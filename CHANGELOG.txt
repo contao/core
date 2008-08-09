@@ -1,0 +1,868 @@
+==========================
+TYPOlight webCMS CHANGELOG
+==========================
+
+Version 2.6.0 (2008-XX-XX)
+--------------------------
+- Packed all style sheets
+- Added new insert tag "env::ip"
+- Added FTP check tool (Safe Mode Hack)
+- Added "upload and go back" button to file manager
+- Added option to remove folder protection to file manager
+- Improved default back end theme to handle weird FF3 margins
+- Removed stopwords and minimum word length from search algorithm
+- Removed format definition sorting by category (style sheet module)
+- Fixed issue with front end login not checking if login has been enabled
+- Fixed issue with moved style definitions not adopting the correct category
+- Fixed issue with incorrect download URLs if there are $_GET variables
+- Fixed issue with events with images linking to wrong target
+- Fixed issue with broken HTML headers of sortable tables
+- Fixed a few minor bugs
+
+Version 2.6beta2 (2008-07-17)
+-----------------------------
+- Added "save and new" button
+- Added extended front end preview
+- Added start and stop date to events
+- Added start and stop date to news items
+- Added date and author to article templates
+- Added front end link to back end login screen
+- Added periodic command scheduler (poor man's cron)
+- Added option to remove an existing radio button selection
+- Replaced class "Archive" with classes "ZipReader" and "ZipWriter"
+- Improved file manager to resize uploaded images that exceed the maximum width or height
+- Fixed XSS vulnerability in the new search module (thanks to Russ McRee)
+- Fixed issue with TinyMCE not showing up on IE6/7
+- Fixed a few minor issues
+
+Version 2.6beta (2008-07-10)
+----------------------------
+- Added "checkCredentials" hook
+- Added "replaceInsertTags" hook
+- Added option to disable search indexing
+- Added insert tags "faq", "news" and "event"
+- Added login notification to front end preview
+- Added plain text support to the newsletter extension
+- Added option to skip empty fields if a form is sent via e-mail
+- Added option to group news items by year to news archive modules
+- Added checkbox wizard to make checkbox lists sortable (e.g. personal data)
+- Added remote events (redirect to an internal or external page)
+- Removed deprecated option to extract template variables
+- Removed deprecated file typolight/comments.php
+- Removed deprecated file typolight/layout.php
+- Removed deprecated file download.php
+- Removed deprecated file image.php
+- Updated TinyMCE to version 3.1.0.1
+- Improved page cache to work without database queries
+- Improved newsletter modules to support multiple channels
+- Improved page layouts to support a custom style sheet order
+- Improved download and gallery modules to support natural sorting
+- Improved search algorithm and added option to index protected pages
+- Improved breadcrumb navigation to exclude hidden and unpublished pages
+- Improved all wizards so they can be used multiple times on the same page
+- Improved newsletter listing modules so logged in users can see unsent items
+- Improved back end login to redirect to the last page visited if the session times out
+- Replaced callback "outputTemplate" with "outputFrontendTemplate" and "outputBackendTemplate"
+- Replaced callback "parseTemplate" with "parseFrontendTemplate" and "parseBackendTemplate"
+- Fixed issue with search indexing and cache in multi-domain mode
+- Fixed issue with users not being able to edit news comments
+- Fixed issue with missing PHP 5.3 error handlers
+- Fixed issues with open_basedir compatibility
+- Fixed some minor bugs and spelling issues
+
+Version 2.5.9 (2008-06-06)
+--------------------------
+- Updated back end data filters
+- Updated calendar script to RC4
+- Added blinking to paste buttons
+- Added option to clear the clipboard
+- Added intervals to event list module
+- Added setter methods to Input library
+- Added classes first/last to event lists
+- Added boolean return value to Email class
+- Added CSV import to list and table elements
+- Added image support and enclosures to events
+- Added "parseTemplate" hook to Template library
+- Added XML template to content element dfGallery
+- Added the title of a calendar to all event modules
+- Added modules "newsletter list" and "newsletter reader"
+- Added backend data filter for fields with multiple options
+- Added option to use multiple enclosures instead of just one
+- Added option to disable element collapsing in the back end preview
+- Added insert tags "article_teaser", "news_teaser" and "event_teaser"
+- Added module protection (show guests or particular member groups only)
+- Added two rewrite rules to the ._htaccess file to prevent hacking attempts
+- Added support for multilanguage meta.txt files (e.g. meta_en.txt or meta_de.txt)
+- Moved the URL suffix variable to the local configuration file (back end settings)
+- Fixed issue with content element "teaser" not linking to articles but only pages
+- Fixed issue with Safari not displaying the TinyMCE "add hyperlink" popup
+- Fixed issue with e-mail links being encoded when exported as PDF
+- Fixed issue with table alias elements not being sortable
+- Fixed some minor spelling issues
+- Fixed some minor bugs
+
+Version 2.5.8 (2008-05-07)
+--------------------------
+- Added "removeOldFeeds" hook
+- Added "generateFrontendUrl" hook
+- Added alternative PDF library (TCPDF)
+- Added field "website" to front end members
+- Added classes first/last/even/odd to FAQ lists
+- Added classes first/last to custom navigation modules
+- Added teaser text to events (see template event_teaser.tpl)
+- Added name and e-mail of front end users to comment form fields
+- Added "filesOnly", "extensions" and "path" to the filetree widget (DCA -> eval)
+- Fixed issue with users not being allowed to copy content elements between articles
+- Fixed issue with wrong unique field error message in registration modules
+- Fixed issue with wrong download links when page alias usage is disabled
+- Fixed issue with long news headlines running across navigation icons
+- Fixed issue with wrong end time of events without end time :-)
+- Fixed issue with HTML entities in form generator e-mails
+- Fixed issue with error pages being indexed
+- Fixed some minor bugs
+
+Version 2.5.7 (2008-04-01)
+--------------------------
+- Improved group based user redirection on login
+- Added option to recreate XML sitemaps in the maintenance module
+- Fixed issue with wrong news time on daylight saving days
+- Fixed issue with multiple download elements on one page
+
+Version 2.5.6 (2008-03-30)
+--------------------------
+- Added trim() to text fields
+- Added sender name to newsletters
+- Added pagination to news archives
+- Added comment count to news modules
+- Added method "isMemberOf()" to user objects
+- Added automatic category to new style definitions
+- Added variable "content type" to the Template class
+- Added events without end time (set end time = start time)
+- Added custom cache timeout to RSS feeds (module RSS reader)
+- Added error 404 page usage if there are domain name restrictions
+- Added class "cal_X" to events with X being the ID of the calendar
+- Added a new search engine friendly download routine without tokens
+- Added new Google Analytics script (adjust your custom fe_ templates!)
+- Added e-mail templates to newsletters (parses newsletter.css if exists)
+- Added option to preserve existing files to front end file upload fields
+- Added option to add news and calendar feeds to the page header (page layout)
+- Improved listing module so array keys = field names ($this->record['field_name'])
+- Fixed issue with CRC32 returning different values on 32bit and 64bit systems
+- Fixed issue with backslashes being removed when inserted into the database
+- Fixed output of module "faq list" to use lists instead of paragraphs
+- Fixed issue with newsletters not being sent to all recipients
+- Fixed issue with wrong event end time on daylight saving days
+- Fixed issue with XML sitemaps not being valid
+- Fixed some minor bugs
+
+Version 2.5.5 (2008-02-28)
+--------------------------
+- Fixed issue with wrong base URL of news and event feeds
+
+Version 2.5.4 (2008-02-28)
+--------------------------
+- Added GET variables to forward pages
+- Added teaser articles to the search index
+- Added teaser articles to breadcrumb menus
+- Added "two year view" to event list modules
+- Added file attachment support to newsletters
+- Added width and height attributes to all images
+- Added "outputTemplate" and "getPageIdFromUrl" hook
+- Added image_container layer to image gallery images
+- Added TinyMCE template plugin and tl_files/tiny_templates
+- Added max-height toggle to all element previews in the back end
+- Added option to split newsletter recipients and send separate e-mails
+- Improved checkbox select menu to support groups (multidimensional arrays)
+- Improved breadcrumb menu to show a page as active if an article is viewed
+- Packed all JavaScripts with the YUI compressor so they do not use eval() anymore
+- Fixed issue with listing module showing the wrong number of records per page
+- Fixed issue with importing CSS browser hack "html>/**/body"
+- Fixed several issues with the new sitemap feature
+- Fixed a small front end referer issue
+- Fixed some minor bugs
+
+Version 2.5.3 (2008-01-28)
+--------------------------
+- Added Google Analytics ID to page layouts
+- Added a different look to active back end filters
+- Added .htaccess folder protection to the file manager
+- Added option to create XML sitemaps to website root pages
+- Added a files drop-down menu to the TinyMCE plugin "typolinks"
+- Added option to preserve existing records when importing a template
+- Added custom sorting group length to sorting mode 3 and 4 (key is "length")
+- Added option to exclude certain files in the root directory from being removed
+- Added an XSS-safe function to determine the use agent to the Environement library
+- Improved news and event readers to overwrite the page title with the item's headline
+- Improved the order of internal JavaScript files so they are included after the mootols library
+- Improved the form generator to always send the raw data and to include links to uploaded files
+- Fixed issue with event list headers when there is a multi-day event and a single-day event
+- Fixed issue with newsletter subscriptions not being saved during member registration
+- Fixed minor cross-site request forgery issue with BBCode in comments
+- Fixed some minor bugs
+
+Version 2.5.2 (2008-01-11)
+--------------------------
+- Added z-index:9999 to slimbox style sheet
+- Added layout templates for navigation modules
+- Added function server() to the Environment library
+- Added insert tags "parent_alias", "parent_name" and "parent_title"
+- Fixed issue with wrong links in registration and password emails
+- Fixed some minor bugs
+
+Version 2.5.1 (2007-01-07)
+--------------------------
+- Updated phpmailer plugin to version 2.0.0
+- Added option to create image submit buttons
+- Added option to choose the form submission type
+- Added the rich text editor to article teaser fields
+- Added some small improvements to the maintenance module
+- Added option to use the page title as navigation item title
+- Added a "macfixes" style sheet to fix some Mac specific formattings
+- Added support for multiple Google sitemaps (names must start with sitemap*)
+- Added option to add front end style sheets and JavaScripts from within a class
+- Improved front end controller to support custom page types (each type has its own class)
+- Improved the standardize() function to support a wider range of unicode characters
+- Improved form field validation for select menus, checkboxes and radio buttons
+- Fixed issue with "print page as PDF" links being added as referer links
+- Fixed access control issues when creating new items as normal user
+- Fixed issue registration URIs if there are GET variables
+- Fixed some minor bugs
+
+Version 2.5.0 (2007-12-12)
+--------------------------
+- Changed to LGPL license
+- Added a few missing labels
+- Added romanization to the file manager
+- Added dynamic JavaScript inclusion to back end modules
+- Added option to disable comments for particular news items
+- Fixed issue with date picker formatting in Safari
+- Fixed a small bug in the date library
+- Fixed some minor bugs
+
+Version 2.5beta-rc2 (2007-12-02)
+--------------------------------
+- Added the task center
+- Added comments to news items
+- Added new unobtrusive date picker
+- Added access control to the form generator
+- Added a default sort order for table elements
+- Added option to store form values in the database
+- Added "validateFormField" hook to the form generator
+- Added ondelete_callback to the table configuration array
+- Added option to limit the newsletter channels a user can subscribe to
+- Added access control on user level (if group permissions shall be extended)
+- Added a custom table sort script that remembers its state if a page is reloaded
+- Changed TinyMCE plugin so drop-down menus are based on the user's pagemounts and filemounts
+- Changed default style sheets so IE fixes are now in separate files (CSS is valid now)
+- Fixed issue with form generator "reply to" addresses
+- Fixed some minor bugs
+
+Version 2.5beta (2007-11-24)
+----------------------------
+- Improved image caching
+- Improved article handling
+- Improved navigation menu modules
+- Added pagination to image galleries
+- Added hidden fields to form generator
+- Added custom thumbnail quality to JPGs
+- Added "show guests only" option to pages
+- Added protected news and protected events
+- Added helpdesk hook to module "personal data"
+- Added custom page title to "website root" pages
+- Added optgroups to form generator drop-down menus
+- Added meta.txt information to module "random image"
+- Added insert tags "insert_article" and "insert_content"
+- Added access control to news, calendars and newsletters
+- Added popup file manager to image and file content elements
+- Added option to choose the HTTP status header of redirect pages
+- Added $this->mainTitle and $this->pageTitle to front end templates
+- Added link parameters to active menu items so they can be used as links
+- Added direct links to forward pages (internal) to all navigation modules
+- Added "postDownload" callback that is called after a files has been downloaded
+- Added dfGallery with a special "TYPOlight Stripper" that can browse the tl_files directory
+- Changed pagetrees and filetrees so they are based on the user's pagemounts and filemounts
+- Changed default form enctype to "application/x-www-form-urlencoded"
+- Fixed issue with style sheet import when a folder is selected
+- Fixed issue with incorrect image embedding in newsletters
+- Fixed issue with call to undefined function DC_Table::2()
+- Fixed issue with special characters of redirect URLs
+- Fixed some minor bugs
+
+Version 2.4.7 (2007-10-11)
+--------------------------
+- Added automatic event alias generation
+- Added realname support to the PunBB bridge
+- Added admin notification if there are new comments
+- Added UNIX timestamps to news, comment and event templates
+- Added a check that prevents admins from downgrading their own accounts
+- Added a robots.txt file to prevent robots from searching system directories
+- Added a bottom navigation bar in the back end if there are more than 30 records
+- Fixed issue with wrong parent ID when adding newsletter recipients in the back end
+- Fixed issue with duplicate form ID attribute when there is a stlye sheet ID
+- Fixed issue with incorrect calendar links when page aliases are disabled
+- Fixed issus with front end forms being validated in the back end
+- Fixed a security hole in the back end preview script
+- Fixed some minor bugs
+
+Version 2.4.6 (2007-09-03)
+--------------------------
+- Updated slimbox to version 1.41
+- Updated mootools to version 1.11
+- Updated UFO script to version 3.22
+- Added automatic news alias generation
+- Added default label to "back to top" element
+- Added automatic form focus in case of an error
+- Added shortened view to calendar and event modules
+- Added mbstring support to regular expressions using Unicode
+- Added user details to the user registration notification e-mail
+- Removed default body margin when printing articles (can be set via CSS)
+- Improved synchronization between member accounts and newsletter subscriptions
+- Fixed issue with empty paragraph element in news layouts when there is no meta data
+- Fixed issue with invalid download tokens when cookies are not accepted
+- Fixed issue with wrong number of all-day events in the mini-calendar
+- Fixed issue with incorrect daylight saving time of repeated events
+- Fixed a minor JavaScript warning caused by the tablesort script
+- Fixed the "save and close" button of the template editor
+- Fixed issue with incorrect e-mail return path format
+- Fixed minor bug in TinyMCE plugin "typolinks"
+- Fixed some minor spelling issues
+
+Version 2.4.5 (2007-08-02)
+--------------------------
+- Moved table row classes to TR elements
+- Added layout templates to listing module
+- Added character set to Ajax response headers
+- Added phpmailer plugin (replaces htmlMimeMail5)
+- Added dp.SyntaxHighlighter plugin (replaces GeSHi)
+- Added classes "even" and "odd" to news layouts and event list
+- Added admin e-mail address (sender address) to website root pages
+- Added front end module "upcoming events" to the calendar extension
+- Added page description ($this->description) to navigation templates
+- Added classes "first" and "last" to list elements and navigation modules
+- Added enclosure download link to news templates (see template news_full.tpl)
+- Added wildcard ##name## (first part of the e-mail address) to the newsletter module
+- Fixed issue with environment insert tags when there is no website root page
+- Fixed some minor spelling issues
+
+Version 2.4.4 (2007-07-17)
+--------------------------
+- Added some new hooks
+- Added insert tag "last_update"
+- Added English as fallback language to TinyMCE
+- Added option to include hidden items in a sitemap
+- Added option to choose the target page of an article list
+- Added option to use a user's home directory as source for downloads
+- Added option to use a user's home directory as source for image galleries
+- Fixed issue with CSS border color/style not being applied
+- Fixed issue with all day events being shown twice
+- Fixed issue with relative URLs in newsletters
+- Fixed small bug in the Flash movie module
+- Fixed some minor bugs
+
+Version 2.4.3 (2007-06-25)
+--------------------------
+- Updated simplepie
+- Added recurring events
+- Added a punBB forum brigde
+- Added guest content elements
+- Added external Flash movie support
+- Added pagination to module "news list"
+- Added pagination to module "rss reader"
+- Added pagination to content element "comments"
+- Added BBCode support and sorting to content element "comments"
+- Added enclosure support to news articles (applies to feeds only)
+- Removed all remaining mb_ functions from the install script
+- Fixed issue with email return path in PHP safe_mode
+- Fixed alias link to original content element
+- Fixed a small bug in the listing module
+- Fixed issue with image cache names
+- Fixed some minor bugs
+
+Version 2.4.2 (2007-06-16)
+--------------------------
+- Added mbstring replacement library
+- Added a zip archive library to the framework
+- Added classes "col_first" and "col_last" to calendar modules
+- Added extension "listing" which lists records of a certain table in the front end
+- Redone the template editor to fit more into the operational concept of the back end
+- Fixed issue with numeric background-position values when importing a style sheet
+- Fixed issue with clipboard icons not being shown on Ajax requests
+- Fixed issue with redirect/forward pages not being protected
+- Fixed issue with emtpy links in the comments module
+- Fixed small bug in the TinyMCE plugin "typolinks"
+- Fixed small bug in the pagination library
+
+Version 2.4.1 (2007-06-10)
+--------------------------
+- Added time to news articles
+- Added yearly view to event list
+- Added onsubmit_callback to "edit all" mode
+- Added some missing labels to TinyMCE plugin "xhtmlxtras"
+- Added option to use calendar and news modules with multiple archives
+- Fixed issue with event end date not being shown in the back end
+- Fixed issue with wrong character encoding in PDF articles
+- Fixed issue with PDF files causing errors in Acrobat < 8
+- Fixed some minor bugs
+
+Version 2.4.0 (2007-06-07)
+--------------------------
+- Added DOMPDF library (print to PDF)
+- Added content element protection (group based)
+- Added insert tag "env::main_alias" (main page alias)
+- Added option to choose the start page of the navigation module
+- Added option to comments module to limit creating new comments to members
+- Added option to choose the end date of an event to the calendar module
+- Added option to add ID and class attributes to forms
+- Fixed a small bug in the form generator
+- Fixed a bug in the date library
+
+Version 2.4beta (2007-06-01)
+----------------------------
+- Added clipboard
+- Added comments module
+- Added newsletter module
+- Added calendar/events module
+- Added template editor extension
+- Updated TinyMCE to version 2.1.1.1
+- Added Google spellchecker plugin to TinyMCE
+- Added image drop-down list to TinyMCE image wizard
+- Added option to send a copy of an e-mail to the sender
+- Added default subject fallback mechanism to form generator
+- Added a field to define the page title in addition to the page name
+- Added href of the active page to the navigation menu template
+- Fixed issue with password fields not being mandatory
+- Fixed username validation of the registration module
+- Fixed issue with special characters in image names
+- Fixed issue with cached environment insert tags
+- Fixed small bug in "copy with childs" function
+- Fixed handling of 403/404 error pages
+- Fixed news archive menu nesting
+
+Version 2.3.4 (2007-05-11)
+--------------------------
+- Added Dutch language
+- Updated French language
+- Updated Romanian language
+- Added custom TinyMCE plugin "typolinks"
+- Fixed some minor bugs
+
+Version 2.3.3 (2007-05-04)
+--------------------------
+- Added Ukrainian language
+- Fixed a bug in the new navigation menu template
+
+Version 2.3.2 (2007-05-04)
+--------------------------
+- Updated Polish language
+- Redone CSS framework and layouts
+- Added meta.txt to downloads element
+- Added syntax highlighting to code element
+- Added option to open redirect targets in a new window
+- Added two important patches to slimbox script
+- Improved navigation and CSS classes
+- Fixed some minor bugs
+
+Version 2.3.1 (2007-04-28)
+--------------------------
+- Updated all language packages
+- Improved RSS reader (added enclosure support)
+- Added option to hide redirect pages in the navigation menu
+- Fixed "skip first item" issue when displaying all news items
+- Fixed issue with routing of a non-unique page alias
+- Fixed some minor spelling issues
+
+Version 2.3.0 (2007-04-25)
+--------------------------
+- Added Polish language
+- Added Russian language
+- Added development module
+- Improved style sheet import
+- Improved back end module handling
+- Updated Swedish and Romanian language
+- Improved image script to handle transparency
+- Added option to skip first item of a news list
+- Fixed issue with special characters in the install tool
+- Renamed HttpRequest library since there are namespace conflicts
+- Added allowedTags, uploadTypes and disableRefererCheck to settings module
+- Added class "trail" to navigation menu to mark parent pages
+- Added alphabetical order to foreign key fields
+- Added a source editor to the file manager
+- Added option to create tableless forms
+- Added class attributes to form fields
+- Added HTML field to form generator
+- Fixed wizards in "edit all" mode
+- Fixed some minor bugs
+
+Version 2.2.12 (2007-04-10)
+---------------------------
+- Fixed a serious news module bug
+
+Version 2.2.11 (2007-04-10)
+---------------------------
+- Added example module
+- Added Swedish and Romanian stopwords
+- Added tl_undo and tl_version to cache tables
+- Added news archive title to news layout templates
+- Improved image gallery to scan meta file if single images are selected
+- Fixed issue with character set of image gallery meta files
+- Fixed issue with Ajax requests and session timeout
+- Fixed a small bug in the FTP library
+- Fixed some minor bugs
+
+Version 2.2.10 (2007-04-03)
+---------------------------
+- Improved image library
+- Added HTML support to lists and tables
+- Added option to position custom layout sections
+- Fixed a small bug in the configuration library
+- Fixed some minor accessibility issues
+
+Version 2.2.9 (2007-03-30)
+--------------------------
+- Fixed major bug in the file manager
+- Fixed small bug in the file library
+
+Version 2.2.8 (2007-03-29)
+--------------------------
+- Added insert tag "link::root"
+- Added insert tag "env::page_alias"
+- Improved image gallery to work with meta files
+- Fixed issue with multiple navigation menus and ID attributes
+- Fixed small bug in FTP library (safe_mode hack)
+- Fixed small bug in file manager
+
+Version 2.2.7 (2007-03-28)
+--------------------------
+- Added Swedish language files
+- Added text field for image caption
+- Removed field "author" from news feeds
+- Added option to import multiple style sheets
+- Added wrapping container to front end templates
+- Improved news list module to show multiple archives
+- Improved headline fields to select the headline level
+- Fixed issue with multiple navigation menus and ID attributes
+- Fixed minor bugs in style sheet import function
+- Fixed small bug in the input library
+- Fixed e-mail address validation
+
+Version 2.2.6 (2007-03-22)
+--------------------------
+- Added RSS/Atom feed generator
+- Added groups to content elements
+- Added edit_all and delete_all to file manager
+- Added a custom label to module quicklink and quicknav
+- Added custom CSS classes to elements, modules and articles
+- Replaced plugin magpierss with simplepie
+- Fixed small bug in driver DC_Table
+
+Version 2.2.5 (2007-03-19)
+--------------------------
+- Fixed major security hole
+- Added cache functionality to image script
+- Fixed minor bugs in some front end modules
+- Fixed small bug in driver DC_Table
+- Fixed small bug in typolight.js
+
+Version 2.2.4 (2007-03-16)
+--------------------------
+- Added module "custom navigation"
+- Added username to version history
+- Added class attributes to various elements
+- Added a custom error page (system/modules/backend/templates/error.tpl)
+- Fixed small bug in template fe_sections_in_main.tpl
+- Fixed issue with keywords not being included
+- Fixed issue with e-mail address validation
+
+Version 2.2.3 (2007-03-06)
+--------------------------
+- Added a new moo_ template that closes all nodes by default
+- Fixed two major bugs in content element library
+
+Version 2.2.2 (2007-03-06)
+--------------------------
+- Added class "active" to news menu
+- Fixed issue with file uploads and safe_mode hack
+
+Version 2.2.1 (2007-03-05)
+--------------------------
+- Added field "state" to tl_member
+- Added FTP support for file operations
+- Added option to disable page alias usage
+- Added option to disable the security question
+- Fixed issue with page reloading on ISS servers
+- Fixed issue with headline of content element "form"
+- Fixed small bug in the environement library
+- Fixed small bug in data container driver
+- Fixed small bug in file manager
+
+Version 2.2.0 (2007-02-28)
+--------------------------
+- Improved front end preview
+- Updated TinyMCE to version 2.1.0
+- Removed table wizard popup window
+- Added content element "multi download"
+- Added AJAX assistance to back end navigation
+- Updated slimbox (lightbox clone) to version 1.3
+- Added option to disable template variable extracting
+- Added option "skip first article" to module "article list"
+- Added option to define a home directory for each front end user
+- Added option to store uploaded files in the user's home directory
+- Compressed all JavaScript and CSS files to decrease page loading time
+- Changed search result highlighting from <strong> to <span class="highlight">
+- Added module "registration" (user registration and lost password functionality)
+- Improved image name extraction (skip prefixes ("1_", "2_", "3_") used to order images)
+- Added insert tag "file::file.ext?vars" to include files from the templates directory
+- Added insert tag "env::main_title" to include the title of the main navigation item
+- Added insert tag "article::ID" which generates a link to a particular article
+- Updated mootools to version 1.0 (check your custom accordion scripts!!!)
+- Added option to pass parameters (flashvars) to a Flash movie
+- Added option to hide content elements in the front end
+- Added option to use text/accordion images as links
+- Added option to select records in "edit all" mode
+- Fixed issue with form sender e-mail address
+- Fixed issue with "show records" filter
+- Improved CTE "content element"
+
+Version 2.1.22 (2007-01-29)
+---------------------------
+- Improved multi-domain mode
+- Pages from domain A cannot be accessed via domain B anymore
+- Each page alias can now be used for multiple pages (once per domain)
+- Improved URL handling to allow any network protocol and insert tag usage
+- Improved redirection to use search engine friendly HTTP 301 headers
+- Added front end module "article list"
+- Minor improvements to back end forms
+
+Version 2.1.21 (2007-01-24)
+---------------------------
+- Added a date picker wizard to the back end
+- Added image width limitation to article preview (back end)
+- Added front end table sorting (see example website "courses.html")
+- Removed current ID from alias drop-down menu (circular reference)
+- Fixed issue with content element option "add image"
+
+Version 2.1.20 (2007-01-18)
+---------------------------
+- Completed update 2.1.19 (some files were missing)
+
+Version 2.1.19 (2007-01-17)
+---------------------------
+- Fixed image gallery image margin
+- Added option to make Flash movies transparent
+- Added option to show multiple content elements in an accordion pane
+- Added option to redirect a front end user group to an individual page
+- Fixed some minor bugs
+
+Version 2.1.18 (2007-01-15)
+---------------------------
+- Improved news handling
+- Improved search engine handling
+- Added a default source page to news archives
+- Added a default form to module "search engine"
+- Added "float" and "clear" to module style sheet
+- Added option to use a random image's name as caption
+- Added multiple selection to selection item (form generator)
+- Added a "toggle all nodes" button to file, page and article tree
+- Changed margin of floating images to padding (IE6 compatibility)
+- Fixed issue with image names (content element "gallery")
+- Fixed issue with non-clickable main navigation items
+- Fixed small bug in the File library
+- Fixed small bug in typolight.js
+
+Version 2.1.17 (2007-01-13)
+---------------------------
+- Compressed all JavaScript files
+- Renamed TYPOlight JavaScript file to "typolight.js"
+- Fixed a minor bug in mootools JavaScript (IE7 syntax error)
+- Fixed a minor bug in UFO JavaScript
+
+Version 2.1.16 (2006-12-31)
+---------------------------
+- Added option to run more than one accordion instance
+- Added option "clear temp folder" to maintenance module
+- Exchanged SWFObject with UFO due to mootools incompatibility (IE)
+- Modified several templates (minor changes)
+
+Version 2.1.15 (2006-12-23)
+---------------------------
+- Added two additional moo_ JavaScript templates
+- Fixed issue with headline of content element "HTML"
+- Added option "add image" to content element "accordion"
+- Fixed issue with URI routing (e.g. home.html?sessionID=xyz)
+- Fixed image handling in TinyMCE and added button
+- Fixed small bug in the News library
+
+Version 2.1.14 (2006-12-22)
+---------------------------
+- Fixed issue with blank option in module "personal data"
+- Fixed small bug in module "page layout"
+
+Version 2.1.13 (2006-12-21)
+---------------------------
+- Added new content element "accordion" (moofx)
+- Added a link to file CHANGELOG.txt (module maintenance)
+- Exchanged lightbox with slimbox (smaller footprint, moofx based)
+- Added a warning to page/file trees to prevent authors from loosing changes
+- Added a "runonce" script to live update to update database fields automatically
+- Modified example website and included a new SQL file
+- Fixed issue with wrong author name in news module
+
+Version 2.1.12 (2006-12-20)
+---------------------------
+- Lightbox update roll back (did not work in Opera)
+
+Version 2.1.11 (2006-12-19)
+---------------------------
+- Updated script.aculo.us (lightbox)
+- Added author drop-down list to news articles
+- Fixed small bug "skip navigation" item bug
+- Fixed small breadcrumb navigation bug
+- Fixed "back to top" links in IE
+- Fixed small search engine bug
+
+Version 2.1.10 (2006-12-18)
+---------------------------
+- Added content element HTML
+- Made insert tags case-insensitive
+- Changed news archive menu indexing
+- Fixed small bug in "edit all" mode
+
+Version 2.1.9 (2006-12-17)
+--------------------------
+- Fixed issue with file download.php (news module)
+- Fixed small bug with country drop-down list
+
+Version 2.1.8 (2006-12-16)
+--------------------------
+- Added a new field to News extension
+- Slight modification of the news archive
+- Fixed issue with content element "code"
+
+Version 2.1.7 (2006-12-14)
+--------------------------
+- Added a new content element that allows to jump to the top of the page
+- Added a new insert tag that allows to include PHP files {{php::file.php}}
+
+Version 2.1.6 (2006-12-13)
+--------------------------
+- Fixed issue with template files when using custom templates
+- Fixed issue with style sheet selector storage (entities)
+
+Version 2.1.5 (2006-12-12)
+--------------------------
+- Added new insert tags "link_url" and "link_title"
+- Added toggle button to change textarea word wrapping
+- Fixed a small bug in the Validator library
+
+Version 2.1.4 (2006-12-11)
+--------------------------
+- Added MIME types to download element
+- Added simple headline to news extension
+- Added function getMimeType() to File library
+- Fixed date issue (last modified) in parent view
+
+Version 2.1.3 (2006-12-07)
+--------------------------
+- Improved backend navigation (search and filter menus)
+- Fixed a minor issue with the Input library
+
+Version 2.1.2 (2006-12-05)
+--------------------------
+- Fixed a minor JavaScript issue with the table wizard
+
+Version 2.1.1 (2006-12-01)
+--------------------------
+- Fixed issue with checkboxes in "edit all" mode
+
+Version 2.1.0 (2006-11-28)
+--------------------------
+- Added live update
+- Added icons to user/group management
+- Added regular expression "prcnt" (percentage)
+- Changed insert tags from <[-- ... --]> to {{...}} (TinyMCE compatibility)
+- Fixed a memory limit bug in the Input and FormGenerator library
+- Fixed a small bug with the download element
+- Fixed a small bug with default permissions
+- Fixed a small bug in RSS Reader library
+- Fixed some minor bugs
+
+Version 2.0 (2006-11-24)
+------------------------
+- Added versioning
+- Added module RSS Reader
+- Added additional <head> fields
+- Added plugin FPDF (PDF generator)
+- Added template switch to page layout
+- Updated CSS framework to support IE7
+- Added option to store uploaded files
+- Added search functionality to the back end
+- Updated TinyMCE compressor to version 1.0.9
+- Added file upload error messages to FormGenerator
+- Added maximum image size validation to FormGenerator
+- Added "re-insert values" switch to the FormGenerator
+- Added a custom error handler to fix issues with log files
+- Fixed issue with module wizard when used without JavaScript
+- Fixed issue with hidden fields outside the form body
+- Fixed issue with automatic image width calculation
+- Fixed issue with the Environement library
+- Fixed a few bugs of the form generator
+- Fixed some minor bugs
+
+Version 2.0beta-rc3 (2006-10-25)
+--------------------------------
+- Added image size limit
+- Modified backend navigation
+- Added custom layout sections
+- Updated TinyMCE to version 2.0.8
+- Added a CSS fix for TinyMCE 2.0.8
+- Modified listing and added a hover effect
+- Moved image folder from typolight to system
+- Disabled "image fullsize" link in the backend
+- Added "create new record" buttons to parent view
+- Redone file manager (now it shows image thumbnails)
+- Added cache functionality to the Environement library
+- Fixed issue with multiple download elements on one page
+- Fixed a minor bug in function "copy with childs"
+- Fixed some bugs in the envronement library
+- Fixed some minor bugs
+
+Version 2.0beta-rc2 (2006-10-18)
+--------------------------------
+- Added SMPT support
+- Added image caption
+- Added gzip compression
+- Updated TinyMCE to version 2.0.7
+- Added field "acceskey" to form items
+- Added automatic page alias generation
+- Added toggle buttons to backend navigation
+- Fixed some minor issues with the install tool
+- Fixed behaviour of module "navigation submenu items"
+- Fixed issue with floating images that are added to a text element
+- Fixed issue with navigation menu if used without a website root page
+- Added a data container configuration file to customize the system
+- Fixed the issue with trigger checkboxes in case of an error
+- Added a "select all" button to simplify checkbox selecting
+- Modified htmlMimeMail5 to support PHP5 strict standards
+- Fixed "edit all records" bug in module style sheets
+- Fixed template fe_page (layout "centered box")
+- Renamed navigation module to "site structure"
+- Fixed a minor bug in the envronement library
+- Fixed issue with missing field labels
+- Fixed some minor bugs
+
+Version 2.0beta-rc1 (2006-10-13)
+--------------------------------
+- Updated TinyMCE to version 2.0.6.1
+- Added a "delete all" method (table tl_log)
+- Added "copy with childs" button to navigation tree
+- Fixed issue with short PHP tags in backend templates
+- Fixed issue with missing global buttons for empty tables (tree view only)
+- Fixed mod_flash template (note that interactive movies are buggy in Flash Player 9)
+- Added "transparent Flash movie" button to tl_module to fix Gecko wmode=transparent bug
+- Fixed redirection bug in case a user calls typolight/main.php without being authenticated
+- Fixed behaviour of module "logout" when no frontend user is logged in
+- Fixed issue with creating records in the root element (pid=0)
+- Fixed issue with "show all records" option in module tl_log
+- Added a workaround for MySQL FROM_UNIXTIME() bug
+- Fixed severe delete and undo bug
+- Fixed some minor bugs
