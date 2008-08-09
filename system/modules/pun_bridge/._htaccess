@@ -1,0 +1,64 @@
+##############################################################
+# TYPOlight to PunBB brigde                                  #
+#                                                            #
+# Redirect punBB authentication and registration requests    #
+# to TYPOlight using mod_rewrite. Move this .htaccess file   #
+# into your punBB root folder and set up the correct paths.  #
+##############################################################
+
+RewriteEngine On
+
+##############################################################
+# Rewrite base                                               #
+#                                                            #
+# The rewrite base is the relative path to your punBB folder #
+# as seen from the URL. Here are some examples:              #
+#                                                            #
+# Forum URL http://www.domain.com                            #
+# RewriteBase /                                              #
+#                                                            #
+# Forum URL http://www.domain.com/forum/                     #
+# Rewrite Base /forum/                                       #
+##############################################################
+
+RewriteBase /forum/
+
+##############################################################
+# Rewrite rules                                              #
+#                                                            #
+# Format: RewriteRule [original URL] [target URL] [Flag]     #
+#                                                            #
+# Do not change the original URLs or the flags. Adjust the   #
+# target URLs to point to your TYPOlight registration or     #
+# authentication page. Here are some examples:               #
+#                                                            #
+# /      (TYPOlight in the root folder)                      #
+# /pun/  (punBB in a subfolder)                              #
+# RewriteRule login.php$ ../index.php/login.html [L]         #
+#                                                            #
+# /tl/   (TYPOlight in a subfolder)                          #
+# /pun/  (punBB in a subfolder)                              #
+# RewriteRule login.php$ ../tl/index.php/login.html [L]      #
+#                                                            #
+# /tl/   (TYPOlight in a subfolder)                          #
+# /      (punBB in the root folder)                          #
+# RewriteRule login.php$ tl/index.php/login.html [L]         #
+##############################################################
+
+# Log out
+RewriteCond %{QUERY_STRING} ^action=out
+RewriteRule login.php$ ../typolight/index.php/logout.html [R=302] [L]
+
+# Request password
+RewriteCond %{QUERY_STRING} ^action=forget
+RewriteRule login.php$ ../typolight/index.php/request-password.html [R=302] [L]
+
+# Change password
+RewriteCond %{QUERY_STRING} ^action=change_pass
+RewriteRule profile.php$ ../typolight/index.php/personal-data.html [R=302] [L]
+
+# Log in
+RewriteRule login.php$ ../typolight/index.php/login.html [R=302]
+
+# Register
+RewriteRule register.php$ ../typolight/index.php/register.html [R=302]

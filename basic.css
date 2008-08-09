@@ -1,0 +1,89 @@
+/**
+ * Style sheet basic
+ */
+body
+{
+	margin:0px 0px 24px 0px;
+	padding:0px;
+}
+
+a,
+body,
+div,
+em,
+input,
+label,
+li,
+ol,
+p,
+select,
+span,
+strong,
+td,
+th,
+textarea,
+u,
+ul
+{
+	font-family:Verdana, sans-serif;
+}
+
+a,
+body,
+div,
+input,
+label,
+li,
+ol,
+p,
+select,
+td,
+th,
+textarea,
+u,
+ul
+{
+	font-size:11px;
+}
+
+h1
+{
+	margin:0px 0px 12px 0px;
+	padding:0px;
+	font-weight:bold;
+	font-size:13px;
+}
+
+h2
+{
+	margin:0px 0px 6px 0px;
+	padding:0px;
+	font-weight:bold;
+	font-size:11px;
+}
+
+a
+{
+	text-decoration:none;
+	color:#a84204;
+}
+
+a:hover
+{
+	text-decoration:underline;
+	color:#a84204;
+}
+
+img
+{
+	vertical-align:middle;
+	border:0px;
+}
+
+p,
+pre,
+form
+{
+	margin:0px;
+	padding:0px;
+}

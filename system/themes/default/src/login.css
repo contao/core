@@ -1,0 +1,186 @@
+/* TYPOlight back end login CSS file */
+body
+{
+	background:url("images/hbg.jpg");
+	background-repeat:repeat-x;
+	background-color:#f5f5f5;
+}
+* html body
+{
+	margin-left:1px;
+	text-align:center;
+}
+
+/* Header */ 
+#header
+{
+	width:516px;
+	margin:18px auto 0 auto;
+	padding:1px;
+	background-color:#fff;
+	border:1px solid #bbb;
+	border-bottom:0;
+	text-align:left;
+}
+* html #header
+{
+	width:520px;
+	w\idth:516px;
+}
+#header h1
+{
+	margin:0;
+	padding:2px 0 4px 6px;
+	background-color:#b3b6b3;
+	background-image:url("images/headline.gif");
+	background-repeat:repeat-x;
+	color:#fff;
+}
+
+/* Container */
+#container
+{
+	width:520px;
+	margin:0 auto;
+	padding:0;
+	text-align:left;
+}
+
+/* Main */
+#main
+{
+	width:516px;
+	padding:1px;
+	background-color:#fff;
+	border:1px solid #bbb;
+	border-top:0;
+	text-align:left;
+}
+* html #main
+{
+	width:520px;
+	w\idth:516px;
+}
+html>body #main
+{
+	margin-bottom:-1px;
+}
+*:first-child+html #main
+{
+	margin-bottom:0;
+}
+
+/* Headlines */
+#container h2
+{
+	margin:18px;
+	padding:6px 0 8px 40px;
+	background-image:url("images/logo.gif");
+	background-position:left center;
+	background-repeat:no-repeat;
+	font-size:14px;
+	color:#8ab858;
+}
+
+/* Front end link */
+#go_to_frontend
+{
+	margin:-6px 18px 12px 0;
+	padding:0;
+	text-align:right;
+}
+#go_to_frontend a
+{
+	padding:2px 0 3px 20px;
+	color:#bbb;
+	background-image:url("images/login.gif");
+	background-position:left center;
+	background-repeat:no-repeat;
+}
+
+/* License (do not remove) */
+#tl_license
+{
+	margin:18px 18px 0 18px;
+}
+#tl_license p
+{
+	line-height:15px;
+	text-align:justify;
+}
+#tl_license p,#tl_license a
+{
+	color:#888b88;
+}
+#tl_license a:hover
+{
+	color:#8ab858;
+}
+
+/* Error messages */
+.login_error
+{
+	margin:1px 0 0 0;
+	padding:2px 0 3px 20px;
+	background-image:url("images/error.gif");
+	background-position:left center;
+	background-repeat:no-repeat;
+}
+.login_error label
+{
+	color:#c55;
+}
+.tl_error
+{
+	margin:0 0 12px 0;
+	padding:2px 0 3px 20px;
+	background-image:url("images/error.gif");
+	background-position:left center;
+	background-repeat:no-repeat;
+	color:#c55;
+}
+.tl_info
+{
+	margin:0 0 12px 0;
+	padding:2px 0 3px 20px;
+	background-image:url("images/show.gif");
+	background-position:left center;
+	background-repeat:no-repeat;
+	color:#5c9ac9;
+}
+
+/* Login form */
+.tl_login_form
+{
+	width:350px;
+	margin:18px auto 24px auto;
+}
+* html .tl_login_form
+{
+	margin:18px 83px 24px 83px;
+	margi\n:18px auto 24px auto;
+}
+.tl_login_form .formbody
+{
+	padding-top:6px;
+}
+.tl_login_table
+{
+	width:100%;
+	margin:0 0 6px 0;
+}
+.tl_login_submit_container
+{
+	padding-top:0;
+	text-align:right;
+}
+
+/* Form fields */
+.tl_text
+{
+	width:174px;
+}
+.tl_select
+{
+	width:180px;
+}

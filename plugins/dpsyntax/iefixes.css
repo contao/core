@@ -1,0 +1,5 @@
+/* Code Syntax Highlighter Style Sheet */
+.dp-highlighter { overflow-x:auto; overflow-y:hidden; }
+.dp-highlighter ol { list-style:decimal; }
+*:first-child+html .dp-highlighter * { word-wrap:break-word; }
+.ce_code pre { overflow-x:auto; overflow-y:hidden; }

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
+<!--
+
+	This website was built with TYPOlight :: open source web content management system
+	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/GPL
+	Visit project page http://www.typolight.org for more information
+
+//-->
+<head>
+<base href="<?php echo $this->base; ?>" />
+<title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/help.css" media="screen" />
+<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+</head>
+<body>
+
+<div id="container">
+
+<div id="main">
+
+<h1>Help wizard</h1>
+
+<h2><?php echo $this->headline; ?></h2>
+
+<?php echo $this->explanation; ?>
+<?php if (count($this->rows)): ?>
+<table cellspacing="0" cellpadding="0" class="tl_help_table" summary="Table explains the current field"><?php foreach ($this->rows as $row): ?> 
+  <tr><?php if ($row[0] == 'colspan'): ?> 
+    <td colspan="2"><?php echo $row[1]; ?></td><?php else: ?> 
+    <td class="tl_label"><?php echo $row[0]; ?></td>
+    <td><?php echo $row[1]; ?></td><?php endif; ?> 
+  </tr><?php endforeach; ?> 
+</table><?php endif; ?> 
+
+</div>
+
+</div>
+
+</body>
+</html>

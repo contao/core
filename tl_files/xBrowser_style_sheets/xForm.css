@@ -1,0 +1,217 @@
+/**
+ * Style sheet xForm
+ * Copyright (C) 2005 Leo Feyer, licensed under LGPL
+ */
+ 
+
+/**
+ * Fieldset
+ */
+fieldset
+{
+	width:600px;
+	display:block;
+	margin:12px 0px 24px 0px;
+	padding:12px 12px 0px 12px;
+}
+
+* html fieldset
+{
+	margin-top:12px;
+}
+
+*:first-child+html fieldset
+{
+	margin-top:12px;
+}
+
+legend
+{
+	color:#0000e6;
+}
+
+* html legend
+{
+	margin-top:-24px;
+	padding:12px 0px;
+}
+
+*:first-child+html legend
+{
+	margin-top:-24px;
+	padding:12px 0px;
+}
+
+
+/**
+ * Text fields
+ */
+input.text,
+input.password
+{
+	width:200px;
+	margin:1px 0px 1px 0px;
+}
+
+* html input.text,
+* html input.password
+{
+	margin:0px;
+}
+
+
+*:first-child+html input.text,
+*:first-child+html input.password
+{
+	margin:0px;
+}
+
+
+/**
+ * Textarea
+ */
+textarea
+{
+	width:360px;
+	height:140px;
+}
+
+* html textarea
+{
+	width:358px;
+}
+
+
+/**
+ * Drop-down menu
+ */
+select
+{
+	width:204px;
+	margin:1px 0px 1px 0px;
+}
+
+* html select
+{
+	width:206px;
+}
+
+
+/**
+ * Radio buttons
+ */
+div.radio_container
+{
+	margin:0px 0px 1px 0px;
+}
+
+* html div.radio_container
+{
+	margin:2px 0px -1px 0px;
+}
+
+*:first-child+html div.radio_container
+{
+	margin:2px 0px -1px 0px;
+}
+
+div.radio_container span
+{
+	padding-right:6px;
+	display:block;
+}
+
+input.radio
+{
+	margin:1px 2px 0px 1px;
+	padding:0px;
+	position:relative;
+	top:2px;
+}
+
+* html input.radio
+{
+	margin:-4px -1px 0px -3px;
+	position:relative;
+	top:1px;
+}
+
+*:first-child+html input.radio
+{
+	margin:-4px 0px 0px -3px;
+	position:relative;
+	top:1px;
+}
+
+
+/**
+ * Checkboxes
+ */
+div.checkbox_container
+{
+	margin:0px 0px 1px 0px;
+}
+
+* html div.checkbox_container
+{
+	margin:2px 0px -1px 0px;
+}
+
+*:first-child+html div.checkbox_container
+{
+	margin:2px 0px -1px 0px;
+}
+
+div.checkbox_container span
+{
+	padding-right:6px;
+	display:block;
+}
+
+input.checkbox
+{
+	margin:3px 3px 0px 1px;
+	padding:0px;
+}
+
+* html input.checkbox
+{
+	margin:-4px 0px 0px -3px;
+	position:relative;
+	top:1px;
+}
+
+*:first-child+html input.checkbox
+{
+	margin:-4px 0px 0px -3px;
+	position:relative;
+	top:1px;
+}
+
+
+/**
+ * File upload
+ */
+input.file
+{
+	margin:1px 0px 1px 0px;
+}
+
+* html input.file
+{
+	margin:0px;
+}
+
+*:first-child+html input.file
+{
+	margin:0px;
+}
+
+
+/**
+ * Error message
+ */
+div.error
+{
+	color:#ff0000;
+}

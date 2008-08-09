@@ -1,0 +1,81 @@
+/* TYPOlight back end file preview CSS file */
+html,body
+{
+	background-color:#333633;
+}
+a,body,div,form,input,selectlabel,p
+{
+	color:#333633;
+}
+
+/* Container */
+#container
+{
+	height:22px;
+	margin:0 0 2px 0;
+	padding:3px 12px 5px 12px;
+	line-height:1;
+	overflow:hidden;
+	background-color:#ffc;
+}
+* html #container
+{
+	padding:2px 12px 6px 12px;
+}
+*:first-child+html #container
+{
+	padding:2px 12px 6px 12px;
+}
+
+/* Left */
+#left
+{
+	width:25%;
+	float:left;
+	padding:6px 0;
+}
+* html #left
+{
+	padding:7px 0 5px 0;
+}
+*:first-child+html #left
+{
+	padding:7px 0 5px 0;
+}
+
+/* Right */
+#right
+{
+	width:75%;
+	float:right;
+	text-align:right;
+}
+
+/* Select menus */
+.tl_select
+{
+	margin:1px 9px 1px 0;
+	padding:1px;
+	border:1px solid #b8b8b8;
+}
+
+/* Form elements */
+input,select,label
+{
+	vertical-align:baseline;
+}
+* html input,* html select,* html label
+{
+	vertical-align:middle;
+}
+*:first-child+html input,*:first-child+html select,*:first-child+html label
+{
+	vertical-align:middle;
+}
+
+/* Paragraphs */
+p
+{
+	margin-bottom:0;
+	font-weight:bold;
+}
