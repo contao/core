@@ -334,7 +334,7 @@ function nl2br_pre($str)
 		return $str;
 
 	$chunks = array();
-	preg_match_all('/<pre[^>]*>.*<\/pre>/is', $str, $chunks);
+	preg_match_all('/<pre[^>]*>.*<\/pre>/Uis', $str, $chunks);
 
 	foreach ($chunks as $chunk)
 	{

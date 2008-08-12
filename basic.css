@@ -7,41 +7,12 @@ body
 	padding:0px;
 }
 
-a,
-body,
-div,
-em,
-input,
-label,
-li,
-ol,
-p,
-select,
-span,
-strong,
-td,
-th,
-textarea,
-u,
-ul
+a, body, div, em, input, label, li, ol, p, select, span, strong, td, th, textarea, u, ul
 {
 	font-family:Verdana, sans-serif;
 }
 
-a,
-body,
-div,
-input,
-label,
-li,
-ol,
-p,
-select,
-td,
-th,
-textarea,
-u,
-ul
+a, body, div, input, label, li, ol, p, select, td, th, textarea, u, ul
 {
 	font-size:11px;
 }
@@ -80,9 +51,7 @@ img
 	border:0px;
 }
 
-p,
-pre,
-form
+p, pre, form
 {
 	margin:0px;
 	padding:0px;

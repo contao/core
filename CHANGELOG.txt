@@ -2,7 +2,7 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
-Version 2.6.0 (2008-XX-XX)
+Version 2.6.0 (2008-08-12)
 --------------------------
 - Packed all style sheets
 - Added new insert tag "env::ip"

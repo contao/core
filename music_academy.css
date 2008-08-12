@@ -1,10 +1,186 @@
 /**
  * Style sheet music_academy
  */
+body
+{
+	background-color:#ece4d9;
+	background-image:url("tl_files/music_academy/background.gif");
+	background-position:center top;
+	background-repeat:repeat-y;
+}
 
-/**
- * Accordion
- */
+#left
+{
+	margin-top:52px;
+}
+
+#top_image
+{
+	float:right;
+	margin:0px;
+	padding:0px;
+}
+
+.ce_text, .teaser
+{
+	line-height:1.5;
+}
+
+.error
+{
+	margin:0px;
+	padding:2px 0px 0px 0px;
+	font-size:9px;
+	color:#ff0000;
+}
+
+.mod_article .back
+{
+	margin-top:18px;
+}
+
+.mod_article .more
+{
+	display:inline;
+}
+
+.mod_breadcrumb
+{
+	margin-bottom:24px;
+	padding:5px 3px 7px 3px;
+	background-color:#ece4d9;
+}
+
+.ce_gallery .caption
+{
+	color:#999999;
+}
+
+.mod_article .pdf_link
+{
+	margin-bottom:-14px;
+	text-align:right;
+}
+
+.mod_article .pdf_link a
+{
+	position:relative;
+	padding:1px;
+	background-color:#bbbbbb;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+.mod_article .pdf_link a:hover
+{
+	background-color:#dddddd;
+	text-decoration:none;
+	color:#ffffff;
+}
+
+.mod_lostPassword
+{
+	margin:24px;
+}
+
+.mod_lostPassword td
+{
+	padding-right:6px;
+	padding-bottom:3px;
+}
+
+.mod_lostPassword .text, .mod_lostPassword .password
+{
+	width:210px;
+}
+
+.mod_lostPassword .captcha
+{
+	width:40px;
+}
+
+.mod_lostPassword .captcha_text
+{
+	color:#666666;
+}
+
+.ce_list ul
+{
+	margin:0px;
+	padding:0px;
+}
+
+.ce_list li
+{
+	margin:0px 0px 0px 22px;
+	padding:0px;
+	line-height:16px;
+}
+
+* html .ce_list li
+{
+	margin-left:26px;
+}
+
+.mod_navigation
+{
+	width:200px;
+	top:43px;
+	position:absolute;
+}
+
+.mod_navigation ul
+{
+	margin:0px 5px;
+	padding:0px;
+	border-bottom:1px solid #c6ad8d;
+	list-style-type:none;
+}
+
+.mod_navigation li
+{
+	margin:0px;
+	padding:5px 0px;
+	border-top:1px solid #c6ad8d;
+	list-style-type:none;
+}
+
+.mod_navigation p
+{
+	margin:0px;
+	padding:0px;
+}
+
+* html .mod_navigation ul, * html .mod_navigation li
+{
+	height:1px;
+}
+
+.mod_navigation .level_2
+{
+	padding:3px 0px 0px 9px;
+	border-bottom:0px;
+}
+
+.mod_navigation .level_2 li
+{
+	padding:0px 0px 3px 0px;
+	border-top:0px;
+}
+
+.mod_navigation a, .mod_navigation li, .mod_navigation p
+{
+	font-weight:bold;
+	font-size:13px;
+	color:#000000;
+}
+
+.mod_navigation .level_2 a, .mod_navigation .level_2 li, .mod_navigation .level_2 p
+{
+	font-weight:normal;
+	font-size:11px;
+}
+
 .ce_accordion
 {
 	margin-left:16px;
@@ -33,273 +209,6 @@
 	line-height:16px;
 }
 
-
-/**
- * Article
- */
-.ce_text,
-.teaser
-{
-	line-height:1.5;
-}
-
-.error
-{
-	margin:0px;
-	padding:2px 0px 0px 0px;
-	font-size:9px;
-	color:#ff0000;
-}
-
-.mod_article .back
-{
-	margin-top:18px;
-}
-
-.mod_article .more
-{
-	display:inline;
-}
-
-.mod_article .pdf_link
-{
-	margin-bottom:-14px;
-	text-align:right;
-}
-
-.mod_article .pdf_link a
-{
-	position:relative;
-	padding:1px;
-	background-color:#bbbbbb;
-	text-decoration:none;
-	color:#ffffff;
-}
-
-.mod_article .pdf_link a:hover
-{
-	background-color:#dddddd;
-	text-decoration:none;
-	color:#ffffff;
-}
-
-
-/**
- * Breadcrumb
- */
-.mod_breadcrumb
-{
-	margin-bottom:24px;
-	padding:5px 3px 7px 3px;
-	background-color:#ece4d9;
-}
-
-
-/**
- * Calendar
- */
-.mod_calendar table
-{
-	width:100%;
-	border-top:1px solid #cccccc;
-	border-left:1px solid #cccccc;
-}
-
-.mod_calendar .head
-{
-	padding-top:4px;
-	padding-bottom:5px;
-	text-align:center;
-	background-color:#f6f6f6;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-}
-
-.mod_calendar .current
-{
-	background-color:#ffffcc;
-}
-
-.mod_calendar .label
-{
-	padding-top:3px;
-	padding-bottom:4px;
-	text-align:center;
-	background-color:#bbbbbb;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-	font-weight:bold;
-	font-size:10px;
-	color:#ffffff;
-}
-
-.mod_calendar td
-{
-	width:14%;
-	height:72px;
-	padding:1px;
-	vertical-align:top;
-	background-color:#ffffff;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-}
-
-.mod_calendar .weekend
-{
-	background-color:#f6f6f6;
-}
-
-.mod_calendar .today
-{
-	background-color:#ffffcc;
-}
-
-.mod_calendar .empty,
-.mod_calendar .empty .header
-{
-	background-color:#f6f6f6;
-}
-
-.mod_calendar td .header
-{
-	padding-bottom:2px;
-	background-color:#e0e0e0;
-	font-size:10px;
-}
-
-.mod_calendar td .event a
-{
-	font-size:10px;
-}
-
-
-/**
- * Events
- */
-.mod_eventlist
-{
-	margin-right:6px;
-}
-
-.mod_eventlist .header
-{
-	padding:3px 6px 4px 6px;
-	background-color:#e6e6e6;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-	border-left:1px solid #cccccc;
-	font-weight:bold;
-}
-
-.mod_eventlist .header.first
-{
-	border-top:1px solid #cccccc;
-}
-
-.mod_eventlist .event
-{
-	padding:10px 6px 12px 6px;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-	border-left:1px solid #cccccc;
-}
-
-.mod_eventlist .time
-{
-	margin-top:-6px;
-	margin-bottom:6px;
-	font-weight:normal;
-	color:#999999;
-}
-
-.mod_eventreader .info
-{
-	margin-top:-12px;
-	font-size:10px;
-	color:#999999;
-}
-
-.mod_eventreader .recurring
-{
-	margin-top:2px;
-	font-size:10px;
-	color:#009900;
-}
-
-.mod_eventreader .ce_text
-{
-	margin-top:15px;
-}
-
-.mod_eventreader .back
-{
-	margin-top:18px;
-}
-
-
-/**
- * Gallery
- */
-.ce_gallery .caption
-{
-	color:#999999;
-}
-
-
-/**
- * Layout
- */
-body
-{
-	background-color:#ece4d9;
-	background-image:url("tl_files/music_academy/background.gif");
-	background-position:center top;
-	background-repeat:repeat-y;
-}
-
-#left
-{
-	margin-top:52px;
-}
-
-#top_image
-{
-	float:right;
-	margin:0px;
-	padding:0px;
-}
-
-
-/**
- * Listing
- */
-.ce_list ul
-{
-	margin:0px;
-	padding:0px;
-}
-
-.ce_list li
-{
-	margin:0px 0px 0px 22px;
-	padding:0px;
-	line-height:16px;
-}
-
-* html .ce_list li
-{
-	margin-left:26px;
-}
-
-*:first-child+html .ce_list li
-{
-	margin-left:26px;
-}
-
-
-/**
- * Login form
- */
 .mod_login
 {
 	margin:0px 5px;
@@ -331,181 +240,6 @@ body
 	color:#999999;
 }
 
-
-/**
- * Lost password
- */
-.mod_lostPassword
-{
-	margin:24px;
-}
-
-.mod_lostPassword td
-{
-	padding-right:6px;
-	padding-bottom:3px;
-}
-
-.mod_lostPassword .text,
-.mod_lostPassword .password
-{
-	width:210px;
-}
-
-.mod_lostPassword .captcha
-{
-	width:40px;
-}
-
-.mod_lostPassword .captcha_text
-{
-	color:#666666;
-}
-
-
-/**
- * Mini calendar
- */
-.mod_minicalendar
-{
-	margin:0px 5px 20px 5px;
-	padding:5px 5px 10px 5px;
-	background-color:#ece4d9;
-}
-
-.mod_minicalendar table
-{
-	width:100%;
-	border-top:1px solid #cccccc;
-	border-left:1px solid #cccccc;
-}
-
-.mod_minicalendar td
-{
-	width:14%;
-	padding-top:2px;
-	padding-bottom:3px;
-	text-align:center;
-	background-color:#ffffff;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-}
-
-.mod_minicalendar td,
-.mod_minicalendar .active a
-{
-	font-size:10px;
-}
-
-.mod_minicalendar .weekend
-{
-	background-color:#f6f6f6;
-}
-
-.mod_minicalendar .today
-{
-	background-color:#ffffcc;
-}
-
-.mod_minicalendar .label
-{
-	padding-top:2px;
-	padding-bottom:3px;
-	text-align:center;
-	background-color:#c3c3c3;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-	font-size:10px;
-	color:#ffffff;
-}
-
-.mod_minicalendar .head
-{
-	padding-top:3px;
-	padding-bottom:4px;
-	text-align:center;
-	background-color:#f9f9f9;
-	border-right:1px solid #cccccc;
-	border-bottom:1px solid #cccccc;
-}
-
-.mod_minicalendar .current
-{
-	background-color:#ffffcc;
-}
-
-
-/**
- * Navigation
- */
-.mod_navigation
-{
-	width:200px;
-	top:43px;
-	position:absolute;
-}
-
-.mod_navigation ul
-{
-	margin:0px 5px;
-	padding:0px;
-	border-bottom:1px solid #c6ad8d;
-	list-style-type:none;
-}
-
-.mod_navigation li
-{
-	margin:0px;
-	padding:5px 0px;
-	border-top:1px solid #c6ad8d;
-	list-style-type:none;
-}
-
-.mod_navigation p
-{
-	margin:0px;
-	padding:0px;
-}
-
-* html .mod_navigation ul,
-* html .mod_navigation li
-{
-	height:1px;
-}
-
-.mod_navigation .level_2
-{
-	padding:3px 0px 0px 9px;
-	border-bottom:0px;
-}
-
-.mod_navigation .level_2 li
-{
-	padding:0px 0px 3px 0px;
-	border-top:0px;
-}
-
-.mod_navigation a,
-.mod_navigation li,
-.mod_navigation p
-{
-	font-weight:bold;
-	font-size:13px;
-	color:#000000;
-}
-
-.mod_navigation .level_2 a,
-.mod_navigation .level_2 li,
-.mod_navigation .level_2 p
-{
-	font-weight:normal;
-	font-size:11px;
-}
-
-
-/**
- * News
- */
 .mod_newsmenu
 {
 	margin:0px 5px 20px 5px;
@@ -520,16 +254,14 @@ body
 	background-color:#ece4d9;
 }
 
-.mod_newsmenu ul,
-.mod_newsmenu li
+.mod_newsmenu ul, .mod_newsmenu li
 {
 	margin:0px;
 	padding:0px;
 	list-style-type:none;
 }
 
-* html .mod_newsmenu ul,
-* html .mod_newsmenu li
+* html .mod_newsmenu ul, * html .mod_newsmenu li
 {
 	height:1px;
 }
@@ -557,8 +289,7 @@ body
 	padding-top:0px;
 }
 
-.mod_newslist .info,
-.mod_newsreader .info
+.mod_newslist .info, .mod_newsreader .info
 {
 	margin-bottom:6px;
 	font-size:10px;
@@ -577,8 +308,7 @@ body
 	margin-top:16px;
 }
 
-.mod_article,
-.mod_newsreader
+.mod_article, .mod_newsreader
 {
 	margin-right:5px;
 }
@@ -615,139 +345,6 @@ body
 	height:120px;
 }
 
-
-/**
- * Pagination
- */
-.pagination li
-{
-	display:inline;
-	margin:0px;
-	padding:0px;
-	list-style-type:none;
-}
-
-.pagination
-{
-	margin-top:22px;
-	padding-top:4px;
-	border-top:1px solid #ece4d9;
-}
-
-.pagination p
-{
-	width:160px;
-	float:left;
-	padding-right:3px;
-	padding-left:3px;
-	text-align:left;
-}
-
-.pagination ul
-{
-	width:240px;
-	float:right;
-	margin:0px;
-	padding:0px 3px;
-	text-align:right;
-}
-
-
-/**
- * Personal data
- */
-.mod_personalData
-{
-	margin-bottom:36px;
-}
-
-.mod_personalData fieldset
-{
-	width:400px;
-	display:block;
-	margin:12px 0px 24px 0px;
-	padding:12px;
-}
-
-* html .mod_personalData fieldset
-{
-	margin-top:-12px;
-}
-
-*:first-child+html .mod_personalData fieldset
-{
-	margin-top:-12px;
-}
-
-.mod_personalData legend
-{
-	color:#0000e6;
-}
-
-* html .mod_personalData legend
-{
-	margin-top:-12px;
-	padding:12px 4px 12px 0px;
-}
-
-*:first-child+html .mod_personalData legend
-{
-	margin-top:-12px;
-	padding:12px 4px 12px 0px;
-}
-
-.mod_personalData .submit_container
-{
-	width:428px;
-	text-align:right;
-}
-
-* html .mod_personalData .submit_container
-{
-	width:434px;
-}
-
-*:first-child+html .mod_personalData .submit_container
-{
-	width:434px;
-}
-
-.mod_personalData td
-{
-	width:160px;
-	padding:2px 6px 2px 0px;
-}
-
-* html .mod_personalData td
-{
-	padding:1px 6px 1px 0px;
-}
-
-.mod_personalData .text,
-.mod_personalData .password
-{
-	width:200px;
-}
-
-.mod_personalData select
-{
-	width:204px;
-}
-
-* html .mod_personalData select
-{
-	width:206px;
-}
-
-*:first-child+html .mod_personalData select
-{
-	width:206px;
-}
-
-
-/**
- * Search
- */
 .mod_search
 {
 	margin-top:3px;
@@ -815,10 +412,293 @@ html>body .mod_search .radio_container
 	font-weight:bold;
 }
 
+.mod_calendar table
+{
+	width:100%;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+}
 
-/**
- * Tables
- */
+.mod_calendar .head
+{
+	padding-top:4px;
+	padding-bottom:5px;
+	text-align:center;
+	background-color:#f6f6f6;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.mod_calendar .current
+{
+	background-color:#ffffcc;
+}
+
+.mod_calendar .label
+{
+	padding-top:3px;
+	padding-bottom:4px;
+	text-align:center;
+	background-color:#bbbbbb;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	font-weight:bold;
+	font-size:10px;
+	color:#ffffff;
+}
+
+.mod_calendar td
+{
+	width:14%;
+	height:72px;
+	padding:1px;
+	vertical-align:top;
+	background-color:#ffffff;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.mod_calendar .weekend
+{
+	background-color:#f6f6f6;
+}
+
+.mod_calendar .today
+{
+	background-color:#ffffcc;
+}
+
+.mod_calendar .empty, .mod_calendar .empty .header
+{
+	background-color:#f6f6f6;
+}
+
+.mod_calendar td .header
+{
+	padding-bottom:2px;
+	background-color:#e0e0e0;
+	font-size:10px;
+}
+
+.mod_calendar td .event a
+{
+	font-size:10px;
+}
+
+.mod_minicalendar
+{
+	margin:0px 5px 20px 5px;
+	padding:5px 5px 10px 5px;
+	background-color:#ece4d9;
+}
+
+.mod_minicalendar table
+{
+	width:100%;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+}
+
+.mod_minicalendar td
+{
+	width:14%;
+	padding-top:2px;
+	padding-bottom:3px;
+	text-align:center;
+	background-color:#ffffff;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.mod_minicalendar td, .mod_minicalendar .active a
+{
+	font-size:10px;
+}
+
+.mod_minicalendar .weekend
+{
+	background-color:#f6f6f6;
+}
+
+.mod_minicalendar .today
+{
+	background-color:#ffffcc;
+}
+
+.mod_minicalendar .label
+{
+	padding-top:2px;
+	padding-bottom:3px;
+	text-align:center;
+	background-color:#c3c3c3;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	font-size:10px;
+	color:#ffffff;
+}
+
+.mod_minicalendar .head
+{
+	padding-top:3px;
+	padding-bottom:4px;
+	text-align:center;
+	background-color:#f9f9f9;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.mod_minicalendar .current
+{
+	background-color:#ffffcc;
+}
+
+.mod_eventlist
+{
+	margin-right:6px;
+}
+
+.mod_eventlist .header
+{
+	padding:3px 6px 4px 6px;
+	background-color:#e6e6e6;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	font-weight:bold;
+}
+
+.mod_eventlist .header.first
+{
+	border-top:1px solid #cccccc;
+}
+
+.mod_eventlist .event
+{
+	padding:10px 6px 12px 6px;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+}
+
+.mod_eventlist .time
+{
+	margin-top:-6px;
+	margin-bottom:6px;
+	font-weight:normal;
+	color:#999999;
+}
+
+.mod_eventreader .info
+{
+	margin-top:-12px;
+	font-size:10px;
+	color:#999999;
+}
+
+.mod_eventreader .recurring
+{
+	margin-top:2px;
+	font-size:10px;
+	color:#009900;
+}
+
+.mod_eventreader .ce_text
+{
+	margin-top:15px;
+}
+
+.mod_eventreader .back
+{
+	margin-top:18px;
+}
+
+.mod_personalData
+{
+	margin-bottom:36px;
+}
+
+.mod_personalData fieldset
+{
+	width:400px;
+	display:block;
+	margin:12px 0px 24px 0px;
+	padding:12px;
+}
+
+* html .mod_personalData fieldset
+{
+	margin-top:-12px;
+}
+
+*:first-child+html .mod_personalData fieldset
+{
+	margin-top:-12px;
+}
+
+.mod_personalData legend
+{
+	color:#0000e6;
+}
+
+* html .mod_personalData legend
+{
+	margin-top:-12px;
+	padding:12px 4px 12px 0px;
+}
+
+*:first-child+html .mod_personalData legend
+{
+	margin-top:-12px;
+	padding:12px 4px 12px 0px;
+}
+
+.mod_personalData .submit_container
+{
+	width:428px;
+	text-align:right;
+}
+
+* html .mod_personalData .submit_container
+{
+	width:434px;
+}
+
+*:first-child+html .mod_personalData .submit_container
+{
+	width:434px;
+}
+
+.mod_personalData td
+{
+	width:160px;
+	padding:2px 6px 2px 0px;
+}
+
+* html .mod_personalData td
+{
+	padding:1px 6px 1px 0px;
+}
+
+.mod_personalData .text, .mod_personalData .password
+{
+	width:200px;
+}
+
+.mod_personalData select
+{
+	width:204px;
+}
+
+* html .mod_personalData select
+{
+	width:206px;
+}
+
+*:first-child+html .mod_personalData select
+{
+	width:206px;
+}
+
 .ce_table
 {
 	margin-top:24px;
@@ -831,6 +711,11 @@ html>body .mod_search .radio_container
 	padding:2px 8px;
 	border-right:1px solid #cccccc;
 	border-bottom:1px solid #cccccc;
+}
+
+*:first-child+html .ce_list li
+{
+	margin-left:26px;
 }
 
 .ce_table th
@@ -847,9 +732,24 @@ html>body .mod_search .radio_container
 	color:#000000;
 }
 
+.pagination li
+{
+	display:inline;
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+}
+
 #tps td
 {
 	padding:2px 4px;
+}
+
+.pagination
+{
+	margin-top:22px;
+	padding-top:4px;
+	border-top:1px solid #ece4d9;
 }
 
 #tps .col_0
@@ -857,7 +757,25 @@ html>body .mod_search .radio_container
 	width:80px;
 }
 
+.pagination p
+{
+	width:160px;
+	float:left;
+	padding-right:3px;
+	padding-left:3px;
+	text-align:left;
+}
+
 #tps .explanation
 {
 	padding-bottom:24px;
+}
+
+.pagination ul
+{
+	width:240px;
+	float:right;
+	margin:0px;
+	padding:0px 3px;
+	text-align:right;
 }

@@ -1,0 +1,16 @@
+# Enable mod_rewrite
+RewriteEngine On
+RewriteBase /
+
+# Block any URI protocol in the query string
+RewriteCond %{QUERY_STRING} (ftp|https?):|/etc/ [NC]
+RewriteRule .* - [F,L]
+
+# Block any URI protocol in the request
+RewriteCond %{REQUEST_URI} (ftp|https?):|/etc/ [NC]
+RewriteRule .* - [F,L]
+
+# Rewrite TYPOlight URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .*\.html$ index.php [L]
