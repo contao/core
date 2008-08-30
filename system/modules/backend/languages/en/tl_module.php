@@ -58,6 +58,7 @@ $GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Form template', 'Ple
 $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Number of columns', 'Please choose the number of columns of the form.');
 $GLOBALS['TL_LANG']['tl_module']['1cl']            = array('One columns', 'the label of each input field will be shown above the input field.');
 $GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Two columns', 'the label of each input field will be shown on the left side of the input field.');
+$GLOBALS['TL_LANG']['tl_module']['redirectBack']   = array('Redirect to last page visited', 'Redirect the user back to the last page visited after login/logout.');
 $GLOBALS['TL_LANG']['tl_module']['jumpTo']         = array('Jump to page', 'This setting defines to which page a user will be redirected on a certain action (e.g. clicking a link or submitting a form).');
 $GLOBALS['TL_LANG']['tl_module']['form']           = array('Form', 'Please select a form.');
 $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML code', 'Please enter your HTML code.');

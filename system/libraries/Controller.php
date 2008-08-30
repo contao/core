@@ -232,25 +232,26 @@ abstract class Controller extends System
 	 * Generate an article and return it as string
 	 * @param integer
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function getArticle($varId, $blnMultiMode=false)
+	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false)
 	{
-		$this->import('Database');
-
 		if (!strlen($varId))
 		{
 			return '';
 		}
 
-		$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE alias=? OR id=?")
+		global $objPage;
+		$this->import('Database');
+
+		// Get article
+		$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE (alias=? OR id=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
 									 ->limit(1)
-									 ->execute($varId, $varId);
+									 ->execute($varId, $varId, $objPage->id);
 
 		if ($objArticle->numRows < 1)
 		{
-			global $objPage;
-
 			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
@@ -276,7 +277,7 @@ abstract class Controller extends System
 		$objArticle->multiMode = $blnMultiMode;
 
 		$objArticle = new ModuleArticle($objArticle);
-		return $objArticle->generate();
+		return $objArticle->generate($blnIsInsertTag);
 	}
 
 
@@ -1123,7 +1124,7 @@ abstract class Controller extends System
 
 				// Insert article
 				case 'insert_article':
-					$arrCache[$strTag] = $this->replaceInsertTags($this->getArticle($elements[1]));
+					$arrCache[$strTag] = $this->replaceInsertTags(ltrim($this->getArticle($elements[1], false, true)));
 					break;
 
 				// Insert content element

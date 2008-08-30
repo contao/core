@@ -2,6 +2,16 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.1 (2008-XX-XX)
+--------------------------
+- Added content element "article alias"
+- Added interface "uploadable" for file upload widgets
+- Added forum/helpdesk hook to template "member_grouped"
+- Improved preview pane to show only members with a username
+- Replaced back end multi-filter with a more efficient implementation
+- Added optgroups to the file list of the TinyMCE "typolinks" plugin
+- Fixed a few minor bugs
+
 Version 2.6.0 (2008-08-12)
 --------------------------
 - Packed all style sheets

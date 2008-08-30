@@ -45,6 +45,12 @@ class ModuleArticle extends Module
 	protected $strTemplate = 'mod_article';
 
 	/**
+	 * No markup
+	 * @var boolean
+	 */
+	protected $blnNoMarkup = false;
+
+	/**
 	 * URL cache array
 	 * @var array
 	 */
@@ -53,11 +59,13 @@ class ModuleArticle extends Module
 
 	/**
 	 * Check whether the article is published
+	 * @param boolean
 	 * @return string
 	 */
-	public function generate()
+	public function generate($blnNoMarkup=false)
 	{
 		$this->type = 'article';
+		$this->blnNoMarkup = $blnNoMarkup;
 
 		if (!BE_USER_LOGGED_IN && (!$this->published || ($this->start > 0 && $this->start > time()) || ($this->stop > 0 && $this->stop < time())))
 		{
@@ -73,6 +81,11 @@ class ModuleArticle extends Module
 	 */
 	protected function compile()
 	{
+		if ($this->blnNoMarkup)
+		{
+			$this->Template = new FrontendTemplate('mod_article_plain');
+		}
+
 		if (!strlen($this->cssID[0]))
 		{
 			$this->cssID = array(standardize($this->title), $this->cssID[1]);

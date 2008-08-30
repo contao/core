@@ -148,12 +148,12 @@ class PreviewSwitch extends Backend
 			$arrUser = array(''=>'-');
 
 			// Get active front end users
-			$objUser = $this->Database->prepare("SELECT id, firstname, lastname, company FROM tl_member WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?) ORDER BY firstname")
+			$objUser = $this->Database->prepare("SELECT id, username FROM tl_member WHERE login=1 AND disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?) ORDER BY username")
 									  ->execute($time, $time);
 
 			while ($objUser->next())
 			{
-				$arrUser[$objUser->id] = (strlen($objUser->firstname) ? $objUser->firstname . ' ' . $objUser->lastname : $objUser->company) . ' (' . $objUser->id . ')';
+				$arrUser[$objUser->id] = $objUser->username . ' (' . $objUser->id . ')';
 			}
 		}
 

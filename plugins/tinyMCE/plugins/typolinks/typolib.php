@@ -152,12 +152,21 @@ class typolib extends Controller
 
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$strFolders .= $this->createFileList($strFolder . '/' . $strFile, $level);
+				$strSubFolders = $this->createFileList($strFolder . '/' . $strFile, $level);
+
+				if (strncmp($strSubFolders, '<optgroup', 9) !== 0)
+				{
+					$strFolders .= '<optgroup label="' . specialchars($strFolder . '/' . $strFile) . '">' . $strSubFolders . '</optgroup>';
+				}
+				else
+				{
+					$strFolders .= $strSubFolders;
+				}
 			}
 
 			elseif ($strFile != 'meta.txt')
 			{
-				$strFiles .= sprintf('<option value="%s">%s</option>', $strFolder . '/' . $strFile, specialchars($strFolder . '/' . $strFile));
+				$strFiles .= sprintf('<option value="%s">%s</option>', $strFolder . '/' . $strFile, specialchars($strFile));
 			}
 		}
 

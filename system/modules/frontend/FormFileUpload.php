@@ -35,7 +35,7 @@
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
-class FormFileUpload extends Widget
+class FormFileUpload extends Widget implements uploadable
 {
 
 	/**

@@ -116,6 +116,25 @@ class Comments extends Backend
 				break;
 		}
 
+		// Store the referer URL even if it includes the "key" parameter
+		if ($this->Input->get('key') == 'comments')
+		{
+			$session = $this->Session->getData();
+
+			// Main script
+			if ($this->Environment->script == 'typolight/main.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('token'))
+			{
+				$session['referer']['last'] = $session['referer']['current'];
+				$session['referer']['current'] = $this->Environment->requestUri;
+			}
+
+			$this->Session->setData($session);
+
+			// Store session data
+			$this->Database->prepare("UPDATE tl_user SET session=? WHERE id=?")
+						   ->execute(serialize($session), $this->User->id);
+		}
+
 		return $dc->$act();
 	}
 }

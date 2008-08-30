@@ -172,7 +172,7 @@ class ModuleBreadcrumb extends Module
 			$items[] = array
 			(
 				'isActive' => true,
-				'link' => $pages[0]['title']
+				'link' => (strlen($pages[0]['pageTitle']) ? $pages[0]['pageTitle'] : $pages[0]['title'])
 			);
 		}
 

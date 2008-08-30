@@ -103,7 +103,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 );
 
 
-
 /**
  * Class tl_module_listing
  *

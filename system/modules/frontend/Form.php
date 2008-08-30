@@ -180,7 +180,7 @@ class Form extends Hybrid
 				unset($_POST[$objFields->name]);
 			}
 
-			if ($objWidget instanceof FormFileUpload)
+			if ($objWidget instanceof uploadable)
 			{
 				$hasUpload = true;
 			}

@@ -59,6 +59,12 @@ class ModuleLogin extends Module
 			return $objTemplate->parse();
 		}
 
+		// Set last page visited
+		if ($this->redirectBack)
+		{
+			$_SESSION['LAST_PAGE_VISITED'] = $this->getReferer();
+		}
+
 		// Login
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
@@ -72,8 +78,14 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 			$strRedirect = $this->Environment->request;
 
-			// Set jumpTo page
-			if (strlen($this->jumpTo))
+			// Redirect to last page visited
+			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+			{
+				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
+			}
+
+			// Redirect to jumpTo page
+			elseif (strlen($this->jumpTo))
 			{
 				$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 											  ->limit(1)
@@ -143,11 +155,19 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 			$strRedirect = $this->Environment->request;
 
-			if ($objPage->protected)
+			// Redirect to last page visited
+			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+			{
+				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
+			}
+
+			// Redirect home if the page is protected
+			elseif ($objPage->protected)
 			{
 				$strRedirect = $this->Environment->base;
 			}
 
+			// Logout and redirect
 			if ($this->User->logout())
 			{
 				// HOOK: post logout callback

@@ -307,6 +307,11 @@ class DataContainer extends Backend
 			}
 		}
 
+		if ($objWidget instanceof uploadable)
+		{
+			$this->blnUploadable = true;
+		}
+
 		return $objWidget->parse().$datepicker.$wizard.$this->help();
 	}
 

@@ -108,8 +108,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'quicknav'                    => 'name,type,headline;customLabel,includeRoot;rootPage;showLevel,hardLimit,showProtected;guests,protected;align,space,cssID',
 		'quicklink'                   => 'name,type,headline;customLabel;pages;guests,protected;align,space,cssID',
 		'sitemap'                     => 'name,type,headline;includeRoot;rootPage;navigationTpl,showHidden,showProtected;guests,protected;align,space,cssID',
-		'login'                       => 'name,type,headline;cols,jumpTo;guests,protected;align,space,cssID',
-		'logout'                      => 'name,type,headline;jumpTo;guests,protected;align,space,cssID',
+		'login'                       => 'name,type,headline;cols,redirectBack;jumpTo;guests,protected;align,space,cssID',
+		'logout'                      => 'name,type,headline;redirectBack;jumpTo;guests,protected;align,space,cssID',
 		'personalData'                => 'name,type,headline;editable,newsletters;jumpTo;memberTpl;guests,protected;align,space,cssID',
 		'form'                        => 'name,type,headline;form;guests,protected;align,space,cssID',
 		'search'                      => 'name,type,headline;searchType,queryType,searchTpl;perPage,totalLength,contextLength;guests,protected;align,space,cssID',
@@ -329,6 +329,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'options'                 => array('1cl', '2cl'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 			'eval'                    => array('helpwizard'=>true)
+		),
+		'redirectBack' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['redirectBack'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox'
 		),
 		'jumpTo' => array
 		(

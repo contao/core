@@ -48,7 +48,7 @@ CREATE TABLE `tl_calendar_events` (
   `startTime` int(10) unsigned NOT NULL default '0',
   `endTime` int(10) unsigned NOT NULL default '0',
   `recurring` char(1) NOT NULL default '',
-  `repeatEach` varchar(32) NOT NULL default '',
+  `repeatEach` varchar(64) NOT NULL default '',
   `repeatEnd` int(10) unsigned NOT NULL default '0',
   `recurrences` smallint(5) unsigned NOT NULL default '0',
   `teaser` text NULL,

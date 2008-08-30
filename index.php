@@ -241,7 +241,10 @@ class Index extends Frontend
 		header('Pragma: public');
 
 		// Replace insert tags
-		echo $this->replaceInsertTags($strBuffer);
+		$strBuffer = $this->replaceInsertTags($strBuffer);
+		echo str_replace(array('[lt]', '[gt]', '[&]'), array('&lt;', '&gt;', '&amp;'), $strBuffer);
+
+		// Stop execution
 		exit;
 	}
 }

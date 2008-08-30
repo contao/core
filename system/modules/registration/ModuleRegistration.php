@@ -90,16 +90,13 @@ class ModuleRegistration extends Module
 			return;
 		}
 
-		$arrUser = array();
-		$arrFields = array();
-		$doNotSubmit = false;
-
 		if (strlen($this->memberTpl))
 		{
 			$this->Template = new Template($this->memberTpl);
 		}
 
 		$this->Template->fields = '';
+		$doNotSubmit = false;
 
 		// Captcha
 		if (!$this->disableCaptcha)
@@ -125,6 +122,9 @@ class ModuleRegistration extends Module
 			}
 		}
 
+		$arrUser = array();
+		$arrFields = array();
+		$hasUpload = false;
 		$i = 0;
 
 		// Build form
@@ -194,6 +194,11 @@ class ModuleRegistration extends Module
 				}
 			}
 
+			if ($objWidget instanceof uploadable)
+			{
+				$hasUpload = true;
+			}
+
 			$temp = $objWidget->parse();
 
 			$this->Template->fields .= $temp;
@@ -213,6 +218,7 @@ class ModuleRegistration extends Module
 		}
 
 		$this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
+		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 
 		// Create new user if there are no errors
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)
@@ -226,12 +232,13 @@ class ModuleRegistration extends Module
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 		$this->Template->captchaDetails = $GLOBALS['TL_LANG']['MSC']['securityQuestion'];
 
-		$this->Template->login = $arrFields['login'];
-		$this->Template->address = $arrFields['address'];
-		$this->Template->contact = $arrFields['contact'];
-		$this->Template->personal = $arrFields['personal'];
-		$this->Template->captcha = $arrFields['captcha'];
+		// Add groups
+		foreach ($arrFields as $k=>$v)
+		{
+			$this->Template->$k = $v;
+		}
 
+		$this->Template->captcha = $arrFields['captcha'];
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
 		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);

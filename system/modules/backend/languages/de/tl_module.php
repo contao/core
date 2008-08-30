@@ -58,6 +58,7 @@ $GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Formularvorlage', 'B
 $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Anzahl an Spalten', 'Bitte wählen Sie die Anzahl an Spalten des Formulars.');
 $GLOBALS['TL_LANG']['tl_module']['1cl']            = array('Eine Spalte', 'die Bezeichnung jedes Eingabefeldes wird über dem Eingabefeld angezeigt.');
 $GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Zwei Spalten', 'die Bezeichnung jedes Eingabefeldes wird links neben dem Eingabefeld angezeigt.');
+$GLOBALS['TL_LANG']['tl_module']['redirectBack']   = array('Zur zuletzt besuchten Seite weiterleiten', 'Den Benutzer nach dem Login/Logout zurück zu der zuletzt besuchten Seiten leiten.');
 $GLOBALS['TL_LANG']['tl_module']['jumpTo']         = array('Weiterleitung zu Seite', 'Mit dieser Einstellung legen Sie fest, auf welche Seite ein Benutzer nach einer bestimmten Aktion wie z.B. dem Anklicken eines Links oder dem Abschicken eines Formulars weitergeleitet wird.');
 $GLOBALS['TL_LANG']['tl_module']['form']           = array('Formular', 'Bitte wählen Sie ein Formular.');
 $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML Code', 'Bitte geben Sie Ihren HTML-Code ein.');

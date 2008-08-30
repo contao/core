@@ -99,12 +99,6 @@ class DC_Table extends DataContainer implements listable, editable
 	protected $current = array();
 
 	/**
-	 * Multiple filter
-	 * @param array
-	 */
-	protected $multifilter = array();
-
-	/**
 	 * Show the current table as tree
 	 * @param  boolean
 	 */
@@ -115,6 +109,12 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param boolean
 	 */
 	protected $blnCreateNewVersion = false;
+
+	/**
+	 * True if one of the form fields is uploadable
+	 * @param boolean
+	 */
+	protected $blnUploadable = false;
 
 
 	/**
@@ -1477,7 +1477,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['editRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>'.$this->getMessages().'
 
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'" />
 <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'" />'.($this->noReload ? '
@@ -1786,7 +1786,7 @@ window.addEvent(\'domready\', function()
 
 <h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
 
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post">
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'" />'.($this->noReload ? '
 
@@ -2861,11 +2861,17 @@ window.addEvent(\'domready\', function()
 </div>';
 		}
 
-		$result = $this->multiFilter($objRow->fetchAllAssoc());
+		// Return "no records found" message
+		if ($objRow->numRows < 1)
+		{
+			$return .= '
+<p class="tl_empty">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
+		}
 
 		// List records
-		if (count($result) > 0)
+		else
 		{
+			$result = $objRow->fetchAllAssoc();
 			$return .= (($this->Input->get('act') == 'select') ? '
 
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_select" class="tl_form" method="post">
@@ -2962,7 +2968,7 @@ window.addEvent(\'domready\', function()
 				}
 
 				// Remove empty brackets (), [], {}, <> and empty tags from label
-				$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
+				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/i', '', $label);
 				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/i', '', $label);
 
 				// Build sorting groups
@@ -3137,13 +3143,6 @@ window.addEvent(\'domready\', function()
 </div>
 </form>';
 			}
-		}
-
-		// Return "no records found" message
-		else
-		{
-			$return .= '
-<p class="tl_empty">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
 		}
 
 		return $return;
@@ -3413,10 +3412,7 @@ window.addEvent(\'domready\', function()
 			}
 
 			$objTotal = $this->Database->prepare($query)->execute($this->values);
-
-			// Filter result
-			$result = $this->multiFilter($objTotal->fetchAllAssoc());
-			$total = count($result);
+			$total = $objTotal->numRows;
 
 			// Build options
 			if ($total > 0)
@@ -3554,13 +3550,14 @@ window.addEvent(\'domready\', function()
 					// Manual filter
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 					{
-						$this->multifilter[$field] = $session['filter'][$filter][$field];
+						$this->procedure[] = $field . ' LIKE ?';
+						$this->values[] = '%"' . $session['filter'][$filter][$field] . '"%';
 					}
 
 					// Other sort algorithm
 					else
 					{
-						$this->procedure[] = $field.'=?';
+						$this->procedure[] = $field . '=?';
 						$this->values[] = $session['filter'][$filter][$field];
 					}
 				}
@@ -3784,37 +3781,6 @@ window.addEvent(\'domready\', function()
 <input type="submit" name="showOnly" id="showOnly" class="tl_submit" alt="narrow results" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['filter']).'" />
 </div>
 </form>';
-	}
-
-
-	/**
-	 * Filter multiple fields
-	 * @param array
-	 * @return array
-	 */
-	private function multiFilter($result)
-	{
-		if (count($this->multifilter) < 1 || !is_array($result))
-		{
-			return $result;
-		}
-
-		foreach($this->multifilter as $k=>$v)
-		{
-			$cnt = count($result);
-
-			for ($i=0; $i<$cnt; $i++)
-			{
-				$rval = deserialize($result[$i][$k]);
-
-				if (!is_array($rval) || !in_array($v, $rval))
-				{
-					unset($result[$i]);
-				}
-			}
-		}
-
-		return $result;
 	}
 }
 

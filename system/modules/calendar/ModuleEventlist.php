@@ -191,7 +191,15 @@ class ModuleEventlist extends Events
 			}
 
 			$count = 0;
+			$eventCount = 0;
 
+			// Get number of events in the day
+			foreach ($days as $events)
+			{
+				$eventCount += count($events);
+			}
+
+			// List events
 			foreach ($days as $day=>$events)
 			{
 				$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
@@ -214,7 +222,7 @@ class ModuleEventlist extends Events
 					$objTemplate->teaser = $event['teaser'];
 					$objTemplate->details = $event['details'];
 					$objTemplate->calendar = $event['calendar'];
-					$objTemplate->class = ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= count($days)) ? ' last' : '') . ' cal_' . $event['parent'];
+					$objTemplate->class = ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= $eventCount) ? ' last' : '') . ' cal_' . $event['parent'];
 					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
 					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
 					$objTemplate->firstDate = $objTemplate->date;

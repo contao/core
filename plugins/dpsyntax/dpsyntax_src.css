@@ -11,7 +11,7 @@
 .dp-highlighter li,
 .dp-highlighter span
 {
-	font-family:"Andale Mono", monospace;
+	font-family:monospace;
 }
 .dp-highlighter .bar
 {

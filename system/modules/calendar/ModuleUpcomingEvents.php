@@ -92,21 +92,31 @@ class ModuleUpcomingEvents extends Events
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $strBegin, $strEnd);
 		ksort($arrAllEvents);
 
+		$dayMax = 0;
+		$dateBegin = date('Ymd', $strBegin);
+		$dateEnd = date('Ymd', $strEnd);
+
+		// Unset events outside the scope
+		foreach ($arrAllEvents as $k=>$v)
+		{
+			if ($k < $dateBegin || $k > $dateEnd)
+			{
+				unset($arrAllEvents[$k]);
+				continue;
+			}
+
+			$dayMax += count($v);
+		}
+
 		$count = 0;
 		$dayCount = 0;
-		$dayMax = count($arrAllEvents);
 
+		// Render events
 		foreach ($arrAllEvents as $days)
 		{
 			foreach ($days as $day=>$events)
 			{
 				++$dayCount;
-
-				if ($day < $strBegin || $day > $strEnd)
-				{
-					continue;
-				}
-
 				$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
 
 				foreach ($events as $event)

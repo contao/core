@@ -97,6 +97,7 @@ $GLOBALS['TL_CTE'] = array
 	'includes' => array
 	(
 		'alias'     => 'ContentAlias',
+		'article'   => 'ContentArticle',
 		'teaser'    => 'ContentTeaser',
 		'form'      => 'Form',
 		'module'    => 'ContentModule'

@@ -1105,7 +1105,7 @@ window.addEvent(\'domready\', function()
 <input type="hidden" name="FORM_SUBMIT" value="tl_files" />
 <div class="tl_tbox">
   <h3><label for="ctrl_source">'.$GLOBALS['TL_LANG']['tl_files']['editor'][0].'</label> ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="'.specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']).'" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_source\');"') . '</h3>
-  <textarea name="source" id="ctrl_source" class="tl_textarea monospace" rows="12" cols="80" style="height:400px;" onfocus="Backend.getScrollOffset();">' . "\n" . $strContent . '</textarea>' . (($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_files']['editor'][1])) ? '
+  <textarea name="source" id="ctrl_source" class="tl_textarea monospace" rows="12" cols="80" style="height:400px;" onfocus="Backend.getScrollOffset();">' . "\n" . specialchars($strContent) . '</textarea>' . (($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_files']['editor'][1])) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_files']['editor'][1].'</p>' : '') . '
 </div>
 </div>

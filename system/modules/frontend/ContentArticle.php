@@ -21,52 +21,40 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005
  * @author     Leo Feyer <leo@typolight.org>
- * @package    System
+ * @package    Frontend
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Interface listable
- * 
+ * Class ContentArticle
+ *
+ * Front end content element "article alias".
  * @copyright  Leo Feyer 2005
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
-interface listable
+class ContentArticle extends ContentElement
 {
-	public function delete();
-	public function show();
-	public function showAll();
-	public function undo();
+
+	/**
+	 * Parse the template
+	 * @return string
+	 */
+	public function generate()
+	{
+		return $this->getArticle($this->articleAlias, false, true);
+	}
+
+
+	/**
+	 * Generate content element
+	 */
+	protected function compile()
+	{
+		return;
+	}
 }
-
-
-/**
- * Interface editable
- * 
- * @copyright  Leo Feyer 2005
- * @author     Leo Feyer <leo@typolight.org>
- * @package    Controller
- */
-interface editable
-{
-	public function create();
-	public function cut();
-	public function copy();
-	public function move();
-	public function edit();
-}
-
-
-/**
- * Interface uploadable
- * 
- * @copyright  Leo Feyer 2005
- * @author     Leo Feyer <leo@typolight.org>
- * @package    Controller
- */
-interface uploadable {}
 
 ?>

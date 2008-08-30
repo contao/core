@@ -75,7 +75,7 @@ $objLib = new typolib();
             <td nowrap="nowrap"><label for="tlpage">{#typolinks.page}</label></td>
             <td><table border="0" cellspacing="0" cellpadding="0"> 
 				  <tr> 
-					<td><select id="tlpage" name="tlpage" style="width: 200px" onchange="document.forms[0].tlfile.value='';document.forms[0].href.value=this.value;" /><option value="">-</option><?php echo $objLib->createPageList(); ?></select></td> 
+					<td><select id="tlpage" name="tlpage" style="width: 200px" onchange="document.forms[0].tlfile.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createPageList(); ?></select></td> 
 					<td id="hrefbrowsercontainer">&nbsp;</td>
 				  </tr> 
 				</table></td>
@@ -84,7 +84,7 @@ $objLib = new typolib();
             <td nowrap="nowrap"><label for="tlfile">{#typolinks.file}</label></td>
             <td><table border="0" cellspacing="0" cellpadding="0"> 
 				  <tr> 
-					<td><select id="tlfile" name="tlfile" style="width: 200px" onchange="document.forms[0].tlpage.value='';document.forms[0].href.value=this.value;" /><option value="">-</option><?php echo $objLib->createFileList(); ?></select></td> 
+					<td><select id="tlfile" name="tlfile" style="width: 200px" onchange="document.forms[0].tlpage.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createFileList(); ?></select></td> 
 					<td id="hrefbrowsercontainer">&nbsp;</td>
 				  </tr> 
 				</table></td>

@@ -51,13 +51,13 @@ $GLOBALS['TL_LANG']['tl_user']['forms']      = array('Formulare', 'Bitte wählen
 $GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deaktivieren', 'Ist ein Benutzerkonto deaktiviert, kann sich der Benutzer nicht mehr am System anmelden.');
 $GLOBALS['TL_LANG']['tl_user']['start']      = array('Aktivieren am', 'Wenn Sie hier ein Datum eingeben, wird das Benutzerkonto zu diesem Tag aktiviert.');
 $GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deaktivieren am', 'Wenn Sie hier ein Datum eingeben, wird das Benutzerkonto zu diesem Tag deaktiviert.');
-$GLOBALS['TL_LANG']['tl_user']['session']    = array('Session Daten löschen', 'Wenn Sie diese Option wählen, werden die gespeicherten Session Daten gelöscht.');
+$GLOBALS['TL_LANG']['tl_user']['session']    = array('Session-Daten löschen', 'Wenn Sie diese Option wählen, werden die gespeicherten Session-Daten gelöscht.');
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_user']['sessionDeleted'] = 'Ihre Session Daten wurden gelöscht';
+$GLOBALS['TL_LANG']['tl_user']['sessionDeleted'] = 'Ihre Session-Daten wurden gelöscht';
 
 
 /**

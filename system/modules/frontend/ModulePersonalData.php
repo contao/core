@@ -79,9 +79,6 @@ class ModulePersonalData extends Module
 		global $objPage;
 		$this->import('FrontendUser', 'User');
 
-		$arrFields = array();
-		$doNotSubmit = false;
-
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		$this->loadLanguageFile('tl_member');
@@ -106,12 +103,15 @@ class ModulePersonalData extends Module
 			$this->Template = new Template($this->memberTpl);
 		}
 
+		$arrFields = array();
+		$doNotSubmit = false;
+		$hasUpload = false;
 		$this->Template->fields = '';
 
 		// Build form
 		foreach ($this->editable as $i=>$field)
 		{
-			$arrData = $GLOBALS['TL_DCA']['tl_member']['fields'][$field];
+			$arrData = &$GLOBALS['TL_DCA']['tl_member']['fields'][$field];
 			$strGroup = $arrData['eval']['feGroup'];
 
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
@@ -197,6 +197,11 @@ class ModulePersonalData extends Module
 				}
 			}
 
+			if ($objWidget instanceof uploadable)
+			{
+				$hasUpload = true;
+			}
+
 			$temp = $objWidget->parse();
 
 			$this->Template->fields .= $temp;
@@ -214,14 +219,16 @@ class ModulePersonalData extends Module
 		$this->Template->contactDetails = $GLOBALS['TL_LANG']['tl_member']['contactDetails'];
 		$this->Template->personalData = $GLOBALS['TL_LANG']['tl_member']['personalData'];
 
-		$this->Template->login = $arrFields['login'];
-		$this->Template->address = $arrFields['address'];
-		$this->Template->contact = $arrFields['contact'];
-		$this->Template->personal = $arrFields['personal'];
+		// Add groups
+		foreach ($arrFields as $k=>$v)
+		{
+			$this->Template->$k = $v;
+		}
 
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
 		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . count($this->editable) . ((($i % 2) == 0) ? ' odd' : ' even');
 
 		// HOOK: add newsletter fields

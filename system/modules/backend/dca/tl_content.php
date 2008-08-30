@@ -134,6 +134,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'accordionstart'              => 'type,mooType;mooHeadline,mooStyle;mooClasses;guests,protected;align,space,cssID',
 		'accordionstop'               => 'type,mooType;mooClasses;guests,protected',
 		'alias'                       => 'type;cteAlias;guests,protected;align,space,cssID',
+		'article'                     => 'type;articleAlias;guests,protected',
 		'teaser'                      => 'type;article;guests,protected;align,space,cssID',
 		'form'                        => 'type,headline;form;guests,protected;align,space,cssID',
 		'module'                      => 'type;module;guests,protected;align,space,cssID'
@@ -463,6 +464,18 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'wizard' => array
 			(
 				array('tl_content', 'editAlias')
+			)
+		),
+		'articleAlias' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['articleAlias'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_content', 'getArticleAlias'),
+			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'wizard' => array
+			(
+				array('tl_content', 'editArticleAlias')
 			)
 		),
 		'article' => array
@@ -807,6 +820,17 @@ class tl_content extends Backend
 
 
 	/**
+	 * Return the edit alias wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editAlias(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+	}
+
+
+	/**
 	 * Get all content elements and return them as array
 	 * @return array
 	 */
@@ -839,9 +863,31 @@ class tl_content extends Backend
 	 * @param object
 	 * @return string
 	 */
-	public function editAlias(DataContainer $dc)
+	public function editArticleAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+	}
+
+
+	/**
+	 * Get all articles and return them as array
+	 * @param object
+	 * @return array
+	 */
+	public function getArticleAlias(DataContainer $dc)
+	{
+		$arrAlias = array();
+		$this->loadLanguageFile('tl_article');
+
+		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+								   ->execute($dc->id);
+
+		while ($objAlias->next())
+		{
+			$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
+		}
+
+		return $arrAlias;
 	}
 
 
@@ -912,7 +958,8 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'ctrl_'.$dc->field.'\')"');
+		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
+		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'' . $strField . '\')"');
 	}
 
 

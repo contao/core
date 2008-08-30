@@ -59,10 +59,23 @@ class ModuleLogout extends Module
 			return $objTemplate->parse();
 		}
 
+		// Set last page visited
+		if ($this->redirectBack)
+		{
+			$_SESSION['LAST_PAGE_VISITED'] = $this->getReferer();
+		}
+
 		$this->import('FrontendUser', 'User');
 		$strRedirect = $this->Environment->base;
 
-		if (strlen($this->jumpTo))
+		// Redirect to last page visited
+		if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+		{
+			$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
+		}
+
+		// Redirect to jumpTo page
+		elseif (strlen($this->jumpTo))
 		{
 			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 										  ->limit(1)

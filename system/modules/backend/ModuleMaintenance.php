@@ -262,9 +262,12 @@ class ModuleMaintenance extends BackendModule
 		// Show files
 		if ($this->Input->get('toc'))
 		{
+			$arrFiles = $objArchive->getFileList();
+			array_shift($arrFiles);
+
 			echo '<h1 style="font-family:Verdana, sans-serif; font-size:13px; margin:12px 3px; line-height:1; padding:0;">Table of contents</h1>';
 			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:0px 3px; line-height:1.3;">';
-			echo implode('<br />', $objArchive->getFileList());
+			echo implode('<br />', $arrFiles);
 			echo '</div>';
 			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:18px 3px 12px 3px;">';
 			echo '<a href="' . str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request) . '">Click here to run the update</a><br />';
@@ -285,11 +288,17 @@ class ModuleMaintenance extends BackendModule
 
 			foreach ($arrFiles as $strFile)
 			{
+				if ($strFile == 'TOC.txt' || $strFile == 'system/runonce.php')
+				{
+					continue;
+				}
+
 				try
 				{
 					$objBackup->addFile($strFile);
 					echo 'Backed up <strong>' . $strFile . '</strong><br />';
 				}
+
 				catch (Exception $e)
 				{
 					echo 'Skipped <strong>' . $strFile . '</strong> (' . $e->getMessage() . ')<br />';
@@ -314,6 +323,11 @@ class ModuleMaintenance extends BackendModule
 		// Unzip files
 		while ($objArchive->next())
 		{
+			if ($objArchive->file_name == 'TOC.txt')
+			{
+				continue;
+			}
+
 			try
 			{
 				$objFile = new File($objArchive->file_name);
@@ -322,6 +336,7 @@ class ModuleMaintenance extends BackendModule
 
 				echo 'Updated <strong>' . $objArchive->file_name . '</strong><br />';
 			}
+
 			catch (Exception $e)
 			{
 				echo '<span style="color:#ff0000;">Error updating <strong>' . $objArchive->file_name . '</strong>: ' . $e->getMessage() . '</span><br />';
@@ -409,6 +424,7 @@ class ModuleMaintenance extends BackendModule
 				// Set cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
 			}
+			// Else: log out user!!!
 
 			$strBuffer = '';
 			$rand = rand();

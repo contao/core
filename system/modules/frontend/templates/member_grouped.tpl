@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" method="post">
+<form action="<?php echo $this->action; ?>" method="post" enctype="<?php echo $this->enctype; ?>">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
 <?php if ($this->personal): ?>
@@ -41,6 +41,13 @@
 <fieldset><legend><?php echo $this->newsletterDetails; ?></legend>
 <table cellspacing="0" cellpadding="0" summary="<?php echo $this->newsletterDetails; ?>">
 <?php foreach ($this->newsletter as $field) echo $field; ?>
+</table>
+</fieldset>
+<?php endif; ?>
+<?php if ($this->helpdesk): ?>
+<fieldset><legend><?php echo $this->helpdeskDetails; ?></legend>
+<table cellspacing="0" cellpadding="0" summary="<?php echo $this->helpdeskDetails; ?>">
+<?php foreach ($this->helpdesk as $field) echo $field; ?>
 </table>
 </fieldset>
 <?php endif; ?>
