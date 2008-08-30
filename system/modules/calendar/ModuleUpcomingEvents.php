@@ -215,7 +215,7 @@ class ModuleUpcomingEvents extends Events
 										$arrEnclosures[$i]['icon'] = $src;
 										$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]) . $size;
 										$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-										$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || count($_GET)) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+										$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 										$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
 									}
 								}

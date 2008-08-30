@@ -97,7 +97,7 @@ class ContentDownload extends ContentElement
 		$this->Template->icon = $src;
 		$this->Template->link = $this->linkTitle . $size;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || count($_GET)) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
+		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
 	}
 }
 

@@ -111,7 +111,7 @@ class ContentDownloads extends ContentElement
 					$files[$file] = array
 					(
 						'title' => $strBasename,
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || count($_GET)) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
+						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
 						'link' => $strBasename . ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)',
 						'alt' => (strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
 						'caption' => (strlen($this->arrMeta[$objFile->basename][2]) ? $this->arrMeta[$objFile->basename][2] : ''),
@@ -151,7 +151,7 @@ class ContentDownloads extends ContentElement
 					$files[$file . '/' . $subfile] = array
 					(
 						'title' => $strBasename,
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || count($_GET)) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
+						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
 						'link' => $strBasename . ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)',
 						'alt' => (strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
 						'caption' => (strlen($this->arrMeta[$objFile->basename][2]) ? $this->arrMeta[$objFile->basename][2] : ''),
