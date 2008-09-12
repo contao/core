@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'fields'                  => array('sent, date DESC', 'tstamp DESC'),
+			'fields'                  => array('sent', 'date DESC', 'tstamp DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp'),
 			'panelLayout'             => 'filter;search,limit',
 			'child_record_callback'   => array('tl_newsletter', 'listNewsletters')

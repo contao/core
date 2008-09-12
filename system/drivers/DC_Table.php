@@ -2546,7 +2546,7 @@ window.addEvent(\'domready\', function()
 			{
 				for ($k=0; $k<count($childs); $k++)
 				{
-					$return .= $this->generateTree($table, $childs[$k], array('p'=>$childs[($k-1)], 'n'=>$childs[($k+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, (($childs[$k] == $arrClipboard['id'] || $blnCircularReference) ? true : false), ($objRow->protected || $protectedPage));
+					$return .= $this->generateTree($table, $childs[$k], array('p'=>$childs[($k-1)], 'n'=>$childs[($k+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, ((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $childs[$k] == $arrClipboard['id']) || $blnCircularReference) ? true : false), ($objRow->protected || $protectedPage));
 				}
 			}
 		}

@@ -408,15 +408,16 @@ class ModuleMaintenance extends BackendModule
 			// Hide unpublished elements
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 
+			// Calculate hash
+			$strHash = sha1(session_id().$this->Environment->ip.'FE_USER_AUTH');
+
+			// Remove old sessions
+			$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
+						   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
+
 			// Log in front end user
 			if (is_numeric($this->Input->get('user')) && $this->Input->get('user') > 0)
 			{
-				$strHash = sha1(session_id().$this->Environment->ip.'FE_USER_AUTH');
-
-				// Remove old sessions
-				$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
-							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
-
 				// Insert new session
 				$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
 							   ->execute($this->Input->get('user'), $time, 'FE_USER_AUTH', session_id(), $this->Environment->ip, $strHash);
@@ -424,7 +425,16 @@ class ModuleMaintenance extends BackendModule
 				// Set cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
 			}
-			// Else: log out user!!!
+
+			// Log out front end user
+			else
+			{
+				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+
+				// Unset the recall cookies
+				$this->setCookie('tl_recall_fe', '', ($time - 86400), '/');
+				$this->setCookie('tl_recall_fe', '', ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+			}
 
 			$strBuffer = '';
 			$rand = rand();
@@ -444,12 +454,12 @@ class ModuleMaintenance extends BackendModule
 		$arrUser = array(''=>'-');
 
 		// Get active front end users
-		$objUser = $this->Database->prepare("SELECT id, firstname, lastname, company FROM tl_member WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?) ORDER BY firstname")
+		$objUser = $this->Database->prepare("SELECT id, username FROM tl_member WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?) ORDER BY username")
 								  ->execute($time, $time);
 
 		while ($objUser->next())
 		{
-			$arrUser[$objUser->id] = (strlen($objUser->firstname) ? $objUser->firstname . ' ' . $objUser->lastname : $objUser->company) . ' (' . $objUser->id . ')';
+			$arrUser[$objUser->id] = $objUser->username . ' (' . $objUser->id . ')';
 		}
 
 		// Default variables

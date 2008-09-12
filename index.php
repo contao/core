@@ -103,7 +103,7 @@ class Index extends Frontend
 				$objCurrentPage = $this->getPageDetails($objPage->id);
 
 				// Look for a root page whose domain name matches the host name
-				if ($objCurrentPage->domain == $strHost || $objCurrentPage->domain == 'www' . $strHost)
+				if ($objCurrentPage->domain == $strHost || $objCurrentPage->domain == 'www.' . $strHost)
 				{
 					$objNewPage = $objCurrentPage;
 					break;
