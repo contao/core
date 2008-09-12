@@ -237,7 +237,7 @@ class ModuleSearch extends Module
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
-					preg_match_all('/\b.{0,'.$this->contextLength.'}\b' . $strWord . '\b.{0,'.$this->contextLength.'}\b/ui', $arrResult[$i]['text'], $arrChunks);
+					preg_match_all('/\b.{0,'.$this->contextLength.'}\PL' . $strWord . '\PL.{0,'.$this->contextLength.'}\b/ui', $arrResult[$i]['text'], $arrChunks);
 
 					foreach ($arrChunks[0] as $strContext)
 					{
@@ -251,7 +251,7 @@ class ModuleSearch extends Module
 					$this->import('String');
 
 					$objTemplate->context = trim($this->String->substrHtml(implode('...', $arrContext), $this->totalLength));
-					$objTemplate->context = preg_replace('/\b(' . implode('|', $arrMatches) . ')\b/ui', '<span class="highlight">$1</span>', $objTemplate->context);
+					$objTemplate->context = preg_replace('/(\PL)(' . implode('|', $arrMatches) . ')(\PL)/ui', '$1<span class="highlight">$2</span>$3', $objTemplate->context);
 
 					$objTemplate->hasContext = true;
 				}

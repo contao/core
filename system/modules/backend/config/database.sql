@@ -444,7 +444,7 @@ CREATE TABLE `tl_search` (
 CREATE TABLE `tl_search_index` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `pid` int(10) unsigned NOT NULL default '0',
-  `word` varchar(64) NOT NULL default '',
+  `word` varbinary(64) NOT NULL default '',
   `relevance` smallint(5) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`),
