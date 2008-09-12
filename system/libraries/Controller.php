@@ -984,10 +984,10 @@ abstract class Controller extends System
 		$strBuffer = '';
 		$arrCache = array();
 
-		for($i=0; $i<count($tags); $i=$i+2)
+		for($_rit=0; $_rit<count($tags); $_rit=$_rit+2)
 		{
-			$strBuffer .= $tags[$i];
-			$strTag = $tags[$i+1];
+			$strBuffer .= $tags[$_rit];
+			$strTag = $tags[$_rit+1];
 
 			// Skip empty tags
 			if (!strlen($strTag))
