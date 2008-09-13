@@ -231,6 +231,7 @@ abstract class Events extends Module
 		$span = floor(($intEnd - $intStart + $ds) / 86400);
 		$strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
+		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
 
 		if ($span > 0)
 		{
@@ -262,6 +263,7 @@ abstract class Events extends Module
 		$arrEvent['time'] = $strTime;
 		$arrEvent['date'] = $strDate;
 		$arrEvent['day'] = $strDay;
+		$arrEvent['month'] = $strMonth;
 		$arrEvent['parent'] = $intCalendar;
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['title'] = specialchars($objEvents->title);

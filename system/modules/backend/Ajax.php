@@ -196,6 +196,18 @@ class Ajax extends Backend
 
 				$this->Session->set('checkbox_groups', $state);
 				break;
+
+			// HOOK: pass unknown actions to callback functions
+			default:
+				if (array_key_exists('executePreActions', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['executePreActions'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->strAction);
+					}
+				}
+				break;
 		}
 	}
 
@@ -277,6 +289,18 @@ class Ajax extends Backend
 					{
 						$GLOBALS['TL_CONFIG'][$this->Input->post('field')] = $val;
 						echo $dc->edit(false, $this->Input->post('id'));
+					}
+				}
+				exit; break;
+
+			// HOOK: pass unknown actions to callback functions
+			default:
+				if (array_key_exists('executePostActions', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->strAction, $dc);
 					}
 				}
 				exit; break;

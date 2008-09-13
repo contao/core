@@ -232,6 +232,17 @@ class Index extends Frontend
 
 		// Session required to determine the referer
 		$this->import('Session');
+		$session = $this->Session->getData();
+
+		// Set new referer
+		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != $this->Environment->requestUri)
+		{
+			$session['referer']['last'] = $session['referer']['current'];
+			$session['referer']['current'] = $this->Environment->requestUri;
+		}
+
+		// Store session data
+		$this->Session->setData($session);
 
 		// Set cache header
 		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);

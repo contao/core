@@ -219,6 +219,7 @@ class ModuleEventlist extends Events
 					$objTemplate->title = $event['title'];
 					$objTemplate->time = $event['time'];
 					$objTemplate->link = $event['href'];
+					$objTemplate->month = $event['month'];
 					$objTemplate->teaser = $event['teaser'];
 					$objTemplate->details = $event['details'];
 					$objTemplate->calendar = $event['calendar'];
