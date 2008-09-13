@@ -961,6 +961,10 @@ div.tl_history .even td.completed
 	display:block;
 	margin:-2px 0 0 0;
 }
+.tl_checkbox_wizard
+{
+	padding-top:2px;
+}
 
 /* Ajax Box */
 #tl_ajaxBox

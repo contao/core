@@ -131,6 +131,10 @@ label.tl_change_selected
 {
 	margin:-4px 0 0 0;
 }
+.tl_checkbox_wizard
+{
+	padding-top:4px;
+}
 
 /* Forms */
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea

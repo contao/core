@@ -1219,18 +1219,38 @@ var Backend =
 	{
 		var container = $(id);
 		var parent = $(el).getParent();
-		var items = container.getChildren();
 
 		Backend.getScrollOffset();
 
 		switch (command)
 		{
 			case 'up':
-				parent.getPrevious() ? parent.injectBefore(parent.getPrevious()) : parent.injectInside(container);
+				if (!parent.getPrevious() || parent.getPrevious().hasClass('fixed'))
+				{
+					parent.injectInside(container);
+				}
+				else
+				{
+					parent.injectBefore(parent.getPrevious());
+				}
 				break;
 
 			case 'down':
-				parent.getNext() ? parent.injectAfter(parent.getNext()) : parent.injectBefore(container.getFirst());
+				if (parent.getNext())
+				{
+					parent.injectAfter(parent.getNext());
+				}
+				else
+				{
+					var fel = container.getFirst();
+
+					if (fel.hasClass('fixed'))
+					{
+						fel = fel.getNext();
+					}
+
+					parent.injectBefore(fel);
+				}
 				break;
 
 		}

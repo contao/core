@@ -510,7 +510,7 @@ class Email
 					'cid' => $c
 				);
 
-				$this->strHtml = str_replace($m, 'cid:' . $c, $this->strHtml);
+				$this->strHtml = str_replace('"' . $m . '"', '"cid:' . $c . '"', $this->strHtml);
 			}
 		}
 

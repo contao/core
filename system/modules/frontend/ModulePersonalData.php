@@ -132,9 +132,10 @@ class ModulePersonalData extends Module
 			{
 				$objWidget->validate();
 				$varValue = $objWidget->value;
+				$strUsername = strlen($this->Input->post('username')) ? $this->Input->post('username') : $this->User->username;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof FormPassword && $varValue == sha1($this->User->username))
+				if ($objWidget instanceof FormPassword && $varValue == sha1($strUsername))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}
