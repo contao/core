@@ -90,7 +90,7 @@ class Index extends Frontend
 
 		// Get the current page object
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								  ->execute($pageId, $pageId, $time, $time);
+								  ->execute((is_numeric($pageId) ? $pageId : 0), $pageId, $time, $time);
 
 		// Check the URL of each page if there are multiple results
 		if ($objPage->numRows > 1)

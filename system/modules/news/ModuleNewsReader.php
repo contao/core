@@ -93,7 +93,7 @@ class ModuleNewsReader extends ModuleNews
 		// Get news item
 		$objArticle = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 									 ->limit(1)
-									 ->execute($this->Input->get('items'), $this->Input->get('items'), $time, $time);
+									 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $time, $time);
 
 		if ($objArticle->numRows < 1)
 		{

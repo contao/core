@@ -152,9 +152,9 @@ class ModuleBreadcrumb extends Module
 			);
 
 			// Get article title
-			$objArticle = $this->Database->prepare("SELECT title FROM tl_article WHERE alias=? OR id=?")
+			$objArticle = $this->Database->prepare("SELECT title FROM tl_article WHERE id=? OR alias=?")
 										 ->limit(1)
-										 ->execute($this->Input->get('articles'), $this->Input->get('articles'));
+										 ->execute((is_numeric($this->Input->get('articles')) ? $this->Input->get('articles') : 0), $this->Input->get('articles'));
 
 			if ($objArticle->numRows)
 			{

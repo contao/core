@@ -246,9 +246,9 @@ abstract class Controller extends System
 		$this->import('Database');
 
 		// Get article
-		$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE (alias=? OR id=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
+		$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
 									 ->limit(1)
-									 ->execute($varId, $varId, $objPage->id);
+									 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
 
 		if ($objArticle->numRows < 1)
 		{
@@ -1087,7 +1087,7 @@ abstract class Controller extends System
 						// Get target page
 						$objNextPage = $this->Database->prepare("SELECT id, alias, title, pageTitle FROM tl_page WHERE id=? OR alias=?")
 													  ->limit(1)
-													  ->execute($elements[1], $elements[1]);
+													  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 						if ($objNextPage->numRows < 1)
 						{

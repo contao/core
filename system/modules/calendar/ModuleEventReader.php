@@ -93,7 +93,7 @@ class ModuleEventReader extends Events
 		// Get current event
 		$objEvent = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar FROM tl_calendar_events WHERE pid IN(" . implode(',', $this->cal_calendar) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								   ->limit(1)
-								   ->execute($this->Input->get('events'), $this->Input->get('events'), $time, $time);
+								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
 
 		if ($objEvent->numRows < 1)
 		{

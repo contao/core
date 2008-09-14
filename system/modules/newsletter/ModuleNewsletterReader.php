@@ -90,7 +90,7 @@ class ModuleNewsletterReader extends Module
 
 		$objNewsletter = $this->Database->prepare("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel FROM tl_newsletter WHERE pid IN(" . implode(',', $this->nl_channels) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND sent=?" : ""))
 										->limit(1)
-										->execute($this->Input->get('items'), $this->Input->get('items'), 1);
+										->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), 1);
 
 		if ($objNewsletter->numRows < 1)
 		{

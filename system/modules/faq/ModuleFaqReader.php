@@ -88,7 +88,7 @@ class ModuleFaqReader extends Module
 
 		$objFaq = $this->Database->prepare("SELECT *, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS authorsName FROM tl_faq WHERE pid IN(" . implode(',', $this->faq_categories) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
 								 ->limit(1)
-								 ->execute($this->Input->get('items'), $this->Input->get('items'));
+								 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'));
 
 		if ($objFaq->numRows < 1)
 		{
