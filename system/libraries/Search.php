@@ -99,7 +99,7 @@ class Search extends System
 		$strContent = preg_replace('/<script[^>]*>(?>.*?<\/script>)/is', '', $strContent);
 
 		// Calculate checksum
-		$arrSet['checksum'] = md5($strContent);
+		$arrSet['checksum'] = md5(strip_tags($strContent));
 
 		// Return if the page is indexed and up to date
 		$objIndex = $this->Database->prepare("SELECT id, checksum FROM tl_search WHERE url=? AND pid=?")
@@ -140,7 +140,7 @@ class Search extends System
 
 		$arrSet['tstamp'] = time();
 
-		// Save the page
+		// Update an existing old entry
 		if ($objIndex->numRows)
 		{
 			$this->Database->prepare("UPDATE tl_search %s WHERE id=?")
@@ -149,13 +149,37 @@ class Search extends System
 
 			$intInsertId = $objIndex->id;
 		}
+
+		// Add a new entry
 		else
 		{
-			$objInsertStmt = $this->Database->prepare("INSERT INTO tl_search %s")
-											->set($arrSet)
-											->execute();
+			// Check for a duplicate record with the same checksum
+			$objDuplicates = $this->Database->prepare("SELECT id, url FROM tl_search WHERE pid=? AND checksum=?")
+											->limit(1)
+											->execute($arrSet['pid'], $arrSet['checksum']);
 
-			$intInsertId = $objInsertStmt->insertId;
+			// Keep the existing record
+			if ($objDuplicates->numRows)
+			{
+				// Update the URL if the new URL is shorter
+				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/'))
+				{
+					$this->Database->prepare("UPDATE tl_search SET url=? WHERE id=?")
+								   ->execute($arrSet['url'], $objDuplicates->id);
+				}
+
+				return false;
+			}
+
+			// Insert the new record if there is no duplicate
+			else
+			{
+				$objInsertStmt = $this->Database->prepare("INSERT INTO tl_search %s")
+												->set($arrSet)
+												->execute();
+
+				$intInsertId = $objInsertStmt->insertId;
+			}
 		}
 
 		// Remove quotes
