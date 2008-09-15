@@ -100,25 +100,12 @@ class Newsletter extends Backend
 		// Send newsletter
 		if (strlen($this->Input->get('token')) && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
 		{
-			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient)=[^&]*/', '', $this->Environment->request);
-
-			// Get total number of recipients
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=?")
-									   ->execute($objNewsletter->pid, 1);
-
-			// Return if there are no recipients
-			if ($objTotal->total < 1)
-			{
-				$this->Session->set('tl_newsletter_send', null);
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['tl_newsletter']['error'];
-
-				$this->redirect($referer);
-			}
-
+			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', $this->Environment->request);
+			$intTimeout = ($this->Input->get('timeout') > 0) ? $this->Input->get('timeout') : 1;
 			$intStart = $this->Input->get('start') ? $this->Input->get('start') : 0;
 			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
-			// Send preview
+			// Preview
 			if (array_key_exists('preview', $_GET))
 			{
 				if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->get('recipient', true)))
@@ -127,22 +114,38 @@ class Newsletter extends Backend
 					$this->redirect($referer);
 				}
 
+				$intTotal = 1;
+				$preview = true;
+
+				// Get result object
 				$objRecipients = $this->Database->prepare("SELECT ? AS email FROM tl_newsletter_recipients")
 												->limit(1)
 												->execute(urldecode($this->Input->get('recipient', true)));
-	
-				$objTotal->total = 1;
-				$preview = true;
 			}
 
-			// Get recipients
+			// Send
 			else
 			{
+				// Get total number of recipients
+				$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=?")
+										   ->execute($objNewsletter->pid, 1);
+
+				// Return if there are no recipients
+				if ($objTotal->total < 1)
+				{
+					$this->Session->set('tl_newsletter_send', null);
+					$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['tl_newsletter']['error'];
+
+					$this->redirect($referer);
+				}
+
+				$intTotal = $objTotal->total;
+				$preview = false;
+
+				// Get recipients
 				$objRecipients = $this->Database->prepare("SELECT * FROM tl_newsletter_recipients WHERE pid=? AND active=?")
 												->limit($intPages, $intStart)
 												->execute($objNewsletter->pid, 1);
-
-				$preview = false;
 			}
 
 			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; line-height:16px; margin-bottom:12px;">';
@@ -209,7 +212,7 @@ class Newsletter extends Backend
 			echo '<div style="margin-top:12px;">';
 
 			// Redirect back home
-			if ($objRecipients->numRows < 1 || ($intStart + $intPages) >= $objTotal->total)
+			if ($objRecipients->numRows < 1 || ($intStart + $intPages) >= $intTotal)
 			{
 				$this->Session->set('tl_newsletter_send', null);
 
@@ -217,7 +220,7 @@ class Newsletter extends Backend
 				$this->Database->prepare("UPDATE tl_newsletter SET sent=?, date=? WHERE id=?")
 							   ->execute(1, time(), $objNewsletter->id);
 
-				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $objTotal->total);
+				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
 
 				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
 				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
@@ -228,7 +231,7 @@ class Newsletter extends Backend
 			{
 				$url = preg_replace('/&(amp;)?(start|mpc|recipient)=[^&]*/', '', $this->Environment->request) . '&start=' . ($intStart + $intPages) . '&mpc=' . $intPages;
 
-				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $url . '"\', 1000);</script>';
+				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
 				echo '<a href="' . $this->Environment->base . $url . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
@@ -282,11 +285,14 @@ class Newsletter extends Backend
 <div class="tl_tbox">
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="" class="tl_text" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="recipient" id="ctrl_recipient" value="" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
-  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] . '</p>' : '') . '
+  <h3><label for="ctrl_timeout">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][0] . '</label></h3>
+  <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <p class="tl_help">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] . '</p>' : '') . '
 </div>
 </div>
 
