@@ -63,7 +63,7 @@ class Newsletter extends Backend
 
 		$arrAttachments = array();
 
-		// Attachments
+		// Add attachments
 		if ($objNewsletter->addFile)
 		{
 			$files = deserialize($objNewsletter->files);
@@ -101,111 +101,64 @@ class Newsletter extends Backend
 		if (strlen($this->Input->get('token')) && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
 		{
 			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', $this->Environment->request);
-			$intTimeout = ($this->Input->get('timeout') > 0) ? $this->Input->get('timeout') : 1;
-			$intStart = $this->Input->get('start') ? $this->Input->get('start') : 0;
-			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
 			// Preview
 			if (array_key_exists('preview', $_GET))
 			{
+				// Check e-mail address
 				if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->get('recipient', true)))
 				{
 					$_SESSION['TL_PREVIEW_ERROR'] = true;
 					$this->redirect($referer);
 				}
 
-				$intTotal = 1;
-				$preview = true;
+				$arrRecipient['email'] = urldecode($this->Input->get('recipient', true));
 
-				// Get result object
-				$objRecipients = $this->Database->prepare("SELECT ? AS email FROM tl_newsletter_recipients")
-												->limit(1)
-												->execute(urldecode($this->Input->get('recipient', true)));
+				// Send
+				$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
+				$this->sendNewsletter($objEmail, $objNewsletter, $arrRecipient, $text, $html, $css);
+
+				// Redirect
+				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1);
+				$this->redirect($referer);
 			}
 
-			// Send
-			else
+			// Get total number of recipients
+			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=?")
+									   ->execute($objNewsletter->pid, 1);
+
+			// Return if there are no recipients
+			if ($objTotal->total < 1)
 			{
-				// Get total number of recipients
-				$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=?")
-										   ->execute($objNewsletter->pid, 1);
+				$this->Session->set('tl_newsletter_send', null);
+				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['tl_newsletter']['error'];
 
-				// Return if there are no recipients
-				if ($objTotal->total < 1)
-				{
-					$this->Session->set('tl_newsletter_send', null);
-					$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['tl_newsletter']['error'];
-
-					$this->redirect($referer);
-				}
-
-				$intTotal = $objTotal->total;
-				$preview = false;
-
-				// Get recipients
-				$objRecipients = $this->Database->prepare("SELECT * FROM tl_newsletter_recipients WHERE pid=? AND active=?")
-												->limit($intPages, $intStart)
-												->execute($objNewsletter->pid, 1);
+				$this->redirect($referer);
 			}
+
+			$intTotal = $objTotal->total;
+
+			// Get page and timeout
+			$intTimeout = ($this->Input->get('timeout') > 0) ? $this->Input->get('timeout') : 1;
+			$intStart = $this->Input->get('start') ? $this->Input->get('start') : 0;
+			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
+
+			// Get recipients
+			$objRecipients = $this->Database->prepare("SELECT r.email, m.gender, m.firstname, m.lastname FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=?")
+											->limit($intPages, $intStart)
+											->execute($objNewsletter->pid, 1);
 
 			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; line-height:16px; margin-bottom:12px;">';
 
 			// Send newsletter
 			if ($objRecipients->numRows > 0)
 			{
-				$objEmail = new Email();
-
-				$objEmail->from = $objNewsletter->sender;
-				$objEmail->subject = $objNewsletter->subject;
-
-				if (strlen($objNewsletter->senderName))
-				{
-					$objEmail->fromName = $objNewsletter->senderName;
-				}
-
-				// Attachments
-				if (is_array($arrAttachments) && count($arrAttachments) > 0)
-				{
-					foreach ($arrAttachments as $strAttachment)
-					{
-						$objEmail->attachFile(TL_ROOT . '/' . $strAttachment);
-					}
-				}
+				$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
 
 				while ($objRecipients->next())
 				{
-					// Prepare text content
-					$strText = strip_tags($text);
-					$strText = preg_replace('/\n\n/', "\r\n", $strText);
-
-					// Replace wildcards
-					$strText = str_replace('##email##', $objRecipients->email, $text);
-					$strText = str_replace('##name##', preg_replace('/@.*$/i', '', $objRecipients->email), $strText);
-
-					$objEmail->text = $strText;
-
-					// Add HTML content
-					if (!$objNewsletter->sendText)
-					{
-						// Replace wildcards
-						$strHtml = str_replace('##email##', $objRecipients->email, $html);
-						$strHtml = str_replace('##name##', preg_replace('/@.*$/i', '', $objRecipients->email), $strHtml);
-
-						// Get mail template
-						$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
-
-						$objTemplate->body = $strHtml;
-						$objTemplate->title = $objNewsletter->subject;
-						$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-						$objTemplate->css = $css;
-
-						// Parse template
-						$objEmail->html = $objTemplate->parse();
-						$objEmail->imageDir = TL_ROOT . '/';
-					}
-
-					$objEmail->sendTo($objRecipients->email);
-					echo 'Sending ' . ($preview ? 'preview ' : 'newsletter ') . 'to <strong>' . $objRecipients->email . '</strong><br />';
+					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html, $css);
+					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br />';
 				}
 			}
 
@@ -220,6 +173,7 @@ class Newsletter extends Backend
 				$this->Database->prepare("UPDATE tl_newsletter SET sent=?, date=? WHERE id=?")
 							   ->execute(1, time(), $objNewsletter->id);
 
+				// Confirm total number of sent items
 				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
 
 				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
@@ -285,7 +239,7 @@ class Newsletter extends Backend
 <div class="tl_tbox">
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.$GLOBALS['TL_CONFIG']['adminEmail'].'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
   <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
@@ -308,6 +262,129 @@ class Newsletter extends Backend
 
 		$_SESSION['TL_PREVIEW_ERROR'] = false;
 		return $return;
+	}
+
+
+	/**
+	 * Generate the e-mail object and return it
+	 * @param object
+	 * @param array
+	 * @return object
+	 */
+	private function generateEmailObject(Database_Result $objNewsletter, $arrAttachments)
+	{
+		$objEmail = new Email();
+
+		$objEmail->from = $objNewsletter->sender;
+		$objEmail->subject = $objNewsletter->subject;
+
+		// Add sender name
+		if (strlen($objNewsletter->senderName))
+		{
+			$objEmail->fromName = $objNewsletter->senderName;
+		}
+
+		// Attachments
+		if (is_array($arrAttachments) && count($arrAttachments) > 0)
+		{
+			foreach ($arrAttachments as $strAttachment)
+			{
+				$objEmail->attachFile(TL_ROOT . '/' . $strAttachment);
+			}
+		}
+
+		return $objEmail;
+	}
+
+
+	/**
+	 * Compile the newsletter and send it
+	 * @param object
+	 * @param object
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	private function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css)
+	{
+		// Prepare text content
+		$objEmail->text = $this->replaceWildcards($text, $arrRecipient);
+
+		// Add HTML content
+		if (!$objNewsletter->sendText)
+		{
+			// Get mail template
+			$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
+
+			$objTemplate->title = $objNewsletter->subject;
+			$objTemplate->body = $this->replaceWildcards($html, $arrRecipient);
+			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
+			$objTemplate->css = $css;
+
+			// Parse template
+			$objEmail->html = $objTemplate->parse();
+			$objEmail->imageDir = TL_ROOT . '/';
+		}
+
+		$objEmail->sendTo($arrRecipient['email']);
+	}
+
+
+	/**
+	 * Replace tags
+	 * @param string
+	 * @param array
+	 * @return string
+	 */
+	private function replaceWildcards($strText, $arrRecipient)
+	{
+
+		// Determin gender
+		switch ($arrRecipient['gender'])
+		{
+			case 'male':
+				$strText = preg_replace(array('@\{if:female\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{else\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
+				break;
+
+			case 'female':
+				$strText = preg_replace(array('@\{if:male\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{else\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
+				break;
+
+			default:
+				$strText = preg_replace(array('@\{if:female\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{if:male\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
+				break;
+		}
+
+		// Search
+		$arrSearch = array
+		(
+			'##email##',
+			'##name##',
+			'##firstname##',
+			'##lastname##',
+			'{if:male}',
+			'{if:female}',
+			'{else}',
+			'{/if}'
+		);
+
+		// Replace
+		$arrReplace = array
+		(
+			$arrRecipient['email'],
+			preg_replace('/@.*$/i', '', $arrRecipient['email']),
+			$arrRecipient['firstname'],
+			$arrRecipient['lastname'],
+			'',
+			'',
+			'',
+			''
+		);
+
+		// Return
+		return str_replace($arrSearch, $arrReplace, trim($strText));
 	}
 
 
