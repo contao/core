@@ -114,14 +114,16 @@ function utf8_convert_encoding($str, $to, $from=null)
 	if ($from == 'ISO-8859-1' && $to == 'UTF-8')
 		return utf8_encode($str);
 
+	if (USE_MBSTRING)
+	{
+		@mb_substitute_character('none');
+		return @mb_convert_encoding($str, $to, $from);
+	}
+
 	if (function_exists('iconv'))
 		return @iconv($from, $to . '//IGNORE', $str);
 
-	if (!USE_MBSTRING)
-		return $str;
-
-	@mb_substitute_character('none');
-	return @mb_convert_encoding($str, $to, $from);
+	return $str;
 }
 
 

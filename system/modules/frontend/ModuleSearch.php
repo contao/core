@@ -53,7 +53,7 @@ class ModuleSearch extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### WEBSITE SEARCH ###';
 
 			return $objTemplate->parse();
@@ -86,7 +86,7 @@ class ModuleSearch extends Module
 			$this->queryType = $this->Input->get('query_type');
 		}
 
-		$objFormTemplate = new Template((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
+		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->queryType = $this->queryType;
 		$objFormTemplate->keyword = specialchars($strKeywords);
@@ -219,7 +219,7 @@ class ModuleSearch extends Module
 					$strHref = 'index.php/' . $strHref;
 				}
 
-				$objTemplate = new Template((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
+				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
@@ -250,7 +250,7 @@ class ModuleSearch extends Module
 				{
 					$this->import('String');
 
-					$objTemplate->context = trim($this->String->substrHtml(implode('...', $arrContext), $this->totalLength));
+					$objTemplate->context = trim($this->String->substrHtml(implode('…', $arrContext), $this->totalLength));
 					$objTemplate->context = preg_replace('/(\PL)(' . implode('|', $arrMatches) . ')(\PL)/ui', '$1<span class="highlight">$2</span>$3', $objTemplate->context);
 
 					$objTemplate->hasContext = true;

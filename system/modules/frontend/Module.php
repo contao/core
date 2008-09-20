@@ -116,7 +116,7 @@ abstract class Module extends Frontend
 			$style[] = 'text-align:'.$this->align.';';
 		}
 
-		$this->Template = new Template($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		$this->compile();
 
@@ -180,7 +180,7 @@ abstract class Module extends Frontend
 		}
 
 		// Overwrite template
-		$objTemplate = new Template($this->navigationTpl);
+		$objTemplate = new FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_' . $level++;

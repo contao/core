@@ -69,7 +69,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=loadNavigation&id=' + id + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -125,7 +125,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=loadStructure&id=' + id + '&level=' + level + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -213,7 +213,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=loadFileManager&id=' + id + '&level=' + level + '&folder=' + folder + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -278,7 +278,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=loadPagetree&id=' + id + '&level=' + level + '&field=' + field + '&name=' + name + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -342,7 +342,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=loadFiletree&id=' + id + '&level=' + level + '&folder=' + folder + '&field=' + field + '&name=' + name + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -403,7 +403,7 @@ var AjaxRequest =
 		new Ajax(window.location.href, 
 		{
 			data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&load=1&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data...'),
+			onStateChange: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{

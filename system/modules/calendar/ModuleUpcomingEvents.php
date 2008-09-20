@@ -59,7 +59,7 @@ class ModuleUpcomingEvents extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### UPCOMING EVENTS ###';
 
 			return $objTemplate->parse();

@@ -146,7 +146,7 @@ class ModuleArticle extends Module
 		}
 
 		$this->Template->printable = false;
-		$this->Template->backlink = (!$this->multiMode && strlen($this->Input->get('articles')) && ($this->Input->get('articles') == $this->id || $this->Input->get('articles') == $this->alias)) ? $this->getReferer() : false;
+		$this->Template->backlink = (!$this->multiMode && strlen($this->Input->get('articles')) && ($this->Input->get('articles') == $this->id || $this->Input->get('articles') == $this->alias)) ? 'javascript:history.go(-1)' : false;
 		$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
 
 		$contentElements = '';

@@ -53,7 +53,7 @@ class ModuleQuicklink extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### QUICK LINK ###';
 
 			return $objTemplate->parse();

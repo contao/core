@@ -231,7 +231,7 @@ class Pagination extends Frontend
 			$this->intPage = $this->intTotalPages;
 		}
 
-		$this->Template = new Template('pagination');
+		$this->Template = new FrontendTemplate('pagination');
 
 		$this->Template->hasFirst = $this->hasFirst();
 		$this->Template->hasPrevious = $this->hasPrevious();

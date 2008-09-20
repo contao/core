@@ -35,7 +35,7 @@ $GLOBALS['TL_LANG']['tl_news']['alias']        = array('Nachrichtenalias', 'Der 
 $GLOBALS['TL_LANG']['tl_news']['date']         = array('Datum', 'Bitte geben Sie das Datum des Nachrichtenbeitrags ein.');
 $GLOBALS['TL_LANG']['tl_news']['time']         = array('Uhrzeit', 'Bitte geben Sie die Uhrzeit des Nachrichtenbeitrags ein.');
 $GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Unterüberschrift', 'Hier können Sie eine Unterüberschrift eingeben.');
-$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teasertext', 'Der Teasertext wird anstatt des Nachrichtentextes gefolgt von einem "weiterlesen..." Link angezeigt.');
+$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teasertext', 'Der Teasertext wird anstatt des Nachrichtentextes gefolgt von einem "Weiterlesen …"-Link angezeigt.');
 $GLOBALS['TL_LANG']['tl_news']['text']         = array('Nachrichtentext', 'Bitte geben Sie den Nachrichtentext ein.');
 $GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Ein Bild einfügen', 'Wenn Sie diese Option wählen, wird dem Beitrag ein Bild hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_news']['author']       = array('Autor', 'Hier können Sie den Autor des Beitrags ändern.');
@@ -52,9 +52,9 @@ $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Anzeigen bis', 'Wenn Sie
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_news']['default']  = array('Standardseite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf die Standardseite des Nachrichtenarchivs weitergeleitet.');
-$GLOBALS['TL_LANG']['tl_news']['internal'] = array('Interne Seite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf eine interne Seite weitergeleitet.');
-$GLOBALS['TL_LANG']['tl_news']['external'] = array('Externe Webseite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf eine externe Webseite weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_news']['default']  = array('Standardseite', 'Bei Anklicken des "Weiterlesen …" Links wird ein Besucher auf die Standardseite des Nachrichtenarchivs weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_news']['internal'] = array('Interne Seite', 'Bei Anklicken des "Weiterlesen …"-Links wird ein Besucher auf eine interne Seite weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_news']['external'] = array('Externe Webseite', 'Bei Anklicken des "Weiterlesen …"-Links wird ein Besucher auf eine externe Webseite weitergeleitet.');
 
 
 /**

@@ -1057,7 +1057,7 @@ abstract class Controller extends System
 					// Back link
 					if ($elements[1] == 'back')
 					{
-						$strUrl = $this->getReferer(ENCODE_AMPERSANDS);
+						$strUrl = 'javascript:history.go(-1)';
 						$strTitle = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 						// No language files if the page is cached
@@ -1374,6 +1374,66 @@ abstract class Controller extends System
 
 
 	/**
+	 * Parse simple tokens that can be used to personalize newsletters
+	 * @param string
+	 * @param array
+	 * @return string
+	 * @throws Exception
+	 */
+	protected function parseSimpleTokens($strBuffer, $arrData)
+	{
+		$strReturn = '';
+
+		// Remove any unwanted tags (especially PHP tags)
+		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
+		$arrTags = preg_split("/{([^}]+)}/", $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+
+		// Replace tags
+		foreach ($arrTags as $strTag)
+		{
+			if (strncmp($strTag, 'if', 2) === 0)
+			{
+				$strReturn .= preg_replace('/if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+			}
+			elseif (strncmp($strTag, 'elseif', 6) === 0)
+			{
+				$strReturn .= preg_replace('/elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+			}
+			elseif (strncmp($strTag, 'else', 4) === 0)
+			{
+				$strReturn .= '<?php else: ?>';
+			}
+			elseif (strncmp($strTag, 'endif', 5) === 0)
+			{
+				$strReturn .= '<?php endif; ?>';
+			}
+			else
+			{
+				$strReturn .= $strTag;
+			}
+		}
+
+		// Replace tokens
+		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
+
+		// Eval the code
+		ob_start();
+		$blnEval = eval("?>" . $strReturn);
+		$strReturn = ob_get_contents();
+		ob_end_clean();
+
+		// Throw an exception if there is an eval() error
+		if ($blnEval === false)
+		{
+			throw new Exception("Error parsing simple tokens ($strReturn)");
+		}
+
+		// Return the evaled code
+		return $strReturn;
+	}
+
+
+	/**
 	 * Generate an image tag and return it as HTML string
 	 * @param string
 	 * @param string
@@ -1475,7 +1535,7 @@ abstract class Controller extends System
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
 
-		// Open the "save as..." dialogue
+		// Open the "save as …" dialogue
 		header('Content-Type: ' . $objFile->mime);
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="'.$objFile->basename.'"');

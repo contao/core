@@ -53,7 +53,7 @@ class ModuleListing extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### LISTING ###';
 
 			return $objTemplate->parse();
@@ -305,7 +305,7 @@ class ModuleListing extends Module
 		}
 
 		$this->Template->record = $arrFields;
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 	}
 

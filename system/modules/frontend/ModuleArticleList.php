@@ -53,7 +53,7 @@ class ModuleArticleList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### ARTICLE LIST ###';
 
 			return $objTemplate->parse();

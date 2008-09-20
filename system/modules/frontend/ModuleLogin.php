@@ -53,7 +53,7 @@ class ModuleLogin extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### FRONT END LOGIN ###';
 
 			return $objTemplate->parse();
@@ -201,7 +201,7 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
-			$this->Template = new Template($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
@@ -211,7 +211,7 @@ class ModuleLogin extends Module
 		}
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
-		$this->Template = new Template($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		$this->Template->message = '';
 

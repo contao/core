@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['template']      = array('E-Mail-Template',
 $GLOBALS['TL_LANG']['tl_newsletter']['sendText']      = array('Als Text senden', 'Wenn Sie diese Option wählen, wird der Newsletter als reiner Text ohne den HTML-Inhalt versendet.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'] = array('Mails pro Zyklus', 'Um zu verhindern dass das Skript vorzeitig abbricht, wird der Prozess in mehreren Teilschritten ausgeführt. Hier können Sie die Anzahl der Mails pro Teilschritt im Verhältnis zur maximalen Skriptlaufzeit in Ihrer php.ini festlegen.');
 $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'] = array('Testsendung an', 'Eine Testsendung des Newsletters an diese E-Mail-Adresse verschicken.');
+$GLOBALS['TL_LANG']['tl_newsletter']['timeout']       = array('Wartezeit in Sekunden', 'Einige Mailserver beschränken die Anzahl der E-Mails, die pro Minute versendet werden können. Durch eine Anpassung der Wartezeit zwischen den einzelnen Versandzyklen in Sekunden, lässt sich der zeitlichen Aspekt des Versands beeinflussen.');
 $GLOBALS['TL_LANG']['tl_newsletter']['addFile']       = array('Attachment hinzufügen', 'Dem Newsletter eine oder mehrere Dateien hinzufügen.');
 $GLOBALS['TL_LANG']['tl_newsletter']['files']         = array('Attachments', 'Bitte wählen Sie die Dateien, die Sie dem Newsletter anhängen möchten.');
 

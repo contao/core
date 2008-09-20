@@ -93,7 +93,7 @@ class Form extends Hybrid
 		$this->loadDataContainer('tl_form_field');
 		$formId = strlen($this->formID) ? 'auto_'.$this->formID : 'auto_form_'.$this->id;
 
-		$this->Template = new Template($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		$this->Template->fields = '';
 		$this->Template->hidden = '';
@@ -334,7 +334,7 @@ class Form extends Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
-				$objTemplate = new Template('form_xml');
+				$objTemplate = new FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
 				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -482,7 +482,7 @@ class Form extends Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
-					$objTemplate = new Template('form_message');
+					$objTemplate = new FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);

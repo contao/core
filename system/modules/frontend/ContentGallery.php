@@ -178,7 +178,7 @@ class ContentGallery extends ContentElement
 		if ($this->fullsize && TL_MODE == 'FE')
 		{
 			$this->strTemplate = 'ce_gallery_fullsize';
-			$this->Template = new Template($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 		}
 
 		$images = array_values($images);

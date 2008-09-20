@@ -94,7 +94,7 @@ $GLOBALS['TL_CONFIG']['ftpPass'] = '';  // FTP password
 
 <p>Trying to establish a connection to the FTP host provided.</p>
 
-<h3 class="no_border">Login to FTP server</h3>
+<h3 class="no_border">Log into the FTP server</h3>
 <?php if ($this->ftpUserError): ?>
 
 <p class="tl_error"><?php if (!$this->ftpUser): ?>Please specify username and password!<?php else: ?>Could not login as "<?php echo $this->ftpUser; ?>"!<?php endif; ?></p>

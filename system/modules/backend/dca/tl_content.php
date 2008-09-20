@@ -846,10 +846,10 @@ class tl_content extends Backend
 			$arrHeadline = deserialize($objAlias->headline, true);
 
 			$headline_length = strlen($arrHeadline[0]);
-			$headline = $headline_length ? ' (' . substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 0, 32) . (($headline_length > 32) ? '...' : '') . ')' : '';
+			$headline = $headline_length ? ' (' . substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 0, 32) . (($headline_length > 32) ? ' …' : '') . ')' : '';
 
 			$text_length = strlen($objAlias->text);
-			$text = $text_length ? ' (' . substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 0, 32) . (($text_length > 32) ? '...' : '') . ')' : '';
+			$text = $text_length ? ' (' . substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 0, 32) . (($text_length > 32) ? ' …' : '') . ')' : '';
 
 			$arrAlias[$objAlias->title][$objAlias->id] = $objAlias->id . ' - ' . $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . (strlen($headline) ? $headline : $text);
 		}

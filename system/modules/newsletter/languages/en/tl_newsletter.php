@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['template']      = array('E-mail template',
 $GLOBALS['TL_LANG']['tl_newsletter']['sendText']      = array('Send as text', 'If you choose this option, the newsletter will be sent as plain text without the HTML content.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'] = array('Mails per cycle', 'To prevent the script from timing out, the sending process is split into several cycles. Here you can define the number of mails per cycle depending on the maximum execution time defined in your php.ini.');
 $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'] = array('Send preview to', 'Send a preview of the newsletter to this e-mail address.');
+$GLOBALS['TL_LANG']['tl_newsletter']['timeout']       = array('Timeout in seconds', 'Some mail servers limit the number of e-mails that can be sent per minute. Here you can modify the timeout between each cycle in seconds to get more control over the time frame.');
 $GLOBALS['TL_LANG']['tl_newsletter']['addFile']       = array('Add attachment', 'Attach one or more files to the newsletter.');
 $GLOBALS['TL_LANG']['tl_newsletter']['files']         = array('Attachments', 'Please select the files you want to attach to the newsletter.');
 

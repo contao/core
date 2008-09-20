@@ -442,7 +442,7 @@ class ModuleMaintenance extends BackendModule
 			// Display pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" />' . ((strlen(($page = substr($arrPages[$i], 0, 108))) < 108) ? $page : $page . '...') . "<br />\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" />' . ((strlen(($page = substr($arrPages[$i], 0, 108))) < 108) ? $page : $page . ' …') . "<br />\n";
 			}
 
 			$this->Template = new BackendTemplate('be_index');

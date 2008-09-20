@@ -99,7 +99,7 @@ class ContentDfGallery extends ContentElement
 		}
 		
 		$this->Template->alt = $this->alt;
-		$this->Template->href = 'system/modules/dfGallery/gallery.swf';
+		$this->Template->href = TL_PATH . '/system/modules/dfGallery/gallery.swf';
 		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
 		$this->Template->flashvars = 'xmlFile=' . $xmlName;
 		$this->Template->src = $this->singleSRC;

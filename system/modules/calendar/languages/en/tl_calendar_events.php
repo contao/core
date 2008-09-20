@@ -38,7 +38,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['endDate']      = array('End date', 'P
 $GLOBALS['TL_LANG']['tl_calendar_events']['addTime']      = array('Add time', 'Add a start and end time of the event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['startTime']    = array('Start time', 'Please enter the start time according to the global time format.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['endTime']      = array('End time', 'Please enter the end time according to the global time format.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['teaser']       = array('Teaser text', 'The teaser text is usually shown instead of the actual event text followed by a "read more..." link.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['teaser']       = array('Teaser text', 'The teaser text is usually shown instead of the actual event text followed by a "read more …" link.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['details']      = array('Event details', 'Please enter the event details.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurring']    = array('Recurring event', 'Repeat the current event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['repeatEach']   = array('Interval', 'Please set the time interval.');
@@ -56,9 +56,9 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Show until', 
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_calendar_events']['default']  = array('Use default', 'By clicking the "read more..." button visitors will be redirected to the default page of the calendar.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['internal'] = array('Internal page', 'By clicking the "read more..." button visitors will be redirected to an internal page.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['external'] = array('External website', 'By clicking the "read more..." button visitors will be redirected to an external website.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['default']  = array('Use default', 'By clicking the "read more …" button visitors will be redirected to the default page of the calendar.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['internal'] = array('Internal page', 'By clicking the "read more …" button visitors will be redirected to an internal page.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['external'] = array('External website', 'By clicking the "read more …" button visitors will be redirected to an external website.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['days']     = 'day(s)';
 $GLOBALS['TL_LANG']['tl_calendar_events']['weeks']    = 'week(s)';
 $GLOBALS['TL_LANG']['tl_calendar_events']['months']   = 'month(s)';

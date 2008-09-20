@@ -53,7 +53,7 @@ class ModuleNewsletterReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### NEWSLETTER READER ###';
 
 			return $objTemplate->parse();
@@ -85,7 +85,7 @@ class ModuleNewsletterReader extends Module
 		global $objPage;
 
 		$this->Template->content = '';
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		$objNewsletter = $this->Database->prepare("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel FROM tl_newsletter WHERE pid IN(" . implode(',', $this->nl_channels) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND sent=?" : ""))

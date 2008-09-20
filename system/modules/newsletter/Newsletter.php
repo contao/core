@@ -144,7 +144,7 @@ class Newsletter extends Backend
 			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
 			// Get recipients
-			$objRecipients = $this->Database->prepare("SELECT r.email, m.gender, m.firstname, m.lastname FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=?")
+			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=?")
 											->limit($intPages, $intStart)
 											->execute($objNewsletter->pid, 1);
 
@@ -310,7 +310,7 @@ class Newsletter extends Backend
 	private function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css)
 	{
 		// Prepare text content
-		$objEmail->text = $this->replaceWildcards($text, $arrRecipient);
+		$objEmail->text = $this->parseSimpleTokens($text, $arrRecipient);
 
 		// Add HTML content
 		if (!$objNewsletter->sendText)
@@ -319,7 +319,7 @@ class Newsletter extends Backend
 			$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
 
 			$objTemplate->title = $objNewsletter->subject;
-			$objTemplate->body = $this->replaceWildcards($html, $arrRecipient);
+			$objTemplate->body = $this->parseSimpleTokens($html, $arrRecipient);
 			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 			$objTemplate->css = $css;
 
@@ -329,62 +329,6 @@ class Newsletter extends Backend
 		}
 
 		$objEmail->sendTo($arrRecipient['email']);
-	}
-
-
-	/**
-	 * Replace tags
-	 * @param string
-	 * @param array
-	 * @return string
-	 */
-	private function replaceWildcards($strText, $arrRecipient)
-	{
-
-		// Determin gender
-		switch ($arrRecipient['gender'])
-		{
-			case 'male':
-				$strText = preg_replace(array('@\{if:female\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{else\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
-				break;
-
-			case 'female':
-				$strText = preg_replace(array('@\{if:male\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{else\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
-				break;
-
-			default:
-				$strText = preg_replace(array('@\{if:female\}[^\}]*\{/if\}(<br />)?\n?@i', '@\{if:male\}[^\}]*\{/if\}(<br />)?\n?@i'), '', $strText);
-				break;
-		}
-
-		// Search
-		$arrSearch = array
-		(
-			'##email##',
-			'##name##',
-			'##firstname##',
-			'##lastname##',
-			'{if:male}',
-			'{if:female}',
-			'{else}',
-			'{/if}'
-		);
-
-		// Replace
-		$arrReplace = array
-		(
-			$arrRecipient['email'],
-			preg_replace('/@.*$/i', '', $arrRecipient['email']),
-			$arrRecipient['firstname'],
-			$arrRecipient['lastname'],
-			'',
-			'',
-			'',
-			''
-		);
-
-		// Return
-		return str_replace($arrSearch, $arrReplace, trim($strText));
 	}
 
 

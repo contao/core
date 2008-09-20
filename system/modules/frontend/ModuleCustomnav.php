@@ -53,7 +53,7 @@ class ModuleCustomnav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### CUSTOM NAVIGATION MENU ###';
 
 			return $objTemplate->parse();
@@ -118,7 +118,7 @@ class ModuleCustomnav extends Module
 			$this->navigationTpl = (file_exists(TL_ROOT . '/system/modules/frontend/templates/mod_navigation_items.tpl') ? 'mod_navigation_items' : 'nav_default');
 		}
 
-		$objTemplate = new Template($this->navigationTpl);
+		$objTemplate = new BackendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_1';

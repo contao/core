@@ -344,7 +344,7 @@ See the example website (front end output) for more information.</p>
 
 <p class="tl_confirm">You have successfully installed TYPOlight!</p>
 
-<p>Now please login to the TYPOlight back end and check all system settings. 
+<p>Now please log into the TYPOlight back end and check all system settings. 
 Then, visit your website to make sure that TYPOlight is working correctly.</p>
 
 <?php endif; endif; endif; endif; endif; endif; ?>

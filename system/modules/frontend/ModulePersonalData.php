@@ -53,7 +53,7 @@ class ModulePersonalData extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### PERSONAL DATA ###';
 
 			return $objTemplate->parse();
@@ -100,7 +100,7 @@ class ModulePersonalData extends Module
 		// Set template
 		if (strlen($this->memberTpl))
 		{
-			$this->Template = new Template($this->memberTpl);
+			$this->Template = new FrontendTemplate($this->memberTpl);
 		}
 
 		$arrFields = array();

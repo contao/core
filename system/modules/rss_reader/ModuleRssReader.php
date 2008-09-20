@@ -59,7 +59,7 @@ class ModuleRssReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### RSS READER ###';
 
 			return $objTemplate->parse();
@@ -105,7 +105,7 @@ class ModuleRssReader extends Module
 		if ($this->rss_template != 'rss_default')
 		{
 			$this->strTemplate = $this->rss_template;
-			$this->Template = new Template($this->strTemplate);
+			$this->Template = new FrontendTemplate($this->strTemplate);
 		}
 
 		$this->Template->link = $this->objFeed->get_link();

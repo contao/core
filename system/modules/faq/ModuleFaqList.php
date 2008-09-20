@@ -58,7 +58,7 @@ class ModuleFaqList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$this->Template = new Template('be_wildcard');
+			$this->Template = new BackendTemplate('be_wildcard');
 			$this->Template->wildcard = '### FAQ LIST ###';
 
 			return $this->Template->parse();

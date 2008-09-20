@@ -63,21 +63,21 @@ class ContentText extends ContentElement
 			if (strlen($this->imageUrl) && TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_text_image_link';
-				$this->Template = new Template($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 			}
 
 			// Fullsize view
 			elseif ($this->fullsize && TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_text_image_fullsize';
-				$this->Template = new Template($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 			}
 
 			// Simple view
 			else
 			{
 				$this->strTemplate = 'ce_text_image';
-				$this->Template = new Template($this->strTemplate);
+				$this->Template = new FrontendTemplate($this->strTemplate);
 			}
 
 			$size = deserialize($this->size);

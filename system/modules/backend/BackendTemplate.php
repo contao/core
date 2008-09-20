@@ -39,10 +39,31 @@ class BackendTemplate extends Template
 {
 
 	/**
-	 * Add the rich text editor configuration and custom style sheets
+	 * Add a hook to modify the template output
 	 * @return string
 	 */
 	public function parse()
+	{
+		$strBuffer = parent::parse();
+
+		// HOOK: add custom parse filter
+		if (array_key_exists('parseBackendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['parseBackendTemplate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseBackendTemplate'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
+			}
+		}
+
+		return $strBuffer;
+	}
+
+
+	/**
+	 * Parse the template file, add the TinyMCE configuration and print it to the screen
+	 */
+	public function output()
 	{
 		// Rich text editor configuration
 		if (count($GLOBALS['TL_RTE']) && $GLOBALS['TL_CONFIG']['useRTE'])
@@ -98,27 +119,6 @@ class BackendTemplate extends Template
 			$this->javascripts = $strJavaScripts;
 		}
 
-		$strBuffer = parent::parse();
-
-		// HOOK: add custom parse filter
-		if (array_key_exists('parseBackendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['parseBackendTemplate']))
-		{
-			foreach ($GLOBALS['TL_HOOKS']['parseBackendTemplate'] as $callback)
-			{
-				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
-			}
-		}
-
-		return $strBuffer;
-	}
-
-
-	/**
-	 * Parse the template file and print it to the screen
-	 */
-	public function output()
-	{
 		$strBuffer = $this->parse();
 
 		// HOOK: add custom output filter

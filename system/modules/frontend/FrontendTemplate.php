@@ -39,19 +39,11 @@ class FrontendTemplate extends Template
 {
 
 	/**
-	 * Add keywords
+	 * Add a hook to modify the template output
 	 * @return string
 	 */
 	public function parse()
 	{
-		$this->keywords = '';
-		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
-
-		if (strlen($arrKeywords[0]))
-		{
-			$this->keywords = implode(', ', array_unique($arrKeywords));
-		}
-
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filter
@@ -110,6 +102,15 @@ class FrontendTemplate extends Template
 			}
 
 			$strUrl .= $GLOBALS['TL_CONFIG']['urlSuffix'];
+		}
+
+		$this->keywords = '';
+		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
+
+		// Add keywords
+		if (strlen($arrKeywords[0]))
+		{
+			$this->keywords = implode(', ', array_unique($arrKeywords));
 		}
 
 		// Parse template

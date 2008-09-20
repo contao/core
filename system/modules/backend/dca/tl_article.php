@@ -455,8 +455,8 @@ class tl_article extends Backend
 			$varValue = standardize($objTitle->title);
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_article WHERE alias=? OR id=?")
-								   ->execute($varValue, $dc->id);
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_article WHERE id=? OR alias=?")
+								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
 		if ($objAlias->numRows > 1)

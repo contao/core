@@ -2,14 +2,31 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
-Version 2.6.1 (2008-XX-XX)
+Version 2.6.1 (2008-09-20)
 --------------------------
 - Added content element "article alias"
 - Added interface "uploadable" for file upload widgets
+- Added optgroups to the TinyMCE "typolinks" file drop-down menu
 - Added forum/helpdesk hook to template "member_grouped"
-- Improved preview pane to show only members with a username
+- Added month names to calendar templates (#27)
+- Added workaround for PCRE unicode word boundary limitation (#65)
+- Added callbacks "executePreActions" and "executePostActions" (#16)
+- Added option to send personalized mails to the newsletter module (#108)
+- Added a variable timeout between each newsletter sending cycle (#56)
+- Added a "check all" box to all checkbox widgets (#32)
 - Replaced back end multi-filter with a more efficient implementation
-- Added optgroups to the file list of the TinyMCE "typolinks" plugin
+- Replaced all Template objects with FrontendTemplate or BackendTemplate (#64)
+- Improved preview pane to show only members with a username
+- Improved search algorithm to check for duplicate content URLs (#98)
+- Fixed issue with external PHP templates breaking insert tags (#12)
+- Fixed issue with domains containing "www" in multi-domain mode (#73)
+- Fixed issue with wrong newsletter URLs when page alias usage is disabled (#26)
+- Fixed issue with ambiguous image names in HTML newsletters (#84)
+- Fixed issue with wrong color in dpSyntaxHighlighter (#30)
+- Fixed issue with backlinks not working on cached pages (#15)
+- Fixed issue with MySQL convertig aliases starting with a digit (#82)
+- Fixed issue with incorrect download URLs (#24)
+- Fixed a few spelling issues (#110)
 - Fixed a few minor bugs
 
 Version 2.6.0 (2008-08-12)

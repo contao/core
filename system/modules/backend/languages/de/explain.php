@@ -101,7 +101,7 @@ $GLOBALS['TL_LANG']['XPL']['jumpTo'] = array
 	array('Login Formular', 'nachdem sich ein Benutzer angemeldet hat, wird er auf diese Seite weitergeleitet. Auf diese Weise können Sie ihn z.B. auf die Startseite eines geschützten Bereiches weiterleiten.'),
 	array('Automatischer Logout', 'nachdem sich ein Benutzer abgemeldet hat, wird er auf diese Seite weitergeleitet (z.B. eine Anmeldeseite oder eine "Auf Wiedersehen" Seite).'),
 	array('Persönliche Daten', 'nachdem ein Benutzer seine persönlichen Daten erfolgreich aktualisiert hat, wird er auf diese Seite weitergeleitet.'),
-	array('Website-News', 'wenn ein Benutzer auf einen "weiterlesen..." Link klickt, können Sie ihn auf eine Seite, die das Modul <em>Nachrichtenleser</em> enthält, weiterleiten.'),
+	array('Website-News', 'wenn ein Benutzer auf einen "Weiterlesen …"-Link klickt, können Sie ihn auf eine Seite, die das Modul <em>Nachrichtenleser</em> enthält, weiterleiten.'),
 	array('Nachrichtenarchiv Menü', 'wenn ein Benutzer ein Archiv durch anklicken auswählt, können Sie ihn auf eine Seite, die das Modul <em>Nachrichtenarchiv</em> enthält, weiterleiten.'),
 	array('Formulargenerator', 'nachdem ein Benutzer ein Formular abgeschickt hat, können Sie ihn z.B. auf eine "Vielen Dank" Seite oder eine Bestätigungsseite weiterleiten.')
 );

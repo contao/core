@@ -53,7 +53,7 @@ class ModuleNewsArchive extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### NEWS ARCHIVE ###';
 
 			return $objTemplate->parse();
@@ -132,7 +132,7 @@ class ModuleNewsArchive extends ModuleNews
 		// No items found
 		if ($objArticles->numRows < 1)
 		{
-			$this->Template = new Template('mod_newsarchive_empty');
+			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
 		}
 
 		$this->Template->headline = $GLOBALS['TL_LANG']['MONTHS'][(date('m', $objDate->tstamp) - 1)] . ' ' . substr($strDate, 0, 4);

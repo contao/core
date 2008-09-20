@@ -53,7 +53,7 @@ class ModuleEventReader extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### EVENT READER ###';
 
 			return $objTemplate->parse();
@@ -85,7 +85,7 @@ class ModuleEventReader extends Events
 		global $objPage;
 
 		$this->Template->event = '';
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
 		$time = time();

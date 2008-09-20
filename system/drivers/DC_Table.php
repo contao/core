@@ -2450,7 +2450,7 @@ window.addEvent(\'domready\', function()
 		// Shorten label it if it is too long
 		if (strlen($GLOBALS['TL_DCA'][$table]['list']['maxCharacters']) && $GLOBALS['TL_DCA'][$table]['list']['maxCharacters'] < strlen($label))
 		{
-			$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$table]['list']['maxCharacters'])).'...';
+			$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$table]['list']['maxCharacters'])).' …';
 		}
 
 		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
@@ -2964,7 +2964,7 @@ window.addEvent(\'domready\', function()
 
 				if (strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] < strlen($label))
 				{
-					$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])).'...';
+					$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])).' …';
 				}
 
 				// Remove empty brackets (), [], {}, <> and empty tags from label

@@ -101,7 +101,7 @@ $GLOBALS['TL_LANG']['XPL']['jumpTo'] = array
 	array('Login form', 'after a user has logged in, he will be redirected to this page. Thus you can e.g. send him to the welcome page of a protected area.'),
 	array('Automatic logout', 'after a user has logged out, he will be redirected to this page (e.g. a login page or a "good bye" page).'),
 	array('Personal data', 'after a user has updated his personal data successfully, he will be redirected to this page.'),
-	array('Website news', 'when a user clicks on a "read more..." button, he can be redirected to a page including module <em>newsreader</em>.'),
+	array('Website news', 'when a user clicks a "read more …" button, he can be redirected to a page including module <em>newsreader</em>.'),
 	array('News archive menu', 'when a user chooses an archiv by clicking a certain month, he can be redirected to a page including module <em>news archive</em>.'),
 	array('Form generator', 'after a user has submitted a form you can e.g. redirect him to a "thank you" or confirmation page.')
 );

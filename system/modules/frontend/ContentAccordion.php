@@ -53,19 +53,33 @@ class ContentAccordion extends ContentElement
 		// Accordion start
 		if ($this->mooType == 'start')
 		{
-			$this->strTemplate = (TL_MODE == 'FE') ? 'ce_accordion_start' : 'be_wildcard';
-
-			$this->Template = new Template($this->strTemplate);
-			$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
+			if (TL_MODE == 'FE')
+			{
+				$this->strTemplate = 'ce_accordion_start';
+				$this->Template = new FrontendTemplate($this->strTemplate);
+			}
+			else
+			{
+				$this->strTemplate = 'be_wildcard';
+				$this->Template = new BackendTemplate($this->strTemplate);
+				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
+			}
 		}
 
 		// Accordion end
 		elseif ($this->mooType == 'stop')
 		{
-			$this->strTemplate = (TL_MODE == 'FE') ? 'ce_accordion_stop' : 'be_wildcard';
-
-			$this->Template = new Template($this->strTemplate);
-			$this->Template->wildcard = '### ACCORDION WRAPPER END ###';
+			if (TL_MODE == 'FE')
+			{
+				$this->strTemplate = 'ce_accordion_stop';
+				$this->Template = new FrontendTemplate($this->strTemplate);
+			}
+			else
+			{
+				$this->strTemplate = 'be_wildcard';
+				$this->Template = new BackendTemplate($this->strTemplate);
+				$this->Template->wildcard = '### ACCORDION WRAPPER END ###';
+			}
 		}
 
 		// Accordion default
@@ -84,21 +98,21 @@ class ContentAccordion extends ContentElement
 				if (strlen($this->imageUrl) && TL_MODE == 'FE')
 				{
 					$this->strTemplate = 'ce_accordion_image_link';
-					$this->Template = new Template($this->strTemplate);
+					$this->Template = new FrontendTemplate($this->strTemplate);
 				}
 
 				// Fullsize view
 				elseif ($this->fullsize && TL_MODE == 'FE')
 				{
 					$this->strTemplate = 'ce_accordion_image_fullsize';
-					$this->Template = new Template($this->strTemplate);
+					$this->Template = new FrontendTemplate($this->strTemplate);
 				}
 
 				// Simple view
 				else
 				{
 					$this->strTemplate = 'ce_accordion_image';
-					$this->Template = new Template($this->strTemplate);
+					$this->Template = new FrontendTemplate($this->strTemplate);
 				}
 
 				$size = deserialize($this->size);

@@ -52,7 +52,7 @@ class ModuleFaqReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$this->Template = new Template('be_wildcard');
+			$this->Template = new BackendTemplate('be_wildcard');
 			$this->Template->wildcard = '### FAQ READER ###';
 
 			return $this->Template->parse();
@@ -84,7 +84,7 @@ class ModuleFaqReader extends Module
 		global $objPage;
 
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
-		$this->Template->referer = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->referer = 'javascript:history.go(-1)';
 
 		$objFaq = $this->Database->prepare("SELECT *, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS authorsName FROM tl_faq WHERE pid IN(" . implode(',', $this->faq_categories) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
 								 ->limit(1)

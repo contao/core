@@ -53,7 +53,7 @@ class ModuleRegistration extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### USER REGISTRATION ###';
 
 			return $objTemplate->parse();
@@ -92,7 +92,7 @@ class ModuleRegistration extends Module
 
 		if (strlen($this->memberTpl))
 		{
-			$this->Template = new Template($this->memberTpl);
+			$this->Template = new FrontendTemplate($this->memberTpl);
 		}
 
 		$this->Template->fields = '';
@@ -343,7 +343,7 @@ class ModuleRegistration extends Module
 	private function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new Template($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		// Check the token
 		$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE activation=?")

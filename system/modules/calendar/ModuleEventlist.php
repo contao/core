@@ -59,7 +59,7 @@ class ModuleEventlist extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### EVENT LIST ###';
 
 			return $objTemplate->parse();

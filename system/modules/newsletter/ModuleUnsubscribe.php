@@ -53,7 +53,7 @@ class ModuleUnsubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### NEWSLETTER UNSUBSCRIBE ###';
 
 			return $objTemplate->parse();

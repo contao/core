@@ -52,7 +52,7 @@ class ContentComments extends ContentElement
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### COMMENTS ###';
 
 			return $objTemplate->parse();

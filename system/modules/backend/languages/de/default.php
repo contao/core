@@ -130,7 +130,7 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'Dezember';
 
 
 /**
- * Week offset (0 = Sunday, 1 = Monday, ...)
+ * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 1;
 $GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';

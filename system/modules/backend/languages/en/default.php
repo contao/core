@@ -130,7 +130,7 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'December';
 
 
 /**
- * Week offset (0 = Sunday, 1 = Monday, ...)
+ * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 0;
 $GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, dS of F Y';
@@ -181,7 +181,7 @@ $GLOBALS['TL_LANG']['MSC']['fePreview']      = 'Front end preview';
 $GLOBALS['TL_LANG']['MSC']['feUser']         = 'Front end user';
 $GLOBALS['TL_LANG']['MSC']['backToTop']      = 'Back to top';
 $GLOBALS['TL_LANG']['MSC']['user']           = 'User';
-$GLOBALS['TL_LANG']['MSC']['loginTo']        = 'Login to %s';
+$GLOBALS['TL_LANG']['MSC']['loginTo']        = 'Log into %s';
 $GLOBALS['TL_LANG']['MSC']['loginBT']        = 'Login';
 $GLOBALS['TL_LANG']['MSC']['logoutBT']       = 'Logout';
 $GLOBALS['TL_LANG']['MSC']['backBT']         = 'Go back';

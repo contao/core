@@ -159,18 +159,33 @@ class PageTree extends Widget
 		}
 
 		$this->strField = $strField;
+		$this->loadDataContainer($this->strTable);
 
 		// Load current values
-		if ($this->Database->fieldExists($strField, $this->strTable))
+		switch ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'])
 		{
-			$objField = $this->Database->prepare("SELECT " . $strField . " FROM " . $this->strTable . " WHERE id=?")
-									   ->limit(1)
-									   ->execute($this->strId);
+			case 'File':
+				if (strlen($GLOBALS['TL_CONFIG'][$this->strField]))
+				{
+					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+				}
+				break;
 
-			if ($objField->numRows)
-			{
-				$this->varValue = deserialize($objField->$strField);
-			}
+			case 'Table':
+				if (!$this->Database->fieldExists($strField, $this->strTable))
+				{
+					break;
+				}
+
+				$objField = $this->Database->prepare("SELECT " . $strField . " FROM " . $this->strTable . " WHERE id=?")
+										   ->limit(1)
+										   ->execute($this->strId);
+
+				if ($objField->numRows)
+				{
+					$this->varValue = deserialize($objField->$strField);
+				}
+				break;
 		}
 
 		// Load requested nodes

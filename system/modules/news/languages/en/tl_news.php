@@ -35,7 +35,7 @@ $GLOBALS['TL_LANG']['tl_news']['alias']        = array('News alias', 'A news ali
 $GLOBALS['TL_LANG']['tl_news']['date']         = array('Date', 'Please enter the date of the news article.');
 $GLOBALS['TL_LANG']['tl_news']['time']         = array('Time', 'Please enter the time of the news article.');
 $GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Subheadline', 'Here you can enter a subheadline here.');
-$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teaser text', 'The teaser text is usually shown instead of the actual news text followed by a "read more..." link.');
+$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teaser text', 'The teaser text is usually shown instead of the actual news text followed by a "read more …" link.');
 $GLOBALS['TL_LANG']['tl_news']['text']         = array('News text', 'Please enter the news text.');
 $GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Add an image', 'If you choose this option, an image will be added to the news article.');
 $GLOBALS['TL_LANG']['tl_news']['author']       = array('Author', 'You can change the author of the news article.');
@@ -52,9 +52,9 @@ $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'If you ent
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_news']['default']  = array('Use default', 'By clicking the "read more..." button visitors will be redirected to the default page of the news archive.');
-$GLOBALS['TL_LANG']['tl_news']['internal'] = array('Internal page', 'By clicking the "read more..." button visitors will be redirected to an internal page.');
-$GLOBALS['TL_LANG']['tl_news']['external'] = array('External website', 'By clicking the "read more..." button visitors will be redirected to an external website.');
+$GLOBALS['TL_LANG']['tl_news']['default']  = array('Use default', 'By clicking the "read more …" button visitors will be redirected to the default page of the news archive.');
+$GLOBALS['TL_LANG']['tl_news']['internal'] = array('Internal page', 'By clicking the "read more …" button visitors will be redirected to an internal page.');
+$GLOBALS['TL_LANG']['tl_news']['external'] = array('External website', 'By clicking the "read more …" button visitors will be redirected to an external website.');
 
 
 /**

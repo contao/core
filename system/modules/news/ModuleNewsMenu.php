@@ -53,7 +53,7 @@ class ModuleNewsMenu extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new Template('be_wildcard');
+			$objTemplate = new BackendTemplate('be_wildcard');
 			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
 
 			return $objTemplate->parse();

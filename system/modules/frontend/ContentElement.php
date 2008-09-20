@@ -123,7 +123,7 @@ abstract class ContentElement extends Frontend
 			$style[] = 'text-align:'.$this->align.';';
 		}
 
-		$this->Template = new Template($this->strTemplate);
+		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		$this->compile();
 

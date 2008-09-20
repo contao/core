@@ -104,7 +104,7 @@ abstract class ModuleNews extends Module
 
 		while ($objArticles->next())
 		{
-			$objTemplate = new Template($this->news_template);
+			$objTemplate = new FrontendTemplate($this->news_template);
 			$objTemplate->class =  ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
 
 			$objTemplate->text = $objArticles->text;

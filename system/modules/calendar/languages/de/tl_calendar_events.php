@@ -38,7 +38,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['endDate']      = array('Enddatum', 'B
 $GLOBALS['TL_LANG']['tl_calendar_events']['addTime']      = array('Zeit hinzufügen', 'Start- und Endzeit des Events hinzufügen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['startTime']    = array('Startzeit', 'Bitte geben Sie die Startzeit des Events gemäß des globalen Zeitformats ein.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['endTime']      = array('Endzeit', 'Bitte geben Sie die Endzeit des Events gemäß des globalen Zeitformats ein.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['teaser']       = array('Teasertext', 'Der Teasertext wird anstatt der Eventdetails gefolgt von einem "weiterlesen..." Link angezeigt.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['teaser']       = array('Teasertext', 'Der Teasertext wird anstatt der Eventdetails gefolgt von einem "Weiterlesen …"-Link angezeigt.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['details']      = array('Eventdetails', 'Bitte geben Sie die Details des Events ein.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurring']    = array('Wiederkehrender Termin', 'Den Termin in bestimmten Zeitabständen wiederholen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['repeatEach']   = array('Intervall', 'Bitte legen Sie den Zeitabstand fest.');
@@ -56,9 +56,9 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Anzeigen bis'
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_calendar_events']['default']  = array('Standardseite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf die Standardseite des Kalenders weitergeleitet.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['internal'] = array('Interne Seite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf eine interne Seite weitergeleitet.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['external'] = array('Externe Webseite', 'Bei Anklicken des "weiterlesen..." Links wird ein Besucher auf eine externe Webseite weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['default']  = array('Standardseite', 'Bei Anklicken des "Weiterlesen …"-Links wird ein Besucher auf die Standardseite des Kalenders weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['internal'] = array('Interne Seite', 'Bei Anklicken des "Weiterlesen …"-Links wird ein Besucher auf eine interne Seite weitergeleitet.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['external'] = array('Externe Webseite', 'Bei Anklicken des "Weiterlesen …"-Links wird ein Besucher auf eine externe Webseite weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['days']     = 'Tag(e)';
 $GLOBALS['TL_LANG']['tl_calendar_events']['weeks']    = 'Woche(n)';
 $GLOBALS['TL_LANG']['tl_calendar_events']['months']   = 'Monat(e)';
