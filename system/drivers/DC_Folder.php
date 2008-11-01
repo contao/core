@@ -1278,7 +1278,7 @@ window.addEvent(\'domready\', function()
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path . '/' . $v))
+				if (!is_dir($path . '/' . $v) && $v != '.DS_Store')
 				{
 					$files[] = $path.'/'.$v;
 					continue;
@@ -1359,7 +1359,7 @@ window.addEvent(\'domready\', function()
 		{
 			$thumbnail = '';
 			$popupWidth = 400;
-			$popupHeight = 204;
+			$popupHeight = 215;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
 			$objFile = new File($currentFile);
@@ -1376,7 +1376,7 @@ window.addEvent(\'domready\', function()
 			if ($objFile->isGdImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 400) ? ($objFile->width + 61) : 461;
-				$popupHeight = ($objFile->height + 252);
+				$popupHeight = ($objFile->height + 266);
 
 				if ($GLOBALS['TL_CONFIG']['thumbnails'])
 				{
@@ -1388,7 +1388,16 @@ window.addEvent(\'domready\', function()
 			}
 
 			$_buttons = '&nbsp;';
-			$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="this.blur(); Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
+
+			// No popup links for templates
+			if ($this->strTable == 'tl_templates')
+			{
+				$return .= $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</div> <div class="tl_right">';
+			}
+			else
+			{
+				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="this.blur(); Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
+			}
 
 			// Buttons
 			if ($this->Input->get('act') != 'paste')

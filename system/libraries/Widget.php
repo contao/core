@@ -149,8 +149,12 @@ abstract class Widget extends Controller
 			case 'onclick':
 			case 'onchange':
 			case 'accesskey':
-			case 'disabled':
 				$this->arrAttributes[$strKey] = $varValue;
+				break;
+
+			case 'disabled':
+				$this->arrAttributes['disabled'] = $varValue;
+				$this->blnSubmitInput = false;
 				break;
 
 			case 'mandatory':
@@ -543,7 +547,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid e-mail address
 				case 'email':
-					if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $varInput))
+					if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
 					}
@@ -559,7 +563,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid URL
 				case 'url':
-					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\[\]@&=~_-]*$/', $varInput))
+					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
@@ -570,6 +574,24 @@ abstract class Widget extends Controller
 					if (!is_numeric($varInput) || $varInput < 0 || $varInput > 100)
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['prcnt'], $this->strLabel));
+					}
+					break;
+				
+				// HOOK: pass unknown tags to callback functions
+				default:
+					if (array_key_exists('addCustomRegexp', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
+					{
+						foreach ($GLOBALS['TL_HOOKS']['addCustomRegexp'] as $callback)
+						{
+							$this->import($callback[0]);
+							$break = $this->$callback[0]->$callback[1]($this->rgxp, $varInput, $this);
+
+							// Stop the loop if a callback returned true
+							if ($break === true)
+							{
+								break;
+							}
+						}
 					}
 					break;
 			}

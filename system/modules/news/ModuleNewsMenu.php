@@ -125,7 +125,7 @@ class ModuleNewsMenu extends ModuleNews
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
 				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $arrDate[0];
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
-				$arrItems[$intYear][$intMonth]['class'] = (++$count == 1) ? 'first' : (($count == $limit) ? 'last' : '');
+				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $arrDate[0]);
 				$arrItems[$intYear][$intMonth]['quantity'] = $quantity;
 			}

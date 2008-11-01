@@ -89,8 +89,14 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['copy'],
-				'href'                => 'act=copy',
+				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(

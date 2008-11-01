@@ -59,6 +59,12 @@ class CronJob extends Frontend
 	 */
 	public function run()
 	{
+		// Do not run if there is POST data
+		if (count($_POST))
+		{
+			return;
+		}
+
 		$intWeekly = date('YW');
 		$intDaily  = date('Ymd');
 		$intHourly = date('YmdH');

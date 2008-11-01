@@ -81,7 +81,7 @@ $GLOBALS['TL_LANG']['PTY']['error_404'] = array('Fehler 404 (Seite nicht gefunde
 $GLOBALS['TL_LANG']['FOP']['fop'] = array('Dateibearbeitungsrechte', 'Die Dateibearbeitungsrechte gelten nur innerhalb der freigeschalteten Verzeichnisse.');
 $GLOBALS['TL_LANG']['FOP']['f1']  = 'Dateien auf den Server hochladen';
 $GLOBALS['TL_LANG']['FOP']['f2']  = 'Dateien und Verzeichnisse bearbeiten, kopieren und verschieben';
-$GLOBALS['TL_LANG']['FOP']['f3']  = 'Einzelne Dateien und leere Vereichnisse löschen';
+$GLOBALS['TL_LANG']['FOP']['f3']  = 'Einzelne Dateien und leere Verzeichnisse löschen';
 $GLOBALS['TL_LANG']['FOP']['f4']  = 'Verzeichnisse inklusive aller Dateien und Unterordner löschen (!)';
 $GLOBALS['TL_LANG']['FOP']['f5']  = 'Dateien im Quelltexteditor bearbeiten';
 
@@ -235,6 +235,7 @@ $GLOBALS['TL_LANG']['MSC']['fileCreated']    = 'Erstellt am';
 $GLOBALS['TL_LANG']['MSC']['fileModified']   = 'Zuletzt geändert am';
 $GLOBALS['TL_LANG']['MSC']['fileAccessed']   = 'Letzter Zugriff am';
 $GLOBALS['TL_LANG']['MSC']['fileDownload']   = 'Herunterladen';
+$GLOBALS['TL_LANG']['MSC']['fileImageSize']  = 'Breite/Höhe in Pixeln';
 $GLOBALS['TL_LANG']['MSC']['version']        = 'Version';
 $GLOBALS['TL_LANG']['MSC']['restore']        = 'Wiederherstellen';
 $GLOBALS['TL_LANG']['MSC']['backendModules'] = 'Backend-Module';

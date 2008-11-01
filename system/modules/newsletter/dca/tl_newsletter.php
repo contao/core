@@ -83,8 +83,14 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter']['copy'],
-				'href'                => 'act=copy',
+				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif'
 			),
 			'delete' => array
 			(
@@ -131,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128)
+			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true)
 		),
 		'senderName' => array
 		(

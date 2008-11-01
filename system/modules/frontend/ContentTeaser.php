@@ -50,7 +50,7 @@ class ContentTeaser extends ContentElement
 	 */
 	protected function compile()
 	{
-		$objArticle = $this->Database->prepare("SELECT p.id AS id, p.alias AS alias, a.id AS aid, a.title AS title, a.alias AS aalias, a.teaser AS teaser FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+		$objArticle = $this->Database->prepare("SELECT p.id AS id, p.alias AS alias, a.id AS aid, a.title AS title, a.alias AS aalias, a.teaser AS teaser, a.inColumn AS inColumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 									 ->limit(1)
 									 ->execute($this->article);
 
@@ -59,9 +59,18 @@ class ContentTeaser extends ContentElement
 			return;
 		}
 
+		$link = '/articles/';
+
+		if ($objArticle->inColumn != 'main')
+		{
+			$link .= $objArticle->inColumn . ':';
+		}
+
+		$link .= (strlen($objArticle->aalias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->aalias : $objArticle->aid;
+		$this->Template->href = $this->generateFrontendUrl($objArticle->row(), $link);
+
 		$this->Template->headline = $objArticle->title;
 		$this->Template->text = $objArticle->teaser;
-		$this->Template->href = $this->generateFrontendUrl($objArticle->row(),  '/articles/' . ((strlen($objArticle->aalias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->aalias : $objArticle->aid));
 		$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 	}
 }

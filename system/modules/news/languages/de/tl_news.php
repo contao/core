@@ -63,6 +63,7 @@ $GLOBALS['TL_LANG']['tl_news']['external'] = array('Externe Webseite', 'Bei Ankl
 $GLOBALS['TL_LANG']['tl_news']['new']        = array('Neuer Beitrag', 'Einen neuen Nachrichtenbeitrag erstellen');
 $GLOBALS['TL_LANG']['tl_news']['edit']       = array('Beitrag bearbeiten', 'Beitrag ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Beitrag duplizieren', 'Beitrag ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_news']['cut']        = array('Beitrag verschieben', 'Beitrag ID %s verschieben');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Beitrag löschen', 'Beitrag ID %s löschen');
 $GLOBALS['TL_LANG']['tl_news']['show']       = array('Beitragsdetails', 'Die Details des Beitrags ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Archivkopf bearbeiten', 'Den Kopf dieses Nachrichtenarchives bearbeiten');

@@ -46,6 +46,7 @@ $GLOBALS['TL_LANG']['FMD']['application']    = 'Applications';
 $GLOBALS['TL_LANG']['FMD']['form']           = array('Form', 'This module embeds a form into a webpage. The data of a form can be sent via e-mail or be processed by another module.');
 $GLOBALS['TL_LANG']['FMD']['search']         = array('Search engine', 'This module allowes you to search your local website.');
 $GLOBALS['TL_LANG']['FMD']['articleList']    = array('Article list', 'This module displays a list of articles of a particular column.');
+$GLOBALS['TL_LANG']['FMD']['articleNav']     = array('Article navigation', 'This module displays a pagination menu to navigate the articles of a page.');
 $GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Miscellaneous';
 $GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML code', 'This module allows you to include some custom HTML code.');
 $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash movie', 'This module embeds a Macromedia Flash movie into a webpage.');

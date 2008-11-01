@@ -118,7 +118,7 @@ class ModuleSearch extends Module
 			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$objPage->rootId);
 			$query_starttime = microtime(true);
 
-			// Get cached result
+			// Load cached result
 			if (file_exists(TL_ROOT . '/system/tmp/' . $strChecksum))
 			{
 				$objFile = new File('system/tmp/' . $strChecksum);
@@ -127,13 +127,15 @@ class ModuleSearch extends Module
 				{
 					$arrResult = deserialize($objFile->getContent());
 				}
+				else
+				{
+					$objFile->delete();
+				}
 			}
 
 			// Cache result
 			if (is_null($arrResult))
 			{
-				$objFile = new File('system/tmp/' . $strChecksum);
-
 				try
 				{
 					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages);
@@ -145,6 +147,7 @@ class ModuleSearch extends Module
 					$arrResult = array();
 				}
 
+				$objFile = new File('system/tmp/' . $strChecksum);
 				$objFile->write(serialize($arrResult));
 				$objFile->close();
 			}

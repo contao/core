@@ -92,6 +92,10 @@ class SelectMenu extends Widget
 				}
 				break;
 
+			case 'mandatory':
+				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;

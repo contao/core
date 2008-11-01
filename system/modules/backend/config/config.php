@@ -189,9 +189,9 @@ $GLOBALS['TL_CACHE'] = array
 /**
  * Cron jobs
  */
-$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'generateSitemap');
+$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'purgeTempFolder');
+$GLOBALS['TL_CRON']['weekly'][] = array('Automator', 'generateSitemap');
 $GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
-$GLOBALS['TL_CRON']['weekly'][] = array('Automator', 'purgeTempFolder');
 
 
 /**

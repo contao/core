@@ -66,6 +66,11 @@ class ContentDfGallery extends ContentElement
 			return '';
 		}
 
+		if (TL_MODE == 'BE')
+		{
+			return $this->alt;
+		}
+
 		return parent::generate();
 	}
 

@@ -45,6 +45,18 @@ class FormTextArea extends Widget
 	protected $blnSubmitInput = true;
 
 	/**
+	 * Rows
+	 * @var integer
+	 */
+	protected $intRows = 12;
+
+	/**
+	 * Columns
+	 * @var integer
+	 */
+	protected $intCols = 80;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -62,16 +74,16 @@ class FormTextArea extends Widget
 		{
 			case 'size':
 				$arrSize = deserialize($varValue);
-				$this->arrAttributes['rows'] = $arrSize[0];
-				$this->arrAttributes['cols'] = $arrSize[1];
+				$this->intRows = $arrSize[0];
+				$this->intCols = $arrSize[1];
 				break;
 
 			case 'rows':
-				$this->arrAttributes['rows'] = $varValue;
+				$this->intRows = $varValue;
 				break;
 
 			case 'cols':
-				$this->arrAttributes['cols'] = $varValue;
+				$this->intCols = $varValue;
 				break;
 
 			case 'mandatory':
@@ -91,10 +103,12 @@ class FormTextArea extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<textarea name="%s" id="ctrl_%s" class="textarea%s"%s>%s</textarea>',
+		return sprintf('<textarea name="%s" id="ctrl_%s" class="textarea%s" rows="%s" cols="%s"%s>%s</textarea>',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->intRows,
+						$this->intCols,
 						$this->getAttributes(),
 						specialchars($this->varValue)) . $this->addSubmit();
 	}

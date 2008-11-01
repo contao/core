@@ -182,9 +182,11 @@ class ModulePersonalData extends Module
 					// Set new value
 					$this->User->$field = $varValue;
 					$_SESSION['FORM_DATA'][$field] = $varValue;
+					$varSave = is_array($varValue) ? serialize($varValue) : $varValue;
 
+					// Save field
 					$this->Database->prepare("UPDATE tl_member SET " . $field . "=? WHERE id=?")
-								   ->execute($varValue, $this->User->id);
+								   ->execute($varSave, $this->User->id);
 
 					// HOOK: set new password callback
 					if ($objWidget instanceof FormPassword && array_key_exists('setNewPassword', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
@@ -231,6 +233,13 @@ class ModulePersonalData extends Module
 		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . count($this->editable) . ((($i % 2) == 0) ? ' odd' : ' even');
+
+		// HOOK: add memberlist fields
+		if (in_array('memberlist', $this->Config->getActiveModules()))
+		{
+			$this->Template->profile = $arrFields['profile'];
+			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
+		}
 
 		// HOOK: add newsletter fields
 		if (in_array('newsletter', $this->Config->getActiveModules()))

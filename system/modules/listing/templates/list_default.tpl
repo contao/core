@@ -33,6 +33,7 @@
 <select name="per_page" class="select">
   <option value="10"<?php if ($this->per_page == 10): ?> selected="selected"<?php endif; ?>>10</option>
   <option value="20"<?php if ($this->per_page == 20): ?> selected="selected"<?php endif; ?>>20</option>
+  <option value="30"<?php if ($this->per_page == 30): ?> selected="selected"<?php endif; ?>>30</option>
   <option value="50"<?php if ($this->per_page == 50): ?> selected="selected"<?php endif; ?>>50</option>
   <option value="100"<?php if ($this->per_page == 100): ?> selected="selected"<?php endif; ?>>100</option>
   <option value="250"<?php if ($this->per_page == 250): ?> selected="selected"<?php endif; ?>>250</option>

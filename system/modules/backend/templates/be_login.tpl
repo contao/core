@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
-<!--
-
-	This website was built with TYPOlight :: open source web content management system
-	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/GPL
-	Visit project page http://www.typolight.org for more information
-
-//-->
 <head>
 <base href="<?php echo $this->base; ?>" />
 <title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
@@ -63,9 +56,9 @@
 
 <div id="tl_license">
 
-<p>TYPOlight webCMS :: Copyright &#169;2005 by <a href="mailto:&#108;&#101;&#111;&#64;&#116;&#121;&#112;&#111;&#108;&#105;&#103;&#104;&#116;&#46;&#111;&#114;&#103;">Leo 
+<p>TYPOlight webCMS :: Copyright &#169;2005-<?php echo date('Y'); ?> by <a href="mailto:&#108;&#101;&#111;&#64;&#116;&#121;&#112;&#111;&#108;&#105;&#103;&#104;&#116;&#46;&#111;&#114;&#103;">Leo 
   Feyer</a> :: Extensions are copyright of their respective owners :: Visit <a href="http://www.typolight.org" onclick="window.open(this.href); return false;">http://www.typolight.org</a>
-  for more information :: Obstructing the appearance of this notice is prohibited by law.</p>
+  for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 
 <p>TYPOlight is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY :: Without even the
   implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE :: See the GNU Lesser General Public

@@ -2,6 +2,37 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.2 (2008-11-01)
+--------------------------
+- Updated TinyMCE to version 3.2.0.2
+- Improved TinyMCE plugin "typolinks" (#111)
+- Added extension repository client
+- Added front end module "article navigation"
+- Added automatic insertion of the invisible copyright notice
+- Added option to copy or move news and events between archives
+- Added hook "addCustomRegexp" to add custom regular expressions to widgets
+- Added workaround to determine the server IP on Strato servers (#113)
+- Added option to add labels to back end drop-down menus (#5)
+- Added config/langconfig.php to store custom labels (#119)
+- Added a close button to the preview pane (#188)
+- Added classes "first" and "last" to comments (#183)
+- Added insert tag "image" to insert resized images (#55)
+- Added the creator's name to tasks in the task list (#136)
+- Added option to define date formats per root page (#190)
+- Added event titles to calendar RSS/Atom feeds (#50)
+- Fixed a small issue with the style sheet importer (#117)
+- Fixed issue with mandatory select menus not throwing errors (#45)
+- Fixed issue with flash movies being displayed in the back end (#121)
+- Fixed issue with limited number of archives/calendars in front end modules (#159)
+- Fixed issue with external news items without text not showing the "read more" link (#128)
+- Fixed issue with module personal data not updating newsletter subscriptions (#149)
+- Fixed issue with article teaser links not working with empty page ID (#180)
+- Fixed issue with Analytics ID being shown in the front end preview (#103)
+- Fixed issue with multi-day events and daylight saving time (#199)
+- Fixed issue with incorrect e-mail address validation (#182)
+- Fixed issue with style sheets not being written after import (#184)
+- Fixed a few minor bugs
+
 Version 2.6.1 (2008-09-20)
 --------------------------
 - Added content element "article alias"
@@ -10,7 +41,7 @@ Version 2.6.1 (2008-09-20)
 - Added forum/helpdesk hook to template "member_grouped"
 - Added month names to calendar templates (#27)
 - Added workaround for PCRE unicode word boundary limitation (#65)
-- Added callbacks "executePreActions" and "executePostActions" (#16)
+- Added hooks "executePreActions" and "executePostActions" (#16)
 - Added option to send personalized mails to the newsletter module (#108)
 - Added a variable timeout between each newsletter sending cycle (#56)
 - Added a "check all" box to all checkbox widgets (#32)

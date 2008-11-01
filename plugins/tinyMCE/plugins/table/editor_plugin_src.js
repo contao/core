@@ -1,5 +1,5 @@
 /**
- * $Id: editor_plugin_src.js 853 2008-05-27 08:05:35Z spocke $
+ * $Id: editor_plugin_src.js 916 2008-09-03 08:57:45Z spocke $
  *
  * @author Moxiecode
  * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
@@ -728,7 +728,7 @@
 								if (!trElm || !tdElm)
 									return true;
 
-								var grid = getTableGrid(tableElm);
+								var grid = getTableGrid(inst.dom.getParent(tableElm, "table"));
 								var cpos = getCellPos(grid, tdElm);
 								var lastTDElm = null;
 
@@ -759,7 +759,7 @@
 								if (!trElm || !tdElm)
 									return true;
 
-								var grid = getTableGrid(tableElm);
+								var grid = getTableGrid(inst.dom.getParent(tableElm, "table"));
 								var cpos = getCellPos(grid, tdElm);
 								var lastTDElm = null;
 

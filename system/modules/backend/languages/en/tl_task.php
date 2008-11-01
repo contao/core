@@ -44,6 +44,8 @@ $GLOBALS['TL_LANG']['tl_task']['comment']     = array('Comment', 'Please add a s
  */
 $GLOBALS['TL_LANG']['tl_task']['date']       = 'Date';
 $GLOBALS['TL_LANG']['tl_task']['assignedTo'] = 'Assigned to';
+$GLOBALS['TL_LANG']['tl_task']['createdBy']  = 'created by %s';
+$GLOBALS['TL_LANG']['tl_task']['creator']    = 'Creator';
 $GLOBALS['TL_LANG']['tl_task']['noTasks']    = 'Currently there are no tasks.';
 $GLOBALS['TL_LANG']['tl_task']['delConfirm'] = 'Do you really want to remove task ID %s?';
 $GLOBALS['TL_LANG']['tl_task']['message']    = "\n\n---\n\nThis task has been assigned by %s.\n";

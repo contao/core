@@ -37,7 +37,7 @@ align_middle:"Mitten",
 align_bottom:"Botten",
 align_texttop:"Toppen av texten",
 align_textbottom:"Botten av texten",
-align_left:"H\u00F6ger",
-align_right:"V\u00E4nster",
+align_left:"V\u00E4nster",
+align_right:"H\u00F6ger",
 image_list:"Bildlista"
 });

@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email', 'decodeEntities'=>true)
 		),
 		'website' => array
 		(

@@ -315,11 +315,11 @@ class Pagination extends Frontend
 		{
 			if ($i == $this->intPage)
 			{
-				$arrLinks[] = sprintf('<li><span class="pagination_current">%s</span></li>', $i);
+				$arrLinks[] = sprintf('<li><span class="current">%s</span></li>', $i);
 				continue;
 			}
 
-			$arrLinks[] = sprintf('<li><a href="%s" class="pagination_link" title="%s">%s</a></li>',
+			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
 								ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $i,
 								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
 								$i);

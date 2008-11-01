@@ -30,7 +30,7 @@
 /**
  * Front end module
  */
-array_insert($GLOBALS['FE_MOD']['application'], 3, array
+array_insert($GLOBALS['FE_MOD']['application'], 4, array
 (
 	'listing' => 'ModuleListing'
 ));

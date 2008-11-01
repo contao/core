@@ -58,7 +58,20 @@ class StyleSheets extends Backend
 										->limit(1)
 										->execute($intId);
 
-		if ($objStyleSheet->numRows)
+		if ($objStyleSheet->numRows < 1)
+		{
+			return;
+		}
+
+		// Delete CSS file
+		if ($this->Input->get('act') == 'delete')
+		{
+			$this->import('Files');
+			$this->Files->delete($objStyleSheet->name . '.css');
+		}
+
+		// Update CSS file
+		else
 		{
 			$this->writeStyleSheet($objStyleSheet->row());
 			$this->log('Generated style sheet "' . $objStyleSheet->name . '.css"', 'StyleSheets updateStyleSheet()', TL_CRON);
@@ -588,6 +601,10 @@ class StyleSheets extends Backend
 				}
 			}
 
+			// Write style sheet
+			$this->updateStyleSheet($insertId);
+
+			// Redirect
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 			$this->redirect(str_replace('&key=import', '', $this->Environment->request));
 		}
@@ -664,18 +681,38 @@ class StyleSheets extends Backend
 			{
 				case 'width':
 				case 'height':
+					if ($arrChunks[1] == 'auto')
+					{
+						$strUnit = '';
+						$varValue = 'auto';
+					}
+					else
+					{
+						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
+					}
 					$arrSet['size'] = 1;
-					$arrSet[$strKey]['value'] = preg_replace('/[^0-9auto\.-]+/', '', $arrChunks[1]);
-					$arrSet[$strKey]['unit'] = ($arrChunks[1] == 'auto') ? '' : preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+					$arrSet[$strKey]['value'] = $varValue;
+					$arrSet[$strKey]['unit'] = $strUnit;
 					break;
 
 				case 'top':
 				case 'right':
 				case 'bottom':
 				case 'left':
+					if ($arrChunks[1] == 'auto')
+					{
+						$strUnit = '';
+						$varValue = 'auto';
+					}
+					else
+					{
+						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
+					}
 					$arrSet['size'] = 1;
-					$arrSet['trbl'][$strKey] = preg_replace('/[^0-9auto\.-]+/', '', $arrChunks[1]);
-					$arrSet['trbl']['unit'] = ($arrChunks[1] == 'auto') ? '' : preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+					$arrSet['trbl'][$strKey] = $varValue;
+					$arrSet['trbl']['unit'] = $strUnit;
 					break;
 
 				case 'position':
@@ -695,11 +732,19 @@ class StyleSheets extends Backend
 				case 'padding':
 					$arrSet['alignment'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = ($arrTRBL[0] == 'auto') ? '' : preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
 					switch (count($arrTRBL))
 					{
 						case 1:
-							$varValue = preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[0]);
+							if ($arrTRBL[0] == 'auto')
+							{
+								$strUnit = '';
+								$varValue = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$varValue = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+							}
 							$arrSet[$strKey] = array
 							(
 								'top' => $varValue,
@@ -711,8 +756,41 @@ class StyleSheets extends Backend
 							break;
 
 						case 2:
-							$varValue_1 = preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[0]);
-							$varValue_2 = preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[1]);
+							$arrUnits = array();
+							if ($arrTRBL[0] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_1 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							if ($arrTRBL[1] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_2 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
+								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							// Move to custom section if there are different units
+							if (count(array_unique($arrUnits)) > 1)
+							{
+								$arrSet['own'][] = $strDefinition;
+								break;
+							}
 							$arrSet[$strKey] = array
 							(
 								'top' => $varValue_1,
@@ -724,12 +802,75 @@ class StyleSheets extends Backend
 							break;
 
 						case 4:
+							$arrUnits = array();
+							if ($arrTRBL[0] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_1 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							if ($arrTRBL[1] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_2 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
+								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							if ($arrTRBL[2] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_3 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[2]);
+								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							if ($arrTRBL[3] == 'auto')
+							{
+								$strUnit = '';
+								$varValue_4 = 'auto';
+							}
+							else
+							{
+								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[3]);
+								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
+								if (strlen($strUnit))
+								{
+									$arrUnits[] = $strUnit;
+								}
+							}
+							// Move to custom section if there are different units
+							if (count(array_unique($arrUnits)) > 1)
+							{
+								$arrSet['own'][] = $strDefinition;
+								break;
+							}
 							$arrSet[$strKey] = array
 							(
-								'top' => preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[0]),
-								'right' => preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[1]),
-								'bottom' => preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[2]),
-								'left' => preg_replace('/[^0-9auto\.-]+/', '', $arrTRBL[3]),
+								'top' => $varValue_1,
+								'right' => $varValue_2,
+								'bottom' => $varValue_3,
+								'left' => $varValue_4,
 								'unit' => $strUnit
 							);
 							break;
@@ -742,9 +883,17 @@ class StyleSheets extends Backend
 				case 'margin-left':
 					$arrSet['alignment'] = 1;
 					$strName = str_replace('margin-', '', $strKey);
-					$varValue = preg_replace('/[^0-9auto\.-]+/', '', $arrChunks[1]);
-					$strUnit = ($arrChunks[1] == 'auto') ? '' : preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
-					$arrSet['margin'][$strName] = preg_replace('/[^0-9auto\.-]+/', '', $varValue);
+					if ($arrChunks[1] == 'auto')
+					{
+						$strUnit = '';
+						$varValue = 'auto';
+					}
+					else
+					{
+						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
+						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
+					}
+					$arrSet['margin'][$strName] = $varValue;
 					$arrSet['margin']['unit'] = $strUnit;
 					break;
 
@@ -756,7 +905,7 @@ class StyleSheets extends Backend
 					$strName = str_replace('padding-', '', $strKey);
 					$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
 					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
-					$arrSet['padding'][$strName] = preg_replace('/[^0-9\.-]+/', '', $varValue);
+					$arrSet['padding'][$strName] = $varValue;
 					$arrSet['padding']['unit'] = $strUnit;
 					break;
 

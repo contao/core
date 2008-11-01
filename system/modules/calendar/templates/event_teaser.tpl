@@ -7,7 +7,7 @@
 <?php endif; ?>
 <div class="event<?php echo $this->class; ?>">
 <?php if ($this->details): ?>
-<h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"><?php echo $this->title; ?></a></h2>
+<h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
 <?php else: ?>
 <h2><?php echo $this->title; ?></h2>
 <?php endif; ?>
@@ -20,6 +20,6 @@
 <?php echo $this->teaser; ?>
 </div>
 <?php if ($this->details): ?>
-<p class="more"><a href="<?php echo $this->link; ?>" title="<?php echo $this->more; ?>"><?php echo $this->more; ?></a></p>
+<p class="more"><a href="<?php echo $this->link; ?>" title="<?php echo $this->more; ?>"<?php echo $this->target; ?>><?php echo $this->more; ?></a></p>
 <?php endif; ?>
 </div>

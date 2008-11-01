@@ -33,7 +33,7 @@
  * -------------------------------------------------------------------------
  *
  * If you want to modify a data container file, you do not have to edit it
- * directly but you can use this configuration file to save your changes.
+ * directly. You can save your changes in this configuration file instead.
  * Thus, you can update or replace the original files without having to 
  * worry about your modifications.
  * 

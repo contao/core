@@ -56,12 +56,13 @@
 <?php foreach ($this->history as $row): ?>
     <tr class="odd">
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->dateLabel; ?>:</strong> <?php echo $row['date']; ?></td>
+      <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->createdByLabel; ?>:</strong>  <?php echo $row['creator']; ?></td>
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->assignedToLabel; ?>:</strong>  <?php echo $row['name']; ?></td>
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->statusLabel; ?>:</strong>  <?php echo $row['status']; ?></td>
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->progressLabel; ?>:</strong>  <?php echo $row['progress']; ?>%</td>
     </tr>
     <tr class="even">
-      <td class="<?php echo $row['class']; ?>" colspan="4"><?php echo $row['comment']; ?></td>
+      <td class="<?php echo $row['class']; ?>" colspan="5"><?php echo $row['comment']; ?></td>
     </tr>
 <?php endforeach; ?>
   </table>

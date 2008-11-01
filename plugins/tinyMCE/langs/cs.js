@@ -11,7 +11,7 @@ class_name:"T\u0159\u00EDda",
 not_set:"- Nenastaveno -",
 clipboard_msg:"Funkce kop\u00EDrovat/vyjmout/vlo\u017Eit nejsou pou\u017Eiteln\u00E9 v Mozille a Firefoxu.\nChcete v\u00EDce informac\u00ED?",
 clipboard_no_support:"Tato funkce nen\u00ED va\u0161\u00EDm prohl\u00ED\u017Ee\u010Dem podporov\u00E1na. Pou\u017Eijte kl\u00E1vesov\u00E9 zkratky.",
-popup_blocked:"Blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, nutn\u00E9 pro funkci aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED vypn\u011Bte blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
+popup_blocked:"Blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, nutn\u00E9 pro funkci aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED vypn\u00C4\u009Bte blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
 invalid_data:"Chyba: Vlo\u017Een\u00E1 chybn\u00E1 data jsou ozna\u010Dena \u010Derven\u011B.",
 more_colors:"V\u00EDce barev"
 },
@@ -44,7 +44,7 @@ rtl_desc:"Sm\u011Br zprava doleva"
 },
 layer:{
 insertlayer_desc:"Vlo\u017Eit novou vrstvu",
-forward_desc:"P\u0159esunout dop\u0159edu",
+forward_desc:"P\u0159esunout doP\u0159edu",
 backward_desc:"P\u0159esunout dozadu",
 absolute_desc:"P\u0159epnout absolutn\u00ED pozici",
 content:"Nov\u00E1 vrstva..."
@@ -99,10 +99,10 @@ word_title:"Pou\u017Eijte CTRL+V pro vlo\u017Een\u00ED textu do okna."
 },
 table:{
 desc:"Vlo\u017Eit novou tabulku",
-row_before_desc:"Vlo\u017Eit \u0159\u00E1dek p\u0159ed",
+row_before_desc:"Vlo\u017Eit \u0159\u00E1dek P\u0159ed",
 row_after_desc:"Vlo\u017Eit \u0159\u00E1dek za",
 delete_row_desc:"Vymazat \u0159\u00E1dek",
-col_before_desc:"Vlo\u017Eit sloupec p\u0159ed",
+col_before_desc:"Vlo\u017Eit sloupec P\u0159ed",
 col_after_desc:"Vlo\u017Eit sloupec za",
 delete_col_desc:"Vymazat sloupec",
 split_cells_desc:"Rozd\u011Blit bu\u0148ky",
@@ -110,7 +110,7 @@ merge_cells_desc:"Slou\u010Dit bu\u0148ky",
 row_desc:"Vlastnosti \u0159\u00E1dku",
 cell_desc:"Vlastnosti bu\u0148ky",
 props_desc:"Vlastnosti tabulky",
-paste_row_before_desc:"Vlo\u017Eit \u0159\u00E1dek p\u0159ed",
+paste_row_before_desc:"Vlo\u017Eit \u0159\u00E1dek P\u0159ed",
 paste_row_after_desc:"Vlo\u017Eit \u0159\u00E1dek za",
 cut_row_desc:"Vyjmout \u0159\u00E1dek",
 copy_row_desc:"Kop\u00EDrovat \u0159\u00E1dek",
@@ -133,7 +133,7 @@ fullpage:{
 desc:"Vlastnosti dokumentu"
 },
 template:{
-desc:"Vlo\u017Eit p\u0159eddefinovan\u00FD obsah ze \u0161ablony"
+desc:"Vlo\u017Eit P\u0159eddefinovan\u00FD obsah ze \u0161ablony"
 },
 visualchars:{
 desc:"Zobrazen\u00ED skryt\u00FDch znak\u016F zap/vyp"
@@ -146,7 +146,7 @@ ignore_words:"Ignorovat v\u0161e",
 langs:"Jazyky",
 wait:"\u010Cekejte pros\u00EDm...",
 sug:"N\u00E1pov\u011Bda",
-no_sug:"\u017D\u00E1dn\u00E1 n\u00E1pov\u011Bda",
+no_sug:"\u0139\u02DD\u00E1dn\u00E1 n\u00E1pov\u011Bda",
 no_mpell:"Nebyly nalezeny \u017E\u00E1dn\u00E9 chyby."
 },
 pagebreak:{

@@ -20,7 +20,6 @@ div.calendar caption span a { top:1px; }
 div.calendar caption span.year { float:right; width:58px; }
 div.calendar table { background:#fff; cursor:default; border-collapse:collapse; margin:0 auto; overflow:hidden; width:100%; }
 div.calendar td, div.calendar th { height:21px; vertical-align:middle; text-align:center; border:0; color:#7cab49; font:normal 11px Arial, Helvetica, sans-serif; }
-**:first-child+body div.calendar td, **:first-child+body div.calendar th { height:19px; }
 div.calendar td { background:url("calendar-td.gif"); color:#fff; font-size:11px; }
 div.calendar td.invalid { color:#999; }
 div.calendar td.valid { background:url("calendar-valid.gif"); color:#7cab49; cursor:pointer; }

@@ -67,7 +67,7 @@ $GLOBALS['TL_LANG']['tl_module']['imgSize']        = array('Bildbreite und Bildh
 $GLOBALS['TL_LANG']['tl_module']['alt']            = array('Alternativer Text', 'Damit Bilder oder Filme barrierefrei dargestellt werden können, sollten sie immer einen alternativen Text mit einer kurzen Beschreibung des Inhaltes enthalten.');
 $GLOBALS['TL_LANG']['tl_module']['useCaption']     = array('Bildunterschrift anzeigen', 'Wenn Sie diese Option wählen, wird der Name des jeweiligen Bildes unter dem Bild angezeigt.');
 $GLOBALS['TL_LANG']['tl_module']['source']         = array('Quelle', 'Bitte wählen Sie die Quelle des Elements.');
-$GLOBALS['TL_LANG']['tl_module']['url']            = array('URL', 'Bitte geben Sie vollständige URL inklusive http:// ein.');
+$GLOBALS['TL_LANG']['tl_module']['url']            = array('URL', 'Bitte geben Sie die vollständige URL inklusive http:// ein.');
 $GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Hier können Sie Parameter eingeben, die Sie an den Flash-Film übergeben möchten (<em>var1=value1&amp;var2=value2</em>).');
 $GLOBALS['TL_LANG']['tl_module']['altContent']     = array('Alternativer Inhalt', 'Bitte geben Sie hier einen alternativen Inhalt ein, falls der Flash-Film nicht geladen werden kann. HTML ist erlaubt.');
 $GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparenter Flash-Film', 'Wählen Sie diese Option um den Flash-Film transparent zu machen (wmode = transparent). Beachten Sie, dass Buttons und Textfelder in transparenten Flash-Filmen in mehreren Browsern nicht korrekt funktionieren.');
@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash-Player Version
 $GLOBALS['TL_LANG']['tl_module']['flashJS']        = array('JavaScript _DoFSCommand(command, args) {', 'Bitte geben Sie den Inhalt der JavaScript <em>_DoFSCommand()</em> Funktion ein. Die Variable, die das Kommando enthält, heißt <em>command</em>, die Variable, die die Argumente enthält, heißt <em>args</em>.');
 $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Spalte', 'Bitte wählen Sie die Spalte, deren Artikel Sie auflisten möchten.');
 $GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Ersten Artikel überspringen', 'Wählen Sie diese Option um den ersten Artikel von der Liste auszunehmen.');
+$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Ersten Artikel laden', 'Automatisch zum ersten Artikel weiterleiten wenn kein Artikel ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['searchable']     = array('Durchsuchbar', 'Das Modul für die Website-Suche indizieren (nicht verfügbar bei geschützten Modulen).');
 $GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Sicherheitsfrage deaktivieren', 'Wählen Sie diese Option um die Sicherheitsfrage abzuschalten (nicht empfohlen).');
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Modul schützen', 'Das Modul nur bestimmten Gruppen anzeigen.');

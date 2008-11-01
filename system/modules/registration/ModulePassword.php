@@ -153,7 +153,7 @@ class ModulePassword extends Module
 		{
 			$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE email=? AND login=1" . (!$this->reg_skipName ? " AND username=?" : ""))
 										->limit(1)
-										->execute($this->Input->post('email'), $this->Input->post('username'));
+										->execute($this->Input->post('email', true), $this->Input->post('username'));
 
 			if ($objMember->numRows < 1)
 			{

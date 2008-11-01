@@ -139,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => 'title,alias,type;language,pageTitle,description;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests,noSearch;published,start,stop',
 		'redirect'                    => 'title,alias,type;url,redirect,target;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests;published,start,stop',
 		'forward'                     => 'title,alias,type;jumpTo,redirect;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests;published,start,stop',
-		'root'                        => 'title,alias,type;dns,language,fallback;pageTitle,adminEmail;includeLayout;includeCache;createSitemap;includeChmod;published,start,stop',
+		'root'                        => 'title,alias,type;dns,language,fallback;pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;includeLayout;includeCache;createSitemap;includeChmod;published,start,stop',
 		'error_403'                   => 'title,alias,type;language,pageTitle,description;autoforward;includeLayout;includeCache;includeChmod;published,start,stop',
 		'error_404'                   => 'title,alias,type;language,pageTitle,description;autoforward;includeLayout;includeCache;includeChmod;published,start,stop'
 	),
@@ -182,7 +182,28 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['adminEmail'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'email', 'maxlength'=>255)
+			'eval'                    => array('maxlength'=>255, 'rgxp'=>'email', 'decodeEntities'=>true)
+		),
+		'dateFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dateFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('helpwizard'=>true),
+			'explanation'             => 'dateFormat'
+
+		),
+		'timeFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text'
+		),
+		'datimFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text'
 		),
 		'type' => array
 		(

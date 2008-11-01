@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
-<!--
-
-	This website was built with TYPOlight :: open source web content management system
-	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/GPL
-	Visit project page http://www.typolight.org for more information
-
-//-->
 <head>
 <base href="<?php echo $this->base; ?>" />
 <title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
@@ -86,7 +79,7 @@
 <div>
 <span class="footer_project_container"><a href="http://www.typolight.org" class="footer_project" onclick="this.blur(); window.open(this.href); return false;">TYPOlight webCMS <?php echo VERSION; ?></a> &nbsp; :: &nbsp; </span>
 <span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top"><?php echo $this->top; ?></a> &nbsp; :: &nbsp; </span>
-<span class="footer_preview_container"><a href="<?php echo $this->base . $this->frontendFile; ?>" onclick="this.blur(); window.open(this.href); return false;" class="footer_preview" title="<?php echo $this->preview; ?>"><?php echo $this->preview; ?></a></span>
+<span class="footer_preview_container"><a href="typolight/preview.php?site=<?php echo $this->frontendFile; ?>" onclick="this.blur(); window.open(this.href); return false;" class="footer_preview" title="<?php echo $this->preview; ?>"><?php echo $this->preview; ?></a></span>
 </div>
 
 </div><?php if ($this->pageOffset): ?>  

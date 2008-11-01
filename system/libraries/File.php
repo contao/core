@@ -340,6 +340,7 @@ class File extends System
 			'ppt'   => 'application/powerpoint',
 			'wbxml' => 'application/wbxml',
 			'wmlc'  => 'application/wmlc',
+			'dmg'   => 'application/x-apple-diskimage',
 			'dcr'   => 'application/x-director',
 			'dir'   => 'application/x-director',
 			'dxr'   => 'application/x-director',

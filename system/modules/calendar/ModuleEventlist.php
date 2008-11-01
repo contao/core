@@ -221,6 +221,7 @@ class ModuleEventlist extends Events
 					$objTemplate->link = $event['href'];
 					$objTemplate->month = $event['month'];
 					$objTemplate->teaser = $event['teaser'];
+					$objTemplate->target = $event['target'];
 					$objTemplate->details = $event['details'];
 					$objTemplate->calendar = $event['calendar'];
 					$objTemplate->class = ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= $eventCount) ? ' last' : '') . ' cal_' . $event['parent'];

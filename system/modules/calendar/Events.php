@@ -225,10 +225,10 @@ abstract class Events extends Module
 
 		if (date('I', $intEnd) !== $blnSummer)
 		{
-			$ds = $blnSummer ? -3600 : 3600;
+			$ds = $blnSummer ? 3600 : -3600;
 		}
 
-		$span = floor(($intEnd - $intStart + $ds) / 86400);
+		$span = floor(($intEnd - $intStart - $ds) / 86400);
 		$strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
@@ -268,22 +268,30 @@ abstract class Events extends Module
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['title'] = specialchars($objEvents->title);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
+		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW_BLUR : '');
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
-		// Multi-day event
+		// Only show first occurrence
 		if ($this->cal_noSpan)
 		{
 			return;
 		}
 
-		for ($i=1; $i<=$span && $intDate <= $intLimit; $i++)
+		// Multi-day event
+		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
-			$intDate = ($intStart + ($i * 86400));
-			$intNextKey = date('Ymd', $intDate);
+			$intCur = $intDate;
+			$intDate += 86400;
 
+			if ($ds !== 0 && date('I', $intCur) != date('I', $intDate))
+			{
+				$intDate += $ds;
+			}
+
+			$intNextKey = date('Ymd', $intDate);
 			$this->arrEvents[$intNextKey][$intDate][] = $arrEvent;
 		}
 	}

@@ -542,6 +542,15 @@ class Newsletter extends Backend
 
 			if ($objUser->numRows)
 			{
+				// E-mail address has changed
+				if (count($_POST) && $this->Input->post('email', true) != $objUser->email)
+				{
+					$this->Database->prepare("UPDATE tl_newsletter_recipients SET email=? WHERE email=?")
+								   ->execute($this->Input->post('email', true), $objUser->email);
+
+					$objUser->email = $this->Input->post('email', true);
+				}
+
 				$objSubscriptions = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=?")
 												   ->execute($objUser->email);
 

@@ -46,6 +46,7 @@ $GLOBALS['TL_LANG']['FMD']['application']    = 'Anwendungen';
 $GLOBALS['TL_LANG']['FMD']['form']           = array('Formular', 'Dieses Modul bindet ein Formular in eine Seite ein. Die Daten eines Formulars können per E-Mail versendet oder von einem anderen Modul (z.B. einem Newslettermodul oder einer passwortgeschützten Seite) weiterverarbeitet werden.');
 $GLOBALS['TL_LANG']['FMD']['search']         = array('Suchmaschine', 'Mit diesem Modul können Sie Ihre lokale Webseite durchsuchen.');
 $GLOBALS['TL_LANG']['FMD']['articleList']    = array('Artikelliste', 'Dieses Modul erzeugt eine Liste aller vorhandener Artikel einer Spalte.');
+$GLOBALS['TL_LANG']['FMD']['articleNav']     = array('Artikelnavigation', 'Dieses Modul erzeugt ein Seitenumbruch-Menü, mit dem die Artikel einer Seite navigiert werden können.');
 $GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Verschiedenes';
 $GLOBALS['TL_LANG']['FMD']['html']           = array('Eigener HTML-Code', 'Mit diesem Modul können Sie eigenen HTML-Code in eine Seite einfügen.');
 $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash-Film', 'Dieses Modul bindet einen Adobe Flash-Film in eine Seite ein.');

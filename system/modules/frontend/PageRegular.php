@@ -170,7 +170,7 @@ class PageRegular extends Frontend
 		}
 
 		// Add urchin ID if there is no back end user
-		if (!BE_USER_LOGGED_IN)
+		if (!BE_USER_LOGGED_IN && sha1(session_id().$this->Environment->ip.'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH'))
 		{
 			$this->Template->urchinId = $objLayout->urchinId;
 			$this->Template->urchinUrl = $this->Environment->ssl ? 'https://ssl.google-analytics.com/ga.js' : 'http://www.google-analytics.com/ga.js';

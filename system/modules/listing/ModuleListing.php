@@ -131,7 +131,9 @@ class ModuleListing extends Module
 		$strQuery = "SELECT COUNT(*) AS count FROM " . $this->list_table;
 
 		if ($this->list_where)
+		{
 			$strQuery .= " WHERE " . $this->list_where;
+		}
 
 		$strQuery .=  $strWhere;
 		$objTotal = $this->Database->prepare($strQuery)->execute($varKeyword);
@@ -143,23 +145,33 @@ class ModuleListing extends Module
 		$strQuery = "SELECT id," . $this->list_fields . " FROM " . $this->list_table;
 
 		if ($this->list_where)
+		{
 			$strQuery .= " WHERE " . $this->list_where;
+		}
 
 		$strQuery .=  $strWhere;
 
 		// Order by
 		if ($this->Input->get('order_by'))
+		{
 			$strQuery .= " ORDER BY " . $this->Input->get('order_by') . ' ' . $this->Input->get('sort');
+		}
 		elseif ($this->list_sort)
+		{
 			$strQuery .= " ORDER BY " . $this->list_sort;
+		}
 
 		$objDataStmt = $this->Database->prepare($strQuery);
 
 		// Limit
 		if ($this->Input->get('per_page'))
+		{
 			$objDataStmt->limit($this->Input->get('per_page'), (($page - 1) * $per_page));
+		}
 		elseif ($this->perPage)
+		{
 			$objDataStmt->limit($this->perPage, (($page - 1) * $per_page));
+		}
 
 		$objData = $objDataStmt->execute($varKeyword);
 
@@ -173,7 +185,7 @@ class ModuleListing extends Module
 
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
 		{
-			if (strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, 'page', 4) !== 0)
+			if (strlen($fragment) && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, 'page', 4) !== 0)
 			{
 				$strUrl .= (!$blnQuery ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
@@ -223,7 +235,9 @@ class ModuleListing extends Module
 			foreach ($arrRows[$i] as $k=>$v)
 			{
 				if ($k == 'id' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
+				{
 					continue;
+				}
 
 				$value = $this->formatValue($k, $v);
 
@@ -232,7 +246,8 @@ class ModuleListing extends Module
 					'raw' => $v,
 					'content' => ($value ? $value : '&nbsp;'),
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
-					'id' => $arrRows[$i]['id']
+					'id' => $arrRows[$i]['id'],
+					'field' => $k
 				);
 			}
 		}
@@ -271,7 +286,9 @@ class ModuleListing extends Module
 	{
 		// Fallback template
 		if (!strlen($this->list_info_layout))
+		{
 			$this->list_info_layout = 'info_default';
+		}
 
 		$this->Template = new FrontendTemplate($this->list_info_layout);
 
@@ -299,7 +316,7 @@ class ModuleListing extends Module
 			(
 				'raw' => $v,
 				'label' => (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['label'][0]) ? $label : $k),
-				'content' => $this->formatValue($k, $v),
+				'content' => $this->formatValue($k, $v, true),
 				'class' => $class
 			);
 		}
@@ -312,36 +329,75 @@ class ModuleListing extends Module
 
 	/**
 	 * Format a value
+	 * @param string
 	 * @param mixed
+	 * @param boolean
 	 * @return mixed
 	 */
-	protected function formatValue($k, $value)
+	protected function formatValue($k, $value, $blnListSingle=false)
 	{
 		$value = deserialize($value);
 
+		// Return if empty
+		if (!strlen($value))
+		{
+			return '';
+		}
+
 		// Array
 		if (is_array($value))
+		{
 			$value = implode(', ', $value);
+		}
+
+		// Date
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
+		{
+			$value = date($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+		}
+
+		// Time
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
+		{
+			$value = date($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+		}
 
 		// Date and time
-		if ($value && $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
-			$value = date($GLOBALS['TL_CONFIG']['dateFormat'], $value);
-
-		elseif ($value && $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
-			$value = date($GLOBALS['TL_CONFIG']['timeFormat'], $value);
-
-		elseif ($value && $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
+		{
 			$value = date($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+		}
 
 		// URLs
-		if ($value && $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
+		{
 			$value = '<a href="' . $value . '" onclick="window.open(this.href); return false;">' . $value . '</a>';
+		}
 
 		// E-mail addresses
-		if ($value && $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'email')
 		{
 			$value = $this->String->encodeEmail($value);
 			$value = '<a href="mailto:' . $value . '">' . $value . '</a>';
+		}
+
+		// Reference
+		elseif (is_array($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['reference']))
+		{
+			$value = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['reference'][$value];
+		}
+
+		// Associative array
+		elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options']))
+		{
+			if ($blnListSingle)
+			{
+				$value = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options'][$value];
+			}
+			else
+			{
+				$value = '<span class="value">[' . $value . ']</span> ' . $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options'][$value];
+			}
 		}
 
 		return $value;

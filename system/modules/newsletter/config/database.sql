@@ -85,7 +85,7 @@ CREATE TABLE `tl_module` (
   `nl_template` varchar(32) NOT NULL default '',
   `nl_subscribe` text NULL,
   `nl_unsubscribe` text NULL,
-  `nl_channels` varchar(255) NOT NULL default '',
+  `nl_channels` blob NULL,
   `nl_includeCss` char(1) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

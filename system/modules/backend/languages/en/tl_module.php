@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash player version
 $GLOBALS['TL_LANG']['tl_module']['flashJS']        = array('JavaScript _DoFSCommand(command, args) {', 'Please enter the content of the JavaScript <em>_DoFSCommand()</em> function. The variable containing the command is named <em>command</em>, the variable containing the arguments is named <em>args</em>.');
 $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Column', 'Please choose the column whose articles you want to list.');
 $GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Skip first article', 'Choose this option to exclude the first article from the article list.');
+$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Load first article', 'Automatically redirect to the first article if no article is selected.');
 $GLOBALS['TL_LANG']['tl_module']['searchable']     = array('Searchable', 'Allow search indexing of the module (not available for protected modules).');
 $GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Disable security question', 'Choose this option to disable the security question (not recommended).');
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Protect module', 'Show module to certain member groups only.');

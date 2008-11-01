@@ -45,6 +45,12 @@ abstract class Module extends Frontend
 	protected $strTemplate;
 
 	/**
+	 * Column
+	 * @var string
+	 */
+	protected $strColumn;
+
+	/**
 	 * Current record
 	 * @var array
 	 */
@@ -54,8 +60,9 @@ abstract class Module extends Frontend
 	/**
 	 * Initialize the object
 	 * @param object
+	 * @param string
 	 */
-	public function __construct(Database_Result $objModule)
+	public function __construct(Database_Result $objModule, $strColumn='main')
 	{
 		parent::__construct();
 
@@ -66,6 +73,7 @@ abstract class Module extends Frontend
 		$arrHeadline = deserialize($objModule->headline);
 		$this->headline = is_array($arrHeadline) ? $arrHeadline['value'] : $arrHeadline;
 		$this->hl = is_array($arrHeadline) ? $arrHeadline['unit'] : 'h1';
+		$this->strColumn = $strColumn;
 	}
 
 
@@ -228,7 +236,7 @@ abstract class Module extends Frontend
 				}
 
 				// Active page
-				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap)
+				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !$this->Input->get('articles'))
 				{
 					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : ''));
 
@@ -247,27 +255,29 @@ abstract class Module extends Frontend
 						'accesskey' => $objSubpages->accesskey,
 						'tabindex' => $objSubpages->tabindex
 					);
-
-					continue;
 				}
 
-				$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : ''));
+				// Regular page
+				else
+				{
+					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : ''));
 
-				$items[] = array
-				(
-					'isActive' => false,
-					'subitems' => $subitems,
-					'class' => (strlen($strClass) ? $strClass : ''),
-					'pageTitle' => specialchars($objSubpages->pageTitle),
-					'title' => specialchars($objSubpages->title),
-					'link' => $objSubpages->title,
-					'href' => $href,
-					'alias' => $objSubpages->alias,
-					'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
-					'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
-					'accesskey' => $objSubpages->accesskey,
-					'tabindex' => $objSubpages->tabindex
-				);
+					$items[] = array
+					(
+						'isActive' => false,
+						'subitems' => $subitems,
+						'class' => (strlen($strClass) ? $strClass : ''),
+						'pageTitle' => specialchars($objSubpages->pageTitle),
+						'title' => specialchars($objSubpages->title),
+						'link' => $objSubpages->title,
+						'href' => $href,
+						'alias' => $objSubpages->alias,
+						'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
+						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
+						'accesskey' => $objSubpages->accesskey,
+						'tabindex' => $objSubpages->tabindex
+					);
+				}
 			}
 		}
 

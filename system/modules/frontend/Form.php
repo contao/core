@@ -305,9 +305,9 @@ class Form extends Hybrid
 			$email->from = $GLOBALS['TL_ADMIN_EMAIL'];
 
 			// Get the "reply to" address
-			if (strlen($this->Input->post('email')))
+			if (strlen($this->Input->post('email', true)))
 			{
-				$replyTo = $this->Input->post('email');
+				$replyTo = $this->Input->post('email', true);
 
 				// Add name
 				if (strlen($this->Input->post('name')))
@@ -327,7 +327,7 @@ class Form extends Hybrid
 			// Send copy to sender
 			if (strlen($arrSubmitted['cc']))
 			{
-				$email->sendCc($this->Input->post('email'));
+				$email->sendCc($this->Input->post('email', true));
 				unset($_SESSION['FORM_DATA']['cc']);
 			}
 
@@ -394,11 +394,14 @@ class Form extends Hybrid
 			}
 
 			// Files
-			foreach ($_SESSION['FILES'] as $k=>$v)
+			if (count($_SESSION['FILES']))
 			{
-				if ($v['uploaded'])
+				foreach ($_SESSION['FILES'] as $k=>$v)
 				{
-					$arrSet[$k] = str_replace(TL_ROOT . '/', '', $v['tmp_name']);
+					if ($v['uploaded'])
+					{
+						$arrSet[$k] = str_replace(TL_ROOT . '/', '', $v['tmp_name']);
+					}
 				}
 			}
 

@@ -38,7 +38,7 @@
 							</tr>
 							<tr>
 								<td><label for="src_list">{#advimage_dlg.image_list}</label></td>
-								<td><select id="src_list" name="src_list" onchange="document.getElementById('src').value=this.options[this.selectedIndex].value;ImageDialog.showPreviewImage(this.options[this.selectedIndex].value);"></select></td>
+								<td><select id="src_list" name="src_list" onchange="document.getElementById('src').value=this.options[this.selectedIndex].value;document.getElementById('alt').value=this.options[this.selectedIndex].text;document.getElementById('title').value=this.options[this.selectedIndex].text;ImageDialog.showPreviewImage(this.options[this.selectedIndex].value);"></select></td>
 							</tr>
 							<tr> 
 								<td class="column1"><label id="altlabel" for="alt">{#advimage_dlg.alt}</label></td> 

@@ -33,6 +33,9 @@
 $GLOBALS['TL_LANG']['tl_page']['title']          = array('Seitenname', 'Der Name einer Seite wird im Menü der Webseite angezeigt.');
 $GLOBALS['TL_LANG']['tl_page']['alias']          = array('Seitenalias', 'Der Alias einer Seite ist eine eindeutige Referenz, die anstelle der Seiten-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_page']['adminEmail']     = array('E-Mail-Adresse des Webseiten-Administrators', 'Die E-Mail-Adresse des Webseiten-Administrators wird als Absenderadresse für automatisch generierte Systemnachrichten wie z.B. Aktivierungsmails oder Bestätigungsmails verwendet.');
+$GLOBALS['TL_LANG']['tl_page']['dateFormat']     = array('Datumsformat', 'Bitte geben Sie ein Datumsformat wie in der PHP Funktion date() ein.');
+$GLOBALS['TL_LANG']['tl_page']['timeFormat']     = array('Zeitformat', 'Bitte geben Sie ein Zeitformat wie in der PHP Funktion date() ein.');
+$GLOBALS['TL_LANG']['tl_page']['datimFormat']    = array('Datums- und Zeitformat', 'Bitte geben Sie ein Datums- und Zeitformat wie in der PHP Funktion date() ein.');
 $GLOBALS['TL_LANG']['tl_page']['type']           = array('Seitentyp', 'Bitte wählen Sie den Seitentyp je nach Funktion der Seite.');
 $GLOBALS['TL_LANG']['tl_page']['language']       = array('Sprache', 'Bitte geben Sie die Sprache ein, die Sie auf der aktuellen Webseite verwenden. Erfassen Sie eine Sprache über ihr primäres Subtag (ISO-639 / RFC3066), also z.B. "de" für Deutsch.');
 $GLOBALS['TL_LANG']['tl_page']['pageTitle']      = array('Seitentitel', 'Der Seitentitle wird unter anderem im TITLE Tag der Seite und in den Suchergebnissen verwendet. Er sollte nicht mehr als 65 Zeichen enthalten. Ist kein Seitentitel vorhanden, wird stattdessen der Seitenname verwendet.');

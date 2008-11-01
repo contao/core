@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'personal')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal')
 		),
 		'lastname' => array
 		(
@@ -132,14 +132,14 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'personal')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal')
 		),
 		'dateOfBirth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member']['dateOfBirth'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'personal')
+			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal')
 		),
 		'gender' => array
 		(
@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'inputType'               => 'select',
 			'options'                 => array('male', 'female'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feGroup'=>'personal')
+			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal')
 		),
 		'language' => array
 		(
@@ -157,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => $this->getLanguages(),
-			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feGroup'=>'personal')
+			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'personal')
 		),
 		'company' => array
 		(
@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'street' => array
 		(
@@ -175,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'postal' => array
 		(
@@ -183,7 +183,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('maxlength'=>32, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'city' => array
 		(
@@ -193,7 +193,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'state' => array
 		(
@@ -201,7 +201,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('maxlength'=>64, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'country' => array
 		(
@@ -211,7 +211,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'inputType'               => 'select',
 			'options'                 => $this->getCountries(),
-			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feGroup'=>'address')
+			'eval'                    => array('includeBlankOption'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'address')
 		),
 		'phone' => array
 		(
@@ -219,7 +219,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'contact')
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact')
 		),
 		'mobile' => array
 		(
@@ -227,7 +227,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feGroup'=>'contact')
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact')
 		),
 		'fax' => array
 		(
@@ -235,7 +235,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feGroup'=>'contact')
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'phone', 'insertTag'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact')
 		),
 		'email' => array
 		(
@@ -243,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'contact')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'rgxp'=>'email', 'insertTag'=>true, 'decodeEntities'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact')
 		),
 		'website' => array
 		(
@@ -251,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feGroup'=>'contact')
+			'eval'                    => array('rgxp'=>'url', 'maxlength'=>255, 'insertTag'=>true, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'contact')
 		),
 		'groups' => array
 		(
@@ -278,7 +278,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feGroup'=>'login')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'maxlength'=>64, 'feEditable'=>true, 'feViewable'=>true, 'feGroup'=>'login')
 		),
 		'password' => array
 		(

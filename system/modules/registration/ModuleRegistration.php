@@ -243,11 +243,25 @@ class ModuleRegistration extends Module
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
 		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
 
+		// HOOK: add memberlist fields
+		if (in_array('memberlist', $this->Config->getActiveModules()))
+		{
+			$this->Template->profile = $arrFields['profile'];
+			$this->Template->profileDetails = $GLOBALS['TL_LANG']['tl_member']['profileDetails'];
+		}
+
 		// HOOK: add newsletter fields
 		if (in_array('newsletter', $this->Config->getActiveModules()))
 		{
 			$this->Template->newsletter = $arrFields['newsletter'];
 			$this->Template->newsletterDetails = $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'];
+		}
+
+		// HOOK: add helpdesk fields
+		if (in_array('helpdesk', $this->Config->getActiveModules()))
+		{
+			$this->Template->helpdesk = $arrFields['helpdesk'];
+			$this->Template->helpdeskDetails = $GLOBALS['TL_LANG']['tl_member']['helpdeskDetails'];
 		}
 	}
 
@@ -431,6 +445,12 @@ class ModuleRegistration extends Module
 			}
 
 			$v = deserialize($v);
+
+			if ($k == 'dateOfBirth' && strlen($v))
+			{
+				$v = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+			}
+
 			$strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
 		}
 

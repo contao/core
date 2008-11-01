@@ -61,6 +61,11 @@ class ModuleFlash extends Module
 			return '';
 		}
 
+		if (TL_MODE == 'BE')
+		{
+			return $this->altContent;
+		}
+
 		return parent::generate();
 	}
 

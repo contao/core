@@ -379,9 +379,19 @@ class DC_Table extends DataContainer implements listable, editable
 				$row[$i] = implode(', ', $value);
 			}
 
-			elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
-				$row[$i] = date($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '';
+			}
+
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
+			{
+				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '';
+			}
+
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)))
+			{
+				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '';
 			}
 
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
@@ -2431,9 +2441,9 @@ window.addEvent(\'domready\', function()
 
 		foreach ($showFields as $k=>$v)
 		{
-			if (in_array($GLOBALS['TL_DCA'][$table]['fields'][$k]['flag'], array(5, 6, 7, 8, 9, 10)))
+			if (in_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 			{
-				$args[$k] = date($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v);
+				$args[$k] = strlen($objRow->$v) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v) : '';
 			}
 			elseif ($GLOBALS['TL_DCA'][$table]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['multiple'])
 			{
@@ -2759,11 +2769,47 @@ window.addEvent(\'domready\', function()
 					$this->current[] = $row[$i]['id'];
 					$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id']), 'class="blink"');
 					$imagePasteNew = $this->generateImage('new.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][1], $row[$i]['id']));
+
 					$return .= '
 
 <div class="tl_content" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);">
-<div style="text-align:right;">
-'.(($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.$row[$i]['id'].'" class="tl_tree_checkbox" value="'.$row[$i]['id'].'" />' : $this->generateButtons($row[$i], $this->strTable, $this->root, false, null, $row[($i-1)]['id'], $row[($i+1)]['id']) . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=1&amp;pid='.$row[$i]['id'].'&amp;id='.$objParent->id).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][1], $row[$i]['id'])).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ($arrClipboard['mode'] == 'cut' && $row[$i]['id'] == $arrClipboard['id']) ? ' ' . $this->generateImage('pasteafter_.gif', '', 'class="blink"') : ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row[$i]['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
+<div style="text-align:right;">';
+
+					// Edit multiple
+					if ($this->Input->get('act') == 'select')
+					{
+						$return .= '<input type="checkbox" name="IDS[]" id="ids_'.$row[$i]['id'].'" class="tl_tree_checkbox" value="'.$row[$i]['id'].'" />';
+					}
+
+					// Regular buttons
+					else
+					{
+						$return .= $this->generateButtons($row[$i], $this->strTable, $this->root, false, null, $row[($i-1)]['id'], $row[($i+1)]['id']);
+
+						// Sortable table
+						if ($blnHasSorting)
+						{
+							// Create new button
+							if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'])
+							{
+								$return .= ' <a href="'.$this->addToUrl('act=create&amp;mode=1&amp;pid='.$row[$i]['id'].'&amp;id='.$objParent->id).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][1], $row[$i]['id'])).'">'.$imagePasteNew.'</a>';
+							}
+
+							// Prevent circular references
+							if ($blnClipboard && $arrClipboard['mode'] == 'cut' && $row[$i]['id'] == $arrClipboard['id'])
+							{
+								$return .= ' ' . $this->generateImage('pasteafter_.gif', '', 'class="blink"');
+							}
+
+							// Paste buttons
+							elseif ($blnClipboard)
+							{
+								$return .= ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row[$i]['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>';
+							}
+						}
+					}
+
+					$return .= '
 </div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
 				}
 			}
@@ -2927,7 +2973,7 @@ window.addEvent(\'domready\', function()
 				{
 					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 					{
-						$args[$k] = date($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]);
+						$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '';
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])
 					{
@@ -2964,7 +3010,8 @@ window.addEvent(\'domready\', function()
 
 				if (strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] < strlen($label))
 				{
-					$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])).' …';
+					$this->import('String');
+					$label = trim($this->String->substrHtml($label, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])) . ' …';
 				}
 
 				// Remove empty brackets (), [], {}, <> and empty tags from label
@@ -3010,21 +3057,21 @@ window.addEvent(\'domready\', function()
 					}
 					elseif (in_array($sortingMode, array(5, 6)))
 					{
-						$remoteNew = date($GLOBALS['TL_CONFIG']['dateFormat'], $current);
+						$remoteNew = strlen($current) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $current) : '-';
 					}
 					elseif (in_array($sortingMode, array(7, 8)))
 					{
-						$remoteNew = date('Y-m', $current);
-						$intMonth = (date('m', $current) - 1);
+						$remoteNew = strlen($current) ? date('Y-m', $current) : '-';
+						$intMonth = strlen($current) ? (date('m', $current) - 1) : '-';
 
 						if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
 						{
-							$remoteNew = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $current);
+							$remoteNew = strlen($current) ? $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $current) : '-';
 						}
 					}
 					elseif (in_array($sortingMode, array(9, 10)))
 					{
-						$remoteNew = date('Y', $current);
+						$remoteNew = strlen($current) ? date('Y', $current) : '-';
 					}
 					else
 					{
@@ -3090,7 +3137,7 @@ window.addEvent(\'domready\', function()
 
 						$return .= '
   <tr onmouseover="Theme.hoverRow(this, 1);" onmouseout="Theme.hoverRow(this, 0);">
-    <td colspan="2" class="'.$groupclass.'" style="padding-left:2px;">'.$group.'</td>
+    <td colspan="2" class="'.$groupclass.'">'.$group.'</td>
   </tr>';
 						$groupclass = 'tl_folder_list';
 					}
@@ -3098,7 +3145,7 @@ window.addEvent(\'domready\', function()
 
 				$return .= '
   <tr onmouseover="Theme.hoverRow(this, 1);" onmouseout="Theme.hoverRow(this, 0);">
-    <td class="tl_file_list" style="padding-left:2px;">';
+    <td class="tl_file_list">';
 
 				// Call label callback ($row, $label, $this)
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
@@ -3116,8 +3163,8 @@ window.addEvent(\'domready\', function()
 
 				// Buttons ($row, $table, $root, $blnCircularReference, $childs, $previous, $next)
 				$return .= '</td>'.(($this->Input->get('act') == 'select') ? '
-    <td class="tl_file_list" style="text-align:right; padding-right:1px;"><input type="checkbox" name="IDS[]" id="ids_'.$row['id'].'" class="tl_tree_checkbox" value="'.$row['id'].'" /></td>' : '
-    <td class="tl_file_list" style="text-align:right; padding-right:1px;">'.$this->generateButtons($row, $this->strTable, $this->root).'</td>') . '
+    <td class="tl_file_list tl_right_nowrap"><input type="checkbox" name="IDS[]" id="ids_'.$row['id'].'" class="tl_tree_checkbox" value="'.$row['id'].'" /></td>' : '
+    <td class="tl_file_list tl_right_nowrap">'.$this->generateButtons($row, $this->strTable, $this->root).'</td>') . '
   </tr>';
 			}
 
@@ -3607,7 +3654,11 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						$options[$v] = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+						if (strlen($v))
+						{
+							$options[$v] = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+						}
+
 						unset($options[$k]);
 					}
 				}
@@ -3619,12 +3670,15 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						$options[$v] = date('Y-m', $v);
-						$intMonth = (date('m', $v) - 1);
-
-						if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
+						if (strlen($v))
 						{
-							$options[$v] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $v);
+							$options[$v] = date('Y-m', $v);
+							$intMonth = (date('m', $v) - 1);
+
+							if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
+							{
+								$options[$v] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $v);
+							}
 						}
 
 						unset($options[$k]);
@@ -3638,7 +3692,11 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						$options[$v] = date('Y', $v);
+						if (strlen($v))
+						{
+							$options[$v] = date('Y', $v);
+						}
+
 						unset($options[$k]);
 					}
 				}

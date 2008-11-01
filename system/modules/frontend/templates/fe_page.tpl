@@ -1,12 +1,5 @@
 <?php echo $this->doctype; ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
-<!--
-
-	This website is powered by TYPOlight :: open source web content management system
-	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/LGPL
-	Visit the project website http://www.typolight.org for more information
-
-//-->
 <head>
 <base href="<?php echo $this->base; ?>" />
 <title><?php echo $this->mainTitle; ?> - <?php echo $this->pageTitle; ?></title>

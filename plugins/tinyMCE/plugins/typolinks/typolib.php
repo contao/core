@@ -59,31 +59,30 @@ class typolib extends Controller
 	 */
 	public function createPageList($intId=0, $level=-1)
 	{
-		// Limit nodes to the pagemounts of the user
+		// Show all pages under the root page that the mounted page belongs to
 		if ($intId === 0 && !$this->User->isAdmin)
 		{
 			$return = '';
+			$processed = array();
 
 			foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
 			{
-				// Add the page itself
-				$objPage = $this->Database->prepare("SELECT id, title FROM tl_page WHERE id=?")
-										  ->execute($page);
-
-				if ($objPage->numRows)
+				if (in_array($page, $processed))
 				{
-					++$level;
-					$return .= sprintf('<option value="{{link_url::%s}}">%s%s</option>', $objPage->id, str_repeat("&nbsp;", (2 * $level)), specialchars($objPage->title));
+					continue;
 				}
 
-				$return .= $this->createPageList($page, $level);
+				$processed[] = $page;
+				$objPage = $this->getPageDetails($page);
+
+				$return .= '<optgroup label="' . $objPage->rootTitle . '">' . $this->createPageList($objPage->rootId, $level) . '</optgroup>';
 			}
 
 			return $return;
 		}
 
 		// Add child pages
-		$objPages = $this->Database->prepare("SELECT id, title FROM tl_page WHERE pid=? ORDER BY sorting")
+		$objPages = $this->Database->prepare("SELECT id, title, type FROM tl_page WHERE pid=? ORDER BY sorting")
 								   ->execute($intId);
 
 		if ($objPages->numRows < 1)
@@ -96,8 +95,17 @@ class typolib extends Controller
 
 		while ($objPages->next())
 		{
-			$strOptions .= sprintf('<option value="{{link_url::%s}}">%s%s</option>', $objPages->id, str_repeat("&nbsp;", (2 * $level)), specialchars($objPages->title));
-			$strOptions .= $this->createPageList($objPages->id, $level);
+			if ($objPages->type == 'root')
+			{
+				$strOptions .= '<optgroup label="' . $objPages->title . '">';
+				$strOptions .= $this->createPageList($objPages->id, -1);
+				$strOptions .= '</optgroup>';
+			}
+			else
+			{
+				$strOptions .= sprintf('<option value="{{link_url::%s}}">%s%s</option>', $objPages->id, str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
+				$strOptions .= $this->createPageList($objPages->id, $level);
+			}
 		}
 
 		return $strOptions;
@@ -142,7 +150,7 @@ class typolib extends Controller
 		$strFolders = '';
 		$strFiles = '';
 
-		// Recursively list all images
+		// Recursively list all files and folders
 		foreach ($arrPages as $strFile)
 		{
 			if (substr($strFile, 0, 1) == '.')
@@ -150,24 +158,22 @@ class typolib extends Controller
 				continue;
 			}
 
+			// Folders
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$strSubFolders = $this->createFileList($strFolder . '/' . $strFile, $level);
-
-				if (strncmp($strSubFolders, '<optgroup', 9) !== 0)
-				{
-					$strFolders .= '<optgroup label="' . specialchars($strFolder . '/' . $strFile) . '">' . $strSubFolders . '</optgroup>';
-				}
-				else
-				{
-					$strFolders .= $strSubFolders;
-				}
+				$strFolders .=  $this->createFileList($strFolder . '/' . $strFile, $level);
 			}
 
+			// Files
 			elseif ($strFile != 'meta.txt')
 			{
 				$strFiles .= sprintf('<option value="%s">%s</option>', $strFolder . '/' . $strFile, specialchars($strFile));
 			}
+		}
+
+		if (strlen($strFiles))
+		{
+			return '<optgroup label="' . specialchars($strFolder) . '">' . $strFiles . $strFolders . '</optgroup>';
 		}
 
 		return $strFiles . $strFolders;

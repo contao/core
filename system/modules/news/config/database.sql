@@ -108,7 +108,7 @@ CREATE TABLE `tl_news_comments` (
 -- 
 
 CREATE TABLE `tl_module` (
-  `news_archives` varchar(255) NOT NULL default '',
+  `news_archives` blob NULL,
   `news_showQuantity` char(1) NOT NULL default '',
   `news_numberOfItems` smallint(5) unsigned NOT NULL default '0',
   `news_template` varchar(32) NOT NULL default '',

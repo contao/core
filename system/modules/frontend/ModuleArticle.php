@@ -127,12 +127,12 @@ class ModuleArticle extends Module
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
 
-			$href = ($this->inColumn != 'main') ? 'sections=' . $this->inColumn . '&amp;' : '';
-			$href .= 'articles=' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($this->alias)) ? $this->alias : $this->id);
+			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($this->alias)) ? $this->alias : $this->id;
+			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
-			$this->Template->teaser = $this->teaser;
 			$this->Template->href = $this->addToUrl($href);
+			$this->Template->teaser = $this->teaser;
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 
 			return;
@@ -146,20 +146,49 @@ class ModuleArticle extends Module
 		}
 
 		$this->Template->printable = false;
-		$this->Template->backlink = (!$this->multiMode && strlen($this->Input->get('articles')) && ($this->Input->get('articles') == $this->id || $this->Input->get('articles') == $this->alias)) ? 'javascript:history.go(-1)' : false;
-		$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
+		$this->Template->backlink = false;
 
-		$contentElements = '';
-
-		$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
-								 ->execute($this->id);
-
-		while ($objCte->next())
+		// Back link
+		if (!$this->multiMode && strlen($this->Input->get('articles')))
 		{
-			$contentElements .= $this->getContentElement($objCte->id);
+			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+
+			if (is_null($strArticle))
+			{
+				$strArticle = $strSection;
+			}
+
+			if ($strArticle == $this->id || $strArticle == $this->alias)
+			{
+				$this->Template->backlink = 'javascript:history.go(-1)';
+				$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
+			}
 		}
 
+		$contentElements = false;
+
+		// HOOK: trigger psishop extension
+		if (in_array('psishop', $this->Config->getActiveModules()))
+		{
+			$contentElements = Psishop::getProductlisting($this);
+		}
+
+		// Default routine
+		if ($contentElements === false)
+		{
+			$contentElements = '';
+			$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
+									 ->execute($this->id);
+
+			while ($objCte->next())
+			{
+				$contentElements .= $this->getContentElement($objCte->id);
+			}
+		}
+
+		$this->Template->teaser = $this->teaser;
 		$this->Template->contentElements = $contentElements;
+
 		$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
 
 		if ($this->printable)

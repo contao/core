@@ -34,8 +34,8 @@ $GLOBALS['TL_LANG']['tl_newsletter']['subject']       = array('Betreff', 'Bitte 
 $GLOBALS['TL_LANG']['tl_newsletter']['alias']         = array('Newsletteralias', 'Der Alias eines Newsletters ist eine eindeutige Referenz, die anstelle der ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_newsletter']['sender']        = array('Absenderadresse', 'Wenn Sie keine Absenderadresse eingeben, wird die E-Mail-Adresse des Administrators verwendet.');
 $GLOBALS['TL_LANG']['tl_newsletter']['senderName']    = array('Absendername', 'Hier können Sie den Namen des Absenders eingeben.');
-$GLOBALS['TL_LANG']['tl_newsletter']['content']       = array('HTML-Inhalt', 'Geben Sie den HTML-Inhalt des Newsletters ein. Benutzen Sie den Platzhalter <em>##email##</em> um die Empfängeradresse einzufügen. Erstellen Sie Links zum Abbestellen des Newsletters im der Form <em>http://www.domain.de/abbestellen.html?email=##email##</em>.');
-$GLOBALS['TL_LANG']['tl_newsletter']['text']          = array('Text-Inhalt', 'Geben Sie den Text-Inhalt des Newsletters ein. Benutzen Sie den Platzhalter <em>##email##</em> um die Empfängeradresse einzufügen. Erstellen Sie Links zum Abbestellen des Newsletters im der Form <em>http://www.domain.de/abbestellen.html?email=##email##</em>.');
+$GLOBALS['TL_LANG']['tl_newsletter']['content']       = array('HTML-Inhalt', 'Geben Sie den HTML-Inhalt des Newsletters ein. Benutzen Sie den Platzhalter <em>##email##</em> um die Empfängeradresse einzufügen. Erstellen Sie Links zum Abbestellen des Newsletters in der Form <em>http://www.domain.de/abbestellen.html?email=##email##</em>.');
+$GLOBALS['TL_LANG']['tl_newsletter']['text']          = array('Text-Inhalt', 'Geben Sie den Text-Inhalt des Newsletters ein. Benutzen Sie den Platzhalter <em>##email##</em> um die Empfängeradresse einzufügen. Erstellen Sie Links zum Abbestellen des Newsletters in der Form <em>http://www.domain.de/abbestellen.html?email=##email##</em>.');
 $GLOBALS['TL_LANG']['tl_newsletter']['template']      = array('E-Mail-Template', 'Bitte wählen Sie ein E-Mail-Template (Templategruppe <em>mail_</em>).');
 $GLOBALS['TL_LANG']['tl_newsletter']['sendText']      = array('Als Text senden', 'Wenn Sie diese Option wählen, wird der Newsletter als reiner Text ohne den HTML-Inhalt versendet.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'] = array('Mails pro Zyklus', 'Um zu verhindern dass das Skript vorzeitig abbricht, wird der Prozess in mehreren Teilschritten ausgeführt. Hier können Sie die Anzahl der Mails pro Teilschritt im Verhältnis zur maximalen Skriptlaufzeit in Ihrer php.ini festlegen.');
@@ -65,6 +65,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['preview']     = 'Testsendung';
 $GLOBALS['TL_LANG']['tl_newsletter']['new']        = array('Neuer Newsletter', 'Einen neuen Newsletter erstellen');
 $GLOBALS['TL_LANG']['tl_newsletter']['edit']       = array('Newsletter bearbeiten', 'Newsletter ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_newsletter']['copy']       = array('Newsletter duplizieren', 'Newsletter ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_newsletter']['cut']        = array('Newsletter verschieben', 'Newsletter ID %s verschieben');
 $GLOBALS['TL_LANG']['tl_newsletter']['delete']     = array('Newsletter löschen', 'Newsletter ID %s löschen');
 $GLOBALS['TL_LANG']['tl_newsletter']['show']       = array('Details des Newsletter', 'Details des Newsletter ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_newsletter']['editheader'] = array('Newsletter Header bearbeiten', 'Den Header des Newsletters bearbeiten');

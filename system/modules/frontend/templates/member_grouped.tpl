@@ -37,6 +37,13 @@
 </table>
 </fieldset>
 <?php endif; ?>
+<?php if ($this->profile): ?>
+<fieldset><legend><?php echo $this->profileDetails; ?></legend>
+<table cellspacing="0" cellpadding="0" summary="<?php echo $this->profileDetails; ?>">
+<?php foreach ($this->profile as $field) echo $field; ?>
+</table>
+</fieldset>
+<?php endif; ?>
 <?php if ($this->newsletter): ?>
 <fieldset><legend><?php echo $this->newsletterDetails; ?></legend>
 <table cellspacing="0" cellpadding="0" summary="<?php echo $this->newsletterDetails; ?>">

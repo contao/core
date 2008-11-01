@@ -277,33 +277,39 @@ class InstallTool extends Controller
 		/**
 		 * Import the example website
 		 */
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_tutorial' && file_exists(TL_ROOT . '/templates/' . $this->Input->post('template')))
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_tutorial')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['exampleWebsite']", time());
-			$tables = preg_grep('/^tl_/i', $this->Database->listTables());
+			$this->Template->emptySelection = true;
 
-			// Truncate tables
-			if (!array_key_exists('preserve', $_POST) || !$this->Input->post('preserve'))
+			// Template selected
+			if (strlen($this->Input->post('template')) && file_exists(TL_ROOT . '/templates/' . $this->Input->post('template')))
 			{
-				foreach ($tables as $table)
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['exampleWebsite']", time());
+				$tables = preg_grep('/^tl_/i', $this->Database->listTables());
+
+				// Truncate tables
+				if (!array_key_exists('preserve', $_POST) || !$this->Input->post('preserve'))
 				{
-					$this->Database->execute("TRUNCATE TABLE " . $table);
+					foreach ($tables as $table)
+					{
+						$this->Database->execute("TRUNCATE TABLE " . $table);
+					}
 				}
+
+				// Import data
+				$file = file(TL_ROOT . '/templates/' . $this->Input->post('template'));
+				$sql = preg_grep('/^INSERT /', $file);
+
+				foreach ($sql as $query)
+				{
+					$this->Database->execute($query);
+				}
+
+				$this->reload();
 			}
-
-			// Import data
-			$file = file(TL_ROOT . '/templates/' . $this->Input->post('template'));
-			$sql = preg_grep('/^INSERT /', $file);
-
-			foreach ($sql as $query)
-			{
-				$this->Database->execute($query);
-			}
-
-			$this->reload();
 		}
 
-		$strTemplates = '';
+		$strTemplates = '<option value="">-</option>';
 
 		foreach (scan(TL_ROOT . '/templates') as $strFile)
 		{
@@ -341,17 +347,17 @@ class InstallTool extends Controller
 			}
 
 			// Save data
-			elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email')) && strlen($this->Input->post('username')))
+			elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email', true)) && strlen($this->Input->post('username')))
 			{
 				$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-							   ->execute(time(), $this->Input->post('name'), $this->Input->post('email'), $this->Input->post('username'), sha1($this->Input->post('pass', true)), 1, 1, 1, 1);
+							   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), sha1($this->Input->post('pass', true)), 1, 1, 1, 1);
 
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email'));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
 				$this->reload();
 			}
 
 			$this->Template->adminName = $this->Input->post('name');
-			$this->Template->adminEmail = $this->Input->post('email');
+			$this->Template->adminEmail = $this->Input->post('email', true);
 			$this->Template->adminUser = $this->Input->post('username');
 		}
 

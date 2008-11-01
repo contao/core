@@ -137,6 +137,24 @@ class Template extends Controller
 
 		$arrEncoding = $this->Environment->httpAcceptEncoding;
 
+		/**
+		 * Copyright notice
+		 * 
+		 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
+		 * PERMITTED TO RUN TYPOlight WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
+		 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
+		 */
+		$this->strBuffer = preg_replace
+		(
+			'/(<head[^>]*>)/',
+			"<!--\n\n"
+			. "\tThis website is powered by TYPOlight :: open source web content management system\n"
+			. "\tTYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/LGPL\n"
+			. "\tVisit the project website http://www.typolight.org for more information\n\n"
+			. "//-->\n$1",
+			$this->strBuffer
+		);
+
 		// Activate gzip compression
 		if ($GLOBALS['TL_CONFIG']['enableGZip'] && (in_array('gzip', $arrEncoding) || in_array('x-gzip', $arrEncoding)) && function_exists('ob_gzhandler') && !ini_get('zlib.output_compression'))
 		{

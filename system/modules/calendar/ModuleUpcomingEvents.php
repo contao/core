@@ -142,6 +142,7 @@ class ModuleUpcomingEvents extends Events
 					$objTemplate->link = $event['href'];
 					$objTemplate->month = $event['month'];
 					$objTemplate->teaser = $event['teaser'];
+					$objTemplate->target = $event['target'];
 					$objTemplate->details = $event['details'];
 					$objTemplate->calendar = $event['calendar'];
 					$objTemplate->class = ((($count % 2) == 0) ? ' odd' : ' even') . (($count == 1) ? ' first' : '') . (($dayCount >= $dayMax) ? ' last' : '') . ' cal_' . $event['parent'];

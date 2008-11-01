@@ -580,6 +580,11 @@ h2.sub_headline_index
 {
 	padding:2px 0;
 }
+.tl_right_nowrap
+{
+	text-align:right;
+	white-space:nowrap;
+}
 .tl_file a:hover
 {
 	color:#666966;
@@ -807,9 +812,10 @@ div.tl_history table
 }
 div.tl_history .odd td
 {
-	padding:3px 6px 4px 6px;
+	padding:3px 4px 4px 4px;
 	border-top:1px solid #ccc;
 	background-color:#f0f0f0;
+	font-size:10px;
 }
 div.tl_history .even td
 {

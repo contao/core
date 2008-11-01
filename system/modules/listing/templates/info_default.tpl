@@ -12,7 +12,7 @@
     <td class="label"><?php echo $col['label']; ?></td>
     <td class="value"><?php echo $col['content']; ?></td>
   </tr>
-<?php endforeach; ?> 
+<?php endforeach; ?>
 </tbody>
 </table>
 

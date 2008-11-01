@@ -63,6 +63,7 @@ $GLOBALS['TL_LANG']['tl_news']['external'] = array('External website', 'By click
 $GLOBALS['TL_LANG']['tl_news']['new']        = array('New article', 'Create a new news article');
 $GLOBALS['TL_LANG']['tl_news']['edit']       = array('Edit article', 'Edit news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Copy article', 'Copy news article ID %s');
+$GLOBALS['TL_LANG']['tl_news']['cut']        = array('Move article', 'Move news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['show']       = array('Article details', 'Show details of news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit archive header', 'Edit the header of this archive');

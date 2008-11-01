@@ -170,6 +170,7 @@ class ModuleTasks extends BackendModule
 				'progress' => $objTask->progress,
 				'deadline' => date($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline),
 				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objTask->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] : $objTask->status),
+				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
 				'editTitle' => sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $objTask->id),
 				'editIcon' => 'system/themes/' . $this->getTheme() . '/images/edit.gif',
@@ -271,7 +272,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $this->Input->get('id'));
 
-		$objTask = $this->Database->prepare("SELECT * FROM tl_task WHERE id=?")
+		$objTask = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=t.createdBy) AS creator FROM tl_task t WHERE id=?")
 								  ->limit(1)
 								  ->execute($this->Input->get('id'));
 
@@ -298,6 +299,7 @@ class ModuleTasks extends BackendModule
 		{
 			$arrHistory[] = array
 			(
+				'creator' => $objTask->creator,
 				'date' => date($GLOBALS['TL_CONFIG']['dateFormat'], $objStatus->tstamp),
 				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] : $objStatus->status),
 				'comment' => (strlen($objStatus->comment) ? nl2br($objStatus->comment) : '&nbsp;'),
@@ -369,6 +371,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->deadlineLabel = $GLOBALS['TL_LANG']['tl_task']['deadline'][0];
 		$this->Template->dateLabel = $GLOBALS['TL_LANG']['tl_task']['date'];
 		$this->Template->assignedToLabel = $GLOBALS['TL_LANG']['tl_task']['assignedTo'];
+		$this->Template->createdByLabel = $GLOBALS['TL_LANG']['tl_task']['creator'];
 		$this->Template->statusLabel = $GLOBALS['TL_LANG']['tl_task']['status'][0];
 		$this->Template->progressLabel = $GLOBALS['TL_LANG']['tl_task']['progress'][0];
 		$this->Template->submit = $GLOBALS['TL_LANG']['tl_task']['editSubmit'];
@@ -437,7 +440,7 @@ class ModuleTasks extends BackendModule
 		$value = array();
 
 		$session = $this->Session->getData();
-		$query = "SELECT *, t.id AS id, (SELECT name FROM tl_user u WHERE u.id=s.assignedTo) AS name FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)";
+		$query = "SELECT *, t.id AS id, (SELECT name FROM tl_user u WHERE u.id=s.assignedTo) AS name, (SELECT name FROM tl_user u WHERE u.id=t.createdBy) AS creator FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)";
 
 		// Do not show all tasks if the user is not an administrator
 		if (!$this->User->isAdmin)
@@ -553,7 +556,8 @@ class ModuleTasks extends BackendModule
 		}
 
 		// Order by
-		$query .= " ORDER BY deadline";
+		$query .= " ORDER BY (assignedTo=?) DESC, (status!='completed') DESC, deadline";
+		$value[] = $this->User->id;
 
 		// Execute query
 		$objTask = $this->Database->prepare($query)->execute($value);

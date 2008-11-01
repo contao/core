@@ -82,7 +82,7 @@ CREATE TABLE `tl_calendar_events` (
 -- 
 
 CREATE TABLE `tl_module` (
-  `cal_calendar` varchar(255) NOT NULL default '',
+  `cal_calendar` blob NULL,
   `cal_template` varchar(32) NOT NULL default '',
   `cal_startDay` smallint(5) unsigned NOT NULL default '0',
   `cal_previous` varchar(255) NOT NULL default '',

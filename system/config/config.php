@@ -297,6 +297,7 @@ $GLOBALS['TL_CONFIG']['validImageTypes']   = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']     = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['allowedDownload']   = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
 $GLOBALS['TL_CONFIG']['installPassword']   = '77e9b7542ac04858d99a0eaaf77adf54b5e18910';
+$GLOBALS['TL_CONFIG']['repository_wsdl']   = 'http://www.typolight.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['backendTheme']      = 'default';
 $GLOBALS['TL_CONFIG']['inactiveModules']   = '';
 $GLOBALS['TL_CONFIG']['liveUpdateId']      = '';

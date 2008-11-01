@@ -71,6 +71,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['years']    = 'year(s)';
 $GLOBALS['TL_LANG']['tl_calendar_events']['new']        = array('New event', 'Create a new event');
 $GLOBALS['TL_LANG']['tl_calendar_events']['edit']       = array('Edit event', 'Edit event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['copy']       = array('Copy event', 'Copy event ID %s');
+$GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Move event', 'Move event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Delete event', 'Delete event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['show']       = array('Event details', 'Show details of event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Edit calendar', 'Edit the current calendar');

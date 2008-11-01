@@ -60,7 +60,7 @@ tinyMCE.init({
   force_hex_style_colors : true,
   fix_list_elements : true,
   fix_table_elements : true,
-  font_size_style_values : "8pt,10pt,12pt,14pt,18pt,24pt,36pt",
+  theme_advanced_font_sizes : "9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px",
   doctype : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
   document_base_url : "<?php echo $this->base; ?>",
   entities : "160,nbsp,60,lt,62,gt",
@@ -87,7 +87,7 @@ tinyMCE.init({
   theme_advanced_blockformats : "div,p,address,pre,h1,h2,h3,h4,h5,h6",
   theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,anchor,separator,typolinks,unlink,separator,image,charmap,emotions,separator,sub,sup,separator,abbr,acronym,separator,styleprops,attribs,separator,search,replace,pasteword,separator,undo,redo,separator,removeformat,cleanup,separator,code",
   theme_advanced_buttons2 : "formatselect,fontsizeselect,styleselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,outdent,indent,separator,forecolor,backcolor",
-  theme_advanced_buttons3 : "tablecontrols,separator,template"
+  theme_advanced_buttons3 : "tablecontrols,separator,template,help"
 });
 //--><!]]>
 </script>

@@ -48,10 +48,23 @@ class News extends Frontend
 									 ->limit(1)
 									 ->execute($intId, 1);
 
-		if ($objArchive->numRows)
+		if ($objArchive->numRows < 1)
 		{
-			$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+			return;
+		}
 
+		$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+
+		// Delete XML file
+		if ($this->Input->get('act') == 'delete')
+		{
+			$this->import('Files');
+			$this->Files->delete($objArchive->feedName . '.xml');
+		}
+
+		// Update XML file
+		else
+		{
 			$this->generateFiles($objArchive->row());
 			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeed()', TL_CRON);
 		}

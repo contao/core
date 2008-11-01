@@ -347,8 +347,9 @@ class Input
 			}
 		}
 
-		$arrRegexp[] = '/<(a|img)[^>]*[^a-z]\.cookie[^>]*>/is';
 		$arrRegexp[] = '/<(a|img)[^>]*[^a-z](<script|<xss)[^>]*>/is';
+		$arrRegexp[] = '/<(a|img)[^>]*[^a-z]document\.cookie[^>]*>/is';
+		$arrRegexp[] = '/<(a|img)[^>]*[^a-z]vbscri?pt\s*:[^>]*>/is';
 
 		// Also remove event handlers and JavaScript in strict mode
 		if ($blnStrictMode)
@@ -358,7 +359,6 @@ class Input
 			$arrRegexp[] = '/<\s*embed.*swf/is';
 			$arrRegexp[] = '/<(a|img)[^>]*[^a-z]alert\s*\([^>]*>/is';
 			$arrRegexp[] = '/<(a|img)[^>]*[^a-z]javascript\s*:[^>]*>/is';
-			$arrRegexp[] = '/<(a|img)[^>]*[^a-z]vbscri?pt\s*:[^>]*>/is';
 			$arrRegexp[] = '/<(a|img)[^>]*[^a-z]window\.[^>]*>/is';
 			$arrRegexp[] = '/<(a|img)[^>]*[^a-z]document\.[^>]*>/is';
 			$arrRegexp[] = '/<[^>]*[^a-z]onabort\s*=[^>]*>/is';
@@ -382,13 +382,7 @@ class Input
 			$arrRegexp[] = '/<[^>]*[^a-z]onresize\s*=[^>]*>/is';
 		}
 
-		// Remove Javascript
-		foreach ($arrRegexp as $strRegexp)
-		{
-			$varValue = preg_replace($strRegexp, '', $varValue);
-		}
-
-		return $varValue;
+		return preg_replace($arrRegexp, '', $varValue);
 	}
 
 

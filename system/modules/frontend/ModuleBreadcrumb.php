@@ -147,20 +147,28 @@ class ModuleBreadcrumb extends Module
 			(
 				'isActive' => false,
 				'href' => $this->generateFrontendUrl($pages[0]),
-				'title' => specialchars($pages[0]['title']),
+				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
 				'link' => $pages[0]['title']
 			);
+
+			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+
+			if (is_null($strArticle))
+			{
+				$strArticle = $strSection;
+			}
 
 			// Get article title
 			$objArticle = $this->Database->prepare("SELECT title FROM tl_article WHERE id=? OR alias=?")
 										 ->limit(1)
-										 ->execute((is_numeric($this->Input->get('articles')) ? $this->Input->get('articles') : 0), $this->Input->get('articles'));
+										 ->execute((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
 
 			if ($objArticle->numRows)
 			{
 				$items[] = array
 				(
 					'isActive' => true,
+					'title' => specialchars($objArticle->title),
 					'link' => $objArticle->title
 				);
 			}
@@ -172,7 +180,8 @@ class ModuleBreadcrumb extends Module
 			$items[] = array
 			(
 				'isActive' => true,
-				'link' => (strlen($pages[0]['pageTitle']) ? $pages[0]['pageTitle'] : $pages[0]['title'])
+				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
+				'link' => $pages[0]['title']
 			);
 		}
 

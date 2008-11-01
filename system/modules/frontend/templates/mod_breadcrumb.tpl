@@ -8,7 +8,7 @@
 
 <?php foreach ($this->items as $item): ?>
 <?php if ($item['isActive']): ?>
-<span class="active"><?php echo $item['link']; ?></span>
+<span class="active"><?php echo $item['title']; ?></span>
 <?php else: ?>
 <a href="<?php echo $item['href']; ?>" title="<?php echo $item['title']; ?>"><?php echo $item['link']; ?></a> &#62; 
 <?php endif; ?>

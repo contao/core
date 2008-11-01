@@ -316,7 +316,7 @@ class FileTree extends Widget
 			{
 				$thumbnail = '';
 				$popupWidth = 400;
-				$popupHeight = 204;
+				$popupHeight = 215;
 
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
@@ -335,7 +335,7 @@ class FileTree extends Widget
 				if ($objFile->isGdImage && $objFile->height > 0)
 				{
 					$popupWidth = ($objFile->width > 400) ? ($objFile->width + 61) : 461;
-					$popupHeight = ($objFile->height + 252);
+					$popupHeight = ($objFile->height + 266);
 
 					if ($GLOBALS['TL_CONFIG']['thumbnails'])
 					{

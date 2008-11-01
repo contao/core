@@ -180,12 +180,22 @@ abstract class Frontend extends Controller
 			$strParams .= $GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' . $k . '=' . $v  : '/' . $k . '/' . $v;
 		}
 
+		// Do not use aliases
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
 			return 'index.php?' . preg_replace('/^&(amp;)?/i', '', $strParams);
 		}
 
-		return ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $this->getPageIdFromUrl() . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+		$pageId = $this->getPageIdFromUrl();
+
+		// Get page ID from global page object if not set
+		if (!$pageId)
+		{
+			global $objPage;
+			$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
+		}
+
+		return ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $pageId . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
 	}
 
 
@@ -195,7 +205,9 @@ abstract class Frontend extends Controller
 	 */
 	protected function jumpToOrReload($intId)
 	{
-		if (strlen($intId))
+		global $objPage;
+
+		if (strlen($intId) && $intId != $objPage->id)
 		{
 			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 										  ->limit(1)
@@ -220,6 +232,7 @@ abstract class Frontend extends Controller
 	{
 		if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH' && !$this->Input->cookie('FE_PREVIEW'))
 		{
+			$_SESSION['TL_USER_LOGGED_IN'] = false;
 			return false;
 		}
 
@@ -233,10 +246,12 @@ abstract class Frontend extends Controller
 
 			if ($objSession->numRows && $objSession->sessionID == session_id() && $objSession->ip == $this->Environment->ip && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
+				$_SESSION['TL_USER_LOGGED_IN'] = true;
 				return true;
 			}
 		}
 
+		$_SESSION['TL_USER_LOGGED_IN'] = false;
 		return false;
 	}
 

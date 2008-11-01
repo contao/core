@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		(
 			'fields'                  => array('tstamp', 'text'),
 			'format'                  => '<span style="color:#b3b3b3; padding-right:3px;">[%s]</span> %s',
-			'maxCharacters'           => 146
+			'maxCharacters'           => 96
 		),
 		'global_operations' => array
 		(

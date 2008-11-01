@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
-<!--
-
-	This website was built with TYPOlight :: open source web content management system
-	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/GPL
-	Visit project page http://www.typolight.org for more information
-
-//-->
 <head>
 <base href="<?php echo $this->base; ?>" />
 <title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
@@ -42,6 +35,7 @@
 </select>
 <input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>" />
 <input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload();" />
+<img src="<?php echo $this->closeSrc; ?>" alt="Close preview bar" class="close" onclick="parent.location = parent.frames[1].location;" />
 </div>
 </form>
 </div>

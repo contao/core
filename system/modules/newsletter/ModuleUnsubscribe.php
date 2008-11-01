@@ -138,7 +138,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Validate e-mail address
-		if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->post('email')))
+		if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->post('email', true)))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();
@@ -148,7 +148,7 @@ class ModuleUnsubscribe extends Module
 
 		// Get active subscriptions
 		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=?")
-										  ->execute($this->Input->post('email'), 1);
+										  ->execute($this->Input->post('email', true), 1);
 
 		if ($objSubscription->numRows)
 		{
@@ -166,7 +166,7 @@ class ModuleUnsubscribe extends Module
 
 		// Remove subscriptions
 		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', $arrRemove) . ")")
-					   ->execute($this->Input->post('email'));
+					   ->execute($this->Input->post('email', true));
 
 		// Confirmation e-mail
 		$objEmail = new Email();
@@ -181,7 +181,7 @@ class ModuleUnsubscribe extends Module
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
 
-		$objEmail->sendTo($this->Input->post('email'));
+		$objEmail->sendTo($this->Input->post('email', true));
 		global $objPage;
 
 		// Redirect to jumpTo page

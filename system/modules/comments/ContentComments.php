@@ -95,8 +95,9 @@ class ContentComments extends ContentElement
 		}
 
 		$objComments = $objCommentsStmt->execute($this->id);
+		$total = $objComments->numRows;
 
-		if ($objComments->numRows)
+		if ($total > 0)
 		{
 			$count = 0;
 			$objTemplate = new FrontendTemplate($this->com_template);
@@ -109,13 +110,14 @@ class ContentComments extends ContentElement
 				$objTemplate->comment = trim($objComments->comment);
 				$objTemplate->datim = date($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
 				$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
-				$objTemplate->class = (($count++ % 2) == 0) ? ' even' : ' odd';
+				$objTemplate->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objTemplate->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objTemplate->id = 'c' . $objComments->id;
 				$objTemplate->ip = $objComments->ip;
 				$objTemplate->timestamp = $objComments->date;
 
 				$arrComments[] = $objTemplate->parse();
+				++$count;
 			}
 		}
 
@@ -162,7 +164,7 @@ class ContentComments extends ContentElement
 				'label' => $GLOBALS['TL_LANG']['MSC']['com_email'],
 				'value' => $this->User->email,
 				'inputType' => 'text',
-				'eval' => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>128)
+				'eval' => array('rgxp'=>'email', 'mandatory'=>true, 'maxlength'=>128, 'decodeEntities'=>true)
 			),
 			'website' => array
 			(
@@ -320,7 +322,7 @@ class ContentComments extends ContentElement
 			'pid' => $this->id,
 			'tstamp' => time(),
 			'name' => $this->Input->post('name'),
-			'email' => $this->Input->post('email'),
+			'email' => $this->Input->post('email', true),
 			'website' => $strWebsite,
 			'comment' => nl2br_pre($strComment),
 			'ip' => $this->Environment->ip,

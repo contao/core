@@ -115,6 +115,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'search'                      => 'name,type,headline;searchType,queryType,searchTpl;perPage,totalLength,contextLength;guests,protected;align,space,cssID',
 		'html'                        => 'name,type;html;guests,protected',
 		'articleList'                 => 'name,type,headline;inColumn,skipFirst;defineRoot;guests,protected;align,space,cssID',
+		'articleNav'                  => 'name,type,headline;loadFirst;guests,protected;align,space,cssID',
 		'flash'                       => 'name,type,headline;size,flashvars,altContent,transparent,searchable;source,singleSRC;interactive;guests,protected;align,space,cssID',
 		'flashexternal'               => 'name,type,headline;size,flashvars,altContent,transparent,searchable;source,url;interactive;guests,protected;align,space,cssID',
 		'randomImage'                 => 'name,type,headline;multiSRC,imgSize,useCaption;guests,protected;align,space,cssID'
@@ -244,7 +245,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['customLabel'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'regexp'=>'extnd')
+			'eval'                    => array('maxlength'=>64, 'rgxp'=>'extnd')
 		),
 		'queryType' => array
 		(
@@ -469,6 +470,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'skipFirst' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['skipFirst'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox'
+		),
+		'loadFirst' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['loadFirst'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox'
 		),

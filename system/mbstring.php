@@ -102,6 +102,9 @@ function utf8_chr($dec)
  */
 function utf8_convert_encoding($str, $to, $from=null)
 {
+	if (!$str)
+		return '';
+
 	if (!$from)
 		$from = utf8_detect_encoding($str);
 
@@ -121,7 +124,12 @@ function utf8_convert_encoding($str, $to, $from=null)
 	}
 
 	if (function_exists('iconv'))
-		return @iconv($from, $to . '//IGNORE', $str);
+	{
+		if (strlen($iconv = @iconv($from, $to . '//IGNORE', $str)))
+			return $iconv;
+
+		return @iconv($from, $to, $str);
+	}
 
 	return $str;
 }

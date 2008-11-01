@@ -68,7 +68,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['adminEmail'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'decodeEntities'=>true)
 		),
 		'websitePath' => array
 		(

@@ -335,6 +335,12 @@ class Environment
 		if (!array_key_exists('server', $this->arrCache))
 		{
 			$this->arrCache['server'] = strlen($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : $_SERVER['LOCAL_ADDR'];
+
+			// Special workaround for Strato users
+			if (!strlen($this->arrCache['server']))
+			{
+				$this->arrCache['server'] = @gethostbyname($_SERVER['SERVER_NAME']);
+			}
 		}
 
 		return $this->arrCache['server'];

@@ -118,6 +118,12 @@ abstract class ModuleNews extends Module
 			$objTemplate->archive = $objArticles->archive;
 			$objTemplate->addImage = false;
 
+			// Display "read more" button if external link
+			if ($objArticles->source == 'external' && !strlen($objArticles->text))
+			{
+				$objTemplate->text = true;
+			}
+
 			// Add an image
 			if ($objArticles->addImage && is_file(TL_ROOT . '/' . $objArticles->singleSRC))
 			{

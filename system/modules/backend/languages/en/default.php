@@ -235,6 +235,7 @@ $GLOBALS['TL_LANG']['MSC']['fileCreated']    = 'Created';
 $GLOBALS['TL_LANG']['MSC']['fileModified']   = 'Last modified';
 $GLOBALS['TL_LANG']['MSC']['fileAccessed']   = 'Last accessed';
 $GLOBALS['TL_LANG']['MSC']['fileDownload']   = 'Download';
+$GLOBALS['TL_LANG']['MSC']['fileImageSize']  = 'Width/height in pixel';
 $GLOBALS['TL_LANG']['MSC']['version']        = 'Version';
 $GLOBALS['TL_LANG']['MSC']['restore']        = 'Restore';
 $GLOBALS['TL_LANG']['MSC']['backendModules'] = 'Back end modules';

@@ -88,6 +88,9 @@ class FormFileUpload extends Widget implements uploadable
 		$file = $_FILES[$this->strName];
 		$maxlength_kb = number_format(($this->maxlength/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
 
+		// Romanize the filename
+		$file['name'] = utf8_romanize($file['name']);
+
 		// File was not uploaded
 		if (!is_uploaded_file($file['tmp_name']))
 		{
@@ -102,22 +105,32 @@ class FormFileUpload extends Widget implements uploadable
 				$this->addError(sprinf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 				$this->log('File "'.$file['name'].'" was only partially uploaded', 'FormFileUpload validate()', TL_ERROR);
 			}
+
+			unset($_FILES[$this->strName]);
+			return;
 		}
 
-		// File has been uploaded
+		// File is too big
 		if ($this->maxlength > 0 && $file['size'] > $this->maxlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
 			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb.' kB', 'FormFileUpload validate()', TL_ERROR);
+
+			unset($_FILES[$this->strName]);
+			return;
 		}
 
 		$pathinfo = pathinfo($file['name']);
 		$uploadTypes = trimsplit(',', $this->extensions);
 
+		// File type is not allowed
 		if (!in_array(strtolower($pathinfo['extension']), $uploadTypes))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
 			$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'FormFileUpload validate()', TL_ERROR);
+
+			unset($_FILES[$this->strName]);
+			return;
 		}
 
 		if (($arrImageSize = @getimagesize($file['tmp_name'])) != false)
@@ -127,6 +140,9 @@ class FormFileUpload extends Widget implements uploadable
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filewidth'], $file['name'], $GLOBALS['TL_CONFIG']['imageWidth']));
 				$this->log('File "'.$file['name'].'" exceeds the maximum image width of '.$GLOBALS['TL_CONFIG']['imageWidth'].' pixels', 'FormFileUpload validate()', TL_ERROR);
+
+				unset($_FILES[$this->strName]);
+				return;
 			}
 
 			// Image exceeds maximum image height
@@ -134,6 +150,9 @@ class FormFileUpload extends Widget implements uploadable
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['fileheight'], $file['name'], $GLOBALS['TL_CONFIG']['imageHeight']));
 				$this->log('File "'.$file['name'].'" exceeds the maximum image height of '.$GLOBALS['TL_CONFIG']['imageHeight'].' pixels', 'FormFileUpload validate()', TL_ERROR);
+
+				unset($_FILES[$this->strName]);
+				return;
 			}
 		}
 

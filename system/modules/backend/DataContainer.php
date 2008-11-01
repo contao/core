@@ -351,8 +351,9 @@ class DataContainer extends Backend
 			{
 				$buffer[] = ($k%2 == 0) ? $v : $v.$names[$i];
 				$buffer[] = ($k%2 == 0) ? $v.$names[$i] : $v;
-				$return = $buffer;
 			}
+
+			$return = $buffer;
 		}
 
 		return $return;

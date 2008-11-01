@@ -81,7 +81,7 @@ tinyMCE.init({
   theme_advanced_statusbar_location : "bottom",
   theme_advanced_source_editor_width : "700",
   theme_advanced_blockformats : "div,p,address,pre,h1,h2,h3,h4,h5,h6",
-  theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,typolinks,unlink,separator,charmap,separator,search,replace,pasteword,separator,undo,redo,separator,removeformat,cleanup,separator,code",
+  theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,typolinks,unlink,separator,charmap,separator,search,replace,pasteword,separator,undo,redo,separator,removeformat,cleanup,separator,code,help",
   theme_advanced_buttons2 : "fontsizeselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,separator,forecolor",
   theme_advanced_buttons3 : ""
 });

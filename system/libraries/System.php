@@ -305,6 +305,8 @@ abstract class System
 				include($strFile);
 			}
 		}
+
+		include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
 

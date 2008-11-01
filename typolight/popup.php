@@ -152,6 +152,7 @@ class Popup extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->href = ampersand($this->Environment->request, ENCODE_AMPERSANDS) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
+		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
 		$this->Template->label_ctime = $GLOBALS['TL_LANG']['MSC']['fileCreated'];
 		$this->Template->label_mtime = $GLOBALS['TL_LANG']['MSC']['fileModified'];

@@ -172,7 +172,7 @@ class ModuleSubscribe extends Module
 		}
 
 		// Validate e-mail address
-		if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->post('email')))
+		if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->post('email', true)))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();
@@ -182,7 +182,7 @@ class ModuleSubscribe extends Module
 
 		// Get active subscriptions
 		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=?")
-										  ->execute($this->Input->post('email'), 1);
+										  ->execute($this->Input->post('email', true), 1);
 
 		if ($objSubscription->numRows)
 		{
@@ -208,7 +208,7 @@ class ModuleSubscribe extends Module
 		{
 			$arrValues[] = $id;
 			$arrValues[] = $time;
-			$arrValues[] = $this->Input->post('email');
+			$arrValues[] = $this->Input->post('email', true);
 			$arrValues[] = '';
 			$arrValues[] = $strToken;
 
@@ -217,7 +217,7 @@ class ModuleSubscribe extends Module
 
 		// Remove old subscriptions that have not been activated yet
 		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND active!=?")
-					   ->execute($this->Input->post('email'), 1);
+					   ->execute($this->Input->post('email', true), 1);
 
 		// Add new subscriptions
 		$this->Database->prepare("INSERT INTO tl_newsletter_recipients (pid, tstamp, email, active, token) VALUES " . implode(', ', $arrCondition))
@@ -237,7 +237,7 @@ class ModuleSubscribe extends Module
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
 
-		$objEmail->sendTo($this->Input->post('email'));
+		$objEmail->sendTo($this->Input->post('email', true));
 		global $objPage;
 
 		// Redirect to jumpTo page

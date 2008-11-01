@@ -144,12 +144,24 @@ abstract class Controller extends System
 			// Show a particular article only
 			if ($this->Input->get('articles'))
 			{
-				$strSections = strlen($this->Input->get('sections')) ? $this->Input->get('sections') : 'main';
+				list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
 
-				if ($strSections == $strColumn)
+				if (is_null($strArticle))
 				{
-					return $this->getArticle($this->Input->get('articles'));
+					$strArticle = $strSection;
+					$strSection = 'main';
 				}
+
+				if ($strSection == $strColumn)
+				{
+					return $this->getArticle($strArticle);
+				}
+			}
+
+			// HOOK: trigger article_raster_designer extension
+			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
+			{
+    			return RasterDesigner::load($objPage->id, $strColumn);
 			}
 
 			// Show all articles of the current column
@@ -165,7 +177,7 @@ abstract class Controller extends System
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false));
+				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn);
 			}
 
 			return $return;
@@ -213,7 +225,7 @@ abstract class Controller extends System
 		}
 
 		$objModule->typePrefix = 'mod_';
-		$objModule = new $strClass($objModule);
+		$objModule = new $strClass($objModule, $strColumn);
 
 
 		$strBuffer = $objModule->generate();
@@ -233,9 +245,10 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false)
+	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
 		if (!strlen($varId))
 		{
@@ -276,7 +289,7 @@ abstract class Controller extends System
 		$objArticle->headline = $objArticle->title;
 		$objArticle->multiMode = $blnMultiMode;
 
-		$objArticle = new ModuleArticle($objArticle);
+		$objArticle = new ModuleArticle($objArticle, $strColumn);
 		return $objArticle->generate($blnIsInsertTag);
 	}
 
@@ -467,6 +480,23 @@ abstract class Controller extends System
 		}
 
 		$objPage->trail = array_reverse($trail);
+
+		// Overwrite the global date and time format
+		if ($objParentPage->numRows && $objParentPage->type == 'root')
+		{
+			if (strlen($objParentPage->dateFormat))
+			{
+				$GLOBALS['TL_CONFIG']['dateFormat'] = $objParentPage->dateFormat;
+			}
+			if (strlen($objParentPage->timeFormat))
+			{
+				$GLOBALS['TL_CONFIG']['timeFormat'] = $objParentPage->timeFormat;
+			}
+			if (strlen($objParentPage->datimFormat))
+			{
+				$GLOBALS['TL_CONFIG']['datimFormat'] = $objParentPage->datimFormat;
+			}
+		}
 
 		// Do not cache protected pages
 		if ($objPage->protected)
@@ -979,7 +1009,7 @@ abstract class Controller extends System
 			return $strBuffer;
 		}
 
-		$tags = preg_split("/{{([^}]+)}}/", $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$tags = preg_split("/{{([^}]+)}}/", $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 		$arrCache = array();
@@ -1319,6 +1349,52 @@ abstract class Controller extends System
 					}
 					break;
 
+				// Images
+				case 'image':
+					$width = null;
+					$height = null;
+					$alt = '';
+					$class = '';
+					$strFile = $elements[1];
+
+					// Take arguments
+					if (strpos($elements[1], '?') !== false)
+					{
+						$this->import('String');
+
+						$arrChunks = explode('?', urldecode($elements[1]));
+						$arrParams = explode('&', $this->String->decodeEntities($arrChunks[1]));
+
+						foreach ($arrParams as $strParam)
+						{
+							list($key, $value) = explode('=', $strParam);
+
+							switch ($key)
+							{
+								case 'width':
+									$width = $value;
+									break;
+
+								case 'height':
+									$height = $value;
+									break;
+
+								case 'alt':
+									$alt = $value;
+									break;
+
+								case 'class':
+									$class = $value;
+									break;
+							}
+						}
+
+						$strFile = $arrChunks[0];
+					}
+
+					$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+					break;
+
 				// Files from the templates directory
 				case 'file':
 					$arrGet = $_GET;
@@ -1360,7 +1436,14 @@ abstract class Controller extends System
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
 							$this->import($callback[0]);
-							$arrCache[$strTag] = $this->$callback[0]->$callback[1]($strTag);
+							$varValue = $this->$callback[0]->$callback[1]($strTag);
+
+							// Replace the tag and stop the loop
+							if ($varValue !== false)
+							{
+								$arrCache[$strTag] = $this->$callback[0]->$callback[1]($strTag);
+								break;
+							}
 						}
 					}
 					break;
@@ -1662,7 +1745,8 @@ abstract class Controller extends System
 
 			if ($arrData['eval']['includeBlankOption'])
 			{
-				$arrNew['options'][] = array('value'=>'', 'label'=>'-');
+				$strLabel = strlen($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
+				$arrNew['options'][] = array('value'=>'', 'label'=>$strLabel);
 			}
 
 			foreach ($arrData['options'] as $k=>$v)
@@ -1779,6 +1863,8 @@ abstract class Controller extends System
 	 */
 	protected function classFileExists($strClass)
 	{
+		$this->import('Config'); // see ticket #152
+
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/%s.php', TL_ROOT, $strModule, $strClass);

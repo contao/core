@@ -88,7 +88,7 @@ style:{
 desc:"Rediger CSS stil"
 },
 paste:{
-paste_text_desc:"Inds\u00E6t som ren tekst",
+paste_text_desc:"Inds\u00E6t ikke-formatteret tekst",
 paste_word_desc:"Inds\u00E6t fra  Word",
 selectall_desc:"V\u00E6lg alle"
 },
@@ -98,7 +98,7 @@ text_linebreaks:"Bevar linieskift",
 word_title:"Anvend CTRL+V p\u00E5 tastaturet for at inds\u00E6tte teksten."
 },
 table:{
-desc:"Inds\u00E6t ny tabel",
+desc:"Inds\u00E6t tabel",
 row_before_desc:"Inds\u00E6t r\u00E6kke f\u00F8r",
 row_after_desc:"Inds\u00E6t r\u00E6kke efter",
 delete_row_desc:"Slet r\u00E6kke",

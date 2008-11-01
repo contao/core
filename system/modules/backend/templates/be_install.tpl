@@ -1,12 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
-<!--
-
-	This website was built with TYPOlight :: open source web content management system
-	TYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/GPL
-	Visit project page http://www.typolight.org for more information
-
-//-->
 <head>
 <base href="<?php echo $this->base; ?>" />
 <title>TYPOlight webCMS <?php echo VERSION; ?> :: Install Tool</title>
@@ -265,7 +258,10 @@ called <strong>dca/database.sql</strong>.</p>
 <?php endif; ?>
 
 <h3>Import a template</h3>
-<?php if ($this->dateImported): ?>
+<?php if ($this->emptySelection): ?>
+
+<p class="tl_error">Please choose a template file!</p>
+<?php elseif ($this->dateImported): ?>
 
 <p class="tl_confirm">Template imported on <?php echo $this->dateImported; ?></p>
 <?php else: ?>

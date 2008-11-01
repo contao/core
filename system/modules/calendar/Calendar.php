@@ -55,10 +55,23 @@ class Calendar extends Frontend
 									  ->limit(1)
 									  ->execute($intId, 1);
 
-		if ($objCalendar->numRows)
+		if ($objCalendar->numRows < 1)
 		{
-			$objCalendar->feedName = strlen($objCalendar->alias) ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+			return;
+		}
 
+		$objCalendar->feedName = strlen($objCalendar->alias) ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+
+		// Delete XML file
+		if ($this->Input->get('act') == 'delete')
+		{
+			$this->import('Files');
+			$this->Files->delete($objCalendar->feedName . '.xml');
+		}
+
+		// Update XML file
+		else
+		{
 			$this->generateFiles($objCalendar->row());
 			$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeed()', TL_CRON);
 		}
@@ -326,7 +339,7 @@ class Calendar extends Frontend
 		$span = floor(($intEnd - $intStart) / 86400);
 		$format = $objArticle->addTime ? 'datimFormat' : 'dateFormat';
 
-		// Set title
+		// Add date
 		if ($span > 0)
 		{
 			$title = date($GLOBALS['TL_CONFIG'][$format], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG'][$format], $intEnd);
@@ -335,6 +348,9 @@ class Calendar extends Frontend
 		{
 			$title = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ($objArticle->addTime ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd) . ')' : '');
 		}
+
+		// Add title
+		$title  .= ' ' . $objArticle->title;
 
 		$arrEvent = array
 		(

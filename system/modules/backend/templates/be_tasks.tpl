@@ -44,7 +44,7 @@
 <?php if ($this->tasks): ?>
 <?php foreach ($this->tasks as $task): ?>
   <tr class="<?php echo $task['trClass']; ?>">
-    <td class="col_0 col_first<?php echo $task['tdClass']; ?>"><?php echo $task['title']; ?></td>
+    <td class="col_0 col_first<?php echo $task['tdClass']; ?>"><?php echo $task['title']; ?><br /><span class="tl_gray"><?php echo $task['creator']; ?></span></td>
     <td class="col_1<?php echo $task['tdClass']; ?>"><?php echo $task['user']; ?></td>
     <td class="col_2<?php echo $task['tdClass']; ?>"><?php echo $task['status']; ?></td>
     <td class="col_3<?php echo $task['tdClass']; ?>"><?php echo $task['progress']; ?>%</td>

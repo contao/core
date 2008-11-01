@@ -62,7 +62,7 @@ class ContentAccordion extends ContentElement
 			{
 				$this->strTemplate = 'be_wildcard';
 				$this->Template = new BackendTemplate($this->strTemplate);
-				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
+				$this->Template->wildcard = '### ACCORDION WRAPPER START :: ' . $this->mooHeadline . ' ###';
 			}
 		}
 
