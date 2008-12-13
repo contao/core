@@ -91,9 +91,9 @@ class ModuleMemberlist extends Module
 		$this->loadDataContainer('tl_member');
 		$this->loadLanguageFile('tl_member');
 
-		if ($this->Input->get('id'))
+		if ($this->Input->get('show'))
 		{
-			$this->listSingleMember($this->Input->get('id'));
+			$this->listSingleMember($this->Input->get('show'));
 		}
 		else
 		{
@@ -105,7 +105,7 @@ class ModuleMemberlist extends Module
 	/**
 	 * List all members
 	 */
-	private function listAllMembers()
+	protected function listAllMembers()
 	{
 		$time = time();
 		$arrFields = $this->arrMlFields;
@@ -278,7 +278,7 @@ class ModuleMemberlist extends Module
 	 * List a single member
 	 * @param integer
 	 */
-	private function listSingleMember($id)
+	protected function listSingleMember($id)
 	{
 		global $objPage;
 
@@ -439,7 +439,7 @@ class ModuleMemberlist extends Module
 	 * @param object
 	 * @param array
 	 */
-	private function sendPersonalMessage(Database_Result $objMember, $arrWidgets)
+	protected function sendPersonalMessage(Database_Result $objMember, $arrWidgets)
 	{
 		$objEmail = new Email();
 
@@ -489,7 +489,7 @@ class ModuleMemberlist extends Module
 	 * @param boolean
 	 * @return mixed
 	 */
-	private function formatValue($k, $value, $blnListSingle=false)
+	protected function formatValue($k, $value, $blnListSingle=false)
 	{
 		$value = deserialize($value);
 

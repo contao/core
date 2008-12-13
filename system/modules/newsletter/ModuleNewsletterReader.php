@@ -94,7 +94,7 @@ class ModuleNewsletterReader extends Module
 
 		if ($objNewsletter->numRows < 1)
 		{
-			$this->Template->content = '<p class="error">Invalid newsletter ID</p>';
+			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 
 			// Do not index the page
 			$objPage->noSearch = 1;
@@ -155,9 +155,12 @@ class ModuleNewsletterReader extends Module
 			}
 		}
 
-		$this->Template->enclosure = $arrEnclosures;
-		$this->Template->content = str_ireplace(' align="center"', '', $objNewsletter->content);
+		$strContent = str_ireplace(' align="center"', '', $objNewsletter->content);
+		$strContent = $this->parseSimpleTokens($strContent, array());
+
+		$this->Template->content = $strContent;
 		$this->Template->subject = $objNewsletter->subject;
+		$this->Template->enclosure = $arrEnclosures;
 	}
 }
 

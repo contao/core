@@ -172,7 +172,7 @@ class FtpCheck extends Controller
 	/**
 	 * Output the template file and exit
 	 */
-	private function outputAndExit()
+	protected function outputAndExit()
 	{
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;

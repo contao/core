@@ -20,7 +20,7 @@ CREATE TABLE `tl_comments` (
   `website` varchar(128) NOT NULL default '',
   `comment` text NULL,
   `ip` varchar(64) NOT NULL default '',
-  `date` int(10) unsigned NOT NULL default '0',
+  `date` int(11) NOT NULL default '0',
   `published` char(1) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`)

@@ -366,30 +366,62 @@ class tl_form_field extends Backend
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
-			case 'select':
 			case 'paste':
+			case 'select':
 				// Allow
 				break;
 
+			case 'create':
+				if (!strlen($this->Input->get('id')) || !in_array($this->Input->get('id'), $root))
+				{
+					$this->log('Not enough permissions to create form fields in form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
+
+			case 'cut':
+			case 'copy':
+				$pid = $this->Input->get('pid');
+
+				// Get form ID
+				if ($this->Input->get('mode') == 1)
+				{
+					$objField = $this->Database->prepare("SELECT pid FROM tl_form_field WHERE id=?")
+											   ->limit(1)
+											   ->execute($this->Input->get('pid'));
+
+					if ($objField->numRows < 1)
+					{
+						$this->log('Invalid form field ID "'.$this->Input->get('pid').'"', 'tl_form_field checkPermission', 5);
+						$this->redirect('typolight/main.php?act=error');
+					}
+
+					$pid = $objField->pid;
+				}
+
+				if (!in_array($pid, $root))
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
 			case 'edit':
 			case 'show':
-			case 'create':
-			case 'copy':
-			case 'cut':
 			case 'delete':
-				$objArchive = $this->Database->prepare("SELECT pid FROM tl_form_field WHERE id=?")
-											 ->limit(1)
-											 ->execute($id);
+				$objField = $this->Database->prepare("SELECT pid FROM tl_form_field WHERE id=?")
+										   ->limit(1)
+										   ->execute($id);
 
-				if ($objArchive->numRows < 1)
+				if ($objField->numRows < 1)
 				{
 					$this->log('Invalid form field ID "'.$id.'"', 'tl_form_field checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
-				if (!in_array($objArchive->pid, $root))
+				if (!in_array($objField->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objArchive->pid.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -440,7 +472,7 @@ class tl_form_field extends Backend
 	public function listFormFields($arrRow)
 	{
 		$strType = '
-<div class="cte_type">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . '</div>
+<div class="cte_type">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . ($arrRow['name'] ? ' ("' . $arrRow['name'] . '")' : '') . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h32' : '') . ' block">';
 
 		$strClass = $GLOBALS['TL_FFL'][$arrRow['type']];

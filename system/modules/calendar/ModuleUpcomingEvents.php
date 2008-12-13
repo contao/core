@@ -135,21 +135,14 @@ class ModuleUpcomingEvents extends Events
 
 					$objTemplate = new FrontendTemplate($this->cal_template);
 
+					// Store raw data
+					$objTemplate->setData($event);
+
 					$objTemplate->day = $strDay;
-					$objTemplate->title = $event['title'];
-					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
-					$objTemplate->time = $event['time'];
 					$objTemplate->link = $event['href'];
-					$objTemplate->month = $event['month'];
-					$objTemplate->teaser = $event['teaser'];
-					$objTemplate->target = $event['target'];
-					$objTemplate->details = $event['details'];
-					$objTemplate->calendar = $event['calendar'];
+					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
 					$objTemplate->class = ((($count % 2) == 0) ? ' odd' : ' even') . (($count == 1) ? ' first' : '') . (($dayCount >= $dayMax) ? ' last' : '') . ' cal_' . $event['parent'];
 					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
-					$objTemplate->start = $event['start'];
-					$objTemplate->end = $event['end'];
-					$objTemplate->data = $event;
 
 					// Short view
 					if ($this->cal_noSpan)

@@ -271,7 +271,7 @@ class Newsletter extends Backend
 	 * @param array
 	 * @return object
 	 */
-	private function generateEmailObject(Database_Result $objNewsletter, $arrAttachments)
+	protected function generateEmailObject(Database_Result $objNewsletter, $arrAttachments)
 	{
 		$objEmail = new Email();
 
@@ -307,7 +307,7 @@ class Newsletter extends Backend
 	 * @param string
 	 * @return string
 	 */
-	private function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css)
+	protected function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css)
 	{
 		// Prepare text content
 		$objEmail->text = $this->parseSimpleTokens($text, $arrRecipient);

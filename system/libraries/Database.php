@@ -522,7 +522,7 @@ abstract class Database_Statement
 	 * @param  array
 	 * @return array
 	 */
-	private function escapeParams($arrParams)
+	protected function escapeParams($arrParams)
 	{
 		foreach ($arrParams as $k=>$v)
 		{
@@ -558,7 +558,7 @@ abstract class Database_Statement
 	 * Debug a query
 	 * @param object
 	 */
-	private function debugQuery($objResult=false)
+	protected function debugQuery($objResult=false)
 	{
 		if (!$GLOBALS['TL_CONFIG']['debugMode'])
 		{

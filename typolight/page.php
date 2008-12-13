@@ -90,9 +90,9 @@ class PagePicker extends Backend
 	 * @param integer
 	 * @return array
 	 */
-	private function createOptions($intId=0, $level=-1)
+	protected function createOptions($intId=0, $level=-1)
 	{
-		$objPages = $this->Database->prepare("SELECT id, title FROM tl_page WHERE pid=? ORDER BY sorting")
+		$objPages = $this->Database->prepare("SELECT id, title, type, dns FROM tl_page WHERE pid=? ORDER BY sorting")
 								   ->execute($intId);
 
 		if ($objPages->numRows < 1)
@@ -105,6 +105,12 @@ class PagePicker extends Backend
 
 		while ($objPages->next())
 		{
+			// Skip websites that run under a different domain
+			if ($objPages->type == 'root' && $objPages->dns && $objPages->dns != $this->Environment->host && $objPages->dns != 'www.' . $this->Environment->host)
+			{
+				continue;
+			}
+
 			$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (($this->Input->get('href') == '{{link_url::' . $objPages->id . '}}') ? ' selected="selected"' : ''), str_repeat("&nbsp;", (2 * $level)), specialchars($objPages->title));
 			$strOptions .= $this->createOptions($objPages->id, $level);
 		}

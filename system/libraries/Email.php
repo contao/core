@@ -167,7 +167,7 @@ class Email
 				break;
 
 			case 'priority':
-				switch ($strKey)
+				switch ($varValue)
 				{
 					case 1:
 					case 'low':
@@ -448,7 +448,7 @@ class Email
 	 * @param array
 	 * @return array
 	 */
-	private function compileRecipients($arrRecipients)
+	protected function compileRecipients($arrRecipients)
 	{
 		$arrReturn = array();
 
@@ -470,7 +470,7 @@ class Email
 	 * Extract images from the HTML source and add them as inline images
 	 * @param object
 	 */
-	private function findHtmlImages(PHPMailer $objMail)
+	protected function findHtmlImages(PHPMailer $objMail)
 	{
 		$arrTypes = array
 		(

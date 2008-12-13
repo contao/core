@@ -163,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
 		),
 		'alias' => array
 		(
@@ -228,14 +228,14 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['pageTitle'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true)
 		),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;')
+			'eval'                    => array('style'=>'height:80px;', 'decodeEntities'=>true)
 		),
 		'url' => array
 		(

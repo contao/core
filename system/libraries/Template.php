@@ -101,6 +101,16 @@ class Template extends Controller
 
 
 	/**
+	 * Set data from an array
+	 * @param array
+	 */
+	public function setData($arrData)
+	{
+		$this->arrData = $arrData;
+	}
+
+
+	/**
 	 * Print all template variables to the screen
 	 */
 	public function showTemplateVars()
@@ -148,11 +158,11 @@ class Template extends Controller
 		(
 			'/(<head[^>]*>)/',
 			"<!--\n\n"
-			. "\tThis website is powered by TYPOlight :: open source web content management system\n"
-			. "\tTYPOlight was developed by Leo Feyer (leo@typolight.org) :: released under GNU/LGPL\n"
-			. "\tVisit the project website http://www.typolight.org for more information\n\n"
+			. "\tThis website is powered by TYPOlight webCMS :: TYPOlight is licensed under GNU/LGPL\n"
+			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
+			. "\tVisit the project website at http://www.typolight.org for more information\n\n"
 			. "//-->\n$1",
-			$this->strBuffer
+			$this->strBuffer, 1
 		);
 
 		// Activate gzip compression

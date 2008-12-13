@@ -254,7 +254,7 @@ class ZipWriter extends System
 	 * @param integer
 	 * @return integer
 	 */
-	private function unixToHex($intTime=0)
+	protected function unixToHex($intTime=0)
 	{
 		$arrTime = $intTime ? getdate($intTime) : getdate();
 

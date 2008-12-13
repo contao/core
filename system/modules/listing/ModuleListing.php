@@ -71,6 +71,8 @@ class ModuleListing extends Module
 		}
 
 		$this->strTemplate = $this->list_layout;
+		$this->list_where = $this->replaceInsertTags($this->list_where);
+
 		return parent::generate();
 	}
 
@@ -86,9 +88,9 @@ class ModuleListing extends Module
 		$this->loadLanguageFile($this->list_table);
 
 		// List a single record
-		if ($this->Input->get('id'))
+		if ($this->Input->get('show'))
 		{
-			$this->listSingleRecord();
+			$this->listSingleRecord($this->Input->get('show'));
 			return;
 		}
 
@@ -281,8 +283,9 @@ class ModuleListing extends Module
 
 	/**
 	 * List a single record
+	 * @param integer
 	 */
-	protected function listSingleRecord()
+	protected function listSingleRecord($id)
 	{
 		// Fallback template
 		if (!strlen($this->list_info_layout))
@@ -297,7 +300,7 @@ class ModuleListing extends Module
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE id=?")
 									->limit(1)
-									->execute($this->Input->get('id'));
+									->execute($id);
 
 		if ($objRecord->numRows < 1)
 		{

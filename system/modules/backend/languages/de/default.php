@@ -39,7 +39,7 @@ $GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Bitte geben Sie einen Prozentwer
 $GLOBALS['TL_LANG']['ERR']['alpha']          = 'Bitte geben Sie nur Buchstaben ein!';
 $GLOBALS['TL_LANG']['ERR']['alnum']          = 'Bitte geben Sie nur Zahlen und Buchstaben ein!';
 $GLOBALS['TL_LANG']['ERR']['phone']          = 'Bitte geben Sie eine gültige Telefonnummer ein!';
-$GLOBALS['TL_LANG']['ERR']['extnd']          = 'Aus Sicherheitsgründen können Sie die diese Zeichen (=<>&/()#) hier nicht verwenden!';
+$GLOBALS['TL_LANG']['ERR']['extnd']          = 'Aus Sicherheitsgründen können Sie diese Zeichen (=<>&/()#) hier nicht verwenden!';
 $GLOBALS['TL_LANG']['ERR']['email']          = 'Bitte geben Sie eine gültige E-Mail-Adresse ein!';
 $GLOBALS['TL_LANG']['ERR']['url']            = 'Bitte geben Sie ein gültiges URL-Format ein und kodieren Sie Sonderzeichen!';
 $GLOBALS['TL_LANG']['ERR']['date']           = 'Bitte geben Sie das Datum im Format "%s" ein!';

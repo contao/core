@@ -179,7 +179,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
 		'caption' => array
 		(

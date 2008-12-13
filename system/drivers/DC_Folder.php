@@ -378,6 +378,15 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Copy folders
 		if (is_dir(TL_ROOT . '/' . $source))
 		{
+			$new = $destination;
+			$count = 1;
+
+			while (is_dir(TL_ROOT . '/' . $new) && $count < 12)
+			{
+				$new = $destination . '_' . $count++;
+			}
+
+			$destination = $new;
 			$this->Files->mkdir($destination);
 			$files = scan(TL_ROOT . '/' . $source);
 
@@ -397,6 +406,22 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Copy file
 		else
 		{
+			$new = $destination;
+			$count = 1;
+
+			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
+			{
+				$pif = pathinfo($destination);
+
+				$new = str_replace
+				(
+					'.' . $pif['extension'],
+					'_' . $count++ . '.' . $pif['extension'],
+					$destination
+				);
+			}
+
+			$destination = $new;
 			$this->Files->copy($source, $destination);
 		}
 
@@ -1247,7 +1272,7 @@ window.addEvent(\'domready\', function()
 	 * @param boolean
 	 * @return string
 	 */
-	private function generateTree($path, $intMargin, $mount=false, $blnProtected=false)
+	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false)
 	{
 		static $session;
 		$session = $this->Session->getData();
@@ -1417,7 +1442,7 @@ window.addEvent(\'domready\', function()
 	 * @param string
 	 * @return boolean
 	 */
-	private function isMounted($strFolder)
+	protected function isMounted($strFolder)
 	{
 		if (!count($this->arrFilemounts))
 		{
@@ -1445,7 +1470,7 @@ window.addEvent(\'domready\', function()
 	 * @param string
 	 * @return array
 	 */
-	private function getMD5Folders($strPath)
+	protected function getMD5Folders($strPath)
 	{
 		$arrFiles = array();
 

@@ -53,35 +53,58 @@ class typolib extends Controller
 
 	/**
 	 * Get all allowed pages and return them as string
+	 * @return string
+	 */
+	public function createPageList()
+	{
+		if ($this->User->isAdmin)
+		{
+			return $this->doCreatePageList();
+		}
+
+		$return = '';
+		$processed = array();
+
+		foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
+		{
+			$objPage = $this->getPageDetails($page);
+
+			// Root page mounted
+			if ($objPage->type == 'root')
+			{
+				$title = $objPage->title;
+				$start = $objPage->id;
+			}
+
+			// Regular page mounted
+			else
+			{
+				$title = $objPage->rootTitle;
+				$start = $objPage->rootId;
+			}
+
+			// Do not process twice
+			if (in_array($start, $processed))
+			{
+				continue;
+			}
+
+			$processed[] = $start;
+			$return .= '<optgroup label="' . $title . '">' . $this->doCreatePageList($start) . '</optgroup>';
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Recursively get all allowed pages and return them as string
 	 * @param integer
 	 * @param integer
 	 * @return string
 	 */
-	public function createPageList($intId=0, $level=-1)
+	public function doCreatePageList($intId=0, $level=-1)
 	{
-		// Show all pages under the root page that the mounted page belongs to
-		if ($intId === 0 && !$this->User->isAdmin)
-		{
-			$return = '';
-			$processed = array();
-
-			foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
-			{
-				if (in_array($page, $processed))
-				{
-					continue;
-				}
-
-				$processed[] = $page;
-				$objPage = $this->getPageDetails($page);
-
-				$return .= '<optgroup label="' . $objPage->rootTitle . '">' . $this->createPageList($objPage->rootId, $level) . '</optgroup>';
-			}
-
-			return $return;
-		}
-
-		// Add child pages
 		$objPages = $this->Database->prepare("SELECT id, title, type FROM tl_page WHERE pid=? ORDER BY sorting")
 								   ->execute($intId);
 
@@ -98,13 +121,13 @@ class typolib extends Controller
 			if ($objPages->type == 'root')
 			{
 				$strOptions .= '<optgroup label="' . $objPages->title . '">';
-				$strOptions .= $this->createPageList($objPages->id, -1);
+				$strOptions .= $this->doCreatePageList($objPages->id, -1);
 				$strOptions .= '</optgroup>';
 			}
 			else
 			{
 				$strOptions .= sprintf('<option value="{{link_url::%s}}">%s%s</option>', $objPages->id, str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
-				$strOptions .= $this->createPageList($objPages->id, $level);
+				$strOptions .= $this->doCreatePageList($objPages->id, $level);
 			}
 		}
 
@@ -114,34 +137,52 @@ class typolib extends Controller
 
 	/**
 	 * Get all allowed files and return them as string
+	 * @return string
+	 */
+	public function createFileList()
+	{
+		if ($this->User->isAdmin)
+		{
+			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath']);
+		}
+
+		$return = '';
+		$processed = array();
+
+		// Limit nodes to the filemounts of the user
+		foreach ($this->eliminateNestedPaths($this->User->filemounts) as $path)
+		{
+			if (in_array($path, $processed))
+			{
+				continue;
+			}
+
+			$processed[] = $path;
+			$return .= $this->doCreateFileList($path);
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Recursively get all allowed files and return them as string
 	 * @param integer
 	 * @param integer
 	 * @return string
 	 */
-	public function createFileList($strFolder=null, $level=-1)
+	public function doCreateFileList($strFolder=null, $level=-1)
 	{
-		if (is_null($strFolder))
-		{
-			// Limit nodes to the filemounts of the user
-			if (!$this->User->isAdmin)
-			{
-				$return = '';
-
-				foreach ($this->eliminateNestedPaths($this->User->filemounts) as $path)
-				{
-					$return .= $this->createFileList($path);
-				}
-
-				return $return;
-			}
-
-			// Allow all nodes for administrators
-			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'];
-		}
-
 		$arrPages = scan(TL_ROOT . '/' . $strFolder);
 
+		// Empty folder
 		if (count($arrPages) < 1)
+		{
+			return '';
+		}
+
+		// Protected folder
+		if (array_search('.htaccess', $arrPages) !== false)
 		{
 			return '';
 		}
@@ -161,7 +202,7 @@ class typolib extends Controller
 			// Folders
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$strFolders .=  $this->createFileList($strFolder . '/' . $strFile, $level);
+				$strFolders .=  $this->doCreateFileList($strFolder . '/' . $strFile, $level);
 			}
 
 			// Files

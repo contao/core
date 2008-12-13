@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'decodeEntities'=>true, 'doNotCopy'=>true),
+			'eval'                    => array('maxlength'=>32, 'decodeEntities'=>true),
 			'load_callback' => array
 			(
 				array('tl_style', 'checkCategory')
@@ -446,11 +446,11 @@ class tl_style extends Backend
 
 
 	/**
-	 * Automatically adjust the category if a record is being cut
+	 * Automatically adjust the category if a record is being cut or duplicated
 	 */
 	public function adjustCategory()
 	{
-		if ($this->Input->get('act') != 'cut')
+		if ($this->Input->get('act') != 'cut' &&$this->Input->get('act') != 'copy')
 		{
 			return;
 		}

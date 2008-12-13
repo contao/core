@@ -105,10 +105,11 @@ abstract class ModuleNews extends Module
 		while ($objArticles->next())
 		{
 			$objTemplate = new FrontendTemplate($this->news_template);
-			$objTemplate->class =  ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
 
-			$objTemplate->text = $objArticles->text;
-			$objTemplate->teaser = $objArticles->teaser;
+			// Store raw data
+			$objTemplate->setData($objArticles->row());
+
+			$objTemplate->class =  ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
 			$objTemplate->newsHeadline = $objArticles->headline;
 			$objTemplate->subHeadline = $objArticles->subheadline;
 			$objTemplate->hasSubHeadline = $objArticles->subheadline ? true : false;
@@ -212,7 +213,7 @@ abstract class ModuleNews extends Module
 	 * @param object
 	 * @return array
 	 */
-	private function getMetaFields(Database_Result $objArticle)
+	protected function getMetaFields(Database_Result $objArticle)
 	{
 		$meta = deserialize($this->news_metaFields);
 
@@ -281,7 +282,7 @@ abstract class ModuleNews extends Module
 	 * @param boolean
 	 * @return string
 	 */
-	private function generateNewsUrl(Database_Result $objArticle, $blnAddArchive=false)
+	protected function generateNewsUrl(Database_Result $objArticle, $blnAddArchive=false)
 	{
 		$strCacheKey = 'id_' . $objArticle->id;
 
@@ -349,7 +350,7 @@ abstract class ModuleNews extends Module
 	 * @param boolean
 	 * @return string
 	 */
-	private function generateLink($strLink, Database_Result $objArticle, $blnAddArchive=false)
+	protected function generateLink($strLink, Database_Result $objArticle, $blnAddArchive=false)
 	{
 		// Internal link
 		if ($objArticle->source != 'external')

@@ -2,6 +2,26 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.3 (2008-12-13)
+--------------------------
+- Added insert tag "env::page_id" (#276)
+- Added option to use insert tags in the listing module (#276)
+- Added option to show hidden pages in the quick navigation module (#280)
+- Added field names to the back end form preview (#227)
+- Hardened Input class to recognize even more malicious code
+- Improved insert tag "image" to support the "rel" attribute (#298)
+- Improved file manager to rename copied files if they exist in the target directory (#273)
+- Declared all private methods protected so they can be overwritten (#310)
+- Fixed issue with safe mode hack messing up the owner of new files
+- Fixed issue with naming conflict in listing and memberlist module (#297)
+- Fixed issue with calendar feeds not linking to external pages (#283)
+- Fixed issue with custom menus with hidden pages not showing class "last" (#259)
+- Fixed issue with TinyMCE hyperlink popup not loading for regular users (#274)
+- Fixed issue with style sheet categories not being duplicated (#236)
+- Fixed issue with regular users not being able to edit multiple content elements (#272)
+- Fixed issue with regular users not being able to cut/copy news and events (#294)
+- Fixed a few minor bugs
+
 Version 2.6.2 (2008-11-01)
 --------------------------
 - Updated TinyMCE to version 3.2.0.2

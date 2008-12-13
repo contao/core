@@ -123,19 +123,19 @@ var TableSort = new Class(
 		}
 
 		// Date
-		if (val.match(/^\d{1,4}[\/\. -]\d{1,2}[\/\. -]\d{1,4}$/))
+		if (el.className.indexOf('date') != -1 || val.match(/^\d{1,4}[\/\. -]\d{1,2}[\/\. -]\d{1,4}$/))
 		{
 			tbody.sort(this.sortDate);
 		}
 
 		// Currency
-		else if (val.match(/^[£$€Û¢´]/) || val.match(/^-?[\d\.,]+[£$€]$/))
+		else if (el.className.indexOf('currency') != -1 || val.match(/^[£$€Û¢´]/) || val.match(/^-?[\d\.,]+[£$€]$/))
 		{
 			tbody.sort(this.sortNumeric);
 		}
 
 		// Numbers
-		else if (val.match(/^-?[\d\.,]+(E[-+][\d]+)?$/) || val.match(/^-?[\d\.,]+%?$/))
+		else if (el.className.indexOf('numeric') != -1 || val.match(/^-?[\d\.,]+(E[-+][\d]+)?$/) || val.match(/^-?[\d\.,]+%?$/))
 		{
 			tbody.sort(this.sortNumeric);
 		}

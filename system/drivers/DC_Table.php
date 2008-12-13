@@ -286,7 +286,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 		else
 		{
-			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4)
+			if ($this->Input->get('table') && $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'] && $this->Database->fieldExists('pid', $this->strTable))
 			{
 				$this->procedure[] = 'pid=?';
 				$this->values[] = CURRENT_ID;
@@ -690,7 +690,7 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param int
 	 * @param int
 	 */
-	private function copyChilds($table, $insertID, $id, $parentId)
+	protected function copyChilds($table, $insertID, $id, $parentId)
 	{
 		$time = time();
 		$copy = array();
@@ -773,7 +773,7 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param integer
 	 * @param boolean
 	 */
-	private function getNewPosition($mode, $pid=null, $insertInto=false)
+	protected function getNewPosition($mode, $pid=null, $insertInto=false)
 	{
 		// If there is pid and sorting
 		if ($this->Database->fieldExists('pid', $this->strTable) && $this->Database->fieldExists('sorting', $this->strTable))
@@ -2089,7 +2089,7 @@ window.addEvent(\'domready\', function()
 	/**
 	 * Delete all incomplete and unrelated records
 	 */
-	private function reviseTable()
+	protected function reviseTable()
 	{
 		$reload = false;
 		$ptable = $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'];
@@ -2136,7 +2136,7 @@ window.addEvent(\'domready\', function()
 	 * List all records of the current table as tree and return them as HTML string
 	 * @return string
 	 */
-	private function treeView()
+	protected function treeView()
 	{
 		$table = $this->strTable;
 
@@ -2371,7 +2371,7 @@ window.addEvent(\'domready\', function()
 	 * @param boolean
 	 * @return string
 	 */
-	private function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=false, $blnCircularReference=false, $protectedPage=false)
+	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=false, $blnCircularReference=false, $protectedPage=false)
 	{
 		static $session;
 
@@ -2576,7 +2576,7 @@ window.addEvent(\'domready\', function()
  	 * Show header of the parent table and list all records of the current table
 	 * @return string
 	 */
-	private function parentView()
+	protected function parentView()
 	{
 		$blnClipboard = false;
 		$arrClipboard = $this->Session->get('CLIPBOARD');
@@ -2844,7 +2844,7 @@ window.addEvent(\'domready\', function()
 	 * List all records of the current table and return them as HTML string
 	 * @return string
 	 */
-	private function listView()
+	protected function listView()
 	{
 		$return = '';
 		$table = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->ptable : $this->strTable;
@@ -2855,12 +2855,6 @@ window.addEvent(\'domready\', function()
 		{
 			$orderBy = $this->orderBy;
 			$firstOrderBy = $this->firstOrderBy;
-		}
-
-		if ($this->Input->get('table') && $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'] && $this->Database->fieldExists('pid', $this->strTable))
-		{
-			$this->procedure[] = 'pid=?';
-			$this->values[] = $this->Input->get('id');
 		}
 
 		$query = "SELECT * FROM " . $this->strTable;
@@ -2973,7 +2967,18 @@ window.addEvent(\'domready\', function()
 				{
 					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 					{
-						$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '';
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
+						{
+							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '';
+						}
+						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'time')
+						{
+							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '';
+						}
+						else
+						{
+							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '';
+						}
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])
 					{
@@ -3200,7 +3205,7 @@ window.addEvent(\'domready\', function()
 	 * Build the sort panel and return it as string
 	 * @return string
 	 */
-	private function panel()
+	protected function panel()
 	{
 		$filter = $this->filterMenu();
 		$search = $this->searchMenu();
@@ -3253,7 +3258,7 @@ window.addEvent(\'domready\', function()
 	 * Return a search form that allows to search results using regular expressions
 	 * @return string
 	 */
-	private function searchMenu()
+	protected function searchMenu()
 	{
 		$searchFields = array();
 		$session = $this->Session->getData();
@@ -3339,7 +3344,7 @@ window.addEvent(\'domready\', function()
 	 * Return a select menu that allows to sort results by a particular field
 	 * @return string
 	 */
-	private function sortMenu()
+	protected function sortMenu()
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] != 2)
 		{
@@ -3426,7 +3431,7 @@ window.addEvent(\'domready\', function()
 	 * @param boolean
 	 * @return string
 	 */
-	private function limitMenu($blnOptional=false)
+	protected function limitMenu($blnOptional=false)
 	{
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
@@ -3519,7 +3524,7 @@ window.addEvent(\'domready\', function()
 	 * Generate the filter panel and return it as HTML string
 	 * @return string
 	 */
-	private function filterMenu()
+	protected function filterMenu()
 	{
 		$fields = '';
 		$this->bid = 'tl_buttons_a';

@@ -409,6 +409,12 @@ abstract class Widget extends Controller
 		{
 			$this->varValue = $varInput;
 		}
+		/* to be included in version 2.7
+		else
+		{
+			$this->class = 'error';
+		}
+		*/
 	}
 
 

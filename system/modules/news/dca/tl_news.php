@@ -223,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
 		'caption' => array
 		(
@@ -392,6 +392,7 @@ class tl_news extends Backend
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'paste':
 			case 'select':
 				// Allow
 				break;
@@ -404,9 +405,17 @@ class tl_news extends Backend
 				}
 				break;
 
+			case 'cut':
+			case 'copy':
+				if (!in_array($this->Input->get('pid'), $root))
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" to news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
 			case 'edit':
 			case 'show':
-			case 'copy':
 			case 'delete':
 				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
 											 ->limit(1)

@@ -136,7 +136,7 @@ class ModuleMiniCalendar extends Events
 	 * Return the week days and labels as array
 	 * @return array
 	 */
-	private function compileDays()
+	protected function compileDays()
 	{
 		$arrDays = array();
 
@@ -154,7 +154,7 @@ class ModuleMiniCalendar extends Events
 	 * Return all weeks of the current month as array
 	 * @return array
 	 */
-	private function compileWeeks()
+	protected function compileWeeks()
 	{
 		$intDaysInMonth = date('t', $this->Date->monthBegin);
 		$intFirstDayOffset = date('w', $this->Date->monthBegin) - $this->cal_startDay;

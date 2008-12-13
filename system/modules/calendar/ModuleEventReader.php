@@ -97,7 +97,7 @@ class ModuleEventReader extends Events
 
 		if ($objEvent->numRows < 1)
 		{
-			$this->Template->event = '<p class="error">Invalid event ID</p>';
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
 
 			// Do not index the page
 			$objPage->noSearch = 1;
@@ -148,14 +148,12 @@ class ModuleEventReader extends Events
 
 		$objTemplate = new FrontendTemplate($this->cal_template);
 
+		// Store raw data
+		$objTemplate->setData($objEvent->row());
+
 		$objTemplate->date = $date;
-		$objTemplate->title = $objEvent->title;
-		$objTemplate->details = $objEvent->details;
-		$objTemplate->teaser = $objEvent->teaser;
-		$objTemplate->calendar = $objEvent->calendar;
 		$objTemplate->start = $objEvent->startTime;
 		$objTemplate->end = $objEvent->endTime;
-		$objTemplate->data = $objEvent->row();
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 		$this->Template->addImage = false;

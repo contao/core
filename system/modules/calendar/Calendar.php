@@ -100,7 +100,7 @@ class Calendar extends Frontend
 	 * Generate an XML files and save them to the root directory
 	 * @param array
 	 */
-	private function generateFiles($arrArchive)
+	protected function generateFiles($arrArchive)
 	{
 		$time = time();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
@@ -328,7 +328,7 @@ class Calendar extends Frontend
 	 * @param integer
 	 * @param string
 	 */
-	private function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl)
+	protected function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl)
 	{
 		if ($intStart < time())
 		{
@@ -352,12 +352,22 @@ class Calendar extends Frontend
 		// Add title
 		$title  .= ' ' . $objArticle->title;
 
+		// Add link
+		if ($objArticle->source == 'external')
+		{
+			$link = $objArticle->url;
+		}
+		else
+		{
+			$link = sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		}
+
 		$arrEvent = array
 		(
 			'title' => $title,
 			'description' => $objArticle->details,
 			'content' => $objArticle->details,
-			'link' => sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id)),
+			'link' => $link,
 			'published' => $intStart
 		);
 

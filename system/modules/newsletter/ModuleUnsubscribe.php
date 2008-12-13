@@ -126,7 +126,7 @@ class ModuleUnsubscribe extends Module
 	/**
 	 * Add a new recipient
 	 */
-	private function removeRecipient()
+	protected function removeRecipient()
 	{
 		$arrChannels = $this->Input->post('channels');
 

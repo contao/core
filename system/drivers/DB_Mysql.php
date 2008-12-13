@@ -75,9 +75,9 @@ class DB_Mysql extends Database
 
 		if (is_resource($this->resConnection))
 		{
-			@mysql_query("SET sql_mode=''");
-			@mysql_query("SET NAMES " . $GLOBALS['TL_CONFIG']['dbCharset']);
-			@mysql_select_db($GLOBALS['TL_CONFIG']['dbDatabase']);
+			@mysql_query("SET sql_mode=''", $this->resConnection);
+			@mysql_query("SET NAMES " . $GLOBALS['TL_CONFIG']['dbCharset'], $this->resConnection);
+			@mysql_select_db($GLOBALS['TL_CONFIG']['dbDatabase'], $this->resConnection);
 		}
 	}
 
@@ -97,7 +97,7 @@ class DB_Mysql extends Database
 	 */
 	protected function get_error()
 	{
-		return mysql_error();
+		return mysql_error($this->resConnection);
 	}
 
 
@@ -182,7 +182,7 @@ class DB_Mysql extends Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		return @mysql_select_db($strDatabase);
+		return @mysql_select_db($strDatabase, $this->resConnection);
 	}
 
 
@@ -191,8 +191,8 @@ class DB_Mysql extends Database
 	 */
 	protected function begin_transaction()
 	{
-		@mysql_query("SET AUTOCOMMIT=0");
-		@mysql_query("BEGIN");
+		@mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
+		@mysql_query("BEGIN", $this->resConnection);
 	}
 
 
@@ -201,8 +201,8 @@ class DB_Mysql extends Database
 	 */
 	protected function commit_transaction()
 	{
-		@mysql_query("COMMIT");
-		@mysql_query("SET AUTOCOMMIT=1");
+		@mysql_query("COMMIT", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -211,8 +211,8 @@ class DB_Mysql extends Database
 	 */
 	protected function rollback_transaction()
 	{
-		@mysql_query("ROLLBACK");
-		@mysql_query("SET AUTOCOMMIT=1");
+		@mysql_query("ROLLBACK", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 }
 
@@ -246,7 +246,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function string_escape($strString)
 	{
-		return "'" . mysql_real_escape_string($strString) . "'";
+		return "'" . mysql_real_escape_string($strString, $this->resConnection) . "'";
 
 		/**
 		 * The TYPOlight framework automatically strips slashes so do not
@@ -290,7 +290,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function execute_query()
 	{
-		return @mysql_query($this->strQuery);
+		return @mysql_query($this->strQuery, $this->resConnection);
 	}
 
 
@@ -300,7 +300,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function get_error()
 	{
-		return mysql_error();
+		return mysql_error($this->resConnection);
 	}
 
 
@@ -310,7 +310,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function affected_rows()
 	{
-		return @mysql_affected_rows();
+		return @mysql_affected_rows($this->resConnection);
 	}
 
 
@@ -320,7 +320,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function insert_id()
 	{
-		return @mysql_insert_id();
+		return @mysql_insert_id($this->resConnection);
 	}
 
 
@@ -330,7 +330,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function explain_query()
 	{
-		return @mysql_fetch_assoc(@mysql_query('EXPLAIN ' . $this->strQuery));
+		return @mysql_fetch_assoc(@mysql_query('EXPLAIN ' . $this->strQuery, $this->resConnection));
 	}
 }
 

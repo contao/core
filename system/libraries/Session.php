@@ -54,7 +54,7 @@ class Session
 	/**
 	 * Get session
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		switch (TL_MODE)
 		{

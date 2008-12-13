@@ -180,7 +180,7 @@ class FileTree extends Widget
 	 * @param boolean
 	 * @return string
 	 */
-	private function renderFiletree($path, $intMargin, $mount=false)
+	protected function renderFiletree($path, $intMargin, $mount=false)
 	{
 		static $session;
 		$session = $this->Session->getData();

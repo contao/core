@@ -146,7 +146,7 @@ class Form extends Hybrid
 				foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 				{
 					$this->import($callback[0]);
-					$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId);
+					$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
 				}
 			}
 
@@ -161,7 +161,7 @@ class Form extends Hybrid
 					foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
 					{
 						$this->import($callback[0]);
-						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId);
+						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
 					}
 				}
 
@@ -236,7 +236,7 @@ class Form extends Hybrid
 	 * Process form data, store it in the session and redirect to the jumpTo page
 	 * @param array
 	 */
-	private function processFormData($arrSubmitted)
+	protected function processFormData($arrSubmitted)
 	{
 		// Send form data via e-mail
 		if ($this->sendViaEmail)
@@ -449,7 +449,7 @@ class Form extends Hybrid
 	/**
 	 * Get the maximum file size that is allowed for file uploads
 	 */
-	private function getMaxFileSize()
+	protected function getMaxFileSize()
 	{
 		$this->Template->maxFileSize = $GLOBALS['TL_CONFIG']['maxFileSize'];
 
@@ -467,7 +467,7 @@ class Form extends Hybrid
 	 * Initialize the form in the current session
 	 * @param string
 	 */
-	private function initializeSession($formId)
+	protected function initializeSession($formId)
 	{
 		if ($this->Input->post('FORM_SUBMIT') != $formId)
 		{

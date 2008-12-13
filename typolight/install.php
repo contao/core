@@ -392,7 +392,7 @@ class InstallTool extends Controller
 	 * Generate a HTML form with update commands and return it as string
 	 * @return string
 	 */
-	private function generateSqlForm()
+	protected function generateSqlForm()
 	{
 		$count = 0;
 		$return = '';
@@ -444,7 +444,7 @@ class InstallTool extends Controller
 	 * Compile a command array for each necessary database modification
 	 * @return array
 	 */
-	private function compileCommands()
+	protected function compileCommands()
 	{
 		$drop = array();
 		$create = array();
@@ -566,7 +566,7 @@ class InstallTool extends Controller
 	 * Compile a table array from all SQL files and return it
 	 * @return array
 	 */
-	private function getFromFile()
+	protected function getFromFile()
 	{
 		$return = array();
 
@@ -642,7 +642,7 @@ class InstallTool extends Controller
 	 * Compile a table array from the database and return it
 	 * @return array
 	 */
-	private function getFromDB()
+	protected function getFromDB()
 	{
 		$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
@@ -723,7 +723,7 @@ class InstallTool extends Controller
 	/**
 	 * Output the template file and exit
 	 */
-	private function outputAndExit()
+	protected function outputAndExit()
 	{
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;

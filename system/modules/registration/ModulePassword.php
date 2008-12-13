@@ -181,7 +181,7 @@ class ModulePassword extends Module
 	/**
 	 * Set the new password
 	 */
-	private function setNewPassword()
+	protected function setNewPassword()
 	{
 		$objMember = $this->Database->prepare("SELECT id, username FROM tl_member WHERE login=1 AND activation=?")
 									->limit(1)
@@ -275,7 +275,7 @@ class ModulePassword extends Module
 	 * Create a new user and redirect
 	 * @param object
 	 */
-	private function sendPasswordLink(Database_Result $objMember)
+	protected function sendPasswordLink(Database_Result $objMember)
 	{
 		$arrChunks = array();
 		$confirmationId = md5(uniqid('', true));

@@ -97,7 +97,7 @@ class ModuleNewsReader extends ModuleNews
 
 		if ($objArticle->numRows < 1)
 		{
-			$this->Template->articles = '<p class="error">Invalid news ID</p>';
+			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 
 			// Do not index the page
 			$objPage->noSearch = 1;
@@ -205,7 +205,7 @@ class ModuleNewsReader extends ModuleNews
 			(
 				'name' => 'name',
 				'label' => $GLOBALS['TL_LANG']['MSC']['com_name'],
-				'value' => $this->User->firstname . ' ' . $this->User->lastname,
+				'value' => trim($this->User->firstname . ' ' . $this->User->lastname),
 				'inputType' => 'text',
 				'eval' => array('mandatory'=>true, 'maxlength'=>64)
 			),
@@ -309,7 +309,7 @@ class ModuleNewsReader extends ModuleNews
 	 * @param object
 	 * @param object
 	 */
-	private function addComment(Database_Result $objArticle, Database_Result $objArchive)
+	protected function addComment(Database_Result $objArticle, Database_Result $objArchive)
 	{
 		$strWebsite = $this->Input->post('website');
 
@@ -369,7 +369,7 @@ class ModuleNewsReader extends ModuleNews
 		$time = time();
 
 		// Prevent cross-site request forgeries
-		$strComment = preg_replace('/(href|src)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"/i', '$1="#"', $strComment);
+		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
 
 		// Prepare record
 		$arrSet = array

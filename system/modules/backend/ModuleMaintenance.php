@@ -70,7 +70,7 @@ class ModuleMaintenance extends BackendModule
 	/**
 	 * Handle the "clear cache" module
 	 */
-	private function cacheTables()
+	protected function cacheTables()
 	{
 		$arrCacheTables = array();
 
@@ -123,8 +123,6 @@ class ModuleMaintenance extends BackendModule
 				// XML sitemaps
 				elseif ($table == 'xml_sitemap')
 				{
-					include(TL_ROOT . '/system/config/dcaconfig.php');
-					
 					$this->import('Automator');
 					$this->Automator->generateSitemap();
 				}
@@ -170,7 +168,7 @@ class ModuleMaintenance extends BackendModule
 	/**
 	 * Handle the "live update" module
 	 */
-	private function liveUpdate()
+	protected function liveUpdate()
 	{
 		$this->Template->updateClass = 'tl_confirm';
 		$this->Template->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
@@ -234,7 +232,7 @@ class ModuleMaintenance extends BackendModule
 	/**
 	 * Run the live update
 	 */
-	private function runLiveUpdate()
+	protected function runLiveUpdate()
 	{
 		$archive = 'system/tmp/' . $this->Input->get('token');
 
@@ -366,7 +364,7 @@ class ModuleMaintenance extends BackendModule
 	/**
 	 * Rebuild the search index
 	 */
-	private function searchIndex()
+	protected function searchIndex()
 	{
 		$time = time();
 

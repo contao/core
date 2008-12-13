@@ -58,7 +58,7 @@ class DB_Oracle extends Database
 	{
 		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
 		{
-			$this->resConnection = @oci_connect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @oci_pconnect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
 		}
 
 		else

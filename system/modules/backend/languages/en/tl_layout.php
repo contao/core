@@ -39,6 +39,7 @@ $GLOBALS['TL_LANG']['tl_layout']['urchinId']      = array('Google Analytics ID',
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Style sheets', 'Please select the style sheets you want to include in the current layout.');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('RSS news feeds', 'Please select the RSS news feeds you want to include in the current layout.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('RSS calendar feeds', 'Please select the RSS calendar feeds you want to include in the current layout.');
+$GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add an optional class attribute that will be added to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'In case one of your custom scripts requires a <em>body onload</em> event, you can add the code here.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add additional meta tags and scripts that will be included at the end of the page head. Please note that default meta tags, script tags and style sheet tags are generated automatically.');
 $GLOBALS['TL_LANG']['tl_layout']['cols']          = array('Columns', 'Please choose the number of columns.');

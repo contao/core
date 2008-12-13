@@ -245,7 +245,7 @@ class ModuleExtension extends BackendModule
 	 * @param object
 	 * @return object
 	 */
-	private function newTemplate($strTemplate, Database_Result $objModule)
+	protected function newTemplate($strTemplate, Database_Result $objModule)
 	{
 		$objTemplate = new Template($strTemplate);
 

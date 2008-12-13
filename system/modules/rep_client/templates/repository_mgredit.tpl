@@ -12,6 +12,7 @@
 	$rep = &$this->rep;
 	$theme = &$rep->theme;
 	$text = &$GLOBALS['TL_LANG']['tl_repository'];
+	$state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 	$tabindex = 1;
 ?>
 
@@ -36,10 +37,10 @@
 <!-- update states -->
 <h3><label><?php echo $text['status']; ?></label></h3>
 <div class="tl_checkbox_container">
-  <input type="checkbox" name="repository_alpha" id="repository_alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; ?> /> <label for="repository_alpha"><?php echo $text['state_options']['alpha']; ?></label><br />
-  <input type="checkbox" name="repository_beta" id="repository_beta" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_beta) echo ' checked="checked"'; ?> /> <label for="repository_beta"><?php echo $text['state_options']['beta']; ?></label><br />
-  <input type="checkbox" name="repository_rc" id="repository_rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; ?> /> <label for="repository_rc"><?php echo $text['state_options']['rc']; ?></label><br />
-  <input type="checkbox" name="repository_stable" id="repository_stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; ?> /> <label for="repository_stable"><?php echo $text['state_options']['stable']; ?></label>
+  <input type="checkbox" name="repository_alpha" id="repository_alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; ?> /> <label for="repository_alpha"><?php echo $state_options['alpha']; ?></label><br />
+  <input type="checkbox" name="repository_beta" id="repository_beta" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_beta) echo ' checked="checked"'; ?> /> <label for="repository_beta"><?php echo $state_options['beta']; ?></label><br />
+  <input type="checkbox" name="repository_rc" id="repository_rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; ?> /> <label for="repository_rc"><?php echo $state_options['rc']; ?></label><br />
+  <input type="checkbox" name="repository_stable" id="repository_stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; ?> /> <label for="repository_stable"><?php echo $state_options['stable']; ?></label>
 </div>
 <p class="tl_help"><?php echo $text['updatehint']; ?></p>
 

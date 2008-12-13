@@ -132,7 +132,7 @@ class ModuleFaqList extends Module
 	 * @param object
 	 * @return string
 	 */
-	private function generateFaqLink(Database_Result $objFaq)
+	protected function generateFaqLink(Database_Result $objFaq)
 	{
 		if (!array_key_exists($objFaq->id, $this->arrTargets))
 		{

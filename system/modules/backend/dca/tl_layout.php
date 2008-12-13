@@ -99,11 +99,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('cols', 'header', 'footer', 'static'),
-		'default'                     => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;onload,urchinId,head;cols',
-		'1cl'                         => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;onload,urchinId,head;cols;header;footer;sections,sPosition;modules;static',
-		'2cll'                        => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;onload,urchinId,head;cols;widthLeft;header;footer;sections,sPosition;modules;static',
-		'2clr'                        => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;onload,urchinId,head;cols;widthRight;header;footer;sections,sPosition;modules;static',
-		'3cl'                         => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;onload,urchinId,head;cols;widthLeft,widthRight;header;footer;sections,sPosition;modules;static'
+		'default'                     => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;cssClass,onload,urchinId,head;cols',
+		'1cl'                         => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;cssClass,onload,urchinId,head;cols;header;footer;sections,sPosition;modules;static',
+		'2cll'                        => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;cssClass,onload,urchinId,head;cols;widthLeft;header;footer;sections,sPosition;modules;static',
+		'2clr'                        => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;cssClass,onload,urchinId,head;cols;widthRight;header;footer;sections,sPosition;modules;static',
+		'3cl'                         => 'name,fallback;template,mootools,doctype;stylesheet,newsfeeds,calendarfeeds;cssClass,onload,urchinId,head;cols;widthLeft,widthRight;header;footer;sections,sPosition;modules;static'
 	),
 
 	// Subpalettes
@@ -193,6 +193,14 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_layout', 'getCalendarfeeds'),
 			'eval'                    => array('multiple'=>true)
+		),
+		'cssClass' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cssClass'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255)
 		),
 		'onload' => array
 		(

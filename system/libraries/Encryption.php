@@ -55,7 +55,7 @@ class Encryption
 	 * Initialize the encryption module
 	 * @throws Exception
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		if (($this->resTd = mcrypt_module_open($GLOBALS['TL_CONFIG']['encryptionCipher'], '', $GLOBALS['TL_CONFIG']['encryptionMode'], '')) == false)
 		{

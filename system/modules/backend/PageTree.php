@@ -211,7 +211,7 @@ class PageTree extends Widget
 	 * @param boolean
 	 * @return string
 	 */
-	private function renderPagetree($id, $intMargin, $protectedPage=false)
+	protected function renderPagetree($id, $intMargin, $protectedPage=false)
 	{
 		static $session;
 		$session = $this->Session->getData();

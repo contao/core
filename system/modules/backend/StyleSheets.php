@@ -125,7 +125,7 @@ class StyleSheets extends Backend
 	 * Write a style sheet to a file
 	 * @param array
 	 */
-	private function writeStyleSheet($row)
+	protected function writeStyleSheet($row)
 	{
 		if (!strlen($row['id']) || !strlen($row['name']))
 		{
@@ -645,7 +645,7 @@ class StyleSheets extends Backend
 	 * Create a format definition and insert it into the database
 	 * @param array
 	 */
-	private function createDefinition($arrDefinition)
+	protected function createDefinition($arrDefinition)
 	{
 		$arrSet = array
 		(

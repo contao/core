@@ -290,7 +290,7 @@ class File extends System
 	 * @param string
 	 * @return boolean
 	 */
-	private function fputs($varData, $strMode)
+	protected function fputs($varData, $strMode)
 	{
 		if (!is_resource($this->resFile))
 		{
@@ -309,7 +309,7 @@ class File extends System
 	 * Get the mime type of a file based on its extension
 	 * @return string
 	 */
-	private function getMimeType()
+	protected function getMimeType()
 	{
 		$arrMimeTypes = array
 		(
@@ -418,7 +418,7 @@ class File extends System
 	 * Return an icon depending on the file type
 	 * @return string
 	 */
-	private function getIcon()
+	protected function getIcon()
 	{
 		switch ($this->extension)
 		{

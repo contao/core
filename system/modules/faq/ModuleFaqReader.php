@@ -92,7 +92,7 @@ class ModuleFaqReader extends Module
 
 		if ($objFaq->numRows < 1)
 		{
-			$this->Template->error = '<p class="error">Invalid FAQ ID</p>';
+			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 
 			// Do not index the page
 			$objPage->noSearch = 1;

@@ -48,7 +48,7 @@ class String
 	/**
 	 * Prevent direct instantiation (Singleton)
 	 */
-	private function __construct() {}
+	protected function __construct() {}
 
 
 	/**

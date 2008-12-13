@@ -408,7 +408,7 @@ class ZipReader
 	 * @return array
 	 * @throws Exception
 	 */
-	private function readCentralDirectory()
+	protected function readCentralDirectory()
 	{
 		$intOffset = 0;
 		$intInterval = min(filesize(TL_ROOT . '/' . $this->strFile), 1024);
@@ -518,7 +518,7 @@ class ZipReader
 	 * @param integer
 	 * @return integer
 	 */
-	private function decToUnix($intTime, $intDate)
+	protected function decToUnix($intTime, $intDate)
 	{
 		return mktime
 		(

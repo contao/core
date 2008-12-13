@@ -193,7 +193,7 @@ class Index extends Frontend
 	/**
 	 * Load the page from the cache table
 	 */
-	private function outputFromCache()
+	protected function outputFromCache()
 	{
 		// Build page if a user is logged in or there is POST data
 		if ($_SESSION['TL_USER_LOGGED_IN'] || count($_POST))
@@ -230,6 +230,24 @@ class Index extends Frontend
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
+		/**
+		 * Copyright notice
+		 * 
+		 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
+		 * PERMITTED TO RUN TYPOlight WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
+		 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
+		 */
+		$strBuffer = preg_replace
+		(
+			'/(<head[^>]*>)/',
+			"<!--\n\n"
+			. "\tThis website is powered by TYPOlight webCMS :: TYPOlight is licensed under GNU/LGPL\n"
+			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
+			. "\tVisit the project website at http://www.typolight.org for more information\n\n"
+			. "//-->\n$1",
+			$strBuffer, 1
+		);
+
 		// Session required to determine the referer
 		$this->import('Session');
 		$session = $this->Session->getData();
@@ -253,7 +271,14 @@ class Index extends Frontend
 
 		// Replace insert tags
 		$strBuffer = $this->replaceInsertTags($strBuffer);
-		echo str_replace(array('[lt]', '[gt]', '[&]'), array('&lt;', '&gt;', '&amp;'), $strBuffer);
+
+		// Restore basic entities
+		echo str_replace
+		(
+			array('[&]', '[lt]', '[gt]'),
+			array('&amp;', '&lt;', '&gt;'),
+			$strBuffer
+		);
 
 		// Stop execution
 		exit;

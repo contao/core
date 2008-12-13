@@ -63,14 +63,14 @@ $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Verify/repair %s %
 /**
  * Status messages
  */
-$GLOBALS['TL_LANG']['tl_repository']['statext']['uptodate']        = 'Up to date.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['notapproved']     = 'Not approved for %s %s.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['notapprovedwith'] = 'Not approved with %s %s.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['newversion']      = 'New version %s build %s available.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['depmissing']      = 'Missing required extension %s.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['extnotfound']     = 'Extension not found in repository.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['vernotfound']     = 'Installed version not found in repository.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['extneedkey']      = 'License key required, install extension in advance.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['errorinstall']    = 'Failed installation, update/repair adviced.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Up to date.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved']     = 'Not approved for %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Not approved with %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'New version %s build %s available.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Missing required extension %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Extension not found in repository.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installed version not found in repository.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'License key required, install extension in advance.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Failed installation, update/repair adviced.';
 
 ?>

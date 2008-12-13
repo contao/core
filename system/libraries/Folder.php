@@ -133,7 +133,7 @@ class Folder extends System
 	 * Recursively delete folder
 	 * @param string
 	 */
-	private function rmdir($strFolder)
+	protected function rmdir($strFolder)
 	{
 		$arrFiles = scan(TL_ROOT . '/' . $strFolder);
 

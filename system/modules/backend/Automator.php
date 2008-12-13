@@ -47,6 +47,9 @@ class Automator extends Backend
 		$time = time();
 		$this->removeOldFeeds();
 
+		// Only root pages should have sitemap names
+		$this->Database->execute("UPDATE tl_page SET createSitemap='', sitemapName='' WHERE type!='root'");
+
 		// Get a particular root page
 		if ($intId > 0)
 		{
@@ -163,7 +166,7 @@ class Automator extends Backend
 		// Check for .htaccess
 		if (!file_exists(TL_ROOT . '/system/tmp/.htaccess'))
 		{
-			$objFile = new File('/system/tmp/.htaccess');
+			$objFile = new File('system/tmp/.htaccess');
 			$objFile->write("order deny,allow\ndeny from all");
 			$objFile->close();
 		}

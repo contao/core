@@ -54,7 +54,7 @@ class Environment
 	/**
 	 * Prevent direct instantiation (Singleton)
 	 */
-	private function __construct() {}
+	protected function __construct() {}
 
 
 	/**
@@ -119,7 +119,7 @@ class Environment
 	 * Return the absolute path to the script (e.g. /home/www/html/website/index.php)
 	 * @return string
 	 */
-	private function scriptFilename()
+	protected function scriptFilename()
 	{
 		if (!array_key_exists('script_filename', $this->arrCache))
 		{
@@ -134,7 +134,7 @@ class Environment
 	 * Return the relative path to the script (e.g. /website/index.php)
 	 * @return string
 	 */
-	private function scriptName()
+	protected function scriptName()
 	{
 		if (!array_key_exists('scriptName', $this->arrCache))
 		{
@@ -149,7 +149,7 @@ class Environment
 	 * Alias for scriptName()
 	 * @return string
 	 */
-	private function phpSelf()
+	protected function phpSelf()
 	{
 		return $this->scriptName();
 	}
@@ -162,7 +162,7 @@ class Environment
 	 * and mod-rewrite rules might return an incorrect DOCUMENT_ROOT.
 	 * @return string
 	 */
-	private function documentRoot()
+	protected function documentRoot()
 	{
 		if (!array_key_exists('documentRoot', $this->arrCache))
 		{
@@ -209,7 +209,7 @@ class Environment
 	 * Return the request URI [path]?[query] (e.g. /typolight/index.php?id=2)
 	 * @return string
 	 */
-	private function requestUri()
+	protected function requestUri()
 	{
 		if (!array_key_exists('requestUri', $this->arrCache))
 		{
@@ -229,7 +229,7 @@ class Environment
 	 * Return accepted user languages as array
 	 * @return array
 	 */
-	private function httpAcceptLanguage()
+	protected function httpAcceptLanguage()
 	{
 		if (!array_key_exists('httpAcceptLanguage', $this->arrCache))
 		{
@@ -252,7 +252,7 @@ class Environment
 	 * Return accepted encoding types as array
 	 * @return array
 	 */
-	private function httpAcceptEncoding()
+	protected function httpAcceptEncoding()
 	{
 		if (!array_key_exists('httpAcceptEncoding', $this->arrCache))
 		{
@@ -267,7 +267,7 @@ class Environment
 	 * Return the user agent as string
 	 * @return string
 	 */
-	private function httpUserAgent()
+	protected function httpUserAgent()
 	{
 		if (!array_key_exists('httpUserAgent', $this->arrCache))
 		{
@@ -285,7 +285,7 @@ class Environment
 	 * Return true if the current page was requested via an SSL connection
 	 * @return boolean
 	 */
-	private function ssl()
+	protected function ssl()
 	{
 		if (!array_key_exists('ssl', $this->arrCache))
 		{
@@ -300,7 +300,7 @@ class Environment
 	 * Return the current URL without path or query string
 	 * @return string
 	 */
-	private function url()
+	protected function url()
 	{
 		if (!array_key_exists('url', $this->arrCache))
 		{
@@ -315,7 +315,7 @@ class Environment
 	 * Return the real REMOTE_ADDR even if a proxy server is used
 	 * @return string
 	 */
-	private function ip()
+	protected function ip()
 	{
 		if (!array_key_exists('ip', $this->arrCache))
 		{
@@ -330,7 +330,7 @@ class Environment
 	 * Return the SERVER_ADDR
 	 * @return string
 	 */
-	private function server()
+	protected function server()
 	{
 		if (!array_key_exists('server', $this->arrCache))
 		{
@@ -351,7 +351,7 @@ class Environment
 	 * Return the relative path to the base directory (e.g. /path)
 	 * @return string
 	 */
-	private function path()
+	protected function path()
 	{
 		return TL_PATH;
 	}
@@ -361,7 +361,7 @@ class Environment
 	 * Return the relativ path to the script (e.g. index.php)
 	 * @return string
 	 */
-	private function script()
+	protected function script()
 	{
 		if (!array_key_exists('script', $this->arrCache))
 		{
@@ -376,7 +376,7 @@ class Environment
 	 * Return the relativ path to the script and include the request (e.g. index.php?id=2)
 	 * @return string
 	 */
-	private function request()
+	protected function request()
 	{
 		if (!array_key_exists('request', $this->arrCache))
 		{
@@ -399,7 +399,7 @@ class Environment
 	 * Return the current URL and path that can be used in a <base> tag
 	 * @return string
 	 */
-	private function base()
+	protected function base()
 	{
 		if (!array_key_exists('base', $this->arrCache))
 		{
@@ -414,7 +414,7 @@ class Environment
 	 * Return the current host name
 	 * @return string
 	 */
-	private function host()
+	protected function host()
 	{
 		if (!array_key_exists('host', $this->arrCache))
 		{

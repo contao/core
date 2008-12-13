@@ -15,7 +15,7 @@
 <?php echo $this->head; ?>
 </head>
 
-<body<?php echo $this->onload; ?> id="top">
+<body id="top"<?php echo $this->class . $this->onload; ?>>
 <div id="wrapper">
 <?php if ($this->header): ?>
 

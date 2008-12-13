@@ -93,7 +93,7 @@ class News extends Frontend
 	 * Generate an XML files and save them to the root directory
 	 * @param array
 	 */
-	private function generateFiles($arrArchive)
+	protected function generateFiles($arrArchive)
 	{
 		$time = time();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
@@ -246,7 +246,7 @@ class News extends Frontend
 	 * @param string
 	 * @return string
 	 */
-	private function getLink(Database_Result $objArticle, $strUrl)
+	protected function getLink(Database_Result $objArticle, $strUrl)
 	{
 		if ($objArticle->source == 'external')
 		{

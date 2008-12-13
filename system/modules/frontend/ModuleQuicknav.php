@@ -96,7 +96,7 @@ class ModuleQuicknav extends Module
 	 * @param integer
 	 * @return array
 	 */
-	private function getQuicknavPages($pid, $level=1)
+	protected function getQuicknavPages($pid, $level=1)
 	{
 		global $objPage;
 
@@ -113,7 +113,7 @@ class ModuleQuicknav extends Module
 		$time = time();
 
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=? AND hide!=1" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
+		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
 									  ->execute($pid, 'root', 'error_403', 'error_404', $time, $time);
 
 		if ($objSubpages->numRows < 1)
@@ -130,23 +130,27 @@ class ModuleQuicknav extends Module
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
-				$arrPages[] = array
-				(
-					'level' => ($level - 2),
-					'title' => specialchars($objSubpages->title),
-					'pageTitle' => specialchars($objSubpages->pageTitle),
-					'href' => $this->generateFrontendUrl($objSubpages->row()),
-					'link' => $objSubpages->title
-				);
-
-				// Subpages
-				if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page')))))
+				// Check hidden pages
+				if (!$objSubpages->hide || $this->showHidden)
 				{
-					$subpages = $this->getQuicknavPages($objSubpages->id, $level);
+					$arrPages[] = array
+					(
+						'level' => ($level - 2),
+						'title' => specialchars($objSubpages->title),
+						'pageTitle' => specialchars($objSubpages->pageTitle),
+						'href' => $this->generateFrontendUrl($objSubpages->row()),
+						'link' => $objSubpages->title
+					);
 
-					if (is_array($subpages))
+					// Subpages
+					if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page')))))
 					{
-						$arrPages = array_merge($arrPages, $subpages);
+						$subpages = $this->getQuicknavPages($objSubpages->id, $level);
+
+						if (is_array($subpages))
+						{
+							$arrPages = array_merge($arrPages, $subpages);
+						}
 					}
 				}
 			}

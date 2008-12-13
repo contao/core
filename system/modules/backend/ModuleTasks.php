@@ -95,7 +95,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Show all tasks
 	 */
-	private function showAllTasks()
+	protected function showAllTasks()
 	{
 		$this->Template->tasks = array();
 
@@ -190,7 +190,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Create a task
 	 */
-	private function createTask()
+	protected function createTask()
 	{
 		$this->Template = new BackendTemplate('be_task_create');
 
@@ -265,7 +265,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Edit a task
 	 */
-	private function editTask()
+	protected function editTask()
 	{
 		$this->Template = new BackendTemplate('be_task_edit');
 
@@ -381,7 +381,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Delete a task
 	 */
-	private function deleteTask()
+	protected function deleteTask()
 	{
 		$objTask = $this->Database->prepare("SELECT * FROM tl_task WHERE id=?")
 								  ->limit(1)
@@ -434,7 +434,7 @@ class ModuleTasks extends BackendModule
 	 * Select all tasks from the DB and return the result object
 	 * @return object
 	 */
-	private function getTaskObject()
+	protected function getTaskObject()
 	{
 		$where = array();
 		$value = array();
@@ -576,7 +576,7 @@ class ModuleTasks extends BackendModule
 	 * @param mixed
 	 * @return object
 	 */
-	private function getTitleWidget($value=null)
+	protected function getTitleWidget($value=null)
 	{
 		$widget = new TextField();
 
@@ -613,7 +613,7 @@ class ModuleTasks extends BackendModule
 	 * @param mixed
 	 * @return object
 	 */
-	private function getAssignedToWidget($value=null)
+	protected function getAssignedToWidget($value=null)
 	{
 		$widget = new SelectMenu();
 
@@ -675,7 +675,7 @@ class ModuleTasks extends BackendModule
 	 * @param mixed
 	 * @return object
 	 */
-	private function getDeadlineWidget($value=null)
+	protected function getDeadlineWidget($value=null)
 	{
 		$widget = new TextField();
 
@@ -715,7 +715,7 @@ class ModuleTasks extends BackendModule
 	 * @param integer
 	 * @return object
 	 */
-	private function getStatusWidget($value=null, $progress=null)
+	protected function getStatusWidget($value=null, $progress=null)
 	{
 		$widget = new SelectMenu();
 
@@ -764,7 +764,7 @@ class ModuleTasks extends BackendModule
 	 * @param mixed
 	 * @return object
 	 */
-	private function getProgressWidget($value=null)
+	protected function getProgressWidget($value=null)
 	{
 		$widget = new SelectMenu();
 
@@ -811,7 +811,7 @@ class ModuleTasks extends BackendModule
 	 * @param mixed
 	 * @return object
 	 */
-	private function getCommentWidget($value=null)
+	protected function getCommentWidget($value=null)
 	{
 		$widget = new TextArea();
 
@@ -848,7 +848,7 @@ class ModuleTasks extends BackendModule
 	 * Return the notify widget as object
 	 * @return object
 	 */
-	private function getNotifyWidget()
+	protected function getNotifyWidget()
 	{
 		$widget = new CheckBox();
 

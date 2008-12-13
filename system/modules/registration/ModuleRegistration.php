@@ -270,7 +270,7 @@ class ModuleRegistration extends Module
 	 * Create a new user and redirect
 	 * @param array
 	 */
-	private function createNewUser($arrData)
+	protected function createNewUser($arrData)
 	{
 		$arrData['tstamp'] = time();
 		$arrData['groups'] = $this->reg_groups;
@@ -354,7 +354,7 @@ class ModuleRegistration extends Module
 	/**
 	 * Activate an account
 	 */
-	private function activateAcount()
+	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
 		$this->Template = new FrontendTemplate($this->strTemplate);
@@ -427,7 +427,7 @@ class ModuleRegistration extends Module
 	 * @param integer
 	 * @param array
 	 */
-	private function sendAdminNotification($intId, $arrData)
+	protected function sendAdminNotification($intId, $arrData)
 	{
 		$objEmail = new Email();
 

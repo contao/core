@@ -163,7 +163,22 @@ class FTP extends Files
 			$this->delete($strNewName);
 		}
 
-		return @ftp_rename($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName, $GLOBALS['TL_CONFIG']['ftpPath'] . $strNewName);
+		// Rename directories
+		if (is_dir(TL_ROOT . '/' . $strOldName))
+		{
+			return @ftp_rename($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName, $GLOBALS['TL_CONFIG']['ftpPath'] . $strNewName);
+		}
+
+		// Copy files to set the correct owner
+		$return = $this->copy($strOldName, $strNewName);
+
+		// Delete the old file
+		if (!@unlink(TL_ROOT . '/' . $strOldName))
+		{
+			$this->delete($strOldName);
+		}
+
+		return $return;
 	}
 
 

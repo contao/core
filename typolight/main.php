@@ -106,7 +106,7 @@ class Main extends Backend
 	/**
 	 * Add the welcome screen
 	 */
-	private function welcomeScreen()
+	protected function welcomeScreen()
 	{
 		$this->loadLanguageFile('explain');
 
@@ -216,7 +216,7 @@ class Main extends Backend
 	/**
 	 * Output the template file
 	 */
-	private function output()
+	protected function output()
 	{
 		if (!strlen($this->Template->headline))
 		{

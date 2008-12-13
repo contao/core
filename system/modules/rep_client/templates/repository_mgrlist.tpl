@@ -12,6 +12,8 @@
 	$rep = &$this->rep;
 	$theme = &$rep->theme;
 	$text = &$GLOBALS['TL_LANG']['tl_repository'];
+	$statext = &$GLOBALS['TL_LANG']['tl_repository_statext'];
+	$state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 ?>
 
 <div id="tl_buttons" class="buttonwrapper">
@@ -40,16 +42,16 @@
   <td class="col_build"><?php echo $ext->build; ?></td>
   <td class="col_updates">
 <?php 
-if ((int)$ext->stable>0) echo $theme->createImage('stable16', $text['state_options']['stable'], 'title="'.$text['state_options']['stable'].'"');
-if ((int)$ext->rc>0) echo $theme->createImage('rc16', $text['state_options']['rc'], 'title="'.$text['state_options']['rc'].'"');
-if ((int)$ext->beta>0) echo $theme->createImage('beta16', $text['state_options']['beta'], 'title="'.$text['state_options']['beta'].'"');
-if ((int)$ext->alpha>0) echo $theme->createImage('alpha16', $text['state_options']['alpha'], 'title="'.$text['state_options']['alpha'].'"'); 
+if ((int)$ext->stable>0) echo $theme->createImage('stable16', $state_options['stable'], 'title="'.$state_options['stable'].'"');
+if ((int)$ext->rc>0) echo $theme->createImage('rc16', $state_options['rc'], 'title="'.$state_options['rc'].'"');
+if ((int)$ext->beta>0) echo $theme->createImage('beta16', $state_options['beta'], 'title="'.$state_options['beta'].'"');
+if ((int)$ext->alpha>0) echo $theme->createImage('alpha16', $state_options['alpha'], 'title="'.$state_options['alpha'].'"'); 
 ?>
   </td>
   <td class="col_status">
 <?php
 foreach ($ext->status as $sta) {
-	echo '<div class="color_'.$sta->color.'">'.sprintf($text['statext'][$sta->text], $sta->par1, $sta->par2).'</div>'."\n";
+	echo '<div class="color_'.$sta->color.'">'.sprintf($statext[$sta->text], $sta->par1, $sta->par2).'</div>'."\n";
 } // foreach status 
 ?>
   </td>

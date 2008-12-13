@@ -154,7 +154,7 @@ class ContentComments extends ContentElement
 			(
 				'name' => 'name',
 				'label' => $GLOBALS['TL_LANG']['MSC']['com_name'],
-				'value' => $this->User->firstname . ' ' . $this->User->lastname,
+				'value' => trim($this->User->firstname . ' ' . $this->User->lastname),
 				'inputType' => 'text',
 				'eval' => array('mandatory'=>true, 'maxlength'=>64)
 			),
@@ -256,7 +256,7 @@ class ContentComments extends ContentElement
 	 * - [email][/email]
 	 * - [email=name@domain.com][/email]
 	 */
-	private function addComment()
+	protected function addComment()
 	{
 		$strWebsite = $this->Input->post('website');
 
@@ -314,7 +314,7 @@ class ContentComments extends ContentElement
 		}
 
 		// Prevent cross-site request forgeries
-		$strComment = preg_replace('/(href|src)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"/i', '$1="#"', $strComment);
+		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
 
 		// Prepare record
 		$arrSet = array

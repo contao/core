@@ -75,7 +75,7 @@ class DB_Mssql extends Database
 
 		if (is_resource($this->resConnection))
 		{
-			@mssql_select_db($GLOBALS['TL_CONFIG']['dbDatabase']);
+			@mssql_select_db($GLOBALS['TL_CONFIG']['dbDatabase'], $this->resConnection);
 		}
 	}
 
@@ -85,7 +85,7 @@ class DB_Mssql extends Database
 	 */
 	protected function disconnect()
 	{
-		@mssql_close();
+		@mssql_close($this->resConnection);
 	}
 
 
@@ -137,7 +137,7 @@ class DB_Mssql extends Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		return @mssql_select_db($strDatabase);
+		return @mssql_select_db($strDatabase, $this->resConnection);
 	}
 
 
@@ -146,7 +146,7 @@ class DB_Mssql extends Database
 	 */
 	protected function begin_transaction()
 	{
-		@mssql_query("BEGIN TRAN");
+		@mssql_query("BEGIN TRAN", $this->resConnection);
 	}
 
 
@@ -155,7 +155,7 @@ class DB_Mssql extends Database
 	 */
 	protected function commit_transaction()
 	{
-		@mssql_query("COMMIT TRAN");
+		@mssql_query("COMMIT TRAN", $this->resConnection);
 	}
 
 
@@ -164,7 +164,7 @@ class DB_Mssql extends Database
 	 */
 	protected function rollback_transaction()
 	{
-		@mssql_query("ROLLBACK TRAN");
+		@mssql_query("ROLLBACK TRAN", $this->resConnection);
 	}
 }
 
@@ -230,7 +230,7 @@ class DB_Mssql_Statement extends Database_Statement
 	 */
 	protected function execute_query()
 	{
-		return @mssql_query($this->strQuery);
+		return @mssql_query($this->strQuery, $this->resConnection);
 	}
 
 
@@ -250,7 +250,7 @@ class DB_Mssql_Statement extends Database_Statement
 	 */
 	protected function affected_rows()
 	{
-		return @mssql_affected_rows();
+		return @mssql_rows_affected($this->resConnection);
 	}
 
 
@@ -260,7 +260,7 @@ class DB_Mssql_Statement extends Database_Statement
 	 */
 	protected function insert_id()
 	{
-		return @mssql_query('SELECT @@IDENTITY');
+		return @mssql_query('SELECT @@IDENTITY', $this->resConnection);
 	}
 
 

@@ -121,7 +121,8 @@ class ModuleArticleList extends Module
 			(
 				'link' => $objArticles->title,
 				'title' => specialchars($objArticles->title),
-				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($objArticles->title)
+				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($objArticles->title),
+				'articleId' => $objArticles->id
 			);
 		}
 

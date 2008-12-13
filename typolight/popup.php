@@ -143,7 +143,7 @@ class Popup extends Backend
 	/**
 	 * Output the template file
 	 */
-	private function output()
+	protected function output()
 	{
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;

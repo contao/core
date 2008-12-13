@@ -225,7 +225,7 @@ class PunBridge extends Frontend
 	 * Connect to the punBB database
 	 * @throws Exception
 	 */
-	private function setDatabase()
+	protected function setDatabase()
 	{
 		if (!$this->Database->setDatabase($GLOBALS['TL_CONFIG']['PUN']['db_name']))
 		{
@@ -238,7 +238,7 @@ class PunBridge extends Frontend
 	 * Connect to the TYPOlight database
 	 * @throws Exception
 	 */
-	private function restoreDatabase()
+	protected function restoreDatabase()
 	{
 		if (!$this->Database->setDatabase($GLOBALS['TL_CONFIG']['dbDatabase']))
 		{

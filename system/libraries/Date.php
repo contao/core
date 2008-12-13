@@ -294,7 +294,7 @@ class Date
 	 * Convert a date string into a UNIX timestamp using a particular date format
 	 * @throws Exception
 	 */
-	private function dateToUnix()
+	protected function dateToUnix()
 	{
 		if (preg_match('/[BbCcDEeFfIJKkLlMNOoPpQqRrSTtUuVvWwXxZz]+/', $this->strFormat))
 		{

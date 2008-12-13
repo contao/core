@@ -167,8 +167,16 @@ class FrontendTemplate extends Template
 			header('Pragma: no-cache');
 		}
 
+		// Replace insert tags
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
-		$this->strBuffer = str_replace(array('[lt]', '[gt]', '[&]'), array('&lt;', '&gt;', '&amp;'), $this->strBuffer);
+
+		// Restore basic entities
+		$this->strBuffer = str_replace
+		(
+			array('[&]', '[lt]', '[gt]'),
+			array('&amp;', '&lt;', '&gt;'),
+			$this->strBuffer
+		);
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)

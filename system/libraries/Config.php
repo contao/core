@@ -54,7 +54,7 @@ class Config
 	/**
 	 * Load all configuration files
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		include(TL_ROOT . '/system/config/config.php');
 		include(TL_ROOT . '/system/config/localconfig.php');
@@ -188,7 +188,7 @@ class Config
 	 * @return array
 	 * @throws Exception
 	 */
-	private function read()
+	protected function read()
 	{
 		$arrFile = file(TL_ROOT . '/system/config/localconfig.php');
 
@@ -212,7 +212,7 @@ class Config
 	 * @param mixed
 	 * @throws Exception
 	 */
-	private function save($arrFile)
+	protected function save($arrFile)
 	{
 		$strFile = implode('', $arrFile);
 
@@ -227,7 +227,7 @@ class Config
 	 * @param mixed
 	 * @return mixed
 	 */
-	private function escape($varValue)
+	protected function escape($varValue)
 	{
 		if (is_numeric($varValue))
 		{

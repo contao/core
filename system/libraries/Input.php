@@ -54,7 +54,7 @@ class Input
 	/**
 	 * Prevent direct instantiation (Singleton)
 	 */
-	private function __construct() {}
+	protected function __construct() {}
 
 
 	/**
@@ -90,9 +90,9 @@ class Input
 
 		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
 		{
-			$varValue = $this->stripTags($_GET[$strKey]);
+			$varValue = $this->decodeEntities($_GET[$strKey]);
 			$varValue = $this->xssClean($varValue, STRICT_MODE);
-			$varValue = $this->decodeEntities($varValue);
+			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
@@ -118,9 +118,10 @@ class Input
 
 		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
 		{
-			$varValue = $this->stripTags($this->findPost($strKey));
-			$varValue = $this->xssClean($varValue, STRICT_MODE);
+			$varValue = $this->findPost($strKey);
 			$varValue = $this->decodeEntities($varValue);
+			$varValue = $this->xssClean($varValue, STRICT_MODE);
+			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
@@ -146,8 +147,10 @@ class Input
 
 		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
 		{
-			$varValue = $this->stripTags($this->findPost($strKey), $GLOBALS['TL_CONFIG']['allowedTags']);
+			$varValue = $this->findPost($strKey);
+			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue);
+			$varValue = $this->stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
 
 			if (!$blnDecodeEntities)
 			{
@@ -172,7 +175,8 @@ class Input
 
 		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
 		{
-			$varValue = get_magic_quotes_gpc() ? stripslashes($this->findPost($strKey)) : $this->findPost($strKey);
+			$varValue = $this->findPost($strKey);
+			$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
 			$varValue = $this->xssClean($varValue);
 
 			$this->arrCache[$strCacheKey][$strKey] = $varValue;
@@ -194,9 +198,9 @@ class Input
 
 		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
 		{
-			$varValue = $this->stripTags($_COOKIE[$strKey]);
+			$varValue = $this->decodeEntities($_COOKIE[$strKey]);
 			$varValue = $this->xssClean($varValue, STRICT_MODE);
-			$varValue = $this->decodeEntities($varValue);
+			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
 			{
@@ -259,7 +263,7 @@ class Input
 	 * @param  boolean
 	 * @return string
 	 */
-	private function stripTags($varValue, $strAllowedTags='')
+	protected function stripTags($varValue, $strAllowedTags='')
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -271,8 +275,6 @@ class Input
 
 			return $varValue;
 		}
-
-		$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
 
 		$varValue = str_replace(array('<!--','<![', '-->'), array('&lt;!--', '&lt;![', '--&gt;'), $varValue);
 		$varValue = strip_tags($varValue, $strAllowedTags);
@@ -288,7 +290,7 @@ class Input
 	 * @param  boolean
 	 * @return mixed
 	 */
-	private function xssClean($varValue, $blnStrictMode=false)
+	protected function xssClean($varValue, $blnStrictMode=false)
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -392,7 +394,7 @@ class Input
 	 * @param  boolean
 	 * @return string
 	 */
-	private function decodeEntities($varValue)
+	protected function decodeEntities($varValue)
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -405,6 +407,16 @@ class Input
 			return $varValue;
 		}
 
+		$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
+
+		// Preserve basic entities
+		$varValue = str_replace
+		(
+			array('&amp;', '&lt;', '&gt;'),
+			array('[&]', '[lt]', '[gt]'),
+			$varValue
+		);
+
 		return html_entity_decode($varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
 	}
 
@@ -415,7 +427,7 @@ class Input
 	 * @param  boolean
 	 * @return string
 	 */
-	private function encodeSpecialChars($varValue)
+	protected function encodeSpecialChars($varValue)
 	{
 		// Recursively clean arrays
 		if (is_array($varValue))
@@ -440,7 +452,7 @@ class Input
 	 * @param string
 	 * @return mixed
 	 */
-	private function findPost($strKey)
+	protected function findPost($strKey)
 	{
 		if (isset($_POST[$strKey]))
 		{

@@ -85,7 +85,7 @@ $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Hier können Sie festlegen, welche Mitgliedergruppen das Modul sehen dürfen.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und danach', 'Bitte geben Sie den Abstand vor und nach dem Modul in Pixeln ein.');
 $GLOBALS['TL_LANG']['tl_module']['align']          = array('Ausrichtung des Moduls', 'Hier können Sie die Ausrichtung des Moduls innerhalb seiner Spalte ändern.');
-$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('Stylesheet-ID und -Klasse', 'Hier können Sie eine Stylesheet-ID (id attribute) sowie eine odere mehrere Stylesheet-Klassen (class attribute) eingeben, um das Modul mittles CSS formatieren zu können.');
+$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('Stylesheet-ID und -Klasse', 'Hier können Sie eine Stylesheet-ID (id attribute) sowie eine oder mehrere Stylesheet-Klassen (class attribute) eingeben, um das Modul mittels CSS formatieren zu können.');
 
 
 /**

@@ -274,6 +274,7 @@ class tl_newsletter extends Backend
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'paste':
 			case 'select':
 				// Allow
 				break;
@@ -286,9 +287,17 @@ class tl_newsletter extends Backend
 				}
 				break;
 
+			case 'cut':
+			case 'copy':
+				if (!in_array($this->Input->get('pid'), $root))
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" to channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				// NO BREAK STATEMENT HERE
+
 			case 'edit':
 			case 'show':
-			case 'copy':
 			case 'delete':
 				$objChannel = $this->Database->prepare("SELECT pid FROM tl_newsletter WHERE id=?")
 											 ->limit(1)

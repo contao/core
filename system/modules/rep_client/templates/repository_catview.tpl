@@ -12,6 +12,8 @@
 	$rep = &$this->rep;
 	$theme = &$rep->theme;
 	$text = &$GLOBALS['TL_LANG']['tl_repository'];
+	$type_options = &$GLOBALS['TL_LANG']['tl_repository_type_options'];
+	$category_options = &$GLOBALS['TL_LANG']['tl_repository_category_options'];
 	$ext = &$rep->extensions[0];
 	$langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 ?>
@@ -56,7 +58,7 @@
   <th class="viewcol1"><?php echo $text['version'][0]; ?></th>
   <td class="viewcol2 status-<?php echo $ext->version % 10; ?>"><?php echo Repository::formatVersion($ext->version); ?></td>
   <th class="viewcol3"><?php echo $text['type'][0]; ?></th>
-  <td class="type-<?php echo $ext->type; ?>"><?php echo $text['type_options'][$ext->type]; ?></td>
+  <td class="type-<?php echo $ext->type; ?>"><?php echo $type_options[$ext->type]; ?></td>
 </tr>
 <tr>
   <th><?php echo $text['releasedate'][0]; ?></th>
@@ -73,7 +75,7 @@
   <th><?php echo $text['license'][0]; ?></th>
   <td><?php echo $ext->license; ?></td>
   <th><?php echo $text['category'][0]; ?></th>
-  <td><?php echo $text['category_options'][$ext->category]; ?></td>
+  <td><?php echo $category_options[$ext->category]; ?></td>
 </tr>
 <tr class="spacer"><td colspan="4" class="spacer">&nbsp;</td></tr>
 <tr>

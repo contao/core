@@ -12,6 +12,8 @@
 	$rep = &$this->rep;
 	$theme = &$rep->theme;
 	$text = &$GLOBALS['TL_LANG']['tl_repository'];
+	$state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
+	$statext = &$GLOBALS['TL_LANG']['tl_repository_statext'];
 	$tabindex = 1;
 ?>
 
@@ -33,10 +35,10 @@
 <?php $nm = ($rep->f_stage==$rep->inst_stages) ? 'repository_' : 'repository_dis_'; ?>
 <h3><label for="<?php echo $nm; ?>container"><?php echo $text['status']; ?></label></h3>
 <div id="<?php echo $nm; ?>container" class="tl_checkbox_container">
-  <input type="checkbox" name="<?php echo $nm; ?>alpha" id="<?php echo $nm; ?>alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>alpha"><?php echo $text['state_options']['alpha']; ?></label><br />
-  <input type="checkbox" name="<?php echo $nm; ?>beta" id="<?php echo $nm; ?>beta" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_beta) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>beta"><?php echo $text['state_options']['beta']; ?></label><br />
-  <input type="checkbox" name="<?php echo $nm; ?>rc" id="<?php echo $nm; ?>rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>rc"><?php echo $text['state_options']['rc']; ?></label><br />
-  <input type="checkbox" name="<?php echo $nm; ?>stable" id="<?php echo $nm; ?>stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>stable"><?php echo $text['state_options']['stable']; ?></label>
+  <input type="checkbox" name="<?php echo $nm; ?>alpha" id="<?php echo $nm; ?>alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>alpha"><?php echo $state_options['alpha']; ?></label><br />
+  <input type="checkbox" name="<?php echo $nm; ?>beta" id="<?php echo $nm; ?>beta" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_beta) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>beta"><?php echo $state_options['beta']; ?></label><br />
+  <input type="checkbox" name="<?php echo $nm; ?>rc" id="<?php echo $nm; ?>rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>rc"><?php echo $state_options['rc']; ?></label><br />
+  <input type="checkbox" name="<?php echo $nm; ?>stable" id="<?php echo $nm; ?>stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; if ($rep->f_stage>$rep->inst_stages) echo ' disabled="disabled"'; ?> onfocus="Backend.getScrollOffset();" /> <label for="<?php echo $nm; ?>stable"><?php echo $state_options['stable']; ?></label>
 </div>
 <p class="tl_help"><?php echo $text['stateshint']; ?></p>
 <?php if ($rep->f_stage>$rep->inst_stages) { ?>
@@ -101,7 +103,7 @@ foreach ($rep->extensions as $ext)
   <td class="col_status">
 <?php
 foreach ($act->status as $sta) {
-	echo '    <div class="color_'.$sta->color.'">'.sprintf($text['statext'][$sta->text], $sta->par1, $sta->par2).'</div>'."\n";
+	echo '    <div class="color_'.$sta->color.'">'.sprintf($statext[$sta->text], $sta->par1, $sta->par2).'</div>'."\n";
 } // foreach status 
 ?>
   </td>

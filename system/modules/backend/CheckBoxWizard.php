@@ -185,7 +185,7 @@ class CheckBoxWizard extends Widget
 	 * @param string
 	 * @return string
 	 */
-	private function generateCheckbox($arrOption, $i, $strButtons)
+	protected function generateCheckbox($arrOption, $i, $strButtons)
 	{
 		return sprintf('<span><input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset();" /> %s <label for="opt_%s">%s</label></span>',
 						$this->strName . ($this->multiple ? '[]' : ''),

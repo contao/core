@@ -115,7 +115,7 @@ class PageRegular extends Frontend
 	 * @param integer
 	 * @return object
 	 */
-	private function getPageLayout($intId)
+	protected function getPageLayout($intId)
 	{
 		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=?")
 									->limit(1)
@@ -147,7 +147,7 @@ class PageRegular extends Frontend
 	 * @param object
 	 * @param object
 	 */
-	private function createTemplate(Database_Result $objPage, Database_Result $objLayout)
+	protected function createTemplate(Database_Result $objPage, Database_Result $objLayout)
 	{
 		$this->Template = new FrontendTemplate($objPage->template);
 
@@ -188,13 +188,22 @@ class PageRegular extends Frontend
 			$this->Template->onload = sprintf(' onload="%s"', $strOnload);
 		}
 
+		// Get css classes from the layout and the page
+		$class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
+
 		// HOOK: extension "bodyclass"
 		if (in_array('bodyclass', $this->Config->getActiveModules()))
 		{
 			if (strlen($objPage->cssBody))
 			{
-				$this->Template->onload .= sprintf(' class="%s"', $objPage->cssBody);
+				$class .= ' ' . $objPage->cssBody;
 			}
+		}
+
+		// Add body CSS class
+		if (strlen($class))
+		{
+			$this->Template->class = ' class="' . $class . '"';
 		}
 
 		// Mootools script
@@ -291,7 +300,7 @@ class PageRegular extends Frontend
 	 * Create all style sheets and scripts
 	 * @param object
 	 */
-	private function createStylesheets(Database_Result $objLayout)
+	protected function createStylesheets(Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);

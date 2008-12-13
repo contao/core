@@ -27,7 +27,7 @@ CREATE TABLE `tl_module` (
   `reg_homeDir` varchar(255) NOT NULL default '',
   `reg_allowLogin` char(1) NOT NULL default '',
   `reg_activate` char(1) NOT NULL default '',
-  `reg_jumpTo` smallint(5) unsigned NOT NULL default '0',
+  `reg_jumpTo` int(10) unsigned NOT NULL default '0',
   `reg_skipName` char(1) NOT NULL default '',
   `reg_text` text NULL,
   `reg_password` text NULL

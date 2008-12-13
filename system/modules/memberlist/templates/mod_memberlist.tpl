@@ -57,12 +57,12 @@
   <tr class="<?php echo $class; ?>">
 <?php foreach ($row as $col): ?>
 <?php if ($col['field'] == 'username'): ?>
-    <td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>?id=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
+    <td class="body <?php echo $col['class']; ?>"><a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><?php echo $col['content']; ?></a></td>
 <?php else: ?>
     <td class="body <?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
 <?php endif; ?>
 <?php endforeach; ?>
-    <td class="body <?php echo $this->col_last; ?> col_last"><a href="<?php echo $this->url; ?>?id=<?php echo $col['id']; ?>"><img src="system/modules/memberlist/html/details.gif" alt="" /></a></td>
+    <td class="body <?php echo $this->col_last; ?> col_last"><a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><img src="system/modules/memberlist/html/details.gif" alt="" /></a></td>
   </tr>
 <?php endforeach; ?>
 </tbody>

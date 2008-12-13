@@ -66,14 +66,14 @@ $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Prüfung/Reparatur
 /**
  * Status messages
  */
-$GLOBALS['TL_LANG']['tl_repository']['statext']['uptodate']        = 'Aktuell.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['notapproved']     = 'Nicht erprobt für %s %s.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['notapprovedwith'] = 'Nicht erprobt mit %s %s.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['newversion']      = 'Neue Version %s Build %s verfügbar.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['depmissing']      = 'Benötigte Erweiterung %s fehlt.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['extnotfound']     = 'Erweiterung im Verzeichnis nicht gefunden.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['vernotfound']     = 'Installierte Version im Verzeichnis nicht gefunden.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['extneedkey']      = 'Lizenzschlüssel benötigt, Erweiterung vorgängig installieren.';
-$GLOBALS['TL_LANG']['tl_repository']['statext']['errorinstall']    = 'Beschädigt, Aktualisierung/Reparatur notwendig.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Aktuell.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved']     = 'Nicht erprobt für %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Nicht erprobt mit %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'Neue Version %s Build %s verfügbar.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Benötigte Erweiterung %s fehlt.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Erweiterung im Verzeichnis nicht gefunden.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installierte Version im Verzeichnis nicht gefunden.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'Lizenzschlüssel benötigt, Erweiterung vorgängig installieren.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Beschädigt, Aktualisierung/Reparatur notwendig.';
  
 ?>

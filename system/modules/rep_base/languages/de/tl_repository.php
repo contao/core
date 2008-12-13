@@ -82,37 +82,37 @@ $GLOBALS['TL_LANG']['tl_repository']['yes']               = 'ja';
 /**
  * Types
  */
-$GLOBALS['TL_LANG']['tl_repository']['type_options']['free']       = 'Frei';
-$GLOBALS['TL_LANG']['tl_repository']['type_options']['private']    = 'Privat';
-$GLOBALS['TL_LANG']['tl_repository']['type_options']['commercial'] = 'Kommerziell';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['free']       = 'Frei';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['private']    = 'Privat';
+$GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Kommerziell';
 
 /**
  * Categories
  */
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['application'] = 'Anwendung';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['utility']     = 'Hilfsprogramm';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['template']    = 'Vorlage';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['widget']      = 'Widget';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['plugin']      = 'Plugin';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['other']       = 'Andere';
-$GLOBALS['TL_LANG']['tl_repository']['category_options']['core']        = 'Core';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Anwendung';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility']     = 'Hilfsprogramm';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Vorlage';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget']      = 'Widget';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['plugin']      = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['other']       = 'Andere';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['core']        = 'Core';
 
 /**
  * Sorting
  */
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['reldate'] = 'Freigabedatum';
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['rating']  = 'Wertung';
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['popular'] = 'Popularität';
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['name']    = 'Name';
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['title']   = 'Titel';
-$GLOBALS['TL_LANG']['tl_repository']['order_options']['author']  = 'Autor';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['reldate'] = 'Freigabedatum';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['rating']  = 'Wertung';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularität';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['name']    = 'Name';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['title']   = 'Titel';
+$GLOBALS['TL_LANG']['tl_repository_order_options']['author']  = 'Autor';
 
 /**
  * States
  */
-$GLOBALS['TL_LANG']['tl_repository']['state_options']['alpha']   = 'Alfa';
-$GLOBALS['TL_LANG']['tl_repository']['state_options']['beta']    = 'Beta';
-$GLOBALS['TL_LANG']['tl_repository']['state_options']['rc']      = 'RC';
-$GLOBALS['TL_LANG']['tl_repository']['state_options']['stable']  = 'Stabil';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['alpha']   = 'Alpha';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['beta']    = 'Beta';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['rc']      = 'RC';
+$GLOBALS['TL_LANG']['tl_repository_state_options']['stable']  = 'Stabil';
  
 ?>

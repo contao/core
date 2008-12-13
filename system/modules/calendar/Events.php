@@ -216,7 +216,7 @@ abstract class Events extends Module
 	 * @param string
 	 * @param integer
 	 */
-	private function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intLimit, $intCalendar)
+	protected function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intLimit, $intCalendar)
 	{
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
@@ -257,6 +257,7 @@ abstract class Events extends Module
 			}
 		}
 
+		// Store raw data
 		$arrEvent = $objEvents->row();
 
 		// Overwrite some settings
@@ -303,7 +304,7 @@ abstract class Events extends Module
 	 * @param string
 	 * @return string
 	 */
-	private function generateEventUrl(Database_Result $objEvent, $strUrl)
+	protected function generateEventUrl(Database_Result $objEvent, $strUrl)
 	{
 		// Link to default page
 		if ($objEvent->source == 'default' || !strlen($objEvent->source))

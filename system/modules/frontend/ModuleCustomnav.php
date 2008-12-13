@@ -123,9 +123,6 @@ class ModuleCustomnav extends Module
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_1';
 
-		$count = 0;
-		$limit = count($arrPages);
-
 		foreach ($arrPages as $arrPage)
 		{
 			$_groups = deserialize($arrPage['groups']);
@@ -133,18 +130,6 @@ class ModuleCustomnav extends Module
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$arrPage['protected'] || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
-				$class = '';
-
-				if (++$count == 1)
-				{
-					$class .= ' first';
-				}
-
-				if ($count == $limit)
-				{
-					$class .= ' last';
-				}
-
 				// Get href
 				switch ($arrPage['type'])
 				{
@@ -175,7 +160,7 @@ class ModuleCustomnav extends Module
 					$items[] = array
 					(
 						'isActive' => true,
-						'class' => trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : '') . $class),
+						'class' => (strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''),
 						'pageTitle' => specialchars($arrPage['pageTitle']),
 						'title' => specialchars($arrPage['title']),
 						'link' => $arrPage['title'],
@@ -192,7 +177,7 @@ class ModuleCustomnav extends Module
 				$items[] = array
 				(
 					'isActive' => false,
-					'class' => trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : '') . $class),
+					'class' => (strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''),
 					'pageTitle' => specialchars($arrPage['pageTitle']),
 					'title' => specialchars($arrPage['title']),
 					'link' => $arrPage['title'],
@@ -205,6 +190,11 @@ class ModuleCustomnav extends Module
 			}
 		}
 
+		// Add classes first and last
+		$items[0]['class'] = trim($items[0]['class'] . ' first');
+		$last = count($items) - 1;
+		$items[$last]['class'] = trim($items[$last]['class'] . ' last');
+		
 		$objTemplate->items = $items;
 
 		$this->Template->skipId = 'skipNavigation' . $this->id;

@@ -108,7 +108,7 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * cause problems e.g. if your server does not return a referer address. In
  * this case you can disable this feature here.
  */
-$GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><code><col><colgroup><dd><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><script><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
+$GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><code><col><colgroup><dd><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
 
 

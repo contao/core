@@ -133,7 +133,7 @@ class ModuleSubscribe extends Module
 	/**
 	 * Activate a recipient
 	 */
-	private function activateRecipient()
+	protected function activateRecipient()
 	{
 		$this->Template = new FrontendTemplate('mod_newsletter');
 
@@ -160,7 +160,7 @@ class ModuleSubscribe extends Module
 	/**
 	 * Add a new recipient
 	 */
-	private function addRecipient()
+	protected function addRecipient()
 	{
 		$arrChannels = $this->Input->post('channels');
 

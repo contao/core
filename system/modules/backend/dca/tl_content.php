@@ -614,11 +614,18 @@ class tl_content extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// View an article
-		if (!strlen($this->Input->get('act')) || $this->Input->get('act') == 'create')
+		if (!strlen($this->Input->get('act')) || $this->Input->get('act') == 'select' || $this->Input->get('act') == 'create')
 		{
 			$objArticle = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 										 ->limit(1)
 										 ->execute($this->Input->get('id'));
+
+			// Invalid article id
+			if ($objArticle->numRows < 1)
+			{
+				$this->log('Article ID ' . $this->Input->get('id') . ' does not exist', 'tl_content checkPermission()', TL_ERROR);
+				$this->redirect('typolight/main.php?act=error');
+			}
 
 			// Check whether the page is mounted
 			if (!in_array($objArticle->id, $pagemounts))
@@ -633,6 +640,17 @@ class tl_content extends Backend
 				$this->log('Not enough permissions to edit article ID ' . $this->Input->get('id') . ' on page ID ' . $objArticle->id, 'tl_content checkPermission()', TL_ERROR);
 				$this->redirect('typolight/main.php?act=error');
 			}
+		}
+
+		// Edit/delete all
+		elseif ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'deleteAll')
+		{
+			$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?")
+									 ->execute(CURRENT_ID);
+
+			$session = $this->Session->getData();
+			$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
+			$this->Session->setData($session);
 		}
 
 		// Edit/move/delete a content element
@@ -688,7 +706,7 @@ class tl_content extends Backend
 	 * @param integer
 	 * @return boolean
 	 */
-	private function checkAccessToElement($id)
+	protected function checkAccessToElement($id)
 	{
 		// Get article
 		$objArticle = $this->Database->prepare("SELECT c.id AS contentId, a.id AS articleId, p.id AS pageId, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p, tl_content c WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")

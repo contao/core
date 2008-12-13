@@ -208,6 +208,9 @@ class ModuleEventlist extends Events
 				{
 					$objTemplate = new FrontendTemplate($this->cal_template);
 
+					// Store raw data
+					$objTemplate->setData($event);
+
 					if ($count < 1)
 					{
 						$objTemplate->header = true;
@@ -216,21 +219,11 @@ class ModuleEventlist extends Events
 
 					$objTemplate->day = $strDay;
 					$objTemplate->firstDay = $strDay;
-					$objTemplate->title = $event['title'];
-					$objTemplate->time = $event['time'];
 					$objTemplate->link = $event['href'];
-					$objTemplate->month = $event['month'];
-					$objTemplate->teaser = $event['teaser'];
-					$objTemplate->target = $event['target'];
-					$objTemplate->details = $event['details'];
-					$objTemplate->calendar = $event['calendar'];
 					$objTemplate->class = ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= $eventCount) ? ' last' : '') . ' cal_' . $event['parent'];
 					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
 					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
 					$objTemplate->firstDate = $objTemplate->date;
-					$objTemplate->start = $event['start'];
-					$objTemplate->end = $event['end'];
-					$objTemplate->data = $event;
 					$objTemplate->span = '';
 
 					// Short view

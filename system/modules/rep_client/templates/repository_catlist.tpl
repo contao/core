@@ -12,6 +12,10 @@
 	$rep = &$this->rep;
 	$theme = &$rep->theme;
 	$text = &$GLOBALS['TL_LANG']['tl_repository'];
+	$type_options = &$GLOBALS['TL_LANG']['tl_repository_type_options'];
+	$category_options = &$GLOBALS['TL_LANG']['tl_repository_category_options'];
+	$order_options = &$GLOBALS['TL_LANG']['tl_repository_order_options'];
+	$state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 ?>
 
 <div class="mod_repository block">
@@ -33,24 +37,24 @@
 <!-- types -->
 <select name="repository_type" id="repository_type" class="tl_select<?php if ($rep->f_type!='') echo ' active'; ?>" onchange="this.form.submit()">
   <option value=""><?php echo '-- '.$text['type'][0].' --'; ?></option>
-<?php foreach (array_keys($text['type_options']) as $tpe) { ?>
-  <option value="<?php echo $tpe; ?>"<?php if ($rep->f_type==$tpe) echo ' selected="selected"'; ?>><?php echo $text['type_options'][$tpe]; ?></option>
+<?php foreach (array_keys($type_options) as $tpe) { ?>
+  <option value="<?php echo $tpe; ?>"<?php if ($rep->f_type==$tpe) echo ' selected="selected"'; ?>><?php echo $type_options[$tpe]; ?></option>
 <?php } // foreach types ?>
 </select>
 
 <!-- categories -->
 <select name="repository_category" id="repository_category" class="tl_select<?php if ($rep->f_category!='') echo ' active'; ?>" onchange="this.form.submit()">
   <option value=""><?php echo '-- '.$text['category'][0].' --'; ?></option>
-<?php foreach (array_keys($text['category_options']) as $cat) if ($cat != 'core') { ?>
-  <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat) echo ' selected="selected"'; ?>><?php echo $text['category_options'][$cat]; ?></option>
+<?php foreach (array_keys($category_options) as $cat) if ($cat != 'core') { ?>
+  <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat) echo ' selected="selected"'; ?>><?php echo $category_options[$cat]; ?></option>
 <?php } // foreach types ?>
 </select>
 
 <!-- states -->
 <select name="repository_state" id="repository_state" class="tl_select<?php if ($rep->f_state!='') echo ' active'; ?>" onchange="this.form.submit()">
   <option value=""><?php echo '-- '.$text['state'].' --'; ?></option>
-<?php foreach (array_keys($text['state_options']) as $sta) { ?>
-  <option value="<?php echo $sta; ?>"<?php if ($rep->f_state==$sta) echo ' selected="selected"'; ?>><?php echo $text['state_options'][$sta]; ?></option>
+<?php foreach (array_keys($state_options) as $sta) { ?>
+  <option value="<?php echo $sta; ?>"<?php if ($rep->f_state==$sta) echo ' selected="selected"'; ?>><?php echo $state_options[$sta]; ?></option>
 <?php } // foreach states ?>
 </select>
 
@@ -75,8 +79,8 @@
  
 <!-- order -->
 <select name="repository_order" id="repository_order" class="tl_select<?php if ($rep->f_order!='' && $rep->f_order!='reldate') echo ' active'; ?>" onchange="this.form.submit()">
-<?php foreach (array_keys($text['order_options']) as $oby) { ?>
-  <option value="<?php echo $oby; ?>"<?php if ($rep->f_order==$oby) echo ' selected="selected"'; ?>><?php echo sprintf($text['byorder'], $text['order_options'][$oby]); ?></option>
+<?php foreach (array_keys($order_options) as $oby) { ?>
+  <option value="<?php echo $oby; ?>"<?php if ($rep->f_order==$oby) echo ' selected="selected"'; ?>><?php echo sprintf($text['byorder'], $order_options[$oby]); ?></option>
 <?php } // foreach pages ?>
 </select>
  
@@ -109,7 +113,7 @@ document.getElementById('repository_submit').style.display = 'none';
   <th class="listcol1"><?php echo $text['version'][0]; ?></th>
   <td class="listcol2 status-<?php echo $ext->version % 10; ?>"><?php echo Repository::formatVersion($ext->version); ?></td>
   <th class="listcol3"><?php echo $text['type'][0]; ?></th>
-  <td class="type-<?php echo $ext->type; ?>"><?php echo $text['type_options'][$ext->type]; ?></td>
+  <td class="type-<?php echo $ext->type; ?>"><?php echo $type_options[$ext->type]; ?></td>
 </tr>
 <tr class="info">
   <th><?php echo $text['releasedate'][0]; ?></th>
@@ -126,7 +130,7 @@ document.getElementById('repository_submit').style.display = 'none';
   <th><?php echo $text['author']; ?></th>
   <td><?php echo $ext->author; ?></td>
   <th><?php echo $text['category'][0]; ?></th>
-  <td><?php echo $text['category_options'][$ext->category]; ?></td>
+  <td><?php echo $category_options[$ext->category]; ?></td>
 </tr>
 <?php if (true || property_exists($ext, 'votes') || property_exists($ext, 'downloads')  || property_exists($ext, 'installs')) { ?>
 <tr class="info">

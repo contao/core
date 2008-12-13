@@ -161,7 +161,7 @@ abstract class Controller extends System
 			// HOOK: trigger article_raster_designer extension
 			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
-    			return RasterDesigner::load($objPage->id, $strColumn);
+				return RasterDesigner::load($objPage->id, $strColumn);
 			}
 
 			// Show all articles of the current column
@@ -1287,6 +1287,10 @@ abstract class Controller extends System
 
 					switch ($elements[1])
 					{
+						case 'page_id':
+							$arrCache[$strTag] = $objPage->id;
+							break;
+
 						case 'page_alias':
 							$arrCache[$strTag] = $objPage->alias;
 							break;
@@ -1355,6 +1359,7 @@ abstract class Controller extends System
 					$height = null;
 					$alt = '';
 					$class = '';
+					$rel = '';
 					$strFile = $elements[1];
 
 					// Take arguments
@@ -1380,11 +1385,15 @@ abstract class Controller extends System
 									break;
 
 								case 'alt':
-									$alt = $value;
+									$alt = specialchars($value);
 									break;
 
 								case 'class':
 									$class = $value;
+									break;
+
+								case 'rel':
+									$rel = $value;
 									break;
 							}
 						}
@@ -1392,7 +1401,14 @@ abstract class Controller extends System
 						$strFile = $arrChunks[0];
 					}
 
-					$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+					if (strlen($rel))
+					{
+						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+					}
+					else
+					{
+						$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+					}
 					break;
 
 				// Files from the templates directory
@@ -1497,6 +1513,7 @@ abstract class Controller extends System
 		}
 
 		// Replace tokens
+		$strReturn = str_replace('?><br />', '?>', $strReturn);
 		$strReturn = preg_replace('/##([A-Za-z0-9_]+)##/i', '<?php echo $arrData[\'$1\']; ?>', $strReturn);
 
 		// Eval the code
@@ -1783,7 +1800,6 @@ abstract class Controller extends System
 	/**
 	 * Create a new version of the current record
 	 * @param mixed
-	 * @throws Exception
 	 */
 	protected function createNewVersion($strTable, $intId)
 	{
@@ -2039,6 +2055,9 @@ abstract class Controller extends System
 				$arrFeeds = array_merge($arrFeeds, $this->$callback[0]->$callback[1]());
 			}
 		}
+
+		// Make sure dcaconfig.php is loaded
+		include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Delete old files
 		foreach (scan(TL_ROOT) as $file)
