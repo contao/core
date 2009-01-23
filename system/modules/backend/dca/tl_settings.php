@@ -205,12 +205,14 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'smtpUser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpUser'],
-			'inputType'               => 'text'
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true)
 		),
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
-			'inputType'               => 'text'
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true)
 		),
 		'useFTP' => array
 		(
@@ -228,7 +230,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['ftpUser'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true)
 		),
 		'ftpPass' => array
 		(

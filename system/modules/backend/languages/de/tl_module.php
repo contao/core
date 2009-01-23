@@ -37,7 +37,7 @@ $GLOBALS['TL_LANG']['tl_module']['singleSRC']      = array('Quelldatei', 'Bitte 
 $GLOBALS['TL_LANG']['tl_module']['multiSRC']       = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stoplevel', 'Legt fest bis zu welchem Level die Menüpunkte angezeigt werden. Wählen Sie 0, um alle Level anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Startlevel', 'Legt fest ab welchem Level die Menüpunkte angezeigt werden. Wählen Sie 0, um alle Level anzuzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard Limit', 'Kein Menüpunkte (auch keine aktiven Menüpunkte) jenseits des Stoplevels anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard Limit', 'Keine Menüpunkte (auch keine aktiven Menüpunkte) jenseits des Stoplevels anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['showProtected']  = array('Geschütze Menüpunkte anzeigen', 'Auch Menüpunkte anzeigen, die sonst nur für angemeldete Benutzer sichtbar sind.');
 $GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Versteckte Menüpunkte anzeigen', 'Auch Menüpunkte anzeigen, die in der Navigation versteckt sind.');
 $GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Vorlage für die Navigation', 'Bitte wählen Sie eine Layoutvorlage für die Navigation aus (Navigationsvorlagen beginnen mit <em>nav_</em>).');
@@ -85,7 +85,7 @@ $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Hier können Sie festlegen, welche Mitgliedergruppen das Modul sehen dürfen.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und danach', 'Bitte geben Sie den Abstand vor und nach dem Modul in Pixeln ein.');
 $GLOBALS['TL_LANG']['tl_module']['align']          = array('Ausrichtung des Moduls', 'Hier können Sie die Ausrichtung des Moduls innerhalb seiner Spalte ändern.');
-$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('Stylesheet-ID und -Klasse', 'Hier können Sie eine Stylesheet-ID (id attribute) sowie eine oder mehrere Stylesheet-Klassen (class attribute) eingeben, um das Modul mittels CSS formatieren zu können.');
+$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-ID und -Klasse', 'Hier können Sie eine CSS-ID (id attribute) sowie eine oder mehrere CSS-Klassen (class attributes) eingeben.');
 
 
 /**

@@ -2097,18 +2097,41 @@ window.addEvent(\'domready\', function()
 
 		$new_records = $this->Session->get('new_records');
 
+		// HOOK: addCustomLogic
+		if (array_key_exists('reviseTable', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['reviseTable']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
+			{
+				$this->import($callback[0]);
+				$status = $this->$callback[0]->$callback[1]($this->strTable, $new_records[$this->strTable], $ptable, $ctable);
+
+				if ($status === true)
+				{
+					$reload = true;
+				}
+			}
+		}
+
 		// Delete all new but incomplete records (tstamp=0)
 		if (is_array($new_records[$this->strTable]) && count($new_records[$this->strTable]) > 0)
 		{
 			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE id IN(" . implode(',', $new_records[$this->strTable]) . ") AND tstamp=0");
-			$reload = ($objStmt->affectedRows > 0) ? true : false;
+
+			if ($objStmt->affectedRows > 0)
+			{
+				$reload = true;
+			}
 		}
 
 		// Delete all records of the current table that are not related to the parent table
 		if (strlen($ptable))
 		{
 			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE NOT EXISTS (SELECT * FROM " . $ptable . " WHERE " . $this->strTable . ".pid = " . $ptable . ".id)");
-			$reload = ($objStmt->affectedRows > 0) ? true : false;
+
+			if ($objStmt->affectedRows > 0)
+			{
+				$reload = true;
+			}
 		}
 
 		// Delete all records of the child table that are not related to the current table
@@ -2119,7 +2142,11 @@ window.addEvent(\'domready\', function()
 				if (strlen($v))
 				{
 					$objStmt = $this->Database->execute("DELETE FROM " . $v . " WHERE NOT EXISTS (SELECT * FROM " . $this->strTable . " WHERE " . $v . ".pid = " . $this->strTable . ".id)");
-					$reload = ($objStmt->affectedRows > 0) ? true : false;
+
+					if ($objStmt->affectedRows > 0)
+					{
+						$reload = true;
+					}
 				}
 			}
 		}
@@ -2441,7 +2468,18 @@ window.addEvent(\'domready\', function()
 
 		foreach ($showFields as $k=>$v)
 		{
-			if (in_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
+			if (strpos($v, ':') !== false)
+			{
+				list($strKey, $strTable) = explode(':', $v);
+				list($strTable, $strField) = explode('.', $strTable);
+
+				$objRef = $this->Database->prepare("SELECT " . $strField . " FROM " . $strTable . " WHERE id=?")
+										 ->limit(1)
+										 ->execute($objRow->$strKey);
+
+				$args[$k] = $objRef->numRows ? $objRef->$strField : '';
+			}
+			elseif (in_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 			{
 				$args[$k] = strlen($objRow->$v) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v) : '';
 			}
@@ -2965,7 +3003,18 @@ window.addEvent(\'domready\', function()
 				// Label
 				foreach ($showFields as $k=>$v)
 				{
-					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
+					if (strpos($v, ':') !== false)
+					{
+						list($strKey, $strTable) = explode(':', $v);
+						list($strTable, $strField) = explode('.', $strTable);
+
+						$objRef = $this->Database->prepare("SELECT " . $strField . " FROM " . $strTable . " WHERE id=?")
+												 ->limit(1)
+												 ->execute($row[$strKey]);
+
+						$args[$k] = $objRef->numRows ? $objRef->$strField : '';
+					}
+					elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 					{
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
 						{
@@ -3104,7 +3153,7 @@ window.addEvent(\'domready\', function()
 					}
 
 					// Add group header
-					if ($remoteNew != $remoteCur || $remoteCur === false)
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['disableGrouping'] && ($remoteNew != $remoteCur || $remoteCur === false))
 					{
 						if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options']))
 						{
@@ -3382,7 +3431,7 @@ window.addEvent(\'domready\', function()
 		// Set sorting from user input
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_sorting')
 		{
-			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->Input->post('tl_sort')]['flag'], array(2, 4, 6, 8, 12)) ? $this->Input->post('tl_sort').' DESC' : $this->Input->post('tl_sort');
+			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->Input->post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? $this->Input->post('tl_sort').' DESC' : $this->Input->post('tl_sort');
 
 			$this->Session->setData($session);
 			$this->reload();
@@ -3575,28 +3624,49 @@ window.addEvent(\'domready\', function()
 					// Sort by day
 					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(5, 6)))
 					{
-						$objDate = new Date($session['filter'][$filter][$field]);
-						$this->procedure[] = $field . ' BETWEEN ? AND ?';
-						$this->values[] = $objDate->dayBegin;
-						$this->values[] = $objDate->dayEnd;
+						if ($session['filter'][$filter][$field] == '')
+						{
+							$this->procedure[] = $field . "=''";
+						}
+						else
+						{
+							$objDate = new Date($session['filter'][$filter][$field]);
+							$this->procedure[] = $field . ' BETWEEN ? AND ?';
+							$this->values[] = $objDate->dayBegin;
+							$this->values[] = $objDate->dayEnd;
+						}
 					}
 
 					// Sort by month
 					elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(7, 8)))
 					{
-						$objDate = new Date($session['filter'][$filter][$field]);
-						$this->procedure[] = $field . ' BETWEEN ? AND ?';
-						$this->values[] = $objDate->monthBegin;
-						$this->values[] = $objDate->monthEnd;
+						if ($session['filter'][$filter][$field] == '')
+						{
+							$this->procedure[] = $field . "=''";
+						}
+						else
+						{
+							$objDate = new Date($session['filter'][$filter][$field]);
+							$this->procedure[] = $field . ' BETWEEN ? AND ?';
+							$this->values[] = $objDate->monthBegin;
+							$this->values[] = $objDate->monthEnd;
+						}
 					}
 
 					// Sort by year
 					elseif (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(9, 10)))
 					{
-						$objDate = new Date($session['filter'][$filter][$field]);
-						$this->procedure[] = $field . ' BETWEEN ? AND ?';
-						$this->values[] = $objDate->yearBegin;
-						$this->values[] = $objDate->yearEnd;
+						if ($session['filter'][$filter][$field] == '')
+						{
+							$this->procedure[] = $field . "=''";
+						}
+						else
+						{
+							$objDate = new Date($session['filter'][$filter][$field]);
+							$this->procedure[] = $field . ' BETWEEN ? AND ?';
+							$this->values[] = $objDate->yearBegin;
+							$this->values[] = $objDate->yearEnd;
+						}
 					}
 
 					// Manual filter
@@ -3659,7 +3729,11 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						if (strlen($v))
+						if ($v == '')
+						{
+							$options[$v] = '-';
+						}
+						else
 						{
 							$options[$v] = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 						}
@@ -3675,7 +3749,11 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						if (strlen($v))
+						if ($v == '')
+						{
+							$options[$v] = '-';
+						}
+						else
 						{
 							$options[$v] = date('Y-m', $v);
 							$intMonth = (date('m', $v) - 1);
@@ -3697,7 +3775,11 @@ window.addEvent(\'domready\', function()
 
 					foreach ($options as $k=>$v)
 					{
-						if (strlen($v))
+						if ($v == '')
+						{
+							$options[$v] = '-';
+						}
+						else
 						{
 							$options[$v] = date('Y', $v);
 						}

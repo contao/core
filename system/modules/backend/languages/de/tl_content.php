@@ -77,7 +77,7 @@ $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Nur Gästen anzeigen'
 $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Erlaubte Mitgliedergruppen', 'Hier können Sie festlegen, welche Mitgliedergruppen das Inhaltselement sehen dürfen.');
 $GLOBALS['TL_LANG']['tl_content']['align']        = array('Ausrichtung des Inhaltselements', 'Hier können Sie die Ausrichtung des Inhaltselements innerhalb des Artikels ändern.');
 $GLOBALS['TL_LANG']['tl_content']['space']        = array('Abstand davor und dahinter', 'Bitte geben Sie den Abstand vor und hinter dem Inhaltselement in Pixeln ein.');
-$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('Stylesheet-ID und -Klasse', 'Hier können Sie eine Stylesheet-ID (id attribute) sowie eine oder mehrere Stylesheet-Klassen (class attribute) eingeben, um das Inhaltselement mittels CSS formatieren zu können.');
+$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS-ID und -Klasse', 'Hier können Sie eine CSS-ID (id attribute) sowie eine oder mehrere CSS-Klassen (class attributes) eingeben.');
 $GLOBALS['TL_LANG']['tl_content']['source']       = array('Quelldateien', 'Bitte wählen Sie die CSV-Dateien, die Sie importieren möchten.');
 
 

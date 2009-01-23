@@ -48,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_form']['csv']          = array('CSV file', 'The form dat
 $GLOBALS['TL_LANG']['tl_form']['skipEmtpy']    = array('Skip empty fields', 'Do not include empty fields in the e-mail.');
 $GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Jump to page', 'A form is usually submitted to another page, which processes the form data or displays a "thank you" message. You can choose this page here.');
 $GLOBALS['TL_LANG']['tl_form']['tstamp']       = array('Revision date', 'Date and time of latest revision');
-$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('Style sheet ID and class', 'Here you can enter a style sheet ID (id attribute) and one or more style sheet classes (class attributes) to be able to format the form using CSS.');
+$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('CSS ID and class', 'Here you can enter a CSS ID (id attribute) and one or more CSS classes (class attributes).');
 
 
 /**

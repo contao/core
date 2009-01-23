@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_archives'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_archives'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_news_archive.title',
+	'options_callback'        => array('tl_module_news', 'getNewsArchives'),
 	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
 );
 
@@ -108,5 +108,53 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
+
+
+/**
+ * Class tl_module_news
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Controller
+ */
+class tl_module_news extends Backend
+{
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Get all news archives and return them as array
+	 * @return array
+	 */
+	public function getNewsArchives()
+	{
+		if (!$this->User->isAdmin && !is_array($this->User->news))
+		{
+			return array();
+		}
+
+		$arrForms = array();
+		$objForms = $this->Database->execute("SELECT id, title FROM tl_news_archive ORDER BY title");
+
+		while ($objForms->next())
+		{
+			if ($this->User->isAdmin || in_array($objForms->id, $this->User->news))
+			{
+				$arrForms[$objForms->id] = $objForms->title;
+			}
+		}
+
+		return $arrForms;
+	}
+}
 
 ?>

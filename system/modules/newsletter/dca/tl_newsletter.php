@@ -223,6 +223,13 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sent'],
 			'filter'                  => true,
 			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true)
+		),
+		'date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['mailingDate'],
+			'filter'                  => true,
+			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim')
 		)
 	)
 );

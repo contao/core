@@ -35,12 +35,10 @@
 <form action="<?php echo $this->action; ?>" method="post">
 <div class="formbody email_form">
 <input type="hidden" name="FORM_SUBMIT" value="tl_send_email" />
-<?php foreach ($this->fields as $objWidget): ?>
 <div class="widget">
-  <?php echo $objWidget->generateLabel(); ?><?php if ($objWidget->required): ?><span class="mandatory">*</span><?php endif; ?><br />
-  <?php echo $objWidget->generateWithError(); ?> 
+  <?php echo $this->widget->generateLabel(); ?><span class="mandatory">*</span><br />
+  <?php echo $this->widget->generateWithError(); ?> 
 </div>
-<?php endforeach; ?>
 <div class="submit_container">
   <input type="submit" value="<?php echo $this->submit; ?>" class="submit" />
 </div>

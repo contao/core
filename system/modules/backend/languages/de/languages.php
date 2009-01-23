@@ -33,6 +33,8 @@
 $GLOBALS['TL_LANG']['LNG']['af'] = 'Afrikaans';
 $GLOBALS['TL_LANG']['LNG']['ar'] = 'Arabisch';
 $GLOBALS['TL_LANG']['LNG']['bg'] = 'Bulgarisch';
+$GLOBALS['TL_LANG']['LNG']['br'] = 'Bretonisch';
+$GLOBALS['TL_LANG']['LNG']['bs'] = 'Bosnisch';
 $GLOBALS['TL_LANG']['LNG']['ca'] = 'Katalanisch';
 $GLOBALS['TL_LANG']['LNG']['cr'] = 'Cree';
 $GLOBALS['TL_LANG']['LNG']['cs'] = 'Tschechisch';

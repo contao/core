@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_channels'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_newsletter_channel.title',
+	'options_callback'        => array('tl_module_newsletter', 'getChannels'),
 	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
 );
 
@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
 	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true),
 	'save_callback' => array
 	(
-		array('nl_module', 'getDefaultValue')
+		array('tl_module_newsletter', 'getDefaultValue')
 	)
 );
 
@@ -79,7 +79,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
 	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true),
 	'save_callback' => array
 	(
-		array('nl_module', 'getDefaultValue')
+		array('tl_module_newsletter', 'getDefaultValue')
 	)
 );
 
@@ -92,15 +92,25 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
 
 
 /**
- * Class nl_module
+ * Class tl_module_newsletter
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
-class nl_module extends Backend
+class tl_module_newsletter extends Backend
 {
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
 
 	/**
 	 * Load the default value if the text is empty
@@ -116,6 +126,32 @@ class nl_module extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Get all channels and return them as array
+	 * @return array
+	 */
+	public function getChannels()
+	{
+		if (!$this->User->isAdmin && !is_array($this->User->newsletters))
+		{
+			return array();
+		}
+
+		$arrForms = array();
+		$objForms = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel ORDER BY title");
+
+		while ($objForms->next())
+		{
+			if ($this->User->isAdmin || in_array($objForms->id, $this->User->newsletters))
+			{
+				$arrForms[$objForms->id] = $objForms->title;
+			}
+		}
+
+		return $arrForms;
 	}
 }
 

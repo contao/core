@@ -349,8 +349,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['form'],
 			'exclude'                 => true,
-			'inputType'               => 'radio',
-			'foreignKey'              => 'tl_form.title'
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_module', 'getForms')
 		),
 		'html' => array
 		(
@@ -553,6 +553,16 @@ class tl_module extends Backend
 {
 
 	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
 	 * Return all front end modules as array
 	 * @return array
 	 */
@@ -592,6 +602,32 @@ class tl_module extends Backend
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Get all forms and return them as array
+	 * @return array
+	 */
+	public function getForms()
+	{
+		if (!$this->User->isAdmin && !is_array($this->User->forms))
+		{
+			return array();
+		}
+
+		$arrForms = array();
+		$objForms = $this->Database->execute("SELECT id, title FROM tl_form ORDER BY title");
+
+		while ($objForms->next())
+		{
+			if ($this->User->isAdmin || in_array($objForms->id, $this->User->forms))
+			{
+				$arrForms[$objForms->id] = $objForms->title;
+			}
+		}
+
+		return $arrForms;
 	}
 
 

@@ -30,15 +30,19 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']  = array('E-mail address', 'Please enter the recipient\'s e-mail address.');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active'] = array('Activated', 'E-mail addresses are usually activated by clicking a link in the confirmation e-mail (double-opt-in).');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'] = array('File source', 'Please choose the CSV file you want to import from the files directory.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']   = array('E-mail address', 'Please enter the recipient\'s e-mail address.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Activated', 'E-mail addresses are usually activated by clicking a link in the confirmation e-mail (double-opt-in).');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source']  = array('File source', 'Please choose the CSV file you want to import from the files directory.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP address', 'The ip address of the subscriber.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'] = array('Subscription date', 'The date of subscription.');
 
 
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'] = '%s recipients have been imported.';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm']    = '%s recipients have been imported.';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'] = 'subscribed on %s';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'added manually';
 
 
 /**

@@ -30,14 +30,17 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['subject']       = 'Subject';
-$GLOBALS['TL_LANG']['MSC']['message']       = 'Message';
-$GLOBALS['TL_LANG']['MSC']['sendMessage']   = 'Send e-mail';
-$GLOBALS['TL_LANG']['MSC']['messageSent']   = 'Your message has been sent.';
-$GLOBALS['TL_LANG']['MSC']['publicProfile'] = 'Public profile of %s';
-$GLOBALS['TL_LANG']['MSC']['noPublicInfo']  = 'No public information available.';
-$GLOBALS['TL_LANG']['MSC']['sendEmail']     = 'Send e-mail';
-$GLOBALS['TL_LANG']['MSC']['loginToSend']   = 'You have to log in to send e-mails.';
-$GLOBALS['TL_LANG']['MSC']['emailDisabled'] = 'The user has disabled e-mails.';
+$GLOBALS['TL_LANG']['MSC']['subject']        = 'Subject';
+$GLOBALS['TL_LANG']['MSC']['message']        = 'Message';
+$GLOBALS['TL_LANG']['MSC']['sendMessage']    = 'Send e-mail';
+$GLOBALS['TL_LANG']['MSC']['messageSent']    = 'Your message has been sent.';
+$GLOBALS['TL_LANG']['MSC']['publicProfile']  = 'Public profile of %s';
+$GLOBALS['TL_LANG']['MSC']['noPublicInfo']   = 'No public information available.';
+$GLOBALS['TL_LANG']['MSC']['sendEmail']      = 'Send e-mail';
+$GLOBALS['TL_LANG']['MSC']['loginToSend']    = 'You have to log in to send e-mails.';
+$GLOBALS['TL_LANG']['MSC']['emailDisabled']  = 'The user has disabled e-mails.';
+$GLOBALS['TL_LANG']['MSC']['subjectUnknown'] = 'Someone has sent you a message from %s';
+$GLOBALS['TL_LANG']['MSC']['subjectFeUser']  = 'User %s has sent you a message from %s';
+$GLOBALS['TL_LANG']['MSC']['sendersProfile'] = "View the sender's profile here:\n%s";
 
 ?>

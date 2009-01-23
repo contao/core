@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Jump to page',
 $GLOBALS['TL_LANG']['tl_news_archive']['protected']      = array('Protect archive', 'Show news items to certain member groups only.');
 $GLOBALS['TL_LANG']['tl_news_archive']['groups']         = array('Allowed member groups', 'Here you can choose which groups will be allowed to see the news items.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Allow comments', 'Allow your visitors to comment news items.');
+$GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Notify', 'Please choose who to notify when new comments are added.');
 $GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Comments layout', 'Please choose a comment layout. Comment template files start with <em>com_</em>.');
 $GLOBALS['TL_LANG']['tl_news_archive']['sortOrder']      = array('Sort order', 'Please choose the sort order.');
 $GLOBALS['TL_LANG']['tl_news_archive']['perPage']        = array('Items per page', 'Please enter the number of comments per page (0 = disable pagination).');
@@ -55,8 +56,10 @@ $GLOBALS['TL_LANG']['tl_news_archive']['maxItems']       = array('Maximum number
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['ascending']  = 'ascending';
-$GLOBALS['TL_LANG']['tl_news_archive']['descending'] = 'descending';
+$GLOBALS['TL_LANG']['tl_news_archive']['ascending']     = 'ascending';
+$GLOBALS['TL_LANG']['tl_news_archive']['descending']    = 'descending';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_author'] = 'Author of the news item';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_admin']  = 'System administrator';
 
 
 /**

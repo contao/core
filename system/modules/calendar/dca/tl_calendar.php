@@ -84,16 +84,14 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_calendar', 'copyCalendar')
+				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback'     => array('tl_calendar', 'copyCalendar')
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
 			'show' => array
 			(
@@ -257,17 +255,33 @@ class tl_calendar extends Backend
 			$root = $this->User->calendars;
 		}
 
-		$GLOBALS['TL_DCA']['tl_calendar']['config']['closed'] = true;
 		$GLOBALS['TL_DCA']['tl_calendar']['list']['sorting']['root'] = $root;
 
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'create':
 			case 'select':
 				// Allow
 				break;
 
 			case 'edit':
+				$arrNew = $this->Session->get('new_records');
+
+				// Dynamically add the record to the user profile
+				if (is_array($arrNew['tl_calendar']) && in_array($this->Input->get('id'), $arrNew['tl_calendar']))
+				{
+					$root = $this->User->calendars;
+					$root[] = $this->Input->get('id');
+					$this->User->calendars = $root;
+
+					$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
+								   ->execute(serialize($root), $this->User->id);
+				}
+				// No break;
+
+			case 'copy':
+			case 'delete':
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root))
 				{
@@ -277,6 +291,7 @@ class tl_calendar extends Backend
 				break;
 
 			case 'editAll':
+			case 'deleteAll':
 				$session = $this->Session->getData();
 				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
 				$this->Session->setData($session);
@@ -290,48 +305,6 @@ class tl_calendar extends Backend
 				}
 				break;
 		}
-	}
-
-
-	/**
-	 * Return the copy archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function copyCalendar($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-
-	/**
-	 * Return the delete archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function deleteCalendar($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 

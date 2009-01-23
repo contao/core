@@ -1,7 +1,7 @@
 <?php echo $this->doctype; ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
-<base href="<?php echo $this->base; ?>" />
+<base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->mainTitle; ?> - <?php echo $this->pageTitle; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <meta name="description" content="<?php echo $this->description; ?>" />
@@ -15,7 +15,7 @@
 <?php echo $this->head; ?>
 </head>
 
-<body id="top"<?php echo $this->class . $this->onload; ?>>
+<body id="top"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 <div id="wrapper">
 <?php if ($this->header): ?>
 
@@ -75,9 +75,10 @@
 <script type="text/javascript" src="<?php echo $this->urchinUrl; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
+try {
 var pageTracker = _gat._getTracker("<?php echo $this->urchinId; ?>");
-pageTracker._initData();
 pageTracker._trackPageview();
+} catch(err) {}
 //--><!]]>
 </script>
 

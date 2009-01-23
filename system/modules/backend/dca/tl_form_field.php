@@ -472,7 +472,7 @@ class tl_form_field extends Backend
 	public function listFormFields($arrRow)
 	{
 		$strType = '
-<div class="cte_type">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . ($arrRow['name'] ? ' ("' . $arrRow['name'] . '")' : '') . '</div>
+<div class="cte_type">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . ($arrRow['name'] ? ' [' . $arrRow['name'] . ']' : '') . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h32' : '') . ' block">';
 
 		$strClass = $GLOBALS['TL_FFL'][$arrRow['type']];

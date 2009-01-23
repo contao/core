@@ -216,6 +216,12 @@ abstract class Module extends Frontend
 				{
 					case 'redirect':
 						$href = $objSubpages->url;
+
+						if (strncasecmp($href, 'mailto:', 7) === 0)
+						{
+							$this->import('String');
+							$href = $this->String->encodeEmail($href);
+						}
 						break;
 
 					case 'forward':

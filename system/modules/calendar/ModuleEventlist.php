@@ -60,7 +60,12 @@ class ModuleEventlist extends Events
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### EVENT LIST ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -131,13 +136,13 @@ class ModuleEventlist extends Events
 
 			case 'next_90':
 				$strBegin = $this->Date->dayBegin;
-				$strEnd = (strtotime('+3 month', $strBegin) - 1);
+				$strEnd = (strtotime('+3 months', $strBegin) - 1);
 				$strEmpty = $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth'];
 				break;
 
 			case 'next_180':
 				$strBegin = $this->Date->dayBegin;
-				$strEnd = (strtotime('+6 month', $strBegin) - 1);
+				$strEnd = (strtotime('+6 months', $strBegin) - 1);
 				$strEmpty = $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth'];
 				break;
 
@@ -173,6 +178,7 @@ class ModuleEventlist extends Events
 		$dayCount = 0;
 		$dayMax = count($arrAllEvents);
 		$strEvents = '';
+		$strMonth = '';
 
 		// List events
 		foreach ($arrAllEvents as $days)
@@ -211,6 +217,14 @@ class ModuleEventlist extends Events
 					// Store raw data
 					$objTemplate->setData($event);
 
+					// Month header
+					if ($strMonth != $event['month'])
+					{
+						$objTemplate->newMonth = true;
+						$strMonth = $event['month'];
+					}
+
+					// Day header
 					if ($count < 1)
 					{
 						$objTemplate->header = true;
@@ -220,7 +234,7 @@ class ModuleEventlist extends Events
 					$objTemplate->day = $strDay;
 					$objTemplate->firstDay = $strDay;
 					$objTemplate->link = $event['href'];
-					$objTemplate->class = ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= $eventCount) ? ' last' : '') . ' cal_' . $event['parent'];
+					$objTemplate->class = $event['class'] . ((($count++ % 2) == 0) ? ' even' : ' odd') . (($count == 1) ? ' first' : '') . (($count >= $eventCount) ? ' last' : '') . ' cal_' . $event['parent'];
 					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
 					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
 					$objTemplate->firstDate = $objTemplate->date;

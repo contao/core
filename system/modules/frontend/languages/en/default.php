@@ -38,7 +38,7 @@ $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Please answer the security question!';
  */
 $GLOBALS['TL_LANG']['SEC']['question1'] = 'Please add %d and %d.';
 $GLOBALS['TL_LANG']['SEC']['question2'] = 'What is the sum of %d and %d?';
-$GLOBALS['TL_LANG']['SEC']['question3'] = 'Please calculate %d plus %s.';
+$GLOBALS['TL_LANG']['SEC']['question3'] = 'Please calculate %d plus %d.';
 
 
 /**

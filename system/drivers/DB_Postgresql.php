@@ -90,7 +90,12 @@ class DB_Postgresql extends Database
 	 */
 	protected function get_error()
 	{
-		return pg_last_error($this->resConnection);
+		if (is_resource($this->resConnection))
+		{
+			return pg_last_error($this->resConnection);
+		}
+
+		return pg_last_error();
 	}
 
 
@@ -346,6 +351,18 @@ class DB_Postgresql_Result extends Database_Result
 		$arrData['type'] = @pg_field_type($this->resResult, $intOffset);
 
 		return $arrData;
+	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_resource($this->resResult))
+		{
+			@pg_free_result($this->resResult);
+		}
 	}
 }
 

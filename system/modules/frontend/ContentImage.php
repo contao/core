@@ -101,7 +101,7 @@ class ContentImage extends ContentElement
 		$this->Template->height = $arrImageSize[1];
 		$this->Template->alt = specialchars($this->alt);
 		$this->Template->margin = $this->generateMargin(deserialize($this->imagemargin), 'padding');
-		$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->singleSRC;
+		$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->urlEncode($this->singleSRC);
 		$this->Template->caption = $this->caption;
 	}
 }

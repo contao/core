@@ -26,7 +26,7 @@ CREATE TABLE `tl_newsletter` (
   `template` varchar(32) NOT NULL default '',
   `sendText` char(1) NOT NULL default '',
   `sent` char(1) NOT NULL default '',
-  `date` int(11) NOT NULL default '0',
+  `date` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -59,6 +59,8 @@ CREATE TABLE `tl_newsletter_recipients` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `email` varchar(128) NOT NULL default '',
   `active` char(1) NOT NULL default '',
+  `addedOn` varchar(10) NOT NULL default '',
+  `ip` varchar(64) NOT NULL default '',
   `token` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`)

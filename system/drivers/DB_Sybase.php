@@ -336,6 +336,18 @@ class DB_Sybase_Result extends Database_Result
 	{
 		return @sybase_fetch_field($this->resResult, $intOffset);
 	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_resource($this->resResult))
+		{
+			@sybase_free_result($this->resResult);
+		}
+	}
 }
 
 ?>

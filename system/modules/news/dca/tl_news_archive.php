@@ -84,16 +84,14 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_news_archive', 'copyArchive')
+				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback'     => array('tl_news_archive', 'deleteArchive')
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
 			'show' => array
 			(
@@ -122,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	'subpalettes' => array
 	(
 		'protected'                   => 'groups',
-		'allowComments'               => 'template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
+		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'makeFeed'                    => 'format,maxItems,description,feedBase,alias'
 	),
 
@@ -161,6 +159,15 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
+		),
+		'notify' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['notify'],
+			'default'                 => 'notify_admin',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('notify_admin', 'notify_author'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
 		),
 		'template' => array
 		(
@@ -321,17 +328,33 @@ class tl_news_archive extends Backend
 			$root = $this->User->news;
 		}
 
-		$GLOBALS['TL_DCA']['tl_news_archive']['config']['closed'] = true;
 		$GLOBALS['TL_DCA']['tl_news_archive']['list']['sorting']['root'] = $root;
 
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'create':
 			case 'select':
 				// Allow
 				break;
 
 			case 'edit':
+				$arrNew = $this->Session->get('new_records');
+
+				// Dynamically add the record to the user profile
+				if (is_array($arrNew['tl_news_archive']) && in_array($this->Input->get('id'), $arrNew['tl_news_archive']))
+				{
+					$root = $this->User->news;
+					$root[] = $this->Input->get('id');
+					$this->User->news = $root;
+
+					$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
+								   ->execute(serialize($root), $this->User->id);
+				}
+				// No break;
+
+			case 'copy':
+			case 'delete':
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root))
 				{
@@ -341,6 +364,7 @@ class tl_news_archive extends Backend
 				break;
 
 			case 'editAll':
+			case 'deleteAll':
 				$session = $this->Session->getData();
 				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
 				$this->Session->setData($session);
@@ -354,48 +378,6 @@ class tl_news_archive extends Backend
 				}
 				break;
 		}
-	}
-
-
-	/**
-	 * Return the copy archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-
-	/**
-	 * Return the delete archive button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 

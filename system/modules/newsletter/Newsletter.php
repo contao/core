@@ -385,6 +385,7 @@ class Newsletter extends Backend
 
 				$strFile = $objFile->getContent();
 				$arrRecipients = trimsplit($strSeparator, $strFile);
+				$arrRecipients = array_unique($arrRecipients);
 				$time = time();
 
 				foreach ($arrRecipients as $strRecipient)
@@ -459,13 +460,21 @@ class Newsletter extends Backend
 		// Add recipients
 		foreach ($arrNewsletters as $intNewsletter)
 		{
+			$intNewsletter = intval($intNewsletter);
+
 			if ($intNewsletter < 1)
 			{
 				continue;
 			}
 
-			$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1")
-						   ->execute(intval($intNewsletter), $time, $arrData['email']);
+			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+										   ->execute($intNewsletter, $arrData['email']);
+
+			if ($objRecipient->total < 1)
+			{
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1, addedOn=?, ip=?")
+							   ->execute($intNewsletter, $time, $arrData['email'], $time, $this->Environment->ip);
+			}
 		}
 	}
 
@@ -478,6 +487,8 @@ class Newsletter extends Backend
 	 */
 	public function synchronize($varValue, $objUser)
 	{
+		$blnIsFrontend = true;
+
 		// If called from the back end, the second argument is a DataContainer object
 		if ($objUser instanceof DataContainer)
 		{
@@ -489,27 +500,49 @@ class Newsletter extends Backend
 			{
 				return $varValue;
 			}
+
+			$blnIsFrontend = false;
 		}
 
-		// Delete existing recipients
-		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=?")
-					   ->execute($objUser->email);
+		// Nothing has changed
+		if ($varValue == $objUser->newsletter)
+		{
+			return $varValue;
+		}
 
 		$time = time();
 		$varValue = deserialize($varValue, true);
 
-		// Add recipients
-		if (is_array($varValue))
-		{
-			foreach ($varValue as $intId)
-			{
-				if ($intId < 1)
-				{
-					continue;
-				}
+		// Get all channel IDs
+		$objChannel = $this->Database->execute("SELECT id FROM tl_newsletter_channel");
+		$arrChannel = $objChannel->fetchEach('id');
 
-				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1")
-							   ->execute(intval($intId), $time, $objUser->email);
+		$arrDelete = array_values(array_diff($arrChannel, $varValue));
+
+		// Delete existing recipients
+		if (count($arrDelete))
+		{
+			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid IN(" . implode(',', $arrDelete) . ") AND email=?")
+						   ->execute($objUser->email);
+		}
+
+		// Add recipients
+		foreach ($varValue as $intId)
+		{
+			$intId = intval($intId);
+
+			if ($intId < 1)
+			{
+				continue;
+			}
+
+			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+										   ->execute($intId, $objUser->email);
+
+			if ($objRecipient->total < 1)
+			{
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1, addedOn=?, ip=?")
+							   ->execute($intId, $time, $objUser->email, ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
 			}
 		}
 

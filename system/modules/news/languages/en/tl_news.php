@@ -44,6 +44,7 @@ $GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Add enclosure', 'Add one
 $GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosure', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Target page', 'Link to an internal or external page instead of the default page.');
 $GLOBALS['TL_LANG']['tl_news']['jumpTo']       = array('Jump to page', 'Please select the page to which visitors will be redirected.');
+$GLOBALS['TL_LANG']['tl_news']['cssClass']     = array('CSS class', 'Here you can enter one or more CSS classes (class attributes).');
 $GLOBALS['TL_LANG']['tl_news']['published']    = array('Published', 'The news article will not be visible on your website until it is published.');
 $GLOBALS['TL_LANG']['tl_news']['start']        = array('Show from', 'If you enter a date here the current news item will not be shown on the website before this day.');
 $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'If you enter a date here the current news item will not be shown on the website after this day.');

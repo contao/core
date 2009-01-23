@@ -54,7 +54,12 @@ class ModuleNewsReader extends ModuleNews
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### NEWS READER ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -393,10 +398,24 @@ class ModuleNewsReader extends ModuleNews
 
 		$this->Database->prepare("INSERT INTO tl_news_comments %s")->set($arrSet)->execute();
 
-		// Inform admin
+		// Send notification
 		$objEmail = new Email();
+		$strNotify = $GLOBALS['TL_ADMIN_EMAIL'];
 
-		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		// Notify author
+		if ($objArchive->notify == 'notify_author')
+		{
+			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
+										->limit(1)
+										->execute($objArticle->author);
+
+			if ($objAuthor->numRows)
+			{
+				$strNotify = $objAuthor->email;
+			}
+		}
+
+		$objEmail->from = $strNotify;
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
 
 		// Add comment details
@@ -405,7 +424,7 @@ class ModuleNewsReader extends ModuleNews
 		$strData .= 'Comment: ' . strip_tags($arrSet['comment']) . "\n";
 
 		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'], $strData . "\n") . "\n";
-		$objEmail->sendTo($GLOBALS['TL_ADMIN_EMAIL']);
+		$objEmail->sendTo($strNotify);
 	}
 }
 

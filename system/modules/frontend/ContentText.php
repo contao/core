@@ -104,7 +104,7 @@ class ContentText extends ContentElement
 			$this->Template->addBefore = ($this->floating != 'below');
 			$this->Template->margin = $this->generateMargin(deserialize($this->imagemargin), 'padding');
 			$this->Template->float = in_array($this->floating, array('left', 'right')) ? sprintf(' float:%s;', $this->floating) : '';
-			$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->singleSRC;
+			$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->urlEncode($this->singleSRC);
 			$this->Template->caption = $this->caption;
 		}
 

@@ -157,7 +157,6 @@ class String
 
 			if ($intCharCount <= $intNumberOfChars)
 			{
-
 				foreach ($arrTagBuffer as $strTag)
 				{
 					$strTagName = strtolower(substr(trim($strTag), 1, -1));
@@ -186,7 +185,10 @@ class String
 
 						for ($j=count($arrOpenTags)-1; $j>=0; $j--)
 						{
-							if (str_replace('<', '</', $arrOpenTags[$j]) == $strTag)
+							$strOpenTag = str_replace('<', '</', $arrOpenTags[$j]);
+							$strOpenTag = substr($strOpenTag, 0, strpos($strOpenTag, ' ')) . '>';
+
+							if ($strOpenTag == $strTag)
 							{
 								unset($arrOpenTags[$j]);
 								break;

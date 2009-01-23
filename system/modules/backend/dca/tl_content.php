@@ -494,21 +494,16 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['form'],
 			'exclude'                 => true,
-			'inputType'               => 'radio',
-			'foreignKey'              => 'tl_form.title',
-			'eval'                    => array('mandatory'=>true)
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_content', 'getForms')
 		),
 		'module' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['module'],
 			'exclude'                 => true,
-			'inputType'               => 'radio',
+			'inputType'               => 'select',
 			'foreignKey'              => 'tl_module.name',
 			'eval'                    => array('mandatory'=>true)
-		),
-		'invisible' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['invisible']
 		),
 		'protected' => array
 		(
@@ -560,6 +555,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['source'],
 			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv')
+		),
+		'invisible' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['invisible']
 		)
 	)
 );
@@ -906,6 +905,32 @@ class tl_content extends Backend
 		}
 
 		return $arrAlias;
+	}
+
+
+	/**
+	 * Get all forms and return them as array
+	 * @return array
+	 */
+	public function getForms()
+	{
+		if (!$this->User->isAdmin && !is_array($this->User->forms))
+		{
+			return array();
+		}
+
+		$arrForms = array();
+		$objForms = $this->Database->execute("SELECT id, title FROM tl_form ORDER BY title");
+
+		while ($objForms->next())
+		{
+			if ($this->User->isAdmin || in_array($objForms->id, $this->User->forms))
+			{
+				$arrForms[$objForms->id] = $objForms->title;
+			}
+		}
+
+		return $arrForms;
 	}
 
 

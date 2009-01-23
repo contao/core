@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
-<base href="<?php echo $this->base; ?>" />
+<base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
@@ -20,13 +20,19 @@
 
 <?php echo $this->explanation; ?>
 <?php if (count($this->rows)): ?>
-<table cellspacing="0" cellpadding="0" class="tl_help_table" summary="Table explains the current field"><?php foreach ($this->rows as $row): ?> 
-  <tr><?php if ($row[0] == 'colspan'): ?> 
-    <td colspan="2"><?php echo $row[1]; ?></td><?php else: ?> 
+<table cellspacing="0" cellpadding="0" class="tl_help_table" summary="Table explains the current field">
+<?php foreach ($this->rows as $row): ?>
+  <tr>
+<?php if ($row[0] == 'colspan'): ?>
+    <td colspan="2"><?php echo $row[1]; ?></td>
+<?php else: ?>
     <td class="tl_label"><?php echo $row[0]; ?></td>
-    <td><?php echo $row[1]; ?></td><?php endif; ?> 
-  </tr><?php endforeach; ?> 
-</table><?php endif; ?> 
+    <td><?php echo $row[1]; ?></td>
+<?php endif; ?>
+  </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>
 
 </div>
 

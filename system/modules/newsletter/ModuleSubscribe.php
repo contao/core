@@ -54,7 +54,12 @@ class ModuleSubscribe extends Module
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### NEWSLETTER SUBSCRIBE ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -210,9 +215,11 @@ class ModuleSubscribe extends Module
 			$arrValues[] = $time;
 			$arrValues[] = $this->Input->post('email', true);
 			$arrValues[] = '';
+			$arrValues[] = $time;
+			$arrValues[] = $this->Environment->ip;
 			$arrValues[] = $strToken;
 
-			$arrCondition[] = '(?, ?, ?, ?, ?)';
+			$arrCondition[] = '(?, ?, ?, ?, ?, ?, ?)';
 		}
 
 		// Remove old subscriptions that have not been activated yet
@@ -220,7 +227,7 @@ class ModuleSubscribe extends Module
 					   ->execute($this->Input->post('email', true), 1);
 
 		// Add new subscriptions
-		$this->Database->prepare("INSERT INTO tl_newsletter_recipients (pid, tstamp, email, active, token) VALUES " . implode(', ', $arrCondition))
+		$this->Database->prepare("INSERT INTO tl_newsletter_recipients (pid, tstamp, email, active, addedOn, ip, token) VALUES " . implode(', ', $arrCondition))
 					   ->execute($arrValues);
 
 		// Activation e-mail

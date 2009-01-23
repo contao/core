@@ -48,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_form']['csv']          = array('CSV-Datei', 'Die Formula
 $GLOBALS['TL_LANG']['tl_form']['skipEmtpy']    = array('Leere Felder überspringen', 'Leere Felder nicht per E-Mail versenden.');
 $GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Weiterleitung zu Seite', 'Die Daten eines Formulars werden normalerweise zu einer anderen Seite weitergeleitet, die diese Daten weiterverarbeitet oder eine "Vielen Dank für Ihre Nachricht" Meldung anzeigt. Sie können diese Seite hier festlegen.');
 $GLOBALS['TL_LANG']['tl_form']['tstamp']       = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
-$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('Stylesheet-ID und -Klasse', 'Hier können Sie eine Stylesheet-ID (id attribute) sowie eine oder mehrere Stylesheet-Klassen (class attribute) eingeben, um das Formular mittels CSS formatieren zu können.');
+$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('CSS-ID und -Klasse', 'Hier können Sie eine CSS-ID (id attribute) sowie eine oder mehrere CSS-Klassen (class attributes) eingeben.');
 
 
 /**

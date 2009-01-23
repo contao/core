@@ -58,10 +58,15 @@ class ModuleFaqList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$this->Template = new BackendTemplate('be_wildcard');
-			$this->Template->wildcard = '### FAQ LIST ###';
+			$objTemplate = new BackendTemplate('be_wildcard');
 
-			return $this->Template->parse();
+			$objTemplate->wildcard = '### FAQ LIST ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+
+			return $objTemplate->parse();
 		}
 
 		$this->faq_categories = deserialize($this->faq_categories, true);

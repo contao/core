@@ -335,6 +335,18 @@ class DB_Mssql_Result extends Database_Result
 	{
 		return @mssql_fetch_field($this->resResult, $intOffset);
 	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_resource($this->resResult))
+		{
+			@mssql_free_result($this->resResult);
+		}
+	}
 }
 
 ?>

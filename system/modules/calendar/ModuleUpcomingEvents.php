@@ -60,7 +60,12 @@ class ModuleUpcomingEvents extends Events
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### UPCOMING EVENTS ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -141,7 +146,7 @@ class ModuleUpcomingEvents extends Events
 					$objTemplate->day = $strDay;
 					$objTemplate->link = $event['href'];
 					$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $day);
-					$objTemplate->class = ((($count % 2) == 0) ? ' odd' : ' even') . (($count == 1) ? ' first' : '') . (($dayCount >= $dayMax) ? ' last' : '') . ' cal_' . $event['parent'];
+					$objTemplate->class = $event['class'] . ((($count % 2) == 0) ? ' odd' : ' even') . (($count == 1) ? ' first' : '') . (($dayCount >= $dayMax) ? ' last' : '') . ' cal_' . $event['parent'];
 					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
 
 					// Short view

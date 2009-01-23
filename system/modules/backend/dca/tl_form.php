@@ -83,16 +83,14 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_form', 'copyForm')
+				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback'     => array('tl_form', 'deleteForm')
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
 			'show' => array
 			(
@@ -276,17 +274,33 @@ class tl_form extends Backend
 			$root = $this->User->forms;
 		}
 
-		$GLOBALS['TL_DCA']['tl_form']['config']['closed'] = true;
 		$GLOBALS['TL_DCA']['tl_form']['list']['sorting']['root'] = $root;
 
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'create':
 			case 'select':
 				// Allow
 				break;
 
 			case 'edit':
+				$arrNew = $this->Session->get('new_records');
+
+				// Dynamically add the record to the user profile
+				if (is_array($arrNew['tl_form']) && in_array($this->Input->get('id'), $arrNew['tl_form']))
+				{
+					$root = $this->User->forms;
+					$root[] = $this->Input->get('id');
+					$this->User->forms = $root;
+
+					$this->Database->prepare("UPDATE tl_user SET forms=? WHERE id=?")
+								   ->execute(serialize($root), $this->User->id);
+				}
+				// No break;
+
+			case 'copy':
+			case 'delete':
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root))
 				{
@@ -296,6 +310,7 @@ class tl_form extends Backend
 				break;
 
 			case 'editAll':
+			case 'deleteAll':
 				$session = $this->Session->getData();
 				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
 				$this->Session->setData($session);
@@ -309,48 +324,6 @@ class tl_form extends Backend
 				}
 				break;
 		}
-	}
-
-
-	/**
-	 * Return the copy form button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function copyForm($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-
-	/**
-	 * Return the delete form button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function deleteForm($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (!$this->User->isAdmin)
-		{
-			return '';
-		}
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 

@@ -2,6 +2,30 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.4 (2009-01-24)
+--------------------------
+- Updated TinyMCE to version 3.2.1.1
+- Added new Google Analytics code (#376)
+- Added insert tag support to form subjects (#382)
+- Added a TinyMCE plugin to insert lightbox images (#370)
+- Added "select all" checkbox to page and file tree widgets (#116)
+- Added foreign key support to DCA listing labels (#88)
+- Added option to choose who to notify if there are new comments (#176)
+- Added option to add CSS classes to news items and events (#61)
+- Added option for regular users to create news archives, calendars etc. (#349)
+- Added "postUpload" and "reviseTable" hook (#366, #412)
+- Improved newsletter extension to store subscription dates (#378)
+- Improved memberlist to skip members without public fields and e-mail (#386)
+- Improved image cache to preserve filenames for SEO reasons (#324)
+- Improved database result classes so result sets are being freed automatically
+- Improved date calculation of all calendar and news modules (#432)
+- Fixed issue with slimbox not showing files with special characters (#374)
+- Fixed issue with users being able to include forms they are not allowed to access (#396)
+- Fixed issue with special characters not being converted correctly (#361)
+- Fixed issue with IE6 not loading pages (operation aborted) (#405)
+- Fixed issue with regular events not being indexed for searching (#358)
+- Fixed a few minor bugs
+
 Version 2.6.3 (2008-12-13)
 --------------------------
 - Added insert tag "env::page_id" (#276)

@@ -182,29 +182,9 @@ class PageRegular extends Frontend
 			$this->Template->head = $strHead . "\n";
 		}
 
-		// Body onload
-		if (($strOnload = trim($objLayout->onload)) != false)
-		{
-			$this->Template->onload = sprintf(' onload="%s"', $strOnload);
-		}
-
-		// Get css classes from the layout and the page
-		$class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
-
-		// HOOK: extension "bodyclass"
-		if (in_array('bodyclass', $this->Config->getActiveModules()))
-		{
-			if (strlen($objPage->cssBody))
-			{
-				$class .= ' ' . $objPage->cssBody;
-			}
-		}
-
-		// Add body CSS class
-		if (strlen($class))
-		{
-			$this->Template->class = ' class="' . $class . '"';
-		}
+		// Body onload and body classes
+		$this->Template->onload = trim($objLayout->onload);
+		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
 
 		// Mootools script
 		if (strlen($objLayout->mootools) && $objLayout->mootools != '-')

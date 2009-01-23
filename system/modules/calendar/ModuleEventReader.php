@@ -54,7 +54,12 @@ class ModuleEventReader extends Events
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### EVENT READER ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -154,6 +159,7 @@ class ModuleEventReader extends Events
 		$objTemplate->date = $date;
 		$objTemplate->start = $objEvent->startTime;
 		$objTemplate->end = $objEvent->endTime;
+		$objTemplate->class = strlen($objEvent->cssClass) ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 		$this->Template->addImage = false;

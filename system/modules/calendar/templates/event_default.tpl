@@ -1,4 +1,6 @@
 
+<div class="event block<?php echo $this->class; ?>">
+
 <h1><?php echo $this->title; ?></h1>
 
 <div class="info">
@@ -31,3 +33,5 @@
 <?php endforeach; ?>
 </div>
 <?php endif; ?>
+
+</div>

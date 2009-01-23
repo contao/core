@@ -56,10 +56,10 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 2,
 			'fields'                  => array('email'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,filter,limit'
+			'panelLayout'             => 'filter;sort,search,limit'
 		),
 		'label' => array
 		(
@@ -128,6 +128,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'insertTag'=>true, 'decodeEntities'=>true)
 		),
@@ -143,6 +144,20 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'],
 			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv')
+		),
+		'addedOn' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'],
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
+			'eval'                    => array('rgxp'=>'datim')
+		),
+		'ip' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'],
+			'search'                  => true,
+			'sorting'                 => true
 		)
 	)
 );
@@ -273,6 +288,15 @@ class tl_newsletter_recipients extends Backend
 	 */
 	public function addIcon($row, $label)
 	{
+		if ($row['addedOn'])
+		{
+			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], date($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
+		}
+		else
+		{
+			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually'] . ')</span>';
+		}
+
 		return sprintf('<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>', $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label);
 	}
 }

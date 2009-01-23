@@ -1,2 +1,12 @@
 
-<span class="tl_gray"><?php echo $this->wildcard; ?></span>
+<?php if ($this->title): ?>
+<h1><?php echo $this->title; ?></h1>
+
+<?php endif; ?>
+<div class="tl_gray">
+<?php echo $this->wildcard; ?> 
+<?php if ($this->link): ?>
+<br />
+<?php echo $this->link; ?> (<a href="<?php echo $this->href; ?>" class="tl_gray">ID: <?php echo $this->id; ?></a>)
+<?php endif; ?>
+</div>

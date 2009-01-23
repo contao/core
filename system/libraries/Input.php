@@ -412,8 +412,8 @@ class Input
 		// Preserve basic entities
 		$varValue = str_replace
 		(
-			array('&amp;', '&lt;', '&gt;'),
-			array('[&]', '[lt]', '[gt]'),
+			array('[&amp;]', '&amp;', '[&lt;]', '&lt;', '[&gt;]', '&gt;'),
+			array('[&]', '[&]', '[lt]', '[lt]', '[gt]', '[gt]'),
 			$varValue
 		);
 

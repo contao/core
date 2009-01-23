@@ -117,9 +117,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('source', 'addTime', 'addImage', 'recurring', 'addEnclosure'),
-		'default'                     => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source;published,start,stop',
-		'internal'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,jumpTo;published,start,stop',
-		'external'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,url,target;published,start,stop'
+		'default'                     => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source;cssClass;published,start,stop',
+		'internal'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,jumpTo;cssClass;published,start,stop',
+		'external'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,url,target;cssClass;published,start,stop'
 	),
 
 	// Subpalettes
@@ -351,6 +351,12 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox'
+		),
+		'cssClass' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['cssClass'],
+			'exclude'                 => true,
+			'inputType'               => 'text'
 		),
 		'published' => array
 		(
@@ -612,33 +618,14 @@ class tl_calendar_events extends Backend
 		// Add time
 		if ($objEvent->addTime)
 		{
-			$blnSummer = date('I', $arrSet['startTime']);
-			$arrSet['startTime'] += (date('G', $objEvent->startTime) * 3600) + (intval(date('i', $objEvent->startTime)) * 60);
-
-			if (date('I', $arrSet['startTime']) !== $blnSummer)
-			{
-				$arrSet['startTime'] = $blnSummer ? ($arrSet['startTime'] + 3600) : ($arrSet['startTime'] - 3600);
-			}
-
-			$blnSummer = date('I', $arrSet['endTime']);
-			$arrSet['endTime'] += (date('G', $objEvent->endTime) * 3600) + (intval(date('i', $objEvent->endTime)) * 60);
-
-			if (date('I', $arrSet['endTime']) !== $blnSummer)
-			{
-				$arrSet['endTime'] = $blnSummer ? ($arrSet['endTime'] + 3600) : ($arrSet['endTime'] - 3600);
-			}
+			$arrSet['startTime'] = strtotime('+ ' . date('G', $objEvent->startTime) . ' hours + ' . date('i', $objEvent->startTime) . ' minutes', $arrSet['startTime']);
+			$arrSet['endTime'] = strtotime('+ ' . date('G', $objEvent->endTime) . ' hours + ' . date('i', $objEvent->endTime) . ' minutes', $arrSet['endTime']);
 		}
 
 		// Adjust end time of "all day" events
 		elseif ((strlen($objEvent->endDate) && $arrSet['endDate'] == $arrSet['endTime']) || $arrSet['startTime'] == $arrSet['endTime'])
 		{
-			$blnSummer = date('I', $arrSet['endTime']);
-			$arrSet['endTime'] += 86399;
-
-			if (date('I', $arrSet['endTime']) !== $blnSummer)
-			{
-				$arrSet['endTime'] = $blnSummer ? ($arrSet['endTime'] + 3600) : ($arrSet['endTime'] - 3600);
-			}
+			$arrSet['endTime'] = (strtotime('+ 1 day', $arrSet['endDate']) - 1);
 		}
 
 		$arrSet['repeatEnd'] = 0;
@@ -646,27 +633,16 @@ class tl_calendar_events extends Backend
 		if ($objEvent->recurring)
 		{
 			$arrRange = deserialize($objEvent->repeatEach);
+			$arg = $arrRange['value'] * $objEvent->recurrences;
+			$unit = $arrRange['unit'];
 
-			switch ($arrRange['unit'])
+			if ($arg == 1)
 			{
-				case 'days':
-					$multiplier = 86400;
-					break;
-
-				case 'weeks':
-					$multiplier = 604800;
-					break;
-
-				case 'months':
-					$multiplier = 2678400;
-					break;
-
-				case 'years':
-					$multiplier = 31622400;
-					break;
+				$unit = substr($unit, 0, -1);
 			}
 
-			$arrSet['repeatEnd'] = $arrSet['endTime'] + ($arrRange['value'] * $multiplier * $objEvent->recurrences);
+			$strtotime = '+ ' . $arg . ' ' . $unit;
+			$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
 		}
 
 		$this->Database->prepare("UPDATE tl_calendar_events %s WHERE id=?")

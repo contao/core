@@ -142,7 +142,6 @@ class Calendar extends Frontend
 			{
 				$count = 0;
 				$arrRepeat = deserialize($objArticle->repeatEach);
-				$blnSummer = date('I', $objArticle->startTime);
 
 				// Do not include more than 20 recurrences
 				while ($count++ < 20)
@@ -152,43 +151,18 @@ class Calendar extends Frontend
 						break;
 					}
 
-					switch ($arrRepeat['unit'])
+					$arg = $arrRepeat['value'];
+					$unit = $arrRepeat['unit'];
+
+					if ($arg == 1)
 					{
-						case 'days':
-							$multiplier = 86400;
-							break;
-
-						case 'weeks':
-							$multiplier = 604800;
-							break;
-
-						case 'months':
-							$multiplier = (date('t', $objArticle->startTime)) * 86400;
-							break;
-
-						case 'years':
-							if (date('n', $objArticle->startTime) < 3)
-								$multiplier = date('L', $objArticle->startTime) ? 31622400 : 31536000;
-							else
-								$multiplier = ((date('Y', $objArticle->startTime) % 4) == 3) ? 31622400 : 31536000;
-							break;
-
-						default:
-							$multiplier = 0;
-							break(2);
+						$unit = substr($unit, 0, -1);
 					}
 
-					$objArticle->startTime += ($multiplier * $arrRepeat['value']);
-					$objArticle->endTime += ($multiplier * $arrRepeat['value']);
+					$strtotime = '+ ' . $arg . ' ' . $unit;
 
-					// Daylight saving time
-					if (($date = date('I', $objArticle->startTime)) !== $blnSummer)
-					{
-						$objArticle->startTime += $blnSummer ? 3600 : -3600;
-						$objArticle->endTime += $blnSummer ? 3600 : -3600;
-
-						$blnSummer = $date;
-					}
+					$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
+					$objArticle->endTime = strtotime($strtotime, $objArticle->endTime);
 
 					if ($objArticle->startTime >= $time)
 					{
@@ -308,7 +282,7 @@ class Calendar extends Frontend
 
 			// Get items
 			$objArticle = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND source=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY startTime DESC")
-										 ->execute($objCalendar->id, 'internal', $time, $time);
+										 ->execute($objCalendar->id, 'default', $time, $time);
 
 			// Add items to the indexer
 			while ($objArticle->next())
@@ -389,6 +363,26 @@ class Calendar extends Frontend
 		}
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
+	}
+
+
+	/**
+	 * Calculate the span between two timestamps in days
+	 * @param integer
+	 * @param integer
+	 * @return integer
+	 */
+	public static function calculateSpan($intStart, $intEnd)
+	{
+		$blnSummer = date('I', $intStart);
+		$intOffset = 0;
+
+		if (date('I', $intEnd) !== $blnSummer)
+		{
+			$intOffset = $blnSummer ? 3600 : -3600;
+		}
+
+		return floor(($intEnd - $intStart - $intOffset) / 86400);
 	}
 }
 

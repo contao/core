@@ -373,6 +373,18 @@ class DB_Mysqli_Result extends Database_Result
 	{
 		return $this->resResult->fetch_field_direct($intOffset);
 	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_object($this->resResult))
+		{
+			@$this->resResult->free();
+		}
+	}
 }
 
 ?>

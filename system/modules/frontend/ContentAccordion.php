@@ -62,7 +62,8 @@ class ContentAccordion extends ContentElement
 			{
 				$this->strTemplate = 'be_wildcard';
 				$this->Template = new BackendTemplate($this->strTemplate);
-				$this->Template->wildcard = '### ACCORDION WRAPPER START :: ' . $this->mooHeadline . ' ###';
+				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
+				$this->Template->title = $this->mooHeadline;
 			}
 		}
 
@@ -139,7 +140,7 @@ class ContentAccordion extends ContentElement
 				$this->Template->addBefore = ($this->floating != 'below');
 				$this->Template->margin = $this->generateMargin(deserialize($this->imagemargin), 'padding');
 				$this->Template->float = in_array($this->floating, array('left', 'right')) ? sprintf(' float:%s;', $this->floating) : '';
-				$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->singleSRC;
+				$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->urlEncode($this->singleSRC);
 				$this->Template->caption = $this->caption;
 			}
 

@@ -65,7 +65,12 @@ class ModuleMemberlist extends Module
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
+
 			$objTemplate->wildcard = '### MEMBERLIST ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -156,8 +161,8 @@ class ModuleMemberlist extends Module
 		}
 
 		// List active members only
-		$strWhere .= "disable!=1 AND (start='' OR start<=?) AND (stop='' OR stop>=?)";
-		array_push($arrValues, $time, $time);
+		$strWhere .= "(publicFields!='' OR allowEmail=? OR allowEmail=?) AND disable!=1 AND (start='' OR start<=?) AND (stop='' OR stop>=?)";
+		array_push($arrValues, 'email_member', 'email_all', $time, $time);
 
 		// Get total number of members
 		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_member WHERE " . $strWhere)
@@ -348,64 +353,30 @@ class ModuleMemberlist extends Module
 		// Handle personal messages
 		if ($this->Template->allowEmail > 1)
 		{
-			// Initialize form fields
-			$arrFormFields = array
+			$arrField = array
 			(
-				'subject' => array
-				(
-					'name'      => 'subject',
-					'label'     => $GLOBALS['TL_LANG']['MSC']['subject'],
-					'inputType' => 'text',
-					'eval'      => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128)
-				),
-				'message' => array
-				(
-					'name'      => 'message',
-					'label'     => $GLOBALS['TL_LANG']['MSC']['message'],
-					'inputType' => 'textarea',
-					'eval'      => array('mandatory'=>true, 'rows'=>4, 'cols'=>40, 'decodeEntities'=>true)
-				)
+				'name'      => 'message',
+				'label'     => $GLOBALS['TL_LANG']['MSC']['message'],
+				'inputType' => 'textarea',
+				'eval'      => array('mandatory'=>true, 'required'=>true, 'rows'=>4, 'cols'=>40, 'decodeEntities'=>true)
 			);
 
-			$doNotSubmit = false;
-			$arrWidgets = array();
+			$arrWidget = $this->prepareForWidget($arrField, $arrField['name'], '');
+			$objWidget = new FormTextArea($arrWidget);
 
-			// Initialize widgets
-			foreach ($arrFormFields as $arrField)
+			// Validate widget
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_send_email')
 			{
-				$strClass = $GLOBALS['TL_FFL'][$arrField['inputType']];
+				$objWidget->validate();
 
-				// Continue if the class is not defined
-				if (!$this->classFileExists($strClass))
+				if (!$objWidget->hasErrors())
 				{
-					continue;
+					$this->sendPersonalMessage($objMember, $objWidget);
 				}
-
-				$arrField['eval']['required'] = $arrField['eval']['mandatory'];
-				$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
-
-				// Validate widget
-				if ($this->Input->post('FORM_SUBMIT') == 'tl_send_email')
-				{
-					$objWidget->validate();
-
-					if ($objWidget->hasErrors())
-					{
-						$doNotSubmit = true;
-					}
-				}
-
-				$arrWidgets[] = $objWidget;
 			}
 
-			$this->Template->fields = $arrWidgets;
+			$this->Template->widget = $objWidget;
 			$this->Template->submit = $GLOBALS['TL_LANG']['MSC']['sendMessage'];
-
-			// Send personal message
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_send_email' && !$doNotSubmit && $this->Template->allowEmail > 1)
-			{
-				$this->sendPersonalMessage($objMember, $arrWidgets);
-			}
 		}
 
 		$arrFields = deserialize($objMember->publicFields);
@@ -437,27 +408,15 @@ class ModuleMemberlist extends Module
 	/**
 	 * Send a personal message
 	 * @param object
-	 * @param array
+	 * @param object
 	 */
-	protected function sendPersonalMessage(Database_Result $objMember, $arrWidgets)
+	protected function sendPersonalMessage(Database_Result $objMember, Widget $objWidget)
 	{
 		$objEmail = new Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = 'TYPOlight mailer';
-
-		// Add subject and message
-		foreach ($arrWidgets as $objWidget)
-		{
-			if ($objWidget->name == 'subject')
-			{
-				$objEmail->subject = $objWidget->value;
-			}
-			elseif ($objWidget->name == 'message')
-			{
-				$objEmail->text = $objWidget->value;
-			}
-		}
+		$objEmail->text = $objWidget->value;
 
 		// Add reply to
 		if (FE_USER_LOGGED_IN)
@@ -471,7 +430,14 @@ class ModuleMemberlist extends Module
 				$replyTo = $this->User->firstname . ' ' . $this->User->lastname . ' <' . $replyTo . '>';
 			}
 
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['subjectFeUser'], $this->User->username, $this->Environment->host);
+			$objEmail->text .= "\n\n---\n\n" . sprintf($GLOBALS['TL_LANG']['MSC']['sendersProfile'], $this->Environment->base . preg_replace('/show=[0-9]+/', 'show=' . $this->User->id, $this->Environment->request));
+
 			$objEmail->replyTo($replyTo);
+		}
+		else
+		{
+			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['subjectUnknown'], $this->Environment->host);
 		}
 
 		// Send e-mail

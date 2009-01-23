@@ -536,6 +536,8 @@ class DC_Folder extends DataContainer implements listable, editable
 			$this->redirect('typolight/main.php?act=error');
 		}
 
+		$arrUploaded = array();
+
 		// Upload files
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
 		{
@@ -618,6 +620,8 @@ class DC_Folder extends DataContainer implements listable, editable
 						}
 					}
 
+					$arrUploaded[] = $strNewFile;
+
 					// Notify user
 					if ($blnResized)
 					{
@@ -629,6 +633,16 @@ class DC_Folder extends DataContainer implements listable, editable
 						$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']);
 						$this->log('File "'.$file['name'].'" uploaded successfully', 'DC_Folder move()', TL_FILES);
 					}
+				}
+			}
+
+			// HOOK: post upload callback
+			if (array_key_exists('postUpload', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['postUpload']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['postUpload'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($arrUploaded);
 				}
 			}
 

@@ -270,7 +270,7 @@ class ContentGallery extends ContentElement
 				(
 					'hasImage' => true,
 					'margin' => $margin,
-					'href' => $images[($i+$j)]['src'],
+					'href' => $this->urlEncode($images[($i+$j)]['src']),
 					'width' => $objFile->width,
 					'height' => $objFile->height,
 					'colWidth' => $colwidth . '%',

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#typobox.image_title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="../../utils/form_utils.js"></script>
+	<script type="text/javascript" src="typobox.js"></script>
+	</script>
+	<base target="_self" />
+</head>
+<body id="link" style="display: none">
+<form onsubmit="Typobox.update();return false;" action="#">
+	<div class="tabs">
+		<ul>
+			<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#typobox.image_title}</a></span></li>
+		</ul>
+	</div>
+
+	<div class="panel_wrapper" style="height:152px;">
+		<div id="general_panel" class="panel current">
+		<table border="0" cellpadding="4" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><label for="tlfile">{#typobox.image_list}</label></td>
+            <td><select id="image_list" name="image_list" style="width: 200px" onchange="document.forms[0].src.value=this.value;"></select></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap"><label for="src">{#typobox.image_src}</label></td>
+            <td><input id="src" name="src" type="text" class="mceFocus" value="" style="width: 200px" /></td>
+          </tr>
+          <tr>
+            <td class="column1"><label id="widthlabel" for="width">{#typobox.image_dimensions}</label></td>
+            <td nowrap="nowrap"><input name="width" type="text" id="width" value="" size="5" maxlength="5" class="size" /> x <input name="height" type="text" id="height" value="" size="5" maxlength="5" class="size" /> px</td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap"><label for="alt">{#typobox.image_alt}</label></td>
+            <td><input id="alt" name="alt" type="text" value="" style="width: 200px" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap"><label for="cssClass">{#typobox.image_class}</label></td>
+            <td><input id="cssClass" name="cssClass" type="text" value="" style="width: 200px" /></td>
+          </tr>
+          <tr>
+            <td nowrap="nowrap"><label for="rel">{#typobox.image_rel}</label></td>
+            <td><select id="rel" name="rel" style="width: 200px"><option value="lightbox">{#typobox.image_rel_single}</option><option value="lightbox[multi]">{#typobox.image_rel_multi}</option></select></td>
+          </tr>
+        </table>
+		</div>
+	</div>
+
+	<div class="mceActionPanel">
+		<div style="float: left">
+			<input type="submit" id="insert" name="insert" value="{#insert}" />
+		</div>
+		<div style="float: right">
+			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+		</div>
+	</div>
+</form>
+</body>
+</html>

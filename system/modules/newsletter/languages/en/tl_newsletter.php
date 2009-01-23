@@ -51,6 +51,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['files']         = array('Attachments', 'Pl
 $GLOBALS['TL_LANG']['tl_newsletter']['sent']        = 'Sent';
 $GLOBALS['TL_LANG']['tl_newsletter']['sentOn']      = 'Sent on %s';
 $GLOBALS['TL_LANG']['tl_newsletter']['notSent']     = 'Not sent yet';
+$GLOBALS['TL_LANG']['tl_newsletter']['mailingDate'] = 'Mailing date';
 $GLOBALS['TL_LANG']['tl_newsletter']['headline']    = 'Send newsletter';
 $GLOBALS['TL_LANG']['tl_newsletter']['confirm']     = 'The newsletter has been sent to %s recipients.';
 $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'There are no active subscribers to this channel.';

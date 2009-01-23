@@ -118,9 +118,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('source', 'addImage', 'addEnclosure'),
-		'default'                     => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source;published,start,stop',
-		'internal'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,jumpTo;published,start,stop',
-		'external'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,url,target;published,start,stop'
+		'default'                     => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source;cssClass;published,start,stop',
+		'internal'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,jumpTo;cssClass;published,start,stop',
+		'external'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,url,target;cssClass;published,start,stop'
 	),
 
 	// Subpalettes
@@ -318,6 +318,12 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox'
+		),
+		'cssClass' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['cssClass'],
+			'exclude'                 => true,
+			'inputType'               => 'text'
 		),
 		'published' => array
 		(
@@ -545,19 +551,8 @@ class tl_news extends Backend
 			return;
 		}
 
-		$objDate = new Date($objEvent->date);
-
-		$arrSet['date'] = $objDate->dayBegin + (date('G', $objEvent->time) * 3600) + (intval(date('i', $objEvent->time)) * 60);
+		$arrSet['date'] = strtotime('+ ' . date('G', $objEvent->time) . ' hours + ' . date('i', $objEvent->time) . ' minutes', $objEvent->date);
 		$arrSet['time'] = $arrSet['date'];
-
-		// Daylight saving time
-		$blnSummer = date('I', $arrSet['time']);
-
-		if (date('I', $objDate->dayBegin) !== $blnSummer)
-		{
-			$arrSet['date'] = $blnSummer ? ($arrSet['date'] - 3600) : ($arrSet['date'] + 3600);
-			$arrSet['time'] = $arrSet['date'];
-		}
 
 		$this->Database->prepare("UPDATE tl_news %s WHERE id=?")
 					   ->set($arrSet)

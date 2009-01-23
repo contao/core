@@ -109,7 +109,7 @@ abstract class ModuleNews extends Module
 			// Store raw data
 			$objTemplate->setData($objArticles->row());
 
-			$objTemplate->class =  ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
+			$objTemplate->class = (strlen($objArticles->cssClass) ? ' ' . $objArticles->cssClass : '') . ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
 			$objTemplate->newsHeadline = $objArticles->headline;
 			$objTemplate->subHeadline = $objArticles->subheadline;
 			$objTemplate->hasSubHeadline = $objArticles->subheadline ? true : false;

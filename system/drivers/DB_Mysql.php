@@ -97,7 +97,12 @@ class DB_Mysql extends Database
 	 */
 	protected function get_error()
 	{
-		return mysql_error($this->resConnection);
+		if (is_resource($this->resConnection))
+		{
+			return mysql_error($this->resConnection);
+		}
+
+		return mysql_error();
 	}
 
 
@@ -394,6 +399,18 @@ class DB_Mysql_Result extends Database_Result
 	protected function fetch_field($intOffset)
 	{
 		return @mysql_fetch_field($this->resResult, $intOffset);
+	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_resource($this->resResult))
+		{
+			@mysql_free_result($this->resResult);
+		}
 	}
 }
 

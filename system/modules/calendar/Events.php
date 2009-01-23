@@ -139,7 +139,6 @@ abstract class Events extends Module
 				{
 					$count = 0;
 					$arrRepeat = deserialize($objEvents->repeatEach);
-					$blnSummer = date('I', $objEvents->startTime);
 
 					while ($objEvents->endTime < $intEnd)
 					{
@@ -148,43 +147,18 @@ abstract class Events extends Module
 							break;
 						}
 
-						switch ($arrRepeat['unit'])
+						$arg = $arrRepeat['value'];
+						$unit = $arrRepeat['unit'];
+
+						if ($arg == 1)
 						{
-							case 'days':
-								$multiplier = 86400;
-								break;
-
-							case 'weeks':
-								$multiplier = 604800;
-								break;
-
-							case 'months':
-								$multiplier = (date('t', $objEvents->startTime)) * 86400;
-								break;
-
-							case 'years':
-								if (date('n', $objEvents->startTime) < 3)
-									$multiplier = date('L', $objEvents->startTime) ? 31622400 : 31536000;
-								else
-									$multiplier = ((date('Y', $objEvents->startTime) % 4) == 3) ? 31622400 : 31536000;
-								break;
-
-							default:
-								$multiplier = 0;
-								break(2);
+							$unit = substr($unit, 0, -1);
 						}
 
-						$objEvents->startTime += ($multiplier * $arrRepeat['value']);
-						$objEvents->endTime += ($multiplier * $arrRepeat['value']);
+						$strtotime = '+ ' . $arg . ' ' . $unit;
 
-						// Daylight saving time
-						if (($date = date('I', $objEvents->startTime)) !== $blnSummer)
-						{
-							$objEvents->startTime += $blnSummer ? 3600 : -3600;
-							$objEvents->endTime += $blnSummer ? 3600 : -3600;
-
-							$blnSummer = $date;
-						}
+						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
+						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
 
 						// Add event
 						if ($objEvents->startTime >= $intStart || $objEvents->endTime <= $intEnd)
@@ -200,6 +174,16 @@ abstract class Events extends Module
 		foreach (array_keys($this->arrEvents) as $key)
 		{
 			ksort($this->arrEvents[$key]);
+		}
+
+		// HOOK: modify result set
+		if (array_key_exists('getAllEvents', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['getAllEvents']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getAllEvents'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->arrEvents = $this->$callback[0]->$callback[1]($this->arrEvents, $arrCalendars);
+			}
 		}
 
 		return $this->arrEvents;
@@ -220,15 +204,7 @@ abstract class Events extends Module
 	{
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
-		$blnSummer = date('I', $intStart);
-		$ds = 0;
-
-		if (date('I', $intEnd) !== $blnSummer)
-		{
-			$ds = $blnSummer ? 3600 : -3600;
-		}
-
-		$span = floor(($intEnd - $intStart - $ds) / 86400);
+		$span = Calendar::calculateSpan($intStart, $intEnd);
 		$strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
@@ -270,6 +246,7 @@ abstract class Events extends Module
 		$arrEvent['title'] = specialchars($objEvents->title);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW_BLUR : '');
+		$arrEvent['class'] = strlen($objEvents->cssClass) ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
@@ -284,15 +261,9 @@ abstract class Events extends Module
 		// Multi-day event
 		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
-			$intCur = $intDate;
-			$intDate += 86400;
-
-			if ($ds !== 0 && date('I', $intCur) != date('I', $intDate))
-			{
-				$intDate += $ds;
-			}
-
+			$intDate = strtotime('+ 1 day', $intDate);
 			$intNextKey = date('Ymd', $intDate);
+
 			$this->arrEvents[$intNextKey][$intDate][] = $arrEvent;
 		}
 	}

@@ -824,12 +824,23 @@ var Backend =
 	 */
 	toggleCheckboxGroup: function(el, id)
 	{
+		var cls = $(el).className;
 		var status = $(el).checked ? 'checked' : '';
 
-		$$('#' + id + ' .tl_checkbox').each(function(checkbox)
+		if (cls == 'tl_checkbox')
 		{
-			checkbox.checked = status;
-		});
+			$$('#' + id + ' .tl_checkbox').each(function(checkbox)
+			{
+				checkbox.checked = status;
+			});
+		}
+		else if (cls == 'tl_tree_checkbox')
+		{
+			$$('#' + id + ' .parent .tl_tree_checkbox').each(function(checkbox)
+			{
+				checkbox.checked = status;
+			});
+		}
 
 		Backend.getScrollOffset();
 	},

@@ -83,16 +83,14 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif',
-				'button_callback'     => array('tl_newsletter_channel', 'copyChannel')
+				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
-				'button_callback'     => array('tl_newsletter_channel', 'deleteChannel')
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
 			'show' => array
 			(
@@ -179,17 +177,33 @@ class tl_newsletter_channel extends Backend
 			$root = $this->User->newsletters;
 		}
 
-		$GLOBALS['TL_DCA']['tl_newsletter_channel']['config']['closed'] = true;
 		$GLOBALS['TL_DCA']['tl_newsletter_channel']['list']['sorting']['root'] = $root;
 
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
+			case 'create':
 			case 'select':
 				// Allow
 				break;
 
 			case 'edit':
+				$arrNew = $this->Session->get('new_records');
+
+				// Dynamically add the record to the user profile
+				if (is_array($arrNew['tl_newsletter_channel']) && in_array($this->Input->get('id'), $arrNew['tl_newsletter_channel']))
+				{
+					$root = $this->User->newsletters;
+					$root[] = $this->Input->get('id');
+					$this->User->newsletters = $root;
+
+					$this->Database->prepare("UPDATE tl_user SET newsletters=? WHERE id=?")
+								   ->execute(serialize($root), $this->User->id);
+				}
+				// No break;
+
+			case 'copy':
+			case 'delete':
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root))
 				{
@@ -199,6 +213,7 @@ class tl_newsletter_channel extends Backend
 				break;
 
 			case 'editAll':
+			case 'deleteAll':
 				$session = $this->Session->getData();
 				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
 				$this->Session->setData($session);

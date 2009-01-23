@@ -35,6 +35,7 @@ $GLOBALS['TL_LANG']['tl_news_archive']['tstamp']         = array('Änderungsdatu
 $GLOBALS['TL_LANG']['tl_news_archive']['language']       = array('Sprache', 'Bitte geben Sie die Sprache im RFC3066-Format ein (z.B. <em>en</em>, <em>en-us</em> oder <em>en-cockney</em>).');
 $GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Weiterleitung zu Seite', 'Bitte wählen Sie die Seite, zu der ein Besucher weitergeleitet werden soll wenn er einen Nachrichtenbeitrag anklickt.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Kommentare erlauben', 'Das Kommentieren von Nachrichtenbeiträge erlauben.');
+$GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
 $GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Kommentarlayout', 'Bitte wählen Sie ein Kommentarlayout. Vorlagen müssen mit <em>com_</em> beginnen.');
 $GLOBALS['TL_LANG']['tl_news_archive']['sortOrder']      = array('Sortierung', 'Bitte wählen Sie eine Sortierung.');
 $GLOBALS['TL_LANG']['tl_news_archive']['perPage']        = array('Elemente pro Seite', 'Bitte geben Sie die Anzahl an Kommentaren pro Seite ein (0 = Seitenumbruch deaktivieren).');
@@ -55,8 +56,10 @@ $GLOBALS['TL_LANG']['tl_news_archive']['maxItems']       = array('Maximale Anzah
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['ascending']  = 'aufsteigend';
-$GLOBALS['TL_LANG']['tl_news_archive']['descending'] = 'absteigend';
+$GLOBALS['TL_LANG']['tl_news_archive']['ascending']     = 'aufsteigend';
+$GLOBALS['TL_LANG']['tl_news_archive']['descending']    = 'absteigend';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_author'] = 'Autor des Beitrags';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_admin']  = 'Systemadministrator';
 
 
 /**

@@ -52,10 +52,15 @@ class ModuleFaqReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$this->Template = new BackendTemplate('be_wildcard');
-			$this->Template->wildcard = '### FAQ READER ###';
+			$objTemplate = new BackendTemplate('be_wildcard');
 
-			return $this->Template->parse();
+			$objTemplate->wildcard = '### FAQ READER ###';
+			$objTemplate->title = $this->headline;
+			$objTemplate->id = $this->id;
+			$objTemplate->link = $this->name;
+			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+
+			return $objTemplate->parse();
 		}
 
 		// Return if no news item has been specified

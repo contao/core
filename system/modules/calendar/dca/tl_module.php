@@ -45,7 +45,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_calendar'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_calendar'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'foreignKey'              => 'tl_calendar.title',
+	'options_callback'        => array('tl_module_calendar', 'getCalendars'),
 	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 );
 
@@ -108,5 +108,53 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
+
+
+/**
+ * Class tl_module_calendar
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Controller
+ */
+class tl_module_calendar extends Backend
+{
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Get all calendars and return them as array
+	 * @return array
+	 */
+	public function getCalendars()
+	{
+		if (!$this->User->isAdmin && !is_array($this->User->calendars))
+		{
+			return array();
+		}
+
+		$arrForms = array();
+		$objForms = $this->Database->execute("SELECT id, title FROM tl_calendar ORDER BY title");
+
+		while ($objForms->next())
+		{
+			if ($this->User->isAdmin || in_array($objForms->id, $this->User->calendars))
+			{
+				$arrForms[$objForms->id] = $objForms->title;
+			}
+		}
+
+		return $arrForms;
+	}
+}
 
 ?>

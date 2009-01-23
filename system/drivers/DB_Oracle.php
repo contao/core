@@ -384,6 +384,18 @@ class DB_Oracle_Result extends Database_Result
 
 		return $arrData;
 	}
+
+
+	/**
+	 * Free the current result
+	 */
+	public function free()
+	{
+		if (is_resource($this->resResult))
+		{
+			@oci_free_statement($this->resResult);
+		}
+	}
 }
 
 ?>

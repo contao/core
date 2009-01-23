@@ -672,7 +672,7 @@ abstract class Controller extends System
 			return null;
 		}
 
-		$strCacheName = 'system/html/' . md5('w' . $width . 'h' . $height . $image) . '.' . $objFile->extension;
+		$strCacheName = 'system/html/' . $objFile->filename . '-w' . $width . '-h' . $height . '.' . $objFile->extension;
 
 		// Resize original image
 		if ($target)
@@ -884,7 +884,7 @@ abstract class Controller extends System
 			$strHtml .= '<head>' . "\n";
 			$strHtml .= '<title>' . $objArticle->title . '</title>' . "\n";
 			$strHtml .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet'] . '" />' . "\n";
-			$strHtml .= '<base href="' . $this->Environment->base . '" />' . "\n";
+			$strHtml .= '<base href="' . $this->Environment->base . '"></base>' . "\n";
 
 			$objStylesheet = $this->Database->execute("SELECT * FROM tl_style_sheet");
 
@@ -1368,7 +1368,9 @@ abstract class Controller extends System
 						$this->import('String');
 
 						$arrChunks = explode('?', urldecode($elements[1]));
-						$arrParams = explode('&', $this->String->decodeEntities($arrChunks[1]));
+						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = str_replace('[&]', '&', $strSource);
+						$arrParams = explode('&', $strSource);
 
 						foreach ($arrParams as $strParam)
 						{
@@ -1921,21 +1923,27 @@ abstract class Controller extends System
 	/**
 	 * Take an array of pages and eliminate nested pages
 	 * @param array
+	 * @param string
 	 * @return array
 	 */
-	protected function eliminateNestedPages($arrPages)
+	protected function eliminateNestedPages($arrPages, $strTable=null)
 	{
 		if (!is_array($arrPages) || count($arrPages) < 1)
 		{
 			return array();
 		}
 
+		if (!$strTable)
+		{
+			$strTable = 'tl_page';
+		}
+
 		$nested = array();
-		$arrPages = array_intersect($this->getChildRecords(0, 'tl_page'), $arrPages);
+		$arrPages = array_intersect($this->getChildRecords(0, $strTable), $arrPages);
 
 		foreach ($arrPages as $page)
 		{
-			$nested = array_merge($nested, $this->getChildRecords($page, 'tl_page'));
+			$nested = array_merge($nested, $this->getChildRecords($page, $strTable));
 		}
 
 		return array_values(array_diff($arrPages, $nested));

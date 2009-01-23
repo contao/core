@@ -80,7 +80,7 @@ class ContentDfGallery extends ContentElement
 	 */
 	protected function compile()
 	{
-		$xmlName = 'system/html/' . md5($this->tstamp . $this->id . $GLOBALS['TL_LANGUAGE']) . '.xml';
+		$xmlName = 'system/html/gallery-' . $this->id . $GLOBALS['TL_LANGUAGE'] . '.xml';
 
 		// Generate XML file
 		if (!file_exists(TL_ROOT . '/' . $xmlName))

@@ -159,7 +159,7 @@ class Files
 		}
 
 		// Unix fix: rename case sensitively
-		if (strcasecmp($strOldName, $strNewName) === 0 && strcmp($strOldName, $strNewName) !== 0)
+		if (strcasecmp($strOldName, $strNewName) !== strcmp($strOldName, $strNewName))
 		{
 			@rename(TL_ROOT . '/' . $strOldName, TL_ROOT . '/' . $strOldName . '__');
 			$strOldName .= '__';

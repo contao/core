@@ -102,7 +102,7 @@ class FormFileUpload extends Widget implements uploadable
 
 			if ($file['error'] == 3)
 			{
-				$this->addError(sprinf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 				$this->log('File "'.$file['name'].'" was only partially uploaded', 'FormFileUpload validate()', TL_ERROR);
 			}
 

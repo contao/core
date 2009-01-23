@@ -30,14 +30,17 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['subject']       = 'Betreff';
-$GLOBALS['TL_LANG']['MSC']['message']       = 'Nachricht';
-$GLOBALS['TL_LANG']['MSC']['sendMessage']   = 'E-Mail senden';
-$GLOBALS['TL_LANG']['MSC']['messageSent']   = 'Ihre Nachricht wurde gesendet.';
-$GLOBALS['TL_LANG']['MSC']['publicProfile'] = 'Öffentliches Profil von %s';
-$GLOBALS['TL_LANG']['MSC']['noPublicInfo']  = 'Kein öffentliches Profil vorhanden.';
-$GLOBALS['TL_LANG']['MSC']['sendEmail']     = 'E-Mail senden';
-$GLOBALS['TL_LANG']['MSC']['loginToSend']   = 'Sie müssen sich anmelden, um E-Mails zu versenden.';
-$GLOBALS['TL_LANG']['MSC']['emailDisabled'] = 'Der Benutzer hat E-Mails deaktiviert.';
+$GLOBALS['TL_LANG']['MSC']['subject']        = 'Betreff';
+$GLOBALS['TL_LANG']['MSC']['message']        = 'Nachricht';
+$GLOBALS['TL_LANG']['MSC']['sendMessage']    = 'E-Mail senden';
+$GLOBALS['TL_LANG']['MSC']['messageSent']    = 'Ihre Nachricht wurde gesendet.';
+$GLOBALS['TL_LANG']['MSC']['publicProfile']  = 'Öffentliches Profil von %s';
+$GLOBALS['TL_LANG']['MSC']['noPublicInfo']   = 'Kein öffentliches Profil vorhanden.';
+$GLOBALS['TL_LANG']['MSC']['sendEmail']      = 'E-Mail senden';
+$GLOBALS['TL_LANG']['MSC']['loginToSend']    = 'Sie müssen sich anmelden, um E-Mails zu versenden.';
+$GLOBALS['TL_LANG']['MSC']['emailDisabled']  = 'Der Benutzer hat E-Mails deaktiviert.';
+$GLOBALS['TL_LANG']['MSC']['subjectUnknown'] = 'Jemand hat Ihnen eine Nachricht über %s gesendet';
+$GLOBALS['TL_LANG']['MSC']['subjectFeUser']  = 'Der Benutzer %s hat Ihnen eine Nachricht über %s gesendet';
+$GLOBALS['TL_LANG']['MSC']['sendersProfile'] = "Das Profil des Absenders finden Sie hier:\n%s";
 
 ?>

@@ -321,7 +321,7 @@ class Form extends Hybrid
 			// Fallback to default subject
 			if (!strlen($email->subject))
 			{
-				$email->subject = $this->subject;
+				$email->subject = $this->replaceInsertTags($this->subject);
 			}
 
 			// Send copy to sender

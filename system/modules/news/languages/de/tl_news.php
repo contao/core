@@ -44,6 +44,7 @@ $GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Enclosure hinzufügen', 
 $GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosure', 'Bitte wählen Sie die Dateien, die Sie der Nachricht hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Zielseite', 'Zu einer internen oder externen Seite anstelle der Standardseite weiterleiten.');
 $GLOBALS['TL_LANG']['tl_news']['jumpTo']       = array('Weiterleitung zu Seite', 'Bitte wählen Sie die Seite, zu der ein Besucher weitergeleitet werden soll.');
+$GLOBALS['TL_LANG']['tl_news']['cssClass']     = array('CSS-Klasse', 'Hier können Sie eine oder mehrere CSS-Klassen (class attributes) eingeben.');
 $GLOBALS['TL_LANG']['tl_news']['published']    = array('Veröffentlicht', 'Solange Sie diese Option nicht wählen, ist der Nachrichtenbeitrag auf Ihrer Webseite nicht sichtbar.');
 $GLOBALS['TL_LANG']['tl_news']['start']        = array('Anzeigen ab', 'Wenn Sie hier ein Datum erfassen, wird der Beitrag erst ab diesem Tag angezeigt.');
 $GLOBALS['TL_LANG']['tl_news']['stop']         = array('Anzeigen bis', 'Wenn Sie hier ein Datum erfassen, wird der Beitrag nur bis zu diesem Tag angezeigt.');

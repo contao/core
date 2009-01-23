@@ -677,6 +677,15 @@ abstract class Database_Result
 
 
 	/**
+	 * Automatically free the current result
+	 */
+	public function __destruct()
+	{
+		$this->free();
+	}
+
+
+	/**
 	 * Set a particular field of the current row
 	 * @param string
 	 * @param string
