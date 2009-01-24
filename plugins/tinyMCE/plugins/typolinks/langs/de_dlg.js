@@ -10,8 +10,9 @@ image_dimensions : "Breite/H\u00F6he",
 image_alt : "Beschreibung",
 image_class : "CSS-Klasse",
 image_rel : "Typ",
-image_rel_single : "Einzelbild",
-image_rel_multi : "Bildergalerie"
+image_rel_single : "Einzelnes Bild",
+image_rel_multi : "Bildergalerie",
+image_rel_empty : "Ohne Großansicht"
 });
 tinyMCE.addI18n('de.advanced_dlg',{
 link_title : "Link einf\u00FCgen/bearbeiten",

@@ -188,17 +188,28 @@ class tl_newsletter_channel extends Backend
 				break;
 
 			case 'edit':
-				$arrNew = $this->Session->get('new_records');
-
 				// Dynamically add the record to the user profile
-				if (is_array($arrNew['tl_newsletter_channel']) && in_array($this->Input->get('id'), $arrNew['tl_newsletter_channel']))
+				if (!in_array($this->Input->get('id'), $root))
 				{
-					$root = $this->User->newsletters;
-					$root[] = $this->Input->get('id');
-					$this->User->newsletters = $root;
+					$arrNew = $this->Session->get('new_records');
 
-					$this->Database->prepare("UPDATE tl_user SET newsletters=? WHERE id=?")
-								   ->execute(serialize($root), $this->User->id);
+					if (is_array($arrNew['tl_newsletter_channel']) && in_array($this->Input->get('id'), $arrNew['tl_newsletter_channel']))
+					{
+						$objUser = $this->Database->prepare("SELECT newsletters FROM tl_user WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->User->id);
+
+						// $newsletters only contains user permissions
+						$newsletters = deserialize($objUser->newsletters);
+						$newsletters[] = $this->Input->get('id');
+
+						$this->Database->prepare("UPDATE tl_user SET newsletters=? WHERE id=?")
+									   ->execute(serialize($newsletters), $this->User->id);
+
+						// $root also contains group permissions
+						$root[] = $this->Input->get('id');
+						$this->User->newsletters = $root;
+					}
 				}
 				// No break;
 

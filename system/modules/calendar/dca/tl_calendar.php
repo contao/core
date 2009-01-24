@@ -266,17 +266,28 @@ class tl_calendar extends Backend
 				break;
 
 			case 'edit':
-				$arrNew = $this->Session->get('new_records');
-
 				// Dynamically add the record to the user profile
-				if (is_array($arrNew['tl_calendar']) && in_array($this->Input->get('id'), $arrNew['tl_calendar']))
+				if (!in_array($this->Input->get('id'), $root))
 				{
-					$root = $this->User->calendars;
-					$root[] = $this->Input->get('id');
-					$this->User->calendars = $root;
+					$arrNew = $this->Session->get('new_records');
 
-					$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
-								   ->execute(serialize($root), $this->User->id);
+					if (is_array($arrNew['tl_calendar']) && in_array($this->Input->get('id'), $arrNew['tl_calendar']))
+					{
+						$objUser = $this->Database->prepare("SELECT calendars FROM tl_user WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->User->id);
+
+						// $calendars only contains user permissions
+						$calendars = deserialize($objUser->calendars);
+						$calendars[] = $this->Input->get('id');
+
+						$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
+									   ->execute(serialize($calendars), $this->User->id);
+
+						// $root also contains group permissions
+						$root[] = $this->Input->get('id');
+						$this->User->calendars = $root;
+					}
 				}
 				// No break;
 

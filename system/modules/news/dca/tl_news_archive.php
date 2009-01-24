@@ -339,17 +339,28 @@ class tl_news_archive extends Backend
 				break;
 
 			case 'edit':
-				$arrNew = $this->Session->get('new_records');
-
 				// Dynamically add the record to the user profile
-				if (is_array($arrNew['tl_news_archive']) && in_array($this->Input->get('id'), $arrNew['tl_news_archive']))
+				if (!in_array($this->Input->get('id'), $root))
 				{
-					$root = $this->User->news;
-					$root[] = $this->Input->get('id');
-					$this->User->news = $root;
+					$arrNew = $this->Session->get('new_records');
 
-					$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
-								   ->execute(serialize($root), $this->User->id);
+					if (is_array($arrNew['tl_news_archive']) && in_array($this->Input->get('id'), $arrNew['tl_news_archive']))
+					{
+						$objUser = $this->Database->prepare("SELECT news FROM tl_user WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->User->id);
+
+						// $news only contains user permissions
+						$news = deserialize($objUser->news);
+						$news[] = $this->Input->get('id');
+
+						$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
+									   ->execute(serialize($news), $this->User->id);
+
+						// $root also contains group permissions
+						$root[] = $this->Input->get('id');
+						$this->User->news = $root;
+					}
 				}
 				// No break;
 

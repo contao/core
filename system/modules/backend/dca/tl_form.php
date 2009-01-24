@@ -285,17 +285,28 @@ class tl_form extends Backend
 				break;
 
 			case 'edit':
-				$arrNew = $this->Session->get('new_records');
-
 				// Dynamically add the record to the user profile
-				if (is_array($arrNew['tl_form']) && in_array($this->Input->get('id'), $arrNew['tl_form']))
+				if (!in_array($this->Input->get('id'), $root))
 				{
-					$root = $this->User->forms;
-					$root[] = $this->Input->get('id');
-					$this->User->forms = $root;
+					$arrNew = $this->Session->get('new_records');
 
-					$this->Database->prepare("UPDATE tl_user SET forms=? WHERE id=?")
-								   ->execute(serialize($root), $this->User->id);
+					if (is_array($arrNew['tl_form']) && in_array($this->Input->get('id'), $arrNew['tl_form']))
+					{
+						$objUser = $this->Database->prepare("SELECT forms FROM tl_user WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->User->id);
+
+						// $forms only contains user permissions
+						$forms = deserialize($objUser->forms);
+						$forms[] = $this->Input->get('id');
+
+						$this->Database->prepare("UPDATE tl_user SET forms=? WHERE id=?")
+									   ->execute(serialize($forms), $this->User->id);
+
+						// $root also contains group permissions
+						$root[] = $this->Input->get('id');
+						$this->User->forms = $root;
+					}
 				}
 				// No break;
 
