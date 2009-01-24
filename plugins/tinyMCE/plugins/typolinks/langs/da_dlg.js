@@ -11,7 +11,8 @@ image_alt : "Description",
 image_class : "CSS class",
 image_rel : "Type",
 image_rel_single : "Single image",
-image_rel_multi : "Image gallery"
+image_rel_multi : "Image gallery",
+image_rel_empty : "Thumbnail only"
 });
 tinyMCE.addI18n('da.advanced_dlg',{
 link_title:"Indsæt/rediger link",

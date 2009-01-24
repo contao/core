@@ -41,6 +41,8 @@ var Typobox = {
 			return;
 		}
 
+		selectByValue(f, 'rel', '');
+
 		c = c.replace(/^.*\{\{image::/gi, '');
 		c = c.replace(/\}\}.*$/i, '');
 		c = c.replace(/\[&amp;\]|\[&\]|&amp;|&/gi, '?');
@@ -96,19 +98,26 @@ var Typobox = {
 		}
 
 		var tag = f.src.value;
-		tag += '?rel=' + f.rel.value;
+		var glue = '?';
 
 		if (f.width.value) {
-			tag += '&amp;width=' + f.width.value;
+			tag += glue + 'width=' + f.width.value;
+			glue = '&amp;';
 		}
 		if (f.height.value) {
-			tag += '&amp;height=' + f.height.value;
+			tag += glue + 'height=' + f.height.value;
+			glue = '&amp;';
 		}
 		if (f.alt.value) {
-			tag += '&amp;alt=' + f.alt.value;
+			tag += glue + 'alt=' + f.alt.value;
+			glue = '&amp;';
 		}
 		if (f.cssClass.value) {
-			tag += '&amp;class=' + f.cssClass.value;
+			tag += glue + 'class=' + f.cssClass.value;
+			glue = '&amp;';
+		}
+		if (f.rel.value) {
+			tag += glue + 'rel=' + f.rel.value;
 		}
 
 		tag = '{{image::' + tag + '}}';
