@@ -50,19 +50,20 @@ $objLib = new typolib();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>{#advanced_dlg.link_title}</title>
+	<title>{#typolinks_dlg.link_title}</title>
 	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
 	<script type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="../../utils/editable_selects.js"></script>
 	<script type="text/javascript" src="../../utils/form_utils.js"></script>
 	<script type="text/javascript" src="../../utils/validate.js"></script>
-	<script type="text/javascript" src="../../themes/advanced/js/link.js"></script>
+	<script type="text/javascript" src="js/typolinks.js"></script>
 	<base target="_self" />
 </head>
 <body id="link" style="display: none">
 <form onsubmit="LinkDialog.update();return false;" action="#">
 	<div class="tabs">
 		<ul>
-			<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#advanced_dlg.link_title}</a></span></li>
+			<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#typolinks_dlg.link_title}</a></span></li>
 		</ul>
 	</div>
 
@@ -70,28 +71,28 @@ $objLib = new typolib();
 		<div id="general_panel" class="panel current">
 		<table border="0" cellpadding="4" cellspacing="0">
           <tr>
-            <td nowrap="nowrap"><label for="tlpage">{#typolinks.page}</label></td>
+            <td nowrap="nowrap"><label for="tlpage">{#typolinks_dlg.page}</label></td>
             <td><select id="tlpage" name="tlpage" style="width: 200px" onchange="document.forms[0].tlfile.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createPageList(); ?></select></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="tlfile">{#typolinks.file}</label></td>
+            <td nowrap="nowrap"><label for="tlfile">{#typolinks_dlg.file}</label></td>
             <td><select id="tlfile" name="tlfile" style="width: 200px" onchange="document.forms[0].tlpage.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createFileList(); ?></select></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="href">{#advanced_dlg.link_url}</label></td>
+            <td nowrap="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
             <td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /><span id="hrefbrowsercontainer" style="display:none"></span></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="linktitle">{#advanced_dlg.link_titlefield}</label></td>
+            <td nowrap="nowrap"><label for="linktitle">{#typolinks_dlg.link_titlefield}</label></td>
             <td><input id="linktitle" name="linktitle" type="text" value="" style="width: 200px" /></td>
           </tr>
           <tr>
-            <td><label id="targetlistlabel" for="targetlist">{#advanced_dlg.link_target}</label></td>
-            <td><select id="target_list" name="target_list"></select></td>
+            <td><label id="targetlistlabel" for="targetlist">{#typolinks_dlg.link_target}</label></td>
+            <td><select id="target_list" name="target_list" style="width: 200px"></select></td>
           </tr>
           <tr>
             <td><label for="class_list">{#class_name}</label></td>
-            <td><select id="class_list" name="class_list"></select></td>
+            <td><select id="class_list" name="class_list" class="mceEditableSelect" style="width: 200px"><option value="" selected>{#not_set}</option></select></td>
           </tr>
         </table>
 		</div>

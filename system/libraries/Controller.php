@@ -672,7 +672,7 @@ abstract class Controller extends System
 			return null;
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-w' . $width . '-h' . $height . '.' . $objFile->extension;
+		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image), 0, 8) . '.' . $objFile->extension;
 
 		// Resize original image
 		if ($target)

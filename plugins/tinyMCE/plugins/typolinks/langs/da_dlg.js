@@ -1,27 +1,23 @@
-tinyMCE.addI18n('da.typolinks',{
-page : 'TYPOlight sider',
-file : 'TYPOlight filer'
-});
-tinyMCE.addI18n('en.typobox',{
-image_title : "Insert/edit lightbox image",
-image_list : "Image list",
-image_src : "Image URL",
-image_dimensions : "Width/height",
-image_alt : "Description",
-image_class : "CSS class",
-image_rel : "Type",
-image_rel_single : "Single image",
-image_rel_multi : "Image gallery",
-image_rel_empty : "Thumbnail only"
-});
-tinyMCE.addI18n('da.advanced_dlg',{
-link_title:"Indsæt/rediger link",
+tinyMCE.addI18n('da.typolinks_dlg',{
+page:"TYPOlight pagina's",
+file:"TYPOlight bestanden",
+link_title:"Voeg in/verander link",
 link_url:"Link URL",
-link_target:"Mål",
-link_target_same:"Åbn link i samme vindue",
-link_target_blank:"Åbn link i et nyt vindue",
+link_target:"Target",
+link_target_same:"Open link in hetzelfde venster",
+link_target_blank:"Open link in een nieuw venster",
 link_titlefield:"Titel",
-link_is_email:"Den URL du indtastede ser ud til at være en e-mail, vil du indsætte det nødvendige mailto: prefix?",
-link_is_external:"Den URL du indtastede ser ud til at være et eksternt link, vil du indsætte det nødvendige http:// prefix?",
-link_list:"Link list"
+link_is_email:"De URL die u invoerde lijkt een e-mailadres te zijn. Wilt u het verplichte prefix \'mailto:\' toevoegen?",
+link_is_external:"De URL die u invoerde lijkt een externe link te zijn. Wilt u het verplichte prefix \'http://\' toevoegen?",
+link_list:"Linklijst",
+image_title:"Voeg in/verander lightbox beeld",
+image_list:"Beeldlijst",
+image_src:"Beeld URL",
+image_dimensions:"Breedte/hoogte",
+image_alt:"Omschrijving",
+image_class:"CSS klasse",
+image_rel:"Type",
+image_rel_single:"Enkel beeld",
+image_rel_multi:"Beeldgalerij",
+image_rel_empty:"Alleen contactafdrukken"
 });

@@ -115,6 +115,7 @@ class Search extends System
 		$strHead = preg_replace('/^.*(<head[^>]*>.*<\/head>).*$/is', '$1', $strContent);
 		$strBody = preg_replace('/^.*(<body[^>]*>.*<\/body>).*$/is', '$1', $strContent);
 
+		unset($strContent);
 		$tags = array();
 
 		// Get description
@@ -135,7 +136,12 @@ class Search extends System
 			$arrData['keywords'] .= ' ' . implode(', ', array_unique($tags[2]));
 		}
 
-		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . strip_tags($strBody) . ' ' . $arrData['keywords'];
+		// Make sure <br /> tags are always followed by a line break
+		$strBody = str_replace('<br />', "<br />\n", $strBody);
+		$strBody = strip_tags($strBody);
+
+		// Put everything together
+		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . $strBody . ' ' . $arrData['keywords'];
 		$arrSet['text'] = trim(preg_replace('/ +/', ' ', $this->String->decodeEntities($arrSet['text'])));
 
 		$arrSet['tstamp'] = time();

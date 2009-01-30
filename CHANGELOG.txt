@@ -2,6 +2,13 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.5 (2009-01-30)
+--------------------------
+- Fixed issue with SEO-friendly image cache names (#465)
+- Fixed issue with indexer occasionally ignoring line breaks (#453)
+- Fixed issue with TinyMCE not showing labels in IE7 (#455)
+- Fixed issue with lightbox images not loading full size (#454)
+
 Version 2.6.4 (2009-01-24)
 --------------------------
 - Updated TinyMCE to version 3.2.1.1

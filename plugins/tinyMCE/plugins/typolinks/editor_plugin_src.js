@@ -41,7 +41,7 @@
 
 			// Register button
 			ed.addButton('typolinks', {
-				title : 'typolinks.desc',
+				title : 'typolinks.link_desc',
 				cmd : 'mceTypolinks',
 				image : url + '/img/link.gif'
 			});
@@ -69,7 +69,7 @@
 
 			// Register button
 			ed.addButton('typobox', {
-				title : 'typobox.desc',
+				title : 'typolinks.image_desc',
 				cmd : 'mceTypobox',
 				image : url + '/img/image.gif'
 			});

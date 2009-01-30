@@ -1,6 +1,4 @@
 tinyMCE.addI18n('pl.typolinks',{
-desc : 'Wstaw/edytuj link'
-});
-tinyMCE.addI18n('pl.typobox',{
-desc : 'Wstaw/Edytuj lightbox obraz'
+link_desc:'Wstaw/edytuj link',
+image_desc:'Wstaw/Edytuj lightbox obraz'
 });

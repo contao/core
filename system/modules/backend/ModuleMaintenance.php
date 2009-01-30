@@ -406,6 +406,10 @@ class ModuleMaintenance extends BackendModule
 			// Hide unpublished elements
 			$this->setCookie('FE_PREVIEW', 0, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 
+			// Purge temporary directory
+			$this->import('Automator');
+			$this->Automator->purgeTempFolder();
+
 			// Calculate hash
 			$strHash = sha1(session_id().$this->Environment->ip.'FE_USER_AUTH');
 
@@ -427,6 +431,7 @@ class ModuleMaintenance extends BackendModule
 			// Log out front end user
 			else
 			{
+				// Unset cookie
 				$this->setCookie('FE_USER_AUTH', $strHash, ($time - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
 
 				// Unset the recall cookies
