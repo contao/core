@@ -495,7 +495,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['form'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_content', 'getForms')
+			'options_callback'        => array('tl_content', 'getForms'),
+			'wizard' => array
+			(
+				array('tl_content', 'editForm')
+			)
 		),
 		'module' => array
 		(
@@ -503,7 +507,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_module.name',
-			'eval'                    => array('mandatory'=>true)
+			'eval'                    => array('mandatory'=>true),
+			'wizard' => array
+			(
+				array('tl_content', 'editModule')
+			)
 		),
 		'protected' => array
 		(
@@ -843,7 +851,7 @@ class tl_content extends Backend
 	 */
 	public function editAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -882,7 +890,7 @@ class tl_content extends Backend
 	 */
 	public function editArticleAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -931,6 +939,28 @@ class tl_content extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * Return the edit form wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editForm(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+	}
+
+
+	/**
+	 * Return the edit module wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editModule(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=modules&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 

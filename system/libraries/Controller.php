@@ -142,7 +142,7 @@ abstract class Controller extends System
 		if ($intId == 0)
 		{
 			// Show a particular article only
-			if ($this->Input->get('articles'))
+			if ($this->Input->get('articles') && $objPage->type == 'regular')
 			{
 				list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
 
@@ -271,7 +271,7 @@ abstract class Controller extends System
 
 			// Send 404 header
 			header('HTTP/1.0 404 Not Found');
-			return '';
+			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
 		}
 
 		if (!file_exists(TL_ROOT . '/system/modules/frontend/ModuleArticle.php'))

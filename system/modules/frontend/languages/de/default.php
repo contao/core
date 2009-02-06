@@ -111,6 +111,6 @@ $GLOBALS['TL_LANG']['MSC']['com_quote']    = '%s schrieb:';
 $GLOBALS['TL_LANG']['MSC']['com_code']     = 'Code:';
 $GLOBALS['TL_LANG']['MSC']['com_subject']  = 'TYPOlight :: Neuer Kommentar auf %s';
 $GLOBALS['TL_LANG']['MSC']['com_message']  = 'Ein neuer Kommentar wurde auf Ihrer Webseite erstellt.%sWenn Sie Ihre Kommentare moderieren, müssen Sie sich im Backend anmelden und den Kommentar freischalten.';
-$GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Die Seite "%s" existiert leider nicht.';
+$GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Der Eintrag "%s" existiert leider nicht.';
 
 ?>

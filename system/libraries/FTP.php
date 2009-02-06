@@ -163,10 +163,17 @@ class FTP extends Files
 			$this->delete($strNewName);
 		}
 
-		// Rename directories and files with the same case-insensitive name
-		if (is_dir(TL_ROOT . '/' . $strOldName) || strcasecmp($strOldName, $strNewName) !== strcmp($strOldName, $strNewName))
+		// Rename directories
+		if (is_dir(TL_ROOT . '/' . $strOldName))
 		{
 			return @ftp_rename($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName, $GLOBALS['TL_CONFIG']['ftpPath'] . $strNewName);
+		}
+
+		// Unix fix: rename case sensitively
+		if (strcasecmp($strOldName, $strNewName) !== strcmp($strOldName, $strNewName))
+		{
+			@ftp_rename($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName . '__');
+			$strOldName .= '__';
 		}
 
 		// Copy files to set the correct owner

@@ -2,6 +2,14 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.6 (2009-02-07)
+--------------------------
+- Re-added the TinyMCE "indent" and "outdent" buttons (#490)
+- Fixed issue with content element "article" modifying the page title (#462)
+- Fixed issue with safe mode hack changing file owner when renaming case-sensitively
+- Fixed issue with 403 pages not being shown if an article is specified (#477)
+- Fixed a few minor bugs
+
 Version 2.6.5 (2009-01-30)
 --------------------------
 - Fixed issue with SEO-friendly image cache names (#465)

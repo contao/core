@@ -58,6 +58,7 @@ $languages = array
 	'is' => 'Icelandic',
 	'it' => 'Italian',
 	'ja' => 'Japanese',
+	'ka' => 'Georgian',
 	'ko' => 'Korean',
 	'lt' => 'Lithuanian',
 	'lv' => 'Latvian',

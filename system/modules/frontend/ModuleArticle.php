@@ -139,7 +139,7 @@ class ModuleArticle extends Module
 		}
 
 		// Overwrite page title
-		if (strlen($this->Input->get('articles')) && strlen($this->title))
+		if (!$this->blnNoMarkup && strlen($this->Input->get('articles')) && strlen($this->title))
 		{
 			global $objPage;
 			$objPage->pageTitle = $this->title;
