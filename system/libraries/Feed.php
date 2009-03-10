@@ -163,8 +163,7 @@ class Feed extends System
 		{
 			$xml .= '  <entry>' . "\n";
 			$xml .= '    <title>' . htmlspecialchars($objItem->title) . '</title>' . "\n";
-			$xml .= '    <summary type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></summary>' . "\n";
-			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->content) . '</div></content>' . "\n";
+			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>' . "\n";
 			$xml .= '    <link rel="alternate" href="' . htmlspecialchars($objItem->link) . '" />' . "\n";
 			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
 			$xml .= '    <id>' . ($objItem->guid ? $objItem->guid : htmlspecialchars($objItem->link)) . '</id>' . "\n";

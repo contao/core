@@ -122,8 +122,8 @@ abstract class Events extends Module
 			}
 
 			// Get events of the current period
-			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?)))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY startTime")
-										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $time, $time);
+			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY startTime")
+										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $time, $time);
 
 			if ($objEvents->numRows < 1)
 			{
@@ -160,11 +160,13 @@ abstract class Events extends Module
 						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
 						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
 
-						// Add event
-						if ($objEvents->startTime >= $intStart || $objEvents->endTime <= $intEnd)
+						// Skip events outside the scope
+						if ($objEvents->startTime < $intStart || $objEvents->endTime > $intEnd)
 						{
-							$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
+							continue;
 						}
+
+						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
 					}
 				}
 			}

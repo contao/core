@@ -272,14 +272,6 @@ class Index extends Frontend
 		// Replace insert tags
 		$strBuffer = $this->replaceInsertTags($strBuffer);
 
-		// Restore basic entities
-		echo str_replace
-		(
-			array('[&]', '[lt]', '[gt]'),
-			array('&amp;', '&lt;', '&gt;'),
-			$strBuffer
-		);
-
 		// Stop execution
 		exit;
 	}

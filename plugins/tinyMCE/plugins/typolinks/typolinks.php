@@ -80,7 +80,12 @@ $objLib = new typolib();
           </tr>
           <tr>
             <td nowrap="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
-            <td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /><span id="hrefbrowsercontainer" style="display:none"></span></td>
+            <td><table border="0" cellspacing="0" cellpadding="0"> 
+				  <tr> 
+					<td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /></td> 
+					<td id="hrefbrowsercontainer">&nbsp;</td>
+				  </tr> 
+				</table></td>
           </tr>
           <tr>
             <td nowrap="nowrap"><label for="linktitle">{#typolinks_dlg.link_titlefield}</label></td>

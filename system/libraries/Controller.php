@@ -1004,6 +1004,9 @@ abstract class Controller extends System
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=false)
 	{
+		// Restore basic entities
+		$strBuffer = str_replace(array('[&]', '[lt]', '[gt]'), array('&amp;', '&lt;', '&gt;'), $strBuffer);
+
 		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
 		{
 			return $strBuffer;
@@ -1424,7 +1427,9 @@ abstract class Controller extends System
 						$this->import('String');
 
 						$arrChunks = explode('?', urldecode($elements[1]));
-						$arrParams = explode('&', $this->String->decodeEntities($arrChunks[1]));
+						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = str_replace('[&]', '&', $strSource);
+						$arrParams = explode('&', $strSource);
 
 						foreach ($arrParams as $strParam)
 						{

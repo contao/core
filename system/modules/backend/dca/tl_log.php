@@ -47,7 +47,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		'sorting' => array
 		(
 			'mode'                    => 2,
-			'fields'                  => array('tstamp DESC'),
+			'fields'                  => array('tstamp DESC', 'id DESC'),
 			'panelLayout'             => 'filter;sort,search,limit'
 		),
 		'label' => array

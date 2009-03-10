@@ -2,6 +2,17 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.6.7 (2009-03-11)
+--------------------------
+- Added Dutch and Latvian translation to the "typolinks" plugin (#525, #539)
+- Fixed issue with relative links in newsletters not being converted correctly (#493)
+- Fixed issue with protected pages with no groups assigned appearing in search results (#533)
+- Fixed issue with resizing of uploaded images not working correctly (#501)
+- Fixed issue with ampersands in square brackets not being decoded everywhere (#558)
+- Fixed two issues with the TinyMCE "typolinks" plugin (#461, #503)
+- Fixed two issues with infinitely recurring events (#524)
+- Fixed some minor issues
+
 Version 2.6.6 (2009-02-07)
 --------------------------
 - Re-added the TinyMCE "indent" and "outdent" buttons (#490)

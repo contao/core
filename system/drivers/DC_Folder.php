@@ -610,6 +610,9 @@ class DC_Folder extends DataContainer implements listable, editable
 						{
 							$blnResized = true;
 							$this->resizeImage($strNewFile, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
+
+							// Recalculate image size
+        					$arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile);
 						}
 
 						// Image exceeds maximum image height

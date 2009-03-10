@@ -1060,11 +1060,15 @@ class StyleSheets extends Backend
 					break;
 
 				case 'font-style':
-					$arrSet['font'] = 1;
-					if ($arrChunks[1] == 'italic')
-					{
-						$arrSet['fontstyle'][] = 'italic';
-					}
+				    if ($arrChunks[1] == 'italic')
+    				{
+        				$arrSet['font'] = 1;
+        				$arrSet['fontstyle'][] = 'italic';
+    				}
+    				else
+    				{
+        				$arrSet['own'][] = $strDefinition;
+    				}
 					break;
 
 				case 'text-decoration':

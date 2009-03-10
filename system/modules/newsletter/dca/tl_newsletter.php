@@ -402,22 +402,25 @@ class tl_newsletter extends Backend
 	 */
 	public function convertRelativeLinks($strContent)
 	{
-		$arrLinks = array();
-		preg_match_all('/href="([^"]+)"/i', $strContent, $arrLinks);
+		$arrLinks = preg_split('/href="([^"]+)/', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$strContent = '';
 
-		foreach ($arrLinks[1] as $strLink)
+		for($i=0; $i<count($arrLinks); $i=$i+2)
 		{
-			if (!preg_match('@^(http://|https://|ftp:|mailto:)@i', $strLink))
+			$strContent .= $arrLinks[$i];
+			$strLink = $arrLinks[$i+1];
+
+			if (!strlen($strLink))
 			{
-				if ($strLink == '/')
-				{
-					$strContent = str_replace('href="/"', 'href="' . $this->Environment->base . '"', $strContent);
-				}
-				else
-				{
-					$strContent = str_replace($strLink, $this->Environment->base . $strLink, $strContent);
-				}
+				continue;
 			}
+
+			if (!preg_match('@^https?://|ftp:|mailto:|#@i', $strLink))
+			{
+				$strLink = $this->Environment->base . (($strLink != '/') ? $strLink : '');
+			}
+
+			$strContent .= 'href="' . $strLink;
 		}
 
 		return $strContent;

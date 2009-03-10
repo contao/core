@@ -60,7 +60,7 @@ $GLOBALS['TL_LANG']['ERR']['accountLocked']  = 'Das Konto wurde gesperrt! Sie k�
 $GLOBALS['TL_LANG']['ERR']['invalidLogin']   = 'Anmeldung fehlgeschlagen!';
 $GLOBALS['TL_LANG']['ERR']['invalidColor']   = 'Ungültiges Farbformat!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Bitte wählen Sie mindestens ein Feld aus!';
-$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Der Seitenalias "%s" existiert bereits!';
+$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Der Alias "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Der Ordner "%s" kann nicht importiert werden!';
 
 

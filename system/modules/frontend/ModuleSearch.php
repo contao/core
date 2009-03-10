@@ -168,6 +168,12 @@ class ModuleSearch extends Module
 				{
 					if ($v['protected'])
 					{
+						if (!FE_USER_LOGGED_IN)
+						{
+							unset($arrResult[$k]);
+							continue;
+						}
+
 						$v['groups'] = deserialize($v['groups']);
 
 						if (is_array($v['groups']) && count(array_intersect($this->User->groups, $v['groups'])) < 1)

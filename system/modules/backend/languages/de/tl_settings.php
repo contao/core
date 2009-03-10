@@ -85,7 +85,7 @@ $GLOBALS['TL_LANG']['tl_settings']['inactiveModules']     = array('Inaktive Back
 $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Neue Zeilen mittels Absätzen erstellen', 'Neue Zeilen im Rich Text Editor mittels Absätzen anstatt mittels Zeilenumbrüchen erstellen.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Inhaltselemente und andere Ressourcen in der Backend-Vorschau nicht verkürzen.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Standardbenutzer', 'Falls eine Seite keinen Besitzer hat, wird der hier angegebene Standardbenutzer verwendet. Ist weder ein Besitzer noch ein Standardbenutzer definiert, gelten keinerlei Zugriffsbeschränkung für eine Seite!');
-$GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Standardgruppe', 'Falls keine Gruppe als Besitzer hat, wird die hier angegebene Standardgruppe verwendet. Ist weder eine besitzende Gruppe noch eine Standardgruppe definiert, gelten keinerlei Zugriffsbeschränkung für eine Seite!');
+$GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Standardgruppe', 'Falls eine Seite keine Gruppe als Besitzer hat, wird die hier angegebene Standardgruppe verwendet. Ist weder eine besitzende Gruppe noch eine Standardgruppe definiert, gelten keinerlei Zugriffsbeschränkung für eine Seite!');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Standardzugriffsrechte', 'Standardmäßig verwendet eine Seite die gleichen Zugriffsrechte wie ihre übergeordnete Seite. Sind keine Zugriffsrechte definiert, werden diese Standardzugriffsrechte verwendet.');
 
 

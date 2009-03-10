@@ -34,7 +34,14 @@ var Typobox = {
 	},
 
 	init : function() {
-		var f = document.forms[0], ed = tinyMCEPopup.editor, c = ed.selection.getContent();
+		var f = document.forms[0], ed = tinyMCEPopup.editor;
+
+		// Setup browse button
+		document.getElementById('srcbrowsercontainer').innerHTML = getBrowserHTML('srcbrowser','src','image','theme_advanced_image');
+		if (isVisible('srcbrowser'))
+			document.getElementById('src').style.width = '180px';
+
+		c = ed.selection.getContent();
 		this.fillFileList('image_list', 'tinyMCEImageList');
 
 		if (!c || c.indexOf("image::") == -1) {

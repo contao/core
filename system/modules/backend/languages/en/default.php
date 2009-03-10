@@ -60,7 +60,7 @@ $GLOBALS['TL_LANG']['ERR']['accountLocked']  = 'This account has been locked! Yo
 $GLOBALS['TL_LANG']['ERR']['invalidLogin']   = 'Login failed!';
 $GLOBALS['TL_LANG']['ERR']['invalidColor']   = 'Invalid color format!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Please select at least one field!';
-$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Page alias "%s" already exists!';
+$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Alias "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Folder "%s" cannot be imported!';
 
 

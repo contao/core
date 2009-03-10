@@ -131,10 +131,9 @@ class News extends Frontend
 			$objItem = new FeedItem();
 
 			$objItem->title = $objArticle->headline;
-			$objItem->description = strlen($objArticle->teaser) ? $objArticle->teaser : $objArticle->text;
+			$objItem->description = strlen($objArticle->text) ? $objArticle->text : $objArticle->teaser;
 			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
 			$objItem->published = $objArticle->date;
-			$objItem->content = $objArticle->text;
 
 			// Enclosure
 			if ($objArticle->addEnclosure)

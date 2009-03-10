@@ -1,0 +1,23 @@
+tinyMCE.addI18n('nl.typolinks_dlg',{
+page:"TYPOlight pagina's",
+file:"TYPOlight bestanden",
+link_title:"Voeg in/verander link",
+link_url:"Link URL",
+link_target:"Target",
+link_target_same:"Open link in hetzelfde venster",
+link_target_blank:"Open link in een nieuw venster",
+link_titlefield:"Titel",
+link_is_email:"De URL die u invoerde lijkt een e-mailadres te zijn. Wilt u het verplichte prefix \'mailto:\' toevoegen?",
+link_is_external:"De URL die u invoerde lijkt een externe link te zijn. Wilt u het verplichte prefix \'http://\' toevoegen?",
+link_list:"Linklijst",
+image_title:"Voeg in/verander lightbox beeld",
+image_list:"Beeldlijst",
+image_src:"Beeld URL",
+image_dimensions:"Breedte/hoogte",
+image_alt:"Omschrijving",
+image_class:"CSS klasse",
+image_rel:"Type",
+image_rel_single:"Enkel beeld",
+image_rel_multi:"Beeldgalerij",
+image_rel_empty:"Alleen contactafdrukken"
+});
