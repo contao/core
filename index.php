@@ -270,10 +270,7 @@ class Index extends Frontend
 		header('Pragma: public');
 
 		// Replace insert tags
-		$strBuffer = $this->replaceInsertTags($strBuffer);
-
-		// Stop execution
-		exit;
+		echo $this->replaceInsertTags($strBuffer);
 	}
 }
 
