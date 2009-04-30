@@ -1,68 +1,67 @@
-/* TYPOlight IE back end CSS file */
-* html body
-{
-	height:100%;
-	margin-left:1px;
-	text-align:center;
-}
-* html .block,* html .tl_content
-{
-	zoom:1;
-}
+/**
+ * TYPOlight webCMS
+ * Copyright (C) 2005-2009 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
 
-/* Ajax */
+/* Navigation */
+#tl_helpBox
+{
+	filter:alpha(opacity=80);
+}
 #tl_ajaxOverlay
 {
 	filter:alpha(opacity=30);
 }
-
-/* Navigation */
-* html #tl_navigation h1
+.opacity
 {
-	width:196px;
-	w\idth:190px;
+	filter:alpha(opacity=80);
 }
-*:first-child+html #tl_navigation .tl_level_1_group img
+#tl_navigation .tl_parent
 {
-	top:0px;
+	display:inline;
 }
-
-/* Filter */
-.tl_panel
+#tl_navigation .tl_level_1_group img
 {
-	padding-top:5px;
-	padding-bottom:1px;
-}
-#tl_search span
-{
-	vertical-align:3px;
-}
-#tl_search .tl_select
-{
-	position:relative;
-	top:0px;
-}
-*:first-child+html #tl_search .tl_text
-{
-	position:static;
-}
-
-/* Listing */
-.toggleWrap
-{
-	cursor:hand;
+	top:0;
 }
 .tl_show
 {
 	margin:18px;
 }
-* html .tl_noopt
+.tl_col_1 .tl_checkbox
 {
-	margin:0 0 1px 0;
+	margin:-2px 0 0 -3px;
 }
-.tl_select_label
+
+/* Listing */
+.tl_panel,.tl_panel_bottom
 {
-	top:0px;
+	padding-bottom:0;
+}
+.tl_panel .tl_search span,.tl_panel strong,.tl_panel_bottom strong
+{
+	vertical-align:3px;
 }
 .tl_folder_list,.tl_folder_tlist
 {
@@ -70,71 +69,51 @@
 }
 .tl_file_list
 {
-	padding:1px 0;
-}
-.tl_listing li
-{
-	min-height:18px;
-	padding-bottom:1px;
-	margin-bottom:-2px;
-}
-* html .tl_listing li
-{
-	height:18px;
-}
-.tl_listing li.parent ul
-{
-	margin-top:-15px;
+	padding:1px 0 2px 0;
 }
 label.tl_change_selected
 {
-	top:0px;
-	position:static;
+	position:relative;
+	top:1px;
 }
-.fw_checkbox
-{
-	margin-left:-3px;
-	margin-right:-2px;
-}
-
-/* Wizards */
-.tl_optionwizard label
-{
-	vertical-align:middle;
-}
-*:first-child+html .tl_optionwizard td input
+.tl_noopt
 {
 	margin:0;
 }
+
+/* Wizards */
 #tl_tablewizard
 {
 	overflow-x:auto;
 	overflow-y:hidden;
 	padding-bottom:19px;
 }
-* html .tl_listwizard,* html .tl_listwizard li
+.tl_tablewizard td.tcontainer
 {
-	height:1px;
+	height:75px;
 }
-*:first-child+html .tl_listwizard li input
+.tl_tablewizard td.tcontainer .tl_textarea
 {
-	margin:0;
+	margin-top:1px;
 }
 .tl_listwizard_img
 {
-	top:1px;
+	top:0px;
 }
-.tl_checkbox_wizard_img
+.tl_optionwizard label
 {
-	margin-top:0;
+	position:relative;
+	top:4px;
+	left:-3px
 }
 .tl_checkbox_wizard span
 {
-	margin:-4px 0 0 0;
+	margin:-3px 0 0 0;
 }
-.tl_checkbox_wizard
+.tl_checkbox_wizard label
 {
-	padding-top:4px;
+	position:relative;
+	top:-1px;
 }
 
 /* Forms */
@@ -142,42 +121,14 @@ label.tl_change_selected
 {
 	margin:0;
 }
-* html .tl_text_unit
-{
-	margin:0;
-	width:254px;
-}
-* html .tl_text_trbl
-{
-	margin:0;
-	width:56px;
-}
-* html .tl_text_interval
-{
-	margin:0;
-}
-* html .tl_select_unit
-{
-	margin:0;
-	width:56px;
-}
-* html .tl_select_interval
-{
-	margin:0;
-}
-.tl_checkbox
+.tl_checkbox,.tl_radio
 {
 	margin:-3px 0 -2px -3px;
 	vertical-align:middle;
 }
 .tl_tree_checkbox
 {
-	margin:-3px 0 0 0;
-}
-.tl_radio
-{
-	margin:-3px 0 -2px -3px;
-	vertical-align:middle;
+	margin:-2px 0 0 0;
 }
 .tl_tree_radio
 {
@@ -186,4 +137,38 @@ label.tl_change_selected
 .tl_upload_field
 {
 	margin:0;
+}
+
+/* BE 27 */
+fieldset.collapsed legend
+{
+	display:inline;
+}
+fieldset.tl_tbox,fieldset.tl_box
+{
+	padding-top:0;
+	background-position:left 8px;
+}
+fieldset.nolegend
+{
+	padding-top:12px;
+	background-position:left top;
+}
+fieldset legend
+{
+	margin-bottom:6px;
+}
+fieldset.collapsed
+{
+	padding-bottom:4px;
+}
+
+/* IE 6 only */
+* html body
+{
+	height:100%;
+}
+* html .block,* html .tl_content,* html .clr
+{
+	zoom:1;
 }

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,16 +30,16 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['news'] = array('Nachrichten', 'Mit diesem Modul können Sie aktuelle Nachrichten auf Ihrer Webseite verwalten.');
+$GLOBALS['TL_LANG']['MOD']['news'] = array('Nachrichten', 'Nachrichten verwalten und als RSS- oder Atom-Feed exportieren.');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['news']        = 'Nachrichten';
-$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Nachrichtenliste', 'Dieses Modul zeigt eine bestimmte Anzahl an Beiträgen eines bestimmten Nachrichtenarchivs.');
-$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Nachrichtenleser', 'Dieses Modul zeigt einen einzelnen Nachrichtenbeitrag.');
-$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('Nachrichtenarchiv', 'Dieses Module zeigt alle Beiträge eines bestimmten Nachrichtenarchives. Bitte beachten Sie, dass das Modul "Nachrichtenarchiv-Menü" benötigt wird, um durch das Archiv zu navigieren.');
-$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('Nachrichtenarchiv-Menü', 'Mit diesem Modul können Sie durch ein Nachrichtenarchiv navigieren.');
+$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Nachrichtenliste', 'fügt der Seite eine Nachrichtenliste hinzu.');
+$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Nachrichtenleser', 'stellt einen einzelnen Nachrichtenbeitrag dar.');
+$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('Nachrichtenarchiv', 'fügt der Seite ein Nachrichtenarchiv hinzu.');
+$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('Nachrichtenarchiv-Menü', 'erzeugt ein Menü zur Navigation des Nachrichtenarchivs.');
 
 ?>

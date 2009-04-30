@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Plugins
  * @license    LGPL
@@ -31,15 +31,20 @@
  * Class typolib
  * 
  * Provide methods to render TinyMCE page and file drop down menus.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
-class typolib extends Controller
+class typolib extends Backend
 {
 
 	/**
-	 * Initialize the object
+	 * Initialize the controller
+	 * 
+	 * 1. Import user
+	 * 2. Call parent constructor
+	 * 3. Authenticate user
+	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
 	{
@@ -47,185 +52,6 @@ class typolib extends Controller
 		parent::__construct();
 
 		$this->User->authenticate();
-		$this->import('Database');
-	}
-
-
-	/**
-	 * Get all allowed pages and return them as string
-	 * @return string
-	 */
-	public function createPageList()
-	{
-		if ($this->User->isAdmin)
-		{
-			return $this->doCreatePageList();
-		}
-
-		$return = '';
-		$processed = array();
-
-		foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
-		{
-			$objPage = $this->getPageDetails($page);
-
-			// Root page mounted
-			if ($objPage->type == 'root')
-			{
-				$title = $objPage->title;
-				$start = $objPage->id;
-			}
-
-			// Regular page mounted
-			else
-			{
-				$title = $objPage->rootTitle;
-				$start = $objPage->rootId;
-			}
-
-			// Do not process twice
-			if (in_array($start, $processed))
-			{
-				continue;
-			}
-
-			$processed[] = $start;
-			$return .= '<optgroup label="' . $title . '">' . $this->doCreatePageList($start) . '</optgroup>';
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Recursively get all allowed pages and return them as string
-	 * @param integer
-	 * @param integer
-	 * @return string
-	 */
-	public function doCreatePageList($intId=0, $level=-1)
-	{
-		$objPages = $this->Database->prepare("SELECT id, title, type FROM tl_page WHERE pid=? ORDER BY sorting")
-								   ->execute($intId);
-
-		if ($objPages->numRows < 1)
-		{
-			return '';
-		}
-
-		++$level;
-		$strOptions = '';
-
-		while ($objPages->next())
-		{
-			if ($objPages->type == 'root')
-			{
-				$strOptions .= '<optgroup label="' . $objPages->title . '">';
-				$strOptions .= $this->doCreatePageList($objPages->id, -1);
-				$strOptions .= '</optgroup>';
-			}
-			else
-			{
-				$strOptions .= sprintf('<option value="{{link_url::%s}}">%s%s</option>', $objPages->id, str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
-				$strOptions .= $this->doCreatePageList($objPages->id, $level);
-			}
-		}
-
-		return $strOptions;
-	}
-
-
-	/**
-	 * Get all allowed files and return them as string
-	 * @param boolean
-	 * @return string
-	 */
-	public function createFileList($blnFilterImages=false)
-	{
-		if ($this->User->isAdmin)
-		{
-			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $blnFilterImages);
-		}
-
-		$return = '';
-		$processed = array();
-
-		// Limit nodes to the filemounts of the user
-		foreach ($this->eliminateNestedPaths($this->User->filemounts) as $path)
-		{
-			if (in_array($path, $processed))
-			{
-				continue;
-			}
-
-			$processed[] = $path;
-			$return .= $this->doCreateFileList($path, -1, $blnFilterImages);
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Recursively get all allowed files and return them as string
-	 * @param integer
-	 * @param integer
-	 * @param boolean
-	 * @return string
-	 */
-	public function doCreateFileList($strFolder=null, $level=-1, $blnFilterImages=false)
-	{
-		$arrPages = scan(TL_ROOT . '/' . $strFolder);
-
-		// Empty folder
-		if (count($arrPages) < 1)
-		{
-			return '';
-		}
-
-		// Protected folder
-		if (array_search('.htaccess', $arrPages) !== false)
-		{
-			return '';
-		}
-
-		++$level;
-		$strFolders = '';
-		$strFiles = '';
-
-		// Recursively list all files and folders
-		foreach ($arrPages as $strFile)
-		{
-			if (substr($strFile, 0, 1) == '.')
-			{
-				continue;
-			}
-
-			// Folders
-			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
-			{
-				$strFolders .=  $this->doCreateFileList($strFolder . '/' . $strFile, $level, $blnFilterImages);
-			}
-
-			// Filter images
-			elseif ($blnFilterImages && !preg_match('/\.gif$|\.jpg$|\.jpeg$|\.png$/i', $strFile))
-			{
-				continue;
-			}
-
-			// Files
-			elseif ($strFile != 'meta.txt')
-			{
-				$strFiles .= sprintf('<option value="%s">%s</option>', $strFolder . '/' . $strFile, specialchars($strFile));
-			}
-		}
-
-		if (strlen($strFiles))
-		{
-			return '<optgroup label="' . specialchars($strFolder) . '">' . $strFiles . $strFolders . '</optgroup>';
-		}
-
-		return $strFiles . $strFolders;
 	}
 
 

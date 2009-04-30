@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,18 +19,12 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
  */
-
-
-/**
- * Load tl_newsletter language file
- */
-$this->loadLanguageFile('tl_newsletter');
 
 
 /**
@@ -118,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addFile'),
-		'default'                     => 'subject,alias;content;text;senderName,sender;addFile;template,sendText'
+		'default'                     => '{title_legend},subject,alias;{html_legend},content;{text_legend:hide},text;{attachment_legend},addFile;{template_legend:hide},template;{expert_legend:hide},sendText,senderName,sender'
 	),
 
 	// Subpalettes
@@ -130,30 +124,13 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 	// Fields
 	'fields' => array
 	(
-		'sender' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sender'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'filter'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true)
-		),
-		'senderName' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['senderName'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128)
-		),
 		'subject' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['subject'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
 		'alias' => array
 		(
@@ -161,7 +138,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128),
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'generateAlias')
@@ -218,6 +195,23 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox'
 		),
+		'sender' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sender'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'filter'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true, 'tl_class'=>'w50')
+		),
+		'senderName' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['senderName'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+		),
 		'sent' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sent'],
@@ -239,7 +233,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
  * Class tl_newsletter
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -387,9 +381,9 @@ class tl_newsletter extends Backend
 	public function listNewsletters($arrRow)
 	{
 		return '
-<div class="cte_type ' . (($arrRow['sent'] && $arrRow['date']) ? 'published' : 'unpublished') . '"><strong>' . $arrRow['subject'] . '</strong> - ' . (($arrRow['sent'] && $arrRow['date']) ? sprintf($GLOBALS['TL_LANG']['tl_newsletter']['sentOn'], date($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date'])) : $GLOBALS['TL_LANG']['tl_newsletter']['notSent']) . '</div>
+<div class="cte_type ' . (($arrRow['sent'] && $arrRow['date']) ? 'published' : 'unpublished') . '"><strong>' . $arrRow['subject'] . '</strong> - ' . (($arrRow['sent'] && $arrRow['date']) ? sprintf($GLOBALS['TL_LANG']['tl_newsletter']['sentOn'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date'])) : $GLOBALS['TL_LANG']['tl_newsletter']['notSent']) . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h128' : '') . ' block">' . (!$arrRow['sendText'] ? '
-' . $arrRow['content'] . '<hr />' : '' ) . ' 
+' . $arrRow['content'] . '<hr />' : '' ) . '
 ' . nl2br($arrRow['text']) . '
 </div>' . "\n";
 	}
@@ -449,7 +443,7 @@ class tl_newsletter extends Backend
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_newsletter WHERE alias=?")
-								   ->execute($varValue, $dc->id);
+								   ->execute($varValue);
 
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)

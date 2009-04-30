@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Folder
  *
  * Provide methods to handle folders.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -76,7 +76,7 @@ class Folder extends System
 
 			foreach ($arrChunks as $strFolder)
 			{
-				$strPath .= $strFolder . '/'; 
+				$strPath .= $strFolder . '/';
 				$this->Files->mkdir($strPath);
 			}
 		}
@@ -87,16 +87,15 @@ class Folder extends System
 	 * Return an object property
 	 * @param string
 	 * @return mixed
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
-		if ($strKey != 'value')
+		if ($strKey == 'value')
 		{
-			throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
+			return $this->strFolder;
 		}
 
-		return $this->strFolder;
+		return null;
 	}
 
 

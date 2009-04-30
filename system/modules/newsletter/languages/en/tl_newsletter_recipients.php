@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -31,10 +31,16 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']   = array('E-mail address', 'Please enter the recipient\'s e-mail address.');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Activated', 'E-mail addresses are usually activated by clicking a link in the confirmation e-mail (double-opt-in).');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source']  = array('File source', 'Please choose the CSV file you want to import from the files directory.');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP address', 'The ip address of the subscriber.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Activate recipient', 'Recipients are usually activated automatically (double-opt-in).');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source']  = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP address', 'The IP address of the subscriber.');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'] = array('Subscription date', 'The date of subscription.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email_legend'] = 'E-mail address';
 
 
 /**
@@ -49,10 +55,10 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'added manually'
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']    = array('Add recipient', 'Add a new recipient');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']   = array('Recipient details', 'Show the details of recipient ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']   = array('Edit recipient', 'Edit recipient ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']   = array('Copy recipient', 'Copy recipient ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete'] = array('Delete recipient', 'Delete recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']   = array('Recipient details', 'Show details of recipient ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'] = array('CSV import', 'Import recipients from a CSV file');
 
 ?>

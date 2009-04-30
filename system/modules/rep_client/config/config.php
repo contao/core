@@ -11,19 +11,18 @@
 /**
  * BACK END MODULES
  */
-if (extension_loaded('soap')) {
-
-	$GLOBALS['BE_MOD']['system']['repository_catalog'] = array(
+array_insert($GLOBALS['BE_MOD']['system'], 4, array
+(
+	'repository_catalog' => array(
 		'callback'		=>	'RepositoryCatalog',
 		'icon'			=>	RepositoryBackendTheme::image('catalog16'),
 		'stylesheet'	=>	RepositoryBackendTheme::file('backend.css')
-	);
-
-	$GLOBALS['BE_MOD']['system']['repository_manager'] = array(
+	),
+	'repository_manager' => array(
 		'callback'		=>	'RepositoryManager',
 		'icon'			=>	RepositoryBackendTheme::image('install16'),
 		'stylesheet'	=>	RepositoryBackendTheme::file('backend.css')
-	);
+	)
+));
 
-} // if
 ?>

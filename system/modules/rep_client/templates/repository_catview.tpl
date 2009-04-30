@@ -62,7 +62,7 @@
 </tr>
 <tr>
   <th><?php echo $text['releasedate'][0]; ?></th>
-  <td><?php echo date($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
+  <td><?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
 <?php if ($ext->type=='commercial') { ?> 
   <th><?php echo $text['demo'][0]; ?></th>
   <td><?php echo $ext->demo ? $text['yes'] : $text['no']; ?></td>

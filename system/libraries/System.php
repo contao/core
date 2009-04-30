@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class System
  *
  * Provide default methods that are required in all models and controllers.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -109,6 +109,12 @@ abstract class System
 	 * @var object
 	 */
 	protected $Automator;
+
+	/**
+	 * Cache array
+	 * @var array
+	 */
+	protected $arrCache = array();
 
 
 	/**
@@ -214,7 +220,7 @@ abstract class System
 	 * @param string
 	 * @param false
 	 */
-	protected function redirect($strLocation, $blnTemporary=false)
+	protected function redirect($strLocation, $intStatus=303)
 	{
 		if (headers_sent())
 		{
@@ -222,13 +228,19 @@ abstract class System
 		}
 
 		// Header
-		if ($blnTemporary)
+		switch ($intStatus)
 		{
-			header('HTTP/1.1 302 Moved Temporarily');
-		}
-		else
-		{
-			header('HTTP/1.1 301 Moved Permanently');
+			case 301:
+				header('HTTP/1.1 301 Moved Permanently');
+				break;
+
+			case 302:
+				header('HTTP/1.1 302 Found');
+				break;
+
+			case 303:
+				header('HTTP/1.1 303 See Other');
+				break;
 		}
 
 		// Check target address
@@ -307,6 +319,70 @@ abstract class System
 		}
 
 		include(TL_ROOT . '/system/config/langconfig.php');
+	}
+
+
+	/**
+	 * Parse a date format string and translate textual representations
+	 * @param integer
+	 * @param string
+	 * @return string
+	 */
+	protected function parseDate($strFormat, $intTstamp=null)
+	{
+		$strModified = str_replace
+		(
+			array('l', 'D', 'F', 'M'),
+			array('w::1', 'w::2', 'n::3', 'n::4'),
+			$strFormat
+		);
+
+		if (is_null($intTstamp))
+		{
+			$strDate = date($strModified);
+		}
+		else
+		{
+			$strDate = date($strModified, $intTstamp);
+		}
+
+		if (strpos($strDate, '::') === false)
+		{
+			return $strDate;
+		}
+
+		$strReturn = '';
+		$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+		foreach ($chunks as $chunk)
+		{
+			list($index, $flag) = explode('::', $chunk);
+
+			switch ($flag)
+			{
+				case 1:
+					$strReturn .= $GLOBALS['TL_LANG']['DAYS'][$index];
+					break;
+
+				case 2:
+					$strReturn .= substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, 3);
+					break;
+
+				case 3:
+					$strReturn .= $GLOBALS['TL_LANG']['MONTHS'][($index - 1)];
+					break;
+
+				case 4:
+					$strReturn .= substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, 3);
+					break;
+
+				default:
+					$strReturn .= $chunk;
+					break;
+			}
+		}
+
+		return $strReturn;	
 	}
 
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -30,9 +30,9 @@
 /**
  * Class Request
  *
- * Provide methods to handle HTTP request. This class uses some functions of 
+ * Provide methods to handle HTTP request. This class uses some functions of
  * Drupal's HTTP request class that you can find on http://drupal.org.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -117,7 +117,7 @@ class Request
 				break;
 
 			default:
-				throw new Exception(sprintf('Invalid argment "%s"', $strKey));
+				throw new Exception(sprintf('Invalid argument "%s"', $strKey));
 				break;
 		}
 	}
@@ -127,7 +127,6 @@ class Request
 	 * Return an object property
 	 * @param string
 	 * @return mixed
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -154,7 +153,7 @@ class Request
 				break;
 
 			default:
-				throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
+				return null;
 				break;
 		}
 	}
@@ -248,7 +247,7 @@ class Request
 			$default[$header] = $header . ': ' . $value;
 		}
 
-		$request = strtoupper($this->strMethod) .' '. $path ." HTTP/1.0\r\n";
+		$request = strtoupper($this->strMethod) .' '. $path ." HTTP/1.1\r\n";
 		$request .= implode("\r\n", $default);
 		$request .= "\r\n\r\n";
 
@@ -316,7 +315,7 @@ class Request
 			405 => 'Method Not Allowed',
 			406 => 'Not Acceptable',
 			407 => 'Proxy Authentication Required',
-			408 => 'Request Time-out',
+			408 => 'Request Timeout',
 			409 => 'Conflict',
 			410 => 'Gone',
 			411 => 'Length Required',
@@ -324,14 +323,14 @@ class Request
 			413 => 'Request Entity Too Large',
 			414 => 'Request-URI Too Large',
 			415 => 'Unsupported Media Type',
-			416 => 'Requested range not satisfiable',
+			416 => 'Requested Range Not Satisfiable',
 			417 => 'Expectation Failed',
 			500 => 'Internal Server Error',
 			501 => 'Not Implemented',
 			502 => 'Bad Gateway',
 			503 => 'Service Unavailable',
-			504 => 'Gateway Time-out',
-			505 => 'HTTP Version not supported'
+			504 => 'Gateway Timeout',
+			505 => 'HTTP Version Not Supported'
 		);
 
 		if (!isset($responses[$code]))

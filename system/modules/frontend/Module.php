@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Module
  *
  * Parent class for front end modules.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -55,6 +55,12 @@ abstract class Module extends Frontend
 	 * @var array
 	 */
 	protected $arrData = array();
+
+	/**
+	 * Style array
+	 * @var array
+	 */
+	protected $arrStyle = array();
 
 
 	/**
@@ -105,30 +111,21 @@ abstract class Module extends Frontend
 	 */
 	public function generate()
 	{
-		$style = array();
-
-		// Margin
 		if (strlen($this->arrData['space'][0]))
 		{
-			$style[] = 'margin-top:'.$this->arrData['space'][0].'px;';
+			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';
 		}
 
 		if (strlen($this->arrData['space'][1]))
 		{
-			$style[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
-		}
-
-		// Align
-		if (strlen($this->align))
-		{
-			$style[] = 'text-align:'.$this->align.';';
+			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
 
 		$this->compile();
 
-		$this->Template->style = count($style) ? implode(' ', $style) : '';
+		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = strlen($this->cssID[0]) ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
 
@@ -163,7 +160,7 @@ abstract class Module extends Frontend
 		$time = time();
 
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . ((!$this instanceof ModuleSitemap || !$this->showHidden) ? " AND hide!=1" : "") . ((!$this instanceof ModuleSitemap && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
+		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
 									  ->execute($pid, 'root', 'error_403', 'error_404', $time, $time);
 
 		if ($objSubpages->numRows < 1)
@@ -181,13 +178,12 @@ abstract class Module extends Frontend
 			$groups = $this->User->groups;
 		}
 
-		// Determine the layout template
+		// Layout template fallback
 		if (!strlen($this->navigationTpl))
 		{
-			$this->navigationTpl = (file_exists(TL_ROOT . '/system/modules/frontend/templates/mod_navigation_items.tpl') ? 'mod_navigation_items' : 'nav_default');
+			$this->navigationTpl = 'nav_default';
 		}
 
-		// Overwrite template
 		$objTemplate = new FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
@@ -256,6 +252,7 @@ abstract class Module extends Frontend
 						'link' => $objSubpages->title,
 						'href' => $href,
 						'alias' => $objSubpages->alias,
+						'nofollow' => (strncmp($objSubpages->robots, 'noindex', 7) === 0),
 						'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
 						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
 						'accesskey' => $objSubpages->accesskey,
@@ -278,6 +275,7 @@ abstract class Module extends Frontend
 						'link' => $objSubpages->title,
 						'href' => $href,
 						'alias' => $objSubpages->alias,
+						'nofollow' => (strncmp($objSubpages->robots, 'noindex', 7) === 0),
 						'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
 						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
 						'accesskey' => $objSubpages->accesskey,

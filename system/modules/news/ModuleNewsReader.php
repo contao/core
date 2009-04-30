@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNewsReader
  *
  * Front end module "news reader".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -96,7 +96,7 @@ class ModuleNewsReader extends ModuleNews
 		$time = time();
 
 		// Get news item
-		$objArticle = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+		$objArticle = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 									 ->limit(1)
 									 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $time, $time);
 
@@ -109,7 +109,7 @@ class ModuleNewsReader extends ModuleNews
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return;
 		}
 
@@ -174,8 +174,8 @@ class ModuleNewsReader extends ModuleNews
 				$objTemplate->email = $objComments->email;
 				$objTemplate->website = $objComments->website;
 				$objTemplate->comment = trim($objComments->comment);
-				$objTemplate->datim = date($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
-				$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
+				$objTemplate->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
+				$objTemplate->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
 				$objTemplate->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objTemplate->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objTemplate->id = 'c' . $objComments->id;
@@ -285,10 +285,24 @@ class ModuleNewsReader extends ModuleNews
 		$this->Template->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$this->Template->action = ampersand($this->Environment->request);
 
+		// Confirmation message
+		if ($_SESSION['TL_COMMENT_ADDED'])
+		{
+			$this->Template->confirm = $GLOBALS['TL_LANG']['MSC']['com_confirm'];
+			$_SESSION['TL_COMMENT_ADDED'] = false;
+		}
+
 		// Add comment
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_news_comment' && !$doNotSubmit)
 		{
 			$this->addComment($objArticle, $objArchive);
+
+			// Pending for approval
+			if ($objArchive->moderate)
+			{
+				$_SESSION['TL_COMMENT_ADDED'] = true;
+			}
+
 			$this->reload();
 		}
 	}
@@ -324,7 +338,7 @@ class ModuleNewsReader extends ModuleNews
 			$strWebsite = 'http://' . $strWebsite;
 		}
 
-		$strComment = trim($this->Input->post('comment', DECODE_ENTITIES));
+		$strComment = trim($this->Input->post('comment', true));
 
 		// Replace bbcode
 		if ($objArchive->bbcode)
@@ -396,7 +410,7 @@ class ModuleNewsReader extends ModuleNews
 			$arrSet['published'] = '';
 		}
 
-		$this->Database->prepare("INSERT INTO tl_news_comments %s")->set($arrSet)->execute();
+		$insert = $this->Database->prepare("INSERT INTO tl_news_comments %s")->set($arrSet)->execute();
 
 		// Send notification
 		$objEmail = new Email();
@@ -418,12 +432,12 @@ class ModuleNewsReader extends ModuleNews
 		$objEmail->from = $strNotify;
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
 
-		// Add comment details
-		$strData = "\n\n";
-		$strData .= 'Name: ' . $arrSet['name'] . ' (' . $arrSet['email'] . ')' . "\n";
-		$strData .= 'Comment: ' . strip_tags($arrSet['comment']) . "\n";
+		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
+								  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
+								  strip_tags($arrSet['comment']),
+								  $this->Environment->base . $this->Environment->request,
+								  $this->Environment->base . 'typolight/main.php?do=news&key=comments&act=edit&id=' . $insert->insertId);
 
-		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'], $strData . "\n") . "\n";
 		$objEmail->sendTo($strNotify);
 	}
 }

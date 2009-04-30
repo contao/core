@@ -12,13 +12,20 @@
 <p class="<?php echo $this->mclass; ?>"><?php echo $this->message; ?></p>
 <?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
+<?php if (!$this->showChannels): ?>
+<?php foreach ($this->channels as $id=>$title): ?>
+<input type="hidden" name="channels[]" value="<?php echo $id; ?>" />
+<?php endforeach; ?>
+<?php endif; ?>
 <input type="text" name="email" class="text" value="<?php echo $this->email; ?>" />
-<input type="submit" name="submit" class="submit" value="<?php echo $this->submit; ?>" />
+<?php if ($this->showChannels): ?>
 <div class="checkbox_container">
 <?php foreach ($this->channels as $id=>$title): ?>
 <span><input type="checkbox" name="channels[]" id="opt_<?php echo $this->id; ?>_<?php echo $id; ?>" value="<?php echo $id; ?>" class="checkbox" /> <label for="opt_<?php echo $this->id; ?>_<?php echo $id; ?>"><?php echo $title; ?></label></span>
 <?php endforeach; ?>
 </div>
+<?php endif; ?>
+<input type="submit" name="submit" class="submit" value="<?php echo $this->submit; ?>" />
 </div>
 </form>
 

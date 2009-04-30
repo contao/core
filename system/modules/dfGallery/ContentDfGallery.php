@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    DfGallery
  * @license    LGPL
@@ -28,15 +28,21 @@
 
 
 /**
- * Class ContentDfGallery 
+ * Class ContentDfGallery
  *
  * Provide methods to render the dfGallery content element.
- * @copyright  Leo Feyer 2005
- * @author     Leo Feyer 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer
  * @package    Controller
  */
 class ContentDfGallery extends ContentElement
 {
+
+	/**
+	 * Albums array
+	 * @var array
+	 */
+	protected $arrAlbums = array();
 
 	/**
 	 * Template
@@ -46,14 +52,14 @@ class ContentDfGallery extends ContentElement
 
 
 	/**
-	 * Make sure the UFO plugin is available
+	 * Make sure the SWFobject plugin is available
 	 * @return string
 	 */
 	public function generate()
 	{
-		if (!file_exists(TL_ROOT . '/plugins/ufo/ufo.js'))
+		if (!file_exists(TL_ROOT . '/plugins/swfobject/swfobject.js'))
 		{
-			throw new Exception('Plugin "ufo" required');
+			throw new Exception('Plugin "swfobject" required');
 		}
 
 		if (!in_array('dfGallery', $this->Config->getActiveModules()))
@@ -80,33 +86,66 @@ class ContentDfGallery extends ContentElement
 	 */
 	protected function compile()
 	{
-		$xmlName = 'system/html/gallery-' . $this->id . $GLOBALS['TL_LANGUAGE'] . '.xml';
+		$jsonName = 'system/html/gallery-' . $this->id . $GLOBALS['TL_LANGUAGE'] . '.json';
 
-		// Generate XML file
-		if (!file_exists(TL_ROOT . '/' . $xmlName))
+		// Generate JSON file
+		if (!file_exists(TL_ROOT . '/' . $jsonName))
 		{
-			$strTemplate = strlen($this->dfTemplate) ? $this->dfTemplate : 'df_default';
-			$objTemplate = new FrontendTemplate($strTemplate);
+			$this->fetchDfAlbums($this->singleSRC);
 
-			$objTemplate->dfTitle = $this->dfTitle;
-			$objTemplate->dfInterval = $this->dfInterval;
-			$objTemplate->dfPause = ($this->dfPause ? 'true' : 'false');
-			$objTemplate->singleSRC = $this->singleSRC;
-			$objTemplate->pleaseWait = $GLOBALS['TL_LANG']['MSC']['pleaseWait'];
-			$objTemplate->loading = $GLOBALS['TL_LANG']['MSC']['loading'];
-			$objTemplate->previous = $GLOBALS['TL_LANG']['MSC']['previous'];
-			$objTemplate->totalPages = str_replace('%s', '%', $GLOBALS['TL_LANG']['MSC']['totalPages']);
-			$objTemplate->next = $GLOBALS['TL_LANG']['MSC']['next'];
+			// Load template file
+			$dfConfig = array();
+			require(TL_ROOT . '/system/modules/dfGallery/templates/' . ($this->dfTemplate ? $this->dfTemplate : 'df_default') . '.tpl');
 
-			$objFile = new File($xmlName);
-			$objFile->write($objTemplate->parse());
+			// Set meta data
+			$dfGallery = array
+			(
+				'albums' => array(),
+				'meta' => array
+				(
+					'generator' => 'TYPOlight webCMS',
+					'version' => VERSION . '.' . BUILD,
+					'description' => 'dfGallery configuration file',
+					'author' => 'Leo Feyer',
+					'timestamp' => time()
+				),
+				'config' => $dfConfig
+			);
+
+			// Add albums
+			foreach ($this->arrAlbums as $folder=>$images)
+			{
+				$dfGallery['albums'][] = array
+				(
+					'properties' => array
+					(
+						'album_type' => 'custom',
+						'title' => $folder,
+						'description' => '',
+						'icon' => '',
+						'exif-type' => 'none'
+					),
+					'images' => $images
+				);
+			}
+
+			// Load theme XML file
+			$strXmlUrl = TL_ROOT . '/system/modules/dfGallery/resources/themes/' . $dfGallery['config']['global']['theme'] . '/skins/' . str_replace('.png', '.xml', $dfGallery['config']['global']['skin']);
+			$dfGallery['config']['skin']['config_xml'] = file_get_contents($strXmlUrl);
+
+			// Then set absolute path to theme file
+			$dfGallery['config']['global']['theme'] = $this->Environment->base . 'system/modules/dfGallery/resources/themes/' . $dfGallery['config']['global']['theme'];
+
+			// Convert to JSON and write to file
+			$objFile = new File($jsonName);
+			$objFile->write(json_encode($dfGallery));
 			$objFile->close();
 		}
 		
 		$this->Template->alt = $this->alt;
-		$this->Template->href = TL_PATH . '/system/modules/dfGallery/gallery.swf';
+		$this->Template->href = TL_PATH . '/system/modules/dfGallery/DfGallery.swf';
 		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
-		$this->Template->flashvars = 'xmlFile=' . $xmlName;
+		$this->Template->flashvars = 'xmlUrl=' . $jsonName;
 		$this->Template->src = $this->singleSRC;
 
 		$size = deserialize($this->dfSize);
@@ -114,15 +153,58 @@ class ContentDfGallery extends ContentElement
 		$this->Template->width = $size[0];
 		$this->Template->height = $size[1];
 
-		// Adjust movie size in the back end
-		if (TL_MODE == 'BE' && $size[0] > 640)
-		{
-			$this->Template->width = 640;
-			$this->Template->height = floor(640 * $size[1] / $size[0]);
-		}
-
 		// Add JavaScript
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/ufo/ufo.js';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/swfobject/swfobject.js';
+	}
+
+
+	/**
+	 * Browse the directory structure and fetch all albums
+	 * @param string
+	 */
+	private function fetchDfAlbums($url)
+	{
+		$this->parseMetaFile($url);
+
+		// Scan folder an sort resources
+		$images = scan(TL_ROOT . '/' . $url);
+		natcasesort($images);
+		$images = array_values($images);
+
+		// Determin the relative path
+		$key = preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//i', '', $url);
+
+		for ($i=0; $i<count($images); $i++)
+		{
+			// Skip hidden files or folders
+			if (strncmp($images[$i], '.', 1) === 0)
+			{
+				continue;
+			}
+
+			// Add subfolders as separate albums
+			if (is_dir(TL_ROOT . '/' . $url . '/' . $images[$i]))
+			{
+				$this->fetchDfAlbums($url . '/' . $images[$i]);
+				continue;
+			}
+
+			$objFile = new File($url . '/' . $images[$i]);
+
+			// Skip non-image files
+			if (!$objFile->isGdImage)
+			{
+				continue;
+			}
+
+			$this->arrAlbums[$key][] = array
+			(
+				'title' => strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename))),
+				'timestamp' => $objFile->mtime,
+				'thumbnail' => $this->getImage($url . '/' . $images[$i], 100, 80),
+				'image' => $url . '/' . $images[$i]
+			);
+		}
 	}
 }
 

@@ -2,6 +2,77 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.7.0 (2009-05-01)
+--------------------------
+- Updated SyntaxHighlighter to version 2.0.296
+- Moved the DOMPDF plugin to the extension repository
+- Moved the developers module to the extension repository
+- Removed the outdated PunBB bridge extension
+- Added a glossary extension to the core
+- Added a rewrite rule to dispatch gzipped .js and .css files
+- Added basic drag'n'drop support in the back end (parent view)
+- Added better confirmation messages to comment elements (#677)
+- Fixes issue with insert tag "date" returning the wrong date(#639)
+- Fixed issue with date validation if the date contains slashes (#668)
+- Fixed issue with RSS reader not showing feed header data (#635)
+- Fixed issue with tablesort.js not working in IE (#652)
+- Fixes issue with limit filter not considering root IDs (#670)
+- Fixes issue with article IDs being generated from the title (#675)
+- Fixed a few minor issues
+
+Version 2.7.RC2 (2009-04-01)
+----------------------------
+- IE8 compatible back end
+- Replaced UFO with SWFObject (#218)
+- Updated mootools to version 1.2.1 (#1)
+- Updated dfGallery to version 2.005 (#463)
+- Updated simplepie to version 1.1.3 (#238)
+- Updated TCPDF to version 4.5.032 (#80)
+- Updated TinyMCE to version 3.2.2.1 (#622)
+- Updated all HTTP headers to HTTP/1.1 (#583)
+- Merged the calendar and mini-calendar modules
+- Added module "book navigation"
+- Added mootools color picker (mooRainbow)
+- Added an improved date validation routine (#314)
+- Added automatic field resizing to the table wizard (#553)
+- Added option to define the meta robots tag in the site structure (#586)
+- Added a file picker widget to choose images in the style sheet editor (#60)
+- Added option to choose whether to export teasers or full articles in RSS feeds (#591)
+- Added a WHERE condition for the details page of the listing module (#618)
+- Added option to hide the channel selection menu in newsletter modules (#464)
+- Added insert tag "iflng" to insert language specific content (#367)
+- Added an option to disable the session ip check (#18)
+- Added conditional comments support to the style sheet editor (#379)
+- Added option to purge data in the personal settings module (#585)
+- Added a custom error page for missing referer host addresses (#592)
+- Added support for featured news to the news extension (#191)
+- Improved cross-browser stability of the new form layout
+- Improved handling of the search and filter functions in the back end (#526)
+- Fixed issue with emtpy requests being cached (#579)
+- Fixed issue with cache header sending a wrong max-age (#600)
+- Fixed news comments permissions in the back end (#603)
+- Fixed some minor issues
+
+Version 2.7.RC1 (2009-03-15)
+----------------------------
+- Overworked all language files
+- Declared the Template class abstract (#309)
+- Modified main navigation template "nav_default" (#559)
+- Added "importUser" hook (#187)
+- Added class "error" to form fields (#200)
+- Added new collapsible two-column back end form layout
+- Added FIND_IN_SET() support to sortable back end fields (#299)
+- Added salted passwords to prevent against rainbow table attacks (#142)
+- Added a method to parse textual date representations (#304)
+- Added routine to check for duplicate newsletter recipients (#575)
+- Improved sorting of FAQ categories in the front end
+- Improved undo function so regular users can only see their own undo steps (#434)
+- Fixed issue with indexer failing to read large pages (#516)
+- Fixed issue with thumbnail generator and transparent GIFs and PNGs (#572)
+- Fixed issue with style sheet importer not handling margin:auto correctly (#492)
+- Fixed issue with e-mail addresses not being encoded in news and events (#528)
+- Fixed some minor issues
+
 Version 2.6.7 (2009-03-11)
 --------------------------
 - Added Dutch and Latvian translation to the "typolinks" plugin (#525, #539)

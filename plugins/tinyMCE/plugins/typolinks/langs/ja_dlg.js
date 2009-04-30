@@ -1,0 +1,23 @@
+tinyMCE.addI18n('ja.typolinks_dlg',{
+page:"TYPOlightのページ",
+file:"TYPOlightのファイル",
+link_title:"リンクを挿入・編集",
+link_url:"リンクのURL",
+link_target:"対象",
+link_target_same:"同一のウィンドウでリンクを開く",
+link_target_blank:"新しいウィンドウでリンクを開く",
+link_titlefield:"タイトル",
+link_is_email:"入力されたURLは電子メール・アドレスのようですが、必要な mailto: を前に付けますか?",
+link_is_external:"入力されたURLは外部リンクのようですが、必要な http:// を前に付けますか?",
+link_list:"リンクの一覧",
+image_title:"リンクの挿入・編集のライトボックス画像",
+image_list:"画像の一覧",
+image_src:"画像のURL",
+image_dimensions:"幅・高さ",
+image_alt:"説明",
+image_class:"CSSクラス",
+image_rel:"タイプ",
+image_rel_single:"単一の画像",
+image_rel_multi:"イメージギャラリー",
+image_rel_empty:"サムネールだけ"
+});

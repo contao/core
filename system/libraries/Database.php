@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Database
  *
  * Provide methods to handle database communication.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -55,6 +55,12 @@ abstract class Database
 	 * @var boolean
 	 */
 	protected $blnDisableAutocommit = false;
+
+	/**
+	 * Cache array
+	 * @var array
+	 */
+	protected $arrCache = array();
 
 
 	/**
@@ -93,20 +99,15 @@ abstract class Database
 	/**
 	 * Return an object property
 	 * @return string
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
-		switch ($strKey)
+		if ($strKey == 'error')
 		{
-			case 'error':
-				return $this->get_error();
-				break;
-
-			default:
-				throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
-				break;
+			return $this->get_error();
 		}
+
+		return null;
 	}
 
 
@@ -165,17 +166,22 @@ abstract class Database
 	/**
 	 * Return all tables of a database as array
 	 * @param  string
+	 * @param  boolean
 	 * @return array
 	 */
-	public function listTables($strDatabase=false)
+	public function listTables($strDatabase=false, $blnNoCache=false)
 	{
-		$arrReturn = array();
-
 		if (!$strDatabase)
 		{
 			$strDatabase = $GLOBALS['TL_CONFIG']['dbDatabase'];
 		}
 
+		if (!$blnNoCache && isset($this->arrCache[$strDatabase]))
+		{
+			return $this->arrCache[$strDatabase];
+		}
+
+		$arrReturn = array();
 		$arrTables = $this->execute(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
 
 		foreach ($arrTables as $arrTable)
@@ -183,29 +189,39 @@ abstract class Database
 			$arrReturn[] = current($arrTable);
 		}
 
-		return $arrReturn;
+		$this->arrCache[$strDatabase] = $arrReturn;
+		return $this->arrCache[$strDatabase];
 	}
 
 
 	/**
 	 * Determine if a particular database table exists
 	 * @param  string
+	 * @param  string
+	 * @param  boolean
 	 * @return boolean
 	 */
-	public function tableExists($strTable)
+	public function tableExists($strTable, $strDatabase=false, $blnNoCache=false)
 	{
-		return in_array($strTable, $this->listTables());
+		return in_array($strTable, $this->listTables($strDatabase, $blnNoCache));
 	}
 
 
 	/**
 	 * Return all columns of a particular table as array
 	 * @param  string
+	 * @param  boolean
 	 * @return array
 	 */
-	public function listFields($strTable)
+	public function listFields($strTable, $blnNoCache=false)
 	{
-		return $this->list_fields($strTable);
+		if (!$blnNoCache && isset($this->arrCache[$strTable]))
+		{
+			return $this->arrCache[$strTable];
+		}
+
+		$this->arrCache[$strTable] = $this->list_fields($strTable);
+		return $this->arrCache[$strTable];
 	}
 
 
@@ -213,11 +229,12 @@ abstract class Database
 	 * Determine if a particular column exists
 	 * @param  string
 	 * @param  string
+	 * @param  boolean
 	 * @return boolean
 	 */
-	public function fieldExists($strField, $strTable)
+	public function fieldExists($strField, $strTable, $blnNoCache=false)
 	{
-		foreach ($this->listFields($strTable) as $arrField)
+		foreach ($this->listFields($strTable, $blnNoCache) as $arrField)
 		{
 			if ($arrField['name'] == $strField)
 			{
@@ -286,7 +303,7 @@ abstract class Database
  * Class Database_Statement
  *
  * Provide methods to execute a database query.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -346,8 +363,8 @@ abstract class Database_Statement
 	 * - insertId:     last insert ID
 	 *
 	 * Throw an exception on requests for protected properties.
+	 * @param string
 	 * @return mixed
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -370,7 +387,7 @@ abstract class Database_Statement
 				break;
 
 			default:
-				throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
+				return null;
 				break;
 		}
 	}
@@ -420,7 +437,7 @@ abstract class Database_Statement
 	 * Take an associative array and autogenerate the SET/VALUES subpart of a query
 	 * 
 	 * Usage example:
-	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id')); 
+	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
 	 * will be transformed into "UPDATE table SET id='my_id'".
 	 * @param  array
 	 * @return object
@@ -614,7 +631,7 @@ abstract class Database_Statement
  * Class Database_Result
  *
  * Provide methods to handle a database result.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -692,6 +709,10 @@ abstract class Database_Result
 	 */
 	public function __set($strKey, $strValue)
 	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
 		$this->arrCache[$this->intIndex][$strKey] = $strValue;
 	}
 
@@ -707,7 +728,6 @@ abstract class Database_Result
 	 * Throw an exception on requests for unknown fields.
 	 * @param  string
 	 * @return string
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -730,13 +750,11 @@ abstract class Database_Result
 				{
 					$this->first();
 				}
-
-				if (!array_key_exists($strKey, $this->arrCache[$this->intIndex]))
+				if (isset($this->arrCache[$this->intIndex][$strKey]))
 				{
-					throw new Exception(sprintf('Unknown field "%s"', $strKey));
+					return $this->arrCache[$this->intIndex][$strKey];
 				}
-
-				return $this->arrCache[$this->intIndex][$strKey];
+				return null;
 				break;
 		}
 	}

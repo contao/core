@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer 
- * @package    Memberlist 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer
+ * @package    Memberlist
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,8 +30,14 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_member']['publicFields'] = array('Public fields', 'Please choose the fields that will be displayed in the public member profile.');
-$GLOBALS['TL_LANG']['tl_member']['allowEmail']   = array('Allow e-mails', 'Please choose who will be allowed to send e-mails to the member.');
+$GLOBALS['TL_LANG']['tl_member']['allowEmail']   = array('Allow e-mails', 'Here you can choose who will be allowed to contact the user.');
+$GLOBALS['TL_LANG']['tl_member']['publicFields'] = array('Public fields', 'Here you can choose the publicly visible fields.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_member']['profile_legend'] = 'Public profile';
 
 
 /**

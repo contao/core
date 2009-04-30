@@ -6,11 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="plugins/calendar/calendar.css" media="screen" />
 <?php if ($this->isMac): ?>
 <link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
-<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
-<link rel="stylesheet" type="text/css" href="plugins/calendar/calendar.css" media="screen" />
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style type="text/css" media="screen">
 <!--/*--><![CDATA[/*><!--*/

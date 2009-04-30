@@ -12,7 +12,7 @@
   <ul class="level_2">
 <?php foreach ($months as $month): ?>
 <?php if($month['isActive']): ?>
-    <li class="active<?php if ($month['class']): ?> <?php echo $month['class']; endif; ?>"><p class="active"><?php echo $month['link']; ?><?php if ($this->showQuantity): ?> (<?php echo $month['quantity']; ?>)<?php endif; ?></p></li>
+    <li class="active<?php if ($month['class']): ?> <?php echo $month['class']; endif; ?>"><span class="active"><?php echo $month['link']; ?><?php if ($this->showQuantity): ?> (<?php echo $month['quantity']; ?>)<?php endif; ?></span></li>
 <?php else: ?>
     <li<?php if ($month['class']): ?> class="<?php echo $month['class']; ?>"<?php endif; ?>><a href="<?php echo $month['href']; ?>" title="<?php echo $month['title']; ?>"><?php echo $month['link']; ?><?php if ($this->showQuantity): ?> (<?php echo $month['quantity']; ?>)<?php endif; ?></a></li>
 <?php endif; ?>

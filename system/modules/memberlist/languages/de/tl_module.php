@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer 
- * @package    Memberlist 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer
+ * @package    Memberlist
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['ml_groups'] = array('Gruppen', 'Bitte wählen Sie die Gruppen, deren Mitglieder aufgelistet werden sollen.');
-$GLOBALS['TL_LANG']['tl_module']['ml_fields'] = array('Felder', 'Bitte wählen Sie die Felder, die in der Mitgliederliste angezeigt werden sollen.');
+$GLOBALS['TL_LANG']['tl_module']['ml_groups'] = array('Gruppen', 'Diese Gruppen werden in der Mitgliederliste veröffentlicht.');
+$GLOBALS['TL_LANG']['tl_module']['ml_fields'] = array('Felder', 'Diese Felder werden (vorbehaltlich individueller Einstellungen) veröffentlicht.');
 
 ?>

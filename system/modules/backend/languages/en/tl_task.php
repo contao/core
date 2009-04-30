@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,13 +30,13 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_task']['title']       = array('Title', 'Please enter a title.');
-$GLOBALS['TL_LANG']['tl_task']['assignTo']    = array('Assign to', 'Please assign the task to a user.');
+$GLOBALS['TL_LANG']['tl_task']['title']       = array('Title', 'Please enter the task title.');
+$GLOBALS['TL_LANG']['tl_task']['deadline']    = array('Deadline', 'Here you can enter the deadline of the task.');
+$GLOBALS['TL_LANG']['tl_task']['assignTo']    = array('Assigned to', 'Here you can assign the task to a user.');
 $GLOBALS['TL_LANG']['tl_task']['notify']      = array('Notify user', 'Notify the user via e-mail.');
-$GLOBALS['TL_LANG']['tl_task']['deadline']    = array('Deadline', 'Please enter the deadline for the task.');
-$GLOBALS['TL_LANG']['tl_task']['status']      = array('Status', 'Please set the status of the task.');
-$GLOBALS['TL_LANG']['tl_task']['progress']    = array('Progress', 'Please choose the current progress.');
-$GLOBALS['TL_LANG']['tl_task']['comment']     = array('Comment', 'Please add a short comment.');
+$GLOBALS['TL_LANG']['tl_task']['status']      = array('Status', 'Here you can set the task status.');
+$GLOBALS['TL_LANG']['tl_task']['progress']    = array('Progress', 'Here you can set the progress of the task in percent.');
+$GLOBALS['TL_LANG']['tl_task']['comment']     = array('Comment', 'Here you can add a comment.');
 
 
 /**

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -30,10 +30,10 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['subscribe']   = 'name,type,headline;nl_channels,nl_template;nl_subscribe;jumpTo;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['unsubscribe'] = 'name,type,headline;nl_channels,nl_template;nl_unsubscribe;jumpTo;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_reader']   = 'name,type,headline;nl_channels,nl_includeCss;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_list']     = 'name,type,headline;nl_channels;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['subscribe']   = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_hideChannels;{redirect_legend},jumpTo;{email_legend:hide},nl_subscribe;{template_legend:hide},nl_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['unsubscribe'] = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_hideChannels;{redirect_legend},jumpTo;{email_legend:hide},nl_unsubscribe;{template_legend:hide},nl_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_list']     = '{title_legend},name,headline,type;{config_legend},nl_channels;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_reader']   = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_includeCss;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -48,6 +48,37 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
 	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
 );
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['nl_hideChannels'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox'
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_subscribe'],
+	'exclude'                 => true,
+	'inputType'               => 'textarea',
+	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+	'load_callback' => array
+	(
+		array('tl_module_newsletter', 'getSubscribeDefault')
+	)
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_unsubscribe'],
+	'exclude'                 => true,
+	'inputType'               => 'textarea',
+	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+	'load_callback' => array
+	(
+		array('tl_module_newsletter', 'getUnsubscribeDefault')
+	)
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_template'],
@@ -55,32 +86,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => $this->getTemplateGroup('nl_')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_subscribe'],
-	'default'                 => $GLOBALS['TL_LANG']['tl_module']['text_subscribe'][1],
-	'exclude'                 => true,
-	'inputType'               => 'textarea',
-	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true),
-	'save_callback' => array
-	(
-		array('tl_module_newsletter', 'getDefaultValue')
-	)
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_unsubscribe'],
-	'default'                 => $GLOBALS['TL_LANG']['tl_module']['text_unsubscribe'][1],
-	'exclude'                 => true,
-	'inputType'               => 'textarea',
-	'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true),
-	'save_callback' => array
-	(
-		array('tl_module_newsletter', 'getDefaultValue')
-	)
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
@@ -95,7 +100,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
  * Class tl_module_newsletter
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -113,16 +118,31 @@ class tl_module_newsletter extends Backend
 
 
 	/**
-	 * Load the default value if the text is empty
+	 * Load the default subscribe text
 	 * @param string
-	 * @param object
 	 * @return string
 	 */
-	public function getDefaultValue($varValue, DataContainer $dc)
+	public function getSubscribeDefault($varValue)
 	{
-		if (!strlen(trim($varValue)))
+		if (!trim($varValue))
 		{
-			$varValue = $GLOBALS['TL_DCA'][$dc->table]['fields'][$dc->field]['default'];
+			$varValue = $GLOBALS['TL_LANG']['tl_module']['text_subscribe'][1];
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Load the default unsubscribe text
+	 * @param string
+	 * @return string
+	 */
+	public function getUnsubscribeDefault($varValue)
+	{
+		if (!trim($varValue))
+		{
+			$varValue = $GLOBALS['TL_LANG']['tl_module']['text_unsubscribe'][1];
 		}
 
 		return $varValue;

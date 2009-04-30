@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,10 +30,10 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']    = 'name,type,headline;news_archives,news_template;news_metaFields,news_dateFormat;searchable,perPage,news_numberOfItems,skipFirst;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']  = 'name,type,headline;news_archives,news_template;news_metaFields,news_dateFormat;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newsarchive'] = 'name,type;news_archives,news_template;news_metaFields,news_dateFormat;searchable,perPage,news_format,news_jumpToCurrent;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newsmenu']    = 'name,type,headline;news_archives,news_showQuantity;jumpTo;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_featured,skipFirst,news_numberOfItems,perPage;{template_legend:hide},news_metaFields,news_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']  = '{title_legend},name,headline,type;{config_legend},news_archives;{template_legend:hide},news_metaFields,news_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newsarchive'] = '{title_legend},name,headline,type;{config_legend},news_archives,news_jumpToCurrent,perPage;{template_legend:hide},news_metaFields,news_template,news_format;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newsmenu']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_showQuantity;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -48,9 +48,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_archives'] = array
 	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_featured'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_showQuantity'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_featured'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
@@ -61,16 +61,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_numberOfItems'] = array
 	'default'                 => 3,
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_template'],
-	'default'                 => 'news_single',
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'],
 	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('news_')
+	'inputType'               => 'checkbox'
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
@@ -84,6 +82,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
 	'eval'                    => array('multiple'=>true)
 );
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_template'],
+	'default'                 => 'news_single',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => $this->getTemplateGroup('news_'),
+	'eval'                    => array('tl_class'=>'w50')
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_format'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_format'],
@@ -91,20 +99,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_format'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array('news_month', 'news_year'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_module']
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['news_dateFormat'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_dateFormat'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>32)
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_showQuantity'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
@@ -114,7 +115,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
  * Class tl_module_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

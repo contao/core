@@ -1,8 +1,8 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class DC_Table
  *
  * Provide methods to modify the database.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -127,7 +127,7 @@ class DC_Table extends DataContainer implements listable, editable
 		$this->intId = $this->Input->get('id');
 
 		// Clear the clipboard
-		if (array_key_exists('clipboard', $_GET))
+		if (isset($_GET['clipboard']))
 		{
 			$this->Session->set('CLIPBOARD', array());
 			$this->redirect($this->getReferer());
@@ -154,7 +154,7 @@ class DC_Table extends DataContainer implements listable, editable
 			$session['CURRENT']['IDS'] = deserialize($this->Input->post('IDS'));
 			$this->Session->setData($session);
 
-			$next = array_key_exists('edit', $_POST) ? 'editAll' : (array_key_exists('delete', $_POST) ? 'deleteAll' : 'select');
+			$next = isset($_POST['edit']) ? 'editAll' : (isset($_POST['delete']) ? 'deleteAll' : 'select');
 			$this->redirect(str_replace('act=select', 'act='.$next, $this->Environment->request));
 		}
 
@@ -254,12 +254,14 @@ class DC_Table extends DataContainer implements listable, editable
 		// Clean up old tl_undo and tl_log entries
 		if ($this->strTable == 'tl_undo' && strlen($GLOBALS['TL_CONFIG']['undoPeriod']))
 		{
-			$this->Database->prepare("DELETE FROM tl_undo WHERE tstamp<?")->execute((int) time() - $GLOBALS['TL_CONFIG']['undoPeriod']);
+			$this->Database->prepare("DELETE FROM tl_undo WHERE tstamp<?")
+						   ->execute(intval(time() - $GLOBALS['TL_CONFIG']['undoPeriod']));
 		}
 
 		elseif ($this->strTable == 'tl_log' && strlen($GLOBALS['TL_CONFIG']['logPeriod']))
 		{
-			$this->Database->prepare("DELETE FROM tl_log WHERE tstamp<?")->execute((int) time() - $GLOBALS['TL_CONFIG']['logPeriod']);
+			$this->Database->prepare("DELETE FROM tl_log WHERE tstamp<?")
+						   ->execute(intval(time() - $GLOBALS['TL_CONFIG']['logPeriod']));
 		}
 
 		$this->reviseTable();
@@ -299,9 +301,24 @@ class DC_Table extends DataContainer implements listable, editable
 			if (strpos($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'], 'limit') !== false && ($strLimit = $this->limitMenu(true)) != false)
 			{
 				$return .= '
-<div class="tl_panel_bottom">'.$strLimit.'
 
-</div>';
+<form action="'.ampersand($this->Environment->request, true).'" class="tl_form" method="post">
+<div class="tl_formbody">
+<input type="hidden" name="FORM_SUBMIT" value="tl_filters_limit" />
+
+<div class="tl_panel_bottom">
+
+<div class="tl_submit_panel tl_subpanel">
+<input type="image" name="btfilter" id="btfilter" src="system/themes/' . $this->getTheme() . '/images/ok.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
+</div>' . $strLimit . '
+
+<div class="clear"></div>
+
+</div>
+
+</div>
+</form>
+';
 			}
 		}
 
@@ -340,12 +357,15 @@ class DC_Table extends DataContainer implements listable, editable
 
 		// Get all fields
 		$fields = array_keys($row);
-		$allowedFields = array('id', 'pid', 'sorting');
+		$allowedFields = array('id', 'pid', 'sorting', 'tstamp');
 
 		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields']))
 		{
-			$allowedFields = array_merge($allowedFields, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields']));
+			$allowedFields = array_unique(array_merge($allowedFields, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])));
 		}
+
+		// Use the field order of the DCA file
+		$fields = array_intersect($allowedFields, $fields);
 
 		// Show all allowed fields
 		foreach ($fields as $i)
@@ -381,17 +401,17 @@ class DC_Table extends DataContainer implements listable, editable
 
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
-				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '';
+				$row[$i] = strlen($value) ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '';
 			}
 
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
 			{
-				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '';
+				$row[$i] = strlen($value) ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value) : '';
 			}
 
-			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)) || $i == 'tstamp')
 			{
-				$row[$i] = strlen($value) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '';
+				$row[$i] = strlen($value) ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value) : '';
 			}
 
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
@@ -498,7 +518,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Return table
 		return '
 <div id="tl_buttons">
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['showRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
@@ -1057,8 +1077,10 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 		}
 
-		$objUndoStmt = $this->Database->prepare("INSERT INTO tl_undo (tstamp, fromTable, query, affectedRows, data) VALUES (?, ?, ?, ?, ?)")
-									  ->execute(time(), $this->strTable, 'DELETE FROM '.$this->strTable.' WHERE id='.$this->intId, $affected, serialize($data));
+		$this->import('BackendUser', 'User');
+
+		$objUndoStmt = $this->Database->prepare("INSERT INTO tl_undo (pid, tstamp, fromTable, query, affectedRows, data) VALUES (?, ?, ?, ?, ?, ?)")
+									  ->execute($this->User->id, time(), $this->strTable, 'DELETE FROM '.$this->strTable.' WHERE id='.$this->intId, $affected, serialize($data));
 
 		// Delete the records
 		if ($objUndoStmt->affectedRows)
@@ -1335,6 +1357,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Build an array from boxes and rows
 		$this->strPalette = $this->getPalette();
 		$boxes = trimsplit(';', $this->strPalette);
+		$legends = array();
 
 		if (count($boxes))
 		{
@@ -1351,7 +1374,13 @@ class DC_Table extends DataContainer implements listable, editable
 						continue;
 					}
 
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
+					if (preg_match('/^\{.*\}$/i', $vv))
+					{
+						$legends[$k] = substr($vv, 1, -1);
+						unset($boxes[$k][$kk]);
+					}
+
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
 					{
 						unset($boxes[$k][$kk]);
 					}
@@ -1364,16 +1393,39 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 			}
 
-			$class = 'tl_tbox';
+			$class = 'tl_tbox block';
+			$fs = $this->Session->get('fieldset_states');
 
 			// Render boxes
 			foreach ($boxes as $k=>$v)
 			{
 				$strAjax = '';
 				$blnAjax = false;
-				$return .= '
+				$legend = '';
 
-<div class="'.$class.'">';
+				if (isset($legends[$k]))
+				{
+					list($key, $cls) = explode(':', $legends[$k]);
+					$legend = "\n" . '<legend onclick="AjaxRequest.toggleFieldset(this, \'' . $key . '\', \'' . $this->strTable . '\')">' . (isset($GLOBALS['TL_LANG'][$this->strTable][$key]) ? $GLOBALS['TL_LANG'][$this->strTable][$key] : $key) . '</legend>';
+				}
+
+				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+				{
+					if (isset($fs[$this->strTable][$key]))
+					{
+						$class .= ($fs[$this->strTable][$key] ? '' : ' collapsed');
+					}
+					else
+					{
+						$class .= (($cls && $legend) ? ' ' . $cls : '');
+					}
+
+					$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
+				}
+				else
+				{
+					$return .= "\n\n" . '<div class="'.$class.'">';
+				}
 
 				// Build rows of the current box
 				foreach ($v as $kk=>$vv)
@@ -1386,7 +1438,7 @@ class DC_Table extends DataContainer implements listable, editable
 						}
 
 						$blnAjax = false;
-						$return .= "\n  " . '</div>';
+						$return .= "\n" . '</div>';
 
 						continue;
 					}
@@ -1395,7 +1447,7 @@ class DC_Table extends DataContainer implements listable, editable
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
 						$blnAjax = ($this->Input->post('isAjax') && $ajaxId == $thisId) ? true : false;
-						$return .= "\n  " . '<div id="'.$thisId.'">';
+						$return .= "\n" . '<div id="'.$thisId.'">';
 
 						continue;
 					}
@@ -1421,9 +1473,16 @@ class DC_Table extends DataContainer implements listable, editable
 					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
 				}
 
-				$class = 'tl_box';
-				$return .= '
-</div>';
+				$class = 'tl_box block';
+
+				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+				{
+					$return .= "\n" . '</fieldset>';
+				}
+				else
+				{
+					$return .= "\n" . '</div>';
+				}
 			}
 		}
 
@@ -1442,7 +1501,7 @@ class DC_Table extends DataContainer implements listable, editable
 				while ($objVersion->next())
 				{
 					$versions .= '
-  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.date($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
+  <option value="'.$objVersion->version.'"'.($objVersion->active ? ' selected="selected"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['version'].' '.$objVersion->version.' ('.$this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objVersion->tstamp).') '.$objVersion->username.'</option>';
 				}
 
 				$version = '
@@ -1482,7 +1541,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = $version . '
 <div id="tl_buttons">
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['editRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>'.$this->getMessages().'
@@ -1522,7 +1581,7 @@ class DC_Table extends DataContainer implements listable, editable
 						   ->execute($arrValues);
 
 			// Redirect
-			if ($this->Input->post('saveNclose'))
+			if (isset($_POST['saveNclose']))
 			{
 				$_SESSION['TL_INFO'] = '';
 				$_SESSION['TL_ERROR'] = '';
@@ -1532,7 +1591,7 @@ class DC_Table extends DataContainer implements listable, editable
 				$this->redirect($this->getReferer());
 			}
 
-			elseif (array_key_exists('saveNedit', $_POST))
+			elseif (isset($_POST['saveNedit']))
 			{
 				$_SESSION['TL_INFO'] = '';
 				$_SESSION['TL_ERROR'] = '';
@@ -1547,7 +1606,7 @@ class DC_Table extends DataContainer implements listable, editable
 				$this->redirect($strUrl);
 			}
 
-			elseif (array_key_exists('saveNback', $_POST))
+			elseif (isset($_POST['saveNback']))
 			{
 				$_SESSION['TL_INFO'] = '';
 				$_SESSION['TL_ERROR'] = '';
@@ -1557,7 +1616,7 @@ class DC_Table extends DataContainer implements listable, editable
 				$this->redirect($this->Environment->script . '?do=' . $this->Input->get('do'));
 			}
 
-			elseif (array_key_exists('saveNcreate', $_POST))
+			elseif (isset($_POST['saveNcreate']))
 			{
 				$_SESSION['TL_INFO'] = '';
 				$_SESSION['TL_ERROR'] = '';
@@ -1566,7 +1625,7 @@ class DC_Table extends DataContainer implements listable, editable
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$strUrl = $this->Environment->script . '?do=' . $this->Input->get('do');
 
-				if (array_key_exists('table', $_GET))
+				if (isset($_GET['table']))
 				{
 					$strUrl .= '&amp;table=' . $this->Input->get('table');
 				}
@@ -1652,7 +1711,7 @@ window.addEvent(\'domready\', function()
 
 		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
 		{
-			$class = 'tl_tbox';
+			$class = 'tl_tbox block';
 
 			// Walk through each record
 			foreach ($ids as $id)
@@ -1699,7 +1758,7 @@ window.addEvent(\'domready\', function()
 				$return .= '
 <div class="'.$class.'">';
 
-				$class = 'tl_box';
+				$class = 'tl_box block';
 				$formFields = array();
 
 				// Get field values
@@ -1886,7 +1945,7 @@ window.addEvent(\'domready\', function()
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'_all" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
 <h3><label for="fields">'.$GLOBALS['TL_LANG']['MSC']['all_fields'][0].'</label></h3>'.(($_POST && !count($_POST['all_fields'])) ? '
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['all_fields'].'</p>' : '').'
 <div id="fields" class="tl_checkbox_container">
@@ -1910,7 +1969,7 @@ window.addEvent(\'domready\', function()
 		// Return
 		return '
 <div id="tl_buttons">
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>'.$return;
 	}
 
@@ -1959,7 +2018,7 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $this->varValue != $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
 		{
 			// If the field is a fallback field, empty all other columns
 			if ($arrData['eval']['fallback'] && strlen($varValue))
@@ -2098,7 +2157,7 @@ window.addEvent(\'domready\', function()
 		$new_records = $this->Session->get('new_records');
 
 		// HOOK: addCustomLogic
-		if (array_key_exists('reviseTable', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['reviseTable']))
+		if (isset($GLOBALS['TL_HOOKS']['reviseTable']) && is_array($GLOBALS['TL_HOOKS']['reviseTable']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
 			{
@@ -2234,7 +2293,7 @@ window.addEvent(\'domready\', function()
 		// Begin buttons container
 		$return = '
 <div id="tl_buttons">'.(($this->Input->get('act') == 'select') ? '
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? '
 <a href="'.$this->addToUrl('act=paste&amp;mode=create').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . (($this->Input->get('act') != 'select') ? $this->generateGlobalButtons() . ($blnClipboard ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') : '') . '
 </div>';
 
@@ -2481,7 +2540,7 @@ window.addEvent(\'domready\', function()
 			}
 			elseif (in_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['flag'], array(5, 6, 7, 8, 9, 10)))
 			{
-				$args[$k] = strlen($objRow->$v) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v) : '';
+				$args[$k] = strlen($objRow->$v) ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objRow->$v) : '';
 			}
 			elseif ($GLOBALS['TL_DCA'][$table]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['multiple'])
 			{
@@ -2496,9 +2555,10 @@ window.addEvent(\'domready\', function()
 		$label = vsprintf(((strlen($GLOBALS['TL_DCA'][$table]['list']['label']['format'])) ? $GLOBALS['TL_DCA'][$table]['list']['label']['format'] : '%s'), $args);
 
 		// Shorten label it if it is too long
-		if (strlen($GLOBALS['TL_DCA'][$table]['list']['maxCharacters']) && $GLOBALS['TL_DCA'][$table]['list']['maxCharacters'] < strlen($label))
+		if ($GLOBALS['TL_DCA'][$table]['list']['label']['maxCharacters'] > 0 && $GLOBALS['TL_DCA'][$table]['list']['label']['maxCharacters'] < strlen(strip_tags($label)))
 		{
-			$label = trim(utf8_substr($label, 0, $GLOBALS['TL_DCA'][$table]['list']['maxCharacters'])).' …';
+			$this->import('String');
+			$label = trim($this->String->substrHtml($label, $GLOBALS['TL_DCA'][$table]['list']['label']['maxCharacters'])) . ' …';
 		}
 
 		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
@@ -2634,7 +2694,7 @@ window.addEvent(\'domready\', function()
 
 		$return = '
 <div id="tl_buttons">
-<a href="'.(($this->Input->get('act') == 'select') ? $this->getReferer(ENCODE_AMPERSANDS) : $this->Environment->script.'?do='.$this->Input->get('do')).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' . (($this->Input->get('act') != 'select') ? ' &#160; :: &#160; ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
+<a href="'.(($this->Input->get('act') == 'select') ? $this->getReferer(true) : $this->Environment->script.'?do='.$this->Input->get('do')).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' . (($this->Input->get('act') != 'select') ? ' &#160; :: &#160; ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
 <a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons(). ($blnClipboard ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') : '') . '
 </div>';
 
@@ -2691,11 +2751,11 @@ window.addEvent(\'domready\', function()
 				}
 				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'date')
 				{
-					$_v = date($GLOBALS['TL_CONFIG']['dateFormat'], $_v);
+					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v);
 				}
 				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
 				{
-					$_v = date($GLOBALS['TL_CONFIG']['datimFormat'], $_v);
+					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v);
 				}
 				elseif ($v == 'tstamp')
 				{
@@ -2707,7 +2767,7 @@ window.addEvent(\'domready\', function()
 						$objMaxTstamp->tstamp = $objParent->tstamp;
 					}
 
-					$_v = date($GLOBALS['TL_CONFIG']['datimFormat'], $objMaxTstamp->tstamp);
+					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objMaxTstamp->tstamp);
 				}
 				elseif (strlen($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
 				{
@@ -2802,11 +2862,26 @@ window.addEvent(\'domready\', function()
 				$this->import($strClass);
 				$row = $objOrderBy->fetchAllAssoc();
 
+				// Make items sortable
+				if ($blnHasSorting)
+				{
+					$return .= '
+
+<ul id="ul_' . CURRENT_ID . '" class="sortable">';
+				}
+
 				for ($i=0; $i<count($row); $i++)
 				{
 					$this->current[] = $row[$i]['id'];
 					$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id']), 'class="blink"');
 					$imagePasteNew = $this->generateImage('new.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][1], $row[$i]['id']));
+
+					// Make items sortable
+					if ($blnHasSorting)
+					{
+						$return .= '
+<li id="li_' . $row[$i]['id'] . '">';
+					}
 
 					$return .= '
 
@@ -2849,8 +2924,29 @@ window.addEvent(\'domready\', function()
 
 					$return .= '
 </div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
+
+					// Make items sortable
+					if ($blnHasSorting)
+					{
+						$return .= '
+
+</li>';
+					}
 				}
 			}
+		}
+
+		// Make items sortable
+		if ($blnHasSorting)
+		{
+			$return .= '
+</ul>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
+//--><!]]>
+</script>';
 		}
 
 		$return .= '
@@ -2895,6 +2991,18 @@ window.addEvent(\'domready\', function()
 			$firstOrderBy = $this->firstOrderBy;
 		}
 
+		// Show only own undo steps
+		if ($this->strTable == 'tl_undo')
+		{
+			$this->import('BackendUser', 'User');
+
+			if (!$this->User->isAdmin)
+			{
+				$this->procedure[] = 'pid=?';
+				$this->values[] = $this->User->id;
+			}
+		}
+
 		$query = "SELECT * FROM " . $this->strTable;
 
 		if (count($this->procedure))
@@ -2909,6 +3017,21 @@ window.addEvent(\'domready\', function()
 
 		if (is_array($orderBy) && strlen($orderBy[0]))
 		{
+			foreach ($orderBy as $k=>$v)
+			{
+				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['findInSet'])
+				{
+					$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
+
+					if (array_is_assoc($keys))
+					{
+						$keys = array_keys($keys);
+					}
+
+					$orderBy[$k] = "FIND_IN_SET(" . $v . ", '" . implode(',', $keys) . "')";
+				}
+			}
+
 			$query .= " ORDER BY " . implode(', ', $orderBy);
 		}
 
@@ -2929,12 +3052,12 @@ window.addEvent(\'domready\', function()
 		$this->bid = strlen($return) ? $this->bid : 'tl_buttons';
 
 		// Display buttos
-		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] || count($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations']) && $objRow->numRows)
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] || count($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations']))
 		{
 			$return .= '
 
 <div id="'.$this->bid.'">'.(($this->Input->get('act') == 'select' || $GLOBALS['TL_DCA'][$this->strTable]['config']['ptable']) ? '
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'] && $this->Input->get('act') != 'select') ? ' &nbsp; :: &nbsp;' : '') . (($this->Input->get('act') != 'select') ? '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($GLOBALS['TL_DCA'][$this->strTable]['config']['ptable'] && $this->Input->get('act') != 'select') ? ' &nbsp; :: &nbsp;' : '') . (($this->Input->get('act') != 'select') ? '
 '.(!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '<a href="'.(strlen($GLOBALS['TL_DCA'][$this->strTable]['config']['ptable']) ? $this->addToUrl('act=create' . (($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] < 4) ? '&amp;mode=2' : '') . '&amp;pid=' . $this->intId) : $this->addToUrl('act=create')).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons() : '') . '
 </div>';
 		}
@@ -3018,15 +3141,15 @@ window.addEvent(\'domready\', function()
 					{
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'date')
 						{
-							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '';
+							$args[$k] = strlen($row[$v]) ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $row[$v]) : '';
 						}
 						elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['rgxp'] == 'time')
 						{
-							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '';
+							$args[$k] = strlen($row[$v]) ? $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $row[$v]) : '';
 						}
 						else
 						{
-							$args[$k] = strlen($row[$v]) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '';
+							$args[$k] = strlen($row[$v]) ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row[$v]) : '';
 						}
 					}
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['multiple'])
@@ -3062,7 +3185,7 @@ window.addEvent(\'domready\', function()
 				// Shorten label it if it is too long
 				$label = vsprintf((strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['format']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['format'] : '%s'), $args);
 
-				if (strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] < strlen($label))
+				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] > 0 && $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] < strlen(strip_tags($label)))
 				{
 					$this->import('String');
 					$label = trim($this->String->substrHtml($label, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])) . ' …';
@@ -3111,7 +3234,7 @@ window.addEvent(\'domready\', function()
 					}
 					elseif (in_array($sortingMode, array(5, 6)))
 					{
-						$remoteNew = strlen($current) ? date($GLOBALS['TL_CONFIG']['dateFormat'], $current) : '-';
+						$remoteNew = strlen($current) ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $current) : '-';
 					}
 					elseif (in_array($sortingMode, array(7, 8)))
 					{
@@ -3161,7 +3284,7 @@ window.addEvent(\'domready\', function()
 						}
 						elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback']))
 						{
-							if (!array_key_exists($firstOrderBy, $arrLookup))
+							if (!isset($arrLookup[$firstOrderBy]))
 							{
 								$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback'][0];
 								$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback'][1];
@@ -3271,14 +3394,21 @@ window.addEvent(\'domready\', function()
 			return '';
 		}
 
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
+		{
+			$this->reload();
+		}
+
 		$return = '';
 		$panelLayout = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'];
 		$arrPanels = trimsplit(';', $panelLayout);
+		$intLast = count($arrPanels) - 1;
 
-		foreach ($arrPanels as $strPanel)
+		for ($i=0; $i<count($arrPanels); $i++)
 		{
 			$panels = '';
-			$arrSubPanels = trimsplit(',', $strPanel);
+			$submit = '';
+			$arrSubPanels = trimsplit(',', $arrPanels[$i]);
 
 			foreach ($arrSubPanels as $strSubPanel)
 			{
@@ -3288,16 +3418,34 @@ window.addEvent(\'domready\', function()
 				}
 			}
 
+			if ($i == $intLast)
+			{
+				$submit = '
+
+<div class="tl_submit_panel tl_subpanel">
+<input type="image" name="filter" id="filter" src="system/themes/' . $this->getTheme() . '/images/ok.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
+</div>';
+			}
+
 			if (strlen($panels))
 			{
 				$return .= '
-<div class="tl_panel">'.$panels.'
+<div class="tl_panel">'.$submit.$panels.'
 
 <div class="clear"></div>
 
 </div>';
 			}
 		}
+
+		$return = '
+<form action="'.ampersand($this->Environment->request, true).'" class="tl_form" method="post">
+<div class="tl_formbody">
+<input type="hidden" name="FORM_SUBMIT" value="tl_filters" />
+' . $return . '
+</div>
+</form>
+';
 
 		return $return;
 	}
@@ -3328,30 +3476,30 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Store search value in the current session
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_be_search')
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
 		{
+			$session['search'][$this->strTable]['value'] = '';
+			$session['search'][$this->strTable]['field'] = $this->Input->post('tl_field', true);
+
 			// Make sure the regular expression is valid
-			if (strlen($this->Input->postRaw('tl_value')))
+			if ($this->Input->postRaw('tl_value') != '')
 			{
 				try
 				{
-					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->Input->post('tl_field') . " REGEXP ?")
+					$this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->Input->post('tl_field', true) . " REGEXP ?")
 								   ->limit(1)
 								   ->execute($this->Input->postRaw('tl_value'));
+
+					$session['search'][$this->strTable]['value'] = $this->Input->postRaw('tl_value');
 				}
 
 				catch (Exception $e)
 				{
-					$this->reload($e->getMessage());
-					exit;
+					// Nothing to do here
 				}
 			}
 
-			$session['search'][$this->strTable]['field'] = $this->Input->post('tl_field');
-			$session['search'][$this->strTable]['value'] = $this->Input->postRaw('tl_value');
-
 			$this->Session->setData($session);
-			$this->reload();
 		}
 
 		// Set search value from session
@@ -3366,26 +3514,23 @@ window.addEvent(\'domready\', function()
 		foreach ($searchFields as $field)
 		{
 			$option_label = strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0]) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] : $GLOBALS['TL_LANG']['MSC'][$field];
-			$options_sorter[$option_label] = '  <option value="'.specialchars($field).'"'.(($field == $session['search'][$this->strTable]['field']) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
+			$options_sorter[utf8_romanize($option_label)] = '  <option value="'.specialchars($field).'"'.(($field == $session['search'][$this->strTable]['field']) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
 		}
 
 		// Sort by option values
-		uksort($options_sorter, 'strcasecmp');
+		$options_sorter = natcaseksort($options_sorter);
 		$active = strlen($session['search'][$this->strTable]['value']) ? true : false;
 
 		return '
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_search" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_be_search" />
+<div class="tl_search tl_subpanel">
+<strong>' . $GLOBALS['TL_LANG']['MSC']['search'] . ':</strong>
 <select name="tl_field" class="tl_select' . ($active ? ' active' : '') . '">
 '.implode("\n", $options_sorter).'
 </select>
 <span>=</span>
 <input type="text" name="tl_value" class="tl_text' . ($active ? ' active' : '') . '" value="'.specialchars($session['search'][$this->strTable]['value']).'" />
-<input type="submit" name="search" id="search" class="tl_submit" alt="search results" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['search']).'" />
-</div>
-</form>';
+</div>';
 	}
 
 
@@ -3429,12 +3574,10 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Set sorting from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_sorting')
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
 		{
 			$session['sorting'][$this->strTable] = in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->Input->post('tl_sort')]['flag'], array(2, 4, 6, 8, 10, 12)) ? $this->Input->post('tl_sort').' DESC' : $this->Input->post('tl_sort');
-
 			$this->Session->setData($session);
-			$this->reload();
 		}
 
 		// Overwrite "orderBy" value with session value
@@ -3463,15 +3606,12 @@ window.addEvent(\'domready\', function()
 
 		return '
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_sorting" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_sorting" />
+<div class="tl_sorting tl_subpanel">
+<strong>' . $GLOBALS['TL_LANG']['MSC']['sortBy'] . ':</strong>
 <select name="tl_sort" id="tl_sort" class="tl_select">
 '.implode("\n", $options_sorter).'
 </select>
-<input type="submit" name="sortBy" id="sortBy" class="tl_submit" alt="sort results" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['sortBy']).'" />
-</div>
-</form>';
+</div>';
 	}
 
 
@@ -3486,11 +3626,11 @@ window.addEvent(\'domready\', function()
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
 
 		// Set limit from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_limit')
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters' || $this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
 		{
-			if ($this->Input->post('limit') != 'tl_limit')
+			if ($this->Input->post('tl_limit') != 'tl_limit')
 			{
-				$session['filter'][$filter]['limit'] = $this->Input->post('limit');
+				$session['filter'][$filter]['limit'] = $this->Input->post('tl_limit');
 			}
 			else
 			{
@@ -3498,14 +3638,23 @@ window.addEvent(\'domready\', function()
 			}
 
 			$this->Session->setData($session);
-			$this->reload();
+
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
+			{
+				$this->reload();
+			}
 		}
 
 		// Set limit from table configuration
 		else
 		{
 			$this->limit = strlen($session['filter'][$filter]['limit']) ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . $GLOBALS['TL_CONFIG']['resultsPerPage'];
-			$query = "SELECT * FROM " . $this->strTable;
+			$query = "SELECT COUNT(*) AS total FROM " . $this->strTable;
+
+			if (is_array($this->root))
+			{
+				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
+			}
 
 			if (count($this->procedure))
 			{
@@ -3513,7 +3662,7 @@ window.addEvent(\'domready\', function()
 			}
 
 			$objTotal = $this->Database->prepare($query)->execute($this->values);
-			$total = $objTotal->numRows;
+			$total = $objTotal->total;
 
 			// Build options
 			if ($total > 0)
@@ -3553,19 +3702,16 @@ window.addEvent(\'domready\', function()
 			}
 
 			$fields .= '
-<select name="limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $total > $GLOBALS['TL_CONFIG']['resultsPerPage']) ? ' active' : '') . '">
+<select name="tl_limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $total > $GLOBALS['TL_CONFIG']['resultsPerPage']) ? ' active' : '') . '">
   <option value="tl_limit">'.$GLOBALS['TL_LANG']['MSC']['filterRecords'].'</option>'.$options.'
 </select> ';
 		}
 
 		return '
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_limit' . ($blnOptional ? '_optional' : '') . '" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_limit" />'.$fields.'
-<input type="submit" name="limit_submit" class="tl_submit" alt="limit results" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['showOnly']).'" />
-</div>
-</form>';
+<div class="tl_limit tl_subpanel">
+<strong>' . $GLOBALS['TL_LANG']['MSC']['showOnly'] . ':</strong>'.$fields.'
+</div>';
 	}
 
 
@@ -3597,21 +3743,21 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Set filter from user input
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filter')
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
 		{
 			foreach ($sortingFields as $field)
 			{
-				if ($this->Input->post($field, DECODE_ENTITIES) != 'tl_'.$field)
+				if ($this->Input->post($field, true) != 'tl_'.$field)
 				{
-					$session['filter'][$filter][$field] = $this->Input->post($field, DECODE_ENTITIES);
-					continue;
+					$session['filter'][$filter][$field] = $this->Input->post($field, true);
 				}
-
-				unset($session['filter'][$filter][$field]);
+				else
+				{
+					unset($session['filter'][$filter][$field]);
+				}
 			}
 
 			$this->Session->setData($session);
-			$this->reload();
 		}
 
 		// Set filter from table configuration
@@ -3698,12 +3844,12 @@ window.addEvent(\'domready\', function()
 				$arrValues[] = CURRENT_ID;
 			}
 
-			// Limit results if there is a keyword (search panel)
+			/* Limit results if there is a keyword (search panel)
 			if (strlen($session['search'][$this->strTable]['value']))
 			{
 				$arrProcedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
 				$arrValues[] = $session['search'][$this->strTable]['value'];
-			}
+			} */
 
 			if (is_array($this->root))
 			{
@@ -3735,7 +3881,7 @@ window.addEvent(\'domready\', function()
 						}
 						else
 						{
-							$options[$v] = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+							$options[$v] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 						}
 
 						unset($options[$k]);
@@ -3788,12 +3934,6 @@ window.addEvent(\'domready\', function()
 					}
 				}
 
-				// Sort by another value
-				else
-				{
-					(in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(2, 4))) ? rsort($options) : sort($options);
-				}
-
 				// Manual filter
 				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 				{
@@ -3825,7 +3965,7 @@ window.addEvent(\'domready\', function()
 					$options_callback = $this->$strClass->$strMethod($this);
 
 					// Sort options according to the keys of the callback array
-					$options = array_keys($options_callback);
+					$options = array_intersect(array_keys($options_callback), $options);
 				}
 
 				$options_sorter = array();
@@ -3883,16 +4023,18 @@ window.addEvent(\'domready\', function()
 						$vv = $options_callback[$vv];
 					}
 
-					// Associative array
-					if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
-					{
-						$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$vv];
-					}
+					$option_label = '';
 
 					// Use reference array
-					else
+					if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference']))
 					{
 						$option_label = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$vv]) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$vv][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$vv];
+					}
+
+					// Associative array
+					elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+					{
+						$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$vv];
 					}
 
 					// No empty options allowed
@@ -3901,13 +4043,18 @@ window.addEvent(\'domready\', function()
 						$option_label = strlen($vv) ? $vv : '-';
 					}
 
-					$options_sorter[$option_label] = '  <option value="' . specialchars($value) . '"' . ((isset($session['filter'][$filter][$field]) && $value == $session['filter'][$filter][$field]) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
+					$options_sorter[utf8_romanize($option_label)] = '  <option value="' . specialchars($value) . '"' . ((isset($session['filter'][$filter][$field]) && $value == $session['filter'][$filter][$field]) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
 				}
 
 				// Sort by option values
 				if (!$blnDate)
 				{
-					uksort($options_sorter, 'strcasecmp');
+					$options_sorter = natcaseksort($options_sorter);
+
+					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(2, 4, 12)))
+					{
+						$options_sorter = array_reverse($options_sorter, true);
+					}
 				}
 
 				$fields .= "\n" . implode("\n", $options_sorter);
@@ -3920,12 +4067,9 @@ window.addEvent(\'domready\', function()
 
 		return '
 
-<form action="'.ampersand($this->Environment->request, true).'" id="tl_filter" class="tl_form" method="post">
-<div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_filter" />'.$fields.'
-<input type="submit" name="showOnly" id="showOnly" class="tl_submit" alt="narrow results" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['filter']).'" />
-</div>
-</form>';
+<div class="tl_filter tl_subpanel">
+<strong>' . $GLOBALS['TL_LANG']['MSC']['filter'] . ':</strong>' . $fields . '
+</div>';
 	}
 }
 

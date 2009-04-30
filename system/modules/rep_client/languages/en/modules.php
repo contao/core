@@ -1,4 +1,5 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TYPOlight Repository :: Language file for modules (en)
  *
@@ -11,8 +12,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository Client';
-$GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Extension catalog', 'Browse the repository to find and install extensions.');
-$GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Extension manager', 'Maintain installed extensions.');
+$GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository client';
+$GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Extension catalog', 'Browse the repository and install extensions.');
+$GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Extension manager', 'Maintain or remove installed extensions.');
 
 ?>

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -31,18 +31,24 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['title']  = array('Title', 'Please enter the title of the channel.');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp'] = array('Revision date', 'Date and time of latest revision');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'] = array('Jump to page', 'Please select the page to which visitors will be redirected when clicking a newsletter.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'] = array('Redirect page', 'Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp'] = array('Revision date', 'Date and time of the latest revision');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['title_legend'] = 'Title and redirect';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['new']        = array('New channel', 'Create a new channel');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['show']       = array('Channel details', 'Show the details of channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['edit']       = array('Edit channel', 'Edit channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Copy channel', 'Copy channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['delete']     = array('Delete channel', 'Delete channel ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['show']       = array('Channel details', 'Show details of channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['recipients'] = array('Edit recipients', 'Edit the recipients of channel ID %s');
 
 ?>

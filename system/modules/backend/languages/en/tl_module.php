@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,89 +30,102 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['name']           = array('Name of the module', 'Please enter a unique module name.');
-$GLOBALS['TL_LANG']['tl_module']['type']           = array('Module type', 'Please select the current module type.');
-$GLOBALS['TL_LANG']['tl_module']['headline']       = array('Headline', 'If you enter a headline, it will be shown on top of the module.');
-$GLOBALS['TL_LANG']['tl_module']['singleSRC']      = array('Source file', 'Please select a file from the files directory.');
-$GLOBALS['TL_LANG']['tl_module']['multiSRC']       = array('Source files', 'Please select one or more file from the files directory.');
-$GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Start level', 'Please define from which level the menu items shall be visible. Choose 0 or leave blank to start from the top level.');
-$GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stop level', 'Please define to which level menu items shall be visible. Choose 0 or leave blank to display all levels.');
-$GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard limit', 'Do not show any items (not even active ones) beyond the stop level.');
-$GLOBALS['TL_LANG']['tl_module']['showProtected']  = array('Show protected items', 'Include items that are usually only visible after a front end user has logged in.');
-$GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Show hidden items', 'Include items that are hidden from the navigation menu.');
-$GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigation template', 'Please choose a navigation template (navigation templates start with <em>nav_</em>).');
-$GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Start from website root', 'Use the website root page as root node of the module.');
-$GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Set reference page', 'Set a reference page to be used as source or target page of the module.');
-$GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Reference page', 'Here you can choose a reference page that will be used as source or target page (e.g. an alternative start page).');
-$GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Custom label', 'Here you can enter a custom label to be used instead of <em>quicklink</em> or <em>quick navigation</em>.');
-$GLOBALS['TL_LANG']['tl_module']['pages']          = array('Pages', 'Please choose the pages for the quick link module.');
-$GLOBALS['TL_LANG']['tl_module']['queryType']      = array('Default query type', 'Please select the default query type.');
-$GLOBALS['TL_LANG']['tl_module']['searchType']     = array('Search form', 'Please choose a search form.');
-$GLOBALS['TL_LANG']['tl_module']['perPage']        = array('Records per page', 'Please enter the number of records per page (0 = disable pagination).');
-$GLOBALS['TL_LANG']['tl_module']['searchTpl']      = array('Search results template', 'Please choose a search results template. Store your own <em>search_</em> templates in the <em>templates</em> directory.');
-$GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Context range', 'The number of characters on the left and right side of each keyword that is used as context.');
-$GLOBALS['TL_LANG']['tl_module']['totalLength']    = array('Maximum context length', 'Please enter the maximum context length of each result.');
-$GLOBALS['TL_LANG']['tl_module']['editable']       = array('Editable fields', 'Please select one or more fields to be editable in the front end.');
-$GLOBALS['TL_LANG']['tl_module']['newsletters']    = array('Newsletter channels', 'Please choose the channels the user can subscribe to during the registration progress.');
-$GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Form template', 'Please choose a form template. The default template is called <em>member_default</em>. If you want to add your own templates, upload them to the <em>templates</em> directory (file extension has to be <em>tpl</em>.');
+$GLOBALS['TL_LANG']['tl_module']['name']           = array('Title', 'Please enter the module title.');
+$GLOBALS['TL_LANG']['tl_module']['headline']       = array('Headline', 'Here you can add a headline to the module.');
+$GLOBALS['TL_LANG']['tl_module']['type']           = array('Module type', 'Please choose the type of module.');
+$GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Start level', 'Enter a value greater than 0 to show only submenu items.');
+$GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stop level', 'Enter a value greater than 0 to limit the nesting level of the menu.');
+$GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard limit', 'Never show any menu items beyond the stop level.');
+$GLOBALS['TL_LANG']['tl_module']['showProtected']  = array('Show protected items', 'Show items that are usually only visible to authenticated users.');
+$GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Set a reference page', 'Define a custom source or target page for the module.');
+$GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Reference page', 'Please choose the reference page from the site structure.');
+$GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigation template', 'Here you can select the navigation template.');
+$GLOBALS['TL_LANG']['tl_module']['pages']          = array('Pages', 'Please choose one or more pages from the site structure.');
+$GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Start from website root', 'Use the website root page as starting point of the module.');
+$GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Show hidden items', 'Show items that are usually hidden in the navigation menu.');
+$GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Custom label', 'Here you can enter a custom label for the drop-down menu.');
+$GLOBALS['TL_LANG']['tl_module']['jumpTo']         = array('Redirect page', 'Please choose the page to which visitors will be redirected when clicking a link or submitting a form.');
+$GLOBALS['TL_LANG']['tl_module']['redirectBack']   = array('Redirect to last page visited', 'Redirect the user back to the last page visited instead of the redirect page.');
 $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Number of columns', 'Please choose the number of columns of the form.');
-$GLOBALS['TL_LANG']['tl_module']['1cl']            = array('One columns', 'the label of each input field will be shown above the input field.');
-$GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Two columns', 'the label of each input field will be shown on the left side of the input field.');
-$GLOBALS['TL_LANG']['tl_module']['redirectBack']   = array('Redirect to last page visited', 'Redirect the user back to the last page visited after login/logout.');
-$GLOBALS['TL_LANG']['tl_module']['jumpTo']         = array('Jump to page', 'This setting defines to which page a user will be redirected on a certain action (e.g. clicking a link or submitting a form).');
+$GLOBALS['TL_LANG']['tl_module']['1cl']            = array('One column', 'show the label above the input field.');
+$GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Two columns', 'show the label on the left side of the input field.');
+$GLOBALS['TL_LANG']['tl_module']['editable']       = array('Editable fields', 'Show these fields in the front end form.');
+$GLOBALS['TL_LANG']['tl_module']['newsletters']    = array('Subscribable newsletters', 'Show these channels in the front end form.');
+$GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Form template', 'Here you can select the form template.');
 $GLOBALS['TL_LANG']['tl_module']['form']           = array('Form', 'Please select a form.');
-$GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML code', 'Please enter your HTML code.');
-$GLOBALS['TL_LANG']['tl_module']['size']           = array('Width and height', 'Please enter the width and height in pixel.');
-$GLOBALS['TL_LANG']['tl_module']['imgSize']        = array('Image width and height', 'If you enter only width or only height, the image will be resized proportionally. If you enter both measures, the image will be cropped if necessary. If you leave both fields blank, the original size will be displayed.');
-$GLOBALS['TL_LANG']['tl_module']['alt']            = array('Alternative text', 'In order to make images or movies accessible, you should always provide an alternative text including a short description of their content.');
-$GLOBALS['TL_LANG']['tl_module']['useCaption']     = array('Show caption', 'If you choose this option, the image name will be displayed below the image.');
-$GLOBALS['TL_LANG']['tl_module']['source']         = array('Source', 'Please choose the source of the element.');
-$GLOBALS['TL_LANG']['tl_module']['url']            = array('URL', 'Please enter the complete URL starting with http://.');
-$GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Here you can enter some variables that will be passed to the Flash movie (<em>var1=value1&amp;var2=value2</em>).');
-$GLOBALS['TL_LANG']['tl_module']['altContent']     = array('Alternative content', 'Please provide an alternative content that will be shown in case the Flash movie cannot be loaded. HTML is allowed.');
-$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparent Flash movie', 'Choose this option to make the Flash movie transparent (wmode = transparent). Please note that buttons and text fields in a transparent Flash movie might not work correctly in some web browsers.');
-$GLOBALS['TL_LANG']['tl_module']['interactive']    = array('Interactive Flash movie', 'Choose this option if your Flash movie interacts with the browser using JavaScript and the Flash function <em>fscommand()</em>.');
-$GLOBALS['TL_LANG']['tl_module']['flashID']        = array('Flash movie ID', 'Please enter a unique Flash movie ID.');
-$GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash player version and build', 'Please enter the required Flash player version and build number (e.g. if your Flash movie requires at least Flash player 6.0.12.0, enter 6 and 12).');
-$GLOBALS['TL_LANG']['tl_module']['flashJS']        = array('JavaScript _DoFSCommand(command, args) {', 'Please enter the content of the JavaScript <em>_DoFSCommand()</em> function. The variable containing the command is named <em>command</em>, the variable containing the arguments is named <em>args</em>.');
+$GLOBALS['TL_LANG']['tl_module']['queryType']      = array('Default query type', 'Please select the default query type.');
+$GLOBALS['TL_LANG']['tl_module']['and']            = array('Find all words', 'returns only pages that contain all keywords.');
+$GLOBALS['TL_LANG']['tl_module']['or']             = array('Find any word', 'returns all pages that contain any of the keywords.');
+$GLOBALS['TL_LANG']['tl_module']['searchType']     = array('Search form layout', 'Here you can select the search form layout.');
+$GLOBALS['TL_LANG']['tl_module']['simple']         = array('Simple form', 'contains a single input field only.');
+$GLOBALS['TL_LANG']['tl_module']['advanced']       = array('Advanced form', 'contains an input field and a radio button menu to choose the query type.');
+$GLOBALS['TL_LANG']['tl_module']['searchTpl']      = array('Search results template', 'Here you can select the search results template.');
+$GLOBALS['TL_LANG']['tl_module']['perPage']        = array('Items per page', 'The number of items per page. Set to 0 to disable pagination.');
+$GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Context range', 'The number of characters on the left and right side of each keyword that are used as context.');
+$GLOBALS['TL_LANG']['tl_module']['totalLength']    = array('Maximum context length', 'Here you can limit the overall context length per result.');
 $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Column', 'Please choose the column whose articles you want to list.');
-$GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Skip first article', 'Choose this option to exclude the first article from the article list.');
-$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Load first article', 'Automatically redirect to the first article if no article is selected.');
-$GLOBALS['TL_LANG']['tl_module']['searchable']     = array('Searchable', 'Allow search indexing of the module (not available for protected modules).');
-$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Disable security question', 'Choose this option to disable the security question (not recommended).');
-$GLOBALS['TL_LANG']['tl_module']['protected']      = array('Protect module', 'Show module to certain member groups only.');
+$GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Skip the first item', 'Do not include the first item into the list.');
+$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Load the first item', 'Automatically redirect to the first item if none is selected.');
+$GLOBALS['TL_LANG']['tl_module']['size']           = array('Width and height', 'Please enter the width and height in pixel.');
+$GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparent movie', 'Make the Flash movie transparent (wmode = transparent).');
+$GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Pass variables to the Flash movie (<em>var1=value1&amp;var2=value2</em>).');
+$GLOBALS['TL_LANG']['tl_module']['version']        = array('Flash player version', 'Please enter the required Flash player version (e.g. 6.0.12).');
+$GLOBALS['TL_LANG']['tl_module']['altContent']     = array('Alternate content', 'The alternate content will be shown if the movie cannot be loaded. HTML tags are allowed.');
+$GLOBALS['TL_LANG']['tl_module']['source']         = array('Source', 'Whether to use a file on the server or point to an external URL.');
+$GLOBALS['TL_LANG']['tl_module']['singleSRC']      = array('Source file', 'Please select a file from the files directory.');
+$GLOBALS['TL_LANG']['tl_module']['url']            = array('URL', 'Please enter the URL (http://…) of the Flash movie.');
+$GLOBALS['TL_LANG']['tl_module']['interactive']    = array('Make interactive', 'Make the Flash movie interact with the browser (requires JavaScript).');
+$GLOBALS['TL_LANG']['tl_module']['flashID']        = array('Flash movie ID', 'Please enter a unique Flash movie ID.');
+$GLOBALS['TL_LANG']['tl_module']['flashJS']        = array('JavaScript _DoFSCommand(command, args) {', 'Please enter the JavaScript code.');
+$GLOBALS['TL_LANG']['tl_module']['imgSize']        = array('Image width and height', 'Enter either width or height to resize the image, or both values to crop it.');
+$GLOBALS['TL_LANG']['tl_module']['useCaption']     = array('Show caption', 'Display the image name or caption below the image.');
+$GLOBALS['TL_LANG']['tl_module']['multiSRC']       = array('Source files', 'Please select one or more files from the files directory.');
+$GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML code', 'You can modify the list of allowed HTML tags in the back end settings.');
+$GLOBALS['TL_LANG']['tl_module']['protected']      = array('Protect module', 'Show the module to certain member groups only.');
+$GLOBALS['TL_LANG']['tl_module']['groups']         = array('Allowed member groups', 'These groups will be able to see the module.');
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Show to guests only', 'Hide the module if a member is logged in.');
-$GLOBALS['TL_LANG']['tl_module']['groups']         = array('Allowed member groups', 'Here you can choose which groups will be allowed to see the module.');
-$GLOBALS['TL_LANG']['tl_module']['space']          = array('Space in front and after', 'Please enter the spacing in front of and after the module in pixel.');
-$GLOBALS['TL_LANG']['tl_module']['align']          = array('Module alignment', 'Here you can change the alignment of the module within its column.');
-$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID and class', 'Here you can enter a CSS ID (id attribute) and one or more CSS classes (class attributes).');
+$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID/class', 'Here you can enter an ID and one or more classes.');
+$GLOBALS['TL_LANG']['tl_module']['space']          = array('Space in front and after', 'Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_module']['title_legend']     = 'Title and type';
+$GLOBALS['TL_LANG']['tl_module']['nav_legend']       = 'Navigation settings';
+$GLOBALS['TL_LANG']['tl_module']['reference_legend'] = 'Reference page';
+$GLOBALS['TL_LANG']['tl_module']['redirect_legend']  = 'Redirect settings';
+$GLOBALS['TL_LANG']['tl_module']['template_legend']  = 'Template settings';
+$GLOBALS['TL_LANG']['tl_module']['config_legend']    = 'Module configuration';
+$GLOBALS['TL_LANG']['tl_module']['include_legend']   = 'Include settings';
+$GLOBALS['TL_LANG']['tl_module']['source_legend']    = 'Files and folders';
+$GLOBALS['TL_LANG']['tl_module']['interact_legend']  = 'Interactive Flash movie';
+$GLOBALS['TL_LANG']['tl_module']['html_legend']      = 'Text/HTML';
+$GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Access protection';
+$GLOBALS['TL_LANG']['tl_module']['expert_legend']    = 'Expert settings';
 
 
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_module']['and']      = array('Find all words', 'The search engine returns only pages that contain all keywords.');
-$GLOBALS['TL_LANG']['tl_module']['or']       = array('Find any word', 'The search engine returns all pages that contain at least one of the keywords.');
-$GLOBALS['TL_LANG']['tl_module']['simple']   = array('Simple', 'Simple search form containing a single input field only.');
-$GLOBALS['TL_LANG']['tl_module']['advanced'] = array('Advanced', 'Advanced search form allowing to choose the query type dynamically.');
 $GLOBALS['TL_LANG']['tl_module']['header']   = 'Header';
 $GLOBALS['TL_LANG']['tl_module']['left']     = 'Left column';
 $GLOBALS['TL_LANG']['tl_module']['main']     = 'Main column';
 $GLOBALS['TL_LANG']['tl_module']['right']    = 'Right column';
 $GLOBALS['TL_LANG']['tl_module']['footer']   = 'Footer';
-$GLOBALS['TL_LANG']['tl_module']['internal'] = 'internal file';
-$GLOBALS['TL_LANG']['tl_module']['external'] = 'external URL';
+$GLOBALS['TL_LANG']['tl_module']['internal'] = 'Internal file';
+$GLOBALS['TL_LANG']['tl_module']['external'] = 'External URL';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_module']['new']    = array('Add module', 'Add a module');
-$GLOBALS['TL_LANG']['tl_module']['show']   = array('Module details', 'Show details of module ID %s');
+$GLOBALS['TL_LANG']['tl_module']['show']   = array('Module details', 'Show the details of module ID %s');
+$GLOBALS['TL_LANG']['tl_module']['edit']   = array('Edit module', 'Edit module ID %s');
 $GLOBALS['TL_LANG']['tl_module']['copy']   = array('Duplicate module', 'Duplicate module ID %s');
 $GLOBALS['TL_LANG']['tl_module']['delete'] = array('Delete module', 'Delete module ID %s');
-$GLOBALS['TL_LANG']['tl_module']['edit']   = array('Edit module', 'Edit module ID %s');
-$GLOBALS['TL_LANG']['tl_module']['up']     = array('Move item up', 'Move this item one position up');
-$GLOBALS['TL_LANG']['tl_module']['down']   = array('Move item down', 'Move this item one position down');
+$GLOBALS['TL_LANG']['tl_module']['up']     = array('Move item up', 'Move the item one position up');
+$GLOBALS['TL_LANG']['tl_module']['down']   = array('Move item down', 'Move the item one position down');
 
 ?>

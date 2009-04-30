@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -30,7 +30,7 @@
 /**
  * Class ContentComments
  *
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -110,8 +110,8 @@ class ContentComments extends ContentElement
 				$objTemplate->email = $objComments->email;
 				$objTemplate->website = $objComments->website;
 				$objTemplate->comment = trim($objComments->comment);
-				$objTemplate->datim = date($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
-				$objTemplate->date = date($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
+				$objTemplate->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
+				$objTemplate->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
 				$objTemplate->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objTemplate->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objTemplate->id = 'c' . $objComments->id;
@@ -230,11 +230,26 @@ class ContentComments extends ContentElement
 		$this->Template->fields = $arrWidgets;
 		$this->Template->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->messages = $this->getMessages();
+
+		// Confirmation message
+		if ($_SESSION['TL_COMMENT_ADDED'])
+		{
+			$this->Template->confirm = $GLOBALS['TL_LANG']['MSC']['com_confirm'];
+			$_SESSION['TL_COMMENT_ADDED'] = false;
+		}
 
 		// Add comment
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_comment' && !$doNotSubmit)
 		{
 			$this->addComment();
+
+			// Pending for approval
+			if ($this->com_moderate)
+			{
+				$_SESSION['TL_COMMENT_ADDED'] = true;
+			}
+
 			$this->reload();
 		}
 	}
@@ -268,7 +283,7 @@ class ContentComments extends ContentElement
 			$strWebsite = 'http://' . $strWebsite;
 		}
 
-		$strComment = trim($this->Input->post('comment', DECODE_ENTITIES));
+		$strComment = trim($this->Input->post('comment', true));
 
 		// Replace bbcode
 		if ($this->com_bbcode)
@@ -338,7 +353,7 @@ class ContentComments extends ContentElement
 			$arrSet['published'] = '';
 		}
 
-		$this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
+		$insert = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
 
 		// Inform admin
 		$objEmail = new Email();
@@ -347,11 +362,12 @@ class ContentComments extends ContentElement
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
 
 		// Add comment details
-		$strData = "\n\n";
-		$strData .= 'Name: ' . $arrSet['name'] . ' (' . $arrSet['email'] . ')' . "\n";
-		$strData .= 'Comment: ' . strip_tags($arrSet['comment']) . "\n";
+		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
+								  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
+								  strip_tags($arrSet['comment']),
+								  $this->Environment->base . $this->Environment->request,
+								  $this->Environment->base . 'typolight/main.php?do=comments&act=edit&id=' . $insert->insertId);
 
-		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'], $strData . "\n") . "\n";
 		$objEmail->sendTo($GLOBALS['TL_ADMIN_EMAIL']);
 	}
 }

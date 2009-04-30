@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -97,6 +97,13 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_style']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s, \'style\');"',
+				'button_callback'     => array('tl_style', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['show'],
@@ -110,36 +117,33 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('size', 'alignment', 'background', 'border', 'font', 'list'),
-		'default'                     => 'comment,selector,category;size;alignment;background;border;font;list;own',
+		'default'                     => '{selector_legend},selector,category,comment;{size_legend},size;{align_legend},alignment;{background_legend},background;{border_legend},border;{font_legend},font;{list_legend},list;{custom_legend:hide},own',
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'size'                        => 'width,height,trbl,position,overflow,floating,clear,display',
-		'alignment'                   => 'margin,padding,align,textalign,verticalalign',
+		'size'                        => 'width,height,trbl,position,floating,clear,overflow,display',
+		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
 		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat',
 		'border'                      => 'borderwidth,borderstyle,bordercolor,bordercollapse',
-		'font'                        => 'fontfamily,fontstyle,fontsize,fontcolor,lineheight,whitespace',
+		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace',
 		'list'                        => 'liststyletype,liststyleimage'
 	),
 
 	// Fields
 	'fields' => array
 	(
-		'comment' => array
+		'invisible' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['comment'],
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true)
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible']
 		),
 		'selector' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['selector'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long')
 		),
 		'category' => array
 		(
@@ -147,11 +151,18 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'decodeEntities'=>true),
+			'eval'                    => array('maxlength'=>32, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'load_callback' => array
 			(
 				array('tl_style', 'checkCategory')
 			)
+		),
+		'comment' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['comment'],
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'size' => array
 		(
@@ -164,56 +175,56 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['width'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'height' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['height'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'trbl' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['trbl'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'position' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['position'],
 			'inputType'               => 'select',
 			'options'                 => array('absolute', 'relative', 'static', 'fixed'),
-			'eval'                    => array('includeBlankOption'=>true)
-		),
-		'overflow' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['overflow'],
-			'inputType'               => 'select',
-			'options'                 => array('auto', 'hidden', 'scroll', 'visible'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['floating'],
 			'inputType'               => 'select',
 			'options'                 => array('left', 'right', 'none'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'clear' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['clear'],
 			'inputType'               => 'select',
 			'options'                 => array('both', 'left', 'right', 'none'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'overflow' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['overflow'],
+			'inputType'               => 'select',
+			'options'                 => array('auto', 'hidden', 'scroll', 'visible'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'display' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['display'],
 			'inputType'               => 'select',
 			'options'                 => array('block', 'inline', 'list-item', 'run-in', 'compact', 'none', 'table', 'inline-table', 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-column', 'table-column-group', 'table-caption'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'alignment' => array
 		(
@@ -226,14 +237,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['margin'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'padding' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['padding'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'align' => array
 		(
@@ -241,7 +252,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('left', 'center', 'right'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'verticalalign' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['verticalalign'],
+			'inputType'               => 'select',
+			'options'                 => array('top', 'text-top', 'middle', 'text-bottom', 'baseline', 'bottom'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'textalign' => array
 		(
@@ -249,14 +267,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('left', 'center', 'right', 'justify'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true)
-		),
-		'verticalalign' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['verticalalign'],
-			'inputType'               => 'select',
-			'options'                 => array('top', 'text-top', 'middle', 'text-bottom', 'baseline', 'bottom'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'background' => array
 		(
@@ -268,7 +279,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgcolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum'),
+			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
@@ -277,21 +288,26 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'bgimage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgimage'],
-			'inputType'               => 'text'
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50 wizard'),
+			'wizard' => array
+			(
+				array('tl_style', 'filePicker')
+			)
 		),
 		'bgposition' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgposition'],
 			'inputType'               => 'select',
 			'options'                 => array('left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'bgrepeat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgrepeat'],
 			'inputType'               => 'select',
 			'options'                 => array('repeat-x', 'repeat-y', 'no-repeat'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'border' => array
 		(
@@ -304,20 +320,20 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderwidth'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'borderstyle' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderstyle'],
 			'inputType'               => 'select',
 			'options'                 => array('solid', 'dotted', 'dashed', 'double', 'groove', 'ridge', 'inset', 'outset', 'hidden'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'bordercolor' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bordercolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum'),
+			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
@@ -328,7 +344,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bordercollapse'],
 			'inputType'               => 'select',
 			'options'                 => array('collapse', 'separate'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'font' => array
 		(
@@ -340,28 +356,20 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontfamily'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
-		),
-		'fontstyle' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontstyle'],
-			'inputType'               => 'checkbox',
-			'options'                 => array('bold', 'italic', 'normal', 'underline', 'notUnderlined', 'line-through', 'overline', 'small-caps'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'fontsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontsize'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'fontcolor' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontcolor'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum'),
+			'eval'                    => array('maxlength'=>6, 'rgxp'=>'alnum', 'tl_class'=>'w50 wizard'),
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
@@ -372,7 +380,15 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['lineheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'fontstyle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontstyle'],
+			'inputType'               => 'checkbox',
+			'options'                 => array('bold', 'italic', 'normal', 'underline', 'notUnderlined', 'line-through', 'overline', 'small-caps'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'clr')
 		),
 		'whitespace' => array
 		(
@@ -391,18 +407,23 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('disc', 'circle', 'square', 'decimal', 'upper-roman', 'lower-roman', 'upper-alpha', 'lower-alpha', 'none'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'liststyleimage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['liststyleimage'],
-			'inputType'               => 'text'
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50 wizard'),
+			'wizard' => array
+			(
+				array('tl_style', 'filePicker')
+			)
 		),
 		'own' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true)
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px;')
 		)
 	)
 );
@@ -412,12 +433,24 @@ $GLOBALS['TL_DCA']['tl_style'] = array
  * Class tl_style
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
 class tl_style extends Backend
 {
+
+	/**
+	 * Add the mooRainbow scripts to the page
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js';
+	}
+
 
 	/**
 	 * Automatically set the category if not set
@@ -479,7 +512,50 @@ class tl_style extends Backend
 	 */
 	public function colorPicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickColor(\'ctrl_'.$dc->field.'\')"');
+		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top; cursor:pointer;" id="moo_'.$dc->field.'" class="mooRainbow"');
+	}
+
+
+	/**
+	 * Return the file picker wizard
+	 * @param object
+	 * @return string
+	 */
+	public function filePicker(DataContainer $dc)
+	{
+		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
+		return ' ' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickFile(\'' . $strField . '\')"');
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->Database->prepare("UPDATE tl_style SET invisible='" . (strlen($this->Input->get('state')) ? '' : 1) . "' WHERE id=?")
+						   ->execute($this->Input->get('tid'));
+
+			$this->redirect($this->getReferer());
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
+
+		if ($row['invisible'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href.'&amp;id='.$this->Input->get('id')).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -45,7 +45,7 @@ require_once('../system/initialize.php');
  * Class FtpCheck
  *
  * Back end FTP check.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -88,23 +88,27 @@ class FtpCheck extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
-			$password =  sha1($this->Input->post('password', true));
+			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
-			if (strlen($password) && $password != 'da39a3ee5e6b4b0d3255bfef95601890afd80709')
+			// Password is correct but not yet salted
+			if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
 			{
-				// Set cookie
-				if ($password == $GLOBALS['TL_CONFIG']['installPassword'])
-				{
-					$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-
-					$this->reload();
-				}
-
-				// Increase count
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
+				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strPassword = sha1($strSalt . $this->Input->post('password'));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 			}
 
+			// Set cookie
+			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
+			{
+				$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+
+				$this->reload();
+			}
+
+			// Increase count
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
 			$this->Template->passwordError = 'Invalid password!';
 		}
 
@@ -116,7 +120,7 @@ class FtpCheck extends Controller
 		}
 
 		// Renew cookie
-		$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
 
 
 		/**

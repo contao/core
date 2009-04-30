@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<beans>
+		<script type="text/json">
+		<![CDATA[
+		
+[
+
+{ 	id			: "background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[0,0,100,100]		}],
+	properties	: [	{name:"scaleWidth", 			value:100	},
+					{name:"scaleHeight", 			value:100	},
+					{name:"widthUnit", 				value:"%"	},
+					{name:"heightUnit", 			value:"%"	}
+				  ]
+},
+
+
+
+
+
+
+{ 	id			: "MenuSystem.background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[0,300,100,38]		}],
+	properties	: [	{name:"scaleWidth", 			value:100	},
+					{name:"widthUnit", 				value:"%"	}
+				  ]
+},
+
+{ 	id			: "MenuSystem.albumButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[425,0,102,38]		}]
+},
+{ 	id			: "MenuSystem.albumButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[425,38,102,38]		}]
+},
+{ 	id			: "MenuSystem.albumButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[425,76,102,38]		}]
+},
+{ 	id			: "MenuSystem.albumButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[425,114,102,38]		}]
+},
+
+
+
+{ 	id			: "MenuSystem.settingsButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1179,0,49,38]		}]
+},
+{ 	id			: "MenuSystem.settingsButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1179,38,49,38]		}]
+},
+{ 	id			: "MenuSystem.settingsButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1179,76,49,38]		}]
+},
+{ 	id			: "MenuSystem.settingsButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1179,114,49,38]		}]
+},
+
+
+
+{ 	id			: "MenuSystem.volumeButton.high.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,0,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.high.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,0,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.high.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,0,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.high.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,0,49,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.volumeButton.medium.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,38,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.medium.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,38,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.medium.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,38,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.medium.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,38,49,38]		}]
+},
+
+
+
+{ 	id			: "MenuSystem.volumeButton.low.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,76,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.low.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,76,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.low.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,76,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.low.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,76,49,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.volumeButton.mute.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,114,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.mute.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,114,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.mute.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,114,49,38]		}]
+},
+{ 	id			: "MenuSystem.volumeButton.mute.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1131,114,49,38]		}]
+},
+
+
+
+{ 	id			: "MenuSystem.fullscreenButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1009,0,122,38]		}]
+},
+{ 	id			: "MenuSystem.fullscreenButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1009,38,122,38]		}]
+},
+{ 	id			: "MenuSystem.fullscreenButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1009,76,122,38]		}]
+},
+{ 	id			: "MenuSystem.fullscreenButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[1009,114,122,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.playButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[772,0,118,38]		}]
+},
+{ 	id			: "MenuSystem.playButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[772,38,118,38]		}]
+},
+{ 	id			: "MenuSystem.playButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[772,76,118,38]		}]
+},
+{ 	id			: "MenuSystem.playButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[772,114,118,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.pauseButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[890,0,118,38]		}]
+},
+{ 	id			: "MenuSystem.pauseButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[890,38,118,38]		}]
+},
+{ 	id			: "MenuSystem.pauseButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[890,76,118,38]		}]
+},
+{ 	id			: "MenuSystem.pauseButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[890,114,118,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.photosUpButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[528,0,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosUpButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[528,38,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosUpButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[528,76,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosUpButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[528,114,122,38]		}]
+},
+
+
+{ 	id			: "MenuSystem.photosDownButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[650,0,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosDownButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[650,38,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosDownButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[650,76,122,38]		}]
+},
+{ 	id			: "MenuSystem.photosDownButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[650,114,122,38]		}]
+},
+
+
+
+
+
+
+{ 	id			: "ImageViewer.outerBackground",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[0,200,100,100]		}],
+	properties	: [	{name:"scaleWidth", 			value:100	},
+					{name:"scaleHeight", 			value:100	},
+					{name:"widthUnit", 				value:"%"	},
+					{name:"heightUnit", 			value:"%"	}
+				  ]
+},
+
+
+
+
+{ 	id			: "ThumbnailViewer.background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[0,200,100,100]		}],
+	properties	: [	{name:"scaleWidth", 			value:100	},
+					{name:"scaleHeight", 			value:100	},
+					{name:"widthUnit", 				value:"%"	},
+					{name:"heightUnit", 			value:"px"	}
+				  ]
+},
+
+
+
+{ 	id			: "Thumbnail.outerBackground",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[100,50,100,100]		}],
+	properties	: [	{name:"scaleWidth", 			value:100	},
+					{name:"scaleHeight", 			value:100	},
+					{name:"widthUnit", 				value:"px"	},
+					{name:"heightUnit", 			value:"px"	}
+				  ]
+},
+
+
+
+{ 	id			: "ThumbnailTitle.background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[0,100,100,100]		}],
+	properties	: [	{name:"scaleHeight",			value:75	},
+					{name:"widthUnit", 				value:"%"	}
+				  ]
+},
+
+{ 	id			: "ThumbnailTitle.title.textFormat",
+	type		: "flash.text.TextFormat" ,
+	properties	: [	{name:"size", 			value:"18"			},
+					{name:"font", 			value:"Lucida GrandeAAA"		},
+					{name:"color", 			value:"0xFFFFFF"	},
+					{name:"bold", 			value:false			}
+				  ]
+},
+{ 	id			: "ThumbnailTitle.description.textFormat",
+	type		: "flash.text.TextFormat" ,
+	properties	: [	{name:"size", 			value:"12"			},
+					{name:"font", 			value:"Arial"		},
+					{name:"color", 			value:"0xFFFFFF"	},
+					{name:"leading", 		value:10			},
+					{name:"bold", 			value:true			}
+				  ]
+},
+
+
+
+
+{ 	id			: "OverlayMenu.previousImageButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[325,0,50,50]		}]
+},
+{ 	id			: "OverlayMenu.previousImageButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[325,50,50,50]		}]
+},
+{ 	id			: "OverlayMenu.previousImageButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[325,100,50,50]		}]
+},
+{ 	id			: "OverlayMenu.previousImageButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[325,150,50,50]		}]
+},
+
+
+
+{ 	id			: "OverlayMenu.nextImageButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[376,0,50,50]		}]
+},
+{ 	id			: "OverlayMenu.nextImageButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[376,50,50,50]		}]
+},
+{ 	id			: "OverlayMenu.nextImageButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[376,100,50,50]		}]
+},
+{ 	id			: "OverlayMenu.nextImageButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[376,150,50,50]		}]
+},
+
+
+
+{ 	id			: "OverlayMenu.centerPanel.background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[100,0,125,50]		}]
+},
+
+
+{ 	id			: "OverlayMenu.infoButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[226,0,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[226,50,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[226,100,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[226,150,50,50]		}]
+},
+
+
+{ 	id			: "OverlayMenu.downloadButton.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[276,0,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[276,50,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[276,100,50,50]		}]
+},
+{ 	id			: "OverlayMenu.downloadButton.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[276,150,50,50]		}]
+},
+
+
+{ 	id			: "AlbumList.background",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[326,152,100,25]		}]
+},
+
+{ 	id			: "AlbumList.listItem.normal",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[426,152,100,25]		}]
+},
+{ 	id			: "AlbumList.listItem.over",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[426,177,100,25]		}]
+},
+{ 	id			: "AlbumList.listItem.down",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[426,202,100,25]		}]
+},
+{ 	id			: "AlbumList.listItem.hit",
+	type		: "com.df.dfg.themes.core.ThemeElement" ,
+	arguments	: [ {value:		[426,227,100,25]		}]
+},
+
+
+
+{ 	id			: "AlbumList.listItem.textField",
+	type		: "flash.text.TextField" ,
+	properties	: [	{name:"selectable", 	value:false			},
+					{name:"autoSize", 		value:"left"		},
+					{name:"height", 		value:"18"			}
+				  ]
+},
+
+
+{ 	id			: "AlbumList.listItem.textFormat",
+	type		: "flash.text.TextFormat" ,
+	properties	: [	{name:"size", 			value:"12"			},
+					{name:"font", 			value:"Arial"		},
+					{name:"color", 			value:"0xFFFFFF"	},
+					{name:"leftMargin", 	value:10			},
+					{name:"rightMargin", 	value:10			},
+					{name:"bold", 			value:true			}
+				  ]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+	id        : "my_format" ,
+	type      : "flash.text.TextFormat" ,
+	arguments : [ { value:"arial" } , { value:24 } , { value:0xFEF292 } , { value:true } ]
+}
+,
+{
+	id         : "my_field" ,
+	type       : "flash.text.TextField"  ,
+	properties :
+	[
+	    { name : "autoSize"          , value  : "left"            } ,
+	    { name : "defaultTextFormat" , ref    : "my_format"       } ,
+	    { name : "text"              , value  : "HELLO WORLD"     } ,
+	    { name : "x"                 , value  : 10                } ,
+	    { name : "y"                 , value  : 10                }
+	]
+}
+,
+{
+	id               : "root" ,
+	type             : "flash.display.MovieClip"  ,
+	//factoryReference : "#root" ,
+	singleton        : true ,
+	properties       :
+	[
+	    { name : "addChild" , arguments  : [ { ref:"my_field" } ] }
+	]
+}
+
+
+
+] ;
+
+
+
+		]]>
+		</script>
+	</beans>
+</skin>

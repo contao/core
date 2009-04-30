@@ -45,7 +45,7 @@ link_target:"Fenster",
 link_target_same:"Im selben Fenster \u00F6ffnen",
 link_target_blank:"Neues Fenster \u00F6ffnen",
 link_titlefield:"Titel",
-link_is_email:"Bei der Adresse scheint es sich um eine E-Mail-Adresse zu handeln. Wollen Sie das dazu ben\u00F6tigte mailto: voranstellen?",
-link_is_external:"Bei der Adresse scheint es sich um einen externen Link zu handeln. M\u00F6chten Sie, dass zur korrekten Verlinkung ein http:// vorangestellt wird?",
+link_is_email:"Diese Adresse scheint eine E-Mail-Adresse zu sein. M\u00F6chten Sie das dazu ben\u00F6tigte mailto: voranstellen?",
+link_is_external:"Diese Adresse scheint ein externer Link zu sein. M\u00F6chten Sie das dazu ben\u00F6tigte http:// voranstellen?",
 link_list:"Linkliste"
 });

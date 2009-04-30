@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleEventReader
  *
  * Front end module "event reader".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -96,7 +96,7 @@ class ModuleEventReader extends Events
 		$time = time();
 
 		// Get current event
-		$objEvent = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar FROM tl_calendar_events WHERE pid IN(" . implode(',', $this->cal_calendar) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+		$objEvent = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', $this->cal_calendar) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								   ->limit(1)
 								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
 
@@ -109,7 +109,7 @@ class ModuleEventReader extends Events
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return;
 		}
 
@@ -124,15 +124,15 @@ class ModuleEventReader extends Events
 		// Get date
 		if ($span > 0)
 		{
-			$date = date($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . ' - ' . date($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime);
+			$date = $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime);
 		}
 		elseif ($objEvent->startTime == $objEvent->endTime)
 		{
-			$date = date($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '');
 		}
 		else
 		{
-			$date = date($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ' - ' . date($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '');
 		}
 
 		$until = '';
@@ -147,7 +147,7 @@ class ModuleEventReader extends Events
 
 			if ($objEvent->recurrences > 0)
 			{
-				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], date($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->repeatEnd));
+				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->repeatEnd));
 			}
 		}
 
@@ -162,6 +162,11 @@ class ModuleEventReader extends Events
 		$objTemplate->class = strlen($objEvent->cssClass) ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
+
+		// Encode e-mail addresses
+		$this->import('String');
+		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
+
 		$this->Template->addImage = false;
 
 		// Add image

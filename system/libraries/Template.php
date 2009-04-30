@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,11 +31,11 @@
  * Class Template
  *
  * Provide methods to handle templates.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
-class Template extends Controller
+abstract class Template extends Controller
 {
 
 	/**
@@ -156,7 +156,7 @@ class Template extends Controller
 		 */
 		$this->strBuffer = preg_replace
 		(
-			'/(<head[^>]*>)/',
+			'/([ \t]*<head[^>]*>)/U',
 			"<!--\n\n"
 			. "\tThis website is powered by TYPOlight webCMS :: TYPOlight is licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"

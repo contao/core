@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleLogin
  *
  * Front end module "login".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -46,7 +46,7 @@ class ModuleLogin extends Module
 
 
 	/**
-	 * Make sure the UFO plugin is available
+	 * Display a login form
 	 * @return string
 	 */
 	public function generate()
@@ -137,7 +137,7 @@ class ModuleLogin extends Module
 			if ($this->User->login())
 			{
 				// HOOK: post login callback
-				if (array_key_exists('postLogin', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
+				if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['postLogin'] as $callback)
 					{
@@ -176,7 +176,7 @@ class ModuleLogin extends Module
 			if ($this->User->logout())
 			{
 				// HOOK: post logout callback
-				if (array_key_exists('postLogout', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
+				if (isset($GLOBALS['TL_HOOKS']['postLogout']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
 					{
@@ -210,7 +210,7 @@ class ModuleLogin extends Module
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
-			$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+			$this->Template->action = ampersand($this->Environment->request, true);
 
 			return;
 		}
@@ -235,7 +235,7 @@ class ModuleLogin extends Module
 
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->value = specialchars($this->Input->post('username'));
 	}

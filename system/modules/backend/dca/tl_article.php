@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -123,14 +123,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('printable'),
-		'default'                     => 'title,alias,author;inColumn;keywords,teaser;showTeaser;space,cssID;printable;published,start,stop'
-	),
-
-	// Subpalettes
-	'subpalettes' => array
-	(
-		'printable'                   => 'label'
+		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},showTeaser,teaser;{expert_legend:hide},printable,cssID,space;{publish_legend},published,start,stop'
 	),
 
 	// Fields
@@ -148,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128),
+			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_article', 'generateAlias')
@@ -161,7 +154,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'default'                 => $this->User->id,
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'foreignKey'              => 'tl_user.name'
+			'foreignKey'              => 'tl_user.name',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'inColumn' => array
 		(
@@ -172,12 +166,12 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'options'                 => $this->getPageSections(),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
 		),
-		'teaser' => array
+		'keywords' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaser'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['keywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE')
+			'eval'                    => array('style'=>'height:60px;')
 		),
 		'showTeaser' => array
 		(
@@ -185,40 +179,32 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['showTeaser'],
 			'inputType'               => 'checkbox'
 		),
-		'keywords' => array
+		'teaser' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['keywords'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaser'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;')
+			'eval'                    => array('rte'=>'tinyMCE')
 		),
-		'space' => array
+		'printable' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['space'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['printable'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true)
+			'inputType'               => 'checkbox'
 		),
 		'cssID' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['cssID'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2)
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
 		),
-		'printable' => array
+		'space' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['printable'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'label' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['label'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['space'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'allowHtml'=>true)
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'published' => array
 		(
@@ -232,14 +218,14 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['start'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['stop'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -249,7 +235,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
  * Class tl_article
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

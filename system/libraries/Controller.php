@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Controller
  *
  * Provide methods to manage controllers.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -164,9 +164,11 @@ abstract class Controller extends System
 				return RasterDesigner::load($objPage->id, $strColumn);
 			}
 
+			$time = time();
+
 			// Show all articles of the current column
-			$objArticles = $this->Database->prepare("SELECT id FROM tl_article WHERE pid=? AND inColumn=? ORDER BY sorting")
-										  ->execute($objPage->id, $strColumn);
+			$objArticles = $this->Database->prepare("SELECT id FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
+										  ->execute($objPage->id, $strColumn, $time, $time);
 
 			if (($count = $objArticles->numRows) < 1)
 			{
@@ -259,7 +261,7 @@ abstract class Controller extends System
 		$this->import('Database');
 
 		// Get article
-		$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
+		$objArticle = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
 									 ->limit(1)
 									 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
 
@@ -270,7 +272,7 @@ abstract class Controller extends System
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
 		}
 
@@ -740,16 +742,15 @@ abstract class Controller extends System
 				if ($arrGdinfo['GIF Read Support'])
 				{
 					$strSourceImage = imagecreatefromgif(TL_ROOT . '/' . $image);
+					$intTranspIndex = imagecolortransparent($strSourceImage);
 
 					// Handle transparency
-					$strBuffer = substr($objFile->getContent(), 0, 13);
-					$intColorFlag = ord(substr($strBuffer, 10, 1)) >> 7;
-					$intBackground = ord(substr($strBuffer, 11));
-
-					if ($intColorFlag)
+					if ($intTranspIndex >= 0)
 					{
-						$strBuffer = substr($objFile->getContent(), 13, (($intBackground + 1) * 3));
-						imagecolortransparent($strSourceImage, imagecolorallocate($strSourceImage, ord(substr($strBuffer, $intBackground * 3, 1)), ord(substr($strBuffer, $intBackground * 3 + 1, 1)), ord(substr($strBuffer, $intBackground * 3 + 2, 1))));
+						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
+						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
+						imagefill($strNewImage, 0, 0, $intTranspIndex);
+						imagecolortransparent($strNewImage, $intTranspIndex);
 					}
 				}
 				break;
@@ -767,13 +768,13 @@ abstract class Controller extends System
 				{
 					$strSourceImage = imagecreatefrompng(TL_ROOT . '/' . $image);
 
-					// Handle transparency (GDlib > 2.0.1 required)
-					if (version_compare($strGdVersion, '2.0.1', '>='))
+					// Handle transparency (GDlib >= 2.0 required)
+					if (version_compare($strGdVersion, '2.0', '>='))
 					{
-						imageantialias($strNewImage, true);
 						imagealphablending($strNewImage, false);
+						$intTranspIndex = imagecolorallocatealpha($strNewImage, 0, 0, 0, 127);
+						imagefill($strNewImage, 0, 0, $intTranspIndex);
 						imagesavealpha($strNewImage, true);
-						imagefilledrectangle($strNewImage, $intPositionX, $intPositionY, $intWidth, $intHeight, imagecolorallocatealpha($strNewImage, 255, 255, 255, 127));
 					}
 				}
 				break;
@@ -875,83 +876,50 @@ abstract class Controller extends System
 		$strArticle = preg_replace('/<form.*<\/form>/Us', '', $strArticle);
 		$strArticle = preg_replace('/\?pdf=[0-9]*/i', '', $strArticle);
 
-		// Use DOMPDF plugin
-		if ($GLOBALS['TL_CONFIG']['useDompdf'])
+		// HOOK: use DOMPDF to generate PDF files
+		if ($GLOBALS['TL_CONFIG']['useDompdf'] && in_array('dompdf', $this->Config->getActiveModules()))
 		{
-			// Add head section
-			$strHtml = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
-			$strHtml .= '<html xmlns="http://www.w3.org/1999/xhtml">' . "\n";
-			$strHtml .= '<head>' . "\n";
-			$strHtml .= '<title>' . $objArticle->title . '</title>' . "\n";
-			$strHtml .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet'] . '" />' . "\n";
-			$strHtml .= '<base href="' . $this->Environment->base . '"></base>' . "\n";
-
-			$objStylesheet = $this->Database->execute("SELECT * FROM tl_style_sheet");
-
-			// Add stylesheets
-			while ($objStylesheet->next())
-			{
-				$arrMedia = deserialize($objStylesheet->media, true);
-
-				if (in_array('print', $arrMedia) || in_array('all', $arrMedia))
-				{
-					$strHtml .= '<link rel="stylesheet" type="text/css" href="' . $objStylesheet->name . '.css" />' . "\n";
-				}
-			}
-
-			// Convert the Euro symbol
-			$strArticle = str_replace('€', '&#0128;', $strArticle);
-
-			// Make sure there is no background
-			$strHtml .= '<style type="text/css">' . "\n";
-			$strHtml .= 'body { background:none; background-color:#ffffff; }' . "\n";
-			$strHtml .= '</style>' . "\n";
-			$strHtml .= '</head>' . "\n";
-			$strHtml .= '<body>' . "\n";
-			$strHtml .= $strArticle . "\n";
-			$strHtml .= '</body>' . "\n";
-			$strHtml .= '</html>';
-
-			// Generate DOMPDF object
-			require_once(TL_ROOT . '/plugins/dompdf/dompdf_config.inc.php');
-			$dompdf = new DOMPDF();
-
-			$dompdf->set_paper('a4');
-			$dompdf->set_base_path(TL_ROOT);
-			$dompdf->load_html($strHtml);
-			$dompdf->render();
-
-			$dompdf->stream(standardize(ampersand($objArticle->title, false)) . '.pdf');
+			$this->import('DompdfIgniter');
+			$this->DompdfIgniter->generatePdf($objArticle, $strArticle);
 		}
 
 		// Use TCPDF plugin
 		else
 		{
-			$arrChunks = array();
-			preg_match_all('/<pre.*<\/pre>/Us', $strArticle, $arrChunks);
+			$arrSearch = array
+			(
+				'@(<pre.*</pre>)@Use',
+				'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
+				'@(<img[^>]+>)@e',
+				'@(<div[^>]+block[^>]+>)@',
+				'@[\n\r\t]@',
+				'@<br /><div class="mod_article@'
+			);
 
-			// Replace linebreaks within PRE tags
-			foreach ($arrChunks[0] as $strChunk)
-			{
-				$strArticle = str_replace($strChunk, str_replace("\n", '<br />', $strChunk), $strArticle);
-			}
+			$arrReplace = array
+			(
+				'str_replace("\n", "<br />", "\\1")',
+				'<u>$1</u>',
+				'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
+				'<br />$1',
+				'',
+				'<div class="mod_article'
+			);
 
-			// Remove linebreaks and tabs
-			$strArticle = str_replace(array("\n", "\t"), '', $strArticle);
-			$strArticle = preg_replace('/<span style="text-decoration: ?underline;?">(.*)<\/span>/Us', '<u>$1</u>', $strArticle);
+			$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
 
 			// TCPDF configuration
 			$l['a_meta_dir'] = 'ltr';
 			$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
 			$l['a_meta_language'] = $GLOBALS['TL_LANGUAGE'];
-			$l['w_page'] = "page";
+			$l['w_page'] = 'page';
 
 			// Include library
 			require_once(TL_ROOT . '/system/config/tcpdf.php');
-			require_once(TL_ROOT . '/plugins/tcpdf/tcpdf.php'); 
+			require_once(TL_ROOT . '/plugins/tcpdf/tcpdf.php');
 
 			// Create new PDF document
-			$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true); 
+			$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
 
 			// Set document information
 			$pdf->SetCreator(PDF_CREATOR);
@@ -971,20 +939,20 @@ abstract class Controller extends System
 			$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
 			// Set image scale factor
-			$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+			$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
 			// Set some language-dependent strings
-			$pdf->setLanguageArray($l); 
+			$pdf->setLanguageArray($l);
 
 			// Initialize document and add a page
 			$pdf->AliasNbPages();
 			$pdf->AddPage();
 
 			// Set font
-			$pdf->SetFont(PDF_FONT_NAME_MAIN, "", PDF_FONT_SIZE_MAIN);
+			$pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
 
 			// Write the HTML content
-			$pdf->writeHTML($strArticle);
+			$pdf->writeHTML($strArticle, true, 0, true, 0);
 
 			// Close and output PDF document
 			$pdf->lastPage();
@@ -1004,15 +972,15 @@ abstract class Controller extends System
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=false)
 	{
-		// Restore basic entities
-		$strBuffer = str_replace(array('[&]', '[lt]', '[gt]'), array('&amp;', '&lt;', '&gt;'), $strBuffer);
+		global $objPage;
 
+		// Preserve insert tags
 		if ($GLOBALS['TL_CONFIG']['disableInsertTags'])
 		{
-			return $strBuffer;
+			return $this->restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split("/{{([^}]+)}}/", $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/{{([^}]+)}}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 		$arrCache = array();
@@ -1029,7 +997,7 @@ abstract class Controller extends System
 			}
 
 			// Load value from cache array
-			if (array_key_exists($strTag, $arrCache))
+			if (isset($arrCache[$strTag]))
 			{
 				$strBuffer .= $arrCache[$strTag];
 				continue;
@@ -1054,7 +1022,7 @@ abstract class Controller extends System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = date((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['dateFormat']));
+					$arrCache[$strTag] = $this->parseDate((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['dateFormat']));
 					break;
 
 				// Accessibility tags
@@ -1118,7 +1086,7 @@ abstract class Controller extends System
 						$this->import('Database');
 
 						// Get target page
-						$objNextPage = $this->Database->prepare("SELECT id, alias, title, pageTitle FROM tl_page WHERE id=? OR alias=?")
+						$objNextPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
 													  ->limit(1)
 													  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
@@ -1275,7 +1243,7 @@ abstract class Controller extends System
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = date((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['datimFormat']), max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = $this->parseDate((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['datimFormat']), max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 
@@ -1284,10 +1252,16 @@ abstract class Controller extends System
 					$arrCache[$strTag] = VERSION . '.' . BUILD;
 					break;
 
+				// Conditional tags
+				case 'iflng':
+					if (strlen($elements[1]) && $elements[1] != $objPage->language)
+					{
+						$_rit = $_rit + 2;
+					}
+					break;
+
 				// Environment
 				case 'env':
-					global $objPage;
-
 					switch ($elements[1])
 					{
 						case 'page_id':
@@ -1351,7 +1325,7 @@ abstract class Controller extends System
 							break;
 
 						case 'referer':
-							$arrCache[$strTag] = $this->getReferer(ENCODE_AMPERSANDS);
+							$arrCache[$strTag] = $this->getReferer(true);
 							break;
 					}
 					break;
@@ -1406,6 +1380,10 @@ abstract class Controller extends System
 						$strFile = $arrChunks[0];
 					}
 
+					// Sanitize path
+					$strFile = str_replace('../', '', $strFile);
+
+					// Generate image
 					if (strlen($rel))
 					{
 						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
@@ -1440,6 +1418,9 @@ abstract class Controller extends System
 						$strFile = $arrChunks[0];
 					}
 
+					// Sanitize path
+					$strFile = str_replace('../', '', $strFile);
+
 					// Include file
 					if (file_exists(TL_ROOT . '/templates/' . $strFile))
 					{
@@ -1454,7 +1435,7 @@ abstract class Controller extends System
 
 				// HOOK: pass unknown tags to callback functions
 				default:
-					if (array_key_exists('replaceInsertTags', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['replaceInsertTags']))
+					if (isset($GLOBALS['TL_HOOKS']['replaceInsertTags']) && is_array($GLOBALS['TL_HOOKS']['replaceInsertTags']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['replaceInsertTags'] as $callback)
 						{
@@ -1464,7 +1445,7 @@ abstract class Controller extends System
 							// Replace the tag and stop the loop
 							if ($varValue !== false)
 							{
-								$arrCache[$strTag] = $this->$callback[0]->$callback[1]($strTag);
+								$arrCache[$strTag] = $varValue;
 								break;
 							}
 						}
@@ -1475,7 +1456,18 @@ abstract class Controller extends System
 			$strBuffer .= $arrCache[$strTag];
 		}
 
-		return $strBuffer;
+		return $this->restoreBasicEntities($strBuffer);
+	}
+
+
+	/**
+	 * Restore basic entities
+	 * @param string
+	 * @return string
+	 */
+	protected function restoreBasicEntities($strBuffer)
+	{
+		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]'), array('&amp;', '&lt;', '&gt;', '&nbsp;'), $strBuffer);
 	}
 
 
@@ -1593,7 +1585,7 @@ abstract class Controller extends System
 		}
 
 		// HOOK: add custom logic
-		if (array_key_exists('generateFrontendUrl', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['generateFrontendUrl']))
+		if (isset($GLOBALS['TL_HOOKS']['generateFrontendUrl']) && is_array($GLOBALS['TL_HOOKS']['generateFrontendUrl']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['generateFrontendUrl'] as $callback)
 			{
@@ -1615,21 +1607,21 @@ abstract class Controller extends System
 		// Make sure there are no attempts to hack the file system
 		if (preg_match('@^\.+@i', $strFile) || preg_match('@\.+/@i', $strFile) || preg_match('@(://)+@i', $strFile))
 		{
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			die('Invalid file name');
 		}
 
 		// Limit downloads to the tl_files directory
 		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $strFile))
 		{
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			die('Invalid path');
 		}
 
 		// Check whether the file exists
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			die('File not found');
 		}
 
@@ -1638,16 +1630,16 @@ abstract class Controller extends System
 
 		if (!in_array($objFile->extension, $arrAllowedTypes))
 		{
-			header('HTTP/1.0 403 Forbidden');
+			header('HTTP/1.1 403 Forbidden');
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
 
 		// Open the "save as …" dialogue
 		header('Content-Type: ' . $objFile->mime);
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="'.$objFile->basename.'"');
-		header('Content-Length: '.$objFile->filesize);
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0'); 
+		header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
+		header('Content-Length: ' . $objFile->filesize);
+		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
 		header('Expires: 0');
 
@@ -1656,7 +1648,7 @@ abstract class Controller extends System
 		fclose($resFile);
 
 		// HOOK: post download callback
-		if (array_key_exists('postDownload', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['postDownload']))
+		if (isset($GLOBALS['TL_HOOKS']['postDownload']) && is_array($GLOBALS['TL_HOOKS']['postDownload']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['postDownload'] as $callback)
 			{
@@ -1755,8 +1747,8 @@ abstract class Controller extends System
 			}
 		}
 
-		// Add default option to single checkbox 
-		if ($arrData['inputType'] == 'checkbox' && !array_key_exists('options', $arrData) && !array_key_exists('options_callback', $arrData) && !array_key_exists('foreignKey', $arrData))
+		// Add default option to single checkbox
+		if ($arrData['inputType'] == 'checkbox' && !isset($arrData['options']) && !isset($arrData['options_callback']) && !isset($arrData['foreignKey']))
 		{
 			$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['label']);
 		}
@@ -1765,7 +1757,7 @@ abstract class Controller extends System
 		if (is_array($arrData['options']))
 		{
 			$blnIsAssociative = array_is_assoc($arrData['options']);
-			$blnUseReference = array_key_exists('reference', $arrData) ? true : false;
+			$blnUseReference = isset($arrData['reference']);
 
 			if ($arrData['eval']['includeBlankOption'])
 			{
@@ -1864,7 +1856,7 @@ abstract class Controller extends System
 			$blnSorting = $this->Database->fieldExists('sorting', $strTable);
 		}
 
-		$objChilds = $this->Database->prepare("SELECT * FROM " . $strTable ." WHERE pid=? AND id!=?" . ($blnSorting ? ' ORDER BY sorting' : ''))
+		$objChilds = $this->Database->prepare("SELECT id, (SELECT COUNT(*) FROM " . $strTable . " t2 WHERE t1.id=t2.pid) AS hasChilds FROM " . $strTable ." t1 WHERE t1.pid=? AND t1.id!=?" . ($blnSorting ? " ORDER BY t1.sorting" : ""))
 									->execute($intParentId, $intParentId);
 
 		if ($objChilds->numRows > 0)
@@ -1872,7 +1864,11 @@ abstract class Controller extends System
 			while ($objChilds->next())
 			{
 				$arrReturn[] = $objChilds->id;
-				$arrReturn = array_merge($arrReturn, $this->getChildRecords($objChilds->id, $strTable, $blnSorting));
+
+				if ($objChilds->hasChilds > 0)
+				{
+					$arrReturn = array_merge($arrReturn, $this->getChildRecords($objChilds->id, $strTable, $blnSorting));
+				}
 			}
 		}
 
@@ -1881,12 +1877,19 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return if a class file exists
+	 * Return true if a class file exists
 	 * @param string
+	 * @param boolean
 	 */
-	protected function classFileExists($strClass)
+	protected function classFileExists($strClass, $blnNoCache=false)
 	{
+		if (!$blnNoCache && isset($this->arrCache[$strClass]))
+		{
+			return $this->arrCache[$strClass];
+		}
+
 		$this->import('Config'); // see ticket #152
+		$this->arrCache[$strClass] = false;
 
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
@@ -1894,11 +1897,12 @@ abstract class Controller extends System
 
 			if (file_exists($strFile))
 			{
-				return true;
+				$this->arrCache[$strClass] = true;
+				break;
 			}
 		}
 
-		return false;
+		return $this->arrCache[$strClass];
 	}
 
 
@@ -2060,7 +2064,7 @@ abstract class Controller extends System
 		}
 
 		// HOOK: preserve third party feeds
-		if (array_key_exists('removeOldFeeds', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['removeOldFeeds']))
+		if (isset($GLOBALS['TL_HOOKS']['removeOldFeeds']) && is_array($GLOBALS['TL_HOOKS']['removeOldFeeds']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['removeOldFeeds'] as $callback)
 			{

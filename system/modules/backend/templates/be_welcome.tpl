@@ -21,7 +21,7 @@
 </div>
 <?php endif; ?>
 
-<table cellspacing="0" cellpadding="0" id="tl_shortcuts" summary="shortcut overview">
+<table cellspacing="0" cellpadding="0" id="tl_shortcuts" summary="Shortcut overview">
 <?php foreach ($this->arrShortcuts as $arrShortcut): ?>
 <?php if ($arrShortcut[0] == 'colspan'): ?>
   <tr>

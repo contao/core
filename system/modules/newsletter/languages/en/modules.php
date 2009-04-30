@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -30,16 +30,16 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletters', 'This module allows you to manage newsletters.');
+$GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletters', 'Manage subscriptions and send newsletters.');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['newsletter']  = 'Newsletter';
-$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Subscribe', 'This module allows front end users to subscribe to certain channels.');
-$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Unsubscribe', 'This module allows front end users to unsubscribe from certain channels.');
-$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletter reader', 'This module shows a single newsletter.');
-$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletter list', 'This module lists the newsletters of one or more channels.');
+$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Subscribe', 'generates a form to subscribe to one or more channels.');
+$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Unsubscribe', 'generates a form to unsubscribe from one or more channels.');
+$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletter list', 'adds a list of newsletters to the page.');
+$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletter reader', 'shows the details of a newsletter.');
 
 ?>

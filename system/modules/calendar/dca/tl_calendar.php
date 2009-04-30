@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -28,7 +28,7 @@
 
 
 /**
- * Table tl_calendar 
+ * Table tl_calendar
  */
 $GLOBALS['TL_DCA']['tl_calendar'] = array
 (
@@ -106,14 +106,14 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected', 'makeFeed'),
-		'default'                     => 'title,language;jumpTo;protected;makeFeed'
+		'default'                     => '{title_legend},title,jumpTo;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'protected'                   => 'groups',
-		'makeFeed'                    => 'format,maxItems,description,feedBase,alias'
+		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
 	),
 
 	// Fields
@@ -127,22 +127,12 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['language'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32)
-		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'eval'                    => array('fieldType'=>'radio')
 		),
 		'protected' => array
 		(
@@ -168,39 +158,34 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
-		'feedBase' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['feedBase'],
-			'default'                 => $this->Environment->base,
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255)
-		),
-		'alias' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['alias'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128)
-		),
-		'description' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['description'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;')
-		),
 		'format' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['format'],
 			'default'                 => 'rss',
 			'exclude'                 => true,
-			'filter'                 => true,
+			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom')
+			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'language' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['language'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
+		),
+		'source' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['source'],
+			'default'                 => 'source_teaser',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('source_teaser', 'source_text'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'maxItems' => array
 		(
@@ -208,7 +193,32 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'feedBase' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['feedBase'],
+			'default'                 => $this->Environment->base,
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'alias' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['alias'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+		),
+		'description' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['description'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
 		)
 	)
 );
@@ -218,7 +228,7 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
  * Class tl_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

@@ -29,7 +29,7 @@
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
 <input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
 
 <!-- states -->
 <?php $nm = ($rep->f_stage==$rep->inst_stages) ? 'repository_' : 'repository_dis_'; ?>

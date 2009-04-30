@@ -10,10 +10,14 @@
 
 <!-- indexer::stop -->
 <div class="form">
+<?php if ($this->confirm): ?>
+
+<p class="confirm"><?php echo $this->confirm; ?></p>
+<?php else: ?>
 
 <form action="<?php echo $this->action; ?>" method="post">
 <div class="formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_comment" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_comment" /><?php echo $this->messages; ?> 
 <?php foreach ($this->fields as $objWidget): ?>
 <div class="widget">
   <?php echo $objWidget->generateWithError(); ?> <?php echo ($objWidget instanceof FormCaptcha) ? $objWidget->generateQuestion() : $objWidget->generateLabel(); ?><?php if ($objWidget->required): ?><span class="mandatory">*</span><?php endif; ?> 
@@ -24,6 +28,7 @@
 </div>
 </div>
 </form>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->

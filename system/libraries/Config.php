@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Config
  *
  * Provide methods to manage configuration files.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -49,6 +49,12 @@ class Config
 	 * @var object
 	 */
 	protected $Files;
+
+	/**
+	 * Cache array
+	 * @var array
+	 */
+	protected $arrCache = array();
 
 
 	/**
@@ -92,10 +98,16 @@ class Config
 
 	/**
 	 * Return all active modules (starting with "backend" and "frontend") as array
+	 * @param boolean
 	 * @return array
 	 */
-	public function getActiveModules()
+	public function getActiveModules($blnNoCache=false)
 	{
+		if (!$blnNoCache && isset($this->arrCache['activeModules']))
+		{
+			return $this->arrCache['activeModules'];
+		}
+
 		$arrActiveModules = array('backend', 'frontend');
 		$arrAllModules = scan(TL_ROOT . '/system/modules');
 
@@ -122,7 +134,8 @@ class Config
 			$arrActiveModules[] = $strModule;
 		}
 
-		return $arrActiveModules;
+		$this->arrCache['activeModules'] = $arrActiveModules;
+		return $this->arrCache['activeModules'];
 	}
 
 

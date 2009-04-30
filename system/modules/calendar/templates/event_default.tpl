@@ -3,14 +3,10 @@
 
 <h1><?php echo $this->title; ?></h1>
 
-<div class="info">
-<?php echo $this->date; ?> 
-</div>
+<p class="info"><?php echo $this->date; ?></p>
 <?php if ($this->recurring): ?>
 
-<div class="recurring">
-<?php echo $this->recurring; if ($this->until): ?> <?php echo $this->until; endif; ?>.
-</div>
+<p class="recurring"><?php echo $this->recurring; if ($this->until): ?> <?php echo $this->until; endif; ?>.</p>
 <?php endif; ?>
 
 <div class="ce_text">

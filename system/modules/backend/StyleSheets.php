@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class StyleSheets
  *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -133,9 +133,9 @@ class StyleSheets extends Backend
 		}
 
 		$objFile = new File($row['name'].'.css');
-		$objFile->write("/**\n * Style sheet " . $row['name'] . "\n */");
+		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
-		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? ORDER BY sorting")
+		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($row['id']);
 
 		while ($objDefinitions->next())
@@ -158,7 +158,7 @@ class StyleSheets extends Backend
 		$return = $blnWriteToFile ? '' : "\n<pre>";
 
 		// Comment
-		if (strlen($row['comment']))
+		if (!$blnWriteToFile && strlen($row['comment']))
 		{
 			$comment = preg_replace('@^\s*/\*+@', '', $row['comment']);
 			$comment = preg_replace('@\*+/\s*$@', '', $comment);
@@ -168,7 +168,7 @@ class StyleSheets extends Backend
 
 		// Selector
 		$arrSelector = trimsplit(',', $this->String->decodeEntities($row['selector']));
-		$return .= "\n" . implode(($blnWriteToFile ? ", " : ",\n"), $arrSelector) . "\n{";
+		$return .= "\n" . implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . "\n{";
 
 		// Size and position
 		if ($row['size'])
@@ -255,10 +255,10 @@ class StyleSheets extends Backend
 	margin:'.$top.(($top == 'auto') ? '' : $row['margin']['unit']).';';
 
 					elseif ($top == $bottom && $right == $left) $return .= '
-	margin:'.$top.$row['margin']['unit'].' '.$right.(($right == 'auto') ? '' : $row['margin']['unit']).';';
+	margin:'.$top.(($top == 'auto') ? '' : $row['margin']['unit']).' '.$right.(($right == 'auto') ? '' : $row['margin']['unit']).';';
 
 					else $return .= '
-	margin:'.$top.$row['margin']['unit'].' '.$right.(($right == 'auto') ? '' : $row['margin']['unit']).' '.$bottom.$row['margin']['unit'].' '.$left.(($left == 'auto') ? '' : $row['margin']['unit']).';';
+	margin:'.$top.(($top == 'auto') ? '' : $row['margin']['unit']).' '.$right.(($right == 'auto') ? '' : $row['margin']['unit']).' '.$bottom.(($bottom == 'auto') ? '' : $row['margin']['unit']).' '.$left.(($left == 'auto') ? '' : $row['margin']['unit']).';';
 				}
 
 				else
@@ -466,7 +466,14 @@ class StyleSheets extends Backend
 		}
 
 		// Close format definition
-		return $return . "\n}" . ($blnWriteToFile ? "" : "</pre>\n");
+		$return .= "\n}" . ($blnWriteToFile ? '' : "</pre>\n");
+
+		if ($blnWriteToFile)
+		{
+			$return = str_replace(array("\n", "\t"), '', $return);
+		}
+
+		return $return;
 	}
 
 
@@ -619,11 +626,11 @@ class StyleSheets extends Backend
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_style_sheet']['import'][1].'</h2>'.$this->getMessages().'
 
-<form action="'.ampersand($this->Environment->request, ENCODE_AMPERSANDS).'" id="tl_style_sheet_import" class="tl_form" method="post">
+<form action="'.ampersand($this->Environment->request, true).'" id="tl_style_sheet_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1].'</p>' : '').'
 </div>
@@ -732,6 +739,7 @@ class StyleSheets extends Backend
 				case 'padding':
 					$arrSet['alignment'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
+					$arrUnits = array();
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -756,38 +764,28 @@ class StyleSheets extends Backend
 							break;
 
 						case 2:
-							$arrUnits = array();
 							if ($arrTRBL[0] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_1 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
 								$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							if ($arrTRBL[1] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_2 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							// Move to custom section if there are different units
 							if (count(array_unique($arrUnits)) > 1)
 							{
+								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
 								break;
 							}
@@ -797,71 +795,60 @@ class StyleSheets extends Backend
 								'right' => $varValue_2,
 								'bottom' => $varValue_1,
 								'left' => $varValue_2,
-								'unit' => $strUnit
+								'unit' => ''
 							);
+							// Overwrite unit
+							foreach ($arrUnits as $strUnit)
+							{
+								if ($strUnit != '')
+								{
+									$arrSet[$strKey]['unit'] = $strUnit;
+									break;
+								}
+							}
 							break;
 
 						case 4:
-							$arrUnits = array();
 							if ($arrTRBL[0] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_1 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
 								$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							if ($arrTRBL[1] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_2 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							if ($arrTRBL[2] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_3 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[2]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[2]);
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							if ($arrTRBL[3] == 'auto')
 							{
-								$strUnit = '';
 								$varValue_4 = 'auto';
 							}
 							else
 							{
-								$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[3]);
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[3]);
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
-								if (strlen($strUnit))
-								{
-									$arrUnits[] = $strUnit;
-								}
 							}
 							// Move to custom section if there are different units
 							if (count(array_unique($arrUnits)) > 1)
 							{
+								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
 								break;
 							}
@@ -871,8 +858,17 @@ class StyleSheets extends Backend
 								'right' => $varValue_2,
 								'bottom' => $varValue_3,
 								'left' => $varValue_4,
-								'unit' => $strUnit
+								'unit' => ''
 							);
+							// Overwrite unit
+							foreach ($arrUnits as $strUnit)
+							{
+								if ($strUnit != '')
+								{
+									$arrSet[$strKey]['unit'] = $strUnit;
+									break;
+								}
+							}
 							break;
 					}
 					break;
@@ -894,7 +890,10 @@ class StyleSheets extends Backend
 						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
 					}
 					$arrSet['margin'][$strName] = $varValue;
-					$arrSet['margin']['unit'] = $strUnit;
+					if (empty($arrSet['margin']['unit']))
+					{
+						$arrSet['margin']['unit'] = $strUnit;
+					}
 					break;
 
 				case 'padding-top':
@@ -1046,29 +1045,43 @@ class StyleSheets extends Backend
 					break;
 
 				case 'font-size':
-					$arrSet['font'] = 1;
-					$arrSet['fontsize'] = array
-					(
-						'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
-						'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
-					);
+					if ($arrChunks[1] == 'inherit')
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
+					else
+					{
+						$arrSet['font'] = 1;
+						$arrSet['fontsize'] = array
+						(
+							'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
+							'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
+						);
+					}
 					break;
 
 				case 'font-weight':
-					$arrSet['font'] = 1;
-					$arrSet['fontstyle'][] = $arrChunks[1];
+					if ($arrChunks[1] == 'inherit')
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
+					else
+					{
+						$arrSet['font'] = 1;
+						$arrSet['fontstyle'][] = $arrChunks[1];
+					}
 					break;
 
 				case 'font-style':
-				    if ($arrChunks[1] == 'italic')
-    				{
-        				$arrSet['font'] = 1;
-        				$arrSet['fontstyle'][] = 'italic';
-    				}
-    				else
-    				{
-        				$arrSet['own'][] = $strDefinition;
-    				}
+					if ($arrChunks[1] == 'italic')
+					{
+						$arrSet['font'] = 1;
+						$arrSet['fontstyle'][] = 'italic';
+					}
+					else
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
 					break;
 
 				case 'text-decoration':
@@ -1093,6 +1106,10 @@ class StyleSheets extends Backend
 					if ($arrChunks[1] == 'small-caps')
 					{
 						$arrSet['fontstyle'][] = 'small-caps';
+					}
+					else
+					{
+						$arrSet['own'][] = $strDefinition;
 					}
 					break;
 

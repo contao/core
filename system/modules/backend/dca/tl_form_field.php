@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -108,29 +108,29 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('type', 'storeFile', 'addSubmit', 'imageSubmit', 'multiple'),
-		'default'                     => 'type',
-		'headline'                    => 'type;text',
-		'explanation'                 => 'type;text',
-		'html'                        => 'type;html',
-		'text'                        => 'name,type;label,mandatory;rgxp,maxlength,value;accesskey,class;addSubmit',
-		'password'                    => 'name,type;label,mandatory;rgxp,maxlength;accesskey,class;addSubmit',
-		'textarea'                    => 'name,type;label,mandatory;rgxp,size,value;accesskey,class;addSubmit',
-		'select'                      => 'name,type;label,mandatory;options;multiple;accesskey,class;addSubmit',
-		'radio'                       => 'name,type;label,mandatory;options;class;addSubmit',
-		'checkbox'                    => 'name,type;label,mandatory;options;class;addSubmit',
-		'upload'                      => 'name,type;label,mandatory;extensions,maxlength;storeFile;accesskey,class;addSubmit',
-		'hidden'                      => 'name,type;value',
-		'captcha'                     => 'type;label;accesskey,class;addSubmit',
-		'submit'                      => 'type;slabel;imageSubmit;accesskey,class'
+		'default'                     => '{type_legend},type',
+		'headline'                    => '{type_legend},type;{text_legend},text',
+		'explanation'                 => '{type_legend},type;{text_legend},text',
+		'html'                        => '{type_legend},type;{text_legend},html',
+		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
+		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
+		'textarea'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,size;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
+		'select'                      => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory,multiple;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
+		'radio'                       => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory;{expert_legend:hide},class;{submit_legend},addSubmit',
+		'checkbox'                    => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory;{expert_legend:hide},class;{submit_legend},addSubmit',
+		'upload'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,extensions,maxlength;{store_legend:hide},storeFile;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
+		'hidden'                      => '{type_legend},type,name,value',
+		'captcha'                     => '{type_legend},type,label;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
+		'submit'                      => '{type_legend},type,slabel;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'storeFile'                   => 'uploadFolder,useHomeDir,doNotOverwrite',
 		'addSubmit'                   => 'slabel',
-		'imageSubmit'                 => 'singleSRC',
-		'multiple'                    => 'mSize'
+		'multiple'                    => 'mSize',
+		'storeFile'                   => 'uploadFolder,useHomeDir,doNotOverwrite',
+		'imageSubmit'                 => 'singleSRC'
 	),
 
 	// Fields
@@ -139,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'type' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['type'],
-			'default'                 => 'text',
+			'default'                 => 'headline',
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
@@ -153,7 +153,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'spaceToUnderscore'=>true, 'maxlength'=>64)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'spaceToUnderscore'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
 		),
 		'label' => array
 		(
@@ -161,15 +161,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
-		),
-		'value' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['value'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'text' => array
 		(
@@ -195,6 +187,35 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'inputType'               => 'optionWizard',
 			'eval'                    => array('mandatory'=>true)
 		),
+		'mandatory' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['mandatory'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox'
+		),
+		'rgxp' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['rgxp'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('digit', 'alpha', 'alnum', 'extnd', 'date', 'time', 'datim', 'phone', 'email', 'url'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field'],
+			'eval'                    => array('helpwizard'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'maxlength' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'size' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['size'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
 		'multiple' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['multiple'],
@@ -209,58 +230,13 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit')
 		),
-		'mandatory' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['mandatory'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
-		),
-		'rgxp' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['rgxp'],
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => array('digit', 'alpha', 'alnum', 'extnd', 'date', 'datim', 'phone', 'email', 'url'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field'],
-			'eval'                    => array('helpwizard'=>true, 'includeBlankOption'=>true)
-		),
-		'maxlength' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit')
-		),
 		'extensions' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['extensions'],
 			'exclude'                 => true,
 			'default'                 => 'jpg,jpeg,gif,png,pdf,doc,xls,ppt',
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255)
-		),
-		'size' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['size'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit')
-		),
-		'accesskey' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['accesskey'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1)
-		),
-		'class' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['class'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64)
+			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'storeFile' => array
 		(
@@ -274,19 +250,45 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['uploadFolder'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr')
 		),
 		'useHomeDir' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['useHomeDir'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'doNotOverwrite' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['doNotOverwrite'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'value' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['value'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255)
+		),
+		'class' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['class'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50')
+		),
+		'accesskey' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['accesskey'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1, 'tl_class'=>'w50')
 		),
 		'addSubmit' => array
 		(
@@ -294,6 +296,13 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
+		),
+		'slabel' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['slabel'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
 		'imageSubmit' => array
 		(
@@ -307,14 +316,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['singleSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
-		),
-		'slabel' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['slabel'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
 		)
 	)
 );
@@ -324,7 +326,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
  * Class tl_form_field
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

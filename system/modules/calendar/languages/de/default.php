@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -31,8 +31,8 @@
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['cal_events']     = '%d Event(s)';
-$GLOBALS['TL_LANG']['MSC']['cal_previous']   = 'Vorheriger Monat';
-$GLOBALS['TL_LANG']['MSC']['cal_next']       = 'Nächster Monat';
+$GLOBALS['TL_LANG']['MSC']['cal_previous']   = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['cal_next']       = '&gt;';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyDay']   = 'Es gibt keine Events an diesem Tag.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek']  = 'Es gibt keine Events in dieser Woche.';
 $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth'] = 'Es gibt keine Events in diesem Monat.';

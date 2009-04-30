@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Input
  *
  * Provide methods to clean up user input and to prevent XSS.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -88,10 +88,10 @@ class Input
 	{
 		$strCacheKey = $blnDecodeEntities ? 'getDecoded' : 'getEncoded';
 
-		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
+		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->decodeEntities($_GET[$strKey]);
-			$varValue = $this->xssClean($varValue, STRICT_MODE);
+			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
@@ -116,11 +116,11 @@ class Input
 	{
 		$strCacheKey = $blnDecodeEntities ? 'postDecoded' : 'postEncoded';
 
-		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
+		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
 			$varValue = $this->decodeEntities($varValue);
-			$varValue = $this->xssClean($varValue, STRICT_MODE);
+			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
@@ -145,7 +145,7 @@ class Input
 	{
 		$strCacheKey = $blnDecodeEntities ? 'postHtmlDecoded' : 'postHtmlEncoded';
 
-		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
+		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
 			$varValue = $this->decodeEntities($varValue);
@@ -173,7 +173,7 @@ class Input
 	{
 		$strCacheKey = 'postRaw';
 
-		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
+		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
 			$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
@@ -196,10 +196,10 @@ class Input
 	{
 		$strCacheKey = $blnDecodeEntities ? 'cookieDecoded' : 'cookieEncoded';
 
-		if (!array_key_exists($strCacheKey, $this->arrCache) || !array_key_exists($strKey, $this->arrCache[$strCacheKey]))
+		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->decodeEntities($_COOKIE[$strKey]);
-			$varValue = $this->xssClean($varValue, STRICT_MODE);
+			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
 
 			if (!$blnDecodeEntities)
@@ -412,8 +412,8 @@ class Input
 		// Preserve basic entities
 		$varValue = str_replace
 		(
-			array('[&amp;]', '&amp;', '[&lt;]', '&lt;', '[&gt;]', '&gt;'),
-			array('[&]', '[&]', '[lt]', '[lt]', '[gt]', '[gt]'),
+			array('[&amp;]', '&amp;', '[&lt;]', '&lt;', '[&gt;]', '&gt;', '[&nbsp;]', '&nbsp;'),
+			array('[&]', '[&]', '[lt]', '[lt]', '[gt]', '[gt]', '[nbsp]', '[nbsp]'),
 			$varValue
 		);
 

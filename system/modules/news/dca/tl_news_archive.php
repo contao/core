@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -113,15 +113,15 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('protected', 'allowComments', 'makeFeed'),
-		'default'                     => 'title,language;jumpTo;protected;allowComments;makeFeed'
+		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'groups',
 		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
-		'makeFeed'                    => 'format,maxItems,description,feedBase,alias'
+		'protected'                   => 'groups',
+		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
 	),
 
 	// Fields
@@ -135,22 +135,12 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['language'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'filter'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32)
-		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'eval'                    => array('fieldType'=>'radio')
 		),
 		'allowComments' => array
 		(
@@ -167,7 +157,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'template' => array
 		(
@@ -175,7 +166,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'default'                 => 'com_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('com_')
+			'options'                 => $this->getTemplateGroup('com_'),
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'sortOrder' => array
 		(
@@ -184,38 +176,43 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('ascending', 'descending'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit')
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'moderate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['moderate'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'bbcode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['bbcode'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'requireLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['requireLogin'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'disableCaptcha' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['disableCaptcha'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'protected' => array
 		(
@@ -241,13 +238,42 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
-		'alias' => array
+		'format' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['alias'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['format'],
+			'default'                 => 'rss',
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'select',
+			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'language' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['language'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
+		),
+		'source' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['source'],
+			'default'                 => 'source_teaser',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('source_teaser', 'source_text'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'maxItems' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['maxItems'],
+			'default'                 => 25,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'feedBase' => array
 		(
@@ -256,7 +282,15 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255)
+			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'alias' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['alias'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
 		'description' => array
 		(
@@ -264,24 +298,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;')
-		),
-		'format' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['format'],
-			'default'                 => 'rss',
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'select',
-			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom')
-		),
-		'maxItems' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['maxItems'],
-			'default'                 => 25,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
 		)
 	)
 );
@@ -291,7 +308,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
  * Class tl_news_archive
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

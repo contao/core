@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -166,8 +166,8 @@ $GLOBALS['BE_FFL'] = array
 $GLOBALS['TL_PTY'] = array
 (
 	'regular'   => 'PageRegular',
-	'redirect'  => 'PageRedirect',
 	'forward'   => 'PageForward',
+	'redirect'  => 'PageRedirect',
 	'root'      => 'PageRoot',
 	'error_403' => 'PageError403',
 	'error_404' => 'PageError404'
@@ -190,6 +190,7 @@ $GLOBALS['TL_CACHE'] = array
  * Cron jobs
  */
 $GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'purgeTempFolder');
+$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'checkForUpdates');
 $GLOBALS['TL_CRON']['weekly'][] = array('Automator', 'generateSitemap');
 $GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
 

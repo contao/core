@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    TemplateEditor
  * @license    LGPL
@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original templates', 'Choose the original template you want to customize. A local copy will be created in the <em>templates</em> folder.');
+$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original templates', 'A copy of the selected template will be stored in the <em>templates</em> directory.');
 
 
 /**
@@ -38,15 +38,15 @@ $GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original templates', 'C
  */
 $GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Add a new template';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl']   = 'Create template';
-$GLOBALS['TL_LANG']['tl_templates']['exists']   = 'A custom template named "%s" exists already!';
+$GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Template "%s" exists already!';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_templates']['new']    = array('New template', 'Create a new template');
-$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Edit template', 'Edit template "%s"');
-$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Edit source', 'Edit the source of file "%s"');
+$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Rename template', 'Rename template "%s"');
+$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Edit template', 'Edit template "%s"');
 $GLOBALS['TL_LANG']['tl_templates']['delete'] = array('Delete template', 'Delete template "%s"');
 
 ?>

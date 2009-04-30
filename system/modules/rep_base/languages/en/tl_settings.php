@@ -1,4 +1,5 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TYPOlight Repository :: Language file for tl_settings (en)
  *
@@ -11,6 +12,11 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'] = array('Extension Repository SOAP URL', 'Please enter the URL of the extension repository WSDL file (default: <em>http://typolight.org/services/repository.wsdl</em>).');
+$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'] = array('Extension repository URL', 'Here you can enter the URL of the extension repository WSDL file.');
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Extension repository';
 
 ?>

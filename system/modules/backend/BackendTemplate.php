@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class BackendTemplate
  *
  * Provide methods to handle back end templates.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -47,7 +47,7 @@ class BackendTemplate extends Template
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filter
-		if (array_key_exists('parseBackendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['parseBackendTemplate']))
+		if (isset($GLOBALS['TL_HOOKS']['parseBackendTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseBackendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseBackendTemplate'] as $callback)
 			{
@@ -122,7 +122,7 @@ class BackendTemplate extends Template
 		$strBuffer = $this->parse();
 
 		// HOOK: add custom output filter
-		if (array_key_exists('outputBackendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['outputBackendTemplate']))
+		if (isset($GLOBALS['TL_HOOKS']['outputBackendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputBackendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['outputBackendTemplate'] as $callback)
 			{

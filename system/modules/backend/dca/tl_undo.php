@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -79,26 +79,31 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		'tstamp' => array
 		(
 			'sorting'                 => true,
-			'flag'                    => 6,
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['tstamp']
+			'flag'                    => 6
+		),
+		'pid' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['pid'],
+			'sorting'                 => true,
+			'foreignKey'              => 'tl_user.name'
 		),
 		'fromTable' => array
 		(
-			'sorting'                 => true,
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['fromTable']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['fromTable'],
+			'sorting'                 => true
 		),
 		'query' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['query']
 		),
-		'data' => array
-		(
-			'search'                  => true,
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['data']
-		),
 		'affectedRows' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['affectedRows']
+		),
+		'data' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['data'],
+			'search'                  => true
 		)
 	)
 );

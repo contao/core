@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -118,15 +118,15 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('source', 'addImage', 'addEnclosure'),
-		'default'                     => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source;cssClass;published,start,stop',
-		'internal'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,jumpTo;cssClass;published,start,stop',
-		'external'                    => 'headline,alias,author;date,time;subheadline,teaser;text;addImage;noComments;addEnclosure;source,url,target;cssClass;published,start,stop'
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
+		'internal'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,jumpTo;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
+		'external'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,url,target;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'addImage'                    => 'singleSRC,alt,imagemargin,size,caption,floating,fullsize',
+		'addImage'                    => 'singleSRC,alt,size,imagemargin,caption,floating,fullsize',
 		'addEnclosure'                => 'enclosure'
 	),
 
@@ -147,11 +147,20 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128),
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_news', 'generateAlias')
 			)
+		),
+		'author' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
+			'exclude'                 => true,
+			'default'                 => $this->User->id,
+			'inputType'               => 'select',
+			'foreignKey'              => 'tl_user.name',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'date' => array
 		(
@@ -161,14 +170,14 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'filter'                  => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'time' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['time'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time')
+			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
 		),
 		'subheadline' => array
 		(
@@ -176,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
 		),
 		'teaser' => array
 		(
@@ -184,7 +193,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;', 'allowHtml'=>true)
+			'eval'                    => array('style'=>'height:60px;', 'allowHtml'=>true)
 		),
 		'text' => array
 		(
@@ -199,7 +208,6 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['addImage'],
 			'exclude'                 => true,
-			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
@@ -210,37 +218,20 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
 		),
-		'size' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true)
-		),
 		'alt' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'long')
 		),
-		'caption' => array
+		'size' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['caption'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
-			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255)
-		),
-		'floating' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
-			'exclude'                 => true,
-			'inputType'               => 'radioTable',
-			'options'                 => array('above', 'left', 'right'),
-			'eval'                    => array('cols'=>3),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC']
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imagemargin' => array
 		(
@@ -248,28 +239,31 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true)
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'caption' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['caption'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'floating' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'exclude'                 => true,
+			'inputType'               => 'radioTable',
+			'options'                 => array('above', 'left', 'right'),
+			'eval'                    => array('cols'=>3, 'tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC']
 		),
 		'fullsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
-		),
-		'author' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
-			'exclude'                 => true,
-			'default'                 => $this->User->id,
-			'inputType'               => 'select',
-			'foreignKey'              => 'tl_user.name'
-		),
-		'noComments' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['noComments'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'addEnclosure' => array
 		(
@@ -302,8 +296,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'eval'                    => array('fieldType'=>'radio')
 		),
 		'url' => array
 		(
@@ -311,19 +304,36 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'target' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['cssClass'],
 			'exclude'                 => true,
 			'inputType'               => 'text'
+		),
+		'noComments' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['noComments'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'featured' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['featured'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'published' => array
 		(
@@ -339,14 +349,14 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -356,7 +366,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
  * Class tl_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -500,7 +510,7 @@ class tl_news extends Backend
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")
-								   ->execute($varValue, $dc->id);
+								   ->execute($varValue);
 
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
@@ -526,7 +536,7 @@ class tl_news extends Backend
 	public function listNewsArticles($arrRow)
 	{
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
-		$date = date($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
+		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
 
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['headline'] . '</strong> - ' . $date . '</div>

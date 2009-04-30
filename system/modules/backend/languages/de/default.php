@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -35,9 +35,9 @@ $GLOBALS['TL_LANG']['ERR']['unique']         = 'Doppelter Eintrag im Feld "%s"!'
 $GLOBALS['TL_LANG']['ERR']['mandatory']      = 'Bitte füllen Sie das Feld "%s" aus!';
 $GLOBALS['TL_LANG']['ERR']['minlength']      = 'Das Feld "%s" muss mindestens %d Zeichen lang sein!';
 $GLOBALS['TL_LANG']['ERR']['digit']          = 'Bitte geben Sie nur Zahlen ein!';
-$GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Bitte geben Sie einen Prozentwert zwischen 0 und 100 ein!';
+$GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Bitte geben Sie einen Prozentsatz zwischen 0 und 100 ein!';
 $GLOBALS['TL_LANG']['ERR']['alpha']          = 'Bitte geben Sie nur Buchstaben ein!';
-$GLOBALS['TL_LANG']['ERR']['alnum']          = 'Bitte geben Sie nur Zahlen und Buchstaben ein!';
+$GLOBALS['TL_LANG']['ERR']['alnum']          = 'Bitte geben Sie nur Buchstaben und Zahlen ein!';
 $GLOBALS['TL_LANG']['ERR']['phone']          = 'Bitte geben Sie eine gültige Telefonnummer ein!';
 $GLOBALS['TL_LANG']['ERR']['extnd']          = 'Aus Sicherheitsgründen können Sie diese Zeichen (=<>&/()#) hier nicht verwenden!';
 $GLOBALS['TL_LANG']['ERR']['email']          = 'Bitte geben Sie eine gültige E-Mail-Adresse ein!';
@@ -51,10 +51,10 @@ $GLOBALS['TL_LANG']['ERR']['filetype']       = 'Der Dateityp "%s" darf nicht hoc
 $GLOBALS['TL_LANG']['ERR']['filepartial']    = 'Die Datei %s wurde nur teilweise hochgeladen!';
 $GLOBALS['TL_LANG']['ERR']['filewidth']      = 'Die Datei %s übersteigt die maximale Bildbreite von %d Pixel!';
 $GLOBALS['TL_LANG']['ERR']['fileheight']     = 'Die Datei %s übersteigt die maximale Bildhöhe von %d Pixel!';
-$GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Der Zugriff wurde verweigert, weil die aktuelle Hostadresse (%s) nicht mit der verweisenden Hostadresse (%s) übereinstimmt!';
+$GLOBALS['TL_LANG']['ERR']['invalidReferer'] = 'Zugriff verweigert! Die aktuelle Hostadresse (%s) stimmt nicht mit der verweisenden Hostadresse (%s) überein!';
 $GLOBALS['TL_LANG']['ERR']['invalidPass']    = 'Ungültiges Passwort!';
 $GLOBALS['TL_LANG']['ERR']['passwordLength'] = 'Ein Passwort muss mindestens %d Zeichen lang sein!';
-$GLOBALS['TL_LANG']['ERR']['passwordName']   = 'Der Benutzername und das Passwort dürfen nicht übereinstimmen!';
+$GLOBALS['TL_LANG']['ERR']['passwordName']   = 'Der Benutzername und das Passwort müssen unterschiedlich sein!';
 $GLOBALS['TL_LANG']['ERR']['passwordMatch']  = 'Die eingegebenen Passwörter stimmen nicht überein!';
 $GLOBALS['TL_LANG']['ERR']['accountLocked']  = 'Das Konto wurde gesperrt! Sie können sich in %d Minuten erneut anmelden.';
 $GLOBALS['TL_LANG']['ERR']['invalidLogin']   = 'Anmeldung fehlgeschlagen!';
@@ -67,18 +67,18 @@ $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Der Ordner "%s" kann nicht impor
 /**
  * Page types
  */
-$GLOBALS['TL_LANG']['PTY']['regular']   = array('Reguläre Seite', 'Eine reguläre Seite enthält Artikel und Inhaltselements. Dieses ist der Standard Seitentyp.');
-$GLOBALS['TL_LANG']['PTY']['redirect']  = array('Weiterleitung zu einer externen URL', 'Diese Seite leitet den Besucher automatisch zu einer externen URL um. Die Funktionsweise entspricht einem Hyperlink.');
-$GLOBALS['TL_LANG']['PTY']['forward']   = array('Weiterleitung zu einer anderen Seite', 'Diese Seite leitet den Besucher automatisch zu einer Seite der Internetpräsenz. Für die Weiterleitung wird eine Seiten-ID oder ein Seitenalias verwendet.');
-$GLOBALS['TL_LANG']['PTY']['root']      = array('Startpunkt einer neuen Webseite', 'Wenn Sie mehrere Webseiten im selben Seitenbaum erstellen möchten, können Sie hier einen neuen Startpunkt definieren. Ein Startpunkt enthält entweder einen DNS-Eintrag oder eine Sprache oder beides.');
-$GLOBALS['TL_LANG']['PTY']['error_403'] = array('Fehler 403 (Zugriff verweigert)', 'Diese Seite wird angezeigt, wenn ein nicht berechtigter Benutzer versucht, eine geschützte Seite aufzurufen. Wenn Sie diese Fehlerseite innerhalb einer Unterwebseite erstellen, wird diese nur im Rahmen dieser Unterwebseite verwendet.');
-$GLOBALS['TL_LANG']['PTY']['error_404'] = array('Fehler 404 (Seite nicht gefunden)', 'Diese Seite wird angezeigt, wenn ein Benutzer versucht, eine nicht vorhandene Seite aufzurufen. Wenn Sie diese Fehlerseite innerhalb einer Unterwebseite erstellen, wird diese nur im Rahmen dieser Unterwebseite verwendet.');
+$GLOBALS['TL_LANG']['PTY']['regular']   = array('Reguläre Seite', 'Eine reguläre Seite enthält Artikel und Inhaltselemente. Sie ist der Standard-Seitentyp.');
+$GLOBALS['TL_LANG']['PTY']['redirect']  = array('Externe Weiterleitung', 'Dieser Seitentyp leitet Besucher automatisch zu einer externen Webseite um. Die Funktionsweise entspricht der eines Hyperlinks.');
+$GLOBALS['TL_LANG']['PTY']['forward']   = array('Interne Weiterleitung', 'Dieser Seitentyp leitet Besucher automatisch zu einer anderen Seite innerhalb der Seitenstruktur um.');
+$GLOBALS['TL_LANG']['PTY']['root']      = array('Startpunkt einer Webseite', 'Dieser Seitentyp kennzeichnet den Startpunkt einer neuen Webseite innerhalb der Seitenstruktur.');
+$GLOBALS['TL_LANG']['PTY']['error_403'] = array('403 Zugriff verweigert', 'Ruft ein Benutzer eine geschützte Seite ohne die entsprechenden Zugriffsrechte auf, wird stattdessen die 403-Fehlerseite geladen.');
+$GLOBALS['TL_LANG']['PTY']['error_404'] = array('404 Seite nicht gefunden', 'Ruft ein Benutzer eine nicht vorhandene Seite auf, wird stattdessen die 404-Fehlerseite geladen.');
 
 
 /**
  * File operation permissions
  */
-$GLOBALS['TL_LANG']['FOP']['fop'] = array('Dateibearbeitungsrechte', 'Die Dateibearbeitungsrechte gelten nur innerhalb der freigeschalteten Verzeichnisse.');
+$GLOBALS['TL_LANG']['FOP']['fop'] = array('Erlaubte Datei-Operationen', 'Hier können Sie die erlaubten Datei-Operationen festlegen.');
 $GLOBALS['TL_LANG']['FOP']['f1']  = 'Dateien auf den Server hochladen';
 $GLOBALS['TL_LANG']['FOP']['f2']  = 'Dateien und Verzeichnisse bearbeiten, kopieren und verschieben';
 $GLOBALS['TL_LANG']['FOP']['f3']  = 'Einzelne Dateien und leere Verzeichnisse löschen';
@@ -95,7 +95,7 @@ $GLOBALS['TL_LANG']['CHMOD']['deletepage']     = 'Seite löschen';
 $GLOBALS['TL_LANG']['CHMOD']['editarticles']   = 'Artikel bearbeiten';
 $GLOBALS['TL_LANG']['CHMOD']['movearticles']   = 'Hierarchie der Artikel ändern';
 $GLOBALS['TL_LANG']['CHMOD']['deletearticles'] = 'Artikel löschen';
-$GLOBALS['TL_LANG']['CHMOD']['cuser']          = 'Benutzer';
+$GLOBALS['TL_LANG']['CHMOD']['cuser']          = 'Besitzer';
 $GLOBALS['TL_LANG']['CHMOD']['cgroup']         = 'Gruppe';
 $GLOBALS['TL_LANG']['CHMOD']['cworld']         = 'Alle';
 
@@ -139,8 +139,8 @@ $GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';
 /**
  * URLs
  */
-$GLOBALS['TL_LANG']['MSC']['url']    = array('Zieladresse', 'Geben Sie die vollständige Zieladresse mit Netzwerkprotokoll ein (z.B. <em>http://www.domain.com</em>). Um einen E-Mail-Adresse zu verlinken, geben Sie <em>mailto:name@domain.de</em> ein. Die Verwendung von Insert-Tags (z.B. <em>link_url</em>) ist möglich.');
-$GLOBALS['TL_LANG']['MSC']['target'] = array('Neues Browserfenster', 'Wenn Sie diese Option wählen, wird die Zielseite in einem neuen Browserfenster geöffnet.');
+$GLOBALS['TL_LANG']['MSC']['url']    = array('Link-Adresse', 'Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Insert-Tag ein.');
+$GLOBALS['TL_LANG']['MSC']['target'] = array('In neuem Fenster öffnen', 'Den Link in einem neuen Browserfenster öffnen.');
 
 
 /**
@@ -153,7 +153,7 @@ $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = '.';
 /**
  * CSV files
  */
-$GLOBALS['TL_LANG']['MSC']['separator'] = array('Trennzeichen', 'Bitte wählen Sie den Separator, durch den die Werte getrennt sind.');
+$GLOBALS['TL_LANG']['MSC']['separator'] = array('Trennzeichen', 'Bitte wählen Sie ein Feld-Trennzeichen aus.');
 $GLOBALS['TL_LANG']['MSC']['comma']     = 'Komma';
 $GLOBALS['TL_LANG']['MSC']['semicolon'] = 'Strichpunkt';
 $GLOBALS['TL_LANG']['MSC']['tabulator'] = 'Tabulator';
@@ -163,14 +163,13 @@ $GLOBALS['TL_LANG']['MSC']['linebreak'] = 'Zeilenumbruch';
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['id']         = array('ID', 'Die ID ist eine eindeutige, automatisch vergebene Identifikationsnummer eines Datensatzes. IDs werden dazu verwendet, Datensätze in Beziehung zu setzen. Versehentliche Änderungungen können die Konsistenz der Daten gefährden!');
-$GLOBALS['TL_LANG']['MSC']['pid']        = array('Übergeordnete ID', 'Die übergeordnete ID ist die Identifikationsnummer des übergeordneten Datensatzes. IDs werden dazu verwendet, Datensätze in Beziehung zu setzen. Versehentliche Änderungen können die Konsistenz der Daten gefährden!');
-$GLOBALS['TL_LANG']['MSC']['sorting']    = array('Sortierindex', 'Der Sortierindex dient dazu, Datensätze in einer bestimmten Reihenfolge anzuordnen. Der Sortierindex wird normalerweise automatisch gesetzt.');
+$GLOBALS['TL_LANG']['MSC']['id']         = array('Id', 'Das Ändern der Id kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['pid']        = array('Parent-Id', 'Das Ändern der Parent-Id kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['sorting']    = array('Sortierindex', 'Der Sortierindex wird normalerweise automatisch gesetzt.');
 $GLOBALS['TL_LANG']['MSC']['all']        = array('Mehrere bearbeiten', 'Mehrere Datensätze auf einmal bearbeiten');
-$GLOBALS['TL_LANG']['MSC']['deleteAll']  = array('Alle Datensätze löschen', 'Alle momentan angezeigten Datensätze löschen');
 $GLOBALS['TL_LANG']['MSC']['all_fields'] = array('Vorhandene Felder', 'Bitte wählen Sie die Felder aus, die Sie bearbeiten möchten.');
 $GLOBALS['TL_LANG']['MSC']['password']   = array('Passwort', 'Bitte geben Sie ein Passwort ein.');
-$GLOBALS['TL_LANG']['MSC']['confirm']    = array('Passwort Bestätigung', 'Bitte bestätigen Sie das Passwort.');
+$GLOBALS['TL_LANG']['MSC']['confirm']    = array('Bestätigung', 'Bitte bestätigen Sie das Passwort.');
 
 
 /**
@@ -180,6 +179,7 @@ $GLOBALS['TL_LANG']['MSC']['feLink']         = 'Zum Frontend';
 $GLOBALS['TL_LANG']['MSC']['fePreview']      = 'Frontend-Vorschau';
 $GLOBALS['TL_LANG']['MSC']['feUser']         = 'Frontend-Benutzer';
 $GLOBALS['TL_LANG']['MSC']['backToTop']      = 'Nach oben';
+$GLOBALS['TL_LANG']['MSC']['home']           = 'Startseite';
 $GLOBALS['TL_LANG']['MSC']['user']           = 'Benutzer';
 $GLOBALS['TL_LANG']['MSC']['loginTo']        = 'Anmelden bei %s';
 $GLOBALS['TL_LANG']['MSC']['loginBT']        = 'Anmelden';
@@ -212,7 +212,9 @@ $GLOBALS['TL_LANG']['MSC']['view']           = 'In einem neuen Fenster ansehen';
 $GLOBALS['TL_LANG']['MSC']['fullsize']       = 'Großansicht des Bildes in einem neuen Fenster öffnen';
 $GLOBALS['TL_LANG']['MSC']['colorpicker']    = 'Farbwähler (benötigt JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['pagepicker']     = 'Seitenwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['filepicker']     = 'Dateiwähler (benötigt JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['ppHeadline']     = 'TYPOlight-Seiten';
+$GLOBALS['TL_LANG']['MSC']['fpHeadline']     = 'TYPOlight-Dateien';
 $GLOBALS['TL_LANG']['MSC']['yes']            = 'ja';
 $GLOBALS['TL_LANG']['MSC']['no']             = 'nein';
 $GLOBALS['TL_LANG']['MSC']['goBack']         = 'Zurück';
@@ -220,7 +222,7 @@ $GLOBALS['TL_LANG']['MSC']['reload']         = 'Neu laden';
 $GLOBALS['TL_LANG']['MSC']['above']          = 'oberhalb';
 $GLOBALS['TL_LANG']['MSC']['below']          = 'unterhalb';
 $GLOBALS['TL_LANG']['MSC']['date']           = 'Datum';
-$GLOBALS['TL_LANG']['MSC']['tstamp']         = 'Datum';
+$GLOBALS['TL_LANG']['MSC']['tstamp']         = 'Änderungsdatum';
 $GLOBALS['TL_LANG']['MSC']['entry']          = '%s Eintrag';
 $GLOBALS['TL_LANG']['MSC']['entries']        = '%s Einträge';
 $GLOBALS['TL_LANG']['MSC']['left']           = 'linksbündig';
@@ -236,6 +238,7 @@ $GLOBALS['TL_LANG']['MSC']['fileModified']   = 'Zuletzt geändert am';
 $GLOBALS['TL_LANG']['MSC']['fileAccessed']   = 'Letzter Zugriff am';
 $GLOBALS['TL_LANG']['MSC']['fileDownload']   = 'Herunterladen';
 $GLOBALS['TL_LANG']['MSC']['fileImageSize']  = 'Breite/Höhe in Pixeln';
+$GLOBALS['TL_LANG']['MSC']['filePath']       = 'Relativer Pfad';
 $GLOBALS['TL_LANG']['MSC']['version']        = 'Version';
 $GLOBALS['TL_LANG']['MSC']['restore']        = 'Wiederherstellen';
 $GLOBALS['TL_LANG']['MSC']['backendModules'] = 'Backend-Module';

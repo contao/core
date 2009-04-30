@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
- * @package    Faq 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Faq
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,17 +30,20 @@
 /**
  * Add back end modules
  */
-$GLOBALS['BE_MOD']['content']['faq'] = array
+array_insert($GLOBALS['BE_MOD']['content'], 2, array
 (
-	'tables' => array('tl_faq_category', 'tl_faq'),
-	'icon'   => 'system/modules/faq/html/icon.gif'
-);
+	'faq' => array
+	(
+		'tables' => array('tl_faq_category', 'tl_faq'),
+		'icon'   => 'system/modules/faq/html/icon.gif'
+	)
+));
 
 
 /**
  * Front end modules
  */
-array_insert($GLOBALS['FE_MOD'], 4, array
+array_insert($GLOBALS['FE_MOD'], 3, array
 (
 	'faq' => array
 	(

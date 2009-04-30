@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class News
  *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -131,7 +131,7 @@ class News extends Frontend
 			$objItem = new FeedItem();
 
 			$objItem->title = $objArticle->headline;
-			$objItem->description = strlen($objArticle->text) ? $objArticle->text : $objArticle->teaser;
+			$objItem->description = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
 			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
 			$objItem->published = $objArticle->date;
 
@@ -192,7 +192,7 @@ class News extends Frontend
 			}
 
 			// Get the URL of the jumpTo page
-			if (!array_key_exists($objArchive->jumpTo, $arrProcessed))
+			if (!isset($arrProcessed[$objArchive->jumpTo]))
 			{
 				$arrProcessed[$objArchive->jumpTo] = false;
 

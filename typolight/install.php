@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -45,7 +45,7 @@ require_once('../system/initialize.php');
  * Class InstallTool
  *
  * Back end install tool.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -113,23 +113,27 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
-			$password =  sha1($this->Input->post('password', true));
+			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
-			if (strlen($password) && $password != 'da39a3ee5e6b4b0d3255bfef95601890afd80709')
+			// Password is correct but not yet salted
+			if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
 			{
-				// Set cookie
-				if ($password == $GLOBALS['TL_CONFIG']['installPassword'])
-				{
-					$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-
-					$this->reload();
-				}
-
-				// Increase count
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
+				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strPassword = sha1($strSalt . $this->Input->post('password'));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 			}
 
+			// Set cookie
+			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
+			{
+				$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
+
+				$this->reload();
+			}
+
+			// Increase count
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
 			$this->Template->passwordError = 'Invalid password!';
 		}
 
@@ -141,7 +145,7 @@ class InstallTool extends Controller
 		}
 
 		// Renew cookie
-		$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
 
 
 		/**
@@ -149,8 +153,14 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_install')
 		{
+			// Do not allow special characters
+			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('password'))))
+			{
+				$this->Template->passwordError = 'For security reasons you can not use these characters (=<>&/()#) here!';
+			}
+
 			// Passwords do not match
-			if ($this->Input->post('password') != $this->Input->post('confirm_password'))
+			elseif ($this->Input->post('password') != $this->Input->post('confirm_password'))
 			{
 				$this->Template->passwordError = 'The passwords did not match!';
 			}
@@ -164,13 +174,21 @@ class InstallTool extends Controller
 			// Save password
 			else
 			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", sha1($this->Input->post('password', true)));
+				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strPassword = sha1($strSalt . $this->Input->post('password'));
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
+
 				$this->reload();
 			}
 		}
 
-		// Password must not be "typolight"
-		if ($GLOBALS['TL_CONFIG']['installPassword'] == '77e9b7542ac04858d99a0eaaf77adf54b5e18910')
+
+		/**
+		 * Password must not be "typolight"
+		 */
+		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
+
+		if ($strPassword == sha1($strSalt . 'typolight'))
 		{
 			$this->Template->setPassword = true;
 			$this->outputAndExit();
@@ -288,7 +306,7 @@ class InstallTool extends Controller
 				$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
 				// Truncate tables
-				if (!array_key_exists('preserve', $_POST) || !$this->Input->post('preserve'))
+				if (!isset($_POST['preserve']))
 				{
 					foreach ($tables as $table)
 					{
@@ -320,7 +338,7 @@ class InstallTool extends Controller
 		}
 
 		$this->Template->templates = $strTemplates;
-		$this->Template->dateImported = strlen($GLOBALS['TL_CONFIG']['exampleWebsite']) ? date($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']) : false;
+		$this->Template->dateImported = strlen($GLOBALS['TL_CONFIG']['exampleWebsite']) ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']) : false;
 
 
 		/**
@@ -328,16 +346,16 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_admin')
 		{
-			// Passwords do not match
-			if ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
+			// Do not allow special characters
+			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
 			{
-				$this->Template->adminError = 'The passwords did not match!';
+				$this->Template->passwordError = 'For security reasons you can not use these characters (=<>&/()#) here!';
 			}
 
-			// Do not allow special characters
-			elseif (preg_match('/[#\(\)\/<=>]/', $this->Input->post('pass')))
+			// Passwords do not match
+			elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
 			{
-				$this->Template->adminError = 'For security reasons you can not use these characters (=<>&/()#) here!';
+				$this->Template->adminError = 'The passwords did not match!';
 			}
 
 			// Password too short
@@ -349,8 +367,11 @@ class InstallTool extends Controller
 			// Save data
 			elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email', true)) && strlen($this->Input->post('username')))
 			{
+				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strPassword = sha1($strSalt . $this->Input->post('pass'));
+
 				$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-							   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), sha1($this->Input->post('pass', true)), 1, 1, 1, 1);
+							   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt, 1, 1, 1, 1);
 
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
 				$this->reload();

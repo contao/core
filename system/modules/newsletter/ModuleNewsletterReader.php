@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNewsletterReader
  *
  * Front end module "newsletter reader".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -106,7 +106,7 @@ class ModuleNewsletterReader extends Module
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return;
 		}
 
@@ -162,6 +162,10 @@ class ModuleNewsletterReader extends Module
 
 		$strContent = str_ireplace(' align="center"', '', $objNewsletter->content);
 		$strContent = $this->parseSimpleTokens($strContent, array());
+
+		// Encode e-mail addresses
+		$this->import('String');
+		$strContent = $this->String->encodeEmail($strContent);
 
 		$this->Template->content = $strContent;
 		$this->Template->subject = $objNewsletter->subject;

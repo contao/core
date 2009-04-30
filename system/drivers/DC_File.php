@@ -1,8 +1,8 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class DC_File
  *
  * Provide methods to edit the local configuration file.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -131,6 +131,7 @@ class DC_File extends DataContainer implements editable
 		// Build an array from boxes and rows
 		$this->strPalette = $this->getPalette();
 		$boxes = trimsplit(';', $this->strPalette);
+		$legends = array();
 
 		if (count($boxes))
 		{
@@ -145,7 +146,13 @@ class DC_File extends DataContainer implements editable
 						continue;
 					}
 
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
+					if (preg_match('/^\{.*\}$/i', $vv))
+					{
+						$legends[$k] = substr($vv, 1, -1);
+						unset($boxes[$k][$kk]);
+					}
+
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
 					{
 						unset($boxes[$k][$kk]);
 					}
@@ -159,15 +166,38 @@ class DC_File extends DataContainer implements editable
 			}
 
 			// Render boxes
-			$class = 'tl_tbox';
+			$class = 'tl_tbox block';
+			$fs = $this->Session->get('fieldset_states');
 
 			foreach ($boxes as $k=>$v)
 			{
 				$strAjax = '';
 				$blnAjax = false;
-				$return .= '
+				$legend = '';
 
-<div class="'.$class.'">';
+				if (isset($legends[$k]))
+				{
+					list($key, $cls) = explode(':', $legends[$k]);
+					$legend = "\n" . '<legend onclick="AjaxRequest.toggleFieldset(this, \'' . $key . '\', \'' . $this->strTable . '\')">' . (isset($GLOBALS['TL_LANG'][$this->strTable][$key]) ? $GLOBALS['TL_LANG'][$this->strTable][$key] : $key) . '</legend>';
+				}
+
+				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+				{
+					if (isset($fs[$this->strTable][$key]))
+					{
+						$class .= ($fs[$this->strTable][$key] ? '' : ' collapsed');
+					}
+					else
+					{
+						$class .= (($cls && $legend) ? ' ' . $cls : '');
+					}
+
+					$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
+				}
+				else
+				{
+					$return .= "\n\n" . '<div class="'.$class.'">';
+				}
 
 				// Build rows of the current box
 				foreach ($v as $kk=>$vv)
@@ -215,9 +245,16 @@ class DC_File extends DataContainer implements editable
 					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
 				}
 
-				$class = 'tl_box';
-				$return .= '
-</div>';
+				$class = 'tl_box block';
+
+				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+				{
+					$return .= "\n" . '</fieldset>';
+				}
+				else
+				{
+					$return .= "\n" . '</div>';
+				}
 			}
 		}
 
@@ -238,12 +275,12 @@ class DC_File extends DataContainer implements editable
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = '
 <div id="tl_buttons">
-<a href="'.$this->getReferer(ENCODE_AMPERSANDS).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>'.$this->getMessages().'
 
-<form action="'.ampersand($this->Environment->request, ENCODE_AMPERSANDS).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'" />
 <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'" />'.($this->noReload ? '

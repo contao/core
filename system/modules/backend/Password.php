@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Password
  *
  * Provide methods to handle password fields.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -121,8 +121,9 @@ class Password extends Widget
 		{
 			$this->blnSubmitInput = true;
 			$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['MSC']['pw_changed'];
+			$strSalt = substr(md5(uniqid('', true)), 0, 23);
 
-			return sha1($varInput);
+			return sha1($strSalt . $varInput) . ':' . $strSalt;
 		}
 
 		return '';
@@ -140,7 +141,7 @@ class Password extends Widget
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
-						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help">'.$this->description.'</p>' : ''));
+						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$this->hasErrors())) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$this->description.'</p>' : ''));
 	}
 
 
@@ -170,7 +171,7 @@ class Password extends Widget
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
-						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
+						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
 	}
 }
 

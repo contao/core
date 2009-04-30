@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Frontend
  *
  * Provide methods to manage front end controllers.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -95,7 +95,7 @@ abstract class Frontend extends Controller
 		}
 
 		// HOOK: add custom logic
-		if (array_key_exists('getPageIdFromUrl', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['getPageIdFromUrl']))
+		if (isset($GLOBALS['TL_HOOKS']['getPageIdFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getPageIdFromUrl']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getPageIdFromUrl'] as $callback)
 			{
@@ -186,13 +186,13 @@ abstract class Frontend extends Controller
 			return 'index.php?' . preg_replace('/^&(amp;)?/i', '', $strParams);
 		}
 
-		$pageId = $this->getPageIdFromUrl();
+		global $objPage;
+		$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
 
-		// Get page ID from global page object if not set
-		if (!$pageId)
+		// Get page ID from URL if not set
+		if (empty($pageId))
 		{
-			global $objPage;
-			$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
+			$pageId = $this->getPageIdFromUrl();
 		}
 
 		return ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $pageId . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
@@ -236,7 +236,7 @@ abstract class Frontend extends Controller
 			return false;
 		}
 
-		$hash = sha1(session_id() . $this->Environment->ip . $strCookie);
+		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . $strCookie);
 
 		if ($this->Input->cookie($strCookie) == $hash)
 		{
@@ -244,7 +244,7 @@ abstract class Frontend extends Controller
 										 ->limit(1)
 										 ->execute($hash, $strCookie);
 
-			if ($objSession->numRows && $objSession->sessionID == session_id() && $objSession->ip == $this->Environment->ip && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+			if ($objSession->numRows && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				$_SESSION['TL_USER_LOGGED_IN'] = true;
 				return true;

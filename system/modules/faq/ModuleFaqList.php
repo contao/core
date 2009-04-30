@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,19 +19,19 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
- * @package    Faq 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Faq
+ * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Class ModuleFaqList 
+ * Class ModuleFaqList
  *
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
+ * @copyright  Leo Feyer 2008-2009
+ * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
 class ModuleFaqList extends Module
@@ -86,7 +86,7 @@ class ModuleFaqList extends Module
 	 */
 	protected function compile()
 	{
-		$objFaq = $this->Database->execute("SELECT tl_faq.id AS id, alias, question, headline, jumpTo FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', $this->faq_categories) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY headline, sorting");
+		$objFaq = $this->Database->execute("SELECT tl_faq.id AS id, pid, alias, question, headline, jumpTo FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', $this->faq_categories) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
 
 		if ($objFaq->numRows < 1)
 		{
@@ -94,19 +94,19 @@ class ModuleFaqList extends Module
 			return;
 		}
 
-		$arrFaq = array();
+		$arrFaq = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs
 		while ($objFaq->next())
 		{
-			$arrFaq[$objFaq->headline]['items'][] = array
+			$arrFaq[$objFaq->pid]['items'][] = array
 			(
 				'question' => $objFaq->question,
 				'title' => htmlspecialchars($objFaq->question),
 				'href' => $this->generateFaqLink($objFaq)
 			);
 
-			$arrFaq[$objFaq->headline]['headline'] = $objFaq->headline;
+			$arrFaq[$objFaq->pid]['headline'] = $objFaq->headline;
 		}
 
 		$arrFaq = array_values($arrFaq);
@@ -139,11 +139,11 @@ class ModuleFaqList extends Module
 	 */
 	protected function generateFaqLink(Database_Result $objFaq)
 	{
-		if (!array_key_exists($objFaq->id, $this->arrTargets))
+		if (!isset($this->arrTargets[$objFaq->id]))
 		{
 			if ($objFaq->jumpTo < 1)
 			{
-				$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+				$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
 			}
 			else
 			{
@@ -153,7 +153,7 @@ class ModuleFaqList extends Module
 
 				if ($objTarget->numRows < 1)
 				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+					$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
 				}
 
 				$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));

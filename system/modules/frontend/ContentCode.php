@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,9 +19,9 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
- * @package    Frontend
+ * @package    Highlighter
  * @license    LGPL
  * @filesource
  */
@@ -31,7 +31,7 @@
  * Class ContentCode
  *
  * Front end content element "code".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -44,12 +44,6 @@ class ContentCode extends ContentElement
 	 */
 	protected $strTemplate = 'ce_code';
 
-	/**
-	 * Code
-	 * @var string
-	 */
-	protected $strCode;
-
 
 	/**
 	 * Return if the highlighter plugin is not loaded
@@ -57,22 +51,9 @@ class ContentCode extends ContentElement
 	 */
 	public function generate()
 	{
-		if (!is_dir(TL_ROOT . '/plugins/dpsyntax'))
-		{
-			return '';
-		}
-
-		$this->import('String');
-
-		$code = $this->String->decodeEntities($this->code);
-		$code = str_ireplace(array('<u>', '</u>'), array('<span style="text-decoration:underline;">', '</span>'), $code);
-		$code = $this->String->encodeEmail(htmlspecialchars($code));
-
-		$this->strCode = $code;
-
 		if (TL_MODE == 'BE')
 		{
-			return '<pre>' . $this->strCode . '</pre>';
+			return '<pre>' . $this->code . '</pre>';
 		}
 
 		return parent::generate();
@@ -84,38 +65,49 @@ class ContentCode extends ContentElement
 	 */
 	protected function compile()
 	{
-		$this->Template->preClass = 'simple';
-		$this->Template->preId = 'dp_' . $this->id;
-		$this->Template->code = $this->strCode;
+		$this->Template->code = htmlspecialchars($this->code);
 
 		// Syntax highlighter
 		if ($this->highlight)
 		{
 			$arrMapper = array
 			(
+				'Bash'       => 'shBrushBash',
 				'C'          => 'shBrushCpp',
 				'CSharp'     => 'shBrushCSharp',
 				'CSS'        => 'shBrushCss',
 				'Delphi'     => 'shBrushDelphi',
-				'HTML'       => 'shBrushXml',
+				'Diff'       => 'shBrushDiff',
 				'Java'       => 'shBrushJava',
 				'JavaScript' => 'shBrushJScript',
+				'Perl'       => 'shBrushPerl',
 				'PHP'        => 'shBrushPhp',
 				'Python'     => 'shBrushPython',
 				'Ruby'       => 'shBrushRuby',
 				'SQL'        => 'shBrushSql',
+				'Text'       => 'shBrushPlain',
 				'VB'         => 'shBrushVb',
+				'XHTML'      => 'shBrushXml',
 				'XML'        => 'shBrushXml'
 			);
 
-			$this->Template->preClass = strtolower($this->highlight);
-			$this->Template->js = $arrMapper[$this->highlight];
+			$this->Template->shClass = 'brush: ' . strtolower($this->highlight);
+
+			if ($this->shClass)
+			{
+				$this->Template->shClass .= '; ' . $this->shClass;
+			}
+
+			// Add CSS
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeTYPOlight.css';
 
 			// Add scripts
-			$GLOBALS['TL_CSS'][] = 'plugins/dpsyntax/dpsyntax.css';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/dpsyntax/shCore.js';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/dpsyntax/' . $arrMapper[$this->highlight] . '.js';
-			$GLOBALS['TL_HEAD'][] = '<!--[if IE]><link rel="stylesheet" href="plugins/dpsyntax/iefixes.css" type="text/css" media="screen" /><![endif]-->';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js';
+
+			// Add head (do not add to scripts!)
+			$GLOBALS['TL_HEAD'][] = '<script type="text/javascript" src="plugins/highlighter/scripts/shInit.js"></script>';
 		}
 	}
 }

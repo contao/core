@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,14 +30,13 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['cal_calendar'] = array('Kalender', 'Bitte wählen Sie einen oder mehrere Kalender.');
-$GLOBALS['TL_LANG']['tl_module']['cal_template'] = array('Eventvorlage', 'Bitte wählen Sie ein Eventlayout. Sie können eigene <em>event_</em>-Vorlagen im Ordner <em>templates</em> speichern.');
-$GLOBALS['TL_LANG']['tl_module']['cal_startDay'] = array('Erster Wochentag', 'Bitte legen Sie den ersten Tag der Woche fest.');
-$GLOBALS['TL_LANG']['tl_module']['cal_previous'] = array('Vorheriger Monat', 'Lassen Sie das Feld frei, um die Standardbeschriftung zu verwenden. HTML-Tags sind möglich.');
-$GLOBALS['TL_LANG']['tl_module']['cal_next']     = array('Nächster Monat', 'Lassen Sie das Feld frei, um die Standardbeschriftung zu verwenden. HTML-Tags sind möglich.');
-$GLOBALS['TL_LANG']['tl_module']['cal_format']   = array('Anzeigeformat', 'Bitte wählen Sie das Anzeigeformat der Eventliste.');
-$GLOBALS['TL_LANG']['tl_module']['cal_limit']    = array('Event Anzahl', 'Bitte geben Sie die maximale Anzahl Events ein. Geben Sie 0 ein um alle Events anzuzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']   = array('Verkürzte Darstellung', 'Events nur einmal anzeigen auch wenn sie über mehrere Tage gehen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_calendar']  = array('Kalender', 'Bitte wählen Sie einen oder mehrere Kalender.');
+$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']    = array('Verkürzte Darstellung', 'Events nur einmal anzeigen, auch wenn sie mehrere Tage umfassen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_format']    = array('Anzeigeformat', 'Hier können Sie das Anzeigeformat der Eventliste auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_limit']     = array('Anzahl an Events', 'Hier können Sie die Event-Anzahl beschränken. Lassen Sie das Feld leer, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_template']  = array('Event-Template', 'Hier können Sie das Event-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate'] = array('Kalendar-Template', 'Hier können Sie das Kalendar-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_startDay']  = array('Erster Wochentag', 'Hier können Sie den ersten Tag der Woche festlegen.');
 
 
 /**

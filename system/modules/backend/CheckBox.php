@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class CheckBox
  *
  * Provide methods to handle check boxes.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -108,7 +108,7 @@ class CheckBox extends Widget
 	{
 		parent::validate();
 
-		if (!array_key_exists($this->strName, $_POST))
+		if (!isset($_POST[$this->strName]))
 		{
 			$this->varValue = '';
 		}
@@ -156,7 +156,7 @@ class CheckBox extends Widget
 			$img = 'folPlus';
 			$display = 'none';
 
-			if ($state[$id] || !is_array($state) || !array_key_exists($id, $state))
+			if (!isset($state[$id]) || !empty($state[$id]))
 			{
 				$img = 'folMinus';
 				$display = 'block';

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class FormRadioButton
  *
  * Form field "radio button".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -121,12 +121,13 @@ class FormRadioButton extends Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s /> <label for="opt_%s">%s</label></span>',
+			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s /> <label id="lbl_%s" for="opt_%s">%s</label></span>',
 									$this->strName,
 									$this->strId.'_'.$i,
 									$arrOption['value'],
 									((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
 									$this->getAttributes(),
+									$this->strId.'_'.$i,
 									$this->strId.'_'.$i,
 									$arrOption['label']);
 		}

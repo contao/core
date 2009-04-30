@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TL_ROOT/system/modules/rep_base/languages/de/tl_repository.php 
  * 
@@ -24,7 +25,7 @@ $GLOBALS['TL_LANG']['tl_repository']['license']       = array('Lizenz', 'Eingabe
 $GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Erweiterungsnamen müssen mit a-z, A-Z oder 0-9 beginnen, wobei bevorzugt die Kleinschreibung anzuwenden ist. Innerhalb des Namens sind zusätzlich die Zeichen _ und - erlaubt.');
 $GLOBALS['TL_LANG']['tl_repository']['popularity']    = array('Popularität', '%s/%s (Downloads/Install.)');
 $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Qualität', 'Wie robust ist die Erweiterung und wie einfach und logisch gestalten sich Installation und Unterhalt?');
-$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Freigabedatum', 'Eingabe des Veröffentlichungs-Datums dieser Freigabe im Format JJJJ-MM-TT.');
+$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Freigabedatum', 'Eingabe des Veröffentlichungs-Datums dieser Freigabe im Format TT.MM.JJJJ.');
 $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Bitte wählen Sie die Version.');
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Typ', 'Bitte wählen Sie den Erweiterung-Typ.');
 $GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Bedienung', 'Werden die TYPOlight-Standards zur Bedienung und zur Zugänglichkeit eingehalten?');

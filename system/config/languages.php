@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Config
  * @license    LGPL
@@ -41,7 +41,7 @@ $languages = array
 	'cr' => 'Cree',
 	'cs' => 'Czech',
 	'da' => 'Danish',
-	'de' => 'German', 
+	'de' => 'German',
 	'el' => 'Greek',
 	'en' => 'English',
 	'es' => 'Spanish',
@@ -74,7 +74,9 @@ $languages = array
 	'sq' => 'Albanian',
 	'sr' => 'Serbian',
 	'sv' => 'Swedish',
+	'ta' => 'Tamil',
 	'th' => 'Thai',
+	'tl' => 'Tagalog',
 	'tr' => 'Turkish',
 	'uk' => 'Ukrainian',
 	'vi' => 'Vietnamese',

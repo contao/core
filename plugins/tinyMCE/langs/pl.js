@@ -1,6 +1,6 @@
 tinyMCE.addI18n({pl:{
 common:{
-edit_confirm:"Czy chcesz usu trybu WYSIWYG dla tego pola formularza?",
+edit_confirm:"Czy chcesz u\u017Cy\u0107 trybu WYSIWYG dla tego pola formularza?",
 apply:"Zastosuj",
 insert:"Wstaw",
 update:"Aktualizuj",

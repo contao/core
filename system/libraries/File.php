@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class File
  *
  * Provide methods to handle files.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -49,12 +49,6 @@ class File extends System
 	 * @var string
 	 */
 	protected $strFile;
-
-	/**
-	 * Cache array
-	 * @var array
-	 */
-	protected $arrCache = array();
 
 	/**
 	 * Pathinfo
@@ -134,11 +128,10 @@ class File extends System
 	 * Return an object property
 	 * @param string
 	 * @return mixed
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
-		if (!array_key_exists($strKey, $this->arrCache))
+		if (!isset($this->arrCache[$strKey]))
 		{
 			switch ($strKey)
 			{
@@ -149,7 +142,7 @@ class File extends System
 
 				case 'dirname':
 				case 'basename':
-					if (!array_key_exists($strKey, $this->arrPathinfo))
+					if (!isset($this->arrPathinfo[$strKey]))
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
@@ -157,7 +150,7 @@ class File extends System
 					break;
 
 				case 'extension':
-					if (!array_key_exists('extension', $this->arrPathinfo))
+					if (!isset($this->arrPathinfo['extension']))
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
@@ -213,7 +206,7 @@ class File extends System
 					break;
 
 				default:
-					throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
+					return null;
 					break;
 			}
 		}
@@ -405,7 +398,7 @@ class File extends System
 
 		$strMime = 'application/octet-stream';
 
-		if (strlen($arrMimeTypes[$this->extension]))
+		if (isset($arrMimeTypes[$this->extension]))
 		{
 			$strMime = $arrMimeTypes[$this->extension];
 		}

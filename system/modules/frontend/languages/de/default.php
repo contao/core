@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -44,29 +44,29 @@ $GLOBALS['TL_LANG']['SEC']['question3'] = 'Bitte rechnen Sie %d plus %d.';
 /**
  * Content elements
  */
-$GLOBALS['TL_LANG']['CTE']['texts']     = 'Text Elemente';
-$GLOBALS['TL_LANG']['CTE']['headline']  = array('Überschrift', 'Dieses Element enthält eine allein stehende Überschrift, die von &#60;H1&#62; Tags umschlossen wird.');
-$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'Dieses Element enthält formatierten Text und Hyperlinks. Außerdem kann dem Element ein Bild hinzugefügt werden.');
-$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'Dieses Element enthält HTML-Code. Beachten Sie, dass bestimmte HTML-Tags aus Sicherheitsgründen nicht erlaubt sind.');
-$GLOBALS['TL_LANG']['CTE']['list']      = array('Aufzählung', 'Dieses Element enthält eine geordnete oder ungeordnete Liste.');
-$GLOBALS['TL_LANG']['CTE']['table']     = array('Tabelle', 'Dieses Element enthält eine Tabelle.');
-$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Akkordeon', 'Dieses Element erzeugt ein Inhaltsfeld eines mootools Akkordeons. Beachten Sie, dass dieser Effekt eine mootols JavaScript-Vorlage benötigt, die Sie im Modul Seitenlayout auswählen können.');
-$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'Dieses Element enthält Teile eines Programmcodes, der auf eine bestimmte Weise formatiert wird. Der Code wird nur auf dem Bildschirm ausgegeben und nicht ausgeführt.');
-$GLOBALS['TL_LANG']['CTE']['links']     = 'Link Elemente';
-$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'Dieses Element enthält einen Verweis auf eine andere Webseite.');
-$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top-Link', 'Dieses Element erzeugt einen Link mit dem man an den Seitenanfang springen kann.');
-$GLOBALS['TL_LANG']['CTE']['images']    = 'Bild Elemente';
-$GLOBALS['TL_LANG']['CTE']['image']     = array('Bild', 'Dieses Element enthält ein einzelnes Bild.');
-$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Bildergalerie', 'Dieses Element enthält mehrere kleine Vorschaubilder, die bei Anklicken in der Großansicht erscheinen.');
+$GLOBALS['TL_LANG']['CTE']['texts']     = 'Text-Elemente';
+$GLOBALS['TL_LANG']['CTE']['headline']  = array('Überschrift', 'erzeugt eine Überschrift (h1 - h6).');
+$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'erzeugt ein Rich-Text-Element.');
+$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'erlaubt das Hinzufügen von eigenem HTML-Code.');
+$GLOBALS['TL_LANG']['CTE']['list']      = array('Aufzählung', 'erzeugt eine geordnete oder ungeordnete Liste.');
+$GLOBALS['TL_LANG']['CTE']['table']     = array('Tabelle', 'erzeugt eine optional sortierbare Tabelle.');
+$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Akkordeon', 'erzeugt ein mootools Akkordeon-Element.');
+$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'gibt formatierten Programmcode auf dem Bildschirm aus.');
+$GLOBALS['TL_LANG']['CTE']['links']     = 'Link-Elemente';
+$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'erzeugt einen Verweis auf eine andere Webseite.');
+$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top-Link', 'erzeugt einen Link zum Seitenanfang.');
+$GLOBALS['TL_LANG']['CTE']['images']    = 'Bild-Elemente';
+$GLOBALS['TL_LANG']['CTE']['image']     = array('Bild', 'erzeugt ein einzelnes Bild.');
+$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Galerie', 'erzeugt eine lightbox Bildergalerie.');
 $GLOBALS['TL_LANG']['CTE']['files']     = 'Datei Elemente';
-$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'Dieses Element enthält einen Verweis auf eine Datei, die von Besuchern der Webseite heruntergeladen werden kann.');
-$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'Diese Element enthält Verweise auf mehrere Dateien, die von Besuchern der Webseite heruntergeladen werden können.');
+$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'erzeugt einen Link zum Download einer Datei.');
+$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'erzeugt mehrere Links zum Download von Dateien.');
 $GLOBALS['TL_LANG']['CTE']['includes']  = 'Include-Elemente';
-$GLOBALS['TL_LANG']['CTE']['alias']     = array('Alias', 'Dieses Element ermöglicht es, ein Inhaltselement aus einem anderen Artikel einzufügen.');
-$GLOBALS['TL_LANG']['CTE']['article']   = array('Artikel-Alias', 'Dieses Element ermöglicht es, einen bestimmten Artikel in einem anderen Artikel anzuzeigen.');
-$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Artikelteaser', 'Dieses Element ermöglicht es, den Teasertext eines bestimmten Artikels anzuzeigen.');
-$GLOBALS['TL_LANG']['CTE']['form']      = array('Formular', 'Verwenden Sie diese Option, um ein Formular in den Artikel einzubinden.');
-$GLOBALS['TL_LANG']['CTE']['module']    = array('Modul', 'Verwenden Sie diese Option, um ein Modul (z.B. ein Navigationsmenü oder einen Flash Film) in einen Artikel einzubinden.');
+$GLOBALS['TL_LANG']['CTE']['article']   = array('Artikel', 'fügt einen anderen Artikel ein.');
+$GLOBALS['TL_LANG']['CTE']['alias']     = array('Inhaltselement', 'fügt ein anderes Inhaltselement ein.');
+$GLOBALS['TL_LANG']['CTE']['form']      = array('Formular', 'fügt ein Formular ein.');
+$GLOBALS['TL_LANG']['CTE']['module']    = array('Modul', 'fügt ein Frontend-Modul ein.');
+$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Artikelteaser', 'zeigt den Teasertext eines Artikels an.');
 
 
 /**
@@ -79,13 +79,14 @@ $GLOBALS['TL_LANG']['MSC']['username']     = 'Benutzername';
 $GLOBALS['TL_LANG']['MSC']['login']        = 'Anmelden';
 $GLOBALS['TL_LANG']['MSC']['logout']       = 'Abmelden';
 $GLOBALS['TL_LANG']['MSC']['loggedInAs']   = 'Sie sind angemeldet als %s.';
-$GLOBALS['TL_LANG']['MSC']['emptyField']   = 'Bitte geben Sie Benutzernamen und Passwort ein!';
+$GLOBALS['TL_LANG']['MSC']['emptyField']   = 'Bitte geben Sie Benutzername und Passwort ein!';
 $GLOBALS['TL_LANG']['MSC']['confirmation'] = 'Bestätigung';
 $GLOBALS['TL_LANG']['MSC']['sMatches']     = '%s Vorkommen für %s';
 $GLOBALS['TL_LANG']['MSC']['sEmpty']       = 'Keine Ergebnisse für <strong>%s</strong>';
 $GLOBALS['TL_LANG']['MSC']['sResults']     = 'Ergebnisse %s - %s von %s für <strong>%s</strong>';
 $GLOBALS['TL_LANG']['MSC']['sNoResult']    = 'Ihre Suche nach <strong>%s</strong> ergab keine Treffer.';
 $GLOBALS['TL_LANG']['MSC']['seconds']      = 'Sekunden';
+$GLOBALS['TL_LANG']['MSC']['up']           = 'Nach oben';
 $GLOBALS['TL_LANG']['MSC']['first']        = '&#171; Anfang';
 $GLOBALS['TL_LANG']['MSC']['previous']     = 'Zurück';
 $GLOBALS['TL_LANG']['MSC']['next']         = 'Vorwärts';
@@ -110,7 +111,8 @@ $GLOBALS['TL_LANG']['MSC']['comment_by']   = 'Kommentar von';
 $GLOBALS['TL_LANG']['MSC']['com_quote']    = '%s schrieb:';
 $GLOBALS['TL_LANG']['MSC']['com_code']     = 'Code:';
 $GLOBALS['TL_LANG']['MSC']['com_subject']  = 'TYPOlight :: Neuer Kommentar auf %s';
-$GLOBALS['TL_LANG']['MSC']['com_message']  = 'Ein neuer Kommentar wurde auf Ihrer Webseite erstellt.%sWenn Sie Ihre Kommentare moderieren, müssen Sie sich im Backend anmelden und den Kommentar freischalten.';
+$GLOBALS['TL_LANG']['MSC']['com_message']  = "%s hat einen neuen Kommentar auf Ihrer Webseite erstellt.\n\n---\n\n%s\n\n---\n\nAnsehen: %s\nBearbeiten: %s\n\nWenn Sie Kommentare moderieren, müssen Sie sich im Backend anmelden und den Kommentar veröffentlichen.";
+$GLOBALS['TL_LANG']['MSC']['com_confirm']  = 'Ihr Kommentar wurde hinzugefügt und wird nach redaktioneller Prüfung veröffentlicht.';
 $GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Der Eintrag "%s" existiert leider nicht.';
 
 ?>

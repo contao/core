@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,16 +30,17 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_undo']['fromTable']    = array('Tabelle', 'Name der ursprünglichen Tabelle');
-$GLOBALS['TL_LANG']['tl_undo']['affectedRows'] = array('Datensätze', 'Anzahl der betroffenen Datensätze');
-$GLOBALS['TL_LANG']['tl_undo']['query']        = array('Details', 'Details des aktuellen Eintrags');
-$GLOBALS['TL_LANG']['tl_undo']['data']         = array('Daten', 'Daten der gelöschten Datensätze');
+$GLOBALS['TL_LANG']['tl_undo']['pid']          = array('Benutzer', 'Name des zugehörigen Benutzers');
+$GLOBALS['TL_LANG']['tl_undo']['fromTable']    = array('Ursprungstabelle', 'Name der ursprünglichen Tabelle');
+$GLOBALS['TL_LANG']['tl_undo']['affectedRows'] = array('Enthaltene Datensätze', 'Anzahl der im Undo-Schritt enthaltenen Datensätze');
+$GLOBALS['TL_LANG']['tl_undo']['query']        = array('Details', 'Details des Undo-Schritts');
+$GLOBALS['TL_LANG']['tl_undo']['data']         = array('Daten', 'Rohdaten des Undo-Schritts');
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_undo']['show'] = array('Anzeigen', 'Eintrag ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Rückgängig', 'Aktion ID %s rückgängig machen');
+$GLOBALS['TL_LANG']['tl_undo']['show'] = array('Anzeigen', 'Den Eintrag ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Wiederherstellen', 'Die Eintrag ID %s wiederherstellen');
 
 ?>

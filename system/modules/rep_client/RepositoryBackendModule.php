@@ -39,6 +39,9 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	public function generate()
 	{
+		if (!extension_loaded('soap')) {
+			return '<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
+		} // if
 		$this->rep = new stdClass();
 		$rep = &$this->rep;
 		$rep->username	= $this->BackendUser->username;
@@ -90,13 +93,25 @@ class RepositoryBackendModule extends BackendModule
 		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
 		if ($wsdl != '') {
 			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0); 
-			$this->client = 
-				new SoapClient($wsdl,
-								array(
-								  'soap_version' => SOAP_1_2,
-								  'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 1
-								)
-					);
+			// HOOK: proxy module
+			if ($GLOBALS['TL_CONFIG']['useProxy']) {
+				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
+				$this->client = new SoapClient($wsdl, array(
+					'soap_version' => SOAP_1_2,
+					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 1,
+					'proxy_host' => $proxy_uri['host'],
+					'proxy_port' => $proxy_uri['port'],
+					'proxy_login' => $proxy_uri['user'],
+					'proxy_password' => $proxy_uri['pass']
+				));
+			}
+			// Default client
+			else {
+				$this->client = new SoapClient($wsdl, array(
+					'soap_version' => SOAP_1_2,
+					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | 1
+				));
+			}
 			$this->mode = 'soap';
 		} else
 			// fallback toload RepositoryServer class if on central server

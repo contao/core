@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,12 +30,21 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_news_comments']['name']      = array('Name', 'Bitte geben Sie den richtigen Namen des Autors ein.');
-$GLOBALS['TL_LANG']['tl_news_comments']['email']     = array('E-Mail-Adresse', 'Bitte geben Sie die E-Mail-Adresse des Autors ein (wird nicht veröffentlicht).');
-$GLOBALS['TL_LANG']['tl_news_comments']['website']   = array('Webseite', 'Bitte geben Sie eine optionale Webadresse ein.');
+$GLOBALS['TL_LANG']['tl_news_comments']['pid']       = array('Nachrichtenbeitrag', 'Der dazugehörige Nachrichtenbeitrag.');
+$GLOBALS['TL_LANG']['tl_news_comments']['date']      = array('Datum', 'Bitte geben Sie das Kommentardatum ein.');
+$GLOBALS['TL_LANG']['tl_news_comments']['name']      = array('Autor', 'Bitte geben Sie den Namen des Autors ein.');
+$GLOBALS['TL_LANG']['tl_news_comments']['email']     = array('E-Mail-Adresse', 'Die E-Mail-Adresse wird nicht veröffentlicht.');
+$GLOBALS['TL_LANG']['tl_news_comments']['website']   = array('Webseite', 'Hier können Sie eine Webadresse eingeben.');
 $GLOBALS['TL_LANG']['tl_news_comments']['comment']   = array('Kommentar', 'Bitte geben Sie den Kommentar ein.');
-$GLOBALS['TL_LANG']['tl_news_comments']['published'] = array('Veröffentlicht', 'Nur veröffentlichte Kommentare erscheinen auf der Webseite.');
-$GLOBALS['TL_LANG']['tl_news_comments']['date']      = array('Datum', 'Bitte geben Sie ein Datum ein.');
+$GLOBALS['TL_LANG']['tl_news_comments']['published'] = array('Kommentar veröffentlichen', 'Den Kommentar auf der Webseite anzeigen.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_news_comments']['author_legend']  = 'Autor';
+$GLOBALS['TL_LANG']['tl_news_comments']['comment_legend'] = 'Kommentar';
+$GLOBALS['TL_LANG']['tl_news_comments']['publish_legend'] = 'Veröffentlichung';
 
 
 /**
@@ -48,9 +57,9 @@ $GLOBALS['TL_LANG']['tl_news_comments']['pending']  = 'Zur Überprüfung';
 /**
  * Buttons
  */
+$GLOBALS['TL_LANG']['tl_news_comments']['show']       = array('Kommentardetails', 'Details des Kommentars ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_news_comments']['edit']       = array('Kommentar bearbeiten', 'Kommentar ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_news_comments']['delete']     = array('Kommentar löschen', 'Kommentar ID %s löschen');
-$GLOBALS['TL_LANG']['tl_news_comments']['show']       = array('Kommentardetails', 'Details des Kommentars ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_news_comments']['editheader'] = array('Archiv bearbeiten', 'Das aktuelle Archiv bearbeiten');
 
 ?>

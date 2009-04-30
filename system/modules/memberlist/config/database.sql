@@ -15,8 +15,8 @@
 -- 
 
 CREATE TABLE `tl_member` (
-  `publicFields` blob NULL,
-  `allowEmail` varchar(32) NOT NULL default ''
+  `allowEmail` varchar(32) NOT NULL default '',
+  `publicFields` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

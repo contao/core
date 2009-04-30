@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -28,7 +28,7 @@
 
 
 /**
- * Table tl_comments 
+ * Table tl_comments
  */
 $GLOBALS['TL_DCA']['tl_comments'] = array
 (
@@ -96,12 +96,25 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,email,website;comment;published'
+		'default'                     => '{author_legend},name,email,website;{comment_legend},comment;{publish_legend},published'
 	),
 
 	// Fields
 	'fields' => array
 	(
+		'pid' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['pid'],
+			'filter'                  => true,
+			'sorting'                 => true
+		),
+		'date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['date'],
+			'sorting'                 => true,
+			'filter'                  => true,
+			'flag'                    => 8
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['name'],
@@ -116,7 +129,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email', 'decodeEntities'=>true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'website' => array
 		(
@@ -124,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true)
+			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'comment' => array
 		(
@@ -141,19 +154,6 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true)
-		),
-		'date' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['date'],
-			'sorting'                 => true,
-			'filter'                  => true,
-			'flag'                    => 8
-		),
-		'pid' => array
-		(
-			'label'                   => array('PID', 'Parent ID'),
-			'filter'                  => true,
-			'sorting'                 => true
 		)
 	)
 );
@@ -163,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
  * Class tl_comments
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -198,7 +198,7 @@ class tl_comments extends Backend
 
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (strlen($arrRow['website']) ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" onclick="window.open(this.href); return false;">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . date($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . $arrRow['ip'] . '<br />' . $this->arrData[$arrRow['pid']] . ' (PID: ' . $arrRow['pid'] . ')</div>
+<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (strlen($arrRow['website']) ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" onclick="window.open(this.href); return false;">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . $arrRow['ip'] . '<br />' . $this->arrData[$arrRow['pid']] . ' (PID: ' . $arrRow['pid'] . ')</div>
 <div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
 ' . $arrRow['comment'] . '
 </div>

@@ -16,7 +16,7 @@
 <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_cache" />
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3><label for="cache_tables"><?php echo $this->cacheLabel; ?></label></h3>
   <div id="cache_tables" class="tl_checkbox_container">
   <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this, 'cache')" /> <label for="check_all" style="color:#a6a6a6;"><em><?php echo $this->selectAll; ?></em></label><br />
@@ -51,7 +51,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="ver" value="<?php echo $this->version; ?>" />
 <input type="hidden" name="ref" value="<?php echo $this->referer; ?>" />
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3 style="padding-top:9px;"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
   <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset();" />
   <div class="tl_checkbox_container" style="margin-top:0px;">
@@ -82,7 +82,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="act" value="index" />
 <input type="hidden" name="do" value="maintenance" />
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3><label for="ctrl_user"><?php echo $this->indexLabel; ?></label></h3>
   <select name="user" id="ctrl_user" class="tl_select">
 <?php foreach ($this->user as $id=>$name): ?>

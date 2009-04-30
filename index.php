@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -38,7 +38,7 @@ require('system/initialize.php');
  * Class Index
  *
  * Main front end controller.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -202,9 +202,14 @@ class Index extends Frontend
 		}
 
 		$this->import('Environment');
-
-		// Get cache key
 		$strCacheKey = $this->Environment->base . preg_replace('@^index.php/?@i', '', $this->Environment->request);
+
+		// Do not cache empty requests
+		if (!$strCacheKey)
+		{
+			return;
+		}
+
 		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey);
 
 		// Return if the file does not exist
@@ -264,13 +269,14 @@ class Index extends Frontend
 
 		// Set cache header
 		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
-		header('Cache-Control: public, max-age=' . $expire);
-		header('Expires: '.gmdate('D, d M Y H:i:s', $expire).' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()).' GMT');
+		header('Cache-Control: public, max-age=' . ($expire - time()));
+		header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
+		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 		header('Pragma: public');
 
 		// Replace insert tags
 		echo $this->replaceInsertTags($strBuffer);
+		exit;
 	}
 }
 

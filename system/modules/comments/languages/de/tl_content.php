@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -30,12 +30,19 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Kommentarlayout', 'Bitte wählen Sie ein Kommentarlayout. Sie können eigene Kommentarlayouts im Ordner <em>templates</em> speichern. Vorlagen müssen mit <em>com_</em> beginnen und die Dateiendung <em>.tpl</em> haben.');
-$GLOBALS['TL_LANG']['tl_content']['com_order']          = array('Sortierung', 'Bitte wählen Sie eine Sortierung.');
-$GLOBALS['TL_LANG']['tl_content']['com_perPage']        = array('Elemente pro Seite', 'Bitte geben Sie die Anzahl an Kommentaren pro Seite ein (0 = Seitenumbruch deaktivieren).');
-$GLOBALS['TL_LANG']['tl_content']['com_moderate']       = array('Moderieren', 'Kommentare bestätigen bevor sie auf der Webseite angezeigt werden.');
-$GLOBALS['TL_LANG']['tl_content']['com_bbcode']         = array('BBCode erlauben', 'Besuchern erlauben, ihre Kommentare mittels BBCode zu formatieren.');
-$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'] = array('Sicherheitsfrage deaktivieren', 'Wählen Sie diese Option um die Sicherheitsfrage abzuschalten (nicht empfohlen).');
+$GLOBALS['TL_LANG']['tl_content']['com_order']          = array('Sortierreihenfolge', 'Bitte wählen Sie die Sortierreihenfolge.');
+$GLOBALS['TL_LANG']['tl_content']['com_perPage']        = array('Elemente pro Seite', 'Die Anzahl an Kommentaren pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
+$GLOBALS['TL_LANG']['tl_content']['com_moderate']       = array('Moderieren', 'Kommentare bestätigen bevor sie auf der Webseite veröffentlicht werden.');
+$GLOBALS['TL_LANG']['tl_content']['com_bbcode']         = array('BBCode erlauben', 'Besuchern das Formatieren ihrer Kommentare mittels BBCode erlauben.');
+$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'] = array('Sicherheitsfrage deaktivieren', 'Hier können Sie die Sicherheitsfrage abzuschalten (nicht empfohlen).');
+$GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Kommentartemplate', 'Hier können Sie das Kommentartemplate auswählen.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_content']['comment_legend']  = 'Kommentar-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['template_legend'] = 'Template-Einstellungen';
 
 
 /**

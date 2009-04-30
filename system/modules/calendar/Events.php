@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Events
  *
  * Provide methods to get all events of a certain period from the database.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -43,6 +43,12 @@ abstract class Events extends Module
 	 * @var string
 	 */
 	protected $strUrl;
+
+	/**
+	 * Today 00:00:00
+	 * @var integer
+	 */
+	protected $intToday;
 
 	/**
 	 * Current events
@@ -105,6 +111,7 @@ abstract class Events extends Module
 			return array();
 		}
 
+		$this->import('String');
 		$time = time();
 
 		foreach ($arrCalendars as $id)
@@ -122,7 +129,7 @@ abstract class Events extends Module
 			}
 
 			// Get events of the current period
-			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY startTime")
+			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY startTime")
 										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $time, $time);
 
 			if ($objEvents->numRows < 1)
@@ -150,9 +157,9 @@ abstract class Events extends Module
 						$arg = $arrRepeat['value'];
 						$unit = $arrRepeat['unit'];
 
-						if ($arg == 1)
+						if ($arg < 1)
 						{
-							$unit = substr($unit, 0, -1);
+							break;
 						}
 
 						$strtotime = '+ ' . $arg . ' ' . $unit;
@@ -179,12 +186,12 @@ abstract class Events extends Module
 		}
 
 		// HOOK: modify result set
-		if (array_key_exists('getAllEvents', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['getAllEvents']))
+		if (isset($GLOBALS['TL_HOOKS']['getAllEvents']) && is_array($GLOBALS['TL_HOOKS']['getAllEvents']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getAllEvents'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->arrEvents = $this->$callback[0]->$callback[1]($this->arrEvents, $arrCalendars);
+				$this->arrEvents = $this->$callback[0]->$callback[1]($this->arrEvents, $arrCalendars, $intStart, $intEnd);
 			}
 		}
 
@@ -207,13 +214,13 @@ abstract class Events extends Module
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$span = Calendar::calculateSpan($intStart, $intEnd);
-		$strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
+		$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
 
 		if ($span > 0)
 		{
-			$strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG']['dateFormat'], $intEnd);
+			$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intEnd);
 			$strDay = '';
 		}
 
@@ -223,15 +230,15 @@ abstract class Events extends Module
 		{
 			if ($span > 0)
 			{
-				$strDate = date($GLOBALS['TL_CONFIG']['datimFormat'], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG']['datimFormat'], $intEnd);
+				$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $intEnd);
 			}
 			elseif ($intStart == $intEnd)
 			{
-				$strTime = date($GLOBALS['TL_CONFIG']['timeFormat'], $intStart);
+				$strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart);
 			}
 			else
 			{
-				$strTime = date($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd);
+				$strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd);
 			}
 		}
 
@@ -249,20 +256,27 @@ abstract class Events extends Module
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW_BLUR : '');
 		$arrEvent['class'] = strlen($objEvents->cssClass) ? ' ' . $objEvents->cssClass : '';
+		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
-		// Only show first occurrence
-		if ($this->cal_noSpan)
+		// Get today's date
+		if (is_null($this->intToday))
 		{
-			return;
+			$this->intToday = strtotime(date('Y-m-d') . ' 00:00:00');
 		}
 
 		// Multi-day event
 		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
+			// Only show first occurrence
+			if ($this->cal_noSpan && $intDate >= $this->intToday)
+			{
+				break;
+			}
+
 			$intDate = strtotime('+ 1 day', $intDate);
 			$intNextKey = date('Ymd', $intDate);
 
@@ -299,7 +313,7 @@ abstract class Events extends Module
 		}
 
 		// Fallback to current URL
-		$strUrl = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$strUrl = ampersand($this->Environment->request, true);
 
 		// Get internal page
 		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
- * @package    Faq 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Faq
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,25 +30,31 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['title']    = array('Titel', 'Bitte geben Sie den Titel der Kategorie ein.');
-$GLOBALS['TL_LANG']['tl_faq_category']['headline'] = array('Überschrift', 'Bitte geben Sie eine Überschrift für die Kategorie ein.');
+$GLOBALS['TL_LANG']['tl_faq_category']['title']    = array('Titel', 'Bitte geben Sie den Kategorie-Titel ein.');
+$GLOBALS['TL_LANG']['tl_faq_category']['headline'] = array('Überschrift', 'Bitte geben Sie die Kategorie-Überschrift ein.');
+$GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']   = array('Weiterleitungsseite', 'Bitte wählen Sie die FAQ-Leser-Seite aus, zu der Besucher weitergeleitet werden wenn Sie eine FAQ anklicken.');
 $GLOBALS['TL_LANG']['tl_faq_category']['tstamp']   = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
-$GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']   = array('Weiterleitung zu Seite', 'Bitte wählen Sie die Seite, zu der ein Besucher weitergeleitet werden soll wenn er eine Frage anklickt.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_faq_category']['title_legend'] = 'Titel und Weiterleitung';
 
 
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Wenn Sie eine Kategorie löschen werde auch alle darin enthaltenen FAQs gelöscht. Wollen Sie die Kategorie ID %s wirklich löschen?';
+$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Wenn Sie die Kategorie %s löschen, werde auch alle darin enthaltenen FAQs gelöscht! Fortfahren?';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_faq_category']['new']    = array('Neue Kategorie', 'Eine neue Kategorie anlegen');
+$GLOBALS['TL_LANG']['tl_faq_category']['show']   = array('Kategoriedetails', 'Details der Kategorie ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_faq_category']['edit']   = array('Kategorie bearbeiten', 'Kategorie ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_faq_category']['copy']   = array('Kategorie duplizieren', 'Kategorie ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_faq_category']['delete'] = array('Kategorie löschen', 'Kategorie ID %s löschen');
-$GLOBALS['TL_LANG']['tl_faq_category']['show']   = array('Kategoriedetails', 'Details der Kategorie ID %s anzeigen');
 
 ?>

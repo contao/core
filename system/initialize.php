@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -154,7 +154,15 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
 
 	if (!strlen($referer['host']) || $referer['host'] != $self['host'])
 	{
-		trigger_error(sprintf('The current host address (%s) does not match the current referer host address (%s)', $self['host'], $referer['host']), E_USER_ERROR);
+		header('HTTP/1.1 412 Precondition Failed');
+
+		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl'))
+		{
+			include(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl');
+			exit;
+		}
+
+		echo sprintf('The current host address (%s) does not match the current referer host address (%s).', $self['host'], $referer['host']);
 		exit;
 	}
 }

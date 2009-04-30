@@ -8,30 +8,25 @@
  * @license See accompaning file LICENSE.txt
  */
 
-if (extension_loaded('soap')) {
+/**
+ * Add to palette
+ */
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ',repository_languages,repository_listsize';
 
-	/**
-	 * Add to palette
-	 */
-	$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';repository_languages,repository_listsize';
+/**
+ * Add fields
+ */
+$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_languages'] = array(
+	'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_languages'],
+	'inputType'	=>	'text',
+	'eval'		=>	array('maxlength'=>255, 'nospace'=>true, 'tl_class'=>'w50')
+);
 
-	/**
-	 * Add fields
-	 */
-	$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_languages'] = array(
-		'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_languages'],
-		'exclude'	=>	true,
-		'inputType'	=>	'text',
-		'eval'		=>	array('maxlength'=>255, 'nospace'=>true)
-	);
+$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_listsize'] = array(
+	'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'],
+	'default'	=>	'10',
+	'inputType'	=>	'text',
+	'eval'		=>	array('rgxp'=>'digit', 'maxlength'=>6, 'tl_class'=>'w50')
+);
 
-	$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_listsize'] = array(
-		'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_listsize'],
-		'default'	=>	'10',
-		'exclude'	=>	true,
-		'inputType'	=>	'text',
-		'eval'		=>	array('rgxp'=>'digit', 'maxlength'=>6)
-	);
-
-} // if
 ?>

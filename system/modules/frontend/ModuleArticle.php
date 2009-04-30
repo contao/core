@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleArticle
  *
  * Provides methodes to handle articles.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -49,12 +49,6 @@ class ModuleArticle extends Module
 	 * @var boolean
 	 */
 	protected $blnNoMarkup = false;
-
-	/**
-	 * URL cache array
-	 * @var array
-	 */
-	private static $arrCache = array();
 
 
 	/**
@@ -88,39 +82,16 @@ class ModuleArticle extends Module
 
 		if (!strlen($this->cssID[0]))
 		{
-			$this->cssID = array(standardize($this->title), $this->cssID[1]);
+			$alias = strlen($this->alias) ? $this->alias : $this->title;
+			$this->cssID = array(standardize($alias), $this->cssID[1]);
 		}
 
 		$this->Template->column = $this->inColumn;
 
 		// Add modification date
 		$this->Template->timestamp = $this->tstamp;
-		$this->Template->date = date($GLOBALS['TL_CONFIG']['datimFormat'], $this->tstamp);
-
-		// Add author
-		if (strlen($this->author))
-		{
-			$strCacheKey = 'author_' . $this->author;
-
-			// Select from database
-			if (!array_key_exists($strCacheKey, self::$arrCache))
-			{
-				$objAuthor = $this->Database->prepare("SELECT name FROM tl_user WHERE id=?")
-											->limit(1)
-											->execute($this->author);
-
-				if ($objAuthor->numRows)
-				{
-					self::$arrCache[$strCacheKey] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
-				}
-				else
-				{
-					self::$arrCache[$strCacheKey] = '';
-				}
-			}
-
-			$this->Template->author = self::$arrCache[$strCacheKey];
-		}
+		$this->Template->date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->tstamp);
+		$this->Template->author = $this->author;
 
 		// Show teaser only
 		if ($this->multiMode && $this->showTeaser)
@@ -193,10 +164,17 @@ class ModuleArticle extends Module
 
 		if ($this->printable)
 		{
-			$this->Template->printable = true;
+			$request = ampersand($this->Environment->request, true);
+
+			if ($request == 'index.php')
+			{
+				$request = '';
+			}
+
+			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
 			$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
-			$this->Template->href = ampersand($this->Environment->request) . ((strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
-			$this->Template->label = strlen($this->label) ? $this->label : $GLOBALS['TL_LANG']['MSC']['printAsPdf'];
+			$this->Template->label = $GLOBALS['TL_LANG']['MSC']['printAsPdf'];
+			$this->Template->printable = true;
 		}
 	}
 }

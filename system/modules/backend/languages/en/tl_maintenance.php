@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,36 +30,34 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables']  = array('Clear cache', 'Please select the cache resources you want to clear.');
-$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 'To index protected pages, you have to create a front end user who is allowed to access these pages.');
+$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables']  = array('Purge data', 'Please select the data you want to purge.');
+$GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 'Automatically log in a front end user to index protected pages.');
 
 
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']   = 'Live update';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearCache']   = 'Clear cache';
-$GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared'] = 'The cache has been cleared';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']    = 'Temp folder';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']    = 'Folder system/html';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearXml']     = 'Recreate XML sitemaps';
-$GLOBALS['TL_LANG']['tl_maintenance']['upToDate']     = 'Your TYPOlight version %s is up to date';
-$GLOBALS['TL_LANG']['tl_maintenance']['newVersion']   = 'A newer TYPOlight version %s is available';
-$GLOBALS['TL_LANG']['tl_maintenance']['changelog']    = 'View changelog';
-$GLOBALS['TL_LANG']['tl_maintenance']['searchIndex']  = 'Rebuild search index';
-$GLOBALS['TL_LANG']['tl_maintenance']['indexSubmit']  = 'Rebuild index';
-$GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'] = 'Live Update ID';
-$GLOBALS['TL_LANG']['tl_maintenance']['backupFiles']  = 'Backup the files that will be updated';
-$GLOBALS['TL_LANG']['tl_maintenance']['showToc']      = 'List the update archive files';
-$GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] = 'The temporary folder (system/tmp) is not writeable';
-$GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId']    = 'Please enter your live update ID';
-$GLOBALS['TL_LANG']['tl_maintenance']['noSearchable'] = 'No searchable pages found';
-$GLOBALS['TL_LANG']['tl_maintenance']['indexNote']    = 'Please wait for the page to load completely before you proceed!';
-
-
-/**
- * Buttons
- */
+$GLOBALS['TL_LANG']['tl_maintenance']['clearCache']    = 'Purge data';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']     = 'system/html';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'XML sitemaps';
+$GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'The data has been purged';
+$GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live update';
+$GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live update ID';
+$GLOBALS['TL_LANG']['tl_maintenance']['upToDate']      = 'Your TYPOlight version %s is up to date';
+$GLOBALS['TL_LANG']['tl_maintenance']['newVersion']    = 'A newer TYPOlight version %s is available';
+$GLOBALS['TL_LANG']['tl_maintenance']['betaVersion']   = 'You cannot update beta versions via live update';
+$GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId']     = 'Please enter your live update ID';
+$GLOBALS['TL_LANG']['tl_maintenance']['notWriteable']  = 'The temporary folder (system/tmp) is not writeable';
+$GLOBALS['TL_LANG']['tl_maintenance']['changelog']     = 'View the change log';
+$GLOBALS['TL_LANG']['tl_maintenance']['backupFiles']   = 'Backup the files that will be updated';
+$GLOBALS['TL_LANG']['tl_maintenance']['showToc']       = 'List the files in the update archive';
 $GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate'] = 'Run the update';
+$GLOBALS['TL_LANG']['tl_maintenance']['searchIndex']   = 'Rebuild the search index';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexSubmit']   = 'Rebuild index';
+$GLOBALS['TL_LANG']['tl_maintenance']['noSearchable']  = 'No searchable pages found';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Please wait for the page to load completely before you proceed!';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Please wait while the search index is being rebuilt.';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'The search index has been rebuilt. You can now proceed.';
 
 ?>

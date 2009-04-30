@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,18 +30,25 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_flash']['title']   = array('Title', 'Please enter a title for your article.');
-$GLOBALS['TL_LANG']['tl_flash']['flashID'] = array('Flash ID', 'Please enter a unique Flash ID. To load the article into a Flash movie, the Flash ID has to be assigned to a dynamic textfield (e.g. <em>textfield._loadArticle("flashID");</em>).');
-$GLOBALS['TL_LANG']['tl_flash']['content'] = array('Text', 'Please enter the article text. HTML tags are allowed but very restrictively supported by Flash.');
+$GLOBALS['TL_LANG']['tl_flash']['title']   = array('Title', 'Please enter the article title.');
+$GLOBALS['TL_LANG']['tl_flash']['flashID'] = array('Flash ID', 'The unique Flash ID is used to load the article into the Flash movie.');
+$GLOBALS['TL_LANG']['tl_flash']['content'] = array('Text', 'Note that Flash only supports a limited number of HTML tags.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_flash']['title_legend']   = 'Title and ID';
+$GLOBALS['TL_LANG']['tl_flash']['content_legend'] = 'Flash content';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_flash']['new']    = array('New content element', 'Create a new Flash content element');
-$GLOBALS['TL_LANG']['tl_flash']['edit']   = array('Edit content element', 'Edit Flash content element ID %s');
-$GLOBALS['TL_LANG']['tl_flash']['copy']   = array('Duplicate content element', 'Duplicate Flash content element ID %s');
-$GLOBALS['TL_LANG']['tl_flash']['delete'] = array('Delete content element', 'Delete Flash content element ID %s');
-$GLOBALS['TL_LANG']['tl_flash']['show']   = array('Show details', 'Show details of Flash content element ID %s');
+$GLOBALS['TL_LANG']['tl_flash']['new']    = array('New article', 'Create a new Flash article');
+$GLOBALS['TL_LANG']['tl_flash']['show']   = array('Show details', 'Show the details of Flash article ID %s');
+$GLOBALS['TL_LANG']['tl_flash']['edit']   = array('Edit article', 'Edit Flash article ID %s');
+$GLOBALS['TL_LANG']['tl_flash']['copy']   = array('Duplicate article', 'Duplicate Flash article ID %s');
+$GLOBALS['TL_LANG']['tl_flash']['delete'] = array('Delete article', 'Delete Flash article ID %s');
 
 ?>

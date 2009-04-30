@@ -1,4 +1,4 @@
-/* Mootools table sorting script by Leo Feyer, Copyright 2007 (LGPL) */
+/* Mootools table sorting script by Leo Feyer, Copyright 2007-2009 (LGPL) */
 
 
 /**
@@ -39,9 +39,9 @@ var TableSort = new Class(
 		}
 
 		var cook = null;
-		var vars = Cookie.get('TS_' + id.toUpperCase());
+		var vars = Cookie.read('TS_' + id.toUpperCase());
 
-		if (vars !== false)
+		if (vars !== null)
 		{
 			var cook = vars.split('|');
 		}
@@ -71,7 +71,7 @@ var TableSort = new Class(
 			// Sort the table if there is a cookie
 			if (cook !== null && cook[0] == i)
 			{
-				el.addClass((cook[1] == 'desc') ? 'asc' : 'desc');
+				$(el).addClass((cook[1] == 'desc') ? 'asc' : 'desc');
 				this.resort(cook[0], el);
 			}
 		}
@@ -158,7 +158,7 @@ var TableSort = new Class(
 			}
 
 			el.addClass('asc');
-			Cookie.set('TS_' + table.id.toUpperCase(), index + '|asc', { path: '/'});
+			Cookie.write('TS_' + table.id.toUpperCase(), index + '|asc', { path: '/' });
 		}
 
 		// Sort descending
@@ -173,7 +173,7 @@ var TableSort = new Class(
 			}
 
 			el.addClass('desc');
-			Cookie.set('TS_' + table.id.toUpperCase(), index + '|desc', { path: '/'});
+			Cookie.write('TS_' + table.id.toUpperCase(), index + '|desc', { path: '/' });
 
 			tbody.reverse();
 		}

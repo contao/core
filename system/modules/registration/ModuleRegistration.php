@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Registration
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleRegistration
  *
  * Front end module "registration".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -114,7 +114,15 @@ class ModuleRegistration extends Module
 				'required'=>true
 			);
 
-			$objCaptcha = new FormCaptcha($arrCaptcha);
+			$strClass = $GLOBALS['TL_FFL']['captcha'];
+
+			// Fallback to default if the class is not defined
+			if (!$this->classFileExists($strClass))
+			{
+				$strClass = 'FormCaptcha';
+			}
+
+			$objCaptcha = new $strClass($arrCaptcha);
 
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_registration')
 			{
@@ -246,7 +254,7 @@ class ModuleRegistration extends Module
 		$this->Template->captcha = $arrFields['captcha'];
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 
 		// HOOK: add memberlist fields
 		if (in_array('memberlist', $this->Config->getActiveModules()))
@@ -337,7 +345,7 @@ class ModuleRegistration extends Module
 		}
 
 		// HOOK: send insert ID and user data
-		if (array_key_exists('createNewUser', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['createNewUser']))
+		if (isset($GLOBALS['TL_HOOKS']['createNewUser']) && is_array($GLOBALS['TL_HOOKS']['createNewUser']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
@@ -382,7 +390,7 @@ class ModuleRegistration extends Module
 					   ->execute($objMember->id);
 
 		// HOOK: post activation callback
-		if (array_key_exists('activateAccount', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['activateAccount']))
+		if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && is_array($GLOBALS['TL_HOOKS']['activateAccount']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback)
 			{
@@ -453,7 +461,7 @@ class ModuleRegistration extends Module
 
 			if ($k == 'dateOfBirth' && strlen($v))
 			{
-				$v = date($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+				$v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
 			}
 
 			$strData .= $GLOBALS['TL_LANG']['tl_member'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";

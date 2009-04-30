@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Memberlist
  * @license    LGPL
@@ -30,12 +30,7 @@
 /**
  * Add palettes to tl_member
  */
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace
-(
-	'login;',
-	'login;allowEmail,publicFields;',
-	$GLOBALS['TL_DCA']['tl_member']['palettes']['default']
-);
+$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('login;', 'login;{profile_legend:hide},allowEmail,publicFields;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
 
 
 /**
@@ -66,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['publicFields'] = array
  * Class tl_member_memberlist
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2008-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

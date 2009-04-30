@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Listing
  * @license    LGPL
@@ -30,13 +30,14 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['list_table']       = array('Tabelle', 'Bitte wählen Sie die Tabelle, deren Datensätze Sie auflisten möchten.');
-$GLOBALS['TL_LANG']['tl_module']['list_fields']      = array('Felder', 'Bitte geben Sie eine durch Komma getrennte Liste der Felder ein, die Sie auflisten möchten.');
-$GLOBALS['TL_LANG']['tl_module']['list_where']       = array('Bedingung', 'Um bestimmte Datensätze auszuschließen, können Sie hier eine Bedingung eingeben (z.B. <em>published=1</em> oder <em>type!=\'admin\'</em>).');
-$GLOBALS['TL_LANG']['tl_module']['list_sort']        = array('Sortieren nach', 'Bitte geben Sie eine durch Komma getrennte Liste der Felder ein, nach denen sortiert werden soll. Fügen Sie <em>DESC</em> nach dem Feldnamen ein, um in absteigender Reihenfolge zu sortieren (z.B. <em>name, date DESC</em>).');
-$GLOBALS['TL_LANG']['tl_module']['list_layout']      = array('Listenvorlage', 'Bitte wählen Sie ein Listenlayout. Sie können eigene Listenlayouts im Ordner <em>templates</em> speichern. Listenvorlagen müssen mit <em>list_</em> beginnen und die Dateiendung <em>.tpl</em> haben.');
-$GLOBALS['TL_LANG']['tl_module']['list_search']      = array('Durchsuchbare Felder', 'Bitte geben Sie eine durch Komma getrennte Liste der Felder ein, die im Frontend durchsuchbar sein sollen.');
-$GLOBALS['TL_LANG']['tl_module']['list_info']        = array('Felder der Detailseite', 'Bitte geben Sie eine durch Komma getrennte Liste der Felder ein, die Sie auf der Detailseite anzeigen möchten. Lassen Sie das Feld leer, um die Detailansicht eines Datensatzes zu deaktivieren.');
-$GLOBALS['TL_LANG']['tl_module']['list_info_layout'] = array('Detailseitenvorlage', 'Bitte wählen Sie ein Detailseitenlayout. Sie können eigene Layouts im Ordner <em>templates</em> speichern. Detailseitenvorlagen müssen mit <em>info_</em> beginnen und die Dateiendung <em>.tpl</em> haben.');
+$GLOBALS['TL_LANG']['tl_module']['list_table']       = array('Tabelle', 'Bitte wählen Sie die Quelltabelle.');
+$GLOBALS['TL_LANG']['tl_module']['list_fields']      = array('Felder', 'Bitte geben Sie eine kommagetrennte Liste der Felder ein, die Sie auflisten möchten.');
+$GLOBALS['TL_LANG']['tl_module']['list_where']       = array('Bedingung', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>published=1</em> oder <em>type!="admin"</em>).');
+$GLOBALS['TL_LANG']['tl_module']['list_search']      = array('Durchsuchbare Felder', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, die durchsuchbar sein sollen.');
+$GLOBALS['TL_LANG']['tl_module']['list_sort']        = array('Sortieren nach', 'Hier können Sie eine kommagetrennte Liste der Felder eingeben, nach denen die Ergebnisse sortiert werden sollen.');
+$GLOBALS['TL_LANG']['tl_module']['list_info']        = array('Felder der Detailseite', 'Geben Sie eine kommagetrennte Liste der Felder ein, die Sie auf der Detailseite anzeigen möchten. Lassen Sie das Feld leer, um das Feature zu deaktivieren.');
+$GLOBALS['TL_LANG']['tl_module']['list_info_where']  = array('Detailseitenbedingung', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>published=1</em> oder <em>type!="admin"</em>).');
+$GLOBALS['TL_LANG']['tl_module']['list_layout']      = array('Listentemplate', 'Hier können das Listentemplate auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['list_info_layout'] = array('Detailseitentemplate', 'Hier können Sie das Detailseitentemplate auswählen.');
 
 ?>

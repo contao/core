@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNewsletterList
  *
  * Front end module "newsletter list".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -94,7 +94,7 @@ class ModuleNewsletterList extends Module
 				continue;
 			}
 
-			if (!array_key_exists($objNewsletter->jumpTo, $arrJumpTo))
+			if (!isset($arrJumpTo[$objNewsletter->jumpTo]))
 			{
 				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
 											->limit(1)
@@ -123,9 +123,9 @@ class ModuleNewsletterList extends Module
 			(
 				'subject' => $objNewsletter->subject,
 				'href' => sprintf($strUrl, $strAlias),
-				'date' => date($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
-				'datim' => date($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),
-				'time' => date($GLOBALS['TL_CONFIG']['timeFormat'], $objNewsletter->date),
+				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
+				'datim' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),
+				'time' => $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objNewsletter->date),
 				'channel' => $objNewsletter->channel
 			);
 		}

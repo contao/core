@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,10 +30,24 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['name']   = array('Name', 'Bitte geben Sie einen eindeutigen Namen für das Stylesheet ein.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['name']   = array('Name', 'Bitte geben Sie den Namen des Stylesheets ein.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['cc']     = array('Conditional Comment', 'Conditional Comments ermöglichen die Erstellung Internet Explorer-spezifischer Stylesheets.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Medientypen', 'Bitte wählen Sie die Medientypen aus, für die das Stylesheet gültig ist.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['source'] = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'] = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
-$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Medientypen', 'Wenn das aktuelle Stylesheet nur für bestimmte Medientypen gedacht ist, können Sie dessen Verwendung durch das Auswählen beliebig vieler Medientypen auf diese beschränken.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['source'] = array('Quelldateien', 'Bitte wählen Sie die CSS-Dateien, die Sie importieren möchten.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name und Medientypen';
+
+
+/**
+ * References
+ */
+$GLOBALS['TL_LANG']['ERROR']['css_exists']   = 'ACHTUNG! Gleichnamige Stylesheets werden überschrieben. Fortfahren?';
+$GLOBALS['TL_LANG']['CONFIRM']['css_exists'] = 'Das Stylesheet "%s" wurde importiert.';
 
 
 /**
@@ -44,13 +58,6 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['show']   = array('Stylesheetdetails', 'De
 $GLOBALS['TL_LANG']['tl_style_sheet']['edit']   = array('Stylesheet bearbeiten', 'Stylesheet ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_style_sheet']['copy']   = array('Stylesheet duplizieren', 'Stylesheet ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_style_sheet']['delete'] = array('Stylesheet löschen', 'Stylesheet ID %s löschen');
-$GLOBALS['TL_LANG']['tl_style_sheet']['import'] = array('CSS Import', 'Eine bestehende CSS-Datei importieren');
-
-
-/**
- * Messages
- */
-$GLOBALS['TL_LANG']['ERROR']['css_exists']   = 'ACHTUNG! Gleichnamige Stylesheets werden überschrieben. Fortfahren?';
-$GLOBALS['TL_LANG']['CONFIRM']['css_exists'] = 'Das Stylesheet "%s" wurde importiert.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['import'] = array('CSS-Import', 'Bestehende CSS-Dateien importieren');
 
 ?>

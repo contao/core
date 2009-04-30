@@ -1,5 +1,4 @@
 
-<!-- indexer::stop -->
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 <?php if ($this->headline): ?>
 
@@ -10,19 +9,12 @@
 <?php echo $this->alt; ?> 
 </div>
 
+<!-- indexer::stop -->
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-UFO.launch("<?php echo $this->flashId; ?>", {
-  movie: "<?php echo $this->href; ?>",
-  width: "<?php echo $this->width; ?>",
-  height: "<?php echo $this->height; ?>",
-  allowfullscreen: "true",
-  flashvars: "<?php echo $this->flashvars; ?>",
-  majorversion: "8",
-  build: "0"
-});
+swfobject.embedSWF("<?php echo $this->href; ?>", "<?php echo $this->flashId; ?>", "<?php echo $this->width; ?>", "<?php echo $this->height; ?>", "8.0.0", false, false, { allowfullscreen: "true", flashvars: "<?php echo $this->flashvars; ?>" });
 //--><!]]>
 </script>
+<!-- indexer::continue -->
 
 </div>
-<!-- indexer::continue -->

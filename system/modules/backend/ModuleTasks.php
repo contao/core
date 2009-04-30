@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleTasks
  *
  * Back end module "tasks".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -84,7 +84,7 @@ class ModuleTasks extends BackendModule
 				break;
 		}
 
-		$this->Template->request = $this->Environment->request;
+		$this->Template->request = ampersand($this->Environment->request, true);
 
 		// Load scripts
 		$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css';
@@ -168,7 +168,7 @@ class ModuleTasks extends BackendModule
 				'user' => $objTask->name,
 				'title' => $objTask->title,
 				'progress' => $objTask->progress,
-				'deadline' => date($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline),
+				'deadline' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline),
 				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objTask->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] : $objTask->status),
 				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
@@ -194,6 +194,17 @@ class ModuleTasks extends BackendModule
 	{
 		$this->Template = new BackendTemplate('be_task_create');
 
+		if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+		{
+			$this->Template = new BackendTemplate('be_task_create_be27');
+			$fs = $this->Session->get('fieldset_states');
+
+			$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
+			$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
+			$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
+			$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
+		}
+
 		$this->Template->title = $this->getTitleWidget();
 		$this->Template->deadline = $this->getDeadlineWidget();
 		$this->Template->assignedTo = $this->getAssignedToWidget();
@@ -203,6 +214,9 @@ class ModuleTasks extends BackendModule
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['tl_task']['new'][1];
 		$this->Template->submit = $GLOBALS['TL_LANG']['tl_task']['createSubmit'];
+		$this->Template->titleLabel = $GLOBALS['TL_LANG']['tl_task']['title'][0];
+		$this->Template->assignLabel = $GLOBALS['TL_LANG']['tl_task']['assignedTo'];
+		$this->Template->statusLabel = $GLOBALS['TL_LANG']['tl_task']['status'][0];
 
 		// Create task
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tasks' && $this->blnSave)
@@ -269,6 +283,17 @@ class ModuleTasks extends BackendModule
 	{
 		$this->Template = new BackendTemplate('be_task_edit');
 
+		if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+		{
+			$this->Template = new BackendTemplate('be_task_edit_be27');
+			$fs = $this->Session->get('fieldset_states');
+
+			$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
+			$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
+			$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
+			$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
+		}
+
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $this->Input->get('id'));
 
@@ -287,7 +312,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->advanced = $this->blnAdvanced;
 
 		$this->Template->title = $this->blnAdvanced ? $this->getTitleWidget($objTask->title) : $objTask->title;
-		$this->Template->deadline = $this->blnAdvanced ? $this->getDeadlineWidget(date($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline)) : date($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline);
+		$this->Template->deadline = $this->blnAdvanced ? $this->getDeadlineWidget($this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline)) : $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline);
 
 		$arrHistory = array();
 
@@ -300,7 +325,7 @@ class ModuleTasks extends BackendModule
 			$arrHistory[] = array
 			(
 				'creator' => $objTask->creator,
-				'date' => date($GLOBALS['TL_CONFIG']['dateFormat'], $objStatus->tstamp),
+				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStatus->tstamp),
 				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] : $objStatus->status),
 				'comment' => (strlen($objStatus->comment) ? nl2br($objStatus->comment) : '&nbsp;'),
 				'assignedTo' => $objStatus->assignedTo,
@@ -375,6 +400,8 @@ class ModuleTasks extends BackendModule
 		$this->Template->statusLabel = $GLOBALS['TL_LANG']['tl_task']['status'][0];
 		$this->Template->progressLabel = $GLOBALS['TL_LANG']['tl_task']['progress'][0];
 		$this->Template->submit = $GLOBALS['TL_LANG']['tl_task']['editSubmit'];
+		$this->Template->titleLabel = $GLOBALS['TL_LANG']['tl_task']['title'][0];
+		$this->Template->assignLabel = $GLOBALS['TL_LANG']['tl_task']['assignedTo'];
 	}
 
 
@@ -413,8 +440,8 @@ class ModuleTasks extends BackendModule
 			++$affected;
 		}
 
-		$objUndoStmt = $this->Database->prepare("INSERT INTO tl_undo (tstamp, fromTable, query, affectedRows, data) VALUES (?, ?, ?, ?, ?)")
-									  ->execute(time(), 'tl_task', 'DELETE FROM tl_task WHERE id= ' . $this->Input->get('id'), $affected, serialize($data));
+		$objUndoStmt = $this->Database->prepare("INSERT INTO tl_undo (pid, tstamp, fromTable, query, affectedRows, data) VALUES (?, ?, ?, ?, ?, ?)")
+									  ->execute($this->User->id, time(), 'tl_task', 'DELETE FROM tl_task WHERE id= ' . $this->Input->get('id'), $affected, serialize($data));
 
 		// Delete data and add a log entry
 		if ($objUndoStmt->affectedRows)
@@ -450,28 +477,34 @@ class ModuleTasks extends BackendModule
 			$value[] = $this->User->id;
 		}
 
-		// Search
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_be_search')
+		// Set filter
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters')
 		{
+			// Search
+			$session['search']['tl_task']['value'] = '';
+			$session['search']['tl_task']['field'] = $this->Input->post('tl_field', true);
+
 			// Make sure the regular expression is valid
-			if (strlen($this->Input->postRaw('tl_value')))
+			if ($this->Input->postRaw('tl_value') != '')
 			{
 				try
 				{
-					$this->Database->prepare("SELECT * FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id) WHERE " . $this->Input->post('tl_field') . " REGEXP ?")
+					$this->Database->prepare("SELECT * FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id) WHERE " . $this->Input->post('tl_field', true) . " REGEXP ?")
 								   ->limit(1)
 								   ->execute($this->Input->postRaw('tl_value'));
+
+					$session['search']['tl_task']['value'] = $this->Input->postRaw('tl_value');
 				}
 
 				catch (Exception $e)
 				{
-					$this->reload($e->getMessage());
-					exit;
+					// Nothing to do here
 				}
 			}
 
-			$session['search']['tl_task']['field'] = $this->Input->post('tl_field');
-			$session['search']['tl_task']['value'] = $this->Input->postRaw('tl_value');
+			// Filter
+			$session['filter']['tl_task']['assignedTo'] = $this->Input->post('assignedTo');
+			$session['filter']['tl_task']['deadline'] = $this->Input->post('deadline');
 
 			$this->Session->setData($session);
 			$this->reload();
@@ -482,6 +515,8 @@ class ModuleTasks extends BackendModule
 		{
 			$where[] = "CAST(" . $session['search']['tl_task']['field'] . " AS CHAR) REGEXP ?";
 			$value[] = $session['search']['tl_task']['value'];
+
+			$this->Template->searchClass = ' active';
 		}
 
 		// Search options
@@ -497,16 +532,6 @@ class ModuleTasks extends BackendModule
 		$this->Template->keywords = specialchars($session['search']['tl_task']['value']);
 		$this->Template->search = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 
-		// Filter
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_filter')
-		{
-			$session['filter']['tl_task']['assignedTo'] = $this->Input->post('assignedTo');
-			$session['filter']['tl_task']['deadline'] = $this->Input->post('deadline');
-
-			$this->Session->setData($session);
-			$this->reload();
-		}
-
 		// Add deadline value to query
 		if (strlen($session['filter']['tl_task']['deadline']))
 		{
@@ -515,6 +540,8 @@ class ModuleTasks extends BackendModule
 			$where[] = "t.deadline BETWEEN ? AND ?";
 			$value[] = $objDate->dayBegin;
 			$value[] = $objDate->dayEnd;
+
+			$this->Template->deadlineClass = ' active';
 		}
 
 		// Add assignedTo value to query
@@ -522,26 +549,20 @@ class ModuleTasks extends BackendModule
 		{
 			$where[] = "s.assignedTo=?";
 			$value[] = $session['filter']['tl_task']['assignedTo'];
+
+			$this->Template->assignedToClass = ' active';
 		}
 
 		// Filter options
-		$filterQuery = "SELECT t.deadline, s.assignedTo, (SELECT name FROM tl_user u WHERE u.id=s.assignedTo) AS name FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)";
+		$objFilter = $this->Database->prepare("SELECT t.deadline, s.assignedTo, (SELECT name FROM tl_user u WHERE u.id=s.assignedTo) AS name FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id) ORDER BY deadline")
+									->execute($value);
 
-		// Where
-		if (count($where))
-		{
-			$filterQuery .= " WHERE " . implode(' AND ', $where);
-		}
-
-		$filterQuery .= " ORDER BY deadline";
-
-		$objFilter = $this->Database->prepare($filterQuery)->execute($value);
 		$deadline = array();
 		$assigned = array();
 
 		while ($objFilter->next())
 		{
-			$deadline[$objFilter->deadline] = sprintf('<option value="%s"%s>%s</option>', $objFilter->deadline, (($objFilter->deadline == $session['filter']['tl_task']['deadline']) ? ' selected="selected"' : ''), date($GLOBALS['TL_CONFIG']['dateFormat'], $objFilter->deadline));
+			$deadline[$objFilter->deadline] = sprintf('<option value="%s"%s>%s</option>', $objFilter->deadline, (($objFilter->deadline == $session['filter']['tl_task']['deadline']) ? ' selected="selected"' : ''), $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFilter->deadline));
 			$assigned[$objFilter->assignedTo] = sprintf('<option value="%s"%s>%s</option>', $objFilter->assignedTo, (($objFilter->assignedTo == $session['filter']['tl_task']['assignedTo']) ? ' selected="selected"' : ''), $objFilter->name);
 		}
 

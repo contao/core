@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Listing
  * @license    LGPL
@@ -28,11 +28,11 @@
 
 
 /**
- * Class ModuleListing 
+ * Class ModuleListing
  *
  * Provide methods to render content element "listing".
- * @copyright  Leo Feyer 2005
- * @author     Leo Feyer 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer
  * @package    Controller
  */
 class ModuleListing extends Module
@@ -303,7 +303,7 @@ class ModuleListing extends Module
 		$this->Template->record = array();
 		$this->list_info = deserialize($this->list_info);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE id=?")
+		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (strlen($this->list_info_where) ? $this->list_info_where . " AND " : "") . "id=?")
 									->limit(1)
 									->execute($id);
 
@@ -361,19 +361,19 @@ class ModuleListing extends Module
 		// Date
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
 		}
 
 		// URLs

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class PageError404
  *
  * Provide methods to handle an error 404 page.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -75,7 +75,7 @@ class PageError404 extends Frontend
 		// Die if there is no page at all
 		if ($obj404->numRows < 1)
 		{
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			die('Page not found');
 		}
 
@@ -87,7 +87,7 @@ class PageError404 extends Frontend
 			$objPage = $this->getPageDetails($obj404->id);
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			$objHandler->generate($objPage);
 
 			exit;
@@ -105,7 +105,7 @@ class PageError404 extends Frontend
 
 		$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
 
-		header('HTTP/1.0 404 Not Found');
+		header('HTTP/1.1 404 Not Found');
 		die('Forward page not found');
 	}
 }

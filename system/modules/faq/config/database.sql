@@ -19,21 +19,21 @@ CREATE TABLE `tl_faq` (
   `pid` int(10) unsigned NOT NULL default '0',
   `sorting` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
-  `alias` varchar(128) NOT NULL default '',
   `question` varchar(255) NOT NULL default '',
+  `alias` varchar(128) NOT NULL default '',
+  `author` int(10) unsigned NOT NULL default '0',
   `answer` text NULL,
   `addImage` char(1) NOT NULL default '',
   `singleSRC` varchar(255) NOT NULL default '',
-  `size` varchar(255) NOT NULL default '',
   `alt` varchar(255) NOT NULL default '',
+  `size` varchar(64) NOT NULL default '',
+  `imagemargin` varchar(128) NOT NULL default '',
   `caption` varchar(255) NOT NULL default '',
   `floating` varchar(32) NOT NULL default '',
-  `imagemargin` varchar(255) NOT NULL default '',
   `fullsize` char(1) NOT NULL default '',
-  `author` varchar(64) NOT NULL default '',
-  `published` char(1) NOT NULL default '',
   `addEnclosure` char(1) NOT NULL default '',
   `enclosure` blob NULL,
+  `published` char(1) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -50,7 +50,7 @@ CREATE TABLE `tl_faq_category` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL default '',
   `headline` varchar(255) NOT NULL default '',
-  `jumpTo` int(10) NOT NULL default '0',
+  `jumpTo` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

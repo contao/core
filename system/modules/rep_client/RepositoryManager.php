@@ -561,9 +561,14 @@ class RepositoryManager extends RepositoryBackendModule
 						$dir = dirname($dir);
 					} // while
 					
+					// save new or changed file - by Request
 					if ($save) {
-						// save new or changed file - by Request
-						$req = new Request();
+						// HOOK: proxy module
+						if ($GLOBALS['TL_CONFIG']['useProxy']) {
+							$req = new ProxyRequest();
+						} else {
+							$req = new Request();
+						}
 						$req->send($file->url);
 						if ($req->hasError()) throw new Exception($req->error);
 						$f = new File($filerel);
@@ -643,7 +648,12 @@ class RepositoryManager extends RepositoryBackendModule
 			$this->Files->delete($zipname);
 			
 			// fetch package - using Request class
-			$req = new Request();
+			// HOOK: proxy module
+			if ($GLOBALS['TL_CONFIG']['useProxy']) {
+				$req = new ProxyRequest();
+			} else {
+				$req = new Request();
+			}
 			$req->send($pkg->url);
 			if ($req->hasError()) throw new Exception($req->error);
 			$dstfile = new File($zipname);

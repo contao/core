@@ -9,48 +9,60 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_tasks" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
 <?php if ($this->advanced): ?>
   <h3><?php echo $this->title->generateLabel(); ?></h3>
-  <?php echo $this->title->generateWithError(); if ($this->title->help): ?> 
-  <p class="tl_help"><?php echo $this->title->help; ?></p><?php endif; ?> 
-
+  <?php echo $this->title->generateWithError(); ?> 
+<?php if ($this->title->help): ?>
+  <p class="tl_help"><?php echo $this->title->help; ?></p>
+<?php endif; ?>
   <h3><?php echo $this->deadline->generateLabel(); ?></h3>
-  <?php echo $this->deadline->generateWithError(); if ($this->deadline->help): ?> 
-  <p class="tl_help"><?php echo $this->deadline->help; ?></p><?php endif; ?> 
-  <script type="text/javascript"><!--//--><![CDATA[//><!--
+  <?php echo $this->deadline->generateWithError(); ?> 
+<?php if ($this->deadline->help): ?>
+  <p class="tl_help"><?php echo $this->deadline->help; ?></p>
+<?php endif; ?>
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  //--><!]]></script>
+  //--><!]]>
+  </script>
 <?php else: ?>
   <h3><?php echo $this->title; ?></h3>
   <p class="tl_deadline"><?php echo $this->deadlineLabel; ?>: <?php echo $this->deadline; ?></p>
 <?php endif; ?>
 </div>
 
-<div class="tl_box">
+<div class="tl_box block">
   <h3><?php echo $this->assignedTo->generateLabel(); ?></h3>
-  <?php echo $this->assignedTo->generateWithError(); if ($this->assignedTo->help): ?> 
-  <p class="tl_help"><?php echo $this->assignedTo->help; ?></p><?php endif; ?> 
-
-  <?php echo $this->notify->generateWithError(); if ($this->notify->help): ?> 
-  <p class="tl_help"><?php echo $this->notify->help; ?></p><?php endif; ?> 
+  <?php echo $this->assignedTo->generateWithError(); ?> 
+<?php if ($this->assignedTo->help): ?>
+  <p class="tl_help"><?php echo $this->assignedTo->help; ?></p>
+<?php endif; ?>
+  <?php echo $this->notify->generateWithError(); ?> 
+<?php if ($this->notify->help): ?>
+  <p class="tl_help"><?php echo $this->notify->help; ?></p>
+<?php endif; ?>
 </div>
 
-<div class="tl_box">
+<div class="tl_box block">
   <h3><?php echo $this->status->generateLabel(); ?></h3>
-  <?php echo $this->status->generateWithError(); if ($this->status->help): ?> 
-  <p class="tl_help"><?php echo $this->status->help; ?></p><?php endif; ?> 
-
+  <?php echo $this->status->generateWithError(); ?> 
+<?php if ($this->status->help): ?>
+  <p class="tl_help"><?php echo $this->status->help; ?></p>
+<?php endif; ?>
   <h3><?php echo $this->progress->generateLabel(); ?></h3>
-  <?php echo $this->progress->generateWithError(); if ($this->progress->help): ?> 
-  <p class="tl_help"><?php echo $this->progress->help; ?></p><?php endif; ?> 
-
+  <?php echo $this->progress->generateWithError(); ?> 
+<?php if ($this->progress->help): ?>
+  <p class="tl_help"><?php echo $this->progress->help; ?></p>
+<?php endif; ?>
   <h3><?php echo $this->comment->generateLabel(); ?></h3>
-  <?php echo $this->comment->generateWithError(); if ($this->comment->help): ?> 
-  <p class="tl_help"><?php echo $this->comment->help; ?></p><?php endif; ?> 
+  <?php echo $this->comment->generateWithError(); ?> 
+<?php if ($this->comment->help): ?>
+  <p class="tl_help"><?php echo $this->comment->help; ?></p>
+<?php endif; ?>
 </div>
 
-<div class="tl_box tl_history">
+<div class="tl_box tl_history block">
   <h3><?php echo $this->historyLabel; ?></h3>
   <table cellpadding="0" cellspacing="0" summary="">
 <?php foreach ($this->history as $row): ?>

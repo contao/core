@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Widget
  *
  * Provide methods to handle form widgets.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -73,6 +73,12 @@ abstract class Widget extends Controller
 	 * @var string
 	 */
 	protected $strTemplate;
+
+	/**
+	 * Wizard
+	 * @var string
+	 */
+	protected $strWizard;
 
 	/**
 	 * Errors
@@ -142,6 +148,10 @@ abstract class Widget extends Controller
 
 			case 'template':
 				$this->strTemplate = $varValue;
+				break;
+
+			case 'wizard':
+				$this->strWizard = $varValue;
 				break;
 
 			case 'alt':
@@ -219,8 +229,12 @@ abstract class Widget extends Controller
 				return $this->strTemplate;
 				break;
 
+			case 'wizard':
+				return $this->strWizard;
+				break;
+
 			default:
-				return array_key_exists($strKey, $this->arrAttributes) ? $this->arrAttributes[$strKey] : $this->arrConfiguration[$strKey];
+				return isset($this->arrAttributes[$strKey]) ? $this->arrAttributes[$strKey] : $this->arrConfiguration[$strKey];
 				break;
 		}
 	}
@@ -285,7 +299,7 @@ abstract class Widget extends Controller
 	 */
 	public function getErrorAsHTML($intIndex=0)
 	{
-		return $this->hasErrors() ? sprintf('<div class="%s">%s</div>', ((TL_MODE == 'BE') ? 'tl_error' : 'error'), $this->arrErrors[$intIndex]) : '';
+		return $this->hasErrors() ? sprintf('<p class="%s">%s</p>', ((TL_MODE == 'BE') ? 'tl_error' : 'error'), $this->arrErrors[$intIndex]) : '';
 	}
 
 
@@ -403,18 +417,14 @@ abstract class Widget extends Controller
 	 */
 	public function validate()
 	{
-		$varInput = $this->validator(deserialize($this->getPost($this->strName)));
+		$varValue = $this->validator(deserialize($this->getPost($this->strName)));
 
-		if (!$this->hasErrors())
-		{
-			$this->varValue = $varInput;
-		}
-		/* to be included in version 2.7
-		else
+		if ($this->hasErrors())
 		{
 			$this->class = 'error';
 		}
-		*/
+
+		$this->varValue = $varValue;
 	}
 
 
@@ -527,7 +537,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date format
 				case 'date':
 					$objDate = new Date();
-					if (!preg_match('/'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'/i', $varInput))
+					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
@@ -536,7 +546,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid time format
 				case 'time':
 					$objDate = new Date();
-					if (!preg_match('/'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'/i', $varInput))
+					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
@@ -545,7 +555,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date and time format
 				case 'datim':
 					$objDate = new Date();
-					if (!preg_match('/'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'/i', $varInput))
+					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}
@@ -585,7 +595,7 @@ abstract class Widget extends Controller
 				
 				// HOOK: pass unknown tags to callback functions
 				default:
-					if (array_key_exists('addCustomRegexp', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
+					if (isset($GLOBALS['TL_HOOKS']['addCustomRegexp']) && is_array($GLOBALS['TL_HOOKS']['addCustomRegexp']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['addCustomRegexp'] as $callback)
 						{

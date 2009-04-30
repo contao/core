@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    RssReader
  * @license    LGPL
@@ -36,18 +36,37 @@ $this->loadLanguageFile('tl_page');
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['rss_reader'] = 'name,type,headline;rss_feed,rss_cache,rss_template;rss_numberOfItems,perPage,skipFirst,searchable;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['rss_reader'] = '{title_legend},name,headline,type;{import_legend},rss_cache,rss_feed;{config_legend},skipFirst,rss_numberOfItems,perPage;{template_legend:hide},rss_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
  * Add fields to tl_module
  */
+$GLOBALS['TL_DCA']['tl_module']['fields']['rss_cache'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_cache'],
+	'default'                 => 3600,
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array(0, 15, 30, 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 259200, 604800),
+	'reference'               => &$GLOBALS['TL_LANG']['CACHE']
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['rss_feed'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_feed'],
 	'exclude'                 => true,
+	'inputType'               => 'textarea',
+	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px;')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['rss_numberOfItems'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'],
+	'default'                 => 3,
+	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255)
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['rss_template'] = array
@@ -57,25 +76,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => $this->getTemplateGroup('rss_')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['rss_numberOfItems'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'],
-	'default'                 => 3,
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['rss_cache'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_cache'],
-	'default'                 => 3600,
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array(0, 15, 30, 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 259200, 604800),
-	'reference'               => &$GLOBALS['TL_LANG']['CACHE']
 );
 
 ?>

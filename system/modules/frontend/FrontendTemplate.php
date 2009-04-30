@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class FrontendTemplate
  *
  * Provide methods to handle front end templates.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -47,7 +47,7 @@ class FrontendTemplate extends Template
 		$strBuffer = parent::parse();
 
 		// HOOK: add custom parse filter
-		if (array_key_exists('parseFrontendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['parseFrontendTemplate']))
+		if (isset($GLOBALS['TL_HOOKS']['parseFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseFrontendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseFrontendTemplate'] as $callback)
 			{
@@ -117,7 +117,7 @@ class FrontendTemplate extends Template
 		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
 
 		// HOOK: add custom output filter
-		if (array_key_exists('outputFrontendTemplate', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
+		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['outputFrontendTemplate'] as $callback)
 			{
@@ -126,45 +126,51 @@ class FrontendTemplate extends Template
 			}
 		}
 
+		$blnCached = false;
+
 		// Cache page if it is not protected
 		if (!BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
-			// Create a unique key
-			$strUniqueKey = $this->Environment->base . $strUrl;
-
-			// Overwrite the key on empty requests
-			if (!strlen($this->Environment->request) || $this->Environment->request == 'index.php')
+			// Do not cache empty requests
+			if (strlen($this->Environment->request) && $this->Environment->request != 'index.php')
 			{
-				$strUniqueKey = $this->Environment->base;
-			}
+				$blnCached = true;
 
-			// Replace insert tags for caching
-			$strBuffer = $this->replaceInsertTags($strBuffer, true);
-			$intCache = intval($objPage->cache) + time();
+				// Create a unique key
+				$strUniqueKey = $this->Environment->base . $strUrl;
 
-			// Create cache file
-			$objFile = new File('system/tmp/' . md5($strUniqueKey));
-			$objFile->write('<?php $expire = ' . $intCache . '; ?>' . $strBuffer);
-			$objFile->close();
+				// Replace insert tags for caching
+				$strBuffer = $this->replaceInsertTags($strBuffer, true);
+				$intCache = intval($objPage->cache) + time();
 
-			// Send cache header
-			if (!headers_sent())
-			{
-				header('Cache-Control: public, max-age=' . $intCache);
-				header('Expires: '.gmdate('D, d M Y H:i:s', $intCache).' GMT');
-				header('Last-Modified: '.gmdate('D, d M Y H:i:s', time()).' GMT');
-				header('Pragma: public');
+				// Create cache file
+				$objFile = new File('system/tmp/' . md5($strUniqueKey));
+				$objFile->write('<?php $expire = ' . $intCache . '; ?>' . $strBuffer);
+				$objFile->close();
 			}
 		}
 
-		// Send no-cache header
-		elseif (!headers_sent())
+		// Send headers
+		if (!headers_sent())
 		{
-			header('Cache-Control: no-cache');
-			header('Cache-Control: pre-check=0, post-check=0', false);
-			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
-			header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
-			header('Pragma: no-cache');
+			// Cache headers
+			if ($blnCached)
+			{
+				header('Cache-Control: public, max-age=' . ($intCache -  time()));
+				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+				header('Pragma: public');
+			}
+
+			// No chache headers
+			else
+			{
+				header('Cache-Control: no-cache');
+				header('Cache-Control: pre-check=0, post-check=0', false);
+				header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+				header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
+				header('Pragma: no-cache');
+			}
 		}
 
 		// Replace insert tags

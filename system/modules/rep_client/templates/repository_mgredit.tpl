@@ -27,7 +27,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
 
 <!-- license key -->
 <h3><label for="repository_lickey"><?php echo $text['lickey'][0]; ?></label></h3>

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'mode'                    => 1,
 			'fields'                  => array('name'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,filter,limit',
+			'panelLayout'             => 'filter;search,limit',
 		),
 		'label' => array
 		(
@@ -111,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name,media'
+		'default'                     => '{title_legend},name,cc,media'
 	),
 
 	// Fields
@@ -123,7 +123,16 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>64, 'spaceToUnderscore'=>true)
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
+		),
+		'cc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['cc'],
+			'inputType'               => 'select',
+			'exclude'                 => true,
+			'filter'                  => true,
+			'options'                 => array('if IE', 'if IE 6', 'if lt IE 6', 'if lte IE 6', 'if gt IE 6', 'if gte IE 6', 'if IE 7', 'if lt IE 7', 'if lte IE 7', 'if gt IE 7', 'if gte IE 7', 'if IE 8', 'if lt IE 8', 'if lte IE 8', 'if gt IE 8', 'if gte IE 8'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'media' => array
 		(
@@ -132,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'options'                 => array('all', 'aural', 'braille', 'embossed', 'handheld', 'print', 'projection', 'screen', 'tty', 'tv'),
-			'eval'                    => array('multiple'=>true, 'mandatory'=>true)
+			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
 		),
 		'source' => array
 		(
@@ -147,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
  * Class tl_style_sheet
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

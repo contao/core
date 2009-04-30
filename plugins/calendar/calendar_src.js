@@ -1,5 +1,6 @@
 // Calendar: a Javascript class for Mootools that adds accessible and unobtrusive date pickers to your form elements <http://electricprism.com/aeron/calendar>
 // Calendar RC4, Copyright (c) 2007 Aeron Glemann <http://electricprism.com/aeron>, MIT Style License.
+// Mootools 1.2 compatibility by Davorin Šego
 
 var Calendar = new Class({	
 
@@ -57,7 +58,7 @@ var Calendar = new Class({
 		}
 
 		// initialize fade method
-		this.fx = this.calendar.effect('opacity', { 
+		this.fx = new Fx.Tween(this.calendar, {
 			onStart: function() { 
 				if (this.calendar.getStyle('opacity') == 0) { // show
 					if (window.ie6) { this.iframe.setStyle('display', 'block'); }
@@ -208,7 +209,7 @@ var Calendar = new Class({
 
 		// 3. then we can further filter the limits by using the pre-existing values in the selects
 		cal.els.each(function(el) {	
-			if (el.getTag() == 'select') {		
+			if (el.get('tag') == 'select') {		
 				if (el.format.test('(y|Y)')) { // search for a year select
 					var years = [];
 
@@ -570,7 +571,7 @@ var Calendar = new Class({
 		
 		el.format = f;
 		
-		if (el.getTag() == 'select') { // select elements allow the user to manually set the date via select option
+		if (el.get('tag') == 'select') { // select elements allow the user to manually set the date via select option
 			el.addEvent('change', function(cal) { this.changed(cal); }.pass(cal, this));
 		}
 		// TYPOlight patch: do not force the user to use the calendar
@@ -762,7 +763,7 @@ var Calendar = new Class({
 	rebuild: function(cal) {
 		cal.els.each(function(el) {			
 			/*
-			if (el.getTag() == 'select' && el.format.test('^(F|m|M|n)$')) { // special case for months-only select
+			if (el.get('tag') == 'select' && el.format.test('^(F|m|M|n)$')) { // special case for months-only select
 				if (!cal.options) { cal.options = el.clone(); } // clone a copy of months select
 			
 				var val = (cal.val) ? cal.val.getMonth() : el.value.toInt();
@@ -779,7 +780,7 @@ var Calendar = new Class({
 			}
 			*/
 
-			if (el.getTag() == 'select' && el.format.test('^(d|j)$')) { // special case for days-only select
+			if (el.get('tag') == 'select' && el.format.test('^(d|j)$')) { // special case for days-only select
 				var d = this.value(cal);
 
 				if (!d) { d = el.value.toInt(); } // if the calendar doesn't have a set value, try to use value from select
@@ -813,12 +814,12 @@ var Calendar = new Class({
 
 		cal.button.blur(); // TYPOlight patch: blur the calendar button
 		cal.val = this.read(cal); // TYPOlight patch: update calendar val from inputs
-
+			
 		if (cal.visible) { // simply hide curr cal						
 			cal.visible = false;
 			cal.button.removeClass(this.classes.active); // active
 			
-			this.fx.start(1, 0);
+			this.fx.start('opacity', 1, 0);
 		}
 		else { // otherwise show (may have to hide others)
 			// hide cal on out-of-bounds click
@@ -858,7 +859,7 @@ var Calendar = new Class({
 				}
 			}, this);
 			
-			var size = window.getSize().scrollSize;
+			var size = window.getScrollSize();
 			
 			var coord = cal.button.getCoordinates();
 
@@ -879,7 +880,7 @@ var Calendar = new Class({
 
 			this.display(cal);
 			
-			this.fx.start(0, 1);
+			this.fx.start('opacity', 0, 1);
 		}
 	},
 
@@ -989,7 +990,7 @@ var Calendar = new Class({
 		var years, months, days;
 
 		cal.els.each(function(el) {	
-			if (el.getTag() == 'select') {		
+			if (el.get('tag') == 'select') {		
 				if (el.format.test('(y|Y)')) { // search for a year select
 					years = [];
 

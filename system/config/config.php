@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Config
  * @license    LGPL
@@ -46,21 +46,21 @@
  * are UTF-8 encoded as well. If you change the character set, make sure to
  * also change the database character set and the language file encoding.
  *
- * The administrator e-mail address is used for sending system alerts and other 
+ * The administrator e-mail address is used for sending system alerts and other
  * messages concerning the content management system.
  *
  * If 'displayErrors' is set to true, error messages will be printed to the
  * screen. It is recommended to disable it for live pages.
  * 
- * With option rewriteURL you can make TYPOlight generate static URLs without 
- * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that 
+ * With option rewriteURL you can make TYPOlight generate static URLs without
+ * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that
  * this feature requires Apache's mod_rewrite!
  * 
- * If you enable GZip, front end and back end pages will be compressed before 
+ * If you enable GZip, front end and back end pages will be compressed before
  * they are sent to your browser.
  *
- * The relative path to the TYPOlight directory is usually set automatically. 
- * However, if you are experiencing any problems, you can change it in the 
+ * The relative path to the TYPOlight directory is usually set automatically.
+ * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
  */
 $GLOBALS['TL_CONFIG']['websiteTitle']   = 'TYPOlight webCMS';
@@ -110,6 +110,7 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  */
 $GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><code><col><colgroup><dd><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
+$GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
 
 
 /**
@@ -207,7 +208,7 @@ $GLOBALS['TL_CONFIG']['uploadFields'] = 8;
  * SMTP SETTINGS
  * -------------------------------------------------------------------------
  *
- * Here you can enable SMTP for sending mails. By default, mails are sent using 
+ * Here you can enable SMTP for sending mails. By default, mails are sent using
  * PHP function mail(). Please enter your SMTP parameters below.
  * 
  *   smtpHost = host name (defaults to localhost)
@@ -255,7 +256,8 @@ $GLOBALS['TL_CONFIG']['showHelp']   = true;
 $GLOBALS['TL_CONFIG']['thumbnails'] = true;
 $GLOBALS['TL_CONFIG']['debugMode']  = false;
 $GLOBALS['TL_CONFIG']['useRTE']     = true;
-$GLOBALS['TL_CONFIG']['pNewLine']   = false;
+$GLOBALS['TL_CONFIG']['pNewLine']   = true;
+$GLOBALS['TL_CONFIG']['oldBeTheme'] = false;
 
 
 /**
@@ -263,49 +265,51 @@ $GLOBALS['TL_CONFIG']['pNewLine']   = false;
  * SYSTEM SETTINGS
  * -------------------------------------------------------------------------
  *
- * The number of resultsPerPage is used to limit query results in the back 
+ * The number of resultsPerPage is used to limit query results in the back
  * end. It does not apply to the search engine.
  *
- * If you need custom page sections (in addition to "header", "left", "main", 
+ * If you need custom page sections (in addition to "header", "left", "main",
  * "right" and "footer", you can define a comma separated list here.
  * 
- * If you enter a maximum image width, images and media files cannot be wider 
+ * If you enter a maximum image width, images and media files cannot be wider
  * than this value and will not break your page layout.
  * 
  * The default user owns all pages and items that are not assigned to a certain
  * user. Please enter the ID of the default user (database record).
  * 
- * The default group owns all pages and items that are not assigned to a group. 
+ * The default group owns all pages and items that are not assigned to a group.
  * Please enter the ID of the default group (database record).
  * 
- * Default page permissions: allow everything for the owner (u1 - u6) of a page. 
- * See back end module "Navigation" for more information. 
+ * Default page permissions: allow everything for the owner (u1 - u6) of a page.
+ * See back end module "Navigation" for more information.
  * 
- * Please enter a comma separated list of allowed image types, editable files 
+ * Please enter a comma separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
  * 
  * The default install tool password is "typolight". Please make sure to change
  * this password during the installation process.
  */
-$GLOBALS['TL_CONFIG']['resultsPerPage']    = 30;
-$GLOBALS['TL_CONFIG']['customSections']    = '';
-$GLOBALS['TL_CONFIG']['maxImageWidth']     = '';
-$GLOBALS['TL_CONFIG']['defaultUser']       = '';
-$GLOBALS['TL_CONFIG']['defaultGroup']      = '';
-$GLOBALS['TL_CONFIG']['defaultChmod']      = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6');
-$GLOBALS['TL_CONFIG']['validImageTypes']   = 'jpg,jpeg,gif,png,tif,tiff,bmp';
-$GLOBALS['TL_CONFIG']['editableFiles']     = 'htm,html,css,js,txt,log,xml';
-$GLOBALS['TL_CONFIG']['allowedDownload']   = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
-$GLOBALS['TL_CONFIG']['installPassword']   = '77e9b7542ac04858d99a0eaaf77adf54b5e18910';
-$GLOBALS['TL_CONFIG']['repository_wsdl']   = 'http://www.typolight.org/services/repository.wsdl';
-$GLOBALS['TL_CONFIG']['backendTheme']      = 'default';
-$GLOBALS['TL_CONFIG']['inactiveModules']   = '';
-$GLOBALS['TL_CONFIG']['liveUpdateId']      = '';
-$GLOBALS['TL_CONFIG']['disableInsertTags'] = false;
-$GLOBALS['TL_CONFIG']['rootFiles']         = array();
-$GLOBALS['TL_CONFIG']['useDompdf']         = false;
-$GLOBALS['TL_CONFIG']['doNotCollapse']     = false;
-$GLOBALS['TL_CONFIG']['urlSuffix']         = '.html';
+$GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
+$GLOBALS['TL_CONFIG']['customSections']       = '';
+$GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
+$GLOBALS['TL_CONFIG']['defaultUser']          = '';
+$GLOBALS['TL_CONFIG']['defaultGroup']         = '';
+$GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6');
+$GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
+$GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
+$GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
+$GLOBALS['TL_CONFIG']['installPassword']      = '77e9b7542ac04858d99a0eaaf77adf54b5e18910';
+$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://liveupdate.inetrobots.com/';
+$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.typolight.org/services/repository.wsdl';
+$GLOBALS['TL_CONFIG']['repository_languages'] = 'en';
+$GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
+$GLOBALS['TL_CONFIG']['backendTheme']         = 'default';
+$GLOBALS['TL_CONFIG']['inactiveModules']      = '';
+$GLOBALS['TL_CONFIG']['liveUpdateId']         = '';
+$GLOBALS['TL_CONFIG']['disableInsertTags']    = false;
+$GLOBALS['TL_CONFIG']['rootFiles']            = array();
+$GLOBALS['TL_CONFIG']['doNotCollapse']        = false;
+$GLOBALS['TL_CONFIG']['urlSuffix']            = '.html';
 
 
 /**

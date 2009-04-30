@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Faq
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleFaq
  *
  * Provide methods regarding FAQs.
- * @copyright  Leo Feyer 2008
+ * @copyright  Leo Feyer 2008-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -68,7 +68,7 @@ class ModuleFaq extends Frontend
 			}
 
 			// Get the URL of the jumpTo page
-			if (!array_key_exists($objFaq->jumpTo, $arrProcessed))
+			if (!isset($arrProcessed[$objFaq->jumpTo]))
 			{
 				$arrProcessed[$objFaq->jumpTo] = false;
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -30,17 +30,23 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']   = array('E-Mail-Adresse', 'Bitte geben Sie die E-Mail-Adresse des Empfängers ein.');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Aktiviert', 'E-Mail-Adressen werden normalerweise durch Anklicken eines Links in der Bestätigungsmail aktiviert (double-opt-in).');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source']  = array('Quelldateien', 'Bitte wählen Sie die CSV-Dateien, die Sie importieren möchten.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email']   = array('E-Mail-Adresse', 'Bitte geben Sie die E-Mail-Adresse des Abonnenten ein.');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['active']  = array('Abonnenten aktivieren', 'Abonnenten werden normalerweise automatisch aktiviert (double-opt-in).');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source']  = array('Quelldateien', 'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip']      = array('IP-Adresse', 'Die IP-Adresse des Abonnenten.');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['addedOn'] = array('Registrierungsdatum', 'Das Datum des Abonnements.');
 
 
 /**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email_legend'] = 'E-Mail-Adresse';
+
+
+/**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm']    = '%s Empfänger wurden importiert.';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm']    = '%s Abonnenten wurden importiert.';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'] = 'registriert am %s';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'manuell hinzugefügt';
 
@@ -48,11 +54,11 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'manuell hinzuge
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']    = array('Empfänger hinzufügen', 'Einen neuen Empfänger hinzufügen');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']   = array('Empfänger bearbeiten', 'Empfänger ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']   = array('Empfänger duplizieren', 'Empfänger ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete'] = array('Empfänger löschen', 'Empfänger ID %s löschen');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']   = array('Empfängerdetails', 'Details des Empfängers ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'] = array('CSV-Import', 'Empfänger aus einer CSV-Datei importieren');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']    = array('Abonnenten hinzufügen', 'Einen neuen Abonnenten hinzufügen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']   = array('Abonnentendetails', 'Details des Abonnenten ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']   = array('Abonnenten bearbeiten', 'Abonnenten ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']   = array('Abonnenten duplizieren', 'Abonnenten ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete'] = array('Abonnenten löschen', 'Abonnenten ID %s löschen');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'] = array('CSV-Import', 'Abonnenten aus einer CSV-Datei importieren');
 
 ?>

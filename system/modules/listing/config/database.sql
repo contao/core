@@ -18,6 +18,7 @@ CREATE TABLE `tl_module` (
   `list_sort` varchar(255) NOT NULL default '',
   `list_search` varchar(255) NOT NULL default '',
   `list_info` varchar(255) NOT NULL default '',
-  `list_layout` varchar(64) NOT NULL default '',
-  `list_info_layout` varchar(64) NOT NULL default ''
+  `list_info_where` varchar(255) NOT NULL default '',
+  `list_layout` varchar(32) NOT NULL default '',
+  `list_info_layout` varchar(32) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

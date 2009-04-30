@@ -15,16 +15,16 @@ CREATE TABLE `tl_newsletter` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
+  `subject` varchar(255) NOT NULL default '',
   `alias` varchar(128) NOT NULL default '',
-  `subject` varchar(128) NOT NULL default '',
-  `sender` varchar(128) NOT NULL default '',
-  `senderName` varchar(128) NOT NULL default '',
   `content` text NULL,
   `text` text NULL,
   `addFile` char(1) NOT NULL default '',
   `files` blob NULL,
   `template` varchar(32) NOT NULL default '',
   `sendText` char(1) NOT NULL default '',
+  `sender` varchar(128) NOT NULL default '',
+  `senderName` varchar(128) NOT NULL default '',
   `sent` char(1) NOT NULL default '',
   `date` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`id`),
@@ -42,7 +42,7 @@ CREATE TABLE `tl_newsletter_channel` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `tstamp` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL default '',
-  `jumpTo` int(10) unsigned NOT NULL default '0'
+  `jumpTo` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -84,10 +84,11 @@ CREATE TABLE `tl_member` (
 -- 
 
 CREATE TABLE `tl_module` (
-  `nl_template` varchar(32) NOT NULL default '',
+  `nl_channels` blob NULL,
+  `nl_hideChannels` char(1) NOT NULL default '',
   `nl_subscribe` text NULL,
   `nl_unsubscribe` text NULL,
-  `nl_channels` blob NULL,
+  `nl_template` varchar(32) NOT NULL default '',
   `nl_includeCss` char(1) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

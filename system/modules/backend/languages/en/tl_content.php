@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,63 +30,84 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_content']['type']         = array('Element type', 'Please choose the content element type.');
-$GLOBALS['TL_LANG']['tl_content']['headline']     = array('Headline', 'If you enter a headline, it will be shown on top of the content element.');
-$GLOBALS['TL_LANG']['tl_content']['text']         = array('Text', 'Please enter the text (you can use HTML tags).');
-$GLOBALS['TL_LANG']['tl_content']['html']         = array('HTML', 'Please enter the HTML code.');
-$GLOBALS['TL_LANG']['tl_content']['code']         = array('Code', 'Please enter the code.');
+$GLOBALS['TL_LANG']['tl_content']['invisible']    = array('Invisible', 'Hide the element on the website.');
+$GLOBALS['TL_LANG']['tl_content']['type']         = array('Element type', 'Please choose the type of content element.');
+$GLOBALS['TL_LANG']['tl_content']['headline']     = array('Headline', 'Here you can add a headline to the content element.');
+$GLOBALS['TL_LANG']['tl_content']['text']         = array('Text', 'You can use HTML tags to format the text.');
+$GLOBALS['TL_LANG']['tl_content']['addImage']     = array('Add an image', 'Add an image to the content element.');
+$GLOBALS['TL_LANG']['tl_content']['singleSRC']    = array('Source file', 'Please select a file or folder from the files directory.');
+$GLOBALS['TL_LANG']['tl_content']['alt']          = array('Alternate text', 'An accessible website should always provide an alternate text for images and movies with a short description of their content.');
+$GLOBALS['TL_LANG']['tl_content']['size']         = array('Image width and height', 'Enter either width or height to resize the image, or both values to crop it.');
+$GLOBALS['TL_LANG']['tl_content']['imagemargin']  = array('Image margin', 'Here you can enter the top, right, bottom and left margin.');
+$GLOBALS['TL_LANG']['tl_content']['imageUrl']     = array('Link target', 'A custom link target will override the lightbox link, so the image cannot be viewed fullsize anymore.');
+$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Image caption', 'Here you can enter a short text that will be displayed below the image.');
+$GLOBALS['TL_LANG']['tl_content']['floating']     = array('Image alignment', 'Please specify how to align the image.');
+$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Full-size view', 'Add a lightbox link to view the full-size image.');
+$GLOBALS['TL_LANG']['tl_content']['html']         = array('HTML code', 'You can modify the list of allowed HTML tags in the back end settings.');
+$GLOBALS['TL_LANG']['tl_content']['listtype']     = array('List type', 'Please choose the type of list.');
+$GLOBALS['TL_LANG']['tl_content']['listitems']    = array('List items', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
+$GLOBALS['TL_LANG']['tl_content']['tableitems']   = array('Table items', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
+$GLOBALS['TL_LANG']['tl_content']['summary']      = array('Table summary', 'Please enter a short summary of the table and describe its purpose or structure.');
+$GLOBALS['TL_LANG']['tl_content']['thead']        = array('Add table header', 'Make the first row of the table the table header.');
+$GLOBALS['TL_LANG']['tl_content']['tfoot']        = array('Add table footer', 'Make the last row of the table the table footer.');
+$GLOBALS['TL_LANG']['tl_content']['sortable']     = array('Sortable table', 'Make the table sortable (requires JavaScript and a table header).');
+$GLOBALS['TL_LANG']['tl_content']['sortIndex']    = array('Sort index', 'The number of the default sort column.');
+$GLOBALS['TL_LANG']['tl_content']['sortOrder']    = array('Sort order', 'Please choose the sort order.');
+$GLOBALS['TL_LANG']['tl_content']['mooType']      = array('Operation mode', 'Please select the operation mode of the accordion element.');
+$GLOBALS['TL_LANG']['tl_content']['single']       = array('Single element', 'Behaves like a single text element that is inside an accordion pane.');
+$GLOBALS['TL_LANG']['tl_content']['start']        = array('Wrapper start', 'Marks the beginning of an accordion pane that spans several content elements.');
+$GLOBALS['TL_LANG']['tl_content']['stop']         = array('Wrapper stop', 'Marks the end of an accordion pane that spans several content elements.');
+$GLOBALS['TL_LANG']['tl_content']['mooHeadline']  = array('Section headline', 'Please enter the headline of the content pane. HTML tags are allowed.');
+$GLOBALS['TL_LANG']['tl_content']['mooStyle']     = array('CSS format', 'Here you can format the section headline using CSS code.');
+$GLOBALS['TL_LANG']['tl_content']['mooClasses']   = array('Element classes', 'Leave blank to use the default classes or enter a custom toggler and accordion class.');
+$GLOBALS['TL_LANG']['tl_content']['shClass']      = array('Configuration', 'Here you can configure the syntax highlighter (e.g. <em>gutter: false;</em>).');
 $GLOBALS['TL_LANG']['tl_content']['highlight']    = array('Syntax highlighting', 'Please choose a scripting language.');
-$GLOBALS['TL_LANG']['tl_content']['addImage']     = array('Add an image', 'If you choose this option, an image will be added to the element.');
-$GLOBALS['TL_LANG']['tl_content']['floating']     = array('Image alignment', 'Please choose the image alignment. An image can be displayed above or on the top left or top right side of the text.');
-$GLOBALS['TL_LANG']['tl_content']['imagemargin']  = array('Image margin', 'Please enter the top, right, bottom and left margin and the unit. Image margin is the space inbetween an image and its neighbour elements.');
-$GLOBALS['TL_LANG']['tl_content']['singleSRC']    = array('Source file', 'Please select a file or a folder from the files directory.');
-$GLOBALS['TL_LANG']['tl_content']['alt']          = array('Alternative text', 'In order to make images or movies accessible, you should always provide an alternative text including a short description of their content.');
-$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Image caption', 'If you enter a short text here, it will be displayed below the image. Leave this field blank to disable the feature.');
-$GLOBALS['TL_LANG']['tl_content']['size']         = array('Image width and height', 'Please enter either the image width, the image height or both measures to resize the image. If you leave both fields blank, the original image size will be displayed.');
-$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Fullsize view', 'If you choose this option, the image can be viewed fullsize by clicking it.');
-$GLOBALS['TL_LANG']['tl_content']['linkTitle']    = array('Link title', 'The title of a link will be shown to the visitors of your website instead of the URL or the source file. If you generate an image link, the image will be shown instead of the link title.');
-$GLOBALS['TL_LANG']['tl_content']['useImage']     = array('Image link', 'Use an image instead of the link title.');
-$GLOBALS['TL_LANG']['tl_content']['embed']        = array('Embed the link', 'If you enter a phrase including the wildcard <em>%s</em>, the hyperlink will be embedded into this phrase. E.g. <em>visit our %s!</em> will be transformed into <em>visit our <u>company\'s website</u>!</em> (provided that <em>company\'s website</em> is the title of the link).');
-$GLOBALS['TL_LANG']['tl_content']['listitems']    = array('List items', 'Please enter the list items. Use the buttons to add, move or delete a list item. If you are working without JavaScript assistance, you should save your changes before you modify the order!');
-$GLOBALS['TL_LANG']['tl_content']['listtype']     = array('List type', 'Please choose a list type.');
-$GLOBALS['TL_LANG']['tl_content']['tableitems']   = array('Table items', 'Please enter the table items. Use the buttons to add, move or delete a column or row. If you are working without JavaScript assistance, you should save your changes before you modify the order!');
-$GLOBALS['TL_LANG']['tl_content']['summary']      = array('Table summary', 'In order to make tables accessible, you should always provide a short summary of its content.');
-$GLOBALS['TL_LANG']['tl_content']['thead']        = array('Table header', 'If you choose this option, the first row of the table will be used as table header.');
-$GLOBALS['TL_LANG']['tl_content']['tfoot']        = array('Table footer', 'If you choose this option, the last row of the table will be used as table footer.');
-$GLOBALS['TL_LANG']['tl_content']['sortable']     = array('Sortable', 'This option allows to sort the table by clicking its column headers (requires option <em>table header</em>).');
-$GLOBALS['TL_LANG']['tl_content']['sortIndex']    = array('Sort index', 'Please enter the number of the default column you want to sort by (first column = 0!).');
-$GLOBALS['TL_LANG']['tl_content']['sortOrder']    = array('Sort order', 'Please choose the default sort order.');
-$GLOBALS['TL_LANG']['tl_content']['multiSRC']     = array('Source files', 'Please select one or more files or folders (files in a folder will be included automatically).');
-$GLOBALS['TL_LANG']['tl_content']['useHomeDir']   = array('Use home directory', 'If a front end user has logged in, use his home directory as file source.');
-$GLOBALS['TL_LANG']['tl_content']['sortBy']       = array('Order by', 'Please select a sort order.');
-$GLOBALS['TL_LANG']['tl_content']['perRow']       = array('Thumbnails per row', 'Please enter the number of thumbnails per row.');
-$GLOBALS['TL_LANG']['tl_content']['perPage']      = array('Items per page', 'Please enter the number of items per page (0 = disable pagination).');
-$GLOBALS['TL_LANG']['tl_content']['imageUrl']     = array('Use image as link', 'Please enter a complete target URL including the network protocol (e.g. <em>http://www.domain.com</em>) to use the image as link. Note that in this case it will not be possible to view the image fullsize anymore.');
-$GLOBALS['TL_LANG']['tl_content']['mooType']      = array('Operation mode', 'Please select the operation mode of the element.');
-$GLOBALS['TL_LANG']['tl_content']['mooHeadline']  = array('Headline', 'Please enter the headline of the accordion content pane (HTML allowed).');
-$GLOBALS['TL_LANG']['tl_content']['mooStyle']     = array('CSS format', 'Here you can enter an optional CSS string to format the headline.');
-$GLOBALS['TL_LANG']['tl_content']['mooClasses']   = array('Class names', 'If you want to run more than one accordion instance per page, you will have to change the class names of your toggler and accordion elements. By default, they use class <em>toggler</em> and <em>accordion</em> (leave blank to use default classes).');
-$GLOBALS['TL_LANG']['tl_content']['cteAlias']     = array('Element ID', 'Please choose the ID of the content element you want to insert.');
-$GLOBALS['TL_LANG']['tl_content']['articleAlias'] = array('Article ID', 'Please choose the ID of the article you want to insert.');
-$GLOBALS['TL_LANG']['tl_content']['article']      = array('Article ID', 'Please choose the ID of the article you want to display.');
+$GLOBALS['TL_LANG']['tl_content']['code']         = array('Code', 'Note that the code will not be executed.');
+$GLOBALS['TL_LANG']['tl_content']['linkTitle']    = array('Link title', 'The link title will be displayed instead of the target URL.');
+$GLOBALS['TL_LANG']['tl_content']['embed']        = array('Embed the link', 'Use the wildcard "%s" to embed the link in a phrase (e.g. <em>For more information please visit %s</em>).');
+$GLOBALS['TL_LANG']['tl_content']['useImage']     = array('Create an image link', 'Use an image instead of the link title.');
+$GLOBALS['TL_LANG']['tl_content']['multiSRC']     = array('Source files', 'Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.');
+$GLOBALS['TL_LANG']['tl_content']['useHomeDir']   = array('Use home directory', 'Use the home directory as file source if there is an authenticated user.');
+$GLOBALS['TL_LANG']['tl_content']['perRow']       = array('Thumbnails per row', 'The number of image thumbnails per row.');
+$GLOBALS['TL_LANG']['tl_content']['perPage']      = array('Items per page', 'The number of items per page. Set to 0 to disable pagination.');
+$GLOBALS['TL_LANG']['tl_content']['sortBy']       = array('Order by', 'Please choose the sort order.');
+$GLOBALS['TL_LANG']['tl_content']['cteAlias']     = array('Referenced element', 'Please choose the content element you want to insert.');
+$GLOBALS['TL_LANG']['tl_content']['articleAlias'] = array('Referenced article', 'Please choose the article you want to insert.');
+$GLOBALS['TL_LANG']['tl_content']['article']      = array('Article', 'Please select an article.');
 $GLOBALS['TL_LANG']['tl_content']['form']         = array('Form', 'Please select a form.');
-$GLOBALS['TL_LANG']['tl_content']['module']       = array('Module', 'Please select the module you want to include in the article.');
-$GLOBALS['TL_LANG']['tl_content']['invisible']    = array('Invisible', 'The current element is not visible on your website.');
-$GLOBALS['TL_LANG']['tl_content']['protected']    = array('Protect element', 'Show content element to certain member groups only.');
+$GLOBALS['TL_LANG']['tl_content']['module']       = array('Module', 'Please select a module.');
+$GLOBALS['TL_LANG']['tl_content']['protected']    = array('Protect element', 'Show the content element to certain member groups only.');
+$GLOBALS['TL_LANG']['tl_content']['groups']       = array('Allowed member groups', 'These groups will be able to see the content element.');
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Show to guests only', 'Hide the content element if a member is logged in.');
-$GLOBALS['TL_LANG']['tl_content']['groups']       = array('Allowed member groups', 'Here you can choose which groups will be allowed to see the content element.');
-$GLOBALS['TL_LANG']['tl_content']['align']        = array('Element alignment', 'Here you can change the alignment of the content element within the article.');
-$GLOBALS['TL_LANG']['tl_content']['space']        = array('Space in front and after', 'Please enter the spacing in front of and after the content element in pixel.');
-$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS ID and class', 'Here you can enter a CSS ID (id attribute) and one or more CSS classes (class attributes).');
-$GLOBALS['TL_LANG']['tl_content']['source']       = array('File source', 'Please choose the CSV file you want to import from the files directory.');
+$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS ID/class', 'Here you can enter an ID and one or more classes.');
+$GLOBALS['TL_LANG']['tl_content']['space']        = array('Space in front and after', 'Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+$GLOBALS['TL_LANG']['tl_content']['source']       = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
+
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_content']['type_legend']      = 'Element type';
+$GLOBALS['TL_LANG']['tl_content']['text_legend']      = 'Text/HTML/Code';
+$GLOBALS['TL_LANG']['tl_content']['image_legend']     = 'Image settings';
+$GLOBALS['TL_LANG']['tl_content']['list_legend']      = 'List items';
+$GLOBALS['TL_LANG']['tl_content']['table_legend']     = 'Table items';
+$GLOBALS['TL_LANG']['tl_content']['tconfig_legend']   = 'Table configuration';
+$GLOBALS['TL_LANG']['tl_content']['sortable_legend']  = 'Sorting options';
+$GLOBALS['TL_LANG']['tl_content']['moo_legend']       = 'Accordion settings';
+$GLOBALS['TL_LANG']['tl_content']['link_legend']      = 'Hyperlink settings';
+$GLOBALS['TL_LANG']['tl_content']['imglink_legend']   = 'Image link settings';
+$GLOBALS['TL_LANG']['tl_content']['source_legend']    = 'Files and folders';
+$GLOBALS['TL_LANG']['tl_content']['dwnconfig_legend'] = 'Download settings';
+$GLOBALS['TL_LANG']['tl_content']['include_legend']   = 'Include settings';
+$GLOBALS['TL_LANG']['tl_content']['protected_legend'] = 'Access protection';
+$GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Expert settings';
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_content']['single']    = array('Single element', 'In this operation mode, the element will be converted into an accordion pane. You can set up content using the rich text editor.');
-$GLOBALS['TL_LANG']['tl_content']['start']     = array('Wrapper start', 'This operation mode allows to display multiple content elements in one accordion pane by inserting them between element <em>wrapper start</em> and <em>wrapper stop</em>.');
-$GLOBALS['TL_LANG']['tl_content']['stop']      = array('Wrapper stop', 'Indicates the end of a wrapper element.');
 $GLOBALS['TL_LANG']['tl_content']['ordered']   = 'ordered list';
 $GLOBALS['TL_LANG']['tl_content']['unordered'] = 'unordered list';
 $GLOBALS['TL_LANG']['tl_content']['name_asc']  = 'File name (ascending)';
@@ -98,18 +119,18 @@ $GLOBALS['TL_LANG']['tl_content']['meta']      = 'Meta file (meta.txt)';
 
 /**
  * Buttons
- */ 
-$GLOBALS['TL_LANG']['tl_content']['new']         = array('New element', 'Create a new element');
-$GLOBALS['TL_LANG']['tl_content']['show']        = array('Element details', 'Show details of content element ID %s');
+ */
+$GLOBALS['TL_LANG']['tl_content']['new']         = array('New element', 'Add a new content element');
+$GLOBALS['TL_LANG']['tl_content']['show']        = array('Element details', 'Show the details of content element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['cut']         = array('Move element', 'Move content element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['copy']        = array('Copy element', 'Copy content element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['delete']      = array('Delete element', 'Delete content element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['edit']        = array('Edit element', 'Edit content element ID %s');
-$GLOBALS['TL_LANG']['tl_content']['editheader']  = array('Edit article header', 'Edit the header of this article');
-$GLOBALS['TL_LANG']['tl_content']['pasteafter']  = array('Paste at the beginning', 'Paste after content element ID %s');
-$GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Create a new content element at the beginning', 'Create a new content element after content element ID %s');
-$GLOBALS['TL_LANG']['tl_content']['up']          = array('Move item up', 'Move this item one position up');
-$GLOBALS['TL_LANG']['tl_content']['down']        = array('Move item down', 'Move this item one position down');
+$GLOBALS['TL_LANG']['tl_content']['editheader']  = array('Edit article header', 'Edit the header of the article');
+$GLOBALS['TL_LANG']['tl_content']['pasteafter']  = array('Paste at the top', 'Paste after content element ID %s');
+$GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Add new at the top', 'Add new after content element ID %s');
+$GLOBALS['TL_LANG']['tl_content']['up']          = array('Move item up', 'Move the item one position up');
+$GLOBALS['TL_LANG']['tl_content']['down']        = array('Move item down', 'Move the item one position down');
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Toggle visibility', 'Toggle the visibility of element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Edit source element', 'Edit the source element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit article ID %s');
@@ -118,15 +139,15 @@ $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit a
 /**
  * Table wizard
  */
-$GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV import', 'Import list from a CSV file');
-$GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV import', 'Import table from a CSV file');
-$GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Duplicate row', 'Duplicate this row');
-$GLOBALS['TL_LANG']['tl_content']['rup']         = array('Move row up', 'Move this row one position up');
-$GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Move row down', 'Move this row one position down');
-$GLOBALS['TL_LANG']['tl_content']['rdelete']     = array('Delete row', 'Delete this row');
-$GLOBALS['TL_LANG']['tl_content']['ccopy']       = array('Duplicate column', 'Duplicate this column');
-$GLOBALS['TL_LANG']['tl_content']['cmovel']      = array('Move column left', 'Move this column one position left');
-$GLOBALS['TL_LANG']['tl_content']['cmover']      = array('Move column right', 'Move this column one position right');
-$GLOBALS['TL_LANG']['tl_content']['cdelete']     = array('Delete column', 'Delete this column');
+$GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV import', 'Import list items from a CSV file');
+$GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV import', 'Import table items from a CSV file');
+$GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Duplicate row', 'Duplicate the row');
+$GLOBALS['TL_LANG']['tl_content']['rup']         = array('Move row up', 'Move the row one position up');
+$GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Move row down', 'Move the row one position down');
+$GLOBALS['TL_LANG']['tl_content']['rdelete']     = array('Delete row', 'Delete the row');
+$GLOBALS['TL_LANG']['tl_content']['ccopy']       = array('Duplicate column', 'Duplicate the column');
+$GLOBALS['TL_LANG']['tl_content']['cmovel']      = array('Move column left', 'Move the column one position left');
+$GLOBALS['TL_LANG']['tl_content']['cmover']      = array('Move column right', 'Move the column one position right');
+$GLOBALS['TL_LANG']['tl_content']['cdelete']     = array('Delete column', 'Delete the column');
 
 ?>

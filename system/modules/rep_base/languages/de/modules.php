@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TL_ROOT/system/modules/rep_base/languages/de/modules.php 
  * 
@@ -14,6 +15,6 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rep_base'] = array('Repository Base', 'Das Basis-Modul des Erweiterungs-Verzeichnisses.');
+$GLOBALS['TL_LANG']['MOD']['rep_base'] = array('Repository-Base', 'Das Basis-Modul des Extension Repository.');
  
 ?>

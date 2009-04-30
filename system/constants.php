@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -38,14 +38,14 @@
  * If you are using the Environment library to get environment parameters,
  * you can choose whether to ENCODE_AMPERSANDS or not.
  * 
- * If you are rendering widgets with error message, you can choose whether 
+ * If you are rendering widgets with error message, you can choose whether
  * to change the order (default order: error message above input field).
  */
 define('URL_SUFFIX', '.html');
 define('ENCODE_AMPERSANDS', true);
 define('SWITCH_ORDER', true);
-define('VERSION', '2.6');
-define('BUILD', '7');
+define('VERSION', '2.7');
+define('BUILD', '0');
 
 
 /**

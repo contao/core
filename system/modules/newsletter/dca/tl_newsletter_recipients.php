@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,18 +19,12 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
  */
-
-
-/**
- * Load tl_newsletter_recipients language file
- */
-$this->loadLanguageFile('tl_newsletter_recipients');
 
 
 /**
@@ -117,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'email,active',
+		'default'                     => '{email_legend},email,active',
 	),
 
 	// Fields
@@ -130,7 +124,11 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'insertTag'=>true, 'decodeEntities'=>true)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'insertTag'=>true, 'decodeEntities'=>true),
+			'save_callback' => array
+			(
+				array('tl_newsletter_recipients', 'checkUniqueRecipient')
+			)
 		),
 		'active' => array
 		(
@@ -167,7 +165,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
  * Class tl_newsletter_recipients
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -281,6 +279,26 @@ class tl_newsletter_recipients extends Backend
 
 
 	/**
+	 * Check if recipients are unique per channel
+	 * @param mixed
+	 * @param object
+	 * @return mixed
+	 */
+	public function checkUniqueRecipient($varValue, DataContainer $dc)
+	{
+		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?)")
+									   ->execute($varValue, $dc->id);
+
+		if ($objRecipient->count > 0)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Add an image to each record
 	 * @param array
 	 * @param string
@@ -290,7 +308,7 @@ class tl_newsletter_recipients extends Backend
 	{
 		if ($row['addedOn'])
 		{
-			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], date($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
+			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
 		}
 		else
 		{

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Backend
  *
  * Provide methods to manage back end controllers.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -97,13 +97,13 @@ abstract class Backend extends Controller
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
 
 		// Add module style sheet
-		if (array_key_exists('stylesheet', $arrModule))
+		if (isset($arrModule['stylesheet']))
 		{
 			$GLOBALS['TL_CSS'][] = $arrModule['stylesheet'];
 		}
 
 		// Add module javascript
-		if (array_key_exists('javascript', $arrModule))
+		if (isset($arrModule['javascript']))
 		{
 			$GLOBALS['TL_JAVASCRIPT'][] = $arrModule['javascript'];
 		}
@@ -163,7 +163,7 @@ abstract class Backend extends Controller
 		}
 
 		// Custom action (if key is not defined in config.php the default action will be called)
-		elseif ($this->Input->get('key') && array_key_exists($this->Input->get('key'), $arrModule))
+		elseif ($this->Input->get('key') && isset($arrModule[$this->Input->get('key')]))
 		{
 			$objCallback = new $arrModule[$this->Input->get('key')][0]();
 			$this->Template->main .= $objCallback->$arrModule[$this->Input->get('key')][1]($dc, $strTable, $arrModule);
@@ -286,6 +286,201 @@ abstract class Backend extends Controller
 		}
 
 		return $arrPages;
+	}
+
+
+	/**
+	 * Get all allowed pages and return them as string
+	 * @return string
+	 */
+	public function createPageList()
+	{
+		$this->import('BackendUser', 'User');
+
+		if ($this->User->isAdmin)
+		{
+			return $this->doCreatePageList();
+		}
+
+		$return = '';
+		$processed = array();
+
+		foreach ($this->eliminateNestedPages($this->User->pagemounts) as $page)
+		{
+			$objPage = $this->getPageDetails($page);
+
+			// Root page mounted
+			if ($objPage->type == 'root')
+			{
+				$title = $objPage->title;
+				$start = $objPage->id;
+			}
+
+			// Regular page mounted
+			else
+			{
+				$title = $objPage->rootTitle;
+				$start = $objPage->rootId;
+			}
+
+			// Do not process twice
+			if (in_array($start, $processed))
+			{
+				continue;
+			}
+
+			$processed[] = $start;
+			$return .= '<optgroup label="' . $title . '">' . $this->doCreatePageList($start) . '</optgroup>';
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Recursively get all allowed pages and return them as string
+	 * @param integer
+	 * @param integer
+	 * @return string
+	 */
+	protected function doCreatePageList($intId=0, $level=-1)
+	{
+		$objPages = $this->Database->prepare("SELECT id, title, type, dns FROM tl_page WHERE pid=? ORDER BY sorting")
+								   ->execute($intId);
+
+		if ($objPages->numRows < 1)
+		{
+			return '';
+		}
+
+		++$level;
+		$strOptions = '';
+
+		while ($objPages->next())
+		{
+			if ($objPages->type == 'root')
+			{
+				// Skip websites that run under a different domain
+				if ($objPages->dns && $objPages->dns != $this->Environment->host && $objPages->dns != 'www.' . $this->Environment->host)
+				{
+					continue;
+				}
+
+				$strOptions .= '<optgroup label="' . $objPages->title . '">';
+				$strOptions .= $this->doCreatePageList($objPages->id, -1);
+				$strOptions .= '</optgroup>';
+			}
+			else
+			{
+				$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (('{{link_url::' . $objPages->id . '}}' == $this->Input->get('value')) ? ' selected="selected"' : ''), str_repeat(" &nbsp; &nbsp; ", $level), specialchars($objPages->title));
+				$strOptions .= $this->doCreatePageList($objPages->id, $level);
+			}
+		}
+
+		return $strOptions;
+	}
+
+
+	/**
+	 * Get all allowed files and return them as string
+	 * @param boolean
+	 * @param boolean
+	 * @return string
+	 */
+	public function createFileList($blnFilterImages=false, $filemount=false)
+	{
+		$this->import('BackendUser', 'User');
+
+		if ($this->User->isAdmin)
+		{
+			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $blnFilterImages);
+		}
+
+		$return = '';
+		$processed = array();
+
+		// Set custom filemount
+		if ($filemount)
+		{
+			$this->User->filemounts = array($filemount);
+		}
+
+		// Limit nodes to the filemounts of the user
+		foreach ($this->eliminateNestedPaths($this->User->filemounts) as $path)
+		{
+			if (in_array($path, $processed))
+			{
+				continue;
+			}
+
+			$processed[] = $path;
+			$return .= $this->doCreateFileList($path, -1, $blnFilterImages);
+		}
+
+		return $return;
+	}
+
+
+	/**
+	 * Recursively get all allowed files and return them as string
+	 * @param integer
+	 * @param integer
+	 * @param boolean
+	 * @return string
+	 */
+	protected function doCreateFileList($strFolder=null, $level=-1, $blnFilterImages=false)
+	{
+		$arrPages = scan(TL_ROOT . '/' . $strFolder);
+
+		// Empty folder
+		if (count($arrPages) < 1)
+		{
+			return '';
+		}
+
+		// Protected folder
+		if (array_search('.htaccess', $arrPages) !== false)
+		{
+			return '';
+		}
+
+		++$level;
+		$strFolders = '';
+		$strFiles = '';
+
+		// Recursively list all files and folders
+		foreach ($arrPages as $strFile)
+		{
+			if (substr($strFile, 0, 1) == '.')
+			{
+				continue;
+			}
+
+			// Folders
+			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
+			{
+				$strFolders .=  $this->doCreateFileList($strFolder . '/' . $strFile, $level, $blnFilterImages);
+			}
+
+			// Filter images
+			elseif ($blnFilterImages && !preg_match('/\.gif$|\.jpg$|\.jpeg$|\.png$/i', $strFile))
+			{
+				continue;
+			}
+
+			// Files
+			elseif ($strFile != 'meta.txt')
+			{
+				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == $this->Input->get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
+			}
+		}
+
+		if (strlen($strFiles))
+		{
+			return '<optgroup label="' . specialchars($strFolder) . '">' . $strFiles . $strFolders . '</optgroup>';
+		}
+
+		return $strFiles . $strFolders;
 	}
 }
 

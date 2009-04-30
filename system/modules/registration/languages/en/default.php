@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Registration
  * @license    LGPL
@@ -36,7 +36,7 @@ $GLOBALS['TL_LANG']['MSC']['accountActivated'] = 'Your account has been activate
 $GLOBALS['TL_LANG']['MSC']['accountError']     = 'Unable to process the current request.';
 $GLOBALS['TL_LANG']['MSC']['emailSubject']     = 'Your registration on %s';
 $GLOBALS['TL_LANG']['MSC']['adminSubject']     = 'TYPOlight :: New registration on %s';
-$GLOBALS['TL_LANG']['MSC']['adminText']        = 'A new user (ID %s) has registered on your website.%sIf you did not allow e-mail activation, you have to log in to the back end to enable the account manually.';
+$GLOBALS['TL_LANG']['MSC']['adminText']        = 'A new user (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.';
 $GLOBALS['TL_LANG']['MSC']['requestPassword']  = 'Request password';
 $GLOBALS['TL_LANG']['MSC']['setNewPassword']   = 'Set new password';
 $GLOBALS['TL_LANG']['MSC']['newPasswordSet']   = 'Your password has been updated.';

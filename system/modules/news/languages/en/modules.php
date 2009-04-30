@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,16 +30,16 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['news'] = array('News', 'This module allows you to manage news on your website.');
+$GLOBALS['TL_LANG']['MOD']['news'] = array('News', 'Manage news and export them as RSS or Atom feed.');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['news']        = 'News';
-$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Newslist', 'This module lists a certain number of news of a certain news archive.');
-$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Newsreader', 'This module shows a single news article.');
-$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('News archive', 'This module lists all news of a certain archive. Please note that you will need module "news archive menu" to browse the news archive.');
-$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('News archive menu', 'This module allows you to browse the news archive.');
+$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Newslist', 'adds a list of news items to the page.');
+$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Newsreader', 'shows the details of a news item.');
+$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('News archive', 'adds a news archive to the page.');
+$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('News archive menu', 'generates a navigation menu to browse the news archive.');
 
 ?>

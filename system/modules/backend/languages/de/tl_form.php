@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,25 +30,35 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_form']['title']        = array('Titel', 'Bitte geben Sie einen Titel für das Formular ein.');
-$GLOBALS['TL_LANG']['tl_form']['formID']       = array('Formular-ID', 'Hier können Sie eine optionale Formular-ID eingeben (zur Steuerung von TYPOlight Modulen).');
-$GLOBALS['TL_LANG']['tl_form']['method']       = array('Übertragungsmethode', 'Bitte wählen Sie eine Übertragungsmethode für das Formular (Standard: POST).');
-$GLOBALS['TL_LANG']['tl_form']['allowTags']    = array('HTML-Tags erlauben', 'Wenn Sie diese Option wählen, werden bestimmte HTML-Tags nicht entfernt (siehe <em>allowedTags</em>).');
-$GLOBALS['TL_LANG']['tl_form']['storeValues']  = array('Eingaben speichern', 'Übermittelte Formulareingaben in der Datenbank speichern.');
-$GLOBALS['TL_LANG']['tl_form']['targetTable']  = array('Zieltabelle', 'Bitte wählen Sie die Tabelle, in der die Eingaben gespeichert werden sollen.');
-$GLOBALS['TL_LANG']['tl_form']['tableless']    = array('Tabellenloses Layout', 'Wenn Sie diese Option wählen, wird das Formular ohne Tabellen gerendert.');
-$GLOBALS['TL_LANG']['tl_form']['sendViaEmail'] = array('Per E-Mail versenden', 'Wenn Sie diese Option wählen, werden die Formulardaten per E-Mail versendet.');
-$GLOBALS['TL_LANG']['tl_form']['recipient']    = array('Empfänger', 'Kommagetrennte Liste von E-Mail-Adressen (z.B. <em>name@domain.com</em> oder <em>Name [name@domain.com]</em>).');
-$GLOBALS['TL_LANG']['tl_form']['subject']      = array('Betreff', 'Geben Sie eine Betreffzeile ein, damit die E-Mail nicht als SPAM eingestuft wird.');
+$GLOBALS['TL_LANG']['tl_form']['title']        = array('Titel', 'Bitte geben Sie den Formular-Titel ein.');
+$GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher nach dem Abschicken des Formulars weitergeleitet werden.');
+$GLOBALS['TL_LANG']['tl_form']['sendViaEmail'] = array('Per E-Mail versenden', 'Die Formulardaten an eine E-Mail-Adresse versenden.');
+$GLOBALS['TL_LANG']['tl_form']['recipient']    = array('Empfänger-Adresse', 'Mehrere E-Mail-Adressen können mit Komma getrennt werden.');
+$GLOBALS['TL_LANG']['tl_form']['subject']      = array('Betreff', 'Bitte geben Sie die Betreffzeile ein.');
 $GLOBALS['TL_LANG']['tl_form']['format']       = array('Datenformat', 'Hier legen Sie fest, in welchem Format die Formulardaten übermittelt werden.');
-$GLOBALS['TL_LANG']['tl_form']['raw']          = array('Unbearbeitete Daten', 'Die Formulardaten werden als einfache Textnachricht mit einem Zeilenumbruch nach jedem Feld versendet.');
-$GLOBALS['TL_LANG']['tl_form']['email']        = array('E-Mail-Format', 'Dieses Format erwartet die Felder <em>email</em>, <em>subject</em>, <em>message</em> und <em>cc</em> (eine Kopie der E-Mail an den Absender schicken). Anders benannte Felder werden ignoriert. Datei-Uploads sind erlaubt.');
+$GLOBALS['TL_LANG']['tl_form']['raw']          = array('Rohdaten', 'Die Formulardaten werden als einfache Textnachricht mit einer Zeile pro Feld versendet.');
 $GLOBALS['TL_LANG']['tl_form']['xml']          = array('XML-Datei', 'Die Formulardaten werden der E-Mail als XML-Datei angefügt.');
-$GLOBALS['TL_LANG']['tl_form']['csv']          = array('CSV-Datei', 'Die Formulardaten werden der E-Mail als CSV-Datei (comma separated values) angefügt.');
-$GLOBALS['TL_LANG']['tl_form']['skipEmtpy']    = array('Leere Felder überspringen', 'Leere Felder nicht per E-Mail versenden.');
-$GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Weiterleitung zu Seite', 'Die Daten eines Formulars werden normalerweise zu einer anderen Seite weitergeleitet, die diese Daten weiterverarbeitet oder eine "Vielen Dank für Ihre Nachricht" Meldung anzeigt. Sie können diese Seite hier festlegen.');
+$GLOBALS['TL_LANG']['tl_form']['csv']          = array('CSV-Datei', 'Die Formulardaten werden der E-Mail als CSV-Datei angefügt.');
+$GLOBALS['TL_LANG']['tl_form']['email']        = array('E-Mail', 'Ignoriert alle Felder außer <em>email</em>, <em>subject</em>, <em>message</em> und <em>cc</em> (Carbon Copy) und verschickt die Formulardaten als wären sie mit einem E-Mail-Programm versendet worden. Datei-Uploads sind erlaubt.');
+$GLOBALS['TL_LANG']['tl_form']['skipEmtpy']    = array('Leere Felder auslassen', 'Leere Felder in der E-Mail nicht anzeigen.');
+$GLOBALS['TL_LANG']['tl_form']['storeValues']  = array('Eingaben speichern', 'Übermittelte Formulardaten in der Datenbank speichern.');
+$GLOBALS['TL_LANG']['tl_form']['targetTable']  = array('Zieltabelle', 'Die Zieltabelle muss für jedes Formularfeld eine Spalte enthalten.');
+$GLOBALS['TL_LANG']['tl_form']['method']       = array('Übertragungsmethode', 'Die Standard-Übertragungsmethode ist POST.');
+$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
+$GLOBALS['TL_LANG']['tl_form']['formID']       = array('Formular-Id', 'Die Formular-Id wird zur Ansteuerung eines TYPOlight-Moduls benötigt.');
+$GLOBALS['TL_LANG']['tl_form']['tableless']    = array('Tabellenloses Layout', 'Das Formular ohne HTML-Tabellen ausgeben.');
+$GLOBALS['TL_LANG']['tl_form']['allowTags']    = array('HTML-Tags erlauben', 'HTML-Eingaben in Formularfeldern erlauben.');
 $GLOBALS['TL_LANG']['tl_form']['tstamp']       = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
-$GLOBALS['TL_LANG']['tl_form']['attributes']   = array('CSS-ID und -Klasse', 'Hier können Sie eine CSS-ID (id attribute) sowie eine oder mehrere CSS-Klassen (class attributes) eingeben.');
+
+
+/**
+ * Legend
+ */
+$GLOBALS['TL_LANG']['tl_form']['title_legend']  = 'Titel und Weiterleitung';
+$GLOBALS['TL_LANG']['tl_form']['email_legend']  = 'Formulardaten versenden';
+$GLOBALS['TL_LANG']['tl_form']['store_legend']  = 'Formulardaten speichern';
+$GLOBALS['TL_LANG']['tl_form']['expert_legend'] = 'Experten-Einstellungen';
+$GLOBALS['TL_LANG']['tl_form']['config_legend'] = 'Formular-Konfiguration';
 
 
 /**

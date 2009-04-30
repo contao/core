@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class DataContainer
  *
  * Provide methods to handle data container arrays.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -145,7 +145,6 @@ class DataContainer extends Backend
 	 */
 	protected function row()
 	{
-		$wizard = '';
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
 		// Redirect if the field is excluded
@@ -155,34 +154,36 @@ class DataContainer extends Backend
 			$this->redirect('typolight/main.php?act=error');
 		}
 
+		$xlabel = '';
+
 		// Toggle line wrap (textarea)
 		if ($arrData['inputType'] == 'textarea' && !strlen($arrData['eval']['rte']))
 		{
-			$wizard .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="'.specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']).'" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\');"');
+			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="'.specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']).'" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\');"');
 		}
 
 		// Add help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$wizard .= ' <a href="typolight/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="Help wizard" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="typolight/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="Help wizard" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
 		// Add popup file manager
 		if ($arrData['inputType'] == 'fileTree')
 		{
-			$wizard .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add table import wizard
 		if ($this->strTable == 'tl_content' && $this->strField == 'tableitems')
 		{
-			$wizard .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add list import wizard
 		if ($this->strTable == 'tl_content' && $this->strField == 'listitems')
 		{
-			$wizard .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Decrypt the value if it is encrypted
@@ -199,11 +200,11 @@ class DataContainer extends Backend
 				$this->import($arrData['input_field_callback'][0]);
 			}
 
-			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $wizard);
+			return $this->$arrData['input_field_callback'][0]->$arrData['input_field_callback'][1]($this, $xlabel);
 		}
 
 		// Return if the widget class does not exists
-		if (!array_key_exists($arrData['inputType'], $GLOBALS['BE_FFL']))
+		if (!isset($GLOBALS['BE_FFL'][$arrData['inputType']]))
 		{
 			return '';
 		}
@@ -213,7 +214,7 @@ class DataContainer extends Backend
 
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
 
-		$objWidget->wizard = $wizard;
+		$objWidget->xlabel = $xlabel;
 		$objWidget->currentRecord = $this->intId;
 
 		// Validate field
@@ -292,9 +293,11 @@ class DataContainer extends Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$datepicker = '
-  <script type="text/javascript"><!--//--><![CDATA[//><!--
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
   window.addEvent(\'domready\', function() { ' . sprintf($arrData['eval']['datepicker'], 'ctrl_' . $objWidget->id) . ' });
-  //--><!]]></script>';
+  //--><!]]>
+  </script>';
 		}
 
 		// Add custom wizard
@@ -307,12 +310,23 @@ class DataContainer extends Backend
 			}
 		}
 
+		$objWidget->wizard = $wizard;
+
+		// Set correct form enctype
 		if ($objWidget instanceof uploadable)
 		{
 			$this->blnUploadable = true;
 		}
 
-		return $objWidget->parse().$datepicker.$wizard.$this->help();
+		// Mark floated single checkboxes
+		if ($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'w50') !== false)
+		{
+			$arrData['eval']['tl_class'] .= ' cbx';
+		}
+
+		return '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
+</div>';
 	}
 
 
@@ -330,7 +344,7 @@ class DataContainer extends Backend
 		}
 
 		return '
-  <p class="tl_help">'.$return.'</p>';
+  <p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$return.'</p>';
 	}
 
 

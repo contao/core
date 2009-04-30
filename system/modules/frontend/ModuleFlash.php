@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleFlash
  *
  * Front end module "flash".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -46,14 +46,14 @@ class ModuleFlash extends Module
 
 
 	/**
-	 * Make sure the UFO plugin is available
+	 * Make sure the SWFobject plugin is available
 	 * @return string
 	 */
 	public function generate()
 	{
-		if (!file_exists(TL_ROOT . '/plugins/ufo/ufo.js'))
+		if (!file_exists(TL_ROOT . '/plugins/swfobject/swfobject.js'))
 		{
-			throw new Exception('Plugin "ufo" required');
+			throw new Exception('Plugin "swfobject" required');
 		}
 
 		if ($this->source != 'external' && (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC)))
@@ -81,12 +81,12 @@ class ModuleFlash extends Module
 		$this->Template->href = ($this->source == 'external') ? $this->url : $this->singleSRC;
 		$this->Template->alt = $this->altContent;
 		$this->Template->var = 'swf' . $this->id;
-		$this->Template->searchable = $this->searchable;
 		$this->Template->transparent = $this->transparent ? true : false;
 		$this->Template->interactive = $this->interactive ? true : false;
 		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
 		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", $this->String->decodeEntities($this->flashJS));
 		$this->Template->flashvars = 'URL=' . $this->Environment->base;
+		$this->Template->version = strlen($this->version) ? $this->version : '6.0.0';
 
 		$size = deserialize($this->size);
 
@@ -105,13 +105,8 @@ class ModuleFlash extends Module
 			$this->Template->flashvars .= '&' . $this->String->decodeEntities($this->flashvars);
 		}
 
-		$version = deserialize($this->version);
-
-		$this->Template->build = strlen($version[1]) ? intval($version[1]) : 1;
-		$this->Template->version = strlen($version[0]) ? intval($version[0]) : 1;
-
 		// Add JavaScript
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/ufo/ufo.js';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/swfobject/swfobject.js';
 	}
 }
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,43 +30,53 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_news']['headline']     = array('Headline', 'Please enter the headline of the news article.');
-$GLOBALS['TL_LANG']['tl_news']['alias']        = array('News alias', 'A news alias is a unique reference to the news article which can be called instead of the news ID.');
-$GLOBALS['TL_LANG']['tl_news']['date']         = array('Date', 'Please enter the date of the news article.');
-$GLOBALS['TL_LANG']['tl_news']['time']         = array('Time', 'Please enter the time of the news article.');
-$GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Subheadline', 'Here you can enter a subheadline here.');
-$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teaser text', 'The teaser text is usually shown instead of the actual news text followed by a "read more …" link.');
-$GLOBALS['TL_LANG']['tl_news']['text']         = array('News text', 'Please enter the news text.');
-$GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Add an image', 'If you choose this option, an image will be added to the news article.');
-$GLOBALS['TL_LANG']['tl_news']['author']       = array('Author', 'You can change the author of the news article.');
-$GLOBALS['TL_LANG']['tl_news']['noComments']   = array('Disable comments', 'Disable comments for this particular news item.');
-$GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Add enclosure', 'Add one or more downloadable files to the news item.');
-$GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosure', 'Please choose the files you want to attach.');
-$GLOBALS['TL_LANG']['tl_news']['source']       = array('Target page', 'Link to an internal or external page instead of the default page.');
-$GLOBALS['TL_LANG']['tl_news']['jumpTo']       = array('Jump to page', 'Please select the page to which visitors will be redirected.');
-$GLOBALS['TL_LANG']['tl_news']['cssClass']     = array('CSS class', 'Here you can enter one or more CSS classes (class attributes).');
-$GLOBALS['TL_LANG']['tl_news']['published']    = array('Published', 'The news article will not be visible on your website until it is published.');
-$GLOBALS['TL_LANG']['tl_news']['start']        = array('Show from', 'If you enter a date here the current news item will not be shown on the website before this day.');
-$GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'If you enter a date here the current news item will not be shown on the website after this day.');
+$GLOBALS['TL_LANG']['tl_news']['headline']     = array('Title', 'Please enter the news title.');
+$GLOBALS['TL_LANG']['tl_news']['alias']        = array('News alias', 'The news alias is a unique reference to the article which can be called instead of its numeric ID.');
+$GLOBALS['TL_LANG']['tl_news']['author']       = array('Author', 'Here you can change the author of the news item.');
+$GLOBALS['TL_LANG']['tl_news']['date']         = array('Date', 'Please enter the date according to the global date format.');
+$GLOBALS['TL_LANG']['tl_news']['time']         = array('Time', 'Please enter the time according to the global time format.');
+$GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Subheadline', 'Here you can enter a subheadline.');
+$GLOBALS['TL_LANG']['tl_news']['teaser']       = array('News teaser', 'The news teaser can be shown in a news list instead of the full article. A "read more …" link will be added automatically.');
+$GLOBALS['TL_LANG']['tl_news']['text']         = array('News text', 'Here you can enter the news text.');
+$GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Add an image', 'Add an image to the news item.');
+$GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Add enclosures', 'Add one or more downloadable files to the news item.');
+$GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosures', 'Please choose the files you want to attach.');
+$GLOBALS['TL_LANG']['tl_news']['source']       = array('Redirect target', 'Here you can override the default redirect target and link to an internal or external page instead.');
+$GLOBALS['TL_LANG']['tl_news']['default']      = array('Use default', 'By clicking the "read more …" button, visitors will be redirected to the default page of the news archive.');
+$GLOBALS['TL_LANG']['tl_news']['internal']     = array('Internal page', 'By clicking the "read more …" button, visitors will be redirected to an internal page.');
+$GLOBALS['TL_LANG']['tl_news']['external']     = array('External website', 'By clicking the "read more …" button, visitors will be redirected to an external website.');
+$GLOBALS['TL_LANG']['tl_news']['jumpTo']       = array('Redirect page', 'Please choose the page to which visitors will be redirected when clicking the news item.');
+$GLOBALS['TL_LANG']['tl_news']['cssClass']     = array('CSS class', 'Here you can enter one or more classes.');
+$GLOBALS['TL_LANG']['tl_news']['noComments']   = array('Disable comments', 'Do not allow comments for this particular news item.');
+$GLOBALS['TL_LANG']['tl_news']['featured']     = array('Feature item', 'Show the news item in a featured news list.');
+$GLOBALS['TL_LANG']['tl_news']['published']    = array('Publish item', 'Make the news item publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_news']['start']        = array('Show from', 'Do not show the news item on the website before this day.');
+$GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'Do not show the news item on the website after this day.');
 
 
 /**
- * References
+ * Legends
  */
-$GLOBALS['TL_LANG']['tl_news']['default']  = array('Use default', 'By clicking the "read more …" button visitors will be redirected to the default page of the news archive.');
-$GLOBALS['TL_LANG']['tl_news']['internal'] = array('Internal page', 'By clicking the "read more …" button visitors will be redirected to an internal page.');
-$GLOBALS['TL_LANG']['tl_news']['external'] = array('External website', 'By clicking the "read more …" button visitors will be redirected to an external website.');
+$GLOBALS['TL_LANG']['tl_news']['title_legend']     = 'Title and author';
+$GLOBALS['TL_LANG']['tl_news']['date_legend']      = 'Date and time';
+$GLOBALS['TL_LANG']['tl_news']['teaser_legend']    = 'Subheadline and teaser';
+$GLOBALS['TL_LANG']['tl_news']['text_legend']      = 'News text';
+$GLOBALS['TL_LANG']['tl_news']['image_legend']     = 'Article image';
+$GLOBALS['TL_LANG']['tl_news']['enclosure_legend'] = 'Enclosures';
+$GLOBALS['TL_LANG']['tl_news']['source_legend']    = 'Redirect target';
+$GLOBALS['TL_LANG']['tl_news']['expert_legend']    = 'Expert settings';
+$GLOBALS['TL_LANG']['tl_news']['publish_legend']   = 'Publish settings';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_news']['new']        = array('New article', 'Create a new news article');
+$GLOBALS['TL_LANG']['tl_news']['show']       = array('Article details', 'Show the details of news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['edit']       = array('Edit article', 'Edit news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Copy article', 'Copy news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Move article', 'Move news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete news article ID %s');
-$GLOBALS['TL_LANG']['tl_news']['show']       = array('Article details', 'Show details of news article ID %s');
-$GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit archive header', 'Edit the header of this archive');
+$GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit news archive', 'Edit the header of the news archive');
 
 ?>

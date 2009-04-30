@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class DB_Sybase
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */
@@ -174,7 +174,7 @@ class DB_Sybase extends Database
  * Class DB_Sybase_Statement
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */
@@ -199,18 +199,6 @@ class DB_Sybase_Statement extends Database_Statement
 	protected function string_escape($strString)
 	{
 		return "'" . str_replace("'", "''", $strString) . "'";
-
-		/**
-		 * The TYPOlight framework automatically strips slashes so do not
-		 * do it again here. Uncomment if used as stand-alone library.
-		 * 
-		if (!get_magic_quotes_gpc())
-		{
-			return "'" . str_replace("'", "''", $strString) . "'";
-		}
-
-		return "'" . str_replace("\\'", "''", str_replace('\\\\', '\\', str_replace('\\"', '"', $strString))) . "'";
-		*/
 	}
 
 
@@ -280,7 +268,7 @@ class DB_Sybase_Statement extends Database_Statement
  * Class DB_Sybase_Result
  *
  * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */

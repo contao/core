@@ -6,11 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="plugins/calendar/calendar.css" media="screen" />
+<?php if ($this->be27): ?>
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/be27.css" media="screen" />
+<?php endif; ?>
 <?php if ($this->isMac): ?>
 <link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
-<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
-<link rel="stylesheet" type="text/css" href="plugins/calendar/calendar.css" media="screen" />
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script type="text/javascript" src="plugins/mootools/mootools.js"></script>
 <script type="text/javascript" src="plugins/calendar/calendar.js"></script>
@@ -32,6 +36,7 @@
 <div>
 <span class="header_user_container"><a href="<?php echo $this->base; ?>typolight/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a> &nbsp; :: &nbsp; </span>
 <span class="header_preview_container"><a href="typolight/preview.php?site=<?php echo $this->frontendFile; ?>" onclick="this.blur(); window.open(this.href); return false;" class="header_preview" title="<?php echo $this->preview; ?>" accesskey="f"><?php echo $this->preview; ?></a> &nbsp; :: &nbsp; </span>
+<span class="header_home_container"><a href="<?php echo $this->base; ?>typolight/main.php" class="header_home" title="<?php echo $this->home; ?>" accesskey="h"><?php echo $this->home; ?></a> &nbsp; :: &nbsp; </span>
 <span class="header_logout_container"><a href="<?php echo $this->base; ?>typolight/index.php" class="header_logout" title="<?php echo $this->logout; ?>" accesskey="x"><?php echo $this->logout; ?></a></span>
 </div>
 

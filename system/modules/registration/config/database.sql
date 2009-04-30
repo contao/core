@@ -22,13 +22,14 @@ CREATE TABLE `tl_member` (
 -- 
 
 CREATE TABLE `tl_module` (
+  `disableCaptcha` char(1) NOT NULL default '',
   `reg_groups` blob NULL,
+  `reg_allowLogin` char(1) NOT NULL default '',
+  `reg_skipName` char(1) NOT NULL default '',
   `reg_assignDir` char(1) NOT NULL default '',
   `reg_homeDir` varchar(255) NOT NULL default '',
-  `reg_allowLogin` char(1) NOT NULL default '',
   `reg_activate` char(1) NOT NULL default '',
   `reg_jumpTo` int(10) unsigned NOT NULL default '0',
-  `reg_skipName` char(1) NOT NULL default '',
   `reg_text` text NULL,
   `reg_password` text NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

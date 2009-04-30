@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleArticleList
  *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -104,7 +104,7 @@ class ModuleArticleList extends Module
 		$time = time();
 
 		// Get published articles
-		$objArticles = $this->Database->prepare("SELECT id, title, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
+		$objArticles = $this->Database->prepare("SELECT id, title, alias, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
 									  ->execute($id, $this->inColumn, $time, $time);
 
 		if ($objArticles->numRows < 1)
@@ -121,12 +121,13 @@ class ModuleArticleList extends Module
 			}
 
 			$cssID = deserialize($objArticles->cssID, true);
+			$alias = strlen($objArticles->alias) ? $objArticles->alias : $objArticles->title;
 
 			$articles[] = array
 			(
 				'link' => $objArticles->title,
 				'title' => specialchars($objArticles->title),
-				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($objArticles->title),
+				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($alias),
 				'articleId' => $objArticles->id
 			);
 		}

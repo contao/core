@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class TextField
  *
  * Provide methods to handle text fields.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -109,12 +109,13 @@ class TextField extends Widget
 	{
 		if (!$this->multiple)
 		{
-			return sprintf('<input type="text" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();" />',
+			return sprintf('<input type="text" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();" />%s',
 							$this->strName,
 							$this->strId,
 							(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 							specialchars($this->varValue),
-							$this->getAttributes());
+							$this->getAttributes(),
+							$this->wizard);
 		}
 
 		// Return if field size is missing
@@ -140,10 +141,11 @@ class TextField extends Widget
 									$this->getAttributes());
 		}
 
-		return sprintf('<div id="ctrl_%s"%s>%s</div>',
+		return sprintf('<div id="ctrl_%s"%s>%s%s</div>',
 						$this->strId,
 						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
-						implode(' ', $arrFields));
+						implode(' ', $arrFields),
+						$this->wizard);
 	}
 }
 

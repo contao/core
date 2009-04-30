@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,17 +30,16 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Calendar/Events', 'This module allows you to manage events of different calendars.');
+$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Manage events and display them in a calendar or event list.');
 
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['events']          = 'Calendar/Events';
-$GLOBALS['TL_LANG']['FMD']['calendar']        = array('Calendar', 'This module adds a calendar to your website.');
-$GLOBALS['TL_LANG']['FMD']['minicalendar']    = array('Mini-calendar', 'This module adds a mini-calendar to your website that can be used to trigger the event list module.');
-$GLOBALS['TL_LANG']['FMD']['eventreader']     = array('Event reader', 'This module shows the details of a single event.');
-$GLOBALS['TL_LANG']['FMD']['eventlist']       = array('Event list', 'This module lists all events of a month, week or day.');
-$GLOBALS['TL_LANG']['FMD']['upcoming_events'] = array('Upcoming events', 'This module lists the a particular number of upcoming events.');
+$GLOBALS['TL_LANG']['FMD']['events']          = 'Events';
+$GLOBALS['TL_LANG']['FMD']['calendar']        = array('Calendar', 'adds a calendar to the page.');
+$GLOBALS['TL_LANG']['FMD']['eventreader']     = array('Event reader', 'shows the details of an event.');
+$GLOBALS['TL_LANG']['FMD']['eventlist']       = array('Event list', 'adds a list of events to the page.');
+$GLOBALS['TL_LANG']['FMD']['upcoming_events'] = array('Upcoming events', 'adds a list of upcoming events to the page.');
 
 ?>

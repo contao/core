@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,7 +30,7 @@
 /**
  * Back end modules
  */
-array_insert($GLOBALS['BE_MOD']['content'], 4, array
+array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
@@ -48,9 +48,8 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 	'events' => array
 	(
 		'calendar'        => 'ModuleCalendar',
-		'minicalendar'    => 'ModuleMiniCalendar',
-		'eventreader'     => 'ModuleEventReader',
 		'eventlist'       => 'ModuleEventlist',
+		'eventreader'     => 'ModuleEventReader',
 		'upcoming_events' => 'ModuleUpcomingEvents'
 	)
 ));

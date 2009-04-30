@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class TableWizard
  *
  * Provide methods to handle table fields.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -205,7 +205,7 @@ class TableWizard extends Widget
 			for ($j=0; $j<count($this->varValue[$i]); $j++)
 			{
 				$return .= '
-      <td><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
+      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
 			}
 
 			$return .= '
@@ -224,7 +224,12 @@ class TableWizard extends Widget
 		return $return.'
   </tbody>
   </table>
-  </div>';
+  </div>
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+  Backend.tableWizardResize();
+  //--><!]]>
+  </script>';
 	}
 
 
@@ -308,11 +313,11 @@ class TableWizard extends Widget
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_content']['importTable'][1].'</h2>'.$this->getMessages().'
 
-<form action="'.ampersand($this->Environment->request, ENCODE_AMPERSANDS).'" id="tl_table_import" class="tl_form" method="post">
+<form action="'.ampersand($this->Environment->request, true).'" id="tl_table_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_table_import" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
   <select name="separator" id="separator" class="tl_select" onfocus="Backend.getScrollOffset();">
     <option value="comma">'.$GLOBALS['TL_LANG']['MSC']['comma'].'</option>
@@ -330,7 +335,7 @@ class TableWizard extends Widget
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" alt="import table" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][0]).'" /> 
+<input type="submit" name="save" id="save" class="tl_submit" alt="import table" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][0]).'" />
 </div>
 
 </div>

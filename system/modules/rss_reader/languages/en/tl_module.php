@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    RssReader
  * @license    LGPL
@@ -30,9 +30,15 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('RSS feed URL', 'Please enter the URL of the RSS feed.');
-$GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Layout template', 'Please choose a layout template. You can add custom RSS templates to folder <em>templates</em>. RSS template files start with <em>rss_</em> and require file extension <em>.tpl</em>.');
-$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Number of items', 'Please select the number of items to be displayed (0 = display all items).');
-$GLOBALS['TL_LANG']['tl_module']['rss_cache']         = array('Cache timeout', 'Here you can define the period of time the RSS feed is being cached.');
+$GLOBALS['TL_LANG']['tl_module']['rss_cache']         = array('Cache timeout', 'Here you can define how long the RSS feed is being cached.');
+$GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('Feed URLs', 'Please enter the URL of one or more RSS feeds.');
+$GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Feed template', 'Here you can select the feed template.');
+$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Number of items', 'Here you can limit the number of items. Set to 0 to show all.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_module']['import_legend'] = 'Import settings';
 
 ?>

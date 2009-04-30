@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Plugins
  * @license    LGPL
@@ -43,7 +43,7 @@ require('typolib.php');
 /**
  * Generate page
  */
-header('Content-Type: text/html; charset='.$GLOBALS['TL_CONFIG']['characterSet']);
+header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 $objLib = new typolib();
 
 ?>
@@ -80,11 +80,11 @@ $objLib = new typolib();
           </tr>
           <tr>
             <td nowrap="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
-            <td><table border="0" cellspacing="0" cellpadding="0"> 
-				  <tr> 
-					<td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /></td> 
+            <td><table border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /></td>
 					<td id="hrefbrowsercontainer">&nbsp;</td>
-				  </tr> 
+				  </tr>
 				</table></td>
           </tr>
           <tr>

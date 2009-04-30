@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModulePersonalData
  *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -137,13 +137,6 @@ class ModulePersonalData extends Module
 			{
 				$objWidget->validate();
 				$varValue = $objWidget->value;
-				$strUsername = strlen($this->Input->post('username')) ? $this->Input->post('username') : $this->User->username;
-
-				// Check whether the password matches the username
-				if ($objWidget instanceof FormPassword && $varValue == sha1($strUsername))
-				{
-					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
-				}
 
 				// Convert date formats into timestamps
 				if (strlen($varValue) && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
@@ -194,7 +187,7 @@ class ModulePersonalData extends Module
 								   ->execute($varSave, $this->User->id);
 
 					// HOOK: set new password callback
-					if ($objWidget instanceof FormPassword && array_key_exists('setNewPassword', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
+					if ($objWidget instanceof FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 						{
@@ -235,7 +228,7 @@ class ModulePersonalData extends Module
 
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . count($this->editable) . ((($i % 2) == 0) ? ' odd' : ' even');
 

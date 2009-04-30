@@ -1,7 +1,7 @@
 <?php
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,7 +18,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -37,7 +37,7 @@ require_once('../system/initialize.php');
  * Class PagePicker
  *
  * Back end page picker.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -77,45 +77,9 @@ class PagePicker extends Backend
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
 		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->href = $this->Input->get('href');
-		$this->Template->options = $this->createOptions();
+		$this->Template->options = $this->createPageList();
 
 		$this->Template->output();
-	}
-
-
-	/**
-	 * Get all pages from the current root page
-	 * @param integer
-	 * @param integer
-	 * @return array
-	 */
-	protected function createOptions($intId=0, $level=-1)
-	{
-		$objPages = $this->Database->prepare("SELECT id, title, type, dns FROM tl_page WHERE pid=? ORDER BY sorting")
-								   ->execute($intId);
-
-		if ($objPages->numRows < 1)
-		{
-			return '';
-		}
-
-		++$level;
-		$strOptions = '';
-
-		while ($objPages->next())
-		{
-			// Skip websites that run under a different domain
-			if ($objPages->type == 'root' && $objPages->dns && $objPages->dns != $this->Environment->host && $objPages->dns != 'www.' . $this->Environment->host)
-			{
-				continue;
-			}
-
-			$strOptions .= sprintf('<option value="{{link_url::%s}}"%s>%s%s</option>', $objPages->id, (($this->Input->get('href') == '{{link_url::' . $objPages->id . '}}') ? ' selected="selected"' : ''), str_repeat("&nbsp;", (2 * $level)), specialchars($objPages->title));
-			$strOptions .= $this->createOptions($objPages->id, $level);
-		}
-
-		return $strOptions;
 	}
 }
 

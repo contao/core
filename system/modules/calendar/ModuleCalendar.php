@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleCalendar
  *
  * Front end module "calendar".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -43,6 +43,12 @@ class ModuleCalendar extends Events
 	 * @var integer
 	 */
 	protected $Date;
+
+	/**
+	 * Redirect URL
+	 * @var string
+	 */
+	protected $strLink;
 
 	/**
 	 * Template
@@ -79,6 +85,21 @@ class ModuleCalendar extends Events
 		}
 
 		$this->strUrl = preg_replace('/\?.*$/i', '', $this->Environment->request);
+
+		// Get current "jumpTo" page
+		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($this->jumpTo);
+
+		if ($objPage->numRows)
+		{
+			$this->strLink = $this->generateFrontendUrl($objPage->row());
+		}
+		else
+		{
+			$this->strLink = $this->strUrl;
+		}
+
 		return parent::generate();
 	}
 
@@ -93,28 +114,30 @@ class ModuleCalendar extends Events
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
 
+		$objTemplate = new FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
+
 		// Previous month
 		$prevMonth = ($intMonth == 1) ? 12 : ($intMonth - 1);
 		$prevYear = ($intMonth == 1) ? ($intYear - 1) : $intYear;
 		$lblPrevious = $GLOBALS['TL_LANG']['MONTHS'][($prevMonth - 1)] . ' ' . $prevYear;
 
-		$this->Template->previous = sprintf('<a href="%s" title="%s">%s</a>',
-											($this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $prevYear . ((strlen($prevMonth) < 2) ? '0' : '') . $prevMonth . '01'),
-											specialchars($lblPrevious),
-											(strlen($this->cal_previous) ? $this->cal_previous : '&lt;') . ' ' . $lblPrevious);
+		$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $prevYear . ((strlen($prevMonth) < 2) ? '0' : '') . $prevMonth . '01';
+		$objTemplate->prevTitle = specialchars($lblPrevious);
+		$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
+		$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
 
 		// Current month
-		$this->Template->current = $GLOBALS['TL_LANG']['MONTHS'][(date('m', $this->Date->tstamp) - 1)] .  ' ' . date('Y', $this->Date->tstamp);
+		$objTemplate->current = $GLOBALS['TL_LANG']['MONTHS'][(date('m', $this->Date->tstamp) - 1)] .  ' ' . date('Y', $this->Date->tstamp);
 
 		// Next month
 		$nextMonth = ($intMonth == 12) ? 1 : ($intMonth + 1);
 		$nextYear = ($intMonth == 12) ? ($intYear + 1) : $intYear;
 		$lblNext = $GLOBALS['TL_LANG']['MONTHS'][($nextMonth - 1)] . ' ' . $nextYear;
 
-		$this->Template->next = sprintf('<a href="%s" title="%s">%s</a>',
-										($this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $nextYear . ((strlen($nextMonth) < 2) ? '0' : '') . $nextMonth . '01'),
-										specialchars($lblNext),
-										$lblNext . ' ' . (strlen($this->cal_next) ? $this->cal_next : '&gt;'));
+		$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $nextYear . ((strlen($nextMonth) < 2) ? '0' : '') . $nextMonth . '01';
+		$objTemplate->nextTitle = specialchars($lblNext);
+		$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
+		$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
 
 		// Set week start day
 		if (!$this->cal_startDay)
@@ -122,8 +145,10 @@ class ModuleCalendar extends Events
 			$this->cal_startDay = 0;
 		}
 
-		$this->Template->days = $this->compileDays();
-		$this->Template->weeks = $this->compileWeeks();
+		$objTemplate->days = $this->compileDays();
+		$objTemplate->weeks = $this->compileWeeks();
+
+		$this->Template->calendar = $objTemplate->parse();
 	}
 
 
@@ -178,7 +203,7 @@ class ModuleCalendar extends Events
 			$strClass = ($intCurrentDay < 2) ? ' weekend' : '';
 			$strClass .= ($i == 1 || $i == 8 || $i == 15 || $i == 22 || $i == 29 || $i == 36) ? ' col_first' : '';
 			$strClass .= ($i == 7 || $i == 14 || $i == 21 || $i == 28 || $i == 35 || $i == 42) ? ' col_last' : '';
-		
+
 			// Empty cell
 			if ($intDay < 1 || $intDay > $intDaysInMonth)
 			{
@@ -193,7 +218,7 @@ class ModuleCalendar extends Events
 			$strClass .= ($intKey == date('Ymd')) ? ' today' : '';
 
 			// Inactive days
-			if (!$intKey || !array_key_exists($intKey, $arrAllEvents))
+			if (empty($intKey) || !isset($arrAllEvents[$intKey]))
 			{
 				$arrDays[$strWeekClass][$i]['label'] = $intDay;
 				$arrDays[$strWeekClass][$i]['class'] = 'days' . $strClass;
@@ -215,6 +240,8 @@ class ModuleCalendar extends Events
 
 			$arrDays[$strWeekClass][$i]['label'] = $intDay;
 			$arrDays[$strWeekClass][$i]['class'] = 'days active' . $strClass;
+			$arrDays[$strWeekClass][$i]['href'] = $this->strLink . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'day=' . $intKey;
+			$arrDays[$strWeekClass][$i]['title'] = sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['cal_events']), count($arrEvents));
 			$arrDays[$strWeekClass][$i]['events'] = $arrEvents;
 		}
 

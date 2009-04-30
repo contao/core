@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -42,7 +42,7 @@ $GLOBALS['TL_LANG']['ERR']['noChannels']   = 'Bitte wählen Sie mindestens einen
 $GLOBALS['TL_LANG']['MSC']['subscribe']   = 'Abonnieren';
 $GLOBALS['TL_LANG']['MSC']['unsubscribe'] = 'Kündigen';
 $GLOBALS['TL_LANG']['MSC']['nl_subject']  = 'Ihr Newsletter-Abonnement auf %s';
-$GLOBALS['TL_LANG']['MSC']['nl_confirm']  = 'Vielen Dank für Ihre Bestellung. Sie erhalten eine Bestätigungsmail.';
+$GLOBALS['TL_LANG']['MSC']['nl_confirm']  = 'Vielen Dank für Ihr Abonnement. Sie erhalten eine Bestätigungsmail.';
 $GLOBALS['TL_LANG']['MSC']['nl_activate'] = 'Ihr Abonnement wurde aktiviert.';
 $GLOBALS['TL_LANG']['MSC']['nl_removed']  = 'Ihr Abonnement wurde gekündigt.';
 

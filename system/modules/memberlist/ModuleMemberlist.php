@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer 
- * @package    Memberlist 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer
+ * @package    Memberlist
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,8 +30,8 @@
 /**
  * Class ModuleMemberlist
  *
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer 
+ * @copyright  Leo Feyer 2008-2009
+ * @author     Leo Feyer
  * @package    Controller
  */
 class ModuleMemberlist extends Module
@@ -306,7 +306,7 @@ class ModuleMemberlist extends Module
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return;
 		}
 
@@ -474,19 +474,19 @@ class ModuleMemberlist extends Module
 		// Date
 		elseif ($GLOBALS['TL_DCA']['tl_member']['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA']['tl_member']['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA']['tl_member']['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = date($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+			$value = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
 		}
 
 		// URLs

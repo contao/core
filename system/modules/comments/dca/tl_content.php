@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -30,21 +30,12 @@
 /**
  * Add palette to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = 'type,headline;com_moderate,com_bbcode,com_disableCaptcha;com_perPage,com_order,com_template;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['comments'] = '{type_legend},type,headline;{comment_legend},com_order,com_perPage,com_moderate,com_bbcode,com_disableCaptcha;{template_legend:hide},com_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
  * Add fields to tl_content
  */
-$GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_template'],
-	'default'                 => 'com_default',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('com_')
-);
-
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_order'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_order'],
@@ -52,7 +43,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_order'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_content']
+	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_perPage'] = array
@@ -60,28 +52,40 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_perPage'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_perPage'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit')
+	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_moderate'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_moderate'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_bbcode'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_bbcode'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['com_disableCaptcha'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_template'],
+	'default'                 => 'com_default',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => $this->getTemplateGroup('com_')
 );
 
 ?>

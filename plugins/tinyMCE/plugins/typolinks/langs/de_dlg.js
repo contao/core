@@ -1,6 +1,6 @@
 tinyMCE.addI18n('de.typolinks_dlg',{
-page:"TYPOlight Seiten",
-file:"TYPOlight Dateien",
+page:"TYPOlight-Seiten",
+file:"TYPOlight-Dateien",
 link_title:"Link einf\u00FCgen/bearbeiten",
 link_url:"Adresse",
 link_target:"Fenster",

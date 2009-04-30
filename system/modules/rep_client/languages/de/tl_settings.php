@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TL_ROOT/system/modules/rep_client/languages/de/tl_settings.php 
  * 
@@ -14,7 +15,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Extension Repository Ausweichsprachen', 'Komma-separierte Liste der ISO-Sprachcodes, die alternativ angezeigt werden falls die Erweiterung nicht in der aktuellen Backendsprache verfügbar ist. Sortierung nach absteigender Priorität.');
-$GLOBALS['TL_LANG']['tl_settings']['repository_listsize']  = array('Erweiterungen pro Seite', 'Anzahl der Erweiterungen, die pro Seite angezeigt werden (Standard = 10).');
- 
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Fallback-Sprachen', 'Hier können Sie eine kommagetrennte Liste von ISO-Sprachcodes eigeben, die angezeigt werden, wenn eine Erweiterung nicht in der aktuellen Backendsprache verfügbar ist.');
+$GLOBALS['TL_LANG']['tl_settings']['repository_listsize']  = array('Erweiterungen pro Seite', 'Hier können Sie die Anzahl an Erweiterungen pro Seite festlegen.');
+
 ?>

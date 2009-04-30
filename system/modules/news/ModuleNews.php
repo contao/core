@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNews
  *
  * Parent class for news modules.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -42,7 +42,7 @@ abstract class ModuleNews extends Module
 	 * URL cache array
 	 * @var array
 	 */
-	private static $arrCache = array();
+	private static $arrUrlCache = array();
 
 
 	/**
@@ -98,6 +98,8 @@ abstract class ModuleNews extends Module
 			return array();
 		}
 
+		$this->import('String');
+
 		$arrArticles = array();
 		$limit = $objArticles->numRows;
 		$count = 0;
@@ -125,6 +127,12 @@ abstract class ModuleNews extends Module
 				$objTemplate->text = true;
 			}
 
+			// Encode e-mail addresses
+			else
+			{
+				$objTemplate->text = $this->String->encodeEmail($objArticles->text);
+			}
+
 			// Add an image
 			if ($objArticles->addImage && is_file(TL_ROOT . '/' . $objArticles->singleSRC))
 			{
@@ -149,7 +157,6 @@ abstract class ModuleNews extends Module
 			$arrMeta = $this->getMetaFields($objArticles);
 
 			$objTemplate->date = $arrMeta['date'];
-			$objTemplate->dateFormat = $this->news_dateFormat;
 			$objTemplate->hasMetaFields = count($arrMeta) ? true : false;
 			$objTemplate->numberOfComments = $arrMeta['ccount'];
 			$objTemplate->commentCount = $arrMeta['comments'];
@@ -229,33 +236,13 @@ abstract class ModuleNews extends Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = date((strlen($this->news_dateFormat) ? $this->news_dateFormat : $GLOBALS['TL_CONFIG']['datimFormat']), $objArticle->date);
+					$return['date'] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objArticle->date);
 					break;
 
 				case 'author':
-					if (!strlen($objArticle->author))
+					if (strlen($objArticle->author))
 					{
-						break;
-					}
-
-					$strCacheKey = 'author_' . $objArticle->author;
-
-					// Load from cache
-					if (array_key_exists($strCacheKey, self::$arrCache))
-					{
-						$return['author'] = self::$arrCache[$strCacheKey];
-						break;
-					}
-
-					// Select from database
-					$objAuthor = $this->Database->prepare("SELECT name FROM tl_user WHERE id=?")
-												->limit(1)
-												->execute($objArticle->author);
-
-					if ($objAuthor->numRows)
-					{
-						self::$arrCache[$strCacheKey] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objAuthor->name;
-						$return['author'] = self::$arrCache[$strCacheKey];
+						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objArticle->author;
 					}
 					break;
 
@@ -287,9 +274,9 @@ abstract class ModuleNews extends Module
 		$strCacheKey = 'id_' . $objArticle->id;
 
 		// Load URL from cache
-		if (array_key_exists($strCacheKey, self::$arrCache))
+		if (isset(self::$arrUrlCache[$strCacheKey]))
 		{
-			return self::$arrCache[$strCacheKey];
+			return self::$arrUrlCache[$strCacheKey];
 		}
 
 		// Link to external page
@@ -302,13 +289,13 @@ abstract class ModuleNews extends Module
 				$objArticle->url = 'mailto:' . $this->String->encodeEmail(substr($objArticle->url, 7));
 			}
 
-			self::$arrCache[$strCacheKey] = ampersand($objArticle->url);
+			self::$arrUrlCache[$strCacheKey] = ampersand($objArticle->url);
 		}
 
 		// Link to internal page
 		else
 		{
-			$strUrl = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+			$strUrl = ampersand($this->Environment->request, true);
 
 			// Get target page
 			$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -336,10 +323,10 @@ abstract class ModuleNews extends Module
 				$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $this->Input->get('month');
 			}
 
-			self::$arrCache[$strCacheKey] = $strUrl;
+			self::$arrUrlCache[$strCacheKey] = $strUrl;
 		}
 
-		return self::$arrCache[$strCacheKey];
+		return self::$arrUrlCache[$strCacheKey];
 	}
 
 
@@ -357,7 +344,7 @@ abstract class ModuleNews extends Module
 		{
 			return sprintf('<a href="%s" title="%s">%s</a>',
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
-							$GLOBALS['TL_LANG']['MSC']['readMore'],
+							sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline),
 							$strLink);
 		}
 

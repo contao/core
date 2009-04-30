@@ -7,11 +7,29 @@
 
 <div id="tl_rebuild_index">
 
-<p><?php echo $this->note; ?></p>
+<p id="index_note"><?php echo $this->note; ?></p>
+<p id="index_loading" style="display:none;"><?php echo $this->loading; ?></p>
+<p id="index_complete" style="display:none;"><?php echo $this->complete; ?></p>
 
 <?php echo $this->content; ?>
 
 </div>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.addEvent('domready', function()
+{
+	$('index_note').setStyle('display', 'none');
+	$$('h2.sub_headline_index').setStyle('display', 'none');
+	$('index_loading').setStyle('display', 'block');
+});
+window.addEvent('load', function()
+{
+	$('index_loading').setStyle('display', 'none');
+	$('index_complete').setStyle('display', 'block');
+});
+//--><!]]>
+</script>
 
 <form action="<?php echo $this->href; ?>" class="tl_form" method="get">
 <div class="tl_submit_container">

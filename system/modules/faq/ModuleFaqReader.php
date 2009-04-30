@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,19 +19,19 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
- * @package    Faq 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Faq
+ * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Class ModuleFaqReader 
+ * Class ModuleFaqReader
  *
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
+ * @copyright  Leo Feyer 2008-2009
+ * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
 class ModuleFaqReader extends Module
@@ -104,7 +104,7 @@ class ModuleFaqReader extends Module
 			$objPage->cache = 0;
 
 			// Send 404 header
-			header('HTTP/1.0 404 Not Found');
+			header('HTTP/1.1 404 Not Found');
 			return;
 		}
 
@@ -114,8 +114,11 @@ class ModuleFaqReader extends Module
 			$objPage->pageTitle = $objFaq->question;
 		}
 
+		// Encode e-mail addresses
+		$this->import('String');
 		$this->Template->question = $objFaq->question;
-		$this->Template->answer = $objFaq->answer;
+		$this->Template->answer = $this->String->encodeEmail($objFaq->answer);
+
 		$this->Template->addImage = false;
 
 		// Add image
@@ -184,7 +187,7 @@ class ModuleFaqReader extends Module
 		}
 
 		$this->Template->enclosure = $arrEnclosures;
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], date($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->authorsName);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->authorsName);
 	}
 }
 

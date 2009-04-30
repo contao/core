@@ -1,4 +1,5 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TYPOlight Repository :: Language file for tl_settings (en)
  *
@@ -11,7 +12,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Extension repository fallback languages', 'Comma separated list of ISO language codes to use as fallback when an extension is not available in the current backend language. Order the list from highest down to lowest priority.');
-$GLOBALS['TL_LANG']['tl_settings']['repository_listsize']  = array('Extension catalog pagesize', 'Number of extensions displayed per page (default = 10).');
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Fallback languages', 'Here you can enter a comma separated list of ISO language codes to be used if an extension description is not available in the current back end language.');
+$GLOBALS['TL_LANG']['tl_settings']['repository_listsize']  = array('Extensions per page', 'Here you can define the number of extensions per page.');
 
 ?>

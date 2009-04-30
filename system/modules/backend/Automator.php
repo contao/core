@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Automator
  *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -116,7 +116,7 @@ class Automator extends Backend
 			$arrPages = $this->getSearchablePages($objRoot->id, $strDomain);
 
 			// HOOK: take additional pages
-			if (array_key_exists('getSearchablePages', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
+			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['getSearchablePages'] as $callback)
 				{
@@ -173,6 +173,54 @@ class Automator extends Backend
 
 		// Add log entry
 		$this->log('Purged temporary directory', 'Automator purgeTempFolder()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the thumbnail directory
+	 */
+	public function purgeHtmlFolder()
+	{
+		$arrHtml = scan(TL_ROOT . '/system/html');
+
+		// Remove files
+		if (is_array($arrHtml))
+		{
+			foreach ($arrHtml as $strFile)
+			{
+				if ($strFile != 'index.html')
+				{
+					@unlink(TL_ROOT . '/system/html/' . $strFile);
+				}
+			}
+		}
+
+		// Add log entry
+		$this->log('Purged thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
+	}
+
+
+	/**
+	 * Check for new TYPOlight versions
+	 */
+	public function checkForUpdates()
+	{
+		if (!is_numeric(BUILD))
+		{
+			return;
+		}
+
+		$objRequest = new Request();
+		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'version.txt');
+
+		if (!$objRequest->hasError())
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
+			$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
+		}
+
+		// Add log entry
+		$this->log('Checked for TYPOlight updates', 'Automator checkForUpdates()', TL_CRON);
 	}
 }
 

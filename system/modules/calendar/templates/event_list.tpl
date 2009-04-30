@@ -8,9 +8,7 @@
 <div class="event<?php echo $this->class; ?>">
 <h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
 <?php if ($this->time || $this->span): ?>
-<div class="time">
-<?php echo $this->time . $this->span; ?> 
-</div>
+<p class="time"><?php echo $this->time . $this->span; ?></p>
 <?php endif; ?>
 <div class="ce_text">
 <?php echo $this->details; ?>

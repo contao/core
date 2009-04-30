@@ -8,22 +8,18 @@
  * @license See accompaning file LICENSE.txt
  */
 
-if (extension_loaded('soap')) {
+/**
+ * Add to palette
+ */
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{repository_legend:hide},repository_wsdl';
 
-	/**
-	 * Add to palette
-	 */
-	$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';repository_wsdl';
+/**
+ * Add fields
+ */
+$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_wsdl'] = array(
+	'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'],
+	'inputType'	=>	'text',
+	'eval'		=>	array('maxlength'=>255, 'rgxp'=>'url', 'tl_class'=>'long')
+);
 
-	/**
-	 * Add fields
-	 */
-	$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_wsdl'] = array(
-		'label'		=>	&$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'],
-		'exclude'	=>	true,
-		'inputType'	=>	'text',
-		'eval'		=>	array('maxlength'=>255, 'rgxp'=>'url')
-	);
-
-} // if
 ?>

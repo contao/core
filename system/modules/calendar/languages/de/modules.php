@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,17 +30,16 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Kalender/Events', 'Mit diesem Modul können Sie verschiedene Kalender verwalten.');
+$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Events verwalten und als Kalender oder Eventliste ausgeben.');
 
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['events']          = 'Kalender/Events';
-$GLOBALS['TL_LANG']['FMD']['calendar']        = array('Kalender', 'Dieses Modul fügt Ihrer Webseite einen Kalender hinzu.');
-$GLOBALS['TL_LANG']['FMD']['minicalendar']    = array('Mini-Kalender', 'Dieses Modul fügt Ihrer Webseite einen Mini-Kalender hinzu, der zur Steuerung des Moduls "Eventliste" verwendet werden kann.');
-$GLOBALS['TL_LANG']['FMD']['eventreader']     = array('Eventleser', 'Dieses Modul stellt einen bestimmten Event dar.');
-$GLOBALS['TL_LANG']['FMD']['eventlist']       = array('Eventliste', 'Dieses Modul listet alle Events eines Monats, einer Woche oder eines Tages.');
-$GLOBALS['TL_LANG']['FMD']['upcoming_events'] = array('Nächste Events', 'Dieses Modul listet eine bestimmte Anzahl demnächst stattfindender Events.');
+$GLOBALS['TL_LANG']['FMD']['events']          = 'Events';
+$GLOBALS['TL_LANG']['FMD']['calendar']        = array('Kalender', 'fügt der Seite einen Kalender hinzu.');
+$GLOBALS['TL_LANG']['FMD']['eventreader']     = array('Eventleser', 'stellt einen einzelnen Event dar.');
+$GLOBALS['TL_LANG']['FMD']['eventlist']       = array('Eventliste', 'listet alle Events eines bestimmten Zeitraums auf.');
+$GLOBALS['TL_LANG']['FMD']['upcoming_events'] = array('Nächste Events', 'listet alle demnächst stattfindender Events auf.');
 
 ?>

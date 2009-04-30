@@ -1,11 +1,11 @@
 /**
- * $Id: editor_template_src.js 960 2008-11-12 18:30:32Z spocke $
+ * $Id: editor_template_src.js 1045 2009-03-04 20:03:18Z spocke $
  *
  * @author Moxiecode
  * @copyright Copyright © 2004-2008, Moxiecode Systems AB, All rights reserved.
  */
 
-(function() {
+(function(tinymce) {
 	var DOM = tinymce.DOM, Event = tinymce.dom.Event, extend = tinymce.extend, each = tinymce.each, Cookie = tinymce.util.Cookie, lastExtID, explode = tinymce.explode;
 
 	// Tell it to load theme specific language pack(s)
@@ -104,7 +104,7 @@
 						}
 					}
 
-					if (/\s*\./.test(v))
+					if (/^\s*\./.test(v))
 						cl = v.replace(/\./g, '');
 
 					o[k] = cl ? {'class' : cl} : {fontSize : v};
@@ -440,7 +440,7 @@
 			}
 */
 
-			if (!ed.getParam('accessibility_focus') || ed.getParam('tab_focus'))
+			if (!ed.getParam('accessibility_focus'))
 				Event.add(DOM.add(p, 'a', {href : '#'}, '<!-- IE -->'), 'focus', function() {tinyMCE.get(ed.id).focus();});
 
 			if (s.theme_advanced_toolbar_location == 'external')
@@ -655,7 +655,7 @@
 
 			n = DOM.add(DOM.add(c, 'tr'), 'td', {'class' : 'mceToolbar ' + a});
 
-			if (!ed.getParam('accessibility_focus') || ed.getParam('tab_focus'))
+			if (!ed.getParam('accessibility_focus'))
 				h.push(DOM.createHTML('a', {href : '#', onfocus : 'tinyMCE.get(\'' + ed.id + '\').focus();'}, '<!-- IE -->'));
 
 			h.push(DOM.createHTML('a', {href : '#', accesskey : 'q', title : ed.getLang("advanced.toolbar_focus")}, '<!-- IE -->'));
@@ -687,10 +687,10 @@
 
 			n = DOM.add(tb, 'tr');
 			n = td = DOM.add(n, 'td', {'class' : 'mceStatusbar'});
-			n = DOM.add(n, 'div', {id : ed.id + '_path_row'}, s.theme_advanced_path ? ed.translate('advanced.path') + ': ' : '&nbsp;');
+			n = DOM.add(n, 'div', {id : ed.id + '_path_row'}, s.theme_advanced_path ? ed.translate('advanced.path') + ': ' : '&#160;');
 			DOM.add(n, 'a', {href : '#', accesskey : 'x'});
 
-			if (s.theme_advanced_resizing && !tinymce.isOldWebKit) {
+			if (s.theme_advanced_resizing) {
 				DOM.add(td, 'a', {id : ed.id + '_resize', href : 'javascript:;', onclick : "return false;", 'class' : 'mceResize'});
 
 				if (s.theme_advanced_resizing_use_cookie) {
@@ -1150,4 +1150,4 @@
 	});
 
 	tinymce.ThemeManager.add('advanced', tinymce.themes.AdvancedTheme);
-}());
+}(tinymce));

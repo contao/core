@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
 /**
  * TL_ROOT/system/modules/rep_client/languages/de/modules.php 
  * 
@@ -14,8 +15,8 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository Client';
-$GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Erweiterungskatalog', 'Das Extension Repository durchsuchen, um Erweiterungen zu finden und zu installieren.');
-$GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Erweiterungsverwaltung', 'Verwaltung der installierten Erweiterungen');
+$GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository-Client';
+$GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Erweiterungskatalog', 'Das Extension Repository durchsuchen und Erweiterungen installieren.');
+$GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Erweiterungsverwaltung', 'Installierte Erweiterungen verwalten oder entfernen.');
  
 ?>

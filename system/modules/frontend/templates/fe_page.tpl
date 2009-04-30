@@ -49,9 +49,10 @@
 <div class="inside">
 <?php echo $this->main; ?> 
 </div>
-<?php echo $this->getCustomSections('main'); ?> 
-<div id="clear"></div>
+<?php echo $this->getCustomSections('main'); ?>
 </div>
+
+<div id="clear"></div>
 
 </div>
 <?php echo $this->getCustomSections('after'); ?>

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,11 +30,10 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']        = 'name,type,headline;cal_calendar,cal_startDay;cal_noSpan,cal_previous,cal_next;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['minicalendar']    = 'name,type,headline;cal_calendar;cal_noSpan,cal_startDay;jumpTo;cal_previous,cal_next;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']     = 'name,type,headline;cal_calendar,cal_template;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']       = 'name,type,headline;cal_calendar,cal_template;searchable,cal_format,cal_startDay,cal_noSpan;guests,protected;align,space,cssID';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['upcoming_events'] = 'name,type,headline;cal_calendar,cal_template;cal_noSpan,cal_limit;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']        = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate,cal_startDay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']     = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']       = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format;{template_legend:hide},cal_template,cal_startDay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['upcoming_events'] = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_limit;{template_legend:hide},cal_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -49,39 +48,11 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_calendar'] = array
 	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
-	'default'                 => 0,
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
 	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
-	'reference'               => &$GLOBALS['TL_LANG']['DAYS']
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_previous'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_previous'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('allowHtml'=>true, 'maxlength'=>255)
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_next'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_next'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('allowHtml'=>true, 'maxlength'=>255)
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_template'],
-	'default'                 => 'event_default',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('event_')
+	'inputType'               => 'checkbox'
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
@@ -102,11 +73,35 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
 	'eval'                    => array('rgxp'=>'digit')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_template'],
+	'default'                 => 'event_default',
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'select',
+	'options'                 => $this->getTemplateGroup('event_'),
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate'],
+	'default'                 => 'cal_default',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => $this->getTemplateGroup('cal_'),
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
+	'default'                 => 0,
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
+	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 
@@ -114,7 +109,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
  * Class tl_module_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

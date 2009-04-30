@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
  * Class Popup
  *
  * Preview images in a back end pop up window.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -101,10 +101,10 @@ class Popup extends Backend
 		{
 			$objFile = new File($this->strFile);
 
-			header('Content-Type: '.$objFile->mime);
+			header('Content-Type: ' . $objFile->mime);
 			header('Content-Transfer-Encoding: binary');
-			header('Content-Disposition: attachment; filename="'.$objFile->basename.'"');
-			header('Content-Length: '.$objFile->filesize);
+			header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
+			header('Content-Length: ' . $objFile->filesize);
 			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 			header('Pragma: public');
 			header('Expires: 0');
@@ -121,10 +121,11 @@ class Popup extends Backend
 
 		// Add file info
 		$this->Template->icon = $objFile->icon;
-		$this->Template->ctime = date($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
-		$this->Template->mtime = date($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
-		$this->Template->atime = date($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
+		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
+		$this->Template->mtime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
+		$this->Template->atime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
 		$this->Template->filesize = number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' kB (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Bytes)';
+		$this->Template->path = $this->strFile;
 
 		// Image
 		if ($objFile->isGdImage)
@@ -150,7 +151,7 @@ class Popup extends Backend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->href = ampersand($this->Environment->request, ENCODE_AMPERSANDS) . '&amp;download=1';
+		$this->Template->href = ampersand($this->Environment->request, true) . '&amp;download=1';
 		$this->Template->headline = basename(utf8_convert_encoding($this->strFile, $GLOBALS['TL_CONFIG']['characterSet']));
 		$this->Template->label_imagesize = $GLOBALS['TL_LANG']['MSC']['fileImageSize'];
 		$this->Template->label_filesize = $GLOBALS['TL_LANG']['MSC']['fileSize'];
@@ -158,6 +159,7 @@ class Popup extends Backend
 		$this->Template->label_mtime = $GLOBALS['TL_LANG']['MSC']['fileModified'];
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
+		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
 		$this->Template->download = $GLOBALS['TL_LANG']['MSC']['fileDownload'];
 
 		$this->Template->output();

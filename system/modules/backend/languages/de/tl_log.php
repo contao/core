@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -31,13 +31,13 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_log']['tstamp']   = array('Datum', 'Datum und Uhrzeit des Eintrags');
+$GLOBALS['TL_LANG']['tl_log']['source']   = array('Ursprung', 'Backend oder Frontend');
 $GLOBALS['TL_LANG']['tl_log']['action']   = array('Kategorie', 'Kategorie der Aktion');
-$GLOBALS['TL_LANG']['tl_log']['source']   = array('Ursprung', 'Log-Einträge können nach ihrem Ursprung sortiert werden (Backend oder Frontend Eintrag).');
 $GLOBALS['TL_LANG']['tl_log']['username'] = array('Benutzer', 'Name des angemeldeten Benutzers');
-$GLOBALS['TL_LANG']['tl_log']['text']     = array('Details', 'Details des aktuellen Eintrags');
-$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP Adresse', 'Anfragende IP-Adresse');
-$GLOBALS['TL_LANG']['tl_log']['browser']  = array('Browser', 'Anfragender Browser');
-$GLOBALS['TL_LANG']['tl_log']['func']     = array('Funktion', 'Name der Funktion');
+$GLOBALS['TL_LANG']['tl_log']['text']     = array('Details', 'Details des Log-Eintrags');
+$GLOBALS['TL_LANG']['tl_log']['func']     = array('Funktion', 'Name der auslösenden Funktion');
+$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP Adresse', 'IP-Adresse des Benutzers');
+$GLOBALS['TL_LANG']['tl_log']['browser']  = array('Browser', 'Name des Browsers');
 
 
 /**

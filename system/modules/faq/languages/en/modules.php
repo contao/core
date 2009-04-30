@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2008 
- * @author     Leo Feyer <leo@typolight.org> 
- * @package    Faq 
- * @license    LGPL 
+ * @copyright  Leo Feyer 2004-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Faq
+ * @license    LGPL
  * @filesource
  */
 
@@ -30,14 +30,14 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['faq'] = array('FAQ', 'This module allows you to manage frequently asked questions.');
+$GLOBALS['TL_LANG']['MOD']['faq'] = array('FAQ', 'Manage frequently asked questions.');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['faq']       = 'FAQ';
-$GLOBALS['TL_LANG']['FMD']['faqlist']   = array('FAQ list', 'With this module you can list frequently asked questions in the front end.');
-$GLOBALS['TL_LANG']['FMD']['faqreader'] = array('FAQ reader', 'With this module you can display a particular question in the front end.');
+$GLOBALS['TL_LANG']['FMD']['faqlist']   = array('FAQ list', 'adds a list of frequently asked questions to the page.');
+$GLOBALS['TL_LANG']['FMD']['faqreader'] = array('FAQ reader', 'shows the answer to a frequently asked question.');
 
 ?>

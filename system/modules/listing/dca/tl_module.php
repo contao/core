@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Listing
  * @license    LGPL
@@ -30,7 +30,7 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['listing'] = 'name,type,headline;list_table,list_fields,list_where;list_layout;perPage,list_search,list_sort;list_info,list_info_layout;guests,protected;align,space,cssID';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['listing'] = '{title_legend},name,headline,type;{config_legend},list_table,list_fields,list_where,list_search,list_sort,perPage,list_info,list_info_where;{template_legend:hide},list_layout,list_info_layout;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -41,7 +41,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_table'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_table'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_listing', 'getAllTables')
+	'options_callback'        => array('tl_module_listing', 'getAllTables'),
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_fields'] = array
@@ -49,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_fields'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_fields'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255)
+	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_where'] = array
@@ -57,7 +58,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_where'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_where'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255)
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_search'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_sort'] = array
@@ -65,7 +74,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_sort'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_sort'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255)
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['list_info'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['list_info_where'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info_where'],
+	'exclude'                 => true,
+	'inputType'               => 'text',
+	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
@@ -74,23 +99,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'default'                 => 'list_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('list_')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_search'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255)
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['list_info'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_info'],
-	'exclude'                 => true,
-	'inputType'               => 'text',
-	'eval'                    => array('maxlength'=>255)
+	'options'                 => $this->getTemplateGroup('list_'),
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
@@ -99,7 +109,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'default'                 => 'info_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('info_')
+	'options'                 => $this->getTemplateGroup('info_'),
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 
@@ -107,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
  * Class tl_module_listing
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

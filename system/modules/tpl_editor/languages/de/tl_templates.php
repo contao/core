@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    TemplateEditor
  * @license    LGPL
@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originalvorlagen', 'Wählen Sie die Originalvorlage aus, die Sie bearbeiten möchten. Es wird eine lokale Kopie im Ordner <em>templates</em> angelegt.');
+$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originaltemplates', 'Eine Kopie des ausgewählten Templates wird im <em>templates</em>-Verzeichnis gespeichert.');
 
 
 /**
@@ -38,15 +38,15 @@ $GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originalvorlagen', 'Wä
  */
 $GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Eine neues Template erstellen';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl']   = 'Template erstellen';
-$GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Ein eigenes Template namens "%s" ist bereits vorhanden!';
+$GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Das Template "%s" existiert bereits!';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_templates']['new']    = array('Neues Template', 'Ein neues Template erstellen');
-$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Template bearbeiten', 'Template "%s" bearbeiten');
-$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Quelltext bearbeiten', 'Den Quelltext der Datei "%s" bearbeiten');
+$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Template umbenennen', 'Template "%s" umbenennen');
+$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Template bearbeiten', 'Die Datei "%s" bearbeiten');
 $GLOBALS['TL_LANG']['tl_templates']['delete'] = array('Template löschen', 'Template "%s" löschen');
 
 ?>

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -33,38 +33,60 @@
 $GLOBALS['TL_LANG']['tl_user']['username']   = array('Username', 'Please enter a unique username.');
 $GLOBALS['TL_LANG']['tl_user']['name']       = array('Name', 'Please enter the first and last name.');
 $GLOBALS['TL_LANG']['tl_user']['email']      = array('E-mail address', 'Please enter a valid e-mail address.');
-$GLOBALS['TL_LANG']['tl_user']['language']   = array('Back end language', 'Please select a back end language.');
-$GLOBALS['TL_LANG']['tl_user']['showHelp']   = array('Show explanation', 'If you choose this option, a short explanation will be shown after each input field.');
-$GLOBALS['TL_LANG']['tl_user']['useRTE']     = array('Enable rich text editor', 'If you experience problems using the rich text editor, you can disable it here.');
-$GLOBALS['TL_LANG']['tl_user']['thumbnails'] = array('Show thumbnail images', 'If you choose this option, thumbnail images will be shown in the file manager.');
-$GLOBALS['TL_LANG']['tl_user']['admin']      = array('Administrator', 'An administrator has unlimited access to all pages, modules, extensions and folders!');
-$GLOBALS['TL_LANG']['tl_user']['groups']     = array('Groups', 'Each user who is not an administrator inherits all permissions from a user group. Therefore, every user has to be a member of at least one group! If a user is assigned to more than one group, the permissions are added together.');
-$GLOBALS['TL_LANG']['tl_user']['inherit']    = array('Permission inheritance', 'Please define to what extent the user inherits permissions.');
-$GLOBALS['TL_LANG']['tl_user']['group']      = array('Use group settings only', 'the current user inherits his permissions from the enabled groups exclusively irrespective of individual settings.');
-$GLOBALS['TL_LANG']['tl_user']['extend']     = array('Extend group settings', 'inherited permissions are extended by individual settings.');
-$GLOBALS['TL_LANG']['tl_user']['custom']     = array('Use individual settings only', 'only the permissions of the current user are applied irrespective of any group permissions.');
-$GLOBALS['TL_LANG']['tl_user']['modules']    = array('Back end modules', 'Please select the modules you want to enable for the user.');
-$GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Please select the pages you want to enable for the current user. Subpages will be included automatically.');
-$GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Allowed page types', 'Please select the page types you want to enable for the user.');
-$GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Please select the folders you want to enable for the user. Subfolders will be included automatically.');
-$GLOBALS['TL_LANG']['tl_user']['forms']      = array('Forms', 'Please select the forms you want to enable for the user.');
-$GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deactivate', 'If you choose this option, the current account will be deactivated. The user will not be able to log in to the system anymore.');
-$GLOBALS['TL_LANG']['tl_user']['start']      = array('Activate on', 'If you enter a date here, the current account will be activated on this day.');
-$GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deactivate on', 'If you enter a date here, the current account will be deactivated on this day.');
-$GLOBALS['TL_LANG']['tl_user']['session']    = array('Delete session data', 'If you choose this option, the current session data will be deleted.');
+$GLOBALS['TL_LANG']['tl_user']['language']   = array('Back end language', 'Here you can choose the back end language.');
+$GLOBALS['TL_LANG']['tl_user']['showHelp']   = array('Show explanation', 'Show a short explanation text below each input field.');
+$GLOBALS['TL_LANG']['tl_user']['thumbnails'] = array('Show thumbnail images', 'Show thumbnail images in the file manager.');
+$GLOBALS['TL_LANG']['tl_user']['useRTE']     = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
+$GLOBALS['TL_LANG']['tl_user']['oldBeTheme'] = array('Use the old form layout', 'Do not use the new collapsible two-column forms.');
+$GLOBALS['TL_LANG']['tl_user']['admin']      = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');
+$GLOBALS['TL_LANG']['tl_user']['groups']     = array('User groups', 'Here you can assign the user to one or more groups.');
+$GLOBALS['TL_LANG']['tl_user']['inherit']    = array('Permission inheritance', 'Here you can define which group permissions the user inherits.');
+$GLOBALS['TL_LANG']['tl_user']['group']      = array('Use group settings only', 'the user inherits only group permissions.');
+$GLOBALS['TL_LANG']['tl_user']['extend']     = array('Extend group settings', 'the group permissions are extended by individual ones.');
+$GLOBALS['TL_LANG']['tl_user']['custom']     = array('Use individual settings only', 'only individual permissions are applied.');
+$GLOBALS['TL_LANG']['tl_user']['modules']    = array('Back end modules', 'Here you can grant access to one or more back end modules.');
+$GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Here you can grant access to one or more pages (subpages are included automatically).');
+$GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Allowed page types', 'Here you can select the page types you want to allow.');
+$GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Here you can grant access to one or more folders (subfolders will be included automatically).');
+$GLOBALS['TL_LANG']['tl_user']['forms']      = array('Allowed forms', 'Here you can grant access to one or more forms.');
+$GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deactivate', 'Temporarily disable the account.');
+$GLOBALS['TL_LANG']['tl_user']['start']      = array('Activate on', 'Automatically activate the account on this day.');
+$GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deactivate on', 'Automatically deactivate the account on this day.');
+$GLOBALS['TL_LANG']['tl_user']['session']    = array('Purge data', 'Please select the data you want to purge.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_user']['name_legend']       = 'Name and e-mail';
+$GLOBALS['TL_LANG']['tl_user']['backend_legend']    = 'Back end settings';
+$GLOBALS['TL_LANG']['tl_user']['password_legend']   = 'Password settings';
+$GLOBALS['TL_LANG']['tl_user']['admin_legend']      = 'Administrator';
+$GLOBALS['TL_LANG']['tl_user']['groups_legend']     = 'User groups';
+$GLOBALS['TL_LANG']['tl_user']['modules_legend']    = 'Allowed modules';
+$GLOBALS['TL_LANG']['tl_user']['pagemounts_legend'] = 'Pagemounts';
+$GLOBALS['TL_LANG']['tl_user']['filemounts_legend'] = 'Filemounts';
+$GLOBALS['TL_LANG']['tl_user']['forms_legend']      = 'Form permissions';
+$GLOBALS['TL_LANG']['tl_user']['account_legend']    = 'Account settings';
+$GLOBALS['TL_LANG']['tl_user']['session_legend']    = 'Clear cache';
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_user']['sessionDeleted'] = 'Your session data has been deleted';
+$GLOBALS['TL_LANG']['tl_user']['sessionLabel']  = 'Session data';
+$GLOBALS['TL_LANG']['tl_user']['htmlLabel']     = 'Image cache';
+$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporary folder';
+$GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'The session data has been purged';
+$GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'The image cache has been purged';
+$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'The temporary folder has been purged';
 
 
 /**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_user']['new']    = array('New user', 'Create a new user');
-$GLOBALS['TL_LANG']['tl_user']['show']   = array('User details', 'Show details of user ID %s');
+$GLOBALS['TL_LANG']['tl_user']['show']   = array('User details', 'Show the details of user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['edit']   = array('Edit user', 'Edit user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['copy']   = array('Duplicate user', 'Duplicate user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['delete'] = array('Delete user', 'Delete user ID %s');

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Newsletter
  * @license    LGPL
@@ -32,7 +32,7 @@
  */
 $GLOBALS['TL_LANG']['ERR']['subscribed']   = 'You are subscribed to the selected channels already.';
 $GLOBALS['TL_LANG']['ERR']['unsubscribed'] = 'You are not subscribed to the selected channels.';
-$GLOBALS['TL_LANG']['ERR']['invalidToken'] = 'This activation link is invalid or outdated.';
+$GLOBALS['TL_LANG']['ERR']['invalidToken'] = 'The activation link is invalid or outdated.';
 $GLOBALS['TL_LANG']['ERR']['noChannels']   = 'Please select at least one channel.';
 
 

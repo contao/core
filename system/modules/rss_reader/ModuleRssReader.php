@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    RssReader
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleRssReader
  *
  * Front end module "rss reader".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -79,8 +79,17 @@ class ModuleRssReader extends Module
 		require_once(TL_ROOT . '/plugins/simplepie/idna_convert.class.php');
 
 		$this->objFeed = new SimplePie();
+		$arrUrls = trimsplit('[\n\t ]', trim($this->rss_feed));
 
-		$this->objFeed->set_feed_url($this->rss_feed);
+		if (count($arrUrls) > 1)
+		{
+			$this->objFeed->set_feed_url($arrUrls);
+		}
+		else
+		{
+			$this->objFeed->set_feed_url($arrUrls[0]);
+		}
+
 		$this->objFeed->set_output_encoding($GLOBALS['TL_CONFIG']['characterSet']);
 		$this->objFeed->set_cache_location(TL_ROOT . '/system/tmp');
 		$this->objFeed->enable_cache(false);
@@ -176,7 +185,6 @@ class ModuleRssReader extends Module
 		}
 
 		$this->Template->items = array_values($items);
-		$this->Template->searchable = $this->searchable ? true : false;
 	}
 }
 

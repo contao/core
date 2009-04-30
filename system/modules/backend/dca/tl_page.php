@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -135,24 +135,24 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('type', 'autoforward', 'protected', 'includeLayout', 'includeCache', 'includeChmod', 'createSitemap'),
-		'default'                     => 'title,alias,type;followup,start,stop',
-		'regular'                     => 'title,alias,type;language,pageTitle,description;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests,noSearch;published,start,stop',
-		'redirect'                    => 'title,alias,type;pageTitle,url,redirect,target;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests;published,start,stop',
-		'forward'                     => 'title,alias,type;pageTitle,jumpTo,redirect;protected;includeLayout;includeCache;includeChmod;cssClass,tabindex,accesskey;hide,guests;published,start,stop',
-		'root'                        => 'title,alias,type;dns,language,fallback;pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;includeLayout;includeCache;createSitemap;includeChmod;published,start,stop',
-		'error_403'                   => 'title,alias,type;language,pageTitle,description;autoforward;includeLayout;includeCache;includeChmod;published,start,stop',
-		'error_404'                   => 'title,alias,type;language,pageTitle,description;autoforward;includeLayout;includeCache;includeChmod;published,start,stop'
+		'default'                     => '{title_legend},title,alias,type;followup,start,stop',
+		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},fallback,dns,language;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'autoforward'                 => 'jumpTo,redirect',
 		'protected'                   => 'groups',
 		'includeLayout'               => 'layout',
 		'includeCache'                => 'cache',
 		'includeChmod'                => 'cuser,cgroup,chmod',
-		'createSitemap'               => 'sitemapName'
+		'createSitemap'               => 'sitemapName',
+		'autoforward'                 => 'redirect,jumpTo'
 	),
 
 	// Fields
@@ -170,40 +170,12 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128),
+			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_page', 'generateAlias')
 			)
 
-		),
-		'adminEmail' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['adminEmail'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'rgxp'=>'email', 'decodeEntities'=>true)
-		),
-		'dateFormat' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dateFormat'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('helpwizard'=>true),
-			'explanation'             => 'dateFormat'
-
-		),
-		'timeFormat' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
-			'exclude'                 => true,
-			'inputType'               => 'text'
-		),
-		'datimFormat' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
-			'exclude'                 => true,
-			'inputType'               => 'text'
 		),
 		'type' => array
 		(
@@ -212,8 +184,15 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_page', 'pageTypes'),
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY']
+		),
+		'pageTitle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['pageTitle'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long')
 		),
 		'language' => array
 		(
@@ -221,57 +200,52 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'default'                 => $GLOBALS['TL_LANGUAGE'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50')
 		),
-		'pageTitle' => array
+		'robots' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['pageTitle'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['robots'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true)
+			'inputType'               => 'select',
+			'options'                 => array('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow'),
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;', 'decodeEntities'=>true)
-		),
-		'url' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['url'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255)
-		),
-		'target' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'eval'                    => array('style'=>'height:60px;', 'decodeEntities'=>true, 'tl_class'=>'clr')
 		),
 		'redirect' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['redirect'],
 			'default'                 => 'permanent',
 			'exclude'                 => true,
-			'inputType'               => 'radio',
-			'options'                 => array('temporary', 'permanent'),
+			'inputType'               => 'select',
+			'options'                 => array('permanent', 'temporary'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_page']
 		),
-		'autoforward' => array
+		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['autoforward'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['jumpTo'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'inputType'               => 'pageTree',
+			'eval'                    => array('fieldType'=>'radio')
 		),
-		'dns' => array
+		'url' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['url'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50')
+		),
+		'target' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'fallback' => array
 		(
@@ -279,13 +253,63 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox'
 		),
-		'jumpTo' => array
+		'dns' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['jumpTo'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
 			'exclude'                 => true,
-			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'adminEmail' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['adminEmail'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>255, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50')
+		),
+		'dateFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dateFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50'),
+			'explanation'             => 'dateFormat'
+
+		),
+		'timeFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'datimFormat' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'createSitemap' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['createSitemap'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'sitemapName' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['sitemapName'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32)
+		),
+		'autoforward' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['autoforward'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
 		),
 		'protected' => array
 		(
@@ -339,13 +363,6 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
-		'chmod' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['chmod'],
-			'default'                 => $GLOBALS['TL_CONFIG']['defaultChmod'],
-			'exclude'                 => true,
-			'inputType'               => 'chmod',
-		),
 		'cuser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cuser'],
@@ -353,6 +370,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'cgroup' => array
 		(
@@ -361,36 +379,19 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
+			'eval'                    => array('tl_class'=>'w50')
 		),
-		'createSitemap' => array
+		'chmod' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['createSitemap'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['chmod'],
+			'default'                 => $GLOBALS['TL_CONFIG']['defaultChmod'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'sitemapName' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['sitemapName'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32)
-		),
-		'hide' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['hide'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'chmod',
+			'eval'                    => array('tl_class'=>'clr')
 		),
 		'noSearch' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['noSearch'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
-		),
-		'guests' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['guests'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox'
 		),
@@ -401,19 +402,33 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>64)
 		),
+		'hide' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['hide'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'guests' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['guests'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
 		'tabindex' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['tabindex'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true)
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'accesskey' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['accesskey'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1)
+			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1, 'tl_class'=>'w50')
 		),
 		'published' => array
 		(
@@ -427,14 +442,14 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -444,7 +459,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
  * Class tl_page
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

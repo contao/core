@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,16 +30,17 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_undo']['fromTable']    = array('Table', 'Name of the original table');
-$GLOBALS['TL_LANG']['tl_undo']['affectedRows'] = array('Data records', 'Number of affected data records');
-$GLOBALS['TL_LANG']['tl_undo']['query']        = array('Details', 'Details of the current entry');
-$GLOBALS['TL_LANG']['tl_undo']['data']         = array('Data', 'Data of the deleted records');
+$GLOBALS['TL_LANG']['tl_undo']['pid']          = array('User', 'Name of the associated user');
+$GLOBALS['TL_LANG']['tl_undo']['fromTable']    = array('Source table', 'Name of the original table');
+$GLOBALS['TL_LANG']['tl_undo']['affectedRows'] = array('Affected rows', 'Number of records included in the undo step');
+$GLOBALS['TL_LANG']['tl_undo']['query']        = array('Details', 'Details of the undo step');
+$GLOBALS['TL_LANG']['tl_undo']['data']         = array('Data', 'Raw data of the undo step');
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_undo']['show'] = array('Show details', 'Show details of entry ID %s');
-$GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Undo', 'Undo action ID %s');
+$GLOBALS['TL_LANG']['tl_undo']['show'] = array('Show details', 'Show the details of entry ID %s');
+$GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Restore', 'Restore entry ID %s');
 
 ?>

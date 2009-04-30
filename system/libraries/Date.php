@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,11 +31,11 @@
  * Class Date
  *
  * Provide methods to handle different date formats.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
-class Date
+class Date extends System
 {
 
 	/**
@@ -91,9 +91,9 @@ class Date
 		}
 
 		// Create dates
-		$this->strDate = date($GLOBALS['TL_CONFIG']['dateFormat'], $this->intTstamp);
-		$this->strTime = date($GLOBALS['TL_CONFIG']['timeFormat'], $this->intTstamp);
-		$this->strDatim = date($GLOBALS['TL_CONFIG']['datimFormat'], $this->intTstamp);
+		$this->strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->intTstamp);
+		$this->strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $this->intTstamp);
+		$this->strDatim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->intTstamp);
 
 		$intYear = date('Y', $this->intTstamp);
 		$intMonth = date('m', $this->intTstamp);
@@ -113,7 +113,6 @@ class Date
 	 * Return an object property
 	 * @param string
 	 * @return mixed
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -165,19 +164,18 @@ class Date
 				break;
 
 			default:
-				throw new Exception(sprintf('Unknown or protected property "%s"', $strKey));
+				return null;
 				break;
 		}
 	}
 
 
 	/**
-	 * Return a regular expression that matches a particular date format
-	 * @param  string
+	 * Return a regular expression to check a date
 	 * @param  string
 	 * @return string
 	 */
-	public function getRegexp($strFormat=false, $strRegexpSyntax='perl')
+	public function getRegexp($strFormat=false)
 	{
 		if (!$strFormat)
 		{
@@ -189,51 +187,26 @@ class Date
 			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
 
-		$arrRegexp = array();
-		$arrCharacters = str_split($strFormat);
+		// Thanks to Christian Labuda
+		$arrRegexp = array
+		(
+			'a' => '(?P<a>am|pm)',
+			'A' => '(?P<A>AM|PM)',
+			'd' => '(?P<d>0[1-9]|[12][0-9]|3[01])',
+			'g' => '(?P<g>[1-9]|1[0-2])',
+			'G' => '(?P<G>[0-9]|1[0-9]|2[0-3])',
+			'h' => '(?P<h>0[1-9]|1[0-2])',
+			'H' => '(?P<H>[01][0-9]|2[0-3])',
+			'i' => '(?P<i>[0-5][0-9])',
+			'j' => '(?P<j>[1-9]|[12][0-9]|3[01])',
+			'm' => '(?P<m>0[1-9]|1[0-2])',
+			'n' => '(?P<n>[1-9]|1[0-2])',
+			's' => '(?P<s>[0-5][0-9])',
+			'Y' => '(?P<Y>[0-9]{4})',
+			'y' => '(?P<y>[0-9]{2})',
+		);
 
-		foreach ($arrCharacters as $strCharacter)
-		{
-			switch ($strCharacter)
-			{
-				case 'a':
-				case 'A':
-					$arrRegexp[$strFormat]['perl']  .= '[apmAPM]{2,2}';
-					$arrRegexp[$strFormat]['posix'] .= '[apmAPM]{2}';
-					break;
-
-				case 'd':
-				case 'm':
-				case 'y':
-				case 'h':
-				case 'H':
-				case 'i':
-				case 's':
-					$arrRegexp[$strFormat]['perl']  .= '[0-9]{2,2}';
-					$arrRegexp[$strFormat]['posix'] .= '[[:digit:]]{2}';
-					break;
-
-				case 'j':
-				case 'n':
-				case 'g':
-				case 'G':
-					$arrRegexp[$strFormat]['perl']  .= '[0-9]{1,2}';
-					$arrRegexp[$strFormat]['posix'] .= '[[:digit:]]{1,2}';
-					break;
-
-				case 'Y':
-					$arrRegexp[$strFormat]['perl']  .= '[0-9]{4,4}';
-					$arrRegexp[$strFormat]['posix'] .= '[[:digit:]]{4}';
-					break;
-
-				default:
-					$arrRegexp[$strFormat]['perl']  .= preg_quote($strCharacter, '/');
-					$arrRegexp[$strFormat]['posix'] .= preg_quote($strCharacter, '/');
-					break;
-			}
-		}
-
-		return $arrRegexp[$strFormat][$strRegexpSyntax];
+		return preg_replace('/[a-zA-Z]/e', 'isset($arrRegexp["$0"]) ? $arrRegexp["$0"] : "$0"', $strFormat);
 	}
 
 
@@ -277,7 +250,7 @@ class Date
 
 		foreach ($arrCharacters as $strCharacter)
 		{
-			if (array_key_exists($strCharacter, $arrCharacterMapper))
+			if (isset($arrCharacterMapper[$strCharacter]))
 			{
 				$arrInputFormat[$strFormat] .= $arrCharacterMapper[$strCharacter];
 				continue;
@@ -332,7 +305,7 @@ class Date
 
 		foreach ($arrCharacters as $strCharacter)
 		{
-			$var = array_key_exists($strCharacter, $arrCharacterMapper) ? $arrCharacterMapper[$strCharacter] : 'dummy';
+			$var = isset($arrCharacterMapper[$strCharacter]) ? $arrCharacterMapper[$strCharacter] : 'dummy';
 
 			switch ($strCharacter)
 			{

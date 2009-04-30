@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class FileTree
  *
  * Provide methods to handle input field "file tree".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -321,8 +321,8 @@ class FileTree extends Widget
 			for ($h=0; $h<count($files); $h++)
 			{
 				$thumbnail = '';
-				$popupWidth = 400;
-				$popupHeight = 215;
+				$popupWidth = 600;
+				$popupHeight = 235;
 
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
@@ -340,8 +340,8 @@ class FileTree extends Widget
 				// Generate thumbnail
 				if ($objFile->isGdImage && $objFile->height > 0)
 				{
-					$popupWidth = ($objFile->width > 400) ? ($objFile->width + 61) : 461;
-					$popupHeight = ($objFile->height + 266);
+					$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
+					$popupHeight = ($objFile->height + 286);
 
 					if ($GLOBALS['TL_CONFIG']['thumbnails'])
 					{

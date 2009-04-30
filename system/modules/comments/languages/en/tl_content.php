@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -30,12 +30,19 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Comments layout', 'Please choose a comment layout. You can add custom comment layouts to folder <em>templates</em>. Comment template files start with <em>com_</em> and require file extension <em>.tpl</em>.');
 $GLOBALS['TL_LANG']['tl_content']['com_order']          = array('Sort order', 'Please choose the sort order.');
-$GLOBALS['TL_LANG']['tl_content']['com_perPage']        = array('Items per page', 'Please enter the number of comments per page (0 = disable pagination).');
-$GLOBALS['TL_LANG']['tl_content']['com_moderate']       = array('Moderate', 'Approve comments before they are shown on the website.');
-$GLOBALS['TL_LANG']['tl_content']['com_bbcode']         = array('Allow BBCode', 'Allow visitors to use BBCode to format their comments.');
-$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'] = array('Disable security question', 'Choose this option to disable the security question (not recommended).');
+$GLOBALS['TL_LANG']['tl_content']['com_perPage']        = array('Items per page', 'The number of comments per page. Set to 0 to disable pagination.');
+$GLOBALS['TL_LANG']['tl_content']['com_moderate']       = array('Moderate', 'Approve comments before they are published on the website.');
+$GLOBALS['TL_LANG']['tl_content']['com_bbcode']         = array('Allow BBCode', 'Allow visitors to format their comments with BBCode.');
+$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'] = array('Disable the security question', 'Here you can disable the security question (not recommended).');
+$GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Comments template', 'Here you can select the comments template.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_content']['comment_legend']  = 'Comment settings';
+$GLOBALS['TL_LANG']['tl_content']['template_legend'] = 'Template settings';
 
 
 /**

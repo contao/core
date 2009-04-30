@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,14 +30,14 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('Nachrichtenarchive', 'Bitte wählen Sie mindestens ein Nachrichtenarchiv.');
-$GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Anzahl der Einträge anzeigen', 'Die Anzahl der Beiträge jedes Monats im Archivmenü angezeigt.');
-$GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Anzahl an Nachrichten', 'Bitte legen Sie fest, wie viele Beiträge angezeigt werden sollen (0 = alle Beiträge anzeigen).');
-$GLOBALS['TL_LANG']['tl_module']['news_template']      = array('Nachrichtenvorlage', 'Bitte wählen Sie ein Nachrichtenlayout. Sie können eigene <em>news_</em>-Vorlagen im Ordner <em>templates</em> speichern.');
-$GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Felder des Nachrichtenkopfs', 'Bitte wählen Sie, welche Felder im Nachrichtenkopf angezeigt werden sollen.');
-$GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Format', 'Bitte wählen Sie ein Archivformat.');
-$GLOBALS['TL_LANG']['tl_module']['news_dateFormat']    = array('Datumsformat', 'Bitte geben Sie ein gültiges Datumsformat wie bei der PHP Funktion <em>date()</em> ein.');
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Zum aktuellen Monat springen', 'Zum aktuellen Monat springen wenn kein bestimmter Monat in der URL vorgegeben wurde.');
+$GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('Nachrichtenarchive', 'Bitte wählen Sie ein oder mehrere Nachrichtenarchive.');
+$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Nur hervorgehobene Beiträge', 'Nur hervorgehobene Beiträge in der Nachrichtenliste anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Zum aktuellen Monat springen', 'Automatisch zum aktuellen Monat springen wenn keiner ausgewählt ist.');
+$GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta-Felder', 'Hier können Sie die Meta-Felder auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['news_template']      = array('Nachrichtentemplate', 'Hier können Sie das Nachrichtentemplate auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Archivformat', 'Hier können Sie das Archivformat auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Anzahl der Beiträge anzeigen', 'Die Anzahl der Beiträge jedes Monats anzeigen.');
 
 
 /**

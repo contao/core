@@ -27,7 +27,7 @@
 <input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>" />
 <input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
 <?php echo $theme->createImage('stop128', 'STOP!'); ?> 
 
 <?php if (count($rep->deps)) { ?>

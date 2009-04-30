@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleQuicklink
  *
  * Front end module "quick link".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -99,7 +99,7 @@ class ModuleQuicklink extends Module
 		// Get all active pages
 		foreach ($this->pages as $intId)
 		{
-			$objPage = $this->Database->prepare("SELECT id, title, alias FROM tl_page WHERE id=? AND type!=? AND type!=? AND type!=?" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$objPage = $this->Database->prepare("SELECT id, title, alias, pageTitle FROM tl_page WHERE id=? AND type!=? AND type!=? AND type!=?" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 									  ->limit(1)
 									  ->execute($intId, 'root', 'error_403', 'error_404', $time, $time);
 
@@ -123,12 +123,13 @@ class ModuleQuicklink extends Module
 			$items[] = array
 			(
 				'href' => $this->generateFrontendUrl($arrPage),
+				'title' => (strlen($arrPage['pageTitle']) ? specialchars($arrPage['pageTitle']) : specialchars($arrPage['title'])),
 				'link' => $arrPage['title']
 			);
 		}
 
 		$this->Template->items = $items;
-		$this->Template->request = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->request = ampersand($this->Environment->request, true);
 		$this->Template->title = strlen($this->customLabel) ? $this->customLabel :$GLOBALS['TL_LANG']['MSC']['quicklink'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}

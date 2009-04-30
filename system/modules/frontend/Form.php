@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Form
  *
  * Provide methods to handle front end forms.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -141,7 +141,7 @@ class Form extends Hybrid
 			$objWidget->required = $objFields->mandatory ? true : false;
 
 			// HOOK: load form field callback
-			if (array_key_exists('loadFormField', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
+			if (isset($GLOBALS['TL_HOOKS']['loadFormField']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 				{
@@ -156,7 +156,7 @@ class Form extends Hybrid
 				$objWidget->validate();
 
 				// HOOK: validate form field callback
-				if (array_key_exists('validateFormField', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['validateFormField']))
+				if (isset($GLOBALS['TL_HOOKS']['validateFormField']) && is_array($GLOBALS['TL_HOOKS']['validateFormField']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
 					{
@@ -213,7 +213,7 @@ class Form extends Hybrid
 		$this->Template->attributes = $strAttributes;
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->formId = strlen($arrAttributes[0]) ? $arrAttributes[0] : 'f' . $this->id;
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 
 		// Get target URL
 		if ($this->method == 'GET')
@@ -258,7 +258,7 @@ class Form extends Hybrid
 				$v = deserialize($v);
 
 				// Skip empty fields
-				if (!is_array($v) && !strlen($v) && $this->skipEmpty)
+				if ($this->skipEmpty && !is_array($v) && !strlen($v))
 				{
 					continue;
 				}
@@ -418,7 +418,7 @@ class Form extends Hybrid
 		$arrData = $_SESSION['FORM_DATA'];
 
 		// HOOK: process form data callback
-		if (array_key_exists('processFormData', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['processFormData']))
+		if (isset($GLOBALS['TL_HOOKS']['processFormData']) && is_array($GLOBALS['TL_HOOKS']['processFormData']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['processFormData'] as $callback)
 			{

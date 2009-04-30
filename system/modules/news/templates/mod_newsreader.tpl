@@ -18,6 +18,10 @@
 
 <!-- indexer::stop -->
 <div class="form">
+<?php if ($this->confirm): ?>
+
+<p class="confirm"><?php echo $this->confirm; ?></p>
+<?php else: ?>
 
 <form action="<?php echo $this->action; ?>" method="post">
 <div class="formbody">
@@ -32,6 +36,7 @@
 </div>
 </div>
 </form>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->

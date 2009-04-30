@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,12 +19,18 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
  */
+
+
+/**
+ * Load tl_user language file
+ */
+$this->loadLanguageFile('tl_user');
 
 
 /**
@@ -99,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name;modules;pagemounts,alpty;filemounts,fop;forms;alexf;disable,start,stop',
+		'default'                     => '{title_legend},name;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms;{alexf_legend},alexf;{account_legend},disable,start,stop',
 	),
 
 	// Fields
@@ -115,7 +121,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 		),
 		'modules' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['modules'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['modules'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_user_group', 'getModules'),
@@ -124,14 +130,14 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 		),
 		'pagemounts' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['pagemounts'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pagemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'eval'                    => array('fieldType'=>'checkbox')
 		),
 		'alpty' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['alpty'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['alpty'],
 			'default'                 => array('regular', 'redirect', 'forward'),
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
@@ -141,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 		),
 		'filemounts' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['filemounts'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['filemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'checkbox')
@@ -158,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 		),
 		'forms' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['forms'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['forms'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_form.title',
@@ -184,14 +190,14 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -201,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
  * Class tl_user_group
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

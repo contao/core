@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,13 +30,13 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_task']['title']       = array('Titel', 'Bitte geben Sie einen Titel ein.');
-$GLOBALS['TL_LANG']['tl_task']['assignTo']    = array('Übertragen an', 'Bitte weisen Sie die Aufgabe einem Benutzer zu.');
+$GLOBALS['TL_LANG']['tl_task']['title']       = array('Titel', 'Bitte geben Sie den Titel der Aufgabe ein.');
+$GLOBALS['TL_LANG']['tl_task']['deadline']    = array('Deadline', 'Hier können Sie die Deadline der Aufgabe eingeben.');
+$GLOBALS['TL_LANG']['tl_task']['assignTo']    = array('Übertragen an', 'Hier können Sie die Aufgabe einem Benutzer zuweisen.');
 $GLOBALS['TL_LANG']['tl_task']['notify']      = array('Benutzer benachrichtigen', 'Den Benutzer per E-Mail benachrichtigen.');
-$GLOBALS['TL_LANG']['tl_task']['deadline']    = array('Deadline', 'Bitte geben Sie die Deadline der Aufgabe ein.');
-$GLOBALS['TL_LANG']['tl_task']['status']      = array('Status', 'Bitte wählen Sie einen Status.');
-$GLOBALS['TL_LANG']['tl_task']['progress']    = array('Stand', 'Bitte wählen Sie den aktuellen Bearbeitungsstand.');
-$GLOBALS['TL_LANG']['tl_task']['comment']     = array('Kommentar', 'Bitte schreiben Sie einen kurzen Kommentar.');
+$GLOBALS['TL_LANG']['tl_task']['status']      = array('Status', 'Hier können Sie den Bearbeitungsstatus auswählen.');
+$GLOBALS['TL_LANG']['tl_task']['progress']    = array('Stand', 'Hier können Sie den Bearbeitungsstand in Prozent festlegen.');
+$GLOBALS['TL_LANG']['tl_task']['comment']     = array('Kommentar', 'Hier können Sie einen Kommentar hinzufügen.');
 
 
 /**
@@ -73,7 +73,7 @@ $GLOBALS['TL_LANG']['tl_task']['editSubmit']   = 'Die Aufgabe aktualisieren';
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_task']['new']    = array('Neue Aufgabe', 'Eine neue Aufgabe erstellen');
-$GLOBALS['TL_LANG']['tl_task']['edit']   = array('Aufgabe bearbeiten', 'Aufgabe ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_task']['delete'] = array('Aufgabe löschen', 'Aufgabe ID %s löschen');
+$GLOBALS['TL_LANG']['tl_task']['edit']   = array('Aufgabe bearbeiten', 'Die Aufgabe ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_task']['delete'] = array('Aufgabe löschen', 'Die Aufgabe ID %s löschen');
 
 ?>

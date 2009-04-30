@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('storeValues', 'sendViaEmail'),
-		'default'                     => 'title,formID,method;jumpTo;storeValues;sendViaEmail;attributes,allowTags,tableless'
+		'default'                     => '{title_legend},title,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail;{store_legend:hide},storeValues;{expert_legend:hide},method,attributes,formID'
 	),
 
 	// Subpalettes
@@ -126,29 +126,54 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
-		'formID' => array
+		'jumpTo' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['formID'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['jumpTo'],
+			'exclude'                 => true,
+			'inputType'               => 'pageTree',
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr')
+		),
+		'sendViaEmail' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['sendViaEmail'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'recipient' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['recipient'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>true, 'maxlength'=>64)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'tl_class'=>'w50')
 		),
-		'method' => array
+		'subject' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['method'],
-			'default'                 => 'POST',
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['subject'],
 			'exclude'                 => true,
-			'filter'                  => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50')
+		),
+		'format' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['format'],
+			'default'                 => 'raw',
+			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('POST', 'GET')
+			'options'                 => array('raw', 'xml', 'csv', 'email'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_form'],
+			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50')
 		),
-		'allowTags' => array
+		'skipEmpty' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['allowTags'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['skipEmtpy'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'storeValues' => array
 		(
@@ -166,68 +191,45 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_form', 'getAllTables')
 		),
-		'tableless' => array
+		'method' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['tableless'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['method'],
+			'default'                 => 'POST',
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox'
-		),
-		'sendViaEmail' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['sendViaEmail'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'recipient' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['recipient'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd')
-		),
-		'subject' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['subject'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
-		),
-		'format' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['format'],
-			'default'                 => 'raw',
-			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('raw', 'email', 'xml', 'csv'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_form'],
-			'eval'                    => array('helpwizard'=>true)
-		),
-		'skipEmpty' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['skipEmtpy'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox'
-		),
-		'jumpTo' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['jumpTo'],
-			'exclude'                 => true,
-			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'options'                 => array('POST', 'GET')
 		),
 		'attributes' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['attributes'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2)
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+		),
+		'formID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['formID'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('nospace'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+		),
+		'tableless' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['tableless'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'allowTags' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['allowTags'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		)
 	)
 );
@@ -237,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
  * Class tl_form
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

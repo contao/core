@@ -9,7 +9,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_tasks" />
 
-<div class="tl_tbox">
+<div class="tl_tbox block">
   <h3><?php echo $this->title->generateLabel(); ?></h3>
   <?php echo $this->title->generateWithError(); if ($this->title->help): ?> 
   <p class="tl_help"><?php echo $this->title->help; ?></p><?php endif; ?> 
@@ -17,12 +17,14 @@
   <h3><?php echo $this->deadline->generateLabel(); ?></h3>
   <?php echo $this->deadline->generateWithError(); if ($this->deadline->help): ?> 
   <p class="tl_help"><?php echo $this->deadline->help; ?></p><?php endif; ?> 
-  <script type="text/javascript"><!--//--><![CDATA[//><!--
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  //--><!]]></script>
+  //--><!]]>
+  </script>
 </div>
 
-<div class="tl_box">
+<div class="tl_box block">
   <h3><?php echo $this->assignedTo->generateLabel(); ?></h3>
   <?php echo $this->assignedTo->generateWithError(); if ($this->assignedTo->help): ?> 
   <p class="tl_help"><?php echo $this->assignedTo->help; ?></p><?php endif; ?> 
@@ -31,7 +33,7 @@
   <p class="tl_help"><?php echo $this->notify->help; ?></p><?php endif; ?> 
 </div>
 
-<div class="tl_box">
+<div class="tl_box block">
   <h3><?php echo $this->comment->generateLabel(); ?></h3>
   <?php echo $this->comment->generateWithError(); if ($this->comment->help): ?> 
   <p class="tl_help"><?php echo $this->comment->help; ?></p><?php endif; ?> 

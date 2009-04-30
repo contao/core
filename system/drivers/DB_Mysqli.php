@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class DB_Mysqlii
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */
@@ -200,7 +200,7 @@ class DB_Mysqli extends Database
  * Class DB_Mysqli_Statement
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */
@@ -225,18 +225,6 @@ class DB_Mysqli_Statement extends Database_Statement
 	protected function string_escape($strString)
 	{
 		return "'" . $this->resConnection->real_escape_string($strString) . "'";
-
-		/**
-		 * The TYPOlight framework automatically strips slashes so do not
-		 * do it again here. Uncomment if used as stand-alone library.
-		 * 
-		if (!get_magic_quotes_gpc())
-		{
-			return "'" . $this->resConnection->real_escape_string($strString) . "'";
-		}
-
-		return "'" . $this->resConnection->real_escape_string(stripslashes($strString)) . "'";
-		*/
 	}
 
 
@@ -317,7 +305,7 @@ class DB_Mysqli_Statement extends Database_Statement
  * Class DB_Mysqli_Result
  *
  * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Driver
  */

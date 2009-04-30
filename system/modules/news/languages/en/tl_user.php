@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -30,6 +30,12 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['news'] = array('News archives', 'Please select the news archives you want to enable for the user.');
+$GLOBALS['TL_LANG']['tl_user']['news'] = array('Allowed archives', 'Here you can grant access to one or more news archives.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_user']['news_legend'] = 'News permissions';
 
 ?>

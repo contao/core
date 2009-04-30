@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Ajax
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -151,8 +151,36 @@ class Ajax extends Backend
 
 			// Toggle the visibility of content elements
 			case 'toggleVisibility':
-				$this->Database->prepare("UPDATE tl_content SET invisible='" . (intval($this->Input->post('state') == 1) ? '' : 1) . "' WHERE id=?")
-							   ->execute($this->Input->post('id'));
+				switch ($this->Input->post('type'))
+				{
+					case 'content':
+						$this->Database->prepare("UPDATE tl_content SET invisible='" . (intval($this->Input->post('state') == 1) ? '' : 1) . "' WHERE id=?")
+									   ->execute($this->Input->post('id'));
+						break;
+
+					case 'style':
+						$this->Database->prepare("UPDATE tl_style SET invisible='" . (intval($this->Input->post('state') == 1) ? '' : 1) . "' WHERE id=?")
+									   ->execute($this->Input->post('id'));
+
+						$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")
+													    ->limit(1)
+													    ->execute($this->Input->post('id'));
+
+						if ($objStylesheet->numRows)
+						{
+							$this->import('StyleSheets');
+							$this->StyleSheets->updateStyleSheet($objStylesheet->pid);
+						}
+						break;
+				}
+				exit; break;
+
+			// Toggle the visibility of a fieldset
+			case 'toggleFieldset':
+				$fs = $this->Session->get('fieldset_states');
+				$fs[$this->Input->post('table')][$this->Input->post('id')] = intval($this->Input->post('state'));
+
+				$this->Session->set('fieldset_states', $fs);
 				exit; break;
 
 			// Check whether the temporary directory is writeable
@@ -174,7 +202,7 @@ class Ajax extends Backend
 					{
 						$this->loadLanguageFile('tl_maintenance');
 
-						header('Content-Type: text/html; charset='.$GLOBALS['TL_CONFIG']['characterSet']);
+						header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 						echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>';
 					}
 				}
@@ -184,7 +212,7 @@ class Ajax extends Backend
 				{
 					$this->loadLanguageFile('tl_maintenance');
 
-					header('Content-Type: text/html; charset='.$GLOBALS['TL_CONFIG']['characterSet']);
+					header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
 				}
 				exit; break;
@@ -199,7 +227,7 @@ class Ajax extends Backend
 
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (array_key_exists('executePreActions', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))
+				if (isset($GLOBALS['TL_HOOKS']['executePreActions']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['executePreActions'] as $callback)
 					{
@@ -218,7 +246,7 @@ class Ajax extends Backend
 	 */
 	public function executePostActions(DataContainer $dc)
 	{
-		header('Content-Type: text/html; charset='.$GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		switch ($this->strAction)
 		{
@@ -229,7 +257,7 @@ class Ajax extends Backend
 
 			// Load nodes of the file manager tree
 			case 'loadFileManager':
-				echo $dc->ajaxTreeView($this->Input->post('folder', DECODE_ENTITIES), intval($this->Input->post('level')));
+				echo $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level')));
 				exit; break;
 
 			// Load nodes of the page tree
@@ -251,7 +279,7 @@ class Ajax extends Backend
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
 
-				echo $objWidget->generateAjax($this->Input->post('folder', DECODE_ENTITIES), $this->Input->post('field'), intval($this->Input->post('level')));
+				echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;
 
 			// Toggle subpalettes
@@ -295,7 +323,7 @@ class Ajax extends Backend
 
 			// HOOK: pass unknown actions to callback functions
 			default:
-				if (array_key_exists('executePostActions', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
+				if (isset($GLOBALS['TL_HOOKS']['executePostActions']) && is_array($GLOBALS['TL_HOOKS']['executePostActions']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['executePostActions'] as $callback)
 					{

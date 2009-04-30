@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Search
  *
  * Provide methods to handle indexing and searching.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -93,10 +93,30 @@ class Search extends System
 		$strContent = str_replace(array("\n", "\r", "\t", '&#160;', '&nbsp;'), ' ', $arrData['content']);
 		unset($arrData['content']);
 
-		// Strip non-indexable areas
-		$strContent = preg_replace('/<style[^>]*>(?>.*<\/style>)/is', '', $strContent);
-		$strContent = preg_replace('/<!-- indexer::stop -->(?>.*?<!-- indexer::continue -->)/is', '', $strContent);
-		$strContent = preg_replace('/<script[^>]*>(?>.*?<\/script>)/is', '', $strContent);
+		$arrOuter = array();
+		$arrInner = array();
+
+		// Strip JavaScript (thanks to Pieter Dreef)
+		while (preg_match('/<script[^>]*>/i', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
+		{
+			if (!preg_match('/<\/script>/i', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
+			{
+				break;
+			}
+
+			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
+		}
+
+		// Strip non-indexable areas (thanks to Pieter Dreef)
+		while (preg_match('/<!-- indexer::stop -->/', $strContent, $arrOuter, PREG_OFFSET_CAPTURE))
+		{
+			if (!preg_match('/<!-- indexer::continue -->/', $strContent, $arrInner, PREG_OFFSET_CAPTURE, (strlen($arrOuter[0][0]) + $arrOuter[0][1])))
+			{
+				break;
+			}
+
+			$strContent = substr($strContent, 0, $arrOuter[0][1]) . substr($strContent, (strlen($arrInner[0][0]) + $arrInner[0][1]));
+		}
 
 		// Calculate checksum
 		$arrSet['checksum'] = md5(strip_tags($strContent));
@@ -111,9 +131,13 @@ class Search extends System
 			return false;
 		}
 
+		$arrMatches = array();
+		preg_match('/<\/head>/', $strContent, $arrMatches, PREG_OFFSET_CAPTURE);
+		$intOffset = strlen($arrMatches[0][0]) + $arrMatches[0][1];
+
 		// Split page in head and body section
-		$strHead = preg_replace('/^.*(<head[^>]*>.*<\/head>).*$/is', '$1', $strContent);
-		$strBody = preg_replace('/^.*(<body[^>]*>.*<\/body>).*$/is', '$1', $strContent);
+		$strHead = substr($strContent, 0, $intOffset);
+		$strBody = substr($strContent, $intOffset);
 
 		unset($strContent);
 		$tags = array();
@@ -226,7 +250,7 @@ class Search extends System
 				$strWord = substr($strWord, 0, -1);
 			}
 
-			if (array_key_exists($strWord, $arrIndex))
+			if (isset($arrIndex[$strWord]))
 			{
 				$arrIndex[$strWord]++;
 				continue;

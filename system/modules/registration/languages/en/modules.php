@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Registration
  * @license    LGPL
@@ -30,13 +30,13 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['registration'] = array('User registration', 'This module provides advanced user registration functionality.');
+$GLOBALS['TL_LANG']['MOD']['registration'] = array('User registration', 'Allow users to register on the website.');
 
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['registration'] = array('Member registration', 'This module creates a form that allows new front end users to register at your website.');
-$GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Lost password', 'This module creates a form that allows front end users to request a new password.');
+$GLOBALS['TL_LANG']['FMD']['registration'] = array('Registration', 'generates a user registration form.');
+$GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Lost password', 'generates a form to request a new password.');
 
 ?>

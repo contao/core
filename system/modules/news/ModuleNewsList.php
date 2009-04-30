@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    News
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNewsList
  *
  * Front end module "news list".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -97,7 +97,7 @@ class ModuleNewsList extends ModuleNews
 		if ($this->perPage > 0)
 		{
 			// Get total number of items
-			$objTotalStmt = $this->Database->prepare("SELECT id AS count FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
+			$objTotalStmt = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
 
 			if (!is_null($limit))
 			{
@@ -105,7 +105,7 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			$objTotal = $objTotalStmt->execute($time, $time);
-			$total = $objTotal->numRows - $skipFirst;
+			$total = $objTotal->total - $skipFirst;
 
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
@@ -124,7 +124,7 @@ class ModuleNewsList extends ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
+		$objArticlesStmt = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
 
 		// Limit result
 		if ($limit)
@@ -140,7 +140,6 @@ class ModuleNewsList extends ModuleNews
 			$objArticles->next();
 		}
 
-		$this->Template->searchable = $this->searchable;
 		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->archives = $this->news_archives;
 	}

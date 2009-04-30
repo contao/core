@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/popup.css" media="screen" />
-<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 </head>
 <body>
 
@@ -34,6 +35,10 @@
   <tr>
     <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
     <td><?php echo $this->filesize; ?></td>
+  </tr>
+  <tr>
+    <td class="tl_label"><?php echo $this->label_path; ?>:</td>
+    <td><?php echo $this->path; ?></td>
   </tr>
 <?php if ($this->src): ?>
   <tr>

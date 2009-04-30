@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleWizard
  *
  * Provide methods to handle modules of a page layout.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -223,6 +223,9 @@ class ModuleWizard extends Widget
   </thead>
   <tbody>';
 
+		// Load tl_article language file
+		$this->loadLanguageFile('tl_article');
+
 		// Add input fields
 		for ($i=0; $i<count($this->varValue); $i++)
 		{
@@ -243,7 +246,7 @@ class ModuleWizard extends Widget
 			// Add column
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'.$v.'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'. (isset($GLOBALS['TL_LANG']['tl_article'][$v]) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
 			}
 
 			$return .= '

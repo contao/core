@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -35,12 +35,12 @@ $GLOBALS['FE_MOD'] = array
 	'navigationMenu' => array
 	(
 		'navigation'     => 'ModuleNavigation',
-		'navigationMain' => 'ModuleNavigationMain',
-		'navigationSub'  => 'ModuleNavigationSub',
 		'customnav'      => 'ModuleCustomnav',
 		'breadcrumb'     => 'ModuleBreadcrumb',
 		'quicknav'       => 'ModuleQuicknav',
 		'quicklink'      => 'ModuleQuicklink',
+		'booknav'        => 'ModuleBooknav',
+		'articlenav'     => 'ModuleArticlenav',
 		'sitemap'        => 'ModuleSitemap'
 	),
 	'user' => array
@@ -52,13 +52,12 @@ $GLOBALS['FE_MOD'] = array
 	'application' => array
 	(
 		'form'           => 'Form',
-		'search'         => 'ModuleSearch',
-		'articleList'    => 'ModuleArticleList',
-		'articleNav'     => 'ModuleArticleNav'
+		'search'         => 'ModuleSearch'
 	),
 	'miscellaneous' => array
 	(
 		'flash'          => 'ModuleFlash',
+		'articleList'    => 'ModuleArticleList',
 		'randomImage'    => 'ModuleRandomImage',
 		'html'           => 'ModuleHtml'
 	)
@@ -97,11 +96,11 @@ $GLOBALS['TL_CTE'] = array
 	),
 	'includes' => array
 	(
-		'alias'     => 'ContentAlias',
 		'article'   => 'ContentArticle',
-		'teaser'    => 'ContentTeaser',
+		'alias'     => 'ContentAlias',
 		'form'      => 'Form',
-		'module'    => 'ContentModule'
+		'module'    => 'ContentModule',
+		'teaser'    => 'ContentTeaser'
 	)
 );
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Registration
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModulePassword
  *
  * Front end module "lost password".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -177,7 +177,7 @@ class ModulePassword extends Module
 		$this->Template->formId = 'tl_lost_password';
 		$this->Template->username = specialchars($GLOBALS['TL_LANG']['MSC']['username']);
 		$this->Template->email = specialchars($GLOBALS['TL_LANG']['MSC']['emailAddress']);
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
 		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
 	}
@@ -217,12 +217,6 @@ class ModulePassword extends Module
 		{
 			$objWidget->validate();
 
-			// Make sure that the password does not equal the username
-			if ($objWidget->value == sha1($objMember->username))
-			{
-				$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
-			}
-
 			// Set the new password and redirect
 			if (!$objWidget->hasErrors())
 			{
@@ -233,7 +227,7 @@ class ModulePassword extends Module
 							   ->execute($objWidget->value, $objMember->id);
 
 				// HOOK: set new password callback
-				if (array_key_exists('setNewPassword', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
+				if (isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
 				{
 					foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 					{
@@ -271,7 +265,7 @@ class ModulePassword extends Module
 
 		$this->Template->formId = $strToken;
 		$this->Template->fields = $objWidget->parse();
-		$this->Template->action = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
+		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['setNewPassword']);
 	}
 

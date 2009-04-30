@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleMaintenance
  *
  * Back end module "maintenance".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -59,7 +59,7 @@ class ModuleMaintenance extends BackendModule
 		$this->liveUpdate();
 		$this->searchIndex();
 
-		$this->Template->href = $this->getReferer(ENCODE_AMPERSANDS);
+		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
@@ -94,36 +94,25 @@ class ModuleMaintenance extends BackendModule
 				$this->reload();
 			}
 
+			$this->import('Automator');
+
 			foreach ($tables as $table)
 			{
 				// Temporary folder
 				if ($table == 'temp_folder')
 				{
-					foreach ($arrTmp as $strFile)
-					{
-						if ($strFile != '.htaccess')
-						{
-							@unlink(TL_ROOT . '/system/tmp/' . $strFile);
-						}
-					}
+					$this->Automator->purgeTempFolder();
 				}
 
 				// Html folder
 				elseif ($table == 'html_folder')
 				{
-					foreach ($arrHtml as $strFile)
-					{
-						if ($strFile != 'index.html')
-						{
-							@unlink(TL_ROOT . '/system/html/' . $strFile);
-						}
-					}
+					$this->Automator->purgeHtmlFolder();
 				}
 
 				// XML sitemaps
 				elseif ($table == 'xml_sitemap')
 				{
-					$this->import('Automator');
 					$this->Automator->generateSitemap();
 				}
 
@@ -181,8 +170,15 @@ class ModuleMaintenance extends BackendModule
 												 'system/themes/'.$this->getTheme().'/images/changelog.gif',
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
 
+		// No live update for beta versions
+		if (!is_numeric(BUILD))
+		{
+			$this->Template->updateClass = 'tl_info';
+			$this->Template->updateMessage = $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion'];
+		}
+
 		// Newer version available
-		if (strlen($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
+		elseif (strlen($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$this->Template->updateClass = 'tl_info';
 			$this->Template->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
@@ -207,12 +203,7 @@ class ModuleMaintenance extends BackendModule
 		}
 
 		$this->Template->uid = $GLOBALS['TL_CONFIG']['liveUpdateId'];
-		$this->Template->updateServer = 'http://www.inetrobots.com/liveupdate/index.php';
-
-		if ($this->Environment->ssl)
-		{
-			$this->Template->updateServer = 'https://sslwebsites.net/inetrobots.com/liveupdate/index.php';
-		}
+		$this->Template->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 
 		// Run update
 		if (strlen($this->Input->get('token')))
@@ -240,7 +231,7 @@ class ModuleMaintenance extends BackendModule
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
 			$objRequest = new Request();
-			$objRequest->send('http://www.inetrobots.com/liveupdate/request.php?token=' . $this->Input->get('token'));
+			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . $this->Input->get('token'));
 
 			if ($objRequest->hasError())
 			{
@@ -263,13 +254,17 @@ class ModuleMaintenance extends BackendModule
 			$arrFiles = $objArchive->getFileList();
 			array_shift($arrFiles);
 
-			echo '<h1 style="font-family:Verdana, sans-serif; font-size:13px; margin:12px 3px; line-height:1; padding:0;">Table of contents</h1>';
-			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:0px 3px; line-height:1.3;">';
-			echo implode('<br />', $arrFiles);
+			echo '<div style="width:720px; margin:0 auto;">';
+			echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Table of contents</h1>';
+			echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
+			echo '<li>';
+			echo implode('</li><li>', $arrFiles);
+			echo '</li>';
+			echo '</ol>';
+			echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
+			echo '<a href="' . $this->Environment->base . 'typolight/main.php?do=maintenance" style="float:left;">&lt; Click here to go back</a>';
+			echo '<a href="' . str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request) . '" style="float:right;">Click here to proceed &gt;</a>';
 			echo '</div>';
-			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:18px 3px 12px 3px;">';
-			echo '<a href="' . str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request) . '">Click here to run the update</a><br />';
-			echo '<a href="' . $this->Environment->base . 'typolight/main.php?do=maintenance">Click here to go back</a>';
 			echo '</div>';
 
 			exit;
@@ -278,8 +273,9 @@ class ModuleMaintenance extends BackendModule
 		// Create backup
 		if ($this->Input->get('bup'))
 		{
-			echo '<h1 style="font-family:Verdana, sans-serif; font-size:13px; margin:12px 3px; line-height:1; padding:0;">Creating backup</h1>';
-			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:0px 3px; line-height:1.3;">';
+			echo '<div style="width:720px; margin:0 auto;">';
+			echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Creating backup</h1>';
+			echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
 
 			$arrFiles = $objArchive->getFileList();
 			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
@@ -294,29 +290,31 @@ class ModuleMaintenance extends BackendModule
 				try
 				{
 					$objBackup->addFile($strFile);
-					echo 'Backed up <strong>' . $strFile . '</strong><br />';
+					echo '<li>Backed up ' . $strFile . '</li>';
 				}
 
 				catch (Exception $e)
 				{
-					echo 'Skipped <strong>' . $strFile . '</strong> (' . $e->getMessage() . ')<br />';
+					echo '<li>Skipped ' . $strFile . ' (' . $e->getMessage() . ')</li>';
 				}
 			}
 
 			$objBackup->close();
 			$url = str_replace('bup=1', 'bup=', $this->Environment->base . $this->Environment->request);
 
+			echo '</ol>';
+			echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
+			echo '<a href="' . $this->Environment->base . 'typolight/main.php?do=maintenance" style="float:left;">&lt; Click here to go back</a>';
+			echo '<a href="' . $url . '" style="float:right;">Click here to proceed &gt;</a>';
 			echo '</div>';
-			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:18px 3px 12px 3px;">';
-			echo '<a href="' . $url . '">Click here to proceed if you are not using JavaScript</a>';
 			echo '</div>';
-			echo '<script type="text/javascript">setTimeout(\'window.location="' . $url . '"\', 1000);</script>';
 
 			exit;
  		}
 
-		echo '<h1 style="font-family:Verdana, sans-serif; font-size:13px; margin:12px 3px; line-height:1; padding:0;">Updating files</h1>';
-		echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:0px 3px; line-height:1.3;">';
+		echo '<div style="width:720px; margin:0 auto;">';
+		echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Updating files</h1>';
+		echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
 
 		// Unzip files
 		while ($objArchive->next())
@@ -332,12 +330,12 @@ class ModuleMaintenance extends BackendModule
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 
-				echo 'Updated <strong>' . $objArchive->file_name . '</strong><br />';
+				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
 
 			catch (Exception $e)
 			{
-				echo '<span style="color:#ff0000;">Error updating <strong>' . $objArchive->file_name . '</strong>: ' . $e->getMessage() . '</span><br />';
+				echo '<li style="color:#ff0000;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</li>';
 			}
 		}
 
@@ -348,13 +346,10 @@ class ModuleMaintenance extends BackendModule
 		// Add log entry
 		$this->log('Live update from version ' . VERSION . '.' . BUILD . ' to version ' . $GLOBALS['TL_CONFIG']['latestVersion'] . ' completed', 'ModuleMaintenance runLiveUpdate()', TL_GENERAL);
 
-		// Reset latest version
-		$GLOBALS['TL_CONFIG']['latestVersion'] = '';
-		$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", '');
-
+		echo '</ol>';
+		echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
+		echo '<a href="main.php?do=maintenance" style="float:right;">Click here to proceed &gt;</a>';
 		echo '</div>';
-		echo '<div style="font-family:Verdana, sans-serif; font-size:11px; margin:18px 3px 12px 3px;">';
-		echo '<a href="main.php?do=maintenance">Click here to continue</a><br />';
 		echo '</div>';
 
 		exit;
@@ -381,7 +376,7 @@ class ModuleMaintenance extends BackendModule
 			$arrPages = $this->getSearchablePages();
 
 			// HOOK: take additional pages
-			if (array_key_exists('getSearchablePages', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
+			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
 			{
 				foreach ($GLOBALS['TL_HOOKS']['getSearchablePages'] as $callback)
 				{
@@ -411,7 +406,7 @@ class ModuleMaintenance extends BackendModule
 			$this->Automator->purgeTempFolder();
 
 			// Calculate hash
-			$strHash = sha1(session_id().$this->Environment->ip.'FE_USER_AUTH');
+			$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'FE_USER_AUTH');
 
 			// Remove old sessions
 			$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
@@ -452,6 +447,9 @@ class ModuleMaintenance extends BackendModule
 
 			$this->Template->content = $strBuffer;
 			$this->Template->note = $GLOBALS['TL_LANG']['tl_maintenance']['indexNote'];
+			$this->Template->loading = $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading'];
+			$this->Template->complete = $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'];
+			$this->Template->theme = $this->getTheme();
 		}
 
 		$arrUser = array(''=>'-');

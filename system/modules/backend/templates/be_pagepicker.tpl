@@ -9,7 +9,8 @@
 <?php if ($this->isMac): ?>
 <link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
-<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 <script type="text/javascript" src="plugins/mootools/mootools.js"></script>
 <script type="text/javascript" src="typolight/typolight.js"></script>
 <script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
@@ -32,7 +33,7 @@ function setPage(p)
 <div id="main">
 
 <h1><?php echo $this->headline; ?></h1>
-<select onchange="setPage(this.value);"><?php echo $this->options; ?></select>
+<select onchange="setPage(this.value);"><option value="">-</option><?php echo $this->options; ?></select>
 
 </div>
 

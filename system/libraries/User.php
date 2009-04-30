@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class User
  *
  * Provide methods to manage users.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Model
  */
@@ -94,7 +94,7 @@ abstract class User extends Model
 	public function authenticate()
 	{
 		// Check the cookie hash
-		if ($this->strHash != sha1(session_id().$this->strIp.$this->strCookie))
+		if ($this->strHash != sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie))
 		{
 			return false;
 		}
@@ -112,7 +112,7 @@ abstract class User extends Model
 		$time = time();
 
 		// Validate the session
-		if ($objSession->sessionID != session_id() || $objSession->ip != $this->strIp || $objSession->hash != $this->strHash || ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) < $time)
+		if ($objSession->sessionID != session_id() || (!$GLOBALS['TL_CONFIG']['disableIpCheck'] && $objSession->ip != $this->strIp) || $objSession->hash != $this->strHash || ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) < $time)
 		{
 			$this->log('Could not verify the session', get_class($this) . ' authenticate()', TL_ACCESS);
 			return false;
@@ -155,10 +155,32 @@ abstract class User extends Model
 		// Load the user object
 		if ($this->findBy('username', $this->Input->post('username')) == false)
 		{
-			$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['invalidLogin'];
-			$this->log('Could not find user "' . $this->Input->post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
+			$blnLoaded = false;
 
-			return false;
+			// HOOK: pass credentials to callback functions
+			if (isset($GLOBALS['TL_HOOKS']['importUser']) && is_array($GLOBALS['TL_HOOKS']['importUser']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['importUser'] as $callback)
+				{
+					$this->import($callback[0]);
+					$blnLoaded = $this->$callback[0]->$callback[1]($this->Input->post('username'), $this->Input->post('password'), $this->strTable);
+
+					// Load successfull
+					if ($blnLoaded === true)
+					{
+						break;
+					}
+				}
+			}
+
+			// Return if the user still cannot be loaded
+			if (!$blnLoaded || $this->findBy('username', $this->Input->post('username')) == false)
+			{
+				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['invalidLogin'];
+				$this->log('Could not find user "' . $this->Input->post('username') . '"', get_class($this) . ' login()', TL_ACCESS);
+
+				return false;
+			}
 		}
 
 		$time = time();
@@ -249,15 +271,24 @@ abstract class User extends Model
 		}
 
 		$blnAuthenticated = false;
+		list($strPassword, $strSalt) = explode(':', $this->password);
+
+		// Password is correct but not yet salted
+		if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
+		{
+			$strSalt = substr(md5(uniqid('', true)), 0, 23);
+			$strPassword = sha1($strSalt . $this->Input->post('password'));
+			$this->password = $strPassword . ':' . $strSalt;
+		}
 
 		// Check the password against the database
-		if ($this->password == sha1($this->Input->post('password')))
+		if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
 		{
 			$blnAuthenticated = true;
 		}
 
 		// HOOK: pass credentials to callback functions
-		elseif (array_key_exists('checkCredentials', $GLOBALS['TL_HOOKS']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
+		elseif (isset($GLOBALS['TL_HOOKS']['checkCredentials']) && is_array($GLOBALS['TL_HOOKS']['checkCredentials']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
@@ -296,7 +327,7 @@ abstract class User extends Model
 		$this->save();
 
 		// Generate hash
-		$this->strHash = sha1(session_id().$this->strIp.$this->strCookie);
+		$this->strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->strIp : '') . $this->strCookie);
 
 		// Clean up old sessions
 		$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")

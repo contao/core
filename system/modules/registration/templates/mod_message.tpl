@@ -6,9 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<div class="<?php echo $this->type; ?> message">
-<?php echo $this->message; ?> 
-</div>
+<p class="<?php echo $this->type; ?> message"><?php echo $this->message; ?></p>
 
 </div>
 <!-- indexer::continue -->

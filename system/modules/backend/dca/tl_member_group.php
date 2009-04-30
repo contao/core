@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -100,7 +100,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('redirect'),
-		'default'                     => 'name;redirect;disable,start,stop',
+		'default'                     => '{title_legend},name;{redirect_legend:hide},redirect;{disable_legend},disable,start,stop',
 	),
 
 	// Subpalettes
@@ -132,8 +132,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_group']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'explanation'             => 'jumpTo',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true)
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr')
 		),
 		'disable' => array
 		(
@@ -147,14 +146,14 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_group']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_group']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -164,7 +163,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
  * Class tl_member_group
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */

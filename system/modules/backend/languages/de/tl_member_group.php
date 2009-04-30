@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,12 +30,20 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_member_group']['name']     = array('Name der Gruppe', 'Bitte geben Sie einen eindeutigen Namen für die Gruppe ein.');
-$GLOBALS['TL_LANG']['tl_member_group']['redirect'] = array('Weiterleiten bei Anmeldung', 'Wählen Sie diese Option, um Mitglieder der Gruppe bei Anmeldung zu einer bestimmten Seite weiterzuleiten.');
-$GLOBALS['TL_LANG']['tl_member_group']['jumpTo']   = array('Weiterleitung zu Seite', 'Bitte wählen Sie die Seite, zu der die Mitglieder weitergeleitet werden sollen.');
-$GLOBALS['TL_LANG']['tl_member_group']['disable']  = array('Deaktivieren', 'Wenn Sie diese Option wählen, wird die Gruppe deaktiviert.');
-$GLOBALS['TL_LANG']['tl_member_group']['start']    = array('Aktivieren am', 'Wenn Sie hier ein Datum eingeben, wird die Gruppe an diesem Tag aktiviert.');
-$GLOBALS['TL_LANG']['tl_member_group']['stop']     = array('Deaktivieren am', 'Wenn Sie hier ein Datum eingeben, wird die Gruppe an diesem Tag deaktiviert.');
+$GLOBALS['TL_LANG']['tl_member_group']['name']     = array('Titel', 'Bitte geben Sie den Titel der Gruppe ein.');
+$GLOBALS['TL_LANG']['tl_member_group']['redirect'] = array('Weiterleiten bei Anmeldung', 'Mitglieder der Gruppe bei der Anmeldung zu einer individuellen Seite weiterleiten.');
+$GLOBALS['TL_LANG']['tl_member_group']['jumpTo']   = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Mitglieder der Gruppe weitergeleitet werden.');
+$GLOBALS['TL_LANG']['tl_member_group']['disable']  = array('Deaktivieren', 'Die Gruppe vorübergehend deaktivieren.');
+$GLOBALS['TL_LANG']['tl_member_group']['start']    = array('Aktivieren am', 'Die Gruppe automatisch an diesem Tag aktivieren.');
+$GLOBALS['TL_LANG']['tl_member_group']['stop']     = array('Deaktivieren am', 'Die Gruppe automatisch an diesem Tag deaktivieren.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_member_group']['title_legend']    = 'Titel';
+$GLOBALS['TL_LANG']['tl_member_group']['redirect_legend'] = 'Weiterleitung';
+$GLOBALS['TL_LANG']['tl_member_group']['disable_legend']  = 'Konto-Einstellungen';
 
 
 /**

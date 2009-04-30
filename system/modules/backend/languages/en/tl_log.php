@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,14 +30,14 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_log']['tstamp']   = array('Date', 'Date and time of creation');
+$GLOBALS['TL_LANG']['tl_log']['tstamp']   = array('Date', 'Date and time of the log entry');
+$GLOBALS['TL_LANG']['tl_log']['source']   = array('Origin', 'Back end or front end');
 $GLOBALS['TL_LANG']['tl_log']['action']   = array('Category', 'Category of the action');
-$GLOBALS['TL_LANG']['tl_log']['source']   = array('Source', 'Log entries can be sorted by their source (back end or front end entry).');
-$GLOBALS['TL_LANG']['tl_log']['username'] = array('User', 'Name of the logged user');
-$GLOBALS['TL_LANG']['tl_log']['text']     = array('Details', 'Details of the current entry');
-$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP address', 'Requesting IP address');
-$GLOBALS['TL_LANG']['tl_log']['browser']  = array('Browser', 'Requesting browser');
-$GLOBALS['TL_LANG']['tl_log']['func']     = array('Function', 'Function name');
+$GLOBALS['TL_LANG']['tl_log']['username'] = array('User', 'Name of the authenticated user');
+$GLOBALS['TL_LANG']['tl_log']['text']     = array('Details', 'Details of the log entry');
+$GLOBALS['TL_LANG']['tl_log']['func']     = array('Function', 'Name of the initiating function');
+$GLOBALS['TL_LANG']['tl_log']['ip']       = array('IP address', 'IP address of the user');
+$GLOBALS['TL_LANG']['tl_log']['browser']  = array('Browser', 'Name of the user agent');
 
 
 /**
@@ -50,7 +50,7 @@ $GLOBALS['TL_LANG']['tl_log']['FE'] = 'Front end';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_log']['show']   = array('Show details', 'Show details of entry ID %s');
+$GLOBALS['TL_LANG']['tl_log']['show']   = array('Show details', 'Show the details of entry ID %s');
 $GLOBALS['TL_LANG']['tl_log']['delete'] = array('Delete', 'Delete entry ID %s');
 
 ?>

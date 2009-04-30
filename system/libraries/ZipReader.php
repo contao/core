@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ZipReader
  *
  * This class provides methods to read a ZIP file.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -153,7 +153,7 @@ class ZipReader
 	 * - extra_field_length:        extra field length
 	 * - file_comment_length:       file comment length
 	 * - disk_number_start:         disk number start
-	 * - internal_file_attributes:  internal file attributes 
+	 * - internal_file_attributes:  internal file attributes
 	 * - external_file_attributes:  external file attributes
 	 * - offset_of_local_header:    relative offset of local header
 	 * - file_name:                 file name
@@ -165,7 +165,6 @@ class ZipReader
 	 * Throws an exception on requests for unknown fields.
 	 * @param  string
 	 * @return string
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -189,13 +188,11 @@ class ZipReader
 				{
 					$this->first();
 				}
-
-				if (!array_key_exists($strKey, $this->arrFiles[$this->intIndex]))
+				if (isset($this->arrFiles[$this->intIndex][$strKey]))
 				{
-					throw new Exception(sprintf('Unknown field "%s"', $strKey));
+					return $this->arrFiles[$this->intIndex][$strKey];
 				}
-
-				return $this->arrFiles[$this->intIndex][$strKey];
+				return null;
 				break;
 		}
 	}

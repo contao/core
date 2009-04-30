@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Config
  * @license    LGPL
@@ -34,14 +34,14 @@
  *
  * If you want to modify a language file, you do not have to edit it
  * directly. You can save your changes in this configuration file instead.
- * Thus, you can update or replace the original files without having to 
+ * Thus, you can update or replace the original files without having to
  * worry about your modifications.
  * 
  * Usage example:
  * 
  *   $GLOBALS['TL_LANG']['tl_layout']['column'] = 'Section';
  * 
- * This line would replace the original label ("Column") with a custom 
+ * This line would replace the original label ("Column") with a custom
  * label ("Section"). You can also set different languages:
  * 
  *   if ($GLOBALS['TL_LANGUAGE'] == 'de')

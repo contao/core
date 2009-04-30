@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -117,9 +117,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('source', 'addTime', 'addImage', 'recurring', 'addEnclosure'),
-		'default'                     => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source;cssClass;published,start,stop',
-		'internal'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,jumpTo;cssClass;published,start,stop',
-		'external'                    => 'title,alias,author;startDate,endDate;addTime;teaser,details;addImage;recurring;addEnclosure;source,url,target;cssClass;published,start,stop'
+		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend:hide},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+		'internal'                    => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend:hide},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,jumpTo;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+		'external'                    => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend:hide},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,url,target;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -127,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	(
 		'addTime'                     => 'startTime,endTime',
 		'recurring'                   => 'repeatEach,recurrences',
-		'addImage'                    => 'singleSRC,alt,imagemargin,size,caption,floating,fullsize',
+		'addImage'                    => 'singleSRC,alt,size,imagemargin,caption,floating,fullsize',
 		'addEnclosure'                => 'enclosure'
 	),
 
@@ -148,7 +148,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128),
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_calendar_events', 'generateAlias')
@@ -160,26 +160,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'default'                 => $this->User->id,
 			'inputType'               => 'select',
-			'foreignKey'              => 'tl_user.name'
-		),
-		'startDate' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startDate'],
-			'default'                 => time(),
-			'exclude'                 => true,
-			'filter'                  => true,
-			'flag'                    => 8,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
-		),
-		'endDate' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
-			'default'                 => time(),
-			'exclude'                 => true,
-			'flag'                    => 8,
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'foreignKey'              => 'tl_user.name',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'addTime' => array
 		(
@@ -193,14 +175,111 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time')
+			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
 		),
 		'endTime' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time')
+			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
+		),
+		'startDate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startDate'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+		),
+		'endDate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'flag'                    => 8,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+		),
+		'teaser' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['teaser'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('style'=>'height:60px;', 'allowHtml'=>true)
+		),
+		'details' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['details'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
+			'explanation'             => 'insertTags'
+		),
+		'addImage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['addImage'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'singleSRC' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+		),
+		'alt' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'long')
+		),
+		'size' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'imagemargin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
+			'exclude'                 => true,
+			'inputType'               => 'trbl',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'caption' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['caption'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'floating' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
+			'exclude'                 => true,
+			'inputType'               => 'radioTable',
+			'options'                 => array('above', 'left', 'right'),
+			'eval'                    => array('cols'=>3, 'tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC']
+		),
+		'fullsize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'recurring' => array
 		(
@@ -217,92 +296,18 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'timePeriod',
 			'options'                 => array('days', 'weeks', 'months', 'years'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_events'],
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_calendar_events', 'checkInterval')
+			)
 		),
 		'recurrences' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['recurrences'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit')
-		),
-		'teaser' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['teaser'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:80px;', 'allowHtml'=>true)
-		),
-		'details' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['details'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'helpwizard'=>true),
-			'explanation'             => 'insertTags'
-		),
-		'addImage' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['addImage'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'singleSRC' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['singleSRC'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
-		),
-		'size' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true)
-		),
-		'alt' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['alt'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
-		),
-		'caption' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['caption'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'extnd', 'maxlength'=>255)
-		),
-		'floating' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
-			'exclude'                 => true,
-			'inputType'               => 'radioTable',
-			'options'                 => array('above', 'left', 'right'),
-			'eval'                    => array('cols'=>3),
-			'reference'               => &$GLOBALS['TL_LANG']['MSC']
-		),
-		'imagemargin' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
-			'exclude'                 => true,
-			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true)
-		),
-		'fullsize' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'addEnclosure' => array
 		(
@@ -335,8 +340,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'helpwizard'=>true),
-			'explanation'             => 'jumpTo'
+			'eval'                    => array('fieldType'=>'radio')
 		),
 		'url' => array
 		(
@@ -344,13 +348,14 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'target' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'cssClass' => array
 		(
@@ -372,14 +377,14 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>10, 'rgxp'=>'date', 'datepicker'=>$this->getDatePickerString())
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		)
 	)
 );
@@ -389,7 +394,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
  * Class tl_calendar_events
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -533,7 +538,7 @@ class tl_calendar_events extends Backend
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_calendar_events WHERE alias=?")
-								   ->execute($varValue, $dc->id);
+								   ->execute($varValue);
 
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
@@ -552,6 +557,24 @@ class tl_calendar_events extends Backend
 
 
 	/**
+	 * Check for a valid recurrence interval
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function checkInterval($varValue)
+	{
+		$varValue = deserialize($varValue);
+
+		if ($varValue['value'] < 1)
+		{
+			$varValue['value'] = 1;
+		}
+
+		return serialize($varValue);
+	}
+
+
+	/**
 	 * Add the type of input field
 	 * @param array
 	 * @return string
@@ -563,15 +586,15 @@ class tl_calendar_events extends Backend
 
 		if ($span > 0)
 		{
-			$date = date($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['startTime']) . ' - ' . date($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['endTime']);
+			$date = $this->parseDate($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['startTime']) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][($arrRow['addTime'] ? 'datimFormat' : 'dateFormat')], $arrRow['endTime']);
 		}
 		elseif ($arrRow['startTime'] == $arrRow['endTime'])
 		{
-			$date = date($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ')' : '');
 		}
 		else
 		{
-			$date = date($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ' - ' . date($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) . ')' : '');
+			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $arrRow['startTime']) . ($arrRow['addTime'] ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['startTime']) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $arrRow['endTime']) . ')' : '');
 		}
 
 		return '
@@ -633,13 +656,9 @@ class tl_calendar_events extends Backend
 		if ($objEvent->recurring)
 		{
 			$arrRange = deserialize($objEvent->repeatEach);
+
 			$arg = $arrRange['value'] * $objEvent->recurrences;
 			$unit = $arrRange['unit'];
-
-			if ($arg == 1)
-			{
-				$unit = substr($unit, 0, -1);
-			}
 
 			$strtotime = '+ ' . $arg . ' ' . $unit;
 			$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);

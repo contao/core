@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class ModuleNavigation
  *
  * Front end module "navigation".
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -86,8 +86,15 @@ class ModuleNavigation extends Module
 			$level = 0;
 		}
 
+		$request = ampersand($this->Environment->request, true);
+
+		if ($request == 'index.php')
+		{
+			$request = '';
+		}
+
+		$this->Template->request = $request;
 		$this->Template->skipId = 'skipNavigation_' . $this->id;
-		$this->Template->request = ampersand($this->Environment->request, ENCODE_AMPERSANDS);
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = $this->renderNavigation($trail[$level]);
 	}

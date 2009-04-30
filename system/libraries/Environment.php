@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    System
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Environment
  *
  * Provide methods to get OS independent environment parameters.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
@@ -82,17 +82,20 @@ class Environment
 	 */
 	public function __get($strKey)
 	{
-		if (!array_key_exists($strKey, $this->arrCache))
+		if (isset($this->arrCache[$strKey]))
 		{
-			if (in_array($strKey, get_class_methods($this)))
-			{
-				$this->arrCache[$strKey] = $this->$strKey();
-				return $this->arrCache[$strKey];
-			}
+			return $this->arrCache[$strKey];
+		}
 
+		if (in_array($strKey, get_class_methods($this)))
+		{
+			$this->arrCache[$strKey] = $this->$strKey();
+		}
+		else
+		{
 			$arrChunks = preg_split('/([A-Z]+[a-z]*)/', $strKey, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-
 			$strServerKey = strtoupper(implode('_', $arrChunks));
+
 			$this->arrCache[$strKey] = $_SERVER[$strServerKey];
 		}
 
@@ -121,12 +124,7 @@ class Environment
 	 */
 	protected function scriptFilename()
 	{
-		if (!array_key_exists('script_filename', $this->arrCache))
-		{
-			$this->arrCache['scriptFilename'] = str_replace('//', '/', str_replace('\\', '/', (php_sapi_name() == 'cgi' || php_sapi_name() == 'isapi' || php_sapi_name() == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME'])));
-		}
-
-		return $this->arrCache['scriptFilename'];
+		return str_replace('//', '/', str_replace('\\', '/', (php_sapi_name() == 'cgi' || php_sapi_name() == 'isapi' || php_sapi_name() == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) ? ($_SERVER['ORIG_PATH_TRANSLATED'] ? $_SERVER['ORIG_PATH_TRANSLATED'] : $_SERVER['PATH_TRANSLATED']) : ($_SERVER['ORIG_SCRIPT_FILENAME'] ? $_SERVER['ORIG_SCRIPT_FILENAME'] : $_SERVER['SCRIPT_FILENAME'])));
 	}
 
 
@@ -136,12 +134,7 @@ class Environment
 	 */
 	protected function scriptName()
 	{
-		if (!array_key_exists('scriptName', $this->arrCache))
-		{
-			$this->arrCache['scriptName'] = (php_sapi_name() == 'cgi' || php_sapi_name() == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) ? ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) : ($_SERVER['ORIG_SCRIPT_NAME'] ? $_SERVER['ORIG_SCRIPT_NAME'] : $_SERVER['SCRIPT_NAME']);
-		}
-
-		return $this->arrCache['scriptName'];
+		return (php_sapi_name() == 'cgi' || php_sapi_name() == 'cgi-fcgi') && ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) ? ($_SERVER['ORIG_PATH_INFO'] ? $_SERVER['ORIG_PATH_INFO'] : $_SERVER['PATH_INFO']) : ($_SERVER['ORIG_SCRIPT_NAME'] ? $_SERVER['ORIG_SCRIPT_NAME'] : $_SERVER['SCRIPT_NAME']);
 	}
 
 
@@ -164,44 +157,39 @@ class Environment
 	 */
 	protected function documentRoot()
 	{
-		if (!array_key_exists('documentRoot', $this->arrCache))
+		$strDocumentRoot = '';
+		$arrUriSegments = array();
+
+		// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
+		if (basename($this->scriptName()) != basename($this->scriptFilename()))
 		{
-			$strDocumentRoot = '';
-			$arrUriSegments = array();
-
-			// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
-			if (basename($this->scriptName()) != basename($this->scriptFilename()))
-			{
-				return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
-			}
-
-			if (substr($this->scriptFilename(), 0, 1) == '/')
-			{
-				$strDocumentRoot = '/';
-			}
-
-			$arrSnSegments = explode('/', strrev($this->scriptName()));
-			$arrSfnSegments = explode('/', strrev($this->scriptFilename()));
-
-			foreach ($arrSfnSegments as $k=>$v)
-			{
-				if ($arrSnSegments[$k] != $v)
-				{
-					$arrUriSegments[] = $v;
-				}
-			}
-
-			$strDocumentRoot .= strrev(implode('/', $arrUriSegments));
-
-			if (strlen($strDocumentRoot) < 2)
-			{
-				$strDocumentRoot = substr($arrSfnSegments, 0, -(strlen($strDocumentRoot) + 1));
-			}
-
-			$this->arrCache['documentRoot'] = str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
+			return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
 		}
 
-		return $this->arrCache['documentRoot'];
+		if (substr($this->scriptFilename(), 0, 1) == '/')
+		{
+			$strDocumentRoot = '/';
+		}
+
+		$arrSnSegments = explode('/', strrev($this->scriptName()));
+		$arrSfnSegments = explode('/', strrev($this->scriptFilename()));
+
+		foreach ($arrSfnSegments as $k=>$v)
+		{
+			if ($arrSnSegments[$k] != $v)
+			{
+				$arrUriSegments[] = $v;
+			}
+		}
+
+		$strDocumentRoot .= strrev(implode('/', $arrUriSegments));
+
+		if (strlen($strDocumentRoot) < 2)
+		{
+			$strDocumentRoot = substr($arrSfnSegments, 0, -(strlen($strDocumentRoot) + 1));
+		}
+
+		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
 	}
 
 
@@ -211,17 +199,14 @@ class Environment
 	 */
 	protected function requestUri()
 	{
-		if (!array_key_exists('requestUri', $this->arrCache))
+		if (!empty($_SERVER['REQUEST_URI']))
 		{
-			$this->arrCache['requestUri'] = $_SERVER['REQUEST_URI'];
-
-			if (!strlen($_SERVER['REQUEST_URI']))
-			{
-				$this->arrCache['requestUri'] = '/' . preg_replace('/^\//i', '', $this->scriptName()) . (strlen($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
-			}
+			return $_SERVER['REQUEST_URI'];
 		}
-
-		return $this->arrCache['requestUri'];
+		else
+		{
+			return '/' . preg_replace('/^\//i', '', $this->scriptName()) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+		}
 	}
 
 
@@ -231,20 +216,15 @@ class Environment
 	 */
 	protected function httpAcceptLanguage()
 	{
-		if (!array_key_exists('httpAcceptLanguage', $this->arrCache))
+		$arrAccepted = array();
+		$arrLanguages = explode(',', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']));
+
+		foreach ($arrLanguages as $strLanguage)
 		{
-			$arrAccepted = array();
-			$arrLanguages = explode(',', strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']));
-
-			foreach ($arrLanguages as $strLanguage)
-			{
-				$arrAccepted[] = substr($strLanguage, 0, 2);
-			}
-
-			$this->arrCache['httpAcceptLanguage'] = array_values(array_unique($arrAccepted));
+			$arrAccepted[] = substr($strLanguage, 0, 2);
 		}
 
-		return $this->arrCache['httpAcceptLanguage'];
+		return array_values(array_unique($arrAccepted));
 	}
 
 
@@ -254,12 +234,7 @@ class Environment
 	 */
 	protected function httpAcceptEncoding()
 	{
-		if (!array_key_exists('httpAcceptEncoding', $this->arrCache))
-		{
-			$this->arrCache['httpAcceptEncoding'] = array_values(array_unique(explode(',', strtolower($_SERVER['HTTP_ACCEPT_ENCODING']))));
-		}
-
-		return $this->arrCache['httpAcceptEncoding'];
+		return array_values(array_unique(explode(',', strtolower($_SERVER['HTTP_ACCEPT_ENCODING']))));
 	}
 
 
@@ -269,15 +244,10 @@ class Environment
 	 */
 	protected function httpUserAgent()
 	{
-		if (!array_key_exists('httpUserAgent', $this->arrCache))
-		{
-			$ua = strip_tags($_SERVER['HTTP_USER_AGENT']);
-			$ua = preg_replace('/javascript|vbscri?pt|script|applet|alert|document|write|cookie|window/i', '', $ua);
+		$ua = strip_tags($_SERVER['HTTP_USER_AGENT']);
+		$ua = preg_replace('/javascript|vbscri?pt|script|applet|alert|document|write|cookie/i', '', $ua);
 
-			$this->arrCache['httpUserAgent'] = $ua;
-		}
-
-		return $this->arrCache['httpUserAgent'];
+		return $ua;
 	}
 
 
@@ -287,12 +257,7 @@ class Environment
 	 */
 	protected function ssl()
 	{
-		if (!array_key_exists('ssl', $this->arrCache))
-		{
-			$this->arrCache['ssl'] = ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ? true : false;
-		}
-
-		return $this->arrCache['ssl'];
+		return ($_SERVER['SSL_SESSION_ID'] || $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1);
 	}
 
 
@@ -302,12 +267,7 @@ class Environment
 	 */
 	protected function url()
 	{
-		if (!array_key_exists('url', $this->arrCache))
-		{
-			$this->arrCache['url'] = ($this->ssl() ? 'https://' : 'http://') . (strlen($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] . '/' : '') . $_SERVER['HTTP_HOST'];
-		}
-
-		return $this->arrCache['url'];
+		return ($this->ssl() ? 'https://' : 'http://') . (!empty($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] . '/' : '') . $_SERVER['HTTP_HOST'];
 	}
 
 
@@ -317,12 +277,7 @@ class Environment
 	 */
 	protected function ip()
 	{
-		if (!array_key_exists('ip', $this->arrCache))
-		{
-			$this->arrCache['ip'] = strlen($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
-		}
-
-		return $this->arrCache['ip'];
+		return !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
 	}
 
 
@@ -332,18 +287,15 @@ class Environment
 	 */
 	protected function server()
 	{
-		if (!array_key_exists('server', $this->arrCache))
-		{
-			$this->arrCache['server'] = strlen($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : $_SERVER['LOCAL_ADDR'];
+		$strServer = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : $_SERVER['LOCAL_ADDR'];
 
-			// Special workaround for Strato users
-			if (!strlen($this->arrCache['server']))
-			{
-				$this->arrCache['server'] = @gethostbyname($_SERVER['SERVER_NAME']);
-			}
+		// Special workaround for Strato users
+		if (empty($strServer))
+		{
+			$strServer = @gethostbyname($_SERVER['SERVER_NAME']);
 		}
 
-		return $this->arrCache['server'];
+		return $strServer;
 	}
 
 
@@ -363,12 +315,7 @@ class Environment
 	 */
 	protected function script()
 	{
-		if (!array_key_exists('script', $this->arrCache))
-		{
-			$this->arrCache['script'] = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName());
-		}
-
-		return $this->arrCache['script'];
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName());
 	}
 
 
@@ -378,20 +325,15 @@ class Environment
 	 */
 	protected function request()
 	{
-		if (!array_key_exists('request', $this->arrCache))
+		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri());
+
+		if (empty($strRequest))
 		{
-			$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri());
-
-			if (!strlen($strRequest))
-			{
-				$strRequest = $this->script();
-			}
-
-			// Do not urlencode() here (thanks to Russ McRee)!
-			$this->arrCache['request'] = $strRequest;
+			$strRequest = $this->script();
 		}
 
-		return $this->arrCache['request'];
+		// Do not urlencode() here (thanks to Russ McRee)!
+		return $strRequest;
 	}
 
 
@@ -401,12 +343,7 @@ class Environment
 	 */
 	protected function base()
 	{
-		if (!array_key_exists('base', $this->arrCache))
-		{
-			$this->arrCache['base'] = $this->url() . TL_PATH . '/';
-		}
-
-		return $this->arrCache['base'];
+		return $this->url() . TL_PATH . '/';
 	}
 
 
@@ -416,13 +353,8 @@ class Environment
 	 */
 	protected function host()
 	{
-		if (!array_key_exists('host', $this->arrCache))
-		{
-			$parse_url = parse_url($this->url());
-			$this->arrCache['host'] = preg_replace('/^www\./i', '', $parse_url['host']);
-		}
-
-		return $this->arrCache['host'];
+		$parse_url = parse_url($this->url());
+		return preg_replace('/^www\./i', '', $parse_url['host']);
 	}
 }
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -30,6 +30,12 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars'] = array('Kalender', 'Bitte wählen Sie die Kalender, die für den Benutzer sichtbar sein sollen.');
+$GLOBALS['TL_LANG']['tl_user']['calendars'] = array('Erlaubte Kalender', 'Hier können Sie den Zugriff auf einen oder mehrere Kalender erlauben.');
+
+
+/**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_user']['calendars_legend'] = 'Kalender-Rechte';
 
 ?>

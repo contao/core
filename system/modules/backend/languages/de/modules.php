@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -31,27 +31,27 @@
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['content']     = 'Inhalte';
-$GLOBALS['TL_LANG']['MOD']['article']     = array('Artikel', 'Artikel dienen als Container für Inhaltselemente wie z.B. Text, Bilder oder Hyperlinks. Jeder Artikel wird auf einer bestimmten Seite veröffentlicht. Mit diesem Modul können Sie Ihre Artikel verwalten.');
-$GLOBALS['TL_LANG']['MOD']['flash']       = array('Flash-Inhalte', 'Mit diesem Modul können Sie die dynamischen Inhalte eines Flash-Films verwalten.');
-$GLOBALS['TL_LANG']['MOD']['form']        = array('Formulargenerator', 'Mit diesem Modul können Sie jede Art von Webformular erstellen.');
+$GLOBALS['TL_LANG']['MOD']['article']     = array('Artikel', 'Artikel und Inhaltselemente verwalten.');
+$GLOBALS['TL_LANG']['MOD']['flash']       = array('Flash-Inhalte', 'Die Inhalte eines dynamischen Flash-Films verwalten.');
+$GLOBALS['TL_LANG']['MOD']['form']        = array('Formulargenerator', 'Individuelle Formulare gestalten und deren Daten speichern oder versenden.');
 $GLOBALS['TL_LANG']['MOD']['design']      = 'Layout';
-$GLOBALS['TL_LANG']['MOD']['modules']     = array('Module', 'Mit diesem Modul können Sie vorhandene Frontend-Module wie z.B. ein Onlineformular oder ein Gästebuch konfigurieren.');
-$GLOBALS['TL_LANG']['MOD']['css']         = array('Stylesheets', 'Mit diesem Modul können Sie Stylesheets erstellen und bearbeiten.');
-$GLOBALS['TL_LANG']['MOD']['layout']      = array('Seitenlayouts', 'Mit diesem Modul können Sie Ihre Seitenlayouts verwalten.');
-$GLOBALS['TL_LANG']['MOD']['page']        = array('Seitenstruktur', 'Mit diesem Modul können Sie die Seitenstruktur und verschiedene Seitenparameter wie z.B. die Sprache festlegen.');
+$GLOBALS['TL_LANG']['MOD']['modules']     = array('Module', 'Die Frontend-Module der Webseite verwalten.');
+$GLOBALS['TL_LANG']['MOD']['css']         = array('Stylesheets', 'Stylesheets erstellen, um die Frontend-Ausgabe zu formatieren.');
+$GLOBALS['TL_LANG']['MOD']['layout']      = array('Seitenlayouts', 'Module und Stylesheets zu einem Seitenlayout kombinieren.');
+$GLOBALS['TL_LANG']['MOD']['page']        = array('Seitenstruktur', 'Die Seitenstruktur der Webseite(n) erstellen.');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Benutzerverwaltung';
-$GLOBALS['TL_LANG']['MOD']['member']      = array('Mitglieder', 'Mitglieder sind registrierte Benutzer einer Webseite (z.B. Kunden eines Online-Shops, Empfänger eines Newsletters oder Mitglieder eines passwortgeschützen Bereichs). Mit diesem Modul können Sie die Mitglieder Ihrer Webseite verwalten.');
-$GLOBALS['TL_LANG']['MOD']['mgroup']      = array('Mitgliedergruppen', 'Mitglieder können beliebig vielen Gruppen zugewiesen werden, um bestimmte Einstellungen zu teilen. Mit diesem Modul können Sie diese Gruppen verwalten.');
-$GLOBALS['TL_LANG']['MOD']['user']        = array('Benutzer', 'Mit diesem Modul können Sie neue TYPOlight Benutzer hinzufügen und bestehende Benutzerkonten verwalten.');
-$GLOBALS['TL_LANG']['MOD']['group']       = array('Benutzergruppen', 'Benutzer können beliebig vielen Gruppen zugewiesen werden, um bestimmte Einstellungen zu teilen. Mit diesem Modul können Sie diese Gruppen verwalten.');
-$GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'Mit diesem Modul können Sie Ihre TYPOlight Installation warten.');
+$GLOBALS['TL_LANG']['MOD']['member']      = array('Mitglieder', 'Mitgliederkonten verwalten (Frontend-Benutzer).');
+$GLOBALS['TL_LANG']['MOD']['mgroup']      = array('Mitgliedergruppen', 'Mitgliedergruppen verwalten (Frontend-Benutzergruppen).');
+$GLOBALS['TL_LANG']['MOD']['user']        = array('Benutzer', 'Benutzerkonten verwalten (Backend-Benutzer).');
+$GLOBALS['TL_LANG']['MOD']['group']       = array('Benutzergruppen', 'Benutzergruppen verwalten (Backend-Benutzergruppen).');
 $GLOBALS['TL_LANG']['MOD']['system']      = 'System';
-$GLOBALS['TL_LANG']['MOD']['files']       = array('Dateiverwaltung', 'Mit diesem Modul können Sie neue Dateien auf den Server laden oder bestehende Dateien und Verzeichnisse verwalten.');
-$GLOBALS['TL_LANG']['MOD']['log']         = array('System-Log', 'Bestimmte Systemereignisse werden in der Log-Datei protokolliert. Mit diesem Modul können Sie diese Log-Einträge analysieren.');
-$GLOBALS['TL_LANG']['MOD']['settings']    = array('Einstellungen', 'Mit diesem Modul können Sie Ihre lokale Installation konfigurieren und Grundeinstellungen wie z.B. das Datumsformat oder den verwendeten Zeichensatz ändern.');
+$GLOBALS['TL_LANG']['MOD']['files']       = array('Dateiverwaltung', 'Dateien und Ordner verwalten oder neue Dateien auf den Server übertragen.');
+$GLOBALS['TL_LANG']['MOD']['log']         = array('System-Log', 'Das System-Log durchsuchen und die Aktivität auf der Webseite analysieren.');
+$GLOBALS['TL_LANG']['MOD']['settings']    = array('Einstellungen', 'Die TYPOlight-Konfiguration prüfen und optimieren.');
+$GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'TYPOlight warten oder aktualisieren.');
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'Benutzerfunktionen';
-$GLOBALS['TL_LANG']['MOD']['undo']        = array('Rückgängig', 'Wenn ein Datensatz versehentlich aus der Datenbank gelöscht wurde, kann er mit diesem Modul wiederhergestellt werden. Dateien und Verzeichnisse sind davon ausgenommen.');
-$GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Mit diesem Modul kann der aktuelle Benutzer seine persönlichen Daten wie z.B. Name, E-Mail-Adresse oder Passwort ändern.');
-$GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task Center', 'Mit diesem Modul können Sie Aufgaben und Workflows verwalten.');
+$GLOBALS['TL_LANG']['MOD']['undo']        = array('Rückgängig', 'Gelöschte Datensätze wiederherstellen.');
+$GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönlichen Daten ändern oder ein neues Passwort setzen.');
+$GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task Center', 'Anderen Backend-Benutzern Aufgaben zuweisen.');
 
 ?>

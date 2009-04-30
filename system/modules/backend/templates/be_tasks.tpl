@@ -1,28 +1,32 @@
 
-<div class="tl_panel">
-
 <form action="<?php echo $this->request; ?>" id="tl_filter" class="tl_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_filter" />
-  <select name="assignedTo" id="assignedTo" class="tl_select"><option value=""><?php echo $this->thAssignedTo; ?></option><?php echo $this->assignedOptions; ?></select>
-  <select name="deadline" id="deadline" class="tl_select"><option value=""><?php echo $this->thDeadline; ?></option><?php echo $this->deadlineOptions; ?></select>
-  <input type="submit" name="showOnly" id="showOnly" class="tl_submit" alt="narrow results" value="<?php echo $this->filter; ?>" />
-</div>
-</form>
+<input type="hidden" name="FORM_SUBMIT" value="tl_filters" />
 
-<form action="<?php echo $this->request; ?>" id="tl_search" class="tl_form" method="post">
-<div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_be_search" />
-  <select name="tl_field" class="tl_select"><?php echo $this->searchOptions; ?></select>
-  <span>=</span>
-  <input type="text" name="tl_value" class="tl_text" value="<?php echo $this->keywords; ?>" />
-  <input type="submit" name="search" id="search" class="tl_submit" alt="search results" value="<?php echo $this->search; ?>" />
+<div class="tl_panel">
+
+<div class="tl_submit_panel tl_subpanel">
+<input type="image" name="filter" id="filter" src="system/themes/<?php echo $this->getTheme(); ?>/images/ok.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
 </div>
-</form>
+
+<div class="tl_search tl_subpanel">
+<strong><?php echo $this->search; ?>:</strong>
+  <select name="tl_field" class="tl_select<?php echo $this->searchClass; ?>"><?php echo $this->searchOptions; ?></select>
+  <span>=</span>
+  <input type="text" name="tl_value" class="tl_text<?php echo $this->searchClass; ?>" value="<?php echo $this->keywords; ?>" />
+</div>
+
+<div class="tl_filter tl_subpanel">
+<strong><?php echo $this->filter; ?>:</strong>
+  <select name="assignedTo" id="assignedTo" class="tl_select<?php echo $this->assignedToClass; ?>"><option value=""><?php echo $this->thAssignedTo; ?></option><?php echo $this->assignedOptions; ?></select>
+  <select name="deadline" id="deadline" class="tl_select<?php echo $this->deadlineClass; ?>"><option value=""><?php echo $this->thDeadline; ?></option><?php echo $this->deadlineOptions; ?></select>
+</div>
 
 <div class="clear"></div>
 
 </div>
+</div>
+</form>
 
 <div id="tl_buttons">
 <a href="<?php echo $this->createHref; ?>" class="header_new" title="<?php echo $this->createTitle; ?>" accesskey="n" onclick="Backend.getScrollOffset();"><?php echo $this->createLabel; ?></a>

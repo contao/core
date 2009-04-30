@@ -9,7 +9,8 @@
 <?php if ($this->isMac): ?>
 <link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
-<!--[if IE]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 <script type="text/javascript" src="plugins/mootools/mootools.js"></script>
 </head>
 <body>
@@ -28,7 +29,7 @@
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_login" /><?php echo $this->messages; ?> 
 
-<table cellpadding="0" cellspacing="0" class="tl_login_table" summary="input fields">
+<table cellpadding="0" cellspacing="0" class="tl_login_table" summary="Input fields">
   <tr>
     <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
     <td align="right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
@@ -56,7 +57,7 @@
 
 <div id="tl_license">
 
-<p>TYPOlight webCMS :: Copyright &#169;2005-<?php echo date('Y'); ?> by <a href="mailto:&#108;&#101;&#111;&#64;&#116;&#121;&#112;&#111;&#108;&#105;&#103;&#104;&#116;&#46;&#111;&#114;&#103;">Leo 
+<p>TYPOlight webCMS :: Copyright ©2005-<?php echo date('Y'); ?> by <a href="mailto:&#108;&#101;&#111;&#64;&#116;&#121;&#112;&#111;&#108;&#105;&#103;&#104;&#116;&#46;&#111;&#114;&#103;">Leo 
   Feyer</a> :: Extensions are copyright of their respective owners :: Visit <a href="http://www.typolight.org" onclick="window.open(this.href); return false;">http://www.typolight.org</a>
   for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 

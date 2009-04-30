@@ -1,17 +1,36 @@
-/* TYPOlight back end install script CSS file */
+/**
+ * TYPOlight webCMS
+ * Copyright (C) 2005-2009 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Body */
 body
 {
-	background:url("images/hbg.jpg");
-	background-repeat:repeat-x;
-	background-color:#f5f5f5;
-}
-* html body
-{
-	margin-left:1px;
-	text-align:center;
+	background:#f5f5f5 url("images/hbg.jpg") repeat-x;
 }
 
-/* Header */ 
+/* Header */
 #header
 {
 	width:756px;
@@ -20,20 +39,12 @@ body
 	background-color:#fff;
 	border:1px solid #bbb;
 	border-bottom:0;
-	text-align:left;
-}
-* html #header
-{
-	width:760px;
-	w\idth:756px;
 }
 #header h1
 {
 	margin:0;
 	padding:2px 0 4px 6px;
-	background-color:#b3b6b3;
-	background-image:url("images/headline.gif");
-	background-repeat:repeat-x;
+	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
 }
 
@@ -43,7 +54,6 @@ body
 	width:760px;
 	margin:0 auto;
 	padding:0 0 18px 0;
-	text-align:left;
 }
 
 /* Main */
@@ -54,20 +64,6 @@ body
 	background-color:#fff;
 	border:1px solid #bbb;
 	border-top:0;
-	text-align:left;
-}
-* html #main
-{
-	width:760px;
-	w\idth:756px;
-}
-html>body #main
-{
-	margin-bottom:-1px;
-}
-*:first-child+html #main
-{
-	margin-bottom:0;
 }
 
 /* Headlines */
@@ -75,9 +71,7 @@ html>body #main
 {
 	margin:16px 18px 0 18px;
 	padding:8px 0 7px 36px;
-	background-image:url("images/install.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
+	background:url("images/install.gif") no-repeat left center;
 	font-size:14px;
 	color:#8ab858;
 }
@@ -85,9 +79,7 @@ html>body #main
 {
 	margin:16px 18px 0 18px;
 	padding:7px 0 8px 36px;
-	background-image:url("images/important.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
+	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
 	font-weight:bold;
 	color:#c55;
@@ -168,23 +160,13 @@ li
 {
 	padding:2px 0 3px 4px;
 }
-* html .tl_col_2
-{
-	padding:0 0 3px 4px;
-}
-*:first-child+html .tl_col_2
-{
-	padding:0 0 3px 4px;
-}
 
 /* Error messages */
 .tl_error
 {
 	margin:0 18px;
 	padding:2px 0 3px 20px;
-	background-image:url("images/error.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
+	background:url("images/error.gif") no-repeat left center;
 	color:#c55;
 }
 .tl_formbody .tl_error
@@ -197,18 +179,14 @@ li
 {
 	margin:0 18px;
 	padding:2px 0 3px 20px;
-	background-image:url("images/ok.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
+	background:url("images/ok.gif") no-repeat left center;
 	color:#8ab858;
 }
 .tl_info
 {
 	margin:0 18px;
 	padding:2px 0 3px 20px;
-	background-image:url("images/show.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
+	background:url("images/show.gif") no-repeat left center;
 	color:#5c9ac9;
 }
 
@@ -222,10 +200,8 @@ li
 #go_to_login a
 {
 	padding:2px 0 3px 20px;
+	background:url("images/login.gif") no-repeat left center;
 	color:#bbb;
-	background-image:url("images/login.gif");
-	background-position:left center;
-	background-repeat:no-repeat;
 }
 
 /* Formbody */

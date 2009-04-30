@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -39,7 +39,7 @@ $GLOBALS['TL_LANG']['LNG']['ca'] = 'Katalanisch';
 $GLOBALS['TL_LANG']['LNG']['cr'] = 'Cree';
 $GLOBALS['TL_LANG']['LNG']['cs'] = 'Tschechisch';
 $GLOBALS['TL_LANG']['LNG']['da'] = 'Dänisch';
-$GLOBALS['TL_LANG']['LNG']['de'] = 'Deutsch'; 
+$GLOBALS['TL_LANG']['LNG']['de'] = 'Deutsch';
 $GLOBALS['TL_LANG']['LNG']['el'] = 'Griechisch';
 $GLOBALS['TL_LANG']['LNG']['en'] = 'Englisch';
 $GLOBALS['TL_LANG']['LNG']['es'] = 'Spanisch';
@@ -72,7 +72,9 @@ $GLOBALS['TL_LANG']['LNG']['so'] = 'Somali';
 $GLOBALS['TL_LANG']['LNG']['sq'] = 'Albanisch';
 $GLOBALS['TL_LANG']['LNG']['sr'] = 'Serbisch';
 $GLOBALS['TL_LANG']['LNG']['sv'] = 'Schwedisch';
+$GLOBALS['TL_LANG']['LNG']['ta'] = 'Tamil';
 $GLOBALS['TL_LANG']['LNG']['th'] = 'Thai';
+$GLOBALS['TL_LANG']['LNG']['tl'] = 'Tagalog';
 $GLOBALS['TL_LANG']['LNG']['tr'] = 'Türkisch';
 $GLOBALS['TL_LANG']['LNG']['uk'] = 'Ukrainisch';
 $GLOBALS['TL_LANG']['LNG']['vi'] = 'Vietnamesisch';

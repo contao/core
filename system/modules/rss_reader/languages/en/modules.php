@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    RssReader
  * @license    LGPL
@@ -30,12 +30,12 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rss_reader'] = array('RSS Reader', 'This module allows to import RSS feeds.');
+$GLOBALS['TL_LANG']['MOD']['rss_reader'] = array('RSS reader', 'Import RSS feeds and display them in the front end.');
 
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['rss_reader'] = array('RSS Reader', 'This module allows to import RSS feeds.');
+$GLOBALS['TL_LANG']['FMD']['rss_reader'] = array('RSS reader', 'adds an RSS feed to the page.');
 
 ?>

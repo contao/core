@@ -1,6 +1,6 @@
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,7 +17,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -29,7 +29,7 @@
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2006
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  */
@@ -54,22 +54,23 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=0'}).send();
 			}
 
 			return false;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=loadNavigation&id=' + id + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
@@ -77,14 +78,14 @@ var AjaxRequest =
 
 				item.addClass('tl_parent');
 				item.setProperty('id', id);
-				item.setHTML(txt);
+				item.set('html', txt);
 				item.setStyle('display', 'inline');
 				item.injectAfter($(el).getParent());
 
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
    			}
-		}).request();
+		}).send();
 
 		return false;
 	},
@@ -110,29 +111,30 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=0'}).send();
 			}
 
 			return false;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=loadStructure&id=' + id + '&level=' + level + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.setHTML(txt);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -167,7 +169,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
    			}
-		}).request();
+		}).send();
 
 		return false;
 	},
@@ -195,32 +197,31 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC', 'folderO');
-
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				icon.src = icon.src.replace('folderO', 'folderC');
-
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=0'}).send();
 			}
 
 			return false;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=loadFileManager&id=' + id + '&level=' + level + '&folder=' + folder + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.setHTML(txt);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -236,7 +237,7 @@ var AjaxRequest =
 
 				AjaxRequest.hideBox();
    			}
-		}).request();
+		}).send();
 
 		return false;
 	},
@@ -263,29 +264,30 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=0'}).send();
 			}
 
 			return false;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=loadPagetree&id=' + id + '&level=' + level + '&field=' + field + '&name=' + name + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.setHTML(txt);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -299,7 +301,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
    			}
-		}).request();
+		}).send();
 
 		return false;
 	},
@@ -327,29 +329,30 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=0'}).send();
 			}
 
 			return false;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=loadFiletree&id=' + id + '&level=' + level + '&folder=' + folder + '&field=' + field + '&name=' + name + '&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.setHTML(txt);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -363,7 +366,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
    			}
-		}).request();
+		}).send();
 
 		return false;
 	},
@@ -387,29 +390,30 @@ var AjaxRequest =
 				el.value = 1;
 				el.checked = 'checked';
 				item.setStyle('display', 'block');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=1'}).send();
 			}
 			else
 			{
 				el.value = '';
 				el.checked = '';
 				item.setStyle('display', 'none');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=0'}).send();
 			}
 
 			return;
 		}
 
-		new Ajax(window.location.href, 
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&load=1&state=1',
-			onStateChange: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox('Loading data …'),
 
 			onComplete: function(txt, xml)
 			{
 				item = new Element('div');
 				item.setProperty('id', id);
-				item.setHTML(txt);
+				item.set('html', txt);
 
 				var folder = false;
 				var div = $(el).getParent();
@@ -432,9 +436,15 @@ var AjaxRequest =
 				item.setStyle('display', 'block');
 
 				AjaxRequest.hideBox();
+
 				Backend.hideTreeBody();
+				Backend.addInteractiveHelp();
+				Backend.addColorPicker();
+
+				// HOOK
+				window.fireEvent('subpalette');
    			}
-		}).request();
+		}).send();
 	},
 
 
@@ -442,9 +452,10 @@ var AjaxRequest =
 	 * Toggle the visibility of content elements
 	 * @param object
 	 * @param string
+	 * @param string
 	 * @return boolean
 	 */
-	toggleVisibility: function(el, id)
+	toggleVisibility: function(el, id, type)
 	{
 		el.blur();
 		var image = $(el).getFirst();
@@ -452,12 +463,39 @@ var AjaxRequest =
 		if (image.src.indexOf('invisible') != -1)
 		{
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Ajax(window.location.href, {data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=1'}).request();
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&type=' + type + '&state=1'}).send();
 		}
 		else
 		{
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Ajax(window.location.href, {data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=0'}).request();
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&type=' + type + '&state=0'}).send();
+		}
+
+		return false;
+	},
+
+
+	/**
+	 * Toggle the visibility of a fieldset
+	 * @param object
+	 * @param string
+	 * @param string
+	 * @return boolean
+	 */
+	toggleFieldset: function(el, id, table)
+	{
+		el.blur();
+		var fs = $('pal_' + id);
+
+		if (fs.hasClass('collapsed'))
+		{
+			fs.removeClass('collapsed');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFieldset&id=' + id + '&table=' + table + '&state=1'}).send();
+		}
+		else
+		{
+			fs.addClass('collapsed');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFieldset&id=' + id + '&table=' + table + '&state=0'}).send();
 		}
 
 		return false;
@@ -478,23 +516,24 @@ var AjaxRequest =
 			return;
 		}
 
-		new Ajax(window.location.href,
+		new Request(
 		{
+			url: window.location.href,
 			data: 'isAjax=1&action=liveUpdate&id=' + uid.value,
-			onStateChange: $('lu_message').innerHTML = '<p class="tl_info">Connecting to live update server</p>',
+			onRequest: $('lu_message').set('html', '<p class="tl_info">Connecting to live update server</p>'),
 
 			onComplete: function(txt, xml)
 			{
 				if (txt)
 				{
-					$('lu_message').innerHTML = txt;
+					$('lu_message').set('html', txt);
 				}
 				else
 				{
 					$(el).submit();
 				}
 			}
-		}).request();
+		}).send();
 	},
 
 
@@ -516,13 +555,13 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'block');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=1'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				new Ajax(window.location.href, {data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=0'}).request();
+				new Request({url: window.location.href, data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=0'}).send();
 			}
 
 			return true;
@@ -552,12 +591,12 @@ var AjaxRequest =
 		}
 
 		var scroll = window.getScrollTop();
-		if (window.ie6) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'hidden'); } }
+		if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'hidden'); } }
 
 		overlay.setStyle('display', 'block');
 		overlay.setStyle('top', scroll + 'px');
 
-		box.setHTML(message);
+		box.set('html', message);
 		box.setStyle('display', 'block');
 		box.setStyle('top', (scroll + 100) + 'px');
 	},
@@ -579,7 +618,7 @@ var AjaxRequest =
 		if (box)
 		{
 			box.setStyle('display', 'none');
-			if (window.ie6) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'visible'); } }
+			if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'visible'); } }
 		}
 	}
 };
@@ -589,7 +628,7 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2006
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  */
@@ -632,8 +671,8 @@ var Backend =
 	 */
 	getMousePosition: function(event)
 	{
-		Backend.xMousePosition = event.client.x;
-		Backend.yMousePosition = event.client.y;
+		Backend.xMousePosition = event.clientX;
+		Backend.yMousePosition = event.clientY;
 	},
 
 
@@ -646,8 +685,8 @@ var Backend =
 	openWindow: function(el, width, height)
 	{
 		el.blur();
-		width = window.ie ? (width + 40) : (width + 17);
-		height = window.ie ? (height + 30) : (height + 17);
+		width = Browser.Engine.trident ? (width + 40) : (width + 17);
+		height = Browser.Engine.trident ? (height + 30) : (height + 17);
 
 		Backend.popupWindow = window.open(el.href, '', 'width='+width+',height='+height+',modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
 	},
@@ -792,7 +831,7 @@ var Backend =
 
 	/**
 	 * Toggle checkboxes
-	 * @param object 
+	 * @param object
 	 * @param string
 	 */
 	toggleCheckboxes: function(trigger, id)
@@ -802,7 +841,7 @@ var Backend =
 
 		for (var i=0; i<items.length; i++)
 		{
-			if (items[i].type.toLowerCase() != "checkbox")
+			if (items[i].type.toLowerCase() != 'checkbox')
 			{
 				continue;
 			}
@@ -819,7 +858,7 @@ var Backend =
 
 	/**
 	 * Toggle checkbox group
-	 * @param object 
+	 * @param object
 	 * @param string
 	 */
 	toggleCheckboxGroup: function(el, id)
@@ -856,13 +895,14 @@ var Backend =
 		var status = (textarea.getProperty('wrap') == 'off') ? 'soft' : 'off';
 		textarea.setProperty('wrap', status);
 
-		if (!window.ie)
+		if (!Browser.Engine.trident)
 		{
 			var v = textarea.value;
 			var n = textarea.clone();
 			n.setProperty('wrap', status);
-			textarea.replaceWith(n);
+			n.setProperty('id', $(id).getProperty('id'));
 			n.value = v;
+			n.replaces(textarea);
 		}
 	},
 
@@ -888,19 +928,33 @@ var Backend =
 
 
 	/**
-	 * Open the color picker wizard in a modal window
-	 * @param string
+	 * Initialize the mootools color picker
 	 */
-	pickColor: function(id)
+	addColorPicker: function()
 	{
-		var width = 275;
-		var height = 204;
+		$$('img.mooRainbow').each(function(img)
+		{
+			var id = $(img).id;
+			var pid = id.replace(/moo_/, 'ctrl_');
+			var el = $(pid);
 
-		Backend.currentId = id;
-		Backend.cpColor = $(id).value;
+			var mr = new MooRainbow(id,
+			{
+				'startColor': [0, 0, 0],
+				'imgPath': 'plugins/mootools/images/',
+				'id': 'rainbow_' + id,
 
-		Backend.getScrollOffset();
-		window.open($$('base')[0].href + 'typolight/color.php?color=' + Backend.cpColor, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-width-30) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+				onComplete: function(color)
+				{
+					el.value = color.hex.substr(1, 6);
+				}
+			});
+
+			if (el.value)
+			{
+				mr.manualSet("#" + el.value, "hex");
+			}
+		});
 	},
 
 
@@ -914,10 +968,154 @@ var Backend =
 		var height = 112;
 
 		Backend.currentId = id;
-		Backend.ppHref = $(id).value;
+		Backend.ppValue = $(id).value;
 
 		Backend.getScrollOffset();
-		window.open($$('base')[0].href + 'typolight/page.php?href=' + Backend.ppHref, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-width-30) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+		window.open($$('base')[0].href + 'typolight/page.php?value=' + Backend.ppValue, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-width-30) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+	},
+
+
+	/**
+	 * Open the file picker wizard in a modal window
+	 * @param string
+	 */
+	pickFile: function(id)
+	{
+		var width = 320;
+		var height = 112;
+
+		Backend.currentId = id;
+		Backend.ppValue = $(id).value;
+
+		Backend.getScrollOffset();
+		window.open($$('base')[0].href + 'typolight/file.php?value=' + Backend.ppValue, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-width-30) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+	},
+
+
+	/**
+	 * Collapse palettes
+	 * @param string
+	 */
+	collapsePalettes: function(id)
+	{
+		$$('fieldset.hide').each(function(el)
+		{
+			el.addClass('collapsed');
+		});
+
+		// Make sure that error messages are always visible
+		$$('div.tl_error').each(function(el)
+		{
+			var fs = el.getParent().getParent();
+
+			if (fs.nodeName.toLowerCase() == 'fieldset')
+			{
+				fs.removeClass('collapsed');
+			}
+		});
+
+		// Make sure that mandatory fields are always visible
+		$$('label.mandatory').each(function(el)
+		{
+			var fs = el.getParent().getParent().getParent();
+
+			if (fs.nodeName.toLowerCase() == 'fieldset')
+			{
+				fs.removeClass('collapsed');
+			}
+		});
+	},
+
+
+	/**
+	 * Add the interactive help
+	 */
+	addInteractiveHelp: function()
+	{
+		$$('p.tl_tip').each(function(el)
+		{
+			if (el.retrieve('complete'))
+			{
+				return;
+			}
+
+			el.addEvent('mouseover', function()
+			{
+				el.timo = setTimeout(function()
+				{
+					var box = $('tl_helpBox');
+
+					if (!box)
+					{
+						box = new Element('div').setProperty('id', 'tl_helpBox').injectInside($(document.body));
+					}
+
+					var scroll = el.getTop();
+
+					box.set('html', el.get('html'));
+					box.setStyle('display', 'block');
+					box.setStyle('top', (scroll + 18) + 'px');
+				}, 1000);
+			});
+
+			el.addEvent('mouseout', function()
+			{
+				var box = $('tl_helpBox');
+
+				if (box)
+				{
+					box.setStyle('display', 'none');
+				}
+
+				clearTimeout(el.timo);
+			});
+
+			el.store('complete', true);
+		});
+	},
+
+
+	/**
+	 * Make parent view items sortable
+	 * @param object
+	 */
+	makeParentViewSortable: function(ul)
+	{
+		var list = new Sortables(ul,
+		{
+			contstrain: true,
+			opacity: 0.6
+		});
+
+		list.active = false;
+
+		list.addEvent('start', function()
+		{
+			list.active = true;
+		});
+
+		list.addEvent('complete', function(el)
+		{
+	    	if (!list.active)
+	    	{
+    			return;
+    		}
+
+    		if (el.getPrevious())
+    		{
+    			var id = el.get('id').replace(/li_/, '');
+    			var pid = el.getPrevious().get('id').replace(/li_/, '');
+    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
+    			new Request({url: window.location.href, method: 'get', data: req}).send();
+    		}
+    		else if (el.getParent())
+    		{
+    			var id = el.get('id').replace(/li_/, '');
+    			var pid = el.getParent().get('id').replace(/ul_/, '');
+    			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
+				new Request({url: window.location.href, method: 'get', data: req}).send();
+    		}
+    	});
 	},
 
 
@@ -951,7 +1149,7 @@ var Backend =
 				break;
 
 			case 'delete':
-				(items.length > 1) ? parent.remove() : null;
+				(items.length > 1) ? parent.destroy() : null;
 				break;
 		}
 	},
@@ -1009,7 +1207,7 @@ var Backend =
 				break;
 
 			case 'rdelete':
-				(rows.length > 2) ? parentTr.remove() : null;
+				(rows.length > 2) ? parentTr.destroy() : null;
 				break;
 
 			case 'ccopy':
@@ -1064,7 +1262,7 @@ var Backend =
 				{
 					for (var i=0; i<rows.length; i++)
 					{
-						rows[i].getChildren()[index].remove();
+						rows[i].getChildren()[index].destroy();
 					}
 				}
 				break;
@@ -1086,6 +1284,46 @@ var Backend =
 				}
 			}
 		}
+
+		Backend.tableWizardResize();
+	},
+
+
+	/**
+	 * Resize table wizard fields on focus
+	 */
+	tableWizardResize: function()
+	{
+		$$('.tl_tablewizard textarea').each(function(el)
+		{
+			el.set('morph', { duration: 200 });
+
+			el.addEvent('focus', function()
+			{
+				el.setStyle('position', 'absolute');
+				el.morph(
+				{
+					'height': '166px',
+					'width': '356px',
+					'margin-top': '-50px',
+					'margin-left': '-107px'
+				});
+				el.setStyle('z-index', '1');
+			});
+
+			el.addEvent('blur', function()
+			{
+				el.setStyle('z-index', '0');
+				el.morph(
+				{
+					'height': '66px',
+					'width': '142px',
+					'margin-top': '1px',
+					'margin-left': '0'
+				});
+				setTimeout(function() { el.setStyle('position', ''); }, 250);
+			});
+		});
 	},
 
 
@@ -1128,7 +1366,7 @@ var Backend =
 				break;
 
 			case 'delete':
-				(rows.length > 1) ? parent.remove() : null;
+				(rows.length > 1) ? parent.destroy() : null;
 				break;
 		}
 
@@ -1180,7 +1418,7 @@ var Backend =
 					if (next.getFirst().type == 'checkbox')
 					{
 						next.getFirst().checked = childs[i].getFirst().checked ? 'checked' : '';
-						if (window.ie6) next.innerHTML = next.innerHTML.replace(/CHECKED/ig, 'checked="checked"');
+						if (Browser.Engine.trident && Browser.Engine.version < 5) next.innerHTML = next.innerHTML.replace(/CHECKED/ig, 'checked="checked"');
 					}
 				}
 
@@ -1196,7 +1434,7 @@ var Backend =
 				break;
 
 			case 'delete':
-				(rows.length > 1) ? parent.remove() : null;
+				(rows.length > 1) ? parent.destroy() : null;
 				break;
 		}
 
@@ -1276,18 +1514,29 @@ document.onmousedown = Backend.getMousePosition.bindWithEvent(document);
 
 
 /**
- * Hide all pagetree and filetree nodes by default
+ * Hide all pagetree and filetree nodes by default and make sure that
+ * errors and mandatory fields are never in a collapsed fieldset
  */
 window.addEvent('domready', function()
 {
 	Backend.hideTreeBody();
-	Backend.limitPreviewHeight();
 	Backend.blink.periodical(600);
 
+	// Remove line wraps from textareas
 	$$('textarea.monospace').each(function(el)
 	{
 		Backend.toggleWrap(el);
 	});
+
+	// New 2.7 back end theme
+	Backend.collapsePalettes();
+	Backend.addInteractiveHelp();
+	Backend.addColorPicker();
+});
+
+window.addEvent('load', function()
+{
+	Backend.limitPreviewHeight();
 });
 
 
@@ -1295,7 +1544,7 @@ window.addEvent('domready', function()
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2006
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  */

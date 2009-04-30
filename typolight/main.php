@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Backend
  * @license    LGPL
@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
  * Class Main
  *
  * Main back end controller.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -119,20 +119,10 @@ class Main extends Backend
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 
 		// Check for latest version
-		$objRequest = new Request();
-		$objRequest->send('http://www.inetrobots.com/liveupdate/version.txt');
-
-		// Notify user
-		if (!$objRequest->hasError())
+		if (!empty($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
-			if (version_compare(VERSION . '.' . BUILD, $objRequest->response, '<'))
-			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['latestVersion']", $objRequest->response);
-				$GLOBALS['TL_CONFIG']['latestVersion'] = $objRequest->response;
-
-				$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $objRequest->response);
-				$objTemplate->messages = true;
-			}
+			$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
+			$objTemplate->messages = true;
 		}
 
 		// Check for tasks
@@ -240,11 +230,13 @@ class Main extends Backend
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->modules = $this->User->navigation();
+		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
+		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
 
 		$this->Template->frontendFile = 'index.php';
 
 		// Preview pages
-		if ($this->Input->get('do') == 'page' && strlen(CURRENT_ID)) 
+		if ($this->Input->get('do') == 'page' && strlen(CURRENT_ID))
 		{
 			$objPreview = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 										 ->limit(1)
@@ -264,7 +256,7 @@ class Main extends Backend
 		}
 
 		// Preview article
-		if ($this->Input->get('do') == 'article' && strlen(CURRENT_ID)) 
+		if ($this->Input->get('do') == 'article' && strlen(CURRENT_ID))
 		{
 			$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, a.id AS aid, a.alias AS aalias FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 										 ->limit(1)

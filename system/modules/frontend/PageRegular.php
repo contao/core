@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Frontend
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -134,7 +134,7 @@ class PageRegular extends Frontend
 		{
 			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
 
-			header('HTTP/1.0 501 Not Implemented');
+			header('HTTP/1.1 501 Not Implemented');
 			die('No layout specified');
 		}
 
@@ -164,13 +164,13 @@ class PageRegular extends Frontend
 		}
 
 		// Robots
-		if ($objPage->noSearch)
+		if (strlen($objPage->robots))
 		{
-			$this->Template->robots = '<meta name="robots" content="noindex,nofollow" />' . "\n";
+			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '" />' . "\n";
 		}
 
 		// Add urchin ID if there is no back end user
-		if (!BE_USER_LOGGED_IN && sha1(session_id().$this->Environment->ip.'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH'))
+		if (!BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH'))
 		{
 			$this->Template->urchinId = $objLayout->urchinId;
 			$this->Template->urchinUrl = $this->Environment->ssl ? 'https://ssl.google-analytics.com/ga.js' : 'http://www.google-analytics.com/ga.js';
@@ -185,6 +185,15 @@ class PageRegular extends Frontend
 		// Body onload and body classes
 		$this->Template->onload = trim($objLayout->onload);
 		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
+
+		// HOOK: extension "bodyclass"
+		if (in_array('bodyclass', $this->Config->getActiveModules()))
+		{
+			if (strlen($objPage->cssBody))
+			{
+				$this->Template->class .= ' ' . $objPage->cssBody;
+			}
+		}
 
 		// Mootools script
 		if (strlen($objLayout->mootools) && $objLayout->mootools != '-')
@@ -217,7 +226,11 @@ class PageRegular extends Frontend
 		if ($objLayout->header)
 		{
 			$arrSize = deserialize($objLayout->headerHeight);
-			$this->Template->framework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+
+			if ($arrSize['value'] > 0)
+			{
+				$this->Template->framework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+			}
 		}
 
 		$strMain = '';
@@ -227,8 +240,11 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->widthLeft);
 
-			$this->Template->framework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-			$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+			if ($arrSize['value'] > 0)
+			{
+				$this->Template->framework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+			}
 		}
 
 		// Right column
@@ -236,8 +252,11 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->widthRight);
 
-			$this->Template->framework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-			$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+			if ($arrSize['value'] > 0)
+			{
+				$this->Template->framework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+			}
 		}
 
 		// Main column
@@ -250,13 +269,17 @@ class PageRegular extends Frontend
 		if ($objLayout->footer)
 		{
 			$arrSize = deserialize($objLayout->footerHeight);
-			$this->Template->framework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+
+			if ($arrSize['value'] > 0)
+			{
+				$this->Template->framework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+			}
 		}
 
 		$this->Template->framework .= '/*]]>*/-->' . "\n";
 		$this->Template->framework .= '</style>' . "\n";
 		$this->Template->framework .= '<link rel="stylesheet" href="system/typolight.css" type="text/css" media="screen" />' . "\n";
-		$this->Template->framework .= '<!--[if IE]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
+		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 
 		// Initialize sections
 		$this->Template->header = '';
@@ -297,13 +320,20 @@ class PageRegular extends Frontend
 		// Add style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT name, media FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT name, cc, media FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
-				$strStyleSheets .= sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-											$objStylesheets->name . '.css',
-											implode(', ', deserialize($objStylesheets->media))) . "\n";
+				$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
+										 $objStylesheets->name . '.css',
+										 implode(', ', deserialize($objStylesheets->media)));
+
+				if ($objStylesheets->cc)
+				{
+					$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+				}
+
+				$strStyleSheets .= $strStyleSheet . "\n";
 			}
 		}
 

@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Comments
  * @license    LGPL
@@ -30,12 +30,12 @@
 /**
  * Content elements
  */
-$GLOBALS['TL_LANG']['CTE']['comments'] = array('Kommentare', 'Dieses Inhaltselement ermöglicht Ihren Besuchern, einen Kommentar zu hinterlassen.');
+$GLOBALS['TL_LANG']['CTE']['comments'] = array('Kommentare', 'fügt ein Kommentar-Formular ein.');
 
 
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['comments'] = array('Kommentare', 'Mit diesem Modul können Sie die Kommentare Ihrer Besucher verwalten.');
+$GLOBALS['TL_LANG']['MOD']['comments'] = array('Kommentare', 'Kommentare bzw. Gästebuch-Einträge verwalten.');
 
 ?>

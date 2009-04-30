@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Language
  * @license    LGPL
@@ -30,9 +30,9 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'Bitte geben Sie den Namen des Verzeichnisses oder der Datei (ohne Dateiendung) ein.');
-$GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('Dateiupload', 'Bitte durchsuchen Sie Ihren Computer und wählen Sie eine oder mehrere Dateien für den Upload.');
-$GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Verwenden Sie den Quelltexteditor, um Dateien auf Ihrem Server zu bearbeiten.');
+$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'TYPOlight fügt die Dateiendung automatisch ein.');
+$GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('Dateiupload', 'Durchsuchen Sie Ihren Computer und wählen Sie die Dateien, die Sie auf den Server übertragen möchten.');
+$GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Hier könne Sie den Quelltext der Datei bearbeiten.');
 
 
 /**
@@ -41,7 +41,7 @@ $GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Verwen
 $GLOBALS['TL_LANG']['tl_files']['upload']      = 'Dateien hochladen';
 $GLOBALS['TL_LANG']['tl_files']['uploadNback'] = 'Dateien hochladen und zurück';
 $GLOBALS['TL_LANG']['tl_files']['editFF']      = 'Eine Datei oder ein Verzeichnis bearbeiten';
-$GLOBALS['TL_LANG']['tl_files']['uploadFF']    = 'Eine Datei in den Ordner "%s" hochladen';
+$GLOBALS['TL_LANG']['tl_files']['uploadFF']    = 'Dateien in den Ordner "%s" hochladen';
 $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Datei "%s" bearbeiten';
 
 
@@ -51,12 +51,12 @@ $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Datei "%s" bearbeiten';
 $GLOBALS['TL_LANG']['tl_files']['new']       = array('Neues Verzeichnis', 'Ein neues Verzeichnis anlegen');
 $GLOBALS['TL_LANG']['tl_files']['cut']       = array('Datei oder Verzeichnis verschieben', 'Datei oder Verzeichnis "%s" verschieben');
 $GLOBALS['TL_LANG']['tl_files']['copy']      = array('Datei oder Verzeichnis duplizieren', 'Datei oder Verzeichnis "%s" duplizieren');
-$GLOBALS['TL_LANG']['tl_files']['edit']      = array('Datei oder Verzeichnis bearbeiten', 'Datei oder Verzeichnis "%s" bearbeiten');
+$GLOBALS['TL_LANG']['tl_files']['edit']      = array('Datei oder Verzeichnis umbenennen', 'Datei oder Verzeichnis "%s" umbenennen');
 $GLOBALS['TL_LANG']['tl_files']['delete']    = array('Datei oder Verzeichnis löschen', 'Datei oder Verzeichnis "%s" löschen');
-$GLOBALS['TL_LANG']['tl_files']['source']    = array('Quelltext bearbeiten', 'Den Quelltext der Datei "%s" bearbeiten');
+$GLOBALS['TL_LANG']['tl_files']['source']    = array('Datei bearbeiten', 'Die Datei "%s" bearbeiten');
 $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Verzeichnis schützen', 'Verzeichnis "%s" schützen');
-$GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Verzeichnisschutz aufheben', 'Zugriffsschutz für "%s" aufheben');
-$GLOBALS['TL_LANG']['tl_files']['move']      = array('Datei-Upload', 'Eine oder mehrere Dateien hochladen');
+$GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Verzeichnisschutz aufheben', 'Schutz des Verzeichnisses "%s" aufheben');
+$GLOBALS['TL_LANG']['tl_files']['move']      = array('Datei-Upload', 'Dateien auf den Server übertragen');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
 
 ?>

@@ -12,9 +12,7 @@
 <h2><?php echo $this->title; ?></h2>
 <?php endif; ?>
 <?php if ($this->time || $this->span): ?>
-<div class="time">
-<?php echo $this->time . $this->span; ?> 
-</div>
+<p class="time"><?php echo $this->time . $this->span; ?></p>
 <?php endif; ?>
 <div class="ce_text">
 <?php echo $this->teaser; ?>

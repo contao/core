@@ -2,7 +2,7 @@
 
 /**
  * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
+ * Copyright (C) 2005-2009 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Calendar
  * @license    LGPL
@@ -31,7 +31,7 @@
  * Class Calendar
  *
  * Provide methods regarding calendars.
- * @copyright  Leo Feyer 2005
+ * @copyright  Leo Feyer 2005-2009
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Controller
  */
@@ -154,11 +154,6 @@ class Calendar extends Frontend
 					$arg = $arrRepeat['value'];
 					$unit = $arrRepeat['unit'];
 
-					if ($arg == 1)
-					{
-						$unit = substr($unit, 0, -1);
-					}
-
 					$strtotime = '+ ' . $arg . ' ' . $unit;
 
 					$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
@@ -190,8 +185,7 @@ class Calendar extends Frontend
 					$objItem = new FeedItem();
 
 					$objItem->title = $event['title'];
-					$objItem->description = $event['description'];
-					$objItem->content = $event['content'];
+					$objItem->description = ($arrArchive['source'] == 'source_text') ? $event['description'] : $event['teaser'];
 					$objItem->link = $event['link'];
 					$objItem->published = $event['published'];
 					$objItem->start = $event['start'];
@@ -248,7 +242,7 @@ class Calendar extends Frontend
 			}
 
 			// Get the URL of the jumpTo page
-			if (!array_key_exists($objCalendar->jumpTo, $arrProcessed))
+			if (!isset($arrProcessed[$objCalendar->jumpTo]))
 			{
 				$arrProcessed[$objCalendar->jumpTo] = false;
 
@@ -316,11 +310,11 @@ class Calendar extends Frontend
 		// Add date
 		if ($span > 0)
 		{
-			$title = date($GLOBALS['TL_CONFIG'][$format], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG'][$format], $intEnd);
+			$title = $this->parseDate($GLOBALS['TL_CONFIG'][$format], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][$format], $intEnd);
 		}
 		else
 		{
-			$title = date($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ($objArticle->addTime ? ' (' . date($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . ' - ' . date($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd) . ')' : '');
+			$title = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ($objArticle->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd) : '') . ')' : '');
 		}
 
 		// Add title
@@ -340,7 +334,7 @@ class Calendar extends Frontend
 		(
 			'title' => $title,
 			'description' => $objArticle->details,
-			'content' => $objArticle->details,
+			'teaser' => $objArticle->teaser,
 			'link' => $link,
 			'published' => $intStart
 		);
