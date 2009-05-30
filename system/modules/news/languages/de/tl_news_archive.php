@@ -31,7 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_news_archive']['title']          = array('Titel', 'Bitte geben Sie den Archiv-Titel ein.');
-$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Nachrichtenleser-Seite aus, zu der Besucher weitergeleitet werden wenn Sie einen Beitrag anklicken.');
+$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Nachrichtenleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Beitrag anklicken.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Kommentare aktivieren', 'Besuchern das Kommentieren von Nachrichtenbeiträgen erlauben.');
 $GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
 $GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Kommentartemplate', 'Hier können Sie das Template für Kommentare auswählen.');

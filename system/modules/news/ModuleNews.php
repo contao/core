@@ -344,7 +344,7 @@ abstract class ModuleNews extends Module
 		{
 			return sprintf('<a href="%s" title="%s">%s</a>',
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
-							sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline),
+							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline)),
 							$strLink);
 		}
 

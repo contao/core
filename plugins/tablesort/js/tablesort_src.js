@@ -94,8 +94,8 @@ var TableSort = new Class(
 			return false;
 		}
 
-		var th = col.getParent();
-		var table = th.getParent().getParent();
+		var th = col.getParent('tr');
+		var table = th.getParent('table');
 
 		// Check whether table exists and there is more than one row
 		if (table == null || table.tBodies[0].rows.length < 2)

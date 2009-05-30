@@ -178,6 +178,7 @@ class DataContainer extends Backend
 		if ($this->strTable == 'tl_content' && $this->strField == 'tableitems')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' ' . $this->generateImage(($this->Session->get('disable_cell_resizer') ? 'resize_.gif' : 'resize.gif'), $GLOBALS['TL_LANG']['tl_content']['resizeCells'][0], 'id="cellResizer" title="'.specialchars($GLOBALS['TL_LANG']['tl_content']['resizeCells'][1]).'" class="toggleWrap" onclick="AjaxRequest.toggleCellResizer(this);"');
 		}
 
 		// Add list import wizard
@@ -322,6 +323,12 @@ class DataContainer extends Backend
 		if ($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'w50') !== false)
 		{
 			$arrData['eval']['tl_class'] .= ' cbx';
+		}
+
+		// No 2-column layout in "edit all" mode
+		if ($this->Input->get('act') == 'editAll')
+		{
+			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12'), '', $arrData['eval']['tl_class']);
 		}
 
 		return '

@@ -60,7 +60,7 @@ class CronJob extends Frontend
 	public function run()
 	{
 		// Do not run if there is POST data
-		if (count($_POST))
+		if (!empty($_POST))
 		{
 			return;
 		}

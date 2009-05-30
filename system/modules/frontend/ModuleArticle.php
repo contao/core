@@ -80,9 +80,19 @@ class ModuleArticle extends Module
 			$this->Template = new FrontendTemplate('mod_article_plain');
 		}
 
+		// Store raw data
+		$this->Template->setData($this->arrData);
+
+		// Generate the cssID if it is not set
 		if (!strlen($this->cssID[0]))
 		{
 			$alias = strlen($this->alias) ? $this->alias : $this->title;
+
+			if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
+			{
+				$alias .= '-' . $this->id;
+			}
+
 			$this->cssID = array(standardize($alias), $this->cssID[1]);
 		}
 
@@ -97,6 +107,9 @@ class ModuleArticle extends Module
 		if ($this->multiMode && $this->showTeaser)
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
+
+			// Store raw data
+			$this->Template->setData($this->arrData);
 
 			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($this->alias)) ? $this->alias : $this->id;
 			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;

@@ -30,8 +30,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['websiteTitle']        = array('Titel der Webseite', 'Bitte geben Sie den Title der Webseite ein.');
-$GLOBALS['TL_LANG']['tl_settings']['adminEmail']          = array('E-Mail-Adresse des Systemadministrators', 'Automatisch erstelle Mitteilungen wie z.B. Kommentar-Benachrichtigungen werden an diese Adresse versendet.');
+$GLOBALS['TL_LANG']['tl_settings']['websiteTitle']        = array('Titel der Webseite', 'Bitte geben Sie den Titel der Webseite ein.');
+$GLOBALS['TL_LANG']['tl_settings']['adminEmail']          = array('E-Mail-Adresse des Systemadministrators', 'Automatisch erstellte Mitteilungen wie z.B. Kommentar-Benachrichtigungen werden an diese Adresse versendet.');
 $GLOBALS['TL_LANG']['tl_settings']['dateFormat']          = array('Datumsformat', 'Der Datumsformat-String wird mit der PHP-Funktion date() geparst.');
 $GLOBALS['TL_LANG']['tl_settings']['timeFormat']          = array('Zeitformat', 'Der Zeitformat-String wird mit der PHP-Funktion date() geparst.');
 $GLOBALS['TL_LANG']['tl_settings']['datimFormat']         = array('Datums- und Zeitformat', 'Der Datums- und Zeitformat-String wird mit der PHP-Funktion date() geparst.');
@@ -40,7 +40,6 @@ $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfa
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update-URL', 'Hier können Sie die Live Update-URL eingeben.');
-$GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
 $GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Backendmotiv', 'Hier können Sie das Backendmotiv wechseln.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
@@ -48,12 +47,13 @@ $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Neue Zeilen m
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL-Suffix', 'Das URL-Suffix wird der URL angehängt, um statische Dokumente zu simulieren.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('URLs umschreiben', 'Statische URLs ohne das index.php-Fragment erzeugen (benötigt "mod_rewrite").');
 $GLOBALS['TL_LANG']['tl_settings']['disableAlias']        = array('Keine Seitenaliase verwenden', 'Die numerische ID einer Seite oder eines Artikels anstelle des Alias verwenden.');
+$GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Erlaubte HTML-Tags', 'Hier können Sie eine Liste erlaubter HTML-Tags eingeben, die nicht entfernt werden sollen.');
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Wartezeit bei gesperrtem Konto', 'Ein Konto wird gesperrt, wenn drei Mal hintereinander ein falsches Passwort eingegeben wird.');
 $GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Hashwert für Verschlüsselung', 'Verschlüsselte Daten können nur mit demselben Hashwert wieder entschlüsselt werden!');
 $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldungen anzeigen', 'Fehlermeldungen auf dem Bildschirm ausgegeben (nicht empfohlen für produktive Seiten).');
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgegeben.');
-$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Referer-Prüfung deaktivieren', 'Die Referer-Adresse beim Absenden eines Formulares nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Referer-Prüfung deaktivieren', 'Die Referer-Adresse beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('IP-Prüfung deaktivieren', 'Benutzersitzungen nicht an IP-Adressen binden. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Erlaubte Upload-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über TYPOlight hochgeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Erlaubte Download-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über TYPOlight heruntergeladen werden dürfen.');

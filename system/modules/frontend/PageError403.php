@@ -90,7 +90,7 @@ class PageError403 extends Frontend
 
 		if ($objNextPage->numRows)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), ($obj403->redirect == 'temporary'));
+			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), (($obj403->redirect == 'temporary') ? 302 : 301));
 		}
 
 		$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);

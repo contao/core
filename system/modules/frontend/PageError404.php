@@ -100,7 +100,7 @@ class PageError404 extends Frontend
 
 		if ($objNextPage->numRows)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), ($obj404->redirect == 'temporary'));
+			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), (($obj404->redirect == 'temporary') ? 302 : 301));
 		}
 
 		$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);

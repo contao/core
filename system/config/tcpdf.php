@@ -60,7 +60,7 @@ define('PDF_FONT_NAME_DATA', 'freeserif');
 define('PDF_FONT_SIZE_DATA', 12);
 define('PDF_FONT_MONOSPACED', 'freemono');
 define('PDF_FONT_SIZE_MONOSPACED', 10); // PATCH
-define('PDF_IMAGE_SCALE_RATIO', 1.3);
+define('PDF_IMAGE_SCALE_RATIO', 1.75);
 define('HEAD_MAGNIFICATION', 1.1);
 define('K_CELL_HEIGHT_RATIO', 1.25);
 define('K_TITLE_MAGNIFICATION', 1.3);

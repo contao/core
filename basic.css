@@ -1,30 +1,10 @@
 /* Style sheet basic */
-body,div,h1,h2,h3,h4,h5,h6,p,blockquote,pre,code,ol,ul,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea{margin:0;padding:0;}
-table{border-collapse:collapse;border-spacing:0;}
-caption,th,td{text-align:left;vertical-align:top;}
-blockquote,q{quotes:none;}
-fieldset,img{border:0;}
-img{vertical-align:middle;}
-li{list-style-type:none;}
-sup{vertical-align:text-top;}
-sub{vertical-align:text-bottom;}
-del{text-decoration:line-through;}
-ins{text-decoration:none;}
-a{text-decoration:none;color:#346599;}
-a:hover{text-decoration:underline;}
-:focus{outline:0;}
-body{font-family:"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;font-size:12px;color:#444;}
-input,button,textarea,select{font-family:inherit;font-size:99%;font-weight:inherit;}
-pre,code{font-family:"Lucida Console",Monaco,monospace;font-size:12px;}
-h1,h2,h3,h4,h5,h6{font-family:"Trebuchet MS",Helvetica,Arial,sans-serif;font-weight:normal;font-size:100%;color:#333;}
-h1{padding-bottom:3px;border-bottom:1px solid #bbb;font-size:22px;}
-h2{font-size:20px;}
-h3{font-size:18px;}
-p{line-height:1.5;}
-table{font-size:inherit;}
-caption,th{font-weight:bold;}
-abbr,acronym{border-bottom:1px dotted #666;font-variant:normal;cursor:help;}
-h1,h2,h3,h4,h5,h6{margin-top:1em;}
-h1,h2,h3,h4,h5,h6,p,pre,blockquote,table,ol,ul,form{margin-bottom:12px;}
-.mtop{margin-top:1em;}
-.mbot{margin-bottom:12px;}
+body{margin:0px 0px 24px 0px;padding:0px;}
+a,body,div,em,input,label,li,ol,p,select,span,strong,td,th,textarea,u,ul{font-family:Verdana, sans-serif;}
+a,body,div,input,label,li,ol,p,select,td,th,textarea,u,ul{font-size:11px;}
+h1{margin:0px 0px 12px 0px;padding:0px;font-weight:bold;font-size:13px;}
+h2{margin:0px 0px 6px 0px;padding:0px;font-weight:bold;font-size:11px;}
+a{text-decoration:none;color:#a84204;}
+a:hover{text-decoration:underline;color:#a84204;}
+img{vertical-align:middle;border:0px;}
+p,pre,form{margin:0px;padding:0px;}

@@ -26,7 +26,6 @@
  * @filesource
  */
 
-
 ### INSTALL SCRIPT START ###
 
 ?>

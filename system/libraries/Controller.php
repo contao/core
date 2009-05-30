@@ -1258,6 +1258,7 @@ abstract class Controller extends System
 					{
 						$_rit = $_rit + 2;
 					}
+					unset($arrCache[$strTag]);
 					break;
 
 				// Environment

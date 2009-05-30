@@ -144,7 +144,7 @@ class Newsletter extends Backend
 			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
 			// Get recipients
-			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=?")
+			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=? ORDER BY r.email")
 											->limit($intPages, $intStart)
 											->execute($objNewsletter->pid, 1);
 
@@ -584,7 +584,7 @@ class Newsletter extends Backend
 			if ($objUser->numRows)
 			{
 				// E-mail address has changed
-				if (count($_POST) && $this->Input->post('email', true) != $objUser->email)
+				if (!empty($_POST) && $this->Input->post('email', true) != $objUser->email)
 				{
 					$this->Database->prepare("UPDATE tl_newsletter_recipients SET email=? WHERE email=?")
 								   ->execute($this->Input->post('email', true), $objUser->email);

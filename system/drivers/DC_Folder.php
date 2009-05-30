@@ -871,7 +871,7 @@ class DC_Folder extends DataContainer implements listable, editable
 <!--//--><![CDATA[//><!--
 window.addEvent(\'domready\', function()
 {
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'div.tl_error\').getPosition().y - 20));
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
 //--><!]]>
 </script>';
@@ -1009,7 +1009,7 @@ window.addEvent(\'domready\', function()
 <!--//--><![CDATA[//><!--
 window.addEvent(\'domready\', function()
 {
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'div.tl_error\').getPosition().y - 20));
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
 //--><!]]>
 </script>';

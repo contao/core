@@ -1663,7 +1663,7 @@ class DC_Table extends DataContainer implements listable, editable
 <!--//--><![CDATA[//><!--
 window.addEvent(\'domready\', function()
 {
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'div.tl_error\').getPosition().y - 20));
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
 //--><!]]>
 </script>';
@@ -1882,7 +1882,7 @@ window.addEvent(\'domready\', function()
 <!--//--><![CDATA[//><!--
 window.addEvent(\'domready\', function()
 {
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'div.tl_error\').getPosition().y - 20));
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
 //--><!]]>
 </script>';
@@ -3423,7 +3423,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$submit = '
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="filter" id="filter" src="system/themes/' . $this->getTheme() . '/images/ok.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
+<input type="image" name="filter" id="filter" src="system/themes/' . $this->getTheme() . '/images/reload.gif" class="tl_img_submit" title="' . $GLOBALS['TL_LANG']['MSC']['apply'] . '" value="apply changes" />
 </div>';
 			}
 

@@ -51,7 +51,7 @@ $GLOBALS['TL_LANG']['MOD']['settings']    = array('Einstellungen', 'Die TYPOligh
 $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'TYPOlight warten oder aktualisieren.');
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'Benutzerfunktionen';
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Rückgängig', 'Gelöschte Datensätze wiederherstellen.');
-$GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönlichen Daten ändern oder ein neues Passwort setzen.');
+$GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönliche Daten ändern oder ein neues Passwort setzen.');
 $GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task Center', 'Anderen Backend-Benutzern Aufgaben zuweisen.');
 
 ?>

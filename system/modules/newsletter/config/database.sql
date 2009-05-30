@@ -16,7 +16,7 @@ CREATE TABLE `tl_newsletter` (
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `subject` varchar(255) NOT NULL default '',
-  `alias` varchar(128) NOT NULL default '',
+  `alias` varbinary(128) NOT NULL default '',
   `content` text NULL,
   `text` text NULL,
   `addFile` char(1) NOT NULL default '',

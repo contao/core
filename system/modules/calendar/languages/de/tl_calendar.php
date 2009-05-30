@@ -31,7 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_calendar']['title']       = array('Titel', 'Bitte geben Sie den Kalender-Titel ein.');
-$GLOBALS['TL_LANG']['tl_calendar']['jumpTo']      = array('Weiterleitungsseite', 'Bitte wählen Sie die Eventleser-Seite aus, zu der Besucher weitergeleitet werden wenn Sie einen Event anklicken.');
+$GLOBALS['TL_LANG']['tl_calendar']['jumpTo']      = array('Weiterleitungsseite', 'Bitte wählen Sie die Eventleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Event anklicken.');
 $GLOBALS['TL_LANG']['tl_calendar']['protected']   = array('Kalender schützen', 'Events nur bestimmten Frontend-Gruppen anzeigen.');
 $GLOBALS['TL_LANG']['tl_calendar']['groups']      = array('Erlaubte Mitgliedergruppen', 'Diese Mitgliedergruppen können die Events des Kalenders sehen.');
 $GLOBALS['TL_LANG']['tl_calendar']['makeFeed']    = array('Feed erstellen', 'Einen RSS- oder Atom-Feed aus dem Kalender generieren.');

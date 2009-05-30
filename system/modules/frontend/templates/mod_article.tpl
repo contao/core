@@ -4,7 +4,7 @@
 
 <!-- indexer::stop -->
 <div class="pdf_link">
-<a href="<?php echo $this->href; ?>" title="<?php echo $this->title; ?>"><?php echo $this->label; ?></a>
+<a href="<?php echo $this->href; ?>" rel="nofollow" title="<?php echo $this->title; ?>"><?php echo $this->label; ?></a>
 </div>
 <!-- indexer::continue -->
 <?php endif; ?>

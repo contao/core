@@ -20,7 +20,7 @@ CREATE TABLE `tl_faq` (
   `sorting` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `question` varchar(255) NOT NULL default '',
-  `alias` varchar(128) NOT NULL default '',
+  `alias` varbinary(128) NOT NULL default '',
   `author` int(10) unsigned NOT NULL default '0',
   `answer` text NULL,
   `addImage` char(1) NOT NULL default '',

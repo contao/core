@@ -31,7 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['title']  = array('Titel', 'Bitte geben Sie den Titel des Verteilers ein.');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'] = array('Weiterleitungsseite', 'Bitte wählen Sie die Newsletterleser-Seite aus, zu der Besucher weitergeleitet werden wenn Sie einen Newsletter anklicken.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'] = array('Weiterleitungsseite', 'Bitte wählen Sie die Newsletterleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Newsletter anklicken.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp'] = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 

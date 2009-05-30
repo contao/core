@@ -141,6 +141,7 @@ $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit a
  */
 $GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV import', 'Import list items from a CSV file');
 $GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV import', 'Import table items from a CSV file');
+$GLOBALS['TL_LANG']['tl_content']['resizeCells'] = array('Cell magnifier', 'Toggle the cell magnifier');
 $GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Duplicate row', 'Duplicate the row');
 $GLOBALS['TL_LANG']['tl_content']['rup']         = array('Move row up', 'Move the row one position up');
 $GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Move row down', 'Move the row one position down');

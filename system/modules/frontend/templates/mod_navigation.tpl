@@ -6,9 +6,9 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible" title="<?php echo $this->skipNavigation; ?>"></a>
+<a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
 <?php echo $this->items; ?> 
-<a id="<?php echo $this->skipId; ?>" class="invisible" title="<?php echo $this->skipNavigation; ?>"></a>
+<a id="<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
 
 </div>
 <!-- indexer::continue -->

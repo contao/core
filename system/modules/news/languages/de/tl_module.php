@@ -33,7 +33,7 @@
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('Nachrichtenarchive', 'Bitte wählen Sie ein oder mehrere Nachrichtenarchive.');
 $GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Nur hervorgehobene Beiträge', 'Nur hervorgehobene Beiträge in der Nachrichtenliste anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Zum aktuellen Monat springen', 'Automatisch zum aktuellen Monat springen wenn keiner ausgewählt ist.');
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Zum aktuellen Monat springen', 'Automatisch zum aktuellen Monat springen, wenn keiner ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta-Felder', 'Hier können Sie die Meta-Felder auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['news_template']      = array('Nachrichtentemplate', 'Hier können Sie das Nachrichtentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Archivformat', 'Hier können Sie das Archivformat auswählen.');

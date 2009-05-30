@@ -116,6 +116,9 @@ class ModuleCalendar extends Events
 
 		$objTemplate = new FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
+		$objTemplate->intYear = $intYear;
+		$objTemplate->intMonth = $intMonth;
+
 		// Previous month
 		$prevMonth = ($intMonth == 1) ? 12 : ($intMonth - 1);
 		$prevYear = ($intMonth == 1) ? ($intYear - 1) : $intYear;

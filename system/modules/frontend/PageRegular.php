@@ -217,8 +217,6 @@ class PageRegular extends Frontend
 		if ($objLayout->static)
 		{
 			$arrSize = deserialize($objLayout->width);
-
-			$this->Template->framework .= sprintf('* html body { text-align:%s; }', $objLayout->align) . "\n";
 			$this->Template->framework .= sprintf('#wrapper { width:%s; margin:%s; }', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 		}
 

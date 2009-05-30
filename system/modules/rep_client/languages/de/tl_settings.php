@@ -15,7 +15,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Fallback-Sprachen', 'Hier können Sie eine kommagetrennte Liste von ISO-Sprachcodes eigeben, die angezeigt werden, wenn eine Erweiterung nicht in der aktuellen Backendsprache verfügbar ist.');
+$GLOBALS['TL_LANG']['tl_settings']['repository_languages'] = array('Fallback-Sprachen', 'Hier können Sie eine kommagetrennte Liste von ISO-Sprachcodes eingeben, die angezeigt werden, wenn eine Erweiterung nicht in der aktuellen Backendsprache verfügbar ist.');
 $GLOBALS['TL_LANG']['tl_settings']['repository_listsize']  = array('Erweiterungen pro Seite', 'Hier können Sie die Anzahl an Erweiterungen pro Seite festlegen.');
 
 ?>

@@ -50,7 +50,7 @@ var AjaxRequest =
 
 		if (item)
 		{
-			if (item.getStyle('display') != 'inline')
+			if (item.getStyle('display') == 'none')
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
@@ -80,7 +80,7 @@ var AjaxRequest =
 				item.setProperty('id', id);
 				item.set('html', txt);
 				item.setStyle('display', 'inline');
-				item.injectAfter($(el).getParent());
+				item.injectAfter($(el).getParent('li'));
 
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
@@ -107,7 +107,7 @@ var AjaxRequest =
 
 		if (item)
 		{
-			if (item.getStyle('display') != 'inline')
+			if (item.getStyle('display') == 'none')
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
@@ -145,12 +145,12 @@ var AjaxRequest =
 
 				if (mode == 5)
 				{
-					item.injectAfter($(el).getParent().getParent());
+					item.injectAfter($(el).getParent('li'));
 				}
 				else
 				{
 					var folder = false;
-					var li = $(el).getParent().getParent();
+					var li = $(el).getParent('li');
 
 					while ($type(li) == 'element' && li.getNext())
 					{
@@ -192,7 +192,7 @@ var AjaxRequest =
 
 		if (item)
 		{
-			if (item.getStyle('display') != 'inline')
+			if (item.getStyle('display') == 'none')
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
@@ -230,7 +230,7 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 
 				ul.injectInside(item);
-				item.injectAfter($(el).getParent().getParent());
+				item.injectAfter($(el).getParent('li'));
 
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
@@ -260,7 +260,7 @@ var AjaxRequest =
 
 		if (item)
 		{
-			if (item.getStyle('display') != 'inline')
+			if (item.getStyle('display') == 'none')
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
@@ -296,7 +296,7 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 
 				ul.injectInside(item);
-				item.injectAfter($(el).getParent().getParent());
+				item.injectAfter($(el).getParent('li'));
 
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -325,7 +325,7 @@ var AjaxRequest =
 
 		if (item)
 		{
-			if (item.getStyle('display') != 'inline')
+			if (item.getStyle('display') == 'none')
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
@@ -361,7 +361,7 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 
 				ul.injectInside(item);
-				item.injectAfter($(el).getParent().getParent());
+				item.injectAfter($(el).getParent('li'));
 
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
@@ -416,7 +416,7 @@ var AjaxRequest =
 				item.set('html', txt);
 
 				var folder = false;
-				var div = $(el).getParent();
+				var div = $(el).getParent('div');
 
 				while ($type(div) == 'element' && div.getNext())
 				{
@@ -565,6 +565,37 @@ var AjaxRequest =
 			}
 
 			return true;
+		}
+
+		return false;
+	},
+
+
+	/**
+	 * Toggle the cell resizer
+	 * @param object
+	 */
+	toggleCellResizer: function(el)
+	{
+		var image = $(el);
+
+		if (image.src.indexOf('resize.gif') != -1)
+		{
+			image.src = image.src.replace('resize.gif', 'resize_.gif');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleCellResizer&state=1'}).send();
+
+			$$('.tl_tablewizard textarea').each(function(el)
+			{
+				el.removeEvents('focus');
+				el.removeEvents('blur');
+			});
+		}
+		else
+		{
+			image.src = image.src.replace('resize_.gif', 'resize.gif');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleCellResizer&state=0'}).send();
+
+			Backend.tableWizardResize();
 		}
 
 		return false;
@@ -1003,23 +1034,11 @@ var Backend =
 			el.addClass('collapsed');
 		});
 
-		// Make sure that error messages are always visible
-		$$('div.tl_error').each(function(el)
+		$$('label.error', 'label.mandatory').each(function(el)
 		{
-			var fs = el.getParent().getParent();
+			var fs = el.getParent('fieldset');
 
-			if (fs.nodeName.toLowerCase() == 'fieldset')
-			{
-				fs.removeClass('collapsed');
-			}
-		});
-
-		// Make sure that mandatory fields are always visible
-		$$('label.mandatory').each(function(el)
-		{
-			var fs = el.getParent().getParent().getParent();
-
-			if (fs.nodeName.toLowerCase() == 'fieldset')
+			if ($defined(fs))
 			{
 				fs.removeClass('collapsed');
 			}
@@ -1337,7 +1356,7 @@ var Backend =
 	{
 		var table = $(id);
 		var tbody = table.getFirst().getNext();
-		var parent = $(el).getParent().getParent();
+		var parent = $(el).getParent('tr');
 		var rows = tbody.getChildren();
 
 		Backend.getScrollOffset();
@@ -1399,7 +1418,7 @@ var Backend =
 	{
 		var table = $(id);
 		var tbody = table.getFirst().getNext();
-		var parent = $(el).getParent().getParent();
+		var parent = $(el).getParent('tr');
 		var rows = tbody.getChildren();
 
 		Backend.getScrollOffset();

@@ -129,7 +129,7 @@ class FrontendTemplate extends Template
 		$blnCached = false;
 
 		// Cache page if it is not protected
-		if (!BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
+		if (empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// Do not cache empty requests
 			if (strlen($this->Environment->request) && $this->Environment->request != 'index.php')

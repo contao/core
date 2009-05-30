@@ -32,14 +32,14 @@
  */
 $GLOBALS['TL_LANG']['tl_article']['title']      = array('Titel', 'Bitte geben Sie den Artikel-Titel ein.');
 $GLOBALS['TL_LANG']['tl_article']['alias']      = array('Artikelalias', 'Der Artikelalias ist eine eindeutige Referenz, die anstelle der numerischen Artikel-Id aufgerufen werden kann.');
-$GLOBALS['TL_LANG']['tl_article']['author']     = array('Autor', 'Hier können Sie den Autor des Artikel ändern.');
+$GLOBALS['TL_LANG']['tl_article']['author']     = array('Autor', 'Hier können Sie den Autor des Artikels ändern.');
 $GLOBALS['TL_LANG']['tl_article']['inColumn']   = array('Anzeigen in', 'Bitte wählen Sie den Layoutbereich, in dem der Artikel angezeigt werden soll.');
 $GLOBALS['TL_LANG']['tl_article']['keywords']   = array('Suchbegriffe', 'Hier können Sie eine Liste kommagetrennter Suchbegriffe eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet werden. Suchmaschinen indizieren normalerweise bis zu 800 Zeichen.');
-$GLOBALS['TL_LANG']['tl_article']['showTeaser'] = array('Teasertext anzeigen', 'Den Teasertext anzeigen wenn es mehrere Artikel gibt.');
+$GLOBALS['TL_LANG']['tl_article']['showTeaser'] = array('Teasertext anzeigen', 'Den Teasertext anzeigen, wenn es mehrere Artikel gibt.');
 $GLOBALS['TL_LANG']['tl_article']['teaser']     = array('Teasertext', 'Der Teasertext kann auch mit dem Inhaltselement "Artikelteaser" dargestellt werden.');
 $GLOBALS['TL_LANG']['tl_article']['printable']  = array('Druckbar', 'Einen Link für den PDF-Export des Artikels hinzufügen.');
 $GLOBALS['TL_LANG']['tl_article']['cssID']      = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
-$GLOBALS['TL_LANG']['tl_article']['space']      = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Artikel in Pixeln eigeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_article']['space']      = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Artikel in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 $GLOBALS['TL_LANG']['tl_article']['published']  = array('Artikel veröffentlichen', 'Den Artikel auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_article']['start']      = array('Anzeigen ab', 'Den Artikel erst ab diesem Tag auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_article']['stop']       = array('Anzeigen bis', 'Den Artikel nur bis zu diesem Tag auf der Webseite anzeigen.');

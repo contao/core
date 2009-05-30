@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP', 'useFTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},enableGZip,websitePath,characterSet,customSections,liveUpdateBase;{backend_legend:hide},backendTheme,resultsPerPage,doNotCollapse,pNewLine;{frontend_legend:hide},urlSuffix,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{ftp_legend:hide},useFTP;{modules_legend:hide},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,liveUpdateBase;{backend_legend},backendTheme,resultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,rewriteURL,disableAlias,enableGZip;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{ftp_legend:hide},useFTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod'
 	),
 
 	// Subpalettes
@@ -94,11 +94,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'select',
 			'options'                 => $this->getTimezones(),
 			'eval'                    => array('tl_class'=>'w50')
-		),
-		'enableGZip' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['enableGZip'],
-			'inputType'               => 'checkbox'
 		),
 		'websitePath' => array
 		(
@@ -153,17 +148,23 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'],
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>'true', 'rgxp'=>'url')
+			'eval'                    => array('nospace'=>'true', 'rgxp'=>'url', 'tl_class'=>'w50')
 		),
 		'rewriteURL' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'disableAlias' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['disableAlias'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'enableGZip' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['enableGZip'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),

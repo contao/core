@@ -97,15 +97,10 @@ class ModuleNewsList extends ModuleNews
 		if ($this->perPage > 0)
 		{
 			// Get total number of items
-			$objTotalStmt = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
+			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC")
+									   ->execute($time, $time);
 
-			if (!is_null($limit))
-			{
-				$objTotalStmt->limit($limit);
-			}
-
-			$objTotal = $objTotalStmt->execute($time, $time);
-			$total = $objTotal->total - $skipFirst;
+			$total = min($limit, ($objTotal->total - $skipFirst));
 
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;

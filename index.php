@@ -196,7 +196,7 @@ class Index extends Frontend
 	protected function outputFromCache()
 	{
 		// Build page if a user is logged in or there is POST data
-		if ($_SESSION['TL_USER_LOGGED_IN'] || count($_POST))
+		if ($_SESSION['TL_USER_LOGGED_IN'] || !empty($_POST))
 		{
 			return;
 		}

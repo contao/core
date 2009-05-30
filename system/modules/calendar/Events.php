@@ -272,7 +272,7 @@ abstract class Events extends Module
 		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
 			// Only show first occurrence
-			if ($this->cal_noSpan && $intDate >= $this->intToday)
+			if ($this->cal_noSpan && (!$this instanceof ModuleUpcomingEvents || $intDate >= $this->intToday))
 			{
 				break;
 			}

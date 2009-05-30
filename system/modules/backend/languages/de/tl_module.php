@@ -65,7 +65,7 @@ $GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Kontext-Spannweite',
 $GLOBALS['TL_LANG']['tl_module']['totalLength']    = array('Gesamte Kontextlänge', 'Hier können Sie die Gesamtlänge der Kontexts pro Ergebnis beschränken.');
 $GLOBALS['TL_LANG']['tl_module']['inColumn']       = array('Spalte', 'Bitte wählen Sie die Spalte, deren Artikel Sie auflisten möchten.');
 $GLOBALS['TL_LANG']['tl_module']['skipFirst']      = array('Erstes Element überspringen', 'Das erste Element nicht in der Liste anzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Erstes Element laden', 'Automatisch zum ersten Element weiterleiten wenn keines ausgewählt ist.');
+$GLOBALS['TL_LANG']['tl_module']['loadFirst']      = array('Erstes Element laden', 'Automatisch zum ersten Element weiterleiten, wenn keines ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['size']           = array('Breite und Höhe', 'Bitte geben Sie die Breite und Höhe in Pixeln ein.');
 $GLOBALS['TL_LANG']['tl_module']['transparent']    = array('Transparenter Film', 'Den Flash-Film transparent machen (wmode = transparent).');
 $GLOBALS['TL_LANG']['tl_module']['flashvars']      = array('FlashVars', 'Variablen an den Flash-Film übergeben (<em>var1=wert1&amp;var2=wert2</em>).');
@@ -85,7 +85,7 @@ $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Modul schützen', 'D
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Modul sehen.');
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
-$GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eigeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 
 
 /**

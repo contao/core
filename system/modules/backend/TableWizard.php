@@ -221,15 +221,22 @@ class TableWizard extends Widget
     </tr>';
 		}
 
-		return $return.'
+		$return .= '
   </tbody>
   </table>
-  </div>
+  </div>';
+
+		if (!$this->Session->get('disable_cell_resizer'))
+		{
+			$return .= '
   <script type="text/javascript">
   <!--//--><![CDATA[//><!--
   Backend.tableWizardResize();
   //--><!]]>
   </script>';
+		}
+
+		return $return;
 	}
 
 

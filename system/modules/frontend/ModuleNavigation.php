@@ -94,7 +94,7 @@ class ModuleNavigation extends Module
 		}
 
 		$this->Template->request = $request;
-		$this->Template->skipId = 'skipNavigation_' . $this->id;
+		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = $this->renderNavigation($trail[$level]);
 	}

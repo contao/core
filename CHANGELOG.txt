@@ -2,6 +2,25 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.7.1 (2009-05-30)
+--------------------------
+- Added a more reliable HTTP request class
+- Added the "name" attribute to the FormSubmit widget (#702)
+- Added automatic capitalization to the glossary module (#697)
+- Added option to disable the table wizard cell magnifier (#716)
+- Moved template "mod_message" to the front end module (#703)
+- Fixed issue with mandatory password fields not being shown (#693)
+- Fixed issue with "checkCredentials" hook only being executed once (#728)
+- Fixed issue with insert tag "iflng" being cached (#707)
+- Fixed issue with error pages sending the wrong redirect header(#749)
+- Fixed issue with special characters in news links not being encoded (#747)
+- Fixed issue with news pagination menu being calculated wrongly (#704)
+- Fixed issue with aliases not being case-sensitive (#752)
+- Fixed broken "shortened view" of the event list module (#694, #153)
+- Fixed a couple of misspellings in the german translation (#701)
+- Fixed a few issues with the new 2-column layout
+- Fixed a few minor issues
+
 Version 2.7.0 (2009-05-01)
 --------------------------
 - Updated SyntaxHighlighter to version 2.0.296
@@ -12,7 +31,7 @@ Version 2.7.0 (2009-05-01)
 - Added a rewrite rule to dispatch gzipped .js and .css files
 - Added basic drag'n'drop support in the back end (parent view)
 - Added better confirmation messages to comment elements (#677)
-- Fixes issue with insert tag "date" returning the wrong date(#639)
+- Fixes issue with insert tag "date" returning the wrong date (#639)
 - Fixed issue with date validation if the date contains slashes (#668)
 - Fixed issue with RSS reader not showing feed header data (#635)
 - Fixed issue with tablesort.js not working in IE (#652)

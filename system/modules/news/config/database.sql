@@ -16,7 +16,7 @@ CREATE TABLE `tl_news` (
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `headline` varchar(255) NOT NULL default '',
-  `alias` varchar(128) NOT NULL default '',
+  `alias` varbinary(128) NOT NULL default '',
   `author` int(10) unsigned NOT NULL default '0',
   `date` int(10) unsigned NOT NULL default '0',
   `time` int(10) unsigned NOT NULL default '0',
@@ -77,7 +77,7 @@ CREATE TABLE `tl_news_archive` (
   `source` varchar(32) NOT NULL default '',
   `maxItems` smallint(5) unsigned NOT NULL default '0',
   `feedBase` varchar(255) NOT NULL default '',
-  `alias` varchar(128) NOT NULL default '',
+  `alias` varbinary(128) NOT NULL default '',
   `description` text NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

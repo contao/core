@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->mainTitle; ?> - <?php echo $this->pageTitle; ?></title>
+<title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <meta name="description" content="<?php echo $this->description; ?>" />
 <meta name="keywords" content="<?php echo $this->keywords; ?>" />
@@ -49,10 +49,9 @@
 <div class="inside">
 <?php echo $this->main; ?> 
 </div>
-<?php echo $this->getCustomSections('main'); ?>
-</div>
-
+<?php echo $this->getCustomSections('main'); ?> 
 <div id="clear"></div>
+</div>
 
 </div>
 <?php echo $this->getCustomSections('after'); ?>

@@ -32,7 +32,7 @@
  */
 $GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'TYPOlight fügt die Dateiendung automatisch ein.');
 $GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('Dateiupload', 'Durchsuchen Sie Ihren Computer und wählen Sie die Dateien, die Sie auf den Server übertragen möchten.');
-$GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Hier könne Sie den Quelltext der Datei bearbeiten.');
+$GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Hier können Sie den Quelltext der Datei bearbeiten.');
 
 
 /**

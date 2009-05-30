@@ -32,7 +32,7 @@
  */
 $GLOBALS['TL_LANG']['tl_faq_category']['title']    = array('Titel', 'Bitte geben Sie den Kategorie-Titel ein.');
 $GLOBALS['TL_LANG']['tl_faq_category']['headline'] = array('Überschrift', 'Bitte geben Sie die Kategorie-Überschrift ein.');
-$GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']   = array('Weiterleitungsseite', 'Bitte wählen Sie die FAQ-Leser-Seite aus, zu der Besucher weitergeleitet werden wenn Sie eine FAQ anklicken.');
+$GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']   = array('Weiterleitungsseite', 'Bitte wählen Sie die FAQ-Leser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie eine FAQ anklicken.');
 $GLOBALS['TL_LANG']['tl_faq_category']['tstamp']   = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 

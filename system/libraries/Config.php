@@ -105,7 +105,7 @@ class Config
 	{
 		if (!$blnNoCache && isset($this->arrCache['activeModules']))
 		{
-			return $this->arrCache['activeModules'];
+			return (array) $this->arrCache['activeModules']; // (array) = PHP 5.1.2 fix
 		}
 
 		$arrActiveModules = array('backend', 'frontend');

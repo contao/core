@@ -66,7 +66,7 @@ class PageForward extends Frontend
 				}
 			}
 
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), ($objPage->redirect == 'temporary'));
+			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
 		}
 
 		$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);

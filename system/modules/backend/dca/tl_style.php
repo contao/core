@@ -223,7 +223,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['display'],
 			'inputType'               => 'select',
-			'options'                 => array('block', 'inline', 'list-item', 'run-in', 'compact', 'none', 'table', 'inline-table', 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-column', 'table-column-group', 'table-caption'),
+			'options'                 => array('block', 'inline', 'inline-block', 'list-item', 'run-in', 'compact', 'none', 'table', 'inline-table', 'table-row', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-column', 'table-column-group', 'table-caption'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'alignment' => array

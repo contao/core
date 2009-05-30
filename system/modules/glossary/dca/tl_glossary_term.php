@@ -127,7 +127,11 @@ $GLOBALS['TL_DCA']['tl_glossary_term'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_glossary_term', 'capitalizeTerm')
+			)
 		),
 		'author' => array
 		(
@@ -236,6 +240,20 @@ $GLOBALS['TL_DCA']['tl_glossary_term'] = array
  */
 class tl_glossary_term extends Backend
 {
+
+	/**
+	 * Capitalize a term
+	 * @param string
+	 * @return string
+	 */
+	public function capitalizeTerm($term)
+	{
+		$first = utf8_substr($term, 0, 1);
+		$upper = utf8_strtoupper($first);
+
+		return $upper . utf8_substr($term, 1);
+	}
+
 
 	/**
 	 * List all terms

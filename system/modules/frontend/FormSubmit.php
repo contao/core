@@ -62,6 +62,10 @@ class FormSubmit extends Widget
 				$this->arrConfiguration['imageSubmit'] = $varValue ? true : false;
 				break;
 
+			case 'name':
+				$this->arrAttributes['name'] = $varValue;
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;

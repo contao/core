@@ -80,7 +80,7 @@ $GLOBALS['TL_LANG']['tl_content']['protected']    = array('Element schützen', '
 $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Inhaltselement sehen.');
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Nur Gästen anzeigen', 'Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
-$GLOBALS['TL_LANG']['tl_content']['space']        = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eigeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_content']['space']        = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 $GLOBALS['TL_LANG']['tl_content']['source']       = array('Quelldateien', 'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.');
 
 
@@ -140,6 +140,7 @@ $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Artikel bearbeiten', '
  */
 $GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV-Import', 'Listeneinträge aus einer CSV-Datei importieren');
 $GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV-Import', 'Tabelleneinträge aus einer CSV-Datei importieren');
+$GLOBALS['TL_LANG']['tl_content']['resizeCells'] = array('Vergrößerung ein-/ausschalten', 'Vergrößerung beim Fokussieren ein- bzw. ausschalten');
 $GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Reihe duplizieren', 'Die Reihe duplizieren');
 $GLOBALS['TL_LANG']['tl_content']['rup']         = array('Eine Position nach oben', 'Die Reihe eine Position nach oben verschieben');
 $GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Eine Position nach unten', 'Die Reihe eine Position nach unten verschieben');

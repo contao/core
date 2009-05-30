@@ -225,6 +225,11 @@ class Ajax extends Backend
 				$this->Session->set('checkbox_groups', $state);
 				break;
 
+			// Toggle cell resizer
+			case 'toggleCellResizer':
+				$this->Session->set('disable_cell_resizer', intval($this->Input->post('state')));
+				break;
+
 			// HOOK: pass unknown actions to callback functions
 			default:
 				if (isset($GLOBALS['TL_HOOKS']['executePreActions']) && is_array($GLOBALS['TL_HOOKS']['executePreActions']))
