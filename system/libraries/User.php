@@ -292,8 +292,8 @@ abstract class User extends Model
 		{
 			foreach ($GLOBALS['TL_HOOKS']['checkCredentials'] as $callback)
 			{
-				$this->import($callback[0]);
-				$blnAuthenticated = $this->$callback[0]->$callback[1]($this->Input->post('username'), $this->Input->post('password'));
+				$this->import($callback[0], 'objAuth', true);
+				$blnAuthenticated = $this->objAuth->$callback[1]($this->Input->post('username'), $this->Input->post('password'));
 
 				// Authentication successfull
 				if ($blnAuthenticated === true)

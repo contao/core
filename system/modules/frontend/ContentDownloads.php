@@ -71,9 +71,9 @@ class ContentDownloads extends ContentElement
 		}
 
 		// Send file to the browser
-		if (strlen($this->Input->get('file')) && (in_array($this->Input->get('file'), $this->multiSRC) || in_array(dirname($this->Input->get('file')), $this->multiSRC)))
+		if (strlen($this->Input->get('file', true)) && (in_array($this->Input->get('file', true), $this->multiSRC) || in_array(dirname($this->Input->get('file')), $this->multiSRC)))
 		{
-			$this->sendFileToBrowser($this->Input->get('file'));
+			$this->sendFileToBrowser($this->Input->get('file', true));
 		}
 
 		return parent::generate();

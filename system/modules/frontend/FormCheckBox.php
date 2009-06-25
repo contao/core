@@ -136,7 +136,12 @@ class FormCheckBox extends Widget
 
 		$varInput = $this->validator($options);
 
-		if (!$this->hasErrors())
+		// Add class "error"
+		if ($this->hasErrors())
+		{
+			$this->class = 'error';
+		}
+		else
 		{
 			$this->varValue = $varInput;
 		}

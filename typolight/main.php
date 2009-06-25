@@ -258,19 +258,26 @@ class Main extends Backend
 		// Preview article
 		if ($this->Input->get('do') == 'article' && strlen(CURRENT_ID))
 		{
-			$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, a.id AS aid, a.alias AS aalias FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+			$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, a.id AS aid, a.alias AS aalias, a.inColumn AS acolumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 										 ->limit(1)
 										 ->execute(CURRENT_ID);
 
 			if ($objPreview->numRows)
 			{
+				$strColumn = '';
+
+				if ($objPreview->acolumn != 'main')
+				{
+					$strColumn = $objPreview->acolumn . ':';
+				}
+
 				if ($GLOBALS['TL_CONFIG']['disableAlias'])
 				{
-					$this->Template->frontendFile = 'index.php?id=' . $objPreview->pid . '&amp;articles=' . $objPreview->aid;
+					$this->Template->frontendFile = 'index.php?id=' . $objPreview->pid . '&amp;articles=' . $strColumn . $objPreview->aid;
 				}
 				else
 				{
-					$this->Template->frontendFile = 'index.php/' . (strlen($objPreview->palias) ? $objPreview->palias : $objPreview->pid) . '/articles/' . (strlen($objPreview->aalias) ? $objPreview->aalias : $objPreview->aid) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+					$this->Template->frontendFile = 'index.php/' . (strlen($objPreview->palias) ? $objPreview->palias : $objPreview->pid) . '/articles/' . $strColumn . (strlen($objPreview->aalias) ? $objPreview->aalias : $objPreview->aid) . $GLOBALS['TL_CONFIG']['urlSuffix'];
 				}
 			}
 		}

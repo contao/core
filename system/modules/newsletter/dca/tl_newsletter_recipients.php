@@ -286,8 +286,8 @@ class tl_newsletter_recipients extends Backend
 	 */
 	public function checkUniqueRecipient($varValue, DataContainer $dc)
 	{
-		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?)")
-									   ->execute($varValue, $dc->id);
+		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?) AND id!=?")
+									   ->execute($varValue, $dc->id, $dc->id);
 
 		if ($objRecipient->count > 0)
 		{

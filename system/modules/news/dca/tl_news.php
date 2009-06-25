@@ -561,7 +561,7 @@ class tl_news extends Backend
 			return;
 		}
 
-		$arrSet['date'] = strtotime('+ ' . date('G', $objEvent->time) . ' hours + ' . date('i', $objEvent->time) . ' minutes', $objEvent->date);
+		$arrSet['date'] = strtotime(date('Y-m-d', $objEvent->date) . ' ' . date('H:i:s', $objEvent->time));
 		$arrSet['time'] = $arrSet['date'];
 
 		$this->Database->prepare("UPDATE tl_news %s WHERE id=?")

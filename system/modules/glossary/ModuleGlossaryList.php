@@ -132,9 +132,9 @@ class ModuleGlossaryList extends Module
 				if (is_array($arrEnclosure))
 				{
 					// Send file to the browser
-					if (strlen($this->Input->get('file')) && in_array($this->Input->get('file'), $arrEnclosure))
+					if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
 					{
-						$this->sendFileToBrowser($this->Input->get('file'));
+						$this->sendFileToBrowser($this->Input->get('file', true));
 					}
 
 					// Add download link

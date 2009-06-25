@@ -114,5 +114,7 @@ $GLOBALS['TL_LANG']['MSC']['com_subject']  = 'TYPOlight :: New comment on %s';
 $GLOBALS['TL_LANG']['MSC']['com_message']  = "%s has created a new comment on your website.\n\n---\n\n%s\n\n---\n\nView: %s\nEdit: %s\n\nIf you are moderating comments, you have to log in to the back end to publish it.";
 $GLOBALS['TL_LANG']['MSC']['com_confirm']  = 'Your comment has been added and is now pending for approval.';
 $GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Sorry, item "%s" does not exist.';
+$GLOBALS['TL_LANG']['MSC']['list_orderBy'] = 'Order by %s';
+$GLOBALS['TL_LANG']['MSC']['list_perPage'] = 'Results per page';
 
 ?>

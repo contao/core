@@ -114,5 +114,7 @@ $GLOBALS['TL_LANG']['MSC']['com_subject']  = 'TYPOlight :: Neuer Kommentar auf %
 $GLOBALS['TL_LANG']['MSC']['com_message']  = "%s hat einen neuen Kommentar auf Ihrer Webseite erstellt.\n\n---\n\n%s\n\n---\n\nAnsehen: %s\nBearbeiten: %s\n\nWenn Sie Kommentare moderieren, müssen Sie sich im Backend anmelden und den Kommentar veröffentlichen.";
 $GLOBALS['TL_LANG']['MSC']['com_confirm']  = 'Ihr Kommentar wurde hinzugefügt und wird nach redaktioneller Prüfung veröffentlicht.';
 $GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Der Eintrag "%s" existiert leider nicht.';
+$GLOBALS['TL_LANG']['MSC']['list_orderBy'] = 'Sortiere nach %s';
+$GLOBALS['TL_LANG']['MSC']['list_perPage'] = 'Ergebnisse pro Seite';
 
 ?>

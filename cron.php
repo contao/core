@@ -107,6 +107,13 @@ class CronJob extends Frontend
 			$this->log('Running hourly cron jobs', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
 		}
+
+		// Output a transparent gif
+		header('Cache-Control: no-cache');
+		header('Content-type: image/gif');
+		header('Content-length: 43');
+
+		echo base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
 	}
 }
 

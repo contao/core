@@ -2,6 +2,19 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.7.2 (2009-06-25)
+--------------------------
+- Improved navigation skip links (#815)
+- Fixed a few PHP 5.3 compatibility issues (#783, #785, #786)
+- Fixed issue with wrong duplicate newsletter recipient warning (#769)
+- Fixed issue with files with special characters not being downloadable (#816)
+- Fixed issue with date calculation in "edit multiple" mode (#809)
+- Fixed issue with revision date not being set in "edit multiple" mode (#793)
+- Fixed issue with news pagination menu not showing (#760)
+- Fixed issue with news author notifications not working (#806)
+- Fixed issue with "checkCredentials" hook (#811)
+- Fixed a few minor issues
+
 Version 2.7.1 (2009-05-30)
 --------------------------
 - Added a more reliable HTTP request class

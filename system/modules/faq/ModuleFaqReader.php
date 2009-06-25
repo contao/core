@@ -91,7 +91,7 @@ class ModuleFaqReader extends Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->referer = 'javascript:history.go(-1)';
 
-		$objFaq = $this->Database->prepare("SELECT *, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS authorsName FROM tl_faq WHERE pid IN(" . implode(',', $this->faq_categories) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
+		$objFaq = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS author FROM tl_faq WHERE pid IN(" . implode(',', $this->faq_categories) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
 								 ->limit(1)
 								 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'));
 
@@ -153,9 +153,9 @@ class ModuleFaqReader extends Module
 			if (is_array($arrEnclosure))
 			{
 				// Send file to the browser
-				if (strlen($this->Input->get('file')) && in_array($this->Input->get('file'), $arrEnclosure))
+				if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
 				{
-					$this->sendFileToBrowser($this->Input->get('file'));
+					$this->sendFileToBrowser($this->Input->get('file', true));
 				}
 
 				// Add download link
@@ -187,7 +187,7 @@ class ModuleFaqReader extends Module
 		}
 
 		$this->Template->enclosure = $arrEnclosures;
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->authorsName);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->author);
 	}
 }
 

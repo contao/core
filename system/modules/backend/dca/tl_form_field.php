@@ -53,7 +53,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'search,filter,limit',
-			'headerFields'            => array('title', 'tstamp', 'formID', 'storeValues', 'sendViaEmail', 'recipient', 'subject'),
+			'headerFields'            => array('title', 'tstamp', 'formID', 'storeValues', 'sendViaEmail', 'recipient', 'subject', 'tableless'),
 			'child_record_callback'   => array('tl_form_field', 'listFormFields')
 		),
 		'global_operations' => array

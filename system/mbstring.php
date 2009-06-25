@@ -165,9 +165,9 @@ function utf8_detect_encoding($str)
 	if (USE_MBSTRING)
 		return mb_detect_encoding($str, array('ASCII', 'ISO-2022-JP', 'UTF-8', 'EUC-JP', 'ISO-8859-1'));
 
-	if (!ereg("[\x80-\xFF]", $str))
+	if (!preg_match("/[\x80-\xFF]/", $str))
 	{
-		if (!ereg("\x1B", $str))
+		if (!preg_match("/\x1B/", $str))
 			return 'ASCII';
 
 		return 'ISO-2022-JP';

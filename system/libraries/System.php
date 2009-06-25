@@ -133,13 +133,14 @@ abstract class System
 	 * Import a library and make it accessible by its name or an optional key
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 * @throws Exception
 	 */
-	protected function import($strClass, $strKey=false)
+	protected function import($strClass, $strKey=false, $blnForce=false)
 	{
 		$strKey = $strKey ? $strKey : $strClass;
 
-		if (!is_object($this->$strKey))
+		if (!is_object($this->$strKey) || $blnForce)
 		{
 			$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 		}

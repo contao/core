@@ -229,9 +229,10 @@ class FTP extends Files
 
 	/**
 	 * Check whether a file is writeable
+	 * @param string
 	 * @return boolean
 	 */
-	public function is_writeable()
+	public function is_writeable($strFile)
 	{
 		return true;
 	}

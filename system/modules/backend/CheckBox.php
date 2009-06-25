@@ -203,7 +203,7 @@ class CheckBox extends Widget
 						$this->strName . ($this->multiple ? '[]' : ''),
 						$this->strId.'_'.$i,
 						($this->multiple ? specialchars($arrOption['value']) : 1),
-						((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
+						((is_array($this->varValue) && in_array($arrOption['value'], $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
 						$this->getAttributes(),
 						$this->strId.'_'.$i,
 						$arrOption['label']);

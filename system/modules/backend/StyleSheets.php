@@ -916,8 +916,15 @@ class StyleSheets extends Backend
 					break;
 
 				case 'background-color':
-					$arrSet['background'] = 1;
-					$arrSet['bgcolor'] = str_replace('#', '', $arrChunks[1]);
+					if (!preg_match('/^#[a-f0-9]+$/i', $arrChunks[1]))
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
+					else
+					{
+						$arrSet['background'] = 1;
+						$arrSet['bgcolor'] = str_replace('#', '', $arrChunks[1]);
+					}
 					break;
 
 				case 'background-image':

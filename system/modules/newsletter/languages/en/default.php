@@ -44,6 +44,6 @@ $GLOBALS['TL_LANG']['MSC']['unsubscribe'] = 'Unsubscribe';
 $GLOBALS['TL_LANG']['MSC']['nl_subject']  = 'Your subscription on %s';
 $GLOBALS['TL_LANG']['MSC']['nl_confirm']  = 'Thank you for your subscription. You will receive a confirmation e-mail.';
 $GLOBALS['TL_LANG']['MSC']['nl_activate'] = 'Your subscription has been activated.';
-$GLOBALS['TL_LANG']['MSC']['nl_removed']  = 'You subscription has been removed.';
+$GLOBALS['TL_LANG']['MSC']['nl_removed']  = 'Your subscription has been cancelled.';
 
 ?>

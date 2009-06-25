@@ -301,7 +301,7 @@ class PageRegular extends Frontend
 	 * Create all style sheets and scripts
 	 * @param object
 	 */
-	protected function createStylesheets(Database_Result $objLayout)
+	protected function createStyleSheets(Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);

@@ -641,8 +641,8 @@ class tl_calendar_events extends Backend
 		// Add time
 		if ($objEvent->addTime)
 		{
-			$arrSet['startTime'] = strtotime('+ ' . date('G', $objEvent->startTime) . ' hours + ' . date('i', $objEvent->startTime) . ' minutes', $arrSet['startTime']);
-			$arrSet['endTime'] = strtotime('+ ' . date('G', $objEvent->endTime) . ' hours + ' . date('i', $objEvent->endTime) . ' minutes', $arrSet['endTime']);
+			$arrSet['startTime'] = strtotime(date('Y-m-d', $arrSet['startTime']) . ' ' . date('H:i:s', $objEvent->startTime));
+			$arrSet['endTime'] = strtotime(date('Y-m-d', $arrSet['endTime']) . ' ' . date('H:i:s', $objEvent->endTime));
 		}
 
 		// Adjust end time of "all day" events

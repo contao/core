@@ -1577,8 +1577,8 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 
 			// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE " . implode(' AND ', $this->procedure))
-						   ->execute($arrValues);
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+						   ->execute(time(), $this->intId);
 
 			// Redirect
 			if (isset($_POST['saveNclose']))
@@ -1832,21 +1832,29 @@ window.addEvent(\'domready\', function()
   <input type="hidden" name="FORM_FIELDS_'.$this->intId.'[]" value="'.specialchars(implode(',', $formFields)).'" />
 </div>';
 
-				// Create a new version
-				if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+				// Save record
+				if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
 				{
-					$this->createNewVersion($this->strTable, $this->intId);
-					$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
-				}
-
-				// Call onsubmit_callback
-				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
-				{
-					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
+					// Call onsubmit_callback
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
 					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this);
+						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
+						{
+							$this->import($callback[0]);
+							$this->$callback[0]->$callback[1]($this);
+						}
 					}
+
+					// Create a new version
+					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
+					{
+						$this->createNewVersion($this->strTable, $this->intId);
+						$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
+					}
+
+					// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+								   ->execute(time(), $this->intId);
 				}
 			}
 
@@ -2244,7 +2252,7 @@ window.addEvent(\'domready\', function()
 			if (!is_array($session[$node]) || count($session[$node]) < 1 || current($session[$node]) != 1)
 			{
 				$session[$node] = array();
-				$objNodes = $this->Database->execute("SELECT DISTINCT pid FROM tl_page WHERE pid>0");
+				$objNodes = $this->Database->execute("SELECT DISTINCT pid FROM " . $table . " WHERE pid>0");
 
 				while ($objNodes->next())
 				{

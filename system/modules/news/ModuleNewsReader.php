@@ -96,7 +96,7 @@ class ModuleNewsReader extends ModuleNews
 		$time = time();
 
 		// Get news item
-		$objArticle = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 									 ->limit(1)
 									 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $time, $time);
 
@@ -421,7 +421,7 @@ class ModuleNewsReader extends ModuleNews
 		{
 			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
 										->limit(1)
-										->execute($objArticle->author);
+										->execute($objArticle->authorId);
 
 			if ($objAuthor->numRows)
 			{

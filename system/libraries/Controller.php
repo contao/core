@@ -261,7 +261,7 @@ abstract class Controller extends System
 		$this->import('Database');
 
 		// Get article
-		$objArticle = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
+		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
 									 ->limit(1)
 									 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
 
@@ -734,7 +734,7 @@ abstract class Controller extends System
 		}
 
 		$arrGdinfo = gd_info();
-		$strGdVersion = ereg_replace('[[:alpha:][:space:]()]+', '', $arrGdinfo['GD Version']);
+		$strGdVersion = preg_replace('/[^0-9\.]+/', '', $arrGdinfo['GD Version']);
 
 		switch ($objFile->extension)
 		{
@@ -757,7 +757,7 @@ abstract class Controller extends System
 
 			case 'jpg':
 			case 'jpeg':
-				if ($arrGdinfo['JPG Support'])
+				if ($arrGdinfo['JPG Support'] || $arrGdinfo['JPEG Support'])
 				{
 					$strSourceImage = imagecreatefromjpeg(TL_ROOT . '/' . $image);
 				}
@@ -778,6 +778,13 @@ abstract class Controller extends System
 					}
 				}
 				break;
+		}
+
+		// New image could not be created
+		if (!$strSourceImage)
+		{
+			$this->log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
+			return null;
 		}
 
 		imagecopyresampled($strNewImage, $strSourceImage, $intPositionX, $intPositionY, 0, 0, $intWidth, $intHeight, $objFile->width, $objFile->height);

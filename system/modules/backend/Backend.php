@@ -218,7 +218,7 @@ abstract class Backend extends Controller
 	 * @param string
 	 * @return array
 	 */
-	protected function getSearchablePages($pid=0, $domain='')
+	protected function findSearchablePages($pid=0, $domain='')
 	{
 		$time = time();
 
@@ -279,7 +279,7 @@ abstract class Backend extends Controller
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->getSearchablePages($objPages->id, $domain)) != false)
+			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}

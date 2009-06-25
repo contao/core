@@ -113,7 +113,7 @@ class Automator extends Backend
 				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
-			$arrPages = $this->getSearchablePages($objRoot->id, $strDomain);
+			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain);
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))

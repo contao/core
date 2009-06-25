@@ -190,6 +190,7 @@ class DataContainer extends Backend
 		// Decrypt the value if it is encrypted
 		if ($arrData['eval']['encrypt'])
 		{
+			$this->import('Encryption');
 			$this->varValue = $this->Encryption->decrypt($this->varValue);
 		}
 		

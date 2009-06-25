@@ -373,7 +373,7 @@ class ModuleMaintenance extends BackendModule
 		// Rebuild index
 		if ($this->Input->get('act') == 'index')
 		{
-			$arrPages = $this->getSearchablePages();
+			$arrPages = $this->findSearchablePages();
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))

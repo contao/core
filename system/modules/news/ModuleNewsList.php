@@ -100,7 +100,13 @@ class ModuleNewsList extends ModuleNews
 			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC")
 									   ->execute($time, $time);
 
-			$total = min($limit, ($objTotal->total - $skipFirst));
+			$total = $objTotal->total - $skipFirst;
+
+			// Determine the limit
+			if (!is_null($limit))
+			{
+				$total = min($limit, $total);
+			}
 
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
@@ -114,12 +120,18 @@ class ModuleNewsList extends ModuleNews
 			$limit = ((is_null($limit) || $this->perPage < $limit) ? $this->perPage : $limit) + $skipFirst;
 			$offset = ((($page > 1) ? $page : 1) - 1) * $this->perPage;
 
+			// Hard limit
+			if (($limit + $offset) > $total)
+			{
+				$limit = $limit + $offset - $total;
+			}
+
 			// Add pagination menu
 			$objPagination = new Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
+		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
 
 		// Limit result
 		if ($limit)
