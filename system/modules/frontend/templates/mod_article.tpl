@@ -11,7 +11,9 @@
 <?php echo $this->contentElements; ?>
 <?php if ($this->backlink): ?>
 
+<!-- indexer::stop -->
 <p class="back"><a href="<?php echo $this->backlink; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+<!-- indexer::continue -->
 <?php endif; ?>
 
 </div>

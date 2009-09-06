@@ -37,6 +37,6 @@ $GLOBALS['TL_LANG']['MOD']['registration'] = array('Benutzerregistrierung', 'Ben
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['registration'] = array('Registrierung', 'erzeugt ein Formular zur Benutzerregistrierung.');
-$GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Passwort vergessen', 'erzeugt ein Formular Passwort-Anforderung.');
+$GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Passwort vergessen', 'erzeugt ein Formular zur Passwort-Anforderung.');
 
 ?>

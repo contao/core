@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'insertTag'=>true, 'decodeEntities'=>true),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true),
 			'save_callback' => array
 			(
 				array('tl_newsletter_recipients', 'checkUniqueRecipient')

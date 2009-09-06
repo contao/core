@@ -163,7 +163,7 @@ abstract class Widget extends Controller
 				break;
 
 			case 'disabled':
-				$this->arrAttributes['disabled'] = $varValue;
+				$this->arrAttributes['disabled'] = 'disabled';
 				$this->blnSubmitInput = false;
 				break;
 

@@ -89,45 +89,58 @@ class ModuleLogin extends Module
 				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 			}
 
-			// Redirect to jumpTo page
-			elseif (strlen($this->jumpTo))
+			else
 			{
-				$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											  ->limit(1)
-											  ->execute($this->jumpTo);
-
-				if ($objNextPage->numRows)
+				// Redirect to jumpTo page
+				if (strlen($this->jumpTo))
 				{
-					$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
-				}
-			}
+					$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->jumpTo);
 
-			// Overwrite jumpTo page with an individual group setting
-			$objGroup = $this->Database->prepare("SELECT groups FROM tl_member WHERE username=?")
-									   ->limit(1)
-									   ->execute($this->Input->post('username'));
-
-			if ($objGroup->numRows)
-			{
-				$arrGroups = deserialize($objGroup->groups);
-
-				if (is_array($arrGroups) && count($arrGroups) > 0)
-				{
-					// Get jumpTo page ID
-					$objGroupPage = $this->Database->prepare("SELECT redirect, jumpTo FROM tl_member_group WHERE id IN(" . implode(',', $arrGroups) . ") AND redirect=?")
-												   ->limit(1)
-												   ->execute(1);
-
-					if ($objGroupPage->numRows && $objGroupPage->jumpTo)
+					if ($objNextPage->numRows)
 					{
-						// Get jumpTo page
-						$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-													  ->limit(1)
-													  ->execute($objGroupPage->jumpTo);
+						$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+					}
+				}
 
-						if ($objNextPage->numRows)
+				// Overwrite jumpTo page with an individual group setting
+				$objGroup = $this->Database->prepare("SELECT groups FROM tl_member WHERE username=?")
+										   ->limit(1)
+										   ->execute($this->Input->post('username'));
+
+				if ($objGroup->numRows)
+				{
+					$arrGroups = deserialize($objGroup->groups);
+
+					if (is_array($arrGroups) && count($arrGroups) > 0)
+					{
+						// Get jumpTo page IDs
+						$arrGroupPage = array();
+						$objGroupPage = $this->Database->execute("SELECT id, jumpTo FROM tl_member_group WHERE id IN(" . implode(',', $arrGroups) . ") AND redirect=1");
+
+						// Simulate FIND_IN_SET()
+						while ($objGroupPage->next())
 						{
-							$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+							$arrGroupPage[$objGroupPage->id] = $objGroupPage->jumpTo;
+						}
+
+						foreach ($arrGroups as $gid)
+						{
+							if (isset($arrGroupPage[$gid]))
+							{
+								// Get jumpTo page
+								$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+															  ->limit(1)
+															  ->execute($arrGroupPage[$gid]);
+
+								if ($objNextPage->numRows)
+								{
+									$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+								}
+
+								break;
+							}
 						}
 					}
 				}

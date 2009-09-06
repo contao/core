@@ -97,12 +97,13 @@ class Calendar extends Frontend
 
 
 	/**
-	 * Generate an XML files and save them to the root directory
+	 * Generate an XML file and save it to the root directory
 	 * @param array
 	 */
 	protected function generateFiles($arrArchive)
 	{
 		$time = time();
+		$this->arrEvents = array();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
 		$strLink = strlen($arrArchive['feedBase']) ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
@@ -304,7 +305,7 @@ class Calendar extends Frontend
 		}
 
 		$intKey = date('Ymd', $intStart);
-		$span = floor(($intEnd - $intStart) / 86400);
+		$span = self::calculateSpan($intStart, $intEnd);
 		$format = $objArticle->addTime ? 'datimFormat' : 'dateFormat';
 
 		// Add date
@@ -368,15 +369,7 @@ class Calendar extends Frontend
 	 */
 	public static function calculateSpan($intStart, $intEnd)
 	{
-		$blnSummer = date('I', $intStart);
-		$intOffset = 0;
-
-		if (date('I', $intEnd) !== $blnSummer)
-		{
-			$intOffset = $blnSummer ? 3600 : -3600;
-		}
-
-		return floor(($intEnd - $intStart - $intOffset) / 86400);
+		return unixtojd($intEnd) - unixtojd($intStart);
 	}
 }
 

@@ -209,15 +209,13 @@ class PageRegular extends Frontend
 			'right'  => '0 0 0 auto'
 		);
 
-		// Add the CSS framework
-		$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
-		$this->Template->framework .= '<!--/*--><![CDATA[/*><!--*/' . "\n";
+		$strFramework = '';
 
 		// Wrapper
 		if ($objLayout->static)
 		{
 			$arrSize = deserialize($objLayout->width);
-			$this->Template->framework .= sprintf('#wrapper { width:%s; margin:%s; }', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
+			$strFramework .= sprintf('#wrapper { width:%s; margin:%s; }', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 		}
 
 		// Header
@@ -227,7 +225,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] > 0)
 			{
-				$this->Template->framework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
@@ -240,7 +238,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] > 0)
 			{
-				$this->Template->framework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 				$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
@@ -252,7 +250,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] > 0)
 			{
-				$this->Template->framework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 				$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
@@ -260,7 +258,7 @@ class PageRegular extends Frontend
 		// Main column
 		if (strlen($strMain))
 		{
-			$this->Template->framework .= sprintf('#main { %s }', $strMain) . "\n";
+			$strFramework .= sprintf('#main { %s }', $strMain) . "\n";
 		}
 
 		// Footer
@@ -270,12 +268,21 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] > 0)
 			{
-				$this->Template->framework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
-		$this->Template->framework .= '/*]]>*/-->' . "\n";
-		$this->Template->framework .= '</style>' . "\n";
+		// Add layout specific CSS
+		if (!empty($strFramework))
+		{
+			$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
+			$this->Template->framework .= '<!--/*--><![CDATA[/*><!--*/' . "\n";
+			$this->Template->framework .= $strFramework;
+			$this->Template->framework .= '/*]]>*/-->' . "\n";
+			$this->Template->framework .= '</style>' . "\n";
+		}
+
+		// Include basic style sheets
 		$this->Template->framework .= '<link rel="stylesheet" href="system/typolight.css" type="text/css" media="screen" />' . "\n";
 		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 

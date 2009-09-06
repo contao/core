@@ -206,7 +206,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['groups'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox',
+			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_user_group.name',
 			'eval'                    => array('multiple'=>true)
 		),

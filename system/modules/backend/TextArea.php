@@ -104,14 +104,15 @@ class TextArea extends Widget
 			$GLOBALS['TL_RTE']['fields'][] = 'ctrl_' . $this->strId;
 		}
 
-		return sprintf('<textarea name="%s" id="ctrl_%s" class="tl_textarea%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset();">%s</textarea>',
+		return sprintf('<textarea name="%s" id="ctrl_%s" class="tl_textarea%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset();">%s</textarea>%s',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->intRows,
 						$this->intCols,
 						$this->getAttributes(),
-						specialchars($this->varValue));
+						specialchars($this->varValue),
+						$this->wizard);
 	}
 }
 

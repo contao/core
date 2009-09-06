@@ -248,7 +248,7 @@ class Request
 			$default[$header] = $header . ': ' . $value;
 		}
 
-		$request = strtoupper($this->strMethod) .' '. $path ." HTTP/1.1\r\n";
+		$request = strtoupper($this->strMethod) .' '. $path ." HTTP/1.0\r\n";
 		$request .= implode("\r\n", $default);
 		$request .= "\r\n\r\n";
 

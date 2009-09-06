@@ -689,7 +689,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to the original image if GDlib cannot handle it
-		if (!extension_loaded('gd') || !$objFile->isGdImage || (!$width && !$height) || $width > 1200 || $height > 1200)
+		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > 3000 || $objFile->height > 3000 || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
 			return $image;
 		}
@@ -837,6 +837,30 @@ abstract class Controller extends System
 
 
 	/**
+	 * Return the current languages to be used with the TinyMCE spellchecker
+	 * @return string
+	 */
+	protected function getSpellcheckerString()
+	{
+		$this->loadLanguageFile('languages');
+
+		$return = array();
+		$langs = scan(TL_ROOT . '/system/modules/backend/languages');
+		array_unshift($langs, $GLOBALS['TL_LANGUAGE']);
+
+		foreach ($langs as $lang)
+		{
+			if (isset($GLOBALS['TL_LANG']['LNG'][$lang]))
+			{
+				$return[$lang] = $GLOBALS['TL_LANG']['LNG'][$lang] . '=' . $lang;
+			}
+		}
+
+		return '+' . implode(',', array_unique($return));
+	}
+
+
+	/**
 	 * Print an article as PDF and stream it to the browser
 	 * @param object
 	 */
@@ -967,7 +991,6 @@ abstract class Controller extends System
 		}
 
 		// Stop script execution
-		ob_end_clean();
 		exit;
 	}
 
@@ -1053,7 +1076,55 @@ abstract class Controller extends System
 					if (FE_USER_LOGGED_IN)
 					{
 						$this->import('FrontendUser', 'User');
-						$arrCache[$strTag] = $this->User->$elements[1];
+						$value = $this->User->$elements[1];
+
+						if ($value == '')
+						{
+							$arrCache[$strTag] = $value;
+							break;
+						}
+
+						$this->loadDataContainer('tl_member');
+
+						if ($GLOBALS['TL_DCA']['tl_member']['fields'][$elements[1]]['inputType'] == 'password')
+						{
+							$arrCache[$strTag] = '';
+							break;
+						}
+
+						$value = deserialize($value);
+						$rgxp = $GLOBALS['TL_DCA']['tl_member']['fields'][$elements[1]]['eval']['rgxp'];
+						$opts = $GLOBALS['TL_DCA']['tl_member']['fields'][$elements[1]]['options'];
+						$rfrc = $GLOBALS['TL_DCA']['tl_member']['fields'][$elements[1]]['reference'];
+
+						if ($rgxp == 'date')
+						{
+							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+						}
+						elseif ($rgxp == 'time')
+						{
+							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+						}
+						elseif ($rgxp == 'datim')
+						{
+							$arrCache[$strTag] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+						}
+						elseif (is_array($value))
+						{
+							$arrCache[$strTag] = implode(', ', $value);
+						}
+						elseif (is_array($opts) && array_is_assoc($opts))
+						{
+							$arrCache[$strTag] = isset($opts[$value]) ? $opts[$value] : $value;
+						}
+						elseif (is_array($rfrc))
+						{
+							$arrCache[$strTag] = isset($rfrc[$value]) ? ((is_array($rfrc[$value])) ? $rfrc[$value][0] : $rfrc[$value]) : $value;
+						}
+						else
+						{
+							$arrCache[$strTag] = $value;
+						}
 					}
 					break;
 
@@ -1325,7 +1396,7 @@ abstract class Controller extends System
 							break;
 
 						case 'request':
-							$arrCache[$strTag] = $this->Environment->request;
+							$arrCache[$strTag] = ampersand($this->Environment->request, true);
 							break;
 
 						case 'ip':
@@ -1475,7 +1546,7 @@ abstract class Controller extends System
 	 */
 	protected function restoreBasicEntities($strBuffer)
 	{
-		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]'), array('&amp;', '&lt;', '&gt;', '&nbsp;'), $strBuffer);
+		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]', '[{]', '[}]'), array('&amp;', '&lt;', '&gt;', '&nbsp;', '{{', '}}'), $strBuffer);
 	}
 
 
@@ -1758,7 +1829,14 @@ abstract class Controller extends System
 		// Add default option to single checkbox
 		if ($arrData['inputType'] == 'checkbox' && !isset($arrData['options']) && !isset($arrData['options_callback']) && !isset($arrData['foreignKey']))
 		{
-			$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['label']);
+			if (TL_MODE == 'FE' && isset($arrNew['description']))
+			{
+				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['description']);
+			}
+			else
+			{
+				$arrNew['options'][] = array('value'=>1, 'label'=>$arrNew['label']);
+			}
 		}
 
 		// Add options

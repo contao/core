@@ -109,7 +109,7 @@ class ModuleBreadcrumb extends Module
 					'isActive' => false,
 					'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
 					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle) : specialchars($objPages->title)),
-					'link' => $objPages->title
+					'link' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle) : specialchars($objPages->title))
 				);
 			}
 
@@ -136,10 +136,40 @@ class ModuleBreadcrumb extends Module
 				continue;
 			}
 
+			// Get href
+			switch ($pages[$i]['type'])
+			{
+				case 'redirect':
+					$href = $pages[$i]['url'];
+
+					if (strncasecmp($href, 'mailto:', 7) === 0)
+					{
+						$this->import('String');
+						$href = $this->String->encodeEmail($href);
+					}
+					break;
+
+				case 'forward':
+					$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+											  ->limit(1)
+											  ->execute($pages[$i]['jumpTo']);
+
+					if ($objNext->numRows)
+					{
+						$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+						break;
+					}
+					// DO NOT ADD A break; STATEMENT
+
+				default:
+					$href = $this->generateFrontendUrl($pages[$i]);
+					break;
+			}
+
 			$items[] = array
 			(
 				'isActive' => false,
-				'href' => $this->generateFrontendUrl($pages[$i]),
+				'href' => $href,
 				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle']) : specialchars($pages[$i]['title'])),
 				'link' => $pages[$i]['title']
 			);

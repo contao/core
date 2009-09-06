@@ -455,7 +455,7 @@ class PHPMailer {
       $to .= $this->AddrFormat($this->to[$i]);
     }
 
-    $toArr = split(',', $to);
+    $toArr = explode(',', $to);
 
     if ($this->Sender != '' && strlen(ini_get('safe_mode'))< 1) {
       $old_from = ini_get('sendmail_from');
@@ -1548,7 +1548,7 @@ class PHPMailer {
         $filename  = basename($url);
         $directory = dirname($url);
         $cid       = 'cid:' . md5($filename);
-        $fileParts = split("\.", $filename);
+        $fileParts = explode('.', $filename);
         $ext       = $fileParts[1];
         $mimeType  = $this->_mime_types($ext);
         $message = preg_replace("/".$images[1][$i]."=\"".preg_quote($url, '/')."\"/Ui", $images[1][$i]."=\"".$cid."\"", $message);

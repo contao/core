@@ -182,12 +182,13 @@ class CheckBox extends Widget
 			$blnCheckAll = false;
 		}
 
-        return sprintf('<div id="ctrl_%s" class="%s%s">%s%s</div>',
+        return sprintf('<div id="ctrl_%s" class="%s%s">%s%s</div>%s',
 						$this->strId,
 						($this->multiple ? 'tl_checkbox_container' : 'tl_checkbox_single_container'),
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						(($this->multiple && $blnCheckAll) ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_' . $this->strId . '\')" /> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br />' : ''),
-						str_replace('<br /></div><br />', '</div>', implode('<br />', $arrOptions)));
+						str_replace('<br /></div><br />', '</div>', implode('<br />', $arrOptions)),
+						$this->wizard);
 	}
 
 

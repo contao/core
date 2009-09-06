@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Verteiler', 'Hier können Sie den Zugriff auf einen oder mehrere Verteiler erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Erlaubte Verteiler', 'Hier können Sie den Zugriff auf einen oder mehrere Verteiler erlauben.');
 
 
 /**

@@ -3852,13 +3852,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$arrValues[] = CURRENT_ID;
 			}
 
-			/* Limit results if there is a keyword (search panel)
-			if (strlen($session['search'][$this->strTable]['value']))
-			{
-				$arrProcedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
-				$arrValues[] = $session['search'][$this->strTable]['value'];
-			} */
-
 			if (is_array($this->root))
 			{
 				$arrProcedure[] = "id IN(" . implode(',', $this->root) . ")";
@@ -3947,6 +3940,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				{
 					$moptions = array();
 
+					// TODO: find a more effective solution
 					foreach($options as $option)
 					{
 						$doptions = deserialize($option);

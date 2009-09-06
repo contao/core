@@ -547,6 +547,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			{
 				// Romanize the filename
 				$file['name'] = utf8_romanize($file['name']);
+				$file['name'] = str_replace('"', '', $file['name']);
 
 				// File was not uploaded
 				if (!is_uploaded_file($file['tmp_name']))
@@ -1418,7 +1419,7 @@ window.addEvent(\'domready\', function()
 			$return .= "\n  " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px;">';
 
 			// Generate thumbnail
-			if ($objFile->isGdImage && $objFile->height > 0)
+			if ($objFile->isGdImage && $objFile->height > 0 && $objFile->height <= 3000 && $objFile->width <= 3000)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
 				$popupHeight = ($objFile->height + 286);

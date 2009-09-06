@@ -6,6 +6,8 @@
 <?php endif; ?>
 <?php echo $this->event; ?>
 
+<!-- indexer::stop -->
 <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+<!-- indexer::continue -->
 
 </div>

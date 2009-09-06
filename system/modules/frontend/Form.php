@@ -188,6 +188,7 @@ class Form extends Hybrid
 			if ($objWidget instanceof FormHidden)
 			{
 				$this->Template->hidden .= $objWidget->parse();
+				--$max_row;
 				continue;
 			}
 

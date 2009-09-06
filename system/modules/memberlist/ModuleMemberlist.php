@@ -161,8 +161,16 @@ class ModuleMemberlist extends Module
 		}
 
 		// List active members only
-		$strWhere .= "(publicFields!='' OR allowEmail=? OR allowEmail=?) AND disable!=1 AND (start='' OR start<=?) AND (stop='' OR stop>=?)";
-		array_push($arrValues, 'email_member', 'email_all', $time, $time);
+		if (in_array('username', $arrFields))
+		{
+			$strWhere .= "(publicFields!='' OR allowEmail=? OR allowEmail=?) AND disable!=1 AND (start='' OR start<=?) AND (stop='' OR stop>=?)";
+			array_push($arrValues, 'email_member', 'email_all', $time, $time);
+		}
+		else
+		{
+			$strWhere .= "publicFields!='' AND disable!=1 AND (start='' OR start<=?) AND (stop='' OR stop>=?)";
+			array_push($arrValues, $time, $time);
+		}
 
 		// Get total number of members
 		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_member WHERE " . $strWhere)

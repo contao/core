@@ -146,7 +146,7 @@ class ModulePersonalData extends Module
 				}
 
 				// Make sure that unique fields are unique
-				if ($arrData['eval']['unique'])
+				if (strlen($varValue) && $arrData['eval']['unique'])
 				{
 					$objUnique = $this->Database->prepare("SELECT * FROM tl_member WHERE " . $field . "=? AND id!=?")
 												->limit(1)

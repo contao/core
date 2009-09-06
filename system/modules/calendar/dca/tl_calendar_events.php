@@ -582,7 +582,7 @@ class tl_calendar_events extends Backend
 	public function listEvents($arrRow)
 	{
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
-		$span = intval(($arrRow['endTime'] - $arrRow['startTime']) / 86400);
+		$span = Calendar::calculateSpan($arrRow['startTime'], $arrRow['endTime']);
 
 		if ($span > 0)
 		{

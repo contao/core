@@ -55,8 +55,8 @@ $GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate'] = 'Aktualisierung starten
 $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex']   = 'Suchindex neu aufbauen';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexSubmit']   = 'Suchindex aufbauen';
 $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable']  = 'Keine durchsuchbaren Seiten gefunden';
-$GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Bitte warten Sie bis die Seite vollständig geladen ist, bevor Sie Ihre Arbeit fortsetzen!';
-$GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Bitte warten Sie während der Suchindex neu aufgebaut wird.';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Bitte warten Sie, bis die Seite vollständig geladen ist, bevor Sie Ihre Arbeit fortsetzen!';
+$GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Bitte warten Sie, während der Suchindex neu aufgebaut wird.';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'Der Suchindex wurde neu aufgebaut. Sie können nun fortfahren.';
 
 ?>

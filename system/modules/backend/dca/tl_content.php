@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'accordion'                   => '{type_legend},type,mooType',
 		'accordionsingle'             => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'accordionstart'              => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'accordionstop'               => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected',
+		'accordionstop'               => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,embed;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -614,8 +614,8 @@ class tl_content extends Backend
 		$groups = $this->User->groups;
 
 		// Set default user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = strlen($GLOBALS['TL_CONFIG']['cuser']) ? $GLOBALS['TL_CONFIG']['cuser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = strlen($GLOBALS['TL_CONFIG']['cgroup']) ? $GLOBALS['TL_CONFIG']['cgroup'] : $groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
 
 		// Get pagemounts
 		$pagemounts = array();
@@ -845,7 +845,7 @@ class tl_content extends Backend
 	public function addCteType($arrRow)
 	{
 		return '
-<div class="cte_type">' . $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] . '</div>
+<div class="cte_type">' . $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] . (($arrRow['type'] == 'alias') ? ' ID: ' . $arrRow['cteAlias'] : '') . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . ' block">
 ' . $this->getContentElement($arrRow['id']) . '
 </div>' . "\n";

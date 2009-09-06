@@ -79,20 +79,23 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['edit'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.gif',
+				'button_callback'     => array('tl_templates', 'editTemplate')
 			),
 			'source' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['source'],
 				'href'                => 'act=source',
-				'icon'                => 'editor.gif'
+				'icon'                => 'editor.gif',
+				'button_callback'     => array('tl_templates', 'editSource')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_templates']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_templates', 'deleteTemplate')
 			)
 		)
 	),
@@ -172,16 +175,22 @@ class tl_templates extends Backend
 					continue;
 				}
 
-				$arrAllTemplates[$strTemplate] = $strModule . '/templates/' . $strTemplate;
+				$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
 			}
 		}
 
-		$arrAllTemplates = natcaseksort($arrAllTemplates);
 		$strAllTemplates = '';
 
 		foreach ($arrAllTemplates as $k=>$v)
 		{
-			$strAllTemplates .= sprintf('<option value="%s">%s</option>', $v, $k);
+			$strAllTemplates .= '<optgroup label="' . $k . '">';
+
+			foreach ($v as $kk=>$vv)
+			{
+				$strAllTemplates .= sprintf('<option value="%s">%s</option>', $vv, $kk);
+			}
+
+			$strAllTemplates .= '</optgroup>';
 		}
 
 		// Show form
@@ -210,6 +219,54 @@ class tl_templates extends Backend
 
 </div>
 </form>';
+	}
+
+
+	/**
+	 * Return the edit file button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editTemplate($row, $href, $label, $title, $icon, $attributes)
+	{
+		return is_file(TL_ROOT . '/' . $row['id']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete file button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteTemplate($row, $href, $label, $title, $icon, $attributes)
+	{
+		return is_file(TL_ROOT . '/' . $row['id']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the edit file source button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editSource($row, $href, $label, $title, $icon, $attributes)
+	{
+		return is_file(TL_ROOT . '/' . $row['id']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

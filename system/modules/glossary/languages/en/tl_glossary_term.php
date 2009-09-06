@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_glossary_term']['enclosure_legend']  = 'Enclosures';
 $GLOBALS['TL_LANG']['tl_glossary_term']['new']    = array('New term', 'Create a new term');
 $GLOBALS['TL_LANG']['tl_glossary_term']['show']   = array('Term details', 'Show the details of term ID %s');
 $GLOBALS['TL_LANG']['tl_glossary_term']['edit']   = array('Edit term', 'Edit term ID %s');
+$GLOBALS['TL_LANG']['tl_glossary_term']['cut']    = array('Move term', 'Move term ID %s');
 $GLOBALS['TL_LANG']['tl_glossary_term']['copy']   = array('Copy term', 'Copy term ID %s');
 $GLOBALS['TL_LANG']['tl_glossary_term']['delete'] = array('Delete term', 'Delete term ID %s');
 

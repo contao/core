@@ -360,7 +360,7 @@ class tl_files extends Backend
 			return '';
 		}
 
-		$strDecoded = urldecode($row['id']);
+		$strDecoded = rawurldecode($row['id']);
 
 		if (is_dir(TL_ROOT . '/' . $strDecoded))
 		{

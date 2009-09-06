@@ -6,7 +6,9 @@
 <?php endif; ?>
 <?php echo $this->articles; ?>
 
+<!-- indexer::stop -->
 <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
+<!-- indexer::continue -->
 <?php if ($this->allowComments && ($this->comments || !$this->protected)): ?>
 
 <div class="ce_comments block">

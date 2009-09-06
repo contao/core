@@ -136,11 +136,12 @@ class Password extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="password" name="%s" id="ctrl_%s" class="tl_text tl_password%s" value=""%s onfocus="Backend.getScrollOffset();" />%s',
+		return sprintf('<input type="password" name="%s" id="ctrl_%s" class="tl_text tl_password%s" value=""%s onfocus="Backend.getScrollOffset();" />%s%s',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
+						$this->wizard,
 						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$this->hasErrors())) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$this->description.'</p>' : ''));
 	}
 

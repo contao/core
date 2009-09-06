@@ -69,7 +69,7 @@ tinyMCE.init({
   save_on_tinymce_forms : true,
   save_callback : "TinyCallback.cleanHTML",
   plugins : "autosave,contextmenu,directionality,inlinepopups,paste,safari,save,searchreplace,spellchecker,template,typolinks",
-  spellchecker_languages : "+English=en,Danish=da,Dutch=nl,Finnish=fi,French=fr,German=de,Italian=it,Polish=pl,Portuguese=pt,Spanish=es,Swedish=sv",
+  spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   valid_elements : "+a[href|target|class],-b/strong,-i/em,-u,+div[align],+p[class|align],-li,br,-span[class],font[face|size|color]",
   content_css : "<?php echo TL_PATH; ?>/basic.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
   tab_focus : ":prev,:next",

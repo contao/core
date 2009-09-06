@@ -68,6 +68,11 @@ class FormTextField extends Widget
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
 
+			case 'readonly':
+				$this->arrAttributes['readonly'] = 'readonly';
+				$this->blnSubmitInput = false;
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;

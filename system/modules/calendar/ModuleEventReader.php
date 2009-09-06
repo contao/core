@@ -119,7 +119,7 @@ class ModuleEventReader extends Events
 			$objPage->pageTitle = $objEvent->title;
 		}
 
-		$span = intval(($objEvent->endTime - $objEvent->startTime) / 86400);
+		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
 		// Get date
 		if ($span > 0)

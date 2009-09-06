@@ -36,7 +36,7 @@ $GLOBALS['TL_LANG']['tl_module']['type']           = array('Modultyp', 'Bitte w�
 $GLOBALS['TL_LANG']['tl_module']['levelOffset']    = array('Startlevel', 'Geben Sie einen Wert größer 0 ein, um nur Untermenüpunkte darzustellen.');
 $GLOBALS['TL_LANG']['tl_module']['showLevel']      = array('Stoplevel', 'Geben Sie einen Wert größer 0 ein, um die Verschachtelungstiefe des Menüs zu beschränken.');
 $GLOBALS['TL_LANG']['tl_module']['hardLimit']      = array('Hard Limit', 'Niemals Menüpunkte jenseits des Stoplevels anzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['showProtected']  = array('Geschütze Seiten anzeigen', 'Menüpunkte anzeigen, die sonst nur für angemeldete Benutzer sichtbar sind.');
+$GLOBALS['TL_LANG']['tl_module']['showProtected']  = array('Geschützte Seiten anzeigen', 'Menüpunkte anzeigen, die sonst nur für angemeldete Benutzer sichtbar sind.');
 $GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Eine Referenzseite festlegen', 'Dem Modul eine individuelle Quell- oder Zielseite zuweisen.');
 $GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Referenzseite', 'Bitte wählen Sie die Referenzseite aus der Seitenstruktur.');
 $GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigationstemplate', 'Hier können Sie das Navigationstemplate auswählen.');
@@ -83,7 +83,7 @@ $GLOBALS['TL_LANG']['tl_module']['multiSRC']       = array('Quelldateien', 'Bitt
 $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML-Code', 'Sie können die Liste der erlaubten HTML-Tags in den Backend-Einstellungen ändern.');
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Modul schützen', 'Das Modul nur bestimmten Gruppen anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Modul sehen.');
-$GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken sobald ein Mitglied angemeldet ist.');
+$GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken, sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 

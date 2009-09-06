@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Channels', 'Here you can grant access to one or more channels.');
+$GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Allowed channels', 'Here you can grant access to one or more channels.');
 
 
 /**

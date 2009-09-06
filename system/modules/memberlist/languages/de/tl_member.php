@@ -30,7 +30,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_member']['allowEmail']   = array('E-Mails erlauben', 'Hier können sie auswählen, wer dem Benutzer E-Mails senden darf.');
+$GLOBALS['TL_LANG']['tl_member']['allowEmail']   = array('E-Mails erlauben', 'Hier können Sie auswählen, wer dem Benutzer E-Mails senden darf.');
 $GLOBALS['TL_LANG']['tl_member']['publicFields'] = array('Öffentliche Felder', 'Hier können Sie die öffentlich sichtbaren Felder festlegen.');
 
 

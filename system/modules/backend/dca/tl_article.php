@@ -267,8 +267,8 @@ class tl_article extends Backend
 		$session = $this->Session->getData();
 
 		// Set default user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = strlen($GLOBALS['TL_CONFIG']['cuser']) ? $GLOBALS['TL_CONFIG']['cuser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = strlen($GLOBALS['TL_CONFIG']['cgroup']) ? $GLOBALS['TL_CONFIG']['cgroup'] : $groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
 
 		// Restrict user permissions
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;

@@ -81,20 +81,19 @@ class ModuleNewsList extends ModuleNews
 	 */
 	protected function compile()
 	{
-		$limit = null;
-		$offset = 0;
+		$time = time();
 		$skipFirst = $this->skipFirst ? 1 : 0;
+		$offset = 0;
+		$limit = null;
 
 		// Maximum number of items
 		if ($this->news_numberOfItems > 0)
 		{
-			$limit = $this->news_numberOfItems + $skipFirst;
+			$limit = $this->news_numberOfItems;
 		}
 
-		$time = time();
-
-		// Split result
-		if ($this->perPage > 0)
+		// Split results
+		if ($this->perPage > 0 && (!isset($limit) || $this->news_numberOfItems > $this->perPage))
 		{
 			// Get total number of items
 			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC")
@@ -102,28 +101,28 @@ class ModuleNewsList extends ModuleNews
 
 			$total = $objTotal->total - $skipFirst;
 
-			// Determine the limit
-			if (!is_null($limit))
+			// Overall limit
+			if (isset($limit))
 			{
 				$total = min($limit, $total);
 			}
 
-			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
+			// Check maximum page number
 			if ($page > ($total/$this->perPage))
 			{
 				$page = ceil($total/$this->perPage);
 			}
 
-			// Set limit and offset
-			$limit = ((is_null($limit) || $this->perPage < $limit) ? $this->perPage : $limit) + $skipFirst;
-			$offset = ((($page > 1) ? $page : 1) - 1) * $this->perPage;
+			// Limit and offset
+			$limit = $this->perPage;
+			$offset = ($page - 1) * $this->perPage;
 
-			// Hard limit
-			if (($limit + $offset) > $total)
+			// Overall limit
+			if ($offset + $limit > $total)
 			{
-				$limit = $limit + $offset - $total;
+				$limit = $total - $offset;
 			}
 
 			// Add pagination menu
@@ -134,9 +133,9 @@ class ModuleNewsList extends ModuleNews
 		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ")" . ($this->news_featured ? " AND featured=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
 
 		// Limit result
-		if ($limit)
+		if (isset($limit))
 		{
-			$objArticlesStmt->limit($limit, $offset);
+			$objArticlesStmt->limit($limit + $skipFirst, $offset);
 		}
 
 		$objArticles = $objArticlesStmt->execute($time, $time);

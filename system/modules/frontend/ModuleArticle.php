@@ -173,7 +173,10 @@ class ModuleArticle extends Module
 		$this->Template->teaser = $this->teaser;
 		$this->Template->contentElements = $contentElements;
 
-		$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
+		if ($this->keywords != '')
+		{
+			$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
+		}
 
 		if ($this->printable)
 		{

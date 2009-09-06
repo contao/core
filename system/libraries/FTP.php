@@ -52,7 +52,7 @@ class FTP extends Files
 
 
 	/**
-	 * Store the FTP resource and make sure that the temp directory is writeable
+	 * Store the FTP resource and make sure that the temp folder is writable
 	 * @param resource
 	 */
 	protected function __construct($resConnection)
@@ -63,7 +63,20 @@ class FTP extends Files
 		}
 
 		$this->resConnection = $resConnection;
-		$this->chmod('system/tmp', 0777);
+
+		// Make folders writable
+		if (!is_writable(TL_ROOT . '/system/tmp'))
+		{
+			$this->chmod('system/tmp', 0777);
+		}
+		if (!is_writable(TL_ROOT . '/system/html'))
+		{
+			$this->chmod('system/html', 0777);
+		}
+		if (!is_writable(TL_ROOT . '/system/logs'))
+		{
+			$this->chmod('system/logs', 0777);
+		}
 	}
 
 

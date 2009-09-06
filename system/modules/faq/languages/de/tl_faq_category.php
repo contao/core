@@ -45,7 +45,7 @@ $GLOBALS['TL_LANG']['tl_faq_category']['title_legend'] = 'Titel und Weiterleitun
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Wenn Sie die Kategorie %s löschen, werde auch alle darin enthaltenen FAQs gelöscht! Fortfahren?';
+$GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Wenn Sie die Kategorie %s löschen, werden auch alle darin enthaltenen FAQs gelöscht! Fortfahren?';
 
 
 /**

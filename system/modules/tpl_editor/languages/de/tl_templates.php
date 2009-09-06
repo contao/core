@@ -36,7 +36,7 @@ $GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originaltemplates', 'Ei
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Eine neues Template erstellen';
+$GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Ein neues Template erstellen';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl']   = 'Template erstellen';
 $GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Das Template "%s" existiert bereits!';
 
@@ -46,7 +46,7 @@ $GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Das Template "%s" existiert b
  */
 $GLOBALS['TL_LANG']['tl_templates']['new']    = array('Neues Template', 'Ein neues Template erstellen');
 $GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Template umbenennen', 'Template "%s" umbenennen');
-$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Template bearbeiten', 'Die Datei "%s" bearbeiten');
+$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Template bearbeiten', 'Template "%s" bearbeiten');
 $GLOBALS['TL_LANG']['tl_templates']['delete'] = array('Template löschen', 'Template "%s" löschen');
 
 ?>

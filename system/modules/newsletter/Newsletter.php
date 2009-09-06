@@ -451,11 +451,10 @@ class Newsletter extends Backend
 	/**
 	 * Synchronize newsletter subscription of new users
 	 * @param object
-	 * @param array
 	 */
-	public function createNewUser($userId, $arrData)
+	public function activateAccount($objUser)
 	{
-		$arrNewsletters = deserialize($arrData['newsletter'], true);
+		$arrNewsletters = deserialize($objUser->newsletter, true);
 
 		// Return if there are no newsletters
 		if (!is_array($arrNewsletters))
@@ -476,12 +475,12 @@ class Newsletter extends Backend
 			}
 
 			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
-										   ->execute($intNewsletter, $arrData['email']);
+										   ->execute($intNewsletter, $objUser->email);
 
 			if ($objRecipient->total < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1, addedOn=?, ip=?")
-							   ->execute($intNewsletter, $time, $arrData['email'], $time, $this->Environment->ip);
+							   ->execute($intNewsletter, $time, $objUser->email, $time, $this->Environment->ip);
 			}
 		}
 	}

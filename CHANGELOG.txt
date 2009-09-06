@@ -2,6 +2,29 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.7.3 (2009-09-06)
+--------------------------
+- Added dynamic spellchecker languages to TinyMCE
+- Added pseudo entities [{] and [}] to output insert tags
+- Fixed issue with breadcrumb menu not handling redirect pages
+- Fixed issue with incorrect row count in forms with hidden fields
+- Fixed issue with empty rows in memberlists without username (#929)
+- Fixed issue with event feeds containing foreign entries (#866)
+- Fixed issue with certain multi-day events not being calculated correctly (#855)
+- Fixed issue with empty keywords being added to the meta keywords tag (#540)
+- Fixed issue with navigation icons not being disabled in the template editor (#761)
+- Fixed issue with insert tag "user" not formatting its output (#957)
+- Fixed issue with backlinks not being exempt from the search index (#896)
+- Fixed issue with special characters in file names not being decoded properly (#877)
+- Fixed issue with default user and group not being applied (#888)
+- Fixed issue with missing "readonly" attribute of text field widgets (#901)
+- Fixed issue with group login page overriding option "last page visited" (#916)
+- Fixed issue with thumbnails of large images exceeding the memory limit (#922)
+- Fixed issue with subscriptions being activated upon registration (#881)
+- Fixed a few issues with the style sheet importer (#838)
+- Fixed various spelling issues (#942)
+- Fixed a few minor issues
+
 Version 2.7.2 (2009-06-25)
 --------------------------
 - Improved navigation skip links (#815)

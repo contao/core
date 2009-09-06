@@ -53,7 +53,7 @@ p
 /* Left */
 #left
 {
-	width:25%;
+	width:22%;
 	float:left;
 	padding:6px 0;
 }
@@ -61,7 +61,7 @@ p
 /* Right */
 #right
 {
-	width:75%;
+	width:78%;
 	float:right;
 	text-align:right;
 }
@@ -78,6 +78,10 @@ img.close
 	margin:1px 9px 1px 0;
 	padding:1px;
 	border:1px solid #b8b8b8;
+}
+#ctrl_user
+{
+	width:24%;
 }
 
 /* Form elements */
