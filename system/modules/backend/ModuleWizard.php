@@ -246,7 +246,7 @@ class ModuleWizard extends Widget
 			// Add column
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'. (isset($GLOBALS['TL_LANG']['tl_article'][$v]) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
 			}
 
 			$return .= '

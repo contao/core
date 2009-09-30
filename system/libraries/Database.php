@@ -164,6 +164,20 @@ abstract class Database
 
 
 	/**
+	 * Execute a raw query (return a Database_Result object)
+	 * @param  string
+	 * @return object
+	 */
+	public function query($strQuery)
+	{
+		$strClass = DB_DRIVER . '_Statement';
+		$objStatement = new $strClass($this->resConnection, $this->blnDisableAutocommit);
+
+		return $objStatement->query($strQuery);
+	}
+
+
+	/**
 	 * Return all tables of a database as array
 	 * @param  string
 	 * @param  boolean
@@ -512,6 +526,37 @@ abstract class Database_Statement
 		{
 			throw new Exception('Too few arguments to build the query string');
 		}
+
+		// Execute the query
+		if (($this->resResult = $this->execute_query()) == false)
+		{
+			throw new Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
+		}
+
+		// Check whether there is a result
+		if (!is_resource($this->resResult) && !is_object($this->resResult))
+		{
+			$this->debugQuery();
+			return $this;
+		}
+
+		$strClass = DB_DRIVER . '_Result';
+		$objResult = new $strClass($this->resResult, $this->strQuery);
+
+		$this->debugQuery($objResult);
+		return $objResult;
+	}
+
+
+	/**
+	 * Execute a raw query
+	 * @param  string
+	 * @return object
+	 * @throws Exception
+	 */
+	public function query($strQuery)
+	{
+		$this->strQuery = $strQuery;
 
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)

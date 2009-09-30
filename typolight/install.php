@@ -338,7 +338,7 @@ class InstallTool extends Controller
 		}
 
 		$this->Template->templates = $strTemplates;
-		$this->Template->dateImported = strlen($GLOBALS['TL_CONFIG']['exampleWebsite']) ? $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']) : false;
+		$this->Template->dateImported = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $GLOBALS['TL_CONFIG']['exampleWebsite']);
 
 
 		/**

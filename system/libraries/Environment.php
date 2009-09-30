@@ -252,6 +252,38 @@ class Environment
 
 
 	/**
+	 * Return the HTTP Host
+	 * @return string
+	 */
+	protected function httpHost()
+	{
+		$host = $_SERVER['HTTP_HOST'];
+
+		if (empty($host))
+		{
+			$host = $_SERVER['SERVER_NAME'];
+
+			if ($_SERVER['SERVER_PORT'] != 80)
+			{
+				$host .= ':' . $_SERVER['SERVER_PORT'];
+			}
+		}
+
+		return preg_replace('/[^A-Za-z0-9\.:-]/', '', $host);
+	}
+
+
+	/**
+	 * Return the HTTP X-Forwarded-Host
+	 * @return string
+	 */
+	protected function httpXForwardedHost()
+	{
+		return preg_replace('/[^A-Za-z0-9\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
+	}
+
+
+	/**
 	 * Return true if the current page was requested via an SSL connection
 	 * @return boolean
 	 */
@@ -267,7 +299,10 @@ class Environment
 	 */
 	protected function url()
 	{
-		return ($this->ssl() ? 'https://' : 'http://') . (!empty($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] . '/' : '') . $_SERVER['HTTP_HOST'];
+		$xhost = $this->httpXForwardedHost();
+		$protocol = $this->ssl() ? 'https://' : 'http://';
+
+		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost();
 	}
 
 

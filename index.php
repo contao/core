@@ -126,6 +126,7 @@ class Index extends Frontend
 		// Load an error 404 page object if the result is empty or still ambiguous
 		if ($objPage->numRows != 1)
 		{
+			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
@@ -246,7 +247,7 @@ class Index extends Frontend
 		(
 			'/(<head[^>]*>)/',
 			"<!--\n\n"
-			. "\tThis website is powered by TYPOlight webCMS :: TYPOlight is licensed under GNU/LGPL\n"
+			. "\tThis website is powered by TYPOlight Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.typolight.org for more information\n\n"
 			. "//-->\n$1",
@@ -275,7 +276,10 @@ class Index extends Frontend
 		header('Pragma: public');
 
 		// Replace insert tags
-		echo $this->replaceInsertTags($strBuffer);
+		$strBuffer = $this->replaceInsertTags($strBuffer);
+		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
+
+		echo $strBuffer;
 		exit;
 	}
 }

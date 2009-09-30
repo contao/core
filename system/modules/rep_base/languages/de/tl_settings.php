@@ -1,21 +1,46 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TL_ROOT/system/modules/rep_base/languages/de/tl_settings.php 
+ * TYPOlight webCMS
+ * Copyright (C) 2005-2009 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
  * 
- * TYPOlight extension: rep_base 1.0.0 rc1 
- * German translation file 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
  * 
- * Copyright : (c)  2008 IBK Software AG 
- * License   : GNU LGPL V3 
- * Author    : Peter Koch (acenes), http://contifex.com 
- * Translator: Peter Koch (acenes), http://contifex.com 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Repository
+ * @license    LGPL
+ * @filesource
  */
+
+
+/**
+ * TYPOlight Repository :: Language file for tl_settings (de)
+ *
+ * @copyright  Peter Koch 2008-2009
+ * @author     Peter Koch, IBK Software AG
+ * @license    See accompaning file LICENSE.txt
+ */
+
 
 /**
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'] = array('Extension Repository-URL', 'Hier können Sie die URL der Extension Repository WSDL-Datei eingeben.');
+
 
 /**
  * Legends

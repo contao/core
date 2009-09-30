@@ -103,6 +103,7 @@ $GLOBALS['TL_LANG']['tl_module']['interact_legend']  = 'Interaktiver Flash-Film'
 $GLOBALS['TL_LANG']['tl_module']['html_legend']      = 'Text/HTML';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Zugriffsschutz';
 $GLOBALS['TL_LANG']['tl_module']['expert_legend']    = 'Experten-Einstellungen';
+$GLOBALS['TL_LANG']['tl_module']['email_legend']     = 'E-Mail-Einstellungen';
 
 
 /**

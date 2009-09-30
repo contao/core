@@ -67,16 +67,7 @@ class FormCheckBox extends Widget
 		switch ($strKey)
 		{
 			case 'options':
-				$arrValue = array();
 				$this->arrOptions = deserialize($varValue);
-				foreach ($this->arrOptions as $arrOptions)
-				{
-					if ($arrOptions['default'])
-					{
-						$arrValue[] = $arrOptions['value'];
-					}
-				}
-				$this->varValue = $arrValue;
 				break;
 
 			case 'mandatory':
@@ -174,7 +165,7 @@ class FormCheckBox extends Widget
 									$this->strName . ((count($this->arrOptions) > 1) ? '[]' : ''),
 									$this->strId.'_'.$i,
 									$arrOption['value'],
-									((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
+									$this->isChecked($arrOption),
 									$this->getAttributes(),
 									$this->strId.'_'.$i,
 									$this->strId.'_'.$i,

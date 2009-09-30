@@ -102,11 +102,11 @@ class FileTree extends Widget
 		// Set custom path
 		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
-			$path = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'];
+			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], 0);
 		}
 
 		// Start from root
-		if ($this->User->isAdmin)
+		elseif ($this->User->isAdmin)
 		{
 			$tree = $this->renderFiletree(TL_ROOT . '/' . $path, 0);
 		}

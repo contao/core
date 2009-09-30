@@ -80,6 +80,76 @@ class ModuleNewsMenu extends ModuleNews
 	 */
 	protected function compile()
 	{
+		if ($this->news_format == 'news_year')
+		{
+			$this->compileYearlyMenu();
+		}
+		else
+		{
+			$this->compileMonthlyMenu();
+		}
+	}
+
+
+	/**
+	 * Generate the yearly menu
+	 */
+	protected function compileYearlyMenu()
+	{
+		$time = time();
+		$arrData = array();
+
+		$this->Template = new FrontendTemplate('mod_newsmenu_year');
+
+		foreach ($this->news_archives as $id)
+		{
+			// Get all active months
+			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC")
+										  ->execute($id, $time, $time);
+
+			while ($objArchives->next())
+			{
+				++$arrData[date('Y', $objArchives->date)]['count'];
+			}
+		}
+
+		// Sort data
+		krsort($arrData);
+		$arrItems = array();
+
+		// Get current "jumpTo" page
+		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($this->jumpTo);
+
+		$count = 0;
+		$limit = count($arrData);
+
+		// Prepare navigation
+		foreach ($arrData as $intYear=>$arrDetails)
+		{
+			$intDate = $intYear . '01';
+			$quantity = sprintf((($arrDetails['count'] < 2) ? $GLOBALS['TL_LANG']['MSC']['entry'] : $GLOBALS['TL_LANG']['MSC']['entries']), $arrDetails['count']);
+
+			$arrItems[$intYear]['date'] = $intDate;
+			$arrItems[$intYear]['link'] = $intYear;
+			$arrItems[$intYear]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
+			$arrItems[$intYear]['title'] = specialchars($intYear . ' (' . $quantity . ')');
+			$arrItems[$intYear]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
+			$arrItems[$intYear]['isActive'] = ($this->Input->get('month') == $intDate);
+			$arrItems[$intYear]['quantity'] = $quantity;
+		}
+
+		$this->Template->items = $arrItems;
+		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+	}
+
+
+	/**
+	 * Generate the monthly menu
+	 */
+	protected function compileMonthlyMenu()
+	{
 		$time = time();
 		$arrData = array();
 
@@ -91,11 +161,7 @@ class ModuleNewsMenu extends ModuleNews
 
 			while ($objArchives->next())
 			{
-				$year = date('Y', $objArchives->date);
-				$month = date('m', $objArchives->date);
-
-				++$arrData[$year][$month]['entries'];
-				$arrData[$year][$month]['date'][] = date('Ym', $objArchives->date);
+				++$arrData[date('Y', $objArchives->date)][date('m', $objArchives->date)]['count'];
 			}
 		}
 
@@ -121,17 +187,17 @@ class ModuleNewsMenu extends ModuleNews
 
 			foreach ($arrMonth as $intMonth=>$arrDetails)
 			{
-				$arrDate = array_unique($arrDetails['date']);
+				$intDate = $intYear . $intMonth;
 				$intMonth = (intval($intMonth) - 1);
 
-				$quantity = sprintf((($arrDetails['entries'] < 2) ? $GLOBALS['TL_LANG']['MSC']['entry'] : $GLOBALS['TL_LANG']['MSC']['entries']), $arrDetails['entries']);
+				$quantity = sprintf((($arrDetails['count'] < 2) ? $GLOBALS['TL_LANG']['MSC']['entry'] : $GLOBALS['TL_LANG']['MSC']['entries']), $arrDetails['count']);
 
-				$arrItems[$intYear][$intMonth]['date'] = $arrDate[0];
+				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $arrDate[0];
+				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $arrDate[0]);
+				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);
 				$arrItems[$intYear][$intMonth]['quantity'] = $quantity;
 			}
 		}

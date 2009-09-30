@@ -1,10 +1,10 @@
 /**
  * TYPOlight Repository :: Backend styles for client modules
  *
- * NOTE: this file was edited with tabs set to 4.
- * @package Repository
- * @copyright Copyright (C) 2008 by Peter Koch, IBK Software AG
- * @license See accompaning file LICENSE.txt
+ * @package    Repository
+ * @copyright  Peter Koch 2008-2009
+ * @author     Peter Koch, IBK Software AG
+ * @license    See accompaning file LICENSE.txt
  */
 
 /* General */
@@ -109,6 +109,10 @@
 .mod_repository table .listcol2, .mod_repository table .viewcol2
 {
 	width:27%;
+}
+.mod_repository .col_functions
+{
+	text-align:right;
 }
 
 /* Details view */

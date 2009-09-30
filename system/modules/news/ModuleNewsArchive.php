@@ -140,14 +140,17 @@ class ModuleNewsArchive extends ModuleNews
 			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
 		}
 
-		$this->Template->headline = $GLOBALS['TL_LANG']['MONTHS'][(date('m', $objDate->tstamp) - 1)] . ' ' . substr($strDate, 0, 4);
-
-		// Overwrite headline
+		// Extend headline
 		if ($this->news_format == 'news_year')
 		{
-			$this->Template->headline = substr($strDate, 0, 4);
+			$this->headline .= ' ' . substr($strDate, 0, 4);
+		}
+		else
+		{
+			$this->headline .= ' ' . $GLOBALS['TL_LANG']['MONTHS'][(date('m', $objDate->tstamp) - 1)] . ' ' . substr($strDate, 0, 4);
 		}
 
+		$this->Template->headline = trim($this->headline);
 		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['empty'];

@@ -68,14 +68,6 @@ class RadioButton extends Widget
 		{
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
-
-				foreach ($this->arrOptions as $arrOptions)
-				{
-					if ($arrOptions['default'])
-					{
-						$this->varValue = $arrOptions['value'];
-					}
-				}
 				break;
 
 			case 'mandatory':
@@ -103,7 +95,7 @@ class RadioButton extends Widget
 									 $this->strName,
 									 $this->strId.'_'.$i,
 									 specialchars($arrOption['value']),
-									 ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
+									 $this->isChecked($arrOption),
 									 $this->getAttributes(),
 									 $this->strId.'_'.$i,
 									 $arrOption['label']);

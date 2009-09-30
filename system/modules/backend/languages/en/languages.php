@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['LNG']['fi'] = 'Finnish';
 $GLOBALS['TL_LANG']['LNG']['fo'] = 'Faroese';
 $GLOBALS['TL_LANG']['LNG']['fr'] = 'French';
 $GLOBALS['TL_LANG']['LNG']['gl'] = 'Galician';
+$GLOBALS['TL_LANG']['LNG']['gn'] = 'Guaraní';
 $GLOBALS['TL_LANG']['LNG']['he'] = 'Hebrew';
 $GLOBALS['TL_LANG']['LNG']['hr'] = 'Croatian';
 $GLOBALS['TL_LANG']['LNG']['hu'] = 'Hungarian';

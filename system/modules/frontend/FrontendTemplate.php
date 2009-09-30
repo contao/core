@@ -175,6 +175,7 @@ class FrontendTemplate extends Template
 
 		// Replace insert tags
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
+		$this->strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $this->strBuffer);
 
 		// Index page if searching is allowed and there is no back end user
 		if ($GLOBALS['TL_CONFIG']['enableSearch'] && $objPage->type == 'regular' && !BE_USER_LOGGED_IN && !$objPage->noSearch)

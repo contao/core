@@ -63,6 +63,7 @@ abstract class Controller extends System
 	 */
 	protected function getTemplate($strTemplate)
 	{
+		$strTemplate = basename($strTemplate);
 		$strFile = sprintf('%s/templates/%s.tpl', TL_ROOT, $strTemplate);
 
 		if (!file_exists($strFile))
@@ -529,23 +530,23 @@ abstract class Controller extends System
 	{
 		$return = array();
 		$languages = array();
+		$arrAux = array();
 
 		$this->loadLanguageFile('languages');
 		include(TL_ROOT . '/system/config/languages.php');
 
 		foreach ($languages as $strKey=>$strName)
 		{
-			$return[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $strName;
+			$arrAux[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
 		}
 
-		$aux = array();
+		asort($arrAux);
 
-		foreach (array_values($return) as $lang)
+		foreach (array_keys($arrAux) as $strKey)
 		{
-			$aux[] = $lang;
+			$return[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
 		}
 
-		array_multisort($aux, SORT_ASC, $return);
 		return $return;
 	}
 
@@ -582,23 +583,23 @@ abstract class Controller extends System
 	{
 		$return = array();
 		$countries = array();
+		$arrAux = array();
 
 		$this->loadLanguageFile('countries');
 		include(TL_ROOT . '/system/config/countries.php');
 
 		foreach ($countries as $strKey=>$strName)
 		{
-			$return[$strKey] = strlen($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $strName;
+			$arrAux[$strKey] = strlen($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
 		}
 
-		$aux = array();
+		asort($arrAux);
 
-		foreach (array_values($return) as $cntr)
+		foreach (array_keys($arrAux) as $strKey)
 		{
-			$aux[] = $cntr;
+			$return[$strKey] = strlen($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
 		}
 
-		array_multisort($aux, SORT_ASC, $return);
 		return $return;
 	}
 
@@ -676,14 +677,8 @@ abstract class Controller extends System
 
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image), 0, 8) . '.' . $objFile->extension;
 
-		// Resize original image
-		if ($target)
-		{
-			$strCacheName = $target;
-		}
-
 		// Return the path of the new image if it exists already
-		elseif (file_exists(TL_ROOT . '/' . $strCacheName))
+		if (file_exists(TL_ROOT . '/' . $strCacheName))
 		{
 			return $strCacheName;
 		}
@@ -815,6 +810,15 @@ abstract class Controller extends System
 		// Destroy temporary images
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
+
+		// Resize original image
+		if ($target)
+		{
+			$this->import('Files');
+			$this->Files->rename($strCacheName, $target);
+
+			return $target;
+		}
 
 		// Return path to new image
 		return $strCacheName;
@@ -1359,6 +1363,10 @@ abstract class Controller extends System
 							$arrCache[$strTag] = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 							break;
 
+						case 'page_language':
+							$arrCache[$strTag] = $objPage->language;
+							break;
+
 						case 'parent_alias':
 							$arrCache[$strTag] = $objPage->parentAlias;
 							break;
@@ -1546,7 +1554,7 @@ abstract class Controller extends System
 	 */
 	protected function restoreBasicEntities($strBuffer)
 	{
-		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]', '[{]', '[}]'), array('&amp;', '&lt;', '&gt;', '&nbsp;', '{{', '}}'), $strBuffer);
+		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]'), array('&amp;', '&lt;', '&gt;', '&nbsp;'), $strBuffer);
 	}
 
 

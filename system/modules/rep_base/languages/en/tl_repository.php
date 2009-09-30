@@ -1,13 +1,40 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Repository :: Language file for frontend module (en)
+ * TYPOlight webCMS
+ * Copyright (C) 2005-2009 Leo Feyer
  *
- * NOTE: this file was edited with tabs set to 4.
- * @package Repository
- * @copyright Copyright (C) 2008 by Peter Koch, IBK Software AG
- * @license See accompaning file LICENSE.txt
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Repository
+ * @license    LGPL
+ * @filesource
  */
+
+
+/**
+ * TYPOlight Repository :: Language file for tl_repository (en)
+ *
+ * @copyright  Peter Koch 2008-2009
+ * @author     Peter Koch, IBK Software AG
+ * @license    See accompaning file LICENSE.txt
+ */
+
  
 /**
  * Fields
@@ -27,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Please
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Type', 'Please select the extension type.');
 $GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the TYPOlight standards for usability and accessability?');
 $GLOBALS['TL_LANG']['tl_repository']['version']       = array('Version', 'Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable');
+
 
 /**
  * References
@@ -77,12 +105,14 @@ $GLOBALS['TL_LANG']['tl_repository']['versions']          = 'Other versions';
 $GLOBALS['TL_LANG']['tl_repository']['versionto']         = 'Version to';
 $GLOBALS['TL_LANG']['tl_repository']['yes']               = 'yes';
 
+
 /**
  * Types
  */
 $GLOBALS['TL_LANG']['tl_repository_type_options']['free']       = 'Free';
 $GLOBALS['TL_LANG']['tl_repository_type_options']['private']    = 'Private';
 $GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Commercial';
+
 
 /**
  * Categories
@@ -95,6 +125,7 @@ $GLOBALS['TL_LANG']['tl_repository_category_options']['plugin']      = 'Plugin';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['other']       = 'Other';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['core']        = 'Core';
 
+
 /**
  * Sorting
  */
@@ -104,6 +135,7 @@ $GLOBALS['TL_LANG']['tl_repository_order_options']['popular'] = 'Popularity';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['name']    = 'Name';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['title']   = 'Title';
 $GLOBALS['TL_LANG']['tl_repository_order_options']['author']  = 'Author';
+
 
 /**
  * States

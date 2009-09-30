@@ -179,6 +179,8 @@ class ContentGallery extends ContentElement
 		{
 			$this->strTemplate = 'ce_gallery_fullsize';
 			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template->lightboxId = 'lb' . $this->id;
+			$this->Template->fullsize = true;
 		}
 
 		$images = array_values($images);
@@ -201,9 +203,6 @@ class ContentGallery extends ContentElement
 		$arrMargin = deserialize($this->imagemargin);
 		$margin = $this->generateMargin($arrMargin);
 		$intWidth = floor((640 / $this->perRow) - $arrMargin['left'] - $arrMargin['right']);
-
-		$this->Template->lightboxId = 'lb' . $this->id;
-		$this->Template->fullsize = (TL_MODE == 'FE') ? true : false;
 
 		$rowcount = 0;
 		$colwidth = floor(100/$this->perRow);

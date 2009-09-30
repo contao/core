@@ -342,6 +342,10 @@ abstract class System
 		{
 			$strDate = date($strModified);
 		}
+		elseif (!is_numeric($intTstamp))
+		{
+			return '';
+		}
 		else
 		{
 			$strDate = date($strModified, $intTstamp);

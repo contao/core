@@ -61,7 +61,7 @@ CREATE TABLE `tl_content` (
   `html` text NULL,
   `listtype` varchar(32) NOT NULL default '',
   `listitems` blob NULL,
-  `tableitems` blob NULL,
+  `tableitems` mediumblob NULL,
   `summary` varchar(255) NOT NULL default '',
   `thead` char(1) NOT NULL default '',
   `tfoot` char(1) NOT NULL default '',

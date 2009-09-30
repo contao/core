@@ -1,12 +1,40 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+
+/**
+ * TYPOlight webCMS
+ * Copyright (C) 2005-2009 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at http://www.gnu.org/licenses/.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2009
+ * @author     Leo Feyer <leo@typolight.org>
+ * @package    Repository
+ * @license    LGPL
+ * @filesource
+ */
+
+
 /**
  * TYPOlight Repository :: Backend module for extension management
  *
- * NOTE: this file was edited with tabs set to 4.
- * @package Repository
- * @copyright Copyright (C) 2008 by Peter Koch, IBK Software AG
- * @license See accompaning file LICENSE.txt
+ * @copyright  Peter Koch 2008-2009
+ * @author     Peter Koch, IBK Software AG
+ * @license    See accompaning file LICENSE.txt
  */
+
 
 /**
  * Implements the extension manager.
@@ -76,13 +104,14 @@ class RepositoryManager extends RepositoryBackendModule
 							);
 						else
 							if (($dep->minversion>0 && $q->version<$dep->minversion) ||
-								($dep->maxversion>0 && $q->version>$dep->maxversion) )
+								($dep->maxversion>0 && $q->version>$dep->maxversion)) {
 								$e->status[] = (object)array(
 									'color'	=> 'darkorange', 
 									'text'	=> 'notapprovedwith', 
 									'par1'	=> $dep->extension,
 									'par2'	=> Repository::formatVersion($q->version)
 								);
+							} // if
 					} // foreach
 				} // if
 				
@@ -395,7 +424,6 @@ class RepositoryManager extends RepositoryBackendModule
 	 */
 	protected function update()
 	{
-		$text = &$GLOBALS['TL_LANG']['tl_repository'];
 		$rep = &$this->Template->rep;
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
@@ -465,12 +493,13 @@ class RepositoryManager extends RepositoryBackendModule
 				$re = &$elist[0];
 				if (property_exists($re, 'dependencies'))
 					foreach ($re->dependencies as $dep) 
-						if ($dep->extension == $rep->f_extension)
+						if ($dep->extension == $rep->f_extension) {
 							$rep->deps[] = (object)array(
 								'extension'	=> $q->extension, 
 								'version'	=> $q->version, 
 								'build'		=> $q->build
 							);
+						} // if
 				unset($re);
 			} // if
 		} // while
@@ -521,8 +550,9 @@ class RepositoryManager extends RepositoryBackendModule
 				if (mb_substr($file->path, 0, 8)=='TL_ROOT/')
 					$filerel = mb_substr($file->path,8);
 				else
-					if (mb_substr($file->path, 0, 9)=='TL_FILES/')
+					if (mb_substr($file->path, 0, 9)=='TL_FILES/') {
 						$filerel = $this->tl_files . mb_substr($file->path,9);
+					} // if
 						
 				// handle file
 				if ($filerel != '') {
@@ -681,8 +711,9 @@ class RepositoryManager extends RepositoryBackendModule
 						if (mb_substr($zip->file_name, 0, 8)=='TL_ROOT/')
 							$filerel = mb_substr($zip->file_name,8);
 						else
-							if (mb_substr($zip->file_name, 0, 9)=='TL_FILES/')
+							if (mb_substr($zip->file_name, 0, 9)=='TL_FILES/') {
 								$filerel = $this->tl_files . mb_substr($zip->file_name,9);
+							} // if
 								
 						if ($filerel != '') {
 							$fileabs = $this->tl_root.$filerel;

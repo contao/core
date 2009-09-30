@@ -139,7 +139,11 @@ abstract class Events extends Module
 
 			while ($objEvents->next())
 			{
-				$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
+				// Add the event if it is inside the scope
+				if (($objEvents->startTime >= $intStart && $objEvents->startTime <= $intEnd) || ($objEvents->endTime >= $intStart && $objEvents->endTime <= $intEnd))
+				{
+					$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
+				}
 
 				// Recurring events
 				if ($objEvents->recurring)
@@ -168,7 +172,7 @@ abstract class Events extends Module
 						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
 
 						// Skip events outside the scope
-						if ($objEvents->startTime < $intStart || $objEvents->endTime > $intEnd)
+						if ($objEvents->endTime < $intStart || $objEvents->startTime > $intEnd)
 						{
 							continue;
 						}
@@ -191,7 +195,7 @@ abstract class Events extends Module
 			foreach ($GLOBALS['TL_HOOKS']['getAllEvents'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->arrEvents = $this->$callback[0]->$callback[1]($this->arrEvents, $arrCalendars, $intStart, $intEnd);
+				$this->arrEvents = $this->$callback[0]->$callback[1]($this->arrEvents, $arrCalendars, $intStart, $intEnd, $this);
 			}
 		}
 

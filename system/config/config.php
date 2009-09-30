@@ -310,6 +310,7 @@ $GLOBALS['TL_CONFIG']['disableInsertTags']    = false;
 $GLOBALS['TL_CONFIG']['rootFiles']            = array();
 $GLOBALS['TL_CONFIG']['doNotCollapse']        = false;
 $GLOBALS['TL_CONFIG']['urlSuffix']            = '.html';
+$GLOBALS['TL_CONFIG']['exampleWebsite']       = '';
 
 
 /**

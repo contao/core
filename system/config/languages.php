@@ -51,6 +51,7 @@ $languages = array
 	'fo' => 'Faroese',
 	'fr' => 'French',
 	'gl' => 'Galician',
+	'gn' => 'Guarani',
 	'he' => 'Hebrew',
 	'hr' => 'Croatian',
 	'hu' => 'Hungarian',

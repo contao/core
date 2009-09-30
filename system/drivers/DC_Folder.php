@@ -600,37 +600,52 @@ class DC_Folder extends DataContainer implements listable, editable
 				// Move file to destination
 				if ($this->Files->move_uploaded_file($file['tmp_name'], $strNewFile))
 				{
+					$blnExceeds = false;
 					$blnResized = false;
+
 					$this->Files->chmod($strNewFile, 0644);
 
 					// Resize image if necessary
 					if (($arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile)) !== false)
 					{
-						// Image exceeds maximum image width
-						if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
+						// Image is too big
+						if ($arrImageSize[0] > 3000 || $arrImageSize[1] > 3000)
 						{
-							$blnResized = true;
-							$this->resizeImage($strNewFile, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
-
-							// Recalculate image size
-							$arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile);
+							$blnExceeds = true;
 						}
-
-						// Image exceeds maximum image height
-						if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
+						else
 						{
-							$blnResized = true;
-							$this->resizeImage($strNewFile, 0, $GLOBALS['TL_CONFIG']['imageHeight']);
+							// Image exceeds maximum image width
+							if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
+							{
+								$blnResized = true;
+								$this->resizeImage($strNewFile, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
+
+								// Recalculate image size
+								$arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile);
+							}
+
+							// Image exceeds maximum image height
+							if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
+							{
+								$blnResized = true;
+								$this->resizeImage($strNewFile, 0, $GLOBALS['TL_CONFIG']['imageHeight']);
+							}
 						}
 					}
 
 					$arrUploaded[] = $strNewFile;
 
 					// Notify user
-					if ($blnResized)
+					if ($blnExceeds)
+					{
+						$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $file['name']);
+						$this->log('File "'.$file['name'].'" uploaded successfully but was too big to be resized automatically', 'DC_Folder move()', TL_FILES);
+					}
+					elseif ($blnResized)
 					{
 						$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $file['name']);
-						$this->log('File "'.$file['name'].'" uploaded and resized successfully', 'DC_Folder move()', TL_FILES);
+						$this->log('File "'.$file['name'].'" uploaded successfully and was scaled down to the maximum dimensions', 'DC_Folder move()', TL_FILES);
 					}
 					else
 					{

@@ -75,14 +75,6 @@ class SelectMenu extends Widget
 
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
-
-				foreach ($this->arrOptions as $arrOptions)
-				{
-					if ($arrOptions['default'])
-					{
-						$this->varValue = $arrOptions['value'];
-					}
-				}
 				break;
 
 			case 'multiple':
@@ -130,7 +122,7 @@ class SelectMenu extends Widget
 			{
 				$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
 										 specialchars($arrOption['value']),
-										 ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' selected="selected"' : ''),
+										 $this->isSelected($arrOption),
 										 $arrOption['label']);
 
 				continue;
@@ -142,7 +134,7 @@ class SelectMenu extends Widget
 			{
 				$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
 										   specialchars($arrOptgroup['value']),
-										   ((is_array($this->varValue) && in_array($arrOptgroup['value'] , $this->varValue) || $this->varValue == $arrOptgroup['value']) ? ' selected="selected"' : ''),
+										   $this->isSelected($arrOptgroup),
 										   $arrOptgroup['label']);
 			}
 

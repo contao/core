@@ -74,16 +74,7 @@ class FormSelectMenu extends Widget
 				break;
 
 			case 'options':
-				$arrValue = array();
 				$this->arrOptions = deserialize($varValue);
-				foreach ($this->arrOptions as $arrOptions)
-				{
-					if ($arrOptions['default'])
-					{
-						$arrValue[] = $arrOptions['value'];
-					}
-				}
-				$this->varValue = $arrValue;
 				break;
 
 			case 'multiple':
@@ -214,7 +205,7 @@ class FormSelectMenu extends Widget
 
 			$strOptions .= sprintf('<option value="%s"%s>%s</option>',
 									$arrOption['value'],
-									((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue) || $this->varValue == $arrOption['value']) ? ' selected="selected"' : ''),
+									$this->isSelected($arrOption),
 									$arrOption['label']);
 		}
 

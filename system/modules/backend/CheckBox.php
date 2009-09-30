@@ -68,26 +68,6 @@ class CheckBox extends Widget
 		{
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
-				foreach ($this->arrOptions as $key=>$arrOptions)
-				{
-					// Single dimension array
-					if (is_numeric($key))
-					{
-						if ($arrOptions['default'])
-						{
-							$this->varValue = $arrOptions['value'];
-						}
-						continue;
-					}
-					// Multidimensional array
-					foreach ($arrOptions as $arrOption)
-					{
-						if ($arrOption['default'])
-						{
-							$this->varValue = $arrOption['value'];
-						}
-					}
-				}
 				break;
 
 			case 'mandatory':
@@ -204,7 +184,7 @@ class CheckBox extends Widget
 						$this->strName . ($this->multiple ? '[]' : ''),
 						$this->strId.'_'.$i,
 						($this->multiple ? specialchars($arrOption['value']) : 1),
-						((is_array($this->varValue) && in_array($arrOption['value'], $this->varValue) || $this->varValue == $arrOption['value']) ? ' checked="checked"' : ''),
+						$this->isChecked($arrOption),
 						$this->getAttributes(),
 						$this->strId.'_'.$i,
 						$arrOption['label']);

@@ -468,12 +468,12 @@ abstract class Widget extends Controller
 			return '';
 		}
 
-		if ($this->mandatory && !strlen($varInput))
+		if ($this->mandatory && !strlen(trim($varInput)))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
 		}
 
-		if ($this->minlength && strlen($varInput) && utf8_strlen($varInput) < $this->minlength)
+		if ($this->minlength && strlen($varInput) && utf8_strlen(trim($varInput)) < $this->minlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minlength'], $this->strLabel, $this->minlength));
 		}
@@ -647,6 +647,38 @@ abstract class Widget extends Controller
 		{
 			$this->$k = $v;
 		}
+	}
+
+
+	/**
+	 * Check whether an option is checked
+	 * @param array
+	 * @return string
+	 */
+	protected function isChecked($arrOption)
+	{
+		if (empty($this->varValue) && $arrOption['default'])
+		{
+			return $this->optionChecked(1, 1);
+		}
+
+		return $this->optionChecked($arrOption['value'], $this->varValue);
+	}
+
+
+	/**
+	 * Check whether an option is selected
+	 * @param array
+	 * @return string
+	 */
+	protected function isSelected($arrOption)
+	{
+		if (empty($this->varValue) && $arrOption['default'])
+		{
+			return $this->optionSelected(1, 1);
+		}
+
+		return $this->optionSelected($arrOption['value'], $this->varValue);
 	}
 }
 

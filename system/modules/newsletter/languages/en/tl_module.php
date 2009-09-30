@@ -39,12 +39,6 @@ $GLOBALS['TL_LANG']['tl_module']['nl_includeCss']   = array('Parse style sheet',
 
 
 /**
- * Legends
- */
-$GLOBALS['TL_LANG']['tl_module']['email_legend'] = 'E-mail settings';
-
-
-/**
  * Reference
  */
 $GLOBALS['TL_LANG']['tl_module']['text_subscribe']   = array('Your subscription on %s', "You have subscribed to the following channels on ##domain##:\n\n##channels##\n\nPlease click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.\n");

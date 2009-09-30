@@ -183,7 +183,7 @@ class FTP extends Files
 		}
 
 		// Unix fix: rename case sensitively
-		if (strcasecmp($strOldName, $strNewName) !== strcmp($strOldName, $strNewName))
+		if (strcasecmp($strOldName, $strNewName) === 0 && strcmp($strOldName, $strNewName) !== 0)
 		{
 			@ftp_rename($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName, $GLOBALS['TL_CONFIG']['ftpPath'] . $strOldName . '__');
 			$strOldName .= '__';

@@ -2,6 +2,24 @@
 TYPOlight webCMS CHANGELOG
 ==========================
 
+Version 2.7.4 (2009-09-30)
+--------------------------
+- Added replacement for unixtojd()
+- Added insert tag "page_language" (#1003)
+- Added option to choose root title in breadcrumb menus (#993)
+- Added a safer and more reliable way to determine the HTTP host (#1002)
+- Fixed issue with file tree path not overriding filemounts (#1020)
+- Fixed issue with compressed JavaScripts having the wrong content type (#1013)
+- Fixed issue with default options of checkboxes/radio buttons not being set (#998)
+- Fixed issue with image resizing not using the Safe Mode Hack (#1016)
+- Fixed issue with country/language sorting not being binary-safe (#983)
+- Fixed issue with parseDate() not checking for valid timestamps
+- Fixed issue with users not being authenticated on error 404 pages
+- Fixed issue with new pseudo entities not working on cached pages
+- Fixed issue with news archive module overriding the headline
+- Fixed issue with news archive menu not supporting yearly archives
+- Fixed a few minor issues
+
 Version 2.7.3 (2009-09-06)
 --------------------------
 - Added dynamic spellchecker languages to TinyMCE

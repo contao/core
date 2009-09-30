@@ -106,10 +106,11 @@ class ModuleBreadcrumb extends Module
 
 				$items[] = array
 				(
+					'isRoot' => true,
 					'isActive' => false,
 					'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
 					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle) : specialchars($objPages->title)),
-					'link' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle) : specialchars($objPages->title))
+					'link' => $objPages->title
 				);
 			}
 
@@ -121,6 +122,7 @@ class ModuleBreadcrumb extends Module
 		{
 			$items[] = array
 			(
+				'isRoot' => true,
 				'isActive' => false,
 				'href' => $this->Environment->base,
 				'title' => specialchars($GLOBALS['TL_CONFIG']['websiteTitle']),
@@ -168,6 +170,7 @@ class ModuleBreadcrumb extends Module
 
 			$items[] = array
 			(
+				'isRoot' => false,
 				'isActive' => false,
 				'href' => $href,
 				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle']) : specialchars($pages[$i]['title'])),
@@ -180,6 +183,7 @@ class ModuleBreadcrumb extends Module
 		{
 			$items[] = array
 			(
+				'isRoot' => false,
 				'isActive' => false,
 				'href' => $this->generateFrontendUrl($pages[0]),
 				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
@@ -202,6 +206,7 @@ class ModuleBreadcrumb extends Module
 			{
 				$items[] = array
 				(
+					'isRoot' => false,
 					'isActive' => true,
 					'title' => specialchars($objArticle->title),
 					'link' => $objArticle->title
@@ -214,6 +219,7 @@ class ModuleBreadcrumb extends Module
 		{
 			$items[] = array
 			(
+				'isRoot' => false,
 				'isActive' => true,
 				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
 				'link' => $pages[0]['title']

@@ -468,8 +468,13 @@ class ModuleMemberlist extends Module
 		$value = deserialize($value);
 
 		// Return if empty
-		if (!strlen($value))
+		if ($value == '')
 		{
+			if (isset($GLOBALS['TL_DCA']['tl_member']['fields'][$k]['reference']['']))
+			{
+				return $GLOBALS['TL_DCA']['tl_member']['fields'][$k]['reference'][''];
+			}
+
 			return '-';
 		}
 

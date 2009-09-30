@@ -306,7 +306,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgrepeat'],
 			'inputType'               => 'select',
-			'options'                 => array('repeat-x', 'repeat-y', 'no-repeat'),
+			'options'                 => array('repeat', 'repeat-x', 'repeat-y', 'no-repeat'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'border' => array

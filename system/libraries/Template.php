@@ -158,7 +158,7 @@ abstract class Template extends Controller
 		(
 			'/([ \t]*<head[^>]*>)/U',
 			"<!--\n\n"
-			. "\tThis website is powered by TYPOlight webCMS :: TYPOlight is licensed under GNU/LGPL\n"
+			. "\tThis website is powered by TYPOlight Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.typolight.org for more information\n\n"
 			. "//-->\n$1",

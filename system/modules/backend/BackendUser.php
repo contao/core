@@ -134,6 +134,10 @@ class BackendUser extends User
 				return is_array($this->arrData['fop']) ? $this->arrData['fop'] : (strlen($this->arrData['fop']) ? array($this->arrData['fop']) : false);
 				break;
 
+			case 'alexf':
+				return $this->arrData['alexf'];
+				break;
+
 			default:
 				return parent::__get($strKey);
 				break;
