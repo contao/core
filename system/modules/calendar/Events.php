@@ -139,11 +139,7 @@ abstract class Events extends Module
 
 			while ($objEvents->next())
 			{
-				// Add the event if it is inside the scope
-				if (($objEvents->startTime >= $intStart && $objEvents->startTime <= $intEnd) || ($objEvents->endTime >= $intStart && $objEvents->endTime <= $intEnd))
-				{
-					$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
-				}
+				$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
 
 				// Recurring events
 				if ($objEvents->recurring)

@@ -328,6 +328,12 @@ class ModuleRegistration extends Module
 			$objEmail->sendTo($arrData['email']);
 		}
 
+		// Make sure newsletter is an array
+		if (isset($arrData['newsletter']) && !is_array($arrData['newsletter']))
+		{
+			$arrData['newsletter'] = array($arrData['newsletter']);
+		}
+
 		// Create user
 		$objNewUser = $this->Database->prepare("INSERT INTO tl_member %s")->set($arrData)->execute();
 		$insertId = $objNewUser->insertId;

@@ -310,13 +310,32 @@ function deserialize($varValue, $blnForceArray=false)
  */
 function trimsplit($strPattern, $strString)
 {
-	$arrFragments = array_map('trim', preg_split('/'.$strPattern.'/ui', $strString));
+	global $arrSplitCache;
+	$strKey = $strPattern.$strString;
 
-	if (count($arrFragments) < 2 && !strlen($arrFragments[0]))
+	// Load from cache
+	if (isset($arrSplitCache[$strKey]))
 	{
-		return array();
+		return $arrSplitCache[$strKey];
 	}
 
+	// Split
+	if (strlen($strPattern) == 1)
+	{
+		$arrFragments = array_map('trim', explode($strPattern, $strString));
+	}
+	else
+	{
+		$arrFragments = array_map('trim', preg_split('/'.$strPattern.'/ui', $strString));
+	}
+
+	// Empty array
+	if (count($arrFragments) < 2 && !strlen($arrFragments[0]))
+	{
+		$arrFragments = array();
+	}
+
+	$arrSplitCache[$strKey] = $arrFragments;
 	return $arrFragments;
 }
 

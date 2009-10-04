@@ -451,10 +451,11 @@ class Newsletter extends Backend
 	/**
 	 * Synchronize newsletter subscription of new users
 	 * @param object
+	 * @param array
 	 */
-	public function activateAccount($objUser)
+	public function createNewUser($userId, $arrData)
 	{
-		$arrNewsletters = deserialize($objUser->newsletter, true);
+		$arrNewsletters = deserialize($arrData['newsletter'], true);
 
 		// Return if there are no newsletters
 		if (!is_array($arrNewsletters))
@@ -475,13 +476,43 @@ class Newsletter extends Backend
 			}
 
 			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
-										   ->execute($intNewsletter, $objUser->email);
+										   ->execute($intNewsletter, $arrData['email']);
 
 			if ($objRecipient->total < 1)
 			{
-				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1, addedOn=?, ip=?")
-							   ->execute($intNewsletter, $time, $objUser->email, $time, $this->Environment->ip);
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, addedOn=?, ip=?")
+							   ->execute($intNewsletter, $time, $arrData['email'], $time, $this->Environment->ip);
 			}
+		}
+	}
+
+
+	/**
+	 * Activate newsletter subscription of new users
+	 * @param object
+	 */
+	public function activateAccount($objUser)
+	{
+		$arrNewsletters = deserialize($objUser->newsletter, true);
+
+		// Return if there are no newsletters
+		if (!is_array($arrNewsletters))
+		{
+			return;
+		}
+
+		// Activate e-mail addresses
+		foreach ($arrNewsletters as $intNewsletter)
+		{
+			$intNewsletter = intval($intNewsletter);
+
+			if ($intNewsletter < 1)
+			{
+				continue;
+			}
+
+			$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=1 WHERE pid=? AND email=?")
+						   ->execute($intNewsletter, $objUser->email);
 		}
 	}
 
@@ -548,8 +579,8 @@ class Newsletter extends Backend
 
 			if ($objRecipient->total < 1)
 			{
-				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=1, addedOn=?, ip=?")
-							   ->execute($intId, $time, $objUser->email, ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=?, addedOn=?, ip=?")
+							   ->execute($intId, $time, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
 			}
 		}
 
@@ -576,7 +607,7 @@ class Newsletter extends Backend
 		// Edit account
 		if (TL_MODE == 'FE' || $this->Input->get('act') == 'edit')
 		{
-			$objUser = $this->Database->prepare("SELECT email FROM tl_member WHERE id=?")
+			$objUser = $this->Database->prepare("SELECT email, disable FROM tl_member WHERE id=?")
 									  ->limit(1)
 									  ->execute($intUser);
 
@@ -594,7 +625,14 @@ class Newsletter extends Backend
 				$objSubscriptions = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=?")
 												   ->execute($objUser->email);
 
-				$strNewsletters = serialize($objSubscriptions->fetchEach('pid'));
+				if ($objSubscriptions->numRows)
+				{
+					$strNewsletters = serialize($objSubscriptions->fetchEach('pid'));
+				}
+				else
+				{
+					$strNewsletters = '';
+				}
 
 				$this->Database->prepare("UPDATE tl_member SET newsletter=? WHERE id=?")
 							   ->execute($strNewsletters, $intUser);
@@ -603,6 +641,15 @@ class Newsletter extends Backend
 				if (TL_MODE == 'FE')
 				{
 					$this->User->newsletter = $strNewsletters;
+				}
+
+				// Check activation status
+				elseif (!empty($_POST) && $this->Input->post('disable') != $objUser->disable)
+				{
+					$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=? WHERE email=?")
+								   ->execute(($this->Input->post('disable') ? '' : 1), $objUser->email);
+
+					$objUser->disable = $this->Input->post('disable');
 				}
 			}
 		}

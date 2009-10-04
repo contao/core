@@ -1,6 +1,12 @@
-==========================
-TYPOlight webCMS CHANGELOG
-==========================
+===================================
+TYPOlight Open Source CMS Changelog
+===================================
+
+Version 2.7.5 (2009-10-04)
+--------------------------
+- Fixed issue with newsletter subscriptions not being activated (#1036)
+- Fixed issue with events spanning multiple months not displaying correctly (#1045)
+- Optimized function trimsplit() to handle large amounts of data (#1001)
 
 Version 2.7.4 (2009-09-30)
 --------------------------
