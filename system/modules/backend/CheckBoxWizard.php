@@ -105,6 +105,11 @@ class CheckBoxWizard extends Widget
 		$arrButtons = array('up', 'down');
 		$strCommand = 'cmd_' . $this->strField;
 
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
+		}
+
 		// Change the order
 		if ($this->Input->get($strCommand) && is_numeric($this->Input->get('cid')) && $this->Input->get('id') == $this->currentRecord)
 		{

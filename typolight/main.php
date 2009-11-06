@@ -199,6 +199,11 @@ class Main extends Backend
 		$objTemplate->tasks = $GLOBALS['TL_LANG']['MOD']['tasks'][0];
 		$objTemplate->script = $this->Environment->script;
 
+		if ($this->User->lastLogin > 0)
+		{
+			$objTemplate->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin));
+		}
+
 		$this->Template->main .= $objTemplate->parse();
 	}
 

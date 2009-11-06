@@ -1,6 +1,6 @@
 tinyMCE.addI18n({fr:{
 common:{
-edit_confirm:"Voulez-vous utiliser le mode WYSIWYG pour cette zone de texte\u00A0?",
+edit_confirm:"Voulez-vous utiliser le mode WYSIWYG pour cette zone de texte?",
 apply:"Appliquer",
 insert:"Ins\u00E9rer",
 update:"Mettre \u00E0 jour",
@@ -9,10 +9,10 @@ close:"Fermer",
 browse:"Naviguer",
 class_name:"Classe",
 not_set:"-- Non init. --",
-clipboard_msg:"Copier/Couper/Coller n'est pas disponible sous Mozilla et sous Firefox.\nVoulez-vous plus d'information sur ce probl\u00E8me\u00A0?",
-clipboard_no_support:"Actuellement non support\u00E9 par votre navigateur, utilisez les raccourcis clavier \u00E0 ma place.",
+clipboard_msg:"Copier/Couper/Coller n'est pas disponible sous Mozilla et sous Firefox.\nVoulez-vous plus d'information sur ce probl\u00E8me?",
+clipboard_no_support:"Actuellement non support\u00E9 par votre navigateur.\r\n Utilisez les raccourcis clavier \u00E0 ma place.",
 popup_blocked:"D\u00E9sol\u00E9, nous avons d\u00E9tect\u00E9 que votre bloqueur de popup a bloqu\u00E9 une fen\u00EAtre dont l'application a besoin. Vous devez d\u00E9sactiver votre bloqueur de popup pour pouvoir utiliser cet outil.",
-invalid_data:"Erreur : Valeurs incorrectes entr\u00E9es, elles sont marqu\u00E9es en rouge.",
+invalid_data:"Erreur: Valeurs incorrectes entr\u00E9es. Elles sont marqu\u00E9es en rouge.",
 more_colors:"Plus de couleurs"
 },
 contextmenu:{
@@ -47,18 +47,18 @@ insertlayer_desc:"Ins\u00E9rer une nouvelle couche",
 forward_desc:"D\u00E9placer vers l'avant",
 backward_desc:"D\u00E9placer vers l'arri\u00E8re",
 absolute_desc:"Activer le positionnement absolu",
-content:"Nouvelle couche..."
+content:"Nouvelle couche\u2026"
 },
 save:{
 save_desc:"Sauver",
 cancel_desc:"Annuler tous les changements"
 },
 nonbreaking:{
-nonbreaking_desc:"Ins\u00E9rer un espace ins\u00E9cable"
+nonbreaking_desc:"Ins\u00E9rer une espace ins\u00E9cable"
 },
 iespell:{
 iespell_desc:"Lancer le v\u00E9rificateur d'orthographe",
-download:"ieSpell non install\u00E9, voulez-vous l'installer maintenant\u00A0?"
+download:"ieSpell non install\u00E9. Voulez-vous l'installer maintenant?"
 },
 advhr:{
 advhr_desc:"Ins\u00E9rer trait horizontal"
@@ -89,8 +89,8 @@ desc:"\u00C9diter la feuille de style CSS"
 },
 paste:{
 paste_text_desc:"Coller en tant que texte brut",
-paste_word_desc:"Coller au d\u00E9part d'un texte cr\u00E9\u00E9 sous Word",
-selectall_desc:"Selectioner tout"
+paste_word_desc:"Coller \u00E0 partir d'un texte cr\u00E9\u00E9 sous Word",
+selectall_desc:"S\u00E9lectionner tout"
 },
 paste_dlg:{
 text_title:"Utilisez CTRL+V sur votre clavier pour coller le texte dans la fen\u00EAtre.",
@@ -144,7 +144,7 @@ menu:"Param\u00E8tres du v\u00E9rificateur d'orthographe",
 ignore_word:"Ignorer mot",
 ignore_words:"Ignorer tout",
 langs:"Langues",
-wait:"Patientez svp...",
+wait:"Patientez SVP\u2026",
 sug:"Suggestions",
 no_sug:"Aucune suggestions",
 no_mpell:"Aucune erreur trouv\u00E9e."

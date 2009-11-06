@@ -129,12 +129,15 @@ class FrontendTemplate extends Template
 		$blnCached = false;
 
 		// Cache page if it is not protected
-		if (empty($_POST) && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
+		if (empty($_POST) && $GLOBALS['TL_CONFIG']['cacheMode'] != 'browser' && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// Do not cache empty requests
 			if (strlen($this->Environment->request) && $this->Environment->request != 'index.php')
 			{
-				$blnCached = true;
+				if ($GLOBALS['TL_CONFIG']['cacheMode'] != 'server')
+				{
+					$blnCached = true;
+				}
 
 				// Create a unique key
 				$strUniqueKey = $this->Environment->base . $strUrl;
@@ -154,7 +157,7 @@ class FrontendTemplate extends Template
 		if (!headers_sent())
 		{
 			// Cache headers
-			if ($blnCached)
+			if ($blnCached || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
@@ -192,7 +195,8 @@ class FrontendTemplate extends Template
 					'title' => (strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title),
 					'protected' => ($objPage->protected ? '1' : ''),
 					'groups' => $objPage->groups,
-					'pid' => $objPage->id
+					'pid' => $objPage->id,
+					'language' => $objPage->language
 				);
 
 				$this->Search->indexPage($arrData);

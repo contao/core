@@ -43,10 +43,13 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'onload_callback' => array
 		(
 			array('tl_page', 'checkPermission'),
+			array('tl_page', 'addBreadcrumb'),
+			array('tl_page', 'setDefaultLanguage'),
 		),
 		'onsubmit_callback' => array
 		(
-			array('tl_page', 'updateSitemap')
+			array('tl_page', 'updateSitemap'),
+			array('tl_page', 'generateArticle')
 		)
 	),
 
@@ -63,22 +66,22 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			'fields'                  => array('title'),
 			'format'                  => '%s',
-			'label_callback'          => array('tl_page', 'addImage')
+			'label_callback'          => array('tl_page', 'addIcon')
 		),
 		'global_operations' => array
 		(
+			'toggleNodes' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
+				'href'                => 'ptg=all',
+				'class'               => 'header_toggle'
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			),
-			'toggleNodes' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
-				'href'                => 'ptg=all',
-				'class'               => 'header_toggle'
 			)
 		),
 		'operations' => array
@@ -122,11 +125,25 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
 				'button_callback'     => array('tl_page', 'deletePage')
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_page']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_page', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
+			),
+			'articles' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_page']['articles'],
+				'href'                => 'do=article',
+				'icon'                => 'article.gif',
+				'button_callback'     => array('tl_page', 'editArticles')
 			)
 		)
 	),
@@ -136,9 +153,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	(
 		'__selector__'                => array('type', 'autoforward', 'protected', 'includeLayout', 'includeCache', 'includeChmod', 'createSitemap'),
 		'default'                     => '{title_legend},title,alias,type;followup,start,stop',
-		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},fallback,dns,language;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop'
@@ -302,7 +319,11 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['sitemapName'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32)
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkFeedAlias')
+			)
 		),
 		'autoforward' => array
 		(
@@ -400,7 +421,16 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cssClass'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64)
+			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50')
+		),
+		'sitemap' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['sitemap'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('map_default', 'map_always', 'map_never'),
+			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_page']
 		),
 		'hide' => array
 		(
@@ -487,6 +517,7 @@ class tl_page extends Backend
 		}
 
 		$groups = $this->User->groups;
+		$session = $this->Session->getData();
 
 		// Set default user and group
 		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
@@ -495,45 +526,66 @@ class tl_page extends Backend
 		// Restrict user permissions
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
 
-		// Set allowed page IDs (edit/delete all)
-		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'deleteAll')
+		// Set allowed page IDs (edit multiple)
+		if (is_array($session['CURRENT']['IDS']))
 		{
-			$session = $this->Session->getData();
+			$edit_all = array();
+			$delete_all = array();
 
-			if (is_array($session['CURRENT']['IDS']))
+			foreach ($session['CURRENT']['IDS'] as $id)
 			{
-				$edit_all = array();
-				$delete_all = array();
+				$objPage = $this->Database->prepare("SELECT id, pid, type, includeChmod, chmod, cuser, cgroup FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute($id);
 
-				foreach ($session['CURRENT']['IDS'] as $id)
+				if ($objPage->numRows < 1 || !in_array($objPage->type, $this->User->alpty))
 				{
-					$objPage = $this->Database->prepare("SELECT id, pid, includeChmod, chmod, cuser, cgroup FROM tl_page WHERE id=?")
-											  ->limit(1)
-											  ->execute($id);
+					continue;
+				}
 
-					if ($objPage->numRows < 1)
-					{
-						continue;
-					}
+				$row = $objPage->fetchAssoc();
 
-					$row = $objPage->fetchAssoc();
+				if ($this->User->isAllowed(1, $row))
+				{
+					$edit_all[] = $id;
+				}
 
-					if ($this->User->isAllowed(1, $row))
-					{
-						$edit_all[] = $id;
-					}
-
-					if ($this->User->isAllowed(3, $row) && !in_array($id, $this->User->pagemounts))
-					{
-						$delete_all[] = $id;
-					}
+				if ($this->User->isAllowed(3, $row) && !in_array($id, $this->User->pagemounts))
+				{
+					$delete_all[] = $id;
 				}
 			}
 
-			// Overwrite session
 			$session['CURRENT']['IDS'] = ($this->Input->get('act') == 'deleteAll') ? $delete_all : $edit_all;
-			$this->Session->setData($session);
 		}
+
+		// Set allowed clipboard IDs
+		if (isset($session['CLIPBOARD']['tl_page']) && is_array($session['CLIPBOARD']['tl_page']['id']))
+		{
+			$clipboard = array();
+
+			foreach ($session['CLIPBOARD']['tl_page']['id'] as $id)
+			{
+				$objPage = $this->Database->prepare("SELECT id, pid, type, includeChmod, chmod, cuser, cgroup FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute($id);
+
+				if ($objPage->numRows < 1 || !in_array($objPage->type, $this->User->alpty))
+				{
+					continue;
+				}
+
+				if ($this->User->isAllowed(2, $objPage->fetchAssoc()))
+				{
+					$clipboard[] = $id;
+				}
+			}
+
+			$session['CLIPBOARD']['tl_page']['id'] = $clipboard;
+		}
+
+		// Overwrite session
+		$this->Session->setData($session);
 
 		// Add access rights to new pages
 		if ($this->Input->get('act') == 'create')
@@ -557,13 +609,13 @@ class tl_page extends Backend
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			$error = false;
-			$ids = strlen(CURRENT_ID) ? array(CURRENT_ID) : array();
+			$ids = strlen(CURRENT_ID) ? array(CURRENT_ID) : array($this->Input->get('id'));
 
 			// Set permission
 			switch ($this->Input->get('act'))
 			{
 				case 'edit':
+				case 'toggle':
 					$permission = 1;
 					break;
 
@@ -574,7 +626,9 @@ class tl_page extends Backend
 
 				case 'new':
 				case 'copy':
+				case 'copyAll':
 				case 'cut':
+				case 'cutAll':
 					$permission = 2;
 					$ids[] = $this->Input->get('pid');
 					break;
@@ -600,10 +654,11 @@ class tl_page extends Backend
 					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 				}
 
+				$error = false;
 				$pagemounts = array_unique($pagemounts);
 
 				// Check each page
-				foreach ($ids as $id)
+				foreach ($ids as $i=>$id)
 				{
 					if (!in_array($id, $pagemounts))
 					{
@@ -611,7 +666,7 @@ class tl_page extends Backend
 						break;
 					}
 
-					// Get page object
+					// Get the page object
 					$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 											  ->limit(1)
 											  ->execute($id);
@@ -627,16 +682,124 @@ class tl_page extends Backend
 						$error = true;
 						break;
 					}
+
+					// Check the type of the first page (not the following parent pages)
+					if ($i == 0 && !in_array($objPage->type, $this->User->alpty))
+					{
+						$error = true;
+						break;
+					}
+				}
+
+				// Redirect if there is an error
+				if ($error)
+				{
+					$this->log('Not enough permissions to ' . $this->Input->get('act') . ' page ID "'.$id.'"', 'tl_page checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
 				}
 			}
 		}
+	}
 
-		// Redirect if there is an error
-		if ($error)
+
+	/**
+	 * Add the breadcrumb menu
+	 */
+	public function addBreadcrumb()
+	{
+		// Set a new node
+		if (isset($_GET['node']))
 		{
-			$this->log('Not enough permissions to modify page ID "'.$id.'"', 'tl_page checkPermission', 5);
+			$this->Session->set('tl_page_node', $this->Input->get('node'));
+			$this->redirect(preg_replace('/&node=[^&]*/', '', $this->Environment->request));
+		}
+
+		$intNode = $this->Session->get('tl_page_node');
+
+		if ($intNode < 1)
+		{
+			return;
+		}
+
+		$arrIds = array();
+		$arrLinks = array();
+
+		// Generate breadcrumb trail
+		if ($intNode)
+		{
+			$intId = $intNode;
+
+			do
+			{
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+								->limit(1)
+								->execute($intId);
+
+				if ($objPage->numRows < 1)
+				{
+					break;
+				}
+
+				$arrIds[] = $intId;
+
+				// No link for the active page
+				if ($objPage->id == $intNode)
+				{
+					$arrLinks[] = $this->addIcon($objPage->row(), '', '', null, true) . ' ' . $objPage->title;
+				}
+				else
+				{
+					$arrLinks[] = $this->addIcon($objPage->row(), '', '', null, true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
+				}
+
+				// Do not show the mounted pages
+				if (!$this->User->isAdmin && in_array($objPage->id, $this->User->pagemounts))
+				{
+					break;
+				}
+
+				$intId = $objPage->pid;
+			}
+			while ($intId > 0 && $objPage->type != 'root');
+		}
+
+		// Check whether the node is mounted
+		if (!$this->User->isAdmin && !$this->User->hasAccess($arrIds, 'pagemounts'))
+		{
+			$this->Session->set('tl_page_node', 0);
+
+			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', 5);
 			$this->redirect('typolight/main.php?act=error');
 		}
+
+		// Limit tree
+		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
+
+		// Add root link
+		$arrLinks[] = '<img src="system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt="" /> <a href="' . $this->addToUrl('node=0') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks = array_reverse($arrLinks);
+
+		// Insert breadcrumb menu
+		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['breadcrumb'] .= '
+
+<ul id="tl_breadcrumb">
+  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
+</ul>';
+	}
+
+
+	/**
+	 * Apply the root page language to new pages
+	 */
+	public function setDefaultLanguage()
+	{
+		if ($this->Input->get('act') != 'create')
+		{
+			return;
+		}
+
+		$objPage = $this->getPageDetails($this->Input->get('pid'));
+		$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
 	}
 
 
@@ -702,11 +865,96 @@ class tl_page extends Backend
 					throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 				}
 
-				$varValue .= '.' . $dc->id;
+				$varValue .= '-' . $dc->id;
 			}
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Automatically create an article in the main column of a new page
+	 * @param object
+	 */
+	public function generateArticle(DataContainer $dc)
+	{
+		$new_records = $this->Session->get('new_records');
+
+		if (!$new_records || (is_array($new_records[$dc->table]) && !in_array($dc->id, $new_records[$dc->table])))
+		{
+			return;
+		}
+
+		$objPage = $this->Database->prepare("SELECT id, tstamp, title, alias, published FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->id);
+
+		if ($objPage->numRows < 1 || $objPage->tstamp > 0)
+		{
+			return;
+		}
+
+		// Create article
+		$arrSet['pid'] = $dc->id;
+		$arrSet['sorting'] = 128;
+		$arrSet['tstamp'] = time();
+		$arrSet['author'] = $this->User->id;
+		$arrSet['inColumn'] = 'main';
+		$arrSet['title'] = $objPage->title;
+		$arrSet['alias'] = $objPage->alias;
+		$arrSet['published'] = $objPage->published;
+
+		// Add article
+		$this->Database->prepare("INSERT INTO tl_article %s")
+					   ->set($arrSet)
+					   ->execute();
+	}
+
+
+	/**
+	 * Check the sitemap alias
+	 * @param object
+	 * @throws Exception
+	 */
+	public function checkFeedAlias($varValue, DataContainer $dc)
+	{
+		// No change or empty value
+		if ($varValue == $dc->value || $varValue == '')
+		{
+			return $varValue;
+		}
+
+		$arrFeeds = $this->removeOldFeeds(true);
+
+		// Alias exists
+		if (array_search($varValue, $arrFeeds) !== false)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Returns all allowed page types as array
+	 * @param object
+	 * @return string
+	 */
+	public function pageTypes(DataContainer $dc)
+	{
+		$arrOptions = array();
+
+		foreach (array_keys($GLOBALS['TL_PTY']) as $pty)
+		{
+			if ($pty == $dc->value || $this->User->hasAccess($pty, 'alpty'))
+			{
+				$arrOptions[] = $pty;
+			}
+		}
+
+		return $arrOptions;
 	}
 
 
@@ -716,9 +964,10 @@ class tl_page extends Backend
 	 * @param string
 	 * @param string
 	 * @param object
+	 * @param boolean
 	 * @return string
 	 */
-	public function addImage($row, $label, $imageAttribute, DataContainer $dc)
+	public function addIcon($row, $label, $imageAttribute, DataContainer $dc=null, $blnReturnImage=false)
 	{
 		$sub = 0;
 		$image = ''.$row['type'].'.gif';
@@ -747,13 +996,23 @@ class tl_page extends Backend
 			$image = ''.$row['type'].'_'.$sub.'.gif';
 		}
 
+		// Return the image only
+		if ($blnReturnImage)
+		{
+			return $this->generateImage($image, '', $imageAttribute);
+		}
+
+		// Mark root pages
 		if ($row['type'] == 'root' || $this->Input->get('do') == 'article')
 		{
 			$label = '<strong>' . $label . '</strong>';
 		}
 
+		// Add breadcrumb link
+		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '">' . $label . '</a>';
+
 		// Return image
-		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : ''). LINK_NEW_WINDOW_BLUR . '>'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
+		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . LINK_NEW_WINDOW . '>'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
 	}
 
 
@@ -769,7 +1028,7 @@ class tl_page extends Backend
 	 */
 	public function editPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->isAllowed(1, $row)) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(1, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -791,7 +1050,7 @@ class tl_page extends Backend
 			return '';
 		}
 
-		return ($this->User->isAdmin || $this->User->isAllowed(2, $row)) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -817,7 +1076,7 @@ class tl_page extends Backend
 									  ->limit(1)
 									  ->execute($row['id']);
 
-		return ($objSubpages->numRows && ($this->User->isAdmin || $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($objSubpages->numRows && ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row)))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -833,7 +1092,7 @@ class tl_page extends Backend
 	 */
 	public function cutPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || $this->User->isAllowed(2, $row)) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -852,7 +1111,7 @@ class tl_page extends Backend
 		$disablePI = false;
 
 		// Disable all buttons if there is a circular reference
-		if ($arrClipboard !== false && $arrClipboard['mode'] == 'cut' && ($cr == 1 || $arrClipboard['id'] == $row['id']))
+		if ($arrClipboard !== false && ($arrClipboard['mode'] == 'cut' && ($cr == 1 || $arrClipboard['id'] == $row['id']) || $arrClipboard['mode'] == 'cutAll' && ($cr == 1 || in_array($row['id'], $arrClipboard['id']))))
 		{
 			$disablePA = true;
 			$disablePI = true;
@@ -893,10 +1152,10 @@ class tl_page extends Backend
 
 		if ($row['id'] > 0)
 		{
-			$return = $disablePA ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+			$return = $disablePA ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
 		}
 
-		return $return.($disablePI ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ');
+		return $return.($disablePI ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ');
 	}
 
 
@@ -913,28 +1172,22 @@ class tl_page extends Backend
 	public function deletePage($row, $href, $label, $title, $icon, $attributes)
 	{
 		$root = func_get_arg(7);
-		return ($this->User->isAdmin || $this->User->isAllowed(3, $row) && !in_array($row['id'], $root)) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(3, $row) && !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
 	/**
-	 * Returns all allowed page types as array
-	 * @param object
+	 * Generate an "edit articles" button and return it as string
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	public function pageTypes(DataContainer $dc)
+	public function editArticles($row, $href, $label, $title, $icon)
 	{
-		$arrOptions = array();
-
-		foreach (array_keys($GLOBALS['TL_PTY']) as $pty)
-		{
-			if ($pty == $dc->value || $this->User->hasAccess($pty, 'alpty'))
-			{
-				$arrOptions[] = $pty;
-			}
-		}
-
-		return $arrOptions;
+		return '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 
@@ -946,6 +1199,75 @@ class tl_page extends Backend
 	{
 		$this->import('Automator');
 		$this->Automator->generateSitemap($dc->id);
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
+		{
+			return '';
+		}
+
+		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($row['id']);
+
+		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->fetchAssoc()))
+		{
+			return $this->generateImage('invisible.gif') . ' ';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Check permissions to publish
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_page SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

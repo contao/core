@@ -171,6 +171,35 @@ class Date extends System
 
 
 	/**
+	 * Return the begin of the week as timestamp
+	 * @param integer
+	 * @return integer
+	 */
+	public function getWeekBegin($intStartDay=0)
+	{
+		$intOffset = date('w', $this->intTstamp) - $intStartDay;
+
+		if ($intOffset < 0)
+		{
+			$intOffset += 7;
+		}
+
+		return strtotime('-' . $intOffset . ' days', $this->intTstamp);
+	}
+
+
+	/**
+	 * Return the end of the week as timestamp
+	 * @param integer
+	 * @return integer
+	 */
+	public function getWeekEnd($intStartDay=0)
+	{
+		return strtotime('+1 week', $this->getWeekBegin($intStartDay)) - 1;
+	}
+
+
+	/**
 	 * Return a regular expression to check a date
 	 * @param  string
 	 * @return string

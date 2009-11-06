@@ -1,5 +1,5 @@
 tinyMCE.addI18n('cs.emotions_dlg',{
-title:"Vlo\u017Eit emotikon",
+title:"Vlo\u017Eit emotikonu",
 desc:"Emotikony",
 cool:"Cool",
 cry:"Cry",

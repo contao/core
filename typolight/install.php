@@ -58,13 +58,13 @@ class InstallTool extends Controller
 	public function __construct()
 	{
 		$this->import('String');
-		$this->import('Files');
-
 		parent::__construct();
 
-		$GLOBALS['TL_LANGUAGE'] = 'en';
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
+
+		$this->loadLanguageFile('default');
+		$this->loadLanguageFile('tl_install');
 	}
 
 
@@ -89,13 +89,76 @@ class InstallTool extends Controller
 		/**
 		 * Check whether the local configuration file is writeable
 		 */
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_ftp')
+		{
+			$GLOBALS['TL_CONFIG']['useFTP'] = true;
+
+			$GLOBALS['TL_CONFIG']['ftpHost'] = $this->Input->post('host');
+			$GLOBALS['TL_CONFIG']['ftpPath'] = $this->Input->post('path');
+			$GLOBALS['TL_CONFIG']['ftpUser'] = $this->Input->post('username', true);
+			$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
+
+			// Add trailing slash
+			if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
+			{
+				$GLOBALS['TL_CONFIG']['ftpPath'] .= '/';
+			}
+
+			// Try to connect and locate TYPOlight directory
+			if (($resFtp = @ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) == false)
+			{
+				$this->Template->ftpHostError = true;
+				$this->outputAndExit();
+			}
+			elseif (!@ftp_login($resFtp, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
+			{
+				$this->Template->ftpUserError = true;
+				$this->outputAndExit();
+			}
+			elseif (ftp_size($resFtp, $GLOBALS['TL_CONFIG']['ftpPath'] . 'system/typolight.css') == -1)
+			{
+				$this->Template->ftpPathError = true;
+				$this->outputAndExit();
+			}
+
+			// Update the local configuration file
+			else
+			{
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['useFTP']", true);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpHost']", $GLOBALS['TL_CONFIG']['ftpHost']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+
+				$this->reload();
+			}
+		}
+
+		// Import files object AFTER storing the FTP settings
+		$this->import('Files');
+
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
 		{
-			$this->Template->lcfWriteable = false;
 			$this->outputAndExit();
 		}
 
 		$this->Template->lcfWriteable = true;
+
+
+		/**
+		 * Show license
+		 */
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_license')
+		{
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['licenseAccepted']", true);
+			$this->reload();
+		}
+
+		if (!$GLOBALS['TL_CONFIG']['licenseAccepted'])
+		{
+			$this->Template->license = specialchars(file_get_contents(TL_ROOT . '/GPL.txt') . "\n\n" . file_get_contents(TL_ROOT . '/LGPL.txt'));
+			$this->outputAndExit();
+		}
 
 
 		/**
@@ -166,9 +229,9 @@ class InstallTool extends Controller
 			}
 
 			// Password too short
-			elseif (utf8_strlen($this->Input->post('password')) < 8)
+			elseif (utf8_strlen($this->Input->post('password')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
-				$this->Template->passwordError = 'A password has to be at least 8 characters long!';
+				$this->Template->passwordError = 'A password has to be at least ' . $GLOBALS['TL_CONFIG']['minPasswordLength'] . ' characters long!';
 			}
 
 			// Save password
@@ -212,7 +275,7 @@ class InstallTool extends Controller
 			$this->outputAndExit();
 		}
 
-		if (utf8_strlen($GLOBALS['TL_CONFIG']['encryptionKey']) < 8)
+		if (utf8_strlen($GLOBALS['TL_CONFIG']['encryptionKey']) < 12)
 		{
 			$this->Template->encryptionLength = true;
 			$this->outputAndExit();
@@ -223,7 +286,7 @@ class InstallTool extends Controller
 
 		foreach ($arrDrivers as $strDriver)
 		{
-			$strDrivers .= sprintf('  <option value="%s"%s>%s</option>' . "\n",
+			$strDrivers .= sprintf('<option value="%s"%s>%s</option>',
 									$strDriver,
 									(($strDriver == $GLOBALS['TL_CONFIG']['dbDriver']) ? ' selected="selected"' : ''),
 									$strDriver);
@@ -359,9 +422,9 @@ class InstallTool extends Controller
 			}
 
 			// Password too short
-			elseif (utf8_strlen($this->Input->post('pass')) < 8)
+			elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
-				$this->Template->adminError = 'A password has to be at least 8 characters long!';
+				$this->Template->adminError = 'A password has to be at least ' . $GLOBALS['TL_CONFIG']['minPasswordLength'] . ' characters long!';
 			}
 
 			// Save data
@@ -426,11 +489,11 @@ class InstallTool extends Controller
 
 		$arrOperations = array
 		(
-			'CREATE'        => 'Create new tables',
-			'ALTER_ADD'     => 'Add new columns',
-			'ALTER_CHANGE'  => 'Change existing columns',
-			'ALTER_DROP'    => 'Drop existing columns',
-			'DROP'          => 'Drop existing tables'
+			'CREATE'        => $GLOBALS['TL_LANG']['tl_install']['CREATE'],
+			'ALTER_ADD'     => $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'],
+			'ALTER_CHANGE'  => $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'],
+			'ALTER_DROP'    => $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP'],
+			'DROP'          => $GLOBALS['TL_LANG']['tl_install']['DROP']
 		);
 
 		foreach ($arrOperations as $command=>$label)
@@ -439,25 +502,32 @@ class InstallTool extends Controller
 			{
 				// Headline
 				$return .= '
-  <tr>
-    <td colspan="2" class="tl_col_0">'.$label.'</td>
-  </tr>';
+    <tr>
+      <td colspan="2" class="tl_col_0">'.$label.'</td>
+    </tr>';
+
+				// Check all
+				$return .= '
+    <tr>
+      <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')" /></td>
+      <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6;"><em>Select all</em></label></td>
+    </tr>';
 
 				// Fields
 				foreach ($sql_command[$command] as $vv)
 				{
 					$return .= '
-  <tr>
-    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
-    <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
-  </tr>';
+    <tr>
+      <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
+      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
+    </tr>';
 				}
 			}
 		}
 
 		return '
-<table cellspacing="0" cellpadding="0" id="sql_table" style="margin-top:9px;" summary="Necessary database modifications">'.$return.'
-</table>' . "\n";
+  <table cellspacing="0" cellpadding="0" id="sql_table" style="margin-top:9px;" summary="Database modifications">'.$return.'
+  </table>' . "\n";
 	}
 
 

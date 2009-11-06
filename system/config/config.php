@@ -63,7 +63,7 @@
  * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
  */
-$GLOBALS['TL_CONFIG']['websiteTitle']   = 'TYPOlight webCMS';
+$GLOBALS['TL_CONFIG']['websiteTitle']   = 'TYPOlight Open Source CMS';
 $GLOBALS['TL_CONFIG']['characterSet']   = 'UTF-8';
 $GLOBALS['TL_CONFIG']['adminEmail']     = '';
 $GLOBALS['TL_CONFIG']['enableSearch']   = true;
@@ -311,6 +311,8 @@ $GLOBALS['TL_CONFIG']['rootFiles']            = array();
 $GLOBALS['TL_CONFIG']['doNotCollapse']        = false;
 $GLOBALS['TL_CONFIG']['urlSuffix']            = '.html';
 $GLOBALS['TL_CONFIG']['exampleWebsite']       = '';
+$GLOBALS['TL_CONFIG']['minPasswordLength']    = 8;
+$GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
 
 
 /**

@@ -7,16 +7,19 @@
 <div id="tl_messages">
   <h2><?php echo $this->systemMessages; ?></h2>
 <?php if ($this->tasksDue): ?>
-  <div class="tl_task_due"><?php echo $this->tasksDue; ?></div>
+  <p class="tl_task_due"><a href="typolight/main.php?do=tasks"><?php echo $this->tasksDue; ?></a></p>
 <?php endif; ?>
 <?php if ($this->tasksNew): ?>
-  <div class="tl_task_new"><?php echo $this->tasksNew; ?></div>
+  <p class="tl_task_new"><a href="typolight/main.php?do=tasks"><?php echo $this->tasksNew; ?></a></p>
 <?php endif; ?>
 <?php if ($this->tasksCur): ?>
-  <div class="tl_task_reg"><?php echo $this->tasksCur; ?></div>
+  <p class="tl_task_reg"><a href="typolight/main.php?do=tasks"><?php echo $this->tasksCur; ?></a></p>
 <?php endif; ?>
 <?php if ($this->update): ?>
-  <div class="tl_update"><?php echo $this->update; ?></div>
+  <p class="tl_update"><a href="typolight/main.php?do=maintenance"><?php echo $this->update; ?></a></p>
+<?php endif; ?>
+<?php if ($this->lastLogin): ?>
+  <p class="tl_update"><?php echo $this->lastLogin; ?></p>
 <?php endif; ?>
 </div>
 <?php endif; ?>

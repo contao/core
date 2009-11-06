@@ -18,6 +18,6 @@
 <?php echo $this->teaser; ?>
 </div>
 <?php if ($this->details): ?>
-<p class="more"><a href="<?php echo $this->link; ?>" title="<?php echo $this->more; ?>"<?php echo $this->target; ?>><?php echo $this->more; ?></a></p>
+<p class="more"><a href="<?php echo $this->link; ?>" title="<?php echo $this->readMore; ?>"<?php echo $this->target; ?>><?php echo $this->more; ?> <span class="invisible"><?php echo $this->title; ?></span></a></p>
 <?php endif; ?>
 </div>

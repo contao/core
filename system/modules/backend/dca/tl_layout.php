@@ -99,11 +99,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('cols', 'header', 'footer', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,mootools,urchinId,cssClass,onload,head',
-		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mootools,urchinId,cssClass,onload,head;{static_legend},static',
-		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mootools,urchinId,cssClass,onload,head;{static_legend},static',
-		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mootools,urchinId,cssClass,onload,head;{static_legend},static',
-		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mootools,urchinId,cssClass,onload,head;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools',
+		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -257,16 +257,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'mootools' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mootools'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'search'                  => true,
-			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('moo_'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
-		),
 		'urchinId' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['urchinId'],
@@ -290,7 +280,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr')
 		),
 		'head' => array
 		(
@@ -299,6 +289,24 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'search'                  => true,
 			'inputType'               => 'textarea',
 			'eval'                    => array('style'=>'height:60px;', 'preserveTags'=>true, 'tl_class'=>'clr')
+		),
+		'mootools' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mootools'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'search'                  => true,
+			'inputType'               => 'checkboxWizard',
+			'options'                 => $this->getTemplateGroup('moo_'),
+			'eval'                    => array('multiple'=>true)
+		),
+		'script' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['script'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('style'=>'height:120px;', 'preserveTags'=>true)
 		),
 		'static' => array
 		(

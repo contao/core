@@ -28,9 +28,10 @@ CREATE TABLE `tl_news` (
   `alt` varchar(255) NOT NULL default '',
   `size` varchar(64) NOT NULL default '',
   `imagemargin` varchar(128) NOT NULL default '',
+  `imageUrl` varchar(255) NOT NULL default '',
+  `fullsize` char(1) NOT NULL default '',
   `caption` varchar(255) NOT NULL default '',
   `floating` varchar(32) NOT NULL default '',
-  `fullsize` char(1) NOT NULL default '',
   `addEnclosure` char(1) NOT NULL default '',
   `enclosure` blob NULL,
   `source` varchar(32) NOT NULL default '',
@@ -119,6 +120,7 @@ CREATE TABLE `tl_module` (
   `news_metaFields` varchar(255) NOT NULL default '',
   `news_template` varchar(32) NOT NULL default '',
   `news_format` varchar(32) NOT NULL default '',
+  `news_startDay` smallint(5) unsigned NOT NULL default '0'
   `news_showQuantity` char(1) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -130,7 +132,8 @@ CREATE TABLE `tl_module` (
 -- 
 
 CREATE TABLE `tl_user` (
-  `news` blob NULL
+  `news` blob NULL,
+  `newp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -141,5 +144,6 @@ CREATE TABLE `tl_user` (
 -- 
 
 CREATE TABLE `tl_user_group` (
-  `news` blob NULL
+  `news` blob NULL,
+  `newp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

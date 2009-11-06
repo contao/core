@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> :: TYPOlight Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/popup.css" media="screen" />
@@ -49,12 +49,12 @@
 </table>
 
 <div id="download">
-<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" alt="" class="mime_icon" /> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
+<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" widht="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
 </div>
 <?php if ($this->isImage): ?>
 
 <div id="preview">
-<img src="<?php echo $this->src; ?>" alt="" class="mime_icon" />
+<img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="" />
 </div>
 <?php endif; ?>
 

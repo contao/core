@@ -44,35 +44,50 @@ class PageForward extends Frontend
 	 */
 	public function generate(Database_Result $objPage)
 	{
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									  ->limit(1)
-									  ->execute($objPage->jumpTo);
-
-		if ($objNextPage->numRows)
+		// Forward to first active page
+		if (!$objPage->jumpTo)
 		{
-			$strGet = '';
+			$time = time();
 
-			// Add $_GET parameters
-			if (is_array($_GET) && count($_GET) > 0)
-			{
-				foreach (array_keys($_GET) as $key)
-				{
-					if ($GLOBALS['TL_CONFIG']['disableAlias'] && $key == 'id')
-					{
-						continue;
-					}
-
-					$strGet .= '/' . $key . '/' . $this->Input->get($key);
-				}
-			}
-
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
+			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+										  ->limit(1)
+										  ->execute($objPage->id);
 		}
 
-		$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
+		// Forward to jumpTo page
+		else
+		{
+			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute($objPage->jumpTo);
+		}
 
-		header('HTTP/1.1 404 Not Found');
-		die('Forward page not found');
+		// Forward page does not exist
+		if ($objNextPage->numRows < 1)
+		{
+			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
+
+			header('HTTP/1.1 404 Not Found');
+			die('Forward page not found');
+		}
+
+		$strGet = '';
+
+		// Add $_GET parameters
+		if (is_array($_GET) && count($_GET) > 0)
+		{
+			foreach (array_keys($_GET) as $key)
+			{
+				if ($GLOBALS['TL_CONFIG']['disableAlias'] && $key == 'id')
+				{
+					continue;
+				}
+
+				$strGet .= '/' . $key . '/' . $this->Input->get($key);
+			}
+		}
+
+		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

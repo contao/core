@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Here you can
 $GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Allowed page types', 'Here you can select the page types you want to allow.');
 $GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Here you can grant access to one or more folders (subfolders will be included automatically).');
 $GLOBALS['TL_LANG']['tl_user']['forms']      = array('Allowed forms', 'Here you can grant access to one or more forms.');
+$GLOBALS['TL_LANG']['tl_user']['formp']      = array('Form permissions', 'Here you can define the form permissions.');
 $GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deactivate', 'Temporarily disable the account.');
 $GLOBALS['TL_LANG']['tl_user']['start']      = array('Activate on', 'Automatically activate the account on this day.');
 $GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deactivate on', 'Automatically deactivate the account on this day.');
@@ -90,6 +91,7 @@ $GLOBALS['TL_LANG']['tl_user']['show']   = array('User details', 'Show the detai
 $GLOBALS['TL_LANG']['tl_user']['edit']   = array('Edit user', 'Edit user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['copy']   = array('Duplicate user', 'Duplicate user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['delete'] = array('Delete user', 'Delete user ID %s');
+$GLOBALS['TL_LANG']['tl_user']['toggle'] = array('Activate/deactivate user', 'Activate/deactivate user ID %s');
 $GLOBALS['TL_LANG']['tl_user']['su']     = array('Switch user', 'Switch to user ID %s');
 
 ?>

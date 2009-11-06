@@ -93,6 +93,13 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="Backend.getScrollOffset(); if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_user_group']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_user_group', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_user_group']['show'],
@@ -105,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms;{alexf_legend},alexf;{account_legend},disable,start,stop',
+		'default'                     => '{title_legend},name;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{alexf_legend},alexf;{account_legend},disable,start,stop',
 	),
 
 	// Fields
@@ -170,6 +177,15 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'foreignKey'              => 'tl_form.title',
 			'eval'                    => array('multiple'=>true)
 		),
+		'formp' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['formp'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options'                 => array('create', 'delete'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('multiple'=>true)
+		),
 		'alexf' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['alexf'],
@@ -213,6 +229,15 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
  */
 class tl_user_group extends Backend
 {
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
 
 	/**
 	 * Add an image to each record
@@ -304,6 +329,61 @@ class tl_user_group extends Backend
 
 		ksort($arrReturn);
 		return $arrReturn;
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['disable'];
+
+		if ($row['disable'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
+		{
+			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_user_group SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

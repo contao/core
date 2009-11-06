@@ -28,6 +28,12 @@
 
 
 /**
+ * Load class tl_page
+ */
+$this->loadDataContainer('tl_page');
+
+
+/**
  * Table tl_article
  */
 $GLOBALS['TL_DCA']['tl_article'] = array
@@ -43,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_article', 'checkPermission')
+			array('tl_article', 'checkPermission'),
+			array('tl_page', 'addBreadcrumb')
 		)
 	),
 
@@ -60,22 +67,22 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		(
 			'fields'                  => array('title', 'inColumn'),
 			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>',
-			'label_callback'          => array('tl_article', 'addImage')
+			'label_callback'          => array('tl_article', 'addIcon')
 		),
 		'global_operations' => array
 		(
+			'toggleNodes' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
+				'href'                => '&amp;ptg=all',
+				'class'               => 'header_toggle'
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			),
-			'toggleNodes' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
-				'href'                => '&amp;ptg=all',
-				'class'               => 'header_toggle'
 			)
 		),
 		'operations' => array
@@ -110,6 +117,13 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
 				'button_callback'     => array('tl_article', 'deleteArticle')
+			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_article']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_article', 'toggleIcon')
 			),
 			'show' => array
 			(
@@ -262,7 +276,6 @@ class tl_article extends Backend
 			return;
 		}
 
-		$edit_all = array();
 		$groups = $this->User->groups;
 		$session = $this->Session->getData();
 
@@ -274,27 +287,65 @@ class tl_article extends Backend
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
 		$GLOBALS['TL_DCA']['tl_article']['fields']['author']['default'] = $this->User->id;
 
-		// Set allowed page IDs (edit all)
+		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))
 		{
+			$edit_all = array();
+			$delete_all = array();
+
 			foreach ($session['CURRENT']['IDS'] as $id)
 			{
 				$objArticle = $this->Database->prepare("SELECT p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 											 ->limit(1)
 											 ->execute($id);
 
-				if ($objArticle->numRows)
+				if ($objArticle->numRows < 1)
 				{
-					if ($this->User->isAllowed(4, $objArticle->fetchAssoc()))
-					{
-						$edit_all[] = $id;
-					}
+					continue;
+				}
+
+				$row = $objArticle->fetchAssoc();
+
+				if ($this->User->isAllowed(4, $row))
+				{
+					$edit_all[] = $id;
+				}
+
+				if ($this->User->isAllowed(6, $row))
+				{
+					$delete_all[] = $id;
 				}
 			}
+
+			$session['CURRENT']['IDS'] = ($this->Input->get('act') == 'deleteAll') ? $delete_all : $edit_all;
+		}
+
+		// Set allowed clipboard IDs
+		if (isset($session['CLIPBOARD']['tl_article']) && is_array($session['CLIPBOARD']['tl_article']['id']))
+		{
+			$clipboard = array();
+
+			foreach ($session['CLIPBOARD']['tl_article']['id'] as $id)
+			{
+				$objArticle = $this->Database->prepare("SELECT p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+											 ->limit(1)
+											 ->execute($id);
+
+				if ($objArticle->numRows < 1)
+				{
+					continue;
+				}
+
+				if ($this->User->isAllowed(5, $objArticle->fetchAssoc()))
+				{
+					$clipboard[] = $id;
+				}
+			}
+
+			$session['CLIPBOARD']['tl_article']['id'] = $clipboard;
 		}
 
 		// Overwrite session
-		$session['CURRENT']['IDS'] = $edit_all;
 		$this->Session->setData($session);
 
 		// Check current action
@@ -313,6 +364,7 @@ class tl_article extends Backend
 			switch ($this->Input->get('act'))
 			{
 				case 'edit':
+				case 'toggle':
 					$permission = 4;
 					break;
 
@@ -324,7 +376,9 @@ class tl_article extends Backend
 				// Do not insert articles into a website root page
 				case 'new':
 				case 'copy':
+				case 'copyAll':
 				case 'cut':
+				case 'cutAll':
 					$permission = 5;
 
 					// Insert into a page
@@ -391,7 +445,7 @@ class tl_article extends Backend
 					{
 						if (!$this->User->isAllowed($permission, $objPage->fetchAssoc()))
 						{
-							$this->log('Not enough permissions to edit article ID '. $this->Input->get('id') .' on page ID ' . $id . ' or to insert it on page ID ' . $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to ' . $this->Input->get('act') . ' ' . (strlen($this->Input->get('id')) ? 'article ID '. $this->Input->get('id') : ' multiple articles') . ' on page ID ' . $id . ' or to insert it on page ID ' . $id, 'tl_article checkPermission()', TL_ERROR);
 							$error = true;
 						}
 					}
@@ -413,7 +467,7 @@ class tl_article extends Backend
 	 * @param string
 	 * @return string
 	 */
-	public function addImage($row, $label)
+	public function addIcon($row, $label)
 	{
 		$published = (!strlen($row['published']) || $row['start'] && $row['start'] > time() || $row['stop'] && $row['stop'] < time()) ? false : true;
 		return $this->generateImage('articles'.($published ? '' : '_').'.gif').' '.$label;
@@ -452,7 +506,7 @@ class tl_article extends Backend
 				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 			}
 
-			$varValue .= '.' . $dc->id;
+			$varValue .= '-' . $dc->id;
 		}
 
 		return $varValue;
@@ -541,14 +595,14 @@ class tl_article extends Backend
 
 		if ($table == $GLOBALS['TL_DCA'][$dc->table]['config']['ptable'])
 		{
-			return ($row['type'] == 'root' || (!$this->User->isAdmin && !$this->User->isAllowed(5, $row)) || $cr) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+			return ($row['type'] == 'root' || (!$this->User->isAdmin && !$this->User->isAllowed(5, $row)) || $cr) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
 		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->fetchAssoc())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->fetchAssoc())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
 	}
 
 
@@ -569,6 +623,75 @@ class tl_article extends Backend
 								  ->execute($row['pid']);
 
 		return ($this->User->isAdmin || $this->User->isAllowed(6, $objPage->fetchAssoc())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
+		{
+			return '';
+		}
+
+		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($row['pid']);
+
+		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->fetchAssoc()))
+		{
+			return $this->generateImage('invisible.gif') . ' ';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Check permissions to publish
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_article SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

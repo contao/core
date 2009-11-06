@@ -87,152 +87,141 @@ class ModuleUpcomingEvents extends Events
 	 */
 	protected function compile()
 	{
-		$this->Date = new Date(date('Ymd'), 'Ymd');
-
-		$strEvents = '';
-		$strBegin = $this->Date->dayBegin;
-		$strEnd = ($this->Date->dayEnd + 31536000);
+		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
+		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format, $this->cal_startDay);
 
 		// Get all events
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $strBegin, $strEnd);
 		ksort($arrAllEvents);
 
-		$dayMax = 0;
+		$arrEvents = array();
 		$dateBegin = date('Ymd', $strBegin);
 		$dateEnd = date('Ymd', $strEnd);
 
-		// Unset events outside the scope
-		foreach ($arrAllEvents as $k=>$v)
+		// Remove events outside the scope
+		foreach ($arrAllEvents as $key=>$days)
 		{
-			if ($k < $dateBegin || $k > $dateEnd)
+			if ($key < $dateBegin || $key > $dateEnd)
 			{
-				unset($arrAllEvents[$k]);
 				continue;
 			}
 
-			$dayMax += count($v);
-		}
-
-		$count = 0;
-		$dayCount = 0;
-
-		// Render events
-		foreach ($arrAllEvents as $days)
-		{
 			foreach ($days as $day=>$events)
 			{
-				++$dayCount;
-				$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
-
 				foreach ($events as $event)
 				{
-					++$count;
+					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
+					$event['firstDate'] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $day);
 
-					if ($this->cal_limit && $count == $this->cal_limit)
-					{
-						$dayMax = $dayCount;
-					}
-
-					if ($this->cal_limit && $count > $this->cal_limit)
-					{
-						break(3);
-					}
-
-					$objTemplate = new FrontendTemplate($this->cal_template);
-
-					// Store raw data
-					$objTemplate->setData($event);
-
-					$objTemplate->day = $strDay;
-					$objTemplate->link = $event['href'];
-					$objTemplate->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $day);
-					$objTemplate->class = $event['class'] . ((($count % 2) == 0) ? ' odd' : ' even') . (($count == 1) ? ' first' : '') . (($dayCount >= $dayMax) ? ' last' : '') . ' cal_' . $event['parent'];
-					$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
-
-					// Short view
-					if ($this->cal_noSpan)
-					{
-						$objTemplate->day = $event['day'];
-						$objTemplate->date = $event['date'];
-					}
-
-					$objTemplate->addImage = false;
-
-					// Add image
-					if ($event['addImage'] && is_file(TL_ROOT . '/' . $event['singleSRC']))
-					{
-						$size = deserialize($event['size']);
-						$src = $this->getImage($this->urlEncode($event['singleSRC']), $size[0], $size[1]);
-
-						if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-						{
-							$objTemplate->imgSize = ' ' . $imgSize[3];
-						}
-
-						$objTemplate->src = $src;
-						$objTemplate->href = $event['singleSRC'];
-						$objTemplate->alt = htmlspecialchars($event['alt']);
-						$objTemplate->fullsize = $event['fullsize'] ? true : false;
-						$objTemplate->margin = $this->generateMargin(deserialize($event['imagemargin']), 'padding');
-						$objTemplate->float = in_array($event['floating'], array('left', 'right')) ? sprintf(' float:%s;', $event['floating']) : '';
-						$objTemplate->caption = $event['caption'];
-						$objTemplate->addImage = true;
-					}
-
-					$arrEnclosures = array();
-
-					// Add enclosure
-					if ($event['addEnclosure'])
-					{
-						$arrEnclosure = deserialize($event['enclosure'], true);
-						$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
-
-						if (is_array($arrEnclosure))
-						{
-							// Send file to the browser
-							if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
-							{
-								$this->sendFileToBrowser($this->Input->get('file', true));
-							}
-
-							// Add download links
-							for ($i=0; $i<count($arrEnclosure); $i++)
-							{
-								if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-								{				
-									$objFile = new File($arrEnclosure[$i]);
-
-									if (in_array($objFile->extension, $allowedDownload))
-									{
-										$size = ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)';
-										$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-
-										if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-										{
-											$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
-										}
-
-										$arrEnclosures[$i]['icon'] = $src;
-										$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]) . $size;
-										$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-										$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
-										$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-									}
-								}
-							}
-						}
-					}
-
-					$objTemplate->enclosure = $arrEnclosures;
-					$strEvents .= $objTemplate->parse();
+					$arrEvents[] = $event;
 				}
 			}
+		}
+
+		unset($arrAllEvents);
+		$total = count($arrEvents);
+		$limit = $total;
+		$offset = 0;
+
+		// Overall limit
+		if ($this->cal_limit > 0)
+		{
+			$total = min($this->cal_limit, $total);
+			$limit = $total;
+		}
+
+		// Pagination
+		if ($this->perPage > 0)
+		{
+			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+			$offset = ($page - 1) * $this->perPage;
+			$limit = min($this->perPage + $offset, $total);
+
+			$objPagination = new Pagination($total, $this->perPage);
+			$this->Template->pagination = $objPagination->generate("\n  ");
+		}
+
+		$strMonth = '';
+		$strEvents = '';
+		$eventCount = 0;
+		$imgSize = false;
+
+		// Override the default image size
+		if ($this->imgSize != '')
+		{
+			$size = deserialize($this->imgSize);
+
+			if ($size[0] > 0 || $size[1] > 0)
+			{
+				$imgSize = $this->imgSize;
+			}
+		}
+
+		// Parse events
+		for ($i=$offset; $i<$limit; $i++)
+		{
+			$event = $arrEvents[$i];
+			$objTemplate = new FrontendTemplate($this->cal_template);
+
+			// Store raw data
+			$objTemplate->setData($event);
+
+			// Month header
+			if ($strMonth != $event['month'])
+			{
+				$objTemplate->newMonth = true;
+				$strMonth = $event['month'];
+			}
+
+			// Add template variables
+			$objTemplate->link = $event['href'];
+			$objTemplate->class = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($eventCount+1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];
+			$objTemplate->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $event['title']));
+			$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
+
+			// Short view
+			if ($this->cal_noSpan)
+			{
+				$objTemplate->day = $event['day'];
+				$objTemplate->date = $event['date'];
+				$objTemplate->span = (!strlen($event['time']) && !strlen($event['day'])) ? $event['date'] : '';
+			}
+			else
+			{
+				$objTemplate->day = $event['firstDay'];
+				$objTemplate->date = $event['firstDate'];
+				$objTemplate->span = '';
+			}
+
+			$objTemplate->addImage = false;
+
+			// Add image
+			if ($event['addImage'] && is_file(TL_ROOT . '/' . $event['singleSRC']))
+			{
+				if ($imgSize)
+				{
+					$event['size'] = $imgSize;
+				}
+
+				$this->addImageToTemplate($objTemplate, $event);
+			}
+
+			$objTemplate->enclosure = array();
+
+			// Add enclosure
+			if ($event['addEnclosure'])
+			{
+				$this->addEnclosuresToTemplate($objTemplate, $event);
+			}
+
+			$strEvents .= $objTemplate->parse();
+			++$eventCount;
 		}
 
 		// No events found
 		if (!strlen($strEvents))
 		{
-			$strEvents = "\n" . '<div class="empty">' . $GLOBALS['TL_LANG']['MSC']['cal_empty'] . '</div>' . "\n";
+			$strEvents = "\n" . '<div class="empty">' . $strEmpty . '</div>' . "\n";
 		}
 
 		$this->Template->events = $strEvents;

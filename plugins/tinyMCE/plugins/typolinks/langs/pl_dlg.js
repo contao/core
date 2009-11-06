@@ -10,14 +10,13 @@ link_titlefield:"Title",
 link_is_email:"Wprowadzony URL wygląda na adres email, czy chcesz dostawić wymagany prefix mailto: ?",
 link_is_external:"Wprowadzony URL wygląda na zewnętrzny link, czy chcesz dostawić wymagany prefix http:// ?",
 link_list:"Lista linków",
-image_title:"Insert/edit a lightbox image",
+image_title:"Insert/edit a thumbnail image",
 image_list:"Image list",
 image_src:"Image URL",
 image_dimensions:"Width/height",
 image_alt:"Description",
 image_class:"CSS class",
-image_rel:"Type",
-image_rel_single:"Single image",
-image_rel_multi:"Image gallery",
-image_rel_empty:"Thumbnail only"
+image_rel:"Lightbox",
+image_rel_single:"Single element",
+image_rel_multi:"Gallery"
 });

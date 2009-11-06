@@ -145,16 +145,23 @@ unset($languages);
 
 
 /**
- * Check referer address if there are $_POST variables
+ * Include the custom initialization file
  */
-if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
+@include(TL_ROOT . '/system/config/initconfig.php');
+
+
+/**
+ * Check referer address if there are $_POST variables (allow
+ * file uploads via FancyUpload if there is a valid key)
+ */
+if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !(strlen($objInput->post('FANCY_KEY')) && $objInput->post('FANCY_KEY') == $_SESSION['FANCY_KEY']))
 {
 	$self = parse_url($objEnvironment->url);
 	$referer = parse_url($objEnvironment->httpReferer);
 
 	if (!strlen($referer['host']) || $referer['host'] != $self['host'])
 	{
-		header('HTTP/1.1 412 Precondition Failed');
+		header('HTTP/1.1 400 Bad Request');
 
 		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl'))
 		{

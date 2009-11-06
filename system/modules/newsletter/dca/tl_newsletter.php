@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sent', 'date DESC', 'tstamp DESC'),
-			'headerFields'            => array('title', 'jumpTo', 'tstamp'),
+			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'useSMTP'),
 			'panelLayout'             => 'filter;search,limit',
 			'child_record_callback'   => array('tl_newsletter', 'listNewsletters')
 		),
@@ -319,6 +319,9 @@ class tl_newsletter extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_news checkPermission', 5);
@@ -454,7 +457,7 @@ class tl_newsletter extends Backend
 		// Add ID to alias
 		if ($objAlias->numRows && $autoAlias)
 		{
-			$varValue .= '.' . $dc->id;
+			$varValue .= '-' . $dc->id;
 		}
 
 		return $varValue;

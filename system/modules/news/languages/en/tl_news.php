@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_news']['edit']       = array('Edit article', 'Edit news 
 $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Copy article', 'Copy news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Move article', 'Move news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete news article ID %s');
+$GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit news archive', 'Edit the header of the news archive');
 
 ?>

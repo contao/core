@@ -56,7 +56,7 @@ class PageError404 extends Frontend
 
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
-			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '"', 'PageError404 generate()', TL_ERROR);
+			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '" (' . $this->Environment->base . $this->Environment->request . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
 		// Look for an 404 page within the website root
@@ -67,9 +67,9 @@ class PageError404 extends Frontend
 		// Look for a global 404 page
 		if ($obj404->numRows < 1)
 		{
-			$obj404 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$obj404 = $this->Database->prepare("SELECT * FROM tl_page WHERE type='error_404' AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 									 ->limit(1)
-									 ->execute('error_404', $time, $time);
+									 ->execute();
 		}
 
 		// Die if there is no page at all

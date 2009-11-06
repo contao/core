@@ -82,6 +82,21 @@ abstract class User extends Model
 
 
 	/**
+	 * Initialize the object
+	 */
+	protected function __construct()
+	{
+		parent::__construct();
+
+		// FancyUploader sends the authentication cookie via POST
+		if ($this->Input->cookie($this->strCookie) == '' && strlen($this->Input->post('FANCY_KEY')) && $this->Input->post('FANCY_KEY') == $_SESSION['FANCY_KEY'])
+		{
+			$this->Input->setCookie($this->strCookie, $this->Input->post($this->strCookie));
+		}
+	}
+
+
+	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
 	final private function __clone() {}
@@ -130,8 +145,8 @@ abstract class User extends Model
 		$this->setUserFromDb();
 
 		// Update session
-		$this->Database->prepare("UPDATE tl_session SET tstamp=? WHERE sessionID=?")
-					   ->execute($time, session_id());
+		$this->Database->prepare("UPDATE tl_session SET tstamp=$time WHERE sessionID=?")
+					   ->execute(session_id());
 
 		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
 		return true;
@@ -322,8 +337,9 @@ abstract class User extends Model
 		}
 
 		// Save user
-		$this->tstamp = $time;
 		$this->loginCount = 3;
+		$this->lastLogin = $this->currentLogin;
+		$this->currentLogin = $time;
 		$this->save();
 
 		// Generate hash
@@ -335,10 +351,10 @@ abstract class User extends Model
 
 		// Save session in the database
 		$this->Database->prepare("INSERT INTO tl_session (pid, tstamp, name, sessionID, ip, hash) VALUES (?, ?, ?, ?, ?, ?)")
-					   ->execute($this->intId, $this->tstamp, $this->strCookie, session_id(), $this->strIp, $this->strHash);
+					   ->execute($this->intId, $time, $this->strCookie, session_id(), $this->strIp, $this->strHash);
 
 		// Set authentication cookie
-		$this->setCookie($this->strCookie, $this->strHash, ($this->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
+		$this->setCookie($this->strCookie, $this->strHash, ($time + $GLOBALS['TL_CONFIG']['sessionTimeout']), $GLOBALS['TL_CONFIG']['websitePath']);
 
 		// Add login status for cache
 		$_SESSION['TL_USER_LOGGED_IN'] = true;

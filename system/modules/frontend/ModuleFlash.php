@@ -46,16 +46,11 @@ class ModuleFlash extends Module
 
 
 	/**
-	 * Make sure the SWFobject plugin is available
+	 * Extend the parent method
 	 * @return string
 	 */
 	public function generate()
 	{
-		if (!file_exists(TL_ROOT . '/plugins/swfobject/swfobject.js'))
-		{
-			throw new Exception('Plugin "swfobject" required');
-		}
-
 		if ($this->source != 'external' && (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC)))
 		{
 			return '';
@@ -93,20 +88,19 @@ class ModuleFlash extends Module
 		$this->Template->width = $size[0];
 		$this->Template->height = $size[1];
 
-		// Adjust movie size in the back end
-		if (TL_MODE == 'BE' && $size[0] > 640)
+		$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+
+		// Adjust movie size
+		if ($intMaxWidth > 0 && $size[0] > $intMaxWidth)
 		{
-			$this->Template->width = 640;
-			$this->Template->height = floor(640 * $size[1] / $size[0]);
+			$this->Template->width = $intMaxWidth;
+			$this->Template->height = floor($intMaxWidth * $size[1] / $size[0]);
 		}
 
 		if (strlen($this->flashvars))
 		{
 			$this->Template->flashvars .= '&' . $this->String->decodeEntities($this->flashvars);
 		}
-
-		// Add JavaScript
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/swfobject/swfobject.js';
 	}
 }
 

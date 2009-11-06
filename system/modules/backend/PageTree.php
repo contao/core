@@ -45,6 +45,12 @@ class PageTree extends Widget
 	protected $blnSubmitInput = true;
 
 	/**
+	 * Path nodes
+	 * @var array
+	 */
+	protected $arrNodes = array();
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -106,7 +112,9 @@ class PageTree extends Widget
 	public function generate()
 	{
 		$this->import('BackendUser', 'User');
+
 		$tree = '';
+		$this->getPathNodes();
 
 		// Show all pages to admins
 		if ($this->User->isAdmin)
@@ -145,7 +153,7 @@ class PageTree extends Widget
 
 		// Return the tree
 		return '  <ul class="tl_listing'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage((strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'pagemounts.gif')).' '.(strlen($GLOBALS['TL_CONFIG']['websiteTitle']) ? $GLOBALS['TL_CONFIG']['websiteTitle'] : 'TYPOlight webCMS').'</div> <div class="tl_right"><label for="ctrl_'.$this->strId.'" class="tl_change_selected">'.$GLOBALS['TL_LANG']['MSC']['changeSelected'].'</label> <input type="checkbox" name="'.$this->strName.'_save" id="ctrl_'.$this->strId.'" class="tl_tree_checkbox" value="1" onclick="Backend.showTreeBody(this, \''.$this->strId.'_parent\');" /></div><div style="clear:both;"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage((strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'pagemounts.gif')).' '.(strlen($GLOBALS['TL_CONFIG']['websiteTitle']) ? $GLOBALS['TL_CONFIG']['websiteTitle'] : 'TYPOlight Open Source CMS').'</div> <div class="tl_right"><label for="ctrl_'.$this->strId.'" class="tl_change_selected">'.$GLOBALS['TL_LANG']['MSC']['changeSelected'].'</label> <input type="checkbox" name="'.$this->strName.'_save" id="ctrl_'.$this->strId.'" class="tl_tree_checkbox" value="1" onclick="Backend.showTreeBody(this, \''.$this->strId.'_parent\');" /></div><div style="clear:both;"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
@@ -193,6 +201,8 @@ class PageTree extends Widget
 				}
 				break;
 		}
+
+		$this->getPathNodes();
 
 		// Load requested nodes
 		$tree = '';
@@ -263,11 +273,12 @@ class PageTree extends Widget
 		$folderAttribute = 'style="margin-left:20px;"';
 		$session[$node][$id] = is_numeric($session[$node][$id]) ? $session[$node][$id] : 0;
 		$level = ($intMargin / $intSpacing + 1);
+		$blnIsOpen = ($session[$node][$id] == 1 || in_array($id, $this->arrNodes));
 
 		if (count($childs))
 		{
 			$folderAttribute = '';
-			$img = ($session[$node][$id] == 1) ? 'folMinus.gif' : 'folPlus.gif';
+			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" onclick="Backend.getScrollOffset(); return AjaxRequest.togglePagetree(this, \''.$xtnode.'_'.$id.'\', \''.$this->strField.'\', \''.$this->strName.'\', '.$level.');">'.$this->generateImage($img, '', 'style="margin-right:2px;"').'</a>';
 		}
 
@@ -317,7 +328,7 @@ class PageTree extends Widget
 		$return .= '</div><div style="clear:both;"></div></li>';
 
 		// Begin new submenu
-		if (count($childs) && $session[$node][$id] == 1)
+		if (count($childs) && $blnIsOpen)
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 
@@ -330,6 +341,53 @@ class PageTree extends Widget
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Get the IDs of all parent pages of the selected pages
+	 */
+	protected function getPathNodes()
+	{
+		if (!$this->varValue)
+		{
+			return;
+		}
+
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
+		}
+
+		foreach ($this->varValue as $id)
+		{
+			do
+			{
+				$objPage = $this->Database->prepare("SELECT pid FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute($id);
+
+				if ($objPage->numRows < 1)
+				{
+					break;
+				}
+
+				// Path has been calculated already
+				if (in_array($objPage->pid, $this->arrNodes))
+				{
+					break;
+				}
+
+				// Add pid to the nodes array
+				if ($objPage->pid > 0)
+				{
+					$this->arrNodes[] = $objPage->pid;
+				}
+
+				$id = $objPage->pid;
+			}
+			while ($objPage->pid > 0);
+		}
 	}
 }
 

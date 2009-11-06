@@ -17,9 +17,11 @@
 <input type="hidden" name="channels[]" value="<?php echo $id; ?>" />
 <?php endforeach; ?>
 <?php endif; ?>
-<input type="text" name="email" class="text" value="<?php echo $this->email; ?>" />
+<label for="ctrl_email" class="invisible"><?php echo $this->emailLabel; ?></label>
+<input type="text" name="email" id="ctrl_email" class="text" value="<?php echo $this->email; ?>" />
 <?php if ($this->showChannels): ?>
-<div class="checkbox_container">
+<label for="ctrl_channels" class="invisible"><?php echo $this->channelsLabel; ?></label>
+<div id="ctrl_channels" class="checkbox_container">
 <?php foreach ($this->channels as $id=>$title): ?>
 <span><input type="checkbox" name="channels[]" id="opt_<?php echo $this->id; ?>_<?php echo $id; ?>" value="<?php echo $id; ?>" class="checkbox" /> <label for="opt_<?php echo $this->id; ?>_<?php echo $id; ?>"><?php echo $title; ?></label></span>
 <?php endforeach; ?>

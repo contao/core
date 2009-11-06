@@ -109,7 +109,7 @@ class ModuleCalendar extends Events
 	 */
 	protected function compile()
 	{
-		$this->Date = new Date(($this->Input->get('day') ? $this->Input->get('day') : date('Ymd')), 'Ymd');
+		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
@@ -182,7 +182,7 @@ class ModuleCalendar extends Events
 		$intDaysInMonth = date('t', $this->Date->monthBegin);
 		$intFirstDayOffset = date('w', $this->Date->monthBegin) - $this->cal_startDay;
 
-		while ($intFirstDayOffset < 0)
+		if ($intFirstDayOffset < 0)
 		{
 			$intFirstDayOffset += 7;
 		}

@@ -40,7 +40,7 @@ $GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
 	array('[ALT] + <strong>b</strong>', 'Go <span>b</span>ack'),
 	array('[ALT] + <strong>t</strong>', 'Back to <span>t</span>op'),
 	array('[ALT] + <strong>f</strong>', '<span>F</span>rontend preview'),
-	array('[ALT] + <strong>x</strong>', 'E<span>x</span>it (logout)')
+	array('[ALT] + <strong>q</strong>', '<span>Q</span>uit (logout)')
 );
 
 

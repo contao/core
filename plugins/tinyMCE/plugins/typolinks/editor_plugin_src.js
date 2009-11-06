@@ -32,7 +32,7 @@
 				ed.windowManager.open({
 					file : url + '/typolinks.php',
 					width : 360 + parseInt(ed.getLang('typolinks.delta_width', 0)),
-					height : 230 + parseInt(ed.getLang('typolinks.delta_height', 0)),
+					height : 256 + parseInt(ed.getLang('typolinks.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
@@ -81,7 +81,7 @@
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
 				infourl : 'http://www.typolight.org',
-				version : '3.2.2.3'
+				version : '3.2.7'
 			};
 		}
 	});

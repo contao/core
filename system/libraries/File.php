@@ -205,6 +205,14 @@ class File extends System
 					$this->arrCache['isGdImage'] = in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
 					break;
 
+				case 'handle':
+					if (!is_resource($this->resFile))
+					{
+						$this->resFile = $this->Files->fopen($this->strFile, 'rb');
+					}
+					return $this->resFile;
+					break;
+
 				default:
 					return null;
 					break;

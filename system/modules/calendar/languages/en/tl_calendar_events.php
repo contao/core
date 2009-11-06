@@ -90,6 +90,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['edit']       = array('Edit event', 'E
 $GLOBALS['TL_LANG']['tl_calendar_events']['copy']       = array('Copy event', 'Copy event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Move event', 'Move event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Delete event', 'Delete event ID %s');
+$GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Publish/unpublish event', 'Publish/unpublish event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Edit calendar', 'Edit the calendar settings');
 
 ?>

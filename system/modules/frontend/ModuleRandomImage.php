@@ -121,36 +121,35 @@ class ModuleRandomImage extends Module
 		}
 
 		$i = mt_rand(0, (count($images)-1));
-		$size = deserialize($this->imgSize);
 
 		$objImage = new File($images[$i]);
+		$arrMeta = $this->arrMeta[$objImage->basename];
 
-		// Adjust image size in the back end
-		if (TL_MODE == 'BE' && $size[0] > 640)
+		if ($arrMeta[0] == '')
 		{
-			$size[0] = 640;
-			$size[1] = floor(640 * $size[1] / $size[0]);
+			$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objImage->filename)));
 		}
 
-		$src = $this->getImage($this->urlEncode($images[$i]), $size[0], $size[1]);
+		$arrImage = array();
 
-		if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-		{
-			$this->Template->imgSize = ' ' . $imgSize[3];
-		}
-
-		$this->Template->src = $src;
-		$this->Template->href = $images[$i];
-		$this->Template->width = $objImage->width;
-		$this->Template->height = $objImage->height;
-		$this->Template->alt = (strlen($this->arrMeta[$objImage->basename][0]) ? $this->arrMeta[$objImage->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objImage->filename))));
-		$this->Template->link = (strlen($this->arrMeta[$objImage->basename][1]) ? $this->arrMeta[$objImage->basename][1] : '');
+		$arrImage['size'] = $this->imgSize;
+		$arrImage['singleSRC'] = $objImage->value;
+		$arrImage['alt'] = specialchars($arrMeta[0]);
+		$arrImage['imageUrl'] = $arrMeta[1];
+		$arrImage['fullsize'] = $this->fullsize;
 
 		// Image caption
 		if ($this->useCaption)
 		{
-			$this->Template->caption = (strlen($this->arrMeta[$objImage->basename][2]) ? $this->arrMeta[$objImage->basename][2] : specialchars($objImage->basename));
+			if ($arrMeta[2] == '')
+			{
+				$arrMeta[2] = $arrMeta[0];
+			}
+
+			$arrImage['caption'] = $arrMeta[2];
 		}
+
+		$this->addImageToTemplate($this->Template, $arrImage);
 	}
 }
 

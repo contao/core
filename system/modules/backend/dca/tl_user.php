@@ -37,7 +37,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'onload_callback' => array
+		(
+			array('tl_user', 'checkPermission')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_user', 'storeDateAdded')
+		)
 	),
 
 	// List
@@ -72,20 +80,30 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_user']['edit'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.gif',
+				'button_callback'     => array('tl_user', 'editUser')
 			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_user']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'icon'                => 'copy.gif',
+				'button_callback'     => array('tl_user', 'copyUser')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_user']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_user', 'deleteUser')
+			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_user']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_user', 'toggleIcon')
 			),
 			'show' => array
 			(
@@ -111,8 +129,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{account_legend},disable,start,stop',
 		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
 		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms;{account_legend},disable,start,stop',
-		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms;{account_legend},disable,start,stop'
+		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
+		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
 	),
 
 	// Fields
@@ -187,7 +205,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>8)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'])
 		),
 		'admin' => array
 		(
@@ -272,6 +290,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'foreignKey'              => 'tl_form.title',
 			'eval'                    => array('multiple'=>true)
 		),
+		'formp' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['formp'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options'                 => array('create', 'delete'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('multiple'=>true)
+		),
 		'disable' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['disable'],
@@ -301,6 +328,16 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'input_field_callback'    => array('tl_user', 'sessionField'),
 			'eval'                    => array('doNotShow'=>true)
+		),
+		'dateAdded' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
+			'eval'                    => array('rgxp'=>'datim')
+		),
+		'lastLogin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'eval'                    => array('rgxp'=>'datim')
 		)
 	)
 );
@@ -328,6 +365,60 @@ class tl_user extends Backend
 
 
 	/**
+	 * Check permissions to edit table tl_user
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Check current action
+		switch ($this->Input->get('act'))
+		{
+			case 'create':
+			case 'select':
+			case 'show':
+				// Allow
+				break;
+
+			case 'delete':
+				if ($this->Input->get('id') == $this->User->id)
+				{
+					$this->log('Attempt to delete own account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				// no break;
+
+			case 'edit':
+			case 'copy':
+			case 'toggle':
+			default:
+				$objUser = $this->Database->prepare("SELECT admin FROM tl_user WHERE id=?")
+										  ->limit(1)
+										  ->execute($this->Input->get('id'));
+
+				if ($objUser->admin && $this->Input->get('act') != '')
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' administrator account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', 5);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+				$session = $this->Session->getData();
+				$objUser = $this->Database->execute("SELECT id FROM tl_user WHERE admin=1");
+				$session['CURRENT']['IDS'] = array_diff($session['CURRENT']['IDS'], $objUser->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+		}
+	}
+
+
+	/**
 	 * Add an image to each record
 	 * @param array
 	 * @param string
@@ -343,6 +434,60 @@ class tl_user extends Backend
 		}
 
 		return sprintf('<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>', $this->getTheme(), $image, $label);
+	}
+
+
+	/**
+	 * Return the edit user button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editUser($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the copy page button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function copyUser($row, $href, $label, $title, $icon, $attributes, $table)
+	{
+		if ($GLOBALS['TL_DCA'][$table]['config']['closed'])
+		{
+			return '';
+		}
+
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete page button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteUser($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || !$row['admin']) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -457,6 +602,101 @@ class tl_user extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Store the date when the account has been added
+	 * @param object
+	 */
+	public function storeDateAdded(DataContainer $dc)
+	{
+		$objUser = $this->Database->prepare("SELECT id, dateAdded, lastLogin FROM tl_user WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->id);
+
+		if ($objUser->numRows < 1 || $objUser->dateAdded > 0)
+		{
+			return;
+		}
+
+		// Fallback solution for existing accounts
+		$time = ($objUser->lastLogin > 0) ? $objUser->lastLogin : time();
+
+		$this->Database->prepare("UPDATE tl_user SET dateAdded=? WHERE id=?")
+					   ->execute($time, $objUser->id);
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		{
+			return '';
+		}
+
+		// Protect admin accounts
+		if (!$this->User->isAdmin && $row['admin'])
+		{
+			return $this->generateImage('invisible.gif') . ' ';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['disable'];
+
+		if ($row['disable'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check admin accounts
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Protect own account
+		if ($this->User->id == $intId)
+		{
+			return;
+		}
+
+		// Check permissions
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
+		{
+			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_user SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

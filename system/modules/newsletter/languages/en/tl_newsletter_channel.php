@@ -30,15 +30,21 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['title']  = array('Title', 'Please enter the title of the channel.');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'] = array('Redirect page', 'Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp'] = array('Revision date', 'Date and time of the latest revision');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['title']    = array('Title', 'Please enter the title of the channel.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo']   = array('Redirect page', 'Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['useSMTP']  = array('Custom SMTP server', 'Use a custom SMTP server for sending newsletters.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'] = array('SMTP hostname', 'Please enter the host name of the SMTP server.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'] = array('SMTP port number', 'Please enter the port number of the SMTP server.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'] = array('SMTP username', 'Here you can enter the SMTP username.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'] = array('SMTP password', 'Here you can enter the SMTP password.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp']   = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['title_legend'] = 'Title and redirect';
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtp_legend']  = 'SMTP configuration';
 
 
 /**

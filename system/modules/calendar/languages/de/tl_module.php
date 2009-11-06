@@ -53,5 +53,7 @@ $GLOBALS['TL_LANG']['tl_module']['next_30']   = '+ 1 Monat';
 $GLOBALS['TL_LANG']['tl_module']['next_90']   = '+ 3 Monate';
 $GLOBALS['TL_LANG']['tl_module']['next_180']  = '+ 6 Monate';
 $GLOBALS['TL_LANG']['tl_module']['next_365']  = '+ 1 Jahr';
+$GLOBALS['TL_LANG']['tl_module']['next_two']  = '+ 2 Jahre';
+$GLOBALS['TL_LANG']['tl_module']['next_all']  = 'Alle';
 
 ?>

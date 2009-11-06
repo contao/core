@@ -117,14 +117,14 @@ class Calendar extends Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get upcoming events
-		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND (startTime>=? OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?))) AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY startTime");
+		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND (startTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
 
 		if ($arrArchive['maxItems'] > 0)
 		{
 			$objArticleStmt->limit($arrArchive['maxItems']);
 		}
 
-		$objArticle = $objArticleStmt->execute($arrArchive['id'], $time, $time, $time, $time);
+		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
 		// Get default URL
 		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -248,9 +248,9 @@ class Calendar extends Frontend
 				$arrProcessed[$objCalendar->jumpTo] = false;
 
 				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
 											->limit(1)
-											->execute($objCalendar->jumpTo, $time, $time);
+											->execute($objCalendar->jumpTo);
 
 				// Determin domain
 				if ($objParent->numRows)
@@ -276,8 +276,8 @@ class Calendar extends Frontend
 			$strUrl = $arrProcessed[$objCalendar->jumpTo];
 
 			// Get items
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND source=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY startTime DESC")
-										 ->execute($objCalendar->id, 'default', $time, $time);
+			$objArticle = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND source='default' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime DESC")
+										 ->execute($objCalendar->id);
 
 			// Add items to the indexer
 			while ($objArticle->next())

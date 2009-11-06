@@ -39,8 +39,8 @@ $GLOBALS['TL_LANG']['tl_news']['subheadline']  = array('Unterüberschrift', 'Hie
 $GLOBALS['TL_LANG']['tl_news']['teaser']       = array('Teasertext', 'Der Teasertext kann in einer Nachrichtenliste anstatt des Nachrichtentextes angezeigt werden. Ein "Weiterlesen …"-Link wird automatisch hinzugefügt.');
 $GLOBALS['TL_LANG']['tl_news']['text']         = array('Nachrichtentext', 'Hier können Sie den Nachrichtentext eingeben.');
 $GLOBALS['TL_LANG']['tl_news']['addImage']     = array('Ein Bild hinzufügen', 'Dem Beitrag ein Bild hinzufügen.');
-$GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Enclosures hinzufügen', 'Dem Beitrag eine oder mehrere Dateien als Download hinzufügen.');
-$GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosures', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
+$GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Anlagen hinzufügen', 'Dem Beitrag eine oder mehrere Dateien als Download hinzufügen.');
+$GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Anlagen', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Weiterleitungsziel', 'Hier können Sie die Standard-Weiterleitung überschreiben und zu einer internen oder externen Seite weiterleiten.');
 $GLOBALS['TL_LANG']['tl_news']['default']      = array('Standardseite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf die Standardseite des Nachrichtenarchivs weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_news']['internal']     = array('Interne Seite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf eine interne Seite weitergeleitet.');
@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['tl_news']['date_legend']      = 'Datum und Uhrzeit';
 $GLOBALS['TL_LANG']['tl_news']['teaser_legend']    = 'Unterüberschrift und Teaser';
 $GLOBALS['TL_LANG']['tl_news']['text_legend']      = 'Nachrichtentext';
 $GLOBALS['TL_LANG']['tl_news']['image_legend']     = 'Artikelbild';
-$GLOBALS['TL_LANG']['tl_news']['enclosure_legend'] = 'Enclosures';
+$GLOBALS['TL_LANG']['tl_news']['enclosure_legend'] = 'Anlagen';
 $GLOBALS['TL_LANG']['tl_news']['source_legend']    = 'Weiterleitungsziel';
 $GLOBALS['TL_LANG']['tl_news']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_news']['publish_legend']   = 'Veröffentlichung';
@@ -77,6 +77,7 @@ $GLOBALS['TL_LANG']['tl_news']['edit']       = array('Beitrag bearbeiten', 'Beit
 $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Beitrag duplizieren', 'Beitrag ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Beitrag verschieben', 'Beitrag ID %s verschieben');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Beitrag löschen', 'Beitrag ID %s löschen');
+$GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Beitrag veröffentlichen/unveröffentlichen', 'Beitrag ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Nachrichtenarchiv bearbeiten', 'Die Nachrichtenarchiv-Einstellungen bearbeiten');
 
 ?>

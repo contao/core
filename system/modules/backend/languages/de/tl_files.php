@@ -43,12 +43,15 @@ $GLOBALS['TL_LANG']['tl_files']['uploadNback'] = 'Dateien hochladen und zurück'
 $GLOBALS['TL_LANG']['tl_files']['editFF']      = 'Eine Datei oder ein Verzeichnis bearbeiten';
 $GLOBALS['TL_LANG']['tl_files']['uploadFF']    = 'Dateien in den Ordner "%s" hochladen';
 $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Datei "%s" bearbeiten';
+$GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Dateien suchen';
+$GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Liste leeren';
+$GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Upload starten';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_files']['new']       = array('Neues Verzeichnis', 'Ein neues Verzeichnis anlegen');
+$GLOBALS['TL_LANG']['tl_files']['new']       = array('Neuer Ordner', 'Einen neuen Ordner anlegen');
 $GLOBALS['TL_LANG']['tl_files']['cut']       = array('Datei oder Verzeichnis verschieben', 'Datei oder Verzeichnis "%s" verschieben');
 $GLOBALS['TL_LANG']['tl_files']['copy']      = array('Datei oder Verzeichnis duplizieren', 'Datei oder Verzeichnis "%s" duplizieren');
 $GLOBALS['TL_LANG']['tl_files']['edit']      = array('Datei oder Verzeichnis umbenennen', 'Datei oder Verzeichnis "%s" umbenennen');

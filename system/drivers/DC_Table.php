@@ -154,8 +154,31 @@ class DC_Table extends DataContainer implements listable, editable
 			$session['CURRENT']['IDS'] = deserialize($this->Input->post('IDS'));
 			$this->Session->setData($session);
 
-			$next = isset($_POST['edit']) ? 'editAll' : (isset($_POST['delete']) ? 'deleteAll' : 'select');
-			$this->redirect(str_replace('act=select', 'act='.$next, $this->Environment->request));
+			if (isset($_POST['edit']))
+			{
+				$this->redirect(str_replace('act=select', 'act=editAll', $this->Environment->request));
+			}
+			elseif (isset($_POST['delete']))
+			{
+				$this->redirect(str_replace('act=select', 'act=deleteAll', $this->Environment->request));
+			}
+			elseif (isset($_POST['override']))
+			{
+				$this->redirect(str_replace('act=select', 'act=overrideAll', $this->Environment->request));
+			}
+			elseif (isset($_POST['cut']) || isset($_POST['copy']))
+			{
+				$arrClipboard = $this->Session->get('CLIPBOARD');
+
+				$arrClipboard[$strTable] = array
+				(
+					'id' => $ids,
+					'mode' => (isset($_POST['cut']) ? 'cutAll' : 'copyAll')
+				);
+
+				$this->Session->set('CLIPBOARD', $arrClipboard);
+				$this->redirect($this->getReferer());
+			}
 		}
 
 		$this->strTable = $strTable;
@@ -185,7 +208,7 @@ class DC_Table extends DataContainer implements listable, editable
 			 // Unless there are any root records specified, use all records with parent ID 0
 			if (!isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']) || $GLOBALS['TL_DCA'][$table]['list']['sorting']['root'] === false)
 			{
-				$objIds = $this->Database->prepare("SELECT id FROM " . $table ." WHERE pid=?" . ($this->Database->fieldExists('sorting', $strTable) ? ' ORDER BY sorting' : ''))
+				$objIds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $strTable) ? ' ORDER BY sorting' : ''))
 										 ->execute(0);
 
 				if ($objIds->numRows > 0)
@@ -588,8 +611,9 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Assign a new position to an existing record
+	 * @param boolean
 	 */
-	public function cut()
+	public function cut($blnDoNotRedirect=false)
 	{
 		$cr = array();
 
@@ -609,6 +633,11 @@ class DC_Table extends DataContainer implements listable, editable
 			$cr[] = $this->intId;
 		}
 
+		// Empty clipboard
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+		$arrClipboard[$this->strTable] = array();
+		$this->Session->set('CLIPBOARD', $arrClipboard);
+
 		// Update the record
 		if (in_array($this->set['pid'], $cr))
 		{
@@ -622,10 +651,36 @@ class DC_Table extends DataContainer implements listable, editable
 					   ->set($this->set)
 					   ->execute($this->intId);
 
-		// Empty clipboard
+		if (!$blnDoNotRedirect)
+		{
+			$this->redirect($this->getReferer());
+		}
+	}
+
+
+	/**
+	 * Move all selected records
+	 */
+	public function cutAll()
+	{
+		// PID is mandatory
+		if (!strlen($this->Input->get('pid')))
+		{
+			$this->redirect($this->getReferer());
+		}
+
 		$arrClipboard = $this->Session->get('CLIPBOARD');
-		$arrClipboard[$this->strTable] = array();
-		$this->Session->set('CLIPBOARD', $arrClipboard);
+
+		if (isset($arrClipboard[$this->strTable]) && is_array($arrClipboard[$this->strTable]['id']))
+		{
+			foreach ($arrClipboard[$this->strTable]['id'] as $id)
+			{
+				$this->intId = $id;
+				$this->cut(true);
+				$this->Input->setGet('pid', $id);
+				$this->Input->setGet('mode', 1);
+			}
+		}
 
 		$this->redirect($this->getReferer());
 	}
@@ -633,8 +688,10 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Duplicate a particular record of the current table
+	 * @param boolean
+	 * @return integer
 	 */
-	public function copy()
+	public function copy($blnDoNotRedirect=false)
 	{
 		if (!$this->intId)
 		{
@@ -675,7 +732,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Insert the record if the table is not closed and switch to edit mode
 		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'])
 		{
-			$this->set['tstamp'] = 0;
+			$this->set['tstamp'] = ($blnDoNotRedirect ? time() : 0);
 
 			$objInsertStmt = $this->Database->prepare("INSERT INTO " . $this->strTable . " %s")
 											->set($this->set)
@@ -686,20 +743,35 @@ class DC_Table extends DataContainer implements listable, editable
 				$insertID = $objInsertStmt->insertId;
 
 				// Save new record in the session
-				$new_records = $this->Session->get('new_records');
-				$new_records[$this->strTable][] = $insertID;
-				$this->Session->set('new_records', $new_records);
+				if (!$blnDoNotRedirect)
+				{
+					$new_records = $this->Session->get('new_records');
+					$new_records[$this->strTable][] = $insertID;
+					$this->Session->set('new_records', $new_records);
+				}
 
 				// Duplicate records of the child table
 				$this->copyChilds($this->strTable, $insertID, $this->intId, $insertID);
 
-				// Add a log entry and switch to edit mode
+				// Add a log entry
 				$this->log('A new entry in table "'.$this->strTable.'" has been created (ID: '.$insertID.')', 'DC_Table copy()', TL_GENERAL);
-				$this->redirect($this->switchToEdit($insertID));
+
+				// Switch to edit mode
+				if (!$blnDoNotRedirect)
+				{
+					$this->redirect($this->switchToEdit($insertID));
+				}
+
+				return $insertID;
 			}
 		}
 
-		$this->redirect($this->getReferer());
+		if (!$blnDoNotRedirect)
+		{
+			$this->redirect($this->getReferer());
+		}
+
+		return false;
 	}
 
 
@@ -784,6 +856,34 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Move all selected records
+	 */
+	public function copyAll()
+	{
+		// PID is mandatory
+		if (!strlen($this->Input->get('pid')))
+		{
+			$this->redirect($this->getReferer());
+		}
+
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+
+		if (isset($arrClipboard[$this->strTable]) && is_array($arrClipboard[$this->strTable]['id']))
+		{
+			foreach ($arrClipboard[$this->strTable]['id'] as $id)
+			{
+				$this->intId = $id;
+				$id = $this->copy(true);
+				$this->Input->setGet('pid', $id);
+				$this->Input->setGet('mode', 1);
+			}
+		}
+
+		$this->redirect($this->getReferer());
 	}
 
 
@@ -1769,7 +1869,7 @@ window.addEvent(\'domready\', function()
 				foreach ($this->strPalette as $v)
 				{
 					// Check whether field is excluded
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['exclude'])
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['exclude'])
 					{
 						continue;
 					}
@@ -1857,6 +1957,266 @@ window.addEvent(\'domready\', function()
 								   ->execute(time(), $this->intId);
 				}
 			}
+
+			// Add the form
+			$return = '
+
+<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
+
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'" />'.($this->noReload ? '
+
+<p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return.'
+
+</div>
+
+<div class="tl_formbody_submit">
+
+<div class="tl_submit_container">
+<input type="submit" name="save" id="save" class="tl_submit" alt="save all changes" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'" />
+<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" alt="save all changes and return" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'" />
+</div>
+
+</div>
+</form>';
+
+			// Set the focus if there is an error
+			if ($this->noReload)
+			{
+				$return .= '
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.addEvent(\'domready\', function()
+{
+    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+});
+//--><!]]>
+</script>';
+			}
+
+			// Reload the page to prevent _POST variables from being sent twice
+			if ($this->Input->post('FORM_SUBMIT') == $this->strTable && !$this->noReload)
+			{
+				if ($this->Input->post('saveNclose'))
+				{
+					setcookie('BE_PAGE_OFFSET', 0, 0, '/');
+					$this->redirect($this->getReferer());
+				}
+
+				$this->reload();
+			}
+		}
+
+		// Else show a form to select the fields
+		else
+		{
+			$options = '';
+			$fields = array();
+
+			// Add fields of the current table
+			$fields = array_merge($fields, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields']));
+
+			// Add meta fields if the current user is an administrator
+			if ($this->User->isAdmin)
+			{
+				if ($this->Database->fieldExists('sorting', $this->strTable) && !in_array('sorting', $fields))
+				{
+					array_unshift($fields, 'sorting');
+				}
+
+				if ($this->Database->fieldExists('pid', $this->strTable) && !in_array('pid', $fields))
+				{
+					array_unshift($fields, 'pid');
+				}
+			}
+
+			// Show all non-excluded fields
+			foreach ($fields as $field)
+			{
+				if ($field == 'pid' || $field == 'sorting' || (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['exclude'] && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['doNotShow'] && (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType']) || is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['input_field_callback']))))
+				{
+					$options .= '
+<input type="checkbox" name="all_fields[]" id="all_'.$field.'" class="tl_checkbox" value="'.specialchars($field).'" /> <label for="all_'.$field.'" class="tl_checkbox_label">'.(strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0]) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] : $GLOBALS['TL_LANG']['MSC'][$field][0]).'</label><br />';
+				}
+			}
+
+			// Return select menu
+			$return .= (($_POST && !count($_POST['all_fields'])) ? '
+
+<p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').'
+
+<h2 class="sub_headline_all">'.sprintf($GLOBALS['TL_LANG']['MSC']['all_info'], $this->strTable).'</h2>
+
+<form action="'.ampersand($this->Environment->request, true).'&amp;fields=1" id="'.$this->strTable.'_all" class="tl_form" method="post">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="'.$this->strTable.'_all" />
+
+<div class="tl_tbox block">
+<h3><label for="fields">'.$GLOBALS['TL_LANG']['MSC']['all_fields'][0].'</label></h3>'.(($_POST && !count($_POST['all_fields'])) ? '
+<p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['all_fields'].'</p>' : '').'
+<div id="fields" class="tl_checkbox_container">
+<input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this)" /> <label for="check_all" style="color:#a6a6a6;"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br />'.$options.'
+</div>'.(($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['MSC']['all_fields'][1])) ? '
+<p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['all_fields'][1].'</p>' : '').'
+</div>
+
+</div>
+
+<div class="tl_formbody_submit">
+
+<div class="tl_submit_container">
+<input type="submit" name="save" id="save" class="tl_submit" alt="continue" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['continue']).'" />
+</div>
+
+</div>
+</form>';
+		}
+
+		// Return
+		return '
+<div id="tl_buttons">
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+</div>'.$return;
+	}
+
+
+	/**
+	 * Autogenerate a form to override all records that are currently shown
+	 * @author Based on a patch by Andreas Schempp
+	 * @return string
+	 */
+	public function overrideAll()
+	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
+		{
+			$this->log('Table ' . $this->strTable . ' is not editable', 'DC_Table overrideAll()', TL_ERROR);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		$return = '';
+		$this->import('BackendUser', 'User');
+
+		// Get current IDs from session
+		$session = $this->Session->getData();
+		$ids = $session['CURRENT']['IDS'];
+
+		// Save field selection in session
+		if ($this->Input->post('FORM_SUBMIT') == $this->strTable.'_all' && $this->Input->get('fields'))
+		{
+			$session['CURRENT'][$this->strTable] = deserialize($this->Input->post('all_fields'));
+			$this->Session->setData($session);
+		}
+
+		// Add fields
+		$fields = $session['CURRENT'][$this->strTable];
+
+		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
+		{
+			$class = 'tl_tbox block';
+			$formFields = array();
+
+			// Save record
+			if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+			{
+				foreach ($ids as $id)
+				{
+					$this->intId = $id;
+					$this->procedure = array('id=?');
+					$this->values = array($this->intId);
+					$this->blnCreateNewVersion = false;
+
+					// Create a new version if there is none
+					if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
+					{
+						$objVersion = $this->Database->prepare("SELECT id FROM tl_version WHERE fromTable=? AND pid=?")
+													 ->limit(1)
+													 ->execute($this->strTable, $this->intId);
+
+						if ($objVersion->numRows < 1)
+						{
+							$this->createNewVersion($this->strTable, $this->intId);
+						}
+					}
+
+					// Store all fields
+					foreach ($fields as $v)
+					{
+						// Check whether field is excluded
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['exclude'])
+						{
+							continue;
+						}
+
+						$this->strField = $v;
+						$this->strInputName = $v;
+						$this->varValue = '';
+
+						// Make sure the new value is applied
+						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['alwaysSave'] = true;
+
+						// Store value
+						$this->row();
+					}
+
+					// Post processing
+					if (!$this->noReload)
+					{
+						// Call onsubmit_callback
+						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
+						{
+							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this);
+							}
+						}
+
+						// Create a new version
+						if ($this->blnCreateNewVersion)
+						{
+							$this->createNewVersion($this->strTable, $this->intId);
+							$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
+						}
+
+						// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
+									   ->execute(time(), $this->intId);
+					}
+				}
+			}
+
+			// Begin current row
+			$return .= '
+<div class="'.$class.'">';
+
+			foreach ($fields as $v)
+			{
+				// Check whether field is excluded
+				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['exclude'])
+				{
+					continue;
+				}
+
+				$formFields[] = $v;
+
+				$this->intId = 0;
+				$this->procedure = array('id=?');
+				$this->values = array($this->intId);
+				$this->strField = $v;
+				$this->strInputName = $v;
+				$this->varValue = '';
+
+				// Disable auto-submit
+				$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['submitOnChange'] = false;
+				$return .= $this->row();
+			}
+
+			// Close box
+			$return .= '
+<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars(implode(',', $formFields)).'" />
+</div>';
 
 			// Add the form
 			$return = '
@@ -2073,7 +2433,7 @@ window.addEvent(\'domready\', function()
 
 			$objFields = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 										->limit(1)
-										->execute($this->intId);
+										->executeUncached($this->intId);
 
 			// Get selector values from DB
 			if ($objFields->numRows > 0)
@@ -2288,7 +2648,7 @@ window.addEvent(\'domready\', function()
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (is_array($arrClipboard) && is_array($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -2327,7 +2687,7 @@ window.addEvent(\'domready\', function()
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select" />' : '').'
 
-<div class="tl_listing_container" id="tl_listing">'.(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
@@ -2353,7 +2713,7 @@ window.addEvent(\'domready\', function()
 			else
 			{
 				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
-				$_buttons = '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid=0&amp;id='.$arrClipboard['id']).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+				$_buttons = '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid=0'.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
 			}
 		}
 
@@ -2371,7 +2731,10 @@ window.addEvent(\'domready\', function()
 <div class="tl_formbody_submit" style="text-align:right;">
 
 <div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />
+  <input type="submit" name="cut" id="cut" class="tl_submit" alt="move selected records" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'" />
+  <input type="submit" name="copy" id="copy" class="tl_submit" alt="copy selected records" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="override" id="override" class="tl_submit" alt="override selected records" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'" />
   <input type="submit" name="edit" id="edit" class="tl_submit" alt="edit selected records" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'" />' : '') . '
 </div>
 
@@ -2438,7 +2801,7 @@ window.addEvent(\'domready\', function()
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (is_array($arrClipboard) && is_array($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -2446,7 +2809,7 @@ window.addEvent(\'domready\', function()
 
 		for ($i=0; $i<count($arrIds); $i++)
 		{
-			$return .= '  ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (!$blnPtable && in_array($id, $this->getChildRecords($arrClipboard['id'], $table, true)))), $blnProtected));
+			$return .= '  ' . trim($this->generateTree($table, $arrIds[$i], array('p'=>$arrIds[($i-1)], 'n'=>$arrIds[($i+1)]), $hasSorting, $margin, ($blnClipboard ? $arrClipboard : false), ($id == $arrClipboard ['id'] || (is_array($arrClipboard ['id']) && in_array($id, $arrClipboard ['id'])) || (!$blnPtable && !is_array($arrClipboard['id']) && in_array($id, $this->getChildRecords($arrClipboard['id'], $table, true)))), $blnProtected));
 		}
 
 		return $return;
@@ -2617,15 +2980,15 @@ window.addEvent(\'domready\', function()
 				// Regular tree (on cut: disable buttons of the page all its childs to avoid circular references)
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5)
 				{
-					$_buttons .= ($arrClipboard['mode'] == 'cut' && ($blnCircularReference || $arrClipboard['id'] == $id) || (count($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && in_array($id, $this->root))) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
-					$_buttons .= ($arrClipboard['mode'] == 'paste' && ($blnCircularReference || $arrClipboard['id'] == $id)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$id.'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+					$_buttons .= ($arrClipboard['mode'] == 'cut' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id'])) || (count($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && in_array($id, $this->root))) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+					$_buttons .= ($arrClipboard['mode'] == 'paste' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id']))) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
 				}
 
 				// Extended tree
 				else
 				{
-					$_buttons .= ($this->strTable == $table) ? '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ' : '';
-					$_buttons .= ($this->strTable != $table) ? '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$id.'&amp;id='.$arrClipboard['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ' : '';
+					$_buttons .= ($this->strTable == $table) ? (($arrClipboard['mode'] == 'cut' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id']))) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ') : '';
+					$_buttons .= ($this->strTable != $table) ? '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1], $id)).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ' : '';
 				}
 			}
 		}
@@ -2687,13 +3050,19 @@ window.addEvent(\'domready\', function()
 		$blnClipboard = false;
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 		$table = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->ptable : $this->strTable;
-		$blnHasSorting = $this->Database->fieldExists('sorting', $table);
+		$blnHasSorting = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'][0] == 'sorting';
+		$blnMultiboard = false;
 
 		// Check clipboard
-		if (is_array($arrClipboard) && is_array($arrClipboard[$table]) && count($arrClipboard[$table]))
+		if (isset($arrClipboard[$table]) && count($arrClipboard[$table]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$table];
+
+			if (is_array($arrClipboard['id']))
+			{
+				$blnMultiboard = true;
+			}
 		}
 
 		// Load language file and data container array of the parent table
@@ -2738,7 +3107,7 @@ window.addEvent(\'domready\', function()
 			$return .= '
 <div style="text-align:right;">'.(($this->Input->get('act') == 'select') ? '
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />' : '
-<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (strlen($this->ptable) ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$arrClipboard['id']).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
+<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (strlen($this->ptable) ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
 </div>';
 
 			// Format header fields
@@ -2779,7 +3148,7 @@ window.addEvent(\'domready\', function()
 				}
 				elseif (strlen($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
 				{
-					$arrForeignKey = trimsplit('\.', $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']);
+					$arrForeignKey = trimsplit('.', $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']);
 
 					$objLabel = $this->Database->prepare("SELECT " . $arrForeignKey[1] . " FROM " . $arrForeignKey[0] . " WHERE id=?")
 											   ->limit(1)
@@ -2917,9 +3286,15 @@ window.addEvent(\'domready\', function()
 							}
 
 							// Prevent circular references
-							if ($blnClipboard && $arrClipboard['mode'] == 'cut' && $row[$i]['id'] == $arrClipboard['id'])
+							if ($blnClipboard && $arrClipboard['mode'] == 'cut' && $row[$i]['id'] == $arrClipboard['id'] || $blnMultiboard && $arrClipboard['mode'] == 'cutAll' && in_array($row[$i]['id'], $arrClipboard['id']))
 							{
 								$return .= ' ' . $this->generateImage('pasteafter_.gif', '', 'class="blink"');
+							}
+
+							// Copy/move multiple
+							elseif ($blnMultiboard)
+							{
+								$return .= ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row[$i]['id']).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>';
 							}
 
 							// Paste buttons
@@ -2969,7 +3344,10 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <div class="tl_formbody_submit" style="text-align:right;">
 
 <div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />
+  <input type="submit" name="cut" id="cut" class="tl_submit" alt="move selected records" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'" />
+  <input type="submit" name="copy" id="copy" class="tl_submit" alt="copy selected records" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="override" id="override" class="tl_submit" alt="override selected records" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'" />
   <input type="submit" name="edit" id="edit" class="tl_submit" alt="edit selected records" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'" />' : '') . '
 </div>
 
@@ -3318,6 +3696,16 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 							$group = $remoteNew;
 						}
 
+						// Call group callback ($group, $sortingMode, $firstOrderBy, $row, $this)
+						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback']))
+						{
+							$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][0];
+							$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][1];
+
+							$this->import($strClass);
+							$group = $this->$strClass->$strMethod($group, $sortingMode, $firstOrderBy, $row, $this);
+						}
+
 						$remoteCur = $remoteNew;
 
 						$return .= '
@@ -3368,6 +3756,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 <div class="tl_submit_container">
   <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="override" id="override" class="tl_submit" alt="override selected records" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'" />
   <input type="submit" name="edit" id="edit" class="tl_submit" alt="edit selected records" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'" />' : '') . '
 </div>
 
@@ -4045,13 +4434,13 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						$option_label = strlen($vv) ? $vv : '-';
 					}
 
-					$options_sorter[utf8_romanize($option_label)] = '  <option value="' . specialchars($value) . '"' . ((isset($session['filter'][$filter][$field]) && $value == $session['filter'][$filter][$field]) ? ' selected="selected"' : '').'>'.$option_label.'</option>';
+					$options_sorter['  <option value="' . specialchars($value) . '"' . ((isset($session['filter'][$filter][$field]) && $value == $session['filter'][$filter][$field]) ? ' selected="selected"' : '').'>'.$option_label.'</option>'] = utf8_romanize($option_label);
 				}
 
 				// Sort by option values
 				if (!$blnDate)
 				{
-					$options_sorter = natcaseksort($options_sorter);
+					natcasesort($options_sorter);
 
 					if (in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['flag'], array(2, 4, 12)))
 					{
@@ -4059,7 +4448,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					}
 				}
 
-				$fields .= "\n" . implode("\n", $options_sorter);
+				$fields .= "\n" . implode("\n", array_keys($options_sorter));
 			}
 
 			// End select menu

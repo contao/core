@@ -125,6 +125,10 @@ class ModuleBooknav extends Module
 		$arrLookup = array_keys($this->arrPages);
 		$intCurrent = array_search($objPage->id, $arrLookup);
 
+		// HOOK: add pagination info
+		$this->Template->currenPage = $intCurrent;
+		$this->Template->pageCount = count($arrLookup);
+
 		// Previous page
 		if ($intCurrent > 0)
 		{
@@ -157,8 +161,8 @@ class ModuleBooknav extends Module
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{
-		$objPages = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle, protected, groups, (SELECT COUNT(*) FROM tl_page p2 WHERE p1.id=p2.pid) AS hasChilds FROM tl_page p1 WHERE p1.pid=? AND p1.id!=? AND type='regular'" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-								   ->execute($intParentId, $intParentId, $time, $time);
+		$objPages = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle, protected, groups, (SELECT COUNT(*) FROM tl_page p2 WHERE p1.id=p2.pid) AS hasChilds FROM tl_page p1 WHERE p1.pid=? AND p1.id!=? AND type='regular'" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+								   ->execute($intParentId, $intParentId);
 
 		if ($objPages->numRows > 0)
 		{

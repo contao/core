@@ -168,8 +168,8 @@ abstract class Controller extends System
 			$time = time();
 
 			// Show all articles of the current column
-			$objArticles = $this->Database->prepare("SELECT id FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-										  ->execute($objPage->id, $strColumn, $time, $time);
+			$objArticles = $this->Database->prepare("SELECT id FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+										  ->execute($objPage->id, $strColumn);
 
 			if (($count = $objArticles->numRows) < 1)
 			{
@@ -471,7 +471,15 @@ abstract class Controller extends System
 			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 
-			$GLOBALS['TL_ADMIN_EMAIL'] = strlen($objParentPage->adminEmail) ? $objParentPage->adminEmail : $GLOBALS['TL_CONFIG']['adminEmail'];
+			// Set admin e-mail
+			if ($objParentPage->adminEmail != '')
+			{
+				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
+			}
+			else
+			{
+				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			}
 		}
 		else
 		{
@@ -479,9 +487,10 @@ abstract class Controller extends System
 			$objPage->rootTitle = $GLOBALS['TL_CONFIG']['websiteTitle'];
 			$objPage->domain = '';
 
-			$GLOBALS['TL_ADMIN_EMAIL'] = $GLOBALS['TL_CONFIG']['adminEmail'];
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
+		$objPage->rootLanguage = $objParentPage->language;
 		$objPage->trail = array_reverse($trail);
 
 		// Overwrite the global date and time format
@@ -635,9 +644,9 @@ abstract class Controller extends System
 	 * @param string
 	 * @return boolean
 	 */
-	protected function resizeImage($image, $width, $height)
+	protected function resizeImage($image, $width, $height, $mode='')
 	{
-		return $this->getImage($image, $width, $height, $image) ? true : false;
+		return $this->getImage($image, $width, $height, $mode, $image) ? true : false;
 	}
 
 
@@ -647,9 +656,10 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param integer
 	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function getImage($image, $width, $height, $target=null)
+	protected function getImage($image, $width, $height, $mode='', $target=null)
 	{
 		if (!strlen($image))
 		{
@@ -675,12 +685,27 @@ abstract class Controller extends System
 			return null;
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image), 0, 8) . '.' . $objFile->extension;
+		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
 		if (file_exists(TL_ROOT . '/' . $strCacheName))
 		{
 			return $strCacheName;
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getImage']) && is_array($GLOBALS['TL_HOOKS']['getImage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getImage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($image, $width, $height, $mode, $strCacheName, $objFile);
+
+				if (is_string($return))
+				{
+					return $return;
+				}
+			}
 		}
 
 		// Return the path to the original image if GDlib cannot handle it
@@ -693,6 +718,19 @@ abstract class Controller extends System
 		$intPositionY = 0;
 		$intWidth = $width;
 		$intHeight = $height;
+
+		// Resize proportional
+		if ($mode == 'proportional' && $intWidth && $intHeight)
+		{
+			if ($objFile->width >= $objFile->height)
+			{
+				unset($height, $intHeight);
+			}
+			else
+			{
+				unset($width, $intWidth);
+			}
+		}
 
 		// Resize width and height and crop the image if necessary
 		if ($intWidth && $intHeight)
@@ -740,7 +778,7 @@ abstract class Controller extends System
 					$intTranspIndex = imagecolortransparent($strSourceImage);
 
 					// Handle transparency
-					if ($intTranspIndex >= 0)
+					if ($intTranspIndex >= 0 && $intTranspIndex < imagecolorstotal($strSourceImage))
 					{
 						$arrColor = imagecolorsforindex($strSourceImage, $intTranspIndex);
 						$intTranspIndex = imagecolorallocate($strNewImage, $arrColor['red'], $arrColor['green'], $arrColor['blue']);
@@ -911,88 +949,88 @@ abstract class Controller extends System
 		$strArticle = preg_replace('/<form.*<\/form>/Us', '', $strArticle);
 		$strArticle = preg_replace('/\?pdf=[0-9]*/i', '', $strArticle);
 
-		// HOOK: use DOMPDF to generate PDF files
-		if ($GLOBALS['TL_CONFIG']['useDompdf'] && in_array('dompdf', $this->Config->getActiveModules()))
+		// HOOK: allow individual PDF routines
+		if (isset($GLOBALS['TL_HOOKS']['printArticleAsPdf']) && is_array($GLOBALS['TL_HOOKS']['printArticleAsPdf']))
 		{
-			$this->import('DompdfIgniter');
-			$this->DompdfIgniter->generatePdf($objArticle, $strArticle);
+			foreach ($GLOBALS['TL_HOOKS']['printArticleAsPdf'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strArticle, $objArticle);
+			}
 		}
 
-		// Use TCPDF plugin
-		else
-		{
-			$arrSearch = array
-			(
-				'@(<pre.*</pre>)@Use',
-				'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
-				'@(<img[^>]+>)@e',
-				'@(<div[^>]+block[^>]+>)@',
-				'@[\n\r\t]@',
-				'@<br /><div class="mod_article@'
-			);
+		// Default PDF export using TCPDF
+		$arrSearch = array
+		(
+			'@(<pre.*</pre>)@Use',
+			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
+			'@(<img[^>]+>)@e',
+			'@(<div[^>]+block[^>]+>)@',
+			'@[\n\r\t]@',
+			'@<br /><div class="mod_article@'
+		);
 
-			$arrReplace = array
-			(
-				'str_replace("\n", "<br />", "\\1")',
-				'<u>$1</u>',
-				'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
-				'<br />$1',
-				'',
-				'<div class="mod_article'
-			);
+		$arrReplace = array
+		(
+			'str_replace("\n", "<br />", "\\1")',
+			'<u>$1</u>',
+			'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
+			'<br />$1',
+			'',
+			'<div class="mod_article'
+		);
 
-			$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
+		$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
 
-			// TCPDF configuration
-			$l['a_meta_dir'] = 'ltr';
-			$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
-			$l['a_meta_language'] = $GLOBALS['TL_LANGUAGE'];
-			$l['w_page'] = 'page';
+		// TCPDF configuration
+		$l['a_meta_dir'] = 'ltr';
+		$l['a_meta_charset'] = $GLOBALS['TL_CONFIG']['characterSet'];
+		$l['a_meta_language'] = $GLOBALS['TL_LANGUAGE'];
+		$l['w_page'] = 'page';
 
-			// Include library
-			require_once(TL_ROOT . '/system/config/tcpdf.php');
-			require_once(TL_ROOT . '/plugins/tcpdf/tcpdf.php');
+		// Include library
+		require_once(TL_ROOT . '/system/config/tcpdf.php');
+		require_once(TL_ROOT . '/plugins/tcpdf/tcpdf.php');
 
-			// Create new PDF document
-			$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+		// Create new PDF document
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
 
-			// Set document information
-			$pdf->SetCreator(PDF_CREATOR);
-			$pdf->SetAuthor(PDF_AUTHOR);
-			$pdf->SetTitle($objArticle->title);
-			$pdf->SetSubject($objArticle->title);
-			$pdf->SetKeywords($objArticle->keywords);
+		// Set document information
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetAuthor(PDF_AUTHOR);
+		$pdf->SetTitle($objArticle->title);
+		$pdf->SetSubject($objArticle->title);
+		$pdf->SetKeywords($objArticle->keywords);
 
-			// Remove default header/footer
-			$pdf->setPrintHeader(false);
-			$pdf->setPrintFooter(false);
+		// Remove default header/footer
+		$pdf->setPrintHeader(false);
+		$pdf->setPrintFooter(false);
 
-			// Set margins
-			$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		// Set margins
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
 
-			// Set auto page breaks
-			$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+		// Set auto page breaks
+		$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
 
-			// Set image scale factor
-			$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+		// Set image scale factor
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 
-			// Set some language-dependent strings
-			$pdf->setLanguageArray($l);
+		// Set some language-dependent strings
+		$pdf->setLanguageArray($l);
 
-			// Initialize document and add a page
-			$pdf->AliasNbPages();
-			$pdf->AddPage();
+		// Initialize document and add a page
+		$pdf->AliasNbPages();
+		$pdf->AddPage();
 
-			// Set font
-			$pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
+		// Set font
+		$pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
 
-			// Write the HTML content
-			$pdf->writeHTML($strArticle, true, 0, true, 0);
+		// Write the HTML content
+		$pdf->writeHTML($strArticle, true, 0, true, 0);
 
-			// Close and output PDF document
-			$pdf->lastPage();
-			$pdf->Output(standardize(ampersand($objArticle->title, false)) . '.pdf', 'D');
-		}
+		// Close and output PDF document
+		$pdf->lastPage();
+		$pdf->Output(standardize(ampersand($objArticle->title, false)) . '.pdf', 'D');
 
 		// Stop script execution
 		exit;
@@ -1042,7 +1080,7 @@ abstract class Controller extends System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer')
+				if ($elements[0] == 'date' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || strncmp($elements[0], 'cache_', 6) === 0)
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1071,7 +1109,29 @@ abstract class Controller extends System
 						$this->import('String');
 
 						$strEmail = $this->String->encodeEmail($elements[1]);
-						$arrCache[$strTag] = '<a href="mailto:' .  $strEmail . '">' .  $strEmail . '</a>';
+						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+					}
+					break;
+
+				// Label tags
+				case 'label':
+					$keys = explode(':', $elements[1]);
+
+					if (count($keys) < 2)
+					{
+						$arrCache[$strTag] = '';
+						break;
+					}
+
+					$this->loadLanguageFile($keys[0]);
+
+					if (count($keys) == 2)
+					{
+						$arrCache[$strTag] = $GLOBALS['TL_LANG'][$keys[0]][$keys[1]];
+					}
+					else
+					{
+						$arrCache[$strTag] = $GLOBALS['TL_LANG'][$keys[0]][$keys[1]][$keys[2]];
 					}
 					break;
 
@@ -1404,7 +1464,15 @@ abstract class Controller extends System
 							break;
 
 						case 'request':
-							$arrCache[$strTag] = ampersand($this->Environment->request, true);
+							$request = $this->Environment->request;
+							if ($request == 'index.php')
+							{
+								$arrCache[$strTag] = '';
+							}
+							else
+							{
+								$arrCache[$strTag] = ampersand($request, true);
+							}
 							break;
 
 						case 'ip':
@@ -1764,7 +1832,7 @@ abstract class Controller extends System
 			}
 		}
 
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
 
@@ -1789,9 +1857,16 @@ abstract class Controller extends System
 		$arrNew['description'] = $arrData['label'][1];
 		$arrNew['type'] = $arrData['inputType'];
 
-		$event = ($arrData['inputType'] == 'select') ? 'onchange' : 'onclick';
+		// Internet Explorer does not support onchange for checkboxes and radio buttons
+		if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
+		{
+			$arrNew['onclick'] = $arrData['eval']['submitOnChange'] ? "Backend.autoSubmit('".$strTable."');" : '';
+		}
+		else
+		{
+			$arrNew['onchange'] = $arrData['eval']['submitOnChange'] ? "Backend.autoSubmit('".$strTable."');" : '';
+		}
 
-		$arrNew[$event] = $arrData['eval']['submitOnChange'] ? "Backend.autoSubmit('".$strTable."');" : '';
 		$arrNew['allowHtml'] = ($arrData['eval']['allowHtml'] || strlen($arrData['eval']['rte']) || $arrData['eval']['preserveTags']) ? true : false;
 
 		// Decode entities if HTML is allowed
@@ -2121,14 +2196,16 @@ abstract class Controller extends System
 
 	/**
 	 * Remove old XML files from the root directory
+	 * @param boolean
+	 * @return array
 	 */
-	protected function removeOldFeeds()
+	protected function removeOldFeeds($blnReturn=false)
 	{
 		$arrFeeds = array();
 		$arrModules = $this->Config->getActiveModules();
 
 		// XML sitemaps
-		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1");
+		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");
 
 		while ($objFeeds->next())
 		{
@@ -2138,7 +2215,7 @@ abstract class Controller extends System
 		// Calendar module
 		if (in_array('calendar', $arrModules))
 		{
-			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_calendar WHERE makeFeed=1");
+			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_calendar WHERE makeFeed=1 AND alias!=''");
 
 			while ($objFeeds->next())
 			{
@@ -2149,7 +2226,7 @@ abstract class Controller extends System
 		// News module
 		if (in_array('news', $arrModules))
 		{
-			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_news_archive WHERE makeFeed=1");
+			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_news_archive WHERE makeFeed=1 AND alias!=''");
 
 			while ($objFeeds->next())
 			{
@@ -2168,30 +2245,181 @@ abstract class Controller extends System
 		}
 
 		// Make sure dcaconfig.php is loaded
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
+
+		// Add root files
+		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
+		{
+			foreach ($GLOBALS['TL_CONFIG']['rootFiles'] as $strFile)
+			{
+				$arrFeeds[] = str_replace('.xml', '', $strFile);
+			}
+		}
 
 		// Delete old files
-		foreach (scan(TL_ROOT) as $file)
+		if (!$blnReturn)
 		{
-			if (is_dir(TL_ROOT . '/' . $file))
+			foreach (scan(TL_ROOT) as $file)
 			{
-				continue;
+				if (is_dir(TL_ROOT . '/' . $file))
+				{
+					continue;
+				}
+
+				$objFile = new File($file);
+
+				if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds) && !preg_match('/^sitemap/i', $objFile->filename))
+				{
+					$objFile->delete();
+				}
+
+				$objFile->close();
 			}
-
-			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
-			{
-				continue;
-			}
-
-			$objFile = new File($file);
-
-			if ($objFile->extension == 'xml' && !in_array($objFile->filename, $arrFeeds) && !preg_match('/^sitemap/i', $objFile->filename))
-			{
-				$objFile->delete();
-			}
-
-			$objFile->close();
 		}
+
+		return $arrFeeds;
+	}
+
+
+	/**
+	 * Convert a filesize into a human readable format
+	 * @param integer
+	 * @param integer
+	 * @return string
+	 */
+	protected function getReadableSize($intSize, $intDecimals=1)
+	{
+		$arrUnits = array('Byte', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+
+		for ($i=0; $intSize>1000; $i++)
+		{
+			$intSize /= 1000;
+		}
+
+		return number_format($intSize, $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' ' . $arrUnits[$i];
+	}
+
+
+	/**
+	 * Add an image to a template
+	 * @param object
+	 * @param array
+	 * @param integer
+	 * @param string
+	 */
+	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=false, $strLightboxId=false)
+	{
+		$size = deserialize($arrItem['size']);
+		$imgSize = getimagesize(TL_ROOT . '/' . $arrItem['singleSRC']);
+
+		if (!$intMaxWidth)
+		{
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+		}
+
+		if (!$strLightboxId)
+		{
+			$strLightboxId = 'lightbox';
+		}
+
+		// Store original dimensions
+		$objTemplate->width = $imgSize[0];
+		$objTemplate->height = $imgSize[1];
+
+		// Adjust image size
+		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && $imgSize[0] > $intMaxWidth)))
+		{
+			$arrMargin = deserialize($arrItem['imagemargin']);
+
+			// Subtract margins
+			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
+			{
+				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
+			}
+
+			$size[0] = $intMaxWidth;
+			$size[1] = floor($intMaxWidth * $imgSize[1] / $imgSize[0]);
+		}
+
+		$src = $this->getImage($this->urlEncode($arrItem['singleSRC']), $size[0], $size[1], $size[2]);
+
+		// Image dimensions
+		if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
+		{
+			$objTemplate->imgSize = ' ' . $imgSize[3];
+		}
+
+		// Float image
+		if (in_array($arrItem['floating'], array('left', 'right')))
+		{
+			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
+			$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+		}
+
+		// Image link
+		if (strlen($arrItem['imageUrl']) && TL_MODE == 'FE')
+		{
+			$objTemplate->href = $arrItem['imageUrl'];
+			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : '';
+		}
+
+		// Fullsize view
+		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
+		{
+			$objTemplate->href = $this->urlEncode($arrItem['singleSRC']);
+			$objTemplate->attributes = ' rel="' . $strLightboxId . '"';
+		}
+
+		$objTemplate->src = $src;
+		$objTemplate->alt = htmlspecialchars($arrItem['alt']);
+		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
+		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
+		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objTemplate->caption = $arrItem['caption'];
+		$objTemplate->addImage = true;
+	}
+
+
+	/**
+	 * Add enclosures to a template
+	 * @param object
+	 * @param array
+	 */
+	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
+	{
+		$arrEnclosure = deserialize($arrItem['enclosure'], true);
+		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+
+		// Send file to the browser
+		if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
+		{
+			$this->sendFileToBrowser($this->Input->get('file', true));
+		}
+
+		$arrEnclosures = array();
+
+		// Add download links
+		for ($i=0; $i<count($arrEnclosure); $i++)
+		{
+			if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
+			{				
+				$objFile = new File($arrEnclosure[$i]);
+
+				if (!in_array($objFile->extension, $allowedDownload))
+				{
+					continue;
+				}
+
+				$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
+				$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
+				$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
+				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
+				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
+				$arrEnclosures[$i]['icon'] = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+			}
+		}
+
+		$objTemplate->enclosure = $arrEnclosures;
 	}
 }
 

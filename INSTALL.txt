@@ -17,7 +17,7 @@ accessbile itself (front end and back end) rendering valid XHTML pages.
 ======================
 
 - Apache Webserver (recommended) or IIS
-- PHP version 5.1 or greater
+- PHP version 5.2 or greater
 - MySQL version 4.1 or greater
 - PHP extension GDLib
 - PHP extension mcrypt (optional)

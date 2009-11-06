@@ -67,7 +67,7 @@ $objLib = new typolib();
 		</ul>
 	</div>
 
-	<div class="panel_wrapper" style="height:152px;">
+	<div class="panel_wrapper" style="height:178px;">
 		<div id="general_panel" class="panel current">
 		<table border="0" cellpadding="4" cellspacing="0">
           <tr>
@@ -92,12 +92,16 @@ $objLib = new typolib();
             <td><input id="linktitle" name="linktitle" type="text" value="" style="width: 200px" /></td>
           </tr>
           <tr>
-            <td><label id="targetlistlabel" for="targetlist">{#typolinks_dlg.link_target}</label></td>
+            <td><label id="rellistlabel" for="rel_list">{#typolinks_dlg.image_rel}</label></td>
+            <td><select id="rel_list" name="rel_list" class="mceEditableSelect" style="width: 200px"></select></td>
+          </tr>
+          <tr>
+            <td><label id="targetlistlabel" for="target_list">{#typolinks_dlg.link_target}</label></td>
             <td><select id="target_list" name="target_list" style="width: 200px"></select></td>
           </tr>
           <tr>
             <td><label for="class_list">{#class_name}</label></td>
-            <td><select id="class_list" name="class_list" class="mceEditableSelect" style="width: 200px"><option value="" selected>{#not_set}</option></select></td>
+            <td><select id="class_list" name="class_list" class="mceEditableSelect" style="width: 200px"></select></td>
           </tr>
         </table>
 		</div>

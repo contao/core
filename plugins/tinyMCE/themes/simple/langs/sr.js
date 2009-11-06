@@ -1,6 +1,6 @@
 tinyMCE.addI18n('sr.simple',{
 bold_desc:"Podebljaj (Ctrl+B)",
-italic_desc:"Kurziv (Ctrl+I)",
+italic_desc:"Iskosi (Ctrl+I)",
 underline_desc:"Podcrtaj (Ctrl+U)",
 striketrough_desc:"Precrtaj",
 bullist_desc:"Neure\u0111ena lista",

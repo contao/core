@@ -44,8 +44,8 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['recurring']    = array('Event wiederh
 $GLOBALS['TL_LANG']['tl_calendar_events']['repeatEach']   = array('Intervall', 'Hier können Sie das Wiederholungsintervall festlegen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurrences']  = array('Wiederholungen', 'Geben Sie 0 ein, um das Event unbefristet zu wiederholen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['addImage']     = array('Ein Bild hinzufügen', 'Dem Event ein Bild hinzufügen.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['addEnclosure'] = array('Enclosures hinzufügen', 'Dem Event eine oder mehrere Dateien als Download hinzufügen.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure']    = array('Enclosures', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['addEnclosure'] = array('Anlagen hinzufügen', 'Dem Event eine oder mehrere Dateien als Download hinzufügen.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure']    = array('Anlagen', 'Bitte wählen Sie die Dateien aus, die Sie hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['source']       = array('Weiterleitungsziel', 'Hier können Sie die Standard-Weiterleitung überschreiben und zu einer internen oder externen Seite weiterleiten.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['default']      = array('Standardseite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf die Standardseite des Kalenders weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['internal']     = array('Interne Seite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf eine interne Seite weitergeleitet.');
@@ -66,7 +66,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['teaser_legend']    = 'Teaser';
 $GLOBALS['TL_LANG']['tl_calendar_events']['text_legend']      = 'Event-Text';
 $GLOBALS['TL_LANG']['tl_calendar_events']['image_legend']     = 'Artikelbild';
 $GLOBALS['TL_LANG']['tl_calendar_events']['recurring_legend'] = 'Wiederholungen';
-$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure_legend'] = 'Enclosures';
+$GLOBALS['TL_LANG']['tl_calendar_events']['enclosure_legend'] = 'Anlagen';
 $GLOBALS['TL_LANG']['tl_calendar_events']['source_legend']    = 'Weiterleitungsziel';
 $GLOBALS['TL_LANG']['tl_calendar_events']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_calendar_events']['publish_legend']   = 'Veröffentlichung';
@@ -89,6 +89,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['edit']       = array('Event bearbeite
 $GLOBALS['TL_LANG']['tl_calendar_events']['copy']       = array('Event duplizieren', 'Event ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Event verschieben', 'Event ID %s verschieben');
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Event löschen', 'Event ID %s löschen');
+$GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Event veröffentlichen/unveröffentlichen', 'Event ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Kalender bearbeiten', 'Die Kalender-Einstellungen bearbeiten');
 
 ?>

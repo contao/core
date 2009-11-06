@@ -95,6 +95,7 @@ class ModuleMaintenance extends BackendModule
 			}
 
 			$this->import('Automator');
+			$this->import('StyleSheets');
 
 			foreach ($tables as $table)
 			{
@@ -110,10 +111,39 @@ class ModuleMaintenance extends BackendModule
 					$this->Automator->purgeHtmlFolder();
 				}
 
-				// XML sitemaps
-				elseif ($table == 'xml_sitemap')
+				// CSS files
+				elseif ($table == 'css_files')
 				{
-					$this->Automator->generateSitemap();
+					$this->StyleSheets->updateStyleSheets();
+				}
+
+				// XML files
+				elseif ($table == 'xml_files')
+				{
+					// HOOK: use the googlesitemap module
+					if (in_array('googlesitemap', $this->Config->getActiveModules()))
+					{
+						$this->import('GoogleSitemap');
+						$this->GoogleSitemap->generateSitemap();
+					}
+					else
+					{
+						$this->Automator->generateSitemap();
+					}
+
+					// HOOK: recreate news feeds
+					if (in_array('news', $this->Config->getActiveModules()))
+					{
+						$this->import('News');
+						$this->News->generateFeeds();
+					}
+
+					// HOOK: recreate calendar feeds
+					if (in_array('calendar', $this->Config->getActiveModules()))
+					{
+						$this->import('Calendar');
+						$this->Calendar->generateFeeds();
+					}
 				}
 
 				// Database table
@@ -144,6 +174,7 @@ class ModuleMaintenance extends BackendModule
 		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$this->Template->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
 		$this->Template->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
+		$this->Template->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$this->Template->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$this->Template->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
 		$this->Template->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count($arrTmp) - 1));
@@ -163,10 +194,11 @@ class ModuleMaintenance extends BackendModule
 		$this->Template->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 
 		// Current version up to date
-		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" title="%s" onclick="this.blur(); window.open(this.href); return false;"><img src="%s" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
+		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" title="%s"%s><img src="%s" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
 												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
 												 $this->Environment->base,
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
+												 LINK_NEW_WINDOW,
 												 'system/themes/'.$this->getTheme().'/images/changelog.gif',
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
 
@@ -455,8 +487,7 @@ class ModuleMaintenance extends BackendModule
 		$arrUser = array(''=>'-');
 
 		// Get active front end users
-		$objUser = $this->Database->prepare("SELECT id, username FROM tl_member WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?) ORDER BY username")
-								  ->execute($time, $time);
+		$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
 
 		while ($objUser->next())
 		{

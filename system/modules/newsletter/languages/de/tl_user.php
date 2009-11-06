@@ -31,11 +31,12 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Erlaubte Verteiler', 'Hier können Sie den Zugriff auf einen oder mehrere Verteiler erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['newsletterp'] = array('Verteilerrechte', 'Hier können Sie die Verteilerrechte festlegen.');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_user']['newsletter_legend'] = 'Newsletter-Rechte';
+$GLOBALS['TL_LANG']['tl_user']['newsletter_legend'] = 'Newsletterrechte';
 
 ?>

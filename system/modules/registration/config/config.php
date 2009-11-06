@@ -33,7 +33,8 @@
 array_insert($GLOBALS['FE_MOD']['user'], 3, array
 (
 	'registration' => 'ModuleRegistration',
-	'lostPassword' => 'ModulePassword'
+	'lostPassword' => 'ModulePassword',
+	'closeAccount' => 'ModuleCloseAccount'
 ));
 
 ?>

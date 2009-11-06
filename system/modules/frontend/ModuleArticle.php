@@ -117,6 +117,7 @@ class ModuleArticle extends Module
 			$this->Template->headline = $this->headline;
 			$this->Template->href = $this->addToUrl($href);
 			$this->Template->teaser = $this->teaser;
+			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline));
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 
 			return;

@@ -82,18 +82,55 @@ class ModuleNewsArchive extends ModuleNews
 	{
 		$limit = null;
 		$offset = 0;
-		$strDate = $this->Input->get('month') ? $this->Input->get('month') : date('Ym');
-		$objDate = new Date($strDate, 'Ym');
 
-		// Display month
-		$intBegin = $objDate->monthBegin;
-		$intEnd = $objDate->monthEnd;
+		// Jump to current period
+		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
+		{
+			switch ($this->news_format)
+			{
+				case 'news_year':
+					$this->Input->setGet('year', date('Y'));
+					break;
+
+				default:
+				case 'news_month':
+					$this->Input->setGet('month', date('Ym'));
+					break;
+
+				case 'news_day':
+					$this->Input->setGet('day', date('Ymd'));
+					break;
+			}
+		}
 
 		// Display year
-		if ($this->news_format == 'news_year')
+		if ($this->Input->get('year'))
 		{
+			$strDate = $this->Input->get('year');
+			$objDate = new Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
+			$this->headline .= ' ' . date('Y', $objDate->tstamp);
+		}
+
+		// Display month
+		elseif ($this->Input->get('month'))
+		{
+			$strDate = $this->Input->get('month');
+			$objDate = new Date($strDate, 'Ym');
+			$intBegin = $objDate->monthBegin;
+			$intEnd = $objDate->monthEnd;
+			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
+		}
+
+		// Display day
+		elseif ($this->Input->get('day'))
+		{
+			$strDate = $this->Input->get('day');
+			$objDate = new Date($strDate, 'Ymd');
+			$intBegin = $objDate->dayBegin;
+			$intEnd = $objDate->dayEnd;
+			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objDate->tstamp);
 		}
 
 		$time = time();
@@ -102,8 +139,8 @@ class ModuleNewsArchive extends ModuleNews
 		if ($this->perPage > 0)
 		{
 			// Get total number of items
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC")
-									   ->execute($intBegin, $intEnd, $time, $time);
+			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
+									   ->execute($intBegin, $intEnd);
 
 			$total = $objTotal->total;
 
@@ -124,7 +161,7 @@ class ModuleNewsArchive extends ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY date DESC");
+		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', $this->news_archives) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
 
 		// Limit result
 		if ($limit)
@@ -132,22 +169,12 @@ class ModuleNewsArchive extends ModuleNews
 			$objArticlesStmt->limit($limit, $offset);
 		}
 
-		$objArticles = $objArticlesStmt->execute($intBegin, $intEnd, $time, $time);
+		$objArticles = $objArticlesStmt->execute($intBegin, $intEnd);
 
 		// No items found
 		if ($objArticles->numRows < 1)
 		{
 			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
-		}
-
-		// Extend headline
-		if ($this->news_format == 'news_year')
-		{
-			$this->headline .= ' ' . substr($strDate, 0, 4);
-		}
-		else
-		{
-			$this->headline .= ' ' . $GLOBALS['TL_LANG']['MONTHS'][(date('m', $objDate->tstamp) - 1)] . ' ' . substr($strDate, 0, 4);
 		}
 
 		$this->Template->headline = trim($this->headline);

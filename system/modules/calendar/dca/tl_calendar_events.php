@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'fields'                  => array('startTime'),
+			'fields'                  => array('startTime DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'makeFeed'),
 			'panelLayout'             => 'filter;search,limit',
 			'child_record_callback'   => array('tl_calendar_events', 'listEvents')
@@ -104,6 +104,13 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_events']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_calendar_events', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_events']['show'],
@@ -127,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 	(
 		'addTime'                     => 'startTime,endTime',
 		'recurring'                   => 'repeatEach,recurrences',
-		'addImage'                    => 'singleSRC,alt,size,imagemargin,caption,floating,fullsize',
+		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,fullsize,caption,floating',
 		'addEnclosure'                => 'enclosure'
 	),
 
@@ -246,8 +253,10 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'inputType'               => 'imageSize',
+			'options'                 => array('proportional', 'crop'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imagemargin' => array
 		(
@@ -256,6 +265,25 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'imageUrl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imageUrl'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50 wizard'),
+			'wizard' => array
+			(
+				array('tl_calendar_events', 'pagePicker')
+			)
+		),
+		'fullsize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'caption' => array
 		(
@@ -270,16 +298,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['floating'],
 			'exclude'                 => true,
 			'inputType'               => 'radioTable',
-			'options'                 => array('above', 'left', 'right'),
-			'eval'                    => array('cols'=>3, 'tl_class'=>'w50'),
+			'options'                 => array('above', 'left', 'right', 'below'),
+			'eval'                    => array('cols'=>4, 'tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC']
-		),
-		'fullsize' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
 		),
 		'recurring' => array
 		(
@@ -461,6 +482,7 @@ class tl_calendar_events extends Backend
 			case 'edit':
 			case 'show':
 			case 'delete':
+			case 'toggle':
 				$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
 											  ->limit(1)
 											  ->execute($id);
@@ -480,6 +502,9 @@ class tl_calendar_events extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', 5);
@@ -549,7 +574,7 @@ class tl_calendar_events extends Backend
 		// Add ID to alias
 		if ($objAlias->numRows && $autoAlias)
 		{
-			$varValue .= '.' . $dc->id;
+			$varValue .= '-' . $dc->id;
 		}
 
 		return $varValue;
@@ -677,6 +702,78 @@ class tl_calendar_events extends Backend
 	{
 		$this->import('Calendar');
 		$this->Calendar->generateFeed(CURRENT_ID);
+	}
+
+
+	/**
+	 * Return the link picker wizard
+	 * @param object
+	 * @return string
+	 */
+	public function pagePicker(DataContainer $dc)
+	{
+		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
+		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'' . $strField . '\')"');
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Check permissions to publish
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_calendar_events SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

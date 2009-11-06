@@ -86,7 +86,7 @@ class FormFileUpload extends Widget implements uploadable
 		}
 
 		$file = $_FILES[$this->strName];
-		$maxlength_kb = number_format(($this->maxlength/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
+		$maxlength_kb = $this->getReadableSize($this->maxlength);
 
 		// Romanize the filename
 		$file['name'] = utf8_romanize($file['name']);
@@ -97,7 +97,7 @@ class FormFileUpload extends Widget implements uploadable
 			if (in_array($file['error'], array(1, 2)))
 			{
 				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb.' kB', 'FormFileUpload validate()', TL_ERROR);
+				$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
 			}
 
 			if ($file['error'] == 3)
@@ -114,7 +114,7 @@ class FormFileUpload extends Widget implements uploadable
 		if ($this->maxlength > 0 && $file['size'] > $this->maxlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb.' kB', 'FormFileUpload validate()', TL_ERROR);
+			$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'FormFileUpload validate()', TL_ERROR);
 
 			unset($_FILES[$this->strName]);
 			return;

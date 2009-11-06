@@ -25,7 +25,8 @@
 <?php endforeach; ?>
   <input type="checkbox" name="tables[]" id="cache_tmp" class="tl_checkbox" value="temp_folder" onfocus="Backend.getScrollOffset();" /> <label for="cache_tmp"><strong><?php echo $this->cacheTmp; ?></strong> (<?php echo $this->cacheEntries; ?>)</label><br />
   <input type="checkbox" name="tables[]" id="cache_html" class="tl_checkbox" value="html_folder" onfocus="Backend.getScrollOffset();" /> <label for="cache_html"><strong><?php echo $this->cacheHtml; ?></strong> (<?php echo $this->htmlEntries; ?>)</label><br />
-  <input type="checkbox" name="tables[]" id="cache_xml" class="tl_checkbox" value="xml_sitemap" onfocus="Backend.getScrollOffset();" /> <label for="cache_xml"><strong><?php echo $this->cacheXml; ?></strong></label>
+  <input type="checkbox" name="tables[]" id="cache_css" class="tl_checkbox" value="css_files" onfocus="Backend.getScrollOffset();" /> <label for="cache_css"><strong><?php echo $this->cacheCss; ?></strong></label><br />
+  <input type="checkbox" name="tables[]" id="cache_xml" class="tl_checkbox" value="xml_files" onfocus="Backend.getScrollOffset();" /> <label for="cache_xml"><strong><?php echo $this->cacheXml; ?></strong></label>
   </div>
 <?php if ($this->cacheHelp): ?>
   <p class="tl_help"><?php echo $this->cacheHelp; ?></p>

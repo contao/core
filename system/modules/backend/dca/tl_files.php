@@ -39,7 +39,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		'dataContainer'               => 'Folder',
 		'onload_callback' => array
 		(
-			array('tl_files', 'checkPermission')
+			array('tl_files', 'checkPermission'),
+			array('tl_files', 'addBreadcrumb'),
 		)
 	),
 
@@ -48,18 +49,18 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'toggleNodes' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
+				'href'                => 'tg=all',
+				'class'               => 'header_toggle'
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			),
-			'toggleNodes' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
-				'href'                => 'tg=all',
-				'class'               => 'header_toggle'
 			)
 		),
 		'operations' => array
@@ -163,34 +164,44 @@ class tl_files extends Backend
 			return;
 		}
 
+		// Permissions
+		if (!is_array($this->User->fop))
+		{
+			$this->User->fop = array();
+		}
+
+		$f1 = in_array('f1', $this->User->fop);
+		$f2 = in_array('f2', $this->User->fop);
+		$f3 = in_array('f3', $this->User->fop);
+		$f4 = in_array('f4', $this->User->fop);
+
 		// Set filemounts
 		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = $this->User->filemounts;
 
 		// Disable upload button if uploads are not allowed
-		if (!is_array($this->User->fop) || !in_array('f1', $this->User->fop))
+		if (!$f1)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['closed'] = true;
 		}
 
 		// Disable edit_all button
-		if (!is_array($this->User->fop) || !in_array('f2', $this->User->fop))
+		if (!$f2)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['notEditable'] = true;
-
-			if ($this->Input->get('act') == 'editAll')
-			{
-				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array();
-				$this->Session->setData($session);
-			}
 		}
 
-		// Set allowed page IDs (delete all)
-		if ($this->Input->get('act') == 'deleteAll')
-		{
-			$session = $this->Session->getData();
+		$session = $this->Session->getData();
 
-			if (is_array($session['CURRENT']['IDS']))
+		// Set allowed page IDs (edit multiple)
+		if (is_array($session['CURRENT']['IDS']))
+		{
+			if ($this->Input->get('act') == 'editAll' && !$f2)
+			{
+				$session['CURRENT']['IDS'] = array();
+			}
+
+			// Check delete permissions
+			else
 			{
 				$folders = array();
 				$delete_all = array();
@@ -201,76 +212,168 @@ class tl_files extends Backend
 					{
 						$folders[] = $id;
 
-						if ((in_array('f4', $this->User->fop) && count(scan(TL_ROOT . '/' . $id)) < 1) || in_array('f4', $this->User->fop))
+						if ($f4 || ($f3 && count(scan(TL_ROOT . '/' . $id)) < 1))
 						{
 							$delete_all[] = $id;
 						}
 					}
-
-					elseif ((in_array('f3', $this->User->fop) || in_array('f4', $this->User->fop)) && !in_array(dirname($id), $folders))
+					else
 					{
-						$delete_all[] = $id;
+						if (($f3 || $f4) && !in_array(dirname($id), $folders))
+						{
+							$delete_all[] = $id;
+						}
 					}
 				}
 
 				$session['CURRENT']['IDS'] = $delete_all;
-				$this->Session->setData($session);
 			}
 		}
+
+		// Set allowed clipboard IDs
+		if (isset($session['CLIPBOARD']['tl_files']) && !$f2)
+		{
+			$session['CLIPBOARD']['tl_files'] = array();
+		}
+
+		// Overwrite session
+		$this->Session->setData($session);
 
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			// No permissions at all
-			if (!is_array($this->User->fop))
+			switch ($this->Input->get('act'))
 			{
-				$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// Upload permission
-			if ($this->Input->get('act') == 'move' && !in_array('f1', $this->User->fop))
-			{
-				$this->log('No permission to upload files', 'tl_files checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// New, edit, copy or cut permission
-			if (in_array($this->Input->get('act'), array('create', 'edit', 'copy', 'cut')) && !in_array('f2', $this->User->fop))
-			{
-				$this->log('No permission to create, edit, copy or move files', 'tl_files checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// Delete permission
-			if ($this->Input->get('act') == 'delete')
-			{
-				// Folders
-				if (is_dir(TL_ROOT . '/' . $this->Input->get('id')))
-				{
-					$files = scan(TL_ROOT . '/' . $this->Input->get('id'));
-
-					if (count($files) && !in_array('f4', $this->User->fop))
+				case 'move':
+					if (!$f1)
 					{
-						$this->log('No permission to delete folder "'.$this->Input->get('id').'" recursively', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to upload files', 'tl_files checkPermission()', TL_ERROR);
 						$this->redirect('typolight/main.php?act=error');
 					}
+					break;
 
-					elseif (!in_array('f3', $this->User->fop))
+				case 'edit':
+				case 'create':
+				case 'copy':
+				case 'copyAll':
+				case 'cut':
+				case 'cutAll':
+					if (!$f2)
 					{
-						$this->log('No permission to delete folder "'.$this->Input->get('id').'"', 'tl_files checkPermission()', TL_ERROR);
+						$this->log('No permission to create, edit, copy or move files', 'tl_files checkPermission()', TL_ERROR);
 						$this->redirect('typolight/main.php?act=error');
 					}
-				}
+					break;
 
-				// Files
-				elseif (!in_array('f3', $this->User->fop))
-				{
-					$this->log('No permission to delete file "'.$this->Input->get('id').'"', 'tl_files checkPermission()', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
-				}
+				case 'delete':
+					$strFile = $this->Input->get('id', true);
+					if (is_dir(TL_ROOT . '/' . $strFile))
+					{
+						$files = scan(TL_ROOT . '/' . $strFile);
+						if (count($files) && !$f4)
+						{
+							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
+							$this->redirect('typolight/main.php?act=error');
+						}
+						elseif (!$f3)
+						{
+							$this->log('No permission to delete folder "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+							$this->redirect('typolight/main.php?act=error');
+						}
+					}
+					elseif (!$f3)
+					{
+						$this->log('No permission to delete file "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
+						$this->redirect('typolight/main.php?act=error');
+					}
+					break;
+
+				default:
+					if (count($this->User->fop) < 1)
+					{
+						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
+						$this->redirect('typolight/main.php?act=error');
+					}
+					break;
 			}
 		}
+	}
+
+
+	/**
+	 * Add the breadcrumb menu
+	 */
+	public function addBreadcrumb()
+	{
+		// Set a new node
+		if (isset($_GET['node']))
+		{
+			$this->Session->set('tl_files_node', $this->Input->get('node'));
+			$this->redirect(preg_replace('/&node=[^&]*/', '', $this->Environment->request));
+		}
+
+		$strNode = $this->Session->get('tl_files_node');
+
+		if ($strNode == '')
+		{
+			return;
+		}
+
+		$strPath = '';
+		$arrNodes = explode('/', $strNode);
+		$arrLinks = array();
+
+		// Add root link
+		$arrLinks[] = '<img src="system/themes/' . $this->getTheme() . '/images/filemounts.gif" width="18" height="18" alt="" /> <a href="' . $this->addToUrl('node=') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+
+		// Generate breadcrumb trail
+		foreach ($arrNodes as $strFolder)
+		{
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$strPath .= $strFolder;
+				continue;
+			}
+			else
+			{
+				$strPath .= '/' . $strFolder;
+			}
+
+			// Do not show pages which are not mounted
+			if (!$this->User->isAdmin && !$this->User->hasAccess($strPath, 'filemounts'))
+			{
+				continue;
+			}
+
+			// No link for the active folder
+			if ($strFolder == basename($strNode))
+			{
+				$arrLinks[] = '<img src="system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt="" /> ' . $strFolder;
+			}
+			else
+			{
+				$arrLinks[] = '<img src="system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt="" /> <a href="' . $this->addToUrl('node='.$strPath) . '">' . $strFolder . '</a>';
+			}
+		}
+
+		// Check whether the node is mounted
+		if (!$this->User->isAdmin && !$this->User->hasAccess($strNode, 'filemounts'))
+		{
+			$this->Session->set('tl_files_node', '');
+
+			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Limit tree
+		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = array($strNode);
+
+		// Insert breadcrumb menu
+		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['breadcrumb'] .= '
+
+<ul id="tl_breadcrumb">
+  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
+</ul>';
 	}
 
 

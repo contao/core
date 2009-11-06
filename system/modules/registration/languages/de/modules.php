@@ -38,5 +38,6 @@ $GLOBALS['TL_LANG']['MOD']['registration'] = array('Benutzerregistrierung', 'Ben
  */
 $GLOBALS['TL_LANG']['FMD']['registration'] = array('Registrierung', 'erzeugt ein Formular zur Benutzerregistrierung.');
 $GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Passwort vergessen', 'erzeugt ein Formular zur Passwort-Anforderung.');
+$GLOBALS['TL_LANG']['FMD']['closeAccount'] = array('Konto schließen', 'erzeugt ein Formular zur Löschung eines Benutzerkontos.');
 
 ?>

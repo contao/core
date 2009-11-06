@@ -106,15 +106,19 @@ class ContentDownloads extends ContentElement
 				if (in_array($objFile->extension, $allowedDownload))
 				{
 					$this->parseMetaFile(dirname($file), true);
-					$strBasename = strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : specialchars($objFile->basename);
+					$arrMeta = $this->arrMeta[$objFile->basename];
+
+					if ($arrMeta[0] == '')
+					{
+						$arrMeta[0] = specialchars($objFile->basename);
+					}
 
 					$files[$file] = array
 					(
-						'title' => $strBasename,
+						'link' => $arrMeta[0],
+						'title' => $arrMeta[0],
 						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
-						'link' => $strBasename . ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)',
-						'alt' => (strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
-						'caption' => (strlen($this->arrMeta[$objFile->basename][2]) ? $this->arrMeta[$objFile->basename][2] : ''),
+						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon
 					);
 
@@ -139,24 +143,20 @@ class ContentDownloads extends ContentElement
 
 				if (in_array($objFile->extension, $allowedDownload))
 				{
-					$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+					$arrMeta = $this->arrMeta[$objFile->basename];
 
-					if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
+					if ($arrMeta[0] == '')
 					{
-						$imgSize = ' ' . $imgSize[3];
+						$arrMeta[0] = specialchars($objFile->basename);
 					}
-
-					$strBasename = strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : specialchars($objFile->basename);
 
 					$files[$file . '/' . $subfile] = array
 					(
-						'title' => $strBasename,
+						'link' => $arrMeta[0],
+						'title' => $arrMeta[0],
 						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
-						'link' => $strBasename . ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)',
-						'alt' => (strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
-						'caption' => (strlen($this->arrMeta[$objFile->basename][2]) ? $this->arrMeta[$objFile->basename][2] : ''),
-						'imgSize' => $imgSize,
-						'icon' => $src
+						'filesize' => $this->getReadableSize($objFile->filesize, 1),
+						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon
 					);
 
 					$auxDate[] = $objFile->mtime;

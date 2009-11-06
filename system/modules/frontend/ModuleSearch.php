@@ -95,11 +95,26 @@ class ModuleSearch extends Module
 
 		$objFormTemplate->queryType = $this->queryType;
 		$objFormTemplate->keyword = specialchars($strKeywords);
+		$objFormTemplate->keywordLabel = $GLOBALS['TL_LANG']['MSC']['keywords'];
+		$objFormTemplate->optionsLabel = $GLOBALS['TL_LANG']['MSC']['options'];
 		$objFormTemplate->search = specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']);
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && $this->Input->get('id')) ? $this->Input->get('id') : false;
 		$objFormTemplate->action = ampersand($this->Environment->request);
+
+		// Reference page
+		if ($this->rootPage > 0)
+		{
+			$objTargetPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+											->limit(1)
+											->execute($this->rootPage);
+
+			if ($objTargetPage->numRows)
+			{
+				$objFormTemplate->action = $this->generateFrontendUrl($objTargetPage->row());
+			}
+		}
 
 		$this->Template->form = $objFormTemplate->parse();
 		$this->Template->pagination = '';
@@ -120,7 +135,7 @@ class ModuleSearch extends Module
 				return;
 			}
 
-			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$objPage->rootId);
+			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$objPage->rootId.$this->fuzzy);
 			$query_starttime = microtime(true);
 
 			// Load cached result
@@ -143,7 +158,7 @@ class ModuleSearch extends Module
 			{
 				try
 				{
-					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages);
+					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
 				catch (Exception $e)

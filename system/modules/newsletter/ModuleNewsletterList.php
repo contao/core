@@ -96,9 +96,9 @@ class ModuleNewsletterList extends Module
 
 			if (!isset($arrJumpTo[$objNewsletter->jumpTo]))
 			{
-				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
+				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
 											->limit(1)
-											->execute($objNewsletter->jumpTo, $time, $time);
+											->execute($objNewsletter->jumpTo);
 	
 				if ($objJumpTo->numRows)
 				{

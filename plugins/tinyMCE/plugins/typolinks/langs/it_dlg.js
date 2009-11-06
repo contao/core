@@ -16,8 +16,7 @@ image_src:"URL immagine",
 image_dimensions:"Larghezza/altezza",
 image_alt:"Descrizione",
 image_class:"Classe CSS",
-image_rel:"Tipo",
+image_rel:"Lightbox",
 image_rel_single:"Immagine singola",
-image_rel_multi:"Gallera immagini",
-image_rel_empty:"Solo miniatura"
+image_rel_multi:"Gallera immagini"
 });

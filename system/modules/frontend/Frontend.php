@@ -125,32 +125,32 @@ abstract class Frontend extends Controller
 		$time = time();
 
 		// Current host and current user language match a record
-		$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type=? AND (dns=? OR dns=?) AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+		$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 									  ->limit(1)
-									  ->execute('root', $host, 'www.'.$host, $accept_language[0], $time, $time);
+									  ->execute($host, 'www.'.$host, $accept_language[0]);
 
 		if ($objRootPage->numRows < 1)
 		{
 			// Current host matches a record (look for fallback language)
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type=? AND (dns=? OR dns=?) AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 										  ->limit(1)
-										  ->execute('root', $host, 'www.'.$host, $time, $time);
+										  ->execute($host, 'www.'.$host);
 		}
 
 		if ($objRootPage->numRows < 1)
 		{
 			// Current user language matches a record (and DNS is empty)
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type=? AND dns='' AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 										  ->limit(1)
-										  ->execute('root', $accept_language[0], $time, $time);
+										  ->execute($accept_language[0]);
 		}
 
 		if ($objRootPage->numRows < 1)
 		{
 			// Current fallback language matches a record (and DNS is empty)
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type=? AND dns='' AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 										  ->limit(1)
-										  ->execute('root', $time, $time);
+										  ->execute();
 		}
 
 		return $objRootPage->numRows ? $objRootPage->id : 0;
@@ -336,15 +336,11 @@ abstract class Frontend extends Controller
 
 		$strBuffer = file_get_contents(TL_ROOT . '/' . $strFile);
 		$strBuffer = utf8_convert_encoding($strBuffer, $GLOBALS['TL_CONFIG']['characterSet']);
-		$arrBuffer = trimsplit('[\n\r]+', $strBuffer);
+		$arrBuffer = array_filter(trimsplit('[\n\r]+', $strBuffer));
 
 		foreach ($arrBuffer as $v)
 		{
-			$pos = strpos($v, '=');
-
-			$strLabel = trim(utf8_substr($v, 0, $pos));
-			$strValue = utf8_substr($v, ($pos + 1));
-
+			list($strLabel, $strValue) = array_map('trim', explode('=', $v));
 			$this->arrMeta[$strLabel] = array_map('trim', explode('|', $strValue));
 
 			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC))
@@ -354,6 +350,81 @@ abstract class Frontend extends Controller
 		}
 
 		$this->arrProcessed[] = $strPath;
+	}
+
+
+	/**
+	 * Replace bbcode and return the HTML string
+	 * 
+	 * Supports the following tags:
+	 * 
+	 * - [b][/b] bold
+	 * - [i][/i] italic
+	 * - [u][/u] underline
+	 * - [img][/img]
+	 * - [code][/code]
+	 * - [color=#ff0000][/color]
+	 * - [quote][/quote]
+	 * - [quote=tim][/quote]
+	 * - [url][/url]
+	 * - [url=http://][/url]
+	 * - [email][/email]
+	 * - [email=name@domain.com][/email]
+	 * @param string
+	 * @return string
+	 */
+	protected function parseBbCode($strComment)
+	{
+		$arrSearch = array
+		(
+			'[b]', '[/b]',
+			'[i]', '[/i]',
+			'[u]', '[/u]',
+			'[code]', '[/code]',
+			'[/color]',
+			'[quote]', '[/quote]'
+		);
+
+		$arrReplace = array
+		(
+			'<strong>', '</strong>',
+			'<em>', '</em>',
+			'<span style="text-decoration:underline;">', '</span>',
+			'<div class="code"><p>' . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', '</pre></div>',
+			'</span>',
+			'<div class="quote">', '</div>'
+		);
+
+		// Replace simple tokens
+		$strComment = str_replace($arrSearch, $arrReplace, trim($strComment));
+
+		// Color, quote and image
+		$strComment = preg_replace('/\[color=([^\]]+)\]/i', '<span style="color:$1;">', $strComment);
+		$strComment = preg_replace('/\[quote=([^\]]+)\]/i', '<div class="quote"><p>' . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>', $strComment);
+		$strComment = preg_replace('/\[img\]([^\[]+)\[\/img\]/i', '<img src="$1" alt="" />', $strComment);
+
+		// URLs
+		$strComment = preg_replace('/\[url\]([^\[]+)\[\/url\]/i', '<a href="$1">$1</a>', $strComment);
+		$strComment = preg_replace('/\[url=([^\]]+)\]([^\[]+)\[\/url\]/i', '<a href="$1">$2</a>', $strComment);
+
+		// E-mail addresses
+		$strComment = preg_replace('/\[email\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$1</a>', $strComment);
+		$strComment = preg_replace('/\[email=([^\]]+)\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$2</a>', $strComment);
+
+		// Line feeds
+		$strComment = preg_replace(array('@</div>(\n)*@', '@\r@'), array("</div>\n", ''), $strComment);
+
+		// Prevent cross-site request forgeries
+		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
+
+		// Encode e-mail addresses
+		if (strpos($strComment, 'mailto:') !== false)
+		{
+			$this->import('String');
+			$strComment = $this->String->encodeEmail($strComment);
+		}
+
+		return $strComment;
 	}
 }
 

@@ -99,9 +99,9 @@ class ModuleQuicklink extends Module
 		// Get all active pages
 		foreach ($this->pages as $intId)
 		{
-			$objPage = $this->Database->prepare("SELECT id, title, alias, pageTitle FROM tl_page WHERE id=? AND type!=? AND type!=? AND type!=?" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$objPage = $this->Database->prepare("SELECT id, title, alias, pageTitle FROM tl_page WHERE id=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 									  ->limit(1)
-									  ->execute($intId, 'root', 'error_403', 'error_404', $time, $time);
+									  ->execute($intId);
 
 			if ($objPage->numRows < 1)
 			{

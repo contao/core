@@ -6,7 +6,7 @@
  * http://alexgorbatchev.com/wiki/SyntaxHighlighter:Donate
  *
  * @version
- * 2.0.296 (March 01 2009)
+ * 2.0.320 (May 03 2009)
  * 
  * @copyright
  * Copyright (C) 2004-2009 Alex Gorbatchev.
@@ -15,7 +15,7 @@
  * This file is part of SyntaxHighlighter.
  * 
  * SyntaxHighlighter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
@@ -25,7 +25,7 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/licenses/>.
+ * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
  */
 .syntaxhighlighter,
 .syntaxhighlighter div,
@@ -51,7 +51,7 @@
 	font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
 	font-weight: normal !important;
 	font-style: normal !important;
-	font-size: 1em /*!important*/;
+	font-size: 1em !important;
 }
 
 .syntaxhighlighter
@@ -60,6 +60,10 @@
 	margin: 1em 0 1em 0 !important;
 	padding: 1px !important; /* adds a little border on top and bottom */
 	position: relative !important;
+}
+
+.syntaxhighlighter code {
+	display: inline !important;
 }
 
 .syntaxhighlighter .bold {
@@ -113,11 +117,17 @@
 
 .syntaxhighlighter .bar
 {
+	display: none !important;
+}
+
+.syntaxhighlighter .bar.show 
+{
+	display: block !important;
 }
 
 .syntaxhighlighter.collapsed .bar
 {
-
+	display: block !important;
 }
 
 .syntaxhighlighter.nogutter .ruler
@@ -139,6 +149,12 @@
 .syntaxhighlighter.collapsed .ruler
 {
 	display: none !important;
+}
+
+.syntaxhighlighter .lines.no-wrap
+{
+	overflow: auto;
+	overflow-y: hidden;
 }
 
 /* Styles for the toolbar */
@@ -222,6 +238,11 @@
 .syntaxhighlighter.printing .line .content .block
 {
 	background: none !important;
+}
+
+.syntaxhighlighter .no-wrap .line .content .block
+{
+	white-space: nowrap !important;
 }
 
 /* Gutter line numbers */

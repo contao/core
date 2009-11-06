@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<img src="<?php echo $this->icon; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->title; ?>" class="mime_icon" /> <a href="<?php echo $this->href; ?>" title="<?php echo $this->title; ?>"><?php echo $this->link; ?></a>
+<img src="<?php echo $this->icon; ?>" width="18" height="18" alt="<?php echo $this->title; ?>" class="mime_icon" /> <a href="<?php echo $this->href; ?>" title="<?php echo $this->title; ?>"><?php echo $this->link; ?> <span class="size">(<?php echo $this->filesize; ?>)</span></a>
 
 </div>
 <!-- indexer::continue -->

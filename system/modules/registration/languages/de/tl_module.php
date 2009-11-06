@@ -34,6 +34,7 @@ $GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Sicherheitsfrage dea
 $GLOBALS['TL_LANG']['tl_module']['reg_groups']     = array('Mitgliedergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
 $GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'] = array('Login erlauben', 'Dem neuen Benutzer die Anmeldung im Frontend erlauben.');
 $GLOBALS['TL_LANG']['tl_module']['reg_skipName']   = array('Benutzernamen nicht abfragen', 'Den Benutzernamen bei der Passwort-Anforderung nicht abfragen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_close']      = array('Modus', 'Hier legen Sie fest, wie die Löschung ausgeführt wird.');
 $GLOBALS['TL_LANG']['tl_module']['reg_assignDir']  = array('Ein Benutzerverzeichnis anlegen', 'Ein Benutzerverzeichnis aus dem registrierten Benutzernamen erstellen.');
 $GLOBALS['TL_LANG']['tl_module']['reg_homeDir']    = array('Pfad zum Benutzerverzeichnis', 'Bitte wählen Sie das übergeordnete Verzeichnis aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_module']['reg_activate']   = array('Aktivierungsmail verschicken', 'Eine Aktivierungsmail an die registrierte E-Mail-Adresse senden.');
@@ -49,9 +50,16 @@ $GLOBALS['TL_LANG']['tl_module']['account_legend'] = 'Konto-Einstellungen';
 
 
 /**
- * Reference
+ * Default messages
  */
 $GLOBALS['TL_LANG']['tl_module']['emailText']    = array('Ihre Registrierung auf %s', "Vielen Dank für Ihre Registrierung auf ##domain##.\n\nBitte klicken Sie ##link## um Ihre Registrierung abzuschließen und Ihr Konto zu aktivieren. Wenn Sie keinen Zugang angefordert haben, ignorieren Sie bitte diese E-Mail.\n");
 $GLOBALS['TL_LANG']['tl_module']['passwordText'] = array('Ihre Passwort-Anforderung auf %s', "Sie haben ein neues Passwort für ##domain## angefordert.\n\nBitte klicken Sie ##link## um das neue Passwort festzulegen. Wenn Sie diese E-Mail nicht angefordert haben, kontaktieren Sie bitte den Administrator der Webseite.\n");
+
+
+/**
+ * Reference
+ */
+$GLOBALS['TL_LANG']['tl_module']['close_deactivate'] = 'Konto deaktivieren';
+$GLOBALS['TL_LANG']['tl_module']['close_delete']     = 'Konto unwiderruflich löschen';
 
 ?>

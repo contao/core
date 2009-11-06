@@ -2,7 +2,7 @@ tinyMCE.addI18n({sr:{
 common:{
 edit_confirm:"\u017Delite li koristiti WYSIWYG na\u010Din rada za ovo tekstualno polje?",
 apply:"Primjeni",
-insert:"Umetni",
+insert:"Ubaci",
 update:"Obnovi",
 cancel:"Odustani",
 close:"Zatvori",

@@ -47,7 +47,7 @@ class PageError403 extends Frontend
 		$time = time();
 
 		// Add a log entry
-		$this->log('Access to page ID "' . $pageId . '"denied', 'PageError403 generate()', TL_ERROR);
+		$this->log('Access to page ID "' . $pageId . '" denied', 'PageError403 generate()', TL_ERROR);
 
 		// Look for an error_403 page within the website root
 		$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
@@ -57,9 +57,9 @@ class PageError403 extends Frontend
 		// Look for a global error_403 page
 		if ($obj403->numRows < 1)
 		{
-			$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+			$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type='error_403' AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 									 ->limit(1)
-									 ->execute('error_403', $time, $time);
+									 ->execute();
 		}
 
 		// Die if there is no page at all

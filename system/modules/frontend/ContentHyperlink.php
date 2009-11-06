@@ -54,7 +54,7 @@ class ContentHyperlink extends ContentElement
 
 		if (substr($this->url, 0, 7) == 'mailto:')
 		{
-			$this->url = 'mailto:' . $this->String->encodeEmail(substr($this->url, 7));
+			$this->url = $this->String->encodeEmail($this->url);
 		}
 
 		$embed = explode('%s', $this->embed);
@@ -75,6 +75,15 @@ class ContentHyperlink extends ContentElement
 			if ($objFile->isGdImage)
 			{
 				$size = deserialize($this->size);
+				$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+
+				// Adjust image size
+				if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))
+				{
+					$size[0] = $intMaxWidth;
+					$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
+				}
+
 				$src = $this->getImage($this->urlEncode($this->singleSRC), $size[0], $size[1]);
 
 				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
@@ -89,12 +98,13 @@ class ContentHyperlink extends ContentElement
 			}
 		}
 
+		$this->Template->rel = $this->rel;
 		$this->Template->href = $this->url;
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->target = $this->target ? LINK_NEW_WINDOW_BLUR : '';
+		$this->Template->target = $this->target ? LINK_NEW_WINDOW : '';
 	}
 }
 

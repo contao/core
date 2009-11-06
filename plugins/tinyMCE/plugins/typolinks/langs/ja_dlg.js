@@ -18,6 +18,5 @@ image_alt:"説明",
 image_class:"CSSクラス",
 image_rel:"タイプ",
 image_rel_single:"単一の画像",
-image_rel_multi:"イメージギャラリー",
-image_rel_empty:"サムネールだけ"
+image_rel_multi:"イメージギャラリー"
 });

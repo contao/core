@@ -41,7 +41,7 @@ define('K_PATH_IMAGES', K_PATH_MAIN . 'images/');
 define('K_BLANK_IMAGE', K_PATH_IMAGES . '_blank.png');
 define('PDF_PAGE_FORMAT', 'A4');
 define('PDF_PAGE_ORIENTATION', 'P');
-define('PDF_CREATOR', 'TYPOlight webCMS');
+define('PDF_CREATOR', 'TYPOlight Open Source CMS');
 define('PDF_AUTHOR', $this->Environment->url);
 define('PDF_HEADER_TITLE', $GLOBALS['TL_CONFIG']['websiteTitle']);
 define('PDF_HEADER_STRING', '');

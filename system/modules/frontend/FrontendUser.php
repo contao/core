@@ -178,15 +178,13 @@ class FrontendUser extends User
 		$time = time();
 
 		// Unset inactive groups
-		$objGroups = $this->Database->prepare("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?)")
-									->execute($time, $time);
-
+		$objGroups = $this->Database->execute("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
 		$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 
 		// Get group login page
-		$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?)")
+		$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
 								   ->limit(1)
-								   ->execute($this->groups[0], $time, $time);
+								   ->execute($this->groups[0]);
 
 		if ($objGroup->numRows && $objGroup->redirect && $objGroup->jumpTo)
 		{

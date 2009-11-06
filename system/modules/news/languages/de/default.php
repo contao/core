@@ -30,15 +30,18 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['open']         = 'Weiterlesen auf %s';
-$GLOBALS['TL_LANG']['MSC']['readMore']     = 'Den Artikel lesen: %s';
-$GLOBALS['TL_LANG']['MSC']['author']       = 'Autor';
-$GLOBALS['TL_LANG']['MSC']['by']           = 'von';
-$GLOBALS['TL_LANG']['MSC']['empty']        = 'Keine Nachrichten in diesem Zeitraum vorhanden.';
-$GLOBALS['TL_LANG']['MSC']['published']    = 'Veröffentlicht';
-$GLOBALS['TL_LANG']['MSC']['unpublished']  = 'Nicht veröffentlicht';
-$GLOBALS['TL_LANG']['MSC']['addComment']   = 'Einen Kommentar schreiben';
-$GLOBALS['TL_LANG']['MSC']['comments']     = 'Kommentare';
-$GLOBALS['TL_LANG']['MSC']['commentCount'] = '(%s Kommentare)';
+$GLOBALS['TL_LANG']['MSC']['open']          = 'Weiterlesen auf %s';
+$GLOBALS['TL_LANG']['MSC']['readMore']      = 'Den Artikel lesen: %s';
+$GLOBALS['TL_LANG']['MSC']['author']        = 'Autor';
+$GLOBALS['TL_LANG']['MSC']['by']            = 'von';
+$GLOBALS['TL_LANG']['MSC']['empty']         = 'Keine Nachrichten in diesem Zeitraum vorhanden.';
+$GLOBALS['TL_LANG']['MSC']['published']     = 'Veröffentlicht';
+$GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Nicht veröffentlicht';
+$GLOBALS['TL_LANG']['MSC']['addComment']    = 'Einen Kommentar schreiben';
+$GLOBALS['TL_LANG']['MSC']['comments']      = 'Kommentare';
+$GLOBALS['TL_LANG']['MSC']['commentCount']  = '(%s Kommentare)';
+$GLOBALS['TL_LANG']['MSC']['news_items']    = '%d Artikel';
+$GLOBALS['TL_LANG']['MSC']['news_previous'] = '&lt;';
+$GLOBALS['TL_LANG']['MSC']['news_next']     = '&gt;';
 
 ?>

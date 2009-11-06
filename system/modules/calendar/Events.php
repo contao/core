@@ -112,7 +112,9 @@ abstract class Events extends Module
 		}
 
 		$this->import('String');
+
 		$time = time();
+		$this->arrEvents = array();
 
 		foreach ($arrCalendars as $id)
 		{
@@ -129,8 +131,8 @@ abstract class Events extends Module
 			}
 
 			// Get events of the current period
-			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY startTime")
-										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $time, $time);
+			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY startTime")
+										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd);
 
 			if ($objEvents->numRows < 1)
 			{
@@ -254,11 +256,19 @@ abstract class Events extends Module
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['title'] = specialchars($objEvents->title);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
-		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW_BLUR : '');
+		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW : '');
 		$arrEvent['class'] = strlen($objEvents->cssClass) ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
+
+		// Clean RTE output
+		$arrEvent['details'] = str_ireplace
+		(
+			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
+			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
+			$this->String->encodeEmail($arrEvent['details'])
+		);
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
@@ -306,10 +316,12 @@ abstract class Events extends Module
 
 			if (substr($objEvent->url, 0, 7) == 'mailto:')
 			{
-				$objEvent->url = 'mailto:' . $this->String->encodeEmail(substr($objEvent->url, 7));
+				return $this->String->encodeEmail($objEvent->url);
 			}
-
-			return ampersand($objEvent->url);
+			else
+			{
+				return ampersand($objEvent->url);
+			}
 		}
 
 		// Fallback to current URL
@@ -328,6 +340,72 @@ abstract class Events extends Module
 		return '';
 	}
 
+
+	/**
+	 * Return the begin and end timestamp and an error message as array
+	 * @param object
+	 * @param string
+	 * @param integer
+	 * @return array
+	 */
+	protected function getDatesFromFormat(Date $objDate, $strFormat, $intStartDay=0)
+	{
+		switch ($strFormat)
+		{
+			case 'cal_day':
+				return array($objDate->dayBegin, $objDate->dayEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyDay']);
+				break;
+
+			case 'cal_week':
+				return array($objDate->getWeekBegin($intStartDay), $objDate->getWeekEnd($intStartDay), $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek']);
+				break;
+
+			default:
+			case 'cal_month':
+				return array($objDate->monthBegin, $objDate->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth']);
+				break;
+
+			case 'cal_year':
+				return array($objDate->yearBegin, $objDate->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
+				break;
+
+			case 'cal_two':
+				return array($objDate->yearBegin, (strtotime('+2 years', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
+				break;
+
+			case 'next_7':
+				return array($objDate->dayBegin, (strtotime('+7 days', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek']);
+				break;
+
+			case 'next_14':
+				return array($objDate->dayBegin, (strtotime('+14 days', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyWeek']);
+				break;
+
+			case 'next_30':
+				return array($objDate->dayBegin, (strtotime('+1 month', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth']);
+				break;
+
+			case 'next_90':
+				return array($objDate->dayBegin, (strtotime('+3 months', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth']);
+				break;
+
+			case 'next_180':
+				return array($objDate->dayBegin, (strtotime('+6 months', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyMonth']);
+				break;
+
+			case 'next_365':
+				return array($objDate->dayBegin, (strtotime('+1 year', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
+				break;
+
+			case 'next_two':
+				return array($objDate->dayBegin, (strtotime('+2 years', $objDate->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
+				break;
+
+			case 'next_all': // 2038-01-01 00:00:00
+				return array($objDate->dayBegin, 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_emptyYear']);
+				break;
+		}
+	}
 }
 
 ?>

@@ -88,6 +88,7 @@ class ModuleQuicknav extends Module
 			$this->rootPage = 0;
 		}
 
+		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 		$this->Template->title = strlen($this->customLabel) ? $this->customLabel : $GLOBALS['TL_LANG']['MSC']['quicknav'];
 		$this->Template->request = ampersand($this->Environment->request, true);
@@ -118,8 +119,8 @@ class ModuleQuicknav extends Module
 		$time = time();
 
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($pid, 'root', 'error_403', 'error_404', $time, $time);
+		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+									  ->execute($pid);
 
 		if ($objSubpages->numRows < 1)
 		{

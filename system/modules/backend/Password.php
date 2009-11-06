@@ -100,9 +100,9 @@ class Password extends Widget
 			return '';
 		}
 
-		if (utf8_strlen($varInput) < 8)
+		if (utf8_strlen($varInput) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], 8));
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']));
 		}
 
 		if ($varInput != $this->getPost($this->strName . '_confirm'))

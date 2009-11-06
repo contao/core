@@ -4,5 +4,7 @@
     <td class="col_1 col_last"><div class="submit_container"><?php echo $this->generate(); ?></div></td>
   </tr>
 <?php else: ?>
-  <div class="submit_container"><?php echo $this->generate(); ?></div>
+  <div class="submit_container">
+    <?php echo $this->generate(); ?> 
+  </div>
 <?php endif; ?>

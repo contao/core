@@ -37,8 +37,9 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'reg_activate';
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['registration'] = '{title_legend},name,headline,type;{config_legend},editable,newsletters,disableCaptcha;{account_legend},reg_groups,reg_allowLogin,reg_assignDir;{redirect_legend},jumpTo;{email_legend:hide},reg_activate;{template_legend:hide},memberTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['lostPassword'] = '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['registration'] = '{title_legend},name,headline,type;{config_legend},editable,newsletters,disableCaptcha;{account_legend},reg_groups,reg_allowLogin,reg_assignDir;{redirect_legend},jumpTo;{email_legend:hide},reg_activate;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['lostPassword'] = '{title_legend},name,headline,type;{config_legend},reg_skipName,disableCaptcha;{redirect_legend},jumpTo;{email_legend:hide},reg_jumpTo,reg_password;{template_legend:hide},tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['closeAccount'] = '{title_legend},name,headline,type;{config_legend},reg_close;{redirect_legend},jumpTo;{template_legend:hide},tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -79,6 +80,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_skipName'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_skipName'],
 	'exclude'       => true,
 	'inputType'     => 'checkbox'
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['reg_close'] = array
+(
+	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_close'],
+	'exclude'       => true,
+	'inputType'     => 'select',
+	'options'       => array('close_deactivate', 'close_delete'),
+	'reference'     => &$GLOBALS['TL_LANG']['tl_module']
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_assignDir'] = array

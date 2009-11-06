@@ -41,14 +41,14 @@ var Typobox = {
 		if (isVisible('srcbrowser'))
 			document.getElementById('src').style.width = '180px';
 
-		c = ed.selection.getContent();
 		this.fillFileList('image_list', 'tinyMCEImageList');
+		this.fillRelList('rel_list');
+		TinyMCE_EditableSelects.init();
 
+		c = ed.selection.getContent();
 		if (!c || c.indexOf("image::") == -1) {
 			return;
 		}
-
-		selectByValue(f, 'rel', '');
 
 		c = c.replace(/^.*\{\{image::/gi, '');
 		c = c.replace(/\}\}.*$/i, '');
@@ -73,7 +73,7 @@ var Typobox = {
 					f.cssClass.value = sub[1];
 					break;
 				case 'rel':
-					selectByValue(f, 'rel', sub[1]);
+					selectByValue(f, 'rel_list', sub[1], true);
 					break;
 			}
 		}
@@ -92,6 +92,14 @@ var Typobox = {
 			});
 		} else
 			dom.remove(dom.getParent(id, 'tr'));
+	},
+
+	fillRelList : function(id) {
+		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_single'), 'lightbox');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_multi'), 'lightbox[multi]');
 	},
 
 	update : function() {
@@ -123,8 +131,8 @@ var Typobox = {
 			tag += glue + 'class=' + f.cssClass.value;
 			glue = '&amp;';
 		}
-		if (f.rel.value) {
-			tag += glue + 'rel=' + f.rel.value;
+		if (f.rel_list) {
+			tag += glue + 'rel=' + getSelectValue(f, "rel_list");
 		}
 
 		tag = '{{image::' + tag + '}}';

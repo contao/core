@@ -35,10 +35,4 @@ $GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('Feed URLs', 'Plea
 $GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Feed template', 'Here you can select the feed template.');
 $GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Number of items', 'Here you can limit the number of items. Set to 0 to show all.');
 
-
-/**
- * Legends
- */
-$GLOBALS['TL_LANG']['tl_module']['import_legend'] = 'Import settings';
-
 ?>

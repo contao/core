@@ -36,7 +36,7 @@ $this->loadLanguageFile('tl_page');
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['rss_reader'] = '{title_legend},name,headline,type;{import_legend},rss_cache,rss_feed;{config_legend},skipFirst,rss_numberOfItems,perPage;{template_legend:hide},rss_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['rss_reader'] = '{title_legend},name,headline,type;{config_legend},rss_feed,rss_numberOfItems,perPage,skipFirst,rss_cache;{template_legend:hide},rss_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -49,6 +49,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_cache'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array(0, 15, 30, 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 259200, 604800),
+	'eval'                    => array('tl_class'=>'w50'),
 	'reference'               => &$GLOBALS['TL_LANG']['CACHE']
 );
 

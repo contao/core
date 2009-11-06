@@ -478,6 +478,18 @@ function utf8_substr($str, $start, $length=null)
 
 
 /**
+ * Make sure the first letter is uppercase
+ *
+ * @param string
+ * @return string
+ */
+function utf8_ucfirst($str)
+{
+	return utf8_strtoupper(utf8_substr($str, 0, 1)) . utf8_substr($str, 1);
+}
+
+
+/**
  * Define global UTF-8 case lookup tables
  *
  * For some reason, strtr() works much faster if we define all lookup tables

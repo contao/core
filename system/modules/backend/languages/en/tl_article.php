@@ -75,6 +75,7 @@ $GLOBALS['TL_LANG']['tl_article']['edit']       = array('Edit article', 'Edit ar
 $GLOBALS['TL_LANG']['tl_article']['copy']       = array('Duplicate article', 'Duplicate article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['cut']        = array('Move article', 'Move article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['delete']     = array('Delete article', 'Delete article ID %s');
+$GLOBALS['TL_LANG']['tl_article']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['pasteafter'] = array('Paste after', 'Paste after article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['pasteinto']  = array('Paste into', 'Paste into page ID %s');
 

@@ -51,7 +51,7 @@ $tabindex = 1;
 
 <?php $nm = ($rep->f_stage==$rep->inst_extension) ? 'repository_extension' : 'repository_extension_dis'; ?>
   <h3><label for="<?php echo $nm; ?>"><?php echo $text['extension'][0]; ?></label></h3>
-  <select name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" class="tl_select" tabindex="<?php echo $tabindex++; ?>"<?php if ($rep->f_stage>$rep->inst_extension) echo ' disabled="disabled"'; ?>>
+  <select name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" class="tl_select" tabindex="<?php echo $tabindex++; ?>"<?php if ($rep->f_stage>$rep->inst_extension): ?> disabled="disabled"<?php endif; ?>>
 <?php foreach ($rep->extensions as $ext) echo '    <option'.($ext==$rep->f_extension ? ' selected="selected"' : '').'>'.$ext.'</option>'."\n"; ?>
   </select>
 <?php if ($rep->f_stage>$rep->inst_extension): ?>
@@ -63,7 +63,7 @@ $tabindex = 1;
 
 <?php $nm = ($rep->f_stage==$rep->inst_lickey) ? 'repository_lickey' : 'repository_lickey_dis'; ?>
   <h3><label for="<?php echo $nm; ?>"><?php echo $text['lickey'][0]; ?></label></h3>
-  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_lickey; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_lickey) echo ' disabled="disabled"'; ?> />
+  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_lickey; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_lickey): ?> disabled="disabled"<?php endif; ?> />
 <?php if ($rep->f_stage>$rep->inst_lickey): ?>
   <input type="hidden" name="repository_lickey" value="<?php echo $rep->f_lickey; ?>" />
 <?php endif; ?>
@@ -90,7 +90,7 @@ $tabindex = 1;
     <td class="col_build"><?php echo $act->build; ?></td>
     <td class="col_action">
     <div class="tl_checkbox_container">
-      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled) echo ' checked="checked"';?> />
+      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled): ?> checked="checked"<?php endif; ?> />
       <label for="repository_enable_<?php echo $act->extension; ?>"><?php echo $text[$act->action]; ?></label>
     </div>
     </td>

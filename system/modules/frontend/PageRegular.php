@@ -75,14 +75,38 @@ class PageRegular extends Frontend
 
 		$this->Template->sections = $arrCustomSections;
 
-		// Page title and description (call AFTER modules have been generated)
+		// HOOK: modify the page or layout object
+		if (isset($GLOBALS['TL_HOOKS']['generatePage']) && is_array($GLOBALS['TL_HOOKS']['generatePage']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['generatePage'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objPage, $objLayout, $this);
+			}
+		}
+
+		//Set page title and description AFTER the modules have been generated
 		$this->Template->mainTitle = $objPage->rootTitle;
 		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 		$this->Template->title = $this->Template->mainTitle . ' - ' . $this->Template->pageTitle;
 		$this->Template->description = str_replace(array("\n", "\r"), array(' ' , ''), $objPage->description);
 
-		// Include all style sheets (call AFTER modules have been generated)
-		$this->createStyleSheets($objLayout);
+		// Body onload and body classes
+		$this->Template->onload = trim($objLayout->onload);
+		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
+
+		// HOOK: extension "bodyclass"
+		if (in_array('bodyclass', $this->Config->getActiveModules()))
+		{
+			if (strlen($objPage->cssBody))
+			{
+				$this->Template->class .= ' ' . $objPage->cssBody;
+			}
+		}
+
+		// Execute AFTER the modules have been generated and create footer scripts first
+		$this->createFooterScripts($objLayout);
+		$this->createHeaderScripts($objLayout);
 
 		// Add an invisible character to empty sections (IE fix)
 		if (!$this->Template->header && $objLayout->header)
@@ -176,32 +200,7 @@ class PageRegular extends Frontend
 			$this->Template->urchinUrl = $this->Environment->ssl ? 'https://ssl.google-analytics.com/ga.js' : 'http://www.google-analytics.com/ga.js';
 		}
 
-		// Additional <head> tags
-		if (($strHead = trim($objLayout->head)) != false)
-		{
-			$this->Template->head = $strHead . "\n";
-		}
-
-		// Body onload and body classes
-		$this->Template->onload = trim($objLayout->onload);
-		$this->Template->class = trim($objLayout->cssClass . ' ' . $objPage->cssClass);
-
-		// HOOK: extension "bodyclass"
-		if (in_array('bodyclass', $this->Config->getActiveModules()))
-		{
-			if (strlen($objPage->cssBody))
-			{
-				$this->Template->class .= ' ' . $objPage->cssBody;
-			}
-		}
-
-		// Mootools script
-		if (strlen($objLayout->mootools) && $objLayout->mootools != '-')
-		{
-			$objTemplate = new FrontendTemplate($objLayout->mootools);
-			$this->Template->mootools = $objTemplate->parse();
-		}
-
+		// Initialize margin
 		$arrMargin = array
 		(
 			'left'   => '0 auto 0 0',
@@ -298,6 +297,7 @@ class PageRegular extends Frontend
 		$this->Template->sPosition = $objLayout->sPosition;
 
 		// Default settings
+		$this->Template->layout = $objLayout;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = $this->Environment->base;
@@ -305,10 +305,10 @@ class PageRegular extends Frontend
 
 
 	/**
-	 * Create all style sheets and scripts
+	 * Create all header scripts
 	 * @param object
 	 */
-	protected function createStyleSheets(Database_Result $objLayout)
+	protected function createHeaderScripts(Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
@@ -318,7 +318,8 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" media="all" />' . "\n";
+				list($stylesheet, $media) = explode('|', $stylesheet);
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
 			}
 		}
 
@@ -369,30 +370,78 @@ class PageRegular extends Frontend
 			}
 		}
 
-		$strJavaScripts = '';
+		$strHeadTags = '';
 
 		// Add internal scripts
 		if (is_array($GLOBALS['TL_JAVASCRIPT']) && count($GLOBALS['TL_JAVASCRIPT']))
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
 			}
 		}
-
-		$strHeadTags = '';
 
 		// Add internal <head> tags
 		if (is_array($GLOBALS['TL_HEAD']) && count($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
 			{
-				$strHeadTags .= $head . "\n";
+				$strHeadTags .= trim($head) . "\n";
 			}
 		}
 
+		// Add <head> tags
+		if (($strHead = trim($objLayout->head)) != false)
+		{
+			$strHeadTags .= $strHead . "\n";
+		}
+
 		$this->Template->stylesheets = $strStyleSheets;
-		$this->Template->head = $strJavaScripts . $strHeadTags . $this->Template->head;
+		$this->Template->head = $strHeadTags;
+	}
+
+
+	/**
+	 * Create all footer scripts
+	 * @param object
+	 */
+	protected function createFooterScripts(Database_Result $objLayout)
+	{
+		$strMootools = '';
+		$arrMootools = deserialize($objLayout->mootools, true);
+
+		// Add MooTools templates
+		foreach ($arrMootools as $strTemplate)
+		{
+			$objTemplate = new FrontendTemplate($strTemplate);
+
+			// Backwards compatibility
+			try
+			{
+				$strMootools .= $objTemplate->parse();
+			}
+			catch (Exception $e)
+			{
+				$this->log($e->getMessage(), 'PageRegular createFooterScripts()', TL_ERROR);
+			}
+		}
+
+		// Add internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		{
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strMootools .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		// Add custom JavaScript
+		if ($objLayout->script != '')
+		{
+			$strMootools .= "\n" . trim($objLayout->script) . "\n";
+		}
+
+		$this->Template->mootools = $strMootools;
 	}
 }
 

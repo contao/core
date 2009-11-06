@@ -68,8 +68,9 @@ $GLOBALS['TL_LANG']['tl_news_archive']['feed_legend']      = 'RSS/Atom feed';
  */
 $GLOBALS['TL_LANG']['tl_news_archive']['ascending']     = 'ascending';
 $GLOBALS['TL_LANG']['tl_news_archive']['descending']    = 'descending';
-$GLOBALS['TL_LANG']['tl_news_archive']['notify_author'] = 'Author of the news item';
 $GLOBALS['TL_LANG']['tl_news_archive']['notify_admin']  = 'System administrator';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_author'] = 'Author of the news item';
+$GLOBALS['TL_LANG']['tl_news_archive']['notify_both']   = 'Author and system administrator';
 $GLOBALS['TL_LANG']['tl_news_archive']['source_teaser'] = 'News teasers';
 $GLOBALS['TL_LANG']['tl_news_archive']['source_text']   = 'Full articles';
 

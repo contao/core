@@ -74,6 +74,13 @@ class DC_Folder extends DataContainer implements listable, editable
 
 		$this->intId = $this->Input->get('id', true);
 
+		// Clear the clipboard
+		if (isset($_GET['clipboard']))
+		{
+			$this->Session->set('CLIPBOARD', array());
+			$this->redirect($this->getReferer());
+		}
+
 		// Check whether the table is defined
 		if (!strlen($strTable) || !count($GLOBALS['TL_DCA'][$strTable]))
 		{
@@ -109,28 +116,30 @@ class DC_Folder extends DataContainer implements listable, editable
 			$session['CURRENT']['IDS'] = $sids;
 			$this->Session->setData($session);
 
-			$next = isset($_POST['edit']) ? 'editAll' : (isset($_POST['delete']) ? 'deleteAll' : 'select');
-			$this->redirect(str_replace('act=select', 'act='.$next, $this->Environment->request));
+			if (isset($_POST['edit']))
+			{
+				$this->redirect(str_replace('act=select', 'act=editAll', $this->Environment->request));
+			}
+			elseif (isset($_POST['delete']))
+			{
+				$this->redirect(str_replace('act=select', 'act=deleteAll', $this->Environment->request));
+			}
+			elseif (isset($_POST['cut']) || isset($_POST['copy']))
+			{
+				$arrClipboard = $this->Session->get('CLIPBOARD');
+
+				$arrClipboard[$strTable] = array
+				(
+					'id' => $ids,
+					'mode' => (isset($_POST['cut']) ? 'cutAll' : 'copyAll')
+				);
+
+				$this->Session->set('CLIPBOARD', $arrClipboard);
+				$this->redirect($this->getReferer());
+			}
 		}
 
 		$this->strTable = $strTable;
-
-		// Check for valid file types
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
-		{
-			$this->arrValidFileTypes = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']);
-
-			if ($this->Input->get('id'))
-			{
-				$fileinfo = preg_replace('/.*\.(.*)$/ui', '$1', $this->Input->get('id'));
-
-				if (!in_array(strtolower($fileinfo), $this->arrValidFileTypes))
-				{
-					$this->log('File "'.$this->Input->get('id').'" is not an allowed file type', 'DC_Folder __construct()', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
-				}
-			}
-		}
 
 		// Call onload_callback (e.g. to check permissions)
 		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onload_callback']))
@@ -145,30 +154,10 @@ class DC_Folder extends DataContainer implements listable, editable
 			}
 		}
 
-		// Redirect if a file is outside the files directory
-		if ($this->Input->get('id') && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $this->Input->get('id', true)))
-		{
-			$this->log('File or folder "'.$this->Input->get('id').'" is not in the files directory', 'DC_Folder __construct()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
-		}
-
-		if ($this->Input->get('pid') && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $this->Input->get('pid')))
-		{
-			$this->log('File or folder "'.$this->Input->get('pid').'" is not in the files directory', 'DC_Folder __construct()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
-		}
-
 		// Get all filemounts (root folders)
 		if (is_array($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))
 		{
 			$this->arrFilemounts = $this->eliminateNestedPaths($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']);
-
-			// Prevent changing root folders
-			if (in_array($this->Input->get('act'), array('edit', 'paste', 'delete')) && in_array($this->Input->get('id', true), $this->arrFilemounts))
-			{
-				$this->log('Attempt to edit, copy, move or delete root folder "'.$this->Input->get('id').'"', 'DC_Folder __construct()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
 		}
 	}
 
@@ -180,7 +169,26 @@ class DC_Folder extends DataContainer implements listable, editable
 	public function showAll()
 	{
 		$return = '';
-		$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
+
+		// Add to clipboard
+		if ($this->Input->get('act') == 'paste')
+		{
+			if ($this->Input->get('mode') != 'create' && $this->Input->get('mode') != 'move')
+			{
+				$this->isValid($this->intId);
+			}
+
+			$arrClipboard = $this->Session->get('CLIPBOARD');
+
+			$arrClipboard[$this->strTable] = array
+			(
+				'id' => $this->intId,
+				'childs' => $this->Input->get('childs'),
+				'mode' => $this->Input->get('mode')
+			);
+
+			$this->Session->set('CLIPBOARD', $arrClipboard);
+		}
 
 		// Get session data and toggle nodes
 		if ($this->Input->get('tg') == 'all')
@@ -203,18 +211,28 @@ class DC_Folder extends DataContainer implements listable, editable
 			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
+		$blnClipboard = false;
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+
+		// Check clipboard
+		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		{
+			$blnClipboard = true;
+			$arrClipboard = $arrClipboard[$this->strTable];
+		}
+
 		$this->import('Files');
 
 		// Call recursive function tree()
 		if (!count($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false)
 		{
-			$return .= $this->generateTree(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], 0);
+			$return .= $this->generateTree(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], 0, false, false, ($blnClipboard ? $arrClipboard : false));
 		}
 		else
 		{
 			for ($i=0; $i<count($this->arrFilemounts); $i++)
 			{
-				$return .= $this->generateTree(TL_ROOT . '/' . $this->arrFilemounts[$i], 0, true);
+				$return .= $this->generateTree(TL_ROOT . '/' . $this->arrFilemounts[$i], 0, true, false, ($blnClipboard ? $arrClipboard : false));
 			}
 		}
 
@@ -232,24 +250,28 @@ class DC_Folder extends DataContainer implements listable, editable
 			$hrfNew = $GLOBALS['TL_DCA'][$this->strTable]['list']['new']['href'];
 		}
 
+		$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
+
 		// Build tree
 		$return = '
-<div id="tl_buttons">
-'.(($this->Input->get('act') == 'paste' || $this->Input->get('act') == 'select') ? '<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '').(($this->Input->get('act') != 'paste' && $this->Input->get('act') != 'select' && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? '<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> &#160; :: &#160; ' : '').(($this->Input->get('act') != 'paste' && $this->Input->get('act') != 'select') ? '<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$lblNew.'</a>' . $this->generateGlobalButtons(true) : '') . '
+<div id="tl_buttons">'.(($this->Input->get('act') == 'select') ? '
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select' && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? '
+<a href="'.$this->addToUrl('&amp;act=paste&amp;mode=move').'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['move'][1]).'" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['move'][0].'</a> &#160; :: &#160; ' : '') . (($this->Input->get('act') != 'select') ? '
+<a href="'.$this->addToUrl($hrfNew).'" class="'.$clsNew.'" title="'.specialchars($ttlNew).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$lblNew.'</a>' . $this->generateGlobalButtons(true) . ($blnClipboard ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') : '') . '
 </div>' . (($this->Input->get('act') == 'select') ? '
 
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_select" class="tl_form" method="post">
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select" />' : '').'
 
-<div class="tl_listing_container" id="tl_listing">'.(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
 </div>' : '').'
 
 <ul class="tl_listing">
-  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($this->Input->get('act') == 'paste' && !count($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$this->Input->get('mode').'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].'&amp;id='.$this->Input->get('id')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both;"></div></li>'.$return.'
+  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($this->Input->get('act') == 'paste' && !count($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both;"></div></li>'.$return.'
 </ul>
 
 </div>';
@@ -262,7 +284,9 @@ class DC_Folder extends DataContainer implements listable, editable
 <div class="tl_formbody_submit" style="text-align:right;">
 
 <div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" alt="delete selected records" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'" />
+  <input type="submit" name="cut" id="cut" class="tl_submit" alt="move selected records" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'" />
+  <input type="submit" name="copy" id="copy" class="tl_submit" alt="copy selected records" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'" />' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="edit" id="edit" class="tl_submit" alt="edit selected records" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'" />' : '') . '
 </div>
 
@@ -292,50 +316,92 @@ class DC_Folder extends DataContainer implements listable, editable
 	public function create()
 	{
 		$this->import('Files');
+		$strFolder = $this->Input->get('pid', true);
 
-		if (!strlen($this->Input->get('pid')) || !file_exists(TL_ROOT . '/' . $this->Input->get('pid', true)) || (count($this->arrFilemounts) && !$this->isMounted($this->Input->get('pid', true))))
+		if ($strFolder == '' || !file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "'.$this->Input->get('pid').'" was not mounted or is not a directory', 'DC_Folder create()', TL_ERROR);
+			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder create()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
-		$this->Files->mkdir($this->Input->get('pid', true) . '/__new__');
-		$this->redirect(html_entity_decode($this->switchToEdit($this->Input->get('pid') . '/__new__')));
+		// Empty clipboard
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+		$arrClipboard[$this->strTable] = array();
+		$this->Session->set('CLIPBOARD', $arrClipboard);
+
+		$this->Files->mkdir($strFolder . '/__new__');
+		$this->redirect(html_entity_decode($this->switchToEdit($strFolder . '/__new__')));
 	}
 
 
 	/**
 	 * Move an existing file or folder
+	 * @param boolean
 	 */
-	public function cut()
+	public function cut($blnDoNotRedirect=false)
 	{
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('id', true)) || !$this->isMounted($this->Input->get('id', true)))
+		$this->isValid($this->intId);
+		$strFolder = $this->Input->get('pid', true);
+
+		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
 		{
-			$this->log('File or folder "'.$this->Input->get('id').'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
+			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('pid', true)) || !$this->isMounted($this->Input->get('pid', true)))
+		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "'.$this->Input->get('pid').'" was not mounted or is not a directory', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
 		// Avoid a circular reference
-		if (preg_match('/^' . preg_quote($this->Input->get('id', true), '/') . '/i', $this->Input->get('pid', true)))
+		if (preg_match('/^' . preg_quote($this->intId, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to move folder "'.$this->Input->get('id').'" to "'.$this->Input->get('pid').'" (circular reference)!', 'DC_Folder cut()', TL_ERROR);
+			$this->log('Attempt to move folder "'.$this->intId.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder cut()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
+		// Empty clipboard
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+		$arrClipboard[$this->strTable] = array();
+		$this->Session->set('CLIPBOARD', $arrClipboard);
+
 		$this->import('Files');
 
-		$source = $this->Input->get('id', true);
-		$destination = str_replace(dirname($source), $this->Input->get('pid', true), $source);
+		$destination = str_replace(dirname($this->intId), $strFolder, $this->intId);
+		$this->Files->rename($this->intId, $destination);
+		$this->log('File or folder "' . $this->intId . '" has been moved to "' . $destination . '"', 'DC_Folder cut()', TL_FILES);
 
-		$this->Files->rename($source, $destination);
+		if (!$blnDoNotRedirect)
+		{
+			$this->redirect($this->getReferer());
+		}
+	}
 
-		$this->log('File or folder "' . $source . '" has been moved to "' . $destination . '"', 'DC_Folder cut()', TL_FILES);
+
+	/**
+	 * Move all selected files and folders
+	 */
+	public function cutAll()
+	{
+		// PID is mandatory
+		if (!strlen($this->Input->get('pid', true)))
+		{
+			$this->redirect($this->getReferer());
+		}
+
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+
+		if (isset($arrClipboard[$this->strTable]) && is_array($arrClipboard[$this->strTable]['id']))
+		{
+			foreach ($arrClipboard[$this->strTable]['id'] as $id)
+			{
+				$this->intId = $id;
+				$this->cut(true);
+			}
+		}
+
 		$this->redirect($this->getReferer());
 	}
 
@@ -348,30 +414,44 @@ class DC_Folder extends DataContainer implements listable, editable
 	public function copy($source='', $destination='')
 	{
 		$noReload = strlen($source);
+		$strFolder = $this->Input->get('pid', true);
 
-		// Get source and destination
-		$source = strlen($source) ? $source : $this->Input->get('id', true);
-		$destination = strlen($destination) ? $destination : str_replace(dirname($source), $this->Input->get('pid', true), $source);
-
-		// Duplicate file or folder
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('id', true)) || !$this->isMounted($this->Input->get('id', true)))
+		if ($source == '')
 		{
-			$this->log('File or folder "'.$this->Input->get('id').'" was not mounted or could not be found', 'DC_Folder copy()', TL_ERROR);
+			$source = $this->intId;
+		}
+
+		if ($destination == '')
+		{
+			$destination = str_replace(dirname($source), $strFolder, $source);
+		}
+
+		$this->isValid($source);
+		$this->isValid($destination);
+
+		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
+		{
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder copy()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('pid', true)) || !$this->isMounted($this->Input->get('pid', true)))
+		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "'.$this->Input->get('pid').'" was not mounted or is not a directory', 'DC_Folder copy()', TL_ERROR);
+			$this->log('Parent folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder copy()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
 		// Avoid a circular reference
-		if (preg_match('/^' . preg_quote($this->Input->get('id', true), '/') . '/i', $this->Input->get('pid', true)))
+		if (preg_match('/^' . preg_quote($source, '/') . '/i', $strFolder))
 		{
-			$this->log('Attempt to copy folder "'.$this->Input->get('id').'" to "'.$this->Input->get('pid').'" (circular reference)!', 'DC_Folder copy()', TL_ERROR);
+			$this->log('Attempt to copy folder "'.$source.'" to "'.$strFolder.'" (circular reference)', 'DC_Folder copy()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
+
+		// Empty clipboard
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+		$arrClipboard[$this->strTable] = array();
+		$this->Session->set('CLIPBOARD', $arrClipboard);
 
 		$this->import('Files');
 
@@ -428,13 +508,38 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Do not reload on recursive calls
 		if (!$noReload)
 		{
-			if (file_exists(TL_ROOT . '/' . $this->Input->get('id', true)) && (!is_array($this->arrFilemounts) || $this->isMounted($this->Input->get('id', true))))
+			if (file_exists(TL_ROOT . '/' . $source) && $this->isMounted($source))
 			{
-				$this->log('File or folder "'.$this->Input->get('id').'" has been duplicated', 'DC_Folder copy()', TL_FILES);
+				$this->log('File or folder "'.$source.'" has been duplicated', 'DC_Folder copy()', TL_FILES);
 			}
 
 			$this->redirect($this->getReferer());
 		}
+	}
+
+
+	/**
+	 * Move all selected files and folders
+	 */
+	public function copyAll()
+	{
+		// PID is mandatory
+		if (!strlen($this->Input->get('pid', true)))
+		{
+			$this->redirect($this->getReferer());
+		}
+
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+
+		if (isset($arrClipboard[$this->strTable]) && is_array($arrClipboard[$this->strTable]['id']))
+		{
+			foreach ($arrClipboard[$this->strTable]['id'] as $id)
+			{
+				$this->copy($id);
+			}
+		}
+
+		$this->redirect($this->getReferer());
 	}
 
 
@@ -446,13 +551,17 @@ class DC_Folder extends DataContainer implements listable, editable
 	{
 		$noReload = strlen($source);
 
-		// Get source
-		$source = strlen($source) ? $source : $this->Input->get('id', true);
+		if ($source == '')
+		{
+			$source = $this->intId;
+		}
+
+		$this->isValid($source);
 
 		// Delete file or folder
 		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
-			$this->log('File or folder "' . $source . '" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
+			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
@@ -525,23 +634,40 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Move one or more local files to the server
+	 * @param boolean
 	 */
-	public function move()
+	public function move($blnIsAjax=false)
 	{
 		$error = false;
+		$strFolder = $this->Input->get('pid', true);
 
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('pid', true)) || !$this->isMounted($this->Input->get('pid', true)))
+		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
 		{
-			$this->log('Folder "' . $this->Input->get('pid') . '" was not mounted or is not a directory', 'DC_Folder move()', TL_ERROR);
+			$this->log('Folder "'.$strFolder.'" was not mounted or is not a directory', 'DC_Folder move()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
+		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFolder))
+		{
+			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', 'DC_Folder move()', TL_ERROR);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Empty clipboard
+		if (!$blnIsAjax)
+		{
+			$arrClipboard = $this->Session->get('CLIPBOARD');
+			$arrClipboard[$this->strTable] = array();
+			$this->Session->set('CLIPBOARD', $arrClipboard);
+		}
+
 		$arrUploaded = array();
+		$uploadTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['uploadTypes']));
 
 		// Upload files
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
 		{
-			$maxlength_kb = number_format(($GLOBALS['TL_CONFIG']['maxFileSize']/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
+			$maxlength_kb = $this->getReadableSize($GLOBALS['TL_CONFIG']['maxFileSize']);
 
 			foreach ($_FILES as $file)
 			{
@@ -555,7 +681,7 @@ class DC_Folder extends DataContainer implements listable, editable
 					if (in_array($file['error'], array(1, 2)))
 					{
 						$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb);
-						$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb.' kB' , 'DC_Folder move()', TL_ERROR);
+						$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
 
 						$error = true;
 					}
@@ -575,13 +701,12 @@ class DC_Folder extends DataContainer implements listable, editable
 				if ($file['size'] > $GLOBALS['TL_CONFIG']['maxFileSize'])
 				{
 					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb);
-					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb.' kB', 'DC_Folder move()', TL_ERROR);
+					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
 
 					$error = true;
 					continue;
 				}
 
-				$uploadTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['uploadTypes']));
 				$pathinfo = pathinfo($file['name']);
 
 				// File type not allowed
@@ -595,7 +720,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				}
 
 				$this->import('Files');
-				$strNewFile = $this->Input->get('pid', true) . '/' . $file['name'];
+				$strNewFile = $strFolder . '/' . $file['name'];
 
 				// Move file to destination
 				if ($this->Files->move_uploaded_file($file['tmp_name'], $strNewFile))
@@ -665,8 +790,31 @@ class DC_Folder extends DataContainer implements listable, editable
 				}
 			}
 
+			// Send FancyUpload response
+			if ($blnIsAjax)
+			{
+				if ($error)
+				{
+					echo json_encode(array('status'=>'0', 'message'=>$_SESSION['TL_ERROR'][0]));
+				}
+				elseif ($blnExceeds || $blnResized)
+				{
+					echo json_encode(array('status'=>'1', 'message'=>$_SESSION['TL_INFO'][0]));
+				}
+				else
+				{
+					echo json_encode(array('status'=>'1', 'message'=>$_SESSION['TL_CONFIRM'][0]));
+				}
+
+				$_SESSION['TL_ERROR'] = array();
+				$_SESSION['TL_INFO'] = array();
+				$_SESSION['TL_CONFIRM'] = array();
+
+				exit;
+			}
+
 			// Redirect or reload
-			if (!$error)
+			elseif (!$error)
 			{
 				$this->import('Automator');
 				$this->Automator->purgeHtmlFolder();
@@ -693,13 +841,20 @@ class DC_Folder extends DataContainer implements listable, editable
   <input type="file" name="'.$i.'" class="tl_upload_field" maxlength="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" onfocus="Backend.getScrollOffset();" /><br />';
 		}
 
+		// Generate FancyUpload key
+		$_SESSION['FANCY_KEY'] = md5(microtime(true));
+
+		// Add FancyUpload scripts
+		$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
+
 		// Display upload form
 		return '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($this->Input->get('pid'))).'</h2>'.$this->getMessages().'
+<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>'.$this->getMessages().'
 
 <form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
 <div class="tl_formbody_edit">
@@ -707,13 +862,30 @@ class DC_Folder extends DataContainer implements listable, editable
 <input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" />
 
 <div class="tl_tbox block">
-  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>'.$fields.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
+  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
+  <div id="fancy-fallback">'.$fields.'
+  </div>
+  <div id="fancy-status" class="hide">
+  <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
+  <div>
+    <strong class="overall-title"></strong><br />
+    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
+  </div>
+  <div style="margin-top:3px">
+    <strong class="current-title"></strong><br />
+    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
+  </div>
+  <div class="current-text"></div>
+  </div>
+  <ul id="fancy-list" class="hide">
+    <li></li>
+  </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
 </div>
 
 </div>
 
-<div class="tl_formbody_submit">
+<div id="fancy-submit" class="tl_formbody_submit">
 
 <div class="tl_submit_container">
 <input type="submit" name="upload" class="tl_submit" alt="upload files" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'" />
@@ -721,6 +893,98 @@ class DC_Folder extends DataContainer implements listable, editable
 </div>
 
 </div>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.addEvent("domready", function() {
+  var up = new FancyUpload2($("fancy-status"), $("fancy-list"), {
+    data: {
+      "isAjax": true,
+      "FORM_SUBMIT": "tl_upload",
+      "FANCY_KEY": "'. $_SESSION['FANCY_KEY'] . '",
+      "action": "fancyUpload"
+    },
+    appendCookieData: true,
+    url: $("'.$this->strTable.'").action,
+    path: "plugins/fancyupload/Swiff.Uploader.swf",
+    typeFilter: {
+      "Images (*.' . implode(', *.', $uploadTypes) . ')": "*.' . implode('; *.', $uploadTypes) . '"
+    },
+    target: "fancy-browse",
+    onLoad: function() {
+      $("fancy-status").removeClass("hide");
+      $("fancy-list").removeClass("hide");
+      $("fancy-fallback").destroy();
+      $("fancy-submit").destroy();
+      this.target.addEvents({
+        click: function() {
+          return false;
+        },
+        mouseenter: function() {
+          this.addClass("hover");
+        },
+        mouseleave: function() {
+          this.removeClass("hover");
+          this.blur();
+        },
+        mousedown: function() {
+          this.focus();
+        }
+      });
+      $("fancy-clear").addEvent("click", function() {
+        up.remove();
+        return false;
+      });
+      $("fancy-upload").addEvent("click", function() {
+        up.start();
+        return false;
+      });
+    },
+    onSelectFail: function(files) {
+      files.each(function(file) {
+        new Element("li", {
+          "class": "validation-error",
+          html: file.validationErrorMessage || file.validationError,
+          title: MooTools.lang.get("FancyUpload", "removeTitle"),
+          events: {
+            click: function() {
+              this.destroy();
+            }
+          }
+        }).inject(this.list, "top");
+      }, this);
+    },
+    onFileSuccess: function(file, response) {
+      var json = new Hash(JSON.decode(response, true) || {});
+      if (json.get("status") == "1") {
+        file.element.addClass("file-success");
+        file.info.set("html", json.get("message"));
+      } else {
+        file.element.addClass("file-failed");
+        file.info.set("html", json.get("message"));
+      }
+    },
+    onFail: function(error) {
+      switch (error) {
+        case "hidden":
+          alert("To enable the embedded uploader, unblock it in your browser and refresh (see Adblock).");
+          break;
+        case "blocked":
+          alert("To enable the embedded uploader, enable the blocked Flash movie (see Flashblock).");
+          break;
+        case "empty":
+          alert("A required file was not found, please be patient and we fix this.");
+          break;
+        case "flash":
+          alert("To enable the embedded uploader, install the latest Adobe Flash plugin.");
+          break;
+      }
+    }
+  });
+});
+//--><!]]>
+</script>
+
 </form>';
 	}
 
@@ -733,11 +997,11 @@ class DC_Folder extends DataContainer implements listable, editable
 	{
 		$return = '';
 		$this->noReload = false;
+		$this->isValid($this->intId);
 
-		// Check whether the current file exists
-		if (!file_exists(TL_ROOT . '/' . $this->Input->get('id', true)) || !$this->isMounted($this->Input->get('id', true)))
+		if (!file_exists(TL_ROOT . '/' . $this->intId) || !$this->isMounted($this->intId))
 		{
-			$this->log('File or folder "'.$this->Input->get('id').'" was not mounted or could not be found', 'DC_Folder edit()', TL_ERROR);
+			$this->log('File or folder "'.$this->intId.'" was not mounted or could not be found', 'DC_Folder edit()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
@@ -782,11 +1046,19 @@ class DC_Folder extends DataContainer implements listable, editable
 					$this->strInputName = $vv;
 
 					// Load current value
-					$pathinfo = pathinfo($this->Input->get('id', true));
-
+					$pathinfo = pathinfo($this->intId);
 					$this->strPath = $pathinfo['dirname'];
-					$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
-					$this->varValue = basename($pathinfo['basename'], $this->strExtension);
+
+					if (is_dir(TL_ROOT . '/' . $this->intId))
+					{
+						$this->strExtension = '';
+						$this->varValue = basename($pathinfo['basename']);
+					}
+					else
+					{
+						$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
+						$this->varValue = basename($pathinfo['basename'], $this->strExtension);
+					}
 
 					// Fix Unix system files like .htaccess
 					if (strncmp($this->varValue, '.', 1) === 0)
@@ -1109,6 +1381,8 @@ window.addEvent(\'domready\', function()
 	 */
 	public function source()
 	{
+		$this->isValid($this->intId);
+
 		if (is_dir(TL_ROOT . '/' . $this->intId))
 		{
 			$this->log('Directory "'.$this->intId.'" cannot be edited', 'DC_Folder source()', TL_ERROR);
@@ -1225,7 +1499,7 @@ window.addEvent(\'domready\', function()
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || (is_array($this->arrFilemounts) && !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension)) || $this->varValue == $varValue)
+		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
 		{
 			return;
 		}
@@ -1247,7 +1521,7 @@ window.addEvent(\'domready\', function()
 		$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
 
 		// Add a log entry
-		if (stristr($this->Input->get('id'), '__new__') == true)
+		if (stristr($this->intId, '__new__') == true)
 		{
 			$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
 		}
@@ -1295,8 +1569,18 @@ window.addEvent(\'domready\', function()
 			return '';
 		}
 
+		$blnClipboard = false;
+		$arrClipboard = $this->Session->get('CLIPBOARD');
+
+		// Check clipboard
+		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		{
+			$blnClipboard = true;
+			$arrClipboard = $arrClipboard[$this->strTable];
+		}
+
 		$this->import('Files');
-		return $this->generateTree(TL_ROOT.'/'.$strFolder, ($level * 20));
+		return $this->generateTree(TL_ROOT.'/'.$strFolder, ($level * 20), false, false, ($blnClipboard ? $arrClipboard : false));
 	}
 
 
@@ -1306,9 +1590,10 @@ window.addEvent(\'domready\', function()
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
-	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false)
+	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false, $arrClipboard=false)
 	{
 		static $session;
 		$session = $this->Session->getData();
@@ -1389,13 +1674,13 @@ window.addEvent(\'domready\', function()
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <strong>'.basename($currentFolder).'</strong></div> <div class="tl_right">';
+			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentFolder) . '"><strong>'.basename($currentFolder).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
-			if ($this->Input->get('act') == 'paste')
+			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
 			{
 				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
-				$return .= (in_array($this->Input->get('mode'), array('cut', 'copy')) && preg_match('/^' . preg_quote($this->Input->get('id', true), '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$this->Input->get('mode').'&amp;mode=2&amp;pid='.$currentFolder.'&amp;id='.$this->Input->get('id', true)).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentFolder.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
 			}
 
 			// Default buttons (do not display buttons for mounted folders)
@@ -1410,7 +1695,7 @@ window.addEvent(\'domready\', function()
 			if ($countFiles > 0 && $session['filetree'][$md5] == 1)
 			{
 				$return .= '<li class="parent" id="filetree_'.$md5.'"><ul class="level_'.$level.'">';
-				$return .= $this->generateTree($folders[$f], ($intMargin + $intSpacing), false, $protected);
+				$return .= $this->generateTree($folders[$f], ($intMargin + $intSpacing), false, $protected, $arrClipboard);
 				$return .= '</ul></li>';
 			}
 		}
@@ -1444,7 +1729,7 @@ window.addEvent(\'domready\', function()
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail = '<br /><a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="this.blur(); Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" ><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
+					$thumbnail = '<br /><a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" ><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
 				}
 			}
 
@@ -1457,11 +1742,15 @@ window.addEvent(\'domready\', function()
 			}
 			else
 			{
-				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="this.blur(); Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons
-			if ($this->Input->get('act') != 'paste')
+			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
+			{
+				$_buttons = '&nbsp;';
+			}
+			else
 			{
 				$_buttons = ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'" />' : $this->generateButtons(array('id'=>urldecode($currentEncoded)), $this->strTable);
 			}
@@ -1480,6 +1769,11 @@ window.addEvent(\'domready\', function()
 	 */
 	protected function isMounted($strFolder)
 	{
+		if ($strFolder == '')
+		{
+			return false;
+		}
+
 		if (!count($this->arrFilemounts))
 		{
 			return true;
@@ -1498,6 +1792,56 @@ window.addEvent(\'domready\', function()
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Check a file operation
+	 * @param string
+	 * @return boolean
+	 */
+	protected function isValid($strFile)
+	{
+		$strFolder = $this->Input->get('pid', true);
+
+		// Check for valid file types
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
+		{
+			$this->arrValidFileTypes = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']);
+			$fileinfo = preg_replace('/.*\.(.*)$/ui', '$1', $strFile);
+
+			if (!in_array(strtolower($fileinfo), $this->arrValidFileTypes))
+			{
+				$this->log('File "'.$strFile.'" is not an allowed file type', 'DC_Folder isValid()', TL_ERROR);
+				$this->redirect('typolight/main.php?act=error');
+			}
+		}
+
+		// Check whether the file is within the files directory
+		if (!preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFile))
+		{
+			$this->log('File or folder "'.$strFile.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Check whether the parent folder is within the files directory
+		if ($strFolder && !preg_match('/^'.preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/').'/i', $strFolder))
+		{
+			$this->log('Parent folder "'.$strFolder.'" is not within the files directory', 'DC_Folder isValid()', TL_ERROR);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Do not allow file operations on root folders
+		if ($this->Input->get('act') == 'edit' || $this->Input->get('act') == 'paste' || $this->Input->get('act') == 'delete')
+		{
+			if (in_array($strFile, $this->arrFilemounts))
+			{
+				$this->log('Attempt to edit, copy, move or delete root folder "'.$strFile.'"', 'DC_Folder isValid()', TL_ERROR);
+				$this->redirect('typolight/main.php?act=error');
+			}
+		}
+
+		return true;
 	}
 
 

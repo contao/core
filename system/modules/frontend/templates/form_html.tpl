@@ -1,1 +1,1 @@
-<?php echo $this->generate(); ?> 
+<?php echo $this->generate(); ?>

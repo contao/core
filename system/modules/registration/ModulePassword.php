@@ -130,7 +130,9 @@ class ModulePassword extends Module
 				continue;
 			}
 
+			$arrField['eval']['tableless'] = $this->tableless;
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
+
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name']));
 
 			$objWidget->storeValues = true;
@@ -180,6 +182,7 @@ class ModulePassword extends Module
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['requestPassword']);
 		$this->Template->rowLast = 'row_' . count($arrFields) . ' row_last' . ((($row % 2) == 0) ? ' even' : ' odd');
+		$this->Template->tableless = $this->tableless;
 	}
 
 
@@ -205,6 +208,8 @@ class ModulePassword extends Module
 
 		// Define form field
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
+		$arrField['eval']['tableless'] = $this->tableless;
+
 		$objWidget = new FormPassword($this->prepareForWidget($arrField, 'password'));
 
 		// Set row classes
@@ -267,6 +272,7 @@ class ModulePassword extends Module
 		$this->Template->fields = $objWidget->parse();
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['setNewPassword']);
+		$this->Template->tableless = $this->tableless;
 	}
 
 
@@ -318,6 +324,7 @@ class ModulePassword extends Module
 		$objEmail = new Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['passwordSubject'], $this->Environment->host);
 		$objEmail->text = $strConfirmation;
 		$objEmail->sendTo($objMember->email);

@@ -289,7 +289,7 @@ class String
 			$strString = str_replace($strEmail, $strEncoded, $strString);
 		}
 
-		return $strString;
+		return str_replace('mailto:', '&#109;&#97;&#105;&#108;&#116;&#111;&#58;', $strString);
 	}
 
 
@@ -322,6 +322,25 @@ class String
 		}
 
 		return preg_replace('/(' . preg_quote($strPhrase, '/') . ')/i', $strOpeningTag . '\\1' . $strClosingTag, $strString);
+	}
+
+
+	/**
+	 * Split a string of comma separated values
+	 * @param  string
+	 * @param  string
+	 * @return array
+	 */
+	public function splitCsv($strString, $strDelimiter=',')
+	{
+		$arrValues = preg_split('/'.$strDelimiter.'(?=(?:[^"]*"[^"]*")*(?![^"]*"))/', $strString);
+
+		foreach ($arrValues as $k=>$v)
+		{
+			$arrValues[$k] = trim($v, ' "');
+		}
+
+		return $arrValues;
 	}
 }
 

@@ -40,9 +40,9 @@ $GLOBALS['TL_LANG']['tl_content']['alt']          = array('Alternativer Text', '
 $GLOBALS['TL_LANG']['tl_content']['size']         = array('Bildbreite und Bildhöhe', 'Geben Sie entweder Breite oder Höhe ein, um das Bild zu skalieren, oder beide Werte, um es zu beschneiden.');
 $GLOBALS['TL_LANG']['tl_content']['imagemargin']  = array('Bildabstand', 'Hier können Sie den oberen, rechten, unteren und linken Bildabstand eingeben.');
 $GLOBALS['TL_LANG']['tl_content']['imageUrl']     = array('Link-Adresse', 'Eine eigene Link-Adresse überschreibt den Lightbox-Link, so dass das Bild nicht mehr in der Großansicht dargestellt werden kann.');
-$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Bildunterschrift', 'Hier können Sie einen kurzen Text eingeben, der unterhalb des Bildes angezeigt wird.');
+$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Großansicht/Neues Fenster', 'Großansicht des Bildes in einer Lightbox bzw. den Link in einem neuem Browserfenster öffnen.');
 $GLOBALS['TL_LANG']['tl_content']['floating']     = array('Bildausrichtung', 'Bitte legen Sie fest, wie das Bild ausgerichtet werden soll.');
-$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Großansicht', 'Einen Lightbox-Link zur Großansicht des Bildes hinzufügen.');
+$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Bildunterschrift', 'Hier können Sie einen kurzen Text eingeben, der unterhalb des Bildes angezeigt wird.');
 $GLOBALS['TL_LANG']['tl_content']['html']         = array('HTML-Code', 'Sie können die Liste der erlaubten HTML-Tags in den Backend-Einstellungen ändern.');
 $GLOBALS['TL_LANG']['tl_content']['listtype']     = array('Listentyp', 'Bitte wählen Sie den Typ der Liste.');
 $GLOBALS['TL_LANG']['tl_content']['listitems']    = array('Listeneinträge', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen bevor Sie die Reihenfolge ändern.');
@@ -65,12 +65,14 @@ $GLOBALS['TL_LANG']['tl_content']['highlight']    = array('Syntaxhervorhebung', 
 $GLOBALS['TL_LANG']['tl_content']['code']         = array('Code', 'Beachten Sie, dass der Code nicht ausgeführt wird.');
 $GLOBALS['TL_LANG']['tl_content']['linkTitle']    = array('Link-Text', 'Der Link-Text wird anstelle der Link-Adresse angezeigt.');
 $GLOBALS['TL_LANG']['tl_content']['embed']        = array('Den Link einbetten', 'Verwenden Sie den Platzhalter "%s", um den Link in einen Text einzubetten (z.B. <em>Für mehr Informationen besuchen Sie %s</em>).');
+$GLOBALS['TL_LANG']['tl_content']['rel']          = array('Lightbox', 'Hier können Sie ein rel-Attribut eingeben, um die Lightbox anzusteuern.');
 $GLOBALS['TL_LANG']['tl_content']['useImage']     = array('Einen Bildlink erstellen', 'Ein Bild anstatt des Link-Textes verwenden.');
 $GLOBALS['TL_LANG']['tl_content']['multiSRC']     = array('Quelldateien', 'Bitte wählen Sie eine oder mehr Dateien oder Ordner aus der Dateiübersicht. Wenn Sie einen Ordner auswählen, werden die darin enthaltenen Dateien automatisch eingefügt.');
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir']   = array('Benutzerverzeichnis verwenden', 'Das Benutzerverzeichnis als Dateiquelle verwenden, wenn sich ein Benutzer angemeldet hat.');
 $GLOBALS['TL_LANG']['tl_content']['perRow']       = array('Vorschaubilder pro Reihe', 'Die Anzahl an Vorschaubildern pro Reihe.');
 $GLOBALS['TL_LANG']['tl_content']['perPage']      = array('Elemente pro Seite', 'Die Anzahl an Elementen pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_content']['sortBy']       = array('Sortieren nach', 'Bitte wählen Sie eine Sortierreihenfolge aus.');
+$GLOBALS['TL_LANG']['tl_content']['galleryTpl']   = array('Galerietemplate', 'Hier können Sie das Galerietemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_content']['cteAlias']     = array('Bezogenes Inhaltselement', 'Bitte wählen Sie das Inhaltselement aus, das Sie einfügen möchten.');
 $GLOBALS['TL_LANG']['tl_content']['articleAlias'] = array('Bezogener Artikel', 'Bitte wählen Sie den Artikel aus, den Sie einfügen möchten.');
 $GLOBALS['TL_LANG']['tl_content']['article']      = array('Artikel', 'Bitte wählen Sie einen Artikel aus.');
@@ -114,6 +116,7 @@ $GLOBALS['TL_LANG']['tl_content']['name_desc'] = 'Dateiname (absteigend)';
 $GLOBALS['TL_LANG']['tl_content']['date_asc']  = 'Datum (aufsteigend)';
 $GLOBALS['TL_LANG']['tl_content']['date_desc'] = 'Datum (absteigend)';
 $GLOBALS['TL_LANG']['tl_content']['meta']      = 'Meta Datei (meta.txt)';
+$GLOBALS['TL_LANG']['tl_content']['random']    = 'Zufällige Reihenfolge';
 
 
 /**

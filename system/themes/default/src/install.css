@@ -108,7 +108,7 @@ body
 /* Paragraphs and lists */
 p
 {
-	margin:0 18px;
+	margin:0 18px 12px 18px;
 	padding:0;
 	line-height:16px;
 	text-align:justify;
@@ -202,6 +202,16 @@ li
 	padding:2px 0 3px 20px;
 	background:url("images/login.gif") no-repeat left center;
 	color:#bbb;
+}
+
+/* License */
+#license pre
+{
+	height:400px;
+	overflow:auto;
+	margin:0 18px;
+	background:#f9f9f9;
+	border:1px solid #b8b8b8;
 }
 
 /* Formbody */

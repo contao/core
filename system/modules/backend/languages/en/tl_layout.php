@@ -51,11 +51,12 @@ $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Ple
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Document Type Definition', 'Please choose a Document Type Definition.');
-$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('Mootools template', 'Here you can select the mootools accordion template');
 $GLOBALS['TL_LANG']['tl_layout']['urchinId']      = array('Google Analytics Id', 'Here you can enter a Google Analytics Id.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add individual tags to the head section of the page.');
+$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('Mootools templates', 'Here you can select one or more MooTools templates.');
+$GLOBALS['TL_LANG']['tl_layout']['script']        = array('Custom JavaScript code', 'The JavaScript code which will be inserted at the bottom of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Static layout', 'Create a static layout with a fixed width and alignment.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Overall width', 'The overall width will be applied to the wrapper element.');
 $GLOBALS['TL_LANG']['tl_layout']['align']         = array('Alignment', 'Please select the alignment of the page.');
@@ -71,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_layout']['sections_legend'] = 'Custom sections';
 $GLOBALS['TL_LANG']['tl_layout']['head_legend']     = 'Head section';
 $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Front end modules';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Expert settings';
+$GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
 
 

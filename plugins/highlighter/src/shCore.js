@@ -6,7 +6,7 @@
  * http://alexgorbatchev.com/wiki/SyntaxHighlighter:Donate
  *
  * @version
- * 2.0.296 (March 01 2009)
+ * 2.0.320 (May 03 2009)
  * 
  * @copyright
  * Copyright (C) 2004-2009 Alex Gorbatchev.
@@ -15,7 +15,7 @@
  * This file is part of SyntaxHighlighter.
  * 
  * SyntaxHighlighter is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
+ * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
@@ -25,7 +25,7 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/licenses/>.
+ * along with SyntaxHighlighter.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
  */
 //
 // Begin anonymous function. This is used to contain local scope variables without polutting global scope.
@@ -42,9 +42,6 @@ var sh = {
 		
 		/** First line number. */
 		'first-line' : 1,
-		
-		/** Font size of the SyntaxHighlighter block. */
-		'font-size' : null,
 		
 		/** Lines to highlight. */
 		'highlight' : null,
@@ -71,7 +68,10 @@ var sh = {
 		'auto-links' : true,
 		
 		/** Gets or sets light mode. Equavalent to turning off gutter and toolbar. */
-		'light' : false
+		'light' : false,
+		
+		/** Enables or disables automatic line wrapping. */
+		'wrap-lines' : true
 	},
 	
 	config : {
@@ -86,6 +86,8 @@ var sh = {
 		
 		/** Blogger mode flag. */
 		bloggerMode : false,
+		
+		stripBrs : false,
 		
 		/** Name of the tag that SyntaxHighlighter will automatically look for. */
 		tagName : 'pre',
@@ -102,7 +104,7 @@ var sh = {
 			brushNotHtmlScript : 'Brush wasn\'t configured for html-script option: ',
 			
 			// this is populated by the build script
-			aboutDialog : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About SyntaxHighlighter</title></head><body style="font-family:Georgia,\'Times New Roman\',Times,serif;background-color:#fff;color:#000;font-size:1em;text-align:center;"><div style="text-align:center;margin-top:3em;"><div style="font-family:Geneva,Arial,Helvetica,sans-serif;font-size:xx-large;">SyntaxHighlighter</div><div style="font-size:.75em;margin-bottom:4em;"><div>version 2.0.296 (March 01 2009)</div><div><a href="http://alexgorbatchev.com" target="_blank" style="color:#0099FF;text-decoration:none;">http://alexgorbatchev.com</a></div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'
+			aboutDialog : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About SyntaxHighlighter</title></head><body style="font-family:Geneva,Arial,Helvetica,sans-serif;background-color:#fff;color:#000;font-size:1em;text-align:center;"><div style="text-align:center;margin-top:3em;"><div style="font-size:xx-large;">SyntaxHighlighter</div><div style="font-size:.75em;margin-bottom:4em;"><div>version 2.0.320 (May 03 2009)</div><div><a href="http://alexgorbatchev.com" target="_blank" style="color:#0099FF;text-decoration:none;">http://alexgorbatchev.com</a></div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'
 		},
 
 		/** If true, output will show HTML produces instead. */
@@ -279,7 +281,7 @@ var sh = {
 				
 				this.execute = function(sender, event, args)
 				{
-					var code = sh.utils.fixForBlogger(highlighter.originalCode).replace(/</g, '&lt;'),
+					var code = sh.utils.fixInputString(highlighter.originalCode).replace(/</g, '&lt;'),
 						wnd = sh.utils.popup('', '_blank', 750, 400, 'location=0, resizable=1, menubar=0, scrollbars=1')
 						;
 					
@@ -385,7 +387,7 @@ var sh = {
 					{
 						case 'get':
 							var code = sh.utils.unindent(
-								sh.utils.fixForBlogger(highlighter.originalCode)
+								sh.utils.fixInputString(highlighter.originalCode)
 									.replace(/&lt;/g, '<')
 									.replace(/&gt;/g, '>')
 									.replace(/&amp;/g, '&')
@@ -475,6 +477,9 @@ var sh = {
 	},
 
 	utils : {
+		/**
+		 * Generates a unique element ID.
+		 */
 		guid : function(prefix)
 		{
 			return prefix + Math.round(Math.random() * 1000000).toString();
@@ -913,9 +918,20 @@ var sh = {
 			return code;
 		},
 		
-		fixForBlogger : function(str)
+		/**
+		 * Performs various string fixes based on configuration.
+		 */
+		fixInputString : function(str)
 		{
-			return (sh.config.bloggerMode == true) ? str.replace(/<br\s*\/?>|&lt;br\s*\/?&gt;/gi, '\n') : str;
+			var br = /<br\s*\/?>|&lt;br\s*\/?&gt;/gi;
+			
+			if (sh.config.bloggerMode == true)
+				str = str.replace(br, '\n');
+
+			if (sh.config.stripBrs == true)
+				str = str.replace(br, '');
+				
+			return str;
 		},
 		
 		/**
@@ -936,7 +952,7 @@ var sh = {
 		 */
 		unindent: function(str)
 		{
-			var lines = sh.utils.fixForBlogger(str).split('\n'),
+			var lines = sh.utils.fixInputString(str).split('\n'),
 				indents = new Array(),
 				regex = /^\s*/,
 				min = 1000
@@ -1242,27 +1258,6 @@ sh.Highlighter.prototype = {
 	},
 	
 	/**
-	 * Checks if one match is inside another.
-	 * @param {Match} match   Match object to check.
-	 * @return {Boolean}      Returns true if given match was inside another, false otherwise.
-	 */
-	isMatchNested: function(match)
-	{
-		for (var i = 0; i < this.matches.length; i++)
-		{
-			var item = this.matches[i];
-			
-			if (item === null)
-				continue;
-			
-			if ((match.index > item.index) && (match.index < item.index + item.length))
-				return true;
-		}
-		
-		return false;
-	},
-	
-	/**
 	 * Applies all regular expression to the code and stores all found
 	 * matches in the `this.matches` array.
 	 * @param {Array} regexList		List of regular expressions.
@@ -1290,9 +1285,32 @@ sh.Highlighter.prototype = {
 	 */
 	removeNestedMatches: function()
 	{
-		for (var i = 0; i < this.matches.length; i++)
-			if (this.isMatchNested(this.matches[i]))
-				this.matches[i] = null;
+		var matches = this.matches;
+		
+		// Optimized by Jose Prado (http://joseprado.com)
+		for (var i = 0; i < matches.length; i++) 
+		{ 
+			if (matches[i] === null)
+				continue;
+			
+			var itemI = matches[i],
+				itemIEndPos = itemI.index + itemI.length
+				;
+			
+			for (var j = i + 1; j < matches.length && matches[i] !== null; j++) 
+			{
+				var itemJ = matches[j];
+				
+				if (itemJ === null) 
+					continue;
+				else if (itemJ.index > itemIEndPos) 
+					break;
+				else if (itemJ.index == itemI.index && itemJ.length > itemI.length)
+					this.matches[i] = null;
+				else if (itemJ.index >= itemI.index && itemJ.index < itemIEndPos) 
+					this.matches[j] = null;
+			}
+		}
 	},
 	
 	/**
@@ -1396,10 +1414,13 @@ sh.Highlighter.prototype = {
 	 */
 	highlight: function(code, params)
 	{
+		// using variables for shortcuts because JS compressor will shorten local variable names
 		var conf = sh.config,
 			vars = sh.vars,
 			div,
-			tabSize
+			divClassName,
+			tabSize,
+			important = 'important'
 			;
 
 		this.params = {};
@@ -1431,18 +1452,26 @@ sh.Highlighter.prototype = {
 		this.lines = this.create('DIV');
 		this.lines.className = 'lines';
 
-		div.className = 'syntaxhighlighter';
+		className = 'syntaxhighlighter';
 		div.id = this.id;
 		
+		// make collapsed
 		if (this.getParam('collapse'))
-			div.className += ' collapsed';
+			className += ' collapsed';
 		
+		// disable gutter
 		if (this.getParam('gutter') == false)
-			div.className += ' nogutter';
+			className += ' nogutter';
+		
+		// disable line wrapping
+		if (this.getParam('wrap-lines') == false)
+		 	this.lines.className += ' no-wrap';
 
-		div.className += ' ' + this.getParam('class-name');
-		div.style.fontSize = this.getParam('font-size', ''); // IE7 can't take null
-					
+		// add custom user style name
+		className += ' ' + this.getParam('class-name');
+		
+		div.className = className;
+		
 		this.originalCode = code;
 		this.code = sh.utils.trimFirstAndLastLines(code)
 			.replace(/\r/g, ' ') // IE lets these buggers through
@@ -1465,6 +1494,12 @@ sh.Highlighter.prototype = {
 			this.bar.className = 'bar';
 			this.bar.appendChild(sh.toolbar.create(this));
 			div.appendChild(this.bar);
+			
+			// set up toolbar rollover
+			var bar = this.bar;
+			function hide() { bar.className = bar.className.replace('show', ''); }
+			div.onmouseover = function() { hide(); bar.className += ' show'; };
+			div.onmouseout = function() { hide(); }
 		}
 		
 		// add columns ruler

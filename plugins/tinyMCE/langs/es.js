@@ -90,7 +90,7 @@ desc:"Editar Estilo CSS"
 paste:{
 paste_text_desc:"Pegar como texto plano",
 paste_word_desc:"Pegar desde Word",
-selectall_desc:"Seleccionar todo"
+selectall_desc:"Elegir todo"
 },
 paste_dlg:{
 text_title:"Use CTRL+V en su teclado para pegar el texto en la ventana.",

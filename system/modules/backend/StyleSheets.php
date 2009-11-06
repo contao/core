@@ -627,10 +627,10 @@ class StyleSheets extends Backend
 							break;
 					}
 				}
-			}
 
-			// Write style sheet
-			$this->updateStyleSheet($insertId);
+				// Write style sheet
+				$this->updateStyleSheet($insertId);
+			}
 
 			// Redirect
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
@@ -652,7 +652,7 @@ class StyleSheets extends Backend
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import" />
 
 <div class="tl_tbox block">
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1].'</p>' : '').'
 </div>
 

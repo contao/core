@@ -1,8 +1,8 @@
 tinyMCE.addI18n('lt.template_dlg',{
 title:"\u0160ablonai",
 label:"\u0160ablonas",
-desc_label:"Apra\u0161ymas",
-desc:"\u012Eterpti jau nustatyt\u0105 \u0161ablonin\u012F turin\u012F",
+desc_label:"Apra\u0161as",
+desc:"\u012Eterpti numatyt\u0105 \u0161ablono turin\u012F",
 select:"Pasirinkti \u0161ablon\u0105",
 preview:"Per\u017Ei\u016Bra",
 warning:"Persp\u0117jimas: \u0160ablono pakeitimas kitu gali sukelti duomen\u0173 praradim\u0105.",

@@ -160,8 +160,8 @@ abstract class Module extends Frontend
 		$time = time();
 
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($pid, 'root', 'error_403', 'error_404', $time, $time);
+		$objSubpages = $this->Database->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$this->showHidden ? " AND p2.hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND p2.guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<".$time.") AND (p2.stop='' OR p2.stop>".$time.") AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$this->showHidden ? " AND p1.hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND p1.guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<".$time.") AND (p1.stop='' OR p1.stop>".$time.") AND p1.published=1" : "") . " ORDER BY p1.sorting")
+									  ->execute($pid);
 
 		if ($objSubpages->numRows < 1)
 		{
@@ -195,14 +195,20 @@ abstract class Module extends Frontend
 		// Browse subpages
 		while($objSubpages->next())
 		{
+			// Skip hidden sitemap pages
+			if ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_never')
+			{
+				continue;
+			}
+
 			$subitems = '';
 			$_groups = deserialize($objSubpages->groups);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!strlen($objSubpages->protected) || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($groups, $_groups))) || $this->showProtected)
+			if (!strlen($objSubpages->protected) || BE_USER_LOGGED_IN || (!is_array($_groups) && FE_USER_LOGGED_IN) || (is_array($_groups) && count(array_intersect($groups, $_groups))) || $this->showProtected || ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_always'))
 			{
 				// Check whether there will be subpages
-				if (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page')))))
+				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page'))))))
 				{
 					$subitems = $this->renderNavigation($objSubpages->id, $level);
 				}
@@ -221,9 +227,18 @@ abstract class Module extends Frontend
 						break;
 
 					case 'forward':
-						$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($objSubpages->jumpTo);
+						if (!$objSubpages->jumpTo)
+						{
+							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+													  ->limit(1)
+													  ->execute($objSubpages->id);
+						}
+						else
+						{
+							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+													  ->limit(1)
+													  ->execute($objSubpages->jumpTo);
+						}
 
 						if ($objNext->numRows)
 						{
@@ -241,46 +256,48 @@ abstract class Module extends Frontend
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !$this->Input->get('articles'))
 				{
 					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : ''));
+					$row = $objSubpages->row();
 
-					$items[] = array
-					(
-						'isActive' => true,
-						'subitems' => $subitems,
-						'class' => (strlen($strClass) ? $strClass : ''),
-						'pageTitle' => specialchars($objSubpages->pageTitle),
-						'title' => specialchars($objSubpages->title),
-						'link' => $objSubpages->title,
-						'href' => $href,
-						'alias' => $objSubpages->alias,
-						'nofollow' => (strncmp($objSubpages->robots, 'noindex', 7) === 0),
-						'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
-						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
-						'accesskey' => $objSubpages->accesskey,
-						'tabindex' => $objSubpages->tabindex
-					);
+					$row['isActive'] = true;
+					$row['subitems'] = $subitems;
+					$row['class'] = (strlen($strClass) ? $strClass : '');
+					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
+					$row['title'] = specialchars($objSubpages->title);
+					$row['link'] = $objSubpages->title;
+					$row['href'] = $href;
+					$row['alias'] = $objSubpages->alias;
+					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
+					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+					$row['accesskey'] = $objSubpages->accesskey;
+					$row['tabindex'] = $objSubpages->tabindex;
+					$row['subpages'] = $objSubpages->subpages;
+
+					$items[] = $row;
 				}
 
 				// Regular page
 				else
 				{
 					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : ''));
+					$row = $objSubpages->row();
 
-					$items[] = array
-					(
-						'isActive' => false,
-						'subitems' => $subitems,
-						'class' => (strlen($strClass) ? $strClass : ''),
-						'pageTitle' => specialchars($objSubpages->pageTitle),
-						'title' => specialchars($objSubpages->title),
-						'link' => $objSubpages->title,
-						'href' => $href,
-						'alias' => $objSubpages->alias,
-						'nofollow' => (strncmp($objSubpages->robots, 'noindex', 7) === 0),
-						'target' => (($objSubpages->type == 'redirect' && $objSubpages->target) ? ' window.open(this.href); return false;' : ''),
-						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description),
-						'accesskey' => $objSubpages->accesskey,
-						'tabindex' => $objSubpages->tabindex
-					);
+					$row['isActive'] = false;
+					$row['subitems'] = $subitems;
+					$row['class'] = (strlen($strClass) ? $strClass : '');
+					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
+					$row['title'] = specialchars($objSubpages->title);
+					$row['link'] = $objSubpages->title;
+					$row['href'] = $href;
+					$row['alias'] = $objSubpages->alias;
+					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
+					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
+					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+					$row['accesskey'] = $objSubpages->accesskey;
+					$row['tabindex'] = $objSubpages->tabindex;
+					$row['subpages'] = $objSubpages->subpages;
+
+					$items[] = $row;
 				}
 			}
 		}

@@ -220,6 +220,7 @@ class Index extends Frontend
 		}
 
 		$expire = null;
+		$content = null;
 
 		// Include file
 		ob_start();
@@ -268,8 +269,14 @@ class Index extends Frontend
 		// Store session data
 		$this->Session->setData($session);
 
+		// Content type
+		if (!$content)
+		{
+			$content = 'text/html';
+		}
+
 		// Set cache header
-		header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 		header('Cache-Control: public, max-age=' . ($expire - time()));
 		header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
 		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');

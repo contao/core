@@ -165,6 +165,16 @@ abstract class System
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
 					   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $this->Environment->httpUserAgent);
+
+		// HOOK: allow to add custom loggers
+		if (isset($GLOBALS['TL_HOOKS']['addLogEntry']) && is_array($GLOBALS['TL_HOOKS']['addLogEntry']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['addLogEntry'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strText, $strFunction, $strAction);
+			}
+		}
 	}
 
 
@@ -297,6 +307,7 @@ abstract class System
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
 
+		// Parse all active modules
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFallback = sprintf('%s/system/modules/%s/languages/en/%s.php', TL_ROOT, $strModule, $strName);
@@ -319,7 +330,17 @@ abstract class System
 			}
 		}
 
-		include(TL_ROOT . '/system/config/langconfig.php');
+		// HOOK: allow to load custom labels
+		if (isset($GLOBALS['TL_HOOKS']['loadLanguageFile']) && is_array($GLOBALS['TL_HOOKS']['loadLanguageFile']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['loadLanguageFile'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strName, $strLanguage);
+			}
+		}
+
+		@include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
 
@@ -459,6 +480,62 @@ abstract class System
 		}
 
 		setcookie($strName, $varValue, $intExpires, $strPath, $strDomain, $blnSecure);
+	}
+
+
+	/**
+	 * Split a friendly name address and return name and e-mail as array
+	 * @param string
+	 * @return array
+	 */
+	protected function splitFriendlyName($strEmail)
+	{
+		if (strpos($strEmail, '<') !== false)
+		{
+			return array_map('trim', explode(' <', str_replace('>', '', $strEmail)));
+		}
+		elseif (strpos($strEmail, '[') !== false)
+		{
+			return array_map('trim', explode(' [', str_replace(']', '', $strEmail)));
+		}
+		else
+		{
+			return array('', $strEmail);
+		}
+	}
+
+
+	/**
+	 * Encode an internationalized domain name
+	 * @param string
+	 * @return string
+	 */
+	protected function idnaEncode($strEmail)
+	{
+		if (!class_exists('idna_convert', false))
+		{
+			require_once(TL_ROOT . '/plugins/idna/idna_convert.class.php');
+		}
+
+		$objIdn = new idna_convert();
+		return $objIdn->encode($strEmail);
+	}
+
+
+	/**
+	 * Decode an internationalized domain name
+	 * @param string
+	 * @return string
+	 */
+	protected function idnaDecode($strEmail)
+	{
+		if (!class_exists('idna_convert', false))
+		{
+			require_once(TL_ROOT . '/plugins/idna/idna_convert.class.php');
+		}
+
+		$objIdn = new idna_convert();
+		return $objIdn->decode($strEmail);
 	}
 }
 

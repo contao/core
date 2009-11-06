@@ -34,6 +34,7 @@ $GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Disable the security
 $GLOBALS['TL_LANG']['tl_module']['reg_groups']     = array('Member groups', 'Here you can assign the user to one or more groups.');
 $GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'] = array('Allow login', 'Allow the new user to log into the front end.');
 $GLOBALS['TL_LANG']['tl_module']['reg_skipName']   = array('Skip username', 'Do not require the username to request a new password.');
+$GLOBALS['TL_LANG']['tl_module']['reg_close']      = array('Mode', 'Here you can define how to handle the deletion.');
 $GLOBALS['TL_LANG']['tl_module']['reg_assignDir']  = array('Create a home directory', 'Create a home directory from the registered username.');
 $GLOBALS['TL_LANG']['tl_module']['reg_homeDir']    = array('Home directory path', 'Please select the parent folder from the files directory.');
 $GLOBALS['TL_LANG']['tl_module']['reg_activate']   = array('Send activation e-mail', 'Send an activation e-mail to the registered e-mail address.');
@@ -49,9 +50,16 @@ $GLOBALS['TL_LANG']['tl_module']['account_legend'] = 'Account settings';
 
 
 /**
- * Reference
+ * Default messages
  */
 $GLOBALS['TL_LANG']['tl_module']['emailText']    = array('Your registration on %s', "Thank you for your registration on ##domain##.\n\nPlease click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.\n");
 $GLOBALS['TL_LANG']['tl_module']['passwordText'] = array('Your password request on %s', "You have requested a new password for ##domain##.\n\nPlease click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.\n");
+
+
+/**
+ * Reference
+ */
+$GLOBALS['TL_LANG']['tl_module']['close_deactivate'] = 'Deactivate account';
+$GLOBALS['TL_LANG']['tl_module']['close_delete']     = 'Irrevocably delete account';
 
 ?>

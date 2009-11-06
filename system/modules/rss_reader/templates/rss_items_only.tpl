@@ -8,7 +8,7 @@
 <?php foreach ($this->items as $item): ?>
 
 <div class="rss_items_only<?php echo $item['class']; ?>">
-<h2><a href="<?php echo $item['link']; ?>" onclick="window.open(this.href); return false;"><?php echo $item['title']; ?></a></h2>
+<h2><a href="<?php echo $item['link']; ?>"<?php echo LINK_NEW_WINDOW; ?>><?php echo $item['title']; ?></a></h2>
 <p class="description"><?php echo $item['description']; ?></p>
 </div>
 <?php endforeach; ?>

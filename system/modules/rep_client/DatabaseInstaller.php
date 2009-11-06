@@ -87,12 +87,19 @@ class DatabaseInstaller extends Controller
     <td colspan="2" class="tl_col_0"><h3><label>'.$label.'</label></h3></td>
   </tr>';
 
+				// Check all
+				$return .= '
+  <tr>
+    <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')" /></td>
+    <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label></td>
+  </tr>';
+
 				// Fields
 				foreach ($sql_command[$command] as $vv)
 				{
 					$return .= '
   <tr>
-    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
+    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
     <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
   </tr>';
 				}

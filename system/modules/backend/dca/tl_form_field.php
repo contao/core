@@ -95,6 +95,13 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_form_field']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_form_field', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form_field']['show'],
@@ -107,10 +114,13 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'storeFile', 'addSubmit', 'imageSubmit', 'multiple'),
+		'__selector__'                => array('type', 'fsType', 'storeFile', 'addSubmit', 'imageSubmit', 'multiple'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type;{text_legend},text',
 		'explanation'                 => '{type_legend},type;{text_legend},text',
+		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType',
+		'fieldsetfsStart'             => '{type_legend},type,label;{fconfig_legend},fsType;{expert_legend:hide},class',
+		'fieldsetfsStop'              => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
 		'html'                        => '{type_legend},type;{text_legend},html',
 		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
 		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
@@ -266,6 +276,16 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
+		'fsType' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['fsType'],
+			'default'                 => 'fsStart',
+			'exclude'                 => true,
+			'inputType'               => 'radio',
+			'options'                 => array('fsStart', 'fsStop'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field'],
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
+		),
 		'value' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['value'],
@@ -280,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'accesskey' => array
 		(
@@ -411,6 +431,7 @@ class tl_form_field extends Backend
 			case 'edit':
 			case 'show':
 			case 'delete':
+			case 'toggle':
 				$objField = $this->Database->prepare("SELECT pid FROM tl_form_field WHERE id=?")
 										   ->limit(1)
 										   ->execute($id);
@@ -430,6 +451,9 @@ class tl_form_field extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', 5);
@@ -499,6 +523,53 @@ class tl_form_field extends Backend
 <table cellspacing="0" cellpadding="0" class="tl_form_field_preview" summary="Table holds a form input field">
 '.$strWidget.'</table>
 </div>' . "\n";
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
+
+		if ($row['invisible'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Toggle the visibility of a form field
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_form_field SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

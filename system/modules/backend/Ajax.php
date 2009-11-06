@@ -149,32 +149,6 @@ class Ajax extends Backend
 				$this->Session->set($this->strAjaxKey, $nodes);
 				break;
 
-			// Toggle the visibility of content elements
-			case 'toggleVisibility':
-				switch ($this->Input->post('type'))
-				{
-					case 'content':
-						$this->Database->prepare("UPDATE tl_content SET invisible='" . (intval($this->Input->post('state') == 1) ? '' : 1) . "' WHERE id=?")
-									   ->execute($this->Input->post('id'));
-						break;
-
-					case 'style':
-						$this->Database->prepare("UPDATE tl_style SET invisible='" . (intval($this->Input->post('state') == 1) ? '' : 1) . "' WHERE id=?")
-									   ->execute($this->Input->post('id'));
-
-						$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")
-													    ->limit(1)
-													    ->execute($this->Input->post('id'));
-
-						if ($objStylesheet->numRows)
-						{
-							$this->import('StyleSheets');
-							$this->StyleSheets->updateStyleSheet($objStylesheet->pid);
-						}
-						break;
-				}
-				exit; break;
-
 			// Toggle the visibility of a fieldset
 			case 'toggleFieldset':
 				$fs = $this->Session->get('fieldset_states');
@@ -285,6 +259,32 @@ class Ajax extends Backend
 				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
 
 				echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
+				exit; break;
+
+			// Upload files via FancyUpload
+			case 'fancyUpload':
+				$dc->move(true);
+				exit; break;
+
+			// Toggle the visibility of a record
+			case 'toggleVisibility':
+				// HOOK: handle news comments
+				if ($dc->table == 'tl_news_archive' && $this->Input->get('key') == 'comments')
+				{
+					$this->loadDataContainer('tl_news_comments');
+					$dc->table = 'tl_news_comments';
+				}
+
+				// Check for a toggleVisibility method
+				if (class_exists($dc->table, false))
+				{
+					$dca = new $dc->table();
+
+					if (method_exists($dca, 'toggleVisibility'))
+					{
+						$dca->toggleVisibility($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
+					}
+				}
 				exit; break;
 
 			// Toggle subpalettes

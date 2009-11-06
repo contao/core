@@ -55,9 +55,10 @@ CREATE TABLE `tl_calendar_events` (
   `alt` varchar(255) NOT NULL default '',
   `size` varchar(64) NOT NULL default '',
   `imagemargin` varchar(128) NOT NULL default '',
+  `imageUrl` varchar(255) NOT NULL default '',
+  `fullsize` char(1) NOT NULL default '',
   `caption` varchar(255) NOT NULL default '',
   `floating` varchar(32) NOT NULL default '',
-  `fullsize` char(1) NOT NULL default '',
   `recurring` char(1) NOT NULL default '',
   `repeatEach` varchar(64) NOT NULL default '',
   `repeatEnd` int(10) unsigned NOT NULL default '0',
@@ -101,7 +102,8 @@ CREATE TABLE `tl_module` (
 -- 
 
 CREATE TABLE `tl_user` (
-  `calendars` blob NULL
+  `calendars` blob NULL,
+  `calendarp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -112,5 +114,6 @@ CREATE TABLE `tl_user` (
 -- 
 
 CREATE TABLE `tl_user_group` (
-  `calendars` blob NULL
+  `calendars` blob NULL,
+  `calendarp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

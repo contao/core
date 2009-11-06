@@ -84,14 +84,16 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'icon'                => 'copy.gif',
+				'button_callback'     => array('tl_calendar', 'copyCalendar')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_calendar', 'deleteCalendar')
 			),
 			'show' => array
 			(
@@ -210,7 +212,11 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_calendar', 'checkFeedAlias')
+			)
 		),
 		'description' => array
 		(
@@ -267,6 +273,12 @@ class tl_calendar extends Backend
 
 		$GLOBALS['TL_DCA']['tl_calendar']['list']['sorting']['root'] = $root;
 
+		// Check permissions to add calendars
+		if (!is_array($this->User->calendarp) || !in_array('create', $this->User->calendarp))
+		{
+			$GLOBALS['TL_DCA']['tl_calendar']['config']['closed'] = true;
+		}
+
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
@@ -283,18 +295,45 @@ class tl_calendar extends Backend
 
 					if (is_array($arrNew['tl_calendar']) && in_array($this->Input->get('id'), $arrNew['tl_calendar']))
 					{
-						$objUser = $this->Database->prepare("SELECT calendars FROM tl_user WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->User->id);
+						// Add permissions on user level
+						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
+						{
+							$objUser = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
 
-						// $calendars only contains user permissions
-						$calendars = deserialize($objUser->calendars);
-						$calendars[] = $this->Input->get('id');
+							$arrCalendarp = deserialize($objUser->calendarp);
 
-						$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
-									   ->execute(serialize($calendars), $this->User->id);
+							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
+							{
+								$arrCalendars = deserialize($objUser->calendars);
+								$arrCalendars[] = $this->Input->get('id');
 
-						// $root also contains group permissions
+								$this->Database->prepare("UPDATE tl_user SET calendars=? WHERE id=?")
+											   ->execute(serialize($arrCalendars), $this->User->id);
+							}
+						}
+
+						// Add permissions on group level
+						elseif ($this->User->groups[0] > 0)
+						{
+							$objGroup = $this->Database->prepare("SELECT calendars, calendarp FROM tl_user_group WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->groups[0]);
+
+							$arrCalendarp = deserialize($objGroup->calendarp);
+
+							if (is_array($arrCalendarp) && in_array('create', $arrCalendarp))
+							{
+								$arrCalendars = deserialize($objGroup->calendars);
+								$arrCalendars[] = $this->Input->get('id');
+
+								$this->Database->prepare("UPDATE tl_user_group SET calendars=? WHERE id=?")
+											   ->execute(serialize($arrCalendars), $this->User->groups[0]);
+							}
+						}
+
+						// Add new element to the user object
 						$root[] = $this->Input->get('id');
 						$this->User->calendars = $root;
 					}
@@ -304,7 +343,7 @@ class tl_calendar extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->calendarp) || !in_array('delete', $this->User->calendarp))))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar ID "'.$this->Input->get('id').'"', 'tl_calendar checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
@@ -313,8 +352,16 @@ class tl_calendar extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
 				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->calendarp) || !in_array('delete', $this->User->calendarp)))
+				{
+					$session['CURRENT']['IDS'] = array();
+				}
+				else
+				{
+					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				}
 				$this->Session->setData($session);
 				break;
 
@@ -342,6 +389,63 @@ class tl_calendar extends Backend
 
 		$this->import('Calendar');
 		$this->Calendar->generateFeed($dc->id);
+	}
+
+
+	/**
+	 * Check the RSS-feed alias
+	 * @param object
+	 * @throws Exception
+	 */
+	public function checkFeedAlias($varValue, DataContainer $dc)
+	{
+		// No change or empty value
+		if ($varValue == $dc->value || $varValue == '')
+		{
+			return $varValue;
+		}
+
+		$arrFeeds = $this->removeOldFeeds(true);
+
+		// Alias exists
+		if (array_search($varValue, $arrFeeds) !== false)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Return the copy calendar button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function copyCalendar($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->calendarp) && in_array('create', $this->User->calendarp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete calendar button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteCalendar($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->calendarp) && in_array('delete', $this->User->calendarp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

@@ -99,6 +99,11 @@ class FileTree extends Widget
 		$tree = '';
 		$path = $GLOBALS['TL_CONFIG']['uploadPath'];
 
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
+		}
+
 		// Set custom path
 		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
@@ -173,6 +178,11 @@ class FileTree extends Widget
 			{
 				$this->varValue = deserialize($objField->$strField);
 			}
+		}
+
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
 		}
 
 		return $this->renderFiletree(TL_ROOT.'/'.$folder, ($level * 20));
@@ -257,20 +267,21 @@ class FileTree extends Widget
 				}
 			}
 
-			$folderAttribute = 'style="margin-left:20px;"';
-			$session[$node][md5($folders[$f])] = is_numeric($session[$node][md5($folders[$f])]) ? $session[$node][md5($folders[$f])] : 0;
-			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$tid = md5($folders[$f]);
+			$folderAttribute = 'style="margin-left:20px;"';
+			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
+			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
+			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
 			{
 				$folderAttribute = '';
-				$img = ($session[$node][$tid] == 1) ? 'folMinus.gif' : 'folPlus.gif';
+				$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 				$return .= '<a href="'.$this->addToUrl($flag.'tg='.$tid).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFiletree(this, \''.$xtnode.'_'.$tid.'\', \''.$currentFolder.'\', \''.$this->strField.'\', \''.$this->strName.'\', '.$level.');">'.$this->generateImage($img, '', 'style="margin-right:2px;"').'</a>';
 			}
 
-			$folderImg = ($session[$node][$tid] == 1 && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
+			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
 			$folderLabel = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? '<strong>'.basename($currentFolder).'</strong>' : basename($currentFolder);
 
 			// Add the current folder
@@ -300,7 +311,7 @@ class FileTree extends Widget
 			$return .= '</div><div style="clear:both;"></div></li>';
 
 			// Call next node
-			if ($countFiles > 0 && $session[$node][$tid] == 1)
+			if ($countFiles > 0 && $blnIsOpen)
 			{
 				$return .= '<li class="parent" id="'.$xtnode.'_'.$tid.'"><ul class="level_'.$level.'">';
 				$return .= $this->renderFiletree($folders[$f], ($intMargin + $intSpacing));
@@ -352,7 +363,7 @@ class FileTree extends Widget
 					}
 				}
 
-				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="this.blur(); Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 				// Add checkbox or radio button
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])

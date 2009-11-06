@@ -40,9 +40,9 @@ $GLOBALS['TL_LANG']['tl_content']['alt']          = array('Alternate text', 'An 
 $GLOBALS['TL_LANG']['tl_content']['size']         = array('Image width and height', 'Enter either width or height to resize the image, or both values to crop it.');
 $GLOBALS['TL_LANG']['tl_content']['imagemargin']  = array('Image margin', 'Here you can enter the top, right, bottom and left margin.');
 $GLOBALS['TL_LANG']['tl_content']['imageUrl']     = array('Link target', 'A custom link target will override the lightbox link, so the image cannot be viewed fullsize anymore.');
-$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Image caption', 'Here you can enter a short text that will be displayed below the image.');
+$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Full-size view/new window', 'Open the full-size image in a lightbox or the link in a new browser window.');
 $GLOBALS['TL_LANG']['tl_content']['floating']     = array('Image alignment', 'Please specify how to align the image.');
-$GLOBALS['TL_LANG']['tl_content']['fullsize']     = array('Full-size view', 'Add a lightbox link to view the full-size image.');
+$GLOBALS['TL_LANG']['tl_content']['caption']      = array('Image caption', 'Here you can enter a short text that will be displayed below the image.');
 $GLOBALS['TL_LANG']['tl_content']['html']         = array('HTML code', 'You can modify the list of allowed HTML tags in the back end settings.');
 $GLOBALS['TL_LANG']['tl_content']['listtype']     = array('List type', 'Please choose the type of list.');
 $GLOBALS['TL_LANG']['tl_content']['listitems']    = array('List items', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
@@ -65,12 +65,14 @@ $GLOBALS['TL_LANG']['tl_content']['highlight']    = array('Syntax highlighting',
 $GLOBALS['TL_LANG']['tl_content']['code']         = array('Code', 'Note that the code will not be executed.');
 $GLOBALS['TL_LANG']['tl_content']['linkTitle']    = array('Link title', 'The link title will be displayed instead of the target URL.');
 $GLOBALS['TL_LANG']['tl_content']['embed']        = array('Embed the link', 'Use the wildcard "%s" to embed the link in a phrase (e.g. <em>For more information please visit %s</em>).');
+$GLOBALS['TL_LANG']['tl_content']['rel']          = array('Lightbox', 'To trigger the lightbox, enter a rel attribute here.');
 $GLOBALS['TL_LANG']['tl_content']['useImage']     = array('Create an image link', 'Use an image instead of the link title.');
 $GLOBALS['TL_LANG']['tl_content']['multiSRC']     = array('Source files', 'Please select one or more files or folders from the files directory. If you select a folder, its files will be included automatically.');
 $GLOBALS['TL_LANG']['tl_content']['useHomeDir']   = array('Use home directory', 'Use the home directory as file source if there is an authenticated user.');
 $GLOBALS['TL_LANG']['tl_content']['perRow']       = array('Thumbnails per row', 'The number of image thumbnails per row.');
 $GLOBALS['TL_LANG']['tl_content']['perPage']      = array('Items per page', 'The number of items per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_content']['sortBy']       = array('Order by', 'Please choose the sort order.');
+$GLOBALS['TL_LANG']['tl_content']['galleryTpl']   = array('Gallery template', 'Here you can select the gallery template.');
 $GLOBALS['TL_LANG']['tl_content']['cteAlias']     = array('Referenced element', 'Please choose the content element you want to insert.');
 $GLOBALS['TL_LANG']['tl_content']['articleAlias'] = array('Referenced article', 'Please choose the article you want to insert.');
 $GLOBALS['TL_LANG']['tl_content']['article']      = array('Article', 'Please select an article.');
@@ -115,6 +117,7 @@ $GLOBALS['TL_LANG']['tl_content']['name_desc'] = 'File name (descending)';
 $GLOBALS['TL_LANG']['tl_content']['date_asc']  = 'Date (ascending)';
 $GLOBALS['TL_LANG']['tl_content']['date_desc'] = 'Date (descending)';
 $GLOBALS['TL_LANG']['tl_content']['meta']      = 'Meta file (meta.txt)';
+$GLOBALS['TL_LANG']['tl_content']['random']    = 'Random order';
 
 
 /**

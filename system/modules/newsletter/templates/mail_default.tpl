@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>">
-<meta name="Generator" content="TYPOlight webCMS">
+<meta name="Generator" content="TYPOlight Open Source CMS">
 <title><?php echo $this->title; ?></title>
 <?php echo $this->css; ?>
 </head>

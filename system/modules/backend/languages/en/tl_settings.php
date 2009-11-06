@@ -39,15 +39,15 @@ $GLOBALS['TL_LANG']['tl_settings']['timeZone']            = array('Time zone', '
 $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relative path to the TYPOlight directory', 'The relative path to the TYPOlight directory is usually set automatically by the install tool.');
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Character set', 'It is recommended to use UTF-8, so special characters are displayed correctly.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Custom layout sections', 'Here you can enter a comma separated list of custom layout sections.');
-$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update URL', 'Here you can enter the live update URL.');
+$GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
 $GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Back end theme', 'Here you can change the back end theme.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
 $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Use paragraphs to generate new lines', 'Use paragraphs instead of line breaks to generate new lines in the rich text editor.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
+$GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache mode', 'Here you can select the cache mode.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('Rewrite URLs', 'Make TYPOlight generate static URLs without the index.php fragment (requires "mod_rewrite").');
 $GLOBALS['TL_LANG']['tl_settings']['disableAlias']        = array('Disable page alias usage', 'Use the numeric ID of a page or article instead of its alias.');
-$GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Allowed HTML tags', 'Here you can enter a list of allowed HTML tags that will not be stripped.');
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Account locking time', 'An account will be locked if a wrong password is entered three times in a row.');
 $GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Encryption key', 'Note that encrypted data can only be decrypted with the same key!');
@@ -59,11 +59,11 @@ $GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Upload file t
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Download file types', 'Here you can enter a comma separated list of downloadable file types.');
 $GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editable file types', 'Here you can enter a comma separated list of file types that can be edited in the source editor.');
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Image file types', 'Here you can enter a comma separated list of file types that can be handled by the image class.');
-$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If an image or media width setting in the back end exceeds this value, it will be adjusted automatically.');
+$GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If the width of an image or movie exceeds this value, it will be adjusted automatically.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the TYPOlight files directory.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
-$GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1024 kB = 1024000 bytes).');
+$GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximum image width', 'Here you can enter the maximum width for image uploads in pixels.');
 $GLOBALS['TL_LANG']['tl_settings']['imageHeight']         = array('Maximum image height', 'Here you can enter the maximum height for image uploads in pixels.');
 $GLOBALS['TL_LANG']['tl_settings']['enableSearch']        = array('Enable searching', 'Index pages so they can be searched.');
@@ -73,11 +73,6 @@ $GLOBALS['TL_LANG']['tl_settings']['smtpHost']            = array('SMTP hostname
 $GLOBALS['TL_LANG']['tl_settings']['smtpPort']            = array('SMTP port number', 'Please enter the port number of the SMTP server.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpUser']            = array('SMTP username', 'Here you can enter the SMTP username.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpPass']            = array('SMTP password', 'Here you can enter the SMTP password.');
-$GLOBALS['TL_LANG']['tl_settings']['useFTP']              = array('Modify files via FTP', 'Establish an FTP connection to modify files (Safe Mode Hack).');
-$GLOBALS['TL_LANG']['tl_settings']['ftpHost']             = array('FTP hostname', 'Please enter the host name of the FTP server.');
-$GLOBALS['TL_LANG']['tl_settings']['ftpPath']             = array('FTP path', 'Please enter path to your TYPOlight folder relative from the FTP root.');
-$GLOBALS['TL_LANG']['tl_settings']['ftpUser']             = array('FTP username', 'Here you can enter the FTP username.');
-$GLOBALS['TL_LANG']['tl_settings']['ftpPass']             = array('FTP password', 'Here you can enter the FTP password.');
 $GLOBALS['TL_LANG']['tl_settings']['inactiveModules']     = array('Inactive extensions', 'Here you can deactivate unneeded extensions.');
 $GLOBALS['TL_LANG']['tl_settings']['undoPeriod']          = array('Storage time for undo steps', 'Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).');
 $GLOBALS['TL_LANG']['tl_settings']['versionPeriod']       = array('Storage time for versions', 'Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).');
@@ -86,6 +81,7 @@ $GLOBALS['TL_LANG']['tl_settings']['sessionTimeout']      = array('Session timeo
 $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Default page owner', 'Here you can select a user as the default owner of a page.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Default page group', 'Here you can select a group as the default owner of a page.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Default access rights', 'Please assign the default access rights for pages and articles.');
+$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update URL', 'Here you can enter the live update URL.');
 
 
 /**
@@ -105,11 +101,15 @@ $GLOBALS['TL_LANG']['tl_settings']['ftp_legend']      = 'Safe Mode Hack';
 $GLOBALS['TL_LANG']['tl_settings']['modules_legend']  = 'Inactive extensions';
 $GLOBALS['TL_LANG']['tl_settings']['timeout_legend']  = 'Timeout values';
 $GLOBALS['TL_LANG']['tl_settings']['chmod_legend']    = 'Default access rights';
+$GLOBALS['TL_LANG']['tl_settings']['update_legend']   = 'Live Update';
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_settings']['edit'] = 'Edit the local configuration';
+$GLOBALS['TL_LANG']['tl_settings']['edit']    = 'Edit the local configuration';
+$GLOBALS['TL_LANG']['tl_settings']['both']    = 'Use the server and the browser cache';
+$GLOBALS['TL_LANG']['tl_settings']['server']  = 'Use only the server cache';
+$GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Use only the browser cache';
 
 ?>

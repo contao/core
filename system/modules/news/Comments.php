@@ -105,7 +105,9 @@ class Comments extends Backend
 
 			case 'create':
 			case 'cut':
+			case 'cutAll':
 			case 'copy':
+			case 'copyAll':
 			case 'move':
 			case 'edit':
 				if (!$dc instanceof editable)
@@ -117,7 +119,7 @@ class Comments extends Backend
 		}
 
 		// Store the referer URL even if it includes the "key" parameter
-		if ($this->Input->get('key') == 'comments')
+		if ($this->Input->get('key') == 'comments' && !strlen($this->Input->get('tid')))
 		{
 			$session = $this->Session->getData();
 

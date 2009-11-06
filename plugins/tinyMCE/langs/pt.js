@@ -8,11 +8,11 @@ cancel:"Cancelar",
 close:"Fechar",
 browse:"Procurar",
 class_name:"Classe",
-not_set:"-- N\u00E3o especificado --",
+not_set:"-- N/A --",
 clipboard_msg:"Copiar/cortar/colar n\u00E3o est\u00E1 dispon\u00EDvel no Mozilla e Firefox.\nDeseja mais informa\u00E7\u00F5es sobre este problema?",
 clipboard_no_support:"O seu browser n\u00E3o suporta esta fun\u00E7\u00E3o, use os atalhos do teclado.",
-popup_blocked:"Detect\u00E1mos que o seu bloqueador de popups bloqueou uma janela que \u00E9 essencial para a aplica\u00E7\u00E3o. Voc\u00EA precisa desactivar o bloqueador de janelas de popups para utilizar esta ferramenta.",
-invalid_data:"Erro: Valores inv\u00E1lidos marcados a vermelho.",
+popup_blocked:"Detectamos que o seu bloqueador de popups bloqueou uma janela que \u00E9 essencial para a aplica\u00E7\u00E3o. Voc\u00EA precisa desativar o bloqueador de janelas de popups para utilizar esta ferramenta.",
+invalid_data:"Erro: Valores inv\u00E1lidos marcados em vermelho.",
 more_colors:"Mais Cores"
 },
 contextmenu:{
@@ -50,7 +50,7 @@ absolute_desc:"Alternar o posicionamento absoluto",
 content:"Nova camada..."
 },
 save:{
-save_desc:"Guardar",
+save_desc:"Salvar",
 cancel_desc:"Cancelar todas as altera\u00E7\u00F5es"
 },
 nonbreaking:{
@@ -58,7 +58,7 @@ nonbreaking_desc:"Inserir um espa\u00E7o \"sem quebra\""
 },
 iespell:{
 iespell_desc:"Verificar ortografia",
-download:"Plugin de ortografia n\u00E3o-detectado. Deseja instal\u00E1-lo agora?"
+download:"Plugin de ortografia n\u00E3o-detectado. Deseja instalar agora?"
 },
 advhr:{
 advhr_desc:"Separador horizontal"
@@ -79,7 +79,7 @@ link_desc:"Inserir/editar hyperlink"
 xhtmlxtras:{
 cite_desc:"Cita\u00E7\u00E3o",
 abbr_desc:"Abrevia\u00E7\u00E3o",
-acronym_desc:"Acr\u00F3nimo",
+acronym_desc:"Acr\u00F4nimo",
 del_desc:"Apagar",
 ins_desc:"Inserir",
 attribs_desc:"Inserir/Editar atributos"
@@ -90,7 +90,7 @@ desc:"Editar CSS"
 paste:{
 paste_text_desc:"Colar como texto simples",
 paste_word_desc:"Colar (copiado do WORD)",
-selectall_desc:"Seleccionar tudo"
+selectall_desc:"Selecionar tudo"
 },
 paste_dlg:{
 text_title:"Use CTRL+V para colar o texto na janela.",

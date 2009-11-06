@@ -9,8 +9,8 @@ replacewith:"Zamie\u0144 z...",
 direction:"Kierunek",
 up:"W g\u00F3r\u0119",
 down:"W d\u00F3\u0142",
-mcase:"Dopasuj case",
+mcase:"Uwzgl\u0119dnij wielko\u015B\u0107 liter",
 findnext:"Znajd\u017A nast\u0119pny",
 replace:"Zamie\u0144",
-replaceall:"Zamien wszystko"
+replaceall:"Zamie\u0144 wszystko"
 });

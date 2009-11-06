@@ -37,7 +37,11 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'onsubmit_callback' => array
+		(
+			array('tl_member', 'storeDateAdded')
+		)
 	),
 
 	// List
@@ -86,6 +90,13 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_member']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_member', 'toggleIcon')
 			),
 			'show' => array
 			(
@@ -285,7 +296,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>8, 'feEditable'=>true, 'feGroup'=>'login'),
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'], 'feEditable'=>true, 'feGroup'=>'login'),
 			'save_callback' => array
 			(
 				array('tl_member', 'setNewPassword')
@@ -325,6 +336,16 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+		),
+		'dateAdded' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
+			'eval'                    => array('rgxp'=>'datim')
+		),
+		'lastLogin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'eval'                    => array('rgxp'=>'datim')
 		)
 	)
 );
@@ -340,6 +361,16 @@ $GLOBALS['TL_DCA']['tl_member'] = array
  */
 class tl_member extends Backend
 {
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
 
 	/**
 	 * Add an image to each record
@@ -368,6 +399,12 @@ class tl_member extends Backend
 	 */
 	public function setNewPassword($strPassword, $user)
 	{
+		// Return if there is no user (e.g. upon registration)
+		if (!$user)
+		{
+			return $strPassword;
+		}
+
 		$objUser = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
 								  ->limit(1)
 								  ->execute($user->id);
@@ -386,6 +423,84 @@ class tl_member extends Backend
 		}
 
 		return $strPassword;
+	}
+
+
+	/**
+	 * Store the date when the account has been added
+	 * @param object
+	 */
+	public function storeDateAdded(DataContainer $dc)
+	{
+		$objUser = $this->Database->prepare("SELECT id, dateAdded, lastLogin FROM tl_member WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->id);
+
+		if ($objUser->numRows < 1 || $objUser->dateAdded > 0)
+		{
+			return;
+		}
+
+		// Fallback solution for existing accounts
+		$time = ($objUser->lastLogin > 0) ? $objUser->lastLogin : time();
+
+		$this->Database->prepare("UPDATE tl_member SET dateAdded=? WHERE id=?")
+					   ->execute($time, $objUser->id);
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['disable'];
+
+		if ($row['disable'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
+		{
+			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', 'tl_member toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_member SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

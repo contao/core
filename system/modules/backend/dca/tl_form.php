@@ -83,14 +83,16 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'icon'                => 'copy.gif',
+				'button_callback'     => array('tl_form', 'copyForm')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_form', 'deleteForm')
 			),
 			'show' => array
 			(
@@ -278,6 +280,12 @@ class tl_form extends Backend
 
 		$GLOBALS['TL_DCA']['tl_form']['list']['sorting']['root'] = $root;
 
+		// Check permissions to add forms
+		if (!is_array($this->User->formp) || !in_array('create', $this->User->formp))
+		{
+			$GLOBALS['TL_DCA']['tl_form']['config']['closed'] = true;
+		}
+
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
@@ -294,18 +302,45 @@ class tl_form extends Backend
 
 					if (is_array($arrNew['tl_form']) && in_array($this->Input->get('id'), $arrNew['tl_form']))
 					{
-						$objUser = $this->Database->prepare("SELECT forms FROM tl_user WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->User->id);
+						// Add permissions on user level
+						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
+						{
+							$objUser = $this->Database->prepare("SELECT forms, formp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
 
-						// $forms only contains user permissions
-						$forms = deserialize($objUser->forms);
-						$forms[] = $this->Input->get('id');
+							$arrFormp = deserialize($objUser->formp);
 
-						$this->Database->prepare("UPDATE tl_user SET forms=? WHERE id=?")
-									   ->execute(serialize($forms), $this->User->id);
+							if (is_array($arrFormp) && in_array('create', $arrFormp))
+							{
+								$arrForms = deserialize($objUser->forms);
+								$arrForms[] = $this->Input->get('id');
 
-						// $root also contains group permissions
+								$this->Database->prepare("UPDATE tl_user SET forms=? WHERE id=?")
+											   ->execute(serialize($arrForms), $this->User->id);
+							}
+						}
+
+						// Add permissions on group level
+						elseif ($this->User->groups[0] > 0)
+						{
+							$objGroup = $this->Database->prepare("SELECT forms, formp FROM tl_user_group WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->groups[0]);
+
+							$arrFormp = deserialize($objGroup->formp);
+
+							if (is_array($arrFormp) && in_array('create', $arrFormp))
+							{
+								$arrForms = deserialize($objGroup->forms);
+								$arrForms[] = $this->Input->get('id');
+
+								$this->Database->prepare("UPDATE tl_user_group SET forms=? WHERE id=?")
+											   ->execute(serialize($arrForms), $this->User->groups[0]);
+							}
+						}
+
+						// Add new element to the user object
 						$root[] = $this->Input->get('id');
 						$this->User->forms = $root;
 					}
@@ -315,7 +350,7 @@ class tl_form extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->formp) || !in_array('delete', $this->User->formp))))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' form ID "'.$this->Input->get('id').'"', 'tl_form checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
@@ -324,8 +359,16 @@ class tl_form extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
 				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->formp) || !in_array('delete', $this->User->formp)))
+				{
+					$session['CURRENT']['IDS'] = array();
+				}
+				else
+				{
+					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				}
 				$this->Session->setData($session);
 				break;
 
@@ -347,6 +390,38 @@ class tl_form extends Backend
 	public function getAllTables()
 	{
 		return $this->Database->listTables();
+	}
+
+
+	/**
+	 * Return the copy form button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function copyForm($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->formp) && in_array('create', $this->User->formp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete form button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteForm($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->formp) && in_array('delete', $this->User->formp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

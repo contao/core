@@ -1,17 +1,17 @@
 tinyMCE.addI18n({cs:{
 common:{
-edit_confirm:"Chcete pou\u017E\u00EDt pro tento text WYSIWYG editaci?",
+edit_confirm:"Chcete pou\u017E\u00EDt WYSIWYG m\u00F3d pro tento text?",
 apply:"Pou\u017E\u00EDt",
 insert:"Vlo\u017Eit",
 update:"Aktualizovat",
-cancel:"Zru\u0161it",
+cancel:"Storno",
 close:"Zav\u0159\u00EDt",
 browse:"Proch\u00E1zet",
 class_name:"T\u0159\u00EDda",
 not_set:"- Nenastaveno -",
 clipboard_msg:"Funkce kop\u00EDrovat/vyjmout/vlo\u017Eit nejsou pou\u017Eiteln\u00E9 v Mozille a Firefoxu.\nChcete v\u00EDce informac\u00ED?",
 clipboard_no_support:"Tato funkce nen\u00ED va\u0161\u00EDm prohl\u00ED\u017Ee\u010Dem podporov\u00E1na. Pou\u017Eijte kl\u00E1vesov\u00E9 zkratky.",
-popup_blocked:"Blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, nutn\u00E9 pro funkci aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED vypn\u00C4\u009Bte blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
+popup_blocked:"Blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, nutn\u00E9 pro funkci aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED vypn\u011Bte blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
 invalid_data:"Chyba: Vlo\u017Een\u00E1 chybn\u00E1 data jsou ozna\u010Dena \u010Derven\u011B.",
 more_colors:"V\u00EDce barev"
 },
@@ -33,7 +33,7 @@ day_long:"Ned\u011Ble,Pond\u011Bl\u00ED,\u00DAter\u00FD,St\u0159eda,\u010Ctvrtek
 day_short:"Ne,Po,\u00DAt,St,\u010Ct,P\u00E1,So,Ne"
 },
 print:{
-print_desc:"Tisknout"
+print_desc:"Tisk"
 },
 preview:{
 preview_desc:"N\u00E1hled"
@@ -44,7 +44,7 @@ rtl_desc:"Sm\u011Br zprava doleva"
 },
 layer:{
 insertlayer_desc:"Vlo\u017Eit novou vrstvu",
-forward_desc:"P\u0159esunout doP\u0159edu",
+forward_desc:"P\u0159esunout dop\u0159edu",
 backward_desc:"P\u0159esunout dozadu",
 absolute_desc:"P\u0159epnout absolutn\u00ED pozici",
 content:"Nov\u00E1 vrstva..."
@@ -54,10 +54,10 @@ save_desc:"Ulo\u017Eit",
 cancel_desc:"Zru\u0161it v\u0161echny zm\u011Bny"
 },
 nonbreaking:{
-nonbreaking_desc:"Vlo\u017Eit pevnou mezeru"
+nonbreaking_desc:"Vlo\u017Eit ned\u011Blitelnou mezeru"
 },
 iespell:{
-iespell_desc:"Kontrolovat pravopis",
+iespell_desc:"Spustit kontrolu pravopisu",
 download:"ieSpell nebyl detekov\u00E1n. Chcete ho nainstalovat?"
 },
 advhr:{
@@ -67,7 +67,7 @@ emotions:{
 emotions_desc:"Emotikony"
 },
 searchreplace:{
-search_desc:"Hledat",
+search_desc:"Naj\u00EDt",
 replace_desc:"Naj\u00EDt/nahradit"
 },
 advimage:{
@@ -99,25 +99,26 @@ word_title:"Pou\u017Eijte CTRL+V pro vlo\u017Een\u00ED textu do okna."
 },
 table:{
 desc:"Vlo\u017Eit novou tabulku",
-row_before_desc:"Vlo\u017Eit \u0159\u00E1dek P\u0159ed",
+row_before_desc:"Vlo\u017Eit \u0159\u00E1dek p\u0159ed",
 row_after_desc:"Vlo\u017Eit \u0159\u00E1dek za",
-delete_row_desc:"Vymazat \u0159\u00E1dek",
-col_before_desc:"Vlo\u017Eit sloupec P\u0159ed",
+delete_row_desc:"Odstranit \u0159\u00E1dek tabulky",
+col_before_desc:"Vlo\u017Eit sloupec p\u0159ed",
 col_after_desc:"Vlo\u017Eit sloupec za",
-delete_col_desc:"Vymazat sloupec",
+delete_col_desc:"Odstranit sloupec tabulky",
 split_cells_desc:"Rozd\u011Blit bu\u0148ky",
 merge_cells_desc:"Slou\u010Dit bu\u0148ky",
-row_desc:"Vlastnosti \u0159\u00E1dku",
+row_desc:"Vlastnosti \u0159\u00E1dku tabulky",
 cell_desc:"Vlastnosti bu\u0148ky",
 props_desc:"Vlastnosti tabulky",
-paste_row_before_desc:"Vlo\u017Eit \u0159\u00E1dek P\u0159ed",
+paste_row_before_desc:"Vlo\u017Eit \u0159\u00E1dek p\u0159ed",
 paste_row_after_desc:"Vlo\u017Eit \u0159\u00E1dek za",
-cut_row_desc:"Vyjmout \u0159\u00E1dek",
-copy_row_desc:"Kop\u00EDrovat \u0159\u00E1dek",
-del:"Vymazat tabulku",
+cut_row_desc:"Vyjmout \u0159\u00E1dek tabulky",
+copy_row_desc:"Kop\u00EDrovat \u0159\u00E1dek tabulky",
+del:"Odstranit tabulku",
 row:"\u0158\u00E1dek",
 col:"Sloupec",
-cell:"Bu\u0148ka"
+cell:"Bu\u0148ka",
+cellprops_delta_width:"50"
 },
 autosave:{
 unload_msg:"Proveden\u00E9 zm\u011Bny mohou b\u00FDt ztraceny, jestli\u017Ee opust\u00EDte tuto str\u00E1nku."
@@ -126,27 +127,27 @@ fullscreen:{
 desc:"P\u0159epnout na celostr\u00E1nkov\u00E9 zobrazen\u00ED"
 },
 media:{
-desc:"Vlo\u017Eit/editovat m\u00E9dia",
-edit:"Editovat m\u00E9dia"
+desc:"Vlo\u017Eit/upravit m\u00E9dia",
+edit:"Upravit m\u00E9dia"
 },
 fullpage:{
 desc:"Vlastnosti dokumentu"
 },
 template:{
-desc:"Vlo\u017Eit P\u0159eddefinovan\u00FD obsah ze \u0161ablony"
+desc:"Vlo\u017Eit p\u0159eddefinovan\u00FD obsah ze \u0161ablony"
 },
 visualchars:{
 desc:"Zobrazen\u00ED skryt\u00FDch znak\u016F zap/vyp"
 },
 spellchecker:{
-desc:"Zapnout kontrolu textu",
-menu:"Nastaven\u00ED kontroly textu",
+desc:"P\u0159epnout kontrolu pravopisu",
+menu:"Nastaven\u00ED kontroly pravopisu",
 ignore_word:"Ignorovat slovo",
 ignore_words:"Ignorovat v\u0161e",
 langs:"Jazyky",
 wait:"\u010Cekejte pros\u00EDm...",
 sug:"N\u00E1pov\u011Bda",
-no_sug:"\u0139\u02DD\u00E1dn\u00E1 n\u00E1pov\u011Bda",
+no_sug:"\u017D\u00E1dn\u00E1 n\u00E1pov\u011Bda",
 no_mpell:"Nebyly nalezeny \u017E\u00E1dn\u00E9 chyby."
 },
 pagebreak:{

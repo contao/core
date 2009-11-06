@@ -31,6 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_user']['calendars'] = array('Erlaubte Kalender', 'Hier können Sie den Zugriff auf einen oder mehrere Kalender erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['calendarp'] = array('Kalenderrechte', 'Hier können Sie die Kalenderrechte festlegen.');
 
 
 /**

@@ -65,6 +65,10 @@ h1,h2,h3,h4,h5,h6
 {
 	color:#a3a3a3;
 }
+span.mandatory
+{
+	color:#f00;
+}
 
 /* Basic elements */
 a
@@ -137,6 +141,7 @@ optgroup
 	padding-top:3px;
 	padding-bottom:3px;
 	font-style:normal;
+	background-color:#fff;
 }
 
 /* Text fields */

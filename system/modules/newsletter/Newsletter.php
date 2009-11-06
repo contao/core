@@ -45,7 +45,7 @@ class Newsletter extends Backend
 	 */
 	public function send(DataContainer $objDc)
 	{
-		$objNewsletter = $this->Database->prepare("SELECT * FROM tl_newsletter WHERE id=?")
+		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
 										->execute($objDc->id);
 
@@ -55,10 +55,21 @@ class Newsletter extends Backend
 			return '';
 		}
 
+		// Overwrite the SMTP configuration
+		if ($objNewsletter->useSMTP)
+		{
+			$GLOBALS['TL_CONFIG']['useSMTP'] = true;
+
+			$GLOBALS['TL_CONFIG']['smtpHost'] = $objNewsletter->smtpHost;
+			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
+			$GLOBALS['TL_CONFIG']['smtpUser'] = $objNewsletter->smtpUser;
+			$GLOBALS['TL_CONFIG']['smtpPass'] = $objNewsletter->smtpPass;
+		}
+
 		// Add default sender address
 		if (!strlen($objNewsletter->sender))
 		{
-			$objNewsletter->sender = $GLOBALS['TL_CONFIG']['adminEmail'];
+			list($objNewsletter->senderName, $objNewsletter->sender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		$arrAttachments = array();
@@ -124,8 +135,8 @@ class Newsletter extends Backend
 			}
 
 			// Get total number of recipients
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=?")
-									   ->execute($objNewsletter->pid, 1);
+			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=1")
+									   ->execute($objNewsletter->pid);
 
 			// Return if there are no recipients
 			if ($objTotal->total < 1)
@@ -144,9 +155,9 @@ class Newsletter extends Backend
 			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
 			// Get recipients
-			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=? ORDER BY r.email")
+			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=1 ORDER BY r.email")
 											->limit($intPages, $intStart)
-											->execute($objNewsletter->pid, 1);
+											->execute($objNewsletter->pid);
 
 			echo '<div style="font-family:Verdana, sans-serif; font-size:11px; line-height:16px; margin-bottom:12px;">';
 
@@ -156,15 +167,17 @@ class Newsletter extends Backend
 				// Update status
 				if ($intStart == 0)
 				{
-					$this->Database->prepare("UPDATE tl_newsletter SET sent=?, date=? WHERE id=?")
-								   ->execute(1, time(), $objNewsletter->id);
-				}
+					$this->Database->prepare("UPDATE tl_newsletter SET sent=1, date=? WHERE id=?")
+								   ->execute(time(), $objNewsletter->id);
 
-				$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
+					$_SESSION['REJECTED_RECIPIENTS'] = array();
+				}
 
 				while ($objRecipients->next())
 				{
+					$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
 					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html, $css);
+
 					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br />';
 				}
 			}
@@ -176,6 +189,18 @@ class Newsletter extends Backend
 			{
 				$this->Session->set('tl_newsletter_send', null);
 				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
+
+				// Deactivate rejected addresses
+				if (!empty($_SESSION['REJECTED_RECIPIENTS']))
+				{
+					foreach ($_SESSION['REJECTED_RECIPIENTS'] as $strRecipient)
+					{
+						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
+									   ->execute($strRecipient);
+
+						$this->log('Recipient address ' . $strRecipient . ' was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_NEWSLETTER);
+					}
+				}
 
 				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
 				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
@@ -242,7 +267,7 @@ class Newsletter extends Backend
 <div>
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="'.$GLOBALS['TL_CONFIG']['adminEmail'].'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.$objNewsletter->sender.'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help' . $tipClass . '">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
@@ -292,6 +317,8 @@ class Newsletter extends Backend
 			$objEmail->fromName = $objNewsletter->senderName;
 		}
 
+		$objEmail->logFile = 'newsletter_' . $objNewsletter->id . '.log';
+
 		// Attachments
 		if (is_array($arrAttachments) && count($arrAttachments) > 0)
 		{
@@ -337,6 +364,12 @@ class Newsletter extends Backend
 		}
 
 		$objEmail->sendTo($arrRecipient['email']);
+
+		// Rejected recipients
+		if (count($objEmail->failures))
+		{
+			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
+		}
 	}
 
 
@@ -360,6 +393,8 @@ class Newsletter extends Backend
 				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
 				$this->reload();
 			}
+
+			$time = time();
 
 			foreach ($this->Input->post('source') as $strCsvFile)
 			{
@@ -391,10 +426,15 @@ class Newsletter extends Backend
 						break;
 				}
 
-				$strFile = $objFile->getContent();
-				$arrRecipients = trimsplit($strSeparator, $strFile);
-				$arrRecipients = array_unique($arrRecipients);
-				$time = time();
+				$arrRecipients = array();
+				$resFile = $objFile->handle;
+
+				while(($arrRow = @fgetcsv($resFile, null, $strSeparator)) !== false)
+				{
+					$arrRecipients = array_merge($arrRecipients, $arrRow);
+				}
+
+				$arrRecipients = array_filter(array_unique($arrRecipients));
 
 				foreach ($arrRecipients as $strRecipient)
 				{
@@ -430,7 +470,7 @@ class Newsletter extends Backend
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(strlen($GLOBALS['TL_LANG']['MSC']['separator'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
 '.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1].'</p>' : '').'
 </div>
@@ -480,8 +520,8 @@ class Newsletter extends Backend
 
 			if ($objRecipient->total < 1)
 			{
-				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, addedOn=?, ip=?")
-							   ->execute($intNewsletter, $time, $arrData['email'], $time, $this->Environment->ip);
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, addedOn=$time, ip=?")
+							   ->execute($intNewsletter, $arrData['email'], $this->Environment->ip);
 			}
 		}
 	}
@@ -579,8 +619,8 @@ class Newsletter extends Backend
 
 			if ($objRecipient->total < 1)
 			{
-				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=?, addedOn=?, ip=?")
-							   ->execute($intId, $time, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
+				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=?, addedOn=?, ip=?")
+							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
 			}
 		}
 
@@ -602,6 +642,12 @@ class Newsletter extends Backend
 		{
 			$this->import('FrontendUser', 'User');
 			$intUser = $this->User->id;
+		}
+
+		// Return if there is no user (e.g. upon registration)
+		if (!$intUser)
+		{
+			return;
 		}
 
 		// Edit account
@@ -752,9 +798,9 @@ class Newsletter extends Backend
 				$arrProcessed[$objNewsletter->jumpTo] = false;
 
 				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
 											->limit(1)
-											->execute($objNewsletter->jumpTo, $time, $time);
+											->execute($objNewsletter->jumpTo);
 
 				// Determin domain
 				if ($objParent->numRows)

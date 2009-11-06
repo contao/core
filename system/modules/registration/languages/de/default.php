@@ -43,5 +43,6 @@ $GLOBALS['TL_LANG']['MSC']['newPasswordSet']   = 'Ihr Passwort wurde aktualisier
 $GLOBALS['TL_LANG']['MSC']['passwordSubject']  = 'Ihre Passwortanfrage für %s';
 $GLOBALS['TL_LANG']['MSC']['accountNotFound']  = 'Kein passendes Konto gefunden';
 $GLOBALS['TL_LANG']['MSC']['securityQuestion'] = 'Sicherheitsfrage';
+$GLOBALS['TL_LANG']['MSC']['closeAccount']     = 'Konto schließen';
 
 ?>

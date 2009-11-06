@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> :: TYPOlight Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/login.css" media="screen" />
@@ -11,12 +11,13 @@
 <?php endif; ?>
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
-<script type="text/javascript" src="plugins/mootools/mootools.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
 </head>
 <body>
 
 <div id="header">
-<h1>TYPOlight webCMS <?php echo VERSION; ?></h1>
+<h1>TYPOlight Open Source CMS <?php echo VERSION; ?></h1>
 </div>
 
 <div id="container">
@@ -57,8 +58,8 @@
 
 <div id="tl_license">
 
-<p>TYPOlight webCMS :: Copyright ©2005-<?php echo date('Y'); ?> by <a href="mailto:&#108;&#101;&#111;&#64;&#116;&#121;&#112;&#111;&#108;&#105;&#103;&#104;&#116;&#46;&#111;&#114;&#103;">Leo 
-  Feyer</a> :: Extensions are copyright of their respective owners :: Visit <a href="http://www.typolight.org" onclick="window.open(this.href); return false;">http://www.typolight.org</a>
+<p>TYPOlight Open Source CMS :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are
+  copyright of their respective owners :: Visit <a href="http://www.typolight.org" onclick="window.open(this.href); return false;">www.typolight.org</a>
   for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 
 <p>TYPOlight is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY :: Without even the

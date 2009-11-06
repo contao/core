@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s, \'style\');"',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
 				'button_callback'     => array('tl_style', 'toggleIcon')
 			),
 			'show' => array
@@ -479,11 +479,11 @@ class tl_style extends Backend
 
 
 	/**
-	 * Automatically adjust the category if a record is being cut or duplicated
+	 * Automatically adjust the category if a record is cut or duplicated
 	 */
 	public function adjustCategory()
 	{
-		if ($this->Input->get('act') != 'cut' &&$this->Input->get('act') != 'copy')
+		if ($this->Input->get('act') != 'cut' && $this->Input->get('act') != 'cutAll' && $this->Input->get('act') != 'copy')
 		{
 			return;
 		}
@@ -499,9 +499,24 @@ class tl_style extends Backend
 
 		$this->import('Database');
 
-		// Update the new record
-		$this->Database->prepare("UPDATE tl_style SET category=? WHERE id=?")
-					   ->execute($category, $this->Input->get('id'));
+		// Update single record
+		if (strlen($this->Input->get('id')))
+		{
+			$this->Database->prepare("UPDATE tl_style SET category=? WHERE id=?")
+						   ->execute($category, $this->Input->get('id'));
+		}
+
+		// Update multiple records
+		else
+		{
+			$arrClipboard = $this->Session->get('CLIPBOARD');
+
+			if (is_array($arrClipboard) && is_array($arrClipboard['tl_style']) && count($arrClipboard['tl_style']['id']))
+			{
+				$this->Database->prepare("UPDATE tl_style SET category=? WHERE id IN(" . implode(',', $arrClipboard['tl_style']['id']) . ")")
+							   ->execute($category);
+			}
+		}
 	}
 
 
@@ -529,6 +544,16 @@ class tl_style extends Backend
 
 
 	/**
+	 * Update style sheet
+	 */
+	public function updateStyleSheet()
+	{
+		$this->import('StyleSheets');
+		$this->StyleSheets->updateStyleSheet(CURRENT_ID);
+	}
+
+
+	/**
 	 * Return the "toggle visibility" button
 	 * @param array
 	 * @param string
@@ -542,9 +567,7 @@ class tl_style extends Backend
 	{
 		if (strlen($this->Input->get('tid')))
 		{
-			$this->Database->prepare("UPDATE tl_style SET invisible='" . (strlen($this->Input->get('state')) ? '' : 1) . "' WHERE id=?")
-						   ->execute($this->Input->get('tid'));
-
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
 			$this->redirect($this->getReferer());
 		}
 
@@ -555,17 +578,31 @@ class tl_style extends Backend
 			$icon = 'invisible.gif';
 		}		
 
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$this->Input->get('id')).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
 
 	/**
-	 * Update style sheet
+	 * Toggle the visibility of a format definition
+	 * @param integer
+	 * @param boolean
 	 */
-	public function updateStyleSheet()
+	public function toggleVisibility($intId, $blnVisible)
 	{
-		$this->import('StyleSheets');
-		$this->StyleSheets->updateStyleSheet(CURRENT_ID);
+		// Update database
+		$this->Database->prepare("UPDATE tl_style SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
+
+		// Recreate the style sheet
+		$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")
+									    ->limit(1)
+									    ->execute($intId);
+
+		if ($objStylesheet->numRows)
+		{
+			$this->import('StyleSheets');
+			$this->StyleSheets->updateStyleSheet($objStylesheet->pid);
+		}
 	}
 }
 

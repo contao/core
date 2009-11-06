@@ -449,13 +449,12 @@ var AjaxRequest =
 
 
 	/**
-	 * Toggle the visibility of content elements
+	 * Toggle the visibility of an element
 	 * @param object
-	 * @param string
 	 * @param string
 	 * @return boolean
 	 */
-	toggleVisibility: function(el, id, type)
+	toggleVisibility: function(el, id)
 	{
 		el.blur();
 		var image = $(el).getFirst();
@@ -463,12 +462,12 @@ var AjaxRequest =
 		if (image.src.indexOf('invisible') != -1)
 		{
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&type=' + type + '&state=1'}).send();
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=1'}).send();
 		}
 		else
 		{
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&type=' + type + '&state=0'}).send();
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=0'}).send();
 		}
 
 		return false;
@@ -736,19 +735,19 @@ var Backend =
 	 * Automatically submit a form
 	 * @param object
 	 */
-	autoSubmit: function(form)
+	autoSubmit: function(el)
 	{
 		Backend.getScrollOffset();
 
-		var formbody = $(form);
+		var form = document.getElementById(el);
 		var hidden = new Element('input');
 
 		hidden.setProperty('type', 'hidden');
 		hidden.setProperty('name', 'SUBMIT_TYPE');
 		hidden.setProperty('value', 'auto');
 
-		hidden.injectInside(formbody);
-		formbody.submit();
+		hidden.injectInside(form);
+		form.submit();
 	},
 
 
@@ -911,6 +910,26 @@ var Backend =
 				checkbox.checked = status;
 			});
 		}
+
+		Backend.getScrollOffset();
+	},
+
+
+	/**
+	 * Toggle checkbox elements
+	 * @param string
+	 */
+	toggleCheckboxElements: function(el, cls)
+	{
+		var status = $(el).checked ? 'checked' : '';
+
+		$$('.' + cls).each(function(checkbox)
+		{
+			if (checkbox.hasClass('tl_checkbox'))
+			{
+				checkbox.checked = status;
+			}
+		});
 
 		Backend.getScrollOffset();
 	},

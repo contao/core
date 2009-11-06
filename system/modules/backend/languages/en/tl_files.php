@@ -43,6 +43,9 @@ $GLOBALS['TL_LANG']['tl_files']['uploadNback'] = 'Upload files and go back';
 $GLOBALS['TL_LANG']['tl_files']['editFF']      = 'Edit a file or folder';
 $GLOBALS['TL_LANG']['tl_files']['uploadFF']    = 'Upload files to folder "%s"';
 $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Edit file "%s"';
+$GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Browse files';
+$GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Clear list';
+$GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Start upload';
 
 
 /**

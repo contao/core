@@ -35,10 +35,4 @@ $GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('Feed-URLs', 'Bitt
 $GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Feed-Template', 'Hier können Sie das Feed-Template auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
 
-
-/**
- * Legends
- */
-$GLOBALS['TL_LANG']['tl_module']['import_legend'] = 'Import-Einstellungen';
-
 ?>

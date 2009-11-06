@@ -33,6 +33,7 @@
 $GLOBALS['TL_LANG']['FFL']['headline']    = array('Überschrift', 'ein individuelles Feld zum Einfügen einer Bereichsüberschrift.');
 $GLOBALS['TL_LANG']['FFL']['explanation'] = array('Erklärung', 'ein individuelles Feld zum Einfügen eines Erklärungstexts.');
 $GLOBALS['TL_LANG']['FFL']['html']        = array('HTML', 'ein individuelles Feld zum Einfügen von HTML-Code.');
+$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'ein Container für Formularfelder mit einer optionalen Legende.');
 $GLOBALS['TL_LANG']['FFL']['text']        = array('Textfeld', 'ein einzeiliges Eingabefeld für einen kurzen oder mittellangen Text.');
 $GLOBALS['TL_LANG']['FFL']['password']    = array('Passwortfeld', 'ein einzeiliges Eingabefeld für ein Passwort. TYPOlight fügt automatisch ein Bestätigungsfeld hinzu.');
 $GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'ein mehrzeiliges Eingabefeld für einen mittellangen oder langen Text.');
@@ -75,6 +76,9 @@ $GLOBALS['TL_LANG']['tl_form_field']['storeFile']      = array('Hochgeladene Dat
 $GLOBALS['TL_LANG']['tl_form_field']['uploadFolder']   = array('Zielverzeichnis', 'Bitte wählen Sie das Zielverzeichnis aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_form_field']['useHomeDir']     = array('Benutzerverzeichnis verwenden', 'Die Datei im Benutzerverzeichnis speichern, wenn sich ein Benutzer angemeldet hat.');
 $GLOBALS['TL_LANG']['tl_form_field']['doNotOverwrite'] = array('Bestehende Dateien erhalten', 'Der neuen Datei ein numerisches Suffix hinzufügen, wenn der Dateiname bereits existiert.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsType']         = array('Betriebsart', 'Bitte wählen Sie die Betriebsart des Fieldset-Elements.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsStart']        = array('Umschlag Anfang', 'Markiert den Anfang eines Fieldset und kann eine Legende enthalten.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsStop']         = array('Umschlag Ende', 'Markiert das Ende eines Fieldset.');
 $GLOBALS['TL_LANG']['tl_form_field']['value']          = array('Standard-Wert', 'Hier können Sie einen Standard-Wert für das Feld eingeben.');
 $GLOBALS['TL_LANG']['tl_form_field']['class']          = array('CSS-Klasse', 'Hier können Sie eine oder mehrere Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_form_field']['accesskey']      = array('Tastaturkürzel', 'Ein Formularfeld kann direkt angewählt werden, indem man gleichzeitig die [ALT]- bzw. [STRG]-Taste und das Tastaturkürzel drückt.');
@@ -120,5 +124,6 @@ $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Oben einfügen', 'Na
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Neues Feld oben erstellen', 'Neues Element nach dem Feld ID %s erstellen');
 $GLOBALS['TL_LANG']['tl_form_field']['up']         = array('Eine Position nach oben', 'Das Feld eine Position nach oben verschieben');
 $GLOBALS['TL_LANG']['tl_form_field']['down']       = array('Eine Position nach unten', 'Das Feld eine Position nach unten verschieben');
+$GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Feldes ID %s ändern');
 
 ?>

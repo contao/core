@@ -104,8 +104,8 @@ class ModuleArticleList extends Module
 		$time = time();
 
 		// Get published articles
-		$objArticles = $this->Database->prepare("SELECT id, title, alias, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($id, $this->inColumn, $time, $time);
+		$objArticles = $this->Database->prepare("SELECT id, title, alias, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+									  ->execute($id, $this->inColumn);
 
 		if ($objArticles->numRows < 1)
 		{
@@ -115,7 +115,7 @@ class ModuleArticleList extends Module
 		while ($objArticles->next())
 		{
 			// Skip first article
-			if (++$intCount == 1 && $this->skipFirst)
+			if (++$intCount <= intval($this->skipFirst))
 			{
 				continue;
 			}

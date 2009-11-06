@@ -124,7 +124,7 @@ class Popup extends Backend
 		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
 		$this->Template->mtime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
 		$this->Template->atime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
-		$this->Template->filesize = number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' kB (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Bytes)';
+		$this->Template->filesize = $this->getReadableSize($objFile->filesize) . ' (' . number_format($objFile->filesize, 0, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' Byte)';
 		$this->Template->path = $this->strFile;
 
 		// Image

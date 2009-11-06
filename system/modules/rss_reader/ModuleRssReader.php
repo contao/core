@@ -28,6 +28,13 @@
 
 
 /**
+ * Include SimplePie classes
+ */
+require_once(TL_ROOT . '/plugins/simplepie/simplepie.inc');
+require_once(TL_ROOT . '/plugins/simplepie/idna_convert.class.php');
+
+
+/**
  * Class ModuleRssReader
  *
  * Front end module "rss reader".
@@ -69,14 +76,6 @@ class ModuleRssReader extends Module
 
 			return $objTemplate->parse();
 		}
-
-		if (!file_exists(TL_ROOT . '/plugins/simplepie/simplepie.inc'))
-		{
-			throw new Exception('Plugin "simplepie" required');
-		}
-
-		require_once(TL_ROOT . '/plugins/simplepie/simplepie.inc');
-		require_once(TL_ROOT . '/plugins/simplepie/idna_convert.class.php');
 
 		$this->objFeed = new SimplePie();
 		$arrUrls = trimsplit('[\n\t ]', trim($this->rss_feed));
@@ -140,7 +139,7 @@ class ModuleRssReader extends Module
 		}
 
 		// Get items
-		$arrItems = $this->objFeed->get_items(($this->skipFirst ? 1 : 0), $this->rss_numberOfItems);
+		$arrItems = $this->objFeed->get_items(intval($this->skipFirst), $this->rss_numberOfItems);
 
 		$limit = count($arrItems);
 		$offset = 0;

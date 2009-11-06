@@ -41,20 +41,28 @@ var LinkDialog = {
 		if (isVisible('hrefbrowser'))
 			document.getElementById('href').style.width = '180px';
 
-		this.fillClassList('class_list');
 		this.fillFileList('link_list', 'tinyMCELinkList');
+		this.fillRelList('rel_list');
 		this.fillTargetList('target_list');
+		this.fillClassList('class_list');
 
 		if (e = ed.dom.getParent(ed.selection.getNode(), 'A')) {
 			f.href.value = ed.dom.getAttrib(e, 'href');
 			f.linktitle.value = ed.dom.getAttrib(e, 'title');
 			f.insert.value = ed.getLang('update');
 			selectByValue(f, 'link_list', f.href.value);
-			selectByValue(f, 'target_list', ed.dom.getAttrib(e, 'target'));
-			selectByValue(f, 'class_list', ed.dom.getAttrib(e, 'class'), true); /* PATCH: add true to set custom values */
+			// PATCH: handle target="_blank"
+			if (/window.open\(this.href\);/.test(ed.dom.getAttrib(e, 'onclick'))) {
+				selectByValue(f, 'target_list', '_blank');
+			} else {
+				selectByValue(f, 'target_list', ed.dom.getAttrib(e, 'target'));
+			}
+			// PATCH EOF
+			selectByValue(f, 'rel_list', ed.dom.getAttrib(e, 'rel'), true); // PATCH: rel attribute
+			selectByValue(f, 'class_list', ed.dom.getAttrib(e, 'class'), true); // PATCH: add true to set custom values
 		}
 
-		TinyMCE_EditableSelects.init(); /* PATCH: initialize editable select */
+		TinyMCE_EditableSelects.init(); // PATCH: initialize editable select
 	},
 
 	update : function() {
@@ -80,7 +88,9 @@ var LinkDialog = {
 
 		// Create new anchor elements
 		if (e == null) {
+			ed.getDoc().execCommand("unlink", false, null);
 			tinyMCEPopup.execCommand("CreateLink", false, "#mce_temp_url#", {skip_undo : 1});
+			var t = this;
 
 			tinymce.each(ed.dom.select("a"), function(n) {
 				if (ed.dom.getAttrib(n, 'href') == '#mce_temp_url#') {
@@ -89,18 +99,26 @@ var LinkDialog = {
 					ed.dom.setAttribs(e, {
 						href : f.href.value,
 						title : f.linktitle.value,
-						target : f.target_list ? f.target_list.options[f.target_list.selectedIndex].value : null,
-						'class' : f.class_list ? f.class_list.options[f.class_list.selectedIndex].value : null
+						//target : f.target_list ? getSelectValue(f, "target_list") : null,
+						'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
+						'class' : f.class_list ? getSelectValue(f, "class_list") : null
 					});
+
+					// PATCH: handle target="_blank"
+					t.fixIssues(ed, f);
 				}
 			});
 		} else {
 			ed.dom.setAttribs(e, {
 				href : f.href.value,
 				title : f.linktitle.value,
-				target : f.target_list ? f.target_list.options[f.target_list.selectedIndex].value : null,
-				'class' : f.class_list ? f.class_list.options[f.class_list.selectedIndex].value : null
+				//target : f.target_list ? getSelectValue(f, "target_list") : null,
+				'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
+				'class' : f.class_list ? getSelectValue(f, "class_list") : null
 			});
+
+			// PATCH: handle target="_blank"
+			this.fixIssues(ed, f);
 		}
 
 		// Don't move caret if selection was image
@@ -115,12 +133,35 @@ var LinkDialog = {
 		tinyMCEPopup.close();
 	},
 
+	// PATCH: add function fixIssues
+	fixIssues : function(ed, f) {
+		var o = ed.dom.getAttrib(e, 'onclick');
+
+		// Handle target="_blank"
+		if (getSelectValue(f, "target_list") == '_blank' && !/window.open\(this.href\);/.test(o)) {
+			ed.dom.setAttrib(e, 'onclick', ((o != '') ? o + ' ' : '') + 'window.open(this.href); return false;');
+		} else if (o) {
+			ed.dom.setAttrib(e, 'onclick', o.replace('window.open(this.href); return false;', ''));
+		}
+
+		// Fix relative URLs
+		if (f.href.value+'/' == ed.settings.document_base_url) {
+			f.href.value += '/';
+		}
+		if (f.href.value == ed.settings.document_base_url) {
+			e.setAttribute('mce_href', f.href.value);
+		}
+	},
+
 	checkPrefix : function(n) {
 		if (n.value && Validator.isEmail(n) && !/^\s*mailto:/i.test(n.value) && confirm(tinyMCEPopup.getLang('typolinks_dlg.link_is_email')))
 			n.value = 'mailto:' + n.value;
 
-		if (/^\s*www./i.test(n.value) && confirm(tinyMCEPopup.getLang('typolinks_dlg.link_is_external')))
+		if (/^\s*www\./i.test(n.value) && confirm(tinyMCEPopup.getLang('typolinks_dlg.link_is_external')))
 			n.value = 'http://' + n.value;
+
+		if (n.value && /^#/.test(n.value))
+			n.value = '{{env::request}}' + n.value;
 	},
 
 	fillFileList : function(id, l) {
@@ -138,6 +179,29 @@ var LinkDialog = {
 			dom.remove(dom.getParent(id, 'tr'));
 	},
 
+	fillRelList : function(id) {
+		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_single'), 'lightbox');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_rel_multi'), 'lightbox[multi]');
+	},
+
+	fillTargetList : function(id) {
+		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
+		//lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.link_target_same'), '_self'); PATCH: hide
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.link_target_blank'), '_blank');
+
+		if (v = tinyMCEPopup.getParam('theme_advanced_link_targets')) {
+			tinymce.each(v.split(','), function(v) {
+				v = v.split('=');
+				lst.options[lst.options.length] = new Option(v[0], v[1]);
+			});
+		}
+	},
+
 	fillClassList : function(id) {
 		var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
 
@@ -152,29 +216,15 @@ var LinkDialog = {
 		} else
 			cl = tinyMCEPopup.editor.dom.getClasses();
 
-		if (cl.length > 0) {
-			lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
+		// PATCH: always show not_set option
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
 
+		if (cl.length > 0) {
 			tinymce.each(cl, function(o) {
 				lst.options[lst.options.length] = new Option(o.title || o['class'], o['class']);
 			});
 		}/* else
 			dom.remove(dom.getParent(id, 'tr')); PATCH: do not remove */
-	},
-
-	fillTargetList : function(id) {
-		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
-
-		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
-		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.link_target_same'), '_self');
-		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.link_target_blank'), '_blank');
-
-		if (v = tinyMCEPopup.getParam('theme_advanced_link_targets')) {
-			tinymce.each(v.split(','), function(v) {
-				v = v.split('=');
-				lst.options[lst.options.length] = new Option(v[0], v[1]);
-			});
-		}
 	}
 };
 

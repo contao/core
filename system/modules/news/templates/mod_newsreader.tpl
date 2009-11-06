@@ -28,11 +28,23 @@
 <form action="<?php echo $this->action; ?>" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_news_comment" />
-<?php foreach ($this->fields as $objWidget): ?>
 <div class="widget">
-  <?php echo $objWidget->generateWithError(); ?> <?php echo ($objWidget instanceof FormCaptcha) ? $objWidget->generateQuestion() : $objWidget->generateLabel(); ?><?php if ($objWidget->required): ?><span class="mandatory">*</span><?php endif; ?> 
+  <?php echo $this->fields['name']->generateWithError(); ?> <?php echo $this->fields['name']->generateLabel(); ?>
 </div>
-<?php endforeach; ?>
+<div class="widget">
+  <?php echo $this->fields['email']->generateWithError(); ?> <?php echo $this->fields['email']->generateLabel(); ?>
+</div>
+<div class="widget">
+  <?php echo $this->fields['website']->generateWithError(); ?> <?php echo $this->fields['website']->generateLabel(); ?>
+</div>
+<?php if (isset($this->fields['captcha'])): ?>
+<div class="widget">
+  <?php echo $this->fields['captcha']->generateWithError(); ?> <?php echo $this->fields['captcha']->generateQuestion(); ?>
+</div>
+<?php endif; ?>
+<div class="widget">
+  <?php echo $this->fields['comment']->generateWithError(); ?> <label for="ctrl_<?php echo $this->fields['comment']->id; ?>" class="invisible"><?php echo $this->fields['comment']->label; ?></label>
+</div>
 <div class="submit_container">
   <input type="submit" class="submit" value="<?php echo $this->submit; ?>" />
 </div>

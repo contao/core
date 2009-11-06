@@ -30,7 +30,7 @@
 /**
  * Extend default palette
  */
-$GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] = str_replace('forms;', 'forms;{newsletter_legend},newsletters;', $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default']);
+$GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] = str_replace('formp;', 'formp;{newsletter_legend},newsletters,newsletterp;', $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default']);
 
 
 /**
@@ -42,6 +42,16 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['newsletters'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_newsletter_channel.title',
+	'eval'                    => array('multiple'=>true)
+);
+
+$GLOBALS['TL_DCA']['tl_user_group']['fields']['newsletterp'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['newsletterp'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'options'                 => array('create', 'delete'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 	'eval'                    => array('multiple'=>true)
 );
 

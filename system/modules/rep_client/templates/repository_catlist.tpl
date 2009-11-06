@@ -45,7 +45,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <option value=""><?php echo '-- '.$text['category'][0].' --'; ?></option>
 <?php foreach (array_keys($category_options) as $cat): ?>
 <?php if ($cat != 'core'): ?>
-  <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat) echo ' selected="selected"'; ?>><?php echo $category_options[$cat]; ?></option>
+  <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat): ?> selected="selected"<?php endif; ?>><?php echo $category_options[$cat]; ?></option>
 <?php endif; ?>
 <?php endforeach; ?>
 </select>
@@ -148,6 +148,7 @@ document.getElementById('repository_submit').style.display = 'none';
 
 </div>
 </div>
+<?php if ($rep->pageOffset): ?>
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -161,3 +162,4 @@ onload = self.scrollTo(0, <?php echo $rep->pageOffset; ?>);
 <?php endif; ?>
 //--><!]]>
 </script>
+<?php endif; ?>

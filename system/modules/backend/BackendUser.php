@@ -135,7 +135,7 @@ class BackendUser extends User
 				break;
 
 			case 'alexf':
-				return $this->arrData['alexf'];
+				return $this->alexf;
 				break;
 
 			default:
@@ -203,7 +203,12 @@ class BackendUser extends User
 			return true;
 		}
 
-		if (is_array($this->$array) && array_intersect((array) $field, $this->$array))
+		if (!is_array($field))
+		{
+			$field = array($field);
+		}
+
+		if (is_array($this->$array) && array_intersect($field, $this->$array))
 		{
 			return true;
 		}
@@ -213,11 +218,14 @@ class BackendUser extends User
 		{
 			foreach ($this->filemounts as $folder)
 			{
-				$return = preg_match('/^'.str_replace('/', '\/', $folder).'/i', $field[0]);
+				if (preg_match('/^'.str_replace('/', '\/', $folder).'/i', $field[0]))
+				{
+					return true;
+				}
 			}
 		}
 
-		return $return;
+		return false;
 	}
 
 
@@ -316,7 +324,7 @@ class BackendUser extends User
 
 		// Inherit permissions
 		$always = array('alexf');
-		$depends = array('modules', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms');
+		$depends = array('modules', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
 		if (is_array($GLOBALS['TL_PERMISSIONS']) && count($GLOBALS['TL_PERMISSIONS'] > 0))
@@ -328,18 +336,21 @@ class BackendUser extends User
 		if (in_array('news', $this->Config->getActiveModules()))
 		{
 			$depends[] = 'news';
+			$depends[] = 'newp';
 		}
 
 		// HOOK: add calendar permissions
 		if (in_array('calendar', $this->Config->getActiveModules()))
 		{
 			$depends[] = 'calendars';
+			$depends[] = 'calendarp';
 		}
 
 		// HOOK: add newsletters permissions
 		if (in_array('newsletter', $this->Config->getActiveModules()))
 		{
 			$depends[] = 'newsletters';
+			$depends[] = 'newsletterp';
 		}
 
 		// Overwrite user permissions if only group permissions shall be inherited
@@ -357,9 +368,9 @@ class BackendUser extends User
 
 		foreach ((array) $this->groups as $id)
 		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?)")
+			$objGroup = $this->Database->prepare("SELECT * FROM tl_user_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
 									   ->limit(1)
-									   ->execute($id, $time, $time);
+									   ->execute($id);
 
 			if ($objGroup->numRows > 0)
 			{

@@ -103,6 +103,18 @@ abstract class ModuleNews extends Module
 		$arrArticles = array();
 		$limit = $objArticles->numRows;
 		$count = 0;
+		$imgSize = false;
+
+		// Override the default image size
+		if ($this->imgSize != '')
+		{
+			$size = deserialize($this->imgSize);
+
+			if ($size[0] > 0 || $size[1] > 0)
+			{
+				$imgSize = $this->imgSize;
+			}
+		}
 
 		while ($objArticles->next())
 		{
@@ -119,7 +131,6 @@ abstract class ModuleNews extends Module
 			$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticles, $blnAddArchive);
 			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
 			$objTemplate->archive = $objArticles->archive;
-			$objTemplate->addImage = false;
 
 			// Display "read more" button if external link
 			if ($objArticles->source == 'external' && !strlen($objArticles->text))
@@ -130,32 +141,18 @@ abstract class ModuleNews extends Module
 			// Encode e-mail addresses
 			else
 			{
-				$objTemplate->text = $this->String->encodeEmail($objArticles->text);
-			}
-
-			// Add an image
-			if ($objArticles->addImage && is_file(TL_ROOT . '/' . $objArticles->singleSRC))
-			{
-				$size = deserialize($objArticles->size);
-				$src = $this->getImage($this->urlEncode($objArticles->singleSRC), $size[0], $size[1]);
-
-				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-				{
-					$objTemplate->imgSize = ' ' . $imgSize[3];
-				}
-
-				$objTemplate->src = $src;
-				$objTemplate->href = $objArticles->singleSRC;
-				$objTemplate->alt = specialchars($objArticles->alt);
-				$objTemplate->fullsize = $objArticles->fullsize ? true : false;
-				$objTemplate->margin = $this->generateMargin(deserialize($objArticles->imagemargin), 'padding');
-				$objTemplate->float = in_array($objArticles->floating, array('left', 'right')) ? sprintf(' float:%s;', $objArticles->floating) : '';
-				$objTemplate->caption = $objArticles->caption;
-				$objTemplate->addImage = true;
+				// Clean RTE output
+				$objTemplate->text = str_ireplace
+				(
+					array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
+					array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
+					$this->String->encodeEmail($objArticles->text)
+				);
 			}
 
 			$arrMeta = $this->getMetaFields($objArticles);
 
+			// Add meta information
 			$objTemplate->date = $arrMeta['date'];
 			$objTemplate->hasMetaFields = count($arrMeta) ? true : false;
 			$objTemplate->numberOfComments = $arrMeta['ccount'];
@@ -163,51 +160,27 @@ abstract class ModuleNews extends Module
 			$objTemplate->timestamp = $objArticles->date;
 			$objTemplate->author = $arrMeta['author'];
 
-			$arrEnclosures = array();
+			$objTemplate->addImage = false;
 
- 			// Add enclosure
-			if ($objArticles->addEnclosure)
+			// Add an image
+			if ($objArticles->addImage && is_file(TL_ROOT . '/' . $objArticles->singleSRC))
 			{
-				$arrEnclosure = deserialize($objArticles->enclosure, true);
-				$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
-
-				if (is_array($arrEnclosure))
+				if ($imgSize)
 				{
-					// Send file to the browser
-					if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
-					{
-						$this->sendFileToBrowser($this->Input->get('file', true));
-					}
-
-					// Add download links
-					for ($i=0; $i<count($arrEnclosure); $i++)
-					{
-						if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-						{				
-							$objFile = new File($arrEnclosure[$i]);
-
-							if (in_array($objFile->extension, $allowedDownload))
-							{
-								$size = ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)';
-								$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-
-								if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-								{
-									$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
-								}
-
-								$arrEnclosures[$i]['icon'] = $src;
-								$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]) . $size;
-								$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-								$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
-								$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-							}
-						}
-					}
+					$objArticles->size = $imgSize;
 				}
+
+				$this->addImageToTemplate($objTemplate, $objArticles->row());
 			}
 
-			$objTemplate->enclosure = $arrEnclosures;
+			$objTemplate->enclosure = array();
+
+			// Add enclosures
+			if ($objArticles->addEnclosure)
+			{
+				$this->addEnclosuresToTemplate($objTemplate, $objArticles->row());
+			}
+
 			$arrArticles[] = $objTemplate->parse();
 		}
 
@@ -286,10 +259,12 @@ abstract class ModuleNews extends Module
 
 			if (substr($objArticle->url, 0, 7) == 'mailto:')
 			{
-				$objArticle->url = 'mailto:' . $this->String->encodeEmail(substr($objArticle->url, 7));
+				self::$arrUrlCache[$strCacheKey] = $this->String->encodeEmail($objArticle->url);
 			}
-
-			self::$arrUrlCache[$strCacheKey] = ampersand($objArticle->url);
+			else
+			{
+				self::$arrUrlCache[$strCacheKey] = ampersand($objArticle->url);
+			}
 		}
 
 		// Link to internal page
@@ -342,17 +317,18 @@ abstract class ModuleNews extends Module
 		// Internal link
 		if ($objArticle->source != 'external')
 		{
-			return sprintf('<a href="%s" title="%s">%s</a>',
+			return sprintf('<a href="%s" title="%s">%s <span class="invisible">%s</span></a>',
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
 							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline)),
-							$strLink);
+							$strLink,
+							$objArticle->headline);
 		}
 
 		// Encode e-mail addresses
 		if (substr($objArticle->url, 0, 7) == 'mailto:')
 		{
 			$this->import('String');
-			$objArticle->url = 'mailto:' . $this->String->encodeEmail(substr($objArticle->url, 7));
+			$objArticle->url = $this->String->encodeEmail($objArticle->url);
 		}
 
 		// Ampersand URIs
@@ -365,7 +341,7 @@ abstract class ModuleNews extends Module
 		return sprintf('<a href="%s" title="%s"%s>%s</a>',
 						$objArticle->url,
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $objArticle->url)),
-						($objArticle->target ? LINK_NEW_WINDOW_BLUR : ''),
+						($objArticle->target ? LINK_NEW_WINDOW : ''),
 						$strLink);
 	}
 }

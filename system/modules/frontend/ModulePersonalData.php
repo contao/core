@@ -108,17 +108,18 @@ class ModulePersonalData extends Module
 			$this->Template = new FrontendTemplate($this->memberTpl);
 		}
 
+		$this->Template->fields = '';
+		$this->Template->tableless = $this->tableless;
+
 		$arrFields = array();
 		$doNotSubmit = false;
 		$hasUpload = false;
-		$this->Template->fields = '';
+		$row = 0;
 
 		// Build form
-		foreach ($this->editable as $i=>$field)
+		foreach ($this->editable as $field)
 		{
 			$arrData = &$GLOBALS['TL_DCA']['tl_member']['fields'][$field];
-			$strGroup = $arrData['eval']['feGroup'];
-
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
@@ -127,10 +128,20 @@ class ModulePersonalData extends Module
 				continue;
 			}
 
+			$strGroup = $arrData['eval']['feGroup'];
+			$arrData['eval']['tableless'] = $this->tableless;
+
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
 
 			$objWidget->storeValues = true;
-			$objWidget->rowClass = 'row_'.$i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
+			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+
+			// Increase the row count if its a password field
+			if ($objWidget instanceof FormPassword)
+			{
+				++$row;
+				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
+			}
 
 			// Validate input
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_member_' . $this->id)
@@ -158,6 +169,25 @@ class ModulePersonalData extends Module
 					}
 				}
 
+				// Save callback
+				if (is_array($arrData['save_callback']))
+				{
+					foreach ($arrData['save_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+
+						try
+						{
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
+						}
+						catch (Exception $e)
+						{
+							$objWidget->class = 'error';
+							$objWidget->addError($e->getMessage());
+						}
+					}
+				}
+
 				// Do not submit if there are errors
 				if ($objWidget->hasErrors())
 				{
@@ -167,16 +197,6 @@ class ModulePersonalData extends Module
 				// Store current value
 				elseif ($objWidget->submitInput())
 				{
-					// Save callback
-					if (is_array($arrData['save_callback']))
-					{
-						foreach ($arrData['save_callback'] as $callback)
-						{
-							$this->import($callback[0]);
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
-						}
-					}
-
 					// Set new value
 					$this->User->$field = $varValue;
 					$_SESSION['FORM_DATA'][$field] = $varValue;
@@ -207,6 +227,7 @@ class ModulePersonalData extends Module
 
 			$this->Template->fields .= $temp;
 			$arrFields[$strGroup][$field] .= $temp;
+			++$row;
 		}
 
 		// Redirect or reload if there was no error
@@ -230,7 +251,7 @@ class ModulePersonalData extends Module
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
-		$this->Template->rowLast = 'row_' . count($this->editable) . ((($i % 2) == 0) ? ' odd' : ' even');
+		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
 
 		// HOOK: add memberlist fields
 		if (in_array('memberlist', $this->Config->getActiveModules()))

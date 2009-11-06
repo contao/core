@@ -41,10 +41,6 @@ $GLOBALS['BE_MOD'] = array
 			'table' => array('TableWizard', 'importTable'),
 			'list' => array('ListWizard', 'importList')
 		),
-		'flash' => array
-		(
-			'tables' => array('tl_flash')
-		),
 		'form' => array
 		(
 			'tables' => array('tl_form', 'tl_form_field')
@@ -156,7 +152,8 @@ $GLOBALS['BE_FFL'] = array
 	'tableWizard'    => 'TableWizard',
 	'listWizard'     => 'ListWizard',
 	'optionWizard'   => 'OptionWizard',
-	'moduleWizard'   => 'ModuleWizard'
+	'moduleWizard'   => 'ModuleWizard',
+	'imageSize'      => 'ImageSize'
 );
 
 

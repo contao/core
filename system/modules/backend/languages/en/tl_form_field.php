@@ -33,6 +33,7 @@
 $GLOBALS['TL_LANG']['FFL']['headline']    = array('Headline', 'a custom field to insert a section headline.');
 $GLOBALS['TL_LANG']['FFL']['explanation'] = array('Explanation', 'a custom field to insert an explanation text.');
 $GLOBALS['TL_LANG']['FFL']['html']        = array('HTML code', 'a custom field to insert HTML code.');
+$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'a container for form fields with an optional legend.');
 $GLOBALS['TL_LANG']['FFL']['text']        = array('Text field', 'a single-line input field for a short or medium text.');
 $GLOBALS['TL_LANG']['FFL']['password']    = array('Password field', 'a single-line input field for a password. TYPOlight automatically adds a confirmation field.');
 $GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'a multi-line input field for a medium or long text.');
@@ -75,6 +76,9 @@ $GLOBALS['TL_LANG']['tl_form_field']['storeFile']      = array('Store uploaded f
 $GLOBALS['TL_LANG']['tl_form_field']['uploadFolder']   = array('Target folder', 'Please select the target folder from the files directory.');
 $GLOBALS['TL_LANG']['tl_form_field']['useHomeDir']     = array('Use home directory', 'Store the file in the home directory if there is an authenticated user.');
 $GLOBALS['TL_LANG']['tl_form_field']['doNotOverwrite'] = array('Preserve existing files', 'Add a numeric suffix to the new file if the file name already exists.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsType']         = array('Operation mode', 'Please select the operation mode of the fieldset element.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsStart']        = array('Wrapper start', 'Marks the beginning of a fieldset and can contain a legend.');
+$GLOBALS['TL_LANG']['tl_form_field']['fsStop']         = array('Wrapper stop', 'Marks the end of a fieldset.');
 $GLOBALS['TL_LANG']['tl_form_field']['value']          = array('Default value', 'Here you can enter a default value for the field.');
 $GLOBALS['TL_LANG']['tl_form_field']['class']          = array('CSS class', 'Here you can enter one or more classes.');
 $GLOBALS['TL_LANG']['tl_form_field']['accesskey']      = array('Access key', 'A form field can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.');
@@ -120,5 +124,6 @@ $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Paste at the top', '
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Add new at the top', 'Add new after field ID %s');
 $GLOBALS['TL_LANG']['tl_form_field']['up']         = array('Move item up', 'Move the item one position up');
 $GLOBALS['TL_LANG']['tl_form_field']['down']       = array('Move item down', 'Move the item one position down');
+$GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Toggle visibility', 'Toggle the visibility of field ID %s');
 
 ?>

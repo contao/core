@@ -28,5 +28,5 @@ remove:"Odstr\u00E1ni\u0165",
 insert_date:"Vlo\u017Ei\u0165 aktu\u00E1lny d\u00E1tum/\u010Das",
 option_ltr:"Z \u013Eava do prava",
 option_rtl:"Z prava do \u013Eava",
-attribs_title:"Vlo\u017Ei\u0165/editova\u0165 atrib\u00FAty"
+attribs_title:"Vlo\u017Ei\u0165/upravi\u0165 atrib\u00FAty"
 });

@@ -163,78 +163,32 @@ class ModuleEventReader extends Events
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 
-		// Encode e-mail addresses
 		$this->import('String');
-		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
 
-		$this->Template->addImage = false;
+		// Clean RTE output
+		$objTemplate->details = str_ireplace
+		(
+			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
+			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
+			$this->String->encodeEmail($objEvent->details)
+		);
+
+		$objTemplate->addImage = false;
 
 		// Add image
 		if ($objEvent->addImage && is_file(TL_ROOT . '/' . $objEvent->singleSRC))
 		{
-			$size = deserialize($objEvent->size);
-			$src = $this->getImage($this->urlEncode($objEvent->singleSRC), $size[0], $size[1]);
-
-			if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-			{
-				$objTemplate->imgSize = ' ' . $imgSize[3];
-			}
-
-			$objTemplate->src = $src;
-			$objTemplate->href = $objEvent->singleSRC;
-			$objTemplate->alt = htmlspecialchars($objEvent->alt);
-			$objTemplate->fullsize = $objEvent->fullsize ? true : false;
-			$objTemplate->margin = $this->generateMargin(deserialize($objEvent->imagemargin), 'padding');
-			$objTemplate->float = in_array($objEvent->floating, array('left', 'right')) ? sprintf(' float:%s;', $objEvent->floating) : '';
-			$objTemplate->caption = $objEvent->caption;
-			$objTemplate->addImage = true;
+			$this->addImageToTemplate($objTemplate, $objEvent->row());
 		}
 
-		$arrEnclosures = array();
+		$objTemplate->enclosure = array();
 
-		// Add enclosure
+		// Add enclosures
 		if ($objEvent->addEnclosure)
 		{
-			$arrEnclosure = deserialize($objEvent->enclosure, true);
-			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
-
-			if (is_array($arrEnclosure))
-			{
-				// Send file to the browser
-				if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
-				{
-					$this->sendFileToBrowser($this->Input->get('file', true));
-				}
-
-				// Add download links
-				for ($i=0; $i<count($arrEnclosure); $i++)
-				{
-					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
-					{				
-						$objFile = new File($arrEnclosure[$i]);
-
-						if (in_array($objFile->extension, $allowedDownload))
-						{
-							$size = ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)';
-							$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-
-							if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-							{
-								$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
-							}
-
-							$arrEnclosures[$i]['icon'] = $src;
-							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]) . $size;
-							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-							$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
-							$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-						}
-					}
-				}
-			}
+			$this->addEnclosuresToTemplate($objTemplate, $objEvent->row());
 		}
 
-		$objTemplate->enclosure = $arrEnclosures;
 		$this->Template->event = $objTemplate->parse();
 	}
 }

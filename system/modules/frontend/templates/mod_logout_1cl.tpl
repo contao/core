@@ -12,7 +12,7 @@
 <p class="error"><?php echo $this->message; ?></p>
 <?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="tl_logout" />
-<p class="login_info"><?php echo $this->loggedInAs; ?></p>
+<p class="login_info"><?php echo $this->loggedInAs; ?><br /><?php echo $this->lastLogin; ?></p>
 <div class="submit_container">
 <input type="submit" class="submit" value="<?php echo $this->slabel; ?>" />
 </div>

@@ -261,6 +261,7 @@ class ModuleTasks extends BackendModule
 					$objEmail = new Email();
 
 					$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+					$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 					$objEmail->subject = $this->Template->title->value;
 
 					$objEmail->text = trim($this->Template->comment->value);
@@ -378,6 +379,7 @@ class ModuleTasks extends BackendModule
 					$objEmail = new Email();
 
 					$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+					$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 					$objEmail->subject = $objTask->title;
 
 					$objEmail->text = trim($this->Template->comment->value);
@@ -654,8 +656,7 @@ class ModuleTasks extends BackendModule
 		$arrOptions = array();
 
 		// Get all active users
-		$objUser = $this->Database->prepare("SELECT id, name, admin, groups FROM tl_user WHERE disable!=1 AND (start='' OR start<?) AND (stop='' OR stop>?)")
-								  ->execute($time, $time);
+		$objUser = $this->Database->execute("SELECT id, name, admin, groups FROM tl_user WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
 
 		while ($objUser->next())
 		{

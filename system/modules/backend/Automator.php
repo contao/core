@@ -86,8 +86,7 @@ class Automator extends Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->prepare("SELECT id, dns, sitemapName FROM tl_page WHERE type=? AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
-									  ->execute('root', $time, $time);
+			$objRoot = $this->Database->execute("SELECT id, dns, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages

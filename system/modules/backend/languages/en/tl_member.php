@@ -85,5 +85,6 @@ $GLOBALS['TL_LANG']['tl_member']['show']   = array('Member details', 'Show the d
 $GLOBALS['TL_LANG']['tl_member']['edit']   = array('Edit member', 'Edit member ID %s');
 $GLOBALS['TL_LANG']['tl_member']['copy']   = array('Duplicate member', 'Duplicate member ID %s');
 $GLOBALS['TL_LANG']['tl_member']['delete'] = array('Delete member', 'Delete member ID %s');
+$GLOBALS['TL_LANG']['tl_member']['toggle'] = array('Activate/deactivate member', 'Activate/deactivate member ID %s');
 
 ?>

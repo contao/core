@@ -53,6 +53,6 @@ $GLOBALS['TL_LANG']['tl_member_group']['new']    = array('New group', 'Create a 
 $GLOBALS['TL_LANG']['tl_member_group']['show']   = array('Group details', 'Show the details of group ID %s');
 $GLOBALS['TL_LANG']['tl_member_group']['copy']   = array('Duplicate group', 'Duplicate group ID %s');
 $GLOBALS['TL_LANG']['tl_member_group']['delete'] = array('Delete group', 'Delete group ID %s');
-$GLOBALS['TL_LANG']['tl_member_group']['edit']   = array('Edit group', 'Edit group ID %s');
+$GLOBALS['TL_LANG']['tl_member_group']['edit']   = array('Activate/deactivate group', 'Activate/deactivate group ID %s');
 
 ?>

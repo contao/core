@@ -44,8 +44,8 @@
 define('URL_SUFFIX', '.html');
 define('ENCODE_AMPERSANDS', true);
 define('SWITCH_ORDER', true);
-define('VERSION', '2.7');
-define('BUILD', '5');
+define('VERSION', '2.8');
+define('BUILD', 'RC1');
 
 
 /**
@@ -97,5 +97,6 @@ define('TL_FILES', 'FILES');
 define('TL_CRON', 'CRON');
 define('TL_FORMS', 'FORMS');
 define('TL_CONFIGURATION', 'CONFIGURATION');
+define('TL_NEWSLETTER', 'NEWSLETTER');
 
 ?>

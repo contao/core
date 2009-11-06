@@ -105,7 +105,7 @@ class Form extends Hybrid
 		$this->getMaxFileSize();
 
 		// Get all form fields
-		$objFields = $this->Database->prepare("SELECT * FROM tl_form_field WHERE pid=? ORDER BY sorting")
+		$objFields = $this->Database->prepare("SELECT * FROM tl_form_field WHERE pid=? AND invisible!=1 ORDER BY sorting")
 									->execute($this->id);
 
 		$row = 0;
@@ -135,6 +135,12 @@ class Form extends Hybrid
 				++$max_row;
 
 				$arrData['rowClassConfirm'] = 'row_'.$row . (($row == ($max_row - 1)) ? ' row_last' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+			}
+
+			// Submit buttons do not use the name attribute
+			if ($objFields->type == 'submit')
+			{
+				$arrData['name'] = '';
 			}
 
 			$objWidget = new $strClass($arrData);
@@ -285,12 +291,12 @@ class Form extends Hybrid
 				}
 			}
 
-			$recipients = trimsplit(',', $this->recipient);
+			$recipients = $this->String->splitCsv($this->recipient);
 
 			// Format recipients
 			foreach ($recipients as $k=>$v)
 			{
-				$recipients[$k] = str_replace(array('[', ']'), array('<', '>'), $v);
+				$recipients[$k] = str_replace(array('[', ']', '"'), array('<', '>', ''), $v);
 			}
 
 			$email = new Email();
@@ -304,6 +310,7 @@ class Form extends Hybrid
 
 			// Set the admin e-mail as "from" address
 			$email->from = $GLOBALS['TL_ADMIN_EMAIL'];
+			$email->fromName = $GLOBALS['TL_ADMIN_NAME'];
 
 			// Get the "reply to" address
 			if (strlen($this->Input->post('email', true)))
@@ -313,7 +320,7 @@ class Form extends Hybrid
 				// Add name
 				if (strlen($this->Input->post('name')))
 				{
-					$replyTo = $this->Input->post('name') . ' <' . $replyTo . '>';
+					$replyTo = '"' . $this->Input->post('name') . '" <' . $replyTo . '>';
 				}
 
 				$email->replyTo($replyTo);

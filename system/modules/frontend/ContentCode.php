@@ -72,18 +72,23 @@ class ContentCode extends ContentElement
 		{
 			$arrMapper = array
 			(
+				'AS3'        => 'shBrushAS3',
 				'Bash'       => 'shBrushBash',
 				'C'          => 'shBrushCpp',
 				'CSharp'     => 'shBrushCSharp',
 				'CSS'        => 'shBrushCss',
 				'Delphi'     => 'shBrushDelphi',
 				'Diff'       => 'shBrushDiff',
+				'Groovy'     => 'shBrushGroovy',
 				'Java'       => 'shBrushJava',
+				'JavaFX'     => 'shBrushJavaFX',
 				'JavaScript' => 'shBrushJScript',
 				'Perl'       => 'shBrushPerl',
 				'PHP'        => 'shBrushPhp',
+				'PowerShell' => 'shBrushPowerShell',
 				'Python'     => 'shBrushPython',
 				'Ruby'       => 'shBrushRuby',
+				'Scala'      => 'shBrushScala',
 				'SQL'        => 'shBrushSql',
 				'Text'       => 'shBrushPlain',
 				'VB'         => 'shBrushVb',

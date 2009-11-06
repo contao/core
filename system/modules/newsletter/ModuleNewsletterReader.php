@@ -141,7 +141,6 @@ class ModuleNewsletterReader extends Module
 
 						if (in_array($objFile->extension, $allowedDownload))
 						{
-							$size = ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)';
 							$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
 
 							if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
@@ -150,7 +149,8 @@ class ModuleNewsletterReader extends Module
 							}
 
 							$arrEnclosures[$i]['icon'] = $src;
-							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]) . $size;
+							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
+							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
 							$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 							$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];

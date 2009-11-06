@@ -11,7 +11,7 @@ class_name:"Klasse",
 not_set:"- Standaard -",
 clipboard_msg:"Kopi\u00EBren/knippen/plakken is niet beschikbaar in Mozilla en Firefox.\nWilt u meer informatie over deze beperking?",
 clipboard_no_support:"Kopi\u00EBren/knippen/plakken wordt niet ondersteund door uw browser, gebruik hiervoor de sneltoetsen.",
-popup_blocked:"U zult uw popup-blocker tijdelijk moeten uitschakelen voor deze website om gebruik te kunnen maken van alle fucties van deze teksteditor.",
+popup_blocked:"U zult uw popup-blocker tijdelijk moeten uitschakelen voor deze website om gebruik te kunnen maken van alle functies van deze teksteditor.",
 invalid_data:"Fout: Er zijn ongeldige waardes ingevoerd, deze zijn rood gemarkeerd.",
 more_colors:"Meer kleuren"
 },
@@ -30,7 +30,7 @@ inserttime_desc:"Tijd invoegen",
 months_long:"Januari,Februari,Maart,April,Mei,Juni,Juli,Augustus,September,Oktober,November,December",
 months_short:"Jan,Feb,Mar,Apr,Mei,Jun,Jul,Aug,Sep,Okt,Nov,Dec",
 day_long:"Zondag,Maandag,Dinsdag,Woensdag,Donderdag,Vrijdag,Zaterdag,Zondag",
-day_short:"Zo,Ma,Di,Wo,Do,Vr,Zat,Zon"
+day_short:"zo,ma,di,wo,do,vr,za,zo"
 },
 print:{
 print_desc:"Afdrukken"
@@ -133,7 +133,7 @@ fullpage:{
 desc:"Documenteigenschappen"
 },
 template:{
-desc:"Voorgedefineerd sjabloon invoegen"
+desc:"Voorgedefinieerd sjabloon invoegen"
 },
 visualchars:{
 desc:"Zichtbare symbolen"
@@ -144,7 +144,7 @@ menu:"Instellingen spellingcontrole",
 ignore_word:"Woord negeren",
 ignore_words:"Alles negeren",
 langs:"Talen",
-wait:"Een ogenblik geduld...",
+wait:"Een ogenblik geduld\u2026",
 sug:"Suggesties",
 no_sug:"Geen suggesties",
 no_mpell:"Geen spelfouten gevonden."

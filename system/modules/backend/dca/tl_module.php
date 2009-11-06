@@ -110,13 +110,13 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},includeRoot,showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'login'                       => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable,newsletters;{redirect_legend},jumpTo;{template_legend:hide},memberTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable,newsletters;{redirect_legend},jumpTo;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'search'                      => '{title_legend},name,headline,type;{config_legend},queryType,perPage,contextLength,totalLength;{template_legend:hide},searchType,searchTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'search'                      => '{title_legend},name,headline,type;{config_legend},queryType,fuzzy,contextLength,totalLength,perPage,searchType;{reference_legend:hide},rootPage;{template_legend:hide},searchTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,version,altContent;{source_legend},source,singleSRC;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'flashexternal'               => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,version,altContent;{source_legend},source,url;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source,singleSRC;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'flashexternal'               => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source,url;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests'
 	),
 
@@ -280,7 +280,15 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('member_')
+			'options'                 => $this->getTemplateGroup('member_'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'tableless' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['tableless'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'form' => array
 		(
@@ -298,6 +306,37 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'options'                 => array('and', 'or'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
 			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50')
+		),
+		'fuzzy' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['fuzzy'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
+		),
+		'contextLength' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['contextLength'],
+			'default'                 => 48,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'totalLength' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['totalLength'],
+			'default'                 => 1000,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'perPage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['perPage'],
+			'default'                 => 0,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'searchType' => array
 		(
@@ -317,30 +356,6 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'options'                 => $this->getTemplateGroup('search_'),
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'perPage' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['perPage'],
-			'default'                 => 0,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
-		),
-		'contextLength' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['contextLength'],
-			'default'                 => 48,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
-		),
-		'totalLength' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['totalLength'],
-			'default'                 => 1000,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
-		),
 		'inColumn' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['inColumn'],
@@ -348,13 +363,15 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => $this->getPageSections(),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_module']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'skipFirst' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['skipFirst'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'loadFirst' => array
 		(
@@ -381,14 +398,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['flashvars'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
-		),
-		'version' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['version'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
+			'eval'                    => array('nospace'=>true, 'maxlength'=>255, 'tl_class'=>'long clr')
 		),
 		'altContent' => array
 		(
@@ -447,19 +457,24 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['imgSize'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_module', 'limitImageWidth')
-			)
+			'inputType'               => 'imageSize',
+			'options'                 => array('proportional', 'crop'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'useCaption' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['useCaption'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 clr')
+		),
+		'fullsize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['fullsize'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'multiSRC' => array
 		(
@@ -604,32 +619,6 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
-	}
-
-
-	/**
-	 * Calculate the maximum image width and adjust the current width if necessary
-	 * @param mixed
-	 * @param object
-	 * @return mixed
-	 */
-	public function limitImageWidth($varValue)
-	{
-		if (!strlen($GLOBALS['TL_CONFIG']['maxImageWidth']) || $GLOBALS['TL_CONFIG']['maxImageWidth'] < 1)
-		{
-			return $varValue;
-		}
-
-		$arrValue = deserialize($varValue);
-		$intMaxWidth = intval($GLOBALS['TL_CONFIG']['maxImageWidth']);
-
-		// Adjust width if image is too wide
-		if ($intMaxWidth > 0 && $arrValue[0] > $intMaxWidth)
-		{
-			$arrValue[0] = $intMaxWidth;
-		}
-		
-		return serialize($arrValue);
 	}
 }
 

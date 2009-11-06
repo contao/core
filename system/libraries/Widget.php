@@ -143,7 +143,10 @@ abstract class Widget extends Controller
 				break;
 
 			case 'class':
-				$this->strClass = trim($this->strClass . ' ' . trim($varValue));
+				if (strlen($varValue) && strpos($this->strClass, $varValue) === false)
+				{
+					$this->strClass = trim($this->strClass . ' ' . $varValue);
+				}
 				break;
 
 			case 'template':
@@ -347,10 +350,12 @@ abstract class Widget extends Controller
 			return '';
 		}
 
-		return sprintf('<label for="ctrl_%s"%s>%s</label>',
+		return sprintf('<label for="ctrl_%s"%s>%s%s%s</label>',
 						$this->strId,
 						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
-						$this->strLabel);
+						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						$this->strLabel,
+						($this->required ? '<span class="mandatory">*</span>' : ''));
 	}
 
 
@@ -561,11 +566,30 @@ abstract class Widget extends Controller
 					}
 					break;
 
+				// Check whether the current value is a valid friendly name e-mail address
+				case 'friendly':
+					list ($strName, $varInput) = $this->splitFriendlyName($varInput);
+					// no break;
+
 				// Check whether the current value is a valid e-mail address
 				case 'email':
+					$varInput = $this->idnaEncode($varInput);
 					if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
+					}
+					if ($this->rgxp == 'friendly' && $strName != '')
+					{
+						$varInput = $strName . ' [' . $varInput . ']';
+					}
+					break;
+
+				// Check whether the current value is a valid URL
+				case 'url':
+					$varInput = $this->idnaEncode($varInput);
+					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
 					break;
 
@@ -574,14 +598,6 @@ abstract class Widget extends Controller
 					if (!preg_match('/^[\d \+\(\)\/-]*$/', html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['phone'], $this->strLabel));
-					}
-					break;
-
-				// Check whether the current value is a valid URL
-				case 'url':
-					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
-					{
-						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
 					break;
 

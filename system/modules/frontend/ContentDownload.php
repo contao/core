@@ -80,24 +80,16 @@ class ContentDownload extends ContentElement
 			return;
 		}
 
-		$size = ' ('.number_format(($objFile->filesize/1024), 1, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']).' kB)';
-
 		if (!strlen($this->linkTitle))
 		{
 			$this->linkTitle = $objFile->basename;
 		}
 
-		$src = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-
-		if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-		{
-			$this->Template->imgSize = ' ' . $imgSize[3];
-		}
-
-		$this->Template->icon = $src;
-		$this->Template->link = $this->linkTitle . $size;
+		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
 		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
+		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
+		$this->Template->icon = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
 	}
 }
 

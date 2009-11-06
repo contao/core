@@ -74,7 +74,10 @@ class Files
 					// Login
 					if (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
 					{
+						// Passive mode
+						ftp_pasv($resConnection, true);
 						self::$objInstance = new FTP($resConnection);
+
 						return self::$objInstance;
 					}
 				}

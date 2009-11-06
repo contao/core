@@ -2,6 +2,81 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
+Version 2.8.RC1 (2009--)
+----------------------------
+- Updated SyntaxHighlighter to version 2.0.320
+- Updated slimbox to version 1.7
+- Updated TCPDF to version 4.8.009 (#1033)
+- Updated TinyMCE to version 3.2.7
+- Updated MooTools to version 1.2.4 (#755)
+- Replaced phpmailer with SwiftMailer 4.0.5 (#1131)
+- Replaced SWFObject with the MooTools built-in Swiff class
+- Added mediabox version 1.1.6
+- Added hook "getImage" (#662)
+- Added hook "generatePage" (#894)
+- Added hook "printArticleAsPdf" (#995)
+- Added hook "addLogEntry" (#1028)
+- Added hook "loadLanguageFile" (#1083)
+- Added hook "closeAccount" (#53)
+- Added hooks "activateRecipient" and "removeRecipient" (#663)
+- Added a database result cache to speed up repeated queries
+- Added meta tags "content-script-type" and "content-style-type" (#527)
+- Added config/initconfig.php to store custom initialization routines (#868)
+- Added protection to admin accounts so they cannot be edited by regular users (#1030)
+- Added classes "float_left" and "float_right" to floated images (#642)
+- Added option to recreate style sheets in the maintenance module (#647)
+- Added Controller::getReadableSize() to return human readable filesizes (#906)
+- Added an option to choose the cache mode (server, browser or both) (#1008)
+- Added an option to override multiple records at once (#1021)
+- Added an option to copy or move multiple records at once (#120)
+- Added an option to copy or move multiple files and folders at once (#135)
+- Added insert tag "label" to insert labels (#831)
+- Added "select all" checkboxes to the database updater (#1040)
+- Added support for internationalized domain names (#967)
+- Added random order to image galleries (#743)
+- Added support for friendly name e-mail addresses (#39)
+- Added "date added" and "last login" to the user and member table (#1038)
+- Added an option to open a link in a new browser window to image elements (#224)
+- Added an option to run the search module in fuzzy mode (#417)
+- Added icons to publish or activate records via Ajax (#327)
+- Added option to align images below a news item, event, faq or definition (#764)
+- Added Controller::addImageToTemplate() to easily add images to templates
+- Added Controller::addEnclosuresToTemplate() to easily add enclosures to templates
+- Added an option to define an arbitrary element offset in news lists and RSS feeds (#1024)
+- Added an option to override the default image size in news and event lists (#873)
+- Added an option to choose the gallery template (#818)
+- Added option "tableless layout" to all user modules (#891)
+- Added a group_callback to the label section of the DCA (#302)
+- Added FancyUpload to the file manager (#708)
+- Added an option to exclude pages from the sitemap (#789)
+- Added an option to control form/archive/calendar/channel permissions (#349, #966)
+- Added an option to open random images in the lightbox (#1106)
+- Added pagination to event lists (#810)
+- Added String::splitCsv() to process CSV strings
+- Added an option to resize images proportionally (#736)
+- Added news format "day" to the news archive modules (#756)
+- Added "onload" and "save" callback to the registration and personal data module (#997)
+- Added a breadcrumb menu to navigate subparts of the page and article tree (#869)
+- Added an option to specify a custom SMTP server per newsletter channel (#85)
+- Added an option to define a target page for search modules (#949)
+- Added form widget "fieldset" (#1082)
+- Added front end module "close account" (#53)
+- Various accessibility improvements (#1068, #938, #939, #770)
+- Moved Safe Mode Hack setup to the install tool (#125)
+- Improved the user module so users cannot delete their own accounts
+- Improved the site structure to apply the root page language to new pages (#722)
+- Improved the site structure to automatically create an article on new pages (#347)
+- Improved the feed alias and sitemap name check (#936)
+- Improved page and file trees to always show the selected items (#908)
+- Improved forward page to forward to the first subpage if no target is defined (#1006)
+- Fixed issue with week start dates not being calculated correctly (#1051)
+- Fixed issue with the listing "go_back"-links not matching the system standards (#994)
+- Fixed issue with not allowed page types still being editable (if mounted) (#714)
+- Fixed issue with typolinks plugins not recognizing target="_blank" (#964)
+- Fixed issue with maximum front end width not being applied everywherer (#828)
+- Fixed issue with friendly names not supporting commas (#1109)
+- Fixed some minor issues
+
 Version 2.7.5 (2009-10-04)
 --------------------------
 - Fixed issue with newsletter subscriptions not being activated (#1036)

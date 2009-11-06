@@ -5,7 +5,7 @@ underline_desc:"Understruken (Ctrl+U)",
 striketrough_desc:"Genomstruken",
 bullist_desc:"Punktlista",
 numlist_desc:"Nummerlista",
-undo_desc:"\u00D6\u0085ngra (Ctrl+Z)",
+undo_desc:"\u00C5\u0085ngra (Ctrl+Z)",
 redo_desc:"G\u00F6r om (Ctrl+Y)",
 cleanup_desc:"St\u00E4da upp i k\u00E4llkoden"
 });

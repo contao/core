@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_news_comments']['pending']  = 'Awaiting moderation';
 $GLOBALS['TL_LANG']['tl_news_comments']['show']       = array('Comment details', 'Show the details of comment ID %s');
 $GLOBALS['TL_LANG']['tl_news_comments']['edit']       = array('Edit comment', 'Edit comment ID %s');
 $GLOBALS['TL_LANG']['tl_news_comments']['delete']     = array('Delete comment', 'Delete comment ID %s');
+$GLOBALS['TL_LANG']['tl_news_comments']['toggle']     = array('Publish/unpublish comment', 'Publish/unpublish comment ID %s');
 $GLOBALS['TL_LANG']['tl_news_comments']['editheader'] = array('Edit archive', 'Edit the current archive');
 
 ?>

@@ -113,6 +113,7 @@ $GLOBALS['TL_FFL'] = array
 	'headline'    => 'FormHeadline',
 	'explanation' => 'FormExplanation',
 	'html'        => 'FormHtml',
+	'fieldset'    => 'FormFieldset',
 	'text'        => 'FormTextField',
 	'password'    => 'FormPassword',
 	'textarea'    => 'FormTextArea',

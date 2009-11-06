@@ -74,8 +74,8 @@ class ModuleArticlenav extends Module
 		$id = $objPage->id;
 		$time = time();
 
-		$this->objArticles = $this->Database->prepare("SELECT id, alias, title FROM tl_article WHERE pid=? AND inColumn=? AND showTeaser=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
-											->execute($id, $this->strColumn, $time, $time);
+		$this->objArticles = $this->Database->prepare("SELECT id, alias, title FROM tl_article WHERE pid=? AND inColumn=? AND showTeaser=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+											->execute($id, $this->strColumn);
 
 		// Return if there are no articles
 		if ($this->objArticles->numRows < 1)

@@ -5,7 +5,7 @@
 
 <div class="teaser">
 <?php echo $this->teaser; ?> 
-<p class="more"><a href="<?php echo $this->href; ?>" title="<?php echo $this->more; ?>"><?php echo $this->more; ?></a></p>
+<p class="more"><a href="<?php echo $this->href; ?>" title="<?php echo $this->readMore; ?>"><?php echo $this->more; ?> <span class="invisible"><?php echo $this->headline; ?></span></a></p>
 </div>
 
 </div>

@@ -9,7 +9,8 @@
 <form action="<?php echo $this->request; ?>" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_quicknav" />
-<select name="target" class="select">
+<label for="ctrl_target" class="invisible"><?php echo $this->targetPage; ?></label>
+<select name="target" id="ctrl_target" class="select">
   <option value=""><?php echo $this->title; ?></option>
 <?php foreach ($this->items as $item): ?>
   <option value="<?php echo $item['href']; ?>"><?php echo str_repeat(' &nbsp; ', $item['level']); ?><?php echo $item['link']; ?></option>

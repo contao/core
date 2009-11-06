@@ -225,6 +225,11 @@ class ModuleLogin extends Module
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
 			$this->Template->action = ampersand($this->Environment->request, true);
 
+			if ($this->User->lastLogin > 0)
+			{
+				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin));
+			}
+
 			return;
 		}
 

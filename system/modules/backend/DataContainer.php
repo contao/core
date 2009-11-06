@@ -171,7 +171,7 @@ class DataContainer extends Backend
 		// Add popup file manager
 		if ($arrData['inputType'] == 'fileTree')
 		{
-			$xlabel .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); this.blur(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add table import wizard
@@ -277,7 +277,6 @@ class DataContainer extends Backend
 					{
 						$this->save($varValue);
 					}
-
 					catch (Exception $e)
 					{
 						$this->noReload = true;
@@ -327,7 +326,7 @@ class DataContainer extends Backend
 		}
 
 		// No 2-column layout in "edit all" mode
-		if ($this->Input->get('act') == 'editAll')
+		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'overrideAll')
 		{
 			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12'), '', $arrData['eval']['tl_class']);
 		}

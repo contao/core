@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Hier können
 $GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Erlaubte Seitentypen', 'Hier können Sie die erlaubten Seitentypen festlegen.');
 $GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Hier können Sie den Zugriff auf ein oder mehrere Verzeichnisse erlauben (Unterverzeichnisse werden automatisch hinzugefügt).');
 $GLOBALS['TL_LANG']['tl_user']['forms']      = array('Erlaubte Formulare', 'Hier können Sie den Zugriff auf ein oder mehrere Formulare erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['formp']      = array('Formularrechte', 'Hier können Sie die Formularrechte festlegen.');
 $GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deaktivieren', 'Das Konto vorübergehend deaktivieren.');
 $GLOBALS['TL_LANG']['tl_user']['start']      = array('Aktivieren am', 'Das Konto automatisch an diesem Tag aktivieren.');
 $GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deaktivieren am', 'Das Konto automatisch an diesem Tag deaktivieren.');
@@ -90,6 +91,7 @@ $GLOBALS['TL_LANG']['tl_user']['show']   = array('Benutzerdetails', 'Details des
 $GLOBALS['TL_LANG']['tl_user']['edit']   = array('Benutzer bearbeiten', 'Benutzer ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_user']['copy']   = array('Benutzer duplizieren', 'Benutzer ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_user']['delete'] = array('Benutzer löschen', 'Benutzer ID %s löschen');
+$GLOBALS['TL_LANG']['tl_user']['toggle'] = array('Benutzer aktivieren/deaktivieren', 'Benutzer ID %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_user']['su']     = array('Benutzer wechseln', 'Zu Benutzer ID %s wechseln');
 
 ?>

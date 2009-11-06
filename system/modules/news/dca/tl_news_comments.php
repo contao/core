@@ -88,6 +88,13 @@ $GLOBALS['TL_DCA']['tl_news_comments'] = array
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
 			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news_comments']['toggle'],
+				'icon'                => 'visible.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'button_callback'     => array('tl_news_comments', 'toggleIcon')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_comments']['show'],
@@ -223,6 +230,7 @@ class tl_news_comments extends Backend
 			case 'edit':
 			case 'show':
 			case 'delete':
+			case 'toggle':
 				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=(SELECT pid FROM tl_news_comments WHERE id=?)")
 											 ->limit(1)
 											 ->execute($id);
@@ -242,6 +250,7 @@ class tl_news_comments extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news_comments checkPermission', 5);
@@ -268,7 +277,7 @@ class tl_news_comments extends Backend
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news comments', 'tl_news_comments checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
 				}
-				elseif (!in_array($this->Input->get('id'), $root))
+				elseif (strlen($this->Input->get('id')) && !in_array($this->Input->get('id'), $root))
 				{
 					$this->log('Not enough permissions to access news archive ID "'.$this->Input->get('id').'"', 'tl_news_comments checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
@@ -301,11 +310,71 @@ class tl_news_comments extends Backend
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (strlen($arrRow['website']) ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" onclick="window.open(this.href); return false;">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . $arrRow['ip'] . '<br />' . $this->arrData[$arrRow['pid']] . ' (PID: ' . $arrRow['pid'] . ')</div>
+<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (strlen($arrRow['website']) ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '"' . LINK_NEW_WINDOW . '>' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . $arrRow['ip'] . '<br />' . $this->arrData[$arrRow['pid']] . ' (PID: ' . $arrRow['pid'] . ')</div>
 <div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
 ' . $arrRow['comment'] . '
 </div>
 </div>' . "\n    ";
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news_comments::published', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;id='.$this->Input->get('id').'&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
+
+		if (!$row['published'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Disable/enable a user group
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		// Check permissions to publish
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news_comments::published', 'alexf'))
+		{
+			$this->log('Not enough permissions to publish/unpublish news comment ID "'.$intId.'"', 'tl_news_comments toggleVisibility', 5);
+			$this->redirect('typolight/main.php?act=error');
+		}
+
+		// Update database
+		$this->Database->prepare("UPDATE tl_news_comments SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

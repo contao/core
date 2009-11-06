@@ -1,18 +1,18 @@
 tinyMCE.addI18n({sk:{
 common:{
-edit_confirm:"Chce\u0161 pou\u017Ei\u0165 WYSIWYG m\u00F3d pre tento text?",
+edit_confirm:"Chcete pou\u017Ei\u0165 WYSIWYG m\u00F3d pre tento text?",
 apply:"Pou\u017Ei\u0165",
 insert:"Vlo\u017Ei\u0165",
 update:"Aktualizova\u0165",
-cancel:"Zru\u0161i\u0165",
+cancel:"Storno",
 close:"Zavrie\u0165",
 browse:"Prech\u00E1dza\u0165",
 class_name:"Trieda",
 not_set:"-- Nezadan\u00E9 --",
-clipboard_msg:"Funkcie Kop\u00EDrova\u0165/vysrihn\u00FA\u0165/vlo\u017Ei\u0165 nie su podporovan\u00E9 prehliada\u010Dmi Mozilla a Firefox.\nChce\u0161 viac inform\u00E1ci\u00ED o tomto probl\u00E9me?",
-clipboard_no_support:"Moment\u00E1lne nie je podporovan\u00E9 tvoj\u00EDm prehliada\u010Dom. Miesto toho pou\u017Ei kl\u00E1vesov\u00FA skratku.",
-popup_blocked:"Ospravedl\u0148ujeme sa, ale blokova\u010D vyskakovac\u00EDch okien neumo\u017Enil otvori\u0165 okno, ktor\u00E9 zprostredkov\u00E1va funk\u010Dnos\u0165 aplik\u00E1ce. Mus\u00ED\u0161 vypnu\u0165 blokovanie vyskakovac\u00EDch okien na tomto webe, aby bolo mo\u017En\u00E9 vyu\u017Ei\u0165 jeho pln\u00FA funk\u010Dnos\u0165.",
-invalid_data:"Chyba: Zadan\u00E9 neplatn\u00E9 hodnoty (zv\u00FDraznen\u00E9 \u010Dervenou)",
+clipboard_msg:"Funkcie kop\u00EDrova\u0165/vysrihn\u00FA\u0165/vlo\u017Ei\u0165 nie su podporovan\u00E9 prehliada\u010Dmi Mozilla a Firefox.\nChcete viac inform\u00E1ci\u00ED o tomto probl\u00E9me?",
+clipboard_no_support:"Moment\u00E1lne nie je podporovan\u00E9 va\u0161\u00EDm prehliada\u010Dom. Miesto toho pou\u017Eite kl\u00E1vesov\u00FA skratku.",
+popup_blocked:"Ospravedl\u0148ujeme sa, ale v\u00E1\u0161 blokova\u010D vyskakovac\u00EDch okien neumo\u017Enil otvori\u0165 okno, ktor\u00E9 sprostredkov\u00E1va funk\u010Dnos\u0165 aplik\u00E1ce. Mus\u00EDte vypnu\u0165 blokovanie vyskakovac\u00EDch okien pre tento web, aby bolo mo\u017En\u00E9 pouu\u017Ei\u0165 t\u00FAto funkciu.",
+invalid_data:"Chyba: Boli zadan\u00E9 neplatn\u00E9 hodnoty (zv\u00FDraznen\u00E9 \u010Dervenou)",
 more_colors:"Viac farieb"
 },
 contextmenu:{
@@ -39,8 +39,8 @@ preview:{
 preview_desc:"N\u00E1h\u013Ead"
 },
 directionality:{
-ltr_desc:"Smer z \u013Eava do prava",
-rtl_desc:"Smer z prava do \u013Eava"
+ltr_desc:"Smer textu z \u013Eava do prava",
+rtl_desc:"Smer textu z prava do \u013Eava"
 },
 layer:{
 insertlayer_desc:"Vlo\u017Ei\u0165 nov\u00FA vrstvu",
@@ -54,11 +54,11 @@ save_desc:"Ulo\u017Ei\u0165",
 cancel_desc:"Zru\u0161i\u0165 v\u0161etky zmeny"
 },
 nonbreaking:{
-nonbreaking_desc:"Vlo\u017Ei\u0165 znak non-breaking space"
+nonbreaking_desc:"Vlo\u017Ei\u0165 znak nezalomen\u00E1 medzera (non-breaking space)"
 },
 iespell:{
 iespell_desc:"Spusti\u0165 kontrolu pravopisu",
-download:"ieSpell nebol n\u00E1jden\u00FD. Chce\u0161 ho nain\u0161talova\u0165?"
+download:"ieSpell nebol n\u00E1jden\u00FD. Chcete ho nain\u0161talova\u0165?"
 },
 advhr:{
 advhr_desc:"Horizont\u00E1lny odde\u013Eova\u010D"
@@ -68,13 +68,13 @@ emotions_desc:"Emotikony"
 },
 searchreplace:{
 search_desc:"N\u00E1jdi",
-replace_desc:"N\u00E1jdi/Nahra\u010F"
+replace_desc:"N\u00E1jdi/nahra\u010F"
 },
 advimage:{
-image_desc:"Vlo\u017Ei\u0165/editova\u0165 obr\u00E1zok"
+image_desc:"Vlo\u017Ei\u0165/upravi\u0165 obr\u00E1zok"
 },
 advlink:{
-link_desc:"Vlo\u017Ei\u0165/editova\u0165 odkaz"
+link_desc:"Vlo\u017Ei\u0165/upravi\u0165 odkaz"
 },
 xhtmlxtras:{
 cite_desc:"Cit\u00E1cia",
@@ -82,10 +82,10 @@ abbr_desc:"Skratka",
 acronym_desc:"Acronym",
 del_desc:"Zru\u0161enie",
 ins_desc:"Vlo\u017Eenie",
-attribs_desc:"Vlo\u017Ei\u0165/editova\u0165 atrib\u00FAty"
+attribs_desc:"Vlo\u017Ei\u0165/upravi\u0165 atrib\u00FAty"
 },
 style:{
-desc:"Editova\u0165 CSS \u0160t\u00FDl"
+desc:"Upravi\u0165 CSS \u0160t\u00FDl"
 },
 paste:{
 paste_text_desc:"Vlo\u017Ei\u0165 ako neformatovan\u00FD text",
@@ -93,9 +93,9 @@ paste_word_desc:"Vlo\u017Ei\u0165 text z aplik\u00E1ce Word",
 selectall_desc:"Ozna\u010Di\u0165 v\u0161etko"
 },
 paste_dlg:{
-text_title:"Pou\u017Ei CTRL+V na kl\u00E1vesnici pre vlo\u017Eenie textu do okna.",
+text_title:"Pou\u017Eite CTRL+V na kl\u00E1vesnici pre vlo\u017Eenie textu do okna.",
 text_linebreaks:"Zachova\u0165 zalamovanie riadkov",
-word_title:"Pou\u017Ei CTRL+V na kl\u00E1vesnici pre vlo\u017Eenie textu do okna."
+word_title:"Pou\u017Eite CTRL+V na kl\u00E1vesnici pre vlo\u017Eenie textu do okna."
 },
 table:{
 desc:"Vlo\u017Ei\u0165 nov\u00FA tabu\u013Eku",
@@ -117,17 +117,18 @@ copy_row_desc:"Kop\u00EDrova\u0165 riadok",
 del:"Zmaza\u0165 tabu\u013Eku",
 row:"Riadok",
 col:"St\u013Apec",
-cell:"Bunka"
+cell:"Bunka",
+cellprops_delta_width:"50"
 },
 autosave:{
-unload_msg:"Vykonan\u00E9 zmeny bud\u00FA straten\u00E9, ak opust\u00ED\u0161 t\u00FAto str\u00E1nku."
+unload_msg:"Ak opust\u00EDte t\u00FAto str\u00E1nku, vykonan\u00E9 zmeny bud\u00FA straten\u00E9."
 },
 fullscreen:{
-desc:"Prepn\u00FA\u0165 zobrazenie na celej obrazovke"
+desc:"Prepn\u00FA\u0165 zobrazenie na cel\u00FA obrazovku"
 },
 media:{
-desc:"Vlo\u017Ei\u0165 / editova\u0165 vnoren\u00E9 m\u00E9di\u00E1",
-edit:"Editova\u0165 vnoren\u00E9 m\u00E9di\u00E1"
+desc:"Vlo\u017Ei\u0165/upravi\u0165 vnoren\u00E9 m\u00E9di\u00E1",
+edit:"Upravi\u0165 vnoren\u00E9 m\u00E9di\u00E1"
 },
 fullpage:{
 desc:"Vlastnosti dokumentu"
@@ -140,7 +141,7 @@ desc:"Vizu\u00E1lne ovl\u00E1dacie znaky zap/vyp."
 },
 spellchecker:{
 desc:"Prepn\u00FA\u0165 na kontrolu pravopisu",
-menu:"Nastavenia kontroly pravopisu",
+menu:"Nastavenie kontroly pravopisu",
 ignore_word:"Vynecha\u0165 slovo",
 ignore_words:"Vynecha\u0165 v\u0161etky",
 langs:"Jazyky",

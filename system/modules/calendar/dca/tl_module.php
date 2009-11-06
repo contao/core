@@ -30,10 +30,10 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']        = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate,cal_startDay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']        = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_startDay,cal_noSpan;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']       = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_format,cal_noSpan,cal_startDay,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']     = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']       = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format;{template_legend:hide},cal_template,cal_startDay;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['upcoming_events'] = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_limit;{template_legend:hide},cal_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['upcoming_events'] = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_format,cal_noSpan,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -48,21 +48,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_calendar'] = array
 	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox'
-);
-
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_format'],
 	'default'                 => 'cal_month',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('cal_day', 'cal_week', 'cal_month', 'cal_year', 'cal_two', 'next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_module']
+	'options'                 => array('cal_day', 'cal_week', 'cal_month', 'cal_year', 'cal_two', 'next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_all'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50 m12')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
@@ -70,13 +72,24 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_limit'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit')
+	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
+	'default'                 => 0,
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
+	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_template'],
-	'default'                 => 'event_default',
+	'default'                 => 'event_full',
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => $this->getTemplateGroup('event_'),
@@ -90,17 +103,6 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => $this->getTemplateGroup('cal_'),
-	'eval'                    => array('tl_class'=>'w50')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
-	'default'                 => 0,
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
-	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
 	'eval'                    => array('tl_class'=>'w50')
 );
 

@@ -31,6 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_user']['newsletters'] = array('Allowed channels', 'Here you can grant access to one or more channels.');
+$GLOBALS['TL_LANG']['tl_user']['newsletterp'] = array('Channel permissions', 'Here you can define the channel permissions.');
 
 
 /**

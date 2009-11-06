@@ -77,7 +77,7 @@ advlink:{
 link_desc:"Wstaw/edytuj link"
 },
 xhtmlxtras:{
-cite_desc:"Cytat",
+cite_desc:"Osoba cytowana",
 abbr_desc:"Skr\u00F3t",
 acronym_desc:"Akronim",
 del_desc:"Usuni\u0119cie",

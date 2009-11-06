@@ -49,9 +49,9 @@ class PageRoot extends Frontend
 		$time = time();
 
 		// Get first active page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!=? AND type!=? AND type!=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : "") . " ORDER BY sorting")
+		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 									  ->limit(1)
-									  ->execute($pageId, 'root', 'error_403', 'error_404', $time, $time);
+									  ->execute($pageId);
 
 		if ($objNextPage->numRows)
 		{

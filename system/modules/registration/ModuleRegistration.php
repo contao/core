@@ -88,6 +88,19 @@ class ModuleRegistration extends Module
 		$this->loadLanguageFile('tl_member');
 		$this->loadDataContainer('tl_member');
 
+		// Call onload_callback (e.g. to check permissions)
+		if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['onload_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_member']['config']['onload_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]();
+				}
+			}
+		}
+
 		// Activate account
 		if (strlen($this->Input->get('token')))
 		{
@@ -101,6 +114,7 @@ class ModuleRegistration extends Module
 		}
 
 		$this->Template->fields = '';
+		$this->Template->tableless = $this->tableless;
 		$doNotSubmit = false;
 
 		// Captcha
@@ -111,7 +125,8 @@ class ModuleRegistration extends Module
 				'id'=>'registration',
 				'label'=>$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
 				'mandatory'=>true,
-				'required'=>true
+				'required'=>true,
+				'tableless' => $this->tableless
 			);
 
 			$strClass = $GLOBALS['TL_FFL']['captcha'];
@@ -152,7 +167,8 @@ class ModuleRegistration extends Module
 				continue;
 			}
 
-			$objWidget = new $strClass($this->prepareForWidget($arrData, $field));
+			$arrData['eval']['tableless'] = $this->tableless;
+			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -192,6 +208,25 @@ class ModuleRegistration extends Module
 					if ($objUnique->numRows)
 					{
 						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $field)));
+					}
+				}
+
+				// Save callback
+				if (is_array($arrData['save_callback']))
+				{
+					foreach ($arrData['save_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+
+						try
+						{
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
+						}
+						catch (Exception $e)
+						{
+							$objWidget->class = 'error';
+							$objWidget->addError($e->getMessage());
+						}
 					}
 				}
 
@@ -289,6 +324,7 @@ class ModuleRegistration extends Module
 		$arrData['groups'] = $this->reg_groups;
 		$arrData['login'] = $this->reg_allowLogin;
 		$arrData['activation'] = md5(uniqid('', true));
+		$arrData['dateAdded'] = $arrData['tstamp'];
 
 		// Disable account
 		$arrData['disable'] = 1;
@@ -322,7 +358,9 @@ class ModuleRegistration extends Module
 			}
 
 			$objEmail = new Email();
+
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['emailSubject'], $this->Environment->host);
 			$objEmail->text = $strConfirmation;
 			$objEmail->sendTo($arrData['email']);
@@ -418,8 +456,7 @@ class ModuleRegistration extends Module
 		$arrData['login'] = $objMember->login;
 		$arrData['disable'] = '';
 
-		// Inform admin
-		$this->sendAdminNotification($objMember->id, $arrData);
+		// Log activity
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', 'ModuleRegistration activateAccount()', TL_ACCESS);
 
 		// Redirect to jumpTo page
@@ -451,6 +488,7 @@ class ModuleRegistration extends Module
 		$objEmail = new Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], $this->Environment->host);
 
 		$strData = "\n\n";

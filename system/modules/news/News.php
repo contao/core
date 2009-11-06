@@ -109,14 +109,14 @@ class News extends Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get items
-		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY date DESC");
+		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC");
 
 		if ($arrArchive['maxItems'] > 0)
 		{
 			$objArticleStmt->limit($arrArchive['maxItems']);
 		}
 
-		$objArticle = $objArticleStmt->execute($arrArchive['id'], $time, $time);
+		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
 		// Get default URL
 		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -197,9 +197,9 @@ class News extends Frontend
 				$arrProcessed[$objArchive->jumpTo] = false;
 
 				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1")
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
 											->limit(1)
-											->execute($objArchive->jumpTo, $time, $time);
+											->execute($objArchive->jumpTo);
 
 				// Determin domain
 				if ($objParent->numRows)
@@ -225,8 +225,8 @@ class News extends Frontend
 			$strUrl = $arrProcessed[$objArchive->jumpTo];
 
 			// Get items
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND source=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY date DESC")
-										 ->execute($objArchive->id, 'default', $time, $time);
+			$objArticle = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND source='default' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC")
+										 ->execute($objArchive->id);
 
 			// Add items to the indexer
 			while ($objArticle->next())

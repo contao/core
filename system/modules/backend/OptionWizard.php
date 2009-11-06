@@ -168,8 +168,9 @@ class OptionWizard extends Widget
     <tr>
       <th>'.$GLOBALS['TL_LANG'][$this->strTable]['opValue'].'</th>
       <th>'.$GLOBALS['TL_LANG'][$this->strTable]['opLabel'].'</th>
-      <th></th>
-      <th></th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>';

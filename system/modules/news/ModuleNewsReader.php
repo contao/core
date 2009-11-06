@@ -246,6 +246,7 @@ class ModuleNewsReader extends ModuleNews
 		$arrFields['comment'] = array
 		(
 			'name' => 'comment',
+			'label' => $GLOBALS['TL_LANG']['MSC']['com_website'],
 			'inputType' => 'textarea',
 			'eval' => array('rows'=>4, 'cols'=>40, 'allowHtml'=>true)
 		);
@@ -278,7 +279,7 @@ class ModuleNewsReader extends ModuleNews
 				}
 			}
 
-			$arrWidgets[] = $objWidget;
+			$arrWidgets[$arrField['name']] = $objWidget;
 		}
 
 		$this->Template->fields = $arrWidgets;
@@ -309,22 +310,7 @@ class ModuleNewsReader extends ModuleNews
 
 
 	/**
-	 * Replace bbcode and add the comment to the database
-	 * 
-	 * Supports the following tags:
-	 * 
-	 * - [b][/b] bold
-	 * - [i][/i] italic
-	 * - [u][/u] underline
-	 * - [img][/img]
-	 * - [code][/code]
-	 * - [color=#ff0000][/color]
-	 * - [quote][/quote]
-	 * - [quote=tim][/quote]
-	 * - [url][/url]
-	 * - [url=http://][/url]
-	 * - [email][/email]
-	 * - [email=name@domain.com][/email]
+	 * Add the comment to the database
 	 * @param object
 	 * @param object
 	 */
@@ -338,57 +324,7 @@ class ModuleNewsReader extends ModuleNews
 			$strWebsite = 'http://' . $strWebsite;
 		}
 
-		$strComment = trim($this->Input->post('comment', true));
-
-		// Replace bbcode
-		if ($objArchive->bbcode)
-		{
-			$arrSearch = array
-			(
-				'[b]', '[/b]',
-				'[i]', '[/i]',
-				'[u]', '[/u]',
-				'[code]', '[/code]',
-				'[/color]',
-				'[quote]', '[/quote]'
-			);
-
-			$arrReplace = array
-			(
-				'<strong>', '</strong>',
-				'<em>', '</em>',
-				'<span style="text-decoration:underline;">', '</span>',
-				'<div class="code"><p>' . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', '</pre></div>',
-				'</span>',
-				'<div class="quote">', '</div>'
-			);
-
-			$strComment = str_replace($arrSearch, $arrReplace, $strComment);
-
-			$strComment = preg_replace('/\[color=([^\]]+)\]/i', '<span style="color:$1;">', $strComment);
-			$strComment = preg_replace('/\[quote=([^\]]+)\]/i', '<div class="quote"><p>' . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>', $strComment);
-			$strComment = preg_replace('/\[img\]([^\[]+)\[\/img\]/i', '<img src="$1" alt="" />', $strComment);
-
-			$strComment = preg_replace('/\[url\]([^\[]+)\[\/url\]/i', '<a href="$1">$1</a>', $strComment);
-			$strComment = preg_replace('/\[url=([^\]]+)\]([^\[]+)\[\/url\]/i', '<a href="$1">$2</a>', $strComment);
-
-			$strComment = preg_replace('/\[email\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$1</a>', $strComment);
-			$strComment = preg_replace('/\[email=([^\]]+)\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$2</a>', $strComment);
-
-			$strComment = preg_replace(array('@</div>(\n)*@', '@\r@'), array("</div>\n", ''), $strComment);
-		}
-
-		// Encode e-mail addresses
-		if (strpos($strComment, 'mailto:') !== false)
-		{
-			$this->import('String');
-			$strComment = $this->String->encodeEmail($strComment);
-		}
-
 		$time = time();
-
-		// Prevent cross-site request forgeries
-		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
 
 		// Prepare record
 		$arrSet = array
@@ -398,7 +334,7 @@ class ModuleNewsReader extends ModuleNews
 			'name' => $this->Input->post('name'),
 			'email' => $this->Input->post('email', true),
 			'website' => $strWebsite,
-			'comment' => nl2br_pre($strComment),
+			'comment' => nl2br_pre($this->parseBbCode($this->Input->post('comment', true))),
 			'ip' => $this->Environment->ip,
 			'date' => $time,
 			'published' => 1
@@ -414,22 +350,9 @@ class ModuleNewsReader extends ModuleNews
 
 		// Send notification
 		$objEmail = new Email();
-		$strNotify = $GLOBALS['TL_ADMIN_EMAIL'];
 
-		// Notify author
-		if ($objArchive->notify == 'notify_author')
-		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objArticle->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$strNotify = $objAuthor->email;
-			}
-		}
-
-		$objEmail->from = $strNotify;
+		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
 
 		$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
@@ -438,7 +361,24 @@ class ModuleNewsReader extends ModuleNews
 								  $this->Environment->base . $this->Environment->request,
 								  $this->Environment->base . 'typolight/main.php?do=news&key=comments&act=edit&id=' . $insert->insertId);
 
-		$objEmail->sendTo($strNotify);
+		// Notify system administrator
+		if ($objArchive->notify != 'notify_author')
+		{
+			$objEmail->sendTo($GLOBALS['TL_ADMIN_EMAIL']);
+		}
+
+		// Notify author
+		if ($objArchive->notify != 'notify_admin')
+		{
+			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
+										->limit(1)
+										->execute($objArticle->authorId);
+
+			if ($objAuthor->numRows)
+			{
+				$objEmail->sendTo($objAuthor->email);
+			}
+		}
 	}
 }
 

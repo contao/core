@@ -50,6 +50,12 @@ class FormCaptcha extends Widget
 	 */
 	protected $strCaptchaKey;
 
+	/**
+	 * Security questions
+	 * @var string
+	 */
+	protected $strQuestion;
+
 
 	/**
 	 * Initialize the object
@@ -103,6 +109,30 @@ class FormCaptcha extends Widget
 
 
 	/**
+	 * Generate the label and return it as string
+	 * @return string
+	 */
+	public function generateLabel()
+	{
+		if (!strlen($this->strLabel))
+		{
+			return '';
+		}
+
+		if ($this->strQuestion == '')
+		{
+			$this->setQuestion();
+		}
+
+		return sprintf('<label for="ctrl_%s"%s>%s <span class="invisible">%s</span></label>',
+						$this->strId,
+						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						$this->strLabel,
+						$this->strQuestion);
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
@@ -117,10 +147,27 @@ class FormCaptcha extends Widget
 
 
 	/**
-	 * Generate the captcha question and return it as string
+	 * Return the captcha question as string
 	 * @return string
 	 */
 	public function generateQuestion()
+	{
+		if ($this->strQuestion == '')
+		{
+			$this->setQuestion();
+		}
+
+		return sprintf('<span class="captcha_text%s">%s</span>',
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->strQuestion);
+	}
+
+
+	/**
+	 * Generate the captcha question
+	 * @return string
+	 */
+	protected function setQuestion()
 	{
 		$int1 = rand(1, 9);
 		$int2 = rand(1, 9);
@@ -143,9 +190,7 @@ class FormCaptcha extends Widget
 			$strEncoded .= sprintf('&#%s;', ord($strCharacter));
 		}
 
-		return sprintf('<span class="captcha_text%s">%s</span>',
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$question);
+		$this->strQuestion = $strEncoded;
 	}
 }
 

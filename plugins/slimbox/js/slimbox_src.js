@@ -1,5 +1,5 @@
 /*!
-	Slimbox v1.69 - The ultimate lightweight Lightbox clone
+	Slimbox v1.7 - The ultimate lightweight Lightbox clone
 	(c) 2007-2009 Christophe Beyls <http://www.digitalia.be>
 	MIT-style license.
 */
@@ -123,18 +123,23 @@ var Slimbox = (function() {
 
 		centerWidth = image.offsetWidth;
 		centerHeight = image.offsetHeight;
-		var top = Math.max(0, middle - (centerHeight / 2)), fn;
+		var top = Math.max(0, middle - (centerHeight / 2)), check = 0, fn;
 		if (center.offsetHeight != centerHeight) {
-			fxResize.start({height: centerHeight, top: top});
+			check = fxResize.start({height: centerHeight, top: top});
 		}
 		if (center.offsetWidth != centerWidth) {
-			fxResize.start({width: centerWidth, marginLeft: -centerWidth/2});
+			check = fxResize.start({width: centerWidth, marginLeft: -centerWidth/2});
 		}
 		fn = function() {
 			bottomContainer.setStyles({width: centerWidth, top: top + centerHeight, marginLeft: -centerWidth/2, visibility: "hidden", display: ""});
 			fxImage.start(1);
 		};
-		if (fxResize.check(fn)) fn();
+		if (check) {
+			fxResize.chain(fn);
+		}
+		else {
+			fn();
+		}
 	}
 
 	function animateCaption() {

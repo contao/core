@@ -6,6 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 <?php echo $this->events; ?>
+<?php echo $this->pagination; ?>
 
 </div>
 <!-- indexer::continue -->

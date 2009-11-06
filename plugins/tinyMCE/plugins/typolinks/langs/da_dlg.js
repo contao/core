@@ -10,14 +10,13 @@ link_titlefield:"Titel",
 link_is_email:"De URL die u invoerde lijkt een e-mailadres te zijn. Wilt u het verplichte prefix \'mailto:\' toevoegen?",
 link_is_external:"De URL die u invoerde lijkt een externe link te zijn. Wilt u het verplichte prefix \'http://\' toevoegen?",
 link_list:"Linklijst",
-image_title:"Voeg in/verander lightbox beeld",
+image_title:"Voeg in/verander thumbnail beeld",
 image_list:"Beeldlijst",
 image_src:"Beeld URL",
 image_dimensions:"Breedte/hoogte",
 image_alt:"Omschrijving",
 image_class:"CSS klasse",
-image_rel:"Type",
+image_rel:"Lightbox",
 image_rel_single:"Enkel beeld",
-image_rel_multi:"Beeldgalerij",
-image_rel_empty:"Alleen contactafdrukken"
+image_rel_multi:"Galerij"
 });

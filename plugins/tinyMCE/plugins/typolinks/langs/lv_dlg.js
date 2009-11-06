@@ -10,14 +10,13 @@ link_titlefield:"Virsraksts",
 link_is_email:"URL, ko jus ievad\u012Bj\u0101t, izskat\u0101s p\u0113c e-pasta adreses, vai v\u0113laties pielikt nepiecie\u0161amo mailto: prefiksu?",
 link_is_external:"URL, ko jus ievad\u012Bj\u0101t, izskat\u0101s p\u0113c \u0101rejas saites, vai v\u0113laties pielikt nepiecie\u0161amo http:// prefiksu?",
 link_list:"Sai\u0161u saraksts",
-image_title:"Ievietot/Redi\u0123\u0113t lightbox att\u0113lu",
+image_title:"Ievietot/Redi\u0123\u0113t thumbnail att\u0113lu",
 image_list:"Att\u0113lu saraksts",
 image_src:"Att\u0113la URL",
 image_dimensions:"Platums/augstums",
 image_alt:"Apraksts",
 image_class:"CSS klase",
-image_rel:"Veids",
+image_rel:"Lightbox",
 image_rel_single:"Viens att\u0113ls",
-image_rel_multi:"Att\u0113lu galerija",
-image_rel_empty:"Tikai s\u012Bkt\u0113ls"
+image_rel_multi:"Att\u0113lu galerija"
 });

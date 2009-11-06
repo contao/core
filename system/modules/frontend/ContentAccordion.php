@@ -88,63 +88,21 @@ class ContentAccordion extends ContentElement
 		{
 			$this->import('String');
 
-			$text = $this->String->encodeEmail($this->text);
-			$text = str_ireplace(array('<u>', '</u>'), array('<span style="text-decoration:underline;">', '</span>'), $text);
-			$text = str_ireplace(array('</p>', '<br /><br />'), array("</p>\n", "<br /><br />\n"), $text);
+			// Clean RTE output
+			$this->Template->text = str_ireplace
+			(
+				array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
+				array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
+				$this->String->encodeEmail($this->text)
+			);
 
-			// Use an image instead of the title
+			$this->Template->addImage = false;
+
+			// Add image
 			if ($this->addImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
 			{
-				// Image link
-				if (strlen($this->imageUrl) && TL_MODE == 'FE')
-				{
-					$this->strTemplate = 'ce_accordion_image_link';
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				}
-
-				// Fullsize view
-				elseif ($this->fullsize && TL_MODE == 'FE')
-				{
-					$this->strTemplate = 'ce_accordion_image_fullsize';
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				}
-
-				// Simple view
-				else
-				{
-					$this->strTemplate = 'ce_accordion_image';
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				}
-
-				$size = deserialize($this->size);
-				$arrImageSize = getimagesize(TL_ROOT . '/' . $this->singleSRC);
-
-				// Adjust image size in the back end
-				if (TL_MODE == 'BE' && $arrImageSize[0] > 640 && ($size[0] > 640 || !$size[0]))
-				{
-					$size[0] = 640;
-					$size[1] = floor(640 * $arrImageSize[1] / $arrImageSize[0]);
-				}
-
-				$src = $this->getImage($this->urlEncode($this->singleSRC), $size[0], $size[1]);
-
-				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-				{
-					$this->Template->imgSize = ' ' . $imgSize[3];
-				}
-
-				$this->Template->src = $src;
-				$this->Template->width = $arrImageSize[0];
-				$this->Template->height = $arrImageSize[1];
-				$this->Template->alt = specialchars($this->alt);
-				$this->Template->addBefore = ($this->floating != 'below');
-				$this->Template->margin = $this->generateMargin(deserialize($this->imagemargin), 'padding');
-				$this->Template->float = in_array($this->floating, array('left', 'right')) ? sprintf(' float:%s;', $this->floating) : '';
-				$this->Template->href = strlen($this->imageUrl) ? $this->imageUrl : $this->urlEncode($this->singleSRC);
-				$this->Template->caption = $this->caption;
+				$this->addImageToTemplate($this->Template, $this->arrData);
 			}
-
-			$this->Template->text = $text;
 		}
 
 		$classes = deserialize($this->mooClasses);

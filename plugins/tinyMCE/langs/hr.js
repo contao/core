@@ -74,7 +74,8 @@ advimage:{
 image_desc:"Umetni/uredi sliku"
 },
 advlink:{
-link_desc:"Insert/edit link"
+link_desc:"Insert/edit link",
+delta_width:"100"
 },
 xhtmlxtras:{
 cite_desc:"Citat",

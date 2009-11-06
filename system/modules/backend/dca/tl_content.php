@@ -100,7 +100,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s, \'content\');"',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
 				'button_callback'     => array('tl_content', 'toggleIcon')
 			),
 			'show' => array
@@ -127,10 +127,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'accordionstart'              => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'accordionstop'               => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests',
 		'code'                        => '{type_legend},type,headline;{text_legend},highlight,shClass,code;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,embed;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,rel,embed;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,size,imagemargin,imageUrl,caption,fullsize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,useHomeDir;{image_legend},size,imagemargin,perRow,perPage,sortBy,fullsize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,size,imagemargin,imageUrl,fullsize,caption;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,useHomeDir;{image_legend},size,imagemargin,perRow,perPage,sortBy,fullsize;{template_legend:hide},galleryTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'download'                    => '{type_legend},type,headline;{source_legend},singleSRC;{dwnconfig_legend},linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'downloads'                   => '{type_legend},type,headline;{source_legend},multiSRC,useHomeDir;{dwnconfig_legend},sortBy;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'alias'                       => '{type_legend},type;{include_legend},cteAlias;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -144,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	'subpalettes' => array
 	(
 		'protected'                   => 'groups',
-		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,caption,floating,fullsize',
+		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,fullsize,caption,floating',
 		'sortable'                    => 'sortIndex,sortOrder',
 		'useImage'                    => 'singleSRC,alt,size,caption'
 	),
@@ -211,12 +211,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_content', 'limitImageWidth')
-			)
+			'inputType'               => 'imageSize',
+			'options'                 => array('proportional', 'crop'),
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'imagemargin' => array
 		(
@@ -238,6 +236,13 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 				array('tl_content', 'pagePicker')
 			)
 		),
+		'fullsize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
+		),
 		'caption' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['caption'],
@@ -254,13 +259,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'options'                 => array('above', 'left', 'right', 'below'),
 			'eval'                    => array('cols'=>4),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'fullsize' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['fullsize'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'html' => array
@@ -376,7 +374,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['highlight'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Java', 'JavaScript', 'Perl', 'PHP', 'Python', 'Ruby', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
+			'options'                 => array('AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'shClass' => array
@@ -427,7 +425,15 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['embed'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long clr')
+		),
+		'rel' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['rel'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50')
 		),
 		'useImage' => array
 		(
@@ -470,9 +476,16 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sortBy'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('name_asc', 'name_desc', 'date_asc', 'date_desc', 'meta'),
+			'options'                 => array('name_asc', 'name_desc', 'date_asc', 'date_desc', 'meta', 'random'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
 			'eval'                    => array('tl_class'=>'w50')
+		),
+		'galleryTpl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => $this->getTemplateGroup('gallery_')
 		),
 		'cteAlias' => array
 		(
@@ -784,60 +797,6 @@ class tl_content extends Backend
 
 
 	/**
-	 * Calculate the maximum image width and adjust the current width if necessary
-	 * @param mixed
-	 * @param object
-	 * @return mixed
-	 */
-	public function limitImageWidth($varValue, DataContainer $dc)
-	{
-		if (!strlen($GLOBALS['TL_CONFIG']['maxImageWidth']) || $GLOBALS['TL_CONFIG']['maxImageWidth'] < 1)
-		{
-			return $varValue;
-		}
-
-		$arrValue = deserialize($varValue);
-		$intMaxWidth = intval($GLOBALS['TL_CONFIG']['maxImageWidth']);
-
-		$objType = $this->Database->prepare("SELECT type, perRow, imagemargin FROM tl_content WHERE id=?")
-								  ->limit(1)
-								  ->execute($dc->id);
-
-		// Calculate image width if it is an image gallery
-		if ($objType->numRows)
-		{
-			switch ($objType->type)
-			{
-				case 'text':
-					$arrMargin = deserialize($objType->imagemargin);
-					if ($arrMargin['unit'] == 'px')
-					{
-						$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
-					}
-					break;
-
-				case 'gallery':
-					$arrMargin = deserialize($objType->imagemargin);
-					if ($arrMargin['unit'] == 'px')
-					{
-						$intMaxWidth = $intMaxWidth - ($objType->perRow * ($arrMargin['left'] + $arrMargin['right']));
-					}
-					$intMaxWidth = floor($intMaxWidth / $objType->perRow);
-					break;
-			}
-		}
-
-		// Adjust width if image is too wide
-		if ($intMaxWidth > 0 && $arrValue[0] > $intMaxWidth)
-		{
-			$arrValue[0] = $intMaxWidth;
-		}
-		
-		return serialize($arrValue);
-	}
-
-
-	/**
 	 * Add the type of content element
 	 * @param array
 	 * @return string
@@ -1002,37 +961,6 @@ class tl_content extends Backend
 
 
 	/**
-	 * Return the "toggle visibility" button
-	 * @param array
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
-	{
-		if (strlen($this->Input->get('tid')))
-		{
-			$this->Database->prepare("UPDATE tl_content SET invisible='" . (strlen($this->Input->get('state')) ? '' : 1) . "' WHERE id=?")
-						   ->execute($this->Input->get('tid'));
-
-			$this->redirect($this->getReferer());
-		}
-
-		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
-
-		if ($row['invisible'])
-		{
-			$icon = 'invisible.gif';
-		}		
-
-		return '<a href="'.$this->addToUrl($href.'&amp;id='.$this->Input->get('id')).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-
-	/**
 	 * Return the link picker wizard
 	 * @param object
 	 * @return string
@@ -1061,6 +989,52 @@ class tl_content extends Backend
 									 ->execute($row['id'], 'alias');
 
 		return $objElement->numRows ? $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)) . ' ' : '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Return the "toggle visibility" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('tid')))
+		{
+			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		$href .= '&amp;id='.$this->Input->get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
+
+		if ($row['invisible'])
+		{
+			$icon = 'invisible.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Toggle the visibility of an element
+	 * @param integer
+	 * @param boolean
+	 */
+	public function toggleVisibility($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
+		$this->Database->prepare("UPDATE tl_content SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+					   ->execute($intId);
 	}
 }
 

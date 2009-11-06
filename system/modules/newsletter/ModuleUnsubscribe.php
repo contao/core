@@ -123,6 +123,8 @@ class ModuleUnsubscribe extends Module
 		$this->Template->showChannels = !$this->nl_hideChannels;
 		$this->Template->email = urldecode($this->Input->get('email'));
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['unsubscribe']);
+		$this->Template->channelsLabel = $GLOBALS['TL_LANG']['MSC']['nl_channels'];
+		$this->Template->emailLabel = $GLOBALS['TL_LANG']['MSC']['emailAddress'];
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->formId = 'tl_unsubscribe';
 		$this->Template->id = $this->id;
@@ -143,8 +145,10 @@ class ModuleUnsubscribe extends Module
 			$this->reload();
 		}
 
+		$varInput = $this->idnaEncode($this->Input->post('email', true));
+
 		// Validate e-mail address
-		if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->post('email', true)))
+		if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $varInput))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();
@@ -153,8 +157,8 @@ class ModuleUnsubscribe extends Module
 		$arrSubscriptions = array();
 
 		// Get active subscriptions
-		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=?")
-										  ->execute($this->Input->post('email', true), 1);
+		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=1")
+										  ->execute($varInput);
 
 		if ($objSubscription->numRows)
 		{
@@ -172,22 +176,37 @@ class ModuleUnsubscribe extends Module
 
 		// Remove subscriptions
 		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', $arrRemove) . ")")
-					   ->execute($this->Input->post('email', true));
+					   ->execute($varInput);
+
+		// Get channels
+		$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $arrRemove) . ")");
+		$arrChannels = $objChannels->fetchEach('title');
+
+		// Log activity
+		$this->log($varInput . ' unsubscribed from ' . implode(', ', $arrChannels), 'ModuleUnsubscribe removeRecipient()', TL_NEWSLETTER);
+
+		// HOOK: post unsubscribe callback
+		if (isset($GLOBALS['TL_HOOKS']['removeRecipient']) && is_array($GLOBALS['TL_HOOKS']['removeRecipient']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['removeRecipient'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($varInput, $arrRemove, $arrChannels);
+			}
+		}
 
 		// Confirmation e-mail
 		$objEmail = new Email();
 
-		// Get channels
-		$objChannel = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $arrChannels) . ")");
-
 		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_unsubscribe);
-		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
+		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
+		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
 
-		$objEmail->sendTo($this->Input->post('email', true));
+		$objEmail->sendTo($varInput);
 		global $objPage;
 
 		// Redirect to jumpTo page

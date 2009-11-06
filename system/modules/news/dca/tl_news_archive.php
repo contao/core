@@ -84,14 +84,16 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['copy'],
 				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'icon'                => 'copy.gif',
+				'button_callback'     => array('tl_news_archive', 'copyArchive')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_news_archive', 'deleteArchive')
 			),
 			'show' => array
 			(
@@ -156,7 +158,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'default'                 => 'notify_admin',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('notify_admin', 'notify_author'),
+			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -290,7 +292,11 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_news_archive', 'checkFeedAlias')
+			)
 		),
 		'description' => array
 		(
@@ -347,6 +353,12 @@ class tl_news_archive extends Backend
 
 		$GLOBALS['TL_DCA']['tl_news_archive']['list']['sorting']['root'] = $root;
 
+		// Check permissions to add archives
+		if (!is_array($this->User->newp) || !in_array('create', $this->User->newp))
+		{
+			$GLOBALS['TL_DCA']['tl_news_archive']['config']['closed'] = true;
+		}
+
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
@@ -363,18 +375,45 @@ class tl_news_archive extends Backend
 
 					if (is_array($arrNew['tl_news_archive']) && in_array($this->Input->get('id'), $arrNew['tl_news_archive']))
 					{
-						$objUser = $this->Database->prepare("SELECT news FROM tl_user WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->User->id);
+						// Add permissions on user level
+						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
+						{
+							$objUser = $this->Database->prepare("SELECT news, newp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
 
-						// $news only contains user permissions
-						$news = deserialize($objUser->news);
-						$news[] = $this->Input->get('id');
+							$arrNewp = deserialize($objUser->newp);
 
-						$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
-									   ->execute(serialize($news), $this->User->id);
+							if (is_array($arrNewp) && in_array('create', $arrNewp))
+							{
+								$arrNews = deserialize($objUser->news);
+								$arrNews[] = $this->Input->get('id');
 
-						// $root also contains group permissions
+								$this->Database->prepare("UPDATE tl_user SET news=? WHERE id=?")
+											   ->execute(serialize($arrNews), $this->User->id);
+							}
+						}
+
+						// Add permissions on group level
+						elseif ($this->User->groups[0] > 0)
+						{
+							$objGroup = $this->Database->prepare("SELECT news, newp FROM tl_user_group WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->groups[0]);
+
+							$arrNewp = deserialize($objGroup->newp);
+
+							if (is_array($arrNewp) && in_array('create', $arrNewp))
+							{
+								$arrNews = deserialize($objGroup->news);
+								$arrNews[] = $this->Input->get('id');
+
+								$this->Database->prepare("UPDATE tl_user_group SET news=? WHERE id=?")
+											   ->execute(serialize($arrNews), $this->User->groups[0]);
+							}
+						}
+
+						// Add new element to the user object
 						$root[] = $this->Input->get('id');
 						$this->User->news = $root;
 					}
@@ -384,7 +423,7 @@ class tl_news_archive extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->newp) || !in_array('delete', $this->User->newp))))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', 5);
 					$this->redirect('typolight/main.php?act=error');
@@ -393,8 +432,16 @@ class tl_news_archive extends Backend
 
 			case 'editAll':
 			case 'deleteAll':
+			case 'overrideAll':
 				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->newp) || !in_array('delete', $this->User->newp)))
+				{
+					$session['CURRENT']['IDS'] = array();
+				}
+				else
+				{
+					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				}
 				$this->Session->setData($session);
 				break;
 
@@ -449,6 +496,63 @@ class tl_news_archive extends Backend
 
 		$this->import('News');
 		$this->News->generateFeed($dc->id);
+	}
+
+
+	/**
+	 * Check the RSS-feed alias
+	 * @param object
+	 * @throws Exception
+	 */
+	public function checkFeedAlias($varValue, DataContainer $dc)
+	{
+		// No change or empty value
+		if ($varValue == $dc->value || $varValue == '')
+		{
+			return $varValue;
+		}
+
+		$arrFeeds = $this->removeOldFeeds(true);
+
+		// Alias exists
+		if (array_search($varValue, $arrFeeds) !== false)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Return the copy archive button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->newp) && in_array('create', $this->User->newp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete archive button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || (is_array($this->User->newp) && in_array('delete', $this->User->newp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

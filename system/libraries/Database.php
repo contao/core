@@ -164,6 +164,17 @@ abstract class Database
 
 
 	/**
+	 * Execute a query and do not cache the result
+	 * @param  string
+	 * @return object
+	 */
+	public function executeUncached($strQuery)
+	{
+		return $this->prepare($strQuery)->executeUncached();
+	}
+
+
+	/**
 	 * Execute a raw query (return a Database_Result object)
 	 * @param  string
 	 * @return object
@@ -348,6 +359,12 @@ abstract class Database_Statement
 	 */
 	protected $blnDisableAutocommit = false;
 
+	/**
+	 * Cache array
+	 * @var array
+	 */
+	protected static $arrCache = array();
+
 
 	/**
 	 * Validate the connection resource and store the query
@@ -517,46 +534,64 @@ abstract class Database_Statement
 			$arrParams = array_values($arrParams[0]);
 		}
 
-		$arrParams = $this->escapeParams($arrParams);
+		$this->replaceWildcards($arrParams);
+		$strKey = md5($this->strQuery);
 
-		$this->strQuery = preg_replace('/%([^bcdufosxX])/', '%%$1', $this->strQuery);
-		$this->strQuery = preg_replace('/%%+/', '%%', $this->strQuery);
-
-		if (($this->strQuery = @vsprintf($this->strQuery, $arrParams)) == false)
+		// Try to load result from cache
+		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
 		{
-			throw new Exception('Too few arguments to build the query string');
+			return self::$arrCache[$strKey]->reset();
 		}
 
-		// Execute the query
-		if (($this->resResult = $this->execute_query()) == false)
+		$objResult = $this->query();
+
+		// Cache result objects
+		if ($objResult instanceof Database_Result)
 		{
-			throw new Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
+			self::$arrCache[$strKey] = $objResult;
 		}
 
-		// Check whether there is a result
-		if (!is_resource($this->resResult) && !is_object($this->resResult))
-		{
-			$this->debugQuery();
-			return $this;
-		}
-
-		$strClass = DB_DRIVER . '_Result';
-		$objResult = new $strClass($this->resResult, $this->strQuery);
-
-		$this->debugQuery($objResult);
 		return $objResult;
 	}
 
 
 	/**
-	 * Execute a raw query
+	 * Execute the current statement but do not cache the result
+	 * @return object
+	 * @throws Exception
+	 */
+	public function executeUncached()
+	{
+		$arrParams = func_get_args();
+
+		if (is_array($arrParams[0]))
+		{
+			$arrParams = array_values($arrParams[0]);
+		}
+
+		$this->replaceWildcards($arrParams);
+		return $this->query();
+	}
+
+
+	/**
+	 * Execute a query and return the result object
 	 * @param  string
 	 * @return object
 	 * @throws Exception
 	 */
-	public function query($strQuery)
+	public function query($strQuery='')
 	{
-		$this->strQuery = $strQuery;
+		if (!empty($strQuery))
+		{
+			$this->strQuery = $strQuery;
+		}
+
+		// Make sure there is a query string
+		if ($this->strQuery == '')
+		{
+			throw new Exception('Empty query string');
+		}
 
 		// Execute the query
 		if (($this->resResult = $this->execute_query()) == false)
@@ -564,18 +599,40 @@ abstract class Database_Statement
 			throw new Exception(sprintf('Query error: %s (%s)', $this->error, $this->strQuery));
 		}
 
-		// Check whether there is a result
+		// No result set available
 		if (!is_resource($this->resResult) && !is_object($this->resResult))
 		{
 			$this->debugQuery();
 			return $this;
 		}
 
+		// Instantiate a result object
 		$strClass = DB_DRIVER . '_Result';
 		$objResult = new $strClass($this->resResult, $this->strQuery);
-
 		$this->debugQuery($objResult);
+
 		return $objResult;
+	}
+
+
+	/**
+	 * Build the query string
+	 * @param array
+	 * @throws Exception
+	 */
+	protected function replaceWildcards($arrParams)
+	{
+		$arrParams = $this->escapeParams($arrParams);
+
+		// Clean wildcards
+		$this->strQuery = preg_replace('/%([^bcdufosxX])/', '%%$1', $this->strQuery);
+		$this->strQuery = preg_replace('/%%+/', '%%', $this->strQuery);
+
+		// Replace wildcards
+		if (($this->strQuery = @vsprintf($this->strQuery, $arrParams)) == false)
+		{
+			throw new Exception('Too few arguments to build the query string');
+		}
 	}
 
 
@@ -629,7 +686,7 @@ abstract class Database_Statement
 
 		$arrData[] = $this->strQuery;
 
-		if (!$objResult || substr(strtoupper($this->strQuery), 0, 6) != 'SELECT')
+		if (!$objResult || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
 		{
 			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
 			$GLOBALS['TL_DEBUG'][] = $arrData;
@@ -714,6 +771,12 @@ abstract class Database_Result
 	private $blnDone = false;
 
 	/**
+	 * Remember modifications
+	 * @var boolean
+	 */
+	private $blnModified = false;
+
+	/**
 	 * Result cache array
 	 * @var array
 	 */
@@ -758,6 +821,8 @@ abstract class Database_Result
 		{
 			$this->first();
 		}
+
+		$this->blnModified = true;
 		$this->arrCache[$this->intIndex][$strKey] = $strValue;
 	}
 
@@ -788,6 +853,10 @@ abstract class Database_Result
 
 			case 'numFields':
 				return $this->num_fields();
+				break;
+
+			case 'isModified':
+				return $this->blnModified;
 				break;
 
 			default:
@@ -855,9 +924,13 @@ abstract class Database_Result
 	public function fetchEach($strKey)
 	{
 		$arrReturn = array();
-		$arrResult = $this->fetchAllAssoc();
 
-		foreach ($arrResult as $arrRow)
+		if ($this->intIndex < 0)
+		{
+			$this->fetchAllAssoc();
+		}
+
+		foreach ($this->arrCache as $arrRow)
 		{
 			$arrReturn[] = $arrRow[$strKey];
 		}

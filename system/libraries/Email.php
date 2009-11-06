@@ -28,6 +28,13 @@
 
 
 /**
+ * Include SwiftMailer classes
+ */
+require_once(TL_ROOT . '/plugins/swiftmailer/classes/Swift.php');
+require_once(TL_ROOT . '/plugins/swiftmailer/swift_init.php');
+
+
+/**
  * Class Email
  *
  * Provide methodes to send e-mails.
@@ -35,14 +42,20 @@
  * @author     Leo Feyer <leo@typolight.org>
  * @package    Library
  */
-class Email
+class Email extends System
 {
 
 	/**
-	 * E-mail subject
-	 * @var string
+	 * Mailer object
+	 * @var object
 	 */
-	protected $strSubject;
+	protected static $objMailer;
+
+	/**
+	 * Message object
+	 * @var object
+	 */
+	protected $objMessage;
 
 	/**
 	 * Sender e-mail address
@@ -61,6 +74,12 @@ class Email
 	 * @var integer
 	 */
 	protected $intPriority = 3;
+
+	/**
+	 * E-mail subject
+	 * @var string
+	 */
+	protected $strSubject;
 
 	/**
 	 * Text part of the e-mail
@@ -87,51 +106,53 @@ class Email
 	protected $strImageDir;
 
 	/**
-	 * Carbon copy recipients array
+	 * Invalid addresses
 	 * @var array
 	 */
-	protected $arrCc = array();
+	protected $arrFailures = array();
 
 	/**
-	 * Blind carbon copy recipients array
-	 * @var array
+	 * Log file
+	 * @var string
 	 */
-	protected $arrBcc = array();
-
-	/**
-	 * Reply to addresses
-	 * @var array
-	 */
-	protected $arrReplyTo = array();
-
-	/**
-	 * Attachments array
-	 * @var array
-	 */
-	protected $arrAttachments = array();
-
-	/**
-	 * String attachments array
-	 * @var array
-	 */
-	protected $arrStringAttachments = array();
+	protected $strLogFile = 'email.log';
 
 
 	/**
-	 * Instantiate object and load phpmailer plugin
+	 * Instantiate object and load Swift plugin
 	 * @throws Exception
 	 */
 	public function __construct()
 	{
-		$strPluginPath = TL_ROOT . '/plugins/phpmailer';
+		$this->import('String');
+		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
-		if (!is_dir($strPluginPath))
+		// Instantiate mailer
+		if (!is_object(self::$objMailer))
 		{
-			throw new Exception('Plugin phpmailer required');
+			if (!$GLOBALS['TL_CONFIG']['useSMTP'])
+			{
+				// Mail
+				$objTransport = Swift_MailTransport::newInstance();
+			}
+			else
+			{
+				// SMTP
+				$objTransport = Swift_SmtpTransport::newInstance($GLOBALS['TL_CONFIG']['smtpHost'], $GLOBALS['TL_CONFIG']['smtpPort']);
+
+				// Authentication
+				if ($GLOBALS['TL_CONFIG']['smtpUser'])
+				{
+					$objTransport->setUsername($GLOBALS['TL_CONFIG']['smtpUser'])->setPassword($GLOBALS['TL_CONFIG']['smtpPass']);
+				}
+			}
+
+			self::$objMailer = Swift_Mailer::newInstance($objTransport);
 		}
 
-		include_once($strPluginPath . '/class.phpmailer.php');
-		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
+		// Instantiate Swift_Message
+		$this->objMessage = Swift_Message::newInstance();
+		$this->objMessage->getHeaders()->addTextHeader('X-Mailer', 'TYPOlight Open Source CMS');
 	}
 
 
@@ -146,8 +167,7 @@ class Email
 		switch ($strKey)
 		{
 			case 'subject':
-				$this->strSubject = preg_replace('/[\t]+/', ' ', $varValue);
-				$this->strSubject = preg_replace('/[\n\r]+/', '', $this->strSubject);
+				$this->strSubject = preg_replace(array('/[\t]+/', '/[\n\r]+/'), array(' ', ''), $varValue);
 				break;
 
 			case 'text':
@@ -190,6 +210,10 @@ class Email
 
 			case 'imageDir':
 				$this->strImageDir = $varValue;
+				break;
+
+			case 'logFile':
+				$this->strLogFile = $varValue;
 				break;
 
 			default:
@@ -240,6 +264,14 @@ class Email
 				return $this->strImageDir;
 				break;
 
+			case 'logFile':
+				return $this->strLogFile;
+				break;
+
+			case 'failures':
+				return $this->arrFailures;
+				break;
+
 			default:
 				return null;
 				break;
@@ -255,7 +287,7 @@ class Email
 	 */
 	public function sendCc()
 	{
-		$this->arrCc = $this->compileRecipients(func_get_args());
+		$this->objMessage->setCc($this->compileRecipients(func_get_args()));
 	}
 
 
@@ -267,7 +299,7 @@ class Email
 	 */
 	public function sendBcc()
 	{
-		$this->arrBcc = $this->compileRecipients(func_get_args());
+		$this->objMessage->setBcc($this->compileRecipients(func_get_args()));
 	}
 
 
@@ -279,7 +311,7 @@ class Email
 	 */
 	public function replyTo()
 	{
-		$this->arrReplyTo = $this->compileRecipients(func_get_args());
+		$this->objMessage->setReplyTo($this->compileRecipients(func_get_args()));
 	}
 
 
@@ -290,11 +322,7 @@ class Email
 	 */
 	public function attachFile($strFile, $strMime='application/octet-stream')
 	{
-		$this->arrAttachments[] = array
-		(
-			'file' => $strFile,
-			'mime' => $strMime
-		);
+		$this->objMessage->attach(Swift_Attachment::fromPath($strFile, $strMime)->setFilename(basename($strFile)));
 	}
 
 
@@ -306,12 +334,7 @@ class Email
 	 */
 	public function attachFileFromString($strContent, $strFilename, $strMime='application/octet-stream')
 	{
-		$this->arrStringAttachments[] = array
-		(
-			'mime' => $strMime,
-			'file' => $strFilename,
-			'content' => $strContent
-		);
+		$this->objMessage->attach(Swift_Attachment::newInstance($strContent, $strFilename, $strMime));
 	}
 
 
@@ -331,113 +354,101 @@ class Email
 			return false;
 		}
 
-		$objMail = new PHPMailer();
+		$this->objMessage->setTo($arrRecipients);
+		$this->objMessage->setCharset($this->strCharset);
+		$this->objMessage->setPriority($this->intPriority);
 
-		$objMail->PluginDir = TL_ROOT . '/plugins/phpmailer/';
-		$objMail->SetLanguage('en', TL_ROOT . '/plugins/phpmailer/language/');
-
-		$objMail->AddCustomHeader('X-Mailer: TYPOlight');
-		$objMail->Priority = $this->intPriority;
-		$objMail->CharSet = $this->strCharset;
-
-		// HTML e-mail
-		if (strlen($this->strHtml))
-		{
-			$objMail->IsHTML(true);
-
-			$this->findHtmlImages($objMail);
-			$objMail->Body = $this->strHtml;
-
-			if (strlen($this->strText))
-			{
-				$objMail->AltBody = $this->strText;
-			}
-		}
-
-		// Text e-mail
-		else
-		{
-			$objMail->IsHTML(false);
-			$objMail->Body = $this->strText;
-		}
-
-		// File attachments
-		foreach ($this->arrAttachments as $arrFile)
-		{
-			$objMail->AddAttachment($arrFile['file'], basename($arrFile['file']), 'base64', $arrFile['mime']);
-		}
-
-		// String attachments
-		foreach ($this->arrStringAttachments as $arrFile)
-		{
-			$objMail->AddStringAttachment($arrFile['content'], $arrFile['file'], 'base64', $arrFile['mime']);
-		}
-
-		// Carbon copy
-		foreach ($this->arrCc as $strRecipient)
-		{
-			$objMail->AddCC($strRecipient);
-		}
-
-		// Blind carbon copy
-		foreach ($this->arrBcc as $strRecipient)
-		{
-			$objMail->AddBCC($strRecipient);
-		}
-
-		// Reply to
-		foreach ($this->arrReplyTo as $strRecipient)
-		{
-			$objMail->AddReplyTo($strRecipient);
-		}
-
-		// Add the administrator e-mail as default sender
-		if (!strlen($this->strSender))
-		{
-			$this->strSender = $GLOBALS['TL_CONFIG']['adminEmail'];
-			$this->strSenderName = '';
-		}
-
-		$objMail->From = $this->strSender;
-		$objMail->FromName = $this->strSenderName;
-		$objMail->Sender = $this->strSender;
-
-		// Add "No subject" as default subject
-		if (!strlen($this->strSubject))
+		// Default subject
+		if (empty($this->strSubject))
 		{
 			$this->strSubject = 'No subject';
 		}
 
-		$objMail->Subject = $this->strSubject;
+		$this->objMessage->setSubject($this->strSubject);
 
-		// Use SMTP to send mails
-		if ($GLOBALS['TL_CONFIG']['useSMTP'])
+		// HTML e-mail
+		if (!empty($this->strHtml))
 		{
-			$objMail->IsSMTP(true);
-			$objMail->SMTPAuth = $GLOBALS['TL_CONFIG']['smtpUser'] ? true : false;
+			if (!strlen($this->strImageDir))
+			{
+				$this->strImageDir = TL_ROOT . '/';
+			}
 
-			$objMail->Host = $GLOBALS['TL_CONFIG']['smtpHost'];
-			$objMail->Port = $GLOBALS['TL_CONFIG']['smtpPort'];
-			$objMail->Username = $GLOBALS['TL_CONFIG']['smtpUser'];
-			$objMail->Password = $GLOBALS['TL_CONFIG']['smtpPass'];
+			// Find images
+			$arrMatches = array();
+			preg_match_all('/(?:"|\')([^"\']+\.(gif|jpg|jpeg|jpe|bmp|png|tif|tiff|swf))(?:"|\')/Ui', $this->strHtml, $arrMatches);
+
+			// Create cid and replace image source
+			foreach (array_unique($arrMatches[1]) as $src)
+			{
+				if (file_exists($this->strImageDir . $src))
+				{
+					$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
+					$this->strHtml = str_replace('"' . $src . '"', '"' . $cid . '"', $this->strHtml);
+				}
+			}
+
+			$this->objMessage->setBody($this->strHtml, 'text/html');
 		}
 
-		// Add recipients
-		foreach ($arrRecipients as $strRecipient)
+		// Text content
+		if (!empty($this->strText))
 		{
-			$objMail->AddAddress($strRecipient);
+			if (!empty($this->strHtml))
+			{
+				$this->objMessage->addPart($this->strText, 'text/plain');
+			}
+			else
+			{
+				$this->objMessage->setBody($this->strText, 'text/plain');
+			}
 		}
 
-		// Add log entry
-		if (!$objMail->Send())
+		// Add the administrator e-mail as default sender
+		if ($this->strSender == '')
 		{
-			log_message('An error occured while trying to send an e-mail: ' . $objMail->ErrorInfo, 'email.log');
+			list($this->strSenderName, $this->strSender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+		}
+
+		// Sender
+		if ($this>strSenderName != '')
+		{
+			$this->objMessage->setFrom(array($this->strSender=>$this->strSenderName));
+		}
+		else
+		{
+			$this->objMessage->setFrom($this->strSender);
+		}
+
+		// Send e-mail
+		$intSent = self::$objMailer->send($this->objMessage, $this->arrFailures);
+
+		// Log failures
+		if (!empty($this->arrFailures))
+		{
+			log_message('E-mail address rejected: ' . implode(', ', $this->arrFailures), $this->strLogFile);
+		}
+
+		// Return if no e-mails have been sent
+		if ($intSent < 1)
+		{
 			return false;
 		}
 
-		$arrAllRecipients = array_merge($arrRecipients, $this->arrCc, $this->arrBcc);
-		log_message(sprintf('An e-mail has been sent to %s', implode(', ', $arrAllRecipients)), 'email.log');
+		// Add log entry
+		$strMessage = 'An e-mail has been sent to ' . implode(', ', array_keys($this->objMessage->getTo()));
 
+		if (count($this->objMessage->getCc()) > 0)
+		{
+			$strMessage .= ', CC to ' . implode(', ', array_keys($this->objMessage->getCc()));
+		}
+
+		if (count($this->objMessage->getBcc()) > 0)
+		{
+			$strMessage .= ', BCC to ' . implode(', ', array_keys($this->objMessage->getBcc()));
+		}
+
+		log_message($strMessage, $this->strLogFile);
 		return true;
 	}
 
@@ -455,76 +466,30 @@ class Email
 		{
 			if (!is_array($varRecipients))
 			{
-				$varRecipients = trimsplit(',', $varRecipients);
+				$varRecipients = $this->String->splitCsv($varRecipients);
 			}
 
-			$arrReturn = array_merge($arrReturn, $varRecipients);
+			// Support friendly name addresses and internationalized domain names
+			foreach ($varRecipients as $v)
+			{
+				list($strName, $strEmail) = $this->splitFriendlyName($v);
+
+				$strName = trim($strName, ' "');
+				$strEmail = $this->idnaEncode($strEmail);
+
+				if ($strName != '')
+				{
+					$arrReturn[$strEmail] = $strName;
+				}
+				else
+				{
+					$arrReturn[] = $strEmail;
+				}
+			}
 		}
 
-		return array_unique($arrReturn);
+		return $arrReturn;
 	}
-
-
-	/**
-	 * Extract images from the HTML source and add them as inline images
-	 * @param object
-	 */
-	protected function findHtmlImages(PHPMailer $objMail)
-	{
-		$arrTypes = array
-		(
-			'gif'  => 'image/gif',
-			'jpg'  => 'image/jpeg',
-			'jpeg' => 'image/jpeg',
-			'jpe'  => 'image/jpeg',
-			'bmp'  => 'image/bmp',
-			'png'  => 'image/png',
-			'tif'  => 'image/tiff',
-			'tiff' => 'image/tiff',
-			'swf'  => 'application/x-shockwave-flash'
-		);
-
-		// Set default image directory
-		if (!strlen($this->strImageDir))
-		{
-			$this->strImageDir = TL_ROOT . '/';
-		}
-
-		$arrImages = array();
-		$arrMatches = array();
-
-		// Find images
-		preg_match_all('/(?:"|\')([^"\']+\.(' . implode('|', array_keys($arrTypes)) . '))(?:"|\')/Ui', $this->strHtml, $arrMatches);
-
-		// Create cid and replace image source
-		foreach (array_unique($arrMatches[1]) as $m)
-		{
-			if (file_exists($this->strImageDir . $m))
-			{
-				$c = md5($m);
-
-				$arrImages[$m] = array
-				(
-					'src' => $m,
-					'cid' => $c
-				);
-
-				$this->strHtml = str_replace('"' . $m . '"', '"cid:' . $c . '"', $this->strHtml);
-			}
-		}
-
-		// Add images
-		if (count($arrImages))
-		{
-			ksort($arrImages);
-
-			foreach ($arrImages as $img)
-			{
-				$ext = preg_replace('#^.*\.(\w{3,4})$#e', 'strtolower("$1")', $img['src']);
-				$objMail->AddEmbeddedImage($this->strImageDir . $img['src'], $img['cid'], basename($img['src']), 'base64', $arrTypes[$ext]);
-            }
-        }
-    }
 }
 
 ?>

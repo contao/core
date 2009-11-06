@@ -36,7 +36,7 @@
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 tinyMCE_GZ.init({
-  plugins : "autosave,contextmenu,directionality,inlinepopups,paste,safari,save,searchreplace,spellchecker,template,typolinks",
+  plugins : "autosave,contextmenu,directionality,inlinepopups,paste,safari,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   themes : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
@@ -68,11 +68,11 @@ tinyMCE.init({
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
   save_callback : "TinyCallback.cleanHTML",
-  plugins : "autosave,contextmenu,directionality,inlinepopups,paste,safari,save,searchreplace,spellchecker,template,typolinks",
+  plugins : "autosave,contextmenu,directionality,inlinepopups,paste,safari,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   valid_elements : "+a[href|target|class],-b/strong,-i/em,-u,+div[align],+p[class|align],-li,br,-span[class],font[face|size|color]",
   content_css : "<?php echo TL_PATH; ?>/basic.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
-  tab_focus : ":prev,:next",
+  tabfocus_elements : ":prev,:next",
   theme : "advanced",
   theme_advanced_resizing : true,
   theme_advanced_resize_horizontal : false,

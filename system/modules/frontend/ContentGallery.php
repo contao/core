@@ -94,16 +94,22 @@ class ContentGallery extends ContentElement
 			{
 				$objFile = new File($file);
 				$this->parseMetaFile(dirname($file), true);
+				$arrMeta = $this->arrMeta[$objFile->basename];
+
+				if ($arrMeta[0] == '')
+				{
+					$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+				}
 
 				if ($objFile->isGdImage)
 				{
 					$images[$file] = array
 					(
 						'name' => $objFile->basename,
-						'src' => $file,
-						'alt' => (strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
-						'link' => (strlen($this->arrMeta[$objFile->basename][1]) ? $this->arrMeta[$objFile->basename][1] : ''),
-						'caption' => (strlen($this->arrMeta[$objFile->basename][2]) ? $this->arrMeta[$objFile->basename][2] : '')
+						'singleSRC' => $file,
+						'alt' => $arrMeta[0],
+						'imageUrl' => $arrMeta[1],
+						'caption' => $arrMeta[2]
 					);
 
 					$auxDate[] = $objFile->mtime;
@@ -127,13 +133,20 @@ class ContentGallery extends ContentElement
 
 				if ($objFile->isGdImage)
 				{
+					$arrMeta = $this->arrMeta[$subfile];
+
+					if ($arrMeta[0] == '')
+					{
+						$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					}
+
 					$images[$file . '/' . $subfile] = array
 					(
 						'name' => $objFile->basename,
-						'src' => $file . '/' . $subfile,
-						'alt' => (strlen($this->arrMeta[$subfile][0]) ? $this->arrMeta[$subfile][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)))),
-						'link' => (strlen($this->arrMeta[$subfile][1]) ? $this->arrMeta[$subfile][1] : ''),
-						'caption' => (strlen($this->arrMeta[$subfile][2]) ? $this->arrMeta[$subfile][2] : '')
+						'singleSRC' => $file . '/' . $subfile,
+						'alt' => $arrMeta[0],
+						'imageUrl' => $arrMeta[1],
+						'caption' => $arrMeta[2]
 					);
 
 					$auxDate[] = $objFile->mtime;
@@ -172,15 +185,10 @@ class ContentGallery extends ContentElement
 				}
 				$images = $arrImages;
 				break;
-		}
 
-		// Fullsize template
-		if ($this->fullsize && TL_MODE == 'FE')
-		{
-			$this->strTemplate = 'ce_gallery_fullsize';
-			$this->Template = new FrontendTemplate($this->strTemplate);
-			$this->Template->lightboxId = 'lb' . $this->id;
-			$this->Template->fullsize = true;
+			case 'random':
+				shuffle($images);
+				break;
 		}
 
 		$images = array_values($images);
@@ -199,14 +207,10 @@ class ContentGallery extends ContentElement
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$size = deserialize($this->size);
-		$arrMargin = deserialize($this->imagemargin);
-		$margin = $this->generateMargin($arrMargin);
-		$intWidth = floor((640 / $this->perRow) - $arrMargin['left'] - $arrMargin['right']);
-
 		$rowcount = 0;
 		$colwidth = floor(100/$this->perRow);
-
+		$intMaxWidth = (TL_MODE == 'BE') ? floor((640 / $this->perRow)) : floor(($GLOBALS['TL_CONFIG']['maxImageWidth'] / $this->perRow));
+		$strLightboxId = 'lightbox[lb' . $this->id . ']';
 		$body = array();
 
 		// Rows
@@ -241,51 +245,40 @@ class ContentGallery extends ContentElement
 					$class_td = ' col_last';
 				}
 
+				$objCell = new stdClass();
+				$key = 'row_' . $rowcount . $class_tr . $class_eo;
+
+				// Empty cell
 				if (!is_array($images[($i+$j)]) || ($j+$i) >= $limit)
 				{
-					$body['row_' . $rowcount . $class_tr . $class_eo][$j]['hasImage'] = false;
-					$body['row_' . $rowcount . $class_tr . $class_eo][$j]['class'] = 'col_'.$j . $class_td;
+					$objCell->class = 'col_'.$j . $class_td;
+					$body[$key][$j] = $objCell;
 
 					continue;
 				}
 
-				$objFile = new File($images[($i+$j)]['src']);
+				// Add size and margin
+				$images[($i+$j)]['size'] = $this->size;
+				$images[($i+$j)]['imagemargin'] = $this->imagemargin;
+				$images[($i+$j)]['fullsize'] = $this->fullsize;
 
-				// Adjust image size in the back end
-				if (TL_MODE == 'BE' && $objFile->width > $intWidth && ($size[0] > $intWidth || !$size[0]))
-				{
-					$size[0] = $intWidth;
-					$size[1] = floor($intWidth * $objFile->height / $objFile->width);
-				}
+				$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
 
-				$src = $this->getImage($this->urlEncode($images[($i+$j)]['src']), $size[0], $size[1]);
+				// Add column width and class
+				$objCell->colWidth = $colwidth . '%';
+				$objCell->class = 'col_'.$j . $class_td;
 
-				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
-				{
-					$imgSize = ' ' . $imgSize[3];
-				}
-
-				$body['row_' . $rowcount . $class_tr . $class_eo][$j] = array
-				(
-					'hasImage' => true,
-					'margin' => $margin,
-					'href' => $this->urlEncode($images[($i+$j)]['src']),
-					'width' => $objFile->width,
-					'height' => $objFile->height,
-					'colWidth' => $colwidth . '%',
-					'class' => 'col_'.$j . $class_td,
-					'alt' => htmlspecialchars($images[($i+$j)]['alt']),
-					'link' => ((TL_MODE == 'BE') ? '' : $images[($i+$j)]['link']),
-					'caption' => $images[($i+$j)]['caption'],
-					'imgSize' => $imgSize,
-					'src' => $src
-				);
+				$body[$key][$j] = $objCell;
 			}
 
 			++$rowcount;
 		}
 
-		$this->Template->body = $body;
+		$strTemplate = ($this->galleryTpl != '') ? $this->galleryTpl : 'gallery_default';
+		$objTemplate = new FrontendTemplate($strTemplate);
+
+		$objTemplate->body = $body;
+		$this->Template->images = $objTemplate->parse();
 	}
 }
 

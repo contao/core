@@ -168,7 +168,7 @@ fieldset.collapsed
 {
 	height:100%;
 }
-* html .block,* html .tl_content,* html .clr
+* html .block,* html .tl_content,* html .clr,* html #tl_breadcrumb
 {
 	zoom:1;
 }

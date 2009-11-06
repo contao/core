@@ -113,7 +113,7 @@ class Feed extends System
 		$xml .= '    <link>' . htmlspecialchars($this->link) . '</link>' . "\n";
 		$xml .= '    <language>' . $this->language . '</language>' . "\n";
 		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
-		$xml .= '    <generator>TYPOlight webCMS</generator>' . "\n";
+		$xml .= '    <generator>TYPOlight Open Source CMS</generator>' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
@@ -156,7 +156,7 @@ class Feed extends System
 		$xml .= '  <link rel="alternate" href="' . htmlspecialchars($this->link) . '" />' . "\n";
 		$xml .= '  <id>' . htmlspecialchars($this->link) . '</id>' . "\n";
 		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
-		$xml .= '  <generator>TYPOlight webCMS</generator>' . "\n";
+		$xml .= '  <generator>TYPOlight Open Source CMS</generator>' . "\n";
 		$xml .= '  <link rel="self" href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.atom" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)

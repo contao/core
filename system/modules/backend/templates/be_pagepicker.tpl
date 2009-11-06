@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: TYPOlight webCMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> :: TYPOlight Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/page.css" media="screen" />
@@ -11,7 +11,8 @@
 <?php endif; ?>
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
-<script type="text/javascript" src="plugins/mootools/mootools.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
 <script type="text/javascript" src="typolight/typolight.js"></script>
 <script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
 <script type="text/javascript">

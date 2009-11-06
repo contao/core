@@ -71,6 +71,7 @@ class ContentTeaser extends ContentElement
 
 		$this->Template->headline = $objArticle->title;
 		$this->Template->text = $objArticle->teaser;
+		$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->title));
 		$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 	}
 }

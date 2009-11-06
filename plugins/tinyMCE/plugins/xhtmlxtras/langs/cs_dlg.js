@@ -9,7 +9,7 @@ attribute_label_langdir:"Sm\u011Br textu",
 attribute_option_ltr:"Zleva doprava",
 attribute_option_rtl:"Zprava doleva",
 attribute_label_langcode:"Jazyk",
-attribute_label_tabindex:"Tabindex",
+attribute_label_tabindex:"Tabul\u00E1tor",
 attribute_label_accesskey:"P\u0159\u00EDstupov\u00E1 kl\u00E1vesa",
 attribute_events_tab:"Ud\u00E1losti",
 attribute_attrib_tab:"Atributy",
@@ -28,5 +28,5 @@ remove:"Odstranit",
 insert_date:"Vlo\u017Eit aktu\u00E1ln\u00ED datum/\u010Das",
 option_ltr:"Zleva doprava",
 option_rtl:"Zprava doleva",
-attribs_title:"Vlo\u017Eit/editovat atributy"
+attribs_title:"Vlo\u017Eit/upravit atributy"
 });

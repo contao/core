@@ -4,14 +4,15 @@
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta name="description" content="<?php echo $this->description; ?>" />
 <meta name="keywords" content="<?php echo $this->keywords; ?>" />
 <?php echo $this->robots; ?>
 <?php echo $this->framework; ?>
-<link rel="stylesheet" href="plugins/slimbox/css/slimbox.css" type="text/css" media="screen" />
 <?php echo $this->stylesheets; ?>
-<script type="text/javascript" src="plugins/mootools/mootools.js"></script>
-<script type="text/javascript" src="plugins/slimbox/js/slimbox.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
 <?php echo $this->head; ?>
 </head>
 

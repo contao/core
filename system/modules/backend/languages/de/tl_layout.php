@@ -51,11 +51,12 @@ $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bit
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Seitentemplate', 'Hier können Sie das Seitentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Dokumenttyp-Definition', 'Bitte wählen Sie eine Dokumenttyp-Definition.');
-$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('Mootools-Template', 'Hier können Sie das Mootools Akkordeon-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('Mootools-Templates', 'Hier können Sie eines oder mehrere Mootools-Templates auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['urchinId']      = array('Google Analytics Id', 'Hier können Sie eine Google Analytics Id eingeben.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Hier können Sie dem Body-Tag ein Onload-Attribut hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Zusätzliche &lt;head&gt;-Tags', 'Hier können Sie dem Head-Bereich der Seite individuelle Tags hinzufügen.');
+$GLOBALS['TL_LANG']['tl_layout']['script']        = array('Eigener JavaScript-Code', 'Der JavaScript-Code wird am Ende der Seite eingefügt.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Statisches Layout', 'Ein statisches Layout mit fester Breite und Ausrichtung erstellen.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Gesamtbreite', 'Die Gesamtbreite wird dem Wrapper-Element zugewiesen.');
 $GLOBALS['TL_LANG']['tl_layout']['align']         = array('Ausrichtung', 'Bitte wählen Sie die Ausrichtung der Seite.');
@@ -71,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_layout']['sections_legend'] = 'Eigene Layoutbereiche';
 $GLOBALS['TL_LANG']['tl_layout']['head_legend']     = 'Head-Bereich';
 $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Frontend-Module';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Experten-Einstellungen';
+$GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Skript-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Statisches Layout';
 
 

@@ -10,14 +10,13 @@ link_titlefield:"Titre",
 link_is_email:"L'URL indiquée semble être une adresse e-mail, voulez-vous ajouter le préfixe mailto: ?",
 link_is_external:"L'URL indiquée semble être un lien externe, voulez-vous ajouter le préfixe http:// ?",
 link_list:"Liste des liens",
-image_title:"Insert/edit a lightbox image",
+image_title:"Insert/edit a thumbnail image",
 image_list:"Image list",
 image_src:"Image URL",
 image_dimensions:"Width/height",
 image_alt:"Description",
 image_class:"CSS class",
-image_rel:"Type",
-image_rel_single:"Single image",
-image_rel_multi:"Image gallery",
-image_rel_empty:"Thumbnail only"
+image_rel:"Lightbox",
+image_rel_single:"Single element",
+image_rel_multi:"Gallery"
 });

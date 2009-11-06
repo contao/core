@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_news_comments']['pending']  = 'Zur Überprüfung';
 $GLOBALS['TL_LANG']['tl_news_comments']['show']       = array('Kommentardetails', 'Details des Kommentars ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_news_comments']['edit']       = array('Kommentar bearbeiten', 'Kommentar ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_news_comments']['delete']     = array('Kommentar löschen', 'Kommentar ID %s löschen');
+$GLOBALS['TL_LANG']['tl_news_comments']['toggle']     = array('Kommentar veröffentlichen/unveröffentlichen', 'Kommentar ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_news_comments']['editheader'] = array('Archiv bearbeiten', 'Das aktuelle Archiv bearbeiten');
 
 ?>

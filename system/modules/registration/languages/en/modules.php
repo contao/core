@@ -38,5 +38,6 @@ $GLOBALS['TL_LANG']['MOD']['registration'] = array('User registration', 'Allow u
  */
 $GLOBALS['TL_LANG']['FMD']['registration'] = array('Registration', 'generates a user registration form.');
 $GLOBALS['TL_LANG']['FMD']['lostPassword'] = array('Lost password', 'generates a form to request a new password.');
+$GLOBALS['TL_LANG']['FMD']['closeAccount'] = array('Close account', 'generates a form to delete a member account.');
 
 ?>

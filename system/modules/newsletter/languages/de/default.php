@@ -45,5 +45,6 @@ $GLOBALS['TL_LANG']['MSC']['nl_subject']  = 'Ihr Newsletter-Abonnement auf %s';
 $GLOBALS['TL_LANG']['MSC']['nl_confirm']  = 'Vielen Dank für Ihr Abonnement. Sie erhalten eine Bestätigungsmail.';
 $GLOBALS['TL_LANG']['MSC']['nl_activate'] = 'Ihr Abonnement wurde aktiviert.';
 $GLOBALS['TL_LANG']['MSC']['nl_removed']  = 'Ihr Abonnement wurde gekündigt.';
+$GLOBALS['TL_LANG']['MSC']['nl_channels'] = 'Verteiler';
 
 ?>

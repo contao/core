@@ -43,6 +43,11 @@ CREATE TABLE `tl_newsletter_channel` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL default '',
   `jumpTo` int(10) unsigned NOT NULL default '0',
+  `useSMTP` char(1) NOT NULL default '',
+  `smtpHost` varchar(64) NOT NULL default '',
+  `smtpPort` smallint(5) unsigned NOT NULL default '0',
+  `smtpUser` varchar(32) NOT NULL default '',
+  `smtpPass` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -100,7 +105,8 @@ CREATE TABLE `tl_module` (
 -- 
 
 CREATE TABLE `tl_user` (
-  `newsletters` blob NULL
+  `newsletters` blob NULL,
+  `newsletterp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
@@ -111,5 +117,6 @@ CREATE TABLE `tl_user` (
 -- 
 
 CREATE TABLE `tl_user_group` (
-  `newsletters` blob NULL
+  `newsletters` blob NULL,
+  `newsletterp` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

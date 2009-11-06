@@ -57,6 +57,13 @@ function __autoload($strClassName)
 		}
 	}
 
+	// HOOK: include Swift classes
+	if (class_exists('Swift', false))
+	{
+		Swift::autoload($strClassName);
+		return;
+	}
+
 	// HOOK: include DOMPDF classes
 	if (function_exists('DOMPDF_autoload'))
 	{
@@ -195,7 +202,7 @@ function show_help_message()
  */
 function log_message($strMessage, $strLog='error.log')
 {
-	@error_log(sprintf("[%s] %s\n", date('Y-m-d H:i:s'), $strMessage), 3, TL_ROOT . '/system/logs/' . $strLog);
+	@error_log(sprintf("[%s] %s\n", date('d-M-Y H:i:s'), $strMessage), 3, TL_ROOT . '/system/logs/' . $strLog);
 }
 
 
@@ -259,12 +266,14 @@ function specialchars($strString)
  */
 function standardize($varValue)
 {
-	$varValue = utf8_romanize($varValue);
+	$varValue = preg_replace
+	(
+		array('/[^a-zA-Z0-9 _-]+/i', '/ +/', '/\-+/'),
+		array('', '-', '-'),
+		utf8_romanize($varValue)
+	);
 
-	$varValue = preg_replace('/[^a-zA-Z0-9 _-]+/i', '', $varValue);
-	$varValue = preg_replace('/ +/i', '-', $varValue);
-
-	if (preg_match('/^[^a-zA-Z]/i', $varValue))
+	if (is_numeric(substr($varValue, 0, 1)))
 	{
 		$varValue = 'id-' . $varValue;
 	}
@@ -311,7 +320,7 @@ function deserialize($varValue, $blnForceArray=false)
 function trimsplit($strPattern, $strString)
 {
 	global $arrSplitCache;
-	$strKey = $strPattern.$strString;
+	$strKey = md5($strPattern.$strString);
 
 	// Load from cache
 	if (isset($arrSplitCache[$strKey]))

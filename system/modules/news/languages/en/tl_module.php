@@ -33,16 +33,18 @@
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('News archives', 'Please select one or more news archives.');
 $GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items only', 'Show only featured news items in the list.');
 $GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Total number of items', 'Here you can limit the total number of news items. Set to 0 to show all.');
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Jump to current month', 'Automatically jump to the current month if none is selected.');
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Jump to current period', 'Automatically jump to the current period if none is selected.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta fields', 'Here you can select the meta fields.');
 $GLOBALS['TL_LANG']['tl_module']['news_template']      = array('News template', 'Here you can select the news template.');
 $GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Archive format', 'Here you can choose the news archive format.');
+$GLOBALS['TL_LANG']['tl_module']['news_startDay']      = array('Week start day', 'Here you can choose the week start day.');
 $GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Show number of items', 'Show the number of news items of each month.');
 
 
 /**
  * Reference
  */
+$GLOBALS['TL_LANG']['tl_module']['news_day']   = 'Day';
 $GLOBALS['TL_LANG']['tl_module']['news_month'] = 'Month';
 $GLOBALS['TL_LANG']['tl_module']['news_year']  = 'Year';
 

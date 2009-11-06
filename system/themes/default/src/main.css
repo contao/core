@@ -590,6 +590,25 @@ label.tl_change_selected
 	font-style:italic;
 	vertical-align:top;
 }
+#tl_breadcrumb
+{
+	margin:0 0 12px 0;
+	padding:3px;
+	overflow:hidden;
+	background:#ffd;
+	border:1px solid #d49822;
+}
+#tl_breadcrumb li
+{
+	margin:0;
+	padding:0 3px;
+	list-style-type:none;
+	float:left;
+}
+#tl_breadcrumb li img
+{
+	vertical-align:-5px;
+}
 
 /* Welcome screen */
 #tl_welcome
@@ -667,32 +686,44 @@ label.tl_change_selected
 	border-width:1px 0;
 	background-color:#f6f6f6;
 }
-div.tl_task_due
+p.tl_task_due
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
 	background:url("images/error.gif") no-repeat left center;
+}
+p.tl_task_due, p.tl_task_due a
+{
 	color:#c55;
 }
-div.tl_task_new
+p.tl_task_new
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
 	background:url("images/all.gif") no-repeat left center;
+}
+p.tl_task_new, p.tl_task_new a
+{
 	color:#d68c23;
 }
-div.tl_task_reg
+p.tl_task_reg
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
 	background:url("images/show.gif") no-repeat left center;
+}
+p.tl_task_reg, p.tl_task_reg a
+{
 	color:#5c9ac9;
 }
-div.tl_update
+p.tl_update
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
 	background:url("images/show.gif") no-repeat left center;
+}
+p.tl_update, p.tl_update a
+{
 	color:#5c9ac9;
 }
 

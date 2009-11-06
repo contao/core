@@ -43,15 +43,14 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('useSMTP', 'useFTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,liveUpdateBase;{backend_legend},backendTheme,resultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,rewriteURL,disableAlias,enableGZip;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{ftp_legend:hide},useFTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod'
+		'__selector__'                => array('useSMTP'),
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},backendTheme,resultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass',
-		'useFTP'                      => 'ftpHost,ftpPath,ftpUser,ftpPass'
+		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass'
 	),
 
 	// Fields
@@ -67,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['adminEmail'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'friendly', 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'dateFormat' => array
 		(
@@ -113,11 +112,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'liveUpdateBase' => array
+		'enableGZip' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['enableGZip'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'backendTheme' => array
 		(
@@ -148,23 +147,25 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['urlSuffix'],
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>'true', 'rgxp'=>'url', 'tl_class'=>'w50')
+			'eval'                    => array('nospace'=>'true', 'tl_class'=>'w50')
+		),
+		'cacheMode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['cacheMode'],
+			'inputType'               => 'select',
+			'options'                 => array('both', 'server', 'browser'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_settings'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'rewriteURL' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'disableAlias' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['disableAlias'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'enableGZip' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['enableGZip'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -184,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['encryptionKey'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'minlength'=>8, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'minlength'=>12, 'tl_class'=>'w50')
 		),
 		'displayErrors' => array
 		(
@@ -324,37 +325,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
-		),
-		'useFTP' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['useFTP'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
-		),
-		'ftpHost' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['ftpHost'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'nospace'=>true, 'tl_class'=>'w50')
-		),
-		'ftpPath' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['ftpPath'],
-			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'nospace'=>true, 'tl_class'=>'w50')
-		),
-		'ftpUser' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['ftpUser'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
-		),
-		'ftpPass' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['ftpPass'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
 		),
 		'inactiveModules' => array
 		(
@@ -404,6 +375,12 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultChmod'],
 			'inputType'               => 'chmod',
 			'eval'                    => array('tl_class'=>'clr')
+		),
+		'liveUpdateBase' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'long')
 		)
 	)
 );

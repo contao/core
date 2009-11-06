@@ -82,6 +82,7 @@ class Search extends System
 		$arrSet['filesize'] = $arrData['filesize'];
 		$arrSet['groups'] = $arrData['groups'];
 		$arrSet['pid'] = $arrData['pid'];
+		$arrSet['language'] = $arrData['language'];
 
 		// Get filesize from raw content
 		if (!$arrSet['filesize'])
@@ -269,14 +270,15 @@ class Search extends System
 
 		foreach ($arrIndex as $k=>$v)
 		{
-			$arrKeys[] = "(?, ?, ?)";
+			$arrKeys[] = "(?, ?, ?, ?)";
 			$arrValues[] = $intInsertId;
 			$arrValues[] = $k;
 			$arrValues[] = $v;
+			$arrValues[] = $arrData['language'];
 		}
 
 		// Insert values
-		$this->Database->prepare("INSERT INTO tl_search_index (pid, word, relevance) VALUES " . implode(", ", $arrKeys))
+		$this->Database->prepare("INSERT INTO tl_search_index (pid, word, relevance, language) VALUES " . implode(", ", $arrKeys))
 					   ->execute($arrValues);
 
 		return true;
@@ -290,10 +292,11 @@ class Search extends System
 	 * @param array
 	 * @param integer
 	 * @param integer
+	 * @param boolean
 	 * @return object
 	 * @throws Exception
 	 */
-	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=false, $intRows=0, $intOffset=0)
+	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=false, $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
 		$this->import('String');
 		$this->import('Database');
@@ -376,6 +379,18 @@ class Search extends System
 			}
 		}
 
+		// Fuzzy search
+		if ($blnFuzzy)
+		{
+			foreach ($arrKeywords as $strKeyword)
+			{
+				$arrWildcards[] = '%' . $strKeyword . '%';
+			}
+
+			$arrKeywords = array();
+		}
+
+		// Count keywords
 		$intPhrases = count($arrPhrases);
 		$intWildcards = count($arrWildcards);
 		$intIncluded = count($arrIncluded);

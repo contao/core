@@ -38,7 +38,7 @@ $GLOBALS['TL_LANG']['tl_page']['language']       = array('Sprache', 'Bitte geben
 $GLOBALS['TL_LANG']['tl_page']['robots']         = array('Robots-Tag', 'Hier legen Sie fest, wie Suchmaschinen die Seite behandeln.');
 $GLOBALS['TL_LANG']['tl_page']['description']    = array('Beschreibung der Seite', 'Hier können Sie eine kurze Beschreibung der Seite eingeben, die von Suchmaschinen wie Google oder Yahoo ausgewertet wird. Suchmaschinen indizieren normalerweise zwischen 150 und 300 Zeichen.');
 $GLOBALS['TL_LANG']['tl_page']['redirect']       = array('Weiterleitungstyp', 'Bitte wählen Sie den Typ der Weiterleitung.');
-$GLOBALS['TL_LANG']['tl_page']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden.');
+$GLOBALS['TL_LANG']['tl_page']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden. Wenn Sie keine Zielseite auswählen, wird automatisch zur ersten regulären Unterseite weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_page']['fallback']       = array('Sprachen-Fallback', 'Diese Seite anzeigen, wenn es keine in der Sprache des Besuchers gibt.');
 $GLOBALS['TL_LANG']['tl_page']['dns']            = array('Domainname', 'Hier können Sie den Zugriff auf die Webseite auf einen bestimmten Domainnamen beschränken.');
 $GLOBALS['TL_LANG']['tl_page']['adminEmail']     = array('E-Mail-Adresse des Webseiten-Administrators', 'Automatisch generierte Systemnachrichten wie z.B. Bestätigungsmails an diese Adresse versenden.');
@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG']['tl_page']['cgroup']         = array('Gruppe', 'Bitte wähle
 $GLOBALS['TL_LANG']['tl_page']['chmod']          = array('Zugriffsrechte', 'Bitte legen Sie die Zugriffsrechte der Seite und ihrer Unterseiten fest.');
 $GLOBALS['TL_LANG']['tl_page']['noSearch']       = array('Nicht durchsuchen', 'Diese Seite nicht in den Suchindex aufnehmen.');
 $GLOBALS['TL_LANG']['tl_page']['cssClass']       = array('CSS-Klasse', 'Die Klasse wird sowohl in der Navigation als auch im Body-Tag verwendet.');
+$GLOBALS['TL_LANG']['tl_page']['sitemap']        = array('In der Sitemap zeigen', 'Hier können Sie festlegen, ob die Seite in der Sitemap angezeigt wird.');
 $GLOBALS['TL_LANG']['tl_page']['hide']           = array('Im Menü verstecken', 'Diese Seite in der Navigation nicht anzeigen.');
 $GLOBALS['TL_LANG']['tl_page']['guests']         = array('Nur Gästen anzeigen', 'Diese Seite ausblenden, sobald ein Benutzer angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_page']['tabindex']       = array('Tab-Index', 'Die Position des Menüpunktes innerhalb der Tabulator-Reihenfolge.');
@@ -109,8 +110,11 @@ $GLOBALS['TL_LANG']['CACHE'][604800] = '7 Tage';
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_page']['permanent'] = '301 Permanente Weiterleitung';
-$GLOBALS['TL_LANG']['tl_page']['temporary'] = '302 Temporäre Weiterleitung';
+$GLOBALS['TL_LANG']['tl_page']['permanent']   = '301 Permanente Weiterleitung';
+$GLOBALS['TL_LANG']['tl_page']['temporary']   = '302 Temporäre Weiterleitung';
+$GLOBALS['TL_LANG']['tl_page']['map_default'] = 'Standard';
+$GLOBALS['TL_LANG']['tl_page']['map_always']  = 'Immer anzeigen';
+$GLOBALS['TL_LANG']['tl_page']['map_never']   = 'Nie anzeigen';
 
 
 /**
@@ -123,7 +127,9 @@ $GLOBALS['TL_LANG']['tl_page']['cut']        = array('Seite verschieben', 'Seite
 $GLOBALS['TL_LANG']['tl_page']['copy']       = array('Seite duplizieren', 'Seite ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_page']['copyChilds'] = array('Seite mit Unterseiten duplizieren', 'Seite ID %s inklusive Unterseiten duplizieren');
 $GLOBALS['TL_LANG']['tl_page']['delete']     = array('Seite löschen', 'Seite ID %s löschen');
+$GLOBALS['TL_LANG']['tl_page']['toggle']     = array('Seite veröffentlichen/unveröffentlichen', 'Seite ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_page']['pasteafter'] = array('Einfügen nach', 'Nach der Seite ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_page']['pasteinto']  = array('Einfügen in', 'In die Seite ID %s einfügen');
+$GLOBALS['TL_LANG']['tl_page']['articles']   = array('Artikel bearbeiten', 'Die Artikel der Seite ID %s bearbeiten');
 
 ?>

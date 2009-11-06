@@ -194,7 +194,9 @@ abstract class Backend extends Controller
 
 				case 'create':
 				case 'cut':
+				case 'cutAll':
 				case 'copy':
+				case 'copyAll':
 				case 'move':
 				case 'edit':
 					if (!$dc instanceof editable)
@@ -223,8 +225,8 @@ abstract class Backend extends Controller
 		$time = time();
 
 		// Get published pages
-		$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 ORDER BY sorting")
-								   ->execute($pid, $time, $time);
+		$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY sorting")
+								   ->execute($pid);
 
 		if ($objPages->numRows < 1)
 		{
@@ -267,8 +269,8 @@ abstract class Backend extends Controller
 						$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row());
 
 						// Get articles with teaser
-						$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1 AND showTeaser=1 ORDER BY sorting")
-													 ->execute($objPages->id, $time, $time);
+						$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
+													 ->execute($objPages->id);
 
 						while ($objArticle->next())
 						{
