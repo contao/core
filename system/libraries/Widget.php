@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class Widget
  *
  * Provide methods to handle form widgets.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 abstract class Widget extends Controller
@@ -542,7 +542,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date format
 				case 'date':
 					$objDate = new Date();
-					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
@@ -551,7 +551,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid time format
 				case 'time':
 					$objDate = new Date();
-					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
@@ -560,7 +560,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date and time format
 				case 'datim':
 					$objDate = new Date();
-					if (!preg_match('~'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'~i', $varInput))
+					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}

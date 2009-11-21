@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class Config
  *
  * Provide methods to manage configuration files.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Library
  */
 class Config
@@ -51,6 +51,30 @@ class Config
 	protected $Files;
 
 	/**
+	 * Top content
+	 * @var string
+	 */
+	protected $strTop = '';
+
+	/**
+	 * Bottom content
+	 * @var string
+	 */
+	protected $strBottom = '';
+
+	/**
+	 * Modified
+	 * @var boolean
+	 */
+	protected $blnIsModified = false;
+
+	/**
+	 * Data array
+	 * @var array
+	 */
+	protected $arrData = array();
+
+	/**
 	 * Cache array
 	 * @var array
 	 */
@@ -65,6 +89,7 @@ class Config
 		include(TL_ROOT . '/system/config/config.php');
 		include(TL_ROOT . '/system/config/localconfig.php');
 
+		// Get module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/config/config.php', TL_ROOT, $strModule);
@@ -72,6 +97,82 @@ class Config
 		}
 
 		include(TL_ROOT . '/system/config/localconfig.php');
+
+		// Read the local configuration file
+		$strMode = 'top';
+		$resFile = fopen(TL_ROOT . '/system/config/localconfig.php', 'rb');
+
+		while (!feof($resFile))
+		{
+			$strLine = fgets($resFile);
+			$strTrim = trim($strLine);
+
+			if ($strTrim == '?>')
+			{
+				continue;
+			}
+
+			if ($strTrim == '### INSTALL SCRIPT START ###')
+			{
+				$strMode = 'data';
+				continue;
+			}
+
+			if ($strTrim == '### INSTALL SCRIPT STOP ###')
+			{
+				$strMode = 'bottom';
+				continue;
+			}
+			
+			if ($strMode == 'top')
+			{
+				$this->strTop .= $strLine;
+			}
+			elseif ($strMode == 'bottom')
+			{
+				$this->strBottom .= $strLine;
+			}
+			elseif ($strTrim != '')
+			{
+				$arrChunks = array_map('trim', explode('=', $strLine));
+				$this->arrData[$arrChunks[0]] = $arrChunks[1];
+			}
+		}
+
+		fclose($resFile);
+	}
+	
+
+	/**
+	 * Save the local configuration
+	 */
+	public function __destruct()
+	{
+		if (!$this->blnIsModified)
+		{
+			return;
+		}
+
+		$strFile  = trim($this->strTop) . "\n\n";
+		$strFile .= "### INSTALL SCRIPT START ###\n";
+
+		foreach ($this->arrData as $k=>$v)
+		{
+			$strFile .= "$k = $v\n";
+		}
+
+		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
+
+		if ($this->strBottom != '')
+		{
+			$strFile .= trim($this->strBottom) . "\n\n";
+		}
+
+		$strFile .= '?>';
+
+		$objFile = new File('system/config/localconfig.php');
+		$objFile->write($strFile);
+		$objFile->close();
 	}
 
 
@@ -146,32 +247,19 @@ class Config
 	 */
 	public function add($strKey, $varValue)
 	{
-		$arrFile = $this->read();
-		array_push($arrFile, sprintf('%s = %s;', $strKey, $this->escape($varValue)));
-
-		$this->save($arrFile);
+		$this->blnIsModified = true;
+		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
 
 	/**
-	 * Update a configuration variable in the local configuration file
+	 * Alias for Config::add()
 	 * @param string
 	 * @param mixed
 	 */
 	public function update($strKey, $varValue)
 	{
-		$arrFile = $this->read();
-
-		for ($i=0; $i<count($arrFile); $i++)
-		{
-			if (preg_match('/' . preg_quote($strKey, '/') . '/i', $arrFile[$i]))
-			{
-				unset($arrFile[$i]);
-			}
-		}
-
-		$arrFile[] = sprintf('%s = %s;', $strKey, $this->escape($varValue));
-		$this->save($arrFile);
+		$this->add($strKey, $varValue);
 	}
 
 
@@ -182,56 +270,8 @@ class Config
 	 */
 	public function delete($strKey)
 	{
-		$arrFile = $this->read();
-
-		for ($i=0; $i<count($arrFile); $i++)
-		{
-			if (preg_match('/' . preg_quote($strKey, '/') . '/i', $arrFile[$i]))
-			{
-				unset($arrFile[$i]);
-			}
-		}
-
-		$this->save($arrFile);
-	}
-
-
-	/**
-	 * Read the configuration file and return it as array
-	 * @return array
-	 * @throws Exception
-	 */
-	protected function read()
-	{
-		$arrFile = file(TL_ROOT . '/system/config/localconfig.php');
-
-		if (!is_array($arrFile) || count($arrFile) < 1)
-		{
-			throw new Exception('Cannot read local configuration file <strong>system/config/localconfig.php</strong>!');
-		}
-
-		// Unset the closing tag
-		for ($i=(count($arrFile)-1); (!strlen(trim($arrFile[$i])) || trim($arrFile[$i]) == '?>'); $i--)
-		{
-			unset($arrFile[$i]);
-		}
-
-		return $arrFile;
-	}
-
-
-	/**
-	 * Save the configuration file
-	 * @param mixed
-	 * @throws Exception
-	 */
-	protected function save($arrFile)
-	{
-		$strFile = implode('', $arrFile);
-
-		$objFile = new File('system/config/localconfig.php');
-		$objFile->write($strFile . "\n\n?>");
-		$objFile->close();
+		$this->blnIsModified = true;
+		unset($this->arrData[$strKey]);
 	}
 
 

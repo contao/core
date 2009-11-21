@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['internal']     = array('Interne Seite
 $GLOBALS['TL_LANG']['tl_calendar_events']['external']     = array('Externe Webseite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf eine externe Webseite weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['jumpTo']       = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden, wenn Sie ein Event anklicken.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['cssClass']     = array('CSS-Klasse', 'Hier können Sie eine oder mehrere Klassen eingeben.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Kommentare deaktivieren', 'Die Kommentarfunktion für dieses Event deaktivieren.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Event veröffentlichen', 'Das Event auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['start']        = array('Anzeigen ab', 'Das Event erst ab diesem Tag auf der Webseite anzeigen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Anzeigen bis', 'Das Event nur bis zu diesem Tag auf der Webseite anzeigen.');

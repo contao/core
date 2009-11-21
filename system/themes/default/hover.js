@@ -1,4 +1,4 @@
-/* TYPOlight webCMS :: Copyright (C) 2005-2009 Leo Feyer :: LGPL license */
+/* TYPOlight Open Source CMS :: Copyright (C) 2005-2010 Leo Feyer :: LGPL license */
 var Theme =
 {
 	hoverRow: function(el, state)

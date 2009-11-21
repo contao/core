@@ -192,7 +192,22 @@
   </div>
 </div>
 </form>
-<?php if ($this->dbConnection): ?>
+<?php if ($this->is28Update): ?>
+
+<h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+
+<p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+<p><?php echo $GLOBALS['TL_LANG']['tl_install']['update28']; ?></p>
+
+<form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+<div class="tl_formbody_submit">
+  <input type="hidden" name="FORM_SUBMIT" value="tl_28update" />
+  <div class="tl_submit_container">
+    <input type="submit" alt="Run the version 2.8 update" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
+  </div>
+</div>
+</form>
+<?php elseif ($this->dbConnection): ?>
 
 <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
 

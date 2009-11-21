@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class ModuleEventReader
  *
  * Front end module "event reader".
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 class ModuleEventReader extends Events
@@ -96,7 +96,7 @@ class ModuleEventReader extends Events
 		$time = time();
 
 		// Get current event
-		$objEvent = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', $this->cal_calendar) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
+		$objEvent = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', $this->cal_calendar) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								   ->limit(1)
 								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
 
@@ -190,6 +190,60 @@ class ModuleEventReader extends Events
 		}
 
 		$this->Template->event = $objTemplate->parse();
+
+		// HOOK: comments extension required
+		if ($objEvent->noComments || !in_array('comments', $this->Config->getActiveModules()))
+		{
+			$this->Template->allowComments = false;
+			return;
+		}
+
+		// Check whether comments are allowed
+		$objCalendar = $this->Database->prepare("SELECT * FROM tl_calendar WHERE id=?")
+									  ->limit(1)
+									  ->execute($objEvent->pid);
+
+		if ($objCalendar->numRows < 1 || !$objCalendar->allowComments)
+		{
+			$this->Template->allowComments = false;
+			return;
+		}
+
+		$this->Template->allowComments = true;
+
+		$this->import('Comments');
+		$arrNotifies = array();
+
+		// Notify system administrator
+		if ($objCalendar->notify != 'notify_author')
+		{
+			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
+		}
+
+		// Notify author
+		if ($objCalendar->notify != 'notify_admin')
+		{
+			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
+										->limit(1)
+										->execute($objEvent->authorId);
+
+			if ($objAuthor->numRows)
+			{
+				$arrNotifies[] = $objAuthor->email;
+			}
+		}
+
+		$objConfig = new stdClass();
+
+		$objConfig->perPage = $objCalendar->perPage;
+		$objConfig->order = $objCalendar->sortOrder;
+		$objConfig->template = $objCalendar->template;
+		$objConfig->requireLogin = $objCalendar->requireLogin;
+		$objConfig->disableCaptcha = $objCalendar->disableCaptcha;
+		$objConfig->bbcode = $objCalendar->bbcode;
+		$objConfig->moderate = $objCalendar->moderate;
+
+		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_calendar_events', $objEvent->id, $arrNotifies);
 	}
 }
 

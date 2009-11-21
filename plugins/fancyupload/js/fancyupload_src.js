@@ -745,7 +745,10 @@ FancyUpload2.File = new Class({
 	onComplete: function() {
 		this.element.removeClass('file-uploading');
 		
-		this.base.currentText.set('html', 'Upload completed');
+		// PATCH: get confirmation message from translation
+		//this.base.currentText.set('html', 'Upload completed');
+		this.base.currentText.set('html', MooTools.lang.get('FancyUpload', 'uploadCompleted'));
+		// PATCH EOF
 		this.base.currentProgress.start(100);
 		
 		if (this.response.error) {
@@ -775,6 +778,8 @@ FancyUpload2.File = new Class({
 	
 });
 
+// PATCH: move lang to DC_Folder
+/*
 // Avoiding MooTools.lang dependency
 (function() {
 	var phrases = {
@@ -810,3 +815,4 @@ FancyUpload2.File = new Class({
 		};
 	}
 })();
+*/

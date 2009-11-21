@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -69,6 +69,8 @@ $GLOBALS['TL_LANG']['tl_install']['dbSave']         = 'Save database settings';
 $GLOBALS['TL_LANG']['tl_install']['updateError']    = 'The database is not up to date!';
 $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'The database is up to date.';
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Update database';
+$GLOBALS['TL_LANG']['tl_install']['update28']       = 'It seems that you are upgrading from a TYPOlight version prior to version 2.8. If that is the case, <strong>it is required to run the version 2.8 update</strong> to ensure the integrity of your data!';
+$GLOBALS['TL_LANG']['tl_install']['update28run']    = 'Run version 2.8 update';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Please choose a template file!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm']  = 'Template imported on %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn']     = 'Any existing data will be deleted!';

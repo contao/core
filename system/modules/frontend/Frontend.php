@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class Frontend
  *
  * Provide methods to manage front end controllers.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 abstract class Frontend extends Controller
@@ -350,81 +350,6 @@ abstract class Frontend extends Controller
 		}
 
 		$this->arrProcessed[] = $strPath;
-	}
-
-
-	/**
-	 * Replace bbcode and return the HTML string
-	 * 
-	 * Supports the following tags:
-	 * 
-	 * - [b][/b] bold
-	 * - [i][/i] italic
-	 * - [u][/u] underline
-	 * - [img][/img]
-	 * - [code][/code]
-	 * - [color=#ff0000][/color]
-	 * - [quote][/quote]
-	 * - [quote=tim][/quote]
-	 * - [url][/url]
-	 * - [url=http://][/url]
-	 * - [email][/email]
-	 * - [email=name@domain.com][/email]
-	 * @param string
-	 * @return string
-	 */
-	protected function parseBbCode($strComment)
-	{
-		$arrSearch = array
-		(
-			'[b]', '[/b]',
-			'[i]', '[/i]',
-			'[u]', '[/u]',
-			'[code]', '[/code]',
-			'[/color]',
-			'[quote]', '[/quote]'
-		);
-
-		$arrReplace = array
-		(
-			'<strong>', '</strong>',
-			'<em>', '</em>',
-			'<span style="text-decoration:underline;">', '</span>',
-			'<div class="code"><p>' . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', '</pre></div>',
-			'</span>',
-			'<div class="quote">', '</div>'
-		);
-
-		// Replace simple tokens
-		$strComment = str_replace($arrSearch, $arrReplace, trim($strComment));
-
-		// Color, quote and image
-		$strComment = preg_replace('/\[color=([^\]]+)\]/i', '<span style="color:$1;">', $strComment);
-		$strComment = preg_replace('/\[quote=([^\]]+)\]/i', '<div class="quote"><p>' . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>', $strComment);
-		$strComment = preg_replace('/\[img\]([^\[]+)\[\/img\]/i', '<img src="$1" alt="" />', $strComment);
-
-		// URLs
-		$strComment = preg_replace('/\[url\]([^\[]+)\[\/url\]/i', '<a href="$1">$1</a>', $strComment);
-		$strComment = preg_replace('/\[url=([^\]]+)\]([^\[]+)\[\/url\]/i', '<a href="$1">$2</a>', $strComment);
-
-		// E-mail addresses
-		$strComment = preg_replace('/\[email\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$1</a>', $strComment);
-		$strComment = preg_replace('/\[email=([^\]]+)\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$2</a>', $strComment);
-
-		// Line feeds
-		$strComment = preg_replace(array('@</div>(\n)*@', '@\r@'), array("</div>\n", ''), $strComment);
-
-		// Prevent cross-site request forgeries
-		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
-
-		// Encode e-mail addresses
-		if (strpos($strComment, 'mailto:') !== false)
-		{
-			$this->import('String');
-			$strComment = $this->String->encodeEmail($strComment);
-		}
-
-		return $strComment;
 	}
 }
 

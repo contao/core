@@ -4,7 +4,7 @@
  * TYPOlight Repository :: Template to display list of installed extensions
  *
  * @package    Repository
- * @copyright  Peter Koch 2008-2009
+ * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */

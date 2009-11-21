@@ -198,7 +198,7 @@ CREATE TABLE `tl_layout` (
   `cssClass` varchar(255) NOT NULL default '',
   `onload` varchar(255) NOT NULL default '',
   `head` text NULL,
-  `mootools` varchar(255) NOT NULL default '',
+  `mootools` text NULL,
   `script` text NULL,
   `static` char(1) NOT NULL default '',
   `width` varchar(255) NOT NULL default '',

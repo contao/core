@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -31,8 +31,8 @@
  * Class DC_Folder
  *
  * Provide methods to modify the file system.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 class DC_Folder extends DataContainer implements listable, editable
@@ -897,11 +897,37 @@ class DC_Folder extends DataContainer implements listable, editable
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 window.addEvent("domready", function() {
+  (function() {
+    var phrases = {
+      "progressOverall": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'].'",
+      "currentTitle": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle'].'",
+      "currentFile": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile'].'",
+      "currentProgress": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'].'",
+      "fileName": "{name}",
+      "remove": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_remove'].'",
+      "removeTitle": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle'].'",
+      "fileError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileError'].'",
+      "uploadCompleted": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'].'",
+      "validationErrors": {
+        "duplicate": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate'].'",
+        "sizeLimitMin": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin'].'",
+        "sizeLimitMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax'].'",
+        "fileListMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax'].'",
+        "fileListSizeMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'].'"
+      },
+      "errors": {
+        "httpStatus": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus'].'",
+        "securityError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_securityError'].'",
+        "ioError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_ioError'].'"
+      }
+    };
+    MooTools.lang.set("en-US", "FancyUpload", phrases);
+  })();
   var up = new FancyUpload2($("fancy-status"), $("fancy-list"), {
-    data: {
-      "isAjax": true,
-      "FORM_SUBMIT": "tl_upload",
-      "FANCY_KEY": "'. $_SESSION['FANCY_KEY'] . '",
+  data: {
+    "isAjax": true,
+    "FORM_SUBMIT": "tl_upload",
+    "FANCY_KEY": "'. $_SESSION['FANCY_KEY'] . '",
       "action": "fancyUpload"
     },
     appendCookieData: true,

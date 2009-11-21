@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -137,8 +137,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
  * Class tl_files
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 class tl_files extends Backend
@@ -319,8 +319,8 @@ class tl_files extends Backend
 			return;
 		}
 
-		$strPath = '';
-		$arrNodes = explode('/', $strNode);
+		$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
+		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
 		$arrLinks = array();
 
 		// Add root link
@@ -329,15 +329,7 @@ class tl_files extends Backend
 		// Generate breadcrumb trail
 		foreach ($arrNodes as $strFolder)
 		{
-			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
-			{
-				$strPath .= $strFolder;
-				continue;
-			}
-			else
-			{
-				$strPath .= '/' . $strFolder;
-			}
+			$strPath .= '/' . $strFolder;
 
 			// Do not show pages which are not mounted
 			if (!$this->User->isAdmin && !$this->User->hasAccess($strPath, 'filemounts'))

@@ -87,28 +87,6 @@ CREATE TABLE `tl_news_archive` (
 -- --------------------------------------------------------
 
 -- 
--- Table `tl_news_comments`
--- 
-
-CREATE TABLE `tl_news_comments` (
-  `id` int(10) unsigned NOT NULL auto_increment,
-  `pid` int(10) unsigned NOT NULL default '0',
-  `tstamp` int(10) unsigned NOT NULL default '0',
-  `name` varchar(64) NOT NULL default '',
-  `email` varchar(128) NOT NULL default '',
-  `website` varchar(128) NOT NULL default '',
-  `comment` text NULL,
-  `published` char(1) NOT NULL default '',
-  `date` int(11) NOT NULL default '0',
-  `ip` varchar(64) NOT NULL default '',
-  PRIMARY KEY  (`id`),
-  KEY `pid` (`pid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-
--- --------------------------------------------------------
-
--- 
 -- Table `tl_module`
 -- 
 

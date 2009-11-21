@@ -1,13 +1,13 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -107,13 +107,14 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('protected', 'makeFeed'),
-		'default'                     => '{title_legend},title,jumpTo;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
+		'__selector__'                => array('protected', 'allowComments', 'makeFeed'),
+		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
+		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'protected'                   => 'groups',
 		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
 	),
@@ -135,6 +136,78 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'eval'                    => array('fieldType'=>'radio')
+		),
+		'allowComments' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['allowComments'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'notify' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['notify'],
+			'default'                 => 'notify_admin',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar'],
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'template' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['template'],
+			'default'                 => 'com_default',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => $this->getTemplateGroup('com_'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'sortOrder' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['sortOrder'],
+			'default'                 => 'ascending',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('ascending', 'descending'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar'],
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'perPage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['perPage'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'moderate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['moderate'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'bbcode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['bbcode'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'requireLogin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['requireLogin'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'disableCaptcha' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['disableCaptcha'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'protected' => array
 		(
@@ -234,8 +307,8 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
  * Class tl_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 class tl_calendar extends Backend
@@ -256,6 +329,12 @@ class tl_calendar extends Backend
 	 */
 	public function checkPermission()
 	{
+		// HOOK: comments extension required
+		if (!in_array('comments', $this->Config->getActiveModules()))
+		{
+			unset($GLOBALS['TL_DCA']['tl_calendar']['fields']['allowComments']);
+		}
+
 		if ($this->User->isAdmin)
 		{
 			return;

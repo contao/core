@@ -1,13 +1,13 @@
 <?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005-2009 Leo Feyer
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
+ * version 3 of the License, or (at your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,11 +16,11 @@
  * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -45,8 +45,8 @@ require_once('../system/initialize.php');
  * Class InstallTool
  *
  * Back end install tool.
- * @copyright  Leo Feyer 2005-2009
- * @author     Leo Feyer <leo@typolight.org>
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
  * @package    Controller
  */
 class InstallTool extends Controller
@@ -329,6 +329,82 @@ class InstallTool extends Controller
 			$this->Template->dbConnection = false;
 			$this->Template->dbError = $e->getMessage();
 
+			$this->outputAndExit();
+		}
+
+
+		/**
+		 * Version 2.8 update
+		 */
+		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('script', 'tl_layout'))
+		{
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_28update')
+			{
+				// Database changes
+				$this->Database->execute("ALTER TABLE `tl_layout` ADD `script` text NULL");
+				$this->Database->execute("ALTER TABLE `tl_member` ADD `dateAdded` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_member` ADD `currentLogin` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_member` ADD `lastLogin` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_user` ADD `dateAdded` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_user` ADD `currentLogin` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_user` ADD `lastLogin` int(10) unsigned NOT NULL default '0'");
+				$this->Database->execute("ALTER TABLE `tl_comments` ADD `source` varchar(32) NOT NULL default ''");
+				$this->Database->execute("ALTER TABLE `tl_comments` ADD KEY `source` (`source`)");
+				
+				$this->Database->execute("ALTER TABLE `tl_layout` CHANGE `mootools` `mootools` text NULL");
+				$this->Database->execute("ALTER TABLE `tl_comments` CHANGE `pid` `parent` int(10) unsigned NOT NULL default '0'");
+
+				$this->Database->execute("UPDATE tl_member SET dateAdded=tstamp, currentLogin=tstamp");
+				$this->Database->execute("UPDATE tl_user SET dateAdded=tstamp, currentLogin=tstamp");
+				$this->Database->execute("UPDATE tl_layout SET mootools='moo_accordion' WHERE mootools='moo_default'");
+				$this->Database->execute("UPDATE tl_module SET cal_format='next_365' WHERE type='upcoming_events'");
+				$this->Database->execute("UPDATE tl_comments SET source='tl_content'");
+				$this->Database->execute("UPDATE tl_faq_category SET title=headline");
+
+				// Update layouts
+				$objLayout = $this->Database->execute("SELECT id, mootools FROM tl_layout");
+
+				while ($objLayout->next())
+				{
+					$mootools = array('moo_mediabox');
+
+					if ($objLayout->mootools != '')
+					{
+						$mootools[] = $objLayout->mootools;
+					}
+
+					$this->Database->prepare("UPDATE tl_layout SET mootools=? WHERE id=?")
+								   ->execute(serialize($mootools), $objLayout->id);
+				}
+
+				// Update event reader
+				if (!file_exists(TL_ROOT . '/templates/event_default.tpl'))
+				{
+					$this->Database->execute("UPDATE tl_module SET cal_template='event_full' WHERE cal_template='event_default'");
+				}
+
+				// News comments
+				$objComment = $this->Database->execute("SELECT * FROM tl_news_comments");
+
+				while ($objComment->next())
+				{
+					$arrSet = $objComment->row();
+
+					$arrSet['source'] = 'tl_news';
+					$arrSet['parent'] = $arrSet['pid'];
+					unset($arrSet['id']);
+					unset($arrSet['pid']);
+
+					$this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
+				}
+
+				// Delete system/modules/news/Comments.php
+				$this->import('Files');
+				$this->Files->delete('system/modules/news/Comments.php');
+				$this->reload();
+			}
+
+			$this->Template->is28Update = true;
 			$this->outputAndExit();
 		}
 
