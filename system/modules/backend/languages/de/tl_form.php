@@ -64,10 +64,11 @@ $GLOBALS['TL_LANG']['tl_form']['config_legend'] = 'Formular-Konfiguration';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_form']['new']    = array('Neues Formular', 'Ein neues Formular anlegen');
-$GLOBALS['TL_LANG']['tl_form']['show']   = array('Formulardetails', 'Details des Formulars ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_form']['edit']   = array('Formular bearbeiten', 'Das Formular ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_form']['copy']   = array('Formular duplizieren', 'Das Formular ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_form']['delete'] = array('Formular löschen', 'Das Formular ID %s löschen');
+$GLOBALS['TL_LANG']['tl_form']['new']        = array('Neues Formular', 'Ein neues Formular anlegen');
+$GLOBALS['TL_LANG']['tl_form']['show']       = array('Formulardetails', 'Details des Formulars ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_form']['edit']       = array('Formular bearbeiten', 'Das Formular ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_form']['editheader'] = array('Formular-Einstellungen bearbeiten', 'Einstellungen des Formulars ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_form']['copy']       = array('Formular duplizieren', 'Das Formular ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_form']['delete']     = array('Formular löschen', 'Das Formular ID %s löschen');
 
 ?>

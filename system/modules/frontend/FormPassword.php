@@ -95,7 +95,7 @@ class FormPassword extends Widget
 	{
 		$this->blnSubmitInput = false;
 
-		if (!strlen($varInput) && strlen($this->varValue))
+		if (!strlen($varInput) && (strlen($this->varValue) || !$this->mandatory))
 		{
 			return '';
 		}
@@ -146,10 +146,12 @@ class FormPassword extends Widget
 	 */
 	public function generateConfirmationLabel()
 	{
-		return sprintf('<label for="ctrl_%s_confirm" class="confirm%s">%s</label>',
+		return sprintf('<label for="ctrl_%s_confirm" class="confirm%s">%s%s%s</label>',
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						sprintf($GLOBALS['TL_LANG']['MSC']['confirmation'], $this->strLabel));
+						($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+						sprintf($GLOBALS['TL_LANG']['MSC']['confirmation'], $this->strLabel),
+						($this->required ? '<span class="mandatory">*</span>' : ''));
 	}
 
 

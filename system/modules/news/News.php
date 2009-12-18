@@ -109,7 +109,7 @@ class News extends Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get items
-		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC");
+		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=n.author) AS authorName FROM tl_news n WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC");
 
 		if ($arrArchive['maxItems'] > 0)
 		{
@@ -134,6 +134,7 @@ class News extends Frontend
 			$objItem->description = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
 			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
 			$objItem->published = $objArticle->date;
+			$objItem->author = $objArticle->authorName;
 
 			// Enclosure
 			if ($objArticle->addEnclosure)

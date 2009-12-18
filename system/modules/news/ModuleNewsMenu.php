@@ -70,7 +70,7 @@ class ModuleNewsMenu extends ModuleNews
 			return $objTemplate->parse();
 		}
 
-		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives, true));
+		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
 		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
 		{
@@ -150,7 +150,7 @@ class ModuleNewsMenu extends ModuleNews
 			$arrItems[$intYear]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'year=' . $intDate;
 			$arrItems[$intYear]['title'] = specialchars($intYear . ' (' . $quantity . ')');
 			$arrItems[$intYear]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
-			$arrItems[$intYear]['isActive'] = ($this->Input->get('month') == $intDate);
+			$arrItems[$intYear]['isActive'] = ($this->Input->get('year') == $intDate);
 			$arrItems[$intYear]['quantity'] = $quantity;
 		}
 

@@ -72,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_article']['footer'] = 'Footer';
 $GLOBALS['TL_LANG']['tl_article']['new']        = array('New article', 'Create a new article');
 $GLOBALS['TL_LANG']['tl_article']['show']       = array('Article details', 'Show the details of article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['edit']       = array('Edit article', 'Edit article ID %s');
+$GLOBALS['TL_LANG']['tl_article']['editheader'] = array('Edit article settings', 'Edit the settings of article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['copy']       = array('Duplicate article', 'Duplicate article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['cut']        = array('Move article', 'Move article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['delete']     = array('Delete article', 'Delete article ID %s');

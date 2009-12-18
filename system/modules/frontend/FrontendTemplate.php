@@ -110,7 +110,7 @@ class FrontendTemplate extends Template
 		// Add keywords
 		if (strlen($arrKeywords[0]))
 		{
-			$this->keywords = implode(', ', array_unique($arrKeywords));
+			$this->keywords = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), implode(', ', array_unique($arrKeywords)));
 		}
 
 		// Parse template
@@ -126,19 +126,12 @@ class FrontendTemplate extends Template
 			}
 		}
 
-		$blnCached = false;
-
 		// Cache page if it is not protected
-		if (empty($_POST) && $GLOBALS['TL_CONFIG']['cacheMode'] != 'browser' && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
+		if (empty($_POST) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// Do not cache empty requests
 			if (strlen($this->Environment->request) && $this->Environment->request != 'index.php')
 			{
-				if ($GLOBALS['TL_CONFIG']['cacheMode'] != 'server')
-				{
-					$blnCached = true;
-				}
-
 				// Create a unique key
 				$strUniqueKey = $this->Environment->base . $strUrl;
 
@@ -157,7 +150,7 @@ class FrontendTemplate extends Template
 		if (!headers_sent())
 		{
 			// Cache headers
-			if ($blnCached || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
+			if ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');

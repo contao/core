@@ -332,7 +332,7 @@ class DC_Table extends DataContainer implements listable, editable
 <div class="tl_panel_bottom">
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="btfilter" id="btfilter" src="system/themes/' . $this->getTheme() . '/images/ok.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
+<input type="image" name="btfilter" id="btfilter" src="system/themes/' . $this->getTheme() . '/images/reload.gif" class="tl_img_submit" alt="apply changes" value="apply changes" />
 </div>' . $strLimit . '
 
 <div class="clear"></div>
@@ -406,9 +406,29 @@ class DC_Table extends DataContainer implements listable, editable
 
 			$value = deserialize($row[$i]);
 			$class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
-
+		
 			// Get field value
-			if (is_array($value))
+			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']))
+			{
+				$temp = array();
+				$chunks = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']);
+
+				foreach ((array) $value as $v)
+				{
+					$objKey = $this->Database->prepare("SELECT " . $chunks[1] . " FROM " . $chunks[0] . " WHERE id=?")
+											 ->limit(1)
+											 ->execute($v);
+
+					if ($objKey->numRows)
+					{
+						$temp[] = $objKey->$chunks[1];
+					}
+				}
+
+				$row[$i] = implode(', ', $temp);
+			}
+
+			elseif (is_array($value))
 			{
 				foreach ($value as $kk=>$vv)
 				{
@@ -445,21 +465,6 @@ class DC_Table extends DataContainer implements listable, editable
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference']))
 			{
 				$row[$i] = strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) ? ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]])) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) : $row[$i];
-			}
-
-			// Replace foreign keys with their values
-			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']))
-			{
-				$chunks = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']);
-
-				$objKey = $this->Database->prepare("SELECT " . $chunks[1] . " FROM " . $chunks[0] . " WHERE id=?")
-										 ->limit(1)
-										 ->execute($row[$i]);
-
-				if ($objKey->numRows)
-				{
-					$row[$i] = $objKey->$chunks[1];
-				}
 			}
 
 			// Label
@@ -647,6 +652,18 @@ class DC_Table extends DataContainer implements listable, editable
 
 		$this->set['tstamp'] = time();
 
+		// HOOK: style sheet category
+		if ($this->strTable == 'tl_style')
+		{
+			$filter = $this->Session->get('filter');
+			$category = $filter['tl_style_' . CURRENT_ID]['category'];
+
+			if ($category != '')
+			{
+				$this->set['category'] = $category;
+			}
+		}
+
 		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
 					   ->set($this->set)
 					   ->execute($this->intId);
@@ -717,6 +734,18 @@ class DC_Table extends DataContainer implements listable, editable
 
 					// Set fields (except password fields)
 					$this->set[$k] = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['inputType'] == 'password' ? '' : $v);
+				}
+			}
+
+			// HOOK: style sheet category
+			if ($this->strTable == 'tl_style')
+			{
+				$filter = $this->Session->get('filter');
+				$category = $filter['tl_style_' . CURRENT_ID]['category'];
+
+				if ($category != '')
+				{
+					$this->set['category'] = $category;
 				}
 			}
 		}
@@ -1432,7 +1461,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Get current record
 		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 								 ->limit(1)
-								 ->execute($this->intId);
+								 ->executeUncached($this->intId);
 
 		// Redirect if there is no record with the given ID
 		if ($objRow->numRows < 1)
@@ -1440,6 +1469,8 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->log('Could not load record ID "'.$this->intId.'" of table "'.$this->strTable.'"!', 'DC_Table edit()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
+
+		$this->objActiveRecord = $objRow;
 
 		// Create a new version if there is none
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
@@ -1567,6 +1598,8 @@ class DC_Table extends DataContainer implements listable, editable
 								$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 							}
 						}
+
+						$this->objActiveRecord->{$this->strField} = $this->varValue;
 					}
 
 					// Build row
@@ -1862,9 +1895,12 @@ window.addEvent(\'domready\', function()
 				$formFields = array();
 
 				// Get field values
-				$objValue = $this->Database->prepare("SELECT " . implode(', ', $fields) . " FROM " . $this->strTable . " WHERE id=?")
+				$objValue = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 										   ->limit(1)
 										   ->execute($this->intId);
+
+				// Store active record
+				$this->objActiveRecord = $objValue;
 
 				foreach ($this->strPalette as $v)
 				{
@@ -1922,6 +1958,9 @@ window.addEvent(\'domready\', function()
 							$this->varValue = $this->$callback[0]->$callback[1]($this->varValue, $this);
 						}
 					}
+
+					// Re-set the current value
+					$this->objActiveRecord->{$this->strField} = $this->varValue;
 
 					// Build the current row
 					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
@@ -2411,6 +2450,11 @@ window.addEvent(\'domready\', function()
 				}
 
 				$this->varValue = deserialize($varValue);
+
+				if (is_object($this->objActiveRecord))
+				{
+					$this->objActiveRecord->{$this->strField} = $this->varValue;
+				}
 			}
 		}
 	}
@@ -2593,10 +2637,12 @@ window.addEvent(\'domready\', function()
 	protected function treeView()
 	{
 		$table = $this->strTable;
+		$treeClass = 'tl_tree';
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6)
 		{
 			$table = $this->ptable;
+			$treeClass = 'tl_tree_xtnd';
 
 			$this->loadLanguageFile($table);
 			$this->loadDataContainer($table);
@@ -2693,7 +2739,7 @@ window.addEvent(\'domready\', function()
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
 </div>' : '').'
 
-<ul class="tl_listing">
+<ul class="tl_listing ' . $treeClass . '">
   <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left">'.$label.'</div> <div class="tl_right">';
 
 		$_buttons = '&nbsp;';
@@ -3106,8 +3152,8 @@ window.addEvent(\'domready\', function()
 
 			$return .= '
 <div style="text-align:right;">'.(($this->Input->get('act') == 'select') ? '
-<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />' : '
-<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (strlen($this->ptable) ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
+<label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
+<a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (strlen($this->ptable) ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
 </div>';
 
 			// Format header fields
@@ -3203,7 +3249,7 @@ window.addEvent(\'domready\', function()
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
 
-			if (is_array($this->root))
+			if (is_array($this->root) && count($this->root) > 0)
 			{
 				$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', $this->root) . ")";
 			}
@@ -3396,7 +3442,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$query .= " WHERE " . implode(' AND ', $this->procedure);
 		}
 
-		if (is_array($this->root))
+		if (is_array($this->root) && count($this->root) > 0)
 		{
 			$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', $this->root) . ")";
 		}
@@ -4241,7 +4287,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$arrValues[] = CURRENT_ID;
 			}
 
-			if (is_array($this->root))
+			if (is_array($this->root) && count($this->root) > 0)
 			{
 				$arrProcedure[] = "id IN(" . implode(',', $this->root) . ")";
 			}

@@ -391,7 +391,7 @@ abstract class System
 					break;
 
 				case 2:
-					$strReturn .= substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, 3);
 					break;
 
 				case 3:
@@ -399,7 +399,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, 3);
 					break;
 
 				default:

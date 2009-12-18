@@ -78,10 +78,11 @@ $GLOBALS['TL_LANG']['tl_calendar']['source_text']   = 'Full articles';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_calendar']['new']    = array('New calendar', 'Create a new calendar');
-$GLOBALS['TL_LANG']['tl_calendar']['show']   = array('Calendar details', 'Show the details of calendar ID %s');
-$GLOBALS['TL_LANG']['tl_calendar']['edit']   = array('Edit calendar', 'Edit calendar ID %s');
-$GLOBALS['TL_LANG']['tl_calendar']['copy']   = array('Copy calendar', 'Copy calendar ID %s');
-$GLOBALS['TL_LANG']['tl_calendar']['delete'] = array('Delete calendar', 'Delete calendar ID %s');
+$GLOBALS['TL_LANG']['tl_calendar']['new']        = array('New calendar', 'Create a new calendar');
+$GLOBALS['TL_LANG']['tl_calendar']['show']       = array('Calendar details', 'Show the details of calendar ID %s');
+$GLOBALS['TL_LANG']['tl_calendar']['edit']       = array('Edit calendar', 'Edit calendar ID %s');
+$GLOBALS['TL_LANG']['tl_calendar']['editheader'] = array('Edit calendar settings', 'Edit the settings of calendar ID %s');
+$GLOBALS['TL_LANG']['tl_calendar']['copy']       = array('Copy calendar', 'Copy calendar ID %s');
+$GLOBALS['TL_LANG']['tl_calendar']['delete']     = array('Delete calendar', 'Delete calendar ID %s');
 
 ?>

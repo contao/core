@@ -87,12 +87,68 @@ class ModuleEventlist extends Events
 	 */
 	protected function compile()
 	{
-		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
-		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format, $this->cal_startDay);
+		// Jump to current period
+		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
+		{
+			switch ($this->cal_format)
+			{
+				case 'cal_year':
+					$this->Input->setGet('year', date('Y'));
+					break;
+
+				case 'cal_month':
+					$this->Input->setGet('month', date('Ym'));
+					break;
+
+				case 'cal_day':
+					$this->Input->setGet('day', date('Ymd'));
+					break;
+			}
+		}
+
+		// Display year
+		if ($this->Input->get('year'))
+		{
+			$this->Date = new Date($this->Input->get('year'), 'Y');
+			$this->cal_format = 'cal_year';
+			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
+		}
+
+		// Display month
+		elseif ($this->Input->get('month'))
+		{
+			$this->Date = new Date($this->Input->get('month'), 'Ym');
+			$this->cal_format = 'cal_month';
+			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
+		}
+
+		// Display day
+		elseif ($this->Input->get('day'))
+		{
+			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+			$this->cal_format = 'cal_day';
+			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->Date->tstamp);
+		}
+
+		// Display all events or upcoming/past events
+		else
+		{
+			$this->Date = new Date();
+		}
+
+		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
 
 		// Get all events
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $strBegin, $strEnd);
-		ksort($arrAllEvents);
+
+		if ($this->cal_order == 'descending')
+		{
+			krsort($arrAllEvents);
+		}
+		else
+		{
+			ksort($arrAllEvents);
+		}
 
 		$arrEvents = array();
 		$dateBegin = date('Ymd', $strBegin);
@@ -123,6 +179,13 @@ class ModuleEventlist extends Events
 		$limit = $total;
 		$offset = 0;
 
+		// Overall limit
+		if ($this->cal_limit > 0)
+		{
+			$total = min($this->cal_limit, $total);
+			$limit = $total;
+		}
+
 		// Pagination
 		if ($this->perPage > 0)
 		{
@@ -139,6 +202,7 @@ class ModuleEventlist extends Events
 		$strEvents = '';
 		$dayCount = 0;
 		$eventCount = 0;
+		$headerCount = 0;
 		$imgSize = false;
 
 		// Override the default image size
@@ -179,9 +243,9 @@ class ModuleEventlist extends Events
 			// Day header
 			if ($strDate != $event['firstDate'])
 			{
-				$eventCount = 0;
+				$headerCount = 0;
 				$objTemplate->header = true;
-				$objTemplate->hclass = ((($dayCount % 2) == 0) ? ' even' : ' odd') . (($dayCount == 0) ? ' first' : '') . (($event['firstDate'] == $arrEvents[($limit-1)]['firstDate']) ? ' last' : '');
+				$objTemplate->classHeader = ((($dayCount % 2) == 0) ? ' even' : ' odd') . (($dayCount == 0) ? ' first' : '') . (($event['firstDate'] == $arrEvents[($limit-1)]['firstDate']) ? ' last' : '');
 				$strDate = $event['firstDate'];
 
 				++$dayCount;
@@ -189,7 +253,8 @@ class ModuleEventlist extends Events
 
 			// Add template variables
 			$objTemplate->link = $event['href'];
-			$objTemplate->class = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
+			$objTemplate->classList = $event['class'] . ((($headerCount % 2) == 0) ? ' even' : ' odd') . (($headerCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
+			$objTemplate->classUpcoming = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($offset + $eventCount + 1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $event['title']));
 			$objTemplate->more = $GLOBALS['TL_LANG']['MSC']['more'];
 
@@ -229,7 +294,9 @@ class ModuleEventlist extends Events
 			}
 
 			$strEvents .= $objTemplate->parse();
+
 			++$eventCount;
+			++$headerCount;
 		}
 
 		// No events found

@@ -153,7 +153,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['cacheMode'],
 			'inputType'               => 'select',
-			'options'                 => array('both', 'server', 'browser'),
+			'options'                 => array('both', 'server', 'browser', 'none'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_settings'],
 			'eval'                    => array('tl_class'=>'w50')
 		),

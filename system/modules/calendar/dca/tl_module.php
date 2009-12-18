@@ -30,10 +30,10 @@
 /**
  * Add palettes to tl_module
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']        = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_startDay,cal_noSpan;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']       = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_format,cal_noSpan,cal_startDay,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']     = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['upcoming_events'] = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_format,cal_noSpan,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']    = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_startDay;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_order,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventmenu']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_startDay;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -54,8 +54,23 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
 	'default'                 => 'cal_month',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array('cal_day', 'cal_week', 'cal_month', 'cal_year', 'cal_two', 'next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_all'),
+	'options_callback'        => array('tl_module_calendar', 'getFormats'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50'),
+	'wizard' => array
+	(
+		array('tl_module_calendar', 'hideStartDay')
+	)
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_order'],
+	'default'                 => 'ascending',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('ascending', 'descending'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -63,8 +78,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12')
+	'inputType'               => 'checkbox'
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
@@ -151,6 +165,53 @@ class tl_module_calendar extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * Return the calendar formats depending on the module type
+	 * @return array
+	 */
+	public function getFormats(DataContainer $dc)
+	{
+		if ($dc->activeRecord->type == 'eventmenu')
+		{
+			return array('cal_day', 'cal_month', 'cal_year');
+		}
+
+		return array
+		(
+			'cal_list'     => array('cal_day', 'cal_month', 'cal_year', 'cal_all'),
+			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_all'),
+			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_all')
+		);
+	}
+
+
+	/**
+	 * Hide the start day drop-down if not applicable
+	 * @return string
+	 */
+	public function hideStartDay()
+	{
+		return '
+  <script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+  var enableStartDay = function() {
+    if (!$defined($("ctrl_cal_startDay"))) {
+      return;
+    }
+    var el = $("ctrl_cal_startDay").getParent("div");
+    if ($("ctrl_cal_format").value == "cal_day") {
+      el.setStyle("visibility", "visible");
+    } else {
+      el.setStyle("visibility", "hidden");
+    }
+  };
+  window.addEvent("domready", enableStartDay);
+  $("ctrl_cal_format").addEvent("change", enableStartDay);
+  //--><!]]>
+  </script>';
 	}
 }
 

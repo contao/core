@@ -84,6 +84,9 @@ class String
 	 */
 	public function substr($strString, $intNumberOfChars)
 	{
+		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
+		$strString = strip_tags($strString);
+
 		if (utf8_strlen($strString) <= $intNumberOfChars)
 		{
 			return $strString;
@@ -91,9 +94,6 @@ class String
 
 		$intCharCount = 0;
 		$arrWords = array();
-
-		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
-		$strString = strip_tags($strString);
 		$arrChunks = preg_split('/\s+/', $strString);
 
 		foreach ($arrChunks as $strChunk)

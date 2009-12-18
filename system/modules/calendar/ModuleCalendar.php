@@ -169,7 +169,7 @@ class ModuleCalendar extends Events
 			$arrDays[$intCurrentDay] = $GLOBALS['TL_LANG']['DAYS'][$intCurrentDay];
 		}
 
-		return array_values($arrDays);
+		return $arrDays;
 	}
 
 

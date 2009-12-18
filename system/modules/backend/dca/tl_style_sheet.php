@@ -86,6 +86,13 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'href'                => 'table=tl_style',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_style_sheet', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['copy'],
@@ -164,6 +171,16 @@ class tl_style_sheet extends Backend
 {
 
 	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
 	 * Update style sheet
 	 * @param object
 	 */
@@ -176,6 +193,22 @@ class tl_style_sheet extends Backend
 
 		$this->import('StyleSheets');
 		$this->StyleSheets->updateStyleSheet($dc->id);
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 }
 

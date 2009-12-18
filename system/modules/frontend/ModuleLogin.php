@@ -115,9 +115,11 @@ class ModuleLogin extends Module
 
 					if (is_array($arrGroups) && count($arrGroups) > 0)
 					{
+						$time = time();
+
 						// Get jumpTo page IDs
 						$arrGroupPage = array();
-						$objGroupPage = $this->Database->execute("SELECT id, jumpTo FROM tl_member_group WHERE id IN(" . implode(',', $arrGroups) . ") AND redirect=1");
+						$objGroupPage = $this->Database->execute("SELECT id, jumpTo FROM tl_member_group WHERE id IN(" . implode(',', $arrGroups) . ") AND redirect=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
 
 						// Simulate FIND_IN_SET()
 						while ($objGroupPage->next())

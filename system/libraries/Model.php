@@ -144,7 +144,7 @@ abstract class Model extends System
 		$this->varRefId = $varRefId;
 
 		$resResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strRefField . "=?")
-									->execute($this->varRefId);
+									->executeUncached($this->varRefId);
 
 		if ($resResult->numRows == 1)
 		{

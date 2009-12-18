@@ -117,7 +117,7 @@ class Calendar extends Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get upcoming events
-		$objArticleStmt = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND (startTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
+		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=e.author) AS authorName FROM tl_calendar_events e WHERE pid=? AND (startTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
 
 		if ($arrArchive['maxItems'] > 0)
 		{
@@ -191,6 +191,7 @@ class Calendar extends Frontend
 					$objItem->published = $event['published'];
 					$objItem->start = $event['start'];
 					$objItem->end = $event['end'];
+					$objItem->author = $event['authorName'];
 
 					if (is_array($event['enclosure']))
 					{
@@ -337,7 +338,8 @@ class Calendar extends Frontend
 			'description' => $objArticle->details,
 			'teaser' => $objArticle->teaser,
 			'link' => $link,
-			'published' => $intStart
+			'published' => $objArticle->tstamp,
+			'authorName' => $objArticle->authorName
 		);
 
 		// Enclosure

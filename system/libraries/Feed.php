@@ -106,7 +106,7 @@ class Feed extends System
 	public function generateRss()
 	{
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
-		$xml .= '<rss version="2.0">' . "\n";
+		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 		$xml .= '  <channel>' . "\n";
 		$xml .= '    <title>' . htmlspecialchars($this->title) . '</title>' . "\n";
 		$xml .= '    <description>' . htmlspecialchars($this->description) . '</description>' . "\n";
@@ -114,6 +114,7 @@ class Feed extends System
 		$xml .= '    <language>' . $this->language . '</language>' . "\n";
 		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
 		$xml .= '    <generator>TYPOlight Open Source CMS</generator>' . "\n";
+		$xml .= '    <atom:link href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
@@ -157,7 +158,7 @@ class Feed extends System
 		$xml .= '  <id>' . htmlspecialchars($this->link) . '</id>' . "\n";
 		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
 		$xml .= '  <generator>TYPOlight Open Source CMS</generator>' . "\n";
-		$xml .= '  <link rel="self" href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.atom" />' . "\n";
+		$xml .= '  <link href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
@@ -167,6 +168,7 @@ class Feed extends System
 			$xml .= '    <link rel="alternate" href="' . htmlspecialchars($objItem->link) . '" />' . "\n";
 			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
 			$xml .= '    <id>' . ($objItem->guid ? $objItem->guid : htmlspecialchars($objItem->link)) . '</id>' . "\n";
+			$xml .= '    <author><name>' . $objItem->author . '</name></author>' . "\n";
 
 			// Enclosures
 			if (is_array($objItem->enclosure))

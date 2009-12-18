@@ -323,10 +323,6 @@ var Mediabox;
 			// PATCH: do not encode URIs because TYPOlight has done already
 			//URL = encodeURI(URL).replace("(","%28").replace(")","%29");
 			// PATCH EOF
-			// PATCH: use relative URLs to bypass the .htaccess protection
-			HOST = window.location.protocol + '//' + window.location.host + '/';
-			URL = URL.replace(HOST, '../../');
-			// PATCH EOF
 			captionSplit = images[activeImage][1].split('::');
 
 // Quietube and yFrog support
@@ -351,6 +347,10 @@ var Mediabox;
 				preload.src = URL;
 // FLV, MP4
 			} else if (URL.match(/\.flv|\.mp4/i) || mediaType == 'video') {
+				// PATCH: use relative URLs to bypass the .htaccess protection
+				var uri = new URI(URL); 
+				URL = "../../" + uri.toRelative();
+				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
@@ -372,6 +372,10 @@ var Mediabox;
 				startEffect();
 // MP3, AAC
 			} else if (URL.match(/\.mp3|\.aac|tweetmic\.com|tmic\.fm/i) || mediaType == 'audio') {
+				// PATCH: use relative URLs to bypass the .htaccess protection
+				var uri = new URI(URL); 
+				URL = "../../" + uri.toRelative();
+				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || "20px";

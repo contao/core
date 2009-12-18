@@ -41,7 +41,6 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_style', 'adjustCategory'),
 			array('tl_style', 'updateStyleSheet')
 		)
 	),
@@ -475,48 +474,6 @@ class tl_style extends Backend
 		}
 
 		return '';
-	}
-
-
-	/**
-	 * Automatically adjust the category if a record is cut or duplicated
-	 */
-	public function adjustCategory()
-	{
-		if ($this->Input->get('act') != 'cut' && $this->Input->get('act') != 'cutAll' && $this->Input->get('act') != 'copy')
-		{
-			return;
-		}
-
-		$filter = $this->Session->get('filter');
-		$category = $filter['tl_style_' . CURRENT_ID]['category'];
-
-		// Return if no category is set
-		if (!strlen($category))
-		{
-			return;
-		}
-
-		$this->import('Database');
-
-		// Update single record
-		if (strlen($this->Input->get('id')))
-		{
-			$this->Database->prepare("UPDATE tl_style SET category=? WHERE id=?")
-						   ->execute($category, $this->Input->get('id'));
-		}
-
-		// Update multiple records
-		else
-		{
-			$arrClipboard = $this->Session->get('CLIPBOARD');
-
-			if (is_array($arrClipboard) && is_array($arrClipboard['tl_style']) && count($arrClipboard['tl_style']['id']))
-			{
-				$this->Database->prepare("UPDATE tl_style SET category=? WHERE id IN(" . implode(',', $arrClipboard['tl_style']['id']) . ")")
-							   ->execute($category);
-			}
-		}
 	}
 
 

@@ -79,6 +79,13 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 				'href'                => 'table=tl_faq',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_faq_category']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_faq_category', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_faq_category']['copy'],
@@ -220,6 +227,16 @@ class tl_faq_category extends Backend
 {
 
 	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
 	 * Check permissions to edit table tl_news_archive
 	 */
 	public function checkPermission()
@@ -229,6 +246,22 @@ class tl_faq_category extends Backend
 		{
 			unset($GLOBALS['TL_DCA']['tl_faq_category']['fields']['allowComments']);
 		}
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || count(preg_grep('/^tl_faq_category::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 }
 

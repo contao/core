@@ -30,7 +30,7 @@
 /**
  * Back end modules
  */
-array_insert($GLOBALS['BE_MOD']['content'], 3, array
+array_insert($GLOBALS['BE_MOD']['content'], 4, array
 (
 	'newsletter' => array
 	(

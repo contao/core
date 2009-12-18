@@ -224,17 +224,12 @@ class TableWizard extends Widget
 		$return .= '
   </tbody>
   </table>
-  </div>';
-
-		if (!$this->Session->get('disable_cell_resizer'))
-		{
-			$return .= '
+  </div>
   <script type="text/javascript">
   <!--//--><![CDATA[//><!--
   Backend.tableWizardResize();
   //--><!]]>
   </script>';
-		}
 
 		return $return;
 	}

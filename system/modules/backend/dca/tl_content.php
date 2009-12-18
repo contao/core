@@ -212,7 +212,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => array('proportional', 'crop'),
+			'options'                 => array('proportional', 'crop', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -803,8 +803,10 @@ class tl_content extends Backend
 	 */
 	public function addCteType($arrRow)
 	{
+		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
+
 		return '
-<div class="cte_type">' . $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] . (($arrRow['type'] == 'alias') ? ' ID: ' . $arrRow['cteAlias'] : '') . '</div>
+<div class="cte_type ' . $key . '">' . $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] . (($arrRow['type'] == 'alias') ? ' ID ' . $arrRow['cteAlias'] : '') . ($arrRow['protected'] ? ' (' . $GLOBALS['TL_LANG']['MSC']['protected'] . ')' : '') . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . ' block">
 ' . $this->getContentElement($arrRow['id']) . '
 </div>' . "\n";
@@ -828,9 +830,21 @@ class tl_content extends Backend
 	 */
 	public function getAlias()
 	{
+		$arrPids = array();
 		$arrAlias = array();
 
-		$objAlias = $this->Database->prepare("SELECT id, type, headline, text, (SELECT title FROM tl_article WHERE tl_article.id=tl_content.pid) AS title FROM tl_content WHERE id!=? ORDER BY title, sorting")
+		foreach ($this->User->pagemounts as $id)
+		{
+			$arrPids[] = $id;
+			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+		}
+
+		if (empty($arrPids))
+		{
+			return $arrAlias;
+		}
+
+		$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_unique($arrPids)) .") AND c.id!=? ORDER BY a.title, c.sorting")
 								   ->execute($this->Input->get('id'));
 
 		while ($objAlias->next())
@@ -868,15 +882,31 @@ class tl_content extends Backend
 	 */
 	public function getArticleAlias(DataContainer $dc)
 	{
+		$arrPids = array();
 		$arrAlias = array();
-		$this->loadLanguageFile('tl_article');
 
-		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+		foreach ($this->User->pagemounts as $id)
+		{
+			$arrPids[] = $id;
+			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+		}
+
+		if (empty($arrPids))
+		{
+			return $arrAlias;
+		}
+
+		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
 								   ->execute($dc->id);
 
-		while ($objAlias->next())
+		if ($objAlias->numRows)
 		{
-			$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
+			$this->loadLanguageFile('tl_article');
+
+			while ($objAlias->next())
+			{
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
+			}
 		}
 
 		return $arrAlias;
@@ -937,8 +967,21 @@ class tl_content extends Backend
 	 */
 	public function getArticles()
 	{
+		$arrPids = array();
 		$arrArticle = array();
-		$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article ORDER BY parent, sorting");
+
+		foreach ($this->User->pagemounts as $id)
+		{
+			$arrPids[] = $id;
+			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+		}
+
+		if (empty($arrPids))
+		{
+			return $arrArticle;
+		}
+
+		$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") ORDER BY parent, sorting");
 
 		while ($objArticle->next())
 		{

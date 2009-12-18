@@ -65,10 +65,11 @@ $GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Wenn Sie die Kategori
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['new']    = array('Neue Kategorie', 'Eine neue Kategorie anlegen');
-$GLOBALS['TL_LANG']['tl_faq_category']['show']   = array('Kategoriedetails', 'Details der Kategorie ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_faq_category']['edit']   = array('Kategorie bearbeiten', 'Kategorie ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_faq_category']['copy']   = array('Kategorie duplizieren', 'Kategorie ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_faq_category']['delete'] = array('Kategorie löschen', 'Kategorie ID %s löschen');
+$GLOBALS['TL_LANG']['tl_faq_category']['new']        = array('Neue Kategorie', 'Eine neue Kategorie anlegen');
+$GLOBALS['TL_LANG']['tl_faq_category']['show']       = array('Kategoriedetails', 'Details der Kategorie ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_faq_category']['edit']       = array('Kategorie bearbeiten', 'Kategorie ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_faq_category']['editheader'] = array('Kategorie-Einstellungen bearbeiten', 'Einstellungen der Kategorie ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_faq_category']['copy']       = array('Kategorie duplizieren', 'Kategorie ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_faq_category']['delete']     = array('Kategorie löschen', 'Kategorie ID %s löschen');
 
 ?>

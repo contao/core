@@ -259,6 +259,23 @@ class tl_comments extends Backend
 					$title .= ' (<a href="typolight/main.php?do=calendar&amp;table=tl_calendar_events&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
 				}
 				break;
+
+			default:
+				// HOOK: support custom modules
+				if (isset($GLOBALS['TL_HOOKS']['listComments']) && is_array($GLOBALS['TL_HOOKS']['listComments']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['listComments'] as $callback)
+					{
+						$this->import($callback[0]);
+
+						if (($tmp = $this->$callback[0]->$callback[1]($arrRow)) != '')
+						{
+							$title .= $tmp;
+							break;
+						}
+					}
+				}
+				break;
 		}
 
 		$key = $arrRow['published'] ? 'published' : 'unpublished';
@@ -318,7 +335,7 @@ class tl_comments extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

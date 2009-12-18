@@ -78,6 +78,7 @@ class ModuleBreadcrumb extends Module
 		$pages = array();
 		$items = array();
 		$pageId = $objPage->id;
+		$type = null;
 
 		// Get all pages up to the root page
 		do

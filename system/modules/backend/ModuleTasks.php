@@ -430,6 +430,7 @@ class ModuleTasks extends BackendModule
 		}
 
 		$affected = 1;
+		$data = array();
 		$data['tl_task'][] = $objTask->row();
 
 		// Get status records

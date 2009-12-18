@@ -122,6 +122,11 @@ class Repository
 			$v = array_search($stat, self::$mStatusName);
 			if ($v === false) $v = 9; // assume stable
 			return (($matches[1] * 1000 + $matches[2]) * 1000 + $matches[3]) * 10 + $v;
+		} elseif (preg_match('/(\d{1,3})\.?(\d{1,3})\.?(\w*)/', $aVersion, $matches)) {
+			$stat = mb_strtolower($matches[3]);
+			$v = array_search($stat, self::$mStatusName);
+			if ($v === false) $v = 9; // assume stable
+			return (($matches[1] * 1000 + $matches[2]) * 1000) * 10 + $v;
 		} // if
 		return 0;
 	} // encodeVersion

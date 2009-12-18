@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},fallback,dns,language;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop'
 	),
@@ -232,7 +232,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'decodeEntities'=>true, 'tl_class'=>'clr')
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
 		),
 		'redirect' => array
 		(
@@ -264,18 +264,23 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12')
 		),
-		'fallback' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['fallback'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox'
-		),
 		'dns' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkDns')
+			)
+		),
+		'fallback' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['fallback'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'adminEmail' => array
 		(
@@ -374,7 +379,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'default'                 => 0,
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array(0, 15, 30, 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 259200, 604800),
+			'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400),
 			'reference'               => &$GLOBALS['TL_LANG']['CACHE']
 		),
 		'includeChmod' => array
@@ -543,7 +548,7 @@ class tl_page extends Backend
 					continue;
 				}
 
-				$row = $objPage->fetchAssoc();
+				$row = $objPage->row();
 
 				if ($this->User->isAllowed(1, $row))
 				{
@@ -575,7 +580,7 @@ class tl_page extends Backend
 					continue;
 				}
 
-				if ($this->User->isAllowed(2, $objPage->fetchAssoc()))
+				if ($this->User->isAllowed(2, $objPage->row()))
 				{
 					$clipboard[] = $id;
 				}
@@ -600,7 +605,7 @@ class tl_page extends Backend
 									  ->limit(1)
 									  ->execute($this->Input->get('id'));
 
-			if ($objPage->numRows && !$this->User->isAllowed(2, $objPage->fetchAssoc()))
+			if ($objPage->numRows && !$this->User->isAllowed(2, $objPage->row()))
 			{
 				$GLOBALS['TL_DCA']['tl_page']['config']['closed'] = true;
 			}
@@ -609,7 +614,8 @@ class tl_page extends Backend
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			$ids = strlen(CURRENT_ID) ? array(CURRENT_ID) : array($this->Input->get('id'));
+			$id = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
+			$ids = ($id != '') ? array($id) : array();
 
 			// Set permission
 			switch ($this->Input->get('act'))
@@ -624,7 +630,7 @@ class tl_page extends Backend
 					$ids[] = $this->Input->get('sid');
 					break;
 
-				case 'new':
+				case 'create':
 				case 'copy':
 				case 'copyAll':
 				case 'cut':
@@ -662,6 +668,8 @@ class tl_page extends Backend
 				{
 					if (!in_array($id, $pagemounts))
 					{
+						$this->log('Page ID ' . $id . ' was not mounted', 'tl_page checkPermission()', TL_ERROR);
+
 						$error = true;
 						break;
 					}
@@ -677,7 +685,7 @@ class tl_page extends Backend
 					}
 
 					// Check whether the current user is allowed to access the current page
-					if (!$this->User->isAllowed($permission, $objPage->fetchAssoc()))
+					if (!$this->User->isAllowed($permission, $objPage->row()))
 					{
 						$error = true;
 						break;
@@ -694,7 +702,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to ' . $this->Input->get('act') . ' page ID "'.$id.'"', 'tl_page checkPermission', 5);
+					$this->log('Not enough permissions to '. $this->Input->get('act') .' page ID '. $id .' or paste it after/into page ID '. $id, 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 			}
@@ -737,6 +745,13 @@ class tl_page extends Backend
 
 				if ($objPage->numRows < 1)
 				{
+					// Currently selected page does not exits
+					if ($intId == $intNode)
+					{
+						$this->Session->set('tl_page_node', 0);
+						return;
+					}
+
 					break;
 				}
 
@@ -768,7 +783,7 @@ class tl_page extends Backend
 		{
 			$this->Session->set('tl_page_node', 0);
 
-			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', 5);
+			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
@@ -816,12 +831,8 @@ class tl_page extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT title FROM tl_page WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->title);
+			$varValue = standardize($dc->activeRecord->title);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
@@ -879,18 +890,25 @@ class tl_page extends Backend
 	 */
 	public function generateArticle(DataContainer $dc)
 	{
+		// Existing or not a regular page
+		if ($dc->activeRecord->tstamp > 0 || $dc->activeRecord->type != 'regular')
+		{
+			return;
+		}
+
 		$new_records = $this->Session->get('new_records');
 
+		// Not a new page
 		if (!$new_records || (is_array($new_records[$dc->table]) && !in_array($dc->id, $new_records[$dc->table])))
 		{
 			return;
 		}
 
-		$objPage = $this->Database->prepare("SELECT id, tstamp, title, alias, published FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($dc->id);
+		// Check whether there are articles (e.g. on copied pages)
+		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_article WHERE pid=?")
+								   ->execute($dc->id);
 
-		if ($objPage->numRows < 1 || $objPage->tstamp > 0)
+		if ($objTotal->total > 0)
 		{
 			return;
 		}
@@ -901,20 +919,18 @@ class tl_page extends Backend
 		$arrSet['tstamp'] = time();
 		$arrSet['author'] = $this->User->id;
 		$arrSet['inColumn'] = 'main';
-		$arrSet['title'] = $objPage->title;
-		$arrSet['alias'] = $objPage->alias;
-		$arrSet['published'] = $objPage->published;
+		$arrSet['title'] = $dc->activeRecord->title;
+		$arrSet['alias'] = $dc->activeRecord->alias;
+		$arrSet['published'] = $dc->activeRecord->published;
 
-		// Add article
-		$this->Database->prepare("INSERT INTO tl_article %s")
-					   ->set($arrSet)
-					   ->execute();
+		$this->Database->prepare("INSERT INTO tl_article %s")->set($arrSet)->execute();
 	}
 
 
 	/**
 	 * Check the sitemap alias
 	 * @param object
+	 * @param mixed
 	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
@@ -934,6 +950,17 @@ class tl_page extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Check the DNS settings
+	 * @param mixed
+	 * @param object
+	 */
+	public function checkDns($varValue, DataContainer $dc)
+	{
+		return str_ireplace(array('http://', 'https://', 'ftp://'), '', $varValue);
 	}
 
 
@@ -1133,7 +1160,7 @@ class tl_page extends Backend
 			// Disable "paste after" button if there is no permission 2 for the parent page
 			if (!$disablePA && $objPage->numRows)
 			{
-				if (!$this->User->isAllowed(2, $objPage->fetchAssoc()))
+				if (!$this->User->isAllowed(2, $objPage->row()))
 				{
 					$disablePA = true;
 				}
@@ -1187,7 +1214,7 @@ class tl_page extends Backend
 	 */
 	public function editArticles($row, $href, $label, $title, $icon)
 	{
-		return '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ';
+		return ($row['type'] == 'regular') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1230,7 +1257,7 @@ class tl_page extends Backend
 								  ->limit(1)
 								  ->execute($row['id']);
 
-		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->fetchAssoc()))
+		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
 		{
 			return $this->generateImage('invisible.gif') . ' ';
 		}
@@ -1261,7 +1288,7 @@ class tl_page extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

@@ -319,6 +319,13 @@ class tl_files extends Backend
 			return;
 		}
 
+		// Currently selected folder does not exist
+		if (!is_dir(TL_ROOT . '/' . $strNode))
+		{
+			$this->Session->set('tl_files_node', '');
+			return;
+		}
+
 		$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 		$arrNodes = explode('/', preg_replace('/^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '/') . '\//', '', $strNode));
 		$arrLinks = array();
@@ -353,7 +360,7 @@ class tl_files extends Backend
 		{
 			$this->Session->set('tl_files_node', '');
 
-			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', 5);
+			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

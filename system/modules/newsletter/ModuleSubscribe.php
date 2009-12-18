@@ -64,7 +64,7 @@ class ModuleSubscribe extends Module
 			return $objTemplate->parse();
 		}
 
-		$this->nl_channels = deserialize($this->nl_channels, true);
+		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
 		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
@@ -146,7 +146,7 @@ class ModuleSubscribe extends Module
 		$this->Template = new FrontendTemplate('mod_newsletter');
 
 		// Check the token
-		$objRecipient = $this->Database->prepare("SELECT r.id, r.email, c.title FROM tl_newsletter_recipients r LEFT JOIN tl_newsletter_channel c ON r.pid=c.id WHERE token=?")
+		$objRecipient = $this->Database->prepare("SELECT r.id, r.email, c.id AS cid, c.title FROM tl_newsletter_recipients r LEFT JOIN tl_newsletter_channel c ON r.pid=c.id WHERE token=?")
 									   ->execute($this->Input->get('token'));
 
 		if ($objRecipient->numRows < 1)
@@ -170,10 +170,12 @@ class ModuleSubscribe extends Module
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateRecipient']) && is_array($GLOBALS['TL_HOOKS']['activateRecipient']))
 		{
+			$arrCids = $objRecipient->fetchEach('cid');
+
 			foreach ($GLOBALS['TL_HOOKS']['activateRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objRecipient->email, $arrAdd, $arrChannels);
+				$this->$callback[0]->$callback[1]($objRecipient->email, $arrAdd, $arrCids);
 			}
 		}
 

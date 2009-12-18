@@ -271,7 +271,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'login')
 		),
 		'login' => array
 		(
@@ -432,20 +432,23 @@ class tl_member extends Backend
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
-		$objUser = $this->Database->prepare("SELECT id, dateAdded, lastLogin FROM tl_member WHERE id=?")
-								  ->limit(1)
-								  ->execute($dc->id);
-
-		if ($objUser->numRows < 1 || $objUser->dateAdded > 0)
+		if ($dc->activeRecord->dateAdded > 0)
 		{
 			return;
 		}
 
 		// Fallback solution for existing accounts
-		$time = ($objUser->lastLogin > 0) ? $objUser->lastLogin : time();
+		if ($dc->activeRecord->lastLogin > 0)
+		{
+			$time = $dc->activeRecord->lastLogin;
+		}
+		else
+		{
+			$time = time();
+		}
 
 		$this->Database->prepare("UPDATE tl_member SET dateAdded=? WHERE id=?")
-					   ->execute($time, $objUser->id);
+					   ->execute($time, $dc->id);
 	}
 
 
@@ -494,13 +497,27 @@ class tl_member extends Backend
 		// Check permissions
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', 'tl_member toggleVisibility', 5);
+			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', 'tl_member toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 
 		// Update database
 		$this->Database->prepare("UPDATE tl_member SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
+
+		// HOOK: update newsletter subscriptions
+		if (in_array('newsletter', $this->Config->getActiveModules()))
+		{
+			$objUser = $this->Database->prepare("SELECT email FROM tl_member WHERE id=?")
+									  ->limit(1)
+									  ->execute($intId);
+
+			if ($objUser->numRows)
+			{
+				$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=? WHERE email=?")
+							   ->execute(($blnVisible ? 1 : ''), $objUser->email);
+			}
+		}
 	}
 }
 

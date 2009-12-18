@@ -396,7 +396,7 @@ class tl_form_field extends Backend
 			case 'create':
 				if (!strlen($this->Input->get('id')) || !in_array($this->Input->get('id'), $root))
 				{
-					$this->log('Not enough permissions to create form fields in form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to create form fields in form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -414,7 +414,7 @@ class tl_form_field extends Backend
 
 					if ($objField->numRows < 1)
 					{
-						$this->log('Invalid form field ID "'.$this->Input->get('pid').'"', 'tl_form_field checkPermission', 5);
+						$this->log('Invalid form field ID "'.$this->Input->get('pid').'"', 'tl_form_field checkPermission', TL_ERROR);
 						$this->redirect('typolight/main.php?act=error');
 					}
 
@@ -423,7 +423,7 @@ class tl_form_field extends Backend
 
 				if (!in_array($pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -438,13 +438,13 @@ class tl_form_field extends Backend
 
 				if ($objField->numRows < 1)
 				{
-					$this->log('Invalid form field ID "'.$id.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Invalid form field ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				if (!in_array($objField->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -456,7 +456,7 @@ class tl_form_field extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -465,7 +465,7 @@ class tl_form_field extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid form ID "'.$id.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Invalid form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -477,12 +477,12 @@ class tl_form_field extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_form_field checkPermission', 5);
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', 5);
+					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -497,8 +497,10 @@ class tl_form_field extends Backend
 	 */
 	public function listFormFields($arrRow)
 	{
+		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
+
 		$strType = '
-<div class="cte_type">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . ($arrRow['name'] ? ' [' . $arrRow['name'] . ']' : '') . '</div>
+<div class="cte_type ' . $key . '">' . $GLOBALS['TL_LANG']['FFL'][$arrRow['type']][0] . ($arrRow['name'] ? ' [' . $arrRow['name'] . ']' : '') . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h32' : '') . ' block">';
 
 		$strClass = $GLOBALS['TL_FFL'][$arrRow['type']];

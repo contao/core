@@ -104,7 +104,7 @@ body
 {
 	color:#888b88;
 }
-#tl_license a:hover
+#tl_license a:hover, #tl_license a:focus, #tl_license a:active
 {
 	color:#8ab858;
 }

@@ -141,6 +141,12 @@ class DC_Folder extends DataContainer implements listable, editable
 
 		$this->strTable = $strTable;
 
+		// Check for valid file types
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
+		{
+			$this->arrValidFileTypes = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']);
+		}
+
 		// Call onload_callback (e.g. to check permissions)
 		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onload_callback']))
 		{
@@ -931,7 +937,7 @@ window.addEvent("domready", function() {
       "action": "fancyUpload"
     },
     appendCookieData: true,
-    url: $("'.$this->strTable.'").action,
+    url: $("'.$this->strTable.'").action.replace("main.php", "upload.php"),
     path: "plugins/fancyupload/Swiff.Uploader.swf",
     typeFilter: {
       "Images (*.' . implode(', *.', $uploadTypes) . ')": "*.' . implode('; *.', $uploadTypes) . '"
@@ -1736,7 +1742,7 @@ window.addEvent(\'domready\', function()
 
 			$objFile = new File($currentFile);
 
-			if (is_array($this->arrValidFileTypes) && count($this->arrValidFileTypes) && !in_array($objFile->extension, $this->arrValidFileTypes))
+			if (!empty($this->arrValidFileTypes) && !in_array($objFile->extension, $this->arrValidFileTypes))
 			{
 				continue;
 			}
@@ -1755,7 +1761,7 @@ window.addEvent(\'domready\', function()
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail = '<br /><a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" ><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
+					$thumbnail = ' <span class="tl_gray">('.$objFile->width.'x'.$objFile->height.')</span><br /><a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" ><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
 				}
 			}
 
@@ -1831,9 +1837,8 @@ window.addEvent(\'domready\', function()
 		$strFolder = $this->Input->get('pid', true);
 
 		// Check for valid file types
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes'])
+		if (!empty($this->arrValidFileTypes))
 		{
-			$this->arrValidFileTypes = trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['config']['validFileTypes']);
 			$fileinfo = preg_replace('/.*\.(.*)$/ui', '$1', $strFile);
 
 			if (!in_array(strtolower($fileinfo), $this->arrValidFileTypes))

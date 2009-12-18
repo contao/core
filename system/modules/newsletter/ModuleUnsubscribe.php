@@ -64,7 +64,7 @@ class ModuleUnsubscribe extends Module
 			return $objTemplate->parse();
 		}
 
-		$this->nl_channels = deserialize($this->nl_channels, true);
+		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
 		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
@@ -191,7 +191,7 @@ class ModuleUnsubscribe extends Module
 			foreach ($GLOBALS['TL_HOOKS']['removeRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($varInput, $arrRemove, $arrChannels);
+				$this->$callback[0]->$callback[1]($varInput, $arrRemove);
 			}
 		}
 

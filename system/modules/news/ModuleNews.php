@@ -52,7 +52,7 @@ abstract class ModuleNews extends Module
 	 */
 	protected function sortOutProtected($arrArchives)
 	{
-		if (BE_USER_LOGGED_IN)
+		if (BE_USER_LOGGED_IN || !is_array($arrArchives) || count($arrArchives) < 1)
 		{
 			return $arrArchives;
 		}
@@ -268,7 +268,20 @@ abstract class ModuleNews extends Module
 			}
 		}
 
-		// Link to internal page
+		// Link to an article
+		elseif ($objArticle->source == 'article')
+		{
+			$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title AS title, p.id AS id, p.alias AS alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND (a.id=? OR a.alias=?)")
+									  ->limit(1)
+									  ->execute($objArticle->articleId, $objArticle->articleId);
+
+			if ($objPage->numRows)
+			{
+				self::$arrUrlCache[$strCacheKey] = $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId));
+			}
+		}
+
+		// Link to a page
 		else
 		{
 			$strUrl = ampersand($this->Environment->request, true);

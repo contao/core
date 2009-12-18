@@ -4,6 +4,8 @@
 
 var Calendar = new Class({	
 
+  Implements: Options,
+
 	options: {
 		blocked: [], // blocked dates 
 		classes: [], // ['calendar', 'prev', 'next', 'month', 'year', 'today', 'invalid', 'valid', 'inactive', 'active', 'hover', 'hilite']
@@ -50,7 +52,7 @@ var Calendar = new Class({
 		}).addClass(this.classes.calendar).injectInside(document.body);
 
 		// iex 6 needs a transparent iframe underneath the calendar in order to not allow select elements to render through
-		if (window.ie6) {
+		if (Browser.Engine.trident4) { // PATCH: window.ie6 = Browser.Engine.trident4
 			this.iframe = new Element('iframe', { 
 				'styles': { left: '-1000px', position: 'absolute', top: '-1000px', zIndex: 999 }
 			}).injectInside(document.body);
@@ -61,7 +63,7 @@ var Calendar = new Class({
 		this.fx = new Fx.Tween(this.calendar, {
 			onStart: function() { 
 				if (this.calendar.getStyle('opacity') == 0) { // show
-					if (window.ie6) { this.iframe.setStyle('display', 'block'); }
+					if (Browser.Engine.trident4) { this.iframe.setStyle('display', 'block'); } // PATCH: window.ie6 = Browser.Engine.trident4
 					this.calendar.setStyle('display', 'block');
 					this.fireEvent('onShowStart', this.element);
 				}
@@ -72,7 +74,7 @@ var Calendar = new Class({
 			onComplete: function() { 
 				if (this.calendar.getStyle('opacity') == 0) { // hidden
 					this.calendar.setStyle('display', 'none');
-					if (window.ie6) { this.iframe.setStyle('display', 'none'); }
+					if (Browser.Engine.trident4) { this.iframe.setStyle('display', 'none'); } // PATCH: window.ie6 = Browser.Engine.trident4
 					this.fireEvent('onHideComplete', this.element);
 				}
 				else { // shown
@@ -85,7 +87,7 @@ var Calendar = new Class({
 		if (window.Drag && this.options.draggable) {
 			this.drag = new Drag.Move(this.calendar, { 
 				onDrag: function() {
-					if (window.ie6) { this.iframe.setStyles({ left: this.calendar.style.left, top: this.calendar.style.top }); } 
+					if (Browser.Engine.trident4) { this.iframe.setStyles({ left: this.calendar.style.left, top: this.calendar.style.top }); } // PATCH: window.ie6 = Browser.Engine.trident4 
 				}.bind(this) 
 			}); 
 		}
@@ -115,7 +117,10 @@ var Calendar = new Class({
 			cal.el.addClass(this.classes.calendar);
 
 			// create cal button
-			cal.button.addClass(this.classes.calendar).addEvent('click', function(cal) { this.toggle(cal); }.pass(cal, this)).injectAfter(cal.el);
+			cal.button.addClass(this.classes.calendar)
+				.addEvent('click', function(event) { event.preventDefault(); }) // PATCH: prevent Safari default (see #1240)
+				.addEvent('click', function(cal) { this.toggle(cal); }.pass(cal, this))
+				.injectAfter(cal.el);
 
 			// read in default value
 			cal.val = this.read(cal);
@@ -875,7 +880,7 @@ var Calendar = new Class({
 			
 			this.calendar.setStyles({ left: x + 'px', top: y + 'px' });
 
-			if (window.ie6) { 
+			if (Browser.Engine.trident4) { // PATCH: window.ie6 = Browser.Engine.trident4
 				this.iframe.setStyles({ height: this.calendar.coord.height + 'px', left: x + 'px', top: y + 'px', width: this.calendar.coord.width + 'px' }); 
 			}
 
@@ -1109,5 +1114,4 @@ var Calendar = new Class({
 	}
 });
 
-Calendar.implement(new Options);
-Calendar.implement(new Events);
+Calendar.implement(new Events, new Options);

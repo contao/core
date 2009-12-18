@@ -377,7 +377,7 @@ class tl_user_group extends Backend
 		// Check permissions
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', 5);
+			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

@@ -131,14 +131,15 @@ $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']   = 'MySQL';
-$GLOBALS['TL_CONFIG']['dbUser']     = '';
-$GLOBALS['TL_CONFIG']['dbPass']     = '';
-$GLOBALS['TL_CONFIG']['dbHost']     = 'localhost';
-$GLOBALS['TL_CONFIG']['dbDatabase'] = '';
-$GLOBALS['TL_CONFIG']['dbPort']     = 3306;
-$GLOBALS['TL_CONFIG']['dbPconnect'] = false;
-$GLOBALS['TL_CONFIG']['dbCharset']  = 'UTF8';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
+$GLOBALS['TL_CONFIG']['dbUser']      = '';
+$GLOBALS['TL_CONFIG']['dbPass']      = '';
+$GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
+$GLOBALS['TL_CONFIG']['dbDatabase']  = '';
+$GLOBALS['TL_CONFIG']['dbPort']      = 3306;
+$GLOBALS['TL_CONFIG']['dbPconnect']  = false;
+$GLOBALS['TL_CONFIG']['dbCharset']   = 'UTF8';
+$GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
 
 
 /**
@@ -299,7 +300,7 @@ $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
 $GLOBALS['TL_CONFIG']['installPassword']      = '77e9b7542ac04858d99a0eaaf77adf54b5e18910';
-$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://liveupdate.inetrobots.com/';
+$GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
 $GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.typolight.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;

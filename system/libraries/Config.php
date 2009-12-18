@@ -162,10 +162,11 @@ class Config
 		}
 
 		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
+		$this->strBottom = trim($this->strBottom);
 
 		if ($this->strBottom != '')
 		{
-			$strFile .= trim($this->strBottom) . "\n\n";
+			$strFile .= $this->strBottom . "\n\n";
 		}
 
 		$strFile .= '?>';

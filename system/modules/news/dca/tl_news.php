@@ -126,6 +126,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'__selector__'                => array('source', 'addImage', 'addEnclosure'),
 		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
 		'internal'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,jumpTo;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
+		'article'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,articleId;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
 		'external'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,url,target;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
@@ -237,7 +238,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => array('proportional', 'crop'),
+			'options'                 => array('proportional', 'crop', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -307,7 +308,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
-			'options'                 => array('default', 'internal', 'external'),
+			'options'                 => array('default', 'internal', 'article', 'external'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news'],
 			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true)
 		),
@@ -317,6 +318,14 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'eval'                    => array('fieldType'=>'radio')
+		),
+		'articleId' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['articleId'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_news', 'getArticleAlias'),
+			'eval'                    => array('mandatory'=>true)
 		),
 		'url' => array
 		(
@@ -443,7 +452,7 @@ class tl_news extends Backend
 			case 'create':
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create news items in news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to create news items in news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -452,7 +461,7 @@ class tl_news extends Backend
 			case 'copy':
 				if (!in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" to news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" to news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -467,13 +476,13 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news item ID "'.$id.'"', 'tl_news checkPermission', 5);
+					$this->log('Invalid news item ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				if (!in_array($objArchive->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -485,7 +494,7 @@ class tl_news extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -494,7 +503,7 @@ class tl_news extends Backend
 
 				if ($objArchive->numRows < 1)
 				{
-					$this->log('Invalid news archive ID "'.$id.'"', 'tl_news checkPermission', 5);
+					$this->log('Invalid news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -506,12 +515,12 @@ class tl_news extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_news checkPermission', 5);
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -532,12 +541,8 @@ class tl_news extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT headline FROM tl_news WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->headline);
+			$varValue = standardize($dc->activeRecord->headline);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")
@@ -578,26 +583,53 @@ class tl_news extends Backend
 
 
 	/**
+	 * Get all articles and return them as array
+	 * @param object
+	 * @return array
+	 */
+	public function getArticleAlias(DataContainer $dc)
+	{
+		$arrPids = array();
+		$arrAlias = array();
+
+		foreach ($this->User->pagemounts as $id)
+		{
+			$arrPids[] = $id;
+			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+		}
+
+		if (empty($arrPids))
+		{
+			return $arrAlias;
+		}
+
+		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+								   ->execute($dc->id);
+
+		if ($objAlias->numRows)
+		{
+			$this->loadLanguageFile('tl_article');
+
+			while ($objAlias->next())
+			{
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
+			}
+		}
+
+		return $arrAlias;
+	}
+
+
+	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
 	 * @param object
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
-		$objEvent = $this->Database->prepare("SELECT date, time FROM tl_news WHERE id=?")
-								   ->limit(1)
-								   ->execute($dc->id);
-
-		if ($objEvent->numRows < 1)
-		{
-			return;
-		}
-
-		$arrSet['date'] = strtotime(date('Y-m-d', $objEvent->date) . ' ' . date('H:i:s', $objEvent->time));
+		$arrSet['date'] = strtotime(date('Y-m-d', $dc->activeRecord->date) . ' ' . date('H:i:s', $dc->activeRecord->time));
 		$arrSet['time'] = $arrSet['date'];
 
-		$this->Database->prepare("UPDATE tl_news %s WHERE id=?")
-					   ->set($arrSet)
-					   ->execute($dc->id);
+		$this->Database->prepare("UPDATE tl_news %s WHERE id=?")->set($arrSet)->execute($dc->id);
 	}
 
 
@@ -673,7 +705,7 @@ class tl_news extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

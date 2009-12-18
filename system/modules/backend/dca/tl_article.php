@@ -94,6 +94,13 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'icon'                => 'edit.gif',
 				'button_callback'     => array('tl_article', 'editArticle')
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_article']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_article', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['copy'],
@@ -304,7 +311,7 @@ class tl_article extends Backend
 					continue;
 				}
 
-				$row = $objArticle->fetchAssoc();
+				$row = $objArticle->row();
 
 				if ($this->User->isAllowed(4, $row))
 				{
@@ -336,7 +343,7 @@ class tl_article extends Backend
 					continue;
 				}
 
-				if ($this->User->isAllowed(5, $objArticle->fetchAssoc()))
+				if ($this->User->isAllowed(5, $objArticle->row()))
 				{
 					$clipboard[] = $id;
 				}
@@ -374,7 +381,7 @@ class tl_article extends Backend
 					break;
 
 				// Do not insert articles into a website root page
-				case 'new':
+				case 'create':
 				case 'copy':
 				case 'copyAll':
 				case 'cut':
@@ -443,9 +450,9 @@ class tl_article extends Backend
 					// Check whether the current user has permission for the current page
 					if (!$error && $objPage->numRows)
 					{
-						if (!$this->User->isAllowed($permission, $objPage->fetchAssoc()))
+						if (!$this->User->isAllowed($permission, $objPage->row()))
 						{
-							$this->log('Not enough permissions to ' . $this->Input->get('act') . ' ' . (strlen($this->Input->get('id')) ? 'article ID '. $this->Input->get('id') : ' multiple articles') . ' on page ID ' . $id . ' or to insert it on page ID ' . $id, 'tl_article checkPermission()', TL_ERROR);
+							$this->log('Not enough permissions to '. $this->Input->get('act') .' '. (strlen($this->Input->get('id')) ? 'article ID '. $this->Input->get('id') : ' articles') .' on page ID '. $id .' or paste it/them into page ID '. $id, 'tl_article checkPermission()', TL_ERROR);
 							$error = true;
 						}
 					}
@@ -487,12 +494,8 @@ class tl_article extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT title FROM tl_article WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->title);
+			$varValue = standardize($dc->activeRecord->title);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_article WHERE id=? OR alias=?")
@@ -529,7 +532,28 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->fetchAssoc())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (!$this->User->isAdmin && count(preg_grep('/^tl_article::/', $this->User->alexf)) < 1)
+		{
+			return '';
+		}
+
+		return self::editArticle($row, $href, $label, $title, $icon, $attributes);
 	}
 
 
@@ -555,7 +579,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->fetchAssoc())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -575,7 +599,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->fetchAssoc())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->isAllowed(5, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -602,7 +626,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->fetchAssoc())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->row())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
 	}
 
 
@@ -622,7 +646,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return ($this->User->isAdmin || $this->User->isAllowed(6, $objPage->fetchAssoc())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->isAllowed(6, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -654,7 +678,7 @@ class tl_article extends Backend
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->fetchAssoc()))
+		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
 		{
 			return $this->generateImage('invisible.gif') . ' ';
 		}
@@ -685,7 +709,7 @@ class tl_article extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

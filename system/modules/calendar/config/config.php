@@ -47,10 +47,10 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 (
 	'events' => array
 	(
-		'calendar'        => 'ModuleCalendar',
-		'eventlist'       => 'ModuleEventlist',
-		'eventreader'     => 'ModuleEventReader',
-		'upcoming_events' => 'ModuleUpcomingEvents'
+		'calendar'    => 'ModuleCalendar',
+		'eventreader' => 'ModuleEventReader',
+		'eventlist'   => 'ModuleEventlist',
+		'eventmenu'   => 'ModuleEventMenu'
 	)
 ));
 

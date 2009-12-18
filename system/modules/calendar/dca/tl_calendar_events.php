@@ -254,7 +254,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => array('proportional', 'crop'),
+			'options'                 => array('proportional', 'crop', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -481,7 +481,7 @@ class tl_calendar_events extends Backend
 			case 'create':
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create events in calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Not enough permissions to create events in calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -490,7 +490,7 @@ class tl_calendar_events extends Backend
 			case 'copy':
 				if (!in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" to calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" to calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -505,13 +505,13 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid event ID "'.$id.'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Invalid event ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				if (!in_array($objCalendar->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -523,7 +523,7 @@ class tl_calendar_events extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -532,7 +532,7 @@ class tl_calendar_events extends Backend
 
 				if ($objCalendar->numRows < 1)
 				{
-					$this->log('Invalid calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Invalid calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -544,12 +544,12 @@ class tl_calendar_events extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', 5);
+					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -570,18 +570,14 @@ class tl_calendar_events extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT title FROM tl_calendar_events WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->title);
+			$varValue = standardize($dc->activeRecord->title);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_calendar_events WHERE alias=?")
 								   ->execute($varValue);
 
-		// Check whether the news alias exists
+		// Check whether the alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
 			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
@@ -652,62 +648,51 @@ class tl_calendar_events extends Backend
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
-		$objEvent = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE id=?")
-								   ->limit(1)
-								   ->execute($dc->id);
-
-		if ($objEvent->numRows < 1)
-		{
-			return;
-		}
-
-		$arrSet['startTime'] = $objEvent->startDate;
-		$arrSet['endTime'] = $objEvent->startDate;
+		$arrSet['startTime'] = $dc->activeRecord->startDate;
+		$arrSet['endTime'] = $dc->activeRecord->startDate;
 
 		// Set end date
-		if (strlen($objEvent->endDate))
+		if (strlen($dc->activeRecord->endDate))
 		{
-			if ($objEvent->endDate > $objEvent->startDate)
+			if ($dc->activeRecord->endDate > $dc->activeRecord->startDate)
 			{
-				$arrSet['endDate'] = $objEvent->endDate;
-				$arrSet['endTime'] = $objEvent->endDate;
+				$arrSet['endDate'] = $dc->activeRecord->endDate;
+				$arrSet['endTime'] = $dc->activeRecord->endDate;
 			}
 			else
 			{
-				$arrSet['endDate'] = $objEvent->startDate;
-				$arrSet['endTime'] = $objEvent->startDate;
+				$arrSet['endDate'] = $dc->activeRecord->startDate;
+				$arrSet['endTime'] = $dc->activeRecord->startDate;
 			}
 		}
 
 		// Add time
-		if ($objEvent->addTime)
+		if ($dc->activeRecord->addTime)
 		{
-			$arrSet['startTime'] = strtotime(date('Y-m-d', $arrSet['startTime']) . ' ' . date('H:i:s', $objEvent->startTime));
-			$arrSet['endTime'] = strtotime(date('Y-m-d', $arrSet['endTime']) . ' ' . date('H:i:s', $objEvent->endTime));
+			$arrSet['startTime'] = strtotime(date('Y-m-d', $arrSet['startTime']) . ' ' . date('H:i:s', $dc->activeRecord->startTime));
+			$arrSet['endTime'] = strtotime(date('Y-m-d', $arrSet['endTime']) . ' ' . date('H:i:s', $dc->activeRecord->endTime));
 		}
 
 		// Adjust end time of "all day" events
-		elseif ((strlen($objEvent->endDate) && $arrSet['endDate'] == $arrSet['endTime']) || $arrSet['startTime'] == $arrSet['endTime'])
+		elseif ((strlen($dc->activeRecord->endDate) && $arrSet['endDate'] == $arrSet['endTime']) || $arrSet['startTime'] == $arrSet['endTime'])
 		{
 			$arrSet['endTime'] = (strtotime('+ 1 day', $arrSet['endTime']) - 1);
 		}
 
 		$arrSet['repeatEnd'] = 0;
 
-		if ($objEvent->recurring)
+		if ($dc->activeRecord->recurring)
 		{
-			$arrRange = deserialize($objEvent->repeatEach);
+			$arrRange = deserialize($dc->activeRecord->repeatEach);
 
-			$arg = $arrRange['value'] * $objEvent->recurrences;
+			$arg = $arrRange['value'] * $dc->activeRecord->recurrences;
 			$unit = $arrRange['unit'];
 
 			$strtotime = '+ ' . $arg . ' ' . $unit;
 			$arrSet['repeatEnd'] = strtotime($strtotime, $arrSet['endTime']);
 		}
 
-		$this->Database->prepare("UPDATE tl_calendar_events %s WHERE id=?")
-					   ->set($arrSet)
-					   ->execute($dc->id);
+		$this->Database->prepare("UPDATE tl_calendar_events %s WHERE id=?")->set($arrSet)->execute($dc->id);
 	}
 
 
@@ -783,7 +768,7 @@ class tl_calendar_events extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

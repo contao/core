@@ -319,7 +319,7 @@ h2.sub_headline_index
 	font-size:10px;
 	color:#a3a3a3;
 }
-.tl_help a:hover
+.tl_help a:hover, .tl_help a:focus, .tl_help a:active
 {
 	text-decoration:underline;
 }
@@ -546,7 +546,7 @@ h2.sub_headline_index
 	text-align:right;
 	white-space:nowrap;
 }
-.tl_file a:hover
+.tl_file a:hover, .tl_file a:focus, .tl_file a:active
 {
 	color:#666966;
 }

@@ -89,7 +89,7 @@ class PageRegular extends Frontend
 		$this->Template->mainTitle = $objPage->rootTitle;
 		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 		$this->Template->title = $this->Template->mainTitle . ' - ' . $this->Template->pageTitle;
-		$this->Template->description = str_replace(array("\n", "\r"), array(' ' , ''), $objPage->description);
+		$this->Template->description = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), $objPage->description);
 
 		// Body onload and body classes
 		$this->Template->onload = trim($objLayout->onload);
@@ -413,6 +413,11 @@ class PageRegular extends Frontend
 		// Add MooTools templates
 		foreach ($arrMootools as $strTemplate)
 		{
+			if ($strTemplate == '')
+			{
+				return;
+			}
+
 			$objTemplate = new FrontendTemplate($strTemplate);
 
 			// Backwards compatibility

@@ -1,11 +1,11 @@
 
 <?php if ($this->header): ?>
-<div class="header<?php echo $this->hclass; ?>">
+<div class="header<?php echo $this->classHeader; ?>">
 <?php echo $this->firstDate; if ($this->firstDay): ?> <span class="day">(<?php echo $this->firstDay; ?>)</span><?php endif; ?> 
 </div>
 
 <?php endif; ?>
-<div class="event<?php echo $this->class; ?>">
+<div class="event<?php echo $this->classList; ?>">
 <h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
 <?php if ($this->time || $this->span): ?>
 <p class="time"><?php echo $this->time . $this->span; ?></p>

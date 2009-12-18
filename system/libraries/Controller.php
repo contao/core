@@ -254,7 +254,7 @@ abstract class Controller extends System
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
-		if (!strlen($varId))
+		if (!strlen($varId) || $varId == 0)
 		{
 			return '';
 		}
@@ -305,12 +305,12 @@ abstract class Controller extends System
 	 */
 	protected function getContentElement($intId)
 	{
-		$this->import('Database');
-
 		if (!strlen($intId) || $intId < 1)
 		{
 			return '';
 		}
+
+		$this->import('Database');
 
 		$objElement = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
 									 ->limit(1)
@@ -380,6 +380,11 @@ abstract class Controller extends System
 	 */
 	protected function getPageDetails($intId)
 	{
+		if (!strlen($intId) || $intId < 1)
+		{
+			return null;
+		}
+
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 						->limit(1)
 						->execute($intId);
@@ -720,16 +725,32 @@ abstract class Controller extends System
 		$intWidth = $width;
 		$intHeight = $height;
 
-		// Resize proportional
-		if ($mode == 'proportional' && $intWidth && $intHeight)
+		// Mode-specific changes
+		if ($intWidth && $intHeight)
 		{
-			if ($objFile->width >= $objFile->height)
+			switch ($mode)
 			{
-				unset($height, $intHeight);
-			}
-			else
-			{
-				unset($width, $intWidth);
+				case 'proportional':
+					if ($objFile->width >= $objFile->height)
+					{
+						unset($height, $intHeight);
+					}
+					else
+					{
+						unset($width, $intWidth);
+					}
+					break;
+
+				case 'box':
+					if (ceil($objFile->height * $width / $objFile->width) <= $intHeight)
+					{
+						unset($height, $intHeight);
+					}
+					else
+					{
+						unset($width, $intWidth);
+					}
+					break;
 			}
 		}
 
@@ -1538,6 +1559,13 @@ abstract class Controller extends System
 
 					// Sanitize path
 					$strFile = str_replace('../', '', $strFile);
+
+					// Check maximum image width
+					if ($GLOBALS['TL_CONFIG']['maxImageWidth'] > 0 && $width > $GLOBALS['TL_CONFIG']['maxImageWidth'])
+					{
+						$width = $GLOBALS['TL_CONFIG']['maxImageWidth'];
+						$height = null;
+					}
 
 					// Generate image
 					if (strlen($rel))

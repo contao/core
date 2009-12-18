@@ -53,11 +53,12 @@ $GLOBALS['TL_LANG']['CONFIRM']['css_exists'] = 'Das Stylesheet "%s" wurde import
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['new']    = array('Neues Stylesheet', 'Ein neues Stylesheet anlegen');
-$GLOBALS['TL_LANG']['tl_style_sheet']['show']   = array('Stylesheetdetails', 'Details des Stylesheets ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_style_sheet']['edit']   = array('Stylesheet bearbeiten', 'Stylesheet ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_style_sheet']['copy']   = array('Stylesheet duplizieren', 'Stylesheet ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_style_sheet']['delete'] = array('Stylesheet löschen', 'Stylesheet ID %s löschen');
-$GLOBALS['TL_LANG']['tl_style_sheet']['import'] = array('CSS-Import', 'Bestehende CSS-Dateien importieren');
+$GLOBALS['TL_LANG']['tl_style_sheet']['new']        = array('Neues Stylesheet', 'Ein neues Stylesheet anlegen');
+$GLOBALS['TL_LANG']['tl_style_sheet']['show']       = array('Stylesheetdetails', 'Details des Stylesheets ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_style_sheet']['edit']       = array('Stylesheet bearbeiten', 'Stylesheet ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'] = array('Stylesheet-Einstellungen bearbeiten', 'Einstellungen des Stylesheets ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_style_sheet']['copy']       = array('Stylesheet duplizieren', 'Stylesheet ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_style_sheet']['delete']     = array('Stylesheet löschen', 'Stylesheet ID %s löschen');
+$GLOBALS['TL_LANG']['tl_style_sheet']['import']     = array('CSS-Import', 'Bestehende CSS-Dateien importieren');
 
 ?>

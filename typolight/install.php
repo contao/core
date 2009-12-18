@@ -197,7 +197,7 @@ class InstallTool extends Controller
 
 			// Increase count
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
-			$this->Template->passwordError = 'Invalid password!';
+			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['invalidPass'];
 		}
 
 		// Check cookie
@@ -216,29 +216,31 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_install')
 		{
+			$strPassword = $this->Input->post('password', true);
+
 			// Do not allow special characters
-			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('password'))))
+			if (preg_match('/[#\(\)\/<=>]/', $strPassword))
 			{
-				$this->Template->passwordError = 'For security reasons you can not use these characters (=<>&/()#) here!';
+				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 			}
 
 			// Passwords do not match
-			elseif ($this->Input->post('password') != $this->Input->post('confirm_password'))
+			elseif ($strPassword != $this->Input->post('confirm_password', true))
 			{
-				$this->Template->passwordError = 'The passwords did not match!';
+				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 			}
 
 			// Password too short
-			elseif (utf8_strlen($this->Input->post('password')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+			elseif (utf8_strlen($strPassword) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
-				$this->Template->passwordError = 'A password has to be at least ' . $GLOBALS['TL_CONFIG']['minPasswordLength'] . ' characters long!';
+				$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 			}
 
 			// Save password
 			else
 			{
 				$strSalt = substr(md5(uniqid('', true)), 0, 23);
-				$strPassword = sha1($strSalt . $this->Input->post('password'));
+				$strPassword = sha1($strSalt . $strPassword);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 
 				$this->reload();
@@ -281,6 +283,10 @@ class InstallTool extends Controller
 			$this->outputAndExit();
 		}
 
+
+		/**
+		 * Database
+		 */
 		$strDrivers = '';
 		$arrDrivers = array('MySQL', 'MySQLi', 'Oracle', 'MSSQL', 'PostgreSQL', 'Sybase');
 
@@ -410,6 +416,72 @@ class InstallTool extends Controller
 
 
 		/**
+		 * Collations
+		 */
+		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')
+		{
+			if ($this->Input->post('dbCollation') != $GLOBALS['TL_CONFIG']['dbCollation'])
+			{
+				$arrTables = array();
+				$strCharset = strtolower($GLOBALS['TL_CONFIG']['dbCharset']);
+				$strCollation = $this->Input->post('dbCollation');
+
+				try
+				{
+					$this->Database->query("ALTER DATABASE {$GLOBALS['TL_CONFIG']['dbDatabase']} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+				}
+				catch (Exception $e)
+				{
+					// Ignore
+				}
+
+				$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
+										   ->execute($GLOBALS['TL_CONFIG']['dbDatabase']);
+
+				while ($objField->next())
+				{
+					if (!in_array($objField->TABLE_NAME, $arrTables))
+					{
+						$this->Database->query("ALTER TABLE {$objField->TABLE_NAME} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+						$arrTables[] = $objField->TABLE_NAME;
+					}
+
+					$strQuery = "ALTER TABLE {$objField->TABLE_NAME} CHANGE {$objField->COLUMN_NAME} {$objField->COLUMN_NAME} {$objField->COLUMN_TYPE} CHARACTER SET $strCharset COLLATE $strCollation";
+
+					if ($objField->IS_NULLABLE == 'YES')
+					{
+						$strQuery .= " NULL";
+					}
+					else
+					{
+						$strQuery .= " NOT NULL DEFAULT '{$objField->COLUMN_DEFAULT}'";
+					}
+
+					$this->Database->query($strQuery);
+				}
+
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['dbCollation']", $strCollation);
+			}
+
+			$this->reload();
+		}
+
+		$strOptions = '';
+		$objCollation = $this->Database->prepare("SELECT COLLATION_NAME AS name FROM INFORMATION_SCHEMA.COLLATIONS WHERE CHARACTER_SET_NAME=? ORDER BY COLLATION_NAME")
+									   ->execute($GLOBALS['TL_CONFIG']['dbCharset']);
+
+		while ($objCollation->next())
+		{
+			$strOptions .= sprintf('<option value="%s"%s>%s</option>',
+									$objCollation->name,
+									(($objCollation->name == $GLOBALS['TL_CONFIG']['dbCollation']) ? ' selected="selected"' : ''),
+									$objCollation->name);
+		}
+
+		$this->Template->collations = $strOptions;
+
+
+		/**
 		 * Update database tables
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tables')
@@ -420,7 +492,10 @@ class InstallTool extends Controller
 			{
 				foreach ($sql as $command)
 				{
-					$this->Database->execute($this->String->decodeEntities($command));
+					$strQuery = $this->String->decodeEntities($command);
+					$strQuery = str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $strQuery);
+
+					$this->Database->query($strQuery);
 				}
 			}
 
@@ -488,19 +563,19 @@ class InstallTool extends Controller
 			// Do not allow special characters
 			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
 			{
-				$this->Template->passwordError = 'For security reasons you can not use these characters (=<>&/()#) here!';
+				$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 			}
 
 			// Passwords do not match
 			elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
 			{
-				$this->Template->adminError = 'The passwords did not match!';
+				$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 			}
 
 			// Password too short
 			elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
-				$this->Template->adminError = 'A password has to be at least ' . $GLOBALS['TL_CONFIG']['minPasswordLength'] . ' characters long!';
+				$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 			}
 
 			// Save data

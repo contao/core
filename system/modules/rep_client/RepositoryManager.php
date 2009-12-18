@@ -123,7 +123,7 @@ class RepositoryManager extends RepositoryBackendModule
 						'color'	=> 'darkorange', 
 						'text'	=> 'notapproved', 
 						'par1'	=> 'TYPOlight',
-						'par2'	=> Repository::formatCoreVersion($tlversion)
+						'par2'	=> VERSION.'.'.BUILD
 					);
 					
 				unset($re);
@@ -285,6 +285,7 @@ class RepositoryManager extends RepositoryBackendModule
 			if ($rep->f_stage==$rep->inst_actions && count($enableActions)>0) {
 				// install!!!!
 				$act = false;
+				$actions = array();
 				$this->addActions($rep->f_extension, $states, $actions, $act);
 				if ($act=='ok') {
 					$rep->log = '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
@@ -430,9 +431,13 @@ class RepositoryManager extends RepositoryBackendModule
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
 			$this->import('String');
 			$sql = deserialize($this->Input->post('sql'));
-			if (is_array($sql))
-				foreach ($sql as $command)
-					$this->Database->execute($this->String->decodeEntities($command));
+			if (is_array($sql)) {
+				foreach ($sql as $command) {
+					$strQuery = $this->String->decodeEntities($command);
+					$strQuery = str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $strQuery);
+					$this->Database->query($strQuery);
+				} // foreach
+			} // if
 		} // if
 		$this->import('DatabaseInstaller');
 		$rep->dbUpdate = $this->DatabaseInstaller->makeSqlForm();
@@ -544,7 +549,6 @@ class RepositoryManager extends RepositoryBackendModule
 			$db->prepare("update `tl_repository_instfiles` set `flag`='D' where `pid`=? and `filetype`='F'")->execute($instId);
 			
 			foreach ($files as $file) {
-
 				// get relative file name
 				$filerel = ''; 
 				if (mb_substr($file->path, 0, 8)=='TL_ROOT/')
@@ -640,6 +644,7 @@ class RepositoryManager extends RepositoryBackendModule
 			if ($sum_ok>0) $rep->log .= '<div>'.sprintf($text['filesunchanged'],$sum_ok)."</div>\n";	
 			if ($sum_del>0) $rep->log .= '<div>'.sprintf($text['filesdeleted'],$sum_del)."</div>\n";	
 			$rep->log .= '<div class="color_green">'.$text['actionsuccess']."</div>\n";
+			$this->log('Extension "'. $aName .'" has been updated to version "'. Repository::formatVersion($aVersion) .'"', 'RepositoryManager::updateExtension()', TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .= 
@@ -776,6 +781,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$this->Files->delete($zipname);
 				throw $exc;
 			} // catch
+			$this->log('Extension "'. $aName .'" version "'. Repository::formatVersion($aVersion) .'" has been installed', 'RepositoryManager::installExtension()', TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .= 
@@ -865,6 +871,7 @@ class RepositoryManager extends RepositoryBackendModule
 				$db->prepare("delete from `tl_repository_installs` where `id`=?")->execute($instId);
 				$rep->log .= '<div class="color_green">'.$text['actionsuccess'].'</div>';
 			} // if
+			$this->log('Extension "'. $aName .'" has been uninstalled', 'RepositoryManager::uninstallExtension()', TL_REPOSITORY);
 		} // try
 		catch (Exception $exc) {
 			$rep->log .= 

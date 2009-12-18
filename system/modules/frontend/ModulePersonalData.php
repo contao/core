@@ -120,6 +120,13 @@ class ModulePersonalData extends Module
 		foreach ($this->editable as $field)
 		{
 			$arrData = &$GLOBALS['TL_DCA']['tl_member']['fields'][$field];
+
+			// Map checkboxWizard to regular checkbox widget
+			if ($arrData['inputType'] == 'checkboxWizard')
+			{
+				$arrData['inputType'] = 'checkbox';
+			}
+
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
@@ -129,7 +136,9 @@ class ModulePersonalData extends Module
 			}
 
 			$strGroup = $arrData['eval']['feGroup'];
+
 			$arrData['eval']['tableless'] = $this->tableless;
+			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
 

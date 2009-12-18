@@ -7,8 +7,8 @@
     <th class="head next"><a href="<?php echo $this->nextHref; ?>" title="<?php echo $this->nextTitle; ?>"><?php echo $this->nextLabel; ?></a></th>
   </tr>
   <tr>
-<?php foreach ($this->days as $day): ?>
-    <th class="label"><?php echo utf8_substr($day, 0, 2); ?></th>
+<?php foreach ($this->days as $i=>$day): ?>
+    <th class="label<?php if ($i == 0 || $i == 6) echo ' weekend'; ?>"><?php echo utf8_substr($day, 0, 2); ?></th>
 <?php endforeach; ?>
   </tr>
 </thead>

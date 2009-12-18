@@ -65,10 +65,11 @@ $GLOBALS['TL_LANG']['tl_faq_category']['deleteConfirm'] = 'Deleting category ID 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['new']    = array('New category', 'Create a new category');
-$GLOBALS['TL_LANG']['tl_faq_category']['show']   = array('Category details', 'Show the details of category ID %s');
-$GLOBALS['TL_LANG']['tl_faq_category']['edit']   = array('Edit category', 'Edit category ID %s');
-$GLOBALS['TL_LANG']['tl_faq_category']['copy']   = array('Copy category', 'Copy category ID %s');
-$GLOBALS['TL_LANG']['tl_faq_category']['delete'] = array('Delete category', 'Delete category ID %s');
+$GLOBALS['TL_LANG']['tl_faq_category']['new']        = array('New category', 'Create a new category');
+$GLOBALS['TL_LANG']['tl_faq_category']['show']       = array('Category details', 'Show the details of category ID %s');
+$GLOBALS['TL_LANG']['tl_faq_category']['edit']       = array('Edit category', 'Edit category ID %s');
+$GLOBALS['TL_LANG']['tl_faq_category']['editheader'] = array('Edit category settings', 'Edit the settings of category ID %s');
+$GLOBALS['TL_LANG']['tl_faq_category']['copy']       = array('Copy category', 'Copy category ID %s');
+$GLOBALS['TL_LANG']['tl_faq_category']['delete']     = array('Delete category', 'Delete category ID %s');
 
 ?>

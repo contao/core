@@ -30,6 +30,7 @@
 /**
  * Error messages
  */
+$GLOBALS['TL_LANG']['ERR']['form']    = 'Das Formular konnte nicht gesendet werden';
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Bitte beantworten Sie die Sicherheitsfrage!';
 
 

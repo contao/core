@@ -64,7 +64,7 @@ class ModuleNewsletterList extends Module
 			return $objTemplate->parse();
 		}
 
-		$this->nl_channels = deserialize($this->nl_channels, true);
+		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
 		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)

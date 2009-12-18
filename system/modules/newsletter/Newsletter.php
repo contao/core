@@ -188,11 +188,14 @@ class Newsletter extends Backend
 			if ($objRecipients->numRows < 1 || ($intStart + $intPages) >= $intTotal)
 			{
 				$this->Session->set('tl_newsletter_send', null);
-				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
 
 				// Deactivate rejected addresses
 				if (!empty($_SESSION['REJECTED_RECIPIENTS']))
 				{
+					$intRejected = count($_SESSION['REJECTED_RECIPIENTS']);
+					$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['rejected'], $intRejected);
+					$intTotal -= $intRejected;
+
 					foreach ($_SESSION['REJECTED_RECIPIENTS'] as $strRecipient)
 					{
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
@@ -201,6 +204,8 @@ class Newsletter extends Backend
 						$this->log('Recipient address ' . $strRecipient . ' was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_NEWSLETTER);
 					}
 				}
+
+				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
 
 				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
 				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
@@ -565,6 +570,12 @@ class Newsletter extends Backend
 	 */
 	public function synchronize($varValue, $objUser)
 	{
+		// Return if there is no user (e.g. upon registration)
+		if (is_null($objUser))
+		{
+			return $varValue;
+		}
+
 		$blnIsFrontend = true;
 
 		// If called from the back end, the second argument is a DataContainer object
@@ -598,7 +609,7 @@ class Newsletter extends Backend
 		$arrDelete = array_values(array_diff($arrChannel, $varValue));
 
 		// Delete existing recipients
-		if (count($arrDelete))
+		if (is_array($arrDelete) && count($arrDelete) > 0)
 		{
 			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid IN(" . implode(',', $arrDelete) . ") AND email=?")
 						   ->execute($objUser->email);
@@ -721,7 +732,7 @@ class Newsletter extends Backend
 	 * @param object
 	 * @return array
 	 */
-	public function getNewsletters($dc)
+	public function getNewsletters($objModule)
 	{
 		$objNewsletter = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel");
 
@@ -744,7 +755,7 @@ class Newsletter extends Backend
 		}
 
 		// Front end
-		$newsletters = deserialize($dc->newsletters, true);
+		$newsletters = deserialize($objModule->newsletters, true);
 
 		if (!is_array($newsletters) || count($newsletters) < 1)
 		{

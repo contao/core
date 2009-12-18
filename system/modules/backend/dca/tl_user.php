@@ -386,7 +386,7 @@ class tl_user extends Backend
 			case 'delete':
 				if ($this->Input->get('id') == $this->User->id)
 				{
-					$this->log('Attempt to delete own account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', 5);
+					$this->log('Attempt to delete own account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				// no break;
@@ -401,7 +401,7 @@ class tl_user extends Backend
 
 				if ($objUser->admin && $this->Input->get('act') != '')
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' administrator account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' administrator account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -611,20 +611,23 @@ class tl_user extends Backend
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
-		$objUser = $this->Database->prepare("SELECT id, dateAdded, lastLogin FROM tl_user WHERE id=?")
-								  ->limit(1)
-								  ->execute($dc->id);
-
-		if ($objUser->numRows < 1 || $objUser->dateAdded > 0)
+		if ($dc->activeRecord->dateAdded > 0)
 		{
 			return;
 		}
 
 		// Fallback solution for existing accounts
-		$time = ($objUser->lastLogin > 0) ? $objUser->lastLogin : time();
+		if ($dc->activeRecord->lastLogin > 0)
+		{
+			$time = $dc->activeRecord->lastLogin;
+		}
+		else
+		{
+			$time = time();
+		}
 
 		$this->Database->prepare("UPDATE tl_user SET dateAdded=? WHERE id=?")
-					   ->execute($time, $objUser->id);
+					   ->execute($time, $dc->id);
 	}
 
 
@@ -690,7 +693,7 @@ class tl_user extends Backend
 		// Check permissions
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
-			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', 5);
+			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

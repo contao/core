@@ -52,8 +52,8 @@ $GLOBALS['TL_LANG']['tl_page']['protected']      = array('Seite schützen', 'Den
 $GLOBALS['TL_LANG']['tl_page']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen dürfen auf die Seite zugreifen.');
 $GLOBALS['TL_LANG']['tl_page']['includeLayout']  = array('Ein Layout zuweisen', 'Der Seite und ihren Unterseiten ein Layout zuweisen.');
 $GLOBALS['TL_LANG']['tl_page']['layout']         = array('Seitenlayout', 'Seitenlayouts können mit dem Modul "Seitenlayouts" verwaltet werden.');
-$GLOBALS['TL_LANG']['tl_page']['includeCache']   = array('Cachen erlauben', 'Das Zwischenspeichern der Seite und ihrer Unterseiten erlauben.');
-$GLOBALS['TL_LANG']['tl_page']['cache']          = array('Cache-Speicherzeit', 'Nach Ablauf dieser Zeitdauer verfällt die zwischengespeicherte Version der Seite.');
+$GLOBALS['TL_LANG']['tl_page']['includeCache']   = array('Cachezeit festlegen', 'Eine Cachezeit für die Seite und ihre Unterseiten festlegen.');
+$GLOBALS['TL_LANG']['tl_page']['cache']          = array('Cachezeit', 'Nach Ablauf dieser Zeitdauer verfällt die zwischengespeicherte Version der Seite.');
 $GLOBALS['TL_LANG']['tl_page']['includeChmod']   = array('Zugriffsrechte zuweisen', 'Zugriffsrechte legen fest, was Backend-Benutzer mit der Seite tun dürfen.');
 $GLOBALS['TL_LANG']['tl_page']['cuser']          = array('Besitzer', 'Bitte wählen Sie einen Benutzer als Besitzer der Seite aus.');
 $GLOBALS['TL_LANG']['tl_page']['cgroup']         = array('Gruppe', 'Bitte wählen Sie eine Gruppe als Besitzer der Seite aus.');
@@ -92,19 +92,19 @@ $GLOBALS['TL_LANG']['tl_page']['publish_legend']   = 'Veröffentlichung';
 /**
  * Cache timeout labels
  */
-$GLOBALS['TL_LANG']['CACHE'][0]      = 'Kein Caching';
+$GLOBALS['TL_LANG']['CACHE'][0]      = '0 (nicht cachen)';
+$GLOBALS['TL_LANG']['CACHE'][5]      = '5 Sekunden';
 $GLOBALS['TL_LANG']['CACHE'][15]     = '15 Sekunden';
 $GLOBALS['TL_LANG']['CACHE'][30]     = '30 Sekunden';
-$GLOBALS['TL_LANG']['CACHE'][60]     = '1 Minute';
+$GLOBALS['TL_LANG']['CACHE'][60]     = '60 Sekunden';
 $GLOBALS['TL_LANG']['CACHE'][300]    = '5 Minuten';
 $GLOBALS['TL_LANG']['CACHE'][900]    = '15 Minuten';
 $GLOBALS['TL_LANG']['CACHE'][1800]   = '30 Minuten';
-$GLOBALS['TL_LANG']['CACHE'][3600]   = '1 Stunde';
+$GLOBALS['TL_LANG']['CACHE'][3600]   = '60 Minuten';
+$GLOBALS['TL_LANG']['CACHE'][10800]  = '3 Stunden';
 $GLOBALS['TL_LANG']['CACHE'][21600]  = '6 Stunden';
 $GLOBALS['TL_LANG']['CACHE'][43200]  = '12 Stunden';
-$GLOBALS['TL_LANG']['CACHE'][86400]  = '1 Tag';
-$GLOBALS['TL_LANG']['CACHE'][259200] = '3 Tage';
-$GLOBALS['TL_LANG']['CACHE'][604800] = '7 Tage';
+$GLOBALS['TL_LANG']['CACHE'][86400]  = '24 Stunden';
 
 
 /**

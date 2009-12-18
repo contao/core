@@ -110,5 +110,6 @@ $GLOBALS['TL_LANG']['tl_settings']['edit']    = 'Die lokale Konfiguration bearbe
 $GLOBALS['TL_LANG']['tl_settings']['both']    = 'Den Server- und den Browsercache verwenden';
 $GLOBALS['TL_LANG']['tl_settings']['server']  = 'Nur den Servercache verwenden';
 $GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Nur den Browsercache verwenden';
+$GLOBALS['TL_LANG']['tl_settings']['none']    = 'Cache deaktivieren';
 
 ?>

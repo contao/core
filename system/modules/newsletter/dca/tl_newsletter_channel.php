@@ -79,6 +79,13 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 				'href'                => 'table=tl_newsletter',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_newsletter_channel', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['copy'],
@@ -143,12 +150,14 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		'useSMTP' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['useSMTP'],
+			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
 		'smtpHost' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -156,18 +165,21 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'],
 			'default'                 => 25,
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'smtpUser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
 		),
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'],
+			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'hideInput'=>true, 'tl_class'=>'w50')
 		)
@@ -290,7 +302,7 @@ class tl_newsletter_channel extends Backend
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->newsletterp) || !in_array('delete', $this->User->newsletterp))))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channel ID "'.$this->Input->get('id').'"', 'tl_newsletter_channel checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channel ID "'.$this->Input->get('id').'"', 'tl_newsletter_channel checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -313,11 +325,27 @@ class tl_newsletter_channel extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channels', 'tl_newsletter_channel checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channels', 'tl_newsletter_channel checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
 		}
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || count(preg_grep('/^tl_newsletter_channel::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 
 

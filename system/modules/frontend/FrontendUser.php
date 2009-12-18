@@ -74,6 +74,12 @@ class FrontendUser extends User
 	 */
 	protected $strLoginPage;
 
+	/**
+	 * Groups
+	 * @var array
+	 */
+	protected $arrGroups;
+
 
 	/**
 	 * Initialize the object
@@ -111,6 +117,26 @@ class FrontendUser extends User
 
 
 	/**
+	 * Extend parent setter class and modify some parameters
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		switch ($strKey)
+		{
+			case 'allGroups':
+				$this->arrGroups = $varValue;
+				break;
+
+			default:
+				parent::__set($strKey, $varValue);
+				break;
+		}
+	}
+
+
+	/**
 	 * Extend parent getter class and modify some parameters
 	 * @param string
 	 * @return mixed
@@ -119,8 +145,8 @@ class FrontendUser extends User
 	{
 		switch ($strKey)
 		{
-			case 'groups':
-				return is_array($this->arrData['groups']) ? $this->arrData['groups'] : array($this->arrData['groups']);
+			case 'allGroups':
+				return $this->arrGroups;
 				break;
 
 			case 'loginPage':
@@ -150,6 +176,22 @@ class FrontendUser extends User
 
 
 	/**
+	 * Restore the original group membership
+	 * @param  boolean
+	 * @return int
+	 */
+	public function save($blnForceInsert=false)
+	{
+		$groups = $this->groups;
+		$this->arrData['groups'] = $this->arrGroups;
+		$return = parent::save($blnForceInsert);
+		$this->groups = $groups;
+
+		return $return;
+	}
+
+
+	/**
 	 * Set all user properties from a database record
 	 * @param object
 	 */
@@ -166,7 +208,14 @@ class FrontendUser extends User
 			}
 		}
 
-		$GLOBALS['TL_LANGUAGE'] = $this->language;
+		$this->arrGroups = $this->groups;
+
+		// Set language
+		if ($this->language != '')
+		{
+			$GLOBALS['TL_LANGUAGE'] = $this->language;
+		}
+
 		$GLOBALS['TL_USERNAME'] = $this->username;
 
 		// Make sure that groups is an array
@@ -177,30 +226,32 @@ class FrontendUser extends User
 
 		$time = time();
 
-		// Unset inactive groups
+		// Skip inactive groups
 		$objGroups = $this->Database->execute("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
 		$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 
 		// Get group login page
-		$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
-								   ->limit(1)
-								   ->execute($this->groups[0]);
-
-		if ($objGroup->numRows && $objGroup->redirect && $objGroup->jumpTo)
+		if ($this->groups[0] > 0)
 		{
-			$this->strLoginPage = $objGroup->jumpTo;
+			$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
+									   ->limit(1)
+									   ->execute($this->groups[0]);
+
+			if ($objGroup->numRows && $objGroup->redirect && $objGroup->jumpTo)
+			{
+				$this->strLoginPage = $objGroup->jumpTo;
+			}
 		}
 
+		// Restore session
 		if (is_array($this->session))
 		{
 			$this->Session->setData($this->session);
-			return;
 		}
-
-		$this->Database->prepare("UPDATE " . $this->strTable . " SET session='' WHERE id=?")
-					   ->execute($this->intId);
-
-		$this->session = array();
+		else
+		{
+			$this->session = array();
+		}
 	}
 }
 

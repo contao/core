@@ -78,11 +78,12 @@ $GLOBALS['TL_LANG']['tl_news_archive']['source_text']   = 'Full articles';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['new']      = array('New archive', 'Create a new archive');
-$GLOBALS['TL_LANG']['tl_news_archive']['show']     = array('Archive details', 'Show the details of archive ID %s');
-$GLOBALS['TL_LANG']['tl_news_archive']['edit']     = array('Edit archive', 'Edit archive ID %s');
-$GLOBALS['TL_LANG']['tl_news_archive']['copy']     = array('Copy archive', 'Copy archive ID %s');
-$GLOBALS['TL_LANG']['tl_news_archive']['delete']   = array('Delete archive', 'Delete archive ID %s');
-$GLOBALS['TL_LANG']['tl_news_archive']['comments'] = array('Comments', 'Show comments of archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['new']        = array('New archive', 'Create a new archive');
+$GLOBALS['TL_LANG']['tl_news_archive']['show']       = array('Archive details', 'Show the details of archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['edit']       = array('Edit archive', 'Edit archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['editheader'] = array('Edit archive settings', 'Edit the settings of archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['copy']       = array('Copy archive', 'Copy archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['delete']     = array('Delete archive', 'Delete archive ID %s');
+$GLOBALS['TL_LANG']['tl_news_archive']['comments']   = array('Comments', 'Show comments of archive ID %s');
 
 ?>

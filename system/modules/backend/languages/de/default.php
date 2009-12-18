@@ -171,7 +171,7 @@ $GLOBALS['TL_LANG']['MSC']['all_fields'] = array('Vorhandene Felder', 'Bitte wä
 $GLOBALS['TL_LANG']['MSC']['password']   = array('Passwort', 'Bitte geben Sie ein Passwort ein.');
 $GLOBALS['TL_LANG']['MSC']['confirm']    = array('Bestätigung', 'Bitte bestätigen Sie das Passwort.');
 $GLOBALS['TL_LANG']['MSC']['dateAdded']  = array('Hinzugefügt am', 'Hinzugefügt am: %s');
-$GLOBALS['TL_LANG']['MSC']['lastLogin']  = array('Letzter Anmeldung', 'Letzte Anmeldung: %s');
+$GLOBALS['TL_LANG']['MSC']['lastLogin']  = array('Letzte Anmeldung', 'Letzte Anmeldung: %s');
 
 
 /**
@@ -272,6 +272,8 @@ $GLOBALS['TL_LANG']['MSC']['mandatory']        = 'Pflichtfeld';
 $GLOBALS['TL_LANG']['MSC']['create']           = 'Anlegen';
 $GLOBALS['TL_LANG']['MSC']['delete']           = 'Löschen';
 $GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
-$GLOBALS['TL_LANG']['MSC']['crop']             = 'Beschneiden';
+$GLOBALS['TL_LANG']['MSC']['crop']             = 'Exaktes Format';
+$GLOBALS['TL_LANG']['MSC']['box']              = 'An Rahmen anpassen';
+$GLOBALS['TL_LANG']['MSC']['protected']        = 'geschützt';
 
 ?>

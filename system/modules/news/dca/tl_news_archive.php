@@ -80,6 +80,13 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 				'href'                => 'table=tl_news',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_news_archive', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['copy'],
@@ -424,7 +431,7 @@ class tl_news_archive extends Backend
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->newp) || !in_array('delete', $this->User->newp))))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -447,7 +454,7 @@ class tl_news_archive extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news archives', 'tl_news_archive checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news archives', 'tl_news_archive checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -493,6 +500,22 @@ class tl_news_archive extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || count(preg_grep('/^tl_news_archive::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 
 

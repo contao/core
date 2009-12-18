@@ -36,6 +36,7 @@ CREATE TABLE `tl_news` (
   `enclosure` blob NULL,
   `source` varchar(32) NOT NULL default '',
   `jumpTo` int(10) unsigned NOT NULL default '0',
+  `articleId` int(10) unsigned NOT NULL default '0',
   `url` varchar(255) NOT NULL default '',
   `target` char(1) NOT NULL default '',
   `cssClass` varchar(255) NOT NULL default '',

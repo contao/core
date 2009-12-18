@@ -78,11 +78,12 @@ $GLOBALS['TL_LANG']['tl_news_archive']['source_text']   = 'Komplette Beiträge';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['new']      = array('Neues Archiv', 'Ein neues Archiv erstellen');
-$GLOBALS['TL_LANG']['tl_news_archive']['show']     = array('Archivdetails', 'Die Details des Archivs ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_news_archive']['edit']     = array('Archiv bearbeiten', 'Archiv ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_news_archive']['copy']     = array('Archiv duplizieren', 'Archiv ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_news_archive']['delete']   = array('Archiv löschen', 'Archiv ID %s löschen');
-$GLOBALS['TL_LANG']['tl_news_archive']['comments'] = array('Kommentare', 'Kommentare des Archivs ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_news_archive']['new']        = array('Neues Archiv', 'Ein neues Archiv erstellen');
+$GLOBALS['TL_LANG']['tl_news_archive']['show']       = array('Archivdetails', 'Die Details des Archivs ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_news_archive']['edit']       = array('Archiv bearbeiten', 'Archiv ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_news_archive']['editheader'] = array('Archiv-Einstellungen bearbeiten', 'Einstellungen des Archivs ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_news_archive']['copy']       = array('Archiv duplizieren', 'Archiv ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_news_archive']['delete']     = array('Archiv löschen', 'Archiv ID %s löschen');
+$GLOBALS['TL_LANG']['tl_news_archive']['comments']   = array('Kommentare', 'Kommentare des Archivs ID %s anzeigen');
 
 ?>

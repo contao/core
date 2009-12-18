@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
 <title>TYPOlight Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
@@ -208,6 +208,24 @@
 </div>
 </form>
 <?php elseif ($this->dbConnection): ?>
+
+<h3><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></h3>
+
+<p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_install']['collationInfo']; ?></p>
+<p><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][1]; ?></p>
+
+<form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+<div class="tl_formbody">
+  <input type="hidden" name="FORM_SUBMIT" value="tl_collation" />
+  <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbCollation']; ?></h4>
+  <select name="dbCollation" id="dbCollation" class="tl_select"><?php echo $this->collations; ?></select>
+</div>
+<div class="tl_formbody_submit">
+  <div class="tl_submit_container">
+    <input type="submit" name="submit" alt="Update collation" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+  </div>
+</div>
+</form>
 
 <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
 

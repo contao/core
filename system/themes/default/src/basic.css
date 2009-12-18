@@ -76,7 +76,7 @@ a
 	color:#666966;
 	text-decoration:none;
 }
-a:hover
+a:hover, a:focus, a:active
 {
 	color:#8ab858;
 }

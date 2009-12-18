@@ -257,6 +257,9 @@ class StyleSheets extends Backend
 					elseif ($top == $bottom && $right == $left) $return .= '
 	margin:'.$top.(($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']).' '.$right.(($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']).';';
 
+					elseif ($top != $bottom && $right == $left) $return .= '
+	margin:'.$top.(($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']).' '.$right.(($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']).' '.$bottom.(($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']).';';
+
 					else $return .= '
 	margin:'.$top.(($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']).' '.$right.(($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']).' '.$bottom.(($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']).' '.$left.(($left == 'auto' || $left == 0) ? '' : $row['margin']['unit']).';';
 				}
@@ -291,6 +294,9 @@ class StyleSheets extends Backend
 
 					elseif ($top == $bottom && $right == $left) $return .= '
 	padding:'.$top.(($top == 0) ? '' : $row['padding']['unit']).' '.$right.(($right == 0) ? '' : $row['padding']['unit']).';';
+
+					elseif ($top != $bottom && $right == $left) $return .= '
+	padding:'.$top.(($top == 0) ? '' : $row['padding']['unit']).' '.$right.(($right == 0) ? '' : $row['padding']['unit']).' '.$bottom.(($bottom == 0) ? '' : $row['padding']['unit']).';';
 
 					else $return .= '
 	padding:'.$top.(($top == 0) ? '' : $row['padding']['unit']).' '.$right.(($right == 0) ? '' : $row['padding']['unit']).' '.$bottom.(($bottom == 0) ? '' : $row['padding']['unit']).' '.$left.(($left == 0) ? '' : $row['padding']['unit']).';';
@@ -815,6 +821,60 @@ class StyleSheets extends Backend
 								'top' => $varValue_1,
 								'right' => $varValue_2,
 								'bottom' => $varValue_1,
+								'left' => $varValue_2,
+								'unit' => ''
+							);
+							// Overwrite unit
+							foreach ($arrUnits as $strUnit)
+							{
+								if ($strUnit != '')
+								{
+									$arrSet[$strKey]['unit'] = $strUnit;
+									break;
+								}
+							}
+							break;
+
+						case 3:
+							if ($arrTRBL[0] == 'auto')
+							{
+								$varValue_1 = 'auto';
+							}
+							else
+							{
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+								$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+							}
+							if ($arrTRBL[1] == 'auto')
+							{
+								$varValue_2 = 'auto';
+							}
+							else
+							{
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[1]);
+								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
+							}
+							if ($arrTRBL[2] == 'auto')
+							{
+								$varValue_3 = 'auto';
+							}
+							else
+							{
+								$arrUnits[] = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[2]);
+								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
+							}
+							// Move to custom section if there are different units
+							if (count(array_filter(array_unique($arrUnits))) > 1)
+							{
+								$arrSet['alignment'] = '';
+								$arrSet['own'][] = $strDefinition;
+								break;
+							}
+							$arrSet[$strKey] = array
+							(
+								'top' => $varValue_1,
+								'right' => $varValue_2,
+								'bottom' => $varValue_3,
 								'left' => $varValue_2,
 								'unit' => ''
 							);

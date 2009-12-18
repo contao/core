@@ -72,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_article']['footer'] = 'Fußzeile';
 $GLOBALS['TL_LANG']['tl_article']['new']        = array('Neuer Artikel', 'Einen neuen Artikel anlegen');
 $GLOBALS['TL_LANG']['tl_article']['show']       = array('Artikeldetails', 'Details des Artikels ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_article']['edit']       = array('Artikel bearbeiten', 'Artikel ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_article']['editheader'] = array('Artikel-Einstellungen bearbeiten', 'Einstellungen des Artikels ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_article']['copy']       = array('Artikel duplizieren', 'Artikel ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_article']['cut']        = array('Artikel verschieben', 'Artikel ID %s verschieben');
 $GLOBALS['TL_LANG']['tl_article']['delete']     = array('Artikel löschen', 'Artikel ID %s löschen');

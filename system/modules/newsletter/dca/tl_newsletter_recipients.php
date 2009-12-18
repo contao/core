@@ -221,7 +221,7 @@ class tl_newsletter_recipients extends Backend
 			case 'create':
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -237,13 +237,13 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				if (!in_array($objRecipient->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -253,7 +253,7 @@ class tl_newsletter_recipients extends Backend
 			case 'overrideAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -262,7 +262,7 @@ class tl_newsletter_recipients extends Backend
 
 				if ($objRecipient->numRows < 1)
 				{
-					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -274,12 +274,12 @@ class tl_newsletter_recipients extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', 5);
+					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -378,7 +378,7 @@ class tl_newsletter_recipients extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', 'tl_newsletter_recipients toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', 'tl_newsletter_recipients toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

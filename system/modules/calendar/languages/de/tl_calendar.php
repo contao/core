@@ -78,10 +78,11 @@ $GLOBALS['TL_LANG']['tl_calendar']['source_text']   = 'Komplette Beiträge';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_calendar']['new']    = array('Neuer Kalender', 'Einen neuen Kalender erstellen');
-$GLOBALS['TL_LANG']['tl_calendar']['show']   = array('Kalenderdetails', 'Details des Kalenders ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_calendar']['edit']   = array('Kalender bearbeiten', 'Kalender ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_calendar']['copy']   = array('Kalender duplizieren', 'Kalender ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_calendar']['delete'] = array('Kalender löschen', 'Kalender ID %s löschen');
+$GLOBALS['TL_LANG']['tl_calendar']['new']        = array('Neuer Kalender', 'Einen neuen Kalender erstellen');
+$GLOBALS['TL_LANG']['tl_calendar']['show']       = array('Kalenderdetails', 'Details des Kalenders ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_calendar']['edit']       = array('Kalender bearbeiten', 'Kalender ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_calendar']['editheader'] = array('Kalender-Einstellungen bearbeiten', 'Einstellungen des Kalenders ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_calendar']['copy']       = array('Kalender duplizieren', 'Kalender ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_calendar']['delete']     = array('Kalender löschen', 'Kalender ID %s löschen');
 
 ?>

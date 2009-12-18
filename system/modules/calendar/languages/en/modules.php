@@ -36,10 +36,10 @@ $GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Manage events and disp
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['events']          = 'Events';
-$GLOBALS['TL_LANG']['FMD']['calendar']        = array('Calendar', 'adds a calendar to the page.');
-$GLOBALS['TL_LANG']['FMD']['eventreader']     = array('Event reader', 'shows the details of an event.');
-$GLOBALS['TL_LANG']['FMD']['eventlist']       = array('Event list', 'adds a list of events to the page.');
-$GLOBALS['TL_LANG']['FMD']['upcoming_events'] = array('Upcoming events', 'adds a list of upcoming events to the page.');
+$GLOBALS['TL_LANG']['FMD']['events']      = 'Events';
+$GLOBALS['TL_LANG']['FMD']['calendar']    = array('Calendar', 'adds a calendar to the page.');
+$GLOBALS['TL_LANG']['FMD']['eventlist']   = array('Event list', 'adds a list of events to the page.');
+$GLOBALS['TL_LANG']['FMD']['eventreader'] = array('Event reader', 'shows the details of an event.');
+$GLOBALS['TL_LANG']['FMD']['eventmenu']   = array('Event list menu', 'generates a navigation menu to browse the event list.');
 
 ?>

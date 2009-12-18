@@ -152,14 +152,11 @@ document.getElementById('repository_submit').style.display = 'none';
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-function repositoryGetScrollOffset()
-{
-	var top = this.pageYOffset || document.documentElement.scrollTop;
-	document.cookie = "REPOSITORY_PAGE_OFFSET=" + top + "; path=/";
+function repositoryGetScrollOffset() {
+  var top = this.pageYOffset || document.documentElement.scrollTop;
+  document.cookie = "REPOSITORY_PAGE_OFFSET=" + top + "; path=/";
 }
-<?php if ($rep->pageOffset >= 0): ?>  
 onload = self.scrollTo(0, <?php echo $rep->pageOffset; ?>);
-<?php endif; ?>
 //--><!]]>
 </script>
 <?php endif; ?>

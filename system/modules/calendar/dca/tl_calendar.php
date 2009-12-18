@@ -80,6 +80,13 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 				'href'                => 'table=tl_calendar_events',
 				'icon'                => 'edit.gif'
 			),
+			'editheader' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['editheader'],
+				'href'                => 'act=edit',
+				'icon'                => 'header.gif',
+				'button_callback'     => array('tl_calendar', 'editHeader')
+			),
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['copy'],
@@ -424,7 +431,7 @@ class tl_calendar extends Backend
 			case 'show':
 				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->calendarp) || !in_array('delete', $this->User->calendarp))))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar ID "'.$this->Input->get('id').'"', 'tl_calendar checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar ID "'.$this->Input->get('id').'"', 'tl_calendar checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -447,7 +454,7 @@ class tl_calendar extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' calendars', 'tl_calendar checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' calendars', 'tl_calendar checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -493,6 +500,22 @@ class tl_calendar extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return the edit header button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editHeader($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || count(preg_grep('/^tl_calendar::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 
 

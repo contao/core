@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->title; ?> :: TYPOlight Open Source CMS <?php echo VERSION; ?></title>
@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css" media="screen" />
-<!--[if IE]><link rel="stylesheet" type="text/css" href="plugins/calendar/css/iefixes.css" media="screen" /><![endif]-->
 <?php if ($this->isMac): ?>
 <link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>

@@ -52,7 +52,7 @@ $GLOBALS['TL_LANG']['tl_page']['protected']      = array('Protect page', 'Restri
 $GLOBALS['TL_LANG']['tl_page']['groups']         = array('Allowed member groups', 'These groups will be able to access the page.');
 $GLOBALS['TL_LANG']['tl_page']['includeLayout']  = array('Assign a layout', 'Assign a page layout to the page and its subpages.');
 $GLOBALS['TL_LANG']['tl_page']['layout']         = array('Page layout', 'You can manage page layouts with the "page layouts" module.');
-$GLOBALS['TL_LANG']['tl_page']['includeCache']   = array('Allow caching', 'Allow caching of the page and its subpages.');
+$GLOBALS['TL_LANG']['tl_page']['includeCache']   = array('Set cache timeout', 'Set a cache timeout value for the page and its subpages.');
 $GLOBALS['TL_LANG']['tl_page']['cache']          = array('Cache timeout', 'After this period, the cached version of the page will expire.');
 $GLOBALS['TL_LANG']['tl_page']['includeChmod']   = array('Assign access rights', 'Access rights determine what back end users can do with the page.');
 $GLOBALS['TL_LANG']['tl_page']['cuser']          = array('Owner', 'Please select a user as the owner of the page.');
@@ -92,19 +92,19 @@ $GLOBALS['TL_LANG']['tl_page']['publish_legend']   = 'Publish settings';
 /**
  * Cache timeout labels
  */
-$GLOBALS['TL_LANG']['CACHE'][0]      = 'No caching';
+$GLOBALS['TL_LANG']['CACHE'][0]      = '0 (do not cache)';
+$GLOBALS['TL_LANG']['CACHE'][5]      = '5 seconds';
 $GLOBALS['TL_LANG']['CACHE'][15]     = '15 seconds';
 $GLOBALS['TL_LANG']['CACHE'][30]     = '30 seconds';
-$GLOBALS['TL_LANG']['CACHE'][60]     = '1 minute';
+$GLOBALS['TL_LANG']['CACHE'][60]     = '60 seconds';
 $GLOBALS['TL_LANG']['CACHE'][300]    = '5 minutes';
 $GLOBALS['TL_LANG']['CACHE'][900]    = '15 minutes';
 $GLOBALS['TL_LANG']['CACHE'][1800]   = '30 minutes';
-$GLOBALS['TL_LANG']['CACHE'][3600]   = '1 hour';
+$GLOBALS['TL_LANG']['CACHE'][3600]   = '60 minutes';
+$GLOBALS['TL_LANG']['CACHE'][10800]  = '3 hours';
 $GLOBALS['TL_LANG']['CACHE'][21600]  = '6 hours';
 $GLOBALS['TL_LANG']['CACHE'][43200]  = '12 hours';
-$GLOBALS['TL_LANG']['CACHE'][86400]  = '1 day';
-$GLOBALS['TL_LANG']['CACHE'][259200] = '3 days';
-$GLOBALS['TL_LANG']['CACHE'][604800] = '7 days';
+$GLOBALS['TL_LANG']['CACHE'][86400]  = '24 hours';
 
 
 /**

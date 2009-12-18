@@ -200,7 +200,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => array('proportional', 'crop'),
+			'options'                 => array('proportional', 'crop', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -332,12 +332,8 @@ class tl_faq extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT question FROM tl_faq WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->question);
+			$varValue = standardize($dc->activeRecord->question);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_faq WHERE alias=?")
@@ -434,7 +430,7 @@ class tl_faq extends Backend
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
-			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', 'tl_faq toggleVisibility', 5);
+			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', 'tl_faq toggleVisibility', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');
 		}
 

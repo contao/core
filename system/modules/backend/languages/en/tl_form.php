@@ -64,10 +64,11 @@ $GLOBALS['TL_LANG']['tl_form']['config_legend'] = 'Form configuration';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_form']['new']    = array('New form', 'Create a new form');
-$GLOBALS['TL_LANG']['tl_form']['show']   = array('Form details', 'Show the details of form ID %s');
-$GLOBALS['TL_LANG']['tl_form']['edit']   = array('Edit form', 'Edit form ID %s');
-$GLOBALS['TL_LANG']['tl_form']['copy']   = array('Duplicate form', 'Duplicate form ID %s');
-$GLOBALS['TL_LANG']['tl_form']['delete'] = array('Delete form', 'Delete form ID %s');
+$GLOBALS['TL_LANG']['tl_form']['new']        = array('New form', 'Create a new form');
+$GLOBALS['TL_LANG']['tl_form']['show']       = array('Form details', 'Show the details of form ID %s');
+$GLOBALS['TL_LANG']['tl_form']['edit']       = array('Edit form', 'Edit form ID %s');
+$GLOBALS['TL_LANG']['tl_form']['editheader'] = array('Edit form settings', 'Edit the settings of form ID %s');
+$GLOBALS['TL_LANG']['tl_form']['copy']       = array('Duplicate form', 'Duplicate form ID %s');
+$GLOBALS['TL_LANG']['tl_form']['delete']     = array('Delete form', 'Delete form ID %s');
 
 ?>

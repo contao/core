@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['tl_newsletter_channel']['smtp_legend']  = 'SMTP-Einstellung
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['new']        = array('Neuer Verteiler', 'Einen neuen Verteiler erstellen');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['show']       = array('Verteilerdetails', 'Details des Verteilers ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['edit']       = array('Verteiler bearbeiten', 'Verteiler ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['editheader'] = array('Verteiler-Einstellungen bearbeiten', 'Einstellungen des Verteilers ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Verteiler duplizieren', 'Verteiler ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['delete']     = array('Verteiler löschen', 'Verteiler ID %s löschen');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['recipients'] = array('Abonnenten bearbeiten', 'Abonnenten des Verteilers ID %s bearbeiten');

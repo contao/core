@@ -182,7 +182,9 @@ class BackendUser extends User
 		// Force redirect via JavaScript on Ajax requests
 		if ($this->Input->post('isAjax'))
 		{
+			header('Content-Type: text/javascript');
 			echo '<script type="text/javascript">location.replace("' . $strRedirect . '")</script>';
+
 			exit;
 		}
 
@@ -387,16 +389,25 @@ class BackendUser extends User
 			}
 		}
 
+		// Restore session
 		if (is_array($this->session))
 		{
 			$this->Session->setData($this->session);
-			return;
+		}
+		else
+		{
+			$this->session = array();
 		}
 
-		$this->Database->prepare("UPDATE " . $this->strTable . " SET session='' WHERE id=?")
-					   ->execute($this->intId);
-
-		$this->session = array();
+		// Make sure pagemounts and filemounts are set!
+		if (!is_array($this->pagemounts))
+		{
+			$this->pagemounts = array();
+		}
+		if (!is_array($this->filemounts))
+		{
+			$this->filemounts = array();
+		}
 	}
 
 

@@ -1,5 +1,5 @@
 <?php echo $this->doctype; ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->language; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>

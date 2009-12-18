@@ -43,9 +43,11 @@ $GLOBALS['TL_LANG']['tl_news']['addEnclosure'] = array('Add enclosures', 'Add on
 $GLOBALS['TL_LANG']['tl_news']['enclosure']    = array('Enclosures', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_news']['source']       = array('Redirect target', 'Here you can override the default redirect target and link to an internal or external page instead.');
 $GLOBALS['TL_LANG']['tl_news']['default']      = array('Use default', 'By clicking the "read more …" button, visitors will be redirected to the default page of the news archive.');
-$GLOBALS['TL_LANG']['tl_news']['internal']     = array('Internal page', 'By clicking the "read more …" button, visitors will be redirected to an internal page.');
-$GLOBALS['TL_LANG']['tl_news']['external']     = array('External website', 'By clicking the "read more …" button, visitors will be redirected to an external website.');
+$GLOBALS['TL_LANG']['tl_news']['internal']     = array('Page', 'By clicking the "read more …" button, visitors will be redirected to a page.');
+$GLOBALS['TL_LANG']['tl_news']['article']      = array('Article', 'By clicking the "read more …" button, visitors will be redirected to an article.');
+$GLOBALS['TL_LANG']['tl_news']['external']     = array('External URL', 'By clicking the "read more …" button, visitors will be redirected to an external website.');
 $GLOBALS['TL_LANG']['tl_news']['jumpTo']       = array('Redirect page', 'Please choose the page to which visitors will be redirected when clicking the news item.');
+$GLOBALS['TL_LANG']['tl_news']['articleId']    = array('Article', 'Please choose the article to which visitors will be redirected when clicking the news item.');
 $GLOBALS['TL_LANG']['tl_news']['cssClass']     = array('CSS class', 'Here you can enter one or more classes.');
 $GLOBALS['TL_LANG']['tl_news']['noComments']   = array('Disable comments', 'Do not allow comments for this particular news item.');
 $GLOBALS['TL_LANG']['tl_news']['featured']     = array('Feature item', 'Show the news item in a featured news list.');
@@ -78,6 +80,6 @@ $GLOBALS['TL_LANG']['tl_news']['copy']       = array('Copy article', 'Copy news 
 $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Move article', 'Move news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish news article ID %s');
-$GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit news archive', 'Edit the header of the news archive');
+$GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit archive settings', 'Edit the archive settings');
 
 ?>

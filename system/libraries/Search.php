@@ -480,7 +480,7 @@ class Search extends System
 		}
 
 		// Limit results to a particular set of pages
-		if (is_array($arrPid) && count($arrPid))
+		if (is_array($arrPid) && count($arrPid) > 0)
 		{
 			$strQuery .= " AND tl_search_index.pid IN(SELECT id FROM tl_search WHERE pid IN(" . implode(',', $arrPid) . "))";
 		}

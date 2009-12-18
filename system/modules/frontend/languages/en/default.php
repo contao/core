@@ -30,6 +30,7 @@
 /**
  * Error messages
  */
+$GLOBALS['TL_LANG']['ERR']['form']    = 'The form could not be sent';
 $GLOBALS['TL_LANG']['ERR']['captcha'] = 'Please answer the security question!';
 
 

@@ -159,6 +159,13 @@ class ModuleRegistration extends Module
 		foreach ($this->editable as $field)
 		{
 			$arrData = $GLOBALS['TL_DCA']['tl_member']['fields'][$field];
+
+			// Map checkboxWizard to regular checkbox widget
+			if ($arrData['inputType'] == 'checkboxWizard')
+			{
+				$arrData['inputType'] = 'checkbox';
+			}
+
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
@@ -168,6 +175,8 @@ class ModuleRegistration extends Module
 			}
 
 			$arrData['eval']['tableless'] = $this->tableless;
+			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
+
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
 
 			$objWidget->storeValues = true;
@@ -321,10 +330,15 @@ class ModuleRegistration extends Module
 	protected function createNewUser($arrData)
 	{
 		$arrData['tstamp'] = time();
-		$arrData['groups'] = $this->reg_groups;
 		$arrData['login'] = $this->reg_allowLogin;
 		$arrData['activation'] = md5(uniqid('', true));
 		$arrData['dateAdded'] = $arrData['tstamp'];
+
+		// Set default groups
+		if (!array_key_exists('groups', $arrData))
+		{
+			$arrData['groups'] = $this->reg_groups;
+		}
 
 		// Disable account
 		$arrData['disable'] = 1;
@@ -349,6 +363,39 @@ class ModuleRegistration extends Module
 
 					case 'link':
 						$strConfirmation = str_replace($strChunk, $this->Environment->base . $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&' : '?') . 'token=' . $arrData['activation'], $strConfirmation);
+						break;
+
+					// HOOK: support newsletter subscriptions
+					case 'channel':
+					case 'channels':
+						if (!in_array('newsletter', $this->Config->getActiveModules()))
+						{
+							break;
+						}
+
+						// Make sure newsletter is an array
+						if (!is_array($arrData['newsletter']))
+						{
+							if ($arrData['newsletter'] != '')
+							{
+								$arrData['newsletter'] = array($arrData['newsletter']);
+							}
+							else
+							{
+								$arrData['newsletter'] = array();
+							}
+						}
+
+						// Replace the wildcard
+						if (count($arrData['newsletter']) > 0)
+						{
+							$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(". implode(',', $arrData['newsletter']) .")");
+							$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
+						}
+						else
+						{
+							$strConfirmation = str_replace($strChunk, '', $strConfirmation);
+						}
 						break;
 
 					default:

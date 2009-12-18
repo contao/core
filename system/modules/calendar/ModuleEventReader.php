@@ -70,7 +70,7 @@ class ModuleEventReader extends Events
 			return '';
 		}
 
-		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar, true));
+		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar));
 
 		// Return if there are no calendars
 		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
@@ -148,6 +148,17 @@ class ModuleEventReader extends Events
 			if ($objEvent->recurrences > 0)
 			{
 				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->repeatEnd));
+			}
+		}
+
+		// Override the default image size
+		if ($this->imgSize != '')
+		{
+			$size = deserialize($this->imgSize);
+
+			if ($size[0] > 0 || $size[1] > 0)
+			{
+				$objEvent->size = $this->imgSize;
 			}
 		}
 

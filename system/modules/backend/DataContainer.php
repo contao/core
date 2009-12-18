@@ -98,6 +98,12 @@ class DataContainer extends Backend
 	 */
 	protected $noReload = false;
 
+	/**
+	 * Active record
+	 * @param object
+	 */
+	protected $objActiveRecord;
+
 
 	/**
 	 * Return an object property
@@ -130,6 +136,10 @@ class DataContainer extends Backend
 
 			case 'palette':
 				return $this->strPalette;
+				break;
+
+			case 'activeRecord':
+				return $this->objActiveRecord;
 				break;
 
 			default:
@@ -178,7 +188,7 @@ class DataContainer extends Backend
 		if ($this->strTable == 'tl_content' && $this->strField == 'tableitems')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
-			$xlabel .= ' ' . $this->generateImage(($this->Session->get('disable_cell_resizer') ? 'resize_.gif' : 'resize.gif'), $GLOBALS['TL_LANG']['tl_content']['resizeCells'][0], 'id="cellResizer" title="'.specialchars($GLOBALS['TL_LANG']['tl_content']['resizeCells'][1]).'" class="toggleWrap" onclick="AjaxRequest.toggleCellResizer(this);"');
+			$xlabel .= ' ' . $this->generateImage('demagnify.gif', 'Demagnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', 'Magnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
 		}
 
 		// Add list import wizard
@@ -211,7 +221,7 @@ class DataContainer extends Backend
 			return '';
 		}
 
-		$arrData['eval']['required'] = (!strlen($this->varValue) && $arrData['eval']['mandatory']) ? true : false;
+		$arrData['eval']['required'] = ($this->varValue == '' && $arrData['eval']['mandatory']) ? true : false;
 		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
 
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);

@@ -64,7 +64,14 @@ class ModuleListing extends Module
 			return $objTemplate->parse();
 		}
 
-		if ($this->Input->get('id') && !strlen($this->list_info))
+		// Return if table or fields are missing
+		if ($this->list_fields == '' || $this->list_table == '')
+		{
+			return '';
+		}
+
+		// Disable details page
+		if ($this->Input->get('id') && $this->list_info == '')
 		{
 			return '';
 		}

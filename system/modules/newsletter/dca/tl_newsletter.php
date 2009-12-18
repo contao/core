@@ -283,7 +283,7 @@ class tl_newsletter extends Backend
 			case 'create':
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to create newsletters in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Not enough permissions to create newsletters in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -292,7 +292,7 @@ class tl_newsletter extends Backend
 			case 'copy':
 				if (!in_array($this->Input->get('pid'), $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" to channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" to channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
@@ -306,13 +306,13 @@ class tl_newsletter extends Backend
 
 				if ($objChannel->numRows < 1)
 				{
-					$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				if (!in_array($objChannel->pid, $root))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -324,7 +324,7 @@ class tl_newsletter extends Backend
 			case 'copyAll':
 				if (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_news checkPermission', 5);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -333,7 +333,7 @@ class tl_newsletter extends Backend
 
 				if ($objChannel->numRows < 1)
 				{
-					$this->log('Invalid newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Invalid newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
@@ -345,7 +345,7 @@ class tl_newsletter extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				if ($this->Input->get('key') == 'send')
@@ -356,19 +356,19 @@ class tl_newsletter extends Backend
 
 					if ($objChannel->numRows < 1)
 					{
-						$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', 5);
+						$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
 						$this->redirect('typolight/main.php?act=error');
 					}
 
 					if (!in_array($objChannel->pid, $root))
 					{
-						$this->log('Not enough permissions to send newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', 5);
+						$this->log('Not enough permissions to send newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
 						$this->redirect('typolight/main.php?act=error');
 					}
 				}
 				elseif (!in_array($id, $root))
 				{
-					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', 5);
+					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -412,7 +412,7 @@ class tl_newsletter extends Backend
 				continue;
 			}
 
-			if (!preg_match('@^https?://|ftp:|mailto:|#@i', $strLink))
+			if (!preg_match('@^(https?://|ftp:|mailto:|#)@i', $strLink))
 			{
 				$strLink = $this->Environment->base . (($strLink != '/') ? $strLink : '');
 			}
@@ -437,12 +437,8 @@ class tl_newsletter extends Backend
 		// Generate alias if there is none
 		if (!strlen($varValue))
 		{
-			$objTitle = $this->Database->prepare("SELECT subject FROM tl_newsletter WHERE id=?")
-									   ->limit(1)
-									   ->execute($dc->id);
-
 			$autoAlias = true;
-			$varValue = standardize($objTitle->subject);
+			$varValue = standardize($dc->activeRecord->subject);
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_newsletter WHERE alias=?")

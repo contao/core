@@ -272,6 +272,8 @@ $GLOBALS['TL_LANG']['MSC']['mandatory']        = 'Mandatory field';
 $GLOBALS['TL_LANG']['MSC']['create']           = 'Create';
 $GLOBALS['TL_LANG']['MSC']['delete']           = 'Delete';
 $GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
-$GLOBALS['TL_LANG']['MSC']['crop']             = 'Crop image';
+$GLOBALS['TL_LANG']['MSC']['crop']             = 'Exact dimensions';
+$GLOBALS['TL_LANG']['MSC']['box']              = 'Fit the box';
+$GLOBALS['TL_LANG']['MSC']['protected']        = 'protected';
 
 ?>

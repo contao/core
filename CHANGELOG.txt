@@ -2,6 +2,35 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
+Version 2.8.RC2 (2009-12-19)
+----------------------------
+- Added image resize mode "fit the box" (#1219)
+- Added an option to link news items to articles (#1252)
+- Added a "form could not be sent" warning to the page title (#1242)
+- Added an option to change the table collation in the install tool (#1202)
+- Added image dimensions to the file manager (#1287)
+- Improved FancyUpload to support basic authentication workarounds (#1288)
+- Reworked the event list module and added a event list menu (#1177, #1227)
+- Reworked the regular expression to validate e-mail addresses (#1230)
+- Replaced the table wizard magnifier with a more user-friendly solution (#1212)
+- Fixed issue with template editor showing all files (#1172, #1176)
+- Fixed issue with Repository not parsing textual version numbers (#1182)
+- Fixed issue with deleting the currently selected page breaking the breadcrumb menu (#1183)
+- Fixed issue with onsubmit_callbacks not being able to load the modified record (#1180)
+- Fixed issue with details page only showing the first selected value (#1196)
+- Fixed issue with automatic articles being created on root and redirect pages (#1194)
+- Fixed issue with SwiftMailer cache directory and the Safe Mode Hack (#1207)
+- Fixed issue with CheckboxWizard widgets not being available in the front end (#1211)
+- Fixed issue with style sheet import not supporting shortened definitions (#1169)
+- Fixed issue with newsletter subscriptions upon registration (#1216)
+- Fixed issue with empty articles being created on duplicated pages (#1226)
+- Fixed issue with password fields always being mandatory (#1264)
+- Fixed issue with stlye sheet categories not being duplicated correctly (#1224)
+- Fixed issue with function parseDate() not being binary-safe (#1238)
+- Fixed issue with popup calendar not working in Safari 4 (#1240)
+- Fixed issue with regular users not being able to create new pages (#1279)
+- Fixed a few minor issues
+
 Version 2.8.RC1 (2009-11-21)
 ----------------------------
 - Updated SyntaxHighlighter to version 2.0.320
