@@ -254,7 +254,7 @@ abstract class Controller extends System
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
-		if (!strlen($varId) || $varId == 0)
+		if (!$varId)
 		{
 			return '';
 		}
