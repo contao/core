@@ -1,9 +1,0 @@
-/* Calendar: a Javascript class for Mootools that adds accessible and unobtrusive date pickers to your form elements <http://electricprism.com/aeron/calendar> */
-/* Default CSS for Calendar (navigation: 1), Copyright (c) 2007 Aeron Glemann <http://electricprism.com/aeron>, MIT Style License. */
-
-/* IE fixes */
-div.calendar th { height:17px; }
-div.calendar td { height:19px; }
-div.calendar caption span a { top:2px; }
-div.calendar caption span { height:18px; }
-button.calendar { margin-left:3px; }
