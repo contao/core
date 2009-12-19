@@ -113,6 +113,9 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
+			$_SESSION['TL_INSTALL_AUTH'] = '';
+			$_SESSION['TL_INSTALL_EXPIRE'] = 0;
+
 			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 			// Password is correct but not yet salted
@@ -126,7 +129,10 @@ class InstallTool extends Controller
 			// Set cookie
 			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
 			{
-				$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+				$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+
+				$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
 
 				$this->reload();
@@ -138,14 +144,20 @@ class InstallTool extends Controller
 		}
 
 		// Check cookie
-		if (!$this->Input->cookie('TL_INSTALL_AUTH'))
+		if (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
 
 		// Renew cookie
-		$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+		else
+		{
+			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+
+			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+		}
 
 
 		/**
