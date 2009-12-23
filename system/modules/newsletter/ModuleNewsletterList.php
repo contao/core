@@ -81,7 +81,7 @@ class ModuleNewsletterList extends Module
 	 */
 	protected function compile()
 	{
-		$objNewsletter = $this->Database->execute("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel, (SELECT jumpTo FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS jumpTo FROM tl_newsletter WHERE pid IN(" . implode(',', $this->nl_channels) . ")" . (!BE_USER_LOGGED_IN ? " AND sent=1" : "") . " ORDER BY date DESC");
+		$objNewsletter = $this->Database->execute("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel, (SELECT jumpTo FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS jumpTo FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ")" . (!BE_USER_LOGGED_IN ? " AND sent=1" : "") . " ORDER BY date DESC");
 
 		$arrJumpTo = array();
 		$arrNewsletter = array();

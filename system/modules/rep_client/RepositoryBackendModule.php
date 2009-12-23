@@ -66,9 +66,6 @@ class RepositoryBackendModule extends BackendModule
 	 */
 	public function generate()
 	{
-		if (!extension_loaded('soap')) {
-			return '<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
-		} // if
 		$this->rep = new stdClass();
 		$rep = &$this->rep;
 		$rep->username	= $this->BackendUser->username;
@@ -85,7 +82,7 @@ class RepositoryBackendModule extends BackendModule
 					break;
 				} // if
 			} // if
-		} // foreach			
+		} // foreach
 		return str_replace(array('{{', '}}'), array('[{]', '[}]'), parent::generate());
 	} // generate
 

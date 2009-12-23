@@ -240,11 +240,11 @@ class DB_Mysqli_Statement extends Database_Statement
 		switch ($strType)
 		{
 			case 'SELECT':
-				$this->strQuery .= sprintf(' LIMIT %s,%s', $intOffset, $intRows);
+				$this->strQuery .= sprintf(' LIMIT %d,%d', $intOffset, $intRows);
 				break;
 
 			default:
-				$this->strQuery .= sprintf(' LIMIT %s', $intRows);
+				$this->strQuery .= sprintf(' LIMIT %d', $intRows);
 				break;
 		}
 	}

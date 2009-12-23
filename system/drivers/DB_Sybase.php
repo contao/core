@@ -209,7 +209,7 @@ class DB_Sybase_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$this->strQuery .= sprintf('SET ROWCOUNT %s; %s; SET ROWCOUNT 0;', ($intOffset + $intRows), $this->strQuery);
+		$this->strQuery .= sprintf('SET ROWCOUNT %d; %s; SET ROWCOUNT 0;', ($intOffset + $intRows), $this->strQuery);
 	}
 
 

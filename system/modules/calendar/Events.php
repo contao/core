@@ -70,7 +70,7 @@ abstract class Events extends Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCalendar = $this->Database->execute("SELECT id, protected, groups FROM tl_calendar WHERE id IN(" . implode(',', $arrCalendars) . ")");
+		$objCalendar = $this->Database->execute("SELECT id, protected, groups FROM tl_calendar WHERE id IN(" . implode(',', array_map('intval', $arrCalendars)) . ")");
 		$arrCalendars = array();
 
 		while ($objCalendar->next())

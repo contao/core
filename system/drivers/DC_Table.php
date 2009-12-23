@@ -2586,7 +2586,7 @@ window.addEvent(\'domready\', function()
 		// Delete all new but incomplete records (tstamp=0)
 		if (is_array($new_records[$this->strTable]) && count($new_records[$this->strTable]) > 0)
 		{
-			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE id IN(" . implode(',', $new_records[$this->strTable]) . ") AND tstamp=0");
+			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE id IN(" . implode(',', array_map('intval', $new_records[$this->strTable])) . ") AND tstamp=0");
 
 			if ($objStmt->affectedRows > 0)
 			{
@@ -3251,7 +3251,7 @@ window.addEvent(\'domready\', function()
 
 			if (is_array($this->root) && count($this->root) > 0)
 			{
-				$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', $this->root) . ")";
+				$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
@@ -3444,7 +3444,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 		if (is_array($this->root) && count($this->root) > 0)
 		{
-			$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', $this->root) . ")";
+			$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 		}
 
 		if (is_array($orderBy) && strlen($orderBy[0]))
@@ -4289,7 +4289,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			if (is_array($this->root) && count($this->root) > 0)
 			{
-				$arrProcedure[] = "id IN(" . implode(',', $this->root) . ")";
+				$arrProcedure[] = "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
 			$objFields = $this->Database->prepare("SELECT DISTINCT(" . $field . ") FROM " . $this->strTable . ((is_array($arrProcedure) && strlen($arrProcedure[0])) ? ' WHERE ' . implode(' AND ', $arrProcedure) : ''))

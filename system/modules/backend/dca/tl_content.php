@@ -844,7 +844,7 @@ class tl_content extends Backend
 			return $arrAlias;
 		}
 
-		$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_unique($arrPids)) .") AND c.id!=? ORDER BY a.title, c.sorting")
+		$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
 								   ->execute($this->Input->get('id'));
 
 		while ($objAlias->next())
@@ -896,7 +896,7 @@ class tl_content extends Backend
 			return $arrAlias;
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
 								   ->execute($dc->id);
 
 		if ($objAlias->numRows)
@@ -981,7 +981,7 @@ class tl_content extends Backend
 			return $arrArticle;
 		}
 
-		$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") ORDER BY parent, sorting");
+		$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
 
 		while ($objArticle->next())
 		{

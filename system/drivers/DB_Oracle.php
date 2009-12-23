@@ -231,8 +231,8 @@ class DB_Oracle_Statement extends Database_Statement
 								$strFields,
 								$strFields,
 								$this->strQuery,
-								($intOffset + $intRows),
-								$intOffset);
+								intval($intOffset + $intRows),
+								intval($intOffset));
 	}
 
 

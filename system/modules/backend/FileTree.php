@@ -78,10 +78,40 @@ class FileTree extends Widget
 	 */
 	protected function validator($varInput)
 	{
+		$this->import('BackendUser', 'User');
+
 		if (!$this->Input->post($this->strName.'_save'))
 		{
 			$this->mandatory = false;
 			$this->blnSubmitInput = false;
+		}
+
+		// Check path
+		elseif (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
+		{
+			$rgxp = '/^'. preg_quote($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], '/') .'\//i';
+
+			foreach ((array) $varInput as $strFile)
+			{
+				if (!preg_match($rgxp, $strFile))
+				{
+					$this->addError('File or folder "'.$strFile.'" is not mounted!');
+					$this->log('File or folder "'.$strFile.'" is not mounted (hacking attempt)', 'FileTree validator()', TL_ERROR);
+				}
+			}
+		}
+
+		// Check filemounts
+		elseif (!$this->User->isAdmin)
+		{
+			foreach ((array) $varInput as $strFile)
+			{
+				if (!$this->User->hasAccess($strFile, 'filemounts'))
+				{
+					$this->addError('File or folder "'.$strFile.'" is not mounted!');
+					$this->log('File or folder "'.$strFile.'" is not mounted (hacking attempt)', 'FileTree validator()', TL_ERROR);
+				}
+			}
 		}
 
 		return parent::validator($varInput);

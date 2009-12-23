@@ -117,7 +117,7 @@ class ModuleSubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $this->nl_channels) . ") ORDER BY title");
+		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") ORDER BY title");
 
 		// Get titles
 		while ($objChannel->next())
@@ -256,7 +256,7 @@ class ModuleSubscribe extends Module
 					   ->execute($arrValues);
 
 		// Get channels
-		$objChannel = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $arrChannels) . ")");
+		$objChannel = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrChannels)) . ")");
 
 		// Activation e-mail
 		$objEmail = new Email();

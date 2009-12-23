@@ -389,7 +389,7 @@ class ModuleRegistration extends Module
 						// Replace the wildcard
 						if (count($arrData['newsletter']) > 0)
 						{
-							$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(". implode(',', $arrData['newsletter']) .")");
+							$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(". implode(',', array_map('intval', $arrData['newsletter'])) .")");
 							$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
 						}
 						else

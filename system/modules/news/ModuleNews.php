@@ -58,7 +58,7 @@ abstract class ModuleNews extends Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objArchive = $this->Database->execute("SELECT id, protected, groups FROM tl_news_archive WHERE id IN(" . implode(',', $arrArchives) . ")");
+		$objArchive = $this->Database->execute("SELECT id, protected, groups FROM tl_news_archive WHERE id IN(" . implode(',', array_map('intval', $arrArchives)) . ")");
 		$arrArchives = array();
 
 		while ($objArchive->next())

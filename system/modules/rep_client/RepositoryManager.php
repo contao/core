@@ -48,6 +48,15 @@ class RepositoryManager extends RepositoryBackendModule
 	 */
 	public function generate()
 	{
+		if ($this->Input->get('update') != 'database' && !extension_loaded('soap')) {
+			$this->loadLanguageFile('tl_repository');
+			$theme = new RepositoryBackendTheme();
+			return '
+<div id="tl_buttons" class="buttonwrapper">
+	'. $theme->createMainButton('dbcheck16', $this->createUrl(array('update'=>'database')), $GLOBALS['TL_LANG']['tl_repository']['updatedatabase']) .' 
+</div>
+<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
+		} // if
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler
 			array('',				'repository_mgrlist',		'listinsts'	),
@@ -429,15 +438,15 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$this->import('String');
 			$sql = deserialize($this->Input->post('sql'));
 			if (is_array($sql)) {
-				foreach ($sql as $command) {
-					$strQuery = $this->String->decodeEntities($command);
-					$strQuery = str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $strQuery);
-					$this->Database->query($strQuery);
+				foreach ($sql as $key) {
+					if (isset($_SESSION['sql_commands'][$key])) {
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+					} // if
 				} // foreach
 			} // if
+			$_SESSION['sql_commands'] = array();
 		} // if
 		$this->import('DatabaseInstaller');
 		$rep->dbUpdate = $this->DatabaseInstaller->makeSqlForm();

@@ -611,7 +611,7 @@ class Newsletter extends Backend
 		// Delete existing recipients
 		if (is_array($arrDelete) && count($arrDelete) > 0)
 		{
-			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid IN(" . implode(',', $arrDelete) . ") AND email=?")
+			$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid IN(" . implode(',', array_map('intval', $arrDelete)) . ") AND email=?")
 						   ->execute($objUser->email);
 		}
 

@@ -208,7 +208,7 @@ class DB_Mssql_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$this->strQuery .= preg_replace('/(^\s*SELECT\s+(DISTINCT|DISTINCTROW)?)/i', '\\1 TOP ' . ($intRows + $intOffset), $this->strQuery);
+		$this->strQuery .= preg_replace('/(^\s*SELECT\s+(DISTINCT|DISTINCTROW)?)/i', '\\1 TOP ' . intval($intRows + $intOffset), $this->strQuery);
 	}
 
 

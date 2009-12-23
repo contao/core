@@ -349,7 +349,7 @@ class PageRegular extends Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && count($newsfeeds) > 0)
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE id IN(" . implode(',', $newsfeeds) . ")");
+			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
 
 			while($objFeeds->next())
 			{
@@ -361,7 +361,7 @@ class PageRegular extends Frontend
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && count($calendarfeeds) > 0)
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE id IN(" . implode(',', $calendarfeeds) . ")");
+			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
 
 			while($objFeeds->next())
 			{

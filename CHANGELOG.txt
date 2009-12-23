@@ -2,7 +2,7 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
-Version 2.8.RC2 (2009-12-19)
+Version 2.8.RC2 (2009-12-23)
 ----------------------------
 - Added image resize mode "fit the box" (#1219)
 - Added an option to link news items to articles (#1252)
@@ -105,6 +105,10 @@ Version 2.8.RC1 (2009-11-21)
 - Fixed issue with maximum front end width not being applied everywherer (#828)
 - Fixed issue with friendly names not supporting commas (#1109)
 - Fixed some minor issues
+
+Version 2.7.6 (2009-12-19)
+--------------------------
+- Fixed TYPOlight install tool vulnerability
 
 Version 2.7.5 (2009-10-04)
 --------------------------

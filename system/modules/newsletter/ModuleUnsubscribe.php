@@ -110,7 +110,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $this->nl_channels) . ") ORDER BY title");
+		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") ORDER BY title");
 
 		// Get titles
 		while ($objChannel->next())
@@ -175,11 +175,11 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Remove subscriptions
-		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', $arrRemove) . ")")
+		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', array_map('intval', $arrRemove)) . ")")
 					   ->execute($varInput);
 
 		// Get channels
-		$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', $arrRemove) . ")");
+		$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrRemove)) . ")");
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity

@@ -48,6 +48,9 @@ class RepositoryCatalog extends RepositoryBackendModule
 	 */
 	public function generate()
 	{
+		if (!extension_loaded('soap')) {
+			return '<p class="tl_empty">SOAP extension not loaded (configure PHP with --enable-soap).</p>';
+		} // if
 		$this->actions = array(
 			//	  act[0]			strTemplate					compiler
 			array('',				'repository_catlist',		'listExtensions' ),

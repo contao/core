@@ -603,7 +603,7 @@ class tl_news extends Backend
 			return $arrAlias;
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_unique($arrPids)) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
 								   ->execute($dc->id);
 
 		if ($objAlias->numRows)

@@ -86,7 +86,7 @@ class ModuleFaqList extends Module
 	 */
 	protected function compile()
 	{
-		$objFaq = $this->Database->execute("SELECT tl_faq.id AS id, pid, alias, question, title, jumpTo FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', $this->faq_categories) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
+		$objFaq = $this->Database->execute("SELECT tl_faq.id AS id, pid, alias, question, title, jumpTo FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
 
 		if ($objFaq->numRows < 1)
 		{

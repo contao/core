@@ -164,7 +164,7 @@ class InstallTool extends Controller
 		/**
 		 * Check the websitePath
 		 */
-		if (!preg_match('/^' . preg_quote(TL_PATH, '/') . '\/typolight\/install\.php/', $this->Environment->requestUri) && !is_null($GLOBALS['TL_CONFIG']['websitePath']))
+		if (!preg_match('/^' . preg_quote(TL_PATH, '/') . '\/typolight\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri) && !is_null($GLOBALS['TL_CONFIG']['websitePath']))
 		{
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
 			$this->reload();
@@ -176,6 +176,9 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
+			$_SESSION['TL_INSTALL_AUTH'] = '';
+			$_SESSION['TL_INSTALL_EXPIRE'] = 0;
+
 			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 			// Password is correct but not yet salted
@@ -189,7 +192,9 @@ class InstallTool extends Controller
 			// Set cookie
 			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
 			{
-				$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+				$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+				$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
 
 				$this->reload();
@@ -201,14 +206,19 @@ class InstallTool extends Controller
 		}
 
 		// Check cookie
-		if (!$this->Input->cookie('TL_INSTALL_AUTH'))
+		if (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
 
 		// Renew cookie
-		$this->setCookie('TL_INSTALL_AUTH', md5((!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id()), (time() + 300), $GLOBALS['TL_CONFIG']['websitePath']);
+		else
+		{
+			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+		}
 
 
 		/**
@@ -288,7 +298,32 @@ class InstallTool extends Controller
 		 * Database
 		 */
 		$strDrivers = '';
-		$arrDrivers = array('MySQL', 'MySQLi', 'Oracle', 'MSSQL', 'PostgreSQL', 'Sybase');
+		$arrDrivers = array();
+
+		if (function_exists('mysql_connect'))
+		{
+			$arrDrivers[] = 'MySQL';
+		}
+		if (class_exists('mysqli', false))
+		{
+			$arrDrivers[] = 'MySQLi';
+		}
+		if (function_exists('oci_connect'))
+		{
+			$arrDrivers[] = 'Oracle';
+		}
+		if (function_exists('mssql_connect'))
+		{
+			$arrDrivers[] = 'MSSQL';
+		}
+		if (function_exists('pg_connect'))
+		{
+			$arrDrivers[] = 'PostgreSQL';
+		}
+		if (function_exists('sybase_connect'))
+		{
+			$arrDrivers[] = 'Sybase';
+		}
 
 		foreach ($arrDrivers as $strDriver)
 		{
@@ -329,7 +364,6 @@ class InstallTool extends Controller
 
 			$this->Template->dbConnection = true;
 		}
-
 		catch (Exception $e)
 		{
 			$this->Template->dbConnection = false;
@@ -363,10 +397,10 @@ class InstallTool extends Controller
 				$this->Database->execute("UPDATE tl_member SET dateAdded=tstamp, currentLogin=tstamp");
 				$this->Database->execute("UPDATE tl_user SET dateAdded=tstamp, currentLogin=tstamp");
 				$this->Database->execute("UPDATE tl_layout SET mootools='moo_accordion' WHERE mootools='moo_default'");
-				$this->Database->execute("UPDATE tl_module SET cal_format='next_365' WHERE type='upcoming_events'");
 				$this->Database->execute("UPDATE tl_comments SET source='tl_content'");
 				$this->Database->execute("UPDATE tl_faq_category SET title=headline");
-
+				$this->Database->execute("UPDATE tl_module SET cal_format='next_365', type='eventlist' WHERE type='upcoming_events'");
+				
 				// Update layouts
 				$objLayout = $this->Database->execute("SELECT id, mootools FROM tl_layout");
 
@@ -490,15 +524,16 @@ class InstallTool extends Controller
 
 			if (is_array($sql))
 			{
-				foreach ($sql as $command)
+				foreach ($sql as $key)
 				{
-					$strQuery = $this->String->decodeEntities($command);
-					$strQuery = str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $strQuery);
-
-					$this->Database->query($strQuery);
+					if (isset($_SESSION['sql_commands'][$key]))
+					{
+						$this->Database->query(str_replace('DEFAULT CHARSET=utf8;', 'DEFAULT CHARSET=utf8 COLLATE ' . $GLOBALS['TL_CONFIG']['dbCollation'] . ';', $_SESSION['sql_commands'][$key]));
+					}
 				}
 			}
 
+			$_SESSION['sql_commands'] = array();
 			$this->reload();
 		}
 
@@ -512,9 +547,10 @@ class InstallTool extends Controller
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tutorial')
 		{
 			$this->Template->emptySelection = true;
+			$strTemplate = basename($this->Input->post('template'));
 
 			// Template selected
-			if (strlen($this->Input->post('template')) && file_exists(TL_ROOT . '/templates/' . $this->Input->post('template')))
+			if ($strTemplate != '' && file_exists(TL_ROOT . '/templates/' . $strTemplate))
 			{
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['exampleWebsite']", time());
 				$tables = preg_grep('/^tl_/i', $this->Database->listTables());
@@ -529,7 +565,7 @@ class InstallTool extends Controller
 				}
 
 				// Import data
-				$file = file(TL_ROOT . '/templates/' . $this->Input->post('template'));
+				$file = file(TL_ROOT . '/templates/' . $strTemplate);
 				$sql = preg_grep('/^INSERT /', $file);
 
 				foreach ($sql as $query)
@@ -558,50 +594,54 @@ class InstallTool extends Controller
 		/**
 		 * Create an admin user
 		 */
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_admin')
-		{
-			// Do not allow special characters
-			if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
-			{
-				$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
-			}
-
-			// Passwords do not match
-			elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
-			{
-				$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
-			}
-
-			// Password too short
-			elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
-			{
-				$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
-			}
-
-			// Save data
-			elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email', true)) && strlen($this->Input->post('username')))
-			{
-				$strSalt = substr(md5(uniqid('', true)), 0, 23);
-				$strPassword = sha1($strSalt . $this->Input->post('pass'));
-
-				$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-							   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt, 1, 1, 1, 1);
-
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
-				$this->reload();
-			}
-
-			$this->Template->adminName = $this->Input->post('name');
-			$this->Template->adminEmail = $this->Input->post('email', true);
-			$this->Template->adminUser = $this->Input->post('username');
-		}
-
 		try
 		{
-			$objAdmin = $this->Database->prepare("SELECT * FROM tl_user WHERE admin=?")->limit(1)->execute(1);
-			$this->Template->adminCreated = $objAdmin->numRows ? true : false;
-		}
+			$objAdmin = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_user WHERE admin=1");
 
+			if ($objAdmin->total > 0)
+			{
+				$this->Template->adminCreated = true;
+			}
+
+			// Create an admin account
+			elseif ($this->Input->post('FORM_SUBMIT') == 'tl_admin')
+			{
+				// Do not allow special characters
+				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
+				{
+					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
+				}
+
+				// Passwords do not match
+				elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
+				{
+					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
+				}
+
+				// Password too short
+				elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
+				{
+					$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
+				}
+
+				// Save data
+				elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email', true)) && strlen($this->Input->post('username')))
+				{
+					$strSalt = substr(md5(uniqid('', true)), 0, 23);
+					$strPassword = sha1($strSalt . $this->Input->post('pass'));
+
+					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
+								   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt, 1, 1, 1, 1);
+
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
+					$this->reload();
+				}
+
+				$this->Template->adminName = $this->Input->post('name');
+				$this->Template->adminEmail = $this->Input->post('email', true);
+				$this->Template->adminUser = $this->Input->post('username');
+			}
+		}
 		catch (Exception $e)
 		{
 			$this->Template->adminCreated = false;
@@ -638,6 +678,8 @@ class InstallTool extends Controller
 			return '';
 		}
 
+		$_SESSION['sql_commands'] = array();
+
 		$arrOperations = array
 		(
 			'CREATE'        => $GLOBALS['TL_LANG']['tl_install']['CREATE'],
@@ -667,9 +709,12 @@ class InstallTool extends Controller
 				// Fields
 				foreach ($sql_command[$command] as $vv)
 				{
+					$key = md5($vv);
+					$_SESSION['sql_commands'][$key] = $vv;
+
 					$return .= '
     <tr>
-      <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
+      <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
       <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
     </tr>';
 				}

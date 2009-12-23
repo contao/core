@@ -68,6 +68,8 @@ class DatabaseInstaller extends Controller
 			return '';
 		}
 
+		$_SESSION['sql_commands'] = array();
+
 		$arrOperations = array
 		(
 			'CREATE'        => 'Create new tables',
@@ -97,9 +99,12 @@ class DatabaseInstaller extends Controller
 				// Fields
 				foreach ($sql_command[$command] as $vv)
 				{
+					$key = md5($vv);
+					$_SESSION['sql_commands'][$key] = $vv;
+
 					$return .= '
   <tr>
-    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.specialchars($vv).'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
+    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
     <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
   </tr>';
 				}
