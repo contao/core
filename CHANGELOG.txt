@@ -13,6 +13,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with system messages not being shown (#1365)
 - Fixed issue with back end top links not working correctly (#1358)
 - Fixed issue with basic entities not being restored in the website title (#1359)
+- Fixed issue with style sheets not being updated correctly (#1351)
 - Fixed some minor issues 
 
 Version 2.8.RC2 (2009-12-23)

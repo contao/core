@@ -505,6 +505,11 @@ class tl_style extends Backend
 	 */
 	public function updateStyleSheet()
 	{
+		if ($this->Input->post('isAjax'))
+		{
+			return;
+		}
+
 		$this->import('StyleSheets');
 		$this->StyleSheets->updateStyleSheet(CURRENT_ID);
 	}
