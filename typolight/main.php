@@ -113,7 +113,6 @@ class Main extends Backend
 		// Create template object
 		$objTemplate = new BackendTemplate('be_welcome');
 
-		$objTemplate->messages = false;
 		$objTemplate->arrShortcuts = $GLOBALS['TL_LANG']['XPL']['shortcuts'];
 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
@@ -122,7 +121,6 @@ class Main extends Backend
 		if (!empty($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
-			$objTemplate->messages = true;
 		}
 
 		// Check for tasks
@@ -160,19 +158,16 @@ class Main extends Backend
 			if ($tasksReg > 0)
 			{
 				$objTemplate->tasksCur = sprintf($GLOBALS['TL_LANG']['MSC']['tasksCur'], $tasksReg);
-				$objTemplate->messages = true;
 			}
 
 			if ($tasksNew > 0)
 			{
 				$objTemplate->tasksNew = sprintf($GLOBALS['TL_LANG']['MSC']['tasksNew'], $tasksNew);
-				$objTemplate->messages = true;
 			}
 
 			if ($tasksDue > 0)
 			{
 				$objTemplate->tasksDue = sprintf($GLOBALS['TL_LANG']['MSC']['tasksDue'], $tasksDue);
-				$objTemplate->messages = true;
 			}
 		}
 

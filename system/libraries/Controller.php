@@ -212,9 +212,9 @@ abstract class Controller extends System
 			}
 
 			$this->import('FrontendUser', 'User');
-			$arrGroups = deserialize($objModule->groups);
+			$groups = deserialize($objModule->groups);
 	
-			if (is_array($arrGroups) && count(array_intersect($this->User->groups, $arrGroups)) < 1)
+			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
 			{
 				return '';
 			}
@@ -336,9 +336,9 @@ abstract class Controller extends System
 			}
 
 			$this->import('FrontendUser', 'User');
-			$arrGroups = deserialize($objElement->groups);
-	
-			if (is_array($arrGroups) && count(array_intersect($this->User->groups, $arrGroups)) < 1)
+			$groups = deserialize($objElement->groups);
+
+			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
 			{
 				return '';
 			}
@@ -476,6 +476,7 @@ abstract class Controller extends System
 			$objPage->rootId = $objParentPage->id;
 			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
+			$objPage->rootLanguage = $objParentPage->language;
 
 			// Set admin e-mail
 			if ($objParentPage->adminEmail != '')
@@ -492,11 +493,11 @@ abstract class Controller extends System
 			$objPage->rootId = 0;
 			$objPage->rootTitle = $GLOBALS['TL_CONFIG']['websiteTitle'];
 			$objPage->domain = '';
+			$objPage->rootLanguage = $objPage->language;
 
 			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
-		$objPage->rootLanguage = $objParentPage->language;
 		$objPage->trail = array_reverse($trail);
 
 		// Overwrite the global date and time format
@@ -2375,6 +2376,7 @@ abstract class Controller extends System
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
 		{
+			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' ' . $imgSize[3];
 		}
 

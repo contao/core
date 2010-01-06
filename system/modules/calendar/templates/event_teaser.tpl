@@ -14,9 +14,7 @@
 <?php if ($this->time || $this->span): ?>
 <p class="time"><?php echo $this->time . $this->span; ?></p>
 <?php endif; ?>
-<div class="ce_text">
-<?php echo $this->teaser; ?>
-</div>
+<p class="teaser"><?php echo $this->teaser; ?></p>
 <?php if ($this->details): ?>
 <p class="more"><a href="<?php echo $this->link; ?>" title="<?php echo $this->readMore; ?>"<?php echo $this->target; ?>><?php echo $this->more; ?> <span class="invisible"><?php echo $this->title; ?></span></a></p>
 <?php endif; ?>

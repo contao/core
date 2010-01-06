@@ -103,12 +103,12 @@ class ModuleSearch extends Module
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && $this->Input->get('id')) ? $this->Input->get('id') : false;
 		$objFormTemplate->action = ampersand($this->Environment->request);
 
-		// Reference page
-		if ($this->rootPage > 0)
+		// Redirect page
+		if ($this->jumpTo > 0)
 		{
 			$objTargetPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 											->limit(1)
-											->execute($this->rootPage);
+											->execute($this->jumpTo);
 
 			if ($objTargetPage->numRows)
 			{
@@ -123,10 +123,21 @@ class ModuleSearch extends Module
 		// Execute search if there are keywords
 		if (strlen($strKeywords) && $strKeywords != '*')
 		{
-			global $objPage;
+			// Reference page
+			if ($this->rootPage > 0)
+			{
+				$intRootId = $this->rootPage;
+				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page');
+				array_unshift($arrPages, $this->rootPage);
+			}
 
-			$arrResult = null;
-			$arrPages = $this->getChildRecords($objPage->rootId, 'tl_page');
+			// Website root
+			else
+			{
+				global $objPage;
+				$intRootId = $objPage->rootId;
+				$arrPages = $this->getChildRecords($objPage->rootId, 'tl_page');
+			}
 
 			// Return if there are no pages
 			if (!is_array($arrPages) || count($arrPages) < 1)
@@ -135,7 +146,8 @@ class ModuleSearch extends Module
 				return;
 			}
 
-			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$objPage->rootId.$this->fuzzy);
+			$arrResult = null;
+			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$intRootId.$this->fuzzy);
 			$query_starttime = microtime(true);
 
 			// Load cached result
@@ -186,14 +198,15 @@ class ModuleSearch extends Module
 						if (!FE_USER_LOGGED_IN)
 						{
 							unset($arrResult[$k]);
-							continue;
 						}
-
-						$v['groups'] = deserialize($v['groups']);
-
-						if (is_array($v['groups']) && count(array_intersect($this->User->groups, $v['groups'])) < 1)
+						else
 						{
-							unset($arrResult[$k]);
+							$groups = deserialize($v['groups']);
+
+							if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+							{
+								unset($arrResult[$k]);
+							}
 						}
 					}
 				}

@@ -618,7 +618,8 @@ class tl_calendar_events extends Backend
 	 */
 	public function listEvents($arrRow)
 	{
-		$key = $arrRow['published'] ? 'published' : 'unpublished';
+		$time = time();
+		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
 		$span = Calendar::calculateSpan($arrRow['startTime'], $arrRow['endTime']);
 
 		if ($span > 0)

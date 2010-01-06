@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_cache'] = array
 	'default'                 => 3600,
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => array(0, 15, 30, 60, 300, 900, 1800, 3600, 21600, 43200, 86400, 259200, 604800),
+	'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400),
 	'eval'                    => array('tl_class'=>'w50'),
 	'reference'               => &$GLOBALS['TL_LANG']['CACHE']
 );

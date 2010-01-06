@@ -117,10 +117,10 @@ class ModuleCustomnav extends Module
 			return;
 		}
 
-		// Determine the layout template
-		if (!strlen($this->navigationTpl))
+		// Set default template
+		if ($this->navigationTpl == '')
 		{
-			$this->navigationTpl = (file_exists(TL_ROOT . '/system/modules/frontend/templates/mod_navigation_items.tpl') ? 'mod_navigation_items' : 'nav_default');
+			$this->navigationTpl = 'nav_default';
 		}
 
 		$objTemplate = new BackendTemplate($this->navigationTpl);
@@ -133,7 +133,7 @@ class ModuleCustomnav extends Module
 			$_groups = deserialize($arrPage['groups']);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$arrPage['protected'] || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
+			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected)
 			{
 				// Get href
 				switch ($arrPage['type'])

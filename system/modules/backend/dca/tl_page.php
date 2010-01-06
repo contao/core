@@ -350,7 +350,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 		),
 		'includeLayout' => array
 		(
@@ -813,8 +813,15 @@ class tl_page extends Backend
 			return;
 		}
 
-		$objPage = $this->getPageDetails($this->Input->get('pid'));
-		$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
+		if ($this->Input->get('pid') == 0)
+		{
+			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $GLOBALS['TL_LANGUAGE'];
+		}
+		else
+		{
+			$objPage = $this->getPageDetails($this->Input->get('pid'));
+			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
+		}
 	}
 
 

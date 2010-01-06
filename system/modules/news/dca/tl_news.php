@@ -571,7 +571,8 @@ class tl_news extends Backend
 	 */
 	public function listNewsArticles($arrRow)
 	{
-		$key = $arrRow['published'] ? 'published' : 'unpublished';
+		$time = time();
+		$key = ($arrRow['published'] && ($arrRow['start'] == '' || $arrRow['start'] < $time) && ($arrRow['stop'] == '' || $arrRow['stop'] > $time)) ? 'published' : 'unpublished';
 		$date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']);
 
 		return '
@@ -592,19 +593,27 @@ class tl_news extends Backend
 		$arrPids = array();
 		$arrAlias = array();
 
-		foreach ($this->User->pagemounts as $id)
+		if (!$this->User->isAdmin)
 		{
-			$arrPids[] = $id;
-			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
-		}
+			foreach ($this->User->pagemounts as $id)
+			{
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+			}
 
-		if (empty($arrPids))
+			if (empty($arrPids))
+			{
+				return $arrAlias;
+			}
+
+			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting")
+									   ->execute($dc->id);
+		}
+		else
 		{
-			return $arrAlias;
+			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article ORDER BY parent, sorting")
+									   ->execute($dc->id);
 		}
-
-		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
-								   ->execute($dc->id);
 
 		if ($objAlias->numRows)
 		{

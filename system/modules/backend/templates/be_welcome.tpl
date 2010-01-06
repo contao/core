@@ -2,7 +2,6 @@
 <h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
 
 <div id="tl_soverview">
-<?php if ($this->messages): ?>
 
 <div id="tl_messages">
   <h2><?php echo $this->systemMessages; ?></h2>
@@ -22,7 +21,6 @@
   <p class="tl_update"><?php echo $this->lastLogin; ?></p>
 <?php endif; ?>
 </div>
-<?php endif; ?>
 
 <table cellspacing="0" cellpadding="0" id="tl_shortcuts" summary="Shortcut overview">
 <?php foreach ($this->arrShortcuts as $arrShortcut): ?>

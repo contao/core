@@ -2,6 +2,17 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
+Version 2.8.0 (2010--)
+--------------------------
+- Fixed issue with empty alias drop-down menus
+- Fixed issue with feed names not being mandatory (#1317)
+- Fixed issue with page language not being set correctly (#1326)
+- Fixed issue with collations drop-down not being MySQL 4.1 compatible (#1336)
+- Fixed issue with comments module not supporting multiple forms (#1332)
+- Fixed inconsistent access permissions (#1319)
+- Fixed issue with system messages not being shown (#1365)
+- Fixed some minor issues 
+
 Version 2.8.RC2 (2009-12-23)
 ----------------------------
 - Added image resize mode "fit the box" (#1219)
@@ -25,7 +36,7 @@ Version 2.8.RC2 (2009-12-23)
 - Fixed issue with newsletter subscriptions upon registration (#1216)
 - Fixed issue with empty articles being created on duplicated pages (#1226)
 - Fixed issue with password fields always being mandatory (#1264)
-- Fixed issue with stlye sheet categories not being duplicated correctly (#1224)
+- Fixed issue with style sheet categories not being duplicated correctly (#1224)
 - Fixed issue with function parseDate() not being binary-safe (#1238)
 - Fixed issue with popup calendar not working in Safari 4 (#1240)
 - Fixed issue with regular users not being able to create new pages (#1279)

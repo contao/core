@@ -75,7 +75,7 @@ abstract class Frontend extends Controller
 	{
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
-			return strlen($this->Input->get('id')) ? $this->Input->get('id') : null;
+			return is_numeric($this->Input->get('id')) ? $this->Input->get('id') : null;
 		}
 
 		if (!strlen($this->Environment->request))

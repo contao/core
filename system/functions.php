@@ -295,9 +295,18 @@ function standardize($varValue)
  */
 function deserialize($varValue, $blnForceArray=false)
 {
-	if (!is_string($varValue) || !strlen(trim($varValue)))
+	if (is_array($varValue))
 	{
-		return ($blnForceArray && !is_array($varValue)) ? array($varValue) : $varValue;
+		return $varValue;
+	}
+
+	if (!is_string($varValue))
+	{
+		return $blnForceArray ? (is_null($varValue) ? array() : array($varValue)) : $varValue;
+	}
+	elseif (trim($varValue) == '')
+	{
+		return $blnForceArray ? array() : '';
 	}
 
 	$varUnserialized = unserialize($varValue);

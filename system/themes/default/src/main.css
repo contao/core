@@ -233,7 +233,7 @@ h2.sub_headline_index
 {
 	margin:1px 0 0 0;
 	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat left center;
+	background:url("images/show.gif") no-repeat 1px center;
 	color:#5c9ac9;
 }
 
@@ -710,7 +710,7 @@ p.tl_task_reg
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat left center;
+	background:url("images/show.gif") no-repeat 1px center;
 }
 p.tl_task_reg, p.tl_task_reg a
 {
@@ -720,7 +720,7 @@ p.tl_update
 {
 	margin:0 3px 1px 6px;
 	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat left center;
+	background:url("images/show.gif") no-repeat 1px center;
 }
 p.tl_update, p.tl_update a
 {

@@ -167,6 +167,7 @@ class Comments extends Frontend
 
 		$doNotSubmit = false;
 		$arrWidgets = array();
+		$strFormId = 'com_'. $strSource .'_'. $intParent;
 
 		// Initialize widgets
 		foreach ($arrFields as $arrField)
@@ -183,7 +184,7 @@ class Comments extends Frontend
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
 
 			// Validate widget
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_comment')
+			if ($this->Input->post('FORM_SUBMIT') == $strFormId)
 			{
 				$objWidget->validate();
 
@@ -200,6 +201,7 @@ class Comments extends Frontend
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->messages = $this->getMessages();
+		$objTemplate->formId = $strFormId;
 
 		// Confirmation message
 		if ($_SESSION['TL_COMMENT_ADDED'])
@@ -209,7 +211,7 @@ class Comments extends Frontend
 		}
 
 		// Add comment
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_comment' && !$doNotSubmit)
+		if ($this->Input->post('FORM_SUBMIT') == $strFormId && !$doNotSubmit)
 		{
 			$strWebsite = $arrWidgets['website']->value;
 

@@ -476,7 +476,9 @@ class tl_article extends Backend
 	 */
 	public function addIcon($row, $label)
 	{
-		$published = (!strlen($row['published']) || $row['start'] && $row['start'] > time() || $row['stop'] && $row['stop'] < time()) ? false : true;
+		$time = time();
+		$published = ($row['published'] && ($row['start'] == '' || $row['start'] < $time) && ($row['stop'] == '' || $row['stop'] > $time));
+
 		return $this->generateImage('articles'.($published ? '' : '_').'.gif').' '.$label;
 	}
 

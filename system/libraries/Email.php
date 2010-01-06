@@ -411,7 +411,7 @@ class Email extends System
 		}
 
 		// Sender
-		if ($this>strSenderName != '')
+		if ($this->strSenderName != '')
 		{
 			$this->objMessage->setFrom(array($this->strSender=>$this->strSenderName));
 		}

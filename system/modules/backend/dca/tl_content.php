@@ -561,7 +561,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true)
 		),
 		'guests' => array
 		(
@@ -833,19 +833,27 @@ class tl_content extends Backend
 		$arrPids = array();
 		$arrAlias = array();
 
-		foreach ($this->User->pagemounts as $id)
+		if (!$this->User->isAdmin)
 		{
-			$arrPids[] = $id;
-			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
-		}
+			foreach ($this->User->pagemounts as $id)
+			{
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+			}
 
-		if (empty($arrPids))
+			if (empty($arrPids))
+			{
+				return $arrAlias;
+			}
+
+			$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
+									   ->execute($this->Input->get('id'));
+		}
+		else
 		{
-			return $arrAlias;
+			$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE c.id!=? ORDER BY a.title, c.sorting")
+									   ->execute($this->Input->get('id'));
 		}
-
-		$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
-								   ->execute($this->Input->get('id'));
 
 		while ($objAlias->next())
 		{
@@ -885,19 +893,27 @@ class tl_content extends Backend
 		$arrPids = array();
 		$arrAlias = array();
 
-		foreach ($this->User->pagemounts as $id)
+		if (!$this->User->isAdmin)
 		{
-			$arrPids[] = $id;
-			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
-		}
+			foreach ($this->User->pagemounts as $id)
+			{
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+			}
 
-		if (empty($arrPids))
+			if (empty($arrPids))
+			{
+				return $arrAlias;
+			}
+
+			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+									   ->execute($dc->id);
+		}
+		else
 		{
-			return $arrAlias;
+			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+									   ->execute($dc->id);
 		}
-
-		$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
-								   ->execute($dc->id);
 
 		if ($objAlias->numRows)
 		{
@@ -970,18 +986,25 @@ class tl_content extends Backend
 		$arrPids = array();
 		$arrArticle = array();
 
-		foreach ($this->User->pagemounts as $id)
+		if (!$this->User->isAdmin)
 		{
-			$arrPids[] = $id;
-			$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
-		}
+			foreach ($this->User->pagemounts as $id)
+			{
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+			}
 
-		if (empty($arrPids))
+			if (empty($arrPids))
+			{
+				return $arrArticle;
+			}
+
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
+		}
+		else
 		{
-			return $arrArticle;
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article ORDER BY parent, sorting");
 		}
-
-		$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
 
 		while ($objArticle->next())
 		{

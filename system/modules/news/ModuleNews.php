@@ -65,14 +65,14 @@ abstract class ModuleNews extends Module
 		{
 			if ($objArchive->protected)
 			{
-				$groups = deserialize($objArchive->groups, true);
-
-				if (!is_array($this->User->groups) || count($this->User->groups) < 1 || !is_array($groups) || count($groups) < 1)
+				if (!FE_USER_LOGGED_IN)
 				{
 					continue;
 				}
 
-				if (count(array_intersect($groups, $this->User->groups)) < 1)
+				$groups = deserialize($objArchive->groups);
+
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
 				{
 					continue;
 				}
@@ -134,7 +134,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->archive = $objArticles->archive;
 
 			// Display "read more" button if external link
-			if ($objArticles->source == 'external' && !strlen($objArticles->text))
+			if (($objArticles->source == 'external' || $objArticles->source == 'article') && !strlen($objArticles->text))
 			{
 				$objTemplate->text = true;
 			}

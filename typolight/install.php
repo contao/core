@@ -390,17 +390,24 @@ class InstallTool extends Controller
 				$this->Database->execute("ALTER TABLE `tl_user` ADD `lastLogin` int(10) unsigned NOT NULL default '0'");
 				$this->Database->execute("ALTER TABLE `tl_comments` ADD `source` varchar(32) NOT NULL default ''");
 				$this->Database->execute("ALTER TABLE `tl_comments` ADD KEY `source` (`source`)");
-				
 				$this->Database->execute("ALTER TABLE `tl_layout` CHANGE `mootools` `mootools` text NULL");
 				$this->Database->execute("ALTER TABLE `tl_comments` CHANGE `pid` `parent` int(10) unsigned NOT NULL default '0'");
-
 				$this->Database->execute("UPDATE tl_member SET dateAdded=tstamp, currentLogin=tstamp");
 				$this->Database->execute("UPDATE tl_user SET dateAdded=tstamp, currentLogin=tstamp");
 				$this->Database->execute("UPDATE tl_layout SET mootools='moo_accordion' WHERE mootools='moo_default'");
 				$this->Database->execute("UPDATE tl_comments SET source='tl_content'");
 				$this->Database->execute("UPDATE tl_faq_category SET title=headline");
 				$this->Database->execute("UPDATE tl_module SET cal_format='next_365', type='eventlist' WHERE type='upcoming_events'");
-				
+
+				// Get all front end groups
+				$objGroups = $this->Database->execute("SELECT id FROM tl_member_group");
+				$strGroups = serialize($objGroups->fetchEach('id'));
+
+				// Update protected elements
+				$this->Database->prepare("UPDATE tl_page SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
+				$this->Database->prepare("UPDATE tl_content SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
+				$this->Database->prepare("UPDATE tl_module SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
+
 				// Update layouts
 				$objLayout = $this->Database->execute("SELECT id, mootools FROM tl_layout");
 
@@ -454,65 +461,65 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')
 		{
-			if ($this->Input->post('dbCollation') != $GLOBALS['TL_CONFIG']['dbCollation'])
+			$arrTables = array();
+			$strCharset = strtolower($GLOBALS['TL_CONFIG']['dbCharset']);
+			$strCollation = $this->Input->post('dbCollation');
+
+			try
 			{
-				$arrTables = array();
-				$strCharset = strtolower($GLOBALS['TL_CONFIG']['dbCharset']);
-				$strCollation = $this->Input->post('dbCollation');
-
-				try
-				{
-					$this->Database->query("ALTER DATABASE {$GLOBALS['TL_CONFIG']['dbDatabase']} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
-				}
-				catch (Exception $e)
-				{
-					// Ignore
-				}
-
-				$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
-										   ->execute($GLOBALS['TL_CONFIG']['dbDatabase']);
-
-				while ($objField->next())
-				{
-					if (!in_array($objField->TABLE_NAME, $arrTables))
-					{
-						$this->Database->query("ALTER TABLE {$objField->TABLE_NAME} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
-						$arrTables[] = $objField->TABLE_NAME;
-					}
-
-					$strQuery = "ALTER TABLE {$objField->TABLE_NAME} CHANGE {$objField->COLUMN_NAME} {$objField->COLUMN_NAME} {$objField->COLUMN_TYPE} CHARACTER SET $strCharset COLLATE $strCollation";
-
-					if ($objField->IS_NULLABLE == 'YES')
-					{
-						$strQuery .= " NULL";
-					}
-					else
-					{
-						$strQuery .= " NOT NULL DEFAULT '{$objField->COLUMN_DEFAULT}'";
-					}
-
-					$this->Database->query($strQuery);
-				}
-
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['dbCollation']", $strCollation);
+				$this->Database->query("ALTER DATABASE {$GLOBALS['TL_CONFIG']['dbDatabase']} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+			}
+			catch (Exception $e)
+			{
+				// Ignore
 			}
 
+			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
+									   ->execute($GLOBALS['TL_CONFIG']['dbDatabase']);
+
+			while ($objField->next())
+			{
+				if (!in_array($objField->TABLE_NAME, $arrTables))
+				{
+					$this->Database->query("ALTER TABLE {$objField->TABLE_NAME} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
+					$arrTables[] = $objField->TABLE_NAME;
+				}
+
+				$strQuery = "ALTER TABLE {$objField->TABLE_NAME} CHANGE {$objField->COLUMN_NAME} {$objField->COLUMN_NAME} {$objField->COLUMN_TYPE} CHARACTER SET $strCharset COLLATE $strCollation";
+
+				if ($objField->IS_NULLABLE == 'YES')
+				{
+					$strQuery .= " NULL";
+				}
+				else
+				{
+					$strQuery .= " NOT NULL DEFAULT '{$objField->COLUMN_DEFAULT}'";
+				}
+
+				$this->Database->query($strQuery);
+			}
+
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['dbCollation']", $strCollation);
 			$this->reload();
 		}
 
-		$strOptions = '';
-		$objCollation = $this->Database->prepare("SELECT COLLATION_NAME AS name FROM INFORMATION_SCHEMA.COLLATIONS WHERE CHARACTER_SET_NAME=? ORDER BY COLLATION_NAME")
-									   ->execute($GLOBALS['TL_CONFIG']['dbCharset']);
+		$arrOptions = array();
+
+		$objCollation = $this->Database->prepare("SHOW COLLATION LIKE ?")
+									   ->execute($GLOBALS['TL_CONFIG']['dbCharset'] .'%');
 
 		while ($objCollation->next())
 		{
-			$strOptions .= sprintf('<option value="%s"%s>%s</option>',
-									$objCollation->name,
-									(($objCollation->name == $GLOBALS['TL_CONFIG']['dbCollation']) ? ' selected="selected"' : ''),
-									$objCollation->name);
+			$key = $objCollation->Collation;
+
+			$arrOptions[$key] = sprintf('<option value="%s"%s>%s</option>',
+										$key,
+										(($key == $GLOBALS['TL_CONFIG']['dbCollation']) ? ' selected="selected"' : ''),
+										$key);
 		}
 
-		$this->Template->collations = $strOptions;
+		ksort($arrOptions);
+		$this->Template->collations = implode('', $arrOptions);
 
 
 		/**

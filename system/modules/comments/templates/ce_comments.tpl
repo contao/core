@@ -17,7 +17,7 @@
 
 <form action="<?php echo $this->action; ?>" method="post">
 <div class="formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_comment" /><?php echo $this->messages; ?> 
+<input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" /><?php echo $this->messages; ?> 
 <div class="widget">
   <?php echo $this->fields['name']->generateWithError(); ?> <?php echo $this->fields['name']->generateLabel(); ?> 
 </div>

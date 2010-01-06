@@ -77,14 +77,14 @@ abstract class Events extends Module
 		{
 			if ($objCalendar->protected)
 			{
-				$groups = deserialize($objCalendar->groups, true);
-
-				if (!is_array($this->User->groups) || count($this->User->groups) < 1 || !is_array($groups) || count($groups) < 1)
+				if (!FE_USER_LOGGED_IN)
 				{
 					continue;
 				}
 
-				if (count(array_intersect($groups, $this->User->groups)) < 1)
+				$groups = deserialize($objCalendar->groups);
+
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
 				{
 					continue;
 				}
