@@ -226,7 +226,7 @@ class DC_File extends DataContainer implements editable
 
 					$this->strField = $vv;
 					$this->strInputName = $vv;
-					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+					$this->varValue = htmlspecialchars($GLOBALS['TL_CONFIG'][$this->strField]);
 
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
@@ -359,6 +359,9 @@ window.addEvent(\'domready\', function()
 			$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
 			$varValue = $objDate->tstamp;
 		}
+
+		$varValue = $this->restoreBasicEntities($varValue);
+		$this->varValue = htmlspecialchars_decode($this->varValue);
 
 		// Call save_callback
 		if (is_array($arrData['save_callback']))

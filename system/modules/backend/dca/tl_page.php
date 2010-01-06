@@ -36,7 +36,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	// Config
 	'config' => array
 	(
-		'label'                       => &$GLOBALS['TL_CONFIG']['websiteTitle'],
+		'label'                       => $GLOBALS['TL_CONFIG']['websiteTitle'],
 		'dataContainer'               => 'Table',
 		'ctable'                      => array('tl_article'),
 		'enableVersioning'            => true,
