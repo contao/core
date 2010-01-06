@@ -12,7 +12,6 @@
 <body>
 
 <div id="container">
-
 <div id="main">
 
 <h1>Help wizard</h1>
@@ -36,7 +35,6 @@
 <?php endif; ?>
 
 </div>
-
 </div>
 
 </body>

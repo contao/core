@@ -12,7 +12,6 @@
 <body>
 
 <div id="container">
-
 <div id="main">
 
 <h1>Image preview</h1>
@@ -49,7 +48,7 @@
 </table>
 
 <div id="download">
-<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" widht="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
+<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" width="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
 </div>
 <?php if ($this->isImage): ?>
 
@@ -59,7 +58,6 @@
 <?php endif; ?>
 
 </div>
-
 </div>
 
 </body>

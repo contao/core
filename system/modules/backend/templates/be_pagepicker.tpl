@@ -27,17 +27,16 @@ function setPage(p)
 //--><!]]>
 </script>
 </head>
-
 <body>
-<div id="container">
 
+<div id="container">
 <div id="main">
 
 <h1><?php echo $this->headline; ?></h1>
 <select onchange="setPage(this.value);"><option value="">-</option><?php echo $this->options; ?></select>
 
 </div>
-
 </div>
+
 </body>
 </html>

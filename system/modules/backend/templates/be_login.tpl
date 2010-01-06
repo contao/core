@@ -21,7 +21,6 @@
 </div>
 
 <div id="container">
-
 <div id="main">
 
 <h2><?php echo $this->headline; ?></h2>

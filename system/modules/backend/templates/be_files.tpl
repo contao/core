@@ -36,12 +36,7 @@ function unloadHandler(e)
 </head>
 <body onunload="unloadHandler(this)">
 
-<div style="display:inline;">
-<a name="top" accesskey="t"></a>
-</div>
-
 <div id="container">
-
 <div id="main">
 
 <h1 class="main_headline"><?php echo $this->headline; ?></h1>
