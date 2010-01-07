@@ -49,7 +49,7 @@
 </table>
 
 <div class="tl_login_submit_container">
-<input type="submit" name="login" id="login" alt="login button" value="<?php echo $this->loginButton; ?>" />
+<input type="submit" name="login" id="login" value="<?php echo $this->loginButton; ?>" />
 </div>
 
 </div>

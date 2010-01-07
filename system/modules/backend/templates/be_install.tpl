@@ -59,7 +59,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Save FTP settings" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>" />
   </div>
 </div>
 </form>
@@ -77,7 +77,7 @@
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_license" />
   <div class="tl_submit_container">
-    <input type="submit" alt="Accept the license agreement" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -98,7 +98,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Login" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>" />
   </div>
 </div>
 </form>
@@ -126,7 +126,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Save password" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>" />
   </div>
 </div>
 </form>
@@ -151,7 +151,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Generate or save key" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -188,7 +188,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Save database settings" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -203,7 +203,7 @@
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_28update" />
   <div class="tl_submit_container">
-    <input type="submit" alt="Run the version 2.8 update" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -222,7 +222,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Update collation" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -243,7 +243,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Update database" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -271,7 +271,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Import template" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -305,7 +305,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" name="submit" alt="Create admin account" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -317,7 +317,7 @@
 <p><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][1]; ?></p>
 
 <?php endif; endif; endif; endif; endif; ?>
-<p id="go_to_login"><a href="typolight/index.php" title="TYPOlight back end login"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
+<p id="go_to_login"><a href="typolight/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>
 </div>
