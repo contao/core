@@ -226,7 +226,16 @@ class DC_File extends DataContainer implements editable
 
 					$this->strField = $vv;
 					$this->strInputName = $vv;
-					$this->varValue = htmlspecialchars($GLOBALS['TL_CONFIG'][$this->strField]);
+
+					// Handle entities
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'textarea')
+					{
+						$this->varValue = htmlspecialchars($GLOBALS['TL_CONFIG'][$this->strField]);
+					}
+					else
+					{
+						$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+					}
 
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
@@ -360,8 +369,12 @@ window.addEvent(\'domready\', function()
 			$varValue = $objDate->tstamp;
 		}
 
-		$varValue = $this->restoreBasicEntities($varValue);
-		$this->varValue = htmlspecialchars_decode($this->varValue);
+		// Handle entities
+		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
+		{
+			$varValue = $this->restoreBasicEntities($varValue);
+			$this->varValue = htmlspecialchars_decode($this->varValue);
+		}
 
 		// Call save_callback
 		if (is_array($arrData['save_callback']))
