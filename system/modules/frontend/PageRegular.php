@@ -415,7 +415,7 @@ class PageRegular extends Frontend
 		{
 			if ($strTemplate == '')
 			{
-				return;
+				continue;
 			}
 
 			$objTemplate = new FrontendTemplate($strTemplate);
