@@ -878,7 +878,7 @@ class DC_Table extends DataContainer implements listable, editable
 													->set($vv)
 													->execute();
 
-					if ($objInsertStmt->affectedRows && count($cctable[$k]) && $kk != $parentId)
+					if ($objInsertStmt->affectedRows && (count($cctable[$k]) || $GLOBALS['TL_DCA'][$k]['list']['sorting']['mode'] == 5) && $kk != $parentId)
 					{
 						$this->copyChilds($k, $objInsertStmt->insertId, $kk, $parentId);
 					}
