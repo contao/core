@@ -1259,7 +1259,6 @@ abstract class Controller extends System
 						{
 							break;
 						}
-
 						else
 						{
 							$strUrl = $this->generateFrontendUrl($objNextPage->row());
@@ -1305,57 +1304,165 @@ abstract class Controller extends System
 
 				// Article
 				case 'article':
+				case 'article_open':
+				case 'article_url':
+				case 'article_title':
 					$this->import('Database');
 
 					$objArticle = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title AS title, p.id AS id, p.alias AS alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND (a.id=? OR a.alias=?)")
 												 ->limit(1)
 												 ->execute($elements[1], $elements[1]);
 
-					if ($objArticle->numRows)
+					if ($objArticle->numRows < 1)
 					{
-						$arrCache[$strTag] = '<a href="' . $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId)) . '" title="' . specialchars($objArticle->title) . '">' . $objArticle->title . '</a>';
+						break;
+					}
+					else
+					{
+						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId));
+					}
+	
+					// Replace tag
+					switch (strtolower($elements[0]))
+					{
+						case 'article':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objArticle->title), $objArticle->title);
+							break;
+
+						case 'article_open':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objArticle->title));
+							break;
+
+						case 'article_url':
+							$arrCache[$strTag] = $strUrl;
+							break;
+
+						case 'article_title':
+							$arrCache[$strTag] = specialchars($objArticle->title);
+							break;
 					}
 					break;
 
 				// FAQ
 				case 'faq':
+				case 'faq_open':
+				case 'faq_url':
+				case 'faq_title':
 					$this->import('Database');
 
 					$objFaq = $this->Database->prepare("SELECT f.id AS fId, f.alias AS fAlias, f.question AS question, p.id AS id, p.alias AS alias FROM tl_faq f, tl_faq_category c, tl_page p WHERE f.pid=c.id AND c.jumpTo=p.id AND (f.id=? OR f.alias=?)")
 											 ->limit(1)
 											 ->execute($elements[1], $elements[1]);
 
-					if ($objFaq->numRows)
+					if ($objFaq->numRows < 1)
 					{
-						$arrCache[$strTag] = '<a href="' . $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId)) . '" title="' . specialchars($objFaq->question) . '">' . $objFaq->question . '</a>';
+						break;
+					}
+					else
+					{
+						$strUrl = $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId));
+					}
+	
+					// Replace tag
+					switch (strtolower($elements[0]))
+					{
+						case 'faq':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objFaq->question), $objFaq->question);
+							break;
+
+						case 'faq_open':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objFaq->question));
+							break;
+
+						case 'faq_url':
+							$arrCache[$strTag] = $strUrl;
+							break;
+
+						case 'faq_title':
+							$arrCache[$strTag] = specialchars($objFaq->question);
+							break;
 					}
 					break;
 
 				// News
 				case 'news':
+				case 'news_open':
+				case 'news_url':
+				case 'news_title':
 					$this->import('Database');
 
 					$objNews = $this->Database->prepare("SELECT n.id AS nId, n.alias AS nAlias, n.headline AS headline, p.id AS id, p.alias AS alias FROM tl_news n, tl_news_archive a, tl_page p WHERE n.pid=a.id AND a.jumpTo=p.id AND (n.id=? OR n.alias=?)")
 											  ->limit(1)
 											  ->execute($elements[1], $elements[1]);
 
-					if ($objNews->numRows)
+					if ($objNews->numRows < 1)
 					{
-						$arrCache[$strTag] = '<a href="' . $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId)) . '" title="' . specialchars($objNews->headline) . '">' . $objNews->headline . '</a>';
+						break;
+					}
+					else
+					{
+						$strUrl = $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId));
+					}
+	
+					// Replace tag
+					switch (strtolower($elements[0]))
+					{
+						case 'news':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objNews->headline), $objNews->headline);
+							break;
+
+						case 'news_open':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objNews->headline));
+							break;
+
+						case 'news_url':
+							$arrCache[$strTag] = $strUrl;
+							break;
+
+						case 'news_title':
+							$arrCache[$strTag] = specialchars($objNews->headline);
+							break;
 					}
 					break;
 
 				// Events
 				case 'event':
+				case 'event_open':
+				case 'event_url':
+				case 'event_title':
 					$this->import('Database');
 
 					$objEvent = $this->Database->prepare("SELECT e.id AS eId, e.alias AS eAlias, e.title AS title, p.id AS id, p.alias AS alias FROM tl_calendar_events e, tl_calendar c, tl_page p WHERE e.pid=c.id AND c.jumpTo=p.id AND (e.id=? OR e.alias=?)")
 											   ->limit(1)
 											   ->execute($elements[1], $elements[1]);
 
-					if ($objEvent->numRows)
+					if ($objEvent->numRows < 1)
 					{
-						$arrCache[$strTag] = '<a href="' . $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId)) . '" title="' . specialchars($objEvent->title) . '">' . $objEvent->title . '</a>';
+						break;
+					}
+					else
+					{
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
+					}
+	
+					// Replace tag
+					switch (strtolower($elements[0]))
+					{
+						case 'event':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objEvent->title), $objEvent->title);
+							break;
+
+						case 'event_open':
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objEvent->title));
+							break;
+
+						case 'event_url':
+							$arrCache[$strTag] = $strUrl;
+							break;
+
+						case 'event_title':
+							$arrCache[$strTag] = specialchars($objEvent->title);
+							break;
 					}
 					break;
 
