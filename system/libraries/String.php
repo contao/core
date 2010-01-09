@@ -279,11 +279,19 @@ class String
 		foreach ((array) $arrEmails[0] as $strEmail)
 		{
 			$strEncoded = '';
-			$arrCharacters = str_split($strEmail);
 
-			foreach ($arrCharacters as $strCharacter)
+			for($i=0; $i<strlen($strEmail); ++$i)
 			{
-				$strEncoded .= sprintf('&#%s;', ord($strCharacter));
+				$blnHex = rand(0, 1);
+
+				if ($blnHex)
+				{
+					$strEncoded .= sprintf('&#x%X;', ord($strEmail{$i}));
+				}
+				else
+				{
+					$strEncoded .= sprintf('&#%s;', ord($strEmail{$i}));
+				}
 			}
 
 			$strString = str_replace($strEmail, $strEncoded, $strString);
