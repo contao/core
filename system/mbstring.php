@@ -35,6 +35,7 @@
  *
  * This library supports the following functions:
  * - utf8_chr
+ * - utf8_ord
  * - utf8_convert_encoding
  * - utf8_decode_entities
  * - utf8_detect_encoding
@@ -47,6 +48,8 @@
  * - utf8_strtolower
  * - utf8_strtoupper
  * - utf8_substr
+ * - utf8_ucfirst
+ * - utf8_str_split
  *
  * A few functions are based on the UTF-8 library written by Niels Leenheer
  * and Andy Matsubara which is part of the Zen Photo web photo album project.
@@ -86,6 +89,41 @@ function utf8_chr($dec)
     	return chr(($dec >> 18) + 240) . chr((($dec >> 12) & 63) + 128) . chr((($dec >> 6) & 63) + 128) . chr(($dec & 63) + 128);
 
     return '';
+}
+
+
+/**
+ * Return the ASCII value of a character
+ * 
+ * Unicode version of ord() that handles UTF-8 characters. The function has
+ * been published by R. Rajesh Jeba Anbiah on php.net.
+ * @param string
+ * @return integer
+ */
+function utf8_ord($str)
+{
+	if (ord($str{0}) >= 0 && ord($str{0}) <= 127)
+		return ord($str{0});
+
+	if (ord($str{0}) >= 192 && ord($str{0}) <= 223)
+		return (ord($str{0})-192)*64 + (ord($str{1})-128);
+
+	if (ord($str{0}) >= 224 && ord($str{0}) <= 239)
+		return (ord($str{0})-224)*4096 + (ord($str{1})-128)*64 + (ord($str{2})-128);
+
+	if (ord($str{0}) >= 240 && ord($str{0}) <= 247)
+		return (ord($str{0})-240)*262144 + (ord($str{1})-128)*4096 + (ord($str{2})-128)*64 + (ord($str{3})-128);
+
+	if (ord($str{0}) >= 248 && ord($str{0}) <= 251)
+		return (ord($str{0})-248)*16777216 + (ord($str{1})-128)*262144 + (ord($str{2})-128)*4096 + (ord($str{3})-128)*64 + (ord($str{4})-128);
+
+	if (ord($str{0}) >= 252 && ord($str{0}) <= 253)
+		return (ord($str{0})-252)*1073741824 + (ord($str{1})-128)*16777216 + (ord($str{2})-128)*262144 + (ord($str{3})-128)*4096 + (ord($str{4})-128)*64 + (ord($str{5})-128);
+
+	if (ord($str{0}) >= 254 && ord($str{0}) <= 255) //error
+		return false;
+
+	return 0;
 }
 
 
@@ -486,6 +524,43 @@ function utf8_substr($str, $start, $length=null)
 function utf8_ucfirst($str)
 {
 	return utf8_strtoupper(utf8_substr($str, 0, 1)) . utf8_substr($str, 1);
+}
+
+
+/**
+ * Convert a string to an array
+ * 
+ * Unicode version of str_split() that handles UTF-8 characters. The function
+ * has been published by saeedco on php.net.
+ * @param string
+ * @return array
+ */
+function utf8_str_split($str)
+{
+	$array = array();
+
+	for ($i=0; $i<strlen($str);)
+	{
+		$split = 1;
+		$value = ord($str[$i]);
+		$key = NULL;
+
+		if($value >= 192 && $value <= 223)
+			$split=2;
+		elseif($value >= 224 && $value <= 239)
+			$split=3;
+		elseif($value >= 240 && $value <= 247)
+			$split=4;
+
+		for ($j=0; $j<$split; $j++,$i++)
+		{
+			$key .= $str[$i];
+		}
+
+		array_push($array, $key);
+	}
+
+	return $array;
 }
 
 

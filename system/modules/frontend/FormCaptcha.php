@@ -185,11 +185,11 @@ class FormCaptcha extends Widget
 		));
 
 		$strEncoded = '';
-		$arrCharacters = str_split($question);
+		$arrCharacters = utf8_str_split($question);
 
 		foreach ($arrCharacters as $strCharacter)
 		{
-			$strEncoded .= sprintf('&#%s;', ord($strCharacter));
+			$strEncoded .= sprintf('&#%s;', utf8_ord($strCharacter));
 		}
 
 		$this->strQuestion = $strEncoded;
