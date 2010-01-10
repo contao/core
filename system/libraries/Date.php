@@ -235,7 +235,7 @@ class Date extends System
 			'y' => '(?P<y>[0-9]{2})',
 		);
 
-		return preg_replace('/[a-zA-Z]/e', 'isset($arrRegexp["$0"]) ? $arrRegexp["$0"] : "$0"', $strFormat);
+		return preg_replace('/[a-zA-Z]/e', 'isset($arrRegexp["$0"]) ? $arrRegexp["$0"] : "$0"', preg_quote($strFormat));
 	}
 
 
