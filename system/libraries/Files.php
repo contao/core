@@ -77,13 +77,21 @@ class Files
 						// Passive mode
 						ftp_pasv($resConnection, true);
 						self::$objInstance = new FTP($resConnection);
-
-						return self::$objInstance;
 					}
 				}
 			}
 
-			self::$objInstance = new Files();
+			// HOOK: use the smhextended module
+			elseif (in_array('smhextended', $this->Config->getActiveModules()))
+			{
+				self::$objInstance = new SMHExtended();
+			}
+
+			// Use PHP to modify files
+			else
+			{
+				self::$objInstance = new Files();
+			}
 		}
 
 		return self::$objInstance;
