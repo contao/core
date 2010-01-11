@@ -1311,7 +1311,7 @@ abstract class Controller extends System
 
 					$objArticle = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title AS title, p.id AS id, p.alias AS alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND (a.id=? OR a.alias=?)")
 												 ->limit(1)
-												 ->execute($elements[1], $elements[1]);
+												 ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objArticle->numRows < 1)
 					{
@@ -1352,7 +1352,7 @@ abstract class Controller extends System
 
 					$objFaq = $this->Database->prepare("SELECT f.id AS fId, f.alias AS fAlias, f.question AS question, p.id AS id, p.alias AS alias FROM tl_faq f, tl_faq_category c, tl_page p WHERE f.pid=c.id AND c.jumpTo=p.id AND (f.id=? OR f.alias=?)")
 											 ->limit(1)
-											 ->execute($elements[1], $elements[1]);
+											 ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objFaq->numRows < 1)
 					{
@@ -1393,7 +1393,7 @@ abstract class Controller extends System
 
 					$objNews = $this->Database->prepare("SELECT n.id AS nId, n.alias AS nAlias, n.headline AS headline, p.id AS id, p.alias AS alias FROM tl_news n, tl_news_archive a, tl_page p WHERE n.pid=a.id AND a.jumpTo=p.id AND (n.id=? OR n.alias=?)")
 											  ->limit(1)
-											  ->execute($elements[1], $elements[1]);
+											  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objNews->numRows < 1)
 					{
@@ -1434,7 +1434,7 @@ abstract class Controller extends System
 
 					$objEvent = $this->Database->prepare("SELECT e.id AS eId, e.alias AS eAlias, e.title AS title, p.id AS id, p.alias AS alias FROM tl_calendar_events e, tl_calendar c, tl_page p WHERE e.pid=c.id AND c.jumpTo=p.id AND (e.id=? OR e.alias=?)")
 											   ->limit(1)
-											   ->execute($elements[1], $elements[1]);
+											   ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objEvent->numRows < 1)
 					{
@@ -1470,9 +1470,9 @@ abstract class Controller extends System
 				case 'article_teaser':
 					$this->import('Database');
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_article WHERE id=?")
+					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_article WHERE id=? OR alias=?")
 												->limit(1)
-												->execute($elements[1]);
+												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objTeaser->numRows)
 					{
@@ -1484,9 +1484,9 @@ abstract class Controller extends System
 				case 'news_teaser':
 					$this->import('Database');
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_news WHERE id=?")
+					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_news WHERE id=? OR alias=?")
 												->limit(1)
-												->execute($elements[1]);
+												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objTeaser->numRows)
 					{
@@ -1498,9 +1498,9 @@ abstract class Controller extends System
 				case 'event_teaser':
 					$this->import('Database');
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_calendar_events WHERE id=?")
+					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_calendar_events WHERE id=? OR alias=?")
 												->limit(1)
-												->execute($elements[1]);
+												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objTeaser->numRows)
 					{

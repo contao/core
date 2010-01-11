@@ -18,7 +18,8 @@ Version 2.8.0 (2010--)
 - Fixed issue with style sheets not being updated correctly (#1351)
 - Fixed issue with DC_Table::copyChilds() not working correctly (#1360)
 - Fixed issue with incorrectly encoded characters in the security question (#1380)
-- Fixed issue with german dates not being validated correctly (#1381) 
+- Fixed issue with german dates not being validated correctly (#1381)
+- Fixed issue with "*_teaser" insert tags not supporting aliases (#1389)
 - Fixed some minor issues 
 
 Version 2.8.RC2 (2009-12-23)
