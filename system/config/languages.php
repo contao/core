@@ -61,6 +61,7 @@ $languages = array
 	'ja' => 'Japanese',
 	'ka' => 'Georgian',
 	'ko' => 'Korean',
+	'lo' => 'Lao',
 	'lt' => 'Lithuanian',
 	'lv' => 'Latvian',
 	'nl' => 'Dutch',

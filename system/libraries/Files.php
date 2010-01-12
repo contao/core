@@ -82,7 +82,7 @@ class Files
 			}
 
 			// HOOK: use the smhextended module
-			elseif (in_array('smhextended', $this->Config->getActiveModules()))
+			elseif ($GLOBALS['TL_CONFIG']['useSmhExtended'] && in_array('smhextended', Config::getInstance()->getActiveModules()))
 			{
 				self::$objInstance = new SMHExtended();
 			}
