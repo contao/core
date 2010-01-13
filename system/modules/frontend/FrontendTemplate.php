@@ -146,10 +146,9 @@ class FrontendTemplate extends Template
 			}
 		}
 
-		// Send headers
+		// Send cache headers
 		if (!headers_sent())
 		{
-			// Cache headers
 			if ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
@@ -157,8 +156,6 @@ class FrontendTemplate extends Template
 				header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
 				header('Pragma: public');
 			}
-
-			// No chache headers
 			else
 			{
 				header('Cache-Control: no-cache');

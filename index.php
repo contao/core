@@ -275,12 +275,24 @@ class Index extends Frontend
 			$content = 'text/html';
 		}
 
-		// Set cache header
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
-		header('Cache-Control: public, max-age=' . ($expire - time()));
-		header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
-		header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
-		header('Pragma: public');
+
+		// Send cache headers
+		if ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
+		{
+			header('Cache-Control: public, max-age=' . ($expire - time()));
+			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
+			header('Pragma: public');
+		}
+		else
+		{
+			header('Cache-Control: no-cache');
+			header('Cache-Control: pre-check=0, post-check=0', false);
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+			header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
+			header('Pragma: no-cache');
+		}
 
 		// Replace insert tags
 		$strBuffer = $this->replaceInsertTags($strBuffer);
