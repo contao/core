@@ -66,7 +66,7 @@
     <td class="body <?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
 <?php endforeach; ?>
 <?php if ($this->details): ?>
-    <td class="body <?php echo $this->col_last; ?> col_last"><a href="<?php echo $this->url; ?>?show=<?php echo $col['id']; ?>"><img src="system/modules/listing/html/details.gif" alt="" /></a></td>
+    <td class="body <?php echo $this->col_last; ?> col_last"><a href="<?php echo $col['url']; ?>"><img src="system/modules/listing/html/details.gif" alt="" /></a></td>
 <?php endif; ?>
   </tr>
 <?php endforeach; ?>

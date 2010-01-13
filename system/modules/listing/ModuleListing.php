@@ -194,7 +194,6 @@ class ModuleListing extends Module
 		 * Prepare URL
 		 */
 		$strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
-		$this->Template->url = $strUrl;
 		$blnQuery = false;
 
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
@@ -206,6 +205,7 @@ class ModuleListing extends Module
 			}
 		}
 
+		$this->Template->url = $strUrl;
 		$strVarConnector = $blnQuery ? '&amp;' : '?';
 
 
@@ -261,7 +261,8 @@ class ModuleListing extends Module
 					'content' => ($value ? $value : '&nbsp;'),
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
 					'id' => $arrRows[$i]['id'],
-					'field' => $k
+					'field' => $k,
+					'url' => $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;show=' : '?show=') . $arrRows[$i]['id']
 				);
 			}
 		}
