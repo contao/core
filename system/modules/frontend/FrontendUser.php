@@ -176,6 +176,23 @@ class FrontendUser extends User
 
 
 	/**
+	 * Save the original group membership
+	 * @param  int
+	 * @return boolean
+	 */
+	public function findBy($strRefField, $varRefId)
+	{
+		if (parent::findBy($strRefField, $varRefId) === false)
+		{
+			return false;
+		}
+
+		$this->arrGroups = $this->groups;
+		return true;
+	}
+
+
+	/**
 	 * Restore the original group membership
 	 * @param  boolean
 	 * @return int
@@ -207,8 +224,6 @@ class FrontendUser extends User
 				$this->$k = deserialize($v);
 			}
 		}
-
-		$this->arrGroups = $this->groups;
 
 		// Set language
 		if ($this->language != '')
