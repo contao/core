@@ -33,6 +33,7 @@ new Swiff("<?php echo $this->href; ?>", {
 <?php if (!$this->transparent): ?>
     wMode: "window",
 <?php endif; ?>
+    allowFullScreen: true,
     flashvars: "<?php echo $this->flashvars; ?>"
   }
 }).replaces($('<?php echo $this->flashId; ?>'));
