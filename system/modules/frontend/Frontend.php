@@ -340,7 +340,7 @@ abstract class Frontend extends Controller
 
 		foreach ($arrBuffer as $v)
 		{
-			list($strLabel, $strValue) = array_map('trim', explode('=', $v));
+			list($strLabel, $strValue) = array_map('trim', explode('=', $v, 2));
 			$this->arrMeta[$strLabel] = array_map('trim', explode('|', $strValue));
 
 			if (!$blnIsFile || in_array($strPath . '/' . $strLabel, $this->multiSRC))

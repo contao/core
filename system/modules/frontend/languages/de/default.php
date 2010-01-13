@@ -122,5 +122,8 @@ $GLOBALS['TL_LANG']['MSC']['com_confirm']  = 'Ihr Kommentar wurde hinzugefügt u
 $GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Der Eintrag "%s" existiert leider nicht.';
 $GLOBALS['TL_LANG']['MSC']['list_orderBy'] = 'Sortiere nach %s';
 $GLOBALS['TL_LANG']['MSC']['list_perPage'] = 'Ergebnisse pro Seite';
+$GLOBALS['TL_LANG']['MSC']['published']    = 'Veröffentlicht';
+$GLOBALS['TL_LANG']['MSC']['unpublished']  = 'Nicht veröffentlicht';
+$GLOBALS['TL_LANG']['MSC']['addComment']   = 'Einen Kommentar schreiben';
 
 ?>

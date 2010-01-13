@@ -80,6 +80,12 @@ class Comments extends Frontend
 		if ($total > 0)
 		{
 			$count = 0;
+
+			if ($objConfig->template == '')
+			{
+				$objConfig->template = 'com_default';
+			}
+
 			$objPartial = new FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
