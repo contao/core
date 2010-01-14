@@ -183,10 +183,32 @@ function utf8_convert_encoding($str, $to, $from=null)
  */
 function utf8_decode_entities($str)
 {
-	$search = array('~&#x([0-9a-f]+);~ei', '~&#([0-9]+);~e');
-	$replace = array('utf8_chr(hexdec("\\1"))', 'utf8_chr(\\1)');
+	$str = preg_replace_callback('~&#x([0-9a-f]+);~i', 'utf8_hexchr_callback', $str);
+	$str = preg_replace_callback('~&#([0-9]+);~', 'utf8_chr_callback', $str);
 
-	return preg_replace($search, $replace, $str);
+	return $str;
+}
+
+
+/**
+ * Callback function for utf8_decode_entities 
+ * @param array
+ * @return string
+ */
+function utf8_chr_callback($matches)
+{
+	return utf8_chr($matches[1]);
+}
+
+
+/**
+ * Callback function for utf8_decode_entities 
+ * @param array
+ * @return string
+ */
+function utf8_hexchr_callback($matches)
+{
+	return utf8_chr(hexdec($matches[1]));
 }
 
 

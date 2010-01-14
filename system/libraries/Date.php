@@ -216,6 +216,17 @@ class Date extends System
 			throw new Exception(sprintf('Invalid date format "%s"', $strFormat));
 		}
 
+		return preg_replace_callback('/[a-zA-Z]/', 'Date::getRegexpCallback', preg_quote($strFormat));
+	}
+
+
+	/**
+	 * Callback function for getRegexp
+	 * @param  array
+	 * @return string
+	 */
+	protected static function getRegexpCallback($matches)
+	{
 		// Thanks to Christian Labuda
 		$arrRegexp = array
 		(
@@ -235,7 +246,7 @@ class Date extends System
 			'y' => '(?P<y>[0-9]{2})',
 		);
 
-		return preg_replace('/[a-zA-Z]/e', 'isset($arrRegexp["$0"]) ? $arrRegexp["$0"] : "$0"', preg_quote($strFormat));
+		return isset($arrRegexp[$matches[0]]) ? $arrRegexp[$matches[0]] : $matches[0];
 	}
 
 

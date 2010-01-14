@@ -4,8 +4,9 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.0 (2010--)
 --------------------------
-- Improved the e-mail address spam protection algorithm (#1248) 
+- Improved the e-mail address spam protection algorithm (#1248)
 - Added insert tags article/faq/news/event_open, _url and _title (#1370)
+- Removed PCRE modifier /e for better compatibility (#1405)
 - Fixed issue with empty alias drop-down menus
 - Fixed issue with feed names not being mandatory (#1317)
 - Fixed issue with page language not being set correctly (#1326)
