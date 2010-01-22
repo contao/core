@@ -62,6 +62,7 @@ $GLOBALS['TL_LANG']['LNG']['ko'] = 'Korean';
 $GLOBALS['TL_LANG']['LNG']['lo'] = 'Lao';
 $GLOBALS['TL_LANG']['LNG']['lt'] = 'Lithuanian';
 $GLOBALS['TL_LANG']['LNG']['lv'] = 'Latvian';
+$GLOBALS['TL_LANG']['LNG']['mk'] = 'Macedonian';
 $GLOBALS['TL_LANG']['LNG']['nl'] = 'Dutch';
 $GLOBALS['TL_LANG']['LNG']['no'] = 'Norwegian';
 $GLOBALS['TL_LANG']['LNG']['pl'] = 'Polish';
