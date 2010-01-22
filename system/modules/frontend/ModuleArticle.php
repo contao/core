@@ -123,8 +123,16 @@ class ModuleArticle extends Module
 			return;
 		}
 
-		// Overwrite page title
-		if (!$this->blnNoMarkup && strlen($this->Input->get('articles')) && strlen($this->title))
+		// Get section and article alias
+		list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
+
+		if (is_null($strArticle))
+		{
+			$strArticle = $strSection;
+		}
+
+		// Overwrite the page title
+		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
 			global $objPage;
 			$objPage->pageTitle = $this->title;
@@ -134,20 +142,10 @@ class ModuleArticle extends Module
 		$this->Template->backlink = false;
 
 		// Back link
-		if (!$this->multiMode && strlen($this->Input->get('articles')))
+		if (!$this->multiMode && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias))
 		{
-			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
-
-			if (is_null($strArticle))
-			{
-				$strArticle = $strSection;
-			}
-
-			if ($strArticle == $this->id || $strArticle == $this->alias)
-			{
-				$this->Template->backlink = 'javascript:history.go(-1)';
-				$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
-			}
+			$this->Template->backlink = 'javascript:history.go(-1)';
+			$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
 		}
 
 		$contentElements = false;
