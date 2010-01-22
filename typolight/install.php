@@ -396,7 +396,6 @@ class InstallTool extends Controller
 				$this->Database->execute("UPDATE tl_user SET dateAdded=tstamp, currentLogin=tstamp");
 				$this->Database->execute("UPDATE tl_layout SET mootools='moo_accordion' WHERE mootools='moo_default'");
 				$this->Database->execute("UPDATE tl_comments SET source='tl_content'");
-				$this->Database->execute("UPDATE tl_faq_category SET title=headline");
 				$this->Database->execute("UPDATE tl_module SET cal_format='next_365', type='eventlist' WHERE type='upcoming_events'");
 
 				// Get all front end groups

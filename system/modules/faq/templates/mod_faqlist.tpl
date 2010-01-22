@@ -7,7 +7,7 @@
 <?php endif; ?>
 <?php foreach($this->faq as $category): ?>
 
-<h2><?php echo $category['title']; ?></h2>
+<h2><?php echo $category['headline']; ?></h2>
 
 <ul class="<?php echo $category['class']; ?>">
 <?php foreach ($category['items'] as $faq): ?>

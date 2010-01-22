@@ -51,6 +51,7 @@ CREATE TABLE `tl_faq_category` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `tstamp` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL default '',
+  `headline` varchar(255) NOT NULL default '',
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `allowComments` char(1) NOT NULL default '',
   `notify` varchar(32) NOT NULL default '',

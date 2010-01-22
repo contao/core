@@ -112,7 +112,7 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('allowComments'),
-		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments'
+		'default'                     => '{title_legend},title,headline,jumpTo;{comments_legend:hide},allowComments'
 	),
 
 	// Subpalettes
@@ -130,7 +130,15 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'headline' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['headline'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'jumpTo' => array
 		(

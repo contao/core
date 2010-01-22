@@ -60,7 +60,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'filter'                  => true,
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'filter;search,limit',
-			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'allowComments'),
+			'headerFields'            => array('title', 'headline', 'jumpTo', 'tstamp', 'allowComments'),
 			'child_record_callback'   => array('tl_faq', 'listQuestions')
 		),
 		'global_operations' => array

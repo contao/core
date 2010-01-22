@@ -31,6 +31,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_faq_category']['title']          = array('Title', 'Please enter the category title.');
+$GLOBALS['TL_LANG']['tl_faq_category']['headline']       = array('Headline', 'Please enter the category headline.');
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']         = array('Redirect page', 'Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.');
 $GLOBALS['TL_LANG']['tl_faq_category']['allowComments']  = array('Enable comments', 'Allow visitors to comment FAQs.');
 $GLOBALS['TL_LANG']['tl_faq_category']['notify']         = array('Notify', 'Please choose who to notify when comments are added.');
