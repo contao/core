@@ -90,7 +90,10 @@ class Input
 
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
-			$varValue = $this->decodeEntities($_GET[$strKey]);
+			$varValue = $_GET[$strKey];
+
+			$varValue = $this->stripSlashes($varValue);
+			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
 
@@ -119,6 +122,8 @@ class Input
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
+
+			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
@@ -148,6 +153,8 @@ class Input
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
+
+			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue);
 			$varValue = $this->stripTags($varValue, $GLOBALS['TL_CONFIG']['allowedTags']);
@@ -176,7 +183,8 @@ class Input
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
-			$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
+
+			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->xssClean($varValue);
 
 			$this->arrCache[$strCacheKey][$strKey] = $varValue;
@@ -198,7 +206,10 @@ class Input
 
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
-			$varValue = $this->decodeEntities($_COOKIE[$strKey]);
+			$varValue = $_COOKIE[$strKey];
+
+			$varValue = $this->stripSlashes($varValue);
+			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue, true);
 			$varValue = $this->stripTags($varValue);
 
@@ -258,10 +269,32 @@ class Input
 
 
 	/**
+	 * Strip slashes
+	 * @param  mixed
+	 * @return mixed
+	 */
+	protected function stripSlashes($varValue)
+	{
+		// Recursively clean arrays
+		if (is_array($varValue))
+		{
+			foreach ($varValue as $k=>$v)
+			{
+				$varValue[$k] = $this->stripSlashes($v);
+			}
+
+			return $varValue;
+		}
+
+		return get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
+	}
+
+
+	/**
 	 * Strip tags preserving HTML comments
+	 * @param  mixed
 	 * @param  string
-	 * @param  boolean
-	 * @return string
+	 * @return mixed
 	 */
 	protected function stripTags($varValue, $strAllowedTags='')
 	{
@@ -390,9 +423,8 @@ class Input
 
 	/**
 	 * Decode HTML entities
-	 * @param  string
-	 * @param  boolean
-	 * @return string
+	 * @param  mixed
+	 * @return mixed
 	 */
 	protected function decodeEntities($varValue)
 	{
@@ -406,8 +438,6 @@ class Input
 
 			return $varValue;
 		}
-
-		$varValue = get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
 
 		// Preserve basic entities
 		$varValue = str_replace
@@ -423,9 +453,8 @@ class Input
 
 	/**
 	 * Encode special characters
-	 * @param  string
-	 * @param  boolean
-	 * @return string
+	 * @param  mixed
+	 * @return mixed
 	 */
 	protected function encodeSpecialChars($varValue)
 	{
