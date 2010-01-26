@@ -256,7 +256,7 @@ abstract class Events extends Module
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['title'] = specialchars($objEvents->title);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
-		$arrEvent['target'] = ($objEvents->target ? LINK_NEW_WINDOW : '');
+		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : '');
 		$arrEvent['class'] = strlen($objEvents->cssClass) ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;

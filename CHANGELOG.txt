@@ -29,6 +29,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with publish icons not being set correctly (#1436)
 - Fixed issue with unsearchable news/events being added to the sitemap (#1464)
 - Fixed issue with striptags() not supporting POST arrays (#1429)
+- Fixed issue with events being opened in a new window (#1453)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
