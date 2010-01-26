@@ -154,7 +154,7 @@ $GLOBALS['TL_CONFIG']['dbCollation'] = 'utf8_general_ci';
  *   ftpUser = FTP username
  *   ftpPass = FTP password
  */
-$GLOBALS['TL_CONFIG']['useFTP'] = false;
+$GLOBALS['TL_CONFIG']['useFTP']  = false;
 $GLOBALS['TL_CONFIG']['ftpHost'] = '';
 $GLOBALS['TL_CONFIG']['ftpPath'] = '';
 $GLOBALS['TL_CONFIG']['ftpUser'] = '';
@@ -202,6 +202,7 @@ $GLOBALS['TL_CONFIG']['imageWidth']   = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']  = 600;
 $GLOBALS['TL_CONFIG']['jpgQuality']   = 80;
 $GLOBALS['TL_CONFIG']['uploadFields'] = 8;
+$GLOBALS['TL_CONFIG']['fancyUpload']  = true;
 
 
 /**
@@ -217,7 +218,7 @@ $GLOBALS['TL_CONFIG']['uploadFields'] = 8;
  *   smtpUser = SMTP username
  *   smtpPass = SMTP password
  */
-$GLOBALS['TL_CONFIG']['useSMTP'] = false;
+$GLOBALS['TL_CONFIG']['useSMTP']  = false;
 $GLOBALS['TL_CONFIG']['smtpHost'] = 'localhost';
 $GLOBALS['TL_CONFIG']['smtpPort'] = 25;
 $GLOBALS['TL_CONFIG']['smtpUser'] = '';

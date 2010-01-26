@@ -62,6 +62,7 @@ $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Image file ty
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If the width of an image or movie exceeds this value, it will be adjusted automatically.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the TYPOlight files directory.');
+$GLOBALS['TL_LANG']['tl_settings']['fancyUpload']         = array('Use FancyUpload', 'Upload files via FancyUpload (requires Flash and JavaScript).');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximum image width', 'Here you can enter the maximum width for image uploads in pixels.');

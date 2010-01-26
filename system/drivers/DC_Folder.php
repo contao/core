@@ -847,58 +847,18 @@ class DC_Folder extends DataContainer implements listable, editable
   <input type="file" name="'.$i.'" class="tl_upload_field" maxlength="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" onfocus="Backend.getScrollOffset();" /><br />';
 		}
 
-		// Generate FancyUpload key
-		$_SESSION['FANCY_KEY'] = md5(microtime(true));
+		$strFancyUpload = '';
 
 		// Add FancyUpload scripts
-		$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
+		if ($GLOBALS['TL_CONFIG']['fancyUpload'])
+		{
+			// Generate FancyUpload key
+			$_SESSION['FANCY_KEY'] = md5(microtime(true));
 
-		// Display upload form
-		return '
-<div id="tl_buttons">
-<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
-</div>
+			$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
 
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>'.$this->getMessages().'
-
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
-<div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_upload" />
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" />
-
-<div class="tl_tbox block">
-  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
-  <div id="fancy-fallback">'.$fields.'
-  </div>
-  <div id="fancy-status" class="hide">
-  <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
-  <div>
-    <strong class="overall-title"></strong><br />
-    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
-  </div>
-  <div style="margin-top:3px">
-    <strong class="current-title"></strong><br />
-    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
-  </div>
-  <div class="current-text"></div>
-  </div>
-  <ul id="fancy-list" class="hide">
-    <li></li>
-  </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
-</div>
-
-</div>
-
-<div id="fancy-submit" class="tl_formbody_submit">
-
-<div class="tl_submit_container">
-<input type="submit" name="upload" class="tl_submit" alt="upload files" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'" />
-<input type="submit" name="uploadNback" class="tl_submit" alt="upload files and go back" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'" />
-</div>
-
-</div>
+			$strFancyUpload = '
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -1015,7 +975,54 @@ window.addEvent("domready", function() {
   });
 });
 //--><!]]>
-</script>
+</script>';
+		}
+
+		// Display upload form
+		return '
+<div id="tl_buttons">
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+</div>
+
+<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>'.$this->getMessages().'
+
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="tl_upload" />
+<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" />
+
+<div class="tl_tbox block">
+  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
+  <div id="fancy-fallback">'.$fields.'
+  </div>
+  <div id="fancy-status" class="hide">
+  <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
+  <div>
+    <strong class="overall-title"></strong><br />
+    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
+  </div>
+  <div style="margin-top:3px">
+    <strong class="current-title"></strong><br />
+    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
+  </div>
+  <div class="current-text"></div>
+  </div>
+  <ul id="fancy-list" class="hide">
+    <li></li>
+  </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
+  <p class="tl_help">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
+</div>
+
+</div>
+
+<div id="fancy-submit" class="tl_formbody_submit">
+
+<div class="tl_submit_container">
+<input type="submit" name="upload" class="tl_submit" alt="upload files" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'" />
+<input type="submit" name="uploadNback" class="tl_submit" alt="upload files and go back" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'" />
+</div>
+
+</div>' . $strFancyUpload . '
 
 </form>';
 	}

@@ -6,10 +6,6 @@
  * @copyright	Authors
  */
 
-.hide {
-	display: none;
-}
-
 /* CSS vs. Adblock tabs */
 .swiff-uploader-box a {
 	display: none !important;

@@ -129,6 +129,10 @@ ul.sortable, ul.sortable li
 	overflow:hidden;
 	display:inline;
 }
+.hide
+{
+	display:none;
+}
 
 /* Forms */
 form
