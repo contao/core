@@ -265,7 +265,7 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $this->Template->title->value;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . $this->Environment->request);
 
 					$objEmail->sendTo($objUser->email);
 				}
@@ -383,7 +383,7 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $objTask->title;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . $this->Environment->request);
 
 					$objEmail->sendTo($objUser->email);
 				}

@@ -48,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_task']['createdBy']  = 'created by %s';
 $GLOBALS['TL_LANG']['tl_task']['creator']    = 'Creator';
 $GLOBALS['TL_LANG']['tl_task']['noTasks']    = 'Currently there are no tasks.';
 $GLOBALS['TL_LANG']['tl_task']['delConfirm'] = 'Do you really want to remove task ID %s?';
-$GLOBALS['TL_LANG']['tl_task']['message']    = "\n\n---\n\nThis task has been assigned by %s.\n";
+$GLOBALS['TL_LANG']['tl_task']['message']    = "\n\n---\n\nThis task has been assigned by %s.\n%s\n";
 $GLOBALS['TL_LANG']['tl_task']['history']    = 'Task history';
 
 
