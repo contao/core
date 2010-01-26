@@ -904,8 +904,8 @@ window.addEvent("domready", function() {
     },
     target: "fancy-browse",
     onLoad: function() {
-      $("fancy-status").removeClass("hide");
-      $("fancy-list").removeClass("hide");
+      $("fancy-status").removeClass("fancy-hide");
+      $("fancy-list").removeClass("fancy-hide");
       $("fancy-fallback").destroy();
       $("fancy-submit").destroy();
       this.target.addEvents({
@@ -995,7 +995,7 @@ window.addEvent("domready", function() {
   <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
   <div id="fancy-fallback">'.$fields.'
   </div>
-  <div id="fancy-status" class="hide">
+  <div id="fancy-status" class="fancy-hide">
   <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
   <div>
     <strong class="overall-title"></strong><br />
@@ -1007,7 +1007,7 @@ window.addEvent("domready", function() {
   </div>
   <div class="current-text"></div>
   </div>
-  <ul id="fancy-list" class="hide">
+  <ul id="fancy-list" class="fancy-hide">
     <li></li>
   </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'

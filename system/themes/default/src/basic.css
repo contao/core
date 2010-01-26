@@ -129,7 +129,7 @@ ul.sortable, ul.sortable li
 	overflow:hidden;
 	display:inline;
 }
-.hide
+.fancy-hide
 {
 	display:none;
 }
