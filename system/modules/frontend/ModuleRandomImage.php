@@ -127,7 +127,7 @@ class ModuleRandomImage extends Module
 
 		if ($arrMeta[0] == '')
 		{
-			$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objImage->filename)));
+			$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objImage->filename));
 		}
 
 		$arrImage = array();

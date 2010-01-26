@@ -98,7 +98,7 @@ class ContentGallery extends ContentElement
 
 				if ($arrMeta[0] == '')
 				{
-					$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
 				}
 
 				if ($objFile->isGdImage)
@@ -137,7 +137,7 @@ class ContentGallery extends ContentElement
 
 					if ($arrMeta[0] == '')
 					{
-						$arrMeta[0] = ucwords(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+						$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
 					}
 
 					$images[$file . '/' . $subfile] = array
