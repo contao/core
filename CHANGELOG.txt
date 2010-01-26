@@ -27,6 +27,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with cached pages being sent with the wrong header (#1407)
 - Fixed issue with right column articles overriding the page title (#1440)
 - Fixed issue with publish icons not being set correctly (#1436)
+- Fixed issue with unsearchable news/events being added to the sitemap (#1464)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)

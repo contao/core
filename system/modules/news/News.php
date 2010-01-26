@@ -198,7 +198,7 @@ class News extends Frontend
 				$arrProcessed[$objArchive->jumpTo] = false;
 
 				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
 											->limit(1)
 											->execute($objArchive->jumpTo);
 
