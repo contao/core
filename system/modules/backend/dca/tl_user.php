@@ -655,18 +655,18 @@ class tl_user extends Backend
 			return '';
 		}
 
-		// Protect admin accounts
-		if (!$this->User->isAdmin && $row['admin'])
-		{
-			return $this->generateImage('invisible.gif') . ' ';
-		}
-
 		$href .= '&amp;tid='.$row['id'].'&amp;state='.$row['disable'];
 
 		if ($row['disable'])
 		{
 			$icon = 'invisible.gif';
 		}		
+
+		// Protect admin accounts
+		if (!$this->User->isAdmin && $row['admin'])
+		{
+			return $this->generateImage($icon) . ' ';
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}

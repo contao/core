@@ -676,21 +676,21 @@ class tl_article extends Backend
 			return '';
 		}
 
-		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($row['pid']);
-
-		if (!$this->User->isAdmin && !$this->User->isAllowed(2, $objPage->row()))
-		{
-			return $this->generateImage('invisible.gif') . ' ';
-		}
-
 		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['published'] ? '' : 1);
 
 		if (!$row['published'])
 		{
 			$icon = 'invisible.gif';
 		}		
+
+		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($row['pid']);
+
+		if (!$this->User->isAdmin && !$this->User->isAllowed(4, $objPage->row()))
+		{
+			return $this->generateImage($icon) . ' ';
+		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}

@@ -6,7 +6,7 @@ Version 2.8.0 (2010--)
 --------------------------
 - Improved the e-mail address spam protection algorithm (#1248)
 - Added insert tags article/faq/news/event_open, _url and _title (#1370)
-- Added an option to disable FancyUpload (#1423) 
+- Added an option to disable FancyUpload (#1423)
 - Removed PCRE modifier /e for better compatibility (#1405)
 - Fixed issue with empty alias drop-down menus
 - Fixed issue with feed names not being mandatory (#1317)
@@ -26,7 +26,8 @@ Version 2.8.0 (2010--)
 - Fixed issue with listing module not working when alias usage is disabled (#1408)
 - Fixed issue with cached pages being sent with the wrong header (#1407)
 - Fixed issue with right column articles overriding the page title (#1440)
-- Fixed some minor issues 
+- Fixed issue with publish icons not being set correctly (#1436)
+- Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
 ----------------------------
