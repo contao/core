@@ -116,8 +116,8 @@ class Newsletter extends Backend
 			// Preview
 			if (isset($_GET['preview']))
 			{
-				// Check e-mail address
-				if (!preg_match('/^\w+([_\.-]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $this->Input->get('recipient', true)))
+				// Check the e-mail address
+				if (!$this->isValidEmailAddress($this->Input->get('recipient', true)))
 				{
 					$_SESSION['TL_PREVIEW_ERROR'] = true;
 					$this->redirect($referer);
@@ -201,7 +201,7 @@ class Newsletter extends Backend
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
 									   ->execute($strRecipient);
 
-						$this->log('Recipient address ' . $strRecipient . ' was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_NEWSLETTER);
+						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_NEWSLETTER);
 					}
 				}
 
@@ -443,8 +443,22 @@ class Newsletter extends Backend
 
 				foreach ($arrRecipients as $strRecipient)
 				{
-					$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE pid=? AND email=?")->execute($this->Input->get('id'), $strRecipient);
-					$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=?, email=?, active=?")->execute($this->Input->get('id'), $time, $strRecipient, 1);
+					// Skip invalid entries
+					if (!$this->isValidEmailAddress($strRecipient))
+					{
+						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_NEWSLETTER);
+						continue;
+					}
+
+					// Check whether the e-mail address exists
+					$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+												   ->execute($this->Input->get('id'), $strRecipient);
+
+					if ($objRecipient->total < 1)
+					{
+						$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=1")
+									   ->execute($this->Input->get('id'), $strRecipient);
+					}
 				}
 			}
 

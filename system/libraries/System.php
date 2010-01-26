@@ -537,6 +537,22 @@ abstract class System
 		$objIdn = new idna_convert();
 		return $objIdn->decode($strEmail);
 	}
+
+
+	/**
+	 * Validate an e-mail address
+	 * @param string
+	 * @return boolean
+	 */
+	protected function isValidEmailAddress($strEmail)
+	{
+		if (preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail))
+		{
+			return true;
+		}
+
+		return false;
+	}
 }
 
 ?>

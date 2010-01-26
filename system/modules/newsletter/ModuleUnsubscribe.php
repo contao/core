@@ -148,7 +148,7 @@ class ModuleUnsubscribe extends Module
 		$varInput = $this->idnaEncode($this->Input->post('email', true));
 
 		// Validate e-mail address
-		if (!preg_match('/^\w+([!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*\w+)*@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $varInput))
+		if (!$this->isValidEmailAddress($varInput))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();

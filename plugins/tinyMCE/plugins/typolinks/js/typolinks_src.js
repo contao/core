@@ -105,7 +105,7 @@ var LinkDialog = {
 					});
 
 					// PATCH: handle target="_blank"
-					t.fixIssues(ed, f);
+					t.fixIssues(ed, e, f);
 				}
 			});
 		} else {
@@ -118,7 +118,7 @@ var LinkDialog = {
 			});
 
 			// PATCH: handle target="_blank"
-			this.fixIssues(ed, f);
+			this.fixIssues(ed, e, f);
 		}
 
 		// Don't move caret if selection was image
@@ -134,14 +134,14 @@ var LinkDialog = {
 	},
 
 	// PATCH: add function fixIssues
-	fixIssues : function(ed, f) {
+	fixIssues : function(ed, e, f) {
 		var o = ed.dom.getAttrib(e, 'onclick');
 
 		// Handle target="_blank"
 		if (getSelectValue(f, "target_list") == '_blank' && !/window.open\(this.href\);/.test(o)) {
-			ed.dom.setAttrib(e, 'onclick', ((o != '') ? o + ' ' : '') + 'window.open(this.href); return false;');
+			ed.dom.setAttrib(e, 'onclick', tinymce.trim(o + ' window.open(this.href); return false;'));
 		} else if (o) {
-			ed.dom.setAttrib(e, 'onclick', o.replace('window.open(this.href); return false;', ''));
+			ed.dom.setAttrib(e, 'onclick', tinymce.trim(o.replace('window.open(this.href); return false;', '')));
 		}
 
 		// Fix relative URLs
@@ -152,6 +152,7 @@ var LinkDialog = {
 			e.setAttribute('mce_href', f.href.value);
 		}
 	},
+	// PATCH EOF
 
 	checkPrefix : function(n) {
 		if (n.value && Validator.isEmail(n) && !/^\s*mailto:/i.test(n.value) && confirm(tinyMCEPopup.getLang('typolinks_dlg.link_is_email')))

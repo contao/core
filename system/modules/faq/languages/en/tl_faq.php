@@ -38,7 +38,7 @@ $GLOBALS['TL_LANG']['tl_faq']['addImage']     = array('Add an image', 'Add an im
 $GLOBALS['TL_LANG']['tl_faq']['addEnclosure'] = array('Add enclosures', 'Add one or more downloadable files to the FAQ.');
 $GLOBALS['TL_LANG']['tl_faq']['enclosure']    = array('Enclosures', 'Please choose the files you want to attach.');
 $GLOBALS['TL_LANG']['tl_faq']['noComments']   = array('Disable comments', 'Do not allow comments for this particular FAQ.');
-$GLOBALS['TL_LANG']['tl_faq']['published']    = array('Publish FAQ', 'Make the FAQ publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_faq']['published']    = array('Publish the FAQ', 'Make the FAQ publicly visible on the website.');
 
 
 /**
