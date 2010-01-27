@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			array('tl_page', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb'),
-			array('tl_page', 'setDefaultLanguage'),
+			array('tl_page', 'setDefaultLanguage')
 		),
 		'onsubmit_callback' => array
 		(
@@ -657,7 +657,7 @@ class tl_page extends Backend
 						$pagemounts[] = $root;
 					}
 
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
 				}
 
 				$error = false;

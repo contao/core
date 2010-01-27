@@ -636,7 +636,7 @@ class tl_content extends Backend
 		foreach ($this->User->pagemounts as $root)
 		{
 			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
 		}
 
 		$pagemounts = array_unique($pagemounts);
@@ -753,7 +753,7 @@ class tl_content extends Backend
 		foreach ($this->User->pagemounts as $root)
 		{
 			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
 		}
 
 		$pagemounts = array_unique($pagemounts);
@@ -825,7 +825,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Get all content elements and return them as array
+	 * Get all content elements and return them as array (content element alias)
 	 * @return array
 	 */
 	public function getAlias()
@@ -838,7 +838,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
 			}
 
 			if (empty($arrPids))
@@ -884,7 +884,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Get all articles and return them as array
+	 * Get all articles and return them as array (article alias)
 	 * @param object
 	 * @return array
 	 */
@@ -898,7 +898,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
 			}
 
 			if (empty($arrPids))
@@ -978,20 +978,39 @@ class tl_content extends Backend
 
 
 	/**
-	 * Get all articles and return them as array
+	 * Get all articles and return them as array (article teaser)
+	 * @param object
 	 * @return array
 	 */
-	public function getArticles()
+	public function getArticles(DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrArticle = array();
+		$arrRoot = array();
 
+		// Limit pages to the website root
+		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		if ($objPage->numRows)
+		{
+			$objPage = $this->getPageDetails($objPage->pid);
+			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+		}
+
+		// Limit pages to the user's pagemounts
 		if (!$this->User->isAdmin)
 		{
 			foreach ($this->User->pagemounts as $id)
 			{
+				if (!in_array($id, $arrRoot))
+				{
+					continue;
+				}
+
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
 			}
 
 			if (empty($arrPids))
@@ -1003,7 +1022,7 @@ class tl_content extends Backend
 		}
 		else
 		{
-			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article ORDER BY parent, sorting");
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, sorting");
 		}
 
 		while ($objArticle->next())
