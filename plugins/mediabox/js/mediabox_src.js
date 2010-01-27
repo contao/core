@@ -1,6 +1,6 @@
 /*
-	mediaboxAdvanced v1.1.6 - The ultimate extension of Slimbox and Mediabox; an all-media script
-	updated 2009.09.07
+	mediaboxAdvanced v1.2.0 - The ultimate extension of Slimbox and Mediabox; an all-media script
+	updated 2010.01.24
 	(c) 2007-2009 John Einselen <http://iaian7.com>
 		based on
 	Slimbox v1.64 - The ultimate lightweight Lightbox clone
@@ -12,7 +12,6 @@
 var Mediabox;
 
 (function() {
-
 	// Global variables, accessible to Mediabox only
 	var options, images, activeImage, prevImage, nextImage, top, mTop, left, mLeft, winWidth, winHeight, fx, preload, preloadPrev = new Image(), preloadNext = new Image(), foxfix = false, iefix = false,
 	// DOM elements
@@ -20,9 +19,7 @@ var Mediabox;
 	// Mediabox specific vars
 	URL, WH, WHL, elrel, mediaWidth, mediaHeight, mediaType = "none", mediaSplit, mediaId = "mediaBox", mediaFmt;
 
-	/*
-		Initialization
-	*/
+	/*	Initialization	*/
 
 	window.addEvent("domready", function() {
 		// Create and append the Mediabox HTML code at the bottom of the document
@@ -50,9 +47,7 @@ var Mediabox;
 		};
 	});
 
-	/*
-		API
-	*/
+	/*	API		*/
 
 	Mediabox = {
 		close: function(){ 
@@ -75,7 +70,6 @@ var Mediabox;
 				defaultWidth: 640,				// Default width of the box (in pixels) for undefined media (MP4, FLV, etc.)
 				defaultHeight: 360,				// Default height of the box (in pixels) for undefined media (MP4, FLV, etc.)
 				showCaption: true,				// Display the title and caption, true / false
-//				animateCaption: true,			// Animate the caption, true / false
 				showCounter: true,				// If true, a counter will only be shown if there is more than 1 image to display
 				counterText: '({x} of {y})',	// Translate or change as you wish
 //			Image options
@@ -91,24 +85,27 @@ var Mediabox;
 				autoplay: 'true',			// Plays the video as soon as it's opened
 				autoplayNum: '1',			// 1 = true
 				autoplayYes: 'yes',			// yes = true
-//				volume: '50',				// 0-100 (not currently implemented)
-				bgcolor: '#000000',			// Background color, used for both flash and QT media
+				volume: '100',				// 0-100, used for NonverBlaster and Quicktime players
+				medialoop: 'true',			// Loop video playback, true / false, used for NonverBlaster and Quicktime players
+				bgcolor: '#000000',			// Background color, used for flash and QT media
 				wmode: 'opaque',			// Background setting for Adobe Flash ('opaque' and 'transparent' are most common)
+//			NonverBlaster
+				useNB: true,				// use NonverBlaster (true) or JW Media Player (false) for .flv and .mp4 files
+				// PATCH: set path to plugins directory
+				playerpath: 'plugins/mediabox/NonverBlaster.swf',	// Path to NonverBlaster.swf
+				// PATCH EOF
+				controlColor: '0xFFFFFF',	// set the controlbar color
+				controlBackColor: '0x000000',	// set the controlbar color
+				showTimecode: 'false',		// turn timecode display off or on
 //			JW Media Player settings and options
 				// PATCH: set path to plugins directory
-				playerpath: 'plugins/mediabox/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
+				JWplayerpath: 'plugins/mediabox/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
+				// PATCH EOF
 				backcolor:	'000000',		// Base color for the controller, color name / hex value (0x000000)
 				frontcolor: '999999',		// Text and button color for the controller, color name / hex value (0x000000)
 				lightcolor: '000000',		// Rollover color for the controller, color name / hex value (0x000000)
 				screencolor: '000000',		// Rollover color for the controller, color name / hex value (0x000000)
 				controlbar: 'over',			// bottom, over, none (this setting is ignored when playing audio files)
-//			NonverBlaster
-				useNB: true,				// use NonverBlaster in place of the JW Media Player for .flv and .mp4 files
-				// PATCH: set path to plugins directory
-				NBpath: 'plugins/mediabox/NonverBlaster.swf',	// Path to NonverBlaster.swf
-				NBloop: 'true',				// Loop video playback, true / false
-				controllerColor: '0x777777',	// set the controlbar colour
-				showTimecode: 'false',		// turn timecode display off or on
 //			Quicktime options
 				controller: 'true',			// Show controller, true / false
 //			Flickr options
@@ -116,15 +113,15 @@ var Mediabox;
 //			Revver options
 				revverID: '187866',			// Revver affiliate ID, required for ad revinue sharing
 				revverFullscreen: 'true',	// Fullscreen option
-				revverBack: '000000',		// Background colour
-				revverFront: 'ffffff',		// Foreground colour
-				revverGrad: '000000',		// Gradation colour
+				revverBack: '000000',		// Background color
+				revverFront: 'ffffff',		// Foreground color
+				revverGrad: '000000',		// Gradation color
 //			Ustream options
 				usViewers: 'true',				// Show online viewer count (true/false)
 //			Youtube options
 				ytBorder: '0',				// Outline				(1=true, 0=false)
-				ytColor1: '000000',			// Outline colour
-				ytColor2: '333333',			// Base interface colour (highlight colours stay consistent)
+				ytColor1: '000000',			// Outline color
+				ytColor2: '333333',			// Base interface color (highlight colors stay consistent)
 				ytQuality: '&ap=%2526fmt%3D18', // Leave empty for standard quality, use '&ap=%2526fmt%3D18' for high quality, and '&ap=%2526fmt%3D22' for HD (note that not all videos are availible in high quality, and very few in HD)
 				ytRel: '0',					// Show related videos	(1=true, 0=false)
 				ytInfo: '1',				// Show video info		(1=true, 0=false)
@@ -135,7 +132,7 @@ var Mediabox;
 				vmTitle: '1',				// Show video title
 				vmByline: '1',				// Show byline
 				vmPortrait: '1',			// Show author portrait
-				vmColor: 'ffffff'			// Custom controller colours, hex value minus the # sign, defult is 5ca0b5
+				vmColor: 'ffffff'			// Custom controller colors, hex value minus the # sign, defult is 5ca0b5
 			}, _options || {});
 
 			if ((Browser.Engine.gecko) && (Browser.Engine.version<19)) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
@@ -143,16 +140,6 @@ var Mediabox;
 				options.overlayOpacity = 1;
 				overlay.className = 'mbOverlayFF';
 			}
-/*
-			if ((Browser.Engine.gecko)) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
-				foxfix = true;
-				overlay.setStyle("position", "absolute");
-				if ((Browser.Engine.version<19)) {
-					options.overlayOpacity = 1;
-					overlay.className = 'mbOverlayFF';
-				}
-			}
-*/
 
 			if (typeof _images == "string") {	// The function is called for a single image, with URL and Title as first two arguments
 				_images = [[_images,startImage,_options]];
@@ -210,11 +197,9 @@ var Mediabox;
 			var links = this;
 
 			// PATCH: enable contextmenu
-			/*
-			links.addEvent('contextmenu', function(e){
-				if (this.toString().match(/\.gif|\.jpg|\.png/i)) e.stop();
-			});
-			*/
+			//links.addEvent('contextmenu', function(e){
+			//	if (this.toString().match(/\.gif|\.jpg|\.png/i)) e.stop();
+			//});
 			// PATCH EOF
 
 			links.removeEvents("click").addEvent("click", function() {
@@ -237,9 +222,7 @@ var Mediabox;
 		}
 	});
 
-	/*
-		Internal functions
-	*/
+	/*	Internal functions	*/
 
 	function position() {
 		overlay.setStyles({top: window.getScrollTop(), left: window.getScrollLeft()});
@@ -305,16 +288,12 @@ var Mediabox;
 			center.className = "mbLoading";
 
 // MEDIABOX FORMATING
-			// PATCH: allow rel="lightbox" without options
-			if (!$defined(images[imageIndex][2])) {
-				images[imageIndex][2] = '';
-			}
-			// PATCH EOF
+			if (!images[imageIndex][2]) images[imageIndex][2] = '';	// Thanks to Leo Feyer for offering this fix
 			WH = images[imageIndex][2].split(' ');
 			WHL = WH.length;
 			if (WHL>1) {
-				mediaWidth = (WH[WHL-2].match("%")) ? (window.getWidth()*("0."+(WH[WHL-2].replace("%", ""))))+"px" : WH[WHL-2]+"px";
-				mediaHeight = (WH[WHL-1].match("%")) ? (window.getHeight()*("0."+(WH[WHL-1].replace("%", ""))))+"px" : WH[WHL-1]+"px";
+				mediaWidth = (WH[WHL-2].match("%")) ? (window.getWidth()*((WH[WHL-2].replace("%", ""))*0.01))+"px" : WH[WHL-2]+"px";
+				mediaHeight = (WH[WHL-1].match("%")) ? (window.getHeight()*((WH[WHL-1].replace("%", ""))*0.01))+"px" : WH[WHL-1]+"px";
 			} else {
 				mediaWidth = "";
 				mediaHeight = "";
@@ -355,14 +334,14 @@ var Mediabox;
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
 				if (options.useNB) {
-				preload = new Swiff(''+options.NBpath+'?mediaURL='+URL+'&allowSmoothing=true&autoPlay='+options.autoplay+'&buffer=6&showTimecode='+options.showTimecode+'&loop='+options.NBloop+'&controlColour='+options.controllerColor+'&scaleIfFullScreen=true&showScalingButton=true', {
+				preload = new Swiff(''+options.playerpath+'?mediaURL='+URL+'&allowSmoothing=true&autoPlay='+options.autoplay+'&buffer=6&showTimecode='+options.showTimecode+'&loop='+options.medialoop+'&controlColor='+options.controlColor+'&controlBackColor='+options.controlBackColor+'&defaultVolume='+options.volume+'&scaleIfFullScreen=true&showScalingButton=true&crop=false', {
 					id: 'MediaboxSWF',
 					width: mediaWidth,
 					height: mediaHeight,
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				} else {
-				preload = new Swiff(''+options.playerpath+'?file='+URL+'&backcolor='+options.backcolor+'&frontcolor='+options.frontcolor+'&lightcolor='+options.lightcolor+'&screencolor='+options.screencolor+'&autostart='+options.autoplay+'&controlbar='+options.controlbar, {
+				preload = new Swiff(''+options.JWplayerpath+'?file='+URL+'&backcolor='+options.backcolor+'&frontcolor='+options.frontcolor+'&lightcolor='+options.lightcolor+'&screencolor='+options.screencolor+'&autostart='+options.autoplay+'&controlbar='+options.controlbar, {
 					id: 'MediaboxSWF',
 					width: mediaWidth,
 					height: mediaHeight,
@@ -384,21 +363,21 @@ var Mediabox;
 					URL[4] = URL[4] || URL[3];
 					URL = "http://media4.fjarnet.net/tweet/tweetmicapp-"+URL[4]+'.mp3';
 				}
-//				if (options.useNB) {
-//				preload = new Swiff(''+options.NBpath+'?mediaURL='+URL+'&allowSmoothing=true&autoPlay='+options.autoplay+'&buffer=6&showTimecode='+options.showTimecode+'&loop='+options.NBloop+'&controlColour='+options.controllerColor+'&scaleIfFullScreen=true&showScalingButton=true', {
-//					id: 'MediaboxSWF',
-//					width: mediaWidth,
-//					height: mediaHeight,
-//					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-//					});
-//				} else {
-				preload = new Swiff(''+options.playerpath+'?file='+URL+'&backcolor='+options.backcolor+'&frontcolor='+options.frontcolor+'&lightcolor='+options.lightcolor+'&screencolor='+options.screencolor+'&autostart='+options.autoplay, {
+				if (options.useNB) {
+				preload = new Swiff(''+options.playerpath+'?mediaURL='+URL+'&allowSmoothing=true&autoPlay='+options.autoplay+'&buffer=6&showTimecode='+options.showTimecode+'&loop='+options.medialoop+'&controlColor='+options.controlColor+'&controlBackColor='+options.controlBackColor+'&defaultVolume='+options.volume+'&scaleIfFullScreen=true&showScalingButton=true&crop=false', {
 					id: 'MediaboxSWF',
 					width: mediaWidth,
 					height: mediaHeight,
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
-//				}
+				} else {
+				preload = new Swiff(''+options.JWplayerpath+'?file='+URL+'&backcolor='+options.backcolor+'&frontcolor='+options.frontcolor+'&lightcolor='+options.lightcolor+'&screencolor='+options.screencolor+'&autostart='+options.autoplay, {
+					id: 'MediaboxSWF',
+					width: mediaWidth,
+					height: mediaHeight,
+					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
+					});
+				}
 				startEffect();
 // SWF
 			} else if (URL.match(/\.swf/i) || mediaType == 'flash') {
@@ -410,6 +389,19 @@ var Mediabox;
 					width: mediaWidth,
 					height: mediaHeight,
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
+					});
+				startEffect();
+// Quicktime
+			} else if (URL.match(/\.mov|\.m4v|\.m4a|\.aiff|\.avi|\.caf|\.dv|\.mid|\.m3u|\.mp3|\.mp2|\.mp4|\.qtz/i) || mediaType == 'qt') {
+				mediaType = 'qt';
+				mediaWidth = mediaWidth || options.defaultWidth;
+				mediaHeight = (parseInt(mediaHeight)+16)+"px" || options.defaultHeight;
+				preload = new Quickie(URL, {
+					id: 'MediaboxQT',
+					width: mediaWidth,
+					height: mediaHeight,
+					container: 'mbImage',
+					attributes: {controller: options.controller, autoplay: options.autoplay, volume: options.volume, loop: options.medialoop, bgcolor: options.bgcolor}
 					});
 				startEffect();
 // SOCIAL SITES
@@ -517,21 +509,6 @@ var Mediabox;
 					width: mediaWidth,
 					height: mediaHeight,
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					});
-				startEffect();
-// Justin.tv
-			} else if (URL.match(/justin\.tv/i)) {
-				mediaType = 'obj';
-				mediaWidth = mediaWidth || "353px";
-				mediaHeight = mediaHeight || "295px";
-				mediaSplit = URL.split('/');
-				mediaId = mediaSplit[3];
-				preload = new Swiff('http://www.justin.tv/widgets/jtv_player.swf', {
-					id: 'jtv_player_flash',
-					width: mediaWidth,
-					height: mediaHeight,
-//					params: {flashvars: 'channel='+mediaId+'&auto_play=true&start_volume=25', wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					params: {flashvars: 'channel='+mediaId, wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
 // Megavideo - Thanks to Robert Jandreu for suggesting this code!
@@ -841,12 +818,12 @@ var Mediabox;
 			mediaHeight = preload.height;
 			if (options.imgBackground) {
 				image.setStyles({backgroundImage: "url("+URL+")", display: ""});
-			} else {
-				if (mediaHeight >= winHeight-options.imgPadding) {
+			} else {	// Thanks to Dusan Medlin for fixing large 16x9 image errors in a 4x3 browser
+				if (mediaHeight >= winHeight-options.imgPadding && (mediaHeight / winHeight) >= (mediaWidth / winWidth)) {
 					mediaHeight = winHeight-options.imgPadding;
 					mediaWidth = preload.width = parseInt((mediaHeight/preload.height)*mediaWidth);
 					preload.height = mediaHeight;
-				} else if (mediaWidth >= winWidth-options.imgPadding) {
+				} else if (mediaWidth >= winWidth-options.imgPadding && (mediaHeight / winHeight) < (mediaWidth / winWidth)) {
 					mediaWidth = winWidth-options.imgPadding;
 					mediaHeight = preload.height = parseInt((mediaWidth/preload.width)*mediaHeight);
 					preload.width = mediaWidth;
@@ -866,6 +843,9 @@ var Mediabox;
 				image.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(image);
 			}
+		} else if (mediaType == "qt") {
+			image.setStyles({backgroundImage: "none", display: ""});
+			preload;
 		} else if (mediaType == "inline") {
 			image.setStyles({backgroundImage: "none", display: ""});
 			image.set('html', preload);
