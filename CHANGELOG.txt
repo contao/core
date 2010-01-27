@@ -31,6 +31,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with striptags() not supporting POST arrays (#1429)
 - Fixed issue with events being opened in a new window (#1453)
 - Fixed issue with article teaser links not being limited to the website root (#1409)
+- Fixed issue with textual font-sizes not being imported (#1465)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)

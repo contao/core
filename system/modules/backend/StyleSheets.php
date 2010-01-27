@@ -1138,7 +1138,7 @@ class StyleSheets extends Backend
 					break;
 
 				case 'font-size':
-					if ($arrChunks[1] == 'inherit')
+					if (!preg_match('/[0-9]+/', $arrChunks[1]))
 					{
 						$arrSet['own'][] = $strDefinition;
 					}
