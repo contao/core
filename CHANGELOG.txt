@@ -5,6 +5,7 @@ TYPOlight Open Source CMS Changelog
 Version 2.8.0 (2010--)
 --------------------------
 - Updated mediabox plugin to version 1.2.0 (#1401)
+- Updated SwiftMailer plugin to version 4.0.6 (#1470)
 - Improved the e-mail address spam protection algorithm (#1248)
 - Added insert tags article/faq/news/event_open, _url and _title (#1370)
 - Added an option to disable FancyUpload (#1423)
