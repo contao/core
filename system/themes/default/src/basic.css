@@ -65,6 +65,22 @@ h1,h2,h3,h4,h5,h6
 {
 	color:#a3a3a3;
 }
+.tl_green
+{
+	color:#8ab858;
+}
+.tl_red
+{
+	color:#c55;
+}
+.tl_blue
+{
+	color:#5c9ac9;
+}
+.tl_orange
+{
+	color:#f90;
+}
 span.mandatory
 {
 	color:#f00;

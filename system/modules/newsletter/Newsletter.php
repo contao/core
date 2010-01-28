@@ -201,7 +201,7 @@ class Newsletter extends Backend
 						$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='' WHERE email=?")
 									   ->execute($strRecipient);
 
-						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_NEWSLETTER);
+						$this->log('Recipient address "' . $strRecipient . '" was rejected and has been deactivated', 'Newsletter sendNewsletter()', TL_ERROR);
 					}
 				}
 
@@ -446,7 +446,7 @@ class Newsletter extends Backend
 					// Skip invalid entries
 					if (!$this->isValidEmailAddress($strRecipient))
 					{
-						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_NEWSLETTER);
+						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
 						continue;
 					}
 

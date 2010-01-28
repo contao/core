@@ -54,7 +54,8 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		(
 			'fields'                  => array('tstamp', 'text'),
 			'format'                  => '<span style="color:#b3b3b3; padding-right:3px;">[%s]</span> %s',
-			'maxCharacters'           => 96
+			'maxCharacters'           => 96,
+			'label_callback'          => array('tl_log', 'colorize')
 		),
 		'global_operations' => array
 		(
@@ -141,5 +142,45 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		)
 	)
 );
+
+
+/**
+ * Class tl_log
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
+ * @package    Controller
+ */
+class tl_log extends Backend
+{
+
+	/**
+	 * Colorize the log entries depending on their category
+	 * @param array
+	 * @param string
+	 * @return string
+	 */
+	public function colorize($row, $label)
+	{
+		switch ($row['action'])
+		{
+			case 'CONFIGURATION':
+			case 'REPOSITORY':
+				$label = preg_replace('@^(.*</span> )(.*)$@U', '$1 <span class="tl_blue">$2</span>', $label);
+				break;
+
+			case 'CRON':
+				$label = preg_replace('@^(.*</span> )(.*)$@U', '$1 <span class="tl_green">$2</span>', $label);
+				break;
+
+			case 'ERROR':
+				$label = preg_replace('@^(.*</span> )(.*)$@U', '$1 <span class="tl_red">$2</span>', $label);
+				break;
+		}
+
+		return $label;
+	}
+}
 
 ?>
