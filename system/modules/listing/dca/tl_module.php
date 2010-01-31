@@ -58,7 +58,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_where'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['list_where'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+	'eval'                    => array('preserveTags'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_search'] = array
