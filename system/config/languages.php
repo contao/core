@@ -20,9 +20,9 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author	   Leo Feyer <http://www.typolight.org>
- * @package	   Config
- * @license	   LGPL
+ * @author     Leo Feyer <http://www.typolight.org>
+ * @package    Config
+ * @license    LGPL
  * @filesource
  */
 
