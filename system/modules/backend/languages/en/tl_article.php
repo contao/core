@@ -30,20 +30,21 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_article']['title']      = array('Title', 'Please enter the article title.');
-$GLOBALS['TL_LANG']['tl_article']['alias']      = array('Article alias', 'The article alias is a unique reference to the article which can be called instead of its numeric ID.');
-$GLOBALS['TL_LANG']['tl_article']['author']     = array('Author', 'Here you can change the author of the article.');
-$GLOBALS['TL_LANG']['tl_article']['inColumn']   = array('Display in', 'Please choose the layout section you want the article to be displayed in.');
-$GLOBALS['TL_LANG']['tl_article']['keywords']   = array('Meta keywords', 'Here you can enter a list of comma separated keywords which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate up to 800 characters.');
-$GLOBALS['TL_LANG']['tl_article']['showTeaser'] = array('Show teaser', 'Show the article teaser if there are multiple articles.');
-$GLOBALS['TL_LANG']['tl_article']['teaser']     = array('Article teaser', 'The article teaser can also be displayed with the content element "article teaser".');
-$GLOBALS['TL_LANG']['tl_article']['printable']  = array('Printable', 'Add a link to export the article as a PDF file.');
-$GLOBALS['TL_LANG']['tl_article']['cssID']      = array('CSS ID/class', 'Here you can enter an ID and one or more classes.');
-$GLOBALS['TL_LANG']['tl_article']['space']      = array('Space in front and after', 'Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
-$GLOBALS['TL_LANG']['tl_article']['published']  = array('Publish article', 'Make the article publicly visible on the website.');
-$GLOBALS['TL_LANG']['tl_article']['start']      = array('Show from', 'Do not show the article on the website before this day.');
-$GLOBALS['TL_LANG']['tl_article']['stop']       = array('Show until', 'Do not show the article on the website after this day.');
-$GLOBALS['TL_LANG']['tl_article']['tstamp']     = array('Revision date', 'Date and time of the latest revision');
+$GLOBALS['TL_LANG']['tl_article']['title']       = array('Title', 'Please enter the article title.');
+$GLOBALS['TL_LANG']['tl_article']['alias']       = array('Article alias', 'The article alias is a unique reference to the article which can be called instead of its numeric ID.');
+$GLOBALS['TL_LANG']['tl_article']['author']      = array('Author', 'Here you can change the author of the article.');
+$GLOBALS['TL_LANG']['tl_article']['inColumn']    = array('Display in', 'Please choose the layout section you want the article to be displayed in.');
+$GLOBALS['TL_LANG']['tl_article']['keywords']    = array('Meta keywords', 'Here you can enter a list of comma separated keywords which will be evaluated by search engines like Google or Yahoo. Search engines usually indicate up to 800 characters.');
+$GLOBALS['TL_LANG']['tl_article']['teaserCssID'] = array('Teaser CSS ID/class', 'Here you can set an ID and one or more classes for the teaser element.');
+$GLOBALS['TL_LANG']['tl_article']['showTeaser']  = array('Show teaser', 'Show the article teaser if there are multiple articles.');
+$GLOBALS['TL_LANG']['tl_article']['teaser']      = array('Article teaser', 'The article teaser can also be displayed with the content element "article teaser".');
+$GLOBALS['TL_LANG']['tl_article']['printable']   = array('Printable', 'Add a link to export the article as a PDF file.');
+$GLOBALS['TL_LANG']['tl_article']['cssID']       = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
+$GLOBALS['TL_LANG']['tl_article']['space']       = array('Space in front and after', 'Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+$GLOBALS['TL_LANG']['tl_article']['published']   = array('Publish article', 'Make the article publicly visible on the website.');
+$GLOBALS['TL_LANG']['tl_article']['start']       = array('Show from', 'Do not show the article on the website before this day.');
+$GLOBALS['TL_LANG']['tl_article']['stop']        = array('Show until', 'Do not show the article on the website after this day.');
+$GLOBALS['TL_LANG']['tl_article']['tstamp']      = array('Revision date', 'Date and time of the latest revision');
 
 
 /**

@@ -80,20 +80,22 @@ class ModuleArticle extends Module
 			$this->Template = new FrontendTemplate('mod_article_plain');
 		}
 
+		$alias = strlen($this->alias) ? $this->alias : $this->title;
+
+		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
+		{
+			$alias .= '-' . $this->id;
+		}
+
+		$alias = standardize($alias);
+
 		// Store raw data
 		$this->Template->setData($this->arrData);
 
 		// Generate the cssID if it is not set
 		if (!strlen($this->cssID[0]))
 		{
-			$alias = strlen($this->alias) ? $this->alias : $this->title;
-
-			if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
-			{
-				$alias .= '-' . $this->id;
-			}
-
-			$this->cssID = array(standardize($alias), $this->cssID[1]);
+			$this->cssID = array($alias, $this->cssID[1]);
 		}
 
 		$this->Template->column = $this->inColumn;
@@ -107,6 +109,19 @@ class ModuleArticle extends Module
 		if ($this->multiMode && $this->showTeaser)
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
+
+			// Override CSS ID and class
+			$arrCss = deserialize($this->teaserCssID);
+
+			if (is_array($arrCss) && count($arrCss) == 2)
+			{
+				if ($arrCss[0] == '')
+				{
+					$arrCss[0] = $alias;
+				}
+
+				$this->cssID = $arrCss;
+			}
 
 			// Store raw data
 			$this->Template->setData($this->arrData);

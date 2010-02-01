@@ -8,6 +8,7 @@ Version 2.8.0 (2010--)
 - Updated SwiftMailer plugin to version 4.0.6 (#1470)
 - Improved the e-mail address spam protection algorithm (#1248)
 - Added insert tags article/faq/news/event_open, _url and _title (#1370)
+- Added an option to assign CSS IDs/classes to teaser elements (#1392)
 - Added an option to disable FancyUpload (#1423)
 - Removed PCRE modifier /e for better compatibility (#1405)
 - Fixed issue with empty alias drop-down menus

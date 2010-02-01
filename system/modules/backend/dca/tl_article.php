@@ -144,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},showTeaser,teaser;{expert_legend:hide},printable,cssID,space;{publish_legend},published,start,stop'
+		'default'                     => '{title_legend},title,alias,author;{layout_legend},inColumn,keywords;{teaser_legend:hide},teaserCssID,showTeaser,teaser;{expert_legend:hide},printable,cssID,space;{publish_legend},published,start,stop'
 	),
 
 	// Fields
@@ -194,18 +194,26 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('style'=>'height:60px;')
 		),
+		'teaserCssID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaserCssID'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+		),
 		'showTeaser' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['showTeaser'],
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'teaser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaser'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE')
+			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr')
 		),
 		'printable' => array
 		(

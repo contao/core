@@ -22,6 +22,7 @@ CREATE TABLE `tl_article` (
   `inColumn` varchar(32) NOT NULL default '',
   `keywords` text NULL,
   `showTeaser` char(1) NOT NULL default '',
+  `teaserCssID` varchar(255) NOT NULL default '',
   `teaser` text NULL,
   `printable` char(1) NOT NULL default '',
   `cssID` varchar(255) NOT NULL default '',

@@ -81,7 +81,7 @@ $GLOBALS['TL_LANG']['tl_content']['module']       = array('Module', 'Please sele
 $GLOBALS['TL_LANG']['tl_content']['protected']    = array('Protect element', 'Show the content element to certain member groups only.');
 $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Allowed member groups', 'These groups will be able to see the content element.');
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Show to guests only', 'Hide the content element if a member is logged in.');
-$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS ID/class', 'Here you can enter an ID and one or more classes.');
+$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_content']['space']        = array('Space in front and after', 'Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
 $GLOBALS['TL_LANG']['tl_content']['source']       = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
 

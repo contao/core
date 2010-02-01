@@ -87,7 +87,7 @@ $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML code', 'You can
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Protect module', 'Show the module to certain member groups only.');
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Allowed member groups', 'These groups will be able to see the module.');
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Show to guests only', 'Hide the module if a member is logged in.');
-$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID/class', 'Here you can enter an ID and one or more classes.');
+$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Space in front and after', 'Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
 
 
