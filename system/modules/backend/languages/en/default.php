@@ -32,7 +32,8 @@
  */
 $GLOBALS['TL_LANG']['ERR']['general']        = 'An error occurred!';
 $GLOBALS['TL_LANG']['ERR']['unique']         = 'Duplicate entry in field "%s"!';
-$GLOBALS['TL_LANG']['ERR']['mandatory']      = 'Please fill in field "%s"!';
+$GLOBALS['TL_LANG']['ERR']['mandatory']      = 'Field "%s" must not be empty!';
+$GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']   = 'This field must not be empty!';
 $GLOBALS['TL_LANG']['ERR']['minlength']      = 'Field "%s" has to be at least %d characters long!';
 $GLOBALS['TL_LANG']['ERR']['digit']          = 'Please enter digits only!';
 $GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Please enter a percentage between 0 und 100!';

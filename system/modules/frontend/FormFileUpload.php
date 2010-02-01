@@ -79,7 +79,14 @@ class FormFileUpload extends Widget implements uploadable
 		{
 			if ($this->mandatory)
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+				if ($this->strLabel == '')
+				{
+					$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
+				}
+				else
+				{
+					$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+				}
 			}
 
 			return;

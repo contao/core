@@ -495,7 +495,14 @@ abstract class Widget extends Controller
 
 		if ($this->mandatory && !strlen(trim($varInput)))
 		{
-			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+			if ($this->strLabel == '')
+			{
+				$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
+			}
+			else
+			{
+				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+			}
 		}
 
 		if ($this->minlength && strlen($varInput) && utf8_strlen(trim($varInput)) < $this->minlength)
