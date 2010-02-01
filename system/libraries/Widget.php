@@ -447,6 +447,26 @@ abstract class Widget extends Controller
 			$strMethod = 'postRaw';
 		}
 
+		// Support arrays (thanks to Andreas Schempp)
+		$arrParts = explode('[', str_replace(']', '', $strKey));
+
+		if (count($arrParts) > 1)
+    	{
+			$varValue = $this->Input->$strMethod(array_shift($arrParts), $this->decodeEntities);
+
+			foreach($arrParts as $part)
+			{
+				if (!is_array($varValue))
+				{
+					break;
+				}
+
+				$varValue = $varValue[$part];
+			}
+
+			return $varValue;
+    	}
+
 		return $this->Input->$strMethod($strKey, $this->decodeEntities);
 	}
 
