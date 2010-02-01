@@ -257,6 +257,10 @@ class DC_Table extends DataContainer implements listable, editable
 				return $this->root;
 				break;
 
+			case 'createNewVersion':
+				return $this->blnCreateNewVersion;
+				break;
+
 			default:
 				return parent::__get($strKey);
 				break;
