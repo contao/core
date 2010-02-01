@@ -248,20 +248,39 @@ class News extends Frontend
 	 */
 	protected function getLink(Database_Result $objArticle, $strUrl)
 	{
-		if ($objArticle->source == 'external')
+		switch ($objArticle->source)
 		{
-			return $objArticle->url;
+			// Link to an external page
+			case 'external':
+				return $objArticle->url;
+				break;
+
+			// Link to an internal page
+			case 'internal':
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+											->limit(1)
+											->execute($objArticle->jumpTo);
+
+				if ($objParent->numRows)
+				{
+					return $this->generateFrontendUrl($objParent->row());
+				}
+				break;
+
+			// Link to an article
+			case 'article':
+				$objParent = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+											->limit(1)
+											->execute($objArticle->articleId);
+
+				if ($objParent->numRows)
+				{
+					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objParent->aAlias)) ? $objParent->aAlias : $objParent->aId));
+				}
+				break;
 		}
 
-		if ($objArticle->source == 'internal')
-		{
-			$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										->limit(1)
-										->execute($objArticle->jumpTo);
-
-			return $this->generateFrontendUrl($objParent->fetchAssoc());
-		}
-
+		// Link to the default page
 		return sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 	}
 }

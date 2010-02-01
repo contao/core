@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['internal']     = array('Internal page
 $GLOBALS['TL_LANG']['tl_calendar_events']['article']      = array('Article', 'By clicking the "read more …" button, visitors will be redirected to an article.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['external']     = array('External website', 'By clicking the "read more …" button, visitors will be redirected to an external website.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['jumpTo']       = array('Redirect page', 'Please choose the page to which visitors will be redirected when clicking the event.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['articleId']    = array('Article', 'Please choose the article to which visitors will be redirected when clicking the event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['cssClass']     = array('CSS class', 'Here you can enter one or more classes.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Disable comments', 'Do not allow comments for this particular event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Publish event', 'Make the event publicly visible on the website.');

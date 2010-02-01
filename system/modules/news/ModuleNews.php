@@ -253,8 +253,8 @@ abstract class ModuleNews extends Module
 			return self::$arrUrlCache[$strCacheKey];
 		}
 
-		// Fallback URL
-		$strUrl = ampersand($this->Environment->request, true);
+		// Initialize cache
+		self::$arrUrlCache[$strCacheKey] = '';
 
 		switch ($objArticle->source)
 		{
@@ -272,18 +272,6 @@ abstract class ModuleNews extends Module
 				}
 				break;
 
-			// Link to an article
-			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objArticle->articleId);
-
-				if ($objPage->numRows)
-				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
-				}
-				break;
-
 			// Link to an internal page
 			case 'internal':
 				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -296,25 +284,40 @@ abstract class ModuleNews extends Module
 				}
 				break;
 
-			// Link to the default page
-			default:
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objArticle->parentJumpTo);
+			// Link to an article
+			case 'article':
+				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+										  ->limit(1)
+										  ->execute($objArticle->articleId);
 
 				if ($objPage->numRows)
 				{
-					$strUrl = ampersand($this->generateFrontendUrl($objPage->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id)));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
 				}
-
-				// Add the current archive parameter (news archive)
-				if ($blnAddArchive && strlen($this->Input->get('month')))
-				{
-					$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $this->Input->get('month');
-				}
-
-				self::$arrUrlCache[$strCacheKey] = $strUrl;
 				break;
+		}
+
+		// Link to the default page
+		if (self::$arrUrlCache[$strCacheKey] == '')
+		{
+			$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+								 	  ->limit(1)
+									  ->execute($objArticle->parentJumpTo);
+
+			if ($objPage->numRows)
+			{
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id)));
+			}
+			else
+			{
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->Environment->request, true);
+			}
+
+			// Add the current archive parameter (news archive)
+			if ($blnAddArchive && strlen($this->Input->get('month')))
+			{
+				self::$arrUrlCache[$strCacheKey] .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $this->Input->get('month');
+			}
 		}
 
 		return self::$arrUrlCache[$strCacheKey];

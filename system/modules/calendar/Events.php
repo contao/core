@@ -319,18 +319,6 @@ abstract class Events extends Module
 				}
 				break;
 
-			// Link to an article
-			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objEvent->articleId);
-
-				if ($objPage->numRows)
-				{
-					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
-				}
-				break;
-
 			// Link to an internal page
 			case 'internal':
 				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -343,11 +331,21 @@ abstract class Events extends Module
 				}
 				break;
 
-			// Link to the default page
-			default:
-				return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->alias)) ? $objEvent->alias : $objEvent->id)));
+			// Link to an article
+			case 'article':
+				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+										  ->limit(1)
+										  ->execute($objEvent->articleId);
+
+				if ($objPage->numRows)
+				{
+					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
+				}
 				break;
 		}
+
+		// Link to the default page
+		return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->alias)) ? $objEvent->alias : $objEvent->id)));
 	}
 
 

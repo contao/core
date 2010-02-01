@@ -136,7 +136,7 @@ class Calendar extends Frontend
 		// Parse items
 		while ($objArticle->next())
 		{
-			$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl);
+			$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
 
 			// Recurring events
 			if ($objArticle->recurring)
@@ -162,7 +162,7 @@ class Calendar extends Frontend
 
 					if ($objArticle->startTime >= $time)
 					{
-						$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl);
+						$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
 					}
 				}
 			}
@@ -297,8 +297,9 @@ class Calendar extends Frontend
 	 * @param integer
 	 * @param integer
 	 * @param string
+	 * @param string
 	 */
-	protected function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl)
+	protected function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl, $strLink)
 	{
 		if ($intStart < time())
 		{
@@ -319,15 +320,41 @@ class Calendar extends Frontend
 			$title = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ($objArticle->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd) : '') . ')' : '');
 		}
 
-		// Add title
-		$title  .= ' ' . $objArticle->title;
+		// Add title and link
+		$title .= ' ' . $objArticle->title;
+		$link = '';
 
-		// Add link
-		if ($objArticle->source == 'external')
+		switch ($objArticle->source)
 		{
-			$link = $objArticle->url;
+			case 'external':
+				$link = $objArticle->url;
+				break;
+
+			case 'internal':
+				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+									 	  ->limit(1)
+										  ->execute($objArticle->jumpTo);
+
+				if ($objPage->numRows)
+				{
+					$link = $strLink . $this->generateFrontendUrl($objPage->row());
+				}
+				break;
+
+			case 'article':
+				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+										  ->limit(1)
+										  ->execute($objArticle->articleId);
+
+				if ($objPage->numRows)
+				{
+					$link = $strLink . $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId));
+				}
+				break;
 		}
-		else
+
+		// Link to default page
+		if ($link == '')
 		{
 			$link = sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 		}

@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['internal']     = array('Interne Seite
 $GLOBALS['TL_LANG']['tl_calendar_events']['article']      = array('Artikel', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf einen Artikel weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['external']     = array('Externe Webseite', 'Bei Anklicken des "Weiterlesen …"-Links wird der Besucher auf eine externe Webseite weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['jumpTo']       = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden, wenn Sie ein Event anklicken.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['articleId']    = array('Artikel', 'Bitte wählen Sie den Artikel aus, zu der Besucher weitergeleitet werden, wenn Sie ein Event anklicken.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['cssClass']     = array('CSS-Klasse', 'Hier können Sie eine oder mehrere Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Kommentare deaktivieren', 'Die Kommentarfunktion für dieses Event deaktivieren.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Event veröffentlichen', 'Das Event auf der Webseite anzeigen.');
