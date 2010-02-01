@@ -591,41 +591,52 @@ class tl_news extends Backend
 	public function getArticleAlias(DataContainer $dc)
 	{
 		$arrPids = array();
-		$arrAlias = array();
+		$arrArticle = array();
+		$arrRoot = array();
 
+		// Limit pages to the website root
+		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		if ($objPage->numRows)
+		{
+			$objPage = $this->getPageDetails($objPage->pid);
+			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+		}
+
+		// Limit pages to the user's pagemounts
 		if (!$this->User->isAdmin)
 		{
 			foreach ($this->User->pagemounts as $id)
 			{
+				if (!in_array($id, $arrRoot))
+				{
+					continue;
+				}
+
 				$arrPids[] = $id;
 				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
 			}
 
 			if (empty($arrPids))
 			{
-				return $arrAlias;
+				return $arrArticle;
 			}
 
-			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting")
-									   ->execute($dc->id);
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
 		}
 		else
 		{
-			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article ORDER BY parent, sorting")
-									   ->execute($dc->id);
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, sorting");
 		}
 
-		if ($objAlias->numRows)
+		while ($objArticle->next())
 		{
-			$this->loadLanguageFile('tl_article');
-
-			while ($objAlias->next())
-			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
-			}
+			$arrArticle[$objArticle->parent][$objArticle->id] = $objArticle->id . ' - ' . $objArticle->title;
 		}
 
-		return $arrAlias;
+		return $arrArticle;
 	}
 
 

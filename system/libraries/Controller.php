@@ -1391,13 +1391,25 @@ abstract class Controller extends System
 				case 'news_title':
 					$this->import('Database');
 
-					$objNews = $this->Database->prepare("SELECT n.id AS nId, n.alias AS nAlias, n.headline AS headline, p.id AS id, p.alias AS alias FROM tl_news n, tl_news_archive a, tl_page p WHERE n.pid=a.id AND a.jumpTo=p.id AND (n.id=? OR n.alias=?)")
+					$objNews = $this->Database->prepare("SELECT n.id AS nId, n.alias AS nAlias, n.headline, n.source, n.url, n.articleId as aId, a.alias AS aAlias, p.id, p.alias FROM tl_news n LEFT JOIN tl_news_archive c ON n.pid=c.id LEFT JOIN tl_article a ON n.articleId=a.id LEFT JOIN tl_page p ON p.id=(CASE WHEN n.source='internal' THEN n.jumpTo WHEN n.source='article' THEN a.pid ELSE c.jumpTo END) WHERE (n.id=? OR n.alias=?)")
 											  ->limit(1)
 											  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
 					if ($objNews->numRows < 1)
 					{
 						break;
+					}
+					elseif ($objNews->source == 'internal')
+					{
+						$strUrl = $this->generateFrontendUrl($objNews->row());
+					}
+					elseif ($objNews->source == 'article')
+					{
+						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->aAlias)) ? $objNews->aAlias : $objNews->aId));
+					}
+					elseif ($objNews->source == 'external')
+					{
+						$strUrl = $objNews->url;
 					}
 					else
 					{
@@ -1432,7 +1444,7 @@ abstract class Controller extends System
 				case 'event_title':
 					$this->import('Database');
 
-					$objEvent = $this->Database->prepare("SELECT e.id AS eId, e.alias AS eAlias, e.title AS title, p.id AS id, p.alias AS alias FROM tl_calendar_events e, tl_calendar c, tl_page p WHERE e.pid=c.id AND c.jumpTo=p.id AND (e.id=? OR e.alias=?)")
+					$objEvent = $this->Database->prepare("SELECT e.id AS eId, e.alias AS eAlias, e.title, e.source, e.url, e.articleId as aId, a.alias AS aAlias, p.id, p.alias FROM tl_calendar_events e LEFT JOIN tl_calendar c ON e.pid=c.id LEFT JOIN tl_article a ON e.articleId=a.id LEFT JOIN tl_page p ON p.id=(CASE WHEN e.source='internal' THEN e.jumpTo WHEN e.source='article' THEN a.pid ELSE c.jumpTo END) WHERE (e.id=? OR e.alias=?)")
 											   ->limit(1)
 											   ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
@@ -1440,11 +1452,23 @@ abstract class Controller extends System
 					{
 						break;
 					}
+					elseif ($objEvent->source == 'internal')
+					{
+						$strUrl = $this->generateFrontendUrl($objEvent->row());
+					}
+					elseif ($objEvent->source == 'article')
+					{
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->aAlias)) ? $objEvent->aAlias : $objEvent->aId));
+					}
+					elseif ($objEvent->source == 'external')
+					{
+						$strUrl = $objEvent->url;
+					}
 					else
 					{
 						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
 					}
-	
+
 					// Replace tag
 					switch (strtolower($elements[0]))
 					{

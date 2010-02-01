@@ -37,6 +37,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with users not being redirected to login upon Ajax requests (#1466)
 - Fixed issue with TextField widgets not supporting arrays (#1342)
 - Fixed issue with newsletter reader not supporting plain text messages (#1478)
+- Fixed issue with news and event insert tags creating wrong links (#1396)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)

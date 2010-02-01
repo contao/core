@@ -126,6 +126,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'__selector__'                => array('source', 'addTime', 'addImage', 'recurring', 'addEnclosure'),
 		'default'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop',
 		'internal'                    => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,jumpTo;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop',
+		'article'                     => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,articleId;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop',
 		'external'                    => '{title_legend},title,alias,author;{date_legend},addTime,startDate,endDate;{teaser_legend:hide},teaser;{text_legend},details;{image_legend},addImage;{recurring_legend},recurring;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,url,target;{expert_legend:hide},cssClass,noComments;{publish_legend},published,start,stop'
 	),
 
@@ -352,7 +353,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'radio',
-			'options'                 => array('default', 'internal', 'external'),
+			'options'                 => array('default', 'internal', 'article', 'external'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_events'],
 			'eval'                    => array('submitOnChange'=>true, 'helpwizard'=>true)
 		),
@@ -362,6 +363,14 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'eval'                    => array('fieldType'=>'radio')
+		),
+		'articleId' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['articleId'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_calendar_events', 'getArticleAlias'),
+			'eval'                    => array('mandatory'=>true)
 		),
 		'url' => array
 		(
@@ -640,6 +649,63 @@ class tl_calendar_events extends Backend
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
 ' . $arrRow['details'] . '
 </div>' . "\n";
+	}
+
+
+	/**
+	 * Get all articles and return them as array
+	 * @param object
+	 * @return array
+	 */
+	public function getArticleAlias(DataContainer $dc)
+	{
+		$arrPids = array();
+		$arrArticle = array();
+		$arrRoot = array();
+
+		// Limit pages to the website root
+		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		if ($objPage->numRows)
+		{
+			$objPage = $this->getPageDetails($objPage->pid);
+			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+		}
+
+		// Limit pages to the user's pagemounts
+		if (!$this->User->isAdmin)
+		{
+			foreach ($this->User->pagemounts as $id)
+			{
+				if (!in_array($id, $arrRoot))
+				{
+					continue;
+				}
+
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+			}
+
+			if (empty($arrPids))
+			{
+				return $arrArticle;
+			}
+
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
+		}
+		else
+		{
+			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, sorting");
+		}
+
+		while ($objArticle->next())
+		{
+			$arrArticle[$objArticle->parent][$objArticle->id] = $objArticle->id . ' - ' . $objArticle->title;
+		}
+
+		return $arrArticle;
 	}
 
 

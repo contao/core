@@ -303,41 +303,51 @@ abstract class Events extends Module
 	 */
 	protected function generateEventUrl(Database_Result $objEvent, $strUrl)
 	{
-		// Link to default page
-		if ($objEvent->source == 'default' || !strlen($objEvent->source))
+		switch ($objEvent->source)
 		{
-			return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->alias)) ? $objEvent->alias : $objEvent->id)));
+			// Link to an external page
+			case 'external':
+				$this->import('String');
+
+				if (substr($objEvent->url, 0, 7) == 'mailto:')
+				{
+					return $this->String->encodeEmail($objEvent->url);
+				}
+				else
+				{
+					return ampersand($objEvent->url);
+				}
+				break;
+
+			// Link to an article
+			case 'article':
+				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+										  ->limit(1)
+										  ->execute($objEvent->articleId);
+
+				if ($objPage->numRows)
+				{
+					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
+				}
+				break;
+
+			// Link to an internal page
+			case 'internal':
+				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+									 	  ->limit(1)
+										  ->execute($objEvent->jumpTo);
+
+				if ($objPage->numRows)
+				{
+					return ampersand($this->generateFrontendUrl($objPage->row()));
+				}
+				break;
+
+			// Link to the default page
+			default:
+				return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->alias)) ? $objEvent->alias : $objEvent->id)));
+				break;
 		}
-
-		// Link to external page
-		if ($objEvent->source == 'external')
-		{
-			$this->import('String');
-
-			if (substr($objEvent->url, 0, 7) == 'mailto:')
-			{
-				return $this->String->encodeEmail($objEvent->url);
-			}
-			else
-			{
-				return ampersand($objEvent->url);
-			}
-		}
-
-		// Fallback to current URL
-		$strUrl = ampersand($this->Environment->request, true);
-
-		// Get internal page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-							 	  ->limit(1)
-								  ->execute($objEvent->jumpTo);
-
-		if ($objPage->numRows)
-		{
-			return ampersand($this->generateFrontendUrl($objPage->fetchAssoc()));
-		}
-
-		return '';
 	}
 
 
