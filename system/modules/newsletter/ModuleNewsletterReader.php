@@ -160,7 +160,17 @@ class ModuleNewsletterReader extends Module
 			}
 		}
 
-		$strContent = str_ireplace(' align="center"', '', $objNewsletter->content);
+		// Support plain text newsletters (thanks to Hagen Klemp)
+		if ($objNewsletter->sendText)
+		{
+			$strContent = nl2br($objNewsletter->text);
+		}
+		else
+		{
+			$strContent = str_ireplace(' align="center"', '', $objNewsletter->content);
+		}
+
+		// Parse simple tokens
 		$strContent = $this->parseSimpleTokens($strContent, array());
 
 		// Encode e-mail addresses
