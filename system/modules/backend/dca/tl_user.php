@@ -53,10 +53,10 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 2,
 			'fields'                  => array('name'),
 			'flag'                    => 1,
-			'panelLayout'             => 'filter;search,limit'
+			'panelLayout'             => 'filter;sort,search,limit'
 		),
 		'label' => array
 		(
@@ -141,6 +141,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['username'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64)
 		),
@@ -149,6 +151,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['name'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 		),
@@ -332,11 +336,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'dateAdded' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
+			'sorting'                 => true,
+			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim')
 		),
 		'lastLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'sorting'                 => true,
+			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim')
 		)
 	)

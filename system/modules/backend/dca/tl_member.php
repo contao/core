@@ -340,11 +340,15 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		'dateAdded' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
+			'sorting'                 => true,
+			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim')
 		),
 		'lastLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
+			'sorting'                 => true,
+			'flag'                    => 6,
 			'eval'                    => array('rgxp'=>'datim')
 		)
 	)
