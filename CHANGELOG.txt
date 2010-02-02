@@ -40,6 +40,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with newsletter reader not supporting plain text messages (#1478)
 - Fixed issue with news and event insert tags creating wrong links (#1396)
 - Fixed issue with TextArea default values not supporting line breaks (#1430)
+- Fixed issue with thumbnails being created although no resizing is required (#1468)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)

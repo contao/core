@@ -692,6 +692,12 @@ abstract class Controller extends System
 			return null;
 		}
 
+		// No resizing required
+		if ($objFile->width == $width && $objFile->height == $height)
+		{
+			return $image;
+		}
+
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
