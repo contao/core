@@ -897,7 +897,7 @@ window.addEvent("domready", function() {
       "action": "fancyUpload"
     },
     appendCookieData: true,
-    url: $("'.$this->strTable.'").action.replace("main.php", "upload.php"),
+    url: $("'.$this->strTable.'").action.replace("'. basename($this->Environment->script) .'", "upload.php"),
     path: "plugins/fancyupload/Swiff.Uploader.swf",
     typeFilter: {
       "Images (*.' . implode(', *.', $uploadTypes) . ')": "*.' . implode('; *.', $uploadTypes) . '"
