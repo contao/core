@@ -110,7 +110,7 @@ class FormTextArea extends Widget
 						$this->intRows,
 						$this->intCols,
 						$this->getAttributes(),
-						specialchars($this->varValue)) . $this->addSubmit();
+						specialchars(str_replace('\n', "\n", $this->varValue))) . $this->addSubmit();
 	}
 }
 

@@ -292,7 +292,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255)
 		),
 		'class' => array
 		(
