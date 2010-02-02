@@ -578,7 +578,7 @@ class tl_news extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['headline'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . ' block">
-' . $arrRow['text'] . '
+' . (($arrRow['text'] != '') ? $arrRow['text'] : $arrRow['teaser']) . '
 </div>' . "\n";
 	}
 

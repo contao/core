@@ -647,7 +647,7 @@ class tl_calendar_events extends Backend
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['title'] . '</strong> - ' . $date . '</div>
 <div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
-' . $arrRow['details'] . '
+' . (($arrRow['details'] != '') ? $arrRow['details'] : $arrRow['teaser']) . '
 </div>' . "\n";
 	}
 
