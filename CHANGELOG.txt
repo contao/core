@@ -43,6 +43,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with thumbnails being created although no resizing is required (#1468)
 - Fixed issue with empty news/event text in the back end overview (#1489)
 - Fixed issue with FancyUpload script not being compatible to extTYPOlight (#1487)
+- Fixed issue with Date class not supporting the Swedish time format (#1498)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
