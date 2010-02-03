@@ -760,11 +760,11 @@ class tl_page extends Backend
 				// No link for the active page
 				if ($objPage->id == $intNode)
 				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', '', null, true) . ' ' . $objPage->title;
+					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' ' . $objPage->title;
 				}
 				else
 				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', '', null, true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
+					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
 				}
 
 				// Do not show the mounted pages
@@ -996,12 +996,12 @@ class tl_page extends Backend
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param string
 	 * @param object
+	 * @param string
 	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, $imageAttribute, DataContainer $dc=null, $blnReturnImage=false)
+	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
 	{
 		$sub = 0;
 		$image = ''.$row['type'].'.gif';
