@@ -858,124 +858,30 @@ class DC_Folder extends DataContainer implements listable, editable
 			$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
 			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
 
-			$strFancyUpload = '
+			$fancy = new stdClass();
 
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent("domready", function() {
-  (function() {
-    var phrases = {
-      "progressOverall": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'].'",
-      "currentTitle": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle'].'",
-      "currentFile": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile'].'",
-      "currentProgress": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'].'",
-      "fileName": "{name}",
-      "remove": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_remove'].'",
-      "removeTitle": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle'].'",
-      "fileError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileError'].'",
-      "uploadCompleted": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'].'",
-      "validationErrors": {
-        "duplicate": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate'].'",
-        "sizeLimitMin": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin'].'",
-        "sizeLimitMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax'].'",
-        "fileListMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax'].'",
-        "fileListSizeMax": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'].'"
-      },
-      "errors": {
-        "httpStatus": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus'].'",
-        "securityError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_securityError'].'",
-        "ioError": "'.$GLOBALS['TL_LANG']['tl_files']['fancy_ioError'].'"
-      }
-    };
-    MooTools.lang.set("en-US", "FancyUpload", phrases);
-  })();
-  var up = new FancyUpload2($("fancy-status"), $("fancy-list"), {
-  data: {
-    "isAjax": true,
-    "FORM_SUBMIT": "tl_upload",
-    "FANCY_KEY": "'. $_SESSION['FANCY_KEY'] . '",
-      "action": "fancyUpload"
-    },
-    appendCookieData: true,
-    url: $("'.$this->strTable.'").action.replace("'. basename($this->Environment->script) .'", "upload.php"),
-    path: "plugins/fancyupload/Swiff.Uploader.swf",
-    typeFilter: {
-      "Images (*.' . implode(', *.', $uploadTypes) . ')": "*.' . implode('; *.', $uploadTypes) . '"
-    },
-    target: "fancy-browse",
-    onLoad: function() {
-      $("fancy-status").removeClass("fancy-hide");
-      $("fancy-list").removeClass("fancy-hide");
-      $("fancy-fallback").destroy();
-      $("fancy-submit").destroy();
-      this.target.addEvents({
-        click: function() {
-          return false;
-        },
-        mouseenter: function() {
-          this.addClass("hover");
-        },
-        mouseleave: function() {
-          this.removeClass("hover");
-          this.blur();
-        },
-        mousedown: function() {
-          this.focus();
-        }
-      });
-      $("fancy-clear").addEvent("click", function() {
-        up.remove();
-        return false;
-      });
-      $("fancy-upload").addEvent("click", function() {
-        up.start();
-        return false;
-      });
-    },
-    onSelectFail: function(files) {
-      files.each(function(file) {
-        new Element("li", {
-          "class": "validation-error",
-          html: file.validationErrorMessage || file.validationError,
-          title: MooTools.lang.get("FancyUpload", "removeTitle"),
-          events: {
-            click: function() {
-              this.destroy();
-            }
-          }
-        }).inject(this.list, "top");
-      }, this);
-    },
-    onFileSuccess: function(file, response) {
-      var json = new Hash(JSON.decode(response, true) || {});
-      if (json.get("status") == "1") {
-        file.element.addClass("file-success");
-        file.info.set("html", json.get("message"));
-      } else {
-        file.element.addClass("file-failed");
-        file.info.set("html", json.get("message"));
-      }
-    },
-    onFail: function(error) {
-      switch (error) {
-        case "hidden":
-          alert("To enable the embedded uploader, unblock it in your browser and refresh (see Adblock).");
-          break;
-        case "blocked":
-          alert("To enable the embedded uploader, enable the blocked Flash movie (see Flashblock).");
-          break;
-        case "empty":
-          alert("A required file was not found, please be patient and we fix this.");
-          break;
-        case "flash":
-          alert("To enable the embedded uploader, install the latest Adobe Flash plugin.");
-          break;
-      }
-    }
-  });
-});
-//--><!]]>
-</script>';
+			// Add upload types and key
+			$fancy->uploadTypes = $uploadTypes;
+			$fancy->key = $_SESSION['FANCY_KEY'];
+
+			// Add labels
+			foreach ($GLOBALS['TL_LANG']['tl_files'] as $k=>$v)
+			{
+				list($prefix, $key) = explode('_', $k);
+
+				if ($prefix == 'fancy')
+				{
+					$fancy->$key = $v;
+				}
+			}
+
+			// Set upload script
+			$uploadScript = sprintf('%s/system/config/%s.php', TL_ROOT, basename($GLOBALS['TL_DCA'][$this->strTable]['config']['uploadScript']));
+
+			ob_start();
+			require($uploadScript);
+			$strFancyUpload = ob_get_contents();
+			ob_end_clean();
 		}
 
 		// Display upload form
@@ -1022,8 +928,8 @@ window.addEvent("domready", function() {
 <input type="submit" name="uploadNback" class="tl_submit" alt="upload files and go back" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'" />
 </div>
 
-</div>' . $strFancyUpload . '
-
+</div>
+' . $strFancyUpload . '
 </form>';
 	}
 
