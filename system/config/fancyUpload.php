@@ -28,7 +28,7 @@
 
 
 /**
- * This is the FancyUpload configuration file. For more information,
+ * This is the FancyUpload configuration file. For more information
  * please visit http://digitarald.de/project/fancyupload/.
  */
 ?>
