@@ -170,8 +170,9 @@ class ModuleNewsletterReader extends Module
 			$strContent = str_ireplace(' align="center"', '', $objNewsletter->content);
 		}
 
-		// Parse simple tokens
+		// Parse simple tokens and insert tags
 		$strContent = $this->parseSimpleTokens($strContent, array());
+		$strContent = $this->replaceInsertTags($strContent);
 
 		// Encode e-mail addresses
 		$this->import('String');
