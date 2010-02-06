@@ -84,7 +84,7 @@
 
 <div>
 <span class="footer_project_container"><a href="http://www.typolight.org" class="footer_project" onclick="window.open(this.href); return false;">TYPOlight Open Source CMS <?php echo VERSION; ?></a> &nbsp; :: &nbsp; </span>
-<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" accesskey="t"><?php echo $this->top; ?></a> &nbsp; :: &nbsp; </span>
+<span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a> &nbsp; :: &nbsp; </span>
 <span class="footer_preview_container"><a href="typolight/preview.php?site=<?php echo $this->frontendFile; ?>" onclick="window.open(this.href); return false;" class="footer_preview" title="<?php echo $this->preview; ?>"><?php echo $this->preview; ?></a></span>
 </div>
 

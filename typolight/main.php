@@ -232,6 +232,7 @@ class Main extends Backend
 		$this->Template->modules = $this->User->navigation();
 		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
+		$this->Template->backToTop = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 
 		$this->Template->frontendFile = 'index.php';
 
