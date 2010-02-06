@@ -427,8 +427,14 @@ class ModuleRegistration extends Module
 		if ($this->reg_assignDir && is_dir(TL_ROOT . '/' . $this->reg_homeDir))
 		{
 			$this->import('Files');
-
 			$strUserDir = strlen($arrData['username']) ? $arrData['username'] : 'user_' . $insertId;
+
+			// Add the user ID if the directory exists
+			if (is_dir(TL_ROOT . '/' . $this->reg_homeDir . '/' . $strUserDir))
+			{
+				$strUserDir .= '_' . $insertId;
+			}
+
 			new Folder($this->reg_homeDir . '/' . $strUserDir);
 
 			$this->Database->prepare("UPDATE tl_member SET homeDir=?, assignDir=1 WHERE id=?")
