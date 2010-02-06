@@ -45,12 +45,6 @@ abstract class Events extends Module
 	protected $strUrl;
 
 	/**
-	 * Today 00:00:00
-	 * @var integer
-	 */
-	protected $intToday;
-
-	/**
 	 * Current events
 	 * @var array
 	 */
@@ -141,7 +135,7 @@ abstract class Events extends Module
 
 			while ($objEvents->next())
 			{
-				$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
+				$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
 
 				// Recurring events
 				if ($objEvents->recurring)
@@ -175,7 +169,7 @@ abstract class Events extends Module
 							continue;
 						}
 
-						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intEnd, $id);
+						$this->addEvent($objEvents, $objEvents->startTime, $objEvents->endTime, $strUrl, $intStart, $intEnd, $id);
 					}
 				}
 			}
@@ -208,10 +202,10 @@ abstract class Events extends Module
 	 * @param integer
 	 * @param string
 	 * @param integer
-	 * @param string
+	 * @param integer
 	 * @param integer
 	 */
-	protected function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intLimit, $intCalendar)
+	protected function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
@@ -272,17 +266,11 @@ abstract class Events extends Module
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
-		// Get today's date
-		if (is_null($this->intToday))
-		{
-			$this->intToday = strtotime(date('Y-m-d') . ' 00:00:00');
-		}
-
 		// Multi-day event
 		for ($i=1; $i<=$span && $intDate<=$intLimit; $i++)
 		{
 			// Only show first occurrence
-			if ($this->cal_noSpan && $intDate >= $this->intToday)
+			if ($this->cal_noSpan && $intDate >= $intBegin)
 			{
 				break;
 			}
