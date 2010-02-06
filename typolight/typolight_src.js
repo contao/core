@@ -167,6 +167,7 @@ var AjaxRequest =
 				}
 
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				ContextMenu.initialize();
 				AjaxRequest.hideBox();
    			}
 		}).send();
