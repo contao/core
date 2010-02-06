@@ -126,6 +126,8 @@ class FrontendTemplate extends Template
 			}
 		}
 
+		$intCache = null;
+
 		// Cache page if it is not protected
 		if (empty($_POST) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
@@ -149,7 +151,7 @@ class FrontendTemplate extends Template
 		// Send cache headers
 		if (!headers_sent())
 		{
-			if ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
+			if (!is_null($intCache) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');

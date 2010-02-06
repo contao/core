@@ -278,7 +278,7 @@ class Index extends Frontend
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Send cache headers
-		if ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser')
+		if (!is_null($expire) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
 			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
