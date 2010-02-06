@@ -8,7 +8,7 @@
 <?php if ($this->href): ?>
 <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
 <?php endif; ?>
-<img src="<?php echo $this->src; ?>" alt="<?php echo $this->alt; ?>" />
+<img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>" />
 <?php if ($this->href): ?>
 </a>
 <?php endif; ?>
