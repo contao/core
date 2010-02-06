@@ -48,6 +48,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with newsletter reader not replacing insert tags (#1506)
 - Fixed issue with home directories not being unique (#1490)
 - Fixed issue with events not being shown in "shortened view" (#1473)
+- Fixed issue with ModuleCustomnav generating invalid links (#1543)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
