@@ -92,14 +92,16 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['edit'],
 				'href'                => 'table=tl_content',
 				'icon'                => 'edit.gif',
-				'button_callback'     => array('tl_article', 'editArticle')
+				'button_callback'     => array('tl_article', 'editArticle'),
+				'attributes'          => 'class="contextmenu"'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_article', 'editHeader')
+				'button_callback'     => array('tl_article', 'editHeader'),
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(
@@ -563,7 +565,11 @@ class tl_article extends Backend
 			return '';
 		}
 
-		return self::editArticle($row, $href, $label, $title, $icon, $attributes);
+		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+								  ->limit(1)
+								  ->execute($row['pid']);
+
+		return ($this->User->isAdmin || $this->User->isAllowed(4, $objPage->row())) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 
 

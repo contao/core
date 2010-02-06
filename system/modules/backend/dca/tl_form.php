@@ -77,14 +77,16 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['edit'],
 				'href'                => 'table=tl_form_field',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.gif',
+				'attributes'          => 'class="contextmenu"'
 			),
 			'editheader' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_form']['editheader'],
 				'href'                => 'act=edit',
 				'icon'                => 'header.gif',
-				'button_callback'     => array('tl_form', 'editHeader')
+				'button_callback'     => array('tl_form', 'editHeader'),
+				'attributes'          => 'class="edit-header"'
 			),
 			'copy' => array
 			(

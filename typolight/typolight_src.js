@@ -1641,6 +1641,102 @@ window.addEvent('load', function()
 
 
 /**
+ * Class ContextMenu
+ *
+ * Provide methods to handle context menus
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
+ * @package    Backend
+ */
+var ContextMenu =
+{
+
+	/**
+	 * Initialize the context menu
+	 * @param object
+	 * @param object
+	 */
+	initialize: function()
+	{
+		// Hide the edit header buttons
+		$$('a.edit-header').each(function(el)
+		{
+			el.addClass('invisible');
+		});
+
+		// Add trigger to edit buttons
+		$$('a.contextmenu').each(function(el)
+		{
+			var el2 = el.getNext('a');
+
+			// Return if there is no edit header button
+			if (!el2 || !el2.hasClass('edit-header'))
+			{
+				return;
+			}
+
+			// Show the context menu
+			el.addEvent('contextmenu', function(e)
+			{
+				e.preventDefault();
+				ContextMenu.show(el, el2, e);
+			});
+		});
+
+		// Hide context menu 
+		$(document.body).addEvent('click', function()
+		{
+			ContextMenu.hide();
+		});
+	},
+
+
+	/**
+	 * Show the context menu
+	 * @param object
+	 * @param object
+	 * @param object
+	 */
+	show: function(el, el2, e)
+	{
+		ContextMenu.hide();
+
+		var div = new Element('div',
+		{
+			'id': 'contextmenu',
+			'styles': {
+				'top': (el.getPosition().y - 6)
+			}
+		});
+
+		var img = el.getFirst('img');
+		var im2 = el2.getFirst('img');
+
+		div.set('html', '<a href="'+ el.href +'" title="'+ el.title +'">'+ el.get('html') +' '+ img.alt +'</a><a href="'+ el2.href +'" title="'+ el2.title +'">'+ el2.get('html') +' '+ im2.alt +'</a>');
+		div.inject($(document.body));
+		div.setStyle('left', el.getPosition().x - (div.getSize().x / 2));
+	},
+
+
+	/**
+	 * Hide the context menu
+	 */
+	hide: function()
+	{
+		if ($defined($('contextmenu')))
+		{
+			$('contextmenu').dispose();
+		}
+	}
+};
+
+window.addEvent('domready', function()
+{
+	ContextMenu.initialize();
+});
+
+
+/**
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.

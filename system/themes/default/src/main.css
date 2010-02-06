@@ -979,6 +979,33 @@ p.tl_deadline
 	opacity: 0.3;
 }
 
+/* Context menu */
+#contextmenu
+{
+	display:block;
+	position:absolute;
+	z-index:99999999;
+	background-color:#fff;
+	border:1px solid #ccc;
+	padding:3px 6px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	margin-right:12px;
+}
+#contextmenu a
+{
+	display:block;
+	line-height:1;
+	padding:3px 0 2px 0;
+	white-space:nowrap;
+}
+#contextmenu img
+{
+	padding-bottom:1px;
+	vertical-align:middle;
+}
+
 /* Icons navigation */
 a.navigation.article
 {
