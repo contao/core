@@ -291,8 +291,8 @@ class Newsletter extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="preview" class="tl_submit" alt="preview newsletter" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'" />
-<input type="submit" id="send" class="tl_submit" alt="send newsletter" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" />
+<input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'" />
+<input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" />
 </div>
 
 </div>
@@ -499,7 +499,7 @@ class Newsletter extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" alt="import style sheet" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][0]).'" />
 </div>
 
 </div>

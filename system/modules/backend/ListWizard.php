@@ -267,7 +267,7 @@ class ListWizard extends Widget
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" alt="import table" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][0]).'" />
 </div>
 
 </div>

@@ -33,7 +33,7 @@
 <?php endif; ?>
 </div>
 <div class="tl_submit_container">
-<input type="submit" name="clear" id="clear" class="tl_submit" alt="clear cache tables" value="<?php echo $this->cacheSubmit; ?>" /> 
+<input type="submit" name="clear" id="clear" class="tl_submit" value="<?php echo $this->cacheSubmit; ?>" /> 
 </div>
 </div>
 </form>
@@ -61,7 +61,7 @@
   </div>
 </div>
 <div class="tl_submit_container">
-<input type="submit" class="tl_submit" alt="run live update" value="<?php echo $this->runLiveUpdate; ?>" />
+<input type="submit" class="tl_submit" value="<?php echo $this->runLiveUpdate; ?>" />
 </div>
 
 </div>
@@ -95,7 +95,7 @@
 <?php endif; ?>
   </div>
 <div class="tl_submit_container">
-<input type="submit" id="index" class="tl_submit" alt="rebuild search index" value="<?php echo $this->indexSubmit; ?>" /> 
+<input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexSubmit; ?>" /> 
 </div>
 
 </div>

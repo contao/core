@@ -34,6 +34,6 @@ window.addEvent('load', function()
 <form action="<?php echo $this->href; ?>" class="tl_form" method="get">
 <div class="tl_submit_container">
 <input type="hidden" name="do" value="maintenance" />
-<input type="submit" id="index" class="tl_submit" alt="<?php echo $this->indexContinue; ?>" value="<?php echo $this->indexContinue; ?>" /> 
+<input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexContinue; ?>" /> 
 </div>
 </form>

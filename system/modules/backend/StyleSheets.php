@@ -667,7 +667,7 @@ class StyleSheets extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" alt="import style sheet" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_style_sheet']['import'][0]).'" onclick="return confirm(\''. $GLOBALS['TL_LANG']['ERROR']['css_exists'] . '\');" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_style_sheet']['import'][0]).'" onclick="return confirm(\''. $GLOBALS['TL_LANG']['ERROR']['css_exists'] . '\');" />
 </div>
 
 </div>

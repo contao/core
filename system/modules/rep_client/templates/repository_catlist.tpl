@@ -82,7 +82,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <?php endforeach; ?>
 </select>
  
-<input type="submit" name="repository_submit" id="repository_submit" class="tl_submit" alt="<?php echo $text['apply']; ?>" value="<?php echo $text['apply']; ?>" />
+<input type="submit" name="repository_submit" id="repository_submit" class="tl_submit" value="<?php echo $text['apply']; ?>" />
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
