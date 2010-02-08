@@ -1,4 +1,4 @@
 tinyMCE.addI18n('ja.typolinks',{
-link_desc:'リンクの挿入・編集',
-image_desc:'リンクの挿入・編集のライトボックス画像'
+link_desc:'\u30ea\u30f3\u30af\u306e\u633f\u5165\u30fb\u7de8\u96c6',
+image_desc:'\u30ea\u30f3\u30af\u306e\u633f\u5165\u30fb\u7de8\u96c6\u306e\u30b5\u30e0\u30cd\u30fc\u30eb\u753b\u50cf'
 });
