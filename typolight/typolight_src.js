@@ -26,6 +26,38 @@
 
 
 /**
+ * Class Request.Mixed
+ * 
+ * Extends the basic Request Class with additional methods for interacting
+ * with HTML responses that include script tags which are not evaluated.
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
+ * @package    Backend
+ */
+Request.Mixed = new Class(
+{
+	Extends: Request,
+
+	options: {
+		evalScripts: false,
+		evalResponse: false
+	},
+
+	success: function(text, xml)
+	{
+		text = text.stripScripts(function(script)
+		{
+			js = script;
+		});
+
+		js = js.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
+		this.onSuccess(text, xml, js);
+	}
+
+});
+
+
+/**
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
@@ -404,13 +436,13 @@ var AjaxRequest =
 			return;
 		}
 
-		new Request(
+		new Request.Mixed(
 		{
 			url: window.location.href,
 			data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&load=1&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 
-			onComplete: function(txt, xml)
+			onComplete: function(txt, xml, js)
 			{
 				item = new Element('div');
 				item.setProperty('id', id);
@@ -431,6 +463,11 @@ var AjaxRequest =
 				}
 
 				folder ? item.injectBefore(div) : item.injectAfter(div);
+
+				if (js)
+				{
+					$exec(js);
+				}
 
 				el.value = 1;
 				el.checked = 'checked';
