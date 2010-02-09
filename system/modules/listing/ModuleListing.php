@@ -198,15 +198,15 @@ class ModuleListing extends Module
 
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING']) as $fragment)
 		{
-			if (strlen($fragment) && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, 'page', 4) !== 0)
+			if ($fragment != '' && strncasecmp($fragment, 'order_by', 8) !== 0 && strncasecmp($fragment, 'sort', 4) !== 0 && strncasecmp($fragment, 'page', 4) !== 0)
 			{
-				$strUrl .= (!$blnQuery ? '?' : '&amp;') . $fragment;
+				$strUrl .= ((!$blnQuery && !$GLOBALS['TL_CONFIG']['disableAlias']) ? '?' : '&amp;') . $fragment;
 				$blnQuery = true;
 			}
 		}
 
 		$this->Template->url = $strUrl;
-		$strVarConnector = $blnQuery ? '&amp;' : '?';
+		$strVarConnector = ($blnQuery || $GLOBALS['TL_CONFIG']['disableAlias']) ? '&amp;' : '?';
 
 
 		/**
@@ -262,7 +262,7 @@ class ModuleListing extends Module
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
 					'id' => $arrRows[$i]['id'],
 					'field' => $k,
-					'url' => $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;show=' : '?show=') . $arrRows[$i]['id']
+					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i]['id']
 				);
 			}
 		}

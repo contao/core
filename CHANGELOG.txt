@@ -50,6 +50,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with events not being shown in "shortened view" (#1473)
 - Fixed issue with ModuleCustomnav generating invalid links (#1543)
 - Fixed issue with subpalettes not evaluating scripts (#1522)
+- Fixed issue with listing module generating invalid profile links (#1532)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
