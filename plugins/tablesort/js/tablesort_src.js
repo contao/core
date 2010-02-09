@@ -29,6 +29,7 @@
  * Current index
  */
 var SORT_INDEX;
+var THOUSANDS_SEPARATOR = ',';
 
 
 /**
@@ -43,12 +44,17 @@ var TableSort = new Class(
 	/**
 	 * Initialize the object
 	 * @param integer
-	 * @param object
+	 * @param string
 	 * @return boolean
 	 */
-	initialize: function(id, options)
+	initialize: function(id, thousandsSeparator)
 	{
 		var table = $(id);
+
+		if (thousandsSeparator)
+		{
+			THOUSANDS_SEPARATOR = thousandsSeparator;
+		}
 
 		// Check whether table exists
 		if (table == null)
@@ -308,8 +314,8 @@ var TableSort = new Class(
 	 */
 	sortNumeric: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.]/g, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.]/g, '').clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9-\.,]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9-\.,]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
 
 		aa = parseFloat(aa);
 		aa = (isNaN(aa) ? 0 : aa);

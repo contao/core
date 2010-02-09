@@ -39,7 +39,9 @@
 <!-- indexer::stop -->
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-window.addEvent('domready', function() { new TableSort('<?php echo $this->id; ?>'); });
+window.addEvent('domready', function() {
+  new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>');
+});
 //--><!]]>
 </script>
 <!-- indexer::continue -->

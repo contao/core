@@ -57,6 +57,7 @@ class ContentTable extends ContentElement
 		$this->Template->useHeader = $this->thead ? true : false;
 		$this->Template->useFooter = $this->tfoot ? true : false;
 		$this->Template->sortable = false;
+		$this->Template->thousandsSeparator = $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'];
 
 		// Add scripts
 		if ($this->sortable)
