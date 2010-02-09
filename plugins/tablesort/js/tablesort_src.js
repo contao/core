@@ -314,8 +314,8 @@ var TableSort = new Class(
 	 */
 	sortNumeric: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9-\.,]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9-\.,]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
 
 		aa = parseFloat(aa);
 		aa = (isNaN(aa) ? 0 : aa);
