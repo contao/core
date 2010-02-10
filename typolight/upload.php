@@ -58,7 +58,7 @@ session_id(filter_input(INPUT_GET, session_name(), FILTER_SANITIZE_STRING));
 /**
  * Set the referer host
  */
-$_SERVER['HTTP_REFERER'] = 'http://' . $_SERVER['SERVER_NAME'];
+$_SERVER['HTTP_REFERER'] = 'http://' . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL);
 
 
 /**
