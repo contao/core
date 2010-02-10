@@ -3180,6 +3180,10 @@ window.addEvent(\'domready\', function()
 				{
 					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $_v);
 				}
+				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'time')
+				{
+					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $_v);
+				}
 				elseif ($_v && $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['rgxp'] == 'datim')
 				{
 					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $_v);
