@@ -30,6 +30,7 @@
  */
 var SORT_INDEX;
 var THOUSANDS_SEPARATOR = ',';
+var DECIMAL_SEPARATOR = '.';
 
 
 /**
@@ -45,15 +46,21 @@ var TableSort = new Class(
 	 * Initialize the object
 	 * @param integer
 	 * @param string
+	 * @param string
 	 * @return boolean
 	 */
-	initialize: function(id, thousandsSeparator)
+	initialize: function(id, thousandsSeparator, decimalSeparator)
 	{
 		var table = $(id);
 
 		if (thousandsSeparator)
 		{
 			THOUSANDS_SEPARATOR = thousandsSeparator;
+		}
+
+		if (decimalSeparator)
+		{
+			DECIMAL_SEPARATOR = decimalSeparator;
 		}
 
 		// Check whether table exists
@@ -314,14 +321,31 @@ var TableSort = new Class(
 	 */
 	sortNumeric: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').replace(THOUSANDS_SEPARATOR, '').clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(THOUSANDS_SEPARATOR, '');
+		bb = b.cells[SORT_INDEX].innerHTML.replace(THOUSANDS_SEPARATOR, '');
+
+		if (DECIMAL_SEPARATOR != '.')
+		{
+			aa = aa.replace(DECIMAL_SEPARATOR, '.');
+			bb = bb.replace(DECIMAL_SEPARATOR, '.');
+		}
+
+		aa = aa.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
+		bb = bb.replace(/<[^>]+>/i).replace(/[^0-9\.,-]/g, '').clean();
 
 		aa = parseFloat(aa);
-		aa = (isNaN(aa) ? 0 : aa);
+
+		if (isNaN(aa))
+		{
+			aa = 0;
+		}
 
 		bb = parseFloat(bb);
-		bb = (isNaN(bb) ? 0 : bb);
+
+		if (isNaN(bb))
+		{
+			bb = 0;
+		}
 
 		return aa - bb;
 	},

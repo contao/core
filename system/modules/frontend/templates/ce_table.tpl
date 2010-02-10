@@ -40,7 +40,7 @@
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 window.addEvent('domready', function() {
-  new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>');
+  new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>', '<?php echo $this->decimalSeparator; ?>');
 });
 //--><!]]>
 </script>
