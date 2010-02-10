@@ -23,8 +23,8 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	'version': '1.2.4.2',
-	'build': 'bd5a93c0913cce25917c48cbdacde568e15e02ef'
+	'version': '1.2.4.3',
+	'build': '6c664838ffa145382c063893d35455a624c13a50'
 };
 
 /*
@@ -427,6 +427,15 @@ Array.implement({
 
 	unique: function(){
 		return [].combine(this);
+	},
+
+	shuffle: function(){
+		for (var i = this.length; i && --i;){
+			var temp = this[i], r = Math.floor(Math.random() * ( i + 1 ));
+			this[i] = this[r];
+			this[r] = temp;
+		}
+		return this;
 	}
 
 });
@@ -507,7 +516,7 @@ provides: [String.Extras]
 
 (function(){
   
-var special = ['Ã','Ã ','Ã','Ã¡','Ã','Ã¢','Ã','Ã£','Ã','Ã¤','Ã','Ã¥','Ä','Ä','Ä','Ä','Ä','Ä','Ä','Ä','Ã','Ã§', 'Ä','Ä','Ä','Ä', 'Ã','Ã¨','Ã','Ã©','Ã','Ãª','Ã','Ã«','Ä','Ä','Ä','Ä', 'Ä','Ä','Ã','Ã¬','Ã','Ã­','Ã','Ã®','Ã','Ã¯', 'Ä¹','Äº','Ä½','Ä¾','Å','Å', 'Ã','Ã±','Å','Å','Å','Å','Ã','Ã²','Ã','Ã³','Ã','Ã´','Ã','Ãµ','Ã','Ã¶','Ã','Ã¸','Å','Å','Å','Å','Å','Å ','Å¡','Å','Å','Å','Å', 'Å¤','Å¥','Å¤','Å¥','Å¢','Å£','Ã','Ã¹','Ã','Ãº','Ã','Ã»','Ã','Ã¼','Å®','Å¯', 'Å¸','Ã¿','Ã½','Ã','Å½','Å¾','Å¹','Åº','Å»','Å¼', 'Ã','Ã¾','Ã','Ã°','Ã','Å','Å','Ã','Ã¦','Âµ'];
+var special = ['À','à','Á','á','Â','â','Ã','ã','Ä','ä','Å','å','Ă','ă','Ą','ą','Ć','ć','Č','č','Ç','ç', 'Ď','ď','Đ','đ', 'È','è','É','é','Ê','ê','Ë','ë','Ě','ě','Ę','ę', 'Ğ','ğ','Ì','ì','Í','í','Î','î','Ï','ï', 'Ĺ','ĺ','Ľ','ľ','Ł','ł', 'Ñ','ñ','Ň','ň','Ń','ń','Ò','ò','Ó','ó','Ô','ô','Õ','õ','Ö','ö','Ø','ø','ő','Ř','ř','Ŕ','ŕ','Š','š','Ş','ş','Ś','ś', 'Ť','ť','Ť','ť','Ţ','ţ','Ù','ù','Ú','ú','Û','û','Ü','ü','Ů','ů', 'Ÿ','ÿ','ý','Ý','Ž','ž','Ź','ź','Ż','ż', 'Þ','þ','Ð','ð','ß','Œ','œ','Æ','æ','µ'];
 
 var standard = ['A','a','A','a','A','a','A','a','Ae','ae','A','a','A','a','A','a','C','c','C','c','C','c','D','d','D','d', 'E','e','E','e','E','e','E','e','E','e','E','e','G','g','I','i','I','i','I','i','I','i','L','l','L','l','L','l', 'N','n','N','n','N','n', 'O','o','O','o','O','o','O','o','Oe','oe','O','o','o', 'R','r','R','r', 'S','s','S','s','S','s','T','t','T','t','T','t', 'U','u','U','u','U','u','Ue','ue','U','u','Y','y','Y','y','Z','z','Z','z','Z','z','TH','th','DH','dh','ss','OE','oe','AE','ae','u'];
 
@@ -581,7 +590,7 @@ description: Methods for dealing with URI query strings.
 license: MIT-style license
 
 authors:
-- Sebastian MarkbÃ¥ge, Aaron Newton, Lennart Pilon, Valerio Proietti
+- Sebastian Markbåge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
 requires:
 - core:1.2.4/Array
@@ -636,7 +645,7 @@ description: Provides methods useful in managing the window location and uris.
 license: MIT-style license
 
 authors:
-- Sebastian Markbåge
+- Sebastian Markb�ge
 - Aaron Newton
 
 requires:
@@ -656,7 +665,7 @@ var URI = new Class({
 		/*base: false*/
 	},
 
-	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@]*):?([^:@]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
+	regex: /^(?:(\w+):)?(?:\/\/(?:(?:([^:@\/]*):?([^:@\/]*))?@)?([^:\/?#]*)(?::(\d*))?)?(\.\.?$|(?:[^?#\/]*\/)*)([^?#]*)(?:\?([^#]*))?(?:#(.*))?/,
 	parts: ['scheme', 'user', 'password', 'host', 'port', 'directory', 'file', 'query', 'fragment'],
 	schemes: {http: 80, https: 443, ftp: 21, rtsp: 554, mms: 1755, file: 0},
 
@@ -749,8 +758,9 @@ var URI = new Class({
 
 	setData: function(values, merge, part){
 		if (typeof values == 'string'){
-			values = this.getData();
-			values[arguments[0]] = arguments[1];
+			data = this.getData();
+			data[arguments[0]] = arguments[1];
+			values = data;
 		} else if (merge) {
 			values = $merge(this.getData(), values);
 		}
@@ -793,7 +803,7 @@ description: Extends the URI class to add methods for computing relative and abs
 license: MIT-style license
 
 authors:
-- Sebastian MarkbÃ¥ge
+- Sebastian Markbåge
 
 
 requires:
@@ -1028,15 +1038,15 @@ Element.implement({
 	hide: function(){
 		var d;
 		try {
-			// IE fails here if the element is not in the dom
-			if ((d = this.getStyle('display')) == 'none') d = null;
+			//IE fails here if the element is not in the dom
+			d = this.getStyle('display');
 		} catch(e){}
-		
-		return this.store('originalDisplay', d || 'block').setStyle('display', 'none');
+		return this.store('originalDisplay', d || '').setStyle('display', 'none');
 	},
 
 	show: function(display){
-		return this.setStyle('display', display || this.retrieve('originalDisplay') || 'block');
+		display = display || this.retrieve('originalDisplay') || 'block';
+		return this.setStyle('display', (display == 'none') ? 'block' : display);
 	},
 
 	swapClass: function(remove, add){
@@ -1130,7 +1140,7 @@ provides: [Fx.Accordion]
 ...
 */
 
-var Accordion = Fx.Accordion = new Class({
+Fx.Accordion = new Class({
 
 	Extends: Fx.Elements,
 
@@ -1152,10 +1162,14 @@ var Accordion = Fx.Accordion = new Class({
 	},
 
 	initialize: function(){
-		var params = Array.link(arguments, {'container': Element.type, 'options': Object.type, 'togglers': $defined, 'elements': $defined});
+		var params = Array.link(arguments, {
+			'container': Element.type, //deprecated
+			'options': Object.type,
+			'togglers': $defined,
+			'elements': $defined
+		});
 		this.parent(params.elements, params.options);
 		this.togglers = $$(params.togglers);
-		this.container = document.id(params.container);
 		this.previous = -1;
 		this.internalChain = new Chain();
 		if (this.options.alwaysHide) this.options.wait = true;
@@ -1179,7 +1193,8 @@ var Accordion = Fx.Accordion = new Class({
 				for (var fx in this.effects) el.setStyle(fx, 0);
 			}
 		}, this);
-		if ($chk(this.options.display)) this.display(this.options.display, this.options.initialDisplayFx);
+		if ($chk(this.options.display) || this.options.initialDisplayFx === false) this.display(this.options.display, this.options.initialDisplayFx);
+		if (this.options.fixedHeight !== false) this.options.returnHeightToAuto = false;
 		this.addEvent('complete', this.internalChain.callChain.bind(this.internalChain));
 	},
 
@@ -1245,6 +1260,37 @@ var Accordion = Fx.Accordion = new Class({
 			};
 		}.bind(this));
 		return useFx ? this.start(obj) : this.set(obj);
+	}
+
+});
+
+/*
+	Compatibility with 1.2.0
+*/
+var Accordion = new Class({
+
+	Extends: Fx.Accordion,
+
+	initialize: function(){
+		this.parent.apply(this, arguments);
+		var params = Array.link(arguments, {'container': Element.type});
+		this.container = params.container;
+	},
+
+	addSection: function(toggler, element, pos){
+		toggler = document.id(toggler);
+		element = document.id(element);
+		var test = this.togglers.contains(toggler);
+		var len = this.togglers.length;
+		if (len && (!test || pos)){
+			pos = $pick(pos, len - 1);
+			toggler.inject(this.togglers[pos], 'before');
+			element.inject(toggler, 'after');
+		} else if (this.container && !test){
+			toggler.inject(this.container);
+			element.inject(this.container);
+		}
+		return this.parent.apply(this, arguments);
 	}
 
 });
@@ -1425,12 +1471,14 @@ Fx.Slide = new Class({
 
 	options: {
 		mode: 'vertical',
+		wrapper: false,
 		hideOverflow: true
 	},
 
 	initialize: function(element, options){
 		this.addEvent('complete', function(){
 			this.open = (this.wrapper['offset' + this.layout.capitalize()] != 0);
+			if (this.open) this.wrapper.setStyle('height', '');
 			if (this.open && Browser.Engine.webkit419) this.element.dispose().inject(this.wrapper);
 		}, true);
 		this.element = this.subject = document.id(element);
@@ -1438,6 +1486,7 @@ Fx.Slide = new Class({
 		var wrapper = this.element.retrieve('wrapper');
 		var styles = this.element.getStyles('margin', 'position', 'overflow');
 		if (this.options.hideOverflow) styles = $extend(styles, {overflow: 'hidden'});
+		if (this.options.wrapper) wrapper = document.id(this.options.wrapper).setStyles(styles);
 		this.wrapper = wrapper || new Element('div', {
 			styles: styles
 		}).wraps(this.element);
@@ -1997,7 +2046,7 @@ Drag.Move = new Class({
 		if (this.container && $type(this.container) != 'element')
 			this.container = document.id(this.container.getDocument().body);
 		
-		var styles = element.getStyles('left', 'right', 'position');
+		var styles = element.getStyles('left', 'top', 'position');
 		if (styles.left == 'auto' || styles.top == 'auto')
 			element.setPosition(element.getPosition(element.getOffsetParent()));
 		
@@ -2222,12 +2271,20 @@ var Sortables = new Class({
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
 		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
-		return element.clone(true).setStyles({
+		var clone = element.clone(true).setStyles({
 			margin: '0px',
 			position: 'absolute',
 			visibility: 'hidden',
 			'width': element.getStyle('width')
-		}).inject(this.list).setPosition(element.getPosition(element.getOffsetParent()));
+		});
+		//prevent the duplicated radio inputs from unchecking the real one
+		if (clone.get('html').test('radio')) {
+			clone.getElements('input[type=radio]').each(function(input, i) {
+				input.set('name', 'clone_' + i);
+			});
+		}
+		
+		return clone.inject(this.list).setPosition(element.getPosition(element.getOffsetParent()));
 	},
 
 	getDroppables: function(){
@@ -2345,7 +2402,9 @@ var Asset = {
 			document: document,
 			check: $lambda(true)
 		}, properties);
-
+		
+		if (properties.onLoad) properties.onload = properties.onLoad;
+		
 		var script = new Element('script', {src: source, type: 'text/javascript'});
 
 		var load = properties.onload.bind(script), 
@@ -2390,6 +2449,8 @@ var Asset = {
 		var element = document.id(image) || new Element('img');
 		['load', 'abort', 'error'].each(function(name){
 			var type = 'on' + name;
+			var cap = name.capitalize();
+			if (properties['on' + cap]) properties[type] = properties['on' + cap];
 			var event = properties[type];
 			delete properties[type];
 			image[type] = function(){
@@ -2659,6 +2720,343 @@ Hash.each(Hash.prototype, function(method, name){
 /*
 ---
 
+script: Keyboard.js
+
+description: KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make alt+shift+c the same as shift+alt+c.
+
+license: MIT-style license
+
+authors:
+- Perrin Westrich
+- Aaron Newton
+- Scott Kyle
+
+requires:
+- core:1.2.4/Events
+- core:1.2.4/Options
+- core:1.2.4/Element.Event
+- /Log
+
+provides: [Keyboard]
+
+...
+*/
+
+(function(){
+	
+	var Keyboard = this.Keyboard = new Class({
+
+		Extends: Events,
+
+		Implements: [Options, Log],
+
+		options: {
+			/*
+			onActivate: $empty,
+			onDeactivate: $empty,
+			*/
+			defaultEventType: 'keydown',
+			active: false,
+			events: {},
+			nonParsedEvents: ['activate', 'deactivate', 'onactivate', 'ondeactivate', 'changed', 'onchanged']
+		},
+
+		initialize: function(options){
+			this.setOptions(options);
+			this.setup();
+		}, 
+		setup: function(){
+			this.addEvents(this.options.events);
+			//if this is the root manager, nothing manages it
+			if (Keyboard.manager && !this.manager) Keyboard.manager.manage(this);
+			if (this.options.active) this.activate();
+		},
+
+		handle: function(event, type){
+			//Keyboard.stop(event) prevents key propagation
+			if (event.preventKeyboardPropagation) return;
+			
+			var bubbles = !!this.manager;
+			if (bubbles && this.activeKB){
+				this.activeKB.handle(event, type);
+				if (event.preventKeyboardPropagation) return;
+			}
+			this.fireEvent(type, event);
+			
+			if (!bubbles && this.activeKB) this.activeKB.handle(event, type);
+		},
+
+		addEvent: function(type, fn, internal){
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn, internal);
+		},
+
+		removeEvent: function(type, fn){
+			return this.parent(Keyboard.parse(type, this.options.defaultEventType, this.options.nonParsedEvents), fn);
+		},
+
+		toggleActive: function(){
+			return this[this.active ? 'deactivate' : 'activate']();
+		},
+
+		activate: function(instance){
+			if (instance) {
+				//if we're stealing focus, store the last keyboard to have it so the relenquish command works
+				if (instance != this.activeKB) this.previous = this.activeKB;
+				//if we're enabling a child, assign it so that events are now passed to it
+				this.activeKB = instance.fireEvent('activate');
+				Keyboard.manager.fireEvent('changed');
+			} else if (this.manager) {
+				//else we're enabling ourselves, we must ask our parent to do it for us
+				this.manager.activate(this);
+			}
+			return this;
+		},
+
+		deactivate: function(instance){
+			if (instance) {
+				if(instance === this.activeKB) {
+					this.activeKB = null;
+					instance.fireEvent('deactivate');
+					Keyboard.manager.fireEvent('changed');
+				}
+			}
+			else if (this.manager) {
+				this.manager.deactivate(this);
+			}
+			return this;
+		},
+
+		relenquish: function(){
+			if (this.previous) this.activate(this.previous);
+		},
+
+		//management logic
+		manage: function(instance){
+			if (instance.manager) instance.manager.drop(instance);
+			this.instances.push(instance);
+			instance.manager = this;
+			if (!this.activeKB) this.activate(instance);
+			else this._disable(instance);
+		},
+
+		_disable: function(instance){
+			if (this.activeKB == instance) this.activeKB = null;
+		},
+
+		drop: function(instance){
+			this._disable(instance);
+			this.instances.erase(instance);
+		},
+
+		instances: [],
+
+		trace: function(){
+			Keyboard.trace(this);
+		},
+
+		each: function(fn){
+			Keyboard.each(this, fn);
+		}
+
+	});
+	
+	var parsed = {};
+	var modifiers = ['shift', 'control', 'alt', 'meta'];
+	var regex = /^(?:shift|control|ctrl|alt|meta)$/;
+	
+	Keyboard.parse = function(type, eventType, ignore){
+		if (ignore && ignore.contains(type.toLowerCase())) return type;
+		
+		type = type.toLowerCase().replace(/^(keyup|keydown):/, function($0, $1){
+			eventType = $1;
+			return '';
+		});
+
+		if (!parsed[type]){
+			var key, mods = {};
+			type.split('+').each(function(part){
+				if (regex.test(part)) mods[part] = true;
+				else key = part;
+			});
+
+			mods.control = mods.control || mods.ctrl; // allow both control and ctrl
+			
+			var keys = [];
+			modifiers.each(function(mod){
+				if (mods[mod]) keys.push(mod);
+			});
+			
+			if (key) keys.push(key);
+			parsed[type] = keys.join('+');
+		}
+
+		return eventType + ':' + parsed[type];
+	};
+
+	Keyboard.each = function(keyboard, fn){
+		var current = keyboard || Keyboard.manager;
+		while (current){
+			fn.run(current);
+			current = current.activeKB;
+		}
+	};
+
+	Keyboard.stop = function(event){
+		event.preventKeyboardPropagation = true;
+	};
+
+	Keyboard.manager = new Keyboard({
+		active: true
+	});
+	
+	Keyboard.trace = function(keyboard){
+		keyboard = keyboard || Keyboard.manager;
+		keyboard.enableLog();
+		keyboard.log('the following items have focus: ');
+		Keyboard.each(keyboard, function(current){
+			keyboard.log(document.id(current.widget) || current.wiget || current);
+		});
+	};
+	
+	var handler = function(event){
+		var keys = [];
+		modifiers.each(function(mod){
+			if (event[mod]) keys.push(mod);
+		});
+		
+		if (!regex.test(event.key)) keys.push(event.key);
+		Keyboard.manager.handle(event, event.type + ':' + keys.join('+'));
+	};
+	
+	document.addEvents({
+		'keyup': handler,
+		'keydown': handler
+	});
+
+	Event.Keys.extend({
+		'shift': 16,
+		'control': 17,
+		'alt': 18,
+		'capslock': 20,
+		'pageup': 33,
+		'pagedown': 34,
+		'end': 35,
+		'home': 36,
+		'numlock': 144,
+		'scrolllock': 145,
+		';': 186,
+		'=': 187,
+		',': 188,
+		'-': Browser.Engine.Gecko ? 109 : 189,
+		'.': 190,
+		'/': 191,
+		'`': 192,
+		'[': 219,
+		'\\': 220,
+		']': 221,
+		"'": 222
+	});
+
+})();
+
+
+/*
+---
+
+script: Keyboard.js
+
+description: Enhances Keyboard by adding the ability to name and describe keyboard shortcuts, and the ability to grab shortcuts by name and bind the shortcut to different keys.
+
+license: MIT-style license
+
+authors:
+- Perrin Westrich
+
+requires:
+- core:1.2.4/Function
+- /Keyboard.Extras
+
+provides: [Keyboard.Extras]
+
+...
+*/
+Keyboard.prototype.options.nonParsedEvents.combine(['rebound', 'onrebound']);
+
+Keyboard.implement({
+
+	/*
+		shortcut should be in the format of:
+		{
+			'keys': 'shift+s', // the default to add as an event.
+			'description': 'blah blah blah', // a brief description of the functionality.
+			'handler': function(){} // the event handler to run when keys are pressed.
+		}
+	*/
+	addShortcut: function(name, shortcut) {
+		this.shortcuts = this.shortcuts || [];
+		this.shortcutIndex = this.shortcutIndex || {};
+		
+		shortcut.getKeyboard = $lambda(this);
+		shortcut.name = name;
+		this.shortcutIndex[name] = shortcut;
+		this.shortcuts.push(shortcut);
+		if(shortcut.keys) this.addEvent(shortcut.keys, shortcut.handler);
+		return this;
+	},
+
+	addShortcuts: function(obj){
+		for(var name in obj) this.addShortcut(name, obj[name]);
+		return this;
+	},
+
+	getShortcuts: function(){
+		return this.shortcuts || [];
+	},
+
+	getShortcut: function(name){
+		return (this.shortcutIndex || {})[name];
+	}
+
+});
+
+Keyboard.rebind = function(newKeys, shortcuts){
+	$splat(shortcuts).each(function(shortcut){
+		shortcut.getKeyboard().removeEvent(shortcut.keys, shortcut.handler);
+		shortcut.getKeyboard().addEvent(newKeys, shortcut.handler);
+		shortcut.keys = newKeys;
+		shortcut.getKeyboard().fireEvent('rebound');
+	});
+};
+
+
+Keyboard.getActiveShortcuts = function(keyboard) {
+	var activeKBS = [], activeSCS = [];
+	Keyboard.each(keyboard, [].push.bind(activeKBS));
+	activeKBS.each(function(kb){ activeSCS.extend(kb.getShortcuts()); });
+	return activeSCS;
+};
+
+Keyboard.getShortcut = function(name, keyboard, opts){
+	opts = opts || {};
+	var shortcuts = opts.many ? [] : null,
+		set = opts.many ? function(kb){
+				var shortcut = kb.getShortcut(name);
+				if(shortcut) shortcuts.push(shortcut);
+			} : function(kb) { 
+				if(!shortcuts) shortcuts = kb.getShortcut(name);
+			};
+	Keyboard.each(keyboard, set);
+	return shortcuts;
+};
+
+Keyboard.getShortcuts = function(name, keyboard) {
+	return Keyboard.getShortcut(name, keyboard, { many: true });
+};
+
+
+/*
+---
+
 script: Scroller.js
 
 description: Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
@@ -2695,7 +3093,8 @@ var Scroller = new Class({
 	initialize: function(element, options){
 		this.setOptions(options);
 		this.element = document.id(element);
-		this.listener = ($type(this.element) != 'element') ? document.id(this.element.getDocument().body) : this.element;
+		this.docBody = document.id(this.element.getDocument().body);
+		this.listener = ($type(this.element) != 'element') ?  this.docBody : this.element;
 		this.timer = null;
 		this.bound = {
 			attach: this.attach.bind(this),
@@ -2737,14 +3136,15 @@ var Scroller = new Class({
 	scroll: function(){
 		var size = this.element.getSize(), 
 			scroll = this.element.getScroll(), 
-			pos = this.element.getOffsets(), 
+			pos = this.element != this.docBody ? this.element.getOffsets() : {x: 0, y:0}, 
 			scrollSize = this.element.getScrollSize(), 
 			change = {x: 0, y: 0};
 		for (var z in this.page){
-			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0)
+			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0) {
 				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
-			else if (this.page[z] + this.options.area > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z])
+			} else if (this.page[z] + this.options.area > (size[z] + pos[z]) && scroll[z] + size[z] != scrollSize[z]) {
 				change[z] = (this.page[z] - size[z] + this.options.area - pos[z]) * this.options.velocity;
+			}
 		}
 		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
 	}
@@ -2806,14 +3206,13 @@ this.Tips = new Class({
 		hideDelay: 100,
 		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
+		windowPadding: {x:0, y:0},
 		fixed: false
 	},
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
-		document.id(this);
-		
 		if (params.elements) this.attach(params.elements);
 	},
 
@@ -2884,8 +3283,10 @@ this.Tips = new Class({
 		}, this);
 		
 		$clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this, element);
-		this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		this.timer = (function(){
+			this.show(this, element);
+			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		}).delay(this.options.showDelay, this);
 	},
 
 	elementLeave: function(event, element){
@@ -2895,11 +3296,10 @@ this.Tips = new Class({
 	},
 
 	fireForParent: function(event, element){
-		if (!element) return;
-		parentNode = element.getParent();
-		if (parentNode == document.body) return;
-		if (parentNode.retrieve('tip:enter')) parentNode.fireEvent('mouseenter', event);
-		else this.fireForParent(parentNode, event);
+		element = element.getParent();
+		if (!element || element == document.body) return;
+		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
+		else this.fireForParent(event, element);
 	},
 
 	elementMove: function(event, element){
@@ -2907,6 +3307,8 @@ this.Tips = new Class({
 	},
 
 	position: function(event){
+		if (!this.tip) document.id(this);
+
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
@@ -2914,7 +3316,7 @@ this.Tips = new Class({
 		
 		for (var z in props){
 			obj[props[z]] = event.page[z] + this.options.offset[z];
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 		}
 		
 		this.tip.setStyles(obj);
@@ -2926,10 +3328,12 @@ this.Tips = new Class({
 	},
 
 	show: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('hide', [this.tip, element]);
 	}
 
