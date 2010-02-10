@@ -852,9 +852,6 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Add FancyUpload scripts
 		if ($GLOBALS['TL_CONFIG']['fancyUpload'])
 		{
-			// Generate FancyUpload key
-			$_SESSION['FANCY_KEY'] = md5(microtime(true));
-
 			$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
 			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
 
@@ -862,7 +859,8 @@ class DC_Folder extends DataContainer implements listable, editable
 
 			// Add upload types and key
 			$fancy->uploadTypes = $uploadTypes;
-			$fancy->key = $_SESSION['FANCY_KEY'];
+			$fancy->script = basename($this->Environment->script) . '?';
+			$fancy->uploadUrl = 'upload.php?' . session_name(). '=' . session_id() . '&';
 
 			// Add labels
 			foreach ($GLOBALS['TL_LANG']['tl_files'] as $k=>$v)

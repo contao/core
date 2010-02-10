@@ -88,21 +88,6 @@ abstract class User extends Model
 
 
 	/**
-	 * Initialize the object
-	 */
-	protected function __construct()
-	{
-		parent::__construct();
-
-		// FancyUploader sends the authentication cookie via POST
-		if ($this->Input->cookie($this->strCookie) == '' && strlen($this->Input->post('FANCY_KEY')) && $this->Input->post('FANCY_KEY') == $_SESSION['FANCY_KEY'])
-		{
-			$this->Input->setCookie($this->strCookie, $this->Input->post($this->strCookie));
-		}
-	}
-
-
-	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
 	final private function __clone() {}

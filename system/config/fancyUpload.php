@@ -66,11 +66,10 @@ window.addEvent("domready", function() {
     data: {
       "isAjax": true,
       "FORM_SUBMIT": "tl_upload",
-      "FANCY_KEY": "<?php echo $fancy->key; ?>",
       "action": "fancyUpload"
     },
     appendCookieData: true,
-    url: $("<?php echo $this->strTable; ?>").action.replace("<?php echo basename($this->Environment->script); ?>", "upload.php"),
+    url: $("<?php echo $this->strTable; ?>").action.replace("<?php echo $fancy->script; ?>", "<?php echo $fancy->uploadUrl; ?>"),
     path: "plugins/fancyupload/Swiff.Uploader.swf",
     typeFilter: {
       "Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)": "*.<?php echo implode('; *.', $fancy->uploadTypes); ?>"

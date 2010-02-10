@@ -151,10 +151,9 @@ unset($languages);
 
 
 /**
- * Check referer address if there are $_POST variables (allow
- * file uploads via FancyUpload if there is a valid key)
+ * Check referer address if there are $_POST variables
  */
-if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !(strlen($objInput->post('FANCY_KEY')) && $objInput->post('FANCY_KEY') == $_SESSION['FANCY_KEY']))
+if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
 {
 	$self = parse_url($objEnvironment->url);
 	$referer = parse_url($objEnvironment->httpReferer);
