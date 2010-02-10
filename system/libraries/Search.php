@@ -193,7 +193,7 @@ class Search extends System
 			if ($objDuplicates->numRows)
 			{
 				// Update the URL if the new URL is shorter
-				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/'))
+				if (substr_count($arrSet['url'], '/') < substr_count($objDuplicates->url, '/') || preg_match('/page=[0-9]*$/', $objDuplicates->url))
 				{
 					$this->Database->prepare("UPDATE tl_search SET url=? WHERE id=?")
 								   ->execute($arrSet['url'], $objDuplicates->id);

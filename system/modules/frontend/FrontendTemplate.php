@@ -137,7 +137,7 @@ class FrontendTemplate extends Template
 		if (empty($_POST) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
 			// Do not cache empty requests
-			if (strlen($this->Environment->request) && $this->Environment->request != 'index.php')
+			if ($this->Environment->request != '' && $this->Environment->request != 'index.php')
 			{
 				// Create a unique key
 				$strUniqueKey = $this->Environment->base . $strUrl;
