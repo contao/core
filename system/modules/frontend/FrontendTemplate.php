@@ -67,41 +67,46 @@ class FrontendTemplate extends Template
 	{
 		global $objPage;
 
-		// Remove index.php fragment
-		$strUrl = preg_replace('@^(index.php/)?([^\?]+)(\?.*)?@i', '$2', $this->Environment->request);
+		// Ignore URLs with certain parameters 
+		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
 
 		// Add $_GET variables if alias usage is disabled
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
 		{
 			$arrChunks = array();
+			$strUrl = 'index.php?id=' . $objPage->id;
 
 			foreach (array_keys($_GET) as $key)
 			{
-				if ($key == 'id' || $key == 'articles' || $key == 'items' || $key == 'events')
+				if (!in_array($key, $arrIgnore))
 				{
 					$arrChunks[] = $key . '=' . $this->Input->get($key);
 				}
 			}
 
-			$strUrl .= '?' . implode('&', $arrChunks);
+			$strUrl .= implode('&', $arrChunks);
 		}
 
 		// Rebuild URL to eliminate duplicate parameters
 		else
 		{
-			$strUrl = (strlen($objPage->alias) ? $objPage->alias : $objPage->id);
+			$strUrl = ($objPage->alias != '') ? $objPage->alias : $objPage->id;
 
 			foreach (array_keys($_GET) as $key)
 			{
-				if ($key == 'day' || $key == 'page' || $key == 'id' || $key == 'file')
+				if (!in_array($key, $arrIgnore))
 				{
-					continue;
+					$strUrl .= '/' . $key . '/' . $this->Input->get($key);
 				}
-
-				$strUrl .= '/' . $key . '/' . $this->Input->get($key);
 			}
 
 			$strUrl .= $GLOBALS['TL_CONFIG']['urlSuffix'];
+		}
+
+		// Add the page number
+		if (isset($_GET['page']))
+		{
+			$strUrl .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&page=' : '?page=') . $this->Input->get('page');
 		}
 
 		$this->keywords = '';

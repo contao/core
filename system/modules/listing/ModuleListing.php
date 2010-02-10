@@ -311,6 +311,8 @@ class ModuleListing extends Module
 		$this->Template = new FrontendTemplate($this->list_info_layout);
 
 		$this->Template->record = array();
+		$this->Template->referer = 'javascript:history.go(-1)';
+		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->list_info = deserialize($this->list_info);
 
 		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (strlen($this->list_info_where) ? $this->list_info_where . " AND " : "") . "id=?")
@@ -340,8 +342,6 @@ class ModuleListing extends Module
 		}
 
 		$this->Template->record = $arrFields;
-		$this->Template->referer = 'javascript:history.go(-1)';
-		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 	}
 
 
