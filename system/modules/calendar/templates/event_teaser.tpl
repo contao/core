@@ -1,7 +1,7 @@
 
 <?php if ($this->header): ?>
 <div class="header<?php echo $this->classHeader; ?>">
-<?php echo $this->firstDate; if ($this->firstDay): ?> <span class="day">(<?php echo $this->firstDay; ?>)</span><?php endif; ?> 
+<span class="date"><?php echo $this->firstDate; ?></span><?php if ($this->firstDay): ?> <span class="day">(<?php echo $this->firstDay; ?>)</span><?php endif; ?> 
 </div>
 
 <?php endif; ?>
