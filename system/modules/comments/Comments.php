@@ -208,6 +208,7 @@ class Comments extends Frontend
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->messages = $this->getMessages();
 		$objTemplate->formId = $strFormId;
+		$objTemplate->hasError = $doNotSubmit;
 
 		// Confirmation message
 		if ($_SESSION['TL_COMMENT_ADDED'])

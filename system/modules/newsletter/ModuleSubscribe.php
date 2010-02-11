@@ -100,9 +100,12 @@ class ModuleSubscribe extends Module
 			$this->addRecipient();
 		}
 
+		$blnHasError = false;
+
 		// Error message
 		if (strlen($_SESSION['SUBSCRIBE_ERROR']))
 		{
+			$blnHasError  = true;
 			$this->Template->mclass = 'error';
 			$this->Template->message = $_SESSION['SUBSCRIBE_ERROR'];
 			$_SESSION['SUBSCRIBE_ERROR'] = '';
@@ -135,6 +138,7 @@ class ModuleSubscribe extends Module
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->formId = 'tl_subscribe';
 		$this->Template->id = $this->id;
+		$this->Template->hasError = $blnHasError;
 	}
 
 

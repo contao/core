@@ -239,6 +239,8 @@ class ModulePersonalData extends Module
 			++$row;
 		}
 
+		$this->Template->hasError = $doNotSubmit;
+
 		// Redirect or reload if there was no error
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_member_' . $this->id && !$doNotSubmit)
 		{

@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" method="post" enctype="<?php echo $this->enctype; ?>">
+<form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post" enctype="<?php echo $this->enctype; ?>">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
 <?php if (!$this->tableless): ?>
@@ -27,6 +27,14 @@
 <?php endif; ?>
 </div>
 </form>
+<?php if ($this->hasError): ?>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
+//--><!]]>
+</script>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->

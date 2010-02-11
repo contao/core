@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" method="post">
+<form action="<?php echo $this->action; ?>" id="tl_login" method="post">
 <div class="formbody">
 <?php if ($this->message): ?>
 <p class="error"><?php echo $this->message; ?></p>
@@ -28,6 +28,14 @@
 </table>
 </div>
 </form>
+<?php if ($this->hasError): ?>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.scrollTo(null, ($('tl_login').getElement('p.error').getPosition().y - 20));
+//--><!]]>
+</script>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->

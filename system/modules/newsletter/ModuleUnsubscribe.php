@@ -93,9 +93,12 @@ class ModuleUnsubscribe extends Module
 			$this->removeRecipient();
 		}
 
+		$blnHasError = false;
+
 		// Error message
 		if (strlen($_SESSION['UNSUBSCRIBE_ERROR']))
 		{
+			$blnHasError = true;
 			$this->Template->mclass = 'error';
 			$this->Template->message = $_SESSION['UNSUBSCRIBE_ERROR'];
 			$_SESSION['UNSUBSCRIBE_ERROR'] = '';
@@ -128,6 +131,7 @@ class ModuleUnsubscribe extends Module
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->formId = 'tl_unsubscribe';
 		$this->Template->id = $this->id;
+		$this->Template->hasError = $blnHasError;
 	}
 
 

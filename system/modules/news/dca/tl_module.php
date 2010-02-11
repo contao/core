@@ -191,8 +191,12 @@ class tl_module_news extends Backend
       el.setStyle("visibility", "hidden");
     }
   };
-  window.addEvent("domready", enableStartDay);
-  $("ctrl_news_format").addEvent("change", enableStartDay);
+  window.addEvent("domready", function() {
+    if ($("ctrl_news_startDay")) {
+      enableStartDay();
+      $("ctrl_news_format").addEvent("change", enableStartDay);
+    }
+  });
   //--><!]]>
   </script>';
 	}

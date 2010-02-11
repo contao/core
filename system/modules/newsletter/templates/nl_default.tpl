@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" method="post">
+<form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post">
 <div class="formbody">
 <?php if ($this->message): ?>
 <p class="<?php echo $this->mclass; ?>"><?php echo $this->message; ?></p>
@@ -30,6 +30,14 @@
 <input type="submit" name="submit" class="submit" value="<?php echo $this->submit; ?>" />
 </div>
 </form>
+<?php if ($this->hasError): ?>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
+//--><!]]>
+</script>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->

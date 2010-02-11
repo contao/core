@@ -6,11 +6,8 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<form action="<?php echo $this->action; ?>" method="post">
+<form action="<?php echo $this->action; ?>" id="tl_logout" method="post">
 <div class="formbody">
-<?php if ($this->message): ?>
-<p class="error"><?php echo $this->message; ?></p>
-<?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="tl_logout" />
 <table cellspacing="0" cellpadding="0" summary="">
   <tr class="row_0 row_first">

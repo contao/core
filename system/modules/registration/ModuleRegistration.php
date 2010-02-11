@@ -276,6 +276,7 @@ class ModuleRegistration extends Module
 
 		$this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
+		$this->Template->hasError = $doNotSubmit;
 
 		// Create new user if there are no errors
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_registration' && !$doNotSubmit)

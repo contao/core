@@ -237,18 +237,21 @@ class ModuleLogin extends Module
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
 		$this->Template = new FrontendTemplate($this->strTemplate);
-
 		$this->Template->message = '';
+
+		$blnHasError = false;
 
 		// Show login form
 		if (count($_SESSION['TL_ERROR']))
 		{
+			$blnHasError = true;
 			$_SESSION['LOGIN_ERROR'] = $_SESSION['TL_ERROR'][0];
 			$_SESSION['TL_ERROR'] = array();
 		}
 
 		if (strlen($_SESSION['LOGIN_ERROR']))
 		{
+			$blnHasError = true;
 			$this->Template->message = $_SESSION['LOGIN_ERROR'];
 			$_SESSION['LOGIN_ERROR'] = '';
 		}
@@ -258,6 +261,7 @@ class ModuleLogin extends Module
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->value = specialchars($this->Input->post('username'));
+		$this->Template->hasError = $blnHasError;
 	}
 }
 

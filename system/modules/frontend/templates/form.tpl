@@ -20,8 +20,6 @@
 <?php else: echo $this->fields; endif; ?>
 </div>
 </form>
-
-</div>
 <?php if ($this->hasError): ?>
 
 <script type="text/javascript">
@@ -31,4 +29,5 @@ window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').g
 </script>
 <?php endif; ?>
 
+</div>
 <!-- indexer::continue -->

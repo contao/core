@@ -154,6 +154,7 @@ class ModulePassword extends Module
 		}
 
 		$this->Template->fields = $strFields;
+		$this->Template->hasError = $doNotSubmit;
 
 		// Look for an account and send password link
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
