@@ -193,7 +193,7 @@ class StyleSheets extends Backend
 				foreach ($row['trbl'] as $k=>$v)
 				{
 					if ($v != '' && $k != 'unit') $return .= '
-	'.$k.':'.$v.(($v == 'auto') ? '' : $row['trbl']['unit']).';';
+	'.$k.':'.$v.(($v == 'auto' || $v == 0) ? '' : $row['trbl']['unit']).';';
 				}
 			}
 
@@ -746,7 +746,10 @@ class StyleSheets extends Backend
 					}
 					$arrSet['size'] = 1;
 					$arrSet['trbl'][$strKey] = $varValue;
-					$arrSet['trbl']['unit'] = $strUnit;
+					if ($strUnit != '')
+					{
+						$arrSet['trbl']['unit'] = $strUnit;
+					}
 					break;
 
 				case 'position':
