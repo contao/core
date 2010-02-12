@@ -69,7 +69,7 @@ window.addEvent("domready", function() {
       "action": "fancyUpload"
     },
     appendCookieData: true,
-    url: $("<?php echo $this->strTable; ?>").action.replace("<?php echo $fancy->script; ?>", "<?php echo $fancy->uploadUrl; ?>"),
+    url: $("<?php echo $this->strTable; ?>").action.replace("<?php echo $fancy->script; ?>", "upload.php"),
     path: "plugins/fancyupload/Swiff.Uploader.swf",
     typeFilter: {
       "Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)": "*.<?php echo implode('; *.', $fancy->uploadTypes); ?>"

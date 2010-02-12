@@ -859,8 +859,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 			// Add upload types and key
 			$fancy->uploadTypes = $uploadTypes;
-			$fancy->script = basename($this->Environment->script) . '?';
-			$fancy->uploadUrl = 'upload.php?' . session_name(). '=' . session_id() . '&';
+			$fancy->script = basename($this->Environment->script);
 
 			// Add labels
 			foreach ($GLOBALS['TL_LANG']['tl_files'] as $k=>$v)

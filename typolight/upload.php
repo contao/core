@@ -30,7 +30,7 @@
 /**
  * Check parameters
  */
-if (count($_GET) != 6 || empty($_POST))
+if (count($_GET) != 5 || empty($_POST))
 {
 	header('HTTP/1.1 400 Bad Request');
 	die('Illegal request');
@@ -50,12 +50,6 @@ if ($_GET['do'] != 'files' || $_GET['act'] != 'move' || $_GET['mode'] != 2)
 
 
 /**
- * Set the session ID
- */
-session_id(filter_input(INPUT_GET, session_name(), FILTER_SANITIZE_STRING));
-
-
-/**
  * Set the referer host
  */
 $_SERVER['HTTP_REFERER'] = 'http://' . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL);
@@ -64,6 +58,7 @@ $_SERVER['HTTP_REFERER'] = 'http://' . filter_var($_SERVER['SERVER_NAME'], FILTE
 /**
  * FancyUpload sends the cookie data via POST
  */
+$_COOKIE[session_name()] = filter_input(INPUT_POST, session_name(), FILTER_SANITIZE_STRING);
 $_COOKIE['BE_USER_AUTH'] = filter_input(INPUT_POST, 'BE_USER_AUTH', FILTER_SANITIZE_STRING);
 
 
