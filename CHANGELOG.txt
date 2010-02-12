@@ -54,6 +54,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with listing module generating invalid profile links (#1532)
 - Fixed issue with sortable tables not supporting negative numbers and floats (#1529)
 - Fixed issue with listView headers not supporting time fields (#1540)
+- Fixed issue with Folder::isEmpty() returning wrong results (#1555)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
