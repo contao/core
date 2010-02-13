@@ -540,7 +540,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['module'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'foreignKey'              => 'tl_module.name',
+			'options_callback'        => array('tl_content', 'getModules'),
 			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
@@ -814,66 +814,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Return the edit alias wizard
-	 * @param object
-	 * @return string
-	 */
-	public function editAlias(DataContainer $dc)
-	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
-	}
-
-
-	/**
-	 * Get all content elements and return them as array (content element alias)
-	 * @return array
-	 */
-	public function getAlias()
-	{
-		$arrPids = array();
-		$arrAlias = array();
-
-		if (!$this->User->isAdmin)
-		{
-			foreach ($this->User->pagemounts as $id)
-			{
-				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
-			}
-
-			if (empty($arrPids))
-			{
-				return $arrAlias;
-			}
-
-			$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute($this->Input->get('id'));
-		}
-		else
-		{
-			$objAlias = $this->Database->prepare("SELECT c.id, c.type, c.headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid WHERE c.id!=? ORDER BY a.title, c.sorting")
-									   ->execute($this->Input->get('id'));
-		}
-
-		while ($objAlias->next())
-		{
-			$arrHeadline = deserialize($objAlias->headline, true);
-
-			$headline_length = strlen($arrHeadline[0]);
-			$headline = $headline_length ? ' (' . substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 0, 32) . (($headline_length > 32) ? ' …' : '') . ')' : '';
-
-			$text_length = strlen($objAlias->text);
-			$text = $text_length ? ' (' . substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 0, 32) . (($text_length > 32) ? ' …' : '') . ')' : '';
-
-			$arrAlias[$objAlias->title][$objAlias->id] = $objAlias->id . ' - ' . $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . (strlen($headline) ? $headline : $text);
-		}
-
-		return $arrAlias;
-	}
-
-
-	/**
-	 * Return the edit alias wizard
+	 * Return the edit article alias wizard
 	 * @param object
 	 * @return string
 	 */
@@ -906,12 +847,12 @@ class tl_content extends Backend
 				return $arrAlias;
 			}
 
-			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a,inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
 									   ->execute($dc->id);
 		}
 		else
 		{
-			$objAlias = $this->Database->prepare("SELECT id, title, inColumn, (SELECT title FROM tl_page WHERE tl_page.id=tl_article.pid) AS parent FROM tl_article WHERE id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, sorting")
+			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
 									   ->execute($dc->id);
 		}
 
@@ -921,11 +862,81 @@ class tl_content extends Backend
 
 			while ($objAlias->next())
 			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->id . ' - ' . $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ')';
+				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
 		return $arrAlias;
+	}
+
+
+	/**
+	 * Return the edit alias wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editAlias(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+	}
+
+
+	/**
+	 * Get all content elements and return them as array (content element alias)
+	 * @return array
+	 */
+	public function getAlias()
+	{
+		$arrPids = array();
+		$arrAlias = array();
+
+		if (!$this->User->isAdmin)
+		{
+			foreach ($this->User->pagemounts as $id)
+			{
+				$arrPids[] = $id;
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+			}
+
+			if (empty($arrPids))
+			{
+				return $arrAlias;
+			}
+
+			$objAlias = $this->Database->prepare("SELECT c.id, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
+									   ->execute($this->Input->get('id'));
+		}
+		else
+		{
+			$objAlias = $this->Database->prepare("SELECT c.id, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE c.id!=? ORDER BY a.title, c.sorting")
+									   ->execute($this->Input->get('id'));
+		}
+
+		while ($objAlias->next())
+		{
+			$arrHeadline = deserialize($objAlias->headline, true);
+
+			$headline_length = strlen($arrHeadline[0]);
+			$headline = $headline_length ? substr(preg_replace('/[\n\r\t]+/', ' ', $arrHeadline[0]), 0, 32) . (($headline_length > 32) ? ' …' : '') . ', ' : '';
+
+			$text_length = strlen($objAlias->text);
+			$text = $text_length ? substr(strip_tags(preg_replace('/[\n\r\t]+/', ' ', $objAlias->text)), 0, 32) . (($text_length > 32) ? ' …' : '') . ', ' : '';
+
+			$arrAlias[$objAlias->title][$objAlias->id] = $GLOBALS['TL_LANG']['CTE'][$objAlias->type][0] . ' (' . (strlen($headline) ? $headline : $text) . 'ID ' . $objAlias->id . ')';
+		}
+
+		return $arrAlias;
+	}
+
+
+	/**
+	 * Return the edit form wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editForm(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -947,22 +958,11 @@ class tl_content extends Backend
 		{
 			if ($this->User->isAdmin || in_array($objForms->id, $this->User->forms))
 			{
-				$arrForms[$objForms->id] = $objForms->title;
+				$arrForms[$objForms->id] = $objForms->title . ' (ID ' . $objForms->id . ')';
 			}
 		}
 
 		return $arrForms;
-	}
-
-
-	/**
-	 * Return the edit form wizard
-	 * @param object
-	 * @return string
-	 */
-	public function editForm(DataContainer $dc)
-	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -974,6 +974,35 @@ class tl_content extends Backend
 	public function editModule(DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=modules&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+	}
+
+
+	/**
+	 * Get all modules and return them as array
+	 * @return array
+	 */
+	public function getModules()
+	{
+		$arrModules = array();
+		$objModules = $this->Database->execute("SELECT id, name FROM tl_module ORDER BY name");
+
+		while ($objModules->next())
+		{
+			$arrModules[$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
+		}
+
+		return $arrModules;
+	}
+
+
+	/**
+	 * Return the edit article teaser wizard
+	 * @param object
+	 * @return string
+	 */
+	public function editArticle(DataContainer $dc)
+	{
+		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -1018,30 +1047,24 @@ class tl_content extends Backend
 				return $arrArticle;
 			}
 
-			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, sorting");
+			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting");
 		}
 		else
 		{
-			$objArticle = $this->Database->execute("SELECT id, title, (SELECT title FROM tl_page WHERE tl_article.pid=tl_page.id) AS parent FROM tl_article WHERE pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, sorting");
+			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, a.sorting");
 		}
 
-		while ($objArticle->next())
+		if ($objArticle->numRows)
 		{
-			$arrArticle[$objArticle->parent][$objArticle->id] = $objArticle->id . ' - ' . $objArticle->title;
+			$this->loadLanguageFile('tl_article');
+
+			while ($objArticle->next())
+			{
+				$arrArticle[$objArticle->parent][$objArticle->id] = $objArticle->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn] : $objArticle->inColumn) . ', ID ' . $objArticle->id . ')';
+			}
 		}
 
 		return $arrArticle;
-	}
-
-
-	/**
-	 * Return the edit article wizard
-	 * @param object
-	 * @return string
-	 */
-	public function editArticle(DataContainer $dc)
-	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
