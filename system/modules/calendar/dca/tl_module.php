@@ -33,7 +33,7 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']    = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_startDay;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_order,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventmenu']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_startDay;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventmenu']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_startDay,cal_order;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -198,18 +198,22 @@ class tl_module_calendar extends Backend
   <script type="text/javascript">
   <!--//--><![CDATA[//><!--
   var enableStartDay = function() {
-    if (!$defined($("ctrl_cal_startDay"))) {
-      return;
-    }
-    var el = $("ctrl_cal_startDay").getParent("div");
+    var e1 = $("ctrl_cal_startDay").getParent("div");
+    var e2 = $("ctrl_cal_order").getParent("div");
     if ($("ctrl_cal_format").value == "cal_day") {
-      el.setStyle("visibility", "visible");
-    } else {
-      el.setStyle("visibility", "hidden");
-    }
+      e1.setStyle("display", "block");
+      e2.setStyle("display", "none");
+	} else {
+      e1.setStyle("display", "none");
+      e2.setStyle("display", "block");
+	}
   };
-  window.addEvent("domready", enableStartDay);
-  $("ctrl_cal_format").addEvent("change", enableStartDay);
+  window.addEvent("domready", function() {
+    if ($("ctrl_cal_startDay")) {
+      enableStartDay();
+      $("ctrl_cal_format").addEvent("change", enableStartDay);
+    }
+  });
   //--><!]]>
   </script>';
 	}

@@ -104,7 +104,7 @@ class ModuleEventMenu extends ModuleCalendar
 		}
 
 		// Sort data
-		krsort($arrData);
+		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
 		// Get current "jumpTo" page
@@ -156,10 +156,10 @@ class ModuleEventMenu extends ModuleCalendar
 		// Sort data
 		foreach (array_keys($arrData) as $key)
 		{
-			krsort($arrData[$key]);
+			($this->cal_order == 'ascending') ? ksort($arrData[$key]) : krsort($arrData[$key]);
 		}
 
-		krsort($arrData);
+		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
 		// Get current "jumpTo" page

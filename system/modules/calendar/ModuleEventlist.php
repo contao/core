@@ -140,15 +140,7 @@ class ModuleEventlist extends Events
 
 		// Get all events
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, $strBegin, $strEnd);
-
-		if ($this->cal_order == 'descending')
-		{
-			krsort($arrAllEvents);
-		}
-		else
-		{
-			ksort($arrAllEvents);
-		}
+		($this->cal_order == 'descending') ? krsort($arrAllEvents) : ksort($arrAllEvents);
 
 		$arrEvents = array();
 		$dateBegin = date('Ymd', $strBegin);

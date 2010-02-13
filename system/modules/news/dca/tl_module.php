@@ -186,9 +186,9 @@ class tl_module_news extends Backend
   var enableStartDay = function() {
     var el = $("ctrl_news_startDay").getParent("div");
     if ($("ctrl_news_format").value == "news_day") {
-      el.setStyle("visibility", "visible");
+      el.setStyle("display", "block");
     } else {
-      el.setStyle("visibility", "hidden");
+      el.setStyle("display", "none");
     }
   };
   window.addEvent("domready", function() {
