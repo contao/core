@@ -315,7 +315,6 @@ CREATE TABLE `tl_module` (
   `redirectBack` char(1) NOT NULL default '',
   `cols` varchar(32) NOT NULL default '',
   `editable` blob NULL,
-  `newsletters` blob NULL,
   `memberTpl` varchar(64) NOT NULL default '',
   `tableless` char(1) NOT NULL default '',
   `form` int(10) unsigned NOT NULL default '0',

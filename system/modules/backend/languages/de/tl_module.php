@@ -50,7 +50,6 @@ $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Anzahl an Spalten', 
 $GLOBALS['TL_LANG']['tl_module']['1cl']            = array('Eine Spalte', 'die Bezeichnung wird über dem Eingabefeld angezeigt.');
 $GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Zwei Spalten', 'die Bezeichnung wird links neben dem Eingabefeld angezeigt.');
 $GLOBALS['TL_LANG']['tl_module']['editable']       = array('Editierbare Felder', 'Diese Felder im Frontend-Formular anzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['newsletters']    = array('Abonnierbare Newsletter', 'Diese Newsletter im Frontend-Formular anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Formulartemplate', 'Hier können Sie das Formulartemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['tableless']      = array('Tabellenloses Layout', 'Das Formular ohne HTML-Tabellen ausgeben.');
 $GLOBALS['TL_LANG']['tl_module']['form']           = array('Formular', 'Bitte wählen Sie ein Formular.');

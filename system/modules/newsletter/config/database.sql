@@ -89,6 +89,7 @@ CREATE TABLE `tl_member` (
 -- 
 
 CREATE TABLE `tl_module` (
+  `newsletters` blob NULL,
   `nl_channels` blob NULL,
   `nl_hideChannels` char(1) NOT NULL default '',
   `nl_subscribe` text NULL,

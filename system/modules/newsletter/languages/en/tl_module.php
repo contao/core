@@ -30,6 +30,7 @@
 /**
  * Fields
  */
+$GLOBALS['TL_LANG']['tl_module']['newsletters']     = array('Subscribable newsletters', 'Show these channels in the front end form.');
 $GLOBALS['TL_LANG']['tl_module']['nl_channels']     = array('Channels', 'Please select one or more channels.');
 $GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'] = array('Hide channel menu', 'Do not show the channel selection menu.');
 $GLOBALS['TL_LANG']['tl_module']['nl_subscribe']    = array('Subscription message', 'You can use the wildcards <em>##channels##</em> (channel names), <em>##domain##</em> (domain name) and <em>##link##</em> (activation link).');

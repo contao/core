@@ -30,6 +30,7 @@
 /**
  * Fields
  */
+$GLOBALS['TL_LANG']['tl_module']['newsletters']     = array('Abonnierbare Newsletter', 'Diese Newsletter im Frontend-Formular anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['nl_channels']     = array('Verteiler', 'Bitte wählen Sie einen oder mehrere Verteiler.');
 $GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'] = array('Verteilermenü ausblenden', 'Das Menü zum Auswählen von Verteilern nicht anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['nl_subscribe']    = array('Abonnementbestätigung', 'Sie können die Platzhalter <em>##channels##</em> (Name der Verteiler), <em>##domain##</em> (Domainname) und <em>##link##</em> (Aktivierungslink) verwenden.');
