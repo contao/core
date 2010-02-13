@@ -400,6 +400,8 @@ class Newsletter extends Backend
 			}
 
 			$time = time();
+			$intTotal = 0;
+			$intInvalid = 0;
 
 			foreach ($this->Input->post('source') as $strCsvFile)
 			{
@@ -447,6 +449,8 @@ class Newsletter extends Backend
 					if (!$this->isValidEmailAddress($strRecipient))
 					{
 						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
+
+						++$intInvalid;
 						continue;
 					}
 
@@ -459,11 +463,20 @@ class Newsletter extends Backend
 						$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=1")
 									   ->execute($this->Input->get('id'), $strRecipient);
 					}
+
+					++$intTotal;
 				}
 			}
 
+			$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'], $intTotal);
+
+			if ($intInvalid > 0)
+			{
+				$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid);
+			}
+
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-			$this->redirect(str_replace('&key=import', '', $this->Environment->request));
+			$this->reload();
 		}
 
 		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['source'], 'source', null, 'source', 'tl_newsletter_recipients'));

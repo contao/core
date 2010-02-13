@@ -50,7 +50,6 @@ $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Number of columns', 
 $GLOBALS['TL_LANG']['tl_module']['1cl']            = array('One column', 'show the label above the input field.');
 $GLOBALS['TL_LANG']['tl_module']['2cl']            = array('Two columns', 'show the label on the left side of the input field.');
 $GLOBALS['TL_LANG']['tl_module']['editable']       = array('Editable fields', 'Show these fields in the front end form.');
-$GLOBALS['TL_LANG']['tl_module']['newsletters']    = array('Subscribable newsletters', 'Show these channels in the front end form.');
 $GLOBALS['TL_LANG']['tl_module']['memberTpl']      = array('Form template', 'Here you can select the form template.');
 $GLOBALS['TL_LANG']['tl_module']['tableless']      = array('Tableless layout', 'Render the form without HTML tables.');
 $GLOBALS['TL_LANG']['tl_module']['form']           = array('Form', 'Please select a form.');
