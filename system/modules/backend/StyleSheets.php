@@ -1210,8 +1210,15 @@ class StyleSheets extends Backend
 					break;
 
 				case 'color':
-					$arrSet['font'] = 1;
-					$arrSet['fontcolor'] = str_replace('#', '', $arrChunks[1]);
+					if (!preg_match('/^#[a-f0-9]+$/i', $arrChunks[1]))
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
+					else
+					{
+						$arrSet['font'] = 1;
+						$arrSet['fontcolor'] = str_replace('#', '', $arrChunks[1]);
+					}
 					break;
 
 				case 'line-height':
