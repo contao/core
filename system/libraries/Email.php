@@ -171,7 +171,7 @@ class Email extends System
 				break;
 
 			case 'text':
-				$this->strText = strip_tags($varValue);
+				$this->strText = $varValue;
 				break;
 
 			case 'html':

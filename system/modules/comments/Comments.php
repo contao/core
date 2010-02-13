@@ -271,7 +271,7 @@ class Comments extends Frontend
 			// Add comment details
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
-									  strip_tags($arrSet['comment']),
+									  str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), strip_tags($strComment)),
 									  $this->Environment->base . $this->Environment->request,
 									  $this->Environment->base . 'typolight/main.php?do=comments&act=edit&id=' . $insert->insertId);
 
