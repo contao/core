@@ -668,7 +668,7 @@ class tl_page extends Backend
 				{
 					if (!in_array($id, $pagemounts))
 					{
-						$this->log('Page ID ' . $id . ' was not mounted', 'tl_page checkPermission()', TL_ERROR);
+						$this->log('Page ID '. $id .' was not mounted', 'tl_page checkPermission()', TL_ERROR);
 
 						$error = true;
 						break;
@@ -692,8 +692,10 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && !in_array($objPage->type, $this->User->alpty))
+					if ($i == 0 && $this->Input->get('act') != 'create' && !in_array($objPage->type, $this->User->alpty))
 					{
+						$this->log('Not enough permissions to  '. $this->Input->get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
+
 						$error = true;
 						break;
 					}
