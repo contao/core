@@ -168,7 +168,7 @@ class Comments extends Frontend
 			'name' => 'comment',
 			'label' => $GLOBALS['TL_LANG']['MSC']['com_comment'],
 			'inputType' => 'textarea',
-			'eval' => array('rows'=>4, 'cols'=>40)
+			'eval' => array('rows'=>4, 'cols'=>40, 'preserveTags'=>true)
 		);
 
 		$doNotSubmit = false;
@@ -228,7 +228,9 @@ class Comments extends Frontend
 				$strWebsite = 'http://' . $strWebsite;
 			}
 
-			$strComment = $arrWidgets['comment']->value;
+			// Do not parse any tags in the comment
+			$strComment = htmlspecialchars($arrWidgets['comment']->value);
+			$strComment = str_replace(array('&amp;', '&lt;', '&gt;'), array('[&]', '[lt]', '[gt]'), $strComment);
 
 			// Parse BBCode
 			if ($objConfig->bbcode)
@@ -236,7 +238,10 @@ class Comments extends Frontend
 				$strComment = $this->parseBbCode($strComment);
 			}
 
-			$intPublished = !$objConfig->moderate ? 1 : '';
+			// Prevent cross-site request forgeries
+			$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
+
+			$intPublished = $objConfig->moderate ? '' : 1;
 			$time = time();
 
 			// Prepare record
@@ -343,9 +348,6 @@ class Comments extends Frontend
 
 		// Line feeds
 		$strComment = preg_replace(array('@</div>(\n)*@', '@\r@'), array("</div>\n", ''), $strComment);
-
-		// Prevent cross-site request forgeries
-		$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
 
 		// Encode e-mail addresses
 		if (strpos($strComment, 'mailto:') !== false)

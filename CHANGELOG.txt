@@ -56,6 +56,7 @@ Version 2.8.0 (2010--)
 - Fixed issue with listView headers not supporting time fields (#1540)
 - Fixed issue with Folder::isEmpty() returning wrong results (#1555)
 - Fixed issue with users not being able to create new pages in a root page (#1554)
+- Fixed issue with BBCode parser stripping tags and code snippets (#1543)
 - Fixed some minor issues
 
 Version 2.8.RC2 (2009-12-23)
