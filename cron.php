@@ -80,6 +80,7 @@ class CronJob extends Frontend
 				$this->$callback[0]->$callback[1]();
 			}
 
+			$this->log('Weekly cron jobs complete', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_weekly']", $intWeekly);
 		}
 
@@ -94,6 +95,7 @@ class CronJob extends Frontend
 				$this->$callback[0]->$callback[1]();
 			}
 
+			$this->log('Daily cron jobs complete', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_daily']", $intDaily);
 		}
 
@@ -108,11 +110,9 @@ class CronJob extends Frontend
 				$this->$callback[0]->$callback[1]();
 			}
 
+			$this->log('Hourly cron jobs complete', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
 		}
-
-		// Confirm completion
-		$this->log('Cron jobs complete', 'CronJobs run()', TL_CRON);
 
 		// Output a transparent gif
 		header('Cache-Control: no-cache');
