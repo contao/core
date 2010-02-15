@@ -70,43 +70,49 @@ class CronJob extends Frontend
 		$intHourly = date('YmdH');
 
 		// Weekly jobs
-		if (count($GLOBALS['TL_CRON']['weekly']) && (!$GLOBALS['TL_CONFIG']['cron_weekly'] || $GLOBALS['TL_CONFIG']['cron_weekly'] < $intWeekly))
+		if (count($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
 		{
+			$this->log('Running weekly cron jobs', 'CronJobs run()', TL_CRON);
+
 			foreach ($GLOBALS['TL_CRON']['weekly'] as $callback)
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]();
 			}
 
-			$this->log('Running weekly cron jobs', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_weekly']", $intWeekly);
 		}
 
 		// Daily jobs
-		elseif (count($GLOBALS['TL_CRON']['daily']) && (!$GLOBALS['TL_CONFIG']['cron_daily'] || $GLOBALS['TL_CONFIG']['cron_daily'] < $intDaily))
+		elseif (count($GLOBALS['TL_CRON']['daily']) && $GLOBALS['TL_CONFIG']['cron_daily'] != $intDaily)
 		{
+			$this->log('Running daily cron jobs', 'CronJobs run()', TL_CRON);
+
 			foreach ($GLOBALS['TL_CRON']['daily'] as $callback)
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]();
 			}
 
-			$this->log('Running daily cron jobs', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_daily']", $intDaily);
 		}
 
 		// Hourly jobs
-		elseif (count($GLOBALS['TL_CRON']['hourly']) && (!$GLOBALS['TL_CONFIG']['cron_hourly'] || $GLOBALS['TL_CONFIG']['cron_hourly'] < $intHourly))
+		elseif (count($GLOBALS['TL_CRON']['hourly']) && $GLOBALS['TL_CONFIG']['cron_hourly'] != $intHourly)
 		{
+			$this->log('Running hourly cron jobs', 'CronJobs run()', TL_CRON);
+
 			foreach ($GLOBALS['TL_CRON']['hourly'] as $callback)
 			{
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]();
 			}
 
-			$this->log('Running hourly cron jobs', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
 		}
+
+		// Confirm completion
+		$this->log('Cron jobs complete', 'CronJobs run()', TL_CRON);
 
 		// Output a transparent gif
 		header('Cache-Control: no-cache');
