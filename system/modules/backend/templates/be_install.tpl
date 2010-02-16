@@ -321,7 +321,7 @@
 
 </div>
 </div>
-<?php if ($this->login): ?>
+<?php if ($this->login || $this->setPassword): ?>
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
