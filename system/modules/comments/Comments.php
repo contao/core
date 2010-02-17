@@ -90,6 +90,19 @@ class Comments extends Frontend
 
 			while ($objComments->next())
 			{
+				// Use paragraphs to generate new lines
+				if ($GLOBALS['TL_CONFIG']['pNewLine'])
+				{
+					$comment = $objComments->comment;
+
+					if (strncmp('<p>', $comment, 3) !== 0)
+					{
+						$comment = '<p>'. $comment .'</p>';
+					}
+
+					$objComments->comment = preg_replace(array('@<br />\W?<br />\W?@i', '@\W?<br /></p>@i'), array("</p>\n<p>", '</p>'), $comment);
+				}
+
 				$objPartial->name = $objComments->name;
 				$objPartial->email = $objComments->email;
 				$objPartial->website = $objComments->website;
