@@ -100,7 +100,7 @@ class Comments extends Frontend
 						$comment = '<p>'. $comment .'</p>';
 					}
 
-					$objComments->comment = preg_replace(array('@<br />\W?<br />\W?@i', '@\W?<br /></p>@i'), array("</p>\n<p>", '</p>'), $comment);
+					$objComments->comment = preg_replace(array('@<br />\W?<br />\W?@', '@\W?<br /></p>@'), array("</p>\n<p>", '</p>'), $comment);
 				}
 
 				$objPartial->name = $objComments->name;
