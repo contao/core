@@ -134,7 +134,7 @@ class Config
 			}
 			elseif ($strTrim != '')
 			{
-				$arrChunks = array_map('trim', explode('=', $strLine));
+				$arrChunks = array_map('trim', explode('=', $strLine, 2));
 				$this->arrData[$arrChunks[0]] = $arrChunks[1];
 			}
 		}

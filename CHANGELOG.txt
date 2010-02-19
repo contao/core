@@ -4,7 +4,7 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.1 (2010--)
 --------------------------
--
+- Fixed: the install tool does not handle equals sings in passwords (#1338) 
 
 Version 2.8.0 (2010-02-16)
 --------------------------

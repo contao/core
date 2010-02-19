@@ -257,7 +257,7 @@ abstract class User extends Model
 				$blnAccountError = true;
 
 				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['invalidLogin'];
-				$this->log('The account was not active yet (activation date: ' . $this->start . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active yet (activation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->start) . ')', get_class($this) . ' login()', TL_ACCESS);
 			}
 
 			if (strlen($this->stop) && $this->stop < $time)
@@ -265,7 +265,7 @@ abstract class User extends Model
 				$blnAccountError = true;
 
 				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['invalidLogin'];
-				$this->log('The account was not active anymore (deactivation date: ' . $this->stop . ')', get_class($this) . ' login()', TL_ACCESS);
+				$this->log('The account was not active anymore (deactivation date: ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->stop) . ')', get_class($this) . ' login()', TL_ACCESS);
 			}
 		}
 
