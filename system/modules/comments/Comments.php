@@ -90,19 +90,6 @@ class Comments extends Frontend
 
 			while ($objComments->next())
 			{
-				// Use paragraphs to generate new lines
-				if ($GLOBALS['TL_CONFIG']['pNewLine'])
-				{
-					$comment = $objComments->comment;
-
-					if (strncmp('<p>', $comment, 3) !== 0)
-					{
-						$comment = '<p>'. $comment .'</p>';
-					}
-
-					$objComments->comment = preg_replace(array('@<br />\W?<br />\W?@', '@\W?<br /></p>@'), array("</p>\n<p>", '</p>'), $comment);
-				}
-
 				$objPartial->name = $objComments->name;
 				$objPartial->email = $objComments->email;
 				$objPartial->website = $objComments->website;
@@ -126,7 +113,7 @@ class Comments extends Frontend
 		$objTemplate->email = $GLOBALS['TL_LANG']['MSC']['com_email'];
 		$objTemplate->website = $GLOBALS['TL_LANG']['MSC']['com_website'];
 
-		// Get front end user object
+		// Get the front end user object
 		$this->import('FrontendUser', 'User');
 
 		// Access control
@@ -202,7 +189,7 @@ class Comments extends Frontend
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
 
-			// Validate widget
+			// Validate the widget
 			if ($this->Input->post('FORM_SUBMIT') == $strFormId)
 			{
 				$objWidget->validate();
@@ -230,20 +217,24 @@ class Comments extends Frontend
 			$_SESSION['TL_COMMENT_ADDED'] = false;
 		}
 
-		// Add comment
+		// Add the comment
 		if ($this->Input->post('FORM_SUBMIT') == $strFormId && !$doNotSubmit)
 		{
+			$this->import('String');
 			$strWebsite = $arrWidgets['website']->value;
 
-			// Add http:// to website
+			// Add http:// to the website
 			if (strlen($strWebsite) && !preg_match('@^https?://|ftp://|mailto:@i', $strWebsite))
 			{
 				$strWebsite = 'http://' . $strWebsite;
 			}
 
 			// Do not parse any tags in the comment
-			$strComment = htmlspecialchars($arrWidgets['comment']->value);
+			$strComment = htmlspecialchars(trim($arrWidgets['comment']->value));
 			$strComment = str_replace(array('&amp;', '&lt;', '&gt;'), array('[&]', '[lt]', '[gt]'), $strComment);
+
+			// Remove multiple line feeds
+			$strComment = preg_replace('@\n\n+@', "\n\n", $strComment);
 
 			// Parse BBCode
 			if ($objConfig->bbcode)
@@ -254,10 +245,9 @@ class Comments extends Frontend
 			// Prevent cross-site request forgeries
 			$strComment = preg_replace('/(href|src|on[a-z]+)="[^"]*(typolight\/main\.php|javascript|vbscri?pt|script|alert|document|cookie|window)[^"]*"+/i', '$1="#"', $strComment);
 
-			$intPublished = $objConfig->moderate ? '' : 1;
 			$time = time();
 
-			// Prepare record
+			// Prepare the record
 			$arrSet = array
 			(
 				'source' => $strSource,
@@ -266,10 +256,10 @@ class Comments extends Frontend
 				'name' => $arrWidgets['name']->value,
 				'email' => $arrWidgets['email']->value,
 				'website' => $strWebsite,
-				'comment' => nl2br_pre($strComment),
+				'comment' => $this->convertLineFeeds($strComment),
 				'ip' => $this->Environment->ip,
 				'date' => $time,
-				'published' => $intPublished
+				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
 			$insert = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
@@ -281,10 +271,15 @@ class Comments extends Frontend
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 			$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['com_subject'], $this->Environment->host);
 
+			// Convert the comment to plain text
+			$strComment = strip_tags($strComment);
+			$strComment = $this->String->decodeEntities($strComment);
+			$strComment = str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), $strComment);
+
 			// Add comment details
 			$objEmail->text = sprintf($GLOBALS['TL_LANG']['MSC']['com_message'],
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
-									  str_replace(array('[&]', '[lt]', '[gt]'), array('&', '<', '>'), strip_tags($strComment)),
+									  $strComment,
 									  $this->Environment->base . $this->Environment->request,
 									  $this->Environment->base . 'typolight/main.php?do=comments&act=edit&id=' . $insert->insertId);
 
@@ -305,7 +300,6 @@ class Comments extends Frontend
 	 * Replace bbcode and return the HTML string
 	 * 
 	 * Supports the following tags:
-	 * 
 	 * - [b][/b] bold
 	 * - [i][/i] italic
 	 * - [u][/u] underline
@@ -325,12 +319,16 @@ class Comments extends Frontend
 	{
 		$arrSearch = array
 		(
-			'[b]', '[/b]',
-			'[i]', '[/i]',
-			'[u]', '[/u]',
-			'[code]', '[/code]',
-			'[/color]',
-			'[quote]', '[/quote]'
+			'@\[b\]@i', '@\[/b\]@i',
+			'@\[i\]@i', '@\[/i\]@i',
+			'@\[u\]@i', '@\[/u\]@i',
+			'@\s*\[code\]@is', '@\[/code\]\s*@is',
+			'@\[color=([^\]" ]+)\]@i', '@\[/color\]@i',
+			'@\s*\[quote\]@is', '@\[/quote\]\s*@is',
+			'@\s*\[quote=([^\]]+)\]@is', 
+			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
+			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i', '@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
+			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i', '@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i'
 		);
 
 		$arrReplace = array
@@ -338,35 +336,59 @@ class Comments extends Frontend
 			'<strong>', '</strong>',
 			'<em>', '</em>',
 			'<span style="text-decoration:underline;">', '</span>',
-			'<div class="code"><p>' . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', '</pre></div>',
-			'</span>',
-			'<div class="quote">', '</div>'
+			"\n\n<div class=\"code\"><p>" . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', "</pre></div>\n\n",
+			'<span style="color:$1;">', '</span>',
+			"\n\n<div class=\"quote\">", "</div>\n\n",
+			"\n\n<div class=\"quote\"><p>" . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>',
+			'<img src="$1" alt="" />',
+			'<a href="$1">$1</a>', '<a href="$1">$2</a>',
+			'<a href="mailto:$1">$1</a>', '<a href="mailto:$1">$2</a>'
 		);
 
-		// Replace simple tokens
-		$strComment = str_replace($arrSearch, $arrReplace, trim($strComment));
-
-		// Color, quote and image
-		$strComment = preg_replace('/\[color=([^\]]+)\]/i', '<span style="color:$1;">', $strComment);
-		$strComment = preg_replace('/\[quote=([^\]]+)\]/i', '<div class="quote"><p>' . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>', $strComment);
-		$strComment = preg_replace('/\[img\]([^\[]+)\[\/img\]/i', '<img src="$1" alt="" />', $strComment);
-
-		// URLs
-		$strComment = preg_replace('/\[url\]([^\[]+)\[\/url\]/i', '<a href="$1">$1</a>', $strComment);
-		$strComment = preg_replace('/\[url=([^\]]+)\]([^\[]+)\[\/url\]/i', '<a href="$1">$2</a>', $strComment);
-
-		// E-mail addresses
-		$strComment = preg_replace('/\[email\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$1</a>', $strComment);
-		$strComment = preg_replace('/\[email=([^\]]+)\]([^\[]+)\[\/email\]/i', '<a href="mailto:$1">$2</a>', $strComment);
-
-		// Line feeds
-		$strComment = preg_replace(array('@</div>(\n)*@', '@\r@'), array("</div>\n", ''), $strComment);
+		$strComment = preg_replace($arrSearch, $arrReplace, $strComment);
 
 		// Encode e-mail addresses
 		if (strpos($strComment, 'mailto:') !== false)
 		{
-			$this->import('String');
 			$strComment = $this->String->encodeEmail($strComment);
+		}
+
+		return $strComment;
+	}
+
+
+	/**
+	 * Convert line feeds to <br /> tags
+	 * @param string
+	 * @return string
+	 */
+	public function convertLineFeeds($strComment)
+	{
+		$strComment = nl2br_pre($strComment);
+
+		// Use paragraphs to generate new lines
+		if ($GLOBALS['TL_CONFIG']['pNewLine'])
+		{
+			if (strncmp('<p>', $strComment, 3) !== 0)
+			{
+				$strComment = '<p>'. $strComment .'</p>';
+			}
+
+			$arrSearch = array
+			(
+				'@<br />\s?<br />\s?@',
+				'@\s?<br /></p>@',
+				'@<p><div@', '@</div></p>@'
+			);
+
+			$arrReplace = array
+			(
+				"</p>\n<p>",
+				'</p>',
+				'<div', '</div>'
+			);
+
+			$strComment = preg_replace($arrSearch, $arrReplace, $strComment);
 		}
 
 		return $strComment;
