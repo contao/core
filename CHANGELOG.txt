@@ -6,6 +6,7 @@ Version 2.8.1 (2010--)
 --------------------------
 - Fixed: the install tool does not handle equals sings in passwords (#1338)
 - Fixed: articles drop-down menu in news/events is causing a fatal error (#1593)
+- Fixed: image link elements do not support the new image resize options (#1585)
 - Fixed several issues in the Comments class (BBCode parser)
 
 Version 2.8.0 (2010-02-16)
