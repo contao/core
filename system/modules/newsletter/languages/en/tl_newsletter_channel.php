@@ -54,7 +54,7 @@ $GLOBALS['TL_LANG']['tl_newsletter_channel']['new']        = array('New channel'
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['show']       = array('Channel details', 'Show the details of channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['edit']       = array('Edit channel', 'Edit channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['editheader'] = array('Edit channel settings', 'Edit the settings of channel ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Copy channel', 'Copy channel ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Duplicate channel', 'Duplicate channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['delete']     = array('Delete channel', 'Delete channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['recipients'] = array('Edit recipients', 'Edit the recipients of channel ID %s');
 

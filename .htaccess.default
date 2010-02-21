@@ -31,4 +31,4 @@ RewriteRule ^(.*)$ $1.gz [QSA,L]
 ##
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule .*\.html$ index.php [L]
+RewriteRule (.*\.html)$ index.php/$1 [L]

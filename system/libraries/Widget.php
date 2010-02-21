@@ -252,6 +252,7 @@ abstract class Widget extends Controller
 	 */
 	public function addError($strError)
 	{
+		$this->class = 'error';
 		$this->arrErrors[] = $strError;
 	}
 

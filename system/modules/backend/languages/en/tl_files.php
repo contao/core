@@ -74,7 +74,7 @@ $GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'] = 'Upload completed';
  */
 $GLOBALS['TL_LANG']['tl_files']['new']       = array('New folder', 'Create a new folder');
 $GLOBALS['TL_LANG']['tl_files']['cut']       = array('Move file or folder', 'Move file or folder "%s"');
-$GLOBALS['TL_LANG']['tl_files']['copy']      = array('Copy file or folder', 'Copy file or folder "%s"');
+$GLOBALS['TL_LANG']['tl_files']['copy']      = array('Duplicate file or folder', 'Duplicate file or folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['edit']      = array('Rename file or folder', 'Rename file or folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['delete']    = array('Delete file or folder', 'Delete file or folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['source']    = array('Edit file', 'Edit file "%s"');
