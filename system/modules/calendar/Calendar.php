@@ -186,12 +186,16 @@ class Calendar extends Frontend
 					$objItem = new FeedItem();
 
 					$objItem->title = $event['title'];
-					$objItem->description = ($arrArchive['source'] == 'source_text') ? $event['description'] : $event['teaser'];
 					$objItem->link = $event['link'];
 					$objItem->published = $event['published'];
 					$objItem->start = $event['start'];
 					$objItem->end = $event['end'];
 					$objItem->author = $event['authorName'];
+
+					// Prepare the description
+					$strDescription = ($arrArchive['source'] == 'source_text') ? $event['description'] : $event['teaser'];
+					$strDescription = $this->replaceInsertTags($strDescription);
+					$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 					if (is_array($event['enclosure']))
 					{

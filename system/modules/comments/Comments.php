@@ -224,7 +224,7 @@ class Comments extends Frontend
 			$strWebsite = $arrWidgets['website']->value;
 
 			// Add http:// to the website
-			if (strlen($strWebsite) && !preg_match('@^https?://|ftp://|mailto:@i', $strWebsite))
+			if (strlen($strWebsite) && !preg_match('@^(https?://|ftp://|mailto:|#)@i', $strWebsite))
 			{
 				$strWebsite = 'http://' . $strWebsite;
 			}

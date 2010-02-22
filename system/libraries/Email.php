@@ -376,7 +376,7 @@ class Email extends System
 
 			// Find images
 			$arrMatches = array();
-			preg_match_all('/(?:"|\')([^"\']+\.(gif|jpg|jpeg|jpe|bmp|png|tif|tiff|swf))(?:"|\')/Ui', $this->strHtml, $arrMatches);
+			preg_match_all('/(?:"|\')([^"\']+\.(jpe?g|png|gif|bmp|tiff?|swf))(?:"|\')/Ui', $this->strHtml, $arrMatches);
 
 			// Create cid and replace image source
 			foreach (array_unique($arrMatches[1]) as $src)

@@ -131,10 +131,14 @@ class News extends Frontend
 			$objItem = new FeedItem();
 
 			$objItem->title = $objArticle->headline;
-			$objItem->description = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
 			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
 			$objItem->published = $objArticle->date;
 			$objItem->author = $objArticle->authorName;
+
+			// Prepare the description
+			$strDescription = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
+			$strDescription = $this->replaceInsertTags($strDescription);
+			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 			// Enclosure
 			if ($objArticle->addEnclosure)

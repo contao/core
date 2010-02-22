@@ -14,6 +14,7 @@ Version 2.8.1 (2010--)
 - Fixed: apply file permissions to image thumbnails when the Safe Mode Hack is used (#1398)
 - Fixed: several issues with the new calendar/event list navigation (#1584)
 - Fixed: Widget class not validating the maximum input length (#1578)
+- Fixed: relative URLs in RSS feeds are not converted to absolute URLs (#1596)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)

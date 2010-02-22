@@ -951,35 +951,7 @@ abstract class Controller extends System
 		$objArticle = new ModuleArticle($objArticle);
 		$strArticle = $this->replaceInsertTags($objArticle->generate());
 		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
-
-		// Replace relative image paths
-		$arrImages = array();
-		preg_match_all('/<img[^>]+>/i', $strArticle, $arrImages);
-
-		foreach($arrImages[0] as $strImage)
-		{
-			if (preg_match('/image\.php/i', $strImage))
-			{
-				$strNewImage = str_replace('image.php?src=', '', $strImage);
-				$strNewImage = preg_replace('/&(amp;)?width=([0-9]*)/i', '" width="$2"', $strNewImage);
-				$strNewImage = preg_replace('/&(amp;)?height=([0-9]*)/i', ' height="$2', $strNewImage);
-
-				$strArticle = str_replace($strImage, $strNewImage, $strArticle);
-			}
-		}
-
-		// Replace relative links
-		$arrLinks = array();
-		preg_match_all('/<a[^>]+>/i', $strArticle, $arrLinks);
-
-		foreach($arrLinks[0] as $strLink)
-		{
-			if (!preg_match('@http://|https://|mailto:|ftp://@i', $strLink))
-			{
-				$strNewLink = preg_replace('/href="([^"]+)"/i', 'href="' . $this->Environment->base .'$1"', $strLink);
-				$strArticle = str_replace($strLink, $strNewLink, $strArticle);
-			}
-		}
+		$strArticle = $this->convertRelativeUrls($strArticle);
 
 		// Remove form elements
 		$strArticle = preg_replace('/<form.*<\/form>/Us', '', $strArticle);
@@ -1924,6 +1896,46 @@ abstract class Controller extends System
 		}
 
 		return $strUrl;
+	}
+
+
+	/**
+	 * Convert relative URLs to absolute URLs
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	protected function convertRelativeUrls($strContent, $strBase=false)
+	{
+		if (!$strBase)
+		{
+			$strBase = $this->Environment->base;
+		}
+
+		$arrUrls = preg_split('/((href|src)="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$strContent = '';
+
+		for($i=0; $i<count($arrUrls); $i=$i+4)
+		{
+			$strContent .= $arrUrls[$i];
+
+			if (!isset($arrUrls[$i+2]))
+			{
+				continue;
+			}
+
+			$strAttribute = $arrUrls[$i+2];
+			$strUrl = $arrUrls[$i+3];
+
+			if (!preg_match('@^(https?://|ftp://|mailto:|#)@i', $strUrl))
+			{
+				$strUrl = $strBase . (($strUrl != '/') ? $strUrl : '');
+			}
+
+			$strContent .= $strAttribute . '="' . $strUrl . '"';
+		}
+
+		return $strContent;
 	}
 
 
