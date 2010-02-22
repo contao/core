@@ -1661,13 +1661,13 @@ window.addEvent(\'domready\', function()
 			$return .= "\n  " . '<li class="tl_file" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px;">';
 
 			// Generate thumbnail
-			if ($objFile->isGdImage && $objFile->height > 0 && $objFile->height <= 3000 && $objFile->width <= 3000)
+			if ($objFile->isGdImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
 				$popupHeight = ($objFile->height + 286);
 				$thumbnail .= ' <span class="tl_gray">('.$objFile->width.'x'.$objFile->height.')</span>';
 
-				if ($GLOBALS['TL_CONFIG']['thumbnails'])
+				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= 3000 && $objFile->width <= 3000)
 				{
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
