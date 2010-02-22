@@ -85,7 +85,7 @@ class Date extends System
 		$this->intTstamp = $intTstamp ? $intTstamp : time();
 		$this->strFormat = $strFormat ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
 
-		if (!preg_match('/^[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
+		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
 			$this->dateToUnix();
 		}

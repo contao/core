@@ -10,6 +10,7 @@ Version 2.8.1 (2010--)
 - Fixed: image link elements do not support the new image resize options (#1585)
 - Fixed: table sort script interchanges the classes even and odd (#1589)
 - Fixed: inconsistent file tree behavior (#1582)
+- Fixed: Date class not supporting negative Unix timestamps (#1591)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)
