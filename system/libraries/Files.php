@@ -121,6 +121,34 @@ class Files
 
 
 	/**
+	 * Recursively remove a directory
+	 * @param string
+	 * @param boolean
+	 */
+	public function rrdir($strFolder, $blnPreserveRoot=false)
+	{
+		$arrFiles = scan(TL_ROOT . '/' . $strFolder);
+
+		foreach ($arrFiles as $strFile)
+		{
+			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
+			{
+				$this->rmdir($strFolder . '/' . $strFile);
+			}
+			else
+			{
+				$this->delete($strFolder . '/' . $strFile);
+			}
+		}
+
+		if (!$blnPreserveRoot)
+		{
+			$this->rmdir($strFolder);
+		}
+	}
+
+
+	/**
 	 * Open a file and return the handle
 	 * @param string
 	 * @param string

@@ -114,8 +114,7 @@ class Folder extends System
 	 */
 	public function clear()
 	{
-		$this->rmdir($this->strFolder);
-		$this->Files->mkdir($this->strFolder);
+		$this->Files->rrdir($this->strFolder, true);
 	}
 
 
@@ -124,30 +123,7 @@ class Folder extends System
 	 */
 	public function delete()
 	{
-		$this->rmdir($this->strFolder);
-	}
-
-
-	/**
-	 * Recursively delete folder
-	 * @param string
-	 */
-	protected function rmdir($strFolder)
-	{
-		$arrFiles = scan(TL_ROOT . '/' . $strFolder);
-
-		foreach ($arrFiles as $strFile)
-		{
-			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
-			{
-				$this->rmdir($strFolder . '/' . $strFile);
-				continue;
-			}
-
-			$this->Files->delete($strFolder . '/' . $strFile);
-		}
-
-		$this->Files->rmdir($strFolder);
+		$this->Files->rrdir($this->strFolder);
 	}
 }
 
