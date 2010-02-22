@@ -106,8 +106,10 @@ class ModuleEventlist extends Events
 			}
 		}
 
+		$blnDynamicFormat = in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year'));
+
 		// Display year
-		if ($this->Input->get('year'))
+		if ($blnDynamicFormat && $this->Input->get('year'))
 		{
 			$this->Date = new Date($this->Input->get('year'), 'Y');
 			$this->cal_format = 'cal_year';
@@ -115,7 +117,7 @@ class ModuleEventlist extends Events
 		}
 
 		// Display month
-		elseif ($this->Input->get('month'))
+		elseif ($blnDynamicFormat && $this->Input->get('month'))
 		{
 			$this->Date = new Date($this->Input->get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
@@ -123,7 +125,7 @@ class ModuleEventlist extends Events
 		}
 
 		// Display day
-		elseif ($this->Input->get('day'))
+		elseif ($blnDynamicFormat && $this->Input->get('day'))
 		{
 			$this->Date = new Date($this->Input->get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';

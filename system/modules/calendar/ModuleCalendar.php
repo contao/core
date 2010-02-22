@@ -109,7 +109,23 @@ class ModuleCalendar extends Events
 	 */
 	protected function compile()
 	{
-		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
+		// Respond to month
+		if ($this->Input->get('month'))
+		{
+			$this->Date = new Date($this->Input->get('month'), 'Ym');
+		}
+
+		// Respond to day
+		elseif ($this->Input->get('day'))
+		{
+			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+		}
+
+		// Fallback to today
+		else
+		{
+			$this->Date = new Date();
+		}
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
@@ -124,7 +140,7 @@ class ModuleCalendar extends Events
 		$prevYear = ($intMonth == 1) ? ($intYear - 1) : $intYear;
 		$lblPrevious = $GLOBALS['TL_LANG']['MONTHS'][($prevMonth - 1)] . ' ' . $prevYear;
 
-		$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $prevYear . ((strlen($prevMonth) < 2) ? '0' : '') . $prevMonth . '01';
+		$objTemplate->prevHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $prevYear . str_pad($prevMonth, 2, 0, STR_PAD_LEFT);
 		$objTemplate->prevTitle = specialchars($lblPrevious);
 		$objTemplate->prevLink = $GLOBALS['TL_LANG']['MSC']['cal_previous'] . ' ' . $lblPrevious;
 		$objTemplate->prevLabel = $GLOBALS['TL_LANG']['MSC']['cal_previous'];
@@ -137,7 +153,7 @@ class ModuleCalendar extends Events
 		$nextYear = ($intMonth == 12) ? ($intYear + 1) : $intYear;
 		$lblNext = $GLOBALS['TL_LANG']['MONTHS'][($nextMonth - 1)] . ' ' . $nextYear;
 
-		$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'day=' . $nextYear . ((strlen($nextMonth) < 2) ? '0' : '') . $nextMonth . '01';
+		$objTemplate->nextHref = $this->strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '?id=' . $this->Input->get('id') . '&amp;' : '?') . 'month=' . $nextYear . str_pad($nextMonth, 2, 0, STR_PAD_LEFT);
 		$objTemplate->nextTitle = specialchars($lblNext);
 		$objTemplate->nextLink = $lblNext . ' ' . $GLOBALS['TL_LANG']['MSC']['cal_next'];
 		$objTemplate->nextLabel = $GLOBALS['TL_LANG']['MSC']['cal_next'];
