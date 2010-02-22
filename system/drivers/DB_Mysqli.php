@@ -56,8 +56,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function connect()
 	{
-		$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort']);
-		$this->resConnection->set_charset($GLOBALS['TL_CONFIG']['dbCharset']);
+		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort']);
+		@$this->resConnection->set_charset($GLOBALS['TL_CONFIG']['dbCharset']);
 	}
 
 
@@ -66,7 +66,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function disconnect()
 	{
-		$this->resConnection->close();
+		@$this->resConnection->close();
 	}
 
 
@@ -76,7 +76,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function get_error()
 	{
-		return $this->resConnection->error;
+		return @$this->resConnection->error;
 	}
 
 
@@ -161,7 +161,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort']);
+		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort']);
 	}
 
 
@@ -170,8 +170,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function begin_transaction()
 	{
-		$this->resConnection->query("SET AUTOCOMMIT=0");
-		$this->resConnection->query("BEGIN");
+		@$this->resConnection->query("SET AUTOCOMMIT=0");
+		@$this->resConnection->query("BEGIN");
 	}
 
 
@@ -180,8 +180,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function commit_transaction()
 	{
-		$this->resConnection->query("COMMIT");
-		$this->resConnection->query("SET AUTOCOMMIT=1");
+		@$this->resConnection->query("COMMIT");
+		@$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 
 
@@ -190,8 +190,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function rollback_transaction()
 	{
-		$this->resConnection->query("ROLLBACK");
-		$this->resConnection->query("SET AUTOCOMMIT=1");
+		@$this->resConnection->query("ROLLBACK");
+		@$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
 }
 
@@ -256,7 +256,7 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function execute_query()
 	{
-		return $this->resConnection->query($this->strQuery);
+		return @$this->resConnection->query($this->strQuery);
 	}
 
 
@@ -266,7 +266,7 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function get_error()
 	{
-		return $this->resConnection->error;
+		return @$this->resConnection->error;
 	}
 
 
@@ -276,7 +276,7 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function affected_rows()
 	{
-		return $this->resConnection->affected_rows;
+		return @$this->resConnection->affected_rows;
 	}
 
 
@@ -286,7 +286,7 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function insert_id()
 	{
-		return $this->resConnection->insert_id;
+		return @$this->resConnection->insert_id;
 	}
 
 
@@ -296,7 +296,7 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function explain_query()
 	{
-		return $this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
+		return @$this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
 	}
 }
 
@@ -318,7 +318,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function fetch_row()
 	{
-		return $this->resResult->fetch_row();
+		return @$this->resResult->fetch_row();
 	}
 
 
@@ -328,7 +328,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function fetch_assoc()
 	{
-		return $this->resResult->fetch_assoc();
+		return @$this->resResult->fetch_assoc();
 	}
 
 
@@ -338,7 +338,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function num_rows()
 	{
-		return $this->resResult->num_rows;
+		return @$this->resResult->num_rows;
 	}
 
 
@@ -348,7 +348,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function num_fields()
 	{
-		return $this->resResult->field_countmysql;
+		return @$this->resResult->field_countmysql;
 	}
 
 
@@ -359,7 +359,7 @@ class DB_Mysqli_Result extends Database_Result
 	 */
 	protected function fetch_field($intOffset)
 	{
-		return $this->resResult->fetch_field_direct($intOffset);
+		return @$this->resResult->fetch_field_direct($intOffset);
 	}
 
 
