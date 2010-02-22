@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
 		),
 		'inColumn' => array
 		(

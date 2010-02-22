@@ -161,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'search'                  => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
 		),
 		'answer' => array
 		(

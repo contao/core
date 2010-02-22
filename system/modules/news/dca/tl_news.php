@@ -163,11 +163,11 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'author' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
-			'exclude'                 => true,
 			'default'                 => $this->User->id,
+			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
 		),
 		'date' => array
 		(
@@ -606,7 +606,7 @@ class tl_news extends Backend
 				return $arrAlias;
 			}
 
-			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a,inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting")
+			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting")
 									   ->execute($dc->id);
 		}
 		else
