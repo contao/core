@@ -675,7 +675,7 @@ abstract class Controller extends System
 
 		$image = urldecode($image);
 
-		// Check whether file exists
+		// Check whether the file exists
 		if (!file_exists(TL_ROOT . '/' . $image))
 		{
 			$this->log('Image "' . $image . '" could not be found', 'Controller getImage()', TL_ERROR);
@@ -685,7 +685,7 @@ abstract class Controller extends System
 		$objFile = new File($image);
 		$arrAllowedTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['validImageTypes']));
 
-		// Check file type
+		// Check the file type
 		if (!in_array($objFile->extension, $arrAllowedTypes))
 		{
 			$this->log('Image type "' . $objFile->extension . '" was not allowed to be processed', 'Controller getImage()', TL_ERROR);
@@ -721,7 +721,7 @@ abstract class Controller extends System
 			}
 		}
 
-		// Return the path to the original image if GDlib cannot handle it
+		// Return the path to the original image if the GDlib cannot handle it
 		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > 3000 || $objFile->height > 3000 || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
 			return $image;
@@ -781,14 +781,14 @@ abstract class Controller extends System
 			$strNewImage = imagecreatetruecolor($width, $height);
 		}
 
-		// Calculate height if only width is given
+		// Calculate the height if only the width is given
 		elseif ($intWidth)
 		{
 			$intHeight = ceil($objFile->height * $width / $objFile->width);
 			$strNewImage = imagecreatetruecolor($intWidth, $intHeight);
 		}
 
-		// Calculate width if only height is given
+		// Calculate the width if only the height is given
 		elseif ($intHeight)
 		{
 			$intWidth = ceil($objFile->width * $height / $objFile->height);
@@ -842,7 +842,7 @@ abstract class Controller extends System
 				break;
 		}
 
-		// New image could not be created
+		// The new image could not be created
 		if (!$strSourceImage)
 		{
 			$this->log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
@@ -857,7 +857,7 @@ abstract class Controller extends System
 			$objFile->extension = 'png';
 		}
 
-		// Create new image
+		// Create the new image
 		switch ($objFile->extension)
 		{
 			case 'gif':
@@ -874,11 +874,11 @@ abstract class Controller extends System
 				break;
 		}
 
-		// Destroy temporary images
+		// Destroy the temporary images
 		imagedestroy($strSourceImage);
 		imagedestroy($strNewImage);
 
-		// Resize original image
+		// Resize the original image
 		if ($target)
 		{
 			$this->import('Files');
@@ -887,7 +887,14 @@ abstract class Controller extends System
 			return $target;
 		}
 
-		// Return path to new image
+		// Set the file permissions when the Safe Mode Hack is used
+		if ($GLOBALS['TL_CONFIG']['useFTP'])
+		{
+			$this->import('Files');
+			$this->Files->chmod($strCacheName, 0644);
+		}
+
+		// Return the path to new image
 		return $strCacheName;
 	}
 

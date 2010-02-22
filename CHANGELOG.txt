@@ -11,6 +11,7 @@ Version 2.8.1 (2010--)
 - Fixed: table sort script interchanges the classes even and odd (#1589)
 - Fixed: inconsistent file tree behavior (#1582)
 - Fixed: Date class not supporting negative Unix timestamps (#1591)
+- Fixed: apply file permissions to image thumbnails when the Safe Mode Hack is used (#1398)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)
