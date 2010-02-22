@@ -35,6 +35,7 @@ $GLOBALS['TL_LANG']['ERR']['unique']         = 'Doppelter Eintrag im Feld "%s"!'
 $GLOBALS['TL_LANG']['ERR']['mandatory']      = 'Bitte füllen Sie das Feld "%s" aus!';
 $GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']   = 'Bitte füllen Sie dieses Feld aus!';
 $GLOBALS['TL_LANG']['ERR']['minlength']      = 'Das Feld "%s" muss mindestens %d Zeichen lang sein!';
+$GLOBALS['TL_LANG']['ERR']['maxlength']      = 'Das Feld "%s" darf höchstens %d Zeichen lang sein!';
 $GLOBALS['TL_LANG']['ERR']['digit']          = 'Bitte geben Sie nur Zahlen ein!';
 $GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Bitte geben Sie einen Prozentsatz zwischen 0 und 100 ein!';
 $GLOBALS['TL_LANG']['ERR']['alpha']          = 'Bitte geben Sie nur Buchstaben ein!';

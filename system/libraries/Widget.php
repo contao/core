@@ -514,6 +514,11 @@ abstract class Widget extends Controller
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minlength'], $this->strLabel, $this->minlength));
 		}
 
+		if ($this->maxlength && strlen($varInput) && utf8_strlen(trim($varInput)) > $this->maxlength)
+		{
+			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
+		}
+
 		if (strlen($this->rgxp))
 		{
 			switch ($this->rgxp)

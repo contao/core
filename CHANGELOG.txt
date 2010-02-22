@@ -13,6 +13,7 @@ Version 2.8.1 (2010--)
 - Fixed: Date class not supporting negative Unix timestamps (#1591)
 - Fixed: apply file permissions to image thumbnails when the Safe Mode Hack is used (#1398)
 - Fixed: several issues with the new calendar/event list navigation (#1584)
+- Fixed: Widget class not validating the maximum input length (#1578)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)
