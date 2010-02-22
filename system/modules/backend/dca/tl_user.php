@@ -705,9 +705,23 @@ class tl_user extends Backend
 			$this->redirect('typolight/main.php?act=error');
 		}
 
-		// Update database
+		$this->createInitialVersion('tl_user', $intId);
+	
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_user']['fields']['disable']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_user']['fields']['disable']['save_callback'] as $callback)
+			{
+				$this->import($callback[0]);
+				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+			}
+		}
+
+		// Update the database
 		$this->Database->prepare("UPDATE tl_user SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
+
+		$this->createNewVersion('tl_user', $intId);
 	}
 }
 

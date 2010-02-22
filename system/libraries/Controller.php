@@ -2152,7 +2152,29 @@ abstract class Controller extends System
 
 
 	/**
-	 * Create a new version of the current record
+	 * Create an initial version of a record
+	 * @param mixed
+	 */
+	protected function createInitialVersion($strTable, $intId)
+	{
+		if (!$GLOBALS['TL_DCA'][$strTable]['config']['enableVersioning'])
+		{
+			return;
+		}
+
+		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_version WHERE fromTable=? AND pid=?")
+									 ->limit(1)
+									 ->executeUncached($strTable, $intId);
+
+		if ($objVersion->total < 1)
+		{
+			$this->createNewVersion($strTable, $intId);
+		}
+	}
+
+
+	/**
+	 * Create a new version of a record
 	 * @param mixed
 	 */
 	protected function createNewVersion($strTable, $intId)
@@ -2169,7 +2191,7 @@ abstract class Controller extends System
 		// Get new record
 		$objRecord = $this->Database->prepare("SELECT * FROM " . $strTable . " WHERE id=?")
 									->limit(1)
-									->execute($intId);
+									->executeUncached($intId);
 
 		if ($objRecord->numRows < 1 || $objRecord->tstamp < 1)
 		{
@@ -2180,7 +2202,7 @@ abstract class Controller extends System
 		$this->import('BackendUser', 'User');
 
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
-									 ->execute($intId, $strTable);
+									 ->executeUncached($intId, $strTable);
 
 		if (!is_null($objVersion->version))
 		{

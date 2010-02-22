@@ -1475,19 +1475,7 @@ class DC_Table extends DataContainer implements listable, editable
 		}
 
 		$this->objActiveRecord = $objRow;
-
-		// Create a new version if there is none
-		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
-		{
-			$objVersion = $this->Database->prepare("SELECT id FROM tl_version WHERE fromTable=? AND pid=?")
-										 ->limit(1)
-										 ->execute($this->strTable, $this->intId);
-
-			if ($objVersion->numRows < 1)
-			{
-				$this->createNewVersion($this->strTable, $this->intId);
-			}
-		}
+		$this->createInitialVersion($this->strTable, $this->intId);
 
 		// Build an array from boxes and rows
 		$this->strPalette = $this->getPalette();
@@ -1710,7 +1698,7 @@ class DC_Table extends DataContainer implements listable, editable
 			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
 			{
 				$this->createNewVersion($this->strTable, $this->intId);
-				$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table edit()', TL_GENERAL);
+				$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 			}
 
 			// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -1859,18 +1847,7 @@ window.addEvent(\'domready\', function()
 				$this->blnCreateNewVersion = false;
 				$this->strPalette = trimsplit('[;,]', $this->getPalette());
 
-				// Create a new version if there is none
-				if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
-				{
-					$objVersion = $this->Database->prepare("SELECT id FROM tl_version WHERE fromTable=? AND pid=?")
-												 ->limit(1)
-												 ->execute($this->strTable, $this->intId);
-
-					if ($objVersion->numRows < 1)
-					{
-						$this->createNewVersion($this->strTable, $this->intId);
-					}
-				}
+				$this->createInitialVersion($this->strTable, $this->intId);
 
 				// Add meta fields if the current user is an administrator
 				if ($this->User->isAdmin)
@@ -1992,7 +1969,7 @@ window.addEvent(\'domready\', function()
 					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
 					{
 						$this->createNewVersion($this->strTable, $this->intId);
-						$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
+						$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 					}
 
 					// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2170,18 +2147,7 @@ window.addEvent(\'domready\', function()
 					$this->values = array($this->intId);
 					$this->blnCreateNewVersion = false;
 
-					// Create a new version if there is none
-					if ($GLOBALS['TL_DCA'][$this->strTable]['config']['enableVersioning'])
-					{
-						$objVersion = $this->Database->prepare("SELECT id FROM tl_version WHERE fromTable=? AND pid=?")
-													 ->limit(1)
-													 ->execute($this->strTable, $this->intId);
-
-						if ($objVersion->numRows < 1)
-						{
-							$this->createNewVersion($this->strTable, $this->intId);
-						}
-					}
+					$this->createInitialVersion($this->strTable, $this->intId);
 
 					// Store all fields
 					foreach ($fields as $v)

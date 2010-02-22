@@ -551,9 +551,23 @@ class tl_style extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
-		// Update database
+		$this->createInitialVersion('tl_style', $intId);
+	
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_style']['fields']['invisible']['save_callback'] as $callback)
+			{
+				$this->import($callback[0]);
+				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+			}
+		}
+
+		// Update the database
 		$this->Database->prepare("UPDATE tl_style SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
+
+		$this->createNewVersion('tl_style', $intId);
 
 		// Recreate the style sheet
 		$objStylesheet = $this->Database->prepare("SELECT pid FROM tl_style WHERE id=?")

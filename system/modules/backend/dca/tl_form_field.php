@@ -569,9 +569,23 @@ class tl_form_field extends Backend
 		$this->Input->setGet('act', 'toggle');
 		$this->checkPermission();
 
-		// Update database
+		$this->createInitialVersion('tl_form_field', $intId);
+
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_form_field']['fields']['invisible']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_form_field']['fields']['invisible']['save_callback'] as $callback)
+			{
+				$this->import($callback[0]);
+				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+			}
+		}
+
+		// Update the database
 		$this->Database->prepare("UPDATE tl_form_field SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
+
+		$this->createNewVersion('tl_form_field', $intId);
 	}
 }
 
