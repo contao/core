@@ -132,7 +132,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
 		),
 		'cc' => array
 		(
