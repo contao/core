@@ -212,7 +212,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['size'],
 			'exclude'                 => true,
 			'inputType'               => 'imageSize',
-			'options'                 => array('proportional', 'crop', 'box'),
+			'options'                 => array('crop', 'proportional', 'box'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -642,7 +642,7 @@ class tl_content extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// View an article
-		if (!strlen($this->Input->get('act')) || $this->Input->get('act') == 'select' || $this->Input->get('act') == 'create')
+		if ($this->Input->get('act') == '' || $this->Input->get('act') == 'select' || $this->Input->get('act') == 'create')
 		{
 			$objArticle = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
 										 ->limit(1)

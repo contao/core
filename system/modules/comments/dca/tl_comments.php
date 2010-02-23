@@ -38,7 +38,11 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	(
 		'dataContainer'               => 'Table',
 		'enableVersioning'            => true,
-		'closed'                      => true
+		'closed'                      => true,
+		'onload_callback' => array
+		(
+			array('tl_comments', 'checkPermission')
+		)
 	),
 
 	// List
@@ -73,14 +77,16 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_comments']['edit'],
 				'href'                => 'act=edit',
-				'icon'                => 'edit.gif'
+				'icon'                => 'edit.gif',
+				'button_callback'     => array('tl_comments', 'editComment')
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_comments']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'button_callback'     => array('tl_comments', 'deleteComment')
 			),
 			'toggle' => array
 			(
@@ -183,19 +189,200 @@ class tl_comments extends Backend
 {
 
 	/**
-	 * Database result
-	 * @var array
-	 */
-	protected $arrData = null;
-
-
-	/**
 	 * Import the back end user object
 	 */
 	public function __construct()
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+	}
+	
+
+	/**
+	 * Check permissions to edit table tl_comments
+	 */
+	public function checkPermission()
+	{
+		switch ($this->Input->get('act'))
+		{
+			case 'select':
+			case 'show':
+				// Allow
+				break;
+
+			case 'edit':
+			case 'delete':
+			case 'toggle':
+				$objComment = $this->Database->prepare("SELECT id, parent, source FROM tl_comments WHERE id=?")
+											 ->limit(1)
+											 ->execute($this->Input->get('id'));
+
+				if ($objComment->numRows < 1)
+				{
+					$this->log('Comment ID ' . $this->Input->get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
+					$this->redirect('typolight/main.php?act=error');
+				}
+
+				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
+				{
+					$this->log('Not enough permissions to ' . $this->Input->get('act') . ' comment ID ' . $this->Input->get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+				$session = $this->Session->getData();
+
+				if (!is_array($session['CURRENT']['IDS']) || count($session['CURRENT']['IDS']) < 1)
+				{
+					break;
+				}
+
+				$objComment = $this->Database->execute("SELECT id, parent, source FROM tl_comments WHERE id IN(" . implode(',', array_map('intval', $session['CURRENT']['IDS'])) . ")");
+
+				while ($objComment->next())
+				{
+					if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source) && ($key = array_search($objComment->id, $session['CURRENT']['IDS'])) !== false)
+					{
+						unset($session['CURRENT']['IDS'][$key]);
+					}
+				}
+
+				$session['CURRENT']['IDS'] = array_values($session['CURRENT']['IDS']);
+				$this->Session->setData($session);
+				break;
+
+			default:
+				if (strlen($this->Input->get('act')))
+				{
+					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_comments checkPermission', TL_ERROR);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
+		}
+	}
+
+
+	/**
+	 * Check whether the user is allowed to edit a comment 
+	 * @param integer
+	 * @param string
+	 * @return boolean
+	 */
+	protected function isAllowedToEditComment($intParent, $strSource)
+	{
+		if ($this->User->isAdmin)
+		{
+			return true;
+		}
+
+		// Load cached result
+		if (isset($this->arrCache[$strSource][$intParent]))
+		{
+			return $this->arrCache[$strSource][$intParent];
+		}
+
+		// Get the pagemounts
+		$pagemounts = array();
+
+		foreach ($this->User->pagemounts as $root)
+		{
+			$pagemounts[] = $root;
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+		}
+
+		$pagemounts = array_unique($pagemounts);
+
+		// Order deny,allow
+		$this->arrCache[$strSource][$intParent] = false;
+
+		switch ($strSource)
+		{
+			case 'tl_content':
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE id=(SELECT pid FROM tl_content WHERE id=?))")
+										  ->limit(1)
+										  ->execute($intParent);
+
+				// Check whether the page is mounted and the user is allowed to edit its articles
+				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
+				{
+					$this->arrCache[$strSource][$intParent] = true;
+				}
+				break;
+
+			case 'tl_page':
+				$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute($intParent);
+
+				// Check whether the page is mounted and the user is allowed to edit it
+				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
+				{
+					$this->arrCache[$strSource][$intParent] = true;
+				}
+				break;
+
+			case 'tl_news':
+				// Check the access to the news module
+				if (in_array('news', $this->User->modules))
+				{
+					$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
+												 ->limit(1)
+												 ->execute($intParent);
+
+					// Check the access to the news archive
+					if ($objArchive->numRows > 0 && in_array($objArchive->pid, $this->User->news))
+					{
+						$this->arrCache[$strSource][$intParent] = true;
+					}
+				}
+				break;
+
+			case 'tl_calendar_events':
+				// Check the access to the calendar module
+				if (in_array('calendar', $this->User->modules))
+				{
+					$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
+												  ->limit(1)
+												  ->execute($intParent);
+
+					// Check the access to the calendar
+					if ($objCalendar->numRows > 0 && in_array($objCalendar->pid, $this->User->calendars))
+					{
+						$this->arrCache[$strSource][$intParent] = true;
+					}
+				}
+				break;
+
+			case 'tl_faq':
+				// Check the access to the FAQ module
+				if (in_array('faq', $this->User->modules))
+				{
+					$this->arrCache[$strSource][$intParent] = true;
+				}
+				break;
+
+			default:
+				// HOOK: support custom modules
+				if (isset($GLOBALS['TL_HOOKS']['isAllowedToEditComment']) && is_array($GLOBALS['TL_HOOKS']['isAllowedToEditComment']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['isAllowedToEditComment'] as $callback)
+					{
+						$this->import($callback[0]);
+
+						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
+						{
+							$this->arrCache[$strSource][$intParent] = true;
+							break;
+						}
+					}
+				}
+				break;
+		}
+
+		return $this->arrCache[$strSource][$intParent];
 	}
 
 
@@ -291,6 +478,38 @@ class tl_comments extends Backend
 
 
 	/**
+	 * Return the edit comment button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function editComment($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
+	 * Return the delete comment button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function deleteComment($row, $href, $label, $title, $icon, $attributes)
+	{
+		return ($this->User->isAdmin || $this->isAllowedToEditComment($row['parent'], $row['source'])) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+	}
+
+
+	/**
 	 * Return the "toggle visibility" button
 	 * @param array
 	 * @param string
@@ -321,6 +540,11 @@ class tl_comments extends Backend
 			$icon = 'invisible.gif';
 		}		
 
+		if (!$this->User->isAdmin && !$this->isAllowedToEditComment($row['parent'], $row['source']))
+		{
+			return $this->generateImage($icon) . ' ';
+		}
+
 		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 
@@ -332,6 +556,11 @@ class tl_comments extends Backend
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'toggle');
+		$this->checkPermission();
+
 		// Check permissions to publish
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
