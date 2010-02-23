@@ -175,11 +175,12 @@ class CheckBoxWizard extends Widget
 			$blnCheckAll = false;
 		}
 
-        return sprintf('<div id="ctrl_%s" class="tl_checkbox_container tl_checkbox_wizard%s">%s%s</div>',
+        return sprintf('<div id="ctrl_%s" class="tl_checkbox_container tl_checkbox_wizard%s">%s%s</div>%s',
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						($blnCheckAll ? '<span class="fixed"><input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_' . $this->strId . '\')" /> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label></span>' : ''),
-						implode('', $arrOptions));
+						implode('', $arrOptions),
+						$this->wizard);
 	}
 
 

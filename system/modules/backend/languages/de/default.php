@@ -277,5 +277,9 @@ $GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
 $GLOBALS['TL_LANG']['MSC']['crop']             = 'Exaktes Format';
 $GLOBALS['TL_LANG']['MSC']['box']              = 'An Rahmen anpassen';
 $GLOBALS['TL_LANG']['MSC']['protected']        = 'geschützt';
+$GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update-Modus';
+$GLOBALS['TL_LANG']['MSC']['updateAdd']        = 'Ausgewählte Gruppen hinzufügen';
+$GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Ausgewählte Gruppen entfernen';
+$GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Bestehende Zuordnung überschreiben';
 
 ?>

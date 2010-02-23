@@ -230,7 +230,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'wizard' => array
+			(
+				array('tl_user', 'addGroupWizard')
+			),
+			'save_callback' => array
+			(
+				array('tl_user', 'updateGroupMembership')
+			)
 		),
 		'inherit' => array
 		(
@@ -636,6 +644,79 @@ class tl_user extends Backend
 
 		$this->Database->prepare("UPDATE tl_user SET dateAdded=? WHERE id=?")
 					   ->execute($time, $dc->id);
+	}
+
+
+	/**
+	 * Generate the group wizard
+	 * @param object
+	 * @return string
+	 */
+	public function addGroupWizard(DataContainer $dc)
+	{
+		if ($this->Input->get('act') != 'overrideAll')
+		{
+			return '';
+		}
+
+		return '
+</div>
+<div>
+  <h3 style="padding-top:7px"><label for="ctrl_update_mode">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
+  <div id="ctrl_update_mode" class="tl_radio_container">
+    <input type="radio" name="update_mode" id="opt_update_mode_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
+    <input type="radio" name="update_mode" id="opt_update_mode_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
+    <input type="radio" name="update_mode" id="opt_update_mode_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
+  </div>';
+	}
+
+
+	/**
+	 * Save the user groups according to the update mode
+	 * @param mixed
+	 * @param object
+	 * @return mixed
+	 */
+	public function updateGroupMembership($varValue, DataContainer $dc)
+	{
+		if ($this->Input->get('act') != 'overrideAll' || !$this->Input->post('update_mode'))
+		{
+			return $varValue;
+		}
+
+		$objGroups = $this->Database->prepare("SELECT groups FROM tl_user WHERE id=?")
+									->limit(1)
+									->execute($dc->id);
+
+		if ($objGroups->numRows < 1)
+		{
+			return $varValue;
+		}
+
+		$old = deserialize($objGroups->groups, true);
+		$new = deserialize($varValue, true);
+
+		switch ($this->Input->post('update_mode'))
+		{
+			case 'add':
+				$varValue = array_values(array_unique(array_merge($old, $new)));
+				break;
+
+			case 'remove':
+				$varValue = array_values(array_diff($old, $new));
+				break;
+
+			case 'replace':
+				$varValue = $new;
+				break;
+		}
+
+		if (!is_array($varValue) || empty($varValue))
+		{
+			return '';
+		}
+
+		return serialize($varValue);
 	}
 
 
