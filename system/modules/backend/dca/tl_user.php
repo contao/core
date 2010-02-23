@@ -627,7 +627,8 @@ class tl_user extends Backend
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{
-		if ($dc->activeRecord->dateAdded > 0)
+		// Return if there is no active record (override all)
+		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
 		{
 			return;
 		}

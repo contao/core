@@ -704,6 +704,12 @@ class tl_calendar_events extends Backend
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
+		// Return if there is no active record (override all)
+		if (!$dc->activeRecord)
+		{
+			return;
+		}
+
 		$arrSet['startTime'] = $dc->activeRecord->startDate;
 		$arrSet['endTime'] = $dc->activeRecord->startDate;
 

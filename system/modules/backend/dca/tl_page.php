@@ -899,6 +899,12 @@ class tl_page extends Backend
 	 */
 	public function generateArticle(DataContainer $dc)
 	{
+		// Return if there is no active record (override all)
+		if (!$dc->activeRecord)
+		{
+			return;
+		}
+
 		// Existing or not a regular page
 		if ($dc->activeRecord->tstamp > 0 || $dc->activeRecord->type != 'regular')
 		{

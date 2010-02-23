@@ -635,6 +635,12 @@ class tl_news extends Backend
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
+		// Return if there is no active record (override all)
+		if (!$dc->activeRecord)
+		{
+			return;
+		}
+
 		$arrSet['date'] = strtotime(date('Y-m-d', $dc->activeRecord->date) . ' ' . date('H:i:s', $dc->activeRecord->time));
 		$arrSet['time'] = $arrSet['date'];
 
