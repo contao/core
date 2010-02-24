@@ -79,11 +79,25 @@ class ModuleNavigation extends Module
 		$trail = $objPage->trail;
 		$level = ($this->levelOffset > 0) ? $this->levelOffset : 0;
 
-		// Overwrite with custom reference page
+		// Overwrite with a custom reference page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$trail = array($this->rootPage);
-			$level = 0;
+			$trail = array();
+			$blnFound = false;
+
+			// Check whether the reference page is within the trail
+			foreach ($objPage->trail as $id)
+			{
+				if ($id == $this->rootPage)
+				{
+					$blnFound = true;
+				}
+
+				if ($blnFound)
+				{
+					$trail[] = $id;
+				}
+			}
 		}
 
 		$request = ampersand($this->Environment->request, true);
