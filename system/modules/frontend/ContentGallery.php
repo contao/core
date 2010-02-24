@@ -278,6 +278,8 @@ class ContentGallery extends ContentElement
 		$objTemplate = new FrontendTemplate($strTemplate);
 
 		$objTemplate->body = $body;
+		$objTemplate->headline = $this->headline; // see #1603
+
 		$this->Template->images = $objTemplate->parse();
 	}
 }
