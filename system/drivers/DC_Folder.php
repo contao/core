@@ -860,6 +860,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			// Add upload types and key
 			$fancy->uploadTypes = $uploadTypes;
 			$fancy->script = basename($this->Environment->script);
+			$fancy->isPopup = ($fancy->script == 'files.php') ? 'true' : 'false';
 
 			// Add labels
 			foreach ($GLOBALS['TL_LANG']['tl_files'] as $k=>$v)

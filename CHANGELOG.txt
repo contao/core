@@ -21,7 +21,8 @@ Version 2.8.1 (2010--)
 - Fixed: no active record available in onsubmit_callbacks in "override multiple" mode
 - Fixed: Swiff does not check whether the Flash plugins is available (#1601)
 - Fixed: navigation module start/stop levels fail if there is a reference page (#1607)
-- Fixed: the style sheet module does not show an error if a file is not writeable (#1598) 
+- Fixed: the style sheet module does not show an error if a file is not writeable (#1598)
+- Fixed: FancyUpload does not work in the popup file manager (#1608)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)

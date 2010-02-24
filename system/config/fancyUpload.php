@@ -35,112 +35,113 @@
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-window.addEvent("domready", function() {
+window.addEvent('domready', function() {
   (function() {
     var phrases = {
-      "progressOverall": "<?php echo $fancy->progressOverall; ?>",
-      "currentTitle": "<?php echo $fancy->currentTitle; ?>",
-      "currentFile": "<?php echo $fancy->currentFile; ?>",
-      "currentProgress": "<?php echo $fancy->currentProgress; ?>",
-      "fileName": "{name}",
-      "remove": "<?php echo $fancy->remove; ?>",
-      "removeTitle": "<?php echo $fancy->removeTitle; ?>",
-      "fileError": "<?php echo $fancy->fileError; ?>",
-      "uploadCompleted": "<?php echo $fancy->uploadCompleted; ?>",
-      "validationErrors": {
-        "duplicate": "<?php echo $fancy->duplicate; ?>",
-        "sizeLimitMin": "<?php echo $fancy->sizeLimitMin; ?>",
-        "sizeLimitMax": "<?php echo $fancy->sizeLimitMax; ?>",
-        "fileListMax": "<?php echo $fancy->fileListMax; ?>",
-        "fileListSizeMax": "<?php echo $fancy->fileListSizeMax; ?>"
+      'progressOverall': '<?php echo $fancy->progressOverall; ?>',
+      'currentTitle': '<?php echo $fancy->currentTitle; ?>',
+      'currentFile': '<?php echo $fancy->currentFile; ?>',
+      'currentProgress': '<?php echo $fancy->currentProgress; ?>',
+      'fileName': '{name}',
+      'remove': '<?php echo $fancy->remove; ?>',
+      'removeTitle': '<?php echo $fancy->removeTitle; ?>',
+      'fileError': '<?php echo $fancy->fileError; ?>',
+      'uploadCompleted': '<?php echo $fancy->uploadCompleted; ?>',
+      'validationErrors': {
+        'duplicate': '<?php echo $fancy->duplicate; ?>',
+        'sizeLimitMin': '<?php echo $fancy->sizeLimitMin; ?>',
+        'sizeLimitMax': '<?php echo $fancy->sizeLimitMax; ?>',
+        'fileListMax': '<?php echo $fancy->fileListMax; ?>',
+        'fileListSizeMax': '<?php echo $fancy->fileListSizeMax; ?>'
       },
-      "errors": {
-        "httpStatus": "<?php echo $fancy->httpStatus; ?>",
-        "securityError": "<?php echo $fancy->securityError; ?>",
-        "ioError": "<?php echo $fancy->ioError; ?>"
+      'errors': {
+        'httpStatus': '<?php echo $fancy->httpStatus; ?>',
+        'securityError': '<?php echo $fancy->securityError; ?>',
+        'ioError': '<?php echo $fancy->ioError; ?>'
       }
     };
-    MooTools.lang.set("en-US", "FancyUpload", phrases);
+    MooTools.lang.set('en-US', 'FancyUpload', phrases);
   })();
-  var up = new FancyUpload2($("fancy-status"), $("fancy-list"), {
+  var up = new FancyUpload2($('fancy-status'), $('fancy-list'), {
     data: {
-      "isAjax": true,
-      "FORM_SUBMIT": "tl_upload",
-      "action": "fancyUpload"
+      'isAjax': true,
+      'FORM_SUBMIT': 'tl_upload',
+      'action': 'fancyUpload',
+      'isPopup': <?php echo $fancy->isPopup; ?> 
     },
     appendCookieData: true,
-    url: $("<?php echo $this->strTable; ?>").action.replace("<?php echo $fancy->script; ?>", "upload.php"),
-    path: "plugins/fancyupload/Swiff.Uploader.swf",
+    url: $('<?php echo $this->strTable; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
+    path: 'plugins/fancyupload/Swiff.Uploader.swf',
     typeFilter: {
-      "Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)": "*.<?php echo implode('; *.', $fancy->uploadTypes); ?>"
+      'Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)': '*.<?php echo implode('; *.', $fancy->uploadTypes); ?>'
     },
-    target: "fancy-browse",
+    target: 'fancy-browse',
     onLoad: function() {
-      $("fancy-status").removeClass("fancy-hide");
-      $("fancy-list").removeClass("fancy-hide");
-      $("fancy-fallback").destroy();
-      $("fancy-submit").destroy();
+      $('fancy-status').removeClass('fancy-hide');
+      $('fancy-list').removeClass('fancy-hide');
+      $('fancy-fallback').destroy();
+      $('fancy-submit').destroy();
       this.target.addEvents({
         click: function() {
           return false;
         },
         mouseenter: function() {
-          this.addClass("hover");
+          this.addClass('hover');
         },
         mouseleave: function() {
-          this.removeClass("hover");
+          this.removeClass('hover');
           this.blur();
         },
         mousedown: function() {
           this.focus();
         }
       });
-      $("fancy-clear").addEvent("click", function() {
+      $('fancy-clear').addEvent('click', function() {
         up.remove();
         return false;
       });
-      $("fancy-upload").addEvent("click", function() {
+      $('fancy-upload').addEvent('click', function() {
         up.start();
         return false;
       });
     },
     onSelectFail: function(files) {
       files.each(function(file) {
-        new Element("li", {
-          "class": "validation-error",
+        new Element('li', {
+          'class': 'validation-error',
           html: file.validationErrorMessage || file.validationError,
-          title: MooTools.lang.get("FancyUpload", "removeTitle"),
+          title: MooTools.lang.get('FancyUpload', 'removeTitle'),
           events: {
             click: function() {
               this.destroy();
             }
           }
-        }).inject(this.list, "top");
+        }).inject(this.list, 'top');
       }, this);
     },
     onFileSuccess: function(file, response) {
       var json = new Hash(JSON.decode(response, true) || {});
-      if (json.get("status") == "1") {
-        file.element.addClass("file-success");
-        file.info.set("html", json.get("message"));
+      if (json.get('status') == '1') {
+        file.element.addClass('file-success');
+        file.info.set('html', json.get('message'));
       } else {
-        file.element.addClass("file-failed");
-        file.info.set("html", json.get("message"));
+        file.element.addClass('file-failed');
+        file.info.set('html', json.get('message'));
       }
     },
     onFail: function(error) {
       switch (error) {
-        case "hidden":
-          alert("To enable the embedded uploader, unblock it in your browser and refresh (see Adblock).");
+        case 'hidden':
+          alert('To enable the embedded uploader, unblock it in your browser and refresh (see Adblock).');
           break;
-        case "blocked":
-          alert("To enable the embedded uploader, enable the blocked Flash movie (see Flashblock).");
+        case 'blocked':
+          alert('To enable the embedded uploader, enable the blocked Flash movie (see Flashblock).');
           break;
-        case "empty":
-          alert("A required file was not found, please be patient and we fix this.");
+        case 'empty':
+          alert('A required file was not found, please be patient and we fix this.');
           break;
-        case "flash":
-          alert("To enable the embedded uploader, install the latest Adobe Flash plugin.");
+        case 'flash':
+          alert('To enable the embedded uploader, install the latest Adobe Flash plugin.');
           break;
       }
     }

@@ -28,9 +28,24 @@
 
 
 /**
+ * Define requirements
+ */
+if ($_POST['isPopup'] == 'true')
+{
+	define('POPUP', true);
+	define('GET_COUNT', 4);
+}
+else
+{
+	define('POPUP', false);
+	define('GET_COUNT', 5);
+}
+
+
+/**
  * Check parameters
  */
-if (count($_GET) != 5 || empty($_POST))
+if (count($_GET) != GET_COUNT || empty($_POST))
 {
 	header('HTTP/1.1 400 Bad Request');
 	die('Illegal request');
@@ -42,7 +57,7 @@ if (!array_key_exists('pid', $_GET) || !array_key_exists('id', $_GET))
 	die('Required parameters missing');
 }
 
-if ($_GET['do'] != 'files' || $_GET['act'] != 'move' || $_GET['mode'] != 2)
+if (($_GET['do'] != 'files' && !POPUP) || $_GET['act'] != 'move' || $_GET['mode'] != 2)
 {
 	header('HTTP/1.1 400 Bad Request');
 	die('Unexpected arguments');
@@ -65,6 +80,6 @@ $_COOKIE['BE_USER_AUTH'] = filter_input(INPUT_POST, 'BE_USER_AUTH', FILTER_SANIT
 /**
  * Load TYPOlight
  */
-require('main.php');
+require(POPUP ? 'files.php' : 'main.php');
 
 ?>
