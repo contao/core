@@ -708,7 +708,7 @@ class StyleSheets extends Backend
 				continue;
 			}
 
-			$arrChunks = array_map('trim', explode(':', $strDefinition));
+			$arrChunks = array_map('trim', explode(':', $strDefinition, 2));
 			$strKey = strtolower($arrChunks[0]);
 
 			switch ($strKey)
@@ -1013,7 +1013,7 @@ class StyleSheets extends Backend
 
 				case 'background-image':
 					$arrSet['background'] = 1;
-					$arrSet['bgimage'] = preg_replace('/url\("?([^"\)]+)"?\)/i', '$1', $arrChunks[1]);
+					$arrSet['bgimage'] = preg_replace('/url\(["\']?([^"\'\)]+)["\']?\)/i', '$1', $arrChunks[1]);
 					break;
 
 				case 'background-position':
