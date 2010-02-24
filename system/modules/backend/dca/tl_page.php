@@ -1229,6 +1229,11 @@ class tl_page extends Backend
 	 */
 	public function editArticles($row, $href, $label, $title, $icon)
 	{
+		if (!$this->User->isAdmin && !$this->User->hasAccess('article', 'modules'))
+		{
+			return '';
+		}
+
 		return ($row['type'] == 'regular') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
