@@ -306,7 +306,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Check whether the page is mounted and the user is allowed to edit its articles
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->hasAccess($objPage->id, 'pagemounts') && $this->User->isAllowed(4, $objPage->row()))
 				{
 					$this->arrCache[$strSource][$intParent] = true;
 				}
@@ -318,7 +318,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Check whether the page is mounted and the user is allowed to edit it
-				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
+				if ($objPage->numRows > 0 && $this->User->hasAccess($objPage->id, 'pagemounts') && $this->User->isAllowed(1, $objPage->row()))
 				{
 					$this->arrCache[$strSource][$intParent] = true;
 				}
@@ -326,14 +326,14 @@ class tl_comments extends Backend
 
 			case 'tl_news':
 				// Check the access to the news module
-				if (in_array('news', $this->User->modules))
+				if ($this->User->hasAccess('news', 'modules'))
 				{
 					$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
 												 ->limit(1)
 												 ->execute($intParent);
 
 					// Check the access to the news archive
-					if ($objArchive->numRows > 0 && in_array($objArchive->pid, $this->User->news))
+					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
 					{
 						$this->arrCache[$strSource][$intParent] = true;
 					}
@@ -342,14 +342,14 @@ class tl_comments extends Backend
 
 			case 'tl_calendar_events':
 				// Check the access to the calendar module
-				if (in_array('calendar', $this->User->modules))
+				if ($this->User->hasAccess('calendar', 'modules'))
 				{
 					$objCalendar = $this->Database->prepare("SELECT pid FROM tl_calendar_events WHERE id=?")
 												  ->limit(1)
 												  ->execute($intParent);
 
 					// Check the access to the calendar
-					if ($objCalendar->numRows > 0 && in_array($objCalendar->pid, $this->User->calendars))
+					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
 					{
 						$this->arrCache[$strSource][$intParent] = true;
 					}
@@ -358,7 +358,7 @@ class tl_comments extends Backend
 
 			case 'tl_faq':
 				// Check the access to the FAQ module
-				if (in_array('faq', $this->User->modules))
+				if ($this->User->hasAccess('faq', 'modules'))
 				{
 					$this->arrCache[$strSource][$intParent] = true;
 				}
