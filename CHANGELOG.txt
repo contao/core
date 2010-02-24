@@ -18,7 +18,8 @@ Version 2.8.1 (2010--)
 - Fixed: relative URLs in RSS feeds are not converted to absolute URLs (#1596)
 - Fixed: the toggleVisibilty() methods do not support save_callbacks and versioning
 - Fixed: access control for comments is missing in the new comments module
-- Fixed: no active record available in onsubmit_callbacks in "override multiple" mode    
+- Fixed: no active record available in onsubmit_callbacks in "override multiple" mode
+- Fixed: Swiff does not check whether the Flash plugins is available (#1601)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)

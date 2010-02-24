@@ -20,6 +20,7 @@ function <?php echo $this->flashId; ?>_DoFSCommand(command, args) {
 <?php echo $this->fsCommand; ?> 
 }
 <?php endif; ?>
+if (Browser.Plugins.Flash.version > 0)
 new Swiff("<?php echo $this->href; ?>", {
   id: "<?php echo $this->flashId; ?>",
   width: <?php echo $this->width; ?>,
@@ -35,8 +36,9 @@ new Swiff("<?php echo $this->href; ?>", {
 <?php endif; ?>
     allowFullScreen: true,
     flashvars: "<?php echo $this->flashvars; ?>"
-  }
-}).replaces($('<?php echo $this->flashId; ?>'));
+  },
+  container: $('<?php echo $this->flashId; ?>')
+});
 //--><!]]>
 </script>
 <!-- indexer::continue -->
