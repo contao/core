@@ -206,7 +206,7 @@ h2.sub_headline_index
 }
 .tl_message
 {
-	margin:6px 18px 0 18px;
+	margin:18px 18px 0 18px;
 }
 .tl_gerror
 {
@@ -218,22 +218,22 @@ h2.sub_headline_index
 .tl_error
 {
 	margin:1px 0 0 0;
-	padding:2px 0 3px 20px;
-	background:url("images/error.gif") no-repeat left center;
+	padding:4px 2px 5px 22px;
+	background:#faeeee url("images/error.gif") no-repeat 2px center;
 	color:#c55;
 }
 .tl_confirm
 {
 	margin:1px 0 0 0;
-	padding:2px 0 3px 20px;
-	background:url("images/ok.gif") no-repeat left center;
+	padding:4px 2px 5px 22px;
+	background:#f3f8ee url("images/ok.gif") no-repeat 2px center;
 	color:#8ab858;
 }
 .tl_info
 {
 	margin:1px 0 0 0;
-	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat 1px center;
+	padding:4px 2px 5px 22px;
+	background:#eff5fa url("images/show.gif") no-repeat 3px center;
 	color:#5c9ac9;
 }
 

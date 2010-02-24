@@ -44,7 +44,9 @@ class StyleSheets extends Backend
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->import('String');
+		$this->import('Files');
 	}
 
 
@@ -130,6 +132,14 @@ class StyleSheets extends Backend
 		if ($row['id'] == '' || $row['name'] == '')
 		{
 			return;
+		}
+
+		$row['name'] = basename($row['name']);
+
+		// Check whether the target file is writeable
+		if (file_exists(TL_ROOT . '/' . $row['name'].'.css') && !$this->Files->is_writeable($row['name'].'.css'))
+		{
+			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], $row['name'].'.css');
 		}
 
 		$objFile = new File($row['name'].'.css');
