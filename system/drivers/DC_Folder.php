@@ -1335,7 +1335,7 @@ window.addEvent(\'domready\', function()
 		$this->import('BackendUser', 'User');
 
 		// Check user permission
-		if (!$this->User->isAdmin && !in_array('f5', $this->User->fop))
+		if (!$this->User->isAdmin && !$this->User->hasAccess('f5', 'fop'))
 		{
 			$this->log('Not enough permissions to edit file source of file "'.$this->intId.'"', 'DC_Folder source()', TL_ERROR);
 			$this->redirect('typolight/main.php?act=error');

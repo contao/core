@@ -233,7 +233,7 @@ class tl_newsletter_channel extends Backend
 		$GLOBALS['TL_DCA']['tl_newsletter_channel']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add channels
-		if (!is_array($this->User->newsletterp) || !in_array('create', $this->User->newsletterp))
+		if (!$this->User->hasAccess('create', 'newsletterp'))
 		{
 			$GLOBALS['TL_DCA']['tl_newsletter_channel']['config']['closed'] = true;
 		}
@@ -302,7 +302,7 @@ class tl_newsletter_channel extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->newsletterp) || !in_array('delete', $this->User->newsletterp))))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsletterp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channel ID "'.$this->Input->get('id').'"', 'tl_newsletter_channel checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
@@ -313,7 +313,7 @@ class tl_newsletter_channel extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->newsletterp) || !in_array('delete', $this->User->newsletterp)))
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newsletterp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -363,7 +363,7 @@ class tl_newsletter_channel extends Backend
 	 */
 	public function copyChannel($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->newsletterp) && in_array('create', $this->User->newsletterp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('create', 'newsletterp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -379,7 +379,7 @@ class tl_newsletter_channel extends Backend
 	 */
 	public function deleteChannel($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->newsletterp) && in_array('delete', $this->User->newsletterp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'newsletterp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

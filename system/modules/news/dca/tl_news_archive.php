@@ -362,7 +362,7 @@ class tl_news_archive extends Backend
 		$GLOBALS['TL_DCA']['tl_news_archive']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add archives
-		if (!is_array($this->User->newp) || !in_array('create', $this->User->newp))
+		if (!$this->User->hasAccess('create', 'newp'))
 		{
 			$GLOBALS['TL_DCA']['tl_news_archive']['config']['closed'] = true;
 		}
@@ -431,7 +431,7 @@ class tl_news_archive extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->newp) || !in_array('delete', $this->User->newp))))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
@@ -442,7 +442,7 @@ class tl_news_archive extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->newp) || !in_array('delete', $this->User->newp)))
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -533,7 +533,7 @@ class tl_news_archive extends Backend
 	 */
 	public function copyArchive($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->newp) && in_array('create', $this->User->newp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('create', 'newp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -549,7 +549,7 @@ class tl_news_archive extends Backend
 	 */
 	public function deleteArchive($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->newp) && in_array('delete', $this->User->newp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'newp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

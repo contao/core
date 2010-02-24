@@ -543,7 +543,7 @@ class tl_page extends Backend
 										  ->limit(1)
 										  ->execute($id);
 
-				if ($objPage->numRows < 1 || !in_array($objPage->type, $this->User->alpty))
+				if ($objPage->numRows < 1 || !$this->User->hasAccess($objPage->type, 'alpty'))
 				{
 					continue;
 				}
@@ -555,7 +555,8 @@ class tl_page extends Backend
 					$edit_all[] = $id;
 				}
 
-				if ($this->User->isAllowed(3, $row) && !in_array($id, $this->User->pagemounts))
+				// Mounted pages cannot be deleted
+				if ($this->User->isAllowed(3, $row) && !$this->User->hasAccess($id, 'pagemounts'))
 				{
 					$delete_all[] = $id;
 				}
@@ -575,7 +576,7 @@ class tl_page extends Backend
 										  ->limit(1)
 										  ->execute($id);
 
-				if ($objPage->numRows < 1 || !in_array($objPage->type, $this->User->alpty))
+				if ($objPage->numRows < 1 || !$this->User->hasAccess($objPage->type, 'alpty'))
 				{
 					continue;
 				}
@@ -692,7 +693,7 @@ class tl_page extends Backend
 					}
 
 					// Check the type of the first page (not the following parent pages)
-					if ($i == 0 && $this->Input->get('act') != 'create' && !in_array($objPage->type, $this->User->alpty))
+					if ($i == 0 && $this->Input->get('act') != 'create' && !$this->User->hasAccess($objPage->type, 'alpty'))
 					{
 						$this->log('Not enough permissions to  '. $this->Input->get('act') .' '. $objPage->type .' pages', 'tl_page checkPermission()', TL_ERROR);
 
@@ -770,7 +771,7 @@ class tl_page extends Backend
 				}
 
 				// Do not show the mounted pages
-				if (!$this->User->isAdmin && in_array($objPage->id, $this->User->pagemounts))
+				if (!$this->User->isAdmin && $this->User->hasAccess($objPage->id, 'pagemounts'))
 				{
 					break;
 				}
@@ -1070,7 +1071,7 @@ class tl_page extends Backend
 	 */
 	public function editPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(1, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(1, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1092,7 +1093,7 @@ class tl_page extends Backend
 			return '';
 		}
 
-		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1118,7 +1119,7 @@ class tl_page extends Backend
 									  ->limit(1)
 									  ->execute($row['id']);
 
-		return ($objSubpages->numRows && ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row)))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($objSubpages->numRows && ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row)))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1134,7 +1135,7 @@ class tl_page extends Backend
 	 */
 	public function cutPage($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(2, $row))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -1214,7 +1215,7 @@ class tl_page extends Backend
 	public function deletePage($row, $href, $label, $title, $icon, $attributes)
 	{
 		$root = func_get_arg(7);
-		return ($this->User->isAdmin || (in_array($row['type'], $this->User->alpty) && $this->User->isAllowed(3, $row) && !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || ($this->User->hasAccess($row['type'], 'alpty') && $this->User->isAllowed(3, $row) && !in_array($row['id'], $root))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 

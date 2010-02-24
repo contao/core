@@ -170,18 +170,18 @@ class tl_module_newsletter extends Backend
 			return array();
 		}
 
-		$arrForms = array();
-		$objForms = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel ORDER BY title");
+		$arrChannels = array();
+		$objChannels = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel ORDER BY title");
 
-		while ($objForms->next())
+		while ($objChannels->next())
 		{
-			if ($this->User->isAdmin || in_array($objForms->id, $this->User->newsletters))
+			if ($this->User->isAdmin || $this->User->hasAccess($objChannels->id, 'newsletters'))
 			{
-				$arrForms[$objForms->id] = $objForms->title;
+				$arrChannels[$objChannels->id] = $objChannels->title;
 			}
 		}
 
-		return $arrForms;
+		return $arrChannels;
 	}
 }
 

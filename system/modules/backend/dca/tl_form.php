@@ -290,7 +290,7 @@ class tl_form extends Backend
 		$GLOBALS['TL_DCA']['tl_form']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add forms
-		if (!is_array($this->User->formp) || !in_array('create', $this->User->formp))
+		if (!$this->User->hasAccess('create', 'formp'))
 		{
 			$GLOBALS['TL_DCA']['tl_form']['config']['closed'] = true;
 		}
@@ -359,7 +359,7 @@ class tl_form extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->formp) || !in_array('delete', $this->User->formp))))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'formp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' form ID "'.$this->Input->get('id').'"', 'tl_form checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
@@ -370,7 +370,7 @@ class tl_form extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->formp) || !in_array('delete', $this->User->formp)))
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'formp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -430,7 +430,7 @@ class tl_form extends Backend
 	 */
 	public function copyForm($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->formp) && in_array('create', $this->User->formp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('create', 'formp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -446,7 +446,7 @@ class tl_form extends Backend
 	 */
 	public function deleteForm($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->formp) && in_array('delete', $this->User->formp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'formp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

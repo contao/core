@@ -159,18 +159,18 @@ class tl_module_news extends Backend
 			return array();
 		}
 
-		$arrForms = array();
-		$objForms = $this->Database->execute("SELECT id, title FROM tl_news_archive ORDER BY title");
+		$arrArchives = array();
+		$objArchives = $this->Database->execute("SELECT id, title FROM tl_news_archive ORDER BY title");
 
-		while ($objForms->next())
+		while ($objArchives->next())
 		{
-			if ($this->User->isAdmin || in_array($objForms->id, $this->User->news))
+			if ($this->User->isAdmin || $this->User->hasAccess($objArchives->id, 'news'))
 			{
-				$arrForms[$objForms->id] = $objForms->title;
+				$arrArchives[$objArchives->id] = $objArchives->title;
 			}
 		}
 
-		return $arrForms;
+		return $arrArchives;
 	}
 
 

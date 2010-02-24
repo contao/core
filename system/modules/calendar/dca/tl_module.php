@@ -153,18 +153,18 @@ class tl_module_calendar extends Backend
 			return array();
 		}
 
-		$arrForms = array();
-		$objForms = $this->Database->execute("SELECT id, title FROM tl_calendar ORDER BY title");
+		$arrCalendars = array();
+		$objCalendars = $this->Database->execute("SELECT id, title FROM tl_calendar ORDER BY title");
 
-		while ($objForms->next())
+		while ($objCalendars->next())
 		{
-			if ($this->User->isAdmin || in_array($objForms->id, $this->User->calendars))
+			if ($this->User->isAdmin || $this->User->hasAccess($objCalendars->id, 'calendars'))
 			{
-				$arrForms[$objForms->id] = $objForms->title;
+				$arrCalendars[$objCalendars->id] = $objCalendars->title;
 			}
 		}
 
-		return $arrForms;
+		return $arrCalendars;
 	}
 
 

@@ -362,7 +362,7 @@ class tl_calendar extends Backend
 		$GLOBALS['TL_DCA']['tl_calendar']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add calendars
-		if (!is_array($this->User->calendarp) || !in_array('create', $this->User->calendarp))
+		if (!$this->User->hasAccess('create', 'calendarp'))
 		{
 			$GLOBALS['TL_DCA']['tl_calendar']['config']['closed'] = true;
 		}
@@ -431,7 +431,7 @@ class tl_calendar extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && (!is_array($this->User->calendarp) || !in_array('delete', $this->User->calendarp))))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar ID "'.$this->Input->get('id').'"', 'tl_calendar checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
@@ -442,7 +442,7 @@ class tl_calendar extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && (!is_array($this->User->calendarp) || !in_array('delete', $this->User->calendarp)))
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -533,7 +533,7 @@ class tl_calendar extends Backend
 	 */
 	public function copyCalendar($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->calendarp) && in_array('create', $this->User->calendarp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('create', 'calendarp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
@@ -549,7 +549,7 @@ class tl_calendar extends Backend
 	 */
 	public function deleteCalendar($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || (is_array($this->User->calendarp) && in_array('delete', $this->User->calendarp))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($this->User->isAdmin || $this->User->hasAccess('delete', 'calendarp')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 }
 

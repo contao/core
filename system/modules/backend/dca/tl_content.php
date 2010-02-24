@@ -956,7 +956,7 @@ class tl_content extends Backend
 
 		while ($objForms->next())
 		{
-			if ($this->User->isAdmin || in_array($objForms->id, $this->User->forms))
+			if ($this->User->isAdmin || $this->User->hasAccess($objForms->id, 'forms'))
 			{
 				$arrForms[$objForms->id] = $objForms->title . ' (ID ' . $objForms->id . ')';
 			}
