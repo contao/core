@@ -309,7 +309,7 @@ class tl_files extends Backend
 		// Set a new node
 		if (isset($_GET['node']))
 		{
-			$this->Session->set('tl_files_node', $this->Input->get('node'));
+			$this->Session->set('tl_files_node', $this->Input->get('node', true));
 			$this->redirect(preg_replace('/&node=[^&]*/', '', $this->Environment->request));
 		}
 

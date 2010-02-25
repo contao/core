@@ -105,15 +105,8 @@ class DC_Folder extends DataContainer implements listable, editable
 				$this->reload();
 			}
 
-			$sids = array();
-
-			foreach ($ids as $id)
-			{
-				$sids[] = urldecode(html_entity_decode($id));
-			}
-
 			$session = $this->Session->getData();
-			$session['CURRENT']['IDS'] = $sids;
+			$session['CURRENT']['IDS'] = $ids;
 			$this->Session->setData($session);
 
 			if (isset($_POST['edit']))
@@ -188,7 +181,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 			$arrClipboard[$this->strTable] = array
 			(
-				'id' => $this->intId,
+				'id' => $this->urlEncode($this->intId),
 				'childs' => $this->Input->get('childs'),
 				'mode' => $this->Input->get('mode')
 			);
@@ -403,7 +396,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->intId = $id;
+				$this->intId = urldecode($id);
 				$this->cut(true);
 			}
 		}
@@ -541,7 +534,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		{
 			foreach ($arrClipboard[$this->strTable]['id'] as $id)
 			{
-				$this->copy($id);
+				$this->copy(urldecode($id));
 			}
 		}
 
@@ -620,7 +613,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		{
 			foreach ($ids as $id)
 			{
-				$this->delete($id);
+				$this->delete(urldecode($id));
 			}
 		}
 
@@ -1090,7 +1083,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				$this->redirect($this->getReferer());
 			}
 
-			$this->redirect($this->addToUrl('id=' . $this->strPath . '/' . $this->varValue . $this->strExtension));
+			$this->redirect($this->addToUrl('id='.$this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension));
 		}
 
 		// Set the focus if there is an error
@@ -1176,7 +1169,7 @@ window.addEvent(\'domready\', function()
 					$formFields[] = $v.'_'.$this->intId;
 
 					// Load current value
-					$pathinfo = pathinfo($id);
+					$pathinfo = pathinfo(urldecode($id));
 
 					$this->strPath = $pathinfo['dirname'];
 					$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
@@ -1478,9 +1471,9 @@ window.addEvent(\'domready\', function()
 		{
 			$session = $this->Session->getData();
 
-			if (($index = array_search($this->strPath.'/'.$this->varValue.$this->strExtension, $session['CURRENT']['IDS'])) !== false)
+			if (($index = array_search($this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension, $session['CURRENT']['IDS'])) !== false)
 			{
-				$session['CURRENT']['IDS'][$index] = $this->strPath.'/'.$varValue.$this->strExtension;
+				$session['CURRENT']['IDS'][$index] = $this->urlEncode($this->strPath.'/'.$varValue).$this->strExtension;
 				$this->Session->setData($session);
 			}
 		}
@@ -1603,6 +1596,7 @@ window.addEvent(\'domready\', function()
 			$folderAttribute = 'style="margin-left:20px;"';
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
+			$currentEncoded = $this->urlEncode($currentFolder);
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
@@ -1617,19 +1611,19 @@ window.addEvent(\'domready\', function()
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentFolder) . '"><strong>'.basename($currentFolder).'</strong></a></div> <div class="tl_right">';
+			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentEncoded) . '"><strong>'.basename($currentFolder).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
 			{
 				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
-				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentFolder.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
 			}
 
 			// Default buttons (do not display buttons for mounted folders)
 			elseif (!$mount)
 			{
-				$return .= ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentFolder).'" class="tl_tree_checkbox" value="'.$currentFolder.'" />' : $this->generateButtons(array('id'=>$currentFolder), $this->strTable);
+				$return .= ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'" />' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
 			}
 
 			$return .= '</div><div style="clear:both;"></div></li>';
@@ -1696,7 +1690,7 @@ window.addEvent(\'domready\', function()
 			}
 			else
 			{
-				$_buttons = ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'" />' : $this->generateButtons(array('id'=>urldecode($currentEncoded)), $this->strTable);
+				$_buttons = ($this->Input->get('act') == 'select') ? '<input type="checkbox" name="IDS[]" id="ids_'.md5($currentEncoded).'" class="tl_tree_checkbox" value="'.$currentEncoded.'" />' : $this->generateButtons(array('id'=>$currentEncoded), $this->strTable);
 			}
 
 			$return .= $_buttons . '</div><div style="clear:both;"></div></li>';
