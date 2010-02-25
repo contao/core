@@ -2535,7 +2535,7 @@ abstract class Controller extends System
 		$objTemplate->height = $imgSize[1];
 
 		// Adjust image size
-		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && $imgSize[0] > $intMaxWidth)))
+		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
 		{
 			$arrMargin = deserialize($arrItem['imagemargin']);
 
