@@ -319,7 +319,7 @@ class tl_user_group extends Backend
 			{
 				foreach ($v['fields'] as $kk=>$vv)
 				{
-					if (isset($vv['exclude']))
+					if ($vv['exclude'])
 					{
 						$arrReturn[$k][specialchars($k.'::'.$kk)] = (strlen($vv['label'][0]) ? $vv['label'][0] : $kk);
 					}
