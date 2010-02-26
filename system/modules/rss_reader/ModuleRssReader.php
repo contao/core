@@ -122,7 +122,9 @@ class ModuleRssReader extends Module
 		if ($this->rss_template != 'rss_default')
 		{
 			$this->strTemplate = $this->rss_template;
+
 			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template->setData($this->arrData);
 		}
 
 		$this->Template->link = $this->objFeed->get_link();

@@ -223,8 +223,6 @@ class ModuleEventlist extends Events
 			}
 
 			$objTemplate = new FrontendTemplate($this->cal_template);
-
-			// Store raw data
 			$objTemplate->setData($event);
 
 			// Month header

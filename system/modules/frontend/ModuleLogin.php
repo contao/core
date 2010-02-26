@@ -219,9 +219,10 @@ class ModuleLogin extends Module
 		if (FE_USER_LOGGED_IN)
 		{
 			$this->import('FrontendUser', 'User');
-
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
+
 			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template->setData($this->arrData);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
@@ -236,8 +237,9 @@ class ModuleLogin extends Module
 		}
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
+
 		$this->Template = new FrontendTemplate($this->strTemplate);
-		$this->Template->message = '';
+		$this->Template->setData($this->arrData);
 
 		$blnHasError = false;
 

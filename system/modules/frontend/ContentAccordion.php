@@ -57,6 +57,7 @@ class ContentAccordion extends ContentElement
 			{
 				$this->strTemplate = 'ce_accordion_start';
 				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template->setData($this->arrData);
 			}
 			else
 			{
@@ -74,6 +75,7 @@ class ContentAccordion extends ContentElement
 			{
 				$this->strTemplate = 'ce_accordion_stop';
 				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template->setData($this->arrData);
 			}
 			else
 			{

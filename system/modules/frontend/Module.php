@@ -122,6 +122,7 @@ abstract class Module extends Frontend
 		}
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template->setData($this->arrData);
 
 		$this->compile();
 

@@ -85,6 +85,7 @@ class ModuleSubscribe extends Module
 		if ($this->nl_template)
 		{
 			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template->setData($this->arrData);
 		}
 
 		// Activate e-mail address

@@ -78,6 +78,7 @@ class ModuleArticle extends Module
 		if ($this->blnNoMarkup)
 		{
 			$this->Template = new FrontendTemplate('mod_article_plain');
+			$this->Template->setData($this->arrData);
 		}
 
 		$alias = strlen($this->alias) ? $this->alias : $this->title;
@@ -88,9 +89,6 @@ class ModuleArticle extends Module
 		}
 
 		$alias = standardize($alias);
-
-		// Store raw data
-		$this->Template->setData($this->arrData);
 
 		// Generate the cssID if it is not set
 		if (!strlen($this->cssID[0]))
@@ -109,6 +107,7 @@ class ModuleArticle extends Module
 		if ($this->multiMode && $this->showTeaser)
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
+			$this->Template->setData($this->arrData);
 
 			// Override CSS ID and class
 			$arrCss = deserialize($this->teaserCssID);
@@ -122,9 +121,6 @@ class ModuleArticle extends Module
 
 				$this->cssID = $arrCss;
 			}
-
-			// Store raw data
-			$this->Template->setData($this->arrData);
 
 			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($this->alias)) ? $this->alias : $this->id;
 			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;

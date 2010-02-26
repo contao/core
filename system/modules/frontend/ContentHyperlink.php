@@ -68,7 +68,9 @@ class ContentHyperlink extends ContentElement
 		if ($this->useImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
 		{
 			$this->strTemplate = 'ce_hyperlink_image';
+
 			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template->setData($this->arrData);
 
 			$objFile = new File($this->singleSRC);
 

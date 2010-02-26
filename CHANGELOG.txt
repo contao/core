@@ -25,6 +25,7 @@ Version 2.8.1 (2010--)
 - Fixed: FancyUpload does not work in the popup file manager (#1608)
 - Fixed: wrong thumbnail size if only height and maximum front end width are given
 - Fixed: file manager does not urlencode filenames (#1616)
+- Fixed: not all elements and modules pass the data array to the view (#1604)
 - Fixed some minor issues
 
 Version 2.8.0 (2010-02-16)

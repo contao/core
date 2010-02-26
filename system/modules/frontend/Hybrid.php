@@ -83,11 +83,9 @@ abstract class Hybrid extends Frontend
 			return;
 		}
 
-		$strKey = $this->strKey;
-
 		$objHybrid = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 									->limit(1)
-									->execute($objElement->$strKey);
+									->execute($objElement->{$this->strKey});
 
 		if ($objHybrid->numRows < 1)
 		{
@@ -147,6 +145,7 @@ abstract class Hybrid extends Frontend
 		}
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template->setData($this->arrData);
 
 		$this->compile();
 

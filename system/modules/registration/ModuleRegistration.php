@@ -111,6 +111,7 @@ class ModuleRegistration extends Module
 		if (strlen($this->memberTpl))
 		{
 			$this->Template = new FrontendTemplate($this->memberTpl);
+			$this->Template->setData($this->arrData);
 		}
 
 		$this->Template->fields = '';

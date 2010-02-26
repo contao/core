@@ -119,8 +119,6 @@ abstract class ModuleNews extends Module
 		while ($objArticles->next())
 		{
 			$objTemplate = new FrontendTemplate($this->news_template);
-
-			// Store raw data
 			$objTemplate->setData($objArticles->row());
 
 			$objTemplate->count = ++$count;

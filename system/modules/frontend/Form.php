@@ -93,8 +93,6 @@ class Form extends Hybrid
 		$this->loadDataContainer('tl_form_field');
 		$formId = strlen($this->formID) ? 'auto_'.$this->formID : 'auto_form_'.$this->id;
 
-		$this->Template = new FrontendTemplate($this->strTemplate);
-
 		$this->Template->fields = '';
 		$this->Template->hidden = '';
 		$this->Template->formSubmit = $formId;
