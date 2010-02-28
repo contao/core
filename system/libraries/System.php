@@ -151,7 +151,7 @@ abstract class System
 	 * Add a log entry
 	 * @param string
 	 * @param string
-	 * @param integer
+	 * @param string
 	 */
 	protected function log($strText, $strFunction, $strAction)
 	{

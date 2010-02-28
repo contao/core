@@ -2,7 +2,7 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
-Version 2.8.1 (2010--)
+Version 2.8.1 (2010-02-28)
 --------------------------
 - Added: different update modes for overriding multiple group memberships
 - Fixed: the install tool does not handle equals sings in passwords (#1338)
