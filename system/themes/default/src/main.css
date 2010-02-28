@@ -236,6 +236,10 @@ h2.sub_headline_index
 	background:#eff5fa url("images/show.gif") no-repeat 3px center;
 	color:#5c9ac9;
 }
+#lu_message
+{
+	margin-top:0;
+}
 #lu_message .tl_confirm,#lu_message .tl_info
 {
 	background-color:transparent;
