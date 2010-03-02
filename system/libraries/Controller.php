@@ -2580,7 +2580,7 @@ abstract class Controller extends System
 		}
 
 		$objTemplate->src = $src;
-		$objTemplate->alt = htmlspecialchars($arrItem['alt']);
+		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
 		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');

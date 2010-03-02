@@ -4,7 +4,7 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.2 (2010--)
 --------------------------
-- 
+- Fixed: special HTML characters were encoded twice (#1642)
 
 Version 2.8.1 (2010-02-28)
 --------------------------

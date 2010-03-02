@@ -108,22 +108,22 @@ class Feed extends System
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 		$xml .= '  <channel>' . "\n";
-		$xml .= '    <title>' . htmlspecialchars($this->title) . '</title>' . "\n";
-		$xml .= '    <description>' . htmlspecialchars($this->description) . '</description>' . "\n";
-		$xml .= '    <link>' . htmlspecialchars($this->link) . '</link>' . "\n";
+		$xml .= '    <title>' . specialchars($this->title) . '</title>' . "\n";
+		$xml .= '    <description>' . specialchars($this->description) . '</description>' . "\n";
+		$xml .= '    <link>' . specialchars($this->link) . '</link>' . "\n";
 		$xml .= '    <language>' . $this->language . '</language>' . "\n";
 		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
 		$xml .= '    <generator>TYPOlight Open Source CMS</generator>' . "\n";
-		$xml .= '    <atom:link href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />' . "\n";
+		$xml .= '    <atom:link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '    <item>' . "\n";
-			$xml .= '      <title>' . htmlspecialchars($objItem->title) . '</title>' . "\n";
+			$xml .= '      <title>' . specialchars($objItem->title) . '</title>' . "\n";
 			$xml .= '      <description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>' . "\n";
-			$xml .= '      <link>' . htmlspecialchars($objItem->link) . '</link>' . "\n";
+			$xml .= '      <link>' . specialchars($objItem->link) . '</link>' . "\n";
 			$xml .= '      <pubDate>' . date('r', $objItem->published) . '</pubDate>' . "\n";
-			$xml .= '      <guid>' . ($objItem->guid ? $objItem->guid : htmlspecialchars($objItem->link)) . '</guid>' . "\n";
+			$xml .= '      <guid>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</guid>' . "\n";
 
 			// Enclosures
 			if (is_array($objItem->enclosure))
@@ -152,22 +152,22 @@ class Feed extends System
 	{
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">' . "\n";
-		$xml .= '  <title>' . htmlspecialchars($this->title) . '</title>' . "\n";
-		$xml .= '  <subtitle>' . htmlspecialchars($this->description) . '</subtitle>' . "\n";
-		$xml .= '  <link rel="alternate" href="' . htmlspecialchars($this->link) . '" />' . "\n";
-		$xml .= '  <id>' . htmlspecialchars($this->link) . '</id>' . "\n";
+		$xml .= '  <title>' . specialchars($this->title) . '</title>' . "\n";
+		$xml .= '  <subtitle>' . specialchars($this->description) . '</subtitle>' . "\n";
+		$xml .= '  <link rel="alternate" href="' . specialchars($this->link) . '" />' . "\n";
+		$xml .= '  <id>' . specialchars($this->link) . '</id>' . "\n";
 		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
 		$xml .= '  <generator>TYPOlight Open Source CMS</generator>' . "\n";
-		$xml .= '  <link href="' . htmlspecialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />' . "\n";
+		$xml .= '  <link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '  <entry>' . "\n";
-			$xml .= '    <title>' . htmlspecialchars($objItem->title) . '</title>' . "\n";
+			$xml .= '    <title>' . specialchars($objItem->title) . '</title>' . "\n";
 			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>' . "\n";
-			$xml .= '    <link rel="alternate" href="' . htmlspecialchars($objItem->link) . '" />' . "\n";
+			$xml .= '    <link rel="alternate" href="' . specialchars($objItem->link) . '" />' . "\n";
 			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
-			$xml .= '    <id>' . ($objItem->guid ? $objItem->guid : htmlspecialchars($objItem->link)) . '</id>' . "\n";
+			$xml .= '    <id>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</id>' . "\n";
 			$xml .= '    <author><name>' . $objItem->author . '</name></author>' . "\n";
 
 			// Enclosures

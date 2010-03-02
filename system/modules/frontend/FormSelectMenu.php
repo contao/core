@@ -197,7 +197,7 @@ class FormSelectMenu extends Widget
 				}
 
 				$strOptions .= sprintf('<optgroup label="%s">',
-										htmlspecialchars($arrOption['label']));
+										specialchars($arrOption['label']));
 
 				$blnHasGroups = true;
 				continue;

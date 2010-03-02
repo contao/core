@@ -102,7 +102,7 @@ class ModuleFaqList extends Module
 			$arrFaq[$objFaq->pid]['items'][] = array
 			(
 				'question' => $objFaq->question,
-				'title' => htmlspecialchars($objFaq->question),
+				'title' => specialchars($objFaq->question),
 				'href' => $this->generateFaqLink($objFaq)
 			);
 

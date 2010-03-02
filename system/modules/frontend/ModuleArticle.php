@@ -156,7 +156,7 @@ class ModuleArticle extends Module
 		if (!$this->multiMode && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias))
 		{
 			$this->Template->backlink = 'javascript:history.go(-1)';
-			$this->Template->back = htmlspecialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
+			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
 		}
 
 		$contentElements = false;
