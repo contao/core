@@ -5,6 +5,7 @@ TYPOlight Open Source CMS Changelog
 Version 2.8.2 (2010--)
 --------------------------
 - Fixed: special HTML characters were encoded twice (#1642)
+- Fixed: the newsletter reader failed to replace insert tags (#1645)
 
 Version 2.8.1 (2010-02-28)
 --------------------------
