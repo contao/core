@@ -310,7 +310,7 @@ class tl_files extends Backend
 		if (isset($_GET['node']))
 		{
 			$this->Session->set('tl_files_node', $this->Input->get('node', true));
-			$this->redirect(preg_replace('/&node=[^&]*/', '', $this->Environment->request));
+			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', $this->Environment->request));
 		}
 
 		$strNode = $this->Session->get('tl_files_node');
