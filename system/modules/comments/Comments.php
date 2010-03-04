@@ -328,7 +328,8 @@ class Comments extends Frontend
 			'@\s*\[quote=([^\]]+)\]@is', 
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
 			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i', '@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
-			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i', '@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i'
+			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i', '@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i',
+			'@href="(([a-z0-9]+\.)*[a-z0-9]+\.[a-z]{2,5})@i'
 		);
 
 		$arrReplace = array
@@ -342,7 +343,8 @@ class Comments extends Frontend
 			"\n\n<div class=\"quote\"><p>" . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>',
 			'<img src="$1" alt="" />',
 			'<a href="$1">$1</a>', '<a href="$1">$2</a>',
-			'<a href="mailto:$1">$1</a>', '<a href="mailto:$1">$2</a>'
+			'<a href="mailto:$1">$1</a>', '<a href="mailto:$1">$2</a>',
+			'href="http://$1'
 		);
 
 		$strComment = preg_replace($arrSearch, $arrReplace, $strComment);

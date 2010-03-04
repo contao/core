@@ -7,6 +7,7 @@ Version 2.8.2 (2010--)
 - Fixed: special HTML characters were encoded twice (#1642)
 - Fixed: the newsletter reader failed to replace insert tags (#1645)
 - Fixed: the subtree navigation did not work in the popup file manager (#1653)
+- Fixed: the BBCode parser did not add missing URI protocols (#1658)
 
 Version 2.8.1 (2010-02-28)
 --------------------------
