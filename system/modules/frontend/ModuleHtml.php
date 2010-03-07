@@ -50,7 +50,7 @@ class ModuleHtml extends Module
 	 */
 	protected function compile()
 	{
-		$this->Template->html = $this->html;
+		$this->Template->html = (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
 	}
 }
 
