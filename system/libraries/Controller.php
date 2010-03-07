@@ -953,9 +953,15 @@ abstract class Controller extends System
 		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
 		$strArticle = $this->convertRelativeUrls($strArticle);
 
-		// Remove form elements
-		$strArticle = preg_replace('/<form.*<\/form>/Us', '', $strArticle);
-		$strArticle = preg_replace('/\?pdf=[0-9]*/i', '', $strArticle);
+		// Remove form elements and JavaScript links
+		$arrSearch = array
+		(
+			'@<form.*</form>@Us',
+			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us',
+			'@pdf=[0-9]*(&|&amp;)?@i'
+		);
+
+		$strArticle = preg_replace($arrSearch, '', $strArticle);
 
 		// HOOK: allow individual PDF routines
 		if (isset($GLOBALS['TL_HOOKS']['printArticleAsPdf']) && is_array($GLOBALS['TL_HOOKS']['printArticleAsPdf']))
