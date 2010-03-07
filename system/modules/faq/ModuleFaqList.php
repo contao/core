@@ -155,8 +155,10 @@ class ModuleFaqList extends Module
 				{
 					$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
 				}
-
-				$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+				else
+				{
+					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+				}
 			}
 		}
 

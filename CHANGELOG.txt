@@ -9,6 +9,7 @@ Version 2.8.2 (2010--)
 - Fixed: the subtree navigation did not work in the popup file manager (#1653)
 - Fixed: the BBCode parser did not add missing URI protocols (#1658)
 - Fixed: PDF exports contained incorrect download links (#1654)
+- Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
 --------------------------
