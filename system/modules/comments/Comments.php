@@ -329,7 +329,7 @@ class Comments extends Frontend
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
 			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i', '@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
 			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i', '@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i',
-			'@href="(([a-z0-9]+\.)*[a-z0-9]+\.[a-z]{2,5})@i'
+			'@href="(([a-z0-9]+\.)*[a-z0-9]+\.([a-z]{2}|asia|biz|com|info|name|net|org|tel)(/|"))@i'
 		);
 
 		$arrReplace = array
