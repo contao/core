@@ -1,4 +1,4 @@
-/* mediaboxAdvanced - black theme */
+/* mediaboxAdvanced - white theme */
 
 #mbOverlay {
 	position: fixed;
@@ -7,7 +7,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #000;
+	background-color: #fff;
 	cursor: pointer;
 }
 
@@ -24,15 +24,15 @@
 	z-index: 9999;
 	left: 50%;
 	overflow: hidden;
-	background-color: #000;
+	background-color: #fff;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
-	-moz-box-shadow: 0px 10px 40px rgba(0,0,0,0.70);
-	-webkit-box-shadow: 0px 10px 40px rgba(0,0,0,0.70);
+	-moz-box-shadow: 0px 5px 20px rgba(0,0,0,0.40);
+	-webkit-box-shadow: 0px 5px 20px rgba(0,0,0,0.40);
 }
 
 #mbCenter.mbLoading {
-	background: #000 url(../images/BlackLoading.gif) no-repeat center;
+	background: #fff url(../images/WhiteLoading.gif) no-repeat center;
 
 /*	This style is applied only during animation.	*/
 /*	For example, the following turns off shadows,	*/
@@ -51,7 +51,7 @@
 	font-family: Myriad, Verdana, Arial, Helvetica, sans-serif;
 	line-height: 20px;
 	font-size: 12px;
-	color: #fff;
+	color: #000;
 	text-align: left;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -59,11 +59,11 @@
 }
 
 #mbImage a, #mbImage a:link, #mbImage a:visited {
-	color: #ddd;
+	color: #333;
 }
 
 #mbImage a:hover, #mbImage a:active {
-	color: #fff;
+	color: #000;
 }
 
 /*	End inline content styles	*/
@@ -80,7 +80,7 @@
 
 #mbTitle {
 	display: inline;
-	color: #fff;
+	color: #000;
 	font-weight: bold;
 	line-height: 20px;
 	font-size: 12px;
@@ -88,7 +88,7 @@
 
 #mbNumber {
 	display: inline;
-	color: #999;
+	color: #333;
 	line-height: 14px;
 	font-size: 10px;
 	margin: auto 10px;
@@ -96,7 +96,7 @@
 
 #mbCaption {
 	display: block;
-	color: #999;
+	color: #333;
 	line-height: 14px;
 	font-size: 10px;
 }
@@ -111,17 +111,17 @@
 
 #mbPrevLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackPrevious.gif) no-repeat center;
+	background: transparent url(../images/CustomWhitePrevious.gif) no-repeat center;
 }
 
 #mbNextLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackNext.gif) no-repeat center;
+	background: transparent url(../images/CustomWhiteNext.gif) no-repeat center;
 }
 
 #mbCloseLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackClose.gif) no-repeat center;
+	background: transparent url(../images/CustomWhiteClose.gif) no-repeat center;
 }
 
 /*	Styles for flash version alert	*/
@@ -131,7 +131,7 @@
 	font-family: Myriad, Verdana, Arial, Helvetica, sans-serif;
 	line-height: 20px;
 	font-size: 12px;
-	color: #fff;
+	color: #000;
 	text-align: center;
 	border: 10px solid #700;
 	padding: 10px 10px 10px;
@@ -141,7 +141,7 @@
 }
 
 #mbError a, #mbError a:link, #mbError a:visited, #mbError a:hover, #mbError a:active {
-	color: #d00;
+	color: #700;
 	font-weight: bold;
 	text-decoration: underline;
 }
