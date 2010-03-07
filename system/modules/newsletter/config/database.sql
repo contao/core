@@ -46,7 +46,7 @@ CREATE TABLE `tl_newsletter_channel` (
   `useSMTP` char(1) NOT NULL default '',
   `smtpHost` varchar(64) NOT NULL default '',
   `smtpPort` smallint(5) unsigned NOT NULL default '0',
-  `smtpUser` varchar(32) NOT NULL default '',
+  `smtpUser` varchar(128) NOT NULL default '',
   `smtpPass` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

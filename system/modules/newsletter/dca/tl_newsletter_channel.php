@@ -176,7 +176,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
 		'smtpPass' => array
 		(
