@@ -90,16 +90,14 @@ class Comments extends Frontend
 
 			while ($objComments->next())
 			{
-				$objPartial->name = $objComments->name;
-				$objPartial->email = $objComments->email;
-				$objPartial->website = $objComments->website;
+				$objPartial->setData($objComments->row());
+
 				$objPartial->comment = trim($objComments->comment);
 				$objPartial->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
 				$objPartial->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objPartial->id = 'c' . $objComments->id;
-				$objPartial->ip = $objComments->ip;
 				$objPartial->timestamp = $objComments->date;
 
 				$arrComments[] = $objPartial->parse();
