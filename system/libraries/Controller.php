@@ -2510,7 +2510,19 @@ abstract class Controller extends System
 			$intSize /= 1000;
 		}
 
-		return number_format($intSize, $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']) . ' ' . $arrUnits[$i];
+		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $arrUnits[$i];
+	}
+
+
+	/**
+	 * Format a number
+	 * @param mixed
+	 * @param integer
+	 * @return mixed
+	 */
+	protected function getFormattedNumber($varNumber, $intDecimals=2)
+	{
+		return number_format($varNumber, $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
 	}
 
 

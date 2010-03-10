@@ -102,6 +102,7 @@ $GLOBALS['TL_LANG']['tl_settings']['ftp_legend']      = 'Safe Mode Hack';
 $GLOBALS['TL_LANG']['tl_settings']['modules_legend']  = 'Inaktive Erweiterungen';
 $GLOBALS['TL_LANG']['tl_settings']['timeout_legend']  = 'Speicherzeiten';
 $GLOBALS['TL_LANG']['tl_settings']['chmod_legend']    = 'Standard-Zugriffsrechte';
+$GLOBALS['TL_LANG']['tl_settings']['update_legend']   = 'Live Update';
 
 
 /**

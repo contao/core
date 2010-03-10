@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css" media="screen" />
 <?php if ($this->isMac): ?>
-<link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->

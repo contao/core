@@ -3581,6 +3581,10 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						{
 							$args[$k] = is_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]]) ? $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]][0] : $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]];
 						}
+						elseif (array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options']) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
+						{
+							$args[$k] = $GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]];
+						}
 						else
 						{
 							$args[$k] = $row[$v];

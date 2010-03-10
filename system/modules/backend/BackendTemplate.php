@@ -100,7 +100,8 @@ class BackendTemplate extends Template
 
 			foreach ($GLOBALS['TL_CSS'] as $stylesheet)
 			{
-				$strStyleSheets .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" media="all" />' . "\n";
+				list($stylesheet, $media) = explode('|', $stylesheet);
+				$strStyleSheets .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
