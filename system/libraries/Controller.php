@@ -2496,37 +2496,6 @@ abstract class Controller extends System
 
 
 	/**
-	 * Convert a filesize into a human readable format
-	 * @param integer
-	 * @param integer
-	 * @return string
-	 */
-	protected function getReadableSize($intSize, $intDecimals=1)
-	{
-		$arrUnits = array('Byte', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-
-		for ($i=0; $intSize>1000; $i++)
-		{
-			$intSize /= 1000;
-		}
-
-		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $arrUnits[$i];
-	}
-
-
-	/**
-	 * Format a number
-	 * @param mixed
-	 * @param integer
-	 * @return mixed
-	 */
-	protected function getFormattedNumber($varNumber, $intDecimals=2)
-	{
-		return number_format($varNumber, $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
-	}
-
-
-	/**
 	 * Add an image to a template
 	 * @param object
 	 * @param array

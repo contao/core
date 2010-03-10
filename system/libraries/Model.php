@@ -133,6 +133,24 @@ abstract class Model extends System
 
 
 	/**
+	 * Set the current record from a database result row
+	 * @param  object
+	 * @param  string
+	 * @param  string
+	 * @throws Exception
+	 */
+	public function setFromRow(Database_Result $objRow, $strTable, $strRefField)
+	{
+		$this->strTable = $strTable;
+		$this->strRefField = $strRefField;
+		$this->varRefId = $objRow->$strRefField;
+
+		$this->arrData = $objRow->row();
+		$this->blnRecordExists = true;
+	}
+
+
+	/**
 	 * Find a record by its reference field and return true if it has been found
 	 * @param  int
 	 * @return boolean

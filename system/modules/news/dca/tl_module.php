@@ -86,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_template'],
-	'default'                 => 'news_single',
+	'default'                 => 'news_latest',
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => $this->getTemplateGroup('news_'),
