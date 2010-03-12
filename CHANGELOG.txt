@@ -11,6 +11,8 @@ Version 2.8.2 (2010--)
 - Fixed: the BBCode parser did not add missing URI protocols (#1658)
 - Fixed: PDF exports contained incorrect download links (#1654)
 - Fixed: the option "always show in sitemap" did not work for hidden pages (#1679)
+- Fixed: the downloads element did not hide meta.txt files (#1688)
+- Fixed: the downloads element did not pass all meta information (#1689)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)

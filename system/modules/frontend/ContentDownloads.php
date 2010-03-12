@@ -70,10 +70,12 @@ class ContentDownloads extends ContentElement
 			return '';
 		}
 
-		// Send file to the browser
-		if (strlen($this->Input->get('file', true)) && (in_array($this->Input->get('file', true), $this->multiSRC) || in_array(dirname($this->Input->get('file')), $this->multiSRC)))
+		$file = $this->Input->get('file', true);
+
+		// Send the file to the browser
+		if ($file != '' && (in_array($file, $this->multiSRC) || in_array(dirname($file), $this->multiSRC)) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 		{
-			$this->sendFileToBrowser($this->Input->get('file', true));
+			$this->sendFileToBrowser($file);
 		}
 
 		return parent::generate();
@@ -103,7 +105,7 @@ class ContentDownloads extends ContentElement
 			{
 				$objFile = new File($file);
 
-				if (in_array($objFile->extension, $allowedDownload))
+				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 				{
 					$this->parseMetaFile(dirname($file), true);
 					$arrMeta = $this->arrMeta[$objFile->basename];
@@ -118,8 +120,10 @@ class ContentDownloads extends ContentElement
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
 						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
+						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon
+						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'meta' => $arrMeta
 					);
 
 					$auxDate[] = $objFile->mtime;
@@ -141,7 +145,7 @@ class ContentDownloads extends ContentElement
 
 				$objFile = new File($file . '/' . $subfile);
 
-				if (in_array($objFile->extension, $allowedDownload))
+				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($subfile)))
 				{
 					$arrMeta = $this->arrMeta[$objFile->basename];
 
@@ -155,8 +159,10 @@ class ContentDownloads extends ContentElement
 						'link' => $arrMeta[0],
 						'title' => $arrMeta[0],
 						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
+						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon
+						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'meta' => $arrMeta
 					);
 
 					$auxDate[] = $objFile->mtime;
