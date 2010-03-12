@@ -78,7 +78,7 @@ $objInput = Input::getInstance();
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] ? E_ALL : 0));
+error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] ? E_ALL|E_STRICT : 0));
 
 
 /**
