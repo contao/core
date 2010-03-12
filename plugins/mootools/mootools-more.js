@@ -1,5 +1,5 @@
 //MooTools More, <http://mootools.net/more>. Copyright (c) 2006-2009 Aaron Newton <http://clientcide.com/>, Valerio Proietti <http://mad4milk.net> & the MooTools team <http://mootools.net/developers>, MIT Style License.
-MooTools.More={version:"1.2.4.3",build:"6c664838ffa145382c063893d35455a624c13a50"};(function(){var a={language:"en-US",languages:{"en-US":{}},cascades:["en-US"]};
+MooTools.More={version:"1.2.4.4",build:"6f6057dc645fdb7547689183b2311063bd653ddf"};(function(){var a={language:"en-US",languages:{"en-US":{}},cascades:["en-US"]};
 var b;MooTools.lang=new Events();$extend(MooTools.lang,{setLanguage:function(c){if(!a.languages[c]){return this;}a.language=c;this.load();this.fireEvent("langChange",c);
 return this;},load:function(){var c=this.cascade(this.getCurrentLanguage());b={};$each(c,function(e,d){b[d]=this.lambda(e);},this);},getCurrentLanguage:function(){return a.language;
 },addLanguage:function(c){a.languages[c]=a.languages[c]||{};return this;},cascade:function(e){var c=(a.languages[e]||{}).cascades||[];c.combine(a.cascades);
@@ -232,8 +232,8 @@ if(!this.timer){this.timer=this.scroll.periodical(Math.round(1000/this.options.f
 for(var d in this.page){if(this.page[d]<(this.options.area+f[d])&&a[d]!=0){e[d]=(this.page[d]-this.options.area-f[d])*this.options.velocity;}else{if(this.page[d]+this.options.area>(b[d]+f[d])&&a[d]+b[d]!=c[d]){e[d]=(this.page[d]-b[d]+this.options.area-f[d])*this.options.velocity;
 }}}if(e.y||e.x){this.fireEvent("change",[a.x+e.x,a.y+e.y]);}}});(function(){var a=function(c,b){return(c)?($type(c)=="function"?c(b):b.get(c)):"";};this.Tips=new Class({Implements:[Events,Options],options:{onShow:function(){this.tip.setStyle("display","block");
 },onHide:function(){this.tip.setStyle("display","none");},title:"title",text:function(b){return b.get("rel")||b.get("href");},showDelay:100,hideDelay:100,className:"tip-wrap",offset:{x:16,y:16},windowPadding:{x:0,y:0},fixed:false},initialize:function(){var b=Array.link(arguments,{options:Object.type,elements:$defined});
-this.setOptions(b.options);if(b.elements){this.attach(b.elements);}},toElement:function(){if(this.tip){return this.tip;}this.container=new Element("div",{"class":"tip"});
-return this.tip=new Element("div",{"class":this.options.className,styles:{position:"absolute",top:0,left:0}}).adopt(new Element("div",{"class":"tip-top"}),this.container,new Element("div",{"class":"tip-bottom"})).inject(document.body);
+this.setOptions(b.options);if(b.elements){this.attach(b.elements);}this.container=new Element("div",{"class":"tip"});},toElement:function(){if(this.tip){return this.tip;
+}return this.tip=new Element("div",{"class":this.options.className,styles:{position:"absolute",top:0,left:0}}).adopt(new Element("div",{"class":"tip-top"}),this.container,new Element("div",{"class":"tip-bottom"})).inject(document.body);
 },attach:function(b){$$(b).each(function(d){var f=a(this.options.title,d),e=a(this.options.text,d);d.erase("title").store("tip:native",f).retrieve("tip:title",f);
 d.retrieve("tip:text",e);this.fireEvent("attach",[d]);var c=["enter","leave"];if(!this.options.fixed){c.push("move");}c.each(function(h){var g=d.retrieve("tip:"+h);
 if(!g){g=this["element"+h.capitalize()].bindWithEvent(this,d);}d.store("tip:"+h,g).addEvent("mouse"+h,g);},this);},this);return this;},detach:function(b){$$(b).each(function(d){["enter","leave","move"].each(function(e){d.removeEvent("mouse"+e,d.retrieve("tip:"+e)).eliminate("tip:"+e);

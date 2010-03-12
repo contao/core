@@ -4,6 +4,7 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.2 (2010--)
 --------------------------
+- Updated MooTools More to version 1.2.4.4 (#1697)
 - Added: added the white Mediabox theme (#1637)
 - Fixed: special HTML characters were encoded twice (#1642)
 - Fixed: the newsletter reader failed to replace insert tags (#1645)

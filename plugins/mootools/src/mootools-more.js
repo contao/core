@@ -23,8 +23,8 @@ provides: [MooTools.More]
 */
 
 MooTools.More = {
-	'version': '1.2.4.3',
-	'build': '6c664838ffa145382c063893d35455a624c13a50'
+	'version': '1.2.4.4',
+	'build': '6f6057dc645fdb7547689183b2311063bd653ddf'
 };
 
 /*
@@ -3214,12 +3214,12 @@ this.Tips = new Class({
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
 		if (params.elements) this.attach(params.elements);
+		this.container = new Element('div', {'class': 'tip'});
 	},
 
 	toElement: function(){
 		if (this.tip) return this.tip;
-		
-		this.container = new Element('div', {'class': 'tip'});
+
 		return this.tip = new Element('div', {
 			'class': this.options.className,
 			styles: {
