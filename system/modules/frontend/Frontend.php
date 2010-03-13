@@ -160,11 +160,12 @@ abstract class Frontend extends Controller
 	/**
 	 * Overwrite parent method as front end URLs are handled differently
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	protected function addToUrl($strRequest)
+	protected function addToUrl($strRequest, $blnIgnoreParams=false)
 	{
-		$arrGet = $_GET;
+		$arrGet = $blnIgnoreParams ? array() : $_GET;
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);
 
 		foreach ($arrFragments as $strFragment)

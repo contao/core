@@ -145,7 +145,7 @@ class Pagination extends Frontend
 		$this->lblLast = $GLOBALS['TL_LANG']['MSC']['last'];
 		$this->lblTotal = $GLOBALS['TL_LANG']['MSC']['totalPages'];
 
-		if (strlen($this->Input->get('page')))
+		if ($this->Input->get('page') != '' && $this->Input->get('page') > 0)
 		{
 			$this->intPage = $this->Input->get('page');
 		}
