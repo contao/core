@@ -93,7 +93,7 @@ class Environment
 		}
 		else
 		{
-			$arrChunks = preg_split('/([A-Z]+[a-z]*)/', $strKey, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$arrChunks = preg_split('/([A-Z][a-z]*)/', $strKey, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 			$strServerKey = strtoupper(implode('_', $arrChunks));
 
 			$this->arrCache[$strKey] = $_SERVER[$strServerKey];
@@ -390,6 +390,16 @@ class Environment
 	{
 		$parse_url = parse_url($this->url());
 		return preg_replace('/^www\./i', '', $parse_url['host']);
+	}
+
+
+	/**
+	 * Return true on Ajax requests
+	 * @return boolean
+	 */
+	protected function isAjaxRequest()
+	{
+		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest');
 	}
 }
 

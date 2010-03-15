@@ -170,8 +170,16 @@ abstract class Frontend extends Controller
 
 		foreach ($arrFragments as $strFragment)
 		{
-			$arrParams = explode('=', $strFragment);
-			$arrGet[$arrParams[0]] = $arrParams[1];
+			list($key, $value) = explode('=', $strFragment);
+
+			if ($value == '')
+			{
+				unset($arrGet[$key]);
+			}
+			else
+			{
+				$arrGet[$key] = $value;
+			}
 		}
 
 		$strParams = '';

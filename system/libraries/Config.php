@@ -283,7 +283,7 @@ class Config
 	 */
 	protected function escape($varValue)
 	{
-		if (is_numeric($varValue))
+		if (is_numeric($varValue) && !preg_match('/e|^00+/', $varValue))
 		{
 			return $varValue;
 		}

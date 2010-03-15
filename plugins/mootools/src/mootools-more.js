@@ -852,6 +852,44 @@ URI = Class.refactor(URI, {
 /*
 ---
 
+script: Elements.From.js
+
+description: Returns a collection of elements from a string of html.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Element
+- /MooTools.More
+
+provides: [Elements.from]
+
+...
+*/
+
+Elements.from = function(text, excludeScripts){
+	if ($pick(excludeScripts, true)) text = text.stripScripts();
+
+	var container, match = text.match(/^\s*<(t[dhr]|tbody|tfoot|thead)/i);
+
+	if (match){
+		container = new Element('table');
+		var tag = match[1].toLowerCase();
+		if (['td', 'th', 'tr'].contains(tag)){
+			container = new Element('tbody').inject(container);
+			if (tag != 'tr') container = new Element('tr').inject(container);
+		}
+	}
+
+	return (container || new Element('div')).set('html', text).getChildren();
+};
+
+/*
+---
+
 script: Element.Measure.js
 
 description: Extends the Element native object to include methods useful in measuring dimensions.
@@ -1001,6 +1039,195 @@ Element.implement({
 /*
 ---
 
+script: Element.Position.js
+
+description: Extends the Element native object to include methods useful positioning elements relative to others.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Element.Dimensions
+- /Element.Measure
+
+provides: [Elements.Position]
+
+...
+*/
+
+(function(){
+
+var original = Element.prototype.position;
+
+Element.implement({
+
+	position: function(options){
+		//call original position if the options are x/y values
+		if (options && ($defined(options.x) || $defined(options.y))) return original ? original.apply(this, arguments) : this;
+		$each(options||{}, function(v, k){ if (!$defined(v)) delete options[k]; });
+		options = $merge({
+			// minimum: { x: 0, y: 0 },
+			// maximum: { x: 0, y: 0},
+			relativeTo: document.body,
+			position: {
+				x: 'center', //left, center, right
+				y: 'center' //top, center, bottom
+			},
+			edge: false,
+			offset: {x: 0, y: 0},
+			returnPos: false,
+			relFixedPosition: false,
+			ignoreMargins: false,
+			ignoreScroll: false,
+			allowNegative: false
+		}, options);
+		//compute the offset of the parent positioned element if this element is in one
+		var parentOffset = {x: 0, y: 0}, 
+				parentPositioned = false;
+		/* dollar around getOffsetParent should not be necessary, but as it does not return
+		 * a mootools extended element in IE, an error occurs on the call to expose. See:
+		 * http://mootools.lighthouseapp.com/projects/2706/tickets/333-element-getoffsetparent-inconsistency-between-ie-and-other-browsers */
+		var offsetParent = this.measure(function(){
+			return document.id(this.getOffsetParent());
+		});
+		if (offsetParent && offsetParent != this.getDocument().body){
+			parentOffset = offsetParent.measure(function(){
+				return this.getPosition();
+			});
+			parentPositioned = offsetParent != document.id(options.relativeTo);
+			options.offset.x = options.offset.x - parentOffset.x;
+			options.offset.y = options.offset.y - parentOffset.y;
+		}
+		//upperRight, bottomRight, centerRight, upperLeft, bottomLeft, centerLeft
+		//topRight, topLeft, centerTop, centerBottom, center
+		var fixValue = function(option){
+			if ($type(option) != 'string') return option;
+			option = option.toLowerCase();
+			var val = {};
+			if (option.test('left')) val.x = 'left';
+			else if (option.test('right')) val.x = 'right';
+			else val.x = 'center';
+			if (option.test('upper') || option.test('top')) val.y = 'top';
+			else if (option.test('bottom')) val.y = 'bottom';
+			else val.y = 'center';
+			return val;
+		};
+		options.edge = fixValue(options.edge);
+		options.position = fixValue(options.position);
+		if (!options.edge){
+			if (options.position.x == 'center' && options.position.y == 'center') options.edge = {x:'center', y:'center'};
+			else options.edge = {x:'left', y:'top'};
+		}
+
+		this.setStyle('position', 'absolute');
+		var rel = document.id(options.relativeTo) || document.body,
+				calc = rel == document.body ? window.getScroll() : rel.getPosition(),
+				top = calc.y, left = calc.x;
+
+		var dim = this.getDimensions({computeSize: true, styles:['padding', 'border','margin']});
+		var pos = {},
+				prefY = options.offset.y,
+				prefX = options.offset.x,
+				winSize = window.getSize();
+		switch(options.position.x){
+			case 'left':
+				pos.x = left + prefX;
+				break;
+			case 'right':
+				pos.x = left + prefX + rel.offsetWidth;
+				break;
+			default: //center
+				pos.x = left + ((rel == document.body ? winSize.x : rel.offsetWidth)/2) + prefX;
+				break;
+		}
+		switch(options.position.y){
+			case 'top':
+				pos.y = top + prefY;
+				break;
+			case 'bottom':
+				pos.y = top + prefY + rel.offsetHeight;
+				break;
+			default: //center
+				pos.y = top + ((rel == document.body ? winSize.y : rel.offsetHeight)/2) + prefY;
+				break;
+		}
+		if (options.edge){
+			var edgeOffset = {};
+
+			switch(options.edge.x){
+				case 'left':
+					edgeOffset.x = 0;
+					break;
+				case 'right':
+					edgeOffset.x = -dim.x-dim.computedRight-dim.computedLeft;
+					break;
+				default: //center
+					edgeOffset.x = -(dim.totalWidth/2);
+					break;
+			}
+			switch(options.edge.y){
+				case 'top':
+					edgeOffset.y = 0;
+					break;
+				case 'bottom':
+					edgeOffset.y = -dim.y-dim.computedTop-dim.computedBottom;
+					break;
+				default: //center
+					edgeOffset.y = -(dim.totalHeight/2);
+					break;
+			}
+			pos.x += edgeOffset.x;
+			pos.y += edgeOffset.y;
+		}
+		pos = {
+			left: ((pos.x >= 0 || parentPositioned || options.allowNegative) ? pos.x : 0).toInt(),
+			top: ((pos.y >= 0 || parentPositioned || options.allowNegative) ? pos.y : 0).toInt()
+		};
+		var xy = {left: 'x', top: 'y'};
+		['minimum', 'maximum'].each(function(minmax) {
+			['left', 'top'].each(function(lr) {
+				var val = options[minmax] ? options[minmax][xy[lr]] : null;
+				if (val != null && pos[lr] < val) pos[lr] = val;
+			});
+		});
+		if (rel.getStyle('position') == 'fixed' || options.relFixedPosition){
+			var winScroll = window.getScroll();
+			pos.top+= winScroll.y;
+			pos.left+= winScroll.x;
+		}
+		if (options.ignoreScroll) {
+			var relScroll = rel.getScroll();
+			pos.top-= relScroll.y;
+			pos.left-= relScroll.x;
+		}
+		if (options.ignoreMargins) {
+			pos.left += (
+				options.edge.x == 'right' ? dim['margin-right'] : 
+				options.edge.x == 'center' ? -dim['margin-left'] + ((dim['margin-right'] + dim['margin-left'])/2) : 
+					- dim['margin-left']
+			);
+			pos.top += (
+				options.edge.y == 'bottom' ? dim['margin-bottom'] : 
+				options.edge.y == 'center' ? -dim['margin-top'] + ((dim['margin-bottom'] + dim['margin-top'])/2) : 
+					- dim['margin-top']
+			);
+		}
+		pos.left = Math.ceil(pos.left);
+		pos.top = Math.ceil(pos.top);
+		if (options.returnPos) return pos;
+		else this.setStyles(pos);
+		return this;
+	}
+
+});
+
+})();
+
+/*
+---
+
 script: Element.Shortcuts.js
 
 description: Extends the Element native object to include some shortcut methods.
@@ -1055,6 +1282,266 @@ Element.implement({
 
 });
 
+
+/*
+---
+
+script: Form.Request.js
+
+description: Handles the basic functionality of submitting a form and updating a dom element with the result.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Request.HTML
+- /Class.Binds
+- /Class.Occlude
+- /Spinner
+- /String.QueryString
+
+provides: [Form.Request]
+
+...
+*/
+
+if (!window.Form) window.Form = {};
+
+(function(){
+
+	Form.Request = new Class({
+
+		Binds: ['onSubmit', 'onFormValidate'],
+
+		Implements: [Options, Events, Class.Occlude],
+
+		options: {
+			//onFailure: $empty,
+			//onSuccess: #empty, //aliased to onComplete,
+			//onSend: $empty
+			requestOptions: {
+				evalScripts: true,
+				useSpinner: true,
+				emulation: false,
+				link: 'ignore'
+			},
+			extraData: {},
+			resetForm: true
+		},
+
+		property: 'form.request',
+
+		initialize: function(form, update, options) {
+			this.element = document.id(form);
+			if (this.occlude()) return this.occluded;
+			this.update = document.id(update);
+			this.setOptions(options);
+			this.makeRequest();
+			if (this.options.resetForm) {
+				this.request.addEvent('success', function(){
+					$try(function(){ this.element.reset(); }.bind(this));
+					if (window.OverText) OverText.update();
+				}.bind(this));
+			}
+			this.attach();
+		},
+
+		toElement: function() {
+			return this.element;
+		},
+
+		makeRequest: function(){
+			this.request = new Request.HTML($merge({
+					update: this.update,
+					emulation: false,
+					spinnerTarget: this.element,
+					method: this.element.get('method') || 'post'
+			}, this.options.requestOptions)).addEvents({
+				success: function(text, xml){
+					['complete', 'success'].each(function(evt){
+						this.fireEvent(evt, [this.update, text, xml]);
+					}, this);
+				}.bind(this),
+				failure: function(xhr){
+					this.fireEvent('complete').fireEvent('failure', xhr);
+				}.bind(this),
+				exception: function(){
+					this.fireEvent('failure', xhr);
+				}.bind(this)
+			});
+		},
+
+		attach: function(attach){
+			attach = $pick(attach, true);
+			method = attach ? 'addEvent' : 'removeEvent';
+			
+			var fv = this.element.retrieve('validator');
+			if (fv) fv[method]('onFormValidate', this.onFormValidate);
+			if (!fv || !attach) this.element[method]('submit', this.onSubmit);
+		},
+
+		detach: function(){
+			this.attach(false);
+		},
+
+		//public method
+		enable: function(){
+			this.attach();
+		},
+
+		//public method
+		disable: function(){
+			this.detach();
+		},
+
+		onFormValidate: function(valid, form, e) {
+			var fv = this.element.retrieve('validator');
+			if (valid || (fv && !fv.options.stopOnFailure)) {
+				if (e && e.stop) e.stop();
+				this.send();
+			}
+		},
+
+		onSubmit: function(e){
+			if (this.element.retrieve('validator')) {
+				//form validator was created after Form.Request
+				this.detach();
+				return;
+			}
+			e.stop();
+			this.send();
+		},
+
+		send: function(){
+			var str = this.element.toQueryString().trim();
+			var data = $H(this.options.extraData).toQueryString();
+			if (str) str += "&" + data;
+			else str = data;
+			this.fireEvent('send', [this.element, str.parseQueryString()]);
+			this.request.send({data: str, url: this.element.get("action")});
+			return this;
+		}
+
+	});
+
+	Element.Properties.formRequest = {
+
+		set: function(){
+			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
+			var update = opt.update || opt.updateId;
+			var updater = this.retrieve('form.request');
+			if (update) {
+				if (updater) updater.update = document.id(update);
+				this.store('form.request:update', update);
+			}
+			if (opt.options) {
+				if (updater) updater.setOptions(opt.options);
+				this.store('form.request:options', opt.options);
+			}
+			return this;
+		},
+
+		get: function(){
+			var opt = Array.link(arguments, {options: Object.type, update: Element.type, updateId: String.type});
+			var update = opt.update || opt.updateId;
+			if (opt.options || update || !this.retrieve('form.request')){
+				if (opt.options || !this.retrieve('form.request:options')) this.set('form.request', opt.options);
+				if (update) this.set('form.request', update);
+				this.store('form.request', new Form.Request(this, this.retrieve('form.request:update'), this.retrieve('form.request:options')));
+			}
+			return this.retrieve('form.request');
+		}
+
+	};
+
+	Element.implement({
+
+		formUpdate: function(update, options){
+			this.get('form.request', update, options).send();
+			return this;
+		}
+
+	});
+
+})();
+
+/*
+---
+
+script: Form.Request.Append.js
+
+description: Handles the basic functionality of submitting a form and updating a dom element with the result. The result is appended to the DOM element instead of replacing its contents.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- /Form.Request
+- /Fx.Reveal
+- /Elements.from
+
+provides: [Form.Request.Append]
+
+...
+*/
+
+Form.Request.Append = new Class({
+
+	Extends: Form.Request,
+
+	options: {
+		//onBeforeEffect: $empty,
+		useReveal: true,
+		revealOptions: {},
+		inject: 'bottom'
+	},
+
+	makeRequest: function(){
+		this.request = new Request.HTML($merge({
+				url: this.element.get('action'),
+				method: this.element.get('method') || 'post',
+				spinnerTarget: this.element
+			}, this.options.requestOptions, {
+				evalScripts: false
+			})
+		).addEvents({
+			success: function(tree, elements, html, javascript){
+				var container;
+				var kids = Elements.from(html);
+				if (kids.length == 1) {
+					container = kids[0];
+				} else {
+					 container = new Element('div', {
+						styles: {
+							display: 'none'
+						}
+					}).adopt(kids);
+				}
+				container.inject(this.update, this.options.inject);
+				if (this.options.requestOptions.evalScripts) $exec(javascript);
+				this.fireEvent('beforeEffect', container);
+				var finish = function(){
+					this.fireEvent('success', [container, this.update, tree, elements, html, javascript]);
+				}.bind(this);
+				if (this.options.useReveal) {
+					container.get('reveal', this.options.revealOptions).chain(finish);
+					container.reveal();
+				} else {
+					finish();
+				}
+			}.bind(this),
+			failure: function(xhr){
+				this.fireEvent('failure', xhr);
+			}.bind(this)
+		});
+	}
+
+});
 
 /*
 ---
@@ -1292,6 +1779,249 @@ var Accordion = new Class({
 		}
 		return this.parent.apply(this, arguments);
 	}
+
+});
+
+/*
+---
+
+script: Fx.Reveal.js
+
+description: Defines Fx.Reveal, a class that shows and hides elements with a transition.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Fx.Morph
+- /Element.Shortcuts
+- /Element.Measure
+
+provides: [Fx.Reveal]
+
+...
+*/
+
+Fx.Reveal = new Class({
+
+	Extends: Fx.Morph,
+
+	options: {/*	  
+		onShow: $empty(thisElement),
+		onHide: $empty(thisElement),
+		onComplete: $empty(thisElement),
+		heightOverride: null,
+		widthOverride: null, */
+		link: 'cancel',
+		styles: ['padding', 'border', 'margin'],
+		transitionOpacity: !Browser.Engine.trident4,
+		mode: 'vertical',
+		display: 'block',
+		hideInputs: Browser.Engine.trident ? 'select, input, textarea, object, embed' : false
+	},
+
+	dissolve: function(){
+		try {
+			if (!this.hiding && !this.showing){
+				if (this.element.getStyle('display') != 'none'){
+					this.hiding = true;
+					this.showing = false;
+					this.hidden = true;
+					this.cssText = this.element.style.cssText;
+					var startStyles = this.element.getComputedSize({
+						styles: this.options.styles,
+						mode: this.options.mode
+					});
+					this.element.setStyle('display', this.options.display);
+					if (this.options.transitionOpacity) startStyles.opacity = 1;
+					var zero = {};
+					$each(startStyles, function(style, name){
+						zero[name] = [style, 0];
+					}, this);
+					this.element.setStyle('overflow', 'hidden');
+					var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+					this.$chain.unshift(function(){
+						if (this.hidden){
+							this.hiding = false;
+							$each(startStyles, function(style, name){
+								startStyles[name] = style;
+							}, this);
+							this.element.style.cssText = this.cssText;
+							this.element.setStyle('display', 'none');
+							if (hideThese) hideThese.setStyle('visibility', 'visible');
+						}
+						this.fireEvent('hide', this.element);
+						this.callChain();
+					}.bind(this));
+					if (hideThese) hideThese.setStyle('visibility', 'hidden');
+					this.start(zero);
+				} else {
+					this.callChain.delay(10, this);
+					this.fireEvent('complete', this.element);
+					this.fireEvent('hide', this.element);
+				}
+			} else if (this.options.link == 'chain'){
+				this.chain(this.dissolve.bind(this));
+			} else if (this.options.link == 'cancel' && !this.hiding){
+				this.cancel();
+				this.dissolve();
+			}
+		} catch(e){
+			this.hiding = false;
+			this.element.setStyle('display', 'none');
+			this.callChain.delay(10, this);
+			this.fireEvent('complete', this.element);
+			this.fireEvent('hide', this.element);
+		}
+		return this;
+	},
+
+	reveal: function(){
+		try {
+			if (!this.showing && !this.hiding){
+				if (this.element.getStyle('display') == 'none' ||
+					 this.element.getStyle('visiblity') == 'hidden' ||
+					 this.element.getStyle('opacity') == 0){
+					this.showing = true;
+					this.hiding = this.hidden =  false;
+					var startStyles;
+					this.cssText = this.element.style.cssText;
+					//toggle display, but hide it
+					this.element.measure(function(){
+						//create the styles for the opened/visible state
+						startStyles = this.element.getComputedSize({
+							styles: this.options.styles,
+							mode: this.options.mode
+						});
+					}.bind(this));
+					$each(startStyles, function(style, name){
+						startStyles[name] = style;
+					});
+					//if we're overridding height/width
+					if ($chk(this.options.heightOverride)) startStyles.height = this.options.heightOverride.toInt();
+					if ($chk(this.options.widthOverride)) startStyles.width = this.options.widthOverride.toInt();
+					if (this.options.transitionOpacity) {
+						this.element.setStyle('opacity', 0);
+						startStyles.opacity = 1;
+					}
+					//create the zero state for the beginning of the transition
+					var zero = {
+						height: 0,
+						display: this.options.display
+					};
+					$each(startStyles, function(style, name){ zero[name] = 0; });
+					//set to zero
+					this.element.setStyles($merge(zero, {overflow: 'hidden'}));
+					//hide inputs
+					var hideThese = this.options.hideInputs ? this.element.getElements(this.options.hideInputs) : null;
+					if (hideThese) hideThese.setStyle('visibility', 'hidden');
+					//start the effect
+					this.start(startStyles);
+					this.$chain.unshift(function(){
+						this.element.style.cssText = this.cssText;
+						this.element.setStyle('display', this.options.display);
+						if (!this.hidden) this.showing = false;
+						if (hideThese) hideThese.setStyle('visibility', 'visible');
+						this.callChain();
+						this.fireEvent('show', this.element);
+					}.bind(this));
+				} else {
+					this.callChain();
+					this.fireEvent('complete', this.element);
+					this.fireEvent('show', this.element);
+				}
+			} else if (this.options.link == 'chain'){
+				this.chain(this.reveal.bind(this));
+			} else if (this.options.link == 'cancel' && !this.showing){
+				this.cancel();
+				this.reveal();
+			}
+		} catch(e){
+			this.element.setStyles({
+				display: this.options.display,
+				visiblity: 'visible',
+				opacity: 1
+			});
+			this.showing = false;
+			this.callChain.delay(10, this);
+			this.fireEvent('complete', this.element);
+			this.fireEvent('show', this.element);
+		}
+		return this;
+	},
+
+	toggle: function(){
+		if (this.element.getStyle('display') == 'none' ||
+			 this.element.getStyle('visiblity') == 'hidden' ||
+			 this.element.getStyle('opacity') == 0){
+			this.reveal();
+		} else {
+			this.dissolve();
+		}
+		return this;
+	},
+
+	cancel: function(){
+		this.parent.apply(this, arguments);
+		this.element.style.cssText = this.cssText;
+		this.hidding = false;
+		this.showing = false;
+	}
+
+});
+
+Element.Properties.reveal = {
+
+	set: function(options){
+		var reveal = this.retrieve('reveal');
+		if (reveal) reveal.cancel();
+		return this.eliminate('reveal').store('reveal:options', options);
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('reveal')){
+			if (options || !this.retrieve('reveal:options')) this.set('reveal', options);
+			this.store('reveal', new Fx.Reveal(this, this.retrieve('reveal:options')));
+		}
+		return this.retrieve('reveal');
+	}
+
+};
+
+Element.Properties.dissolve = Element.Properties.reveal;
+
+Element.implement({
+
+	reveal: function(options){
+		this.get('reveal', options).reveal();
+		return this;
+	},
+
+	dissolve: function(options){
+		this.get('reveal', options).dissolve();
+		return this;
+	},
+
+	nix: function(){
+		var params = Array.link(arguments, {destroy: Boolean.type, options: Object.type});
+		this.get('reveal', params.options).dissolve().chain(function(){
+			this[params.destroy ? 'destroy' : 'dispose']();
+		}.bind(this));
+		return this;
+	},
+
+	wink: function(){
+		var params = Array.link(arguments, {duration: Number.type, options: Object.type});
+		var reveal = this.get('reveal', params.options);
+		reveal.reveal().chain(function(){
+			(function(){
+				reveal.dissolve();
+			}).delay(params.duration || 2000);
+		});
+	}
+
 
 });
 
@@ -2720,6 +3450,134 @@ Hash.each(Hash.prototype, function(method, name){
 /*
 ---
 
+script: IframeShim.js
+
+description: Defines IframeShim, a class for obscuring select lists and flash objects in IE.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Element.Event
+- core:1.2.4/Element.Style
+- core:1.2.4/Options Events
+- /Element.Position
+- /Class.Occlude
+
+provides: [IframeShim]
+
+...
+*/
+
+var IframeShim = new Class({
+
+	Implements: [Options, Events, Class.Occlude],
+
+	options: {
+		className: 'iframeShim',
+		src: 'javascript:false;document.write("");',
+		display: false,
+		zIndex: null,
+		margin: 0,
+		offset: {x: 0, y: 0},
+		browsers: (Browser.Engine.trident4 || (Browser.Engine.gecko && !Browser.Engine.gecko19 && Browser.Platform.mac))
+	},
+
+	property: 'IframeShim',
+
+	initialize: function(element, options){
+		this.element = document.id(element);
+		if (this.occlude()) return this.occluded;
+		this.setOptions(options);
+		this.makeShim();
+		return this;
+	},
+
+	makeShim: function(){
+		if(this.options.browsers){
+			var zIndex = this.element.getStyle('zIndex').toInt();
+
+			if (!zIndex){
+				zIndex = 1;
+				var pos = this.element.getStyle('position');
+				if (pos == 'static' || !pos) this.element.setStyle('position', 'relative');
+				this.element.setStyle('zIndex', zIndex);
+			}
+			zIndex = ($chk(this.options.zIndex) && zIndex > this.options.zIndex) ? this.options.zIndex : zIndex - 1;
+			if (zIndex < 0) zIndex = 1;
+			this.shim = new Element('iframe', {
+				src: this.options.src,
+				scrolling: 'no',
+				frameborder: 0,
+				styles: {
+					zIndex: zIndex,
+					position: 'absolute',
+					border: 'none',
+					filter: 'progid:DXImageTransform.Microsoft.Alpha(style=0,opacity=0)'
+				},
+				'class': this.options.className
+			}).store('IframeShim', this);
+			var inject = (function(){
+				this.shim.inject(this.element, 'after');
+				this[this.options.display ? 'show' : 'hide']();
+				this.fireEvent('inject');
+			}).bind(this);
+			if (!IframeShim.ready) window.addEvent('load', inject);
+			else inject();
+		} else {
+			this.position = this.hide = this.show = this.dispose = $lambda(this);
+		}
+	},
+
+	position: function(){
+		if (!IframeShim.ready || !this.shim) return this;
+		var size = this.element.measure(function(){ 
+			return this.getSize(); 
+		});
+		if (this.options.margin != undefined){
+			size.x = size.x - (this.options.margin * 2);
+			size.y = size.y - (this.options.margin * 2);
+			this.options.offset.x += this.options.margin;
+			this.options.offset.y += this.options.margin;
+		}
+		this.shim.set({width: size.x, height: size.y}).position({
+			relativeTo: this.element,
+			offset: this.options.offset
+		});
+		return this;
+	},
+
+	hide: function(){
+		if (this.shim) this.shim.setStyle('display', 'none');
+		return this;
+	},
+
+	show: function(){
+		if (this.shim) this.shim.setStyle('display', 'block');
+		return this.position();
+	},
+
+	dispose: function(){
+		if (this.shim) this.shim.dispose();
+		return this;
+	},
+
+	destroy: function(){
+		if (this.shim) this.shim.destroy();
+		return this;
+	}
+
+});
+
+window.addEvent('load', function(){
+	IframeShim.ready = true;
+});
+
+/*
+---
+
 script: Keyboard.js
 
 description: KeyboardEvents used to intercept events on a class for keyboard and format modifiers in a specific order so as to make alt+shift+c the same as shift+alt+c.
@@ -3057,6 +3915,201 @@ Keyboard.getShortcuts = function(name, keyboard) {
 /*
 ---
 
+script: Mask.js
+
+description: Creates a mask element to cover another.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Options
+- core:1.2.4/Events
+- core:1.2.4/Element.Event
+- /Class.Binds
+- /Element.Position
+- /IframeShim
+
+provides: [Mask]
+
+...
+*/
+
+var Mask = new Class({
+
+	Implements: [Options, Events],
+
+	Binds: ['position'],
+
+	options: {
+		// onShow: $empty,
+		// onHide: $empty,
+		// onDestroy: $empty,
+		// onClick: $empty,
+		//inject: {
+		//  where: 'after',
+		//  target: null,
+		//},
+		// hideOnClick: false,
+		// id: null,
+		// destroyOnHide: false,
+		style: {},
+		'class': 'mask',
+		maskMargins: false,
+		useIframeShim: true,
+		iframeShimOptions: {}
+	},
+
+	initialize: function(target, options){
+		this.target = document.id(target) || document.id(document.body);
+		this.target.store('Mask', this);
+		this.setOptions(options);
+		this.render();
+		this.inject();
+	},
+	
+	render: function() {
+		this.element = new Element('div', {
+			'class': this.options['class'],
+			id: this.options.id || 'mask-' + $time(),
+			styles: $merge(this.options.style, {
+				display: 'none'
+			}),
+			events: {
+				click: function(){
+					this.fireEvent('click');
+					if (this.options.hideOnClick) this.hide();
+				}.bind(this)
+			}
+		});
+		this.hidden = true;
+	},
+
+	toElement: function(){
+		return this.element;
+	},
+
+	inject: function(target, where){
+		where = where || this.options.inject ? this.options.inject.where : '' || this.target == document.body ? 'inside' : 'after';
+		target = target || this.options.inject ? this.options.inject.target : '' || this.target;
+		this.element.inject(target, where);
+		if (this.options.useIframeShim) {
+			this.shim = new IframeShim(this.element, this.options.iframeShimOptions);
+			this.addEvents({
+				show: this.shim.show.bind(this.shim),
+				hide: this.shim.hide.bind(this.shim),
+				destroy: this.shim.destroy.bind(this.shim)
+			});
+		}
+	},
+
+	position: function(){
+		this.resize(this.options.width, this.options.height);
+		this.element.position({
+			relativeTo: this.target,
+			position: 'topLeft',
+			ignoreMargins: !this.options.maskMargins,
+			ignoreScroll: this.target == document.body
+		});
+		return this;
+	},
+
+	resize: function(x, y){
+		var opt = {
+			styles: ['padding', 'border']
+		};
+		if (this.options.maskMargins) opt.styles.push('margin');
+		var dim = this.target.getComputedSize(opt);
+		if (this.target == document.body) {
+			var win = window.getSize();
+			if (dim.totalHeight < win.y) dim.totalHeight = win.y;
+			if (dim.totalWidth < win.x) dim.totalWidth = win.x;
+		}
+		this.element.setStyles({
+			width: $pick(x, dim.totalWidth, dim.x),
+			height: $pick(y, dim.totalHeight, dim.y)
+		});
+		return this;
+	},
+
+	show: function(){
+		if (!this.hidden) return this;
+		window.addEvent('resize', this.position);
+		this.position();
+		this.showMask.apply(this, arguments);
+		return this;
+	},
+
+	showMask: function(){
+		this.element.setStyle('display', 'block');
+		this.hidden = false;
+		this.fireEvent('show');
+	},
+
+	hide: function(){
+		if (this.hidden) return this;
+		window.removeEvent('resize', this.position);
+		this.hideMask.apply(this, arguments);
+		if (this.options.destroyOnHide) return this.destroy();
+		return this;
+	},
+
+	hideMask: function(){
+		this.element.setStyle('display', 'none');
+		this.hidden = true;
+		this.fireEvent('hide');
+	},
+
+	toggle: function(){
+		this[this.hidden ? 'show' : 'hide']();
+	},
+
+	destroy: function(){
+		this.hide();
+		this.element.destroy();
+		this.fireEvent('destroy');
+		this.target.eliminate('mask');
+	}
+
+});
+
+Element.Properties.mask = {
+
+	set: function(options){
+		var mask = this.retrieve('mask');
+		return this.eliminate('mask').store('mask:options', options);
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('mask')){
+			if (this.retrieve('mask')) this.retrieve('mask').destroy();
+			if (options || !this.retrieve('mask:options')) this.set('mask', options);
+			this.store('mask', new Mask(this, this.retrieve('mask:options')));
+		}
+		return this.retrieve('mask');
+	}
+
+};
+
+Element.implement({
+
+	mask: function(options){
+		this.get('mask', options).show();
+		return this;
+	},
+
+	unmask: function(){
+		this.get('mask').hide();
+		return this;
+	}
+
+});
+
+/*
+---
+
 script: Scroller.js
 
 description: Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
@@ -3340,3 +4393,202 @@ this.Tips = new Class({
 });
 
 })();
+
+/*
+---
+
+script: Spinner.js
+
+description: Adds a semi-transparent overlay over a dom element with a spinnin ajax icon.
+
+license: MIT-style license
+
+authors:
+- Aaron Newton
+
+requires:
+- core:1.2.4/Fx.Tween
+- /Class.refactor
+- /Mask
+
+provides: [Spinner]
+
+...
+*/
+
+var Spinner = new Class({
+
+	Extends: Mask,
+
+	options: {
+		/*message: false,*/
+		'class':'spinner',
+		containerPosition: {},
+		content: {
+			'class':'spinner-content'
+		},
+		messageContainer: {
+			'class':'spinner-msg'
+		},
+		img: {
+			'class':'spinner-img'
+		},
+		fxOptions: {
+			link: 'chain'
+		}
+	},
+
+	initialize: function(){
+		this.parent.apply(this, arguments);
+		this.target.store('spinner', this);
+
+		//add this to events for when noFx is true; parent methods handle hide/show
+		var deactivate = function(){ this.active = false; }.bind(this);
+		this.addEvents({
+			hide: deactivate,
+			show: deactivate
+		});
+	},
+
+	render: function(){
+		this.parent();
+		this.element.set('id', this.options.id || 'spinner-'+$time());
+		this.content = document.id(this.options.content) || new Element('div', this.options.content);
+		this.content.inject(this.element);
+		if (this.options.message) {
+			this.msg = document.id(this.options.message) || new Element('p', this.options.messageContainer).appendText(this.options.message);
+			this.msg.inject(this.content);
+		}
+		if (this.options.img) {
+			this.img = document.id(this.options.img) || new Element('div', this.options.img);
+			this.img.inject(this.content);
+		}
+		this.element.set('tween', this.options.fxOptions);
+	},
+
+	show: function(noFx){
+		if (this.active) return this.chain(this.show.bind(this));
+		if (!this.hidden) {
+			this.callChain.delay(20, this);
+			return this;
+		}
+		this.active = true;
+		return this.parent(noFx);
+	},
+
+	showMask: function(noFx){
+		var pos = function(){
+			this.content.position($merge({
+				relativeTo: this.element
+			}, this.options.containerPosition));
+		}.bind(this);
+		if (noFx) {
+			this.parent();
+			pos();
+		} else {
+			this.element.setStyles({
+				display: 'block',
+				opacity: 0
+			}).tween('opacity', this.options.style.opacity || 0.9);
+			pos();
+			this.hidden = false;
+			this.fireEvent('show');
+			this.callChain();
+		}
+	},
+
+	hide: function(noFx){
+		if (this.active) return this.chain(this.hide.bind(this));
+		if (this.hidden) {
+			this.callChain.delay(20, this);
+			return this;
+		}
+		this.active = true;
+		return this.parent(noFx);
+	},
+
+	hideMask: function(noFx){
+		if (noFx) return this.parent();
+		this.element.tween('opacity', 0).get('tween').chain(function(){
+			this.element.setStyle('display', 'none');
+			this.hidden = true;
+			this.fireEvent('hide');
+			this.callChain();
+		}.bind(this));
+	},
+
+	destroy: function(){
+		this.content.destroy();
+		this.parent();
+		this.target.eliminate('spinner');
+	}
+
+});
+
+Spinner.implement(new Chain);
+
+if (window.Request) {
+	Request = Class.refactor(Request, {
+		
+		options: {
+			useSpinner: false,
+			spinnerOptions: {},
+			spinnerTarget: false
+		},
+		
+		initialize: function(options){
+			this._send = this.send;
+			this.send = function(options){
+				if (this.spinner) this.spinner.chain(this._send.bind(this, options)).show();
+				else this._send(options);
+				return this;
+			};
+			this.previous(options);
+			var update = document.id(this.options.spinnerTarget) || document.id(this.options.update);
+			if (this.options.useSpinner && update) {
+				this.spinner = update.get('spinner', this.options.spinnerOptions);
+				['onComplete', 'onException', 'onCancel'].each(function(event){
+					this.addEvent(event, this.spinner.hide.bind(this.spinner));
+				}, this);
+			}
+		},
+		
+		getSpinner: function(){
+			return this.spinner;
+		}
+		
+	});
+}
+
+Element.Properties.spinner = {
+
+	set: function(options){
+		var spinner = this.retrieve('spinner');
+		return this.eliminate('spinner').store('spinner:options', options);
+	},
+
+	get: function(options){
+		if (options || !this.retrieve('spinner')){
+			if (this.retrieve('spinner')) this.retrieve('spinner').destroy();
+			if (options || !this.retrieve('spinner:options')) this.set('spinner', options);
+			new Spinner(this, this.retrieve('spinner:options'));
+		}
+		return this.retrieve('spinner');
+	}
+
+};
+
+Element.implement({
+
+	spin: function(options){
+		this.get('spinner', options).show();
+		return this;
+	},
+
+	unspin: function(){
+		var opt = Array.link(arguments, {options: Object.type, callback: Function.type});
+		this.get('spinner', opt.options).hide(opt.callback);
+		return this;
+	}
+
+});

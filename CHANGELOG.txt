@@ -15,6 +15,8 @@ Version 2.8.2 (2010--)
 - Fixed: the downloads element did not hide meta.txt files (#1688)
 - Fixed: the downloads element did not pass all meta information (#1689)
 - Fixed: reverted the changes to the navigation menu (#1635)
+- Fixed: the function addToUrl() generated invalid URLs in the front end (#1707)
+- Fixed: the Config library did not handle numeric strings correctly (#286)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)

@@ -57,6 +57,12 @@ abstract class Model extends System
 	protected $varRefId;
 
 	/**
+	 * Database result
+	 * @var object
+	 */
+	protected $resResult;
+
+	/**
 	 * Data array
 	 * @var array
 	 */
@@ -133,19 +139,30 @@ abstract class Model extends System
 
 
 	/**
+	 * Return the database result object
+	 * @return object
+	 */
+	public function getDatabaseResult()
+	{
+		return $this->resResult;
+	}
+
+
+	/**
 	 * Set the current record from a database result row
 	 * @param  object
 	 * @param  string
 	 * @param  string
 	 * @throws Exception
 	 */
-	public function setFromRow(Database_Result $objRow, $strTable, $strRefField)
+	public function setFromRow(Database_Result $resResult, $strTable, $strRefField)
 	{
 		$this->strTable = $strTable;
 		$this->strRefField = $strRefField;
-		$this->varRefId = $objRow->$strRefField;
+		$this->varRefId = $resResult->$strRefField;
 
-		$this->arrData = $objRow->row();
+		$this->resResult = $resResult;
+		$this->arrData = $resResult->row();
 		$this->blnRecordExists = true;
 	}
 
@@ -166,6 +183,7 @@ abstract class Model extends System
 
 		if ($resResult->numRows == 1)
 		{
+			$this->resResult = $resResult;
 			$this->arrData = $resResult->fetchAssoc();
 			$this->blnRecordExists = true;
 
