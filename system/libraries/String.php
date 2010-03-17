@@ -108,6 +108,13 @@ class String
 				continue;
 			}
 
+			// If the first word is longer than $intNumberOfChars already, shorten it
+			// with utf8_substr() so the method does not return an empty string.
+			if (empty($arrWords))
+			{
+				$arrWords[] = utf8_substr($strChunk, 0, $intNumberOfChars);
+			}
+
 			$strEllipsis = ' …';
 			break;
 		}
