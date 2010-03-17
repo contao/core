@@ -125,7 +125,7 @@ class ModuleNewsReader extends ModuleNews
 		// Overwrite the page description
 		if ($objArticle->teaser != '')
 		{
-			$objPage->description = trim(str_replace("\n", ' ', $objArticle->teaser) . ' ' . $objPage->description); 
+			$objPage->description = $this->prepareMetaDescription($objArticle->teaser);
 		}
 
 		// HOOK: comments extension required

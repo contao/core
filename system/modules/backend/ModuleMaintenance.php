@@ -468,11 +468,12 @@ class ModuleMaintenance extends BackendModule
 
 			$strBuffer = '';
 			$rand = rand();
+			$this->import('String');
 
 			// Display pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible" />' . ((strlen(($page = substr($arrPages[$i], 0, 108))) < 108) ? $page : $page . ' …') . "<br />\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible" />' . $this->String->substr($arrPages[$i], 108, true) . "<br />\n";
 			}
 
 			$this->Template = new BackendTemplate('be_index');

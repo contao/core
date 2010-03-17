@@ -360,6 +360,23 @@ abstract class Frontend extends Controller
 
 		$this->arrProcessed[] = $strPath;
 	}
+
+
+	/**
+	 * Prepare a text to be used in the meta description tag
+	 * @param string
+	 * @return boolean
+	 */
+	protected function prepareMetaDescription($strText)
+	{
+		$this->import('String');
+
+		$strText = strip_tags($strText);
+		$strText = str_replace("\n", ' ', $strText);
+		$strText = $this->String->substr($strText, 180, true);
+
+		return trim($strText);
+	}
 }
 
 ?>

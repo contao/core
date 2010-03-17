@@ -80,9 +80,10 @@ class String
 	 * characters specified). Stips all tags.
 	 * @param string
 	 * @param integer
+	 * @param boolean
 	 * @return string
 	 */
-	public function substr($strString, $intNumberOfChars)
+	public function substr($strString, $intNumberOfChars, $blnAddEllipsis=false)
 	{
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
 		$strString = strip_tags($strString);
@@ -95,6 +96,7 @@ class String
 		$intCharCount = 0;
 		$arrWords = array();
 		$arrChunks = preg_split('/\s+/', $strString);
+		$strEllipsis = '';
 
 		foreach ($arrChunks as $strChunk)
 		{
@@ -106,10 +108,11 @@ class String
 				continue;
 			}
 
+			$strEllipsis = ' …';
 			break;
 		}
 
-		return implode(' ', $arrWords);
+		return implode(' ', $arrWords) . ($blnAddEllipsis ? $strEllipsis : '');
 	}
 
 

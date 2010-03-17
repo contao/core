@@ -122,7 +122,7 @@ class ModuleEventReader extends Events
 		// Overwrite the page description
 		if ($objEvent->teaser != '')
 		{
-			$objPage->description = trim(str_replace("\n", ' ', $objEvent->teaser) . ' ' . $objPage->description); 
+			$objPage->description = $this->prepareMetaDescription($objEvent->teaser); 
 		}
 
 		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);

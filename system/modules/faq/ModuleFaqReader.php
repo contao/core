@@ -112,7 +112,7 @@ class ModuleFaqReader extends Module
 		if ($objFaq->question != '')
 		{
 			$objPage->pageTitle = $objFaq->question;
-			$objPage->description = trim($objFaq->question . ' ' . $objPage->description); 
+			$objPage->description = $this->prepareMetaDescription($objFaq->question); 
 		}
 
 		$this->import('String');
