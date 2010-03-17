@@ -116,10 +116,16 @@ class ModuleNewsReader extends ModuleNews
 		$arrArticle = $this->parseArticles($objArticle);
 		$this->Template->articles = $arrArticle[0];
 
-		// Overwrite page title
-		if (strlen($objArticle->headline))
+		// Overwrite the page title
+		if ($objArticle->headline != '')
 		{
 			$objPage->pageTitle = $objArticle->headline;
+		}
+
+		// Overwrite the page description
+		if ($objArticle->teaser != '')
+		{
+			$objPage->description = trim(str_replace("\n", ' ', $objArticle->teaser) . ' ' . $objPage->description); 
 		}
 
 		// HOOK: comments extension required

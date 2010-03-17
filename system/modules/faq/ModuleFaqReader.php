@@ -108,10 +108,11 @@ class ModuleFaqReader extends Module
 			return;
 		}
 
-		// Overwrite page title
-		if (strlen($objFaq->question))
+		// Overwrite the page title and description
+		if ($objFaq->question != '')
 		{
 			$objPage->pageTitle = $objFaq->question;
+			$objPage->description = trim($objFaq->question . ' ' . $objPage->description); 
 		}
 
 		$this->import('String');

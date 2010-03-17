@@ -113,10 +113,16 @@ class ModuleEventReader extends Events
 			return;
 		}
 
-		// Overwrite page title
-		if (strlen($objEvent->title))
+		// Overwrite the page title
+		if ($objEvent->title != '')
 		{
 			$objPage->pageTitle = $objEvent->title;
+		}
+
+		// Overwrite the page description
+		if ($objEvent->teaser != '')
+		{
+			$objPage->description = trim(str_replace("\n", ' ', $objEvent->teaser) . ' ' . $objPage->description); 
 		}
 
 		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
