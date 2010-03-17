@@ -198,7 +198,7 @@ var Mediabox;
 
 			// PATCH: enable contextmenu
 			//links.addEvent('contextmenu', function(e){
-			//	if (this.toString().match(/\.gif|\.jpg|\.png/i)) e.stop();
+			//	if (this.toString().match(/\.gif|\.jpe?g|\.png/i)) e.stop();
 			//});
 			// PATCH EOF
 
@@ -318,7 +318,10 @@ var Mediabox;
 
 // MEDIA TYPES
 // IMAGES
-			if (URL.match(/\.gif|\.jpg|\.png|twitpic\.com/i) || mediaType == 'image') {
+			// PATCH: also support .jpeg
+			//if (URL.match(/\.gif|\.jpg|\.png|twitpic\.com/i) || mediaType == 'image') {
+			if (URL.match(/\.gif|\.jpe?g|\.png|twitpic\.com/i) || mediaType == 'image') {
+			// PATCH EOF
 				mediaType = 'img';
 				URL = URL.replace(/twitpic\.com/i, "twitpic.com/show/full");
 				preload = new Image();
@@ -864,8 +867,12 @@ var Mediabox;
 		caption.set('html', (options.showCaption && (captionSplit.length > 1)) ? captionSplit[1] : "");
 		number.set('html', (options.showCounter && (images.length > 1)) ? options.counterText.replace(/{x}/, activeImage + 1).replace(/{y}/, images.length) : "");
 
-		if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
-		if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		// PATCH: also support .jpeg
+		//if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		//if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpe?g|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpe?g|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		// PATCH EOF
 
 		mediaWidth = image.offsetWidth;
 		mediaHeight = image.offsetHeight+bottom.offsetHeight;
