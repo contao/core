@@ -65,6 +65,7 @@ $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Bitte wählen Sie mindestens ein
 $GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Der Alias "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Der Ordner "%s" kann nicht importiert werden!';
 $GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'Die Datei "%s" ist nicht beschreibbar, daher werden Ihre Änderungen nicht wirksam!';
+$GLOBALS['TL_LANG']['ERR']['invalidName']    = 'Dieser Datei- bzw. Verzeichnisname ist ungültig!';
 
 
 /**

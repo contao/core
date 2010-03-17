@@ -127,7 +127,11 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true),
+			'save_callback' => array
+			(
+				array('tl_files', 'checkFilename')
+			)
 		)
 	)
 );
@@ -374,6 +378,26 @@ class tl_files extends Backend
 <ul id="tl_breadcrumb">
   <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
 </ul>';
+	}
+
+
+	/**
+	 * Check a file name and romanize it
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function checkFilename($varValue, DataContainer $dc)
+	{
+		$varValue = utf8_romanize($varValue);
+		$varValue = str_replace('"', '', $varValue);
+
+		if (preg_match('/\.$/', $varValue))
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+		}
+
+		return $varValue;
 	}
 
 

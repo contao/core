@@ -65,6 +65,7 @@ $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Please select at least one field
 $GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Alias "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Folder "%s" cannot be imported!';
 $GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'File "%s" is not writeable, so your changes will not take effect!';
+$GLOBALS['TL_LANG']['ERR']['invalidName']    = 'This file or folder name is invalid!';
 
 
 /**

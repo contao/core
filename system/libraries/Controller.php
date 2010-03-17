@@ -540,9 +540,10 @@ abstract class Controller extends System
 
 	/**
 	 * Return all languages as array
+	 * @param boolean
 	 * @return array
 	 */
-	protected function getLanguages()
+	protected function getLanguages($blnBeOnly=false)
 	{
 		$return = array();
 		$languages = array();
@@ -557,9 +558,15 @@ abstract class Controller extends System
 		}
 
 		asort($arrAux);
+		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/backend/languages');
 
 		foreach (array_keys($arrAux) as $strKey)
 		{
+			if ($blnBeOnly && !in_array($strKey, $arrBackendLanguages))
+			{
+				continue;
+			}
+
 			$return[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
 		}
 
@@ -573,21 +580,7 @@ abstract class Controller extends System
 	 */
 	protected function getBackendLanguages()
 	{
-		$arrReturn = array();
-		$arrLanguages = $this->getLanguages();
-		$arrBackendLanguages = scan(TL_ROOT . '/system/modules/backend/languages');
-
-		foreach ($arrBackendLanguages as $language)
-		{
-			if (substr($language, 0, 1) == '.')
-			{
-				continue;
-			}
-
-			$arrReturn[$language] = $arrLanguages[$language];
-		}
-
-		return $arrReturn;
+		return $this->getLanguages(true);
 	}
 
 
@@ -990,7 +983,7 @@ abstract class Controller extends System
 			'<u>$1</u>',
 			'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
 			'<br />$1',
-			'',
+			' ',
 			'<div class="mod_article'
 		);
 

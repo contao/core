@@ -162,6 +162,26 @@ class DC_Folder extends DataContainer implements listable, editable
 
 
 	/**
+	 * Return an object property
+	 * @param string
+	 * @return mixed
+	 */
+	public function __get($strKey)
+	{
+		switch ($strKey)
+		{
+			case 'extension':
+				return $this->strExtension;
+				break;
+
+			default:
+				return parent::__get($strKey);
+				break;
+		}
+	}
+
+
+	/**
 	 * List all files and folders of the file system
 	 * @return string
 	 */

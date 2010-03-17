@@ -18,6 +18,7 @@ Version 2.8.2 (2010--)
 - Fixed: the function addToUrl() generated invalid URLs in the front end (#1707)
 - Fixed: the Config library did not handle numeric strings correctly (#286)
 - Fixed: the Mediabox plugin did not support .jpeg file extensions (#1728)
+- Fixed: the file manager allowed invalid file and folder names (#1699)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
