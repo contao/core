@@ -180,7 +180,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('ascending', 'descending'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'perPage' => array

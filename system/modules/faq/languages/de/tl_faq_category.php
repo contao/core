@@ -55,8 +55,6 @@ $GLOBALS['TL_LANG']['tl_faq_category']['comments_legend']  = 'Kommentare';
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_faq_category']['ascending']     = 'aufsteigend';
-$GLOBALS['TL_LANG']['tl_faq_category']['descending']    = 'absteigend';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_admin']  = 'Systemadministrator';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_author'] = 'Autor der Frage';
 $GLOBALS['TL_LANG']['tl_faq_category']['notify_both']   = 'Autor und Systemadministrator';

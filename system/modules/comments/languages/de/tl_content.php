@@ -45,11 +45,4 @@ $GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Kommentartempla
 $GLOBALS['TL_LANG']['tl_content']['comment_legend']  = 'Kommentar-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['template_legend'] = 'Template-Einstellungen';
 
-
-/**
- * References
- */
-$GLOBALS['TL_LANG']['tl_content']['ascending']  = 'aufsteigend';
-$GLOBALS['TL_LANG']['tl_content']['descending'] = 'absteigend';
-
 ?>

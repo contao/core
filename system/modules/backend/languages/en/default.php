@@ -283,5 +283,7 @@ $GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update mode';
 $GLOBALS['TL_LANG']['MSC']['updateAdd']        = 'Add the selected groups';
 $GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Remove the selected groups';
 $GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Replace the existing entry';
+$GLOBALS['TL_LANG']['MSC']['ascending']        = 'ascending';
+$GLOBALS['TL_LANG']['MSC']['descending']       = 'descending';
 
 ?>

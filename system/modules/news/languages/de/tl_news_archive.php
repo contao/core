@@ -66,8 +66,6 @@ $GLOBALS['TL_LANG']['tl_news_archive']['feed_legend']      = 'RSS/Atom-Feed';
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_news_archive']['ascending']     = 'aufsteigend';
-$GLOBALS['TL_LANG']['tl_news_archive']['descending']    = 'absteigend';
 $GLOBALS['TL_LANG']['tl_news_archive']['notify_admin']  = 'Systemadministrator';
 $GLOBALS['TL_LANG']['tl_news_archive']['notify_author'] = 'Autor des Beitrags';
 $GLOBALS['TL_LANG']['tl_news_archive']['notify_both']   = 'Autor und Systemadministrator';
