@@ -214,10 +214,6 @@ class tl_newsletter_recipients extends Backend
 		// Check current action
 		switch ($this->Input->get('act'))
 		{
-			case 'select':
-				// Allow
-				break;
-
 			case 'create':
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
@@ -248,6 +244,7 @@ class tl_newsletter_recipients extends Backend
 				}
 				break;
 
+			case 'select':
 			case 'editAll':
 			case 'deleteAll':
 			case 'overrideAll':

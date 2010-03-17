@@ -445,7 +445,6 @@ class tl_news extends Backend
 		switch ($this->Input->get('act'))
 		{
 			case 'paste':
-			case 'select':
 				// Allow
 				break;
 
@@ -487,6 +486,7 @@ class tl_news extends Backend
 				}
 				break;
 
+			case 'select':
 			case 'editAll':
 			case 'deleteAll':
 			case 'overrideAll':

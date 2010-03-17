@@ -389,14 +389,14 @@ class tl_form_field extends Backend
 		switch ($this->Input->get('act'))
 		{
 			case 'paste':
-			case 'select':
 				// Allow
 				break;
 
 			case 'create':
+			case 'select':
 				if (!strlen($this->Input->get('id')) || !in_array($this->Input->get('id'), $root))
 				{
-					$this->log('Not enough permissions to create form fields in form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to access form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 				break;
@@ -460,17 +460,17 @@ class tl_form_field extends Backend
 					$this->redirect('typolight/main.php?act=error');
 				}
 
-				$objArchive = $this->Database->prepare("SELECT id FROM tl_form_field WHERE pid=?")
-											 ->execute($id);
+				$objForm = $this->Database->prepare("SELECT id FROM tl_form_field WHERE pid=?")
+										  ->execute($id);
 
-				if ($objArchive->numRows < 1)
+				if ($objForm->numRows < 1)
 				{
 					$this->log('Invalid form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
-				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objArchive->fetchEach('id'));
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objForm->fetchEach('id'));
 				$this->Session->setData($session);
 				break;
 

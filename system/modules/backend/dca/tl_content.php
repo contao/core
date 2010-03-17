@@ -641,90 +641,58 @@ class tl_content extends Backend
 
 		$pagemounts = array_unique($pagemounts);
 
-		// View an article
-		if ($this->Input->get('act') == '' || $this->Input->get('act') == 'select' || $this->Input->get('act') == 'create')
+		// Check the current action
+		switch ($this->Input->get('act'))
 		{
-			$objArticle = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
-										 ->limit(1)
-										 ->execute($this->Input->get('id'));
+			case 'paste':
+				// Allow
+				break;
 
-			// Invalid article id
-			if ($objArticle->numRows < 1)
-			{
-				$this->log('Article ID ' . $this->Input->get('id') . ' does not exist', 'tl_content checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// Check whether the page is mounted
-			if (!in_array($objArticle->id, $pagemounts))
-			{
-				$this->log('Page ID ' . $objArticle->id . ' was not mounted', 'tl_content checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// Check whether the article is allowed
-			if (!$this->User->isAllowed(4, $objArticle->row()))
-			{
-				$this->log('Not enough permissions to edit article ID ' . $this->Input->get('id') . ' on page ID ' . $objArticle->id, 'tl_content checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-		}
-
-		// Edit/delete all
-		elseif ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'deleteAll')
-		{
-			$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?")
-									 ->execute(CURRENT_ID);
-
-			$session = $this->Session->getData();
-			$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
-			$this->Session->setData($session);
-		}
-
-		// Edit/move/delete a content element
-		elseif ($this->Input->get('act') != 'paste')
-		{
-			// Check parent element if a content element is being moved
-			if ($this->Input->get('act') == 'copy')
-			{
-				// Check content element
-				$objArticle = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_content c, tl_article a, tl_page p WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
-											 ->limit(1)
-											 ->execute($this->Input->get('pid'));
-
-				// Check whether the page is mounted
-				if (!in_array($objArticle->id, $pagemounts))
+			case '': // empty
+			case 'create':
+			case 'select':
+				// Check access to the article
+				if (!$this->checkAccessToElement(CURRENT_ID, $pagemounts, true))
 				{
-					$this->log('Parent page ID ' . $objArticle->id . ' was not mounted', 'tl_content checkPermission()', TL_ERROR);
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+			case 'cutAll':
+			case 'copyAll':
+				// Check access to the parent element if a content element is moved
+				if (($this->Input->get('act') == 'cutAll' || $this->Input->get('act') == 'copyAll') && !$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
+				{
 					$this->redirect('typolight/main.php?act=error');
 				}
 
-				// Check whether the article is allowed
-				if (!$this->User->isAllowed(4, $objArticle->row()))
+				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?")
+										 ->execute(CURRENT_ID);
+
+				$session = $this->Session->getData();
+				$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $objCes->fetchEach('id'));
+				$this->Session->setData($session);
+				break;
+
+			case 'cut':
+			case 'copy':
+				// Check access to the parent element if a content element is moved
+				if (!$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
 				{
-					$this->log('Not enough permissions to copy or move content element ID ' . $this->Input->get('pid') . ' of article ID ' . $objArticle->aid . ' on page ID ' . $objArticle->id, 'tl_content checkPermission()', TL_ERROR);
 					$this->redirect('typolight/main.php?act=error');
 				}
-			}
+				// NO BREAK STATEMENT HERE
 
-			// Check content element
-			$objArticle = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_content c, tl_article a, tl_page p WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
-										 ->limit(1)
-										 ->execute($this->Input->get('id'));
-
-			// Check whether the page is mounted
-			if (!in_array($objArticle->id, $pagemounts))
-			{
-				$this->log('Page ID ' . $objArticle->id . ' was not mounted', 'tl_content checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
-
-			// Check whether the article is allowed
-			if (!$this->User->isAllowed(4, $objArticle->row()))
-			{
-				$this->log('Not enough permissions to edit content element ID ' . $this->Input->get('id') . ' of article ID ' . $objArticle->aid . ' on page ID ' . $objArticle->id, 'tl_content checkPermission()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
-			}
+			default:
+				// Check access to the content element
+				if (!$this->checkAccessToElement($this->Input->get('id'), $pagemounts))
+				{
+					$this->redirect('typolight/main.php?act=error');
+				}
+				break;
 		}
 	}
 
@@ -732,43 +700,43 @@ class tl_content extends Backend
 	/**
 	 * Check access to a particular content element
 	 * @param integer
+	 * @param array
+	 * @param boolean
 	 * @return boolean
 	 */
-	protected function checkAccessToElement($id)
+	protected function checkAccessToElement($id, $pagemounts, $blnIsPid=false)
 	{
-		// Get article
-		$objArticle = $this->Database->prepare("SELECT c.id AS contentId, a.id AS articleId, p.id AS pageId, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup FROM tl_article a, tl_page p, tl_content c WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
-									 ->limit(1)
-									 ->execute($id);
+		if ($blnIsPid)
+		{
+			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+									  ->limit(1)
+									  ->execute($id);
+		}
+		else
+		{
+			$objPage = $this->Database->prepare("SELECT p.id, p.pid, p.includeChmod, p.chmod, p.cuser, p.cgroup, a.id AS aid FROM tl_content c, tl_article a, tl_page p WHERE c.id=? AND c.pid=a.id AND a.pid=p.id")
+									  ->limit(1)
+									  ->execute($id);
+		}
 
-		// Check whether page is mounted
-		if ($objArticle->numRows < 1)
+		// Invalid ID
+		if ($objPage->numRows < 1)
 		{
 			$this->log('Invalid content element ID ' . $id, 'tl_content checkAccessToElement()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
-		}
-
-		$pagemounts = array();
-
-		foreach ($this->User->pagemounts as $root)
-		{
-			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
-		}
-
-		$pagemounts = array_unique($pagemounts);
-
-		// Page is not mounted
-		if (!in_array($objArticle->pageId, $pagemounts))
-		{
-			$this->log('Not enough permissions to modify article ID ' . $objArticle->articleId . ' on page ID ' . $objArticle->pageId, 'tl_content checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
-		// Not enough permissions to modify article
-		if (!$this->User->isAllowed(4, $objArticle->row()))
+		// The page is not mounted
+		if (!in_array($objPage->id, $pagemounts))
 		{
-			$this->log('Not enough permissions to modify article ID ' . $objArticle->articleId, 'tl_content checkAccessToElement()', TL_ERROR);
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid . ' on page ID ' . $objPage->id, 'tl_content checkAccessToElement()', TL_ERROR);
+			return false;
+		}
+
+		// Not enough permissions to modify the article
+		if (!$this->User->isAllowed(4, $objPage->row()))
+		{
+			$this->log('Not enough permissions to modify article ID ' . $objPage->aid, 'tl_content checkAccessToElement()', TL_ERROR);
 			return false;
 		}
 
