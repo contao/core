@@ -49,7 +49,7 @@
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible" title="<?php echo specialchars($this->skipNavigation); ?>"></a>
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" alt="" /></a><?php echo $arrModules['label']; ?></li>
+<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" alt="" /><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
 <li class="tl_parent" id="<?php echo $strGroup; ?>">
 <ul class="tl_level_2">
