@@ -973,7 +973,7 @@ abstract class Controller extends System
 			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
 			'@(<img[^>]+>)@e',
 			'@(<div[^>]+block[^>]+>)@',
-			'@[\n\r\t]@',
+			'@[\n\r\t]+@',
 			'@<br /><div class="mod_article@'
 		);
 
