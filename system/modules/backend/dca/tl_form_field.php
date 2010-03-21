@@ -153,8 +153,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => array_keys($GLOBALS['TL_FFL']),
-			'reference'               => &$GLOBALS['TL_LANG']['FFL'],
+			'options_callback'        => array('tl_form_field', 'getFields'),
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
 		),
 		'name' => array
@@ -525,6 +524,35 @@ class tl_form_field extends Backend
 <table cellspacing="0" cellpadding="0" class="tl_form_field_preview" summary="Table holds a form input field">
 '.$strWidget.'</table>
 </div>' . "\n";
+	}
+
+
+	/**
+	 * Return a list of form fields
+	 * @param object
+	 * @return array
+	 */
+	public function getFields(DataContainer $dc)
+	{
+		$objForm = $this->Database->prepare("SELECT tableless FROM tl_form WHERE id=?")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		$arrFields = $GLOBALS['TL_FFL'];
+
+		// Fieldsets are only supported in tableless forms
+		if (!$objForm->tableless)
+		{
+			unset($arrFields['fieldset']);
+		}
+
+		// Add the translation
+		foreach (array_keys($arrFields) as $key)
+		{
+			$arrFields[$key] = $GLOBALS['TL_LANG']['FFL'][$key][0];
+		}
+
+		return $arrFields;
 	}
 
 
