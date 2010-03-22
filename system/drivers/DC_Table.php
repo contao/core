@@ -672,6 +672,16 @@ class DC_Table extends DataContainer implements listable, editable
 					   ->set($this->set)
 					   ->execute($this->intId);
 
+		// Call the oncut_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncut_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncut_callback'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this);
+			}
+		}
+
 		if (!$blnDoNotRedirect)
 		{
 			$this->redirect($this->getReferer());
@@ -785,6 +795,16 @@ class DC_Table extends DataContainer implements listable, editable
 
 				// Duplicate records of the child table
 				$this->copyChilds($this->strTable, $insertID, $this->intId, $insertID);
+
+				// Call the oncopy_callback after all new records have been created
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncopy_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($insertID, $this);
+					}
+				}
 
 				// Add a log entry
 				$this->log('A new entry in table "'.$this->strTable.'" has been created (ID: '.$insertID.')', 'DC_Table copy()', TL_GENERAL);
@@ -4019,6 +4039,12 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		foreach ($sortingFields as $field)
 		{
 			$options_label = strlen(($lbl = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label']) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'])) ? $lbl : $GLOBALS['TL_LANG']['MSC'][$field];
+
+			if (is_array($options_label))
+			{
+				$options_label = $options_label[0];
+			}
+
 			$options_sorter[$options_label] = '  <option value="'.specialchars($field).'"'.((!strlen($session['sorting'][$this->strTable]) && $field == $firstOrderBy || $field == str_replace(' DESC', '', $session['sorting'][$this->strTable])) ? ' selected="selected"' : '').'>'.$options_label.'</option>';
 		}
 

@@ -89,6 +89,9 @@ class StyleSheets extends Backend
 		$objStyleSheets = $this->Database->execute("SELECT * FROM tl_style_sheet");
 		$arrStyleSheets = $objStyleSheets->fetchEach('name');
 
+		// Make sure the dcaconfig.php is loaded
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
+
 		// Delete old style sheets
 		foreach (scan(TL_ROOT) as $file)
 		{

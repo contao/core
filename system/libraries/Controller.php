@@ -2451,7 +2451,7 @@ abstract class Controller extends System
 			}
 		}
 
-		// Make sure dcaconfig.php is loaded
+		// Make sure the dcaconfig.php is loaded
 		@include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Add root files
