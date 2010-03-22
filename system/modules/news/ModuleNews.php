@@ -127,7 +127,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->subHeadline = $objArticles->subheadline;
 			$objTemplate->hasSubHeadline = $objArticles->subheadline ? true : false;
 			$objTemplate->linkHeadline = $this->generateLink($objArticles->headline, $objArticles, $blnAddArchive);
-			$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticles, $blnAddArchive);
+			$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticles, $blnAddArchive, true);
 			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
 			$objTemplate->archive = $objArticles->archive;
 
@@ -327,18 +327,19 @@ abstract class ModuleNews extends Module
 	 * @param string
 	 * @param object
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, Database_Result $objArticle, $blnAddArchive=false)
+	protected function generateLink($strLink, Database_Result $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
 	{
 		// Internal link
 		if ($objArticle->source != 'external')
 		{
-			return sprintf('<a href="%s" title="%s">%s <span class="invisible">%s</span></a>',
+			return sprintf('<a href="%s" title="%s">%s%s</a>',
 							$this->generateNewsUrl($objArticle, $blnAddArchive),
 							specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $objArticle->headline)),
 							$strLink,
-							$objArticle->headline);
+							($blnIsReadMore ? ' <span class="invisible">'.$objArticle->headline.'</span>' : ''));
 		}
 
 		// Encode e-mail addresses

@@ -582,7 +582,7 @@ abstract class System
 	 */
 	protected function getFormattedNumber($varNumber, $intDecimals=2)
 	{
-		return number_format($varNumber, $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
+		return number_format(round($varNumber, $intDecimals), $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
 	}
 }
 

@@ -23,6 +23,7 @@ Version 2.8.2 (2010--)
 - Fixed: the news and event reader did not overwrite the page description (#1702)
 - Fixed: regular users were not able to copy/move multiple content elements (#1715)
 - Fixed: the PDF export function did not handle whitespace characters correctly (#1716)
+- Fixed: news headlines appeared twice in link headlines (#1749)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
