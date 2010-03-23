@@ -234,12 +234,12 @@ class ModuleTasks extends BackendModule
 			);
 
 			$objTask = $this->Database->prepare("INSERT INTO tl_task %s")->set($arrSet)->execute();
-			$pid = $objTask->insertId;
+			$insertId = $objTask->insertId;
 
 			// Insert status
 			$arrSet = array
 			(
-				'pid' => $pid,
+				'pid' => $insertId,
 				'tstamp' => $time,
 				'assignedTo' => $this->Template->assignedTo->value,
 				'comment' => trim($this->Template->comment->value),
@@ -265,7 +265,7 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $this->Template->title->value;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . $this->Environment->request);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'typolight/main.php?do=tasks&act=edit&id=' . $insertId);
 
 					$objEmail->sendTo($objUser->email);
 				}
@@ -383,7 +383,7 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $objTask->title;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . $this->Environment->request);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'typolight/main.php?do=tasks&act=edit&id=' . $objTask->id);
 
 					$objEmail->sendTo($objUser->email);
 				}

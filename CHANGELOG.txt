@@ -26,6 +26,7 @@ Version 2.8.2 (2010--)
 - Fixed: news headlines appeared twice in link headlines (#1749)
 - Fixed: the search module did not remove insert tags from the keywords string (#1750)
 - Fixed: the file tree widget did not validate the mounted paths (#1746)
+- Fixed: the task center e-mails contained invalid links (#1753)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
