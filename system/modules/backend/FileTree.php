@@ -228,6 +228,12 @@ class FileTree extends Widget
 	 */
 	protected function renderFiletree($path, $intMargin, $mount=false)
 	{
+		// Invalid path
+		if (!is_dir($path))
+		{
+			return '';
+		}
+
 		static $session;
 		$session = $this->Session->getData();
 
