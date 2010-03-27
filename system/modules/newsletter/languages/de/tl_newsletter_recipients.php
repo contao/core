@@ -46,7 +46,7 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['email_legend'] = 'E-Mail-Adress
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm']    = '%s Abonnenten wurden importiert.';
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm']    = '%s neue Abonnenten wurden importiert.';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid']    = '%s ungültige Einträge wurden übersprungen.';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'] = 'registriert am %s';
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'manuell hinzugefügt';

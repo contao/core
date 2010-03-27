@@ -462,9 +462,9 @@ class Newsletter extends Backend
 					{
 						$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=1")
 									   ->execute($this->Input->get('id'), $strRecipient);
-					}
 
-					++$intTotal;
+						++$intTotal;
+					}
 				}
 			}
 

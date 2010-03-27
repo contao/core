@@ -31,6 +31,7 @@ Version 2.8.2 (2010--)
 - Fixed: the list wizard did not render correctly if the first item was empty (#1740)
 - Fixed: System::idnaEncode() encoded more than just the domain name (#1748)
 - Fixed: the Captcha field was missing class="mandatory" (#1767)
+- Fixed: the newsletter recipient importer did not count correctly (#1732)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
