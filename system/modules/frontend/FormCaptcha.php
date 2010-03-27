@@ -124,9 +124,9 @@ class FormCaptcha extends Widget
 			$this->setQuestion();
 		}
 
-		return sprintf('<label for="ctrl_%s"%s>%s%s%s <span class="invisible">%s</span></label>',
+		return sprintf('<label for="ctrl_%s" class="mandatory%s">%s%s%s <span class="invisible">%s</span></label>',
 						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						'<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ',
 						$this->strLabel,
 						'<span class="mandatory">*</span>',
@@ -140,7 +140,7 @@ class FormCaptcha extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha%s" value=""%s />',
+		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s />',
 						$this->strCaptchaKey,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
