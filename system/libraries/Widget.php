@@ -609,7 +609,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid e-mail address
 				case 'email':
-					$varInput = $this->idnaEncode($varInput);
+					$varInput = $this->idnaEncodeEmail($varInput);
 					if (!$this->isValidEmailAddress($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
@@ -622,7 +622,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid URL
 				case 'url':
-					$varInput = $this->idnaEncode($varInput);
+					$varInput = $this->idnaEncodeUrl($varInput);
 					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));

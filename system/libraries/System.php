@@ -510,7 +510,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function idnaEncode($strEmail)
+	protected function idnaEncode($strDomain)
 	{
 		if (!class_exists('idna_convert', false))
 		{
@@ -518,7 +518,7 @@ abstract class System
 		}
 
 		$objIdn = new idna_convert();
-		return $objIdn->encode($strEmail);
+		return $objIdn->encode($strDomain);
 	}
 
 
@@ -527,7 +527,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function idnaDecode($strEmail)
+	protected function idnaDecode($strDomain)
 	{
 		if (!class_exists('idna_convert', false))
 		{
@@ -535,7 +535,86 @@ abstract class System
 		}
 
 		$objIdn = new idna_convert();
-		return $objIdn->decode($strEmail);
+		return $objIdn->decode($strDomain);
+	}
+
+
+	/**
+	 * Encode an e-mail address
+	 * @param string
+	 * @return string
+	 */
+	protected function idnaEncodeEmail($strEmail)
+	{
+		list($strLocal, $strHost) = explode('@', $strEmail);
+		return $strLocal .'@'. $this->idnaEncode($strHost);
+	}
+
+
+	/**
+	 * Encode an URL
+	 * @param string
+	 * @return string
+	 */
+	protected function idnaEncodeUrl($strUrl)
+	{
+		// E-mail address
+		if (strncasecmp($strUrl, 'mailto:', 7) === 0)
+		{
+			return $this->idnaEncodeEmail($strUrl);
+		}
+
+		$arrUrl = parse_url($strUrl);
+
+		// Scheme
+		if (isset($arrUrl['scheme']))
+		{
+			$arrUrl['scheme'] .= '://';
+		}
+
+		// User
+		if (isset($arrUrl['user']))
+		{
+			$arrUrl['user'] .= isset($arrUrl['pass']) ? ':' : '@';
+		}
+
+		// Password
+		if (isset($arrUrl['pass']))
+		{
+			$arrUrl['pass'] .= '@';
+		}
+
+		// Host
+		if (isset($arrUrl['host']))
+		{
+			$arrUrl['host'] = $this->idnaEncode($arrUrl['host']);
+		}
+
+		// Port
+		if (isset($arrUrl['port']))
+		{
+			$arrUrl['port'] = ':' . $arrUrl['port'];
+		}
+
+		// Path
+		if (isset($arrUrl['path']))
+		{
+			$arrUrl['path'] = $this->urlEncode($arrUrl['path']);
+		}
+
+		// Query
+		if (isset($arrUrl['query']))
+		{
+			$arrUrl['query'] = '?' . $arrUrl['query']; // urlEncode would also encode (=)
+		}
+
+		// Anchor
+		if (isset($arrUrl['fragment']))
+		{
+			$arrUrl['fragment'] = '#' . $arrUrl['fragment'];
+		}
+
+		return $arrUrl['scheme'] . $arrUrl['user'] . $arrUrl['pass'] . $arrUrl['host'] . $arrUrl['port'] . $arrUrl['path'] . $arrUrl['query'] . $arrUrl['fragment']; 
 	}
 
 

@@ -475,7 +475,7 @@ class Email extends System
 				list($strName, $strEmail) = $this->splitFriendlyName($v);
 
 				$strName = trim($strName, ' "');
-				$strEmail = $this->idnaEncode($strEmail);
+				$strEmail = $this->idnaEncodeEmail($strEmail);
 
 				if ($strName != '')
 				{

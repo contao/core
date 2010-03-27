@@ -150,7 +150,7 @@ class ModuleUnsubscribe extends Module
 			$this->reload();
 		}
 
-		$varInput = $this->idnaEncode($this->Input->post('email', true));
+		$varInput = $this->idnaEncodeEmail($this->Input->post('email', true));
 
 		// Validate e-mail address
 		if (!$this->isValidEmailAddress($varInput))
