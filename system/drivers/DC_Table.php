@@ -1224,6 +1224,12 @@ class DC_Table extends DataContainer implements listable, editable
 				if ($objSave->numRows)
 				{
 					$data[$table][$k] = $objSave->fetchAssoc();
+
+					// Store the active record
+					if ($table == $this->strTable && $v == $this->intId)
+					{
+						$this->objActiveRecord = $objSave;
+					}
 				}
 
 				$affected++;
@@ -1900,7 +1906,7 @@ window.addEvent(\'domready\', function()
 										   ->limit(1)
 										   ->execute($this->intId);
 
-				// Store active record
+				// Store the active record
 				$this->objActiveRecord = $objValue;
 
 				foreach ($this->strPalette as $v)
