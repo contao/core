@@ -28,6 +28,7 @@ Version 2.8.2 (2010--)
 - Fixed: the file tree widget did not validate the mounted paths (#1746)
 - Fixed: the task center e-mails contained invalid links (#1753)
 - Fixed: the option "show protected pages" also showed guest pages (#1694)
+- Fixed: the list wizard did not render correctly if the first item was empty (#1740)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)

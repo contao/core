@@ -135,7 +135,7 @@ class ListWizard extends Widget
 		}
 
 		// Make sure there is at least an empty array
-		if (!is_array($this->varValue) || !$this->varValue[0])
+		if (!is_array($this->varValue) || count($this->varValue) < 1)
 		{
 			$this->varValue = array('');
 		}
