@@ -159,25 +159,15 @@ class ModuleArticle extends Module
 			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
 		}
 
-		$contentElements = false;
+		$contentElements = '';
 
-		// HOOK: trigger psishop extension
-		if (in_array('psishop', $this->Config->getActiveModules()))
+		// Get all visible content elements
+		$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
+								 ->execute($this->id);
+
+		while ($objCte->next())
 		{
-			$contentElements = Psishop::getProductlisting($this);
-		}
-
-		// Default routine
-		if ($contentElements === false)
-		{
-			$contentElements = '';
-			$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
-									 ->execute($this->id);
-
-			while ($objCte->next())
-			{
-				$contentElements .= $this->getContentElement($objCte->id);
-			}
+			$contentElements .= $this->getContentElement($objCte->id);
 		}
 
 		$this->Template->teaser = $this->teaser;
