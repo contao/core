@@ -60,7 +60,7 @@ class FormHtml extends Widget
 	 */
 	public function generate()
 	{
-		return $this->html;
+		return (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
 	}
 }
 
