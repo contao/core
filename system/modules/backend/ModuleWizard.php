@@ -140,14 +140,14 @@ class ModuleWizard extends Widget
 					break;
 
 				case '2clr':
-					$cols[] = 'main';
 					$cols[] = 'right';
+					$cols[] = 'main';
 					break;
 
 				case '3cl':
 					$cols[] = 'left';
-					$cols[] = 'main';
 					$cols[] = 'right';
+					$cols[] = 'main';
 					break;
 			}
 

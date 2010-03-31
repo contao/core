@@ -57,7 +57,7 @@ class PageRegular extends Frontend
 
 		// Initialize modules and sections
 		$arrCustomSections = array();
-		$arrSections = array('header', 'left', 'main', 'right', 'footer');
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		$arrModules = deserialize($objLayout->modules);
 
 		// Generate all modules
