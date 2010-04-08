@@ -1,0 +1,23 @@
+tinyMCE.addI18n('ru.typolinks_dlg',{
+page:"TYPOlight страницы",
+file:"TYPOlight файлы",
+link_title:"Вставить/редактировать ссылку",
+link_url:"URL ссылки",
+link_target:"Target",
+link_target_same:"Открыть ссылку в этом же окне",
+link_target_blank:"Открыть ссылку в новом окне",
+link_titlefield:"Заголовок",
+link_is_email:"Похоже что введенное значение URL является адрессом электронной почты, добавить префикс mailto:?",
+link_is_external:"Похоже что введенное значение URL является внешней ссылкой, добавить префикс http://?",
+link_list:"Список ссылок",
+image_title:"Вставить/редактировать изображение в лайтбоксе",
+image_list:"Список изображений",
+image_src:"URL изображения",
+image_dimensions:"Ширина/высота",
+image_alt:"Описание",
+image_class:"Класс CSS",
+image_rel:"Тип",
+image_rel_single:"Одно изображение",
+image_rel_multi:"Галлерея изображений",
+image_rel_empty:"Миниатюра изображения"
+});
