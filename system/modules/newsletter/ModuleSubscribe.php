@@ -266,6 +266,7 @@ class ModuleSubscribe extends Module
 		// Activation e-mail
 		$objEmail = new Email();
 
+		$strText = str_replace('##token##', $strToken, $strText);
 		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_subscribe);
 		$strText = str_replace('##link##', $this->Environment->base . $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
