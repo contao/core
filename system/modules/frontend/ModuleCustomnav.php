@@ -159,41 +159,43 @@ class ModuleCustomnav extends Module
 						break;
 				}
 
-				// Active page == main page
+				// Active page
 				if ($objPage->id == $arrPage['id'])
 				{
-					$items[] = array
-					(
-						'isActive' => true,
-						'class' => (strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''),
-						'pageTitle' => specialchars($arrPage['pageTitle']),
-						'title' => specialchars($arrPage['title']),
-						'link' => $arrPage['title'],
-						'href' => $href,
-						'target' => (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''),
-						'description' => str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']),
-						'accesskey' => $arrPage['accesskey'],
-						'tabindex' => $arrPage['tabindex'],
-						'alias' => $arrPage['alias']
-					);
+					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''));
+					$row = $arrPage;
 
-					continue;
+					$row['isActive'] = true;
+					$row['class'] = $strClass;
+					$row['pageTitle'] = specialchars($arrPage['pageTitle']);
+					$row['title'] = specialchars($arrPage['title']);
+					$row['link'] = $arrPage['title'];
+					$row['href'] = $href;
+					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
+					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : '');
+					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
+
+					$items[] = $row;
 				}
 
-				$items[] = array
-				(
-					'isActive' => false,
-					'class' => (strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''),
-					'pageTitle' => specialchars($arrPage['pageTitle']),
-					'title' => specialchars($arrPage['title']),
-					'link' => $arrPage['title'],
-					'href' => $href,
-					'target' => (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''),
-					'description' => str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']),
-					'accesskey' => $arrPage['accesskey'],
-					'tabindex' => $arrPage['tabindex'],
-					'alias' => $arrPage['alias']
-				);
+				// Regular page
+				else
+				{
+					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : '') . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$row = $arrPage;
+
+					$row['isActive'] = false;
+					$row['class'] = $strClass;
+					$row['pageTitle'] = specialchars($arrPage['pageTitle']);
+					$row['title'] = specialchars($arrPage['title']);
+					$row['link'] = $arrPage['title'];
+					$row['href'] = $href;
+					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
+					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : '');
+					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
+
+					$items[] = $row;
+				}
 			}
 		}
 

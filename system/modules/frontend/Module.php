@@ -261,18 +261,14 @@ abstract class Module extends Frontend
 
 					$row['isActive'] = true;
 					$row['subitems'] = $subitems;
-					$row['class'] = (strlen($strClass) ? $strClass : '');
+					$row['class'] = $strClass;
 					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
 					$row['title'] = specialchars($objSubpages->title);
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
-					$row['alias'] = $objSubpages->alias;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
 					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-					$row['accesskey'] = $objSubpages->accesskey;
-					$row['tabindex'] = $objSubpages->tabindex;
-					$row['subpages'] = $objSubpages->subpages;
 
 					$items[] = $row;
 				}
@@ -285,18 +281,14 @@ abstract class Module extends Frontend
 
 					$row['isActive'] = false;
 					$row['subitems'] = $subitems;
-					$row['class'] = (strlen($strClass) ? $strClass : '');
+					$row['class'] = $strClass;
 					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
 					$row['title'] = specialchars($objSubpages->title);
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
-					$row['alias'] = $objSubpages->alias;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
 					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
-					$row['accesskey'] = $objSubpages->accesskey;
-					$row['tabindex'] = $objSubpages->tabindex;
-					$row['subpages'] = $objSubpages->subpages;
 
 					$items[] = $row;
 				}
