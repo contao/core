@@ -306,7 +306,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Check whether the page is mounted and the user is allowed to edit its articles
-				if ($objPage->numRows > 0 && $this->User->hasAccess($objPage->id, 'pagemounts') && $this->User->isAllowed(4, $objPage->row()))
+				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
 				{
 					$this->arrCache[$strSource][$intParent] = true;
 				}
@@ -318,7 +318,7 @@ class tl_comments extends Backend
 										  ->execute($intParent);
 
 				// Check whether the page is mounted and the user is allowed to edit it
-				if ($objPage->numRows > 0 && $this->User->hasAccess($objPage->id, 'pagemounts') && $this->User->isAllowed(1, $objPage->row()))
+				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
 				{
 					$this->arrCache[$strSource][$intParent] = true;
 				}

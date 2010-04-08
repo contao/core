@@ -36,6 +36,7 @@ Version 2.8.2 (2010--)
 - Fixed: System::idnaEncode() encoded more than just the domain name (#1748)
 - Fixed: the Captcha field was missing class="mandatory" (#1767)
 - Fixed: the newsletter recipient importer did not count correctly (#1732)
+- Fixed: regular users could not edit comments on unmounted pages (#1659)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
