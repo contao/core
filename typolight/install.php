@@ -156,7 +156,7 @@ class InstallTool extends Controller
 
 		if (!$GLOBALS['TL_CONFIG']['licenseAccepted'])
 		{
-			$this->Template->license = specialchars(file_get_contents(TL_ROOT . '/GPL.txt') . "\n\n" . file_get_contents(TL_ROOT . '/LGPL.txt'));
+			$this->Template->license = true;
 			$this->outputAndExit();
 		}
 
