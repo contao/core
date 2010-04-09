@@ -100,7 +100,6 @@ $countries = array
 	'er' => 'Eritrea',
 	'es' => 'Spain',
 	'et' => 'Ethiopia',
-	'eu' => 'European Union',
 	'fi' => 'Finland',
 	'fj' => 'Fiji',
 	'fk' => 'Falkland Islands (Malvinas)',

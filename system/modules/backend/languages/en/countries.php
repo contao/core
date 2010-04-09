@@ -98,7 +98,6 @@ $GLOBALS['TL_LANG']['CNT']['eh'] = 'Western Sahara';
 $GLOBALS['TL_LANG']['CNT']['er'] = 'Eritrea';
 $GLOBALS['TL_LANG']['CNT']['es'] = 'Spain';
 $GLOBALS['TL_LANG']['CNT']['et'] = 'Ethiopia';
-$GLOBALS['TL_LANG']['CNT']['eu'] = 'European Union';
 $GLOBALS['TL_LANG']['CNT']['fi'] = 'Finland';
 $GLOBALS['TL_LANG']['CNT']['fj'] = 'Fiji';
 $GLOBALS['TL_LANG']['CNT']['fk'] = 'Falkland Islands (Malvinas)';
