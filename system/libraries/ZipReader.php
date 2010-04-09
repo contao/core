@@ -355,6 +355,14 @@ class ZipReader
 
 		// Reposition pointer
 		@fseek($this->resFile, ($this->arrFiles[$this->intIndex]['file_name_length'] + $arrEFL[1]), SEEK_CUR);
+
+		// Empty file
+		if ($this->arrFiles[$this->intIndex]['compressed_size'] < 1)
+		{
+			return '';
+		}
+
+		// Read data
 		$strBuffer = @fread($this->resFile, $this->arrFiles[$this->intIndex]['compressed_size']);
 
 		// Decompress data
