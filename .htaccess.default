@@ -1,34 +1,99 @@
 ##
-# Rewrite base
+# TYPOlight Open Source CMS
+# Copyright (C) 2005-2010 Leo Feyer
+#
+# This program is free software: you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation, either
+# version 3 of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public
+# License along with this program. If not, please visit the Free
+# Software Foundation website at <http://www.gnu.org/licenses/>.
+#
+# PHP version 5
+# @copyright  Leo Feyer 2005-2010
+# @author     Leo Feyer <http://www.typolight.org>
+# @license    LGPL
 ##
-RewriteEngine On
-RewriteBase /
 
-##
-# Block malicious requests
-##
-RewriteCond %{REQUEST_URI} (ftp|https?):|/etc/ [NC,OR]
-RewriteCond %{QUERY_STRING} (ftp|https?):|/etc/ [NC]
-RewriteRule .* - [F,L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
 
-##
-# Compress .js and .css files
-##
-AddEncoding gzip .gz
-<FilesMatch "\.js\.gz$">
-  AddType "text/javascript" .gz
-</FilesMatch>
-<FilesMatch "\.css\.gz$">
-  AddType "text/css" .gz
-</FilesMatch>
-RewriteCond %{HTTP:Accept-encoding} gzip
-RewriteCond %{REQUEST_FILENAME} \.(js|css)$
-RewriteCond %{REQUEST_FILENAME}.gz -f
-RewriteRule ^(.*)$ $1.gz [QSA,L]
+  ##
+  # Rewrite base
+  #
+  # Set the RewriteBase if your TYPOlight installation is in a subdirectoy and
+  # the rewrite rules are not working properly. Usage examples:
+  #
+  #   RewriteBase /typolight-2.8.0
+  #   RewriteBase /path/to/typolight
+  #
+  # Add your own RewriteBase after this comment.
+  ##
 
-##
-# Rewrite TYPOlight URLs
-##
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule (.*\.html)$ index.php/$1 [L]
+  ##
+  # Malicious requests
+  #
+  # TYPOlight usually does not pass absolute URLs via GET, therefore the
+  # following rules block all requests that try to pass a URL or the /etc/
+  # directory as parameter.
+  ##
+  RewriteCond %{REQUEST_URI} (ftp|https?):|/etc/ [NC,OR]
+  RewriteCond %{QUERY_STRING} (ftp|https?):|/etc/ [NC]
+  RewriteRule .* - [F,L]
+
+  ##
+  # Compressed .js and .css files
+  #
+  # Most of the JavaScript and CSS files used in TYPOlight are also available
+  # as compressed .gz version, which requires less bandwidth and optimizes the
+  # page loading time. The following rules load these compressed ressources.
+  ##
+  AddEncoding gzip .gz
+  <FilesMatch "\.js\.gz$">
+    AddType "text/javascript" .gz
+  </FilesMatch>
+  <FilesMatch "\.css\.gz$">
+    AddType "text/css" .gz
+  </FilesMatch>
+  RewriteCond %{HTTP:Accept-encoding} gzip
+  RewriteCond %{REQUEST_FILENAME} \.(js|css)$
+  RewriteCond %{REQUEST_FILENAME}.gz -f
+  RewriteRule ^(.*)$ $1.gz [QSA,L]
+
+  ##
+  # Static ressources
+  #
+  # Do not rewrite requests for static files or folders such as style sheets,
+  # images, movies or text documents.
+  ##
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  ##
+  # TYPOlight URLs
+  #
+  # By default, TYPOlight adds ".html" to the generated URLs to simulate static
+  # HTML documents. If you change the URL suffix in the back end settings, make
+  # sure to change it here accordingly!
+  #
+  #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
+  #   RewriteRule .* index.php [L]          # No URL suffix
+  #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+  #
+  # If you are using mod_cache, it is recommended to use the RewriteRule below,
+  # which adds the query string to the internal URL:
+  # 
+  #   RewriteRule (.*\.html)$ index.php/$1 [L]
+  #
+  # Note that not all environments support mod_rewrite and mod_cache!
+  ##
+  RewriteRule .*\.html$ index.php [L]
+
+</IfModule>
