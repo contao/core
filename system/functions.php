@@ -278,7 +278,7 @@ function standardize($varValue)
 	(
 		array('/[^a-zA-Z0-9 _-]+/i', '/ +/', '/\-+/'),
 		array('', '-', '-'),
-		utf8_romanize($varValue)
+		utf8_romanize(html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']))
 	);
 
 	if (is_numeric(substr($varValue, 0, 1)))
