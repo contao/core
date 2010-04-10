@@ -376,15 +376,20 @@ class Email extends System
 
 			// Find images
 			$arrMatches = array();
-			preg_match_all('/(?:"|\')([^"\']+\.(jpe?g|png|gif|bmp|tiff?|swf))(?:"|\')/Ui', $this->strHtml, $arrMatches);
+			preg_match_all('/src="([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
+			$strBase = Environment::getInstance()->base;
 
-			// Create cid and replace image source
-			foreach (array_unique($arrMatches[1]) as $src)
+			// Embed internal images
+			foreach (array_unique($arrMatches[1]) as $url)
 			{
-				if (file_exists($this->strImageDir . $src))
+				// Try to remove the base URL
+				$src = str_replace($strBase, '', $url);
+
+				// Embed the image if the URL is now relative
+				if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
 				{
 					$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
-					$this->strHtml = str_replace('"' . $src . '"', '"' . $cid . '"', $this->strHtml);
+					$this->strHtml = str_replace('src="' . $url . '"', 'src="' . $cid . '"', $this->strHtml);
 				}
 			}
 

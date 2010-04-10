@@ -41,6 +41,7 @@ Version 2.8.2 (2010--)
 - Fixed: the newsletter recipient importer did not count correctly (#1732)
 - Fixed: regular users could not edit comments on unmounted pages (#1659)
 - Fixed: the ZipReader class failed to handle empty files (#1804)
+- Fixed: the Newsletter module did not embed images correctly (#1799)
 - Fixed some minor issues
 
 Version 2.8.1 (2010-02-28)
