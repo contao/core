@@ -1631,6 +1631,7 @@ abstract class Controller extends System
 					$class = '';
 					$rel = '';
 					$strFile = $elements[1];
+					$mode = '';
 
 					// Take arguments
 					if (strpos($elements[1], '?') !== false)
@@ -1667,6 +1668,10 @@ abstract class Controller extends System
 								case 'rel':
 									$rel = $value;
 									break;
+
+								case 'mode':
+									$mode = $value;
+									break;
 							}
 						}
 
@@ -1686,11 +1691,11 @@ abstract class Controller extends System
 					// Generate image
 					if (strlen($rel))
 					{
-						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $this->getImage($strFile, $width, $height, $mode) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
 					}
 					else
 					{
-						$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+						$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height, $mode) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
 					}
 					break;
 
