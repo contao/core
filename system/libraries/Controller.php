@@ -2022,6 +2022,16 @@ abstract class Controller extends System
 			}
 		}
 
+		// HOOK: allow to load custom settings
+		if (isset($GLOBALS['TL_HOOKS']['loadDataContainer']) && is_array($GLOBALS['TL_HOOKS']['loadDataContainer']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['loadDataContainer'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($strName);
+			}
+		}
+
 		@include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
