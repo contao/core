@@ -90,7 +90,9 @@ desc:"Editare CSS"
 paste:{
 paste_text_desc:"Lipire ca text simplu",
 paste_word_desc:"Lipire din Word",
-selectall_desc:"Selecteaz\u0103 tot"
+selectall_desc:"Selecteaz\u0103 tot",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Folosi\u0163i CTRL+V pentru a lipi \u00EEn aceast\u0103 zon\u0103.",
@@ -120,7 +122,9 @@ col:"Coloan\u0103",
 cell:"Celul\u0103"
 },
 autosave:{
-unload_msg:"Modific\u0103rile nu vor fi salvate."
+unload_msg:"Modific\u0103rile nu vor fi salvate.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Mod ecran complet"
@@ -151,4 +155,16 @@ no_mpell:"Nu sunt gre\u015Feli."
 },
 pagebreak:{
 desc:"Insereaz\u0103 un separator de pagin\u0103"
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

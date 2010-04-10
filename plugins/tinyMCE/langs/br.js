@@ -90,7 +90,9 @@ desc:"Editar CSS"
 paste:{
 paste_text_desc:"Colar como texto simples",
 paste_word_desc:"Colar (copiado do WORD)",
-selectall_desc:"Selecionar tudo"
+selectall_desc:"Selecionar tudo",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Use CTRL+V para colar o texto na janela.",
@@ -120,7 +122,9 @@ col:"Coluna",
 cell:"C\u00E9lula"
 },
 autosave:{
-unload_msg:"As mudan\u00E7as efetuadas ser\u00E3o perdidas se sair desta p\u00E1gina."
+unload_msg:"As mudan\u00E7as efetuadas ser\u00E3o perdidas se sair desta p\u00E1gina.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Tela Inteira"
@@ -151,4 +155,16 @@ no_mpell:"N\u00E3o foram detectados erros de ortografia."
 },
 pagebreak:{
 desc:"Inserir quebra de p\u00E1gina."
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

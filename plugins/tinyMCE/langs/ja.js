@@ -90,7 +90,9 @@ desc:"CSS\u7DE8\u96C6"
 paste:{
 paste_text_desc:"\u30C6\u30AD\u30B9\u30C8\u3068\u3057\u3066\u8CBC\u308A\u4ED8\u3051",
 paste_word_desc:"Word\u304B\u3089\u8CBC\u308A\u4ED8\u3051",
-selectall_desc:"\u5168\u3066\u9078\u629E"
+selectall_desc:"\u5168\u3066\u9078\u629E",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"\u30AD\u30FC\u30DC\u30FC\u30C9\u3067CTRL+V\u3068\u5165\u529B\u3057\u30C6\u30AD\u30B9\u30C8\u3092\u8CBC\u308A\u4ED8\u3051\u3066\u304F\u3060\u3055\u3044\u3002",
@@ -120,7 +122,9 @@ col:"\u5217",
 cell:"\u30BB\u30EB"
 },
 autosave:{
-unload_msg:"\u4ED6\u306E\u30DA\u30FC\u30B8\u3078\u79FB\u52D5\u3059\u308B\u3068\u7DE8\u96C6\u30C7\u30FC\u30BF\u306F\u3059\u3079\u3066\u7834\u68C4\u3055\u308C\u307E\u3059\u3002"
+unload_msg:"\u4ED6\u306E\u30DA\u30FC\u30B8\u3078\u79FB\u52D5\u3059\u308B\u3068\u7DE8\u96C6\u30C7\u30FC\u30BF\u306F\u3059\u3079\u3066\u7834\u68C4\u3055\u308C\u307E\u3059\u3002",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"\u30D5\u30EB\u30B9\u30AF\u30EA\u30FC\u30F3"
@@ -151,4 +155,16 @@ no_mpell:"\u30B9\u30DA\u30EB\u30DF\u30B9\u306F\u898B\u3064\u304B\u308A\u307E\u30
 },
 pagebreak:{
 desc:"\u6539\u30DA\u30FC\u30B8\u633F\u5165"
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

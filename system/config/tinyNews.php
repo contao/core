@@ -36,7 +36,7 @@
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 tinyMCE_GZ.init({
-  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,safari,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
+  plugins : "advimage,autoresize,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   themes : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
@@ -51,6 +51,7 @@ tinyMCE.init({
   height : "300",
   language : "<?php echo $this->language; ?>",
   elements : "<?php echo $this->rteFields; ?>",
+  inline_styles : false,
 <?php if ($this->brNewLine): ?>
   forced_root_block : false,
   force_p_newlines : false,
@@ -72,10 +73,11 @@ tinyMCE.init({
   onchange_callback : "TinyCallback.getScrollOffset",
   external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
-  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,safari,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
+  plugins : "advimage,autoresize,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   content_css : "<?php echo TL_PATH; ?>/newsletter.css",
   event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
+  extended_valid_elements : "b/strong,i/em",
   tabfocus_elements : ":prev,:next",
   theme : "advanced",
   theme_advanced_resizing : true,

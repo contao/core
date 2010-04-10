@@ -57,7 +57,6 @@ $objLib = new typolib();
 	<script type="text/javascript" src="../../utils/form_utils.js"></script>
 	<script type="text/javascript" src="../../utils/validate.js"></script>
 	<script type="text/javascript" src="js/typolinks.js"></script>
-	<base target="_self" />
 </head>
 <body id="link" style="display: none">
 <form onsubmit="LinkDialog.update();return false;" action="#">
@@ -71,15 +70,15 @@ $objLib = new typolib();
 		<div id="general_panel" class="panel current">
 		<table border="0" cellpadding="4" cellspacing="0">
           <tr>
-            <td nowrap="nowrap"><label for="tlpage">{#typolinks_dlg.page}</label></td>
+            <td class="nowrap"><label for="tlpage">{#typolinks_dlg.page}</label></td>
             <td><select id="tlpage" name="tlpage" style="width: 200px" onchange="document.forms[0].tlfile.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createPageList(); ?></select></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="tlfile">{#typolinks_dlg.file}</label></td>
+            <td class="nowrap"><label for="tlfile">{#typolinks_dlg.file}</label></td>
             <td><select id="tlfile" name="tlfile" style="width: 200px" onchange="document.forms[0].tlpage.value='';document.forms[0].href.value=this.value;"><option value="">-</option><?php echo $objLib->createFileList(); ?></select></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
+            <td class="nowrap"><label for="href">{#typolinks_dlg.link_url}</label></td>
             <td><table border="0" cellspacing="0" cellpadding="0">
 				  <tr>
 					<td><input id="href" name="href" type="text" class="mceFocus" value="" style="width: 200px" onchange="LinkDialog.checkPrefix(this);" /></td>
@@ -88,7 +87,7 @@ $objLib = new typolib();
 				</table></td>
           </tr>
           <tr>
-            <td nowrap="nowrap"><label for="linktitle">{#typolinks_dlg.link_titlefield}</label></td>
+            <td class="nowrap"><label for="linktitle">{#typolinks_dlg.link_titlefield}</label></td>
             <td><input id="linktitle" name="linktitle" type="text" value="" style="width: 200px" /></td>
           </tr>
           <tr>
@@ -108,12 +107,8 @@ $objLib = new typolib();
 	</div>
 
 	<div class="mceActionPanel">
-		<div style="float: left">
-			<input type="submit" id="insert" name="insert" value="{#insert}" />
-		</div>
-		<div style="float: right">
-			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
-		</div>
+		<input type="submit" id="insert" name="insert" value="{#insert}" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
 	</div>
 </form>
 </body>

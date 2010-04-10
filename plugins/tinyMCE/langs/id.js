@@ -1,6 +1,6 @@
 tinyMCE.addI18n({id:{
 common:{
-edit_confirm:"Do you want to use the WYSIWYG mode for this textarea?",
+edit_confirm:"Gunakan mode WYSIWYG untuk textarea ini?",
 apply:"Apply",
 insert:"Insert",
 update:"Update",
@@ -9,56 +9,56 @@ close:"Close",
 browse:"Browse",
 class_name:"Class",
 not_set:"-- Not set --",
-clipboard_msg:"Copy/Cut/Paste is not available in Mozilla and Firefox.\nDo you want more information about this issue?",
-clipboard_no_support:"Currently not supported by your browser, use keyboard shortcuts instead.",
-popup_blocked:"Sorry, but we have noticed that your popup-blocker has disabled a window that provides application functionality. You will need to disable popup blocking on this site in order to fully utilize this tool.",
-invalid_data:"Error: Invalid values entered, these are marked in red.",
+clipboard_msg:"Copy/Cut/Paste tidak tersedia pada Mozilla dan Firefox.\nButuh info selengkapnya?",
+clipboard_no_support:"Tidak didukung Browser, gunakan shortcut dari keyboard.",
+popup_blocked:"Maaf, popup-blocker anda telah menonaktifkan jendela aplikasi yang menyediakan fungsionalitas. Nonaktifkan popup-blocker untuk sepenuhnya memanfaatkan alat ini.",
+invalid_data:"Error: nilai invalid, ditandai dengan dengan warna merah",
 more_colors:"More colors"
 },
 contextmenu:{
 align:"Alignment",
-left:"Left",
-center:"Center",
-right:"Right",
-full:"Full"
+left:"Kiri",
+center:"Tengah",
+right:"Kanan",
+full:"Penuh"
 },
 insertdatetime:{
 date_fmt:"%Y-%m-%d",
 time_fmt:"%H:%M:%S",
-insertdate_desc:"Insert date",
-inserttime_desc:"Insert time",
-months_long:"January,February,March,April,May,June,July,August,September,October,November,December",
-months_short:"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
-day_long:"Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
-day_short:"Sun,Mon,Tue,Wed,Thu,Fri,Sat,Sun"
+insertdate_desc:"sisipkan tanggal",
+inserttime_desc:"sisipkan waktu",
+months_long:"Januari,Februari,Maren,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember",
+months_short:"Jan,Feb,Mar,Apr,Mei,Jun,Jul,Ags,Sep,Okt,Nov,Des",
+day_long:"Minggu,Senin,Selasa,Rabu,Kamis,Jumat,Sabtu,Minggu",
+day_short:"Min,Sen,Sel,Rab,Kam,Jum,Sab,Min"
 },
 print:{
-print_desc:"Print"
+print_desc:"Cetak"
 },
 preview:{
 preview_desc:"Preview"
 },
 directionality:{
-ltr_desc:"Direction left to right",
-rtl_desc:"Direction right to left"
+ltr_desc:"Arah kiri ke kanan",
+rtl_desc:"Arah kanan ke kiri"
 },
 layer:{
-insertlayer_desc:"Insert new layer",
-forward_desc:"Move forward",
-backward_desc:"Move backward",
-absolute_desc:"Toggle absolute positioning",
-content:"New layer..."
+insertlayer_desc:"sisipkan layer Baru",
+forward_desc:"Pindah ke depan",
+backward_desc:"Pindah ke belakang",
+absolute_desc:"Beralih posisi absolut",
+content:"Layer baru..."
 },
 save:{
-save_desc:"Save",
-cancel_desc:"Cancel all changes"
+save_desc:"Simpan",
+cancel_desc:"Batalkan semua perubahan"
 },
 nonbreaking:{
-nonbreaking_desc:"Insert non-breaking space character"
+nonbreaking_desc:"sisipkan karakter non-breaking space"
 },
 iespell:{
-iespell_desc:"Run spell checking",
-download:"ieSpell not detected. Do you want to install it now?"
+iespell_desc:"Jalankan spell checking",
+download:"ieSpell tidak terdeteksi. Instal sekarang?"
 },
 advhr:{
 advhr_desc:"Horizontal rule"
@@ -67,60 +67,64 @@ emotions:{
 emotions_desc:"Emotions"
 },
 searchreplace:{
-search_desc:"Find",
-replace_desc:"Find/Replace"
+search_desc:"Cari",
+replace_desc:"Cari/Ganti"
 },
 advimage:{
-image_desc:"Insert/edit image"
+image_desc:"sisipkan/Ubah Gambar"
 },
 advlink:{
-link_desc:"Insert/edit link"
+link_desc:"Sisipkan/Ubah link"
 },
 xhtmlxtras:{
-cite_desc:"Citation",
-abbr_desc:"Abbreviation",
-acronym_desc:"Acronym",
-del_desc:"Deletion",
-ins_desc:"Insertion",
-attribs_desc:"Insert/Edit Attributes"
+cite_desc:"Kutipan",
+abbr_desc:"Singkatan/Kependekan Kata",
+acronym_desc:"Akronim",
+del_desc:"Penghapusan",
+ins_desc:"Penyisipan",
+attribs_desc:"Sisip/Ubah Atribut"
 },
 style:{
-desc:"Edit CSS Style"
+desc:"Ubah CSS Style"
 },
 paste:{
 paste_text_desc:"Paste as Plain Text",
 paste_word_desc:"Paste from Word",
-selectall_desc:"Select All"
+selectall_desc:"Select All",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
-text_title:"Use CTRL+V on your keyboard to paste the text into the window.",
+text_title:"Gunakan CTRL+V pada keyboard untuk paste.",
 text_linebreaks:"Keep linebreaks",
-word_title:"Use CTRL+V on your keyboard to paste the text into the window."
+word_title:"Gunakan CTRL+V pada keyboard untuk paste."
 },
 table:{
-desc:"Inserts a new table",
-row_before_desc:"Insert row before",
-row_after_desc:"Insert row after",
-delete_row_desc:"Delete row",
-col_before_desc:"Insert column before",
-col_after_desc:"Insert column after",
-delete_col_desc:"Remove column",
-split_cells_desc:"Split merged table cells",
-merge_cells_desc:"Merge table cells",
-row_desc:"Table row properties",
-cell_desc:"Table cell properties",
-props_desc:"Table properties",
-paste_row_before_desc:"Paste table row before",
-paste_row_after_desc:"Paste table row after",
-cut_row_desc:"Cut table row",
-copy_row_desc:"Copy table row",
-del:"Delete table",
+desc:"Sisipkan tabel baru",
+row_before_desc:"Sisipkan row sebelum",
+row_after_desc:"Sisipkan row sesudah",
+delete_row_desc:"Hapus row",
+col_before_desc:"Sisipkan column sebelum",
+col_after_desc:"Sisipkan column setelah",
+delete_col_desc:"Hapus column",
+split_cells_desc:"Pisahkan cell tabel yang di-merge",
+merge_cells_desc:"Merge cell tabel",
+row_desc:"Properti row tabel",
+cell_desc:"Properti cell tabel",
+props_desc:"Properti tabel",
+paste_row_before_desc:"Paste row tabel sebelum",
+paste_row_after_desc:"Paste row tabel sesudah",
+cut_row_desc:"Cut row tabel",
+copy_row_desc:"Copy row tabel",
+del:"Hapus Tabel",
 row:"Row",
 col:"Column",
 cell:"Cell"
 },
 autosave:{
-unload_msg:"The changes you made will be lost if you navigate away from this page."
+unload_msg:"Perubahan yang dilakukan akan hilang jika Anda pindah dari halaman ini.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Toggle fullscreen mode"
@@ -130,25 +134,37 @@ desc:"Insert / edit embedded media",
 edit:"Edit embedded media"
 },
 fullpage:{
-desc:"Document properties"
+desc:"Properti Dokumen"
 },
 template:{
-desc:"Insert predefined template content"
+desc:"Menyisipkan template standar isi"
 },
 visualchars:{
-desc:"Visual control characters on/off."
+desc:"Pengendalian visual karakter on/off"
 },
 spellchecker:{
 desc:"Toggle spellchecker",
-menu:"Spellchecker settings",
-ignore_word:"Ignore word",
-ignore_words:"Ignore all",
-langs:"Languages",
-wait:"Please wait...",
-sug:"Suggestions",
-no_sug:"No suggestions",
-no_mpell:"No misspellings found."
+menu:"Pengaturan Spellchecker ",
+ignore_word:"Abaikan kata",
+ignore_words:"Abaikan semua",
+langs:"Bahasa",
+wait:"Harap tunggu...",
+sug:"Saran",
+no_sug:"Tidak ada saran",
+no_mpell:"Tidak ada misspellings ditemukan."
 },
 pagebreak:{
-desc:"Insert page break."
+desc:"Sisipkan page break."
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

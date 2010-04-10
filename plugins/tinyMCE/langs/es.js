@@ -90,7 +90,9 @@ desc:"Editar Estilo CSS"
 paste:{
 paste_text_desc:"Pegar como texto plano",
 paste_word_desc:"Pegar desde Word",
-selectall_desc:"Elegir todo"
+selectall_desc:"Elegir todo",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Use CTRL+V en su teclado para pegar el texto en la ventana.",
@@ -120,7 +122,9 @@ col:"Columna",
 cell:"Celda"
 },
 autosave:{
-unload_msg:"Los cambios realizados se perder\u00E1n si sale de esta p\u00E1gina."
+unload_msg:"Los cambios realizados se perder\u00E1n si sale de esta p\u00E1gina.",
+restore_content:"Reestablecer contenido guardado autom\u00E1ticamente",
+warning_message:"Se reestablece en contenido guardado, perder\u00E1 todo el contenido que est\u00E1 actualmente en el editor.\n\nEst\u00E1 seguro de que quiere reestablecer el contenido guardado."
 },
 fullscreen:{
 desc:"Cambiar a modo Pantalla Completa"
@@ -130,7 +134,9 @@ desc:"Insertar/editar medio embebido",
 edit:"Editar medio embebido"
 },
 fullpage:{
-desc:"Propiedades del documento"
+desc:"Propiedades del documento",
+delta_width:"Ancho",
+delta_height:"Alto"
 },
 template:{
 desc:"Insertar contenido de plantilla predefinida"
@@ -151,4 +157,16 @@ no_mpell:"No se encontraron errores."
 },
 pagebreak:{
 desc:"Insertar fin de p\u00E1gina"
+},
+advlist:{
+types:"Tipo",
+def:"Preestablecido",
+lower_alpha:"Menos opaco",
+lower_greek:"Menos greek",
+lower_roman:"Menos roman",
+upper_alpha:"M\u00E1s opaco",
+upper_roman:"M\u00E1s roman",
+circle:"Circulo",
+disc:"Disc",
+square:"Cuadro"
 }}});

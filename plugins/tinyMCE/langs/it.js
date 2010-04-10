@@ -90,7 +90,9 @@ desc:"Modifica stile CSS"
 paste:{
 paste_text_desc:"Incolla come testo semplice",
 paste_word_desc:"Incolla da Word",
-selectall_desc:"Seleziona tutto"
+selectall_desc:"Seleziona tutto",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Premere CTRL+V sulla tastiera per incollare il testo nella finestra.",
@@ -120,7 +122,9 @@ col:"Colonna",
 cell:"Cella"
 },
 autosave:{
-unload_msg:"I cambiamenti effettuati saranno persi se si abbandona la pagina corrente."
+unload_msg:"I cambiamenti effettuati saranno persi se si abbandona la pagina corrente.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Attiva/disattiva modalit\u00E0 a tutto schermo"
@@ -151,4 +155,16 @@ no_mpell:"Nessun errore rilevato."
 },
 pagebreak:{
 desc:"Inserisci intterruzione di pagina."
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

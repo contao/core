@@ -9,7 +9,7 @@ close:"Fechar",
 browse:"Procurar",
 class_name:"Classe",
 not_set:"-- N/A --",
-clipboard_msg:"Copiar/cortar/colar n\u00E3o est\u00E1 dispon\u00EDvel no Mozilla e Firefox.\nDeseja mais informa\u00E7\u00F5es sobre este problema?",
+clipboard_msg:"Copiar/recortar/colar n\u00E3o est\u00E1 dispon\u00EDvel no Mozilla e Firefox.\nDeseja mais informa\u00E7\u00F5es sobre este problema?",
 clipboard_no_support:"O seu browser n\u00E3o suporta esta fun\u00E7\u00E3o, use os atalhos do teclado.",
 popup_blocked:"Detectamos que o seu bloqueador de popups bloqueou uma janela que \u00E9 essencial para a aplica\u00E7\u00E3o. Voc\u00EA precisa desativar o bloqueador de janelas de popups para utilizar esta ferramenta.",
 invalid_data:"Erro: Valores inv\u00E1lidos marcados em vermelho.",
@@ -90,7 +90,9 @@ desc:"Editar CSS"
 paste:{
 paste_text_desc:"Colar como texto simples",
 paste_word_desc:"Colar (copiado do WORD)",
-selectall_desc:"Selecionar tudo"
+selectall_desc:"Selecionar tudo",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Use CTRL+V para colar o texto na janela.",
@@ -112,7 +114,7 @@ cell_desc:"Propriedades das c\u00E9lulas",
 props_desc:"Propriedades da tabela",
 paste_row_before_desc:"Colar linha antes",
 paste_row_after_desc:"Colar linha depois",
-cut_row_desc:"Cortar linha",
+cut_row_desc:"Recortar linha",
 copy_row_desc:"Copiar linha",
 del:"Apagar tabela",
 row:"Linha",
@@ -120,7 +122,9 @@ col:"Coluna",
 cell:"C\u00E9lula"
 },
 autosave:{
-unload_msg:"As mudan\u00E7as efetuadas ser\u00E3o perdidas se sair desta p\u00E1gina."
+unload_msg:"As mudan\u00E7as efetuadas ser\u00E3o perdidas se sair desta p\u00E1gina.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Tela Inteira"
@@ -151,4 +155,16 @@ no_mpell:"N\u00E3o foram detectados erros de ortografia."
 },
 pagebreak:{
 desc:"Inserir quebra de p\u00E1gina."
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});

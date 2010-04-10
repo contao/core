@@ -9,11 +9,11 @@ close:"Zav\u0159\u00EDt",
 browse:"Proch\u00E1zet",
 class_name:"T\u0159\u00EDda",
 not_set:"- Nenastaveno -",
-clipboard_msg:"Funkce kop\u00EDrovat/vyjmout/vlo\u017Eit nejsou pou\u017Eiteln\u00E9 v Mozille a Firefoxu.\nChcete v\u00EDce informac\u00ED?",
-clipboard_no_support:"Tato funkce nen\u00ED va\u0161\u00EDm prohl\u00ED\u017Ee\u010Dem podporov\u00E1na. Pou\u017Eijte kl\u00E1vesov\u00E9 zkratky.",
-popup_blocked:"Blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, nutn\u00E9 pro funkci aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED vypn\u011Bte blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
-invalid_data:"Chyba: Vlo\u017Een\u00E1 chybn\u00E1 data jsou ozna\u010Dena \u010Derven\u011B.",
-more_colors:"V\u00EDce barev"
+clipboard_msg:"Funkce kop\u00EDrovat/vyjmout/vlo\u017Eit nejsou podporovan\u00E9 v prohl\u00ED\u017Ee\u010D\u00EDch Mozilla a Firefox.\nChcete v\u00EDce informac\u00ED o tomto probl\u00E9mu?",
+clipboard_no_support:"Tato funkce nen\u00ED va\u0161\u00EDm prohl\u00ED\u017Ee\u010Dem podporov\u00E1na. Pou\u017Eijte m\u00EDsto toho kl\u00E1vesov\u00E9 zkratky.",
+popup_blocked:"Omlouv\u00E1me se, ale blokov\u00E1n\u00ED vyskakovac\u00EDch oken neumo\u017Enilo otev\u0159\u00EDt okno, kter\u00E9 poskytuje funk\u010Dnost aplikace. Pro pln\u00E9 vyu\u017Eit\u00ED mo\u017Enost\u00ED aplikace mus\u00EDte vypnout blokov\u00E1n\u00ED vyskakovac\u00EDch oken pro tento web.",
+invalid_data:"Chyba: Byly zad\u00E1ny neplatn\u00E9 hodnoty a tyto byly ozna\u010Deny \u010Derven\u011B.",
+more_colors:"Dal\u0161\u00ED barvy"
 },
 contextmenu:{
 align:"Zarovn\u00E1n\u00ED",
@@ -46,7 +46,7 @@ layer:{
 insertlayer_desc:"Vlo\u017Eit novou vrstvu",
 forward_desc:"P\u0159esunout dop\u0159edu",
 backward_desc:"P\u0159esunout dozadu",
-absolute_desc:"P\u0159epnout absolutn\u00ED pozici",
+absolute_desc:"P\u0159epnout na absolutn\u00ED pozicov\u00E1n\u00ED",
 content:"Nov\u00E1 vrstva..."
 },
 save:{
@@ -58,7 +58,7 @@ nonbreaking_desc:"Vlo\u017Eit ned\u011Blitelnou mezeru"
 },
 iespell:{
 iespell_desc:"Spustit kontrolu pravopisu",
-download:"ieSpell nebyl detekov\u00E1n. Chcete ho nainstalovat?"
+download:"Slovn\u00EDk ieSpell nebyl detekov\u00E1n. Chcete ho nainstalovat?"
 },
 advhr:{
 advhr_desc:"Vodorovn\u00FD odd\u011Blova\u010D"
@@ -71,7 +71,8 @@ search_desc:"Naj\u00EDt",
 replace_desc:"Naj\u00EDt/nahradit"
 },
 advimage:{
-image_desc:"Vlo\u017Eit/upravit obr\u00E1zek"
+image_desc:"Vlo\u017Eit/upravit obr\u00E1zek",
+delta_width:"20"
 },
 advlink:{
 link_desc:"Vlo\u017Eit/upravit odkaz"
@@ -80,21 +81,24 @@ xhtmlxtras:{
 cite_desc:"Citace",
 abbr_desc:"Zkratka",
 acronym_desc:"Akronym",
-del_desc:"Vymaz\u00E1n\u00ED",
-ins_desc:"Vlo\u017Een\u00ED",
+del_desc:"Odstran\u011Bn\u00FD text",
+ins_desc:"P\u0159idan\u00FD text",
 attribs_desc:"Vlo\u017Eit/upravit atributy"
 },
 style:{
-desc:"Upravit CSS styl"
+desc:"Upravit CSS styl",
+delta_width:"25"
 },
 paste:{
-paste_text_desc:"Vlo\u017Eit prost\u00FD text",
+paste_text_desc:"Vlo\u017Eit jako prost\u00FD text",
 paste_word_desc:"Vlo\u017Eit z Wordu",
-selectall_desc:"Vybrat v\u0161e"
+selectall_desc:"Vybrat v\u0161e",
+plaintext_mode_sticky:"Funkce vlo\u017Eit je nyn\u00ED v re\u017Eimu prost\u00FD text. Op\u011Btovn\u00E9 kliknut\u00ED p\u0159epne tuto funkci zp\u011Bt do norm\u00E1ln\u00EDho re\u017Eimu. Po vlo\u017Een\u00ED \u010Dehokoli bude tato funkce vr\u00E1cena zp\u011Bt do norm\u00E1ln\u00EDho re\u017Eimu.",
+plaintext_mode:"Funkce vlo\u017Eit je nyn\u00ED v re\u017Eimu prost\u00FD text. Op\u011Btovn\u00E9 kliknut\u00ED p\u0159epne tuto funkci zp\u011Bt do norm\u00E1ln\u00EDho re\u017Eimu."
 },
 paste_dlg:{
 text_title:"Pou\u017Eijte CTRL+V pro vlo\u017Een\u00ED textu do okna.",
-text_linebreaks:"Zachovat \u0159\u00E1dkov\u00E1n\u00ED",
+text_linebreaks:"Zachovat zalamov\u00E1n\u00ED \u0159\u00E1dk\u016F",
 word_title:"Pou\u017Eijte CTRL+V pro vlo\u017Een\u00ED textu do okna."
 },
 table:{
@@ -118,20 +122,25 @@ del:"Odstranit tabulku",
 row:"\u0158\u00E1dek",
 col:"Sloupec",
 cell:"Bu\u0148ka",
-cellprops_delta_width:"50"
+cellprops_delta_width:"100",
+table_delta_width:"50"
 },
 autosave:{
-unload_msg:"Proveden\u00E9 zm\u011Bny mohou b\u00FDt ztraceny, jestli\u017Ee opust\u00EDte tuto str\u00E1nku."
+unload_msg:"Proveden\u00E9 zm\u011Bny mohou b\u00FDt ztraceny, jestli\u017Ee opust\u00EDte tuto str\u00E1nku.",
+restore_content:"Obnovit automaticky ulo\u017Een\u00FD obsah.",
+warning_message:"Pokud obnov\u00EDte ulo\u017Een\u00FD obsah, ztrat\u00EDte t\u00EDm ve\u0161ker\u00FD obsah, kter\u00FD je pr\u00E1v\u011B v okn\u011B editoru.\n\nOpravdu chcete obnovit ulo\u017Een\u00FD obsah?."
 },
 fullscreen:{
 desc:"P\u0159epnout na celostr\u00E1nkov\u00E9 zobrazen\u00ED"
 },
 media:{
 desc:"Vlo\u017Eit/upravit m\u00E9dia",
-edit:"Upravit m\u00E9dia"
+edit:"Upravit m\u00E9dia",
+delta_width:"130"
 },
 fullpage:{
-desc:"Vlastnosti dokumentu"
+desc:"Vlastnosti dokumentu",
+delta_width:"110"
 },
 template:{
 desc:"Vlo\u017Eit p\u0159eddefinovan\u00FD obsah ze \u0161ablony"
@@ -152,4 +161,16 @@ no_mpell:"Nebyly nalezeny \u017E\u00E1dn\u00E9 chyby."
 },
 pagebreak:{
 desc:"Vlo\u017Eit konec str\u00E1nky"
+},
+advlist:{
+types:"Typ",
+def:"V\u00FDchoz\u00ED",
+lower_alpha:"Mal\u00E1 p\u00EDsmena",
+lower_greek:"Mal\u00E1 \u0159eck\u00E1 p\u00EDsmena",
+lower_roman:"Mal\u00E9 \u0159\u00EDmsk\u00E9 \u010D\u00EDslice",
+upper_alpha:"Velk\u00E1 p\u00EDsmena",
+upper_roman:"Velk\u00E9 \u0159\u00EDmsk\u00E9 \u010D\u00EDslice",
+circle:"Kole\u010Dko",
+disc:"Punt\u00EDk",
+square:"\u010Ctvere\u010Dek"
 }}});

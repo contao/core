@@ -102,7 +102,9 @@ delta_width:"40"
 paste:{
 paste_text_desc:"\u012Ed\u0117ti kaip paprast\u0105 tekst\u0105",
 paste_word_desc:"\u012Ed\u0117ti i\u0161 Word",
-selectall_desc:"Visk\u0105 pa\u017Eym\u0117ti"
+selectall_desc:"Visk\u0105 pa\u017Eym\u0117ti",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"Naudokite CTRL+V tekstui \u012Fd\u0117ti \u012F \u0161\u012F lang\u0105.",
@@ -110,7 +112,7 @@ text_linebreaks:"Palikti eilu\u010Di\u0173 l\u016B\u017Eius",
 word_title:"Naudokite CTRL+V tekstui \u012Fd\u0117ti \u012F \u0161\u012F lang\u0105."
 },
 table:{
-desc:"\u012Eterpia nauj\u0105 lentel\u0119",
+desc:"\u012Eterpti/Redaguoti lentel\u0119",
 row_before_desc:"\u012Eterpti eilut\u0119 prie\u0161",
 row_after_desc:"\u012Eterpti eilut\u0119 po",
 delete_row_desc:"\u0160alinti eilut\u0119",
@@ -120,7 +122,7 @@ delete_col_desc:"\u0160alinti stulpel\u012F",
 split_cells_desc:"Skaidyti sulietus lentel\u0117s langelius",
 merge_cells_desc:"Sujungti lentel\u0117s langelius",
 row_desc:"Lentel\u0117s eilut\u0117s nustatymai",
-cell_desc:"Lentel\u0117s langeli\u0173 nustatymai",
+cell_desc:"Lentel\u0117s langelio nustatymai",
 props_desc:"Lentel\u0117s nustatymai",
 paste_row_before_desc:"\u012Ed\u0117ti lentel\u0117s eilut\u0119 prie\u0161",
 paste_row_after_desc:"\u012Ed\u0117ti lentel\u0117s eilut\u0119 po",
@@ -136,7 +138,9 @@ table_delta_width:"10",
 merge_cells_delta_width:"10"
 },
 autosave:{
-unload_msg:"Visi pakeitimai bus prarasti, jei i\u0161eisite i\u0161 \u0161io puslapio."
+unload_msg:"Visi pakeitimai bus prarasti, jei i\u0161eisite i\u0161 \u0161io puslapio.",
+restore_content:"Atstatyti automati\u0161kai i\u0161saugot\u0105 turin\u012F.",
+warning_message:"Jei atstatysite i\u0161saugot\u0105 turin\u012F, prarasite esam\u0105 turin\u012F redaktoriaus lange.\n\nAr tikrai norite atstatyti i\u0161saugot\u0105 turin\u012F?"
 },
 fullscreen:{
 desc:"Perjungti viso ekrano re\u017Eim\u0105"
@@ -169,4 +173,16 @@ no_mpell:"Klaid\u0173 nerasta."
 },
 pagebreak:{
 desc:"\u012Eterpti puslapio pabaigos \u017Eym\u0119."
+},
+advlist:{
+types:"Tipai",
+def:"Numatytasis",
+lower_alpha:"Ma\u017Eosiomis raid\u0117mis",
+lower_greek:"Ma\u017Eaisiais graik\u0173",
+lower_roman:"Ma\u017Eaisiais rom\u0117n\u0173",
+upper_alpha:"Did\u017Eiosiomis raid\u0117mis",
+upper_roman:"Did\u017Eiaisiais rom\u0117n\u0173",
+circle:"Apskritimas",
+disc:"Diskas",
+square:"Kvadratas"
 }}});

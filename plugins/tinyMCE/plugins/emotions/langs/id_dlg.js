@@ -1,5 +1,5 @@
 tinyMCE.addI18n('id.emotions_dlg',{
-title:"Insert emotion",
+title:"sisipkan emotion",
 desc:"Emotions",
 cool:"Cool",
 cry:"Cry",

@@ -28,7 +28,7 @@ time_fmt:"%H:%M:%S",
 insertdate_desc:"Datum einf\u00FCgen",
 inserttime_desc:"Zeit einf\u00FCgen",
 months_long:"Januar,Februar,M\u00E4rz,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember",
-months_short:"Jan,Feb,M\u00E4rz,Apr,Mai,Juni,Juli,Aug,Sept,Okt,Nov,Dez",
+months_short:"Jan,Feb,M\u00E4r,Apr,Mai,Juni,Juli,Aug,Sept,Okt,Nov,Dez",
 day_long:"Sonntag,Montag,Dienstag,Mittwoch,Donnerstag,Freitag,Samstag,Sonntag",
 day_short:"So,Mo,Di,Mi,Do,Fr,Sa,So"
 },
@@ -44,8 +44,8 @@ rtl_desc:"Schrift von rechts nach links"
 },
 layer:{
 insertlayer_desc:"Neue Ebene einf\u00FCgen",
-forward_desc:"Vor verschieben",
-backward_desc:"Zur\u00FCck verschieben",
+forward_desc:"Nach vorne holen",
+backward_desc:"Nach hinten legen",
 absolute_desc:"Absolute Positionierung",
 content:"Neue Ebene..."
 },
@@ -90,7 +90,9 @@ desc:"CSS-Styles bearbeiten"
 paste:{
 paste_text_desc:"Als normalen Text einf\u00FCgen",
 paste_word_desc:"Mit Formatierungen (aus Word) einf\u00FCgen",
-selectall_desc:"Alles ausw\u00E4hlen"
+selectall_desc:"Alles ausw\u00E4hlen",
+plaintext_mode_sticky:"Einf\u00FCgemodus ist nun \"Nur Text\". Erneut klicken (oder das Einf\u00FCgen aus der Zwischenablage) stellt den Normalmodus wieder her.",
+plaintext_mode:"Einf\u00FCgemodus ist nun \"Nur Text\". Erneut klicken stellt den Normalmodus wieder her."
 },
 paste_dlg:{
 text_title:"Dr\u00FCcken Sie auf Ihrer Tastatur Strg+V, um den Text einzuf\u00FCgen.",
@@ -121,7 +123,9 @@ cell:"Zelle",
 cellprops_delta_width:"150"
 },
 autosave:{
-unload_msg:"Ihre \u00C4nderungen werden verloren gehen, wenn Sie die Seite verlassen."
+unload_msg:"Ihre \u00C4nderungen werden verloren gehen, wenn Sie die Seite verlassen.",
+restore_content:"Automatisch gespeicherten Inhalt wiederherstellen.",
+warning_message:"Wenn Sie den Inhalt wiederherstellen, gehen die aktuellen Daten im Editor verloren.\n\nSind sie sicher, dass Sie den Inhalt wiederherstellen m\u00F6chten?"
 },
 fullscreen:{
 desc:"Vollbildschirm"
@@ -134,7 +138,7 @@ fullpage:{
 desc:"Dokument-Eigenschaften"
 },
 template:{
-desc:"Vorgefertigten Vorlageninhalt einf\u00FCgen"
+desc:"Inhalt aus Vorlage einf\u00FCgen"
 },
 visualchars:{
 desc:"Sichtbarkeit der Steuerzeichen an/aus"
@@ -152,4 +156,16 @@ no_mpell:"Keine Rechtschreibfehler gefunden."
 },
 pagebreak:{
 desc:"Seitenumbruch einf\u00FCgen"
+},
+advlist:{
+types:"Typen",
+def:"Standard",
+lower_alpha:"a. b. c.",
+lower_greek:"1. 2. 3.",
+lower_roman:"i. ii. iii.",
+upper_alpha:"A. B. C.",
+upper_roman:"I. II. III.",
+circle:"Kreis",
+disc:"Punkt",
+square:"Quadrat"
 }}});

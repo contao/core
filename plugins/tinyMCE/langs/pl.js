@@ -1,6 +1,6 @@
 tinyMCE.addI18n({pl:{
 common:{
-edit_confirm:"Czy chcesz u\u017Cy\u0107 trybu WYSIWYG dla tego pola formularza?",
+edit_confirm:"Czy chcesz usu trybu WYSIWYG dla tego pola formularza?",
 apply:"Zastosuj",
 insert:"Wstaw",
 update:"Aktualizuj",
@@ -20,7 +20,7 @@ align:"Wyr\u00F3wnanie",
 left:"Lewy",
 center:"\u015Arodkowy",
 right:"Prawy",
-full:"Wype\u0142niony"
+full:"Wyjustuj"
 },
 insertdatetime:{
 date_fmt:"%Y-%m-%d",
@@ -77,7 +77,7 @@ advlink:{
 link_desc:"Wstaw/edytuj link"
 },
 xhtmlxtras:{
-cite_desc:"Osoba cytowana",
+cite_desc:"Cytat",
 abbr_desc:"Skr\u00F3t",
 acronym_desc:"Akronim",
 del_desc:"Usuni\u0119cie",
@@ -90,7 +90,9 @@ desc:"Edytuj Style CSS"
 paste:{
 paste_text_desc:"Wklej jako zwyk\u0142y tekst",
 paste_word_desc:"Wklej z Worda",
-selectall_desc:"Zaznacz wszystko"
+selectall_desc:"Zaznacz wszystko",
+plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
+plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
 },
 paste_dlg:{
 text_title:"U\u017Cyj CTRL+V na swojej klawiaturze \u017Ceby wklei\u0107 tekst do okna.",
@@ -120,7 +122,9 @@ col:"Kolumna",
 cell:"Kom\u00F3rka"
 },
 autosave:{
-unload_msg:"Zmiany, kt\u00F3re zrobi\u0142e\u015B zostan\u0105 utracone je\u015Bli opu\u015Bcisz t\u0119 stron\u0119."
+unload_msg:"Zmiany, kt\u00F3re zrobi\u0142e\u015B zostan\u0105 utracone je\u015Bli opu\u015Bcisz t\u0119 stron\u0119.",
+restore_content:"Restore auto-saved content.",
+warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
 },
 fullscreen:{
 desc:"Prze\u0142\u0105cz tryb pe\u0142noekranowy"
@@ -151,4 +155,16 @@ no_mpell:"\u017Badnych brakuj\u0105cych nie znaleziono."
 },
 pagebreak:{
 desc:"Wstaw lini\u0119."
+},
+advlist:{
+types:"Types",
+def:"Default",
+lower_alpha:"Lower alpha",
+lower_greek:"Lower greek",
+lower_roman:"Lower roman",
+upper_alpha:"Upper alpha",
+upper_roman:"Upper roman",
+circle:"Circle",
+disc:"Disc",
+square:"Square"
 }}});
