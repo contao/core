@@ -691,7 +691,7 @@ abstract class Controller extends System
 			return $image;
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode), 0, 8) . '.' . $objFile->extension;
+		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
 		if (file_exists(TL_ROOT . '/' . $strCacheName))
