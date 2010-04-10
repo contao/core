@@ -161,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
 		),
 		'smtpPort' => array
 		(
@@ -169,21 +169,21 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
 		),
 		'smtpUser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'doNotShow'=>true, 'tl_class'=>'w50')
 		),
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'hideInput'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
 		)
 	)
 );
