@@ -3,7 +3,7 @@
  * $Id: editor_plugin_src.js 201 2007-02-12 15:56:56Z spocke $
  *
  * @author Moxiecode
- * @copyright Copyright © 2004-2007, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright ï¿½ 2004-2007, Moxiecode Systems AB, All rights reserved.
  */
 
 class GoogleSpell extends SpellChecker {
@@ -38,7 +38,9 @@ class GoogleSpell extends SpellChecker {
 		$matches = $this->_getMatches($lang, $word);
 
 		if (count($matches) > 0)
-			$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
+			// PATCH: do not utf8_encode() here
+			//$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
+			$sug = explode("\t", $this->_unhtmlentities($matches[0][4]));
 
 		// Remove empty
 		foreach ($sug as $item) {
