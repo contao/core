@@ -13791,6 +13791,7 @@ if (!class_exists('TCPDF', false)) {
 						}
 						if (($dom[$key]['value'] == 'pre') OR ($dom[$key]['value'] == 'tt')) {
 							$dom[$key]['fontname'] = $this->default_monospaced_font;
+							$dom[$key]['fontsize'] = PDF_FONT_SIZE_MONOSPACED; // PATCH
 						}
 						if (($dom[$key]['value']{0} == 'h') AND (intval($dom[$key]['value']{1}) > 0) AND (intval($dom[$key]['value']{1}) < 7)) {
 							$headsize = (4 - intval($dom[$key]['value']{1})) * 2;
