@@ -691,6 +691,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			foreach ($_FILES as $file)
 			{
 				// Romanize the filename
+				$file['name'] = strip_tags($file['name']);
 				$file['name'] = utf8_romanize($file['name']);
 				$file['name'] = str_replace('"', '', $file['name']);
 
@@ -1631,7 +1632,7 @@ window.addEvent(\'domready\', function()
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentEncoded) . '"><strong>'.basename($currentFolder).'</strong></a></div> <div class="tl_right">';
+			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentEncoded) . '"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
@@ -1700,11 +1701,11 @@ window.addEvent(\'domready\', function()
 			// No popup links for templates
 			if ($this->strTable == 'tl_templates')
 			{
-				$return .= $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</div> <div class="tl_right">';
+				$return .= $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</div> <div class="tl_right">';
 			}
 			else
 			{
-				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(basename($currentFile), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons
