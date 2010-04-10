@@ -260,7 +260,17 @@ class Comments extends Frontend
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
-			$insert = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
+			$insertId = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute()->insertId;
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($insertId, $arrSet);
+				}
+			}
 
 			// Notification
 			$objEmail = new Email();
@@ -279,7 +289,7 @@ class Comments extends Frontend
 									  $arrSet['name'] . ' (' . $arrSet['email'] . ')',
 									  $strComment,
 									  $this->Environment->base . $this->Environment->request,
-									  $this->Environment->base . 'typolight/main.php?do=comments&act=edit&id=' . $insert->insertId);
+									  $this->Environment->base . 'typolight/main.php?do=comments&act=edit&id=' . $insertId);
 
 			$objEmail->sendTo($arrNotifies);
 

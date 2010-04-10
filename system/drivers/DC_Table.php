@@ -2569,7 +2569,7 @@ window.addEvent(\'domready\', function()
 
 		$new_records = $this->Session->get('new_records');
 
-		// HOOK: addCustomLogic
+		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['reviseTable']) && is_array($GLOBALS['TL_HOOKS']['reviseTable']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['reviseTable'] as $callback)
