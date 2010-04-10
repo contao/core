@@ -63,7 +63,7 @@ tinyMCE.init({
   theme_advanced_font_sizes : "9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px",
   doctype : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">',
   document_base_url : "<?php echo $this->base; ?>",
-  entities : "160,nbsp,60,lt,62,gt",
+  entities : "160,nbsp,60,lt,62,gt,173,shy",
   cleanup_on_startup : true,
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,

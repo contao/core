@@ -1767,7 +1767,7 @@ abstract class Controller extends System
 	 */
 	protected function restoreBasicEntities($strBuffer)
 	{
-		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]'), array('&amp;', '&lt;', '&gt;', '&nbsp;'), $strBuffer);
+		return str_replace(array('[&]', '[lt]', '[gt]', '[nbsp]', '[-]'), array('&amp;', '&lt;', '&gt;', '&nbsp;', '&shy;'), $strBuffer);
 	}
 
 
