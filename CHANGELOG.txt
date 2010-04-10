@@ -4,6 +4,7 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.2 (2010--)
 --------------------------
+- Updated TCPDF to version 4.9.011 (#1802)
 - Updated TinyMCE to version 3.3.2 (#1711)
 - Updated MooTools More to version 1.2.4.4 (#1697)
 - Added: added the white Mediabox theme (#1637)
