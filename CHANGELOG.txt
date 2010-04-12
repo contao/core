@@ -46,6 +46,7 @@ Version 2.8.2 (2010--)
 - Fixed: regular users could not edit comments on unmounted pages (#1659)
 - Fixed: the ZipReader class failed to handle empty files (#1804)
 - Fixed: the Newsletter module did not embed images correctly (#1799)
+- Fixed: parameters passed to the file insert tag were cached by the Input object (#1818)
 - Fixed a possible request forgery vulnerability in the back end
 - Fixed some minor issues
 

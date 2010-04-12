@@ -1702,6 +1702,7 @@ abstract class Controller extends System
 				// Files from the templates directory
 				case 'file':
 					$arrGet = $_GET;
+					$this->Input->resetCache();
 					$strFile = $elements[1];
 
 					// Take arguments and add them to the $_GET array
@@ -1736,6 +1737,7 @@ abstract class Controller extends System
 					}
 
 					$_GET = $arrGet;
+					$this->Input->resetCache();
 					break;
 
 				// HOOK: pass unknown tags to callback functions

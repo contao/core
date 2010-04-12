@@ -269,6 +269,15 @@ class Input
 
 
 	/**
+	 * Reset the internal cache
+	 */
+	public function resetCache()
+	{
+		$this->arrCache = array();
+	}
+
+
+	/**
 	 * Strip slashes
 	 * @param  mixed
 	 * @return mixed
