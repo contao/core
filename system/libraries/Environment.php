@@ -367,7 +367,7 @@ class Environment
 			$strRequest = $this->script();
 		}
 
-		// Do not urlencode() here (thanks to Russ McRee)!
+		// Do not urldecode() here (thanks to Russ McRee)!
 		return $strRequest;
 	}
 
