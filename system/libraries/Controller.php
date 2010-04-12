@@ -1474,6 +1474,11 @@ abstract class Controller extends System
 					}
 					break;
 
+				// Closing link tag
+				case 'link_close':
+					$arrCache[$strTag] = '</a>';
+					break;
+
 				// Article teaser
 				case 'article_teaser':
 					$this->import('Database');
