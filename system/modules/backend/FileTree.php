@@ -86,7 +86,13 @@ class FileTree extends Widget
 			$this->blnSubmitInput = false;
 		}
 
-		// Check path
+		// Reset the field
+		elseif ($varInput == '')
+		{
+			return parent::validator($varInput);
+		}
+
+		// Check the path
 		elseif (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
 			$rgxp = '/^'. preg_quote($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], '/') .'\//i';
@@ -101,7 +107,7 @@ class FileTree extends Widget
 			}
 		}
 
-		// Check filemounts
+		// Check the filemounts
 		elseif (!$this->User->isAdmin)
 		{
 			foreach ((array) $varInput as $strFile)
