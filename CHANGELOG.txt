@@ -2,7 +2,7 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
-Version 2.8.2 (2010--)
+Version 2.8.2 (2010-04-13)
 --------------------------
 - Updated TCPDF to version 4.9.011 (#1802)
 - Updated TinyMCE to version 3.3.2 (#1711)
