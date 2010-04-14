@@ -1,0 +1,9 @@
+/* TYPOlight Open Source CMS :: Copyright (C) 2005-2010 Leo Feyer :: LGPL license */
+body { color:#666966; background:none !important; background-color:#ffffff !important; }
+ol { margin-left:3em; }
+ol li { list-style:decimal outside; }
+ul { margin-left:2.5em; }
+ul li { list-style:disc outside; }
+blockquote { margin:0 2em; }
+table { border-collapse:separate; border-spacing:2px; }
+th,td { padding:1px; color:#666966; }

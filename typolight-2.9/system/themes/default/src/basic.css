@@ -1,0 +1,327 @@
+/**
+ * TYPOlight Open Source CMS
+ * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.typolight.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Body */
+html,body
+{
+	margin:0;
+	padding:0;
+}
+img
+{
+	border:0;
+}
+
+/* Font family */
+a,b,body,cite,div,em,h1,h2,h3,h4,h5,h6,i,label,li,ol,p,strong,td,th,u,ul
+{
+	font-family:Verdana, sans-serif;
+}
+fieldset,form,input,optgroup,select,textarea
+{
+	font-family:"Trebuchet MS", Verdana, sans-serif;
+}
+
+/* Font size and color */
+a,body,div,label,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea
+{
+	font-size:11px;
+	color:#666966;
+}
+h1,h2,h3,h4,h5,h6
+{
+	font-size:12px;
+	color:#666966;
+}
+.tl_small
+{
+	font-size:9px;
+	color:#a3a3a3;
+}
+.tl_gray
+{
+	color:#a3a3a3;
+}
+.tl_green
+{
+	color:#8ab858;
+}
+.tl_red
+{
+	color:#c55;
+}
+.tl_blue
+{
+	color:#5c9ac9;
+}
+.tl_orange
+{
+	color:#f90;
+}
+span.mandatory
+{
+	color:#f00;
+}
+
+/* Basic elements */
+a
+{
+	color:#666966;
+	text-decoration:none;
+}
+a:hover, a:focus, a:active
+{
+	color:#8ab858;
+}
+hr
+{
+	height:1px;
+	margin:18px 0;
+	border:0;
+	background-color:#ddd;
+	color:#ddd;
+}
+p
+{
+	margin:0 0 12px 0;
+	padding:0;
+}
+pre
+{
+	margin:0;
+	padding:0;
+}
+
+/* Sortable lists */
+ul.sortable, ul.sortable li
+{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+
+/* Invisible elements */
+.clear
+{
+	clear:both;
+	height:0.1px;
+	line-height:0.1px;
+	font-size:0.1px;
+}
+.block,.tl_content
+{
+	overflow:hidden;
+}
+.invisible
+{
+	width:0;
+	height:0;
+	left:-1000px;
+	top:-1000px;
+	position:absolute;
+	overflow:hidden;
+	display:inline;
+}
+.fancy-hide
+{
+	display:none;
+}
+
+/* Forms */
+form
+{
+	margin:0;
+	padding:0;
+}
+optgroup
+{
+	padding-top:3px;
+	padding-bottom:3px;
+	font-style:normal;
+	background-color:#fff;
+}
+
+/* Text fields */
+.tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea
+{
+	margin:1px 0;
+}
+.tl_text
+{
+	width:314px;
+}
+.tl_text_2
+{
+	width:152px;
+}
+.tl_text_3
+{
+	width:99px;
+}
+.tl_text_4
+{
+	width:72px;
+}
+.tl_textarea
+{
+	width:682px;
+	height:240px;
+}
+.tl_text_unit
+{
+	margin:1px 0 1px 0;
+	width:250px;
+}
+.tl_text_trbl
+{
+	margin:1px 0 1px 0;
+	width:55px;
+}
+.tl_text_interval
+{
+	margin:1px 0 1px 0;
+	width:152px;
+}
+.tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval
+{
+	border:1px solid #b8b8b8;
+	padding:2px;
+}
+.tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus
+{
+	background-color:#ebfdd7;
+}
+pre,.tl_textarea.monospace
+{
+	font-family:"Andale Mono", monospace;
+	font-size:12px;
+}
+.tl_textarea.monospace:focus
+{
+	background:none;
+}
+
+/* Select menus */
+.tl_select,.tl_mselect,.tl_select_column
+{
+	margin:1px 0 1px 0;
+}
+.tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect
+{
+	width:320px;
+}
+.tl_select_column
+{
+	width:140px;
+}
+.tl_select_unit
+{
+	margin:1px 0;
+	width:60px;
+}
+.tl_select_interval
+{
+	margin:1px 0 1px 0;
+	width:158px;
+}
+.tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval
+{
+	border:1px solid #b8b8b8;
+	padding:1px;
+}
+
+/* Checkboxes */
+.tl_checkbox
+{
+	margin:1px 3px 0 0;
+	vertical-align:bottom;
+}
+.tl_tree_checkbox
+{
+	margin:0 3px 0 0;
+}
+.tl_checkbox_single_container
+{
+	margin:16px 0 1px 0;
+}
+.tl_checkbox_single_container label
+{
+	font-weight:bold;
+}
+
+/* Grouped checkboxes */
+.checkbox_toggler
+{
+	font-weight:bold;
+}
+.checkbox_toggler_first
+{
+	font-weight:bold;
+	margin-top:3px;
+}
+.checkbox_toggler img,.checkbox_toggler_first img
+{
+	vertical-align:top;
+	position:relative;
+	top:-2px;
+	margin-right:3px;
+}
+.checkbox_options
+{
+	margin:0 0 6px 21px;
+}
+
+/* Radio buttons */
+.tl_radio
+{
+	margin:1px 3px 0 0;
+	vertical-align:bottom;
+}
+.tl_tree_radio
+{
+	margin:0 3px 1px 0;
+	vertical-align:middle;
+}
+
+/* Radio table */
+.tl_radio_table
+{
+	margin:2px 0 1px 0;
+}
+.tl_radio_table td
+{
+	padding:0 24px 1px 0;
+}
+.tl_radio_table img,.tl_radio_table input
+{
+	vertical-align:middle;
+}
+
+/* Upload fields */
+.tl_upload_field
+{
+	margin:1px 0 1px 0;
+}

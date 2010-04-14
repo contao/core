@@ -1,0 +1,4 @@
+campus_overview.jpg = Music Academy campus (main bulding) || Campus overview
+campus_library.jpg = Music Academy campus library || Campus library
+campus_hall.jpg = Music Academy Lincoln Hall || Lincoln Hall
+campus_building.jpg = Historical building on Music Academy campus || Historical building

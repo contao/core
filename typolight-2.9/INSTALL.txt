@@ -1,0 +1,56 @@
+=========================
+TYPOlight Open Source CMS
+=========================
+
+
+1. What is TYPOlight?
+=====================
+
+TYPOlight is an Open Source Content Management Framework developed by Leo Feyer
+and distributed under the LGPL license (see GPL.txt and LGPL.txt for more
+information). Its open architecture allows everybody to extend the system to fit
+his needs. TYPOlight specializes in accessible websites and is accessbile
+itself (front end and back end), rendering valid XHTML pages.
+
+
+2. System requirements
+======================
+
+- Apache Webserver (recommended) or IIS
+- PHP version 5.2 or greater
+- MySQL version 4.1 or greater
+- PHP extension GDLib
+- PHP extension mcrypt (optional)
+
+
+3. Installation
+===============
+
+a. Download a TYPOlight package from http://www.typolight.org/download.html
+   and unpack it on your webserver.
+
+b. Open your web browser and go to the TYPOlight install tool at
+   http://www.yourdomain.com/typolight/install.php.
+
+c. The initial password is "typolight".
+
+d. Follow the instructions of the install tool.
+
+   
+4. How to access the back end (administration area)
+===================================================
+
+Open your web browser and add "/typolight" to the URL of your website. Here are
+a few examples:
+
+- http://www.yourdomain.com/typolight
+- http://www.yourdomain.com/typolight/typolight
+- http://www.yourdomain.com/typolight-2.7.5/typolight
+
+
+5. Troubleshooting
+==================
+
+If you are having problems installing or using TYPOlight, please visit the
+project website at http://www.typolight.org/support.html and read the user's
+guide or post your question in the TYPOlight forum.
