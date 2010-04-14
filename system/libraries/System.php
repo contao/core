@@ -600,13 +600,13 @@ abstract class System
 		// Path
 		if (isset($arrUrl['path']))
 		{
-			$arrUrl['path'] = $this->urlEncode($arrUrl['path']);
+			$arrUrl['path'] = $arrUrl['path'];
 		}
 
 		// Query
 		if (isset($arrUrl['query']))
 		{
-			$arrUrl['query'] = '?' . $arrUrl['query']; // urlEncode would also encode (=)
+			$arrUrl['query'] = '?' . $arrUrl['query'];
 		}
 
 		// Anchor

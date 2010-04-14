@@ -4,7 +4,7 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.3 (2010--)
 --------------------------
--
+- Fixed: function idnaEncode() encoded the URL multiple times (#1829)
 
 Version 2.8.2 (2010-04-13)
 --------------------------
