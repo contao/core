@@ -54,7 +54,7 @@ var Typobox = {
 		c = c.replace(/\}\}.*$/i, '');
 		c = c.replace(/\[&amp;\]|\[&\]|&amp;|&/gi, '?');
 
-		var split = c.split('?')
+		var split = c.split('?');
 		f.src.value = split[0];
 
 		for (i=1; i<split.length; i++) {
