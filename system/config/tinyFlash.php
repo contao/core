@@ -36,7 +36,7 @@
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 tinyMCE_GZ.init({
-  plugins : "autoresize,autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
+  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   themes : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
@@ -67,7 +67,7 @@ tinyMCE.init({
   save_on_tinymce_forms : true,
   save_callback : "TinyCallback.cleanHTML",
   onchange_callback : "TinyCallback.getScrollOffset",
-  plugins : "autoresize,autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
+  plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   extended_valid_elements : "b/strong,i/em",
   content_css : "<?php echo TL_PATH; ?>/basic.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
