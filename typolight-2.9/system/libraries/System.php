@@ -271,21 +271,31 @@ abstract class System
 	/**
 	 * Return the current referer URL and optionally encode ampersands
 	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	protected function getReferer($blnEncodeAmpersands=false)
+	protected function getReferer($blnEncodeAmpersands=false, $strTable='')
 	{
-		$session = $this->Session->getData();
 		$key = ($this->Environment->script == 'typolight/files.php') ? 'fileReferer' : 'referer';
+		$session = $this->Session->get($key);
 
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session[$key]['current'] != $this->Environment->requestUri) ? $session[$key]['current'] : $session[$key]['last']));
+		// Use a specific referer
+		if ($strTable != '' && TL_MODE == 'BE' && isset($session[$strTable]))
+		{
+			$session['current'] = $session[$strTable];
+		}
+
+		// Get the default referer
+		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != $this->Environment->requestUri) ? $session['current'] : $session['last']));
 		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
 
+		// Fallback to the generic referer in the front end
 		if (!strlen($return) && TL_MODE == 'FE')
 		{
 			$return = $this->Environment->httpReferer;
 		}
 
+		// Fallback to the current URL if there is no referer
 		if (!strlen($return))
 		{
 			$return = (TL_MODE == 'BE') ? 'typolight/main.php' : $this->Environment->url;
