@@ -280,7 +280,7 @@ abstract class System
 		$session = $this->Session->get($key);
 
 		// Use a specific referer
-		if ($strTable != '' && TL_MODE == 'BE' && isset($session[$strTable]))
+		if ($strTable != '' && isset($session[$strTable]) && $this->Input->get('act') != 'select')
 		{
 			$session['current'] = $session[$strTable];
 		}
