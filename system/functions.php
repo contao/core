@@ -255,11 +255,25 @@ function scan($strFolder)
 
 /**
  * Convert special characters except ampersands to HTML entities
+ * 
+ * The difference between specialchars($str, true) and htmlspecialchars() is
+ * that ampersands will never be double converted.
+ * 
+ *   specialchars('<you &amp; me>', true) -> &lt;you &amp; me&gt;
+ *   htmlspecialchars('<you &amp; me>') -> &lt;you &amp;amp; me&gt;
+ * 
+ * The second argument has been added in TYPOlight 2.8.3.
  * @param string
+ * @param boolean
  * @return string
  */
-function specialchars($strString)
+function specialchars($strString, $blnAmpersands=false)
 {
+	if ($blnAmpersands)
+	{
+		$strString = ampersand($strString);
+	}
+
 	$arrFind = array('"', "'", '<', '>');
 	$arrReplace = array('&#34;', '&#39;', '&lt;', '&gt;');
 
