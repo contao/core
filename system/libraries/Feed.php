@@ -108,8 +108,8 @@ class Feed extends System
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 		$xml .= '  <channel>' . "\n";
-		$xml .= '    <title>' . specialchars($this->title) . '</title>' . "\n";
-		$xml .= '    <description>' . specialchars($this->description) . '</description>' . "\n";
+		$xml .= '    <title>' . specialchars($this->title, true) . '</title>' . "\n";
+		$xml .= '    <description>' . specialchars($this->description, true) . '</description>' . "\n";
 		$xml .= '    <link>' . specialchars($this->link) . '</link>' . "\n";
 		$xml .= '    <language>' . $this->language . '</language>' . "\n";
 		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
@@ -119,7 +119,7 @@ class Feed extends System
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '    <item>' . "\n";
-			$xml .= '      <title>' . specialchars($objItem->title) . '</title>' . "\n";
+			$xml .= '      <title>' . specialchars($objItem->title, true) . '</title>' . "\n";
 			$xml .= '      <description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>' . "\n";
 			$xml .= '      <link>' . specialchars($objItem->link) . '</link>' . "\n";
 			$xml .= '      <pubDate>' . date('r', $objItem->published) . '</pubDate>' . "\n";
@@ -152,8 +152,8 @@ class Feed extends System
 	{
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">' . "\n";
-		$xml .= '  <title>' . specialchars($this->title) . '</title>' . "\n";
-		$xml .= '  <subtitle>' . specialchars($this->description) . '</subtitle>' . "\n";
+		$xml .= '  <title>' . specialchars($this->title, true) . '</title>' . "\n";
+		$xml .= '  <subtitle>' . specialchars($this->description, true) . '</subtitle>' . "\n";
 		$xml .= '  <link rel="alternate" href="' . specialchars($this->link) . '" />' . "\n";
 		$xml .= '  <id>' . specialchars($this->link) . '</id>' . "\n";
 		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
@@ -163,7 +163,7 @@ class Feed extends System
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '  <entry>' . "\n";
-			$xml .= '    <title>' . specialchars($objItem->title) . '</title>' . "\n";
+			$xml .= '    <title>' . specialchars($objItem->title, true) . '</title>' . "\n";
 			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>' . "\n";
 			$xml .= '    <link rel="alternate" href="' . specialchars($objItem->link) . '" />' . "\n";
 			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
