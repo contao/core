@@ -4,7 +4,9 @@ TYPOlight Open Source CMS Changelog
 
 Version 2.8.3 (2010--)
 --------------------------
+- Removed the TinyMCE autoresize plugin
 - Fixed: function idnaEncode() encoded the URL multiple times (#1829)
+- Fixed: insert tags were not removed in the page description (#1856)
 
 Version 2.8.2 (2010-04-13)
 --------------------------
