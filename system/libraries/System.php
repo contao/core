@@ -341,6 +341,12 @@ abstract class System
 			}
 		}
 
+		// Handle single quotes in the deleteConfirm message
+		if ($strName == 'default')
+		{
+			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
+		}
+
 		@include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
