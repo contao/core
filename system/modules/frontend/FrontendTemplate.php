@@ -84,7 +84,10 @@ class FrontendTemplate extends Template
 				}
 			}
 
-			$strUrl .= implode('&', $arrChunks);
+			if (count($arrChunks) > 0)
+			{
+				$strUrl .= '&amp;' . implode('&amp;', $arrChunks);
+			}
 		}
 
 		// Rebuild URL to eliminate duplicate parameters
