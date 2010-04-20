@@ -944,7 +944,7 @@ abstract class Controller extends System
 		$objArticle = new ModuleArticle($objArticle);
 		$strArticle = $this->replaceInsertTags($objArticle->generate());
 		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
-		$strArticle = $this->convertRelativeUrls($strArticle);
+		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
 
 		// Remove form elements and JavaScript links
 		$arrSearch = array
@@ -1914,16 +1914,18 @@ abstract class Controller extends System
 	 * Convert relative URLs to absolute URLs
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	protected function convertRelativeUrls($strContent, $strBase=false)
+	protected function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
 	{
-		if (!$strBase)
+		if ($strBase == '')
 		{
 			$strBase = $this->Environment->base;
 		}
 
-		$arrUrls = preg_split('/((href|src)="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$search = $blnHrefOnly ? 'href' : 'href|src';
+		$arrUrls = preg_split('/(('.$search.')="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
 		$strContent = '';
 
 		for($i=0; $i<count($arrUrls); $i=$i+4)
