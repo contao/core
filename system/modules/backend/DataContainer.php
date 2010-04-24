@@ -185,16 +185,16 @@ class DataContainer extends Backend
 		}
 
 		// Add table import wizard
-		if ($this->strTable == 'tl_content' && $this->strField == 'tableitems')
+		elseif ($arrData['inputType'] == 'tableWizard')
 		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG'][$this->strTable]['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG'][$this->strTable]['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 			$xlabel .= ' ' . $this->generateImage('demagnify.gif', 'Demagnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', 'Magnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
 		}
 
 		// Add list import wizard
-		if ($this->strTable == 'tl_content' && $this->strField == 'listitems')
+		elseif ($arrData['inputType'] == 'listWizard')
 		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG'][$this->strTable]['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG'][$this->strTable]['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Decrypt the value if it is encrypted
