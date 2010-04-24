@@ -1707,6 +1707,7 @@ abstract class Controller extends System
 				// Files from the templates directory
 				case 'file':
 					$arrGet = $_GET;
+					$this->import('Input');
 					$this->Input->resetCache();
 					$strFile = $elements[1];
 

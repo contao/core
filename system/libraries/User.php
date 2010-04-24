@@ -388,8 +388,8 @@ abstract class User extends Model
 		session_destroy();
 		session_write_close();
 
-		// Reset the PHPSESSID cookie
-		setcookie('PHPSESSID', session_id(), ($time - 86400), '/');
+		// Reset the session cookie
+		setcookie(session_name(), session_id(), ($time - 86400), '/');
 
 		// Remove login status for cache
 		$_SESSION['TL_USER_LOGGED_IN'] = false;
