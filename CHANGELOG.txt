@@ -12,6 +12,7 @@ Version 2.8.3 (2010--)
 - Fixed: image paths were converted to absolute URLs during PDF export (#1843)
 - Fixed: search index URLs were incorrect when alias usage is disabled (#1864)
 - Fixed: automatically deactivate invalid e-mail addresses while sending newsletters
+- Fixed: skipFirst had no effect on news lists without pagination (#1872)
 - Fixed some minor issues
 
 Version 2.8.2 (2010-04-13)
