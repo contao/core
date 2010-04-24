@@ -412,6 +412,11 @@ class Date extends System
 			$intDay = 1;
 		}
 
+		if ($intYear == '')
+		{
+			$intYear = 1970;
+		}
+
 		$this->intTstamp =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
 	}
 }
