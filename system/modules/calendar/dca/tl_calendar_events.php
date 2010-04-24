@@ -851,6 +851,10 @@ class tl_calendar_events extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_calendar_events', $intId);
+
+		// Update the RSS feed (for some reason it does not work without sleep(1))
+		sleep(1);
+		$this->generateFeed();
 	}
 }
 

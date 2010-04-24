@@ -741,6 +741,10 @@ class tl_news extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_news', $intId);
+
+		// Update the RSS feed (for some reason it does not work without sleep(1))
+		sleep(1);
+		$this->generateFeed();
 	}
 }
 
