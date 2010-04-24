@@ -111,6 +111,16 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Return the template data as array
+	 * @return array
+	 */
+	public function getData()
+	{
+		return $this->arrData;
+	}
+
+
+	/**
 	 * Print all template variables to the screen
 	 */
 	public function showTemplateVars()
