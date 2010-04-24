@@ -368,7 +368,15 @@ class Newsletter extends Backend
 			$objEmail->imageDir = TL_ROOT . '/';
 		}
 
-		$objEmail->sendTo($arrRecipient['email']);
+		// Deactivate invalid addresses
+		try
+		{
+			$objEmail->sendTo($arrRecipient['email']);
+		}
+		catch (Swift_RfcComplianceException $e)
+		{
+			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
+		}
 
 		// Rejected recipients
 		if (count($objEmail->failures))
