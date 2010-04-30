@@ -15,6 +15,7 @@ Version 2.8.3 (2010--)
 - Fixed: skipFirst had no effect on news lists without pagination (#1872)
 - Fixed: the ModuleWizard and TableWizard were dependent on tl_content (#1883)
 - Fixed: the XML news/calendar feeds were not updated if modified via Ajax (#1833)
+- Fixed: CSV import failed if the Safe Mode Hack was enabled (#1908)
 - Fixed some minor issues
 
 Version 2.8.2 (2010-04-13)

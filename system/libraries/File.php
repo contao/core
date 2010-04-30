@@ -208,7 +208,7 @@ class File extends System
 				case 'handle':
 					if (!is_resource($this->resFile))
 					{
-						$this->resFile = $this->Files->fopen($this->strFile, 'rb');
+						$this->resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
 					}
 					return $this->resFile;
 					break;
