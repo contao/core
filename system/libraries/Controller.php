@@ -930,7 +930,7 @@ abstract class Controller extends System
 				'@(<div[^>]+block[^>]+>)@',
 				'@[\n\r\t]@',
 				'@<br /><div class="mod_article@',
-				'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]+)"@'
+				'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
 			);
 
 			$arrReplace = array
