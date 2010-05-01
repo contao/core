@@ -139,6 +139,7 @@ div.calendar {
 		color: #7cab49; /* PATCH */
 		cursor: pointer;
 	}
+	div.calendar td.today, /* PATCH */
 	div.calendar td.hilite {
 		background: url("../media/calendar-hilite.gif");
 	}

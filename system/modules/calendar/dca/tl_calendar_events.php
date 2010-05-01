@@ -183,14 +183,14 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'tl_class'=>'w50')
 		),
 		'endTime' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'tl_class'=>'w50')
 		),
 		'startDate' => array
 		(
@@ -205,7 +205,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'endDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
-			'default'                 => time(),
 			'exclude'                 => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',

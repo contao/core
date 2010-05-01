@@ -196,7 +196,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadPath']   = 'tl_files';
-$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,css,html,htm,fla,flv,swf,txt';
+$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,css,html,htm,fla,flv,swf,txt,ico';
 $GLOBALS['TL_CONFIG']['maxFileSize']  = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']   = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']  = 600;
