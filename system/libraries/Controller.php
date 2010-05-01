@@ -950,8 +950,7 @@ abstract class Controller extends System
 		$arrSearch = array
 		(
 			'@<form.*</form>@Us',
-			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us',
-			'@pdf=[0-9]*(&|&amp;)?@i'
+			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us'
 		);
 
 		$strArticle = preg_replace($arrSearch, '', $strArticle);
@@ -966,25 +965,28 @@ abstract class Controller extends System
 			}
 		}
 
+		// Handle line breaks in preformatted text
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+
 		// Default PDF export using TCPDF
 		$arrSearch = array
 		(
-			'@(<pre.*</pre>)@Use',
 			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
-			'@(<img[^>]+>)@e',
+			'@(<img[^>]+>)@',
 			'@(<div[^>]+block[^>]+>)@',
 			'@[\n\r\t]+@',
-			'@<br /><div class="mod_article@'
+			'@<br /><div class="mod_article@',
+			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
 		);
 
 		$arrReplace = array
 		(
-			'str_replace("\n", "<br />", "\\1")',
 			'<u>$1</u>',
-			'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
+			'<br />$1',
 			'<br />$1',
 			' ',
-			'<div class="mod_article'
+			'<div class="mod_article',
+			'href="$1$4"'
 		);
 
 		$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
