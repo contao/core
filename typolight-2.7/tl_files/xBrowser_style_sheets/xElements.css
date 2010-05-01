@@ -1,0 +1,90 @@
+/**
+ * Style sheet xElements
+ * Copyright (C) 2005 Leo Feyer, licensed under LGPL
+ */
+
+
+/**
+ * Text
+ */
+.ce_text
+{
+	line-height:1.5;
+}
+
+
+/**
+ * Listing
+ */
+.ce_list ul
+{
+	margin:0px;
+	padding:0px;
+}
+
+.ce_list li
+{
+	margin:0px 0px 0px 22px;
+	padding:0px;
+	line-height:1.4;
+}
+
+* html .ce_list li
+{
+	margin:0px 0px 0px 26px;
+}
+
+*:first-child+html .ce_list li
+{
+	margin:0px 0px 0px 26px;
+}
+
+
+/**
+ * Table
+ */
+.ce_table table
+{
+	border-left:1px solid #cccccc;
+}
+
+.ce_table td
+{
+	padding:2px 8px;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+.ce_table th
+{
+	padding:2px 8px;
+	background-color:#e6e6e6;
+	border-top:1px solid #cccccc;
+	border-right:1px solid #cccccc;
+	border-bottom:1px solid #cccccc;
+}
+
+
+/**
+ * Image gallery
+ */
+.ce_gallery table
+{
+	width:100%;
+}
+
+.ce_gallery td
+{
+	text-align:center;
+	vertical-align:middle;
+}
+
+
+/**
+ * Download
+ */
+html>body .mime_icon
+{
+	top:-1px;
+	position:relative;
+}

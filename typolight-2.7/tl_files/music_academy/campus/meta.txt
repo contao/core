@@ -1,0 +1,4 @@
+campus_overview.jpg = Music Academy campus (main bulding) | http://www.typolight.org | Campus overview
+campus_library.jpg = Music Academy campus library | http://www.typolight.org | Campus library
+campus_hall.jpg = Music Academy Lincoln Hall || Lincoln Hall
+campus_building.jpg = Historical building on Music Academy campus || Historical building

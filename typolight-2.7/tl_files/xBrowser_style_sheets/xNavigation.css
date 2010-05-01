@@ -1,0 +1,150 @@
+/**
+ * Style sheet xNavigation
+ * Copyright (C) 2005 Leo Feyer, licensed under LGPL
+ */
+
+
+/**
+ * Container
+ */
+.mod_navigation
+{
+	width:200px;
+	top:43px;
+	position:absolute;
+}
+
+
+/**
+ * First level
+ */
+.mod_navigation ul
+{
+	margin:0px 5px;
+	padding:0px;
+	border-bottom:1px solid #c6ad8d;
+	list-style-type:none;
+}
+
+.mod_navigation li
+{
+	margin:0px;
+	padding:5px 0px;
+	border-top:1px solid #c6ad8d;
+	list-style-type:none;
+}
+
+* html .mod_navigation ul,
+* html .mod_navigation li
+{
+	height:1px;
+}
+
+*:first-child+html .mod_navigation .parent
+{
+	height:3px;
+}
+
+.mod_navigation p
+{
+	margin:0px;
+	padding:0px;
+}
+
+.mod_navigation a,
+.mod_navigation li,
+.mod_navigation p
+{
+	font-weight:bold;
+	font-size:13px;
+	color:#000000;
+}
+
+
+/**
+ * Second level
+ */
+.mod_navigation .submenu
+{
+	margin:-2px 0px 0px 8px;
+	padding:0px;
+	border-top:0px;
+}
+
+.mod_navigation .level_2
+{
+	padding-bottom:4px;
+	border-bottom:0px;
+}
+
+.mod_navigation .level_2 li
+{
+	padding:0px 0px 4px 0px;
+	border-top:0px;
+}
+
+.mod_navigation .level_2 a,
+.mod_navigation .level_2 li,
+.mod_navigation .level_2 p
+{
+	font-weight:normal;
+	font-size:11px;
+}
+
+
+/**
+ * Horizontal menu
+ */
+.mod_navigationMain ul
+{
+  margin:0px;
+  padding:0px;
+}
+
+.mod_navigationMain li
+{
+  width:133px;
+  margin:0px;
+  padding:0px;
+  text-align:center;
+  list-style-type:none;
+  float:left;
+}
+
+.mod_navigationMain a,
+.mod_navigationMain p
+{
+  font-weight:bold;
+  font-size:11px;
+  color:#ffffff;
+}
+
+.mod_navigationMain a
+{
+  height:30px;
+  display:block;
+  margin:0px;
+  padding:5px 0px 0px 0px;
+  text-align:center;
+  background-color:#cc0000;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:11px;
+  color:#ffffff;
+}
+
+.mod_navigationMain a:hover
+{
+  background-color:#b30000;
+  text-decoration:none;
+  color:#ffffff;
+}
+
+.mod_navigationMain p
+{
+  height:30px;
+  margin:0px;
+  padding:5px 0px 0px 0px;
+  background-color:#b30000;
+  text-align:center;
+}

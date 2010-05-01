@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /plugins/
+Disallow: /system/
+Disallow: /templates/
+Disallow: /typolight/
+Disallow: /CHANGELOG.txt
+Disallow: /INSTALL.txt
+Disallow: /LICENSE.txt
+Disallow: /cron.php
+Disallow: /flash.php
