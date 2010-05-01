@@ -1,6 +1,0 @@
-/* Mootools table sorting script by Leo Feyer, Copyright 2007-2009 (LGPL) */
-table.sortable th { background-image:url("../media/default.gif"); background-repeat:no-repeat; background-position:center right; }
-table.sortable th a.pointer { display:block; margin-right:9px; cursor:pointer; }
-table.sortable th.unsortable { background-image:none; }
-table.sortable th.asc { background-image:url("../media/asc.gif"); }
-table.sortable th.desc { background-image:url("../media/desc.gif"); }

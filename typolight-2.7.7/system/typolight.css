@@ -1,3 +1,0 @@
-/* TYPOlight webCMS :: Copyright (C) 2005-2009 Leo Feyer :: LGPL license */
-body{margin:0;padding:0;font-size:100.01%;text-align:left;position:relative;}select,input,textarea{font-size:99%;}form{margin:0;padding:0;}img{border:0;}#left{float:left;}#right{float:right;}#main{width:auto;position:relative;}.inside{position:relative;text-align:left;}.block{overflow:hidden;}.clear,#clear{height:0.1px;font-size:0.1px;line-height:0.1px;clear:both;}
-.invisible{width:0px;height:0px;left:-1000px;top:-1000px;position:absolute;overflow:hidden;display:inline;}.custom{display:block;text-align:left;}.custom:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
