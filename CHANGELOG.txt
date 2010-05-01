@@ -2,6 +2,14 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
+Version 2.7.7 (2010-05-01)
+--------------------------
+- Consolidated security update
+
+Version 2.7.6 (2009-12-19)
+--------------------------
+- Fixed TYPOlight install tool vulnerability
+
 Version 2.7.5 (2009-10-04)
 --------------------------
 - Fixed issue with newsletter subscriptions not being activated (#1036)

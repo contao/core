@@ -376,6 +376,17 @@ function nl2br_pre($str)
 
 
 /**
+ * Replace line breaks with <br /> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", "<br />", $matches[0]);
+}
+
+
+/**
  * Compare two file names using a case insensitive "natural order" algorithm
  * @param string
  * @param string
