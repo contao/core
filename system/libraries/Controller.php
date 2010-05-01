@@ -873,7 +873,7 @@ abstract class Controller extends System
 
 		// Remove form elements
 		$strArticle = preg_replace('/<form.*<\/form>/Us', '', $strArticle);
-		$strArticle = preg_replace('/\?pdf=[0-9]*/i', '', $strArticle);
+		$strArticle = preg_replace('/href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"/', 'href="$1$4"', $strArticle);
 
 		// Use DOMPDF plugin
 		if ($GLOBALS['TL_CONFIG']['useDompdf'])

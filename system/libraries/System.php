@@ -268,7 +268,8 @@ abstract class System
 			$return = (TL_MODE == 'BE') ? 'typolight/main.php' : $this->Environment->url;
 		}
 
-		return ampersand(urldecode($return), $blnEncodeAmpersands);
+		// Do not urldecode here!
+		return ampersand($return, $blnEncodeAmpersands);
 	}
 
 

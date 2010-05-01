@@ -88,6 +88,9 @@ class FtpCheck extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
+			$_SESSION['TL_INSTALL_AUTH'] = '';
+			$_SESSION['TL_INSTALL_EXPIRE'] = 0;
+
 			$password =  sha1($this->Input->post('password', true));
 
 			if (strlen($password) && $password != 'da39a3ee5e6b4b0d3255bfef95601890afd80709')
@@ -95,7 +98,10 @@ class FtpCheck extends Controller
 				// Set cookie
 				if ($password == $GLOBALS['TL_CONFIG']['installPassword'])
 				{
-					$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
+					$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+					$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . $this->Environment->ip . session_id());
+
+					$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
 
 					$this->reload();
@@ -109,14 +115,20 @@ class FtpCheck extends Controller
 		}
 
 		// Check cookie
-		if (!$this->Input->cookie('TL_INSTALL_AUTH'))
+		if (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
 
 		// Renew cookie
-		$this->setCookie('TL_INSTALL_AUTH', md5($this->Environment->ip.session_id()), (time()+300), $GLOBALS['TL_CONFIG']['websitePath']);
+		else
+		{
+			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . $this->Environment->ip . session_id());
+
+			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+		}
 
 
 		/**
