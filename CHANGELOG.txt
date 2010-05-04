@@ -5,6 +5,7 @@ TYPOlight Open Source CMS Changelog
 Version 2.8.4 (2010--)
 --------------------------
 - Fixed: corrected the doctype in the mail_default template (#1916)
+- Fixed: idnaEncodeEmail() did not correctly handle empty strings (#1894)
 
 Version 2.8.3 (2010-05-01)
 --------------------------
