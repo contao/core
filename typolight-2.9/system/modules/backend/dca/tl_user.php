@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -129,8 +131,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{account_legend},disable,start,stop',
 		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
 		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
-		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
+		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
+		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,showHelp,thumbnails,useRTE,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
 	),
 
 	// Fields
@@ -260,6 +262,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
 		),
+		'themes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options'                 => array('css', 'modules', 'layout'),
+			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
+			'eval'                    => array('multiple'=>true)
+		),
 		'pagemounts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pagemounts'],
@@ -364,7 +375,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_user extends Backend
@@ -403,7 +414,7 @@ class tl_user extends Backend
 				if ($this->Input->get('id') == $this->User->id)
 				{
 					$this->log('Attempt to delete own account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// no break;
 
@@ -418,7 +429,7 @@ class tl_user extends Backend
 				if ($objUser->admin && $this->Input->get('act') != '')
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' administrator account ID "'.$this->Input->get('id').'"', 'tl_user checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -528,7 +539,7 @@ class tl_user extends Backend
 			$this->Database->prepare("UPDATE tl_session SET pid=? WHERE pid=?")
 						   ->execute($this->Input->get('id'), $this->User->id);
 
-			$this->redirect('typolight/main.php');
+			$this->redirect('contao/main.php');
 		}
 
 		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ';
@@ -784,7 +795,7 @@ class tl_user extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user ID "'.$intId.'"', 'tl_user toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_user', $intId);

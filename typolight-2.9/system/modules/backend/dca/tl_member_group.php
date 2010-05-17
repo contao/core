@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -48,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 			'mode'                    => 1,
 			'fields'                  => array('name'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,filter,limit',
+			'panelLayout'             => 'filter,search,limit',
 		),
 		'label' => array
 		(
@@ -171,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_member_group extends Backend
@@ -252,7 +254,7 @@ class tl_member_group extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member_group::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate member group ID "'.$intId.'"', 'tl_member_group toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_member_group', $intId);

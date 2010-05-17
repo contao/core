@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title>TYPOlight Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
+<title>Contao Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/install.css" media="screen" />
@@ -13,13 +13,13 @@
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
 <script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
 <script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
-<script type="text/javascript" src="typolight/typolight.js"></script>
+<script type="text/javascript" src="contao/contao.js"></script>
 <script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
 </head>
 <body>
 
 <div id="header">
-<h1>TYPOlight Open Source CMS <?php echo VERSION; ?></h1>
+<h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
 </div>
 
 <div id="container">
@@ -992,6 +992,21 @@ Library.
   </div>
 </div>
 </form>
+<?php elseif ($this->is29Update): ?>
+
+<h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+
+<p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+<p><?php echo $GLOBALS['TL_LANG']['tl_install']['update29']; ?></p>
+
+<form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+<div class="tl_formbody_submit">
+  <input type="hidden" name="FORM_SUBMIT" value="tl_29update" />
+  <div class="tl_submit_container">
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();" />
+  </div>
+</div>
+</form>
 <?php elseif ($this->dbConnection): ?>
 
 <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></h3>
@@ -1102,7 +1117,7 @@ Library.
 <p><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][1]; ?></p>
 
 <?php endif; endif; endif; endif; endif; ?>
-<p id="go_to_login"><a href="typolight/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
+<p id="go_to_login"><a href="contao/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>
 </div>

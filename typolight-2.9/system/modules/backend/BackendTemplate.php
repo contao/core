@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle back end templates.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class BackendTemplate extends Template
@@ -71,7 +73,7 @@ class BackendTemplate extends Template
 			$this->base = $this->Environment->base;
 			$this->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
 			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
-
+			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 			$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $GLOBALS['TL_RTE']['type']);
 
 			if (!file_exists($strFile))
@@ -79,12 +81,14 @@ class BackendTemplate extends Template
 				throw new Exception(sprintf('Cannot find rich text editor configuration file "%s.php"', $GLOBALS['TL_RTE']['type']));
 			}
 
-			$this->language = 'en';
-
 			// Fallback to English if the user language is not supported
 			if (file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js'))
 			{
 				$this->language = $GLOBALS['TL_LANGUAGE'];
+			}
+			else
+			{
+				$this->language = 'en';
 			}
 
 			ob_start();

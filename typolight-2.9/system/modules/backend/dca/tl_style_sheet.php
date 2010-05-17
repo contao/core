@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -37,11 +39,13 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
+		'ptable'                      => 'tl_theme',
 		'ctable'                      => array('tl_style'),
 		'switchToEdit'                => true,
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
+			array('tl_style_sheet', 'checkPermission'),
 			array('tl_style_sheet', 'updateStyleSheet')
 		)
 	),
@@ -51,15 +55,12 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'flag'                    => 1,
 			'panelLayout'             => 'filter;search,limit',
-		),
-		'label' => array
-		(
-			'fields'                  => array('name', 'media'),
-			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>'
+			'headerFields'            => array('name', 'author', 'tstamp'),
+			'child_record_callback'   => array('tl_style_sheet', 'listStyleSheet'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -98,8 +99,15 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['copy'],
-				'href'                => 'act=copy',
+				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();"'
 			),
 			'delete' => array
 			(
@@ -132,6 +140,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'search'                  => true,
+			'flag'                    => 1,
 			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
 		),
 		'cc' => array
@@ -155,7 +164,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'css')
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'css', 'class'=>'mandatory')
 		)
 	)
 );
@@ -166,7 +175,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_style_sheet extends Backend
@@ -183,6 +192,24 @@ class tl_style_sheet extends Backend
 
 
 	/**
+	 * Check permissions to edit the table
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		if (!$this->User->hasAccess('css', 'themes'))
+		{
+			$this->log('Not enough permissions to access the style sheets module', 'tl_style_sheets checkPermission', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+	}
+	
+
+	/**
 	 * Update style sheet
 	 * @param object
 	 */
@@ -195,6 +222,24 @@ class tl_style_sheet extends Backend
 
 		$this->import('StyleSheets');
 		$this->StyleSheets->updateStyleSheet($dc->id);
+	}
+
+
+	/**
+	 * List a style sheet
+	 * @param array
+	 * @return string
+	 */
+	public function listStyleSheet($row)
+	{
+		$media = deserialize($row['media']);
+
+		if (!is_array($media) || count($media) < 1)
+		{
+			return '<div style="float:left;">'. $row['name'] ."</div>\n";
+		}
+
+		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. implode(', ', $media) .']</span>' . "</div>\n";
 	}
 
 

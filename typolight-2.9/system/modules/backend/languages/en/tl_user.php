@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -45,6 +47,7 @@ $GLOBALS['TL_LANG']['tl_user']['group']      = array('Use group settings only', 
 $GLOBALS['TL_LANG']['tl_user']['extend']     = array('Extend group settings', 'the group permissions are extended by individual ones.');
 $GLOBALS['TL_LANG']['tl_user']['custom']     = array('Use individual settings only', 'only individual permissions are applied.');
 $GLOBALS['TL_LANG']['tl_user']['modules']    = array('Back end modules', 'Here you can grant access to one or more back end modules.');
+$GLOBALS['TL_LANG']['tl_user']['themes']     = array('Theme modules', 'Here you can grant access to the theme modules.');
 $GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Here you can grant access to one or more pages (subpages are included automatically).');
 $GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Allowed page types', 'Here you can select the page types you want to allow.');
 $GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Here you can grant access to one or more folders (subfolders will be included automatically).');

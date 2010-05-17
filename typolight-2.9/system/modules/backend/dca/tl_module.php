@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -37,7 +39,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'ptable'                      => 'tl_theme',
+		'enableVersioning'            => true,
+		'onload_callback' => array
+		(
+			array('tl_module', 'checkPermission')
+		)
 	),
 
 	// List
@@ -45,15 +52,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'flag'                    => 1,
-			'panelLayout'             => 'filter;search,limit',
-		),
-		'label' => array
-		(
-			'fields'                  => array('name', 'type'),
-			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>'
+			'panelLayout'             => 'filter;sort,search,limit',
+			'headerFields'            => array('name', 'author', 'tstamp'),
+			'child_record_callback'   => array('tl_module', 'listModule'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -76,8 +80,16 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_module']['copy'],
-				'href'                => 'act=copy',
-				'icon'                => 'copy.gif'
+				'href'                => 'act=paste&amp;mode=copy',
+				'icon'                => 'copy.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_module']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();"'
 			),
 			'delete' => array
 			(
@@ -108,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'booknav'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden,rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'articlenav'                  => '{title_legend},name,headline,type;{config_legend},loadFirst;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},includeRoot,showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'login'                       => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'login'                       => '{title_legend},name,headline,type;{config_legend},autologin;{redirect_legend},jumpTo,redirectBack;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'personalData'                => '{title_legend},name,headline,type;{config_legend},editable;{redirect_legend},jumpTo;{template_legend:hide},memberTpl,tableless;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -135,9 +147,11 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['name'],
 			'exclude'                 => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
 		'headline' => array
 		(
@@ -153,6 +167,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['type'],
 			'default'                 => 'navigation',
 			'exclude'                 => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_module', 'getModules'),
@@ -235,6 +251,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>64, 'rgxp'=>'extnd', 'tl_class'=>'w50')
+		),
+		'autologin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['autologin'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox'
 		),
 		'jumpTo' => array
 		(
@@ -529,7 +551,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_module extends Backend
@@ -542,6 +564,24 @@ class tl_module extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to edit the table
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		if (!$this->User->hasAccess('modules', 'themes'))
+		{
+			$this->log('Not enough permissions to access the modules module', 'tl_module checkPermission', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 	}
 
 
@@ -611,6 +651,17 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * List a front end module
+	 * @param array
+	 * @return string
+	 */
+	public function listModule($row)
+	{
+		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. $GLOBALS['TL_LANG']['FMD'][$row['type']][0] .']</span>' . "</div>\n";
 	}
 }
 

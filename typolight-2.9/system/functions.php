@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -179,7 +181,7 @@ function __exception($e)
 
 
 /**
- * Show a special TYPOlight "what to do in case of an error" message
+ * Show a special Contao "what to do in case of an error" message
  */
 function show_help_message()
 {
@@ -255,11 +257,25 @@ function scan($strFolder)
 
 /**
  * Convert special characters except ampersands to HTML entities
+ * 
+ * The difference between specialchars($str, true) and htmlspecialchars() is
+ * that ampersands will never be double converted.
+ * 
+ *   specialchars('<you &amp; me>', true) -> &lt;you &amp; me&gt;
+ *   htmlspecialchars('<you &amp; me>') -> &lt;you &amp;amp; me&gt;
+ * 
+ * The second argument has been added in Contao 2.8.3.
  * @param string
+ * @param boolean
  * @return string
  */
-function specialchars($strString)
+function specialchars($strString, $blnAmpersands=false)
 {
+	if ($blnAmpersands)
+	{
+		$strString = ampersand($strString);
+	}
+
 	$arrFind = array('"', "'", '<', '>');
 	$arrReplace = array('&#34;', '&#39;', '&lt;', '&gt;');
 
@@ -398,6 +414,17 @@ function nl2br_pre($str)
 	}
 
 	return $str;
+}
+
+
+/**
+ * Replace line breaks with <br /> tags (to be used with preg_replace_callback)
+ * @param array
+ * @return string
+ */
+function nl2br_callback($matches)
+{
+	return str_replace("\n", "<br />", $matches[0]);
 }
 
 

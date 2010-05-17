@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle data container arrays.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class DataContainer extends Backend
@@ -161,7 +163,7 @@ class DataContainer extends Backend
 		if ($arrData['exclude'])
 		{
 			$this->log('Field "'.$this->strField.'" ('.$this->strTable.') was excluded from being edited', 'DataContainer row()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$xlabel = '';
@@ -175,26 +177,26 @@ class DataContainer extends Backend
 		// Add help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="typolight/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="Help wizard" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="Help wizard" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
 		// Add popup file manager
 		if ($arrData['inputType'] == 'fileTree')
 		{
-			$xlabel .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add table import wizard
-		if ($this->strTable == 'tl_content' && $this->strField == 'tableitems')
+		elseif ($arrData['inputType'] == 'tableWizard')
 		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG'][$this->strTable]['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG'][$this->strTable]['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 			$xlabel .= ' ' . $this->generateImage('demagnify.gif', 'Demagnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', 'Magnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
 		}
 
 		// Add list import wizard
-		if ($this->strTable == 'tl_content' && $this->strField == 'listitems')
+		elseif ($arrData['inputType'] == 'listWizard')
 		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['tl_content']['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG'][$this->strTable]['importList'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG'][$this->strTable]['importList'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Decrypt the value if it is encrypted
@@ -480,7 +482,7 @@ class DataContainer extends Backend
 			}
 		}
 
-		return $return;
+		return trim($return);
 	}
 
 

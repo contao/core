@@ -1,4 +1,4 @@
--- TYPOlight Repository :: Database setup file
+-- Contao Repository :: Database setup file
 --
 -- Copyright (C) 2008 by Peter Koch, IBK Software AG.
 -- For license see accompaning file LICENSE.txt
@@ -8,10 +8,10 @@
 -- **********************************************************
 -- *      ! ! !   I M P O R T A N T  N O T E   ! ! !        *
 -- *                                                        *
--- * Do not import this file manually! Use the TYPOlight    *
+-- * Do not import this file manually! Use the Contao       *
 -- * install tool to create and maintain database tables:   *
 -- * - Point your browser to                                *
--- *   http://www.yourdomain.com/typolight/install.php      *
+-- *   http://www.yourdomain.com/contao/install.php         *
 -- * - Enter the installation password and click "Login"    *
 -- * - Scroll down and click button "Update Database"       *
 -- **********************************************************

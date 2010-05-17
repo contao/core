@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to display a list of extensions
+ * Contao Repository :: Template to display a list of extensions
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010

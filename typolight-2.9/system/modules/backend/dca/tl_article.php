@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -221,7 +223,10 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['printable'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'options'                 => array('print', 'pdf', 'facebook', 'twitter'),
+			'eval'                    => array('multiple'=>true),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
 		),
 		'cssID' => array
 		(
@@ -267,7 +272,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_article extends Backend
@@ -421,7 +426,7 @@ class tl_article extends Backend
 					if ($objParent->numRows && $objParent->type == 'root')
 					{
 						$this->log('Attempt to insert an article into website root page '.$this->Input->get('pid'), 'tl_article checkPermission()', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 
@@ -473,7 +478,7 @@ class tl_article extends Backend
 		// Redirect if there is an error
 		if ($error)
 		{
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 	}
 
@@ -726,7 +731,7 @@ class tl_article extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_article::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish article ID "'.$intId.'"', 'tl_article toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_article', $intId);

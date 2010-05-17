@@ -1,6 +1,6 @@
 
 <div id="tl_buttons">
-<a href="typolight/main.php?do=tasks" class="header_back" title="<?php echo $this->goBack; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $this->goBack; ?></a>
+<a href="contao/main.php?do=tasks" class="header_back" title="<?php echo $this->goBack; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $this->goBack; ?></a>
 </div>
 
 <h2 class="sub_headline"><?php echo $this->headline; ?></h2>

@@ -8,9 +8,8 @@ div.error,p.error{margin:0;padding:2px 0 0;font-size:9px;color:#ff0000;}
 .mod_article .more{display:inline;}
 .mod_breadcrumb{margin-bottom:24px;padding:5px 3px 7px;background-color:#ece4d9;}
 .ce_gallery .caption{color:#999999;}
-.mod_article .pdf_link{margin-bottom:-14px;text-align:right;}
-.mod_article .pdf_link a{position:relative;padding:1px;background-color:#bbbbbb;text-decoration:none;color:#ffffff;}
-.mod_article .pdf_link a:hover{background-color:#dddddd;text-decoration:none;color:#ffffff;}
+.mod_article .pdf_link{margin-bottom:-16px;text-align:right;}
+.mod_article .pdf_link a{padding-right:1px;padding-left:1px;}
 .mod_lostPassword{margin:24px;}
 .mod_lostPassword td{padding-right:6px;padding-bottom:3px;}
 .mod_lostPassword .text,.mod_lostPassword .password{width:210px;}
@@ -34,6 +33,8 @@ div.error,p.error{margin:0;padding:2px 0 0;font-size:9px;color:#ff0000;}
 .accordion div{padding:6px 0 8px 15px;line-height:16px;}
 .mod_login{margin:0 5px;padding:5px;background-color:#ece4d9;}
 .mod_login label{display:block;margin:4px 0 1px;}
+.mod_login .checkbox_container{margin-top:3px;}
+.mod_login .checkbox_container label{display:inline;}
 .mod_login .submit_container{margin-top:8px;margin-bottom:4px;}
 #request_password{margin:0 5px;padding:0 5px 10px 6px;background-color:#ece4d9;}
 #request_password a{font-size:10px;color:#999999;}

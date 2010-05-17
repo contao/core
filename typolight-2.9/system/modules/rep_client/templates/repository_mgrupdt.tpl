@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to update the database
+ * Contao Repository :: Template to update the database
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010

@@ -1,6 +1,6 @@
 tinyMCE.addI18n('lv.typolinks_dlg',{
-page:"TYPOlight lapas",
-file:"TYPOlight datnes",
+page:"Contao lapas",
+file:"Contao datnes",
 link_title:"Ievietot/Redi\u0123\u0113t saiti",
 link_url:"Saites URL",
 link_target:"M\u0113r\u0137is",

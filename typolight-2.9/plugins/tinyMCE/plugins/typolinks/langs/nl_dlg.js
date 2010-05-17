@@ -1,6 +1,6 @@
 tinyMCE.addI18n('nl.typolinks_dlg',{
-page:"TYPOlight pagina's",
-file:"TYPOlight bestanden",
+page:"Contao pagina's",
+file:"Contao bestanden",
 link_title:"Voeg in/verander link",
 link_url:"Link URL",
 link_target:"Target",

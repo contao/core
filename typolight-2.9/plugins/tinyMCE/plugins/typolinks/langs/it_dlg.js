@@ -1,6 +1,6 @@
 tinyMCE.addI18n('it.typolinks_dlg',{
-page:"Pagine TYPOlight",
-file:"File TYPOlight",
+page:"Pagine Contao",
+file:"File Contao",
 link_title:"Inserisci/modifica link",
 link_url:"Link URL",
 link_target:"Destinazione",

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide default methods that are required in all models and controllers.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 abstract class System
@@ -276,7 +278,7 @@ abstract class System
 	 */
 	protected function getReferer($blnEncodeAmpersands=false, $strTable='')
 	{
-		$key = ($this->Environment->script == 'typolight/files.php') ? 'fileReferer' : 'referer';
+		$key = ($this->Environment->script == 'contao/files.php') ? 'fileReferer' : 'referer';
 		$session = $this->Session->get($key);
 
 		// Use a specific referer
@@ -298,7 +300,7 @@ abstract class System
 		// Fallback to the current URL if there is no referer
 		if (!strlen($return))
 		{
-			$return = (TL_MODE == 'BE') ? 'typolight/main.php' : $this->Environment->url;
+			$return = (TL_MODE == 'BE') ? 'contao/main.php' : $this->Environment->url;
 		}
 
 		// Do not urldecode here!
@@ -349,6 +351,12 @@ abstract class System
 				$this->import($callback[0]);
 				$this->$callback[0]->$callback[1]($strName, $strLanguage);
 			}
+		}
+
+		// Handle single quotes in the deleteConfirm message
+		if ($strName == 'default')
+		{
+			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
 		}
 
 		@include(TL_ROOT . '/system/config/langconfig.php');
@@ -610,13 +618,13 @@ abstract class System
 		// Path
 		if (isset($arrUrl['path']))
 		{
-			$arrUrl['path'] = $this->urlEncode($arrUrl['path']);
+			$arrUrl['path'] = $arrUrl['path'];
 		}
 
 		// Query
 		if (isset($arrUrl['query']))
 		{
-			$arrUrl['query'] = '?' . $arrUrl['query']; // urlEncode would also encode (=)
+			$arrUrl['query'] = '?' . $arrUrl['query'];
 		}
 
 		// Anchor

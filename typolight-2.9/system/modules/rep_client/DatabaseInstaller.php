@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Create database update statements
+ * Contao Repository :: Create database update statements
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -40,7 +42,7 @@
  * This is a wrapper of the original generator for database update commands in install.php.
  *
  * The private functions generateSqlForm(), compileCommands(), getFromFile() and getFromDb()
- * are exact copies from install.php of TYPOlight 2.6.0, and may therefore easy get replaced 
+ * are exact copies from install.php of Contao 2.6.0, and may therefore easy get replaced 
  * by updated versions of future releases.
  *
  * The wrapper itself is makeSqlForm() that posp-processes the html code for the repository.

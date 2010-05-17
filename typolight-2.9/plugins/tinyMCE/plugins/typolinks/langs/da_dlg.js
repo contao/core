@@ -1,6 +1,6 @@
 tinyMCE.addI18n('da.typolinks_dlg',{
-page:"TYPOlight sider",
-file:"TYPOlight filer",
+page:"Contao sider",
+file:"Contao filer",
 link_title:"Tilføj/redigér link",
 link_url:"Link URL",
 link_target:"Åben link...",

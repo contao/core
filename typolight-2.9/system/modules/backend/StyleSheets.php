@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle style sheets.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class StyleSheets extends Backend
@@ -549,7 +551,7 @@ class StyleSheets extends Backend
 
 				$objFile = new File($strCssFile);
 
-				// Check file extension
+				// Check the file extension
 				if ($objFile->extension != 'css')
 				{
 					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
@@ -558,30 +560,14 @@ class StyleSheets extends Backend
 
 				$strFile = $objFile->getContent();
 				$strFile = str_replace("\r", '', $strFile);
-				$strSource = preg_replace('/\.css$/i', '', basename($strCssFile));
+				$strName = preg_replace('/\.css$/i', '', basename($strCssFile));
+				$strName = $this->checkStyleSheetName($strName);
 
-				$objStyleSheet = $this->Database->prepare("SELECT * FROM tl_style_sheet WHERE name=?")
-												->limit(1)
-												->execute($strSource);
+				// Create the new style sheet
+				$objStyleSheet = $this->Database->prepare("INSERT INTO tl_style_sheet (pid, tstamp, name, media) VALUES (?, ?, ?, ?)")
+												->execute($this->Input->get('id'), time(), $strName, array('all'));
 
-				// Update style sheet
-				if ($objStyleSheet->numRows)
-				{
-					$this->Database->prepare("DELETE FROM tl_style WHERE pid=?")
-								   ->execute($objStyleSheet->id);
-
-					$insertId = $objStyleSheet->id;
-				}
-
-				// Create a new style sheet
-				else
-				{
-					$objStyleSheet = $this->Database->prepare("INSERT INTO tl_style_sheet (tstamp, name, media) VALUES (?, ?, ?)")
-													->execute(time(), preg_replace('/\.css$/i', '', basename($strCssFile)), array('all'));
-
-					$insertId = $objStyleSheet->insertId;
-				}
-
+				$insertId = $objStyleSheet->insertId;
 				$intSorting = 0;
 				$strComment = '';
 				$strCategory = '';
@@ -649,6 +635,16 @@ class StyleSheets extends Backend
 
 				// Write style sheet
 				$this->updateStyleSheet($insertId);
+
+				// Notify the user
+				if ($strName . '.css' != basename($strCssFile))
+				{
+					$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css');
+				}
+				else
+				{
+					$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css');
+				}
 			}
 
 			// Redirect
@@ -671,7 +667,7 @@ class StyleSheets extends Backend
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import" />
 
 <div class="tl_tbox block">
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1].'</p>' : '').'
 </div>
 
@@ -680,11 +676,35 @@ class StyleSheets extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_style_sheet']['import'][0]).'" onclick="return confirm(\''. $GLOBALS['TL_LANG']['ERROR']['css_exists'] . '\');" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_style_sheet']['import'][0]).'" />
 </div>
 
 </div>
 </form>';
+	}
+
+
+	/**
+	 * Check the name of an imported file
+	 * @param string
+	 * @return string
+	 */
+	public function checkStyleSheetName($strName)
+	{
+		$objStyleSheet = Database::getInstance()->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
+												->limit(1)
+												->execute($strName);
+
+		if ($objStyleSheet->total < 1)
+		{
+			return $strName;
+		}
+
+		$chunks = explode('-', $strName);
+		$i = (count($chunks) > 1) ? array_pop($chunks) : 0;
+		$strName = implode('-', $chunks) .'-'. (intval($i) + 1);
+
+		return self::checkStyleSheetName($strName);
 	}
 
 

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end module "login".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleLogin extends Module
@@ -59,7 +61,7 @@ class ModuleLogin extends Module
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -146,6 +148,13 @@ class ModuleLogin extends Module
 						}
 					}
 				}
+			}
+
+			// Auto login is not allowed 
+			if (isset($_POST['autologin']) && !$this->autologin)
+			{
+				unset($_POST['autologin']);
+				$this->Input->setPost('autologin', null);
 			}
 
 			// Login and redirect
@@ -243,7 +252,6 @@ class ModuleLogin extends Module
 
 		$blnHasError = false;
 
-		// Show login form
 		if (count($_SESSION['TL_ERROR']))
 		{
 			$blnHasError = true;
@@ -258,12 +266,14 @@ class ModuleLogin extends Module
 			$_SESSION['LOGIN_ERROR'] = '';
 		}
 
+		$this->Template->hasError = $blnHasError;
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['username'];
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->action = ampersand($this->Environment->request, true);
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['login']);
 		$this->Template->value = specialchars($this->Input->post('username'));
-		$this->Template->hasError = $blnHasError;
+		$this->Template->autologin = ($this->autologin && $GLOBALS['TL_CONFIG']['autologin'] > 0);
+		$this->Template->autoLabel = $GLOBALS['TL_LANG']['MSC']['autologin'];
 	}
 }
 

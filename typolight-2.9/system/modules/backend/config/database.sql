@@ -2,7 +2,7 @@
 -- *                                                        *
 -- * IMPORTANT NOTE                                         *
 -- *                                                        *
--- * Do not import this file manually but use the TYPOlight *
+-- * Do not import this file manually but use the Contao    *
 -- * install tool to create and maintain database tables!   *
 -- *                                                        *
 -- **********************************************************
@@ -24,7 +24,7 @@ CREATE TABLE `tl_article` (
   `showTeaser` char(1) NOT NULL default '',
   `teaserCssID` varchar(255) NOT NULL default '',
   `teaser` text NULL,
-  `printable` char(1) NOT NULL default '',
+  `printable` varchar(255) NOT NULL default '',
   `cssID` varchar(255) NOT NULL default '',
   `space` varchar(64) NOT NULL default '',
   `published` char(1) NOT NULL default '',
@@ -177,6 +177,7 @@ CREATE TABLE `tl_form_field` (
 
 CREATE TABLE `tl_layout` (
   `id` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `fallback` char(1) NOT NULL default '',
@@ -266,8 +267,11 @@ CREATE TABLE `tl_member` (
   `dateAdded` int(10) unsigned NOT NULL default '0',
   `currentLogin` int(10) unsigned NOT NULL default '0',
   `lastLogin` int(10) unsigned NOT NULL default '0',
+  `autologin` varchar(32) NULL default NULL,
+  `createdOn` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  KEY `username` (`username`)
+  KEY `username` (`username`),
+  UNIQUE KEY `autologin` (`autologin`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -296,6 +300,7 @@ CREATE TABLE `tl_member_group` (
 
 CREATE TABLE `tl_module` (
   `id` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `headline` varchar(255) NOT NULL default '',
@@ -311,6 +316,7 @@ CREATE TABLE `tl_module` (
   `includeRoot` char(1) NOT NULL default '',
   `showHidden` char(1) NOT NULL default '',
   `customLabel` varchar(64) NOT NULL default '',
+  `autologin` char(1) NOT NULL default '',
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `redirectBack` char(1) NOT NULL default '',
   `cols` varchar(32) NOT NULL default '',
@@ -531,6 +537,7 @@ CREATE TABLE `tl_style` (
 
 CREATE TABLE `tl_style_sheet` (
   `id` int(10) unsigned NOT NULL auto_increment,
+  `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(64) NOT NULL default '',
   `cc` varchar(32) NOT NULL default '',
@@ -575,6 +582,23 @@ CREATE TABLE `tl_task_status` (
 -- --------------------------------------------------------
 
 -- 
+-- Table `tl_theme`
+-- 
+
+CREATE TABLE `tl_theme` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `tstamp` int(10) unsigned NOT NULL default '0',
+  `name` varchar(128) NOT NULL default '',
+  `author` varchar(128) NOT NULL default '',
+  `screenshot` varchar(255) NOT NULL default '',
+  `folders` blob NULL,
+  `templates` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table `tl_undo`
 -- 
 
@@ -611,6 +635,7 @@ CREATE TABLE `tl_user` (
   `groups` blob NULL,
   `inherit` varchar(32) NOT NULL default '',
   `modules` blob NULL,
+  `themes` blob NULL,
   `pagemounts` blob NULL,
   `alpty` blob NULL,
   `filemounts` blob NULL,
@@ -641,6 +666,7 @@ CREATE TABLE `tl_user_group` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
   `modules` blob NULL,
+  `themes` blob NULL,
   `pagemounts` blob NULL,
   `alpty` blob NULL,
   `filemounts` blob NULL,

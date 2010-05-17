@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Backend module for extension management
+ * Contao Repository :: Backend module for extension management
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -124,14 +126,14 @@ class RepositoryManager extends RepositoryBackendModule
 					} // foreach
 				} // if
 				
-				// typolight compatibility check
+				// Contao compatibility check
 				$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);
 				if (($re->coreminversion>0 && $tlversion<$re->coreminversion) ||
 					($re->coremaxversion>0 && $tlversion>$re->coremaxversion) )
 					$e->status[] = (object)array(
 						'color'	=> 'darkorange', 
 						'text'	=> 'notapproved', 
-						'par1'	=> 'TYPOlight',
+						'par1'	=> 'Contao',
 						'par2'	=> VERSION.'.'.BUILD
 					);
 					
@@ -1016,14 +1018,14 @@ class RepositoryManager extends RepositoryBackendModule
 					'par2'	=> Repository::formatVersion($aParentVersion)
 				);
 				
-			// typolight compatibility check
+			// Contao compatibility check
 			$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);
 			if (($ext->coreminversion>0 && $tlversion<$ext->coreminversion) ||
 				($ext->coremaxversion>0 && $tlversion>$ext->coremaxversion) )
 				$action->status[] = (object)array(
 					'color'	=> 'darkorange', 
 					'text'	=> 'notapproved',
-					'par1'	=> 'TYPOlight',
+					'par1'	=> 'Contao',
 					'par2'	=> VERSION.'.'.BUILD
 				);
 				

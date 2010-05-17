@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -49,7 +51,7 @@ $GLOBALS['TL_LANG']['tl_calendar']['language']       = array('Feed language', 'P
 $GLOBALS['TL_LANG']['tl_calendar']['source']         = array('Export settings', 'Here you can choose what will be exported.');
 $GLOBALS['TL_LANG']['tl_calendar']['maxItems']       = array('Maximum number of items', 'Here you can limit the number of events. Set to 0 to export all.');
 $GLOBALS['TL_LANG']['tl_calendar']['feedBase']       = array('Base URL', 'Please enter the base URL with protocol (e.g. <em>http://</em>).');
-$GLOBALS['TL_LANG']['tl_calendar']['alias']          = array('Feed alias', 'Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your TYPOlight installation, e.g. as <em>name.xml</em>.');
+$GLOBALS['TL_LANG']['tl_calendar']['alias']          = array('Feed alias', 'Here you can enter a unique filename (without extension). The XML feed file will be auto-generated in the root directory of your Contao installation, e.g. as <em>name.xml</em>.');
 $GLOBALS['TL_LANG']['tl_calendar']['description']    = array('Feed description', 'Please enter a short description of the calendar feed.');
 $GLOBALS['TL_LANG']['tl_calendar']['tstamp']         = array('Revision date', 'Date and time of the latest revision');
 

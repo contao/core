@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
@@ -36,7 +38,7 @@
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 tinyMCE_GZ.init({
-  plugins : "advimage,autoresize,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
+  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   themes : "advanced",
   languages : "<?php echo $this->language; ?>",
   disk_cache : false,
@@ -72,9 +74,9 @@ tinyMCE.init({
   advimage_update_dimensions_onchange : false,
   external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
-  plugins : "advimage,autoresize,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
+  plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
-  content_css : "<?php echo TL_PATH; ?>/basic.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
+  content_css : "<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
   event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
   extended_valid_elements : "q[cite|class|title]",
   tabfocus_elements : ":prev,:next",

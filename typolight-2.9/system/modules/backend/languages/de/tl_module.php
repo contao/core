@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -44,6 +46,7 @@ $GLOBALS['TL_LANG']['tl_module']['pages']          = array('Seiten', 'Bitte wäh
 $GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Wurzelseite als Startpunkt', 'Die Wurzelseite der Seitenstruktur als Ausgangspunkt des Moduls verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Versteckte Seiten anzeigen', 'Menüpunkte anzeigen, die sonst in der Navigation nicht sichtbar sind.');
 $GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Individuelle Bezeichnung', 'Hier können Sie eine individuelle Bezeichnung für das Drop-Down-Menü eingeben.');
+$GLOBALS['TL_LANG']['tl_module']['autologin']      = array('Autologin erlauben', 'Mitgliedern die automatische Anmeldung im Frontend erlauben.');
 $GLOBALS['TL_LANG']['tl_module']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher beim Anklicken eines Links oder Abschicken eines Formulars weitergeleitet werden.');
 $GLOBALS['TL_LANG']['tl_module']['redirectBack']   = array('Zur zuletzt besuchten Seite', 'Den Benutzer zurück zu der zuletzt besuchten Seiten anstatt der Weiterleitungsseite leiten.');
 $GLOBALS['TL_LANG']['tl_module']['cols']           = array('Anzahl an Spalten', 'Bitte wählen Sie die Spaltenanzahl des Formulars.');
@@ -56,7 +59,7 @@ $GLOBALS['TL_LANG']['tl_module']['form']           = array('Formular', 'Bitte w�
 $GLOBALS['TL_LANG']['tl_module']['queryType']      = array('Standard-Abfragetyp', 'Bitte wählen Sie den Standard-Abfragetyp aus.');
 $GLOBALS['TL_LANG']['tl_module']['and']            = array('Finde alle Wörter', 'findet nur Seiten, die alle gesuchten Begriffe enthalten.');
 $GLOBALS['TL_LANG']['tl_module']['or']             = array('Finde irgendein Wort', 'findet alle Seiten, die einen der Suchbegriffe enthalten.');
-$GLOBALS['TL_LANG']['tl_module']['fuzzy']          = array('Ungenaue Suche', 'Findet "TYPOlight" bei der Suche nach "typo" (entspricht einer Suche mit Platzhaltern).');
+$GLOBALS['TL_LANG']['tl_module']['fuzzy']          = array('Ungenaue Suche', 'Findet "Contao" bei der Suche nach "con" (entspricht einer Suche mit Platzhaltern).');
 $GLOBALS['TL_LANG']['tl_module']['simple']         = array('Einfaches Formular', 'enthält nur ein Eingabefeld.');
 $GLOBALS['TL_LANG']['tl_module']['advanced']       = array('Erweitertes Formular', 'enthält ein Eingabefeld und ein Radio-Button-Menü zur Auswahl des Abfragetyps.');
 $GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Kontext-Spannweite', 'Die Anzahl an Buchstaben, die links und rechts des Suchbegriffs als Kontext verwendet werden.');
@@ -123,12 +126,15 @@ $GLOBALS['TL_LANG']['tl_module']['external'] = 'Externe URL';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_module']['new']    = array('Neues Modul', 'Ein neues Modul anlegen');
-$GLOBALS['TL_LANG']['tl_module']['show']   = array('Moduldetails', 'Details des Moduls ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_module']['edit']   = array('Modul bearbeiten', 'Modul ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_module']['copy']   = array('Modul duplizieren', 'Modul ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_module']['delete'] = array('Modul löschen', 'Modul ID %s löschen');
-$GLOBALS['TL_LANG']['tl_module']['up']     = array('Eine Position nach oben', 'Den Eintrag eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['tl_module']['down']   = array('Eine Position nach unten', 'Den Eintrag eine Position nach unten verschieben');
+$GLOBALS['TL_LANG']['tl_module']['new']        = array('Neues Modul', 'Ein neues Modul anlegen');
+$GLOBALS['TL_LANG']['tl_module']['show']       = array('Moduldetails', 'Details des Moduls ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_module']['edit']       = array('Modul bearbeiten', 'Modul ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_module']['cut']        = array('Modul verschieben ', 'Modul ID %s verschieben');
+$GLOBALS['TL_LANG']['tl_module']['copy']       = array('Modul duplizieren', 'Modul ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_module']['delete']     = array('Modul löschen', 'Modul ID %s löschen');
+$GLOBALS['TL_LANG']['tl_module']['editheader'] = array('Theme bearbeiten', 'Die Theme-Einstellungen bearbeiten');
+$GLOBALS['TL_LANG']['tl_module']['pasteafter'] = array('Hier einfügen', 'Nach dem Modul ID %s einfügen');
+$GLOBALS['TL_LANG']['tl_module']['up']         = array('Eine Position nach oben', 'Den Eintrag eine Position nach oben verschieben');
+$GLOBALS['TL_LANG']['tl_module']['down']       = array('Eine Position nach unten', 'Den Eintrag eine Position nach unten verschieben');
 
 ?>

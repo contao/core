@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to modify the database.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class DC_Table extends DataContainer implements listable, editable
@@ -664,7 +666,7 @@ class DC_Table extends DataContainer implements listable, editable
 		if (in_array($this->set['pid'], $cr))
 		{
 			$this->log('Attempt to relate record "'.$this->intId.'" of table "'.$this->strTable.'" to its child record "'.$this->Input->get('pid').'" (circular reference)', 'DC_Table cut()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->set['tstamp'] = time();
@@ -1458,7 +1460,7 @@ class DC_Table extends DataContainer implements listable, editable
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
 			$this->log('Table ' . $this->strTable . ' is not editable', 'DC_Table edit()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		if ($intID)
@@ -1510,7 +1512,7 @@ class DC_Table extends DataContainer implements listable, editable
 		if ($objRow->numRows < 1)
 		{
 			$this->log('Could not load record ID "'.$this->intId.'" of table "'.$this->strTable.'"!', 'DC_Table edit()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->objActiveRecord = $objRow;
@@ -1848,7 +1850,7 @@ window.addEvent(\'domready\', function()
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
 			$this->log('Table ' . $this->strTable . ' is not editable', 'DC_Table editAll()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$return = '';
@@ -2151,7 +2153,7 @@ window.addEvent(\'domready\', function()
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
 			$this->log('Table ' . $this->strTable . ' is not editable', 'DC_Table overrideAll()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$return = '';
@@ -2742,14 +2744,14 @@ window.addEvent(\'domready\', function()
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select" />' : '').'
 
-<div class="tl_listing_container" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container tree_view" id="tl_listing">'.(isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb']) ? $GLOBALS['TL_DCA'][$table]['list']['sorting']['breadcrumb'] : '').(($this->Input->get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
 </div>' : '').'
 
 <ul class="tl_listing ' . $treeClass . '">
-  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left">'.$label.'</div> <div class="tl_right">';
+  <li class="tl_folder_top"><div class="tl_left">'.$label.'</div> <div class="tl_right">';
 
 		$_buttons = '&nbsp;';
 
@@ -2934,8 +2936,9 @@ window.addEvent(\'domready\', function()
 		// Check whether the page is protected
 		$objRow->protected = ($table == 'tl_page') ? ($objRow->protected || $protectedPage) : false;
 		$session[$node][$id] = (is_int($session[$node][$id])) ? $session[$node][$id] : 0;
+		$mouseover = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 || $table == $this->strTable) ? ' onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"' : '';
 
-		$return .= "\n  " . '<li class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px;">';
+		$return .= "\n  " . '<li class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'"'.$mouseover.'><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px;">';
 
 		// Calculate label and add a toggle button
 		$args = array();
@@ -3127,7 +3130,7 @@ window.addEvent(\'domready\', function()
 		$return = '
 <div id="tl_buttons">
 <a href="'.$this->getReferer(true, $this->ptable).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' . (($this->Input->get('act') != 'select') ? ' &#160; :: &#160; ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] ? '
-<a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons(). ($blnClipboard ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') : '') . '
+<a href="'.$this->addToUrl(($blnHasSorting ? 'act=paste&amp;mode=create' : 'act=create&amp;mode=2&amp;pid='.$this->intId)).'" class="header_new" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['new'][1]).'" accesskey="n" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG'][$this->strTable]['new'][0].'</a>' : '') . $this->generateGlobalButtons() . ($blnClipboard ? ' &nbsp; :: &nbsp; <a href="'.$this->addToUrl('clipboard=1').'" class="header_clipboard" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['clearClipboard']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['clearClipboard'].'</a>' : '') : '') . '
 </div>' . $this->getMessages();
 
 		// Get all details of the parent record
@@ -3146,21 +3149,20 @@ window.addEvent(\'domready\', function()
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select" />' : '').'
 
-<div class="tl_listing_container">
+<div class="tl_listing_container parent_view">
 
 <div class="tl_header" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);">';
 
 		// List all records of the child table
 		if (!$this->Input->get('act') || $this->Input->get('act') == 'paste' || $this->Input->get('act') == 'select')
 		{
-
 			// Header
 			$imagePasteNew = $this->generateImage('new.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]);
 			$imagePasteAfter = $this->generateImage('pasteafter.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0], 'class="blink"');
 			$imageEditHeader = $this->generateImage('edit.gif', $GLOBALS['TL_LANG'][$this->strTable]['editheader'][0]);
 
 			$return .= '
-<div style="text-align:right;">'.(($this->Input->get('act') == 'select') ? '
+<div class="tl_content_right">'.(($this->Input->get('act') == 'select') ? '
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />' : (!$GLOBALS['TL_DCA'][$this->ptable]['config']['notEditable'] ? '
 <a href="'.preg_replace('/&(amp;)?table=[^& ]*/i', (strlen($this->ptable) ? '&amp;table='.$this->ptable : ''), $this->addToUrl('act=edit')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['editheader'][1]).'">'.$imageEditHeader.'</a>' : '') . (($blnHasSorting && !$GLOBALS['TL_DCA'][$this->strTable]['config']['closed']) ? ' <a href="'.$this->addToUrl('act=create&amp;mode=2&amp;pid='.$objParent->id.'&amp;id='.$this->intId).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][0]).'">'.$imagePasteNew.'</a>' : '') . ($blnClipboard ? ' <a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$objParent->id . (!$blnMultiboard ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][0]).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a>' : '')) . '
 </div>';
@@ -3254,8 +3256,30 @@ window.addEvent(\'domready\', function()
 </table>
 </div>';
 
+			$orderBy = array();
+			$firstOrderBy = array();
+
 			// Add all records of the current table
 			$query = "SELECT * FROM " . $this->strTable;
+
+			if (is_array($this->orderBy) && strlen($this->orderBy[0]))
+			{
+				$orderBy = $this->orderBy;
+				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+
+				// Order by the foreign key
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
+				{
+					$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']);
+					$query = "SELECT *, (SELECT ". $key[1] ." FROM ". $key[0] ." WHERE ". $this->strTable .".". $firstOrderBy ."=". $key[0] .".id) AS ". $key[1] ." FROM " . $this->strTable;
+					$orderBy[0] = $key[1];
+				}
+			}
+			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
+			{
+				$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
+				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
+			}
 
 			if (count($this->procedure))
 			{
@@ -3267,9 +3291,9 @@ window.addEvent(\'domready\', function()
 				$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
-			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
+			if (is_array($orderBy) && count($orderBy) > 0)
 			{
-				$query .= " ORDER BY " . implode(', ', $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']);
+				$query .= " ORDER BY " . implode(', ', $orderBy);
 			}
 
 			$objOrderByStmt = $this->Database->prepare($query);
@@ -3297,6 +3321,7 @@ window.addEvent(\'domready\', function()
 
 				$this->import($strClass);
 				$row = $objOrderBy->fetchAllAssoc();
+				$strGroup = '';
 
 				// Make items sortable
 				if ($blnHasSorting)
@@ -3319,10 +3344,24 @@ window.addEvent(\'domready\', function()
 <li id="li_' . $row[$i]['id'] . '">';
 					}
 
+					// Add the group header
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['disableGrouping'] && $firstOrderBy != 'sorting')
+					{
+						$sortingMode = (count($orderBy) == 1 && $firstOrderBy == $orderBy[0] && strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag']) && !strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['flag'])) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag'] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['flag'];
+						$remoteNew = $this->formatCurrentValue($firstOrderBy, $row[$i][$firstOrderBy], $sortingMode);
+						$group = $this->formatGroupHeader($firstOrderBy, $remoteNew, $sortingMode, $row);
+
+						if ($group != $strGroup)
+						{
+							$return .= "\n\n" . '<div class="tl_content_header">'.$group.'</div>';
+							$strGroup = $group;
+						}
+					}
+
 					$return .= '
 
-<div class="tl_content" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);">
-<div style="text-align:right;">';
+<div class="tl_content block'.(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').'" onmouseover="Theme.hoverDiv(this, 1);" onmouseout="Theme.hoverDiv(this, 0);">
+<div class="tl_content_right">';
 
 					// Edit multiple
 					if ($this->Input->get('act') == 'select')
@@ -3364,8 +3403,7 @@ window.addEvent(\'domready\', function()
 						}
 					}
 
-					$return .= '
-</div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
+					$return .= '</div>'.$this->$strClass->$strMethod($row[$i]).'</div>';
 
 					// Make items sortable
 					if ($blnHasSorting)
@@ -3524,7 +3562,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_select" />' : '').'
 
-<div class="tl_listing_container">'.(($this->Input->get('act') == 'select') ? '
+<div class="tl_listing_container list_view">'.(($this->Input->get('act') == 'select') ? '
 
 <div class="tl_select_trigger">
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
@@ -3560,7 +3598,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			// Process result and add label and buttons
 			$remoteCur = false;
 			$groupclass = 'tl_folder_tlist';
-			$arrLookup = array();
 
 			foreach ($result as $row)
 			{
@@ -3631,7 +3668,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					}
 				}
 
-				// Shorten label it if it is too long
+				// Shorten the label it if it is too long
 				$label = vsprintf((strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['format']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['format'] : '%s'), $args);
 
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] > 0 && $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'] < strlen(strip_tags($label)))
@@ -3640,7 +3677,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					$label = trim($this->String->substrHtml($label, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['maxCharacters'])) . ' …';
 				}
 
-				// Remove empty brackets (), [], {}, <> and empty tags from label
+				// Remove empty brackets (), [], {}, <> and empty tags from the label
 				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/i', '', $label);
 				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/i', '', $label);
 
@@ -3650,129 +3687,16 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					$current = $row[$firstOrderBy];
 					$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
 					$sortingMode = (count($orderBy) == 1 && $firstOrderBy == $orderBy[0] && strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag']) && !strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['flag'])) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag'] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['flag'];
+					$remoteNew = $this->formatCurrentValue($firstOrderBy, $current, $sortingMode);
 
-					if($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['eval']['multiple'])
+					// Add the group header
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['disableGrouping'] && ($remoteNew != $remoteCur || $remoteCur === false))
 					{
-						$remoteNew = strlen($current) ? ucfirst($GLOBALS['TL_LANG']['MSC']['yes']) : ucfirst($GLOBALS['TL_LANG']['MSC']['no']);
-					}
-					elseif(strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
-					{
-						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']);
-
-						$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
-													->limit(1)
-													->execute($current);
-
-						if ($objParent->numRows)
-						{
-							$remoteNew = $objParent->$key[1];
-						}
-					}
-					elseif (in_array($sortingMode, array(1, 2)))
-					{
-						$remoteNew = strlen($current) ? ucfirst(utf8_substr($current , 0, 1)) : '-';
-					}
-					elseif (in_array($sortingMode, array(3, 4)))
-					{
-						if (!strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['length']))
-						{
-							$GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['length'] = 2;
-						}
-
-						$remoteNew = strlen($current) ? ucfirst(utf8_substr($current , 0, $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['length'])) : '-';
-					}
-					elseif (in_array($sortingMode, array(5, 6)))
-					{
-						$remoteNew = strlen($current) ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $current) : '-';
-					}
-					elseif (in_array($sortingMode, array(7, 8)))
-					{
-						$remoteNew = strlen($current) ? date('Y-m', $current) : '-';
-						$intMonth = strlen($current) ? (date('m', $current) - 1) : '-';
-
-						if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
-						{
-							$remoteNew = strlen($current) ? $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $current) : '-';
-						}
-					}
-					elseif (in_array($sortingMode, array(9, 10)))
-					{
-						$remoteNew = strlen($current) ? date('Y', $current) : '-';
-					}
-					else
-					{
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['eval']['multiple'])
-						{
-							$remoteNew = strlen($current) ? $firstOrderBy : '';
-						}
-						elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['reference']))
-						{
-							$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['reference'][$current];
-						}
-						elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options']))
-						{
-							$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options'][$current];
-						}
-						else
-						{
-							$remoteNew = $current;
-						}
-
-						if (!strlen($remoteNew))
-						{
-							$remoteNew = '-';
-						}
-					}
-
-					// Add group header
-					if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['disableGrouping'] && ($remoteNew != $remoteCur || $remoteCur === false))
-					{
-						if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options']))
-						{
-							$group = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options'][$remoteNew];
-						}
-						elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback']))
-						{
-							if (!isset($arrLookup[$firstOrderBy]))
-							{
-								$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback'][0];
-								$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['options_callback'][1];
-
-								$this->import($strClass);
-								$arrLookup[$firstOrderBy] = $this->$strClass->$strMethod($this);
-							}
-
-							$group = $arrLookup[$firstOrderBy][$remoteNew];
-						}
-						else
-						{
-							$group = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['reference'][$remoteNew] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['reference'][$remoteNew][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['reference'][$remoteNew]);
-						}
-
-						if (!strlen($group))
-						{
-							$group = is_array($GLOBALS['TL_LANG'][$this->strTable][$remoteNew] ? $GLOBALS['TL_LANG'][$this->strTable][$remoteNew][0] : $GLOBALS['TL_LANG'][$this->strTable][$remoteNew]);
-						}
-
-						if (!strlen($group))
-						{
-							$group = $remoteNew;
-						}
-
-						// Call group callback ($group, $sortingMode, $firstOrderBy, $row, $this)
-						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback']))
-						{
-							$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][0];
-							$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][1];
-
-							$this->import($strClass);
-							$group = $this->$strClass->$strMethod($group, $sortingMode, $firstOrderBy, $row, $this);
-						}
-
+						$group = $this->formatGroupHeader($firstOrderBy, $remoteNew, $sortingMode, $row);
 						$remoteCur = $remoteNew;
 
 						$return .= '
-  <tr onmouseover="Theme.hoverRow(this, 1);" onmouseout="Theme.hoverRow(this, 0);">
+  <tr>
     <td colspan="2" class="'.$groupclass.'">'.$group.'</td>
   </tr>';
 						$groupclass = 'tl_folder_list';
@@ -4000,7 +3924,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	 */
 	protected function sortMenu()
 	{
-		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] != 2)
+		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] != 2 && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] != 4)
 		{
 			return '';
 		}
@@ -4040,7 +3964,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$this->Session->setData($session);
 		}
 
-		// Overwrite "orderBy" value with session value
+		// Overwrite the "orderBy" value with the session value
 		elseif (strlen($session['sorting'][$this->strTable]))
 		{
 			$overwrite = preg_quote(preg_replace('/\s+.*$/i', '', $session['sorting'][$this->strTable]), '/');
@@ -4530,6 +4454,156 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <div class="tl_filter tl_subpanel">
 <strong>' . $GLOBALS['TL_LANG']['MSC']['filter'] . ':</strong>' . $fields . '
 </div>';
+	}
+
+
+	/**
+	 * Return the formatted group header as string
+	 * @param string
+	 * @param mixed
+	 * @param integer
+	 * @return string
+	 */
+	protected function formatCurrentValue($field, $value, $mode)
+	{
+		if($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
+		{
+			$remoteNew = ($value != '') ? ucfirst($GLOBALS['TL_LANG']['MSC']['yes']) : ucfirst($GLOBALS['TL_LANG']['MSC']['no']);
+		}
+		elseif(isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
+		{
+			$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']);
+
+			$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
+										->limit(1)
+										->execute($value);
+
+			if ($objParent->numRows)
+			{
+				$remoteNew = $objParent->$key[1];
+			}
+		}
+		elseif (in_array($mode, array(1, 2)))
+		{
+			$remoteNew = ($value != '') ? ucfirst(utf8_substr($value , 0, 1)) : '-';
+		}
+		elseif (in_array($mode, array(3, 4)))
+		{
+			if (!isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['length']))
+			{
+				$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['length'] = 2;
+			}
+
+			$remoteNew = ($value != '') ? ucfirst(utf8_substr($value , 0, $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['length'])) : '-';
+		}
+		elseif (in_array($mode, array(5, 6)))
+		{
+			$remoteNew = ($value != '') ? $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value) : '-';
+		}
+		elseif (in_array($mode, array(7, 8)))
+		{
+			$remoteNew = ($value != '') ? date('Y-m', $value) : '-';
+			$intMonth = ($value != '') ? (date('m', $value) - 1) : '-';
+
+			if (isset($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
+			{
+				$remoteNew = ($value != '') ? $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $value) : '-';
+			}
+		}
+		elseif (in_array($mode, array(9, 10)))
+		{
+			$remoteNew = ($value != '') ? date('Y', $value) : '-';
+		}
+		else
+		{
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
+			{
+				$remoteNew = ($value != '') ? $field : '';
+			}
+			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference']))
+			{
+				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value];
+			}
+			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+			{
+				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
+			}
+			else
+			{
+				$remoteNew = $value;
+			}
+
+			if (is_array($remoteNew))
+			{
+				$remoteNew = $remoteNew[0];
+			}
+
+			if (empty($remoteNew))
+			{
+				$remoteNew = '-';
+			}
+		}
+
+		return $remoteNew;
+	}
+
+
+	/**
+	 * Return the formatted group header as string
+	 * @param string
+	 * @param mixed
+	 * @param integer
+	 * @param array
+	 * @return string
+	 */
+	protected function formatGroupHeader($field, $value, $mode, $row)
+	{
+		$group = '';
+		static $lookup = array();
+
+		if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+		{
+			$group = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
+		}
+		elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback']))
+		{
+			if (!isset($lookup[$field]))
+			{
+				$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][0];
+				$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options_callback'][1];
+
+				$this->import($strClass);
+				$lookup[$field] = $this->$strClass->$strMethod($this);
+			}
+
+			$group = $lookup[$field][$value];
+		}
+		else
+		{
+			$group = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value]);
+		}
+
+		if (empty($group))
+		{
+			$group = is_array($GLOBALS['TL_LANG'][$this->strTable][$value] ? $GLOBALS['TL_LANG'][$this->strTable][$value][0] : $GLOBALS['TL_LANG'][$this->strTable][$value]);
+		}
+
+		if (empty($group))
+		{
+			$group = $value;
+		}
+
+		// Call the group callback ($group, $sortingMode, $firstOrderBy, $row, $this)
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback']))
+		{
+			$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][0];
+			$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['group_callback'][1];
+
+			$this->import($strClass);
+			$group = $this->$strClass->$strMethod($group, $mode, $field, $row, $this);
+		}
+
+		return $group;
 	}
 }
 

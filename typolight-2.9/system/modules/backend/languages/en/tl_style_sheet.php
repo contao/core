@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -46,8 +48,8 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name and media types';
 /**
  * References
  */
-$GLOBALS['TL_LANG']['ERROR']['css_exists']   = 'ATTENTION! Style sheets of the same name will be overwritten. Continue?';
-$GLOBALS['TL_LANG']['CONFIRM']['css_exists'] = 'Style sheet "%s" has been imported.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'] = 'Style sheet "%s" has been imported.';
+$GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed']  = 'Style sheet "%s" has been imported as "%s".';
 
 
 /**
@@ -56,7 +58,8 @@ $GLOBALS['TL_LANG']['CONFIRM']['css_exists'] = 'Style sheet "%s" has been import
 $GLOBALS['TL_LANG']['tl_style_sheet']['new']        = array('New style sheet', 'Create a new style sheet');
 $GLOBALS['TL_LANG']['tl_style_sheet']['show']       = array('Style sheet details', 'Show the details of style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['edit']       = array('Edit style sheet', 'Edit style sheet ID %s');
-$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'] = array('Edit style sheet settings', 'Edit the settings of style sheet ID %s');
+$GLOBALS['TL_LANG']['tl_style_sheet']['editheader'] = array('Edit theme settings', 'Edit the settings of theme ID %s');
+$GLOBALS['TL_LANG']['tl_style_sheet']['cut']        = array('Move style sheet', 'Move style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['copy']       = array('Duplicate style sheet', 'Duplicate style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['delete']     = array('Delete style sheet', 'Delete style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['import']     = array('CSS import', 'Import existing CSS files');

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -45,8 +47,8 @@ $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS files';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'The data has been purged';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live update ID';
-$GLOBALS['TL_LANG']['tl_maintenance']['upToDate']      = 'Your TYPOlight version %s is up to date';
-$GLOBALS['TL_LANG']['tl_maintenance']['newVersion']    = 'A newer TYPOlight version %s is available';
+$GLOBALS['TL_LANG']['tl_maintenance']['upToDate']      = 'Your Contao version %s is up to date';
+$GLOBALS['TL_LANG']['tl_maintenance']['newVersion']    = 'A newer Contao version %s is available';
 $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion']   = 'You cannot update beta versions via live update';
 $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId']     = 'Please enter your live update ID';
 $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable']  = 'The temporary folder (system/tmp) is not writeable';

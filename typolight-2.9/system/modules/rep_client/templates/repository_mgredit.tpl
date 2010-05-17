@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to add a new extension
+ * Contao Repository :: Template to add a new extension
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010

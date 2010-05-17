@@ -1,6 +1,6 @@
 tinyMCE.addI18n('ja.typolinks_dlg',{
-page:"TYPOlight\u306e\u30da\u30fc\u30b8",
-file:"TYPOlight\u306e\u30d5\u30a1\u30a4\u30eb",
+page:"Contao\u306e\u30da\u30fc\u30b8",
+file:"Contao\u306e\u30d5\u30a1\u30a4\u30eb",
 link_title:"\u30ea\u30f3\u30af\u3092\u633f\u5165\u30fb\u7de8\u96c6",
 link_url:"\u30ea\u30f3\u30af\u306eURL",
 link_target:"\u5bfe\u8c61",

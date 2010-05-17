@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -219,8 +221,8 @@ $GLOBALS['TL_LANG']['MSC']['fullsize']         = 'Großansicht des Bildes in ein
 $GLOBALS['TL_LANG']['MSC']['colorpicker']      = 'Farbwähler (benötigt JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['pagepicker']       = 'Seitenwähler (benötigt JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['filepicker']       = 'Dateiwähler (benötigt JavaScript)';
-$GLOBALS['TL_LANG']['MSC']['ppHeadline']       = 'TYPOlight-Seiten';
-$GLOBALS['TL_LANG']['MSC']['fpHeadline']       = 'TYPOlight-Dateien';
+$GLOBALS['TL_LANG']['MSC']['ppHeadline']       = 'Contao-Seiten';
+$GLOBALS['TL_LANG']['MSC']['fpHeadline']       = 'Contao-Dateien';
 $GLOBALS['TL_LANG']['MSC']['yes']              = 'ja';
 $GLOBALS['TL_LANG']['MSC']['no']               = 'nein';
 $GLOBALS['TL_LANG']['MSC']['goBack']           = 'Zurück';
@@ -249,7 +251,7 @@ $GLOBALS['TL_LANG']['MSC']['version']          = 'Version';
 $GLOBALS['TL_LANG']['MSC']['restore']          = 'Wiederherstellen';
 $GLOBALS['TL_LANG']['MSC']['backendModules']   = 'Backend-Module';
 $GLOBALS['TL_LANG']['MSC']['welcomeTo']        = '%s Backend';
-$GLOBALS['TL_LANG']['MSC']['updateVersion']    = 'TYPOlight Version %s verfügbar';
+$GLOBALS['TL_LANG']['MSC']['updateVersion']    = 'Contao Version %s verfügbar';
 $GLOBALS['TL_LANG']['MSC']['wordWrap']         = 'Zeilenumbruch';
 $GLOBALS['TL_LANG']['MSC']['saveAlert']        = 'ACHTUNG! Nicht gespeicherte Änderungen gehen verloren. Fortfahren?';
 $GLOBALS['TL_LANG']['MSC']['toggleNodes']      = 'Alle öffnen/schließen';
@@ -285,5 +287,6 @@ $GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Ausgewählte Gruppen entfernen
 $GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Bestehende Zuordnung überschreiben';
 $GLOBALS['TL_LANG']['MSC']['ascending']        = 'aufsteigend';
 $GLOBALS['TL_LANG']['MSC']['descending']       = 'absteigend';
+$GLOBALS['TL_LANG']['MSC']['default']          = 'Standard';
 
 ?>

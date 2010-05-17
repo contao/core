@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * This file contains some UTF-8 helper functions that allow to run TYPOlight
+ * This file contains some UTF-8 helper functions that allow to run Contao
  * without the mbstring extension. It is based on the UTF-8 library written
  * by Andreas Gohr <andi@splitbrain.org> which is part of the DokuWiki project.
  * Visit http://www.splitbrain.org/projects/dokuwiki to get the original file.

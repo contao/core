@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -200,7 +202,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'default'                 => 'regular',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_page', 'pageTypes'),
+			'options_callback'        => array('tl_page', 'getPageTypes'),
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY']
 		),
@@ -364,7 +366,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['layout'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'foreignKey'              => 'tl_layout.name'
+			'options_callback'        => array('tl_page', 'getPageLayouts')
 		),
 		'includeCache' => array
 		(
@@ -495,7 +497,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_page extends Backend
@@ -706,7 +708,7 @@ class tl_page extends Backend
 				if ($error)
 				{
 					$this->log('Not enough permissions to '. $this->Input->get('act') .' page ID '. $id .' or paste it after/into page ID '. $id, 'tl_page checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 			}
 		}
@@ -787,7 +789,7 @@ class tl_page extends Backend
 			$this->Session->set('tl_page_node', 0);
 
 			$this->log('Page ID '.$intNode.' was not mounted', 'tl_page addBreadcrumb', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Limit tree
@@ -985,7 +987,7 @@ class tl_page extends Backend
 	 * @param object
 	 * @return string
 	 */
-	public function pageTypes(DataContainer $dc)
+	public function getPageTypes(DataContainer $dc)
 	{
 		$arrOptions = array();
 
@@ -998,6 +1000,30 @@ class tl_page extends Backend
 		}
 
 		return $arrOptions;
+	}
+
+
+	/**
+	 * Return all page layouts grouped by theme
+	 * @return array
+	 */
+	public function getPageLayouts()
+	{
+		$objLayout = $this->Database->execute("SELECT l.id, l.name, t.name AS theme FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id ORDER BY t.name, l.name");
+
+		if ($objLayout->numRows < 1)
+		{
+			return array();
+		}
+
+		$return = array();
+
+		while ($objLayout->next())
+		{
+			$return[$objLayout->theme][$objLayout->id] = $objLayout->name;
+		}
+
+		return $return;
 	}
 
 
@@ -1310,7 +1336,7 @@ class tl_page extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_page::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish page ID "'.$intId.'"', 'tl_page toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_page', $intId);

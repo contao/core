@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Language file for tl_repository (en)
+ * Contao Repository :: Language file for tl_repository (en)
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -52,7 +54,7 @@ $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Quality', 'How ro
 $GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Release date', 'Enter the publishing date of this release as YYYY-MM-DD.');
 $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Please select the version');
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Type', 'Please select the extension type.');
-$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the TYPOlight standards for usability and accessability?');
+$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the Contao standards for usability and accessability?');
 $GLOBALS['TL_LANG']['tl_repository']['version']       = array('Version', 'Version numbers must be in format n.n.n s, where n are integers and s is one of: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable');
 
 

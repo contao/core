@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -73,57 +75,61 @@ $GLOBALS['TL_LANG']['CTE']['teaser']    = array('Article teaser', 'displays the 
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['go']           = 'Go';
-$GLOBALS['TL_LANG']['MSC']['quicknav']     = 'Quick navigation';
-$GLOBALS['TL_LANG']['MSC']['quicklink']    = 'Quick link';
-$GLOBALS['TL_LANG']['MSC']['username']     = 'Username';
-$GLOBALS['TL_LANG']['MSC']['login']        = 'Login';
-$GLOBALS['TL_LANG']['MSC']['logout']       = 'Logout';
-$GLOBALS['TL_LANG']['MSC']['loggedInAs']   = 'You are logged in as %s.';
-$GLOBALS['TL_LANG']['MSC']['emptyField']   = 'Please enter your username and password!';
-$GLOBALS['TL_LANG']['MSC']['confirmation'] = 'Confirmation';
-$GLOBALS['TL_LANG']['MSC']['sMatches']     = '%s occurrences for %s';
-$GLOBALS['TL_LANG']['MSC']['sEmpty']       = 'No matches for <strong>%s</strong>';
-$GLOBALS['TL_LANG']['MSC']['sResults']     = 'Results %s - %s of %s for <strong>%s</strong>';
-$GLOBALS['TL_LANG']['MSC']['sNoResult']    = 'Your search for <strong>%s</strong> returned no results.';
-$GLOBALS['TL_LANG']['MSC']['seconds']      = 'seconds';
-$GLOBALS['TL_LANG']['MSC']['up']           = 'Up';
-$GLOBALS['TL_LANG']['MSC']['first']        = '&#171; First';
-$GLOBALS['TL_LANG']['MSC']['previous']     = 'Previous';
-$GLOBALS['TL_LANG']['MSC']['next']         = 'Next';
-$GLOBALS['TL_LANG']['MSC']['last']         = 'Last &#187;';
-$GLOBALS['TL_LANG']['MSC']['goToPage']     = 'Go to page %s';
-$GLOBALS['TL_LANG']['MSC']['totalPages']   = 'Page %s of %s';
-$GLOBALS['TL_LANG']['MSC']['fileUploaded'] = 'File %s uploaded successfully.';
-$GLOBALS['TL_LANG']['MSC']['fileExceeds']  = 'Image %s uploaded successfully, however it is too big to be resized automatically.';
-$GLOBALS['TL_LANG']['MSC']['fileResized']  = 'Image %s uploaded successfully and was scaled down to the maximum dimensions.';
-$GLOBALS['TL_LANG']['MSC']['searchLabel']  = 'Search';
-$GLOBALS['TL_LANG']['MSC']['keywords']     = 'Keywords';
-$GLOBALS['TL_LANG']['MSC']['options']      = 'Options';
-$GLOBALS['TL_LANG']['MSC']['matchAll']     = 'match all words';
-$GLOBALS['TL_LANG']['MSC']['matchAny']     = 'match any word';
-$GLOBALS['TL_LANG']['MSC']['saveData']     = 'Save data';
-$GLOBALS['TL_LANG']['MSC']['printAsPdf']   = 'Print article as PDF';
-$GLOBALS['TL_LANG']['MSC']['pleaseWait']   = 'Please wait';
-$GLOBALS['TL_LANG']['MSC']['loading']      = 'Loading …';
-$GLOBALS['TL_LANG']['MSC']['more']         = 'Read more …';
-$GLOBALS['TL_LANG']['MSC']['targetPage']   = 'Target page';
-$GLOBALS['TL_LANG']['MSC']['com_name']     = 'Name';
-$GLOBALS['TL_LANG']['MSC']['com_email']    = 'E-mail (not published)';
-$GLOBALS['TL_LANG']['MSC']['com_website']  = 'Website';
-$GLOBALS['TL_LANG']['MSC']['com_comment']  = 'Comment';
-$GLOBALS['TL_LANG']['MSC']['com_submit']   = 'Submit comment';
-$GLOBALS['TL_LANG']['MSC']['comment_by']   = 'Comment by';
-$GLOBALS['TL_LANG']['MSC']['com_quote']    = '%s wrote:';
-$GLOBALS['TL_LANG']['MSC']['com_code']     = 'Code:';
-$GLOBALS['TL_LANG']['MSC']['com_subject']  = 'TYPOlight :: New comment on %s';
-$GLOBALS['TL_LANG']['MSC']['com_message']  = "%s has created a new comment on your website.\n\n---\n\n%s\n\n---\n\nView: %s\nEdit: %s\n\nIf you are moderating comments, you have to log in to the back end to publish it.";
-$GLOBALS['TL_LANG']['MSC']['com_confirm']  = 'Your comment has been added and is now pending for approval.';
-$GLOBALS['TL_LANG']['MSC']['invalidPage']  = 'Sorry, item "%s" does not exist.';
-$GLOBALS['TL_LANG']['MSC']['list_orderBy'] = 'Order by %s';
-$GLOBALS['TL_LANG']['MSC']['list_perPage'] = 'Results per page';
-$GLOBALS['TL_LANG']['MSC']['published']    = 'Published';
-$GLOBALS['TL_LANG']['MSC']['unpublished']  = 'Unpublished';
-$GLOBALS['TL_LANG']['MSC']['addComment']   = 'Add a comment';
+$GLOBALS['TL_LANG']['MSC']['go']            = 'Go';
+$GLOBALS['TL_LANG']['MSC']['quicknav']      = 'Quick navigation';
+$GLOBALS['TL_LANG']['MSC']['quicklink']     = 'Quick link';
+$GLOBALS['TL_LANG']['MSC']['username']      = 'Username';
+$GLOBALS['TL_LANG']['MSC']['login']         = 'Login';
+$GLOBALS['TL_LANG']['MSC']['logout']        = 'Logout';
+$GLOBALS['TL_LANG']['MSC']['loggedInAs']    = 'You are logged in as %s.';
+$GLOBALS['TL_LANG']['MSC']['emptyField']    = 'Please enter your username and password!';
+$GLOBALS['TL_LANG']['MSC']['confirmation']  = 'Confirmation';
+$GLOBALS['TL_LANG']['MSC']['sMatches']      = '%s occurrences for %s';
+$GLOBALS['TL_LANG']['MSC']['sEmpty']        = 'No matches for <strong>%s</strong>';
+$GLOBALS['TL_LANG']['MSC']['sResults']      = 'Results %s - %s of %s for <strong>%s</strong>';
+$GLOBALS['TL_LANG']['MSC']['sNoResult']     = 'Your search for <strong>%s</strong> returned no results.';
+$GLOBALS['TL_LANG']['MSC']['seconds']       = 'seconds';
+$GLOBALS['TL_LANG']['MSC']['up']            = 'Up';
+$GLOBALS['TL_LANG']['MSC']['first']         = '&#171; First';
+$GLOBALS['TL_LANG']['MSC']['previous']      = 'Previous';
+$GLOBALS['TL_LANG']['MSC']['next']          = 'Next';
+$GLOBALS['TL_LANG']['MSC']['last']          = 'Last &#187;';
+$GLOBALS['TL_LANG']['MSC']['goToPage']      = 'Go to page %s';
+$GLOBALS['TL_LANG']['MSC']['totalPages']    = 'Page %s of %s';
+$GLOBALS['TL_LANG']['MSC']['fileUploaded']  = 'File %s uploaded successfully.';
+$GLOBALS['TL_LANG']['MSC']['fileExceeds']   = 'Image %s uploaded successfully, however it is too big to be resized automatically.';
+$GLOBALS['TL_LANG']['MSC']['fileResized']   = 'Image %s uploaded successfully and was scaled down to the maximum dimensions.';
+$GLOBALS['TL_LANG']['MSC']['searchLabel']   = 'Search';
+$GLOBALS['TL_LANG']['MSC']['keywords']      = 'Keywords';
+$GLOBALS['TL_LANG']['MSC']['options']       = 'Options';
+$GLOBALS['TL_LANG']['MSC']['matchAll']      = 'match all words';
+$GLOBALS['TL_LANG']['MSC']['matchAny']      = 'match any word';
+$GLOBALS['TL_LANG']['MSC']['saveData']      = 'Save data';
+$GLOBALS['TL_LANG']['MSC']['printPage']     = 'Print this page';
+$GLOBALS['TL_LANG']['MSC']['printAsPdf']    = 'Print article as PDF';
+$GLOBALS['TL_LANG']['MSC']['facebookShare'] = 'Share on Facebook';
+$GLOBALS['TL_LANG']['MSC']['twitterShare']  = 'Share on Twitter';
+$GLOBALS['TL_LANG']['MSC']['pleaseWait']    = 'Please wait';
+$GLOBALS['TL_LANG']['MSC']['loading']       = 'Loading …';
+$GLOBALS['TL_LANG']['MSC']['more']          = 'Read more …';
+$GLOBALS['TL_LANG']['MSC']['targetPage']    = 'Target page';
+$GLOBALS['TL_LANG']['MSC']['com_name']      = 'Name';
+$GLOBALS['TL_LANG']['MSC']['com_email']     = 'E-mail (not published)';
+$GLOBALS['TL_LANG']['MSC']['com_website']   = 'Website';
+$GLOBALS['TL_LANG']['MSC']['com_comment']   = 'Comment';
+$GLOBALS['TL_LANG']['MSC']['com_submit']    = 'Submit comment';
+$GLOBALS['TL_LANG']['MSC']['comment_by']    = 'Comment by';
+$GLOBALS['TL_LANG']['MSC']['com_quote']     = '%s wrote:';
+$GLOBALS['TL_LANG']['MSC']['com_code']      = 'Code:';
+$GLOBALS['TL_LANG']['MSC']['com_subject']   = 'Contao :: New comment on %s';
+$GLOBALS['TL_LANG']['MSC']['com_message']   = "%s has created a new comment on your website.\n\n---\n\n%s\n\n---\n\nView: %s\nEdit: %s\n\nIf you are moderating comments, you have to log in to the back end to publish it.";
+$GLOBALS['TL_LANG']['MSC']['com_confirm']   = 'Your comment has been added and is now pending for approval.';
+$GLOBALS['TL_LANG']['MSC']['invalidPage']   = 'Sorry, item "%s" does not exist.';
+$GLOBALS['TL_LANG']['MSC']['list_orderBy']  = 'Order by %s';
+$GLOBALS['TL_LANG']['MSC']['list_perPage']  = 'Results per page';
+$GLOBALS['TL_LANG']['MSC']['published']     = 'Published';
+$GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Unpublished';
+$GLOBALS['TL_LANG']['MSC']['addComment']    = 'Add a comment';
+$GLOBALS['TL_LANG']['MSC']['autologin']     = 'Remember me';
 
 ?>

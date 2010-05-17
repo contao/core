@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Registration
  * @license    LGPL
  * @filesource
@@ -35,7 +37,7 @@ $GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-mail address';
 $GLOBALS['TL_LANG']['MSC']['accountActivated'] = 'Your account has been activated.';
 $GLOBALS['TL_LANG']['MSC']['accountError']     = 'Unable to process the current request.';
 $GLOBALS['TL_LANG']['MSC']['emailSubject']     = 'Your registration on %s';
-$GLOBALS['TL_LANG']['MSC']['adminSubject']     = 'TYPOlight :: New registration on %s';
+$GLOBALS['TL_LANG']['MSC']['adminSubject']     = 'Contao :: New registration on %s';
 $GLOBALS['TL_LANG']['MSC']['adminText']        = 'A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.';
 $GLOBALS['TL_LANG']['MSC']['requestPassword']  = 'Request password';
 $GLOBALS['TL_LANG']['MSC']['setNewPassword']   = 'Set new password';

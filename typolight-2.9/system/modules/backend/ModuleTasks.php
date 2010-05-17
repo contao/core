@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Back end module "tasks".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleTasks extends BackendModule
@@ -265,14 +267,14 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $this->Template->title->value;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'typolight/main.php?do=tasks&act=edit&id=' . $insertId);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'contao/main.php?do=tasks&act=edit&id=' . $insertId);
 
 					$objEmail->sendTo($objUser->email);
 				}
 			}
 
 			// Go back
-			$this->redirect('typolight/main.php?do=tasks');
+			$this->redirect('contao/main.php?do=tasks');
 		}
 	}
 
@@ -305,7 +307,7 @@ class ModuleTasks extends BackendModule
 		if ($objTask->numRows < 1)
 		{
 			$this->log('Invalid task ID "' . $this->Input->get('id') . '"', 'ModuleTask editTask()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Check if the user is allowed to edit the task
@@ -383,14 +385,14 @@ class ModuleTasks extends BackendModule
 					$objEmail->subject = $objTask->title;
 
 					$objEmail->text = trim($this->Template->comment->value);
-					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'typolight/main.php?do=tasks&act=edit&id=' . $objTask->id);
+					$objEmail->text .= sprintf($GLOBALS['TL_LANG']['tl_task']['message'], $this->User->name, $this->Environment->base . 'contao/main.php?do=tasks&act=edit&id=' . $objTask->id);
 
 					$objEmail->sendTo($objUser->email);
 				}
 			}
 
 			// Go back
-			$this->redirect('typolight/main.php?do=tasks');
+			$this->redirect('contao/main.php?do=tasks');
 		}
 
 		$this->Template->history = $arrHistory;
@@ -419,14 +421,14 @@ class ModuleTasks extends BackendModule
 		if ($objTask->numRows < 1)
 		{
 			$this->log('Invalid task ID "' . $this->Input->get('id') . '"', 'ModuleTask deleteTask()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Check if the user is allowed to delete the task
 		if (!$this->User->isAdmin && $objTask->createdBy != $this->User->id)
 		{
 			$this->log('Not enough permissions to delete task ID "' . $this->Input->get('id') . '"', 'ModuleTask deleteTask()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$affected = 1;

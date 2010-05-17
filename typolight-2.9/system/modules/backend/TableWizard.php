@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle table fields.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class TableWizard extends Widget
@@ -240,7 +242,7 @@ class TableWizard extends Widget
 	 * @param object
 	 * @return string
 	 */
-	public function importTable()
+	public function importTable(DataContainer $dc)
 	{
 		if ($this->Input->get('key') != 'table')
 		{
@@ -293,16 +295,16 @@ class TableWizard extends Widget
 				}
 			}
 
-			$this->createNewVersion('tl_content', $this->Input->get('id'));
+			$this->createNewVersion($dc->table, $this->Input->get('id'));
 
-			$this->Database->prepare("UPDATE tl_content SET tableitems=? WHERE id=?")
+			$this->Database->prepare("UPDATE " . $dc->table . " SET tableitems=? WHERE id=?")
 						   ->execute(serialize($arrTable), $this->Input->get('id'));
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 			$this->redirect(str_replace('&key=table', '', $this->Environment->request));
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_content']['fields']['source'], 'source', null, 'source', 'tl_content'));
+		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA'][$dc->table]['fields']['source'], 'source', null, 'source', $dc->table));
 
 		// Return form
 		return '
@@ -310,7 +312,7 @@ class TableWizard extends Widget
 <a href="'.ampersand(str_replace('&key=table', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_content']['importTable'][1].'</h2>'.$this->getMessages().'
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$dc->table]['importTable'][1].'</h2>'.$this->getMessages().'
 
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_table_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -324,9 +326,9 @@ class TableWizard extends Widget
     <option value="tabulator">'.$GLOBALS['TL_LANG']['MSC']['tabulator'].'</option>
   </select>'.(strlen($GLOBALS['TL_LANG']['MSC']['separator'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_content']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
-'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_content']['source'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_content']['source'][1].'</p>' : '').'
+  <h3><label for="source">'.$GLOBALS['TL_LANG'][$dc->table]['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+'.$objTree->generate().(strlen($GLOBALS['TL_LANG'][$dc->table]['source'][1]) ? '
+  <p class="tl_help">'.$GLOBALS['TL_LANG'][$dc->table]['source'][1].'</p>' : '').'
 </div>
 
 </div>
@@ -334,7 +336,7 @@ class TableWizard extends Widget
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importTable'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$dc->table]['importTable'][0]).'" />
 </div>
 
 </div>

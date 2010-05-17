@@ -1,6 +1,6 @@
 tinyMCE.addI18n('pl.typolinks_dlg',{
-page:'Strony TYPOlight',
-file:'Pliki TYPOlight',
+page:'Strony Contao',
+file:'Pliki Contao',
 link_title:"Wstaw/edytuj link",
 link_url:"Link URL",
 link_target:"Cel",

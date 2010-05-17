@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle newsletters.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class Newsletter extends Backend
@@ -368,7 +370,15 @@ class Newsletter extends Backend
 			$objEmail->imageDir = TL_ROOT . '/';
 		}
 
-		$objEmail->sendTo($arrRecipient['email']);
+		// Deactivate invalid addresses
+		try
+		{
+			$objEmail->sendTo($arrRecipient['email']);
+		}
+		catch (Swift_RfcComplianceException $e)
+		{
+			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
+		}
 
 		// Rejected recipients
 		if (count($objEmail->failures))
@@ -502,7 +512,7 @@ class Newsletter extends Backend
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(strlen($GLOBALS['TL_LANG']['MSC']['separator'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
 '.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1].'</p>' : '').'
 </div>

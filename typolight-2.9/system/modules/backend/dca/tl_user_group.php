@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -54,7 +56,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'mode'                    => 1,
 			'fields'                  => array('name'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,filter,limit',
+			'panelLayout'             => 'filter,search,limit',
 		),
 		'label' => array
 		(
@@ -112,7 +114,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name;{modules_legend},modules;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{alexf_legend},alexf;{account_legend},disable,start,stop',
+		'default'                     => '{title_legend},name;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{alexf_legend},alexf;{account_legend},disable,start,stop',
 	),
 
 	// Fields
@@ -134,6 +136,15 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'options_callback'        => array('tl_user_group', 'getModules'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
 			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
+		),
+		'themes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['themes'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'options'                 => array('css', 'modules', 'layout'),
+			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
+			'eval'                    => array('multiple'=>true)
 		),
 		'pagemounts' => array
 		(
@@ -224,7 +235,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_user_group extends Backend
@@ -378,7 +389,7 @@ class tl_user_group extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_user_group::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate user group ID "'.$intId.'"', 'tl_user_group toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_user_group', $intId);

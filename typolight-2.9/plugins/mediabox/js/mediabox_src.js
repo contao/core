@@ -6,7 +6,7 @@
 	Slimbox v1.64 - The ultimate lightweight Lightbox clone
 	(c) 2007-2008 Christophe Beyls <http://www.digitalia.be>
 	MIT-style license.
-	Customized for TYPOlight.
+	Customized for Contao Open Source CMS.
 */
 
 var Mediabox;
@@ -299,7 +299,7 @@ var Mediabox;
 				mediaHeight = "";
 			}
 			URL = images[imageIndex][0];
-			// PATCH: do not encode URIs because TYPOlight has done already
+			// PATCH: do not encode URIs because Contao has done already
 			//URL = encodeURI(URL).replace("(","%28").replace(")","%29");
 			// PATCH EOF
 			captionSplit = images[activeImage][1].split('::');

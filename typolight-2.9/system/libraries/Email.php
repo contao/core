@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -39,7 +41,7 @@ require_once(TL_ROOT . '/plugins/swiftmailer/swift_init.php');
  *
  * Provide methodes to send e-mails.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class Email extends System
@@ -152,7 +154,7 @@ class Email extends System
 
 		// Instantiate Swift_Message
 		$this->objMessage = Swift_Message::newInstance();
-		$this->objMessage->getHeaders()->addTextHeader('X-Mailer', 'TYPOlight Open Source CMS');
+		$this->objMessage->getHeaders()->addTextHeader('X-Mailer', 'Contao Open Source CMS');
 	}
 
 
@@ -282,7 +284,7 @@ class Email extends System
 	/**
 	 * Get CC e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@typolight.org>) are allowed.
+	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
 	 * @param mixed
 	 */
 	public function sendCc()
@@ -294,7 +296,7 @@ class Email extends System
 	/**
 	 * Get BCC e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@typolight.org>) are allowed.
+	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
 	 * @param mixed
 	 */
 	public function sendBcc()
@@ -306,7 +308,7 @@ class Email extends System
 	/**
 	 * Get ReplyTo e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@typolight.org>) are allowed.
+	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
 	 * @param mixed
 	 */
 	public function replyTo()
@@ -341,7 +343,7 @@ class Email extends System
 	/**
 	 * Get e-mail addresses from an array, string or unlimited number of arguments and send the e-mail
 	 *
-	 * Friendly name portions (e.g. Leo <leo@typolight.org>) are allowed.
+	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
 	 * @param mixed
 	 * @return boolean
 	 */

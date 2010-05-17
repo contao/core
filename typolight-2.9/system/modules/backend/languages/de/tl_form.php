@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -45,7 +47,7 @@ $GLOBALS['TL_LANG']['tl_form']['storeValues']  = array('Eingaben speichern', 'Ü
 $GLOBALS['TL_LANG']['tl_form']['targetTable']  = array('Zieltabelle', 'Die Zieltabelle muss für jedes Formularfeld eine Spalte enthalten.');
 $GLOBALS['TL_LANG']['tl_form']['method']       = array('Übertragungsmethode', 'Die Standard-Übertragungsmethode ist POST.');
 $GLOBALS['TL_LANG']['tl_form']['attributes']   = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
-$GLOBALS['TL_LANG']['tl_form']['formID']       = array('Formular-Id', 'Die Formular-Id wird zur Ansteuerung eines TYPOlight-Moduls benötigt.');
+$GLOBALS['TL_LANG']['tl_form']['formID']       = array('Formular-Id', 'Die Formular-Id wird zur Ansteuerung eines Contao-Moduls benötigt.');
 $GLOBALS['TL_LANG']['tl_form']['tableless']    = array('Tabellenloses Layout', 'Das Formular ohne HTML-Tabellen ausgeben.');
 $GLOBALS['TL_LANG']['tl_form']['allowTags']    = array('HTML-Tags erlauben', 'HTML-Eingaben in Formularfeldern erlauben.');
 $GLOBALS['TL_LANG']['tl_form']['tstamp']       = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');

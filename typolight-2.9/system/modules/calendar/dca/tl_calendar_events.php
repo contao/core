@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -64,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'mode'                    => 4,
 			'fields'                  => array('startTime DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_calendar_events', 'listEvents')
 		),
 		'global_operations' => array
@@ -147,6 +149,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
@@ -167,6 +171,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['author'],
 			'default'                 => $this->User->id,
 			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
@@ -182,32 +189,31 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startTime'],
 			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 8,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'tl_class'=>'w50')
 		),
 		'endTime' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'tl_class'=>'w50')
 		),
 		'startDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startDate'],
 			'default'                 => time(),
 			'exclude'                 => true,
-			'filter'                  => true,
-			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'endDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
-			'default'                 => time(),
 			'exclude'                 => true,
-			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
@@ -335,7 +341,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['addEnclosure'],
 			'exclude'                 => true,
-			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
@@ -434,7 +439,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_calendar_events extends Backend
@@ -490,7 +495,7 @@ class tl_calendar_events extends Backend
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to create events in calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -499,7 +504,7 @@ class tl_calendar_events extends Backend
 				if (!in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" to calendar ID "'.$this->Input->get('pid').'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
 
@@ -514,13 +519,13 @@ class tl_calendar_events extends Backend
 				if ($objCalendar->numRows < 1)
 				{
 					$this->log('Invalid event ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objCalendar->pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' event ID "'.$id.'" of calendar ID "'.$objCalendar->pid.'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -533,7 +538,7 @@ class tl_calendar_events extends Backend
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objCalendar = $this->Database->prepare("SELECT id FROM tl_calendar_events WHERE pid=?")
@@ -542,7 +547,7 @@ class tl_calendar_events extends Backend
 				if ($objCalendar->numRows < 1)
 				{
 					$this->log('Invalid calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
@@ -554,12 +559,12 @@ class tl_calendar_events extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access calendar ID "'.$id.'"', 'tl_calendar_events checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
@@ -831,7 +836,7 @@ class tl_calendar_events extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_calendar_events::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish event ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_calendar_events', $intId);
@@ -851,6 +856,10 @@ class tl_calendar_events extends Backend
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_calendar_events', $intId);
+
+		// Update the RSS feed (for some reason it does not work without sleep(1))
+		sleep(1);
+		$this->generateFeed();
 	}
 }
 

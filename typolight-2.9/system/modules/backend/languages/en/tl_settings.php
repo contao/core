@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -36,7 +38,7 @@ $GLOBALS['TL_LANG']['tl_settings']['dateFormat']          = array('Date format',
 $GLOBALS['TL_LANG']['tl_settings']['timeFormat']          = array('Time format', 'The time format string will be parsed with the PHP date() function.');
 $GLOBALS['TL_LANG']['tl_settings']['datimFormat']         = array('Date and time format', 'The date and time format string will be parsed with the PHP date() function.');
 $GLOBALS['TL_LANG']['tl_settings']['timeZone']            = array('Time zone', 'Please select the server time zone.');
-$GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relative path to the TYPOlight directory', 'The relative path to the TYPOlight directory is usually set automatically by the install tool.');
+$GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relative path to the Contao directory', 'The relative path to the Contao directory is usually set automatically by the install tool.');
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Character set', 'It is recommended to use UTF-8, so special characters are displayed correctly.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Custom layout sections', 'Here you can enter a comma separated list of custom layout sections.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
@@ -46,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collap
 $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Use paragraphs to generate new lines', 'Use paragraphs instead of line breaks to generate new lines in the rich text editor.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache mode', 'Here you can select the cache mode.');
-$GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('Rewrite URLs', 'Make TYPOlight generate static URLs without the index.php fragment. This feature requires "mod_rewrite", renaming the ".htaccess.default" file to ".htaccess" and adjusting the RewriteBase as necessary.');
+$GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('Rewrite URLs', 'Make Contao generate static URLs without the index.php fragment. This feature requires "mod_rewrite", renaming the ".htaccess.default" file to ".htaccess" and adjusting the RewriteBase as necessary.');
 $GLOBALS['TL_LANG']['tl_settings']['disableAlias']        = array('Disable page alias usage', 'Use the numeric ID of a page or article instead of its alias.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Allowed HTML tags', 'Here you can enter a list of allowed HTML tags that will not be stripped.');
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Account locking time', 'An account will be locked if a wrong password is entered three times in a row.');
@@ -61,7 +63,7 @@ $GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editable file
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Image file types', 'Here you can enter a comma separated list of file types that can be handled by the image class.');
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If the width of an image or movie exceeds this value, it will be adjusted automatically.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
-$GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the TYPOlight files directory.');
+$GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the Contao files directory.');
 $GLOBALS['TL_LANG']['tl_settings']['fancyUpload']         = array('Use FancyUpload', 'Upload files via FancyUpload (requires Flash and JavaScript).');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).');
@@ -79,6 +81,7 @@ $GLOBALS['TL_LANG']['tl_settings']['undoPeriod']          = array('Storage time 
 $GLOBALS['TL_LANG']['tl_settings']['versionPeriod']       = array('Storage time for versions', 'Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).');
 $GLOBALS['TL_LANG']['tl_settings']['logPeriod']           = array('Storage time for log entries', 'Here you can enter the storage time for log entries in seconds (14 days = 1209600 seconds).');
 $GLOBALS['TL_LANG']['tl_settings']['sessionTimeout']      = array('Session timeout', 'Here you can enter the maximum lifetime of a session in seconds (60 minutes = 3600 seconds).');
+$GLOBALS['TL_LANG']['tl_settings']['autologin']           = array('Auto login period', 'Here you can set the front end auto login period (90 days = 7776000 seconds).');
 $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Default page owner', 'Here you can select a user as the default owner of a page.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Default page group', 'Here you can select a group as the default owner of a page.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Default access rights', 'Please assign the default access rights for pages and articles.');

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle list items.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ListWizard extends Widget
@@ -168,7 +170,7 @@ class ListWizard extends Widget
 	 * @param object
 	 * @return string
 	 */
-	public function importList()
+	public function importList(DataContainer $dc)
 	{
 		if ($this->Input->get('key') != 'list')
 		{
@@ -225,16 +227,16 @@ class ListWizard extends Widget
 				}
 			}
 
-			$this->createNewVersion('tl_content', $this->Input->get('id'));
+			$this->createNewVersion($dc->table, $this->Input->get('id'));
 
-			$this->Database->prepare("UPDATE tl_content SET listitems=? WHERE id=?")
+			$this->Database->prepare("UPDATE " . $dc->table . " SET listitems=? WHERE id=?")
 						   ->execute(serialize($arrList), $this->Input->get('id'));
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 			$this->redirect(str_replace('&key=list', '', $this->Environment->request));
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_content']['fields']['source'], 'source', null, 'source', 'tl_content'));
+		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA'][$dc->table]['fields']['source'], 'source', null, 'source', $dc->table));
 
 		// Return form
 		return '
@@ -242,7 +244,7 @@ class ListWizard extends Widget
 <a href="'.ampersand(str_replace('&key=list', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_content']['importList'][1].'</h2>'.$this->getMessages().'
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$dc->table]['importList'][1].'</h2>'.$this->getMessages().'
 
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_list_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
@@ -257,9 +259,9 @@ class ListWizard extends Widget
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(strlen($GLOBALS['TL_LANG']['MSC']['separator'][1]) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_content']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
-'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_content']['source'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_content']['source'][1].'</p>' : '').'
+  <h3><label for="source">'.$GLOBALS['TL_LANG'][$dc->table]['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+'.$objTree->generate().(strlen($GLOBALS['TL_LANG'][$dc->table]['source'][1]) ? '
+  <p class="tl_help">'.$GLOBALS['TL_LANG'][$dc->table]['source'][1].'</p>' : '').'
 </div>
 
 </div>
@@ -267,7 +269,7 @@ class ListWizard extends Widget
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_content']['importList'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$dc->table]['importList'][0]).'" />
 </div>
 
 </div>

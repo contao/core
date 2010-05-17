@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    TemplateEditor
  * @license    LGPL
  * @filesource
@@ -30,7 +32,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originaltemplates', 'Eine Kopie des ausgewählten Templates wird im <em>templates</em>-Verzeichnis gespeichert.');
+$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originaltemplate', 'Hier können Sie das Template auswählen, das Sie anpassen möchten.');
+$GLOBALS['TL_LANG']['tl_templates']['target']   = array('Zielverzeichnis', 'Eine Kopie des ausgewählten Templates wird im Zielverzeichnis gespeichert.');
 
 
 /**
@@ -39,14 +42,17 @@ $GLOBALS['TL_LANG']['tl_templates']['original'] = array('Originaltemplates', 'Ei
 $GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Ein neues Template erstellen';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl']   = 'Template erstellen';
 $GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Das Template "%s" existiert bereits!';
+$GLOBALS['TL_LANG']['tl_templates']['invalid']  = 'Ungültiges Zielverzeichnis "%s"!';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_templates']['new']    = array('Neues Template', 'Ein neues Template erstellen');
-$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Template umbenennen', 'Template "%s" umbenennen');
-$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Template bearbeiten', 'Template "%s" bearbeiten');
-$GLOBALS['TL_LANG']['tl_templates']['delete'] = array('Template löschen', 'Template "%s" löschen');
+$GLOBALS['TL_LANG']['tl_templates']['new_tpl']   = array('Neues Template', 'Ein neues Template erstellen');
+$GLOBALS['TL_LANG']['tl_templates']['new']       = array('Neuer Ordner', 'Einen neuen Ordner anlegen');
+$GLOBALS['TL_LANG']['tl_templates']['edit']      = array('Template umbenennen', 'Template "%s" umbenennen');
+$GLOBALS['TL_LANG']['tl_templates']['source']    = array('Template bearbeiten', 'Template "%s" bearbeiten');
+$GLOBALS['TL_LANG']['tl_templates']['delete']    = array('Template löschen', 'Template "%s" löschen');
+$GLOBALS['TL_LANG']['tl_templates']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
 
 ?>

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to manage front end users.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
 class FrontendUser extends User
@@ -172,6 +174,114 @@ class FrontendUser extends User
 		}
 
 		return self::$objInstance;
+	}
+	
+
+	/**
+	 * Authenticate a user
+	 * @return boolean
+	 */
+	public function authenticate()
+	{
+		// Default authentication
+		if (parent::authenticate())
+		{
+			return true;
+		}
+
+		// Check whether auto login is active
+		if ($GLOBALS['TL_CONFIG']['autologin'] < 1 || $this->Input->cookie('FE_AUTO_LOGIN') == '')
+		{
+			return false;
+		}
+
+		// Try to find the user by his auto login cookie
+		if ($this->findBy('autologin', $this->Input->cookie('FE_AUTO_LOGIN')) == false)
+		{
+			return false;
+		}
+
+		// Check the auto login period
+		if ($this->createdOn < (time() - $GLOBALS['TL_CONFIG']['autologin']))
+		{
+			return false;
+		}
+
+		// Validate the account status
+		if ($this->checkAccountStatus() == false)
+		{
+			return false;
+		}
+
+		$this->setUserFromDb();
+
+		// Last login date
+		$this->lastLogin = $this->currentLogin;
+		$this->currentLogin = time();
+		$this->save();
+
+		// Generate the session
+		$this->generateSession();
+		$this->log('User "' . $this->username . '" was logged in automatically', get_class($this) . ' authenticate()', TL_ACCESS);
+
+		// Reload the page
+		$this->reload();
+		return true;
+	}
+
+
+	/**
+	 * Add the auto login resources
+	 * @return boolean
+	 */
+	public function login()
+	{
+		// Default routine
+		if (parent::login() == false)
+		{
+			return false;
+		}
+
+		// Set the auto login data
+		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && $this->Input->post('autologin'))
+		{
+			$time = time();
+			$strToken = md5(uniqid('', true));
+
+			$this->createdOn = $time;
+			$this->autologin = $strToken;
+			$this->save();
+
+			$this->setCookie('FE_AUTO_LOGIN', $strToken, ($time + $GLOBALS['TL_CONFIG']['autologin']), $GLOBALS['TL_CONFIG']['websitePath']);
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Remove the auto login resources
+	 * @return boolean
+	 */
+	public function logout()
+	{
+		// Default routine
+		if (parent::logout() == false)
+		{
+			return false;
+		}
+
+		// Reset the auto login data
+		if ($this->blnRecordExists)
+		{
+			$this->autologin = null;
+			$this->createdOn = 0;
+			$this->save();
+		}
+
+		// Remove the auto login cookie
+		$this->setCookie('FE_AUTO_LOGIN', $this->autologin, (time() - 86400), $GLOBALS['TL_CONFIG']['websitePath']);
+		return true;
 	}
 
 

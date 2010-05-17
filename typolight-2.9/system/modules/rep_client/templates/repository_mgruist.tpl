@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to uninstall an extension
+ * Contao Repository :: Template to uninstall an extension
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010

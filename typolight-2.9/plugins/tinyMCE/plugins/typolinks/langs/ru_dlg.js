@@ -1,6 +1,6 @@
 tinyMCE.addI18n('ru.typolinks_dlg',{
-page:"TYPOlight страницы",
-file:"TYPOlight файлы",
+page:"Contao страницы",
+file:"Contao файлы",
 link_title:"Вставить/редактировать ссылку",
 link_url:"URL ссылки",
 link_target:"Target",

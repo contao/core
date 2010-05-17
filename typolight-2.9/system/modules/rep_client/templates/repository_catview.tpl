@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to display a single extension
+ * Contao Repository :: Template to display a single extension
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
@@ -20,7 +20,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 ?>
 
 <div id="tl_buttons">
-<a href="typolight/main.php?do=repository_catalog" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
+<a href="contao/main.php?do=repository_catalog" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
 </div>
 
 <div class="mod_repository mod_repository_view block">
@@ -167,7 +167,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
         <th><?php echo $text['versionto']; ?></th>
       </tr>
       <tr>
-        <td>TYPOlight</td>
+        <td>Contao</td>
         <td><?php echo Repository::formatCoreVersion($ext->coreminversion); ?></td>
         <td><?php echo Repository::formatCoreVersion($ext->coremaxversion); ?></td>
       </tr>

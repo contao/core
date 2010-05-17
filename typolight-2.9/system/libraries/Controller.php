@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to manage controllers.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 abstract class Controller extends System
@@ -63,29 +65,48 @@ abstract class Controller extends System
 	 */
 	protected function getTemplate($strTemplate)
 	{
+		$strPath = TL_ROOT . '/templates';
 		$strTemplate = basename($strTemplate);
-		$strFile = sprintf('%s/templates/%s.tpl', TL_ROOT, $strTemplate);
 
-		if (!file_exists($strFile))
+		// Check the templates subfolder
+		if (TL_MODE == 'FE')
 		{
-			foreach ($this->Config->getActiveModules() as $strModule)
-			{
-				$strPath = sprintf('%s/system/modules/%s/templates/%s.tpl', TL_ROOT, $strModule, $strTemplate);
+			global $objPage;
 
-				if (file_exists($strPath))
+			$strTemplateGroup = str_replace('../', '', $objPage->templateGroup);
+			$strTemplateGroup = preg_replace('@^templates/@', '', $strTemplateGroup);
+
+			if ($strTemplateGroup != '')
+			{
+				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+
+				if (file_exists($strFile))
 				{
-					$strFile = $strPath;
-					break;
+					return $strFile;
 				}
 			}
 		}
 
-		if (!file_exists($strFile))
+		// Check the templates directory
+		$strFile = $strPath . '/' . $strTemplate . '.tpl';
+
+		if (file_exists($strFile))
 		{
-			throw new Exception(sprintf('Could not find template file "%s"', $strTemplate));
+			return $strFile;
 		}
 
-		return $strFile;
+		// Browse all module folders
+		foreach ($this->Config->getActiveModules() as $strModule)
+		{
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+
+			if (file_exists($strFile))
+			{
+				return $strFile;
+			}
+		}
+
+		throw new Exception(sprintf('Could not find template file "%s"', $strTemplate));
 	}
 
 
@@ -99,9 +120,21 @@ abstract class Controller extends System
 		$arrTemplates = array();
 		$arrFolders = array(TL_ROOT . '/templates');
 
+		// Add template subfolders
+		foreach (scan(TL_ROOT . '/templates') as $strName)
+		{
+			$strFolder = TL_ROOT . '/templates/' . $strName;
+
+			if (is_dir($strFolder) && strncmp($strName, '.', 1) !== 0)
+			{
+				$arrFolders[] = $strFolder;
+			}
+		}
+
+		// Add module subfolders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$strFolder = sprintf('%s/system/modules/%s/templates', TL_ROOT, $strModule);
+			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
 
 			if (is_dir($strFolder))
 			{
@@ -109,6 +142,7 @@ abstract class Controller extends System
 			}
 		}
 
+		// Find all matching templates
 		foreach ($arrFolders as $strFolder)
 		{
 			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '.*\.tpl$/i',  scan($strFolder));
@@ -287,7 +321,22 @@ abstract class Controller extends System
 		// Print article as PDF
 		if ($this->Input->get('pdf') == $objArticle->id)
 		{
-			$this->printArticleAsPdf($objArticle);
+			// Backwards compatibility
+			if ($objArticle->printable == 1)
+			{
+				$this->printArticleAsPdf($objArticle);
+			}
+
+			// New structure
+			elseif ($objArticle->printable != '')
+			{
+				$options = deserialize($objArticle->printable);
+
+				if (is_array($options) && in_array('pdf', $options))
+				{
+					$this->printArticleAsPdf($objArticle);
+				}
+			}
 		}
 
 		$objArticle->headline = $objArticle->title;
@@ -944,14 +993,13 @@ abstract class Controller extends System
 		$objArticle = new ModuleArticle($objArticle);
 		$strArticle = $this->replaceInsertTags($objArticle->generate());
 		$strArticle = html_entity_decode($strArticle, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
-		$strArticle = $this->convertRelativeUrls($strArticle);
+		$strArticle = $this->convertRelativeUrls($strArticle, '', true);
 
 		// Remove form elements and JavaScript links
 		$arrSearch = array
 		(
 			'@<form.*</form>@Us',
-			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us',
-			'@pdf=[0-9]*(&|&amp;)?@i'
+			'@<a [^>]*href="[^"]*javascript:[^>]+>.*</a>@Us'
 		);
 
 		$strArticle = preg_replace($arrSearch, '', $strArticle);
@@ -966,25 +1014,28 @@ abstract class Controller extends System
 			}
 		}
 
+		// Handle line breaks in preformatted text
+		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
+
 		// Default PDF export using TCPDF
 		$arrSearch = array
 		(
-			'@(<pre.*</pre>)@Use',
 			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
-			'@(<img[^>]+>)@e',
+			'@(<img[^>]+>)@',
 			'@(<div[^>]+block[^>]+>)@',
 			'@[\n\r\t]+@',
-			'@<br /><div class="mod_article@'
+			'@<br /><div class="mod_article@',
+			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
 		);
 
 		$arrReplace = array
 		(
-			'str_replace("\n", "<br />", "\\1")',
 			'<u>$1</u>',
-			'"<br />" . preg_replace(array("/ width=\"[^\"]+\"/", "/ height=\"[^\"]+\"/"), "", "\\1")',
+			'<br />$1',
 			'<br />$1',
 			' ',
-			'<div class="mod_article'
+			'<div class="mod_article',
+			'href="$1$4"'
 		);
 
 		$strArticle = preg_replace($arrSearch, $arrReplace, $strArticle);
@@ -1254,11 +1305,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), $strTitle);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle, true), ampersand($strTitle));
 							break;
 
 						case 'link_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($strTitle));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($strTitle, true));
 							break;
 
 						case 'link_url':
@@ -1266,7 +1317,7 @@ abstract class Controller extends System
 							break;
 
 						case 'link_title':
-							$arrCache[$strTag] = specialchars($strTitle);
+							$arrCache[$strTag] = specialchars($strTitle, true);
 							break;
 					}
 					break;
@@ -1310,11 +1361,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'article':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objArticle->title), $objArticle->title);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objArticle->title, true), ampersand($objArticle->title));
 							break;
 
 						case 'article_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objArticle->title));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objArticle->title, true));
 							break;
 
 						case 'article_url':
@@ -1322,7 +1373,7 @@ abstract class Controller extends System
 							break;
 
 						case 'article_title':
-							$arrCache[$strTag] = specialchars($objArticle->title);
+							$arrCache[$strTag] = specialchars($objArticle->title, true);
 							break;
 					}
 					break;
@@ -1351,11 +1402,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'faq':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objFaq->question), $objFaq->question);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objFaq->question, true), ampersand($objFaq->question));
 							break;
 
 						case 'faq_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objFaq->question));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objFaq->question, true));
 							break;
 
 						case 'faq_url':
@@ -1363,7 +1414,7 @@ abstract class Controller extends System
 							break;
 
 						case 'faq_title':
-							$arrCache[$strTag] = specialchars($objFaq->question);
+							$arrCache[$strTag] = specialchars($objFaq->question, true);
 							break;
 					}
 					break;
@@ -1404,11 +1455,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'news':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objNews->headline), $objNews->headline);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objNews->headline, true), ampersand($objNews->headline));
 							break;
 
 						case 'news_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objNews->headline));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objNews->headline, true));
 							break;
 
 						case 'news_url':
@@ -1416,7 +1467,7 @@ abstract class Controller extends System
 							break;
 
 						case 'news_title':
-							$arrCache[$strTag] = specialchars($objNews->headline);
+							$arrCache[$strTag] = specialchars($objNews->headline, true);
 							break;
 					}
 					break;
@@ -1457,11 +1508,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'event':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objEvent->title), $objEvent->title);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objEvent->title, true), ampersand($objEvent->title));
 							break;
 
 						case 'event_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objEvent->title));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($objEvent->title, true));
 							break;
 
 						case 'event_url':
@@ -1469,7 +1520,7 @@ abstract class Controller extends System
 							break;
 
 						case 'event_title':
-							$arrCache[$strTag] = specialchars($objEvent->title);
+							$arrCache[$strTag] = specialchars($objEvent->title, true);
 							break;
 					}
 					break;
@@ -1707,6 +1758,7 @@ abstract class Controller extends System
 				// Files from the templates directory
 				case 'file':
 					$arrGet = $_GET;
+					$this->import('Input');
 					$this->Input->resetCache();
 					$strFile = $elements[1];
 
@@ -1914,16 +1966,18 @@ abstract class Controller extends System
 	 * Convert relative URLs to absolute URLs
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	protected function convertRelativeUrls($strContent, $strBase=false)
+	protected function convertRelativeUrls($strContent, $strBase='', $blnHrefOnly=false)
 	{
-		if (!$strBase)
+		if ($strBase == '')
 		{
 			$strBase = $this->Environment->base;
 		}
 
-		$arrUrls = preg_split('/((href|src)="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$search = $blnHrefOnly ? 'href' : 'href|src';
+		$arrUrls = preg_split('/(('.$search.')="([^"]+)")/i', $strContent, -1, PREG_SPLIT_DELIM_CAPTURE);
 		$strContent = '';
 
 		for($i=0; $i<count($arrUrls); $i=$i+4)
