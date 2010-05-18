@@ -497,9 +497,9 @@ class tl_member extends Backend
 	 * @param object
 	 * @return mixed
 	 */
-	public function updateGroupMembership($varValue, DataContainer $dc)
+	public function updateGroupMembership($varValue, DataContainer $dc=null)
 	{
-		if ($this->Input->get('act') != 'overrideAll' || !$this->Input->post('update_mode'))
+		if (is_null($dc) || $this->Input->get('act') != 'overrideAll' || !$this->Input->post('update_mode'))
 		{
 			return $varValue;
 		}
