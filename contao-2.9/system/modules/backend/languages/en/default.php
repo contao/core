@@ -288,5 +288,6 @@ $GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Replace the existing entry';
 $GLOBALS['TL_LANG']['MSC']['ascending']        = 'ascending';
 $GLOBALS['TL_LANG']['MSC']['descending']       = 'descending';
 $GLOBALS['TL_LANG']['MSC']['default']          = 'Default';
+$GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Help wizard';
 
 ?>

@@ -127,6 +127,7 @@ class Help extends Backend
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->headline = strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0]) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0] : $this->Input->get('field');
+		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
 		$this->Template->output();
 	}

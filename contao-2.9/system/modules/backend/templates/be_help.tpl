@@ -14,7 +14,7 @@
 <div id="container">
 <div id="main">
 
-<h1>Help wizard</h1>
+<h1><?php echo $this->helpWizard; ?></h1>
 
 <h2><?php echo $this->headline; ?></h2>
 

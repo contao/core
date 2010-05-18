@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.RC1 (2010--)
+------------------------
+- Fixed a few minor issues
+
 Version 2.9.beta1 (2010-05-17)
 ------------------------------
 - Added: theme manager
@@ -10,4 +14,3 @@ Version 2.9.beta1 (2010-05-17)
 - Added: buttons to share articles on Facebook and Twitter
 - Added: parent view sorting groups
 - Added: Edit Area as default file editor
-

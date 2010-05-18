@@ -288,5 +288,6 @@ $GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Bestehende Zuordnung überschr
 $GLOBALS['TL_LANG']['MSC']['ascending']        = 'aufsteigend';
 $GLOBALS['TL_LANG']['MSC']['descending']       = 'absteigend';
 $GLOBALS['TL_LANG']['MSC']['default']          = 'Standard';
+$GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Hilfe-Assistent';
 
 ?>
