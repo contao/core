@@ -133,7 +133,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
 			$objTemplate->archive = $objArticles->archive;
 
-			// Display "read more" button if external link
+			// Display the "read more" button for external/article links
 			if (($objArticles->source == 'external' || $objArticles->source == 'article') && !strlen($objArticles->text))
 			{
 				$objTemplate->text = true;

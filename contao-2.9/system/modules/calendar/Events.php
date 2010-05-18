@@ -258,6 +258,12 @@ abstract class Events extends Module
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
+		// Display the "read more" button for external/article links
+		if (($objEvents->source == 'external' || $objEvents->source == 'article') && !strlen($objEvents->details))
+		{
+			$arrEvent['details'] = true;
+		}
+
 		// Clean RTE output
 		$arrEvent['details'] = str_ireplace
 		(
