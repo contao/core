@@ -92,6 +92,10 @@ class FormTextArea extends Widget
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
 
+			case 'maxlength':
+				// Not supported
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;
