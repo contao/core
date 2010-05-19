@@ -8,6 +8,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: recoverable error in the registration module (#1926) 
 - Fixed: the event list did not show a "read more" link when redirecting to an article (#1944)
 - Fixed: the textarea widget did not ignore the maxlength attribute (#1960)
+- Fixed: replaced "uk" with "gb" in the countries list (#1803)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)
