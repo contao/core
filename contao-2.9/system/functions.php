@@ -256,30 +256,15 @@ function scan($strFolder)
 
 
 /**
- * Convert special characters except ampersands to HTML entities
- * 
- * The difference between specialchars($str, true) and htmlspecialchars() is
- * that ampersands will never be double converted.
- * 
- *   specialchars('<you &amp; me>', true) -> &lt;you &amp; me&gt;
- *   htmlspecialchars('<you &amp; me>') -> &lt;you &amp;amp; me&gt;
- * 
- * The second argument has been added in Contao 2.8.3.
+ * Convert special characters to HTML entities and make sure that
+ * ampersands are never double converted.
  * @param string
  * @param boolean
  * @return string
  */
-function specialchars($strString, $blnAmpersands=false)
+function specialchars($strString)
 {
-	if ($blnAmpersands)
-	{
-		$strString = ampersand($strString);
-	}
-
-	$arrFind = array('"', "'", '<', '>');
-	$arrReplace = array('&#34;', '&#39;', '&lt;', '&gt;');
-
-	return str_replace($arrFind, $arrReplace, $strString);
+	return str_replace('&amp;amp;', '&amp;', htmlspecialchars($strString));
 }
 
 
