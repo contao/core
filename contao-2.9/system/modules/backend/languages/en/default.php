@@ -64,10 +64,11 @@ $GLOBALS['TL_LANG']['ERR']['accountLocked']  = 'This account has been locked! Yo
 $GLOBALS['TL_LANG']['ERR']['invalidLogin']   = 'Login failed!';
 $GLOBALS['TL_LANG']['ERR']['invalidColor']   = 'Invalid color format!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Please select at least one field!';
-$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Alias "%s" already exists!';
-$GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Folder "%s" cannot be imported!';
-$GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'File "%s" is not writeable, so your changes will not take effect!';
+$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'The alias "%s" already exists!';
+$GLOBALS['TL_LANG']['ERR']['importFolder']   = 'The folder "%s" cannot be imported!';
+$GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'The file "%s" is not writeable, so your changes will not take effect!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']    = 'This file or folder name is invalid!';
+$GLOBALS['TL_LANG']['ERR']['invalidFile']    = 'The file or folder "%s" is invalid!';
 
 
 /**

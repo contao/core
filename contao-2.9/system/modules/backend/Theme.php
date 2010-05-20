@@ -45,7 +45,6 @@ class Theme extends Backend
 	 */
 	public function importTheme()
 	{
-
 		// Import the themes
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_theme_import')
 		{
@@ -79,9 +78,24 @@ class Theme extends Backend
 				// Extract all files
 				while ($objArchive->next())
 				{
+					// Limit file operations to system/tmp, tl_files and the templates directory
+					if (strncmp($objArchive->file_name, 'system/tmp/', 11) !== 0 && strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
+					{
+						$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name);
+					}
+
+					// Extract the files
 					try
 					{
-						$objFile = new File($objArchive->file_name);
+						$strFileName = $objArchive->file_name;
+
+						// Override the files directory
+						if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'tl_files' && strncmp($objArchive->file_name, 'tl_files/', 9) === 0)
+						{
+							$strFileName = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
+						}
+
+						$objFile = new File($strFileName);
 						$objFile->write($objArchive->unzip());
 						$objFile->close();
 					}
@@ -113,6 +127,15 @@ class Theme extends Backend
 				{
 					$rows = $tables->item($i)->childNodes;
 					$table = $tables->item($i)->getAttribute('name');
+
+					// Table names do not include spaces and special characters
+					$table = preg_replace('/[^A-Za-z0-9_]+/', '', $table);
+
+					// Skip invalid tables
+					if ($table != 'tl_theme' && $table != 'tl_style_sheet' && $table != 'tl_style' && $table != 'tl_module' && $table != 'tl_layout')
+					{
+						continue;
+					}
 
 					// Loop through the rows
 					for ($j=0; $j<$rows->length; $j++)
@@ -501,10 +524,12 @@ class Theme extends Backend
 
 		if ($strFolder == '')
 		{
+			$strTarget = 'tl_files';
 			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'];
 		}
 		else
 		{
+			$strTarget = 'tl_files/' . $strFolder;
 			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'] .'/'. $strFolder;
 		}
 
@@ -529,7 +554,8 @@ class Theme extends Backend
 			}
 			else
 			{
-				$objArchive->addFile($strFolder .'/'. $strFile);
+				// Always store files in tl_files and convert the directory upon import
+				$objArchive->addFile($strFolder .'/'. $strFile, $strTarget .'/'. $strFile);
 			}
 		}
 	}
