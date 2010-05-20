@@ -144,7 +144,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
 		'author' => array
 		(
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
 		'screenshot' => array
 		(
