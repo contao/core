@@ -1625,11 +1625,33 @@ window.addEvent(\'domready\', function()
 
 			$md5 = md5($folders[$f]);
 			$content = scan($folders[$f]);
-			$countFiles = count($content);
 			$folderAttribute = 'style="margin-left:20px;"';
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
 			$currentEncoded = $this->urlEncode($currentFolder);
+			$countFiles = count($content);
+
+			// Subtract files that will not be shown
+			if (!empty($this->arrValidFileTypes))
+			{
+				foreach ($content as $file)
+				{
+					// Folders
+					if (is_dir($folders[$f] .'/'. $file))
+					{
+						if ($file == '.svn')
+						{
+							--$countFiles;
+						}
+					}
+
+					// Files
+					elseif (!in_array(strtolower(substr($file, (strrpos($file, '.') + 1))), $this->arrValidFileTypes))
+					{
+						--$countFiles;
+					}
+				}
+			}
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
@@ -1662,7 +1684,7 @@ window.addEvent(\'domready\', function()
 			$return .= '</div><div style="clear:both;"></div></li>';
 
 			// Call next node
-			if ($countFiles > 0 && $session['filetree'][$md5] == 1)
+			if (count($content) > 0 && $session['filetree'][$md5] == 1)
 			{
 				$return .= '<li class="parent" id="filetree_'.$md5.'"><ul class="level_'.$level.'">';
 				$return .= $this->generateTree($folders[$f], ($intMargin + $intSpacing), false, $protected, $arrClipboard);

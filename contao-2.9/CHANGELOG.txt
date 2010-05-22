@@ -14,6 +14,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: check the table names during import to prevent data injections (#1978)
 - Fixed: the theme importer did not strip special characters from the file name (#1974)
 - Fixed: the Encryption class did not handle empty strings (#2004)
+- Fixed: the file manager showed a toggle button even if there were no valid files (#1993)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)
