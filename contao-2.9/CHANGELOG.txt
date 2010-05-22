@@ -15,6 +15,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: the theme importer did not strip special characters from the file name (#1974)
 - Fixed: the Encryption class did not handle empty strings (#2004)
 - Fixed: the file manager showed a toggle button even if there were no valid files (#1993)
+- Fixed: group modules by theme in the corresponding content element (#1992)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)

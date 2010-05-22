@@ -953,11 +953,11 @@ class tl_content extends Backend
 	public function getModules()
 	{
 		$arrModules = array();
-		$objModules = $this->Database->execute("SELECT id, name FROM tl_module ORDER BY name");
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
 
 		while ($objModules->next())
 		{
-			$arrModules[$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
+			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
 		}
 
 		return $arrModules;
