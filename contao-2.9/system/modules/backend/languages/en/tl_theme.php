@@ -34,9 +34,9 @@
  */
 $GLOBALS['TL_LANG']['tl_theme']['name']       = array('Theme title', 'Please enter a unique theme title.');
 $GLOBALS['TL_LANG']['tl_theme']['author']     = array('Author', 'Please enter the name of the theme designer.');
-$GLOBALS['TL_LANG']['tl_theme']['screenshot'] = array('Screenshot', 'Here you can choose a screenshot of the theme.');
 $GLOBALS['TL_LANG']['tl_theme']['folders']    = array('Folders', 'Please select the folders that belong to the theme from the files directory.');
 $GLOBALS['TL_LANG']['tl_theme']['templates']  = array('Templates folder', 'Here you can select a templates folder that will be exported with the theme.');
+$GLOBALS['TL_LANG']['tl_theme']['screenshot'] = array('Screenshot', 'Here you can choose a screenshot of the theme.');
 $GLOBALS['TL_LANG']['tl_theme']['source']     = array('Source files', 'Please choose one or more .zip files from the files directory.');
 $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Revision date', 'Date and time of the latest revision');
 

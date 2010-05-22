@@ -590,9 +590,9 @@ CREATE TABLE `tl_theme` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(128) NOT NULL default '',
   `author` varchar(128) NOT NULL default '',
-  `screenshot` varchar(255) NOT NULL default '',
   `folders` blob NULL,
   `templates` varchar(255) NOT NULL default '',
+  `screenshot` varchar(255) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

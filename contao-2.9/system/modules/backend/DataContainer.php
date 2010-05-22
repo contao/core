@@ -180,8 +180,8 @@ class DataContainer extends Backend
 			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="'.$GLOBALS['TL_LANG']['MSC']['helpWizard'].'" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
-		// Add popup file manager
-		if ($arrData['inputType'] == 'fileTree')
+		// Add the popup file manager
+		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
 		{
 			$xlabel .= ' <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}

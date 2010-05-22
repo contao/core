@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,author;{config_legend},screenshot,folders,templates'
+		'default'                     => '{title_legend},name,author;{config_legend},folders,templates,screenshot'
 	),
 
 	// Fields
@@ -156,13 +156,6 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'search'                  => true,
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
-		'screenshot' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['screenshot'],
-			'exclude'                 => true,
-			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true)
-		),
 		'folders' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['folders'],
@@ -176,6 +169,13 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'path'=>'templates')
+		),
+		'screenshot' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['screenshot'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true)
 		),
 		'source' => array
 		(
