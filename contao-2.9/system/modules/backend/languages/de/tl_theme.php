@@ -44,9 +44,16 @@ $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Änderungsdatum', 'Datum 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_theme']['title_legend']   = 'Titel und Autor';
-$GLOBALS['TL_LANG']['tl_theme']['config_legend']  = 'Konfiguration';
-$GLOBALS['TL_LANG']['tl_theme']['theme_imported'] = 'Das Theme "%s" wurde importiert.';
+$GLOBALS['TL_LANG']['tl_theme']['title_legend']    = 'Titel und Autor';
+$GLOBALS['TL_LANG']['tl_theme']['config_legend']   = 'Konfiguration';
+$GLOBALS['TL_LANG']['tl_theme']['theme_imported']  = 'Das Theme "%s" wurde importiert.';
+$GLOBALS['TL_LANG']['tl_theme']['checking_theme']  = 'Die Theme-Daten werden überprüft';
+$GLOBALS['TL_LANG']['tl_theme']['tables_fields']   = 'Tabellen und Felder';
+$GLOBALS['TL_LANG']['tl_theme']['missing_field']   = 'Das Feld <strong>%s</strong> fehlt in der Datenbank und wird daher nicht importiert.';
+$GLOBALS['TL_LANG']['tl_theme']['tables_checked']  = 'Die Prüfung der Tabellen war erfolgreich.';
+$GLOBALS['TL_LANG']['tl_theme']['custom_sections'] = 'Eigene Layoutbereiche';
+$GLOBALS['TL_LANG']['tl_theme']['missing_section'] = 'Der Layoutbereich <strong>%s</strong> ist in den Backend-Einstellungen nicht definiert.';
+$GLOBALS['TL_LANG']['tl_theme']['sections_ok']     = 'Das Theme enthält keine eigenen Layoutbereiche.';
 
 
 /**

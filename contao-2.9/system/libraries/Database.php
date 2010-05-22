@@ -275,6 +275,26 @@ abstract class Database
 
 
 	/**
+	 * Return the field names of a particular table as array
+	 * @param  string
+	 * @param  boolean
+	 * @return array
+	 */
+	public function getFieldNames($strTable, $blnNoCache=false)
+	{
+		$arrNames = array();
+		$arrFields = $this->listFields($strTable, $blnNoCache);
+
+		foreach ($arrFields as $arrField)
+		{
+			$arrNames[] = $arrField['name'];
+		}
+
+		return $arrNames;
+	}
+
+
+	/**
 	 * Change the current database
 	 * @param  string
 	 * @return boolean

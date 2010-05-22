@@ -275,6 +275,12 @@ h2.sub_headline_index {
 	padding:14px 0 1px 0;
 	font-weight:bold;
 }
+.tl_box h4,.tl_tbox h4 {
+	margin:6px 0 0 0;
+	padding:0;
+	font-weight:bold;
+	font-size:11px;
+}
 .tl_help,.tl_help a {
 	margin-bottom:0;
 	padding:1px 0 1px 0;
