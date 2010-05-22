@@ -99,6 +99,11 @@ class Encryption
 	 */
 	public function encrypt($strValue)
 	{
+		if ($strValue == '')
+		{
+			return '';
+		}
+
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($this->resTd), MCRYPT_RAND);
 		mcrypt_generic_init($this->resTd, md5($GLOBALS['TL_CONFIG']['encryptionKey']), $iv);
 
@@ -117,11 +122,21 @@ class Encryption
 	 */
 	public function decrypt($strValue)
 	{
+		if ($strValue == '')
+		{
+			return '';
+		}
+
 		$strValue = base64_decode($strValue);
 
 		$ivsize = mcrypt_enc_get_iv_size($this->resTd);
 		$iv = substr($strValue, 0, $ivsize);
 		$strValue = substr($strValue, $ivsize);
+
+		if ($strValue == '')
+		{
+			return '';
+		}
 
 		mcrypt_generic_init($this->resTd, md5($GLOBALS['TL_CONFIG']['encryptionKey']), $iv);
 		$strDecrypted = mdecrypt_generic($this->resTd, $strValue);
