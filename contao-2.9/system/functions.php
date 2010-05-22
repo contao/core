@@ -257,14 +257,14 @@ function scan($strFolder)
 
 /**
  * Convert special characters to HTML entities and make sure that
- * ampersands are never double converted.
+ * entities are never double converted.
  * @param string
  * @param boolean
  * @return string
  */
 function specialchars($strString)
 {
-	return str_replace('&amp;amp;', '&amp;', htmlspecialchars($strString));
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
 }
 
 
