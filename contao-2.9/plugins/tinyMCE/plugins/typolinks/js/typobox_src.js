@@ -44,6 +44,7 @@ var Typobox = {
 			document.getElementById('src').style.width = '180px';
 
 		this.fillFileList('image_list', 'tinyMCEImageList');
+		this.fillModeList('mode_list');
 		this.fillRelList('rel_list');
 		TinyMCE_EditableSelects.init();
 
@@ -74,6 +75,9 @@ var Typobox = {
 				case 'class':
 					f.cssClass.value = sub[1];
 					break;
+				case 'mode':
+					selectByValue(f, 'mode_list', sub[1], true);
+					break;
 				case 'rel':
 					selectByValue(f, 'rel_list', sub[1], true);
 					break;
@@ -94,6 +98,14 @@ var Typobox = {
 			});
 		} else
 			dom.remove(dom.getParent(id, 'tr'));
+	},
+
+	fillModeList : function(id) {
+		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_crop'), 'crop');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_proportional'), 'proportional');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_box'), 'box');
 	},
 
 	fillRelList : function(id) {
@@ -132,6 +144,9 @@ var Typobox = {
 		if (f.cssClass.value) {
 			tag += glue + 'class=' + f.cssClass.value;
 			glue = '&amp;';
+		}
+		if (f.mode_list) {
+			tag += glue + 'mode=' + getSelectValue(f, "mode_list");
 		}
 		if (f.rel_list) {
 			tag += glue + 'rel=' + getSelectValue(f, "rel_list");

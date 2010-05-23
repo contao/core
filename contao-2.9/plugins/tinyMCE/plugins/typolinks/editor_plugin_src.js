@@ -62,7 +62,7 @@
 				ed.windowManager.open({
 					file : url + '/typobox.html',
 					width : 360 + parseInt(ed.getLang('typobox.delta_width', 0)),
-					height : 230 + parseInt(ed.getLang('typobox.delta_height', 0)),
+					height : 256 + parseInt(ed.getLang('typobox.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
