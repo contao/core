@@ -13,7 +13,7 @@
 
 <div class="ce_comments block">
 
-<<?php echo $this->hl; ?>><?php echo $this->addComment; ?></<?php echo $this->hl; ?>>
+<<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
 <?php foreach ($this->comments as $comment) echo $comment; ?>
 <?php echo $this->pagination; ?>
 <?php if (!$this->protected): ?>

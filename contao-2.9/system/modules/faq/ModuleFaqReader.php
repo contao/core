@@ -166,6 +166,10 @@ class ModuleFaqReader extends Module
 
 		$this->Template->allowComments = true;
 
+		// Adjust the comments headline level
+		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
+		$this->Template->hlc = 'h' . ($intHl + 1);
+
 		$this->import('Comments');
 		$arrNotifies = array();
 

@@ -7,6 +7,7 @@ Version 2.9.RC1 (2010--)
 - Moved the comments template menu to the module settings
 - Modified the behavior of the specialchars() function (#1860)
 - Modified the theme importer to check for missing fields and layout sections
+- Added: automatically increase the comments headline level (#1794)
 - Fixed: recoverable error in the registration module (#1926) 
 - Fixed: the event list did not show a "read more" link when redirecting to an article (#1944)
 - Fixed: the textarea widget did not ignore the maxlength attribute (#1960)
