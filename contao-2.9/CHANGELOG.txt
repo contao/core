@@ -23,6 +23,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: do not show unrelated templates in the template group menu (#1994)
 - Fixed: adjusted the module links in the back end to the new theme URLs (#1972)
 - Fixed: the image alt attribute could not be empty (#2009)
+- Fixed: do not link a news headline if the item does not contain text (#1987)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)
