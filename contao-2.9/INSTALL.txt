@@ -10,7 +10,7 @@ Contao is an Open Source Content Management Framework developed by Leo Feyer
 and distributed under the LGPL license (see GPL.txt and LGPL.txt for more
 information). It was formerly known as TYPOlight Open Source CMS. Its open
 architecture allows everybody to extend the system to fit his needs. Contao
-specializes in accessible websites and is accessbile itself (front end and
+specializes in accessible websites and is accessible itself (front end and
 back end), rendering valid XHTML pages.
 
 
