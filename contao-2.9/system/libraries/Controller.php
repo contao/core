@@ -113,25 +113,28 @@ abstract class Controller extends System
 	/**
 	 * Return all template files of a particular group as array
 	 * @param string
+	 * @param integer
 	 * @return array
 	 */
-	protected function getTemplateGroup($strPrefix)
+	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
 		$arrTemplates = array();
 		$arrFolders = array(TL_ROOT . '/templates');
 
-		// Add template subfolders
-		foreach (scan(TL_ROOT . '/templates') as $strName)
+		// Add a custom templates folder
+		if ($intTheme > 0)
 		{
-			$strFolder = TL_ROOT . '/templates/' . $strName;
+			$objTheme = $this->Database->prepare("SELECT templates FROM tl_theme WHERE id=?")
+									   ->limit(1)
+									   ->execute($intTheme);
 
-			if (is_dir($strFolder) && strncmp($strName, '.', 1) !== 0)
+			if ($objTheme->numRows > 0 && $objTheme->templates != '')
 			{
-				$arrFolders[] = $strFolder;
+				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
 			}
 		}
 
-		// Add module subfolders
+		// Add the module subfolders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
@@ -582,7 +585,7 @@ abstract class Controller extends System
 	 */
 	protected function getPageSections()
 	{
-		$arrSections = array('header', 'left', 'main', 'right', 'footer');
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		return array_merge($arrSections, trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
 	}
 

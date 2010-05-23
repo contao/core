@@ -48,4 +48,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['faq_categories'] = array
 	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
 );
 
+
+/**
+ * Add the comments template drop-down menu
+ */
+if (in_array('comments', Config::getInstance()->getActiveModules()))
+{
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['faqreader'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['faqreader']);
+}
+
 ?>

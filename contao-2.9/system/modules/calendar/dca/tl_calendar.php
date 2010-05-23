@@ -125,7 +125,7 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'protected'                   => 'groups',
 		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
 	),
@@ -163,17 +163,7 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'template' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['template'],
-			'default'                 => 'com_default',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('com_'),
-			'eval'                    => array('tl_class'=>'w50')
+			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar']
 		),
 		'sortOrder' => array
 		(

@@ -188,7 +188,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'default'                 => 'main',
 			'inputType'               => 'select',
-			'options'                 => $this->getPageSections(),
+			'options_callback'        => array('tl_article', 'getActivePageSections'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
 		),
 		'keywords' => array
@@ -530,6 +530,62 @@ class tl_article extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Return all active page sections as array
+	 * @param object
+	 * @return array
+	 */
+	public function getActivePageSections(DataContainer $dc)
+	{
+		// Inherit the page settings
+		$objPage = $this->getPageDetails($dc->activeRecord->pid);
+
+		// Get the layout settings
+		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=?")
+									->limit(1)
+									->execute($objPage->layout);
+
+		$arrSections = array();
+
+		// Header
+		if ($objLayout->header)
+		{
+			$arrSections[] = 'header';
+		}
+
+		// Left column
+		if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+		{
+			$arrSections[] = 'left';
+		}
+
+		// Right column
+		if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+		{
+			$arrSections[] = 'right';
+		}
+
+		// Main column
+		$arrSections[] = 'main';
+
+		// Footer
+		if ($objLayout->footer)
+		{
+			$arrSections[] = 'footer';
+		}
+
+		$arrCustom = deserialize($objLayout->sections);
+
+		// Custom layout sections
+		if (is_array($arrCustom) && count($arrCustom) > 0)
+		{
+			$arrSections = array_merge($arrSections, $arrCustom);
+		}
+
+		return $arrSections;
 	}
 
 

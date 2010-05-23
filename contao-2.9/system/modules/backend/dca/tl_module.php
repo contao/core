@@ -222,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['navigationTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('nav_')
+			'options_callback'        => array('tl_module', 'getNavigationTemplates')
 		),
 		'pages' => array
 		(
@@ -294,7 +294,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['memberTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('member_'),
+			'options_callback'        => array('tl_module', 'getMemberTemplates'),
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'tableless' => array
@@ -367,7 +367,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['searchTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('search_'),
+			'options_callback'        => array('tl_module', 'getSearchTemplates'),
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'inColumn' => array
@@ -651,6 +651,39 @@ class tl_module extends Backend
 		}
 
 		return $arrForms;
+	}
+
+
+	/**
+	 * Return all navigation templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getNavigationTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('nav_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all member templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getMemberTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('member_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all search templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getSearchTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('search_', $dc->activeRecord->pid);
 	}
 
 

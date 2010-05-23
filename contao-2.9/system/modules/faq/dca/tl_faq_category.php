@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
 	),
 
 	// Fields
@@ -166,17 +166,7 @@ $GLOBALS['TL_DCA']['tl_faq_category'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_faq_category'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'template' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_faq_category']['template'],
-			'default'                 => 'com_default',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('com_'),
-			'eval'                    => array('tl_class'=>'w50')
+			'reference'               => &$GLOBALS['TL_LANG']['tl_faq_category']
 		),
 		'sortOrder' => array
 		(

@@ -78,7 +78,31 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_template'] = array
 	'default'                 => 'rss_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('rss_')
+	'options_callback'        => array('tl_module_rss_reader', 'getRssTemplates')
 );
+
+
+
+/**
+ * Class tl_module_rss_reader
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class tl_module_rss_reader extends Backend
+{
+
+	/**
+	 * Return all navigation templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getRssTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('rss_', $dc->activeRecord->pid);
+	}
+}
 
 ?>

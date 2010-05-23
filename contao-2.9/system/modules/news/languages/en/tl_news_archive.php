@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_news_archive']['title']          = array('Title', 'Pleas
 $GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Redirect page', 'Please choose the news reader page to which visitors will be redirected when clicking a news item.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Enable comments', 'Allow visitors to comment news items.');
 $GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Notify', 'Please choose who to notify when comments are added.');
-$GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Comments template', 'Here you can select the comments template.');
 $GLOBALS['TL_LANG']['tl_news_archive']['sortOrder']      = array('Sort order', 'By default, comments are sorted ascending, starting with the oldest one.');
 $GLOBALS['TL_LANG']['tl_news_archive']['perPage']        = array('Comments per page', 'Number of comments per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_news_archive']['moderate']       = array('Moderate comments', 'Approve comments before they are published on the website.');

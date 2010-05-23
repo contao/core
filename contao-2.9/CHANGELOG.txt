@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.9.RC1 (2010--)
 ------------------------
+- Moved the comments template menu to the module settings
 - Modified the behavior of the specialchars() function (#1860)
 - Modified the theme importer to check for missing fields and layout sections
 - Fixed: recoverable error in the registration module (#1926) 
@@ -17,6 +18,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: the file manager showed a toggle button even if there were no valid files (#1993)
 - Fixed: group modules by theme in the corresponding content element (#1992)
 - Fixed: the templates target folder drop-down menu only showed the first level (#1953)
+- Fixed: do not show unrelated templates in the template group menu (#1994)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)

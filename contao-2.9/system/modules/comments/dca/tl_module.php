@@ -93,7 +93,31 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_template'] = array
 	'default'                 => 'com_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('com_')
+	'options_callback'        => array('tl_module_comments', 'getCommentTemplates'),
+	'eval'                    => array('tl_class'=>'w50')
 );
+
+
+/**
+ * Class tl_module
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class tl_module_comments extends Backend
+{
+
+	/**
+	 * Return all navigation templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getCommentTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('com_', $dc->activeRecord->pid);
+	}
+}
 
 ?>

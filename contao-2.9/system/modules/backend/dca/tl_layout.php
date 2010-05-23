@@ -259,7 +259,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('fe_'),
+			'options_callback'        => array('tl_layout', 'getPageTemplates'),
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'doctype' => array
@@ -316,7 +316,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => $this->getTemplateGroup('moo_'),
+			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
 			'eval'                    => array('multiple'=>true)
 		),
 		'script' => array
@@ -468,6 +468,27 @@ class tl_layout extends Backend
 		return $return;
 	}
 
+
+	/**
+	 * Return all page templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getPageTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('fe_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all MooTools templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getMooToolsTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('moo_', $dc->activeRecord->pid);
+	}
 
 
 	/**

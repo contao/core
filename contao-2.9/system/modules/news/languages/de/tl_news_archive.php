@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_news_archive']['title']          = array('Titel', 'Bitte
 $GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Nachrichtenleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Beitrag anklicken.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Kommentare aktivieren', 'Besuchern das Kommentieren von Nachrichtenbeiträgen erlauben.');
 $GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
-$GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Kommentartemplate', 'Hier können Sie das Template für Kommentare auswählen.');
 $GLOBALS['TL_LANG']['tl_news_archive']['sortOrder']      = array('Sortierung', 'Standardmäßig werden Kommentare aufsteigend sortiert, beginnend mit dem ältesten.');
 $GLOBALS['TL_LANG']['tl_news_archive']['perPage']        = array('Kommentare pro Seite', 'Anzahl an Kommentaren pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_news_archive']['moderate']       = array('Kommentare moderieren', 'Kommentare erst nach Bestätigung auf der Webseite veröffentlichen.');

@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_calendar']['title']          = array('Title', 'Please en
 $GLOBALS['TL_LANG']['tl_calendar']['jumpTo']         = array('Redirect page', 'Please choose the event reader page to which visitors will be redirected when clicking an event.');
 $GLOBALS['TL_LANG']['tl_calendar']['allowComments']  = array('Enable comments', 'Allow visitors to comment events.');
 $GLOBALS['TL_LANG']['tl_calendar']['notify']         = array('Notify', 'Please choose who to notify when comments are added.');
-$GLOBALS['TL_LANG']['tl_calendar']['template']       = array('Comments template', 'Here you can select the comments template.');
 $GLOBALS['TL_LANG']['tl_calendar']['sortOrder']      = array('Sort order', 'By default, comments are sorted ascending, starting with the oldest one.');
 $GLOBALS['TL_LANG']['tl_calendar']['perPage']        = array('Comments per page', 'Number of comments per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_calendar']['moderate']       = array('Moderate comments', 'Approve comments before they are published on the website.');

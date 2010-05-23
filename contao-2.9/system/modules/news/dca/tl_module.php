@@ -91,7 +91,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'default'                 => 'news_latest',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('news_'),
+	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -127,6 +127,15 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
+
+
+/**
+ * Add the comments template drop-down menu
+ */
+if (in_array('comments', Config::getInstance()->getActiveModules()))
+{
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']);
+}
 
 
 /**
@@ -201,6 +210,17 @@ class tl_module_news extends Backend
   });
   //--><!]]>
   </script>';
+	}
+
+
+	/**
+	 * Return all news templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getNewsTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('news_', $dc->activeRecord->pid);
 	}
 }
 

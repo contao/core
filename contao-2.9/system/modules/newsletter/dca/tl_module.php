@@ -97,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 	'default'                 => 'nl_simple',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('nl_')
+	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
@@ -184,6 +184,17 @@ class tl_module_newsletter extends Backend
 		}
 
 		return $arrChannels;
+	}
+
+
+	/**
+	 * Return all newsletter templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getNewsletterTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('nl_', $dc->activeRecord->pid);
 	}
 }
 

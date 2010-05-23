@@ -37,7 +37,6 @@ $GLOBALS['TL_LANG']['tl_faq_category']['headline']       = array('Headline', 'Pl
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']         = array('Redirect page', 'Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.');
 $GLOBALS['TL_LANG']['tl_faq_category']['allowComments']  = array('Enable comments', 'Allow visitors to comment FAQs.');
 $GLOBALS['TL_LANG']['tl_faq_category']['notify']         = array('Notify', 'Please choose who to notify when comments are added.');
-$GLOBALS['TL_LANG']['tl_faq_category']['template']       = array('Comments template', 'Here you can select the comments template.');
 $GLOBALS['TL_LANG']['tl_faq_category']['sortOrder']      = array('Sort order', 'By default, comments are sorted ascending, starting with the oldest one.');
 $GLOBALS['TL_LANG']['tl_faq_category']['perPage']        = array('Comments per page', 'Number of comments per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_faq_category']['moderate']       = array('Moderate comments', 'Approve comments before they are published on the website.');

@@ -36,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_calendar']['title']          = array('Titel', 'Bitte geb
 $GLOBALS['TL_LANG']['tl_calendar']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Eventleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Event anklicken.');
 $GLOBALS['TL_LANG']['tl_calendar']['allowComments']  = array('Kommentare aktivieren', 'Besuchern das Kommentieren von Events erlauben.');
 $GLOBALS['TL_LANG']['tl_calendar']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
-$GLOBALS['TL_LANG']['tl_calendar']['template']       = array('Kommentartemplate', 'Hier können Sie das Template für Kommentare auswählen.');
 $GLOBALS['TL_LANG']['tl_calendar']['sortOrder']      = array('Sortierung', 'Standardmäßig werden Kommentare aufsteigend sortiert, beginnend mit dem ältesten.');
 $GLOBALS['TL_LANG']['tl_calendar']['perPage']        = array('Kommentare pro Seite', 'Anzahl an Kommentaren pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_calendar']['moderate']       = array('Kommentare moderieren', 'Kommentare erst nach Bestätigung auf der Webseite veröffentlichen.');
