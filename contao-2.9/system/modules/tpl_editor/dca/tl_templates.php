@@ -160,34 +160,29 @@ class tl_templates extends Backend
 		// Copy an existing template
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . $this->Input->post('original')))
 		{
-			$strOriginal = basename($this->Input->post('original'));
+			$strOriginal = $this->Input->post('original');
 			$strTarget = str_replace('../', '', $this->Input->post('target'));
-			$strTarget = basename($strTarget);
 
-			// Compile the file path
-			if ($strTarget == '')
+			// Validate the target path
+			if (strncmp($strTarget, 'templates', 9) !== 0 || !is_dir(TL_ROOT . '/' . $strTarget))
 			{
-				$strTarget = $strOriginal;
+				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], $strTarget);
 			}
 			else
 			{
-				$strTarget = $strTarget . '/' . $strOriginal;
-			}
+				$strTarget .= '/' . basename($strOriginal);
 
-			// Copy the template
-			if (!is_dir(TL_ROOT . '/templates/' . dirname($strTarget)))
-			{
-				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['invalid'], dirname($strTarget));
-			}
-			elseif (file_exists(TL_ROOT . '/templates/' . $strTarget))
-			{
-				$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
-			}
-			else
-			{
-				$this->import('Files');
-				$this->Files->copy('system/modules/' . $this->Input->post('original'), 'templates/' . $strTarget);
-				$this->redirect($this->getReferer());
+				// Check whether the target file exists
+				if (file_exists(TL_ROOT . '/' . $strTarget))
+				{
+					$strError = sprintf($GLOBALS['TL_LANG']['tl_templates']['exists'], $strTarget);
+				}
+				else
+				{
+					$this->import('Files');
+					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
+					$this->redirect($this->getReferer());
+				}
 			}
 		}
 
@@ -227,17 +222,6 @@ class tl_templates extends Backend
 			$strAllTemplates .= '</optgroup>';
 		}
 
-		$strTargetFolders = '';
-
-		// Get all target folders
-		foreach (scan(TL_ROOT . '/templates') as $strFolder)
-		{
-			if (strncmp($strFolder, '.', 1) !== 0 && is_dir(TL_ROOT . '/templates/' . $strFolder))
-			{
-				$strTargetFolders .= sprintf('<option value="%s"%s>templates/%s</option>', $strFolder, (($this->Input->post('target') == $strFolder) ? ' selected="selected"' : ''), $strFolder);
-			}
-		}
-
 		// Show form
 		return '
 <div id="tl_buttons">
@@ -261,7 +245,7 @@ class tl_templates extends Backend
 </div>
 <div>
   <h3><label for="ctrl_target">'.$GLOBALS['TL_LANG']['tl_templates']['target'][0].'</label></h3>
-  <select name="target" id="ctrl_target" class="tl_select" onfocus="Backend.getScrollOffset();"><option value="">templates</option>'.$strTargetFolders.'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['target'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <select name="target" id="ctrl_target" class="tl_select" onfocus="Backend.getScrollOffset();"><option value="templates">templates</option>'. $this->getTargetFolders('templates') .'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['target'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_templates']['target'][1].'</p>' : '').'
 </div>
 </div>
@@ -273,6 +257,32 @@ class tl_templates extends Backend
 </div>
 </div>
 </form>';
+	}
+
+
+	/**
+	 * Recursively scan the templates directory and return all folders as array
+	 * @param string
+	 * @param integer
+	 */
+	protected function getTargetFolders($strFolder, $intLevel=1)
+	{
+		$strFolders = '';
+		$strPath = TL_ROOT .'/'. $strFolder;
+
+		foreach (scan($strPath) as $strFile)
+		{
+			if (!is_dir($strPath .'/'. $strFile) || strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			$strRelPath = $strFolder .'/'. $strFile;
+			$strFolders .= sprintf('<option value="%s"%s>%s%s</option>', $strRelPath, (($this->Input->post('target') == $strRelPath) ? ' selected="selected"' : ''), str_repeat(' &nbsp; ', $intLevel), basename($strRelPath));
+			$strFolders .= $this->getTargetFolders($strRelPath, ($intLevel + 1));
+		}
+
+		return $strFolders;
 	}
 
 
