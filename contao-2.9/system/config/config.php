@@ -198,7 +198,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadPath']   = 'tl_files';
-$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,css,html,htm,fla,flv,swf,txt,ico,zip';
+$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,ico,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip';
 $GLOBALS['TL_CONFIG']['maxFileSize']  = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']   = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']  = 600;
@@ -216,15 +216,17 @@ $GLOBALS['TL_CONFIG']['fancyUpload']  = true;
  * PHP function mail(). Please enter your SMTP parameters below.
  * 
  *   smtpHost = host name (defaults to localhost)
- *   smtpPort = defaults to 25 or 465 for SSL
  *   smtpUser = SMTP username
  *   smtpPass = SMTP password
+ *   smtpEnc  = SMTP encryption ("ssl" or "tls")
+ *   smtpPort = defaults to 25 or 465 for SSL
  */
 $GLOBALS['TL_CONFIG']['useSMTP']  = false;
 $GLOBALS['TL_CONFIG']['smtpHost'] = 'localhost';
-$GLOBALS['TL_CONFIG']['smtpPort'] = 25;
 $GLOBALS['TL_CONFIG']['smtpUser'] = '';
 $GLOBALS['TL_CONFIG']['smtpPass'] = '';
+$GLOBALS['TL_CONFIG']['smtpEnc']  = '';
+$GLOBALS['TL_CONFIG']['smtpPort'] = 25;
 
 
 /**

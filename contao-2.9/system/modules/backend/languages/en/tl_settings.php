@@ -73,9 +73,10 @@ $GLOBALS['TL_LANG']['tl_settings']['enableSearch']        = array('Enable search
 $GLOBALS['TL_LANG']['tl_settings']['indexProtected']      = array('Index protected pages', 'Use this option carefully and always exclude personalized pages from being indexed!');
 $GLOBALS['TL_LANG']['tl_settings']['useSMTP']             = array('Send e-mails via SMTP', 'Use an SMTP server instead of the PHP mail() function to send e-mails.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpHost']            = array('SMTP hostname', 'Please enter the host name of the SMTP server.');
-$GLOBALS['TL_LANG']['tl_settings']['smtpPort']            = array('SMTP port number', 'Please enter the port number of the SMTP server.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpUser']            = array('SMTP username', 'Here you can enter the SMTP username.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpPass']            = array('SMTP password', 'Here you can enter the SMTP password.');
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc']             = array('SMTP encryption', 'Here you can choose an encryption method (SSL or TLS).');
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort']            = array('SMTP port number', 'Please enter the port number of the SMTP server.');
 $GLOBALS['TL_LANG']['tl_settings']['inactiveModules']     = array('Inactive extensions', 'Here you can deactivate unneeded extensions.');
 $GLOBALS['TL_LANG']['tl_settings']['undoPeriod']          = array('Storage time for undo steps', 'Here you can enter the storage time for undo steps in seconds (24 hours = 86400 seconds).');
 $GLOBALS['TL_LANG']['tl_settings']['versionPeriod']       = array('Storage time for versions', 'Here you can enter the storage time for different versions of a record in seconds (90 days = 7776000 seconds).');

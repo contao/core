@@ -73,9 +73,10 @@ $GLOBALS['TL_LANG']['tl_settings']['enableSearch']        = array('Suche aktivie
 $GLOBALS['TL_LANG']['tl_settings']['indexProtected']      = array('Geschützte Seiten indizieren', 'Nutzen Sie diese Option sorgfältig und schließen Sie personalisierte Seiten grundsätzlich von der Indizierung aus!');
 $GLOBALS['TL_LANG']['tl_settings']['useSMTP']             = array('E-Mails via SMTP versenden', 'Einen SMTP-Server statt der PHP-Funktion mail() für den E-Mail-Versand verwenden.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpHost']            = array('SMTP-Hostname', 'Bitte geben Sie den Hostnamen des SMTP-Servers ein.');
-$GLOBALS['TL_LANG']['tl_settings']['smtpPort']            = array('SMTP-Portnummer', 'Bitte geben Sie die Portnummer des SMTP-Servers ein.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpUser']            = array('SMTP-Benutzername', 'Hier können Sie den SMTP-Benutzernamen eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['smtpPass']            = array('SMTP-Passwort', 'Hier können Sie das SMTP-Passwort eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['smtpEnc']             = array('SMTP-Verschlüsselung', 'Hier können Sie eine Verschlüsselungsmethode auswählen (SSL oder TLS).');
+$GLOBALS['TL_LANG']['tl_settings']['smtpPort']            = array('SMTP-Portnummer', 'Bitte geben Sie die Portnummer des SMTP-Servers ein.');
 $GLOBALS['TL_LANG']['tl_settings']['inactiveModules']     = array('Inaktive Erweiterungen', 'Hier können Sie nicht benötigte Erweiterungen deaktivieren.');
 $GLOBALS['TL_LANG']['tl_settings']['undoPeriod']          = array('Speicherzeit für Undo-Schritte', 'Hier können Sie die Speicherzeit für Undo-Schritte in Sekunden eingeben (24 Stunden = 86400 Sekunden).');
 $GLOBALS['TL_LANG']['tl_settings']['versionPeriod']       = array('Speicherzeit für Versionen', 'Hier können Sie die Speicherzeit für verschiedene Versionen eines Datensatzes in Sekunden eingeben (90 Tage = 7776000 Sekunden).');

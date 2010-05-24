@@ -130,7 +130,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass'
+		'useSMTP'                     => 'smtpHost,smtpUser,smtpPass,smtpEnc,smtpPort'
 	),
 
 	// Fields
@@ -163,15 +163,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
-		),
-		'smtpPort' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'],
-			'default'                 => 25,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'long')
 		),
 		'smtpUser' => array
 		(
@@ -186,6 +178,22 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+		),
+		'smtpEnc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpEnc'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array(''=>'-', 'ssl'=>'SSL', 'tls'=>'TLS'),
+			'eval'                    => array('doNotShow'=>true, 'tl_class'=>'w50')
+		),
+		'smtpPort' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'],
+			'default'                 => 25,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
 		)
 	)
 );

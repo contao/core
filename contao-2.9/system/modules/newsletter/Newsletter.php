@@ -63,9 +63,10 @@ class Newsletter extends Backend
 			$GLOBALS['TL_CONFIG']['useSMTP'] = true;
 
 			$GLOBALS['TL_CONFIG']['smtpHost'] = $objNewsletter->smtpHost;
-			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
 			$GLOBALS['TL_CONFIG']['smtpUser'] = $objNewsletter->smtpUser;
 			$GLOBALS['TL_CONFIG']['smtpPass'] = $objNewsletter->smtpPass;
+			$GLOBALS['TL_CONFIG']['smtpEnc']  = $objNewsletter->smtpEnc;
+			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
 		}
 
 		// Add default sender address

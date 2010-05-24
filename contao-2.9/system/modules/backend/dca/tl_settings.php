@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass'
+		'useSMTP'                     => 'smtpHost,smtpUser,smtpPass,smtpEnc,smtpPort'
 	),
 
 	// Fields
@@ -315,13 +315,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpHost'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'nospace'=>true, 'tl_class'=>'w50')
-		),
-		'smtpPort' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'nospace'=>true, 'tl_class'=>'long')
 		),
 		'smtpUser' => array
 		(
@@ -334,6 +328,19 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
 			'inputType'               => 'text',
 			'eval'                    => array('decodeEntities'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+		),
+		'smtpEnc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'],
+			'inputType'               => 'select',
+			'options'                 => array(''=>'-', 'ssl'=>'SSL', 'tls'=>'TLS'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'smtpPort' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'inactiveModules' => array
 		(

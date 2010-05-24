@@ -142,8 +142,14 @@ class Email extends System
 				// SMTP
 				$objTransport = Swift_SmtpTransport::newInstance($GLOBALS['TL_CONFIG']['smtpHost'], $GLOBALS['TL_CONFIG']['smtpPort']);
 
+				// Encryption
+				if ($GLOBALS['TL_CONFIG']['smtpEnc'] == 'ssl' || $GLOBALS['TL_CONFIG']['smtpEnc'] == 'tls')
+				{
+					$objTransport->setEncryption($GLOBALS['TL_CONFIG']['smtpEnc']);
+				}
+
 				// Authentication
-				if ($GLOBALS['TL_CONFIG']['smtpUser'])
+				if ($GLOBALS['TL_CONFIG']['smtpUser'] != '')
 				{
 					$objTransport->setUsername($GLOBALS['TL_CONFIG']['smtpUser'])->setPassword($GLOBALS['TL_CONFIG']['smtpPass']);
 				}
