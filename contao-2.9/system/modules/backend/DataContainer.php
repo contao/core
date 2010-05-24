@@ -340,11 +340,27 @@ class DataContainer extends Backend
 		// No 2-column layout in "edit all" mode
 		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'overrideAll')
 		{
-			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12'), '', $arrData['eval']['tl_class']);
+			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12', 'cbx'), '', $arrData['eval']['tl_class']);
+		}
+
+		$updateMode = '';
+
+		// Handle multi-select fields in "override all" mode
+		if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+		{
+			$updateMode = '
+</div>
+<div>
+  <h3 style="padding-top:7px"><label for="ctrl_'.$this->strInputName.'_update">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
+  <div id="ctrl_'.$this->strInputName.'_update" class="tl_radio_container">
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
+  </div>';
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
 </div>';
 	}
 

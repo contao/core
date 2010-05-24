@@ -2425,7 +2425,45 @@ window.addEvent(\'domready\', function()
 			}
 		}
 
-		// Call save_callback
+		// Handle multi-select fields in "override all" mode
+		if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+		{
+			$objCurrent = $this->Database->prepare("SELECT " . $this->strField . " FROM " . $this->strTable . " WHERE id=?")
+										 ->limit(1)
+										 ->execute($this->intId);
+
+			if ($objCurrent->numRows > 0)
+			{
+				$new = deserialize($varValue, true);
+				$old = deserialize($objCurrent->{$this->strField}, true);
+
+				switch ($this->Input->post($this->strInputName . '_update'))
+				{
+					case 'add':
+						$varValue = array_values(array_unique(array_merge($old, $new)));
+						break;
+
+					case 'remove':
+						$varValue = array_values(array_diff($old, $new));
+						break;
+
+					case 'replace':
+						$varValue = $new;
+						break;
+				}
+
+				if (!is_array($varValue) || empty($varValue))
+				{
+					$varValue = '';
+				}
+				else
+				{
+					$varValue = serialize($varValue);
+				}
+			}
+		}
+
+		// Call the save_callback
 		if (is_array($arrData['save_callback']))
 		{
 			foreach ($arrData['save_callback'] as $callback)

@@ -534,7 +534,9 @@ class InstallTool extends Controller
 								   ->set($set)
 								   ->execute($objUser->id);
 
-					// Update the news list modules
+					// Other version 2.9 updates
+					$this->Database->query("UPDATE tl_member SET country='gb' WHERE country='uk'");
+					$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
 					$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
 				}
 			}
