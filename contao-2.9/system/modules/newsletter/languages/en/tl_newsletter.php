@@ -72,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'There are no active subsc
 $GLOBALS['TL_LANG']['tl_newsletter']['from']        = 'From';
 $GLOBALS['TL_LANG']['tl_newsletter']['attachments'] = 'Attachments';
 $GLOBALS['TL_LANG']['tl_newsletter']['preview']     = 'Send preview';
+$GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm'] = 'Do you really want to send the newsletter?';
 
 
 /**

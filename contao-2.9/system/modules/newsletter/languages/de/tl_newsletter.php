@@ -72,6 +72,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'In diesem Verteiler sind 
 $GLOBALS['TL_LANG']['tl_newsletter']['from']        = 'Absender';
 $GLOBALS['TL_LANG']['tl_newsletter']['attachments'] = 'Dateianhänge';
 $GLOBALS['TL_LANG']['tl_newsletter']['preview']     = 'Testsendung';
+$GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm'] = 'Soll der Newsletter wirklich verschickt werden?';
 
 
 /**
