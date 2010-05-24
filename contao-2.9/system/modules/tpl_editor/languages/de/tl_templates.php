@@ -50,9 +50,6 @@ $GLOBALS['TL_LANG']['tl_templates']['invalid']  = 'Ungültiges Zielverzeichnis "
  */
 $GLOBALS['TL_LANG']['tl_templates']['new_tpl']   = array('Neues Template', 'Ein neues Template erstellen');
 $GLOBALS['TL_LANG']['tl_templates']['new']       = array('Neuer Ordner', 'Einen neuen Ordner anlegen');
-$GLOBALS['TL_LANG']['tl_templates']['edit']      = array('Template umbenennen', 'Template "%s" umbenennen');
-$GLOBALS['TL_LANG']['tl_templates']['source']    = array('Template bearbeiten', 'Template "%s" bearbeiten');
-$GLOBALS['TL_LANG']['tl_templates']['delete']    = array('Template löschen', 'Template "%s" löschen');
 $GLOBALS['TL_LANG']['tl_templates']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
 
 ?>
