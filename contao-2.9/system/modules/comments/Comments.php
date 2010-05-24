@@ -329,31 +329,35 @@ class Comments extends Frontend
 	{
 		$arrSearch = array
 		(
-			'@\[b\]@i', '@\[/b\]@i',
-			'@\[i\]@i', '@\[/i\]@i',
-			'@\[u\]@i', '@\[/u\]@i',
-			'@\s*\[code\]@is', '@\[/code\]\s*@is',
-			'@\[color=([^\]" ]+)\]@i', '@\[/color\]@i',
-			'@\s*\[quote\]@is', '@\[/quote\]\s*@is',
-			'@\s*\[quote=([^\]]+)\]@is', 
+			'@\[b\](.*)\[/b\]@Uis',
+			'@\[i\](.*)\[/i\]@Uis',
+			'@\[u\](.*)\[/u\]@Uis',
+			'@\s*\[code\](.*)\[/code\]\s*@Uis',
+			'@\[color=([^\]" ]+)\](.*)\[/color\]@Uis',
+			'@\s*\[quote\](.*)\[/quote\]\s*@Uis',
+			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis', 
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
-			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i', '@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
-			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i', '@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i',
+			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i',
+			'@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
+			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i',
+			'@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i',
 			'@href="(([a-z0-9]+\.)*[a-z0-9]+\.([a-z]{2}|asia|biz|com|info|name|net|org|tel)(/|"))@i'
 		);
 
 		$arrReplace = array
 		(
-			'<strong>', '</strong>',
-			'<em>', '</em>',
-			'<span style="text-decoration:underline;">', '</span>',
-			"\n\n<div class=\"code\"><p>" . $GLOBALS['TL_LANG']['MSC']['com_code'] . '</p><pre>', "</pre></div>\n\n",
-			'<span style="color:$1;">', '</span>',
-			"\n\n<div class=\"quote\">", "</div>\n\n",
-			"\n\n<div class=\"quote\"><p>" . sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') . '</p>',
+			'<strong>$1</strong>',
+			'<em>$1</em>',
+			'<span style="text-decoration:underline;">$1</span>',
+			"\n\n" . '<div class="code"><p>'. $GLOBALS['TL_LANG']['MSC']['com_code'] .'</p><pre>$1</pre></div>' . "\n\n",
+			'<span style="color:$1;">$2</span>',
+			"\n\n" . '<div class="quote">$1</div>' . "\n\n",
+			"\n\n" . '<div class="quote"><p>'. sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') .'</p>$2</div>' . "\n\n",
 			'<img src="$1" alt="" />',
-			'<a href="$1">$1</a>', '<a href="$1">$2</a>',
-			'<a href="mailto:$1">$1</a>', '<a href="mailto:$1">$2</a>',
+			'<a href="$1">$1</a>',
+			'<a href="$1">$2</a>',
+			'<a href="mailto:$1">$1</a>',
+			'<a href="mailto:$1">$2</a>',
 			'href="http://$1'
 		);
 
