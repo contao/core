@@ -929,7 +929,7 @@ class DC_Folder extends DataContainer implements listable, editable
   <ul id="fancy-list" class="fancy-hide">
     <li></li>
   </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
 </div>
 
 </div>
@@ -1310,7 +1310,7 @@ window.addEvent(\'domready\', function()
 <div id="fields" class="tl_checkbox_container">
 <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this);" /> <label for="check_all" style="color:#a6a6a6;"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br />'.$options.'
 </div>'.(($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['MSC']['all_fields'][1])) ? '
-<p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['all_fields'][1].'</p>' : '').'
+<p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['all_fields'][1].'</p>' : '').'
 </div>
 
 </div>
@@ -1410,7 +1410,7 @@ window.addEvent(\'domready\', function()
 <div class="tl_tbox block">
   <h3><label for="ctrl_source">'.$GLOBALS['TL_LANG']['tl_files']['editor'][0].'</label></h3>
   <textarea name="source" id="ctrl_source" class="tl_textarea monospace" rows="12" cols="80" style="height:400px;" onfocus="Backend.getScrollOffset();">' . "\n" . specialchars($strContent) . '</textarea>' . (($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_files']['editor'][1])) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_files']['editor'][1].'</p>' : '') . '
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_files']['editor'][1].'</p>' : '') . '
 </div>
 </div>
 

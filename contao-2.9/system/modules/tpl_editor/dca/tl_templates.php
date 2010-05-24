@@ -241,12 +241,12 @@ class tl_templates extends Backend
 <div>
   <h3><label for="ctrl_original">'.$GLOBALS['TL_LANG']['tl_templates']['original'][0].'</label></h3>
   <select name="original" id="ctrl_original" class="tl_select" onfocus="Backend.getScrollOffset();">'.$strAllTemplates.'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['original'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_templates']['original'][1].'</p>' : '').'
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_templates']['original'][1].'</p>' : '').'
 </div>
 <div>
   <h3><label for="ctrl_target">'.$GLOBALS['TL_LANG']['tl_templates']['target'][0].'</label></h3>
   <select name="target" id="ctrl_target" class="tl_select" onfocus="Backend.getScrollOffset();"><option value="templates">templates</option>'. $this->getTargetFolders('templates') .'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['target'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_templates']['target'][1].'</p>' : '').'
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_templates']['target'][1].'</p>' : '').'
 </div>
 </div>
 </div>
