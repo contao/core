@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('News archives', 'Please select one or more news archives.');
-$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items only', 'Show only featured news items in the list.');
+$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items', 'Here you can choose how featured items are handled.');
 $GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Total number of items', 'Here you can limit the total number of news items. Set to 0 to show all.');
 $GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Jump to current period', 'Automatically jump to the current period if none is selected.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta fields', 'Here you can select the meta fields.');
@@ -46,8 +46,11 @@ $GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Show number of i
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_module']['news_day']   = 'Day';
-$GLOBALS['TL_LANG']['tl_module']['news_month'] = 'Month';
-$GLOBALS['TL_LANG']['tl_module']['news_year']  = 'Year';
+$GLOBALS['TL_LANG']['tl_module']['news_day']    = 'Day';
+$GLOBALS['TL_LANG']['tl_module']['news_month']  = 'Month';
+$GLOBALS['TL_LANG']['tl_module']['news_year']   = 'Year';
+$GLOBALS['TL_LANG']['tl_module']['all_items']   = 'Show all news items';
+$GLOBALS['TL_LANG']['tl_module']['featured']    = 'Show featured news items only';
+$GLOBALS['TL_LANG']['tl_module']['unfeatured']  = 'Skip featured news items';
 
 ?>

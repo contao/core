@@ -92,7 +92,7 @@ CREATE TABLE `tl_news_archive` (
 
 CREATE TABLE `tl_module` (
   `news_archives` blob NULL,
-  `news_featured` char(1) NOT NULL default '',
+  `news_featured` varchar(16) NOT NULL default '',
   `news_numberOfItems` smallint(5) unsigned NOT NULL default '0',
   `news_jumpToCurrent` char(1) NOT NULL default '',
   `news_metaFields` varchar(255) NOT NULL default '',

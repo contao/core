@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('Nachrichtenarchive', 'Bitte wählen Sie ein oder mehrere Nachrichtenarchive.');
-$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Nur hervorgehobene Beiträge', 'Nur hervorgehobene Beiträge in der Nachrichtenliste anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Hervorgehobene Beiträge', 'Hier legen Sie fest, wie hervorgehobene Beiträge gehandhabt werden.');
 $GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Zum aktuellen Zeitraum springen', 'Automatisch zum aktuellen Zeitraum springen, wenn keiner ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta-Felder', 'Hier können Sie die Meta-Felder auswählen.');
@@ -46,8 +46,11 @@ $GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Anzahl der Beitr
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_module']['news_day']   = 'Tag';
-$GLOBALS['TL_LANG']['tl_module']['news_month'] = 'Monat';
-$GLOBALS['TL_LANG']['tl_module']['news_year']  = 'Jahr';
+$GLOBALS['TL_LANG']['tl_module']['news_day']    = 'Tag';
+$GLOBALS['TL_LANG']['tl_module']['news_month']  = 'Monat';
+$GLOBALS['TL_LANG']['tl_module']['news_year']   = 'Jahr';
+$GLOBALS['TL_LANG']['tl_module']['all_items']   = 'Alle Beiträge anzeigen';
+$GLOBALS['TL_LANG']['tl_module']['featured']    = 'Nur hervorgehobene Beiträge anzeigen';
+$GLOBALS['TL_LANG']['tl_module']['unfeatured']  = 'Hervorgehobene Beiträge überspringen';
 
 ?>

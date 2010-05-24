@@ -533,6 +533,9 @@ class InstallTool extends Controller
 					$this->Database->prepare("UPDATE " . $objUser->tbl . " %s WHERE id=?")
 								   ->set($set)
 								   ->execute($objUser->id);
+
+					// Update the news list modules
+					$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
 				}
 			}
 

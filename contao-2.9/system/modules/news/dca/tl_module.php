@@ -62,9 +62,12 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_numberOfItems'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_featured'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_featured'],
+	'default'                 => 'all_items',
 	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12')
+	'inputType'               => 'select',
+	'options'                 => array('all_items', 'featured', 'unfeatured'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
