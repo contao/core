@@ -59,7 +59,7 @@ CREATE TABLE `tl_content` (
   `fullsize` char(1) NOT NULL default '',
   `caption` varchar(255) NOT NULL default '',
   `floating` varchar(32) NOT NULL default '',
-  `html` text NULL,
+  `html` mediumtext NULL,
   `listtype` varchar(32) NOT NULL default '',
   `listitems` blob NULL,
   `tableitems` mediumblob NULL,

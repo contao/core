@@ -55,7 +55,14 @@ class ContentCode extends ContentElement
 	{
 		if (TL_MODE == 'BE')
 		{
-			return '<pre>' . $this->code . '</pre>';
+			$return = '<pre>'. specialchars($this->code) .'</pre>';
+
+			if ($this->headline != '')
+			{
+				$return = '<'. $this->hl .'>'. $this->headline .'</'. $this->hl .'>'. $return;
+			}
+
+			return $return;
 		}
 
 		return parent::generate();

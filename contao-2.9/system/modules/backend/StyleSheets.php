@@ -1190,14 +1190,14 @@ class StyleSheets extends Backend
 					break;
 
 				case 'font-weight':
-					if ($arrChunks[1] == 'inherit')
-					{
-						$arrSet['own'][] = $strDefinition;
-					}
-					else
+					if ($arrChunks[1] == 'bold' || $arrChunks[1] == 'normal')
 					{
 						$arrSet['font'] = 1;
 						$arrSet['fontstyle'][] = $arrChunks[1];
+					}
+					else
+					{
+						$arrSet['own'][] = $strDefinition;
 					}
 					break;
 

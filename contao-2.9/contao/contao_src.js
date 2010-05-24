@@ -1765,7 +1765,7 @@ var ContextMenu =
 	{
 		if ($defined($('contextmenu')))
 		{
-			$('contextmenu').dispose();
+			$('contextmenu').destroy();
 		}
 	}
 };

@@ -208,9 +208,9 @@ class ModuleArticle extends Module
 		{
 			$request = ampersand($this->Environment->request, true);
 
-			if ($request == 'index.php')
+			if ($request == 'index.php' || $request == '')
 			{
-				$request = '';
+				$request = $this->generateFrontendUrl($objPage->row());
 			}
 
 			$this->Template->print = $request;
