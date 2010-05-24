@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},title,jumpTo;{smtp_legend:hide},useSMTP'
+		'default'                     => '{title_legend},title,jumpTo;{smtp_legend},useSMTP'
 	),
 
 	// Subpalettes
@@ -176,8 +176,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'],
 			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+			'inputType'               => 'textStore',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'tl_class'=>'w50')
 		),
 		'smtpEnc' => array
 		(

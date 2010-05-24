@@ -326,8 +326,8 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+			'inputType'               => 'textStore',
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'smtpEnc' => array
 		(

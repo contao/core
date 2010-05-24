@@ -134,6 +134,7 @@ $GLOBALS['BE_FFL'] = array
 (
 	'text'           => 'TextField',
 	'password'       => 'Password',
+	'textStore'      => 'TextStore',
 	'textarea'       => 'TextArea',
 	'select'         => 'SelectMenu',
 	'checkbox'       => 'CheckBox',
