@@ -7,6 +7,7 @@ Version 2.9.RC1 (2010--)
 - Moved the comments template menu to the module settings
 - Modified the behavior of the specialchars() function (#1860)
 - Modified the theme importer to check for missing fields and layout sections
+- Added: added a TextStore widget to enter passwords
 - Added: automatically increase the comments headline level (#1794)
 - Added: added support for the different image resize modes to TinyMCE (#1712)
 - Added: replaced the old Google Analytics script with the new asynchronous one (#1233)
@@ -27,6 +28,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: adjusted the module links in the back end to the new theme URLs (#1972)
 - Fixed: the image alt attribute could not be empty (#2009)
 - Fixed: do not link a news headline if the item does not contain text (#1987)
+- Fixed: error_403 and error_404 pages did not automatically generate an article (#2005)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)

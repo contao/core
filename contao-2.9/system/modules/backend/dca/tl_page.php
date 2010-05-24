@@ -909,7 +909,7 @@ class tl_page extends Backend
 		}
 
 		// Existing or not a regular page
-		if ($dc->activeRecord->tstamp > 0 || $dc->activeRecord->type != 'regular')
+		if ($dc->activeRecord->tstamp > 0 || !in_array($dc->activeRecord->type, array('regular', 'error_403', 'error_404')))
 		{
 			return;
 		}
@@ -1261,7 +1261,7 @@ class tl_page extends Backend
 			return '';
 		}
 
-		return ($row['type'] == 'regular') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
+		return ($row['type'] == 'regular' || $row['type'] == 'error_403' || $row['type'] == 'error_404') ? '<a href="' . $this->addToUrl($href.'&amp;node='.$row['id']) . '" title="'.specialchars($title).'">'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 	}
 
 
