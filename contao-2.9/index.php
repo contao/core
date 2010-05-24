@@ -88,6 +88,14 @@ class Index extends Frontend
 			$pageId = $objHandler->generate($this->getRootIdFromUrl(), true);
 		}
 
+		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
+		if ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
+
 		$time = time();
 
 		// Get the current page object
