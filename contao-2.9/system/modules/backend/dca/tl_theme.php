@@ -181,7 +181,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'zip', 'class'=>'mandatory')
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'cto', 'class'=>'mandatory')
 		)
 	)
 );

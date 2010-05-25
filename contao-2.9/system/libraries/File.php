@@ -327,6 +327,7 @@ class File extends System
 			'lzh'   => 'application/octet-stream',
 			'exe'   => 'application/octet-stream',
 			'class' => 'application/octet-stream',
+			'cto'   => 'application/octet-stream',
 			'psd'   => 'application/x-photoshop',
 			'so'    => 'application/octet-stream',
 			'sea'   => 'application/octet-stream',
@@ -522,6 +523,11 @@ class File extends System
 			case 'ods':
 			case 'odp':
 				return 'iconOFFICE.gif';
+				break;
+
+			// Contao themes
+			case 'cto':
+				return 'iconCTO.gif';
 				break;
 
 			default:

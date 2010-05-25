@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.9.RC1 (2010--)
 ------------------------
+- Changed the theme file extension to "cto" (#1986)
 - Moved the comments template menu to the module settings
 - Modified the behavior of the specialchars() function (#1860)
 - Modified the theme importer to check for missing fields and layout sections

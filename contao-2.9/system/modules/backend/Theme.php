@@ -68,8 +68,8 @@ class Theme extends Backend
 
 				$objFile = new File($strZipFile);
 
-				// Skip anything but .zip files
-				if ($objFile->extension != 'zip')
+				// Skip anything but .cto files
+				if ($objFile->extension != 'cto')
 				{
 					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
 					continue;
@@ -175,7 +175,7 @@ class Theme extends Backend
 
 			// Find the XML file
 			$objArchive = new ZipReader($strFile);
-			$objArchive->getFile('system/tmp/' . str_replace('.zip', '', basename($strFile)) .'.xml');
+			$objArchive->getFile('system/tmp/theme.xml');
 
 			// Open the XML file
 			$xml = new DOMDocument();
@@ -311,6 +311,7 @@ class Theme extends Backend
 	{
 		foreach ($arrFiles as $strZipFile)
 		{
+
 			// Open the archive
 			$objArchive = new ZipReader($strZipFile);
 
@@ -347,9 +348,8 @@ class Theme extends Backend
 			// Open the XML file
 			$xml = new DOMDocument();
 			$xml->preserveWhiteSpace = false;
-			$xml->load(TL_ROOT .'/system/tmp/'. str_replace('.zip', '', basename($strZipFile)) .'.xml');
+			$xml->load(TL_ROOT .'/system/tmp/theme.xml');
 			$tables = $xml->getElementsByTagName('table');
-
 			$arrMapper = array();
 
 			// Lock the tables
@@ -538,10 +538,10 @@ class Theme extends Backend
 		$this->addTableTlLayout($xml, $tables, $objTheme);
 
 		// Generate the archive
-		$objArchive = new ZipWriter('system/tmp/'. $strName .'.zip');
+		$objArchive = new ZipWriter('system/tmp/'. $strName .'.cto');
 
 		// Add the XML document
-		$objArchive->addString($xml->saveXML(), 'system/tmp/'. $strName .'.xml');
+		$objArchive->addString($xml->saveXML(), 'system/tmp/theme.xml');
 
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
@@ -561,9 +561,9 @@ class Theme extends Backend
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
-		$objFile = new File('system/tmp/'. $strName .'.zip');
+		$objFile = new File('system/tmp/'. $strName .'.cto');
 
-		header('Content-Type: ' . $objFile->mime);
+		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
 		header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
 		header('Content-Length: ' . $objFile->filesize);
@@ -571,7 +571,7 @@ class Theme extends Backend
 		header('Pragma: public');
 		header('Expires: 0');
 
-		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strName .'.zip', 'rb');
+		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strName .'.cto', 'rb');
 		fpassthru($resFile);
 		fclose($resFile);
 
