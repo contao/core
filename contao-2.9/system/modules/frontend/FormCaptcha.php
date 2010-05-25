@@ -68,7 +68,7 @@ class FormCaptcha extends Widget
 		parent::__construct($arrAttributes);
 
 		$this->arrAttributes['maxlength'] = 2;
-		$this->strCaptchaKey = 'c' . md5(uniqid('', true));
+		$this->strCaptchaKey = 'c' . md5(uniqid(mt_rand(), true));
 		$this->mandatory = true;
 	}
 

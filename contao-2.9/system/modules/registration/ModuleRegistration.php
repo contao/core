@@ -335,7 +335,7 @@ class ModuleRegistration extends Module
 	{
 		$arrData['tstamp'] = time();
 		$arrData['login'] = $this->reg_allowLogin;
-		$arrData['activation'] = md5(uniqid('', true));
+		$arrData['activation'] = md5(uniqid(mt_rand(), true));
 		$arrData['dateAdded'] = $arrData['tstamp'];
 
 		// Set default groups

@@ -268,7 +268,7 @@ class ModulePassword extends Module
 			}
 		}
 
-		$strToken = md5(uniqid('', true));
+		$strToken = md5(uniqid(mt_rand(), true));
 		$this->Session->set('setPasswordToken', $strToken);
 
 		$this->Template->formId = $strToken;
@@ -286,7 +286,7 @@ class ModulePassword extends Module
 	protected function sendPasswordLink(Database_Result $objMember)
 	{
 		$arrChunks = array();
-		$confirmationId = md5(uniqid('', true));
+		$confirmationId = md5(uniqid(mt_rand(), true));
 
 		// Store confirmation ID
 		$this->Database->prepare("UPDATE tl_member SET activation=? WHERE id=?")

@@ -562,7 +562,8 @@ class Theme extends Backend
 		$this->addTableTlLayout($xml, $tables, $objTheme);
 
 		// Generate the archive
-		$objArchive = new ZipWriter('system/tmp/'. $strName .'.cto');
+		$strTmp = md5(uniqid(mt_rand(), true));
+		$objArchive = new ZipWriter('system/tmp/'. $strTmp);
 
 		// Add the XML document
 		$objArchive->addString($xml->saveXML(), 'theme.xml');
@@ -585,17 +586,17 @@ class Theme extends Backend
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
-		$objFile = new File('system/tmp/'. $strName .'.cto');
+		$objFile = new File('system/tmp/'. $strTmp);
 
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');
-		header('Content-Disposition: attachment; filename="' . $objFile->basename . '"');
+		header('Content-Disposition: attachment; filename="' . $strName . '.cto"');
 		header('Content-Length: ' . $objFile->filesize);
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
 		header('Expires: 0');
 
-		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strName .'.cto', 'rb');
+		$resFile = fopen(TL_ROOT . '/system/tmp/'. $strTmp, 'rb');
 		fpassthru($resFile);
 		fclose($resFile);
 

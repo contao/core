@@ -121,7 +121,7 @@ class FTP extends Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
-		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid('', true)), $strMode);
+		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid(mt_rand(), true)), $strMode);
 
 		// Copy temp file
 		if (!file_exists(TL_ROOT . '/' . $strFile))

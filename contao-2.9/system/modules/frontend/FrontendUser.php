@@ -246,7 +246,7 @@ class FrontendUser extends User
 		if ($GLOBALS['TL_CONFIG']['autologin'] > 0 && $this->Input->post('autologin'))
 		{
 			$time = time();
-			$strToken = md5(uniqid('', true));
+			$strToken = md5(uniqid(mt_rand(), true));
 
 			$this->createdOn = $time;
 			$this->autologin = $strToken;

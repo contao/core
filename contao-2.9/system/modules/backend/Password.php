@@ -123,7 +123,7 @@ class Password extends Widget
 		{
 			$this->blnSubmitInput = true;
 			$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['MSC']['pw_changed'];
-			$strSalt = substr(md5(uniqid('', true)), 0, 23);
+			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 
 			return sha1($strSalt . $varInput) . ':' . $strSalt;
 		}

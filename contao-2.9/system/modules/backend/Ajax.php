@@ -166,7 +166,7 @@ class Ajax extends Backend
 
 				try
 				{
-					$objFile = new File('system/tmp/' . md5(uniqid('', true)));
+					$objFile = new File('system/tmp/' . md5(uniqid(mt_rand(), true)));
 					$objFile->close();
 					$objFile->delete();
 				}

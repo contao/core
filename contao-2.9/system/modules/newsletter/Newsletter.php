@@ -227,7 +227,7 @@ class Newsletter extends Backend
 			exit;
 		}
 
-		$strToken = md5(uniqid('', true));
+		$strToken = md5(uniqid(mt_rand(), true));
 		$this->Session->set('tl_newsletter_send', $strToken);
 		$sprintf = strlen($objNewsletter->senderName) ? $objNewsletter->senderName . ' &lt;%s&gt;' : '%s';
 

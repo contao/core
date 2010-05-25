@@ -186,7 +186,7 @@ class InstallTool extends Controller
 			// Password is correct but not yet salted
 			if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
 			{
-				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 				$strPassword = sha1($strSalt . $this->Input->post('password'));
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 			}
@@ -195,7 +195,7 @@ class InstallTool extends Controller
 			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
 			{
 				$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
 				$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
 
@@ -218,7 +218,7 @@ class InstallTool extends Controller
 		else
 		{
 			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid('', true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
 			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 		}
 
@@ -251,7 +251,7 @@ class InstallTool extends Controller
 			// Save password
 			else
 			{
-				$strSalt = substr(md5(uniqid('', true)), 0, 23);
+				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 				$strPassword = sha1($strSalt . $strPassword);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 
@@ -277,7 +277,7 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_encryption')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", (($this->Input->post('key')) ? $this->Input->post('key') : md5(uniqid('', true))));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", (($this->Input->post('key')) ? $this->Input->post('key') : md5(uniqid(mt_rand(), true))));
 			$this->reload();
 		}
 
@@ -724,7 +724,7 @@ class InstallTool extends Controller
 				// Save data
 				elseif(strlen($this->Input->post('name')) && strlen($this->Input->post('email', true)) && strlen($this->Input->post('username')))
 				{
-					$strSalt = substr(md5(uniqid('', true)), 0, 23);
+					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $this->Input->post('pass'));
 
 					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")

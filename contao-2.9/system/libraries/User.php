@@ -235,7 +235,7 @@ abstract class User extends Model
 		// Password is correct but not yet salted
 		if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
 		{
-			$strSalt = substr(md5(uniqid('', true)), 0, 23);
+			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 			$strPassword = sha1($strSalt . $this->Input->post('password'));
 			$this->password = $strPassword . ':' . $strSalt;
 		}

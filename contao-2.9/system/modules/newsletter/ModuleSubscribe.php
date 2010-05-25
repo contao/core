@@ -236,7 +236,7 @@ class ModuleSubscribe extends Module
 		}
 
 		$time = time();
-		$strToken = md5(uniqid('', true));
+		$strToken = md5(uniqid(mt_rand(), true));
 		$arrCondition = array();
 		$arrValues = array();
 
