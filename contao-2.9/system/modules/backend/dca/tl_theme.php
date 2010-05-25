@@ -84,6 +84,20 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
+			'delete' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['delete'],
+				'href'                => 'act=delete',
+				'icon'                => 'delete.gif',
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.gif',
+				'attributes'          => 'style="margin-right:3px"'
+			),
 			'css' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['css'],
@@ -110,19 +124,6 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['exportTheme'],
 				'href'                => 'key=exportTheme',
 				'icon'                => 'theme_export.gif'
-			),
-			'delete' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['delete'],
-				'href'                => 'act=delete',
-				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
-			),
-			'show' => array
-			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_theme']['show'],
-				'href'                => 'act=show',
-				'icon'                => 'show.gif'
 			)
 		)
 	),
