@@ -95,8 +95,8 @@ if (is_null($this->syntax))
  * http://www.cdolivet.com/editarea/ for more information.
  */
 ?>
-<script language="javascript" type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js"></script>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js"></script>
+<script type="text/javascript">
 <!--//--><![CDATA[//><!--
 editAreaLoader.init({
   id : "<?php echo $this->eaField; ?>",

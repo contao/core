@@ -82,14 +82,11 @@
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-window.addEvent('domready', function()
-{
-	$('username').focus();
-
-	if (parent.frames[0] && parent.frames[0].name == 'switch')
-	{
-		parent.location.reload();
-	}
+window.addEvent('domready', function() {
+  if (parent.frames[0] && parent.frames[0].name == 'switch') {
+    parent.location.reload();
+  }
+  $('username').focus();
 });
 //--><!]]>
 </script>

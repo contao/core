@@ -7,6 +7,9 @@
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css" media="screen" />
+<?php if ($this->be27): ?>
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/be27.css" media="screen" />
+<?php endif; ?>
 <?php if ($this->isMac): ?>
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
 <?php endif; ?>
@@ -16,6 +19,7 @@
 <style type="text/css" media="screen">
 <!--/*--><![CDATA[/*><!--*/
 #container { margin:0 auto; padding:12px 0px; width:750px; }
+#tl_helpBox { margin-left:-353px; }
 /*]]>*/-->
 </style>
 <script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
@@ -27,9 +31,8 @@
 <?php echo $this->rteConfig; ?>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-function unloadHandler(e)
-{
-	self.opener.Backend.checkPopup();
+function unloadHandler(e) {
+  self.opener.Backend.checkPopup();
 }
 //--><!]]>
 </script>

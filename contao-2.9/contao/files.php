@@ -107,6 +107,7 @@ class FileManager extends Backend
 		$this->Template->skipNavigation = $GLOBALS['TL_LANG']['MSC']['skipNavigation'];
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
+		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
 
 		$this->Template->output();
 	}

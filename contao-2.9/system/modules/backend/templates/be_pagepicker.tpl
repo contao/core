@@ -17,13 +17,11 @@
 <script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-document.onLoad = self.focus();
-
-function setPage(p)
-{
-    self.opener.$(self.opener.Backend.currentId).value = p;
-    self.close();
+function setPage(p) {
+  self.opener.$(self.opener.Backend.currentId).value = p;
+  self.close();
 }
+document.onLoad = self.focus();
 //--><!]]>
 </script>
 </head>

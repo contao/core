@@ -17,16 +17,14 @@
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-window.addEvent('domready', function()
-{
-	$('index_note').setStyle('display', 'none');
-	$$('h2.sub_headline_index').setStyle('display', 'none');
-	$('index_loading').setStyle('display', 'block');
+window.addEvent('domready', function() {
+  $('index_note').setStyle('display', 'none');
+  $$('h2.sub_headline_index').setStyle('display', 'none');
+  $('index_loading').setStyle('display', 'block');
 });
-window.addEvent('load', function()
-{
-	$('index_loading').setStyle('display', 'none');
-	$('index_complete').setStyle('display', 'block');
+window.addEvent('load', function() {
+  $('index_loading').setStyle('display', 'none');
+  $('index_complete').setStyle('display', 'block');
 });
 //--><!]]>
 </script>
