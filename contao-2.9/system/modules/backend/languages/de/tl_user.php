@@ -32,31 +32,33 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['username']   = array('Benutzername', 'Bitte geben Sie einen eindeutigen Benutzernamen ein.');
-$GLOBALS['TL_LANG']['tl_user']['name']       = array('Name', 'Bitte geben Sie den Vor- und Nachnamen ein.');
-$GLOBALS['TL_LANG']['tl_user']['email']      = array('E-Mail-Adresse', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
-$GLOBALS['TL_LANG']['tl_user']['language']   = array('Backend-Sprache', 'Hier können Sie die Backend-Sprache auswählen.');
-$GLOBALS['TL_LANG']['tl_user']['showHelp']   = array('Erklärungen anzeigen', 'Unter jedem Eingabefeld einen kurzen Erklärungstext anzeigen.');
-$GLOBALS['TL_LANG']['tl_user']['useRTE']     = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
-$GLOBALS['TL_LANG']['tl_user']['thumbnails'] = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
-$GLOBALS['TL_LANG']['tl_user']['oldBeTheme'] = array('Das alte Formularlayout verwenden', 'Die neuen einklappbaren 2-spaltigen Formulare nicht verwenden.');
-$GLOBALS['TL_LANG']['tl_user']['admin']      = array('Zum Administrator machen', 'Administratoren haben uneingeschränkten Zugriff auf alle Module und Elemente!');
-$GLOBALS['TL_LANG']['tl_user']['groups']     = array('Benutzergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
-$GLOBALS['TL_LANG']['tl_user']['inherit']    = array('Rechtevererbung', 'Hier können Sie festlegen, welche Gruppenrechte der Benutzer erbt.');
-$GLOBALS['TL_LANG']['tl_user']['group']      = array('Nur Gruppenrechte verwenden', 'es werden ausschließlich Gruppenrechte verwendet.');
-$GLOBALS['TL_LANG']['tl_user']['extend']     = array('Gruppenrechte erweitern', 'Gruppenrechte werden durch individuelle Rechte erweitert.');
-$GLOBALS['TL_LANG']['tl_user']['custom']     = array('Nur Benutzerrechte verwenden', 'es werden ausschließlich individuelle Rechte verwendet.');
-$GLOBALS['TL_LANG']['tl_user']['modules']    = array('Backend-Module', 'Hier können Sie den Zugriff auf ein oder mehrere Backend-Module erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['themes']     = array('Theme-Module', 'Hier können Sie den Zugriff auf die Theme-Module steuern.');
-$GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Hier können Sie den Zugriff auf eine oder mehrere Seiten erlauben (Unterseiten werden automatisch hinzugefügt).');
-$GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Erlaubte Seitentypen', 'Hier können Sie die erlaubten Seitentypen festlegen.');
-$GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Hier können Sie den Zugriff auf ein oder mehrere Verzeichnisse erlauben (Unterverzeichnisse werden automatisch hinzugefügt).');
-$GLOBALS['TL_LANG']['tl_user']['forms']      = array('Erlaubte Formulare', 'Hier können Sie den Zugriff auf ein oder mehrere Formulare erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['formp']      = array('Formularrechte', 'Hier können Sie die Formularrechte festlegen.');
-$GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deaktivieren', 'Das Konto vorübergehend deaktivieren.');
-$GLOBALS['TL_LANG']['tl_user']['start']      = array('Aktivieren am', 'Das Konto automatisch an diesem Tag aktivieren.');
-$GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deaktivieren am', 'Das Konto automatisch an diesem Tag deaktivieren.');
-$GLOBALS['TL_LANG']['tl_user']['session']    = array('Daten bereinigen', 'Bitte wählen Sie die zu bereinigenden Daten aus.');
+$GLOBALS['TL_LANG']['tl_user']['username']     = array('Benutzername', 'Bitte geben Sie einen eindeutigen Benutzernamen ein.');
+$GLOBALS['TL_LANG']['tl_user']['name']         = array('Name', 'Bitte geben Sie den Vor- und Nachnamen ein.');
+$GLOBALS['TL_LANG']['tl_user']['email']        = array('E-Mail-Adresse', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+$GLOBALS['TL_LANG']['tl_user']['language']     = array('Backend-Sprache', 'Hier können Sie die Backend-Sprache auswählen.');
+$GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Backendmotiv', 'Hier können Sie das globale Backendmotiv überschreiben.');
+$GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Erklärungen anzeigen', 'Unter jedem Eingabefeld einen kurzen Erklärungstext anzeigen.');
+$GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
+$GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
+$GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('FancyUpload aktivieren', 'Falls FancyUpload in Ihrem Browser nicht fehlerfrei läuft, können Sie das Skript hier deaktivieren.');
+$GLOBALS['TL_LANG']['tl_user']['oldBeTheme']   = array('Das alte Formularlayout verwenden', 'Die neuen einklappbaren 2-spaltigen Formulare nicht verwenden.');
+$GLOBALS['TL_LANG']['tl_user']['admin']        = array('Zum Administrator machen', 'Administratoren haben uneingeschränkten Zugriff auf alle Module und Elemente!');
+$GLOBALS['TL_LANG']['tl_user']['groups']       = array('Benutzergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
+$GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Rechtevererbung', 'Hier können Sie festlegen, welche Gruppenrechte der Benutzer erbt.');
+$GLOBALS['TL_LANG']['tl_user']['group']        = array('Nur Gruppenrechte verwenden', 'es werden ausschließlich Gruppenrechte verwendet.');
+$GLOBALS['TL_LANG']['tl_user']['extend']       = array('Gruppenrechte erweitern', 'Gruppenrechte werden durch individuelle Rechte erweitert.');
+$GLOBALS['TL_LANG']['tl_user']['custom']       = array('Nur Benutzerrechte verwenden', 'es werden ausschließlich individuelle Rechte verwendet.');
+$GLOBALS['TL_LANG']['tl_user']['modules']      = array('Backend-Module', 'Hier können Sie den Zugriff auf ein oder mehrere Backend-Module erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['themes']       = array('Theme-Module', 'Hier können Sie den Zugriff auf die Theme-Module steuern.');
+$GLOBALS['TL_LANG']['tl_user']['pagemounts']   = array('Pagemounts', 'Hier können Sie den Zugriff auf eine oder mehrere Seiten erlauben (Unterseiten werden automatisch hinzugefügt).');
+$GLOBALS['TL_LANG']['tl_user']['alpty']        = array('Erlaubte Seitentypen', 'Hier können Sie die erlaubten Seitentypen festlegen.');
+$GLOBALS['TL_LANG']['tl_user']['filemounts']   = array('Filemounts', 'Hier können Sie den Zugriff auf ein oder mehrere Verzeichnisse erlauben (Unterverzeichnisse werden automatisch hinzugefügt).');
+$GLOBALS['TL_LANG']['tl_user']['forms']        = array('Erlaubte Formulare', 'Hier können Sie den Zugriff auf ein oder mehrere Formulare erlauben.');
+$GLOBALS['TL_LANG']['tl_user']['formp']        = array('Formularrechte', 'Hier können Sie die Formularrechte festlegen.');
+$GLOBALS['TL_LANG']['tl_user']['disable']      = array('Deaktivieren', 'Das Konto vorübergehend deaktivieren.');
+$GLOBALS['TL_LANG']['tl_user']['start']        = array('Aktivieren am', 'Das Konto automatisch an diesem Tag aktivieren.');
+$GLOBALS['TL_LANG']['tl_user']['stop']         = array('Deaktivieren am', 'Das Konto automatisch an diesem Tag deaktivieren.');
+$GLOBALS['TL_LANG']['tl_user']['session']      = array('Daten bereinigen', 'Bitte wählen Sie die zu bereinigenden Daten aus.');
 
 
 /**

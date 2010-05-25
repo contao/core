@@ -637,6 +637,29 @@ abstract class Controller extends System
 
 
 	/**
+	 * Return all back end themes as array
+	 * @return array
+	 */
+	public function getBackendThemes()
+	{
+		$arrReturn = array();
+		$arrThemes = scan(TL_ROOT . '/system/themes');
+
+		foreach ($arrThemes as $strTheme)
+		{
+			if (substr($strTheme, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
+			{
+				continue;
+			}
+
+			$arrReturn[$strTheme] = $strTheme;
+		}
+
+		return $arrReturn;
+	}
+
+
+	/**
 	 * Return all counties as array
 	 * @return array
 	 */

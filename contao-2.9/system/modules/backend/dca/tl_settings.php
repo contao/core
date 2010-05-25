@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['backendTheme'],
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_settings', 'getThemes'),
+			'options'                 => $this->getBackendThemes(),
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'resultsPerPage' => array
@@ -456,29 +456,6 @@ class tl_settings extends Backend
 		}
 
 		natcasesort($arrReturn);
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Return all back end themes as array
-	 * @return array
-	 */
-	public function getThemes()
-	{
-		$arrReturn = array();
-		$arrThemes = scan(TL_ROOT . '/system/themes');
-
-		foreach ($arrThemes as $strTheme)
-		{
-			if (substr($strTheme, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
-			{
-				continue;
-			}
-
-			$arrReturn[$strTheme] = $strTheme;
-		}
-
 		return $arrReturn;
 	}
 
