@@ -177,7 +177,7 @@ class FileTree extends Widget
 			$strReset = "\n" . '    <li class="tl_folder"><div class="tl_left">&nbsp;</div> <div class="tl_right"><label for="check_all_' . $this->strId . '" class="tl_change_selected">' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</label> <input type="checkbox" id="check_all_' . $this->strId . '" class="tl_tree_checkbox" value="" onclick="Backend.toggleCheckboxGroup(this, \'' . $this->strName . '\')" /></div><div style="clear:both;"></div></li>';
 		}
 
-		return '<ul class="tl_listing tree_view'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" id="'.$this->strName.'">
+		return '<ul class="tl_listing tree_view filetree'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" id="'.$this->strName.'">
     <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.(strlen($GLOBALS['TL_LANG']['MSC']['filetree']) ? $GLOBALS['TL_LANG']['MSC']['filetree'] : 'Files directory').'</div> <div class="tl_right"><label for="ctrl_'.$this->strId.'" class="tl_change_selected">'.$GLOBALS['TL_LANG']['MSC']['changeSelected'].'</label> <input type="checkbox" name="'.$this->strName.'_save" id="ctrl_'.$this->strId.'" class="tl_tree_checkbox" value="1" onclick="Backend.showTreeBody(this, \''.$this->strId.'_parent\');" /></div><div style="clear:both;"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
@@ -275,7 +275,7 @@ class FileTree extends Widget
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path.'/'.$v))
+				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
 				{
 					$files[] = $path.'/'.$v;
 					continue;

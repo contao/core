@@ -255,6 +255,12 @@ class Ajax extends Backend
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
 
+				// Fallback to the files directory (reload filetrees)
+				if ($this->Input->post('folder', true) == '')
+				{
+					$this->Input->setPost('folder', $GLOBALS['TL_CONFIG']['uploadPath']);
+				}
+
 				echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;
 

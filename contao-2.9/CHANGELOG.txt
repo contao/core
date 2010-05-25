@@ -8,6 +8,7 @@ Version 2.9.RC1 (2010--)
 - Modified the behavior of the specialchars() function (#1860)
 - Modified the theme importer to check for missing fields and layout sections
 - Improved the BBCode parser to always look for a closing tags (#1943)
+- Improved the FileTree widget to reload via Ajax after using the popup file manager (#1980)
 - Added: added a TextStore widget to enter passwords
 - Added: automatically increase the comments headline level (#1794)
 - Added: added support for the different image resize modes to TinyMCE (#1712)

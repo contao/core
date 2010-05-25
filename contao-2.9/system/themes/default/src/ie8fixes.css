@@ -31,7 +31,7 @@
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }
 #tl_ajaxOverlay {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 .opacity {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";

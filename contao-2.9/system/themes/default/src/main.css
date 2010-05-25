@@ -845,9 +845,9 @@ p.tl_deadline {
 	position:absolute;
 	top:0px;
 	left:0px;
-	background:#000;
-	-moz-opacity:0.3;
-	opacity: 0.3;
+	background:#fff;
+	-moz-opacity:0.5;
+	opacity: 0.5;
 }
 
 /* Context menu */

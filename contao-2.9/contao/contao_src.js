@@ -405,6 +405,37 @@ var AjaxRequest =
 
 		return false;
 	},
+	
+	
+	/**
+	 * Reload all file trees (input field)
+	 */
+	reloadFiletrees: function ()
+	{
+		$$('.filetree').each(function(el)
+		{
+			var name = el.id;
+			var field = name.replace(/_[0-9]+$/, '');
+
+			new Request(
+			{
+				url: window.location.href,
+				data: 'isAjax=1&action=loadFiletree&name=' + name + '&field=' + field,
+				onRequest: AjaxRequest.displayBox('Loading data …'),
+					
+				onComplete: function(txt, xml)
+				{
+					// Preserve the "reset selection" entry
+					var ul = $(el.id + '_parent').getFirst('ul');
+					var li = ul.getLast('li');
+					ul.set('html', txt);
+					li.inject(ul);
+
+					AjaxRequest.hideBox();
+				}
+			}).send();
+		});
+	},
 
 
 	/**
@@ -787,7 +818,7 @@ var Backend =
 	{
 		if (Backend.popupWindow && Backend.popupWindow.closed)
 		{
-			location.reload();
+			AjaxRequest.reloadFiletrees();
 		}
 	},
 
