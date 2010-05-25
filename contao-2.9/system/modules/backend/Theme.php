@@ -163,19 +163,29 @@ class Theme extends Backend
 		{
 			$return .= "\n" . '<input type="hidden" name="source[]" value="'.$strFile.'" />';
 		}
-		
+
+		$count = 0;
+
 		// Check the theme data
 		foreach ($arrFiles as $strFile)
 		{
 			$return .= '
 
-<div class="tl_tbox block">
+<div class="tl_'. (($count++ < 1) ? 't' : '') .'box block">
   <h3>'. basename($strFile) .'</h3>
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['tables_fields'].'</h4>';
 
 			// Find the XML file
 			$objArchive = new ZipReader($strFile);
-			$objArchive->getFile('system/tmp/theme.xml');
+
+			// Continue if there is no XML file
+			if ($objArchive->getFile('theme.xml') === false)
+			{
+				$blnHasError = true;
+				$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
+
+				continue;
+			}
 
 			// Open the XML file
 			$xml = new DOMDocument();
@@ -311,6 +321,7 @@ class Theme extends Backend
 	{
 		foreach ($arrFiles as $strZipFile)
 		{
+			$xml = null;
 
 			// Open the archive
 			$objArchive = new ZipReader($strZipFile);
@@ -318,10 +329,20 @@ class Theme extends Backend
 			// Extract all files
 			while ($objArchive->next())
 			{
-				// Limit file operations to system/tmp, tl_files and the templates directory
-				if (strncmp($objArchive->file_name, 'system/tmp/', 11) !== 0 && strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
+				// Load the XML file
+				if ($objArchive->file_name == 'theme.xml')
+				{
+					$xml = new DOMDocument();
+					$xml->preserveWhiteSpace = false;
+					$xml->loadXML($objArchive->unzip());
+					continue;
+				}
+
+				// Limit file operations to tl_files and the templates directory
+				if (strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
 				{
 					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name);
+					continue;
 				}
 
 				// Extract the files
@@ -345,12 +366,15 @@ class Theme extends Backend
 				}
 			}
 
-			// Open the XML file
-			$xml = new DOMDocument();
-			$xml->preserveWhiteSpace = false;
-			$xml->load(TL_ROOT .'/system/tmp/theme.xml');
-			$tables = $xml->getElementsByTagName('table');
+			// Continue if there is no XML file
+			if (!$xml instanceof DOMDocument)
+			{
+				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile));
+				continue;
+			}
+
 			$arrMapper = array();
+			$tables = $xml->getElementsByTagName('table');
 
 			// Lock the tables
 			$this->Database->query("LOCK TABLES tl_theme WRITE, tl_style_sheet WRITE, tl_style WRITE, tl_module WRITE, tl_layout WRITE");
@@ -541,7 +565,7 @@ class Theme extends Backend
 		$objArchive = new ZipWriter('system/tmp/'. $strName .'.cto');
 
 		// Add the XML document
-		$objArchive->addString($xml->saveXML(), 'system/tmp/theme.xml');
+		$objArchive->addString($xml->saveXML(), 'theme.xml');
 
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);

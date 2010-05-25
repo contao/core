@@ -54,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_theme']['tables_ok']       = 'Die Prüfung der Tabellen 
 $GLOBALS['TL_LANG']['tl_theme']['custom_sections'] = 'Eigene Layoutbereiche';
 $GLOBALS['TL_LANG']['tl_theme']['missing_section'] = 'Der Layoutbereich <strong>%s</strong> ist in den Backend-Einstellungen nicht definiert.';
 $GLOBALS['TL_LANG']['tl_theme']['sections_ok']     = 'Das Theme enthält keine eigenen Layoutbereiche.';
+$GLOBALS['TL_LANG']['tl_theme']['missing_xml']     = 'Das Theme "%s" ist fehlerhaft und kann nicht importiert werden.';
 
 
 /**

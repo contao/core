@@ -54,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_theme']['tables_ok']       = 'The tables have been succe
 $GLOBALS['TL_LANG']['tl_theme']['custom_sections'] = 'Custom layout sections';
 $GLOBALS['TL_LANG']['tl_theme']['missing_section'] = 'The layout section <strong>%s</strong> is not defined in the back end settings.';
 $GLOBALS['TL_LANG']['tl_theme']['sections_ok']     = 'The theme does not include custom layout sections.';
+$GLOBALS['TL_LANG']['tl_theme']['missing_xml']     = 'Theme "%s" is corrupt and cannot be imported.';
 
 
 /**
