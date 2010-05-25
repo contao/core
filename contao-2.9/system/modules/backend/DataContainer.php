@@ -258,7 +258,7 @@ class DataContainer extends Backend
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
-			if (in_array($this->strInputName, $paletteFields))
+			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
 

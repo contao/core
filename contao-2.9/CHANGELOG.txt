@@ -35,6 +35,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: the image alt attribute could not be empty (#2009)
 - Fixed: do not link a news headline if the item does not contain text (#1987)
 - Fixed: error_403 and error_404 pages did not automatically generate an article (#2005)
+- Fixed: do not check palettes in "override all" mode (#1982)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)
