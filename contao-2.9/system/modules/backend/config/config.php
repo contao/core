@@ -194,4 +194,10 @@ $GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
  */
 $GLOBALS['TL_HOOKS'] = array();
 
+
+/**
+ * Mime types
+ */
+$GLOBALS['TL_MIME'] = array();
+
 ?>
