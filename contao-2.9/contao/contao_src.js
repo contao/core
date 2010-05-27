@@ -480,22 +480,7 @@ var AjaxRequest =
 				item = new Element('div');
 				item.setProperty('id', id);
 				item.set('html', txt);
-
-				var folder = false;
-				var div = $(el).getParent('div');
-
-				while ($type(div) == 'element' && div.getNext())
-				{
-					div = div.getNext();
-
-					if (div.nodeName.toLowerCase() == 'h3' || div.nodeName.toLowerCase() == 'div')
-					{
-						folder = true;
-						break;
-					}
-				}
-
-				folder ? item.injectBefore(div) : item.injectAfter(div);
+				item.injectAfter($(el).getParent('div').getParent('div'));
 
 				if (js)
 				{
