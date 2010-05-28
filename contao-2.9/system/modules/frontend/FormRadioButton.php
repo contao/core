@@ -127,9 +127,10 @@ class FormRadioButton extends Widget
 									$arrOption['label']);
 		}
 
-        return sprintf('<div id="ctrl_%s" class="radio_container%s">%s</div>',
+        return sprintf('<div id="ctrl_%s" class="radio_container%s"><input type="hidden" name="%s" value="" />%s</div>',
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						$this->strName,
 						$strOptions) . $this->addSubmit();
 	}
 }
