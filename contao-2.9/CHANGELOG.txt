@@ -46,6 +46,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: corrected a few spelling mistakes and translation issues (#2032)
 - Fixed: subpalettes were not inserted correctly when loaded via Ajax (#2039)
 - Fixed: the DC_File driver did not support multi-text fields (#2045)
+- Fixed: do not remove line breaks from mails sent with the form generator (#1959)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)

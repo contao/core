@@ -278,7 +278,7 @@ class Form extends Hybrid
 				}
 
 				// Add field to message
-				$message .= ucfirst($k) . ': ' . (is_array($v) ? implode(', ', $v) : preg_replace('/[\n\t\r]+/', ' ', $v)) . "\n";
+				$message .= ucfirst($k) . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
 
 				// Prepare XML file
 				if ($this->format == 'xml')
@@ -286,7 +286,7 @@ class Form extends Hybrid
 					$fields[] = array
 					(
 						'name' => $k,
-						'values' => (is_array($v) ? $v : array(preg_replace('/[\n\t\r]+/', ' ', $v)))
+						'values' => (is_array($v) ? $v : array($v))
 					);
 				}
 
@@ -294,7 +294,7 @@ class Form extends Hybrid
 				if ($this->format == 'csv')
 				{
 					$keys[] = $k;
-					$values[] = (is_array($v) ? implode(',', $v) : preg_replace('/[\n\t\r]+/', ' ', $v));
+					$values[] = (is_array($v) ? implode(',', $v) : $v);
 				}
 			}
 
@@ -360,7 +360,7 @@ class Form extends Hybrid
 			// Attach CSV file
 			if ($this->format == 'csv')
 			{
-				$email->attachFileFromString($this->String->decodeEntities(implode(';', $keys) . "\n" . implode(';', $values)), 'form.csv', 'text/comma-separated-values');
+				$email->attachFileFromString($this->String->decodeEntities('"' . implode(';', $keys) . '"' . "\n" . '"' . implode('";"', $values) . '"'), 'form.csv', 'text/comma-separated-values');
 			}
 
 			$uploaded = '';
