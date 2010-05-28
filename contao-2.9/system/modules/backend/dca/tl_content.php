@@ -269,7 +269,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace')
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'editArea|html', 'helpwizard'=>true),
+			'explanation'             => 'insertTags'
 		),
 		'listtype' => array
 		(
@@ -377,7 +378,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'load_callback' => array
+			(
+				array('tl_content', 'setRteSyntax')
+			)
 		),
 		'shClass' => array
 		(
@@ -393,7 +398,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'tl_class'=>'clr')
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'editArea', 'helpwizard'=>true, 'tl_class'=>'clr'),
+			'explanation'             => 'insertTags'
 		),
 		'url' => array
 		(
@@ -1059,6 +1065,79 @@ class tl_content extends Backend
 		}
 
 		return $arrArticle;
+	}
+
+
+	/**
+	 * Dynamically set the editArea syntax
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function setRteSyntax($varValue, DataContainer $dc)
+	{
+		switch ($dc->activeRecord->highlight)
+		{
+			case 'C':
+				$syntax = 'c';
+				break;
+
+			case 'CSharp':
+				$syntax = 'cpp';
+				break;
+
+			case 'XHTML':
+				$syntax = 'html';
+				break;
+
+			case 'Perl':
+				$syntax = 'perl';
+				break;
+
+			case 'Python':
+				$syntax = 'python';
+				break;
+
+			case 'Ruby':
+				$syntax = 'ruby';
+				break;
+
+			case 'JavaScript':
+				$syntax = 'js';
+				break;
+
+			case 'Java':
+			case 'JavaFX':
+				$syntax = 'java';
+				break;
+
+			case 'CSS':
+				$syntax = 'css';
+				break;
+
+			case 'PHP':
+				$syntax = 'php';
+				break;
+
+			case 'SQL':
+				$syntax = 'sql';
+				break;
+
+			case 'VB':
+				$syntax = 'vb';
+				break;
+
+			case 'XML':
+				$syntax = 'xml';
+				break;
+
+			default:
+				$syntax = '';
+				break;
+		}
+		
+		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'editArea|' . $syntax;
+		return $varValue;
 	}
 
 

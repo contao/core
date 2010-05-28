@@ -503,7 +503,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('allowHtml'=>true, 'class'=>'monospace')
+			'eval'                    => array('allowHtml'=>true, 'class'=>'monospace', 'rte'=>'editArea|html', 'helpwizard'=>true),
+			'explanation'             => 'insertTags'
 		),
 		'protected' => array
 		(
