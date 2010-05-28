@@ -43,6 +43,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: changed the theme icon order according to the system defaults (#2025)
 - Fixed: corrected a few spelling mistakes and translation issues (#2032)
 - Fixed: subpalettes were not inserted correctly when loaded via Ajax (#2039)
+- Fixed: the DC_File driver did not support multi-text fields (#2045)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)

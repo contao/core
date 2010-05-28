@@ -259,7 +259,6 @@ function scan($strFolder)
  * Convert special characters to HTML entities and make sure that
  * entities are never double converted.
  * @param string
- * @param boolean
  * @return string
  */
 function specialchars($strString)

@@ -228,15 +228,27 @@ class DC_File extends DataContainer implements editable
 
 					$this->strField = $vv;
 					$this->strInputName = $vv;
+					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
 
 					// Handle entities
 					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'textarea')
 					{
-						$this->varValue = htmlspecialchars($GLOBALS['TL_CONFIG'][$this->strField]);
-					}
-					else
-					{
-						$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'])
+						{
+							$this->varValue = deserialize($this->varValue);
+						}
+
+						if (!is_array($this->varValue))
+						{
+							$this->varValue = htmlspecialchars($this->varValue);
+						}
+						else
+						{
+							foreach ($this->varValue as $k=>$v)
+							{
+								$this->varValue[$k] = htmlspecialchars($v);
+							}
+						}
 					}
 
 					// Call load_callback
@@ -374,8 +386,21 @@ window.addEvent(\'domready\', function()
 		// Handle entities
 		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
 		{
-			$varValue = $this->restoreBasicEntities($varValue);
-			$this->varValue = htmlspecialchars_decode($this->varValue);
+			$varValue = deserialize($varValue);
+
+			if (!is_array($varValue))
+			{
+				$varValue = $this->restoreBasicEntities($varValue);
+			}
+			else
+			{
+				foreach ($varValue as $k=>$v)
+				{
+					$varValue[$k] = $this->restoreBasicEntities($v);
+				}
+
+				$varValue = serialize($varValue);
+			}
 		}
 
 		// Call save_callback
