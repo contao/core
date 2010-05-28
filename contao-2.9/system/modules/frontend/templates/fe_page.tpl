@@ -11,8 +11,8 @@
 <?php echo $this->robots; ?>
 <?php echo $this->framework; ?>
 <?php echo $this->stylesheets; ?>
-<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo $this->mooCore; ?>"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo $this->mooMore; ?>"></script>
 <?php echo $this->head; ?>
 <?php if ($this->urchinId): ?>
 <script type="text/javascript">

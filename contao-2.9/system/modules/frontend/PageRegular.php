@@ -288,6 +288,10 @@ class PageRegular extends Frontend
 		$this->Template->framework .= '<link rel="stylesheet" href="system/contao.css" type="text/css" media="screen" />' . "\n";
 		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 
+		// Pass the modification time of the MooTools scripts
+		$this->Template->mooCore = filemtime(TL_ROOT .'/plugins/mootools/mootools-core.js');
+		$this->Template->mooMore = filemtime(TL_ROOT .'/plugins/mootools/mootools-more.js');
+
 		// Initialize sections
 		$this->Template->header = '';
 		$this->Template->left = '';
@@ -322,25 +326,25 @@ class PageRegular extends Frontend
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet .'?'. filemtime(TL_ROOT .'/'. $stylesheet) . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
 			}
 		}
 
 		// Default TinyMCE style sheet
 		if (file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css" type="text/css" media="screen" />' . "\n";
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css?' . filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') . '" type="text/css" media="screen" />' . "\n";
 		}
 
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT name, cc, media FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT tstamp, name, cc, media, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
 				$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-										 $objStylesheets->name . '.css',
+										 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
 										 implode(', ', deserialize($objStylesheets->media)));
 
 				if ($objStylesheets->cc)
@@ -386,7 +390,7 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script type="text/javascript" src="' . $javascript .'?'. filemtime(TL_ROOT .'/'. $javascript) . '"></script>' . "\n";
 			}
 		}
 
