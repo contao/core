@@ -56,6 +56,12 @@
   <input type="text" name="username" id="username" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpUser']; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
   <input type="password" name="password" id="password" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPass']; ?>" />
+  <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
+  <div class="tl_checkbox_container" style="margin-top:3px;">
+    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $GLOBALS['TL_CONFIG']['ftpSSL'] ? ' checked="checked"' : ''; ?> /> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
+  </div>
+  <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPort']; ?></h4>
+  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPort']; ?>" />
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">

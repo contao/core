@@ -161,6 +161,8 @@ $GLOBALS['TL_CONFIG']['ftpHost'] = '';
 $GLOBALS['TL_CONFIG']['ftpPath'] = '';
 $GLOBALS['TL_CONFIG']['ftpUser'] = '';
 $GLOBALS['TL_CONFIG']['ftpPass'] = '';
+$GLOBALS['TL_CONFIG']['ftpSSL']  = false;
+$GLOBALS['TL_CONFIG']['ftpPort'] = 21;
 
 
 /**

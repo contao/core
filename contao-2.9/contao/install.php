@@ -93,26 +93,29 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_ftp')
 		{
-			$GLOBALS['TL_CONFIG']['useFTP'] = true;
-
+			$GLOBALS['TL_CONFIG']['useFTP']  = true;
 			$GLOBALS['TL_CONFIG']['ftpHost'] = $this->Input->post('host');
 			$GLOBALS['TL_CONFIG']['ftpPath'] = $this->Input->post('path');
 			$GLOBALS['TL_CONFIG']['ftpUser'] = $this->Input->post('username', true);
 			$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
+			$GLOBALS['TL_CONFIG']['ftpSSL']  = $this->Input->post('ssl');
+			$GLOBALS['TL_CONFIG']['ftpPort'] = $this->Input->post('port');
 
-			// Add trailing slash
+			// Add a trailing slash
 			if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
 			{
 				$GLOBALS['TL_CONFIG']['ftpPath'] .= '/';
 			}
 
-			// Try to connect and locate Contao directory
-			if (($resFtp = @ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) == false)
+			$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
+
+			// Try to connect and locate the Contao directory
+			if (($resFtp = $ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'], $GLOBALS['TL_CONFIG']['ftpPort'], 5)) == false)
 			{
 				$this->Template->ftpHostError = true;
 				$this->outputAndExit();
 			}
-			elseif (!@ftp_login($resFtp, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
+			elseif (!ftp_login($resFtp, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
 			{
 				$this->Template->ftpUserError = true;
 				$this->outputAndExit();
@@ -131,6 +134,8 @@ class InstallTool extends Controller
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
 
 				$this->reload();
 			}

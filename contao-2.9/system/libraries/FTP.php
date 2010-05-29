@@ -96,8 +96,10 @@ class FTP extends Files
 			throw new Exception('The FTP password must not be empty');
 		}
 
+		$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
+
 		// Try to connect
-		if (($resConnection = ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) == false)
+		if (($resConnection = $ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'], $GLOBALS['TL_CONFIG']['ftpPort'], 5)) == false)
 		{
 			throw new Exception('Could not connect to the FTP server');
 		}
