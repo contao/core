@@ -523,14 +523,13 @@ class tl_page extends Backend
 			return;
 		}
 
-		$groups = $this->User->groups;
 		$session = $this->Session->getData();
 
-		// Set default user and group
+		// Set the default page user and group
 		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $this->User->groups[0];
 
-		// Restrict user permissions
+		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
 
 		// Set allowed page IDs (edit multiple)
@@ -594,12 +593,6 @@ class tl_page extends Backend
 
 		// Overwrite session
 		$this->Session->setData($session);
-
-		// Add access rights to new pages
-		if ($this->Input->get('act') == 'create')
-		{
-			$GLOBALS['TL_DCA']['tl_page']['fields']['includeChmod']['default'] = 1;
-		}
 
 		// Check permissions to save and create new
 		if ($this->Input->get('act') == 'edit')

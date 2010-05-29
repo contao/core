@@ -3058,6 +3058,8 @@ window.addEvent(\'domready\', function()
 		// Paste buttons
 		if ($arrClipboard !== false && $this->Input->get('act') != 'select')
 		{
+			$_buttons .= ' ';
+
 			// Call paste_button_callback(&$dc, $row, $table, $blnCircularReference, $arrClipboard, $childs, $previous, $next)
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['paste_button_callback']))
 			{

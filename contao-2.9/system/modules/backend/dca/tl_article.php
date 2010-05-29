@@ -298,16 +298,14 @@ class tl_article extends Backend
 			return;
 		}
 
-		$groups = $this->User->groups;
 		$session = $this->Session->getData();
 
-		// Set default user and group
+		// Set the default page user and group
 		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $this->User->groups[0];
 
-		// Restrict user permissions
+		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
-		$GLOBALS['TL_DCA']['tl_article']['fields']['author']['default'] = $this->User->id;
 
 		// Set allowed page IDs (edit multiple)
 		if (is_array($session['CURRENT']['IDS']))

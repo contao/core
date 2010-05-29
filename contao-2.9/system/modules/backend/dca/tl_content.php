@@ -632,12 +632,6 @@ class tl_content extends Backend
 			return;
 		}
 
-		$groups = $this->User->groups;
-
-		// Set default user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
-
 		// Get pagemounts
 		$pagemounts = array();
 
