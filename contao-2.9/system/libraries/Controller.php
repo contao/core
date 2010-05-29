@@ -1618,7 +1618,13 @@ abstract class Controller extends System
 				case 'iflng':
 					if (strlen($elements[1]) && $elements[1] != $objPage->language)
 					{
-						$_rit = $_rit + 2;
+						for($_rit; $_rit<count($tags); $_rit+=2)
+						{
+							if ($tags[$_rit+1] == 'iflng')
+							{
+								break;
+							}
+						}
 					}
 					unset($arrCache[$strTag]);
 					break;

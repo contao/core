@@ -11,6 +11,7 @@ Version 2.9.RC1 (2010--)
 - Improved the BBCode parser to always look for a closing tags (#1943)
 - Improved the FileTree widget to reload via Ajax after using the popup file manager (#1980)
 - Improved the Safe Mode Hack to only establish an FTP connection for write operations (#1957)
+- Improved the iflng insert tag to support nested tags (#1515)
 - Replaced uniqid('', true) with uniqid(mt_rand(), true)
 - Added: added a TextStore widget to enter passwords
 - Added: automatically increase the comments headline level (#1794)
