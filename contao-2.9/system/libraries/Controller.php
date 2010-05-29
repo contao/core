@@ -1273,6 +1273,9 @@ abstract class Controller extends System
 						{
 							$arrCache[$strTag] = $value;
 						}
+
+						// Convert special characters (see #1890)
+						$arrCache[$strTag] = specialchars($arrCache[$strTag]);
 					}
 					break;
 

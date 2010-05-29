@@ -53,6 +53,7 @@ Version 2.9.RC1 (2010--)
 - Fixed: do not remove line breaks from mails sent with the form generator (#1959)
 - Fixed: mandatory checkboxes and radio buttons were not handled correctly (#1921)
 - Fixed: do not set access rights for every new page but inherit them from the parent page (#2042)
+- Fixed: convert special characters in the output of the user insert tag (#1890)
 - Fixed a few minor issues
 
 Version 2.9.beta1 (2010-05-17)
