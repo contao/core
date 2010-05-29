@@ -74,7 +74,9 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'select',
+	'options'                 => array('hide_module', 'show_current', 'all_items'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module']
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
