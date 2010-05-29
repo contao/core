@@ -68,19 +68,9 @@ class Files
 		if (!is_object(self::$objInstance))
 		{
 			// Use FTP to modify files
-			if ($GLOBALS['TL_CONFIG']['useFTP'] && strlen($GLOBALS['TL_CONFIG']['ftpHost']) && strlen($GLOBALS['TL_CONFIG']['ftpUser']) && strlen($GLOBALS['TL_CONFIG']['ftpPass']))
+			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				// Connect to FTP server
-				if (($resConnection = ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) != false)
-				{
-					// Login
-					if (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
-					{
-						// Passive mode
-						ftp_pasv($resConnection, true);
-						self::$objInstance = new FTP($resConnection);
-					}
-				}
+				self::$objInstance = new FTP();
 			}
 
 			// HOOK: use the smhextended module
