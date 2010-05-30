@@ -44,6 +44,7 @@ $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layout
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
 $GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Backendmotiv', 'Hier können Sie das Backendmotiv wechseln.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum Datensätze pro Seite', 'Hier legen Sie fest, wie viele Datensätze maximal angezeigt werden, wenn ein Benutzer die Option "alle Datensätze anzeigen" auswählt.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
 $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Neue Zeilen mittels Absätzen erstellen', 'Neue Zeilen im Rich Text Editor mittels Absätzen anstatt mittels Zeilenumbrüchen erstellen.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('URLs umschreiben', 'Statische URLs ohne das index.php-Fragment erzeugen. Für diese Funktion muss "mod_rewrite" verfügbar sein sowie die Datei ".htaccess.default" in ".htaccess" umbenannt und gegebenenfalls die RewriteBase angepasst werden.');

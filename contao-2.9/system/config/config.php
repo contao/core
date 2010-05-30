@@ -29,12 +29,12 @@
  */
 
 
-#################################################################
-#                                                               #
-#  DO NOT CHANGE ANYTHING HERE! USE THE LOCAL CONFIGURATION     #
-#  FILE localconfig.php TO MODIFY THE CONTAO CONFIGURATION!     #
-#                                                               #
-#################################################################
+##############################################################
+#                                                            #
+#  DO NOT CHANGE ANYTHING HERE! USE THE LOCAL CONFIGURATION  #
+#  FILE localconfig.php TO MODIFY THE CONTAO CONFIGURATION!  #
+#                                                            #
+##############################################################
 
 
 /**
@@ -298,6 +298,7 @@ $GLOBALS['TL_CONFIG']['oldBeTheme'] = false;
  * this password during the installation process.
  */
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
+$GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
 $GLOBALS['TL_CONFIG']['customSections']       = '';
 $GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
 $GLOBALS['TL_CONFIG']['defaultUser']          = '';

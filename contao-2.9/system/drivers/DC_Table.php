@@ -4093,6 +4093,20 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			$objTotal = $this->Database->prepare($query)->execute($this->values);
 			$total = $objTotal->total;
+			$blnIsMaxResultsPerPage = false;
+
+			// Overall limit
+			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && (is_null($this->limit) || preg_replace('/^.*,/i', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
+			{
+				if (is_null($this->limit))
+				{
+					$this->limit = '0,' . $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
+				}
+
+				$blnIsMaxResultsPerPage = true;
+				$GLOBALS['TL_CONFIG']['resultsPerPage'] = $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
+				$session['filter'][$filter]['limit'] = $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
+			}
 
 			// Build options
 			if ($total > 0)
@@ -4101,7 +4115,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$options_total = ceil($total / $GLOBALS['TL_CONFIG']['resultsPerPage']);
 
 				// Reset limit if other parameters have decreased the number of results
-				if (!is_null($this->limit) && (!strlen($this->limit) || preg_replace('/,.*$/i', '', $this->limit) > $total))
+				if (!is_null($this->limit) && ($this->limit == '' || preg_replace('/,.*$/i', '', $this->limit) > $total))
 				{
 					$this->limit = '0,'.$GLOBALS['TL_CONFIG']['resultsPerPage'];
 				}
@@ -4121,8 +4135,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
   <option value="'.$this_limit.'"' . $this->optionSelected($this->limit, $this_limit) . '>'.($i*$GLOBALS['TL_CONFIG']['resultsPerPage']+1).' - '.$upper_limit.'</option>';
 				}
 
-				$options .= '
+				if (!$blnIsMaxResultsPerPage)
+				{
+					$options .= '
   <option value="all"' . $this->optionSelected($this->limit, null) . '>'.$GLOBALS['TL_LANG']['MSC']['filterAll'].'</option>';
+				}
 			}
 
 			// Return if there is only one page

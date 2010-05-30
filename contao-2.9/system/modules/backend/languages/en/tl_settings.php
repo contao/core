@@ -44,6 +44,7 @@ $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Custom layout
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
 $GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Back end theme', 'Here you can change the back end theme.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
+$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items per page', 'This overall limit takes effect if a user chooses the "show all records" option.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
 $GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Use paragraphs to generate new lines', 'Use paragraphs instead of line breaks to generate new lines in the rich text editor.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
