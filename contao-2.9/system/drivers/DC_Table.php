@@ -4455,7 +4455,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					// Replace boolean checkbox value with "yes" and "no"
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isBoolean'] || ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple']))
 					{
-						$vv = strlen($vv) ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
+						$vv = ($vv != '') ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
 					}
 
 					// Options callback
@@ -4648,6 +4648,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		if (empty($group))
 		{
 			$group = $value;
+
+			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isBoolean'] && $value != '-')
+			{
+				$group = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label']) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'];
+			}
 		}
 
 		// Call the group callback ($group, $sortingMode, $firstOrderBy, $row, $this)

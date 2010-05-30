@@ -222,6 +222,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sent'],
 			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true)
 		),
 		'date' => array

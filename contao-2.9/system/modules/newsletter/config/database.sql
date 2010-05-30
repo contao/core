@@ -69,7 +69,8 @@ CREATE TABLE `tl_newsletter_recipients` (
   `ip` varchar(64) NOT NULL default '',
   `token` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`),
-  KEY `pid` (`pid`)
+  KEY `pid` (`pid`),
+  KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
