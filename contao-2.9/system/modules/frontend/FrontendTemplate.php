@@ -69,44 +69,20 @@ class FrontendTemplate extends Template
 	{
 		global $objPage;
 
-		// Ignore URLs with certain parameters 
+		// Ignore certain URL parameters 
 		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
+		$strParams = '';
 
-		// Add $_GET variables if alias usage is disabled
-		if ($GLOBALS['TL_CONFIG']['disableAlias'])
+		// Rebuild the URL to eliminate duplicate parameters
+		foreach (array_keys($_GET) as $key)
 		{
-			$arrChunks = array();
-			$strUrl = 'index.php?id=' . $objPage->id;
-
-			foreach (array_keys($_GET) as $key)
+			if (!in_array($key, $arrIgnore))
 			{
-				if (!in_array($key, $arrIgnore))
-				{
-					$arrChunks[] = $key . '=' . $this->Input->get($key);
-				}
-			}
-
-			if (count($arrChunks) > 0)
-			{
-				$strUrl .= '&amp;' . implode('&amp;', $arrChunks);
+				$strParams .= '/' . $key . '/' . $this->Input->get($key);
 			}
 		}
 
-		// Rebuild URL to eliminate duplicate parameters
-		else
-		{
-			$strUrl = ($objPage->alias != '') ? $objPage->alias : $objPage->id;
-
-			foreach (array_keys($_GET) as $key)
-			{
-				if (!in_array($key, $arrIgnore))
-				{
-					$strUrl .= '/' . $key . '/' . $this->Input->get($key);
-				}
-			}
-
-			$strUrl .= $GLOBALS['TL_CONFIG']['urlSuffix'];
-		}
+		$strUrl = $this->generateFrontendUrl($objPage->row(), $strParams);
 
 		// Add the page number
 		if (isset($_GET['page']))

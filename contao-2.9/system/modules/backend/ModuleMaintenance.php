@@ -398,7 +398,7 @@ class ModuleMaintenance extends BackendModule
 		$time = time();
 
 		// Add error message
-		if (strlen($_SESSION['REBUILD_INDEX_ERROR']))
+		if ($_SESSION['REBUILD_INDEX_ERROR'] != '')
 		{
 			$this->Template->indexMessage = $_SESSION['REBUILD_INDEX_ERROR'];
 			$_SESSION['REBUILD_INDEX_ERROR'] = '';
