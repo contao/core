@@ -64,6 +64,7 @@ class RepositoryManager extends RepositoryBackendModule
 			array('',				'repository_mgrlist',		'listinsts'	),
 			array('edit',			'repository_mgredit',		'edit'		),
 			array('install',		'repository_mgrinst',		'install'	),
+			array('upgrade',		'repository_mgrupgd',		'upgrade'	),
 			array('update',			'repository_mgrupdt',		'update'	),
 			array('uninstall',		'repository_mgruist',		'uninstall'	)
 		);
@@ -76,111 +77,28 @@ class RepositoryManager extends RepositoryBackendModule
 	protected function listinsts()
 	{
 		$rep = &$this->Template->rep;
-		$db = &$this->Database;
 		
-		// query extensions
-		$rep->extensions = array();
-		$ext = $db->execute("select * from `tl_repository_installs` order by `extension`");
-		while ($ext->next()) {
-			$e = (object)$ext->row();
-			$e->status = array();
-			if ((int)$e->error>0) $e->status[] = (object)array('color' => 'red', 'text' => 'errorinstall');
+		// return from submit?
+		if ($this->filterPost('repository_action') == $rep->f_action) {
+			// nothing checked?
+			$ids0 = $this->Input->post('selectedids');
+			if (!is_array($ids0)) { $this->redirect($rep->homeLink); return; }
+			
+			// valid ids?
+			$ids = array();
+			foreach ($ids0 as $id) 
+				if (is_numeric($id) && $id >= 0) {
+					$id = (int)$id;
+					$ok = true;
+					foreach ($ids as $i) if ($i == $id) { $ok = false; break; }
+					if ($ok) $ids[] = $id;
+				} // if
+			if (count($ids) > 0) { $this->redirect($this->createUrl(array('upgrade'=>implode(',',$ids)))); return; }
+		} // if
 
-			// query current release
-			$elist = $this->getExtensionList(array(
-				'match' 	=> 'exact',
-				'names' 	=> $e->extension,
-				'versions'	=> $e->version,
-				'languages'	=> $this->languages,
-				'sets'		=> 'dependencies'
-			));
-			
-			$found = false;
-			if (count($elist) == 0) {
-				$e->status[] = (object)array('color' => 'red', 'text' => 'vernotfound');
-			} else {
-				$found = true;
-				$re = &$elist[0];
-				
-				// dependencies check
-				if (property_exists($re, 'dependencies')) {
-					foreach ($re->dependencies as &$dep) {
-						$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
-								->execute($dep->extension);
-						if (!$q->next()) 
-							$e->status[] = (object)array(
-								'color'	=> 'red', 
-								'text'	=> 'depmissing', 
-								'par1'	=> $dep->extension
-							);
-						else
-							if (($dep->minversion>0 && $q->version<$dep->minversion) ||
-								($dep->maxversion>0 && $q->version>$dep->maxversion)) {
-								$e->status[] = (object)array(
-									'color'	=> 'darkorange', 
-									'text'	=> 'notapprovedwith', 
-									'par1'	=> $dep->extension,
-									'par2'	=> Repository::formatVersion($q->version)
-								);
-							} // if
-					} // foreach
-				} // if
-				
-				// Contao compatibility check
-				$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);
-				if (($re->coreminversion>0 && $tlversion<$re->coreminversion) ||
-					($re->coremaxversion>0 && $tlversion>$re->coremaxversion) )
-					$e->status[] = (object)array(
-						'color'	=> 'darkorange', 
-						'text'	=> 'notapproved', 
-						'par1'	=> 'Contao',
-						'par2'	=> VERSION.'.'.BUILD
-					);
-					
-				unset($re);
-			} // if
-			
-			$updversion = $e->version;
-			
-			// new version search
-			$states = $this->stateList($e->alpha, $e->beta, $e->rc, $e->stable);
-			if ($states != '') {
-				// search for new release
-				$elist = $this->getExtensionList(array(
-					'match' 	=> 'exact',
-					'names' 	=> $e->extension,
-					'states'	=> $states,
-					'languages'	=> $this->languages,
-					'sets'		=> 'details'
-				));
-				if (count($elist) > 0) {
-					// new version/build check
-					$found = true;
-					$re = &$elist[0];
-					if ($re->version > $e->version ||
-						($re->version == $e->version && $re->build > $e->build)) {
-						$e->status[] = (object)array('text'=>'newversion', 'color'=>'blue', 'par1'=>Repository::formatVersion($re->version), 'par2'=>$re->build);
-						$updversion = $re->version;
-					} // if
-					if (isset($re->manual)) $e->manualLink = $re->manual; 
-					if (isset($re->forum)) $e->forumLink = $re->forum; 
-					unset($re);
-				} // if
-			} // if
-			
-			if (count($e->status)==0) {
-				$e->status[] = (object)array('text' => 'uptodate', 'color' => 'green');
-			} // if
-			
-			if ($found) $e->catalogLink = $this->createPageUrl('repository_catalog', array('view'=>$e->extension));
-			$e->editLink = $this->createUrl(array('edit'=>$e->extension));
-			$e->updateLink = $this->createUrl(array('install'=>$e->extension.'.'.$updversion));
-			if ((int)$e->delprot==0) $e->uninstallLink =  $this->createUrl(array('uninstall'=>$e->extension));
-			$rep->extensions[] = $e;
-		} // while
-		
+		$rep->extensions = $this->getInstalledExtensions();
 		$rep->installLink = $this->createUrl(array('install'=>'extension'));
-		$rep->updateLink = $this->createUrl(array('update'=>'database'));
+		$rep->updateLink = $this->createUrl(array('update'=>'database'));	
 	} // listinsts
 
 	/**
@@ -203,11 +121,12 @@ class RepositoryManager extends RepositoryBackendModule
 				'beta'		=> (int)$this->Input->post('repository_beta') > 0,
 				'rc'		=> (int)$this->Input->post('repository_rc') > 0,
 				'stable'	=> (int)$this->Input->post('repository_stable') > 0,
-				'delprot'	=> (int)$this->Input->post('repository_delprot') > 0
+				'delprot'	=> (int)$this->Input->post('repository_delprot') > 0,
+				'updprot'	=> (int)$this->Input->post('repository_updprot') > 0
 			);
 			$db->prepare("update `tl_repository_installs` %s where `extension`=?")
 				->set($params)
-				->execute($aName);
+				->executeUncached($aName);
 			$this->redirect($rep->homeLink);
 		} // if
 		
@@ -217,6 +136,7 @@ class RepositoryManager extends RepositoryBackendModule
 		$rep->f_rc = (int)$ext->rc > 0;
 		$rep->f_stable = (int)$ext->stable > 0;
 		$rep->f_delprot = (int)$ext->delprot > 0;
+		$rep->f_updprot = (int)$ext->updprot > 0;
 	} // edit
 	
 	/**
@@ -228,17 +148,18 @@ class RepositoryManager extends RepositoryBackendModule
 		$rep = &$this->Template->rep;
 		$db = &$this->Database;
 		
-		$rep->inst_stages		= 0;
-		$rep->inst_extension	= 1;
+		$rep->inst_extension	= 0;
+		$rep->inst_version		= 1;
 		$rep->inst_lickey		= 2;
 		$rep->inst_actions		= 3;
 		$rep->inst_showlog		= 4;
 		$rep->inst_error		= 5;
 		
-		$rep->f_stage = $rep->inst_stages;
-		$rep->f_alpha = $rep->f_beta = $rep->f_rc = false;
-		$rep->f_stable = true;
+		$rep->f_stage = $rep->inst_extension;
 		$rep->f_extension = '';
+		$rep->f_version = '';
+		$rep->f_allversions = array();
+		$rep->f_enterkey = false;
 		$rep->f_lickey = '';
 		
 		// return from submit?
@@ -246,17 +167,6 @@ class RepositoryManager extends RepositoryBackendModule
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
 			$ok = true;
 			$rep->f_stage = (int)$this->Input->post('repository_stage');
-
-			// get and validate states
-			$rep->f_alpha	= (int)$this->Input->post('repository_alpha') > 0;
-			$rep->f_beta	= (int)$this->Input->post('repository_beta') > 0;
-			$rep->f_rc		= (int)$this->Input->post('repository_rc') > 0;
-			$rep->f_stable	= (int)$this->Input->post('repository_stable') > 0;
-			$states = $this->stateList($rep->f_alpha, $rep->f_beta, $rep->f_rc, $rep->f_stable);		
-			if ($states == '') {
-				$ok = false;
-				$rep->f_stage = $rep->inst_stages;
-			} // if
 
 			if ($rep->f_stage >= $rep->inst_extension) {
 				// get and check extension
@@ -266,21 +176,38 @@ class RepositoryManager extends RepositoryBackendModule
 						'languages' => $this->languages,
 						'match'		=> 'exact',
 						'names'		=> $rep->f_extension,
-						'states'	=> $states,
 						'sets'		=> 'history'
 					));
 				} else
 					$exts = array();
 				$ok = count($exts)>0;
-				if (!$ok) $rep->f_stage = $rep->inst_extension;
+				if ($ok) {
+					foreach ($exts[0]->allversions as $ver)
+						array_unshift($rep->f_allversions, $ver->version);
+					$rep->f_enterkey = $exts[0]->type!='free';
+				} else {
+					$rep->f_extension_msg = 'extensionnotfound';
+					$rep->f_stage = $rep->inst_extension;
+				} // if
 			} // if
 			
-			if ($rep->f_stage >= $rep->inst_lickey) {
+			if ($rep->f_stage >= $rep->inst_version) {
+				// get and check version
+				$rep->f_version = trim($this->Input->post('repository_version'));
+				$ok = false;
+				foreach ($exts[0]->allversions as $ver)
+					if ($ver->version == $rep->f_version) {
+						$ok = true;
+						break;
+					} // if
+				if (!$ok)
+					$rep->f_stage = $rep->inst_version;
+			} // if
+			
+			if ($rep->f_stage >= $rep->inst_lickey && $rep->f_enterkey) {
 				// get license key
 				$rep->f_lickey = trim($this->Input->post('repository_lickey'));
-				if ($rep->f_lickey=='' 
-					&& ($exts[0]->type=='private' ||
-						($exts[0]->type=='commercial' && !intval($exts[0]->demo)) ) ) {
+				if ($rep->f_lickey == '') {
 					$rep->f_lickey_msg = 'lickeyrequired';
 					$ok = false;
 					$rep->f_stage = $rep->inst_lickey;
@@ -295,9 +222,9 @@ class RepositoryManager extends RepositoryBackendModule
 				
 			if ($rep->f_stage==$rep->inst_actions && count($enableActions)>0) {
 				// install!!!!
-				$act = false;
+				$act = '';
 				$actions = array();
-				$this->addActions($rep->f_extension, $states, $actions, $act);
+				$this->addActions($rep->f_extension, $rep->f_version, $actions, $act);
 				if ($act=='ok') {
 					$rep->log = '<div class="title">'.$text['installlogtitle'].'</div>'."\n";
 					$lickey = $rep->f_lickey;
@@ -332,7 +259,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'stable'	=> '1',
 									'error'		=> '1'
 								);
-								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->execute();
+								$q = $db->prepare("insert into `tl_repository_installs` %s")->set($params)->executeUncached();
 								$error = $this->installExtension($act->extension, $act->version, $lickey);
 								$checkdb = $updinst = true;
 								$record = 'install';
@@ -356,7 +283,7 @@ class RepositoryManager extends RepositoryBackendModule
 								'error'		=> $error ? '1' : ''
 							);
 							if ($lickey != '') $params['lickey'] = $lickey;
-							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->execute($act->extension);
+							$db->prepare("update `tl_repository_installs` %s where `extension`=?")->set($params)->executeUncached($act->extension);
 						} // if
 						if ($record != '')
 							$this->recordAction(array(
@@ -378,40 +305,31 @@ class RepositoryManager extends RepositoryBackendModule
 			// parse name.version
 			$matches = array();
 			if (preg_match('#^([a-zA-Z0-9_-]+)\.([0-9]+)$#', $aParams, $matches)) {
-				$rep->f_stage = $rep->inst_lickey;
-				$s = $matches[2] % 10;
-				if ($s <= 2) $rep->f_alpha = true;
-				if ($s <= 5) $rep->f_beta = true;
-				if ($s <= 8) $rep->f_rc = true;
 				$rep->f_extension = $matches[1];
-				
-				// get license key and default states
-				$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
-						->execute($rep->f_extension);
-				if ($q->next()) {
-					$rep->f_lickey = $q->lickey;
-					if ((int)$q->alpha>0) $rep->f_alpha = true;
-					if ((int)$q->beta>0) $rep->f_beta = true;
-					if ((int)$q->rc>0) $rep->f_rc = true;
-				} // if
+				$rep->f_version = $matches[2];
+				$rep->f_stage = $rep->inst_lickey;
+
+				// get all versions
+				$options = array(
+					'languages' => $this->languages,
+					'match'		=> 'exact',
+					'names'		=> $rep->f_extension,
+					'sets'		=> 'history'
+				);
+				$exts = $this->getExtensionList($options);
+				if (count($exts)>0) {
+					foreach ($exts[0]->allversions as $ver)
+						array_unshift($rep->f_allversions, $ver->version);
+						
+					// get license key
+					$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
+							->execute($rep->f_extension);
+					if ($q->next()) $rep->f_lickey = $q->lickey;
+				} else {
+					$rep->f_extension_msg = 'extensionnotfound';
+					$rep->f_stage = $rep->inst_extension;
+				} // if				
 			} // if
-		} // if
-		
-		// get extension list
-		if ($rep->f_stage >= $rep->inst_extension) {
-			$states = $this->stateList($rep->f_alpha, $rep->f_beta, $rep->f_rc, $rep->f_stable);
-			$options = array(
-				'languages' => $this->languages,
-				'states'	=> $states
-			);
-			if ($rep->f_stage > $rep->inst_extension) {
-				$options['match'] = 'exact';
-				$options['names'] = $rep->f_extension;
-			} // if
-			$exts = $this->getExtensionList($options);
-			$rep->extensions = array();
-			foreach ($exts as $e) $rep->extensions[] = $e->name;
-			if (count($rep->extensions)>0) natcasesort($rep->extensions);
 		} // if
 		
 		// skip license key if not commercial or private
@@ -421,7 +339,7 @@ class RepositoryManager extends RepositoryBackendModule
 		if ($rep->f_stage >= $rep->inst_actions) {
 			$act = '';
 			$rep->actions = array();
-			$this->addActions($rep->f_extension, $states, $rep->actions, $act);
+			$this->addActions($rep->f_extension, $rep->f_version, $rep->actions, $act);
 			if ($act != 'ok') $rep->f_stage = $rep->inst_error;
 			if (is_array($enableActions))
 				foreach ($rep->actions as &$act)
@@ -430,6 +348,59 @@ class RepositoryManager extends RepositoryBackendModule
 
 		if ($rep->f_stage < $rep->inst_error) $rep->f_submit = 'continue';
 	} // install
+
+	/**
+	 * Upgrade extensions
+	 */
+	protected function upgrade($aParams)
+	{
+		$rep = &$this->Template->rep;
+
+		// return from submit?
+		if ($this->filterPost('repository_action') == $rep->f_action) {
+			if (isset($_POST['repository_continuebutton'])) { 
+				$this->redirect($this->createUrl(array('update'=>'database'))); 
+				return; 
+			} // if
+		} // if
+		
+		$text = &$GLOBALS['TL_LANG']['tl_repository']; 
+		$db = &$this->Database;
+		$exts = $this->getInstalledExtensions($aParams);
+		$rep->log = '';
+		foreach ($exts as $ext) {
+			if ((int)$ext->updprot==0) {
+				$label = 
+					($ext->version != $ext->upd_version || $ext->upd_build != $ext->upd_build)
+					? $text['updatingext'] 
+					: $text['validatingext'];
+				$rep->log .= 
+					'<div class="subtitle">'.
+						sprintf($label, $ext->extension, Repository::formatVersion($ext->upd_version), $ext->upd_build).
+					"</div>\n";
+				$error = $this->updateExtension($ext->extension, $ext->upd_version, $ext->lickey);
+
+				// update db
+				$params = array(
+					'tstamp'	=> time(),
+					'version'	=> $ext->upd_version,
+					'build'		=> $ext->upd_build,
+					'error'		=> $error ? '1' : ''
+				);
+				$db->prepare("update `tl_repository_installs` %s where `extension`=?")
+					->set($params)
+					->executeUncached($ext->extension);
+					
+				// update server stats
+				if (intval($ext->version / 10000) < intval($ext->upd_version / 10000))
+					$this->recordAction(array(
+						'name'		=> $act->extension,
+						'version'	=> $act->upd_version,
+						'action'	=> 'update'
+					));
+			} // if
+		} // foreach
+	} // upgrade
 
 	/**
 	 * Check / update database
@@ -557,7 +528,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$q = $db->prepare("select `id` from `tl_repository_installs` where `extension`=?")->execute($aName);
 			if (!$q->next()) throw new Exception($text['extinstrecntf']);
 			$instId = $q->id;
-			$db->prepare("update `tl_repository_instfiles` set `flag`='D' where `pid`=? and `filetype`='F'")->execute($instId);
+			$db->prepare("update `tl_repository_instfiles` set `flag`='D' where `pid`=? and `filetype`='F'")->executeUncached($instId);
 			
 			foreach ($files as $file) {
 				// get relative file name
@@ -593,7 +564,7 @@ class RepositoryManager extends RepositoryBackendModule
 									"update `tl_repository_instfiles` set `tstamp`=?".
 									" where `pid`=? and `filetype`='D' and `filename`=?"
 								  )
-								->execute(array(time(), $instId, $dir));
+								->executeUncached(array(time(), $instId, $dir));
 						if ($q->affectedRows == 0)
 							$db	->prepare("insert into `tl_repository_instfiles` %s")
 								->set(array(
@@ -602,7 +573,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'filename'	=> $dir,
 									'filetype'	=> 'D'
 								  ))
-								->execute();
+								->executeUncached();
 						$dir = dirname($dir);
 					} // while
 					
@@ -628,7 +599,7 @@ class RepositoryManager extends RepositoryBackendModule
 								"update `tl_repository_instfiles` set `tstamp`=?, `flag`=''".
 								" where `pid`=? and `filetype`='F' and `filename`=?"
 							  )
-							->execute(array(time(), $instId, $filerel));
+							->executeUncached(array(time(), $instId, $filerel));
 					if ($q->affectedRows == 0)
 						$db	->prepare("insert into `tl_repository_instfiles` %s")
 							->set(array(
@@ -637,7 +608,7 @@ class RepositoryManager extends RepositoryBackendModule
 								'filename'	=> $filerel,
 								'filetype'	=> 'F'
 							  ))
-							->execute();
+							->executeUncached();
 				} // if
 			} // foreach
 			
@@ -645,7 +616,7 @@ class RepositoryManager extends RepositoryBackendModule
 			$q = $db->prepare("select * from `tl_repository_instfiles` where `pid`=? and `filetype`='F' and `flag`='D'")->execute($instId);
 			while ($q->next()) {
 				$this->Files->delete($q->filename);
-				$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
+				$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
 				$sum_del++;
 			} // while
 		
@@ -743,7 +714,7 @@ class RepositoryManager extends RepositoryBackendModule
 											"update `tl_repository_instfiles` set `tstamp`=?".
 											" where `pid`=? and `filetype`='D' and `filename`=?"
 										  )
-										->execute(array(time(), $instId, $dir));
+										->executeUncached(array(time(), $instId, $dir));
 								if ($q->affectedRows == 0)
 									$db	->prepare("insert into `tl_repository_instfiles` %s")
 										->set(array(
@@ -752,7 +723,7 @@ class RepositoryManager extends RepositoryBackendModule
 											'filename'	=> $dir,
 											'filetype'	=> 'D'
 										  ))
-										->execute();
+										->executeUncached();
 								$dir = dirname($dir);
 							} // while
 							
@@ -770,7 +741,7 @@ class RepositoryManager extends RepositoryBackendModule
 									'filename'	=> $filerel,
 									'filetype'	=> 'F'
 								  ))
-								->execute();
+								->executeUncached();
 						} // if
 					} // for	
 					$zip = null; // destruct = close
@@ -846,7 +817,7 @@ class RepositoryManager extends RepositoryBackendModule
 					$rep->log .= '<span class="color_blue">'.$text['notfound'];
 				$rep->log .= "</span></div>\n";
 				if ($del) 
-					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
+					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
 			} // while
 		
 			// delete the directories
@@ -863,7 +834,7 @@ class RepositoryManager extends RepositoryBackendModule
 					} else
 						$rep->log .= '<span class="color_blue">'.$text['notfound'];
 					$rep->log .= "</span></div>\n";
-					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->execute($q->id);
+					$db->prepare("delete from `tl_repository_instfiles` where `id`=?")->executeUncached($q->id);
 				} // while
 			} // if
 			
@@ -876,10 +847,10 @@ class RepositoryManager extends RepositoryBackendModule
 				
 			$rep->log .= "<div>&nbsp;</div>\n";
 			if ($err) {
-				$db->prepare("update `tl_repository_installs` set `error`='1' where `id`=?")->execute($instId);
+				$db->prepare("update `tl_repository_installs` set `error`='1' where `id`=?")->executeUncached($instId);
 				$rep->log .= '<div class="color_red">'.$text['actionfailed'].'</div>';
 			} else {
-				$db->prepare("delete from `tl_repository_installs` where `id`=?")->execute($instId);
+				$db->prepare("delete from `tl_repository_installs` where `id`=?")->executeUncached($instId);
 				$rep->log .= '<div class="color_green">'.$text['actionsuccess'].'</div>';
 			} // if
 			$this->log('Extension "'. $aName .'" has been uninstalled', 'RepositoryManager::uninstallExtension()', TL_REPOSITORY);
@@ -912,7 +883,7 @@ class RepositoryManager extends RepositoryBackendModule
 	/**
 	 * Collect all acctions necessary to install/update an extension.
 	 */
-	private function addActions($aName, $aStates, &$aActions, &$aAction, $aParent='', $aParentVersion=0, $aMinversion=0, $aMaxversion=0)
+	private function addActions($aName, $aVersion, &$aActions, &$aAction, $aDeps=true, $aParent='', $aParentVersion=0, $aMinversion=0, $aMaxversion=0)
 	{
 		$db = &$this->Database;
 		
@@ -923,62 +894,25 @@ class RepositoryManager extends RepositoryBackendModule
 			'build'		=> 0,
 			'action'	=> 'none',
 			'enabled'	=> true,
+			'locked'	=> false,
 			'status'	=> array()
 		);
 		$aActions[] = $action;
 
-		// finding the extension:
-		//
-		// - First try with the parent extension states in $aStates, and in case the 
-		//	 extension is allready installed add the update states of the installed 
-		//	 extension.
-		//
-		// - While extension is not found, add states stable, rc, beta and alfa one 
-		//   after the other an retry each time a new state was added
-		
-		$states = $aStates; // inherit parent flags
-						
-		// get update flags of installed extension
-		$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
-				->execute($aName);		
-		if ($q->next()) {
-			// add update flags of installed extension
-			$sa = explode(',',$states);
-			if ((int)$q->alpha>0 && !in_array('alpha', $sa)) $sa[] = 'alpha';
-			if ((int)$q->beta>0 && !in_array('beta', $sa)) $sa[] = 'beta';
-			if ((int)$q->rc>0 && !in_array('rc', $sa)) $sa[] = 'rc';
-			if ((int)$q->stable>0 && !in_array('stable', $sa)) $sa[] = 'stable';
-			$states = implode(',',$sa);
-		} // if
-		
-		// get most current release
-		do {
-			$exts = $this->getExtensionList(array(
-				'match' 	=> 'exact',
-				'names' 	=> $aName,
-				'languages'	=> $this->languages,
-				'states'	=> $states,
-				'sets'		=> 'dependencies'
-			));
-			$retry = false;
-			if (count($exts)<1) {
-				$sa = explode(',',$states);
-				foreach (array('stable','rc','beta','alpha') as $s)
-					if (!in_array($s, $sa)) {
-						$sa[] = $s;
-						$states = implode(',',$sa);
-						$retry = true;
-						break;
-					} // if
-			} // if
-		} while ($retry);
-		
+		$params = array(
+			'match' 	=> 'exact',
+			'names' 	=> $aName,
+			'versions' 	=> $aVersion,
+			'languages'	=> $this->languages
+		);
+		if ($aDeps) $params['sets'] = 'dependencies';
+		$exts = $this->getExtensionList($params);
+
 		if (count($exts)<1) {
 			$action->status[] = (object)array('color'=>'red', 'text'=>'extnotfound');
 			$aAction = 'failed';
 		} else {
 			$ext = &$exts[0];
-			
 			$action->version = $ext->version;
 			$action->build = $ext->build;
 			
@@ -986,51 +920,77 @@ class RepositoryManager extends RepositoryBackendModule
 			$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
 					->execute($aName);
 			if ($q->next()) {
-				if ((int)$q->error>0) $action->status[] = (object)array('color'=>'red', 'text'=>'errorinstall');
-				if ($q->version < $ext->version || $q->build < $ext->build) {
+				if ((int)$q->error>0) 
+					$action->status[] = (object)array('color'=>'red', 'text'=>'errorinstall');
+				if ($q->version != $ext->version || $q->build != $ext->build) {
 					$action->action = 'update';
 				} else {
-					if ((int)$q->error==0) $action->status[] = (object)array('color'=>'green', 'text'=>'uptodate');
 					$action->action = 'validate';
 					$action->enabled = false;
 				} // if
 				if ($aAction=='') $aAction = 'ok';
-			} else {
-				if ($aParent!='' && property_exists($ext, 'soapwsdl')) {
-					$action->status[] = (object)array(
-						'color'=>'red', 
-						'text'=>'extneedkey',
-					);
-					$aAction = 'failed';
-				} else {
-					$action->action = 'install';
-					if ($aAction=='') $aAction = 'ok';
+				if ($q->updprot) {
+					$action->enabled = false;
+					$action->locked = true;
 				} // if
+			} else {
+				$action->action = 'install';
+				if ($aAction=='') $aAction = 'ok';
 			} // if
 			
 			// parent compatibility check
-			if (($aMinversion>0 && $ext->version<$aMinversion) ||
-				($aMaxversion>0 && $ext->version>$aMaxversion) )
-				$action->status[] = (object)array(
-					'color'	=> 'darkorange', 
-					'text'	=> 'notapproved', 
-					'par1'	=> $aParent, 
-					'par2'	=> Repository::formatVersion($aParentVersion)
-				);
+			$extver = $ext->version;
+			$minver = $aMinversion>0 ? $aMinversion : $extver;
+			$maxver = $aMaxversion>0 ? $aMaxversion : $extver;
+			if ($extver<$minver || $extver>$maxver) {
+				$extver = intval($extver / 10000);
+				$minver = intval($minver / 10000);
+				$maxver = intval($maxver / 10000);
+				if ($extver<$minver || $extver>$maxver)
+					$action->status[] = (object)array(
+						'color'	=> 'darkorange', 
+						'text'	=> 'notapproved', 
+						'par1'	=> $aParent, 
+						'par2'	=> Repository::formatVersion($aParentVersion)
+					);
+				else
+					$action->status[] = (object)array(
+						'color'	=> 'green', 
+						'text'	=> 'shouldwork', 
+						'par1'	=> $aParent, 
+						'par2'	=> Repository::formatVersion($aParentVersion)
+					);
+			} // if
 				
-			// Contao compatibility check
+			// contao compatibility check
 			$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);
-			if (($ext->coreminversion>0 && $tlversion<$ext->coreminversion) ||
-				($ext->coremaxversion>0 && $tlversion>$ext->coremaxversion) )
-				$action->status[] = (object)array(
-					'color'	=> 'darkorange', 
-					'text'	=> 'notapproved',
-					'par1'	=> 'Contao',
-					'par2'	=> VERSION.'.'.BUILD
-				);
-				
+			$minver = $ext->coreminversion>0 ? $ext->coreminversion : $tlversion;
+			$maxver = $ext->coremaxversion>0 ? $ext->coremaxversion : $tlversion;
+			if ($tlversion<$minver || $tlversion>$maxver) {
+				$tlversion = intval($tlversion / 10000);
+				$minver = intval($minver / 10000);
+				$maxver = intval($maxver / 10000);
+				if ($tlversion<$minver || $tlversion>$maxver)
+					$action->status[] = (object)array(
+						'color'	=> 'darkorange', 
+						'text'	=> 'notapproved', 
+						'par1'	=> 'Contao',
+						'par2'	=> VERSION.'.'.BUILD
+					);
+				else
+					$action->status[] = (object)array(
+						'color'	=> 'green', 
+						'text'	=> 'shouldwork', 
+						'par1'	=> 'Contao',
+						'par2'	=> VERSION.'.'.BUILD
+					);
+			} // if
+
+			if (count($action->status)==0)
+				$action->status[] = (object)array('color'=>'green', 'text'=>'uptodate');
+
 			// add dependencies
-			if (property_exists($ext, 'dependencies')) 
+			if ($aDeps && property_exists($ext, 'dependencies')) 
 				foreach ($ext->dependencies as $dep) {
 					$take = true;
 					foreach ($aActions as $a)
@@ -1039,11 +999,27 @@ class RepositoryManager extends RepositoryBackendModule
 							break;
 						} // if
 					if ($take) {
+						// find highest version that might be compatible
+						$deps = $this->getExtensionList(array(
+							'match' 	=> 'exact',
+							'names' 	=> $dep->extension,
+							'languages'	=> $this->languages,
+							'sets'		=> 'history'
+						));
+						$depver = $dep->maxversion;
+						if (count($deps)>0) {
+							foreach ($deps[0]->allversions as $ver) {
+								$v = $ver->version;
+								if ($v>$depver && intval($v/10000)==intval($depver/10000)) 
+									$depver = $v;
+							} // foreach
+						} // if
 						$this->addActions(
 							$dep->extension, 
-							$aStates, 
+							$depver, 
 							$aActions, 
 							$aAction,
+							$aDeps,
 							$aName, 
 							$ext->version, 
 							$dep->minversion, 
@@ -1053,6 +1029,237 @@ class RepositoryManager extends RepositoryBackendModule
 				} // foreach
 		} // if
 	} // addActions
+	
+	/**
+	 * Get installed extensions list.
+	 * @return array Array with the extension records.
+	 */
+	private function getInstalledExtensions($aIds = '')
+	{
+		$db = &$this->Database;
+		
+		// query installed extensions
+		$exts = array();
+		$q = $db->execute(
+			($aIds=='') 
+				? "select * from `tl_repository_installs` order by `extension`"
+				: "select * from `tl_repository_installs` where `id` in ($aIds) order by `extension`"
+		);
+		while ($q->next()) $exts[] = (object)$q->row();
+		
+		// find each highest compatible version
+		foreach ($exts as &$ext) {
+			$ext->tl_incompatible = false;
+			$ext->tl_shouldwork = false;
+			$ext->dep_missing = array();
+			$ext->dep_incompatible = array();
+			$ext->dep_shouldwork = array();
+			$ext->upd_version = $ext->version;
+			$ext->upd_build = $ext->build;
+			
+			// query current release
+			$elist = $this->getExtensionList(array(
+				'match' 	=> 'exact',
+				'names' 	=> $ext->extension,
+				'versions'	=> $ext->version,
+				'languages'	=> $this->languages,
+				'sets'		=> 'dependencies,history,details'
+			));
+			$ext->found = count($elist)>0;
+			if ($ext->found) {
+				$extrec = &$elist[0];
+				if (isset($extrec->manual)) $ext->manualLink = ampersand($extrec->manual, true); 
+				if (isset($extrec->forum)) $ext->forumLink = ampersand($extrec->forum, true); 
+			
+				// contao compatibility check
+				$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);
+				$minver = $extrec->coreminversion>0 ? $extrec->coreminversion : $tlversion;
+				$maxver = $extrec->coremaxversion>0 ? $extrec->coremaxversion : $tlversion;
+				if ($tlversion<$minver || $tlversion>$maxver) {
+					$tlversion = intval($tlversion / 10000);
+					$minver = intval($minver / 10000);
+					$maxver = intval($maxver / 10000);
+					if ($tlversion<$minver || $tlversion>$maxver)
+						$ext->tl_incompatible = true;
+					else
+						$ext->tl_shouldwork = true;
+				} // if
+			
+				// dependencies compatibility check
+				if (property_exists($ext, 'dependencies')) {
+					foreach ($ext->dependencies as &$dep) {
+						$found = false;
+						foreach ($exts as $e)
+							if ($e->extension == $dep->extension) {
+								$found = true;
+								$extver = $e->version;
+								$minver = $dep->minversion>0 ? $dep->minversion : $extver;
+								$maxver = $dep->maxversion>0 ? $dep->maxversion : $extver;
+								if ($extver<$minver || $extver>$maxver) {
+									$extver = intval($extver / 10000);
+									$minver = intval($minver / 10000);
+									$maxver = intval($maxver / 10000);
+									if ($extver<$minver || $extver>$maxver)
+										$ext->dep_incompatible[] = array('extension'=>$e->extension, 'version'=>$e->version);
+									else
+										$ext->dep_shouldwork[] = array('extension'=>$e->extension, 'version'=>$e->version);
+								} // if
+								break;
+							} // if
+						if (!$found) $ext->dep_missing[] = $dep->extension;
+					} // foreach
+				} // if
+			} else {
+				// find any other version
+				$elist = $this->getExtensionList(array(
+					'match' 	=> 'exact',
+					'names' 	=> $ext->extension,
+					'languages'	=> $this->languages,
+					'sets'		=> 'dependencies,history'
+				));
+			} // if
+			if (count($elist)<1) continue; // no other tests possible
+			
+			// get all available versions in descending order
+			$vers = array();
+			foreach ($elist[0]->allversions as $ver)
+				array_unshift($vers, (object)array('version' => $ver->version, 'build' => $ver->build));
+				
+			// find highest compatible version
+			foreach ($vers as $ver) {
+				// status check
+				$compatible = false;
+				switch ($ver->version % 10) {
+					case 0: case 1: case 2: $compatible = (int)$ext->alpha>0; break;
+					case 3: case 4: case 5: $compatible = (int)$ext->beta>0; break;
+					case 6: case 7: case 8: $compatible = (int)$ext->rc>0; break;
+					default: $compatible = (int)$ext->stable>0;
+				} // switch
+				if (!$compatible) continue;
+					
+				// get record of this version
+				$rec = null;
+				if ($ver->version == $elist[0]->version)
+					$rec = &$elist[0];
+				else {
+					$olist = $this->getExtensionList(array(
+						'match' 	=> 'exact',
+						'names' 	=> $ext->extension,
+						'versions'	=> $ver->version,
+						'languages'	=> $this->languages,
+						'sets'		=> 'dependencies'
+					));
+					if (count($olist) > 0) $rec = &$olist[0];
+				} // if
+				if ($rec == null) continue;
+				
+				// contao compatibility check
+				$tlversion = intval(Repository::encodeVersion(VERSION.'.'.BUILD)/10000);
+				$minver = $rec->coreminversion>0 ? intval($rec->coreminversion/10000) : $tlversion;
+				$maxver = $rec->coremaxversion>0 ? intval($rec->coremaxversion/10000) : $tlversion;
+				if ($tlversion<$minver || $tlversion>$maxver) continue;
+				
+				// dependencies compatibility check
+				if (property_exists($rec, 'dependencies')) {
+					foreach ($rec->dependencies as &$dep) {
+						foreach ($exts as $e)
+							if ($e->extension == $dep->extension) {
+								$extver = intval($e->version/10000);
+								$minver = $dep->minversion>0 ? intval($dep->minversion/10000) : $extver;
+								$maxver = $dep->maxversion>0 ? intval($dep->maxversion/10000) : $extver;
+								if ($extver<$minver || $extver>$maxver) $compatible = false;
+								break;
+							} // if
+					} // foreach
+				} // if
+				if (!$compatible) continue;
+				
+				// $rec is the highest compatible version
+				if ($rec->version != $ext->version || $rec->build != $ext->build) {
+					$ext->upd_version = $rec->version;
+					$ext->upd_build = $rec->build;
+				} // if
+				break;
+			} // foreach version
+		} // while
+
+		// find display status for each extension
+		foreach ($exts as &$ext) {
+			$ext->status = array();
+			
+			// code red
+			if ((int)$e->error>0) 
+				$ext->status[] = (object)array(
+					'color'	=> 'red', 
+					'text'	=> 'errorinstall'
+				);
+			if (!$ext->found)
+				$ext->status[] = (object)array(
+					'color'	=> 'red', 
+					'text'	=> 'vernotfound'
+				);
+			foreach ($ext->dep_missing as $d) 
+				$ext->status[] = (object)array(
+					'color'	=> 'red', 
+					'text'	=> 'depmissing', 
+					'par1'	=> $d
+				);
+				
+			// code yellow
+			if ($ext->tl_incompatible)
+				$ext->status[] = (object)array(
+					'color'	=> 'darkorange', 
+					'text'	=> 'notapproved', 
+					'par1'	=> 'Contao', 
+					'par2'	=> VERSION.'.'.BUILD
+				);
+			foreach ($ext->dep_incompatible as $d) 
+				$ext->status[] = (object)array(
+					'color'	=> 'darkorange', 
+					'text'	=> 'notapprovedwith', 
+					'par1'	=> $d->extension, 
+					'par2'	=> Repository::formatVersion($d->version)
+				);
+			
+			// code blue
+			if ($ext->upd_version!=$ext->version || $ext->upd_build!=$ext->build)
+				$ext->status[] = (object)array(
+					'text'	=> 'newversion', 
+					'color'	=> 'blue', 
+					'par1'	=> Repository::formatVersion($ext->upd_version), 
+					'par2'	=> $ext->upd_build
+				);
+			
+			// code light green
+			if ($ext->tl_shouldwork)
+				$ext->status[] = (object)array(
+					'color'	=> 'green', 
+					'text'	=> 'shouldwork', 
+					'par1'	=> 'Contao',
+					'par2'	=> VERSION.'.'.BUILD
+				);
+			foreach ($ext->dep_shouldwork as $d) 
+				$ext->status[] = (object)array(
+					'color'	=> 'green', 
+					'text'	=> 'shouldwork', 
+					'par1'	=> $dep->extension,
+					'par2'	=> Repository::formatVersion($dep->version)
+				);
+
+			// code dark green
+			if (count($ext->status)==0)
+				$ext->status[] = (object)array(
+					'color' => 'darkgreen',
+					'text'	=> 'uptodate'
+				);
+
+			if ($ext->found) $ext->catalogLink = $this->createPageUrl('repository_catalog', array('view'=>$ext->extension));
+			$ext->editLink = $this->createUrl(array('edit'=>$ext->extension));
+			if ((int)$ext->updprot==0) $ext->updateLink = $this->createUrl(array('install'=>$ext->extension.'.'.$ext->upd_version));
+			if ((int)$ext->delprot==0) $ext->uninstallLink =  $this->createUrl(array('uninstall'=>$ext->extension));
+		} // while
+		return $exts;
+	} // getInstalledExtensions
 	
 	/**
 	 * Get file list from repository. Either via SOAP or directly when on same site.

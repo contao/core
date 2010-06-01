@@ -42,7 +42,7 @@
  * This is a wrapper of the original generator for database update commands in install.php.
  *
  * The private functions generateSqlForm(), compileCommands(), getFromFile() and getFromDb()
- * are exact copies from install.php of Contao 2.6.0, and may therefore easy get replaced 
+ * are exact copies from install.php of Contao 2.9.0, and may therefore easy get replaced 
  * by updated versions of future releases.
  *
  * The wrapper itself is makeSqlForm() that posp-processes the html code for the repository.
@@ -59,7 +59,7 @@ class DatabaseInstaller extends Controller
 	 * Generate a HTML form with update commands and return it as string
 	 * @return string
 	 */
-	private function generateSqlForm()
+	protected function generateSqlForm()
 	{
 		$count = 0;
 		$return = '';
@@ -71,14 +71,15 @@ class DatabaseInstaller extends Controller
 		}
 
 		$_SESSION['sql_commands'] = array();
+		$this->loadLanguageFile('tl_install');
 
 		$arrOperations = array
 		(
-			'CREATE'        => 'Create new tables',
-			'ALTER_ADD'     => 'Add new columns',
-			'ALTER_CHANGE'  => 'Change existing columns',
-			'ALTER_DROP'    => 'Drop existing columns',
-			'DROP'          => 'Drop existing tables'
+			'CREATE'        => $GLOBALS['TL_LANG']['tl_install']['CREATE'],
+			'ALTER_ADD'     => $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'],
+			'ALTER_CHANGE'  => $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'],
+			'ALTER_DROP'    => $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP'],
+			'DROP'          => $GLOBALS['TL_LANG']['tl_install']['DROP']
 		);
 
 		foreach ($arrOperations as $command=>$label)
@@ -87,16 +88,16 @@ class DatabaseInstaller extends Controller
 			{
 				// Headline
 				$return .= '
-  <tr>
-    <td colspan="2" class="tl_col_0"><h3><label>'.$label.'</label></h3></td>
-  </tr>';
+    <tr>
+      <td colspan="2" class="tl_col_0"><strong>'.$label.'</strong></td>
+    </tr>';
 
 				// Check all
 				$return .= '
-  <tr>
-    <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')" /></td>
-    <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label></td>
-  </tr>';
+    <tr>
+      <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')" /></td>
+      <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6;"><em>Select all</em></label></td>
+    </tr>';
 
 				// Fields
 				foreach ($sql_command[$command] as $vv)
@@ -105,17 +106,17 @@ class DatabaseInstaller extends Controller
 					$_SESSION['sql_commands'][$key] = $vv;
 
 					$return .= '
-  <tr>
-    <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
-    <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
-  </tr>';
+    <tr>
+      <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
+      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
+    </tr>';
 				}
 			}
 		}
 
 		return '
-<table cellspacing="0" cellpadding="0" id="sql_table" style="margin-top:9px;" summary="Necessary database modifications">'.$return.'
-</table>' . "\n";
+  <table cellspacing="0" cellpadding="0" id="sql_table" summary="Database modifications">'.$return.'
+  </table>' . "\n";
 	}
 
 
@@ -123,7 +124,7 @@ class DatabaseInstaller extends Controller
 	 * Compile a command array for each necessary database modification
 	 * @return array
 	 */
-	private function compileCommands()
+	protected function compileCommands()
 	{
 		$drop = array();
 		$create = array();
@@ -236,6 +237,7 @@ class DatabaseInstaller extends Controller
 				}
 			}
 		}
+
 		return $return;
 	}
 
@@ -244,7 +246,7 @@ class DatabaseInstaller extends Controller
 	 * Compile a table array from all SQL files and return it
 	 * @return array
 	 */
-	private function getFromFile()
+	protected function getFromFile()
 	{
 		$return = array();
 
@@ -311,6 +313,7 @@ class DatabaseInstaller extends Controller
 				}
 			}
 		}
+
 		return $return;
 	}
 
@@ -319,7 +322,7 @@ class DatabaseInstaller extends Controller
 	 * Compile a table array from the database and return it
 	 * @return array
 	 */
-	private function getFromDB()
+	protected function getFromDB()
 	{
 		$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
@@ -392,6 +395,7 @@ class DatabaseInstaller extends Controller
 				$return[$table]['TABLE_FIELDS'][$name] = trim(implode(' ', $field));
 			}
 		}
+
 		return $return;
 	}
 

@@ -1,7 +1,7 @@
 Contao Extension Repository - License Conditions
 ------------------------------------------------
 
-This software was developed by Peter Koch (Acenes) and is property of:
+This software was developed by Peter Koch (community nick "Acenes") and is property of:
 
 	IBK Software AG
 	Bondastrasse 45
@@ -10,9 +10,8 @@ This software was developed by Peter Koch (Acenes) and is property of:
 
 Author Contact:
 
-	By email: peter@contao.org
-	In the Contao forum at http://www.contao.org: username "Acenes"
-
+	http://ibk-software.com/contact
+	
 Disclaimer:
 
     This program is distributed in the hope that it will be useful,
@@ -36,6 +35,6 @@ Licenses and distribution conditions:
 		is prohibited without a written permission from IBK Software AG.
 
 ---
-Chur, 2008-26-07 
+Chur, 2010-31-05 
 Peter Koch
 IBK Software AG

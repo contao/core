@@ -1,18 +1,15 @@
 <?php
 
 /**
- * Contao Repository :: Template to update the database
+ * Contao Repository :: Template to update multiple extensions
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */
-
 $rep = &$this->rep;
-$theme = &$rep->theme;
 $text = &$GLOBALS['TL_LANG']['tl_repository'];
-$tabindex = 1;
 
 ?>
 
@@ -20,15 +17,15 @@ $tabindex = 1;
 <a href="<?php echo $rep->homeLink; ?>" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
 </div>
 
-<h2 class="sub_headline"><?php echo $text['updatedatabase']; ?></h2>
+<h2 class="sub_headline"><?php echo $text['installlogtitle']; ?></h2>
 
 <div class="mod_repository block">
-<form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
+<form action="<?php echo $rep->f_link; ?>" id="repository_upgdform" method="post" >
 <div class="tl_formbody_edit">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
 
-<div class="tl_tbox block">
-<?php echo ($rep->dbUpdate != '') ? $rep->dbUpdate : '<div class="color_green">'.$text['dbuptodate'].'</div>'; ?> 
+<div class="installlog">
+<?php echo $rep->log; ?>
 </div>
 
 </div>
@@ -36,10 +33,7 @@ $tabindex = 1;
 <div class="mod_repository_submit tl_formbody_submit">
 
 <div class="tl_submit_container">
-<?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
-<?php endif; ?>
-  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>" />
+  <input type="submit" name="repository_continuebutton" id="repository_continuebutton" class="tl_submit" value="<?php echo $text['continue']; ?>" />
 </div>
 
 </div>

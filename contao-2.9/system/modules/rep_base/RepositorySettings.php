@@ -33,7 +33,7 @@
  * Contao Repository :: Repository settings
  *
  * @copyright  Peter Koch 2008-2010
- * @author     Peter Koch, IBK Software AG
+ * @author     Peter Koch, IBK Software AG 
  * @license    See accompaning file LICENSE.txt
  */
 
@@ -42,7 +42,8 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
-		'20080049,20080049;'.	// 2.8.4 stable
+		'20090006,20090006;'.	// 2.9.0 RC1
+		'20090003,20090003;'.	// 2.9.0 beta1
 		'20080039,20080039;'.	// 2.8.3 stable
 		'20080029,20080029;'.	// 2.8.2 stable
 		'20080019,20080019;'.	// 2.8.1 stable
@@ -95,23 +96,34 @@ define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ul><li><em><strong>');
 // # of searchtags allowed 
 define('REPOSITORY_SEARCHTAGS', 5);
 
-// assumed maximum length of one line in translation editor
-define('REPOSITORY_TRANSLINECHARS', 60);
+// Assumed maximum length of one line in translation editor
+define('REPOSITORY_TRANSLINECHARS', 45);
 
-// minimum # of lines of textareas in translation editor
+// Minimum # of lines of textareas in translation editor
 define('REPOSITORY_TRANSMINLINES', 3);
 
-// maximum # of lines of textareas in translation editor
+// Maximum # of lines of textareas in translation editor
 define('REPOSITORY_TRANSMAXLINES', 15);
 
-// pixel height of one line in translation editor
+// Pixel height of one line in translation editor
 define('REPOSITORY_TRANSLINEHEIGHT', 15);
 
-// non editable file extensions
+// Non editable file extensions
 define('REPOSITORY_NOEDIT', 'gif,png,zip,gz,tgz,bz,jpg,jpeg,exe,tif,tiff,db');
 
-// thumbnail size limits
+// Max # of items to display in each cloud
+define('REPOSITORY_MAXCLOUDITEMS', 100);
+
+// Thumbnail size limits
 define('REPOSITORY_THUMBWIDTHMAX', 240);
 define('REPOSITORY_THUMBHEIGHTMAX', 180);
+
+// Time in seconds after which a dirty cache must be flushed
+// NOW   : Used for 'Resynchronize' by repository admins and after delete/unpublish 
+// NORMAL: Used on updates by authors and translators
+// LATER : Used for download-, install- and update-counters, and for ratings.
+define('REPOSITORY_CLEARCACHE_NOW', 1);			// immediate
+define('REPOSITORY_CLEARCACHE_NORMAL', 300);	// allow 5 minutes max
+define('REPOSITORY_CLEARCACHE_LATER', 3600);	// allow 1 hour max
 
 ?>

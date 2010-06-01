@@ -44,6 +44,10 @@ $tabindex = 1;
     <input type="checkbox" name="repository_delprot" id="repository_delprot" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_delprot) echo ' checked="checked"'; ?> /> <label for="repository_delprot"><?php echo $text['uninstprotect'][0]; ?></label>
   </div>
   <p class="tl_help"><?php echo $text['uninstprotect'][1]; ?></p>
+  <div class="tl_checkbox_single_container">
+    <input type="checkbox" name="repository_updprot" id="repository_updprot" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_updprot) echo ' checked="checked"'; ?> /> <label for="repository_updprot"><?php echo $text['updateprotect'][0]; ?></label>
+  </div>
+  <p class="tl_help"><?php echo $text['updateprotect'][1]; ?></p>
 </div>
 
 </div>

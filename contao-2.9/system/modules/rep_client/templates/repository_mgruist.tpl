@@ -44,7 +44,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
   </tr>
 <?php foreach ($rep->deps as $dep): ?>
   <tr>
-    <td><?php echo $dep->extension; ?></a></td>
+    <td><?php echo $dep->extension; ?></td>
     <td><?php echo Repository::formatVersion($dep->version); ?></td>
     <td><?php echo $dep->build; ?></td>
   </tr>
@@ -69,13 +69,14 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 </div>
 
 <div class="mod_repository_submit tl_formbody_submit">
+
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
   <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
 <?php endif; ?>
   <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>" />
 </div>
-</div>
 
+</div>
 </form>
 </div>

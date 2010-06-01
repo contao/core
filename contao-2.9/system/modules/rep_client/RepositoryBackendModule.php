@@ -140,7 +140,7 @@ class RepositoryBackendModule extends BackendModule
 			}
 			$this->mode = 'soap';
 		} else
-			// fallback toload RepositoryServer class if on central server
+			// fallback to load RepositoryServer class if on central server
 			if (file_exists($this->tl_root . 'system/modules/rep_server/RepositoryServer.php')) {
 				$this->import('RepositoryServer');
 				$this->RepositoryServer->enableLocal();

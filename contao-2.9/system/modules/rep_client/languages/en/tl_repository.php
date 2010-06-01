@@ -43,6 +43,7 @@
  */
 $GLOBALS['TL_LANG']['tl_repository']['lickey']        = array('License key', 'Enter the license key that you got from the extension vendor.');
 $GLOBALS['TL_LANG']['tl_repository']['uninstprotect'] = array('Uninstall protection', 'Protect extension against accidental uninstallation.');
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'] = array('Update protection', 'Protect extension against accidental update.');
 
 
 /**
@@ -67,9 +68,10 @@ $GLOBALS['TL_LANG']['tl_repository']['filesdeleted']       = '%s file(s) deleted
 $GLOBALS['TL_LANG']['tl_repository']['filesinstalled']     = '%s file(s) installed';
 $GLOBALS['TL_LANG']['tl_repository']['filesunchanged']     = '%s file(s) unchanged'; 
 $GLOBALS['TL_LANG']['tl_repository']['filesupdated']       = '%s file(s) updated'; 
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch']           = 'Fulltext search';
 $GLOBALS['TL_LANG']['tl_repository']['goback']             = 'Go back';
 $GLOBALS['TL_LANG']['tl_repository']['install']            = 'Install';
-$GLOBALS['TL_LANG']['tl_repository']['installextension']   = 'Install/update extension';
+$GLOBALS['TL_LANG']['tl_repository']['installextension']   = 'Install extension';
 $GLOBALS['TL_LANG']['tl_repository']['installingext']      = 'Install %s %s build %s';
 $GLOBALS['TL_LANG']['tl_repository']['installlogtitle']    = 'File installation/update log';
 $GLOBALS['TL_LANG']['tl_repository']['lickeyrequired']     = 'This extension requires a license key. Please visit the vendor\'s shop to purchase one.';
@@ -82,8 +84,9 @@ $GLOBALS['TL_LANG']['tl_repository']['stateshint']         = 'Check the states t
 $GLOBALS['TL_LANG']['tl_repository']['status']             = 'Status';
 $GLOBALS['TL_LANG']['tl_repository']['success']            = 'success';
 $GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Uninstall extension';
-$GLOBALS['TL_LANG']['tl_repository']['updatedatabase']     = 'Check/update database';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase']     = 'Update database';
 $GLOBALS['TL_LANG']['tl_repository']['updateextension']    = 'Update extension';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions']   = 'Update checked extensions';
 $GLOBALS['TL_LANG']['tl_repository']['update']             = 'Update';
 $GLOBALS['TL_LANG']['tl_repository']['updates']            = 'Updates';
 $GLOBALS['TL_LANG']['tl_repository']['updatehint']         = 'Check the states to be included at updates.';
@@ -95,10 +98,11 @@ $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Verify/repair %s %
 /**
  * Status messages
  */
-$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Up to date.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Up to date and approved.';
 $GLOBALS['TL_LANG']['tl_repository_statext']['notapproved']     = 'Not approved for %s %s.';
 $GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Not approved with %s %s.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'New version %s build %s available.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork']		= 'Compatible with %s %s.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'Version %s build %s available.';
 $GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Missing required extension %s.';
 $GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Extension not found in repository.';
 $GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installed version not found in repository.';

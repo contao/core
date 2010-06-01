@@ -43,15 +43,14 @@
  */
 $GLOBALS['TL_LANG']['tl_repository']['category']      = array('Category', 'Please select the extension category.');
 $GLOBALS['TL_LANG']['tl_repository']['copyright']     = array('Copyright', 'Here you can enter a copyright notice (e.g. &amp;copy; 2007,2008 Jerry Miller Webservices Inc).');
-$GLOBALS['TL_LANG']['tl_repository']['demo']          = array('Demo available', 'The commercial extension can be installed as demo without a key.');
 $GLOBALS['TL_LANG']['tl_repository']['description']   = array('Description', 'These HTML tags are allowed: %s');
-$GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Extension', 'Please select the extension name.');
+$GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Extension', 'Name of the extension.');
 $GLOBALS['TL_LANG']['tl_repository']['functionality'] = array('Functionality', 'Does the extension provide the expected functionality?');
 $GLOBALS['TL_LANG']['tl_repository']['license']       = array('License', 'Please enter a short license information. You may add full license information in a file LICENSE.txt.');
 $GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Extension names must start with a-z, A-Z or 0-9, whereby lowercase names are prefered. Additionally, the characters _ and - are allowed within the name.');
 $GLOBALS['TL_LANG']['tl_repository']['popularity']    = array('Popularity', '%s/%s (downloads/installs)');
 $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Quality', 'How robust is the extension and how painless is installation and maintenance?');
-$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Release date', 'Enter the publishing date of this release as YYYY-MM-DD.');
+$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Release date', 'Enter the publishing date of this release in format %s');
 $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Please select the version');
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Type', 'Please select the extension type.');
 $GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Usability', 'Does the extension meet the Contao standards for usability and accessability?');
