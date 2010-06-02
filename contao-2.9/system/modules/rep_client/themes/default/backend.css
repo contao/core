@@ -13,7 +13,6 @@
 .mod_repository .middle, .mod_repository .middle * { vertical-align:middle; }
 .mod_repository table.nested { width:100%; margin:0; border:0; }
 .mod_repository table td.nopadding { vertical-align:top; padding:0px !important;}
-.color_darkgreen { color:#00aa00; }
 .color_green { color:#8ab858; }
 .color_red { color:#c55; }
 .color_blue { color:#5c9ac9; }

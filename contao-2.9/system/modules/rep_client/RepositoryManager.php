@@ -1249,7 +1249,7 @@ class RepositoryManager extends RepositoryBackendModule
 			// code dark green
 			if (count($ext->status)==0)
 				$ext->status[] = (object)array(
-					'color' => 'darkgreen',
+					'color' => 'green',
 					'text'	=> 'uptodate'
 				);
 
