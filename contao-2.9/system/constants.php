@@ -47,7 +47,7 @@ define('URL_SUFFIX', '.html');
 define('ENCODE_AMPERSANDS', true);
 define('SWITCH_ORDER', true);
 define('VERSION', '2.9');
-define('BUILD', 'beta1');
+define('BUILD', 'RC1');
 
 
 /**

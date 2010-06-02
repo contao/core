@@ -369,6 +369,9 @@ class Environment
 			$strRequest = $this->script();
 		}
 
+		// IE security fix: encode square brackets
+		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
+
 		// Do not urldecode() here (thanks to Russ McRee)!
 		return $strRequest;
 	}
