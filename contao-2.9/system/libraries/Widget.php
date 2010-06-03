@@ -667,7 +667,7 @@ abstract class Widget extends Controller
 			}
 		}
 
-		if ($this->nospace && preg_match('/\s+/i', $varInput))
+		if ($this->nospace && preg_match('/[\t ]+/i', $varInput))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $this->strLabel));
 		}

@@ -333,6 +333,25 @@ abstract class Database
 
 
 	/**
+	 * Lock tables
+	 * @param array
+	 */
+	public function lockTables($arrTables)
+	{
+		$this->lock_tables($arrTables);
+	}
+
+
+	/**
+	 * Unlock tables
+	 */
+	public function unlockTables()
+	{
+		$this->unlock_tables();
+	}
+
+
+	/**
 	 * Abstract database driver methods
 	 */
 	abstract protected function connect();
@@ -343,6 +362,8 @@ abstract class Database
 	abstract protected function rollback_transaction();
 	abstract protected function list_fields($strTable);
 	abstract protected function set_database($strDatabase);
+	abstract protected function lock_tables($arrTables);
+	abstract protected function unlock_tables();
 }
 
 

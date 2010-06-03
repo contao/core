@@ -55,7 +55,7 @@ $tabindex = 1;
   <select name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" class="tl_select" tabindex="<?php echo $tabindex++; ?>"<?php if ($rep->f_stage>$rep->inst_version) echo ' disabled="disabled"'; ?>>
 <?php foreach ($rep->f_allversions as $ver) echo '    <option value="'.$ver.'" '.($ver==$rep->f_version ? ' selected="selected"' : '').'>'.Repository::formatVersion($ver).'</option>'."\n"; ?>
   </select>
-  <p class="tl_help"><?php echo $text['selversion'][1]; ?></p>
+  <p class="tl_help tl_tip"><?php echo $text['selversion'][1]; ?></p>
 <?php if ($rep->f_stage>$rep->inst_version): ?>
   <input type="hidden" name="repository_version" value="<?php echo $rep->f_version; ?>" />
 <?php endif; ?>
@@ -73,7 +73,7 @@ $tabindex = 1;
 <?php if (property_exists($rep, 'f_lickey_msg')): ?>
   <div class="tl_error"><?php echo $text[$rep->f_lickey_msg]; ?></div>
 <?php else: ?>
-  <p class="tl_help"><?php echo $text['lickey'][1]; ?></p>
+  <p class="tl_help tl_tip"><?php echo $text['lickey'][1]; ?></p>
 <?php endif; ?>
 </div>
 <?php endif; ?>

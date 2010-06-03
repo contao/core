@@ -220,6 +220,32 @@ class DB_Mysql extends Database
 		@mysql_query("ROLLBACK", $this->resConnection);
 		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 */
+	protected function lock_tables($arrTables)
+	{
+		$arrLocks = array();
+
+		foreach ($arrTables as $table=>$mode)
+		{
+			$arrLocks[] = $table .' '. $mode;
+		}
+
+		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
+	}
+
+
+	/**
+	 * Unlock tables
+	 */
+	protected function unlock_tables()
+	{
+		@mysql_query("UNLOCK TABLES");
+	}
 }
 
 

@@ -168,6 +168,21 @@ class DB_Mssql extends Database
 	{
 		@mssql_query("ROLLBACK TRAN", $this->resConnection);
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 * @todo implement
+	 */
+	protected function lock_tables($arrTables) {}
+
+
+	/**
+	 * Unlock tables
+	 * @todo implement
+	 */
+	protected function unlock_tables() {}
 }
 
 

@@ -394,8 +394,8 @@ class RepositoryManager extends RepositoryBackendModule
 				// update server stats
 				if (intval($ext->version / 10000) < intval($ext->upd_version / 10000))
 					$this->recordAction(array(
-						'name'		=> $act->extension,
-						'version'	=> $act->upd_version,
+						'name'		=> $ext->extension,
+						'version'	=> $ext->upd_version,
 						'action'	=> 'update'
 					));
 			} // if
@@ -1068,8 +1068,8 @@ class RepositoryManager extends RepositoryBackendModule
 			$ext->found = count($elist)>0;
 			if ($ext->found) {
 				$extrec = &$elist[0];
-				if (isset($extrec->manual)) $ext->manualLink = ampersand($extrec->manual, true); 
-				if (isset($extrec->forum)) $ext->forumLink = ampersand($extrec->forum, true); 
+				if (isset($extrec->manual)) $ext->manualLink = $extrec->manual; 
+				if (isset($extrec->forum)) $ext->forumLink = $extrec->forum; 
 			
 				// contao compatibility check
 				$tlversion = Repository::encodeVersion(VERSION.'.'.BUILD);

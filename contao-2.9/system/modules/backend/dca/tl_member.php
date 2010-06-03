@@ -113,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('login', 'assignDir'),
-		'default'                     => '{personal_legend},firstname,lastname,dateOfBirth,gender;{address_legend:hide},company,street,postal,city,state,country;{contact_legend},phone,mobile,fax,email,website,language;{groups_legend},groups;{login_legend:hide},login;{homedir_legend:hide},assignDir;{account_legend},disable,start,stop',
+		'default'                     => '{personal_legend},firstname,lastname,dateOfBirth,gender;{address_legend:hide},company,street,postal,city,state,country;{contact_legend},phone,mobile,fax,email,website,language;{groups_legend},groups;{login_legend},login;{homedir_legend:hide},assignDir;{account_legend},disable,start,stop',
 	),
 
 	// Subpalettes

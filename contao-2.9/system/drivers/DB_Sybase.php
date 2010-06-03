@@ -169,6 +169,21 @@ class DB_Sybase extends Database
 	{
 		@sybase_query("ROLLBACK TRAN");
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 * @todo implement
+	 */
+	protected function lock_tables($arrTables) {}
+
+
+	/**
+	 * Unlock tables
+	 * @todo implement
+	 */
+	protected function unlock_tables() {}
 }
 
 

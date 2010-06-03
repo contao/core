@@ -162,6 +162,21 @@ class DB_Oracle extends Database
 		@oci_rollback($this->resConnection);
 		$this->blnDisableAutocommit = false;
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 * @todo implement
+	 */
+	protected function lock_tables($arrTables) {}
+
+
+	/**
+	 * Unlock tables
+	 * @todo implement
+	 */
+	protected function unlock_tables() {}
 }
 
 

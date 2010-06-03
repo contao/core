@@ -169,6 +169,21 @@ class DB_Postgresql extends Database
 	{
 		@pg_query($this->resConnection, "ROLLBACK");
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 * @todo implement
+	 */
+	protected function lock_tables($arrTables) {}
+
+
+	/**
+	 * Unlock tables
+	 * @todo implement
+	 */
+	protected function unlock_tables() {}
 }
 
 

@@ -377,7 +377,16 @@ class Theme extends Backend
 			$tables = $xml->getElementsByTagName('table');
 
 			// Lock the tables
-			$this->Database->query("LOCK TABLES tl_theme WRITE, tl_style_sheet WRITE, tl_style WRITE, tl_module WRITE, tl_layout WRITE");
+			$arrLocks = array
+			(
+				'tl_theme'       => 'WRITE',
+				'tl_style_sheet' => 'WRITE',
+				'tl_style'       => 'WRITE',
+				'tl_module'      => 'WRITE',
+				'tl_layout'      => 'WRITE'
+			);
+
+			$this->Database->lockTables($arrLocks);
 
 			// Get the current auto_increment values
 			$tl_theme = $this->Database->query("SELECT MAX(id) AS id FROM tl_theme")->id;
@@ -509,7 +518,7 @@ class Theme extends Backend
 			}
 
 			// Unlock the tables
-			$this->Database->query("UNLOCK TABLES");
+			$this->Database->unlockTables();
 
 			// Update the style sheets
 			$this->import('StyleSheets');

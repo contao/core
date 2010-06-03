@@ -195,6 +195,32 @@ class DB_Mysqli extends Database
 		@$this->resConnection->query("ROLLBACK");
 		@$this->resConnection->query("SET AUTOCOMMIT=1");
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 */
+	protected function lock_tables($arrTables)
+	{
+		$arrLocks = array();
+
+		foreach ($arrTables as $table=>$mode)
+		{
+			$arrLocks[] = $table .' '. $mode;
+		}
+
+		@$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
+	}
+
+
+	/**
+	 * Unlock tables
+	 */
+	protected function unlock_tables()
+	{
+		@$this->resConnection->query("UNLOCK TABLES");
+	}
 }
 
 
