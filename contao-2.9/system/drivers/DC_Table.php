@@ -3544,7 +3544,18 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			{
 				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['findInSet'])
 				{
-					$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback']))
+					{
+						$strClass = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][0];
+						$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options_callback'][1];
+
+						$this->import($strClass);
+						$keys = $this->$strClass->$strMethod($this);
+					}
+					else
+					{
+						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
+					}
 
 					if (array_is_assoc($keys))
 					{

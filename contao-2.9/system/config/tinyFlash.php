@@ -68,7 +68,7 @@ tinyMCE.init({
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
   save_callback : "TinyCallback.cleanHTML",
-  onchange_callback : "TinyCallback.getScrollOffset",
+  init_instance_callback : "TinyCallback.getScrollOffset",
   plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   extended_valid_elements : "b/strong,i/em",

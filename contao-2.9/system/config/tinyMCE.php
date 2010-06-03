@@ -70,7 +70,7 @@ tinyMCE.init({
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
   save_callback : "TinyCallback.cleanXHTML",
-  onchange_callback : "TinyCallback.getScrollOffset",
+  init_instance_callback : "TinyCallback.getScrollOffset",
   advimage_update_dimensions_onchange : false,
   external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",

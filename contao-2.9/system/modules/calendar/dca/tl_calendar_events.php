@@ -200,7 +200,11 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endTime'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_calendar_events', 'setEmptyEndTime')
+			)
 		),
 		'startDate' => array
 		(
@@ -601,6 +605,23 @@ class tl_calendar_events extends Backend
 		if ($objAlias->numRows && $autoAlias)
 		{
 			$varValue .= '-' . $dc->id;
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Automatically set the end time if not set
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function setEmptyEndTime($varValue, DataContainer $dc)
+	{
+		if ($varValue == '')
+		{
+			$varValue = $dc->activeRecord->startTime;
 		}
 
 		return $varValue;

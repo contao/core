@@ -1846,11 +1846,11 @@ var TinyCallback =
 	 * Get the scroll offset of the editor
 	 * @param object
 	 */
-	getScrollOffset: function(inst)
+	getScrollOffset: function(ed)
 	{
-		if (inst.isDirty) 
+		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function(e)
 		{
 			Backend.getScrollOffset();
-		}
+	    });
 	}
 };
