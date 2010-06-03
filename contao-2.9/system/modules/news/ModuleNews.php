@@ -182,6 +182,16 @@ abstract class ModuleNews extends Module
 				$this->addEnclosuresToTemplate($objTemplate, $objArticles->row());
 			}
 
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($objTemplate, $objArticles->row());
+				}
+			}
+
 			$arrArticles[] = $objTemplate->parse();
 		}
 
