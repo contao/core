@@ -117,15 +117,15 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('storeValues', 'sendViaEmail'),
+		'__selector__'                => array('sendViaEmail', 'storeValues'),
 		'default'                     => '{title_legend},title,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail;{store_legend:hide},storeValues;{expert_legend:hide},method,attributes,formID'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'storeValues'                 => 'targetTable',
-		'sendViaEmail'                => 'recipient,subject,format,skipEmpty'
+		'sendViaEmail'                => 'recipient,subject,format,skipEmpty',
+		'storeValues'                 => 'targetTable'
 	),
 
 	// Fields

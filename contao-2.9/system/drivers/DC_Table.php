@@ -2533,22 +2533,22 @@ window.addEvent(\'domready\', function()
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__'] as $name)
 				{
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['multiple'])
+					$trigger = $objFields->$name;
+
+					// Overwrite the trigger if the page is not reloaded
+					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 					{
-						$trigger = $objFields->$name;
+						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
-						// Overwrite trigger if the page is not reloaded
-						if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+						if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
 						{
-							$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
-
-							if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
-							{
-								$trigger = $this->Input->post($key);
-							}
+							$trigger = $this->Input->post($key);
 						}
+					}
 
-						if (strlen($trigger))
+					if ($trigger != '')
+					{
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['multiple'])
 						{
 							$sValues[] = $name;
 
@@ -2558,11 +2558,17 @@ window.addEvent(\'domready\', function()
 								$subpalettes[$name] = $GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$name];
 							}
 						}
-					}
+						else
+						{
+							$sValues[] = $trigger;
+							$key = $name .'_'. $trigger;
 
-					elseif ($objFields->$name)
-					{
-						$sValues[] = $objFields->$name;
+							// Look for a subpalette
+							if (strlen($GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$key]))
+							{
+								$subpalettes[$name] = $GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$key];
+							}
+						}
 					}
 				}
 			}
@@ -2572,12 +2578,10 @@ window.addEvent(\'domready\', function()
 			{
 				$names = array('default');
 			}
-
 			elseif (count($sValues) > 1)
 			{
 				$names = $this->combiner($sValues);
 			}
-
 			else
 			{
 				$names = array($sValues[0]);

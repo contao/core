@@ -117,7 +117,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'mooType', 'addImage', 'useImage', 'sortable', 'protected'),
+		'__selector__'                => array('type', 'mooType', 'addImage', 'sortable', 'useImage', 'protected'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend},{expert_legend:hide},guests,cssID,space',
@@ -145,10 +145,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'groups',
 		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,fullsize,caption,floating',
 		'sortable'                    => 'sortIndex,sortOrder',
-		'useImage'                    => 'singleSRC,alt,size,caption'
+		'useImage'                    => 'singleSRC,alt,size,caption',
+		'protected'                   => 'groups'
 	),
 
 	// Fields

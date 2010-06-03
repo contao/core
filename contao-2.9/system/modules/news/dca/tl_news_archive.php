@@ -118,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('protected', 'allowComments', 'makeFeed'),
+		'__selector__'                => array('allowComments', 'protected', 'makeFeed'),
 		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
 	),
 

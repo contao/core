@@ -109,12 +109,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('cols', 'header', 'footer', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools',
-		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'__selector__'                => array('header', 'footer', 'cols', 'static'),
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -122,6 +118,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	(
 		'header'                      => 'headerHeight',
 		'footer'                      => 'footerHeight',
+		'cols_2cll'                   => 'widthLeft',
+		'cols_2clr'                   => 'widthRight',
+		'cols_3cl'                    => 'widthLeft,widthRight',
 		'static'                      => 'width,align'
 	),
 

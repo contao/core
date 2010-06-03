@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'interactive', 'defineRoot', 'source', 'protected'),
+		'__selector__'                => array('type', 'defineRoot', 'source', 'interactive', 'protected'),
 		'default'                     => '{title_legend},name,type',
 		'navigation'                  => '{title_legend},name,headline,type;{nav_legend},levelOffset,showLevel,hardLimit,showProtected;{reference_legend:hide},defineRoot;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},showProtected,pages;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -126,8 +126,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'form'                        => '{title_legend},name,headline,type;{include_legend},form;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'search'                      => '{title_legend},name,headline,type;{config_legend},queryType,fuzzy,contextLength,totalLength,perPage,searchType;{redirect_legend:hide},jumpTo;{reference_legend:hide},rootPage;{template_legend:hide},searchTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source,singleSRC;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'flashexternal'               => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source,url;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests'
 	),
@@ -136,6 +135,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 	'subpalettes' => array
 	(
 		'defineRoot'                  => 'rootPage',
+		'source_internal'             => 'singleSRC',
+		'source_external'             => 'url',
 		'interactive'                 => 'flashID,flashJS',
 		'protected'                   => 'groups'
 	),

@@ -116,13 +116,11 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'fsType', 'storeFile', 'addSubmit', 'imageSubmit', 'multiple'),
+		'__selector__'                => array('type', 'fsType', 'multiple', 'storeFile', 'addSubmit', 'imageSubmit'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type;{text_legend},text',
 		'explanation'                 => '{type_legend},type;{text_legend},text',
-		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType',
-		'fieldsetfsStart'             => '{type_legend},type,label;{fconfig_legend},fsType;{expert_legend:hide},class',
-		'fieldsetfsStop'              => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
+		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
 		'html'                        => '{type_legend},type;{text_legend},html',
 		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
 		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
@@ -139,9 +137,10 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'addSubmit'                   => 'slabel',
+		'fsType_fsStart'              => 'label',
 		'multiple'                    => 'mSize',
 		'storeFile'                   => 'uploadFolder,useHomeDir,doNotOverwrite',
+		'addSubmit'                   => 'slabel',
 		'imageSubmit'                 => 'singleSRC'
 	),
 

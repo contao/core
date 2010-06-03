@@ -35,6 +35,7 @@ Version 2.9.RC1 (2010--)
 - Added: allow to resume an interrupted newsletter sending process by defining the start cycle (#1481)
 - Added: optionally load the MooTools scripts from a content delivery network
 - Added: findInSet now supports option_callbacks in addition to static options (#1914)
+- Added: load subpalettes from drop-down menus (#1156)
 - Fixed: recoverable error in the registration module (#1926) 
 - Fixed: the event list did not show a "read more" link when redirecting to an article (#1944)
 - Fixed: the textarea widget did not ignore the maxlength attribute (#1960)

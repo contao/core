@@ -48,7 +48,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['closeAccount'] = '{title_legend},na
  * Add subpalettes to tl_module
  */
 $GLOBALS['TL_DCA']['tl_module']['subpalettes']['reg_assignDir'] = 'reg_homeDir';
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['reg_activate'] = 'reg_jumpTo,reg_text';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['reg_activate']  = 'reg_jumpTo,reg_text';
 
 
 /**
