@@ -1,11 +1,11 @@
 <?php
 
 // Add mediabox style sheet
-$GLOBALS['TL_CSS'][] = 'plugins/mediabox/css/mediabox.css|screen';
+$GLOBALS['TL_CSS'][] = 'plugins/mediabox/css/mediabox.css?'. MEDIABOX .'|screen';
 
 ?>
 
-<script type="text/javascript" src="plugins/mediabox/js/mediabox.js"></script>
+<script type="text/javascript" src="plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 Mediabox.scanPage = function() {

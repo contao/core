@@ -110,11 +110,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('cols', 'header', 'footer', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools',
-		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools',
+		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
+		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -274,16 +274,15 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'urchinId' => array
+		'mooSource' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['urchinId'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
+			'default'                 => 'moo_local',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'flag'                    => 11,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'inputType'               => 'select',
+			'options'                 => array('moo_local', 'moo_googleapis'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'cssClass' => array
 		(

@@ -196,13 +196,6 @@ class PageRegular extends Frontend
 			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '" />' . "\n";
 		}
 
-		// Add urchin ID if there is no back end user
-		if (!BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH'))
-		{
-			$this->Template->urchinId = $objLayout->urchinId;
-			$this->Template->urchinUrl = $this->Environment->ssl ? 'https://ssl.google-analytics.com/ga.js' : 'http://www.google-analytics.com/ga.js';
-		}
-
 		// Initialize margin
 		$arrMargin = array
 		(
@@ -274,6 +267,8 @@ class PageRegular extends Frontend
 			}
 		}
 
+		$this->Template->framework = '';
+
 		// Add layout specific CSS
 		if (!empty($strFramework))
 		{
@@ -288,9 +283,17 @@ class PageRegular extends Frontend
 		$this->Template->framework .= '<link rel="stylesheet" href="system/contao.css" type="text/css" media="screen" />' . "\n";
 		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 
-		// Pass the modification time of the MooTools scripts
-		$this->Template->mooCore = filemtime(TL_ROOT .'/plugins/mootools/mootools-core.js');
-		$this->Template->mooMore = filemtime(TL_ROOT .'/plugins/mootools/mootools-more.js');
+		// MooTools scripts
+		if ($objLayout->mooSource == 'moo_googleapis')
+		{
+			$this->Template->mooScripts  = '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
+			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+		}
+		else
+		{
+			$this->Template->mooScripts  = '<script type="text/javascript" src="plugins/mootools/mootools-core.js?'. MOOTOOLS_CORE .'"></script>' . "\n";
+			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+		}
 
 		// Initialize sections
 		$this->Template->header = '';
@@ -326,7 +329,7 @@ class PageRegular extends Frontend
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet .'?'. filemtime(TL_ROOT .'/'. $stylesheet) . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
 			}
 		}
 
@@ -390,7 +393,7 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script type="text/javascript" src="' . $javascript .'?'. filemtime(TL_ROOT .'/'. $javascript) . '"></script>' . "\n";
+				$strHeadTags .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
 			}
 		}
 

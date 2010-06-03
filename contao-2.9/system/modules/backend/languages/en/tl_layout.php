@@ -53,7 +53,7 @@ $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Ple
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Document Type Definition', 'Please choose a Document Type Definition.');
-$GLOBALS['TL_LANG']['tl_layout']['urchinId']      = array('Google Analytics Id', 'Note that the Google Analytics Id will not be displayed while you are logged in to the Contao back end.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'You can either use the local MooTools script or load it from a content delivery network.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add individual tags to the head section of the page.');
@@ -76,6 +76,8 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Front end modules';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Use the local file';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com';
 
 
 /**

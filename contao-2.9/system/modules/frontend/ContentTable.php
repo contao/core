@@ -67,8 +67,8 @@ class ContentTable extends ContentElement
 		{
 			$this->Template->sortable = true;
 
-			$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/tablesort/js/tablesort.js';
+			$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css?'. TABLESORT .'|screen';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
 		}
 
 		$arrHeader = array();

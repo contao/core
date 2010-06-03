@@ -4,29 +4,35 @@
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->title; ?> :: Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
+<link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css?<?php echo CALENDAR; ?>" media="screen" />
 <?php if ($this->be27): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/be27.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/be27.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php endif; ?>
 <?php if ($this->isMac): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php endif; ?>
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style type="text/css" media="screen">
 <!--/*--><![CDATA[/*><!--*/
-#container { margin:0 auto; padding:12px 0px; width:750px; }
-#tl_helpBox { margin-left:-353px; }
+#container {
+  margin:0 auto;
+  padding:12px 0;
+  width:750px;
+}
+#tl_helpBox {
+  margin-left:-353px;
+}
 /*]]>*/-->
 </style>
-<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
-<script type="text/javascript" src="plugins/calendar/js/calendar.js"></script>
-<script type="text/javascript" src="contao/contao.js"></script>
-<script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
+<script type="text/javascript" src="plugins/calendar/js/calendar.js?<?php echo CALENDAR; ?>"></script>
+<script type="text/javascript" src="contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
+<script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
 <?php echo $this->javascripts; ?>
 <?php echo $this->rteConfig; ?>
 <script type="text/javascript">

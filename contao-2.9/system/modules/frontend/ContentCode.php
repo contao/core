@@ -113,12 +113,12 @@ class ContentCode extends ContentElement
 			}
 
 			// Add CSS
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css';
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeContao.css';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css?'. HIGHLIGHTER .'|screen';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeContao.css?' . HIGHLIGHTER;
 
 			// Add scripts
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js?' . HIGHLIGHTER;
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
 
 			// Add head (do not add to scripts!)
 			$GLOBALS['TL_HEAD'][] = '<script type="text/javascript" src="plugins/highlighter/scripts/shInit.js"></script>';

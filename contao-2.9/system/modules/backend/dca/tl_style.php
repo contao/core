@@ -448,8 +448,8 @@ class tl_style extends Backend
 	{
 		parent::__construct();
 
-		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js';
+		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css?'. MOO_RAINBOW . '|screen';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
 
 		$this->import('BackendUser', 'User');
 	}

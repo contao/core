@@ -11,26 +11,8 @@
 <?php echo $this->robots; ?>
 <?php echo $this->framework; ?>
 <?php echo $this->stylesheets; ?>
-<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo $this->mooCore; ?>"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo $this->mooMore; ?>"></script>
+<?php echo $this->mooScripts; ?>
 <?php echo $this->head; ?>
-<?php if ($this->urchinId): ?>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', '<?php echo $this->urchinId; ?>']);
-_gaq.push(['_trackPageview']);
-(function() {
-  var ga = document.createElement('script');
-  ga.type = 'text/javascript';
-  ga.async = true;
-  ga.src = '<?php echo $this->urchinUrl; ?>';
-  var s = document.getElementsByTagName('script')[0];
-  s.parentNode.insertBefore(ga, s);
-})();
-//--><!]]>
-</script>
-<?php endif; ?>
 </head>
 
 <body id="top"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>

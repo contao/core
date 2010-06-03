@@ -46,8 +46,28 @@
 define('URL_SUFFIX', '.html');
 define('ENCODE_AMPERSANDS', true);
 define('SWITCH_ORDER', true);
+
+
+/**
+ * -------------------------------------------------------------------------
+ * CORE AND PLUGIN VERSIONS
+ * -------------------------------------------------------------------------
+ * 
+ * Version numbers are added to style sheets and JavaScript files to make
+ * the web browser reload those resources after a Contao update.
+ */
 define('VERSION', '2.9');
 define('BUILD', 'RC1');
+define('CALENDAR', '1.2.RC4');
+define('EDITAREA', '0.8.2');
+define('FANCYUPLOAD', '3.0');
+define('HIGHLIGHTER', '2.0.320');
+define('MEDIABOX', '1.2.0');
+define('MOO_RAINBOW', '1.2b2');
+define('MOOTOOLS_CORE', '1.2.4');
+define('MOOTOOLS_MORE', '1.2.4.4');
+define('SLIMBOX', '1.7');
+define('TABLESORT', '1.3.0');
 
 
 /**

@@ -867,8 +867,8 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Add FancyUpload scripts
 		if ($GLOBALS['TL_CONFIG']['fancyUpload'])
 		{
-			$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js';
+			$GLOBALS['TL_CSS'][] = 'plugins/fancyupload/css/fancyupload.css?'. FANCYUPLOAD . '|screen';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/fancyupload/js/fancyupload.js?' . FANCYUPLOAD;
 
 			$fancy = new stdClass();
 

@@ -95,7 +95,7 @@ if (is_null($this->syntax))
  * http://www.cdolivet.com/editarea/ for more information.
  */
 ?>
-<script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js"></script>
+<script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js?<?php echo EDITAREA; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 editAreaLoader.init({

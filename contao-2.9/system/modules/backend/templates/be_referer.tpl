@@ -5,10 +5,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css" media="screen">
 <!--/*--><![CDATA[/*><!--*/
-a { text-decoration:none; }
-div { width:520px; margin:64px auto; padding:18px 18px 9px 18px; background-color:#ffffcc; border:1px solid #ffcc00; font-family:Verdana, sans-serif; font-size:12px; }
-h1 { font-size:18px; font-weight:normal; margin:0px 0px 18px 0px; }
-p { line-height:1.5; }
+a {
+  text-decoration:none;
+}
+div {
+  width:520px;
+  margin:64px auto;
+  padding:18px 18px 9px 18px;
+  background-color:#ffc;
+  border:1px solid #fc0;
+  font-family:Verdana, sans-serif;
+  font-size:12px;
+}
+h1 {
+  font-size:18px;
+  font-weight:normal;
+  margin:0 0 18px 0;
+}
+p {
+  line-height:1.5;
+}
 /*]]>*/-->
 </style>
 </head>
