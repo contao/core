@@ -42,7 +42,6 @@ $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relative path
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Character set', 'It is recommended to use UTF-8, so special characters are displayed correctly.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Custom layout sections', 'Here you can enter a comma separated list of custom layout sections.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
-$GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Back end theme', 'Here you can change the back end theme.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items per page', 'This overall limit takes effect if a user chooses the "show all records" option.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
@@ -65,7 +64,6 @@ $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Image file ty
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If the width of an image or movie exceeds this value, it will be adjusted automatically.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the Contao files directory.');
-$GLOBALS['TL_LANG']['tl_settings']['fancyUpload']         = array('Use FancyUpload', 'Upload files via FancyUpload (requires Flash and JavaScript).');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximum image width', 'Here you can enter the maximum width for image uploads in pixels.');

@@ -42,7 +42,6 @@ $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfa
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
-$GLOBALS['TL_LANG']['tl_settings']['backendTheme']        = array('Backendmotiv', 'Hier können Sie das Backendmotiv wechseln.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum Datensätze pro Seite', 'Hier legen Sie fest, wie viele Datensätze maximal angezeigt werden, wenn ein Benutzer die Option "alle Datensätze anzeigen" auswählt.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
@@ -65,7 +64,6 @@ $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Unterstützte
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximale Frontend-Breite', 'Wenn die Breite eines Bildes oder Films diesen Wert übersteigt, wird sie automatisch angepasst.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG-Qualität', 'Hier können Sie die Qualität der JPG-Vorschaubilder in Prozent eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files-Verzeichnis', 'Hier können Sie den relativen Pfad zum Contao Files-Verzeichnis eingeben.');
-$GLOBALS['TL_LANG']['tl_settings']['fancyUpload']         = array('FancyUpload aktivieren', 'Dateien mit FancyUpload hochladen (benötigt Flash und JavaScript).');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultane Datei-Uploads', 'Hier können Sie die maximale Anzahl simultaner Datei-Uploads festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximale Upload-Dateigröße', 'Hier können Sie die maximale Upload-Dateigröße in Bytes eingeben (1 MB = 1000 kB = 1000000 Byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximale Bildbreite', 'Hier können Sie die maximale Breite für Bild-Uploads in Pixeln festlegen.');
