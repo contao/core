@@ -74,7 +74,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <div class="tl_limit tl_subpanel">
 <strong><?php echo $GLOBALS['TL_LANG']['MSC']['showOnly']; ?>:</strong>
-<select name="repository_page" id="repository_page" class="tl_select<?php if ($rep->f_page!='' && $rep->f_page!=1) echo ' active'; ?>">
+<select name="repository_page" id="repository_page" class="tl_select active" onchange="this.form.submit()">
 <?php for ($page = 1; $page <= $rep->pages; $page++): ?>
   <option value="<?php echo $page; ?>"<?php if ($rep->f_page==$page) echo ' selected="selected"'; ?>><?php echo sprintf($text['pageof'], $page, $rep->pages); ?></option>
 <?php endfor; ?>
@@ -83,7 +83,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <div class="tl_search tl_subpanel">
 <strong><?php echo $GLOBALS['TL_LANG']['MSC']['search']; ?>:</strong>
-<input type="text" name="repository_find" id="repository_find" value="<?php echo $rep->f_find; ?>" class="tl_text fulltextsearch<?php if ($rep->f_find!='') echo ' active'; ?>"/>
+<input type="text" name="repository_find" id="repository_find" value="<?php echo specialchars($rep->f_find); ?>" class="tl_text fulltextsearch<?php if ($rep->f_find!='') echo ' active'; ?>"/>
 </div>
 
 <div class="tl_sorting tl_subpanel">
