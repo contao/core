@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle input field "file tree".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class FileTree extends Widget
@@ -175,7 +177,7 @@ class FileTree extends Widget
 			$strReset = "\n" . '    <li class="tl_folder"><div class="tl_left">&nbsp;</div> <div class="tl_right"><label for="check_all_' . $this->strId . '" class="tl_change_selected">' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</label> <input type="checkbox" id="check_all_' . $this->strId . '" class="tl_tree_checkbox" value="" onclick="Backend.toggleCheckboxGroup(this, \'' . $this->strName . '\')" /></div><div style="clear:both;"></div></li>';
 		}
 
-		return '  <ul class="tl_listing'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" id="'.$this->strName.'">
+		return '<ul class="tl_listing tree_view filetree'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" id="'.$this->strName.'">
     <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.(strlen($GLOBALS['TL_LANG']['MSC']['filetree']) ? $GLOBALS['TL_LANG']['MSC']['filetree'] : 'Files directory').'</div> <div class="tl_right"><label for="ctrl_'.$this->strId.'" class="tl_change_selected">'.$GLOBALS['TL_LANG']['MSC']['changeSelected'].'</label> <input type="checkbox" name="'.$this->strName.'_save" id="ctrl_'.$this->strId.'" class="tl_tree_checkbox" value="1" onclick="Backend.showTreeBody(this, \''.$this->strId.'_parent\');" /></div><div style="clear:both;"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
@@ -273,7 +275,7 @@ class FileTree extends Widget
 		{
 			foreach (scan($path) as $v)
 			{
-				if (!is_dir($path.'/'.$v))
+				if (!is_dir($path.'/'.$v) && $v != '.DS_Store')
 				{
 					$files[] = $path.'/'.$v;
 					continue;
@@ -406,7 +408,7 @@ class FileTree extends Widget
 					}
 				}
 
-				$return .= '<a href="typolight/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="contao/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 				// Add checkbox or radio button
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])

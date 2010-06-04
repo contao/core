@@ -29,7 +29,7 @@
   <input type="checkbox" name="tables[]" id="cache_xml" class="tl_checkbox" value="xml_files" onfocus="Backend.getScrollOffset();" /> <label for="cache_xml"><strong><?php echo $this->cacheXml; ?></strong></label>
   </div>
 <?php if ($this->cacheHelp): ?>
-  <p class="tl_help"><?php echo $this->cacheHelp; ?></p>
+  <p class="tl_help tl_tip"><?php echo $this->cacheHelp; ?></p>
 <?php endif; ?>
 </div>
 <div class="tl_submit_container">
@@ -91,7 +91,7 @@
 <?php endforeach; ?>
   </select>
 <?php if ($this->indexHelp): ?>
-  <p class="tl_help"><?php echo $this->indexHelp; ?></p>
+  <p class="tl_help tl_tip"><?php echo $this->indexHelp; ?></p>
 <?php endif; ?>
   </div>
 <div class="tl_submit_container">

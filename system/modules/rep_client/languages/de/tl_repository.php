@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Language file for tl_repository (de)
+ * Contao Repository :: Language file for tl_repository (de)
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -41,6 +43,7 @@
  */
 $GLOBALS['TL_LANG']['tl_repository']['lickey']        = array('Lizenzschlüssel', 'Eingabe des beim Erweiterungshersteller erworbenen Lizenzschlüssels.');
 $GLOBALS['TL_LANG']['tl_repository']['uninstprotect'] = array('Löschgeschützt', 'Erweiterung gegen versehentliches Löschen schützen.');
+$GLOBALS['TL_LANG']['tl_repository']['updateprotect'] = array('Updategeschützt', 'Erweiterung gegen versehentliches Updaten schützen.');
 
 
 /**
@@ -65,9 +68,10 @@ $GLOBALS['TL_LANG']['tl_repository']['filesdeleted']       = '%s Datei(en) gelö
 $GLOBALS['TL_LANG']['tl_repository']['filesinstalled']     = '%s Datei(en) installiert';
 $GLOBALS['TL_LANG']['tl_repository']['filesunchanged']     = '%s Datei(en) unverändert';
 $GLOBALS['TL_LANG']['tl_repository']['filesupdated']       = '%s Datei(en) aktualisiert';
+$GLOBALS['TL_LANG']['tl_repository']['ftsearch']           = 'Volltextsuche';
 $GLOBALS['TL_LANG']['tl_repository']['goback']             = 'Zurück';
 $GLOBALS['TL_LANG']['tl_repository']['install']            = 'Installieren';
-$GLOBALS['TL_LANG']['tl_repository']['installextension']   = 'Erweiterung installieren/aktualisieren';
+$GLOBALS['TL_LANG']['tl_repository']['installextension']   = 'Erweiterung installieren';
 $GLOBALS['TL_LANG']['tl_repository']['installingext']      = 'Installation %s %s Build %s';
 $GLOBALS['TL_LANG']['tl_repository']['installlogtitle']    = 'Datei Installation/Update-Log';
 $GLOBALS['TL_LANG']['tl_repository']['lickeyrequired']     = 'Diese Erweiterung benötigt einen Lizenzschlüssel. Bitte erwerben Sie diesen beim Anbieter.';
@@ -80,8 +84,9 @@ $GLOBALS['TL_LANG']['tl_repository']['stateshint']         = 'Wählen Sie die ge
 $GLOBALS['TL_LANG']['tl_repository']['status']             = 'Status';
 $GLOBALS['TL_LANG']['tl_repository']['success']            = 'erfolgreich';
 $GLOBALS['TL_LANG']['tl_repository']['uninstallextension'] = 'Erweiterung deinstallieren';
-$GLOBALS['TL_LANG']['tl_repository']['updatedatabase']     = 'Datenbank prüfen/aktualisieren';
+$GLOBALS['TL_LANG']['tl_repository']['updatedatabase']     = 'Datenbank aktualisieren';
 $GLOBALS['TL_LANG']['tl_repository']['updateextension']    = 'Erweiterung aktualisieren';
+$GLOBALS['TL_LANG']['tl_repository']['updateextensions']   = 'Markierte Erweiterungen aktualisieren';
 $GLOBALS['TL_LANG']['tl_repository']['update']             = 'Aktualisierung';
 $GLOBALS['TL_LANG']['tl_repository']['updates']            = 'Aktualisierungen';
 $GLOBALS['TL_LANG']['tl_repository']['updatehint']         = 'Status auswählen, zu denen aktualisiert werden soll.';
@@ -93,14 +98,15 @@ $GLOBALS['TL_LANG']['tl_repository']['validatingext']      = 'Prüfung/Reparatur
 /**
  * Status messages
  */
-$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Aktuell.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved']     = 'Nicht erprobt für %s %s.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Nicht erprobt mit %s %s.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'Neue Version %s Build %s verfügbar.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Benötigte Erweiterung %s fehlt.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Erweiterung im Verzeichnis nicht gefunden.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installierte Version im Verzeichnis nicht gefunden.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'Lizenzschlüssel benötigt, Erweiterung vorgängig installieren.';
-$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Beschädigt, Aktualisierung/Reparatur notwendig.';
+$GLOBALS['TL_LANG']['tl_repository_statext']['uptodate']        = 'Aktuell';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapproved']     = 'Nicht erprobt für %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['notapprovedwith'] = 'Nicht erprobt mit %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['shouldwork']      = 'Voraussichtlich kompatibel zu %s %s';
+$GLOBALS['TL_LANG']['tl_repository_statext']['newversion']      = 'Version %s Build %s verfügbar';
+$GLOBALS['TL_LANG']['tl_repository_statext']['depmissing']      = 'Benötigte Erweiterung %s fehlt';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Erweiterung im Verzeichnis nicht gefunden';
+$GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installierte Version im Verzeichnis nicht gefunden';
+$GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'Lizenzschlüssel benötigt, Erweiterung vorgängig installieren';
+$GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Beschädigt, Aktualisierung/Reparatur notwendig';
  
 ?>

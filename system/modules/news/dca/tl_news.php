@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -64,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'mode'                    => 4,
 			'fields'                  => array('date DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'protected', 'allowComments', 'makeFeed'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_news', 'listNewsArticles')
 		),
 		'global_operations' => array
@@ -123,18 +125,18 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('source', 'addImage', 'addEnclosure'),
-		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
-		'internal'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,jumpTo;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
-		'article'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,articleId;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop',
-		'external'                    => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source,url,target;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
+		'__selector__'                => array('addImage', 'addEnclosure', 'source'),
+		'default'                     => '{title_legend},headline,alias,author;{date_legend},date,time;{teaser_legend:hide},subheadline,teaser;{text_legend},text;{image_legend},addImage;{enclosure_legend:hide},addEnclosure;{source_legend:hide},source;{expert_legend:hide},cssClass,noComments,featured;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,fullsize,caption,floating',
-		'addEnclosure'                => 'enclosure'
+		'addEnclosure'                => 'enclosure',
+		'source_internal'             => 'jumpTo',
+		'source_article'              => 'articleId',
+		'source_external'             => 'url,target'
 	),
 
 	// Fields
@@ -145,6 +147,8 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['headline'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
@@ -165,6 +169,9 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['author'],
 			'default'                 => $this->User->id,
 			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
@@ -175,6 +182,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
+			'sorting'                 => true,
 			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
@@ -231,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
 		),
 		'size' => array
 		(
@@ -290,7 +298,6 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['addEnclosure'],
 			'exclude'                 => true,
-			'filter'                  => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true)
 		),
@@ -369,7 +376,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'flag'                    => 2,
+			'flag'                    => 1,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true)
 		),
@@ -396,7 +403,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_news extends Backend
@@ -452,7 +459,7 @@ class tl_news extends Backend
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to create news items in news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -461,7 +468,7 @@ class tl_news extends Backend
 				if (!in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" to news archive ID "'.$this->Input->get('pid').'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
 
@@ -476,13 +483,13 @@ class tl_news extends Backend
 				if ($objArchive->numRows < 1)
 				{
 					$this->log('Invalid news item ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objArchive->pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news item ID "'.$id.'" of news archive ID "'.$objArchive->pid.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -495,7 +502,7 @@ class tl_news extends Backend
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objArchive = $this->Database->prepare("SELECT id FROM tl_news WHERE pid=?")
@@ -504,7 +511,7 @@ class tl_news extends Backend
 				if ($objArchive->numRows < 1)
 				{
 					$this->log('Invalid news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
@@ -516,12 +523,12 @@ class tl_news extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access news archive ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
@@ -721,7 +728,7 @@ class tl_news extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish news item ID "'.$intId.'"', 'tl_news toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_news', $intId);

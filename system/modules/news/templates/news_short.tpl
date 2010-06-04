@@ -3,7 +3,7 @@
 <?php if ($this->hasMetaFields): ?>
 <p class="info"><?php echo $this->date; ?> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
 <?php endif; ?>
-<h2><?php echo $this->linkHeadline; ?></h2>
+<h2><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h2>
 <p class="teaser"><?php echo $this->teaser; ?></p>
 <?php if ($this->text): ?>
 <p class="more"><?php echo $this->more; ?></p>

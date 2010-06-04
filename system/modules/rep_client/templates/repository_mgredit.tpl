@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to add a new extension
+ * Contao Repository :: Template to add a new extension
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
@@ -31,7 +31,7 @@ $tabindex = 1;
 <div class="tl_tbox block">
   <h3><label for="repository_lickey"><?php echo $text['lickey'][0]; ?></label></h3>
   <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="repository_lickey" id="repository_lickey" value="<?php echo $rep->f_lickey; ?>" class="tl_text" />
-  <p class="tl_help"><?php echo $text['lickey'][1]; ?></p>
+  <p class="tl_help tl_tip"><?php echo $text['lickey'][1]; ?></p>
   <h3><label><?php echo $text['status']; ?></label></h3>
   <div class="tl_checkbox_container">
     <input type="checkbox" name="repository_alpha" id="repository_alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; ?> /> <label for="repository_alpha"><?php echo $state_options['alpha']; ?></label><br />
@@ -39,11 +39,15 @@ $tabindex = 1;
     <input type="checkbox" name="repository_rc" id="repository_rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; ?> /> <label for="repository_rc"><?php echo $state_options['rc']; ?></label><br />
     <input type="checkbox" name="repository_stable" id="repository_stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; ?> /> <label for="repository_stable"><?php echo $state_options['stable']; ?></label>
   </div>
-  <p class="tl_help"><?php echo $text['updatehint']; ?></p>
+  <p class="tl_help tl_tip"><?php echo $text['updatehint']; ?></p>
   <div class="tl_checkbox_single_container">
     <input type="checkbox" name="repository_delprot" id="repository_delprot" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_delprot) echo ' checked="checked"'; ?> /> <label for="repository_delprot"><?php echo $text['uninstprotect'][0]; ?></label>
   </div>
-  <p class="tl_help"><?php echo $text['uninstprotect'][1]; ?></p>
+  <p class="tl_help tl_tip"><?php echo $text['uninstprotect'][1]; ?></p>
+  <div class="tl_checkbox_single_container">
+    <input type="checkbox" name="repository_updprot" id="repository_updprot" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_updprot) echo ' checked="checked"'; ?> /> <label for="repository_updprot"><?php echo $text['updateprotect'][0]; ?></label>
+  </div>
+  <p class="tl_help tl_tip"><?php echo $text['updateprotect'][1]; ?></p>
 </div>
 
 </div>

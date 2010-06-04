@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide default methods that are required in all models and controllers.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 abstract class System
@@ -271,24 +273,34 @@ abstract class System
 	/**
 	 * Return the current referer URL and optionally encode ampersands
 	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	protected function getReferer($blnEncodeAmpersands=false)
+	protected function getReferer($blnEncodeAmpersands=false, $strTable='')
 	{
-		$session = $this->Session->getData();
-		$key = ($this->Environment->script == 'typolight/files.php') ? 'fileReferer' : 'referer';
+		$key = ($this->Environment->script == 'contao/files.php') ? 'fileReferer' : 'referer';
+		$session = $this->Session->get($key);
 
-		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session[$key]['current'] != $this->Environment->requestUri) ? $session[$key]['current'] : $session[$key]['last']));
+		// Use a specific referer
+		if ($strTable != '' && isset($session[$strTable]) && $this->Input->get('act') != 'select')
+		{
+			$session['current'] = $session[$strTable];
+		}
+
+		// Get the default referer
+		$return = preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', (($session['current'] != $this->Environment->requestUri) ? $session['current'] : $session['last']));
 		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
 
+		// Fallback to the generic referer in the front end
 		if (!strlen($return) && TL_MODE == 'FE')
 		{
 			$return = $this->Environment->httpReferer;
 		}
 
+		// Fallback to the current URL if there is no referer
 		if (!strlen($return))
 		{
-			$return = (TL_MODE == 'BE') ? 'typolight/main.php' : $this->Environment->url;
+			$return = (TL_MODE == 'BE') ? 'contao/main.php' : $this->Environment->url;
 		}
 
 		// Do not urldecode here!
@@ -553,11 +565,6 @@ abstract class System
 	 */
 	protected function idnaEncodeEmail($strEmail)
 	{
-		if ($strEmail == '')
-		{
-			return '';
-		}
-
 		list($strLocal, $strHost) = explode('@', $strEmail);
 		return $strLocal .'@'. $this->idnaEncode($strHost);
 	}
@@ -570,11 +577,6 @@ abstract class System
 	 */
 	protected function idnaEncodeUrl($strUrl)
 	{
-		if ($strUrl == '')
-		{
-			return '';
-		}
-
 		// E-mail address
 		if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 		{

@@ -1,6 +1,8 @@
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,7 +20,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Plugins
  * @license    LGPL
  * @filesource
@@ -42,6 +44,7 @@ var Typobox = {
 			document.getElementById('src').style.width = '180px';
 
 		this.fillFileList('image_list', 'tinyMCEImageList');
+		this.fillModeList('mode_list');
 		this.fillRelList('rel_list');
 		TinyMCE_EditableSelects.init();
 
@@ -72,6 +75,9 @@ var Typobox = {
 				case 'class':
 					f.cssClass.value = sub[1];
 					break;
+				case 'mode':
+					selectByValue(f, 'mode_list', sub[1], true);
+					break;
 				case 'rel':
 					selectByValue(f, 'rel_list', sub[1], true);
 					break;
@@ -92,6 +98,14 @@ var Typobox = {
 			});
 		} else
 			dom.remove(dom.getParent(id, 'tr'));
+	},
+
+	fillModeList : function(id) {
+		var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
+
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_crop'), 'crop');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_proportional'), 'proportional');
+		lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('typolinks_dlg.image_box'), 'box');
 	},
 
 	fillRelList : function(id) {
@@ -130,6 +144,9 @@ var Typobox = {
 		if (f.cssClass.value) {
 			tag += glue + 'class=' + f.cssClass.value;
 			glue = '&amp;';
+		}
+		if (f.mode_list) {
+			tag += glue + 'mode=' + getSelectValue(f, "mode_list");
 		}
 		if (f.rel_list) {
 			tag += glue + 'rel=' + getSelectValue(f, "rel_list");

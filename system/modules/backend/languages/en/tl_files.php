@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -30,7 +32,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'TYPOlight automatically adds the file extension.');
+$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'Contao automatically adds the file extension.');
 $GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('File upload', 'Browse your local computer and select the files you want to upload to the server.');
 $GLOBALS['TL_LANG']['tl_files']['editor']     = array('Source editor', 'Here you can edit the file source.');
 

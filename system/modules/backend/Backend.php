@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to manage back end controllers.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 abstract class Backend extends Controller
@@ -71,7 +73,7 @@ abstract class Backend extends Controller
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))
 		{
 			$this->log('Attempt to access inactive back end module "' . $module . '"', 'Backend getBackendModule()', TL_ACCESS);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->import('BackendUser', 'User');
@@ -80,7 +82,7 @@ abstract class Backend extends Controller
 		if (!in_array($module, array_keys($GLOBALS['BE_MOD']['profile'])) && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$strTable = $this->Input->get('table') ? $this->Input->get('table') : $arrModule['tables'][0];
@@ -114,7 +116,7 @@ abstract class Backend extends Controller
 			if (!in_array($strTable, (array) $arrModule['tables']))
 			{
 				$this->log('Table "' . $strTable . '" is not allowed in module "' . $module . '"', 'Backend getBackendModule()', TL_ERROR);
-				$this->redirect('typolight/main.php?act=error');
+				$this->redirect('contao/main.php?act=error');
 			}
 
 			// Load the language and DCA file

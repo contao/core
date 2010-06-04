@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Listing
  * @license    LGPL
  * @filesource
@@ -99,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_layout'] = array
 	'default'                 => 'list_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('list_'),
+	'options_callback'        => array('tl_module_listing', 'getListTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -109,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
 	'default'                 => 'info_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('info_'),
+	'options_callback'        => array('tl_module_listing', 'getInfoTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -119,7 +121,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_info_layout'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_module_listing extends Backend
@@ -132,6 +134,28 @@ class tl_module_listing extends Backend
 	public function getAllTables()
 	{
 		return $this->Database->listTables();
+	}
+
+
+	/**
+	 * Return all list templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getListTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('list_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all info templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getInfoTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('info_', $dc->activeRecord->pid);
 	}
 }
 

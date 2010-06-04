@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -111,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('login', 'assignDir'),
-		'default'                     => '{personal_legend},firstname,lastname,dateOfBirth,gender;{address_legend:hide},company,street,postal,city,state,country;{contact_legend},phone,mobile,fax,email,website,language;{groups_legend},groups;{login_legend:hide},login;{homedir_legend:hide},assignDir;{account_legend},disable,start,stop',
+		'default'                     => '{personal_legend},firstname,lastname,dateOfBirth,gender;{address_legend:hide},company,street,postal,city,state,country;{contact_legend},phone,mobile,fax,email,website,language;{groups_legend},groups;{login_legend},login;{homedir_legend:hide},assignDir;{account_legend},disable,start,stop',
 	),
 
 	// Subpalettes
@@ -271,15 +273,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'login'),
-			'wizard' => array
-			(
-				array('tl_member', 'addGroupWizard')
-			),
-			'save_callback' => array
-			(
-				array('tl_member', 'updateGroupMembership')
-			)
+			'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'login')
 		),
 		'login' => array
 		(
@@ -368,7 +362,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_member extends Backend
@@ -466,79 +460,6 @@ class tl_member extends Backend
 
 
 	/**
-	 * Generate the group wizard
-	 * @param object
-	 * @return string
-	 */
-	public function addGroupWizard(DataContainer $dc)
-	{
-		if ($this->Input->get('act') != 'overrideAll')
-		{
-			return '';
-		}
-
-		return '
-</div>
-<div>
-  <h3 style="padding-top:7px"><label for="ctrl_update_mode">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
-  <div id="ctrl_update_mode" class="tl_radio_container">
-    <input type="radio" name="update_mode" id="opt_update_mode_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
-    <input type="radio" name="update_mode" id="opt_update_mode_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
-    <input type="radio" name="update_mode" id="opt_update_mode_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_update_mode_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
-  </div>';
-	}
-
-
-	/**
-	 * Save the member groups according to the update mode
-	 * @param mixed
-	 * @param object
-	 * @return mixed
-	 */
-	public function updateGroupMembership($varValue, DataContainer $dc)
-	{
-		if ($this->Input->get('act') != 'overrideAll' || !$this->Input->post('update_mode'))
-		{
-			return $varValue;
-		}
-
-		$objGroups = $this->Database->prepare("SELECT groups FROM tl_member WHERE id=?")
-									->limit(1)
-									->execute($dc->id);
-
-		if ($objGroups->numRows < 1)
-		{
-			return $varValue;
-		}
-
-		$old = deserialize($objGroups->groups, true);
-		$new = deserialize($varValue, true);
-
-		switch ($this->Input->post('update_mode'))
-		{
-			case 'add':
-				$varValue = array_values(array_unique(array_merge($old, $new)));
-				break;
-
-			case 'remove':
-				$varValue = array_values(array_diff($old, $new));
-				break;
-
-			case 'replace':
-				$varValue = $new;
-				break;
-		}
-
-		if (!is_array($varValue) || empty($varValue))
-		{
-			return '';
-		}
-
-		return serialize($varValue);
-	}
-
-
-	/**
 	 * Return the "toggle visibility" button
 	 * @param array
 	 * @param string
@@ -584,7 +505,7 @@ class tl_member extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_member::disable', 'alexf'))
 		{
 			$this->log('Not enough permissions to activate/deactivate member ID "'.$intId.'"', 'tl_member toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_member', $intId);

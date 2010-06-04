@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -143,7 +145,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_files extends Backend
@@ -253,7 +255,7 @@ class tl_files extends Backend
 					if (!$f1)
 					{
 						$this->log('No permission to upload files', 'tl_files checkPermission()', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 
@@ -266,7 +268,7 @@ class tl_files extends Backend
 					if (!$f2)
 					{
 						$this->log('No permission to create, edit, copy or move files', 'tl_files checkPermission()', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 
@@ -278,18 +280,18 @@ class tl_files extends Backend
 						if (count($files) && !$f4)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
-							$this->redirect('typolight/main.php?act=error');
+							$this->redirect('contao/main.php?act=error');
 						}
 						elseif (!$f3)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
-							$this->redirect('typolight/main.php?act=error');
+							$this->redirect('contao/main.php?act=error');
 						}
 					}
 					elseif (!$f3)
 					{
 						$this->log('No permission to delete file "'.$strFile.'"', 'tl_files checkPermission()', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 
@@ -297,7 +299,7 @@ class tl_files extends Backend
 					if (count($this->User->fop) < 1)
 					{
 						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 					break;
 			}
@@ -366,7 +368,7 @@ class tl_files extends Backend
 			$this->Session->set('tl_files_node', '');
 
 			$this->log('Folder ID '.$strNode.' was not mounted', 'tl_files addBreadcrumb', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		// Limit tree

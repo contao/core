@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -37,7 +39,12 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'ptable'                      => 'tl_theme',
+		'enableVersioning'            => true,
+		'onload_callback' => array
+		(
+			array('tl_layout', 'checkPermission')
+		)
 	),
 
 	// List
@@ -45,15 +52,12 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 1,
+			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'flag'                    => 1,
-			'panelLayout'             => 'filter;search,limit'
-		),
-		'label' => array
-		(
-			'fields'                  => array('name', 'fallback'),
-			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>'
+			'panelLayout'             => 'filter;sort,search,limit',
+			'headerFields'            => array('name', 'author', 'tstamp'),
+			'child_record_callback'   => array('tl_layout', 'listLayout'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -76,8 +80,15 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'copy' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_layout']['copy'],
-				'href'                => 'act=copy',
+				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif'
+			),
+			'cut' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_layout']['cut'],
+				'href'                => 'act=paste&amp;mode=cut',
+				'icon'                => 'cut.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset();"'
 			),
 			'delete' => array
 			(
@@ -98,12 +109,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('cols', 'header', 'footer', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{head_legend},stylesheet,newsfeeds,calendarfeeds;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools',
-		'1cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2cll'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'2clr'                        => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static',
-		'3cl'                         => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols,widthLeft,widthRight;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,urchinId,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'__selector__'                => array('header', 'footer', 'cols', 'static'),
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -111,6 +118,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	(
 		'header'                      => 'headerHeight',
 		'footer'                      => 'footerHeight',
+		'cols_2cll'                   => 'widthLeft',
+		'cols_2clr'                   => 'widthRight',
+		'cols_3cl'                    => 'widthLeft,widthRight',
 		'static'                      => 'width,align'
 	),
 
@@ -122,8 +132,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['name'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
 		'fallback' => array
 		(
@@ -212,7 +224,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'foreignKey'              => 'tl_style_sheet.name',
+			'options_callback'        => array('tl_layout', 'getStyleSheets'),
 			'eval'                    => array('multiple'=>true)
 		),
 		'newsfeeds' => array
@@ -243,8 +255,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('fe_'),
+			'options_callback'        => array('tl_layout', 'getPageTemplates'),
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'doctype' => array
@@ -252,19 +266,22 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['doctype'],
 			'exclude'                 => true,
 			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'inputType'               => 'select',
 			'options'                 => array('xhtml_strict', 'xhtml_trans'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'urchinId' => array
+		'mooSource' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['urchinId'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
+			'default'                 => 'moo_local',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'inputType'               => 'select',
+			'options'                 => array('moo_local', 'moo_googleapis'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'cssClass' => array
 		(
@@ -297,7 +314,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
-			'options'                 => $this->getTemplateGroup('moo_'),
+			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
 			'eval'                    => array('multiple'=>true)
 		),
 		'script' => array
@@ -342,11 +359,65 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_layout extends Backend
 {
+
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to edit the table
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		if (!$this->User->hasAccess('layout', 'themes'))
+		{
+			$this->log('Not enough permissions to access the page layout module', 'tl_layout checkPermission', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+	}
+
+
+	/**
+	 * Return all style sheets of the current theme
+	 * @param array
+	 * @return array
+	 */
+	public function getStyleSheets(DataContainer $dc)
+	{
+		$objStyleSheet = $this->Database->prepare("SELECT id, name FROM tl_style_sheet WHERE pid=?")
+										->execute($dc->activeRecord->pid);
+
+		if ($objStyleSheet->numRows < 1)
+		{
+			return array();
+		}
+
+		$return = array();
+
+		while ($objStyleSheet->next())
+		{
+			$return[$objStyleSheet->id] = $objStyleSheet->name;
+		}
+
+		return $return;
+	}
+
 
 	/**
 	 * Return all news archives with XML feeds
@@ -393,6 +464,44 @@ class tl_layout extends Backend
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Return all page templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getPageTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('fe_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all MooTools templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getMooToolsTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('moo_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * List a page layout
+	 * @param array
+	 * @return string
+	 */
+	public function listLayout($row)
+	{
+		if (!$row['fallback'])
+		{
+			return '<div style="float:left;">'. $row['name'] ."</div>\n";
+		}
+
+		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
 	}
 }
 

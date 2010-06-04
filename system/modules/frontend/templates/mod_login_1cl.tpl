@@ -15,7 +15,13 @@
 <label for="username"><?php echo $this->username; ?></label>
 <input type="text" name="username" id="username" class="text" maxlength="64" value="<?php echo $this->value; ?>" /><br />
 <label for="password"><?php echo $this->password; ?></label>
-<input type="password" name="password" id="password" class="text password" maxlength="64" value="" /><br />
+<input type="password" name="password" id="password" class="text password" maxlength="64" value="" />
+<?php if ($this->autologin): ?>
+<div class="checkbox_container">
+<input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox" />
+<label for="autologin"><?php echo $this->autoLabel; ?></label>
+</div>
+<?php endif; ?>
 <div class="submit_container">
 <input type="submit" class="submit" value="<?php echo $this->slabel; ?>" />
 </div>

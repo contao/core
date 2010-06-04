@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Class Repository
+ * Contao Repository :: Class Repository
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -54,8 +56,16 @@ class Repository
 			'stable'
 		);
 		
+	private static $mShortStatusName = 
+		array(
+			'&#945;1', '&#945;2', '&#945;3',
+			'&#946;1', '&#946;2', '&#946;3',
+			'r1', 'r2', 'r3',
+			'st'
+		);
+		
 	/**
-	 * Format a version number to human readable.
+	 * Format a version number to human readable with long status text
 	 *
 	 * Example:
 	 * <code>
@@ -77,6 +87,30 @@ class Repository
 		$major		= (int)($aVersion / 1000);
 		return "$major.$minor.$micro ".self::$mStatusName[$status];
 	} // formatVersion
+
+	/**
+	 * Format a version number to human readable with short status text
+	 *
+	 * Example:
+	 * <code>
+	 * echo Repository::formatShortVersion(10030042); 
+	 * // will output: 1.3.4 a3
+	 * </code>
+	 * @param int $aVersion The encoded version
+	 * @return string The version in human readable format
+	 */ 
+	public static function formatShortVersion($aVersion)
+	{
+		$aVersion	= (int)$aVersion;
+		if (!$aVersion) return '';
+		$status		= $aVersion % 10;
+		$aVersion	= (int)($aVersion / 10);
+		$micro		= $aVersion % 1000;
+		$aVersion	= (int)($aVersion / 1000);
+		$minor		= $aVersion % 1000;
+		$major		= (int)($aVersion / 1000);
+		return $status < 9 ? "$major.$minor.$micro ".self::$mShortStatusName[$status] : "$major.$minor.$micro";
+	} // formatShortVersion
 
 	/**
 	 * Remap and format a core version number to human readable.
@@ -102,6 +136,31 @@ class Repository
 		} // foreach
 		return self::formatVersion($aVersion);
 	} // formatCoreVersion
+
+	/**
+	 * Remap and format a core version number to human readable, short version.
+	 *
+	 * Example:
+	 * <code>
+	 * echo Repository::formatShortCoreVersion(20050119); 
+	 * // will output: 2.6.0 b2
+	 * </code>
+	 * @param int $aVersion The encoded version
+	 * @return string The version in human readable format
+	 */ 
+	public static function formatShortCoreVersion($aVersion)
+	{
+		$aVersion = (int)$aVersion;
+		if (!$aVersion) return '';
+		foreach (explode(';',REPOSITORY_COREVERSIONS) as $v) {
+			$v = explode(',',$v);
+			if ((int)$v[0] == $aVersion) {
+				$aVersion = $v[1];
+				break;
+			} // if
+		} // foreach
+		return self::formatShortVersion($aVersion);
+	} // formatShortCoreVersion
 
 	/**
 	 * Encode version from human readable format.
@@ -130,6 +189,22 @@ class Repository
 		} // if
 		return 0;
 	} // encodeVersion
+	
+	/**
+	 * Shorten text adding ellipsis when it is too long.
+	 * The text is enclosed in a span element with the full length text as title, so when
+	 * hoovering with the mouse the full text is visible.
+	 * @param string $aText The text to process.
+	 * @param int $aLength The maximum length.
+	 * @return string The (probably) shortened text packed into a span element.
+	 */
+	public static function ellipsisText($aText, $aLength = 32)
+	{
+		return 
+			'<span title="'.$aText.'">'.
+			(mb_strlen($aText)<=$aLength ? $aText : mb_substr($aText,0,$aLength-2).'...').
+			'</span>';
+	} // ellipsisText
 	
 } // class Repository
 

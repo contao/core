@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -50,7 +52,8 @@ $GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
 	array('Rich Text Editor', 'for more information about TinyMCE please visit <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
-	array('Insert tags', 'for more information on insert tags please visit <a href="http://dev.typolight.org/wiki/EnglishInserttags" title="TYPOlight online documentation" onclick="window.open(this.href); return false;">http://dev.typolight.org/wiki/EnglishInserttags</a>.')
+	array('Insert tags', 'for more information on insert tags please visit <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.'),
+	array('Code Editor', 'for more information about EditArea please visit <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.')
 );
 
 
@@ -59,7 +62,7 @@ $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
 (
-	array('colspan', 'TYPOlight supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br /><br /><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br /><br /><em>Here are some examples of valid date and time formats</em>:'),
+	array('colspan', 'Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br /><br /><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br /><br /><em>Here are some examples of valid date and time formats</em>:'),
 	array('Y-m-d', 'YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28'),
 	array('m/d/Y', 'MM/DD/YYYY, english format, e.g. 01/28/2005'),
 	array('d.m.Y', 'DD.MM.YYYY, german format, e.g. 28.01.2005'),

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle files.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class File extends System
@@ -307,111 +309,151 @@ class File extends System
 
 
 	/**
+	 * Return the mime type and icon of a file based on its extension
+	 * @return array
+	 */
+	protected function getMimeInfo()
+	{
+		$arrMimeTypes = array
+		(
+			// Application files
+			'xl'    => array('application/excel', 'iconOFFICE.gif'),
+			'xls'   => array('application/excel', 'iconOFFICE.gif'),
+			'hqx'   => array('application/mac-binhex40', 'iconPLAIN.gif'),
+			'cpt'   => array('application/mac-compactpro', 'iconPLAIN.gif'),
+			'bin'   => array('application/macbinary', 'iconPLAIN.gif'),
+			'doc'   => array('application/msword', 'iconOFFICE.gif'),
+			'word'  => array('application/msword', 'iconOFFICE.gif'),
+			'cto'   => array('application/octet-stream', 'iconCTO.gif'),
+			'dms'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'lha'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'lzh'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'exe'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'class' => array('application/octet-stream', 'iconPLAIN.gif'),
+			'so'    => array('application/octet-stream', 'iconPLAIN.gif'),
+			'sea'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'dll'   => array('application/octet-stream', 'iconPLAIN.gif'),
+			'oda'   => array('application/oda', 'iconPLAIN.gif'),
+			'pdf'   => array('application/pdf', 'iconPDF.gif'),
+			'ai'    => array('application/postscript', 'iconPLAIN.gif'),
+			'eps'   => array('application/postscript', 'iconPLAIN.gif'),
+			'ps'    => array('application/postscript', 'iconPLAIN.gif'),
+			'pps'   => array('application/powerpoint', 'iconOFFICE.gif'),
+			'ppt'   => array('application/powerpoint', 'iconOFFICE.gif'),
+			'smi'   => array('application/smil', 'iconPLAIN.gif'),
+			'smil'  => array('application/smil', 'iconPLAIN.gif'),
+			'mif'   => array('application/vnd.mif', 'iconPLAIN.gif'),
+			'odc'   => array('application/vnd.oasis.opendocument.chart', 'iconOFFICE.gif'),
+			'odf'   => array('application/vnd.oasis.opendocument.formula', 'iconOFFICE.gif'),
+			'odg'   => array('application/vnd.oasis.opendocument.graphics', 'iconOFFICE.gif'),
+			'odi'   => array('application/vnd.oasis.opendocument.image', 'iconOFFICE.gif'),
+			'odp'   => array('application/vnd.oasis.opendocument.presentation', 'iconOFFICE.gif'),
+			'ods'   => array('application/vnd.oasis.opendocument.spreadsheet', 'iconOFFICE.gif'),
+			'odt'   => array('application/vnd.oasis.opendocument.text', 'iconOFFICE.gif'),
+			'wbxml' => array('application/wbxml', 'iconPLAIN.gif'),
+			'wmlc'  => array('application/wmlc', 'iconPLAIN.gif'),
+			'dmg'   => array('application/x-apple-diskimage', 'iconRAR.gif'),
+			'dcr'   => array('application/x-director', 'iconPLAIN.gif'),
+			'dir'   => array('application/x-director', 'iconPLAIN.gif'),
+			'dxr'   => array('application/x-director', 'iconPLAIN.gif'),
+			'dvi'   => array('application/x-dvi', 'iconPLAIN.gif'),
+			'gtar'  => array('application/x-gtar', 'iconRAR.gif'),
+			'inc'   => array('application/x-httpd-php', 'iconPHP.gif'),
+			'php'   => array('application/x-httpd-php', 'iconPHP.gif'),
+			'php3'  => array('application/x-httpd-php', 'iconPHP.gif'),
+			'php4'  => array('application/x-httpd-php', 'iconPHP.gif'),
+			'php5'  => array('application/x-httpd-php', 'iconPHP.gif'),
+			'phtml' => array('application/x-httpd-php', 'iconPHP.gif'),
+			'phps'  => array('application/x-httpd-php-source', 'iconPHP.gif'),
+			'js'    => array('application/x-javascript', 'iconJS.gif'),
+			'psd'   => array('application/x-photoshop', 'iconPLAIN.gif'),
+			'rar'   => array('application/x-rar', 'iconRAR.gif'),
+			'fla'   => array('application/x-shockwave-flash', 'iconSWF.gif'),
+			'swf'   => array('application/x-shockwave-flash', 'iconSWF.gif'),
+			'sit'   => array('application/x-stuffit', 'iconRAR.gif'),
+			'tar'   => array('application/x-tar', 'iconRAR.gif'),
+			'tgz'   => array('application/x-tar', 'iconRAR.gif'),
+			'xhtml' => array('application/xhtml+xml', 'iconPLAIN.gif'),
+			'xht'   => array('application/xhtml+xml', 'iconPLAIN.gif'),
+			'zip'   => array('application/zip', 'iconRAR.gif'),
+
+			// Audio files
+			'mid'   => array('audio/midi', 'iconAUDIO.gif'),
+			'midi'  => array('audio/midi', 'iconAUDIO.gif'),
+			'mpga'  => array('audio/mpeg', 'iconAUDIO.gif'),
+			'mp2'   => array('audio/mpeg', 'iconAUDIO.gif'),
+			'mp3'   => array('audio/mpeg', 'iconAUDIO.gif'),
+			'aif'   => array('audio/x-aiff', 'iconAUDIO.gif'),
+			'aiff'  => array('audio/x-aiff', 'iconAUDIO.gif'),
+			'aifc'  => array('audio/x-aiff', 'iconAUDIO.gif'),
+			'ram'   => array('audio/x-pn-realaudio', 'iconAUDIO.gif'),
+			'rm'    => array('audio/x-pn-realaudio', 'iconAUDIO.gif'),
+			'rpm'   => array('audio/x-pn-realaudio-plugin', 'iconAUDIO.gif'),
+			'ra'    => array('audio/x-realaudio', 'iconAUDIO.gif'),
+			'wav'   => array('audio/x-wav', 'iconAUDIO.gif'),
+
+			// Images
+			'bmp'   => array('image/bmp', 'iconBMP.gif'),
+			'gif'   => array('image/gif', 'iconGIF.gif'),
+			'jpeg'  => array('image/jpeg', 'iconJPG.gif'),
+			'jpg'   => array('image/jpeg', 'iconJPG.gif'),
+			'jpe'   => array('image/jpeg', 'iconJPG.gif'),
+			'png'   => array('image/png', 'iconTIF.gif'),
+			'tiff'  => array('image/tiff', 'iconTIF.gif'),
+			'tif'   => array('image/tiff', 'iconTIF.gif'),
+
+			// Mailbox files
+			'eml'   => array('message/rfc822', 'iconPLAIN.gif'),
+
+			// Text files
+			'asp'   => array('text/asp', 'iconPLAIN.gif'),
+			'css'   => array('text/css', 'iconCSS.gif'),
+			'html'  => array('text/html', 'iconHTML.gif'),
+			'htm'   => array('text/html', 'iconHTML.gif'),
+			'shtml' => array('text/html', 'iconHTML.gif'),
+			'txt'   => array('text/plain', 'iconPLAIN.gif'),
+			'text'  => array('text/plain', 'iconPLAIN.gif'),
+			'log'   => array('text/plain', 'iconPLAIN.gif'),
+			'rtx'   => array('text/richtext', 'iconPLAIN.gif'),
+			'rtf'   => array('text/rtf', 'iconPLAIN.gif'),
+			'xml'   => array('text/xml', 'iconPLAIN.gif'),
+			'xsl'   => array('text/xml', 'iconPLAIN.gif'),
+
+			// Videos
+			'mpeg'  => array('video/mpeg', 'iconVIDEO.gif'),
+			'mpg'   => array('video/mpeg', 'iconVIDEO.gif'),
+			'mpe'   => array('video/mpeg', 'iconVIDEO.gif'),
+			'qt'    => array('video/quicktime', 'iconVIDEO.gif'),
+			'mov'   => array('video/quicktime', 'iconVIDEO.gif'),
+			'rv'    => array('video/vnd.rn-realvideo', 'iconVIDEO.gif'),
+			'avi'   => array('video/x-msvideo', 'iconVIDEO.gif'),
+			'movie' => array('video/x-sgi-movie', 'iconVIDEO.gif')
+		);
+
+		// Extend the default lookup array
+		if (is_array($GLOBALS['TL_MIME']) && !empty($GLOBALS['TL_MIME']))
+		{
+			$arrMimeTypes = array_merge($arrMimeTypes, $GLOBALS['TL_MIME']);
+		}
+
+		// Fallback to application/octet-stream
+		if (!isset($arrMimeTypes[$this->extension]))
+		{
+			return array('application/octet-stream', 'iconPLAIN.gif');
+		}
+
+		return $arrMimeTypes[$this->extension];
+	}
+
+
+	/**
 	 * Get the mime type of a file based on its extension
 	 * @return string
 	 */
 	protected function getMimeType()
 	{
-		$arrMimeTypes = array
-		(
-			'xl'    => 'application/excel',
-			'hqx'   => 'application/mac-binhex40',
-			'cpt'   => 'application/mac-compactpro',
-			'doc'   => 'application/msword',
-			'word'  => 'application/msword',
-			'bin'   => 'application/macbinary',
-			'dms'   => 'application/octet-stream',
-			'lha'   => 'application/octet-stream',
-			'lzh'   => 'application/octet-stream',
-			'exe'   => 'application/octet-stream',
-			'class' => 'application/octet-stream',
-			'psd'   => 'application/x-photoshop',
-			'so'    => 'application/octet-stream',
-			'sea'   => 'application/octet-stream',
-			'dll'   => 'application/octet-stream',
-			'oda'   => 'application/oda',
-			'pdf'   => 'application/pdf',
-			'ai'    => 'application/postscript',
-			'eps'   => 'application/postscript',
-			'ps'    => 'application/postscript',
-			'smi'   => 'application/smil',
-			'smil'  => 'application/smil',
-			'mif'   => 'application/vnd.mif',
-			'xls'   => 'application/excel',
-			'ppt'   => 'application/powerpoint',
-			'wbxml' => 'application/wbxml',
-			'wmlc'  => 'application/wmlc',
-			'dmg'   => 'application/x-apple-diskimage',
-			'dcr'   => 'application/x-director',
-			'dir'   => 'application/x-director',
-			'dxr'   => 'application/x-director',
-			'dvi'   => 'application/x-dvi',
-			'gtar'  => 'application/x-gtar',
-			'php'   => 'application/x-httpd-php',
-			'php3'  => 'application/x-httpd-php',
-			'php4'  => 'application/x-httpd-php',
-			'php5'  => 'application/x-httpd-php',
-			'phtml' => 'application/x-httpd-php',
-			'phps'  => 'application/x-httpd-php-source',
-			'js'    => 'application/x-javascript',
-			'swf'   => 'application/x-shockwave-flash',
-			'sit'   => 'application/x-stuffit',
-			'tar'   => 'application/x-tar',
-			'tgz'   => 'application/x-tar',
-			'xhtml' => 'application/xhtml+xml',
-			'xht'   => 'application/xhtml+xml',
-			'zip'   => 'application/zip',
-			'mid'   => 'audio/midi',
-			'midi'  => 'audio/midi',
-			'mpga'  => 'audio/mpeg',
-			'mp2'   => 'audio/mpeg',
-			'mp3'   => 'audio/mpeg',
-			'wav'   => 'audio/x-wav',
-			'aif'   => 'audio/x-aiff',
-			'aiff'  => 'audio/x-aiff',
-			'aifc'  => 'audio/x-aiff',
-			'ram'   => 'audio/x-pn-realaudio',
-			'rm'    => 'audio/x-pn-realaudio',
-			'rpm'   => 'audio/x-pn-realaudio-plugin',
-			'ra'    => 'audio/x-realaudio',
-			'bmp'   => 'image/bmp',
-			'gif'   => 'image/gif',
-			'jpeg'  => 'image/jpeg',
-			'jpg'   => 'image/jpeg',
-			'jpe'   => 'image/jpeg',
-			'png'   => 'image/png',
-			'tiff'  => 'image/tiff',
-			'tif'   => 'image/tiff',
-			'eml'   => 'message/rfc822',
-			'css'   => 'text/css',
-			'html'  => 'text/html',
-			'htm'   => 'text/html',
-			'shtml' => 'text/html',
-			'txt'   => 'text/plain',
-			'text'  => 'text/plain',
-			'log'   => 'text/plain',
-			'rtx'   => 'text/richtext',
-			'rtf'   => 'text/rtf',
-			'xml'   => 'text/xml',
-			'xsl'   => 'text/xml',
-			'mpeg'  => 'video/mpeg',
-			'mpg'   => 'video/mpeg',
-			'mpe'   => 'video/mpeg',
-			'qt'    => 'video/quicktime',
-			'mov'   => 'video/quicktime',
-			'avi'   => 'video/x-msvideo',
-			'movie' => 'video/x-sgi-movie',
-			'rv'    => 'video/vnd.rn-realvideo'
-		);
-
-		$strMime = 'application/octet-stream';
-
-		if (isset($arrMimeTypes[$this->extension]))
-		{
-			$strMime = $arrMimeTypes[$this->extension];
-		}
-
-		return $strMime;
+		$arrMime = $this->getMimeInfo();
+		return $arrMime[0];
 	}
 
 
@@ -421,111 +463,8 @@ class File extends System
 	 */
 	protected function getIcon()
 	{
-		switch ($this->extension)
-		{
-			// HTML
-			case 'html':
-			case 'htm':
-				return 'iconHTML.gif';
-				break;
-
-			// PHP
-			case 'php':
-			case 'php3':
-			case 'php4':
-			case 'php5':
-			case 'inc':
-				return 'iconPHP.gif';
-				break;
-
-			// JavaScript
-			case 'js':
-				return 'iconJS.gif';
-				break;
-
-			// Style sheets
-			case 'css':
-				return 'iconCSS.gif';
-				break;
-
-			// Flash
-			case 'swf':
-			case 'fla':
-				return 'iconSWF.gif';
-				break;
-
-			// GIF
-			case 'gif':
-				return 'iconGIF.gif';
-				break;
-
-			// JPG
-			case 'jpg':
-			case 'jpeg':
-				return 'iconJPG.gif';
-				break;
-
-			// TIF
-			case 'png':
-			case 'tif':
-			case 'tiff':
-				return 'iconTIF.gif';
-				break;
-
-			// Bitmap
-			case 'bmp':
-				return 'iconBMP.gif';
-				break;
-
-			// PDF
-			case 'pdf':
-				return 'iconPDF.gif';
-				break;
-
-			// Archive
-			case 'zip':
-			case 'tar':
-			case 'rar':
-				return 'iconRAR.gif';
-				break;
-
-			// ASP
-			case 'jsp':
-			case 'asp':
-				return 'iconJSP.gif';
-				break;
-
-			// Audio
-			case 'mp3':
-			case 'wav':
-			case 'wma':
-				return 'iconAUDIO.gif';
-				break;
-
-			// Video
-			case 'mov':
-			case 'wmv':
-			case 'avi':
-			case 'ram':
-			case 'rm':
-				return 'iconVIDEO.gif';
-				break;
-
-			// Office
-			case 'doc':
-			case 'xls':
-			case 'ppt':
-			case 'pps':
-			case 'odt':
-			case 'ods':
-			case 'odp':
-				return 'iconOFFICE.gif';
-				break;
-
-			default:
-				return 'iconPLAIN.gif';
-				break;
-		}
+		$arrMime = $this->getMimeInfo();
+		return $arrMime[1];
 	}
 }
 

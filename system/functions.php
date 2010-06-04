@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -179,7 +181,7 @@ function __exception($e)
 
 
 /**
- * Show a special TYPOlight "what to do in case of an error" message
+ * Show a special Contao "what to do in case of an error" message
  */
 function show_help_message()
 {
@@ -254,30 +256,14 @@ function scan($strFolder)
 
 
 /**
- * Convert special characters except ampersands to HTML entities
- * 
- * The difference between specialchars($str, true) and htmlspecialchars() is
- * that ampersands will never be double converted.
- * 
- *   specialchars('<you &amp; me>', true) -> &lt;you &amp; me&gt;
- *   htmlspecialchars('<you &amp; me>') -> &lt;you &amp;amp; me&gt;
- * 
- * The second argument has been added in TYPOlight 2.8.3.
+ * Convert special characters to HTML entities and make sure that
+ * entities are never double converted.
  * @param string
- * @param boolean
  * @return string
  */
-function specialchars($strString, $blnAmpersands=false)
+function specialchars($strString)
 {
-	if ($blnAmpersands)
-	{
-		$strString = ampersand($strString);
-	}
-
-	$arrFind = array('"', "'", '<', '>');
-	$arrReplace = array('&#34;', '&#39;', '&lt;', '&gt;');
-
-	return str_replace($arrFind, $arrReplace, $strString);
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
 }
 
 

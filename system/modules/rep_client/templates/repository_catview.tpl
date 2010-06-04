@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to display a single extension
+ * Contao Repository :: Template to display a single extension
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
@@ -20,7 +20,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 ?>
 
 <div id="tl_buttons">
-<a href="typolight/main.php?do=repository_catalog" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
+<a href="contao/main.php?do=repository_catalog" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
 </div>
 
 <div class="mod_repository mod_repository_view block">
@@ -36,7 +36,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
   <td colspan="4">
 <?php if (property_exists($ext, 'thumbnail')): ?>
   <div class="image_container">
-    <a href="<?php echo $ext->picture->url; ?>" title="<?php echo $text['showpicture']; ?>"><img src="<?php echo $ext->thumbnail->url; ?>" alt="<?php echo $text['thumbnail']; ?>" width="<?php echo $ext->thumbnail->width; ?>" height="<?php echo $ext->thumbnail->height; ?>" class="thumbnail" /></a>
+    <a href="<?php echo $ext->picture->url; ?>" title="<?php echo $text['showpicture']; ?>" onclick="Backend.openWindow(this, 600, 450); return false;"><img src="<?php echo $ext->thumbnail->url; ?>" alt="<?php echo $text['thumbnail']; ?>" width="<?php echo $ext->thumbnail->width; ?>" height="<?php echo $ext->thumbnail->height; ?>" class="thumbnail" /></a>
   </div>
 <?php endif; ?>
 <?php if ($ext->teaser!=''): ?>
@@ -55,13 +55,8 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <tr>
   <th><?php echo $text['releasedate'][0]; ?></th>
   <td><?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
-<?php if ($ext->type=='commercial'): ?> 
-  <th><?php echo $text['demo'][0]; ?></th>
-  <td><?php echo $ext->demo ? $text['yes'] : $text['no']; ?></td>
-<?php else: ?>
   <th>&nbsp;</th>
   <td>&nbsp;</td>
-<?php endif; ?>
 </tr>
 <tr>
   <th><?php echo $text['license'][0]; ?></th>
@@ -167,7 +162,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
         <th><?php echo $text['versionto']; ?></th>
       </tr>
       <tr>
-        <td>TYPOlight</td>
+        <td>Contao</td>
         <td><?php echo Repository::formatCoreVersion($ext->coreminversion); ?></td>
         <td><?php echo Repository::formatCoreVersion($ext->coremaxversion); ?></td>
       </tr>

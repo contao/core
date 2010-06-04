@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle newsletters.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class Newsletter extends Backend
@@ -61,9 +63,10 @@ class Newsletter extends Backend
 			$GLOBALS['TL_CONFIG']['useSMTP'] = true;
 
 			$GLOBALS['TL_CONFIG']['smtpHost'] = $objNewsletter->smtpHost;
-			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
 			$GLOBALS['TL_CONFIG']['smtpUser'] = $objNewsletter->smtpUser;
 			$GLOBALS['TL_CONFIG']['smtpPass'] = $objNewsletter->smtpPass;
+			$GLOBALS['TL_CONFIG']['smtpEnc']  = $objNewsletter->smtpEnc;
+			$GLOBALS['TL_CONFIG']['smtpPort'] = $objNewsletter->smtpPort;
 		}
 
 		// Add default sender address
@@ -134,8 +137,8 @@ class Newsletter extends Backend
 				$this->redirect($referer);
 			}
 
-			// Get total number of recipients
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=1")
+			// Get the total number of recipients
+			$objTotal = $this->Database->prepare("SELECT COUNT(DISTINCT email) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=1")
 									   ->execute($objNewsletter->pid);
 
 			// Return if there are no recipients
@@ -155,7 +158,7 @@ class Newsletter extends Backend
 			$intPages = $this->Input->get('mpc') ? $this->Input->get('mpc') : 10;
 
 			// Get recipients
-			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=1 ORDER BY r.email")
+			$objRecipients = $this->Database->prepare("SELECT *, r.email FROM tl_newsletter_recipients r LEFT JOIN tl_member m ON(r.email=m.email) WHERE r.pid=? AND r.active=1 GROUP BY r.email ORDER BY r.email")
 											->limit($intPages, $intStart)
 											->execute($objNewsletter->pid);
 
@@ -224,10 +227,9 @@ class Newsletter extends Backend
 			exit;
 		}
 
-		$strToken = md5(uniqid('', true));
+		$strToken = md5(uniqid(mt_rand(), true));
 		$this->Session->set('tl_newsletter_send', $strToken);
 		$sprintf = strlen($objNewsletter->senderName) ? $objNewsletter->senderName . ' &lt;%s&gt;' : '%s';
-		$tipClass = (!$GLOBALS['TL_CONFIG']['oldBeTheme']) ? ' tl_tip' : '';
 
 		// Preview newsletter
 		$return = '
@@ -269,21 +271,26 @@ class Newsletter extends Backend
 ' . nl2br($text) . '
 </div>
 <div class="tl_tbox block">
-<div>
-  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
-  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="'.$objNewsletter->sender.'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help' . $tipClass . '">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
-</div>
 <div class="w50">
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
   <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help' . $tipClass . '">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] . '</p>' : '') . '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_timeout">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][0] . '</label></h3>
   <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help' . $tipClass . '">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] . '</p>' : '') . '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] . '</p>' : '') . '
+</div>
+<div class="w50">
+  <h3><label for="ctrl_start">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][0] . '</label></h3>
+  <input type="text" name="start" id="ctrl_start" value="0" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['start'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][1] . '</p>' : '') . '
+</div>
+<div class="w50">
+  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
+  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.$objNewsletter->sender.'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
 </div>
 </div>
 </div>
@@ -292,7 +299,7 @@ class Newsletter extends Backend
 
 <div class="tl_submit_container">
 <input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'" />
-<input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" />
+<input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" onclick="return confirm(\''. str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm']) .'\')" />
 </div>
 
 </div>
@@ -509,10 +516,10 @@ class Newsletter extends Backend
     <option value="tabulator">'.$GLOBALS['TL_LANG']['MSC']['tabulator'].'</option>
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(strlen($GLOBALS['TL_LANG']['MSC']['separator'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
 '.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1]) ? '
-  <p class="tl_help">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1].'</p>' : '').'
+  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'][1].'</p>' : '').'
 </div>
 
 </div>

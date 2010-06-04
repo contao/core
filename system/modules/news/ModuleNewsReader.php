@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end module "news reader".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleNewsReader extends ModuleNews
@@ -59,7 +61,7 @@ class ModuleNewsReader extends ModuleNews
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -148,6 +150,10 @@ class ModuleNewsReader extends ModuleNews
 
 		$this->Template->allowComments = true;
 
+		// Adjust the comments headline level
+		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
+		$this->Template->hlc = 'h' . ($intHl + 1);
+
 		$this->import('Comments');
 		$arrNotifies = array();
 
@@ -174,7 +180,7 @@ class ModuleNewsReader extends ModuleNews
 
 		$objConfig->perPage = $objArchive->perPage;
 		$objConfig->order = $objArchive->sortOrder;
-		$objConfig->template = $objArchive->template;
+		$objConfig->template = $this->com_template;
 		$objConfig->requireLogin = $objArchive->requireLogin;
 		$objConfig->disableCaptcha = $objArchive->disableCaptcha;
 		$objConfig->bbcode = $objArchive->bbcode;

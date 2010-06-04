@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -52,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
-			'panelLayout'             => 'search,filter,limit',
+			'panelLayout'             => 'filter,search,limit',
 			'headerFields'            => array('title', 'tstamp', 'formID', 'storeValues', 'sendViaEmail', 'recipient', 'subject', 'tableless'),
 			'child_record_callback'   => array('tl_form_field', 'listFormFields')
 		),
@@ -114,13 +116,11 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'fsType', 'storeFile', 'addSubmit', 'imageSubmit', 'multiple'),
+		'__selector__'                => array('type', 'fsType', 'multiple', 'storeFile', 'addSubmit', 'imageSubmit'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type;{text_legend},text',
 		'explanation'                 => '{type_legend},type;{text_legend},text',
-		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType',
-		'fieldsetfsStart'             => '{type_legend},type,label;{fconfig_legend},fsType;{expert_legend:hide},class',
-		'fieldsetfsStop'              => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
+		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
 		'html'                        => '{type_legend},type;{text_legend},html',
 		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
 		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
@@ -137,9 +137,10 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'addSubmit'                   => 'slabel',
+		'fsType_fsStart'              => 'label',
 		'multiple'                    => 'mSize',
 		'storeFile'                   => 'uploadFolder,useHomeDir,doNotOverwrite',
+		'addSubmit'                   => 'slabel',
 		'imageSubmit'                 => 'singleSRC'
 	),
 
@@ -346,7 +347,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_form_field extends Backend
@@ -396,7 +397,7 @@ class tl_form_field extends Backend
 				if (!strlen($this->Input->get('id')) || !in_array($this->Input->get('id'), $root))
 				{
 					$this->log('Not enough permissions to access form ID "'.$this->Input->get('id').'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -414,7 +415,7 @@ class tl_form_field extends Backend
 					if ($objField->numRows < 1)
 					{
 						$this->log('Invalid form field ID "'.$this->Input->get('pid').'"', 'tl_form_field checkPermission', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 
 					$pid = $objField->pid;
@@ -423,7 +424,7 @@ class tl_form_field extends Backend
 				if (!in_array($pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" to form ID "'.$pid.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
 
@@ -438,13 +439,13 @@ class tl_form_field extends Backend
 				if ($objField->numRows < 1)
 				{
 					$this->log('Invalid form field ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objField->pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' form field ID "'.$id.'" of form ID "'.$objField->pid.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -456,7 +457,7 @@ class tl_form_field extends Backend
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objForm = $this->Database->prepare("SELECT id FROM tl_form_field WHERE pid=?")
@@ -465,7 +466,7 @@ class tl_form_field extends Backend
 				if ($objForm->numRows < 1)
 				{
 					$this->log('Invalid form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
@@ -477,12 +478,12 @@ class tl_form_field extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access form ID "'.$id.'"', 'tl_form_field checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}

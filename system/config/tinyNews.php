@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
@@ -70,7 +72,7 @@ tinyMCE.init({
   save_on_tinymce_forms : true,
   advimage_update_dimensions_onchange : false,
   save_callback : "TinyCallback.cleanHTML",
-  onchange_callback : "TinyCallback.getScrollOffset",
+  init_instance_callback : "TinyCallback.getScrollOffset",
   external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",
   template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
   plugins : "advimage,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",

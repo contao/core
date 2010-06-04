@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -50,16 +52,12 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 2,
+			'mode'                    => 4,
 			'fields'                  => array('email'),
-			'flag'                    => 1,
-			'panelLayout'             => 'filter;sort,search,limit'
-		),
-		'label' => array
-		(
-			'fields'                  => array('email'),
-			'format'                  => '%s',
-			'label_callback'          => array('tl_newsletter_recipients', 'addIcon')
+			'panelLayout'             => 'filter;sort,search,limit',
+			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'useSMTP'),
+			'child_record_callback'   => array('tl_newsletter_recipients', 'listRecipient'),
+			'child_record_class'      => 'no_padding'
 		),
 		'global_operations' => array
 		(
@@ -130,6 +128,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true),
 			'save_callback' => array
@@ -148,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv')
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
 		),
 		'addedOn' => array
 		(
@@ -162,7 +161,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'],
 			'search'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'flag'                    => 11
 		)
 	)
 );
@@ -173,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_newsletter_recipients extends Backend
@@ -218,7 +218,7 @@ class tl_newsletter_recipients extends Backend
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to create newsletters recipients in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -234,13 +234,13 @@ class tl_newsletter_recipients extends Backend
 				if ($objRecipient->numRows < 1)
 				{
 					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objRecipient->pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' recipient ID "'.$id.'" of newsletter channel ID "'.$objRecipient->pid.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -251,7 +251,7 @@ class tl_newsletter_recipients extends Backend
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objRecipient = $this->Database->prepare("SELECT id FROM tl_newsletter_recipients WHERE pid=?")
@@ -260,7 +260,7 @@ class tl_newsletter_recipients extends Backend
 				if ($objRecipient->numRows < 1)
 				{
 					$this->log('Invalid newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
@@ -272,12 +272,12 @@ class tl_newsletter_recipients extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				elseif (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access newsletter recipient ID "'.$id.'"', 'tl_newsletter_recipients checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
@@ -305,13 +305,14 @@ class tl_newsletter_recipients extends Backend
 
 
 	/**
-	 * Add an image to each record
+	 * List a recipient
 	 * @param array
-	 * @param string
 	 * @return string
 	 */
-	public function addIcon($row, $label)
+	public function listRecipient($row)
 	{
+		$label = $row['email'];
+
 		if ($row['addedOn'])
 		{
 			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
@@ -321,7 +322,7 @@ class tl_newsletter_recipients extends Backend
 			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually'] . ')</span>';
 		}
 
-		return sprintf('<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>', $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label);
+		return sprintf('<div style="float:left;"><div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div></div>', $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label) . "\n";
 	}
 
 
@@ -376,7 +377,7 @@ class tl_newsletter_recipients extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_newsletter_recipients::active', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish newsletter recipient ID "'.$intId.'"', 'tl_newsletter_recipients toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_newsletter_recipients', $intId);

@@ -1,11 +1,11 @@
--- **********************************************************
--- *                                                        *
--- * IMPORTANT NOTE                                         *
--- *                                                        *
--- * Do not import this file manually but use the TYPOlight *
--- * install tool to create and maintain database tables!   *
--- *                                                        *
--- **********************************************************
+-- ********************************************************
+-- *                                                      *
+-- * IMPORTANT NOTE                                       *
+-- *                                                      *
+-- * Do not import this file manually but use the Contao  *
+-- * install tool to create and maintain database tables! *
+-- *                                                      *
+-- ********************************************************
 
 -- 
 -- Table `tl_news`
@@ -64,7 +64,6 @@ CREATE TABLE `tl_news_archive` (
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `allowComments` char(1) NOT NULL default '',
   `notify` varchar(32) NOT NULL default '',
-  `template` varchar(32) NOT NULL default '',
   `sortOrder` varchar(32) NOT NULL default '',
   `perPage` smallint(5) unsigned NOT NULL default '0',
   `moderate` char(1) NOT NULL default '',
@@ -93,9 +92,9 @@ CREATE TABLE `tl_news_archive` (
 
 CREATE TABLE `tl_module` (
   `news_archives` blob NULL,
-  `news_featured` char(1) NOT NULL default '',
+  `news_featured` varchar(16) NOT NULL default '',
   `news_numberOfItems` smallint(5) unsigned NOT NULL default '0',
-  `news_jumpToCurrent` char(1) NOT NULL default '',
+  `news_jumpToCurrent` varchar(16) NOT NULL default '',
   `news_metaFields` varchar(255) NOT NULL default '',
   `news_template` varchar(32) NOT NULL default '',
   `news_format` varchar(32) NOT NULL default '',

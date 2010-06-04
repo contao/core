@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
  * @filesource
@@ -35,7 +37,6 @@ $GLOBALS['TL_LANG']['tl_faq_category']['headline']       = array('Überschrift',
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die FAQ-Leser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie eine FAQ anklicken.');
 $GLOBALS['TL_LANG']['tl_faq_category']['allowComments']  = array('Kommentare aktivieren', 'Besuchern das Kommentieren von FAQs erlauben.');
 $GLOBALS['TL_LANG']['tl_faq_category']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
-$GLOBALS['TL_LANG']['tl_faq_category']['template']       = array('Kommentartemplate', 'Hier können Sie das Template für Kommentare auswählen.');
 $GLOBALS['TL_LANG']['tl_faq_category']['sortOrder']      = array('Sortierung', 'Standardmäßig werden Kommentare aufsteigend sortiert, beginnend mit dem ältesten.');
 $GLOBALS['TL_LANG']['tl_faq_category']['perPage']        = array('Kommentare pro Seite', 'Anzahl an Kommentaren pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_faq_category']['moderate']       = array('Kommentare moderieren', 'Kommentare erst nach Bestätigung auf der Webseite veröffentlichen.');

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -55,12 +57,13 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually']   = 'added manually'
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']    = array('Add recipient', 'Add a new recipient');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']   = array('Recipient details', 'Show the details of recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']   = array('Edit recipient', 'Edit recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']   = array('Duplicate recipient', 'Duplicate recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete'] = array('Delete recipient', 'Delete recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle'] = array('Activate/deactivate recipient', 'Activate/deactivate recipient ID %s');
-$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'] = array('CSV import', 'Import recipients from a CSV file');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['new']        = array('Add recipient', 'Add a new recipient');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['show']       = array('Recipient details', 'Show the details of recipient ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['edit']       = array('Edit recipient', 'Edit recipient ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['copy']       = array('Duplicate recipient', 'Duplicate recipient ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete']     = array('Delete recipient', 'Delete recipient ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['editheader'] = array('Edit channel', 'Edit the channel settings');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle']     = array('Activate/deactivate recipient', 'Activate/deactivate recipient ID %s');
+$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import']     = array('CSV import', 'Import recipients from a CSV file');
 
 ?>

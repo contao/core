@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle Ajax requests.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class Ajax extends Backend
@@ -164,7 +166,7 @@ class Ajax extends Backend
 
 				try
 				{
-					$objFile = new File('system/tmp/' . md5(uniqid('', true)));
+					$objFile = new File('system/tmp/' . md5(uniqid(mt_rand(), true)));
 					$objFile->close();
 					$objFile->delete();
 				}
@@ -252,6 +254,12 @@ class Ajax extends Backend
 				$arrData['name'] = $this->Input->post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
+
+				// Fallback to the files directory (reload filetrees)
+				if ($this->Input->post('folder', true) == '')
+				{
+					$this->Input->setPost('folder', $GLOBALS['TL_CONFIG']['uploadPath']);
+				}
 
 				echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;

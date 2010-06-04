@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
@@ -41,7 +43,7 @@ define('K_PATH_IMAGES', K_PATH_MAIN . 'images/');
 define('K_BLANK_IMAGE', K_PATH_IMAGES . '_blank.png');
 define('PDF_PAGE_FORMAT', 'A4');
 define('PDF_PAGE_ORIENTATION', 'P');
-define('PDF_CREATOR', 'TYPOlight Open Source CMS');
+define('PDF_CREATOR', 'Contao Open Source CMS');
 define('PDF_AUTHOR', $this->Environment->url);
 define('PDF_HEADER_TITLE', $GLOBALS['TL_CONFIG']['websiteTitle']);
 define('PDF_HEADER_STRING', '');

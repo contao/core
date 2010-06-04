@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -95,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 	'default'                 => 'nl_simple',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('nl_')
+	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
@@ -111,7 +113,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_module_newsletter extends Backend
@@ -182,6 +184,17 @@ class tl_module_newsletter extends Backend
 		}
 
 		return $arrChannels;
+	}
+
+
+	/**
+	 * Return all newsletter templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getNewsletterTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('nl_', $dc->activeRecord->pid);
 	}
 }
 

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to modify files and folders via FTP.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class FTP extends Files
@@ -45,6 +47,12 @@ class FTP extends Files
 	protected $resConnection;
 
 	/**
+	 * Is connected
+	 * @var boolean
+	 */
+	protected $blnIsConnected = false;
+
+	/**
 	 * Files array
 	 * @var array
 	 */
@@ -52,16 +60,60 @@ class FTP extends Files
 
 
 	/**
-	 * Store the FTP resource and make sure that the temp folder is writable
-	 * @param resource
+	 * Disconnect from ftp server
 	 */
-	protected function __construct($resConnection)
+	public function __destruct()
 	{
-		if (!is_resource($resConnection))
+		if ($this->blnIsConnected)
 		{
-			throw new Exception('Class FTP requires a valid FTP connection resource');
+			@ftp_close($this->resConnection);
+		}
+	}
+
+
+	/**
+	 * Establish an FTP connection
+	 * @throws Exception
+	 */
+	public function connect()
+	{
+		if ($this->blnIsConnected)
+		{
+			return;
 		}
 
+		// Check the FTP credentials
+		if ($GLOBALS['TL_CONFIG']['ftpHost'] == '')
+		{
+			throw new Exception('The FTP host must not be empty');
+		}
+		elseif ($GLOBALS['TL_CONFIG']['ftpUser'] == '')
+		{
+			throw new Exception('The FTP username must not be empty');
+		}
+		elseif ($GLOBALS['TL_CONFIG']['ftpPass'] == '')
+		{
+			throw new Exception('The FTP password must not be empty');
+		}
+
+		$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
+
+		// Try to connect
+		if (($resConnection = $ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'], $GLOBALS['TL_CONFIG']['ftpPort'], 5)) == false)
+		{
+			throw new Exception('Could not connect to the FTP server');
+		}
+
+		// Try to login
+		elseif (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']) == false)
+		{
+			throw new Exception('Authentication failed');
+		}
+
+		// Switch to passive mode
+		ftp_pasv($resConnection, true);
+
+		$this->blnIsConnected = true;
 		$this->resConnection = $resConnection;
 
 		// Make folders writable
@@ -81,21 +133,13 @@ class FTP extends Files
 
 
 	/**
-	 * Disconnect from ftp server
-	 */
-	public function __destruct()
-	{
-		@ftp_close($this->resConnection);
-	}
-
-
-	/**
 	 * Create a directory
 	 * @param string
 	 * @return boolean
 	 */
 	public function mkdir($strDirectory)
 	{
+		$this->connect();
 		return @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
 	}
 
@@ -107,6 +151,7 @@ class FTP extends Files
 	 */
 	public function rmdir($strDirectory)
 	{
+		$this->connect();
 		return @ftp_rmdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory);
 	}
 
@@ -119,11 +164,13 @@ class FTP extends Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
-		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid('', true)), $strMode);
+		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid(mt_rand(), true)), $strMode);
 
-		// Copy temp file
+		// Copy the temp file
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
+			$this->connect();
+
 			if (!@ftp_fput($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strFile, $resFile, FTP_BINARY))
 			{
 				return false;
@@ -152,7 +199,7 @@ class FTP extends Files
 		$arrData = stream_get_meta_data($resFile);
 		$fclose = fclose($resFile);
 
-		// Move temp file
+		// Move the temp file
 		if (isset($this->arrFiles[$arrData['uri']]))
 		{
 			$this->rename(preg_replace('/^' . preg_quote(TL_ROOT, '/') . '\//i', '', $arrData['uri']), $this->arrFiles[$arrData['uri']]);
@@ -170,6 +217,8 @@ class FTP extends Files
 	 */
 	public function rename($strOldName, $strNewName)
 	{
+		$this->connect();
+
 		// Windows fix: delete target file
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists(TL_ROOT . '/' . $strNewName))
 		{
@@ -210,6 +259,7 @@ class FTP extends Files
 	 */
 	public function copy($strSource, $strDestination)
 	{
+		$this->connect();
 		$return = @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, TL_ROOT . '/' . $strSource, FTP_BINARY);
 		$this->chmod($strDestination, 0644);
 
@@ -224,6 +274,7 @@ class FTP extends Files
 	 */
 	public function delete($strFile)
 	{
+		$this->connect();
 		return @ftp_delete($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strFile);
 	}
 
@@ -236,6 +287,7 @@ class FTP extends Files
 	 */
 	public function chmod($strFile, $varMode)
 	{
+		$this->connect();
 		return @ftp_chmod($this->resConnection, $varMode, $GLOBALS['TL_CONFIG']['ftpPath'] . $strFile);
 	}
 
@@ -259,6 +311,7 @@ class FTP extends Files
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{
+		$this->connect();
 		return @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, $strSource, FTP_BINARY);
 	}
 }

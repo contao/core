@@ -1,11 +1,11 @@
--- **********************************************************
--- *                                                        *
--- * IMPORTANT NOTE                                         *
--- *                                                        *
--- * Do not import this file manually but use the TYPOlight *
--- * install tool to create and maintain database tables!   *
--- *                                                        *
--- **********************************************************
+-- ********************************************************
+-- *                                                      *
+-- * IMPORTANT NOTE                                       *
+-- *                                                      *
+-- * Do not import this file manually but use the Contao  *
+-- * install tool to create and maintain database tables! *
+-- *                                                      *
+-- ********************************************************
 
 
 -- --------------------------------------------------------
@@ -55,7 +55,6 @@ CREATE TABLE `tl_faq_category` (
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `allowComments` char(1) NOT NULL default '',
   `notify` varchar(32) NOT NULL default '',
-  `template` varchar(32) NOT NULL default '',
   `sortOrder` varchar(32) NOT NULL default '',
   `perPage` smallint(5) unsigned NOT NULL default '0',
   `moderate` char(1) NOT NULL default '',

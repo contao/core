@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -37,7 +39,7 @@ $GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']   = 'This field must not be empty!';
 $GLOBALS['TL_LANG']['ERR']['minlength']      = 'Field "%s" has to be at least %d characters long!';
 $GLOBALS['TL_LANG']['ERR']['maxlength']      = 'Field "%s" must not be longer than %d characters!';
 $GLOBALS['TL_LANG']['ERR']['digit']          = 'Please enter digits only!';
-$GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Please enter a percentage between 0 und 100!';
+$GLOBALS['TL_LANG']['ERR']['prcnt']          = 'Please enter a percentage between 0 and 100!';
 $GLOBALS['TL_LANG']['ERR']['alpha']          = 'Please enter alphabetic characters only!';
 $GLOBALS['TL_LANG']['ERR']['alnum']          = 'Please enter alphanumeric characters only!';
 $GLOBALS['TL_LANG']['ERR']['phone']          = 'Please enter a valid phone number!';
@@ -62,10 +64,11 @@ $GLOBALS['TL_LANG']['ERR']['accountLocked']  = 'This account has been locked! Yo
 $GLOBALS['TL_LANG']['ERR']['invalidLogin']   = 'Login failed!';
 $GLOBALS['TL_LANG']['ERR']['invalidColor']   = 'Invalid color format!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']     = 'Please select at least one field!';
-$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'Alias "%s" already exists!';
-$GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Folder "%s" cannot be imported!';
-$GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'File "%s" is not writeable, so your changes will not take effect!';
+$GLOBALS['TL_LANG']['ERR']['aliasExists']    = 'The alias "%s" already exists!';
+$GLOBALS['TL_LANG']['ERR']['importFolder']   = 'The folder "%s" cannot be imported!';
+$GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'The file "%s" is not writeable, so your changes will not take effect!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']    = 'This file or folder name is invalid!';
+$GLOBALS['TL_LANG']['ERR']['invalidFile']    = 'The file or folder "%s" is invalid!';
 
 
 /**
@@ -219,8 +222,8 @@ $GLOBALS['TL_LANG']['MSC']['fullsize']         = 'Open full size image in a new 
 $GLOBALS['TL_LANG']['MSC']['colorpicker']      = 'Color picker (requires JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['pagepicker']       = 'Page picker (requires JavaScript)';
 $GLOBALS['TL_LANG']['MSC']['filepicker']       = 'File picker (requires JavaScript)';
-$GLOBALS['TL_LANG']['MSC']['ppHeadline']       = 'TYPOlight pages';
-$GLOBALS['TL_LANG']['MSC']['fpHeadline']       = 'TYPOlight files';
+$GLOBALS['TL_LANG']['MSC']['ppHeadline']       = 'Contao pages';
+$GLOBALS['TL_LANG']['MSC']['fpHeadline']       = 'Contao files';
 $GLOBALS['TL_LANG']['MSC']['yes']              = 'yes';
 $GLOBALS['TL_LANG']['MSC']['no']               = 'no';
 $GLOBALS['TL_LANG']['MSC']['goBack']           = 'Go back';
@@ -249,7 +252,7 @@ $GLOBALS['TL_LANG']['MSC']['version']          = 'Version';
 $GLOBALS['TL_LANG']['MSC']['restore']          = 'Restore';
 $GLOBALS['TL_LANG']['MSC']['backendModules']   = 'Back end modules';
 $GLOBALS['TL_LANG']['MSC']['welcomeTo']        = '%s back end';
-$GLOBALS['TL_LANG']['MSC']['updateVersion']    = 'TYPOlight version %s available';
+$GLOBALS['TL_LANG']['MSC']['updateVersion']    = 'Contao version %s available';
 $GLOBALS['TL_LANG']['MSC']['wordWrap']         = 'Word wrap';
 $GLOBALS['TL_LANG']['MSC']['saveAlert']        = 'ATTENTION! You will lose any unsaved changes. Continue?';
 $GLOBALS['TL_LANG']['MSC']['toggleNodes']      = 'Toggle all nodes';
@@ -280,10 +283,12 @@ $GLOBALS['TL_LANG']['MSC']['crop']             = 'Exact dimensions';
 $GLOBALS['TL_LANG']['MSC']['box']              = 'Fit the box';
 $GLOBALS['TL_LANG']['MSC']['protected']        = 'protected';
 $GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update mode';
-$GLOBALS['TL_LANG']['MSC']['updateAdd']        = 'Add the selected groups';
-$GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Remove the selected groups';
-$GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Replace the existing entry';
+$GLOBALS['TL_LANG']['MSC']['updateAdd']        = 'Add the selected values';
+$GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Remove the selected values';
+$GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Replace the existing entries';
 $GLOBALS['TL_LANG']['MSC']['ascending']        = 'ascending';
 $GLOBALS['TL_LANG']['MSC']['descending']       = 'descending';
+$GLOBALS['TL_LANG']['MSC']['default']          = 'Default';
+$GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Help wizard';
 
 ?>

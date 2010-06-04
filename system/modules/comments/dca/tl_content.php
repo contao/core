@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  * @license    LGPL
  * @filesource
@@ -93,7 +95,44 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['com_template'] = array
 	'default'                 => 'com_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('com_')
+	'options_callback'        => array('tl_content_comments', 'getCommentsTemplates')
 );
+
+
+/**
+ * Class tl_content_comments
+ *
+ * Provide miscellaneous methods that are used by the data configuration array.
+ * @copyright  Leo Feyer 2005-2010
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+class tl_content_comments extends Backend
+{
+
+	/**
+	 * Return all comments templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getCommentsTemplates(DataContainer $dc)
+	{
+		// Get the page ID
+		$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE pid=?)")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		// Inherit the page settings
+		$objPage = $this->getPageDetails($objPage->id);
+
+		// Get the theme ID
+		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=?")
+									->limit(1)
+									->execute($objPage->layout);
+
+		// Return all gallery templates
+		return $this->getTemplateGroup('com_', $objLayout->pid);
+	}
+}
 
 ?>

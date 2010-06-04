@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Mysql extends Database
@@ -67,7 +69,6 @@ class DB_Mysql extends Database
 		{
 			$this->resConnection = @mysql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
 		}
-
 		else
 		{
 			$this->resConnection = @mysql_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
@@ -219,6 +220,32 @@ class DB_Mysql extends Database
 		@mysql_query("ROLLBACK", $this->resConnection);
 		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 */
+	protected function lock_tables($arrTables)
+	{
+		$arrLocks = array();
+
+		foreach ($arrTables as $table=>$mode)
+		{
+			$arrLocks[] = $table .' '. $mode;
+		}
+
+		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
+	}
+
+
+	/**
+	 * Unlock tables
+	 */
+	protected function unlock_tables()
+	{
+		@mysql_query("UNLOCK TABLES");
+	}
 }
 
 
@@ -227,7 +254,7 @@ class DB_Mysql extends Database
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Mysql_Statement extends Database_Statement
@@ -333,7 +360,7 @@ class DB_Mysql_Statement extends Database_Statement
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Mysql_Result extends Database_Result

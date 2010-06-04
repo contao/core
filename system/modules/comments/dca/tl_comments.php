@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  * @license    LGPL
  * @filesource
@@ -182,7 +184,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_comments extends Backend
@@ -220,13 +222,13 @@ class tl_comments extends Backend
 				if ($objComment->numRows < 1)
 				{
 					$this->log('Comment ID ' . $this->Input->get('id') . ' does not exist', 'tl_comments checkPermission()', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!$this->isAllowedToEditComment($objComment->parent, $objComment->source))
 				{
 					$this->log('Not enough permissions to ' . $this->Input->get('act') . ' comment ID ' . $this->Input->get('id') . ' (parent element: ' . $objComment->source . ' ID ' . $objComment->parent . ')', 'tl_comments checkPermission()', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -258,7 +260,7 @@ class tl_comments extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_comments checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
@@ -403,7 +405,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="typolight/main.php?do=article&amp;table=tl_content&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
 				}
 				break;
 
@@ -413,7 +415,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="typolight/main.php?do=page&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=page&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
 				}
 				break;
 
@@ -423,7 +425,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="typolight/main.php?do=news&amp;table=tl_news&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->headline . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=news&amp;table=tl_news&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->headline . '</a>)';
 				}
 				break;
 
@@ -433,7 +435,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="typolight/main.php?do=faq&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->question . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=faq&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->question . '</a>)';
 				}
 				break;
 
@@ -443,7 +445,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="typolight/main.php?do=calendar&amp;table=tl_calendar_events&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=calendar&amp;table=tl_calendar_events&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->title . '</a>)';
 				}
 				break;
 
@@ -565,7 +567,7 @@ class tl_comments extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_comments::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish comment ID "'.$intId.'"', 'tl_calendar_events toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_comments', $intId);

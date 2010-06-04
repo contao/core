@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Back end module displaying a list of extensions
+ * Contao Repository :: Back end module displaying a list of extensions
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -75,16 +77,18 @@ class RepositoryCatalog extends RepositoryBackendModule
 			$rep->f_author	= trim($this->Input->post('repository_author'));
 			$rep->f_order	= trim($this->Input->post('repository_order'));
 			$rep->f_page	= trim($this->Input->post('repository_page'));
+			$rep->f_find	= trim($this->Input->post('repository_find'));
 			$this->Session->set(
 				'repository_catalog_settings',
 				array(
-					'repository_tag'		=> $rep->f_tag,
-					'repository_type'		=> $rep->f_type,
-					'repository_category'	=> $rep->f_category,
-					'repository_state'		=> $rep->f_state,
-					'repository_author'		=> $rep->f_author,
-					'repository_order'		=> $rep->f_order,
-					'repository_page'		=> $rep->f_page
+					'repository_tag'	=> $rep->f_tag,
+					'repository_type'	=> $rep->f_type,
+					'repository_category'=> $rep->f_category,
+					'repository_state'	=> $rep->f_state,
+					'repository_author'	=> $rep->f_author,
+					'repository_order'	=> $rep->f_order,
+					'repository_page'	=> $rep->f_page,
+					'repository_find'	=> $rep->f_find
 				)
 			);
 		} else {
@@ -97,6 +101,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 				$rep->f_author	= trim($stg['repository_author']);
 				$rep->f_order	= trim($stg['repository_order']);
 				$rep->f_page	= trim($stg['repository_page']);
+				$rep->f_find	= trim($stg['repository_find']);
 			} // if
 		} // if	
 		
@@ -113,18 +118,19 @@ class RepositoryCatalog extends RepositoryBackendModule
 			'first'		=> ($rep->f_page-1) * $perpage,
 			'limit'		=> $perpage
 		);
-		if ($rep->f_tag		!= '') $options[tags]		= $rep->f_tag;
-		if ($rep->f_type 	!= '') $options[types]		= $rep->f_type;
-		if ($rep->f_category!= '') $options[categories] = $rep->f_category;
-		if ($rep->f_state	!= '') $options[states]		= $rep->f_state; 
-		if ($rep->f_author	!= '') $options[authors]	= $rep->f_author;
+		if ($rep->f_tag		!= '') $options['tags']			= $rep->f_tag;
+		if ($rep->f_type 	!= '') $options['types']		= $rep->f_type;
+		if ($rep->f_category!= '') $options['categories'] 	= $rep->f_category;
+		if ($rep->f_state	!= '') $options['states']		= $rep->f_state; 
+		if ($rep->f_author	!= '') $options['authors']		= $rep->f_author;
+		if ($rep->f_find	!= '') $options['find']			= $rep->f_find;
 		switch ($rep->f_order) {
 			case 'name'		: break;
-			case 'title'	: $options[order] = 'title'; break;
-			case 'author'	: $options[order] = 'author'; break;
-			case 'rating'	: $options[order] = 'rating-'; break;
-			case 'popular'	: $options[order] = 'popularity-'; break;
-			default			: $options[order] = 'releasedate-';
+			case 'title'	: $options['order'] = 'title'; break;
+			case 'author'	: $options['order'] = 'author'; break;
+			case 'rating'	: $options['order'] = 'rating-'; break;
+			case 'reldate'	: $options['order'] = 'releasedate-'; break;
+			default			: $options['order'] = 'popularity-';
 		} // switch
 		
 		// query extensions

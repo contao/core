@@ -1,6 +1,6 @@
 tinyMCE.addI18n('ru.typolinks_dlg',{
-page:"TYPOlight страницы",
-file:"TYPOlight файлы",
+page:"Contao страницы",
+file:"Contao файлы",
 link_title:"Вставить/редактировать ссылку",
 link_url:"URL ссылки",
 link_target:"Target",
@@ -16,8 +16,11 @@ image_src:"URL изображения",
 image_dimensions:"Ширина/высота",
 image_alt:"Описание",
 image_class:"Класс CSS",
+image_resize_mode:"Resize mode",
+image_crop:"Exact dimensions",
+image_proportional:"Proportional",
+image_box:"Fit the box",
 image_rel:"Тип",
 image_rel_single:"Одно изображение",
-image_rel_multi:"Галлерея изображений",
-image_rel_empty:"Миниатюра изображения"
+image_rel_multi:"Галлерея изображений"
 });

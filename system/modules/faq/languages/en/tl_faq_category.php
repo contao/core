@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
  * @filesource
@@ -35,7 +37,6 @@ $GLOBALS['TL_LANG']['tl_faq_category']['headline']       = array('Headline', 'Pl
 $GLOBALS['TL_LANG']['tl_faq_category']['jumpTo']         = array('Redirect page', 'Please choose the FAQ reader page to which visitors will be redirected when clicking a FAQ.');
 $GLOBALS['TL_LANG']['tl_faq_category']['allowComments']  = array('Enable comments', 'Allow visitors to comment FAQs.');
 $GLOBALS['TL_LANG']['tl_faq_category']['notify']         = array('Notify', 'Please choose who to notify when comments are added.');
-$GLOBALS['TL_LANG']['tl_faq_category']['template']       = array('Comments template', 'Here you can select the comments template.');
 $GLOBALS['TL_LANG']['tl_faq_category']['sortOrder']      = array('Sort order', 'By default, comments are sorted ascending, starting with the oldest one.');
 $GLOBALS['TL_LANG']['tl_faq_category']['perPage']        = array('Comments per page', 'Number of comments per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_faq_category']['moderate']       = array('Moderate comments', 'Approve comments before they are published on the website.');

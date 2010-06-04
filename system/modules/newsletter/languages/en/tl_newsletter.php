@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -40,9 +42,10 @@ $GLOBALS['TL_LANG']['tl_newsletter']['template']      = array('E-mail template',
 $GLOBALS['TL_LANG']['tl_newsletter']['sendText']      = array('Send as plain text', 'Send the newsletter as plain text e-mail without the HTML content.');
 $GLOBALS['TL_LANG']['tl_newsletter']['senderName']    = array('Sender name', 'Here you can enter the sender\'s name.');
 $GLOBALS['TL_LANG']['tl_newsletter']['sender']        = array('Sender address', 'Here you can enter a custom sender address.');
-$GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'] = array('Send preview to', 'Send the preview of the newsletter to this e-mail address.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'] = array('Mails per cycle', 'The sending process is split into several cycles to prevent the script from timing out.');
 $GLOBALS['TL_LANG']['tl_newsletter']['timeout']       = array('Timeout in seconds', 'Here you can modify the waiting time between each cycle to control the number of e-mails per minute.');
+$GLOBALS['TL_LANG']['tl_newsletter']['start']         = array('Start cycle', 'In case the sending process is interrupted, you can enter the number of the cycle to continue with here. The counting starts at 0 for the first cycle!');
+$GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'] = array('Send preview to', 'Send the preview of the newsletter to this e-mail address.');
 
 
 /**
@@ -70,6 +73,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'There are no active subsc
 $GLOBALS['TL_LANG']['tl_newsletter']['from']        = 'From';
 $GLOBALS['TL_LANG']['tl_newsletter']['attachments'] = 'Attachments';
 $GLOBALS['TL_LANG']['tl_newsletter']['preview']     = 'Send preview';
+$GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm'] = 'Do you really want to send the newsletter?';
 
 
 /**

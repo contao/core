@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -44,13 +46,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},backendTheme,resultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,fancyUpload,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass'
+		'useSMTP'                     => 'smtpHost,smtpUser,smtpPass,smtpEnc,smtpPort'
 	),
 
 	// Fields
@@ -118,16 +120,15 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12')
 		),
-		'backendTheme' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['backendTheme'],
-			'inputType'               => 'select',
-			'options_callback'        => array('tl_settings', 'getThemes'),
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'resultsPerPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'],
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'maxResultsPerPage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -251,17 +252,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadPath'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false),
 			'save_callback' => array
 			(
 				array('tl_settings', 'checkUploadPath')
 			)
-		),
-		'fancyUpload' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['fancyUpload'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'uploadFields' => array
 		(
@@ -313,13 +308,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpHost'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'nospace'=>true, 'tl_class'=>'w50')
-		),
-		'smtpPort' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'nospace'=>true, 'tl_class'=>'long')
 		),
 		'smtpUser' => array
 		(
@@ -330,8 +319,21 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPass'],
+			'inputType'               => 'textStore',
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+		),
+		'smtpEnc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpEnc'],
+			'inputType'               => 'select',
+			'options'                 => array(''=>'-', 'ssl'=>'SSL', 'tls'=>'TLS'),
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'smtpPort' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['smtpPort'],
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'inactiveModules' => array
 		(
@@ -361,6 +363,12 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'sessionTimeout' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['sessionTimeout'],
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'autologin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['autologin'],
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
@@ -397,7 +405,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_settings extends Backend
@@ -441,29 +449,6 @@ class tl_settings extends Backend
 		}
 
 		natcasesort($arrReturn);
-		return $arrReturn;
-	}
-
-
-	/**
-	 * Return all back end themes as array
-	 * @return array
-	 */
-	public function getThemes()
-	{
-		$arrReturn = array();
-		$arrThemes = scan(TL_ROOT . '/system/themes');
-
-		foreach ($arrThemes as $strTheme)
-		{
-			if (substr($strTheme, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
-			{
-				continue;
-			}
-
-			$arrReturn[$strTheme] = $strTheme;
-		}
-
 		return $arrReturn;
 	}
 

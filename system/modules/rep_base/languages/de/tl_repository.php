@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
  * @filesource
@@ -28,7 +30,7 @@
 
 
 /**
- * TYPOlight Repository :: Language file for tl_repository (de)
+ * Contao Repository :: Language file for tl_repository (de)
  *
  * @copyright  Peter Koch 2008-2010
  * @author     Peter Koch, IBK Software AG
@@ -41,18 +43,17 @@
  */
 $GLOBALS['TL_LANG']['tl_repository']['category']      = array('Kategorie', 'Bitte wählen Sie die Erweiterungs-Kategorie.');
 $GLOBALS['TL_LANG']['tl_repository']['copyright']     = array('Urheberrecht', 'Hier können Sie einen Urheberrecht-Vermerk eingeben (z.B. &amp;copy; 2007,2008 ACME Holding Inc).');
-$GLOBALS['TL_LANG']['tl_repository']['demo']          = array('Demo vorhanden', 'Die kommerzielle Erweiterung kann auch ohne Schlüssel als Demoversion installiert werden.');
 $GLOBALS['TL_LANG']['tl_repository']['description']   = array('Beschreibung', 'Folgende HTML-Tags sind erlaubt: %s');
-$GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Erweiterung', 'Bitte wählen Sie den Namen der Erweiterung.');
+$GLOBALS['TL_LANG']['tl_repository']['extension']     = array('Erweiterung', 'Name der Erweiterung.');
 $GLOBALS['TL_LANG']['tl_repository']['functionality'] = array('Funktion', 'Bietet die Erweiterung die erwarteten Funktionen?');
 $GLOBALS['TL_LANG']['tl_repository']['license']       = array('Lizenz', 'Eingabe einer kurzen Lizenzinformation für freie Erweiterungen. Ausführliche Lizenzinformationen können z.B. in einer Datei LICENSE.txt hinterlegt werden.');
 $GLOBALS['TL_LANG']['tl_repository']['name']          = array('Name', 'Erweiterungsnamen müssen mit a-z, A-Z oder 0-9 beginnen, wobei bevorzugt die Kleinschreibung anzuwenden ist. Innerhalb des Namens sind zusätzlich die Zeichen _ und - erlaubt.');
 $GLOBALS['TL_LANG']['tl_repository']['popularity']    = array('Popularität', '%s/%s (Downloads/Install.)');
 $GLOBALS['TL_LANG']['tl_repository']['quality']       = array('Qualität', 'Wie robust ist die Erweiterung und wie einfach und logisch gestalten sich Installation und Unterhalt?');
-$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Freigabedatum', 'Eingabe des Veröffentlichungs-Datums dieser Freigabe im Format TT.MM.JJJJ.');
+$GLOBALS['TL_LANG']['tl_repository']['releasedate']   = array('Freigabedatum', 'Eingabe des Veröffentlichungsdatums dieser Freigabe im Format %s');
 $GLOBALS['TL_LANG']['tl_repository']['selversion']    = array('Version', 'Bitte wählen Sie die Version.');
 $GLOBALS['TL_LANG']['tl_repository']['type']          = array('Typ', 'Bitte wählen Sie den Erweiterung-Typ.');
-$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Bedienung', 'Werden die TYPOlight-Standards zur Bedienung und zur Zugänglichkeit eingehalten?');
+$GLOBALS['TL_LANG']['tl_repository']['usability']     = array('Bedienung', 'Werden die Contao-Standards zur Bedienung und zur Zugänglichkeit eingehalten?');
 $GLOBALS['TL_LANG']['tl_repository']['version']       = array('Version', 'Versionsnummern müssen im Format n.n.n s sein, wobei n ganze Zahlen sind und s eines der folgenden Texte ist: alpha1, alpha2, alpha3, beta1, beta2, beta3, rc1, rc2, rc3, stable');
 
 
@@ -74,7 +75,7 @@ $GLOBALS['TL_LANG']['tl_repository']['installs']          = 'Online-Installation
 $GLOBALS['TL_LANG']['tl_repository']['langtrans']         = '%s übers.';
 $GLOBALS['TL_LANG']['tl_repository']['manual']            = 'Handbuch';
 $GLOBALS['TL_LANG']['tl_repository']['no']                = 'nein';
-$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Keine Erweiterungen gefunden.';
+$GLOBALS['TL_LANG']['tl_repository']['noextensionsfound'] = 'Keine entsprechenden Erweiterungen gefunden.';
 $GLOBALS['TL_LANG']['tl_repository']['orderby']           = 'Sortieren nach';
 $GLOBALS['TL_LANG']['tl_repository']['otherlanguages']    = 'Andere Sprachen';
 $GLOBALS['TL_LANG']['tl_repository']['pageof']            = 'Seite %s von %s';

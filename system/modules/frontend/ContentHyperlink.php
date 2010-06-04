@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end content element "hyperlink".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ContentHyperlink extends ContentElement
@@ -101,7 +103,7 @@ class ContentHyperlink extends ContentElement
 		}
 
 		$this->Template->rel = $this->rel;
-		$this->Template->href = $this->url;
+		$this->Template->href = ampersand($this->url);
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;

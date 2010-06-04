@@ -1,7 +1,7 @@
-TYPOlight Extension Repository - License Conditions
----------------------------------------------------
+Contao Extension Repository - License Conditions
+------------------------------------------------
 
-This software was developed by Peter Koch (Acenes) and is property of:
+This software was developed by Peter Koch (community nick "Acenes") and is property of:
 
 	IBK Software AG
 	Bondastrasse 45
@@ -10,9 +10,8 @@ This software was developed by Peter Koch (Acenes) and is property of:
 
 Author Contact:
 
-	By email: peter@typolight.org
-	In the TYPOlight forum at http://www.typolight.org: username "Acenes"
-
+	http://ibk-software.com/contact
+	
 Disclaimer:
 
     This program is distributed in the hope that it will be useful,
@@ -31,11 +30,11 @@ Licenses and distribution conditions:
 
 	Modules rep_listrev, rep_autran, rep_server:
 
-		This software is licensed for exclusive use to the TYPOlight project. 
-		Distribution or usage outside of the official TYPOlight websites
+		This software is licensed for exclusive use to the Contao project. 
+		Distribution or usage outside of the official Contao websites
 		is prohibited without a written permission from IBK Software AG.
 
 ---
-Chur, 2008-26-07 
+Chur, 2010-31-05 
 Peter Koch
 IBK Software AG

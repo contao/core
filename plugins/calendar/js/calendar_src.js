@@ -20,7 +20,7 @@ var Calendar = new Class({
 		onShowStart: Class.empty,
 		onShowComplete: Class.empty,
 		pad: 1, // padding between multiple calendars
-		titleFormat: 'D M jS Y', // TYPOlight patch: hover title format 
+		titleFormat: 'D M jS Y', // Contao patch: hover title format 
 		tweak: {x: 0, y: 0} // tweak calendar positioning
 	},
 
@@ -428,7 +428,7 @@ var Calendar = new Class({
 			else {
 				kal.month = cal.month;
 				kal.year = cal.year;
-				$extend(kal, this.values(kal)); // TYPOlight patch (see #1089)
+				$extend(kal, this.values(kal)); // Contao patch (see #1089)
 			}
 		}, this);
 	},
@@ -533,7 +533,7 @@ var Calendar = new Class({
 			td.addClass(cls);
 
 			if (valid.contains(day)) { // if it's a valid - clickable - day we add interaction
-				td.setProperty('title', this.format(date, this.options.titleFormat)); // TYPOlight patch: variable title format
+				td.setProperty('title', this.format(date, this.options.titleFormat)); // Contao patch: variable title format
 				
 				td.addEvents({
 					'click': function(td, day, cal) { 
@@ -580,7 +580,7 @@ var Calendar = new Class({
 		if (el.get('tag') == 'select') { // select elements allow the user to manually set the date via select option
 			el.addEvent('change', function(cal) { this.changed(cal); }.pass(cal, this));
 		}
-		// TYPOlight patch: do not force the user to use the calendar
+		// Contao patch: do not force the user to use the calendar
 //		else { // input (type text) elements restrict the user to only setting the date via the calendar
 //			el.readOnly = true;
 //			el.addEvent('focus', function(cal) { this.toggle(cal); }.pass(cal, this));
@@ -818,8 +818,8 @@ var Calendar = new Class({
 	toggle: function(cal) {
 		document.removeEvent('mousedown', this.fn); // always remove the current mousedown script first
 
-		cal.button.blur(); // TYPOlight patch: blur the calendar button
-		cal.val = this.read(cal); // TYPOlight patch: update calendar val from inputs
+		cal.button.blur(); // Contao patch: blur the calendar button
+		cal.val = this.read(cal); // Contao patch: update calendar val from inputs
 			
 		if (cal.visible) { // simply hide curr cal						
 			cal.visible = false;
@@ -1106,7 +1106,7 @@ var Calendar = new Class({
 		
 		cal.els.each(function(el) {	// then we can set the value to the field
 			el.value = this.format(cal.val, el.format); 		
-			// TYPOlight patch (see #1089)
+			// Contao patch (see #1089)
 			el.fireEvent('change');
 			if (el.onchange) el.onchange();
 			// PATCH EOF

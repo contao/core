@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -50,18 +52,12 @@ $GLOBALS['BE_MOD'] = array
 	// Design modules
 	'design' => array
 	(
-		'modules' => array
+		'themes' => array
 		(
-			'tables' => array('tl_module')
-		),
-		'css' => array
-		(
-			'tables' => array('tl_style_sheet', 'tl_style'),
+			'tables' => array('tl_theme', 'tl_module', 'tl_style_sheet', 'tl_style', 'tl_layout'),
+			'importTheme' => array('Theme', 'importTheme'),
+			'exportTheme' => array('Theme', 'exportTheme'),
 			'import' => array('StyleSheets', 'importStyleSheet')
-		),
-		'layout' => array
-		(
-			'tables' => array('tl_layout')
 		),
 		'page' => array
 		(
@@ -138,6 +134,7 @@ $GLOBALS['BE_FFL'] = array
 (
 	'text'           => 'TextField',
 	'password'       => 'Password',
+	'textStore'      => 'TextStore',
 	'textarea'       => 'TextArea',
 	'select'         => 'SelectMenu',
 	'checkbox'       => 'CheckBox',
@@ -196,5 +193,11 @@ $GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
  * Hooks
  */
 $GLOBALS['TL_HOOKS'] = array();
+
+
+/**
+ * Mime types
+ */
+$GLOBALS['TL_MIME'] = array();
 
 ?>

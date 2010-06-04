@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Listing
  * @license    LGPL
  * @filesource
@@ -32,11 +34,17 @@
  *
  * Provide methods to render content element "listing".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleListing extends Module
 {
+
+	/**
+	 * Primary key
+	 * @var string
+	 */
+	protected $strPk = 'id';
 
 	/**
 	 * Template
@@ -59,25 +67,25 @@ class ModuleListing extends Module
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
 
-		// Return if table or fields are missing
-		if ($this->list_fields == '' || $this->list_table == '')
+		// Return if the table or the fields have not been set
+		if ($this->list_table == '' || $this->list_fields == '')
 		{
 			return '';
 		}
 
-		// Disable details page
-		if ($this->Input->get('id') && $this->list_info == '')
+		// Disable the details page
+		if ($this->Input->get('show') && $this->list_info == '')
 		{
 			return '';
 		}
 
-		// Fallback template
-		if (!strlen($this->list_layout))
+		// Fallback to the default template
+		if ($this->list_layout == '')
 		{
 			$this->list_layout = 'list_default';
 		}
@@ -96,8 +104,8 @@ class ModuleListing extends Module
 	{
 		$this->import('String');
 
-		$this->loadDataContainer($this->list_table);
 		$this->loadLanguageFile($this->list_table);
+		$this->loadDataContainer($this->list_table);
 
 		// List a single record
 		if ($this->Input->get('show'))
@@ -111,7 +119,7 @@ class ModuleListing extends Module
 
 
 		/**
-		 * Add search query
+		 * Add the search menu
 		 */
 		$strWhere = '';
 		$varKeyword = '';
@@ -140,7 +148,7 @@ class ModuleListing extends Module
 
 
 		/**
-		 * Get total number of records
+		 * Get the total number of records
 		 */
 		$strQuery = "SELECT COUNT(*) AS count FROM " . $this->list_table;
 
@@ -156,7 +164,7 @@ class ModuleListing extends Module
 		/**
 		 * Get the selected records
 		 */
-		$strQuery = "SELECT id," . $this->list_fields . " FROM " . $this->list_table;
+		$strQuery = "SELECT " . $this->strPk . "," . $this->list_fields . " FROM " . $this->list_table;
 
 		if ($this->list_where)
 		{
@@ -191,7 +199,7 @@ class ModuleListing extends Module
 
 
 		/**
-		 * Prepare URL
+		 * Prepare the URL
 		 */
 		$strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
 		$blnQuery = false;
@@ -210,7 +218,7 @@ class ModuleListing extends Module
 
 
 		/**
-		 * Prepare data arrays
+		 * Prepare the data arrays
 		 */
 		$arrTh = array();
 		$arrTd = array();
@@ -219,10 +227,17 @@ class ModuleListing extends Module
 		// THEAD
 		for ($i=0; $i<count($arrFields); $i++)
 		{
+			// Never show passwords
+			if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['inputType'] == 'password')
+			{
+				continue;
+			}
+
 			$class = '';
 			$sort = 'asc';
 			$strField = strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$arrFields[$i]]['label'][0]) ? $label : $arrFields[$i];
 
+			// Add a CSS class to the order_by column
 			if ($this->Input->get('order_by') == $arrFields[$i])
 			{
 				$sort = ($this->Input->get('sort') == 'asc') ? 'desc' : 'asc';
@@ -248,7 +263,8 @@ class ModuleListing extends Module
 
 			foreach ($arrRows[$i] as $k=>$v)
 			{
-				if ($k == 'id' || $GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
+				// Never show passwords
+				if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
 				{
 					continue;
 				}
@@ -260,9 +276,9 @@ class ModuleListing extends Module
 					'raw' => $v,
 					'content' => ($value ? $value : '&nbsp;'),
 					'class' => 'col_' . $j . (($j++ == 0) ? ' col_first' : '') . ($this->list_info ? '' : (($j >= (count($arrRows[$i]) - 1)) ? ' col_last' : '')),
-					'id' => $arrRows[$i]['id'],
+					'id' => $arrRows[$i][$this->strPk],
 					'field' => $k,
-					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i]['id']
+					'url' => $strUrl . $strVarConnector . 'show=' . $arrRows[$i][$this->strPk]
 				);
 			}
 		}
@@ -315,7 +331,7 @@ class ModuleListing extends Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->list_info = deserialize($this->list_info);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (strlen($this->list_info_where) ? $this->list_info_where . " AND " : "") . "id=?")
+		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (strlen($this->list_info_where) ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
 									->limit(1)
 									->execute($id);
 
@@ -326,11 +342,19 @@ class ModuleListing extends Module
 
 		$arrFields = array();
 		$arrRow = $objRecord->fetchAssoc();
+		$limit = count($arrRow);
 		$count = -1;
 
 		foreach ($arrRow as $k=>$v)
 		{
-			$class = 'row_' . ++$count . (($count == 0) ? ' row_first' : '') . (($count >= (count($arrRow) - 1)) ? ' row_last' : '') . ((($count % 2) == 0) ? ' even' : ' odd');
+			// Never show passwords
+			if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
+			{
+				--$limit;
+				continue;
+			}
+
+			$class = 'row_' . ++$count . (($count == 0) ? ' row_first' : '') . (($count >= ($limit - 1)) ? ' row_last' : '') . ((($count % 2) == 0) ? ' even' : ' odd');
 
 			$arrFields[$k] = array
 			(
@@ -357,7 +381,7 @@ class ModuleListing extends Module
 		$value = deserialize($value);
 
 		// Return if empty
-		if (!strlen($value))
+		if (empty($value))
 		{
 			return '';
 		}

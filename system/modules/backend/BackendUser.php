@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to manage back end users.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
 class BackendUser extends User
@@ -83,14 +85,14 @@ class BackendUser extends User
 		$session = $this->Session->getData();
 
 		// Main script
-		if ($this->Environment->script == 'typolight/main.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
+		if ($this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
 		{
 			$session['referer']['last'] = $session['referer']['current'];
 			$session['referer']['current'] = $this->Environment->requestUri;
 		}
 
 		// File manager
-		if ($this->Environment->script == 'typolight/files.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
+		if ($this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
 		{
 			$session['fileReferer']['last'] = $session['referer']['current'];
 			$session['fileReferer']['current'] = $this->Environment->requestUri;
@@ -161,20 +163,20 @@ class BackendUser extends User
 
 
 	/**
-	 * Redirect to typolight/index.php if authentication fails
+	 * Redirect to contao/index.php if authentication fails
 	 */
 	public function authenticate()
 	{
 		// Do not redirect if authentication is successful
-		if (parent::authenticate() || $this->Environment->script == 'typolight/index.php')
+		if (parent::authenticate() || $this->Environment->script == 'contao/index.php')
 		{
 			return;
 		}
 
-		$strRedirect = 'typolight/index.php';
+		$strRedirect = 'contao/index.php';
 
 		// Redirect to the last page visited on login
-		if ($this->Environment->script == 'typolight/main.php' || $this->Environment->script == 'typolight/preview.php')
+		if ($this->Environment->script == 'contao/main.php' || $this->Environment->script == 'contao/preview.php')
 		{
 			$strRedirect .= '?referer=' . base64_encode($this->Environment->request);
 		}
@@ -322,11 +324,13 @@ class BackendUser extends User
 		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
 		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
+		$GLOBALS['TL_CONFIG']['fancyUpload'] = $this->fancyUpload;
+		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
 		$GLOBALS['TL_CONFIG']['oldBeTheme'] = $this->oldBeTheme;
 
 		// Inherit permissions
 		$always = array('alexf');
-		$depends = array('modules', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
+		$depends = array('modules', 'themes', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
 		if (is_array($GLOBALS['TL_PERMISSIONS']) && count($GLOBALS['TL_PERMISSIONS'] > 0))

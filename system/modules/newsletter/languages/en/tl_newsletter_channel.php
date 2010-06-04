@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -34,9 +36,10 @@ $GLOBALS['TL_LANG']['tl_newsletter_channel']['title']    = array('Title', 'Pleas
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo']   = array('Redirect page', 'Please choose the newsletter reader page to which visitors will be redirected when clicking a newsletter.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['useSMTP']  = array('Custom SMTP server', 'Use a custom SMTP server for sending newsletters.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'] = array('SMTP hostname', 'Please enter the host name of the SMTP server.');
-$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'] = array('SMTP port number', 'Please enter the port number of the SMTP server.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'] = array('SMTP username', 'Here you can enter the SMTP username.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'] = array('SMTP password', 'Here you can enter the SMTP password.');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpEnc']  = array('SMTP encryption', 'Here you can choose an encryption method (SSL or TLS).');
+$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'] = array('SMTP port number', 'Please enter the port number of the SMTP server.');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['tstamp']   = array('Revision date', 'Date and time of the latest revision');
 
 

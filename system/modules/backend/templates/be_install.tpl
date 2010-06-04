@@ -2,24 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title>TYPOlight Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
+<title>Contao Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/install.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/install.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php if ($this->isMac): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php endif; ?>
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
-<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
-<script type="text/javascript" src="typolight/typolight.js"></script>
-<script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js"></script>
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
+<script type="text/javascript" src="contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
+<script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
 </head>
 <body>
 
 <div id="header">
-<h1>TYPOlight Open Source CMS <?php echo VERSION; ?></h1>
+<h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
 </div>
 
 <div id="container">
@@ -56,6 +56,12 @@
   <input type="text" name="username" id="username" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpUser']; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
   <input type="password" name="password" id="password" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPass']; ?>" />
+  <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
+  <div class="tl_checkbox_container" style="margin-top:3px;">
+    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $GLOBALS['TL_CONFIG']['ftpSSL'] ? ' checked="checked"' : ''; ?> /> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
+  </div>
+  <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPort']; ?></h4>
+  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPort']; ?>" />
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
@@ -992,6 +998,21 @@ Library.
   </div>
 </div>
 </form>
+<?php elseif ($this->is29Update): ?>
+
+<h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+
+<p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+<p><?php echo $GLOBALS['TL_LANG']['tl_install']['update29']; ?></p>
+
+<form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+<div class="tl_formbody_submit">
+  <input type="hidden" name="FORM_SUBMIT" value="tl_29update" />
+  <div class="tl_submit_container">
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();" />
+  </div>
+</div>
+</form>
 <?php elseif ($this->dbConnection): ?>
 
 <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></h3>
@@ -1102,7 +1123,7 @@ Library.
 <p><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][1]; ?></p>
 
 <?php endif; endif; endif; endif; endif; ?>
-<p id="go_to_login"><a href="typolight/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
+<p id="go_to_login"><a href="contao/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>
 </div>

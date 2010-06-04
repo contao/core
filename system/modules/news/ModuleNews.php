@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Parent class for news modules.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 abstract class ModuleNews extends Module
@@ -131,7 +133,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
 			$objTemplate->archive = $objArticles->archive;
 
-			// Display "read more" button if external link
+			// Display the "read more" button for external/article links
 			if (($objArticles->source == 'external' || $objArticles->source == 'article') && !strlen($objArticles->text))
 			{
 				$objTemplate->text = true;
@@ -178,6 +180,16 @@ abstract class ModuleNews extends Module
 			if ($objArticles->addEnclosure)
 			{
 				$this->addEnclosuresToTemplate($objTemplate, $objArticles->row());
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($objTemplate, $objArticles->row());
+				}
 			}
 
 			$arrArticles[] = $objTemplate->parse();

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -35,7 +37,7 @@ $GLOBALS['TL_LANG']['FFL']['explanation'] = array('Explanation', 'a custom field
 $GLOBALS['TL_LANG']['FFL']['html']        = array('HTML code', 'a custom field to insert HTML code.');
 $GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'a container for form fields with an optional legend.');
 $GLOBALS['TL_LANG']['FFL']['text']        = array('Text field', 'a single-line input field for a short or medium text.');
-$GLOBALS['TL_LANG']['FFL']['password']    = array('Password field', 'a single-line input field for a password. TYPOlight automatically adds a confirmation field.');
+$GLOBALS['TL_LANG']['FFL']['password']    = array('Password field', 'a single-line input field for a password. Contao automatically adds a confirmation field.');
 $GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'a multi-line input field for a medium or long text.');
 $GLOBALS['TL_LANG']['FFL']['select']      = array('Select menu', 'a single- or multi-line drop-down menu.');
 $GLOBALS['TL_LANG']['FFL']['radio']       = array('Radio button menu', 'a list of multiple options from which one can be selected.');

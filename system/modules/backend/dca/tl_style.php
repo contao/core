@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -41,6 +43,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
+			array('tl_style', 'checkPermission'),
 			array('tl_style', 'updateStyleSheet')
 		)
 	),
@@ -51,9 +54,8 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'filter'                  => true,
 			'fields'                  => array('sorting'),
-			'panelLayout'             => 'search,filter,limit',
+			'panelLayout'             => 'filter,search,limit',
 			'headerFields'            => array('name', 'tstamp', 'media'),
 			'child_record_callback'   => array('StyleSheets', 'compileDefinition')
 		),
@@ -433,7 +435,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_style extends Backend
@@ -446,8 +448,28 @@ class tl_style extends Backend
 	{
 		parent::__construct();
 
-		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js';
+		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css?'. MOO_RAINBOW . '|screen';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
+
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to edit the table
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		if (!$this->User->hasAccess('css', 'themes'))
+		{
+			$this->log('Not enough permissions to access the style sheets module', 'tl_style checkPermission', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
 	}
 
 

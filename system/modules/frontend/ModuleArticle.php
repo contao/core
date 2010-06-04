@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provides methodes to handle articles.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleArticle extends Module
@@ -71,10 +73,12 @@ class ModuleArticle extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		if ($this->blnNoMarkup)
 		{
 			$this->Template = new FrontendTemplate('mod_article_plain');
@@ -145,7 +149,6 @@ class ModuleArticle extends Module
 		// Overwrite the page title
 		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
-			global $objPage;
 			$objPage->pageTitle = $this->title;
 		}
 
@@ -178,19 +181,47 @@ class ModuleArticle extends Module
 			$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
 		}
 
-		if ($this->printable)
+		// Backwards compatibility
+		if ($this->printable == 1)
+		{
+			$this->Template->printable = true;
+			$this->Template->pdfButton = true;
+		}
+
+		// New structure
+		elseif ($this->printable != '')
+		{
+			$options = deserialize($this->printable);
+
+			if (is_array($options) && count($options) > 0)
+			{
+				$this->Template->printable = true;
+				$this->Template->printButton = in_array('print', $options);
+				$this->Template->pdfButton = in_array('pdf', $options);
+				$this->Template->facebookButton = in_array('facebook', $options);
+				$this->Template->twitterButton = in_array('twitter', $options);
+			}
+		}
+
+		// Add syndication variables
+		if ($this->Template->printable)
 		{
 			$request = ampersand($this->Environment->request, true);
 
-			if ($request == 'index.php')
+			if ($request == 'index.php' || $request == '')
 			{
-				$request = '';
+				$request = $this->generateFrontendUrl($objPage->row());
 			}
 
+			$this->Template->print = $request;
+			$this->Template->encUrl = rawurlencode($this->Environment->base . $this->Environment->request);
+			$this->Template->encTitle = rawurlencode($objPage->pageTitle);
 			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
-			$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
-			$this->Template->label = $GLOBALS['TL_LANG']['MSC']['printAsPdf'];
-			$this->Template->printable = true;
+
+			$this->Template->printTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printPage']);
+			$this->Template->pdfTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
+			$this->Template->facebookTitle = specialchars($GLOBALS['TL_LANG']['MSC']['facebookShare']);
+			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
 		}
 	}
 }

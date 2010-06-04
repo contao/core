@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to generate RSS/Atom feeds.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class Feed extends System
@@ -108,18 +110,18 @@ class Feed extends System
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 		$xml .= '  <channel>' . "\n";
-		$xml .= '    <title>' . specialchars($this->title, true) . '</title>' . "\n";
-		$xml .= '    <description>' . specialchars($this->description, true) . '</description>' . "\n";
+		$xml .= '    <title>' . specialchars($this->title) . '</title>' . "\n";
+		$xml .= '    <description>' . specialchars($this->description) . '</description>' . "\n";
 		$xml .= '    <link>' . specialchars($this->link) . '</link>' . "\n";
 		$xml .= '    <language>' . $this->language . '</language>' . "\n";
 		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
-		$xml .= '    <generator>TYPOlight Open Source CMS</generator>' . "\n";
+		$xml .= '    <generator>Contao Open Source CMS</generator>' . "\n";
 		$xml .= '    <atom:link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '    <item>' . "\n";
-			$xml .= '      <title>' . specialchars($objItem->title, true) . '</title>' . "\n";
+			$xml .= '      <title>' . specialchars($objItem->title) . '</title>' . "\n";
 			$xml .= '      <description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>' . "\n";
 			$xml .= '      <link>' . specialchars($objItem->link) . '</link>' . "\n";
 			$xml .= '      <pubDate>' . date('r', $objItem->published) . '</pubDate>' . "\n";
@@ -152,18 +154,18 @@ class Feed extends System
 	{
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">' . "\n";
-		$xml .= '  <title>' . specialchars($this->title, true) . '</title>' . "\n";
-		$xml .= '  <subtitle>' . specialchars($this->description, true) . '</subtitle>' . "\n";
+		$xml .= '  <title>' . specialchars($this->title) . '</title>' . "\n";
+		$xml .= '  <subtitle>' . specialchars($this->description) . '</subtitle>' . "\n";
 		$xml .= '  <link rel="alternate" href="' . specialchars($this->link) . '" />' . "\n";
 		$xml .= '  <id>' . specialchars($this->link) . '</id>' . "\n";
 		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
-		$xml .= '  <generator>TYPOlight Open Source CMS</generator>' . "\n";
+		$xml .= '  <generator>Contao Open Source CMS</generator>' . "\n";
 		$xml .= '  <link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />' . "\n";
 
 		foreach ($this->arrItems as $objItem)
 		{
 			$xml .= '  <entry>' . "\n";
-			$xml .= '    <title>' . specialchars($objItem->title, true) . '</title>' . "\n";
+			$xml .= '    <title>' . specialchars($objItem->title) . '</title>' . "\n";
 			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>' . "\n";
 			$xml .= '    <link rel="alternate" href="' . specialchars($objItem->link) . '" />' . "\n";
 			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
@@ -192,7 +194,7 @@ class Feed extends System
  *
  * Provide methods to generate RSS/Atom feed items.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class FeedItem extends System

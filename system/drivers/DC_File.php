@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to edit the local configuration file.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class DC_File extends DataContainer implements editable
@@ -226,15 +228,27 @@ class DC_File extends DataContainer implements editable
 
 					$this->strField = $vv;
 					$this->strInputName = $vv;
+					$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
 
 					// Handle entities
 					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text' || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'textarea')
 					{
-						$this->varValue = htmlspecialchars($GLOBALS['TL_CONFIG'][$this->strField]);
-					}
-					else
-					{
-						$this->varValue = $GLOBALS['TL_CONFIG'][$this->strField];
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'])
+						{
+							$this->varValue = deserialize($this->varValue);
+						}
+
+						if (!is_array($this->varValue))
+						{
+							$this->varValue = htmlspecialchars($this->varValue);
+						}
+						else
+						{
+							foreach ($this->varValue as $k=>$v)
+							{
+								$this->varValue[$k] = htmlspecialchars($v);
+							}
+						}
 					}
 
 					// Call load_callback
@@ -372,8 +386,21 @@ window.addEvent(\'domready\', function()
 		// Handle entities
 		if ($arrData['inputType'] == 'text' || $arrData['inputType'] == 'textarea')
 		{
-			$varValue = $this->restoreBasicEntities($varValue);
-			$this->varValue = htmlspecialchars_decode($this->varValue);
+			$varValue = deserialize($varValue);
+
+			if (!is_array($varValue))
+			{
+				$varValue = $this->restoreBasicEntities($varValue);
+			}
+			else
+			{
+				foreach ($varValue as $k=>$v)
+				{
+					$varValue[$k] = $this->restoreBasicEntities($v);
+				}
+
+				$varValue = serialize($varValue);
+			}
 		}
 
 		// Call save_callback
@@ -425,22 +452,22 @@ window.addEvent(\'domready\', function()
 
 			foreach ($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__'] as $name)
 			{
-				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['multiple'])
+				$trigger = $GLOBALS['TL_CONFIG'][$name];
+
+				// Overwrite the trigger if the page is not reloaded
+				if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 				{
-					$trigger = $GLOBALS['TL_CONFIG'][$name];
+					$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
-					// Overwrite trigger if the page is not reloaded
-					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
 					{
-						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
-
-						if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
-						{
-							$trigger = $this->Input->post($key);
-						}
+						$trigger = $this->Input->post($key);
 					}
+				}
 
-					if ($trigger)
+				if ($trigger != '')
+				{
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['multiple'])
 					{
 						$sValues[] = $name;
 
@@ -450,11 +477,17 @@ window.addEvent(\'domready\', function()
 							$subpalettes[$name] = $GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$name];
 						}
 					}
-				}
+					else
+					{
+						$sValues[] = $trigger;
+						$key = $name .'_'. $trigger;
 
-				else
-				{
-					$sValues[] = $GLOBALS['TL_CONFIG'][$name];
+						// Look for a subpalette
+						if (strlen($GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$key]))
+						{
+							$subpalettes[$name] = $GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$key];
+						}
+					}
 				}
 			}
 
@@ -463,12 +496,10 @@ window.addEvent(\'domready\', function()
 			{
 				$names = array('default');
 			}
-
 			elseif (count($sValues) > 1)
 			{
 				$names = $this->combiner($sValues);
 			}
-
 			else
 			{
 				$names = array($sValues[0]);

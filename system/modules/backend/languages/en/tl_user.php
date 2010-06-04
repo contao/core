@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -30,30 +32,33 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['username']   = array('Username', 'Please enter a unique username.');
-$GLOBALS['TL_LANG']['tl_user']['name']       = array('Name', 'Please enter the first and last name.');
-$GLOBALS['TL_LANG']['tl_user']['email']      = array('E-mail address', 'Please enter a valid e-mail address.');
-$GLOBALS['TL_LANG']['tl_user']['language']   = array('Back end language', 'Here you can choose the back end language.');
-$GLOBALS['TL_LANG']['tl_user']['showHelp']   = array('Show explanation', 'Show a short explanation text below each input field.');
-$GLOBALS['TL_LANG']['tl_user']['thumbnails'] = array('Show thumbnail images', 'Show thumbnail images in the file manager.');
-$GLOBALS['TL_LANG']['tl_user']['useRTE']     = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
-$GLOBALS['TL_LANG']['tl_user']['oldBeTheme'] = array('Use the old form layout', 'Do not use the new collapsible two-column forms.');
-$GLOBALS['TL_LANG']['tl_user']['admin']      = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');
-$GLOBALS['TL_LANG']['tl_user']['groups']     = array('User groups', 'Here you can assign the user to one or more groups.');
-$GLOBALS['TL_LANG']['tl_user']['inherit']    = array('Permission inheritance', 'Here you can define which group permissions the user inherits.');
-$GLOBALS['TL_LANG']['tl_user']['group']      = array('Use group settings only', 'the user inherits only group permissions.');
-$GLOBALS['TL_LANG']['tl_user']['extend']     = array('Extend group settings', 'the group permissions are extended by individual ones.');
-$GLOBALS['TL_LANG']['tl_user']['custom']     = array('Use individual settings only', 'only individual permissions are applied.');
-$GLOBALS['TL_LANG']['tl_user']['modules']    = array('Back end modules', 'Here you can grant access to one or more back end modules.');
-$GLOBALS['TL_LANG']['tl_user']['pagemounts'] = array('Pagemounts', 'Here you can grant access to one or more pages (subpages are included automatically).');
-$GLOBALS['TL_LANG']['tl_user']['alpty']      = array('Allowed page types', 'Here you can select the page types you want to allow.');
-$GLOBALS['TL_LANG']['tl_user']['filemounts'] = array('Filemounts', 'Here you can grant access to one or more folders (subfolders will be included automatically).');
-$GLOBALS['TL_LANG']['tl_user']['forms']      = array('Allowed forms', 'Here you can grant access to one or more forms.');
-$GLOBALS['TL_LANG']['tl_user']['formp']      = array('Form permissions', 'Here you can define the form permissions.');
-$GLOBALS['TL_LANG']['tl_user']['disable']    = array('Deactivate', 'Temporarily disable the account.');
-$GLOBALS['TL_LANG']['tl_user']['start']      = array('Activate on', 'Automatically activate the account on this day.');
-$GLOBALS['TL_LANG']['tl_user']['stop']       = array('Deactivate on', 'Automatically deactivate the account on this day.');
-$GLOBALS['TL_LANG']['tl_user']['session']    = array('Purge data', 'Please select the data you want to purge.');
+$GLOBALS['TL_LANG']['tl_user']['username']     = array('Username', 'Please enter a unique username.');
+$GLOBALS['TL_LANG']['tl_user']['name']         = array('Name', 'Please enter the first and last name.');
+$GLOBALS['TL_LANG']['tl_user']['email']        = array('E-mail address', 'Please enter a valid e-mail address.');
+$GLOBALS['TL_LANG']['tl_user']['language']     = array('Back end language', 'Here you can choose the back end language.');
+$GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Back end theme', 'Here you can override the global back end theme.');
+$GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Show explanation', 'Show a short explanation text below each input field.');
+$GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Show thumbnail images', 'Show thumbnail images in the file manager.');
+$GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
+$GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('Use FancyUpload', 'If FancyUpload does not work properly in your web browser, you can deactivate the script here.');
+$GLOBALS['TL_LANG']['tl_user']['oldBeTheme']   = array('Use the old form layout', 'Do not use the new collapsible two-column forms.');
+$GLOBALS['TL_LANG']['tl_user']['admin']        = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');
+$GLOBALS['TL_LANG']['tl_user']['groups']       = array('User groups', 'Here you can assign the user to one or more groups.');
+$GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Permission inheritance', 'Here you can define which group permissions the user inherits.');
+$GLOBALS['TL_LANG']['tl_user']['group']        = array('Use group settings only', 'the user inherits only group permissions.');
+$GLOBALS['TL_LANG']['tl_user']['extend']       = array('Extend group settings', 'the group permissions are extended by individual ones.');
+$GLOBALS['TL_LANG']['tl_user']['custom']       = array('Use individual settings only', 'only individual permissions are applied.');
+$GLOBALS['TL_LANG']['tl_user']['modules']      = array('Back end modules', 'Here you can grant access to one or more back end modules.');
+$GLOBALS['TL_LANG']['tl_user']['themes']       = array('Theme modules', 'Here you can grant access to the theme modules.');
+$GLOBALS['TL_LANG']['tl_user']['pagemounts']   = array('Pagemounts', 'Here you can grant access to one or more pages (subpages are included automatically).');
+$GLOBALS['TL_LANG']['tl_user']['alpty']        = array('Allowed page types', 'Here you can select the page types you want to allow.');
+$GLOBALS['TL_LANG']['tl_user']['filemounts']   = array('Filemounts', 'Here you can grant access to one or more folders (subfolders will be included automatically).');
+$GLOBALS['TL_LANG']['tl_user']['forms']        = array('Allowed forms', 'Here you can grant access to one or more forms.');
+$GLOBALS['TL_LANG']['tl_user']['formp']        = array('Form permissions', 'Here you can define the form permissions.');
+$GLOBALS['TL_LANG']['tl_user']['disable']      = array('Deactivate', 'Temporarily disable the account.');
+$GLOBALS['TL_LANG']['tl_user']['start']        = array('Activate on', 'Automatically activate the account on this day.');
+$GLOBALS['TL_LANG']['tl_user']['stop']         = array('Deactivate on', 'Automatically deactivate the account on this day.');
+$GLOBALS['TL_LANG']['tl_user']['session']      = array('Purge data', 'Please select the data you want to purge.');
 
 
 /**

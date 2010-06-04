@@ -2,22 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: TYPOlight Open Source CMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> :: Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/login.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/login.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php if ($this->isMac): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <?php endif; ?>
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css" media="screen" /><![endif]-->
-<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
+<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
+<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
 </head>
 <body>
 
 <div id="header">
-<h1>TYPOlight Open Source CMS <?php echo VERSION; ?></h1>
+<h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
 </div>
 
 <div id="container">
@@ -57,14 +57,16 @@
 
 <div id="tl_license">
 
-<p>TYPOlight Open Source CMS :: Copyright ©2005-<?php echo date('Y'); ?> by Leo Feyer :: Extensions are
-  copyright of their respective owners :: Visit <a href="http://www.typolight.org" onclick="window.open(this.href); return false;">www.typolight.org</a>
+<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?>
+  by Leo Feyer :: Extensions are copyright of their respective owners :: Visit
+  <a href="http://www.contao.org" onclick="window.open(this.href); return false;">contao.org</a>
   for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 
-<p>TYPOlight is distributed in the hope that it will be useful but WITHOUT ANY WARRANTY :: Without even the
-  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE :: See the GNU Lesser General Public
-  License for more details :: TYPOlight is free software :: You can redistribute it and/or modify it under the
-  terms of the GNU Lesser General Public License (LGPL) as published by the Free Software Foundation.</p>
+<p>Contao is distributed in the hope that it will be useful but WITHOUT ANY
+  WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+  details. Contao is free software. You can redistribute it and/or modify it
+  under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
 
 </div>
 
@@ -80,14 +82,11 @@
 
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-window.addEvent('domready', function()
-{
-	$('username').focus();
-
-	if (parent.frames[0] && parent.frames[0].name == 'switch')
-	{
-		parent.location.reload();
-	}
+window.addEvent('domready', function() {
+  if (parent.frames[0] && parent.frames[0].name == 'switch') {
+    parent.location.reload();
+  }
+  $('username').focus();
 });
 //--><!]]>
 </script>

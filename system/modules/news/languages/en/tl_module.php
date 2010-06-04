@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -31,9 +33,9 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('News archives', 'Please select one or more news archives.');
-$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items only', 'Show only featured news items in the list.');
+$GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items', 'Here you can choose how featured items are handled.');
 $GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Total number of items', 'Here you can limit the total number of news items. Set to 0 to show all.');
-$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Jump to current period', 'Automatically jump to the current period if none is selected.');
+$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('No period selected', 'Here you can define what to display if no period is selected.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta fields', 'Here you can select the meta fields.');
 $GLOBALS['TL_LANG']['tl_module']['news_template']      = array('News template', 'Here you can select the news template.');
 $GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Archive format', 'Here you can choose the news archive format.');
@@ -44,8 +46,13 @@ $GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Show number of i
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_module']['news_day']   = 'Day';
-$GLOBALS['TL_LANG']['tl_module']['news_month'] = 'Month';
-$GLOBALS['TL_LANG']['tl_module']['news_year']  = 'Year';
+$GLOBALS['TL_LANG']['tl_module']['news_day']     = 'Day';
+$GLOBALS['TL_LANG']['tl_module']['news_month']   = 'Month';
+$GLOBALS['TL_LANG']['tl_module']['news_year']    = 'Year';
+$GLOBALS['TL_LANG']['tl_module']['hide_module']  = 'Hide the module';
+$GLOBALS['TL_LANG']['tl_module']['show_current'] = 'Jump to the current period';
+$GLOBALS['TL_LANG']['tl_module']['all_items']    = 'Show all news items';
+$GLOBALS['TL_LANG']['tl_module']['featured']     = 'Show featured news items only';
+$GLOBALS['TL_LANG']['tl_module']['unfeatured']   = 'Skip featured news items';
 
 ?>

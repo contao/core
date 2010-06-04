@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -53,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'mode'                    => 4,
 			'fields'                  => array('sent', 'date DESC', 'tstamp DESC'),
 			'headerFields'            => array('title', 'jumpTo', 'tstamp', 'useSMTP'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter;sort,search,limit',
 			'child_record_callback'   => array('tl_newsletter', 'listNewsletters')
 		),
 		'global_operations' => array
@@ -129,6 +131,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['subject'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
@@ -209,6 +213,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['senderName'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'inputType'               => 'text',
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
 		),
@@ -216,12 +222,15 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sent'],
 			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 11,
 			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true)
 		),
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['mailingDate'],
 			'filter'                  => true,
+			'sorting'                 => true,
 			'flag'                    => 8,
 			'eval'                    => array('rgxp'=>'datim')
 		)
@@ -234,7 +243,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_newsletter extends Backend
@@ -284,7 +293,7 @@ class tl_newsletter extends Backend
 				if (!strlen($this->Input->get('pid')) || !in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to create newsletters in channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -293,7 +302,7 @@ class tl_newsletter extends Backend
 				if (!in_array($this->Input->get('pid'), $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" to channel ID "'.$this->Input->get('pid').'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
 
@@ -307,13 +316,13 @@ class tl_newsletter extends Backend
 				if ($objChannel->numRows < 1)
 				{
 					$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				if (!in_array($objChannel->pid, $root))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -325,7 +334,7 @@ class tl_newsletter extends Backend
 				if (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_news checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objChannel = $this->Database->prepare("SELECT id FROM tl_newsletter WHERE pid=?")
@@ -334,7 +343,7 @@ class tl_newsletter extends Backend
 				if ($objChannel->numRows < 1)
 				{
 					$this->log('Invalid newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$session = $this->Session->getData();
@@ -346,7 +355,7 @@ class tl_newsletter extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Invalid command "'.$this->Input->get('act').'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				if ($this->Input->get('key') == 'send')
 				{
@@ -357,19 +366,19 @@ class tl_newsletter extends Backend
 					if ($objChannel->numRows < 1)
 					{
 						$this->log('Invalid newsletter ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 
 					if (!in_array($objChannel->pid, $root))
 					{
 						$this->log('Not enough permissions to send newsletter ID "'.$id.'" of newsletter channel ID "'.$objChannel->pid.'"', 'tl_newsletter checkPermission', TL_ERROR);
-						$this->redirect('typolight/main.php?act=error');
+						$this->redirect('contao/main.php?act=error');
 					}
 				}
 				elseif (!in_array($id, $root))
 				{
 					$this->log('Not enough permissions to access newsletter channel ID "'.$id.'"', 'tl_newsletter checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}

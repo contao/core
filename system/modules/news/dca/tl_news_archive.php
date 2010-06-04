@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -116,14 +118,14 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('protected', 'allowComments', 'makeFeed'),
+		'__selector__'                => array('allowComments', 'protected', 'makeFeed'),
 		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'allowComments'               => 'notify,template,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'protected'                   => 'groups',
 		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
 	),
@@ -161,17 +163,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'template' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['template'],
-			'default'                 => 'com_default',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('com_'),
-			'eval'                    => array('tl_class'=>'w50')
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
 		),
 		'sortOrder' => array
 		(
@@ -317,7 +309,7 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_news_archive extends Backend
@@ -434,7 +426,7 @@ class tl_news_archive extends Backend
 				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news archive ID "'.$this->Input->get('id').'"', 'tl_news_archive checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -457,7 +449,7 @@ class tl_news_archive extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' news archives', 'tl_news_archive checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}

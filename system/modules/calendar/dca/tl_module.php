@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -106,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 	'default'                 => 'event_full',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('event_'),
+	'options_callback'        => array('tl_module_calendar', 'getEventTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -116,9 +118,18 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'default'                 => 'cal_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('cal_'),
+	'options_callback'        => array('tl_module_calendar', 'getCalendarTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
+
+
+/**
+ * Add the comments template drop-down menu
+ */
+if (in_array('comments', Config::getInstance()->getActiveModules()))
+{
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader']);
+}
 
 
 /**
@@ -126,7 +137,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_module_calendar extends Backend
@@ -216,6 +227,28 @@ class tl_module_calendar extends Backend
   });
   //--><!]]>
   </script>';
+	}
+
+
+	/**
+	 * Return all event templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getEventTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('event_', $dc->activeRecord->pid);
+	}
+
+
+	/**
+	 * Return all calendar templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getCalendarTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('cal_', $dc->activeRecord->pid);
 	}
 }
 

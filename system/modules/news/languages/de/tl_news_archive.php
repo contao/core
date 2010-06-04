@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -34,7 +36,6 @@ $GLOBALS['TL_LANG']['tl_news_archive']['title']          = array('Titel', 'Bitte
 $GLOBALS['TL_LANG']['tl_news_archive']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Nachrichtenleser-Seite aus, zu der Besucher weitergeleitet werden, wenn Sie einen Beitrag anklicken.');
 $GLOBALS['TL_LANG']['tl_news_archive']['allowComments']  = array('Kommentare aktivieren', 'Besuchern das Kommentieren von Nachrichtenbeiträgen erlauben.');
 $GLOBALS['TL_LANG']['tl_news_archive']['notify']         = array('Benachrichtigung an', 'Bitte legen Sie fest, wer beim Hinzufügen neuer Kommentare benachrichtigt wird.');
-$GLOBALS['TL_LANG']['tl_news_archive']['template']       = array('Kommentartemplate', 'Hier können Sie das Template für Kommentare auswählen.');
 $GLOBALS['TL_LANG']['tl_news_archive']['sortOrder']      = array('Sortierung', 'Standardmäßig werden Kommentare aufsteigend sortiert, beginnend mit dem ältesten.');
 $GLOBALS['TL_LANG']['tl_news_archive']['perPage']        = array('Kommentare pro Seite', 'Anzahl an Kommentaren pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_news_archive']['moderate']       = array('Kommentare moderieren', 'Kommentare erst nach Bestätigung auf der Webseite veröffentlichen.');
@@ -49,7 +50,7 @@ $GLOBALS['TL_LANG']['tl_news_archive']['language']       = array('Feed-Sprache',
 $GLOBALS['TL_LANG']['tl_news_archive']['source']         = array('Export-Einstellungen', 'Hier können Sie festlegen, was exportiert werden soll.');
 $GLOBALS['TL_LANG']['tl_news_archive']['maxItems']       = array('Maximale Anzahl an Beiträgen', 'Hier können Sie die Anzahl der Beiträge limitieren. Geben Sie 0 ein, um alle zu exportieren.');
 $GLOBALS['TL_LANG']['tl_news_archive']['feedBase']       = array('Basis-URL', 'Bitte geben Sie die Basis-URL mit Protokoll (z.B. <em>http://</em>) ein.');
-$GLOBALS['TL_LANG']['tl_news_archive']['alias']          = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im Wurzelverzeichnis Ihrer TYPOlight-Installation erstellt, z.B. als <em>name.xml</em>.');
+$GLOBALS['TL_LANG']['tl_news_archive']['alias']          = array('Feed-Alias', 'Hier können Sie einen eindeutigen Dateinamen (ohne Endung) eingeben. Die XML-Datei wird automatisch im Wurzelverzeichnis Ihrer Contao-Installation erstellt, z.B. als <em>name.xml</em>.');
 $GLOBALS['TL_LANG']['tl_news_archive']['description']    = array('Feed-Beschreibung', 'Bitte geben Sie eine kurze Beschreibung des Nachrichten-Feeds ein.');
 $GLOBALS['TL_LANG']['tl_news_archive']['tstamp']         = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 

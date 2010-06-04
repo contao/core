@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -60,16 +62,21 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_numberOfItems'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_featured'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_featured'],
+	'default'                 => 'all_items',
 	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50 m12')
+	'inputType'               => 'select',
+	'options'                 => array('all_items', 'featured', 'unfeatured'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'select',
+	'options'                 => array('hide_module', 'show_current', 'all_items'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module']
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
@@ -89,7 +96,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'default'                 => 'news_latest',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'                 => $this->getTemplateGroup('news_'),
+	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
 	'eval'                    => array('tl_class'=>'w50')
 );
 
@@ -128,11 +135,20 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
 
 
 /**
+ * Add the comments template drop-down menu
+ */
+if (in_array('comments', Config::getInstance()->getActiveModules()))
+{
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader'] = str_replace('{protected_legend:hide}', '{comment_legend:hide},com_template;{protected_legend:hide}', $GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']);
+}
+
+
+/**
  * Class tl_module_news
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_module_news extends Backend
@@ -199,6 +215,17 @@ class tl_module_news extends Backend
   });
   //--><!]]>
   </script>';
+	}
+
+
+	/**
+	 * Return all news templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getNewsTemplates(DataContainer $dc)
+	{
+		return $this->getTemplateGroup('news_', $dc->activeRecord->pid);
 	}
 }
 

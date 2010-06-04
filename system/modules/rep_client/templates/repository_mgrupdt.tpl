@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to update the database
+ * Contao Repository :: Template to update the database
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
@@ -34,13 +34,14 @@ $tabindex = 1;
 </div>
 
 <div class="mod_repository_submit tl_formbody_submit">
+
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
   <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
 <?php endif; ?>
   <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>" />
 </div>
-</div>
 
+</div>
 </form>
 </div>

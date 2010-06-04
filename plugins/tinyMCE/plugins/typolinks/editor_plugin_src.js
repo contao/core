@@ -1,6 +1,8 @@
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,7 +20,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Plugins
  * @license    LGPL
  * @filesource
@@ -60,7 +62,7 @@
 				ed.windowManager.open({
 					file : url + '/typobox.html',
 					width : 360 + parseInt(ed.getLang('typobox.delta_width', 0)),
-					height : 230 + parseInt(ed.getLang('typobox.delta_height', 0)),
+					height : 256 + parseInt(ed.getLang('typobox.delta_height', 0)),
 					inline : 1
 				}, {
 					plugin_url : url
@@ -77,10 +79,10 @@
 
 		getInfo : function() {
 			return {
-				longname : 'TYPOlight plugin',
+				longname : 'Contao plugin',
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
-				infourl : 'http://www.typolight.org',
+				infourl : 'http://www.contao.org',
 				version : '3.2.7'
 			};
 		}

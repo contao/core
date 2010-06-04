@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle a regular front end page.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class PageRegular extends Frontend
@@ -51,6 +53,7 @@ class PageRegular extends Frontend
 
 		$objLayout = $this->getPageLayout($objPage->layout);
 		$objPage->template = strlen($objLayout->template) ? $objLayout->template : 'fe_page';
+		$objPage->templateGroup = $objLayout->templates;
 
 		// Initialize the template
 		$this->createTemplate($objPage, $objLayout);
@@ -141,14 +144,14 @@ class PageRegular extends Frontend
 	 */
 	protected function getPageLayout($intId)
 	{
-		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=?")
+		$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.id=?")
 									->limit(1)
 									->execute($intId);
 
 		// Fallback layout
 		if ($objLayout->numRows < 1)
 		{
-			$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE fallback=?")
+			$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.fallback=?")
 										->limit(1)
 										->execute(1);
 		}
@@ -191,13 +194,6 @@ class PageRegular extends Frontend
 		if (strlen($objPage->robots))
 		{
 			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '" />' . "\n";
-		}
-
-		// Add urchin ID if there is no back end user
-		if (!BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'BE_USER_AUTH') != $this->Input->cookie('BE_USER_AUTH'))
-		{
-			$this->Template->urchinId = $objLayout->urchinId;
-			$this->Template->urchinUrl = $this->Environment->ssl ? 'https://ssl.google-analytics.com/ga.js' : 'http://www.google-analytics.com/ga.js';
 		}
 
 		// Initialize margin
@@ -271,6 +267,8 @@ class PageRegular extends Frontend
 			}
 		}
 
+		$this->Template->framework = '';
+
 		// Add layout specific CSS
 		if (!empty($strFramework))
 		{
@@ -282,8 +280,20 @@ class PageRegular extends Frontend
 		}
 
 		// Include basic style sheets
-		$this->Template->framework .= '<link rel="stylesheet" href="system/typolight.css" type="text/css" media="screen" />' . "\n";
+		$this->Template->framework .= '<link rel="stylesheet" href="system/contao.css" type="text/css" media="screen" />' . "\n";
 		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
+
+		// MooTools scripts
+		if ($objLayout->mooSource == 'moo_googleapis')
+		{
+			$this->Template->mooScripts  = '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
+			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+		}
+		else
+		{
+			$this->Template->mooScripts  = '<script type="text/javascript" src="plugins/mootools/mootools-core.js?'. MOOTOOLS_CORE .'"></script>' . "\n";
+			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+		}
 
 		// Initialize sections
 		$this->Template->header = '';
@@ -313,7 +323,7 @@ class PageRegular extends Frontend
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 
-		// Add internal style sheets
+		// Internal style sheets
 		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
@@ -323,15 +333,21 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Add style sheets
+		// Default TinyMCE style sheet
+		if (file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		{
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css?' . filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') . '" type="text/css" media="screen" />' . "\n";
+		}
+
+		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT name, cc, media FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT tstamp, name, cc, media, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
 				$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-										 $objStylesheets->name . '.css',
+										 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
 										 implode(', ', deserialize($objStylesheets->media)));
 
 				if ($objStylesheets->cc)

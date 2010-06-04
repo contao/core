@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -105,6 +107,7 @@ $GLOBALS['TL_LANG']['CNT']['fm'] = 'Micronesia';
 $GLOBALS['TL_LANG']['CNT']['fo'] = 'Faroe Islands';
 $GLOBALS['TL_LANG']['CNT']['fr'] = 'France';
 $GLOBALS['TL_LANG']['CNT']['ga'] = 'Gabon';
+$GLOBALS['TL_LANG']['CNT']['gb'] = 'United Kingdom';
 $GLOBALS['TL_LANG']['CNT']['gd'] = 'Grenada';
 $GLOBALS['TL_LANG']['CNT']['ge'] = 'Georgia';
 $GLOBALS['TL_LANG']['CNT']['gf'] = 'French Guiana';
@@ -256,7 +259,6 @@ $GLOBALS['TL_LANG']['CNT']['tw'] = 'Taiwan';
 $GLOBALS['TL_LANG']['CNT']['tz'] = 'Tanzania';
 $GLOBALS['TL_LANG']['CNT']['ua'] = 'Ukraine';
 $GLOBALS['TL_LANG']['CNT']['ug'] = 'Uganda';
-$GLOBALS['TL_LANG']['CNT']['uk'] = 'United Kingdom';
 $GLOBALS['TL_LANG']['CNT']['um'] = 'United States Minor Outlying Islands';
 $GLOBALS['TL_LANG']['CNT']['us'] = 'United States';
 $GLOBALS['TL_LANG']['CNT']['uy'] = 'Uruguay';

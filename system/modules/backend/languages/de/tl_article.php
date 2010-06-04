@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -38,7 +40,7 @@ $GLOBALS['TL_LANG']['tl_article']['keywords']    = array('Suchbegriffe', 'Hier k
 $GLOBALS['TL_LANG']['tl_article']['teaserCssID'] = array('Teaser-CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen für das Teaser-Element eingeben.');
 $GLOBALS['TL_LANG']['tl_article']['showTeaser']  = array('Teasertext anzeigen', 'Den Teasertext anzeigen, wenn es mehrere Artikel gibt.');
 $GLOBALS['TL_LANG']['tl_article']['teaser']      = array('Teasertext', 'Der Teasertext kann auch mit dem Inhaltselement "Artikelteaser" dargestellt werden.');
-$GLOBALS['TL_LANG']['tl_article']['printable']   = array('Druckbar', 'Einen Link für den PDF-Export des Artikels hinzufügen.');
+$GLOBALS['TL_LANG']['tl_article']['printable']   = array('Syndikation', 'Hier legen Sie fest, welche Optionen verfügbar sind.');
 $GLOBALS['TL_LANG']['tl_article']['cssID']       = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_article']['space']       = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Artikel in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 $GLOBALS['TL_LANG']['tl_article']['published']   = array('Artikel veröffentlichen', 'Den Artikel auf der Webseite anzeigen.');
@@ -55,6 +57,10 @@ $GLOBALS['TL_LANG']['tl_article']['layout_legend']  = 'Layoutbereich und Suchbeg
 $GLOBALS['TL_LANG']['tl_article']['teaser_legend']  = 'Teasertext';
 $GLOBALS['TL_LANG']['tl_article']['expert_legend']  = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_article']['publish_legend'] = 'Veröffentlichung';
+$GLOBALS['TL_LANG']['tl_article']['print']          = 'Seite drucken';
+$GLOBALS['TL_LANG']['tl_article']['pdf']            = 'Artikel als PDF';
+$GLOBALS['TL_LANG']['tl_article']['facebook']       = 'Auf Facebook teilen';
+$GLOBALS['TL_LANG']['tl_article']['twitter']        = 'Auf Twitter teilen';
 
 
 /**

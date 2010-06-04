@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to modify files and folders.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 class Files
@@ -66,19 +68,9 @@ class Files
 		if (!is_object(self::$objInstance))
 		{
 			// Use FTP to modify files
-			if ($GLOBALS['TL_CONFIG']['useFTP'] && strlen($GLOBALS['TL_CONFIG']['ftpHost']) && strlen($GLOBALS['TL_CONFIG']['ftpUser']) && strlen($GLOBALS['TL_CONFIG']['ftpPass']))
+			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				// Connect to FTP server
-				if (($resConnection = ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) != false)
-				{
-					// Login
-					if (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
-					{
-						// Passive mode
-						ftp_pasv($resConnection, true);
-						self::$objInstance = new FTP($resConnection);
-					}
-				}
+				self::$objInstance = new FTP();
 			}
 
 			// HOOK: use the smhextended module

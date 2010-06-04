@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -44,8 +46,28 @@
 define('URL_SUFFIX', '.html');
 define('ENCODE_AMPERSANDS', true);
 define('SWITCH_ORDER', true);
-define('VERSION', '2.8');
-define('BUILD', '4');
+
+
+/**
+ * -------------------------------------------------------------------------
+ * CORE AND PLUGIN VERSIONS
+ * -------------------------------------------------------------------------
+ * 
+ * Version numbers are added to style sheets and JavaScript files to make
+ * the web browser reload those resources after a Contao update.
+ */
+define('VERSION', '2.9');
+define('BUILD', 'RC1');
+define('CALENDAR', '1.2.RC4');
+define('EDITAREA', '0.8.2');
+define('FANCYUPLOAD', '3.0');
+define('HIGHLIGHTER', '2.0.320');
+define('MEDIABOX', '1.2.0');
+define('MOO_RAINBOW', '1.2b2');
+define('MOOTOOLS_CORE', '1.2.4');
+define('MOOTOOLS_MORE', '1.2.4.4');
+define('SLIMBOX', '1.7');
+define('TABLESORT', '1.3.0');
 
 
 /**

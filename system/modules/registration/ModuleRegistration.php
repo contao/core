@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Registration
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end module "registration".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleRegistration extends Module
@@ -59,7 +61,7 @@ class ModuleRegistration extends Module
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
@@ -123,10 +125,10 @@ class ModuleRegistration extends Module
 		{
 			$arrCaptcha = array
 			(
-				'id'=>'registration',
-				'label'=>$GLOBALS['TL_LANG']['MSC']['securityQuestion'],
-				'mandatory'=>true,
-				'required'=>true,
+				'id' => 'registration',
+				'label' => $GLOBALS['TL_LANG']['MSC']['securityQuestion'],
+				'mandatory' => true,
+				'required' => true,
 				'tableless' => $this->tableless
 			);
 
@@ -333,7 +335,7 @@ class ModuleRegistration extends Module
 	{
 		$arrData['tstamp'] = time();
 		$arrData['login'] = $this->reg_allowLogin;
-		$arrData['activation'] = md5(uniqid('', true));
+		$arrData['activation'] = md5(uniqid(mt_rand(), true));
 		$arrData['dateAdded'] = $arrData['tstamp'];
 
 		// Set default groups

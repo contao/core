@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle database communication.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 abstract class Database
@@ -273,6 +275,26 @@ abstract class Database
 
 
 	/**
+	 * Return the field names of a particular table as array
+	 * @param  string
+	 * @param  boolean
+	 * @return array
+	 */
+	public function getFieldNames($strTable, $blnNoCache=false)
+	{
+		$arrNames = array();
+		$arrFields = $this->listFields($strTable, $blnNoCache);
+
+		foreach ($arrFields as $arrField)
+		{
+			$arrNames[] = $arrField['name'];
+		}
+
+		return $arrNames;
+	}
+
+
+	/**
 	 * Change the current database
 	 * @param  string
 	 * @return boolean
@@ -311,6 +333,25 @@ abstract class Database
 
 
 	/**
+	 * Lock tables
+	 * @param array
+	 */
+	public function lockTables($arrTables)
+	{
+		$this->lock_tables($arrTables);
+	}
+
+
+	/**
+	 * Unlock tables
+	 */
+	public function unlockTables()
+	{
+		$this->unlock_tables();
+	}
+
+
+	/**
 	 * Abstract database driver methods
 	 */
 	abstract protected function connect();
@@ -321,6 +362,8 @@ abstract class Database
 	abstract protected function rollback_transaction();
 	abstract protected function list_fields($strTable);
 	abstract protected function set_database($strDatabase);
+	abstract protected function lock_tables($arrTables);
+	abstract protected function unlock_tables();
 }
 
 
@@ -329,7 +372,7 @@ abstract class Database
  *
  * Provide methods to execute a database query.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 abstract class Database_Statement
@@ -734,7 +777,7 @@ abstract class Database_Statement
  *
  * Provide methods to handle a database result.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
 abstract class Database_Result

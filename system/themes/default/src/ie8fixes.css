@@ -1,6 +1,8 @@
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,107 +20,87 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
  */
 
 /* Navigation */
-#tl_helpBox
-{
+#tl_helpBox {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }
-#tl_ajaxOverlay
-{
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+#tl_ajaxOverlay {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
-.opacity
-{
+.opacity {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
 
 /* Listing */
-.tl_folder_list,.tl_folder_tlist
-{
+.tl_folder_list,.tl_folder_tlist {
 	padding:0 0 2px 0;
 }
-.tl_file_list
-{
+.tl_file_list {
 	padding:1px 0 2px 0;
 }
-label.tl_change_selected
-{
+label.tl_change_selected {
 	position:relative;
 	top:1px;
 }
-.tl_noopt
-{
+.tl_noopt {
 	margin:0;
 }
 
 /* Wizards */
-.tl_tablewizard td.tcontainer
-{
+.tl_tablewizard td.tcontainer {
 	height:75px;
 }
-.tl_optionwizard label
-{
+.tl_optionwizard label {
 	position:relative;
 	top:3px;
 	left:-3px
 }
-.tl_checkbox_wizard .fixed
-{
+.tl_checkbox_wizard .fixed {
 	position:relative;
 	top:4px;
 }
-.tl_checkbox_wizard span
-{
+.tl_checkbox_wizard span {
 	height:20px;
 	margin:-4px 0 0 0;
 }
-.tl_checkbox_wizard label
-{
+.tl_checkbox_wizard label {
 	position:relative;
 	top:-1px;
 }
 
 /* Forms */
-.tl_checkbox,.tl_radio
-{
+.tl_checkbox,.tl_radio {
 	margin:-4px 0 0 -2px;
 	vertical-align:middle;
 }
-.tl_checkbox_container,.tl_radio_container
-{
+.tl_checkbox_container,.tl_radio_container {
 	margin-top:2px;
 }
-.tl_col_1 .tl_checkbox
-{
+.tl_col_1 .tl_checkbox {
 	margin:0 0 -4px -3px;
 }
-.tl_tree_checkbox
-{
+.tl_tree_checkbox {
 	margin:-1px 0 0 0;
 }
-.tl_tree_radio
-{
+.tl_tree_radio {
 	margin:-2px 0 0 0;
 }
 
 /* BE 27 */
-fieldset.tl_tbox,fieldset.tl_box
-{
+fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:0;
 	background-position:left 7px;
 }
-fieldset.nolegend
-{
+fieldset.nolegend {
 	padding-top:12px;
 	background-position:left top;
 }
-fieldset.collapsed
-{
+fieldset.collapsed {
 	padding-bottom:12px;
 }

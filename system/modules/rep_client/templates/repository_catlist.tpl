@@ -1,7 +1,7 @@
 <?php
 
 /**
- * TYPOlight Repository :: Template to display a list of extensions
+ * Contao Repository :: Template to display a list of extensions
  *
  * @package    Repository
  * @copyright  Peter Koch 2008-2010
@@ -27,21 +27,21 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <div class="tl_panel">
 
-<select name="repository_tag" id="repository_tag" class="tl_select<?php if ($rep->f_tag!='') echo ' active'; ?>" onchange="this.form.submit()">
+<div class="tl_filter tl_subpanel">
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['filter']; ?>:</strong>
+<select name="repository_tag" id="repository_tag" class="tl_select<?php if ($rep->f_tag!='') echo ' active'; ?>">
   <option value=""><?php echo '-- '.$text['tag'].' --'; ?></option>
 <?php foreach ($rep->tags as $tag): ?>
   <option value="<?php echo $tag->item; ?>"<?php if ($rep->f_tag==$tag->item) echo ' selected="selected"'; ?>><?php echo $tag->item; ?></option>
 <?php endforeach; ?>
 </select>
- 
-<select name="repository_type" id="repository_type" class="tl_select<?php if ($rep->f_type!='') echo ' active'; ?>" onchange="this.form.submit()">
+<select name="repository_type" id="repository_type" class="tl_select<?php if ($rep->f_type!='') echo ' active'; ?>">
   <option value=""><?php echo '-- '.$text['type'][0].' --'; ?></option>
 <?php foreach (array_keys($type_options) as $tpe): ?>
   <option value="<?php echo $tpe; ?>"<?php if ($rep->f_type==$tpe) echo ' selected="selected"'; ?>><?php echo $type_options[$tpe]; ?></option>
 <?php endforeach; ?>
 </select>
-
-<select name="repository_category" id="repository_category" class="tl_select<?php if ($rep->f_category!='') echo ' active'; ?>" onchange="this.form.submit()">
+<select name="repository_category" id="repository_category" class="tl_select<?php if ($rep->f_category!='') echo ' active'; ?>">
   <option value=""><?php echo '-- '.$text['category'][0].' --'; ?></option>
 <?php foreach (array_keys($category_options) as $cat): ?>
 <?php if ($cat != 'core'): ?>
@@ -49,51 +49,55 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <?php endif; ?>
 <?php endforeach; ?>
 </select>
-
-<select name="repository_state" id="repository_state" class="tl_select<?php if ($rep->f_state!='') echo ' active'; ?>" onchange="this.form.submit()">
+<select name="repository_state" id="repository_state" class="tl_select<?php if ($rep->f_state!='') echo ' active'; ?>">
   <option value=""><?php echo '-- '.$text['state'].' --'; ?></option>
 <?php foreach (array_keys($state_options) as $sta): ?>
   <option value="<?php echo $sta; ?>"<?php if ($rep->f_state==$sta) echo ' selected="selected"'; ?>><?php echo $state_options[$sta]; ?></option>
 <?php endforeach; ?>
 </select>
-
-<select name="repository_author" id="repository_author" class="tl_select<?php if ($rep->f_author!='') echo ' active'; ?>" onchange="this.form.submit()">
+<select name="repository_author" id="repository_author" class="tl_select<?php if ($rep->f_author!='') echo ' active'; ?>">
   <option value=""><?php echo '-- '.$text['author'].' --'; ?></option>
 <?php foreach ($rep->authors as $aut): ?>
   <option value="<?php echo $aut->item; ?>"<?php if ($rep->f_author==$aut->item) echo ' selected="selected"'; ?>><?php echo $aut->item; ?></option>
 <?php endforeach; ?>
 </select>
- 
 </div>
 
 <div class="clear"></div>
 
+</div>
 <div class="tl_panel">
 
-<select name="repository_page" id="repository_page" class="tl_select<?php if ($rep->f_page!='' && $rep->f_page!=1) echo ' active'; ?>" onchange="this.form.submit()">
+<div class="tl_submit_panel tl_subpanel">
+<input type="image" name="filter" id="filter" src="system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $text['apply']; ?>" value="<?php echo $text['apply']; ?>" />
+</div>
+
+<div class="tl_limit tl_subpanel">
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['showOnly']; ?>:</strong>
+<select name="repository_page" id="repository_page" class="tl_select active" onchange="this.form.submit()">
 <?php for ($page = 1; $page <= $rep->pages; $page++): ?>
   <option value="<?php echo $page; ?>"<?php if ($rep->f_page==$page) echo ' selected="selected"'; ?>><?php echo sprintf($text['pageof'], $page, $rep->pages); ?></option>
 <?php endfor; ?>
 </select>
+</div>
 
-<select name="repository_order" id="repository_order" class="tl_select<?php if ($rep->f_order!='' && $rep->f_order!='reldate') echo ' active'; ?>" onchange="this.form.submit()">
+<div class="tl_search tl_subpanel">
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['search']; ?>:</strong>
+<input type="text" name="repository_find" id="repository_find" value="<?php echo specialchars($rep->f_find); ?>" class="tl_text fulltextsearch<?php if ($rep->f_find!='') echo ' active'; ?>"/>
+</div>
+
+<div class="tl_sorting tl_subpanel">
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['sortBy']; ?>:</strong>
+<select name="repository_order" id="repository_order" class="tl_select">
 <?php foreach (array_keys($order_options) as $oby): ?>
   <option value="<?php echo $oby; ?>"<?php if ($rep->f_order==$oby) echo ' selected="selected"'; ?>><?php echo sprintf($text['byorder'], $order_options[$oby]); ?></option>
 <?php endforeach; ?>
 </select>
- 
-<input type="submit" name="repository_submit" id="repository_submit" class="tl_submit" value="<?php echo $text['apply']; ?>" />
-
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-document.getElementById('repository_submit').style.display = 'none';
-//--><!]]>
-</script>
-
 </div>
 
 <div class="clear"></div>
 
+</div>
 </div>
 </form>
 
@@ -122,13 +126,8 @@ document.getElementById('repository_submit').style.display = 'none';
 <tr class="info">
   <th><?php echo $text['releasedate'][0]; ?></th>
   <td><?php echo $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $ext->releasedate); ?></td>
-<?php if ($ext->type=='commercial'): ?> 
-  <th><?php echo $text['demo'][0]; ?></th>
-  <td><?php echo $ext->demo ? $text['yes'] : $text['no']; ?></td>
-<?php else: ?>
   <th><?php echo $text['license'][0]; ?></th>
   <td><?php echo $ext->license; ?></td>
-<?php endif; ?>
 </tr>
 <tr class="info">
   <th><?php echo $text['author']; ?></th>

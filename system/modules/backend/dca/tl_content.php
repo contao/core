@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -53,7 +55,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'mode'                    => 4,
 			'fields'                  => array('sorting'),
 			'panelLayout'             => 'filter;search,limit',
-			'headerFields'            => array('title', 'author', 'inColumn', 'tstamp', 'showTeaser', 'printable', 'published', 'start', 'stop'),
+			'headerFields'            => array('title', 'author', 'inColumn', 'tstamp', 'showTeaser', 'published', 'start', 'stop'),
 			'child_record_callback'   => array('tl_content', 'addCteType')
 		),
 		'global_operations' => array
@@ -115,7 +117,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'mooType', 'addImage', 'useImage', 'sortable', 'protected'),
+		'__selector__'                => array('type', 'mooType', 'addImage', 'sortable', 'useImage', 'protected'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend},{expert_legend:hide},guests,cssID,space',
@@ -143,10 +145,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'protected'                   => 'groups',
 		'addImage'                    => 'singleSRC,alt,size,imagemargin,imageUrl,fullsize,caption,floating',
 		'sortable'                    => 'sortIndex,sortOrder',
-		'useImage'                    => 'singleSRC,alt,size,caption'
+		'useImage'                    => 'singleSRC,alt,size,caption',
+		'protected'                   => 'groups'
 	),
 
 	// Fields
@@ -205,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
 		),
 		'size' => array
 		(
@@ -267,7 +269,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace')
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'editArea|html', 'helpwizard'=>true),
+			'explanation'             => 'insertTags'
 		),
 		'listtype' => array
 		(
@@ -375,7 +378,11 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('AS3', 'Bash', 'C', 'CSharp', 'CSS', 'Delphi', 'Diff', 'Groovy', 'Java', 'JavaFx', 'JavaScript', 'Perl', 'PHP', 'PowerShell', 'Python', 'Ruby', 'Scala', 'SQL', 'Text', 'VB', 'XHTML', 'XML'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'load_callback' => array
+			(
+				array('tl_content', 'setRteSyntax')
+			)
 		),
 		'shClass' => array
 		(
@@ -391,7 +398,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'tl_class'=>'clr')
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'editArea', 'helpwizard'=>true, 'tl_class'=>'clr'),
+			'explanation'             => 'insertTags'
 		),
 		'url' => array
 		(
@@ -485,7 +493,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['galleryTpl'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('gallery_')
+			'options_callback'        => array('tl_content', 'getGalleryTemplates')
 		),
 		'cteAlias' => array
 		(
@@ -587,7 +595,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv')
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
 		)
 	)
 );
@@ -598,7 +606,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_content extends Backend
@@ -624,12 +632,6 @@ class tl_content extends Backend
 			return;
 		}
 
-		$groups = $this->User->groups;
-
-		// Set default user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $groups[0];
-
 		// Get pagemounts
 		$pagemounts = array();
 
@@ -654,7 +656,7 @@ class tl_content extends Backend
 				// Check access to the article
 				if (!$this->checkAccessToElement(CURRENT_ID, $pagemounts, true))
 				{
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -666,7 +668,7 @@ class tl_content extends Backend
 				// Check access to the parent element if a content element is moved
 				if (($this->Input->get('act') == 'cutAll' || $this->Input->get('act') == 'copyAll') && !$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
 				{
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 
 				$objCes = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?")
@@ -682,7 +684,7 @@ class tl_content extends Backend
 				// Check access to the parent element if a content element is moved
 				if (!$this->checkAccessToElement($this->Input->get('pid'), $pagemounts, ($this->Input->get('mode') == 2)))
 				{
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				// NO BREAK STATEMENT HERE
 
@@ -690,7 +692,7 @@ class tl_content extends Backend
 				// Check access to the content element
 				if (!$this->checkAccessToElement($this->Input->get('id'), $pagemounts))
 				{
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}
@@ -788,7 +790,7 @@ class tl_content extends Backend
 	 */
 	public function editArticleAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -903,7 +905,7 @@ class tl_content extends Backend
 	 */
 	public function editForm(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -940,7 +942,7 @@ class tl_content extends Backend
 	 */
 	public function editModule(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=modules&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -951,14 +953,39 @@ class tl_content extends Backend
 	public function getModules()
 	{
 		$arrModules = array();
-		$objModules = $this->Database->execute("SELECT id, name FROM tl_module ORDER BY name");
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id ORDER BY t.name, m.name");
 
 		while ($objModules->next())
 		{
-			$arrModules[$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
+			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
 		}
 
 		return $arrModules;
+	}
+
+
+	/**
+	 * Return all gallery templates as array
+	 * @param object
+	 * @return array
+	 */
+	public function getGalleryTemplates(DataContainer $dc)
+	{
+		// Get the page ID
+		$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE pid=?)")
+								  ->limit(1)
+								  ->execute($dc->activeRecord->pid);
+
+		// Inherit the page settings
+		$objPage = $this->getPageDetails($objPage->id);
+
+		// Get the theme ID
+		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=?")
+									->limit(1)
+									->execute($objPage->layout);
+
+		// Return all gallery templates
+		return $this->getTemplateGroup('gallery_', $objLayout->pid);
 	}
 
 
@@ -969,7 +996,7 @@ class tl_content extends Backend
 	 */
 	public function editArticle(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="typolight/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top;"') . '</a>';
 	}
 
 
@@ -1032,6 +1059,79 @@ class tl_content extends Backend
 		}
 
 		return $arrArticle;
+	}
+
+
+	/**
+	 * Dynamically set the editArea syntax
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function setRteSyntax($varValue, DataContainer $dc)
+	{
+		switch ($dc->activeRecord->highlight)
+		{
+			case 'C':
+				$syntax = 'c';
+				break;
+
+			case 'CSharp':
+				$syntax = 'cpp';
+				break;
+
+			case 'XHTML':
+				$syntax = 'html';
+				break;
+
+			case 'Perl':
+				$syntax = 'perl';
+				break;
+
+			case 'Python':
+				$syntax = 'python';
+				break;
+
+			case 'Ruby':
+				$syntax = 'ruby';
+				break;
+
+			case 'JavaScript':
+				$syntax = 'js';
+				break;
+
+			case 'Java':
+			case 'JavaFX':
+				$syntax = 'java';
+				break;
+
+			case 'CSS':
+				$syntax = 'css';
+				break;
+
+			case 'PHP':
+				$syntax = 'php';
+				break;
+
+			case 'SQL':
+				$syntax = 'sql';
+				break;
+
+			case 'VB':
+				$syntax = 'vb';
+				break;
+
+			case 'XML':
+				$syntax = 'xml';
+				break;
+
+			default:
+				$syntax = '';
+				break;
+		}
+		
+		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'editArea|' . $syntax;
+		return $varValue;
 	}
 
 

@@ -1,11 +1,11 @@
--- **********************************************************
--- *                                                        *
--- * IMPORTANT NOTE                                         *
--- *                                                        *
--- * Do not import this file manually but use the TYPOlight *
--- * install tool to create and maintain database tables!   *
--- *                                                        *
--- **********************************************************
+-- ********************************************************
+-- *                                                      *
+-- * IMPORTANT NOTE                                       *
+-- *                                                      *
+-- * Do not import this file manually but use the Contao  *
+-- * install tool to create and maintain database tables! *
+-- *                                                      *
+-- ********************************************************
 
 -- 
 -- Table `tl_newsletter`
@@ -45,9 +45,10 @@ CREATE TABLE `tl_newsletter_channel` (
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `useSMTP` char(1) NOT NULL default '',
   `smtpHost` varchar(64) NOT NULL default '',
-  `smtpPort` smallint(5) unsigned NOT NULL default '0',
   `smtpUser` varchar(128) NOT NULL default '',
   `smtpPass` varchar(32) NOT NULL default '',
+  `smtpPort` smallint(5) unsigned NOT NULL default '0',
+  `smtpEnc` varchar(3) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -68,7 +69,8 @@ CREATE TABLE `tl_newsletter_recipients` (
   `ip` varchar(64) NOT NULL default '',
   `token` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`),
-  KEY `pid` (`pid`)
+  KEY `pid` (`pid`),
+  KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

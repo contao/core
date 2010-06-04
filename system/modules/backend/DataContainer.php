@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to handle data container arrays.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class DataContainer extends Backend
@@ -161,7 +163,7 @@ class DataContainer extends Backend
 		if ($arrData['exclude'])
 		{
 			$this->log('Field "'.$this->strField.'" ('.$this->strTable.') was excluded from being edited', 'DataContainer row()', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$xlabel = '';
@@ -172,16 +174,16 @@ class DataContainer extends Backend
 			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="'.specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']).'" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\');"');
 		}
 
-		// Add help wizard
+		// Add the help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="typolight/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="Help wizard" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="'.$GLOBALS['TL_LANG']['MSC']['helpWizard'].'" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
-		// Add popup file manager
-		if ($arrData['inputType'] == 'fileTree')
+		// Add the popup file manager
+		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
 		{
-			$xlabel .= ' <a href="typolight/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
+			$xlabel .= ' <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add table import wizard
@@ -256,7 +258,7 @@ class DataContainer extends Backend
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
-			if (in_array($this->strInputName, $paletteFields))
+			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
 
@@ -338,11 +340,27 @@ class DataContainer extends Backend
 		// No 2-column layout in "edit all" mode
 		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'overrideAll')
 		{
-			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12'), '', $arrData['eval']['tl_class']);
+			$arrData['eval']['tl_class'] = str_replace(array('w50', 'clr', 'wizard', 'long', 'm12', 'cbx'), '', $arrData['eval']['tl_class']);
+		}
+
+		$updateMode = '';
+
+		// Handle multi-select fields in "override all" mode
+		if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+		{
+			$updateMode = '
+</div>
+<div>
+  <h3 style="padding-top:7px"><label for="ctrl_'.$this->strInputName.'_update">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
+  <div id="ctrl_'.$this->strInputName.'_update" class="tl_radio_container">
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
+  </div>';
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
 </div>';
 	}
 
@@ -480,7 +498,7 @@ class DataContainer extends Backend
 			}
 		}
 
-		return $return;
+		return trim($return);
 	}
 
 

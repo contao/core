@@ -1,8 +1,10 @@
 <?php
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
  * @filesource
@@ -39,7 +41,7 @@ require('system/initialize.php');
  *
  * Main front end controller.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class Index extends Frontend
@@ -84,6 +86,14 @@ class Index extends Frontend
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$pageId = $objHandler->generate($this->getRootIdFromUrl(), true);
+		}
+
+		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
+		if ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
 		}
 
 		$time = time();
@@ -241,16 +251,16 @@ class Index extends Frontend
 		 * Copyright notice
 		 * 
 		 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
-		 * PERMITTED TO RUN TYPOlight WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
+		 * PERMITTED TO RUN CONTAO WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
 		 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
 		 */
 		$strBuffer = preg_replace
 		(
 			'/(<head[^>]*>)/',
 			"<!--\n\n"
-			. "\tThis website is powered by TYPOlight Open Source CMS :: Licensed under GNU/LGPL\n"
+			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
-			. "\tVisit the project website at http://www.typolight.org for more information\n\n"
+			. "\tVisit the project website at http://www.contao.org for more information\n\n"
 			. "//-->\n$1",
 			$strBuffer, 1
 		);

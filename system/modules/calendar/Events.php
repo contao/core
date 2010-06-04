@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Provide methods to get all events of a certain period from the database.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 abstract class Events extends Module
@@ -255,6 +257,12 @@ abstract class Events extends Module
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
+
+		// Display the "read more" button for external/article links
+		if (($objEvents->source == 'external' || $objEvents->source == 'article') && !strlen($objEvents->details))
+		{
+			$arrEvent['details'] = true;
+		}
 
 		// Clean RTE output
 		$arrEvent['details'] = str_ireplace

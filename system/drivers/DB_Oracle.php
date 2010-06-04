@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Driver class for Oracle databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Oracle extends Database
@@ -160,6 +162,21 @@ class DB_Oracle extends Database
 		@oci_rollback($this->resConnection);
 		$this->blnDisableAutocommit = false;
 	}
+
+
+	/**
+	 * Lock tables
+	 * @param array
+	 * @todo implement
+	 */
+	protected function lock_tables($arrTables) {}
+
+
+	/**
+	 * Unlock tables
+	 * @todo implement
+	 */
+	protected function unlock_tables() {}
 }
 
 
@@ -168,7 +185,7 @@ class DB_Oracle extends Database
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Oracle_Statement extends Database_Statement
@@ -306,7 +323,7 @@ class DB_Oracle_Statement extends Database_Statement
  *
  * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
 class DB_Oracle_Result extends Database_Result

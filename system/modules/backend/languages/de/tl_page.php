@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -51,7 +53,7 @@ $GLOBALS['TL_LANG']['tl_page']['autoforward']    = array('Zu einer anderen Seite
 $GLOBALS['TL_LANG']['tl_page']['protected']      = array('Seite schützen', 'Den Seiten-Zugriff auf bestimmte Mitgliedergruppen beschränken.');
 $GLOBALS['TL_LANG']['tl_page']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen dürfen auf die Seite zugreifen.');
 $GLOBALS['TL_LANG']['tl_page']['includeLayout']  = array('Ein Layout zuweisen', 'Der Seite und ihren Unterseiten ein Layout zuweisen.');
-$GLOBALS['TL_LANG']['tl_page']['layout']         = array('Seitenlayout', 'Seitenlayouts können mit dem Modul "Seitenlayouts" verwaltet werden.');
+$GLOBALS['TL_LANG']['tl_page']['layout']         = array('Seitenlayout', 'Seitenlayouts können mit dem Modul "Themes" verwaltet werden.');
 $GLOBALS['TL_LANG']['tl_page']['includeCache']   = array('Cachezeit festlegen', 'Eine Cachezeit für die Seite und ihre Unterseiten festlegen.');
 $GLOBALS['TL_LANG']['tl_page']['cache']          = array('Cachezeit', 'Nach Ablauf dieser Zeitdauer verfällt die zwischengespeicherte Version der Seite.');
 $GLOBALS['TL_LANG']['tl_page']['includeChmod']   = array('Zugriffsrechte zuweisen', 'Zugriffsrechte legen fest, was Backend-Benutzer mit der Seite tun dürfen.');

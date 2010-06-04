@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Highlighter
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end content element "code".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ContentCode extends ContentElement
@@ -53,7 +55,14 @@ class ContentCode extends ContentElement
 	{
 		if (TL_MODE == 'BE')
 		{
-			return '<pre>' . $this->code . '</pre>';
+			$return = '<pre>'. specialchars($this->code) .'</pre>';
+
+			if ($this->headline != '')
+			{
+				$return = '<'. $this->hl .'>'. $this->headline .'</'. $this->hl .'>'. $return;
+			}
+
+			return $return;
 		}
 
 		return parent::generate();
@@ -104,12 +113,12 @@ class ContentCode extends ContentElement
 			}
 
 			// Add CSS
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css';
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeTYPOlight.css';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css?'. HIGHLIGHTER .'|screen';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeContao.css?' . HIGHLIGHTER;
 
 			// Add scripts
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js?' . HIGHLIGHTER;
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
 
 			// Add head (do not add to scripts!)
 			$GLOBALS['TL_HEAD'][] = '<script type="text/javascript" src="plugins/highlighter/scripts/shInit.js"></script>';

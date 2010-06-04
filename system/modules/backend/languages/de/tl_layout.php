@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
  * @filesource
@@ -51,8 +53,8 @@ $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bit
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Seitentemplate', 'Hier können Sie das Seitentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Dokumenttyp-Definition', 'Bitte wählen Sie eine Dokumenttyp-Definition.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Sie können entweder das lokale MooTools-Skript verwenden oder es von einem Content Delivery Network laden.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
-$GLOBALS['TL_LANG']['tl_layout']['urchinId']      = array('Google Analytics Id', 'Beachten Sie, dass die Google Analytics Id nicht angezeigt wird, solange Sie im TYPOlight-Backend angemeldet sind.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Hier können Sie dem Body-Tag ein Onload-Attribut hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Zusätzliche &lt;head&gt;-Tags', 'Hier können Sie dem Head-Bereich der Seite individuelle Tags hinzufügen.');
@@ -74,6 +76,8 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Frontend-Module';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Skript-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Statisches Layout';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Die lokale Datei verwenden';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Von googleapis.com laden';
 
 
 /**
@@ -91,11 +95,13 @@ $GLOBALS['TL_LANG']['tl_layout']['after']        = 'Oberhalb der Fußzeile';
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_layout']['new']    = array('Neues Layout', 'Ein neues Layout anlegen');
-$GLOBALS['TL_LANG']['tl_layout']['show']   = array('Layoutdetails', 'Details des Layouts ID %s anzeigen');
-$GLOBALS['TL_LANG']['tl_layout']['edit']   = array('Layout bearbeiten', 'Layout ID %s bearbeiten');
-$GLOBALS['TL_LANG']['tl_layout']['copy']   = array('Layout duplizieren', 'Layout ID %s duplizieren');
-$GLOBALS['TL_LANG']['tl_layout']['delete'] = array('Layout löschen', 'Layout ID %s löschen');
+$GLOBALS['TL_LANG']['tl_layout']['new']        = array('Neues Layout', 'Ein neues Layout anlegen');
+$GLOBALS['TL_LANG']['tl_layout']['show']       = array('Layoutdetails', 'Details des Layouts ID %s anzeigen');
+$GLOBALS['TL_LANG']['tl_layout']['edit']       = array('Layout bearbeiten', 'Layout ID %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_layout']['cut']        = array('Layout verschieben ', 'Layout ID %s verschieben');
+$GLOBALS['TL_LANG']['tl_layout']['copy']       = array('Layout duplizieren', 'Layout ID %s duplizieren');
+$GLOBALS['TL_LANG']['tl_layout']['delete']     = array('Layout löschen', 'Layout ID %s löschen');
+$GLOBALS['TL_LANG']['tl_layout']['editheader'] = array('Theme bearbeiten', 'Die Theme-Einstellungen bearbeiten');
 
 
 /**

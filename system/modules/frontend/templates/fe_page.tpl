@@ -11,8 +11,7 @@
 <?php echo $this->robots; ?>
 <?php echo $this->framework; ?>
 <?php echo $this->stylesheets; ?>
-<script type="text/javascript" src="plugins/mootools/mootools-core.js"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js"></script>
+<?php echo $this->mooScripts; ?>
 <?php echo $this->head; ?>
 </head>
 
@@ -71,18 +70,5 @@
 <?php echo $this->mootools; ?>
 
 </div>
-<?php if ($this->urchinId): ?>
-
-<script type="text/javascript" src="<?php echo $this->urchinUrl; ?>"></script>
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-try {
-var pageTracker = _gat._getTracker("<?php echo $this->urchinId; ?>");
-pageTracker._trackPageview();
-} catch(err) {}
-//--><!]]>
-</script>
-
-<?php endif; ?>
 </body>
 </html>

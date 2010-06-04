@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
  * @filesource
@@ -57,9 +59,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		'sorting' => array
 		(
 			'mode'                    => 4,
-			'filter'                  => true,
 			'fields'                  => array('sorting'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter;sort,search,limit',
 			'headerFields'            => array('title', 'headline', 'jumpTo', 'tstamp', 'allowComments'),
 			'child_record_callback'   => array('tl_faq', 'listQuestions')
 		),
@@ -138,6 +139,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_faq']['question'],
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
 		),
@@ -159,6 +162,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'default'                 => $this->User->id,
 			'exclude'                 => true,
 			'search'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 1,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'tl_class'=>'w50')
@@ -193,7 +198,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'long')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'long')
 		),
 		'size' => array
 		(
@@ -279,6 +284,12 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'flag'                    => 2,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('doNotCopy'=>true)
+		),
+		'sorting' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['sorting'],
+			'sorting'                 => true,
+			'flag'                    => 2,
 		)
 	)
 );
@@ -289,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2008-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_faq extends Backend
@@ -431,7 +442,7 @@ class tl_faq extends Backend
 		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_faq::published', 'alexf'))
 		{
 			$this->log('Not enough permissions to publish/unpublish FAQ ID "'.$intId.'"', 'tl_faq toggleVisibility', TL_ERROR);
-			$this->redirect('typolight/main.php?act=error');
+			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->createInitialVersion('tl_faq', $intId);

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,19 +22,19 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
  * @filesource
  */
 
 
-#################################################################
-#                                                               #
-#  DO NOT CHANGE ANYTHING HERE! USE THE LOCAL CONFIGURATION     #
-#  FILE localconfig.php TO MODIFY THE TYPOlight CONFIGURATION!  #
-#                                                               #
-#################################################################
+##############################################################
+#                                                            #
+#  DO NOT CHANGE ANYTHING HERE! USE THE LOCAL CONFIGURATION  #
+#  FILE localconfig.php TO MODIFY THE CONTAO CONFIGURATION!  #
+#                                                            #
+##############################################################
 
 
 /**
@@ -52,18 +54,18 @@
  * If 'displayErrors' is set to true, error messages will be printed to the
  * screen. It is recommended to disable it for live pages.
  * 
- * With option rewriteURL you can make TYPOlight generate static URLs without
+ * With option rewriteURL you can make Contao generate static URLs without
  * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that
  * this feature requires Apache's mod_rewrite!
  * 
  * If you enable GZip, front end and back end pages will be compressed before
  * they are sent to your browser.
  *
- * The relative path to the TYPOlight directory is usually set automatically.
+ * The relative path to the Contao directory is usually set automatically.
  * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
  */
-$GLOBALS['TL_CONFIG']['websiteTitle']   = 'TYPOlight Open Source CMS';
+$GLOBALS['TL_CONFIG']['websiteTitle']   = 'Contao Open Source CMS';
 $GLOBALS['TL_CONFIG']['characterSet']   = 'UTF-8';
 $GLOBALS['TL_CONFIG']['adminEmail']     = '';
 $GLOBALS['TL_CONFIG']['enableSearch']   = true;
@@ -108,7 +110,7 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * cause problems e.g. if your server does not return a referer address. In
  * this case you can disable this feature here.
  */
-$GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><code><col><colgroup><dd><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
+$GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
 $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
 
@@ -159,6 +161,8 @@ $GLOBALS['TL_CONFIG']['ftpHost'] = '';
 $GLOBALS['TL_CONFIG']['ftpPath'] = '';
 $GLOBALS['TL_CONFIG']['ftpUser'] = '';
 $GLOBALS['TL_CONFIG']['ftpPass'] = '';
+$GLOBALS['TL_CONFIG']['ftpSSL']  = false;
+$GLOBALS['TL_CONFIG']['ftpPort'] = 21;
 
 
 /**
@@ -196,7 +200,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadPath']   = 'tl_files';
-$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,css,html,htm,fla,flv,swf,txt,ico';
+$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,ico,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
 $GLOBALS['TL_CONFIG']['maxFileSize']  = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']   = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']  = 600;
@@ -214,15 +218,17 @@ $GLOBALS['TL_CONFIG']['fancyUpload']  = true;
  * PHP function mail(). Please enter your SMTP parameters below.
  * 
  *   smtpHost = host name (defaults to localhost)
- *   smtpPort = defaults to 25 or 465 for SSL
  *   smtpUser = SMTP username
  *   smtpPass = SMTP password
+ *   smtpEnc  = SMTP encryption ("ssl" or "tls")
+ *   smtpPort = defaults to 25 or 465 for SSL
  */
 $GLOBALS['TL_CONFIG']['useSMTP']  = false;
 $GLOBALS['TL_CONFIG']['smtpHost'] = 'localhost';
-$GLOBALS['TL_CONFIG']['smtpPort'] = 25;
 $GLOBALS['TL_CONFIG']['smtpUser'] = '';
 $GLOBALS['TL_CONFIG']['smtpPass'] = '';
+$GLOBALS['TL_CONFIG']['smtpEnc']  = '';
+$GLOBALS['TL_CONFIG']['smtpPort'] = 25;
 
 
 /**
@@ -288,21 +294,22 @@ $GLOBALS['TL_CONFIG']['oldBeTheme'] = false;
  * Please enter a comma separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
  * 
- * The default install tool password is "typolight". Please make sure to change
+ * The default install tool password is "contao". Please make sure to change
  * this password during the installation process.
  */
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
+$GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
 $GLOBALS['TL_CONFIG']['customSections']       = '';
 $GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
 $GLOBALS['TL_CONFIG']['defaultUser']          = '';
 $GLOBALS['TL_CONFIG']['defaultGroup']         = '';
-$GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6');
+$GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'g4', 'g5', 'g6');
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
 $GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
-$GLOBALS['TL_CONFIG']['installPassword']      = '77e9b7542ac04858d99a0eaaf77adf54b5e18910';
+$GLOBALS['TL_CONFIG']['installPassword']      = '4d19f112e30930cbe278de966e9b2d907568d1c8';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
-$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.typolight.org/services/repository.wsdl';
+$GLOBALS['TL_CONFIG']['repository_wsdl']      = 'http://www.contao.org/services/repository.wsdl';
 $GLOBALS['TL_CONFIG']['repository_languages'] = 'en,de';
 $GLOBALS['TL_CONFIG']['repository_listsize']  = 10;
 $GLOBALS['TL_CONFIG']['backendTheme']         = 'default';
@@ -315,6 +322,7 @@ $GLOBALS['TL_CONFIG']['urlSuffix']            = '.html';
 $GLOBALS['TL_CONFIG']['exampleWebsite']       = '';
 $GLOBALS['TL_CONFIG']['minPasswordLength']    = 8;
 $GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
+$GLOBALS['TL_CONFIG']['autologin']            = 7776000;
 
 
 /**

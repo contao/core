@@ -21,7 +21,13 @@
     <td class="col_0 col_first"><label for="password"><?php echo $this->password; ?></label></td>
     <td class="col_1 col_last"><input type="password" name="password" id="password" class="text" maxlength="64" value="" /></td>
   </tr>
-  <tr class="row_2 row_last">
+<?php if ($this->autologin): ?>
+  <tr class="row_2">
+    <td class="col_0 col_first">&nbsp;</td>
+    <td class="col_1 col_last"><div class="checkbox_container"><input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox" /> <label for="autologin"><?php echo $this->autoLabel; ?></label></div></td>
+  </tr>
+<?php endif; ?>
+  <tr class="row_<?php echo $this->autologin ? 3 : 2; ?> row_last">
     <td class="col_0 col_first">&nbsp;</td>
     <td class="col_1 col_last"><div class="submit_container"><input type="submit" class="submit" value="<?php echo $this->slabel; ?>" /></div></td>
   </tr>

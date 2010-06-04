@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    TemplateEditor
  * @license    LGPL
  * @filesource
@@ -30,7 +32,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original templates', 'A copy of the selected template will be stored in the <em>templates</em> directory.');
+$GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original template', 'Here you can select the template that you want to customize.');
+$GLOBALS['TL_LANG']['tl_templates']['target']   = array('Target folder', 'A copy of the selected template will be stored in the target folder.');
 
 
 /**
@@ -39,14 +42,14 @@ $GLOBALS['TL_LANG']['tl_templates']['original'] = array('Original templates', 'A
 $GLOBALS['TL_LANG']['tl_templates']['headline'] = 'Add a new template';
 $GLOBALS['TL_LANG']['tl_templates']['newTpl']   = 'Create template';
 $GLOBALS['TL_LANG']['tl_templates']['exists']   = 'Template "%s" exists already!';
+$GLOBALS['TL_LANG']['tl_templates']['invalid']  = 'Invalid target directory "%s"!';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_templates']['new']    = array('New template', 'Create a new template');
-$GLOBALS['TL_LANG']['tl_templates']['edit']   = array('Rename template', 'Rename template "%s"');
-$GLOBALS['TL_LANG']['tl_templates']['source'] = array('Edit template', 'Edit template "%s"');
-$GLOBALS['TL_LANG']['tl_templates']['delete'] = array('Delete template', 'Delete template "%s"');
+$GLOBALS['TL_LANG']['tl_templates']['new_tpl']   = array('New template', 'Create a new template');
+$GLOBALS['TL_LANG']['tl_templates']['new']       = array('New folder', 'Create a new folder');
+$GLOBALS['TL_LANG']['tl_templates']['pasteinto'] = array('Paste into', 'Paste into this folder');
 
 ?>

@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
  * @filesource
@@ -122,13 +124,13 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},title,jumpTo;{smtp_legend:hide},useSMTP'
+		'default'                     => '{title_legend},title,jumpTo;{smtp_legend},useSMTP'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'useSMTP'                     => 'smtpHost,smtpPort,smtpUser,smtpPass'
+		'useSMTP'                     => 'smtpHost,smtpUser,smtpPass,smtpEnc,smtpPort'
 	),
 
 	// Fields
@@ -161,15 +163,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
-		),
-		'smtpPort' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'],
-			'default'                 => 25,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'long')
 		),
 		'smtpUser' => array
 		(
@@ -182,8 +176,24 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'],
 			'exclude'                 => true,
+			'inputType'               => 'textStore',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'tl_class'=>'w50')
+		),
+		'smtpEnc' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpEnc'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array(''=>'-', 'ssl'=>'SSL', 'tls'=>'TLS'),
+			'eval'                    => array('doNotShow'=>true, 'tl_class'=>'w50')
+		),
+		'smtpPort' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPort'],
+			'default'                 => 25,
+			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'hideInput'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
 		)
 	)
 );
@@ -194,7 +204,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class tl_newsletter_channel extends Backend
@@ -305,7 +315,7 @@ class tl_newsletter_channel extends Backend
 				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsletterp')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channel ID "'.$this->Input->get('id').'"', 'tl_newsletter_channel checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 
@@ -328,7 +338,7 @@ class tl_newsletter_channel extends Backend
 				if (strlen($this->Input->get('act')))
 				{
 					$this->log('Not enough permissions to '.$this->Input->get('act').' newsletter channels', 'tl_newsletter_channel checkPermission', TL_ERROR);
-					$this->redirect('typolight/main.php?act=error');
+					$this->redirect('contao/main.php?act=error');
 				}
 				break;
 		}

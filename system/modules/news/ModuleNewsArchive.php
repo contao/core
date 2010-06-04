@@ -1,8 +1,10 @@
 <?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
- * TYPOlight Open Source CMS
+ * Contao Open Source CMS
  * Copyright (C) 2005-2010 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
  *
  * This program is free software: you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,7 +22,7 @@
  *
  * PHP version 5
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
  * @filesource
@@ -32,7 +34,7 @@
  *
  * Front end module "news archive".
  * @copyright  Leo Feyer 2005-2010
- * @author     Leo Feyer <http://www.typolight.org>
+ * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class ModuleNewsArchive extends ModuleNews
@@ -59,14 +61,14 @@ class ModuleNewsArchive extends ModuleNews
 			$objTemplate->title = $this->headline;
 			$objTemplate->id = $this->id;
 			$objTemplate->link = $this->name;
-			$objTemplate->href = 'typolight/main.php?do=modules&amp;act=edit&amp;id=' . $this->id;
+			$objTemplate->href = 'contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->id;
 
 			return $objTemplate->parse();
 		}
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1 || (!$this->news_jumpToCurrent && !strlen($this->Input->get('month'))))
+		if (!is_array($this->news_archives) || count($this->news_archives) < 1 || ($this->news_jumpToCurrent == 'hide_module' && !isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day'])))
 		{
 			return '';
 		}
@@ -83,8 +85,8 @@ class ModuleNewsArchive extends ModuleNews
 		$limit = null;
 		$offset = 0;
 
-		// Jump to current period
-		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
+		// Jump to the current period
+		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']) && $this->news_jumpToCurrent != 'all_items')
 		{
 			switch ($this->news_format)
 			{
@@ -133,18 +135,25 @@ class ModuleNewsArchive extends ModuleNews
 			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objDate->tstamp);
 		}
 
+		// Show all items 
+		elseif ($this->news_jumpToCurrent == 'all_items')
+		{
+			$intBegin = 0;
+			$intEnd = time();
+		}
+
 		$time = time();
 
 		// Split result
 		if ($this->perPage > 0)
 		{
-			// Get total number of items
+			// Get the total number of items
 			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
 									   ->execute($intBegin, $intEnd);
 
 			$total = $objTotal->total;
 
-			// Get current page
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
 			if ($page > ($total/$this->perPage))
@@ -156,7 +165,7 @@ class ModuleNewsArchive extends ModuleNews
 			$limit = $this->perPage;
 			$offset = ((($page > 1) ? $page : 1) - 1) * $this->perPage;
 
-			// Add pagination menu
+			// Add the pagination menu
 			$objPagination = new Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
