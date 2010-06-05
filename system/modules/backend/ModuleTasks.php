@@ -107,6 +107,7 @@ class ModuleTasks extends BackendModule
 		$this->Database->execute("DELETE FROM tl_task_status WHERE pid NOT IN(SELECT id FROM tl_task)");
 
 		// Set default variables
+		$this->Template->apply = $GLOBALS['TL_LANG']['MSC']['apply'];
 		$this->Template->noTasks = $GLOBALS['TL_LANG']['tl_task']['noTasks'];
 		$this->Template->createTitle = $GLOBALS['TL_LANG']['tl_task']['new'][1];
 		$this->Template->createLabel = $GLOBALS['TL_LANG']['tl_task']['new'][0];

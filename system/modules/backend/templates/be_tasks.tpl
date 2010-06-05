@@ -6,7 +6,7 @@
 <div class="tl_panel">
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="filter" id="filter" src="system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" value="apply changes" />
+<input type="image" name="filter" id="filter" src="system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $this->apply; ?>" value="<?php echo $this->apply; ?>" />
 </div>
 
 <div class="tl_search tl_subpanel">

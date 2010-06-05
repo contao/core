@@ -48,28 +48,28 @@ $GLOBALS['TL_LANG']['SEC']['question3'] = 'Please calculate %d plus %d.';
  * Content elements
  */
 $GLOBALS['TL_LANG']['CTE']['texts']     = 'Text elements';
-$GLOBALS['TL_LANG']['CTE']['headline']  = array('Headline', 'generates a headline (h1 - h6).');
-$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'generates a rich text element.');
-$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'allows you to add custom HTML code.');
-$GLOBALS['TL_LANG']['CTE']['list']      = array('List', 'generates an ordered or unordered list.');
-$GLOBALS['TL_LANG']['CTE']['table']     = array('Table', 'generates an optionally sortable table.');
-$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Accordion', 'generates a mootools accordion pane.');
-$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'highlights code snippets and prints them to the screen.');
+$GLOBALS['TL_LANG']['CTE']['headline']  = array('Headline', 'Generates a headline (h1 - h6).');
+$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'Generates a rich text element.');
+$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'Allows you to add custom HTML code.');
+$GLOBALS['TL_LANG']['CTE']['list']      = array('List', 'Generates an ordered or unordered list.');
+$GLOBALS['TL_LANG']['CTE']['table']     = array('Table', 'Generates an optionally sortable table.');
+$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Accordion', 'Generates a mootools accordion pane.');
+$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'Highlights code snippets and prints them to the screen.');
 $GLOBALS['TL_LANG']['CTE']['links']     = 'Link elements';
-$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'generates a link to another website.');
-$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top link', 'generates a link to jump to the top of the page.');
+$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'Generates a link to another website.');
+$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top link', 'Generates a link to jump to the top of the page.');
 $GLOBALS['TL_LANG']['CTE']['images']    = 'Image elements';
-$GLOBALS['TL_LANG']['CTE']['image']     = array('Image', 'generates a stand-alone image.');
-$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Gallery', 'generates a lightbox image gallery.');
+$GLOBALS['TL_LANG']['CTE']['image']     = array('Image', 'Generates a stand-alone image.');
+$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Gallery', 'Generates a lightbox image gallery.');
 $GLOBALS['TL_LANG']['CTE']['files']     = 'File elements';
-$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'generates a link to download a file.');
-$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'generates multiple links to download files.');
+$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'Generates a link to download a file.');
+$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'Generates multiple links to download files.');
 $GLOBALS['TL_LANG']['CTE']['includes']  = 'Include elements';
-$GLOBALS['TL_LANG']['CTE']['article']   = array('Article', 'includes another article.');
-$GLOBALS['TL_LANG']['CTE']['alias']     = array('Content element', 'includes another content element.');
-$GLOBALS['TL_LANG']['CTE']['form']      = array('Form', 'includes a form.');
-$GLOBALS['TL_LANG']['CTE']['module']    = array('Module', 'includes a front end module.');
-$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Article teaser', 'displays the teaser text of an article.');
+$GLOBALS['TL_LANG']['CTE']['article']   = array('Article', 'Includes another article.');
+$GLOBALS['TL_LANG']['CTE']['alias']     = array('Content element', 'Includes another content element.');
+$GLOBALS['TL_LANG']['CTE']['form']      = array('Form', 'Includes a form.');
+$GLOBALS['TL_LANG']['CTE']['module']    = array('Module', 'Includes a front end module.');
+$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Article teaser', 'Displays the teaser text of an article.');
 
 
 /**

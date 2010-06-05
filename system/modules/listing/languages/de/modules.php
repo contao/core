@@ -38,6 +38,6 @@ $GLOBALS['TL_LANG']['MOD']['listing'] = array('Auflistung', 'Die Daten einer bel
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['listing'] = array('Auflistung', 'listet die Daten einer beliebigen Tabelle auf.');
+$GLOBALS['TL_LANG']['FMD']['listing'] = array('Auflistung', 'Listet die Daten einer beliebigen Tabelle auf.');
 
 ?>

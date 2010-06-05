@@ -32,20 +32,20 @@
 /**
  * Form fields
  */
-$GLOBALS['TL_LANG']['FFL']['headline']    = array('Headline', 'a custom field to insert a section headline.');
-$GLOBALS['TL_LANG']['FFL']['explanation'] = array('Explanation', 'a custom field to insert an explanation text.');
-$GLOBALS['TL_LANG']['FFL']['html']        = array('HTML code', 'a custom field to insert HTML code.');
-$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'a container for form fields with an optional legend.');
-$GLOBALS['TL_LANG']['FFL']['text']        = array('Text field', 'a single-line input field for a short or medium text.');
-$GLOBALS['TL_LANG']['FFL']['password']    = array('Password field', 'a single-line input field for a password. Contao automatically adds a confirmation field.');
-$GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'a multi-line input field for a medium or long text.');
-$GLOBALS['TL_LANG']['FFL']['select']      = array('Select menu', 'a single- or multi-line drop-down menu.');
-$GLOBALS['TL_LANG']['FFL']['radio']       = array('Radio button menu', 'a list of multiple options from which one can be selected.');
-$GLOBALS['TL_LANG']['FFL']['checkbox']    = array('Checkbox menu', 'a list of multiple options from which any can be selected.');
-$GLOBALS['TL_LANG']['FFL']['upload']      = array('File upload', 'a single-line input field to upload a local file to the server.');
-$GLOBALS['TL_LANG']['FFL']['hidden']      = array('Hidden field', 'a single-line input field that is not visible in the form.');
-$GLOBALS['TL_LANG']['FFL']['captcha']     = array('Security question', 'a simple math question to verify that the form is being submitted by a human (CAPTCHA).');
-$GLOBALS['TL_LANG']['FFL']['submit']      = array('Submit field', 'a button to submit the form.');
+$GLOBALS['TL_LANG']['FFL']['headline']    = array('Headline', 'A custom field to insert a section headline.');
+$GLOBALS['TL_LANG']['FFL']['explanation'] = array('Explanation', 'A custom field to insert an explanation text.');
+$GLOBALS['TL_LANG']['FFL']['html']        = array('HTML code', 'A custom field to insert HTML code.');
+$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'A container for form fields with an optional legend.');
+$GLOBALS['TL_LANG']['FFL']['text']        = array('Text field', 'A single-line input field for a short or medium text.');
+$GLOBALS['TL_LANG']['FFL']['password']    = array('Password field', 'A single-line input field for a password. Contao automatically adds a confirmation field.');
+$GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'A multi-line input field for a medium or long text.');
+$GLOBALS['TL_LANG']['FFL']['select']      = array('Select menu', 'A single- or multi-line drop-down menu.');
+$GLOBALS['TL_LANG']['FFL']['radio']       = array('Radio button menu', 'A list of multiple options from which one can be selected.');
+$GLOBALS['TL_LANG']['FFL']['checkbox']    = array('Checkbox menu', 'A list of multiple options from which any can be selected.');
+$GLOBALS['TL_LANG']['FFL']['upload']      = array('File upload', 'A single-line input field to upload a local file to the server.');
+$GLOBALS['TL_LANG']['FFL']['hidden']      = array('Hidden field', 'A single-line input field that is not visible in the form.');
+$GLOBALS['TL_LANG']['FFL']['captcha']     = array('Security question', 'A simple math question to verify that the form is being submitted by a human (CAPTCHA).');
+$GLOBALS['TL_LANG']['FFL']['submit']      = array('Submit field', 'A button to submit the form.');
 
 
 /**
@@ -59,16 +59,16 @@ $GLOBALS['TL_LANG']['tl_form_field']['html']           = array('HTML', 'You can 
 $GLOBALS['TL_LANG']['tl_form_field']['options']        = array('Options', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_form_field']['mandatory']      = array('Mandatory field', 'The form will not submit if the field is empty.');
 $GLOBALS['TL_LANG']['tl_form_field']['rgxp']           = array('Input validation', 'Validate the input against a regular expression.');
-$GLOBALS['TL_LANG']['tl_form_field']['digit']          = array('Numeric characters', 'allows numeric characters, minus (-), full stop (.) and space ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['alpha']          = array('Alphabetic characters', 'allows alphabetic characters, minus (-), full stop (.) and space ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['alnum']          = array('Alphanumeric characters', 'allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['extnd']          = array('Extended alphanumeric characters', 'allows everything except special characters which are usually encoded for security reasons (#/()<=>).');
-$GLOBALS['TL_LANG']['tl_form_field']['date']           = array('Date', 'checks whether the input matches the global date format.');
-$GLOBALS['TL_LANG']['tl_form_field']['time']           = array('Time', 'checks whether the input matches the global time format.');
-$GLOBALS['TL_LANG']['tl_form_field']['datim']          = array('Date and time', 'checks whether the input matches the global date and time format.');
-$GLOBALS['TL_LANG']['tl_form_field']['phone']          = array('Phone number', 'allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['email']          = array('E-mail address', 'checks whether the input is a valid e-mail address.');
-$GLOBALS['TL_LANG']['tl_form_field']['url']            = array('URL format', 'checks whether the input is a valid URL.');
+$GLOBALS['TL_LANG']['tl_form_field']['digit']          = array('Numeric characters', 'Allows numeric characters, minus (-), full stop (.) and space ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['alpha']          = array('Alphabetic characters', 'Allows alphabetic characters, minus (-), full stop (.) and space ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['alnum']          = array('Alphanumeric characters', 'Allows alphabetic and numeric characters, minus (-), full stop (.), underscore (_) and space ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['extnd']          = array('Extended alphanumeric characters', 'Allows everything except special characters which are usually encoded for security reasons (#/()<=>).');
+$GLOBALS['TL_LANG']['tl_form_field']['date']           = array('Date', 'Checks whether the input matches the global date format.');
+$GLOBALS['TL_LANG']['tl_form_field']['time']           = array('Time', 'Checks whether the input matches the global time format.');
+$GLOBALS['TL_LANG']['tl_form_field']['datim']          = array('Date and time', 'Checks whether the input matches the global date and time format.');
+$GLOBALS['TL_LANG']['tl_form_field']['phone']          = array('Phone number', 'Allows numeric characters, plus (+), minus (-), slash (/), parentheses () and space ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['email']          = array('E-mail address', 'Checks whether the input is a valid e-mail address.');
+$GLOBALS['TL_LANG']['tl_form_field']['url']            = array('URL format', 'Checks whether the input is a valid URL.');
 $GLOBALS['TL_LANG']['tl_form_field']['maxlength']      = array('Maximum length', 'Limit the field length to a certain number of characters (text) or bytes (file uploads).');
 $GLOBALS['TL_LANG']['tl_form_field']['size']           = array('Rows and columns', 'The number of rows and columns of the textarea.');
 $GLOBALS['TL_LANG']['tl_form_field']['multiple']       = array('Multiple selection', 'Allow visitors to select more than one option.');

@@ -30,19 +30,24 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <div class="tl_filter tl_subpanel">
 <strong><?php echo $GLOBALS['TL_LANG']['MSC']['filter']; ?>:</strong>
 <select name="repository_tag" id="repository_tag" class="tl_select<?php if ($rep->f_tag!='') echo ' active'; ?>">
-  <option value=""><?php echo '-- '.$text['tag'].' --'; ?></option>
+  <option value=""><?php echo $text['tag']; ?></option>
+  <option value="">---</option>
 <?php foreach ($rep->tags as $tag): ?>
   <option value="<?php echo $tag->item; ?>"<?php if ($rep->f_tag==$tag->item) echo ' selected="selected"'; ?>><?php echo $tag->item; ?></option>
 <?php endforeach; ?>
 </select>
 <select name="repository_type" id="repository_type" class="tl_select<?php if ($rep->f_type!='') echo ' active'; ?>">
-  <option value=""><?php echo '-- '.$text['type'][0].' --'; ?></option>
+  <option value=""><?php echo $text['type'][0]; ?></option>
+  <option value="">---</option>
 <?php foreach (array_keys($type_options) as $tpe): ?>
+<?php if ($tpe!='private'): ?>
   <option value="<?php echo $tpe; ?>"<?php if ($rep->f_type==$tpe) echo ' selected="selected"'; ?>><?php echo $type_options[$tpe]; ?></option>
+<?php endif; ?>
 <?php endforeach; ?>
 </select>
 <select name="repository_category" id="repository_category" class="tl_select<?php if ($rep->f_category!='') echo ' active'; ?>">
-  <option value=""><?php echo '-- '.$text['category'][0].' --'; ?></option>
+  <option value=""><?php echo $text['category'][0]; ?></option>
+  <option value="">---</option>
 <?php foreach (array_keys($category_options) as $cat): ?>
 <?php if ($cat != 'core'): ?>
   <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat): ?> selected="selected"<?php endif; ?>><?php echo $category_options[$cat]; ?></option>
@@ -50,13 +55,15 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <?php endforeach; ?>
 </select>
 <select name="repository_state" id="repository_state" class="tl_select<?php if ($rep->f_state!='') echo ' active'; ?>">
-  <option value=""><?php echo '-- '.$text['state'].' --'; ?></option>
+  <option value=""><?php echo $text['state']; ?></option>
+  <option value="">---</option>
 <?php foreach (array_keys($state_options) as $sta): ?>
   <option value="<?php echo $sta; ?>"<?php if ($rep->f_state==$sta) echo ' selected="selected"'; ?>><?php echo $state_options[$sta]; ?></option>
 <?php endforeach; ?>
 </select>
 <select name="repository_author" id="repository_author" class="tl_select<?php if ($rep->f_author!='') echo ' active'; ?>">
-  <option value=""><?php echo '-- '.$text['author'].' --'; ?></option>
+  <option value=""><?php echo $text['author']; ?></option>
+  <option value="">---</option>
 <?php foreach ($rep->authors as $aut): ?>
   <option value="<?php echo $aut->item; ?>"<?php if ($rep->f_author==$aut->item) echo ' selected="selected"'; ?>><?php echo $aut->item; ?></option>
 <?php endforeach; ?>

@@ -38,6 +38,6 @@ $GLOBALS['TL_LANG']['MOD']['listing'] = array('Listing', 'List the records of an
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['listing'] = array('Listing', 'lists the records of any table.');
+$GLOBALS['TL_LANG']['FMD']['listing'] = array('Listing', 'Lists the records of any table.');
 
 ?>

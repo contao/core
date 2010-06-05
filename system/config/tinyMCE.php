@@ -76,7 +76,7 @@ tinyMCE.init({
   template_external_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typotemplates.php",
   plugins : "advimage,autosave,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
-  content_css : "<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
+  content_css : "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css",
   event_elements : "a,div,h1,h2,h3,h4,h5,h6,img,p,span",
   extended_valid_elements : "q[cite|class|title]",
   tabfocus_elements : ":prev,:next",

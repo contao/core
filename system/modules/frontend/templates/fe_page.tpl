@@ -67,8 +67,9 @@
 <!-- indexer::stop -->
 <img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible" />
 <!-- indexer::continue -->
-<?php echo $this->mootools; ?>
 
 </div>
+<?php echo $this->mootools; ?>
+
 </body>
 </html>

@@ -39,9 +39,9 @@ $GLOBALS['TL_LANG']['MOD']['news'] = array('News', 'Manage news and export them 
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['news']        = 'News';
-$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Newslist', 'adds a list of news items to the page.');
-$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Newsreader', 'shows the details of a news item.');
-$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('News archive', 'adds a news archive to the page.');
-$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('News archive menu', 'generates a navigation menu to browse the news archive.');
+$GLOBALS['TL_LANG']['FMD']['newslist']    = array('Newslist', 'Adds a list of news items to the page.');
+$GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Newsreader', 'Shows the details of a news item.');
+$GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('News archive', 'Adds a news archive to the page.');
+$GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('News archive menu', 'Generates a navigation menu to browse the news archive.');
 
 ?>

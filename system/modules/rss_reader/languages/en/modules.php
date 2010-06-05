@@ -38,6 +38,6 @@ $GLOBALS['TL_LANG']['MOD']['rss_reader'] = array('RSS reader', 'Import RSS feeds
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['rss_reader'] = array('RSS reader', 'adds an RSS feed to the page.');
+$GLOBALS['TL_LANG']['FMD']['rss_reader'] = array('RSS reader', 'Adds an RSS feed to the page.');
 
 ?>

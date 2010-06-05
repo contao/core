@@ -39,9 +39,9 @@ $GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletters', 'Manage subscrip
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['newsletter']  = 'Newsletter';
-$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Subscribe', 'generates a form to subscribe to one or more channels.');
-$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Unsubscribe', 'generates a form to unsubscribe from one or more channels.');
-$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletter list', 'adds a list of newsletters to the page.');
-$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletter reader', 'shows the details of a newsletter.');
+$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Subscribe', 'Generates a form to subscribe to one or more channels.');
+$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Unsubscribe', 'Generates a form to unsubscribe from one or more channels.');
+$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletter list', 'Adds a list of newsletters to the page.');
+$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletter reader', 'Shows the details of a newsletter.');
 
 ?>

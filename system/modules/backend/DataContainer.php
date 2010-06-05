@@ -177,7 +177,7 @@ class DataContainer extends Backend
 		// Add the help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="'.$GLOBALS['TL_LANG']['MSC']['helpWizard'].'" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', 'Help wizard', 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="'.$GLOBALS['TL_LANG']['MSC']['helpWizard'].'" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
 		// Add the popup file manager

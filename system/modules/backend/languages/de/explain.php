@@ -51,9 +51,9 @@ $GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
-	array('Rich Text Editor', 'weitere Informationen zu TinyMCE finden Sie unter <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
-	array('Insert-Tags', 'weitere Informationen zu Insert-Tags finden Sie unter <a href="http://www.contao.org/inserttags.html" title="Contao Online-Dokumentation" onclick="window.open(this.href); return false;">http://www.contao.org/inserttags.html</a>.'),
-	array('Code Editor', 'weitere Informationen zu EditArea finden Sie unter <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.')
+	array('Rich Text Editor', 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
+	array('Insert-Tags', 'Weitere Informationen zu Insert-Tags finden Sie unter <a href="http://www.contao.org/inserttags.html" title="Contao Online-Dokumentation" onclick="window.open(this.href); return false;">http://www.contao.org/inserttags.html</a>.'),
+	array('Code Editor', 'Weitere Informationen zu EditArea finden Sie unter <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.')
 );
 
 
@@ -78,7 +78,7 @@ $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
-	array('Syntaxhervorhebung', 'weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" onclick="window.open(this.href); return false;">http://alexgorbatchev.com</a>.')
+	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" onclick="window.open(this.href); return false;">http://alexgorbatchev.com</a>.')
 );
 
 ?>

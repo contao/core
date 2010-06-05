@@ -32,20 +32,20 @@
 /**
  * Form fields
  */
-$GLOBALS['TL_LANG']['FFL']['headline']    = array('Überschrift', 'ein individuelles Feld zum Einfügen einer Bereichsüberschrift.');
-$GLOBALS['TL_LANG']['FFL']['explanation'] = array('Erklärung', 'ein individuelles Feld zum Einfügen eines Erklärungstexts.');
-$GLOBALS['TL_LANG']['FFL']['html']        = array('HTML', 'ein individuelles Feld zum Einfügen von HTML-Code.');
-$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'ein Container für Formularfelder mit einer optionalen Legende.');
-$GLOBALS['TL_LANG']['FFL']['text']        = array('Textfeld', 'ein einzeiliges Eingabefeld für einen kurzen oder mittellangen Text.');
-$GLOBALS['TL_LANG']['FFL']['password']    = array('Passwortfeld', 'ein einzeiliges Eingabefeld für ein Passwort. Contao fügt automatisch ein Bestätigungsfeld hinzu.');
-$GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'ein mehrzeiliges Eingabefeld für einen mittellangen oder langen Text.');
-$GLOBALS['TL_LANG']['FFL']['select']      = array('Select-Menü', 'ein ein- oder mehrzeiliges Drop-Down-Menü.');
-$GLOBALS['TL_LANG']['FFL']['radio']       = array('Radio-Button-Menü', 'eine Liste mehrerer Optionen, von denen eine ausgewählt werden kann.');
-$GLOBALS['TL_LANG']['FFL']['checkbox']    = array('Checkbox-Menü', 'eine Liste mehrerer Optionen, von denen beliebig viele ausgewählt werden können.');
-$GLOBALS['TL_LANG']['FFL']['upload']      = array('Datei-Upload', 'ein einzeiliges Eingabefeld zur Übertragung lokaler Dateien auf den Server.');
-$GLOBALS['TL_LANG']['FFL']['hidden']      = array('Verstecktes Feld', 'ein einzeiliges Eingabefeld, das im Formular nicht sichtbar ist.');
-$GLOBALS['TL_LANG']['FFL']['captcha']     = array('Sicherheitsfrage', 'eine einfache Rechenaufgabe zur Prüfung, ob das Formular von einem Menschen abgeschickt wurde (CAPTCHA).');
-$GLOBALS['TL_LANG']['FFL']['submit']      = array('Absendefeld', 'eine Absende-Schaltfläche zur Versendung des Formulars.');
+$GLOBALS['TL_LANG']['FFL']['headline']    = array('Überschrift', 'Ein individuelles Feld zum Einfügen einer Bereichsüberschrift.');
+$GLOBALS['TL_LANG']['FFL']['explanation'] = array('Erklärung', 'Ein individuelles Feld zum Einfügen eines Erklärungstexts.');
+$GLOBALS['TL_LANG']['FFL']['html']        = array('HTML', 'Ein individuelles Feld zum Einfügen von HTML-Code.');
+$GLOBALS['TL_LANG']['FFL']['fieldset']    = array('Fieldset', 'Ein Container für Formularfelder mit einer optionalen Legende.');
+$GLOBALS['TL_LANG']['FFL']['text']        = array('Textfeld', 'Ein einzeiliges Eingabefeld für einen kurzen oder mittellangen Text.');
+$GLOBALS['TL_LANG']['FFL']['password']    = array('Passwortfeld', 'Ein einzeiliges Eingabefeld für ein Passwort. Contao fügt automatisch ein Bestätigungsfeld hinzu.');
+$GLOBALS['TL_LANG']['FFL']['textarea']    = array('Textarea', 'Ein mehrzeiliges Eingabefeld für einen mittellangen oder langen Text.');
+$GLOBALS['TL_LANG']['FFL']['select']      = array('Select-Menü', 'Ein ein- oder mehrzeiliges Drop-Down-Menü.');
+$GLOBALS['TL_LANG']['FFL']['radio']       = array('Radio-Button-Menü', 'Eine Liste mehrerer Optionen, von denen eine ausgewählt werden kann.');
+$GLOBALS['TL_LANG']['FFL']['checkbox']    = array('Checkbox-Menü', 'Eine Liste mehrerer Optionen, von denen beliebig viele ausgewählt werden können.');
+$GLOBALS['TL_LANG']['FFL']['upload']      = array('Datei-Upload', 'Ein einzeiliges Eingabefeld zur Übertragung lokaler Dateien auf den Server.');
+$GLOBALS['TL_LANG']['FFL']['hidden']      = array('Verstecktes Feld', 'Ein einzeiliges Eingabefeld, das im Formular nicht sichtbar ist.');
+$GLOBALS['TL_LANG']['FFL']['captcha']     = array('Sicherheitsfrage', 'Eine einfache Rechenaufgabe zur Prüfung, ob das Formular von einem Menschen abgeschickt wurde (CAPTCHA).');
+$GLOBALS['TL_LANG']['FFL']['submit']      = array('Absendefeld', 'Eine Absende-Schaltfläche zur Versendung des Formulars.');
 
 
 /**
@@ -59,16 +59,16 @@ $GLOBALS['TL_LANG']['tl_form_field']['html']           = array('HTML-Code', 'Sie
 $GLOBALS['TL_LANG']['tl_form_field']['options']        = array('Optionen', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');
 $GLOBALS['TL_LANG']['tl_form_field']['mandatory']      = array('Pflichtfeld', 'Das Feld muss zum Abschicken des Formulars ausgefüllt werden.');
 $GLOBALS['TL_LANG']['tl_form_field']['rgxp']           = array('Eingabeprüfung', 'Die Eingaben anhand eines regulären Ausdrucks prüfen.');
-$GLOBALS['TL_LANG']['tl_form_field']['digit']          = array('Numerische Zeichen', 'erlaubt numerische Zeichen, Minus (-), Punkt (.) und Leerzeichen ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['alpha']          = array('Alphabetische Zeichen', 'erlaubt alphabetische Zeichen, Minus (-), Punkt (.) und Leerzeichen ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['alnum']          = array('Alphanumerische Zeichen', 'erlaubt alphabetische und numerische Zeichen, Minus (-), Punkt (.), Unterstrich (_) und Leerzeichen ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['extnd']          = array('Erweiterte alphanumerische Zeichen', 'erlaubt alle Zeichen außer denen, die normalerweise aus Sicherheitsgründen kodiert werden (#/()<=>).');
-$GLOBALS['TL_LANG']['tl_form_field']['date']           = array('Datum', 'prüft, ob die Eingabe dem globalen Datumsformat entspricht.');
-$GLOBALS['TL_LANG']['tl_form_field']['time']           = array('Uhrzeit', 'prüft, ob die Eingabe dem globalen Uhrzeitformat entspricht.');
-$GLOBALS['TL_LANG']['tl_form_field']['datim']          = array('Datum und Uhrzeit', 'prüft, ob die Eingabe dem globalen Datums- und Uhrzeitformat entspricht.');
-$GLOBALS['TL_LANG']['tl_form_field']['phone']          = array('Telefonnummer', 'erlaubt numerische Zeichen, Plus (+), Minus (-), Schrägstrich (/), Klammern () und Leerzeichen ( ).');
-$GLOBALS['TL_LANG']['tl_form_field']['email']          = array('E-Mail-Adresse', 'prüft, ob die Eingabe eine gültige E-Mail-Adresse ist.');
-$GLOBALS['TL_LANG']['tl_form_field']['url']            = array('URL Format', 'prüft, ob die Eingabe eine gültige URL ist.');
+$GLOBALS['TL_LANG']['tl_form_field']['digit']          = array('Numerische Zeichen', 'Erlaubt numerische Zeichen, Minus (-), Punkt (.) und Leerzeichen ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['alpha']          = array('Alphabetische Zeichen', 'Erlaubt alphabetische Zeichen, Minus (-), Punkt (.) und Leerzeichen ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['alnum']          = array('Alphanumerische Zeichen', 'Erlaubt alphabetische und numerische Zeichen, Minus (-), Punkt (.), Unterstrich (_) und Leerzeichen ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['extnd']          = array('Erweiterte alphanumerische Zeichen', 'Erlaubt alle Zeichen außer denen, die normalerweise aus Sicherheitsgründen kodiert werden (#/()<=>).');
+$GLOBALS['TL_LANG']['tl_form_field']['date']           = array('Datum', 'Prüft, ob die Eingabe dem globalen Datumsformat entspricht.');
+$GLOBALS['TL_LANG']['tl_form_field']['time']           = array('Uhrzeit', 'Prüft, ob die Eingabe dem globalen Uhrzeitformat entspricht.');
+$GLOBALS['TL_LANG']['tl_form_field']['datim']          = array('Datum und Uhrzeit', 'Prüft, ob die Eingabe dem globalen Datums- und Uhrzeitformat entspricht.');
+$GLOBALS['TL_LANG']['tl_form_field']['phone']          = array('Telefonnummer', 'Erlaubt numerische Zeichen, Plus (+), Minus (-), Schrägstrich (/), Klammern () und Leerzeichen ( ).');
+$GLOBALS['TL_LANG']['tl_form_field']['email']          = array('E-Mail-Adresse', 'Prüft, ob die Eingabe eine gültige E-Mail-Adresse ist.');
+$GLOBALS['TL_LANG']['tl_form_field']['url']            = array('URL Format', 'Prüft, ob die Eingabe eine gültige URL ist.');
 $GLOBALS['TL_LANG']['tl_form_field']['maxlength']      = array('Maximale Eingabelänge', 'Hier können Sie die maximale Anzahl an Zeichen (Text) bzw. Bytes (Datei-Uploads) festlegen.');
 $GLOBALS['TL_LANG']['tl_form_field']['size']           = array('Reihen und Spalten', 'Die Anzahl an Reihen und Spalten der Textarea.');
 $GLOBALS['TL_LANG']['tl_form_field']['multiple']       = array('Mehrfachauswahl', 'Erlaubt die Auswahl mehrerer Optionen.');

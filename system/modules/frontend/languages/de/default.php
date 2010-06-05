@@ -48,28 +48,28 @@ $GLOBALS['TL_LANG']['SEC']['question3'] = 'Bitte rechnen Sie %d plus %d.';
  * Content elements
  */
 $GLOBALS['TL_LANG']['CTE']['texts']     = 'Text-Elemente';
-$GLOBALS['TL_LANG']['CTE']['headline']  = array('Überschrift', 'erzeugt eine Überschrift (h1 - h6).');
-$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'erzeugt ein Rich-Text-Element.');
-$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'erlaubt das Hinzufügen von eigenem HTML-Code.');
-$GLOBALS['TL_LANG']['CTE']['list']      = array('Aufzählung', 'erzeugt eine geordnete oder ungeordnete Liste.');
-$GLOBALS['TL_LANG']['CTE']['table']     = array('Tabelle', 'erzeugt eine optional sortierbare Tabelle.');
-$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Akkordeon', 'erzeugt ein mootools Akkordeon-Element.');
-$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'gibt formatierten Programmcode auf dem Bildschirm aus.');
+$GLOBALS['TL_LANG']['CTE']['headline']  = array('Überschrift', 'Erzeugt eine Überschrift (h1 - h6).');
+$GLOBALS['TL_LANG']['CTE']['text']      = array('Text', 'Erzeugt ein Rich-Text-Element.');
+$GLOBALS['TL_LANG']['CTE']['html']      = array('HTML', 'Erlaubt das Hinzufügen von eigenem HTML-Code.');
+$GLOBALS['TL_LANG']['CTE']['list']      = array('Aufzählung', 'Erzeugt eine geordnete oder ungeordnete Liste.');
+$GLOBALS['TL_LANG']['CTE']['table']     = array('Tabelle', 'Erzeugt eine optional sortierbare Tabelle.');
+$GLOBALS['TL_LANG']['CTE']['accordion'] = array('Akkordeon', 'Erzeugt ein mootools Akkordeon-Element.');
+$GLOBALS['TL_LANG']['CTE']['code']      = array('Code', 'Gibt formatierten Programmcode auf dem Bildschirm aus.');
 $GLOBALS['TL_LANG']['CTE']['links']     = 'Link-Elemente';
-$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'erzeugt einen Verweis auf eine andere Webseite.');
-$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top-Link', 'erzeugt einen Link zum Seitenanfang.');
+$GLOBALS['TL_LANG']['CTE']['hyperlink'] = array('Hyperlink', 'Erzeugt einen Verweis auf eine andere Webseite.');
+$GLOBALS['TL_LANG']['CTE']['toplink']   = array('Top-Link', 'Erzeugt einen Link zum Seitenanfang.');
 $GLOBALS['TL_LANG']['CTE']['images']    = 'Bild-Elemente';
-$GLOBALS['TL_LANG']['CTE']['image']     = array('Bild', 'erzeugt ein einzelnes Bild.');
-$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Galerie', 'erzeugt eine lightbox Bildergalerie.');
+$GLOBALS['TL_LANG']['CTE']['image']     = array('Bild', 'Erzeugt ein einzelnes Bild.');
+$GLOBALS['TL_LANG']['CTE']['gallery']   = array('Galerie', 'Erzeugt eine lightbox Bildergalerie.');
 $GLOBALS['TL_LANG']['CTE']['files']     = 'Datei Elemente';
-$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'erzeugt einen Link zum Download einer Datei.');
-$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'erzeugt mehrere Links zum Download von Dateien.');
+$GLOBALS['TL_LANG']['CTE']['download']  = array('Download', 'Erzeugt einen Link zum Download einer Datei.');
+$GLOBALS['TL_LANG']['CTE']['downloads'] = array('Downloads', 'Erzeugt mehrere Links zum Download von Dateien.');
 $GLOBALS['TL_LANG']['CTE']['includes']  = 'Include-Elemente';
-$GLOBALS['TL_LANG']['CTE']['article']   = array('Artikel', 'fügt einen anderen Artikel ein.');
-$GLOBALS['TL_LANG']['CTE']['alias']     = array('Inhaltselement', 'fügt ein anderes Inhaltselement ein.');
-$GLOBALS['TL_LANG']['CTE']['form']      = array('Formular', 'fügt ein Formular ein.');
-$GLOBALS['TL_LANG']['CTE']['module']    = array('Modul', 'fügt ein Frontend-Modul ein.');
-$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Artikelteaser', 'zeigt den Teasertext eines Artikels an.');
+$GLOBALS['TL_LANG']['CTE']['article']   = array('Artikel', 'Fügt einen anderen Artikel ein.');
+$GLOBALS['TL_LANG']['CTE']['alias']     = array('Inhaltselement', 'Fügt ein anderes Inhaltselement ein.');
+$GLOBALS['TL_LANG']['CTE']['form']      = array('Formular', 'Fügt ein Formular ein.');
+$GLOBALS['TL_LANG']['CTE']['module']    = array('Modul', 'Fügt ein Frontend-Modul ein.');
+$GLOBALS['TL_LANG']['CTE']['teaser']    = array('Artikelteaser', 'Zeigt den Teasertext eines Artikels an.');
 
 
 /**

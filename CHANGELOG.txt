@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.9.RC1 (2010-06-04)
+Version 2.9.RC1 (2010-06-06)
 ----------------------------
 - Updated the Extension Repository to version 2
 - Changed the theme file extension to "cto" (#1986)

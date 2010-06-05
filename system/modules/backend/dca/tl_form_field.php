@@ -155,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_form_field', 'getFields'),
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
+			'reference'               => &$GLOBALS['TL_LANG']['FFL']
 		),
 		'name' => array
 		(

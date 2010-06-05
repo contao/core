@@ -32,7 +32,7 @@
 /**
  * Content elements
  */
-$GLOBALS['TL_LANG']['CTE']['comments'] = array('Comments', 'adds a comment form to the page.');
+$GLOBALS['TL_LANG']['CTE']['comments'] = array('Comments', 'Adds a comment form to the page.');
 
 
 /**

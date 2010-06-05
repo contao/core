@@ -72,7 +72,7 @@ tinyMCE.init({
   plugins : "autosave,directionality,inlinepopups,legacyoutput,paste,save,searchreplace,spellchecker,tabfocus,template,typolinks",
   spellchecker_languages : "<?php echo $this->getSpellcheckerString(); ?>",
   extended_valid_elements : "b/strong,i/em",
-  content_css : "<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css,<?php echo TL_PATH; ?>/system/themes/tinymce.css",
+  content_css : "<?php echo TL_PATH; ?>/system/themes/tinymce.css,<?php echo TL_PATH .'/'. $this->uploadPath; ?>/tinymce.css",
   tabfocus_elements : ":prev,:next",
   theme : "advanced",
   theme_advanced_resizing : true,

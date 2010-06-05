@@ -320,11 +320,7 @@ class RepositoryManager extends RepositoryBackendModule
 				if (count($exts)>0) {
 					foreach ($exts[0]->allversions as $ver)
 						array_unshift($rep->f_allversions, $ver->version);
-						
-					// get license key
-					$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
-							->execute($rep->f_extension);
-					if ($q->next()) $rep->f_lickey = $q->lickey;
+					$rep->f_enterkey = $exts[0]->type!='free';
 				} else {
 					$rep->f_extension_msg = 'extensionnotfound';
 					$rep->f_stage = $rep->inst_extension;
@@ -332,9 +328,19 @@ class RepositoryManager extends RepositoryBackendModule
 			} // if
 		} // if
 		
-		// skip license key if not commercial or private
-		if ($rep->f_stage==$rep->inst_lickey && $exts[0]->type!='commercial' && $exts[0]->type!='private') 
-			$rep->f_stage++;
+		if ($rep->f_stage==$rep->inst_lickey) {
+			if (!$rep->f_enterkey) {
+				// skip license key if not commercial or private
+				$rep->f_stage++;
+			} else {
+				if ($rep->f_lickey=='') {
+					// get license key
+					$q = $db->prepare("select * from `tl_repository_installs` where `extension`=?")
+							->execute($rep->f_extension);
+					if ($q->next()) $rep->f_lickey = $q->lickey;
+				} // if
+			} // if
+		} // if
 		
 		if ($rep->f_stage >= $rep->inst_actions) {
 			$act = '';

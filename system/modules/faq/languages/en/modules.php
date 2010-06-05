@@ -39,7 +39,7 @@ $GLOBALS['TL_LANG']['MOD']['faq'] = array('FAQ', 'Manage frequently asked questi
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['faq']       = 'FAQ';
-$GLOBALS['TL_LANG']['FMD']['faqlist']   = array('FAQ list', 'adds a list of frequently asked questions to the page.');
-$GLOBALS['TL_LANG']['FMD']['faqreader'] = array('FAQ reader', 'shows the answer to a frequently asked question.');
+$GLOBALS['TL_LANG']['FMD']['faqlist']   = array('FAQ list', 'Adds a list of frequently asked questions to the page.');
+$GLOBALS['TL_LANG']['FMD']['faqreader'] = array('FAQ reader', 'Shows the answer to a frequently asked question.');
 
 ?>

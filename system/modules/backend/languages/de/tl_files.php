@@ -32,7 +32,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'Contao fügt die Dateiendung automatisch ein.');
+$GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'Contao fügt die Dateiendung bei Dateien automatisch ein.');
 $GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('Datei-Upload', 'Durchsuchen Sie Ihren Computer und wählen Sie die Dateien, die Sie auf den Server übertragen möchten.');
 $GLOBALS['TL_LANG']['tl_files']['editor']     = array('Quelltexteditor', 'Hier können Sie den Quelltext der Datei bearbeiten.');
 
