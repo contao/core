@@ -241,27 +241,45 @@ abstract class Frontend extends Controller
 	 */
 	protected function getLoginStatus($strCookie)
 	{
-		if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH' && !$this->Input->cookie('FE_PREVIEW'))
-		{
-			$_SESSION['TL_USER_LOGGED_IN'] = false;
-			return false;
-		}
-
 		$hash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . $strCookie);
 
+		// Validate the cookie hash
 		if ($this->Input->cookie($strCookie) == $hash)
 		{
+			// Try to find the session
 			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
 										 ->limit(1)
 										 ->execute($hash, $strCookie);
 
+			// Validate the session ID and timeout
 			if ($objSession->numRows && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
+				// Disable the cache if a back end user is logged in
+				if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH')
+				{
+					$_SESSION['DISABLE_CACHE'] = true;
+
+					// Always return false if we are not in preview mode (show hidden elements)
+					if (!$this->Input->cookie('FE_PREVIEW'))
+					{
+						$_SESSION['TL_USER_LOGGED_IN'] = false;
+						return false;
+					}
+				}
+
+				// The session could be verified
 				$_SESSION['TL_USER_LOGGED_IN'] = true;
 				return true;
 			}
 		}
 
+		// Reset the cache settings
+		if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH')
+		{
+			$_SESSION['DISABLE_CACHE'] = false;
+		}
+
+		// The session could not be verified
 		$_SESSION['TL_USER_LOGGED_IN'] = false;
 		return false;
 	}
