@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.0 (2010-XX-XX)
+--------------------------
+- Fixed: double_encode in htmlspecialchars() is only available from PHP 5.2.3 (#2097)
+
 Version 2.9.RC1 (2010-06-06)
 ----------------------------
 - Updated the Extension Repository to version 2

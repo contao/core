@@ -263,7 +263,12 @@ function scan($strFolder)
  */
 function specialchars($strString)
 {
-	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
+	if (version_compare(PHP_VERSION, '5.2.3', '>='))
+	{
+		return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
+	}
+
+	return str_replace(array('&amp;amp;', '&amp;quot;', '&amp;lt;', '&amp;gt;'), array('&amp;', '&quot;', '&lt;', '&gt;'), htmlspecialchars($strString));
 }
 
 
