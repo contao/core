@@ -113,10 +113,11 @@ class RepositoryCatalog extends RepositoryBackendModule
 		
 		// process parameters and build query options
 		$options = array(
-			'languages'	=> $this->languages,
-			'sets'		=> 'sums,reviews',
-			'first'		=> ($rep->f_page-1) * $perpage,
-			'limit'		=> $perpage
+			'languages'     => $this->languages,
+			'compatibility'	=> Repository::encodeVersion(VERSION.'.'.BUILD),
+			'sets'          => 'sums,reviews',
+			'first'         => ($rep->f_page-1) * $perpage,
+			'limit'         => $perpage
 		);
 		if ($rep->f_tag		!= '') $options['tags']			= $rep->f_tag;
 		if ($rep->f_type 	!= '') $options['types']		= $rep->f_type;
