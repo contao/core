@@ -140,6 +140,8 @@ class FTP extends Files
 	public function mkdir($strDirectory)
 	{
 		$this->connect();
+		$this->validate($strDirectory);
+
 		return @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
 	}
 
@@ -152,6 +154,8 @@ class FTP extends Files
 	public function rmdir($strDirectory)
 	{
 		$this->connect();
+		$this->validate($strDirectory);
+
 		return @ftp_rmdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory);
 	}
 
@@ -164,6 +168,7 @@ class FTP extends Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
+		$this->validate($strFile);
 		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid(mt_rand(), true)), $strMode);
 
 		// Copy the temp file
@@ -218,6 +223,7 @@ class FTP extends Files
 	public function rename($strOldName, $strNewName)
 	{
 		$this->connect();
+		$this->validate($strOldName, $strNewName);
 
 		// Windows fix: delete target file
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists(TL_ROOT . '/' . $strNewName))
@@ -260,6 +266,7 @@ class FTP extends Files
 	public function copy($strSource, $strDestination)
 	{
 		$this->connect();
+		$this->validate($strSource, $strDestination);
 		$return = @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, TL_ROOT . '/' . $strSource, FTP_BINARY);
 		$this->chmod($strDestination, 0644);
 
@@ -275,6 +282,8 @@ class FTP extends Files
 	public function delete($strFile)
 	{
 		$this->connect();
+		$this->validate($strFile);
+
 		return @ftp_delete($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strFile);
 	}
 
@@ -288,6 +297,8 @@ class FTP extends Files
 	public function chmod($strFile, $varMode)
 	{
 		$this->connect();
+		$this->validate($strFile);
+
 		return @ftp_chmod($this->resConnection, $varMode, $GLOBALS['TL_CONFIG']['ftpPath'] . $strFile);
 	}
 
@@ -312,6 +323,8 @@ class FTP extends Files
 	public function move_uploaded_file($strSource, $strDestination)
 	{
 		$this->connect();
+		$this->validate($strSource, $strDestination);
+
 		return @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, $strSource, FTP_BINARY);
 	}
 }
