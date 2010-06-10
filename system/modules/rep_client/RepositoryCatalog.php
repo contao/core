@@ -67,6 +67,8 @@ class RepositoryCatalog extends RepositoryBackendModule
 	protected function listExtensions()
 	{
 		$rep = &$this->Template->rep;
+		$rep->f_page = 0;
+		
 		// returning from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			// get url parameters
@@ -107,24 +109,27 @@ class RepositoryCatalog extends RepositoryBackendModule
 		
 		if ($rep->f_order=='') $rep->f_order = 'popular';
 		
-		if ($rep->f_page < 1) $rep->f_page = 1;
 		$perpage = (int)trim($GLOBALS['TL_CONFIG']['repository_listsize']);
-		if ($perpage < 1) $perpage = 10;
+		if ($perpage < 0) $perpage = 0;
 		
 		// process parameters and build query options
 		$options = array(
-			'languages'     => $this->languages,
-			'compatibility'	=> Repository::encodeVersion(VERSION.'.'.BUILD),
-			'sets'          => 'sums,reviews',
-			'first'         => ($rep->f_page-1) * $perpage,
-			'limit'         => $perpage
+			'languages'		=> $this->languages,
+			'sets'			=> 'sums,reviews',
 		);
+		if ($rep->f_page>=0 && $perpage>0) {
+			$options['first'] = $rep->f_page * $perpage;
+			$options['limit'] = $perpage;
+		} // if
 		if ($rep->f_tag		!= '') $options['tags']			= $rep->f_tag;
 		if ($rep->f_type 	!= '') $options['types']		= $rep->f_type;
 		if ($rep->f_category!= '') $options['categories'] 	= $rep->f_category;
 		if ($rep->f_state	!= '') $options['states']		= $rep->f_state; 
 		if ($rep->f_author	!= '') $options['authors']		= $rep->f_author;
 		if ($rep->f_find	!= '') $options['find']			= $rep->f_find;
+		if (!$GLOBALS['TL_CONFIG']['repository_unsafe_catalog'])
+			$options['compatibility'] = Repository::encodeVersion(VERSION.'.'.BUILD);
+		
 		switch ($rep->f_order) {
 			case 'name'		: break;
 			case 'title'	: $options['order'] = 'title'; break;
@@ -136,8 +141,8 @@ class RepositoryCatalog extends RepositoryBackendModule
 		
 		// query extensions
 		$rep->extensions = $this->getExtensionList($options);
-		if ($rep->f_page>1 && count($rep->extensions)==0) {
-			$rep->f_page = 1;
+		if ($rep->f_page>=0 && $perpage>0 && count($rep->extensions)==0) {
+			$rep->f_page = 0;
 			$options['first'] = 0;
 			$rep->extensions = $this->getExtensionList($options);
 		} // if
@@ -148,8 +153,19 @@ class RepositoryCatalog extends RepositoryBackendModule
 			$ext->viewLink = $this->createUrl(array('view' => $ext->name.'.'.$ext->version.'.'.$ext->language));
 			$totrecs = $ext->totrecs;
 		} // foreach
+
+		// create pages list
+		$rep->pages = array();
+		if ($perpage > 0) {
+			$first = 1;
+			while ($totrecs > 0) {
+				$cnt = $totrecs > $perpage ? $perpage : $totrecs;
+				$rep->pages[] = $first . ' - ' . ($first+$cnt-1);
+				$first += $cnt;
+				$totrecs -= $cnt;
+			} // while
+		} // if		
 		
-		$rep->pages = ($totrecs > 0) ? floor(($totrecs+$perpage-1) / $perpage) : 1;	
 		$rep->tags = $this->getTagList(array('languages'=>$this->languages, 'mode'=>'initcap'));
 		$rep->authors = $this->getAuthorList(array('languages'=>$this->languages));
 	} // listExtensions

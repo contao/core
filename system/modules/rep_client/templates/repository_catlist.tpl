@@ -81,10 +81,12 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <div class="tl_limit tl_subpanel">
 <strong><?php echo $GLOBALS['TL_LANG']['MSC']['showOnly']; ?>:</strong>
-<select name="repository_page" id="repository_page" class="tl_select active" onchange="this.form.submit()">
-<?php for ($page = 1; $page <= $rep->pages; $page++): ?>
-  <option value="<?php echo $page; ?>"<?php if ($rep->f_page==$page) echo ' selected="selected"'; ?>><?php echo sprintf($text['pageof'], $page, $rep->pages); ?></option>
+<select name="repository_page" id="repository_page" class="tl_select<?php if ($rep->f_page!=-1) echo ' active'; ?>" onchange="this.form.submit()">
+  <option value="0"><?php echo $GLOBALS['TL_LANG']['MSC']['filterRecords']; ?></option>
+<?php for ($page=0; $page<count($rep->pages); $page++): ?>
+  <option value="<?php echo $page; ?>"<?php if ($rep->f_page==$page) echo ' selected="selected"'; ?>><?php echo $rep->pages[$page]; ?></option>
 <?php endfor; ?>
+  <option value="-1"<?php if ($rep->f_page<0) echo ' selected="selected"'; ?>><?php echo $GLOBALS['TL_LANG']['MSC']['filterAll']; ?></option>
 </select>
 </div>
 

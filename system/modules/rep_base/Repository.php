@@ -113,6 +113,25 @@ class Repository
 	} // formatShortVersion
 
 	/**
+	 * Format a compatibility version number to human readable
+	 *
+	 * Example:
+	 * <code>
+	 * echo Repository::formatCompatVersion(20090039); 
+	 * // version 2.9.3 stable will output: 2.9
+	 * </code>
+	 * @param int $aVersion The encoded version
+	 * @return string The version in human readable format
+	 */ 
+	public static function formatCompatVersion($aVersion)
+	{
+		$aVersion	= (int)$aVersion;
+		if (!$aVersion) return '';
+		$aVersion	= (int)($aVersion / 10000);
+		return intval($aVersion / 1000) . '.' . ($aVersion % 1000);
+	} // formatCompatVersion
+
+	/**
 	 * Remap and format a core version number to human readable.
 	 *
 	 * Example:

@@ -51,7 +51,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['repository_wsdl'] = array
 (
 	'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'],
 	'inputType'	=> 'text',
-	'eval'		=> array('maxlength'=>255, 'rgxp'=>'url', 'tl_class'=>'long')
+	'eval'		=> array('maxlength'=>255, 'rgxp'=>'url', 'tl_class'=>'w50')
 );
 
 ?>

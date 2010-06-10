@@ -41,7 +41,7 @@
 /**
  * Add to palette
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ',repository_languages,repository_listsize';
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ',repository_languages,repository_listsize,repository_unsafe_catalog';
 
 /**
  * Add fields
@@ -59,6 +59,13 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['repository_listsize'] = array
 	'default'	=> '10',
 	'inputType'	=> 'text',
 	'eval'		=> array('rgxp'=>'digit', 'maxlength'=>6, 'tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['repository_unsafe_catalog'] = array
+(
+	'label'		=> &$GLOBALS['TL_LANG']['tl_settings']['repository_unsafe_catalog'],
+	'inputType'	=> 'checkbox',
+	'eval'      => array('tl_class'=>'w50 m12')
 );
 
 ?>
