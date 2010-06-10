@@ -222,11 +222,11 @@ class Search extends System
 		// Remove special characters
 		if (function_exists('mb_eregi_replace'))
 		{
-			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
+			$strText = mb_eregi_replace('[^[:alnum:]\'\.:,_-]|- | -|\' | \'|\. |\.$|: |:$|, |,$', ' ', $strText);
 		}
 		else
 		{
-			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,-]/u'), ' ', $strText);
+			$strText = preg_replace(array('/- /', '/ -/', "/' /", "/ '/", '/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL\'\.:,_-]/u'), ' ', $strText);
 		}
 
 		// Split words
@@ -238,7 +238,7 @@ class Search extends System
 		{
 			$strWord = trim($strWord);
 
-			if (!strlen($strWord) || preg_match('/^[\.:,\'-]+$/', $strWord))
+			if (!strlen($strWord) || preg_match('/^[\.:,\'_-]+$/', $strWord))
 			{
 				continue;
 			}
@@ -309,11 +309,11 @@ class Search extends System
 
 		if (function_exists('mb_eregi_replace'))
 		{
-			$strKeywords = mb_eregi_replace('[^[:alnum:] \*\+\'"\.:,-]|\. |\.$|: |:$|, |,$', ' ', $strKeywords);
+			$strKeywords = mb_eregi_replace('[^[:alnum:] \*\+\'"\.:,_-]|\. |\.$|: |:$|, |,$', ' ', $strKeywords);
 		}
 		else
 		{
-			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL \*\+\'"\.:,-]/iu'), ' ', $strKeywords);
+			$strKeywords = preg_replace(array('/\. /', '/\.$/', '/: /', '/:$/', '/, /', '/,$/', '/[^\pN\pL \*\+\'"\.:,_-]/iu'), ' ', $strKeywords);
 		}
 
 		// Check keyword string
