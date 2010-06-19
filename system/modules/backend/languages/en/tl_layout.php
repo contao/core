@@ -48,6 +48,7 @@ $GLOBALS['TL_LANG']['tl_layout']['widthRight']    = array('Right column width', 
 $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Custom layout sections', 'Custom layout sections can be defined in the back end settings.');
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Custom sections position', 'Please select the position of the custom layout sections.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Style sheets', 'Please select the style sheets you want to add to the layout.');
+$GLOBALS['TL_LANG']['tl_layout']['aggregate']     = array('Aggregate style sheets', 'Aggregate the style sheets into a single file (improves the page loading time).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('News feeds', 'Please select the news feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Please select the calendar feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');

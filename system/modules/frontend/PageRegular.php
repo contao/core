@@ -342,21 +342,69 @@ class PageRegular extends Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
+			$arrAggregator = array();
+			$strCcStyleSheets = '';
 			$objStylesheets = $this->Database->execute("SELECT tstamp, name, cc, media, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
-				$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-										 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
-										 implode(', ', deserialize($objStylesheets->media)));
-
-				if ($objStylesheets->cc)
+				// Try to aggregate regular style sheets
+				if ($objLayout->aggregate && !$objStylesheets->cc)
 				{
-					$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+					$key = md5($objStylesheets->id .'-'. max($objStylesheets->tstamp, $objStylesheets->tstamp2) .'-'. $objStylesheets->media);
+
+					$arrAggregator[$key] = array
+					(
+						'name' => $objStylesheets->name . '.css',
+						'media' => implode(', ', deserialize($objStylesheets->media))
+					);
 				}
 
-				$strStyleSheets .= $strStyleSheet . "\n";
+				// Add each style sheet separately
+				else
+				{
+					$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
+											 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
+											 implode(', ', deserialize($objStylesheets->media)));
+
+					if ($objStylesheets->cc)
+					{
+						$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+					}
+
+					$strCcStyleSheets .= $strStyleSheet . "\n";
+				}
 			}
+
+			// Create the aggregated style sheet
+			if (count($arrAggregator) > 0)
+			{
+				$key = substr(md5(implode('-', array_keys($arrAggregator))), 0, 16);
+
+				// Load the existing file
+				if (file_exists(TL_ROOT .'/'. $key . '.css'))
+				{
+					$strStyleSheets .= '<link rel="stylesheet" href="'. $key .'.css" type="text/css" media="all" />' . "\n";
+				}
+
+				// Create a new file
+				else
+				{
+					$objFile = new File($key . '.css');
+
+					foreach ($arrAggregator as $file)
+					{
+						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') .'{');
+						$objFile->append(file_get_contents(TL_ROOT .'/'. $file['name']) . '}');
+					}
+
+					$objFile->close();
+					$strStyleSheets .= '<link rel="stylesheet" href="'. $key .'.css" type="text/css" media="all" />' . "\n";
+				}
+			}
+
+			// Always add conditional style sheets at the end
+			$strStyleSheets .= $strCcStyleSheets;
 		}
 
 		$newsfeeds = deserialize($objLayout->newsfeeds);

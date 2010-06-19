@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{head_legend},stylesheet,aggregate,newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -226,6 +226,12 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
 			'eval'                    => array('multiple'=>true)
+		),
+		'aggregate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['aggregate'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox'
 		),
 		'newsfeeds' => array
 		(

@@ -85,8 +85,7 @@ class ModuleQuicklink extends Module
 			return '';
 		}
 
-		$strBuffer = parent::generate();
-		return strlen($this->Template->items) ? $strBuffer : '';
+		return parent::generate();
 	}
 
 

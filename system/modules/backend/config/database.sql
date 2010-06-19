@@ -191,6 +191,7 @@ CREATE TABLE `tl_layout` (
   `sections` blob NULL,
   `sPosition` varchar(32) NOT NULL default '',
   `stylesheet` blob NULL,
+  `aggregate` char(1) NOT NULL default '',
   `newsfeeds` blob NULL,
   `calendarfeeds` blob NULL,
   `modules` blob NULL,
