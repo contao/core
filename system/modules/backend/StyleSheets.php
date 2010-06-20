@@ -117,6 +117,15 @@ class StyleSheets extends Backend
 			$objFile->close();
 		}
 
+		// Purge system/html
+		$cssFiles = scan(TL_ROOT . '/system/html');
+		$cssFiles = preg_grep('/\.css$/', $cssFiles);
+
+		foreach ($cssFiles as $file)
+		{
+			@unlink(TL_ROOT . '/system/html/' . $file);
+		}
+
 		$objStyleSheets->reset();
 
 		// Create new style sheets
