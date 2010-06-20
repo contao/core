@@ -458,7 +458,7 @@ class tl_faq extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_faq SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_faq SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_faq', $intId);

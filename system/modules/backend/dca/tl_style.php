@@ -586,7 +586,7 @@ class tl_style extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_style SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_style SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_style', $intId);

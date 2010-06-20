@@ -382,24 +382,28 @@ class PageRegular extends Frontend
 				$key = substr(md5(implode('-', array_keys($arrAggregator))), 0, 16);
 
 				// Load the existing file
-				if (file_exists(TL_ROOT .'/'. $key . '.css'))
+				if (file_exists(TL_ROOT .'/system/html/'. $key .'.css'))
 				{
-					$strStyleSheets .= '<link rel="stylesheet" href="'. $key .'.css" type="text/css" media="all" />' . "\n";
+					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
 				}
 
 				// Create a new file
 				else
 				{
-					$objFile = new File($key . '.css');
+					$objFile = new File('system/html/'. $key .'.css');
 
 					foreach ($arrAggregator as $file)
 					{
-						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') .'{');
-						$objFile->append(file_get_contents(TL_ROOT .'/'. $file['name']) . '}');
+						// Adjust the file paths
+						$content = file_get_contents(TL_ROOT .'/'. $file['name']);
+						$content = str_replace('url("'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', 'url("../../'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $content);
+
+						// Append the style sheet
+						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') .'{'. $content .'}');
 					}
 
 					$objFile->close();
-					$strStyleSheets .= '<link rel="stylesheet" href="'. $key .'.css" type="text/css" media="all" />' . "\n";
+					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
 				}
 			}
 

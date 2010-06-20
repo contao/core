@@ -612,7 +612,7 @@ class tl_form_field extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_form_field SET invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_form_field SET tstamp=". time() .", invisible='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_form_field', $intId);

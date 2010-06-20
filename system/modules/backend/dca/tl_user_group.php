@@ -405,7 +405,7 @@ class tl_user_group extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_user_group SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_user_group SET tstamp=". time() .", disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_user_group', $intId);

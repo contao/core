@@ -747,7 +747,7 @@ class tl_user extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_user SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_user SET tstamp=". time() .", disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_user', $intId);

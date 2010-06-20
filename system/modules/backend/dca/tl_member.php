@@ -520,8 +520,10 @@ class tl_member extends Backend
 			}
 		}
 
+		$time = time();
+
 		// Update the database
-		$this->Database->prepare("UPDATE tl_member SET disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_member SET tstamp=$time, disable='" . ($blnVisible ? '' : 1) . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_member', $intId);
@@ -535,7 +537,7 @@ class tl_member extends Backend
 
 			if ($objUser->numRows)
 			{
-				$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=? WHERE email=?")
+				$this->Database->prepare("UPDATE tl_newsletter_recipients SET tstamp=$time, active=? WHERE email=?")
 							   ->execute(($blnVisible ? 1 : ''), $objUser->email);
 			}
 		}

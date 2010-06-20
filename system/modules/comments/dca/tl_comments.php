@@ -583,7 +583,7 @@ class tl_comments extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_comments SET published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_comments SET tstamp=". time() .", published='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_comments', $intId);

@@ -393,7 +393,7 @@ class tl_newsletter_recipients extends Backend
 		}
 
 		// Update the database
-		$this->Database->prepare("UPDATE tl_newsletter_recipients SET active='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+		$this->Database->prepare("UPDATE tl_newsletter_recipients SET tstamp=". time() .", active='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
 					   ->execute($intId);
 
 		$this->createNewVersion('tl_newsletter_recipients', $intId);
