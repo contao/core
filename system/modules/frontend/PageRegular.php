@@ -344,7 +344,7 @@ class PageRegular extends Frontend
 		{
 			$arrAggregator = array();
 			$strCcStyleSheets = '';
-			$objStylesheets = $this->Database->execute("SELECT tstamp, name, cc, media, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
@@ -356,7 +356,7 @@ class PageRegular extends Frontend
 					$arrAggregator[$key] = array
 					(
 						'name' => $objStylesheets->name . '.css',
-						'media' => implode(', ', deserialize($objStylesheets->media))
+						'media' => implode(',', deserialize($objStylesheets->media))
 					);
 				}
 
@@ -365,7 +365,7 @@ class PageRegular extends Frontend
 				{
 					$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
 											 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
-											 implode(', ', deserialize($objStylesheets->media)));
+											 implode(',', deserialize($objStylesheets->media)));
 
 					if ($objStylesheets->cc)
 					{
@@ -399,7 +399,7 @@ class PageRegular extends Frontend
 						$content = str_replace('url("'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', 'url("../../'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $content);
 
 						// Append the style sheet
-						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') .'{'. $content .'}');
+						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') ."{\n". $content .'}');
 					}
 
 					$objFile->close();
