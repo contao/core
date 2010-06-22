@@ -11,6 +11,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: store the last modification date if a record is being updated via Ajax
 - Fixed: do not cache pages with a comment notification message
 - Fixed: do not allow negative values for resultsPerPage in the back end (#2100, #2109)
+- Fixed: EditArea 0.8.2 seems not to handle empty syntax strings (#2112)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

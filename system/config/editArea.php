@@ -53,6 +53,7 @@ if (is_null($this->syntax))
 		case 'htm':
 		case 'html':
 		case 'tpl':
+		default:
 			$this->syntax = 'html';
 			break;
 
@@ -82,11 +83,13 @@ if (is_null($this->syntax))
 		case 'xml':
 			$this->syntax = $this->extension;
 			break;
-
-		default:
-			$this->syntax = '';
-			break;
 	}
+}
+
+// Version 0.8.2 fix (see #2112)
+if ($this->syntax == '')
+{
+	$this->syntax = 'html';
 }
 
 

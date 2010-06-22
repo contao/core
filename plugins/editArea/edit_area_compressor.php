@@ -20,11 +20,12 @@
 	
 	class Compressor{
 	
-		
+		/* PATCH: remove
 		function compressor($param)
 		{
 			$this->__construct($param);
 		}
+		PATCH EOF */
 		
 		function __construct($param)
 		{
