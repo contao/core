@@ -188,6 +188,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		'startTime' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['startTime'],
+			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
 			'sorting'                 => true,

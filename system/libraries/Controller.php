@@ -274,7 +274,7 @@ abstract class Controller extends System
 		// Disable indexing if protected
 		if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
 		{
-			$strBuffer = "\n<!-- indexer::stop -->$strBuffer<!-- indexer::continue -->\n";
+			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 		}
 
 		return $strBuffer;
@@ -2251,10 +2251,10 @@ abstract class Controller extends System
 		$arrNew['value'] = deserialize($varValue);
 
 		// Convert timestamps
-		if (in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')) && strlen($varValue))
+		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
 			$objDate = new Date($varValue);
-			$arrNew['value'] = $objDate->$arrData['eval']['rgxp'];
+			$arrNew['value'] = $objDate->{$arrData['eval']['rgxp']};
 		}
 
 		return $arrNew;

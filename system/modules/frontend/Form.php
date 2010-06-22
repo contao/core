@@ -208,11 +208,12 @@ class Form extends Hybrid
 			$this->processFormData($arrSubmitted);
 		}
 
-		// Add a warning to page title
+		// Add a warning to the page title
 		if ($doNotSubmit)
 		{
 			global $objPage;
-			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $objPage->pageTitle;
+			$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
+			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $title;
 		}
 
 		$strAttributes = '';
