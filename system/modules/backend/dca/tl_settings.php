@@ -124,7 +124,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['resultsPerPage'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkResultsPerPage')
+			)
 		),
 		'maxResultsPerPage' => array
 		(
@@ -463,6 +467,22 @@ class tl_settings extends Backend
 		if (!$varValue)
 		{
 			$this->Database->execute("DELETE FROM tl_search WHERE protected=1");
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Make sure that resultsPerPage > 0
+	 * @param mixed
+	 * @return array
+	 */
+	public function checkResultsPerPage($varValue)
+	{
+		if ($varValue < 1)
+		{
+			$varValue = 30;
 		}
 
 		return $varValue;

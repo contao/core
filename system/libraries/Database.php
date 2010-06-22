@@ -558,7 +558,7 @@ abstract class Database_Statement
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
-		$this->limit_query($intRows, (($intOffset >= 0) ? $intOffset : 0));
+		$this->limit_query((($intRows > 0) ? $intRows : 30), (($intOffset > 0) ? $intOffset : 0));
 		return $this;
 	}
 
