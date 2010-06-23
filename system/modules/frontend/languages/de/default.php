@@ -112,6 +112,7 @@ $GLOBALS['TL_LANG']['MSC']['twitterShare']  = 'Auf Twitter teilen';
 $GLOBALS['TL_LANG']['MSC']['pleaseWait']    = 'Bitte warten Sie';
 $GLOBALS['TL_LANG']['MSC']['loading']       = 'Laden …';
 $GLOBALS['TL_LANG']['MSC']['more']          = 'Weiterlesen …';
+$GLOBALS['TL_LANG']['MSC']['readMore']      = 'Den Artikel lesen: %s';
 $GLOBALS['TL_LANG']['MSC']['targetPage']    = 'Zielseite';
 $GLOBALS['TL_LANG']['MSC']['com_name']      = 'Name';
 $GLOBALS['TL_LANG']['MSC']['com_email']     = 'E-Mail (wird nicht veröffentlicht)';

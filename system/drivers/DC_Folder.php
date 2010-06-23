@@ -1595,13 +1595,13 @@ window.addEvent(\'domready\', function()
 			{
 				if (!is_dir($path . '/' . $v) && $v != '.DS_Store')
 				{
-					$files[] = $path.'/'.$v;
+					$files[] = $path . '/' . $v;
 					continue;
 				}
 
 				if ($v == '__new__')
 				{
-					$this->Files->rmdir($path . '/' . $v);
+					$this->Files->rmdir(str_replace(TL_ROOT.'/', '', $path) . '/' . $v);
 					continue;
 				}
 

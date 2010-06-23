@@ -33,7 +33,6 @@
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['open']          = 'Read more on %s';
-$GLOBALS['TL_LANG']['MSC']['readMore']      = 'Read the article: %s';
 $GLOBALS['TL_LANG']['MSC']['author']        = 'Author';
 $GLOBALS['TL_LANG']['MSC']['by']            = 'by';
 $GLOBALS['TL_LANG']['MSC']['empty']         = 'There are no news items for this period.';
