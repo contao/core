@@ -47,6 +47,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			array('tl_style_sheet', 'checkPermission'),
 			array('tl_style_sheet', 'updateStyleSheet')
+		),
+		'oncopy_callback' => array
+		(
+			array('tl_style_sheet', 'scheduleUpdate')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_style_sheet', 'scheduleUpdate')
 		)
 	),
 
@@ -207,21 +215,56 @@ class tl_style_sheet extends Backend
 			$this->redirect('contao/main.php?act=error');
 		}
 	}
-	
+
 
 	/**
-	 * Update style sheet
-	 * @param object
+	 * Check for modified style sheets and update them if necessary
 	 */
-	public function updateStyleSheet(DataContainer $dc)
+	public function updateStyleSheet()
 	{
-		if (!$dc->id)
+		$session = $this->Session->get('style_sheet_updater');
+
+		if (!is_array($session) || count($session) < 1)
 		{
 			return;
 		}
 
 		$this->import('StyleSheets');
-		$this->StyleSheets->updateStyleSheet($dc->id);
+
+		foreach ($session as $id)
+		{
+			$this->StyleSheets->updateStyleSheet($id);
+		}
+
+		$this->Session->set('style_sheet_updater', null);
+	}
+
+
+	/**
+	 * Schedule a style sheet update
+	 * 
+	 * This method is triggered when a single style sheet or multiple style
+	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
+	 * @param mixed
+	 */
+	public function scheduleUpdate($id)
+	{
+		// The onsubmit_callback passes a DataContainer object
+		if (is_object($id))
+		{
+			$id = $id->id;
+		}
+
+		// Return if there is no ID 
+		if (!$id || $this->Input->get('act') == 'copy')
+		{
+			return;
+		}
+
+		// Store the ID in the session
+		$session = $this->Session->get('style_sheet_updater');
+		$session[] = $id;
+		$this->Session->set('style_sheet_updater', array_unique($session));
 	}
 
 

@@ -755,10 +755,16 @@ class DC_Table extends DataContainer implements listable, editable
 			{
 				if (in_array($k, array_keys($GLOBALS['TL_DCA'][$this->strTable]['fields'])))
 				{
-					// Reset all unique, doNotCopy and fallback fields to their default value
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['unique'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
+					// Empty unique fields or add a unique identifier in copyAll mode
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['unique'])
 					{
-						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'])) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
+						$v = ($this->Input->get('act') == 'copyAll') ? $v .'-'. substr(md5(uniqid(mt_rand(), true)), 0, 8) : '';
+					}
+
+					// Reset doNotCopy and fallback fields to their default value
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
+					{
+						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
 					}
 
 					// Set fields (except password fields)
@@ -1784,9 +1790,13 @@ class DC_Table extends DataContainer implements listable, editable
 				{
 					$this->redirect($this->Environment->script . '?do=' . $this->Input->get('do'));
 				}
+				elseif ($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') # TODO: try to abstract this
+				{
+					$this->redirect($this->getReferer(false, $this->strTable));
+				}
 				else
 				{
-					$this->redirect($this->getReferer(true, $this->ptable));
+					$this->redirect($this->getReferer(false, $this->ptable));
 				}
 			}
 

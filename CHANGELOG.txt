@@ -17,6 +17,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: "showQuantity" support was broken in the event menu (#2114)
 - Fixed: the theme importer did not strip special characters from the file name (#1974)
 - Fixed: "save and back" redirected back to the themes list when editing a style (#2110)
+- Fixed: the style sheet files were not correctly updated in some cases (#2169)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

@@ -45,6 +45,22 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			array('tl_style', 'checkPermission'),
 			array('tl_style', 'updateStyleSheet')
+		),
+		'oncopy_callback' => array
+		(
+			array('tl_style', 'scheduleUpdate')
+		),
+		'oncut_callback' => array
+		(
+			array('tl_style', 'scheduleUpdate')
+		),
+		'ondelete_callback' => array
+		(
+			array('tl_style', 'scheduleUpdate')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_style', 'scheduleUpdate')
 		)
 	),
 
@@ -523,17 +539,47 @@ class tl_style extends Backend
 
 
 	/**
-	 * Update style sheet
+	 * Check for modified style sheets and update them if necessary
 	 */
 	public function updateStyleSheet()
 	{
-		if ($this->Input->post('isAjax'))
+		$session = $this->Session->get('style_sheet_updater');
+
+		if (!is_array($session) || count($session) < 1)
 		{
 			return;
 		}
 
 		$this->import('StyleSheets');
-		$this->StyleSheets->updateStyleSheet(CURRENT_ID);
+
+		foreach ($session as $id)
+		{
+			$this->StyleSheets->updateStyleSheet($id);
+		}
+
+		$this->Session->set('style_sheet_updater', null);
+	}
+
+
+	/**
+	 * Schedule a style sheet update
+	 * 
+	 * This method is triggered when a single style or multiple styles are
+	 * modified (edit/editAll), duplicated (copy/copyAll), moved (cut/cutAll)
+	 * or deleted (delete/deleteAll).
+	 */
+	public function scheduleUpdate()
+	{
+		// Return if there is no ID 
+		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || $this->Input->post('isAjax'))
+		{
+			return;
+		}
+
+		// Store the ID in the session
+		$session = $this->Session->get('style_sheet_updater');
+		$session[] = CURRENT_ID;
+		$this->Session->set('style_sheet_updater', array_unique($session));
 	}
 
 
