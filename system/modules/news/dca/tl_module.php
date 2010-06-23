@@ -35,7 +35,7 @@
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_numberOfItems,news_featured,perPage,skipFirst;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']  = '{title_legend},name,headline,type;{config_legend},news_archives;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newsarchive'] = '{title_legend},name,headline,type;{config_legend},news_archives,news_jumpToCurrent,perPage,news_format;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newsmenu']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_showQuantity,news_format,news_startDay;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newsmenu']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_showQuantity,news_format,news_startDay,news_order;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -126,6 +126,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_startDay'] = array
 	'eval'                    => array('tl_class'=>'w50')
 );
 
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_order'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_order'],
+	'default'                 => 'descending',
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array('ascending', 'descending'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('tl_class'=>'w50')
+);
+
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_showQuantity'],
@@ -200,12 +211,15 @@ class tl_module_news extends Backend
   <script type="text/javascript">
   <!--//--><![CDATA[//><!--
   var enableStartDay = function() {
-    var el = $("ctrl_news_startDay").getParent("div");
+    var e1 = $("ctrl_news_startDay").getParent("div");
+    var e2 = $("ctrl_news_order").getParent("div");
     if ($("ctrl_news_format").value == "news_day") {
-      el.setStyle("display", "block");
-    } else {
-      el.setStyle("display", "none");
-    }
+      e1.setStyle("display", "block");
+      e2.setStyle("display", "none");
+	} else {
+      e1.setStyle("display", "none");
+      e2.setStyle("display", "block");
+	}
   };
   window.addEvent("domready", function() {
     if ($("ctrl_news_startDay")) {

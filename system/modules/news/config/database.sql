@@ -99,6 +99,7 @@ CREATE TABLE `tl_module` (
   `news_template` varchar(32) NOT NULL default '',
   `news_format` varchar(32) NOT NULL default '',
   `news_startDay` smallint(5) unsigned NOT NULL default '0'
+  `news_order` varchar(32) NOT NULL default '',
   `news_showQuantity` char(1) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

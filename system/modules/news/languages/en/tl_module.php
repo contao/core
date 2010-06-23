@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta fields', 'H
 $GLOBALS['TL_LANG']['tl_module']['news_template']      = array('News template', 'Here you can select the news template.');
 $GLOBALS['TL_LANG']['tl_module']['news_format']        = array('Archive format', 'Here you can choose the news archive format.');
 $GLOBALS['TL_LANG']['tl_module']['news_startDay']      = array('Week start day', 'Here you can choose the week start day.');
+$GLOBALS['TL_LANG']['tl_module']['news_order']         = array('Sort order', 'Here you can choose the sort order.');
 $GLOBALS['TL_LANG']['tl_module']['news_showQuantity']  = array('Show number of items', 'Show the number of news items of each month.');
 
 

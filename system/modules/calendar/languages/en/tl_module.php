@@ -32,14 +32,15 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['cal_calendar']  = array('Calendars', 'Please select one or more calendars.');
-$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']    = array('Shortened view', 'Show events only once even if they span multiple days.');
-$GLOBALS['TL_LANG']['tl_module']['cal_format']    = array('Event list format', 'Here you can choose the event list format.');
-$GLOBALS['TL_LANG']['tl_module']['cal_order']     = array('Sort order', 'Here you can choose the sort order.');
-$GLOBALS['TL_LANG']['tl_module']['cal_limit']     = array('Number of events', 'Here you can limit the number of events. Enter 0 to show all.');
-$GLOBALS['TL_LANG']['tl_module']['cal_template']  = array('Event template', 'Here you can select the event template.');
-$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate'] = array('Calendar template', 'Here you can select the calendar template.');
-$GLOBALS['TL_LANG']['tl_module']['cal_startDay']  = array('Week start day', 'Here you can choose the week start day.');
+$GLOBALS['TL_LANG']['tl_module']['cal_calendar']     = array('Calendars', 'Please select one or more calendars.');
+$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']       = array('Shortened view', 'Show events only once even if they span multiple days.');
+$GLOBALS['TL_LANG']['tl_module']['cal_format']       = array('Event list format', 'Here you can choose the event list format.');
+$GLOBALS['TL_LANG']['tl_module']['cal_order']        = array('Sort order', 'Here you can choose the sort order.');
+$GLOBALS['TL_LANG']['tl_module']['cal_limit']        = array('Number of events', 'Here you can limit the number of events. Enter 0 to show all.');
+$GLOBALS['TL_LANG']['tl_module']['cal_template']     = array('Event template', 'Here you can select the event template.');
+$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate']    = array('Calendar template', 'Here you can select the calendar template.');
+$GLOBALS['TL_LANG']['tl_module']['cal_startDay']     = array('Week start day', 'Here you can choose the week start day.');
+$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'] = array('Show number of events', 'Show the number of events of each month in the menu.');
 
 
 /**

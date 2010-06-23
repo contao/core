@@ -129,7 +129,7 @@ class ModuleNewsMenu extends ModuleNews
 		}
 
 		// Sort data
-		krsort($arrData);
+		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
 		// Get current "jumpTo" page
@@ -184,10 +184,10 @@ class ModuleNewsMenu extends ModuleNews
 		// Sort data
 		foreach (array_keys($arrData) as $key)
 		{
-			krsort($arrData[$key]);
+			($this->news_order == 'ascending') ? ksort($arrData[$key]) : krsort($arrData[$key]);
 		}
 
-		krsort($arrData);
+		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
 		// Get current "jumpTo" page

@@ -14,6 +14,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: EditArea 0.8.2 seems not to handle empty syntax strings (#2112)
 - Fixed: include the runonce.php file inside a try-catch block
 - Fixed: moved the "readMore" label to the frontend module (#2106)
+- Fixed: "showQuantity" support was broken in the event menu (#2114)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

@@ -134,6 +134,7 @@ class ModuleEventMenu extends ModuleCalendar
 		}
 
 		$this->Template->items = $arrItems;
+		$this->Template->showQuantity = strlen($this->cal_showQuantity) ? true : false;
 	}
 
 
@@ -193,6 +194,7 @@ class ModuleEventMenu extends ModuleCalendar
 		}
 
 		$this->Template->items = $arrItems;
+		$this->Template->showQuantity = strlen($this->cal_showQuantity) ? true : false;
 	}
 }
 
