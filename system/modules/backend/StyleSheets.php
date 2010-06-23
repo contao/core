@@ -781,6 +781,11 @@ class StyleSheets extends Backend
 						$strUnit = '';
 						$varValue = 'auto';
 					}
+					elseif (isset($arrSet['trbl']['unit']))
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					else
 					{
 						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
