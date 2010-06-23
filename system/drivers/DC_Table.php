@@ -3931,11 +3931,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 					$session['search'][$this->strTable]['value'] = $this->Input->postRaw('tl_value');
 				}
-
-				catch (Exception $e)
-				{
-					// Nothing to do here
-				}
+				catch (Exception $e) {}
 			}
 
 			$this->Session->setData($session);

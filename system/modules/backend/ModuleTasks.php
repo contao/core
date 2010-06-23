@@ -501,11 +501,7 @@ class ModuleTasks extends BackendModule
 
 					$session['search']['tl_task']['value'] = $this->Input->postRaw('tl_value');
 				}
-
-				catch (Exception $e)
-				{
-					// Nothing to do here
-				}
+				catch (Exception $e) {}
 			}
 
 			// Filter

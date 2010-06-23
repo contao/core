@@ -103,7 +103,6 @@ if (is_null($GLOBALS['TL_CONFIG']['websitePath']))
 		$GLOBALS['TL_CONFIG']['websitePath'] = $path;
 		$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
 	}
-
 	catch (Exception $e)
 	{
 		log_message($e->getMessage());
@@ -181,7 +180,11 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
  */
 if (file_exists(TL_ROOT . '/system/runonce.php'))
 {
-	include(TL_ROOT . '/system/runonce.php');
+	try
+	{
+		include(TL_ROOT . '/system/runonce.php');
+	}
+	catch (Exception $e) {}
 
 	$objFiles = Files::getInstance();
 	$objFiles->delete('system/runonce.php');

@@ -568,10 +568,7 @@ class InstallTool extends Controller
 			{
 				$this->Database->query("ALTER DATABASE {$GLOBALS['TL_CONFIG']['dbDatabase']} DEFAULT CHARACTER SET $strCharset COLLATE $strCollation");
 			}
-			catch (Exception $e)
-			{
-				// Ignore
-			}
+			catch (Exception $e) {}
 
 			$objField = $this->Database->prepare("SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME LIKE 'tl_%' AND !ISNULL(COLLATION_NAME)")
 									   ->execute($GLOBALS['TL_CONFIG']['dbDatabase']);
