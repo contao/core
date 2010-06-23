@@ -1779,7 +1779,15 @@ class DC_Table extends DataContainer implements listable, editable
 				$_SESSION['TL_CONFIRM'] = '';
 
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
-				$this->redirect($this->Environment->script . '?do=' . $this->Input->get('do'));
+
+				if ($this->ptable == '')
+				{
+					$this->redirect($this->Environment->script . '?do=' . $this->Input->get('do'));
+				}
+				else
+				{
+					$this->redirect($this->getReferer(true, $this->ptable));
+				}
 			}
 
 			elseif (isset($_POST['saveNcreate']))
