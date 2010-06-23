@@ -19,6 +19,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: "save and back" redirected back to the themes list when editing a style (#2110)
 - Fixed: the style sheet files were not correctly updated in some cases (#2169)
 - Fixed: the style sheet importer did not support multiple position units (#2107)
+- Fixed: the new FileTree reload via Ajax did not work correctly (#2142)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

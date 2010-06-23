@@ -255,13 +255,39 @@ class Ajax extends Backend
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
 
-				// Fallback to the files directory (reload filetrees)
-				if ($this->Input->post('folder', true) == '')
+				// Load a particular node
+				if ($this->Input->post('folder', true) != '')
 				{
-					$this->Input->setPost('folder', $GLOBALS['TL_CONFIG']['uploadPath']);
+					echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
+					exit; break;
 				}
 
-				echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
+				// Reload the whole tree
+				$this->import('BackendUser', 'User');
+				$tree = '';
+
+				// Set a custom path
+				if (strlen($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['eval']['path']))
+				{
+					$tree = $objWidget->generateAjax($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['eval']['path'], $this->Input->post('field'), intval($this->Input->post('level')));
+				}
+
+				// Start from root
+				elseif ($this->User->isAdmin)
+				{
+					$tree = $objWidget->generateAjax($GLOBALS['TL_CONFIG']['uploadPath'], $this->Input->post('field'), intval($this->Input->post('level')));
+				}
+
+				// Set filemounts
+				else
+				{
+					foreach ($this->eliminateNestedPaths($this->User->filemounts) as $node)
+					{
+						$tree .= $objWidget->generateAjax($node, $this->Input->post('field'), intval($this->Input->post('level')), true);
+					}
+				}
+
+				echo $tree;
 				exit; break;
 
 			// Upload files via FancyUpload

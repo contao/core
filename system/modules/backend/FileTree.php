@@ -142,7 +142,7 @@ class FileTree extends Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		// Set custom path
+		// Set a custom path
 		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path']))
 		{
 			$tree = $this->renderFiletree(TL_ROOT . '/' . $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['path'], 0);
@@ -188,9 +188,10 @@ class FileTree extends Widget
 	 * @param string
 	 * @param string
 	 * @param integer
+	 * @param boolean
 	 * @return string
 	 */
-	public function generateAjax($folder, $strField, $level)
+	public function generateAjax($folder, $strField, $level, $mount=false)
 	{
 		if (!$this->Input->post('isAjax'))
 		{
@@ -201,7 +202,7 @@ class FileTree extends Widget
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'] == 'File')
 		{
-			return $this->renderFiletree(TL_ROOT.'/'.$folder, ($level * 20));
+			return $this->renderFiletree(TL_ROOT.'/'.$folder, ($level * 20), $mount);
 		}
 
 		$this->import('Database');
@@ -223,7 +224,7 @@ class FileTree extends Widget
 			$this->varValue = array($this->varValue);
 		}
 
-		return $this->renderFiletree(TL_ROOT.'/'.$folder, ($level * 20));
+		return $this->renderFiletree(TL_ROOT.'/'.$folder, ($level * 20), $mount);
 	}
 
 
