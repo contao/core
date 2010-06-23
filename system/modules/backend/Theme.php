@@ -47,8 +47,10 @@ class Theme extends Backend
 	{
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_theme_import')
 		{
+			$source = $this->Input->post('source', true);
+
 			// Check the file names
-			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
+			if (!$source || !is_array($source))
 			{
 				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
 				$this->reload();
@@ -57,7 +59,7 @@ class Theme extends Backend
 			$arrFiles = array();
 
 			// Skip invalid entries
-			foreach ($this->Input->post('source') as $strZipFile)
+			foreach ($source as $strZipFile)
 			{
 				// Skip folders
 				if (is_dir(TL_ROOT . '/' . $strZipFile))
