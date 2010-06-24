@@ -972,12 +972,12 @@ class tl_content extends Backend
 	public function getGalleryTemplates(DataContainer $dc)
 	{
 		// Get the page ID
-		$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE id=(SELECT pid FROM tl_article WHERE pid=?)")
-								  ->limit(1)
-								  ->execute($dc->activeRecord->pid);
+		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
+									 ->limit(1)
+									 ->execute($dc->activeRecord->pid);
 
 		// Inherit the page settings
-		$objPage = $this->getPageDetails($objPage->id);
+		$objPage = $this->getPageDetails($objArticle->pid);
 
 		// Get the theme ID
 		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=?")
