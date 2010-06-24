@@ -141,8 +141,10 @@ class FTP extends Files
 	{
 		$this->connect();
 		$this->validate($strDirectory);
+		$return = @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
+		$this->chmod($strDirectory, 0755);
 
-		return @ftp_mkdir($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDirectory) ? true : false;
+		return $return;
 	}
 
 
