@@ -5,6 +5,7 @@ Contao Open Source CMS Changelog
 Version 2.9.0 (2010-XX-XX)
 --------------------------
 - Improved the Search algorithm to treat the underscore as word character
+- Improved the news/calendar feed updater analogous to the style sheets (#2169)
 - Hardened the Files library and the file manager (thanks to Stefan Lindecke)
 - Added: added an option to aggregate user style sheets into a single file (#2094)
 - Fixed: double_encode in htmlspecialchars() is only available from PHP 5.2.3 (#2097)

@@ -46,6 +46,10 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 		(
 			array('tl_calendar', 'checkPermission'),
 			array('tl_calendar', 'generateFeed')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_calendar', 'scheduleUpdate')
 		)
 	),
 
@@ -457,22 +461,6 @@ class tl_calendar extends Backend
 
 
 	/**
-	 * Update the RSS feed
-	 * @param object
-	 */
-	public function generateFeed(DataContainer $dc)
-	{
-		if (!$dc->id)
-		{
-			return;
-		}
-
-		$this->import('Calendar');
-		$this->Calendar->generateFeed($dc->id);
-	}
-
-
-	/**
 	 * Check the RSS-feed alias
 	 * @param object
 	 * @throws Exception
@@ -494,6 +482,51 @@ class tl_calendar extends Backend
 		}
 
 		return $varValue;
+	}
+
+
+	/**
+	 * Check for modified calendar feeds and update the XML files if necessary
+	 */
+	public function generateFeed()
+	{
+		$session = $this->Session->get('calendar_feed_updater');
+
+		if (!is_array($session) || count($session) < 1)
+		{
+			return;
+		}
+
+		$this->import('Calendar');
+
+		foreach ($session as $id)
+		{
+			$this->Calendar->generateFeed($id);
+		}
+
+		$this->Session->set('calendar_feed_updater', null);
+	}
+
+
+	/**
+	 * Schedule a calendar feed update
+	 * 
+	 * This method is triggered when a single calendar or multiple calendars
+	 * are modified (edit/editAll).
+	 * @param object
+	 */
+	public function scheduleUpdate(DataContainer $dc)
+	{
+		// Return if there is no ID 
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		// Store the ID in the session
+		$session = $this->Session->get('calendar_feed_updater');
+		$session[] = $dc->id;
+		$this->Session->set('calendar_feed_updater', array_unique($session));
 	}
 
 

@@ -52,9 +52,18 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			array('tl_news', 'checkPermission'),
 			array('tl_news', 'generateFeed')
 		),
+		'oncut_callback' => array
+		(
+			array('tl_news', 'scheduleUpdate')
+		),
+		'ondelete_callback' => array
+		(
+			array('tl_news', 'scheduleUpdate')
+		),
 		'onsubmit_callback' => array
 		(
-			array('tl_news', 'adjustTime')
+			array('tl_news', 'adjustTime'),
+			array('tl_news', 'scheduleUpdate')
 		)
 	),
 
@@ -656,12 +665,48 @@ class tl_news extends Backend
 
 
 	/**
-	 * Update the RSS-feed
+	 * Check for modified news feeds and update the XML files if necessary
 	 */
 	public function generateFeed()
 	{
+		$session = $this->Session->get('news_feed_updater');
+
+		if (!is_array($session) || count($session) < 1)
+		{
+			return;
+		}
+
 		$this->import('News');
-		$this->News->generateFeed(CURRENT_ID);
+
+		foreach ($session as $id)
+		{
+			$this->News->generateFeed($id);
+		}
+
+		$this->Session->set('news_feed_updater', null);
+	}
+
+
+	/**
+	 * Schedule a news feed update
+	 * 
+	 * This method is triggered when a single news item or multiple news
+	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
+	 * (delete/deleteAll). Since duplicated items are unpublished by default,
+	 * it is not necessary to schedule updates on copyAll as well.
+	 */
+	public function scheduleUpdate()
+	{
+		// Return if there is no ID 
+		if (!CURRENT_ID || $this->Input->get('act') == 'copy')
+		{
+			return;
+		}
+
+		// Store the ID in the session
+		$session = $this->Session->get('news_feed_updater');
+		$session[] = CURRENT_ID;
+		$this->Session->set('news_feed_updater', array_unique($session));
 	}
 
 
@@ -751,7 +796,8 @@ class tl_news extends Backend
 
 		// Update the RSS feed (for some reason it does not work without sleep(1))
 		sleep(1);
-		$this->generateFeed();
+		$this->import('News');
+		$this->News->generateFeed(CURRENT_ID);
 	}
 }
 

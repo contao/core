@@ -46,6 +46,10 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 		(
 			array('tl_news_archive', 'checkPermission'),
 			array('tl_news_archive', 'generateFeed')
+		),
+		'onsubmit_callback' => array
+		(
+			array('tl_news_archive', 'scheduleUpdate')
 		)
 	),
 
@@ -457,18 +461,47 @@ class tl_news_archive extends Backend
 
 
 	/**
-	 * Update the RSS-feed
-	 * @param object
+	 * Check for modified news feeds and update the XML files if necessary
 	 */
-	public function generateFeed(DataContainer $dc)
+	public function generateFeed()
 	{
-		if (!$dc->id)
+		$session = $this->Session->get('news_feed_updater');
+
+		if (!is_array($session) || count($session) < 1)
 		{
 			return;
 		}
 
 		$this->import('News');
-		$this->News->generateFeed($dc->id);
+
+		foreach ($session as $id)
+		{
+			$this->News->generateFeed($id);
+		}
+
+		$this->Session->set('news_feed_updater', null);
+	}
+
+
+	/**
+	 * Schedule a news feed update
+	 * 
+	 * This method is triggered when a single news archive or multiple news
+	 * archives are modified (edit/editAll).
+	 * @param object
+	 */
+	public function scheduleUpdate(DataContainer $dc)
+	{
+		// Return if there is no ID 
+		if (!$dc->id)
+		{
+			return;
+		}
+
+		// Store the ID in the session
+		$session = $this->Session->get('news_feed_updater');
+		$session[] = $dc->id;
+		$this->Session->set('news_feed_updater', array_unique($session));
 	}
 
 
