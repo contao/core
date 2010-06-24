@@ -88,7 +88,7 @@ class PageRegular extends Frontend
 			}
 		}
 
-		//Set page title and description AFTER the modules have been generated
+		// Set the page title and description AFTER the modules have been generated
 		$this->Template->mainTitle = $objPage->rootTitle;
 		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 		$this->Template->title = $this->Template->mainTitle . ' - ' . $this->Template->pageTitle;
@@ -417,7 +417,7 @@ class PageRegular extends Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && count($newsfeeds) > 0)
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
+			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
 
 			while($objFeeds->next())
 			{
@@ -429,7 +429,7 @@ class PageRegular extends Frontend
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && count($calendarfeeds) > 0)
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
+			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
 
 			while($objFeeds->next())
 			{
