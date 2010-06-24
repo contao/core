@@ -1684,6 +1684,10 @@ abstract class Controller extends System
 							$arrCache[$strTag] = strlen($objPage->rootTitle) ? $objPage->rootTitle : $GLOBALS['TL_CONFIG']['websiteTitle'];
 							break;
 
+						case 'host':
+							$arrCache[$strTag] = $this->Environment->httpHost;
+							break;
+
 						case 'url':
 							$arrCache[$strTag] = $this->Environment->url;
 							break;
