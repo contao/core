@@ -22,6 +22,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: the new FileTree reload via Ajax did not work correctly (#2142)
 - Fixed: check the RSS feed status when adding them to the page header (#2105)
 - Fixed: also consider the fallback layout in the article settings (#2133)
+- Fixed: the fields of table tl_user_group were not displayed under allowed fields (#2167)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

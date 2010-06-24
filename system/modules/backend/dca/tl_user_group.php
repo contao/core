@@ -313,11 +313,11 @@ class tl_user_group extends Backend
 					continue;
 				}
 
-				$strFile = str_replace('.php', '', $strFile);
 				$included[] = $strFile;
+				$strTable = str_replace('.php', '', $strFile);
 
-				$this->loadLanguageFile($strFile);
-				$this->loadDataContainer($strFile);
+				$this->loadLanguageFile($strTable);
+				$this->loadDataContainer($strTable);
 			}
 		}
 
@@ -330,7 +330,7 @@ class tl_user_group extends Backend
 			{
 				foreach ($v['fields'] as $kk=>$vv)
 				{
-					if ($vv['exclude'])
+					if ($vv['exclude'] || $vv['orig_exclude'])
 					{
 						$arrReturn[$k][specialchars($k.'::'.$kk)] = (strlen($vv['label'][0]) ? $vv['label'][0] : $kk);
 					}

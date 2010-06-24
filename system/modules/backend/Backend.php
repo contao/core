@@ -132,6 +132,11 @@ abstract class Backend extends Controller
 					{
 						if ($this->User->hasAccess($strTable.'::'.$k, 'alexf'))
 						{
+							if ($strTable == 'tl_user_group')
+							{
+								$GLOBALS['TL_DCA'][$strTable]['fields'][$k]['orig_exclude'] = $GLOBALS['TL_DCA'][$strTable]['fields'][$k]['exclude'];
+							}
+
 							$GLOBALS['TL_DCA'][$strTable]['fields'][$k]['exclude'] = false;
 						}
 					}
