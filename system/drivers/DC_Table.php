@@ -318,11 +318,21 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->Session->set('CLIPBOARD', $arrClipboard);
 		}
 
+		// Custom filter
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && count($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter'] as $filter)
+			{
+				$this->procedure[] = $filter[0];
+				$this->values[] = $filter[1];
+			}
+		}
+
+		// Render view
 		if ($this->treeView)
 		{
 			$return .= $this->treeView();
 		}
-
 		else
 		{
 			if ($this->Input->get('table') && $this->ptable && $this->Database->fieldExists('pid', $this->strTable))
