@@ -259,6 +259,7 @@ abstract class Controller extends System
 
 		$strClass = $this->findFrontendModule($objModule->type);
 
+		// Return if the class does not exist
 		if (!$this->classFileExists($strClass))
 		{
 			$this->log('Module class "'.$GLOBALS['FE_MOD'][$objModule->type].'" (module "'.$objModule->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
@@ -267,8 +268,6 @@ abstract class Controller extends System
 
 		$objModule->typePrefix = 'mod_';
 		$objModule = new $strClass($objModule, $strColumn);
-
-
 		$strBuffer = $objModule->generate();
 
 		// Disable indexing if protected
@@ -404,6 +403,7 @@ abstract class Controller extends System
 
 		$strClass = $this->findContentElement($objElement->type);
 
+		// Return if the class does not exist
 		if (!$this->classFileExists($strClass))
 		{
 			$this->log('Content element class "'.$strClass.'" (content element "'.$objElement->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
@@ -412,13 +412,22 @@ abstract class Controller extends System
 
 		$objElement->typePrefix = 'ce_';
 		$objElement = new $strClass($objElement);
-
 		$strBuffer = $objElement->generate();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getContentElement']) && is_array($GLOBALS['TL_HOOKS']['getContentElement']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($objElement, $strBuffer);
+			}
+		}
 
 		// Disable indexing if protected
 		if ($objElement->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
 		{
-			$strBuffer = "\n<!-- indexer::stop -->$strBuffer<!-- indexer::continue -->\n";
+			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 		}
 
 		return $strBuffer;

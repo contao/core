@@ -10,6 +10,7 @@ Version 2.9.0 (2010-XX-XX)
 - Added: added an option to aggregate user style sheets into a single file (#2094)
 - Added: added the insert tag "env::host" which displays the current host name (#2146)
 - Added: added an option to set a custom filter in the DCA configuration (#2150)
+- Added: added the "getContentElement" hook (#2065)
 - Fixed: double_encode in htmlspecialchars() is only available from PHP 5.2.3 (#2097)
 - Fixed: store the last modification date if a record is being updated via Ajax
 - Fixed: do not cache pages with a comment notification message
