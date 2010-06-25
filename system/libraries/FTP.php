@@ -115,20 +115,6 @@ class FTP extends Files
 
 		$this->blnIsConnected = true;
 		$this->resConnection = $resConnection;
-
-		// Make folders writable
-		if (!is_writable(TL_ROOT . '/system/tmp'))
-		{
-			$this->chmod('system/tmp', 0777);
-		}
-		if (!is_writable(TL_ROOT . '/system/html'))
-		{
-			$this->chmod('system/html', 0777);
-		}
-		if (!is_writable(TL_ROOT . '/system/logs'))
-		{
-			$this->chmod('system/logs', 0777);
-		}
 	}
 
 
@@ -170,11 +156,6 @@ class FTP extends Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
-		if ($strMode != 'r' && $strMode != 'rb')
-		{
-			$this->connect();
-		}
-
 		$this->validate($strFile);
 		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid(mt_rand(), true)), $strMode);
 
@@ -296,7 +277,7 @@ class FTP extends Files
 
 
 	/**
-	 * Change file mode
+	 * Change the file mode
 	 * @param string
 	 * @param mixed
 	 * @return boolean

@@ -137,11 +137,27 @@ class InstallTool extends Controller
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
 
+				$this->import('Files');
+
+				// Make folders writable
+				if (!is_writable(TL_ROOT . '/system/tmp'))
+				{
+					$this->Files->chmod('system/tmp', 0777);
+				}
+				if (!is_writable(TL_ROOT . '/system/html'))
+				{
+					$this->Files->chmod('system/html', 0777);
+				}
+				if (!is_writable(TL_ROOT . '/system/logs'))
+				{
+					$this->Files->chmod('system/logs', 0777);
+				}
+
 				$this->reload();
 			}
 		}
 
-		// Import files object AFTER storing the FTP settings
+		// Import the Files object AFTER storing the FTP settings
 		$this->import('Files');
 
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
