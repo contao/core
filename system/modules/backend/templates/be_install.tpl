@@ -69,6 +69,14 @@
   </div>
 </div>
 </form>
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+window.addEvent('domready', function() {
+  $('host').focus();
+});
+//--><!]]>
+</script>
 <?php elseif ($this->license): ?>
 
 <h3 class="no_border">GNU Lesser General Public License</h3>
@@ -1121,8 +1129,8 @@ Library.
 
 <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['installConfirm']; ?></p>
 <p><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][1]; ?></p>
-
 <?php endif; endif; endif; endif; endif; ?>
+
 <p id="go_to_login"><a href="contao/index.php" title="<?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?>"><?php echo $GLOBALS['TL_LANG']['tl_install']['beLogin']; ?></a></p>
 
 </div>

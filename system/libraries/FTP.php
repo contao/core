@@ -170,6 +170,11 @@ class FTP extends Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
+		if ($strMode != 'r' && $strMode != 'rb')
+		{
+			$this->connect();
+		}
+
 		$this->validate($strFile);
 		$resFile = fopen(TL_ROOT . '/system/tmp/' . md5(uniqid(mt_rand(), true)), $strMode);
 
