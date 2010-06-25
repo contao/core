@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
 			)
 		),
 		'operations' => array
