@@ -197,6 +197,8 @@ class TableWizard extends Widget
       <td></td>
     </tr>';
 
+		$tabindex = 0;
+
 		// Add rows
 		for ($i=0; $i<count($this->varValue); $i++)
 		{
@@ -207,7 +209,7 @@ class TableWizard extends Widget
 			for ($j=0; $j<count($this->varValue[$i]); $j++)
 			{
 				$return .= '
-      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
+      <td class="tcontainer"><textarea name="'.$this->strId.'['.$i.']['.$j.']" class="tl_textarea" tabindex="'.++$tabindex.'" rows="'.$this->intRows.'" cols="'.$this->intCols.'"'.$this->getAttributes().'>'.specialchars($this->varValue[$i][$j]).'</textarea></td>';
 			}
 
 			$return .= '

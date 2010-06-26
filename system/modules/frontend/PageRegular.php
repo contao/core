@@ -334,7 +334,7 @@ class PageRegular extends Frontend
 		}
 
 		// Default TinyMCE style sheet
-		if (file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
 			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css?' . filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') . '" type="text/css" media="screen" />' . "\n";
 		}
