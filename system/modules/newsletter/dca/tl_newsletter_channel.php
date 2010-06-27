@@ -124,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},title,jumpTo;{smtp_legend},useSMTP'
+		'default'                     => '{title_legend},title,jumpTo;{smtp_legend:hide},useSMTP'
 	),
 
 	// Subpalettes
