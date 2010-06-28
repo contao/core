@@ -82,8 +82,9 @@ class FormCaptcha extends Widget
 	{
 		switch ($strKey)
 		{
+			case 'required':
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				// Is set by default
 				break;
 
 			default:

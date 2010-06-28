@@ -97,12 +97,12 @@ if ($this->syntax == '')
  * This is the editArea (code editor) configuration file. Please visit
  * http://www.cdolivet.com/editarea/ for more information.
  */
-?>
+if ($GLOBALS['TL_CONFIG']['useCE']): ?>
 <script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js?<?php echo EDITAREA; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 editAreaLoader.init({
-  id : "<?php echo $this->eaField; ?>",
+  id : "<?php echo $this->ceField; ?>",
   syntax: "<?php echo $this->syntax; ?>",
   language: "<?php echo $this->language; ?>",
   start_highlight: true,
@@ -111,3 +111,4 @@ editAreaLoader.init({
 });
 //--><!]]>
 </script>
+<?php endif; ?>

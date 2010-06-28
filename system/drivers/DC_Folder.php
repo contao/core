@@ -1386,16 +1386,21 @@ window.addEvent(\'domready\', function()
 			$this->reload();
 		}
 
-		// Prepare the code editor
-		$this->eaField = 'ctrl_source';
-		$this->language = $GLOBALS['TL_LANGUAGE'];
-		$this->extension = $objFile->extension;
+		$editArea = '';
 
-		// Load the code editor configuration
-		ob_start();
-		include(TL_ROOT . '/system/config/editArea.php');
-		$editArea = ob_get_contents();
-		ob_end_clean();
+		// Prepare the code editor
+		if ($GLOBALS['TL_CONFIG']['useCE'])
+		{
+			$this->ceField = 'ctrl_source';
+			$this->language = $GLOBALS['TL_LANGUAGE'];
+			$this->extension = $objFile->extension;
+
+			// Load the code editor configuration
+			ob_start();
+			include(TL_ROOT . '/system/config/editArea.php');
+			$editArea = ob_get_contents();
+			ob_end_clean();
+		}
 
 		return'
 <div id="tl_buttons">

@@ -323,6 +323,7 @@ class BackendUser extends User
 
 		$GLOBALS['TL_CONFIG']['showHelp'] = $this->showHelp;
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
+		$GLOBALS['TL_CONFIG']['useCE'] = $this->useCE;
 		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
 		$GLOBALS['TL_CONFIG']['fancyUpload'] = $this->fancyUpload;
 		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;

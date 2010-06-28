@@ -33,7 +33,7 @@
  * This is the tinyMCE (rich text editor) configuration file. Please visit
  * http://tinymce.moxiecode.com for more information.
  */
-?>
+if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
 <script type="text/javascript" src="<?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -94,3 +94,4 @@ tinyMCE.init({
 });
 //--><!]]>
 </script>
+<?php endif; ?>

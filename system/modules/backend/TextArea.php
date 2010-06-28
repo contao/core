@@ -100,7 +100,7 @@ class TextArea extends Widget
 	public function generate()
 	{
 		// Register field name for rich text editor usage
-		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']) && $GLOBALS['TL_CONFIG']['useRTE'])
+		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
 		{
 			$GLOBALS['TL_RTE']['type'] = $this->rte;
 			$GLOBALS['TL_RTE']['fields'][] = 'ctrl_' . $this->strId;

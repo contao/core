@@ -68,12 +68,12 @@ class BackendTemplate extends Template
 	public function output()
 	{
 		// Rich text editor configuration
-		if (count($GLOBALS['TL_RTE']) && $GLOBALS['TL_CONFIG']['useRTE'])
+		if (count($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
 			$this->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
 			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
-			$this->eaField = $GLOBALS['TL_RTE']['fields'][0];
+			$this->ceField = $GLOBALS['TL_RTE']['fields'][0];
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 			list($type, $this->syntax) = explode('|', $GLOBALS['TL_RTE']['type']);
 			$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $type);

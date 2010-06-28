@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Back end theme', 'Here y
 $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Show explanation', 'Show a short explanation text below each input field.');
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Show thumbnail images', 'Show thumbnail images in the file manager.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
+$GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Enable the code editor', 'Use the code editor to modify code elements.');
 $GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('Use FancyUpload', 'If FancyUpload does not work properly in your web browser, you can deactivate the script here.');
 $GLOBALS['TL_LANG']['tl_user']['oldBeTheme']   = array('Use the old form layout', 'Do not use the new collapsible two-column forms.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');

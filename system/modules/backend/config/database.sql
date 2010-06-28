@@ -632,6 +632,7 @@ CREATE TABLE `tl_user` (
   `showHelp` char(1) NOT NULL default '',
   `thumbnails` char(1) NOT NULL default '',
   `useRTE` char(1) NOT NULL default '',
+  `useCE` char(1) NOT NULL default '',
   `fancyUpload` char(1) NOT NULL default '',
   `oldBeTheme` char(1) NOT NULL default '',
   `password` varchar(64) NOT NULL default '',
