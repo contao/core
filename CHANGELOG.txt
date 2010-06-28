@@ -31,6 +31,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: the fields of table tl_user_group were not displayed under allowed fields (#2167)
 - Fixed: set the permissions of new folders to 755 when using the Safe Mode Hack (#2120)
 - Fixed: the com_ and gallery_ template groups were not queried correctly (#2136)
+- Fixed: the search module returned wrong URLs when URL rewriting was disabled
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

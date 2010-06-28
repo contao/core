@@ -258,18 +258,11 @@ class ModuleSearch extends Module
 			// Get results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$strHref = $arrResult[$i]['url'];
-
-				if (!$GLOBALS['TL_CONFIG']['rewriteURL'] && !$GLOBALS['TL_CONFIG']['disableAlias'])
-				{
-					$strHref = 'index.php/' . $strHref;
-				}
-
 				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
-				$objTemplate->href = $this->Environment->base . $strHref;
+				$objTemplate->href = $this->Environment->base . $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
 				$objTemplate->relevance = number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2);
