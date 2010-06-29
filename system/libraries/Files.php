@@ -66,19 +66,9 @@ class Files
 		if (!is_object(self::$objInstance))
 		{
 			// Use FTP to modify files
-			if ($GLOBALS['TL_CONFIG']['useFTP'] && strlen($GLOBALS['TL_CONFIG']['ftpHost']) && strlen($GLOBALS['TL_CONFIG']['ftpUser']) && strlen($GLOBALS['TL_CONFIG']['ftpPass']))
+			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				// Connect to FTP server
-				if (($resConnection = ftp_connect($GLOBALS['TL_CONFIG']['ftpHost'])) != false)
-				{
-					// Login
-					if (ftp_login($resConnection, $GLOBALS['TL_CONFIG']['ftpUser'], $GLOBALS['TL_CONFIG']['ftpPass']))
-					{
-						// Passive mode
-						ftp_pasv($resConnection, true);
-						self::$objInstance = new FTP($resConnection);
-					}
-				}
+				self::$objInstance = new FTP();
 			}
 
 			// HOOK: use the smhextended module
@@ -105,6 +95,7 @@ class Files
 	 */
 	public function mkdir($strDirectory)
 	{
+		$this->validate($strDirectory);
 		return @mkdir(TL_ROOT . '/' . $strDirectory);
 	}
 
@@ -116,6 +107,7 @@ class Files
 	 */
 	public function rmdir($strDirectory)
 	{
+		$this->validate($strDirectory);
 		return @rmdir(TL_ROOT. '/' . $strDirectory);
 	}
 
@@ -127,6 +119,7 @@ class Files
 	 */
 	public function rrdir($strFolder, $blnPreserveRoot=false)
 	{
+		$this->validate($strFolder);
 		$arrFiles = scan(TL_ROOT . '/' . $strFolder);
 
 		foreach ($arrFiles as $strFile)
@@ -156,6 +149,7 @@ class Files
 	 */
 	public function fopen($strFile, $strMode)
 	{
+		$this->validate($strFile);
 		return @fopen(TL_ROOT . '/' . $strFile, $strMode);
 	}
 
@@ -191,6 +185,14 @@ class Files
 	 */
 	public function rename($strOldName, $strNewName)
 	{
+		// Source file == target file
+		if ($strOldName == $strNewName)
+		{
+			return;
+		}
+
+		$this->validate($strOldName, $strNewName);
+
 		// Windows fix: delete target file
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists(TL_ROOT . '/' . $strNewName))
 		{
@@ -216,6 +218,7 @@ class Files
 	 */
 	public function copy($strSource, $strDestination)
 	{
+		$this->validate($strSource, $strDestination);
 		return @copy(TL_ROOT . '/' . $strSource, TL_ROOT . '/' . $strDestination);
 	}
 
@@ -227,6 +230,7 @@ class Files
 	 */
 	public function delete($strFile)
 	{
+		$this->validate($strFile);
 		return @unlink(TL_ROOT . '/' . $strFile);
 	}
 
@@ -239,6 +243,7 @@ class Files
 	 */
 	public function chmod($strFile, $varMode)
 	{
+		$this->validate($strFile);
 		return @chmod(TL_ROOT . '/' . $strFile, $varMode);
 	}
 
@@ -250,6 +255,7 @@ class Files
 	 */
 	public function is_writeable($strFile)
 	{
+		$this->validate($strFile);
 		return @is_writeable(TL_ROOT . '/' . $strFile);
 	}
 
@@ -262,7 +268,24 @@ class Files
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{
+		$this->validate($strSource, $strDestination);
 		return @move_uploaded_file($strSource, TL_ROOT . '/' . $strDestination);
+	}
+
+
+	/**
+	 * Validate the path
+	 * @throws Exception
+	 */
+	protected function validate()
+	{
+		foreach (func_get_args() as $strPath)
+		{
+			if (strpos($strPath, '../') !== false)
+			{
+				throw new Exception('Invalid file or folder name ' . $strPath);
+			}
+		}
 	}
 }
 

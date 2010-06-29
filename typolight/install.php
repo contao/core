@@ -98,7 +98,7 @@ class InstallTool extends Controller
 			$GLOBALS['TL_CONFIG']['ftpUser'] = $this->Input->post('username', true);
 			$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
 
-			// Add trailing slash
+			// Add a trailing slash
 			if ($GLOBALS['TL_CONFIG']['ftpPath'] != '' && substr($GLOBALS['TL_CONFIG']['ftpPath'], -1) != '/')
 			{
 				$GLOBALS['TL_CONFIG']['ftpPath'] .= '/';
@@ -130,11 +130,27 @@ class InstallTool extends Controller
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
 
+				$this->import('Files');
+
+				// Make folders writable
+				if (!is_writable(TL_ROOT . '/system/tmp'))
+				{
+					$this->Files->chmod('system/tmp', 0777);
+				}
+				if (!is_writable(TL_ROOT . '/system/html'))
+				{
+					$this->Files->chmod('system/html', 0777);
+				}
+				if (!is_writable(TL_ROOT . '/system/logs'))
+				{
+					$this->Files->chmod('system/logs', 0777);
+				}
+
 				$this->reload();
 			}
 		}
 
-		// Import files object AFTER storing the FTP settings
+		// Import the Files object AFTER storing the FTP settings
 		$this->import('Files');
 
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
