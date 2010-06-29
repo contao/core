@@ -98,6 +98,23 @@ abstract class Backend extends Controller
 		define('CURRENT_ID', ($this->Input->get('table') ? $id : $this->Input->get('id')));
 		$this->Template->headline = $GLOBALS['TL_LANG']['MOD'][$module][0];
 
+		// Theme headlines
+		if ($module == 'themes')
+		{
+			if ($this->Input->get('table') == 'tl_style_sheet' || $this->Input->get('table') == 'tl_style')
+			{
+				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['css'][0];
+			}
+			elseif ($this->Input->get('table') == 'tl_module')
+			{
+				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['modules'][0];
+			}
+			elseif ($this->Input->get('table') == 'tl_layout')
+			{
+				$this->Template->headline .= ' - ' . $GLOBALS['TL_LANG']['MOD']['layout'][0];
+			}
+		}
+
 		// Add module style sheet
 		if (isset($arrModule['stylesheet']))
 		{
