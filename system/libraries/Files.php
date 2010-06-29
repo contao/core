@@ -187,6 +187,12 @@ class Files
 	 */
 	public function rename($strOldName, $strNewName)
 	{
+		// Source file == target file
+		if ($strOldName == $strNewName)
+		{
+			return;
+		}
+
 		$this->validate($strOldName, $strNewName);
 
 		// Windows fix: delete target file

@@ -32,6 +32,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: set the permissions of new folders to 755 when using the Safe Mode Hack (#2120)
 - Fixed: the com_ and gallery_ template groups were not queried correctly (#2136)
 - Fixed: the search module returned wrong URLs when URL rewriting was disabled
+- Fixed: do not execute Files::rename() if the source is the same as the target (#2067)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)
