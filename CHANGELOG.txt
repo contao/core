@@ -33,6 +33,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: the com_ and gallery_ template groups were not queried correctly (#2136)
 - Fixed: the search module returned wrong URLs when URL rewriting was disabled
 - Fixed: do not execute Files::rename() if the source is the same as the target (#2067)
+- Fixed: updated the countries list to its latest version (#2202)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)

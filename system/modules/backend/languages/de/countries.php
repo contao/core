@@ -32,7 +32,6 @@
 /**
  * Countries
  */
-$GLOBALS['TL_LANG']['CNT']['ac'] = 'Himmelfahrtsinsel';
 $GLOBALS['TL_LANG']['CNT']['ad'] = 'Andorra';
 $GLOBALS['TL_LANG']['CNT']['ae'] = 'Vereinigte Arabische Emirate';
 $GLOBALS['TL_LANG']['CNT']['af'] = 'Afghanistan';
@@ -48,8 +47,8 @@ $GLOBALS['TL_LANG']['CNT']['as'] = 'Amerikanisch-Samoa';
 $GLOBALS['TL_LANG']['CNT']['at'] = 'Österreich';
 $GLOBALS['TL_LANG']['CNT']['au'] = 'Australien';
 $GLOBALS['TL_LANG']['CNT']['aw'] = 'Aruba';
-$GLOBALS['TL_LANG']['CNT']['az'] = 'Aserbaidschan';
 $GLOBALS['TL_LANG']['CNT']['ax'] = 'Aland Islands';
+$GLOBALS['TL_LANG']['CNT']['az'] = 'Aserbaidschan';
 $GLOBALS['TL_LANG']['CNT']['ba'] = 'Bosnien-Herzegowina';
 $GLOBALS['TL_LANG']['CNT']['bb'] = 'Barbados';
 $GLOBALS['TL_LANG']['CNT']['bd'] = 'Bangladesh';
@@ -59,6 +58,7 @@ $GLOBALS['TL_LANG']['CNT']['bg'] = 'Bulgarien';
 $GLOBALS['TL_LANG']['CNT']['bh'] = 'Bahrain';
 $GLOBALS['TL_LANG']['CNT']['bi'] = 'Burundi';
 $GLOBALS['TL_LANG']['CNT']['bj'] = 'Benin';
+$GLOBALS['TL_LANG']['CNT']['bl'] = 'Sankt Bartholomäus';
 $GLOBALS['TL_LANG']['CNT']['bm'] = 'Bermuda-Inseln';
 $GLOBALS['TL_LANG']['CNT']['bn'] = 'Brunei';
 $GLOBALS['TL_LANG']['CNT']['bo'] = 'Bolivien';
@@ -171,6 +171,7 @@ $GLOBALS['TL_LANG']['CNT']['ma'] = 'Marokko';
 $GLOBALS['TL_LANG']['CNT']['mc'] = 'Monaco';
 $GLOBALS['TL_LANG']['CNT']['md'] = 'Moldawien';
 $GLOBALS['TL_LANG']['CNT']['me'] = 'Montenegro';
+$GLOBALS['TL_LANG']['CNT']['mf'] = 'Saint-Martin';
 $GLOBALS['TL_LANG']['CNT']['mg'] = 'Madagaskar';
 $GLOBALS['TL_LANG']['CNT']['mh'] = 'Marshall-Inseln';
 $GLOBALS['TL_LANG']['CNT']['mk'] = 'Mazedonien';
