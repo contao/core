@@ -2,7 +2,7 @@
 TYPOlight Open Source CMS Changelog
 ===================================
 
-Version 2.8.4 (2010-06-29)
+Version 2.8.4 (2010-06-30)
 --------------------------
 - Back-ported the Safe Mode Hack improvements from version 2.9
 
