@@ -87,11 +87,10 @@ fieldset.collapsed {
 	padding-bottom:12px;
 	margin-bottom:0;
 }
-fieldset.collapsed * {
-	display:none;
+fieldset.collapsed div {
+	display:none !important;
 }
 fieldset.collapsed legend {
-	display:block;
 	background:url("images/palCollapsed.gif") left center no-repeat;
 }
 

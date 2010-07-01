@@ -34,6 +34,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: the search module returned wrong URLs when URL rewriting was disabled
 - Fixed: do not execute Files::rename() if the source is the same as the target (#2067)
 - Fixed: updated the countries list to its latest version (#2202)
+- Fixed: automatically convert language tags to lowercase letters (#2205)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)
