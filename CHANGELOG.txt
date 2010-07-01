@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.9.0 (2010-XX-XX)
+Version 2.9.0 (2010-07-02)
 --------------------------
 - Improved the Search algorithm to treat the underscore as word character
 - Improved the news/calendar feed updater analogous to the style sheets (#2169)
@@ -35,6 +35,7 @@ Version 2.9.0 (2010-XX-XX)
 - Fixed: do not execute Files::rename() if the source is the same as the target (#2067)
 - Fixed: updated the countries list to its latest version (#2202)
 - Fixed: automatically convert language tags to lowercase letters (#2205)
+- Fixed: the "save and new" button did not always handle PIDs correctly (#2212)
 - Fixed a few minor issues
 
 Version 2.9.RC1 (2010-06-06)
