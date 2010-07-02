@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_content']['invisible']    = array('Unsichtbar', 'Das Element auf der Webseite nicht anzeigen.');
-$GLOBALS['TL_LANG']['tl_content']['type']         = array('Elementtyp', 'Bitte wählen sie den Typ des Inhaltselements.');
+$GLOBALS['TL_LANG']['tl_content']['type']         = array('Elementtyp', 'Bitte wählen Sie den Typ des Inhaltselements.');
 $GLOBALS['TL_LANG']['tl_content']['headline']     = array('Überschrift', 'Hier können Sie dem Inhaltselement eine Überschrift hinzufügen.');
 $GLOBALS['TL_LANG']['tl_content']['text']         = array('Text', 'Sie können HTML-Tags verwenden, um den Text zu formatieren.');
 $GLOBALS['TL_LANG']['tl_content']['addImage']     = array('Ein Bild hinzufügen', 'Dem Inhaltselement ein Bild hinzufügen.');
