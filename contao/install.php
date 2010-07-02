@@ -485,10 +485,6 @@ class InstallTool extends Controller
 		{
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_29update')
 			{
-				// Add the "useCE" feld at the beginning (see #2197)
-				$this->Database->query("ALTER TABLE `tl_user` ADD `useCE` char(1) NOT NULL default ''");
-				$this->Database->query("UPDATE tl_user SET useCE=1");
-
 				// Create the themes table
 				$this->Database->query(
 					"CREATE TABLE `tl_theme` (
@@ -558,14 +554,16 @@ class InstallTool extends Controller
 					$this->Database->prepare("UPDATE " . $objUser->tbl . " %s WHERE id=?")
 								   ->set($set)
 								   ->execute($objUser->id);
-
-					// Other version 2.9 updates
-					$this->Database->query("UPDATE tl_member SET country='gb' WHERE country='uk'");
-					$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
-					$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
-					$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_jumpToCurrent` `news_jumpToCurrent` varchar(16) NOT NULL default ''");
-					$this->Database->query("UPDATE tl_module SET news_jumpToCurrent='show_current' WHERE news_jumpToCurrent=1");
 				}
+
+				// Other version 2.9 updates
+				$this->Database->query("UPDATE tl_member SET country='gb' WHERE country='uk'");
+				$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
+				$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
+				$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_jumpToCurrent` `news_jumpToCurrent` varchar(16) NOT NULL default ''");
+				$this->Database->query("UPDATE tl_module SET news_jumpToCurrent='show_current' WHERE news_jumpToCurrent=1");
+				$this->Database->query("ALTER TABLE `tl_user` ADD `useCE` char(1) NOT NULL default ''");
+				$this->Database->query("UPDATE tl_user SET useCE=1");
 
 				$this->reload();
 			}
