@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.1 (2010-XX-XX)
+--------------------------
+- Fixed: the listing module always showed the primary key column (#2248)
+
 Version 2.9.0 (2010-07-02)
 --------------------------
 - Improved the Search algorithm to treat the underscore as word character

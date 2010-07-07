@@ -263,6 +263,12 @@ class ModuleListing extends Module
 
 			foreach ($arrRows[$i] as $k=>$v)
 			{
+				// Skip the primary key
+				if ($k == $this->strPk && !in_array($this->strPk, $arrFields))
+				{
+					continue;
+				}
+
 				// Never show passwords
 				if ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['inputType'] == 'password')
 				{
