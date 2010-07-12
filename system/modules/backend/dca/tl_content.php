@@ -1020,6 +1020,7 @@ class tl_content extends Backend
 		{
 			$objPage = $this->getPageDetails($objPage->pid);
 			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+			array_unshift($arrRoot, $objPage->rootId);
 		}
 
 		// Limit pages to the user's pagemounts
