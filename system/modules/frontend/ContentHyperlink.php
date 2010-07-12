@@ -58,6 +58,10 @@ class ContentHyperlink extends ContentElement
 		{
 			$this->url = $this->String->encodeEmail($this->url);
 		}
+		else
+		{
+			$this->url = ampersand($this->url);
+		}
 
 		$embed = explode('%s', $this->embed);
 
@@ -103,7 +107,7 @@ class ContentHyperlink extends ContentElement
 		}
 
 		$this->Template->rel = $this->rel;
-		$this->Template->href = ampersand($this->url);
+		$this->Template->href = $this->url;
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;

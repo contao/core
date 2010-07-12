@@ -6,6 +6,7 @@ Version 2.9.1 (2010-XX-XX)
 --------------------------
 - Fixed: the listing module always showed the primary key column (#2248)
 - Fixed: empty article teaser drop-down menu when only a root page was mounted (#2201)
+- Fixed: the hyperlink element did not handle mailto-links correctly (#2273)
 
 Version 2.9.0 (2010-07-02)
 --------------------------
