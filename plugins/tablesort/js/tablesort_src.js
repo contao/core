@@ -40,7 +40,7 @@ var DECIMAL_SEPARATOR = '.';
  *
  * Provide methods to sort tables using the mootools framework
  * keeping the Contao class names intact.
- * @version 1.3.0
+ * @version 1.3.1
  */
 var TableSort = new Class(
 {
@@ -151,7 +151,7 @@ var TableSort = new Class(
 		// Skip emtpy cells and get value
 		while (val == '' && table.tBodies[0].rows[i])
 		{
-			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/i).clean();
+			val = table.tBodies[0].rows[i].cells[index].innerHTML.replace(/<[^>]+>/ig, '').clean();
 			i++;
 		}
 
@@ -282,8 +282,8 @@ var TableSort = new Class(
 	 */
 	sortDate: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).clean();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).clean();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean();
 
 		var aaChunks = aa.replace(/[\/\.-]/g, ' ').split(' ');
 		var bbChunks = bb.replace(/[\/\.-]/g, ' ').split(' ');
@@ -324,8 +324,10 @@ var TableSort = new Class(
 	 */
 	sortNumeric: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(THOUSANDS_SEPARATOR, '');
-		bb = b.cells[SORT_INDEX].innerHTML.replace(THOUSANDS_SEPARATOR, '');
+		var rgxp = new RegExp('\\' + THOUSANDS_SEPARATOR, 'g');
+
+		aa = a.cells[SORT_INDEX].innerHTML.replace(rgxp, '');
+		bb = b.cells[SORT_INDEX].innerHTML.replace(rgxp, '');
 
 		if (DECIMAL_SEPARATOR != '.')
 		{
@@ -362,8 +364,8 @@ var TableSort = new Class(
 	 */
 	sortCaseInsensitive: function(a, b)
 	{
-		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).clean().toLowerCase();
-		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/i).clean().toLowerCase();
+		aa = a.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
+		bb = b.cells[SORT_INDEX].innerHTML.replace(/<[^>]+>/ig, '').clean().toLowerCase();
 
 		if (aa == bb)
 		{
