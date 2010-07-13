@@ -123,6 +123,7 @@ $GLOBALS['TL_LANG']['tl_repository_category_options']['utility']     = 'Hilfspro
 $GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Vorlage';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['widget']      = 'Widget';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['plugin']      = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Übersetzung';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['other']       = 'Andere';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['core']        = 'Core';
 
