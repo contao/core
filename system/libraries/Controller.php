@@ -2649,8 +2649,11 @@ abstract class Controller extends System
 				$intMaxWidth = $intMaxWidth - $arrMargin['left'] - $arrMargin['right'];
 			}
 
+			// See #2268 (thanks to Thyon)
+			$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+
 			$size[0] = $intMaxWidth;
-			$size[1] = floor($intMaxWidth * $imgSize[1] / $imgSize[0]);
+			$size[1] = floor($intMaxWidth * $ratio);
 		}
 
 		$src = $this->getImage($this->urlEncode($arrItem['singleSRC']), $size[0], $size[1], $size[2]);

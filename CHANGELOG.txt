@@ -9,6 +9,7 @@ Version 2.9.1 (2010-XX-XX)
 - Fixed: the hyperlink element did not handle mailto-links correctly (#2273)
 - Fixed: the table sort script did not handle tag replacements correclty (#2289)
 - Fixed: the version 2.9 database update failed when upgrading from version 2.6 (#2290)
+- Fixed: the maximum front end image width was not calculated correctly (#2268)
 - Fixed some minor issues
 
 Version 2.9.0 (2010-07-02)
