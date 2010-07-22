@@ -276,7 +276,14 @@ class ContentGallery extends ContentElement
 			++$rowcount;
 		}
 
-		$strTemplate = ($this->galleryTpl != '') ? $this->galleryTpl : 'gallery_default';
+		$strTemplate = 'gallery_default';
+
+		// Use a custom template
+		if (TL_MODE == 'FE' && $this->galleryTpl != '')
+		{
+			$strTemplate = $this->galleryTpl;
+		}
+
 		$objTemplate = new FrontendTemplate($strTemplate);
 
 		$objTemplate->body = $body;

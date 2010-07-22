@@ -10,6 +10,7 @@ Version 2.9.1 (2010-XX-XX)
 - Fixed: the table sort script did not handle tag replacements correclty (#2289)
 - Fixed: the version 2.9 database update failed when upgrading from version 2.6 (#2290)
 - Fixed: the maximum front end image width was not calculated correctly (#2268)
+- Fixed: custom image gallery templates threw an exception the back end (#2328)
 - Fixed some minor issues
 
 Version 2.9.0 (2010-07-02)
@@ -29,7 +30,7 @@ Version 2.9.0 (2010-07-02)
 - Fixed: do not allow negative values for resultsPerPage in the back end (#2100, #2109)
 - Fixed: EditArea 0.8.2 seems not to handle empty syntax strings (#2112)
 - Fixed: include the runonce.php file inside a try-catch block
-- Fixed: moved the "readMore" label to the frontend module (#2106)
+- Fixed: moved the "readMore" label to the front end module (#2106)
 - Fixed: "showQuantity" support was broken in the event menu (#2114)
 - Fixed: the theme importer did not strip special characters from the file name (#1974)
 - Fixed: "save and back" redirected back to the themes list when editing a style (#2110)
