@@ -1341,9 +1341,14 @@ window.addEvent(\'domready\', function()
 	{
 		$this->isValid($this->intId);
 
-		if (is_dir(TL_ROOT . '/' . $this->intId))
+		if (is_dir(TL_ROOT .'/'. $this->intId))
 		{
 			$this->log('Directory "'.$this->intId.'" cannot be edited', 'DC_Folder source()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+		elseif (!file_exists(TL_ROOT .'/'. $this->intId))
+		{
+			$this->log('File "'.$this->intId.'" does not exist', 'DC_Folder source()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 

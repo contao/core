@@ -401,7 +401,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'cgroup' => array
 		(
@@ -410,7 +410,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'chmod' => array
 		(

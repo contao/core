@@ -525,24 +525,24 @@ abstract class Database_Statement
 			return $this;
 		}
 
-		$strType = strtoupper(preg_replace('/\s+.*$/i', '', trim($this->strQuery)));
+		$strTrim = trim($this->strQuery);
 
-		switch ($strType)
+		if (strncasecmp($strTrim, 'INSERT', 6) === 0)
 		{
-			case 'INSERT':
-				$strQuery = sprintf('(%s) VALUES (%s)',
-									implode(', ', array_keys($arrParams)),
-									str_replace('%', '%%', implode(', ', array_values($arrParams))));
-				break;
+			$strQuery = sprintf('(%s) VALUES (%s)',
+								implode(', ', array_keys($arrParams)),
+								str_replace('%', '%%', implode(', ', array_values($arrParams))));
+		}
+		elseif (strncasecmp($strTrim, 'UPDATE', 6) === 0)
+		{
+			$arrSet = array();
 
-			case 'UPDATE':
-				$arrSet = array();
-				foreach ($arrParams as $k=>$v)
-				{
-					$arrSet[] = $k . '=' . $v;
-				}
-				$strQuery = 'SET ' . str_replace('%', '%%', implode(', ', $arrSet));
-				break;
+			foreach ($arrParams as $k=>$v)
+			{
+				$arrSet[] = $k . '=' . $v;
+			}
+
+			$strQuery = 'SET ' . str_replace('%', '%%', implode(', ', $arrSet));
 		}
 
 		$this->strQuery = str_replace('%p', $strQuery, $this->strQuery);

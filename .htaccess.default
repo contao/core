@@ -57,7 +57,7 @@
   # Uncomment the following lines and replace "domain.com" with your domain
   # name to redirect requests without "www". 
   ##
-  #RewriteCond %{HTTP_HOST} ^domain.com [NC]
+  #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
   #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
 
   ##
