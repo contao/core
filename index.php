@@ -257,11 +257,11 @@ class Index extends Frontend
 		$strBuffer = preg_replace
 		(
 			'/(<head[^>]*>)/',
-			"<!--\n\n"
+			"$1\n<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->\n$1",
+			. "//-->",
 			$strBuffer, 1
 		);
 
