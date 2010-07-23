@@ -498,7 +498,7 @@ class Search extends System
 			// Dynamically add the number of wildcard matches
 			if ($intWildcards)
 			{
-				$strQuery .= " + wildcards";
+				$strQuery .= " + IF(wildcards>" . $intWildcards . ", wildcards, " . $intWildcards . ")";
 			}
 		}
 
