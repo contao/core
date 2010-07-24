@@ -557,7 +557,14 @@ var AjaxRequest =
 				{
 					if (img.src.match(/folPlus|folMinus/))
 					{
-						img = img.getParent('a').getNext('a').getFirst('img');
+						if (img.getParent('a').getNext('a'))
+						{
+							img = img.getParent('a').getNext('a').getFirst('img');
+						}
+						else
+						{
+							img = new Element('img'); // no icons used (see #2286)
+						}
 					}
 
 					if (publish)
