@@ -344,9 +344,9 @@ class Comments extends Frontend
 			'@\s*\[quote=([^\]]+)\](.*)\[/quote\]\s*@Uis', 
 			'@\[img\]\s*([^\[" ]+\.(jpe?g|png|gif|bmp|tiff?|ico))\s*\[/img\]@i',
 			'@\[url\]\s*([^\[" ]+)\s*\[/url\]@i',
-			'@\[url=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/url\]@i',
+			'@\[url=([^\]" ]+)\](.*)\[/url\]@Uis',
 			'@\[email\]\s*([^\[" ]+)\s*\[/email\]@i',
-			'@\[email=([^\]" ]+)\]\s*([^\[" ]+)\s*\[/email\]@i',
+			'@\[email=([^\]" ]+)\](.*)\[/email\]@Uis',
 			'@href="(([a-z0-9]+\.)*[a-z0-9]+\.([a-z]{2}|asia|biz|com|info|name|net|org|tel)(/|"))@i'
 		);
 

@@ -187,7 +187,7 @@ class StyleSheets extends Backend
 			$comment = preg_replace('@^\s*/\*+@', '', $row['comment']);
 			$comment = preg_replace('@\*+/\s*$@', '', $comment);
 
-			$return .= "\n/* " . trim($comment) . " */";
+			$return .= "\n/* " . wordwrap(trim($comment), 72) . " */";
 		}
 
 		// Selector
@@ -432,6 +432,16 @@ class StyleSheets extends Backend
 	border-'.$k.':'.$v.$row['borderwidth']['unit'].(($row['borderstyle'] != '') ? ' '.$row['borderstyle'] : '').(($row['bordercolor'] != '') ? ' #'.$row['bordercolor'] : '').';';
 					}
 				}
+			}
+			else
+			{
+				if ($row['borderstyle'] != '')
+					$return .= '
+	border-style:'.$row['borderstyle'].';';
+
+				if ($row['bordercolor'] != '')
+					$return .= '
+	border-color:#'.$row['bordercolor'].';';
 			}
 
 			// Border collapse
@@ -1117,13 +1127,18 @@ class StyleSheets extends Backend
 					$strName = str_replace('border-', '', $strKey);
 					$varValue = preg_replace('/[^0-9\.-]+/', '', $arrWSC[0]);
 					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrWSC[0]);
+					if ((isset($arrSet['borderwidth']['unit']) && $arrSet['borderwidth']['unit'] != $strUnit) || ($arrWSC[1] != '' && isset($arrSet['borderstyle']) && $arrSet['borderstyle'] != $arrWSC[1]) || ($arrWSC[2] != '' && isset($arrSet['bordercolor']) && $arrSet['bordercolor'] != $arrWSC[2]))
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					$arrSet['borderwidth'][$strName] = preg_replace('/[^0-9\.-]+/', '', $varValue);
 					$arrSet['borderwidth']['unit'] = $strUnit;
-					if (strlen($arrWSC[1]))
+					if ($arrWSC[1] != '')
 					{
 						$arrSet['borderstyle'] = $arrWSC[1];
 					}
-					if (strlen($arrWSC[2]))
+					if ($arrWSC[2] != '')
 					{
 						$arrSet['bordercolor'] = str_replace('#', '', $arrWSC[2]);
 					}
