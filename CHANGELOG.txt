@@ -14,6 +14,7 @@ Version 2.9.1 (2010-XX-XX)
 - Fixed: the maximum front end image width was not calculated correctly (#2268)
 - Fixed: custom image gallery templates threw an exception the back end (#2328)
 - Fixed: fixed an XSS vulnerability in the front end (thanks to thyon)
+- Fixed: the feed generator did not always use the correct publication date (#2323)
 - Fixed some minor issues
 
 Version 2.9.0 (2010-07-02)

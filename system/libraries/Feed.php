@@ -107,6 +107,8 @@ class Feed extends System
 	 */
 	public function generateRss()
 	{
+		$this->adjustPublicationDate();
+
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
 		$xml .= '  <channel>' . "\n";
@@ -152,6 +154,8 @@ class Feed extends System
 	 */
 	public function generateAtom()
 	{
+		$this->adjustPublicationDate();
+
 		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
 		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">' . "\n";
 		$xml .= '  <title>' . specialchars($this->title) . '</title>' . "\n";
@@ -185,6 +189,18 @@ class Feed extends System
 		}
 
 		return $xml . '</feed>';
+	}
+	
+
+	/**
+	 * Adjust the publication date
+	 */
+	protected function adjustPublicationDate()
+	{
+		if (count($this->arrItems) && $this->arrItems[0]->published > $this->published)
+		{
+			$this->published = $this->arrItems[0]->published;
+		}
 	}
 }
 
