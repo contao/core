@@ -5,7 +5,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<div id="<?php echo $this->flashId; ?>">
+<div id="<?php echo $this->flashId; ?>_container">
 <?php echo $this->alt; ?> 
 </div>
 
@@ -20,25 +20,26 @@ function <?php echo $this->flashId; ?>_DoFSCommand(command, args) {
 <?php echo $this->fsCommand; ?> 
 }
 <?php endif; ?>
-if (Browser.Plugins.Flash.version > 0)
-new Swiff("<?php echo $this->href; ?>", {
-  id: "<?php echo $this->flashId; ?>",
-  width: <?php echo $this->width; ?>,
-  height: <?php echo $this->height; ?>,
+if (Browser.Plugins.Flash.version > 0) {
+  new Swiff("<?php echo $this->href; ?>", {
+    id: "<?php echo $this->flashId; ?>",
+    width: <?php echo $this->width; ?>,
+    height: <?php echo $this->height; ?>,
 <?php if ($this->interactive): ?>
-  properties : {
-    name: "<?php echo $this->flashId; ?>"
-  },
+    properties : {
+      name: "<?php echo $this->flashId; ?>"
+    },
 <?php endif; ?>
-  params : {
+    params : {
 <?php if (!$this->transparent): ?>
-    wMode: "window",
+      wMode: "window",
 <?php endif; ?>
-    allowFullScreen: true,
-    flashvars: "<?php echo $this->flashvars; ?>"
-  },
-  container: $('<?php echo $this->flashId; ?>')
-});
+      allowFullScreen: true,
+      flashvars: "<?php echo $this->flashvars; ?>"
+    },
+    container: $('<?php echo $this->flashId; ?>_container')
+  });
+}
 //--><!]]>
 </script>
 <!-- indexer::continue -->

@@ -34,7 +34,6 @@
  */
 $GLOBALS['TL_LANG']['MOD']['content']     = 'Content';
 $GLOBALS['TL_LANG']['MOD']['article']     = array('Articles', 'Manage articles and content elements.');
-$GLOBALS['TL_LANG']['MOD']['flash']       = array('Flash content', 'Manage the content of a dynamic Flash movie.');
 $GLOBALS['TL_LANG']['MOD']['form']        = array('Form generator', 'Create custom forms and store or send the submitted data.');
 $GLOBALS['TL_LANG']['MOD']['design']      = 'Layout';
 $GLOBALS['TL_LANG']['MOD']['themes']      = array('Themes', 'Manage front end modules, style sheets, page layouts and templates.');

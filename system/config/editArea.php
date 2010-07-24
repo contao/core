@@ -106,7 +106,7 @@ editAreaLoader.init({
   syntax: "<?php echo $this->syntax; ?>",
   language: "<?php echo $this->language; ?>",
   start_highlight: true,
-  toolbar: "new_document,save,search,go_to_line,fullscreen,|,syntax_selection,select_font,|,change_smooth_selection,highlight,reset_highlight,word_wrap,|,undo,redo,|,help",
+  toolbar: "new_document,search,go_to_line,fullscreen,|,syntax_selection,select_font,|,change_smooth_selection,highlight,reset_highlight,word_wrap,|,undo,redo,|,help",
   syntax_selection_allow: "c,cpp,css,html,java,js,perl,php,phyton,ruby,sql,vb,xml"
 });
 //--><!]]>

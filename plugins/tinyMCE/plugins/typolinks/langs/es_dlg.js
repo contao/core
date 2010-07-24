@@ -1,6 +1,6 @@
 tinyMCE.addI18n('es.typolinks_dlg',{
-page:"Paginas TYPOlight",
-file:"Archivos TYPOlight",
+page:"Paginas Contao",
+file:"Archivos Contao",
 link_title:"Insertar/editar enlace",
 link_url:"URL enlace",
 link_target:"Destino",
