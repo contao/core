@@ -168,8 +168,16 @@ abstract class Frontend extends Controller
 	protected function addToUrl($strRequest, $blnIgnoreParams=false)
 	{
 		$arrGet = $blnIgnoreParams ? array() : $_GET;
+
+		// Clean the $_GET values (thanks to thyon)
+		foreach (array_keys($arrGet) as $key)
+		{
+			$arrGet[$key] = $this->Input->get($key, true);
+		}
+
 		$arrFragments = preg_split('/&(amp;)?/i', $strRequest);
 
+		// Merge the new request string
 		foreach ($arrFragments as $strFragment)
 		{
 			list($key, $value) = explode('=', $strFragment);
