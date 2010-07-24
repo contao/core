@@ -2205,7 +2205,7 @@ abstract class Controller extends System
 		if (strlen($arrData['foreignKey']))
 		{
 			$arrKey = explode('.', $arrData['foreignKey']);
-			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " FROM " . $arrKey[0] . " ORDER BY " . $arrKey[1]);
+			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY " . $arrKey[1]);
 
 			if ($objOptions->numRows)
 			{

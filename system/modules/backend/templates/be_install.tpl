@@ -884,6 +884,7 @@ Library.
 
 <h3 class="no_border"><?php echo $GLOBALS['TL_LANG']['tl_install']['installTool'][1]; ?></h3>
 
+<p class="tl_info"><?php echo $this->noCookies; ?></p>
 <p><?php echo $GLOBALS['TL_LANG']['tl_install']['password'][1]; ?></p>
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">

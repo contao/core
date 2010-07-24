@@ -1145,6 +1145,7 @@ class InstallTool extends Controller
 		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 
 		$this->Template->output();
 		exit;

@@ -291,5 +291,6 @@ $GLOBALS['TL_LANG']['MSC']['ascending']        = 'aufsteigend';
 $GLOBALS['TL_LANG']['MSC']['descending']       = 'absteigend';
 $GLOBALS['TL_LANG']['MSC']['default']          = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Hilfe-Assistent';
+$GLOBALS['TL_LANG']['MSC']['noCookies']        = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
 
 ?>

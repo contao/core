@@ -67,7 +67,7 @@ class Index extends Backend
 			$strUrl = 'contao/main.php';
 
 			// Redirect to last page visited
-			if (strlen($this->Input->get('referer', true)))
+			if ($this->Input->get('referer', true) != '')
 			{
 				$strUrl = base64_decode($this->Input->get('referer', true));
 			}
@@ -106,6 +106,12 @@ class Index extends Backend
 	public function run()
 	{
 		$this->Template = new BackendTemplate('be_login');
+
+		// Show a cookie warning
+		if ($this->Input->get('referer', true) != '' && empty($_COOKIE))
+		{
+			$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
+		}
 
 		$this->Template->theme = $this->getTheme();
 		$this->Template->messages = $this->getMessages();

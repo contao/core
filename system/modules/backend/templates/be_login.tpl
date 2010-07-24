@@ -28,6 +28,10 @@
 <form action="<?php echo $this->action; ?>" class="tl_login_form" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_login" /><?php echo $this->messages; ?> 
+<?php if ($this->noCookies): ?>
+
+<p class="tl_error"><?php echo $this->noCookies; ?></p>
+<?php endif; ?>
 
 <table cellpadding="0" cellspacing="0" class="tl_login_table" summary="Input fields">
   <tr>
