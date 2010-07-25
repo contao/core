@@ -235,54 +235,59 @@ class Main extends Backend
 		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
 		$this->Template->backToTop = $GLOBALS['TL_LANG']['MSC']['backToTop'];
+		$this->Template->frontendFile = $GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php';
 
-		$this->Template->frontendFile = 'index.php';
-
-		// Preview pages
-		if ($this->Input->get('do') == 'page' && strlen(CURRENT_ID))
+		// Front end preview links
+		if (CURRENT_ID != '')
 		{
-			$objPreview = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										 ->limit(1)
-										 ->execute(CURRENT_ID);
-
-			if ($objPreview->numRows)
+			// Pages
+			if ($this->Input->get('do') == 'page')
 			{
-				if ($GLOBALS['TL_CONFIG']['disableAlias'])
+				$objPreview = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+											 ->limit(1)
+											 ->execute(CURRENT_ID);
+
+				if ($objPreview->numRows)
 				{
-					$this->Template->frontendFile = 'index.php?id=' . $objPreview->id;
-				}
-				else
-				{
-					$this->Template->frontendFile = 'index.php/' . (strlen($objPreview->alias) ? $objPreview->alias : $objPreview->id) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+					if ($GLOBALS['TL_CONFIG']['disableAlias'])
+					{
+						$this->Template->frontendFile .= '?id=' . $objPreview->id;
+					}
+					else
+					{
+						$this->Template->frontendFile .= ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : '/') . (($objPreview->alias != '') ? $objPreview->alias : $objPreview->id) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+					}
 				}
 			}
-		}
 
-		// Preview article
-		if ($this->Input->get('do') == 'article' && strlen(CURRENT_ID))
-		{
-			$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, a.id AS aid, a.alias AS aalias, a.inColumn AS acolumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
-										 ->limit(1)
-										 ->execute(CURRENT_ID);
-
-			if ($objPreview->numRows)
+			// Articles
+			elseif ($this->Input->get('do') == 'article')
 			{
-				$strColumn = '';
+				$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, a.id AS aid, a.alias AS aalias, a.inColumn AS acolumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+											 ->limit(1)
+											 ->execute(CURRENT_ID);
 
-				if ($objPreview->acolumn != 'main')
+				if ($objPreview->numRows)
 				{
-					$strColumn = $objPreview->acolumn . ':';
-				}
+					$strColumn = '';
 
-				if ($GLOBALS['TL_CONFIG']['disableAlias'])
-				{
-					$this->Template->frontendFile = 'index.php?id=' . $objPreview->pid . '&amp;articles=' . $strColumn . $objPreview->aid;
-				}
-				else
-				{
-					$this->Template->frontendFile = 'index.php/' . (strlen($objPreview->palias) ? $objPreview->palias : $objPreview->pid) . '/articles/' . $strColumn . (strlen($objPreview->aalias) ? $objPreview->aalias : $objPreview->aid) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+					if ($objPreview->acolumn != 'main')
+					{
+						$strColumn = $objPreview->acolumn . ':';
+					}
+
+					if ($GLOBALS['TL_CONFIG']['disableAlias'])
+					{
+						$this->Template->frontendFile .= '?id=' . $objPreview->pid . '&articles=' . $strColumn . $objPreview->aid;
+					}
+					else
+					{
+						$this->Template->frontendFile .= ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : '/') . (($objPreview->palias != '') ? $objPreview->palias : $objPreview->pid) . '/articles/' . $strColumn . (($objPreview->aalias != '') ? $objPreview->aalias : $objPreview->aid) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+					}
 				}
 			}
+		
+			$this->Template->frontendFile = str_replace(array('?', '&', '='), array('%3F', '%26', '%3D'), $this->Template->frontendFile);
 		}
 
 		$this->Template->output();

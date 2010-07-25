@@ -17,6 +17,7 @@ Version 2.9.1 (2010-XX-XX)
 - Fixed: fixed an XSS vulnerability in the front end (thanks to thyon)
 - Fixed: the feed generator did not always use the correct publication date (#2323)
 - Fixed: fixed two style sheet importer issues (#2239, #2347)
+- Fixed: the front end preview links did not work with URL rewriting enabled (#2262)
 - Fixed some minor issues
 
 Version 2.9.0 (2010-07-02)
