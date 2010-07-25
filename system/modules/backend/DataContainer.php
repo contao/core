@@ -190,7 +190,7 @@ class DataContainer extends Backend
 		elseif ($arrData['inputType'] == 'tableWizard')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG'][$this->strTable]['importTable'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG'][$this->strTable]['importTable'][0], 'style="vertical-align:text-bottom;"') . '</a>';
-			$xlabel .= ' ' . $this->generateImage('demagnify.gif', 'Demagnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', 'Magnify', 'style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
+			$xlabel .= ' ' . $this->generateImage('demagnify.gif', $GLOBALS['TL_LANG']['tl_content']['shrink'][0], 'title="'.$GLOBALS['TL_LANG']['tl_content']['shrink'][1].'" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', $GLOBALS['TL_LANG']['tl_content']['expand'][0], 'title="'.$GLOBALS['TL_LANG']['tl_content']['expand'][1].'" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
 		}
 
 		// Add list import wizard

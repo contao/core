@@ -86,6 +86,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['copy']       = array('Duplicate newsletter
 $GLOBALS['TL_LANG']['tl_newsletter']['cut']        = array('Move newsletter', 'Move newsletter ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter']['delete']     = array('Delete newsletter', 'Delete newsletter ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter']['editheader'] = array('Edit channel', 'Edit the channel settings');
+$GLOBALS['TL_LANG']['tl_newsletter']['pasteafter'] = array('Paste into this channel', 'Paste after newsletter ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter']['send']       = array('Send newsletter', 'Send newsletter ID %s');
 
 ?>

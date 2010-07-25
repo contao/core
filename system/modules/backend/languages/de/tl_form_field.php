@@ -124,8 +124,8 @@ $GLOBALS['TL_LANG']['tl_form_field']['delete']     = array('Feld löschen', 'Das
 $GLOBALS['TL_LANG']['tl_form_field']['editheader'] = array('Formular bearbeiten', 'Die Formular-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Oben einfügen', 'Nach dem Feld ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Neues Feld oben erstellen', 'Neues Element nach dem Feld ID %s erstellen');
-$GLOBALS['TL_LANG']['tl_form_field']['up']         = array('Eine Position nach oben', 'Das Feld eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['tl_form_field']['down']       = array('Eine Position nach unten', 'Das Feld eine Position nach unten verschieben');
+$GLOBALS['TL_LANG']['tl_form_field']['up']         = array('Das Feld eine Position nach oben verschieben', 'Nach oben');
+$GLOBALS['TL_LANG']['tl_form_field']['down']       = array('Das Feld eine Position nach unten verschieben', 'Nach unten');
 $GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Feldes ID %s ändern');
 
 ?>

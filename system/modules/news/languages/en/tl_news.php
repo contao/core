@@ -83,5 +83,6 @@ $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Move article', 'Move news 
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Delete article', 'Delete news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish news article ID %s');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Edit archive settings', 'Edit the archive settings');
+$GLOBALS['TL_LANG']['tl_news']['pasteafter'] = array('Paste into this archive', 'Paste after news article ID %s');
 
 ?>

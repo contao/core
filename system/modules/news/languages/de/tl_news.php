@@ -83,5 +83,6 @@ $GLOBALS['TL_LANG']['tl_news']['cut']        = array('Beitrag verschieben', 'Bei
 $GLOBALS['TL_LANG']['tl_news']['delete']     = array('Beitrag löschen', 'Beitrag ID %s löschen');
 $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Beitrag veröffentlichen/unveröffentlichen', 'Beitrag ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Nachrichtenarchiv bearbeiten', 'Die Nachrichtenarchiv-Einstellungen bearbeiten');
+$GLOBALS['TL_LANG']['tl_news']['pasteafter'] = array('In dieses Nachrichtenarchiv einfügen', 'Nach dem Beitrag ID %s einfügen');
 
 ?>

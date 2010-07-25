@@ -134,7 +134,5 @@ $GLOBALS['TL_LANG']['tl_module']['copy']       = array('Modul duplizieren', 'Mod
 $GLOBALS['TL_LANG']['tl_module']['delete']     = array('Modul löschen', 'Modul ID %s löschen');
 $GLOBALS['TL_LANG']['tl_module']['editheader'] = array('Theme bearbeiten', 'Die Theme-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_module']['pasteafter'] = array('Hier einfügen', 'Nach dem Modul ID %s einfügen');
-$GLOBALS['TL_LANG']['tl_module']['up']         = array('Eine Position nach oben', 'Den Eintrag eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['tl_module']['down']       = array('Eine Position nach unten', 'Den Eintrag eine Position nach unten verschieben');
 
 ?>

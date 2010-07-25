@@ -179,6 +179,8 @@ $GLOBALS['TL_LANG']['MSC']['password']   = array('Password', 'Please enter a pas
 $GLOBALS['TL_LANG']['MSC']['confirm']    = array('Confirmation', 'Please confirm the password.');
 $GLOBALS['TL_LANG']['MSC']['dateAdded']  = array('Date added', 'Date added: %s');
 $GLOBALS['TL_LANG']['MSC']['lastLogin']  = array('Last login', 'Last login: %s');
+$GLOBALS['TL_LANG']['MSC']['move_up']    = array('Move up', 'Move the item one position up');
+$GLOBALS['TL_LANG']['MSC']['move_down']  = array('Move down', 'Move the item one position down');
 
 
 /**

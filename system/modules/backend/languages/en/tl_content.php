@@ -134,11 +134,16 @@ $GLOBALS['TL_LANG']['tl_content']['edit']        = array('Edit element', 'Edit c
 $GLOBALS['TL_LANG']['tl_content']['editheader']  = array('Edit article settings', 'Edit the settings of the article');
 $GLOBALS['TL_LANG']['tl_content']['pasteafter']  = array('Paste at the top', 'Paste after content element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Add new at the top', 'Add new after content element ID %s');
-$GLOBALS['TL_LANG']['tl_content']['up']          = array('Move item up', 'Move the item one position up');
-$GLOBALS['TL_LANG']['tl_content']['down']        = array('Move item down', 'Move the item one position down');
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Toggle visibility', 'Toggle the visibility of element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Edit source element', 'Edit the source element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit article ID %s');
+
+
+/**
+ * List wizard
+ */
+$GLOBALS['TL_LANG']['tl_content']['up']   = array('Move the element one position up', 'Move up');
+$GLOBALS['TL_LANG']['tl_content']['down'] = array('Move the element one position down', 'Move down');
 
 
 /**
@@ -146,7 +151,8 @@ $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit a
  */
 $GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV import', 'Import list items from a CSV file');
 $GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV import', 'Import table items from a CSV file');
-$GLOBALS['TL_LANG']['tl_content']['resizeCells'] = array('Cell magnifier', 'Toggle the cell magnifier');
+$GLOBALS['TL_LANG']['tl_content']['expand']      = array('Expand', 'Increase the input field size');
+$GLOBALS['TL_LANG']['tl_content']['shrink']      = array('Shrink', 'Decrease the input field size');
 $GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Duplicate row', 'Duplicate the row');
 $GLOBALS['TL_LANG']['tl_content']['rup']         = array('Move row up', 'Move the row one position up');
 $GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Move row down', 'Move the row one position down');

@@ -133,11 +133,16 @@ $GLOBALS['TL_LANG']['tl_content']['edit']        = array('Element bearbeiten', '
 $GLOBALS['TL_LANG']['tl_content']['editheader']  = array('Artikel bearbeiten', 'Die Artikeleinstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_content']['pasteafter']  = array('Oben einfügen', 'Nach dem Inhaltselement ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Neues Element oben erstellen', 'Neues Element nach dem Inhaltselement ID %s erstellen');
-$GLOBALS['TL_LANG']['tl_content']['up']          = array('Eine Position nach oben', 'Den Eintrag eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['tl_content']['down']        = array('Eine Position nach unten', 'Den Eintrag eine Position nach unten verschieben');
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Inhaltselements ID %s ändern');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Quellelement bearbeiten', 'Das Quellelement ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Artikel bearbeiten', 'Artikel ID %s bearbeiten');
+
+
+/**
+ * List wizard
+ */
+$GLOBALS['TL_LANG']['tl_content']['up']   = array('Das Element eine Position nach oben verschieben', 'Nach oben');
+$GLOBALS['TL_LANG']['tl_content']['down'] = array('Das Element eine Position nach unten verschieben', 'Nach unten');
 
 
 /**
@@ -145,7 +150,8 @@ $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Artikel bearbeiten', '
  */
 $GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV-Import', 'Listeneinträge aus einer CSV-Datei importieren');
 $GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV-Import', 'Tabelleneinträge aus einer CSV-Datei importieren');
-$GLOBALS['TL_LANG']['tl_content']['resizeCells'] = array('Vergrößerung ein-/ausschalten', 'Vergrößerung beim Fokussieren ein- bzw. ausschalten');
+$GLOBALS['TL_LANG']['tl_content']['expand']      = array('Vergrößern', 'Die Eingabefelder vergrößern');
+$GLOBALS['TL_LANG']['tl_content']['shrink']      = array('Verkleinern', 'Die Eingabefelder verkleinern');
 $GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Reihe duplizieren', 'Die Reihe duplizieren');
 $GLOBALS['TL_LANG']['tl_content']['rup']         = array('Eine Position nach oben', 'Die Reihe eine Position nach oben verschieben');
 $GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Eine Position nach unten', 'Die Reihe eine Position nach unten verschieben');

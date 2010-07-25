@@ -97,5 +97,6 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['cut']        = array('Move event', 'M
 $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Delete event', 'Delete event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Publish/unpublish event', 'Publish/unpublish event ID %s');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Edit calendar', 'Edit the calendar settings');
+$GLOBALS['TL_LANG']['tl_calendar_events']['pasteafter'] = array('Paste into this calendar', 'Paste after event ID %s');
 
 ?>
