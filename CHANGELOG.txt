@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.9.1 (2010-XX-XX)
 --------------------------
+- Updated TinyMCE to version 3.3.8 (#2285)
 - Improved the theme exporter to skip back end templates (#2343)
 - Improved the theme importer to check for existing custom templates (#2344)
 - Added: added a Safari patch for the EditArea plugin (#2281)

@@ -164,7 +164,7 @@ lower_greek:"Lower greek",
 lower_roman:"Lower roman",
 upper_alpha:"Upper alpha",
 upper_roman:"Upper roman",
-circle:"Circle",
-disc:"Disc",
+circle:"K\u00F6r",
+disc:"Lemez",
 square:"Square"
 }}});

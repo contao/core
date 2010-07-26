@@ -91,8 +91,8 @@ paste:{
 paste_text_desc:"Colar como texto simples",
 paste_word_desc:"Colar (copiado do WORD)",
 selectall_desc:"Selecionar tudo",
-plaintext_mode_sticky:"Paste is now in plain text mode. Click again to toggle back to regular paste mode. After you paste something you will be returned to regular paste mode.",
-plaintext_mode:"Paste is now in plain text mode. Click again to toggle back to regular paste mode."
+plaintext_mode_sticky:"Comando colar est\u00E1 em modo texto simples. Clique novamente para voltar para o modo normal. Depois de colar alguma coisa retornar\u00E1 para o modo normal.",
+plaintext_mode:"Comando colar est\u00E1 em modo texto simples. Clique novamente para voltar para o modo normal."
 },
 paste_dlg:{
 text_title:"Use CTRL+V para colar o texto na janela.",
@@ -123,8 +123,8 @@ cell:"C\u00E9lula"
 },
 autosave:{
 unload_msg:"As mudan\u00E7as efetuadas ser\u00E3o perdidas se sair desta p\u00E1gina.",
-restore_content:"Restore auto-saved content.",
-warning_message:"If you restore the saved content, you will lose all the content that is currently in the editor.\n\nAre you sure you want to restore the saved content?."
+restore_content:"Restaura conte\u00FAdo salvo automaticamente.",
+warning_message:"Se restaurar o conte\u00FAdo, voc\u00EA ir\u00E1 perder tudo que est\u00E1 atualmente no editor.\n\nTem certeza que quer restaurar o conte\u00FAdo salvo?"
 },
 fullscreen:{
 desc:"Tela Inteira"
@@ -157,14 +157,14 @@ pagebreak:{
 desc:"Inserir quebra de p\u00E1gina."
 },
 advlist:{
-types:"Types",
-def:"Default",
-lower_alpha:"Lower alpha",
-lower_greek:"Lower greek",
-lower_roman:"Lower roman",
-upper_alpha:"Upper alpha",
-upper_roman:"Upper roman",
-circle:"Circle",
-disc:"Disc",
-square:"Square"
+types:"Tipos",
+def:"Padr\u00E3o",
+lower_alpha:"Alfabeto min\u00FAsculo",
+lower_greek:"Alfabeto grego",
+lower_roman:"Num. romanos min\u00FAsculos",
+upper_alpha:"Alfabeto mai\u00FAsculos",
+upper_roman:"Num. romanos mai\u00FAsculos",
+circle:"C\u00EDrculo",
+disc:"Disco",
+square:"Quadrado"
 }}});
