@@ -191,7 +191,7 @@ class tl_templates extends Backend
 		// Get all templates
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			if (!is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
+			if ($strModule == 'rep_client' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
 				continue;
 			}

@@ -836,7 +836,7 @@ class Theme extends Backend
 		// Add all .tpl files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
 		{
-			if (preg_match('/\.tpl$/', $strFile))
+			if (preg_match('/\.tpl$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
 			{
 				$objArchive->addFile($strFolder .'/'. $strFile);
 			}
