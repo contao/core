@@ -5,6 +5,7 @@ Contao Open Source CMS Changelog
 Version 2.9.1 (2010-XX-XX)
 --------------------------
 - Improved the theme exporter to skip back end templates (#2343)
+- Improved the theme importer to check for existing custom templates (#2344)
 - Added: added a Safari patch for the EditArea plugin (#2281)
 - Added: added a Swedish translation to the TinyMCE typolinks plugin (#2235)
 - Added: added a warning to the login screen if cookies are not allowed (#2210)

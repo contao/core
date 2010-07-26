@@ -294,6 +294,34 @@ class Theme extends Backend
 				$return .= "\n  " . '<p style="margin:0; color:#8ab858;">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
 			}
 
+			// Check the custom templates
+			$return .= '
+  <h4>'.$GLOBALS['TL_LANG']['tl_theme']['custom_templates'].'</h4>';
+
+			$objArchive->reset();
+			$blnTplExists = false;
+
+			// Loop through the archive
+			while ($objArchive->next())
+			{
+				if (strncmp($objArchive->file_name, 'templates/', 10) !== 0)
+				{
+					continue;
+				}
+
+				if (file_exists(TL_ROOT .'/'. $objArchive->file_name))
+				{
+					$blnTplExists = true;
+					$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
+				}
+			}
+
+			// Confirmation
+			if (!$blnTplExists)
+			{
+				$return .= "\n  " . '<p style="margin:0; color:#8ab858;">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+			}
+
 			$return .= '
 </div>';
 		}

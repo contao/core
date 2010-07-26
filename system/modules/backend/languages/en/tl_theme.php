@@ -44,17 +44,20 @@ $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Revision date', 'Date and
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_theme']['title_legend']    = 'Title and author';
-$GLOBALS['TL_LANG']['tl_theme']['config_legend']   = 'Configuration';
-$GLOBALS['TL_LANG']['tl_theme']['theme_imported']  = 'Theme "%s" has been imported.';
-$GLOBALS['TL_LANG']['tl_theme']['checking_theme']  = 'The theme data is being checked';
-$GLOBALS['TL_LANG']['tl_theme']['tables_fields']   = 'Tables and fields';
-$GLOBALS['TL_LANG']['tl_theme']['missing_field']   = 'The field <strong>%s</strong> is missing in the database and will not be imported.';
-$GLOBALS['TL_LANG']['tl_theme']['tables_ok']       = 'The tables have been successfully checked.';
-$GLOBALS['TL_LANG']['tl_theme']['custom_sections'] = 'Custom layout sections';
-$GLOBALS['TL_LANG']['tl_theme']['missing_section'] = 'The layout section <strong>%s</strong> is not defined in the back end settings.';
-$GLOBALS['TL_LANG']['tl_theme']['sections_ok']     = 'The theme does not include custom layout sections.';
-$GLOBALS['TL_LANG']['tl_theme']['missing_xml']     = 'Theme "%s" is corrupt and cannot be imported.';
+$GLOBALS['TL_LANG']['tl_theme']['title_legend']     = 'Title and author';
+$GLOBALS['TL_LANG']['tl_theme']['config_legend']    = 'Configuration';
+$GLOBALS['TL_LANG']['tl_theme']['theme_imported']   = 'Theme "%s" has been imported.';
+$GLOBALS['TL_LANG']['tl_theme']['checking_theme']   = 'The theme data is being checked';
+$GLOBALS['TL_LANG']['tl_theme']['tables_fields']    = 'Tables and fields';
+$GLOBALS['TL_LANG']['tl_theme']['missing_field']    = 'The field <strong>%s</strong> is missing in the database and will not be imported.';
+$GLOBALS['TL_LANG']['tl_theme']['tables_ok']        = 'The tables have been successfully checked.';
+$GLOBALS['TL_LANG']['tl_theme']['custom_sections']  = 'Custom layout sections';
+$GLOBALS['TL_LANG']['tl_theme']['missing_section']  = 'The layout section <strong>%s</strong> is not defined in the back end settings.';
+$GLOBALS['TL_LANG']['tl_theme']['sections_ok']      = 'The theme does not include custom layout sections.';
+$GLOBALS['TL_LANG']['tl_theme']['missing_xml']      = 'Theme "%s" is corrupt and cannot be imported.';
+$GLOBALS['TL_LANG']['tl_theme']['custom_templates'] = 'Custom templates';
+$GLOBALS['TL_LANG']['tl_theme']['template_exists']  = 'The template <strong>"%s"</strong> exists and will be overwritten.';
+$GLOBALS['TL_LANG']['tl_theme']['templates_ok']     = 'No conflicts detected.';
 
 
 /**
