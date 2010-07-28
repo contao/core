@@ -304,7 +304,7 @@ class ModuleListing extends Module
 		/**
 		 * Template variables
 		 */
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->details = strlen($this->list_info) ? true : false;
 		$this->Template->search_label = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);

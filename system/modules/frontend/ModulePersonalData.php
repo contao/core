@@ -263,7 +263,7 @@ class ModulePersonalData extends Module
 
 		$this->Template->formId = 'tl_member_' . $this->id;
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['saveData']);
-		$this->Template->action = ampersand($this->Environment->request, true);
+		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
 		$this->Template->rowLast = 'row_' . $row . ((($row % 2) == 0) ? ' even' : ' odd');
 

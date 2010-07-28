@@ -149,7 +149,7 @@ class ModuleCloseAccount extends Module
 		$this->Template->fields = $objWidget->parse();
 
 		$this->Template->formId = 'tl_close_account';
-		$this->Template->action = ampersand($this->Environment->request, true);
+		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['closeAccount']);
 		$this->Template->tableless = $this->tableless;
 	}

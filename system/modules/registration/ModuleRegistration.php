@@ -302,7 +302,7 @@ class ModuleRegistration extends Module
 		$this->Template->captcha = $arrFields['captcha'];
 		$this->Template->formId = 'tl_registration';
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['register']);
-		$this->Template->action = ampersand($this->Environment->request, true);
+		$this->Template->action = $this->getIndexFreeRequest();
 
 		// HOOK: add memberlist fields
 		if (in_array('memberlist', $this->Config->getActiveModules()))

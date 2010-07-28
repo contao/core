@@ -364,11 +364,9 @@ class Environment
 	{
 		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri());
 
-		if (empty($strRequest))
-		{
-			$strRequest = $this->script();
-		}
-
+		// From version 2.9, do not fallback to $this->script()
+		// anymore if the request string is empty (see #1844).
+		
 		// IE security fix (thanks to Michiel Leideman)
 		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
 

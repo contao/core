@@ -205,16 +205,10 @@ class ModuleCustomnav extends Module
 		$items[0]['class'] = trim($items[0]['class'] . ' first');
 		$last = count($items) - 1;
 		$items[$last]['class'] = trim($items[$last]['class'] . ' last');
-		
+
 		$objTemplate->items = $items;
-		$request = ampersand($this->Environment->request, true);
 
-		if ($request == 'index.php')
-		{
-			$request = '';
-		}
-
-		$this->Template->request = $request;
+		$this->Template->request = $this->getIndexFreeRequest(true);
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = count($items) ? $objTemplate->parse() : '';

@@ -93,16 +93,16 @@ class FrontendTemplate extends Template
 		$this->keywords = '';
 		$arrKeywords = array_map('trim', explode(',', $GLOBALS['TL_KEYWORDS']));
 
-		// Add keywords
+		// Add the meta keywords
 		if (strlen($arrKeywords[0]))
 		{
 			$this->keywords = str_replace(array("\n", "\r", '"'), array(' ' , '', ''), implode(', ', array_unique($arrKeywords)));
 		}
 
-		// Parse template
+		// Parse the template
 		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
 
-		// HOOK: add custom output filter
+		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['outputFrontendTemplate'] as $callback)
@@ -114,24 +114,26 @@ class FrontendTemplate extends Template
 
 		$intCache = null;
 
-		// Cache page if it is not protected
+		// Cache the page if it is not protected
 		if (empty($_POST) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
-			// Do not cache empty requests
-			if ($this->Environment->request != '' && $this->Environment->request != 'index.php')
+			// If the request string is empty, use a special cache tag which considers the browser languages
+			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 			{
-				// Create a unique key
-				$strUniqueKey = $this->Environment->base . $strUrl;
-
-				// Replace insert tags for caching
-				$strBuffer = $this->replaceInsertTags($strBuffer, true);
-				$intCache = intval($objPage->cache) + time();
-
-				// Create cache file
-				$objFile = new File('system/tmp/' . md5($strUniqueKey));
-				$objFile->write('<?php $expire = ' . $intCache . '; ?>' . $strBuffer);
-				$objFile->close();
+				$strUrl = 'empty.' . implode('.', $this->Environment->httpAcceptLanguage);
 			}
+
+			// Create a unique key
+			$strUniqueKey = $this->Environment->base . $strUrl;
+
+			// Replace insert tags for caching
+			$strBuffer = $this->replaceInsertTags($strBuffer, true);
+			$intCache = intval($objPage->cache) + time();
+
+			// Create cache file
+			$objFile = new File('system/tmp/' . md5($strUniqueKey));
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $strBuffer);
+			$objFile->close();
 		}
 
 		// Send cache headers

@@ -213,12 +213,15 @@ class Index extends Frontend
 		}
 
 		$this->import('Environment');
-		$strCacheKey = $this->Environment->base . preg_replace('@^index.php/?@i', '', $this->Environment->request);
 
-		// Do not cache empty requests
-		if (!$strCacheKey)
+		// If the request string is empty, look for a cached page matching the browser languages
+		if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 		{
-			return;
+			$strCacheKey = $this->Environment->base .'empty.'. implode('.', $this->Environment->httpAcceptLanguage);
+		}
+		else
+		{
+			$strCacheKey = $this->Environment->base . $this->Environment->request;
 		}
 
 		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey);

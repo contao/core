@@ -206,14 +206,9 @@ class ModuleArticle extends Module
 		// Add syndication variables
 		if ($this->Template->printable)
 		{
-			$request = ampersand($this->Environment->request, true);
+			$request = $this->getIndexFreeRequest(true);
 
-			if ($request == 'index.php' || $request == '')
-			{
-				$request = $this->generateFrontendUrl($objPage->row());
-			}
-
-			$this->Template->print = $request;
+			$this->Template->print = '#';
 			$this->Template->encUrl = rawurlencode($this->Environment->base . $this->Environment->request);
 			$this->Template->encTitle = rawurlencode($objPage->pageTitle);
 			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;

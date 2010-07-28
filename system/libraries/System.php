@@ -309,6 +309,25 @@ abstract class System
 
 
 	/**
+	 * Return the request string or an empty string if the request string
+	 * is "index.php" and optionally encode ampersands
+	 * @param boolean
+	 * @return string
+	 */
+	protected function getIndexFreeRequest($blnAmpersand=true)
+	{
+		$strRequest = $this->Environment->request;
+
+		if ($strRequest == 'index.php')
+		{
+			return '';
+		}
+
+		return ampersand($strRequest, $blnAmpersand);
+	}
+
+
+	/**
 	 * Load a set of language files
 	 * @param string
 	 * @param boolean

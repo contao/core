@@ -63,7 +63,7 @@ class ModuleMaintenance extends BackendModule
 
 		$this->Template->href = $this->getReferer(true);
 		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
-		$this->Template->action = ampersand($this->Environment->request, true);
+		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 	}

@@ -88,14 +88,7 @@ class ModuleNavigation extends Module
 			$level = 0;
 		}
 
-		$request = ampersand($this->Environment->request, true);
-
-		if ($request == 'index.php')
-		{
-			$request = '';
-		}
-
-		$this->Template->request = $request;
+		$this->Template->request = $this->getIndexFreeRequest(true);
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->items = $this->renderNavigation($trail[$level]);

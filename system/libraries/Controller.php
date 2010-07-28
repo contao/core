@@ -1706,15 +1706,7 @@ abstract class Controller extends System
 							break;
 
 						case 'request':
-							$request = $this->Environment->request;
-							if ($request == 'index.php')
-							{
-								$arrCache[$strTag] = '';
-							}
-							else
-							{
-								$arrCache[$strTag] = ampersand($request, true);
-							}
+							$arrCache[$strTag] = $this->getIndexFreeRequest(true);
 							break;
 
 						case 'ip':

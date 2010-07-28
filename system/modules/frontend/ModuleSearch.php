@@ -105,7 +105,7 @@ class ModuleSearch extends Module
 		$objFormTemplate->matchAll = specialchars($GLOBALS['TL_LANG']['MSC']['matchAll']);
 		$objFormTemplate->matchAny = specialchars($GLOBALS['TL_LANG']['MSC']['matchAny']);
 		$objFormTemplate->id = ($GLOBALS['TL_CONFIG']['disableAlias'] && $this->Input->get('id')) ? $this->Input->get('id') : false;
-		$objFormTemplate->action = ampersand($this->Environment->request);
+		$objFormTemplate->action = $this->getIndexFreeRequest();
 
 		// Redirect page
 		if ($this->jumpTo > 0)

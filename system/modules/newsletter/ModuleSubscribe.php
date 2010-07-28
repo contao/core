@@ -138,7 +138,7 @@ class ModuleSubscribe extends Module
 		$this->Template->submit = specialchars($GLOBALS['TL_LANG']['MSC']['subscribe']);
 		$this->Template->channelsLabel = $GLOBALS['TL_LANG']['MSC']['nl_channels'];
 		$this->Template->emailLabel = $GLOBALS['TL_LANG']['MSC']['emailAddress'];
-		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->formId = 'tl_subscribe';
 		$this->Template->id = $this->id;
 		$this->Template->hasError = $blnHasError;
