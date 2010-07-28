@@ -163,7 +163,7 @@ class ModuleBooknav extends Module
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{
-		$objPages = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle, protected, groups, (SELECT COUNT(*) FROM tl_page p2 WHERE p1.id=p2.pid) AS hasChilds FROM tl_page p1 WHERE p1.pid=? AND p1.id!=? AND type='regular'" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+		$objPages = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle, protected, groups, (SELECT COUNT(*) FROM tl_page p2 WHERE p1.id=p2.pid) AS hasChilds FROM tl_page p1 WHERE p1.pid=? AND p1.id!=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 								   ->execute($intParentId, $intParentId);
 
 		if ($objPages->numRows > 0)
