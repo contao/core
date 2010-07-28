@@ -126,30 +126,46 @@ abstract class Frontend extends Controller
 		$accept_language = $this->Environment->httpAcceptLanguage;
 		$time = time();
 
-		// Current host and current user language match a record
-		$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									  ->limit(1)
-									  ->execute($host, 'www.'.$host, $accept_language[0]);
+		// Case 1: look for a website matching the current host name and one of the user languages
+		foreach ($accept_language as $lng)
+		{
+			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
+										  ->limit(1)
+										  ->execute($host, 'www.'.$host, $lng);
 
+			if ($objRootPage->numRows)
+			{
+				break;
+			}
+		}
+
+		// Case 2: look for a language fallback website matching the current host name
 		if ($objRootPage->numRows < 1)
 		{
-			// Current host matches a record (look for fallback language)
 			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 										  ->limit(1)
 										  ->execute($host, 'www.'.$host);
 		}
 
+		// Case 3: look for a website matching one of the user languages
 		if ($objRootPage->numRows < 1)
 		{
-			// Current user language matches a record (and DNS is empty)
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-										  ->limit(1)
-										  ->execute($accept_language[0]);
+			foreach ($accept_language as $lng)
+			{
+				$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
+											  ->limit(1)
+											  ->execute($lng);
+
+				if ($objRootPage->numRows)
+				{
+					break;
+				}
+			}
 		}
 
+		// Case 4: look for a language fallback website
 		if ($objRootPage->numRows < 1)
 		{
-			// Current fallback language matches a record (and DNS is empty)
 			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 										  ->limit(1)
 										  ->execute();
