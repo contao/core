@@ -120,17 +120,18 @@ class FrontendTemplate extends Template
 			// If the request string is empty, use a special cache tag which considers the browser languages
 			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 			{
-				$strUrl = 'empty.' . implode('.', $this->Environment->httpAcceptLanguage);
+				$strUniqueKey = $this->Environment->base . 'empty.' . implode('.', $this->Environment->httpAcceptLanguage);
 			}
-
-			// Create a unique key
-			$strUniqueKey = $this->Environment->base . $strUrl;
+			else
+			{
+				$strUniqueKey = $this->Environment->base . $strUrl;
+			}
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
 
-			// Create cache file
+			// Create the cache file
 			$objFile = new File('system/tmp/' . md5($strUniqueKey));
 			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $strBuffer);
 			$objFile->close();
