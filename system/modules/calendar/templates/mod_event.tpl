@@ -9,14 +9,14 @@
 <!-- indexer::stop -->
 <p class="back"><a href="<?php echo $this->referer; ?>" title="<?php echo $this->back; ?>"><?php echo $this->back; ?></a></p>
 <!-- indexer::continue -->
-<?php if ($this->allowComments && ($this->comments || !$this->protected)): ?>
+<?php if ($this->allowComments && ($this->comments || !$this->requireLogin)): ?>
 
 <div class="ce_comments block">
 
 <<?php echo $this->hlc; ?>><?php echo $this->addComment; ?></<?php echo $this->hlc; ?>>
 <?php foreach ($this->comments as $comment) echo $comment; ?>
 <?php echo $this->pagination; ?>
-<?php if (!$this->protected): ?>
+<?php if (!$this->requireLogin): ?>
 
 <!-- indexer::stop -->
 <div class="form">

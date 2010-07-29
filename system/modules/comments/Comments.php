@@ -119,7 +119,7 @@ class Comments extends Frontend
 		// Access control
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
-			$objTemplate->protected = true;
+			$objTemplate->requireLogin = true;
 			return;
 		}
 
