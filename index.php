@@ -214,10 +214,15 @@ class Index extends Frontend
 
 		$this->import('Environment');
 
-		// If the request string is empty, look for a cached page matching the browser languages
+		/**
+		 * If the request string is empty, look for a cached page matching the
+		 * primary browser language. This is a compromise between not caching
+		 * empty requests at all and considering all browser languages, which
+		 * is not possible for various reasons.
+		 */
 		if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 		{
-			$strCacheKey = $this->Environment->base .'empty.'. implode('.', $this->Environment->httpAcceptLanguage);
+			$strCacheKey = $this->Environment->base .'empty.'. $this->Environment->httpAcceptLanguage[0];
 		}
 		else
 		{

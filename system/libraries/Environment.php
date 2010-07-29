@@ -223,7 +223,12 @@ class Environment
 
 		foreach ($arrLanguages as $strLanguage)
 		{
-			$arrAccepted[] = substr($strLanguage, 0, 2);
+			$strTag = substr($strLanguage, 0, 2);
+
+			if ($strTag != '' && preg_match('/^[a-z]{2}$/', $strTag))
+			{
+				$arrAccepted[] = $strTag;
+			}
 		}
 
 		return array_values(array_unique($arrAccepted));

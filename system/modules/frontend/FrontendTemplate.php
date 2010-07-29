@@ -117,10 +117,10 @@ class FrontendTemplate extends Template
 		// Cache the page if it is not protected
 		if (empty($_POST) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'server') && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN && intval($objPage->cache) > 0 && !$objPage->protected)
 		{
-			// If the request string is empty, use a special cache tag which considers the browser languages
+			// If the request string is empty, use a special cache tag which considers the page language
 			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 			{
-				$strUniqueKey = $this->Environment->base . 'empty.' . implode('.', $this->Environment->httpAcceptLanguage);
+				$strUniqueKey = $this->Environment->base . 'empty.' . $objPage->language;
 			}
 			else
 			{

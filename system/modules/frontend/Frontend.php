@@ -122,56 +122,78 @@ abstract class Frontend extends Controller
 	 */
 	protected function getRootIdFromUrl()
 	{
+		$intPageId = 0;
 		$host = $this->Environment->host;
+		$arrRootPage = array();
 		$accept_language = $this->Environment->httpAcceptLanguage;
 		$time = time();
 
-		// Case 1: look for a website matching the current host name and one of the user languages
-		foreach ($accept_language as $lng)
-		{
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-										  ->limit(1)
-										  ->execute($host, 'www.'.$host, $lng);
+		// Get all root pages
+		$objRootPage = $this->Database->query("SELECT id, dns, language, fallback FROM tl_page WHERE type='root'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""));
 
-			if ($objRootPage->numRows)
+		// Simulate FIND_IN_SET()
+		while ($objRootPage->next())
+		{
+			$key = str_replace('www.', '', $objRootPage->dns);
+
+			if ($key == '')
 			{
-				break;
+				$key = 'empty';
 			}
+
+			if ($objRootPage->fallback)
+			{
+				$arrRootPage[$key]['fallback'] = $objRootPage->id;
+			}
+
+			$arrRootPage[$key][$objRootPage->language] = $objRootPage->id;
 		}
 
-		// Case 2: look for a language fallback website matching the current host name
-		if ($objRootPage->numRows < 1)
+		// Find a matching root page
+		if (isset($arrRootPage[$host]))
 		{
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND (dns=? OR dns=?) AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-										  ->limit(1)
-										  ->execute($host, 'www.'.$host);
-		}
-
-		// Case 3: look for a website matching one of the user languages
-		if ($objRootPage->numRows < 1)
-		{
+			// Case 1: the host name and one of the user languages match
 			foreach ($accept_language as $lng)
 			{
-				$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-											  ->limit(1)
-											  ->execute($lng);
-
-				if ($objRootPage->numRows)
+				if (isset($arrRootPage[$host][$lng]))
 				{
+					$intPageId = $arrRootPage[$host][$lng];
 					break;
+				}
+			}
+
+			// Case 2: the host name matches a language fallback page
+			if ($intPageId < 1)
+			{
+				if (isset($arrRootPage[$host]['fallback']))
+				{
+					$intPageId = $arrRootPage[$host]['fallback'];
+				}
+			}
+		}
+		else
+		{
+			// Case 3: one of the user languages matches
+			foreach ($accept_language as $lng)
+			{
+				if (isset($arrRootPage['empty'][$lng]))
+				{
+					$intPageId = $arrRootPage['empty'][$lng];
+					break;
+				}
+			}
+
+			// Case 4: a language fallback page exists
+			if ($intPageId < 1)
+			{
+				if (isset($arrRootPage['empty']['fallback']))
+				{
+					$intPageId = $arrRootPage['empty']['fallback'];
 				}
 			}
 		}
 
-		// Case 4: look for a language fallback website
-		if ($objRootPage->numRows < 1)
-		{
-			$objRootPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND dns='' AND fallback=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-										  ->limit(1)
-										  ->execute();
-		}
-
-		return $objRootPage->numRows ? $objRootPage->id : 0;
+		return $intPageId;
 	}
 
 
