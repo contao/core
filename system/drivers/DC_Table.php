@@ -816,7 +816,7 @@ class DC_Table extends DataContainer implements listable, editable
 			{
 				$insertID = $objInsertStmt->insertId;
 
-				// Save new record in the session
+				// Save the new record in the session
 				if (!$blnDoNotRedirect)
 				{
 					$new_records = $this->Session->get('new_records');
@@ -824,7 +824,7 @@ class DC_Table extends DataContainer implements listable, editable
 					$this->Session->set('new_records', $new_records);
 				}
 
-				// Duplicate records of the child table
+				// Duplicate the records of the child table
 				$this->copyChilds($this->strTable, $insertID, $this->intId, $insertID);
 
 				// Call the oncopy_callback after all new records have been created
@@ -896,24 +896,26 @@ class DC_Table extends DataContainer implements listable, editable
 
 				foreach ($objCTable->fetchAllAssoc() as $row)
 				{
+					// Exclude the duplicated record itself
+					if ($v == $table && $row['id'] == $parentId)
+					{
+						continue;
+					}
+
 					foreach ($row as $kk=>$vv)
 					{
-						// Exclude the duplicated record itself
-						if ($v == $table && $row['id'] == $parentId)
+						if ($kk == 'id')
 						{
 							continue;
 						}
 
-						if ($kk != 'id')
+						// Reset all unique, doNotCopy and fallback fields to their default value
+						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
-							// Reset all unique, doNotCopy and fallback fields to their default value
-							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
-							{
-								$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
-							}
-
-							$copy[$v][$row['id']][$kk] = $vv;
+							$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
 						}
+
+						$copy[$v][$row['id']][$kk] = $vv;
 					}
 
 					$copy[$v][$row['id']]['pid'] = $insertID;

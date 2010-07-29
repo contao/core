@@ -48,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_faq']['published']    = array('Frage veröffentlichen', 
  */
 $GLOBALS['TL_LANG']['tl_faq']['title_legend']     = 'Titel und Autor';
 $GLOBALS['TL_LANG']['tl_faq']['answer_legend']    = 'Antwort';
-$GLOBALS['TL_LANG']['tl_faq']['image_legend']     = 'Artikelbild';
+$GLOBALS['TL_LANG']['tl_faq']['image_legend']     = 'Bild-Einstellungen';
 $GLOBALS['TL_LANG']['tl_faq']['enclosure_legend'] = 'Anlagen';
 $GLOBALS['TL_LANG']['tl_faq']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_faq']['publish_legend']   = 'Veröffentlichung';
