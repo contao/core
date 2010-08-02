@@ -213,7 +213,7 @@ class Environment
 
 
 	/**
-	 * Return accepted user languages as array
+	 * Return the first eight user languages as array
 	 * @return array
 	 */
 	protected function httpAcceptLanguage()
@@ -231,7 +231,7 @@ class Environment
 			}
 		}
 
-		return array_values(array_unique($arrAccepted));
+		return array_slice(array_values(array_unique($arrAccepted)), 0, 8);
 	}
 
 
