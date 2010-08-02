@@ -242,9 +242,10 @@ abstract class Backend extends Controller
 	 * Get all searchable pages and return them as array
 	 * @param integer
 	 * @param string
+	 * @param boolean
 	 * @return array
 	 */
-	protected function findSearchablePages($pid=0, $domain='')
+	protected function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
 	{
 		$time = time();
 
@@ -285,7 +286,7 @@ abstract class Backend extends Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']))
+				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && (!$blnIsSitemap || strncmp($objPages->robots, 'noindex', 7) !== 0))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
@@ -305,7 +306,7 @@ abstract class Backend extends Controller
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain)) != false)
+			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain, $blnIsSitemap)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}

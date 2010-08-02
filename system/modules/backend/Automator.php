@@ -76,7 +76,7 @@ class Automator extends Backend
 				return;
 			}
 
-			// Check sitemap name
+			// Check the sitemap name
 			if (!$objRoot->createSitemap || !$objRoot->sitemapName)
 			{
 				return;
@@ -97,7 +97,7 @@ class Automator extends Backend
 			return;
 		}
 
-		// Create XML file
+		// Create the XML file
 		while($objRoot->next())
 		{
 			$objFile = new File($objRoot->sitemapName . '.xml');
@@ -108,13 +108,13 @@ class Automator extends Backend
 
 			$strDomain = '';
 
-			// Overwrite domain
+			// Overwrite the domain
 			if (strlen($objRoot->dns))
 			{
 				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
-			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain);
+			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true);
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
@@ -122,7 +122,7 @@ class Automator extends Backend
 				foreach ($GLOBALS['TL_HOOKS']['getSearchablePages'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id);
+					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id, true);
 				}
 			}
 
