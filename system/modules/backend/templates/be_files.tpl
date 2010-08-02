@@ -31,6 +31,13 @@
 <script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
 <script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
 <script type="text/javascript" src="plugins/calendar/js/calendar.js?<?php echo CALENDAR; ?>"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var CONTAO_THEME = '<?php echo $this->theme; ?>';
+var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
+var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
+//--><!]]>
+</script>
 <script type="text/javascript" src="contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
 <script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
 <?php echo $this->javascripts; ?>

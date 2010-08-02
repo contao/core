@@ -134,7 +134,7 @@ abstract class Frontend extends Controller
 		// Simulate FIND_IN_SET()
 		while ($objRootPage->next())
 		{
-			$key = str_replace('www.', '', $objRootPage->dns);
+			$key = preg_replace('/^www\./', '', $objRootPage->dns);
 
 			if ($key == '')
 			{

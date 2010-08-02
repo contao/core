@@ -441,7 +441,7 @@ class BackendUser extends User
 			if (count($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
 			{
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
-				$arrModules[$strGroupName]['title'] = specialchars($arrModules[$strGroupName]['href']);
+				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
 				$arrModules[$strGroupName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strGroupName]) ? $GLOBALS['TL_LANG']['MOD'][$strGroupName][0] : $GLOBALS['TL_LANG']['MOD'][$strGroupName]) != false) ? $label : $strGroupName;
 				$arrModules[$strGroupName]['href'] = $this->addToUrl('mtg=' . $strGroupName);
 
@@ -450,6 +450,7 @@ class BackendUser extends User
 				{
 					$arrModules[$strGroupName]['modules'] = false;
 					$arrModules[$strGroupName]['icon'] = 'modPlus.gif';
+					$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['expandNode']);
 
 					continue;
 				}

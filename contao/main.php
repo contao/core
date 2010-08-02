@@ -236,6 +236,8 @@ class Main extends Backend
 		$this->Template->home = $GLOBALS['TL_LANG']['MSC']['home'];
 		$this->Template->backToTop = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->frontendFile = $GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php';
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 
 		// Front end preview links
 		if (CURRENT_ID != '')

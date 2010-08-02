@@ -108,6 +108,8 @@ class FileManager extends Backend
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 
 		$this->Template->output();
 	}

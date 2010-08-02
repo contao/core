@@ -377,7 +377,7 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Convert date formats into timestamps
-		if (strlen($varValue) && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
 			$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
 			$varValue = $objDate->tstamp;
@@ -403,7 +403,7 @@ window.addEvent(\'domready\', function()
 			}
 		}
 
-		// Call save_callback
+		// Trigger the save_callback
 		if (is_array($arrData['save_callback']))
 		{
 			foreach ($arrData['save_callback'] as $callback)
@@ -413,8 +413,10 @@ window.addEvent(\'domready\', function()
 			}
 		}
 
+		$strCurrent = html_entity_decode($this->varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $this->varValue != $varValue)
+		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)
 		{
 			$strKey = sprintf("\$GLOBALS['TL_CONFIG']['%s']", $this->strField);
 			$this->Config->update($strKey, $varValue);
@@ -422,7 +424,7 @@ window.addEvent(\'domready\', function()
 			$deserialize = deserialize($varValue);
 			$prior = is_bool($GLOBALS['TL_CONFIG'][$this->strField]) ? ($GLOBALS['TL_CONFIG'][$this->strField] ? 'true' : 'false') : $GLOBALS['TL_CONFIG'][$this->strField];
 
-			// Add log entry
+			// Add a log entry
 			if (!is_array(deserialize($prior)) && !is_array($deserialize))
 			{
 				$this->log('Global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', 'DC_File save()', TL_CONFIGURATION);

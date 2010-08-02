@@ -25,6 +25,7 @@ Version 2.9.1 (2010-XX-XX)
 - Fixed: the front end cache only worked with rewritten URLs (#2360)
 - Fixed: recursive duplication of a page created an empty record (#2363)
 - Fixed: the comments form was not displayed if an element was protected (#2365)
+- Fixed: change the link title when nodes are expanded or collapsed (#2223)
 - Fixed some minor issues
 
 Version 2.9.0 (2010-07-02)

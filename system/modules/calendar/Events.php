@@ -253,13 +253,13 @@ abstract class Events extends Module
 		$arrEvent['title'] = specialchars($objEvents->title);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : '');
-		$arrEvent['class'] = strlen($objEvents->cssClass) ? ' ' . $objEvents->cssClass : '';
+		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
 
 		// Display the "read more" button for external/article links
-		if (($objEvents->source == 'external' || $objEvents->source == 'article') && !strlen($objEvents->details))
+		if (($objEvents->source == 'external' || $objEvents->source == 'article') && $objEvents->details == '')
 		{
 			$arrEvent['details'] = true;
 		}
@@ -335,13 +335,13 @@ abstract class Events extends Module
 
 				if ($objPage->numRows)
 				{
-					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
+					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->alias)) ? $objEvent->alias : $objEvent->id)));
+		return ampersand(sprintf($strUrl, ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id)));
 	}
 
 

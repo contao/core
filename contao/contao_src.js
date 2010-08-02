@@ -88,12 +88,14 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
+				$(el).title = CONTAO_COLLAPSE;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
+				$(el).title = CONTAO_EXPAND;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=0'}).send();
 			}
 
@@ -116,6 +118,7 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				item.injectAfter($(el).getParent('li'));
 
+				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
    			}
@@ -145,12 +148,14 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				$(el).title = CONTAO_COLLAPSE;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				$(el).title = CONTAO_EXPAND;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=0'}).send();
 			}
 
@@ -200,6 +205,7 @@ var AjaxRequest =
 					folder ? item.injectBefore(li) : item.injectAfter(li);
 				}
 
+				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				ContextMenu.initialize();
 				AjaxRequest.hideBox();
@@ -232,6 +238,7 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC', 'folderO');
+				$(el).title = CONTAO_COLLAPSE;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=1'}).send();
 			}
 			else
@@ -239,6 +246,7 @@ var AjaxRequest =
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				icon.src = icon.src.replace('folderO', 'folderC');
+				$(el).title = CONTAO_EXPAND;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=0'}).send();
 			}
 
@@ -267,6 +275,7 @@ var AjaxRequest =
 				ul.injectInside(item);
 				item.injectAfter($(el).getParent('li'));
 
+				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
 
@@ -299,12 +308,14 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				$(el).title = CONTAO_COLLAPSE;
 				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				$(el).title = CONTAO_EXPAND;
 				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=0'}).send();
 			}
 
@@ -333,6 +344,7 @@ var AjaxRequest =
 				ul.injectInside(item);
 				item.injectAfter($(el).getParent('li'));
 
+				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
    			}
@@ -364,12 +376,14 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				$(el).title = CONTAO_COLLAPSE;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=1'}).send();
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
+				$(el).title = CONTAO_EXPAND;
 				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=0'}).send();
 			}
 
@@ -398,6 +412,7 @@ var AjaxRequest =
 				ul.injectInside(item);
 				item.injectAfter($(el).getParent('li'));
 
+				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
    			}
@@ -952,26 +967,27 @@ var Backend =
 			}
 
 			div.setStyle('height', hgt);
+			var path = 'system/themes/' + CONTAO_THEME + '/images/';
 			toggler = new Element('img').addClass('limit_toggler');
 
 			// Disable function if the preview height is below the max-height
 			if (size.height < hgt)
 			{
-				toggler.src = 'system/themes/default/images/expand_.gif';
+				toggler.src = path + 'expand_.gif';
 				toggler.injectAfter(div);
 
 				return;
 			}
 
 			toggler.setStyle('cursor', 'pointer');
-			toggler.src = 'system/themes/default/images/expand.gif';
+			toggler.src = path + 'expand.gif';
 
 			toggler.addEvent('click', function()
 			{
 				style = this.getPrevious().getStyle('height').toInt();
 				this.getPrevious().setStyle('height', ((style > hgt) ? hgt : ''));
 
-				this.src = (this.src.indexOf('expand.gif') != -1) ? 'system/themes/default/images/collapse.gif' : 'system/themes/default/images/expand.gif';
+				this.src = (this.src.indexOf('expand.gif') != -1) ? path + 'collapse.gif' : path + 'expand.gif';
 			});
 
 			toggler.injectAfter(div);

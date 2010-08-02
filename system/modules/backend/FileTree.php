@@ -323,7 +323,8 @@ class FileTree extends Widget
 			{
 				$folderAttribute = '';
 				$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
-				$return .= '<a href="'.$this->addToUrl($flag.'tg='.$tid).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFiletree(this, \''.$xtnode.'_'.$tid.'\', \''.$currentFolder.'\', \''.$this->strField.'\', \''.$this->strName.'\', '.$level.');">'.$this->generateImage($img, '', 'style="margin-right:2px;"').'</a>';
+				$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
+				$return .= '<a href="'.$this->addToUrl($flag.'tg='.$tid).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFiletree(this, \''.$xtnode.'_'.$tid.'\', \''.$currentFolder.'\', \''.$this->strField.'\', \''.$this->strName.'\', '.$level.');">'.$this->generateImage($img, '', 'style="margin-right:2px;"').'</a>';
 			}
 
 			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';

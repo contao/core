@@ -257,7 +257,7 @@ class ModuleEventlist extends Events
 			{
 				$objTemplate->day = $event['day'];
 				$objTemplate->date = $event['date'];
-				$objTemplate->span = (!strlen($event['time']) && !strlen($event['day'])) ? $event['date'] : '';
+				$objTemplate->span = ($event['time'] == '' && $event['day'] == '') ? $event['date'] : '';
 			}
 			else
 			{
@@ -294,7 +294,7 @@ class ModuleEventlist extends Events
 		}
 
 		// No events found
-		if (!strlen($strEvents))
+		if ($strEvents == '')
 		{
 			$strEvents = "\n" . '<div class="empty">' . $strEmpty . '</div>' . "\n";
 		}
