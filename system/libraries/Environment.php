@@ -231,7 +231,7 @@ class Environment
 			}
 		}
 
-		return array_slice(array_values(array_unique($arrAccepted)), 0, 8);
+		return array_slice(array_unique($arrAccepted), 0, 8);
 	}
 
 

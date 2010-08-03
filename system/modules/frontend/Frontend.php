@@ -122,79 +122,16 @@ abstract class Frontend extends Controller
 	 */
 	protected function getRootIdFromUrl()
 	{
-		$intPageId = 0;
 		$host = $this->Environment->host;
-		$arrRootPage = array();
 		$accept_language = $this->Environment->httpAcceptLanguage;
 		$time = time();
 
-		// Find the matching root pages
-		$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
+		// Find the matching root pages (thanks to Andreas Schempp)
+		$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", language='". implode("' DESC, language='", $accept_language) ."' DESC" : ""))
+									  ->limit(1)
 									  ->execute($host, 'www.'.$host);
 
-		// Simulate FIND_IN_SET()
-		while ($objRootPage->next())
-		{
-			$key = preg_replace('/^www\./', '', $objRootPage->dns);
-
-			if ($key == '')
-			{
-				$key = 'empty';
-			}
-
-			if ($objRootPage->fallback)
-			{
-				$arrRootPage[$key]['fallback'] = $objRootPage->id;
-			}
-
-			$arrRootPage[$key][$objRootPage->language] = $objRootPage->id;
-		}
-
-		// Find a matching root page
-		if (isset($arrRootPage[$host]))
-		{
-			// Case 1: the host name and one of the user languages match
-			foreach ($accept_language as $lng)
-			{
-				if (isset($arrRootPage[$host][$lng]))
-				{
-					$intPageId = $arrRootPage[$host][$lng];
-					break;
-				}
-			}
-
-			// Case 2: the host name matches a language fallback page
-			if ($intPageId < 1)
-			{
-				if (isset($arrRootPage[$host]['fallback']))
-				{
-					$intPageId = $arrRootPage[$host]['fallback'];
-				}
-			}
-		}
-		else
-		{
-			// Case 3: one of the user languages matches
-			foreach ($accept_language as $lng)
-			{
-				if (isset($arrRootPage['empty'][$lng]))
-				{
-					$intPageId = $arrRootPage['empty'][$lng];
-					break;
-				}
-			}
-
-			// Case 4: a language fallback page exists
-			if ($intPageId < 1)
-			{
-				if (isset($arrRootPage['empty']['fallback']))
-				{
-					$intPageId = $arrRootPage['empty']['fallback'];
-				}
-			}
-		}
-
-		return $intPageId;
+		return $objRootPage->numRows ? $objRootPage->id : 0;
 	}
 
 
