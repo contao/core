@@ -168,7 +168,7 @@ class Comments extends Frontend
 			'name' => 'comment',
 			'label' => $GLOBALS['TL_LANG']['MSC']['com_comment'],
 			'inputType' => 'textarea',
-			'eval' => array('rows'=>4, 'cols'=>40, 'preserveTags'=>true)
+			'eval' => array('mandatory'=>true, 'rows'=>4, 'cols'=>40, 'preserveTags'=>true)
 		);
 
 		$doNotSubmit = false;

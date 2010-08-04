@@ -413,7 +413,17 @@ window.addEvent(\'domready\', function()
 			}
 		}
 
-		$strCurrent = html_entity_decode($this->varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+		$strCurrent = $this->varValue;
+
+		// Handle arrays and strings
+		if (is_array($strCurrent))
+		{
+			$strCurrent = serialize($strCurrent);
+		}
+		elseif (is_string($strCurrent))
+		{
+			$strCurrent = html_entity_decode($this->varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+		}
 
 		// Save the value if there was no error
 		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && $strCurrent != $varValue)

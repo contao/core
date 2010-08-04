@@ -584,6 +584,11 @@ abstract class System
 	 */
 	protected function idnaEncodeEmail($strEmail)
 	{
+		if ($strEmail == '')
+		{
+			return '';
+		}
+
 		list($strLocal, $strHost) = explode('@', $strEmail);
 		return $strLocal .'@'. $this->idnaEncode($strHost);
 	}
@@ -596,6 +601,11 @@ abstract class System
 	 */
 	protected function idnaEncodeUrl($strUrl)
 	{
+		if ($strUrl == '')
+		{
+			return '';
+		}
+
 		// E-mail address
 		if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 		{
