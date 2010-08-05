@@ -24,7 +24,35 @@
 # @license    LGPL
 ##
 
+<IfModule mod_expires.c>
+
+  ##
+  # Enable the module
+  ##
+  ExpiresActive On
+
+  ##
+  # Expiration date
+  #
+  # Specify an expiration one week in the future for images, JavaScripts and
+  # CSS files (as recommended by Google Page Speed). Edit or remove the lines
+  # to set up your own expiration logic.
+  ##
+  ExpiresByType image/png A604800
+  ExpiresByType image/gif A604800
+  ExpiresByType image/jpg A604800
+  ExpiresByType image/jpeg A604800
+  ExpiresByType text/javascript A604800
+  ExpiresByType application/x-javascript A604800
+  ExpiresByType text/css A604800
+
+</IfModule>
+
 <IfModule mod_rewrite.c>
+
+  ##
+  # Enable the module
+  ##
   RewriteEngine On
 
   ##
@@ -73,6 +101,9 @@
   </FilesMatch>
   <FilesMatch "\.css\.gz$">
     AddType "text/css" .gz
+  </FilesMatch>
+  <FilesMatch "\.(js|css|gz)$">
+    Header append Vary Accept-Encoding
   </FilesMatch>
   RewriteCond %{HTTP:Accept-encoding} gzip
   RewriteCond %{REQUEST_FILENAME} \.(js|css)$

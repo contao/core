@@ -403,6 +403,15 @@ class PageRegular extends Frontend
 					}
 
 					$objFile->close();
+
+					// Also create a gzipped version
+					if (function_exists('gzencode'))
+					{
+						$objFile = new File('system/html/'. $key .'.css.gz');
+						$objFile->write(gzencode(file_get_contents(TL_ROOT . '/system/html/'. $key .'.css'), 9));
+						$objFile->close();
+					}
+
 					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
 				}
 			}
