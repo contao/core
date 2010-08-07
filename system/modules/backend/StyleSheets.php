@@ -154,6 +154,7 @@ class StyleSheets extends Backend
 		if (file_exists(TL_ROOT . '/' . $row['name'].'.css') && !$this->Files->is_writeable($row['name'].'.css'))
 		{
 			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], $row['name'].'.css');
+			return;
 		}
 
 		$objFile = new File($row['name'].'.css');

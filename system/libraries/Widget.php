@@ -667,6 +667,11 @@ abstract class Widget extends Controller
 			}
 		}
 
+		if ($this->isHexColor && $varInput != '')
+		{
+			$varInput = preg_replace('/[^a-f0-9]+/i', '', $varInput);
+		}
+
 		if ($this->nospace && preg_match('/[\t ]+/i', $varInput))
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $this->strLabel));
@@ -677,7 +682,7 @@ abstract class Widget extends Controller
 			$varInput = preg_replace('/\s+/i', '_', trim($varInput));
 		}
 
-		if (is_bool($this->trailingSlash) && strlen($varInput))
+		if (is_bool($this->trailingSlash) && $varInput != '')
 		{
 			$varInput = preg_replace('/\/+$/i', '', $varInput) . ($this->trailingSlash ? '/' : '');
 		}
