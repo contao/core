@@ -124,25 +124,28 @@ if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 /**
  * Set the default language
  */
-$languages = $objEnvironment->httpAcceptLanguage;
-krsort($languages);
-
-foreach ($languages as $v)
-{
-	if (is_dir(TL_ROOT . '/system/modules/backend/languages/' . $v))
-	{
-		$GLOBALS['TL_LANGUAGE'] = $v;
-	}
-
-	unset($v);
-}
-
 if ($objInput->post('language'))
 {
 	$GLOBALS['TL_LANGUAGE'] = $objInput->post('language');
 }
+elseif (isset($_SESSION['TL_LANGUAGE']))
+{
+	$GLOBALS['TL_LANGUAGE'] = $_SESSION['TL_LANGUAGE'];
+}
+else
+{
+	foreach ($objEnvironment->httpAcceptLanguage as $v)
+	{
+		if (is_dir(TL_ROOT . '/system/modules/backend/languages/' . $v))
+		{
+			$GLOBALS['TL_LANGUAGE'] = $v;
+			$_SESSION['TL_LANGUAGE'] = $v;
+			break;
+		}
+	}
 
-unset($languages);
+	unset($v);
+}
 
 
 /**
