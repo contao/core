@@ -120,7 +120,7 @@ $GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Kommerziell';
  */
 $GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Anwendung';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['utility']     = 'Hilfsprogramm';
-$GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Vorlage';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Theme';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['widget']      = 'Widget';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['plugin']      = 'Plugin';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Übersetzung';
