@@ -56,6 +56,11 @@ class FormSubmit extends Widget
 	{
 		switch ($strKey)
 		{
+			case 'required':
+			case 'mandatory':
+				// Ignore
+				break;
+
 			case 'singleSRC':
 				$this->arrConfiguration['singleSRC'] = $varValue;
 				break;

@@ -66,7 +66,6 @@ $GLOBALS['TL_LANG']['tl_newsletter']['sent']        = 'Sent';
 $GLOBALS['TL_LANG']['tl_newsletter']['sentOn']      = 'Sent on %s';
 $GLOBALS['TL_LANG']['tl_newsletter']['notSent']     = 'Not sent yet';
 $GLOBALS['TL_LANG']['tl_newsletter']['mailingDate'] = 'Mailing date';
-$GLOBALS['TL_LANG']['tl_newsletter']['headline']    = 'Send newsletter';
 $GLOBALS['TL_LANG']['tl_newsletter']['confirm']     = 'The newsletter has been sent to %s recipients.';
 $GLOBALS['TL_LANG']['tl_newsletter']['rejected']    = '%s invalid e-mail address(es) has/have been disabled (see system log).';
 $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'There are no active subscribers to the channel.';

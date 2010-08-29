@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.2 (2010-XX-XX)
+--------------------------
+- Fixed some minor issues
+
 Version 2.9.1 (2010-08-09)
 --------------------------
 - Updated TinyMCE to version 3.3.8 (#2285)
@@ -13,7 +17,7 @@ Version 2.9.1 (2010-08-09)
 - Fixed: the listing module always showed the primary key column (#2248)
 - Fixed: empty article teaser drop-down menu when only a root page was mounted (#2201)
 - Fixed: the hyperlink element did not handle mailto-links correctly (#2273)
-- Fixed: the table sort script did not handle tag replacements correclty (#2289)
+- Fixed: the table sort script did not handle tag replacements correctly (#2289)
 - Fixed: the version 2.9 database update failed when upgrading from version 2.6 (#2290)
 - Fixed: the maximum front end image width was not calculated correctly (#2268)
 - Fixed: custom image gallery templates threw an exception the back end (#2328)

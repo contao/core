@@ -124,8 +124,8 @@ class ModuleSearch extends Module
 		$this->Template->pagination = '';
 		$this->Template->results = '';
 
-		// Execute search if there are keywords
-		if (strlen($strKeywords) && $strKeywords != '*')
+		// Execute the search if there are keywords
+		if ($this->jumpTo < 1 && $strKeywords != '' && $strKeywords != '*')
 		{
 			// Reference page
 			if ($this->rootPage > 0)

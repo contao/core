@@ -66,7 +66,6 @@ $GLOBALS['TL_LANG']['tl_newsletter']['sent']        = 'Gesendet';
 $GLOBALS['TL_LANG']['tl_newsletter']['sentOn']      = 'Gesendet am %s';
 $GLOBALS['TL_LANG']['tl_newsletter']['notSent']     = 'Noch nicht gesendet';
 $GLOBALS['TL_LANG']['tl_newsletter']['mailingDate'] = 'Versanddatum';
-$GLOBALS['TL_LANG']['tl_newsletter']['headline']    = 'Newsletter versenden';
 $GLOBALS['TL_LANG']['tl_newsletter']['confirm']     = 'Der Newsletter wurde an %s Empfänger versendet.';
 $GLOBALS['TL_LANG']['tl_newsletter']['rejected']    = '%s ungültige E-Mail-Adresse(n) wurde(n) deaktiviert (siehe System-Log).';
 $GLOBALS['TL_LANG']['tl_newsletter']['error']       = 'In diesem Verteiler sind keine aktiven Abonnenten vorhanden.';

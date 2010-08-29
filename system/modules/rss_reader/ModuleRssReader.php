@@ -164,6 +164,7 @@ class ModuleRssReader extends Module
 		}
 
 		$items = array();
+		$last = min($limit, count($arrItems)) - 1;
 
 		for ($i=$offset; $i<$limit && $i<count($arrItems); $i++)
 		{
@@ -173,7 +174,7 @@ class ModuleRssReader extends Module
 				'title' => $arrItems[$i]->get_title(),
 				'permalink' => $arrItems[$i]->get_permalink(),
 				'description' => $arrItems[$i]->get_description(),
-				'class' => (($i == 0) ? ' first' : (($i == (count($arrItems) - 1)) ? ' last' : '')) . ((($i % 2) == 0) ? ' even' : ' odd'),
+				'class' => (($i == 0) ? ' first' : (($i == $last) ? ' last' : '')) . ((($i % 2) == 0) ? ' even' : ' odd'),
 				'pubdate' => $arrItems[$i]->get_date($GLOBALS['TL_CONFIG']['datimFormat']),
 				'category' => $arrItems[$i]->get_category(0)
 			);

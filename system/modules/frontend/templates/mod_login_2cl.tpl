@@ -19,7 +19,7 @@
   </tr>
   <tr class="row_1">
     <td class="col_0 col_first"><label for="password"><?php echo $this->password; ?></label></td>
-    <td class="col_1 col_last"><input type="password" name="password" id="password" class="text" maxlength="64" value="" /></td>
+    <td class="col_1 col_last"><input type="password" name="password" id="password" class="text password" maxlength="64" value="" /></td>
   </tr>
 <?php if ($this->autologin): ?>
   <tr class="row_2">

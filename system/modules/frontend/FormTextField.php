@@ -104,10 +104,11 @@ class FormTextField extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s" value="%s"%s />',
+		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s />',
 						($this->hideInput ? 'password' : 'text'),
 						$this->strName,
 						$this->strId,
+						($this->hideInput ? ' password' : ''),
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						specialchars($this->varValue),
 						$this->getAttributes()) . $this->addSubmit();

@@ -92,6 +92,7 @@ class ModuleCloseAccount extends Module
 		);
 
 		$objWidget = new FormTextField($this->prepareForWidget($arrField, $arrField['name']));
+		$objWidget->rowClass = 'row_0 row_first even';
 
 		// Validate widget
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_close_account')
@@ -151,6 +152,7 @@ class ModuleCloseAccount extends Module
 		$this->Template->formId = 'tl_close_account';
 		$this->Template->action = $this->getIndexFreeRequest();
 		$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['closeAccount']);
+		$this->Template->rowLast = 'row_1 row_last odd';
 		$this->Template->tableless = $this->tableless;
 	}
 }

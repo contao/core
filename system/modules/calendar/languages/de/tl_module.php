@@ -40,7 +40,7 @@ $GLOBALS['TL_LANG']['tl_module']['cal_limit']        = array('Anzahl an Events',
 $GLOBALS['TL_LANG']['tl_module']['cal_template']     = array('Event-Template', 'Hier können Sie das Event-Template auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['cal_ctemplate']    = array('Kalendar-Template', 'Hier können Sie das Kalendar-Template auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['cal_startDay']     = array('Erster Wochentag', 'Hier können Sie den ersten Tag der Woche festlegen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'] = array('Anzahl der Beiträge anzeigen', 'Die Anzahl der Beiträge jedes Monats im Menü anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'] = array('Anzahl der Events anzeigen', 'Die Anzahl der Events jedes Monats im Menü anzeigen.');
 
 
 /**

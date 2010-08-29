@@ -68,7 +68,7 @@ $GLOBALS['TL_LANG']['tl_calendar']['feed_legend']      = 'RSS/Atom feed';
  * References
  */
 $GLOBALS['TL_LANG']['tl_calendar']['notify_admin']  = 'System administrator';
-$GLOBALS['TL_LANG']['tl_calendar']['notify_author'] = 'Author of the news item';
+$GLOBALS['TL_LANG']['tl_calendar']['notify_author'] = 'Author of the event';
 $GLOBALS['TL_LANG']['tl_calendar']['notify_both']   = 'Author and system administrator';
 $GLOBALS['TL_LANG']['tl_calendar']['source_teaser'] = 'Event teasers';
 $GLOBALS['TL_LANG']['tl_calendar']['source_text']   = 'Full articles';
