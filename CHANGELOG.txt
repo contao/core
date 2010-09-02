@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.9.2 (2010-XX-XX)
 --------------------------
+- Fixed: do not allow insert tags in comments (#2499)
 - Fixed some minor issues
 
 Version 2.9.1 (2010-08-09)
