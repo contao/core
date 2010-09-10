@@ -242,6 +242,7 @@ class Theme extends Backend
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['custom_sections'].'</h4>';
 
 			$blnHasLayout = false;
+			$arrSections = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
 			$arrProcessed = array();
 
 			// Loop through tl_layout
@@ -275,7 +276,7 @@ class Theme extends Backend
 						}
 
 						// Do not show multiple warnings
-						if (in_array($mod['col'], $arrProcessed))
+						if (in_array($mod['col'], $arrProcessed) || in_array($mod['col'], $arrSections))
 						{
 							continue;
 						}
