@@ -163,7 +163,7 @@ class ModuleNewsArchive extends ModuleNews
 
 			// Set limit and offset
 			$limit = $this->perPage;
-			$offset = ((($page > 1) ? $page : 1) - 1) * $this->perPage;
+			$offset = (max($page, 1) - 1) * $this->perPage;
 
 			// Add the pagination menu
 			$objPagination = new Pagination($total, $this->perPage);

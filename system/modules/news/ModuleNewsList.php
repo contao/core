@@ -117,7 +117,7 @@ class ModuleNewsList extends ModuleNews
 
 			// Limit and offset
 			$limit = $this->perPage;
-			$offset = ($page - 1) * $this->perPage;
+			$offset = (max($page, 1) - 1) * $this->perPage;
 
 			// Overall limit
 			if ($offset + $limit > $total)
@@ -137,9 +137,9 @@ class ModuleNewsList extends ModuleNews
 		{
 			$objArticles->limit($limit, $offset + $skipFirst);
 		}
-		elseif ($skipFirst > 0 && $total > 0)
+		elseif ($skipFirst > 0)
 		{
-			$objArticles->limit($total, $skipFirst);
+			$objArticles->limit(max($total, 1), $skipFirst);
 		}
 
 		$this->Template->articles = $this->parseArticles($objArticles->execute());
