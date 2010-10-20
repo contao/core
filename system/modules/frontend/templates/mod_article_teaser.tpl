@@ -1,7 +1,7 @@
 
 <div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 
-<h1><?php echo $this->headline; ?></h1>
+<h2><?php echo $this->headline; ?></h2>
 
 <div class="teaser">
 <?php echo $this->teaser; ?> 

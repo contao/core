@@ -5,12 +5,14 @@
 
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
+<?php if (count($this->newsletters)): ?>
 
 <ul>
 <?php foreach($this->newsletters as $newsletter): ?>
   <li><?php echo $newsletter['datim']; ?>: <a href="<?php echo $newsletter['href']; ?>" title="<?php echo $newsletter['subject']; ?>"><?php echo $newsletter['subject']; ?></a></li>
 <?php endforeach; ?>
 </ul>
+<?php endif; ?>
 
 </div>
 <!-- indexer::continue -->
