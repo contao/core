@@ -13,6 +13,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: consider the protocol when loading scripts from the Google CDN (#2450)
 - Fixed: textareas in the back end were cut off in Opera (#2404)
 - Fixed: the task history could not be collapsed (#2424)
+- Fixed: the link insert tags showed the page title instead of the page name (#2371)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 

@@ -1304,6 +1304,8 @@ abstract class Controller extends System
 						{
 							$strTitle = 'Go back';
 						}
+
+						$strName = $strTitle;
 					}
 
 					// Regular link
@@ -1335,7 +1337,8 @@ abstract class Controller extends System
 						else
 						{
 							$strUrl = $this->generateFrontendUrl($objNextPage->row());
-							$strTitle = strlen($objNextPage->pageTitle) ? $objNextPage->pageTitle : $objNextPage->title;
+							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
+							$strName = $objNextPage->title;
 						}
 					}
 
@@ -1343,7 +1346,7 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), ampersand($strTitle));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), ampersand($strName));
 							break;
 
 						case 'link_open':
