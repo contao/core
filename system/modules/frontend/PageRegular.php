@@ -286,7 +286,9 @@ class PageRegular extends Frontend
 		// MooTools scripts
 		if ($objLayout->mooSource == 'moo_googleapis')
 		{
-			$this->Template->mooScripts  = '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
+			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+
+			$this->Template->mooScripts  = '<script type="text/javascript" src="'. $protocol .'ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
 			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
 		}
 		else
