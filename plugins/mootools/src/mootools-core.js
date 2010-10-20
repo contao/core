@@ -1,9 +1,7 @@
-//MooTools, <http://mootools.net>, My Object Oriented (JavaScript) Tools. Copyright (c) 2006-2009 Valerio Proietti, <http://mad4milk.net>, MIT Style License.
-
 /*
 ---
 
-script: Core.js
+name: Core
 
 description: The core of MooTools, contains all the base functions and the Native and Hash implementations. Required by all the other scripts.
 
@@ -14,17 +12,17 @@ copyright: Copyright (c) 2006-2008 [Valerio Proietti](http://mad4milk.net/).
 authors: The MooTools production team (http://mootools.net/developers/)
 
 inspiration:
-- Class implementation inspired by [Base.js](http://dean.edwards.name/weblog/2006/03/base/) Copyright (c) 2006 Dean Edwards, [GNU Lesser General Public License](http://opensource.org/licenses/lgpl-license.php)
-- Some functionality inspired by [Prototype.js](http://prototypejs.org) Copyright (c) 2005-2007 Sam Stephenson, [MIT License](http://opensource.org/licenses/mit-license.php)
+  - Class implementation inspired by [Base.js](http://dean.edwards.name/weblog/2006/03/base/) Copyright (c) 2006 Dean Edwards, [GNU Lesser General Public License](http://opensource.org/licenses/lgpl-license.php)
+  - Some functionality inspired by [Prototype.js](http://prototypejs.org) Copyright (c) 2005-2007 Sam Stephenson, [MIT License](http://opensource.org/licenses/mit-license.php)
 
-provides: [Mootools, Native, Hash.base, Array.each, $util]
+provides: [MooTools, Native, Hash.base, Array.each, $util]
 
 ...
 */
 
 var MooTools = {
-	'version': '1.2.4',
-	'build': '0d9113241a90b9cd5643b926795852a2026710d4'
+	'version': '1.2.5',
+	'build': '008d8f0f2fcc2044e54fdd3635341aaab274e757'
 };
 
 var Native = function(options){
@@ -296,15 +294,13 @@ function $unlink(object){
 /*
 ---
 
-script: Browser.js
+name: Browser
 
 description: The Browser Core. Contains Browser initialization, Window and Document, and the Browser Hash.
 
 license: MIT-style license.
 
-requires: 
-- /Native
-- /$util
+requires: [Native, $util]
 
 provides: [Browser, Window, Document, $exec]
 
@@ -466,17 +462,15 @@ new Document(document);
 /*
 ---
 
-script: Array.js
+name: Array
 
 description: Contains Array Prototypes like each, contains, and erase.
 
 license: MIT-style license.
 
-requires:
-- /$util
-- /Array.each
+requires: [$util, Array.each]
 
-provides: [Array]
+provides: Array
 
 ...
 */
@@ -618,20 +612,22 @@ Array.implement({
 /*
 ---
 
-script: Function.js
+name: Function
 
 description: Contains Function Prototypes like create, bind, pass, and delay.
 
 license: MIT-style license.
 
-requires:
-- /Native
-- /$util
+requires: [Native, $util]
 
-provides: [Function]
+provides: Function
 
 ...
 */
+
+try {
+	delete Function.prototype.bind;
+} catch(e){}
 
 Function.implement({
 
@@ -691,17 +687,15 @@ Function.implement({
 /*
 ---
 
-script: Number.js
+name: Number
 
 description: Contains Number Prototypes like limit, round, times, and ceil.
 
 license: MIT-style license.
 
-requires:
-- /Native
-- /$util
+requires: [Native, $util]
 
-provides: [Number]
+provides: Number
 
 ...
 */
@@ -747,16 +741,15 @@ Number.alias('times', 'each');
 /*
 ---
 
-script: String.js
+name: String
 
 description: Contains String Prototypes like camelCase, capitalize, test, and toInt.
 
 license: MIT-style license.
 
-requires:
-- /Native
+requires: Native
 
-provides: [String]
+provides: String
 
 ...
 */
@@ -843,16 +836,15 @@ String.implement({
 /*
 ---
 
-script: Hash.js
+name: Hash
 
 description: Contains Hash Prototypes. Provides a means for overcoming the JavaScript practical impossibility of extending native Objects.
 
 license: MIT-style license.
 
-requires:
-- /Hash.base
+requires: Hash.base
 
-provides: [Hash]
+provides: Hash
 
 ...
 */
@@ -988,21 +980,15 @@ Hash.alias({keyOf: 'indexOf', hasValue: 'contains'});
 /*
 ---
 
-script: Event.js
+name: Event
 
 description: Contains the Event Class, to make the event object cross-browser.
 
 license: MIT-style license.
 
-requires:
-- /Window
-- /Document
-- /Hash
-- /Array
-- /Function
-- /String
+requires: [Window, Document, Hash, Array, Function, String]
 
-provides: [Event]
+provides: Event
 
 ...
 */
@@ -1118,22 +1104,15 @@ Event.implement({
 /*
 ---
 
-script: Class.js
+name: Class
 
 description: Contains the Class Function for easily creating, extending, and implementing reusable Classes.
 
 license: MIT-style license.
 
-requires:
-- /$util
-- /Native
-- /Array
-- /String
-- /Function
-- /Number
-- /Hash
+requires: [$util, Native, Array, String, Function, Number, Hash]
 
-provides: [Class]
+provides: Class
 
 ...
 */
@@ -1287,16 +1266,15 @@ Class.Mutators = {
 /*
 ---
 
-script: Class.Extras.js
+name: Class.Extras
 
 description: Contains Utility Classes that can be implemented into your own Classes to ease the execution of many common tasks.
 
 license: MIT-style license.
 
-requires:
-- /Class
+requires: Class
 
-provides: [Chain, Events, Options]
+provides: [Chain, Events, Options, Class.Extras]
 
 ...
 */
@@ -1398,20 +1376,13 @@ var Options = new Class({
 /*
 ---
 
-script: Element.js
+name: Element
 
 description: One of the most important items in MooTools. Contains the dollar function, the dollars function, and an handful of cross-browser, time-saver methods to let you easily work with HTML Elements.
 
 license: MIT-style license.
 
-requires:
-- /Window
-- /Document
-- /Array
-- /String
-- /Function
-- /Number
-- /Hash
+requires: [Window, Document, Array, String, Function, Number, Hash]
 
 provides: [Element, Elements, $, $$, Iframe]
 
@@ -1518,18 +1489,35 @@ Elements.implement({
 
 });
 
+(function(){
+
+/*<ltIE8>*/
+var createElementAcceptsHTML;
+try {
+	var x = document.createElement('<input name=x>');
+	createElementAcceptsHTML = (x.name == 'x');
+} catch(e){}
+
+var escapeQuotes = function(html){
+	return ('' + html).replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+};
+/*</ltIE8>*/
+
 Document.implement({
 
 	newElement: function(tag, props){
-		if (Browser.Engine.trident && props){
-			['name', 'type', 'checked'].each(function(attribute){
-				if (!props[attribute]) return;
-				tag += ' ' + attribute + '="' + props[attribute] + '"';
-				if (attribute != 'checked') delete props[attribute];
-			});
-			tag = '<' + tag + '>';
+		if (props && props.checked != null) props.defaultChecked = props.checked;
+		/*<ltIE8>*/// Fix for readonly name and type properties in IE < 8
+		if (createElementAcceptsHTML && props){
+			tag = '<' + tag;
+			if (props.name) tag += ' name="' + escapeQuotes(props.name) + '"';
+			if (props.type) tag += ' type="' + escapeQuotes(props.type) + '"';
+			tag += '>';
+			delete props.name;
+			delete props.type;
 		}
-		return document.id(this.createElement(tag)).set(props);
+		/*</ltIE8>*/
+		return this.id(this.createElement(tag)).set(props);
 	},
 
 	newTextNode: function(text){
@@ -1580,6 +1568,8 @@ Document.implement({
 	})()
 
 });
+
+})();
 
 if (window.$ == null) Window.implement({
 	$: function(el, nc){
@@ -1644,6 +1634,7 @@ var get = function(uid){
 var clean = function(item, retain){
 	if (!item) return;
 	var uid = item.uid;
+	if (retain !== true) retain = false;
 	if (Browser.Engine.trident){
 		if (item.clearAttributes){
 			var clone = retain && item.cloneNode(false);
@@ -2109,17 +2100,15 @@ if (Browser.Engine.webkit && Browser.Engine.version < 420) Element.Properties.te
 /*
 ---
 
-script: Element.Event.js
+name: Element.Event
 
 description: Contains Element methods for dealing with events. This file also includes mouseenter and mouseleave custom Element Events.
 
 license: MIT-style license.
 
-requires: 
-- /Element
-- /Event
+requires: [Element, Event]
 
-provides: [Element.Event]
+provides: Element.Event
 
 ...
 */
@@ -2226,6 +2215,12 @@ Native.implement([Element, Window, Document], {
 
 });
 
+// IE9
+try {
+	if (typeof HTMLElement != 'undefined')
+		HTMLElement.prototype.fireEvent = Element.prototype.fireEvent;
+} catch(e){}
+
 Element.NativeEvents = {
 	click: 2, dblclick: 2, mouseup: 2, mousedown: 2, contextmenu: 2, //mouse buttons
 	mousewheel: 2, DOMMouseScroll: 2, //mouse wheel
@@ -2269,16 +2264,15 @@ Element.Events = new Hash({
 /*
 ---
 
-script: Element.Style.js
+name: Element.Style
 
 description: Contains methods for interacting with the styles of Elements in a fashionable way.
 
 license: MIT-style license.
 
-requires:
-- /Element
+requires: Element
 
-provides: [Element.Style]
+provides: Element.Style
 
 ...
 */
@@ -2420,20 +2414,19 @@ Element.ShortStyles = {margin: {}, padding: {}, border: {}, borderWidth: {}, bor
 /*
 ---
 
-script: Element.Dimensions.js
+name: Element.Dimensions
 
 description: Contains methods to work with size, scroll, or positioning of Elements and the window object.
 
 license: MIT-style license.
 
 credits:
-- Element positioning based on the [qooxdoo](http://qooxdoo.org/) code and smart browser fixes, [LGPL License](http://www.gnu.org/licenses/lgpl.html).
-- Viewport dimensions based on [YUI](http://developer.yahoo.com/yui/) code, [BSD License](http://developer.yahoo.com/yui/license.html).
+  - Element positioning based on the [qooxdoo](http://qooxdoo.org/) code and smart browser fixes, [LGPL License](http://www.gnu.org/licenses/lgpl.html).
+  - Viewport dimensions based on [YUI](http://developer.yahoo.com/yui/) code, [BSD License](http://developer.yahoo.com/yui/license.html).
 
-requires:
-- /Element
+requires: Element
 
-provides: [Element.Dimensions]
+provides: Element.Dimensions
 
 ...
 */
@@ -2680,16 +2673,15 @@ Native.implement([Window, Document, Element], {
 /*
 ---
 
-script: Selectors.js
+name: Selectors
 
 description: Adds advanced CSS-style querying capabilities for targeting HTML Elements. Includes pseudo selectors.
 
 license: MIT-style license.
 
-requires:
-- /Element
+requires: Element
 
-provides: [Selectors]
+provides: Selectors
 
 ...
 */
@@ -3058,16 +3050,15 @@ Selectors.Pseudo = new Hash({
 /*
 ---
 
-script: DomReady.js
+name: DomReady
 
 description: Contains the custom event domready.
 
 license: MIT-style license.
 
-requires:
-- /Element.Event
+requires: Element.Event
 
-provides: [DomReady]
+provides: DomReady
 
 ...
 */
@@ -3113,22 +3104,17 @@ Element.Events.domready = {
 /*
 ---
 
-script: JSON.js
+name: JSON
 
 description: JSON encoder and decoder.
 
 license: MIT-style license.
 
-See Also: <http://www.json.org/>
+see: <http://www.json.org/>
 
-requires:
-- /Array
-- /String
-- /Number
-- /Function
-- /Hash
+requires: [Array, String, Number, Function, Hash]
 
-provides: [JSON]
+provides: JSON
 
 ...
 */
@@ -3171,31 +3157,21 @@ var JSON = new Hash(this.JSON && {
 
 });
 
-Native.implement([Hash, Array, String, Number], {
-
-	toJSON: function(){
-		return JSON.encode(this);
-	}
-
-});
-
 
 /*
 ---
 
-script: Cookie.js
+name: Cookie
 
 description: Class for creating, reading, and deleting browser Cookies.
 
 license: MIT-style license.
 
-credits:
-- Based on the functions by Peter-Paul Koch (http://quirksmode.org).
+credits: Based on the functions by Peter-Paul Koch (http://quirksmode.org).
 
-requires:
-- /Options
+requires: Options
 
-provides: [Cookie]
+provides: Cookie
 
 ...
 */
@@ -3259,20 +3235,17 @@ Cookie.dispose = function(key, options){
 /*
 ---
 
-script: Swiff.js
+name: Swiff
 
 description: Wrapper for embedding SWF movies. Supports External Interface Communication.
 
 license: MIT-style license.
 
-credits: 
-- Flash detection & Internet Explorer + Flash Player 9 fix inspired by SWFObject.
+credits: Flash detection & Internet Explorer + Flash Player 9 fix inspired by SWFObject.
 
-requires:
-- /Options
-- /$util
+requires: [Options, $util]
 
-provides: [Swiff]
+provides: Swiff
 
 ...
 */
@@ -3371,18 +3344,15 @@ Swiff.remote = function(obj, fn){
 /*
 ---
 
-script: Fx.js
+name: Fx
 
 description: Contains the basic animation logic to be extended by all other Fx Classes.
 
 license: MIT-style license.
 
-requires:
-- /Chain
-- /Events
-- /Options
+requires: [Chain, Events, Options]
 
-provides: [Fx]
+provides: Fx
 
 ...
 */
@@ -3515,17 +3485,15 @@ Fx.Durations = {'short': 250, 'normal': 500, 'long': 1000};
 /*
 ---
 
-script: Fx.CSS.js
+name: Fx.CSS
 
 description: Contains the CSS animation logic. Used by Fx.Tween, Fx.Morph, Fx.Elements.
 
 license: MIT-style license.
 
-requires:
-- /Fx
-- /Element.Style
+requires: [Fx, Element.Style]
 
-provides: [Fx.CSS]
+provides: Fx.CSS
 
 ...
 */
@@ -3659,14 +3627,13 @@ Fx.CSS.Parsers = new Hash({
 /*
 ---
 
-script: Fx.Tween.js
+name: Fx.Tween
 
 description: Formerly Fx.Style, effect to transition any CSS property for an element.
 
 license: MIT-style license.
 
-requires: 
-- /Fx.CSS
+requires: Fx.CSS
 
 provides: [Fx.Tween, Element.fade, Element.highlight]
 
@@ -3765,16 +3732,15 @@ Element.implement({
 /*
 ---
 
-script: Fx.Morph.js
+name: Fx.Morph
 
 description: Formerly Fx.Styles, effect to transition any number of CSS properties for an element using an object of rules, or CSS based selector rules.
 
 license: MIT-style license.
 
-requires:
-- /Fx.CSS
+requires: Fx.CSS
 
-provides: [Fx.Morph]
+provides: Fx.Morph
 
 ...
 */
@@ -3845,19 +3811,17 @@ Element.implement({
 /*
 ---
 
-script: Fx.Transitions.js
+name: Fx.Transitions
 
 description: Contains a set of advanced transitions to be used with any of the Fx Classes.
 
 license: MIT-style license.
 
-credits:
-- Easing Equations by Robert Penner, <http://www.robertpenner.com/easing/>, modified and optimized to be used with MooTools.
+credits: Easing Equations by Robert Penner, <http://www.robertpenner.com/easing/>, modified and optimized to be used with MooTools.
 
-requires:
-- /Fx
+requires: Fx
 
-provides: [Fx.Transitions]
+provides: Fx.Transitions
 
 ...
 */
@@ -3952,20 +3916,15 @@ Fx.Transitions.extend({
 /*
 ---
 
-script: Request.js
+name: Request
 
 description: Powerful all purpose Request Class. Uses XMLHTTPRequest.
 
 license: MIT-style license.
 
-requires:
-- /Element
-- /Chain
-- /Events
-- /Options
-- /Browser
+requires: [Element, Chain, Events, Options, Browser]
 
-provides: [Request]
+provides: Request
 
 ...
 */
@@ -4192,17 +4151,15 @@ Element.implement({
 /*
 ---
 
-script: Request.HTML.js
+name: Request.HTML
 
 description: Extends the basic Request Class with additional methods for interacting with HTML responses.
 
 license: MIT-style license.
 
-requires:
-- /Request
-- /Element
+requires: [Request, Element]
 
-provides: [Request.HTML]
+provides: Request.HTML
 
 ...
 */
@@ -4296,16 +4253,15 @@ Element.implement({
 /*
 ---
 
-script: Request.JSON.js
+name: Request.JSON
 
 description: Extends the basic Request Class with additional methods for sending and receiving JSON data.
 
 license: MIT-style license.
 
-requires:
-- /Request JSON
+requires: [Request, JSON]
 
-provides: [Request.HTML]
+provides: [Request.JSON]
 
 ...
 */
