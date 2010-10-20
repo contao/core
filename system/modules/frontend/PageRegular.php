@@ -218,7 +218,7 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->headerHeight);
 
-			if ($arrSize['value'] > 0)
+			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
 				$strFramework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
@@ -231,7 +231,7 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->widthLeft);
 
-			if ($arrSize['value'] > 0)
+			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
 				$strFramework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 				$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
@@ -243,7 +243,7 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->widthRight);
 
-			if ($arrSize['value'] > 0)
+			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
 				$strFramework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 				$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
@@ -253,7 +253,7 @@ class PageRegular extends Frontend
 		// Main column
 		if (strlen($strMain))
 		{
-			$strFramework .= sprintf('#main { %s }', $strMain) . "\n";
+			$strFramework .= sprintf('#main {%s }', $strMain) . "\n";
 		}
 
 		// Footer
@@ -261,7 +261,7 @@ class PageRegular extends Frontend
 		{
 			$arrSize = deserialize($objLayout->footerHeight);
 
-			if ($arrSize['value'] > 0)
+			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
 				$strFramework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
