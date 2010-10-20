@@ -88,7 +88,7 @@ class FormFieldset extends Widget
 		// Return the HTML code in the front end
 		if ($this->fsType == 'fsStart')
 		{
-			return "  <fieldset" . ($this->strClass ? ' class="' . $this->strClass . '"' : '') . ">\n  <legend>" . $this->label . "</legend>\n";
+			return "  <fieldset" . ($this->strClass ? ' class="' . $this->strClass . '"' : '') . ">\n" . (($this->label != '') ? "  <legend>" . $this->label . "</legend>\n" : '');
 		}
 		else
 		{
