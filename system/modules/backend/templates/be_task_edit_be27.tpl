@@ -83,6 +83,7 @@
 
 <fieldset id="pal_history_legend" class="tl_box tl_history block<?php echo $this->historyClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'history_legend', 'tl_tasks')"><?php echo $this->historyLabel; ?></legend>
+<div>
   <table cellpadding="0" cellspacing="0" summary="">
 <?php foreach ($this->history as $row): ?>
     <tr class="odd">
@@ -97,6 +98,7 @@
     </tr>
 <?php endforeach; ?>
   </table>
+</div>
 </fieldset>
 
 </div>
