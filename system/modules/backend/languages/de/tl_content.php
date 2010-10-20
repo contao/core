@@ -83,7 +83,7 @@ $GLOBALS['TL_LANG']['tl_content']['module']       = array('Modul', 'Bitte wähle
 $GLOBALS['TL_LANG']['tl_content']['protected']    = array('Element schützen', 'Das Inhaltselement nur bestimmten Gruppen anzeigen.');
 $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Inhaltselement sehen.');
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Nur Gästen anzeigen', 'Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.');
-$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
+$GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_content']['space']        = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 $GLOBALS['TL_LANG']['tl_content']['source']       = array('Quelldateien', 'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.');
 

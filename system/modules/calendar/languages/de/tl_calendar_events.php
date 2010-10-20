@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_calendar_events']['title']        = array('Titel', 'Bitte geben Sie den Event-Titel ein.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['alias']        = array('Event-Alias', 'Der Event-Alias ist eine eindeutige Referenz, die anstelle der numerischen Event-Id aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['alias']        = array('Event-Alias', 'Der Event-Alias ist eine eindeutige Referenz, die anstelle der numerischen Event-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['author']       = array('Autor', 'Hier können Sie den Autor des Events ändern.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['addTime']      = array('Zeit hinzufügen', 'Dem Event eine Start- und Endzeit hinzufügen.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['startTime']    = array('Startzeit', 'Bitte geben Sie die Startzeit gemäß des globalen Zeitformats ein.');

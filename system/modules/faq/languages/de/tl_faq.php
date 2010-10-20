@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_faq']['question']     = array('Frage', 'Bitte geben Sie die Frage ein.');
-$GLOBALS['TL_LANG']['tl_faq']['alias']        = array('FAQ-Alias', 'Der FAQ-Alias ist eine eindeutige Referenz, die anstelle der numerischen FAQ-Id aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_faq']['alias']        = array('FAQ-Alias', 'Der FAQ-Alias ist eine eindeutige Referenz, die anstelle der numerischen FAQ-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_faq']['author']       = array('Autor', 'Hier können Sie den Autor der Frage ändern.');
 $GLOBALS['TL_LANG']['tl_faq']['answer']       = array('Antwort', 'Bitte geben Sie die Antwort ein.');
 $GLOBALS['TL_LANG']['tl_faq']['addImage']     = array('Ein Bild hinzufügen', 'Der Frage ein Bild hinzufügen.');

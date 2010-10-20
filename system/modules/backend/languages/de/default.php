@@ -170,8 +170,8 @@ $GLOBALS['TL_LANG']['MSC']['linebreak'] = 'Zeilenumbruch';
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['id']         = array('Id', 'Das Ändern der Id kann die Konsistenz der Daten gefährden!');
-$GLOBALS['TL_LANG']['MSC']['pid']        = array('Parent-Id', 'Das Ändern der Parent-Id kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['id']         = array('ID', 'Das Ändern der ID kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['pid']        = array('Parent-ID', 'Das Ändern der Parent-ID kann die Konsistenz der Daten gefährden!');
 $GLOBALS['TL_LANG']['MSC']['sorting']    = array('Sortierindex', 'Der Sortierindex wird normalerweise automatisch gesetzt.');
 $GLOBALS['TL_LANG']['MSC']['all']        = array('Mehrere bearbeiten', 'Mehrere Datensätze auf einmal bearbeiten');
 $GLOBALS['TL_LANG']['MSC']['all_fields'] = array('Vorhandene Felder', 'Bitte wählen Sie die Felder aus, die Sie bearbeiten möchten.');

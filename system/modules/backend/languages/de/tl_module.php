@@ -79,7 +79,7 @@ $GLOBALS['TL_LANG']['tl_module']['source']         = array('Quelle', 'Eine Datei
 $GLOBALS['TL_LANG']['tl_module']['singleSRC']      = array('Quelldatei', 'Bitte wählen Sie eine Datei aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_module']['url']            = array('URL', 'Bitte geben Sie die URL (http://…) des Flash-Films ein.');
 $GLOBALS['TL_LANG']['tl_module']['interactive']    = array('Interaktiv machen', 'Den Flash-Film mit dem Webbrowser über JavaScript interagieren lassen.');
-$GLOBALS['TL_LANG']['tl_module']['flashID']        = array('Flash-Film-Id', 'Bitte geben Sie eine eindeutige Flash-Film-Id ein.');
+$GLOBALS['TL_LANG']['tl_module']['flashID']        = array('Flash-Film-ID', 'Bitte geben Sie eine eindeutige Flash-Film-ID ein.');
 $GLOBALS['TL_LANG']['tl_module']['flashJS']        = array('JavaScript _DoFSCommand(command, args) {', 'Bitte geben Sie den JavaScript-Code ein.');
 $GLOBALS['TL_LANG']['tl_module']['imgSize']        = array('Bildbreite und Bildhöhe', 'Hier können Sie die Abmessungen des Bildes und den Skalierungsmodus festlegen.');
 $GLOBALS['TL_LANG']['tl_module']['useCaption']     = array('Bildunterschrift anzeigen', 'Den Bildnamen bzw. die Bildunterschrift unter dem Bild anzeigen.');
@@ -89,7 +89,7 @@ $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML-Code', 'Sie kö
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Modul schützen', 'Das Modul nur bestimmten Gruppen anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Modul sehen.');
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken, sobald ein Mitglied angemeldet ist.');
-$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-Id/Klasse', 'Hier können Sie eine Id und beliebig viele Klassen eingeben.');
+$GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
 
 

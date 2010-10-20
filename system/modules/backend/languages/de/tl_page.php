@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_page']['title']          = array('Seitenname', 'Bitte geben Sie den Namen der Seite ein.');
-$GLOBALS['TL_LANG']['tl_page']['alias']          = array('Seitenalias', 'Der Seitenalias ist eine eindeutige Referenz, die anstelle der numerischen Seiten-Id aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_page']['alias']          = array('Seitenalias', 'Der Seitenalias ist eine eindeutige Referenz, die anstelle der numerischen Seiten-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_page']['type']           = array('Seitentyp', 'Bitte wählen Sie den Typ der Seite aus.');
 $GLOBALS['TL_LANG']['tl_page']['pageTitle']      = array('Seitentitel', 'Bitte geben Sie den Titel der Seite ein.');
 $GLOBALS['TL_LANG']['tl_page']['language']       = array('Sprache', 'Bitte geben Sie die Sprache der Seite gemäß des ISO-639-1 Standards ein (z.B. "de" für Deutsch).');

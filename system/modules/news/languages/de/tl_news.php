@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_news']['headline']     = array('Titel', 'Bitte geben Sie den Nachrichten-Titel ein.');
-$GLOBALS['TL_LANG']['tl_news']['alias']        = array('Nachrichtenalias', 'Der Nachrichtenalias ist eine eindeutige Referenz, die anstelle der numerischen Artikel-Id aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_news']['alias']        = array('Nachrichtenalias', 'Der Nachrichtenalias ist eine eindeutige Referenz, die anstelle der numerischen Artikel-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_news']['author']       = array('Autor', 'Hier können Sie den Autor des Beitrags ändern.');
 $GLOBALS['TL_LANG']['tl_news']['date']         = array('Datum', 'Bitte geben Sie das Datum gemäß des globalen Datumsformats ein.');
 $GLOBALS['TL_LANG']['tl_news']['time']         = array('Uhrzeit', 'Bitte geben Sie die Uhrzeit gemäß des globalen Zeitformats ein.');

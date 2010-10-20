@@ -33,7 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_newsletter']['subject']       = array('Betreff', 'Bitte geben Sie den Betreff des Newsletters ein.');
-$GLOBALS['TL_LANG']['tl_newsletter']['alias']         = array('Newsletteralias', 'Der Newsletteralias ist eine eindeutige Referenz, die anstelle der numerischen Newsletter-Id aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_newsletter']['alias']         = array('Newsletteralias', 'Der Newsletteralias ist eine eindeutige Referenz, die anstelle der numerischen Newsletter-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_newsletter']['content']       = array('HTML-Inhalt', 'Hier können Sie den HTML-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
 $GLOBALS['TL_LANG']['tl_newsletter']['text']          = array('Text-Inhalt', 'Hier können Sie den Text-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
 $GLOBALS['TL_LANG']['tl_newsletter']['addFile']       = array('Dateien anhängen', 'Dem Newsletter eine oder mehrere Dateien anhängen.');
