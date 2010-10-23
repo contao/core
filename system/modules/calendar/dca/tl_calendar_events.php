@@ -222,7 +222,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'default'                 => time(),
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'date', 'mandatory'=>true, 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
 		),
 		'endDate' => array
 		(

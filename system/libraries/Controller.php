@@ -1891,24 +1891,24 @@ abstract class Controller extends System
 
 		// Remove any unwanted tags (especially PHP tags)
 		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
-		$arrTags = preg_split("/{([^}]+)}/", $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+		$arrTags = preg_split('/(\{[^\}]+\})/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
 		// Replace tags
 		foreach ($arrTags as $strTag)
 		{
-			if (strncmp($strTag, 'if', 2) === 0)
+			if (strncmp($strTag, '{if', 3) === 0)
 			{
-				$strReturn .= preg_replace('/if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{if ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php if ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
-			elseif (strncmp($strTag, 'elseif', 6) === 0)
+			elseif (strncmp($strTag, '{elseif', 7) === 0)
 			{
-				$strReturn .= preg_replace('/elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
+				$strReturn .= preg_replace('/\{elseif ([A-Za-z0-9_]+)([=!<>]+)([^;$\(\)\[\] ]+).*\}/i', '<?php elseif ($arrData[\'$1\'] $2 $3): ?>', $strTag);
 			}
-			elseif (strncmp($strTag, 'else', 4) === 0)
+			elseif (strncmp($strTag, '{else', 5) === 0)
 			{
 				$strReturn .= '<?php else: ?>';
 			}
-			elseif (strncmp($strTag, 'endif', 5) === 0)
+			elseif (strncmp($strTag, '{endif', 6) === 0)
 			{
 				$strReturn .= '<?php endif; ?>';
 			}
