@@ -1737,7 +1737,7 @@ abstract class Controller extends System
 					{
 						$this->import('String');
 
-						$arrChunks = explode('?', urldecode($elements[1]));
+						$arrChunks = explode('?', urldecode($elements[1]), 2);
 						$strSource = $this->String->decodeEntities($arrChunks[1]);
 						$strSource = str_replace('[&]', '&', $strSource);
 						$arrParams = explode('&', $strSource);
