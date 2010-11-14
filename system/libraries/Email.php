@@ -198,11 +198,11 @@ class Email extends System
 				switch ($varValue)
 				{
 					case 1:
-					case 'lowest':
+					case 'highest':
 						$this->intPriority = 1;
 						break;
 					case 2:
-					case 'low':
+					case 'high':
 						$this->intPriority = 2;
 						break;
 					case 3:
@@ -210,11 +210,11 @@ class Email extends System
 						$this->intPriority = 3;
 						break;
 					case 4:
-					case 'high':
+					case 'low':
 						$this->intPriority = 4;
 						break;
 					case 5:
-					case 'highest':
+					case 'lowest':
 						$this->intPriority = 5;
 						break;
 				}
