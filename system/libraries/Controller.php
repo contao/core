@@ -1787,14 +1787,24 @@ abstract class Controller extends System
 						$height = null;
 					}
 
-					// Generate image
+					// Generate the thumbnail image
+					$src = $this->getImage($strFile, $width, $height, $mode);
+					$dimensions = '';
+
+					// Add the image dimensions
+					if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
+					{
+						$dimensions = $imgSize[3];
+					}
+
+					// Generate the HTML markup
 					if (strlen($rel))
 					{
-						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $this->getImage($strFile, $width, $height, $mode) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
 					}
 					else
 					{
-						$arrCache[$strTag] = '<img src="' . $this->getImage($strFile, $width, $height, $mode) . '" alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+						$arrCache[$strTag] = '<img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
 					}
 					break;
 
@@ -1953,12 +1963,12 @@ abstract class Controller extends System
 			$src = sprintf('system/themes/%s/images/%s', $this->getTheme(), $src);
 		}
 
-		if (!file_exists(TL_ROOT.'/'.$src))
+		if (!file_exists(TL_ROOT .'/'. $src))
 		{
 			return '';
 		}
 
-		$size = getimagesize(TL_ROOT.'/'.$src);
+		$size = getimagesize(TL_ROOT .'/'. $src);
 
 		return '<img src="'.$src.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').' />';
 	}
@@ -2617,7 +2627,7 @@ abstract class Controller extends System
 	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=false, $strLightboxId=false)
 	{
 		$size = deserialize($arrItem['size']);
-		$imgSize = getimagesize(TL_ROOT . '/' . $arrItem['singleSRC']);
+		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
 		if (!$intMaxWidth)
 		{
@@ -2654,7 +2664,7 @@ abstract class Controller extends System
 		$src = $this->getImage($this->urlEncode($arrItem['singleSRC']), $size[0], $size[1], $size[2]);
 
 		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
+		if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' ' . $imgSize[3];
