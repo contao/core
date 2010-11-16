@@ -94,7 +94,7 @@ class Comments extends Frontend
 			{
 				$objPartial->setData($objComments->row());
 
-				$objPartial->comment = trim(preg_replace('/{{([^}]+)}}/', '', $objComments->comment));
+				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
 				$objPartial->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
 				$objPartial->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');

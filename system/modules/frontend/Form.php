@@ -361,7 +361,7 @@ class Form extends Hybrid
 			// Attach CSV file
 			if ($this->format == 'csv')
 			{
-				$email->attachFileFromString($this->String->decodeEntities('"' . implode(';', $keys) . '"' . "\n" . '"' . implode('";"', $values) . '"'), 'form.csv', 'text/comma-separated-values');
+				$email->attachFileFromString($this->String->decodeEntities('"' . implode('";"', $keys) . '"' . "\n" . '"' . implode('";"', $values) . '"'), 'form.csv', 'text/comma-separated-values');
 			}
 
 			$uploaded = '';
