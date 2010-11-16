@@ -312,6 +312,10 @@ class Index extends Frontend
 			header('Pragma: no-cache');
 		}
 
+		// Load the default language file (see #2644)
+		$this->import('Config');
+		$this->loadLanguageFile('default');
+
 		// Replace insert tags
 		$strBuffer = $this->replaceInsertTags($strBuffer);
 		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
