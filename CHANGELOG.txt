@@ -16,6 +16,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: the link insert tags showed the page title instead of the page name (#2371)
 - Fixed: do not show empty fieldset legends in the form generator (#2625)
 - Fixed: preserve curly brackets when replacing simple tokens (#2597)
+- Fixed: the style sheet importer did not support some CSS3 selectors (#2566)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 

@@ -605,7 +605,7 @@ class StyleSheets extends Backend
 					$strFile = "\n" . $strFile;
 				}
 
-				preg_match_all('@(/\*.*\*\/)|([^\/}]*{[^}]*})@Us', $strFile, $arrChunks);
+				preg_match_all('@(\/\*.*\*\/)|([^\n\}]*\{[^\}]*\})@Us', $strFile, $arrChunks);
 
 				// Skip comment block at the very top (if any)
 				if (strpos($arrChunks[0][0], '*/') !== false)
