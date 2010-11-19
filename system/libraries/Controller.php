@@ -1346,7 +1346,7 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), ampersand($strName));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), specialchars($strName));
 							break;
 
 						case 'link_open':
@@ -1402,7 +1402,8 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'article':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objArticle->title), ampersand($objArticle->title));
+							$strLink = specialchars($objArticle->title);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
 							break;
 
 						case 'article_open':
@@ -1443,7 +1444,8 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'faq':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objFaq->question), ampersand($objFaq->question));
+							$strLink = specialchars($objFaq->question);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
 							break;
 
 						case 'faq_open':
@@ -1496,7 +1498,8 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'news':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objNews->headline), ampersand($objNews->headline));
+							$strLink = specialchars($objNews->headline);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
 							break;
 
 						case 'news_open':
@@ -1549,7 +1552,8 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'event':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($objEvent->title), ampersand($objEvent->title));
+							$strLink = specialchars($objEvent->title);
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, $strLink, $strLink);
 							break;
 
 						case 'event_open':
