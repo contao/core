@@ -528,7 +528,8 @@ CREATE TABLE `tl_style` (
   `liststyleimage` varchar(255) NOT NULL default '',
   `own` text NULL,
   PRIMARY KEY  (`id`),
-  KEY `pid` (`pid`)
+  KEY `pid` (`pid`),
+  KEY `selector` (`selector`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

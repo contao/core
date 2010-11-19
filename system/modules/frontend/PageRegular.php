@@ -346,12 +346,12 @@ class PageRegular extends Frontend
 		{
 			$arrAggregator = array();
 			$strCcStyleSheets = '';
-			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2 FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
 				// Try to aggregate regular style sheets
-				if ($objLayout->aggregate && !$objStylesheets->cc)
+				if ($objLayout->aggregate && !$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
 					$key = md5($objStylesheets->id .'-'. max($objStylesheets->tstamp, $objStylesheets->tstamp2) .'-'. $objStylesheets->media);
 
