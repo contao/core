@@ -365,6 +365,7 @@ class Newsletter extends Backend
 		{
 			// Get mail template
 			$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
+			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;
 			$objTemplate->body = $this->parseSimpleTokens($html, $arrRecipient);
