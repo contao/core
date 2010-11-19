@@ -45,7 +45,7 @@ $GLOBALS['TL_LANG']['tl_article']['cssID']       = array('CSS ID/class', 'Here y
 $GLOBALS['TL_LANG']['tl_article']['space']       = array('Space in front and after', 'Here you can enter the spacing in front of and after the article in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
 $GLOBALS['TL_LANG']['tl_article']['published']   = array('Publish article', 'Make the article publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_article']['start']       = array('Show from', 'Do not show the article on the website before this day.');
-$GLOBALS['TL_LANG']['tl_article']['stop']        = array('Show until', 'Do not show the article on the website after this day.');
+$GLOBALS['TL_LANG']['tl_article']['stop']        = array('Show until', 'Do not show the article on the website on and after this day.');
 $GLOBALS['TL_LANG']['tl_article']['tstamp']      = array('Revision date', 'Date and time of the latest revision');
 
 

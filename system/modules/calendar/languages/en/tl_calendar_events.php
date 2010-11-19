@@ -59,7 +59,7 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['cssClass']     = array('CSS class', '
 $GLOBALS['TL_LANG']['tl_calendar_events']['noComments']   = array('Disable comments', 'Do not allow comments for this particular event.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['published']    = array('Publish event', 'Make the event publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_calendar_events']['start']        = array('Show from', 'Do not show the event on the website before this day.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Show until', 'Do not show the event on the website after this day.');
+$GLOBALS['TL_LANG']['tl_calendar_events']['stop']         = array('Show until', 'Do not show the event on the website on and after this day.');
 
 
 /**

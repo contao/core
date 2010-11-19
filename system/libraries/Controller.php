@@ -1792,23 +1792,30 @@ abstract class Controller extends System
 					}
 
 					// Generate the thumbnail image
-					$src = $this->getImage($strFile, $width, $height, $mode);
-					$dimensions = '';
+					try
+					{
+						$src = $this->getImage($strFile, $width, $height, $mode);
+						$dimensions = '';
 
-					// Add the image dimensions
-					if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
-					{
-						$dimensions = $imgSize[3];
-					}
+						// Add the image dimensions
+						if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
+						{
+							$dimensions = $imgSize[3];
+						}
 
-					// Generate the HTML markup
-					if (strlen($rel))
-					{
-						$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+						// Generate the HTML markup
+						if (strlen($rel))
+						{
+							$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+						}
+						else
+						{
+							$arrCache[$strTag] = '<img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+						}
 					}
-					else
+					catch (Exception $e)
 					{
-						$arrCache[$strTag] = '<img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+						$arrCache[$strTag] = '';
 					}
 					break;
 

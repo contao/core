@@ -55,7 +55,7 @@ $GLOBALS['TL_LANG']['tl_news']['noComments']   = array('Disable comments', 'Do n
 $GLOBALS['TL_LANG']['tl_news']['featured']     = array('Feature item', 'Show the news item in a featured news list.');
 $GLOBALS['TL_LANG']['tl_news']['published']    = array('Publish item', 'Make the news item publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_news']['start']        = array('Show from', 'Do not show the news item on the website before this day.');
-$GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'Do not show the news item on the website after this day.');
+$GLOBALS['TL_LANG']['tl_news']['stop']         = array('Show until', 'Do not show the news item on the website on and after this day.');
 
 
 /**

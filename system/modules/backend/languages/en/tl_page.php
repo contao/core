@@ -69,7 +69,7 @@ $GLOBALS['TL_LANG']['tl_page']['tabindex']       = array('Tab index', 'The posit
 $GLOBALS['TL_LANG']['tl_page']['accesskey']      = array('Access key', 'A navigation item can be focused by pressing the [ALT] or [CTRL] key and the access key simultaneously.');
 $GLOBALS['TL_LANG']['tl_page']['published']      = array('Publish page', 'Make the page publicly visible on the website.');
 $GLOBALS['TL_LANG']['tl_page']['start']          = array('Show from', 'Do not show the page on the website before this day.');
-$GLOBALS['TL_LANG']['tl_page']['stop']           = array('Show until', 'Do not show the page on the website after this day.');
+$GLOBALS['TL_LANG']['tl_page']['stop']           = array('Show until', 'Do not show the page on the website on and after this day.');
 
 
 /**
