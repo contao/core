@@ -108,6 +108,12 @@ class Email extends System
 	protected $strImageDir;
 
 	/**
+	 * Embed images
+	 * @var boolean
+	 */
+	protected $blnEmbedImages = true;
+
+	/**
 	 * Invalid addresses
 	 * @var array
 	 */
@@ -228,6 +234,10 @@ class Email extends System
 				$this->strImageDir = $varValue;
 				break;
 
+			case 'embedImages':
+				$this->blnEmbedImages = $varValue;
+				break;
+
 			case 'logFile':
 				$this->strLogFile = $varValue;
 				break;
@@ -278,6 +288,10 @@ class Email extends System
 
 			case 'imageDir':
 				return $this->strImageDir;
+				break;
+
+			case 'embedImages':
+				return $this->blnEmbedImages;
 				break;
 
 			case 'logFile':
@@ -385,27 +399,30 @@ class Email extends System
 		// HTML e-mail
 		if (!empty($this->strHtml))
 		{
-			if (!strlen($this->strImageDir))
+			// Embed images
+			if ($this->blnEmbedImages)
 			{
-				$this->strImageDir = TL_ROOT . '/';
-			}
-
-			// Find images
-			$arrMatches = array();
-			preg_match_all('/src="([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
-			$strBase = Environment::getInstance()->base;
-
-			// Embed internal images
-			foreach (array_unique($arrMatches[1]) as $url)
-			{
-				// Try to remove the base URL
-				$src = str_replace($strBase, '', $url);
-
-				// Embed the image if the URL is now relative
-				if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
+				if (!strlen($this->strImageDir))
 				{
-					$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
-					$this->strHtml = str_replace('src="' . $url . '"', 'src="' . $cid . '"', $this->strHtml);
+					$this->strImageDir = TL_ROOT . '/';
+				}
+
+				$arrMatches = array();
+				preg_match_all('/src="([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
+				$strBase = Environment::getInstance()->base;
+
+				// Check for internal images
+				foreach (array_unique($arrMatches[1]) as $url)
+				{
+					// Try to remove the base URL
+					$src = str_replace($strBase, '', $url);
+
+					// Embed the image if the URL is now relative
+					if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
+					{
+						$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
+						$this->strHtml = str_replace('src="' . $url . '"', 'src="' . $cid . '"', $this->strHtml);
+					}
 				}
 			}
 

@@ -23,6 +23,7 @@ CREATE TABLE `tl_newsletter` (
   `files` blob NULL,
   `template` varchar(32) NOT NULL default '',
   `sendText` char(1) NOT NULL default '',
+  `externalImages` char(1) NOT NULL default '',
   `sender` varchar(128) NOT NULL default '',
   `senderName` varchar(128) NOT NULL default '',
   `sent` char(1) NOT NULL default '',

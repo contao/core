@@ -329,6 +329,7 @@ class Newsletter extends Backend
 			$objEmail->fromName = $objNewsletter->senderName;
 		}
 
+		$objEmail->embedImages = !$objNewsletter->externalImages;
 		$objEmail->logFile = 'newsletter_' . $objNewsletter->id . '.log';
 
 		// Attachments

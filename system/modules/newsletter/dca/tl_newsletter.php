@@ -114,7 +114,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('addFile'),
-		'default'                     => '{title_legend},subject,alias;{html_legend},content;{text_legend:hide},text;{attachment_legend},addFile;{template_legend:hide},template;{expert_legend:hide},sendText,senderName,sender'
+		'default'                     => '{title_legend},subject,alias;{html_legend},content;{text_legend:hide},text;{attachment_legend},addFile;{template_legend:hide},template;{expert_legend:hide},sendText,externalImages,senderName,sender'
 	),
 
 	// Subpalettes
@@ -197,7 +197,15 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['sendText'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'externalImages' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['externalImages'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'sender' => array
 		(

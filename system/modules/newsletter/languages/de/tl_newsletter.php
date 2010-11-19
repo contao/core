@@ -32,20 +32,21 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_newsletter']['subject']       = array('Betreff', 'Bitte geben Sie den Betreff des Newsletters ein.');
-$GLOBALS['TL_LANG']['tl_newsletter']['alias']         = array('Newsletteralias', 'Der Newsletteralias ist eine eindeutige Referenz, die anstelle der numerischen Newsletter-ID aufgerufen werden kann.');
-$GLOBALS['TL_LANG']['tl_newsletter']['content']       = array('HTML-Inhalt', 'Hier können Sie den HTML-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
-$GLOBALS['TL_LANG']['tl_newsletter']['text']          = array('Text-Inhalt', 'Hier können Sie den Text-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
-$GLOBALS['TL_LANG']['tl_newsletter']['addFile']       = array('Dateien anhängen', 'Dem Newsletter eine oder mehrere Dateien anhängen.');
-$GLOBALS['TL_LANG']['tl_newsletter']['files']         = array('Dateianhänge', 'Bitte wählen Sie die anzuhängenden Dateien aus der Dateiübersicht.');
-$GLOBALS['TL_LANG']['tl_newsletter']['template']      = array('E-Mail-Template', 'Hier können Sie das E-Mail-Template auswählen.');
-$GLOBALS['TL_LANG']['tl_newsletter']['sendText']      = array('Als Text senden', 'Den Newsletter als reinen Text ohne HTML-Inhalt versenden.');
-$GLOBALS['TL_LANG']['tl_newsletter']['senderName']    = array('Absendername', 'Hier können Sie den Namen des Absenders eingeben.');
-$GLOBALS['TL_LANG']['tl_newsletter']['sender']        = array('Absenderadresse', 'Hier können Sie eine individuelle Absenderadresse eingeben.');
-$GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'] = array('Mails pro Zyklus', 'Die Versendung wird in mehreren Teilschritten ausgeführt, um einen vorzeitigen Skriptabbruch zu verhindern.');
-$GLOBALS['TL_LANG']['tl_newsletter']['timeout']       = array('Wartezeit in Sekunden', 'Hier können Sie die Wartezeit zwischen den Teilschritten festlegen, um die Anzahl der E-Mails pro Minute zu kontrollieren.');
-$GLOBALS['TL_LANG']['tl_newsletter']['start']         = array('Startzyklus', 'Im Falle einer Versandunterbrechung können Sie hier die Nummer des Zyklus eingeben, von dem an die Versendung weiterlaufen soll. Die Zählung beginnt bei 0 für den ersten Zyklus!');
-$GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'] = array('Testsendung an', 'Die Testsendung des Newsletters an diese E-Mail-Adresse versenden.');
+$GLOBALS['TL_LANG']['tl_newsletter']['subject']        = array('Betreff', 'Bitte geben Sie den Betreff des Newsletters ein.');
+$GLOBALS['TL_LANG']['tl_newsletter']['alias']          = array('Newsletteralias', 'Der Newsletteralias ist eine eindeutige Referenz, die anstelle der numerischen Newsletter-ID aufgerufen werden kann.');
+$GLOBALS['TL_LANG']['tl_newsletter']['content']        = array('HTML-Inhalt', 'Hier können Sie den HTML-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
+$GLOBALS['TL_LANG']['tl_newsletter']['text']           = array('Text-Inhalt', 'Hier können Sie den Text-Inhalt des Newsletters eingeben. Benutzen Sie den Platzhalter <em>##email##</em>, um die Empfängeradresse einzufügen.');
+$GLOBALS['TL_LANG']['tl_newsletter']['addFile']        = array('Dateien anhängen', 'Dem Newsletter eine oder mehrere Dateien anhängen.');
+$GLOBALS['TL_LANG']['tl_newsletter']['files']          = array('Dateianhänge', 'Bitte wählen Sie die anzuhängenden Dateien aus der Dateiübersicht.');
+$GLOBALS['TL_LANG']['tl_newsletter']['template']       = array('E-Mail-Template', 'Hier können Sie das E-Mail-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_newsletter']['sendText']       = array('Als Text senden', 'Den Newsletter als reinen Text ohne HTML-Inhalt versenden.');
+$GLOBALS['TL_LANG']['tl_newsletter']['externalImages'] = array('Externe Bilder', 'Bilder in HTML-Newslettern nicht einbetten.');
+$GLOBALS['TL_LANG']['tl_newsletter']['senderName']     = array('Absendername', 'Hier können Sie den Namen des Absenders eingeben.');
+$GLOBALS['TL_LANG']['tl_newsletter']['sender']         = array('Absenderadresse', 'Hier können Sie eine individuelle Absenderadresse eingeben.');
+$GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle']  = array('Mails pro Zyklus', 'Die Versendung wird in mehreren Teilschritten ausgeführt, um einen vorzeitigen Skriptabbruch zu verhindern.');
+$GLOBALS['TL_LANG']['tl_newsletter']['timeout']        = array('Wartezeit in Sekunden', 'Hier können Sie die Wartezeit zwischen den Teilschritten festlegen, um die Anzahl der E-Mails pro Minute zu kontrollieren.');
+$GLOBALS['TL_LANG']['tl_newsletter']['start']          = array('Startzyklus', 'Im Falle einer Versandunterbrechung können Sie hier die Nummer des Zyklus eingeben, von dem an die Versendung weiterlaufen soll. Die Zählung beginnt bei 0 für den ersten Zyklus!');
+$GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo']  = array('Testsendung an', 'Die Testsendung des Newsletters an diese E-Mail-Adresse versenden.');
 
 
 /**

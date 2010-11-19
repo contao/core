@@ -5,6 +5,7 @@ Contao Open Source CMS Changelog
 Version 2.9.2 (2010-XX-XX)
 --------------------------
 - Updated MooTools Core to version 1.2.5 (#2545)
+- Added: allow external images in HTML newsletters (#2396)
 - Fixed: do not allow insert tags in comments (#2499)
 - Fixed: check for custom layout sections during the theme import
 - Fixed: only send the comments notification once (#2407)
