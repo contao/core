@@ -89,7 +89,9 @@ class ModuleEventlist extends Events
 	 */
 	protected function compile()
 	{
-		// Jump to current period
+		$blnClearInput = false;
+
+		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
 		{
 			switch ($this->cal_format)
@@ -106,6 +108,8 @@ class ModuleEventlist extends Events
 					$this->Input->setGet('day', date('Ymd'));
 					break;
 			}
+
+			$blnClearInput = true;
 		}
 
 		$blnDynamicFormat = in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year'));
@@ -300,6 +304,14 @@ class ModuleEventlist extends Events
 		}
 
 		$this->Template->events = $strEvents;
+
+		// Clear the $_GET array (see #2445)
+		if ($blnClearInput)
+		{
+			$this->Input->setGet('year', null);
+			$this->Input->setGet('month', null);
+			$this->Input->setGet('day', null);
+		}
 	}
 }
 

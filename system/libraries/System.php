@@ -196,7 +196,7 @@ abstract class System
 		{
 			$explode = explode('=', $v);
 
-			if (preg_match('/' . preg_quote($explode[0], '/') . '=/i', $strRequest))
+			if (preg_match('/(^|&(amp;)?)' . preg_quote($explode[0], '/') . '=/i', $strRequest))
 			{
 				unset($queries[$k]);
 			}

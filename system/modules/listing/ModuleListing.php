@@ -140,7 +140,7 @@ class ModuleListing extends Module
 
 			foreach ($arrSearchFields as $field)
 			{
-				$strOptions .= '  <option value="' . $field . '"' . (($field == $this->Input->get('search')) ? ' selected="selected"' : '') . '>' . $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0] . '</option>' . "\n";
+				$strOptions .= '  <option value="' . $field . '"' . (($field == $this->Input->get('search')) ? ' selected="selected"' : '') . '>' . (strlen($label = $GLOBALS['TL_DCA'][$this->list_table]['fields'][$field]['label'][0]) ? $label : $field) . '</option>' . "\n";
 			}
 		}
 

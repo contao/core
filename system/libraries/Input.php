@@ -237,7 +237,14 @@ class Input
 		unset($this->arrCache['getEncoded'][$strKey]);
 		unset($this->arrCache['getDecoded'][$strKey]);
 
-		$_GET[$strKey] = $varValue;
+		if (is_null($varValue))
+		{
+			unset($_GET[$strKey]);
+		}
+		else
+		{
+			$_GET[$strKey] = $varValue;
+		}
 	}
 
 
@@ -252,7 +259,14 @@ class Input
 		unset($this->arrCache['postDecoded'][$strKey]);
 		unset($this->arrCache['postRaw'][$strKey]);
 
-		$_POST[$strKey] = $varValue;
+		if (is_null($varValue))
+		{
+			unset($_POST[$strKey]);
+		}
+		else
+		{
+			$_POST[$strKey] = $varValue;
+		}
 	}
 
 
@@ -266,7 +280,14 @@ class Input
 		unset($this->arrCache['cookieEncoded'][$strKey]);
 		unset($this->arrCache['cookieDecoded'][$strKey]);
 
-		$_COOKIE[$strKey] = $varValue;
+		if (is_null($varValue))
+		{
+			unset($_COOKIE[$strKey]);
+		}
+		else
+		{
+			$_COOKIE[$strKey] = $varValue;
+		}
 	}
 
 

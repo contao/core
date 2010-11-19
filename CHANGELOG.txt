@@ -20,6 +20,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: the style sheet importer did not support some CSS3 selectors (#2566)
 - Fixed: textual date insert tags were not replaced when loaded from cache (#2644)
 - Fixed: the image insert tag did not output the image dimensions (#2529)
+- Fixed: clear the $_GET array after rendering the event list module (#2445)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 
