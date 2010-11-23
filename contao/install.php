@@ -139,7 +139,7 @@ class InstallTool extends Controller
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
 
-				if ($GLOBALS['TL_CONFIG']['ftpPass'] != '*****')
+				if ($this->Input->post('password', true) != '*****')
 				{
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
 				}
