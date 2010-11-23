@@ -49,19 +49,19 @@
 <div class="tl_formbody">
   <input type="hidden" name="FORM_SUBMIT" value="tl_ftp" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpHost']; ?></h4>
-  <input type="text" name="host" id="host" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpHost']; ?>" />
+  <input type="text" name="host" id="host" class="tl_text" value="<?php echo $this->ftpHost; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPath']; ?></h4>
-  <input type="text" name="path" id="path" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPath']; ?>" />
+  <input type="text" name="path" id="path" class="tl_text" value="<?php echo $this->ftpPath; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpUser']; ?></h4>
-  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpUser']; ?>" />
+  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->ftpUser; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
-  <input type="password" name="password" id="password" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPass']; ?>" />
+  <input type="password" name="password" id="password" class="tl_text" value="<?php echo $this->ftpPass; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
   <div class="tl_checkbox_container" style="margin-top:3px;">
-    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $GLOBALS['TL_CONFIG']['ftpSSL'] ? ' checked="checked"' : ''; ?> /> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
+    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $this->ftpSSL ? ' checked="checked"' : ''; ?> /> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
   </div>
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPort']; ?></h4>
-  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $GLOBALS['TL_CONFIG']['ftpPort']; ?>" />
+  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $this->ftpPort; ?>" />
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
@@ -986,7 +986,7 @@ window.addEvent('domready', function() {
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbUsername']; ?></h4>
   <input type="text" name="dbUser" id="dbUser" class="tl_text" value="<?php echo $this->user; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></h4>
-  <input type="text" name="dbPass" id="dbPass" class="tl_text" value="<?php echo $this->pass; ?>" />
+  <input type="password" name="dbPass" id="dbPass" class="tl_text" value="<?php echo $this->pass; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbDatabase']; ?></h4>
   <input type="text" name="dbDatabase" id="dbDatabase" class="tl_text" value="<?php echo $this->database; ?>" />
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbPersistent']; ?></h4>

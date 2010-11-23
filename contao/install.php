@@ -97,7 +97,12 @@ class InstallTool extends Controller
 			$GLOBALS['TL_CONFIG']['ftpHost'] = $this->Input->post('host');
 			$GLOBALS['TL_CONFIG']['ftpPath'] = $this->Input->post('path');
 			$GLOBALS['TL_CONFIG']['ftpUser'] = $this->Input->post('username', true);
-			$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
+
+			if ($this->Input->post('password', true) != '*****')
+			{
+				$GLOBALS['TL_CONFIG']['ftpPass'] = $this->Input->post('password', true);
+			}
+
 			$GLOBALS['TL_CONFIG']['ftpSSL']  = $this->Input->post('ssl');
 			$GLOBALS['TL_CONFIG']['ftpPort'] = $this->Input->post('port');
 
@@ -133,7 +138,12 @@ class InstallTool extends Controller
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpHost']", $GLOBALS['TL_CONFIG']['ftpHost']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+
+				if ($GLOBALS['TL_CONFIG']['ftpPass'] != '*****')
+				{
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+				}
+
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
 
@@ -162,6 +172,13 @@ class InstallTool extends Controller
 
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
 		{
+			$this->Template->ftpHost = $GLOBALS['TL_CONFIG']['ftpHost'];
+			$this->Template->ftpPath = $GLOBALS['TL_CONFIG']['ftpPath'];
+			$this->Template->ftpUser = $GLOBALS['TL_CONFIG']['ftpUser'];
+			$this->Template->ftpPass = ($GLOBALS['TL_CONFIG']['ftpPass'] != '') ? '*****' : '';
+			$this->Template->ftpSSL  = $GLOBALS['TL_CONFIG']['ftpSSL'];
+			$this->Template->ftpPort = $GLOBALS['TL_CONFIG']['ftpPort'];
+
 			$this->outputAndExit();
 		}
 
@@ -360,7 +377,7 @@ class InstallTool extends Controller
 		$this->Template->driver = $GLOBALS['TL_CONFIG']['dbDriver'];
 		$this->Template->host = $GLOBALS['TL_CONFIG']['dbHost'];
 		$this->Template->user = $GLOBALS['TL_CONFIG']['dbUser'];
-		$this->Template->pass = $GLOBALS['TL_CONFIG']['dbPass'];
+		$this->Template->pass = ($GLOBALS['TL_CONFIG']['dbPass'] != '') ? '*****' : '';
 		$this->Template->port = $GLOBALS['TL_CONFIG']['dbPort'];
 		$this->Template->pconnect = $GLOBALS['TL_CONFIG']['dbPconnect'];
 		$this->Template->dbcharset = $GLOBALS['TL_CONFIG']['dbCharset'];
@@ -374,6 +391,11 @@ class InstallTool extends Controller
 		{
 			foreach (preg_grep('/^db/', array_keys($_POST)) as $strKey)
 			{
+				if ($strKey == 'dbPass' && $this->Input->post($strKey, true) == '*****')
+				{
+					continue;
+				}
+
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['$strKey']", $this->Input->post($strKey, true));
 			}
 
