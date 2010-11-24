@@ -58,12 +58,6 @@ array_insert($GLOBALS['FE_MOD'], 2, array
 
 
 /**
- * Register a new back end input field
- */
-$GLOBALS['BE_FFL']['timePeriod'] = 'TimePeriod';
-
-
-/**
  * Cron jobs
  */
 $GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');

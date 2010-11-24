@@ -26,6 +26,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: do not aggregate style sheets with a @font-face selector (#2443)
 - Fixed: news insert tags did not handle entities correctly (#2604)
 - Fixed: do not show the FTP and database passwords in the install tool (#2417)
+- Fixed: minor TimePeriod fixes (#2477)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 

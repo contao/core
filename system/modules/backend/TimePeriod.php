@@ -102,7 +102,7 @@ class TimePeriod extends Widget
 		{
 			if ($k != 'unit')
 			{
-				$varInput[$k] = parent::validator($v);
+				$varInput[$k] = parent::validator(trim($v));
 			}
 		}
 
@@ -131,13 +131,15 @@ class TimePeriod extends Widget
 			$this->varValue = array('value'=>$this->varValue);
 		}
 
-		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_interval" value="%s"%s onfocus="Backend.getScrollOffset();" /> <select name="%s[unit]" class="tl_select_interval" onfocus="Backend.getScrollOffset();">%s</select>',
+		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_interval%s" value="%s"%s onfocus="Backend.getScrollOffset();" /> <select name="%s[unit]" class="tl_select_interval" onfocus="Backend.getScrollOffset();">%s</select>%s',
 						$this->strName,
 						$this->strId,
+						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						specialchars($this->varValue['value']),
 						$this->getAttributes(),
 						$this->strName,
-						implode('', $arrUnits));
+						implode('', $arrUnits),
+						$this->wizard);
 	}
 }
 
