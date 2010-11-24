@@ -258,12 +258,12 @@ abstract class Module extends Frontend
 				// Active page
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !$this->Input->get('articles'))
 				{
-					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : ''));
+					$strClass = (strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '');
 					$row = $objSubpages->row();
 
 					$row['isActive'] = true;
 					$row['subitems'] = $subitems;
-					$row['class'] = $strClass;
+					$row['class'] = trim($strClass);
 					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
 					$row['title'] = specialchars($objSubpages->title);
 					$row['link'] = $objSubpages->title;
@@ -278,12 +278,19 @@ abstract class Module extends Frontend
 				// Regular page
 				else
 				{
-					$strClass = trim((strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : ''));
+					$strClass = (strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '');
+
+					// Mark pages on the same level (see #2419)
+					if ($objSubpages->pid == $objPage->pid)
+					{
+						$strClass .= ' sibling';
+					}
+
 					$row = $objSubpages->row();
 
 					$row['isActive'] = false;
 					$row['subitems'] = $subitems;
-					$row['class'] = $strClass;
+					$row['class'] = trim($strClass);
 					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
 					$row['title'] = specialchars($objSubpages->title);
 					$row['link'] = $objSubpages->title;
