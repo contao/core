@@ -1515,6 +1515,19 @@ class DC_Table extends DataContainer implements listable, editable
 								   ->execute($this->intId, $this->Input->post('version'));
 
 					$this->log(sprintf('Version %s of record ID %s (table %s) has been restored', $this->Input->post('version'), $this->intId, $this->strTable), 'DC_Table edit()', TL_GENERAL);
+
+					// Trigger the onrestore_callback
+					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
+					{
+						foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback'] as $callback)
+						{
+							if (is_array($callback))
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this->intId, $this->strTable, $data, $this->Input->post('version'));
+							}
+						}
+					}
 				}
 			}
 
@@ -3279,7 +3292,7 @@ window.addEvent(\'domready\', function()
 						$objMaxTstamp->tstamp = $objParent->tstamp;
 					}
 
-					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objMaxTstamp->tstamp);
+					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], max($objParent->tstamp, $objMaxTstamp->tstamp));
 				}
 				elseif (strlen($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
 				{

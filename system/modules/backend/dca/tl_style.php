@@ -61,6 +61,10 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_style', 'scheduleUpdate')
+		),
+		'onrestore_callback' => array
+		(
+			array('tl_style', 'updateAfterRestore')
 		)
 	),
 
@@ -580,6 +584,29 @@ class tl_style extends Backend
 		$session = $this->Session->get('style_sheet_updater');
 		$session[] = CURRENT_ID;
 		$this->Session->set('style_sheet_updater', array_unique($session));
+	}
+
+
+	/**
+	 * Update a style sheet after a version has been restored
+	 * @param integer
+	 * @param string
+	 * @param array
+	 */
+	public function updateAfterRestore($id, $table, $data)
+	{
+		if ($table != 'tl_style')
+		{
+			return;
+		}
+
+		// Update the timestamp of the style sheet
+		$this->Database->prepare("UPDATE tl_style_sheet SET tstamp=? WHERE id=?")
+					   ->execute(time(), $data['pid']);
+
+		// Update the CSS file
+		$this->import('StyleSheets');
+		$this->StyleSheets->updateStyleSheet($data['pid']);
 	}
 
 

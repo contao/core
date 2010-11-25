@@ -61,7 +61,7 @@ abstract class Backend extends Controller
 
 		foreach ($GLOBALS['BE_MOD'] as $arrGroup)
 		{
-			if (count($arrGroup) && in_array($module, array_keys($arrGroup)))
+			if (isset($arrGroup[$module]))
 			{
 				$arrModule =& $arrGroup[$module];
 			}
@@ -72,14 +72,14 @@ abstract class Backend extends Controller
 		// Check whether the module is active
 		if (is_array($arrInactiveModules) && in_array($module, $arrInactiveModules))
 		{
-			$this->log('Attempt to access inactive back end module "' . $module . '"', 'Backend getBackendModule()', TL_ACCESS);
+			$this->log('Attempt to access the inactive back end module "' . $module . '"', 'Backend getBackendModule()', TL_ACCESS);
 			$this->redirect('contao/main.php?act=error');
 		}
 
 		$this->import('BackendUser', 'User');
 
 		// Check whether the current user has access to the current module
-		if (!in_array($module, array_keys($GLOBALS['BE_MOD']['profile'])) && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
+		if (!isset($GLOBALS['BE_MOD']['profile'][$module]) && !$this->User->isAdmin && !$this->User->hasAccess($module, 'modules'))
 		{
 			$this->log('Back end module "' . $module . '" was not allowed for user "' . $this->User->username . '"', 'Backend getBackendModule()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
