@@ -488,7 +488,7 @@ class tl_layout extends Backend
 	 */
 	public function getPageTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('fe_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('fe_', $this->Input->get('id'));
 	}
 
 
@@ -499,7 +499,7 @@ class tl_layout extends Backend
 	 */
 	public function getMooToolsTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('moo_', $dc->activeRecord->pid);
+		return $this->getTemplateGroup('moo_', $this->Input->get('id'));
 	}
 
 

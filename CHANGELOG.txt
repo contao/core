@@ -28,6 +28,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: do not show the FTP and database passwords in the install tool (#2417)
 - Fixed: minor fixes for the TimePeriod widget (#2477)
 - Fixed: update the CSS files after an old version of a record has been restored (#2524)
+- Fixed: custom page templates were not shown in "override all" mode (#2494)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 
