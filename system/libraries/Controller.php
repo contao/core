@@ -1095,6 +1095,9 @@ abstract class Controller extends System
 		$pdf->SetSubject($objArticle->title);
 		$pdf->SetKeywords($objArticle->keywords);
 
+		// Prevent font subsetting (huge speed improvement)
+		$pdf->setFontSubsetting(false);
+
 		// Remove default header/footer
 		$pdf->setPrintHeader(false);
 		$pdf->setPrintFooter(false);

@@ -67,7 +67,7 @@ define('HEAD_MAGNIFICATION', 1.1);
 define('K_CELL_HEIGHT_RATIO', 1.25);
 define('K_TITLE_MAGNIFICATION', 1.3);
 define('K_SMALL_RATIO', 2/3);
-define('K_THAI_TOPCHARS', true);
+define('K_THAI_TOPCHARS', false);
 define('K_TCPDF_CALLS_IN_HTML', false);
 
 ?>

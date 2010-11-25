@@ -2,7 +2,7 @@
 //============================================================+
 // File name   : tcpdf_config.php
 // Begin       : 2004-06-11
-// Last Update : 2010-04-02
+// Last Update : 2010-08-19
 //
 // Description : Configuration file for TCPDF.
 //
@@ -66,7 +66,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 			$k_path_url = 'http://';
 		}
 		$k_path_url .= $_SERVER['HTTP_HOST'];
-		$k_path_url .= str_replace( '\\', '/', substr($_SERVER['PHP_SELF'], 0, -24));
+		$k_path_url .= str_replace( '\\', '/', substr(K_PATH_MAIN, (strlen($_SERVER['DOCUMENT_ROOT']) - 1)));
 	}
 
 	/**
@@ -204,7 +204,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 	/**
 	 * ratio used to adjust the conversion of pixels to user units
 	 */
-	define ('PDF_IMAGE_SCALE_RATIO', 1);
+	define ('PDF_IMAGE_SCALE_RATIO', 1.25);
 
 	/**
 	 * magnification factor for titles
@@ -241,4 +241,3 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
 //============================================================+
 // END OF FILE
 //============================================================+
-?>
