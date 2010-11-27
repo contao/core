@@ -229,7 +229,11 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['endDate'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'date', 'datepicker'=>$this->getDatePickerString(), 'tl_class'=>'w50 wizard'),
+			'save_callback' => array
+			(
+				array('tl_calendar_events', 'setEmptyEndDate')
+			)
 		),
 		'teaser' => array
 		(
@@ -632,6 +636,23 @@ class tl_calendar_events extends Backend
 		if ($varValue == '')
 		{
 			$varValue = $dc->activeRecord->startTime;
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Set the end date to null if empty
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function setEmptyEndDate($varValue, DataContainer $dc)
+	{
+		if ($varValue == '')
+		{
+			$varValue = null;
 		}
 
 		return $varValue;

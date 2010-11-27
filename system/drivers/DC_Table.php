@@ -1534,7 +1534,7 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->reload();
 		}
 
-		// Get current record
+		// Get the current record
 		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 								 ->limit(1)
 								 ->executeUncached($this->intId);
@@ -1756,7 +1756,7 @@ class DC_Table extends DataContainer implements listable, editable
 			$arrValues = $this->values;
 			array_unshift($arrValues, time());
 
-			// Call onsubmit_callback
+			// Trigger the onsubmit_callback
 			if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback']))
 			{
 				foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onsubmit_callback'] as $callback)
@@ -1766,14 +1766,14 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 			}
 
-			// Save current version
+			// Save the current version
 			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
 			{
 				$this->createNewVersion($this->strTable, $this->intId);
 				$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 			}
 
-			// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
 						   ->execute(time(), $this->intId);
 
@@ -2450,21 +2450,21 @@ window.addEvent(\'domready\', function()
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
 		// Convert date formats into timestamps
-		if (strlen($varValue) && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
 			$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
 			$varValue = $objDate->tstamp;
 		}
 
 		// Make sure unique fields are unique
-		if (strlen($varValue) && $arrData['eval']['unique'])
+		if ($varValue != '' && $arrData['eval']['unique'])
 		{
 			$objUnique = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strField . "=? AND id!=?")
 										->execute($varValue, $this->intId);
 
 			if ($objUnique->numRows)
 			{
-				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $this->strField)));
+				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (($arrData['label'][0] != '') ? $arrData['label'][0] : $this->strField)));
 			}
 		}
 
@@ -2506,7 +2506,7 @@ window.addEvent(\'domready\', function()
 			}
 		}
 
-		// Call the save_callback
+		// Trigger the save_callback
 		if (is_array($arrData['save_callback']))
 		{
 			foreach ($arrData['save_callback'] as $callback)
@@ -2517,10 +2517,10 @@ window.addEvent(\'domready\', function()
 		}
 
 		// Save the value if there was no error
-		if ((strlen($varValue) || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
+		if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
 		{
 			// If the field is a fallback field, empty all other columns
-			if ($arrData['eval']['fallback'] && strlen($varValue))
+			if ($arrData['eval']['fallback'] && $varValue != '')
 			{
 				$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
 			}
