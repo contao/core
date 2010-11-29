@@ -601,6 +601,32 @@ class InstallTool extends Controller
 
 
 		/**
+		 * Version 2.9.2 update
+		 */
+		$arrFields = $this->Database->listFields('tl_calendar_events');
+
+		foreach ($arrFields as $arrField)
+		{
+			if ($arrField['name'] == 'startDate' && $arrField['type'] != 'int')
+			{
+				if ($this->Input->post('FORM_SUBMIT') == 'tl_292update')
+				{
+					$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `startTime` `startTime` int(10) unsigned NULL default NULL");
+					$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `endTime` `endTime` int(10) unsigned NULL default NULL");
+					$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `startDate` `startDate` int(10) unsigned NULL default NULL");
+					$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `endDate` `endDate` int(10) unsigned NULL default NULL");
+					$this->Database->query("UPDATE tl_calendar_events SET endDate=null WHERE endDate=0");
+
+					$this->reload();
+				}
+
+				$this->Template->is292Update = true;
+				$this->outputAndExit;
+			}
+		}
+
+
+		/**
 		 * Collations
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')

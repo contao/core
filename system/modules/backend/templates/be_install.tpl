@@ -1032,6 +1032,21 @@ window.addEvent('domready', function() {
   </div>
 </div>
 </form>
+<?php elseif ($this->is292Update): ?>
+
+<h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+
+<p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+<p><?php echo $GLOBALS['TL_LANG']['tl_install']['update292']; ?></p>
+
+<form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+<div class="tl_formbody_submit">
+  <input type="hidden" name="FORM_SUBMIT" value="tl_292update" />
+  <div class="tl_submit_container">
+    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update292run']; ?>" onclick="Backend.getScrollOffset();" />
+  </div>
+</div>
+</form>
 <?php elseif ($this->dbConnection): ?>
 
 <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></h3>
