@@ -32,6 +32,7 @@ Version 2.9.2 (2010-XX-XX)
 - Fixed: custom page templates were not shown in "override all" mode (#2494)
 - Fixed: incorrect event sorting (#2675)
 - Fixed: do not execute hooks in the extension manager (#2448)
+- Fixed: check for existing files when renaming files in the file manager (#2610)
 - Fixed: fixed a few minor spelling issues (#2403)
 - Fixed some minor issues
 

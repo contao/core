@@ -172,6 +172,10 @@ class DC_Folder extends DataContainer implements listable, editable
 	{
 		switch ($strKey)
 		{
+			case 'path':
+				return $this->strPath;
+				break;
+
 			case 'extension':
 				return $this->strExtension;
 				break;

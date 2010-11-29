@@ -69,6 +69,7 @@ $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'Der Ordner "%s" kann nicht impor
 $GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'Die Datei "%s" ist nicht beschreibbar, daher werden Ihre Änderungen nicht wirksam!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']    = 'Dieser Datei- bzw. Verzeichnisname ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile']    = 'Die Datei bzw. das Verzeichnis "%s" ist ungültig!';
+$GLOBALS['TL_LANG']['ERR']['fileExists']     = 'Die Datei "%s" existiert bereits!';
 
 
 /**

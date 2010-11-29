@@ -69,6 +69,7 @@ $GLOBALS['TL_LANG']['ERR']['importFolder']   = 'The folder "%s" cannot be import
 $GLOBALS['TL_LANG']['ERR']['notWriteable']   = 'The file "%s" is not writeable, so your changes will not take effect!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']    = 'This file or folder name is invalid!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile']    = 'The file or folder "%s" is invalid!';
+$GLOBALS['TL_LANG']['ERR']['fileExists']     = 'The file "%s" already exists!';
 
 
 /**
