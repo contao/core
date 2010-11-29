@@ -253,7 +253,11 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'eval'                    => array('fieldType'=>'radio'),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkJumpTo')
+			)
 		),
 		'url' => array
 		(
@@ -972,6 +976,22 @@ class tl_page extends Backend
 		if (array_search($varValue, $arrFeeds) !== false)
 		{
 			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Prevent circular references
+	 * @param mixed
+	 * @param object
+	 */
+	public function checkJumpTo($varValue, DataContainer $dc)
+	{
+		if ($varValue == $dc->id)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
 		}
 
 		return $varValue;
