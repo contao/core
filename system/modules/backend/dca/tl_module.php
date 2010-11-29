@@ -696,7 +696,7 @@ class tl_module extends Backend
 	 */
 	public function listModule($row)
 	{
-		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. $GLOBALS['TL_LANG']['FMD'][$row['type']][0] .']</span>' . "</div>\n";
+		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. (isset($GLOBALS['TL_LANG']['FMD'][$row['type']][0]) ? $GLOBALS['TL_LANG']['FMD'][$row['type']][0] : $row['type']) .']</span>' . "</div>\n";
 	}
 }
 

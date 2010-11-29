@@ -66,7 +66,7 @@ define('MEDIABOX', '1.2.5');
 define('MOO_RAINBOW', '1.2b2');
 define('MOOTOOLS_CORE', '1.2.5');
 define('MOOTOOLS_MORE', '1.2.5.1');
-define('SLIMBOX', '1.7');
+define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
 
 
