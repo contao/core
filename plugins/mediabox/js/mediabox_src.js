@@ -1,9 +1,9 @@
 /*
-	mediaboxAdvanced v1.2.0 - The ultimate extension of Slimbox and Mediabox; an all-media script
-	updated 2010.01.24
-	(c) 2007-2009 John Einselen <http://iaian7.com>
+	mediaboxAdvanced v1.2.5 - The ultimate extension of Slimbox and Mediabox; an all-media script
+	updated 2010.08.11
+	(c) 2007-2010 John Einselen <http://iaian7.com>
 		based on
-	Slimbox v1.64 - The ultimate lightweight Lightbox clone
+	based on Slimbox v1.64 - The ultimate lightweight Lightbox clone
 	(c) 2007-2008 Christophe Beyls <http://www.digitalia.be>
 	MIT-style license.
 	Customized for Contao Open Source CMS.
@@ -23,7 +23,7 @@ var Mediabox;
 
 	window.addEvent("domready", function() {
 		// Create and append the Mediabox HTML code at the bottom of the document
-		$(document.body).adopt(
+		document.id(document.body).adopt(
 			$$([
 				overlay = new Element("div", {id: "mbOverlay"}).addEvent("click", close),
 				center = new Element("div", {id: "mbCenter"})
@@ -50,19 +50,19 @@ var Mediabox;
 	/*	API		*/
 
 	Mediabox = {
-		close: function(){ 
+		close: function(){
 			close();	// Thanks to Yosha on the google group for fixing the close function API!
-		}, 
+		},
 
 		open: function(_images, startImage, _options) {
 			options = $extend({
 				loop: false,					// Allows to navigate between first and last images
-				stopKey: true,					// Prevents default keyboard action (such as up/down arrows), in lieu of the shortcuts
-													// Does not apply to iFrame content
-													// Does not affect mouse scrolling
+				keyboard: true,					// Enables keyboard control; escape key, left arrow, and right arrow
+				alpha: true,					// Adds 'x', 'c', 'p', and 'n' when keyboard control is also set to true
+				stopKey: false,					// Stops all default keyboard actions while overlay is open (such as up/down arrows)
+													// Does not apply to iFrame content, does not affect mouse scrolling
 				overlayOpacity: 0.7,			// 1 is opaque, 0 is completely transparent (change the color in the CSS file)
-													// Remember that Firefox 2 and Camino 1.6 on the Mac require a background .png set in the CSS
-				resizeOpening: true,			// Determines if box opens small and grows (true) or start full size (false)
+				resizeOpening: true,			// Determines if box opens small and grows (true) or starts at larger size (false)
 				resizeDuration: 240,			// Duration of each of the box resize animations (in milliseconds)
 				resizeTransition: false,		// Mootools transition effect (false leaves it at the default)
 				initialWidth: 320,				// Initial width of the box (in pixels)
@@ -78,6 +78,8 @@ var Mediabox;
 												// ...the IMG tag allows automatic scaling for smaller screens, minimal no-click code is included but does not work in Opera
 				imgPadding: 70,					// Clearance necessary for images larger than the window size (only used when imgBackground is false)
 												// Change this number only if the CSS style is significantly divergent from the original, and requires different sizes
+//			Inline options
+//				overflow: 'auto',				// Sets CSS overflow of the overflow to allow for
 //			Global media options
 				scriptaccess: 'true',		// Allow script access to flash files
 				fullscreen: 'true',			// Use fullscreen
@@ -140,7 +142,16 @@ var Mediabox;
 				options.overlayOpacity = 1;
 				overlay.className = 'mbOverlayFF';
 			}
-
+/*
+			if ((Browser.Engine.gecko)) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
+				foxfix = true;
+				overlay.setStyle("position", "absolute");
+				if ((Browser.Engine.version<19)) {
+					options.overlayOpacity = 1;
+					overlay.className = 'mbOverlayFF';
+				}
+			}
+*/
 			if (typeof _images == "string") {	// The function is called for a single image, with URL and Title as first two arguments
 				_images = [[_images,startImage,_options]];
 				startImage = 0;
@@ -196,9 +207,9 @@ var Mediabox;
 
 			var links = this;
 
-			// PATCH: enable contextmenu
+			// PATCH: enable the contextmenu
 			//links.addEvent('contextmenu', function(e){
-			//	if (this.toString().match(/\.gif|\.jpe?g|\.png/i)) e.stop();
+			//	if (this.toString().match(/\.gif|\.jpg|\.jpeg|\.png/i)) e.stop();
 			//});
 			// PATCH EOF
 
@@ -236,35 +247,50 @@ var Mediabox;
 
 	function setup(open) {
 		// Hides on-page objects and embeds while the overlay is open, nessesary to counteract Firefox stupidity
-		["object", window.ie ? "select" : "embed"].forEach(function(tag) {
-			Array.forEach(document.getElementsByTagName(tag), function(el) {
-				if (open) el._mediabox = el.style.visibility;
-				el.style.visibility = open ? "hidden" : el._mediabox;
+		if (Browser.Engine.gecko) {
+			["object", window.ie ? "select" : "embed"].forEach(function(tag) {
+				Array.forEach(document.getElementsByTagName(tag), function(el) {
+					if (open) el._mediabox = el.style.visibility;
+					el.style.visibility = open ? "hidden" : el._mediabox;
+				});
 			});
-		});
+		}
 
 		overlay.style.display = open ? "" : "none";
 
 		var fn = open ? "addEvent" : "removeEvent";
 		if (iefix) window[fn]("scroll", position);
 		window[fn]("resize", size);
-		document[fn]("keydown", keyDown);
+		if (options.keyboard) document[fn]("keydown", keyDown);
 	}
 
 	function keyDown(event) {
-		switch(event.code) {
-			case 27:	// Esc
-			case 88:	// 'x'
-			case 67:	// 'c'
-				close();
-				break;
-			case 37:	// Left arrow
-			case 80:	// 'p'
-				previous();
-				break;	
-			case 39:	// Right arrow
-			case 78:	// 'n'
-				next();
+		if (options.alpha) {
+			switch(event.code) {
+				case 27:	// Esc
+				case 88:	// 'x'
+				case 67:	// 'c'
+					close();
+					break;
+				case 37:	// Left arrow
+				case 80:	// 'p'
+					previous();
+					break;
+				case 39:	// Right arrow
+				case 78:	// 'n'
+					next();
+			}
+		} else {
+			switch(event.code) {
+				case 27:	// Esc
+					close();
+					break;
+				case 37:	// Left arrow
+					previous();
+					break;
+				case 39:	// Right arrow
+					next();
+			}
 		}
 		if (options.stopKey) { return false; };
 	}
@@ -318,10 +344,7 @@ var Mediabox;
 
 // MEDIA TYPES
 // IMAGES
-			// PATCH: also support .jpeg
-			//if (URL.match(/\.gif|\.jpg|\.png|twitpic\.com/i) || mediaType == 'image') {
-			if (URL.match(/\.gif|\.jpe?g|\.png|twitpic\.com/i) || mediaType == 'image') {
-			// PATCH EOF
+			if (URL.match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i) || mediaType == 'image') {
 				mediaType = 'img';
 				URL = URL.replace(/twitpic\.com/i, "twitpic.com/show/full");
 				preload = new Image();
@@ -425,7 +448,7 @@ var Mediabox;
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || "464px";
 				mediaHeight = mediaHeight || "376px";
-				mediaId = URL.match(/\d{6}/g)
+				mediaId = URL.match(/\d{6}/g);
 				preload = new Swiff('http://embed.break.com/'+mediaId, {
 					width: mediaWidth,
 					height: mediaHeight,
@@ -475,24 +498,12 @@ var Mediabox;
 					params: {flashvars: 'photo_id='+mediaId+'&amp;show_info_box='+options.flInfo, wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// Fliggo
-			} else if (URL.match(/fliggo\.com/i)) {
-				mediaType = 'obj';
-				mediaWidth = mediaWidth || "425px";
-				mediaHeight = mediaHeight || "355px";
-				URL = URL.replace('/video/', '/embed/');
-				preload = new Swiff(URL, {
-					width: mediaWidth,
-					height: mediaHeight,
-					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					});
-				startEffect();
 // GameTrailers Video
 			} else if (URL.match(/gametrailers\.com/i)) {
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || "480px";
 				mediaHeight = mediaHeight || "392px";
-				mediaId = URL.match(/\d{5}/g)
+				mediaId = URL.match(/\d{5}/g);
 				preload = new Swiff('http://www.gametrailers.com/remote_wrap.php?mid='+mediaId, {
 					id: mediaId,
 					width: mediaWidth,
@@ -542,14 +553,12 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// MyspaceTV
-			} else if (URL.match(/myspacetv\.com|vids\.myspace\.com/i)) {
+// Myspace
+			} else if (URL.match(/vids\.myspace\.com/i)) {
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || "425px";
 				mediaHeight = mediaHeight || "360px";
-				mediaSplit = URL.split('=');
-				mediaId = mediaSplit[2];
-				preload = new Swiff('http://lads.myspace.com/videos/vplayer.swf?m='+mediaId+'&v=2&a='+options.autoplayNum+'&type=video', {
+				preload = new Swiff(URL, {
 					id: mediaId,
 					width: mediaWidth,
 					height: mediaHeight,
@@ -637,19 +646,6 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// Twitvid.io
-			} else if (URL.match(/twitvid\.io/i)) {
-				mediaType = 'obj';
-				mediaWidth = mediaWidth || "580px";
-				mediaHeight = mediaHeight || "323px";
-				mediaSplit = URL.split('/');
-				mediaId = mediaSplit[3];
-				preload = new Swiff('http://twitvid.io/embed/'+mediaId, {
-					width: mediaWidth,
-					height: mediaHeight,
-					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					});
-				startEffect();
 // Ustream.tv
 			} else if (URL.match(/ustream\.tv/i)) {
 				mediaType = 'obj';
@@ -718,9 +714,10 @@ var Mediabox;
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || "410px";
 				mediaHeight = mediaHeight || "341px";
-				mediaSplit = URL.split('videos/');
+				URL = URL.replace('%3D','/');
+				mediaSplit = URL.split('watch/');
 				mediaId = mediaSplit[1];
-				preload = new Swiff('http://www.veoh.com/videodetails2.swf?permalinkId='+mediaId+'&player=videodetailsembedded&videoAutoPlay='+options.AutoplayNum, {
+				preload = new Swiff('http://www.veoh.com/static/swf/webplayer/WebPlayer.swf?version=AFrontend.5.5.2.1001&permalinkId='+mediaId+'&player=videodetailsembedded&videoAutoPlay='+options.AutoplayNum+'&id=anonymous', {
 					id: mediaId,
 					width: mediaWidth,
 					height: mediaHeight,
@@ -793,7 +790,7 @@ var Mediabox;
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
 				URLsplit = URL.split('#');
-				preload = $(URLsplit[1]).get('html');
+				preload = document.id(URLsplit[1]).get('html');
 				startEffect();
 // HTML
 			} else {
@@ -831,7 +828,7 @@ var Mediabox;
 					mediaHeight = preload.height = parseInt((mediaWidth/preload.width)*mediaHeight);
 					preload.width = mediaWidth;
 				}
-				if (Browser.Engine.trident) preload = $(preload);
+				if (Browser.Engine.trident) preload = document.id(preload);
 				preload.addEvent('mousedown', function(e){ e.stop(); }).addEvent('contextmenu', function(e){ e.stop(); });
 				image.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(image);
@@ -850,6 +847,7 @@ var Mediabox;
 			image.setStyles({backgroundImage: "none", display: ""});
 			preload;
 		} else if (mediaType == "inline") {
+//			center.setStyles({overflow: options.overflow});
 			image.setStyles({backgroundImage: "none", display: ""});
 			image.set('html', preload);
 		} else if (mediaType == "url") {
@@ -867,12 +865,8 @@ var Mediabox;
 		caption.set('html', (options.showCaption && (captionSplit.length > 1)) ? captionSplit[1] : "");
 		number.set('html', (options.showCounter && (images.length > 1)) ? options.counterText.replace(/{x}/, activeImage + 1).replace(/{y}/, images.length) : "");
 
-		// PATCH: also support .jpeg
-		//if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
-		//if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpg|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
-		if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpe?g|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
-		if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpe?g|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
-		// PATCH EOF
+		if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
+		if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
 
 		mediaWidth = image.offsetWidth;
 		mediaHeight = image.offsetHeight+bottom.offsetHeight;
@@ -912,4 +906,4 @@ var Mediabox;
 		return false;
 	}
 })();
-// PATCH: remove autoload block
+//PATCH: remove autoload block

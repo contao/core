@@ -62,7 +62,7 @@ define('CALENDAR', '1.2.RC4');
 define('EDITAREA', '0.8.2');
 define('FANCYUPLOAD', '3.0');
 define('HIGHLIGHTER', '2.0.320');
-define('MEDIABOX', '1.2.0');
+define('MEDIABOX', '1.2.5');
 define('MOO_RAINBOW', '1.2b2');
 define('MOOTOOLS_CORE', '1.2.5');
 define('MOOTOOLS_MORE', '1.2.5.1');
