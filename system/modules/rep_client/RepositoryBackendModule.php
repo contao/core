@@ -149,6 +149,11 @@ class RepositoryBackendModule extends BackendModule
 
 		// execute compiler
 		$this->$compiler($this->parameter);
+
+		// do not execute hooks upon installation/removal (see #2448)
+		if ($compiler == 'install' || $compiler == 'upgrade' || $compiler == 'uninstall') {
+			$GLOBALS['TL_HOOKS'] = array();
+		} // if
 	} // compile
 
 	/**
