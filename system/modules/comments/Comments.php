@@ -299,7 +299,13 @@ class Comments extends Frontend
 									  $this->Environment->base . $this->Environment->request,
 									  $this->Environment->base . 'contao/main.php?do=comments&act=edit&id=' . $insertId);
 
-			$objEmail->sendTo(array_unique($arrNotifies));
+			// Do not send notifications twice
+			if (is_array($arrNotifies))
+			{
+				$arrNotifies = array_unique($arrNotifies);
+			}
+
+			$objEmail->sendTo($arrNotifies);
 
 			// Pending for approval
 			if ($objConfig->moderate)

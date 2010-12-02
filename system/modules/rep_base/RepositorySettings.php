@@ -42,6 +42,7 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
+		'20090029,20090029;'.	// 2.9.2 stable
 		'20090019,20090019;'.	// 2.9.1 stable
 		'20090009,20090009;'.	// 2.9.0 stable
 		'20090006,20090006;'.	// 2.9.0 RC1
@@ -94,7 +95,7 @@ define('REPOSITORY_FILEROOT', 'tl_files/repository');
 define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');
 
 // HTML tags allowed in long texts 
-define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ul><li><em><strong>');
+define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
 
 // # of searchtags allowed 
 define('REPOSITORY_SEARCHTAGS', 5);
