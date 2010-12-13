@@ -663,7 +663,14 @@ class tl_module extends Backend
 	 */
 	public function getNavigationTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('nav_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('nav_', $intPid);
 	}
 
 
@@ -674,7 +681,14 @@ class tl_module extends Backend
 	 */
 	public function getMemberTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('member_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('member_', $intPid);
 	}
 
 
@@ -685,7 +699,14 @@ class tl_module extends Backend
 	 */
 	public function getSearchTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('search_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('search_', $intPid);
 	}
 
 

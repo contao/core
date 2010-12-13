@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.3 (2011-XX-XX)
+--------------------------
+- Fixed: custom templates were not always shown in "override all" mode (#2725)
+
 Version 2.9.2 (2010-12-02)
 --------------------------
 - Updated TCPDF to version 5.9.023 (#2686)

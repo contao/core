@@ -488,7 +488,14 @@ class tl_layout extends Backend
 	 */
 	public function getPageTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('fe_', $this->Input->get('id'));
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('fe_', $intPid);
 	}
 
 
@@ -499,7 +506,14 @@ class tl_layout extends Backend
 	 */
 	public function getMooToolsTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('moo_', $this->Input->get('id'));
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('moo_', $intPid);
 	}
 
 
