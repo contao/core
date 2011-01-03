@@ -5,6 +5,7 @@ Contao Open Source CMS Changelog
 Version 2.9.3 (2011-XX-XX)
 --------------------------
 - Fixed: custom templates were not always shown in "override all" mode (#2725)
+- Fixed: prevent the X_FORWARDED_FOR header against XSS attacks (#2751)
 - Fixed some minor issues
 
 Version 2.9.2 (2010-12-02)

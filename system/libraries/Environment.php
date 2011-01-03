@@ -319,7 +319,12 @@ class Environment
 	 */
 	protected function ip()
 	{
-		return !empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && preg_match('/^[A-Fa-f0-9, \.\:]+$/', $_SERVER['HTTP_X_FORWARDED_FOR']))
+		{
+			return $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}
+
+		return $_SERVER['REMOTE_ADDR'];
 	}
 
 
