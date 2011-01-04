@@ -57,15 +57,12 @@ class ModuleUser extends BackendModule
 		$GLOBALS['TL_DCA'][$this->table]['config']['closed'] = true;
 		$GLOBALS['TL_DCA'][$this->table]['config']['enableVersioning'] = false;
 
-		foreach (array_keys($GLOBALS['TL_DCA'][$this->table]['palettes']) as $key)
-		{
-			if ($key != '__selector__' && $key != 'login')
-			{
-				unset($GLOBALS['TL_DCA'][$this->table]['palettes'][$key]);
-			}
-		}
+		$GLOBALS['TL_DCA'][$this->table]['palettes'] = array
+		(
+			'__selector__' => $GLOBALS['TL_DCA'][$this->table]['palettes']['__selector__'],
+			'default' => $GLOBALS['TL_DCA'][$this->table]['palettes']['login'] 
+		);
 
-		$GLOBALS['TL_DCA'][$this->table]['palettes']['default'] = $GLOBALS['TL_DCA'][$this->table]['palettes']['login'];
 		$arrFields = trimsplit('[,;]', $GLOBALS['TL_DCA'][$this->table]['palettes']['default']);
 
 		foreach ($arrFields as $strField)
