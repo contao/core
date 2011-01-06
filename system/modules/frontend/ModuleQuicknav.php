@@ -68,9 +68,9 @@ class ModuleQuicknav extends Module
 
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_quicknav')
 		{
-			if (strlen($this->Input->post('target')))
+			if (strlen($this->Input->post('target', true)))
 			{
-				$this->redirect($this->Input->post('target'));
+				$this->redirect($this->Input->post('target', true));
 			}
 
 			$this->reload();

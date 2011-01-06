@@ -128,7 +128,7 @@ class Files
 		{
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$this->rmdir($strFolder . '/' . $strFile);
+				$this->rrdir($strFolder . '/' . $strFile);
 			}
 			else
 			{
