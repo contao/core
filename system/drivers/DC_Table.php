@@ -4476,7 +4476,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				{
 					$value = $blnDate ? $kk : $vv;
 
-					// Get name of the parent record
+					// Get the name of the parent record
 					if ($field == 'pid')
 					{
 						$showFields = $GLOBALS['TL_DCA'][$this->ptable]['list']['label']['fields'];
@@ -4496,8 +4496,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						}
 					}
 
-					// Replace ID with the foreign key
-					elseif(strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
+					// Replace the ID with the foreign key
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'] != '')
 					{
 						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']);
 

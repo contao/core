@@ -204,7 +204,8 @@ class RepositoryBackendModule extends BackendModule
 				$v = strip_tags($v, REPOSITORY_TEXTTAGS);
 				break;
 		} // switch
-		return preg_replace('/<(\w+) .*>/U', '<$1>', $v);
+		$v = preg_replace('/<(\w+) .*>/U', '<$1>', $v);
+		return str_replace('<br>', '<br />', $v);
 	} // filterPost
 	
 	protected function getExtensionList($aOptions)

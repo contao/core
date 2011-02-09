@@ -90,7 +90,6 @@ class ModuleLogin extends Module
 			{
 				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 			}
-
 			else
 			{
 				// Redirect to jumpTo page
