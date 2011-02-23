@@ -175,7 +175,7 @@ class ModuleRssReader extends Module
 				'permalink' => $arrItems[$i]->get_permalink(),
 				'description' => specialchars($arrItems[$i]->get_description()),
 				'class' => (($i == 0) ? ' first' : (($i == $last) ? ' last' : '')) . ((($i % 2) == 0) ? ' even' : ' odd'),
-				'pubdate' => $arrItems[$i]->get_date($GLOBALS['TL_CONFIG']['datimFormat']),
+				'pubdate' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrItems[$i]->get_date('U')),
 				'category' => $arrItems[$i]->get_category(0)
 			);
 
