@@ -112,6 +112,7 @@ class Comments extends Frontend
 		$objTemplate->name = $GLOBALS['TL_LANG']['MSC']['com_name'];
 		$objTemplate->email = $GLOBALS['TL_LANG']['MSC']['com_email'];
 		$objTemplate->website = $GLOBALS['TL_LANG']['MSC']['com_website'];
+		$objTemplate->commentsTotal = $limit ? $objTotal->count : $total;
 
 		// Get the front end user object
 		$this->import('FrontendUser', 'User');

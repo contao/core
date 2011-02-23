@@ -4,7 +4,10 @@ Contao Open Source CMS Changelog
 
 Version 2.9.4 (2011-XX-XX)
 --------------------------
+- Added: pass the number of comments to the template (#2753)
 - Fixed: wrong sorting values when copying multiple elements (#2433)
+- Fixed: correct invalid XHTML in the extension catalog (#2651)
+- Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)
 --------------------------

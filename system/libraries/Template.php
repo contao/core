@@ -123,11 +123,23 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Return the name of the template
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->strTemplate;
+	}
+
+
+	/**
 	 * Print all template variables to the screen
 	 */
 	public function showTemplateVars()
 	{
+		echo "<pre>\n";
 		print_r($this->arrData);
+		echo "</pre>\n";
 	}
 
 
