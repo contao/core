@@ -133,12 +133,23 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Print all template variables to the screen
+	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
 	{
 		echo "<pre>\n";
 		print_r($this->arrData);
+		echo "</pre>\n";
+	}
+
+
+	/**
+	 * Print all template variables to the screen using var_dump
+	 */
+	public function dumpTemplateVars()
+	{
+		echo "<pre>\n";
+		var_dump($this->arrData);
 		echo "</pre>\n";
 	}
 

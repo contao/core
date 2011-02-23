@@ -204,7 +204,7 @@ class InstallTool extends Controller
 		/**
 		 * Check the websitePath
 		 */
-		if (!preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri) && !is_null($GLOBALS['TL_CONFIG']['websitePath']))
+		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
 		{
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
 			$this->reload();

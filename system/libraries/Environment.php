@@ -188,7 +188,7 @@ class Environment
 
 		if (strlen($strDocumentRoot) < 2)
 		{
-			$strDocumentRoot = substr($arrSfnSegments, 0, -(strlen($strDocumentRoot) + 1));
+			$strDocumentRoot = substr($this->scriptFilename(), 0, -(strlen($strDocumentRoot) + 1));
 		}
 
 		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
@@ -376,7 +376,7 @@ class Environment
 
 		// From version 2.9, do not fallback to $this->script()
 		// anymore if the request string is empty (see #1844).
-		
+
 		// IE security fix (thanks to Michiel Leideman)
 		$strRequest = str_replace(array('<', '>', '"'), array('%3C', '%3E', '%22'), $strRequest);
 
