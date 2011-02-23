@@ -173,7 +173,7 @@ class ModuleRssReader extends Module
 				'link' => $arrItems[$i]->get_link(),
 				'title' => $arrItems[$i]->get_title(),
 				'permalink' => $arrItems[$i]->get_permalink(),
-				'description' => $arrItems[$i]->get_description(),
+				'description' => specialchars($arrItems[$i]->get_description()),
 				'class' => (($i == 0) ? ' first' : (($i == $last) ? ' last' : '')) . ((($i % 2) == 0) ? ' even' : ' odd'),
 				'pubdate' => $arrItems[$i]->get_date($GLOBALS['TL_CONFIG']['datimFormat']),
 				'category' => $arrItems[$i]->get_category(0)
