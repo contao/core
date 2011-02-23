@@ -45,7 +45,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['senderName']     = array('Sender name', 'H
 $GLOBALS['TL_LANG']['tl_newsletter']['sender']         = array('Sender address', 'Here you can enter a custom sender address.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle']  = array('Mails per cycle', 'The sending process is split into several cycles to prevent the script from timing out.');
 $GLOBALS['TL_LANG']['tl_newsletter']['timeout']        = array('Timeout in seconds', 'Here you can modify the waiting time between each cycle to control the number of e-mails per minute.');
-$GLOBALS['TL_LANG']['tl_newsletter']['start']          = array('Start cycle', 'In case the sending process is interrupted, you can enter the number of the cycle to continue with here. The counting starts at 0 for the first cycle!');
+$GLOBALS['TL_LANG']['tl_newsletter']['start']          = array('Offset', 'In case the sending process is interrupted, you can enter a numeric offset here to continue with a particular recipient. You can check how many mails have been sent in the <em>system/logs/newsletter_*.log</em> file. E.g., if 120 mails have been sent, enter "120" to continue with the 121st recipient (counting starts at 0).');
 $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo']  = array('Send preview to', 'Send the preview of the newsletter to this e-mail address.');
 
 

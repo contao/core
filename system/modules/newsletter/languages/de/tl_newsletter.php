@@ -45,7 +45,7 @@ $GLOBALS['TL_LANG']['tl_newsletter']['senderName']     = array('Absendername', '
 $GLOBALS['TL_LANG']['tl_newsletter']['sender']         = array('Absenderadresse', 'Hier können Sie eine individuelle Absenderadresse eingeben.');
 $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle']  = array('Mails pro Zyklus', 'Die Versendung wird in mehreren Teilschritten ausgeführt, um einen vorzeitigen Skriptabbruch zu verhindern.');
 $GLOBALS['TL_LANG']['tl_newsletter']['timeout']        = array('Wartezeit in Sekunden', 'Hier können Sie die Wartezeit zwischen den Teilschritten festlegen, um die Anzahl der E-Mails pro Minute zu kontrollieren.');
-$GLOBALS['TL_LANG']['tl_newsletter']['start']          = array('Startzyklus', 'Im Falle einer Versandunterbrechung können Sie hier die Nummer des Zyklus eingeben, von dem an die Versendung weiterlaufen soll. Die Zählung beginnt bei 0 für den ersten Zyklus!');
+$GLOBALS['TL_LANG']['tl_newsletter']['start']          = array('Versatz', 'Falls eine Versendung unterbrochen wurde, können Sie hier festlegen, ab welchem Empfänger diese weiterlaufen soll. In der Datei <em>system/logs/newsletter_*.log</em> können Sie prüfen, wie viele Mails bereits versendet wurden. Waren es z.B. 120 Mails, geben Sie "120" ein, um mit dem 121. Empfänger fortzufahren (die Zählung beginnt bei 0).');
 $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo']  = array('Testsendung an', 'Die Testsendung des Newsletters an diese E-Mail-Adresse versenden.');
 
 
