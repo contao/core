@@ -264,8 +264,8 @@ abstract class Module extends Frontend
 					$row['isActive'] = true;
 					$row['subitems'] = $subitems;
 					$row['class'] = trim($strClass);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
-					$row['title'] = specialchars($objSubpages->title);
+					$row['title'] = specialchars($objSubpages->title, true);
+					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
@@ -291,8 +291,8 @@ abstract class Module extends Frontend
 					$row['isActive'] = false;
 					$row['subitems'] = $subitems;
 					$row['class'] = trim($strClass);
-					$row['pageTitle'] = specialchars($objSubpages->pageTitle);
-					$row['title'] = specialchars($objSubpages->title);
+					$row['title'] = specialchars($objSubpages->title, true);
+					$row['pageTitle'] = specialchars($objSubpages->pageTitle, true);
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);

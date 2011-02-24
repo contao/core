@@ -169,8 +169,8 @@ class ModuleCustomnav extends Module
 
 					$row['isActive'] = true;
 					$row['class'] = $strClass;
-					$row['pageTitle'] = specialchars($arrPage['pageTitle']);
-					$row['title'] = specialchars($arrPage['title']);
+					$row['title'] = specialchars($arrPage['title'], true);
+					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
@@ -188,8 +188,8 @@ class ModuleCustomnav extends Module
 
 					$row['isActive'] = false;
 					$row['class'] = $strClass;
-					$row['pageTitle'] = specialchars($arrPage['pageTitle']);
-					$row['title'] = specialchars($arrPage['title']);
+					$row['title'] = specialchars($arrPage['title'], true);
+					$row['pageTitle'] = specialchars($arrPage['pageTitle'], true);
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);

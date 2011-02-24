@@ -98,7 +98,7 @@ class ModuleNewsletterList extends Module
 
 			if (!isset($arrJumpTo[$objNewsletter->jumpTo]))
 			{
-				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1")
+				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 											->limit(1)
 											->execute($objNewsletter->jumpTo);
 	
@@ -123,7 +123,7 @@ class ModuleNewsletterList extends Module
 
 			$arrNewsletter[] = array
 			(
-				'subject' => $objNewsletter->subject,
+				'subject' => strip_insert_tags($objNewsletter->subject),
 				'href' => sprintf($strUrl, $strAlias),
 				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
 				'datim' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),

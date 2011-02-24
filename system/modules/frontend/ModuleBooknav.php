@@ -119,8 +119,8 @@ class ModuleBooknav extends Module
 			$intKey = $objPage->pid;
 
 			$this->Template->upHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title']);
-			$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle']);
+			$this->Template->upTitle = specialchars($this->arrPages[$intKey]['title'], true);
+			$this->Template->upPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
 			$this->Template->upLink = $GLOBALS['TL_LANG']['MSC']['up'];
 		}
 
@@ -137,8 +137,8 @@ class ModuleBooknav extends Module
 			$intKey = $arrLookup[($intCurrent - 1)];
 
 			$this->Template->prevHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->prevTitle = specialchars($this->arrPages[$intKey]['title']);
-			$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]['pageTitle']);
+			$this->Template->prevTitle = specialchars($this->arrPages[$intKey]['title'], true);
+			$this->Template->prevPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
 			$this->Template->prevLink = $this->arrPages[$intKey]['title'];
 		}
 
@@ -148,8 +148,8 @@ class ModuleBooknav extends Module
 			$intKey = $arrLookup[($intCurrent + 1)];
 
 			$this->Template->nextHref = $this->generateFrontendUrl($this->arrPages[$intKey]);
-			$this->Template->nextTitle = specialchars($this->arrPages[$intKey]['title']);
-			$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]['pageTitle']);
+			$this->Template->nextTitle = specialchars($this->arrPages[$intKey]['title'], true);
+			$this->Template->nextPageTitle = specialchars($this->arrPages[$intKey]['pageTitle'], true);
 			$this->Template->nextLink = $this->arrPages[$intKey]['title'];
 		}
 	}

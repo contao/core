@@ -121,6 +121,9 @@ class ModuleQuicklink extends Module
 
 		foreach ($arrPages as $arrPage)
 		{
+			$arrPage['title'] = strip_insert_tags($arrPage['title']);
+			$arrPage['pageTitle'] = strip_insert_tags($arrPage['pageTitle']);
+
 			$items[] = array
 			(
 				'href' => $this->generateFrontendUrl($arrPage),

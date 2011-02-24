@@ -121,7 +121,7 @@ class ModuleNewsReader extends ModuleNews
 		// Overwrite the page title
 		if ($objArticle->headline != '')
 		{
-			$objPage->pageTitle = $objArticle->headline;
+			$objPage->pageTitle = strip_insert_tags($objArticle->headline);
 		}
 
 		// Overwrite the page description

@@ -141,6 +141,9 @@ class ModuleQuicknav extends Module
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
+					$objSubpages->title = strip_insert_tags($objSubpages->title);
+					$objSubpages->pageTitle = strip_insert_tags($objSubpages->pageTitle);
+
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),

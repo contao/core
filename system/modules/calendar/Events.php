@@ -250,7 +250,7 @@ abstract class Events extends Module
 		$arrEvent['month'] = $strMonth;
 		$arrEvent['parent'] = $intCalendar;
 		$arrEvent['link'] = $objEvents->title;
-		$arrEvent['title'] = specialchars($objEvents->title);
+		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
 		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : '');
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';

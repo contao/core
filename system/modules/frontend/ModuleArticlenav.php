@@ -121,7 +121,7 @@ class ModuleArticlenav extends Module
 				(
 					'isActive' => true,
 					'href' => $this->addToUrl('articles=' . $strAlias),
-					'title' => specialchars($this->objArticles->title),
+					'title' => specialchars($this->objArticles->title, true),
 					'link' => $intCount
 				);
 
@@ -135,7 +135,7 @@ class ModuleArticlenav extends Module
 				(
 					'isActive' => false,
 					'href' => $this->addToUrl('articles=' . $strAlias),
-					'title' => specialchars($this->objArticles->title),
+					'title' => specialchars($this->objArticles->title, true),
 					'link' => $intCount
 				);
 			}

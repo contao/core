@@ -561,6 +561,15 @@ abstract class Controller extends System
 
 		$objPage->trail = array_reverse($trail);
 
+		// Remove insert tags from all titles (see #2853)
+		$objPage->title = strip_insert_tags($objPage->title);
+		$objPage->pageTitle = strip_insert_tags($objPage->pageTitle);
+		$objPage->parentTitle = strip_insert_tags($objPage->parentTitle);
+		$objPage->parentPageTitle = strip_insert_tags($objPage->parentPageTitle);
+		$objPage->mainTitle = strip_insert_tags($objPage->mainTitle);
+		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
+		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
+
 		// Overwrite the global date and time format
 		if ($objParentPage->numRows && $objParentPage->type == 'root')
 		{
@@ -1136,6 +1145,7 @@ abstract class Controller extends System
 	/**
 	 * Replace insert tags with their values
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
 	protected function replaceInsertTags($strBuffer, $blnCache=false)

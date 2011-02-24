@@ -259,10 +259,16 @@ function scan($strFolder)
  * Convert special characters to HTML entities and make sure that
  * entities are never double converted.
  * @param string
+ * @param boolean
  * @return string
  */
-function specialchars($strString)
+function specialchars($strString, $blnSriptInsertTags=false)
 {
+	if ($blnSriptInsertTags)
+	{
+		$strString = strip_insert_tags($strString);
+	}
+
 	if (version_compare(PHP_VERSION, '5.2.3', '>='))
 	{
 		return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
@@ -274,24 +280,36 @@ function specialchars($strString)
 
 /**
  * Standardize a parameter (strip special characters and convert spaces to underscores)
- * @param mixed
- * @return mixed
+ * @param string
+ * @return string
  */
-function standardize($varValue)
+function standardize($strString)
 {
-	$varValue = preg_replace
-	(
-		array('/[^a-zA-Z0-9 _-]+/i', '/ +/', '/\-+/'),
-		array('', '-', '-'),
-		utf8_romanize(html_entity_decode($varValue, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']))
-	);
+	$arrSearch = array('/[^a-zA-Z0-9 _-]+/i', '/ +/', '/\-+/');
+	$arrReplace = array('', '-', '-');
 
-	if (is_numeric(substr($varValue, 0, 1)))
+	$strString = html_entity_decode($strString, ENT_QUOTES, $GLOBALS['TL_CONFIG']['characterSet']);
+	$strString = strip_insert_tags($strString);
+	$strString = utf8_romanize($strString);
+	$strString = preg_replace($arrSearch, $arrReplace, $strString);
+
+	if (is_numeric(substr($strString, 0, 1)))
 	{
-		$varValue = 'id-' . $varValue;
+		$strString = 'id-' . $strString;
 	}
 
-	return strtolower($varValue);
+	return strtolower($strString);
+}
+
+
+/**
+ * Remove Contao insert tags from a string
+ * @param string
+ * @return string
+ */
+function strip_insert_tags($strString)
+{
+	return preg_replace('/\{\{[^\}]+\}\}/U', '', $strString);
 }
 
 

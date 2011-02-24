@@ -9,6 +9,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: correct invalid XHTML in the extension catalog (#2651)
 - Fixed: textual publication dates in RSS feeds were not translated (#2760)
 - Fixed: the description of the newsletter offset was wrong (#2824)
+- Fixed: remove insert tags in page names from title attributes (#2853)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)

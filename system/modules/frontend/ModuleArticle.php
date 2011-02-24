@@ -132,7 +132,7 @@ class ModuleArticle extends Module
 			$this->Template->headline = $this->headline;
 			$this->Template->href = $this->addToUrl($href);
 			$this->Template->teaser = $this->teaser;
-			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline));
+			$this->Template->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $this->headline), true);
 			$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 
 			return;
@@ -149,7 +149,7 @@ class ModuleArticle extends Module
 		// Overwrite the page title
 		if (!$this->blnNoMarkup && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias) && $this->title != '')
 		{
-			$objPage->pageTitle = $this->title;
+			$objPage->pageTitle = strip_insert_tags($this->title);
 		}
 
 		$this->Template->printable = false;

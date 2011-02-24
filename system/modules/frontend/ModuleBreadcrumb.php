@@ -102,7 +102,7 @@ class ModuleBreadcrumb extends Module
 			{
 				$time = time();
 
-				// Get first page
+				// Get the first page
 				$objFirstPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 											   ->limit(1)
 											   ->execute($objPages->id);
@@ -112,7 +112,7 @@ class ModuleBreadcrumb extends Module
 					'isRoot' => true,
 					'isActive' => false,
 					'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
-					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle) : specialchars($objPages->title)),
+					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
 					'link' => $objPages->title
 				);
 			}
@@ -128,7 +128,7 @@ class ModuleBreadcrumb extends Module
 				'isRoot' => true,
 				'isActive' => false,
 				'href' => $this->Environment->base,
-				'title' => specialchars($GLOBALS['TL_CONFIG']['websiteTitle']),
+				'title' => specialchars($GLOBALS['TL_CONFIG']['websiteTitle'], true),
 				'link' => $GLOBALS['TL_CONFIG']['websiteTitle']
 			);
 		}
@@ -176,7 +176,7 @@ class ModuleBreadcrumb extends Module
 				'isRoot' => false,
 				'isActive' => false,
 				'href' => $href,
-				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle']) : specialchars($pages[$i]['title'])),
+				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle'], true) : specialchars($pages[$i]['title'], true)),
 				'link' => $pages[$i]['title']
 			);
 		}
@@ -189,7 +189,7 @@ class ModuleBreadcrumb extends Module
 				'isRoot' => false,
 				'isActive' => false,
 				'href' => $this->generateFrontendUrl($pages[0]),
-				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
+				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle'], true) : specialchars($pages[0]['title'], true)),
 				'link' => $pages[0]['title']
 			);
 
@@ -211,7 +211,7 @@ class ModuleBreadcrumb extends Module
 				(
 					'isRoot' => false,
 					'isActive' => true,
-					'title' => specialchars($objArticle->title),
+					'title' => specialchars($objArticle->title, true),
 					'link' => $objArticle->title
 				);
 			}
