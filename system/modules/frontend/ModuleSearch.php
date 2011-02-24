@@ -97,6 +97,7 @@ class ModuleSearch extends Module
 
 		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
+		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $this->queryType;
 		$objFormTemplate->keyword = specialchars($strKeywords);
 		$objFormTemplate->keywordLabel = $GLOBALS['TL_LANG']['MSC']['keywords'];

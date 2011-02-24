@@ -13,6 +13,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: do not generate RSS feeds of protected archives/calendars (#2699)
 - Fixed: the CSS classes of image galleries with pagination were not set correctly (#2803)
 - Fixed: remove shy-entities from the page title tag (#2709)
+- Fixed: assign unique IDs to search box elements in case multiple boxes are used (#2829)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)
