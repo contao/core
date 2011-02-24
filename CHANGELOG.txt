@@ -12,6 +12,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: remove insert tags in page names from title attributes (#2853)
 - Fixed: do not generate RSS feeds of protected archives/calendars (#2699)
 - Fixed: the CSS classes of image galleries with pagination were not set correctly (#2803)
+- Fixed: remove shy-entities from the page title tag (#2709)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)
