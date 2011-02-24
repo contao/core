@@ -222,12 +222,12 @@ class ContentGallery extends ContentElement
 
 			if ($rowcount == 0)
 			{
-				$class_tr = ' row_first';
+				$class_tr .= ' row_first';
 			}
 
-			if (($i + $this->perRow) >= count($images))
+			if (($i + $this->perRow) >= $limit)
 			{
-				$class_tr = ' row_last';
+				$class_tr .= ' row_last';
 			}
 
 			$class_eo = (($rowcount % 2) == 0) ? ' even' : ' odd';
