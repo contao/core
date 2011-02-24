@@ -403,23 +403,19 @@ class StyleSheets extends Backend
 					$return .= '
 	border-width:'.$top.$row['borderwidth']['unit'].' '.$right.$row['borderwidth']['unit'].';';
 
-					if ($row['borderstyle'] != '')
-						$return .= '
+					if ($row['borderstyle'] != '') $return .= '
 	border-style:'.$row['borderstyle'].';';
 
-					if ($row['bordercolor'] != '')
-						$return .= '
+					if ($row['bordercolor'] != '') $return .= '
 	border-color:#'.$row['bordercolor'].';';
 				}
 
 				elseif ($top == '' && $right == '' && $bottom == '' && $left == '')
 				{
-					if ($row['borderstyle'] != '')
-						$return .= '
+					if ($row['borderstyle'] != '') $return .= '
 	border-style:'.$row['borderstyle'].';';
 
-					if ($row['bordercolor'] != '')
-						$return .= '
+					if ($row['bordercolor'] != '') $return .= '
 	border-color:#'.$row['bordercolor'].';';
 				}
 
@@ -436,12 +432,10 @@ class StyleSheets extends Backend
 			}
 			else
 			{
-				if ($row['borderstyle'] != '')
-					$return .= '
+				if ($row['borderstyle'] != '') $return .= '
 	border-style:'.$row['borderstyle'].';';
 
-				if ($row['bordercolor'] != '')
-					$return .= '
+				if ($row['bordercolor'] != '') $return .= '
 	border-color:#'.$row['bordercolor'].';';
 			}
 
@@ -516,7 +510,10 @@ class StyleSheets extends Backend
 	list-style-type:'.$row['liststyletype'].';';
 
 			// Custom symbol
-			if ($row['liststyleimage'] != '') $return .= '
+			if ($row['liststyleimage'] == 'none') $return .= '
+	list-style-image:none;';
+
+			elseif ($row['liststyleimage'] != '') $return .= '
 	list-style-image:url("'.$row['liststyleimage'].'");';
 		}
 
