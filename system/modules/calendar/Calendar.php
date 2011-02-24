@@ -65,7 +65,7 @@ class Calendar extends Frontend
 		$objCalendar->feedName = strlen($objCalendar->alias) ? $objCalendar->alias : 'calendar' . $objCalendar->id;
 
 		// Delete XML file
-		if ($this->Input->get('act') == 'delete')
+		if ($this->Input->get('act') == 'delete' || $objCalendar->protected)
 		{
 			$this->import('Files');
 			$this->Files->delete($objCalendar->feedName . '.xml');
@@ -86,7 +86,7 @@ class Calendar extends Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1");
+		$objCalendar = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND protected!=1");
 
 		while ($objCalendar->next())
 		{

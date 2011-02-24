@@ -58,7 +58,7 @@ class News extends Frontend
 		$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
 
 		// Delete XML file
-		if ($this->Input->get('act') == 'delete')
+		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
 		{
 			$this->import('Files');
 			$this->Files->delete($objArchive->feedName . '.xml');
@@ -79,7 +79,7 @@ class News extends Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objArchive = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1");
+		$objArchive = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND protected!=1");
 
 		while ($objArchive->next())
 		{
