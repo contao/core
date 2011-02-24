@@ -273,7 +273,7 @@ class StyleSheets extends Backend
 					}
 				}
 
-				// Try to shorten definition
+				// Try to shorten the definition
 				if ($top != '' && $right != '' && $bottom != '' && $left != '')
 				{
 					if ($top == $right && $top == $bottom && $top == $left) $return .= '
@@ -311,7 +311,7 @@ class StyleSheets extends Backend
 				$bottom = $row['padding']['bottom'];
 				$left = $row['padding']['left'];
 
-				// Try to shorten definition
+				// Try to shorten the definition
 				if ($top != '' && $right != '' && $bottom != '' && $left != '')
 				{
 					if ($top == $right && $top == $bottom && $top == $left) $return .= '
@@ -351,7 +351,7 @@ class StyleSheets extends Backend
 		// Background
 		if ($row['background'])
 		{
-			// Try to shorten definition
+			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
 				$return .= '
@@ -391,7 +391,7 @@ class StyleSheets extends Backend
 				$bottom = $row['borderwidth']['bottom'];
 				$left = $row['borderwidth']['left'];
 
-				// Try to shorten definition
+				// Try to shorten the definition
 				if ($top != '' && $right != '' && $bottom != '' && $left != '' && $top == $right && $top == $bottom && $top == $left)
 				{
 					$return .= '

@@ -270,60 +270,6 @@ abstract class Frontend extends Controller
 
 
 	/**
-	 * Take an array of four margin values and the current unit and compile the margin style definition
-	 * @param array
-	 * @param string
-	 * @return string
-	 */
-	protected function generateMargin($arrValues, $strType='margin')
-	{
-		$top = $arrValues['top'];
-		$right = $arrValues['right'];
-		$bottom = $arrValues['bottom'];
-		$left = $arrValues['left'];
-
-		// Try to shorten definition
-		if (strlen($top) && strlen($right) && strlen($bottom) && strlen($left))
-		{
-			if ($top == $right && $top == $bottom && $top == $left)
-			{
-				return $strType . ':' . $top . $arrValues['unit'] . ';';
-			}
-
-			elseif ($top == $bottom && $right == $left)
-			{
-				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
-			}
-
-			else
-			{
-				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
-			}
-		}
-
-		$arrDir = array
-		(
-			'top'=>$top,
-			'right'=>$right,
-			'bottom'=>$bottom,
-			'left'=>$left
-		);
-
-		$return = array();
-
-		foreach ($arrDir as $k=>$v)
-		{
-			if (strlen($v))
-			{
-				$return[] = $strType . '-' . $k . ':' . $v . $arrValues['unit'] . ';';
-			}
-		}
-
-		return implode(' ', $return);
-	}
-
-
-	/**
 	 * Parse the meta.txt file of a folder
 	 * @param string
 	 * @param boolean

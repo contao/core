@@ -2023,6 +2023,62 @@ abstract class Controller extends System
 
 
 	/**
+	 * Take an array of four margin values and the current unit and compile the margin style definition
+	 * @param array
+	 * @param string
+	 * @return string
+	 */
+	protected function generateMargin($arrValues, $strType='margin')
+	{
+		$top = $arrValues['top'];
+		$right = $arrValues['right'];
+		$bottom = $arrValues['bottom'];
+		$left = $arrValues['left'];
+
+		// Try to shorten the definition
+		if ($top != '' && $right != '' && $bottom != '' && $left != '')
+		{
+			if ($top == $right && $top == $bottom && $top == $left)
+			{
+				return $strType . ':' . $top . $arrValues['unit'] . ';';
+			}
+			elseif ($top == $bottom && $right == $left)
+			{
+				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
+			}
+			elseif ($top != $bottom && $right == $left)
+			{
+				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ';';
+			}
+			else
+			{
+				return $strType . ':' . $top . $arrValues['unit'] . ' ' . $right . $arrValues['unit'] . ' ' . $bottom . $arrValues['unit'] . ' ' . $left . $arrValues['unit'] . ';';
+			}
+		}
+
+		$arrDir = array
+		(
+			'top'=>$top,
+			'right'=>$right,
+			'bottom'=>$bottom,
+			'left'=>$left
+		);
+
+		$return = array();
+
+		foreach ($arrDir as $k=>$v)
+		{
+			if (strlen($v))
+			{
+				$return[] = $strType . '-' . $k . ':' . $v . $arrValues['unit'] . ';';
+			}
+		}
+
+		return implode(' ', $return);
+	}
+
+
+	/**
 	 * Generate an URL from a tl_page record depending on the current rewriteURL setting and return it
 	 * @param array
 	 * @param string

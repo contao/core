@@ -633,7 +633,7 @@ class tl_calendar_events extends Backend
 	 */
 	public function setEmptyEndTime($varValue, DataContainer $dc)
 	{
-		if ($varValue == '')
+		if ($varValue === '')
 		{
 			$varValue = $dc->activeRecord->startTime;
 		}
@@ -650,7 +650,7 @@ class tl_calendar_events extends Backend
 	 */
 	public function setEmptyEndDate($varValue, DataContainer $dc)
 	{
-		if ($varValue == '')
+		if ($varValue === '')
 		{
 			$varValue = null;
 		}
