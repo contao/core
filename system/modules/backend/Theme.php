@@ -507,7 +507,7 @@ class Theme extends Backend
 						}
 
 						// Adjust the names
-						elseif ($name == 'name' && ($table == 'tl_theme' || $table == 'tl_style_sheet'))
+						elseif (($table == 'tl_theme' || $table == 'tl_style_sheet') && $name == 'name')
 						{
 							$objCount = $this->Database->prepare("SELECT COUNT(*) AS total FROM ". $table ." WHERE name=?")
 													   ->execute($value);
@@ -529,6 +529,26 @@ class Theme extends Backend
 						elseif ($value == 'NULL')
 						{
 							continue;
+						}
+
+						// Adjust the file paths in style sheets and modules
+						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'tl_files' && strpos($value, 'tl_files') !== false)
+						{
+							$tmp = deserialize($value);
+
+							if (is_array($tmp))
+							{
+								foreach ($tmp as $kk=>$vv)
+								{
+									$tmp[$kk] = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
+								}
+
+								$value = serialize($tmp);
+							}
+							else
+							{
+								$value = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+							}
 						}
 
 						$set[$name] = $value;

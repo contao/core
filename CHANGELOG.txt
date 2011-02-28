@@ -14,6 +14,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: the CSS classes of image galleries with pagination were not set correctly (#2803)
 - Fixed: remove shy-entities from the page title tag (#2709)
 - Fixed: assign unique IDs to search box elements in case multiple boxes are used (#2829)
+- Fixed: adjust the file paths in style sheets and modules during theme import (#2882)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)
