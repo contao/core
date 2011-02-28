@@ -1630,7 +1630,12 @@ var Backend =
 
 				if (first.type == 'text' || first.type == 'checkbox')
 				{
-					first.name = first.name.replace(/\[[0-9]+\]/ig, '[' + i + ']')
+					first.name = first.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
+				}
+				if (first.type == 'checkbox')
+				{
+					first.id = first.name.replace(/\[[0-9]+\]/g, '').replace(/\[/g, '_').replace(/\]/g, '') + '_' + i;
+					first.getNext().set('for', first.id);
 				}
 			}
 		}
