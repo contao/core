@@ -596,57 +596,53 @@ class StyleSheets extends Backend
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
+				$arrChunks = preg_split('/\*\/|\{([^\}]*)\}/U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
-				if (substr($strFile, 0, 2) != '/*')
+				for ($i=0; $i<count($arrChunks); $i++)
 				{
-					$strFile = "\n" . $strFile;
-				}
+					$strChunk = trim($arrChunks[$i]);
 
-				preg_match_all('@(\/\*.*\*\/)|([^\*\}]*\{[^\}]*\})@Us', $strFile, $arrChunks);
+					if ($strChunk == '')
+					{
+						continue;
+					}
 
-				// Skip comment block at the very top (if any)
-				if (strpos($arrChunks[0][0], '*/') !== false)
-				{
-					array_shift($arrChunks[0]);
-				}
-
-				// Create format definitions
-				foreach ($arrChunks[0] as $strChunk)
-				{
-					$strChunk = trim($strChunk);
-					$strType = (substr($strChunk, 0, 2) == '/*') ? ((substr($strChunk, 0, 3) == '/**') ? 'CATEGORY' : 'COMMENT') : 'DEFINITION';
 					$strChunk = preg_replace('/[\n\r\t]+/', ' ', $strChunk);
 
-					switch ($strType)
+					// Category
+					if (strncmp($strChunk, '/**', 3) === 0)
 					{
-						case 'CATEGORY':
-							$strCategory = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-							$strCategory = trim(preg_replace('/\s+/', ' ', $strCategory));
-							break;
+						$strCategory = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
+						$strCategory = trim(preg_replace('/\s+/', ' ', $strCategory));
+					}
 
-						case 'COMMENT':
-							$strComment = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
-							$strComment = trim(preg_replace('/\s+/', ' ', $strComment));
-							break;
+					// Comment
+					elseif (strncmp($strChunk, '/*', 2) === 0)
+					{
+						$strComment = str_replace(array('/*', '*/', '*', '[__]'), '', $strChunk);
+						$strComment = trim(preg_replace('/\s+/', ' ', $strComment));
+					}
 
-						case 'DEFINITION':
-							$strChunk = preg_replace('@/\*.*\*/@U', '', $strChunk);
-							$strChunk = str_replace('[__]', '/**/', $strChunk);
-							$strChunk = trim(preg_replace('/\s+/', ' ', $strChunk));
+					// Format definition
+					else
+					{
+						$strNext = trim($arrChunks[$i+1]);
+						$strNext = preg_replace('/[\n\r\t]+/', ' ', $strNext);
 
-							$arrDefinition = array
-							(
-								'pid' => $insertId,
-								'category' => $strCategory,
-								'comment' => $strComment,
-								'sorting' => $intSorting += 128,
-								'selector' => trim(preg_replace('@ ?{.*$@', '', $strChunk)),
-								'attributes' => trim(preg_replace('/.*{ ?(.*) ?}.*/', '$1', $strChunk))
-							);
+						$arrDefinition = array
+						(
+							'pid' => $insertId,
+							'category' => $strCategory,
+							'comment' => $strComment,
+							'sorting' => $intSorting += 128,
+							'selector' => $strChunk,
+							'attributes' => $strNext
+						);
 
-							$this->createDefinition($arrDefinition);
-							$strComment = '';
-							break;
+						$this->createDefinition($arrDefinition);
+
+						++$i;
+						$strComment = '';
 					}
 				}
 

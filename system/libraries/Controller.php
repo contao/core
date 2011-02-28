@@ -1158,7 +1158,7 @@ abstract class Controller extends System
 			return $this->restoreBasicEntities($strBuffer);
 		}
 
-		$tags = preg_split('/{{([^}]+)}}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
+		$tags = preg_split('/\{\{([^\}]+)\}\}/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 		$strBuffer = '';
 		$arrCache = array();
