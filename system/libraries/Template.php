@@ -103,7 +103,7 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Set data from an array
+	 * Set the template data from an array
 	 * @param array
 	 */
 	public function setData($arrData)
@@ -123,7 +123,17 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Return the name of the template
+	 * Set the template name
+	 * @param string
+	 */
+	public function setName($strTemplate)
+	{
+		$this->strTemplate = $strTemplate;
+	}
+
+
+	/**
+	 * Return the template name
 	 * @return string
 	 */
 	public function getName()
