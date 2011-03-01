@@ -107,6 +107,17 @@ abstract class ContentElement extends Frontend
 
 
 	/**
+	 * Check whether a property is set
+	 * @param string
+	 * @return boolean
+	 */
+	public function __isset($strKey)
+	{
+		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
 	 * Parse the template
 	 * @return string
 	 */

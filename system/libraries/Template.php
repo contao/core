@@ -103,6 +103,17 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Check whether a property is set
+	 * @param string
+	 * @return boolean
+	 */
+	public function __isset($strKey)
+	{
+		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
 	 * Set the template data from an array
 	 * @param array
 	 */
