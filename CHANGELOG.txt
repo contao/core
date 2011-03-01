@@ -17,6 +17,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: adjust the file paths in style sheets and modules during theme import (#2882)
 - Fixed: support PNGs and JPGs in the toggleVisibility() function (#2854)
 - Fixed: the style sheet importer still did not support some CSS3 selectors (#2781)
+- Fixed: check the target page and article status in the article teaser element (#2714)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)

@@ -596,7 +596,7 @@ class StyleSheets extends Backend
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
-				$arrChunks = preg_split('/\*\/|\{([^\}]*)\}/U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
+				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				for ($i=0; $i<count($arrChunks); $i++)
 				{

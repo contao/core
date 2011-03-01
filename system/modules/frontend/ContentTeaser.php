@@ -46,22 +46,41 @@ class ContentTeaser extends ContentElement
 	 */
 	protected $strTemplate = 'ce_teaser';
 
+	/**
+	 * Article object
+	 * @var object
+	 */
+	protected $objArticle;
+
+
+	/**
+	 * Check whether the target page and article are published
+	 */
+	public function generate()
+	{
+		$time = time();
+
+		$objArticle = $this->Database->prepare("SELECT p.id AS id, p.alias AS alias, a.id AS aid, a.title AS title, a.alias AS aalias, a.teaser AS teaser, a.inColumn AS inColumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id" . (!BE_USER_LOGGED_IN ? " AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) AND p.published=1 AND (a.start='' OR a.start<$time) AND (a.stop='' OR a.stop>$time) AND a.published=1" : ""))
+									 ->limit(1)
+									 ->execute($this->article);
+
+		if ($objArticle->numRows < 1)
+		{
+			return '';
+		}
+
+		$this->objArticle = $objArticle;
+		return parent::generate();
+	}
+
 
 	/**
 	 * Generate content element
 	 */
 	protected function compile()
 	{
-		$objArticle = $this->Database->prepare("SELECT p.id AS id, p.alias AS alias, a.id AS aid, a.title AS title, a.alias AS aalias, a.teaser AS teaser, a.inColumn AS inColumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
-									 ->limit(1)
-									 ->execute($this->article);
-
-		if ($objArticle->numRows < 1)
-		{
-			return;
-		}
-
 		$link = '/articles/';
+		$objArticle = $this->objArticle;
 
 		if ($objArticle->inColumn != 'main')
 		{
