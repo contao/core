@@ -161,7 +161,9 @@ class ModulePassword extends Module
 		// Look for an account and send password link
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
 		{
-			$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE email=? AND login=1" . (!$this->reg_skipName ? " AND username=?" : ""))
+			$time = time();
+
+			$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE email=? AND login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)" . (!$this->reg_skipName ? " AND username=?" : ""))
 										->limit(1)
 										->execute($this->Input->post('email', true), $this->Input->post('username'));
 
