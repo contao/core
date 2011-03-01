@@ -524,7 +524,17 @@ class StyleSheets extends Backend
 			$return .= "\n\t" . implode("\n\t", $own);
 		}
 
-		// Close format definition
+		// Allow custom definitions
+		if (isset($GLOBALS['TL_HOOKS']['compileDefinition']) && is_array($GLOBALS['TL_HOOKS']['compileDefinition']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
+            {                
+				$this->import($callback[0]);
+				$return .= $this->$callback[0]->$callback[1]($row);
+			}    
+		}
+
+		// Close the format definition
 		$return .= "\n}" . ($blnWriteToFile ? '' : "</pre>\n");
 
 		if ($blnWriteToFile)
@@ -1302,7 +1312,29 @@ class StyleSheets extends Backend
 					break;
 
 				default:
-					$arrSet['own'][] = $strDefinition;
+					$blnIsOwn = true;
+
+					// Allow custom definitions
+					if (isset($GLOBALS['TL_HOOKS']['createDefinition']) && is_array($GLOBALS['TL_HOOKS']['createDefinition']))
+					{
+						foreach ($GLOBALS['TL_HOOKS']['createDefinition'] as $callback)
+            			{
+							$this->import($callback[0]);
+							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $strDefinition, $arrSet);
+
+							if ($arrTemp && is_array($arrTemp))
+							{
+								$blnIsOwn = false;
+								$arrSet = array_merge($arrSet, $arrTemp);
+							}
+						}
+					}
+
+					// Unknown definition
+					if ($blnIsOwn)
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
 					break;
 			}
 		}
