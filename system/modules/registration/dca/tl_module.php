@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * Copyright (C) 2005-2011 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Registration
  * @license    LGPL
@@ -154,7 +154,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_password'] = array
  * Class tl_module_registration
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */

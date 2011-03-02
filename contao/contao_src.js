@@ -1,6 +1,6 @@
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * Copyright (C) 2005-2011 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -19,7 +19,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
@@ -32,7 +32,7 @@
  * 
  * Extends the basic Request Class with additional methods for interacting
  * with HTML responses that include script tags which are not evaluated.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -63,7 +63,7 @@ Request.Mixed = new Class(
  * Class AjaxRequest
  *
  * Provide methods to handle Ajax requests.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -793,7 +793,7 @@ var AjaxRequest =
  * Class Backend
  *
  * Provide methods to handle back end tasks.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -1728,7 +1728,7 @@ window.addEvent('load', function()
  * Class ContextMenu
  *
  * Provide methods to handle context menus
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
@@ -1824,7 +1824,7 @@ window.addEvent('domready', function()
  * Class TinyCallback
  *
  * Provide callback functions for TinyMCE.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */

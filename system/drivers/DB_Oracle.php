@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2010 Leo Feyer
+ * Copyright (C) 2005-2011 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
@@ -33,7 +33,7 @@
  * Class DB_Oracle
  *
  * Driver class for Oracle databases.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
@@ -184,7 +184,7 @@ class DB_Oracle extends Database
  * Class DB_Oracle_Statement
  *
  * Driver class for MySQL databases.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
@@ -322,7 +322,7 @@ class DB_Oracle_Statement extends Database_Statement
  * Class DB_Oracle_Result
  *
  * Driver class for MySQL databases.
- * @copyright  Leo Feyer 2005-2010
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
