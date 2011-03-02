@@ -73,7 +73,8 @@ class BackendTemplate extends Template
 			$this->base = $this->Environment->base;
 			$this->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
 			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
-			$this->ceField = $GLOBALS['TL_RTE']['fields'][0];
+			$this->ceFields = $GLOBALS['TL_RTE']['fields'];
+			$this->ceField = $GLOBALS['TL_RTE']['fields'][0]; // Backwards compatibility
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 			list($type, $this->syntax) = explode('|', $GLOBALS['TL_RTE']['type']);
 			$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $type);

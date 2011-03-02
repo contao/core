@@ -99,10 +99,11 @@ if ($this->syntax == '')
  */
 if ($GLOBALS['TL_CONFIG']['useCE']): ?>
 <script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js?<?php echo EDITAREA; ?>"></script>
+<?php foreach ($this->ceFields as $strField): ?>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 editAreaLoader.init({
-  id : "<?php echo $this->ceField; ?>",
+  id : "<?php echo $strField; ?>",
   syntax: "<?php echo $this->syntax; ?>",
   language: "<?php echo $this->language; ?>",
   start_highlight: true,
@@ -111,4 +112,5 @@ editAreaLoader.init({
 });
 //--><!]]>
 </script>
+<?php endforeach; ?>
 <?php endif; ?>
