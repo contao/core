@@ -104,15 +104,6 @@ $GLOBALS['TL_LANG']['tl_form_field']['image_legend']   = 'Bildschaltfläche';
 
 
 /**
- * References
- */
-$GLOBALS['TL_LANG']['tl_form_field']['opValue']   = 'Wert';
-$GLOBALS['TL_LANG']['tl_form_field']['opLabel']   = 'Bezeichnung';
-$GLOBALS['TL_LANG']['tl_form_field']['opDefault'] = 'Standard';
-$GLOBALS['TL_LANG']['tl_form_field']['opGroup']   = 'Gruppe';
-
-
-/**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_form_field']['new']        = array('Neues Feld', 'Ein neues Feld anlegen');
@@ -124,8 +115,6 @@ $GLOBALS['TL_LANG']['tl_form_field']['delete']     = array('Feld löschen', 'Das
 $GLOBALS['TL_LANG']['tl_form_field']['editheader'] = array('Formular bearbeiten', 'Die Formular-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Oben einfügen', 'Nach dem Feld ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Neues Feld oben erstellen', 'Neues Element nach dem Feld ID %s erstellen');
-$GLOBALS['TL_LANG']['tl_form_field']['up']         = array('Das Feld eine Position nach oben verschieben', 'Nach oben');
-$GLOBALS['TL_LANG']['tl_form_field']['down']       = array('Das Feld eine Position nach unten verschieben', 'Nach unten');
 $GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Feldes ID %s ändern');
 
 ?>

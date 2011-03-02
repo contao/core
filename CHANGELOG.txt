@@ -22,6 +22,7 @@ Version 2.9.4 (2011-XX-XX)
 - Fixed: the style sheet importer still did not support some CSS3 selectors (#2781)
 - Fixed: check the target page and article status in the article teaser element (#2714)
 - Fixed: do not send lost password mails if an account is not active (#2685)
+- Fixed: the wizard labels can conflict with the field labels (#2860)
 - Fixed some minor issues
 
 Version 2.9.3 (2011-01-06)

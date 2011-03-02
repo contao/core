@@ -86,8 +86,6 @@ $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Von googleapis.com laden'
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_layout']['module']       = 'Modul';
-$GLOBALS['TL_LANG']['tl_layout']['column']       = 'Spalte';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'Unterhalb der Kopfzeile';
@@ -105,14 +103,5 @@ $GLOBALS['TL_LANG']['tl_layout']['cut']        = array('Layout verschieben ', 'L
 $GLOBALS['TL_LANG']['tl_layout']['copy']       = array('Layout duplizieren', 'Layout ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_layout']['delete']     = array('Layout löschen', 'Layout ID %s löschen');
 $GLOBALS['TL_LANG']['tl_layout']['editheader'] = array('Theme bearbeiten', 'Die Theme-Einstellungen bearbeiten');
-
-
-/**
- * Wizard buttons
- */
-$GLOBALS['TL_LANG']['tl_layout']['wz_copy']   = 'Die Reihe duplizieren';
-$GLOBALS['TL_LANG']['tl_layout']['wz_up']     = 'Die Reihe eine Position nach oben verschieben';
-$GLOBALS['TL_LANG']['tl_layout']['wz_down']   = 'Die Reihe eine Position nach unten verschieben';
-$GLOBALS['TL_LANG']['tl_layout']['wz_delete'] = 'Die Reihe löschen';
 
 ?>

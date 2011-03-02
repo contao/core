@@ -221,8 +221,8 @@ class ModuleWizard extends Widget
 		$return .= '<table cellspacing="0" cellpadding="0" id="ctrl_'.$this->strId.'" class="tl_modulewizard" summary="Module wizard">
   <thead>
   <tr>
-    <td>'.$GLOBALS['TL_LANG'][$this->strTable]['module'].'</td>
-    <td>'.$GLOBALS['TL_LANG'][$this->strTable]['column'].'</td>
+    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</td>
+    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</td>
     <td>&nbsp;</td>
   </tr>
   </thead>
@@ -260,7 +260,7 @@ class ModuleWizard extends Widget
 
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['wz_'.$button]).'" onclick="Backend.moduleWizard(this, \''.$button.'\',  \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG'][$this->strTable]['wz_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this, \''.$button.'\',  \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
 			}
 
 			$return .= '</td>

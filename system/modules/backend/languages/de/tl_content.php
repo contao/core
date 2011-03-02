@@ -85,7 +85,6 @@ $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Erlaubte Mitgliedergr
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Nur Gästen anzeigen', 'Das Inhaltselement verstecken sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_content']['space']        = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Inhaltselement in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
-$GLOBALS['TL_LANG']['tl_content']['source']       = array('Quelldateien', 'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.');
 
 
 /**
@@ -136,29 +135,5 @@ $GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Neues Element oben ers
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Inhaltselements ID %s ändern');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Quellelement bearbeiten', 'Das Quellelement ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Artikel bearbeiten', 'Artikel ID %s bearbeiten');
-
-
-/**
- * List wizard
- */
-$GLOBALS['TL_LANG']['tl_content']['up']   = array('Das Element eine Position nach oben verschieben', 'Nach oben');
-$GLOBALS['TL_LANG']['tl_content']['down'] = array('Das Element eine Position nach unten verschieben', 'Nach unten');
-
-
-/**
- * Table wizard
- */
-$GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV-Import', 'Listeneinträge aus einer CSV-Datei importieren');
-$GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV-Import', 'Tabelleneinträge aus einer CSV-Datei importieren');
-$GLOBALS['TL_LANG']['tl_content']['expand']      = array('Vergrößern', 'Die Eingabefelder vergrößern');
-$GLOBALS['TL_LANG']['tl_content']['shrink']      = array('Verkleinern', 'Die Eingabefelder verkleinern');
-$GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Reihe duplizieren', 'Die Reihe duplizieren');
-$GLOBALS['TL_LANG']['tl_content']['rup']         = array('Eine Position nach oben', 'Die Reihe eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Eine Position nach unten', 'Die Reihe eine Position nach unten verschieben');
-$GLOBALS['TL_LANG']['tl_content']['rdelete']     = array('Reihe löschen', 'Die Reihe löschen');
-$GLOBALS['TL_LANG']['tl_content']['ccopy']       = array('Spalte duplizieren', 'Die Spalte duplizieren');
-$GLOBALS['TL_LANG']['tl_content']['cmovel']      = array('Eine Position nach links', 'Die Spalte eine Position nach links verschieben');
-$GLOBALS['TL_LANG']['tl_content']['cmover']      = array('Eine Position nach rechts', 'Die Spalte eine Position nach rechts verschieben');
-$GLOBALS['TL_LANG']['tl_content']['cdelete']     = array('Spalte löschen', 'Die Spalte löschen');
 
 ?>

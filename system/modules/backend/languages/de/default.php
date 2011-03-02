@@ -163,10 +163,61 @@ $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = '.';
  * CSV files
  */
 $GLOBALS['TL_LANG']['MSC']['separator'] = array('Trennzeichen', 'Bitte wählen Sie ein Feld-Trennzeichen aus.');
+$GLOBALS['TL_LANG']['MSC']['source']    = array('Quelldateien', 'Bitte wählen Sie die zu importierenden CSV-Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['MSC']['comma']     = 'Komma';
 $GLOBALS['TL_LANG']['MSC']['semicolon'] = 'Strichpunkt';
 $GLOBALS['TL_LANG']['MSC']['tabulator'] = 'Tabulator';
 $GLOBALS['TL_LANG']['MSC']['linebreak'] = 'Zeilenumbruch';
+
+
+/**
+ * List wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['lw_import'] = array('CSV-Import', 'Listeneinträge aus einer CSV-Datei importieren');
+$GLOBALS['TL_LANG']['MSC']['lw_copy']   = 'Das Element duplizieren';
+$GLOBALS['TL_LANG']['MSC']['lw_up']     = 'Das Element eine Position nach oben verschieben';
+$GLOBALS['TL_LANG']['MSC']['lw_down']   = 'Das Element eine Position nach unten verschieben';
+$GLOBALS['TL_LANG']['MSC']['lw_delete'] = 'Das Element löschen';
+
+
+/**
+ * Table wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['tw_import']  = array('CSV-Import', 'Tabelleneinträge aus einer CSV-Datei importieren');
+$GLOBALS['TL_LANG']['MSC']['tw_expand']  = 'Die Eingabefelder vergrößern';
+$GLOBALS['TL_LANG']['MSC']['tw_shrink']  = 'Die Eingabefelder verkleinern';
+$GLOBALS['TL_LANG']['MSC']['tw_rcopy']   = 'Die Reihe duplizieren';
+$GLOBALS['TL_LANG']['MSC']['tw_rup']     = 'Die Reihe eine Position nach oben verschieben';
+$GLOBALS['TL_LANG']['MSC']['tw_rdown']   = 'Die Reihe eine Position nach unten verschieben';
+$GLOBALS['TL_LANG']['MSC']['tw_rdelete'] = 'Die Reihe löschen';
+$GLOBALS['TL_LANG']['MSC']['tw_ccopy']   = 'Die Spalte duplizieren';
+$GLOBALS['TL_LANG']['MSC']['tw_cmovel']  = 'Die Spalte eine Position nach links verschieben';
+$GLOBALS['TL_LANG']['MSC']['tw_cmover']  = 'Die Spalte eine Position nach rechts verschieben';
+$GLOBALS['TL_LANG']['MSC']['tw_cdelete'] = 'Die Spalte löschen';
+
+
+/**
+ * Option wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['ow_copy']    = 'Die Reihe duplizieren';
+$GLOBALS['TL_LANG']['MSC']['ow_up']      = 'Die Reihe eine Position nach oben verschieben';
+$GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Die Reihe eine Position nach unten verschieben';
+$GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Die Reihe löschen';
+$GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Wert';
+$GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Bezeichnung';
+$GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Standard';
+$GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Gruppe';
+
+
+/**
+ * Module wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['mw_copy']   = 'Die Reihe duplizieren';
+$GLOBALS['TL_LANG']['MSC']['mw_up']     = 'Die Reihe eine Position nach oben verschieben';
+$GLOBALS['TL_LANG']['MSC']['mw_down']   = 'Die Reihe eine Position nach unten verschieben';
+$GLOBALS['TL_LANG']['MSC']['mw_delete'] = 'Die Reihe löschen';
+$GLOBALS['TL_LANG']['MSC']['mw_module'] = 'Modul';
+$GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Spalte';
 
 
 /**

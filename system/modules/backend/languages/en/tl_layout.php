@@ -86,8 +86,6 @@ $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com'
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_layout']['module']       = 'Module';
-$GLOBALS['TL_LANG']['tl_layout']['column']       = 'Column';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';
@@ -105,14 +103,5 @@ $GLOBALS['TL_LANG']['tl_layout']['cut']        = array('Move layout', 'Move layo
 $GLOBALS['TL_LANG']['tl_layout']['copy']       = array('Duplicate layout', 'Duplicate layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['delete']     = array('Delete layout', 'Delete layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['editheader'] = array('Edit theme', 'Edit the theme settings');
-
-
-/**
- * Wizard buttons
- */
-$GLOBALS['TL_LANG']['tl_layout']['wz_copy']   = 'Duplicate the row';
-$GLOBALS['TL_LANG']['tl_layout']['wz_up']     = 'Move the row one position up';
-$GLOBALS['TL_LANG']['tl_layout']['wz_down']   = 'Move the row one position down';
-$GLOBALS['TL_LANG']['tl_layout']['wz_delete'] = 'Delete the row';
 
 ?>

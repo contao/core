@@ -85,7 +85,6 @@ $GLOBALS['TL_LANG']['tl_content']['groups']       = array('Allowed member groups
 $GLOBALS['TL_LANG']['tl_content']['guests']       = array('Show to guests only', 'Hide the content element if a member is logged in.');
 $GLOBALS['TL_LANG']['tl_content']['cssID']        = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_content']['space']        = array('Space in front and after', 'Here you can enter the spacing in front of and after the content element in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
-$GLOBALS['TL_LANG']['tl_content']['source']       = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
 
 
 
@@ -137,29 +136,5 @@ $GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Add new at the top', '
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Toggle visibility', 'Toggle the visibility of element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Edit source element', 'Edit the source element ID %s');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Edit article', 'Edit article ID %s');
-
-
-/**
- * List wizard
- */
-$GLOBALS['TL_LANG']['tl_content']['up']   = array('Move the element one position up', 'Move up');
-$GLOBALS['TL_LANG']['tl_content']['down'] = array('Move the element one position down', 'Move down');
-
-
-/**
- * Table wizard
- */
-$GLOBALS['TL_LANG']['tl_content']['importList']  = array('CSV import', 'Import list items from a CSV file');
-$GLOBALS['TL_LANG']['tl_content']['importTable'] = array('CSV import', 'Import table items from a CSV file');
-$GLOBALS['TL_LANG']['tl_content']['expand']      = array('Expand', 'Increase the input field size');
-$GLOBALS['TL_LANG']['tl_content']['shrink']      = array('Shrink', 'Decrease the input field size');
-$GLOBALS['TL_LANG']['tl_content']['rcopy']       = array('Duplicate row', 'Duplicate the row');
-$GLOBALS['TL_LANG']['tl_content']['rup']         = array('Move row up', 'Move the row one position up');
-$GLOBALS['TL_LANG']['tl_content']['rdown']       = array('Move row down', 'Move the row one position down');
-$GLOBALS['TL_LANG']['tl_content']['rdelete']     = array('Delete row', 'Delete the row');
-$GLOBALS['TL_LANG']['tl_content']['ccopy']       = array('Duplicate column', 'Duplicate the column');
-$GLOBALS['TL_LANG']['tl_content']['cmovel']      = array('Move column left', 'Move the column one position left');
-$GLOBALS['TL_LANG']['tl_content']['cmover']      = array('Move column right', 'Move the column one position right');
-$GLOBALS['TL_LANG']['tl_content']['cdelete']     = array('Delete column', 'Delete the column');
 
 ?>

@@ -163,10 +163,61 @@ $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = ',';
  * CSV files
  */
 $GLOBALS['TL_LANG']['MSC']['separator'] = array('Separator', 'Please choose a field delimiter.');
+$GLOBALS['TL_LANG']['MSC']['source']    = array('Source files', 'Please choose the CSV files you want to import from the files directory.');
 $GLOBALS['TL_LANG']['MSC']['comma']     = 'Comma';
 $GLOBALS['TL_LANG']['MSC']['semicolon'] = 'Semicolon';
 $GLOBALS['TL_LANG']['MSC']['tabulator'] = 'Tabulator';
 $GLOBALS['TL_LANG']['MSC']['linebreak'] = 'Line break';
+
+
+/**
+ * List wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['lw_import'] = array('CSV import', 'Import list items from a CSV file');
+$GLOBALS['TL_LANG']['MSC']['lw_copy']   = 'Duplicate the element';
+$GLOBALS['TL_LANG']['MSC']['lw_up']     = 'Move the element one position up';
+$GLOBALS['TL_LANG']['MSC']['lw_down']   = 'Move the element one position down';
+$GLOBALS['TL_LANG']['MSC']['lw_delete'] = 'Delete the element';
+
+
+/**
+ * Table wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['tw_import']  = array('CSV import', 'Import table items from a CSV file');
+$GLOBALS['TL_LANG']['MSC']['tw_expand']  = 'Increase the input field size';
+$GLOBALS['TL_LANG']['MSC']['tw_shrink']  = 'Decrease the input field size';
+$GLOBALS['TL_LANG']['MSC']['tw_rcopy']   = 'Duplicate the row';
+$GLOBALS['TL_LANG']['MSC']['tw_rup']     = 'Move the row one position up';
+$GLOBALS['TL_LANG']['MSC']['tw_rdown']   = 'Move the row one position down';
+$GLOBALS['TL_LANG']['MSC']['tw_rdelete'] = 'Delete the row';
+$GLOBALS['TL_LANG']['MSC']['tw_ccopy']   = 'Duplicate the column';
+$GLOBALS['TL_LANG']['MSC']['tw_cmovel']  = 'Move the column one position left';
+$GLOBALS['TL_LANG']['MSC']['tw_cmover']  = 'Move the column one position right';
+$GLOBALS['TL_LANG']['MSC']['tw_cdelete'] = 'Delete the column';
+
+
+/**
+ * Option wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['ow_copy']    = 'Duplicate the row';
+$GLOBALS['TL_LANG']['MSC']['ow_up']      = 'Move the row one position up';
+$GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Move the row one position down';
+$GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Delete the row';
+$GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Value';
+$GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Label';
+$GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Default';
+$GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Group';
+
+
+/**
+ * Module wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['mw_copy']   = 'Duplicate the row';
+$GLOBALS['TL_LANG']['MSC']['mw_up']     = 'Move the row one position up';
+$GLOBALS['TL_LANG']['MSC']['mw_down']   = 'Move the row one position down';
+$GLOBALS['TL_LANG']['MSC']['mw_delete'] = 'Delete the row';
+$GLOBALS['TL_LANG']['MSC']['mw_module'] = 'Module';
+$GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Column';
 
 
 /**
