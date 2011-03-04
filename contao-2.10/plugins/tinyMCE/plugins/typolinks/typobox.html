@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#typolinks_dlg.image_title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="../../utils/mctabs.js"></script>
+	<script type="text/javascript" src="../../utils/editable_selects.js"></script>
+	<script type="text/javascript" src="../../utils/form_utils.js"></script>
+	<script type="text/javascript" src="../../utils/validate.js"></script>
+	<script type="text/javascript" src="js/typobox.js"></script>
+</head>
+<body id="link" style="display: none">
+<form onsubmit="Typobox.update();return false;" action="#">
+	<div class="tabs">
+		<ul>
+			<li id="general_tab" class="current"><span><a href="javascript:mcTabs.displayTab('general_tab','general_panel');" onmousedown="return false;">{#typolinks_dlg.image_title}</a></span></li>
+		</ul>
+	</div>
+
+	<div class="panel_wrapper" style="height:178px;">
+		<div id="general_panel" class="panel current">
+		<table border="0" cellpadding="4" cellspacing="0">
+          <tr>
+            <td class="nowrap"><label for="tlfile">{#typolinks_dlg.image_list}</label></td>
+            <td><select id="image_list" name="image_list" style="width: 200px" onchange="document.forms[0].src.value=this.value;"></select></td>
+          </tr>
+          <tr>
+            <td class="nowrap"><label for="src">{#typolinks_dlg.image_src}</label></td>
+            <td><table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><input id="src" name="src" type="text" class="mceFocus" value="" style="width: 200px" /></td>
+                  <td id="srcbrowsercontainer">&nbsp;</td>
+                </tr>
+              </table></td>
+          </tr>
+          <tr>
+            <td class="column1"><label id="widthlabel" for="width">{#typolinks_dlg.image_dimensions}</label></td>
+            <td class="nowrap"><input name="width" type="text" id="width" value="" size="5" maxlength="5" class="size" /> x <input name="height" type="text" id="height" value="" size="5" maxlength="5" class="size" /> px</td>
+          </tr>
+          <tr>
+            <td class="nowrap"><label for="mode_list">{#typolinks_dlg.image_resize_mode}</label></td>
+            <td><select id="mode_list" name="mode_list" style="width: 200px"></select></td>
+          </tr>
+          <tr>
+            <td class="nowrap"><label for="alt">{#typolinks_dlg.image_alt}</label></td>
+            <td><input id="alt" name="alt" type="text" value="" style="width: 200px" /></td>
+          </tr>
+          <tr>
+            <td class="nowrap"><label for="cssClass">{#typolinks_dlg.image_class}</label></td>
+            <td><input id="cssClass" name="cssClass" type="text" value="" style="width: 200px" /></td>
+          </tr>
+          <tr>
+            <td class="nowrap"><label for="rel_list">{#typolinks_dlg.image_rel}</label></td>
+            <td><select id="rel_list" name="rel_list" class="mceEditableSelect" style="width: 200px"></select></td>
+          </tr>
+        </table>
+		</div>
+	</div>
+
+	<div class="mceActionPanel">
+		<input type="submit" id="insert" name="insert" value="{#insert}" />
+		<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+	</div>
+</form>
+</body>
+</html>

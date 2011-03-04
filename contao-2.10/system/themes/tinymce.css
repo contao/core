@@ -1,0 +1,4 @@
+/* Contao Open Source CMS :: Copyright (C) 2005-2011 Leo Feyer :: LGPL license */
+body,div,p,li,th,td { font-family:"Trebuchet MS",Verdana,sans-serif; font-size:12px; color:#666966; }
+ul li { list-style:disc outside; }
+ol li { list-style:decimal outside; }

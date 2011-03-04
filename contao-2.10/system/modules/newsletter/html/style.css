@@ -1,0 +1,11 @@
+/* Contao Open Source CMS :: Copyright (C) 2005-2011 Leo Feyer :: LGPL license */
+.tl_newsletter_send { margin-top:24px; }
+.tl_newsletter_send .prev_header { margin:0px; width:100%; border:1px solid #cccccc; border-bottom:0px; }
+.tl_newsletter_send .prev_header td { vertical-align:top; padding:2px 12px; background-color:#f0f0f0; } 
+.tl_newsletter_send .prev_header .row_0 td { padding:8px 12px 2px 12px; background-color:#f0f0f0; } 
+.tl_newsletter_send .prev_header .row_1 td { padding:2px 12px 2px 12px; background-color:#f0f0f0; } 
+.tl_newsletter_send .prev_header .row_2 td { padding:2px 12px 9px 12px; background-color:#f0f0f0; } 
+.tl_newsletter_send .prev_header .row_3 td { padding:2px 12px 9px 12px; background-color:#f0f0f0; } 
+.tl_newsletter_send .prev_header .col_0 { width:1%; white-space:nowrap; padding-right:18px; font-weight:bold; } 
+.tl_newsletter_send .preview_html { border:1px solid #cccccc; padding:24px 18px; overflow:auto; border-bottom:0px; }
+.tl_newsletter_send .preview_text { border:1px solid #cccccc; padding:24px 18px; overflow:auto; margin-bottom:12px; }

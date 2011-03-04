@@ -1,0 +1,124 @@
+##
+# Contao Open Source CMS
+# Copyright (C) 2005-2010 Leo Feyer
+#
+# Formerly known as TYPOlight Open Source CMS.
+#
+# This program is free software: you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation, either
+# version 3 of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public
+# License along with this program. If not, please visit the Free
+# Software Foundation website at <http://www.gnu.org/licenses/>.
+#
+# PHP version 5
+# @copyright  Leo Feyer 2005-2010
+# @author     Leo Feyer <http://www.contao.org>
+# @license    LGPL
+##
+
+<IfModule mod_deflate.c>
+
+  ##
+  # Use mod_deflate to compress JavaScript, CSS and XML files. Do not add
+  # PHP and HTML files, because those have already been compressed by Contao.
+  ##
+  <FilesMatch "\.(css|js|xml)$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+
+</IfModule>
+
+<IfModule mod_headers.c>
+
+  ##
+  # Add a Vary Accept-Encoding header for the compressed resources. If you
+  # modify the file types above, make sure to change them here accordingly.
+  ##
+  <FilesMatch "\.(js|css|xml|gz)$">
+    Header append Vary Accept-Encoding
+  </FilesMatch>
+
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  ##
+  # Specify an expiration one week in the future for images, JavaScripts and
+  # CSS files (as recommended by Google Page Speed). Edit or remove the lines
+  # to set up your own expiration logic.
+  ##
+  ExpiresByType image/png A604800
+  ExpiresByType image/gif A604800
+  ExpiresByType image/jpg A604800
+  ExpiresByType image/jpeg A604800
+  ExpiresByType text/javascript A604800
+  ExpiresByType application/x-javascript A604800
+  ExpiresByType text/css A604800
+
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  ##
+  # Set the RewriteBase if your Contao installation is in a subdirectoy and
+  # the rewrite rules are not working properly. Usage examples:
+  #
+  #   RewriteBase /contao-2.9.0
+  #   RewriteBase /path/to/contao
+  #
+  # Uncomment the following line to set the RewriteBase.
+  ##
+  #RewriteBase /
+
+  ##
+  # Contao usually does not pass absolute URLs via GET, therefore the
+  # following rules block all requests that try to pass a URL or the /etc/
+  # directory as parameter (malicious requests).
+  ##
+  RewriteCond %{REQUEST_URI} (ftp|https?):|/etc/ [NC,OR]
+  RewriteCond %{QUERY_STRING} (ftp|https?):|/etc/ [NC]
+  RewriteRule .* - [F,L]
+
+  ##
+  # Uncomment the following lines and replace "domain.com" with your domain
+  # name to redirect requests without "www" to the correct domain. 
+  ##
+  #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
+  #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+
+  ##
+  # Do not rewrite requests for static files or folders such as style sheets,
+  # images, movies or text documents.
+  ##
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  ##
+  # By default, Contao adds ".html" to the generated URLs to simulate static
+  # HTML documents. If you change the URL suffix in the back end settings, make
+  # sure to change it here accordingly!
+  #
+  #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
+  #   RewriteRule .* index.php [L]          # No URL suffix
+  #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+  #
+  # If you are using mod_cache, it is recommended to use the RewriteRule below,
+  # which adds the query string to the internal URL:
+  # 
+  #   RewriteRule (.*\.html)$ index.php/$1 [L]
+  #
+  # Note that not all environments support mod_rewrite and mod_cache!
+  ##
+  RewriteRule .*\.html$ index.php [L]
+
+</IfModule>
