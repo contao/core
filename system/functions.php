@@ -262,9 +262,9 @@ function scan($strFolder)
  * @param boolean
  * @return string
  */
-function specialchars($strString, $blnSriptInsertTags=false)
+function specialchars($strString, $blnStripInsertTags=false)
 {
-	if ($blnSriptInsertTags)
+	if ($blnStripInsertTags)
 	{
 		$strString = strip_insert_tags($strString);
 	}
