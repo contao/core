@@ -190,7 +190,11 @@ if (file_exists(TL_ROOT . '/system/runonce.php'))
 	catch (Exception $e) {}
 
 	$objFiles = Files::getInstance();
-	$objFiles->delete('system/runonce.php');
+
+	if (!$objFiles->delete('system/runonce.php'))
+	{
+		throw new Exception('The system/runonce.php file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.');
+	}
 }
 
 ?>
