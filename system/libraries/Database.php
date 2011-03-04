@@ -666,10 +666,7 @@ abstract class Database_Statement
 	protected function replaceWildcards($arrParams)
 	{
 		$arrParams = $this->escapeParams($arrParams);
-
-		// Clean wildcards
-		$this->strQuery = preg_replace('/%([^bcdufosxX])/', '%%$1', $this->strQuery);
-		$this->strQuery = preg_replace('/%%+/', '%%', $this->strQuery);
+		$this->strQuery = preg_replace('/(?<!%)%([^bcdufosxX%])/', '%%$1', $this->strQuery);
 
 		// Replace wildcards
 		if (($this->strQuery = @vsprintf($this->strQuery, $arrParams)) == false)
