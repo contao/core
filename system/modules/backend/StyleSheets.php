@@ -1321,7 +1321,7 @@ class StyleSheets extends Backend
 						foreach ($GLOBALS['TL_HOOKS']['createDefinition'] as $callback)
             			{
 							$this->import($callback[0]);
-							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $strDefinition, $arrSet);
+							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $arrChunks[1], $strDefinition, $arrSet);
 
 							if ($arrTemp && is_array($arrTemp))
 							{
