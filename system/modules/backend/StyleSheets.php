@@ -365,7 +365,9 @@ class StyleSheets extends Backend
 	background-color:#'.$row['bgcolor'].';';
 
 				// Background image
-				if ($row['bgimage'] != '') $return .= '
+				if ($row['bgimage'] == 'none') $return .= '
+	background-image:none;';
+				elseif ($row['bgimage'] != '') $return .= '
 	background-image:url("'.$row['bgimage'].'");';
 
 				// Background position
@@ -509,10 +511,9 @@ class StyleSheets extends Backend
 			if ($row['liststyletype'] != '') $return .= '
 	list-style-type:'.$row['liststyletype'].';';
 
-			// Custom symbol
+			// List image
 			if ($row['liststyleimage'] == 'none') $return .= '
 	list-style-image:none;';
-
 			elseif ($row['liststyleimage'] != '') $return .= '
 	list-style-image:url("'.$row['liststyleimage'].'");';
 		}
