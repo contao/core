@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.9.4 (2011-XX-XX)
+Version 2.9.4 (2011-03-08)
 --------------------------
 - Added: pass the number of comments to the template (#2753)
 - Added: added methods to the Template class to read and write the template name (#2694)
