@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.9.5 (2011-XX-XX)
+--------------------------
+- Fixed: the code editor did not show up in the file manager (#2922)
+
 Version 2.9.4 (2011-03-08)
 --------------------------
 - Added: pass the number of comments to the template (#2753)
