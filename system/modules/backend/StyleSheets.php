@@ -365,7 +365,9 @@ class StyleSheets extends Backend
 	background-color:#'.$row['bgcolor'].';';
 
 				// Background image
-				if ($row['bgimage'] != '') $return .= '
+				if ($row['bgimage'] == 'none') $return .= '
+	background-image:none;';
+				elseif ($row['bgimage'] != '') $return .= '
 	background-image:url("'.$row['bgimage'].'");';
 
 				// Background position
@@ -509,10 +511,9 @@ class StyleSheets extends Backend
 			if ($row['liststyletype'] != '') $return .= '
 	list-style-type:'.$row['liststyletype'].';';
 
-			// Custom symbol
+			// List image
 			if ($row['liststyleimage'] == 'none') $return .= '
 	list-style-image:none;';
-
 			elseif ($row['liststyleimage'] != '') $return .= '
 	list-style-image:url("'.$row['liststyleimage'].'");';
 		}
@@ -1320,7 +1321,7 @@ class StyleSheets extends Backend
 						foreach ($GLOBALS['TL_HOOKS']['createDefinition'] as $callback)
             			{
 							$this->import($callback[0]);
-							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $strDefinition, $arrSet);
+							$arrTemp = $this->$callback[0]->$callback[1]($strKey, $arrChunks[1], $strDefinition, $arrSet);
 
 							if ($arrTemp && is_array($arrTemp))
 							{
