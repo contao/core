@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.9.5 (2011-XX-XX)
 --------------------------
+- Updated: updated TCPDF to version 5.9.061 (#2929)
 - Fixed: the code editor did not show up in the file manager (#2922)
 - Fixed: the RSS reader did not parse HTML code correctly (#2918)
 
