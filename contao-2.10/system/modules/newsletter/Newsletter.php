@@ -111,6 +111,12 @@ class Newsletter extends Backend
 		$html = $this->replaceInsertTags($objNewsletter->content);
 		$text = $this->replaceInsertTags($objNewsletter->text);
 
+		// Convert relative URLs
+		if ($objNewsletter->externalImages)
+		{
+			$html = $this->convertRelativeUrls($html);
+		}
+
 		// Send newsletter
 		if (strlen($this->Input->get('token')) && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
 		{
