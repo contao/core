@@ -130,6 +130,9 @@ body {
 	font-weight:normal;
 	line-height:19px;
 }
+#tl_navigation .active {
+	color:#8ab858;
+}
 
 /* Buttons */
 #tl_buttons,#tl_buttons_a {

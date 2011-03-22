@@ -4,4 +4,4 @@ Contao Open Source CMS Changelog
 
 Version 2.10.beta1 (XXXX-XX-XX)
 -------------------------------
-- 
+- Added: highlight the active module in the back end navigation (#2941)
