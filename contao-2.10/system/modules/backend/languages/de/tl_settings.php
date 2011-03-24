@@ -86,6 +86,9 @@ $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Standardbesit
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Standardgruppe', 'Bitte wählen Sie eine Gruppe als Standardbesitzer einer Seite aus.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Standardzugriffsrechte', 'Bitte legen Sie die Standardzugriffsrechte für Seiten und Artikel fest.');
 $GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update-URL', 'Hier können Sie die Live Update-URL eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['staticFiles']         = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['tl_settings']['staticSystem']        = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['tl_settings']['staticPlugins']       = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
 
 
 /**
@@ -106,10 +109,7 @@ $GLOBALS['TL_LANG']['tl_settings']['modules_legend']  = 'Inaktive Erweiterungen'
 $GLOBALS['TL_LANG']['tl_settings']['timeout_legend']  = 'Speicherzeiten';
 $GLOBALS['TL_LANG']['tl_settings']['chmod_legend']    = 'Standard-Zugriffsrechte';
 $GLOBALS['TL_LANG']['tl_settings']['update_legend']   = 'Live Update';
-$GLOBALS['TL_LANG']['tl_settings']['disabled']        = 'deaktiviert';
-$GLOBALS['TL_LANG']['tl_settings']['+1 week']         = '7 Tage';
-$GLOBALS['TL_LANG']['tl_settings']['+1 month']        = '30 Tage';
-$GLOBALS['TL_LANG']['tl_settings']['+1 year']         = '365 Tage';
+$GLOBALS['TL_LANG']['tl_settings']['static_legend']   = 'Statische Ressourcen';
 
 
 /**

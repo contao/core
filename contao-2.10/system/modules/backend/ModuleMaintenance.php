@@ -76,9 +76,6 @@ class ModuleMaintenance extends BackendModule
 	{
 		$arrCacheTables = array();
 
-		$arrTmp = scan(TL_ROOT . '/system/tmp');
-		$arrHtml = scan(TL_ROOT . '/system/html');
-
 		// Confirmation message
 		if (strlen($_SESSION['CLEAR_CACHE_CONFIRM']))
 		{
@@ -101,16 +98,22 @@ class ModuleMaintenance extends BackendModule
 
 			foreach ($tables as $table)
 			{
-				// Temporary folder
-				if ($table == 'temp_folder')
-				{
-					$this->Automator->purgeTempFolder();
-				}
-
 				// Html folder
-				elseif ($table == 'html_folder')
+				if ($table == 'html_folder')
 				{
 					$this->Automator->purgeHtmlFolder();
+				}
+
+				// Scripts folder
+				elseif ($table == 'scripts_folder')
+				{
+					$this->Automator->purgeScriptsFolder();
+				}
+
+				// Temporary folder
+				elseif ($table == 'temp_folder')
+				{
+					$this->Automator->purgeTempFolder();
 				}
 
 				// CSS files
@@ -172,15 +175,17 @@ class ModuleMaintenance extends BackendModule
 				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count)
 			);
 		}
-
-		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
+		
 		$this->Template->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
+		$this->Template->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
+		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$this->Template->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
 		$this->Template->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$this->Template->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$this->Template->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
-		$this->Template->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count($arrTmp) - 1));
-		$this->Template->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count($arrHtml) - 1));
+		$this->Template->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/html')) - 1));
+		$this->Template->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/scripts')) - 1));
+		$this->Template->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
 		$this->Template->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$this->Template->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
 		$this->Template->cacheTables = $arrCacheTables;

@@ -216,7 +216,7 @@ class PageRegular extends Frontend
 		if ($objLayout->static)
 		{
 			$arrSize = deserialize($objLayout->width);
-			$strFramework .= sprintf('#wrapper { width:%s; margin:%s; }', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
+			$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 		}
 
 		// Header
@@ -226,7 +226,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
@@ -239,8 +239,8 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+				$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
 
@@ -251,15 +251,15 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+				$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
 
 		// Main column
 		if (strlen($strMain))
 		{
-			$strFramework .= sprintf('#main {%s }', $strMain) . "\n";
+			$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
 		}
 
 		// Footer
@@ -269,7 +269,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
@@ -285,22 +285,26 @@ class PageRegular extends Frontend
 			$this->Template->framework .= '</style>' . "\n";
 		}
 
-		// Include basic style sheets
-		$this->Template->framework .= '<link rel="stylesheet" href="system/contao.css" type="text/css" media="screen" />' . "\n";
-		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
+		// Include the basic style sheets
+		$this->Template->framework .= '<link rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/contao.css" type="text/css" media="screen" />' . "\n";
+		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 
 		// MooTools scripts
 		if ($objLayout->mooSource == 'moo_googleapis')
 		{
 			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
 
-			$this->Template->mooScripts  = '<script type="text/javascript" src="'. $protocol .'ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
-			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+			$this->Template->mooScripts  = '<script type="text/javascript" src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS_CORE . '/mootools-yui-compressed.js"></script>' . "\n";
+			$this->Template->mooScripts .= '<script type="text/javascript" src="' . TL_PLUGINS_URL . 'plugins/mootools/mootools-more.js?' . MOOTOOLS_MORE . '"></script>' . "\n";
 		}
 		else
 		{
-			$this->Template->mooScripts  = '<script type="text/javascript" src="plugins/mootools/mootools-core.js?'. MOOTOOLS_CORE .'"></script>' . "\n";
-			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+			$objCombiner = new JsCombiner();
+
+			$objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
+			$objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
+
+			$this->Template->mooScripts = '<script type="text/javascript" src="' . $objCombiner->generate() . '"></script>' . "\n";
 		}
 
 		// Initialize sections
@@ -341,38 +345,33 @@ class PageRegular extends Frontend
 			}
 		}
 
+		$objCombiner = new CssCombiner();
+
 		// Default TinyMCE style sheet
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css?' . filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') . '" type="text/css" media="screen" />' . "\n";
+			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$arrAggregator = array();
 			$strCcStyleSheets = '';
 			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
-				// Try to aggregate regular style sheets
-				if ($objLayout->aggregate && !$objStylesheets->cc && !$objStylesheets->hasFontFace)
+				// Aggregate regular style sheets
+				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
-					$key = md5($objStylesheets->id .'-'. max($objStylesheets->tstamp, $objStylesheets->tstamp2) .'-'. $objStylesheets->media);
-
-					$arrAggregator[$key] = array
-					(
-						'name' => $objStylesheets->name . '.css',
-						'media' => implode(',', deserialize($objStylesheets->media))
-					);
+					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), implode(',', deserialize($objStylesheets->media)));
 				}
-
-				// Add each style sheet separately
 				else
 				{
-					$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-											 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
+					$strStyleSheet = sprintf('<link rel="stylesheet" href="%ssystem/scripts/%s.css?%s" type="text/css" media="%s" />',
+											 TL_SCRIPT_URL,
+											 $objStylesheets->name,
+											 max($objStylesheets->tstamp, $objStylesheets->tstamp2),
 											 implode(',', deserialize($objStylesheets->media)));
 
 					if ($objStylesheets->cc)
@@ -385,34 +384,9 @@ class PageRegular extends Frontend
 			}
 
 			// Create the aggregated style sheet
-			if (count($arrAggregator) > 0)
+			if ($objCombiner->hasEntries())
 			{
-				$key = substr(md5(implode('-', array_keys($arrAggregator))), 0, 16);
-
-				// Load the existing file
-				if (file_exists(TL_ROOT .'/system/html/'. $key .'.css'))
-				{
-					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
-				}
-
-				// Create a new file
-				else
-				{
-					$objFile = new File('system/html/'. $key .'.css');
-
-					foreach ($arrAggregator as $file)
-					{
-						// Adjust the file paths
-						$content = file_get_contents(TL_ROOT .'/'. $file['name']);
-						$content = str_replace('url("'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', 'url("../../'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $content);
-
-						// Append the style sheet
-						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') ."{\n". $content .'}');
-					}
-
-					$objFile->close();
-					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
-				}
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $objCombiner->generate() . '" type="text/css" media="all" />' . "\n";
 			}
 
 			// Always add conditional style sheets at the end

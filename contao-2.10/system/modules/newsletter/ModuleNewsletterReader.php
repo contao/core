@@ -113,9 +113,9 @@ class ModuleNewsletterReader extends Module
 		}
 
 		// Add newsletter style sheet
-		if ($this->nl_includeCss && file_exists(TL_ROOT . '/newsletter.css'))
+		if ($this->nl_includeCss && file_exists(TL_ROOT . '/system/scripts/newsletter.css'))
 		{
-			$GLOBALS['TL_CSS'][] = 'newsletter.css';
+			$GLOBALS['TL_CSS'][] = 'system/scripts/newsletter.css';
 		}
 
 		$arrEnclosures = array();
@@ -150,7 +150,7 @@ class ModuleNewsletterReader extends Module
 								$arrEnclosures[$i]['size'] = ' ' . $imgSize[3];
 							}
 
-							$arrEnclosures[$i]['icon'] = $src;
+							$arrEnclosures[$i]['icon'] = TL_FILES_URL . $src;
 							$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
 							$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
 							$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));

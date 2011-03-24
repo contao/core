@@ -219,20 +219,21 @@ function log_message($strMessage, $strLog='error.log')
 /**
  * Scan a directory and return its files and folders as array
  * @param string
+ * @param boolean
  * @return array
  */
-function scan($strFolder)
+function scan($strFolder, $blnUncached=false)
 {
 	global $arrScanCache;
 
-	// Add trailing slash
+	// Add a trailing slash
 	if (substr($strFolder, -1, 1) != '/')
 	{
 		$strFolder .= '/';
 	}
 
 	// Load from cache
-	if (isset($arrScanCache[$strFolder]))
+	if (!$blnUncached && isset($arrScanCache[$strFolder]))
 	{
 		return $arrScanCache[$strFolder];
 	}
@@ -250,7 +251,12 @@ function scan($strFolder)
 		$arrReturn[] = $strFile;
 	}
 
-	$arrScanCache[$strFolder] = $arrReturn;
+	// Cache the result
+	if (!$blnUncached)
+	{
+		$arrScanCache[$strFolder] = $arrReturn;
+	}
+
 	return $arrReturn;
 }
 

@@ -239,11 +239,12 @@ class File extends System
 	/**
 	 * Append data to the file
 	 * @param mixed
+	 * @param string
 	 * @return boolean
 	 */
-	public function append($varData)
+	public function append($varData, $strLine="\n")
 	{
-		return $this->fputs($varData . "\n", 'ab');
+		return $this->fputs($varData . $strLine, 'ab');
 	}
 
 

@@ -2,17 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: Contao Open Source CMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/main.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
-<link rel="stylesheet" type="text/css" href="plugins/calendar/css/calendar.css?<?php echo CALENDAR; ?>" media="screen" />
-<?php if ($this->be27): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/be27.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
-<?php endif; ?>
-<?php if ($this->isMac): ?>
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/macfixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
-<?php endif; ?>
+<link type="text/css" rel="stylesheet" href="<?php
+  $objCombiner = new CssCombiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
+  $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
+  if ($this->be27) {
+    $objCombiner->add('system/themes/'. $this->theme .'/be27.css');
+  }
+  if ($this->isMac) {
+    $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
+  }
+  echo $objCombiner->generate();
+?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
@@ -28,9 +32,6 @@
 }
 /*]]>*/-->
 </style>
-<script type="text/javascript" src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
-<script type="text/javascript" src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
-<script type="text/javascript" src="plugins/calendar/js/calendar.js?<?php echo CALENDAR; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
@@ -38,8 +39,15 @@ var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 //--><!]]>
 </script>
-<script type="text/javascript" src="contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
-<script type="text/javascript" src="system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
+<script type="text/javascript" src="<?php
+  $objCombiner = new JsCombiner();
+  $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
+  $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/calendar/js/calendar.js', CALENDAR);
+  $objCombiner->add('contao/contao.js');
+  $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
+  echo $objCombiner->generate();
+?>"></script>
 <?php echo $this->javascripts; ?>
 <?php echo $this->rteConfig; ?>
 <script type="text/javascript">

@@ -39,8 +39,9 @@ $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Frontend-Benutzer
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCache']    = 'Daten bereinigen';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']     = 'system/html';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'system/scripts';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'XML-Dateien';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS-Dateien';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'Die Daten wurden bereinigt';
