@@ -9,7 +9,7 @@
 
 <ul>
 <?php foreach($this->newsletters as $newsletter): ?>
-  <li><?php echo $newsletter['datim']; ?>: <a href="<?php echo $newsletter['href']; ?>" title="<?php echo $newsletter['subject']; ?>"><?php echo $newsletter['subject']; ?></a></li>
+  <li><?php echo $newsletter['datim']; ?>: <a href="<?php echo $newsletter['href']; ?>" title="<?php echo $newsletter['title']; ?>"><?php echo $newsletter['subject']; ?></a></li>
 <?php endforeach; ?>
 </ul>
 <?php endif; ?>
