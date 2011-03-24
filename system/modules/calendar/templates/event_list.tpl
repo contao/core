@@ -6,7 +6,7 @@
 
 <?php endif; ?>
 <div class="event<?php echo $this->classList; ?>">
-<h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
+<h2><a href="<?php echo $this->href; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->link; ?></a></h2>
 <?php if ($this->time || $this->span): ?>
 <p class="time"><?php echo $this->time . $this->span; ?></p>
 <?php endif; ?>
