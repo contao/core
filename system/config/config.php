@@ -326,6 +326,9 @@ $GLOBALS['TL_CONFIG']['exampleWebsite']       = '';
 $GLOBALS['TL_CONFIG']['minPasswordLength']    = 8;
 $GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
 $GLOBALS['TL_CONFIG']['autologin']            = 7776000;
+$GLOBALS['TL_CONFIG']['staticFiles']          = '';
+$GLOBALS['TL_CONFIG']['staticSystem']         = '';
+$GLOBALS['TL_CONFIG']['staticPlugins']        = '';
 
 
 /**

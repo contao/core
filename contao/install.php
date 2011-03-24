@@ -158,6 +158,10 @@ class InstallTool extends Controller
 				{
 					$this->Files->chmod('system/html', 0777);
 				}
+				if (!is_writable(TL_ROOT . '/system/scripts'))
+				{
+					$this->Files->chmod('system/scripts', 0777);
+				}
 				if (!is_writable(TL_ROOT . '/system/logs'))
 				{
 					$this->Files->chmod('system/logs', 0777);

@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase;{static_legend:hide},staticFiles,staticSystem,staticPlugins'
 	),
 
 	// Subpalettes
@@ -256,7 +256,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadPath'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false),
+			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false, 'tl_class'=>'long'),
 			'save_callback' => array
 			(
 				array('tl_settings', 'checkUploadPath')
@@ -399,6 +399,24 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'long')
+		),
+		'staticFiles' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticFiles'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
+		),
+		'staticSystem' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticSystem'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
+		),
+		'staticPlugins' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticPlugins'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
 		)
 	)
 );

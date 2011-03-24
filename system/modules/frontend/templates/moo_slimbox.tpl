@@ -1,11 +1,11 @@
 <?php
 
 // Add slimbox style sheet
-$GLOBALS['TL_CSS'][] = 'plugins/slimbox/css/slimbox.css?'. SLIMBOX .'|screen';
+$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/slimbox/css/slimbox.css?'. SLIMBOX .'|screen';
 
 ?>
 
-<script type="text/javascript" src="plugins/slimbox/js/slimbox.js?<?php echo SLIMBOX; ?>"></script>
+<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/slimbox/js/slimbox.js?<?php echo SLIMBOX; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 Slimbox.scanPage = function() {

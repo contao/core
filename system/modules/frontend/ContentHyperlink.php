@@ -99,7 +99,7 @@ class ContentHyperlink extends ContentElement
 					$this->Template->imgSize = ' ' . $imgSize[3];
 				}
 
-				$this->Template->src = $src;
+				$this->Template->src = TL_FILES_URL . $src;
 				$this->Template->alt = specialchars($this->alt);
 				$this->Template->title = specialchars($this->linkTitle);
 				$this->Template->caption = $this->caption;

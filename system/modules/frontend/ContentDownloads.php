@@ -124,7 +124,7 @@ class ContentDownloads extends ContentElement
 						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'icon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 						'meta' => $arrMeta
 					);
 

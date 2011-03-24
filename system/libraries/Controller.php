@@ -1843,11 +1843,11 @@ abstract class Controller extends System
 						// Generate the HTML markup
 						if (strlen($rel))
 						{
-							$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
 						}
 						else
 						{
-							$arrCache[$strTag] = '<img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
 						}
 					}
 					catch (Exception $e)
@@ -2018,7 +2018,7 @@ abstract class Controller extends System
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
 
-		return '<img src="'.$src.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').' />';
+		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . ' />';
 	}
 
 
@@ -2784,18 +2784,18 @@ abstract class Controller extends System
 		// Image link
 		if (strlen($arrItem['imageUrl']) && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $arrItem['imageUrl'];
+			$objTemplate->href = TL_FILES_URL . $arrItem['imageUrl'];
 			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : '';
 		}
 
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $this->urlEncode($arrItem['singleSRC']);
+			$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ' rel="' . $strLightboxId . '"';
 		}
 
-		$objTemplate->src = $src;
+		$objTemplate->src = TL_FILES_URL . $src;
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
@@ -2840,7 +2840,7 @@ abstract class Controller extends System
 				$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
 				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-				$arrEnclosures[$i]['icon'] = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+				$arrEnclosures[$i]['icon'] = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
 			}
 		}
 

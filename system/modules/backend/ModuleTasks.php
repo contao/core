@@ -89,8 +89,8 @@ class ModuleTasks extends BackendModule
 		$this->Template->request = ampersand($this->Environment->request, true);
 
 		// Load scripts
-		$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css?'. TABLESORT .'|screen';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
+		$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/tablesort/css/tablesort.css?' . TABLESORT . '|screen';
+		$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
 	}
 
 

@@ -2,10 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title><?php echo $this->title; ?> :: Contao Open Source CMS <?php echo VERSION; ?></title>
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
-<link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/popup.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
+<link type="text/css" rel="stylesheet" href="<?php
+  $objCombiner = new CssCombiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/popup.css');
+  echo $objCombiner->generate();
+?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 </head>

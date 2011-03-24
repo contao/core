@@ -1,5 +1,4 @@
 //MooTools More, <http://mootools.net/more>. Copyright (c) 2006-2009 Aaron Newton <http://clientcide.com/>, Valerio Proietti <http://mad4milk.net> & the MooTools team <http://mootools.net/developers>, MIT Style License.
-
 MooTools.More={version:"1.2.5.1",build:"254884f2b83651bf95260eed5c6cceb838e22d8e"};(function(){var a={language:"en-US",languages:{"en-US":{}},cascades:["en-US"]};
 var b;MooTools.lang=new Events();$extend(MooTools.lang,{setLanguage:function(c){if(!a.languages[c]){return this;}a.language=c;this.load();this.fireEvent("langChange",c);
 return this;},load:function(){var c=this.cascade(this.getCurrentLanguage());b={};$each(c,function(f,d){b[d]=this.lambda(f);},this);},getCurrentLanguage:function(){return a.language;

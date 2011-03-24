@@ -48,7 +48,6 @@ $GLOBALS['TL_LANG']['tl_layout']['widthRight']    = array('Breite der rechten Sp
 $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Eigene Layoutbereiche', 'Eigene Layoutbereiche können in den Backend-Einstellungen definiert werden.');
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Position der Layoutbereiche', 'Bitte wählen Sie die Position der eigenen Layoutbereiche aus.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Stylesheets', 'Bitte wählen Sie die Stylesheets aus, die Sie dem Layout hinzufügen möchten.');
-$GLOBALS['TL_LANG']['tl_layout']['aggregate']     = array('Stylesheets zusammenfassen', 'Die einzelnen Stylesheets in einer Datei zusammenfassen (verbessert die Seitenladezeit).');
 $GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('tl_files/tinymce.css ignorieren', 'Das TinyMCE-Stylesheet tl_files/tinymce.css nicht einbinden.');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('Newsfeeds', 'Bitte wählen Sie die Newsfeeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bitte wählen Sie die Kalender-Feeds aus, die Sie dem Layout hinzufügen möchten.');
