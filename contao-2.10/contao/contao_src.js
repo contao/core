@@ -121,6 +121,9 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 
@@ -209,6 +212,9 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				ContextMenu.initialize();
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 
@@ -278,8 +284,10 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
-
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 
@@ -347,6 +355,9 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 
@@ -415,6 +426,9 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 
@@ -445,8 +459,10 @@ var AjaxRequest =
 					var li = ul.getLast('li');
 					ul.set('html', txt);
 					li.inject(ul);
-
 					AjaxRequest.hideBox();
+
+					// HOOK
+					window.fireEvent('ajax_change');
 				}
 			}).send();
 		});
@@ -513,7 +529,8 @@ var AjaxRequest =
 				Backend.addColorPicker();
 
 				// HOOK
-				window.fireEvent('subpalette');
+				window.fireEvent('subpalette'); // Backwards compatibility
+				window.fireEvent('ajax_change');
    			}
 		}).send();
 	},
@@ -807,27 +824,6 @@ var Backend =
 	xMousePosition: 0,
 	yMousePosition: 0,
 	popupWindow: null,
-
-
-	/**
-	 * Check whether the popup window has been closed
-	 */
-	checkPopup: function()
-	{
-		setTimeout("Backend.doCheckPopup()", 10);
-	},
-
-
-	/**
-	 * Reload the page if the popup window has been closed
-	 */
-	doCheckPopup: function()
-	{
-		if (Backend.popupWindow && Backend.popupWindow.closed)
-		{
-			AjaxRequest.reloadFiletrees();
-		}
-	},
 
 
 	/**

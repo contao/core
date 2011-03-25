@@ -1715,7 +1715,7 @@ window.addEvent(\'domready\', function()
 		{
 			$thumbnail = '';
 			$popupWidth = 600;
-			$popupHeight = 235;
+			$popupHeight = 250;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
 			$objFile = new File($currentFile);
@@ -1732,7 +1732,7 @@ window.addEvent(\'domready\', function()
 			if ($objFile->isGdImage && $objFile->height > 0)
 			{
 				$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-				$popupHeight = ($objFile->height + 286);
+				$popupHeight = ($objFile->height + 305);
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
 
 				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= 3000 && $objFile->width <= 3000)
@@ -1740,7 +1740,7 @@ window.addEvent(\'domready\', function()
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail .= '<br /><a href="contao/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" ><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
+					$thumbnail .= '<br /><a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" rel="lightbox[details '.$popupWidth.' '.$popupHeight.']"><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" /></a>';
 				}
 			}
 			else
@@ -1757,7 +1757,7 @@ window.addEvent(\'domready\', function()
 			}
 			else
 			{
-				$return .= '<a href="contao/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" rel="lightbox[details '.$popupWidth.' '.$popupHeight.']">' . $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</a>'.$thumbnail.'</div> <div class="tl_right">';
 			}
 
 			// Buttons

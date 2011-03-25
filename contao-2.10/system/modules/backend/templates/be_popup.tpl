@@ -18,7 +18,7 @@
 <div id="container">
 <div id="main">
 
-<h1>Image preview</h1>
+<h1>File preview</h1>
 
 <h2><?php echo $this->headline; ?></h2>
 

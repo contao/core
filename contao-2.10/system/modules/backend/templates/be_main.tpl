@@ -4,6 +4,7 @@
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
+<link type="text/css" rel="stylesheet" href="plugins/mediabox/css/mediabox_white.css?<?php echo MEDIABOX; ?>" media="screen" />
 <link type="text/css" rel="stylesheet" href="<?php
   $objCombiner = new CssCombiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -112,6 +113,34 @@ Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 //--><!]]>
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+
+<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+Mediabox.scanPage = function() {
+  var links = $$("a").filter(function(el) {
+    return el.rel && el.rel.test(/^lightbox/i);
+  });
+  var options = {
+    'showCaption': false,
+    'showCounter': false
+  };
+  $$(links).mediabox(options, null, function(el) {
+    var rel0 = this.rel.replace(/[[]|]/gi," ");
+    var relsize = rel0.split(" ");
+    return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
+  });
+}
+Mediabox.enableFiletreeReload = function() {
+  window.addEvent('mb_close', function() {
+    AjaxRequest.reloadFiletrees();
+    window.removeEvents('mb_close');
+  });
+}
+window.addEvent("domready", Mediabox.scanPage);
+window.addEvent("ajax_change", Mediabox.scanPage);
+//--><!]]>
+</script>
 
 </body>
 </html>
