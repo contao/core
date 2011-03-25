@@ -52,13 +52,11 @@ var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 <?php echo $this->rteConfig; ?>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-function unloadHandler(e) {
-  self.opener.Backend.checkPopup();
-}
+parent.Mediabox.enableFiletreeReload();
 //--><!]]>
 </script>
 </head>
-<body onunload="unloadHandler(this)">
+<body>
 
 <div id="container">
 <div id="main">

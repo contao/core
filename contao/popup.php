@@ -71,7 +71,11 @@ class Popup extends Backend
 		$this->User->authenticate();
 		$this->loadLanguageFile('default');
 
-		$this->strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $this->Input->get('src', true)));
+		$strFile = $this->Input->get('src', true);
+		$strFile = base64_decode($strFile);
+		$strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $strFile));
+
+		$this->strFile = $strFile; 
 	}
 
 

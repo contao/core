@@ -903,6 +903,9 @@ var Mediabox;
 			center.setStyle("display", "none");
 			fx.overlay.chain(setup).start(0);
 		}
+		// PATCH: fire a custom event
+		window.fireEvent('mb_close');
+		// PATCH EOF
 		return false;
 	}
 })();

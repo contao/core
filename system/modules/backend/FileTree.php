@@ -379,7 +379,7 @@ class FileTree extends Widget
 			{
 				$thumbnail = '';
 				$popupWidth = 600;
-				$popupHeight = 235;
+				$popupHeight = 250;
 
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
@@ -398,7 +398,7 @@ class FileTree extends Widget
 				if ($objFile->isGdImage && $objFile->height > 0)
 				{
 					$popupWidth = ($objFile->width > 600) ? ($objFile->width + 61) : 661;
-					$popupHeight = ($objFile->height + 286);
+					$popupHeight = ($objFile->height + 305);
 					$thumbnail .= ' <span class="tl_gray">('.$objFile->width.'x'.$objFile->height.')</span>';
 
 					if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= 3000 && $objFile->width <= 3000)
@@ -410,7 +410,7 @@ class FileTree extends Widget
 					}
 				}
 
-				$return .= '<a href="contao/popup.php?src='.$currentEncoded.'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" onclick="Backend.openWindow(this, '.$popupWidth.', '.$popupHeight.'); return false;" >' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
+				$return .= '<a href="contao/popup.php?src='.base64_encode($currentEncoded).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'" rel="lightbox[details '.$popupWidth.' '.$popupHeight.']">' . $this->generateImage($objFile->icon).'</a> <label for="'.$this->strName.'_'.md5($currentFile).'">'.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 				// Add checkbox or radio button
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
