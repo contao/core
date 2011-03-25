@@ -219,7 +219,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'fancyUpload' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['fancyUpload'],
-			'default'                 => $GLOBALS['TL_CONFIG']['fancyUpload'],
+			'default'                 => 1,
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')

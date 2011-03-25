@@ -395,6 +395,7 @@ class DataContainer extends Backend
 		for ($i=0; $i<count($names); $i++)
 		{
 			$buffer = array();
+			$return = array_reverse($return);
 
 			foreach ($return as $k=>$v)
 			{
@@ -405,7 +406,7 @@ class DataContainer extends Backend
 			$return = $buffer;
 		}
 
-		return $return;
+		return array_filter($return);
 	}
 
 

@@ -11,7 +11,7 @@
   echo $objCombiner->generate();
 ?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 </head>
 <body>
 
@@ -23,31 +23,31 @@
 <h2><?php echo $this->headline; ?></h2>
 
 <table cellspacing="3" cellpadding="0" class="tl_help_table" summary="File preview">
-  <tr>
-    <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
-    <td><?php echo $this->ctime; ?></td>
-  </tr>
-  <tr>
-    <td class="tl_label"><?php echo $this->label_mtime; ?>:</td>
-    <td><?php echo $this->mtime; ?></td>
-  </tr>
-  <tr>
-    <td class="tl_label"><?php echo $this->label_atime; ?>:</td>
-    <td><?php echo $this->atime; ?></td>
-  </tr>
-  <tr>
-    <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
-    <td><?php echo $this->filesize; ?></td>
-  </tr>
-  <tr>
-    <td class="tl_label"><?php echo $this->label_path; ?>:</td>
-    <td><?php echo $this->path; ?></td>
-  </tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_ctime; ?>:</td>
+  <td><?php echo $this->ctime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_mtime; ?>:</td>
+  <td><?php echo $this->mtime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_atime; ?>:</td>
+  <td><?php echo $this->atime; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_filesize; ?>:</td>
+  <td><?php echo $this->filesize; ?></td>
+</tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_path; ?>:</td>
+  <td><?php echo $this->path; ?></td>
+</tr>
 <?php if ($this->src): ?>
-  <tr>
-    <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>
-    <td><?php echo $this->width; ?> x <?php echo $this->height; ?></td>
-  </tr>
+<tr>
+  <td class="tl_label"><?php echo $this->label_imagesize; ?>:</td>
+  <td><?php echo $this->width; ?> x <?php echo $this->height; ?></td>
+</tr>
 <?php endif; ?>
 </table>
 

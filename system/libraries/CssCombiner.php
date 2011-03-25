@@ -114,6 +114,7 @@ class CssCombiner extends System
 
 		// Create the file
 		$objFile = new File('system/scripts/' . $strKey . '.css');
+		$objFile->truncate();
 
 		foreach ($this->arrFiles as $arrFile)
 		{

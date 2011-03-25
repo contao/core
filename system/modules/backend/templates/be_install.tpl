@@ -14,7 +14,7 @@
   echo $objCombiner->generate();
 ?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <script type="text/javascript" src="<?php
   $objCombiner = new JsCombiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
@@ -73,7 +73,7 @@
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>" />
   </div>
 </div>
 </form>
@@ -884,7 +884,7 @@ Library.
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_license" />
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -906,7 +906,7 @@ Library.
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>" />
   </div>
 </div>
 </form>
@@ -944,7 +944,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>" />
   </div>
 </div>
 </form>
@@ -969,7 +969,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1006,7 +1006,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1021,7 +1021,7 @@ window.addEvent('domready', function() {
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_28update" />
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1036,7 +1036,7 @@ window.addEvent('domready', function() {
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_29update" />
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1051,7 +1051,7 @@ window.addEvent('domready', function() {
 <div class="tl_formbody_submit">
   <input type="hidden" name="FORM_SUBMIT" value="tl_292update" />
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update292run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update292run']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1070,7 +1070,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1091,7 +1091,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1119,7 +1119,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
@@ -1153,7 +1153,7 @@ window.addEvent('domready', function() {
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();" />
   </div>
 </div>
 </form>
