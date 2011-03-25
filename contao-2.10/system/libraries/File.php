@@ -226,6 +226,16 @@ class File extends System
 
 
 	/**
+	 * Truncate the file
+	 * @return boolean
+	 */
+	public function truncate()
+	{
+		return $this->write('');
+	}
+
+
+	/**
 	 * Write data to the file
 	 * @param mixed
 	 * @return boolean

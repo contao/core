@@ -8,6 +8,7 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Improved: optimized the back end page speed (#2400)
 - Improved: added CSS and JS combining to the back end front end
 - Improved: standardized event and newsletter templates (#2889)
+- Improved: minor CSS3 enhancements in the back end
 - Added: added an option to specify URLs for static content (#2399)
 - Added: highlight the active module in the back end navigation (#2941)
 - Fixed: do not add $objRow->protected in tree view by default (#2915)

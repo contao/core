@@ -113,6 +113,7 @@ class JsCombiner extends System
 
 		// Create the file
 		$objFile = new File('system/scripts/'. $strKey .'.js');
+		$objFile->truncate();
 
 		foreach ($this->arrFiles as $arrFile)
 		{

@@ -14,7 +14,7 @@
   echo $objCombiner->generate();
 ?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <script type="text/javascript" src="<?php
   $objCombiner = new JsCombiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
@@ -42,26 +42,28 @@
 <?php endif; ?>
 
 <table cellpadding="0" cellspacing="0" class="tl_login_table" summary="Input fields">
-  <tr>
-    <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-    <td align="right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
-  </tr>
-  <tr>
-    <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-    <td align="right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" /></td>
-  </tr>
-  <tr>
-    <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
-    <td align="right">
-      <select name="language" id="language" class="tl_select"><?php foreach ($this->languages as $key=>$lang): ?> 
-        <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option><?php endforeach; ?> 
-      </select>
-    </td>
-  </tr>
+<tr>
+  <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
+  <td align="right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
+</tr>
+<tr>
+  <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
+  <td align="right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" /></td>
+</tr>
+<tr>
+  <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
+  <td align="right">
+    <select name="language" id="language" class="tl_select">
+<?php foreach ($this->languages as $key=>$lang): ?>
+      <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
+<?php endforeach; ?>
+    </select>
+  </td>
+</tr>
 </table>
 
 <div class="tl_login_submit_container">
-<input type="submit" name="login" id="login" value="<?php echo $this->loginButton; ?>" />
+  <input type="submit" name="login" id="login" class="tl_submit" value="<?php echo $this->loginButton; ?>" />
 </div>
 
 </div>
@@ -69,8 +71,8 @@
 
 <div id="tl_license">
 
-<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?>
-  by Leo Feyer :: Extensions are copyright of their respective owners :: Visit
+<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by
+  Leo Feyer :: Extensions are copyright of their respective owners :: Visit
   <a href="http://www.contao.org" onclick="window.open(this.href); return false;">contao.org</a>
   for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
 
