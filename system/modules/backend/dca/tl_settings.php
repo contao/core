@@ -404,19 +404,31 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticFiles'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
 		),
 		'staticSystem' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticSystem'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
 		),
 		'staticPlugins' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticPlugins'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long')
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
 		)
 	)
 );
@@ -519,6 +531,22 @@ class tl_settings extends Backend
 		if ($varValue == '.' || $varValue == '..' || $varValue == '')
 		{
 			$varValue = 'tl_files';
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Check a static URL
+	 * @param mixed
+	 * @return array
+	 */
+	public function checkStaticUrl($varValue)
+	{
+		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
+		{
+			$varValue = ($this->Environment->ssl ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;

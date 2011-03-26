@@ -1736,6 +1736,18 @@ abstract class Controller extends System
 						case 'referer':
 							$arrCache[$strTag] = $this->getReferer(true);
 							break;
+
+						case 'files_url':
+							$arrCache[$strTag] = TL_FILES_URL;
+							break;
+
+						case 'script_url':
+							$arrCache[$strTag] = TL_SCRIPT_URL;
+							break;
+
+						case 'plugins_url':
+							$arrCache[$strTag] = TL_PLUGINS_URL;
+							break;
 					}
 					break;
 
