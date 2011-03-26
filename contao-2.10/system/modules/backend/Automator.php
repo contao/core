@@ -188,6 +188,10 @@ class Automator extends Backend
 			}
 		}
 
+		// Generate the style sheets (see #2400)
+		$this->import('StyleSheets');
+		$this->StyleSheets->updateStyleSheets();
+
 		// Add log entry
 		$this->log('Purged scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
 	}
