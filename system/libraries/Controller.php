@@ -2029,7 +2029,6 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-
 		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . ' />';
 	}
 

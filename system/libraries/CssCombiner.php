@@ -124,6 +124,14 @@ class CssCombiner extends System
 			if (TL_MODE == 'BE')
 			{
 				$strDirname = dirname($arrFile['name']);
+
+				// Remove relative paths
+				while (strpos($content, '../') !== false)
+				{
+					$strDirname = dirname($strDirname);
+					$content = str_replace('../', '', $content);
+				}
+
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 				$content = str_replace('url("', 'url("../../' . $strGlue, $content);
 			}
