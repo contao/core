@@ -66,7 +66,8 @@ parent.Mediabox.enableFiletreeReload();
 <?php if ($this->error): ?>
 
 <p class="tl_gerror"><?php echo $this->error; ?></p>
-<?php endif; echo $this->main; ?>
+<?php endif; ?>
+<?php echo $this->main; ?>
 
 </div>
 

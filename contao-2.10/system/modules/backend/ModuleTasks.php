@@ -153,7 +153,7 @@ class ModuleTasks extends BackendModule
 
 			$deleteHref = '';
 			$deleteTitle = '';
-			$deleteIcon = 'system/themes/' . $this->getTheme() . '/images/delete_.gif';
+			$deleteIcon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/delete_.gif';
 			$deleteConfirm = '';
 
 			// Check delete permissions
@@ -161,7 +161,7 @@ class ModuleTasks extends BackendModule
 			{
 				$deleteHref = $this->addToUrl('act=delete&amp;id=' . $objTask->id);
 				$deleteTitle = sprintf($GLOBALS['TL_LANG']['tl_task']['delete'][1], $objTask->id);
-				$deleteIcon = 'system/themes/' . $this->getTheme() . '/images/delete.gif';
+				$deleteIcon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/delete.gif';
 				$deleteConfirm = sprintf($GLOBALS['TL_LANG']['tl_task']['delConfirm'], $objTask->id);
 			}
 
@@ -176,7 +176,7 @@ class ModuleTasks extends BackendModule
 				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
 				'editTitle' => sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $objTask->id),
-				'editIcon' => 'system/themes/' . $this->getTheme() . '/images/edit.gif',
+				'editIcon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/edit.gif',
 				'deleteHref' => $deleteHref,
 				'deleteTitle' => $deleteTitle,
 				'deleteIcon' => $deleteIcon,

@@ -4,9 +4,9 @@
 <base href="<?php echo $this->base; ?>"></base>
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link type="text/css" rel="stylesheet" href="plugins/mediabox/css/mediabox_white.css?<?php echo MEDIABOX; ?>" media="screen" />
 <link type="text/css" rel="stylesheet" href="<?php
   $objCombiner = new CssCombiner();
+  $objCombiner->add('plugins/mediabox/css/mediabox_white.css', MEDIABOX);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
   $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
@@ -36,6 +36,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
   $objCombiner->add('plugins/calendar/js/calendar.js', CALENDAR);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
+  $objCombiner->add('plugins/mediabox/js/mediabox.js', MEDIABOX);
   echo $objCombiner->generate();
 ?>"></script>
 <?php echo $this->javascripts; ?>
@@ -66,7 +67,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <a href="<?php echo $this->request; ?>#skipNavigation" class="invisible" title="<?php echo specialchars($this->skipNavigation); ?>"></a>
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt="" /><?php echo $arrModules['label']; ?></a></li>
+<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt="" /><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
 <li class="tl_parent" id="<?php echo $strGroup; ?>">
 <ul class="tl_level_2">
@@ -115,7 +116,6 @@ Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 
-<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 Mediabox.scanPage = function() {

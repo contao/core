@@ -925,11 +925,11 @@ class DC_Folder extends DataContainer implements listable, editable
   <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
   <div>
     <strong class="overall-title"></strong><br />
-    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
+    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
   </div>
   <div style="margin-top:3px">
     <strong class="current-title"></strong><br />
-    <img src="plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
+    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
   </div>
   <div class="current-text"></div>
   </div>
@@ -1740,7 +1740,7 @@ window.addEvent(\'domready\', function()
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail .= '<br /><img src="' . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" />';
+					$thumbnail .= '<br /><img src="' . TL_FILES_URL . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0px 0px 2px 23px;" />';
 				}
 			}
 			else
@@ -1750,10 +1750,10 @@ window.addEvent(\'domready\', function()
 
 			$_buttons = '&nbsp;';
 
-			// No popup links for templates
-			if ($this->strTable == 'tl_templates')
+			// No popup links for templates and in the popup file manager
+			if ($this->strTable == 'tl_templates' || basename($this->Environment->scriptName) == 'files.php')
 			{
-				$return .= $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).'</div> <div class="tl_right">';
+				$return .= $this->generateImage($objFile->icon).' '.utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']).$thumbnail.'</div> <div class="tl_right">';
 			}
 			else
 			{

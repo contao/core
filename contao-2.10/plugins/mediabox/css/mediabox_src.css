@@ -12,7 +12,7 @@
 }
 
 #mbOverlay.mbOverlayFF {
-	background: transparent url(../images/80.png) repeat;
+	background: transparent url("../images/80.png") repeat;
 }
 
 #mbOverlay.mbOverlayIE {
@@ -32,7 +32,7 @@
 }
 
 #mbCenter.mbLoading {
-	background: #000 url(../images/BlackLoading.gif) no-repeat center;
+	background: #000 url("../images/BlackLoading.gif") no-repeat center;
 
 /*	This style is applied only during animation.	*/
 /*	For example, the following turns off shadows,	*/
@@ -111,17 +111,17 @@
 
 #mbPrevLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackPrevious.gif) no-repeat center;
+	background: transparent url("../images/CustomBlackPrevious.gif") no-repeat center;
 }
 
 #mbNextLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackNext.gif) no-repeat center;
+	background: transparent url("../images/CustomBlackNext.gif") no-repeat center;
 }
 
 #mbCloseLink {
 	width: 24px;
-	background: transparent url(../images/CustomBlackClose.gif) no-repeat center;
+	background: transparent url("../images/CustomBlackClose.gif") no-repeat center;
 }
 
 /*	Styles for flash version alert	*/
