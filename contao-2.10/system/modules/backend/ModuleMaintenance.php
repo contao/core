@@ -201,11 +201,11 @@ class ModuleMaintenance extends BackendModule
 		$this->Template->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 
 		// Current version up to date
-		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
+		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
 												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
 												 $this->Environment->base,
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
-												 'system/themes/'.$this->getTheme().'/images/changelog.gif',
+												 TL_FILES_URL . 'system/themes/'.$this->getTheme().'/images/changelog.gif',
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
 
 		// No live update for beta versions

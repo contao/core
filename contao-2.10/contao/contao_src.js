@@ -964,7 +964,7 @@ var Backend =
 
 			div.setStyle('height', hgt);
 			var path = CONTAO_SCRIPT_URL + 'system/themes/' + CONTAO_THEME + '/images/';
-			toggler = new Element('img', { 'class':'limit_toggler', 'alt':'' });
+			toggler = new Element('img', { 'class':'limit_toggler', 'alt':'', 'width':'20', 'height':'24' });
 
 			// Disable function if the preview height is below the max-height
 			if (size.height < hgt)
