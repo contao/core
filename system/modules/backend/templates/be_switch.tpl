@@ -40,7 +40,7 @@
 </select>
 <input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>" />
 <input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload();" />
-<img src="<?php echo $this->closeSrc; ?>" alt="Close preview bar" class="close" onclick="parent.location = parent.frames[1].location;" />
+<img src="<?php echo $this->closeSrc; ?>" width="12" height="12" alt="Close preview bar" class="close" onclick="parent.location = parent.frames[1].location;" />
 </div>
 </form>
 </div>

@@ -148,7 +148,7 @@ $GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';
 /**
  * URLs
  */
-$GLOBALS['TL_LANG']['MSC']['url']    = array('Link-Adresse', 'Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Insert-Tag ein.');
+$GLOBALS['TL_LANG']['MSC']['url']    = array('Link-Adresse', 'Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Inserttag ein.');
 $GLOBALS['TL_LANG']['MSC']['target'] = array('In neuem Fenster öffnen', 'Den Link in einem neuen Browserfenster öffnen.');
 
 

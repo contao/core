@@ -925,11 +925,11 @@ class DC_Folder extends DataContainer implements listable, editable
   <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
   <div>
     <strong class="overall-title"></strong><br />
-    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" alt="" class="progress overall-progress" />
+    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress overall-progress" />
   </div>
   <div style="margin-top:3px">
     <strong class="current-title"></strong><br />
-    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" alt="" class="progress current-progress" />
+    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress current-progress" />
   </div>
   <div class="current-text"></div>
   </div>
