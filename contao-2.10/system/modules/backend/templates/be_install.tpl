@@ -5,23 +5,23 @@
 <title>Install tool - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link type="text/css" rel="stylesheet" href="<?php
-  $objCombiner = new CssCombiner();
+  $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/install.css');
   if ($this->isMac) {
     $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
   }
-  echo $objCombiner->generate();
+  echo $objCombiner->getCombinedFile();
 ?>" media="all" />
 <!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <script type="text/javascript" src="<?php
-  $objCombiner = new JsCombiner();
+  $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
-  echo $objCombiner->generate();
+  echo $objCombiner->getCombinedFile();
 ?>"></script>
 </head>
 <body>

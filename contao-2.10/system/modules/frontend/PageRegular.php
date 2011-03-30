@@ -299,12 +299,12 @@ class PageRegular extends Frontend
 		}
 		else
 		{
-			$objCombiner = new JsCombiner();
+			$objCombiner = new Combiner();
 
 			$objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
 			$objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
 
-			$this->Template->mooScripts = '<script type="text/javascript" src="' . $objCombiner->generate() . '"></script>' . "\n";
+			$this->Template->mooScripts = '<script type="text/javascript" src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
 		}
 
 		// Initialize sections
@@ -345,7 +345,7 @@ class PageRegular extends Frontend
 			}
 		}
 
-		$objCombiner = new CssCombiner();
+		$objCombiner = new Combiner();
 
 		// Default TinyMCE style sheet
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
@@ -386,7 +386,7 @@ class PageRegular extends Frontend
 			// Create the aggregated style sheet
 			if ($objCombiner->hasEntries())
 			{
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $objCombiner->generate() . '" type="text/css" media="all" />' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" type="text/css" media="all" />' . "\n";
 			}
 
 			// Always add conditional style sheets at the end
