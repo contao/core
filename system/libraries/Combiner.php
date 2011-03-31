@@ -142,14 +142,14 @@ class Combiner extends System
 	 * Generate the combined file and return the path
 	 * @return string
 	 */
-	public function getCombinedFile()
+	public function getCombinedFile($strUrl=TL_SCRIPT_URL)
 	{
 		$strKey = substr(md5($this->strKey), 0, 12);
 
 		// Load the existing file
 		if (file_exists(TL_ROOT . '/system/scripts/' . $strKey . $this->strMode))
 		{
-			return TL_SCRIPT_URL . 'system/scripts/' . $strKey . $this->strMode;
+			return $strUrl . 'system/scripts/' . $strKey . $this->strMode;
 		}
 
 		// Create the file
@@ -206,7 +206,7 @@ class Combiner extends System
 			$objFile->close();
 		}
 
-		return TL_SCRIPT_URL . 'system/scripts/' . $strKey . $this->strMode;
+		return $strUrl . 'system/scripts/' . $strKey . $this->strMode;
 	}
 }
 
