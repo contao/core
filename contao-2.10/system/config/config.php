@@ -74,6 +74,7 @@ $GLOBALS['TL_CONFIG']['displayErrors']  = false;
 $GLOBALS['TL_CONFIG']['rewriteURL']     = false;
 $GLOBALS['TL_CONFIG']['disableAlias']   = false;
 $GLOBALS['TL_CONFIG']['enableGZip']     = false;
+$GLOBALS['TL_CONFIG']['gzipScripts']    = false;
 $GLOBALS['TL_CONFIG']['websitePath']    = null;
 
 

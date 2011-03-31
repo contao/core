@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfa
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Kombinierte Skripte komprimieren', 'Eine komprimierte Version der kombinierten CSS- bzw. JavaScript-Dateien erstellen. Erfordert die Anpassung der .htaccess-Datei.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum Datensätze pro Seite', 'Hier legen Sie fest, wie viele Datensätze maximal angezeigt werden, wenn ein Benutzer die Option "alle Datensätze anzeigen" auswählt.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
