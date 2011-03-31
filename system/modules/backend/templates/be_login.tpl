@@ -87,10 +87,12 @@
 <p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>
 
 </div>
+<?php if (!$this->disableCron): ?>
 
 <!-- indexer::stop -->
 <img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible" />
 <!-- indexer::continue -->
+<?php endif; ?>
 
 </div>
 

@@ -323,6 +323,7 @@ class PageRegular extends Frontend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = $this->Environment->base;
+		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 	}
 
 

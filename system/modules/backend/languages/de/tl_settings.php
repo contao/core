@@ -41,6 +41,7 @@ $GLOBALS['TL_LANG']['tl_settings']['timeZone']            = array('Zeitzone', 'B
 $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfad zum Contao-Verzeichnis', 'Der relative Pfad zum Contao-Verzeichnis wird normalerweise automatisch im Install-Tool gesetzt.');
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['disableCron']         = array('Den Command Scheduler deaktivieren', 'Den Periodic Command Scheduler deaktivieren und das cron.php-Skript mittels eines echten Cronjobs (den Sie selbständig einrichten müssen) ausführen.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
 $GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Kombinierte Skripte komprimieren', 'Eine komprimierte Version der kombinierten CSS- bzw. JavaScript-Dateien erstellen. Erfordert die Anpassung der .htaccess-Datei.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
