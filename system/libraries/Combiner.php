@@ -160,7 +160,15 @@ class Combiner extends System
 		{
 			$content = file_get_contents(TL_ROOT . '/' . $arrFile['name']);
 
-			// TODO: add a hook
+			// HOOK: modify the file content
+			if (isset($GLOBALS['TL_HOOKS']['getCombinedFile']) && is_array($GLOBALS['TL_HOOKS']['getCombinedFile']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['getCombinedFile'] as $callback)
+				{
+					$this->import($callback[0]);
+					$content = $this->$callback[0]->$callback[1]($content, $strKey, $this->strMode);
+				}
+			}
 
 			// Handle style sheets
 			if ($this->strMode == self::CSS)
@@ -191,8 +199,7 @@ class Combiner extends System
 		$objFile->close();
 
 		// Create a gzipped version
-		// TODO: make configurable in the back end settings
-		if (function_exists('gzencode'))
+		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
 			$objFile = new File('system/scripts/' . $strKey . $this->strMode . '.gz');
 			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/system/scripts/' . $strKey . $this->strMode), 9));

@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relative path
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Character set', 'It is recommended to use UTF-8, so special characters are displayed correctly.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Custom layout sections', 'Here you can enter a comma separated list of custom layout sections.');
 $GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('Enable GZip compression', 'Compress pages before they are sent to the browser.');
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Compress combined scripts', 'Create a compress version of the combined CSS and JavaScript files. Requires adjustments of the .htaccess file.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items per page', 'This overall limit takes effect if a user chooses the "show all records" option.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');

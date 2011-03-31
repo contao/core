@@ -284,11 +284,11 @@ pre,.tl_textarea.monospace {
 	color:#fff;
 	cursor:pointer;
 	line-height:1;
-	text-shadow:1px 1px 0 rgba(0, 0, 0, 0.25);
-	box-shadow:0 1px 3px rgba(0, 0, 0, 0.25);
+	text-shadow:1px 1px 0 #666;
+	box-shadow:0 1px 3px #bbb;
 }
 .tl_submit:focus,.tl_submit:hover {
-	box-shadow:0 0 6px rgba(138, 184, 88, 1);
+	box-shadow:0 0 6px #8ab858;
 }
 .tl_submit:active {
 	background:#8ab858;
