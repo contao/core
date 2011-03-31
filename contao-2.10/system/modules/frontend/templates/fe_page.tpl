@@ -63,10 +63,12 @@
 </div>
 </div>
 <?php endif; ?>
+<?php if (!$this->disableCron): ?>
 
 <!-- indexer::stop -->
 <img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible" />
 <!-- indexer::continue -->
+<?php endif; ?>
 
 </div>
 <?php echo $this->mootools; ?>

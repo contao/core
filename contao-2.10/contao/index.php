@@ -133,6 +133,7 @@ class Index extends Backend
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
 		$this->Template->frontendFile = $this->Environment->base;
+		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 
 		$this->Template->output();
 	}
