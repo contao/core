@@ -119,7 +119,7 @@ class ContentCode extends ContentElement
 			$objCombiner = new Combiner();
 			$objCombiner->add('plugins/highlighter/XRegExp.js', HIGHLIGHTER);
 			$objCombiner->add('plugins/highlighter/shCore.js', HIGHLIGHTER);
-			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile();
+			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);
 
 			// Add the brushes separately in case there are multiple code elements
 			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
