@@ -62,7 +62,6 @@ class DB_Oracle extends Database
 		{
 			$this->resConnection = @oci_pconnect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
 		}
-
 		else
 		{
 			$this->resConnection = @oci_connect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
@@ -87,6 +86,25 @@ class DB_Oracle extends Database
 	{
 		$arrError = oci_error();
 		return $arrError['message'];
+	}
+
+
+	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  string
+	 * @return object
+	 */
+	protected function find_in_set($strKey, $strSet)
+	{
+		$arrSet = trimsplit(',', $strSet);
+
+		foreach ($arrSet as $k=>$v)
+		{
+			$arrSet[$k] = str_replace("'", "''", $v);
+		}
+
+		return $strKey . "='" . implode("' DESC, $strKey='", $arrSet) . "' DESC";
 	}
 
 
@@ -226,10 +244,8 @@ class DB_Oracle_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$strType = strtoupper(preg_replace('/\s+.*$/is', '', trim($this->strQuery)));
-
 		// Return if the current statement is not a SELECT statement
-		if ($strType != 'SELECT')
+		if (strncasecmp($this->strQuery, 'SELECT', 6) !== 0)
 		{
 			return;
 		}

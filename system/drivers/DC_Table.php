@@ -1468,7 +1468,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 
 	/**
-	 * Autogenerate a form to edit the current database record
+	 * Auto-generate a form to edit the current database record
 	 * @param integer
 	 * @param integer
 	 * @return string
@@ -1883,7 +1883,7 @@ window.addEvent(\'domready\', function()
 
 
 	/**
-	 * Autogenerate a form to edit all records that are currently shown
+	 * Auto-generate a form to edit all records that are currently shown
 	 * @param integer
 	 * @param integer
 	 * @return string
@@ -2187,7 +2187,7 @@ window.addEvent(\'domready\', function()
 
 
 	/**
-	 * Autogenerate a form to override all records that are currently shown
+	 * Auto-generate a form to override all records that are currently shown
 	 * @author Based on a patch by Andreas Schempp
 	 * @return string
 	 */
@@ -3619,7 +3619,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						$keys = array_keys($keys);
 					}
 
-					$orderBy[$k] = "FIND_IN_SET(" . $v . ", '" . implode(',', $keys) . "')";
+					$orderBy[$k] = $this->Database->findInSet($v, $keys);
 				}
 			}
 

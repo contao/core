@@ -545,7 +545,7 @@ class tl_news extends Backend
 
 
 	/**
-	 * Autogenerate a news alias if it has not been set yet
+	 * Auto-generate the news alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string

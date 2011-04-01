@@ -955,7 +955,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 
 	/**
-	 * Autogenerate a form to rename a file or folder
+	 * Auto-generate a form to rename a file or folder
 	 * @return string
 	 */
 	public function edit()
@@ -1135,7 +1135,7 @@ window.addEvent(\'domready\', function()
 
 
 	/**
-	 * Autogenerate a form to edit all records that are currently shown
+	 * Auto-generate a form to edit all records that are currently shown
 	 * @param integer
 	 * @param integer
 	 * @return string

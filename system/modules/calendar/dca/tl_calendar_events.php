@@ -590,7 +590,7 @@ class tl_calendar_events extends Backend
 
 
 	/**
-	 * Autogenerate a event alias if it has not been set yet
+	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string

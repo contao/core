@@ -69,7 +69,6 @@ class DB_Mssql extends Database
 		{
 			$this->resConnection = @mssql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
 		}
-
 		else
 		{
 			$this->resConnection = @mssql_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
@@ -98,6 +97,25 @@ class DB_Mssql extends Database
 	protected function get_error()
 	{
 		return mssql_get_last_message();
+	}
+
+
+	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  string
+	 * @return object
+	 */
+	protected function find_in_set($strKey, $strSet)
+	{
+		$arrSet = trimsplit(',', $strSet);
+
+		foreach ($arrSet as $k=>$v)
+		{
+			$arrSet[$k] = str_replace("'", "''", $v);
+		}
+
+		return $strKey . "='" . implode("' DESC, $strKey='", $arrSet) . "' DESC";
 	}
 
 

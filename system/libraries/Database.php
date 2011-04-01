@@ -191,6 +191,23 @@ abstract class Database
 
 
 	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  mixed
+	 * @return object
+	 */
+	public function findInSet($strKey, $varSet)
+	{
+		if (is_array($varSet))
+		{
+			$varSet = implode(',', $varSet);
+		}
+
+		return $this->find_in_set($strKey, $varSet);
+	}
+
+
+	/**
 	 * Return all tables of a database as array
 	 * @param  string
 	 * @param  boolean
@@ -266,7 +283,6 @@ abstract class Database
 			if ($arrField['name'] == $strField)
 			{
 				return true;
-				break;
 			}
 		}
 
@@ -357,6 +373,7 @@ abstract class Database
 	abstract protected function connect();
 	abstract protected function disconnect();
 	abstract protected function get_error();
+	abstract protected function find_in_set($strKey, $strSet);
 	abstract protected function begin_transaction();
 	abstract protected function commit_transaction();
 	abstract protected function rollback_transaction();
@@ -483,8 +500,8 @@ abstract class Database_Statement
 		$this->resResult = NULL;
 		$this->strQuery = $this->prepare_query($strQuery);
 
-		// Autogenerate SET/VALUES subpart
-		if (in_array(substr(strtoupper($this->strQuery), 0, 6), array('INSERT', 'UPDATE')))
+		// Auto-generate the SET/VALUES subpart
+		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0 || strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
 		{
 			$this->strQuery = str_replace('%s', '%p', $this->strQuery);
 		}
@@ -502,13 +519,13 @@ abstract class Database_Statement
 			$arrChunks[$k] = str_replace('?', '%s', $v);
 		}
 
-		$this->strQuery = implode('', $arrChunks);
+		$this->strQuery = trim(implode('', $arrChunks));
 		return $this;
 	}
 
 
 	/**
-	 * Take an associative array and autogenerate the SET/VALUES subpart of a query
+	 * Take an associative array and auto-generate the SET/VALUES subpart of a query
 	 * 
 	 * Usage example:
 	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
@@ -520,20 +537,16 @@ abstract class Database_Statement
 	{
 		$arrParams = $this->escapeParams($arrParams);
 
-		if (strpos($this->strQuery, '%s') < 0)
-		{
-			return $this;
-		}
-
-		$strTrim = trim($this->strQuery);
-
-		if (strncasecmp($strTrim, 'INSERT', 6) === 0)
+		// INSERT
+		if (strncasecmp($this->strQuery, 'INSERT', 6) === 0)
 		{
 			$strQuery = sprintf('(%s) VALUES (%s)',
 								implode(', ', array_keys($arrParams)),
 								str_replace('%', '%%', implode(', ', array_values($arrParams))));
 		}
-		elseif (strncasecmp($strTrim, 'UPDATE', 6) === 0)
+
+		// UPDATE
+		elseif (strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
 		{
 			$arrSet = array();
 
@@ -558,7 +571,17 @@ abstract class Database_Statement
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
-		$this->limit_query((($intRows > 0) ? $intRows : 30), (($intOffset > 0) ? $intOffset : 0));
+		if ($intRows <= 0)
+		{
+			$intRows = 30;
+		}
+
+		if ($intOffset < 0)
+		{
+			$intOffset = 0;
+		}
+
+		$this->limit_query($intRows, $intOffset);
 		return $this;
 	}
 
@@ -580,7 +603,7 @@ abstract class Database_Statement
 		$this->replaceWildcards($arrParams);
 		$strKey = md5($this->strQuery);
 
-		// Try to load result from cache
+		// Try to load the result from cache
 		if (isset(self::$arrCache[$strKey]) && !self::$arrCache[$strKey]->isModified)
 		{
 			return self::$arrCache[$strKey]->reset();
@@ -588,7 +611,7 @@ abstract class Database_Statement
 
 		$objResult = $this->query();
 
-		// Cache result objects
+		// Cache the result objects
 		if ($objResult instanceof Database_Result)
 		{
 			self::$arrCache[$strKey] = $objResult;

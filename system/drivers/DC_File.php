@@ -115,7 +115,7 @@ class DC_File extends DataContainer implements editable
 
 
 	/**
-	 * Autogenerate a form to edit the local configuration file
+	 * Auto-generate a form to edit the local configuration file
 	 * @param integer
 	 * @param integer
 	 * @return string
