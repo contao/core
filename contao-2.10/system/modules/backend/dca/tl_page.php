@@ -831,7 +831,7 @@ class tl_page extends Backend
 
 
 	/**
-	 * Autogenerate a page alias if it has not been set yet
+	 * Auto-generate a page alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string

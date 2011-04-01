@@ -69,7 +69,6 @@ class DB_Sybase extends Database
 		{
 			$this->resConnection = @sybase_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
 		}
-
 		else
 		{
 			$this->resConnection = @sybase_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
@@ -98,6 +97,25 @@ class DB_Sybase extends Database
 	protected function get_error()
 	{
 		return sybase_get_last_message();
+	}
+
+
+	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  string
+	 * @return object
+	 */
+	protected function find_in_set($strKey, $strSet)
+	{
+		$arrSet = trimsplit(',', $strSet);
+
+		foreach ($arrSet as $k=>$v)
+		{
+			$arrSet[$k] = str_replace("'", "''", $v);
+		}
+
+		return $strKey . "='" . implode("' DESC, $strKey='", $arrSet) . "' DESC";
 	}
 
 
@@ -226,7 +244,7 @@ class DB_Sybase_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$this->strQuery .= sprintf('SET ROWCOUNT %d; %s; SET ROWCOUNT 0;', ($intOffset + $intRows), $this->strQuery);
+		$this->strQuery .= 'SET ROWCOUNT ' . ($intOffset + $intRows) . '; ' . $this->strQuery . '; SET ROWCOUNT 0;';
 	}
 
 

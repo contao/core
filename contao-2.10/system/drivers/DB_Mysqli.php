@@ -83,6 +83,18 @@ class DB_Mysqli extends Database
 
 
 	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  string
+	 * @return object
+	 */
+	protected function find_in_set($strKey, $strSet)
+	{
+		return "FIND_IN_SET(" . $strKey . ", '" . $this->resConnection->real_escape_string($strSet) . "')";
+	}
+
+
+	/**
 	 * Return a standardized array with field information
 	 * 
 	 * Standardized format:
@@ -263,17 +275,13 @@ class DB_Mysqli_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$strType = strtoupper(preg_replace('/\s+.*$/is', '', trim($this->strQuery)));
-
-		switch ($strType)
+		if (strncasecmp($this->strQuery, 'SELECT', 6) === 0)
 		{
-			case 'SELECT':
-				$this->strQuery .= sprintf(' LIMIT %d,%d', $intOffset, $intRows);
-				break;
-
-			default:
-				$this->strQuery .= sprintf(' LIMIT %d', $intRows);
-				break;
+			$this->strQuery .= ' LIMIT ' . $intOffset . ',' . $intRows;
+		}
+		else
+		{
+			$this->strQuery .= ' LIMIT ' . $intRows;
 		}
 	}
 

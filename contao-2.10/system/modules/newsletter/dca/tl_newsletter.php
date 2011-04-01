@@ -421,7 +421,7 @@ class tl_newsletter extends Backend
 
 
 	/**
-	 * Autogenerate a news alias if it has not been set yet
+	 * Auto-generate the newsletter alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string

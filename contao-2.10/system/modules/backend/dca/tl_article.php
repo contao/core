@@ -497,7 +497,7 @@ class tl_article extends Backend
 
 
 	/**
-	 * Autogenerate an article alias if it has not been set yet
+	 * Auto-generate an article alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string
