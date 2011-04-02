@@ -62,13 +62,12 @@ class ContentTable extends ContentElement
 		$this->Template->thousandsSeparator = $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'];
 		$this->Template->decimalSeparator = $GLOBALS['TL_LANG']['MSC']['decimalSeparator'];
 
-		// Add scripts
+		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
-			$this->Template->sortable = true;
-
 			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/tablesort/css/tablesort.css?' . TABLESORT . '|screen';
-			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
+			$GLOBALS['TL_MOOTOOLS'][] = '<script type="text/javascript" src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js?' . TABLESORT . '"></script>';
+			$this->Template->sortable = true;
 		}
 
 		$arrHeader = array();

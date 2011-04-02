@@ -105,7 +105,7 @@ class BackendTemplate extends Template
 		{
 			$strStyleSheets = '';
 
-			foreach ($GLOBALS['TL_CSS'] as $stylesheet)
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
 				$strStyleSheets .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
@@ -119,12 +119,25 @@ class BackendTemplate extends Template
 		{
 			$strJavaScripts = '';
 
-			foreach ($GLOBALS['TL_JAVASCRIPT'] as $javascript)
+			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
 				$strJavaScripts .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;
+		}
+
+		// MooTools scripts (added at the page bottom)
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		{
+			$strMootools = '';
+
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strMootools .= "\n" . trim($script) . "\n";
+			}
+
+			$this->mootools = $strMootools;
 		}
 
 		$strBuffer = $this->parse();
