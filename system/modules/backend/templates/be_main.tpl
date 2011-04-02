@@ -142,6 +142,7 @@ window.addEvent("domready", Mediabox.scanPage);
 window.addEvent("ajax_change", Mediabox.scanPage);
 //--><!]]>
 </script>
+<?php echo $this->mootools; ?>
 
 </body>
 </html>

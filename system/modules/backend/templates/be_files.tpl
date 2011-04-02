@@ -82,6 +82,7 @@ Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 //--><!]]>
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
+<?php echo $this->mootools; ?>
 
 </body>
 </html>
