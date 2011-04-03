@@ -44,7 +44,7 @@
 
 <div class="tl_module_desc">
 <h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php if ($arrModule['icon']): ?> style="background-image:url('<?php echo TL_SCRIPT_URL . $arrModule['icon']; ?>')"<?php endif; ?>><?php echo $arrModule['name']; ?></a></h3>
-<?php echo $arrModule['description']; ?> 
+<p><?php echo $arrModule['description']; ?></p> 
 </div>
 <?php endforeach; endforeach; ?>
 </div>

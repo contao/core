@@ -7,7 +7,7 @@ $GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/slimbox/css/slimbox.css?'. SLIM
 
 <script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/slimbox/js/slimbox.js?<?php echo SLIMBOX; ?>"></script>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Slimbox.scanPage = function() {
   $$(document.links).filter(function(el) {
     return el.rel && el.rel.test(/^lightbox/i);
@@ -15,6 +15,6 @@ Slimbox.scanPage = function() {
     return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
   });
 };
-window.addEvent("domready", Slimbox.scanPage);
-//--><!]]>
+window.addEvent('domready', Slimbox.scanPage);
+/*]]>*/
 </script>

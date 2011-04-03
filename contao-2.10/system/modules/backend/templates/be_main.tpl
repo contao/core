@@ -22,12 +22,12 @@
 <!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-//--><!]]>
+/*]]>*/
 </script>
 <script type="text/javascript" src="<?php
   $objCombiner = new Combiner();
@@ -110,16 +110,16 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <?php if ($this->pageOffset): ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
-//--><!]]>
+/*]]>*/
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Mediabox.scanPage = function() {
-  var links = $$("a").filter(function(el) {
+  var links = $$('a').filter(function(el) {
     return el.rel && el.rel.test(/^lightbox/i);
   });
   var options = {
@@ -127,20 +127,20 @@ Mediabox.scanPage = function() {
     'showCounter': false
   };
   $$(links).mediabox(options, null, function(el) {
-    var rel0 = this.rel.replace(/[[]|]/gi," ");
-    var relsize = rel0.split(" ");
+    var rel0 = this.rel.replace(/[[]|]/gi,' ');
+    var relsize = rel0.split(' ');
     return (this == el) || ((this.rel.length > 8) && el.rel.match(relsize[1]));
   });
-}
+};
 Mediabox.enableFiletreeReload = function() {
   window.addEvent('mb_close', function() {
     AjaxRequest.reloadFiletrees();
     window.removeEvents('mb_close');
   });
-}
-window.addEvent("domready", Mediabox.scanPage);
-window.addEvent("ajax_change", Mediabox.scanPage);
-//--><!]]>
+};
+window.addEvent('domready', Mediabox.scanPage);
+window.addEvent('ajax_change', Mediabox.scanPage);
+/*]]>*/
 </script>
 <?php echo $this->mootools; ?>
 

@@ -101,7 +101,7 @@ if ($GLOBALS['TL_CONFIG']['useCE']): ?>
 <script type="text/javascript" src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js?<?php echo EDITAREA; ?>"></script>
 <?php foreach ($this->ceFields as $strField): ?>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 editAreaLoader.init({
   id : "<?php echo $strField; ?>",
   syntax: "<?php echo $this->syntax; ?>",
@@ -110,7 +110,7 @@ editAreaLoader.init({
   toolbar: "new_document,search,go_to_line,fullscreen,|,syntax_selection,select_font,|,change_smooth_selection,highlight,reset_highlight,word_wrap,|,undo,redo,|,help",
   syntax_selection_allow: "c,cpp,css,html,java,js,perl,php,phyton,ruby,sql,vb,xml"
 });
-//--><!]]>
+/*]]>*/
 </script>
 <?php endforeach; ?>
 <?php endif; ?>

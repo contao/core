@@ -58,9 +58,6 @@
  * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that
  * this feature requires Apache's mod_rewrite!
  * 
- * If you enable GZip, front end and back end pages will be compressed before
- * they are sent to your browser.
- *
  * The relative path to the Contao directory is usually set automatically.
  * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
@@ -73,7 +70,7 @@ $GLOBALS['TL_CONFIG']['indexProtected'] = false;
 $GLOBALS['TL_CONFIG']['displayErrors']  = false;
 $GLOBALS['TL_CONFIG']['rewriteURL']     = false;
 $GLOBALS['TL_CONFIG']['disableAlias']   = false;
-$GLOBALS['TL_CONFIG']['enableGZip']     = false;
+$GLOBALS['TL_CONFIG']['minifyMarkup']   = false;
 $GLOBALS['TL_CONFIG']['gzipScripts']    = false;
 $GLOBALS['TL_CONFIG']['websitePath']    = null;
 

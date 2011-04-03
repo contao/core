@@ -4,7 +4,7 @@
 <title>Contao Open Source CMS</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <style type="text/css" media="screen">
-<!--/*--><![CDATA[/*><!--*/
+/*<![CDATA[*/
 a {
   text-decoration:none;
 }
@@ -40,7 +40,7 @@ ol {
 li {
   line-height:24px;
 }
-/*]]>*/-->
+/*]]>*/
 </style>
 </head>
 <body>

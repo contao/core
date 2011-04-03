@@ -49,9 +49,9 @@
 <?php if ($this->update): ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 parent.frames[1].location.reload();
-//--><!]]>
+/*]]>*/
 </script>
 <?php endif; ?>
 

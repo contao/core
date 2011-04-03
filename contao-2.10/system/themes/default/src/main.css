@@ -600,6 +600,9 @@ label.tl_change_selected {
 	margin:0 0 4px 0;
 	padding:0;
 }
+#tl_moverview .tl_module_desc p {
+	margin-bottom:0;
+}
 #tl_messages {
 	margin-bottom:24px;
 }

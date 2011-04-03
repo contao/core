@@ -21,7 +21,7 @@
 <!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style type="text/css" media="screen">
-<!--/*--><![CDATA[/*><!--*/
+/*<![CDATA[*/
 #container {
   margin:0 auto;
   padding:12px 0;
@@ -33,12 +33,12 @@
 /*]]>*/-->
 </style>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-//--><!]]>
+/*]]>*/
 </script>
 <script type="text/javascript" src="<?php
   $objCombiner = new Combiner();
@@ -52,9 +52,9 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <?php echo $this->javascripts; ?>
 <?php echo $this->rteConfig; ?>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 parent.Mediabox.enableFiletreeReload();
-//--><!]]>
+/*]]>*/
 </script>
 </head>
 <body>
@@ -77,9 +77,9 @@ parent.Mediabox.enableFiletreeReload();
 <?php if ($this->pageOffset): ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
-//--><!]]>
+/*]]>*/
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 <?php echo $this->mootools; ?>

@@ -33,11 +33,10 @@ FileETag None
 <IfModule mod_deflate.c>
 
   ##
-  # Use mod_deflate to compress JavaScript, CSS and XML files. Do not add
-  # PHP and HTML files, because those have already been compressed by Contao.
+  # Use mod_deflate to compress JavaScript, CSS, XML, HTML and PHP files.
   # @see http://developer.yahoo.com/performance/rules.html#gzip
   ##
-  <FilesMatch "\.(css|js|xml)$">
+  <FilesMatch "\.(css|js|xml|html?|php)$">
     SetOutputFilter DEFLATE
   </FilesMatch>
 

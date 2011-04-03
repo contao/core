@@ -16,7 +16,7 @@
 </div>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   $('index_note').setStyle('display', 'none');
   $$('h2.sub_headline_index').setStyle('display', 'none');
@@ -26,7 +26,7 @@ window.addEvent('load', function() {
   $('index_loading').setStyle('display', 'none');
   $('index_complete').setStyle('display', 'block');
 });
-//--><!]]>
+/*]]>*/
 </script>
 
 <form action="<?php echo $this->href; ?>" class="tl_form" method="get">

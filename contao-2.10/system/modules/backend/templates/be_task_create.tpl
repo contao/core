@@ -18,9 +18,9 @@
   <?php echo $this->deadline->generateWithError(); if ($this->deadline->help): ?> 
   <p class="tl_help"><?php echo $this->deadline->help; ?></p><?php endif; ?> 
   <script type="text/javascript">
-  <!--//--><![CDATA[//><!--
+  /*<![CDATA[*/
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  //--><!]]>
+  /*]]>*/
   </script>
 </div>
 
