@@ -36,7 +36,7 @@
 ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   (function() {
     var phrases = {
@@ -65,36 +65,36 @@ window.addEvent('domready', function() {
     MooTools.lang.set('en-US', 'FancyUpload', phrases);
   })();
   var up = new FancyUpload2($('fancy-status'), $('fancy-list'), {
-    data: {
+    'data': {
       'isAjax': true,
       'FORM_SUBMIT': 'tl_upload',
       'action': 'fancyUpload',
       'isPopup': <?php echo $fancy->isPopup; ?> 
     },
-    appendCookieData: true,
-    url: $('<?php echo $this->strTable; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
-    path: 'plugins/fancyupload/Swiff.Uploader.swf',
-    typeFilter: {
+    'appendCookieData': true,
+    'url': $('<?php echo $this->strTable; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
+    'path': 'plugins/fancyupload/Swiff.Uploader.swf',
+    'typeFilter': {
       'Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)': '*.<?php echo implode('; *.', $fancy->uploadTypes); ?>'
     },
-    target: 'fancy-browse',
-    onLoad: function() {
+    'target': 'fancy-browse',
+    'onLoad': function() {
       $('fancy-status').removeClass('fancy-hide');
       $('fancy-list').removeClass('fancy-hide');
       $('fancy-fallback').destroy();
       $('fancy-submit').destroy();
       this.target.addEvents({
-        click: function() {
+        'click': function() {
           return false;
         },
-        mouseenter: function() {
+        'mouseenter': function() {
           this.addClass('hover');
         },
-        mouseleave: function() {
+        'mouseleave': function() {
           this.removeClass('hover');
           this.blur();
         },
-        mousedown: function() {
+        'mousedown': function() {
           this.focus();
         }
       });
@@ -107,21 +107,21 @@ window.addEvent('domready', function() {
         return false;
       });
     },
-    onSelectFail: function(files) {
+    'onSelectFail': function(files) {
       files.each(function(file) {
         new Element('li', {
           'class': 'validation-error',
-          html: file.validationErrorMessage || file.validationError,
-          title: MooTools.lang.get('FancyUpload', 'removeTitle'),
-          events: {
-            click: function() {
+          'html': file.validationErrorMessage || file.validationError,
+          'title': MooTools.lang.get('FancyUpload', 'removeTitle'),
+          'events': {
+            'click': function() {
               this.destroy();
             }
           }
         }).inject(this.list, 'top');
       }, this);
     },
-    onFileSuccess: function(file, response) {
+    'onFileSuccess': function(file, response) {
       var json = new Hash(JSON.decode(response, true) || {});
       if (json.get('status') == '1') {
         file.element.addClass('file-success');
@@ -131,7 +131,7 @@ window.addEvent('domready', function() {
         file.info.set('html', json.get('message'));
       }
     },
-    onFail: function(error) {
+    'onFail': function(error) {
       switch (error) {
         case 'hidden':
           alert('To enable the embedded uploader, unblock it in your browser and refresh (see Adblock).');
@@ -149,5 +149,5 @@ window.addEvent('domready', function() {
     }
   });
 });
-//--><!]]>
+/*]]>*/
 </script>

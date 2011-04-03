@@ -38,11 +38,11 @@
 
 <!-- indexer::stop -->
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>', '<?php echo $this->decimalSeparator; ?>');
 });
-//--><!]]>
+/*]]>*/
 </script>
 <!-- indexer::continue -->
 <?php endif; ?>

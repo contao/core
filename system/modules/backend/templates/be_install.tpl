@@ -79,11 +79,11 @@
 </form>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   $('host').focus();
 });
-//--><!]]>
+/*]]>*/
 </script>
 <?php elseif ($this->license): ?>
 
@@ -912,13 +912,13 @@ Library.
 </form>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   if (navigator.cookieEnabled) {
     $('cookies').destroy();
   }
 });
-//--><!]]>
+/*]]>*/
 </script>
 <?php else: ?>
 
@@ -1172,19 +1172,19 @@ window.addEvent('domready', function() {
 <?php if ($this->login || $this->setPassword): ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() {
   $('password').focus();
 });
-//--><!]]>
+/*]]>*/
 </script>
 <?php endif; ?>
 <?php if ($this->pageOffset): ?>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
-//--><!]]>
+/*]]>*/
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 

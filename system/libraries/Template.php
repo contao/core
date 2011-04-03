@@ -201,7 +201,47 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		$arrEncoding = $this->Environment->httpAcceptEncoding;
+		// Use tidy to clean the markup
+		if ($GLOBALS['TL_CONFIG']['minifyMarkup'] && class_exists('tidy', false))
+		{
+			switch ($GLOBALS['TL_CONFIG']['characterSet'])
+			{
+				case 'UTF-8':
+					$cs = 'utf8';
+					break;
+
+				case 'ISO-8859-1':
+					$cs = 'latin1';
+					break;
+
+				default:
+					$cs = 'raw';
+					break;
+			}
+
+			$config = array
+			(
+				'clean' => 1,
+				'bare' => 1,
+				'hide-comments' => 0,
+				'indent-spaces' => 0,
+				'indent' => 0,
+				'tab-size' => 1,
+				'wrap' => 0,
+				'merge-divs' => 0,
+				'break-before-br' => 0,
+				'preserve-entities' => 1,
+				'output-xhtml' => 1,
+				'input-encoding' => $cs,
+				'output-encoding' => $cs,
+				'char-encoding' => $cs
+			);
+
+			$tidy = new tidy;
+			$tidy->parseString($this->strBuffer, $config);
+			$tidy->cleanRepair();
+			$this->strBuffer = $tidy;
+		}
 
 		/**
 		 * Copyright notice
@@ -221,10 +261,37 @@ abstract class Template extends Controller
 			$this->strBuffer, 1
 		);
 
-		// Activate gzip compression
-		if ($GLOBALS['TL_CONFIG']['enableGZip'] && (in_array('gzip', $arrEncoding) || in_array('x-gzip', $arrEncoding)) && function_exists('ob_gzhandler') && !ini_get('zlib.output_compression'))
+		// Minify the cleaned markup
+		if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
 		{
-			ob_start('ob_gzhandler');
+			// Replace line breaks between tags and after br-tags
+			$this->strBuffer = str_replace(array(">\n<", "<br />\n"), array('><', '<br />'), $this->strBuffer);
+
+			// Split the content to isolate inline scripts
+			$arrChunks = preg_split('@(/\*<!\[CDATA\[\*/)|(/\*\]\]>\*/)@', $this->strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+			$this->strBuffer = '';
+
+			// Handle IE conditional comments
+			$arrChunks[0] = preg_replace('/endif\]-->\n+/', 'endif]-->', $arrChunks[0]);
+			$strMinimizeNext = false;
+
+			foreach ($arrChunks as $strChunk)
+			{
+				if ($strChunk == '/*<![CDATA[*/')
+				{
+					$strMinimizeNext = true;
+				}
+				elseif ($strMinimizeNext)
+				{
+					// Try to remove not required whitespace 
+					$strChunk = "\n" . preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', trim($strChunk)) . "\n";
+					$strMinimizeNext = false;
+				}
+
+				$this->strBuffer .= $strChunk;
+			}
+
+			unset($arrChunks, $strChunk);
 		}
 
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);

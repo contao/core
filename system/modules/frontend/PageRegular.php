@@ -279,9 +279,9 @@ class PageRegular extends Frontend
 		if (!empty($strFramework))
 		{
 			$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
-			$this->Template->framework .= '<!--/*--><![CDATA[/*><!--*/' . "\n";
+			$this->Template->framework .= '/*<![CDATA[*/' . "\n";
 			$this->Template->framework .= $strFramework;
-			$this->Template->framework .= '/*]]>*/-->' . "\n";
+			$this->Template->framework .= '/*]]>*/' . "\n";
 			$this->Template->framework .= '</style>' . "\n";
 		}
 

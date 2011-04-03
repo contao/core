@@ -66,7 +66,7 @@
 </div>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 window.addEvent('domready', function() { new TableSort('taskcenter'); });
-//--><!]]>
+/*]]>*/
 </script>

@@ -126,10 +126,10 @@ class ContentCode extends ContentElement
 
 			// Initialization
 			$strInit  = '<script type="text/javascript">' . "\n";
-			$strInit .= '<!--//--><![CDATA[//><!--' . "\n";
+			$strInit .= '/*<![CDATA[*/' . "\n";
 			$strInit .= 'SyntaxHighlighter.defaults.toolbar = false;' . "\n";
 			$strInit .= 'SyntaxHighlighter.all();' . "\n";
-			$strInit .= '//--><!]]>' . "\n";
+			$strInit .= '/*]]>*/' . "\n";
 			$strInit .= '</script>';
 
 			// Add the initialization script to the head section and not (!) to TL_JAVASCRIPT

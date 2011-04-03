@@ -1869,12 +1869,11 @@ class DC_Table extends DataContainer implements listable, editable
 			$return .= '
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+/*<![CDATA[*/
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
+/*]]>*/
 </script>';
 		}
 
@@ -2091,12 +2090,11 @@ window.addEvent(\'domready\', function()
 				$return .= '
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+/*<![CDATA[*/
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
+/*]]>*/
 </script>';
 			}
 
@@ -2340,12 +2338,11 @@ window.addEvent(\'domready\', function()
 				$return .= '
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+/*<![CDATA[*/
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
+/*]]>*/
 </script>';
 			}
 
@@ -3520,9 +3517,9 @@ window.addEvent(\'domready\', function()
 </ul>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
-//--><!]]>
+/*]]>*/
 </script>';
 		}
 

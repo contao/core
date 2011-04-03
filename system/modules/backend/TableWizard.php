@@ -230,9 +230,9 @@ class TableWizard extends Widget
   </table>
   </div>
   <script type="text/javascript">
-  <!--//--><![CDATA[//><!--
+  /*<![CDATA[*/
   Backend.tableWizardResize();
-  //--><!]]>
+  /*]]>*/
   </script>';
 
 		return $return;

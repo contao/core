@@ -14,7 +14,7 @@
 <!--[if gte IE 5]><script type="text/javascript" event="FSCommand(command,args)" for="<?php echo $this->flashId; ?>"><?php echo $this->flashId; ?>_DoFSCommand(command, args);</script><![endif]-->
 <?php endif; ?>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 <?php if ($this->interactive): ?>
 function <?php echo $this->flashId; ?>_DoFSCommand(command, args) {
 <?php echo $this->fsCommand; ?> 
@@ -40,7 +40,7 @@ if (Browser.Plugins.Flash.version > 0) {
     container: $('<?php echo $this->flashId; ?>_container')
   });
 }
-//--><!]]>
+/*]]>*/
 </script>
 <!-- indexer::continue -->
 

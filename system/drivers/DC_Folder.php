@@ -924,11 +924,11 @@ class DC_Folder extends DataContainer implements listable, editable
   <div id="fancy-status" class="fancy-hide">
   <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
   <div>
-    <strong class="overall-title"></strong><br />
+    <strong class="overall-title">&nbsp;</strong><br />
     <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress overall-progress" />
   </div>
   <div style="margin-top:3px">
-    <strong class="current-title"></strong><br />
+    <strong class="current-title">&nbsp;</strong><br />
     <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress current-progress" />
   </div>
   <div class="current-text"></div>
@@ -1121,12 +1121,11 @@ class DC_Folder extends DataContainer implements listable, editable
 			$return .= '
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+/*<![CDATA[*/
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
+/*]]>*/
 </script>';
 		}
 
@@ -1259,12 +1258,11 @@ window.addEvent(\'domready\', function()
 				$return .= '
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+/*<![CDATA[*/
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
+/*]]>*/
 </script>';
 			}
 

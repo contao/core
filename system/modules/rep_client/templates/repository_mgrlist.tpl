@@ -76,7 +76,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 function enableSelectFunctions() {
   var sel = false;
   var cbs = document.getElementsByName('selectedids[]');
@@ -97,5 +97,5 @@ function selectUnselectAll() {
 }
 
 enableSelectFunctions();
-//--><!]]>
+/*]]>*/
 </script>

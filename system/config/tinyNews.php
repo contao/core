@@ -36,7 +36,7 @@
 if ($GLOBALS['TL_CONFIG']['useRTE']): ?>
 <script type="text/javascript" src="<?php echo $this->base; ?>plugins/tinyMCE/tiny_mce_gzip.js"></script>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 tinyMCE_GZ.init({
   plugins : "advimage,directionality,emotions,inlinepopups,paste,save,searchreplace,spellchecker,style,tabfocus,table,template,typolinks,xhtmlxtras",
   themes : "advanced",
@@ -44,10 +44,10 @@ tinyMCE_GZ.init({
   disk_cache : false,
   debug : false
 });
-//--><!]]>
+/*]]>*/
 </script>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 tinyMCE.init({
   mode : "exact",
   height : "300",
@@ -95,6 +95,6 @@ tinyMCE.init({
   theme_advanced_buttons2 : "formatselect,fontsizeselect,styleselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,indent,outdent,separator,blockquote,separator,forecolor,backcolor",
   theme_advanced_buttons3 : "tablecontrols,separator,template,separator,charmap,emotions,separator,help"
 });
-//--><!]]>
+/*]]>*/
 </script>
 <?php endif; ?>

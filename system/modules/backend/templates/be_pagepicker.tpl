@@ -24,13 +24,13 @@
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <script type="text/javascript">
-<!--//--><![CDATA[//><!--
+/*<![CDATA[*/
 function setPage(p) {
   self.opener.$(self.opener.Backend.currentId).value = p;
   self.close();
 }
 document.onLoad = self.focus();
-//--><!]]>
+/*]]>*/
 </script>
 </head>
 <body>
