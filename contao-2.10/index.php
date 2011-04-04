@@ -264,8 +264,8 @@ class Index extends Frontend
 		 */
 		$strBuffer = preg_replace
 		(
-			'/(<head[^>]*>)/',
-			"$1\n<!--\n\n"
+			'/([ \t]*<head[^>]*>)\n*/',
+			"$1<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
@@ -284,8 +284,16 @@ class Index extends Frontend
 			$session['referer']['current'] = $this->Environment->requestUri;
 		}
 
-		// Store session data
+		// Store the session data
 		$this->Session->setData($session);
+
+		// Load the default language file (see #2644)
+		$this->import('Config');
+		$this->loadLanguageFile('default');
+
+		// Replace insert tags
+		$strBuffer = $this->replaceInsertTags($strBuffer);
+		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
 
 		// Content type
 		if (!$content)
@@ -311,14 +319,6 @@ class Index extends Frontend
 			header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
 			header('Pragma: no-cache');
 		}
-
-		// Load the default language file (see #2644)
-		$this->import('Config');
-		$this->loadLanguageFile('default');
-
-		// Replace insert tags
-		$strBuffer = $this->replaceInsertTags($strBuffer);
-		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
 
 		echo $strBuffer;
 		exit;
