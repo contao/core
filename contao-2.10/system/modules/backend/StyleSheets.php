@@ -191,7 +191,7 @@ class StyleSheets extends Backend
 		else
 		{
 			$strGlue = '';
-			$lb = "\n\t";
+			$lb = "\n    ";
 			$return = "\n<pre>";
 		}
 
@@ -202,7 +202,7 @@ class StyleSheets extends Backend
 			$comment = preg_replace($search, '', $row['comment']);
 			$comment = wordwrap(trim($comment), 72);
 
-			$return .= "\n/* " . $comment . " */";
+			$return .= "\n/* " . $comment . " */\n";
 		}
 
 		// Selector
@@ -698,6 +698,7 @@ class StyleSheets extends Backend
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
+				$strFile = preg_replace('/\/\*\*\n( *\*.*\n){2,} *\*\//', '', $strFile); // see #2974
 				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				for ($i=0; $i<count($arrChunks); $i++)
@@ -748,7 +749,7 @@ class StyleSheets extends Backend
 					}
 				}
 
-				// Write style sheet
+				// Write the style sheet
 				$this->updateStyleSheet($insertId);
 
 				// Notify the user
