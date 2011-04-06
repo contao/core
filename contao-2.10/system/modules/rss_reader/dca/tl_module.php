@@ -101,7 +101,14 @@ class tl_module_rss_reader extends Backend
 	 */
 	public function getRssTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('rss_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('rss_', $intPid);
 	}
 }
 

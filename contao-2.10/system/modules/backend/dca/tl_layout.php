@@ -406,8 +406,15 @@ class tl_layout extends Backend
 	 */
 	public function getStyleSheets(DataContainer $dc)
 	{
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
 		$objStyleSheet = $this->Database->prepare("SELECT id, name FROM tl_style_sheet WHERE pid=?")
-										->execute($dc->activeRecord->pid);
+										->execute($intPid);
 
 		if ($objStyleSheet->numRows < 1)
 		{
