@@ -18,4 +18,5 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Added: optionally minify the page markup before it is sent to the browser (#2982)
 - Fixed: do not add $objRow->protected in tree view by default (#2915)
 - Fixed: convert relative external image URLs in newsletters (#2895)
+- Fixed: not all option callbacks worked correctly in override multiple mode (#2976)
 - Fixed a few minor issues

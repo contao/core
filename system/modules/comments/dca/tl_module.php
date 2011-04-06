@@ -116,7 +116,14 @@ class tl_module_comments extends Backend
 	 */
 	public function getCommentTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('com_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('com_', $intPid);
 	}
 }
 

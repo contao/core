@@ -194,7 +194,14 @@ class tl_module_newsletter extends Backend
 	 */
 	public function getNewsletterTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('nl_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('nl_', $intPid);
 	}
 }
 

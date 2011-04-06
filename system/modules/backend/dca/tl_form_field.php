@@ -536,11 +536,17 @@ class tl_form_field extends Backend
 	 */
 	public function getFields(DataContainer $dc)
 	{
+		$arrFields = $GLOBALS['TL_FFL'];
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
 		$objForm = $this->Database->prepare("SELECT tableless FROM tl_form WHERE id=?")
 								  ->limit(1)
-								  ->execute($dc->activeRecord->pid);
-
-		$arrFields = $GLOBALS['TL_FFL'];
+								  ->execute($intPid);
 
 		// Fieldsets are only supported in tableless forms
 		if (!$objForm->tableless)
