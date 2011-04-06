@@ -971,10 +971,18 @@ class tl_content extends Backend
 	 */
 	public function getGalleryTemplates(DataContainer $dc)
 	{
+		$intPid = $dc->activeRecord->pid;
+
+		// Override multiple
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
 		// Get the page ID
 		$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
 									 ->limit(1)
-									 ->execute($dc->activeRecord->pid);
+									 ->execute($intPid);
 
 		// Inherit the page settings
 		$objPage = $this->getPageDetails($objArticle->pid);
@@ -1010,11 +1018,17 @@ class tl_content extends Backend
 		$arrPids = array();
 		$arrArticle = array();
 		$arrRoot = array();
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
 
 		// Limit pages to the website root
 		$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
 								  ->limit(1)
-								  ->execute($dc->activeRecord->pid);
+								  ->execute($intPid);
 
 		if ($objPage->numRows)
 		{
@@ -1024,7 +1038,11 @@ class tl_content extends Backend
 		}
 
 		// Limit pages to the user's pagemounts
-		if (!$this->User->isAdmin)
+		if ($this->User->isAdmin)
+		{
+			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid" . ((count($arrRoot) > 0) ? " WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .")" : "") . " ORDER BY parent, a.sorting");
+		}
+		else
 		{
 			foreach ($this->User->pagemounts as $id)
 			{
@@ -1044,11 +1062,8 @@ class tl_content extends Backend
 
 			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting");
 		}
-		else
-		{
-			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .") ORDER BY parent, a.sorting");
-		}
 
+		// Edit the result
 		if ($objArticle->numRows)
 		{
 			$this->loadLanguageFile('tl_article');

@@ -239,7 +239,14 @@ class tl_module_news extends Backend
 	 */
 	public function getNewsTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('news_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('news_', $intPid);
 	}
 }
 

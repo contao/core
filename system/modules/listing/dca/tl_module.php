@@ -144,7 +144,14 @@ class tl_module_listing extends Backend
 	 */
 	public function getListTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('list_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('list_', $intPid);
 	}
 
 
@@ -155,7 +162,14 @@ class tl_module_listing extends Backend
 	 */
 	public function getInfoTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('info_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('info_', $intPid);
 	}
 }
 

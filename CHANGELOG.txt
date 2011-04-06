@@ -8,6 +8,7 @@ Version 2.9.5 (2011-XX-XX)
 - Added: IE9 compatibility
 - Fixed: the code editor did not show up in the file manager (#2922)
 - Fixed: the RSS reader did not parse HTML code correctly (#2918)
+- Fixed: not all option callbacks worked correctly in override multiple mode (#2976)
 
 Version 2.9.4 (2011-03-08)
 --------------------------

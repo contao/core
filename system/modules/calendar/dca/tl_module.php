@@ -244,7 +244,14 @@ class tl_module_calendar extends Backend
 	 */
 	public function getEventTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('event_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('event_', $intPid);
 	}
 
 
@@ -255,7 +262,14 @@ class tl_module_calendar extends Backend
 	 */
 	public function getCalendarTemplates(DataContainer $dc)
 	{
-		return $this->getTemplateGroup('cal_', $dc->activeRecord->pid);
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('cal_', $intPid);
 	}
 }
 

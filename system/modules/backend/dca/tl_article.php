@@ -538,52 +538,58 @@ class tl_article extends Backend
 	 */
 	public function getActivePageSections(DataContainer $dc)
 	{
-		// Inherit the page settings
-		$objPage = $this->getPageDetails($dc->activeRecord->pid);
+		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 
-		// Get the layout settings
-		$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=? OR fallback=1 ORDER BY fallback")
-									->limit(1)
-									->execute($objPage->layout);
-
-		// No layout specified
-		if ($objLayout->numRows < 1)
+		// Show only active sections
+		if ($dc->activeRecord->pid)
 		{
-			return array('main');
-		}
+			// Inherit the page settings
+			$objPage = $this->getPageDetails($dc->activeRecord->pid);
 
-		$arrSections = array();
+			// Get the layout settings
+			$objLayout = $this->Database->prepare("SELECT * FROM tl_layout WHERE id=? OR fallback=1 ORDER BY fallback")
+										->limit(1)
+										->execute($objPage->layout);
 
-		// Header
-		if ($objLayout->header)
-		{
-			$arrSections[] = 'header';
-		}
+			// No layout specified
+			if ($objLayout->numRows < 1)
+			{
+				return array('main');
+			}
 
-		// Left column
-		if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-		{
-			$arrSections[] = 'left';
-		}
+			$arrSections = array();
 
-		// Right column
-		if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-		{
-			$arrSections[] = 'right';
-		}
+			// Header
+			if ($objLayout->header)
+			{
+				$arrSections[] = 'header';
+			}
 
-		// Main column
-		$arrSections[] = 'main';
+			// Left column
+			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+			{
+				$arrSections[] = 'left';
+			}
 
-		// Footer
-		if ($objLayout->footer)
-		{
-			$arrSections[] = 'footer';
+			// Right column
+			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+			{
+				$arrSections[] = 'right';
+			}
+
+			// Main column
+			$arrSections[] = 'main';
+
+			// Footer
+			if ($objLayout->footer)
+			{
+				$arrSections[] = 'footer';
+			}
 		}
 
 		$arrCustom = deserialize($objLayout->sections);
 
-		// Custom layout sections
+		// Add the custom layout sections
 		if (is_array($arrCustom) && count($arrCustom) > 0)
 		{
 			$arrSections = array_merge($arrSections, $arrCustom);
