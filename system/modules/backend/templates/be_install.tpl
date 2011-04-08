@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title>Contao Open Source CMS <?php echo VERSION; ?> :: Install Tool</title>
+<title><?php echo $this->pageTitle; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />
 <link rel="stylesheet" type="text/css" href="system/themes/<?php echo $this->theme; ?>/install.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" />

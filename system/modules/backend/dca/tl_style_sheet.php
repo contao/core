@@ -157,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'select',
 			'exclude'                 => true,
 			'filter'                  => true,
-			'options'                 => array('if IE', 'if IE 6', 'if lt IE 6', 'if lte IE 6', 'if gt IE 6', 'if gte IE 6', 'if IE 7', 'if lt IE 7', 'if lte IE 7', 'if gt IE 7', 'if gte IE 7', 'if IE 8', 'if lt IE 8', 'if lte IE 8', 'if gt IE 8', 'if gte IE 8'),
+			'options'                 => array('if IE', 'if IE 6', 'if lt IE 6', 'if lte IE 6', 'if gt IE 6', 'if gte IE 6', 'if IE 7', 'if lt IE 7', 'if lte IE 7', 'if gt IE 7', 'if gte IE 7', 'if IE 8', 'if lt IE 8', 'if lte IE 8', 'if gt IE 8', 'if gte IE 8', 'if IE 9', 'if lt IE 9', 'if lte IE 9', 'if gt IE 9', 'if gte IE 9'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'media' => array
