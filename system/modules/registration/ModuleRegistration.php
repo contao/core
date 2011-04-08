@@ -127,6 +127,7 @@ class ModuleRegistration extends Module
 			(
 				'id' => 'registration',
 				'label' => $GLOBALS['TL_LANG']['MSC']['securityQuestion'],
+				'type' => 'captcha',
 				'mandatory' => true,
 				'required' => true,
 				'tableless' => $this->tableless
