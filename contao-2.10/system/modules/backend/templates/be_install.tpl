@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
 <base href="<?php echo $this->base; ?>"></base>
-<title>Install tool - Contao Open Source CMS <?php echo VERSION; ?></title>
+<title><?php echo $this->pageTitle; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <link type="text/css" rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
