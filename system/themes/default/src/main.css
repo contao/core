@@ -385,6 +385,10 @@ h2.sub_headline_index {
 .list_view .tl_listing img {
 	vertical-align:-4px;
 }
+.list_view .tl_listing img.theme_preview {
+	margin:3px 6px 3px 0;
+	vertical-align:middle;
+}
 .tl_show {
 	width:690px;
 	margin:0 18px;
@@ -764,7 +768,7 @@ p.tl_deadline {
 	top:1px;
 }
 
-/* Options wizard (form) */
+/* Options wizard */
 .tl_optionwizard {
 	margin:0;
 }
@@ -832,7 +836,7 @@ p.tl_deadline {
 	padding-top:2px;
 }
 
-/* Ajax Box */
+/* Ajax box */
 #tl_ajaxBox {
 	width:20%;
 	padding:24px;
@@ -880,7 +884,7 @@ p.tl_deadline {
 	vertical-align:middle;
 }
 
-/* Icons navigation */
+/* Navigation icons */
 a.navigation.article {
 	background-image:url("images/article.gif");
 }
@@ -946,7 +950,7 @@ a.navigation {
 	background-repeat:no-repeat;
 }
 
-/* Icons header */
+/* Header icons */
 .header_home {
 	padding:2px 0 3px 20px;
 	background:url("images/home.gif") no-repeat left center;
@@ -1000,7 +1004,7 @@ a.navigation {
 	background:url("images/folPlus.gif") no-repeat left center;
 }
 
-/* Icons news */
+/* News icons */
 .tl_news_published {
 	padding:2px 0 3px 24px;
 	background:url("images/news.gif") no-repeat left center;

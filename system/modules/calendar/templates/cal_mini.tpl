@@ -2,9 +2,9 @@
 <table cellspacing="0" cellpadding="0" class="minicalendar" summary="Calendar">
 <thead>
   <tr>
-    <th class="head previous"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevTitle; ?>"><?php echo $this->prevLabel; ?></a></th>
+    <th class="head previous"><a href="<?php echo $this->prevHref; ?>" rel="nofollow" title="<?php echo $this->prevTitle; ?>"><?php echo $this->prevLabel; ?></a></th>
     <th colspan="5" class="head current"><?php echo $this->current; ?></th>
-    <th class="head next"><a href="<?php echo $this->nextHref; ?>" title="<?php echo $this->nextTitle; ?>"><?php echo $this->nextLabel; ?></a></th>
+    <th class="head next"><a href="<?php echo $this->nextHref; ?>" rel="nofollow" title="<?php echo $this->nextTitle; ?>"><?php echo $this->nextLabel; ?></a></th>
   </tr>
   <tr>
 <?php foreach ($this->days as $i=>$day): ?>

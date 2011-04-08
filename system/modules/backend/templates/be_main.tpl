@@ -7,9 +7,9 @@
 <link type="text/css" rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mediabox/css/mediabox_white.css', MEDIABOX);
+  $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
-  $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
   if ($this->be27) {
     $objCombiner->add('system/themes/'. $this->theme .'/be27.css');
   }

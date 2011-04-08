@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter,search,limit',
 			'headerFields'            => array('name', 'author', 'tstamp'),
 			'child_record_callback'   => array('tl_style_sheet', 'listStyleSheet'),
 			'child_record_class'      => 'no_padding'
@@ -154,11 +154,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'cc' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['cc'],
-			'inputType'               => 'select',
+			'inputType'               => 'text',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'options'                 => array('if IE', 'if IE 6', 'if lt IE 6', 'if lte IE 6', 'if gt IE 6', 'if gte IE 6', 'if IE 7', 'if lt IE 7', 'if lte IE 7', 'if gt IE 7', 'if gte IE 7', 'if IE 8', 'if lt IE 8', 'if lte IE 8', 'if gt IE 8', 'if gte IE 8'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'search'                  => true,
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_style_sheet', 'sanitizeCc')
+			)
 		),
 		'media' => array
 		(
@@ -283,6 +286,22 @@ class tl_style_sheet extends Backend
 		}
 
 		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. implode(', ', $media) .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Sanitize the conditional comments field
+	 * @param mixed
+	 * @return string
+	 */
+	public function sanitizeCc($varValue)
+	{
+		if ($varValue != '')
+		{
+			$varValue = str_replace(array('<!--[', ']>'), '', $varValue);
+		}
+
+		return $varValue;
 	}
 
 

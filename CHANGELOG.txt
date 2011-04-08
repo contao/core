@@ -6,6 +6,7 @@ Version 2.10.beta1 (XXXX-XX-XX)
 -------------------------------
 - Updated: updated SyntaxHighlighter to version 3.0.83 (#2459)
 - Changed: moved auto-generated style sheets to system/scripts
+- Changed: support more complex conditional comments by making the field a text field
 - Improved: optimized the back end page speed (#2400)
 - Improved: added CSS and JS combining to the back end front end
 - Improved: standardized event and newsletter templates (#2889)
