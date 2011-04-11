@@ -238,6 +238,17 @@ abstract class Template extends Controller
 			echo "\n</pre>";
 		}
 	}
+
+
+	/**
+	 * Print the IE6 warning
+	 */
+	public function showIE6warning()
+	{
+		echo "\n<!--[if lte IE 6]>\n";
+		printf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<div style="background:#ffc;padding:12px;border-bottom:1px solid #e4790f;font-size:14px;color:#000;text-align:center;">', '<a href="http://ie6countdown.com" style="font-size:14px;color:#e4790f;">', '</a>', '</div>');
+		echo "\n<![endif]-->\n";
+	}
 }
 
 ?>

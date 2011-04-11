@@ -4,7 +4,6 @@
 <meta charset="<?php echo $this->charset; ?>" />
 <title>Contao Open Source CMS</title>
 <style media="screen">
-/*<![CDATA[*/
 a {
   text-decoration:none;
 }
@@ -40,7 +39,6 @@ ol {
 li {
   line-height:24px;
 }
-/*]]>*/
 </style>
 </head>
 <body>

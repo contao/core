@@ -12,8 +12,9 @@
 <?php echo $this->mooScripts; ?>
 <?php echo $this->head; ?>
 </head>
-
 <body id="top"<?php if ($this->class): ?> class="<?php echo $this->class; ?>"<?php endif; if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+<?php $this->showIE6warning(); ?>
+
 <div id="wrapper">
 <?php if ($this->header): ?>
 
