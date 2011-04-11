@@ -342,12 +342,10 @@ class DC_File extends DataContainer implements editable
 		{
 			$return .= '
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent(\'domready\', function() {
   Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-/*]]>*/
 </script>';
 		}
 

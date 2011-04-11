@@ -174,7 +174,7 @@ class TableWizard extends Widget
 
 		// Begin table
 		$return .= '<div id="tl_tablewizard">
-  <table cellspacing="0" cellpadding="0" class="tl_tablewizard" id="ctrl_'.$this->strId.'" summary="Table wizard">
+  <table id="ctrl_'.$this->strId.'" class="tl_tablewizard">
   <tbody>
     <tr>';
 
@@ -229,10 +229,8 @@ class TableWizard extends Widget
   </tbody>
   </table>
   </div>
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   Backend.tableWizardResize();
-  /*]]>*/
   </script>';
 
 		return $return;

@@ -5,7 +5,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<table cellpadding="0" cellspacing="0" class="single_record" summary="">
+<table class="single_record">
 <tbody>
 <?php foreach ($this->record as $col): ?>
   <tr class="<?php echo $col['class']; ?>">

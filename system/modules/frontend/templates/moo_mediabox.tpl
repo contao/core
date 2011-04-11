@@ -5,9 +5,8 @@ $GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mediabox/css/mediabox.css?'. ME
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
-<script type="text/javascript">
-/*<![CDATA[*/
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
+<script>
 Mediabox.scanPage = function() {
   var links = $$('a').filter(function(el) {
     return el.rel && el.rel.test(/^lightbox/i);
@@ -19,5 +18,4 @@ Mediabox.scanPage = function() {
   });
 };
 window.addEvent('domready', Mediabox.scanPage);
-/*]]>*/
 </script>

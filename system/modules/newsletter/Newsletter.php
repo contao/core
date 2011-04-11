@@ -216,7 +216,7 @@ class Newsletter extends Backend
 
 				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
 
-				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
+				echo '<script>setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
 				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
@@ -225,7 +225,7 @@ class Newsletter extends Backend
 			{
 				$url = preg_replace('/&(amp;)?(start|mpc|recipient)=[^&]*/', '', $this->Environment->request) . '&start=' . ($intStart + $intPages) . '&mpc=' . $intPages;
 
-				echo '<script type="text/javascript">setTimeout(\'window.location="' . $this->Environment->base . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
+				echo '<script>setTimeout(\'window.location="' . $this->Environment->base . $url . '"\', ' . ($intTimeout * 1000) . ');</script>';
 				echo '<a href="' . $this->Environment->base . $url . '">Please click here to proceed if you are not using JavaScript</a>';
 			}
 
@@ -252,7 +252,7 @@ class Newsletter extends Backend
 <input type="hidden" name="key" value="' . $this->Input->get('key') . '" />
 <input type="hidden" name="id" value="' . $this->Input->get('id') . '" />
 <input type="hidden" name="token" value="' . $strToken . '" />
-<table cellpadding="0" cellspacing="0" class="prev_header" summary="">
+<table class="prev_header">
   <tr class="row_0">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['from'] . '</td>
     <td class="col_1">' . sprintf($sprintf, $objNewsletter->sender) . '</td>

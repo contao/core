@@ -24,10 +24,8 @@
 <?php if ($this->deadline->help): ?>
   <p class="tl_help tl_tip"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  /*]]>*/
   </script>
 </div>
 </fieldset>

@@ -117,7 +117,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <?php else: ?>
 <?php foreach ($rep->extensions as $ext): ?>
 
-<table cellpadding="0" cellspacing="0" class="extension" summary="">
+<table class="extension">
 <tr class="title">
   <th colspan="4"><span class="leftblock">[<a href="<?php echo $ext->viewLink; ?>" title="<?php echo $text['showdetails']; ?>"><?php echo $ext->name; ?></a>] <?php echo $ext->title; ?></span> <span class="rightblock"><?php echo $theme->createListButton('info', $ext->viewLink, $text['showdetails']); ?></span></th>
 </tr>
@@ -158,13 +158,11 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 <?php if ($rep->pageOffset): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 function repositoryGetScrollOffset() {
   var top = this.pageYOffset || document.documentElement.scrollTop;
   document.cookie = "REPOSITORY_PAGE_OFFSET=" + top + "; path=/";
 }
 onload = self.scrollTo(0, <?php echo $rep->pageOffset; ?>);
-/*]]>*/
 </script>
 <?php endif; ?>

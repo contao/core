@@ -523,7 +523,7 @@ class tl_form_field extends Backend
 		}
 		
 		return $strType . '
-<table cellspacing="0" cellpadding="0" class="tl_form_field_preview" summary="Table holds a form input field">
+<table class="tl_form_field_preview">
 '.$strWidget.'</table>
 </div>' . "\n";
 	}

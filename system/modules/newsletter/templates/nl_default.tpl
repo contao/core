@@ -32,10 +32,8 @@
 </form>
 <?php if ($this->hasError): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
-/*]]>*/
 </script>
 <?php endif; ?>
 

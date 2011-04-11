@@ -14,7 +14,7 @@
 <?php endif; ?>
 <?php echo $this->hidden; ?>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="Form fields">
+<table>
 <?php echo $this->fields; ?>
 </table>
 <?php else: echo $this->fields; endif; ?>
@@ -22,10 +22,8 @@
 </form>
 <?php if ($this->hasError): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
-/*]]>*/
 </script>
 <?php endif; ?>
 

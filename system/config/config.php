@@ -63,7 +63,7 @@
  * local configuration file.
  */
 $GLOBALS['TL_CONFIG']['websiteTitle']   = 'Contao Open Source CMS';
-$GLOBALS['TL_CONFIG']['characterSet']   = 'UTF-8';
+$GLOBALS['TL_CONFIG']['characterSet']   = 'utf-8';
 $GLOBALS['TL_CONFIG']['adminEmail']     = '';
 $GLOBALS['TL_CONFIG']['enableSearch']   = true;
 $GLOBALS['TL_CONFIG']['indexProtected'] = false;

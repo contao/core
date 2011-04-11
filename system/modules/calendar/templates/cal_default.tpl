@@ -1,5 +1,5 @@
 
-<table cellspacing="0" cellpadding="0" class="calendar" summary="Calendar">
+<table class="calendar">
 <thead>
   <tr>
     <th colspan="2" class="head previous"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevTitle; ?>"><?php echo $this->prevLink; ?></a></th>

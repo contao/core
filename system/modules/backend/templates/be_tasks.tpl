@@ -33,7 +33,7 @@
 </div>
 
 <div id="tl_taskcenter">
-<table cellpadding="0" cellspacing="0" class="sortable" id="taskcenter" summary="">
+<table id="taskcenter" class="sortable">
 <thead>
   <tr>
     <th class="col_0 col_first"><?php echo $this->thTitle; ?></th>
@@ -65,8 +65,6 @@
 </table>
 </div>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent('domready', function() { new TableSort('taskcenter'); });
-/*]]>*/
 </script>

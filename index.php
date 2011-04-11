@@ -229,7 +229,7 @@ class Index extends Frontend
 			$strCacheKey = $this->Environment->base . $this->Environment->request;
 		}
 
-		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey);
+		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
 
 		// Return if the file does not exist
 		if (!file_exists($strCacheFile))
@@ -255,6 +255,8 @@ class Index extends Frontend
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
+		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
+
 		/**
 		 * Copyright notice
 		 * 
@@ -264,12 +266,12 @@ class Index extends Frontend
 		 */
 		$strBuffer = preg_replace
 		(
-			'/([ \t]*<head[^>]*>)\n*/',
-			"$1<!--\n\n"
+			'/([ \t]*<title[^>]*>)\n*/',
+			"<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->",
+			. "//-->$lb$1",
 			$strBuffer, 1
 		);
 

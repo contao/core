@@ -95,7 +95,7 @@ body {
 #tl_license p,#tl_license a {
 	color:#888b88;
 }
-#tl_license a:hover, #tl_license a:focus, #tl_license a:active {
+#tl_license a:hover,#tl_license a:focus,#tl_license a:active {
 	color:#8ab858;
 }
 

@@ -7,8 +7,9 @@
 <?php endif; ?>
 
 <a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
-<?php echo $this->items; ?> 
-<a name="<?php echo $this->skipId; ?>" id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
+<?php echo $this->items; ?>
+
+<a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
 
 </div>
 <!-- indexer::continue -->

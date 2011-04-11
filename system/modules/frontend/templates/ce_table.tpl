@@ -5,7 +5,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<table cellspacing="0" cellpadding="0"<?php if ($this->sortable): ?> class="sortable"<?php endif; ?> id="<?php echo $this->id; ?>" summary="<?php echo $this->summary; ?>">
+<table id="<?php echo $this->id; ?>"<?php if ($this->sortable): ?> class="sortable"<?php endif; ?><?php if ($this->summary != ''): ?> summary="<?php echo $this->summary; ?>"<?php endif; ?>>
 <?php if ($this->useHeader): ?>
 <thead>
 <tr>
@@ -37,12 +37,10 @@
 <?php if ($this->sortable): ?>
 
 <!-- indexer::stop -->
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent('domready', function() {
   new TableSort('<?php echo $this->id; ?>', '<?php echo $this->thousandsSeparator; ?>', '<?php echo $this->decimalSeparator; ?>');
 });
-/*]]>*/
 </script>
 <!-- indexer::continue -->
 <?php endif; ?>

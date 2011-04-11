@@ -115,7 +115,7 @@ class DatabaseInstaller extends Controller
 		}
 
 		return '
-  <table cellspacing="0" cellpadding="0" id="sql_table" summary="Database modifications">'.$return.'
+  <table id="sql_table">'.$return.'
   </table>' . "\n";
 	}
 

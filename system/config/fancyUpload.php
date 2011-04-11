@@ -35,8 +35,7 @@
  */
 ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent('domready', function() {
   (function() {
     var phrases = {
@@ -67,9 +66,9 @@ window.addEvent('domready', function() {
   var up = new FancyUpload2($('fancy-status'), $('fancy-list'), {
     'data': {
       'isAjax': true,
+      'isPopup': <?php echo $fancy->isPopup; ?>,
       'FORM_SUBMIT': 'tl_upload',
-      'action': 'fancyUpload',
-      'isPopup': <?php echo $fancy->isPopup; ?> 
+      'action': 'fancyUpload'
     },
     'appendCookieData': true,
     'url': $('<?php echo $this->strTable; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
@@ -149,5 +148,4 @@ window.addEvent('domready', function() {
     }
   });
 });
-/*]]>*/
 </script>

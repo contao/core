@@ -81,7 +81,7 @@ $tabindex = 1;
 
 <div>
   <h3><label><?php echo $text['actionsummary']; ?></label></h3>
-  <table cellpadding="0" cellspacing="0" class="installs" summary="">
+  <table class="installs">
   <tr class="title">
     <th class="col_extension"><?php echo $text['extension'][0]; ?></th>
     <th class="col_version"><?php echo $text['version'][0]; ?></th>

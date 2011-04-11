@@ -32,7 +32,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <p><?php echo $text['noextensionsfound']; ?></p>
 <?php else: ?>
 
-<table cellpadding="0" cellspacing="0" class="installs" summary="">
+<table class="installs">
 <tr class="title">
   <th class="col_selectcheckbox"><input type="checkbox" id="selectall" onclick="selectUnselectAll()" /></th>
   <th class="col_extension"><?php echo $text['extension'][0]; ?></th>
@@ -75,8 +75,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </form>
 </div>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 function enableSelectFunctions() {
   var sel = false;
   var cbs = document.getElementsByName('selectedids[]');
@@ -97,5 +96,4 @@ function selectUnselectAll() {
 }
 
 enableSelectFunctions();
-/*]]>*/
 </script>

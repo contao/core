@@ -10,7 +10,7 @@
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="">
+<table>
 <?php echo $this->fields; ?>
   <tr class="<?php echo $this->rowLast; ?> row_last">
     <td class="col_0 col_first">&nbsp;</td>
@@ -29,10 +29,8 @@
 </form>
 <?php if ($this->hasError): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
-/*]]>*/
 </script>
 <?php endif; ?>
 

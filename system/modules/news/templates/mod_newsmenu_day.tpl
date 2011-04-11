@@ -6,7 +6,7 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<table cellspacing="0" cellpadding="0" class="minicalendar" summary="Calendar">
+<table class="minicalendar">
 <thead>
   <tr>
     <th class="head previous"><a href="<?php echo $this->prevHref; ?>" title="<?php echo $this->prevTitle; ?>"><?php echo $this->prevLabel; ?></a></th>

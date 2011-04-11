@@ -48,7 +48,7 @@
 </div>
 <?php endif; ?>
 
-<table cellpadding="0" cellspacing="0" class="all_records" summary="">
+<table class="all_records">
 <thead>
   <tr>
 <?php foreach ($this->thead as $col): ?>

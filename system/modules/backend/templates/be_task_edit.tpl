@@ -21,10 +21,8 @@
 <?php if ($this->deadline->help): ?>
   <p class="tl_help"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  /*]]>*/
   </script>
 <?php else: ?>
   <h3><?php echo $this->title; ?></h3>
@@ -64,7 +62,7 @@
 
 <div class="tl_box tl_history block">
   <h3><?php echo $this->historyLabel; ?></h3>
-  <table cellpadding="0" cellspacing="0" summary="">
+  <table>
 <?php foreach ($this->history as $row): ?>
     <tr class="odd">
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->dateLabel; ?>:</strong> <?php echo $row['date']; ?></td>

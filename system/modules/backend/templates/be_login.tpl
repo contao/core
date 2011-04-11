@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
+<!DOCTYPE html>
+<html>
 <head>
-<base href="<?php echo $this->base; ?>"></base>
+<meta charset="<?php echo $this->charset; ?>" />
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link type="text/css" rel="stylesheet" href="<?php
+<base href="<?php echo $this->base; ?>" />
+<link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/login.css');
@@ -13,9 +13,9 @@
   }
   echo $objCombiner->getCombinedFile();
 ?>" media="all" />
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<script type="text/javascript" src="<?php
+<!--[if lte IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
@@ -35,24 +35,25 @@
 
 <form action="<?php echo $this->action; ?>" class="tl_login_form" method="post">
 <div class="formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_login" /><?php echo $this->messages; ?> 
+<input type="hidden" name="FORM_SUBMIT" value="tl_login" />
+<?php echo $this->messages; ?>
 <?php if ($this->noCookies): ?>
 
 <p class="tl_error"><?php echo $this->noCookies; ?></p>
 <?php endif; ?>
 
-<table cellpadding="0" cellspacing="0" class="tl_login_table" summary="Input fields">
+<table class="tl_login_table">
 <tr>
   <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-  <td align="right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
+  <td style="text-align:right;"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
 </tr>
 <tr>
   <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-  <td align="right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" /></td>
+  <td style="text-align:right;"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" /></td>
 </tr>
 <tr>
   <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
-  <td align="right">
+  <td style="text-align:right;">
     <select name="language" id="language" class="tl_select">
 <?php foreach ($this->languages as $key=>$lang): ?>
       <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
@@ -96,15 +97,13 @@
 
 </div>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent('domready', function() {
   if (parent.frames[0] && parent.frames[0].name == 'switch') {
     parent.location.reload();
   }
   $('username').focus();
 });
-/*]]>*/
 </script>
 
 </body>

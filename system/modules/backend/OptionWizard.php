@@ -165,7 +165,7 @@ class OptionWizard extends Widget
 		}
 
 		// Begin table
-		$return .= '<table cellspacing="0" cellpadding="0" class="tl_optionwizard" id="ctrl_'.$this->strId.'" summary="Field wizard">
+		$return .= '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
   <thead>
     <tr>
       <th>'.$GLOBALS['TL_LANG']['MSC']['ow_value'].'</th>

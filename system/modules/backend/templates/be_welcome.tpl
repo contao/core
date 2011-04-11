@@ -22,7 +22,7 @@
 <?php endif; ?>
 </div>
 
-<table cellspacing="0" cellpadding="0" id="tl_shortcuts" summary="Shortcut overview">
+<table id="tl_shortcuts">
 <?php foreach ($this->arrShortcuts as $arrShortcut): ?>
 <?php if ($arrShortcut[0] == 'colspan'): ?>
   <tr>

@@ -580,7 +580,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['showRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
 
-<table cellpadding="0" cellspacing="0" class="tl_show" summary="Table lists all details of an entry">'.$return.'
+<table class="tl_show">'.$return.'
 </table>';
 	}
 
@@ -1868,12 +1868,10 @@ class DC_Table extends DataContainer implements listable, editable
 		{
 			$return .= '
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent(\'domready\', function() {
   Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-/*]]>*/
 </script>';
 		}
 
@@ -2089,12 +2087,10 @@ window.addEvent(\'domready\', function() {
 			{
 				$return .= '
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent(\'domready\', function() {
   Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-/*]]>*/
 </script>';
 			}
 
@@ -2337,12 +2333,10 @@ window.addEvent(\'domready\', function() {
 			{
 				$return .= '
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.addEvent(\'domready\', function() {
   Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-/*]]>*/
 </script>';
 			}
 
@@ -3330,7 +3324,7 @@ window.addEvent(\'domready\', function() {
 			// Output header data
 			$return .= '
 
-<table cellpadding="0" cellspacing="0" class="tl_header_table" summary="Table lists all details of the header record">';
+<table class="tl_header_table">';
 
 			foreach ($add as $k=>$v)
 			{
@@ -3516,10 +3510,8 @@ window.addEvent(\'domready\', function() {
 			$return .= '
 </ul>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
-/*]]>*/
 </script>';
 		}
 
@@ -3673,7 +3665,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox" />
 </div>' : '').'
 
-<table cellpadding="0" cellspacing="0" class="tl_listing" summary="Table lists records">';
+<table class="tl_listing">';
 
 			// Rename each pid to its label and resort the result (sort by parent table)
 			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))

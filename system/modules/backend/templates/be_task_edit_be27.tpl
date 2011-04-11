@@ -25,10 +25,8 @@
 <?php if ($this->deadline->help): ?>
   <p class="tl_help tl_tip"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  /*]]>*/
   </script>
 </div>
 <?php else: ?>
@@ -84,7 +82,7 @@
 <fieldset id="pal_history_legend" class="tl_box tl_history block<?php echo $this->historyClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'history_legend', 'tl_tasks')"><?php echo $this->historyLabel; ?></legend>
 <div>
-  <table cellpadding="0" cellspacing="0" summary="">
+  <table>
 <?php foreach ($this->history as $row): ?>
     <tr class="odd">
       <td class="<?php echo $row['class']; ?>"><strong><?php echo $this->dateLabel; ?>:</strong> <?php echo $row['date']; ?></td>

@@ -1,5 +1,5 @@
 
-<table cellspacing="0" cellpadding="0" summary="Image gallery">
+<table>
 <tbody>
 <?php foreach ($this->body as $class=>$row): ?>
 <tr class="<?php echo $class; ?>">
