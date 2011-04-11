@@ -306,10 +306,8 @@ class DataContainer extends Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$datepicker = '
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   window.addEvent(\'domready\', function() { ' . sprintf($arrData['eval']['datepicker'], 'ctrl_' . $objWidget->id) . ' });
-  /*]]>*/
   </script>';
 		}
 

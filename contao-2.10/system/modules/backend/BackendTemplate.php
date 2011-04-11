@@ -108,7 +108,7 @@ class BackendTemplate extends Template
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
@@ -121,7 +121,7 @@ class BackendTemplate extends Template
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
+				$strJavaScripts .= '<script src="' . $javascript . '"></script>' . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;

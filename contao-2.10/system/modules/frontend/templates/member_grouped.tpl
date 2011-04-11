@@ -13,7 +13,7 @@
 <fieldset>
 <legend><?php echo $this->personalData; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->personalData; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->personal as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -25,7 +25,7 @@
 <fieldset>
 <legend><?php echo $this->addressDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->addressDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->address as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -37,7 +37,7 @@
 <fieldset>
 <legend><?php echo $this->contactDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->contactDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->contact as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -49,7 +49,7 @@
 <fieldset>
 <legend><?php echo $this->loginDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->loginDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->login as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -61,7 +61,7 @@
 <fieldset>
 <legend><?php echo $this->profileDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->profileDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->profile as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -73,7 +73,7 @@
 <fieldset>
 <legend><?php echo $this->newsletterDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->newsletterDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->newsletter as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -85,7 +85,7 @@
 <fieldset>
 <legend><?php echo $this->helpdeskDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" summary="<?php echo $this->helpdeskDetails; ?>">
+<table>
 <?php endif; ?>
 <?php foreach ($this->helpdesk as $field) echo $field; ?>
 <?php if (!$this->tableless): ?>
@@ -97,7 +97,7 @@
 <fieldset>
 <legend><?php echo $this->captchaDetails; ?></legend>
 <?php if (!$this->tableless): ?>
-<table cellspacing="0" cellpadding="0" class="captcha_container" summary="Captcha">
+<table>
 <?php endif; ?>
 <?php echo $this->captcha; ?>
 <?php if (!$this->tableless): ?>
@@ -112,10 +112,8 @@
 </form>
 <?php if ($this->hasError): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.scrollTo(null, ($('<?php echo $this->formId; ?>').getElement('p.error').getPosition().y - 20));
-/*]]>*/
 </script>
 <?php endif; ?>
 

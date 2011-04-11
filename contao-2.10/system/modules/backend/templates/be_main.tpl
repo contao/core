@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
+<!DOCTYPE html>
+<html>
 <head>
-<base href="<?php echo $this->base; ?>"></base>
+<meta charset="<?php echo $this->charset; ?>" />
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link type="text/css" rel="stylesheet" href="<?php
+<base href="<?php echo $this->base; ?>" />
+<link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mediabox/css/mediabox_white.css', MEDIABOX);
   $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
@@ -18,18 +18,16 @@
   }
   echo $objCombiner->getCombinedFile();
 ?>" media="all" />
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <?php echo $this->stylesheets; ?>
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-/*]]>*/
 </script>
-<script type="text/javascript" src="<?php
+<script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
@@ -64,7 +62,8 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 
 <h1><?php echo $this->backendModules; ?></h1>
 
-<a href="<?php echo $this->request; ?>#skipNavigation" class="invisible" title="<?php echo specialchars($this->skipNavigation); ?>"></a>
+<a href="<?php echo $this->request; ?>#skipNavigation" class="invisible"><?php echo $this->skipNavigation; ?></a>
+
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
 <li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt="" /><?php echo $arrModules['label']; ?></a></li>
@@ -76,9 +75,11 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <?php endforeach; ?>
 </ul>
 </li>
-<?php endif; endforeach; ?>
+<?php endif; ?>
+<?php endforeach; ?>
 </ul>
-<a id="skipNavigation" class="invisible" title="Skip navigation"></a>
+
+<a id="skipNavigation" class="invisible">&nbsp;</a>
 
 </div>
 
@@ -109,15 +110,12 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 </div>
 <?php if ($this->pageOffset): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
-/*]]>*/
 </script>
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 Mediabox.scanPage = function() {
   var links = $$('a').filter(function(el) {
     return el.rel && el.rel.test(/^lightbox/i);
@@ -140,7 +138,6 @@ Mediabox.enableFiletreeReload = function() {
 };
 window.addEvent('domready', Mediabox.scanPage);
 window.addEvent('ajax_change', Mediabox.scanPage);
-/*]]>*/
 </script>
 <?php echo $this->mootools; ?>
 

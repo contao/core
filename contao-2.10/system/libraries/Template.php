@@ -201,7 +201,14 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		$this->strBuffer = $this->minify($this->strBuffer);
+		// Minify the markup
+		if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
+		{
+			$this->import('Compressor');
+			$this->strBuffer = $this->Compressor->minifyHtml($this->strBuffer);
+		}
+
+		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 		/**
 		 * Copyright notice
@@ -212,12 +219,12 @@ abstract class Template extends Controller
 		 */
 		$this->strBuffer = preg_replace
 		(
-			'/([ \t]*<head[^>]*>)\n*/',
-			"$1<!--\n\n"
+			'/([ \t]*<title[^>]*>)\n*/',
+			"<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->",
+			. "//-->$lb$1",
 			$this->strBuffer, 1
 		);
 
@@ -230,98 +237,6 @@ abstract class Template extends Controller
 			print_r($GLOBALS['TL_DEBUG']);
 			echo "\n</pre>";
 		}
-	}
-
-
-	/**
-	 * Minify the HTML markup
-	 * @param string
-	 * @return string
-	 */
-	protected function minify($strMarkup)
-	{
-		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'])
-		{
-			return $strMarkup;
-		}
-
-		if (!class_exists('tidy', false))
-		{
-			trigger_error('The PHP tidy extension is required to minify the HTML markup', E_USER_ERROR);
-			return $strMarkup;
-		}
-
-		// Tidy uses different character set names
-		switch ($GLOBALS['TL_CONFIG']['characterSet'])
-		{
-			case 'UTF-8':
-				$cs = 'utf8';
-				break;
-
-			case 'ISO-8859-1':
-				$cs = 'latin1';
-				break;
-
-			default:
-				$cs = 'raw';
-				break;
-		}
-
-		// Tidy configuration
-		$config = array
-		(
-			'clean' => 1,
-			'bare' => 1,
-			'hide-comments' => 0,
-			'indent-spaces' => 0,
-			'indent' => 0,
-			'tab-size' => 1,
-			'wrap' => 0,
-			'merge-divs' => 0,
-			'break-before-br' => 0,
-			'preserve-entities' => 1,
-			'output-xhtml' => 1,
-			'input-encoding' => $cs,
-			'output-encoding' => $cs,
-			'char-encoding' => $cs
-		);
-
-		// Run tidy
-		$tidy = new tidy;
-		$tidy->parseString($strMarkup, $config);
-		$tidy->cleanRepair();
-		$strMarkup = $tidy;
-
-		// Replace line breaks between tags and after br-tags
-		$strMarkup = str_replace(array(">\n<", "<br />\n"), array('><', '<br />'), $strMarkup);
-
-		// Split the content to isolate inline scripts
-		$arrChunks = preg_split('@(/\*<!\[CDATA\[\*/)|(/\*\]\]>\*/)@', $strMarkup, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
-		$strMarkup = '';
-
-		// Handle IE conditional comments
-		$arrChunks[0] = preg_replace('/endif\]-->\n+/', 'endif]-->', $arrChunks[0]);
-		$strMinimizeNext = false;
-
-		// Recombine the markup
-		foreach ($arrChunks as $strChunk)
-		{
-			if ($strChunk == '/*<![CDATA[*/')
-			{
-				$strMinimizeNext = true;
-			}
-			elseif ($strMinimizeNext)
-			{
-				// Try to remove not required whitespace 
-				$strChunk = "\n" . preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', trim($strChunk)) . "\n";
-				$strMinimizeNext = false;
-			}
-
-			$strMarkup .= $strChunk;
-		}
-
-		unset($arrChunks, $strChunk);
-		return $strMarkup;
 	}
 }
 

@@ -213,8 +213,7 @@ class tl_module_calendar extends Backend
 	public function hideStartDay()
 	{
 		return '
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   var enableStartDay = function() {
     var e1 = $("ctrl_cal_startDay").getParent("div");
     var e2 = $("ctrl_cal_order").getParent("div");
@@ -232,7 +231,6 @@ class tl_module_calendar extends Backend
       $("ctrl_cal_format").addEvent("change", enableStartDay);
     }
   });
-  /*]]>*/
   </script>';
 	}
 

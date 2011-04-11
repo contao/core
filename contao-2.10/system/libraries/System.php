@@ -483,7 +483,7 @@ abstract class System
 
 		if (strlen($strMessages))
 		{
-			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>', "\n\n", "\n", $strMessages, "\n");
+			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', "\n", "\n", $strMessages, "\n", "\n");
 		}
 
 		return $strMessages;

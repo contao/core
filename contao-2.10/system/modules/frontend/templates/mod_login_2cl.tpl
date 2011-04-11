@@ -12,7 +12,7 @@
 <p class="error"><?php echo $this->message; ?></p>
 <?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="tl_login" />
-<table cellspacing="0" cellpadding="0" summary="">
+<table>
   <tr class="row_0 row_first">
     <td class="col_0 col_first"><label for="username"><?php echo $this->username; ?></label></td>
     <td class="col_1 col_last"><input type="text" name="username" id="username" class="text" maxlength="64" value="<?php echo $this->value; ?>" /></td>
@@ -36,10 +36,8 @@
 </form>
 <?php if ($this->hasError): ?>
 
-<script type="text/javascript">
-/*<![CDATA[*/
+<script>
 window.scrollTo(null, ($('tl_login').getElement('p.error').getPosition().y - 20));
-/*]]>*/
 </script>
 <?php endif; ?>
 

@@ -53,7 +53,6 @@ $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('News feeds', 'Please 
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Please select the calendar feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
-$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Document Type Definition', 'Please choose a Document Type Definition.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'You can either use the local MooTools script or load it from a content delivery network.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');

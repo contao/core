@@ -81,7 +81,7 @@ class ChmodTable extends Widget
 	{
 		$arrObjects = array('u'=>'cuser', 'g'=>'cgroup', 'w'=>'cworld');
 
-		$return = '  <table cellpadding="2" cellspacing="2" id="ctrl_defaultChmod" class="tl_chmod" summary="Table holds input fields">
+		$return = '  <table id="ctrl_defaultChmod" class="tl_chmod">
     <tr>
       <th></th>
       <th scope="col">'.$GLOBALS['TL_LANG']['CHMOD']['editpage'].'</th>

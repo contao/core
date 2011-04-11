@@ -28,7 +28,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <div class="extension_container">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
 
-<table cellpadding="0" cellspacing="0" class="extension" summary="">
+<table class="extension">
 <tr class="title">
   <th colspan="4"><span class="title">[<?php echo $ext->name; ?>] <?php echo $ext->title; ?></span> <span class="actions"><?php if (property_exists($ext, 'packageLink')): ?> <a href="<?php echo $ext->packageLink; ?>" title="<?php echo $text['downloadpackage']; ?>"> <?php echo $rep->theme->createImage('download16',$text['downloadpackage'],'title="'.$text['downloadpackage'].'"'); ?></a><?php endif; ?></span></th>
 </tr>
@@ -155,7 +155,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 </tr>
 <tr>
   <td colspan="2" class="nopadding">
-    <table cellpadding="0" cellspacing="0" class="nested" summary="">
+    <table class="nested">
       <tr>
         <th><?php echo $text['name'][0]; ?></th>
         <th><?php echo $text['versionfrom']; ?></th>
@@ -178,7 +178,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
     </table>
   </td>
   <td colspan="2" class="nopadding">
-    <table cellpadding="0" cellspacing="0" class="nested" summary="">
+    <table class="nested">
       <tr>
         <th><?php echo $text['name'][0]; ?></th>
         <th><?php echo $text['versionfrom']; ?></th>

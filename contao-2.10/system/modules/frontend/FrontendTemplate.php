@@ -132,8 +132,20 @@ class FrontendTemplate extends Template
 			$intCache = intval($objPage->cache) + time();
 
 			// Create the cache file
-			$objFile = new File('system/tmp/' . md5($strUniqueKey));
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $this->minify($strBuffer));
+			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
+
+			// Store the minified version
+			if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
+			{
+				$this->import('Compressor');
+				$objFile->append($this->Compressor->minifyHtml($strBuffer));
+			}
+			else
+			{
+				$objFile->append($strBuffer);
+			}
+
 			$objFile->close();
 		}
 

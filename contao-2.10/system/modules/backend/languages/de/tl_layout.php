@@ -53,7 +53,6 @@ $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('Newsfeeds', 'Bitte w�
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bitte wählen Sie die Kalender-Feeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Seitentemplate', 'Hier können Sie das Seitentemplate auswählen.');
-$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Dokumenttyp-Definition', 'Bitte wählen Sie eine Dokumenttyp-Definition.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Sie können entweder das lokale MooTools-Skript verwenden oder es von einem Content Delivery Network laden.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');

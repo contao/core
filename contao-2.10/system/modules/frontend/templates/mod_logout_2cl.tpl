@@ -9,7 +9,7 @@
 <form action="<?php echo $this->action; ?>" id="tl_logout" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_logout" />
-<table cellspacing="0" cellpadding="0" summary="">
+<table>
   <tr class="row_0 row_first">
     <td class="login_info"><?php echo $this->loggedInAs; ?><br /><?php echo $this->lastLogin; ?></td>
   </tr>

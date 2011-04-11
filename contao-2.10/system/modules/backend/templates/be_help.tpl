@@ -1,17 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
+<!DOCTYPE html>
+<html>
 <head>
-<base href="<?php echo $this->base; ?>"></base>
+<meta charset="<?php echo $this->charset; ?>" />
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
-<link type="text/css" rel="stylesheet" href="<?php
+<base href="<?php echo $this->base; ?>" />
+<link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/help.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all" />
-<!--[if lte IE 7]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gte IE 8]><link type="text/css" rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if lte IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gte IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 </head>
 <body>
 
@@ -24,7 +24,7 @@
 
 <?php echo $this->explanation; ?>
 <?php if (count($this->rows)): ?>
-<table cellspacing="0" cellpadding="0" class="tl_help_table" summary="Table explains the current field">
+<table class="tl_help_table">
 <?php foreach ($this->rows as $row): ?>
   <tr>
 <?php if ($row[0] == 'colspan'): ?>

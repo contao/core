@@ -903,7 +903,7 @@ class InstallTool extends Controller
 		}
 
 		return '
-  <table cellspacing="0" cellpadding="0" id="sql_table" style="margin-top:9px;" summary="Database modifications">'.$return.'
+  <table id="sql_table" style="margin-top:9px;">'.$return.'
   </table>' . "\n";
 	}
 
@@ -1201,7 +1201,7 @@ class InstallTool extends Controller
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
-		$this->Template->pageTitle = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
+		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
 
 		$this->Template->output();
 		exit;

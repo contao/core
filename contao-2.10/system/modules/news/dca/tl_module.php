@@ -208,8 +208,7 @@ class tl_module_news extends Backend
 	public function hideStartDay()
 	{
 		return '
-  <script type="text/javascript">
-  /*<![CDATA[*/
+  <script>
   var enableStartDay = function() {
     var e1 = $("ctrl_news_startDay").getParent("div");
     var e2 = $("ctrl_news_order").getParent("div");
@@ -227,7 +226,6 @@ class tl_module_news extends Backend
       $("ctrl_news_format").addEvent("change", enableStartDay);
     }
   });
-  /*]]>*/
   </script>';
 	}
 

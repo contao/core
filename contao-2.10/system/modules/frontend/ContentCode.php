@@ -125,11 +125,9 @@ class ContentCode extends ContentElement
 			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
 
 			// Initialization
-			$strInit  = '<script type="text/javascript">' . "\n";
-			$strInit .= '/*<![CDATA[*/' . "\n";
+			$strInit  = '<script>' . "\n";
 			$strInit .= 'SyntaxHighlighter.defaults.toolbar = false;' . "\n";
 			$strInit .= 'SyntaxHighlighter.all();' . "\n";
-			$strInit .= '/*]]>*/' . "\n";
 			$strInit .= '</script>';
 
 			// Add the initialization script to the head section and not (!) to TL_JAVASCRIPT

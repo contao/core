@@ -37,10 +37,10 @@ img {
 
 /* Font family */
 a,b,body,cite,div,em,h1,h2,h3,h4,h5,h6,i,label,li,ol,p,strong,td,th,u,ul {
-	font-family:Verdana, sans-serif;
+	font-family:Verdana,sans-serif;
 }
 fieldset,form,input,optgroup,select,textarea {
-	font-family:"Trebuchet MS", Verdana, sans-serif;
+	font-family:"Trebuchet MS",Verdana,sans-serif;
 }
 
 /* Font size and color */
@@ -51,6 +51,12 @@ a,body,div,label,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
 	color:#666966;
+}
+table {
+	border-spacing:0;
+}
+th,td {
+	padding:0;
 }
 .tl_small {
 	font-size:9px;
@@ -80,7 +86,7 @@ a {
 	color:#666966;
 	text-decoration:none;
 }
-a:hover, a:focus, a:active {
+a:hover,a:focus,a:active {
 	color:#8ab858;
 }
 hr {
@@ -100,7 +106,7 @@ pre {
 }
 
 /* Sortable lists */
-ul.sortable, ul.sortable li {
+ul.sortable,ul.sortable li {
 	margin:0;
 	padding:0;
 	list-style-type:none;
@@ -185,7 +191,7 @@ optgroup {
 	background:#ebfdd7;
 }
 pre,.tl_textarea.monospace {
-	font-family:"Andale Mono", monospace;
+	font-family:"Andale Mono",monospace;
 	font-size:12px;
 }
 .tl_textarea.monospace:focus {
