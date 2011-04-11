@@ -268,10 +268,6 @@ class PageRegular extends Frontend
 			$this->Template->framework .= '</style>' . "\n";
 		}
 
-		// Include the basic style sheets
-		$this->Template->framework .= '<link rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/contao.css" media="screen" />' . "\n";
-		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/iefixes.css" media="screen" /><![endif]-->' . "\n";
-
 		// MooTools scripts
 		if ($objLayout->mooSource == 'moo_googleapis')
 		{
@@ -319,6 +315,9 @@ class PageRegular extends Frontend
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 
+		// Make IE 6-8 understand HTML5
+		$strStyleSheets .= '<!--[if lt IE 9]><script src="' . TL_PLUGINS_URL . 'plugins/html5shim/html5.js?' . HTML5SHIM . '"></script><![endif]-->' . "\n";
+
 		// Internal style sheets
 		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
 		{
@@ -330,6 +329,7 @@ class PageRegular extends Frontend
 		}
 
 		$objCombiner = new Combiner();
+		$objCombiner->add('system/contao.css');
 
 		// Default TinyMCE style sheet
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
@@ -414,6 +414,9 @@ class PageRegular extends Frontend
 				$strHeadTags .= '<script src="' . $javascript . '"></script>' . "\n";
 			}
 		}
+
+		// Make IE 6-8 understand CSS3
+		$strHeadTags .= '<!--[if lt IE 9]><script src="' . TL_PLUGINS_URL . 'plugins/selectivizr/selectivizr.js?' . SELECTIVIZR . '"></script><![endif]-->' . "\n";
 
 		// Add internal <head> tags
 		if (is_array($GLOBALS['TL_HEAD']) && count($GLOBALS['TL_HEAD']))

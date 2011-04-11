@@ -243,8 +243,8 @@ class Newsletter extends Backend
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>'.$this->getMessages().'
-
+<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_newsletter']['send'][1], $objNewsletter->id).'</h2>
+'.$this->getMessages().'
 <form action="'.ampersand($this->Environment->script, true).'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
 <input type="hidden" name="do" value="' . $this->Input->get('do') . '" />
@@ -510,8 +510,8 @@ class Newsletter extends Backend
 <a href="'.ampersand(str_replace('&key=import', '', $this->Environment->request)).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>'.$this->getMessages().'
-
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][1].'</h2>
+'.$this->getMessages().'
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_recipients_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import" />

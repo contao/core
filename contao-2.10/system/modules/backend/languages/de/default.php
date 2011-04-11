@@ -71,6 +71,7 @@ $GLOBALS['TL_LANG']['ERR']['invalidName']       = 'Dieser Datei- bzw. Verzeichni
 $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'Die Datei bzw. das Verzeichnis "%s" ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'Die Datei "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Ungültiges Weiterleitungsziel (Zirkelbezug)!';
+$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Achtung!</strong> Sie verwenden einen %sveralteten Browser%s und <strong>können nicht alle Funktionen dieser Webseite nutzen</strong>.%s';
 
 
 /**

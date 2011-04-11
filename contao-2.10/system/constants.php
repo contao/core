@@ -68,6 +68,8 @@ define('MOOTOOLS_CORE', '1.2.5');
 define('MOOTOOLS_MORE', '1.2.5.1');
 define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
+define('HTML5SHIM', '1.6.2');
+define('SELECTIVIZR', '1.0.1');
 
 
 /**

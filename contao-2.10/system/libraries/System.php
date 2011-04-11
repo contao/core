@@ -454,7 +454,7 @@ abstract class System
 	 * Return all error, confirmation and info messages as HTML
 	 * @return string
 	 */
-	protected function getMessages()
+	protected function getMessages($blnDcLayout=false)
 	{
 		$strMessages = '';
 		$arrGroups = array('TL_ERROR', 'TL_CONFIRM', 'TL_INFO');
@@ -481,9 +481,9 @@ abstract class System
 
 		$strMessages = trim($strMessages);
 
-		if (strlen($strMessages))
+		if ($strMessages != '')
 		{
-			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', "\n", "\n", $strMessages, "\n", "\n");
+			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
 		}
 
 		return $strMessages;

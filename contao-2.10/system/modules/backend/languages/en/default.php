@@ -71,6 +71,7 @@ $GLOBALS['TL_LANG']['ERR']['invalidName']       = 'This file or folder name is i
 $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'The file or folder "%s" is invalid!';
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'The file "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Invalid redirect target (circular reference)!';
+$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Attention!</strong> Your web browser is %sout of date%s and <strong>you cannot use all features of this website</strong>.%s';
 
 
 /**

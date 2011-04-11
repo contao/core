@@ -4,6 +4,7 @@
 <meta charset="<?php echo $this->charset; ?>" />
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>" />
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -13,16 +14,18 @@
   }
   echo $objCombiner->getCombinedFile();
 ?>" media="all" />
-<!--[if lte IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gte IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
 <script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
   echo $objCombiner->getCombinedFile();
 ?>"></script>
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 </head>
 <body>
+<?php $this->showIE6warning(); ?>
 
 <div id="header">
 <h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
