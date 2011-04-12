@@ -33,7 +33,8 @@
     <td class="col_1"><?php echo $arrShortcut[0]; ?></td>
     <td class="col_2"><?php echo $arrShortcut[1]; ?></td>
   </tr>
-<?php endif; endforeach; ?>
+<?php endif; ?>
+<?php endforeach; ?>
 </table>
 
 <div id="tl_moverview">
@@ -44,9 +45,10 @@
 
 <div class="tl_module_desc">
 <h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php if ($arrModule['icon']): ?> style="background-image:url('<?php echo TL_SCRIPT_URL . $arrModule['icon']; ?>')"<?php endif; ?>><?php echo $arrModule['name']; ?></a></h3>
-<p><?php echo $arrModule['description']; ?></p> 
+<p><?php echo $arrModule['description']; ?></p>
 </div>
-<?php endforeach; endforeach; ?>
+<?php endforeach; ?>
+<?php endforeach; ?>
 </div>
 
 </div>

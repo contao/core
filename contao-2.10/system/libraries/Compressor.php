@@ -79,10 +79,14 @@ class Compressor extends System
 			{
 				$arrReplace = array
 				(
-					'/>( ?[\n\r]+)+</' => '><', // Remove all line-breaks between tags
-					'/[\n\r\t\s]+/'    => ' '   // Then convert the remaining whitespace characters
+					'/\n ?\n+/'      => "\n",   // Convert multiple line-breaks
+					'/^[\t ]+</m'    => '<',    // Remove tag indentation
+					'/>( )?\n</'     => '>$1<', // Remove line-breaks between tags
+					'/\n/'           => '',     // Remove all remaining line-breaks
+					'/ <\/(div|p)>/' => '</$1>' // Remove spaces before closing DIV and P tags
 				);
 
+				$strChunk = str_replace("\r", '', $strChunk);
 				$strChunk = preg_replace(array_keys($arrReplace), array_values($arrReplace), $strChunk);
 				$strChunk = trim($strChunk);
 			}
