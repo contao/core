@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="<?php echo $this->charset; ?>" />
 <title>Contao Open Source CMS</title>

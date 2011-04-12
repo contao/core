@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $this->language; ?>">
 <head>
 <meta charset="<?php echo $this->charset; ?>" />
 <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>

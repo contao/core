@@ -81,6 +81,8 @@ class PagePicker extends Backend
 		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->options = $this->createPageList();
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 
 		$this->Template->output();
 	}

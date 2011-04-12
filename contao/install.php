@@ -1202,6 +1202,8 @@ class InstallTool extends Controller
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
 		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 
 		$this->Template->output();
 		exit;

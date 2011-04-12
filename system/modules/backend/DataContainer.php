@@ -349,8 +349,8 @@ class DataContainer extends Backend
 			$updateMode = '
 </div>
 <div>
-  <h3 style="padding-top:7px"><label for="ctrl_'.$this->strInputName.'_update">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
-  <div id="ctrl_'.$this->strInputName.'_update" class="tl_radio_container">
+  <h3 style="padding-top:7px"><label>' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
+  <div class="tl_radio_container">
     <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
     <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
     <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
