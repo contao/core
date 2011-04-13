@@ -82,24 +82,13 @@ input,select,label {
 	vertical-align:baseline;
 }
 
-/* IE6 fixes */
-* html #container {
-	padding:2px 6px 6px 12px;
-}
-* html #left {
-	padding:7px 0 5px 0;
-}
-* html input,* html select,* html label {
-	vertical-align:middle;
-}
-
 /* IE7 fixes */
-*:first-child+html #container {
+*+html #container {
 	padding:2px 6px 6px 12px;
 }
-*:first-child+html #left {
+*+html #left {
 	padding:7px 0 5px 0;
 }
-*:first-child+html input,*:first-child+html select,*:first-child+html label {
+*+html input,*+html select,*+html label {
 	vertical-align:middle;
 }

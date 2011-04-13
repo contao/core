@@ -30,14 +30,14 @@
 
 
 /**
- * Class Compressor
+ * Class Minifier
  *
- * This class provides methods to compress HTML files.
+ * This class provides methods to minify files.
  * @copyright  Leo Feyer 2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Compressor extends System
+class Minifier extends System
 {
 
 	/**
@@ -72,7 +72,7 @@ class Compressor extends System
 			elseif ($blnOptimizeNext)
 			{
 				$blnOptimizeNext = false;
-				$strChunk = $this->minifyInlineScript($strChunk);
+				$strChunk = $this->minifyInlineCode($strChunk);
 				$strChunk = trim($strChunk);
 			}
 			else
@@ -103,7 +103,7 @@ class Compressor extends System
 	 * @param string
 	 * @return string
 	 */
-	public function minifyInlineScript($strCode)
+	public function minifyInlineCode($strCode)
 	{
 		return preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', $strCode);
 	}

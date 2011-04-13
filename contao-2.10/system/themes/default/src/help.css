@@ -76,10 +76,7 @@ h2 {
 	font-weight:bold;
 }
 
-/* IE fixes */
-* html #container {
-	padding-bottom:18px;
-}
-*:first-child+html #container {
+/* IE 7 fix */
+*+html #container {
 	padding-bottom:18px;
 }

@@ -27,7 +27,7 @@
  */
 
 /* Body */
-html,body {
+html,body,form,pre {
 	margin:0;
 	padding:0;
 }
@@ -36,7 +36,7 @@ img {
 }
 
 /* Font family */
-a,b,body,cite,div,em,h1,h2,h3,h4,h5,h6,i,label,li,ol,p,strong,td,th,u,ul {
+a,b,body,cite,div,em,h1,h2,h3,h4,h5,h6,i,label,legend,li,ol,p,strong,td,th,u,ul {
 	font-family:Verdana,sans-serif;
 }
 fieldset,form,input,optgroup,select,textarea {
@@ -44,7 +44,7 @@ fieldset,form,input,optgroup,select,textarea {
 }
 
 /* Font size and color */
-a,body,div,label,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
+a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
 	font-size:11px;
 	color:#666966;
 }
@@ -100,10 +100,6 @@ p {
 	margin:0 0 12px 0;
 	padding:0;
 }
-pre {
-	margin:0;
-	padding:0;
-}
 
 /* Sortable lists */
 ul.sortable,ul.sortable li {
@@ -139,15 +135,21 @@ ul.sortable li {
 }
 
 /* Forms */
-form {
-	margin:0;
-	padding:0;
-}
 optgroup {
 	padding-top:3px;
 	padding-bottom:3px;
 	font-style:normal;
 	background:#fff;
+}
+fieldset.tl_radio_container {
+	border:0;
+	margin:9px 0 0 0;
+	padding:0;
+}
+fieldset.tl_radio_container legend {
+	font-weight:bold;
+	margin:0;
+	padding:0 0 1px 0;
 }
 
 /* Text fields */

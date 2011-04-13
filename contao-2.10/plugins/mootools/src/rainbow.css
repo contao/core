@@ -125,13 +125,3 @@ span.moor-ballino {
 	width: 59px; 
 	height: 34px;
 }
-
-/* PATCH: IE6 fixes */
-* html .moor-box * {
-	left:0;
-}
-* html .moor-arrows {
-	left:270px;
-	overflow:hidden;
-}
-/* PATCH EOF */

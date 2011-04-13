@@ -83,10 +83,7 @@ img.mime_icon {
 	vertical-align:middle;
 }
 
-/* IE fixes */
-* html #container {
-	padding-bottom:18px;
-}
-*:first-child+html #container {
+/* IE 7 fixes */
+*+html #container {
 	padding-bottom:18px;
 }
