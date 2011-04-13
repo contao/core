@@ -109,7 +109,7 @@ class RadioButton extends Widget
 			$arrOptions[]= '<p class="tl_noopt">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
 		}
 
-        return sprintf('<div id="ctrl_%s" class="tl_radio_container%s">%s</div>%s',
+        return sprintf('<fieldset id="ctrl_%s" class="tl_radio_container%s"><legend>Hallo</legend>%s</fieldset>%s',
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						implode('<br />', $arrOptions),

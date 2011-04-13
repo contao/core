@@ -76,10 +76,10 @@ label.tl_change_selected {
 
 /* Forms */
 .tl_checkbox,.tl_radio {
-	margin:-4px 0 0 -2px;
+	margin:-3px 0 -1px -2px;
 	vertical-align:middle;
 }
-.tl_checkbox_container,.tl_radio_container {
+.tl_checkbox_container {
 	margin-top:2px;
 }
 .tl_col_1 .tl_checkbox {

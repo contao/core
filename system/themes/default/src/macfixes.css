@@ -52,9 +52,6 @@ fieldset,form,input,optgroup,select,textarea {
 .tl_panel select {
 	max-width:164px;
 }
-**:first-child+body .tl_panel .tl_select,**:first-child+body .tl_panel_bottom .tl_select {
-	margin-top:3px;
-}
 
 /* Listing */
 .tl_listing .tl_right,x:-moz-any-link {
@@ -65,23 +62,6 @@ fieldset,form,input,optgroup,select,textarea {
 .tl_checkbox {
 	margin:0 3px 0 0;
 }
-**:first-child+body .tl_checkbox {
-	margin:3px 3px 0 1px;
-}
 .tl_checkbox_container {
 	margin:-1px 0 1px 0;
-}
-**:first-child+body .tl_checkbox_container {
-	margin-top:-2px;
-}
-**:first-child+body .tl_radio {
-	margin:1px 3px 0 1px;
-}
-**:first-child+body .tl_radio_container {
-	margin:-1px 0 1px 0;
-}
-
-/* Calendar plugin */
-**:first-child+body div.calendar td,**:first-child+body div.calendar th {
-	height:19px;
 }

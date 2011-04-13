@@ -138,8 +138,8 @@ class FrontendTemplate extends Template
 			// Store the minified version
 			if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
 			{
-				$this->import('Compressor');
-				$objFile->append($this->Compressor->minifyHtml($strBuffer));
+				$this->import('Minifier');
+				$objFile->append($this->Minifier->minifyHtml($strBuffer));
 			}
 			else
 			{

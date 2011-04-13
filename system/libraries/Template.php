@@ -204,8 +204,8 @@ abstract class Template extends Controller
 		// Minify the markup
 		if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
 		{
-			$this->import('Compressor');
-			$this->strBuffer = $this->Compressor->minifyHtml($this->strBuffer);
+			$this->import('Minifier');
+			$this->strBuffer = $this->Minifier->minifyHtml($this->strBuffer);
 		}
 
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";

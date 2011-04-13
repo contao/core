@@ -773,7 +773,6 @@ var AjaxRequest =
 		}
 
 		var scroll = window.getScroll().y;
-		if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'hidden'); } }
 
 		overlay.setStyle('display', 'block');
 		overlay.setStyle('top', scroll + 'px');
@@ -800,7 +799,6 @@ var AjaxRequest =
 		if (box)
 		{
 			box.setStyle('display', 'none');
-			if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'visible'); } }
 		}
 	}
 };
@@ -1593,7 +1591,6 @@ var Backend =
 					if (next.getFirst().type == 'checkbox')
 					{
 						next.getFirst().checked = childs[i].getFirst().checked ? 'checked' : '';
-						if (Browser.Engine.trident && Browser.Engine.version < 5) next.innerHTML = next.innerHTML.replace(/CHECKED/ig, 'checked="checked"');
 					}
 				}
 

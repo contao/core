@@ -102,6 +102,9 @@ label.tl_change_selected {
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea {
 	margin:0;
 }
+fieldset.tl_radio_container legend {
+	margin-left:-7px;
+}
 .tl_checkbox,.tl_radio {
 	margin:-3px 0 -2px -3px;
 	vertical-align:middle;
@@ -133,12 +136,4 @@ fieldset legend {
 }
 fieldset.collapsed {
 	padding-bottom:4px;
-}
-
-/* IE 6 only */
-* html body {
-	height:100%;
-}
-* html .block,* html .tl_content,* html .clr,* html #tl_breadcrumb {
-	zoom:1;
 }
