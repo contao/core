@@ -181,10 +181,14 @@ class PageRegular extends Frontend
 	{
 		$this->Template = new FrontendTemplate($objPage->template);
 
+		// Store the doctype
+		$this->Template->doctype = $objLayout->doctype;
+		$this->Template->isXhtml = (strncmp($objLayout->doctype, 'xhtml', 5) === 0);
+
 		// Robots
 		if (strlen($objPage->robots))
 		{
-			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '" />' . "\n";
+			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '">' . "\n";
 		}
 
 		// Initialize margin

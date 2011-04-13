@@ -201,13 +201,7 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		// Minify the markup
-		if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
-		{
-			$this->import('Minifier');
-			$this->strBuffer = $this->Minifier->minifyHtml($this->strBuffer);
-		}
-
+		$this->strBuffer = $this->minifyHtml($this->strBuffer);
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 		/**
@@ -237,6 +231,148 @@ abstract class Template extends Controller
 			print_r($GLOBALS['TL_DEBUG']);
 			echo "\n</pre>";
 		}
+	}
+
+
+	/**
+	 * Minify HTML markup preserving pre, script, style and textarea tags
+	 * @param string
+	 * @return string
+	 */
+	public function minifyHtml($strHtml)
+	{
+		// The feature has been disabled
+		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'])
+		{
+			return $strHtml;
+		}
+
+		// Split the markup based on the tags that shall be preserved
+		$arrChunks = preg_split('@(</?pre[^>]*>)|(</?script[^>]*>)|(</?style[^>]*>)|(</?textarea[^>]*>)@i', $strHtml, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+
+		$strHtml = '';
+		$blnPreserveNext = false;
+		$blnOptimizeNext = false;
+
+		// Recombine the markup
+		foreach ($arrChunks as $strChunk)
+		{
+			if (strncasecmp($strChunk, '<pre', 4) === 0 || strncasecmp($strChunk, '<textarea', 9) === 0)
+			{
+				$blnPreserveNext = true;
+			}
+			elseif (strncasecmp($strChunk, '<script', 7) === 0 || strncasecmp($strChunk, '<style', 6) === 0)
+			{
+				$blnOptimizeNext = true;
+			}
+			elseif ($blnPreserveNext)
+			{
+				$blnPreserveNext = false;
+			}
+			elseif ($blnOptimizeNext)
+			{
+				$blnOptimizeNext = false;
+
+				// Minify inline scripts
+				$strChunk = preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', $strChunk);
+				$strChunk = trim($strChunk);
+			}
+			else
+			{
+				$arrReplace = array
+				(
+					'/\n ?\n+/'      => "\n",   // Convert multiple line-breaks
+					'/^[\t ]+</m'    => '<',    // Remove tag indentation
+					'/>( )?\n</'     => '>$1<', // Remove line-breaks between tags
+					'/\n/'           => '',     // Remove all remaining line-breaks
+					'/ <\/(div|p)>/' => '</$1>' // Remove spaces before closing DIV and P tags
+				);
+
+				$strChunk = str_replace("\r", '', $strChunk);
+				$strChunk = preg_replace(array_keys($arrReplace), array_values($arrReplace), $strChunk);
+				$strChunk = trim($strChunk);
+			}
+
+			$strHtml .= $strChunk;
+		}
+
+		return $strHtml;
+	}
+
+
+	/**
+	 * Convert HTML5 to XHTML using tidy or regular expressions
+	 * @param string
+	 * @return string
+	 */
+	public function convertToXhtml($strHtml)
+	{
+		// Use PHP tidy if available
+		if (!class_exists('tidy', false))
+		{
+			// Tidy configuration
+			$config = array
+			(
+				'wrap' => 0,
+				'output-xhtml' => 1,
+				'preserve-entities' => 1,
+				'tab-size' => 4
+			);
+
+			// Set the correct doctype
+			if ($this->doctype)
+			{
+				$config['doctype'] = substr($this->doctype, strpos($this->doctype, '_') + 1);
+			}
+
+			// Convert the meta charset tag
+			$strHtml = str_replace('<meta charset="', '<meta http-equiv="Content-Type" content="text/html; charset=', $strHtml);
+
+			// Execute tidy
+			$tidy = new tidy;
+			$strHtml = $tidy->repairString($strHtml, $config, $GLOBALS['TL_CONFIG']['dbCharset']);
+		}
+		else
+		{
+			global $objPage;
+			$lng = $objPage->language;
+
+			// Complex replacements
+			$arrRegReplace = array
+			(
+				'@<(base|br|hr|img|input|meta)([^>]*)>@' => '<$1$2 />',                      // Close stand-alone tags
+				'@<(script|style)([^>]*)>\n@'            => '<$1$2>' . "\n/* <![CDATA[ */\n" // Wrap inline scripts in CDATA comments
+			);
+
+			// Simple replacements
+			$arrStrReplace = array
+			(
+				'/ />'            => '/>',                                                                    // Fix incorrectly closed tags
+				'target="_blank"' => 'onclick="window.open(this.href); return false;"',                       // Replace target="_blank"
+				'<script'         => '<script type="text/javascript"',                                        // Add the type attribute to the script tag
+				'<style'          => '<style type="text/css"',                                                // Add the type attribute to the style tag
+				"\n</script>"     => "\n/* ]]> */\n</script>",                                                // Wrap inline scripts in CDATA comments
+				"\n</style>"      => "\n/* ]]> */\n</style>",                                                 // Wrap inline scripts in CDATA comments
+				'<html lang="'    => '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.$lng.'" lang="', // Add the XML namespace to the <html> tag
+				'<meta charset="' => '<meta http-equiv="Content-Type" content="text/html; charset='           // Convert the meta charset tag
+			);
+
+			// Set the correct doctype
+			if ($this->doctype == 'xhtml_strict')
+			{
+				$arrStrReplace['<!DOCTYPE html>'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+			}
+			else
+			{
+				$arrStrReplace['<!DOCTYPE html>'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+			}
+
+			// Execute the replacement functions
+			$strHtml = preg_replace(array_keys($arrRegReplace), array_values($arrRegReplace), $strHtml);
+			$strHtml = str_replace(array_keys($arrStrReplace), array_values($arrStrReplace), $strHtml);
+		}
+
+		return $strHtml;
 	}
 
 
