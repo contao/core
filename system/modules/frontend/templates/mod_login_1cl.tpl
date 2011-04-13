@@ -18,8 +18,7 @@
 <input type="password" name="password" id="password" class="text password" maxlength="64" value="" />
 <?php if ($this->autologin): ?>
 <div class="checkbox_container">
-<input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox" />
-<label for="autologin"><?php echo $this->autoLabel; ?></label>
+<input type="checkbox" name="autologin" id="autologin" value="1" class="checkbox" /> <label for="autologin"><?php echo $this->autoLabel; ?></label>
 </div>
 <?php endif; ?>
 <div class="submit_container">

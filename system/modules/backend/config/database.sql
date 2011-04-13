@@ -196,6 +196,7 @@ CREATE TABLE `tl_layout` (
   `calendarfeeds` blob NULL,
   `modules` blob NULL,
   `template` varchar(64) NOT NULL default '',
+  `doctype` varchar(32) NOT NULL default '',
   `mooSource` varchar(16) NOT NULL default '',
   `cssClass` varchar(255) NOT NULL default '',
   `onload` varchar(255) NOT NULL default '',

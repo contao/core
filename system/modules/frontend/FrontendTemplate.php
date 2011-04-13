@@ -135,15 +135,13 @@ class FrontendTemplate extends Template
 			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
 			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
 
-			// Store the minified version
-			if ($GLOBALS['TL_CONFIG']['minifyMarkup'])
+			if ($this->isXhtml)
 			{
-				$this->import('Minifier');
-				$objFile->append($this->Minifier->minifyHtml($strBuffer));
+				$objFile->append($this->minifyHtml($this->convertToXhtml($strBuffer)));
 			}
 			else
 			{
-				$objFile->append($strBuffer);
+				$objFile->append($this->minifyHtml($strBuffer));
 			}
 
 			$objFile->close();
@@ -194,6 +192,12 @@ class FrontendTemplate extends Template
 
 				$this->Search->indexPage($arrData);
 			}
+		}
+
+		// Convert the output to XHTML
+		if ($this->isXhtml)
+		{
+			$this->strBuffer = $this->convertToXhtml($this->strBuffer);
 		}
 
 		parent::output();
