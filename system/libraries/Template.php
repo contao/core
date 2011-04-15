@@ -62,7 +62,13 @@ abstract class Template extends Controller
 	 * Output format
 	 * @var string
 	 */
-	protected $strFormat;
+	protected $strFormat = 'html5';
+
+	/**
+	 * Tag ending
+	 * @var string
+	 */
+	protected $strTagEnding = '>';
 
 	/**
 	 * Template data
@@ -72,18 +78,17 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Set current template file
+	 * Create a new template instance
 	 * @param string
 	 * @param string
 	 * @throws Exception
 	 */
-	public function __construct($strTemplate='', $strContentType='text/html', $strFormat='html5')
+	public function __construct($strTemplate='', $strContentType='text/html')
 	{
 		parent::__construct();
 
 		$this->strTemplate = $strTemplate;
 		$this->strContentType = $strContentType;
-		$this->setFormat($strFormat);
 	}
 
 
@@ -161,32 +166,6 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Set the output format
-	 * @param string
-	 * @throws Exception
-	 */
-	public function setFormat($strFormat)
-	{
-		if ($strFormat == '')
-		{
-			throw new Exception('Invalid output format');
-		}
-
-		$this->strFormat = $strFormat;
-	}
-
-
-	/**
-	 * Return the output format
-	 * @return string
-	 */
-	public function getFormat()
-	{
-		return $this->strFormat;
-	}
-
-
-	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
@@ -215,6 +194,24 @@ abstract class Template extends Controller
 	 */
 	public function parse()
 	{
+		if ($this->strTemplate == '')
+		{
+			return '';
+		}
+
+		// Override the output format in the front end
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat != '')
+			{
+				$this->strFormat = $objPage->outputFormat;
+			}
+
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
 		ob_start();
 		include($this->getTemplate($this->strTemplate, $this->strFormat));
 		$strBuffer = ob_get_contents();

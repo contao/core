@@ -122,7 +122,6 @@ abstract class ModuleNews extends Module
 		{
 			$objTemplate = new FrontendTemplate($this->news_template);
 			$objTemplate->setData($objArticles->row());
-			$objTemplate->setFormat($this->strFormat);
 
 			$objTemplate->count = ++$count;
 			$objTemplate->class = (strlen($objArticles->cssClass) ? ' ' . $objArticles->cssClass : '') . (($count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');

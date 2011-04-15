@@ -297,7 +297,6 @@ class ModuleListing extends Module
 		 * Pagination
 		 */
 		$objPagination = new Pagination($objTotal->count, $per_page);
-		$objPagination->setFormat($this->strFormat);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 
@@ -332,7 +331,6 @@ class ModuleListing extends Module
 		}
 
 		$this->Template = new FrontendTemplate($this->list_info_layout);
-		$this->Template->setFormat($this->strFormat);
 
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';

@@ -83,7 +83,6 @@ class ModuleArticle extends Module
 		{
 			$this->Template = new FrontendTemplate('mod_article_plain');
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 		}
 
 		$alias = strlen($this->alias) ? $this->alias : $this->title;
@@ -113,7 +112,6 @@ class ModuleArticle extends Module
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 
 			// Override CSS ID and class
 			$arrCss = deserialize($this->teaserCssID);

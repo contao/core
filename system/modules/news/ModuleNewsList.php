@@ -127,8 +127,6 @@ class ModuleNewsList extends ModuleNews
 
 			// Add the pagination menu
 			$objPagination = new Pagination($total, $this->perPage);
-			$objPagination->setFormat($this->strFormat);
-
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

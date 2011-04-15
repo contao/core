@@ -234,7 +234,6 @@ class Pagination extends Frontend
 		}
 
 		$this->Template = new FrontendTemplate('pagination');
-		$this->Template->setFormat($this->strFormat);
 
 		$this->Template->hasFirst = $this->hasFirst();
 		$this->Template->hasPrevious = $this->hasPrevious();

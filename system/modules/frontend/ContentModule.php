@@ -64,7 +64,6 @@ class ContentModule extends ContentElement
 
 		$objModule->typePrefix = 'ce_';
 		$objModule = new $strClass($objModule);
-		$objModule->setFormat($this->strFormat);
 
 		// Overwrite spacing and CSS ID
 		$objModule->space = $this->space;

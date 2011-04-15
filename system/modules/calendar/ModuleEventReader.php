@@ -172,7 +172,6 @@ class ModuleEventReader extends Events
 
 		$objTemplate = new FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
-		$objTemplate->setFormat($this->strFormat);
 
 		$objTemplate->date = $date;
 		$objTemplate->start = $objEvent->startTime;

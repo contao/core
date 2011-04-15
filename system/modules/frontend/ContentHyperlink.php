@@ -77,7 +77,6 @@ class ContentHyperlink extends ContentElement
 
 			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 
 			$objFile = new File($this->singleSRC);
 

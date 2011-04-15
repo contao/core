@@ -66,7 +66,6 @@ class ContentAlias extends ContentElement
 		$objElement->typePrefix = 'ce_';
 
 		$objElement = new $strClass($objElement);
-		$objElement->setFormat($this->strFormat);
 
 		// Overwrite spacing and CSS ID
 		$objElement->space = $this->space;

@@ -60,7 +60,6 @@ class ContentAccordion extends ContentElement
 				$this->strTemplate = 'ce_accordion_start';
 				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
-				$this->Template->setFormat($this->strFormat);
 			}
 			else
 			{
@@ -68,7 +67,6 @@ class ContentAccordion extends ContentElement
 				$this->Template = new BackendTemplate($this->strTemplate);
 				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
 				$this->Template->title = $this->mooHeadline;
-				$this->Template->setFormat($this->strFormat);
 			}
 		}
 

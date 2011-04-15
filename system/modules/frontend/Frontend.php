@@ -41,12 +41,6 @@ abstract class Frontend extends Controller
 {
 
 	/**
-	 * Output format
-	 * @var string
-	 */
-	protected $strFormat;
-
-	/**
 	 * Meta array
 	 * @var array
 	 */
@@ -72,32 +66,6 @@ abstract class Frontend extends Controller
 	{
 		parent::__construct();
 		$this->import('Database');
-	}
-
-
-	/**
-	 * Set the output format
-	 * @param string
-	 * @throws Exception
-	 */
-	public function setFormat($strFormat)
-	{
-		if ($strFormat != 'html5' && $strFormat != 'xhtml')
-		{
-			throw new Exception("Invalid template format $strFormat");
-		}
-
-		$this->strFormat = $strFormat;
-	}
-
-
-	/**
-	 * Return the output format
-	 * @return string
-	 */
-	public function getFormat()
-	{
-		return $this->strFormat;
 	}
 
 

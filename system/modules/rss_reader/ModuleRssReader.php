@@ -127,7 +127,6 @@ class ModuleRssReader extends Module
 
 			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 		}
 
 		$this->Template->link = $this->objFeed->get_link();
@@ -161,8 +160,6 @@ class ModuleRssReader extends Module
 			$limit = $this->perPage + $offset;
 
 			$objPagination = new Pagination(count($arrItems), $this->perPage);
-			$objPagination->setFormat($this->strFormat);
-
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

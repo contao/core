@@ -109,7 +109,6 @@ class ModulePersonalData extends Module
 		{
 			$this->Template = new FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 		}
 
 		$this->Template->fields = '';
@@ -145,7 +144,7 @@ class ModulePersonalData extends Module
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
-			$objWidget->setFormat($this->strFormat);
+
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 

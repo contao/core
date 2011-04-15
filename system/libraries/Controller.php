@@ -204,10 +204,9 @@ abstract class Controller extends System
 	 * Generate a front end module and return it as HTML string
 	 * @param integer
 	 * @param string
-	 * @param string
 	 * @return string
 	 */
-	protected function getFrontendModule($intId, $strColumn='main', $strFormat='html5')
+	protected function getFrontendModule($intId, $strColumn='main')
 	{
 		global $objPage;
 		$this->import('Database');
@@ -233,14 +232,14 @@ abstract class Controller extends System
 
 				if ($strSection == $strColumn)
 				{
-					return $this->getArticle($strArticle, false, false, $strSection, $strFormat);
+					return $this->getArticle($strArticle);
 				}
 			}
 
 			// HOOK: trigger the article_raster_designer extension
 			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
-				return RasterDesigner::load($objPage->id, $strColumn, $strFormat);
+				return RasterDesigner::load($objPage->id, $strColumn);
 			}
 
 			$time = time();
@@ -258,7 +257,7 @@ abstract class Controller extends System
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn, $strFormat);
+				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn);
 			}
 
 			return $return;
@@ -308,7 +307,6 @@ abstract class Controller extends System
 
 		$objModule->typePrefix = 'mod_';
 		$objModule = new $strClass($objModule, $strColumn);
-		$objModule->setFormat($strFormat);
 		$strBuffer = $objModule->generate();
 
 		// Disable indexing if protected
@@ -327,10 +325,9 @@ abstract class Controller extends System
 	 * @param boolean
 	 * @param boolean
 	 * @param string
-	 * @param string
 	 * @return string
 	 */
-	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main', $strFormat='html5')
+	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
 		if (!$varId)
 		{
@@ -387,8 +384,6 @@ abstract class Controller extends System
 		$objArticle->multiMode = $blnMultiMode;
 
 		$objArticle = new ModuleArticle($objArticle, $strColumn);
-		$objArticle->setFormat($strFormat);
-
 		return $objArticle->generate($blnIsInsertTag);
 	}
 
@@ -457,7 +452,6 @@ abstract class Controller extends System
 
 		$objElement->typePrefix = 'ce_';
 		$objElement = new $strClass($objElement);
-		$objElement->setFormat($strFormat);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic

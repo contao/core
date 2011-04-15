@@ -86,7 +86,7 @@ abstract class Widget extends Controller
 	 * Output format
 	 * @var string
 	 */
-	protected $strFormat;
+	protected $strFormat = 'html5';
 
 	/**
 	 * Tag ending
@@ -122,15 +122,12 @@ abstract class Widget extends Controller
 	/**
 	 * Initialize the object
 	 * @param array
-	 * @param string
 	 * @throws Exception
 	 */
-	public function __construct($arrAttributes=false, $strFormat='html5')
+	public function __construct($arrAttributes=false)
 	{
 		parent::__construct();
-
 		$this->addAttributes($arrAttributes);
-		$this->setFormat($strFormat);
 	}
 
 
@@ -265,33 +262,6 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Set the output format
-	 * @param string
-	 * @throws Exception
-	 */
-	public function setFormat($strFormat)
-	{
-		if ($strFormat == '')
-		{
-			throw new Exception('Invalid output format');
-		}
-
-		$this->strFormat = $strFormat;
-		$this->strTagEnding = ($strFormat == 'xhtml') ? ' />' : '>';
-	}
-
-
-	/**
-	 * Return the output format
-	 * @return string
-	 */
-	public function getFormat()
-	{
-		return $this->strFormat;
-	}
-
-
-	/**
 	 * Add an error message
 	 * @param string
 	 */
@@ -377,9 +347,22 @@ abstract class Widget extends Controller
 	 */
 	public function parse($arrAttributes=false)
 	{
-		if (!strlen($this->strTemplate))
+		if ($this->strTemplate == '')
 		{
 			return '';
+		}
+
+		// Override the output format in the front end
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat != '')
+			{
+				$this->strFormat = $objPage->outputFormat;
+			}
+
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 		}
 
 		$this->addAttributes($arrAttributes);
