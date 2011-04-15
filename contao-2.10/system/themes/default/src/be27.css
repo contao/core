@@ -75,7 +75,7 @@ fieldset.tl_tbox,fieldset.tl_box {
 fieldset.nolegend {
 	padding-top:12px;
 }
-fieldset.tl_tbox legend,fieldset.tl_box legend {
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	color:#8ab858;
 	padding-left:18px;
 	padding-right:3px;
@@ -90,7 +90,7 @@ fieldset.collapsed {
 fieldset.collapsed div {
 	display:none !important;
 }
-fieldset.collapsed legend {
+fieldset.collapsed > legend {
 	background:url("images/palCollapsed.gif") left center no-repeat;
 }
 
