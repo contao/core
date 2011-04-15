@@ -512,7 +512,6 @@ class tl_form_field extends Backend
 		}
 
 		$objWidget = new $strClass($arrRow);
-		# FIXME: Controller::getTemplate does not load FE templates in the BE!
 
 		$strWidget = $objWidget->parse();
 		$strWidget = preg_replace('/ name="[^"]+"/i', '', $strWidget);

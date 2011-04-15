@@ -71,18 +71,7 @@ abstract class Controller extends System
 			throw new Exception('Invalid output format');
 		}
 
-		// The back end does not support different formats
-		# FIXME: breaks the form generator!
-		if (TL_MODE == 'BE')
-		{
-			$strFolder = 'templates';
-		}
-		else
-		{
-			$strFolder = 'templates/' . $strFormat;
-		}
-
-		$strPath = TL_ROOT . '/' . $strFolder;
+		$strPath = TL_ROOT . '/templates';
 		$strTemplate = basename($strTemplate);
 
 		// Check the templates folder of the theme
@@ -93,7 +82,7 @@ abstract class Controller extends System
 
 			if ($strTemplateGroup != '')
 			{
-				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strFormat . '/' . $strTemplate . '.tpl';
 
 				if (file_exists($strFile))
 				{
@@ -113,11 +102,24 @@ abstract class Controller extends System
 		// Browse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder . '/' . $strTemplate . '.tpl';
-
-			if (file_exists($strFile))
+			// Back end modules do not have subfolders
+			if (!is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFormat))
 			{
-				return $strFile;
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+
+				if (file_exists($strFile))
+				{
+					return $strFile;
+				}
+			}
+			else
+			{
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFormat . '/' . $strTemplate . '.tpl';
+
+				if (file_exists($strFile))
+				{
+					return $strFile;
+				}
 			}
 		}
 
