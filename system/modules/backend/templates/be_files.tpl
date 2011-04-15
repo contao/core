@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>" />
+<meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<base href="<?php echo $this->base; ?>" />
-<script>
-var CONTAO_THEME = '<?php echo $this->theme; ?>';
-var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
-var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
-var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-</script>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -23,9 +16,9 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
     $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
   }
   echo $objCombiner->getCombinedFile();
-?>" media="all" />
-<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+?>" media="all">
+<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style media="screen">
 #container {
@@ -37,6 +30,12 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
   margin-left:-353px;
 }
 </style>
+<script>
+var CONTAO_THEME = '<?php echo $this->theme; ?>';
+var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
+var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
+var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
+</script>
 <script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
@@ -46,8 +45,9 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 <?php echo $this->javascripts; ?>
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 <script>
 parent.Mediabox.enableFiletreeReload();

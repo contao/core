@@ -26,7 +26,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <div class="mod_repository mod_repository_view block">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="extension_container">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 
 <table class="extension">
 <tr class="title">
@@ -36,13 +36,13 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
   <td colspan="4">
 <?php if (property_exists($ext, 'thumbnail')): ?>
   <div class="image_container">
-    <a href="<?php echo $ext->picture->url; ?>" title="<?php echo $text['showpicture']; ?>" rel="lightbox"><img src="<?php echo $ext->thumbnail->url; ?>" alt="<?php echo $text['thumbnail']; ?>" width="<?php echo $ext->thumbnail->width; ?>" height="<?php echo $ext->thumbnail->height; ?>" class="thumbnail" /></a>
+    <a href="<?php echo $ext->picture->url; ?>" title="<?php echo $text['showpicture']; ?>" rel="lightbox"><img src="<?php echo $ext->thumbnail->url; ?>" alt="<?php echo $text['thumbnail']; ?>" width="<?php echo $ext->thumbnail->width; ?>" height="<?php echo $ext->thumbnail->height; ?>" class="thumbnail"></a>
   </div>
 <?php endif; ?>
 <?php if ($ext->teaser!=''): ?>
   <h2><?php echo $ext->teaser; ?></h2>
 <?php endif; ?>
-  <?php echo str_replace('<br>', '<br />', $ext->description); ?> 
+  <?php echo str_replace('<br>', '<br>', $ext->description); ?> 
   </td>
 </tr>
 <tr class="spacer"><td colspan="4" class="spacer">&nbsp;</td></tr>
@@ -85,15 +85,15 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
   <th><?php echo $text['versions']; ?></th>
 </tr>
 <tr>
-  <td colspan="3"<?php if ($langs) echo ' rowspan="3"'; ?> class="releasenotes"><?php echo str_replace('<br>', '<br />', $ext->releasenotes); ?></td>
-  <td><?php if (property_exists($ext, 'allversions')) foreach ($ext->allversions as $ver) if ($ver->version != $ext->version): ?><a href="<?php echo $ver->viewLink; ?>"><?php echo Repository::formatVersion($ver->version); ?></a><br /><?php endif; ?></td>
+  <td colspan="3"<?php if ($langs) echo ' rowspan="3"'; ?> class="releasenotes"><?php echo str_replace('<br>', '<br>', $ext->releasenotes); ?></td>
+  <td><?php if (property_exists($ext, 'allversions')) foreach ($ext->allversions as $ver) if ($ver->version != $ext->version): ?><a href="<?php echo $ver->viewLink; ?>"><?php echo Repository::formatVersion($ver->version); ?></a><br><?php endif; ?></td>
 </tr>
 <?php if ($langs): ?>
 <tr>
   <th style="height:20px"><?php echo $text['otherlanguages']; ?></th>
 </tr>
 <tr>
-  <td><?php foreach ($ext->languages as $lng) if ($lng->language != $ext->language): ?><a href="<?php echo $lng->link; ?>"><?php echo $GLOBALS['TL_LANG']['LNG'][$lng->language]; ?></a><br /><?php endif; ?></td>
+  <td><?php foreach ($ext->languages as $lng) if ($lng->language != $ext->language): ?><a href="<?php echo $lng->link; ?>"><?php echo $GLOBALS['TL_LANG']['LNG'][$lng->language]; ?></a><br><?php endif; ?></td>
 </tr>
 <?php endif; ?>
 <tr class="spacer"><td colspan="4" class="spacer">&nbsp;</td></tr>
@@ -202,15 +202,15 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 
 <div class="mod_repository_submit tl_formbody_submit">
 <div class="tl_submit_container">
-  <input type="submit" name="repository_installbutton" class="tl_submit" value="<?php echo $text['install']; ?>" />
+  <input type="submit" name="repository_installbutton" class="tl_submit" value="<?php echo $text['install']; ?>">
 <?php if (property_exists($ext, 'manual')): ?>
-  <input type="submit" name="repository_manualbutton" class="tl_submit" value="<?php echo $text['manual']; ?>" onclick="window.open('<?php echo ampersand($ext->manual); ?>'); return false;" />
+  <input type="submit" name="repository_manualbutton" class="tl_submit" value="<?php echo $text['manual']; ?>" onclick="window.open('<?php echo ampersand($ext->manual); ?>'); return false;">
 <?php endif; ?>
 <?php if (property_exists($ext, 'forum')): ?>
-  <input type="submit" name="repository_forumbutton" class="tl_submit" value="<?php echo $text['forum']; ?>" onclick="window.open('<?php echo ampersand($ext->forum); ?>'); return false;" />
+  <input type="submit" name="repository_forumbutton" class="tl_submit" value="<?php echo $text['forum']; ?>" onclick="window.open('<?php echo ampersand($ext->forum); ?>'); return false;">
 <?php endif; ?>
 <?php if (property_exists($ext, 'shop')): ?>
-  <input type="submit" name="repository_shopbutton" class="tl_submit" value="<?php echo $text[$ext->type=='free' ? 'donate' : 'shop']; ?>" onclick="window.open('<?php echo ampersand($ext->shop); ?>'); return false;" />
+  <input type="submit" name="repository_shopbutton" class="tl_submit" value="<?php echo $text[$ext->type=='free' ? 'donate' : 'shop']; ?>" onclick="window.open('<?php echo ampersand($ext->shop); ?>'); return false;">
 <?php endif; ?>
 </div>
 </div>

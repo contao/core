@@ -83,6 +83,18 @@ abstract class Widget extends Controller
 	protected $strWizard;
 
 	/**
+	 * Output format
+	 * @var string
+	 */
+	protected $strFormat;
+
+	/**
+	 * Tag ending
+	 * @var string
+	 */
+	protected $strTagEnding = '>';
+
+	/**
 	 * Errors
 	 * @var array
 	 */
@@ -110,11 +122,15 @@ abstract class Widget extends Controller
 	/**
 	 * Initialize the object
 	 * @param array
+	 * @param string
+	 * @throws Exception
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=false, $strFormat='html5')
 	{
 		parent::__construct();
+
 		$this->addAttributes($arrAttributes);
+		$this->setFormat($strFormat);
 	}
 
 
@@ -249,6 +265,33 @@ abstract class Widget extends Controller
 
 
 	/**
+	 * Set the output format
+	 * @param string
+	 * @throws Exception
+	 */
+	public function setFormat($strFormat)
+	{
+		if ($strFormat == '')
+		{
+			throw new Exception('Invalid output format');
+		}
+
+		$this->strFormat = $strFormat;
+		$this->strTagEnding = ($strFormat == 'xhtml') ? ' />' : '>';
+	}
+
+
+	/**
+	 * Return the output format
+	 * @return string
+	 */
+	public function getFormat()
+	{
+		return $this->strFormat;
+	}
+
+
+	/**
 	 * Add an error message
 	 * @param string
 	 */
@@ -295,8 +338,13 @@ abstract class Widget extends Controller
 	 * @param string
 	 * @return string
 	 */
-	public function getErrorsAsString($strSeparator="<br />\n")
+	public function getErrorsAsString($strSeparator=false)
 	{
+		if ($strSeparator === false)
+		{
+			$strSeparator = '<br' . $this->strTagEnding . "\n";
+		}
+
 		return $this->hasErrors() ? implode($strSeparator, $this->arrErrors) : '';
 	}
 
@@ -337,7 +385,7 @@ abstract class Widget extends Controller
 		$this->addAttributes($arrAttributes);
 
 		ob_start();
-		include($this->getTemplate($this->strTemplate));
+		include($this->getTemplate($this->strTemplate, $this->strFormat));
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -417,9 +465,10 @@ abstract class Widget extends Controller
 			return '';
 		}
 
-		return sprintf(' <input type="submit" id="ctrl_%s_submit" class="submit" value="%s" />',
+		return sprintf(' <input type="submit" id="ctrl_%s_submit" class="submit" value="%s"%s',
 						$this->strId,
-						specialchars($this->slabel));
+						specialchars($this->slabel),
+						$this->strTagEnding);
 	}
 
 

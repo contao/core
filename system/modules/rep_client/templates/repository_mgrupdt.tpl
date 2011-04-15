@@ -25,7 +25,7 @@ $tabindex = 1;
 <div class="mod_repository block">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
 <div class="tl_formbody_edit">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 
 <div class="tl_tbox block">
 <?php echo ($rep->dbUpdate != '') ? $rep->dbUpdate : '<div class="color_green">'.$text['dbuptodate'].'</div>'; ?> 
@@ -37,9 +37,9 @@ $tabindex = 1;
 
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
 <?php endif; ?>
-  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>" />
+  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>">
 </div>
 
 </div>

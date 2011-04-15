@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="<?php echo $this->charset; ?>" />
+<meta charset="<?php echo $this->charset; ?>">
 <title>Contao Open Source CMS</title>
 <style media="screen">
 a {

@@ -187,7 +187,7 @@ class Newsletter extends Backend
 					$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
 					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html, $css);
 
-					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br />';
+					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br>';
 				}
 			}
 
@@ -247,11 +247,11 @@ class Newsletter extends Backend
 '.$this->getMessages().'
 <form action="'.ampersand($this->Environment->script, true).'" id="tl_newsletter_send" class="tl_form" method="get">
 <div class="tl_formbody_edit tl_newsletter_send">
-<input type="hidden" name="do" value="' . $this->Input->get('do') . '" />
-<input type="hidden" name="table" value="' . $this->Input->get('table') . '" />
-<input type="hidden" name="key" value="' . $this->Input->get('key') . '" />
-<input type="hidden" name="id" value="' . $this->Input->get('id') . '" />
-<input type="hidden" name="token" value="' . $strToken . '" />
+<input type="hidden" name="do" value="' . $this->Input->get('do') . '">
+<input type="hidden" name="table" value="' . $this->Input->get('table') . '">
+<input type="hidden" name="key" value="' . $this->Input->get('key') . '">
+<input type="hidden" name="id" value="' . $this->Input->get('id') . '">
+<input type="hidden" name="token" value="' . $strToken . '">
 <table class="prev_header">
   <tr class="row_0">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['from'] . '</td>
@@ -279,23 +279,23 @@ class Newsletter extends Backend
 <div class="tl_tbox block">
 <div class="w50">
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
-  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset();">' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_timeout">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][0] . '</label></h3>
-  <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="timeout" id="ctrl_timeout" value="1" class="tl_text" onfocus="Backend.getScrollOffset();">' . (($GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['timeout'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_start">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][0] . '</label></h3>
-  <input type="text" name="start" id="ctrl_start" value="0" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['start'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="start" id="ctrl_start" value="0" class="tl_text" onfocus="Backend.getScrollOffset();">' . (($GLOBALS['TL_LANG']['tl_newsletter']['start'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
   <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="'.$objNewsletter->sender.'" class="tl_text" onfocus="Backend.getScrollOffset();" />' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.$objNewsletter->sender.'" class="tl_text" onfocus="Backend.getScrollOffset();">' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
 </div>
 </div>
@@ -304,8 +304,8 @@ class Newsletter extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'" />
-<input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" onclick="return confirm(\''. str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm']) .'\')" />
+<input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'">
+<input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" onclick="return confirm(\''. str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm']) .'\')">
 </div>
 
 </div>
@@ -369,7 +369,7 @@ class Newsletter extends Backend
 		// Add HTML content
 		if (!$objNewsletter->sendText)
 		{
-			// Get mail template
+			// Get the mail template
 			$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
 			$objTemplate->setData($objNewsletter->row());
 
@@ -514,7 +514,7 @@ class Newsletter extends Backend
 '.$this->getMessages().'
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_recipients_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">
 
 <div class="tl_tbox block">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
@@ -535,7 +535,7 @@ class Newsletter extends Backend
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'][0]).'">
 </div>
 
 </div>

@@ -91,7 +91,7 @@ class RepositoryBackendTheme
 		if ($alt=='') $alt = 'icon';
 		$img = self::image($file);
 		$size = getimagesize(TL_ROOT.'/'.$img);
-		return '<img'.((substr($img, -4) == '.png') ? ' class="pngfix"' : '').' src="'.$img.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').' />';
+		return '<img'.((substr($img, -4) == '.png') ? ' class="pngfix"' : '').' src="'.$img.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').'>';
 	} // createImage
 	
 	/**

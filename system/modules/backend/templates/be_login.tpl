@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>" />
+<meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<base href="<?php echo $this->base; ?>" />
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -13,15 +12,16 @@
     $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
   }
   echo $objCombiner->getCombinedFile();
-?>" media="all" />
-<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+?>" media="all">
+<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 <script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
   echo $objCombiner->getCombinedFile();
 ?>"></script>
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 </head>
 <body>
@@ -38,7 +38,7 @@
 
 <form action="<?php echo $this->action; ?>" class="tl_login_form" method="post">
 <div class="formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_login" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_login">
 <?php echo $this->messages; ?>
 <?php if ($this->noCookies): ?>
 
@@ -48,11 +48,11 @@
 <table class="tl_login_table">
 <tr>
   <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-  <td style="text-align:right;"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" /></td>
+  <td style="text-align:right;"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64"></td>
 </tr>
 <tr>
   <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-  <td style="text-align:right;"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" /></td>
+  <td style="text-align:right;"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64"></td>
 </tr>
 <tr>
   <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
@@ -67,7 +67,7 @@
 </table>
 
 <div class="tl_login_submit_container">
-  <input type="submit" name="login" id="login" class="tl_submit" value="<?php echo $this->loginButton; ?>" />
+  <input type="submit" name="login" id="login" class="tl_submit" value="<?php echo $this->loginButton; ?>">
 </div>
 
 </div>
@@ -75,15 +75,15 @@
 
 <div id="tl_license">
 
-<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by
-  Leo Feyer :: Extensions are copyright of their respective owners :: Visit
-  <a href="http://www.contao.org" onclick="window.open(this.href); return false;">contao.org</a>
-  for more information :: Obstructing the appearance of this notice is prohibited by law!</p>
+<p>Contao Open Source CMS (fka TYPOlight) :: Copyright ©2005-<?php echo date('Y'); ?> by 
+  Leo Feyer :: Extensions are copyright of their respective owners :: Visit 
+  <a href="http://www.contao.org" target="_blank">contao.org</a> for more information :: 
+  Obstructing the appearance of this notice is prohibited by law!</p>
 
-<p>Contao is distributed in the hope that it will be useful but WITHOUT ANY
-  WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-  A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
-  details. Contao is free software. You can redistribute it and/or modify it
+<p>Contao is distributed in the hope that it will be useful but WITHOUT ANY 
+  WARRANTY. Without even the implied warranty of MERCHANTABILITY or FITNESS FOR 
+  A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+  details. Contao is free software. You can redistribute it and/or modify it 
   under the terms of the GNU/LGPL as published by the Free Software Foundation.</p>
 
 </div>
@@ -94,7 +94,7 @@
 <?php if (!$this->disableCron): ?>
 
 <!-- indexer::stop -->
-<img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible" />
+<img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible">
 <!-- indexer::continue -->
 <?php endif; ?>
 

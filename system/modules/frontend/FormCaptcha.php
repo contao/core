@@ -143,11 +143,12 @@ class FormCaptcha extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s />',
+		return sprintf('<input type="text" name="%s" id="ctrl_%s" class="captcha mandatory%s" value=""%s%s',
 						$this->strCaptchaKey,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						$this->getAttributes()) . $this->addSubmit();
+						$this->getAttributes(),
+						$this->strTagEnding) . $this->addSubmit();
 	}
 
 

@@ -213,6 +213,7 @@ class ModuleLogin extends Module
 
 			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
+			$this->Template->setFormat($this->strFormat);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
 			$this->Template->loggedInAs = sprintf($GLOBALS['TL_LANG']['MSC']['loggedInAs'], $this->User->username);
@@ -230,6 +231,7 @@ class ModuleLogin extends Module
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
+		$this->Template->setFormat($this->strFormat);
 
 		$blnHasError = false;
 

@@ -7,7 +7,7 @@
 
 <form action="<?php echo $this->request; ?>" id="tl_tasks" class="tl_form" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_tasks" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_tasks">
 
 <fieldset id="pal_title_legend" class="tl_tbox block<?php echo $this->titleClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'title_legend', 'tl_tasks')"><?php echo $this->titleLabel; ?></legend>
@@ -61,7 +61,7 @@
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="<?php echo $this->submit; ?>" />
+<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="<?php echo $this->submit; ?>">
 </div>
 
 </div>

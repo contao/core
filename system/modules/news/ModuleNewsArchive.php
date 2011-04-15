@@ -167,6 +167,8 @@ class ModuleNewsArchive extends ModuleNews
 
 			// Add the pagination menu
 			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination->setFormat($this->strFormat);
+
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -184,6 +186,7 @@ class ModuleNewsArchive extends ModuleNews
 		if ($objArticles->numRows < 1)
 		{
 			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template->setFormat($this->strFormat);
 		}
 
 		$this->Template->headline = trim($this->headline);

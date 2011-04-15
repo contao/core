@@ -174,7 +174,7 @@ class ModuleCustomnav extends Module
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
-					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : '');
+					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
 
 					$items[] = $row;
@@ -193,7 +193,7 @@ class ModuleCustomnav extends Module
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
-					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : '');
+					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
 
 					$items[] = $row;

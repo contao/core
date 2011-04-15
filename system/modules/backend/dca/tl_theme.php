@@ -218,7 +218,7 @@ class tl_theme extends Backend
 	{
 		if ($row['screenshot'] != '' && file_exists(TL_ROOT . '/' . $row['screenshot']))
 		{
-			$label = '<img src="' . TL_FILES_URL . $this->getImage($row['screenshot'], 160, 120) . '" width="160" height="120" alt="" class="theme_preview" />' . $label;
+			$label = '<img src="' . TL_FILES_URL . $this->getImage($row['screenshot'], 160, 120) . '" width="160" height="120" alt="" class="theme_preview">' . $label;
 		}
 
 		return $label;

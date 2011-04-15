@@ -252,7 +252,7 @@ abstract class Events extends Module
 		$arrEvent['link'] = $objEvents->title;
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
-		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : '');
+		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
@@ -267,6 +267,7 @@ abstract class Events extends Module
 		// Clean RTE output
 		$arrEvent['details'] = str_ireplace
 		(
+			# FIXME: tag endings are different in HTML5
 			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
 			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
 			$this->String->encodeEmail($arrEvent['details'])

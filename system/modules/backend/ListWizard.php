@@ -149,7 +149,7 @@ class ListWizard extends Widget
 		for ($i=0; $i<count($this->varValue); $i++)
 		{
 			$return .= '
-    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . ' /> ';
+    <li><input type="text" name="'.$this->strId.'[]" class="tl_text" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]).'"' . $this->getAttributes() . '> ';
 
 			// Add buttons
 			foreach ($arrButtons as $button)
@@ -248,7 +248,7 @@ class ListWizard extends Widget
 '.$this->getMessages().'
 <form action="'.ampersand($this->Environment->request, true).'" id="tl_list_import" class="tl_form" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_list_import" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_list_import">
 
 <div class="tl_tbox block">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
@@ -269,7 +269,7 @@ class ListWizard extends Widget
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][0]).'" />
+  <input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][0]).'">
 </div>
 
 </div>

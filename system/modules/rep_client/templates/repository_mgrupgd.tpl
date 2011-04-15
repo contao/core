@@ -22,7 +22,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <div class="mod_repository block">
 <form action="<?php echo $rep->f_link; ?>" id="repository_upgdform" method="post" >
 <div class="tl_formbody_edit">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 
 <div class="installlog">
 <?php echo $rep->log; ?>
@@ -33,7 +33,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <div class="mod_repository_submit tl_formbody_submit">
 
 <div class="tl_submit_container">
-  <input type="submit" name="repository_continuebutton" id="repository_continuebutton" class="tl_submit" value="<?php echo $text['continue']; ?>" />
+  <input type="submit" name="repository_continuebutton" id="repository_continuebutton" class="tl_submit" value="<?php echo $text['continue']; ?>">
 </div>
 
 </div>

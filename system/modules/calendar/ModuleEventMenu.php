@@ -95,6 +95,8 @@ class ModuleEventMenu extends ModuleCalendar
 		$arrData = array();
 
 		$this->Template = new FrontendTemplate('mod_eventmenu_year');
+		$this->Template->setFormat($this->strFormat);
+
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -146,6 +148,8 @@ class ModuleEventMenu extends ModuleCalendar
 		$arrData = array();
 
 		$this->Template = new FrontendTemplate('mod_eventmenu');
+		$this->Template->setFormat($this->strFormat);
+
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)

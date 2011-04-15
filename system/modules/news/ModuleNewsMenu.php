@@ -115,6 +115,7 @@ class ModuleNewsMenu extends ModuleNews
 		$arrData = array();
 
 		$this->Template = new FrontendTemplate('mod_newsmenu_year');
+		$this->Template->setFormat($this->strFormat);
 
 		foreach ($this->news_archives as $id)
 		{
@@ -232,6 +233,7 @@ class ModuleNewsMenu extends ModuleNews
 		$arrData = array();
 
 		$this->Template = new FrontendTemplate('mod_newsmenu_day');
+		$this->Template->setFormat($this->strFormat);
 
 		foreach ($this->news_archives as $id)
 		{

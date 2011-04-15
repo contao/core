@@ -5,7 +5,7 @@ Contao Open Source CMS Changelog
 Version 2.10.beta1 (XXXX-XX-XX)
 -------------------------------
 - Updated: updated SyntaxHighlighter to version 3.0.83 (#2459)
-- Changed: switched the whole system from XHTML to HTML5
+- Changed: the back end now uses HTML5 instead of XHTML
 - Changed: moved auto-generated style sheets to system/scripts
 - Changed: support more complex conditional comments by making the field a text field
 - Improved: optimized the back end page speed (#2400)
@@ -19,6 +19,7 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Added: added a FIND_IN_SET() method to the DBAL (#2383)
 - Added: optionally minify the page markup before it is sent to the browser (#2982)
 - Added: added a default IE6 warning message (browser out of date)
+- Added: added an option to choose between HTML and XHTML output in the front end
 - Fixed: do not add $objRow->protected in tree view by default (#2915)
 - Fixed: convert relative external image URLs in newsletters (#2895)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)

@@ -83,6 +83,7 @@ class ModuleArticle extends Module
 		{
 			$this->Template = new FrontendTemplate('mod_article_plain');
 			$this->Template->setData($this->arrData);
+			$this->Template->setFormat($this->strFormat);
 		}
 
 		$alias = strlen($this->alias) ? $this->alias : $this->title;
@@ -112,6 +113,7 @@ class ModuleArticle extends Module
 		{
 			$this->Template = new FrontendTemplate('mod_article_teaser');
 			$this->Template->setData($this->arrData);
+			$this->Template->setFormat($this->strFormat);
 
 			// Override CSS ID and class
 			$arrCss = deserialize($this->teaserCssID);
@@ -170,7 +172,7 @@ class ModuleArticle extends Module
 
 		while ($objCte->next())
 		{
-			$contentElements .= $this->getContentElement($objCte->id);
+			$contentElements .= $this->getContentElement($objCte->id, $this->strFormat);
 		}
 
 		$this->Template->teaser = $this->teaser;

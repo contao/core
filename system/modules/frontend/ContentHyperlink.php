@@ -77,6 +77,7 @@ class ContentHyperlink extends ContentElement
 
 			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
+			$this->Template->setFormat($this->strFormat);
 
 			$objFile = new File($this->singleSRC);
 
@@ -112,7 +113,7 @@ class ContentHyperlink extends ContentElement
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->target = $this->target ? LINK_NEW_WINDOW : '';
+		$this->Template->target = $this->target ? LINK_NEW_WINDOW : ''; # FIXME: HTML5 uses target="_blank"
 	}
 }
 

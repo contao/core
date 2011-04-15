@@ -136,6 +136,7 @@ abstract class Module extends Frontend
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
+		$this->Template->setFormat($this->strFormat);
 
 		$this->compile();
 
@@ -199,6 +200,7 @@ abstract class Module extends Frontend
 		}
 
 		$objTemplate = new FrontendTemplate($this->navigationTpl);
+		$objTemplate->setFormat($this->strFormat);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_' . $level++;
@@ -280,7 +282,7 @@ abstract class Module extends Frontend
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
+					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
 
 					$items[] = $row;
@@ -307,7 +309,7 @@ abstract class Module extends Frontend
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : '');
+					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
 
 					$items[] = $row;
