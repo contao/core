@@ -45,9 +45,10 @@ class Comments extends Frontend
 	 * @param object
 	 * @param string
 	 * @param integer
+	 * @param string
 	 * @param array
 	 */
-	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies, $strFormat='html5')
 	{
 		$limit = null;
 		$arrComments = array();
@@ -59,12 +60,14 @@ class Comments extends Frontend
 			$limit = $objConfig->perPage;
 			$offset = ($page - 1) * $objConfig->perPage;
  
-			// Get total number of comments
+			// Get the total number of comments
 			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_comments WHERE source=? AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
 									   ->execute($strSource, $intParent);
 
-			// Add pagination menu
+			// Initialize the pagination menu
 			$objPagination = new Pagination($objTotal->count, $objConfig->perPage);
+			$objPagination->setFormat($strFormat);
+
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -89,6 +92,7 @@ class Comments extends Frontend
 			}
 
 			$objPartial = new FrontendTemplate($objConfig->template);
+			$objPartial->setFormat($strFormat);
 
 			while ($objComments->next())
 			{
@@ -189,6 +193,7 @@ class Comments extends Frontend
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
+			$objWidget->setFormat($strFormat);
 
 			// Validate the widget
 			if ($this->Input->post('FORM_SUBMIT') == $strFormId)
@@ -403,6 +408,7 @@ class Comments extends Frontend
 				$strComment = '<p>'. $strComment .'</p>';
 			}
 
+			# FIXME: tag endings are different in HTML5
 			$arrSearch = array
 			(
 				'@<br />\s?<br />\s?@',

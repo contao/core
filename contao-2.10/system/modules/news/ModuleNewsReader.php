@@ -186,7 +186,7 @@ class ModuleNewsReader extends ModuleNews
 		$objConfig->bbcode = $objArchive->bbcode;
 		$objConfig->moderate = $objArchive->moderate;
 
-		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objArticle->id, $arrNotifies);
+		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objArticle->id, $arrNotifies, $this->strFormat);
 	}
 }
 

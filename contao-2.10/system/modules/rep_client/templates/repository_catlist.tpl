@@ -23,7 +23,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="tl_formbody">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 
 <div class="tl_panel">
 
@@ -76,7 +76,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <div class="tl_panel">
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="filter" id="filter" src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $text['apply']; ?>" value="<?php echo $text['apply']; ?>" />
+<input type="image" name="filter" id="filter" src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $text['apply']; ?>" alt="<?php echo $text['apply']; ?>">
 </div>
 
 <div class="tl_limit tl_subpanel">

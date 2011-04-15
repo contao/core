@@ -60,6 +60,7 @@ class ContentAccordion extends ContentElement
 				$this->strTemplate = 'ce_accordion_start';
 				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
+				$this->Template->setFormat($this->strFormat);
 			}
 			else
 			{
@@ -67,6 +68,7 @@ class ContentAccordion extends ContentElement
 				$this->Template = new BackendTemplate($this->strTemplate);
 				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
 				$this->Template->title = $this->mooHeadline;
+				$this->Template->setFormat($this->strFormat);
 			}
 		}
 
@@ -95,6 +97,7 @@ class ContentAccordion extends ContentElement
 			// Clean RTE output
 			$this->Template->text = str_ireplace
 			(
+				# FIXME: tag endings are different in HTML5
 				array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
 				array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
 				$this->String->encodeEmail($this->text)

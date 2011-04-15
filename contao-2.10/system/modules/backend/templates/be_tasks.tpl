@@ -1,19 +1,19 @@
 
 <form action="<?php echo $this->request; ?>" id="tl_filter" class="tl_form" method="post">
 <div class="tl_formbody">
-<input type="hidden" name="FORM_SUBMIT" value="tl_filters" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_filters">
 
 <div class="tl_panel">
 
 <div class="tl_submit_panel tl_subpanel">
-<input type="image" name="filter" id="filter" src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $this->apply; ?>" value="<?php echo $this->apply; ?>" />
+<input type="image" name="filter" id="filter" src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->getTheme(); ?>/images/reload.gif" class="tl_img_submit" title="<?php echo $this->apply; ?>" alt="<?php echo $this->apply; ?>">
 </div>
 
 <div class="tl_search tl_subpanel">
 <strong><?php echo $this->search; ?>:</strong>
   <select name="tl_field" class="tl_select<?php echo $this->searchClass; ?>"><?php echo $this->searchOptions; ?></select>
   <span>=</span>
-  <input type="text" name="tl_value" class="tl_text<?php echo $this->searchClass; ?>" value="<?php echo $this->keywords; ?>" />
+  <input type="text" name="tl_value" class="tl_text<?php echo $this->searchClass; ?>" value="<?php echo $this->keywords; ?>">
 </div>
 
 <div class="tl_filter tl_subpanel">
@@ -48,12 +48,12 @@
 <?php if ($this->tasks): ?>
 <?php foreach ($this->tasks as $task): ?>
   <tr class="<?php echo $task['trClass']; ?>">
-    <td class="col_0 col_first<?php echo $task['tdClass']; ?>"><?php echo $task['title']; ?><br /><span class="tl_gray"><?php echo $task['creator']; ?></span></td>
+    <td class="col_0 col_first<?php echo $task['tdClass']; ?>"><?php echo $task['title']; ?><br><span class="tl_gray"><?php echo $task['creator']; ?></span></td>
     <td class="col_1<?php echo $task['tdClass']; ?>"><?php echo $task['user']; ?></td>
     <td class="col_2<?php echo $task['tdClass']; ?>"><?php echo $task['status']; ?></td>
     <td class="col_3<?php echo $task['tdClass']; ?>"><?php echo $task['progress']; ?>%</td>
     <td class="col_4<?php echo $task['tdClass']; ?>"><?php echo $task['deadline']; ?></td>
-    <td class="col_5 col_last<?php echo $task['tdClass']; ?>"><a href="<?php echo $task['editHref']; ?>" title="<?php echo $task['editTitle']; ?>"><img src="<?php echo $task['editIcon']; ?>" width="12" height="16" alt="<?php echo $this->editLabel; ?>" /></a><?php if ($task['deleteHref']): ?> <a href="<?php echo $task['deleteHref']; ?>" title="<?php echo $task['deleteTitle']; ?>" onclick="if (!confirm('<?php echo $task['deleteConfirm']; ?>')) return false; Backend.getScrollOffset();"><img src="<?php echo $task['deleteIcon']; ?>" width="14" height="16" alt="<?php echo $this->deleteLabel; ?>" /></a><?php else: ?> <img src="<?php echo $task['deleteIcon']; ?>" alt="" /><?php endif; ?></td>
+    <td class="col_5 col_last<?php echo $task['tdClass']; ?>"><a href="<?php echo $task['editHref']; ?>" title="<?php echo $task['editTitle']; ?>"><img src="<?php echo $task['editIcon']; ?>" width="12" height="16" alt="<?php echo $this->editLabel; ?>"></a><?php if ($task['deleteHref']): ?> <a href="<?php echo $task['deleteHref']; ?>" title="<?php echo $task['deleteTitle']; ?>" onclick="if (!confirm('<?php echo $task['deleteConfirm']; ?>')) return false; Backend.getScrollOffset();"><img src="<?php echo $task['deleteIcon']; ?>" width="14" height="16" alt="<?php echo $this->deleteLabel; ?>"></a><?php else: ?> <img src="<?php echo $task['deleteIcon']; ?>" alt=""><?php endif; ?></td>
   </tr>
 <?php endforeach; ?>
 <?php else: ?>

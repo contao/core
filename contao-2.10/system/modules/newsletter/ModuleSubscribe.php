@@ -88,6 +88,7 @@ class ModuleSubscribe extends Module
 		{
 			$this->Template = new FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
+			$this->Template->setFormat($this->strFormat);
 		}
 
 		// Activate e-mail address
@@ -151,6 +152,7 @@ class ModuleSubscribe extends Module
 	protected function activateRecipient()
 	{
 		$this->Template = new FrontendTemplate('mod_newsletter');
+		$this->Template->setFormat($this->strFormat);
 
 		// Check the token
 		$objRecipient = $this->Database->prepare("SELECT r.id, r.email, c.id AS cid, c.title FROM tl_newsletter_recipients r LEFT JOIN tl_newsletter_channel c ON r.pid=c.id WHERE token=?")

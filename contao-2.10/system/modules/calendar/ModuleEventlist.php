@@ -194,6 +194,8 @@ class ModuleEventlist extends Events
 			$limit = min($this->perPage + $offset, $total);
 
 			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination->setFormat($this->strFormat);
+
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -230,6 +232,7 @@ class ModuleEventlist extends Events
 
 			$objTemplate = new FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
+			$objTemplate->setFormat($this->strFormat);
 
 			// Month header
 			if ($strMonth != $event['month'])

@@ -172,6 +172,7 @@ class ModuleEventReader extends Events
 
 		$objTemplate = new FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
+		$objTemplate->setFormat($this->strFormat);
 
 		$objTemplate->date = $date;
 		$objTemplate->start = $objEvent->startTime;
@@ -185,6 +186,7 @@ class ModuleEventReader extends Events
 		// Clean RTE output
 		$objTemplate->details = str_ireplace
 		(
+			# FIXME: tag endings are different in HTML5
 			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
 			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
 			$this->String->encodeEmail($objEvent->details)

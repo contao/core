@@ -136,7 +136,7 @@ class ModulePassword extends Module
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name']));
-
+			$objWidget->setFormat($this->strFormat);
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
@@ -170,8 +170,9 @@ class ModulePassword extends Module
 			if ($objMember->numRows < 1)
 			{
 				$this->strTemplate = 'mod_message';
-				$this->Template = new FrontendTemplate($this->strTemplate);
 
+				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template->setFormat($this->strFormat);
 				$this->Template->type = 'error';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
 
@@ -203,8 +204,9 @@ class ModulePassword extends Module
 		if ($objMember->numRows < 1)
 		{
 			$this->strTemplate = 'mod_message';
-			$this->Template = new FrontendTemplate($this->strTemplate);
 
+			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template->setFormat($this->strFormat);
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -216,6 +218,7 @@ class ModulePassword extends Module
 		$arrField['eval']['tableless'] = $this->tableless;
 
 		$objWidget = new FormPassword($this->prepareForWidget($arrField, 'password'));
+		$objWidget->setFormat($this->strFormat);
 
 		// Set row classes
 		$objWidget->rowClass = 'row_0 row_first even';
@@ -261,8 +264,9 @@ class ModulePassword extends Module
 
 				// Confirm
 				$this->strTemplate = 'mod_message';
-				$this->Template = new FrontendTemplate($this->strTemplate);
 
+				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template->setFormat($this->strFormat);
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 

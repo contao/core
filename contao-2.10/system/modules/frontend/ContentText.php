@@ -57,6 +57,7 @@ class ContentText extends ContentElement
 		// Clean RTE output
 		$this->Template->text = str_ireplace
 		(
+			# FIXME: tag endings are different in HTML5
 			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
 			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
 			$this->String->encodeEmail($this->text)

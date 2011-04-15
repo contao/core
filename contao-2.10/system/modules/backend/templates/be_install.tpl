@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>" />
+<meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<base href="<?php echo $this->base; ?>" />
-<script>
-var CONTAO_THEME = '<?php echo $this->theme; ?>';
-var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
-var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
-var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-</script>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -19,9 +12,15 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
     $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
   }
   echo $objCombiner->getCombinedFile();
-?>" media="all" />
-<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+?>" media="all">
+<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<script>
+var CONTAO_THEME = '<?php echo $this->theme; ?>';
+var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
+var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
+var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
+</script>
 <script src="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
@@ -30,6 +29,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 </head>
 <body>
@@ -64,25 +64,25 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_ftp" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_ftp">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpHost']; ?></h4>
-  <input type="text" name="host" id="host" class="tl_text" value="<?php echo $this->ftpHost; ?>" />
+  <input type="text" name="host" id="host" class="tl_text" value="<?php echo $this->ftpHost; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPath']; ?></h4>
-  <input type="text" name="path" id="path" class="tl_text" value="<?php echo $this->ftpPath; ?>" />
+  <input type="text" name="path" id="path" class="tl_text" value="<?php echo $this->ftpPath; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpUser']; ?></h4>
-  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->ftpUser; ?>" />
+  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->ftpUser; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
-  <input type="password" name="password" id="password" class="tl_text" value="<?php echo $this->ftpPass; ?>" />
+  <input type="password" name="password" id="password" class="tl_text" value="<?php echo $this->ftpPass; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
   <div class="tl_checkbox_container" style="margin-top:3px;">
-    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $this->ftpSSL ? ' checked="checked"' : ''; ?> /> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
+    <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $this->ftpSSL ? ' checked="checked"' : ''; ?>> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
   </div>
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPort']; ?></h4>
-  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $this->ftpPort; ?>" />
+  <input type="text" name="port" id="port" class="tl_text" value="<?php echo $this->ftpPort; ?>">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSave']; ?>">
   </div>
 </div>
 </form>
@@ -889,9 +889,9 @@ Library.
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody_submit">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_license" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_license">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -904,16 +904,16 @@ Library.
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_login" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_login">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['password'][0]; ?></h4>
 <?php if ($this->passwordError): ?>
   <p class="tl_error"><?php echo $this->passwordError; ?></p>
 <?php endif; ?>
-  <input type="password" name="password" id="password" class="tl_text" value="" />
+  <input type="password" name="password" id="password" class="tl_text" value="">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['MSC']['login']; ?>">
   </div>
 </div>
 </form>
@@ -938,18 +938,18 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_install" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_install">
   <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
 <?php if ($this->passwordError): ?>
   <p class="tl_error"><?php echo $this->passwordError; ?></p>
 <?php endif; ?>
-  <input type="password" name="password" id="password" class="tl_text" value="" />
+  <input type="password" name="password" id="password" class="tl_text" value="">
   <h4><label for="confirm_password"><?php echo $GLOBALS['TL_LANG']['MSC']['confirm'][0]; ?></label></h4>
-  <input type="password" name="confirm_password" id="confirm_password" class="tl_text" value="" />
+  <input type="password" name="confirm_password" id="confirm_password" class="tl_text" value="">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['passSave']; ?>">
   </div>
 </div>
 </form>
@@ -968,13 +968,13 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_encryption" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_encryption">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['keyCreate']; ?></h4>
-  <input type="text" name="key" id="key" class="tl_text" value="<?php echo $this->encryptionKey; ?>" />
+  <input type="text" name="key" id="key" class="tl_text" value="<?php echo $this->encryptionKey; ?>">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -991,27 +991,27 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_database_login" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_database_login">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbDriver']; ?></h4>
   <select name="dbDriver" id="dbDriver" class="tl_select"><?php echo $this->drivers; ?></select>
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbHost']; ?></h4>
-  <input type="text" name="dbHost" id="dbHost" class="tl_text" value="<?php echo $this->host; ?>" />
+  <input type="text" name="dbHost" id="dbHost" class="tl_text" value="<?php echo $this->host; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbUsername']; ?></h4>
-  <input type="text" name="dbUser" id="dbUser" class="tl_text" value="<?php echo $this->user; ?>" />
+  <input type="text" name="dbUser" id="dbUser" class="tl_text" value="<?php echo $this->user; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></h4>
-  <input type="password" name="dbPass" id="dbPass" class="tl_text" value="<?php echo $this->pass; ?>" />
+  <input type="password" name="dbPass" id="dbPass" class="tl_text" value="<?php echo $this->pass; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbDatabase']; ?></h4>
-  <input type="text" name="dbDatabase" id="dbDatabase" class="tl_text" value="<?php echo $this->database; ?>" />
+  <input type="text" name="dbDatabase" id="dbDatabase" class="tl_text" value="<?php echo $this->database; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbPersistent']; ?></h4>
   <select name="dbPconnect" id="dbPconnect" class="tl_select"><option value="false"<?php if (!$this->pconnect) echo ' selected="selected"'; ?>><?php echo $GLOBALS['TL_LANG']['MSC']['no']; ?></option><option value="true"<?php if ($this->pconnect) echo ' selected="selected"'; ?>><?php echo $GLOBALS['TL_LANG']['MSC']['yes']; ?></option></select>
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbCharset']; ?></h4>
-  <input type="text" name="dbCharset" id="dbCharset" class="tl_text" value="<?php echo $this->dbcharset; ?>" />
+  <input type="text" name="dbCharset" id="dbCharset" class="tl_text" value="<?php echo $this->dbcharset; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbPort']; ?></h4>
-  <input type="text" name="dbPort" id="dbPort" class="tl_text" value="<?php echo $this->port; ?>" />
+  <input type="text" name="dbPort" id="dbPort" class="tl_text" value="<?php echo $this->port; ?>">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1024,9 +1024,9 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody_submit">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_28update" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_28update">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1039,9 +1039,9 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody_submit">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_29update" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_29update">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1054,9 +1054,9 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody_submit">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_292update" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_292update">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update292run']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update292run']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1069,13 +1069,13 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_collation" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_collation">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbCollation']; ?></h4>
   <select name="dbCollation" id="dbCollation" class="tl_select"><?php echo $this->collations; ?></select>
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1092,11 +1092,11 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" id="sql_form" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_tables" /><?php echo $this->dbUpdate; ?>
+  <input type="hidden" name="FORM_SUBMIT" value="tl_tables"><?php echo $this->dbUpdate; ?>
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1115,16 +1115,16 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" id="tl_static" class="tl_install_form" method="post">
 <div class="tl_formbody_submit">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_tutorial" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_tutorial">
   <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['templates']; ?></h4>
   <select name="template" class="tl_select"><?php echo $this->templates; ?></select>
   <div class="tl_checkbox_container" style="margin-top:3px;">
-    <input type="checkbox" name="preserve" id="ctrl_preserve" class="tl_checkbox" value="1" /> <label for="ctrl_preserve"><?php echo $GLOBALS['TL_LANG']['tl_install']['doNotTruncate']; ?></label>
+    <input type="checkbox" name="preserve" id="ctrl_preserve" class="tl_checkbox" value="1"> <label for="ctrl_preserve"><?php echo $GLOBALS['TL_LANG']['tl_install']['doNotTruncate']; ?></label>
   </div>
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();">
   </div>
 </div>
 </form>
@@ -1141,24 +1141,24 @@ window.addEvent('domready', function() {
 
 <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
 <div class="tl_formbody">
-  <input type="hidden" name="FORM_SUBMIT" value="tl_admin" />
+  <input type="hidden" name="FORM_SUBMIT" value="tl_admin">
   <h4><?php echo $GLOBALS['TL_LANG']['MSC']['username']; ?></h4>
-  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->adminUser; ?>" />
+  <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->adminUser; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['MSC']['com_name']; ?></h4>
-  <input type="text" name="name" id="name" class="tl_text" value="<?php echo $this->adminName; ?>" />
+  <input type="text" name="name" id="name" class="tl_text" value="<?php echo $this->adminName; ?>">
   <h4><?php echo $GLOBALS['TL_LANG']['MSC']['emailAddress']; ?></h4>
-  <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>" />
+  <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
   <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
 <?php if ($this->adminError): ?>
   <p class="tl_error"><?php echo $this->adminError; ?></p>
 <?php endif; ?>
-  <input type="password" name="pass" id="pass" class="tl_text" value="" />
+  <input type="password" name="pass" id="pass" class="tl_text" value="">
   <h4><label for="confirm_password"><?php echo $GLOBALS['TL_LANG']['MSC']['confirm'][0]; ?></label></h4>
-  <input type="password" name="confirm_pass" id="confirm_pass" class="tl_text" value="" />
+  <input type="password" name="confirm_pass" id="confirm_pass" class="tl_text" value="">
 </div>
 <div class="tl_formbody_submit">
   <div class="tl_submit_container">
-    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();" />
+    <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();">
   </div>
 </div>
 </form>

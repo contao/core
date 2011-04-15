@@ -122,6 +122,7 @@ abstract class ModuleNews extends Module
 		{
 			$objTemplate = new FrontendTemplate($this->news_template);
 			$objTemplate->setData($objArticles->row());
+			$objTemplate->setFormat($this->strFormat);
 
 			$objTemplate->count = ++$count;
 			$objTemplate->class = (strlen($objArticles->cssClass) ? ' ' . $objArticles->cssClass : '') . (($count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
@@ -145,6 +146,7 @@ abstract class ModuleNews extends Module
 				// Clean RTE output
 				$objTemplate->text = str_ireplace
 				(
+					# FIXME: tag endings are different in HTML5
 					array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
 					array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
 					$this->String->encodeEmail($objArticles->text)
@@ -371,7 +373,7 @@ abstract class ModuleNews extends Module
 		return sprintf('<a href="%s" title="%s"%s>%s</a>',
 						$objArticle->url,
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $objArticle->url)),
-						($objArticle->target ? LINK_NEW_WINDOW : ''),
+						($objArticle->target ? LINK_NEW_WINDOW : ''), # FIXME: HTML5 uses target="_blank"
 						$strLink);
 	}
 }

@@ -60,21 +60,36 @@ abstract class Controller extends System
 	/**
 	 * Find a particular template file and return its path
 	 * @param string
+	 * @param string
 	 * @return string
 	 * @throws Exception
 	 */
-	protected function getTemplate($strTemplate)
+	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$strPath = TL_ROOT . '/templates';
+		if ($strFormat == '')
+		{
+			throw new Exception('Invalid output format');
+		}
+
+		// The back end does not support different formats
+		# FIXME: breaks the form generator!
+		if (TL_MODE == 'BE')
+		{
+			$strFolder = 'templates';
+		}
+		else
+		{
+			$strFolder = 'templates/' . $strFormat;
+		}
+
+		$strPath = TL_ROOT . '/' . $strFolder;
 		$strTemplate = basename($strTemplate);
 
-		// Check the templates subfolder
+		// Check the templates folder of the theme
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-
-			$strTemplateGroup = str_replace('../', '', $objPage->templateGroup);
-			$strTemplateGroup = preg_replace('@^templates/@', '', $strTemplateGroup);
+			$strTemplateGroup = str_replace(array('../', 'templates/'), '', $objPage->templateGroup);
 
 			if ($strTemplateGroup != '')
 			{
@@ -87,7 +102,7 @@ abstract class Controller extends System
 			}
 		}
 
-		// Check the templates directory
+		// Check the global templates directory
 		$strFile = $strPath . '/' . $strTemplate . '.tpl';
 
 		if (file_exists($strFile))
@@ -98,7 +113,7 @@ abstract class Controller extends System
 		// Browse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/' . $strFolder . '/' . $strTemplate . '.tpl';
 
 			if (file_exists($strFile))
 			{
@@ -106,7 +121,7 @@ abstract class Controller extends System
 			}
 		}
 
-		throw new Exception(sprintf('Could not find template file "%s"', $strTemplate));
+		throw new Exception('Could not find template file "' . $strFormat . '/' . $strTemplate . '.tpl"');
 	}
 
 
@@ -115,13 +130,25 @@ abstract class Controller extends System
 	 * @param string
 	 * @param integer
 	 * @return array
+	 * @throws Exception
 	 */
 	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
+		$arrFolders = array();
 		$arrTemplates = array();
-		$arrFolders = array(TL_ROOT . '/templates');
 
-		// Add a custom templates folder
+		// Add the templates root directory
+		$arrFolders[] = TL_ROOT . '/templates';
+
+		// Add the html5/xhtml subfolders of the root directory
+		# FIXME: do we really need this?
+		if (is_dir(TL_ROOT . '/templates/html5'))
+		{
+			$arrFolders[] = TL_ROOT . '/templates/html5';
+			$arrFolders[] = TL_ROOT . '/templates/xhtml';
+		}
+
+		// Add the theme templates folder
 		if ($intTheme > 0)
 		{
 			$objTheme = $this->Database->prepare("SELECT templates FROM tl_theme WHERE id=?")
@@ -130,18 +157,28 @@ abstract class Controller extends System
 
 			if ($objTheme->numRows > 0 && $objTheme->templates != '')
 			{
-				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
+				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/html5';
+				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/xhtml';
 			}
 		}
 
-		// Add the module subfolders
+		// Add the module templates folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
 
+			// No templates directory at all
 			if (is_dir($strFolder))
 			{
+				// be_ and mail_ templates are never in a subfolder
 				$arrFolders[] = $strFolder;
+
+				// Check whether subfolders are available
+				if (is_dir($strFolder . '/html5'))
+				{
+					$arrFolders[] = $strFolder . '/html5';
+					$arrFolders[] = $strFolder . '/xhtml';
+				}
 			}
 		}
 
@@ -157,7 +194,9 @@ abstract class Controller extends System
 		}
 
 		natcasesort($arrTemplates);
-		return array_values(array_unique($arrTemplates));
+		$arrTemplates = array_values(array_unique($arrTemplates));
+
+		return $arrTemplates;
 	}
 
 
@@ -165,9 +204,10 @@ abstract class Controller extends System
 	 * Generate a front end module and return it as HTML string
 	 * @param integer
 	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function getFrontendModule($intId, $strColumn='main')
+	protected function getFrontendModule($intId, $strColumn='main', $strFormat='html5')
 	{
 		global $objPage;
 		$this->import('Database');
@@ -193,14 +233,14 @@ abstract class Controller extends System
 
 				if ($strSection == $strColumn)
 				{
-					return $this->getArticle($strArticle);
+					return $this->getArticle($strArticle, false, false, $strSection, $strFormat);
 				}
 			}
 
-			// HOOK: trigger article_raster_designer extension
+			// HOOK: trigger the article_raster_designer extension
 			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
-				return RasterDesigner::load($objPage->id, $strColumn);
+				return RasterDesigner::load($objPage->id, $strColumn, $strFormat);
 			}
 
 			$time = time();
@@ -218,7 +258,7 @@ abstract class Controller extends System
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn);
+				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn, $strFormat);
 			}
 
 			return $return;
@@ -268,6 +308,7 @@ abstract class Controller extends System
 
 		$objModule->typePrefix = 'mod_';
 		$objModule = new $strClass($objModule, $strColumn);
+		$objModule->setFormat($strFormat);
 		$strBuffer = $objModule->generate();
 
 		// Disable indexing if protected
@@ -286,9 +327,10 @@ abstract class Controller extends System
 	 * @param boolean
 	 * @param boolean
 	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
+	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main', $strFormat='html5')
 	{
 		if (!$varId)
 		{
@@ -345,6 +387,8 @@ abstract class Controller extends System
 		$objArticle->multiMode = $blnMultiMode;
 
 		$objArticle = new ModuleArticle($objArticle, $strColumn);
+		$objArticle->setFormat($strFormat);
+
 		return $objArticle->generate($blnIsInsertTag);
 	}
 
@@ -352,9 +396,10 @@ abstract class Controller extends System
 	/**
 	 * Generate a content element return it as HTML string
 	 * @param integer
+	 * @param string
 	 * @return string
 	 */
-	protected function getContentElement($intId)
+	protected function getContentElement($intId, $strFormat='html5')
 	{
 		if (!strlen($intId) || $intId < 1)
 		{
@@ -412,6 +457,7 @@ abstract class Controller extends System
 
 		$objElement->typePrefix = 'ce_';
 		$objElement = new $strClass($objElement);
+		$objElement->setFormat($strFormat);
 		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
@@ -1062,6 +1108,7 @@ abstract class Controller extends System
 		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
 
 		// Default PDF export using TCPDF
+		# FIXME: tag endings are different in HTML5
 		$arrSearch = array
 		(
 			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
@@ -2796,7 +2843,7 @@ abstract class Controller extends System
 		if (strlen($arrItem['imageUrl']) && TL_MODE == 'FE')
 		{
 			$objTemplate->href = TL_FILES_URL . $arrItem['imageUrl'];
-			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : '';
+			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : ''; # FIXME: HTML5 uses target="_blank"
 		}
 
 		// Fullsize view

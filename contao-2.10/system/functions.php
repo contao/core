@@ -131,7 +131,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 				$e = new Exception();
 				$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 
-				echo '<br />' . $strMessage;
+				echo '<br>' . $strMessage;
 			}
 		}
 
@@ -172,7 +172,7 @@ function __exception($e)
 
 		$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 
-		echo '<br />' . $strMessage;
+		echo '<br>' . $strMessage;
 	}
 
 	show_help_message();
@@ -423,6 +423,7 @@ function nl2br_pre($str)
 
 	foreach ($chunks as $chunk)
 	{
+		# FIXME: tag endings are different in HTML5
 		$str = str_replace($chunk, str_ireplace(array('<br>', '<br />'), '', $chunk), $str);
 	}
 
@@ -437,6 +438,7 @@ function nl2br_pre($str)
  */
 function nl2br_callback($matches)
 {
+	# FIXME: tag endings are different in HTML5
 	return str_replace("\n", "<br />", $matches[0]);
 }
 

@@ -236,7 +236,7 @@ class tl_templates extends Backend
 
 <form action="'.ampersand($this->Environment->request).'" id="tl_create_template" class="tl_form" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_create_template" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_create_template">
 <div class="tl_tbox block">
 <div>
   <h3><label for="ctrl_original">'.$GLOBALS['TL_LANG']['tl_templates']['original'][0].'</label></h3>
@@ -253,7 +253,7 @@ class tl_templates extends Backend
 
 <div class="tl_formbody_submit">
 <div class="tl_submit_container">
-  <input type="submit" name="create" id="create" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_templates']['newTpl']).'" />
+  <input type="submit" name="create" id="create" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_templates']['newTpl']).'">
 </div>
 </div>
 </form>';

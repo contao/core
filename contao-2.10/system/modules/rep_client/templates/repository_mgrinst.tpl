@@ -27,8 +27,8 @@ $tabindex = 1;
 <div class="mod_repository block">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
 <div class="tl_formbody_edit">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
-<input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>">
 
 <div class="tl_tbox block">
 <?php if ($rep->f_stage>=$rep->inst_extension): ?>
@@ -36,14 +36,14 @@ $tabindex = 1;
 
 <div>
   <h3><label for="<?php echo $nm; ?>"><?php echo $text['extension'][0]; ?></label></h3>
-  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="32" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_extension; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_extension): ?> disabled="disabled"<?php endif; ?> />
+  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="32" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_extension; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_extension): ?> disabled="disabled"<?php endif; ?>>
 <?php if (property_exists($rep, 'f_extension_msg')): ?>
   <p class="tl_error"><?php echo $text[$rep->f_extension_msg]; ?></p>
 <?php else: ?>
   <p class="tl_help tl_tip"><?php echo $text['extension'][1]; ?></p>
 <?php endif; ?>
 <?php if ($rep->f_stage>$rep->inst_extension): ?>
-  <input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>" />
+  <input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>">
 <?php endif; ?>
 </div>
 <?php endif; ?>
@@ -57,7 +57,7 @@ $tabindex = 1;
   </select>
   <p class="tl_help tl_tip"><?php echo $text['selversion'][1]; ?></p>
 <?php if ($rep->f_stage>$rep->inst_version): ?>
-  <input type="hidden" name="repository_version" value="<?php echo $rep->f_version; ?>" />
+  <input type="hidden" name="repository_version" value="<?php echo $rep->f_version; ?>">
 <?php endif; ?>
 </div>
 <?php endif; ?>
@@ -66,9 +66,9 @@ $tabindex = 1;
 
 <div>
   <h3><label for="<?php echo $nm; ?>"><?php echo $text['lickey'][0]; ?></label></h3>
-  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_lickey; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_lickey) echo ' disabled="disabled"'; ?> />
+  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_lickey; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_lickey) echo ' disabled="disabled"'; ?>>
 <?php if ($rep->f_stage>$rep->inst_lickey): ?>
-  <input type="hidden" name="repository_lickey" value="<?php echo $rep->f_lickey; ?>" />
+  <input type="hidden" name="repository_lickey" value="<?php echo $rep->f_lickey; ?>">
 <?php endif; ?>
 <?php if (property_exists($rep, 'f_lickey_msg')): ?>
   <div class="tl_error"><?php echo $text[$rep->f_lickey_msg]; ?></div>
@@ -96,7 +96,7 @@ $tabindex = 1;
     <td class="col_build"><?php echo $act->build; ?></td>
     <td class="col_action">
     <div class="tl_checkbox_container">
-      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled): ?> checked="checked"<?php endif; ?><?php if ($act->locked): ?> disabled="disabled"<?php endif; ?> />
+      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled): ?> checked="checked"<?php endif; ?><?php if ($act->locked): ?> disabled="disabled"<?php endif; ?>>
       <label for="repository_enable_<?php echo $act->extension; ?>"><?php echo $text[$act->action]; ?></label>
     </div>
     </td>
@@ -120,9 +120,9 @@ $tabindex = 1;
 <div class="mod_repository_submit tl_formbody_submit">
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
 <?php endif; ?>
-  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>" />
+  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>">
 </div>
 </div>
 

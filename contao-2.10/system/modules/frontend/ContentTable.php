@@ -136,6 +136,7 @@ class ContentTable extends ContentElement
 					$class_td = ' col_last';
 				}
 
+				# FIXME: tag endings are different in HTML5
 				$arrBody['row_' . $j . $class_tr . $class_eo][] = array
 				(
 					'class' => 'col_'.$i . $class_td,
@@ -151,6 +152,7 @@ class ContentTable extends ContentElement
 		{
 			foreach ($rows[(count($rows)-1)] as $i=>$v)
 			{
+				# FIXME: tag endings are different in HTML5
 				$arrFooter[] = array
 				(
 					'class' => 'foot_'.$i . (($i == 0) ? ' col_first' : '') . (($i == (count($rows[(count($rows)-1)]) - 1)) ? ' col_last' : ''),

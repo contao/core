@@ -133,17 +133,7 @@ class FrontendTemplate extends Template
 
 			// Create the cache file
 			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
-
-			if ($this->isXhtml)
-			{
-				$objFile->append($this->minifyHtml($this->convertToXhtml($strBuffer)));
-			}
-			else
-			{
-				$objFile->append($this->minifyHtml($strBuffer));
-			}
-
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $this->minifyHtml($strBuffer));
 			$objFile->close();
 		}
 

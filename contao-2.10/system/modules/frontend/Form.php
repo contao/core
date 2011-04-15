@@ -144,6 +144,7 @@ class Form extends Hybrid
 			}
 
 			$objWidget = new $strClass($arrData);
+			$objWidget->setFormat($this->strFormat);
 			$objWidget->required = $objFields->mandatory ? true : false;
 
 			// HOOK: load form field callback
@@ -502,6 +503,7 @@ class Form extends Hybrid
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
 					$objTemplate = new FrontendTemplate('form_message');
+					$objTemplate->setFormat($this->strFormat);
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);

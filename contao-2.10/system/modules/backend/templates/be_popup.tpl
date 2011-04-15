@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="<?php echo $this->language; ?>">
 <head>
-<meta charset="<?php echo $this->charset; ?>" />
+<meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
-<base href="<?php echo $this->base; ?>" />
+<base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/popup.css');
   echo $objCombiner->getCombinedFile();
-?>" media="all" />
-<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
-<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen" /><![endif]-->
+?>" media="all">
+<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 </head>
 <body>
 
@@ -52,12 +52,12 @@
 </table>
 
 <div id="download">
-<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" width="18" height="18" alt="" class="mime_icon" /> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
+<img src="system/themes/<?php echo $this->theme; ?>/images/<?php echo $this->icon; ?>" width="18" height="18" alt="" class="mime_icon"> <a href="<?php echo $this->href; ?>"><?php echo $this->download; ?></a>
 </div>
 <?php if ($this->isImage): ?>
 
 <div id="preview">
-<img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="" />
+<img src="<?php echo $this->src; ?>" width="<?php echo $this->width; ?>" height="<?php echo $this->height; ?>" alt="">
 </div>
 <?php endif; ?>
 

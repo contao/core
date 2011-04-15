@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
 (
-	array('colspan', 'Contao unterstützt alle Datums- und Zeitformate, die mit der PHP-Funktion date() geparst werden können. Um alle Eingaben in einen UNIX-Zeitstempel umwandeln zu können, sind im Backend jedoch ausschließlich numerische Formate (j, d, m, n, y, Y, g, G, h, H, i, s) erlaubt.<br /><br /><strong>Abweichende Frontend-Formate können in der Seitenstruktur erfasst werden.</strong><br /><br /><em>Hier sind einige Beispiele gültiger Datums- und Zeitangaben</em>:'),
+	array('colspan', 'Contao unterstützt alle Datums- und Zeitformate, die mit der PHP-Funktion date() geparst werden können. Um alle Eingaben in einen UNIX-Zeitstempel umwandeln zu können, sind im Backend jedoch ausschließlich numerische Formate (j, d, m, n, y, Y, g, G, h, H, i, s) erlaubt.<br><br><strong>Abweichende Frontend-Formate können in der Seitenstruktur erfasst werden.</strong><br><br><em>Hier sind einige Beispiele gültiger Datums- und Zeitangaben</em>:'),
 	array('Y-m-d', 'JJJJ-MM-TT, international ISO-8601, z.B. 2005-01-28'),
 	array('m/d/Y', 'MM/TT/JJJJ, Englisches Format, z.B. 01/28/2005'),
 	array('d.m.Y', 'TT.MM.JJJJ, Deutsches Format, z.B. 28.01.2005'),

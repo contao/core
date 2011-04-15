@@ -24,9 +24,9 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <div class="mod_repository block">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>" />
-<input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>" />
-<input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>" />
+<input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>">
+<input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>">
 
 <div class="tl_tbox block">
 
@@ -72,9 +72,9 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>" />
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
 <?php endif; ?>
-  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>" />
+  <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text['cancel']; ?>">
 </div>
 
 </div>

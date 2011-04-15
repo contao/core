@@ -201,7 +201,7 @@ class ModuleMaintenance extends BackendModule
 		$this->Template->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 
 		// Current version up to date
-		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
+		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;"></a>',
 												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
 												 $this->Environment->base,
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
@@ -476,7 +476,7 @@ class ModuleMaintenance extends BackendModule
 			// Display pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible" />' . $this->String->substr($arrPages[$i], 100, true) . "<br />\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . $this->String->substr($arrPages[$i], 100, true) . "<br>\n";
 			}
 
 			$this->Template = new BackendTemplate('be_index');

@@ -59,6 +59,12 @@ abstract class Template extends Controller
 	protected $strContentType;
 
 	/**
+	 * Output format
+	 * @var string
+	 */
+	protected $strFormat;
+
+	/**
 	 * Template data
 	 * @var array
 	 */
@@ -71,12 +77,13 @@ abstract class Template extends Controller
 	 * @param string
 	 * @throws Exception
 	 */
-	public function __construct($strTemplate='', $strContentType='text/html')
+	public function __construct($strTemplate='', $strContentType='text/html', $strFormat='html5')
 	{
 		parent::__construct();
 
 		$this->strTemplate = $strTemplate;
 		$this->strContentType = $strContentType;
+		$this->setFormat($strFormat);
 	}
 
 
@@ -154,6 +161,32 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Set the output format
+	 * @param string
+	 * @throws Exception
+	 */
+	public function setFormat($strFormat)
+	{
+		if ($strFormat == '')
+		{
+			throw new Exception('Invalid output format');
+		}
+
+		$this->strFormat = $strFormat;
+	}
+
+
+	/**
+	 * Return the output format
+	 * @return string
+	 */
+	public function getFormat()
+	{
+		return $this->strFormat;
+	}
+
+
+	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
@@ -183,7 +216,7 @@ abstract class Template extends Controller
 	public function parse()
 	{
 		ob_start();
-		include($this->getTemplate($this->strTemplate));
+		include($this->getTemplate($this->strTemplate, $this->strFormat));
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -274,6 +307,7 @@ abstract class Template extends Controller
 				$blnOptimizeNext = false;
 
 				// Minify inline scripts
+				$strChunk = str_replace("/* <![CDATA[ */\n", '/* <![CDATA[ */', $strChunk);
 				$strChunk = preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', $strChunk);
 				$strChunk = trim($strChunk);
 			}
@@ -294,82 +328,6 @@ abstract class Template extends Controller
 			}
 
 			$strHtml .= $strChunk;
-		}
-
-		return $strHtml;
-	}
-
-
-	/**
-	 * Convert HTML5 to XHTML using tidy or regular expressions
-	 * @param string
-	 * @return string
-	 */
-	public function convertToXhtml($strHtml)
-	{
-		// Use PHP tidy if available
-		if (!class_exists('tidy', false))
-		{
-			// Tidy configuration
-			$config = array
-			(
-				'wrap' => 0,
-				'output-xhtml' => 1,
-				'preserve-entities' => 1,
-				'tab-size' => 4
-			);
-
-			// Set the correct doctype
-			if ($this->doctype)
-			{
-				$config['doctype'] = substr($this->doctype, strpos($this->doctype, '_') + 1);
-			}
-
-			// Convert the meta charset tag
-			$strHtml = str_replace('<meta charset="', '<meta http-equiv="Content-Type" content="text/html; charset=', $strHtml);
-
-			// Execute tidy
-			$tidy = new tidy;
-			$strHtml = $tidy->repairString($strHtml, $config, $GLOBALS['TL_CONFIG']['dbCharset']);
-		}
-		else
-		{
-			global $objPage;
-			$lng = $objPage->language;
-
-			// Complex replacements
-			$arrRegReplace = array
-			(
-				'@<(base|br|hr|img|input|meta)([^>]*)>@' => '<$1$2 />',                      // Close stand-alone tags
-				'@<(script|style)([^>]*)>\n@'            => '<$1$2>' . "\n/* <![CDATA[ */\n" // Wrap inline scripts in CDATA comments
-			);
-
-			// Simple replacements
-			$arrStrReplace = array
-			(
-				'/ />'            => '/>',                                                                    // Fix incorrectly closed tags
-				'target="_blank"' => 'onclick="window.open(this.href); return false;"',                       // Replace target="_blank"
-				'<script'         => '<script type="text/javascript"',                                        // Add the type attribute to the script tag
-				'<style'          => '<style type="text/css"',                                                // Add the type attribute to the style tag
-				"\n</script>"     => "\n/* ]]> */\n</script>",                                                // Wrap inline scripts in CDATA comments
-				"\n</style>"      => "\n/* ]]> */\n</style>",                                                 // Wrap inline scripts in CDATA comments
-				'<html lang="'    => '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="'.$lng.'" lang="', // Add the XML namespace to the <html> tag
-				'<meta charset="' => '<meta http-equiv="Content-Type" content="text/html; charset='           // Convert the meta charset tag
-			);
-
-			// Set the correct doctype
-			if ($this->doctype == 'xhtml_strict')
-			{
-				$arrStrReplace['<!DOCTYPE html>'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-			}
-			else
-			{
-				$arrStrReplace['<!DOCTYPE html>'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-			}
-
-			// Execute the replacement functions
-			$strHtml = preg_replace(array_keys($arrRegReplace), array_values($arrRegReplace), $strHtml);
-			$strHtml = str_replace(array_keys($arrStrReplace), array_values($arrStrReplace), $strHtml);
 		}
 
 		return $strHtml;
