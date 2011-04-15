@@ -1248,7 +1248,18 @@ abstract class Controller extends System
 
 				// Accessibility tags
 				case 'lang':
-					$arrCache[$strTag] = strlen($elements[1]) ? '<span lang="' . $elements[1] . '" xml:lang="' . $elements[1] . '">' : '</span>';
+					if ($elements[1] == '')
+					{
+						$arrCache[$strTag] = '</span>';
+					}
+					elseif ($objPage->outputFormat == 'xhtml')
+					{
+						$arrCache[$strTag] = '<span lang="' . $elements[1] . '" xml:lang="' . $elements[1] . '">';
+					}
+					else
+					{
+						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . $elements[1] . '">';
+					}
 					break;
 
 				// E-mail addresses
@@ -1898,11 +1909,11 @@ abstract class Controller extends System
 						// Generate the HTML markup
 						if (strlen($rel))
 						{
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
-							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
 					catch (Exception $e)
@@ -2072,7 +2083,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . ' />';
+		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . '>';
 	}
 
 
