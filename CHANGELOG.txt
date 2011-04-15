@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.beta1 (XXXX-XX-XX)
 -------------------------------
+- Updated: updated TinyMCE to version 3.4.2
 - Updated: updated SyntaxHighlighter to version 3.0.83 (#2459)
 - Changed: the back end now uses HTML5 instead of XHTML
 - Changed: moved auto-generated style sheets to system/scripts
