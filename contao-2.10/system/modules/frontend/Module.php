@@ -136,7 +136,6 @@ abstract class Module extends Frontend
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
-		$this->Template->setFormat($this->strFormat);
 
 		$this->compile();
 
@@ -200,7 +199,6 @@ abstract class Module extends Frontend
 		}
 
 		$objTemplate = new FrontendTemplate($this->navigationTpl);
-		$objTemplate->setFormat($this->strFormat);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_' . $level++;

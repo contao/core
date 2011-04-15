@@ -88,7 +88,6 @@ class ModuleUnsubscribe extends Module
 		{
 			$this->Template = new FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 		}
 
 		// Unsubscribe

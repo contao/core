@@ -114,7 +114,6 @@ class ModuleRegistration extends Module
 		{
 			$this->Template = new FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
-			$this->Template->setFormat($this->strFormat);
 		}
 
 		$this->Template->fields = '';
@@ -142,7 +141,6 @@ class ModuleRegistration extends Module
 			}
 
 			$objCaptcha = new $strClass($arrCaptcha);
-			$objCaptcha->setFormat($this->strFormat);
 
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_registration')
 			{
@@ -183,7 +181,6 @@ class ModuleRegistration extends Module
 			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
-			$objWidget->setFormat($this->strFormat);
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
@@ -473,9 +470,7 @@ class ModuleRegistration extends Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-
 		$this->Template = new FrontendTemplate($this->strTemplate);
-		$this->Template->setFormat($this->strFormat);
 
 		// Check the token
 		$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE activation=?")

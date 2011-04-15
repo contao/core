@@ -135,7 +135,6 @@ abstract class ContentElement extends Frontend
 
 		$this->Template = new FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
-		$this->Template->setFormat($this->strFormat);
 
 		$this->compile();
 

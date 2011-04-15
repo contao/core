@@ -66,8 +66,6 @@ class Comments extends Frontend
 
 			// Initialize the pagination menu
 			$objPagination = new Pagination($objTotal->count, $objConfig->perPage);
-			$objPagination->setFormat($strFormat);
-
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -92,7 +90,6 @@ class Comments extends Frontend
 			}
 
 			$objPartial = new FrontendTemplate($objConfig->template);
-			$objPartial->setFormat($strFormat);
 
 			while ($objComments->next())
 			{
@@ -193,7 +190,6 @@ class Comments extends Frontend
 
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name'], $arrField['value']));
-			$objWidget->setFormat($strFormat);
 
 			// Validate the widget
 			if ($this->Input->post('FORM_SUBMIT') == $strFormId)

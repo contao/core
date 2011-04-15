@@ -206,8 +206,6 @@ class ContentGallery extends ContentElement
 			$limit = min($this->perPage + $offset, $total);
 
 			$objPagination = new Pagination($total, $this->perPage);
-			$objPagination->setFormat($this->strFormat);
-
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -287,7 +285,7 @@ class ContentGallery extends ContentElement
 		}
 
 		$objTemplate = new FrontendTemplate($strTemplate);
-		$objTemplate->setFormat($this->strFormat);
+		# FIXME: $objTemplate->setData($this->arrData); required?
 
 		$objTemplate->body = $body;
 		$objTemplate->headline = $this->headline; // see #1603

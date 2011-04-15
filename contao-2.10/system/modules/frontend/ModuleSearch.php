@@ -89,14 +89,13 @@ class ModuleSearch extends Module
 		$strKeywords = trim($this->Input->get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
-		// Overwrite default query_type
+		// Overwrite the default query_type
 		if ($this->Input->get('query_type'))
 		{
 			$this->queryType = $this->Input->get('query_type');
 		}
 
 		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
-		$objFormTemplate->setFormat($this->strFormat);
 
 		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $this->queryType;
@@ -253,17 +252,14 @@ class ModuleSearch extends Module
 				if ($to < $count || $from > 1)
 				{
 					$objPagination = new Pagination($count, $per_page);
-					$objPagination->setFormat($this->strFormat);
-
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}
 
-			// Get results
+			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
 				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
-				$objTemplate->setFormat($this->strFormat);
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];

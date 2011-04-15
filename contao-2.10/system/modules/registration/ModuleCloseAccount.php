@@ -92,7 +92,6 @@ class ModuleCloseAccount extends Module
 		);
 
 		$objWidget = new FormTextField($this->prepareForWidget($arrField, $arrField['name']));
-		$objWidget->setFormat($this->strFormat);
 		$objWidget->rowClass = 'row_0 row_first even';
 
 		// Validate widget
