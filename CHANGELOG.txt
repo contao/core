@@ -6,6 +6,7 @@ Version 2.9.5 (2011-XX-XX)
 --------------------------
 - Updated: updated TCPDF to version 5.9.061 (#2929)
 - Added: IE9 compatibility
+- Added: added the Swedish editArea translation (#3016)
 - Fixed: the code editor did not show up in the file manager (#2922)
 - Fixed: the RSS reader did not parse HTML code correctly (#2918)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)
