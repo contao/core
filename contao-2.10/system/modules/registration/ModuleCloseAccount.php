@@ -87,6 +87,7 @@ class ModuleCloseAccount extends Module
 		$arrField = array
 		(
 			'name' => 'password',
+			'inputType' => 'text',
 			'label' => $GLOBALS['TL_LANG']['MSC']['password'][0],
 			'eval' => array('hideInput'=>true, 'mandatory'=>true, 'required'=>true, 'tableless'=>$this->tableless)
 		);
