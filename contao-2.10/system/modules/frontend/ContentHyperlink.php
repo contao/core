@@ -112,7 +112,14 @@ class ContentHyperlink extends ContentElement
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->target = $this->target ? LINK_NEW_WINDOW : ''; # FIXME: HTML5 uses target="_blank"
+		$this->Template->target = '';
+
+		// Override the link target
+		if ($this->target)
+		{
+			global $objPage;
+			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+		}
 	}
 }
 

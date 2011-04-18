@@ -142,14 +142,6 @@ abstract class Controller extends System
 		// Add the templates root directory
 		$arrFolders[] = TL_ROOT . '/templates';
 
-		// Add the html5/xhtml subfolders of the root directory
-		# FIXME: do we really need this?
-		if (is_dir(TL_ROOT . '/templates/html5'))
-		{
-			$arrFolders[] = TL_ROOT . '/templates/html5';
-			$arrFolders[] = TL_ROOT . '/templates/xhtml';
-		}
-
 		// Add the theme templates folder
 		if ($intTheme > 0)
 		{
@@ -159,8 +151,17 @@ abstract class Controller extends System
 
 			if ($objTheme->numRows > 0 && $objTheme->templates != '')
 			{
-				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/html5';
-				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/xhtml';
+				// Check whether the new subfolders are available
+				if (is_dir(TL_ROOT .'/'. $objTheme->templates . '/html5'))
+				{
+					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/html5';
+					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/xhtml';
+				}
+				else
+				{
+					// Backwards compatibility
+					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
+				}
 			}
 		}
 
@@ -170,17 +171,20 @@ abstract class Controller extends System
 			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
 
 			// No templates directory at all
-			if (is_dir($strFolder))
+			if (!is_dir($strFolder))
 			{
-				// be_ and mail_ templates are never in a subfolder
-				$arrFolders[] = $strFolder;
+				continue;
+			}
 
-				// Check whether subfolders are available
-				if (is_dir($strFolder . '/html5'))
-				{
-					$arrFolders[] = $strFolder . '/html5';
-					$arrFolders[] = $strFolder . '/xhtml';
-				}
+			// Back end templates are never in a subfolder, so search the
+			// root folder as well. This also ensures backwards compatibility.
+			$arrFolders[] = $strFolder;
+
+			// Check whether the new subfolders are available
+			if (is_dir($strFolder . '/html5'))
+			{
+				$arrFolders[] = $strFolder . '/html5';
+				$arrFolders[] = $strFolder . '/xhtml';
 			}
 		}
 
@@ -1104,22 +1108,21 @@ abstract class Controller extends System
 		$strArticle = preg_replace_callback('@(<pre.*</pre>)@Us', 'nl2br_callback', $strArticle);
 
 		// Default PDF export using TCPDF
-		# FIXME: tag endings are different in HTML5
 		$arrSearch = array
 		(
 			'@<span style="text-decoration: ?underline;?">(.*)</span>@Us',
 			'@(<img[^>]+>)@',
 			'@(<div[^>]+block[^>]+>)@',
 			'@[\n\r\t]+@',
-			'@<br /><div class="mod_article@',
+			'@<br( /)?><div class="mod_article@',
 			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
 		);
 
 		$arrReplace = array
 		(
 			'<u>$1</u>',
-			'<br />$1',
-			'<br />$1',
+			'<br>$1',
+			'<br>$1',
 			' ',
 			'<div class="mod_article',
 			'href="$1$4"'
@@ -2847,10 +2850,16 @@ abstract class Controller extends System
 		}
 
 		// Image link
-		if (strlen($arrItem['imageUrl']) && TL_MODE == 'FE')
+		if (($arrItem['imageUrl'] != '') && TL_MODE == 'FE')
 		{
 			$objTemplate->href = TL_FILES_URL . $arrItem['imageUrl'];
-			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : ''; # FIXME: HTML5 uses target="_blank"
+			$objTemplate->attributes = '';
+
+			if ($arrItem['fullsize'])
+			{
+				global $objPage;
+				$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+			}
 		}
 
 		// Fullsize view

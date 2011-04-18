@@ -257,7 +257,6 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   debugMode  = debug the system and print results to the screen
  *   useRTE     = use the rich text editor (TinyMCE)
  *   useCE      = use the code editor (EditArea)
- *   pNewLine   = generate new lines using <p></p> instead of <br />
  *   oldBeTheme = use the old one-column back end form layout
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
@@ -265,7 +264,6 @@ $GLOBALS['TL_CONFIG']['thumbnails'] = true;
 $GLOBALS['TL_CONFIG']['debugMode']  = false;
 $GLOBALS['TL_CONFIG']['useRTE']     = true;
 $GLOBALS['TL_CONFIG']['useCE']      = true;
-$GLOBALS['TL_CONFIG']['pNewLine']   = true;
 $GLOBALS['TL_CONFIG']['oldBeTheme'] = false;
 
 

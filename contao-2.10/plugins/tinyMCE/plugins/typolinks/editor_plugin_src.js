@@ -83,7 +83,7 @@
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
 				infourl : 'http://www.contao.org',
-				version : '3.2.7'
+				version : '3.4.2'
 			};
 		}
 	});

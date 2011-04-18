@@ -280,8 +280,14 @@ abstract class Module extends Frontend
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
+					$row['target'] = '';
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+
+					// Override the link target
+					if ($objSubpages->type == 'redirect' && $objSubpages->target)
+					{
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+					}
 
 					$items[] = $row;
 				}
@@ -307,8 +313,14 @@ abstract class Module extends Frontend
 					$row['link'] = $objSubpages->title;
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($objSubpages->robots, 'noindex', 7) === 0);
-					$row['target'] = (($objSubpages->type == 'redirect' && $objSubpages->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
+					$row['target'] = '';
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $objSubpages->description);
+
+					// Override the link target
+					if ($objSubpages->type == 'redirect' && $objSubpages->target)
+					{
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+					}
 
 					$items[] = $row;
 				}

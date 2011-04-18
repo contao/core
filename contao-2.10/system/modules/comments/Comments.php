@@ -397,32 +397,20 @@ class Comments extends Frontend
 		$strComment = nl2br_pre($strComment);
 
 		// Use paragraphs to generate new lines
-		if ($GLOBALS['TL_CONFIG']['pNewLine'])
+		if (strncmp('<p>', $strComment, 3) !== 0)
 		{
-			if (strncmp('<p>', $strComment, 3) !== 0)
-			{
-				$strComment = '<p>'. $strComment .'</p>';
-			}
-
-			# FIXME: tag endings are different in HTML5
-			$arrSearch = array
-			(
-				'@<br />\s?<br />\s?@',
-				'@\s?<br /></p>@',
-				'@<p><div@', '@</div></p>@'
-			);
-
-			$arrReplace = array
-			(
-				"</p>\n<p>",
-				'</p>',
-				'<div', '</div>'
-			);
-
-			$strComment = preg_replace($arrSearch, $arrReplace, $strComment);
+			$strComment = '<p>'. $strComment .'</p>';
 		}
 
-		return $strComment;
+		$arrReplace = array
+		(
+			'@<br>\s?<br>\s?@' => "</p>\n<p>", // Convert two linebreaks into a new paragraph
+			'@\s?<br></p>@'    => '</p>',      // Remove BR tags before closing P tags
+			'@<p><div@'        => '<div',      // Do not nest DIVs inside paragraphs
+			'@</div></p>@'     => '</div>'     // Do not nest DIVs inside paragraphs
+		);
+
+		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
 	}
 }
 

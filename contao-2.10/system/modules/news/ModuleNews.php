@@ -100,6 +100,7 @@ abstract class ModuleNews extends Module
 			return array();
 		}
 
+		global $objPage;
 		$this->import('String');
 
 		$arrArticles = array();
@@ -142,14 +143,19 @@ abstract class ModuleNews extends Module
 			// Encode e-mail addresses
 			else
 			{
+				$objTemplate->text = $objArticles->text;
+
 				// Clean RTE output
-				$objTemplate->text = str_ireplace
-				(
-					# FIXME: tag endings are different in HTML5
-					array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
-					array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
-					$this->String->encodeEmail($objArticles->text)
-				);
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$objTemplate->text = $this->String->toXhtml($objTemplate->text);
+				}
+				else
+				{
+					$objTemplate->text = $this->String->toHtml5($objTemplate->text);
+				}
+
+				$objTemplate->text = $this->String->encodeEmail($objTemplate->text);
 			}
 
 			$arrMeta = $this->getMetaFields($objArticles);
@@ -368,11 +374,13 @@ abstract class ModuleNews extends Module
 			$objArticle->url = ampersand($objArticle->url);
 		}
 
+		global $objPage;
+
 		// External link
 		return sprintf('<a href="%s" title="%s"%s>%s</a>',
 						$objArticle->url,
 						specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['open'], $objArticle->url)),
-						($objArticle->target ? LINK_NEW_WINDOW : ''), # FIXME: HTML5 uses target="_blank"
+						($objArticle->target ? (($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"') : ''),
 						$strLink);
 	}
 }

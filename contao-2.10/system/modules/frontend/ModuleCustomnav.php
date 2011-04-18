@@ -174,8 +174,14 @@ class ModuleCustomnav extends Module
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
-					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
+					$row['target'] = '';
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
+
+					// Override the link target
+					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
+					{
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+					}
 
 					$items[] = $row;
 				}
@@ -193,8 +199,14 @@ class ModuleCustomnav extends Module
 					$row['link'] = $arrPage['title'];
 					$row['href'] = $href;
 					$row['nofollow'] = (strncmp($arrPage['robots'], 'noindex', 7) === 0);
-					$row['target'] = (($arrPage['type'] == 'redirect' && $arrPage['target']) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
+					$row['target'] = '';
 					$row['description'] = str_replace(array("\n", "\r"), array(' ' , ''), $arrPage['description']);
+
+					// Override the link target
+					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
+					{
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+					}
 
 					$items[] = $row;
 				}

@@ -52,17 +52,22 @@ class ContentText extends ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$this->import('String');
+		$this->Template->text = $this->text;
 
 		// Clean RTE output
-		$this->Template->text = str_ireplace
-		(
-			# FIXME: tag endings are different in HTML5
-			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
-			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
-			$this->String->encodeEmail($this->text)
-		);
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$this->Template->text = $this->String->toXhtml($this->Template->text);
+		}
+		else
+		{
+			$this->Template->text = $this->String->toHtml5($this->Template->text);
+		}
 
+		$this->Template->text = $this->String->encodeEmail($this->Template->text);
 		$this->Template->addImage = false;
 
 		// Add image

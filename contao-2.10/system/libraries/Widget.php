@@ -127,6 +127,20 @@ abstract class Widget extends Controller
 	public function __construct($arrAttributes=false)
 	{
 		parent::__construct();
+
+		// Override the output format in the front end
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat != '')
+			{
+				$this->strFormat = $objPage->outputFormat;
+			}
+
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
 		$this->addAttributes($arrAttributes);
 	}
 
@@ -350,19 +364,6 @@ abstract class Widget extends Controller
 		if ($this->strTemplate == '')
 		{
 			return '';
-		}
-
-		// Override the output format in the front end
-		if (TL_MODE == 'FE')
-		{
-			global $objPage;
-
-			if ($objPage->outputFormat != '')
-			{
-				$this->strFormat = $objPage->outputFormat;
-			}
-
-			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
 		}
 
 		$this->addAttributes($arrAttributes);
