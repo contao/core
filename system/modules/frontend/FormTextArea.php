@@ -92,6 +92,11 @@ class FormTextArea extends Widget
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
 
+			case 'readonly':
+				$this->arrAttributes['readonly'] = 'readonly';
+				$this->blnSubmitInput = false;
+				break;
+
 			case 'maxlength':
 				// Not supported
 				break;

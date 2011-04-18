@@ -1708,7 +1708,7 @@ class DC_Table extends DataContainer implements listable, editable
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_version">
 <select name="version" class="tl_select">'.$versions.'
-</select>
+</select> 
 <input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
 </div>
 </form>
@@ -4001,11 +4001,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		return '
 
 <div class="tl_search tl_subpanel">
-<strong>' . $GLOBALS['TL_LANG']['MSC']['search'] . ':</strong>
+<strong>' . $GLOBALS['TL_LANG']['MSC']['search'] . ':</strong> 
 <select name="tl_field" class="tl_select' . ($active ? ' active' : '') . '">
 '.implode("\n", $options_sorter).'
 </select>
-<span>=</span>
+<span> = </span>
 <input type="text" name="tl_value" class="tl_text' . ($active ? ' active' : '') . '" value="'.specialchars($session['search'][$this->strTable]['value']).'">
 </div>';
 	}
@@ -4090,7 +4090,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		return '
 
 <div class="tl_sorting tl_subpanel">
-<strong>' . $GLOBALS['TL_LANG']['MSC']['sortBy'] . ':</strong>
+<strong>' . $GLOBALS['TL_LANG']['MSC']['sortBy'] . ':</strong> 
 <select name="tl_sort" id="tl_sort" class="tl_select">
 '.implode("\n", $options_sorter).'
 </select>
@@ -4210,7 +4210,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		return '
 
 <div class="tl_limit tl_subpanel">
-<strong>' . $GLOBALS['TL_LANG']['MSC']['showOnly'] . ':</strong>'.$fields.'
+<strong>' . $GLOBALS['TL_LANG']['MSC']['showOnly'] . ':</strong> '.$fields.'
 </div>';
 	}
 
@@ -4563,7 +4563,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		return '
 
 <div class="tl_filter tl_subpanel">
-<strong>' . $GLOBALS['TL_LANG']['MSC']['filter'] . ':</strong>' . $fields . '
+<strong>' . $GLOBALS['TL_LANG']['MSC']['filter'] . ':</strong> ' . $fields . '
 </div>';
 	}
 

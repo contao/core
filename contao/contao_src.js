@@ -1825,45 +1825,6 @@ var TinyCallback =
 {
 
 	/**
-	 * Replace target="_blank" and close <br> tags
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	cleanXHTML: function(id, html)
-	{
-		var modify = '';
-		var a = html.match(/<a[^>]*>/gi);
-
-		if (a != null)
-		{
-			for (var i=0; i<a.length; i++)
-			{
-				modify = a[i].replace(/target="_blank"/gi, 'onclick="window.open(this.href); return false;"');
-				html = html.replace(a[i], modify);
-			}
-		}
-
-		return html.replace(/<br>/, '<br />');
-	},
-
-
-	/**
-	 * Close <br> tags and remove whitespace from the beginning of the code
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	cleanHTML: function(id, html)
-	{
-		html = html.replace(/<br \/>/, '<br>');
-		html = html.replace(/^\s*/ig, '');
-
-		return html;
-	},
-	
-	
-	/**
 	 * Get the scroll offset of the editor
 	 * @param object
 	 */
