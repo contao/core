@@ -50,11 +50,6 @@ tinyMCE.init({
   height : "300",
   language : "<?php echo $this->language; ?>",
   elements : "<?php echo $this->rteFields; ?>",
-<?php if ($this->brNewLine): ?>
-  forced_root_block : false,
-  force_p_newlines : false,
-  force_br_newlines : true,
-<?php endif; ?>
   remove_linebreaks : false,
   force_hex_style_colors : true,
   fix_list_elements : true,
@@ -66,8 +61,6 @@ tinyMCE.init({
   cleanup_on_startup : true,
   save_enablewhendirty : true,
   save_on_tinymce_forms : true,
-  //save_callback : "TinyCallback.cleanXHTML",
-  file_browser_callback : "ajaxfilemanager",
   init_instance_callback : "TinyCallback.getScrollOffset",
   advimage_update_dimensions_onchange : false,
   external_image_list_url : "<?php echo TL_PATH; ?>/plugins/tinyMCE/plugins/typolinks/typoimages.php",

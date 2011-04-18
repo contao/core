@@ -362,6 +362,67 @@ class String
 
 		return $arrValues;
 	}
+
+
+	/**
+	 * Convert a string to XHTML
+	 * @param  string
+	 * @return string
+	 */
+	public function toXhtml($strString)
+	{
+		$arrPregReplace = array
+		(
+			'/<(br|hr|img)([^>]*)>/i' => '<$1$2 />', // Close stand-alone tags
+			'/ border="[^"]*"/'       => ''          // Remove deprecated attributes 
+		);
+
+		$arrStrReplace = array
+		(
+			'/ />'             => ' />',        // Fix incorrectly closed tags
+			'<b>'              => '<strong>',   // Replace <b> with <strong>
+			'</b>'             => '</strong>',
+			'<i>'              => '<em>',       // Replace <i> with <em>
+			'</i>'             => '</em>',
+			'<u>'              => '<span style="text-decoration:underline;">',
+			'</u>'             => '</span>',
+			' target="_self"'  => '',
+			' target="_blank"' => ' onclick="window.open(this.href); return false;"'
+		);
+
+		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+
+		return $strString;
+	}
+
+
+	/**
+	 * Convert a string to HTML5
+	 * @param  string
+	 * @return string
+	 */
+	public function toHtml5($strString)
+	{
+		$arrPregReplace = array
+		(
+			'/<(br|hr|img)([^>]*) \/>/i'                  => '<$1$2>', // Close stand-alone tags
+			'/ (cellpadding|cellspacing|border)="[^"]*"/' => ''        // Remove deprecated attributes 
+		);
+
+		$arrStrReplace = array
+		(
+			'<u>'                                              => '<span style="text-decoration:underline;">',
+			'</u>'                                             => '</span>',
+			' target="_self"'                                  => '',
+			' onclick="window.open(this.href); return false;"' => ' target="_blank"'
+		);
+
+		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+
+		return $strString;
+	}
 }
 
 ?>

@@ -47,7 +47,6 @@ $GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Compress scri
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Items per page', 'Here you can define the number of items per page in the back end.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items per page', 'This overall limit takes effect if a user chooses the "show all records" option.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
-$GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Use paragraphs to generate new lines', 'Use paragraphs instead of line breaks to generate new lines in the rich text editor.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache mode', 'Here you can select the cache mode.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('Rewrite URLs', 'Make Contao generate static URLs without the index.php fragment. This feature requires "mod_rewrite", renaming the ".htaccess.default" file to ".htaccess" and adjusting the RewriteBase as necessary.');

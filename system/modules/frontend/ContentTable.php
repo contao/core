@@ -52,7 +52,10 @@ class ContentTable extends ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$rows = deserialize($this->tableitems);
+		$br = ($objPage->outputFormat == 'xhtml') ? '<br />' : '<br>';
 
 		$this->Template->id = 'table_' . $this->id;
 		$this->Template->summary = specialchars($this->summary);
@@ -136,11 +139,10 @@ class ContentTable extends ContentElement
 					$class_td = ' col_last';
 				}
 
-				# FIXME: tag endings are different in HTML5
 				$arrBody['row_' . $j . $class_tr . $class_eo][] = array
 				(
 					'class' => 'col_'.$i . $class_td,
-					'content' => (strlen($v) ? preg_replace('/[\n\r]+/i', '<br />', $v) : '&nbsp;')
+					'content' => (($v != '') ? str_replace("\n", $br, $v) : '&nbsp;')
 				);
 			}
 		}
@@ -152,11 +154,10 @@ class ContentTable extends ContentElement
 		{
 			foreach ($rows[(count($rows)-1)] as $i=>$v)
 			{
-				# FIXME: tag endings are different in HTML5
 				$arrFooter[] = array
 				(
 					'class' => 'foot_'.$i . (($i == 0) ? ' col_first' : '') . (($i == (count($rows[(count($rows)-1)]) - 1)) ? ' col_last' : ''),
-					'content' => (strlen($v) ? preg_replace('/[\n\r]+/i', '<br />', $v) : '&nbsp;')
+					'content' => (($v != '') ? str_replace("\n", $br, $v) : '&nbsp;')
 				);
 			}
 		}

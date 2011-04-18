@@ -119,16 +119,19 @@ class ModuleFaqReader extends Module
 
 		$this->import('String');
 		$this->Template->question = $objFaq->question;
+		$this->Template->answer = $objFaq->answer;
 
 		// Clean RTE output
-		$this->Template->answer = str_ireplace
-		(
-			# FIXME: tag endings are different in HTML5
-			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
-			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
-			$this->String->encodeEmail($objFaq->answer)
-		);
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$this->Template->answer = $this->String->toXhtml($this->Template->answer);
+		}
+		else
+		{
+			$this->Template->answer = $this->String->toHtml5($this->Template->answer);
+		}
 
+		$this->Template->answer = $this->String->encodeEmail($this->Template->answer);
 		$this->Template->addImage = false;
 
 		// Add image

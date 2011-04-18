@@ -71,7 +71,7 @@ class BackendTemplate extends Template
 		if (count($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
-			$this->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
+			$this->brNewLine = false; // Backwards compatibility
 			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
 			$this->ceFields = $GLOBALS['TL_RTE']['fields'];
 			$this->ceField = $GLOBALS['TL_RTE']['fields'][0]; // Backwards compatibility

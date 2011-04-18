@@ -209,6 +209,8 @@ abstract class Events extends Module
 	 */
 	protected function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
+		global $objPage;
+
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
 		$span = Calendar::calculateSpan($intStart, $intEnd);
@@ -250,13 +252,19 @@ abstract class Events extends Module
 		$arrEvent['month'] = $strMonth;
 		$arrEvent['parent'] = $intCalendar;
 		$arrEvent['link'] = $objEvents->title;
+		$arrEvent['target'] = '';
 		$arrEvent['title'] = specialchars($objEvents->title, true);
 		$arrEvent['href'] = $this->generateEventUrl($objEvents, $strUrl);
-		$arrEvent['target'] = (($objEvents->source == 'external' && $objEvents->target) ? LINK_NEW_WINDOW : ''); # FIXME: HTML5 uses target="_blank"
 		$arrEvent['class'] = ($objEvents->cssClass != '') ? ' ' . $objEvents->cssClass : '';
 		$arrEvent['details'] = $this->String->encodeEmail($objEvents->details);
 		$arrEvent['start'] = $intStart;
 		$arrEvent['end'] = $intEnd;
+
+		// Override the link target
+		if ($objEvents->source == 'external' && $objEvents->target)
+		{
+			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+		}
 
 		// Display the "read more" button for external/article links
 		if (($objEvents->source == 'external' || $objEvents->source == 'article') && $objEvents->details == '')
@@ -265,13 +273,17 @@ abstract class Events extends Module
 		}
 
 		// Clean RTE output
-		$arrEvent['details'] = str_ireplace
-		(
-			# FIXME: tag endings are different in HTML5
-			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
-			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
-			$this->String->encodeEmail($arrEvent['details'])
-		);
+		else
+		{
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$arrEvent['details'] = $this->String->toXhtml($arrEvent['details']);
+			}
+			else
+			{
+				$arrEvent['details'] = $this->String->toHtml5($arrEvent['details']);
+			}
+		}
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 

@@ -53,13 +53,7 @@ var LinkDialog = {
 			f.linktitle.value = ed.dom.getAttrib(e, 'title');
 			f.insert.value = ed.getLang('update');
 			selectByValue(f, 'link_list', f.href.value);
-			// PATCH: handle target="_blank"
-			if (/window.open\(this.href\);/.test(ed.dom.getAttrib(e, 'onclick'))) {
-				selectByValue(f, 'target_list', '_blank');
-			} else {
-				selectByValue(f, 'target_list', ed.dom.getAttrib(e, 'target'));
-			}
-			// PATCH EOF
+			selectByValue(f, 'target_list', ed.dom.getAttrib(e, 'target'));
 			selectByValue(f, 'rel_list', ed.dom.getAttrib(e, 'rel'), true); // PATCH: rel attribute
 			selectByValue(f, 'class_list', ed.dom.getAttrib(e, 'class'), true); // PATCH: add true to set custom values
 		}
@@ -101,12 +95,12 @@ var LinkDialog = {
 					ed.dom.setAttribs(e, {
 						href : f.href.value,
 						title : f.linktitle.value,
-						//target : f.target_list ? getSelectValue(f, "target_list") : null,
+						target : f.target_list ? getSelectValue(f, "target_list") : null,
 						'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
 						'class' : f.class_list ? getSelectValue(f, "class_list") : null
 					});
 
-					// PATCH: handle target="_blank"
+					// PATCH: fix issues
 					t.fixIssues(ed, e, f);
 				}
 			});
@@ -114,12 +108,12 @@ var LinkDialog = {
 			ed.dom.setAttribs(e, {
 				href : f.href.value,
 				title : f.linktitle.value,
-				//target : f.target_list ? getSelectValue(f, "target_list") : null,
+				target : f.target_list ? getSelectValue(f, "target_list") : null,
 				'rel' : f.rel_list ? getSelectValue(f, "rel_list") : null,
 				'class' : f.class_list ? getSelectValue(f, "class_list") : null
 			});
 
-			// PATCH: handle target="_blank"
+			// PATCH: fix issues
 			this.fixIssues(ed, e, f);
 		}
 
@@ -137,15 +131,6 @@ var LinkDialog = {
 
 	// PATCH: add function fixIssues
 	fixIssues : function(ed, e, f) {
-		var o = ed.dom.getAttrib(e, 'onclick');
-
-		// Handle target="_blank"
-		if (getSelectValue(f, "target_list") == '_blank' && !/window.open\(this.href\);/.test(o)) {
-			ed.dom.setAttrib(e, 'onclick', tinymce.trim(o + ' window.open(this.href); return false;'));
-		} else if (o) {
-			ed.dom.setAttrib(e, 'onclick', tinymce.trim(o.replace('window.open(this.href); return false;', '')));
-		}
-
 		// Fix relative URLs
 		if (f.href.value+'/' == ed.settings.document_base_url) {
 			f.href.value += '/';

@@ -407,23 +407,24 @@ function ampersand($strString, $blnEncode=true)
 
 
 /**
- * Insert HTML line breaks before all newlines preserving preformatted text
+ * Replace line breaks with <br> tags preserving preformatted text
  * @param string
  * @return string
  */
 function nl2br_pre($str)
 {
-	$str = nl2br($str);
+	$str = nl2br($str, false);
 
 	if (stripos($str, '<pre') === false)
+	{
 		return $str;
+	}
 
 	$chunks = array();
 	preg_match_all('/<pre[^>]*>.*<\/pre>/Uis', $str, $chunks);
 
 	foreach ($chunks as $chunk)
 	{
-		# FIXME: tag endings are different in HTML5
 		$str = str_replace($chunk, str_ireplace(array('<br>', '<br />'), '', $chunk), $str);
 	}
 
@@ -432,14 +433,13 @@ function nl2br_pre($str)
 
 
 /**
- * Replace line breaks with <br /> tags (to be used with preg_replace_callback)
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
  * @param array
  * @return string
  */
 function nl2br_callback($matches)
 {
-	# FIXME: tag endings are different in HTML5
-	return str_replace("\n", "<br />", $matches[0]);
+	return str_replace("\n", '<br>', $matches[0]);
 }
 
 

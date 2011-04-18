@@ -181,16 +181,19 @@ class ModuleEventReader extends Events
 		$objTemplate->until = $until;
 
 		$this->import('String');
+		$objTemplate->details = $objEvent->details;
 
 		// Clean RTE output
-		$objTemplate->details = str_ireplace
-		(
-			# FIXME: tag endings are different in HTML5
-			array('<u>', '</u>', '</p>', '<br /><br />', ' target="_self"'),
-			array('<span style="text-decoration:underline;">', '</span>', "</p>\n", "<br /><br />\n", ''),
-			$this->String->encodeEmail($objEvent->details)
-		);
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$objTemplate->details = $this->String->toXhtml($objTemplate->details);
+		}
+		else
+		{
+			$objTemplate->details = $this->String->toHtml5($objTemplate->details);
+		}
 
+		$objTemplate->details = $this->String->encodeEmail($objTemplate->details);
 		$objTemplate->addImage = false;
 
 		// Add image

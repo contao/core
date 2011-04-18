@@ -419,7 +419,8 @@ class ModuleListing extends Module
 		// URLs
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
-			$value = '<a href="' . $value . '"' . LINK_NEW_WINDOW . '>' . $value . '</a>'; # FIXME: HTML5 uses target="_blank"
+			global $objPage;
+			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"') . '>' . $value . '</a>';
 		}
 
 		// E-mail addresses
