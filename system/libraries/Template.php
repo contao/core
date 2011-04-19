@@ -231,6 +231,11 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
+		// Add the browser and OS classes
+		$ua = $this->Environment->agent;
+		$this->strBuffer = str_replace('__ua__', $ua->class, $this->strBuffer);
+
+		// Minify the markup if activated
 		$this->strBuffer = $this->minifyHtml($this->strBuffer);
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 

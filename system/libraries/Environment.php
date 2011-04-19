@@ -414,6 +414,158 @@ class Environment
 	{
 		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest');
 	}
+
+
+	/**
+	 * Return the operating system and the browser name and version
+	 * @return array
+	 */
+	protected function agent()
+	{
+		$return = new stdClass();
+		$ua = $this->httpUserAgent;
+
+		// Operating system
+		switch (true)
+		{
+			case preg_match('/Macintosh/i', $ua):
+				$os = 'mac';
+				$mobile = false;
+				break;
+
+			case preg_match('/Windows CE/i', $ua):
+				$os = 'win-ce';
+				$mobile = true;
+				break;
+
+			case preg_match('/Windows/i', $ua):
+				$os = 'win';
+				$mobile = false;
+				break;
+
+			case preg_match('/Android/i', $ua):
+				$os = 'android';
+				$mobile = true;
+				break;
+
+			case preg_match('/Linux|FreeBSD|OpenBSD/i', $ua):
+				$os = 'unix';
+				$mobile = false;
+				break;
+
+			case preg_match('/iPad/i', $ua):
+				$os = 'ipad';
+				$mobile = true;
+				break;
+
+			case preg_match('/iPhone|iPod/i', $ua):
+				$os = 'iphone';
+				$mobile = true;
+				break;
+
+			case preg_match('/Blackberry/i', $ua):
+				$os = 'blackberry';
+				$mobile = true;
+				break;
+
+			case preg_match('/Palm/i', $ua):
+				$os = 'palm';
+				$mobile = true;
+				break;
+
+			default;
+				$os = 'nos';
+				$mobile = false;
+				break;
+		}
+
+		$return->os = $os;
+
+		// Browser and version
+		switch (true)
+		{
+			case preg_match('/Firefox/i', $ua):
+				$browser = 'firefox';
+				$shorty  = 'fx';
+				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case preg_match('/Chrome/i', $ua):
+				$browser = 'chrome';
+				$shorty  = 'ch';
+				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case preg_match('/Safari/i', $ua):
+				$browser = 'safari';
+				$shorty  = 'sf';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case preg_match('/IEMobile/i', $ua):
+				$browser = 'ie-mobile';
+				$shorty  = 'im';
+				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case preg_match('/MSIE/i', $ua):
+				$browser = 'ie';
+				$shorty  = 'ie';
+				$version = preg_replace('/^.*MSIE (\d+).*$/', '$1', $ua);
+				break;
+
+			case preg_match('/Opera Mini/i', $ua):
+				$browser = 'opera-mini';
+				$shorty  = 'oi';
+				$version = preg_replace('/^.*Opera Mini\/(\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case preg_match('/Opera Mobi/i', $ua):
+				$browser = 'opera-mobile';
+				$shorty  = 'om';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case preg_match('/Opera/i', $ua):
+				$browser = 'opera';
+				$shorty  = 'op';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case preg_match('/Camino/i', $ua):
+				$browser = 'camino';
+				$shorty  = 'ca';
+				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
+				break;
+
+			default:
+				$browser = 'other';
+				$shorty  = '';
+				$version = '';
+		}
+
+		$return->class = $os . ' ' . $browser;
+
+		if ($version != '')
+		{
+			$return->class .= ' ' . $shorty . $version;
+		}
+
+		if ($mobile)
+		{
+			$return->class .= ' mobile';
+		}
+
+		$return->browser = $browser;
+		$return->shorty  = $shorty;
+		$return->version = $version;
+		$return->mobile  = $mobile;
+
+		return $return;
+	}
 }
 
 ?>

@@ -255,6 +255,10 @@ class Index extends Frontend
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
+		// Add the browser and OS classes
+		$ua = $this->Environment->agent;
+		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
+
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 		/**

@@ -22,6 +22,7 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Added: optionally minify the page markup before it is sent to the browser (#2982)
 - Added: added a default IE6 warning message (browser out of date)
 - Added: added an option to choose between HTML and XHTML output in the front end
+- Added: add CSS classes to the body tag depending on the client's OS and browser
 - Fixed: do not add $objRow->protected in tree view by default (#2915)
 - Fixed: convert relative external image URLs in newsletters (#2895)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)

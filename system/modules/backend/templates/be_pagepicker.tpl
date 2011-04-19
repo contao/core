@@ -39,7 +39,7 @@ document.onLoad = self.focus();
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 </head>
-<body>
+<body class="__ua__">
 
 <div id="container">
 <div id="main">

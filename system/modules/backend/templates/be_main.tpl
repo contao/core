@@ -42,7 +42,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 </head>
-<body id="top">
+<body id="top" class="__ua__">
 <?php $this->showIE6warning(); ?>
 
 <div id="header">
