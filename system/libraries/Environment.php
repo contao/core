@@ -485,7 +485,7 @@ class Environment
 
 		$return->os = $os;
 
-		// Browser and version (check Opera Mini and Opera Mobi before Opera!)
+		// Browser and version (check OmniWeb before Safari and Opera Mini/Mobi before Opera!)
 		switch (true)
 		{
 			case stristr($ua, 'MSIE'):
@@ -504,6 +504,12 @@ class Environment
 				$browser = 'chrome';
 				$shorty  = 'ch';
 				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case stristr($ua, 'OmniWeb'):
+				$browser = 'omniweb';
+				$shorty  = 'ow';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				break;
 
 			case stristr($ua, 'Safari'):
@@ -543,6 +549,12 @@ class Environment
 				$browser = 'camino';
 				$shorty  = 'ca';
 				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case stristr($ua, 'Konqueror'):
+				$browser = 'konqueror';
+				$shorty  = 'ko';
+				$version = preg_replace('/^.*Konqueror\/(\d+).*$/', '$1', $ua);
 				break;
 
 			default:
