@@ -425,50 +425,54 @@ class Environment
 		$return = new stdClass();
 		$ua = $this->httpUserAgent;
 
-		// Operating system
+		// Operating system (check Windows CE before Windows and Android before Linux!)
 		switch (true)
 		{
-			case preg_match('/Macintosh/i', $ua):
+			case stristr($ua, 'Macintosh'):
 				$os = 'mac';
 				$mobile = false;
 				break;
 
-			case preg_match('/Windows CE/i', $ua):
+			case stristr($ua, 'Windows CE'):
 				$os = 'win-ce';
 				$mobile = true;
 				break;
 
-			case preg_match('/Windows/i', $ua):
+			case stristr($ua, 'Windows'):
 				$os = 'win';
 				$mobile = false;
 				break;
 
-			case preg_match('/Android/i', $ua):
-				$os = 'android';
-				$mobile = true;
-				break;
-
-			case preg_match('/Linux|FreeBSD|OpenBSD/i', $ua):
-				$os = 'unix';
-				$mobile = false;
-				break;
-
-			case preg_match('/iPad/i', $ua):
-				$os = 'ipad';
-				$mobile = true;
-				break;
-
-			case preg_match('/iPhone|iPod/i', $ua):
+			case stristr($ua, 'iPhone'):
+			case stristr($ua, 'iPod'):
 				$os = 'iphone';
 				$mobile = true;
 				break;
 
-			case preg_match('/Blackberry/i', $ua):
+			case stristr($ua, 'iPad'):
+				$os = 'ipad';
+				$mobile = true;
+				break;
+
+			case stristr($ua, 'Android'):
+				$os = 'android';
+				$mobile = true;
+				break;
+
+			case stristr($ua, 'Blackberry'):
 				$os = 'blackberry';
 				$mobile = true;
 				break;
 
-			case preg_match('/Palm/i', $ua):
+			case stristr($ua, 'Linux'):
+			case stristr($ua, 'FreeBSD'):
+			case stristr($ua, 'OpenBSD'):
+			case stristr($ua, 'NetBSD'):
+				$os = 'unix';
+				$mobile = false;
+				break;
+
+			case stristr($ua, 'Palm'):
 				$os = 'palm';
 				$mobile = true;
 				break;
@@ -481,61 +485,61 @@ class Environment
 
 		$return->os = $os;
 
-		// Browser and version
+		// Browser and version (check Opera Mini and Opera Mobi before Opera!)
 		switch (true)
 		{
-			case preg_match('/Firefox/i', $ua):
-				$browser = 'firefox';
-				$shorty  = 'fx';
-				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case preg_match('/Chrome/i', $ua):
-				$browser = 'chrome';
-				$shorty  = 'ch';
-				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case preg_match('/Safari/i', $ua):
-				$browser = 'safari';
-				$shorty  = 'sf';
-				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case preg_match('/IEMobile/i', $ua):
-				$browser = 'ie-mobile';
-				$shorty  = 'im';
-				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
-				$mobile = true;
-				break;
-
-			case preg_match('/MSIE/i', $ua):
+			case stristr($ua, 'MSIE'):
 				$browser = 'ie';
 				$shorty  = 'ie';
 				$version = preg_replace('/^.*MSIE (\d+).*$/', '$1', $ua);
 				break;
 
-			case preg_match('/Opera Mini/i', $ua):
+			case stristr($ua, 'Firefox'):
+				$browser = 'firefox';
+				$shorty  = 'fx';
+				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case stristr($ua, 'Chrome'):
+				$browser = 'chrome';
+				$shorty  = 'ch';
+				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case stristr($ua, 'Safari'):
+				$browser = 'safari';
+				$shorty  = 'sf';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case stristr($ua, 'Opera Mini'):
 				$browser = 'opera-mini';
 				$shorty  = 'oi';
 				$version = preg_replace('/^.*Opera Mini\/(\d+).*$/', '$1', $ua);
 				$mobile = true;
 				break;
 
-			case preg_match('/Opera Mobi/i', $ua):
+			case stristr($ua, 'Opera Mobi'):
 				$browser = 'opera-mobile';
 				$shorty  = 'om';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				$mobile = true;
 				break;
 
-			case preg_match('/Opera/i', $ua):
+			case stristr($ua, 'Opera'):
 				$browser = 'opera';
 				$shorty  = 'op';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case preg_match('/Camino/i', $ua):
+			case stristr($ua, 'IEMobile'):
+				$browser = 'ie-mobile';
+				$shorty  = 'im';
+				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case stristr($ua, 'Camino'):
 				$browser = 'camino';
 				$shorty  = 'ca';
 				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
@@ -549,11 +553,13 @@ class Environment
 
 		$return->class = $os . ' ' . $browser;
 
+		// Add the version number if available
 		if ($version != '')
 		{
 			$return->class .= ' ' . $shorty . $version;
 		}
 
+		// Mark mobile devices
 		if ($mobile)
 		{
 			$return->class .= ' mobile';

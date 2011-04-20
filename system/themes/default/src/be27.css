@@ -46,7 +46,7 @@
 	width:657px;
 }
 .m12 {
-	margin:12px 0 12px 0;
+	margin:12px 0 12px;
 }
 .cbx {
 	height:48px;
@@ -69,7 +69,7 @@ fieldset.tl_tbox {
 fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:6px;
 	border:1px solid #ddd;
-	border-width:1px 0 0 0;
+	border-width:1px 0 0;
 	background:url("images/palBg.jpg") left top repeat-x;
 }
 fieldset.nolegend {
@@ -105,7 +105,7 @@ fieldset.collapsed > legend {
 	-moz-opacity:.9;
 	width:682px;
 	margin-left:-248px;
-	padding:8px 12px 10px 12px;
+	padding:8px 12px 10px;
 	line-height:1.5;
 	text-align:left;
 	color:#fff;

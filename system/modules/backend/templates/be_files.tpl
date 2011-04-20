@@ -12,9 +12,6 @@
   if ($this->be27) {
     $objCombiner->add('system/themes/'. $this->theme .'/be27.css');
   }
-  if ($this->isMac) {
-    $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
-  }
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
@@ -53,7 +50,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 parent.Mediabox.enableFiletreeReload();
 </script>
 </head>
-<body class="__ua__">
+<body class="{{ua::class}}">
 
 <div id="container">
 <div id="main">

@@ -40,7 +40,7 @@ body {
 
 /* Main */
 #main {
-	padding:9px 9px 15px 9px;
+	padding:9px 9px 15px;
 	background:#fff;
 	border:1px solid #999;
 	text-align:left;
@@ -49,7 +49,7 @@ body {
 /* Elements */
 h1 {
 	margin:0px;
-	padding:3px 0 9px 0;
+	padding:3px 0 9px;
 }
 select {
 	width:280px;

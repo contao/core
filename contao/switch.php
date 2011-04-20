@@ -173,7 +173,6 @@ class PreviewSwitch extends Backend
 		$this->Template->fePreview = $GLOBALS['TL_LANG']['MSC']['fePreview'];
 		$this->Template->hiddenElements = $GLOBALS['TL_LANG']['MSC']['hiddenElements'];
 		$this->Template->closeSrc = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/close.gif';
-		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->isAdmin = $this->User->isAdmin;
 

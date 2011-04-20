@@ -8,9 +8,6 @@
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/login.css');
-  if ($this->isMac) {
-    $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
-  }
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
@@ -24,7 +21,7 @@
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 </head>
-<body class="__ua__">
+<body class="{{ua::class}}">
 <?php $this->showIE6warning(); ?>
 
 <div id="header">

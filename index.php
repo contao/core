@@ -251,13 +251,9 @@ class Index extends Frontend
 			return;
 		}
 
-		// Read buffer
+		// Read the buffer
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
-
-		// Add the browser and OS classes
-		$ua = $this->Environment->agent;
-		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
@@ -307,6 +303,7 @@ class Index extends Frontend
 			$content = 'text/html';
 		}
 
+		header('Vary: User-Agent');
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Send cache headers
