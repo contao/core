@@ -14,7 +14,7 @@
 <?php echo $this->mooScripts; ?>
 <?php echo $this->head; ?>
 </head>
-<body id="top" class="__ua__<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
+<body id="top" class="{{ua::class}}<?php if ($this->class): ?> <?php echo $this->class; ?><?php endif; ?>"<?php if ($this->onload): ?> onload="<?php echo $this->onload; ?>"<?php endif; ?>>
 <?php $this->showIE6warning(); ?>
 
 <div id="wrapper">

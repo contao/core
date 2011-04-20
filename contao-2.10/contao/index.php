@@ -122,7 +122,6 @@ class Index extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->userLanguage = $GLOBALS['TL_LANG']['tl_user']['language'][0];
-		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['MSC']['loginTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$this->Template->curLanguage = $this->Input->post('language') ? $this->Input->post('language') : $GLOBALS['TL_LANGUAGE'];
 		$this->Template->curUsername = $this->Input->post('username') ? $this->Input->post('username') : '';

@@ -1232,7 +1232,7 @@ abstract class Controller extends System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || strncmp($elements[0], 'cache_', 6) === 0)
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || strncmp($elements[0], 'cache_', 6) === 0)
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1805,6 +1805,20 @@ abstract class Controller extends System
 						case 'plugins_url':
 							$arrCache[$strTag] = TL_PLUGINS_URL;
 							break;
+					}
+					break;
+
+				// User agent
+				case 'ua':
+					$ua = $this->Environment->agent;
+
+					if ($elements[1] != '')
+					{
+						$arrCache[$strTag] = $ua->{$elements[1]};
+					}
+					else
+					{
+						$arrCache[$strTag] = '';
 					}
 					break;
 

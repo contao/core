@@ -231,10 +231,6 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		// Add the browser and OS classes
-		$ua = $this->Environment->agent;
-		$this->strBuffer = str_replace('__ua__', $ua->class, $this->strBuffer);
-
 		// Minify the markup if activated
 		$this->strBuffer = $this->minifyHtml($this->strBuffer);
 		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
@@ -257,7 +253,9 @@ abstract class Template extends Controller
 			$this->strBuffer, 1
 		);
 
+		header('Vary: User-Agent');
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+
 		echo $this->strBuffer;
 
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
@@ -266,6 +264,8 @@ abstract class Template extends Controller
 			print_r($GLOBALS['TL_DEBUG']);
 			echo "\n</pre>";
 		}
+
+		exit;
 	}
 
 

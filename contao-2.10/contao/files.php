@@ -103,7 +103,6 @@ class FileManager extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
 		$this->Template->error = ($this->Input->get('act') == 'error') ? $GLOBALS['TL_LANG']['ERR']['general'] : '';
-		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->skipNavigation = $GLOBALS['TL_LANG']['MSC']['skipNavigation'];
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];

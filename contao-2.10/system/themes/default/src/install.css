@@ -34,7 +34,7 @@ body {
 /* Header */
 #header {
 	width:756px;
-	margin:18px auto 0 auto;
+	margin:18px auto 0;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -51,7 +51,7 @@ body {
 #container {
 	width:760px;
 	margin:0 auto;
-	padding:0 0 18px 0;
+	padding:0 0 18px;
 }
 
 /* Main */
@@ -65,14 +65,14 @@ body {
 
 /* Headlines */
 #container h2 {
-	margin:16px 18px 0 18px;
+	margin:16px 18px 0;
 	padding:8px 0 7px 36px;
 	background:url("images/install.gif") no-repeat left center;
 	font-size:14px;
 	color:#8ab858;
 }
 #container h2.important {
-	margin:16px 18px 0 18px;
+	margin:16px 18px 0;
 	padding:7px 0 8px 36px;
 	background:url("images/important.gif") no-repeat left center;
 	font-size:14px;
@@ -80,8 +80,8 @@ body {
 	color:#c55;
 }
 #container h3 {
-	margin:24px 18px 0 18px;
-	padding:24px 0 3px 0;
+	margin:24px 18px 0;
+	padding:24px 0 3px;
 	border-top:1px solid #ddd;
 	font-size:12px;
 	font-weight:bold;
@@ -91,7 +91,7 @@ body {
 	border-top:0;
 }
 #container h4 {
-	margin:12px 0 1px 0;
+	margin:12px 0 1px;
 	padding:0;
 	font-size:11px;
 	font-weight:normal;
@@ -99,7 +99,7 @@ body {
 
 /* Paragraphs and lists */
 p {
-	margin:0 18px 12px 18px;
+	margin:0 18px 12px;
 	padding:0;
 	line-height:16px;
 	text-align:justify;
@@ -113,26 +113,29 @@ li {
 }
 .code_old {
 	margin:9px 18px;
-	padding:6px 6px 7px 6px;
+	padding:6px 6px 7px;
 	border:1px solid #c00;
 	background:#fdd;
 }
 .code_new {
 	margin:9px 18px;
-	padding:6px 6px 7px 6px;
+	padding:6px 6px 7px;
 	border:1px solid #0a0;
 	background:#dfd;
 }
 
 /* Form tables */
 #sql_table {
-	margin:-3px 0 -3px 0;
+	margin:-3px 0;
 }
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
 }
+.mac #sql_table pre label {
+	font-size:12px;
+}
 .tl_col_0 {
-	padding:6px 0 2px 0;
+	padding:6px 0 2px;
 	font-weight:bold;
 	color:#8ab858;
 }
@@ -143,29 +146,25 @@ li {
 	padding:2px 0 3px 4px;
 }
 
-/* Error messages */
-.tl_error {
+/* Error and confirmation messages */
+.tl_error,.tl_confirm,.tl_info {
 	margin:0 18px;
 	padding:2px 0 3px 20px;
-	background:url("images/error.gif") no-repeat left center;
+}
+.tl_error {
 	color:#c55;
+	background:url("images/error.gif") no-repeat left center;
+}
+.tl_confirm {
+	color:#8ab858;
+	background:url("images/ok.gif") no-repeat left center;
+}
+.tl_info {
+	color:#5c9ac9;
+	background:url("images/show.gif") no-repeat 1px center;
 }
 .tl_formbody .tl_error {
 	margin:0;
-}
-
-/* Confirmation messages */
-.tl_confirm {
-	margin:0 18px;
-	padding:2px 0 3px 20px;
-	background:url("images/ok.gif") no-repeat left center;
-	color:#8ab858;
-}
-.tl_info {
-	margin:0 18px;
-	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat 1px center;
-	color:#5c9ac9;
 }
 
 /* Go to back end */

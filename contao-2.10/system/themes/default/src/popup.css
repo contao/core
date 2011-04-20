@@ -51,7 +51,7 @@ h1 {
 	color:#fff;
 }
 h2 {
-	margin:18px 18px 12px 18px;
+	margin:18px 18px 12px;
 	padding:7px 0 7px 36px;
 	background:url("images/help.gif") left center no-repeat;
 	font-size:14px;
@@ -73,7 +73,7 @@ h2 {
 	margin:18px;
 }
 #download {
-	margin:9px 18px 3px 18px;
+	margin:9px 18px 3px;
 }
 #download img {
 	position:relative;
@@ -84,6 +84,6 @@ img.mime_icon {
 }
 
 /* IE 7 fixes */
-*+html #container {
+.ie7 #container {
 	padding-bottom:18px;
 }

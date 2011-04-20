@@ -34,7 +34,7 @@ body {
 /* Header */
 #header {
 	width:516px;
-	margin:18px auto 0 auto;
+	margin:18px auto 0;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -86,7 +86,7 @@ body {
 
 /* License (do not remove) */
 #tl_license {
-	margin:18px 18px 0 18px;
+	margin:18px 18px 0;
 }
 #tl_license p {
 	line-height:15px;
@@ -101,37 +101,37 @@ body {
 
 /* Error messages */
 .login_error {
-	margin:1px 0 0 0;
+	margin:1px 0 0;
 	padding:2px 0 3px 20px;
 	background:url("images/error.gif") no-repeat left center;
 }
 .login_error label {
 	color:#c55;
 }
-.tl_error {
-	margin:0 0 12px 0;
+.tl_error,.tl_info {
+	margin:0 0 12px;
 	padding:2px 0 3px 20px;
-	background:url("images/error.gif") no-repeat left center;
+}
+.tl_error {
 	color:#c55;
+	background:url("images/error.gif") no-repeat left center;
 }
 .tl_info {
-	margin:0 0 12px 0;
-	padding:2px 0 3px 20px;
-	background:url("images/show.gif") no-repeat 1px center;
 	color:#5c9ac9;
+	background:url("images/show.gif") no-repeat 1px center;
 }
 
 /* Login form */
 .tl_login_form {
 	width:350px;
-	margin:18px auto 24px auto;
+	margin:18px auto 24px;
 }
 .tl_login_form .formbody {
 	padding-top:6px;
 }
 .tl_login_table {
 	width:100%;
-	margin:0 0 6px 0;
+	margin:0 0 6px;
 }
 .tl_login_submit_container {
 	padding-top:0;

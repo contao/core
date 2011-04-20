@@ -63,7 +63,7 @@ h2 {
 
 /* Table */
 .tl_help_table {
-	margin:0 18px 18px 18px;
+	margin:0 18px 18px;
 }
 .tl_help_table td {
 	padding:12px 0;
@@ -77,6 +77,6 @@ h2 {
 }
 
 /* IE 7 fix */
-*+html #container {
+.ie7 #container {
 	padding-bottom:18px;
 }

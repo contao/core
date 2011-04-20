@@ -48,6 +48,9 @@ a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,tex
 	font-size:11px;
 	color:#666966;
 }
+.mac fieldset,.mac form,.mac input,.mac optgroup,.mac select,.mac textarea {
+	font-size:12px;
+}
 h1,h2,h3,h4,h5,h6 {
 	font-size:12px;
 	color:#666966;
@@ -60,9 +63,8 @@ th,td {
 }
 .tl_small {
 	font-size:9px;
-	color:#a3a3a3;
 }
-.tl_gray {
+.tl_small,.tl_gray {
 	color:#a3a3a3;
 }
 .tl_green {
@@ -97,7 +99,7 @@ hr {
 	color:#ddd;
 }
 p {
-	margin:0 0 12px 0;
+	margin:0 0 12px;
 	padding:0;
 }
 
@@ -143,13 +145,13 @@ optgroup {
 }
 fieldset.tl_radio_container {
 	border:0;
-	margin:15px 0 0 0;
+	margin:15px 0 0;
 	padding:0;
 }
 fieldset.tl_radio_container legend {
 	font-weight:bold;
 	margin:0;
-	padding:0 0 1px 0;
+	padding:0 0 1px;
 }
 
 /* Text fields */
@@ -173,21 +175,24 @@ fieldset.tl_radio_container legend {
 	height:240px;
 }
 .tl_text_unit {
-	margin:1px 0 1px 0;
+	margin:1px 0 1px;
 	width:250px;
 }
 .tl_text_trbl {
-	margin:1px 0 1px 0;
+	margin:1px 0 1px;
 	width:55px;
 }
 .tl_text_interval {
-	margin:1px 0 1px 0;
+	margin:1px 0 1px;
 	width:152px;
 }
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
 	border:1px solid #b8b8b8;
 	padding:2px;
 	border-radius:3px;
+}
+.mac .tl_text,.mac .tl_text_2,.mac .tl_text_3,.mac .tl_text_4,.mac .tl_textarea,.mac .tl_text_unit,.mac .tl_text_trbl,.mac .tl_text_interval {
+	padding:3px 2px;
 }
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
 	background:#ebfdd7;
@@ -202,7 +207,7 @@ pre,.tl_textarea.monospace {
 
 /* Select menus */
 .tl_select,.tl_mselect,.tl_select_column {
-	margin:1px 0 1px 0;
+	margin:1px 0;
 }
 .tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect {
 	width:320px;
@@ -215,7 +220,7 @@ pre,.tl_textarea.monospace {
 	width:60px;
 }
 .tl_select_interval {
-	margin:1px 0 1px 0;
+	margin:1px 0;
 	width:158px;
 }
 .tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
@@ -223,20 +228,29 @@ pre,.tl_textarea.monospace {
 	padding:1px;
 	border-radius:3px;
 }
+.mac .tl_select,.mac .tl_mselect,.mac .tl_select_column,.mac .tl_select_unit,.mac .tl_select_interval {
+	padding:2px 1px;
+}
 
 /* Checkboxes */
 .tl_checkbox {
 	margin:1px 3px 0 0;
 	vertical-align:bottom;
 }
+.mac .tl_checkbox {
+	margin:0 3px 0 0;
+}
 .tl_tree_checkbox {
 	margin:0 3px 0 0;
 }
 .tl_checkbox_single_container {
-	margin:16px 0 1px 0;
+	margin:16px 0 1px;
 }
 .tl_checkbox_single_container label {
 	font-weight:bold;
+}
+.mac .tl_checkbox_container {
+	margin:-1px 0 1px;
 }
 
 /* Grouped checkboxes */
@@ -269,7 +283,7 @@ pre,.tl_textarea.monospace {
 
 /* Radio table */
 .tl_radio_table {
-	margin:2px 0 1px 0;
+	margin:2px 0 1px;
 }
 .tl_radio_table td {
 	padding:0 24px 1px 0;
@@ -280,7 +294,7 @@ pre,.tl_textarea.monospace {
 
 /* Upload fields */
 .tl_upload_field {
-	margin:1px 0 1px 0;
+	margin:1px 0;
 }
 
 /* Submit buttons */
@@ -295,12 +309,12 @@ pre,.tl_textarea.monospace {
 	text-shadow:1px 1px 0 #666;
 	box-shadow:0 1px 3px #bbb;
 }
+.mac.firefox .tl_submit {
+	padding:2px 12px 3px;
+}
 .tl_submit:focus,.tl_submit:hover {
 	box-shadow:0 0 6px #8ab858;
 }
 .tl_submit:active {
 	background:#8ab858;
-}
-.tl_submit,x:-moz-any-link {
-	padding:2px 12px 3px;
 }

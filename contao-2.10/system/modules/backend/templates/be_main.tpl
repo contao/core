@@ -13,9 +13,6 @@
   if ($this->be27) {
     $objCombiner->add('system/themes/'. $this->theme .'/be27.css');
   }
-  if ($this->isMac) {
-    $objCombiner->add('system/themes/'. $this->theme .'/macfixes.css');
-  }
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
@@ -42,7 +39,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/selectivizr/selectivizr.js?<?php echo SELECTIVIZR; ?>"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 </head>
-<body id="top" class="__ua__">
+<body id="top" class="{{ua::class}}">
 <?php $this->showIE6warning(); ?>
 
 <div id="header">
