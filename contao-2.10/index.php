@@ -303,7 +303,7 @@ class Index extends Frontend
 			$content = 'text/html';
 		}
 
-		header('Vary: User-Agent');
+		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Send cache headers

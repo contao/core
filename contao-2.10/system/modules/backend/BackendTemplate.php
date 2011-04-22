@@ -156,7 +156,7 @@ class BackendTemplate extends Template
 		// consistent with the front end, however, insert tags are actually
 		// not supported in the back end).
 		$ua = $this->Environment->agent;
-		$strBuffer = str_replace('{{ua:class}}', $ua->class, $strBuffer);
+		$strBuffer = str_replace('{{ua::class}}', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;
 		parent::output();

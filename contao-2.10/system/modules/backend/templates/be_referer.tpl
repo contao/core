@@ -10,16 +10,16 @@ a {
 div {
   width:520px;
   margin:64px auto;
-  padding:18px 18px 9px 18px;
+  padding:18px 18px 9px;
   background-color:#ffc;
   border:1px solid #fc0;
-  font-family:Verdana, sans-serif;
+  font-family:Verdana,sans-serif;
   font-size:12px;
 }
 h1 {
   font-size:18px;
   font-weight:normal;
-  margin:0 0 18px 0;
+  margin:0 0 18px;
 }
 p {
   line-height:1.5;

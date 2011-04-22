@@ -428,57 +428,59 @@ class Environment
 		// Operating system (check Windows CE before Windows and Android before Linux!)
 		switch (true)
 		{
-			case stristr($ua, 'Macintosh'):
+			case $this->has($ua, 'Macintosh'):
 				$os = 'mac';
 				$mobile = false;
 				break;
 
-			case stristr($ua, 'Windows CE'):
+			case $this->has($ua, 'Windows CE'):
+			case $this->has($ua, 'Windows Phone'):
 				$os = 'win-ce';
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Windows'):
+			case $this->has($ua, 'Windows'):
 				$os = 'win';
 				$mobile = false;
 				break;
 
-			case stristr($ua, 'iPhone'):
-			case stristr($ua, 'iPod'):
-				$os = 'iphone';
+			case $this->has($ua, 'iPad'):
+			case $this->has($ua, 'iPhone'):
+			case $this->has($ua, 'iPod'):
+				$os = 'ios';
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'iPad'):
-				$os = 'ipad';
-				$mobile = true;
-				break;
-
-			case stristr($ua, 'Android'):
+			case $this->has($ua, 'Android'):
 				$os = 'android';
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Blackberry'):
+			case $this->has($ua, 'Blackberry'):
 				$os = 'blackberry';
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Linux'):
-			case stristr($ua, 'FreeBSD'):
-			case stristr($ua, 'OpenBSD'):
-			case stristr($ua, 'NetBSD'):
+			case $this->has($ua, 'Symbian'):
+				$os = 'symbian';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'WebOS'):
+				$os = 'webos';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Linux'):
+			case $this->has($ua, 'FreeBSD'):
+			case $this->has($ua, 'OpenBSD'):
+			case $this->has($ua, 'NetBSD'):
 				$os = 'unix';
 				$mobile = false;
 				break;
 
-			case stristr($ua, 'Palm'):
-				$os = 'palm';
-				$mobile = true;
-				break;
-
 			default;
-				$os = 'nos';
+				$os = 'unknown';
 				$mobile = false;
 				break;
 		}
@@ -488,70 +490,70 @@ class Environment
 		// Browser and version (check OmniWeb before Safari and Opera Mini/Mobi before Opera!)
 		switch (true)
 		{
-			case stristr($ua, 'MSIE'):
+			case $this->has($ua, 'MSIE'):
 				$browser = 'ie';
 				$shorty  = 'ie';
 				$version = preg_replace('/^.*MSIE (\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'Firefox'):
+			case $this->has($ua, 'Firefox'):
 				$browser = 'firefox';
 				$shorty  = 'fx';
 				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'Chrome'):
+			case $this->has($ua, 'Chrome'):
 				$browser = 'chrome';
 				$shorty  = 'ch';
 				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'OmniWeb'):
+			case $this->has($ua, 'OmniWeb'):
 				$browser = 'omniweb';
 				$shorty  = 'ow';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'Safari'):
+			case $this->has($ua, 'Safari'):
 				$browser = 'safari';
 				$shorty  = 'sf';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'Opera Mini'):
+			case $this->has($ua, 'Opera Mini'):
 				$browser = 'opera-mini';
 				$shorty  = 'oi';
 				$version = preg_replace('/^.*Opera Mini\/(\d+).*$/', '$1', $ua);
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Opera Mobi'):
+			case $this->has($ua, 'Opera Mobi'):
 				$browser = 'opera-mobile';
 				$shorty  = 'om';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Opera'):
+			case $this->has($ua, 'Opera'):
 				$browser = 'opera';
 				$shorty  = 'op';
 				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'IEMobile'):
+			case $this->has($ua, 'IEMobile'):
 				$browser = 'ie-mobile';
 				$shorty  = 'im';
 				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
 				$mobile = true;
 				break;
 
-			case stristr($ua, 'Camino'):
+			case $this->has($ua, 'Camino'):
 				$browser = 'camino';
 				$shorty  = 'ca';
 				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
 				break;
 
-			case stristr($ua, 'Konqueror'):
+			case $this->has($ua, 'Konqueror'):
 				$browser = 'konqueror';
 				$shorty  = 'ko';
 				$version = preg_replace('/^.*Konqueror\/(\d+).*$/', '$1', $ua);
@@ -583,6 +585,17 @@ class Environment
 		$return->mobile  = $mobile;
 
 		return $return;
+	}
+
+
+	/**
+	 * Test the user agent string for a certain keyword
+	 * @param string
+	 * @param string
+	 */
+	protected function has($haystack, $needle)
+	{
+		return (stripos($haystack, $needle) !== false);
 	}
 }
 
