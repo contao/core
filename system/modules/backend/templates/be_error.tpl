@@ -19,7 +19,7 @@ div {
 h1 {
   font-size:18px;
   font-weight:normal;
-  margin:0 0 18px 0;
+  margin:0 0 18px;
 }
 pre {
   margin:9px;
@@ -27,7 +27,7 @@ pre {
   font-size:14px;
 }
 p {
-  margin:24px 0 0 0;
+  margin:24px 0 0;
   padding:0;
   color:#666;
   font-size:11px;

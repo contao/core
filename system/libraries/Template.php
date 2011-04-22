@@ -253,7 +253,7 @@ abstract class Template extends Controller
 			$this->strBuffer, 1
 		);
 
-		header('Vary: User-Agent');
+		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		echo $this->strBuffer;

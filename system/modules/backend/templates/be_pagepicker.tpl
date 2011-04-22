@@ -10,8 +10,7 @@
   $objCombiner->add('system/themes/'. $this->theme .'/page.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<!--[if lt IE 8]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
-<!--[if gt IE 7]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/ie8fixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 <script>
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
