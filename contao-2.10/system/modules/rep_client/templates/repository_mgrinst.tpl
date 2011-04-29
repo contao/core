@@ -96,8 +96,7 @@ $tabindex = 1;
     <td class="col_build"><?php echo $act->build; ?></td>
     <td class="col_action">
     <div class="tl_checkbox_container">
-      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled): ?> checked="checked"<?php endif; ?><?php if ($act->locked): ?> disabled="disabled"<?php endif; ?>>
-      <label for="repository_enable_<?php echo $act->extension; ?>"><?php echo $text[$act->action]; ?></label>
+      <input type="checkbox" name="repository_enable[]" id="repository_enable_<?php echo $act->extension; ?>"  tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="<?php echo $act->extension; ?>"<?php if ($act->enabled): ?> checked="checked"<?php endif; ?><?php if ($act->locked): ?> disabled="disabled"<?php endif; ?>> <label for="repository_enable_<?php echo $act->extension; ?>"><?php echo $text[$act->action]; ?></label>
     </div>
     </td>
     <td class="col_status"><?php foreach ($act->status as $sta) echo '<div class="color_'.$sta->color.'">'.sprintf($statext[$sta->text], $sta->par1, $sta->par2).'</div>'; ?></td>

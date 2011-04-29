@@ -143,12 +143,12 @@ optgroup {
 	font-style:normal;
 	background:#fff;
 }
-fieldset.tl_radio_container {
+fieldset.tl_checkbox_container,fieldset.tl_radio_container {
 	border:0;
 	margin:15px 0 0;
 	padding:0;
 }
-fieldset.tl_radio_container legend {
+fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
 	font-weight:bold;
 	margin:0;
 	padding:0 0 1px;
@@ -248,9 +248,6 @@ pre,.tl_textarea.monospace {
 }
 .tl_checkbox_single_container label {
 	font-weight:bold;
-}
-.mac .tl_checkbox_container {
-	margin:-1px 0 1px;
 }
 
 /* Grouped checkboxes */

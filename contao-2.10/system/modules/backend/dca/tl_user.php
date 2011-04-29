@@ -600,13 +600,13 @@ class tl_user extends Backend
 
 		return '
 <div>
-  <h3><label for="ctrl_purge">'.$GLOBALS['TL_LANG']['tl_user']['session'][0].'</label></h3>
-  <div id="ctrl_purge" class="tl_checkbox_container">
+  <fieldset class="tl_checkbox_container">
+    <legend>'.$GLOBALS['TL_LANG']['tl_user']['session'][0].'</legend>
     <input type="checkbox" id="check_all_purge" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_purge\')"> <label for="check_all_purge" style="color:#a6a6a6;"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br>
     <input type="checkbox" name="purge[]" id="opt_purge_0" class="tl_checkbox" value="purge_session" onfocus="Backend.getScrollOffset();"> <label for="opt_purge_0">'.$GLOBALS['TL_LANG']['tl_user']['sessionLabel'].'</label><br>
     <input type="checkbox" name="purge[]" id="opt_purge_1" class="tl_checkbox" value="purge_html" onfocus="Backend.getScrollOffset();"> <label for="opt_purge_1">'.$GLOBALS['TL_LANG']['tl_user']['htmlLabel'].'</label><br>
     <input type="checkbox" name="purge[]" id="opt_purge_2" class="tl_checkbox" value="purge_temp" onfocus="Backend.getScrollOffset();"> <label for="opt_purge_2">'.$GLOBALS['TL_LANG']['tl_user']['tempLabel'].'</label>
-  </div>'.$dc->help().'
+  </fieldset>'.$dc->help().'
 </div>';
 	}
 

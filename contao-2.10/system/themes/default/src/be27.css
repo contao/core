@@ -53,7 +53,7 @@
 }
 
 /* Error messages */
-label.error {
+label.error,legend.error {
 	color:#c55;
 }
 .tl_tbox .tl_error,.tl_box .tl_error {
