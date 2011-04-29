@@ -32,13 +32,13 @@ $tabindex = 1;
   <h3><label for="repository_lickey"><?php echo $text['lickey'][0]; ?></label></h3>
   <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="repository_lickey" id="repository_lickey" value="<?php echo $rep->f_lickey; ?>" class="tl_text">
   <p class="tl_help tl_tip"><?php echo $text['lickey'][1]; ?></p>
-  <h3><label><?php echo $text['status']; ?></label></h3>
-  <div class="tl_checkbox_container">
+  <fieldset class="tl_checkbox_container">
+    <legend><?php echo $text['status']; ?></legend>
     <input type="checkbox" name="repository_alpha" id="repository_alpha" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_alpha) echo ' checked="checked"'; ?>> <label for="repository_alpha"><?php echo $state_options['alpha']; ?></label><br>
     <input type="checkbox" name="repository_beta" id="repository_beta" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_beta) echo ' checked="checked"'; ?>> <label for="repository_beta"><?php echo $state_options['beta']; ?></label><br>
     <input type="checkbox" name="repository_rc" id="repository_rc" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_rc) echo ' checked="checked"'; ?>> <label for="repository_rc"><?php echo $state_options['rc']; ?></label><br>
     <input type="checkbox" name="repository_stable" id="repository_stable" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_stable) echo ' checked="checked"'; ?>> <label for="repository_stable"><?php echo $state_options['stable']; ?></label>
-  </div>
+  </fieldset>
   <p class="tl_help tl_tip"><?php echo $text['updatehint']; ?></p>
   <div class="tl_checkbox_single_container">
     <input type="checkbox" name="repository_delprot" id="repository_delprot" tabindex="<?php echo $tabindex++; ?>" class="tl_checkbox" value="1"<?php if ($rep->f_delprot) echo ' checked="checked"'; ?>> <label for="repository_delprot"><?php echo $text['uninstprotect'][0]; ?></label>

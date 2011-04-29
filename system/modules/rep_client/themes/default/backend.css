@@ -8,7 +8,6 @@
  */
 
 /* General */
-.mod_repository { line-height:1; }
 .mod_repository .nowrap { white-space:nowrap; }
 .mod_repository .middle, .mod_repository .middle * { vertical-align:middle; }
 .mod_repository table.nested { width:100%; margin:0; border:0; }
