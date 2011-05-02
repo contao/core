@@ -298,7 +298,7 @@ function standardize($strString)
 		$strString = 'id-' . $strString;
 	}
 
-	return strtolower($strString);
+	return strtolower(trim($strString, '-'));
 }
 
 
