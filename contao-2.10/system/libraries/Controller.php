@@ -2283,6 +2283,9 @@ abstract class Controller extends System
 		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
 		while (@ob_end_clean());
 
+		// Prevent session locking (see #2804)
+		session_write_close();
+
 		// Open the "save as …" dialogue
 		header('Content-Type: ' . $objFile->mime);
 		header('Content-Transfer-Encoding: binary');
