@@ -2279,6 +2279,10 @@ abstract class Controller extends System
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
 
+		// Make sure no output buffer is active
+		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
+		while (@ob_end_clean());
+
 		// Open the "save as …" dialogue
 		header('Content-Type: ' . $objFile->mime);
 		header('Content-Transfer-Encoding: binary');

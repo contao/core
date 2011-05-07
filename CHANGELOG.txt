@@ -28,4 +28,5 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Fixed: convert relative external image URLs in newsletters (#2895)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)
 - Fixed: make the Input class return null if a variable is not set (#2570)
+- Fixed: clear the output buffer befor sending a file to the browser (#2678)
 - Fixed a few minor issues
