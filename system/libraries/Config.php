@@ -84,9 +84,71 @@ class Config
 
 
 	/**
+	 * Prevent direct instantiation (Singleton)
+	 */
+	protected function __construct() {}
+
+
+	/**
+	 * Save the local configuration
+	 */
+	public function __destruct()
+	{
+		if (!$this->blnIsModified)
+		{
+			return;
+		}
+
+		$strFile  = trim($this->strTop) . "\n\n";
+		$strFile .= "### INSTALL SCRIPT START ###\n";
+
+		foreach ($this->arrData as $k=>$v)
+		{
+			$strFile .= "$k = $v\n";
+		}
+
+		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
+		$this->strBottom = trim($this->strBottom);
+
+		if ($this->strBottom != '')
+		{
+			$strFile .= $this->strBottom . "\n\n";
+		}
+
+		$strFile .= '?>';
+
+		$objFile = new File('system/config/localconfig.php');
+		$objFile->write($strFile);
+		$objFile->close();
+	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 */
+	final private function __clone() {}
+
+
+	/**
+	 * Return the current object instance (Singleton)
+	 * @return object
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(self::$objInstance))
+		{
+			self::$objInstance = new Config();
+			self::$objInstance->initialize();
+		}
+
+		return self::$objInstance;
+	}
+
+
+	/**
 	 * Load all configuration files
 	 */
-	protected function __construct()
+	protected function initialize()
 	{
 		include(TL_ROOT . '/system/config/config.php');
 		include(TL_ROOT . '/system/config/localconfig.php');
@@ -142,61 +204,6 @@ class Config
 		}
 
 		fclose($resFile);
-	}
-	
-
-	/**
-	 * Save the local configuration
-	 */
-	public function __destruct()
-	{
-		if (!$this->blnIsModified)
-		{
-			return;
-		}
-
-		$strFile  = trim($this->strTop) . "\n\n";
-		$strFile .= "### INSTALL SCRIPT START ###\n";
-
-		foreach ($this->arrData as $k=>$v)
-		{
-			$strFile .= "$k = $v\n";
-		}
-
-		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
-		$this->strBottom = trim($this->strBottom);
-
-		if ($this->strBottom != '')
-		{
-			$strFile .= $this->strBottom . "\n\n";
-		}
-
-		$strFile .= '?>';
-
-		$objFile = new File('system/config/localconfig.php');
-		$objFile->write($strFile);
-		$objFile->close();
-	}
-
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final private function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return object
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(self::$objInstance))
-		{
-			self::$objInstance = new Config();
-		}
-
-		return self::$objInstance;
 	}
 
 

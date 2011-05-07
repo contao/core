@@ -30,4 +30,5 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Fixed: make the Input class return null if a variable is not set (#2570)
 - Fixed: clear the output buffer befor sending a file to the browser (#2678)
 - Fixed: prevent session locking during downloads (#2804)
+- Fixed: modify the Config class to allow nested calls to getInstance() (#2706)
 - Fixed a few minor issues
