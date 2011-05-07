@@ -2547,12 +2547,18 @@ abstract class Controller extends System
 	 */
 	protected function getChildRecords($intParentId, $strTable, $blnSorting=null)
 	{
-		$arrReturn = array();
-
 		if (is_null($blnSorting))
 		{
 			$blnSorting = $this->Database->fieldExists('sorting', $strTable);
 		}
+
+		// Thanks to Andreas Schempp (see #2475)
+		if (!$blnSorting)
+		{
+			return $this->getChildRecordsAsArray(array($intParentId), $strTable);
+		}
+
+		$arrReturn = array();
 
 		$objChilds = $this->Database->prepare("SELECT id, (SELECT COUNT(*) FROM " . $strTable . " t2 WHERE t1.id=t2.pid) AS hasChilds FROM " . $strTable ." t1 WHERE t1.pid=? AND t1.id!=?" . ($blnSorting ? " ORDER BY t1.sorting" : ""))
 									->execute($intParentId, $intParentId);
@@ -2568,6 +2574,28 @@ abstract class Controller extends System
 					$arrReturn = array_merge($arrReturn, $this->getChildRecords($objChilds->id, $strTable, $blnSorting));
 				}
 			}
+		}
+
+		return $arrReturn;
+	}
+
+
+	/**
+	 * Return the IDs of all child records as array (see #2475)
+	 * @param array
+	 * @param string
+	 * @return array
+	 * @author Andreas Schempp
+	 */
+	protected function getChildRecordsAsArray($arrParenIds, $strTable)
+	{
+		$arrReturn = array();
+		$objChilds = $this->Database->execute("SELECT id FROM " . $strTable . " WHERE pid IN(" . implode(',', array_map('intval', $arrParenIds)) . ")");
+
+		if ($objChilds->numRows > 0)
+		{
+			$arrChilds = $objChilds->fetchEach('id');
+			$arrReturn = array_merge($arrChilds, $this->getChildRecordsAsArray($arrChilds, $strTable));
 		}
 
 		return $arrReturn;
@@ -2645,15 +2673,11 @@ abstract class Controller extends System
 			$strTable = 'tl_page';
 		}
 
-		$nested = array();
-		$arrPages = array_intersect($this->getChildRecords(0, $strTable), $arrPages);
+		// Thanks to Andreas Schempp (see #2475)
+		$arrPages = array_intersect($this->getChildRecords(0, $strTable, false), $arrPages);
+		$arrPages = array_values(array_diff($arrPages, $this->getChildRecordsAsArray($arrPages, $strTable)));
 
-		foreach ($arrPages as $page)
-		{
-			$nested = array_merge($nested, $this->getChildRecords($page, $strTable));
-		}
-
-		return array_values(array_diff($arrPages, $nested));
+		return $arrPages;
 	}
 
 
