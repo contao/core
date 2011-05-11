@@ -161,15 +161,17 @@ class ModulePersonalData extends Module
 				$objWidget->validate();
 				$varValue = $objWidget->value;
 
-				// Convert date formats into timestamps
-				if (strlen($varValue) && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+				$rgxp = $arrData['eval']['rgxp'];
+
+				// Convert date formats into timestamps (check the eval setting first -> #3063)
+				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
+					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp . 'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
-				// Make sure that unique fields are unique
-				if (strlen($varValue) && $arrData['eval']['unique'])
+				// Make sure that unique fields are unique (check the eval setting first -> #3063)
+				if ($arrData['eval']['unique'] && $varValue != '')
 				{
 					$objUnique = $this->Database->prepare("SELECT * FROM tl_member WHERE " . $field . "=? AND id!=?")
 												->limit(1)
