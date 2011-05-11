@@ -11,6 +11,7 @@ Version 2.9.5 (2011-XX-XX)
 - Fixed: the RSS reader did not parse HTML code correctly (#2918)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)
 - Fixed: the textarea widget did not support the readonly attribute (#2997)
+- Fixed: the personal data modules did not handle checkbox fields (#3063)
 - Fixed some minor issues
 
 Version 2.9.4 (2011-03-08)
