@@ -71,7 +71,7 @@ class InstallTool extends Controller
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
 	 */
 	public function run()
 	{
@@ -190,7 +190,17 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Show license
+		 * Check the websitePath
+		 */
+		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
+		{
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
+			$this->reload();
+		}
+
+
+		/**
+		 * Make the user accept the LGPL license
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_license')
 		{
@@ -206,17 +216,7 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Check the websitePath
-		 */
-		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
-		{
-			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
-			$this->reload();
-		}
-
-
-		/**
-		 * Authenticate user
+		 * Authenticate the user
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
@@ -226,47 +226,48 @@ class InstallTool extends Controller
 			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 			// Password is correct but not yet salted
-			if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
+			if ($strSalt == '' && $strPassword == sha1($this->Input->post('password')))
 			{
 				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 				$strPassword = sha1($strSalt . $this->Input->post('password'));
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 			}
 
-			// Set cookie
-			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
+			// Set the cookie
+			if ($strSalt != '' && $strPassword == sha1($strSalt . $this->Input->post('password')))
 			{
-				$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
-				$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setAuthCookie();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-
 				$this->reload();
 			}
 
-			// Increase count
+			// Increase the login count
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
 			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['invalidPass'];
 		}
 
-		// Check cookie
-		if (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
+		// Auto-login on fresh installations
+		if ($GLOBALS['TL_CONFIG']['installPassword'] == '4d19f112e30930cbe278de966e9b2d907568d1c8')
+		{
+			$this->setAuthCookie();
+		}
+
+		// Check the cookie
+		elseif (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
 
-		// Renew cookie
+		// Renew the cookie
 		else
 		{
-			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
-			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+			$this->setAuthCookie();
 		}
 
 
 		/**
-		 * Set install script password
+		 * Set the install script password
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_install')
 		{
@@ -278,19 +279,19 @@ class InstallTool extends Controller
 				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 			}
 
-			// Passwords do not match
+			// The passwords do not match
 			elseif ($strPassword != $this->Input->post('confirm_password', true))
 			{
 				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 			}
 
-			// Password too short
+			// The password is too short
 			elseif (utf8_strlen($strPassword) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
 				$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 			}
 
-			// Save password
+			// Save the password
 			else
 			{
 				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
@@ -303,7 +304,7 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Password must not be "contao" or "typolight"
+		 * The password must not be "contao" or "typolight"
 		 */
 		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
@@ -315,22 +316,25 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Save encryption key
+		 * Save the encryption key
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_encryption')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", (($this->Input->post('key')) ? $this->Input->post('key') : md5(uniqid(mt_rand(), true))));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $this->Input->post('key'));
 			$this->reload();
+		}
+
+		// Autogenerate a key
+		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
+		{
+			$strKey = md5(uniqid(mt_rand(), true));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $strKey);
+			$GLOBALS['TL_CONFIG']['encryptionKey'] = $strKey;
 		}
 
 		$this->Template->encryptionKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
 
-		if (!strlen($GLOBALS['TL_CONFIG']['encryptionKey']))
-		{
-			$this->Template->encryption = true;
-			$this->outputAndExit();
-		}
-
+		// Check the minimum length
 		if (utf8_strlen($GLOBALS['TL_CONFIG']['encryptionKey']) < 12)
 		{
 			$this->Template->encryptionLength = true;
@@ -841,6 +845,17 @@ class InstallTool extends Controller
 		 * Output the template file
 		 */
 		$this->outputAndExit();
+	}
+
+
+	/**
+	 * Set the authentication cookie
+	 */
+	protected function setAuthCookie()
+	{
+		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 	}
 
 

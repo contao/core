@@ -40,10 +40,10 @@ $GLOBALS['TL_LANG']['tl_install']['encryption']  = array('Generate an encryption
 $GLOBALS['TL_LANG']['tl_install']['database']    = array('Check database connection', 'Please enter your database connection parameters.');
 $GLOBALS['TL_LANG']['tl_install']['collation']   = array('Collation', 'For more information see the <a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" onclick="window.open(this.href); return false;">MySQL manual</a>.');
 $GLOBALS['TL_LANG']['tl_install']['update']      = array('Update database tables', 'Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually. In this case, please go to <strong>system/modules</strong> and search all its subfolders for <strong>config/database.sql</strong> files.');
-$GLOBALS['TL_LANG']['tl_install']['template']    = array('Import a template', 'Please choose an <em>.sql</em> file from the <em>templates</em> directory.');
+$GLOBALS['TL_LANG']['tl_install']['template']    = array('Import a template', 'Here you can import an <em>.sql</em> file from the <em>templates</em> directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.');
 $GLOBALS['TL_LANG']['tl_install']['admin']       = array('Create an admin user', 'If you have imported the example website, the admin\'s username is <strong>k.jones</strong> and the password is <strong>kevinjones</strong>. See the example website (front end) for more information.');
-$GLOBALS['TL_LANG']['tl_install']['completed']   = array('Congratulations!', 'Now please log into the Contao back end and check the system settings. Then visit your website to make sure that Contao is working correctly.');
-$GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Modify files via FTP', 'Please enter your FTP login details so Contao can modify files via FTP (Safe Mode Hack).');
+$GLOBALS['TL_LANG']['tl_install']['completed']   = array('Congratulations!', 'Now please log into the <a href="contao/index.php">Contao back end</a> and check the system settings. Then visit your website to make sure that Contao is working correctly.');
+$GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Modify files via FTP', 'Your server does not support file access via PHP; most likely PHP runs as Apache module under a different user. Therefore please enter your FTP login details, so Contao can modify files via FTP (Safe Mode Hack).');
 
 
 /**
@@ -51,16 +51,16 @@ $GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Modify files via FTP',
  */
 $GLOBALS['TL_LANG']['tl_install']['accept']         = 'Accept license';
 $GLOBALS['TL_LANG']['tl_install']['beLogin']        = 'Contao back end login';
-$GLOBALS['TL_LANG']['tl_install']['passError']      = 'Please change the default password to prevent unauthorized access!';
-$GLOBALS['TL_LANG']['tl_install']['passConfirm']    = 'The default password has been changed.';
+$GLOBALS['TL_LANG']['tl_install']['passError']      = 'Please enter a password to prevent unauthorized access!';
+$GLOBALS['TL_LANG']['tl_install']['passConfirm']    = 'A custom password has been set.';
 $GLOBALS['TL_LANG']['tl_install']['passSave']       = 'Save password';
 $GLOBALS['TL_LANG']['tl_install']['keyError']       = 'Please create an encryption key!';
 $GLOBALS['TL_LANG']['tl_install']['keyLength']      = 'An encryption key has to be at least 12 characters long!';
 $GLOBALS['TL_LANG']['tl_install']['keyConfirm']     = 'An encryption key has been created.';
 $GLOBALS['TL_LANG']['tl_install']['keyCreate']      = 'Generate encryption key';
 $GLOBALS['TL_LANG']['tl_install']['keySave']        = 'Generate or save key';
-$GLOBALS['TL_LANG']['tl_install']['dbConfirm']      = 'Database connection ok.';
-$GLOBALS['TL_LANG']['tl_install']['dbError']        = 'Could not connect to database!';
+$GLOBALS['TL_LANG']['tl_install']['dbConfirm']      = 'Database connection established.';
+$GLOBALS['TL_LANG']['tl_install']['dbError']        = 'Not connected to a database!';
 $GLOBALS['TL_LANG']['tl_install']['dbDriver']       = 'Driver';
 $GLOBALS['TL_LANG']['tl_install']['dbHost']         = 'Host';
 $GLOBALS['TL_LANG']['tl_install']['dbUsername']     = 'Username';
