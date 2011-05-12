@@ -306,7 +306,7 @@ pre,.tl_textarea.monospace {
 	text-shadow:1px 1px 0 #666;
 	box-shadow:0 1px 3px #bbb;
 }
-.mac.firefox .tl_submit {
+.firefox .tl_submit {
 	padding:2px 12px 3px;
 }
 .tl_submit:focus,.tl_submit:hover {

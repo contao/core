@@ -80,15 +80,10 @@ body {
 	color:#c55;
 }
 #container h3 {
-	margin:24px 18px 0;
-	padding:24px 0 3px;
-	border-top:1px solid #ddd;
+	margin:0;
+	padding:18px 0 3px;
 	font-size:12px;
 	font-weight:bold;
-}
-#container h3.no_border {
-	padding-top:0;
-	border-top:0;
 }
 #container h4 {
 	margin:12px 0 1px;
@@ -99,7 +94,7 @@ body {
 
 /* Paragraphs and lists */
 p {
-	margin:0 18px 12px;
+	margin:0 0 12px;
 	padding:0;
 	line-height:16px;
 	text-align:justify;
@@ -148,7 +143,7 @@ li {
 
 /* Error and confirmation messages */
 .tl_error,.tl_confirm,.tl_info {
-	margin:0 18px;
+	margin:0;
 	padding:2px 0 3px 20px;
 }
 .tl_error {
@@ -183,23 +178,58 @@ li {
 #license pre {
 	height:400px;
 	overflow:auto;
-	margin:0 18px;
+	margin:0;
 	background:#f9f9f9;
 	border:1px solid #b8b8b8;
 }
 
 /* Formbody */
 .tl_formbody,.tl_formbody_submit {
-	margin:0 18px;
+	margin:0;
 }
 .tl_submit_container {
 	margin-top:18px;
 }
 
+/* Fieldsets */
+fieldset > div {
+	margin-bottom:24px;
+}
+fieldset.tl_tbox {
+	margin-top:18px;
+}
+fieldset.tl_tbox,fieldset.tl_box {
+	margin-left:18px;
+	margin-right:18px;
+	padding-top:6px;
+	border:1px solid #ddd;
+	border-width:1px 0 0;
+	background:url("images/palBg.jpg") left top repeat-x;
+}
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
+	margin-top:-1px;
+	color:#8ab858;
+	padding-left:18px;
+	padding-right:3px;
+	background:url("images/palOpen.gif") left center no-repeat;
+	cursor:pointer;
+}
+fieldset.collapsed {
+	padding-top:0;
+	padding-bottom:12px;
+	margin-bottom:0;
+}
+fieldset.collapsed div {
+	display:none !important;
+}
+fieldset.collapsed > legend {
+	background:url("images/palCollapsed.gif") left center no-repeat;
+}
+
 /* Form fields */
 .tl_text {
-	width:232px;
+	width:232px !important;
 }
 .tl_select {
-	width:238px;
+	width:238px !important;
 }
