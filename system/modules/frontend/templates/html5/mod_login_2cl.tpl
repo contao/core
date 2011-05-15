@@ -1,6 +1,6 @@
 
 <!-- indexer::stop -->
-<div class="<?php echo $this->class; ?> two_column tableform login block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<section class="<?php echo $this->class; ?> two_column tableform login block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
 <?php if ($this->headline): ?>
 
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
@@ -41,5 +41,5 @@ window.scrollTo(null, ($('tl_login').getElement('p.error').getPosition().y - 20)
 </script>
 <?php endif; ?>
 
-</div>
+</section>
 <!-- indexer::continue -->

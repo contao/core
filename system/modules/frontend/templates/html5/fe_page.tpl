@@ -19,49 +19,49 @@
 <div id="wrapper">
 <?php if ($this->header): ?>
 
-<div id="header">
+<header id="header">
 <div class="inside">
 <?php echo $this->header; ?> 
 </div>
-</div>
+</header>
 <?php endif; ?>
 <?php echo $this->getCustomSections('before'); ?>
 
 <div id="container">
 <?php if ($this->left): ?>
 
-<div id="left">
+<aside id="left">
 <div class="inside">
 <?php echo $this->left; ?> 
 </div>
-</div>
+</aside>
 <?php endif; ?>
 <?php if ($this->right): ?>
 
-<div id="right">
+<aside id="right">
 <div class="inside">
 <?php echo $this->right; ?> 
 </div>
-</div>
+</aside>
 <?php endif; ?>
 
-<div id="main">
+<section id="main">
 <div class="inside">
 <?php echo $this->main; ?> 
 </div>
 <?php echo $this->getCustomSections('main'); ?> 
 <div id="clear"></div>
-</div>
+</section>
 
 </div>
 <?php echo $this->getCustomSections('after'); ?>
 <?php if ($this->footer): ?>
 
-<div id="footer">
+<footer id="footer">
 <div class="inside">
 <?php echo $this->footer; ?> 
 </div>
-</div>
+</footer>
 <?php endif; ?>
 <?php if (!$this->disableCron): ?>
 
