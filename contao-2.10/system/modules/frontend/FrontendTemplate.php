@@ -217,14 +217,32 @@ class FrontendTemplate extends Template
 			return '';
 		}
 
+		$tag = 'div';
+
+		if ($strKey == 'main')
+		{
+			global $objPage;
+
+			// Use the section tag in HTML5
+			if ($objPage->outputFormat == 'html5')
+			{
+				$tag = 'section';
+			}
+		}
+
 		$sections = '';
 
 		foreach ($this->sections as $k=>$v)
 		{
-			$sections .= sprintf("\n<div id=\"%s\">\n<div class=\"inside\">\n%s\n</div>\n</div>\n", $k, $v);
+			$sections .= "\n" . '<' . $tag . ' id="' . $k . '">' . "\n" . '<div class="inside">' . "\n" . $v . "\n" . '</div>' . "\n" . '</' . $tag . '>' . "\n";
 		}
 
-		return strlen($sections) ? "\n<div class=\"custom\">\n$sections\n</div>\n" : '';
+		if ($sections == '')
+		{
+			return '';
+		}
+
+		return "\n" . '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
 }
 
