@@ -265,7 +265,7 @@ pre,.tl_textarea.monospace {
 	margin-right:3px;
 }
 .checkbox_options {
-	margin:0 0 6px 21px;
+	margin:0 0 6px 21px !important;
 }
 
 /* Radio buttons */

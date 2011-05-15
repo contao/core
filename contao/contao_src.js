@@ -1028,7 +1028,11 @@ var Backend =
 
 		if (cls == 'tl_checkbox')
 		{
-			$$('#' + id + ' .tl_checkbox').each(function(checkbox)
+			var cbx = ($(id)) ?
+				$$('#' + id + ' .tl_checkbox') :
+				$(el).getParent('fieldset').getElements('.tl_checkbox');
+
+			cbx.each(function(checkbox)
 			{
 				checkbox.checked = status;
 			});
