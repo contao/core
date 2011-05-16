@@ -195,6 +195,8 @@ class StyleSheets extends Backend
 			$return = "\n<pre>";
 		}
 
+		$blnNeedsPie = false;
+
 		// Comment
 		if (!$blnWriteToFile && $row['comment'] != '')
 		{
@@ -209,7 +211,7 @@ class StyleSheets extends Backend
 		$arrSelector = trimsplit(',', $this->String->decodeEntities($row['selector']));
 		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? '' : "\n") . '{';
 
-		// Size and position
+		// Size
 		if ($row['size'])
 		{
 			// Width
@@ -228,6 +230,42 @@ class StyleSheets extends Backend
 				$return .= $lb . 'height:' . $row['height']['value'] . (($row['height']['value'] == 'auto') ? '' : $row['height']['unit']) . ';';
 			}
 
+			// Min-width
+			$row['minwidth'] = deserialize($row['minwidth']);
+
+			if ($row['minwidth']['value'] != '')
+			{
+				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . (($row['minwidth']['value'] == 'auto') ? '' : $row['minwidth']['unit']) . ';';
+			}
+
+			// Min-height
+			$row['minheight'] = deserialize($row['minheight']);
+
+			if ($row['minheight']['value'] != '')
+			{
+				$return .= $lb . 'min-height:' . $row['minheight']['value'] . (($row['minheight']['value'] == 'auto') ? '' : $row['minheight']['unit']) . ';';
+			}
+
+			// Max-width
+			$row['maxwidth'] = deserialize($row['maxwidth']);
+
+			if ($row['maxwidth']['value'] != '')
+			{
+				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . (($row['maxwidth']['value'] == 'auto') ? '' : $row['maxwidth']['unit']) . ';';
+			}
+
+			// Max-height
+			$row['maxheight'] = deserialize($row['maxheight']);
+
+			if ($row['maxheight']['value'] != '')
+			{
+				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . (($row['maxheight']['value'] == 'auto') ? '' : $row['maxheight']['unit']) . ';';
+			}
+		}
+
+		// Position
+		if ($row['positioning'])
+		{
 			// Top/right/bottom/left
 			$row['trbl'] = deserialize($row['trbl']);
 
@@ -287,95 +325,98 @@ class StyleSheets extends Backend
 					$right = $row['margin']['right'];
 					$bottom = $row['margin']['bottom'];
 					$left = $row['margin']['left'];
-				}
 
-				// Overwrite left and right margin if an alignment is set
-				if ($row['align'] != '')
-				{
-					if ($row['align'] == 'left' || $row['align'] == 'center')
+					// Overwrite left and right margin if an alignment is set
+					if ($row['align'] != '')
 					{
-						$right = 'auto';
+						if ($row['align'] == 'left' || $row['align'] == 'center')
+						{
+							$right = 'auto';
+						}
+
+						if ($row['align'] == 'right' || $row['align'] == 'center')
+						{
+							$left = 'auto';
+						}
 					}
 
-					if ($row['align'] == 'right' || $row['align'] == 'center')
+					// Try to shorten the definition
+					if ($top != '' && $right != '' && $bottom != '' && $left != '')
 					{
-						$left = 'auto';
-					}
-				}
-
-				// Try to shorten the definition
-				if ($top != '' && $right != '' && $bottom != '' && $left != '')
-				{
-					if ($top == $right && $top == $bottom && $top == $left)
-					{
-						$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ';';
-					}
-					elseif ($top == $bottom && $right == $left)
-					{
-						$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ';';
-					}
-					elseif ($top != $bottom && $right == $left)
-					{
-						$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ';';
+						if ($top == $right && $top == $bottom && $top == $left)
+						{
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ';';
+						}
+						elseif ($top == $bottom && $right == $left)
+						{
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ';';
+						}
+						elseif ($top != $bottom && $right == $left)
+						{
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ';';
+						}
+						else
+						{
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ' ' . $left . (($left == 'auto' || $left == 0) ? '' : $row['margin']['unit']) . ';';
+						}
 					}
 					else
 					{
-						$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ' ' . $left . (($left == 'auto' || $left == 0) ? '' : $row['margin']['unit']) . ';';
-					}
-				}
-				else
-				{
-					$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
+						$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
-					foreach ($arrDir as $k=>$v)
-					{
-						if ($v != '')
+						foreach ($arrDir as $k=>$v)
 						{
-							$return .= $lb . 'margin-' . $k . ':' . $v . (($v == 'auto' || $v == 0) ? '' : $row['margin']['unit']) . ';';
+							if ($v != '')
+							{
+								$return .= $lb . 'margin-' . $k . ':' . $v . (($v == 'auto' || $v == 0) ? '' : $row['margin']['unit']) . ';';
+							}
 						}
 					}
 				}
 			}
 
 			// Padding
-			$row['padding'] = deserialize($row['padding']);
-
-			if (is_array($row['padding']))
+			if ($row['padding'] != '')
 			{
-				$top = $row['padding']['top'];
-				$right = $row['padding']['right'];
-				$bottom = $row['padding']['bottom'];
-				$left = $row['padding']['left'];
+				$row['padding'] = deserialize($row['padding']);
 
-				// Try to shorten the definition
-				if ($top != '' && $right != '' && $bottom != '' && $left != '')
+				if (is_array($row['padding']))
 				{
-					if ($top == $right && $top == $bottom && $top == $left)
+					$top = $row['padding']['top'];
+					$right = $row['padding']['right'];
+					$bottom = $row['padding']['bottom'];
+					$left = $row['padding']['left'];
+
+					// Try to shorten the definition
+					if ($top != '' && $right != '' && $bottom != '' && $left != '')
 					{
-						$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ';';
-					}
-					elseif ($top == $bottom && $right == $left)
-					{
-						$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ';';
-					}
-					elseif ($top != $bottom && $right == $left)
-					{
-						$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ';';
+						if ($top == $right && $top == $bottom && $top == $left)
+						{
+							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ';';
+						}
+						elseif ($top == $bottom && $right == $left)
+						{
+							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ';';
+						}
+						elseif ($top != $bottom && $right == $left)
+						{
+							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ';';
+						}
+						else
+						{
+							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['padding']['unit']) . ';';
+						}
 					}
 					else
 					{
-						$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['padding']['unit']) . ';';
-					}
-				}
-				else
-				{
-					$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
+						$arrDir = array('top'=>$top, 'right'=>$right, 'bottom'=>$bottom, 'left'=>$left);
 
-					foreach ($arrDir as $k=>$v)
-					{
-						if ($v != '')
+						foreach ($arrDir as $k=>$v)
 						{
-							$return .= $lb . 'padding-' . $k . ':' . $v . (($v == 0) ? '' : $row['padding']['unit']) . ';';
+							if ($v != '')
+							{
+								$return .= $lb . 'padding-' . $k . ':' . $v . (($v == 0) ? '' : $row['padding']['unit']) . ';';
+							}
 						}
 					}
 				}
@@ -430,6 +471,64 @@ class StyleSheets extends Backend
 				if ($row['bgrepeat'] != '')
 				{
 					$return .= $lb . 'background-repeat:' .$row['bgrepeat']. ';';
+				}
+			}
+
+			// Background gradient
+			if ($row['gradienttop'] != '' && $row['gradientbottom'] != '')
+			{
+				$blnNeedsPie = true;
+
+				// Try to shorten the definition
+				if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
+				{
+					$return .= $lb . 'background:url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . 'background:url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',-moz-linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . 'background:url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',-webkit-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . '-pie-background:url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+				}
+				else
+				{
+					$return .= $lb . 'background:linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . 'background:-moz-linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . 'background:-webkit-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+					$return .= $lb . '-pie-background:linear-gradient(#' . $row['gradienttop'] . ',#' . $row['gradientbottom'] . ');';
+				}
+			}
+
+			// Box shadow
+			if ($row['shadowsize'] != '')
+			{
+				$row['shadowsize'] = deserialize($row['shadowsize']);
+
+				if (is_array($row['shadowsize']))
+				{
+					$blnNeedsPie = true;
+
+					$offsetx = $row['shadowsize']['top'];
+					$offsety = $row['shadowsize']['right'];
+					$blursize = $row['shadowsize']['bottom'];
+					$radius = $row['shadowsize']['left'];
+
+					$shadow = $offsetx . (($offsetx == 0) ? '' : $row['shadowsize']['unit']);
+					$shadow .= ' ' . $offsety . (($offsety == 0) ? '' : $row['shadowsize']['unit']);
+					if ($blursize != '')
+					{
+						$shadow .= ' ' . $blursize . (($blursize == 0) ? '' : $row['shadowsize']['unit']);
+					}
+					if ($radius != '')
+					{
+						$shadow .= ' ' . $radius . (($radius == 0) ? '' : $row['shadowsize']['unit']);
+					}
+					if ($row['shadowcolor'] != '')
+					{
+						$shadow .= ' #' . $row['shadowcolor'];
+					}
+					$shadow .= ';';
+					
+					$return .= $lb . 'box-shadow:' . $shadow;
+					$return .= $lb . '-moz-box-shadow:' . $shadow;
+					$return .= $lb . '-webkit-box-shadow:' . $shadow;
 				}
 			}
 		}
@@ -504,20 +603,107 @@ class StyleSheets extends Backend
 				}
 			}
 
+			// Border radius
+			if ($row['borderradius'] != '')
+			{
+				$row['borderradius'] = deserialize($row['borderradius']);
+
+				if (is_array($row['borderradius']))
+				{
+					$blnNeedsPie = true;
+
+					$top = $row['borderradius']['top'];
+					$right = $row['borderradius']['right'];
+					$bottom = $row['borderradius']['bottom'];
+					$left = $row['borderradius']['left'];
+					$borderradius = '';
+
+					// Try to shorten the definition
+					if ($top != '' && $right != '' && $bottom != '' && $left != '')
+					{
+						if ($top == $right && $top == $bottom && $top == $left)
+						{
+							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ';';
+						}
+						elseif ($top == $bottom && $right == $left)
+						{
+							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ';';
+						}
+						elseif ($top != $bottom && $right == $left)
+						{
+							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['borderradius']['unit']) . ';';
+						}
+						else
+						{
+							$borderradius .= $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['borderradius']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['borderradius']['unit']) . ';';
+						}
+
+						$return .= $lb . 'border-radius:' . $borderradius;
+						$return .= $lb . '-moz-border-radius:' . $borderradius;
+						$return .= $lb . '-webkit-border-radius:' . $borderradius;
+					}
+					else
+					{
+						$arrDir = array('top-left'=>$top, 'top-right'=>$right, 'bottom-right'=>$bottom, 'bottom-left'=>$left);
+
+						foreach ($arrDir as $k=>$v)
+						{
+							if ($v != '')
+							{
+								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . '-moz-border-radius-' . str_replace('-', '', $k) . ':' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . '-webkit-border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
+							}
+						}
+					}
+				}
+			}
+
 			// Border collapse
 			if ($row['bordercollapse'] != '')
 			{
 				$return .= $lb . 'border-collapse:' . $row['bordercollapse'] . ';';
+			}
+
+			// Border spacing
+			$row['borderspacing'] = deserialize($row['borderspacing']);
+
+			if ($row['borderspacing']['value'] != '')
+			{
+				$return .= $lb . 'border-spacing:' . $row['borderspacing']['value'] . $row['borderspacing']['unit'] . ';';
 			}
 		}
 
 		// Font
 		if ($row['font'])
 		{
-			// Font family
-			if ($row['fontfamily'] != '')
+			$row['fontsize'] = deserialize($row['fontsize']);
+			$row['lineheight'] = deserialize($row['lineheight']);
+
+			// Try to shorten the definition
+			if ($row['fontfamily'] != '' && $row['fontsize']['value'] != '')
 			{
-				$return .= $lb . 'font-family:' . $row['fontfamily'] . ';';
+				$return .= $lb . 'font:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . (($row['lineheight']['value'] != '') ? '/' . $row['lineheight']['value'] . $row['lineheight']['unit'] : '') . ' ' . $row['fontfamily'] . ';';
+			}
+			else
+			{
+				// Font family
+				if ($row['fontfamily'] != '')
+				{
+					$return .= $lb . 'font-family:' . $row['fontfamily'] . ';';
+				}
+
+				// Font size
+				if ($row['fontsize']['value'] != '')
+				{
+					$return .= $lb . 'font-size:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . ';';
+				}
+
+				// Line height
+				if ($row['lineheight']['value'] != '')
+				{
+					$return .= $lb . 'line-height:' . $row['lineheight']['value'] . $row['lineheight']['unit'] . ';';
+				}
 			}
 
 			// Font style
@@ -566,32 +752,46 @@ class StyleSheets extends Backend
 				}
 			}
 
-			// Font size
-			$row['fontsize'] = deserialize($row['fontsize']);
-
-			if ($row['fontsize']['value'] != '')
-			{
-				$return .= $lb . 'font-size:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . ';';
-			}
-
 			// Font color
 			if ($row['fontcolor'] != '')
 			{
 				$return .= $lb . 'color:#' . $row['fontcolor'] . ';';
 			}
 
-			// Line height
-			$row['lineheight'] = deserialize($row['lineheight']);
-
-			if ($row['lineheight']['value'] != '')
-			{
-				$return .= $lb . 'line-height:' . $row['lineheight']['value'] . $row['lineheight']['unit'] . ';';
-			}
-
 			// White space
 			if ($row['whitespace'] != '')
 			{
 				$return .= $lb . 'white-space:nowrap;';
+			}
+
+			// Text transform
+			if ($row['texttransform'] != '')
+			{
+				$return .= $lb . 'text-transform:' . $row['texttransform'] . ';';
+			}
+
+			// Text indent
+			$row['textindent'] = deserialize($row['textindent']);
+
+			if ($row['textindent']['value'] != '')
+			{
+				$return .= $lb . 'text-indent:' . $row['textindent']['value'] . $row['textindent']['unit'] . ';';
+			}
+
+			// Letter spacing
+			$row['letterspacing'] = deserialize($row['letterspacing']);
+
+			if ($row['letterspacing']['value'] != '')
+			{
+				$return .= $lb . 'letter-spacing:' . $row['letterspacing']['value'] . $row['letterspacing']['unit'] . ';';
+			}
+
+			// Word spacing
+			$row['wordspacing'] = deserialize($row['wordspacing']);
+
+			if ($row['wordspacing']['value'] != '')
+			{
+				$return .= $lb . 'word-spacing:' . $row['wordspacing']['value'] . $row['wordspacing']['unit'] . ';';
 			}
 		}
 
@@ -615,11 +815,17 @@ class StyleSheets extends Backend
 			}
 		}
 
+		// CSS3PIE
+		if ($blnNeedsPie)
+		{
+			$return .= $lb . 'behavior:url("plugins/css3pie/PIE.htc");';
+		}
+
 		// Custom code
 		if ($row['own'] != '')
 		{
 			$own = preg_split('/[\n\r]+/i', trim($this->String->decodeEntities($row['own'])));
-			$return .= ($blnWriteToFile ? '' : "\n\t") . implode(($blnWriteToFile ? '' : "\n\t"), $own);
+			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
 
 		// Allow custom definitions
@@ -864,6 +1070,11 @@ class StyleSheets extends Backend
 			{
 				case 'width':
 				case 'height':
+				case 'min-width':
+				case 'min-height':
+				case 'max-width':
+				case 'max-height':
+					$strName = str_replace('-', '', $strKey);
 					if ($arrChunks[1] == 'auto')
 					{
 						$strUnit = '';
@@ -875,8 +1086,8 @@ class StyleSheets extends Backend
 						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
 					}
 					$arrSet['size'] = 1;
-					$arrSet[$strKey]['value'] = $varValue;
-					$arrSet[$strKey]['unit'] = $strUnit;
+					$arrSet[$strName]['value'] = $varValue;
+					$arrSet[$strName]['unit'] = $strUnit;
 					break;
 
 				case 'top':
@@ -1288,10 +1499,66 @@ class StyleSheets extends Backend
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;
 
+				case 'border-radius':
+					$arrSet['border'] = 1;
+					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
+					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					switch (count($arrTRBL))
+					{
+						case 1:
+							$varValue = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+							$arrSet['borderradius'] = array
+							(
+								'top' => $varValue,
+								'right' => $varValue,
+								'bottom' => $varValue,
+								'left' => $varValue,
+								'unit' => $strUnit
+							);
+							break;
+						case 2:
+							$varValue_1 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]);
+							$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
+							$arrSet['borderradius'] = array
+							(
+								'top' => $varValue_1,
+								'right' => $varValue_2,
+								'bottom' => $varValue_1,
+								'left' => $varValue_2,
+								'unit' => $strUnit
+							);
+							break;
+						case 4:
+							$arrSet['borderradius'] = array
+							(
+								'top' => preg_replace('/[^0-9\.-]+/', '', $arrTRBL[0]),
+								'right' => preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]),
+								'bottom' => preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]),
+								'left' => preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]),
+								'unit' => $strUnit
+							);
+							break;
+					}
+					break;
+
+				case '-moz-border-radius':
+				case '-webkit-border-radius':
+					// Ignore
+					break;
+
 				case 'border-style':
 				case 'border-collapse':
 					$arrSet['border'] = 1;
 					$arrSet[str_replace('-', '', $strKey)] = $arrChunks[1];
+					break;
+
+				case 'border-spacing':
+					$arrSet['border'] = 1;
+					$arrSet['border-spacing'] = array
+					(
+						'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
+						'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
+					);
 					break;
 
 				case 'font-family':
@@ -1394,6 +1661,23 @@ class StyleSheets extends Backend
 					$arrSet['whitespace'] = ($arrChunks[1] == 'nowrap') ? 1 : '';
 					break;
 
+				case 'text-transform':
+					$arrSet['font'] = 1;
+					$arrSet['texttransform'] = $arrChunks[1];
+					break;
+
+				case 'text-indent':
+				case 'letter-spacing':
+				case 'word-spacing':
+					$strName = str_replace('-', '', $strKey);
+					$arrSet['font'] = 1;
+					$arrSet[$strName] = array
+					(
+						'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
+						'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
+					);
+					break;
+
 				case 'list-style-type':
 					$arrSet['list'] = 1;
 					$arrSet[str_replace('-', '', $strKey)] = $arrChunks[1];
@@ -1402,6 +1686,13 @@ class StyleSheets extends Backend
 				case 'list-style-image':
 					$arrSet['list'] = 1;
 					$arrSet['liststyleimage'] = preg_replace('/url\("?([^"\)]+)"?\)/i', '$1', $arrChunks[1]);
+					break;
+
+				case 'behavior':
+					if ($arrChunks[1] != 'url("plugins/css3pie/PIE.htc")')
+					{
+						$arrSet['own'][] = $strDefinition;
+					}
 					break;
 
 				default:
