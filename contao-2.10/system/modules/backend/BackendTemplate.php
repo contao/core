@@ -152,11 +152,9 @@ class BackendTemplate extends Template
 			}
 		}
 
-		// Add the browser and OS classes (looks like an insert tag to be
-		// consistent with the front end, however, insert tags are actually
-		// not supported in the back end).
+		// Add the browser and OS classes (see #3074)
 		$ua = $this->Environment->agent;
-		$strBuffer = str_replace('{{ua::class}}', $ua->class, $strBuffer);
+		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;
 		parent::output();

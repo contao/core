@@ -48,7 +48,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 parent.Mediabox.enableFiletreeReload();
 </script>
 </head>
-<body class="{{ua::class}}">
+<body class="__ua__">
 
 <div id="container">
 <div id="main">
