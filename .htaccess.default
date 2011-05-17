@@ -25,6 +25,12 @@
 ##
 
 ##
+# Serve the correct content type for .htc files (CSS3 PIE)
+# @see http://css3pie.com/documentation/known-issues/#content-type
+##
+AddType text/x-component .htc
+
+##
 # Disable ETags
 # @see http://developer.yahoo.com/performance/rules.html#etags
 ##

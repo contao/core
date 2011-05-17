@@ -235,7 +235,7 @@ class StyleSheets extends Backend
 
 			if ($row['minwidth']['value'] != '')
 			{
-				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . (($row['minwidth']['value'] == 'auto') ? '' : $row['minwidth']['unit']) . ';';
+				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . $row['minwidth']['unit'] . ';';
 			}
 
 			// Min-height
@@ -243,7 +243,7 @@ class StyleSheets extends Backend
 
 			if ($row['minheight']['value'] != '')
 			{
-				$return .= $lb . 'min-height:' . $row['minheight']['value'] . (($row['minheight']['value'] == 'auto') ? '' : $row['minheight']['unit']) . ';';
+				$return .= $lb . 'min-height:' . $row['minheight']['value'] . $row['minheight']['unit'] . ';';
 			}
 
 			// Max-width
@@ -251,7 +251,7 @@ class StyleSheets extends Backend
 
 			if ($row['maxwidth']['value'] != '')
 			{
-				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . (($row['maxwidth']['value'] == 'auto') ? '' : $row['maxwidth']['unit']) . ';';
+				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . $row['maxwidth']['unit'] . ';';
 			}
 
 			// Max-height
@@ -259,7 +259,7 @@ class StyleSheets extends Backend
 
 			if ($row['maxheight']['value'] != '')
 			{
-				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . (($row['maxheight']['value'] == 'auto') ? '' : $row['maxheight']['unit']) . ';';
+				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . $row['maxheight']['unit'] . ';';
 			}
 		}
 
@@ -501,7 +501,7 @@ class StyleSheets extends Backend
 			{
 				$row['shadowsize'] = deserialize($row['shadowsize']);
 
-				if (is_array($row['shadowsize']))
+				if (is_array($row['shadowsize']) && $row['shadowsize']['top'] != '' && $row['shadowsize']['bottom'] != '')
 				{
 					$blnNeedsPie = true;
 
