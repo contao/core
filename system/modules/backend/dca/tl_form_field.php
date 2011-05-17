@@ -498,6 +498,7 @@ class tl_form_field extends Backend
 	 */
 	public function listFormFields($arrRow)
 	{
+		$arrRow['required'] = $arrRow['mandatory'];
 		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
 
 		$strType = '
