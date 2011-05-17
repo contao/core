@@ -34,16 +34,15 @@
  */
 define('TL_MODE', 'FE');
 require('system/initialize.php');
-$in = Input::getInstance();
 
 
 /**
  * Facebook
  */
-if ($in->get('p') == 'facebook')
+if ($objInput->get('p') == 'facebook')
 {
-	$query  = '?u=' . rawurlencode($in->get('u'));
-	$query .= '&t=' . rawurlencode($in->get('t'));
+	$query  = '?u=' . rawurlencode($objInput->get('u'));
+	$query .= '&t=' . rawurlencode($objInput->get('t'));
 	header('Location: http://www.facebook.com/sharer.php' . $query);
 	exit;
 }
@@ -52,9 +51,9 @@ if ($in->get('p') == 'facebook')
 /**
  * Twitter
  */
-elseif ($in->get('p') == 'twitter')
+elseif ($objInput->get('p') == 'twitter')
 {
-	$url = $in->get('u');
+	$url = $objInput->get('u');
 
 	// Shorten the URL
 	if (Environment::getInstance()->host != 'localhost')
@@ -68,7 +67,7 @@ elseif ($in->get('p') == 'twitter')
 		}
 	}
 
-	$query  = rawurlencode($in->get('t'));
+	$query  = rawurlencode($objInput->get('t'));
 	$query .= ' ' . rawurlencode($url);
 	header('Location: http://twitter.com/home?status=' . $query);
 	exit;
