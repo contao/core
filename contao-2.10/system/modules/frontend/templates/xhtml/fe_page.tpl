@@ -1,7 +1,7 @@
 <?php echo $this->doctype; ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->charset; ?>" />
 <title><?php echo $this->pageTitle; ?> - <?php echo $this->mainTitle; ?></title>
 <base href="<?php echo $this->base; ?>" />
 <meta name="robots" content="<?php echo $this->robots; ?>" />
