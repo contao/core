@@ -19,7 +19,7 @@
 ?>"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 </head>
-<body class="{{ua::class}}">
+<body class="__ua__">
 <?php $this->showIE6warning(); ?>
 
 <div id="header">

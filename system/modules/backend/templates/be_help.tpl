@@ -12,7 +12,7 @@
 ?>" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 </head>
-<body class="{{ua::class}}">
+<body class="__ua__">
 
 <div id="container">
 <div id="main">

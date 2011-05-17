@@ -196,14 +196,42 @@ class tl_templates extends Backend
 				continue;
 			}
 
-			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
+			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates/html5'))
 			{
-				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
+				// HTML5 templates
+				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates/html5') as $strTemplate)
 				{
-					continue;
+					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
+					{
+						continue;
+					}
+
+					$arrAllTemplates[$strModule]['html5/'.$strTemplate] = $strModule . '/templates/html5/' . $strTemplate;
 				}
 
-				$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
+				// XHTML templates
+				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates/xhtml') as $strTemplate)
+				{
+					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
+					{
+						continue;
+					}
+
+					$arrAllTemplates[$strModule]['xhtml/'.$strTemplate] = $strModule . '/templates/xhtml/' . $strTemplate;
+				}
+			}
+			else
+			{
+				// Default templates
+				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
+				{
+					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
+					{
+						continue;
+					}
+
+					$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
+				}
 			}
 		}
 
