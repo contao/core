@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.9.5 (2011-XX-XX)
+Version 2.9.5 (2011-05-18)
 --------------------------
 - Updated: updated TCPDF to version 5.9.061 (#2929)
 - Added: IE9 compatibility
