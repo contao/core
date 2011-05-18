@@ -34,7 +34,7 @@
  */
 $GLOBALS['TL_LANG']['tl_style_sheet']['name']   = array('Name', 'Please enter the style sheet name.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc']     = array('Conditional comment', 'Conditional comments allow you to create Internet Explorer specific style sheets (e.g. <em>if lt IE 9</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Media types', 'Here you can choose the media types the style sheet applies to.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Media type', 'Here you can enter one or more media types the style sheet applies to. Media queries like <em>screen and (min-width: 800px)</em> are supported.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['source'] = array('Source files', 'Please choose one or more files from the files directory.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'] = array('Revision date', 'Date and time of the latest revision');
 
