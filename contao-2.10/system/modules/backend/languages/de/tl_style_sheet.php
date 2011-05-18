@@ -34,7 +34,7 @@
  */
 $GLOBALS['TL_LANG']['tl_style_sheet']['name']   = array('Name', 'Bitte geben Sie den Namen des Stylesheets ein.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['cc']     = array('Conditional Comment', 'Conditional Comments ermöglichen die Erstellung Internet Explorer-spezifischer Stylesheets (z.B. <em>if lt IE 9</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Medientypen', 'Bitte wählen Sie die Medientypen aus, für die das Stylesheet gültig ist.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['media']  = array('Medientyp', 'Hier können Sie einen oder mehrere Medientypen angeben, für die das Stylesheet gültig ist. Media Queries wie z.B. <em>screen and (min-width: 800px)</em> werden unterstützt.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['source'] = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp'] = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 

@@ -166,11 +166,10 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'media' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['media'],
-			'inputType'               => 'checkbox',
+			'inputType'               => 'text',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'options'                 => array('all', 'aural', 'braille', 'embossed', 'handheld', 'print', 'projection', 'screen', 'tty', 'tv'),
-			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
+			'search'                  => true,
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long')
 		),
 		'source' => array
 		(

@@ -374,7 +374,7 @@ class PageRegular extends Frontend
 				// Aggregate regular style sheets
 				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
-					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), implode(',', deserialize($objStylesheets->media)));
+					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $objStylesheets->media);
 				}
 				else
 				{
@@ -383,7 +383,7 @@ class PageRegular extends Frontend
 											 TL_SCRIPT_URL,
 											 $objStylesheets->name,
 											 max($objStylesheets->tstamp, $objStylesheets->tstamp2),
-											 implode(',', deserialize($objStylesheets->media)),
+											 $objStylesheets->media,
 											 $strTagEnding);
 
 					if ($objStylesheets->cc)

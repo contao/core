@@ -1019,12 +1019,12 @@ window.addEvent('domready', function() {
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
-  <p><?php echo $GLOBALS['TL_LANG']['tl_install']['update28']; ?></p>
+  <p><?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateX'], '2.8', '2.8'); ?></p>
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_28update">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update28run']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.8'); ?>" onclick="Backend.getScrollOffset();">
     </div>
   </div>
   </form>
@@ -1037,12 +1037,30 @@ window.addEvent('domready', function() {
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
-  <p><?php echo $GLOBALS['TL_LANG']['tl_install']['update29']; ?></p>
+  <p><?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateX'], '2.9', '2.9'); ?></p>
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_29update">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['update29run']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.9'); ?>" onclick="Backend.getScrollOffset();">
+    </div>
+  </div>
+  </form>
+</div>
+</fieldset>
+<?php elseif ($this->is210Update): ?>
+
+<fieldset class="tl_box<?php if (!$this->is210Update): ?> collapsed<?php endif; ?>">
+<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+<div>
+  <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
+  <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
+  <p><?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateX'], '2.10', '2.10'); ?></p>
+  <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
+  <div class="tl_formbody_submit">
+    <input type="hidden" name="FORM_SUBMIT" value="tl_210update">
+    <div class="tl_submit_container">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.10'); ?>" onclick="Backend.getScrollOffset();">
     </div>
   </div>
   </form>

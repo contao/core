@@ -638,6 +638,53 @@ class InstallTool extends Controller
 
 
 		/**
+		 * Version 2.10 update
+		 */
+		if ($this->Database->tableExists('tl_style') && !$this->Database->fieldExists('positioning', 'tl_style'))
+		{
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
+			{
+				$objStyleSheet = $this->Database->execute("SELECT * FROM tl_style_sheet WHERE media!=''");
+
+				while ($objStyleSheet->next())
+				{
+					$media = deserialize($objStyleSheet->media);
+
+					if (is_array($media))
+					{
+						$media = implode(',', $media);
+					}
+
+					$this->Database->prepare("UPDATE tl_style_sheet SET media=? WHERE id=?")
+								   ->execute($media, $objStyleSheet->id);
+				}
+
+				$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `minwidth` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `minheight` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `maxwidth` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `maxheight` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `gradienttop` varchar(6) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `gradientbottom` varchar(6) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `shadowsize` varchar(128) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `shadowcolor` varchar(6) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `borderradius` varchar(128) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `borderspacing` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `texttransform` varchar(32) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `textindent` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `letterspacing` varchar(64) NOT NULL default ''");
+				$this->Database->query("ALTER TABLE `tl_style` ADD `wordspacing` varchar(64) NOT NULL default ''");
+				$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
+
+				$this->reload();
+			}
+
+			$this->Template->is210Update = true;
+			$this->outputAndExit();
+		}
+
+
+		/**
 		 * Collations
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')
