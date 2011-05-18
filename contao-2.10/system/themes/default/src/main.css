@@ -1003,3 +1003,38 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 .tl_news_published {
 	background:url("images/news.gif") no-repeat left center;
 }
+
+/* Visual hint for TRBL fields - thanks to Eugene Rybyakov */
+.tl_text_trbl,.tl_text_trbl:focus,#ctrl_size input {
+	background:url("images/hints.gif") no-repeat -20px 20px;
+}
+#ctrl_size_0 {
+	background-position:63px 1px !important;
+}
+#ctrl_size_1 {
+	background-position:64px -18px !important;
+}
+.trbl_top {
+	background-position:47px -39px !important;
+}
+.trbl_right {
+	background-position:47px -59px !important;
+}
+.trbl_bottom {
+	background-position:47px -79px !important;
+}
+.trbl_left {
+	background-position:47px -99px !important;
+}
+.shadowsize .trbl_top {
+	background-position:46px -119px !important;
+}
+.shadowsize .trbl_right {
+	background-position:46px -139px !important;
+}
+.shadowsize .trbl_bottom {
+	background-position:46px -159px !important;
+}
+.shadowsize .trbl_left {
+	background-position:46px -179px !important;
+}
