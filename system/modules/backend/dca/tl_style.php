@@ -390,7 +390,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50 shadowsize')
 		),
 		'shadowcolor' => array
 		(
