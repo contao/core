@@ -4,8 +4,8 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
-<link rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>'" media="all">
-<link rel="stylesheet" href="system/themes/<?php echo $this->theme; ?>/install.css?<?php echo VERSION .'.'. BUILD; ?>'" media="all">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/basic.css?<?php echo VERSION .'.'. BUILD; ?>'" media="all">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/install.css?<?php echo VERSION .'.'. BUILD; ?>'" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
 <script>
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
@@ -13,10 +13,10 @@ var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 </script>
-<script src="plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
-<script src="plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
-<script src="contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
-<script src="system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mootools-core.js?<?php echo MOOTOOLS_CORE; ?>"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mootools-more.js?<?php echo MOOTOOLS_MORE; ?>"></script>
+<script src="<?php echo TL_SCRIPT_URL; ?>contao/contao.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
+<script src="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/hover.js?<?php echo VERSION .'.'. BUILD; ?>"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
 </head>
 <body class="__ua__">

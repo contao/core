@@ -660,20 +660,6 @@ class InstallTool extends Controller
 				}
 
 				$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `minwidth` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `minheight` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `maxwidth` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `maxheight` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `gradienttop` varchar(6) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `gradientbottom` varchar(6) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `shadowsize` varchar(128) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `shadowcolor` varchar(6) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `borderradius` varchar(128) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `borderspacing` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `texttransform` varchar(32) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `textindent` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `letterspacing` varchar(64) NOT NULL default ''");
-				$this->Database->query("ALTER TABLE `tl_style` ADD `wordspacing` varchar(64) NOT NULL default ''");
 				$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
 
 				$this->reload();
