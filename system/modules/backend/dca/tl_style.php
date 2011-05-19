@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'size'                        => 'width,height,minwidth,minheight,maxwidth,maxheight',
 		'positioning'                 => 'trbl,position,floating,clear,overflow,display',
 		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
-		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,gradienttop,gradientbottom,shadowsize,shadowcolor',
+		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradient',
 		'border'                      => 'borderwidth,borderstyle,bordercolor,borderradius,bordercollapse,borderspacing',
 		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace,texttransform,textindent,letterspacing,wordspacing',
 		'list'                        => 'liststyletype,liststyleimage'
@@ -365,32 +365,12 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'options'                 => array('repeat', 'repeat-x', 'repeat-y', 'no-repeat'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
-		'gradienttop' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradienttop'],
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			)
-		),
-		'gradientbottom' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientbottom'],
-			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>6, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
-			'wizard' => array
-			(
-				array('tl_style', 'colorPicker')
-			)
-		),
 		'shadowsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50 shadowsize')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'shadowcolor' => array
 		(
@@ -401,6 +381,12 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			(
 				array('tl_style', 'colorPicker')
 			)
+		),
+		'gradient' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradient'],
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>4, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'border' => array
 		(

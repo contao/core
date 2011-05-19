@@ -79,8 +79,19 @@ class ModuleMaintenance extends BackendModule
 		// Confirmation message
 		if (strlen($_SESSION['CLEAR_CACHE_CONFIRM']))
 		{
-			$this->Template->cacheMessage = sprintf('<p class="tl_confirm">%s</p>', $_SESSION['CLEAR_CACHE_CONFIRM']);
+			$this->Template->cacheMessage = sprintf('<p class="tl_confirm">%s</p>' . "\n", $_SESSION['CLEAR_CACHE_CONFIRM']);
 			$_SESSION['CLEAR_CACHE_CONFIRM'] = '';
+		}
+
+		// Add potential error messages
+		if (count($_SESSION['TL_ERROR']))
+		{
+			foreach ($_SESSION['TL_ERROR'] as $message)
+			{
+				$this->Template->cacheMessage .= sprintf('<p class="tl_error">%s</p>' . "\n", $message);
+			}
+
+			$_SESSION['TL_ERROR'] = array();
 		}
 
 		// Truncate cache tables

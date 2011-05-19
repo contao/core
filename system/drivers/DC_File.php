@@ -281,6 +281,14 @@ class DC_File extends DataContainer implements editable
 			}
 		}
 
+		$this->import('Files');
+
+		// Check whether the target file is writeable
+		if (!$this->Files->is_writeable('system/config/localconfig.php'))
+		{
+			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php');
+		}
+
 		// Add some buttons and end the form
 		$return .= '
 </div>
