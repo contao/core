@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'size'                        => 'width,height,minwidth,minheight,maxwidth,maxheight',
 		'positioning'                 => 'trbl,position,floating,clear,overflow,display',
 		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
-		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradient',
+		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradientAngle,gradientColors',
 		'border'                      => 'borderwidth,borderstyle,bordercolor,borderradius,bordercollapse,borderspacing',
 		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace,texttransform,textindent,letterspacing,wordspacing',
 		'list'                        => 'liststyletype,liststyleimage'
@@ -382,9 +382,15 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 				array('tl_style', 'colorPicker')
 			)
 		),
-		'gradient' => array
+		'gradientAngle' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradient'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientAngle'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50')
+		),
+		'gradientColors' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientColors'],
 			'inputType'               => 'text',
 			'eval'                    => array('multiple'=>true, 'size'=>4, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
