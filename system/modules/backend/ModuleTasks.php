@@ -704,7 +704,6 @@ class ModuleTasks extends BackendModule
 		$widget->id = 'deadline';
 		$widget->name = 'deadline';
 		$widget->mandatory = true;
-		$widget->maxlength = 10;
 		$widget->rgxp = 'date';
 		$widget->datepicker = sprintf($this->getDatePickerString(), 'ctrl_deadline');
 		$widget->value = $value;
