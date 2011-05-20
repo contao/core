@@ -14,7 +14,7 @@
   }
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style media="screen">
 #container {
@@ -34,15 +34,15 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 </script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
-  $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
   $objCombiner->add('plugins/calendar/js/calendar.js', CALENDAR);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 <script>
 parent.Mediabox.enableFiletreeReload();

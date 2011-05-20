@@ -10,7 +10,7 @@
   $objCombiner->add('system/themes/'. $this->theme .'/popup.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen"><![endif]-->
 </head>
 <body class="__ua__">
 

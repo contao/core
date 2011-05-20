@@ -98,7 +98,7 @@ if ($this->syntax == '')
  * http://www.cdolivet.com/editarea/ for more information.
  */
 if ($GLOBALS['TL_CONFIG']['useCE']): ?>
-<script src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js?<?php echo EDITAREA; ?>"></script>
+<script src="<?php echo $this->base; ?>plugins/editArea/edit_area_full.js"></script>
 <?php foreach ($this->ceFields as $strField): ?>
 <script>
 editAreaLoader.init({

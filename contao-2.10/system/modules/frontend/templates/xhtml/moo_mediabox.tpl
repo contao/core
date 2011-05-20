@@ -1,11 +1,11 @@
 <?php
 
 // Add mediabox style sheet
-$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mediabox/css/mediabox.css?'. MEDIABOX .'|screen';
+$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mediabox/'. MEDIABOX .'/css/mediaboxAdvBlack21.css|screen';
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/js/mediabox.js?<?php echo MEDIABOX; ?>"></script>
+<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
 Mediabox.scanPage = function() {

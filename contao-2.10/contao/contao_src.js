@@ -1116,6 +1116,9 @@ var Backend =
 	 */
 	addColorPicker: function()
 	{
+		/*
+		FIXME: replace with http://www.nogray.com/color_picker.php as soon
+		       as the new version has been released
 		$$('img.mooRainbow').each(function(img)
 		{
 			var id = $(img).id;
@@ -1139,6 +1142,7 @@ var Backend =
 				mr.manualSet("#" + el.value, "hex");
 			}
 		});
+		*/
 	},
 
 

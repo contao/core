@@ -6,7 +6,7 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mediabox/css/mediabox_white.css', MEDIABOX);
+  $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
   $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
@@ -15,7 +15,7 @@
   }
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css?<?php echo VERSION .'.'. BUILD; ?>" media="screen"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <script>
 var CONTAO_THEME = '<?php echo $this->theme; ?>';
@@ -25,16 +25,16 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 </script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
-  $objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
   $objCombiner->add('plugins/calendar/js/calendar.js', CALENDAR);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
-  $objCombiner->add('plugins/mediabox/js/mediabox.js', MEDIABOX);
+  $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <?php echo $this->javascripts; ?>
-<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5.js?<?php echo HTML5SHIM; ?>"></script><![endif]-->
+<!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 </head>
 <body id="top" class="__ua__">

@@ -569,8 +569,12 @@ class tl_style extends Backend
 	{
 		parent::__construct();
 
+		/*
+		FIXME: replace with http://www.nogray.com/color_picker.php as soon
+		       as the new version has been released.
 		$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.css?' . MOO_RAINBOW . '|screen';
 		$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
+		*/
 
 		$this->import('BackendUser', 'User');
 	}
