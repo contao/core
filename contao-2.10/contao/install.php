@@ -644,21 +644,6 @@ class InstallTool extends Controller
 		{
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
 			{
-				$objStyleSheet = $this->Database->execute("SELECT * FROM tl_style_sheet WHERE media!=''");
-
-				while ($objStyleSheet->next())
-				{
-					$media = deserialize($objStyleSheet->media);
-
-					if (is_array($media))
-					{
-						$media = implode(',', $media);
-					}
-
-					$this->Database->prepare("UPDATE tl_style_sheet SET media=? WHERE id=?")
-								   ->execute($media, $objStyleSheet->id);
-				}
-
 				$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
 				$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
 
