@@ -38,4 +38,5 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Fixed: clear the output buffer befor sending a file to the browser (#2678)
 - Fixed: prevent session locking during downloads (#2804)
 - Fixed: modify the Config class to allow nested calls to getInstance() (#2706)
+- Fixed: make getReadableSize() units translateable (#2658)
 - Fixed a few minor issues

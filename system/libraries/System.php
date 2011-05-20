@@ -690,14 +690,12 @@ abstract class System
 	 */
 	protected function getReadableSize($intSize, $intDecimals=1)
 	{
-		$arrUnits = array('Byte', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-
 		for ($i=0; $intSize>1000; $i++)
 		{
 			$intSize /= 1000;
 		}
 
-		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $arrUnits[$i];
+		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];
 	}
 
 
