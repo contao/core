@@ -475,11 +475,11 @@ class StyleSheets extends Backend
 			}
 
 			// Background gradient
-			if ($row['gradient'] != '')
+			if ($row['gradientColors'] != '')
 			{
-				$row['gradient'] = deserialize($row['gradient']);
+				$row['gradientColors'] = deserialize($row['gradientColors']);
 
-				if (is_array($row['gradient']))
+				if (is_array($row['gradientColors']))
 				{
 					$blnNeedsPie = true;
 					$bgImage = '';
@@ -490,117 +490,144 @@ class StyleSheets extends Backend
 						$bgImage = 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
+					// Default starting point
+					if ($row['gradientAngle'] == '')
+					{
+						$row['gradientAngle'] = 'top';
+					}
+
+					$webkitAngle = $row['gradientAngle'];
+
+					// Convert the starting point to degrees
+					$arrMapper = array
+					(
+						'left'         => '0deg',
+						'top'          => '270deg',
+						'right'        => '180deg',
+						'bottom'       => '90deg',
+						'top left'     => '315deg', 
+						'left top'     => '315deg', 
+						'bottom left'  => '45deg', 
+						'left bottom'  => '45deg', 
+						'top right'    => '225deg', 
+						'right top'    => '225deg', 
+						'bottom right' => '135deg', 
+						'right bottom' => '135deg' 
+					);
+
+					if (isset($arrMapper[$webkitAngle]))
+					{
+						$webkitAngle = $arrMapper[$webkitAngle];
+					}
+
+					$angle = floatval($webkitAngle);
+					$multi = 50 / 45; // 45 degree == 50 %
+
+					// Make angle a positive value
+					while ($angle < 0)
+					{
+						$angle += 360;
+					}
+
+					// Convert the angle to points in percentage from the top left corner 
+					if ($angle >= 0 && $angle < 45)
+					{
+						$offset = round(($angle * $multi), 2);
+						$webkitAngle = '0% ' . (50 + $offset) . '%,100% ' . (50 - $offset) .'%';
+					}
+					elseif ($angle >= 45 && $angle < 135)
+					{
+						$offset = round((($angle - 45) * $multi), 2);
+						$webkitAngle = $offset . '% 100%,' . (100 - $offset) .'% 0%';
+					}
+					elseif ($angle >= 135 && $angle < 225)
+					{
+						$offset = round((($angle - 135) * $multi), 2);
+						$webkitAngle = '100% ' . (100 - $offset) . '%,0% ' . $offset .'%';
+					}
+					elseif ($angle >= 225 && $angle < 315)
+					{
+						$offset = round((($angle - 225) * $multi), 2);
+						$webkitAngle = (100 - $offset) . '% 0%,' . $offset .'% 100%';
+					}
+					elseif ($angle >= 315 && $angle <= 360)
+					{
+						$offset = round((($angle - 315) * $multi), 2);
+						$webkitAngle = '0% ' . $offset . '%,100% ' . (100 - $offset) .'%';
+					}
+
+					$row['gradientColors'] = array_values(array_filter($row['gradientColors']));
+
 					// Add a hash tag to the color values
-					for ($i=1; $i<count($row['gradient']); $i++)
+					foreach ($row['gradientColors'] as $k=>$v)
 					{
-						if ($row['gradient'][$i] != '')
-						{
-							$row['gradient'][$i] = '#' . $row['gradient'][$i];
-						}
+						$row['gradientColors'][$k] = '#' . $v;
 					}
 
-					$webkit = $row['gradient'];
+					$webkitColors = $row['gradientColors'];
 
-					// Try to convert the gradient to webkit syntax
-					foreach ($webkit as $k=>$v)
+					// Convert #ffc 10% to color-stop(0.1,#ffc)
+					foreach ($webkitColors as $k=>$v)
 					{
-						if ($k == 0)
+						// Split #ffc 10%
+						list($col, $pct) = explode(' ', $v, 2);
+
+						// Convert 10% to 0.1
+						if ($pct != '')
 						{
-							// Handle keywords
-							$arrMapper = array
-							(
-								'left'         => '0deg',
-								'top'          => '270deg',
-								'right'        => '180deg',
-								'bottom'       => '90deg',
-								'top left'     => '315deg', 
-								'left top'     => '315deg', 
-								'bottom left'  => '45deg', 
-								'left bottom'  => '45deg', 
-								'top right'    => '225deg', 
-								'right top'    => '225deg', 
-								'bottom right' => '135deg', 
-								'right bottom' => '135deg' 
-							);
+							$pct = intval($pct) / 100;
+						}
+						else
+						{
+							// Default values: 0, 0.33, 0.66, 1
+							switch ($k)
+							{
+								case 0:
+									$pct = 0;
+									break;
 
-							// Empty value defaults to "top"
-							if ($v == '')
-							{
-								$v = '270deg';
-							}
-							elseif (isset($arrMapper[$v]))
-							{
-								$v = $arrMapper[$v];
-							}
+								case 1:
+									if (count($webkitColors) == 2)
+									{
+										$pct = 1;
+									}
+									elseif (count($webkitColors) == 3)
+									{
+										$pct = 0.5;
+									}
+									elseif (count($webkitColors) == 4)
+									{
+										$pct = 0.33;
+									}
+									break;
 
-							$angle = floatval($v);
-							$multi = 50 / 45; // 45 degree == 50 %
+								case 2:
+									if (count($webkitColors) == 3)
+									{
+										$pct = 1;
+									}
+									elseif (count($webkitColors) == 4)
+									{
+										$pct = 0.66;
+									}
+									break;
 
-							// Make angle a positive value
-							while ($angle < 0)
-							{
-								$angle += 360;
-							}
-
-							// Convert the angle to points in percentage from the top left corner 
-							if ($angle >= 0 && $angle < 45)
-							{
-								$offset = round(($angle * $multi), 2);
-								$webkit[$k] = '0% ' . (50 + $offset) . '%,100% ' . (50 - $offset) .'%';
-							}
-							elseif ($angle >= 45 && $angle < 135)
-							{
-								$offset = round((($angle - 45) * $multi), 2);
-								$webkit[$k] = $offset . '% 100%,' . (100 - $offset) .'% 0%';
-							}
-							elseif ($angle >= 135 && $angle < 225)
-							{
-								$offset = round((($angle - 135) * $multi), 2);
-								$webkit[$k] = '100% ' . (100 - $offset) . '%,0% ' . $offset .'%';
-							}
-							elseif ($angle >= 225 && $angle < 315)
-							{
-								$offset = round((($angle - 225) * $multi), 2);
-								$webkit[$k] = (100 - $offset) . '% 0%,' . $offset .'% 100%';
-							}
-							elseif ($angle >= 315 && $angle <= 360)
-							{
-								$offset = round((($angle - 315) * $multi), 2);
-								$webkit[$k] = '0% ' . $offset . '%,100% ' . (100 - $offset) .'%';
+								case 3:
+									$pct = 1;
+									break;
 							}
 						}
-						elseif ($v != '')
-						{
-							// Split #ffc 10%
-							list($col, $pct) = explode(' ', $v, 2);
 
-							// Convert 10% to 0.1
-							if ($pct != '')
-							{
-								$pct = intval($pct) / 100;
-							}
-							else
-							{
-								// Default values: 0, 0.5, 1
-								switch ($k)
-								{
-									case 1: $pct = 0; break;
-									case 2: $pct = ($webkit[3] != '') ? 0.5 : 1; break;
-									case 3: $pct = 1; break;
-								}
-							}
-
-							// The syntax is: color-stop(0.1,#ffc)
-							$webkit[$k] = 'color-stop(' . $pct . ',' . $col . ')';
-						}
+						// The syntax is: color-stop(0.1,#ffc)
+						$webkitColors[$k] = 'color-stop(' . $pct . ',' . $col . ')';
 					}
 
-					$gradient = implode(',', array_filter($row['gradient']));
-					$webkit_gradient = implode(',', array_filter($webkit));
+					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
+					$webkitGradient = $webkitAngle . ',' . implode(',', $webkitColors);
 
 					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
-					$return .= $lb . 'background:' . $bgImage . '-webkit-gradient(linear,' . $webkit_gradient . ');';
+					$return .= $lb . 'background:' . $bgImage . '-webkit-gradient(linear,' . $webkitGradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
 					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 				}
