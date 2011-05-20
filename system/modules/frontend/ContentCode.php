@@ -113,7 +113,7 @@ class ContentCode extends ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css?' . HIGHLIGHTER . '|screen';
+			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css|screen';
 
 			// Add the core scripts
 			$objCombiner = new Combiner();
@@ -122,7 +122,7 @@ class ContentCode extends ContentElement
 			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);
 
 			// Add the brushes separately in case there are multiple code elements
-			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
+			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js';
 
 			// Initialization
 			$strInit  = '<script>' . "\n";

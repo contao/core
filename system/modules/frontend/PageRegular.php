@@ -300,15 +300,15 @@ class PageRegular extends Frontend
 		{
 			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
 
-			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS_CORE . '/mootools-yui-compressed.js"></script>' . "\n";
-			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/mootools-more.js?' . MOOTOOLS_MORE . '"></script>' . "\n";
+			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
 		}
 		else
 		{
 			$objCombiner = new Combiner();
 
-			$objCombiner->add('plugins/mootools/mootools-core.js', MOOTOOLS_CORE);
-			$objCombiner->add('plugins/mootools/mootools-more.js', MOOTOOLS_MORE);
+			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
 
 			$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
 		}
@@ -378,11 +378,10 @@ class PageRegular extends Frontend
 				}
 				else
 				{
-					$strStyleSheet = sprintf('<link%s rel="stylesheet" href="%ssystem/scripts/%s.css?%s" media="%s"%s',
+					$strStyleSheet = sprintf('<link%s rel="stylesheet" href="%ssystem/scripts/%s.css" media="%s"%s',
 											 (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : ''),
 											 TL_SCRIPT_URL,
 											 $objStylesheets->name,
-											 max($objStylesheets->tstamp, $objStylesheets->tstamp2),
 											 $objStylesheets->media,
 											 $strTagEnding);
 
