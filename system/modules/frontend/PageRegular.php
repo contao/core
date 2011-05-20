@@ -371,10 +371,18 @@ class PageRegular extends Frontend
 
 			while ($objStylesheets->next())
 			{
+				$media = implode(',', deserialize($objStylesheets->media));
+
+				// Overwrite the media type with a custom media query
+				if ($objStylesheets->mediaQuery != '')
+				{
+					$media = $objStylesheets->mediaQuery;
+				}
+
 				// Aggregate regular style sheets
 				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
-					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $objStylesheets->media);
+					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
 				}
 				else
 				{
@@ -382,7 +390,7 @@ class PageRegular extends Frontend
 											 (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : ''),
 											 TL_SCRIPT_URL,
 											 $objStylesheets->name,
-											 $objStylesheets->media,
+											 $media,
 											 $strTagEnding);
 
 					if ($objStylesheets->cc)
