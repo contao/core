@@ -866,7 +866,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		for ($i=0; $i<$GLOBALS['TL_CONFIG']['uploadFields']; $i++)
 		{
 			$fields .= '
-  <input type="file" name="'.$i.'" class="tl_upload_field" maxlength="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'" onfocus="Backend.getScrollOffset();"><br>';
+  <input type="file" name="'.$i.'" class="tl_upload_field" onfocus="Backend.getScrollOffset();"><br>';
 		}
 
 		$strFancyUpload = '';

@@ -57,7 +57,7 @@ class FormFileUpload extends Widget implements uploadable
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+				// Not allowed here (see #3094)
 				break;
 
 			case 'mandatory':
