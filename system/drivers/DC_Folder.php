@@ -844,7 +844,9 @@ class DC_Folder extends DataContainer implements listable, editable
 			// Redirect or reload
 			elseif (!$error)
 			{
+				// Also purge the temp folder (see #2898)
 				$this->import('Automator');
+				$this->Automator->purgeTempFolder();
 				$this->Automator->purgeHtmlFolder();
 
 				if ($this->Input->post('uploadNback') && !$blnResized)
