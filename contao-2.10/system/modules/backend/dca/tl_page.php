@@ -668,7 +668,7 @@ class tl_page extends Backend
 						$pagemounts[] = $root;
 					}
 
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 				}
 
 				$error = false;

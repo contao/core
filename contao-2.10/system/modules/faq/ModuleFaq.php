@@ -52,7 +52,7 @@ class ModuleFaq extends Frontend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page', true);
+			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$time = time();

@@ -637,7 +637,7 @@ class tl_content extends Backend
 		foreach ($this->User->pagemounts as $root)
 		{
 			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 		}
 
 		$pagemounts = array_unique($pagemounts);
@@ -808,7 +808,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -866,7 +866,7 @@ class tl_content extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
@@ -1032,7 +1032,7 @@ class tl_content extends Backend
 		if ($objPage->numRows)
 		{
 			$objPage = $this->getPageDetails($objPage->pid);
-			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+			$arrRoot = $this->getChildRecords($objPage->rootId, 'tl_page');
 			array_unshift($arrRoot, $objPage->rootId);
 		}
 
@@ -1051,7 +1051,7 @@ class tl_content extends Backend
 				}
 
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))
