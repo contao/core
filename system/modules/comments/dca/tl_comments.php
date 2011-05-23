@@ -292,7 +292,7 @@ class tl_comments extends Backend
 		foreach ($this->User->pagemounts as $root)
 		{
 			$pagemounts[] = $root;
-			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+			$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 		}
 
 		$pagemounts = array_unique($pagemounts);
