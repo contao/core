@@ -1395,7 +1395,7 @@ abstract class Controller extends System
 
 						$this->import('Database');
 
-						// Get target page
+						// Get the target page
 						$objNextPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
 													  ->limit(1)
 													  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
@@ -1406,9 +1406,50 @@ abstract class Controller extends System
 						}
 						else
 						{
-							$strUrl = $this->generateFrontendUrl($objNextPage->row());
-							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
+							// Page type specific settings (thanks to Andreas Schempp)
+							switch ($objNextPage->type)
+							{
+								case 'redirect':
+									$strUrl = $objNextPage->url;
+
+									if (strncasecmp($strUrl, 'mailto:', 7) === 0)
+									{
+										$this->import('String');
+										$strUrl = $this->String->encodeEmail($strUrl);
+									}
+									break;
+
+								case 'forward':
+									$time = time();
+
+									if (!$objNextPage->jumpTo)
+									{
+										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+																	->limit(1)
+																	->execute($objNextPage->id);
+									}
+									else
+									{
+										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+																	->limit(1)
+																	->execute($objNextPage->jumpTo);
+									}
+
+									if ($objTarget->numRows)
+									{
+										$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
+										break;
+									}
+									// DO NOT ADD A break; STATEMENT
+
+								default:
+									$strUrl = $this->generateFrontendUrl($objNextPage->row());
+									break;
+							}
+
 							$strName = $objNextPage->title;
+							$strTarget = $objNextPage->target ? (($objPage->outputFormat == 'xhtml') ? LINK_NEW_WINDOW : ' target="_blank"') : '';
+							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
 						}
 					}
 
@@ -1416,11 +1457,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), specialchars($strName));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>%s</a>', $strUrl, specialchars($strTitle), $strTarget, specialchars($strName));
 							break;
 
 						case 'link_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($strTitle));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>', $strUrl, specialchars($strTitle), $strTarget);
 							break;
 
 						case 'link_url':
@@ -1429,6 +1470,10 @@ abstract class Controller extends System
 
 						case 'link_title':
 							$arrCache[$strTag] = specialchars($strTitle);
+							break;
+
+						case 'link_target':
+							$arrCache[$strTag] = $strTarget;
 							break;
 					}
 					break;
