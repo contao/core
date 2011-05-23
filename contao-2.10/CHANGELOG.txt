@@ -43,4 +43,5 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Fixed: modify the Config class to allow nested calls to getInstance() (#2706)
 - Fixed: make getReadableSize() units translateable (#2658)
 - Fixed: the link insert tag did not handle redirect and forward pages (#2972)
+- Fixed: pages excluded in the sitemap did appear in the Google XML sitemap (#2811)
 - Fixed a few minor issues
