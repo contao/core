@@ -319,7 +319,7 @@ class Index extends Frontend
 			header('Cache-Control: no-cache');
 			header('Cache-Control: pre-check=0, post-check=0', false);
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-			header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
+			header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
 			header('Pragma: no-cache');
 		}
 
