@@ -66,12 +66,6 @@ class ModulePassword extends Module
 			return $objTemplate->parse();
 		}
 
-		// Return if there is a logged in user user already
-		if (FE_USER_LOGGED_IN)
-		{
-			return '';
-		}
-
 		return parent::generate();
 	}
 
