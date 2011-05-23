@@ -86,12 +86,6 @@
 <p id="go_to_frontend"><a href="<?php echo $this->frontendFile; ?>" class="footer_preview" title="<?php echo $this->feLink; ?>"><?php echo $this->feLink; ?></a></p>
 
 </div>
-<?php if (!$this->disableCron): ?>
-
-<!-- indexer::stop -->
-<img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible">
-<!-- indexer::continue -->
-<?php endif; ?>
 
 </div>
 
@@ -103,6 +97,20 @@ window.addEvent('domready', function() {
   $('username').focus();
 });
 </script>
+<?php if (!$this->disableCron): ?>
+
+<script>
+new Request({
+  url:'system/html/cron.txt',
+  onComplete: function(txt) {
+    if (!txt) txt = 0;
+    if (parseInt(txt) < (Date.now()/1000 - 300)) {
+      new Request({url:'cron.php'}).send();
+    }
+  }
+}).send();
+</script>
+<?php endif; ?>
 
 </body>
 </html>

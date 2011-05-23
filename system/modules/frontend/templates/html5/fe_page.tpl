@@ -63,15 +63,23 @@
 </div>
 </footer>
 <?php endif; ?>
-<?php if (!$this->disableCron): ?>
-
-<!-- indexer::stop -->
-<img src="<?php echo $this->base; ?>cron.php" alt="" class="invisible">
-<!-- indexer::continue -->
-<?php endif; ?>
 
 </div>
 <?php echo $this->mootools; ?>
+<?php if (!$this->disableCron): ?>
+
+<script>
+new Request({
+  url:'system/html/cron.txt',
+  onComplete: function(txt) {
+    if (!txt) txt = 0;
+    if (parseInt(txt) < (Date.now()/1000 - 300)) {
+      new Request({url:'cron.php'}).send();
+    }
+  }
+}).send();
+</script>
+<?php endif; ?>
 
 </body>
 </html>

@@ -48,7 +48,7 @@ class CronJob extends Frontend
 {
 
 	/**
-	 * Initialize object (do not remove)
+	 * Initialize the object (do not remove)
 	 */
 	public function __construct()
 	{
@@ -61,8 +61,8 @@ class CronJob extends Frontend
 	 */
 	public function run()
 	{
-		// Do not run if there is POST data
-		if (!empty($_POST))
+		// Do not run if there is POST data or the last execution was less than five minutes ago 
+		if (!empty($_POST) || $this->hasToWait())
 		{
 			return;
 		}
@@ -115,13 +115,60 @@ class CronJob extends Frontend
 			$this->log('Hourly cron jobs complete', 'CronJobs run()', TL_CRON);
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_hourly']", $intHourly);
 		}
+	}
 
-		// Output a transparent gif
-		header('Cache-Control: no-cache');
-		header('Content-type: image/gif');
-		header('Content-length: 43');
 
-		echo base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+	/**
+	 * Check whether the last script execution was less than five minutes ago
+	 * @return boolean
+	 */
+	protected function hasToWait()
+	{
+		$time = time();
+
+		// Lock the table
+		$this->Database->lockTables(array('tl_lock'=>'WRITE'));
+
+		// Get the last execution date
+		$objCron = $this->Database->prepare("SELECT * FROM tl_lock WHERE name='cron'")
+								  ->limit(1)
+								  ->execute();
+
+		// Add the cron entry
+		if ($objCron->numRows < 1)
+		{
+			$this->updateCronTxt($time);
+			$this->Database->query("INSERT INTO tl_lock (name, tstamp) VALUES ('cron', $time)");
+			$this->Database->unlockTables();
+
+			return false;
+		}
+
+		// Last execution was less than five minutes ago
+		if ($objCron->tstamp > (time() - 300))
+		{
+			$this->Database->unlockTables();
+			return true;
+		}
+
+		// Store the new value
+		$this->updateCronTxt($time);
+		$this->Database->query("UPDATE tl_lock SET tstamp=$time WHERE name='cron'");
+		$this->Database->unlockTables();
+
+		return false;
+	}
+
+
+	/**
+	 * Update the cron.txt file
+	 * @param integer
+	 */
+	protected function updateCronTxt($time)
+	{
+		$objFile = new File('system/html/cron.txt');
+		$objFile->write($time);
+		$objFile->close();
 	}
 }
 

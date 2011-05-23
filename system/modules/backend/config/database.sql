@@ -212,6 +212,20 @@ CREATE TABLE `tl_layout` (
 -- --------------------------------------------------------
 
 -- 
+-- Table `tl_lock`
+-- 
+
+CREATE TABLE `tl_lock` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(64) NOT NULL default '',
+  `tstamp` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
 -- Table `tl_log`
 -- 
 

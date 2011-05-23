@@ -99,27 +99,7 @@ class Config
 			return;
 		}
 
-		$strFile  = trim($this->strTop) . "\n\n";
-		$strFile .= "### INSTALL SCRIPT START ###\n";
-
-		foreach ($this->arrData as $k=>$v)
-		{
-			$strFile .= "$k = $v\n";
-		}
-
-		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
-		$this->strBottom = trim($this->strBottom);
-
-		if ($this->strBottom != '')
-		{
-			$strFile .= $this->strBottom . "\n\n";
-		}
-
-		$strFile .= '?>';
-
-		$objFile = new File('system/config/localconfig.php');
-		$objFile->write($strFile);
-		$objFile->close();
+		$this->save();
 	}
 
 
@@ -208,6 +188,40 @@ class Config
 
 
 	/**
+	 * Save the local configuration file
+	 */
+	public function save()
+	{
+		$strFile  = trim($this->strTop) . "\n\n";
+		$strFile .= "### INSTALL SCRIPT START ###\n";
+
+		foreach ($this->arrData as $k=>$v)
+		{
+			$strFile .= "$k = $v\n";
+		}
+
+		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
+		$this->strBottom = trim($this->strBottom);
+
+		if ($this->strBottom != '')
+		{
+			$strFile .= $this->strBottom . "\n\n";
+		}
+
+		$strFile .= '?>';
+		$strTemp = md5(uniqid(mt_rand(), true));
+
+		// Write to a temp file first
+		$objFile = fopen(TL_ROOT . '/system/tmp/' . $strTemp, 'wb');
+		fputs($objFile, $strFile);
+		fclose($objFile);
+
+		// Then move the file to its final destination
+		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
+	}
+
+
+	/**
 	 * Return all active modules (starting with "backend" and "frontend") as array
 	 * @param boolean
 	 * @return array
@@ -258,6 +272,7 @@ class Config
 	public function add($strKey, $varValue)
 	{
 		$this->blnIsModified = true;
+		$this->Files = Files::getInstance(); // Required in the destructor
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
@@ -281,6 +296,7 @@ class Config
 	public function delete($strKey)
 	{
 		$this->blnIsModified = true;
+		$this->Files = Files::getInstance(); // Required in the destructor
 		unset($this->arrData[$strKey]);
 	}
 
