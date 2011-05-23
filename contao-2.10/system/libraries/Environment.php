@@ -146,7 +146,7 @@ class Environment
 	 */
 	protected function phpSelf()
 	{
-		return $this->scriptName();
+		return $this->scriptName;
 	}
 
 
@@ -163,18 +163,18 @@ class Environment
 		$arrUriSegments = array();
 
 		// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
-		if (basename($this->scriptName()) != basename($this->scriptFilename()))
+		if (basename($this->scriptName) != basename($this->scriptFilename))
 		{
 			return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
 		}
 
-		if (substr($this->scriptFilename(), 0, 1) == '/')
+		if (substr($this->scriptFilename, 0, 1) == '/')
 		{
 			$strDocumentRoot = '/';
 		}
 
-		$arrSnSegments = explode('/', strrev($this->scriptName()));
-		$arrSfnSegments = explode('/', strrev($this->scriptFilename()));
+		$arrSnSegments = explode('/', strrev($this->scriptName));
+		$arrSfnSegments = explode('/', strrev($this->scriptFilename));
 
 		foreach ($arrSfnSegments as $k=>$v)
 		{
@@ -188,7 +188,7 @@ class Environment
 
 		if (strlen($strDocumentRoot) < 2)
 		{
-			$strDocumentRoot = substr($this->scriptFilename(), 0, -(strlen($strDocumentRoot) + 1));
+			$strDocumentRoot = substr($this->scriptFilename, 0, -(strlen($strDocumentRoot) + 1));
 		}
 
 		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
@@ -207,7 +207,7 @@ class Environment
 		}
 		else
 		{
-			return '/' . preg_replace('/^\//i', '', $this->scriptName()) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+			return '/' . preg_replace('/^\//i', '', $this->scriptName) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 	}
 
@@ -306,10 +306,10 @@ class Environment
 	 */
 	protected function url()
 	{
-		$xhost = $this->httpXForwardedHost();
-		$protocol = $this->ssl() ? 'https://' : 'http://';
+		$xhost = $this->httpXForwardedHost;
+		$protocol = $this->ssl ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost();
+		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost;
 	}
 
 
@@ -362,7 +362,7 @@ class Environment
 	 */
 	protected function script()
 	{
-		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName());
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName);
 	}
 
 
@@ -372,9 +372,9 @@ class Environment
 	 */
 	protected function request()
 	{
-		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri());
+		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri);
 
-		// From version 2.9, do not fallback to $this->script()
+		// From version 2.9, do not fallback to $this->script
 		// anymore if the request string is empty (see #1844).
 
 		// IE security fix (thanks to Michiel Leideman)
@@ -391,7 +391,7 @@ class Environment
 	 */
 	protected function base()
 	{
-		return $this->url() . TL_PATH . '/';
+		return $this->url . TL_PATH . '/';
 	}
 
 
@@ -401,8 +401,8 @@ class Environment
 	 */
 	protected function host()
 	{
-		$parse_url = parse_url($this->url());
-		return preg_replace('/^www\./i', '', $parse_url['host']);
+		$xhost = $this->httpXForwardedHost;
+		return ($xhost != '') ? $xhost : $this->httpHost;
 	}
 
 
