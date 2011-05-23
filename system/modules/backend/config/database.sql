@@ -396,6 +396,7 @@ CREATE TABLE `tl_page` (
   `target` char(1) NOT NULL default '',
   `fallback` char(1) NOT NULL default '',
   `dns` varchar(255) NOT NULL default '',
+  `useSSL` char(1) NOT NULL default '',
   `adminEmail` varchar(255) NOT NULL default '',
   `dateFormat` varchar(32) NOT NULL default '',
   `timeFormat` varchar(32) NOT NULL default '',

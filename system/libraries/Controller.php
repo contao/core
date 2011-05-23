@@ -1816,6 +1816,10 @@ abstract class Controller extends System
 							break;
 
 						case 'host':
+							$arrCache[$strTag] = $this->Environment->host;
+							break;
+
+						case 'http_host':
 							$arrCache[$strTag] = $this->Environment->httpHost;
 							break;
 

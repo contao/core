@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_page']['redirect']       = array('Redirect type', 'Pleas
 $GLOBALS['TL_LANG']['tl_page']['jumpTo']         = array('Redirect page', 'Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.');
 $GLOBALS['TL_LANG']['tl_page']['fallback']       = array('Language fallback', 'Show this page if there is none that matches the visitor\'s language.');
 $GLOBALS['TL_LANG']['tl_page']['dns']            = array('Domain name', 'Here you can restrict the access to the website to a certain domain name.');
+$GLOBALS['TL_LANG']['tl_page']['useSSL']         = array('Use HTTPS in sitemaps', 'Generate the sitemap URLs of this website with <em>https://</em>.');
 $GLOBALS['TL_LANG']['tl_page']['adminEmail']     = array('E-mail address of the website administrator', 'Auto-generated messages like subscription confirmation e-mails will be sent to this address.');
 $GLOBALS['TL_LANG']['tl_page']['dateFormat']     = array('Date format', 'The date format string will be parsed with the PHP date() function.');
 $GLOBALS['TL_LANG']['tl_page']['timeFormat']     = array('Time format', 'The time format string will be parsed with the PHP date() function.');

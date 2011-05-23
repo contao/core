@@ -88,7 +88,7 @@ class Automator extends Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->execute("SELECT id, dns, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $this->Database->execute("SELECT id, dns, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages
@@ -111,7 +111,7 @@ class Automator extends Backend
 			// Overwrite the domain
 			if (strlen($objRoot->dns))
 			{
-				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
+				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
 			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true);
