@@ -72,6 +72,8 @@ $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'The file or folder "%s" is in
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'The file "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Invalid redirect target (circular reference)!';
 $GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Attention!</strong> Your web browser is %sout of date%s and <strong>you cannot use all features of this website</strong>.%s';
+$GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'None of the website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
+$GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'None of the website root pages for <strong>%s</strong> has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
 
 
 /**

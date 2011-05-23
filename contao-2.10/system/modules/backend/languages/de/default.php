@@ -72,6 +72,8 @@ $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'Die Datei bzw. das Verzeichni
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'Die Datei "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Ungültiges Weiterleitungsziel (Zirkelbezug)!';
 $GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Achtung!</strong> Sie verwenden einen %sveralteten Browser%s und <strong>können nicht alle Funktionen dieser Webseite nutzen</strong>.%s';
+$GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'Bei keinem der Website-Startpunkte ohne explizite DNS-Angabe wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
+$GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'Bei keinem der Website-Startpunkte für <strong>%s</strong> wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 
 
 /**

@@ -46,7 +46,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			array('tl_page', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb'),
-			array('tl_page', 'setDefaultLanguage')
+			array('tl_page', 'setDefaultLanguage'),
+			array('tl_page', 'showFallbackWarning')
 		),
 		'onsubmit_callback' => array
 		(
@@ -826,6 +827,50 @@ class tl_page extends Backend
 		{
 			$objPage = $this->getPageDetails($this->Input->get('pid'));
 			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
+		}
+	}
+
+
+	/**
+	 * Show a warning if there is no language fallback page
+	 */
+	public function showFallbackWarning()
+	{
+		if ($this->Input->get('act') != '')
+		{
+			return;
+		}
+
+		$arrRoots = array();
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' ORDER BY dns");
+
+		while ($objRoots->next())
+		{
+			$strDns = ($objRoots->dns != '') ? $objRoots->dns : 'empty';
+
+			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
+			{
+				continue;
+			}
+
+			$arrRoots[$strDns] = $objRoots->fallback;
+		}
+
+		foreach ($arrRoots as $k=>$v)
+		{
+			if ($v != '')
+			{
+				continue;
+			}
+
+			if ($k == 'empty')
+			{
+				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'];
+			}
+			else
+			{
+				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['noFallbackDns'], $k);
+			}
 		}
 	}
 
