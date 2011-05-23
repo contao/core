@@ -378,7 +378,7 @@ abstract class System
 			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
 		}
 
-		@include(TL_ROOT . '/system/config/langconfig.php');
+		include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
 
