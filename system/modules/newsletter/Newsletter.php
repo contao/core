@@ -370,7 +370,7 @@ class Newsletter extends Backend
 		if (!$objNewsletter->sendText)
 		{
 			// Get the mail template
-			$objTemplate = new FrontendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
+			$objTemplate = new BackendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;

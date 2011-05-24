@@ -84,7 +84,7 @@ class ModuleMaintenance extends BackendModule
 		}
 
 		// Add potential error messages
-		if (count($_SESSION['TL_ERROR']))
+		if (is_array($_SESSION['TL_ERROR']) && count($_SESSION['TL_ERROR']))
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{
