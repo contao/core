@@ -143,6 +143,13 @@ class News extends Frontend
 			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
 			// Enclosure
+			if ($objArticle->addImage)
+			{
+				$objItem->addEnclosure($objArticle->singleSRC);
+				$objItem->description .= '<p><img src="' . $strLink . $objArticle->singleSRC . '"></p>';
+			}
+
+			// Enclosure
 			if ($objArticle->addEnclosure)
 			{
 				$arrEnclosure = deserialize($objArticle->enclosure, true);
