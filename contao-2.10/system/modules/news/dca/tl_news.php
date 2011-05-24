@@ -122,6 +122,13 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
 				'button_callback'     => array('tl_news', 'toggleIcon')
 			),
+			'feature' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_news']['feature'],
+				'icon'                => 'featured.gif',
+				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFeatured(this, %s);"',
+				'button_callback'     => array('tl_news', 'iconFeatured')
+			),
 			'show' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_news']['show'],
@@ -485,6 +492,7 @@ class tl_news extends Backend
 			case 'show':
 			case 'delete':
 			case 'toggle':
+			case 'feature':
 				$objArchive = $this->Database->prepare("SELECT pid FROM tl_news WHERE id=?")
 											 ->limit(1)
 											 ->execute($id);
@@ -719,6 +727,81 @@ class tl_news extends Backend
 	{
 		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
 		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'' . $strField . '\')"');
+	}
+
+
+	/**
+	 * Return the "feature/unfeature element" button
+	 * @param array
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function iconFeatured($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen($this->Input->get('fid')))
+		{
+			$this->toggleFeatured($this->Input->get('fid'), ($this->Input->get('state') == 1));
+			$this->redirect($this->getReferer());
+		}
+
+		// Check permissions AFTER checking the fid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		{
+			return '';
+		}
+
+		$href .= '&amp;fid='.$row['id'].'&amp;state='.($row['featured'] ? '' : 1);
+
+		if (!$row['featured'])
+		{
+			$icon = 'featured_.gif';
+		}		
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
+	}
+
+
+	/**
+	 * Feature/unfeature a news item
+	 * @param integer
+	 * @param boolean
+	 * @return string
+	 */
+	public function toggleFeatured($intId, $blnVisible)
+	{
+		// Check permissions to edit
+		$this->Input->setGet('id', $intId);
+		$this->Input->setGet('act', 'feature');
+		$this->checkPermission();
+
+		// Check permissions to feature
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_news::featured', 'alexf'))
+		{
+			$this->log('Not enough permissions to feature/unfeature news item ID "'.$intId.'"', 'tl_news toggleFeatured', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
+		$this->createInitialVersion('tl_news', $intId);
+	
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_news']['fields']['featured']['save_callback'] as $callback)
+			{
+				$this->import($callback[0]);
+				$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, $this);
+			}
+		}
+
+		// Update the database
+		$this->Database->prepare("UPDATE tl_news SET tstamp=". time() .", featured='" . ($blnVisible ? 1 : '') . "' WHERE id=?")
+					   ->execute($intId);
+
+		$this->createNewVersion('tl_news', $intId);
 	}
 
 

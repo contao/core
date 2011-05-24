@@ -656,7 +656,7 @@ class Newsletter extends Backend
 		// Get all channel IDs (thanks to Andreas Schempp)
 		if ($blnIsFrontend && $objModule instanceof Module)
 		{
-			$arrChannel = deserialize($objModule->newsletters);
+			$arrChannel = deserialize($objModule->newsletters, true);
 		}
 		else
 		{

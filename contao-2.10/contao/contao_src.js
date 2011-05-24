@@ -658,6 +658,35 @@ var AjaxRequest =
 
 
 	/**
+	 * Feature/unfeature an element
+	 * @param object
+	 * @param string
+	 * @return boolean
+	 */
+	toggleFeatured: function(el, id)
+	{
+		el.blur();
+
+		var image = $(el).getFirst();
+		var featured = (image.src.indexOf('featured_') == -1);
+
+		// Send request
+		if (!featured)
+		{
+			image.src = image.src.replace('featured_.gif', 'featured.gif');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFeatured&id=' + id + '&state=1'}).send();
+		}
+		else
+		{
+			image.src = image.src.replace('featured.gif', 'featured_.gif');
+			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFeatured&id=' + id + '&state=0'}).send();
+		}
+
+		return false;
+	},
+
+
+	/**
 	 * Toggle the visibility of a fieldset
 	 * @param object
 	 * @param string
