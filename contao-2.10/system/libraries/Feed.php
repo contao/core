@@ -120,39 +120,39 @@ class Feed extends System
 	{
 		$this->adjustPublicationDate();
 
-		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
-		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">' . "\n";
-		$xml .= '  <channel>' . "\n";
-		$xml .= '    <title>' . specialchars($this->title) . '</title>' . "\n";
-		$xml .= '    <description>' . specialchars($this->description) . '</description>' . "\n";
-		$xml .= '    <link>' . specialchars($this->link) . '</link>' . "\n";
-		$xml .= '    <language>' . $this->language . '</language>' . "\n";
-		$xml .= '    <pubDate>' . date('r', $this->published) . '</pubDate>' . "\n";
-		$xml .= '    <generator>Contao Open Source CMS</generator>' . "\n";
-		$xml .= '    <atom:link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />' . "\n";
+		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>';
+		$xml .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
+		$xml .= '<channel>';
+		$xml .= '<title>' . specialchars($this->title) . '</title>';
+		$xml .= '<description>' . specialchars($this->description) . '</description>';
+		$xml .= '<link>' . specialchars($this->link) . '</link>';
+		$xml .= '<language>' . $this->language . '</language>';
+		$xml .= '<pubDate>' . date('r', $this->published) . '</pubDate>';
+		$xml .= '<generator>Contao Open Source CMS</generator>';
+		$xml .= '<atom:link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" type="application/rss+xml" />';
 
 		foreach ($this->arrItems as $objItem)
 		{
-			$xml .= '    <item>' . "\n";
-			$xml .= '      <title>' . specialchars($objItem->title) . '</title>' . "\n";
-			$xml .= '      <description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>' . "\n";
-			$xml .= '      <link>' . specialchars($objItem->link) . '</link>' . "\n";
-			$xml .= '      <pubDate>' . date('r', $objItem->published) . '</pubDate>' . "\n";
-			$xml .= '      <guid>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</guid>' . "\n";
+			$xml .= '<item>';
+			$xml .= '<title>' . specialchars($objItem->title) . '</title>';
+			$xml .= '<description><![CDATA[' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . ']]></description>';
+			$xml .= '<link>' . specialchars($objItem->link) . '</link>';
+			$xml .= '<pubDate>' . date('r', $objItem->published) . '</pubDate>';
+			$xml .= '<guid>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</guid>';
 
 			// Enclosures
 			if (is_array($objItem->enclosure))
 			{
 				foreach ($objItem->enclosure as $arrEnclosure)
 				{
-					$xml .= '      <enclosure url="' . $arrEnclosure['url'] . '" length="' . $arrEnclosure['length'] . '" type="' . $arrEnclosure['type'] . '" />' . "\n";
+					$xml .= '<enclosure url="' . $arrEnclosure['url'] . '" length="' . $arrEnclosure['length'] . '" type="' . $arrEnclosure['type'] . '" />';
 				}
 			}
 
-			$xml .= '    </item>' . "\n";
+			$xml .= '</item>';
 		}
 
-		$xml .= '  </channel>' . "\n";
+		$xml .= '</channel>';
 		$xml .= '</rss>';
 
 		return $xml;
@@ -167,36 +167,36 @@ class Feed extends System
 	{
 		$this->adjustPublicationDate();
 
-		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>' . "\n";
-		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">' . "\n";
-		$xml .= '  <title>' . specialchars($this->title) . '</title>' . "\n";
-		$xml .= '  <subtitle>' . specialchars($this->description) . '</subtitle>' . "\n";
-		$xml .= '  <link rel="alternate" href="' . specialchars($this->link) . '" />' . "\n";
-		$xml .= '  <id>' . specialchars($this->link) . '</id>' . "\n";
-		$xml .= '  <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>' . "\n";
-		$xml .= '  <generator>Contao Open Source CMS</generator>' . "\n";
-		$xml .= '  <link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />' . "\n";
+		$xml  = '<?xml version="1.0" encoding="' . $GLOBALS['TL_CONFIG']['characterSet'] . '"?>';
+		$xml .= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="' . $this->language . '">';
+		$xml .= '<title>' . specialchars($this->title) . '</title>';
+		$xml .= '<subtitle>' . specialchars($this->description) . '</subtitle>';
+		$xml .= '<link rel="alternate" href="' . specialchars($this->link) . '" />';
+		$xml .= '<id>' . specialchars($this->link) . '</id>';
+		$xml .= '<updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $this->published)) . '</updated>';
+		$xml .= '<generator>Contao Open Source CMS</generator>';
+		$xml .= '<link href="' . specialchars($this->Environment->base . $this->strName) . '.xml" rel="self" />';
 
 		foreach ($this->arrItems as $objItem)
 		{
-			$xml .= '  <entry>' . "\n";
-			$xml .= '    <title>' . specialchars($objItem->title) . '</title>' . "\n";
-			$xml .= '    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>' . "\n";
-			$xml .= '    <link rel="alternate" href="' . specialchars($objItem->link) . '" />' . "\n";
-			$xml .= '    <updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>' . "\n";
-			$xml .= '    <id>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</id>' . "\n";
-			$xml .= '    <author><name>' . $objItem->author . '</name></author>' . "\n";
+			$xml .= '<entry>';
+			$xml .= '<title>' . specialchars($objItem->title) . '</title>';
+			$xml .= '<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">' . preg_replace('/[\n\r]+/', ' ', $objItem->description) . '</div></content>';
+			$xml .= '<link rel="alternate" href="' . specialchars($objItem->link) . '" />';
+			$xml .= '<updated>' . preg_replace('/00$/', ':00', date('Y-m-d\TH:i:sO', $objItem->published)) . '</updated>';
+			$xml .= '<id>' . ($objItem->guid ? $objItem->guid : specialchars($objItem->link)) . '</id>';
+			$xml .= '<author><name>' . $objItem->author . '</name></author>';
 
 			// Enclosures
 			if (is_array($objItem->enclosure))
 			{
 				foreach ($objItem->enclosure as $arrEnclosure)
 				{
-					$xml .= '    <link rel="enclosure" type="' . $arrEnclosure['type'] . '" href="' . $arrEnclosure['url'] . '" length="' . $arrEnclosure['length'] . '" />' . "\n";
+					$xml .= '<link rel="enclosure" type="' . $arrEnclosure['type'] . '" href="' . $arrEnclosure['url'] . '" length="' . $arrEnclosure['length'] . '" />';
 				}
 			}
 
-			$xml .= '  </entry>' . "\n";
+			$xml .= '</entry>';
 		}
 
 		return $xml . '</feed>';
