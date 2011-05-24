@@ -616,9 +616,10 @@ class Newsletter extends Backend
 	 * Synchronize newsletter subscription of existing users
 	 * @param mixed
 	 * @param object
+	 * @param object
 	 * @return mixed
 	 */
-	public function synchronize($varValue, $objUser)
+	public function synchronize($varValue, $objUser, $objModule=null)
 	{
 		// Return if there is no user (e.g. upon registration)
 		if (is_null($objUser))
@@ -652,9 +653,15 @@ class Newsletter extends Backend
 		$time = time();
 		$varValue = deserialize($varValue, true);
 
-		// Get all channel IDs
-		$objChannel = $this->Database->execute("SELECT id FROM tl_newsletter_channel");
-		$arrChannel = $objChannel->fetchEach('id');
+		// Get all channel IDs (thanks to Andreas Schempp)
+		if ($blnIsFrontend && $objModule instanceof Module)
+		{
+			$arrChannel = deserialize($objModule->newsletters);
+		}
+		else
+		{
+			$arrChannel = $this->Database->execute("SELECT id FROM tl_newsletter_channel")->fetchEach('id');
+		}
 
 		$arrDelete = array_values(array_diff($arrChannel, $varValue));
 
