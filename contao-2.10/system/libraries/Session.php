@@ -141,6 +141,17 @@ class Session
 
 
 	/**
+	 * Remove a particular session parameter
+	 * @param string
+	 * @param mixed
+	 */
+	public function remove($strKey)
+	{
+		unset($this->arrSession[$strKey]);
+	}
+
+
+	/**
 	 * Return the current session array
 	 * @return array
 	 */
