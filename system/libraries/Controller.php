@@ -71,6 +71,19 @@ abstract class Controller extends System
 			throw new Exception('Invalid output format');
 		}
 
+		// Try to load the template path from the session cache
+		if (isset($_SESSION['getTemplate'][$strTemplate][$strFormat]))
+		{
+			if (file_exists($_SESSION['getTemplate'][$strTemplate][$strFormat]))
+			{
+				return $_SESSION['getTemplate'][$strTemplate][$strFormat];
+			}
+			else
+			{
+				unset($_SESSION['getTemplate'][$strTemplate][$strFormat]);
+			}
+		}
+
 		$strPath = TL_ROOT . '/templates';
 		$strTemplate = basename($strTemplate);
 
@@ -86,6 +99,7 @@ abstract class Controller extends System
 
 				if (file_exists($strFile))
 				{
+					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
 					return $strFile;
 				}
 			}
@@ -96,6 +110,7 @@ abstract class Controller extends System
 
 		if (file_exists($strFile))
 		{
+			$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
 			return $strFile;
 		}
 
@@ -109,6 +124,7 @@ abstract class Controller extends System
 
 				if (file_exists($strFile))
 				{
+					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
 					return $strFile;
 				}
 			}
@@ -118,6 +134,7 @@ abstract class Controller extends System
 
 				if (file_exists($strFile))
 				{
+					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
 					return $strFile;
 				}
 			}
