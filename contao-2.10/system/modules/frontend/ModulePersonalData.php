@@ -192,7 +192,7 @@ class ModulePersonalData extends Module
 
 						try
 						{
-							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User);
+							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 						}
 						catch (Exception $e)
 						{
