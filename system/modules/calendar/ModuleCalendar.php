@@ -238,6 +238,12 @@ class ModuleCalendar extends Events
 			$intKey = date('Ym', $this->Date->tstamp) . ((strlen($intDay) < 2) ? '0' . $intDay : $intDay);
 			$strClass .= ($intKey == date('Ymd')) ? ' today' : '';
 
+			// Mark the selected day (see #1784)
+			if ($intKey == $this->Input->get('day'))
+			{
+				$strClass .= ' selected';
+			}
+
 			// Inactive days
 			if (empty($intKey) || !isset($arrAllEvents[$intKey]))
 			{
