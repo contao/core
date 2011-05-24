@@ -264,8 +264,6 @@ abstract class Template extends Controller
 			print_r($GLOBALS['TL_DEBUG']);
 			echo "\n</pre>";
 		}
-
-		exit;
 	}
 
 
