@@ -1272,7 +1272,7 @@ abstract class Controller extends System
 						$this->import('String');
 
 						$strEmail = $this->String->encodeEmail($elements[1]);
-						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
 					}
 					break;
 
