@@ -37,14 +37,31 @@
  */
 function __autoload($strClassName)
 {
-	// Library
-	if (file_exists(TL_ROOT . '/system/libraries/' . $strClassName . '.php'))
+	// Try to load the class name from the session cache
+	if (isset($_SESSION['__autoload'][$strClassName]))
 	{
-		include_once(TL_ROOT . '/system/libraries/' . $strClassName . '.php');
+		if (@include_once($_SESSION['__autoload'][$strClassName]))
+		{
+			return; // The class could be loaded
+		}
+		else
+		{
+			unset($_SESSION['__autoload'][$strClassName]); // The class has been removed
+		}
+	}
+
+	$strLibrary = TL_ROOT . '/system/libraries/' . $strClassName . '.php';
+
+	// Check for libraries first
+	if (file_exists($strLibrary))
+	{
+		include_once($strLibrary);
+		$_SESSION['__autoload'][$strClassName] = $strLibrary;
+
 		return;
 	}
 
-	// Modules
+	// Then check the modules folder
 	foreach (scan(TL_ROOT . '/system/modules/') as $strFolder)
 	{
 		if (substr($strFolder, 0, 1) == '.')
@@ -52,9 +69,13 @@ function __autoload($strClassName)
 			continue;
 		}
 
-		if (file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php'))
+		$strModule = TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php';
+
+		if (file_exists($strModule))
 		{
-			include_once(TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php');
+			include_once($strModule);
+			$_SESSION['AUTOLOAD'][$strClassName] = $strModule;
+
 			return;
 		}
 	}
