@@ -5,7 +5,7 @@
 </div>
 
 <?php endif; ?>
-<div class="event<?php echo $this->classList; ?>">
+<div class="event layout_teaser<?php echo $this->classList; ?>">
 <?php if ($this->details): ?>
 <h2><a href="<?php echo $this->link; ?>" title="<?php echo $this->title; ?> (<?php if ($this->day): echo $this->day; ?>, <?php endif; echo $this->date; if ($this->time): ?>, <?php echo $this->time; endif; ?>)"<?php echo $this->target; ?>><?php echo $this->title; ?></a></h2>
 <?php else: ?>

@@ -1,5 +1,5 @@
 
-<div class="event block<?php echo $this->class; ?>">
+<div class="event layout_full block<?php echo $this->class; ?>">
 
 <h1><?php echo $this->title; ?></h1>
 
