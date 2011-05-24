@@ -295,7 +295,7 @@ class Ajax extends Backend
 				$dc->move(true);
 				exit; break;
 
-			// Toggle the visibility of a record
+			// Toggle the visibility of an element
 			case 'toggleVisibility':
 				// HOOK: handle news comments
 				if ($dc->table == 'tl_news_archive' && $this->Input->get('key') == 'comments')
@@ -312,6 +312,19 @@ class Ajax extends Backend
 					if (method_exists($dca, 'toggleVisibility'))
 					{
 						$dca->toggleVisibility($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
+					}
+				}
+				exit; break;
+
+			// Feature/unfeature an element
+			case 'toggleFeatured':
+				if (class_exists($dc->table, false))
+				{
+					$dca = new $dc->table();
+
+					if (method_exists($dca, 'toggleFeatured'))
+					{
+						$dca->toggleFeatured($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
 					}
 				}
 				exit; break;
