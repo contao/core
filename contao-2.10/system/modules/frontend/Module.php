@@ -139,6 +139,7 @@ abstract class Module extends Frontend
 
 		$this->compile();
 
+		$this->Template->inColumn = $this->strColumn;
 		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = strlen($this->cssID[0]) ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
