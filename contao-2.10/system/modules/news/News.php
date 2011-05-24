@@ -142,11 +142,10 @@ class News extends Frontend
 			$strDescription = $this->replaceInsertTags($strDescription);
 			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
-			// Enclosure
+			// Add the article image as enclosure
 			if ($objArticle->addImage)
 			{
 				$objItem->addEnclosure($objArticle->singleSRC);
-				$objItem->description .= '<p><img src="' . $strLink . $objArticle->singleSRC . '"></p>';
 			}
 
 			// Enclosure
