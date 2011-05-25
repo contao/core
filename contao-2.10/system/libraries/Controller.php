@@ -1369,6 +1369,14 @@ abstract class Controller extends System
 						$strName = $strTitle;
 					}
 
+					// External links
+					elseif (strncmp($elements[1], 'http://', 7) === 0 || strncmp($elements[1], 'https://', 8) === 0)
+					{
+						$strUrl = $elements[1];
+						$strTitle = $elements[1];
+						$strName = str_replace(array('http://', 'https://'), '', $elements[1]);
+					}
+
 					// Regular link
 					else
 					{
