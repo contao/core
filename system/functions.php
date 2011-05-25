@@ -30,6 +30,13 @@
 
 
 /**
+ * Load the required classes for the file cache
+ */
+include_once TL_ROOT . '/system/libraries/System.php';
+include_once TL_ROOT . '/system/libraries/FileCache.php';
+
+
+/**
  * Class autoloader
  *
  * Include classes automatically when they are instantiated.
@@ -37,16 +44,18 @@
  */
 function __autoload($strClassName)
 {
+	$objCache = FileCache::getInstance('autoload.csv');
+
 	// Try to load the class name from the session cache
-	if (isset($_SESSION['__autoload'][$strClassName]))
+	if (isset($objCache->$strClassName))
 	{
-		if (@include_once($_SESSION['__autoload'][$strClassName]))
+		if (@include_once(TL_ROOT . '/' . $objCache->$strClassName))
 		{
 			return; // The class could be loaded
 		}
 		else
 		{
-			unset($_SESSION['__autoload'][$strClassName]); // The class has been removed
+			unset($objCache->$strClassName); // The class has been removed
 		}
 	}
 
@@ -56,7 +65,7 @@ function __autoload($strClassName)
 	if (file_exists($strLibrary))
 	{
 		include_once($strLibrary);
-		$_SESSION['__autoload'][$strClassName] = $strLibrary;
+		$objCache->$strClassName = 'system/libraries/' . $strClassName . '.php';
 
 		return;
 	}
@@ -74,7 +83,7 @@ function __autoload($strClassName)
 		if (file_exists($strModule))
 		{
 			include_once($strModule);
-			$_SESSION['AUTOLOAD'][$strClassName] = $strModule;
+			$objCache->$strClassName = 'system/modules/' . $strFolder . '/' . $strClassName . '.php';
 
 			return;
 		}

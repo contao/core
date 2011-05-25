@@ -72,17 +72,18 @@ abstract class Controller extends System
 		}
 
 		$strKey = $strTemplate . '.' . $strFormat;
+		$objCache = FileCache::getInstance('templates.csv');
 
 		// Try to load the template path from the session cache
-		if (isset($_SESSION['getTemplate'][$strKey]))
+		if (isset($objCache->$strKey))
 		{
-			if (file_exists($_SESSION['getTemplate'][$strKey]))
+			if (file_exists($objCache->$strKey))
 			{
-				return $_SESSION['getTemplate'][$strKey];
+				return $objCache->$strKey;
 			}
 			else
 			{
-				unset($_SESSION['getTemplate'][$strKey]);
+				unset($objCache->$strKey);
 			}
 		}
 
@@ -101,7 +102,7 @@ abstract class Controller extends System
 
 				if (file_exists($strFile))
 				{
-					$_SESSION['getTemplate'][$strKey] = $strFile;
+					$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strKey;
 					return $strFile;
 				}
 			}
@@ -112,7 +113,7 @@ abstract class Controller extends System
 
 		if (file_exists($strFile))
 		{
-			$_SESSION['getTemplate'][$strKey] = $strFile;
+			$objCache->$strKey = 'templates/' . $strKey;
 			return $strFile;
 		}
 
@@ -123,7 +124,7 @@ abstract class Controller extends System
 
 			if (file_exists($strFile))
 			{
-				$_SESSION['getTemplate'][$strKey] = $strFile;
+				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strKey;
 				return $strFile;
 			}
 		}
