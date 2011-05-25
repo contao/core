@@ -72,3 +72,8 @@
 "Ajax","system/modules/backend/Ajax.php"
 "TextStore","system/modules/backend/TextStore.php"
 "ChmodTable","system/modules/backend/ChmodTable.php"
+"TextArea","system/modules/backend/TextArea.php"
+"News","system/modules/news/News.php"
+"Feed","system/libraries/Feed.php"
+"Automator","system/modules/backend/Automator.php"
+"PageError404","system/modules/frontend/PageError404.php"
