@@ -25,16 +25,25 @@
 ##
 
 ##
-# Serve the correct content type for .htc files (CSS3 PIE)
-# @see http://css3pie.com/documentation/known-issues/#content-type
-##
-AddType text/x-component .htc
-
-##
 # Disable ETags
 # @see http://developer.yahoo.com/performance/rules.html#etags
 ##
 FileETag None
+
+<IfModule mod_mime.c>
+
+  ##
+  # Serve the correct content type for .htc files (CSS3 PIE)
+  # @see http://css3pie.com/documentation/known-issues/#content-type
+  ##
+  AddType text/x-component .htc
+
+  ##
+  # Add template files to the PHP parser
+  ##
+  AddHandler application/x-httpd-php .tpl .html5 .xhtml
+
+</IfModule>
 
 <IfModule mod_deflate.c>
 

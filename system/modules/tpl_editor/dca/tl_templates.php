@@ -39,7 +39,7 @@ $this->loadLanguageFile('tl_files');
  * Overwrite some settings
  */
 $GLOBALS['TL_CONFIG']['uploadPath'] = 'templates';
-$GLOBALS['TL_CONFIG']['editableFiles'] = 'tpl';
+$GLOBALS['TL_CONFIG']['editableFiles'] = 'html5,xhtml';
 
 
 /**
@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'validFileTypes'              => 'tpl',
+		'validFileTypes'              => 'html5,xhtml',
 		'closed'                      => true
 	),
 
@@ -191,47 +191,21 @@ class tl_templates extends Backend
 		// Get all templates
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
+			// Continue if there is no templates folder
 			if ($strModule == 'rep_client' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
 				continue;
 			}
 
-			if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates/html5'))
+			// Find all templates
+			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
 			{
-				// HTML5 templates
-				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates/html5') as $strTemplate)
+				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(html5|xhtml)$/', $strTemplate))
 				{
-					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
-					{
-						continue;
-					}
-
-					$arrAllTemplates[$strModule]['html5/'.$strTemplate] = $strModule . '/templates/html5/' . $strTemplate;
+					continue;
 				}
 
-				// XHTML templates
-				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates/xhtml') as $strTemplate)
-				{
-					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
-					{
-						continue;
-					}
-
-					$arrAllTemplates[$strModule]['xhtml/'.$strTemplate] = $strModule . '/templates/xhtml/' . $strTemplate;
-				}
-			}
-			else
-			{
-				// Default templates
-				foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
-				{
-					if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
-					{
-						continue;
-					}
-
-					$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
-				}
+				$arrAllTemplates[$strModule][$strTemplate] = $strModule . '/templates/' . $strTemplate;
 			}
 		}
 

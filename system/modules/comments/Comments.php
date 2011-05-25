@@ -45,10 +45,9 @@ class Comments extends Frontend
 	 * @param object
 	 * @param string
 	 * @param integer
-	 * @param string
 	 * @param array
 	 */
-	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies, $strFormat='html5')
+	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		$limit = null;
 		$arrComments = array();
