@@ -101,6 +101,7 @@ class ContentDownload extends ContentElement
 		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
 		$this->Template->filesize = $this->getReadableSize($this->objFile->filesize, 1);
 		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
+		$this->Template->mime = $this->objFile->mime;
 	}
 }
 
