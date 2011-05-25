@@ -564,7 +564,7 @@ abstract class Controller extends System
 		$objPage->parentTitle = $pname;
 		$objPage->parentPageTitle = $ptitle;
 
-		// Set root ID and title
+		// Set the root ID and title
 		if ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0))
 		{
 			$objPage->rootId = $objParentPage->id;
@@ -572,7 +572,7 @@ abstract class Controller extends System
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
 
-			// Set admin e-mail
+			// Set the admin e-mail address
 			if ($objParentPage->adminEmail != '')
 			{
 				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
@@ -581,6 +581,10 @@ abstract class Controller extends System
 			{
 				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
+
+			// Store whether the root page has been published
+			$time = time();
+			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
 		}
 		else
 		{

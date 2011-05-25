@@ -152,18 +152,26 @@ class Index extends Frontend
 		if (!is_bool($objPage->protected))
 		{
 			$objPage = $this->getPageDetails($objPage->id);
+		}
 
-			// Check whether there are domain name restrictions
-			if (strlen($objPage->domain))
+		// Exit if the root page has not been published (see #2425) and
+		// do not try to load the 404 page! It can cause an infinite loop.
+		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
+		{
+			header('HTTP/1.1 404 Not Found');
+			die('Page not found');
+		}
+
+		// Check whether there are domain name restrictions
+		if (strlen($objPage->domain))
+		{
+			$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
+
+			// Load an error 404 page object
+			if ($strDomain != $this->Environment->host)
 			{
-				$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
-
-				// Load an error 404 page object
-				if ($strDomain != $this->Environment->host)
-				{
-					$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-					$objHandler->generate($objPage->id, $strDomain, $this->Environment->host);
-				}
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($objPage->id, $strDomain, $this->Environment->host);
 			}
 		}
 
