@@ -66,6 +66,7 @@ CREATE TABLE `tl_content` (
   `summary` varchar(255) NOT NULL default '',
   `thead` char(1) NOT NULL default '',
   `tfoot` char(1) NOT NULL default '',
+  `tleft` char(1) NOT NULL default '',
   `sortable` char(1) NOT NULL default '',
   `sortIndex` smallint(5) unsigned NOT NULL default '0',
   `sortOrder` varchar(32) NOT NULL default '',

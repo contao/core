@@ -61,6 +61,7 @@ class ContentTable extends ContentElement
 		$this->Template->summary = specialchars($this->summary);
 		$this->Template->useHeader = $this->thead ? true : false;
 		$this->Template->useFooter = $this->tfoot ? true : false;
+		$this->Template->useLeftTh = $this->tleft ? true : false;
 		$this->Template->sortable = false;
 		$this->Template->thousandsSeparator = $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'];
 		$this->Template->decimalSeparator = $GLOBALS['TL_LANG']['MSC']['decimalSeparator'];

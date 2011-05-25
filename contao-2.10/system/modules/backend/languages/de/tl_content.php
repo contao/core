@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_content']['tableitems']   = array('Tabelleneinträge', '
 $GLOBALS['TL_LANG']['tl_content']['summary']      = array('Zusammenfassung', 'Bitte geben Sie eine kurze Zusammenfassung des Inhalts und der Struktur der Tabelle ein.');
 $GLOBALS['TL_LANG']['tl_content']['thead']        = array('Kopfzeile hinzufügen', 'Die erste Reihe der Tabelle als Kopfzeile verwenden.');
 $GLOBALS['TL_LANG']['tl_content']['tfoot']        = array('Fußzeile hinzufügen', 'Die letzte Reihe der Tabelle als Fußzeile verwenden.');
+$GLOBALS['TL_LANG']['tl_content']['tleft']        = array('Reihenüberschriften hinzufügen', 'Die linke Spalte als Reihenüberschrift definieren.');
 $GLOBALS['TL_LANG']['tl_content']['sortable']     = array('Sortierbare Tabelle', 'Die Tabelle sortierbar machen (benötigt JavaScript und eine Kopfzeile).');
 $GLOBALS['TL_LANG']['tl_content']['sortIndex']    = array('Sortierindex', 'Die Nummer der Spalte, nach der standardmäßig sortiert wird.');
 $GLOBALS['TL_LANG']['tl_content']['sortOrder']    = array('Sortierreihenfolge', 'Bitte wählen Sie die Sortierreihenfolge aus.');
