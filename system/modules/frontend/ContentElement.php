@@ -123,12 +123,12 @@ abstract class ContentElement extends Frontend
 	 */
 	public function generate()
 	{
-		if (strlen($this->arrData['space'][0]))
+		if ($this->arrData['space'][0] != '')
 		{
 			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';
 		}
 
-		if (strlen($this->arrData['space'][1]))
+		if ($this->arrData['space'][1] != '')
 		{
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
@@ -139,15 +139,15 @@ abstract class ContentElement extends Frontend
 		$this->compile();
 
 		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
-		$this->Template->cssID = strlen($this->cssID[0]) ? ' id="' . $this->cssID[0] . '"' : '';
+		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('ce_' . $this->type . ' ' . $this->cssID[1]);
 
-		if (!strlen($this->Template->headline))
+		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $this->headline;
 		}
 
-		if (!strlen($this->Template->hl))
+		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
 		}

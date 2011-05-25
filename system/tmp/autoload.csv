@@ -77,3 +77,4 @@
 "Feed","system/libraries/Feed.php"
 "Automator","system/modules/backend/Automator.php"
 "PageError404","system/modules/frontend/PageError404.php"
+"PageError403","system/modules/frontend/PageError403.php"
