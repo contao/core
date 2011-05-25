@@ -219,14 +219,14 @@ function show_help_message()
 	{
 		header('HTTP/1.1 500 Internal Server Error');
 
-		if (file_exists(TL_ROOT . '/templates/be_error.tpl'))
+		if (file_exists(TL_ROOT . '/templates/be_error.html5'))
 		{
-			include(TL_ROOT . '/templates/be_error.tpl');
+			include(TL_ROOT . '/templates/be_error.html5');
 			exit;
 		}
-		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.tpl'))
+		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
 		{
-			include(TL_ROOT . '/system/modules/backend/templates/be_error.tpl');
+			include(TL_ROOT . '/system/modules/backend/templates/be_error.html5');
 			exit;
 		}
 

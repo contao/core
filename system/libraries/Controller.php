@@ -66,9 +66,11 @@ abstract class Controller extends System
 	 */
 	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
-		if ($strFormat == '')
+		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+
+		if (!in_array($strFormat, $arrAllowed))
 		{
-			throw new Exception('Invalid output format');
+			throw new Exception("Invalid output format $strFormat");
 		}
 
 		$strKey = $strTemplate . '.' . $strFormat;

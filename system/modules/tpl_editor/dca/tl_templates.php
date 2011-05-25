@@ -39,7 +39,7 @@ $this->loadLanguageFile('tl_files');
  * Overwrite some settings
  */
 $GLOBALS['TL_CONFIG']['uploadPath'] = 'templates';
-$GLOBALS['TL_CONFIG']['editableFiles'] = 'html5,xhtml';
+$GLOBALS['TL_CONFIG']['editableFiles'] = $GLOBALS['TL_CONFIG']['templateFiles'];
 
 
 /**
@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'validFileTypes'              => 'html5,xhtml',
+		'validFileTypes'              => $GLOBALS['TL_CONFIG']['templateFiles'],
 		'closed'                      => true
 	),
 
@@ -188,6 +188,7 @@ class tl_templates extends Backend
 		}
 
 		$arrAllTemplates = array();
+		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 
 		// Get all templates
 		foreach ($this->Config->getActiveModules() as $strModule)
@@ -201,7 +202,8 @@ class tl_templates extends Backend
 			// Find all templates
 			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
 			{
-				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(html5|xhtml)$/', $strTemplate))
+				// Ignore non-template files
+				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strTemplate))
 				{
 					continue;
 				}
@@ -212,14 +214,14 @@ class tl_templates extends Backend
 
 		$strAllTemplates = '';
 
-		// Group the templates by extension
+		// Group the templates by module
 		foreach ($arrAllTemplates as $k=>$v)
 		{
 			$strAllTemplates .= '<optgroup label="' . $k . '">';
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s"%s>%s</option>', $vv, (($this->Input->post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), (($this->Input->post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';

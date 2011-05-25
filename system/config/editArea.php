@@ -53,6 +53,8 @@ if (is_null($this->syntax))
 		case 'htm':
 		case 'html':
 		case 'tpl':
+		case 'html5':
+		case 'xhtml':
 		default:
 			$this->syntax = 'html';
 			break;

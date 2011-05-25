@@ -58,13 +58,14 @@ $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldung
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgegeben.');
 $GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Referer-Prüfung deaktivieren', 'Die Referer-Adresse beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('IP-Prüfung deaktivieren', 'Benutzersitzungen nicht an IP-Adressen binden. Warnung: potentielles Sicherheitsrisiko!');
-$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Erlaubte Upload-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao hochgeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Erlaubte Download-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao heruntergeladen werden dürfen.');
-$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editierbare Dateien', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die mit dem Quelltexteditor bearbeitet werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Unterstützte Bildformate', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die von der Bild-Klasse verarbeitet werden können.');
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editierbare Dateien', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die mit dem Quelltexteditor bearbeitet werden dürfen.');
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles']       = array('Unterstützte Templateformate', 'Hier können Sie eine kommagetrennte Liste von unterstützten Template-Dateitypen eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximale Frontend-Breite', 'Wenn die Breite eines Bildes oder Films diesen Wert übersteigt, wird sie automatisch angepasst.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG-Qualität', 'Hier können Sie die Qualität der JPG-Vorschaubilder in Prozent eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files-Verzeichnis', 'Hier können Sie den relativen Pfad zum Contao Files-Verzeichnis eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Erlaubte Upload-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao hochgeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultane Datei-Uploads', 'Hier können Sie die maximale Anzahl simultaner Datei-Uploads festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximale Upload-Dateigröße', 'Hier können Sie die maximale Upload-Dateigröße in Bytes eingeben (1 MB = 1000 kB = 1000000 Byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximale Bildbreite', 'Hier können Sie die maximale Breite für Bild-Uploads in Pixeln festlegen.');
