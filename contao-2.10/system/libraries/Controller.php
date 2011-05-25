@@ -71,16 +71,18 @@ abstract class Controller extends System
 			throw new Exception('Invalid output format');
 		}
 
+		$strKey = $strTemplate . '.' . $strFormat;
+
 		// Try to load the template path from the session cache
-		if (isset($_SESSION['getTemplate'][$strTemplate][$strFormat]))
+		if (isset($_SESSION['getTemplate'][$strKey]))
 		{
-			if (file_exists($_SESSION['getTemplate'][$strTemplate][$strFormat]))
+			if (file_exists($_SESSION['getTemplate'][$strKey]))
 			{
-				return $_SESSION['getTemplate'][$strTemplate][$strFormat];
+				return $_SESSION['getTemplate'][$strKey];
 			}
 			else
 			{
-				unset($_SESSION['getTemplate'][$strTemplate][$strFormat]);
+				unset($_SESSION['getTemplate'][$strKey]);
 			}
 		}
 
@@ -95,52 +97,38 @@ abstract class Controller extends System
 
 			if ($strTemplateGroup != '')
 			{
-				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strFormat . '/' . $strTemplate . '.tpl';
+				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strKey;
 
 				if (file_exists($strFile))
 				{
-					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
+					$_SESSION['getTemplate'][$strKey] = $strFile;
 					return $strFile;
 				}
 			}
 		}
 
 		// Check the global templates directory
-		$strFile = $strPath . '/' . $strTemplate . '.tpl';
+		$strFile = $strPath . '/' . $strKey;
 
 		if (file_exists($strFile))
 		{
-			$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
+			$_SESSION['getTemplate'][$strKey] = $strFile;
 			return $strFile;
 		}
 
 		// Browse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			// Back end modules do not have subfolders
-			if (!is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFormat))
-			{
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strKey;
 
-				if (file_exists($strFile))
-				{
-					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
-					return $strFile;
-				}
-			}
-			else
+			if (file_exists($strFile))
 			{
-				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFormat . '/' . $strTemplate . '.tpl';
-
-				if (file_exists($strFile))
-				{
-					$_SESSION['getTemplate'][$strTemplate][$strFormat] = $strFile;
-					return $strFile;
-				}
+				$_SESSION['getTemplate'][$strKey] = $strFile;
+				return $strFile;
 			}
 		}
 
-		throw new Exception('Could not find template file "' . $strFormat . '/' . $strTemplate . '.tpl"');
+		throw new Exception('Could not find template file "' . $strKey . '"');
 	}
 
 
@@ -168,51 +156,30 @@ abstract class Controller extends System
 
 			if ($objTheme->numRows > 0 && $objTheme->templates != '')
 			{
-				// Check whether the new subfolders are available
-				if (is_dir(TL_ROOT .'/'. $objTheme->templates . '/html5'))
-				{
-					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/html5';
-					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates . '/xhtml';
-				}
-				else
-				{
-					// Backwards compatibility
-					$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
-				}
+				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
 			}
 		}
 
-		// Add the module templates folders
+		// Add the module templates folders if they exist
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
 
-			// No templates directory at all
-			if (!is_dir($strFolder))
+			if (is_dir($strFolder))
 			{
-				continue;
-			}
-
-			// Back end templates are never in a subfolder, so search the
-			// root folder as well. This also ensures backwards compatibility.
-			$arrFolders[] = $strFolder;
-
-			// Check whether the new subfolders are available
-			if (is_dir($strFolder . '/html5'))
-			{
-				$arrFolders[] = $strFolder . '/html5';
-				$arrFolders[] = $strFolder . '/xhtml';
+				$arrFolders[] = $strFolder;
 			}
 		}
 
 		// Find all matching templates
 		foreach ($arrFolders as $strFolder)
 		{
-			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '.*\.tpl$/i',  scan($strFolder));
+			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '/i',  scan($strFolder));
 
 			foreach ($arrFiles as $strTemplate)
 			{
-				$arrTemplates[] = basename($strTemplate, '.tpl');
+				$strName = basename($strTemplate);
+				$arrTemplates[] = substr($strName, 0, strrpos($strName, '.'));
 			}
 		}
 
