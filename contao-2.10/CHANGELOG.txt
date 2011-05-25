@@ -53,8 +53,3 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Fixed: pages excluded in the sitemap did appear in the Google XML sitemap (#2811)
 - Fixed: fixed the issue with lost newsletter subscriptions (#2779)
 - Fixed a few minor issues
-
-	- templates/html5 und templates/xhtml unterstützen?
-	- noch einmal getTemplate() und getTemplateGroup() checken
-	- loadDataContainer() cachen?
-	- classFileExists() cachen?

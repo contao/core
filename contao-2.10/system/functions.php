@@ -44,7 +44,7 @@ include_once TL_ROOT . '/system/libraries/FileCache.php';
  */
 function __autoload($strClassName)
 {
-	$objCache = FileCache::getInstance('autoload.csv');
+	$objCache = FileCache::getInstance('autoload');
 
 	// Try to load the class name from the session cache
 	if (isset($objCache->$strClassName))

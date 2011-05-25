@@ -151,7 +151,7 @@ else
 /**
  * Include the custom initialization file
  */
-@include(TL_ROOT . '/system/config/initconfig.php');
+include(TL_ROOT . '/system/config/initconfig.php');
 
 
 /**

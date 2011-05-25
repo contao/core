@@ -133,7 +133,7 @@ class Config
 		include(TL_ROOT . '/system/config/config.php');
 		include(TL_ROOT . '/system/config/localconfig.php');
 
-		// Get module configuration files
+		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/config/config.php', TL_ROOT, $strModule);
