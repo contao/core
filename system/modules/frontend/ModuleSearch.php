@@ -266,7 +266,7 @@ class ModuleSearch extends Module
 				$objTemplate->href = $this->Environment->base . $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
-				$objTemplate->relevance = number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2);
+				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2));
 				$objTemplate->filesize = $arrResult[$i]['filesize'];
 				$objTemplate->matches = $arrResult[$i]['matches'];
 
