@@ -132,6 +132,6 @@ $GLOBALS['TL_LANG']['MSC']['published']     = 'Published';
 $GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Unpublished';
 $GLOBALS['TL_LANG']['MSC']['addComment']    = 'Add a comment';
 $GLOBALS['TL_LANG']['MSC']['autologin']     = 'Remember me';
-$GLOBALS['TL_LANG']['MSC']['relevance']     = '%s%% relevance';
+$GLOBALS['TL_LANG']['MSC']['relevance']     = '%s relevance';
 
 ?>
