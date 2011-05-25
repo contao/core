@@ -66,12 +66,12 @@ class FileCache extends System
 	protected function __construct($strFile)
 	{
 		$this->strFile = $strFile;
-		$strPath = TL_ROOT . '/system/tmp/' . $strFile . 'rb';
+		$strPath = TL_ROOT . '/system/tmp/' . $strFile;
 
 		// Read the file content if it exists
 		if (file_exists($strPath))
 		{
-			$fh = fopen($strPath);
+			$fh = fopen($strPath, 'rb');
 
 			while(($row = @fgetcsv($fh)) !== false)
 			{
