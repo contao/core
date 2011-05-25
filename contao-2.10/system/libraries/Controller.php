@@ -107,6 +107,15 @@ abstract class Controller extends System
 					$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strKey;
 					return $strFile;
 				}
+
+				// Also check for .tpl files (backwards compatibility)
+				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+
+				if (file_exists($strFile))
+				{
+					$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+					return $strFile;
+				}
 			}
 		}
 
@@ -119,6 +128,15 @@ abstract class Controller extends System
 			return $strFile;
 		}
 
+		// Also check for .tpl files (backwards compatibility)
+		$strFile = $strPath . '/' . $strTemplate . '.tpl';
+
+		if (file_exists($strFile))
+		{
+			$objCache->$strKey = 'templates/' . $strTemplate . '.tpl';
+			return $strFile;
+		}
+
 		// Browse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
@@ -127,6 +145,15 @@ abstract class Controller extends System
 			if (file_exists($strFile))
 			{
 				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strKey;
+				return $strFile;
+			}
+
+			// Also check for .tpl files (backwards compatibility)
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+
+			if (file_exists($strFile))
+			{
+				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
 				return $strFile;
 			}
 		}
