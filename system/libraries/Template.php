@@ -166,6 +166,26 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Set the output format
+	 * @param string
+	 */
+	public function setFormat($strFormat)
+	{
+		$this->strFormat = $strFormat;
+	}
+
+
+	/**
+	 * Return the output format
+	 * @return string
+	 */
+	public function getFormat()
+	{
+		return $this->strFormat;
+	}
+
+
+	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
@@ -210,6 +230,16 @@ abstract class Template extends Controller
 			}
 
 			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
+		// HOOK: add custom parse filters
+		if (isset($GLOBALS['TL_HOOKS']['parseTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseTemplate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseTemplate'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($this);
+			}
 		}
 
 		ob_start();
