@@ -181,6 +181,7 @@ class tl_templates extends Backend
 				{
 					$this->import('Files');
 					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
+					$this->Files->delete('system/tmp/templates.csv');
 					$this->redirect($this->getReferer());
 				}
 			}
