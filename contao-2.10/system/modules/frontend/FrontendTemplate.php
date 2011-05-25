@@ -48,7 +48,7 @@ class FrontendTemplate extends Template
 	{
 		$strBuffer = parent::parse();
 
-		// HOOK: add custom parse filter
+		// HOOK: add custom parse filters
 		if (isset($GLOBALS['TL_HOOKS']['parseFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseFrontendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseFrontendTemplate'] as $callback)
