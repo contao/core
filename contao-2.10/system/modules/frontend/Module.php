@@ -124,12 +124,12 @@ abstract class Module extends Frontend
 	 */
 	public function generate()
 	{
-		if (strlen($this->arrData['space'][0]))
+		if ($this->arrData['space'][0] != '')
 		{
 			$this->arrStyle[] = 'margin-top:'.$this->arrData['space'][0].'px;';
 		}
 
-		if (strlen($this->arrData['space'][1]))
+		if ($this->arrData['space'][1] != '')
 		{
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
@@ -141,15 +141,15 @@ abstract class Module extends Frontend
 
 		$this->Template->inColumn = $this->strColumn;
 		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
-		$this->Template->cssID = strlen($this->cssID[0]) ? ' id="' . $this->cssID[0] . '"' : '';
+		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
 
-		if (!strlen($this->Template->headline))
+		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $this->headline;
 		}
 
-		if (!strlen($this->Template->hl))
+		if ($this->Template->hl == '')
 		{
 			$this->Template->hl = $this->hl;
 		}
@@ -194,7 +194,7 @@ abstract class Module extends Frontend
 		}
 
 		// Layout template fallback
-		if (!strlen($this->navigationTpl))
+		if ($this->navigationTpl == '')
 		{
 			$this->navigationTpl = 'nav_default';
 		}
@@ -270,7 +270,7 @@ abstract class Module extends Frontend
 				// Active page
 				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !$this->Input->get('articles'))
 				{
-					$strClass = (strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '');
+					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
 					$row = $objSubpages->row();
 
 					$row['isActive'] = true;
@@ -296,7 +296,7 @@ abstract class Module extends Frontend
 				// Regular page
 				else
 				{
-					$strClass = (strlen($subitems) ? 'submenu' : '') . (strlen($objSubpages->cssClass) ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '');
+					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '') . (in_array($objSubpages->id, $objPage->trail) ? ' trail' : '');
 
 					// Mark pages on the same level (see #2419)
 					if ($objSubpages->pid == $objPage->pid)
