@@ -114,7 +114,7 @@ class FileCache extends System
 
 		foreach ($this->arrCache as $k=>$v)
 		{
-			fputs($fh, $k . ',' . $v . "\n");
+			fputs($fh, '"' . $k . "','" . $v . '"' . "\n");
 		}
 
 		fclose($fh);
