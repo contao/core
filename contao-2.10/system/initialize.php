@@ -166,9 +166,9 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
 	{
 		header('HTTP/1.1 400 Bad Request');
 
-		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl'))
+		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
 		{
-			include(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl');
+			include(TL_ROOT . '/system/modules/backend/templates/be_referer.html5');
 			exit;
 		}
 

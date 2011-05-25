@@ -58,13 +58,14 @@ $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Display error
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Enable debug mode', 'Print certain runtime information like database queries to the screen.');
 $GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Disable referer check', 'Do not check the referer host address when a form is submitted. Choosing this option is a potential security risk!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('Disable IP check', 'Do not bind sessions to IP addresses. Choosing this option is a potential security risk!');
-$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Upload file types', 'Here you can enter a comma separated list of uploadable file types.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Download file types', 'Here you can enter a comma separated list of downloadable file types.');
-$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editable file types', 'Here you can enter a comma separated list of file types that can be edited in the source editor.');
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Image file types', 'Here you can enter a comma separated list of file types that can be handled by the image class.');
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editable file types', 'Here you can enter a comma separated list of file types that can be edited in the source editor.');
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles']       = array('Template file types', 'Here you can enter a comma separated list of supported template file types.');
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximum front end width', 'If the width of an image or movie exceeds this value, it will be adjusted automatically.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG thumbnail quality', 'Here you can enter the JPG thumbnail quality in percent.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files directory', 'Here you can set the relative path to the Contao files directory.');
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Upload file types', 'Here you can enter a comma separated list of uploadable file types.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultaneous file uploads', 'Here you can enter the maximum number of simultaneous file uploads.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximum upload file size', 'Here you can enter the maximum upload file size in bytes (1 MB = 1000 kB = 1000000 byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximum image width', 'Here you can enter the maximum width for image uploads in pixels.');

@@ -263,7 +263,7 @@ class Newsletter extends Backend
   </tr>
   <tr class="row_2">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['template'][0] . '</td>
-    <td class="col_1">' . $objNewsletter->template . '.tpl</td>
+    <td class="col_1">' . $objNewsletter->template . '</td>
   </tr>' . ((is_array($arrAttachments) && count($arrAttachments) > 0) ? '
   <tr class="row_3">
     <td class="col_0">' . $GLOBALS['TL_LANG']['tl_newsletter']['attachments'] . '</td>

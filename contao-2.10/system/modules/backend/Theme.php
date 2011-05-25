@@ -882,10 +882,12 @@ class Theme extends Backend
 			return;
 		}
 
-		// Add all .tpl files to the archive
+		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+
+		// Add all template files to the archive
 		foreach (scan(TL_ROOT .'/'. $strFolder) as $strFile)
 		{
-			if (preg_match('/\.tpl$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
+			if (preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strFile) && strncmp($strFile, 'be_', 3) !== 0 && strncmp($strFile, 'nl_', 3) !== 0)
 			{
 				$objArchive->addFile($strFolder .'/'. $strFile);
 			}

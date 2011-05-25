@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase;{static_legend:hide},staticFiles,staticSystem,staticPlugins'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase;{static_legend:hide},staticFiles,staticSystem,staticPlugins'
 	),
 
 	// Subpalettes
@@ -222,15 +222,15 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'uploadTypes' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'],
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'allowedDownload' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'validImageTypes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -240,9 +240,9 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'validImageTypes' => array
+		'templateFiles' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['templateFiles'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -262,11 +262,17 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadPath'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_settings', 'checkUploadPath')
 			)
+		),
+		'uploadTypes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'uploadFields' => array
 		(
