@@ -1465,6 +1465,11 @@ abstract class Controller extends System
 					}
 					break;
 
+				// Closing link tag
+				case 'link_close':
+					$arrCache[$strTag] = '</a>';
+					break;
+
 				// Insert article
 				case 'insert_article':
 					$arrCache[$strTag] = $this->replaceInsertTags(ltrim($this->getArticle($elements[1], false, true)));
@@ -1672,11 +1677,6 @@ abstract class Controller extends System
 					}
 					break;
 
-				// Closing link tag
-				case 'link_close':
-					$arrCache[$strTag] = '</a>';
-					break;
-
 				// Article teaser
 				case 'article_teaser':
 					$this->import('Database');
@@ -1716,6 +1716,34 @@ abstract class Controller extends System
 					if ($objTeaser->numRows)
 					{
 						$arrCache[$strTag] = $objTeaser->teaser;
+					}
+					break;
+
+				// News feed URL
+				case 'news_feed':
+					$this->import('Database');
+
+					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_news_archive WHERE id=?")
+											  ->limit(1)
+											  ->execute($elements[1]);
+
+					if ($objFeed->numRows)
+					{
+						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+					}
+					break;
+
+				// Event feed URL
+				case 'event_feed':
+					$this->import('Database');
+
+					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_calendar WHERE id=?")
+											  ->limit(1)
+											  ->execute($elements[1]);
+
+					if ($objFeed->numRows)
+					{
+						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
 					}
 					break;
 
