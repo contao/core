@@ -3062,6 +3062,7 @@ abstract class Controller extends System
 				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
 				$arrEnclosures[$i]['icon'] = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+				$arrEnclosures[$i]['mime'] = $objFile->mime;
 			}
 		}
 

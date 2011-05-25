@@ -127,6 +127,7 @@ class Popup extends Backend
 
 		// Add file info
 		$this->Template->icon = $objFile->icon;
+		$this->Template->mime = $objFile->mime;
 		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
 		$this->Template->mtime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
 		$this->Template->atime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);
