@@ -1733,8 +1733,8 @@ abstract class Controller extends System
 					}
 					break;
 
-				// Event feed URL
-				case 'event_feed':
+				// Calendar feed URL
+				case 'calendar_feed':
 					$this->import('Database');
 
 					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_calendar WHERE id=?")
