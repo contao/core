@@ -52,6 +52,7 @@ $GLOBALS['TL_LANG']['tl_content']['tableitems']   = array('Table items', 'If Jav
 $GLOBALS['TL_LANG']['tl_content']['summary']      = array('Table summary', 'Please enter a short summary of the table and describe its purpose or structure.');
 $GLOBALS['TL_LANG']['tl_content']['thead']        = array('Add table header', 'Make the first row of the table the table header.');
 $GLOBALS['TL_LANG']['tl_content']['tfoot']        = array('Add table footer', 'Make the last row of the table the table footer.');
+$GLOBALS['TL_LANG']['tl_content']['tleft']        = array('Use row headers', 'Define the left column as row header.');
 $GLOBALS['TL_LANG']['tl_content']['sortable']     = array('Sortable table', 'Make the table sortable (requires JavaScript and a table header).');
 $GLOBALS['TL_LANG']['tl_content']['sortIndex']    = array('Sort index', 'The number of the default sort column.');
 $GLOBALS['TL_LANG']['tl_content']['sortOrder']    = array('Sort order', 'Please choose the sort order.');

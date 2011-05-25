@@ -27,8 +27,12 @@
 <tbody>
 <?php foreach ($this->body as $class=>$row): ?>
 <tr class="<?php echo $class; ?>">
-<?php foreach ($row as $col): ?>
+<?php foreach ($row as $i=>$col): ?>
+<?php if ($i == 0 && $this->useLeftTh): ?>
+  <th scope="row" class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></th>
+<?php else: ?>
   <td class="<?php echo $col['class']; ?>"><?php echo $col['content']; ?></td>
+<?php endif; ?>
 <?php endforeach; ?>
 </tr>
 <?php endforeach; ?>

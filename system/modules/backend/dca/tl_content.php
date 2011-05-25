@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'html'                        => '{type_legend},type;{text_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests',
 		'list'                        => '{type_legend},type,headline;{list_legend},listtype,listitems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'table'                       => '{type_legend},type,headline;{table_legend},tableitems;{tconfig_legend},summary,thead,tfoot;{sortable_legend:hide},sortable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'table'                       => '{type_legend},type,headline;{table_legend},tableitems;{tconfig_legend},summary,thead,tfoot,tleft;{sortable_legend:hide},sortable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'accordionsingle'             => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'accordionstart'              => '{type_legend},type,mooType;{moo_legend},mooHeadline,mooStyle,mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'accordionstop'               => '{type_legend},type,mooType;{moo_legend},mooClasses;{protected_legend:hide},protected;{expert_legend:hide},guests',
@@ -299,18 +299,25 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255)
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'thead' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['thead'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'tfoot' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tfoot'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'tleft' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tleft'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')

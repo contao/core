@@ -78,3 +78,8 @@
 "Automator","system/modules/backend/Automator.php"
 "PageError404","system/modules/frontend/PageError404.php"
 "PageError403","system/modules/frontend/PageError403.php"
+"TableWizard","system/modules/backend/TableWizard.php"
+"RepositoryManager","system/modules/rep_client/RepositoryManager.php"
+"BackendModule","system/modules/backend/BackendModule.php"
+"RepositoryBackendModule","system/modules/rep_client/RepositoryBackendModule.php"
+"DatabaseInstaller","system/modules/rep_client/DatabaseInstaller.php"
