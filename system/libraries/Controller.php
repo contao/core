@@ -74,7 +74,7 @@ abstract class Controller extends System
 		}
 
 		$strKey = $strTemplate . '.' . $strFormat;
-		$objCache = FileCache::getInstance('templates.csv');
+		$objCache = FileCache::getInstance('templates');
 
 		// Try to load the template path from the session cache
 		if (isset($objCache->$strKey))
@@ -2375,7 +2375,7 @@ abstract class Controller extends System
 			}
 		}
 
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
 
@@ -2609,23 +2609,58 @@ abstract class Controller extends System
 	 */
 	protected function classFileExists($strClass, $blnNoCache=false)
 	{
-		if (!$blnNoCache && isset($this->arrCache[$strClass]))
+		if ($strClass == '')
 		{
-			return $this->arrCache[$strClass];
+			return false;
+		}
+
+		// Try to load from cache
+		if (!$blnNoCache)
+		{
+			// Handle multiple requests for the same class
+			if (isset($this->arrCache[$strClass]))
+			{
+				return $this->arrCache[$strClass];
+			}
+
+			$objCache = FileCache::getInstance('classes');
+
+			// Check the file cache
+			if (isset($objCache->$strClass))
+			{
+				$this->arrCache[$strClass] = $objCache->$strClass;
+				return $objCache->$strClass;
+			}
+			else
+			{
+				unset($objCache->$strClass);
+			}
 		}
 
 		$this->import('Config'); // see ticket #152
 		$this->arrCache[$strClass] = false;
 
+		// Browse all modules
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/%s.php', TL_ROOT, $strModule, $strClass);
 
 			if (file_exists($strFile))
 			{
+				// Also store the result in the autoloader cache, so the
+				// function does not have to browse the module folders again
+				$objAutoload = FileCache::getInstance('autoload');
+				$objAutoload->$strClass = 'system/modules/' . $strModule . '/' . $strClass . '.php';
+
 				$this->arrCache[$strClass] = true;
 				break;
 			}
+		}
+
+		// Remember the result
+		if (!$blnNoCache)
+		{
+			$objCache->$strClass = $this->arrCache[$strClass];
 		}
 
 		return $this->arrCache[$strClass];
@@ -2798,7 +2833,7 @@ abstract class Controller extends System
 		}
 
 		// Make sure the dcaconfig.php is loaded
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Add root files
 		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))

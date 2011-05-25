@@ -65,8 +65,8 @@ class FileCache extends System
 	 */
 	protected function __construct($strFile)
 	{
-		$this->strFile = $strFile;
-		$strPath = TL_ROOT . '/system/tmp/' . $strFile;
+		$this->strFile = $strFile . '.csv';
+		$strPath = TL_ROOT . '/system/tmp/' . $this->strFile;
 
 		// Read the file content if it exists
 		if (file_exists($strPath))
@@ -114,7 +114,10 @@ class FileCache extends System
 
 		foreach ($this->arrCache as $k=>$v)
 		{
-			fputs($fh, '"' . $k . '","' . $v . '"' . "\n");
+			if ($k != '')
+			{
+				fputs($fh, '"' . $k . '","' . $v . '"' . "\n");
+			}
 		}
 
 		fclose($fh);

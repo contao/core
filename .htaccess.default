@@ -30,6 +30,14 @@
 ##
 FileETag None
 
+##
+# Prevent access to the Contao template files
+##
+<FilesMatch "\.(tpl|html5|xhtml)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
 <IfModule mod_mime.c>
 
   ##
@@ -37,11 +45,6 @@ FileETag None
   # @see http://css3pie.com/documentation/known-issues/#content-type
   ##
   AddType text/x-component .htc
-
-  ##
-  # Add template files to the PHP parser
-  ##
-  AddHandler application/x-httpd-php .tpl .html5 .xhtml
 
 </IfModule>
 
