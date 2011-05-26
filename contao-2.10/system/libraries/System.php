@@ -341,10 +341,13 @@ abstract class System
 		}
 
 		// Return if the data has been loaded already
-		if (!$blnNoCache && isset($this->arrCache['loadLanguageFile'][$strName][$strLanguage]))
+		if (!$blnNoCache && isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]))
 		{
 			return;
 		}
+
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
 
 		// Parse all active modules
 		foreach ($this->Config->getActiveModules() as $strModule)
@@ -385,7 +388,6 @@ abstract class System
 			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
 		}
 
-		$this->arrCache['loadLanguageFile'][$strName][$strLanguage] = true;
 		include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
