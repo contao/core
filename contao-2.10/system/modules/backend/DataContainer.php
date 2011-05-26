@@ -199,13 +199,6 @@ class DataContainer extends Backend
 			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
-		// Decrypt the value if it is encrypted
-		if ($arrData['eval']['encrypt'])
-		{
-			$this->import('Encryption');
-			$this->varValue = $this->Encryption->decrypt($this->varValue);
-		}
-		
 		// Input field callback
 		if (is_array($arrData['input_field_callback']))
 		{
@@ -276,12 +269,6 @@ class DataContainer extends Backend
 					{
 						ksort($varValue);
 						$varValue = serialize($varValue);
-					}
-
-					// Encrypt the value
-					if ($arrData['eval']['encrypt'])
-					{
-						$varValue = $this->Encryption->encrypt($varValue);
 					}
 
 					// Save the current value

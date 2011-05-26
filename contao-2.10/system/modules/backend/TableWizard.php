@@ -74,10 +74,6 @@ class TableWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'rows':
 				$this->intRows = $varValue;
 				break;

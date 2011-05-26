@@ -68,10 +68,6 @@ class TrblField extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'maxlength':
 				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
 				break;
