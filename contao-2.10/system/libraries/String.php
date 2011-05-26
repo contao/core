@@ -82,10 +82,10 @@ class String
 	 * characters specified). Stips all tags.
 	 * @param string
 	 * @param integer
-	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	public function substr($strString, $intNumberOfChars, $blnAddEllipsis=false)
+	public function substr($strString, $intNumberOfChars, $strEllipsis=' …')
 	{
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
 		$strString = strip_tags($strString);
@@ -98,7 +98,7 @@ class String
 		$intCharCount = 0;
 		$arrWords = array();
 		$arrChunks = preg_split('/\s+/', $strString);
-		$strEllipsis = '';
+		$blnAddEllipsis = false;
 
 		foreach ($arrChunks as $strChunk)
 		{
@@ -117,7 +117,11 @@ class String
 				$arrWords[] = utf8_substr($strChunk, 0, $intNumberOfChars);
 			}
 
-			$strEllipsis = ' …';
+			if ($strEllipsis !== false)
+			{
+				$blnAddEllipsis = true;
+			}
+
 			break;
 		}
 
@@ -160,7 +164,7 @@ class String
 			}
 
 			// Get the substring of the current text
-			if (($arrChunks[$i] = $this->substr($arrChunks[$i], ($intNumberOfChars - $intCharCount))) == false)
+			if (($arrChunks[$i] = $this->substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
