@@ -1258,12 +1258,12 @@ class StyleSheets extends Backend
 				case 'overflow':
 				case 'clear':
 				case 'display':
-					$arrSet['size'] = 1;
+					$arrSet['positioning'] = 1;
 					$arrSet[$strKey] = $arrChunks[1];
 					break;
 
 				case 'float':
-					$arrSet['size'] = 1;
+					$arrSet['positioning'] = 1;
 					$arrSet['floating'] = $arrChunks[1];
 					break;
 
