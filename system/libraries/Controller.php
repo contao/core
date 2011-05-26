@@ -2481,18 +2481,22 @@ abstract class Controller extends System
 	protected function loadDataContainer($strName, $blnNoCache=false)
 	{
 		// Return if the data has been loaded already
-		if (!$blnNoCache && isset($this->arrCache['loadDataContainer'][$strName]))
+		if (!$blnNoCache && isset($GLOBALS['loadDataContainer'][$strName]))
 		{
 			return;
 		}
 
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadDataContainer'][$strName] = true;
+
+		// Parse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/dca/%s.php', TL_ROOT, $strModule, $strName);
 
 			if (file_exists($strFile))
 			{
-				include_once($strFile); // include_once is required for nested calls!
+				include($strFile);
 			}
 		}
 
@@ -2506,7 +2510,6 @@ abstract class Controller extends System
 			}
 		}
 
-		$this->arrCache['loadDataContainer'][$strName] = true;
 		include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
