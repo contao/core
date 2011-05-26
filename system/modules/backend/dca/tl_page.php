@@ -311,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dateFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'explanation'             => 'dateFormat'
 
 		),
@@ -320,14 +320,14 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'datimFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'createSitemap' => array
 		(

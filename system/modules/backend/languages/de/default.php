@@ -142,6 +142,13 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'Dezember';
 
 
 /**
+ * Short names length
+ */
+$GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 2;
+$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+
+
+/**
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 1;

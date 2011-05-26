@@ -74,20 +74,20 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['dateFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'explanation'             => 'dateFormat'
 		),
 		'timeFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'datimFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['datimFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'timeZone' => array
 		(
