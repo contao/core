@@ -95,9 +95,10 @@ class Encryption
 	/**
 	 * Encrypt a value
 	 * @param  mixed
+	 * @param  string
 	 * @return string
 	 */
-	public function encrypt($varValue)
+	public function encrypt($varValue, $strKey=null)
 	{
 		// Recursively encrypt arrays
 		if (is_array($varValue))
@@ -115,8 +116,13 @@ class Encryption
 			return '';
 		}
 
+		if (!$strKey)
+		{
+			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
+		}
+
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($this->resTd), MCRYPT_RAND);
-		mcrypt_generic_init($this->resTd, md5($GLOBALS['TL_CONFIG']['encryptionKey']), $iv);
+		mcrypt_generic_init($this->resTd, md5($strKey), $iv);
 		$strEncrypted = mcrypt_generic($this->resTd, $varValue);
 		$strEncrypted = base64_encode($iv.$strEncrypted);
 		mcrypt_generic_deinit($this->resTd);
@@ -128,9 +134,10 @@ class Encryption
 	/**
 	 * Decrypt a value
 	 * @param  mixed
+	 * @param  string
 	 * @return string
 	 */
-	public function decrypt($varValue)
+	public function decrypt($varValue, $strKey=null)
 	{
 		// Recursively decrypt arrays
 		if (is_array($varValue))
@@ -158,7 +165,12 @@ class Encryption
 			return '';
 		}
 
-		mcrypt_generic_init($this->resTd, md5($GLOBALS['TL_CONFIG']['encryptionKey']), $iv);
+		if (!$strKey)
+		{
+			$strKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
+		}
+
+		mcrypt_generic_init($this->resTd, md5($strKey), $iv);
 		$strDecrypted = mdecrypt_generic($this->resTd, $varValue);
 		mcrypt_generic_deinit($this->resTd);
 
