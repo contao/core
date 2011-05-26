@@ -3041,6 +3041,15 @@ window.addEvent(\'domready\', function() {
 
 		foreach ($showFields as $k=>$v)
 		{
+			// Decrypt the value
+			if ($GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['encrypt'])
+			{
+				$objRow->$v = deserialize($objRow->$v);
+
+				$this->import('Encryption');
+				$objRow->$v = $this->Encryption->decrypt($objRow->$v);
+			}
+
 			if (strpos($v, ':') !== false)
 			{
 				list($strKey, $strTable) = explode(':', $v);
@@ -3428,6 +3437,18 @@ window.addEvent(\'domready\', function() {
 					$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $row[$i]['id']), 'class="blink"');
 					$imagePasteNew = $this->generateImage('new.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pastenew'][1], $row[$i]['id']));
 
+					// Decrypt encrypted value
+					foreach ($row[$i] as $k=>$v)
+					{
+						if ($GLOBALS['TL_DCA'][$table]['fields'][$k]['eval']['encrypt'])
+						{
+							$v = deserialize($v);
+
+							$this->import('Encryption');
+							$row[$i][$k] = $this->Encryption->decrypt($v);
+						}
+					}
+
 					// Make items sortable
 					if ($blnHasSorting)
 					{
@@ -3708,6 +3729,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				// Label
 				foreach ($showFields as $k=>$v)
 				{
+					// Decrypt the value
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['encrypt'])
+					{
+						$row[$v] = deserialize($row[$v]);
+
+						$this->import('Encryption');
+						$row[$v] = $this->Encryption->decrypt($row[$v]);
+					}
+
 					if (strpos($v, ':') !== false)
 					{
 						list($strKey, $strTable) = explode(':', $v);

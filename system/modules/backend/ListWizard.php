@@ -62,10 +62,6 @@ class ListWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'mandatory':
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
