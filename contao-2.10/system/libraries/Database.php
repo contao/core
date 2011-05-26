@@ -368,6 +368,17 @@ abstract class Database
 
 
 	/**
+	 * Return the table size in bytes
+	 * @param  string
+	 * @return integer
+	 */
+	public function getSizeOf($strTable)
+	{
+		return $this->get_size_of($strTable);
+	}
+
+
+	/**
 	 * Abstract database driver methods
 	 */
 	abstract protected function connect();
@@ -381,6 +392,7 @@ abstract class Database
 	abstract protected function set_database($strDatabase);
 	abstract protected function lock_tables($arrTables);
 	abstract protected function unlock_tables();
+	abstract protected function get_size_of($strTable);
 }
 
 

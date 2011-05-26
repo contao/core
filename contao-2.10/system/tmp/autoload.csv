@@ -93,3 +93,4 @@
 "RadioTable","system/modules/backend/RadioTable.php"
 "RadioButton","system/modules/backend/RadioButton.php"
 "StyleSheets","system/modules/backend/StyleSheets.php"
+"ModuleMaintenance","system/modules/backend/ModuleMaintenance.php"

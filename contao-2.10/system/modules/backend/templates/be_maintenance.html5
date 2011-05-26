@@ -21,7 +21,7 @@
     <legend><?php echo $this->cacheLabel; ?></legend>
     <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this, 'cache')"> <label for="check_all" style="color:#a6a6a6;"><em><?php echo $this->selectAll; ?></em></label><br>
 <?php foreach ($this->cacheTables as $arrTable): ?>
-    <input type="checkbox" name="tables[]" id="<?php echo $arrTable['id']; ?>" class="tl_checkbox" value="<?php echo $arrTable['value']; ?>" onfocus="Backend.getScrollOffset();"> <label for="<?php echo $arrTable['id']; ?>"><strong><?php echo $arrTable['name']; ?></strong> (<?php echo $arrTable['entries']; ?>)</label><br>
+    <input type="checkbox" name="tables[]" id="<?php echo $arrTable['id']; ?>" class="tl_checkbox" value="<?php echo $arrTable['value']; ?>" onfocus="Backend.getScrollOffset();"> <label for="<?php echo $arrTable['id']; ?>"><strong><?php echo $arrTable['name']; ?></strong> (<?php echo $arrTable['entries']; ?>, <?php echo $arrTable['size']; ?>)</label><br>
 <?php endforeach; ?>
     <input type="checkbox" name="tables[]" id="cache_html" class="tl_checkbox" value="html_folder" onfocus="Backend.getScrollOffset();"> <label for="cache_html"><strong><?php echo $this->cacheHtml; ?></strong> (<?php echo $this->htmlEntries; ?>)</label><br>
     <input type="checkbox" name="tables[]" id="cache_scripts" class="tl_checkbox" value="scripts_folder" onfocus="Backend.getScrollOffset();"> <label for="cache_scripts"><strong><?php echo $this->cacheScripts; ?></strong> (<?php echo $this->scriptEntries; ?>)</label><br>

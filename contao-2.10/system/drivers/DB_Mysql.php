@@ -258,6 +258,20 @@ class DB_Mysql extends Database
 	{
 		@mysql_query("UNLOCK TABLES");
 	}
+
+
+	/**
+	 * Return the table size in bytes
+	 * @param  string
+	 * @return integer
+	 */
+	protected function get_size_of($strTable)
+	{
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
+
+		return ($objStatus->Data_length + $objStatus->Index_length);
+	}
 }
 
 

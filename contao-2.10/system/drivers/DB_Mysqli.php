@@ -233,6 +233,20 @@ class DB_Mysqli extends Database
 	{
 		@$this->resConnection->query("UNLOCK TABLES");
 	}
+
+
+	/**
+	 * Return the table size in bytes
+	 * @param  string
+	 * @return integer
+	 */
+	protected function get_size_of($strTable)
+	{
+		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
+										  ->fetch_object();
+
+		return ($objStatus->Data_length + $objStatus->Index_length);
+	}
 }
 
 
