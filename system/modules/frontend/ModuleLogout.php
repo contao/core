@@ -97,16 +97,6 @@ class ModuleLogout extends Module
 		// Log out and redirect
 		if ($this->User->logout())
 		{
-			// HOOK: post logout callback
-			if (isset($GLOBALS['TL_HOOKS']['postLogout']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
-			{
-				foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
-				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->User);
-				}
-			}
-
 			$this->redirect($strRedirect);
 		}
 

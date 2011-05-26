@@ -286,6 +286,16 @@ abstract class User extends Model
 		$this->generateSession();
 		$this->log('User "' . $this->username . '" has logged in', get_class($this) . ' login()', TL_ACCESS);
 
+		// HOOK: post login callback
+		if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postLogin'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this);
+			}
+		}
+
 		return true;
 	}
 
@@ -417,6 +427,16 @@ abstract class User extends Model
 		{
 			$GLOBALS['TL_USERNAME'] = $this->username;
 			$this->log('User "' . $this->username . '" has logged out', $this->strTable . ' logout()', TL_ACCESS);
+		}
+
+		// HOOK: post logout callback
+		if (isset($GLOBALS['TL_HOOKS']['postLogout']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($this);
+			}
 		}
 
 		return true;

@@ -141,16 +141,6 @@ class ModuleLogin extends Module
 			// Login and redirect
 			if ($this->User->login())
 			{
-				// HOOK: post login callback
-				if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['postLogin'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User);
-					}
-				}
-
 				$this->redirect($strRedirect);
 			}
 
@@ -180,16 +170,6 @@ class ModuleLogin extends Module
 			// Logout and redirect
 			if ($this->User->logout())
 			{
-				// HOOK: post logout callback
-				if (isset($GLOBALS['TL_HOOKS']['postLogout']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User);
-					}
-				}
-
 				$this->redirect($strRedirect);
 			}
 
