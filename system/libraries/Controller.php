@@ -409,7 +409,7 @@ abstract class Controller extends System
 
 
 	/**
-	 * Generate a content element return it as HTML string
+	 * Generate a content element and return it as HTML string
 	 * @param integer
 	 * @param string
 	 * @return string
@@ -489,6 +489,39 @@ abstract class Controller extends System
 		{
 			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 		}
+
+		return $strBuffer;
+	}
+
+
+	/**
+	 * Generate a form and return it as HTML string
+	 * @param integer
+	 * @param string
+	 * @return string
+	 */
+	protected function getForm($intId, $strFormat='html5')
+	{
+		if (!strlen($intId) || $intId < 1)
+		{
+			return '';
+		}
+
+		$this->import('Database');
+
+		$objElement = $this->Database->prepare("SELECT * FROM tl_form WHERE id=?")
+									 ->limit(1)
+									 ->execute($intId);
+
+		if ($objElement->numRows < 1)
+		{
+			return '';
+		}
+
+		$objElement->typePrefix = 'ce_';
+		$objElement->form = $intId;
+		$objElement = new Form($objElement);
+		$strBuffer = $objElement->generate();
 
 		return $strBuffer;
 	}
