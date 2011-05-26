@@ -1557,6 +1557,11 @@ abstract class Controller extends System
 					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]));
 					break;
 
+				// Insert form
+				case 'insert_form':
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]));
+					break;
+
 				// Article
 				case 'article':
 				case 'article_open':
