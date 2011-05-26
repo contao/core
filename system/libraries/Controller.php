@@ -1053,6 +1053,24 @@ abstract class Controller extends System
 				break;
 
 			case 'png':
+				// Optimize non-truecolor images (see #2426)
+				if (version_compare($strGdVersion, '2.0', '>=') && !imageistruecolor($strSourceImage))
+				{
+					$intColors = imagecolorstotal($strSourceImage);
+
+					// Convert to palette image
+					if ($intColors > 0 && $intColors <= 255)
+					{
+						$wi = imagesx($strNewImage);
+						$he = imagesy($strNewImage);
+						$ch = imagecreatetruecolor($wi, $he);
+						imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
+						imagetruecolortopalette($strNewImage, null, $intColors);
+						imagecolormatch($ch, $strNewImage);
+						imagedestroy($ch);
+					}
+				}
+
 				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
 				break;
 		}
@@ -2474,7 +2492,7 @@ abstract class Controller extends System
 
 			if (file_exists($strFile))
 			{
-				include($strFile);
+				include_once($strFile); // include_once is required for nested calls!
 			}
 		}
 
