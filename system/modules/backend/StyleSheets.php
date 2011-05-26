@@ -475,11 +475,11 @@ class StyleSheets extends Backend
 			}
 
 			// Background gradient
-			if ($row['gradientColors'] != '')
+			if ($row['gradientAngle'] != '' && $row['gradientColors'] != '')
 			{
 				$row['gradientColors'] = deserialize($row['gradientColors']);
 
-				if (is_array($row['gradientColors']))
+				if (is_array($row['gradientColors']) && count(array_filter($row['gradientColors'])) > 0)
 				{
 					$blnNeedsPie = true;
 					$bgImage = '';
@@ -745,7 +745,7 @@ class StyleSheets extends Backend
 			{
 				$row['borderradius'] = deserialize($row['borderradius']);
 
-				if (is_array($row['borderradius']))
+				if (is_array($row['borderradius']) && ($row['borderradius']['top'] != '' || $row['borderradius']['right'] != '' || $row['borderradius']['bottom'] != '' || $row['borderradius']['left'] != ''))
 				{
 					$blnNeedsPie = true;
 
