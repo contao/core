@@ -210,7 +210,6 @@ var AjaxRequest =
 
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				ContextMenu.initialize();
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -1778,7 +1777,7 @@ var ContextMenu =
 			el.addClass('invisible');
 		});
 
-		// Add trigger to edit buttons
+		// Add a trigger to the edit buttons
 		$$('a.contextmenu').each(function(el)
 		{
 			var el2 = el.getNext('a');
@@ -1797,7 +1796,7 @@ var ContextMenu =
 			});
 		});
 
-		// Hide context menu 
+		// Hide the context menu 
 		$(document.body).addEvent('click', function()
 		{
 			ContextMenu.hide();
