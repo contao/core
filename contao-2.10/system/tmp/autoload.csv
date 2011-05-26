@@ -92,3 +92,4 @@
 "TrblField","system/modules/backend/TrblField.php"
 "RadioTable","system/modules/backend/RadioTable.php"
 "RadioButton","system/modules/backend/RadioButton.php"
+"StyleSheets","system/modules/backend/StyleSheets.php"

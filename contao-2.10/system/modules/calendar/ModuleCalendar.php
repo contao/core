@@ -168,6 +168,7 @@ class ModuleCalendar extends Events
 
 		$objTemplate->days = $this->compileDays();
 		$objTemplate->weeks = $this->compileWeeks();
+		$objTemplate->substr = $GLOBALS['TL_LANG']['MSC']['dayShortLength'];
 
 		$this->Template->calendar = $objTemplate->parse();
 	}
