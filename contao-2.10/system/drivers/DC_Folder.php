@@ -694,7 +694,25 @@ class DC_Folder extends DataContainer implements listable, editable
 		// Upload files
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
 		{
-			$maxlength_kb = $this->getReadableSize($GLOBALS['TL_CONFIG']['maxFileSize']);
+			// Get the upload_max_filesize from the php.ini
+			$upload_max_filesize = ini_get('upload_max_filesize');
+
+			// Convert the value to bytes
+			if (strpos($upload_max_filesize, 'K') !== false)
+			{
+				$upload_max_filesize = round($upload_max_filesize / 1024);
+			}
+			elseif (strpos($upload_max_filesize, 'M') !== false)
+			{
+				$upload_max_filesize = round($upload_max_filesize / 1024 / 1024);
+			}
+			elseif (strpos($upload_max_filesize, 'G') !== false)
+			{
+				$upload_max_filesize = round($upload_max_filesize / 1024 / 1024 / 1024);
+			}
+
+			// Convert the maximum file size into a human-readable format
+			$maxlength_kb = $this->getReadableSize(min($upload_max_filesize, $GLOBALS['TL_CONFIG']['maxFileSize']));
 
 			foreach ($_FILES as $file)
 			{
