@@ -137,8 +137,8 @@ abstract class Controller extends System
 			return $strFile;
 		}
 
-		// Browse all module folders
-		foreach ($this->Config->getActiveModules() as $strModule)
+		// Browse all module folders in reverse order
+		foreach (array_reverse($this->Config->getActiveModules()) as $strModule)
 		{
 			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strKey;
 
