@@ -51,4 +51,5 @@
 "be_widget_rdo.html5","system/modules/backend/templates/be_widget_rdo.html5"
 "be_widget_chk.html5","system/modules/backend/templates/be_widget_chk.html5"
 "be_widget.html5","system/modules/backend/templates/be_widget.html5"
+"be_maintenance.html5","system/modules/backend/templates/be_maintenance.html5"
 "be_main.html5","system/modules/backend/templates/be_main.html5"

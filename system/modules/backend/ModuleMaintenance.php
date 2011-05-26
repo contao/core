@@ -183,10 +183,11 @@ class ModuleMaintenance extends BackendModule
 				'id' => 'cache_' . $k,
 				'value' => specialchars($v),
 				'name' => $v,
-				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count)
+				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count),
+				'size' => $this->getReadableSize($this->Database->getSizeOf($v))
 			);
 		}
-		
+
 		$this->Template->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
 		$this->Template->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
 		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];

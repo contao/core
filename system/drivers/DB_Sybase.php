@@ -202,6 +202,15 @@ class DB_Sybase extends Database
 	 * @todo implement
 	 */
 	protected function unlock_tables() {}
+
+
+	/**
+	 * Return the table size in bytes
+	 * @param  string
+	 * @return integer
+	 * @todo implement
+	 */
+	protected function get_size_of($strTable) {}
 }
 
 
