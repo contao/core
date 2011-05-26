@@ -331,12 +331,19 @@ abstract class System
 	 * Load a set of language files
 	 * @param string
 	 * @param boolean
+	 * @param boolean
 	 */
-	protected function loadLanguageFile($strName, $strLanguage=false)
+	protected function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
 	{
 		if (!$strLanguage)
 		{
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
+		}
+
+		// Return if the data has been loaded already
+		if (!$blnNoCache && isset($this->arrCache['loadLanguageFile'][$strName][$strLanguage]))
+		{
+			return;
 		}
 
 		// Parse all active modules
@@ -378,6 +385,7 @@ abstract class System
 			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
 		}
 
+		$this->arrCache['loadLanguageFile'][$strName][$strLanguage] = true;
 		include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
