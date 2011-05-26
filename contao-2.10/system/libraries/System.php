@@ -415,6 +415,16 @@ abstract class System
 			return $strDate;
 		}
 
+		if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
+		{
+			$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
+		}
+
+		if (!$GLOBALS['TL_LANG']['MSC']['monthShortLength'])
+		{
+			$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+		}
+
 		$strReturn = '';
 		$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
 
@@ -429,7 +439,7 @@ abstract class System
 					break;
 
 				case 2:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, $GLOBALS['TL_LANG']['MSC']['dayShortLength']);
 					break;
 
 				case 3:
@@ -437,7 +447,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, $GLOBALS['TL_LANG']['MSC']['monthShortLength']);
 					break;
 
 				default:
