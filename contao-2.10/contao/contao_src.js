@@ -210,6 +210,7 @@ var AjaxRequest =
 
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
+				window.fireEvent('structure');
 				AjaxRequest.hideBox();
 
 				// HOOK
@@ -1844,6 +1845,11 @@ var ContextMenu =
 };
 
 window.addEvent('domready', function()
+{
+	ContextMenu.initialize();
+});
+
+window.addEvent('structure', function()
 {
 	ContextMenu.initialize();
 });
