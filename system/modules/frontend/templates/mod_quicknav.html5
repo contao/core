@@ -9,6 +9,7 @@
 <form action="<?php echo $this->request; ?>" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_quicknav">
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}">
 <label for="ctrl_target" class="invisible"><?php echo $this->targetPage; ?></label>
 <select name="target" id="ctrl_target" class="select">
   <option value=""><?php echo $this->title; ?></option>

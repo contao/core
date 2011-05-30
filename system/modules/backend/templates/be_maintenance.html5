@@ -16,6 +16,7 @@
 <form action="<?php echo $this->action; ?>" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_cache">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <div class="tl_tbox block">
   <fieldset class="tl_checkbox_container">
     <legend><?php echo $this->cacheLabel; ?></legend>

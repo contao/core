@@ -99,3 +99,5 @@
 "ModuleWizard","system/modules/backend/ModuleWizard.php"
 "TimePeriod","system/modules/backend/TimePeriod.php"
 "DbInstaller","system/modules/backend/DbInstaller.php"
+"ModuleTasks","system/modules/backend/ModuleTasks.php"
+"ModuleUser","system/modules/backend/ModuleUser.php"
