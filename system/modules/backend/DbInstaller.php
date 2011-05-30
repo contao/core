@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
  * Contao Open Source CMS
@@ -23,43 +23,28 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
+ * @package    System
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Contao Repository :: Create database update statements
+ * Class DbInstaller
  *
- * @copyright  Peter Koch 2008-2010
- * @author     Peter Koch, IBK Software AG
- * @license    See accompaning file LICENSE.txt
+ * Provide methods to handle database installs/updates.
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Library
  */
-
-
-/**
- * This is a wrapper of the original generator for database update commands in install.php.
- *
- * The private functions generateSqlForm(), compileCommands(), getFromFile() and getFromDb()
- * are exact copies from install.php of Contao 2.9.0, and may therefore easy get replaced 
- * by updated versions of future releases.
- *
- * The wrapper itself is makeSqlForm() that posp-processes the html code for the repository.
- */
-class DatabaseInstaller extends Controller
+class DbInstaller extends Controller
 {
-	public function makeSqlForm()
-	{
-		$this->import('Database');
-		return $this->generateSqlForm();
-	} // makeSqlForm
 
 	/**
 	 * Generate a HTML form with update commands and return it as string
 	 * @return string
 	 */
-	protected function generateSqlForm()
+	public function generateSqlForm()
 	{
 		$count = 0;
 		$return = '';
@@ -71,7 +56,6 @@ class DatabaseInstaller extends Controller
 		}
 
 		$_SESSION['sql_commands'] = array();
-		$this->loadLanguageFile('tl_install');
 
 		$arrOperations = array
 		(
@@ -89,7 +73,7 @@ class DatabaseInstaller extends Controller
 				// Headline
 				$return .= '
     <tr>
-      <td colspan="2" class="tl_col_0"><strong>'.$label.'</strong></td>
+      <td colspan="2" class="tl_col_0">'.$label.'</td>
     </tr>';
 
 				// Check all
@@ -115,7 +99,7 @@ class DatabaseInstaller extends Controller
 		}
 
 		return '
-  <table id="sql_table">'.$return.'
+  <table id="sql_table" style="margin-top:9px;">'.$return.'
   </table>' . "\n";
 	}
 
@@ -212,18 +196,6 @@ class DatabaseInstaller extends Controller
 		{
 			if (!in_array($k, $drop))
 			{
-				// Fields
-				if (is_array($v['TABLE_FIELDS']))
-				{
-					foreach ($v['TABLE_FIELDS'] as $kk=>$vv)
-					{
-						if (!isset($sql_target[$k]['TABLE_FIELDS'][$kk]))
-						{
-							$return['ALTER_DROP'][] = 'ALTER TABLE `'.$k.'` DROP `'.$kk.'`;';
-						}
-					}
-				}
-
 				// Create definitions
 				if (is_array($v['TABLE_CREATE_DEFINITIONS']))
 				{
@@ -232,6 +204,18 @@ class DatabaseInstaller extends Controller
 						if (!isset($sql_target[$k]['TABLE_CREATE_DEFINITIONS'][$kk]))
 						{
 							$return['ALTER_DROP'][] = 'ALTER TABLE `'.$k.'` DROP INDEX `'.$kk.'`;';
+						}
+					}
+				}
+
+				// Fields
+				if (is_array($v['TABLE_FIELDS']))
+				{
+					foreach ($v['TABLE_FIELDS'] as $kk=>$vv)
+					{
+						if (!isset($sql_target[$k]['TABLE_FIELDS'][$kk]))
+						{
+							$return['ALTER_DROP'][] = 'ALTER TABLE `'.$k.'` DROP `'.$kk.'`;';
 						}
 					}
 				}
@@ -303,9 +287,13 @@ class DatabaseInstaller extends Controller
 					// Create definitions
 					if (in_array($first, array('KEY', 'PRIMARY', 'PRIMARY KEY', 'FOREIGN', 'FOREIGN KEY', 'INDEX', 'UNIQUE', 'FULLTEXT', 'CHECK')))
 					{
+						if (in_array($first, array('PRIMARY', 'PRIMARY KEY')))
+						{
+							$key = 'PRIMARY';
+						}
+
 						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/i', '', trim($v));
 					}
-
 					else
 					{
 						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/i', '', trim($v));
@@ -324,6 +312,7 @@ class DatabaseInstaller extends Controller
 	 */
 	protected function getFromDB()
 	{
+		$this->import('Database');
 		$tables = preg_grep('/^tl_/i', $this->Database->listTables());
 
 		if (!count($tables))
@@ -342,63 +331,71 @@ class DatabaseInstaller extends Controller
 				$name = $field['name'];
 				$field['name'] = '`'.$field['name'].'`';
 
-				// Field type
-				if (strlen($field['length']))
+				if ($field['type'] != 'index')
 				{
-					$field['type'] .= '(' . $field['length'] . (strlen($field['precision']) ? ',' . $field['precision'] : '') . ')';
+					unset($field['index']);
 
-					unset($field['length']);
-					unset($field['precision']);
-				}
+					// Field type
+					if (strlen($field['length']))
+					{
+						$field['type'] .= '(' . $field['length'] . (strlen($field['precision']) ? ',' . $field['precision'] : '') . ')';
 
-				// Default values
-				if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment'))
-				{
-					unset($field['default']);
-				}
+						unset($field['length']);
+						unset($field['precision']);
+					}
 
-				elseif (is_null($field['default']) || strtolower($field['default']) == 'null')
-				{
-					$field['default'] = "default NULL";
-				}
+					// Default values
+					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment'))
+					{
+						unset($field['default']);
+					}
+					elseif (is_null($field['default']) || strtolower($field['default']) == 'null')
+					{
+						$field['default'] = "default NULL";
+					}
+					else
+					{
+						$field['default'] = "default '" . $field['default'] . "'";
+					}
 
-				else
-				{
-					$field['default'] = "default '" . $field['default'] . "'";
+					$return[$table]['TABLE_FIELDS'][$name] = trim(implode(' ', $field));
 				}
 
 				// Indices
-				if (strlen($field['index']))
+				if (strlen($field['index']) && $field['index_fields'])
 				{
+					$index_fields = implode('`, `', $field['index_fields']);
+
 					switch ($field['index'])
 					{
-						case 'PRIMARY':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  (`'.$name.'`)';
-							break;
-
 						case 'UNIQUE':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` (`'.$name.'`)';
+							if ($name == 'PRIMARY')
+							{
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  (`'.$index_fields.'`)';
+							}
+							else
+							{
+								$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` (`'.$index_fields.'`)';
+							}
 							break;
 
 						case 'FULLTEXT':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` (`'.$name.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` (`'.$index_fields.'`)';
 							break;
 
 						default:
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` (`'.$name.'`)';
+							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` (`'.$index_fields.'`)';
 							break;
 					}
 
+					unset($field['index_fields']);
 					unset($field['index']);
 				}
-
-				$return[$table]['TABLE_FIELDS'][$name] = trim(implode(' ', $field));
 			}
 		}
 
 		return $return;
 	}
-
-} // class DatabaseInstaller
+}
 
 ?>
