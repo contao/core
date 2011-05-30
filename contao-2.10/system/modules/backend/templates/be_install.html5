@@ -52,6 +52,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_ftp">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpHost']; ?></h4>
     <input type="text" name="host" id="host" class="tl_text" value="<?php echo $this->ftpHost; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPath']; ?></h4>
@@ -877,6 +878,7 @@ Library.
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_license">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
       <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();">
     </div>
@@ -892,6 +894,7 @@ Library.
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_login">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['password'][0]; ?></h4>
 <?php if ($this->passwordError): ?>
     <p class="tl_error"><?php echo $this->passwordError; ?></p>
@@ -928,6 +931,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_install">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
 <?php if ($this->passwordError): ?>
     <p class="tl_error"><?php echo $this->passwordError; ?></p>
@@ -961,6 +965,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_encryption">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['keyCreate']; ?></h4>
     <input type="text" name="key" id="key" class="tl_text" value="<?php echo $this->encryptionKey; ?>">
   </div>
@@ -987,6 +992,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_database_login">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbDriver']; ?></h4>
     <select name="dbDriver" id="dbDriver" class="tl_select"><?php echo $this->drivers; ?></select>
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbHost']; ?></h4>
@@ -1023,6 +1029,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_28update">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
       <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.8'); ?>" onclick="Backend.getScrollOffset();">
     </div>
@@ -1041,6 +1048,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_29update">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
       <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.9'); ?>" onclick="Backend.getScrollOffset();">
     </div>
@@ -1059,6 +1067,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_210update">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
       <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.10'); ?>" onclick="Backend.getScrollOffset();">
     </div>
@@ -1077,6 +1086,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_collation">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['dbCollation']; ?></h4>
     <select name="dbCollation" id="dbCollation" class="tl_select"><?php echo $this->collations; ?></select>
   </div>
@@ -1102,7 +1112,8 @@ window.addEvent('domready', function() {
 <?php if (!$this->dbUpToDate): ?>
   <form action="<?php echo $this->action; ?>" id="sql_form" class="tl_install_form" method="post">
   <div class="tl_formbody">
-    <input type="hidden" name="FORM_SUBMIT" value="tl_tables"><?php echo $this->dbUpdate; ?>
+    <input type="hidden" name="FORM_SUBMIT" value="tl_tables">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>"><?php echo $this->dbUpdate; ?>
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
@@ -1129,6 +1140,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" id="tl_static" class="tl_install_form" method="post">
   <div class="tl_formbody_submit">
     <input type="hidden" name="FORM_SUBMIT" value="tl_tutorial">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['templates']; ?></h4>
     <select name="template" class="tl_select"><?php echo $this->templates; ?></select>
     <div class="tl_checkbox_container" style="margin-top:3px;">
@@ -1158,6 +1170,7 @@ window.addEvent('domready', function() {
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_admin">
+    <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['MSC']['username']; ?></h4>
     <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->adminUser; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['MSC']['com_name']; ?></h4>

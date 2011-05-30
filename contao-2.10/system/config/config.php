@@ -103,10 +103,8 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * If you use the input library to handle input data, all HTML tags except
  * for these 'allowedTags' will be removed.
  *
- * For security reasons, the referer host address will be validated against
- * the current host address whenever there is $_POST data. However, this can
- * cause problems e.g. if your server does not return a referer address. In
- * this case you can disable this feature here.
+ * In Contao 2.10, the referer check has been replaced with a request token
+ * system, which you can disable here (not recommended).
  */
 $GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;

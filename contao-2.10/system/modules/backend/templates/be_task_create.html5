@@ -8,6 +8,7 @@
 <form action="<?php echo $this->request; ?>" id="tl_tasks" class="tl_form" method="post">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_tasks">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <div class="tl_tbox block">
   <h3><?php echo $this->title->generateLabel(); ?></h3>

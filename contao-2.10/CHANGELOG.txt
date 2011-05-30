@@ -63,6 +63,7 @@ Version 2.10.beta1 (XXXX-XX-XX)
 - Added: added global style sheet variables
 - Added: added autocomplete="off" to back end password fields (#2835, #3019)
 - Added: optionally ignore dynamic date parameters in the event list (#2559)
+- Added: replaced the referer check with a request token system
 - Fixed: do not add $objRow->protected in tree view by default (#2915)
 - Fixed: convert relative external image URLs in newsletters (#2895)
 - Fixed: not all option callbacks worked correctly in override multiple mode (#2976)

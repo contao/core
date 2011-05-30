@@ -9,6 +9,7 @@
 <form action="<?php echo $this->request; ?>" method="post">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_quicklink" />
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
 <select name="target" class="select">
   <option value=""><?php echo $this->title; ?></option>
 <?php foreach ($this->items as $item): ?>
