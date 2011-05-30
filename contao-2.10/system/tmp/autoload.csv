@@ -97,3 +97,5 @@
 "ContentImage","system/modules/frontend/ContentImage.php"
 "KeyValueWizard","system/modules/backend/KeyValueWizard.php"
 "ModuleWizard","system/modules/backend/ModuleWizard.php"
+"TimePeriod","system/modules/backend/TimePeriod.php"
+"DbInstaller","system/modules/backend/DbInstaller.php"

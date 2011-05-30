@@ -32,15 +32,16 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['cal_calendar']     = array('Kalender', 'Bitte wählen Sie einen oder mehrere Kalender.');
-$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']       = array('Verkürzte Darstellung', 'Events nur einmal anzeigen, auch wenn sie mehrere Tage umfassen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_format']       = array('Anzeigeformat', 'Hier können Sie das Anzeigeformat der Eventliste auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_order']        = array('Sortierreihenfolge', 'Hier können Sie die Sortierreihenfolge festlegen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_limit']        = array('Anzahl an Events', 'Hier können Sie die Event-Anzahl beschränken. Geben Sie 0 ein, um alle anzuzeigen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_template']     = array('Event-Template', 'Hier können Sie das Event-Template auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate']    = array('Kalendar-Template', 'Hier können Sie das Kalendar-Template auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_startDay']     = array('Erster Wochentag', 'Hier können Sie den ersten Tag der Woche festlegen.');
-$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'] = array('Anzahl der Events anzeigen', 'Die Anzahl der Events jedes Monats im Menü anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_calendar']      = array('Kalender', 'Bitte wählen Sie einen oder mehrere Kalender.');
+$GLOBALS['TL_LANG']['tl_module']['cal_noSpan']        = array('Verkürzte Darstellung', 'Events nur einmal anzeigen, auch wenn sie mehrere Tage umfassen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_format']        = array('Anzeigeformat', 'Hier können Sie das Anzeigeformat der Eventliste auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_order']         = array('Sortierreihenfolge', 'Hier können Sie die Sortierreihenfolge festlegen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_limit']         = array('Anzahl an Events', 'Hier können Sie die Event-Anzahl beschränken. Geben Sie 0 ein, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_template']      = array('Event-Template', 'Hier können Sie das Event-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_ctemplate']     = array('Kalendar-Template', 'Hier können Sie das Kalendar-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_startDay']      = array('Erster Wochentag', 'Hier können Sie den ersten Tag der Woche festlegen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity']  = array('Anzahl der Events anzeigen', 'Die Anzahl der Events jedes Monats im Menü anzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'] = array('URL-Parameter ignorieren', 'Den Zeitraum nicht anhand der date/month/year-Parameter in der URL ändern.');
 
 
 /**

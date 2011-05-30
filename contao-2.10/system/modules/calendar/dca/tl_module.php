@@ -33,7 +33,7 @@
  * Add palettes to tl_module
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']    = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_startDay;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_order,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_ignoreDynamic,cal_format,cal_order,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventmenu']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_showQuantity,cal_format,cal_startDay,cal_order;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
@@ -79,6 +79,13 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox'
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_ignoreDynamic'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox'
 );
