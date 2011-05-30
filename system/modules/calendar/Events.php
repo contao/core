@@ -143,7 +143,14 @@ abstract class Events extends Module
 				if ($objEvents->recurring)
 				{
 					$count = 0;
+
 					$arrRepeat = deserialize($objEvents->repeatEach);
+					$strtotime = '+ ' . $arrRepeat['value'] . ' ' . $arrRepeat['unit'];
+
+					if ($arrRepeat['value'] < 1)
+					{
+						continue;
+					}
 
 					while ($objEvents->endTime < $intEnd)
 					{
@@ -151,16 +158,6 @@ abstract class Events extends Module
 						{
 							break;
 						}
-
-						$arg = $arrRepeat['value'];
-						$unit = $arrRepeat['unit'];
-
-						if ($arg < 1)
-						{
-							break;
-						}
-
-						$strtotime = '+ ' . $arg . ' ' . $unit;
 
 						$objEvents->startTime = strtotime($strtotime, $objEvents->startTime);
 						$objEvents->endTime = strtotime($strtotime, $objEvents->endTime);
