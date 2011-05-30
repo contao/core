@@ -59,7 +59,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpUser']; ?></h4>
     <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->ftpUser; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
-    <input type="password" name="password" id="password" class="tl_text" value="<?php echo $this->ftpPass; ?>">
+    <input type="password" name="password" id="password" autocomplete="off" class="tl_text" value="<?php echo $this->ftpPass; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
     <div class="tl_checkbox_container" style="margin-top:3px;">
       <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $this->ftpSSL ? ' checked="checked"' : ''; ?>> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
@@ -896,7 +896,7 @@ Library.
 <?php if ($this->passwordError): ?>
     <p class="tl_error"><?php echo $this->passwordError; ?></p>
 <?php endif; ?>
-    <input type="password" name="password" id="password" class="tl_text" value="">
+    <input type="password" name="password" id="password" autocomplete="off" class="tl_text" value="">
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
@@ -932,9 +932,9 @@ window.addEvent('domready', function() {
 <?php if ($this->passwordError): ?>
     <p class="tl_error"><?php echo $this->passwordError; ?></p>
 <?php endif; ?>
-    <input type="password" name="password" id="password" class="tl_text" value="">
+    <input type="password" name="password" id="password" autocomplete="off" class="tl_text" value="">
     <h4><label for="confirm_password"><?php echo $GLOBALS['TL_LANG']['MSC']['confirm'][0]; ?></label></h4>
-    <input type="password" name="confirm_password" id="confirm_password" class="tl_text" value="">
+    <input type="password" name="confirm_password" id="confirm_password" autocomplete="off" class="tl_text" value="">
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
