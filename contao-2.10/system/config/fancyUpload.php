@@ -61,13 +61,14 @@ window.addEvent('domready', function() {
         'ioError': '<?php echo $fancy->ioError; ?>'
       }
     };
-    MooTools.lang.set('en-US', 'FancyUpload', phrases);
+    Locale.define('en-US', 'FancyUpload', phrases);
   })();
   var up = new FancyUpload2($('fancy-status'), $('fancy-list'), {
     'data': {
       'isAjax': true,
       'isPopup': <?php echo $fancy->isPopup; ?>,
       'FORM_SUBMIT': 'tl_upload',
+      'REQUEST_TOKEN': '<?php echo REQUEST_TOKEN; ?>',
       'action': 'fancyUpload'
     },
     'appendCookieData': true,
