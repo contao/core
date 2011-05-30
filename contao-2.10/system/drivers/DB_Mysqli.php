@@ -153,6 +153,10 @@ class DB_Mysqli extends Database
 						$arrReturn[$k]['index'] = 'UNIQUE';
 						break;
 
+					case 'MUL':
+						// Ignore
+						break;
+
 					default:
 						$arrReturn[$k]['index'] = 'KEY';
 						break;
@@ -162,6 +166,16 @@ class DB_Mysqli extends Database
 			$arrReturn[$k]['null'] = ($v['Null'] == 'YES') ? 'NULL' : 'NOT NULL';
 			$arrReturn[$k]['default'] = $v['Default'];
 			$arrReturn[$k]['extra'] = $v['Extra'];
+		}
+
+		$arrIndexes = $this->execute("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+
+		foreach ($arrIndexes as $arrIndex)
+		{
+			$arrReturn[$arrIndex['Key_name']]['name'] = $arrIndex['Key_name'];
+			$arrReturn[$arrIndex['Key_name']]['type'] = 'index';
+			$arrReturn[$arrIndex['Key_name']]['index_fields'][] = $arrIndex['Column_name'];
+			$arrReturn[$arrIndex['Key_name']]['index'] = (($arrIndex['Non_unique'] == 0) ? 'UNIQUE' : 'KEY');
 		}
 
 		return $arrReturn;
