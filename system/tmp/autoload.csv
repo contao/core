@@ -95,3 +95,4 @@
 "StyleSheets","system/modules/backend/StyleSheets.php"
 "ModuleMaintenance","system/modules/backend/ModuleMaintenance.php"
 "ContentImage","system/modules/frontend/ContentImage.php"
+"KeyValueWizard","system/modules/backend/KeyValueWizard.php"
