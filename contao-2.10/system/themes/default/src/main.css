@@ -1014,6 +1014,9 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 #ctrl_size_1 {
 	background-position:64px -18px !important;
 }
+#tl_form_field #ctrl_size input {
+	background:none !important;
+}
 .trbl_top {
 	background-position:47px -39px !important;
 }
