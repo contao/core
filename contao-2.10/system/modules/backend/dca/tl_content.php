@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'__selector__'                => array('type', 'mooType', 'addImage', 'sortable', 'useImage', 'protected'),
 		'default'                     => '{type_legend},type',
 		'headline'                    => '{type_legend},type,headline;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'text'                        => '{type_legend},type,headline;{text_legend},text;{image_legend},addImage;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'html'                        => '{type_legend},type;{text_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests',
 		'list'                        => '{type_legend},type,headline;{list_legend},listtype,listitems;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'table'                       => '{type_legend},type,headline;{table_legend},tableitems;{tconfig_legend},summary,thead,tfoot,tleft;{sortable_legend:hide},sortable;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -153,10 +153,6 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 	// Fields
 	'fields' => array
 	(
-		'invisible' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['invisible']
-		),
 		'type' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['type'],
@@ -582,21 +578,30 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['guests'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'invisible' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['invisible'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'cssID' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['cssID'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50 clr')
 		),
 		'space' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['space'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true)
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
 		'source' => array
 		(
@@ -1207,6 +1212,12 @@ class tl_content extends Backend
 			$this->redirect($this->getReferer());
 		}
 
+		// Check permissions AFTER checking the tid, so hacking attempts are logged
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_content::invisible', 'alexf'))
+		{
+			return '';
+		}
+
 		$href .= '&amp;id='.$this->Input->get('id').'&amp;tid='.$row['id'].'&amp;state='.$row['invisible'];
 
 		if ($row['invisible'])
@@ -1229,7 +1240,14 @@ class tl_content extends Backend
 		$this->Input->setGet('id', $intId);
 		$this->Input->setGet('act', 'toggle');
 		$this->checkPermission();
-	
+
+		// Check permissions to publish
+		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_content::invisible', 'alexf'))
+		{
+			$this->log('Not enough permissions to show/hide content element ID "'.$intId.'"', 'tl_content toggleVisibility', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$this->createInitialVersion('tl_content', $intId);
 
 		// Trigger the save_callback
