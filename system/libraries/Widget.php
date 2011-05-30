@@ -566,13 +566,20 @@ abstract class Widget extends Controller
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
-		if (strlen($this->rgxp))
+		if ($this->rgxp != '')
 		{
+			$strAdd = '';
+
+			if ($this->strTable == 'tl_style')
+			{
+				$strAdd = '\$';
+			}
+
 			switch ($this->rgxp)
 			{
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!preg_match('/^[\d \.-]*$/', $varInput))
+					if (!preg_match('/^[\d \.'.$strAdd.'-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -582,14 +589,14 @@ abstract class Widget extends Controller
 				case 'alpha':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alpha:] \.-]*$', $varInput))
+						if (!mb_eregi('^[[:alpha:] \.'.$strAdd.'-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pL \.-]*$/u', $varInput))
+						if (!preg_match('/^[\pL \.'.$strAdd.'-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
@@ -600,14 +607,14 @@ abstract class Widget extends Controller
 				case 'alnum':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alnum:] \._-]*$', $varInput))
+						if (!mb_eregi('^[[:alnum:] \.'.$strAdd.'_-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pN\pL \._-]*$/u', $varInput))
+						if (!preg_match('/^[\pN\pL \.'.$strAdd.'_-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}
@@ -712,7 +719,7 @@ abstract class Widget extends Controller
 			}
 		}
 
-		if ($this->isHexColor && $varInput != '')
+		if ($this->isHexColor && $varInput != '' && strncmp($varInput, '$', 1) !== 0)
 		{
 			$varInput = preg_replace('/[^a-f0-9]+/i', '', $varInput);
 		}

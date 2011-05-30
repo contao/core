@@ -576,6 +576,7 @@ CREATE TABLE `tl_style_sheet` (
   `cc` varchar(32) NOT NULL default '',
   `media` varchar(255) NOT NULL default '',
   `mediaQuery` varchar(255) NOT NULL default '',
+  `vars` text NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

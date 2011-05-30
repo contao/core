@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc,media,mediaQuery'
+		'default'                     => '{title_legend},name,cc,media,mediaQuery,vars'
 	),
 
 	// Fields
@@ -179,6 +179,12 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long')
+		),
+		'vars' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['vars'],
+			'inputType'               => 'keyValueWizard',
+			'exclude'                 => true
 		),
 		'source' => array
 		(

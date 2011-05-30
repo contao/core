@@ -229,6 +229,7 @@ $GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Move the row one position down';
 $GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Delete the row';
 $GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Value';
 $GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Label';
+$GLOBALS['TL_LANG']['MSC']['ow_key']     = 'Key';
 $GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Default';
 $GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Group';
 
