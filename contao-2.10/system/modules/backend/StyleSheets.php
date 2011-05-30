@@ -147,6 +147,21 @@ class StyleSheets extends Backend
 		}
 
 		$intCount = 0;
+		$vars = array();
+
+		// Global variables
+		if ($row['vars'] != '')
+		{
+			$tmp = deserialize($row['vars']);
+
+			if (is_array($tmp))
+			{
+				foreach ($tmp as $v)
+				{
+					$vars[$v['key']] = $v['value'];
+				}
+			}
+		}
 
 		$objFile = new File('system/scripts/' . $row['name'] . '.css');
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
@@ -156,7 +171,7 @@ class StyleSheets extends Backend
 
 		while ($objDefinitions->next())
 		{
-			$strText = $this->compileDefinition($objDefinitions->row(), true);
+			$strText = $this->compileDefinition($objDefinitions->row(), true, $vars);
 			$intLength = strlen($strText);
 
 			// Add a line break after approximately 400 characters
@@ -178,9 +193,10 @@ class StyleSheets extends Backend
 	 * Compile format definitions and return them as string
 	 * @param array
 	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
-	public function compileDefinition($row, $blnWriteToFile=false)
+	public function compileDefinition($row, $blnWriteToFile=false, $vars=array())
 	{
 		if ($blnWriteToFile)
 		{
@@ -977,6 +993,13 @@ class StyleSheets extends Backend
 
 		// Close the format definition
 		$return .= ($blnWriteToFile ? '' : "\n") . '}' . ($blnWriteToFile ? '' : "</pre>\n");
+
+		// Replace global variables
+		if (strpos($return, '$') !== false && count($vars) > 0)
+		{
+			$return = str_replace(array_keys($vars), array_values($vars), $return);
+		}
+
 		return $return;
 	}
 

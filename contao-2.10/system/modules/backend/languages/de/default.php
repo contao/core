@@ -229,6 +229,7 @@ $GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Die Reihe eine Position nach unten v
 $GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Die Reihe löschen';
 $GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Wert';
 $GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Bezeichnung';
+$GLOBALS['TL_LANG']['MSC']['ow_key']     = 'Schlüssel';
 $GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Gruppe';
 

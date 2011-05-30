@@ -153,6 +153,11 @@ fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
 	margin:0;
 	padding:0 0 1px;
 }
+fieldset.checkbox_container,fieldset.radio_container {
+	border:0;
+	margin:0;
+	padding:0;
+}
 
 /* Text fields */
 .tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea {
