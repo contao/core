@@ -125,7 +125,7 @@ class DC_File extends DataContainer implements editable
 		$return = '';
 		$ajaxId = null;
 
-		if ($this->Input->post('isAjax'))
+		if ($this->Environment->isAjaxRequest)
 		{
 			$ajaxId = func_get_arg(1);
 		}
@@ -206,7 +206,7 @@ class DC_File extends DataContainer implements editable
 				{
 					if ($vv == '[EOF]')
 					{
-						if ($this->Input->post('isAjax') && $blnAjax)
+						if ($blnAjax && $this->Environment->isAjaxRequest)
 						{
 							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">';
 						}
@@ -220,7 +220,7 @@ class DC_File extends DataContainer implements editable
 					if (preg_match('/^\[.*\]$/i', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
-						$blnAjax = ($this->Input->post('isAjax') && $ajaxId == $thisId) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && $this->Environment->isAjaxRequest) ? true : false;
 						$return .= "\n  " . '<div id="'.$thisId.'">';
 
 						continue;

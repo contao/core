@@ -235,6 +235,13 @@ abstract class System
 	 */
 	protected function redirect($strLocation, $intStatus=303)
 	{
+		// Ajax request
+		if ($this->Environment->isAjaxRequest)
+		{
+			echo json_encode(array('token'=>REQUEST_TOKEN));
+			exit;
+		}
+
 		if (headers_sent())
 		{
 			exit;
@@ -256,7 +263,7 @@ abstract class System
 				break;
 		}
 
-		// Check target address
+		// Check the target address
 		if (preg_match('@^https?://@i', $strLocation))
 		{
 			header('Location: ' . str_replace('&amp;', '&', $strLocation));
@@ -532,7 +539,7 @@ abstract class System
 	 */
 	protected function setCookie($strName, $varValue, $intExpires, $strPath='', $strDomain=null, $blnSecure=null)
 	{
-		if (!strlen($strPath))
+		if ($strPath == '')
 		{
 			$strPath = '/';
 		}

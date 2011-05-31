@@ -24,6 +24,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="tl_formbody">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <div class="tl_panel">
 

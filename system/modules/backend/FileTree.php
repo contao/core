@@ -193,7 +193,7 @@ class FileTree extends Widget
 	 */
 	public function generateAjax($folder, $strField, $level, $mount=false)
 	{
-		if (!$this->Input->post('isAjax'))
+		if (!$this->Environment->isAjaxRequest)
 		{
 			return '';
 		}

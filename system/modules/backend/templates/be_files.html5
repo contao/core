@@ -31,6 +31,7 @@ var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
+var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 </script>
 <script src="<?php
   $objCombiner = new Combiner();
@@ -45,6 +46,7 @@ var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
 <script>
+parent.REQUEST_TOKEN = REQUEST_TOKEN;
 parent.Mediabox.enableFiletreeReload();
 </script>
 </head>

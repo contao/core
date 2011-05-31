@@ -182,11 +182,10 @@ class BackendUser extends User
 		}
 
 		// Force JavaScript redirect on Ajax requests (IE requires absolute link)
-		if ($this->Input->post('isAjax'))
+		if ($this->Environment->isAjaxRequest)
 		{
 			header('Content-Type: text/javascript');
 			echo 'location.replace("' . $this->Environment->base . $strRedirect . '")';
-
 			exit;
 		}
 

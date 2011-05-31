@@ -686,7 +686,7 @@ class tl_style extends Backend
 	public function scheduleUpdate()
 	{
 		// Return if there is no ID 
-		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || $this->Input->post('isAjax'))
+		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || $this->Environment->isAjaxRequest)
 		{
 			return;
 		}

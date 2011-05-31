@@ -27,6 +27,7 @@ $tabindex = 1;
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
 <div class="tl_formbody_edit">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <div class="tl_tbox block">
   <h3><label for="repository_lickey"><?php echo $text['lickey'][0]; ?></label></h3>

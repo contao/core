@@ -27,6 +27,7 @@ $text = &$GLOBALS['TL_LANG']['tl_repository'];
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 <input type="hidden" name="repository_stage" value="<?php echo $rep->f_stage; ?>">
 <input type="hidden" name="repository_extension" value="<?php echo $rep->f_extension; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <div class="tl_tbox block">
 

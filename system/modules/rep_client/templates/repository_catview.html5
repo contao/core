@@ -27,6 +27,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="extension_container">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
 <table class="extension">
 <tr class="title">
