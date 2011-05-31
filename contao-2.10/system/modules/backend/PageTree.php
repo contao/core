@@ -169,7 +169,7 @@ class PageTree extends Widget
 	 */
 	public function generateAjax($id, $strField, $level)
 	{
-		if (!$this->Input->post('isAjax'))
+		if (!$this->Environment->isAjaxRequest)
 		{
 			return '';
 		}

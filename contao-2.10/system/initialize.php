@@ -159,7 +159,7 @@ include(TL_ROOT . '/system/config/initconfig.php');
  */
 if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
 {
-	if (!$objInput->post('REQUEST_TOKEN') || $objInput->post('REQUEST_TOKEN') != $_SESSION['REQUEST_TOKEN'][TL_MODE])
+	if (!$objInput->post('REQUEST_TOKEN') || !isset($_SESSION['REQUEST_TOKEN'][TL_MODE]) || $objInput->post('REQUEST_TOKEN') != $_SESSION['REQUEST_TOKEN'][TL_MODE])
 	{
 		header('HTTP/1.1 400 Bad Request');
 

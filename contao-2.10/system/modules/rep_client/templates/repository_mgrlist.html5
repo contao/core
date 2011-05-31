@@ -27,6 +27,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <form action="<?php echo $rep->f_link; ?>" id="repository_upgdform" method="post" >
 <div class="extension_container">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if (count($rep->extensions) < 1): ?>
 
 <p><?php echo $text['noextensionsfound']; ?></p>

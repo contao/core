@@ -1572,7 +1572,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function ajaxTreeView($strFolder, $level)
 	{
-		if (!$this->Input->post('isAjax'))
+		if (!$this->Environment->isAjaxRequest)
 		{
 			return '';
 		}

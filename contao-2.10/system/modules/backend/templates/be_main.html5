@@ -22,6 +22,7 @@ var CONTAO_THEME = '<?php echo $this->theme; ?>';
 var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
 var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
 var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
+var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 </script>
 <script src="<?php
   $objCombiner = new Combiner();

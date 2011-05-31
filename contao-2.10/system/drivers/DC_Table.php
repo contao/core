@@ -1627,7 +1627,7 @@ class DC_Table extends DataContainer implements listable, editable
 				{
 					if ($vv == '[EOF]')
 					{
-						if ($this->Input->post('isAjax') && $blnAjax)
+						if ($blnAjax && $this->Environment->isAjaxRequest)
 						{
 							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">';
 						}
@@ -1641,7 +1641,7 @@ class DC_Table extends DataContainer implements listable, editable
 					if (preg_match('/^\[.*\]$/i', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
-						$blnAjax = ($this->Input->post('isAjax') && $ajaxId == $thisId) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && $this->Environment->isAjaxRequest) ? true : false;
 						$return .= "\n" . '<div id="'.$thisId.'">';
 
 						continue;
@@ -1902,7 +1902,7 @@ window.addEvent(\'domready\', function() {
 		$session = $this->Session->getData();
 		$ids = $session['CURRENT']['IDS'];
 
-		if ($this->Input->post('isAjax'))
+		if ($this->Environment->isAjaxRequest)
 		{
 			$ids = array($intId);
 		}
@@ -1976,7 +1976,7 @@ window.addEvent(\'domready\', function() {
 
 					if ($v == '[EOF]')
 					{
-						if ($this->Input->post('isAjax') && $blnAjax)
+						if ($blnAjax && $this->Environment->isAjaxRequest)
 						{
 							return $strAjax . '<input type="hidden" name="FORM_FIELDS_'.$id.'[]" value="'.specialchars(implode(',', $formFields)).'">';
 						}
@@ -1990,7 +1990,7 @@ window.addEvent(\'domready\', function() {
 					if (preg_match('/^\[.*\]$/i', $v))
 					{
 						$thisId = 'sub_' . substr($v, 1, -1) . '_' . $id;
-						$blnAjax = ($this->Input->post('isAjax') && $ajaxId == $thisId) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && $this->Environment->isAjaxRequest) ? true : false;
 						$return .= "\n  " . '<div id="'.$thisId.'">';
 
 						continue;
@@ -2899,7 +2899,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function ajaxTreeView($id, $level)
 	{
-		if (!$this->Input->post('isAjax'))
+		if (!$this->Environment->isAjaxRequest)
 		{
 			return '';
 		}

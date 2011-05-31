@@ -83,7 +83,7 @@ class Main extends Backend
 		$this->Template = new BackendTemplate('be_main');
 		$this->Template->main = '';
 
-		if ($this->Input->post('isAjax'))
+		if ($_POST && $this->Environment->isAjaxRequest)
 		{
 			$this->objAjax = new Ajax($this->Input->post('action'));
 			$this->objAjax->executePreActions();
