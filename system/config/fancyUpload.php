@@ -65,7 +65,6 @@ window.addEvent('domready', function() {
   })();
   var up = new FancyUpload2($('fancy-status'), $('fancy-list'), {
     'data': {
-      'isAjax': true,
       'isPopup': <?php echo $fancy->isPopup; ?>,
       'FORM_SUBMIT': 'tl_upload',
       'REQUEST_TOKEN': '<?php echo REQUEST_TOKEN; ?>',

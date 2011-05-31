@@ -67,9 +67,9 @@ if (($_GET['do'] != 'files' && !POPUP) || $_GET['act'] != 'move' || $_GET['mode'
 
 
 /**
- * Set the referer host
+ * Signalize an Ajax request
  */
-$_SERVER['HTTP_REFERER'] = 'http://' . filter_var($_SERVER['SERVER_NAME'], FILTER_SANITIZE_URL);
+$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
 
 
 /**
