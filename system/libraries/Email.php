@@ -310,6 +310,17 @@ class Email extends System
 
 
 	/**
+	 * Add a custom text header
+	 * @param string
+	 * @param string
+	 */
+	public function addHeader($strKey, $strValue)
+	{
+		$this->objMessage->getHeaders()->addTextHeader($strKey, $strValue);
+	}
+
+
+	/**
 	 * Get CC e-mail addresses from an array, string or unlimited number of arguments
 	 *
 	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.

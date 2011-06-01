@@ -48,13 +48,12 @@ $GLOBALS['TL_LANG']['tl_layout']['widthRight']    = array('Breite der rechten Sp
 $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Eigene Layoutbereiche', 'Eigene Layoutbereiche können in den Backend-Einstellungen definiert werden.');
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Position der Layoutbereiche', 'Bitte wählen Sie die Position der eigenen Layoutbereiche aus.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Stylesheets', 'Bitte wählen Sie die Stylesheets aus, die Sie dem Layout hinzufügen möchten.');
-$GLOBALS['TL_LANG']['tl_layout']['aggregate']     = array('Stylesheets zusammenfassen', 'Die einzelnen Stylesheets in einer Datei zusammenfassen (verbessert die Seitenladezeit).');
 $GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('tl_files/tinymce.css ignorieren', 'Das TinyMCE-Stylesheet tl_files/tinymce.css nicht einbinden.');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('Newsfeeds', 'Bitte wählen Sie die Newsfeeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bitte wählen Sie die Kalender-Feeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Seitentemplate', 'Hier können Sie das Seitentemplate auswählen.');
-$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Dokumenttyp-Definition', 'Bitte wählen Sie eine Dokumenttyp-Definition.');
+$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Ausgabeformat', 'Hier legen Sie das Ausgabeformat fest.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Sie können entweder das lokale MooTools-Skript verwenden oder es von einem Content Delivery Network laden.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');
@@ -86,6 +85,7 @@ $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Von googleapis.com laden'
 /**
  * References
  */
+$GLOBALS['TL_LANG']['tl_layout']['html5']        = 'HTML';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'Unterhalb der Kopfzeile';

@@ -226,6 +226,16 @@ class File extends System
 
 
 	/**
+	 * Truncate the file
+	 * @return boolean
+	 */
+	public function truncate()
+	{
+		return $this->write('');
+	}
+
+
+	/**
 	 * Write data to the file
 	 * @param mixed
 	 * @return boolean
@@ -239,11 +249,12 @@ class File extends System
 	/**
 	 * Append data to the file
 	 * @param mixed
+	 * @param string
 	 * @return boolean
 	 */
-	public function append($varData)
+	public function append($varData, $strLine="\n")
 	{
-		return $this->fputs($varData . "\n", 'ab');
+		return $this->fputs($varData . $strLine, 'ab');
 	}
 
 

@@ -56,18 +56,19 @@ define('SWITCH_ORDER', true);
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('VERSION', '2.9');
-define('BUILD', '5');
+define('VERSION', '2.10');
+define('BUILD', 'beta1');
 define('CALENDAR', '1.2.RC4');
 define('EDITAREA', '0.8.2');
 define('FANCYUPLOAD', '3.0');
-define('HIGHLIGHTER', '2.0.320');
-define('MEDIABOX', '1.2.5');
-define('MOO_RAINBOW', '1.2b2');
-define('MOOTOOLS_CORE', '1.2.5');
-define('MOOTOOLS_MORE', '1.2.5.1');
+define('HIGHLIGHTER', '3.0.83');
+define('MEDIABOX', '1.3.4');
+define('MOOTOOLS', '1.3.2');
+define('MOOTOOLS_CORE', '1.3.2');
+define('MOOTOOLS_MORE', '1.3.2.1');
 define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
+define('HTML5SHIM', '1.6.2');
 
 
 /**

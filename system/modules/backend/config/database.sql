@@ -66,6 +66,7 @@ CREATE TABLE `tl_content` (
   `summary` varchar(255) NOT NULL default '',
   `thead` char(1) NOT NULL default '',
   `tfoot` char(1) NOT NULL default '',
+  `tleft` char(1) NOT NULL default '',
   `sortable` char(1) NOT NULL default '',
   `sortIndex` smallint(5) unsigned NOT NULL default '0',
   `sortOrder` varchar(32) NOT NULL default '',
@@ -191,7 +192,6 @@ CREATE TABLE `tl_layout` (
   `sections` blob NULL,
   `sPosition` varchar(32) NOT NULL default '',
   `stylesheet` blob NULL,
-  `aggregate` char(1) NOT NULL default '',
   `skipTinymce` char(1) NOT NULL default '',
   `newsfeeds` blob NULL,
   `calendarfeeds` blob NULL,
@@ -208,6 +208,20 @@ CREATE TABLE `tl_layout` (
   `width` varchar(255) NOT NULL default '',
   `align` varchar(32) NOT NULL default '',
   PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table `tl_lock`
+-- 
+
+CREATE TABLE `tl_lock` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(64) NOT NULL default '',
+  `tstamp` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -383,6 +397,7 @@ CREATE TABLE `tl_page` (
   `target` char(1) NOT NULL default '',
   `fallback` char(1) NOT NULL default '',
   `dns` varchar(255) NOT NULL default '',
+  `useSSL` char(1) NOT NULL default '',
   `adminEmail` varchar(255) NOT NULL default '',
   `dateFormat` varchar(32) NOT NULL default '',
   `timeFormat` varchar(32) NOT NULL default '',
@@ -494,6 +509,11 @@ CREATE TABLE `tl_style` (
   `size` char(1) NOT NULL default '',
   `width` varchar(64) NOT NULL default '',
   `height` varchar(64) NOT NULL default '',
+  `minwidth` varchar(64) NOT NULL default '',
+  `minheight` varchar(64) NOT NULL default '',
+  `maxwidth` varchar(64) NOT NULL default '',
+  `maxheight` varchar(64) NOT NULL default '',
+  `positioning` char(1) NOT NULL default '',
   `trbl` varchar(128) NOT NULL default '',
   `position` varchar(32) NOT NULL default '',
   `floating` varchar(32) NOT NULL default '',
@@ -511,11 +531,17 @@ CREATE TABLE `tl_style` (
   `bgimage` varchar(255) NOT NULL default '',
   `bgposition` varchar(32) NOT NULL default '',
   `bgrepeat` varchar(32) NOT NULL default '',
+  `gradientAngle` varchar(32) NOT NULL default '',
+  `gradientColors` varchar(128) NOT NULL default '',
+  `shadowsize` varchar(128) NOT NULL default '',
+  `shadowcolor` varchar(6) NOT NULL default '',
   `border` char(1) NOT NULL default '',
   `borderwidth` varchar(128) NOT NULL default '',
   `borderstyle` varchar(32) NOT NULL default '',
   `bordercolor` varchar(6) NOT NULL default '',
+  `borderradius` varchar(128) NOT NULL default '',
   `bordercollapse` varchar(32) NOT NULL default '',
+  `borderspacing` varchar(64) NOT NULL default '',
   `font` char(1) NOT NULL default '',
   `fontfamily` varchar(255) NOT NULL default '',
   `fontsize` varchar(64) NOT NULL default '',
@@ -523,6 +549,10 @@ CREATE TABLE `tl_style` (
   `lineheight` varchar(64) NOT NULL default '',
   `fontstyle` varchar(255) NOT NULL default '',
   `whitespace` char(1) NOT NULL default '',
+  `texttransform` varchar(32) NOT NULL default '',
+  `textindent` varchar(64) NOT NULL default '',
+  `letterspacing` varchar(64) NOT NULL default '',
+  `wordspacing` varchar(64) NOT NULL default '',
   `list` char(1) NOT NULL default '',
   `liststyletype` varchar(32) NOT NULL default '',
   `liststyleimage` varchar(255) NOT NULL default '',
@@ -545,6 +575,8 @@ CREATE TABLE `tl_style_sheet` (
   `name` varchar(64) NOT NULL default '',
   `cc` varchar(32) NOT NULL default '',
   `media` varchar(255) NOT NULL default '',
+  `mediaQuery` varchar(255) NOT NULL default '',
+  `vars` text NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

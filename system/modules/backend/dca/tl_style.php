@@ -137,18 +137,19 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('size', 'alignment', 'background', 'border', 'font', 'list'),
-		'default'                     => '{selector_legend},selector,category,comment;{size_legend},size;{align_legend},alignment;{background_legend},background;{border_legend},border;{font_legend},font;{list_legend},list;{custom_legend:hide},own',
+		'__selector__'                => array('size', 'positioning', 'alignment', 'background', 'border', 'font', 'list'),
+		'default'                     => '{selector_legend},selector,category,comment;{size_legend},size;{position_legend},positioning;{align_legend},alignment;{background_legend},background;{border_legend},border;{font_legend},font;{list_legend},list;{custom_legend:hide},own',
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'size'                        => 'width,height,trbl,position,floating,clear,overflow,display',
+		'size'                        => 'width,height,minwidth,minheight,maxwidth,maxheight',
+		'positioning'                 => 'trbl,position,floating,clear,overflow,display',
 		'alignment'                   => 'margin,padding,align,verticalalign,textalign',
-		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat',
-		'border'                      => 'borderwidth,borderstyle,bordercolor,bordercollapse',
-		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace',
+		'background'                  => 'bgcolor,bgimage,bgposition,bgrepeat,shadowsize,shadowcolor,gradientAngle,gradientColors',
+		'border'                      => 'borderwidth,borderstyle,bordercolor,borderradius,bordercollapse,borderspacing',
+		'font'                        => 'fontfamily,fontsize,fontcolor,lineheight,fontstyle,whitespace,texttransform,textindent,letterspacing,wordspacing',
 		'list'                        => 'liststyletype,liststyleimage'
 	),
 
@@ -204,6 +205,40 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'minwidth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minwidth'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'minheight' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minheight'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'maxwidth' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'maxheight' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'positioning' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['positioning'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
 		),
 		'trbl' => array
 		(
@@ -330,6 +365,35 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'options'                 => array('repeat', 'repeat-x', 'repeat-y', 'no-repeat'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
+		'shadowsize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
+			'inputType'               => 'trbl',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
+		),
+		'shadowcolor' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowcolor'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>6, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
+			'wizard' => array
+			(
+				array('tl_style', 'colorPicker')
+			)
+		),
+		'gradientAngle' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientAngle'],
+			'inputType'               => 'text',
+			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50')
+		),
+		'gradientColors' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientColors'],
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>4, 'decodeEntities'=>true, 'tl_class'=>'w50')
+		),
 		'border' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['border'],
@@ -360,12 +424,26 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 				array('tl_style', 'colorPicker')
 			)
 		),
+		'borderradius' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderradius'],
+			'inputType'               => 'trbl',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
 		'bordercollapse' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bordercollapse'],
 			'inputType'               => 'select',
 			'options'                 => array('collapse', 'separate'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'borderspacing' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderspacing'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'font' => array
 		(
@@ -415,6 +493,35 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
 			'inputType'               => 'checkbox'
+		),
+		'texttransform' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['texttransform'],
+			'inputType'               => 'select',
+			'options'                 => array('uppercase', 'lowercase', 'capitalize', 'none'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+		),
+		'textindent' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['textindent'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'letterspacing' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['letterspacing'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'wordspacing' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['wordspacing'],
+			'inputType'               => 'inputUnit',
+			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'list' => array
 		(
@@ -468,8 +575,12 @@ class tl_style extends Backend
 	{
 		parent::__construct();
 
-		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css?'. MOO_RAINBOW . '|screen';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
+		/*
+		FIXME: replace with http://www.nogray.com/color_picker.php as soon
+		       as the new version has been released.
+		$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.css?' . MOO_RAINBOW . '|screen';
+		$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
+		*/
 
 		$this->import('BackendUser', 'User');
 	}
@@ -575,7 +686,7 @@ class tl_style extends Backend
 	public function scheduleUpdate()
 	{
 		// Return if there is no ID 
-		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || $this->Input->post('isAjax'))
+		if (!CURRENT_ID || $this->Input->get('act') == 'copy' || $this->Environment->isAjaxRequest)
 		{
 			return;
 		}

@@ -82,10 +82,10 @@ class String
 	 * characters specified). Stips all tags.
 	 * @param string
 	 * @param integer
-	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	public function substr($strString, $intNumberOfChars, $blnAddEllipsis=false)
+	public function substr($strString, $intNumberOfChars, $strEllipsis=' …')
 	{
 		$strString = preg_replace('/[\t\n\r]+/', ' ', $strString);
 		$strString = strip_tags($strString);
@@ -98,7 +98,7 @@ class String
 		$intCharCount = 0;
 		$arrWords = array();
 		$arrChunks = preg_split('/\s+/', $strString);
-		$strEllipsis = '';
+		$blnAddEllipsis = false;
 
 		foreach ($arrChunks as $strChunk)
 		{
@@ -117,7 +117,11 @@ class String
 				$arrWords[] = utf8_substr($strChunk, 0, $intNumberOfChars);
 			}
 
-			$strEllipsis = ' …';
+			if ($strEllipsis !== false)
+			{
+				$blnAddEllipsis = true;
+			}
+
 			break;
 		}
 
@@ -160,7 +164,7 @@ class String
 			}
 
 			// Get the substring of the current text
-			if (($arrChunks[$i] = $this->substr($arrChunks[$i], ($intNumberOfChars - $intCharCount))) == false)
+			if (($arrChunks[$i] = $this->substr($arrChunks[$i], ($intNumberOfChars - $intCharCount), false)) == false)
 			{
 				break;
 			}
@@ -361,6 +365,67 @@ class String
 		}
 
 		return $arrValues;
+	}
+
+
+	/**
+	 * Convert a string to XHTML
+	 * @param  string
+	 * @return string
+	 */
+	public function toXhtml($strString)
+	{
+		$arrPregReplace = array
+		(
+			'/<(br|hr|img)([^>]*)>/i' => '<$1$2 />', // Close stand-alone tags
+			'/ border="[^"]*"/'       => ''          // Remove deprecated attributes 
+		);
+
+		$arrStrReplace = array
+		(
+			'/ />'             => ' />',        // Fix incorrectly closed tags
+			'<b>'              => '<strong>',   // Replace <b> with <strong>
+			'</b>'             => '</strong>',
+			'<i>'              => '<em>',       // Replace <i> with <em>
+			'</i>'             => '</em>',
+			'<u>'              => '<span style="text-decoration:underline;">',
+			'</u>'             => '</span>',
+			' target="_self"'  => '',
+			' target="_blank"' => ' onclick="window.open(this.href); return false;"'
+		);
+
+		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+
+		return $strString;
+	}
+
+
+	/**
+	 * Convert a string to HTML5
+	 * @param  string
+	 * @return string
+	 */
+	public function toHtml5($strString)
+	{
+		$arrPregReplace = array
+		(
+			'/<(br|hr|img)([^>]*) \/>/i'                  => '<$1$2>', // Close stand-alone tags
+			'/ (cellpadding|cellspacing|border)="[^"]*"/' => ''        // Remove deprecated attributes 
+		);
+
+		$arrStrReplace = array
+		(
+			'<u>'                                              => '<span style="text-decoration:underline;">',
+			'</u>'                                             => '</span>',
+			' target="_self"'                                  => '',
+			' onclick="window.open(this.href); return false;"' => ' target="_blank"'
+		);
+
+		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
+		$strString = str_ireplace(array_keys($arrStrReplace), array_values($arrStrReplace), $strString);
+
+		return $strString;
 	}
 }
 

@@ -71,7 +71,11 @@ class Popup extends Backend
 		$this->User->authenticate();
 		$this->loadLanguageFile('default');
 
-		$this->strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $this->Input->get('src', true)));
+		$strFile = $this->Input->get('src', true);
+		$strFile = base64_decode($strFile);
+		$strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $strFile));
+
+		$this->strFile = $strFile; 
 	}
 
 
@@ -123,6 +127,7 @@ class Popup extends Backend
 
 		// Add file info
 		$this->Template->icon = $objFile->icon;
+		$this->Template->mime = $objFile->mime;
 		$this->Template->ctime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->ctime);
 		$this->Template->mtime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->mtime);
 		$this->Template->atime = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objFile->atime);

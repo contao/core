@@ -33,7 +33,7 @@ body {
 
 /* Container */
 #container {
-	margin:18px;
+	margin:18px 12px;
 }
 
 /* Main */
@@ -51,7 +51,7 @@ h1 {
 	color:#fff;
 }
 h2 {
-	margin:18px 18px 12px 18px;
+	margin:18px 18px 12px;
 	padding:7px 0 7px 36px;
 	background:url("images/help.gif") left center no-repeat;
 	font-size:14px;
@@ -62,15 +62,18 @@ h2 {
 .tl_help_table {
 	margin:0 18px;
 }
+.tl_help_table td {
+	padding:0 12px 3px 0;
+}
 .tl_label {
 	font-weight:bold;
 	padding-right:6px;
 }
 #preview {
-	margin:18px;
+	margin:3px 18px 18px;
 }
 #download {
-	margin:9px 18px 3px 18px;
+	margin:9px 18px 15px;
 }
 #download img {
 	position:relative;
@@ -80,10 +83,7 @@ img.mime_icon {
 	vertical-align:middle;
 }
 
-/* IE fixes */
-* html #container {
-	padding-bottom:18px;
-}
-*:first-child+html #container {
+/* IE 7 fixes */
+.ie7 #container {
 	padding-bottom:18px;
 }

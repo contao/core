@@ -48,7 +48,7 @@ class FrontendTemplate extends Template
 	{
 		$strBuffer = parent::parse();
 
-		// HOOK: add custom parse filter
+		// HOOK: add custom parse filters
 		if (isset($GLOBALS['TL_HOOKS']['parseFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseFrontendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseFrontendTemplate'] as $callback)
@@ -132,8 +132,8 @@ class FrontendTemplate extends Template
 			$intCache = intval($objPage->cache) + time();
 
 			// Create the cache file
-			$objFile = new File('system/tmp/' . md5($strUniqueKey));
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $strBuffer);
+			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $this->minifyHtml($strBuffer));
 			$objFile->close();
 		}
 
@@ -152,7 +152,7 @@ class FrontendTemplate extends Template
 				header('Cache-Control: no-cache');
 				header('Cache-Control: pre-check=0, post-check=0', false);
 				header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-				header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
+				header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
 				header('Pragma: no-cache');
 			}
 		}
@@ -184,6 +184,12 @@ class FrontendTemplate extends Template
 			}
 		}
 
+		// Convert the output to XHTML
+		if ($this->isXhtml)
+		{
+			$this->strBuffer = $this->convertToXhtml($this->strBuffer);
+		}
+
 		parent::output();
 	}
 
@@ -211,14 +217,32 @@ class FrontendTemplate extends Template
 			return '';
 		}
 
+		$tag = 'div';
+
+		if ($strKey == 'main')
+		{
+			global $objPage;
+
+			// Use the section tag in HTML5
+			if ($objPage->outputFormat == 'html5')
+			{
+				$tag = 'section';
+			}
+		}
+
 		$sections = '';
 
 		foreach ($this->sections as $k=>$v)
 		{
-			$sections .= sprintf("\n<div id=\"%s\">\n<div class=\"inside\">\n%s\n</div>\n</div>\n", $k, $v);
+			$sections .= "\n" . '<' . $tag . ' id="' . $k . '">' . "\n" . '<div class="inside">' . "\n" . $v . "\n" . '</div>' . "\n" . '</' . $tag . '>' . "\n";
 		}
 
-		return strlen($sections) ? "\n<div class=\"custom\">\n$sections\n</div>\n" : '';
+		if ($sections == '')
+		{
+			return '';
+		}
+
+		return "\n" . '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
 }
 

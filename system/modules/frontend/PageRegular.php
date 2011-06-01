@@ -51,9 +51,15 @@ class PageRegular extends Frontend
 
 		$this->loadLanguageFile('default');
 
+		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
 		$objPage->template = strlen($objLayout->template) ? $objLayout->template : 'fe_page';
 		$objPage->templateGroup = $objLayout->templates;
+
+		// Store the output format
+		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
+		$objPage->outputFormat = $strFormat;
+		$objPage->outputVariant = $strVariant;
 
 		// Initialize the template
 		$this->createTemplate($objPage, $objLayout);
@@ -114,26 +120,23 @@ class PageRegular extends Frontend
 		}
 
 		// Execute AFTER the modules have been generated and create footer scripts first
-		$this->createFooterScripts($objLayout);
-		$this->createHeaderScripts($objLayout);
+		$this->createFooterScripts($objPage, $objLayout);
+		$this->createHeaderScripts($objPage, $objLayout);
 
 		// Add an invisible character to empty sections (IE fix)
-		if (!$this->Template->header && $objLayout->header)
+		if ($this->Template->header == '' && $objLayout->header)
 		{
 			$this->Template->header = '&nbsp;';
 		}
-
-		if (!$this->Template->left && ($objLayout->cols == '2cll' || $objLayout->cols == '3cl'))
+		if ($this->Template->left == '' && ($objLayout->cols == '2cll' || $objLayout->cols == '3cl'))
 		{
 			$this->Template->left = '&nbsp;';
 		}
-
-		if (!$this->Template->right && ($objLayout->cols == '2clr' || $objLayout->cols == '3cl'))
+		if ($this->Template->right == '' && ($objLayout->cols == '2clr' || $objLayout->cols == '3cl'))
 		{
 			$this->Template->right = '&nbsp;';
 		}
-
-		if (!$this->Template->footer && $objLayout->footer)
+		if ($this->Template->footer == '' && $objLayout->footer)
 		{
 			$this->Template->footer = '&nbsp;';
 		}
@@ -184,23 +187,21 @@ class PageRegular extends Frontend
 	{
 		$this->Template = new FrontendTemplate($objPage->template);
 
-		// DTD
-		switch ($objLayout->doctype)
+		// Generate the DTD
+		if ($objPage->outputFormat == 'xhtml')
 		{
-			case 'xhtml_strict':
+			if ($objPage->outputVariant == 'strict')
+			{
 				$this->Template->doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
-				break;
-
-			case 'xhtml_trans':
+			}
+			else
+			{
 				$this->Template->doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">' . "\n";
-				break;
+			}
 		}
 
-		// Robots
-		if (strlen($objPage->robots))
-		{
-			$this->Template->robots = '<meta name="robots" content="' . $objPage->robots . '" />' . "\n";
-		}
+		// Meta robots tag
+		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
 
 		// Initialize margin
 		$arrMargin = array
@@ -216,7 +217,7 @@ class PageRegular extends Frontend
 		if ($objLayout->static)
 		{
 			$arrSize = deserialize($objLayout->width);
-			$strFramework .= sprintf('#wrapper { width:%s; margin:%s; }', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
+			$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 		}
 
 		// Header
@@ -226,7 +227,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#header { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
@@ -239,8 +240,8 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#left { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf(' margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+				$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
 
@@ -251,15 +252,15 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#right { width:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf(' margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+				$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
 			}
 		}
 
 		// Main column
 		if (strlen($strMain))
 		{
-			$strFramework .= sprintf('#main {%s }', $strMain) . "\n";
+			$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
 		}
 
 		// Footer
@@ -269,7 +270,7 @@ class PageRegular extends Frontend
 
 			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
 			{
-				$strFramework .= sprintf('#footer { height:%s; }', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
 			}
 		}
 
@@ -278,29 +279,38 @@ class PageRegular extends Frontend
 		// Add layout specific CSS
 		if (!empty($strFramework))
 		{
-			$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
-			$this->Template->framework .= '<!--/*--><![CDATA[/*><!--*/' . "\n";
-			$this->Template->framework .= $strFramework;
-			$this->Template->framework .= '/*]]>*/-->' . "\n";
-			$this->Template->framework .= '</style>' . "\n";
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
+				$this->Template->framework .= '/* <![CDATA[ */' . "\n";
+				$this->Template->framework .= $strFramework;
+				$this->Template->framework .= '/* ]]> */' . "\n";
+				$this->Template->framework .= '</style>' . "\n";
+			}
+			else
+			{
+				$this->Template->framework .= '<style media="screen">' . "\n";
+				$this->Template->framework .= $strFramework;
+				$this->Template->framework .= '</style>' . "\n";
+			}
 		}
-
-		// Include basic style sheets
-		$this->Template->framework .= '<link rel="stylesheet" href="system/contao.css" type="text/css" media="screen" />' . "\n";
-		$this->Template->framework .= '<!--[if lte IE 7]><link rel="stylesheet" href="system/iefixes.css" type="text/css" media="screen" /><![endif]-->' . "\n";
 
 		// MooTools scripts
 		if ($objLayout->mooSource == 'moo_googleapis')
 		{
 			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
 
-			$this->Template->mooScripts  = '<script type="text/javascript" src="'. $protocol .'ajax.googleapis.com/ajax/libs/mootools/'. MOOTOOLS_CORE .'/mootools-yui-compressed.js"></script>' . "\n";
-			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
 		}
 		else
 		{
-			$this->Template->mooScripts  = '<script type="text/javascript" src="plugins/mootools/mootools-core.js?'. MOOTOOLS_CORE .'"></script>' . "\n";
-			$this->Template->mooScripts .= '<script type="text/javascript" src="plugins/mootools/mootools-more.js?'. MOOTOOLS_MORE .'"></script>' . "\n";
+			$objCombiner = new Combiner();
+
+			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+
+			$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
 		}
 
 		// Initialize sections
@@ -319,17 +329,20 @@ class PageRegular extends Frontend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->base = $this->Environment->base;
+		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 	}
 
 
 	/**
 	 * Create all header scripts
 	 * @param object
+	 * @param object
 	 */
-	protected function createHeaderScripts(Database_Result $objLayout)
+	protected function createHeaderScripts(Database_Result $objPage, Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
+		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
 
 		// Internal style sheets
 		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
@@ -337,43 +350,48 @@ class PageRegular extends Frontend
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" type="text/css" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
+				$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
 			}
 		}
+
+		$objCombiner = new Combiner();
+		$objCombiner->add('system/contao.css');
 
 		// Default TinyMCE style sheet
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css?' . filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') . '" type="text/css" media="screen" />' . "\n";
+			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$arrAggregator = array();
 			$strCcStyleSheets = '';
 			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
 			{
-				// Try to aggregate regular style sheets
-				if ($objLayout->aggregate && !$objStylesheets->cc && !$objStylesheets->hasFontFace)
-				{
-					$key = md5($objStylesheets->id .'-'. max($objStylesheets->tstamp, $objStylesheets->tstamp2) .'-'. $objStylesheets->media);
+				$media = implode(',', deserialize($objStylesheets->media));
 
-					$arrAggregator[$key] = array
-					(
-						'name' => $objStylesheets->name . '.css',
-						'media' => implode(',', deserialize($objStylesheets->media))
-					);
+				// Overwrite the media type with a custom media query
+				if ($objStylesheets->mediaQuery != '')
+				{
+					$media = $objStylesheets->mediaQuery;
 				}
 
-				// Add each style sheet separately
+				// Aggregate regular style sheets
+				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
+				{
+					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+				}
 				else
 				{
-					$strStyleSheet = sprintf('<link rel="stylesheet" href="%s" type="text/css" media="%s" />',
-											 $objStylesheets->name . '.css?' . max($objStylesheets->tstamp, $objStylesheets->tstamp2),
-											 implode(',', deserialize($objStylesheets->media)));
+					$strStyleSheet = sprintf('<link%s rel="stylesheet" href="%ssystem/scripts/%s.css" media="%s"%s',
+											 (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : ''),
+											 TL_SCRIPT_URL,
+											 $objStylesheets->name,
+											 $media,
+											 $strTagEnding);
 
 					if ($objStylesheets->cc)
 					{
@@ -385,34 +403,9 @@ class PageRegular extends Frontend
 			}
 
 			// Create the aggregated style sheet
-			if (count($arrAggregator) > 0)
+			if ($objCombiner->hasEntries())
 			{
-				$key = substr(md5(implode('-', array_keys($arrAggregator))), 0, 16);
-
-				// Load the existing file
-				if (file_exists(TL_ROOT .'/system/html/'. $key .'.css'))
-				{
-					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
-				}
-
-				// Create a new file
-				else
-				{
-					$objFile = new File('system/html/'. $key .'.css');
-
-					foreach ($arrAggregator as $file)
-					{
-						// Adjust the file paths
-						$content = file_get_contents(TL_ROOT .'/'. $file['name']);
-						$content = str_replace('url("'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', 'url("../../'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $content);
-
-						// Append the style sheet
-						$objFile->append('@media '. (($file['media'] != '') ? $file['media'] : 'all') ."{\n". $content .'}');
-					}
-
-					$objFile->close();
-					$strStyleSheets .= '<link rel="stylesheet" href="system/html/'. $key .'.css" type="text/css" media="all" />' . "\n";
-				}
+				$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
 			}
 
 			// Always add conditional style sheets at the end
@@ -430,7 +423,7 @@ class PageRegular extends Frontend
 			while($objFeeds->next())
 			{
 				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '" />' . "\n";
+				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 			}
 		}
 
@@ -442,7 +435,7 @@ class PageRegular extends Frontend
 			while($objFeeds->next())
 			{
 				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '" />' . "\n";
+				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 			}
 		}
 
@@ -453,7 +446,7 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $javascript . '"></script>' . "\n";
 			}
 		}
 
@@ -480,8 +473,9 @@ class PageRegular extends Frontend
 	/**
 	 * Create all footer scripts
 	 * @param object
+	 * @param object
 	 */
-	protected function createFooterScripts(Database_Result $objLayout)
+	protected function createFooterScripts(Database_Result $objPage, Database_Result $objLayout)
 	{
 		$strMootools = '';
 		$arrMootools = deserialize($objLayout->mootools, true);

@@ -127,7 +127,7 @@ abstract class Frontend extends Controller
 		$time = time();
 
 		// Find the matching root pages (thanks to Andreas Schempp)
-		$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", language='". implode("' DESC, language='", $accept_language) ."' DESC" : "") . ", sorting")
+		$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", " . $this->Database->findInSet('language', $accept_language) : "") . ", sorting")
 									  ->limit(1)
 									  ->execute($host, 'www.'.$host);
 
@@ -324,7 +324,7 @@ abstract class Frontend extends Controller
 		$strText = $this->replaceInsertTags($strText);
 		$strText = strip_tags($strText);
 		$strText = str_replace("\n", ' ', $strText);
-		$strText = $this->String->substr($strText, 180, true);
+		$strText = $this->String->substr($strText, 180);
 
 		return trim($strText);
 	}

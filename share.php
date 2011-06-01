@@ -34,17 +34,19 @@
  */
 define('TL_MODE', 'FE');
 require('system/initialize.php');
-$in = Input::getInstance();
 
 
 /**
  * Facebook
  */
-if ($in->get('p') == 'facebook')
+if ($objInput->get('p') == 'facebook')
 {
-	$query  = '?u=' . rawurlencode($in->get('u'));
-	$query .= '&t=' . rawurlencode($in->get('t'));
-	header('Location: http://www.facebook.com/sharer.php' . $query);
+	$query  = '?app_id=123050457758183';
+	$query .= '&link=' . rawurlencode($objInput->get('u'));
+	$query .= '&message=' . rawurlencode($objInput->get('t'));
+	$query .= '&display=popup';
+	$query .= '&redirect_uri=http%3A%2F%2Fwww.facebook.com';
+	header('Location: http://www.facebook.com/dialog/feed' . $query);
 	exit;
 }
 
@@ -52,25 +54,11 @@ if ($in->get('p') == 'facebook')
 /**
  * Twitter
  */
-elseif ($in->get('p') == 'twitter')
+elseif ($objInput->get('p') == 'twitter')
 {
-	$url = $in->get('u');
-
-	// Shorten the URL
-	if (Environment::getInstance()->host != 'localhost')
-	{
-		$req = new Request();
-		$req->send('http://tinyurl.com/api-create.php?url=' . $url);
-
-		if (!$req->hasError())
-		{
-			$url = $req->response;
-		}
-	}
-
-	$query  = rawurlencode($in->get('t'));
-	$query .= ' ' . rawurlencode($url);
-	header('Location: http://twitter.com/home?status=' . $query);
+	$query  = '?url=' . rawurlencode($objInput->get('u'));
+	$query .= '&text=' . rawurlencode($objInput->get('t'));
+	header('Location: http://twitter.com/share' . $query);
 	exit;
 }
 

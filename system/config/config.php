@@ -58,22 +58,20 @@
  * "index.php" (e.g. "alias.html" instead of "index.php/alias.html"). Note that
  * this feature requires Apache's mod_rewrite!
  * 
- * If you enable GZip, front end and back end pages will be compressed before
- * they are sent to your browser.
- *
  * The relative path to the Contao directory is usually set automatically.
  * However, if you are experiencing any problems, you can change it in the
  * local configuration file.
  */
 $GLOBALS['TL_CONFIG']['websiteTitle']   = 'Contao Open Source CMS';
-$GLOBALS['TL_CONFIG']['characterSet']   = 'UTF-8';
+$GLOBALS['TL_CONFIG']['characterSet']   = 'utf-8';
 $GLOBALS['TL_CONFIG']['adminEmail']     = '';
 $GLOBALS['TL_CONFIG']['enableSearch']   = true;
 $GLOBALS['TL_CONFIG']['indexProtected'] = false;
 $GLOBALS['TL_CONFIG']['displayErrors']  = false;
 $GLOBALS['TL_CONFIG']['rewriteURL']     = false;
 $GLOBALS['TL_CONFIG']['disableAlias']   = false;
-$GLOBALS['TL_CONFIG']['enableGZip']     = false;
+$GLOBALS['TL_CONFIG']['minifyMarkup']   = false;
+$GLOBALS['TL_CONFIG']['gzipScripts']    = false;
 $GLOBALS['TL_CONFIG']['websitePath']    = null;
 
 
@@ -105,10 +103,8 @@ $GLOBALS['TL_CONFIG']['timeFormat']  = 'H:i';
  * If you use the input library to handle input data, all HTML tags except
  * for these 'allowedTags' will be removed.
  *
- * For security reasons, the referer host address will be validated against
- * the current host address whenever there is $_POST data. However, this can
- * cause problems e.g. if your server does not return a referer address. In
- * this case you can disable this feature here.
+ * In Contao 2.10, the referer check has been replaced with a request token
+ * system, which you can disable here (not recommended).
  */
 $GLOBALS['TL_CONFIG']['allowedTags']         = '<a><abbr><acronym><address><area><b><big><blockquote><br><base><bdo><button><caption><cite><code><col><colgroup><dd><del><div><dfn><dl><dt><em><form><fieldset><hr><h1><h2><h3><h4><h5><h6><i><img><input><ins><label><legend><li><link><map><object><ol><optgroup><option><p><pre><param><q><select><small><span><strong><sub><sup><style><table><tbody><td><textarea><tfoot><th><thead><tr><tt><u><ul>';
 $GLOBALS['TL_CONFIG']['disableRefererCheck'] = false;
@@ -259,7 +255,6 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   debugMode  = debug the system and print results to the screen
  *   useRTE     = use the rich text editor (TinyMCE)
  *   useCE      = use the code editor (EditArea)
- *   pNewLine   = generate new lines using <p></p> instead of <br />
  *   oldBeTheme = use the old one-column back end form layout
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;
@@ -267,7 +262,6 @@ $GLOBALS['TL_CONFIG']['thumbnails'] = true;
 $GLOBALS['TL_CONFIG']['debugMode']  = false;
 $GLOBALS['TL_CONFIG']['useRTE']     = true;
 $GLOBALS['TL_CONFIG']['useCE']      = true;
-$GLOBALS['TL_CONFIG']['pNewLine']   = true;
 $GLOBALS['TL_CONFIG']['oldBeTheme'] = false;
 
 
@@ -309,6 +303,7 @@ $GLOBALS['TL_CONFIG']['defaultGroup']         = '';
 $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'g4', 'g5', 'g6');
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
+$GLOBALS['TL_CONFIG']['templateFiles']        = 'tpl,html5,xhtml';
 $GLOBALS['TL_CONFIG']['allowedDownload']      = 'jpg,jpeg,gif,png,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov';
 $GLOBALS['TL_CONFIG']['installPassword']      = '4d19f112e30930cbe278de966e9b2d907568d1c8';
 $GLOBALS['TL_CONFIG']['liveUpdateBase']       = 'http://www.inetrobots.com/liveupdate/';
@@ -326,6 +321,10 @@ $GLOBALS['TL_CONFIG']['exampleWebsite']       = '';
 $GLOBALS['TL_CONFIG']['minPasswordLength']    = 8;
 $GLOBALS['TL_CONFIG']['cacheMode']            = 'both';
 $GLOBALS['TL_CONFIG']['autologin']            = 7776000;
+$GLOBALS['TL_CONFIG']['staticFiles']          = '';
+$GLOBALS['TL_CONFIG']['staticSystem']         = '';
+$GLOBALS['TL_CONFIG']['staticPlugins']        = '';
+$GLOBALS['TL_CONFIG']['disableCron']          = false;
 
 
 /**

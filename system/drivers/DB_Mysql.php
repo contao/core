@@ -108,6 +108,18 @@ class DB_Mysql extends Database
 
 
 	/**
+	 * Auto-generate a FIND_IN_SET() statement
+	 * @param  string
+	 * @param  string
+	 * @return object
+	 */
+	protected function find_in_set($strKey, $strSet)
+	{
+		return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($strSet, $this->resConnection) . "')";
+	}
+
+
+	/**
 	 * Return a standardized array with field information
 	 * 
 	 * Standardized format:
@@ -166,6 +178,10 @@ class DB_Mysql extends Database
 						$arrReturn[$k]['index'] = 'UNIQUE';
 						break;
 
+					case 'MUL':
+						// Ignore
+						break;
+
 					default:
 						$arrReturn[$k]['index'] = 'KEY';
 						break;
@@ -175,6 +191,16 @@ class DB_Mysql extends Database
 			$arrReturn[$k]['null'] = ($v['Null'] == 'YES') ? 'NULL' : 'NOT NULL';
 			$arrReturn[$k]['default'] = $v['Default'];
 			$arrReturn[$k]['extra'] = $v['Extra'];
+		}
+
+		$arrIndexes = $this->execute("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+
+		foreach ($arrIndexes as $arrIndex)
+		{
+			$arrReturn[$arrIndex['Key_name']]['name'] = $arrIndex['Key_name'];
+			$arrReturn[$arrIndex['Key_name']]['type'] = 'index';
+			$arrReturn[$arrIndex['Key_name']]['index_fields'][] = $arrIndex['Column_name'];
+			$arrReturn[$arrIndex['Key_name']]['index'] = (($arrIndex['Non_unique'] == 0) ? 'UNIQUE' : 'KEY');
 		}
 
 		return $arrReturn;
@@ -246,6 +272,20 @@ class DB_Mysql extends Database
 	{
 		@mysql_query("UNLOCK TABLES");
 	}
+
+
+	/**
+	 * Return the table size in bytes
+	 * @param  string
+	 * @return integer
+	 */
+	protected function get_size_of($strTable)
+	{
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
+
+		return ($objStatus->Data_length + $objStatus->Index_length);
+	}
 }
 
 
@@ -289,17 +329,13 @@ class DB_Mysql_Statement extends Database_Statement
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
-		$strType = strtoupper(preg_replace('/\s+.*$/is', '', trim($this->strQuery)));
-
-		switch ($strType)
+		if (strncasecmp($this->strQuery, 'SELECT', 6) === 0)
 		{
-			case 'SELECT':
-				$this->strQuery .= sprintf(' LIMIT %d,%d', $intOffset, $intRows);
-				break;
-
-			default:
-				$this->strQuery .= sprintf(' LIMIT %d', $intRows);
-				break;
+			$this->strQuery .= ' LIMIT ' . $intOffset . ',' . $intRows;
+		}
+		else
+		{
+			$this->strQuery .= ' LIMIT ' . $intRows;
 		}
 	}
 

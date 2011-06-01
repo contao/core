@@ -62,10 +62,6 @@ class ModuleWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'mandatory':
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
@@ -218,7 +214,7 @@ class ModuleWizard extends Widget
 		}
 
 		// Add label and return wizard
-		$return .= '<table cellspacing="0" cellpadding="0" id="ctrl_'.$this->strId.'" class="tl_modulewizard" summary="Module wizard">
+		$return .= '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
   <tr>
     <td>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</td>
@@ -248,7 +244,7 @@ class ModuleWizard extends Widget
 
 			$options = '';
 
-			// Add column
+			// Add columns
 			foreach ($cols as $v)
 			{
 				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
@@ -258,6 +254,7 @@ class ModuleWizard extends Widget
     <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" onfocus="Backend.getScrollOffset();">'.$options.'</select></td>
     <td>';
 
+			// Add buttons
 			foreach ($arrButtons as $button)
 			{
 				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this, \''.$button.'\',  \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';

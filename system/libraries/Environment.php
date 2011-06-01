@@ -146,7 +146,7 @@ class Environment
 	 */
 	protected function phpSelf()
 	{
-		return $this->scriptName();
+		return $this->scriptName;
 	}
 
 
@@ -163,18 +163,18 @@ class Environment
 		$arrUriSegments = array();
 
 		// Fallback to DOCUMENT_ROOT if SCRIPT_FILENAME and SCRIPT_NAME point to different files
-		if (basename($this->scriptName()) != basename($this->scriptFilename()))
+		if (basename($this->scriptName) != basename($this->scriptFilename))
 		{
 			return str_replace('//', '/', str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT'])));
 		}
 
-		if (substr($this->scriptFilename(), 0, 1) == '/')
+		if (substr($this->scriptFilename, 0, 1) == '/')
 		{
 			$strDocumentRoot = '/';
 		}
 
-		$arrSnSegments = explode('/', strrev($this->scriptName()));
-		$arrSfnSegments = explode('/', strrev($this->scriptFilename()));
+		$arrSnSegments = explode('/', strrev($this->scriptName));
+		$arrSfnSegments = explode('/', strrev($this->scriptFilename));
 
 		foreach ($arrSfnSegments as $k=>$v)
 		{
@@ -188,7 +188,7 @@ class Environment
 
 		if (strlen($strDocumentRoot) < 2)
 		{
-			$strDocumentRoot = substr($this->scriptFilename(), 0, -(strlen($strDocumentRoot) + 1));
+			$strDocumentRoot = substr($this->scriptFilename, 0, -(strlen($strDocumentRoot) + 1));
 		}
 
 		return str_replace('//', '/', str_replace('\\', '/', realpath($strDocumentRoot)));
@@ -207,7 +207,7 @@ class Environment
 		}
 		else
 		{
-			return '/' . preg_replace('/^\//i', '', $this->scriptName()) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
+			return '/' . preg_replace('/^\//i', '', $this->scriptName) . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
 		}
 	}
 
@@ -306,10 +306,10 @@ class Environment
 	 */
 	protected function url()
 	{
-		$xhost = $this->httpXForwardedHost();
-		$protocol = $this->ssl() ? 'https://' : 'http://';
+		$xhost = $this->httpXForwardedHost;
+		$protocol = $this->ssl ? 'https://' : 'http://';
 
-		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost();
+		return $protocol . (!empty($xhost) ? $xhost . '/' : '') . $this->httpHost;
 	}
 
 
@@ -362,7 +362,7 @@ class Environment
 	 */
 	protected function script()
 	{
-		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName());
+		return preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->scriptName);
 	}
 
 
@@ -372,9 +372,9 @@ class Environment
 	 */
 	protected function request()
 	{
-		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri());
+		$strRequest = preg_replace('/^' . preg_quote(TL_PATH, '/') . '\/?/i', '', $this->requestUri);
 
-		// From version 2.9, do not fallback to $this->script()
+		// From version 2.9, do not fallback to $this->script
 		// anymore if the request string is empty (see #1844).
 
 		// IE security fix (thanks to Michiel Leideman)
@@ -391,7 +391,7 @@ class Environment
 	 */
 	protected function base()
 	{
-		return $this->url() . TL_PATH . '/';
+		return $this->url . TL_PATH . '/';
 	}
 
 
@@ -401,8 +401,8 @@ class Environment
 	 */
 	protected function host()
 	{
-		$parse_url = parse_url($this->url());
-		return preg_replace('/^www\./i', '', $parse_url['host']);
+		$xhost = $this->httpXForwardedHost;
+		return ($xhost != '') ? $xhost : $this->httpHost;
 	}
 
 
@@ -413,6 +413,189 @@ class Environment
 	protected function isAjaxRequest()
 	{
 		return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest');
+	}
+
+
+	/**
+	 * Return the operating system and the browser name and version
+	 * @return array
+	 */
+	protected function agent()
+	{
+		$return = new stdClass();
+		$ua = $this->httpUserAgent;
+
+		// Operating system (check Windows CE before Windows and Android before Linux!)
+		switch (true)
+		{
+			case $this->has($ua, 'Macintosh'):
+				$os = 'mac';
+				$mobile = false;
+				break;
+
+			case $this->has($ua, 'Windows CE'):
+			case $this->has($ua, 'Windows Phone'):
+				$os = 'win-ce';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Windows'):
+				$os = 'win';
+				$mobile = false;
+				break;
+
+			case $this->has($ua, 'iPad'):
+			case $this->has($ua, 'iPhone'):
+			case $this->has($ua, 'iPod'):
+				$os = 'ios';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Android'):
+				$os = 'android';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Blackberry'):
+				$os = 'blackberry';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Symbian'):
+				$os = 'symbian';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'WebOS'):
+				$os = 'webos';
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Linux'):
+			case $this->has($ua, 'FreeBSD'):
+			case $this->has($ua, 'OpenBSD'):
+			case $this->has($ua, 'NetBSD'):
+				$os = 'unix';
+				$mobile = false;
+				break;
+
+			default;
+				$os = 'unknown';
+				$mobile = false;
+				break;
+		}
+
+		$return->os = $os;
+
+		// Browser and version (check OmniWeb before Safari and Opera Mini/Mobi before Opera!)
+		switch (true)
+		{
+			case $this->has($ua, 'MSIE'):
+				$browser = 'ie';
+				$shorty  = 'ie';
+				$version = preg_replace('/^.*MSIE (\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'Firefox'):
+				$browser = 'firefox';
+				$shorty  = 'fx';
+				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'Chrome'):
+				$browser = 'chrome';
+				$shorty  = 'ch';
+				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'OmniWeb'):
+				$browser = 'omniweb';
+				$shorty  = 'ow';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'Safari'):
+				$browser = 'safari';
+				$shorty  = 'sf';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'Opera Mini'):
+				$browser = 'opera-mini';
+				$shorty  = 'oi';
+				$version = preg_replace('/^.*Opera Mini\/(\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Opera Mobi'):
+				$browser = 'opera-mobile';
+				$shorty  = 'om';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Opera'):
+				$browser = 'opera';
+				$shorty  = 'op';
+				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'IEMobile'):
+				$browser = 'ie-mobile';
+				$shorty  = 'im';
+				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
+				$mobile = true;
+				break;
+
+			case $this->has($ua, 'Camino'):
+				$browser = 'camino';
+				$shorty  = 'ca';
+				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
+				break;
+
+			case $this->has($ua, 'Konqueror'):
+				$browser = 'konqueror';
+				$shorty  = 'ko';
+				$version = preg_replace('/^.*Konqueror\/(\d+).*$/', '$1', $ua);
+				break;
+
+			default:
+				$browser = 'other';
+				$shorty  = '';
+				$version = '';
+		}
+
+		$return->class = $os . ' ' . $browser;
+
+		// Add the version number if available
+		if ($version != '')
+		{
+			$return->class .= ' ' . $shorty . $version;
+		}
+
+		// Mark mobile devices
+		if ($mobile)
+		{
+			$return->class .= ' mobile';
+		}
+
+		$return->browser = $browser;
+		$return->shorty  = $shorty;
+		$return->version = $version;
+		$return->mobile  = $mobile;
+
+		return $return;
+	}
+
+
+	/**
+	 * Test the user agent string for a certain keyword
+	 * @param string
+	 * @param string
+	 */
+	protected function has($haystack, $needle)
+	{
+		return (stripos($haystack, $needle) !== false);
 	}
 }
 

@@ -108,7 +108,7 @@ class RadioTable extends Widget
 		}
 
 		$rows = ceil(count($this->arrOptions) / $this->intCols);
-		$return = '<table cellspacing="0" cellpadding="0" id="ctrl_'.$this->strName.'" class="tl_radio_table'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'" summary="">';
+		$return = '<table id="ctrl_'.$this->strName.'" class="tl_radio_table'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'">';
 
 		for ($i=0; $i<$rows; $i++)
 		{
@@ -125,7 +125,7 @@ class RadioTable extends Widget
 				{
 					$label = $this->generateImage($value.'.gif', $label, 'title="'.specialchars($label).'"');
 					$return .= '
-      <td><input type="radio" name="'.$this->strName.'" id="'.$this->strField.'_'.$i.'_'.$j.'" class="tl_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset();"'.$this->isChecked($this->arrOptions[$j]).$this->getAttributes().' /> <label for="'.$this->strField.'_'.$i.'_'.$j.'">'.$label.'</label></td>';
+      <td><input type="radio" name="'.$this->strName.'" id="'.$this->strField.'_'.$i.'_'.$j.'" class="tl_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset();"'.$this->isChecked($this->arrOptions[$j]).$this->getAttributes().'> <label for="'.$this->strField.'_'.$i.'_'.$j.'">'.$label.'</label></td>';
 				}
 
 				// Else return an empty cell

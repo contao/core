@@ -235,6 +235,13 @@ abstract class System
 	 */
 	protected function redirect($strLocation, $intStatus=303)
 	{
+		// Ajax request
+		if ($this->Environment->isAjaxRequest)
+		{
+			echo json_encode(array('token'=>REQUEST_TOKEN));
+			exit;
+		}
+
 		if (headers_sent())
 		{
 			exit;
@@ -256,7 +263,7 @@ abstract class System
 				break;
 		}
 
-		// Check target address
+		// Check the target address
 		if (preg_match('@^https?://@i', $strLocation))
 		{
 			header('Location: ' . str_replace('&amp;', '&', $strLocation));
@@ -331,13 +338,23 @@ abstract class System
 	 * Load a set of language files
 	 * @param string
 	 * @param boolean
+	 * @param boolean
 	 */
-	protected function loadLanguageFile($strName, $strLanguage=false)
+	protected function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
 	{
 		if (!$strLanguage)
 		{
 			$strLanguage = $GLOBALS['TL_LANGUAGE'];
 		}
+
+		// Return if the data has been loaded already
+		if (!$blnNoCache && isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]))
+		{
+			return;
+		}
+
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
 
 		// Parse all active modules
 		foreach ($this->Config->getActiveModules() as $strModule)
@@ -378,7 +395,7 @@ abstract class System
 			$GLOBALS['TL_LANG']['MSC']['deleteConfirm'] = str_replace("'", "\\'", $GLOBALS['TL_LANG']['MSC']['deleteConfirm']);
 		}
 
-		@include(TL_ROOT . '/system/config/langconfig.php');
+		include(TL_ROOT . '/system/config/langconfig.php');
 	}
 
 
@@ -415,6 +432,16 @@ abstract class System
 			return $strDate;
 		}
 
+		if (!$GLOBALS['TL_LANG']['MSC']['dayShortLength'])
+		{
+			$GLOBALS['TL_LANG']['MSC']['dayShortLength'] = 3;
+		}
+
+		if (!$GLOBALS['TL_LANG']['MSC']['monthShortLength'])
+		{
+			$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+		}
+
 		$strReturn = '';
 		$chunks = preg_split("/([0-9]{1,2}::[1-4])/", $strDate, -1, PREG_SPLIT_DELIM_CAPTURE);
 
@@ -429,7 +456,7 @@ abstract class System
 					break;
 
 				case 2:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, $GLOBALS['TL_LANG']['MSC']['dayShortLength']);
 					break;
 
 				case 3:
@@ -437,7 +464,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, 3);
+					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, $GLOBALS['TL_LANG']['MSC']['monthShortLength']);
 					break;
 
 				default:
@@ -454,7 +481,7 @@ abstract class System
 	 * Return all error, confirmation and info messages as HTML
 	 * @return string
 	 */
-	protected function getMessages()
+	protected function getMessages($blnDcLayout=false)
 	{
 		$strMessages = '';
 		$arrGroups = array('TL_ERROR', 'TL_CONFIRM', 'TL_INFO');
@@ -481,9 +508,9 @@ abstract class System
 
 		$strMessages = trim($strMessages);
 
-		if (strlen($strMessages))
+		if ($strMessages != '')
 		{
-			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>', "\n\n", "\n", $strMessages, "\n");
+			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
 		}
 
 		return $strMessages;
@@ -512,7 +539,7 @@ abstract class System
 	 */
 	protected function setCookie($strName, $varValue, $intExpires, $strPath='', $strDomain=null, $blnSecure=null)
 	{
-		if (!strlen($strPath))
+		if ($strPath == '')
 		{
 			$strPath = '/';
 		}
@@ -690,14 +717,12 @@ abstract class System
 	 */
 	protected function getReadableSize($intSize, $intDecimals=1)
 	{
-		$arrUnits = array('Byte', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-
 		for ($i=0; $intSize>1000; $i++)
 		{
 			$intSize /= 1000;
 		}
 
-		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $arrUnits[$i];
+		return $this->getFormattedNumber($intSize, $intDecimals) . ' ' . $GLOBALS['TL_LANG']['UNITS'][$i];
 	}
 
 

@@ -52,23 +52,26 @@ class ContentTable extends ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$rows = deserialize($this->tableitems);
+		$br = ($objPage->outputFormat == 'xhtml') ? '<br />' : '<br>';
 
 		$this->Template->id = 'table_' . $this->id;
 		$this->Template->summary = specialchars($this->summary);
 		$this->Template->useHeader = $this->thead ? true : false;
 		$this->Template->useFooter = $this->tfoot ? true : false;
+		$this->Template->useLeftTh = $this->tleft ? true : false;
 		$this->Template->sortable = false;
 		$this->Template->thousandsSeparator = $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'];
 		$this->Template->decimalSeparator = $GLOBALS['TL_LANG']['MSC']['decimalSeparator'];
 
-		// Add scripts
+		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
+			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/tablesort/css/tablesort.css|screen';
+			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
 			$this->Template->sortable = true;
-
-			$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css?'. TABLESORT .'|screen';
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
 		}
 
 		$arrHeader = array();
@@ -140,7 +143,7 @@ class ContentTable extends ContentElement
 				$arrBody['row_' . $j . $class_tr . $class_eo][] = array
 				(
 					'class' => 'col_'.$i . $class_td,
-					'content' => (strlen($v) ? preg_replace('/[\n\r]+/i', '<br />', $v) : '&nbsp;')
+					'content' => (($v != '') ? str_replace("\n", $br, $v) : '&nbsp;')
 				);
 			}
 		}
@@ -155,7 +158,7 @@ class ContentTable extends ContentElement
 				$arrFooter[] = array
 				(
 					'class' => 'foot_'.$i . (($i == 0) ? ' col_first' : '') . (($i == (count($rows[(count($rows)-1)]) - 1)) ? ' col_last' : ''),
-					'content' => (strlen($v) ? preg_replace('/[\n\r]+/i', '<br />', $v) : '&nbsp;')
+					'content' => (($v != '') ? str_replace("\n", $br, $v) : '&nbsp;')
 				);
 			}
 		}

@@ -81,7 +81,7 @@ class ChmodTable extends Widget
 	{
 		$arrObjects = array('u'=>'cuser', 'g'=>'cgroup', 'w'=>'cworld');
 
-		$return = '  <table cellpadding="2" cellspacing="2" id="ctrl_defaultChmod" class="tl_chmod" summary="Table holds input fields">
+		$return = '  <table id="ctrl_defaultChmod" class="tl_chmod">
     <tr>
       <th></th>
       <th scope="col">'.$GLOBALS['TL_LANG']['CHMOD']['editpage'].'</th>
@@ -103,7 +103,7 @@ class ChmodTable extends Widget
 			for ($j=1; $j<=6; $j++)
 			{
 				$return .= '
-      <td><input type="checkbox" name="'.$this->strName.'[]" value="'.specialchars($k.$j).'"'.$this->optionChecked($k.$j, $this->varValue).' onfocus="Backend.getScrollOffset();" /></td>';
+      <td><input type="checkbox" name="'.$this->strName.'[]" value="'.specialchars($k.$j).'"'.$this->optionChecked($k.$j, $this->varValue).' onfocus="Backend.getScrollOffset();"></td>';
 			}
 
 			$return .= '

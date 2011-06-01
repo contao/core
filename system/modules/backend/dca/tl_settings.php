@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,enableGZip;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse,pNewLine;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},uploadTypes,allowedDownload,editableFiles,validImageTypes,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase;{static_legend:hide},staticFiles,staticSystem,staticPlugins'
 	),
 
 	// Subpalettes
@@ -74,20 +74,20 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['dateFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('mandatory'=>true, 'helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'explanation'             => 'dateFormat'
 		),
 		'timeFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'datimFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['datimFormat'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'timeZone' => array
 		(
@@ -114,11 +114,23 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'enableGZip' => array
+		'disableCron' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['enableGZip'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['disableCron'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50 m12')
+		),
+		'minifyMarkup' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'gzipScripts' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['gzipScripts'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'resultsPerPage' => array
 		(
@@ -139,12 +151,6 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'doNotCollapse' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['doNotCollapse'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
-		),
-		'pNewLine' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['pNewLine'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -216,15 +222,15 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'uploadTypes' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'],
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'allowedDownload' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedDownload'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'validImageTypes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -234,9 +240,9 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'validImageTypes' => array
+		'templateFiles' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['validImageTypes'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['templateFiles'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -256,11 +262,17 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadPath'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false),
+			'eval'                    => array('mandatory'=>true, 'trailingSlash'=>false, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_settings', 'checkUploadPath')
 			)
+		),
+		'uploadTypes' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['uploadTypes'],
+			'inputType'               => 'text',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'uploadFields' => array
 		(
@@ -399,6 +411,36 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
 			'inputType'               => 'text',
 			'eval'                    => array('tl_class'=>'long')
+		),
+		'staticFiles' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticFiles'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
+		),
+		'staticSystem' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticSystem'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
+		),
+		'staticPlugins' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['staticPlugins'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'long'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkStaticUrl')
+			)
 		)
 	)
 );
@@ -501,6 +543,22 @@ class tl_settings extends Backend
 		if ($varValue == '.' || $varValue == '..' || $varValue == '')
 		{
 			$varValue = 'tl_files';
+		}
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Check a static URL
+	 * @param mixed
+	 * @return array
+	 */
+	public function checkStaticUrl($varValue)
+	{
+		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
+		{
+			$varValue = ($this->Environment->ssl ? 'https://' : 'http://') . $varValue;
 		}
 
 		return $varValue;

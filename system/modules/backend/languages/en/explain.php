@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
 (
-	array('colspan', 'Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br /><br /><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br /><br /><em>Here are some examples of valid date and time formats</em>:'),
+	array('colspan', 'Contao supports all date and time formats that can be parsed with the PHP date() function. However, to ensure that any input can be transformed into a UNIX timestamp, you can only use numeric date and time formats (j, d, m, n, y, Y, g, G, h, H, i, s) in the back end.<br><br><strong>You can enter variant front end formats in the site structure (website root pages).</strong><br><br><em>Here are some examples of valid date and time formats</em>:'),
 	array('Y-m-d', 'YYYY-MM-DD, international ISO-8601, e.g. 2005-01-28'),
 	array('m/d/Y', 'MM/DD/YYYY, english format, e.g. 01/28/2005'),
 	array('d.m.Y', 'DD.MM.YYYY, german format, e.g. 28.01.2005'),

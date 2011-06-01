@@ -41,7 +41,7 @@ p {
 /* Container */
 #container {
 	height:22px;
-	margin:0 0 2px 0;
+	margin:0 0 2px;
 	padding:3px 6px 5px 12px;
 	overflow:hidden;
 	background:#ffc;
@@ -82,24 +82,13 @@ input,select,label {
 	vertical-align:baseline;
 }
 
-/* IE6 fixes */
-* html #container {
-	padding:2px 6px 6px 12px;
-}
-* html #left {
-	padding:7px 0 5px 0;
-}
-* html input,* html select,* html label {
-	vertical-align:middle;
-}
-
 /* IE7 fixes */
-*:first-child+html #container {
+.ie7 #container {
 	padding:2px 6px 6px 12px;
 }
-*:first-child+html #left {
-	padding:7px 0 5px 0;
+.ie7 #left {
+	padding:7px 0 5px;
 }
-*:first-child+html input,*:first-child+html select,*:first-child+html label {
+.ie7 input,.ie7 select,.ie7 label {
 	vertical-align:middle;
 }

@@ -442,7 +442,7 @@ class tl_article extends Backend
 				foreach ($this->User->pagemounts as $root)
 				{
 					$pagemounts[] = $root;
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 				}
 
 				$pagemounts = array_unique($pagemounts);
@@ -497,7 +497,7 @@ class tl_article extends Backend
 
 
 	/**
-	 * Autogenerate an article alias if it has not been set yet
+	 * Auto-generate an article alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string

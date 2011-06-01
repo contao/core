@@ -152,18 +152,26 @@ class Index extends Frontend
 		if (!is_bool($objPage->protected))
 		{
 			$objPage = $this->getPageDetails($objPage->id);
+		}
 
-			// Check whether there are domain name restrictions
-			if (strlen($objPage->domain))
+		// Exit if the root page has not been published (see #2425) and
+		// do not try to load the 404 page! It can cause an infinite loop.
+		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
+		{
+			header('HTTP/1.1 404 Not Found');
+			die('Page not found');
+		}
+
+		// Check whether there are domain name restrictions
+		if (strlen($objPage->domain))
+		{
+			$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
+
+			// Load an error 404 page object
+			if ($strDomain != $this->Environment->host)
 			{
-				$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
-
-				// Load an error 404 page object
-				if ($strDomain != $this->Environment->host)
-				{
-					$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-					$objHandler->generate($objPage->id, $strDomain, $this->Environment->host);
-				}
+				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+				$objHandler->generate($objPage->id, $strDomain, $this->Environment->host);
 			}
 		}
 
@@ -229,7 +237,7 @@ class Index extends Frontend
 			$strCacheKey = $this->Environment->base . $this->Environment->request;
 		}
 
-		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey);
+		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
 
 		// Return if the file does not exist
 		if (!file_exists($strCacheFile))
@@ -251,9 +259,11 @@ class Index extends Frontend
 			return;
 		}
 
-		// Read buffer
+		// Read the buffer
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
+
+		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 		/**
 		 * Copyright notice
@@ -264,12 +274,12 @@ class Index extends Frontend
 		 */
 		$strBuffer = preg_replace
 		(
-			'/(<head[^>]*>)/',
-			"$1\n<!--\n\n"
+			'/([ \t]*<title[^>]*>)\n*/',
+			"<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->",
+			. "//-->$lb$1",
 			$strBuffer, 1
 		);
 
@@ -284,8 +294,16 @@ class Index extends Frontend
 			$session['referer']['current'] = $this->Environment->requestUri;
 		}
 
-		// Store session data
+		// Store the session data
 		$this->Session->setData($session);
+
+		// Load the default language file (see #2644)
+		$this->import('Config');
+		$this->loadLanguageFile('default');
+
+		// Replace insert tags
+		$strBuffer = $this->replaceInsertTags($strBuffer);
+		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
 
 		// Content type
 		if (!$content)
@@ -293,6 +311,7 @@ class Index extends Frontend
 			$content = 'text/html';
 		}
 
+		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Send cache headers
@@ -308,17 +327,9 @@ class Index extends Frontend
 			header('Cache-Control: no-cache');
 			header('Cache-Control: pre-check=0, post-check=0', false);
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-			header('Expires: Wed, 28 Jan 1976 11:52:00 GMT');
+			header('Expires: Fri, 06 Jun 1975 15:10:00 GMT');
 			header('Pragma: no-cache');
 		}
-
-		// Load the default language file (see #2644)
-		$this->import('Config');
-		$this->loadLanguageFile('default');
-
-		// Replace insert tags
-		$strBuffer = $this->replaceInsertTags($strBuffer);
-		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
 
 		echo $strBuffer;
 		exit;

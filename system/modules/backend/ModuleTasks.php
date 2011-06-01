@@ -88,9 +88,9 @@ class ModuleTasks extends BackendModule
 
 		$this->Template->request = ampersand($this->Environment->request, true);
 
-		// Load scripts
-		$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css?'. TABLESORT .'|screen';
-		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/tablesort/js/tablesort.js?' . TABLESORT;
+		// Add the CSS and JavaScript files
+		$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/tablesort/css/tablesort.css|screen';
+		$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
 	}
 
 
@@ -153,7 +153,7 @@ class ModuleTasks extends BackendModule
 
 			$deleteHref = '';
 			$deleteTitle = '';
-			$deleteIcon = 'system/themes/' . $this->getTheme() . '/images/delete_.gif';
+			$deleteIcon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/delete_.gif';
 			$deleteConfirm = '';
 
 			// Check delete permissions
@@ -161,7 +161,7 @@ class ModuleTasks extends BackendModule
 			{
 				$deleteHref = $this->addToUrl('act=delete&amp;id=' . $objTask->id);
 				$deleteTitle = sprintf($GLOBALS['TL_LANG']['tl_task']['delete'][1], $objTask->id);
-				$deleteIcon = 'system/themes/' . $this->getTheme() . '/images/delete.gif';
+				$deleteIcon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/delete.gif';
 				$deleteConfirm = sprintf($GLOBALS['TL_LANG']['tl_task']['delConfirm'], $objTask->id);
 			}
 
@@ -176,7 +176,7 @@ class ModuleTasks extends BackendModule
 				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
 				'editTitle' => sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $objTask->id),
-				'editIcon' => 'system/themes/' . $this->getTheme() . '/images/edit.gif',
+				'editIcon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/edit.gif',
 				'deleteHref' => $deleteHref,
 				'deleteTitle' => $deleteTitle,
 				'deleteIcon' => $deleteIcon,
@@ -704,7 +704,6 @@ class ModuleTasks extends BackendModule
 		$widget->id = 'deadline';
 		$widget->name = 'deadline';
 		$widget->mandatory = true;
-		$widget->maxlength = 10;
 		$widget->rgxp = 'date';
 		$widget->datepicker = sprintf($this->getDatePickerString(), 'ctrl_deadline');
 		$widget->value = $value;

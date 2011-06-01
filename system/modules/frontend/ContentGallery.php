@@ -285,6 +285,7 @@ class ContentGallery extends ContentElement
 		}
 
 		$objTemplate = new FrontendTemplate($strTemplate);
+		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;
 		$objTemplate->headline = $this->headline; // see #1603

@@ -142,6 +142,12 @@ class News extends Frontend
 			$strDescription = $this->replaceInsertTags($strDescription);
 			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
+			// Add the article image as enclosure
+			if ($objArticle->addImage)
+			{
+				$objItem->addEnclosure($objArticle->singleSRC);
+			}
+
 			// Enclosure
 			if ($objArticle->addEnclosure)
 			{
@@ -181,7 +187,7 @@ class News extends Frontend
 
 		if ($intRoot > 0)
 		{
-			$arrRoot = $this->getChildRecords($intRoot, 'tl_page', true);
+			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
 		$time = time();

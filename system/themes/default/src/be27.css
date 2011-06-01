@@ -46,17 +46,17 @@
 	width:657px;
 }
 .m12 {
-	margin:12px 0 12px 0;
+	margin:12px 0 12px;
 }
 .cbx {
 	height:48px;
 }
 
 /* Error messages */
-label.error {
+label.error,legend.error {
 	color:#c55;
 }
-.tl_tbox .tl_error, .tl_box .tl_error {
+.tl_tbox .tl_error,.tl_box .tl_error {
 	background:none;
 	padding:0;
 	font-size:10px;
@@ -69,13 +69,13 @@ fieldset.tl_tbox {
 fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:6px;
 	border:1px solid #ddd;
-	border-width:1px 0 0 0;
+	border-width:1px 0 0;
 	background:url("images/palBg.jpg") left top repeat-x;
 }
 fieldset.nolegend {
 	padding-top:12px;
 }
-fieldset.tl_tbox legend,fieldset.tl_box legend {
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	color:#8ab858;
 	padding-left:18px;
 	padding-right:3px;
@@ -90,7 +90,7 @@ fieldset.collapsed {
 fieldset.collapsed div {
 	display:none !important;
 }
-fieldset.collapsed legend {
+fieldset.collapsed > legend {
 	background:url("images/palCollapsed.gif") left center no-repeat;
 }
 
@@ -105,7 +105,7 @@ fieldset.collapsed legend {
 	-moz-opacity:.9;
 	width:682px;
 	margin-left:-248px;
-	padding:8px 12px 10px 12px;
+	padding:8px 12px 10px;
 	line-height:1.5;
 	text-align:left;
 	color:#fff;

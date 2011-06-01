@@ -32,7 +32,7 @@
 /**
  * Class OptionWizard
  *
- * Provide methods to handle form field option.
+ * Provide methods to handle form field options.
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
@@ -62,10 +62,6 @@ class OptionWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'mandatory':
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
@@ -94,16 +90,24 @@ class OptionWizard extends Widget
 		{
 			foreach ($options as $key=>$option)
 			{
+				// Unset empty rows
+				if ($option['value'] == '')
+				{
+					unset($options[$key]);
+					continue;
+				}
+
 				$options[$key]['label'] = trim($option['label']);
 				$options[$key]['value'] = trim($option['value']);
 
-				if (strlen($options[$key]['label']))
+				if ($options[$key]['label'] != '')
 				{
 					$this->mandatory = false;
 				}
 			}
 		}
 
+		$options = array_values($options);
 		$varInput = $this->validator($options);
 
 		if (!$this->hasErrors())
@@ -165,7 +169,7 @@ class OptionWizard extends Widget
 		}
 
 		// Begin table
-		$return .= '<table cellspacing="0" cellpadding="0" class="tl_optionwizard" id="ctrl_'.$this->strId.'" summary="Field wizard">
+		$return .= '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
   <thead>
     <tr>
       <th>'.$GLOBALS['TL_LANG']['MSC']['ow_value'].'</th>
@@ -184,10 +188,10 @@ class OptionWizard extends Widget
 		{
 			$return .= '
     <tr>
-      <td><input type="text" name="'.$this->strId.'['.$i.'][value]" id="'.$this->strId.'_value_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['value']).'" /></td>
-      <td><input type="text" name="'.$this->strId.'['.$i.'][label]" id="'.$this->strId.'_label_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['label']).'" /></td>
-      <td><input type="checkbox" name="'.$this->strId.'['.$i.'][default]" id="'.$this->strId.'_default_'.$i.'" class="fw_checkbox" tabindex="'.++$tabindex.'" value="1"'.($this->varValue[$i]['default'] ? ' checked="checked"' : '').' /> <label for="'.$this->strId.'_default_'.$i.'">'.$GLOBALS['TL_LANG']['MSC']['ow_default'].'</label></td>
-      <td><input type="checkbox" name="'.$this->strId.'['.$i.'][group]" id="'.$this->strId.'_group_'.$i.'" class="fw_checkbox" tabindex="'.++$tabindex.'" value="1"'.($this->varValue[$i]['group'] ? ' checked="checked"' : '').' /> <label for="'.$this->strId.'_group_'.$i.'">'.$GLOBALS['TL_LANG']['MSC']['ow_group'].'</label></td>';
+      <td><input type="text" name="'.$this->strId.'['.$i.'][value]" id="'.$this->strId.'_value_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['value']).'"></td>
+      <td><input type="text" name="'.$this->strId.'['.$i.'][label]" id="'.$this->strId.'_label_'.$i.'" class="tl_text_2" tabindex="'.++$tabindex.'" value="'.specialchars($this->varValue[$i]['label']).'"></td>
+      <td><input type="checkbox" name="'.$this->strId.'['.$i.'][default]" id="'.$this->strId.'_default_'.$i.'" class="fw_checkbox" tabindex="'.++$tabindex.'" value="1"'.($this->varValue[$i]['default'] ? ' checked="checked"' : '').'> <label for="'.$this->strId.'_default_'.$i.'">'.$GLOBALS['TL_LANG']['MSC']['ow_default'].'</label></td>
+      <td><input type="checkbox" name="'.$this->strId.'['.$i.'][group]" id="'.$this->strId.'_group_'.$i.'" class="fw_checkbox" tabindex="'.++$tabindex.'" value="1"'.($this->varValue[$i]['group'] ? ' checked="checked"' : '').'> <label for="'.$this->strId.'_group_'.$i.'">'.$GLOBALS['TL_LANG']['MSC']['ow_group'].'</label></td>';
 			
 			// Add row buttons
 			$return .= '

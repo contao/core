@@ -40,8 +40,9 @@ $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCache']    = 'Purge data';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']     = 'system/html';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'system/scripts';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'XML files';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS files';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'The data has been purged';

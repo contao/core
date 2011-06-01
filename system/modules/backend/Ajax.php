@@ -92,8 +92,9 @@ class Ajax extends Backend
 			case 'toggleNavigation':
 				$bemod = $this->Session->get('backend_modules');
 				$bemod[$this->Input->post('id')] = intval($this->Input->post('state'));
-
 				$this->Session->set('backend_modules', $bemod);
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Load a navigation menu group
@@ -103,12 +104,16 @@ class Ajax extends Backend
 				$this->Session->set('backend_modules', $bemod);
 
 				$this->import('BackendUser', 'User');
-				$navigation = $this->User->navigation();
 
 				$objTemplate = new BackendTemplate('be_navigation');
+				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[$this->Input->post('id')]['modules'];
 
-				$objTemplate->output();
+				echo json_encode(array
+				(
+					'content' => $objTemplate->parse(),
+					'token'   => REQUEST_TOKEN
+				));
 				exit; break;
 
 			// Toggle nodes of the file or page tree
@@ -127,8 +132,9 @@ class Ajax extends Backend
 
 				$nodes = $this->Session->get($this->strAjaxKey);
 				$nodes[$this->strAjaxId] = intval($this->Input->post('state'));
-
 				$this->Session->set($this->strAjaxKey, $nodes);
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Load nodes of the file or page tree
@@ -147,7 +153,6 @@ class Ajax extends Backend
 
 				$nodes = $this->Session->get($this->strAjaxKey);
 				$nodes[$this->strAjaxId] = intval($this->Input->post('state'));
-
 				$this->Session->set($this->strAjaxKey, $nodes);
 				break;
 
@@ -155,8 +160,9 @@ class Ajax extends Backend
 			case 'toggleFieldset':
 				$fs = $this->Session->get('fieldset_states');
 				$fs[$this->Input->post('table')][$this->Input->post('id')] = intval($this->Input->post('state'));
-
 				$this->Session->set('fieldset_states', $fs);
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Check whether the temporary directory is writeable
@@ -164,22 +170,24 @@ class Ajax extends Backend
 				$GLOBALS['TL_CONFIG']['liveUpdateId'] = $this->Input->post('id');
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['liveUpdateId']", $this->Input->post('id'));
 
+				// Check whether the temp directory is writeable
 				try
 				{
 					$objFile = new File('system/tmp/' . md5(uniqid(mt_rand(), true)));
 					$objFile->close();
 					$objFile->delete();
 				}
-
-				// Temp directory not writeable
 				catch (Exception $e)
 				{
 					if ($e->getCode() == 0)
 					{
 						$this->loadLanguageFile('tl_maintenance');
-
-						header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
-						echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>';
+						echo json_encode(array
+						(
+							'content' => '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>',
+							'token'   => REQUEST_TOKEN
+						));
+						exit; break;
 					}
 				}
 
@@ -187,17 +195,21 @@ class Ajax extends Backend
 				if (!strlen($this->Input->post('id')))
 				{
 					$this->loadLanguageFile('tl_maintenance');
-
-					header('Content-Type: text/html; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
-					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
+					echo json_encode(array
+					(
+						'content' => '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>',
+						'token'   => REQUEST_TOKEN
+					));
+					exit; break;
 				}
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Toggle checkbox groups
 			case 'toggleCheckboxGroup':
 				$state = $this->Session->get('checkbox_groups');
 				$state[$this->Input->post('id')] = intval($this->Input->post('state'));
-
 				$this->Session->set('checkbox_groups', $state);
 				break;
 
@@ -228,12 +240,20 @@ class Ajax extends Backend
 		{
 			// Load nodes of the page structure tree
 			case 'loadStructure':
-				echo $dc->ajaxTreeView($this->strAjaxId, intval($this->Input->post('level')));
+				echo json_encode(array
+				(
+					'content' => $dc->ajaxTreeView($this->strAjaxId, intval($this->Input->post('level'))),
+					'token'   => REQUEST_TOKEN
+				));
 				exit; break;
 
 			// Load nodes of the file manager tree
 			case 'loadFileManager':
-				echo $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level')));
+				echo json_encode(array
+				(
+					'content' => $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level'))),
+					'token'   => REQUEST_TOKEN
+				));
 				exit; break;
 
 			// Load nodes of the page tree
@@ -244,7 +264,11 @@ class Ajax extends Backend
 
 				$objWidget = new $GLOBALS['BE_FFL']['pageTree']($arrData, $dc);
 
-				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
+				echo json_encode(array
+				(
+					'content' => $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level'))),
+					'token'   => REQUEST_TOKEN
+				));
 				exit; break;
 
 			// Load nodes of the file tree
@@ -258,7 +282,11 @@ class Ajax extends Backend
 				// Load a particular node
 				if ($this->Input->post('folder', true) != '')
 				{
-					echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
+					echo json_encode(array
+					(
+						'content' => $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level'))),
+						'token'   => REQUEST_TOKEN
+					));
 					exit; break;
 				}
 
@@ -287,7 +315,11 @@ class Ajax extends Backend
 					}
 				}
 
-				echo $tree;
+				echo json_encode(array
+				(
+					'content' => $tree,
+					'token'   => REQUEST_TOKEN
+				));
 				exit; break;
 
 			// Upload files via FancyUpload
@@ -295,7 +327,7 @@ class Ajax extends Backend
 				$dc->move(true);
 				exit; break;
 
-			// Toggle the visibility of a record
+			// Toggle the visibility of an element
 			case 'toggleVisibility':
 				// HOOK: handle news comments
 				if ($dc->table == 'tl_news_archive' && $this->Input->get('key') == 'comments')
@@ -314,6 +346,23 @@ class Ajax extends Backend
 						$dca->toggleVisibility($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
 					}
 				}
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
+				exit; break;
+
+			// Feature/unfeature an element
+			case 'toggleFeatured':
+				if (class_exists($dc->table, false))
+				{
+					$dca = new $dc->table();
+
+					if (method_exists($dca, 'toggleFeatured'))
+					{
+						$dca->toggleFeatured($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
+					}
+				}
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Toggle subpalettes
@@ -327,21 +376,29 @@ class Ajax extends Backend
 
 						if ($this->Input->post('load'))
 						{
-							echo $dc->editAll($this->strAjaxId, $this->Input->post('id'));
+							echo json_encode(array
+							(
+								'content' => $dc->editAll($this->strAjaxId, $this->Input->post('id')),
+								'token'   => REQUEST_TOKEN
+							));
+							exit; break;
 						}
 					}
-
 					else
 					{
 						$this->Database->prepare("UPDATE " . $dc->table . " SET " . $this->Input->post('field') . "='" . (intval($this->Input->post('state') == 1) ? 1 : '') . "' WHERE id=?")->execute($dc->id);
 
 						if ($this->Input->post('load'))
 						{
-							echo $dc->edit(false, $this->Input->post('id'));
+							echo json_encode(array
+							(
+								'content' => $dc->edit(false, $this->Input->post('id')),
+								'token'   => REQUEST_TOKEN
+							));
+							exit; break;
 						}
 					}
 				}
-
 				elseif ($dc instanceof DC_File)
 				{
 					$val = (intval($this->Input->post('state') == 1) ? true : false);
@@ -350,9 +407,17 @@ class Ajax extends Backend
 					if ($this->Input->post('load'))
 					{
 						$GLOBALS['TL_CONFIG'][$this->Input->post('field')] = $val;
-						echo $dc->edit(false, $this->Input->post('id'));
+
+						echo json_encode(array
+						(
+							'content' => $dc->edit(false, $this->Input->post('id')),
+							'token'   => REQUEST_TOKEN
+						));
+						exit; break;
 					}
 				}
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// HOOK: pass unknown actions to callback functions
@@ -365,6 +430,8 @@ class Ajax extends Backend
 						$this->$callback[0]->$callback[1]($this->strAction, $dc);
 					}
 				}
+
+				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 		}
 	}

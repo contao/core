@@ -115,7 +115,7 @@ class DC_File extends DataContainer implements editable
 
 
 	/**
-	 * Autogenerate a form to edit the local configuration file
+	 * Auto-generate a form to edit the local configuration file
 	 * @param integer
 	 * @param integer
 	 * @return string
@@ -125,7 +125,7 @@ class DC_File extends DataContainer implements editable
 		$return = '';
 		$ajaxId = null;
 
-		if ($this->Input->post('isAjax'))
+		if ($this->Environment->isAjaxRequest)
 		{
 			$ajaxId = func_get_arg(1);
 		}
@@ -206,9 +206,9 @@ class DC_File extends DataContainer implements editable
 				{
 					if ($vv == '[EOF]')
 					{
-						if ($this->Input->post('isAjax') && $blnAjax)
+						if ($blnAjax && $this->Environment->isAjaxRequest)
 						{
-							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'" />';
+							return $strAjax . '<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">';
 						}
 
 						$blnAjax = false;
@@ -220,7 +220,7 @@ class DC_File extends DataContainer implements editable
 					if (preg_match('/^\[.*\]$/i', $vv))
 					{
 						$thisId = 'sub_' . substr($vv, 1, -1);
-						$blnAjax = ($this->Input->post('isAjax') && $ajaxId == $thisId) ? true : false;
+						$blnAjax = ($ajaxId == $thisId && $this->Environment->isAjaxRequest) ? true : false;
 						$return .= "\n  " . '<div id="'.$thisId.'">';
 
 						continue;
@@ -281,6 +281,14 @@ class DC_File extends DataContainer implements editable
 			}
 		}
 
+		$this->import('Files');
+
+		// Check whether the target file is writeable
+		if (!$this->Files->is_writeable('system/config/localconfig.php'))
+		{
+			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php');
+		}
+
 		// Add some buttons and end the form
 		$return .= '
 </div>
@@ -288,8 +296,8 @@ class DC_File extends DataContainer implements editable
 <div class="tl_formbody_submit">
 
 <div class="tl_submit_container">
-<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'" />
-<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'" />
+<input type="submit" name="save" id="save" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['save']).'"> 
+<input type="submit" name="saveNclose" id="saveNclose" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['saveNclose']).'">
 </div>
 
 </div>
@@ -301,12 +309,14 @@ class DC_File extends DataContainer implements editable
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset();">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>'.$this->getMessages().'
-
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
+'.$this->getMessages().'
 <form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'" />
-<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'" />'.($this->noReload ? '
+<input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
+<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
+<input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">'.($this->noReload ? '
 
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').$return;
 
@@ -342,13 +352,10 @@ class DC_File extends DataContainer implements editable
 		{
 			$return .= '
 
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
-window.addEvent(\'domready\', function()
-{
-    Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
+<script>
+window.addEvent(\'domready\', function() {
+  Backend.vScrollTo(($(\'' . $this->strTable . '\').getElement(\'label.error\').getPosition().y - 20));
 });
-//--><!]]>
 </script>';
 		}
 

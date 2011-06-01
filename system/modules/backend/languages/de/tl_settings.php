@@ -41,11 +41,12 @@ $GLOBALS['TL_LANG']['tl_settings']['timeZone']            = array('Zeitzone', 'B
 $GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfad zum Contao-Verzeichnis', 'Der relative Pfad zum Contao-Verzeichnis wird normalerweise automatisch im Install-Tool gesetzt.');
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
-$GLOBALS['TL_LANG']['tl_settings']['enableGZip']          = array('GZip-Kompression aktivieren', 'Die Seiten komprimiert an den Browser schicken.');
+$GLOBALS['TL_LANG']['tl_settings']['disableCron']         = array('Den Command Scheduler deaktivieren', 'Den Periodic Command Scheduler deaktivieren und das cron.php-Skript mittels eines echten Cronjobs (den Sie selbständig einrichten müssen) ausführen.');
+$GLOBALS['TL_LANG']['tl_settings']['minifyMarkup']        = array('Markup komprimieren', 'Das HTML-Markup vor dem Senden an den Browser komprimieren (benötigt die PHP tidy-Erweiterung).');
+$GLOBALS['TL_LANG']['tl_settings']['gzipScripts']         = array('Skripte komprimieren', 'Eine komprimierte Version der kombinierten CSS- bzw. JavaScript-Dateien erstellen. Erfordert die Anpassung der .htaccess-Datei.');
 $GLOBALS['TL_LANG']['tl_settings']['resultsPerPage']      = array('Datensätze pro Seite', 'Hier können Sie die Anzahl der Datensätze pro Seite im Backend festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum Datensätze pro Seite', 'Hier legen Sie fest, wie viele Datensätze maximal angezeigt werden, wenn ein Benutzer die Option "alle Datensätze anzeigen" auswählt.');
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
-$GLOBALS['TL_LANG']['tl_settings']['pNewLine']            = array('Neue Zeilen mittels Absätzen erstellen', 'Neue Zeilen im Rich Text Editor mittels Absätzen anstatt mittels Zeilenumbrüchen erstellen.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('URLs umschreiben', 'Statische URLs ohne das index.php-Fragment erzeugen. Für diese Funktion muss "mod_rewrite" verfügbar sein sowie die Datei ".htaccess.default" in ".htaccess" umbenannt und gegebenenfalls die RewriteBase angepasst werden.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache-Modus', 'Hier können Sie den Cache-Modus festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL-Suffix', 'Das URL-Suffix wird der URL angehängt, um statische Dokumente zu simulieren.');
@@ -55,15 +56,16 @@ $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Wartezeit bei
 $GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Hashwert für Verschlüsselung', 'Verschlüsselte Daten können nur mit demselben Hashwert wieder entschlüsselt werden!');
 $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldungen anzeigen', 'Fehlermeldungen auf dem Bildschirm ausgegeben (nicht empfohlen für produktive Seiten).');
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgegeben.');
-$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Referer-Prüfung deaktivieren', 'Die Referer-Adresse beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Anfrage-Tokens deaktivieren', 'Das Anfrage-Token beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('IP-Prüfung deaktivieren', 'Benutzersitzungen nicht an IP-Adressen binden. Warnung: potentielles Sicherheitsrisiko!');
-$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Erlaubte Upload-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao hochgeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Erlaubte Download-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao heruntergeladen werden dürfen.');
-$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editierbare Dateien', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die mit dem Quelltexteditor bearbeitet werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Unterstützte Bildformate', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die von der Bild-Klasse verarbeitet werden können.');
+$GLOBALS['TL_LANG']['tl_settings']['editableFiles']       = array('Editierbare Dateien', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die mit dem Quelltexteditor bearbeitet werden dürfen.');
+$GLOBALS['TL_LANG']['tl_settings']['templateFiles']       = array('Unterstützte Templateformate', 'Hier können Sie eine kommagetrennte Liste von unterstützten Template-Dateitypen eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['maxImageWidth']       = array('Maximale Frontend-Breite', 'Wenn die Breite eines Bildes oder Films diesen Wert übersteigt, wird sie automatisch angepasst.');
 $GLOBALS['TL_LANG']['tl_settings']['jpgQuality']          = array('JPG-Qualität', 'Hier können Sie die Qualität der JPG-Vorschaubilder in Prozent eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadPath']          = array('Files-Verzeichnis', 'Hier können Sie den relativen Pfad zum Contao Files-Verzeichnis eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['uploadTypes']         = array('Erlaubte Upload-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao hochgeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['uploadFields']        = array('Simultane Datei-Uploads', 'Hier können Sie die maximale Anzahl simultaner Datei-Uploads festlegen.');
 $GLOBALS['TL_LANG']['tl_settings']['maxFileSize']         = array('Maximale Upload-Dateigröße', 'Hier können Sie die maximale Upload-Dateigröße in Bytes eingeben (1 MB = 1000 kB = 1000000 Byte).');
 $GLOBALS['TL_LANG']['tl_settings']['imageWidth']          = array('Maximale Bildbreite', 'Hier können Sie die maximale Breite für Bild-Uploads in Pixeln festlegen.');
@@ -86,6 +88,9 @@ $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Standardbesit
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Standardgruppe', 'Bitte wählen Sie eine Gruppe als Standardbesitzer einer Seite aus.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Standardzugriffsrechte', 'Bitte legen Sie die Standardzugriffsrechte für Seiten und Artikel fest.');
 $GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update-URL', 'Hier können Sie die Live Update-URL eingeben.');
+$GLOBALS['TL_LANG']['tl_settings']['staticFiles']         = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['tl_settings']['staticSystem']        = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['tl_settings']['staticPlugins']       = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
 
 
 /**
@@ -106,10 +111,7 @@ $GLOBALS['TL_LANG']['tl_settings']['modules_legend']  = 'Inaktive Erweiterungen'
 $GLOBALS['TL_LANG']['tl_settings']['timeout_legend']  = 'Speicherzeiten';
 $GLOBALS['TL_LANG']['tl_settings']['chmod_legend']    = 'Standard-Zugriffsrechte';
 $GLOBALS['TL_LANG']['tl_settings']['update_legend']   = 'Live Update';
-$GLOBALS['TL_LANG']['tl_settings']['disabled']        = 'deaktiviert';
-$GLOBALS['TL_LANG']['tl_settings']['+1 week']         = '7 Tage';
-$GLOBALS['TL_LANG']['tl_settings']['+1 month']        = '30 Tage';
-$GLOBALS['TL_LANG']['tl_settings']['+1 year']         = '365 Tage';
+$GLOBALS['TL_LANG']['tl_settings']['static_legend']   = 'Statische Ressourcen';
 
 
 /**

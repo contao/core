@@ -123,7 +123,8 @@ class ModuleNewsletterList extends Module
 
 			$arrNewsletter[] = array
 			(
-				'subject' => strip_insert_tags($objNewsletter->subject),
+				'subject' => $objNewsletter->subject,
+				'title' => strip_insert_tags($objNewsletter->subject),
 				'href' => sprintf($strUrl, $strAlias),
 				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
 				'datim' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),

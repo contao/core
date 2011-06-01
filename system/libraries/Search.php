@@ -164,7 +164,7 @@ class Search extends System
 		}
 
 		// Make sure <br /> tags are always followed by a line break
-		$strBody = str_replace('<br />', "<br />\n", $strBody);
+		$strBody = str_ireplace(array('<br>', '<br />'), "<br>\n", $strBody);
 		$strBody = strip_tags($strBody);
 
 		// Put everything together

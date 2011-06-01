@@ -68,10 +68,6 @@ class TextField extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'maxlength':
 				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
 				break;
@@ -118,7 +114,7 @@ class TextField extends Widget
 
 		if (!$this->multiple)
 		{
-			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();" />%s',
+			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();">%s',
 							$type,
 							$this->strName,
 							$this->strId,
@@ -143,7 +139,7 @@ class TextField extends Widget
 
 		for ($i=0; $i<$this->size; $i++)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset();" />',
+			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset();">',
 									$type,
 									$this->strName,
 									$this->strId.'_'.$i,

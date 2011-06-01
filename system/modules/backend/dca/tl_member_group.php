@@ -204,7 +204,7 @@ class tl_member_group extends Backend
 			$image .= '_';
 		}
 
-		return sprintf('<div class="list_icon" style="background-image:url(\'system/themes/%s/images/%s.gif\');">%s</div>', $this->getTheme(), $image, $label);
+		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\');">%s</div>', TL_SCRIPT_URL, $this->getTheme(), $image, $label);
 	}
 
 

@@ -68,10 +68,6 @@ class InputUnit extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'maxlength':
 				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
 				break;
@@ -131,7 +127,7 @@ class InputUnit extends Widget
 			$this->varValue = array('value'=>$this->varValue);
 		}
 
-		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_unit%s" value="%s"%s onfocus="Backend.getScrollOffset();" /> <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset();">%s</select>%s',
+		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_unit%s" value="%s"%s onfocus="Backend.getScrollOffset();"> <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset();">%s</select>%s',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),

@@ -112,16 +112,26 @@ class ContentCode extends ContentElement
 				$this->Template->shClass .= '; ' . $this->shClass;
 			}
 
-			// Add CSS
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shCore.css?'. HIGHLIGHTER .'|screen';
-			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/styles/shThemeContao.css?' . HIGHLIGHTER;
+			// Add the style sheet
+			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css|screen';
 
-			// Add scripts
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/shCore.js?' . HIGHLIGHTER;
-			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/scripts/' . $arrMapper[$this->highlight] . '.js?' . HIGHLIGHTER;
+			// Add the core scripts
+			$objCombiner = new Combiner();
+			$objCombiner->add('plugins/highlighter/XRegExp.js', HIGHLIGHTER);
+			$objCombiner->add('plugins/highlighter/shCore.js', HIGHLIGHTER);
+			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);
 
-			// Add head (do not add to scripts!)
-			$GLOBALS['TL_HEAD'][] = '<script type="text/javascript" src="plugins/highlighter/scripts/shInit.js"></script>';
+			// Add the brushes separately in case there are multiple code elements
+			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js';
+
+			// Initialization
+			$strInit  = '<script>' . "\n";
+			$strInit .= 'SyntaxHighlighter.defaults.toolbar = false;' . "\n";
+			$strInit .= 'SyntaxHighlighter.all();' . "\n";
+			$strInit .= '</script>';
+
+			// Add the initialization script to the head section and not (!) to TL_JAVASCRIPT
+			$GLOBALS['TL_HEAD'][] = $strInit;
 		}
 	}
 }

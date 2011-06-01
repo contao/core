@@ -48,7 +48,7 @@ class BackendTemplate extends Template
 	{
 		$strBuffer = parent::parse();
 
-		// HOOK: add custom parse filter
+		// HOOK: add custom parse filters
 		if (isset($GLOBALS['TL_HOOKS']['parseBackendTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseBackendTemplate']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['parseBackendTemplate'] as $callback)
@@ -71,7 +71,7 @@ class BackendTemplate extends Template
 		if (count($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
-			$this->brNewLine = $GLOBALS['TL_CONFIG']['pNewLine'] ? false : true;
+			$this->brNewLine = false; // Backwards compatibility
 			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
 			$this->ceFields = $GLOBALS['TL_RTE']['fields'];
 			$this->ceField = $GLOBALS['TL_RTE']['fields'][0]; // Backwards compatibility
@@ -105,10 +105,10 @@ class BackendTemplate extends Template
 		{
 			$strStyleSheets = '';
 
-			foreach ($GLOBALS['TL_CSS'] as $stylesheet)
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '" />' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '">' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
@@ -119,12 +119,25 @@ class BackendTemplate extends Template
 		{
 			$strJavaScripts = '';
 
-			foreach ($GLOBALS['TL_JAVASCRIPT'] as $javascript)
+			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script type="text/javascript" src="' . $javascript . '"></script>' . "\n";
+				$strJavaScripts .= '<script src="' . $javascript . '"></script>' . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;
+		}
+
+		// MooTools scripts (added at the page bottom)
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		{
+			$strMootools = '';
+
+			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
+			{
+				$strMootools .= "\n" . trim($script) . "\n";
+			}
+
+			$this->mootools = $strMootools;
 		}
 
 		$strBuffer = $this->parse();
@@ -138,6 +151,10 @@ class BackendTemplate extends Template
 				$strBuffer = $this->$callback[0]->$callback[1]($strBuffer, $this->strTemplate);
 			}
 		}
+
+		// Add the browser and OS classes (see #3074)
+		$ua = $this->Environment->agent;
+		$strBuffer = str_replace('__ua__', $ua->class, $strBuffer);
 
 		$this->strBuffer = $strBuffer;
 		parent::output();

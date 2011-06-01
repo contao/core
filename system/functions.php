@@ -30,6 +30,13 @@
 
 
 /**
+ * Load the required classes for the file cache
+ */
+include_once TL_ROOT . '/system/libraries/System.php';
+include_once TL_ROOT . '/system/libraries/FileCache.php';
+
+
+/**
  * Class autoloader
  *
  * Include classes automatically when they are instantiated.
@@ -37,14 +44,33 @@
  */
 function __autoload($strClassName)
 {
-	// Library
-	if (file_exists(TL_ROOT . '/system/libraries/' . $strClassName . '.php'))
+	$objCache = FileCache::getInstance('autoload');
+
+	// Try to load the class name from the session cache
+	if (isset($objCache->$strClassName))
 	{
-		include_once(TL_ROOT . '/system/libraries/' . $strClassName . '.php');
+		if (@include_once(TL_ROOT . '/' . $objCache->$strClassName))
+		{
+			return; // The class could be loaded
+		}
+		else
+		{
+			unset($objCache->$strClassName); // The class has been removed
+		}
+	}
+
+	$strLibrary = TL_ROOT . '/system/libraries/' . $strClassName . '.php';
+
+	// Check for libraries first
+	if (file_exists($strLibrary))
+	{
+		include_once($strLibrary);
+		$objCache->$strClassName = 'system/libraries/' . $strClassName . '.php';
+
 		return;
 	}
 
-	// Modules
+	// Then check the modules folder
 	foreach (scan(TL_ROOT . '/system/modules/') as $strFolder)
 	{
 		if (substr($strFolder, 0, 1) == '.')
@@ -52,9 +78,13 @@ function __autoload($strClassName)
 			continue;
 		}
 
-		if (file_exists(TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php'))
+		$strModule = TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php';
+
+		if (file_exists($strModule))
 		{
-			include_once(TL_ROOT . '/system/modules/' . $strFolder . '/' . $strClassName . '.php');
+			include_once($strModule);
+			$objCache->$strClassName = 'system/modules/' . $strFolder . '/' . $strClassName . '.php';
+
 			return;
 		}
 	}
@@ -131,7 +161,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 				$e = new Exception();
 				$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 
-				echo '<br />' . $strMessage;
+				echo '<br>' . $strMessage;
 			}
 		}
 
@@ -172,7 +202,7 @@ function __exception($e)
 
 		$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 
-		echo '<br />' . $strMessage;
+		echo '<br>' . $strMessage;
 	}
 
 	show_help_message();
@@ -189,14 +219,14 @@ function show_help_message()
 	{
 		header('HTTP/1.1 500 Internal Server Error');
 
-		if (file_exists(TL_ROOT . '/templates/be_error.tpl'))
+		if (file_exists(TL_ROOT . '/templates/be_error.html5'))
 		{
-			include(TL_ROOT . '/templates/be_error.tpl');
+			include(TL_ROOT . '/templates/be_error.html5');
 			exit;
 		}
-		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.tpl'))
+		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
 		{
-			include(TL_ROOT . '/system/modules/backend/templates/be_error.tpl');
+			include(TL_ROOT . '/system/modules/backend/templates/be_error.html5');
 			exit;
 		}
 
@@ -219,20 +249,21 @@ function log_message($strMessage, $strLog='error.log')
 /**
  * Scan a directory and return its files and folders as array
  * @param string
+ * @param boolean
  * @return array
  */
-function scan($strFolder)
+function scan($strFolder, $blnUncached=false)
 {
 	global $arrScanCache;
 
-	// Add trailing slash
+	// Add a trailing slash
 	if (substr($strFolder, -1, 1) != '/')
 	{
 		$strFolder .= '/';
 	}
 
 	// Load from cache
-	if (isset($arrScanCache[$strFolder]))
+	if (!$blnUncached && isset($arrScanCache[$strFolder]))
 	{
 		return $arrScanCache[$strFolder];
 	}
@@ -250,7 +281,12 @@ function scan($strFolder)
 		$arrReturn[] = $strFile;
 	}
 
-	$arrScanCache[$strFolder] = $arrReturn;
+	// Cache the result
+	if (!$blnUncached)
+	{
+		$arrScanCache[$strFolder] = $arrReturn;
+	}
+
 	return $arrReturn;
 }
 
@@ -401,16 +437,18 @@ function ampersand($strString, $blnEncode=true)
 
 
 /**
- * Insert HTML line breaks before all newlines preserving preformatted text
+ * Replace line breaks with <br> tags preserving preformatted text
  * @param string
  * @return string
  */
 function nl2br_pre($str)
 {
-	$str = nl2br($str);
+	$str = nl2br($str, false);
 
 	if (stripos($str, '<pre') === false)
+	{
 		return $str;
+	}
 
 	$chunks = array();
 	preg_match_all('/<pre[^>]*>.*<\/pre>/Uis', $str, $chunks);
@@ -425,13 +463,13 @@ function nl2br_pre($str)
 
 
 /**
- * Replace line breaks with <br /> tags (to be used with preg_replace_callback)
+ * Replace line breaks with <br> tags (to be used with preg_replace_callback)
  * @param array
  * @return string
  */
 function nl2br_callback($matches)
 {
-	return str_replace("\n", "<br />", $matches[0]);
+	return str_replace("\n", '<br>', $matches[0]);
 }
 
 

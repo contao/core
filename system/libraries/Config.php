@@ -84,14 +84,56 @@ class Config
 
 
 	/**
+	 * Prevent direct instantiation (Singleton)
+	 */
+	protected function __construct() {}
+
+
+	/**
+	 * Save the local configuration
+	 */
+	public function __destruct()
+	{
+		if (!$this->blnIsModified)
+		{
+			return;
+		}
+
+		$this->save();
+	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 */
+	final private function __clone() {}
+
+
+	/**
+	 * Return the current object instance (Singleton)
+	 * @return object
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(self::$objInstance))
+		{
+			self::$objInstance = new Config();
+			self::$objInstance->initialize();
+		}
+
+		return self::$objInstance;
+	}
+
+
+	/**
 	 * Load all configuration files
 	 */
-	protected function __construct()
+	protected function initialize()
 	{
 		include(TL_ROOT . '/system/config/config.php');
 		include(TL_ROOT . '/system/config/localconfig.php');
 
-		// Get module configuration files
+		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/config/config.php', TL_ROOT, $strModule);
@@ -143,18 +185,13 @@ class Config
 
 		fclose($resFile);
 	}
-	
+
 
 	/**
-	 * Save the local configuration
+	 * Save the local configuration file
 	 */
-	public function __destruct()
+	public function save()
 	{
-		if (!$this->blnIsModified)
-		{
-			return;
-		}
-
 		$strFile  = trim($this->strTop) . "\n\n";
 		$strFile .= "### INSTALL SCRIPT START ###\n";
 
@@ -172,31 +209,15 @@ class Config
 		}
 
 		$strFile .= '?>';
+		$strTemp = md5(uniqid(mt_rand(), true));
 
-		$objFile = new File('system/config/localconfig.php');
-		$objFile->write($strFile);
-		$objFile->close();
-	}
+		// Write to a temp file first
+		$objFile = fopen(TL_ROOT . '/system/tmp/' . $strTemp, 'wb');
+		fputs($objFile, $strFile);
+		fclose($objFile);
 
-
-	/**
-	 * Prevent cloning of the object (Singleton)
-	 */
-	final private function __clone() {}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return object
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(self::$objInstance))
-		{
-			self::$objInstance = new Config();
-		}
-
-		return self::$objInstance;
+		// Then move the file to its final destination
+		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
 	}
 
 
@@ -251,6 +272,7 @@ class Config
 	public function add($strKey, $varValue)
 	{
 		$this->blnIsModified = true;
+		$this->Files = Files::getInstance(); // Required in the destructor
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
@@ -274,6 +296,7 @@ class Config
 	public function delete($strKey)
 	{
 		$this->blnIsModified = true;
+		$this->Files = Files::getInstance(); // Required in the destructor
 		unset($this->arrData[$strKey]);
 	}
 

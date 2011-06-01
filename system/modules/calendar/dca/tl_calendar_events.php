@@ -590,7 +590,7 @@ class tl_calendar_events extends Backend
 
 
 	/**
-	 * Autogenerate a event alias if it has not been set yet
+	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string
@@ -724,7 +724,7 @@ class tl_calendar_events extends Backend
 			foreach ($this->User->pagemounts as $id)
 			{
 				$arrPids[] = $id;
-				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page', true));
+				$arrPids = array_merge($arrPids, $this->getChildRecords($id, 'tl_page'));
 			}
 
 			if (empty($arrPids))

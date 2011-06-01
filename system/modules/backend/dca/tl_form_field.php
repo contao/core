@@ -150,7 +150,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'type' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['type'],
-			'default'                 => 'headline',
+			'default'                 => 'text',
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
@@ -498,6 +498,7 @@ class tl_form_field extends Backend
 	 */
 	public function listFormFields($arrRow)
 	{
+		$arrRow['required'] = $arrRow['mandatory'];
 		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
 
 		$strType = '
@@ -523,7 +524,7 @@ class tl_form_field extends Backend
 		}
 		
 		return $strType . '
-<table cellspacing="0" cellpadding="0" class="tl_form_field_preview" summary="Table holds a form input field">
+<table class="tl_form_field_preview">
 '.$strWidget.'</table>
 </div>' . "\n";
 	}

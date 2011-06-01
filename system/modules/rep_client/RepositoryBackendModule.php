@@ -205,7 +205,7 @@ class RepositoryBackendModule extends BackendModule
 				break;
 		} // switch
 		$v = preg_replace('/<(\w+) .*>/U', '<$1>', $v);
-		return str_replace('<br>', '<br />', $v);
+		return $v;
 	} // filterPost
 	
 	protected function getExtensionList($aOptions)

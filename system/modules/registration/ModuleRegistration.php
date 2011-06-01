@@ -68,8 +68,8 @@ class ModuleRegistration extends Module
 
 		$this->editable = deserialize($this->editable);
 
-		// Return if there are no editable fields or if there is a logged in user already
-		if (!is_array($this->editable) || count($this->editable) < 1 || FE_USER_LOGGED_IN)
+		// Return if there are no editable fields
+		if (!is_array($this->editable) || count($this->editable) < 1)
 		{
 			return '';
 		}
@@ -182,7 +182,6 @@ class ModuleRegistration extends Module
 			$arrData['eval']['required'] = $arrData['eval']['mandatory'];
 
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
-
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 

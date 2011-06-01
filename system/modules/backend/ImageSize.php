@@ -68,10 +68,6 @@ class ImageSize extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'value':
-				$this->varValue = deserialize($varValue);
-				break;
-
 			case 'maxlength':
 				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
 				break;
@@ -126,7 +122,7 @@ class ImageSize extends Widget
 
 		for ($i=0; $i<2; $i++)
 		{
-			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4" value="%s"%s onfocus="Backend.getScrollOffset();" />',
+			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4" value="%s"%s onfocus="Backend.getScrollOffset();">',
 									$this->strName,
 									$this->strId.'_'.$i,
 									specialchars($this->varValue[$i]),

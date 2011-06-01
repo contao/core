@@ -39,7 +39,7 @@ $this->loadLanguageFile('tl_files');
  * Overwrite some settings
  */
 $GLOBALS['TL_CONFIG']['uploadPath'] = 'templates';
-$GLOBALS['TL_CONFIG']['editableFiles'] = 'tpl';
+$GLOBALS['TL_CONFIG']['editableFiles'] = $GLOBALS['TL_CONFIG']['templateFiles'];
 
 
 /**
@@ -52,7 +52,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'validFileTypes'              => 'tpl',
+		'validFileTypes'              => $GLOBALS['TL_CONFIG']['templateFiles'],
 		'closed'                      => true
 	),
 
@@ -181,24 +181,29 @@ class tl_templates extends Backend
 				{
 					$this->import('Files');
 					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
+					$this->Files->delete('system/tmp/templates.csv');
 					$this->redirect($this->getReferer());
 				}
 			}
 		}
 
 		$arrAllTemplates = array();
+		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 
 		// Get all templates
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
+			// Continue if there is no templates folder
 			if ($strModule == 'rep_client' || !is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 			{
 				continue;
 			}
 
+			// Find all templates
 			foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strTemplate)
 			{
-				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.tpl' || substr($strTemplate, -4) != '.tpl')
+				// Ignore non-template files
+				if (strncmp($strTemplate, '.', 1) === 0 || $strTemplate == 'tpl_editor.html5' || !preg_match('/\.(' . implode('|', $arrAllowed) . ')$/', $strTemplate))
 				{
 					continue;
 				}
@@ -209,14 +214,14 @@ class tl_templates extends Backend
 
 		$strAllTemplates = '';
 
-		// Group the templates by extension
+		// Group the templates by module
 		foreach ($arrAllTemplates as $k=>$v)
 		{
 			$strAllTemplates .= '<optgroup label="' . $k . '">';
 
 			foreach ($v as $kk=>$vv)
 			{
-				$strAllTemplates .= sprintf('<option value="%s"%s>%s</option>', $vv, (($this->Input->post('original') == $vv) ? ' selected="selected"' : ''), $kk);
+				$strAllTemplates .= sprintf('<option value="%s" class="%s"%s>%s</option>', $vv, ((strpos($vv, '.html5') === false) ? 'tl_gray' : ''), (($this->Input->post('original') == $vv) ? ' selected="selected"' : ''), $kk);
 			}
 
 			$strAllTemplates .= '</optgroup>';
@@ -236,7 +241,8 @@ class tl_templates extends Backend
 
 <form action="'.ampersand($this->Environment->request).'" id="tl_create_template" class="tl_form" method="post">
 <div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_create_template" />
+<input type="hidden" name="FORM_SUBMIT" value="tl_create_template">
+<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 <div class="tl_tbox block">
 <div>
   <h3><label for="ctrl_original">'.$GLOBALS['TL_LANG']['tl_templates']['original'][0].'</label></h3>
@@ -253,7 +259,7 @@ class tl_templates extends Backend
 
 <div class="tl_formbody_submit">
 <div class="tl_submit_container">
-  <input type="submit" name="create" id="create" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_templates']['newTpl']).'" />
+  <input type="submit" name="create" id="create" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_templates']['newTpl']).'">
 </div>
 </div>
 </form>';

@@ -66,11 +66,14 @@ $GLOBALS['TL_LANG']['ERR']['invalidColor']      = 'Ungültiges Farbformat!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']        = 'Bitte wählen Sie mindestens ein Feld aus!';
 $GLOBALS['TL_LANG']['ERR']['aliasExists']       = 'Der Alias "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']      = 'Der Ordner "%s" kann nicht importiert werden!';
-$GLOBALS['TL_LANG']['ERR']['notWriteable']      = 'Die Datei "%s" ist nicht beschreibbar, daher werden Ihre Änderungen nicht wirksam!';
+$GLOBALS['TL_LANG']['ERR']['notWriteable']      = 'Die Datei "%s" ist nicht beschreibbar und kann daher nicht aktualisiert werden!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']       = 'Dieser Datei- bzw. Verzeichnisname ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'Die Datei bzw. das Verzeichnis "%s" ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'Die Datei "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Ungültiges Weiterleitungsziel (Zirkelbezug)!';
+$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Achtung!</strong> Sie verwenden einen %sveralteten Browser%s und <strong>können nicht alle Funktionen dieser Webseite nutzen</strong>.%s';
+$GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'Bei keinem der Website-Startpunkte ohne explizite DNS-Angabe wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
+$GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'Bei keinem der Website-Startpunkte für <strong>%s</strong> wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 
 
 /**
@@ -139,6 +142,13 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'Dezember';
 
 
 /**
+ * Short names length
+ */
+$GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 2;
+$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+
+
+/**
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 1;
@@ -148,7 +158,7 @@ $GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';
 /**
  * URLs
  */
-$GLOBALS['TL_LANG']['MSC']['url']    = array('Link-Adresse', 'Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Insert-Tag ein.');
+$GLOBALS['TL_LANG']['MSC']['url']    = array('Link-Adresse', 'Geben Sie eine Web-Adresse (http://…), eine E-Mail-Adresse (mailto:…) oder ein Inserttag ein.');
 $GLOBALS['TL_LANG']['MSC']['target'] = array('In neuem Fenster öffnen', 'Den Link in einem neuen Browserfenster öffnen.');
 
 
@@ -157,6 +167,20 @@ $GLOBALS['TL_LANG']['MSC']['target'] = array('In neuem Fenster öffnen', 'Den Li
  */
 $GLOBALS['TL_LANG']['MSC']['decimalSeparator']   = ',';
 $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = '.';
+
+
+/**
+ * Units
+ */
+$GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 
 
 /**
@@ -205,6 +229,7 @@ $GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Die Reihe eine Position nach unten v
 $GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Die Reihe löschen';
 $GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Wert';
 $GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Bezeichnung';
+$GLOBALS['TL_LANG']['MSC']['ow_key']     = 'Schlüssel';
 $GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Gruppe';
 

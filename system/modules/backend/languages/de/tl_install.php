@@ -37,13 +37,13 @@ $GLOBALS['TL_LANG']['tl_install']['locked']      = array('Das Installtool wurde 
 $GLOBALS['TL_LANG']['tl_install']['password']    = array('Passwort', 'Bitte geben Sie das Installtool-Passwort ein. Das Installtool-Passwort ist nicht gleich dem Contao Backend-Passwort.');
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Installtool-Passwort', 'Um das Contao-Installtool zusätzlich abzusichern, können Sie die Datei <strong>contao/install.php</strong> nach der Installation von Contao entweder umbenennen oder komplett von Ihrem Server entfernen.');
 $GLOBALS['TL_LANG']['tl_install']['encryption']  = array('Einen Verschlüsselungsschlüssel erstellen', 'Der Schlüssel wird zur verschlüsselten Datenspeicherung verwendet. Beachten Sie, dass einmal verschlüsselte Daten nur mit diesem Schlüssel wiederhergestellt werden können! Notieren Sie ihn sich daher und ändern Sie ihn nicht, wenn es bereits verschlüsselte Daten gibt. Lassen Sie das Feld leer, um einen zufälligen Schlüssel zu generieren.');
-$GLOBALS['TL_LANG']['tl_install']['database']    = array('Datenbankverbindung prüfen', 'Bitte geben Sie Ihre Datenbank-Zugangsdaten ein.');
+$GLOBALS['TL_LANG']['tl_install']['database']    = array('Datenbankverbindung', 'Bitte geben Sie nachfolgend Ihre Datenbank-Zugangsdaten ein.');
 $GLOBALS['TL_LANG']['tl_install']['collation']   = array('Kollation', 'Weitere Informationen finden Sie im <a href="http://dev.mysql.com/doc/refman/5.1/de/charset-unicode-sets.html" onclick="window.open(this.href); return false;">MySQL-Handbuch</a>.');
-$GLOBALS['TL_LANG']['tl_install']['update']      = array('Tabellen aktualisieren', 'Beachten Sie, dass der Update-Assistent bisher nur mit MySQL- und MySQLi-Treibern getestet wurde. Wenn Sie eine andere Datenbank verwenden (z.B. Oracle), müssen Sie die Datenbank ggf. manuell installieren bzw. aktualisieren. Durchsuchen Sie in diesem Fall die Unterordner des Verzeichnisses <strong>system/modules</strong> nach <strong>config/database.sql</strong>-Dateien.');
-$GLOBALS['TL_LANG']['tl_install']['template']    = array('Ein Template importieren', 'Bitte wählen Sie eine <em>.sql</em>-Datei aus dem <em>templates</em>-Verzeichnis.');
+$GLOBALS['TL_LANG']['tl_install']['update']      = array('Tabellen prüfen', 'Beachten Sie, dass der Update-Assistent bisher nur mit MySQL- und MySQLi-Treibern getestet wurde. Wenn Sie eine andere Datenbank verwenden (z.B. Oracle), müssen Sie die Datenbank ggf. manuell installieren bzw. aktualisieren. Durchsuchen Sie in diesem Fall die Unterordner des Verzeichnisses <strong>system/modules</strong> nach <strong>config/database.sql</strong>-Dateien.');
+$GLOBALS['TL_LANG']['tl_install']['template']    = array('Ein Template importieren', 'Hier können Sie eine <em>.sql</em>-Datei aus dem <em>templates</em>-Verzeichnis mit einer vorkonfigurierten Beispielwebseite importieren. Dabei werden alle bestehenden Daten gelöscht! Wenn Sie stattdessen lediglich ein Theme importieren wollen, nutzen Sie bitte den Theme-Manager im Contao-Backend.');
 $GLOBALS['TL_LANG']['tl_install']['admin']       = array('Ein Administratorkonto anlegen', 'Wenn Sie die Beispielwebseite importiert haben, lautet der Benutzername des Administrators <strong>k.jones</strong> und das Passwort <strong>kevinjones</strong>. Rufen Sie die Beispielwebseite (Frontend) auf, um weitere Informationen zu erhalten.');
-$GLOBALS['TL_LANG']['tl_install']['completed']   = array('Gratulation!', 'Melden Sie sich nun im Contao-Backend an und prüfen Sie die Systemeinstellungen. Rufen Sie danach Ihre Webseite auf, um sicher zu gehen, dass Contao korrekt funktioniert.');
-$GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Dateien via FTP bearbeiten', 'Bitte geben Sie Ihre FTP-Zugangsdaten ein, damit Contao Dateien via FTP bearbeiten kann (Safe Mode Hack).');
+$GLOBALS['TL_LANG']['tl_install']['completed']   = array('Gratulation!', 'Melden Sie sich nun im <a href="contao/index.php">Contao-Backend</a> an und prüfen Sie die Systemeinstellungen. Rufen Sie danach Ihre Webseite auf, um sicher zu gehen, dass Contao korrekt funktioniert.');
+$GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Dateien via FTP bearbeiten', 'Ihr Server unterstützt den Dateizugriff per PHP nicht; vermutlich läuft PHP als Apache-Modul unter einem anderen Benutzer. Bitte geben Sie daher Ihre FTP-Zugangsdaten ein, damit Contao Dateien via FTP bearbeiten kann (Safe Mode Hack).');
 
 
 /**
@@ -51,16 +51,16 @@ $GLOBALS['TL_LANG']['tl_install']['ftp']         = array('Dateien via FTP bearbe
  */
 $GLOBALS['TL_LANG']['tl_install']['accept']         = 'Lizenz akzeptieren';
 $GLOBALS['TL_LANG']['tl_install']['beLogin']        = 'Contao Backend-Login';
-$GLOBALS['TL_LANG']['tl_install']['passError']      = 'Bitte ändern Sie das Standardpasswort, um unberechtigte Zugriffe zu vermeiden!';
-$GLOBALS['TL_LANG']['tl_install']['passConfirm']    = 'Das Standardpasswort wurde geändert.';
+$GLOBALS['TL_LANG']['tl_install']['passError']      = 'Bitte vergeben Sie ein Passwort, um unberechtigte Zugriffe zu vermeiden!';
+$GLOBALS['TL_LANG']['tl_install']['passConfirm']    = 'Ein individuelles Passwort wurde hinterlegt.';
 $GLOBALS['TL_LANG']['tl_install']['passSave']       = 'Passwort speichern';
 $GLOBALS['TL_LANG']['tl_install']['keyError']       = 'Bitte erstellen Sie einen Schlüssel!';
 $GLOBALS['TL_LANG']['tl_install']['keyLength']      = 'Der Schlüssel muss mindestens 12 Zeichen lang sein!';
 $GLOBALS['TL_LANG']['tl_install']['keyConfirm']     = 'Ein Schlüssel wurde erstellt.';
 $GLOBALS['TL_LANG']['tl_install']['keyCreate']      = 'Verschlüsselungsschlüssel';
 $GLOBALS['TL_LANG']['tl_install']['keySave']        = 'Schlüssel erstellen bzw. speichern';
-$GLOBALS['TL_LANG']['tl_install']['dbConfirm']      = 'Datenbankverbindung ok.';
-$GLOBALS['TL_LANG']['tl_install']['dbError']        = 'Keine Verbindung zur Datenbank möglich!';
+$GLOBALS['TL_LANG']['tl_install']['dbConfirm']      = 'Datenbankverbindung hergestellt.';
+$GLOBALS['TL_LANG']['tl_install']['dbError']        = 'Keine Verbindung zur Datenbank vorhanden!';
 $GLOBALS['TL_LANG']['tl_install']['dbDriver']       = 'Treiber';
 $GLOBALS['TL_LANG']['tl_install']['dbHost']         = 'Host';
 $GLOBALS['TL_LANG']['tl_install']['dbUsername']     = 'Benutzername';
@@ -74,12 +74,8 @@ $GLOBALS['TL_LANG']['tl_install']['collationInfo']  = 'Das Ändern der Kollation
 $GLOBALS['TL_LANG']['tl_install']['updateError']    = 'Die Datenbank ist nicht aktuell!';
 $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'Die Datenbank ist aktuell.';
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Datenbank aktualisieren';
-$GLOBALS['TL_LANG']['tl_install']['update28']       = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als 2.8 durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version 2.8-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
-$GLOBALS['TL_LANG']['tl_install']['update28run']    = 'Version 2.8-Update ausführen';
-$GLOBALS['TL_LANG']['tl_install']['update29']       = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als 2.9 durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version 2.9-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
-$GLOBALS['TL_LANG']['tl_install']['update29run']    = 'Version 2.9-Update ausführen';
-$GLOBALS['TL_LANG']['tl_install']['update292']      = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als 2.9.2 durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version 2.9.2-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
-$GLOBALS['TL_LANG']['tl_install']['update292run']   = 'Version 2.9.2-Update ausführen';
+$GLOBALS['TL_LANG']['tl_install']['updateX']        = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als %s durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version %s-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
+$GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Version %s-Update ausführen';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Bitte wählen Sie eine Template-Datei!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm']  = 'Template importiert am %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn']     = 'Alle bestehenden Daten werden gelöscht!';

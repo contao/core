@@ -151,31 +151,42 @@ else
 /**
  * Include the custom initialization file
  */
-@include(TL_ROOT . '/system/config/initconfig.php');
+include(TL_ROOT . '/system/config/initconfig.php');
 
 
 /**
- * Check referer address if there are $_POST variables
+ * Check the request token upon POST requests
  */
 if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
 {
-	$self = parse_url($objEnvironment->url);
-	$referer = parse_url($objEnvironment->httpReferer);
-
-	if (!strlen($referer['host']) || $referer['host'] != $self['host'])
+	if (!$objInput->post('REQUEST_TOKEN') || !isset($_SESSION['REQUEST_TOKEN'][TL_MODE]) || $objInput->post('REQUEST_TOKEN') != $_SESSION['REQUEST_TOKEN'][TL_MODE])
 	{
 		header('HTTP/1.1 400 Bad Request');
 
-		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl'))
+		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
 		{
-			include(TL_ROOT . '/system/modules/backend/templates/be_referer.tpl');
-			exit;
+			include(TL_ROOT . '/system/modules/backend/templates/be_referer.html5');
+		}
+		else
+		{
+			echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href;">go back</a> and try again.';
 		}
 
-		echo sprintf('The current host address (%s) does not match the current referer host address (%s).', $self['host'], $referer['host']);
 		exit;
 	}
 }
+
+// Generate a new request token
+define('REQUEST_TOKEN', md5(uniqid(mt_rand(), true)));
+$_SESSION['REQUEST_TOKEN'][TL_MODE] = REQUEST_TOKEN;
+
+
+/**
+ * Static ressources URLs
+ */
+define('TL_FILES_URL', ($GLOBALS['TL_CONFIG']['staticFiles'] != '') ? $GLOBALS['TL_CONFIG']['staticFiles'] . TL_PATH . '/' : '');
+define('TL_SCRIPT_URL', ($GLOBALS['TL_CONFIG']['staticSystem'] != '') ? $GLOBALS['TL_CONFIG']['staticSystem'] . TL_PATH . '/' : '');
+define('TL_PLUGINS_URL', ($GLOBALS['TL_CONFIG']['staticPlugins'] != '') ? $GLOBALS['TL_CONFIG']['staticPlugins'] . TL_PATH . '/' : '');
 
 
 /**

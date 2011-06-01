@@ -66,7 +66,7 @@ class ModuleLogin extends Module
 			return $objTemplate->parse();
 		}
 
-		// Set last page visited
+		// Set the last page visited
 		if ($this->redirectBack)
 		{
 			$_SESSION['LAST_PAGE_VISITED'] = $this->getReferer();
@@ -85,14 +85,14 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 			$strRedirect = $this->Environment->request;
 
-			// Redirect to last page visited
+			// Redirect to the last page visited
 			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
 			{
 				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 			}
 			else
 			{
-				// Redirect to jumpTo page
+				// Redirect to the jumpTo page
 				if (strlen($this->jumpTo))
 				{
 					$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
@@ -105,7 +105,7 @@ class ModuleLogin extends Module
 					}
 				}
 
-				// Overwrite jumpTo page with an individual group setting
+				// Overwrite the jumpTo page with an individual group setting
 				$objGroup = $this->Database->prepare("SELECT groups FROM tl_member WHERE username=?")
 										   ->limit(1)
 										   ->execute($this->Input->post('username'));
@@ -118,32 +118,14 @@ class ModuleLogin extends Module
 					{
 						$time = time();
 
-						// Get jumpTo page IDs
-						$arrGroupPage = array();
-						$objGroupPage = $this->Database->execute("SELECT id, jumpTo FROM tl_member_group WHERE id IN(" . implode(',', array_map('intval', $arrGroups)) . ") AND redirect=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
+						// Get the first active jumpTo page
+						$objGroupPage = $this->Database->prepare("SELECT p.id, p.alias FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', array_map('intval', $arrGroups)) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $this->Database->findInSet('g.id', $arrGroups))
+													   ->limit(1)
+													   ->execute();
 
-						// Simulate FIND_IN_SET()
-						while ($objGroupPage->next())
+						if ($objGroupPage->numRows)
 						{
-							$arrGroupPage[$objGroupPage->id] = $objGroupPage->jumpTo;
-						}
-
-						foreach ($arrGroups as $gid)
-						{
-							if (isset($arrGroupPage[$gid]))
-							{
-								// Get jumpTo page
-								$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-															  ->limit(1)
-															  ->execute($arrGroupPage[$gid]);
-
-								if ($objNextPage->numRows)
-								{
-									$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
-								}
-
-								break;
-							}
+							$strRedirect = $this->generateFrontendUrl($objGroupPage->row());
 						}
 					}
 				}
@@ -159,16 +141,6 @@ class ModuleLogin extends Module
 			// Login and redirect
 			if ($this->User->login())
 			{
-				// HOOK: post login callback
-				if (isset($GLOBALS['TL_HOOKS']['postLogin']) && is_array($GLOBALS['TL_HOOKS']['postLogin']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['postLogin'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User);
-					}
-				}
-
 				$this->redirect($strRedirect);
 			}
 
@@ -198,16 +170,6 @@ class ModuleLogin extends Module
 			// Logout and redirect
 			if ($this->User->logout())
 			{
-				// HOOK: post logout callback
-				if (isset($GLOBALS['TL_HOOKS']['postLogout']) && is_array($GLOBALS['TL_HOOKS']['postLogout']))
-				{
-					foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
-					{
-						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User);
-					}
-				}
-
 				$this->redirect($strRedirect);
 			}
 

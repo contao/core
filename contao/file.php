@@ -78,9 +78,8 @@ class PagePicker extends Backend
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['fpHeadline'];
-		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->options = $this->createFileList();
+		$this->Template->options = $this->createFileList(true);
 
 		$this->Template->output();
 	}

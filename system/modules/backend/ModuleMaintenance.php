@@ -76,14 +76,22 @@ class ModuleMaintenance extends BackendModule
 	{
 		$arrCacheTables = array();
 
-		$arrTmp = scan(TL_ROOT . '/system/tmp');
-		$arrHtml = scan(TL_ROOT . '/system/html');
-
 		// Confirmation message
 		if (strlen($_SESSION['CLEAR_CACHE_CONFIRM']))
 		{
-			$this->Template->cacheMessage = sprintf('<p class="tl_confirm">%s</p>', $_SESSION['CLEAR_CACHE_CONFIRM']);
+			$this->Template->cacheMessage = sprintf('<p class="tl_confirm">%s</p>' . "\n", $_SESSION['CLEAR_CACHE_CONFIRM']);
 			$_SESSION['CLEAR_CACHE_CONFIRM'] = '';
+		}
+
+		// Add potential error messages
+		if (is_array($_SESSION['TL_ERROR']) && count($_SESSION['TL_ERROR']))
+		{
+			foreach ($_SESSION['TL_ERROR'] as $message)
+			{
+				$this->Template->cacheMessage .= sprintf('<p class="tl_error">%s</p>' . "\n", $message);
+			}
+
+			$_SESSION['TL_ERROR'] = array();
 		}
 
 		// Truncate cache tables
@@ -101,16 +109,22 @@ class ModuleMaintenance extends BackendModule
 
 			foreach ($tables as $table)
 			{
-				// Temporary folder
-				if ($table == 'temp_folder')
-				{
-					$this->Automator->purgeTempFolder();
-				}
-
 				// Html folder
-				elseif ($table == 'html_folder')
+				if ($table == 'html_folder')
 				{
 					$this->Automator->purgeHtmlFolder();
+				}
+
+				// Scripts folder
+				elseif ($table == 'scripts_folder')
+				{
+					$this->Automator->purgeScriptsFolder();
+				}
+
+				// Temporary folder
+				elseif ($table == 'temp_folder')
+				{
+					$this->Automator->purgeTempFolder();
 				}
 
 				// CSS files
@@ -169,18 +183,21 @@ class ModuleMaintenance extends BackendModule
 				'id' => 'cache_' . $k,
 				'value' => specialchars($v),
 				'name' => $v,
-				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count)
+				'entries' => sprintf($GLOBALS['TL_LANG']['MSC']['entries'], $objCount->count),
+				'size' => $this->getReadableSize($this->Database->getSizeOf($v))
 			);
 		}
 
-		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$this->Template->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
+		$this->Template->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
+		$this->Template->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$this->Template->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
 		$this->Template->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$this->Template->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$this->Template->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
-		$this->Template->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count($arrTmp) - 1));
-		$this->Template->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count($arrHtml) - 1));
+		$this->Template->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/html')) - 1));
+		$this->Template->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/scripts')) - 1));
+		$this->Template->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
 		$this->Template->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$this->Template->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
 		$this->Template->cacheTables = $arrCacheTables;
@@ -196,12 +213,11 @@ class ModuleMaintenance extends BackendModule
 		$this->Template->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 
 		// Current version up to date
-		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" title="%s"%s><img src="%s" alt="%s" style="vertical-align:text-bottom; padding-left:3px;" /></a>',
+		$this->Template->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;"></a>',
 												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
 												 $this->Environment->base,
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
-												 LINK_NEW_WINDOW,
-												 'system/themes/'.$this->getTheme().'/images/changelog.gif',
+												 TL_FILES_URL . 'system/themes/'.$this->getTheme().'/images/changelog.gif',
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
 
 		// No live update for beta versions
@@ -472,7 +488,7 @@ class ModuleMaintenance extends BackendModule
 			// Display pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
-				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible" />' . $this->String->substr($arrPages[$i], 100, true) . "<br />\n";
+				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . $this->String->substr($arrPages[$i], 100) . "<br>\n";
 			}
 
 			$this->Template = new BackendTemplate('be_index');

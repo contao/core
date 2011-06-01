@@ -94,6 +94,11 @@ class Input
 		{
 			$varValue = $_GET[$strKey];
 
+			if (is_null($varValue))
+			{
+				return $varValue;
+			}
+
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue, true);
@@ -124,6 +129,11 @@ class Input
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $this->findPost($strKey);
+
+			if (is_null($varValue))
+			{
+				return $varValue;
+			}
 
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
@@ -156,6 +166,11 @@ class Input
 		{
 			$varValue = $this->findPost($strKey);
 
+			if (is_null($varValue))
+			{
+				return $varValue;
+			}
+
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
 			$varValue = $this->xssClean($varValue);
@@ -186,6 +201,11 @@ class Input
 		{
 			$varValue = $this->findPost($strKey);
 
+			if (is_null($varValue))
+			{
+				return $varValue;
+			}
+
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->xssClean($varValue);
 
@@ -209,6 +229,11 @@ class Input
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $_COOKIE[$strKey];
+
+			if (is_null($varValue))
+			{
+				return $varValue;
+			}
 
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
@@ -307,6 +332,11 @@ class Input
 	 */
 	protected function stripSlashes($varValue)
 	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
 		// Recursively clean arrays
 		if (is_array($varValue))
 		{
@@ -330,6 +360,11 @@ class Input
 	 */
 	protected function stripTags($varValue, $strAllowedTags='')
 	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
 		// Recursively clean arrays
 		if (is_array($varValue))
 		{
@@ -357,6 +392,11 @@ class Input
 	 */
 	protected function xssClean($varValue, $blnStrictMode=false)
 	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
 		// Recursively clean arrays
 		if (is_array($varValue))
 		{
@@ -460,6 +500,11 @@ class Input
 	 */
 	protected function decodeEntities($varValue)
 	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
 		// Recursively clean arrays
 		if (is_array($varValue))
 		{
@@ -490,6 +535,11 @@ class Input
 	 */
 	protected function encodeSpecialChars($varValue)
 	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
 		// Recursively clean arrays
 		if (is_array($varValue))
 		{
@@ -525,7 +575,7 @@ class Input
 			return ($strKey == 'FORM_SUBMIT') ? preg_replace('/^auto_/i', '', $_SESSION['FORM_DATA'][$strKey]) : $_SESSION['FORM_DATA'][$strKey];
 		}
 
-		return '';
+		return null;
 	}
 }
 

@@ -50,7 +50,7 @@ class RadioButton extends Widget
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'be_widget';
+	protected $strTemplate = 'be_widget_rdo';
 
 	/**
 	 * Options
@@ -93,7 +93,7 @@ class RadioButton extends Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset();" /> <label for="opt_%s">%s</label>',
+			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset();"> <label for="opt_%s">%s</label>',
 									 $this->strName,
 									 $this->strId.'_'.$i,
 									 specialchars($arrOption['value']),
@@ -109,10 +109,11 @@ class RadioButton extends Widget
 			$arrOptions[]= '<p class="tl_noopt">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
 		}
 
-        return sprintf('<div id="ctrl_%s" class="tl_radio_container%s">%s</div>%s',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-						implode('<br />', $arrOptions),
+		return sprintf('<fieldset class="tl_radio_container%s"><legend>%s%s</legend>%s</fieldset>%s',
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						$this->strLabel,
+						$this->xlabel,
+						implode('<br>', $arrOptions),
 						$this->wizard);
 	}
 }

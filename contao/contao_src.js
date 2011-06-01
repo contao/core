@@ -30,7 +30,7 @@
 /**
  * Class Request.Mixed
  * 
- * Extends the basic Request Class with additional methods for interacting
+ * Extend the basic Request class with additional methods for interacting
  * with HTML responses that include script tags which are not evaluated.
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
@@ -38,22 +38,117 @@
  */
 Request.Mixed = new Class(
 {
-	Extends: Request,
+	Extends: Request.JSON,
 
-	options: {
+	options:
+	{
+		url: window.location.href,
 		evalScripts: false,
 		evalResponse: false
 	},
 
 	success: function(text, xml)
 	{
-		text = text.stripScripts(function(script)
-		{
-			js = script;
-		});
+		var json;
 
-		js = js.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
-		this.onSuccess(text, xml, js);
+		try
+		{
+			json = this.response.json = JSON.decode(text, this.options.secure);
+		}
+		catch (error)
+		{
+			alert(error);
+			return;
+		}
+
+		if (json == null)
+		{
+			this.onFailure();
+		}
+		else
+		{
+			// Automatically set the new request token
+			if (json.token)
+			{
+				REQUEST_TOKEN = json.token;
+
+				// Update all forms
+				$$('input[type="hidden"]').each(function(el)
+				{
+					if (el.name == 'REQUEST_TOKEN')
+					{
+						el.value = REQUEST_TOKEN;
+					}
+				});
+			}
+
+			text = text.stripScripts(function(script)
+			{
+				js = script;
+			});
+
+			js = js.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
+			this.onSuccess(json, js);
+		}
+	}
+
+});
+
+
+/**
+ * Class Request.Contao
+ * 
+ * Extend the basic Request.JSON class to automatically handle request tokens.
+ * @copyright  Leo Feyer 2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Backend
+ */
+Request.Contao = new Class(
+{
+	Extends: Request.JSON,
+
+	options:
+	{
+		url: window.location.href
+	},
+
+	success: function(text, xml)
+	{
+		var json;
+
+		try
+		{
+			json = this.response.json = JSON.decode(text, this.options.secure);
+		}
+		catch (error)
+		{
+			alert(error);
+			return;
+		}
+
+		if (json == null)
+		{
+			this.onFailure();
+		}
+		else
+		{
+			// Automatically set the new request token
+			if (json.token)
+			{
+				REQUEST_TOKEN = json.token;
+
+				// Update all forms
+				$$('input[type="hidden"]').each(function(el)
+				{
+					if (el.name == 'REQUEST_TOKEN')
+					{
+						el.value = REQUEST_TOKEN;
+					}
+				});
+			}
+
+			this.onSuccess(json, text);
+		}
 	}
 
 });
@@ -89,47 +184,47 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleNavigation&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=loadNavigation&id=' + id + '&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
 				item = new Element('li');
 
 				item.addClass('tl_parent');
 				item.setProperty('id', id);
-				item.set('html', txt);
+				item.set('html', json.content);
 				item.setStyle('display', 'inline');
 				item.injectAfter($(el).getParent('li'));
 
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'loadNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 
 		return false;
 	},
 
 
 	/**
-	 * Toggle the page structure tree
+	 * Toggle the site structure tree
 	 * @param object
 	 * @param string
 	 * @param integer
@@ -149,31 +244,28 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleStructure&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=loadStructure&id=' + id + '&level=' + level + '&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', txt);
+				ul.set('html', json.content);
 
 				item = new Element('li');
 
@@ -207,10 +299,13 @@ var AjaxRequest =
 
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				ContextMenu.initialize();
+				window.fireEvent('structure');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'loadStructure', 'id':id, 'level':level, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 
 		return false;
 	},
@@ -239,7 +334,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC', 'folderO');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
@@ -247,24 +342,21 @@ var AjaxRequest =
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				icon.src = icon.src.replace('folderO', 'folderC');
 				$(el).title = CONTAO_EXPAND;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFileManager&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=loadFileManager&id=' + id + '&level=' + level + '&folder=' + folder + '&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', txt);
+				ul.set('html', json.content);
 
 				item = new Element('li');
 
@@ -278,10 +370,12 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
-
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'loadFileManager', 'id':id, 'level':level, 'folder':folder, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 
 		return false;
 	},
@@ -309,31 +403,28 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request({url: window.location.href, data: 'isAjax=1&action=togglePagetree&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=loadPagetree&id=' + id + '&level=' + level + '&field=' + field + '&name=' + name + '&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', txt);
+				ul.set('html', json.content);
 
 				item = new Element('li');
 
@@ -347,8 +438,11 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'loadPagetree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 
 		return false;
 	},
@@ -377,31 +471,28 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleFiletree&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=loadFiletree&id=' + id + '&level=' + level + '&folder=' + folder + '&field=' + field + '&name=' + name + '&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', txt);
+				ul.set('html', json.content);
 
 				item = new Element('li');
 
@@ -415,8 +506,11 @@ var AjaxRequest =
 				$(el).title = CONTAO_COLLAPSE;
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
+
+				// HOOK
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'loadFiletree', 'id':id, 'level':level, 'folder':folder, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 
 		return false;
 	},
@@ -432,23 +526,22 @@ var AjaxRequest =
 			var name = el.id;
 			var field = name.replace(/_[0-9]+$/, '');
 
-			new Request(
+			new Request.Contao(
 			{
-				url: window.location.href,
-				data: 'isAjax=1&action=loadFiletree&name=' + name + '&field=' + field,
 				onRequest: AjaxRequest.displayBox('Loading data …'),
-					
-				onComplete: function(txt, xml)
+				onSuccess: function(json)
 				{
 					// Preserve the "reset selection" entry
 					var ul = $(el.id + '_parent').getFirst('ul');
 					var li = ul.getLast('li');
-					ul.set('html', txt);
+					ul.set('html', json.content);
 					li.inject(ul);
-
 					AjaxRequest.hideBox();
+
+					// HOOK
+					window.fireEvent('ajax_change');
 				}
-			}).send();
+			}).post({'action':'loadFiletree', 'field':field, 'name':name, 'REQUEST_TOKEN':REQUEST_TOKEN});
 		});
 	},
 
@@ -471,14 +564,14 @@ var AjaxRequest =
 				el.value = 1;
 				el.checked = 'checked';
 				item.setStyle('display', 'block');
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				el.value = '';
 				el.checked = '';
 				item.setStyle('display', 'none');
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return;
@@ -486,15 +579,12 @@ var AjaxRequest =
 
 		new Request.Mixed(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=toggleSubpalette&id=' + id + '&field=' + field + '&load=1&state=1',
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-
-			onComplete: function(txt, xml, js)
+			onSuccess: function(json, js)
 			{
 				item = new Element('div');
 				item.setProperty('id', id);
-				item.set('html', txt);
+				item.set('html', json.content);
 				item.injectAfter($(el).getParent('div').getParent('div'));
 
 				if (js)
@@ -513,9 +603,10 @@ var AjaxRequest =
 				Backend.addColorPicker();
 
 				// HOOK
-				window.fireEvent('subpalette');
+				window.fireEvent('subpalette'); // Backwards compatibility
+				window.fireEvent('ajax_change');
    			}
-		}).send();
+		}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'load':1, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 	},
 
 
@@ -628,12 +719,41 @@ var AjaxRequest =
 		if (publish)
 		{
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=1'}).send();
+			new Request.Contao().post({'action':'toggleVisibility', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 		}
 		else
 		{
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleVisibility&id=' + id + '&state=0'}).send();
+			new Request.Contao().post({'action':'toggleVisibility', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+		}
+
+		return false;
+	},
+
+
+	/**
+	 * Feature/unfeature an element
+	 * @param object
+	 * @param string
+	 * @return boolean
+	 */
+	toggleFeatured: function(el, id)
+	{
+		el.blur();
+
+		var image = $(el).getFirst();
+		var featured = (image.src.indexOf('featured_') == -1);
+
+		// Send request
+		if (!featured)
+		{
+			image.src = image.src.replace('featured_.gif', 'featured.gif');
+			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+		}
+		else
+		{
+			image.src = image.src.replace('featured.gif', 'featured_.gif');
+			new Request.Contao().post({'action':'toggleFeatured', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 		}
 
 		return false;
@@ -655,12 +775,12 @@ var AjaxRequest =
 		if (fs.hasClass('collapsed'))
 		{
 			fs.removeClass('collapsed');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFieldset&id=' + id + '&table=' + table + '&state=1'}).send();
+			new Request.Contao().post({'action':'toggleFieldset', 'id':id, 'table':table, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 		}
 		else
 		{
 			fs.addClass('collapsed');
-			new Request({url: window.location.href, data: 'isAjax=1&action=toggleFieldset&id=' + id + '&table=' + table + '&state=0'}).send();
+			new Request.Contao().post({'action':'toggleFieldset', 'id':id, 'table':table, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 		}
 
 		return false;
@@ -681,24 +801,21 @@ var AjaxRequest =
 			return;
 		}
 
-		new Request(
+		new Request.Contao(
 		{
-			url: window.location.href,
-			data: 'isAjax=1&action=liveUpdate&id=' + uid.value,
 			onRequest: $('lu_message').set('html', '<p class="tl_info">Connecting to live update server</p>'),
-
-			onComplete: function(txt, xml)
+			onSuccess: function(json)
 			{
-				if (txt)
+				if (json.content)
 				{
-					$('lu_message').set('html', txt);
+					$('lu_message').set('html', json.content);
 				}
 				else
 				{
 					$(el).submit();
 				}
 			}
-		}).send();
+		}).post({'action':'liveUpdate', 'id':uid.value, 'REQUEST_TOKEN':REQUEST_TOKEN});
 	},
 
 
@@ -720,13 +837,13 @@ var AjaxRequest =
 			{
 				item.setStyle('display', 'block');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=1'}).send();
+				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				new Request({url: window.location.href, data: 'isAjax=1&action=toggleCheckboxGroup&id=' + id + '&state=0'}).send();
+				new Request.Contao().post({'action':'toggleCheckboxGroup', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return true;
@@ -756,7 +873,6 @@ var AjaxRequest =
 		}
 
 		var scroll = window.getScroll().y;
-		if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'hidden'); } }
 
 		overlay.setStyle('display', 'block');
 		overlay.setStyle('top', scroll + 'px');
@@ -783,7 +899,6 @@ var AjaxRequest =
 		if (box)
 		{
 			box.setStyle('display', 'none');
-			if (Browser.Engine.trident && Browser.Engine.version < 5) { var sel = $$('select'); for (var i=0; i<sel.length; i++) { sel[i].setStyle('visibility', 'visible'); } }
 		}
 	}
 };
@@ -807,27 +922,6 @@ var Backend =
 	xMousePosition: 0,
 	yMousePosition: 0,
 	popupWindow: null,
-
-
-	/**
-	 * Check whether the popup window has been closed
-	 */
-	checkPopup: function()
-	{
-		setTimeout("Backend.doCheckPopup()", 10);
-	},
-
-
-	/**
-	 * Reload the page if the popup window has been closed
-	 */
-	doCheckPopup: function()
-	{
-		if (Backend.popupWindow && Backend.popupWindow.closed)
-		{
-			AjaxRequest.reloadFiletrees();
-		}
-	},
 
 
 	/**
@@ -967,8 +1061,8 @@ var Backend =
 			}
 
 			div.setStyle('height', hgt);
-			var path = 'system/themes/' + CONTAO_THEME + '/images/';
-			toggler = new Element('img').addClass('limit_toggler');
+			var path = CONTAO_SCRIPT_URL + 'system/themes/' + CONTAO_THEME + '/images/';
+			toggler = new Element('img', { 'class':'limit_toggler', 'alt':'', 'width':'20', 'height':'24' });
 
 			// Disable function if the preview height is below the max-height
 			if (size.height < hgt)
@@ -1034,7 +1128,11 @@ var Backend =
 
 		if (cls == 'tl_checkbox')
 		{
-			$$('#' + id + ' .tl_checkbox').each(function(checkbox)
+			var cbx = ($(id)) ?
+				$$('#' + id + ' .tl_checkbox') :
+				$(el).getParent('fieldset').getElements('.tl_checkbox');
+
+			cbx.each(function(checkbox)
 			{
 				checkbox.checked = status;
 			});
@@ -1118,6 +1216,9 @@ var Backend =
 	 */
 	addColorPicker: function()
 	{
+		/*
+		FIXME: replace with http://www.nogray.com/color_picker.php as soon
+		       as the new version has been released
 		$$('img.mooRainbow').each(function(img)
 		{
 			var id = $(img).id;
@@ -1141,6 +1242,7 @@ var Backend =
 				mr.manualSet("#" + el.value, "hex");
 			}
 		});
+		*/
 	},
 
 
@@ -1280,14 +1382,16 @@ var Backend =
     			var id = el.get('id').replace(/li_/, '');
     			var pid = el.getPrevious().get('id').replace(/li_/, '');
     			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=1&pid=' + pid;
-    			new Request({url: window.location.href, method: 'get', data: req}).send();
+    			var href = window.location.href.replace(/\?.*$/, '');
+    			new Request.Contao({url:href+req}).get();
     		}
     		else if (el.getParent())
     		{
     			var id = el.get('id').replace(/li_/, '');
     			var pid = el.getParent().get('id').replace(/ul_/, '');
     			var req = window.location.search.replace(/id=[0-9]*/, 'id=' + id) + '&act=cut&mode=2&pid=' + pid;
-				new Request({url: window.location.href, method: 'get', data: req}).send();
+    			var href = window.location.href.replace(/\?.*$/, '');
+    			new Request.Contao({url:href+req}).get();
     		}
     	});
 	},
@@ -1597,7 +1701,6 @@ var Backend =
 					if (next.getFirst().type == 'checkbox')
 					{
 						next.getFirst().checked = childs[i].getFirst().checked ? 'checked' : '';
-						if (Browser.Engine.trident && Browser.Engine.version < 5) next.innerHTML = next.innerHTML.replace(/CHECKED/ig, 'checked="checked"');
 					}
 				}
 
@@ -1636,6 +1739,69 @@ var Backend =
 				{
 					first.id = first.name.replace(/\[[0-9]+\]/g, '').replace(/\[/g, '_').replace(/\]/g, '') + '_' + i;
 					first.getNext().set('for', first.id);
+				}
+			}
+		}
+	},
+
+
+	/**
+	 * Key/value wizard
+	 * @param object
+	 * @param string
+	 * @param string
+	 */
+	keyValueWizard: function(el, command, id)
+	{
+		var table = $(id);
+		var tbody = table.getFirst().getNext();
+		var parent = $(el).getParent('tr');
+		var rows = tbody.getChildren();
+
+		Backend.getScrollOffset();
+
+		switch (command)
+		{
+			case 'copy':
+				var tr = new Element('tr');
+				var childs = parent.getChildren();
+
+				for (var i=0; i<childs.length; i++)
+				{
+					var next = childs[i].clone(true).injectInside(tr);
+					next.getFirst().value = childs[i].getFirst().value;
+				}
+
+				tr.injectAfter(parent);
+				break;
+
+			case 'up':
+				parent.getPrevious() ? parent.injectBefore(parent.getPrevious()) : parent.injectInside(tbody);
+				break;
+
+			case 'down':
+				parent.getNext() ? parent.injectAfter(parent.getNext()) : parent.injectBefore(tbody.getFirst());
+				break;
+
+			case 'delete':
+				(rows.length > 1) ? parent.destroy() : null;
+				break;
+		}
+
+		rows = tbody.getChildren();
+		var fieldnames = new Array('key', 'value');
+
+		for (var i=0; i<rows.length; i++)
+		{
+			var childs = rows[i].getChildren();
+
+			for (var j=0; j<childs.length; j++)
+			{
+				var first = childs[j].getFirst();
+
+				if (first.type == 'text')
+				{
+					first.name = first.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
 				}
 			}
 		}
@@ -1748,7 +1914,7 @@ var ContextMenu =
 			el.addClass('invisible');
 		});
 
-		// Add trigger to edit buttons
+		// Add a trigger to the edit buttons
 		$$('a.contextmenu').each(function(el)
 		{
 			var el2 = el.getNext('a');
@@ -1767,7 +1933,7 @@ var ContextMenu =
 			});
 		});
 
-		// Hide context menu 
+		// Hide the context menu 
 		$(document.body).addEvent('click', function()
 		{
 			ContextMenu.hide();
@@ -1819,6 +1985,11 @@ window.addEvent('domready', function()
 	ContextMenu.initialize();
 });
 
+window.addEvent('structure', function()
+{
+	ContextMenu.initialize();
+});
+
 
 /**
  * Class TinyCallback
@@ -1831,45 +2002,6 @@ window.addEvent('domready', function()
 var TinyCallback =
 {
 
-	/**
-	 * Replace target="_blank" and close <br> tags
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	cleanXHTML: function(id, html)
-	{
-		var modify = '';
-		var a = html.match(/<a[^>]*>/gi);
-
-		if (a != null)
-		{
-			for (var i=0; i<a.length; i++)
-			{
-				modify = a[i].replace(/target="_blank"/gi, 'onclick="window.open(this.href); return false;"');
-				html = html.replace(a[i], modify);
-			}
-		}
-
-		return html.replace(/<br>/, '<br />');
-	},
-
-
-	/**
-	 * Close <br> tags and remove whitespace from the beginning of the code
-	 * @param string
-	 * @param string
-	 * @return string
-	 */
-	cleanHTML: function(id, html)
-	{
-		html = html.replace(/<br \/>/, '<br>');
-		html = html.replace(/^\s*/ig, '');
-
-		return html;
-	},
-	
-	
 	/**
 	 * Get the scroll offset of the editor
 	 * @param object

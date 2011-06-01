@@ -88,7 +88,7 @@ class Automator extends Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->execute("SELECT id, dns, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $this->Database->execute("SELECT id, dns, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages
@@ -111,7 +111,7 @@ class Automator extends Backend
 			// Overwrite the domain
 			if (strlen($objRoot->dns))
 			{
-				$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
+				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
 			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true);
@@ -146,18 +146,70 @@ class Automator extends Backend
 
 
 	/**
+	 * Purge the thumbnail directory
+	 */
+	public function purgeHtmlFolder()
+	{
+		$arrHtml = scan(TL_ROOT . '/system/html', true);
+
+		// Remove files
+		if (is_array($arrHtml))
+		{
+			foreach ($arrHtml as $strFile)
+			{
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/html/' . $strFile))
+				{
+					@unlink(TL_ROOT . '/system/html/' . $strFile);
+				}
+			}
+		}
+
+		// Add log entry
+		$this->log('Purged thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
+	}
+
+
+	/**
+	 * Purge the scripts directory
+	 */
+	public function purgeScriptsFolder()
+	{
+		$arrScripts = scan(TL_ROOT . '/system/scripts', true);
+
+		// Remove files
+		if (is_array($arrScripts))
+		{
+			foreach ($arrScripts as $strFile)
+			{
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
+				{
+					unlink(TL_ROOT . '/system/scripts/' . $strFile);
+				}
+			}
+		}
+
+		// Generate the style sheets (see #2400)
+		$this->import('StyleSheets');
+		$this->StyleSheets->updateStyleSheets();
+
+		// Add log entry
+		$this->log('Purged scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
+	}
+
+
+	/**
 	 * Purge the temporary directory
 	 */
 	public function purgeTempFolder()
 	{
-		$arrTmp = scan(TL_ROOT . '/system/tmp');
+		$arrTmp = scan(TL_ROOT . '/system/tmp', true);
 
 		// Remove files
 		if (is_array($arrTmp))
 		{
 			foreach ($arrTmp as $strFile)
 			{
-				if ($strFile != '.htaccess')
+				if ($strFile != '.htaccess' && !is_dir(TL_ROOT . '/system/tmp/' . $strFile))
 				{
 					@unlink(TL_ROOT . '/system/tmp/' . $strFile);
 				}
@@ -174,30 +226,6 @@ class Automator extends Backend
 
 		// Add log entry
 		$this->log('Purged temporary directory', 'Automator purgeTempFolder()', TL_CRON);
-	}
-
-
-	/**
-	 * Purge the thumbnail directory
-	 */
-	public function purgeHtmlFolder()
-	{
-		$arrHtml = scan(TL_ROOT . '/system/html');
-
-		// Remove files
-		if (is_array($arrHtml))
-		{
-			foreach ($arrHtml as $strFile)
-			{
-				if ($strFile != 'index.html')
-				{
-					@unlink(TL_ROOT . '/system/html/' . $strFile);
-				}
-			}
-		}
-
-		// Add log entry
-		$this->log('Purged thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
 	}
 
 

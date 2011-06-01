@@ -88,7 +88,7 @@ class ModuleFaqList extends Module
 	 */
 	protected function compile()
 	{
-		$objFaq = $this->Database->execute("SELECT tl_faq.id AS id, pid, alias, question, headline, jumpTo FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
+		$objFaq = $this->Database->execute("SELECT *, tl_faq.id AS id FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
 
 		if ($objFaq->numRows < 1)
 		{
@@ -101,13 +101,12 @@ class ModuleFaqList extends Module
 		// Add FAQs
 		while ($objFaq->next())
 		{
-			$arrFaq[$objFaq->pid]['items'][] = array
-			(
-				'question' => $objFaq->question,
-				'title' => specialchars($objFaq->question, true),
-				'href' => $this->generateFaqLink($objFaq)
-			);
+			$arrTemp = $objFaq->row();
 
+			$arrTemp['title'] = specialchars($objFaq->question, true);
+			$arrTemp['href'] = $this->generateFaqLink($objFaq);
+
+			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
 			$arrFaq[$objFaq->pid]['headline'] = $objFaq->headline;
 		}
 

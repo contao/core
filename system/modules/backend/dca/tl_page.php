@@ -46,7 +46,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			array('tl_page', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb'),
-			array('tl_page', 'setDefaultLanguage')
+			array('tl_page', 'setDefaultLanguage'),
+			array('tl_page', 'showFallbackWarning')
 		),
 		'onsubmit_callback' => array
 		(
@@ -158,7 +159,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,useSSL,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
@@ -278,11 +279,18 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255),
+			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkDns')
 			)
+		),
+		'useSSL' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['useSSL'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'fallback' => array
 		(
@@ -303,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dateFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50'),
+			'eval'                    => array('helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
 			'explanation'             => 'dateFormat'
 
 		),
@@ -312,14 +320,14 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'datimFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
 		),
 		'createSitemap' => array
 		(
@@ -660,7 +668,7 @@ class tl_page extends Backend
 						$pagemounts[] = $root;
 					}
 
-					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page', true));
+					$pagemounts = array_merge($pagemounts, $this->getChildRecords($root, 'tl_page'));
 				}
 
 				$error = false;
@@ -796,7 +804,7 @@ class tl_page extends Backend
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
 
 		// Add root link
-		$arrLinks[] = '<img src="system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt="" /> <a href="' . $this->addToUrl('node=0') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=0') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
 		$arrLinks = array_reverse($arrLinks);
 
 		// Insert breadcrumb menu
@@ -831,7 +839,51 @@ class tl_page extends Backend
 
 
 	/**
-	 * Autogenerate a page alias if it has not been set yet
+	 * Show a warning if there is no language fallback page
+	 */
+	public function showFallbackWarning()
+	{
+		if ($this->Input->get('act') != '')
+		{
+			return;
+		}
+
+		$arrRoots = array();
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' ORDER BY dns");
+
+		while ($objRoots->next())
+		{
+			$strDns = ($objRoots->dns != '') ? $objRoots->dns : 'empty';
+
+			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
+			{
+				continue;
+			}
+
+			$arrRoots[$strDns] = $objRoots->fallback;
+		}
+
+		foreach ($arrRoots as $k=>$v)
+		{
+			if ($v != '')
+			{
+				continue;
+			}
+
+			if ($k == 'empty')
+			{
+				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'];
+			}
+			else
+			{
+				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['noFallbackDns'], $k);
+			}
+		}
+	}
+
+
+	/**
+	 * Auto-generate a page alias if it has not been set yet
 	 * @param mixed
 	 * @param object
 	 * @return string
@@ -1108,7 +1160,7 @@ class tl_page extends Backend
 		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '">' . $label . '</a>';
 
 		// Return image
-		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . LINK_NEW_WINDOW . '>'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
+		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
 	}
 
 

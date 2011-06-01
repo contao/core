@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		(
 			'mode'                    => 4,
 			'fields'                  => array('name'),
-			'panelLayout'             => 'filter;search,limit',
+			'panelLayout'             => 'filter,search,limit',
 			'headerFields'            => array('name', 'author', 'tstamp'),
 			'child_record_callback'   => array('tl_style_sheet', 'listStyleSheet'),
 			'child_record_class'      => 'no_padding'
@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc,media'
+		'default'                     => '{title_legend},name,cc,media,mediaQuery,vars'
 	),
 
 	// Fields
@@ -154,11 +154,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'cc' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['cc'],
-			'inputType'               => 'select',
+			'inputType'               => 'text',
 			'exclude'                 => true,
-			'filter'                  => true,
-			'options'                 => array('if IE', 'if IE 6', 'if lt IE 6', 'if lte IE 6', 'if gt IE 6', 'if gte IE 6', 'if IE 7', 'if lt IE 7', 'if lte IE 7', 'if gt IE 7', 'if gte IE 7', 'if IE 8', 'if lt IE 8', 'if lte IE 8', 'if gt IE 8', 'if gte IE 8', 'if IE 9', 'if lt IE 9', 'if lte IE 9', 'if gt IE 9', 'if gte IE 9'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'search'                  => true,
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_style_sheet', 'sanitizeCc')
+			)
 		),
 		'media' => array
 		(
@@ -168,6 +171,20 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'filter'                  => true,
 			'options'                 => array('all', 'aural', 'braille', 'embossed', 'handheld', 'print', 'projection', 'screen', 'tty', 'tv'),
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
+		),
+		'mediaQuery' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'],
+			'inputType'               => 'text',
+			'exclude'                 => true,
+			'search'                  => true,
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long')
+		),
+		'vars' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['vars'],
+			'inputType'               => 'keyValueWizard',
+			'exclude'                 => true
 		),
 		'source' => array
 		(
@@ -283,6 +300,22 @@ class tl_style_sheet extends Backend
 		}
 
 		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. implode(', ', $media) .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Sanitize the conditional comments field
+	 * @param mixed
+	 * @return string
+	 */
+	public function sanitizeCc($varValue)
+	{
+		if ($varValue != '')
+		{
+			$varValue = str_replace(array('<!--[', ']>'), '', $varValue);
+		}
+
+		return $varValue;
 	}
 
 

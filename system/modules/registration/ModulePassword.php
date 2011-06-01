@@ -66,12 +66,6 @@ class ModulePassword extends Module
 			return $objTemplate->parse();
 		}
 
-		// Return if there is a logged in user user already
-		if (FE_USER_LOGGED_IN)
-		{
-			return '';
-		}
-
 		return parent::generate();
 	}
 
@@ -136,7 +130,6 @@ class ModulePassword extends Module
 			$arrField['eval']['required'] = $arrField['eval']['mandatory'];
 
 			$objWidget = new $strClass($this->prepareForWidget($arrField, $arrField['name']));
-
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 			++$row;
@@ -170,8 +163,8 @@ class ModulePassword extends Module
 			if ($objMember->numRows < 1)
 			{
 				$this->strTemplate = 'mod_message';
-				$this->Template = new FrontendTemplate($this->strTemplate);
 
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'error';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
 
@@ -203,8 +196,8 @@ class ModulePassword extends Module
 		if ($objMember->numRows < 1)
 		{
 			$this->strTemplate = 'mod_message';
-			$this->Template = new FrontendTemplate($this->strTemplate);
 
+			$this->Template = new FrontendTemplate($this->strTemplate);
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -261,8 +254,8 @@ class ModulePassword extends Module
 
 				// Confirm
 				$this->strTemplate = 'mod_message';
-				$this->Template = new FrontendTemplate($this->strTemplate);
 
+				$this->Template = new FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 

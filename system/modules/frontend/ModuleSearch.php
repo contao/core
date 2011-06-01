@@ -89,7 +89,7 @@ class ModuleSearch extends Module
 		$strKeywords = trim($this->Input->get('keywords'));
 		$strKeywords = preg_replace('/\{\{[^\}]*\}\}/', '', $strKeywords);
 
-		// Overwrite default query_type
+		// Overwrite the default query_type
 		if ($this->Input->get('query_type'))
 		{
 			$this->queryType = $this->Input->get('query_type');
@@ -132,7 +132,7 @@ class ModuleSearch extends Module
 			if ($this->rootPage > 0)
 			{
 				$intRootId = $this->rootPage;
-				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page', true);
+				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page');
 				array_unshift($arrPages, $this->rootPage);
 			}
 
@@ -141,7 +141,7 @@ class ModuleSearch extends Module
 			{
 				global $objPage;
 				$intRootId = $objPage->rootId;
-				$arrPages = $this->getChildRecords($objPage->rootId, 'tl_page', true);
+				$arrPages = $this->getChildRecords($objPage->rootId, 'tl_page');
 			}
 
 			// Return if there are no pages
@@ -256,7 +256,7 @@ class ModuleSearch extends Module
 				}
 			}
 
-			// Get results
+			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
 				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
@@ -266,7 +266,7 @@ class ModuleSearch extends Module
 				$objTemplate->href = $this->Environment->base . $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
-				$objTemplate->relevance = number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2);
+				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2) . '%');
 				$objTemplate->filesize = $arrResult[$i]['filesize'];
 				$objTemplate->matches = $arrResult[$i]['matches'];
 

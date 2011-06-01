@@ -60,53 +60,112 @@ abstract class Controller extends System
 	/**
 	 * Find a particular template file and return its path
 	 * @param string
+	 * @param string
 	 * @return string
 	 * @throws Exception
 	 */
-	protected function getTemplate($strTemplate)
+	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
-		$strPath = TL_ROOT . '/templates';
-		$strTemplate = basename($strTemplate);
+		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 
-		// Check the templates subfolder
+		if (!in_array($strFormat, $arrAllowed))
+		{
+			throw new Exception("Invalid output format $strFormat");
+		}
+
+		$strTemplate = basename($strTemplate);
+		$strKey = $strFilename = $strTemplate . '.' . $strFormat;
+
+		// Check for a theme folder
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-
-			$strTemplateGroup = str_replace('../', '', $objPage->templateGroup);
-			$strTemplateGroup = preg_replace('@^templates/@', '', $strTemplateGroup);
+			$strTemplateGroup = str_replace(array('../', 'templates/'), '', $objPage->templateGroup);
 
 			if ($strTemplateGroup != '')
 			{
-				$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
-
-				if (file_exists($strFile))
-				{
-					return $strFile;
-				}
+				$strKey = $strTemplateGroup . '/' . $strKey;
 			}
 		}
 
-		// Check the templates directory
-		$strFile = $strPath . '/' . $strTemplate . '.tpl';
+		$objCache = FileCache::getInstance('templates');
 
-		if (file_exists($strFile))
+		// Try to load the template path from the cache
+		if (isset($objCache->$strKey))
 		{
-			return $strFile;
+			if (file_exists($objCache->$strKey))
+			{
+				return $objCache->$strKey;
+			}
+			else
+			{
+				unset($objCache->$strKey);
+			}
 		}
 
-		// Browse all module folders
-		foreach ($this->Config->getActiveModules() as $strModule)
+		$strPath = TL_ROOT . '/templates';
+
+		// Check the theme folder first
+		if (TL_MODE == 'FE' && $strTemplateGroup != '')
 		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+			$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strFilename;
 
 			if (file_exists($strFile))
 			{
+				$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strFilename;
+				return $strFile;
+			}
+
+			// Also check for .tpl files (backwards compatibility)
+			$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+
+			if (file_exists($strFile))
+			{
+				$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
 				return $strFile;
 			}
 		}
 
-		throw new Exception(sprintf('Could not find template file "%s"', $strTemplate));
+		// Then check the global templates directory
+		$strFile = $strPath . '/' . $strFilename;
+
+		if (file_exists($strFile))
+		{
+			$objCache->$strKey = 'templates/' . $strFilename;
+			return $strFile;
+		}
+
+		// Also check for .tpl files (backwards compatibility)
+		$strFile = $strPath . '/' . $strTemplate . '.tpl';
+
+		if (file_exists($strFile))
+		{
+			$objCache->$strKey = 'templates/' . $strTemplate . '.tpl';
+			return $strFile;
+		}
+
+		// At last browse all module folders in reverse order
+		foreach (array_reverse($this->Config->getActiveModules()) as $strModule)
+		{
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFilename;
+
+			if (file_exists($strFile))
+			{
+				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strFilename;
+				return $strFile;
+			}
+
+			// Also check for .tpl files (backwards compatibility)
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+
+			if (file_exists($strFile))
+			{
+				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+				return $strFile;
+			}
+		}
+
+		throw new Exception('Could not find template file "' . $strFilename . '"');
 	}
 
 
@@ -115,13 +174,17 @@ abstract class Controller extends System
 	 * @param string
 	 * @param integer
 	 * @return array
+	 * @throws Exception
 	 */
 	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
+		$arrFolders = array();
 		$arrTemplates = array();
-		$arrFolders = array(TL_ROOT . '/templates');
 
-		// Add a custom templates folder
+		// Add the templates root directory
+		$arrFolders[] = TL_ROOT . '/templates';
+
+		// Add the theme templates folder
 		if ($intTheme > 0)
 		{
 			$objTheme = $this->Database->prepare("SELECT templates FROM tl_theme WHERE id=?")
@@ -134,7 +197,7 @@ abstract class Controller extends System
 			}
 		}
 
-		// Add the module subfolders
+		// Add the module templates folders if they exist
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
@@ -148,16 +211,19 @@ abstract class Controller extends System
 		// Find all matching templates
 		foreach ($arrFolders as $strFolder)
 		{
-			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '.*\.tpl$/i',  scan($strFolder));
+			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '/i',  scan($strFolder));
 
 			foreach ($arrFiles as $strTemplate)
 			{
-				$arrTemplates[] = basename($strTemplate, '.tpl');
+				$strName = basename($strTemplate);
+				$arrTemplates[] = substr($strName, 0, strrpos($strName, '.'));
 			}
 		}
 
 		natcasesort($arrTemplates);
-		return array_values(array_unique($arrTemplates));
+		$arrTemplates = array_values(array_unique($arrTemplates));
+
+		return $arrTemplates;
 	}
 
 
@@ -197,7 +263,7 @@ abstract class Controller extends System
 				}
 			}
 
-			// HOOK: trigger article_raster_designer extension
+			// HOOK: trigger the article_raster_designer extension
 			elseif (in_array('article_raster_designer', $this->Config->getActiveModules()))
 			{
 				return RasterDesigner::load($objPage->id, $strColumn);
@@ -350,11 +416,12 @@ abstract class Controller extends System
 
 
 	/**
-	 * Generate a content element return it as HTML string
+	 * Generate a content element and return it as HTML string
 	 * @param integer
+	 * @param string
 	 * @return string
 	 */
-	protected function getContentElement($intId)
+	protected function getContentElement($intId, $strFormat='html5')
 	{
 		if (!strlen($intId) || $intId < 1)
 		{
@@ -429,6 +496,39 @@ abstract class Controller extends System
 		{
 			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
 		}
+
+		return $strBuffer;
+	}
+
+
+	/**
+	 * Generate a form and return it as HTML string
+	 * @param integer
+	 * @param string
+	 * @return string
+	 */
+	protected function getForm($intId, $strFormat='html5')
+	{
+		if (!strlen($intId) || $intId < 1)
+		{
+			return '';
+		}
+
+		$this->import('Database');
+
+		$objElement = $this->Database->prepare("SELECT * FROM tl_form WHERE id=?")
+									 ->limit(1)
+									 ->execute($intId);
+
+		if ($objElement->numRows < 1)
+		{
+			return '';
+		}
+
+		$objElement->typePrefix = 'ce_';
+		$objElement->form = $intId;
+		$objElement = new Form($objElement);
+		$strBuffer = $objElement->generate();
 
 		return $strBuffer;
 	}
@@ -531,7 +631,7 @@ abstract class Controller extends System
 		$objPage->parentTitle = $pname;
 		$objPage->parentPageTitle = $ptitle;
 
-		// Set root ID and title
+		// Set the root ID and title
 		if ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0))
 		{
 			$objPage->rootId = $objParentPage->id;
@@ -539,7 +639,7 @@ abstract class Controller extends System
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
 
-			// Set admin e-mail
+			// Set the admin e-mail address
 			if ($objParentPage->adminEmail != '')
 			{
 				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
@@ -548,6 +648,10 @@ abstract class Controller extends System
 			{
 				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 			}
+
+			// Store whether the root page has been published
+			$time = time();
+			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
 		}
 		else
 		{
@@ -956,6 +1060,24 @@ abstract class Controller extends System
 				break;
 
 			case 'png':
+				// Optimize non-truecolor images (see #2426)
+				if (version_compare($strGdVersion, '2.0', '>=') && !imageistruecolor($strSourceImage))
+				{
+					$intColors = imagecolorstotal($strSourceImage);
+
+					// Convert to palette image
+					if ($intColors > 0 && $intColors <= 255)
+					{
+						$wi = imagesx($strNewImage);
+						$he = imagesy($strNewImage);
+						$ch = imagecreatetruecolor($wi, $he);
+						imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
+						imagetruecolortopalette($strNewImage, null, $intColors);
+						imagecolormatch($ch, $strNewImage);
+						imagedestroy($ch);
+					}
+				}
+
 				imagepng($strNewImage, TL_ROOT . '/' . $strCacheName);
 				break;
 		}
@@ -1068,15 +1190,15 @@ abstract class Controller extends System
 			'@(<img[^>]+>)@',
 			'@(<div[^>]+block[^>]+>)@',
 			'@[\n\r\t]+@',
-			'@<br /><div class="mod_article@',
+			'@<br( /)?><div class="mod_article@',
 			'@href="([^"]+)(pdf=[0-9]*(&|&amp;)?)([^"]*)"@'
 		);
 
 		$arrReplace = array
 		(
 			'<u>$1</u>',
-			'<br />$1',
-			'<br />$1',
+			'<br>$1',
+			'<br>$1',
 			' ',
 			'<div class="mod_article',
 			'href="$1$4"'
@@ -1186,7 +1308,7 @@ abstract class Controller extends System
 			// Skip certain elements if the output will be cached
 			if ($blnCache)
 			{
-				if ($elements[0] == 'date' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || strncmp($elements[0], 'cache_', 6) === 0)
+				if ($elements[0] == 'date' || $elements[0] == 'ua' || $elements[0] == 'file' || $elements[1] == 'back' || $elements[1] == 'referer' || $elements[0] == 'request_token' || strncmp($elements[0], 'cache_', 6) === 0)
 				{
 					$strBuffer .= '{{' . $strTag . '}}';
 					continue;
@@ -1205,7 +1327,18 @@ abstract class Controller extends System
 
 				// Accessibility tags
 				case 'lang':
-					$arrCache[$strTag] = strlen($elements[1]) ? '<span lang="' . $elements[1] . '" xml:lang="' . $elements[1] . '">' : '</span>';
+					if ($elements[1] == '')
+					{
+						$arrCache[$strTag] = '</span>';
+					}
+					elseif ($objPage->outputFormat == 'xhtml')
+					{
+						$arrCache[$strTag] = '<span lang="' . $elements[1] . '" xml:lang="' . $elements[1] . '">';
+					}
+					else
+					{
+						$arrCache[$strTag] = $arrCache[$strTag] = '<span lang="' . $elements[1] . '">';
+					}
 					break;
 
 				// E-mail addresses
@@ -1215,7 +1348,7 @@ abstract class Controller extends System
 						$this->import('String');
 
 						$strEmail = $this->String->encodeEmail($elements[1]);
-						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
 					}
 					break;
 
@@ -1321,6 +1454,14 @@ abstract class Controller extends System
 						$strName = $strTitle;
 					}
 
+					// External links
+					elseif (strncmp($elements[1], 'http://', 7) === 0 || strncmp($elements[1], 'https://', 8) === 0)
+					{
+						$strUrl = $elements[1];
+						$strTitle = $elements[1];
+						$strName = str_replace(array('http://', 'https://'), '', $elements[1]);
+					}
+
 					// Regular link
 					else
 					{
@@ -1338,7 +1479,7 @@ abstract class Controller extends System
 
 						$this->import('Database');
 
-						// Get target page
+						// Get the target page
 						$objNextPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
 													  ->limit(1)
 													  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
@@ -1349,9 +1490,50 @@ abstract class Controller extends System
 						}
 						else
 						{
-							$strUrl = $this->generateFrontendUrl($objNextPage->row());
-							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
+							// Page type specific settings (thanks to Andreas Schempp)
+							switch ($objNextPage->type)
+							{
+								case 'redirect':
+									$strUrl = $objNextPage->url;
+
+									if (strncasecmp($strUrl, 'mailto:', 7) === 0)
+									{
+										$this->import('String');
+										$strUrl = $this->String->encodeEmail($strUrl);
+									}
+									break;
+
+								case 'forward':
+									$time = time();
+
+									if (!$objNextPage->jumpTo)
+									{
+										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+																	->limit(1)
+																	->execute($objNextPage->id);
+									}
+									else
+									{
+										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+																	->limit(1)
+																	->execute($objNextPage->jumpTo);
+									}
+
+									if ($objTarget->numRows)
+									{
+										$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
+										break;
+									}
+									// DO NOT ADD A break; STATEMENT
+
+								default:
+									$strUrl = $this->generateFrontendUrl($objNextPage->row());
+									break;
+							}
+
 							$strName = $objNextPage->title;
+							$strTarget = $objNextPage->target ? (($objPage->outputFormat == 'xhtml') ? LINK_NEW_WINDOW : ' target="_blank"') : '';
+							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
 						}
 					}
 
@@ -1359,11 +1541,11 @@ abstract class Controller extends System
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">%s</a>', $strUrl, specialchars($strTitle), specialchars($strName));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>%s</a>', $strUrl, specialchars($strTitle), $strTarget, specialchars($strName));
 							break;
 
 						case 'link_open':
-							$arrCache[$strTag] = sprintf('<a href="%s" title="%s">', $strUrl, specialchars($strTitle));
+							$arrCache[$strTag] = sprintf('<a href="%s" title="%s"%s>', $strUrl, specialchars($strTitle), $strTarget);
 							break;
 
 						case 'link_url':
@@ -1373,7 +1555,16 @@ abstract class Controller extends System
 						case 'link_title':
 							$arrCache[$strTag] = specialchars($strTitle);
 							break;
+
+						case 'link_target':
+							$arrCache[$strTag] = $strTarget;
+							break;
 					}
+					break;
+
+				// Closing link tag
+				case 'link_close':
+					$arrCache[$strTag] = '</a>';
 					break;
 
 				// Insert article
@@ -1389,6 +1580,11 @@ abstract class Controller extends System
 				// Insert module
 				case 'insert_module':
 					$arrCache[$strTag] = $this->replaceInsertTags($this->getFrontendModule($elements[1]));
+					break;
+
+				// Insert form
+				case 'insert_form':
+					$arrCache[$strTag] = $this->replaceInsertTags($this->getForm($elements[1]));
 					break;
 
 				// Article
@@ -1583,11 +1779,6 @@ abstract class Controller extends System
 					}
 					break;
 
-				// Closing link tag
-				case 'link_close':
-					$arrCache[$strTag] = '</a>';
-					break;
-
 				// Article teaser
 				case 'article_teaser':
 					$this->import('Database');
@@ -1630,6 +1821,34 @@ abstract class Controller extends System
 					}
 					break;
 
+				// News feed URL
+				case 'news_feed':
+					$this->import('Database');
+
+					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_news_archive WHERE id=?")
+											  ->limit(1)
+											  ->execute($elements[1]);
+
+					if ($objFeed->numRows)
+					{
+						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+					}
+					break;
+
+				// Calendar feed URL
+				case 'calendar_feed':
+					$this->import('Database');
+
+					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_calendar WHERE id=?")
+											  ->limit(1)
+											  ->execute($elements[1]);
+
+					if ($objFeed->numRows)
+					{
+						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
+					}
+					break;
+
 				// Last update
 				case 'last_update':
 					$this->import('Database');
@@ -1644,6 +1863,11 @@ abstract class Controller extends System
 				// Version
 				case 'version':
 					$arrCache[$strTag] = VERSION . '.' . BUILD;
+					break;
+
+				// Request token
+				case 'request_token':
+					$arrCache[$strTag] = REQUEST_TOKEN;
 					break;
 
 				// Conditional tags
@@ -1714,6 +1938,10 @@ abstract class Controller extends System
 							break;
 
 						case 'host':
+							$arrCache[$strTag] = $this->Environment->host;
+							break;
+
+						case 'http_host':
 							$arrCache[$strTag] = $this->Environment->httpHost;
 							break;
 
@@ -1736,6 +1964,32 @@ abstract class Controller extends System
 						case 'referer':
 							$arrCache[$strTag] = $this->getReferer(true);
 							break;
+
+						case 'files_url':
+							$arrCache[$strTag] = TL_FILES_URL;
+							break;
+
+						case 'script_url':
+							$arrCache[$strTag] = TL_SCRIPT_URL;
+							break;
+
+						case 'plugins_url':
+							$arrCache[$strTag] = TL_PLUGINS_URL;
+							break;
+					}
+					break;
+
+				// User agent
+				case 'ua':
+					$ua = $this->Environment->agent;
+
+					if ($elements[1] != '')
+					{
+						$arrCache[$strTag] = $ua->{$elements[1]};
+					}
+					else
+					{
+						$arrCache[$strTag] = '';
 					}
 					break;
 
@@ -1843,11 +2097,11 @@ abstract class Controller extends System
 						// Generate the HTML markup
 						if (strlen($rel))
 						{
-							$arrCache[$strTag] = '<a href="' . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' /></a>';
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
-							$arrCache[$strTag] = '<img src="' . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . ' />';
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
 					catch (Exception $e)
@@ -2017,8 +2271,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-
-		return '<img src="'.$src.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').' />';
+		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -2197,6 +2450,13 @@ abstract class Controller extends System
 			die(sprintf('File type "%s" is not allowed', $objFile->extension));
 		}
 
+		// Make sure no output buffer is active
+		// @see http://ch2.php.net/manual/en/function.fpassthru.php#74080
+		while (@ob_end_clean());
+
+		// Prevent session locking (see #2804)
+		session_write_close();
+
 		// Open the "save as …" dialogue
 		header('Content-Type: ' . $objFile->mime);
 		header('Content-Transfer-Encoding: binary');
@@ -2227,16 +2487,28 @@ abstract class Controller extends System
 
 	/**
 	 * Load a set of DCA files
+	 * @param string
+	 * @param boolean
 	 */
-	protected function loadDataContainer($strName)
+	protected function loadDataContainer($strName, $blnNoCache=false)
 	{
+		// Return if the data has been loaded already
+		if (!$blnNoCache && isset($GLOBALS['loadDataContainer'][$strName]))
+		{
+			return;
+		}
+
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadDataContainer'][$strName] = true;
+
+		// Parse all module folders
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/dca/%s.php', TL_ROOT, $strModule, $strName);
 
 			if (file_exists($strFile))
 			{
-				include_once($strFile);
+				include($strFile);
 			}
 		}
 
@@ -2250,7 +2522,7 @@ abstract class Controller extends System
 			}
 		}
 
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
 
@@ -2450,35 +2722,27 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return the IDs of all child records of a particular record
-	 * @param integer
-	 * @param string
+	 * Return the IDs of all child records of a particular record (see #2475)
+	 * @param mixed
 	 * @param string
 	 * @return array
+	 * @author Andreas Schempp
 	 */
-	protected function getChildRecords($intParentId, $strTable, $blnSorting=null)
+	protected function getChildRecords($arrParenIds, $strTable)
 	{
 		$arrReturn = array();
 
-		if (is_null($blnSorting))
+		if (!is_array($arrParenIds))
 		{
-			$blnSorting = $this->Database->fieldExists('sorting', $strTable);
+			$arrParenIds = array($arrParenIds);
 		}
 
-		$objChilds = $this->Database->prepare("SELECT id, (SELECT COUNT(*) FROM " . $strTable . " t2 WHERE t1.id=t2.pid) AS hasChilds FROM " . $strTable ." t1 WHERE t1.pid=? AND t1.id!=?" . ($blnSorting ? " ORDER BY t1.sorting" : ""))
-									->execute($intParentId, $intParentId);
+		$objChilds = $this->Database->execute("SELECT id FROM " . $strTable . " WHERE pid IN(" . implode(',', array_map('intval', $arrParenIds)) . ")");
 
 		if ($objChilds->numRows > 0)
 		{
-			while ($objChilds->next())
-			{
-				$arrReturn[] = $objChilds->id;
-
-				if ($objChilds->hasChilds > 0)
-				{
-					$arrReturn = array_merge($arrReturn, $this->getChildRecords($objChilds->id, $strTable, $blnSorting));
-				}
-			}
+			$arrChilds = $objChilds->fetchEach('id');
+			$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable));
 		}
 
 		return $arrReturn;
@@ -2492,23 +2756,58 @@ abstract class Controller extends System
 	 */
 	protected function classFileExists($strClass, $blnNoCache=false)
 	{
-		if (!$blnNoCache && isset($this->arrCache[$strClass]))
+		if ($strClass == '')
 		{
-			return $this->arrCache[$strClass];
+			return false;
+		}
+
+		// Try to load from cache
+		if (!$blnNoCache)
+		{
+			// Handle multiple requests for the same class
+			if (isset($this->arrCache[$strClass]))
+			{
+				return $this->arrCache[$strClass];
+			}
+
+			$objCache = FileCache::getInstance('classes');
+
+			// Check the file cache
+			if (isset($objCache->$strClass))
+			{
+				$this->arrCache[$strClass] = $objCache->$strClass;
+				return $objCache->$strClass;
+			}
+			else
+			{
+				unset($objCache->$strClass);
+			}
 		}
 
 		$this->import('Config'); // see ticket #152
 		$this->arrCache[$strClass] = false;
 
+		// Browse all modules
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/%s.php', TL_ROOT, $strModule, $strClass);
 
 			if (file_exists($strFile))
 			{
+				// Also store the result in the autoloader cache, so the
+				// function does not have to browse the module folders again
+				$objAutoload = FileCache::getInstance('autoload');
+				$objAutoload->$strClass = 'system/modules/' . $strModule . '/' . $strClass . '.php';
+
 				$this->arrCache[$strClass] = true;
 				break;
 			}
+		}
+
+		// Remember the result
+		if (!$blnNoCache)
+		{
+			$objCache->$strClass = $this->arrCache[$strClass];
 		}
 
 		return $this->arrCache[$strClass];
@@ -2556,15 +2855,11 @@ abstract class Controller extends System
 			$strTable = 'tl_page';
 		}
 
-		$nested = array();
+		// Thanks to Andreas Schempp (see #2475)
 		$arrPages = array_intersect($this->getChildRecords(0, $strTable), $arrPages);
+		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable)));
 
-		foreach ($arrPages as $page)
-		{
-			$nested = array_merge($nested, $this->getChildRecords($page, $strTable));
-		}
-
-		return array_values(array_diff($arrPages, $nested));
+		return $arrPages;
 	}
 
 
@@ -2685,7 +2980,7 @@ abstract class Controller extends System
 		}
 
 		// Make sure the dcaconfig.php is loaded
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Add root files
 		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
@@ -2782,20 +3077,26 @@ abstract class Controller extends System
 		}
 
 		// Image link
-		if (strlen($arrItem['imageUrl']) && TL_MODE == 'FE')
+		if (($arrItem['imageUrl'] != '') && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $arrItem['imageUrl'];
-			$objTemplate->attributes = $arrItem['fullsize'] ? LINK_NEW_WINDOW : '';
+			$objTemplate->href = TL_FILES_URL . $arrItem['imageUrl'];
+			$objTemplate->attributes = '';
+
+			if ($arrItem['fullsize'])
+			{
+				global $objPage;
+				$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+			}
 		}
 
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $this->urlEncode($arrItem['singleSRC']);
+			$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
 			$objTemplate->attributes = ' rel="' . $strLightboxId . '"';
 		}
 
-		$objTemplate->src = $src;
+		$objTemplate->src = TL_FILES_URL . $src;
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
@@ -2840,7 +3141,8 @@ abstract class Controller extends System
 				$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
 				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
 				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-				$arrEnclosures[$i]['icon'] = 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+				$arrEnclosures[$i]['icon'] = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+				$arrEnclosures[$i]['mime'] = $objFile->mime;
 			}
 		}
 

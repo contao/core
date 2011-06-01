@@ -59,6 +59,18 @@ abstract class Template extends Controller
 	protected $strContentType;
 
 	/**
+	 * Output format
+	 * @var string
+	 */
+	protected $strFormat = 'html5';
+
+	/**
+	 * Tag ending
+	 * @var string
+	 */
+	protected $strTagEnding = '>';
+
+	/**
 	 * Template data
 	 * @var array
 	 */
@@ -66,7 +78,7 @@ abstract class Template extends Controller
 
 
 	/**
-	 * Set current template file
+	 * Create a new template instance
 	 * @param string
 	 * @param string
 	 * @throws Exception
@@ -154,6 +166,26 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Set the output format
+	 * @param string
+	 */
+	public function setFormat($strFormat)
+	{
+		$this->strFormat = $strFormat;
+	}
+
+
+	/**
+	 * Return the output format
+	 * @return string
+	 */
+	public function getFormat()
+	{
+		return $this->strFormat;
+	}
+
+
+	/**
 	 * Print all template variables to the screen using print_r
 	 */
 	public function showTemplateVars()
@@ -182,8 +214,36 @@ abstract class Template extends Controller
 	 */
 	public function parse()
 	{
+		if ($this->strTemplate == '')
+		{
+			return '';
+		}
+
+		// Override the output format in the front end
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat != '')
+			{
+				$this->strFormat = $objPage->outputFormat;
+			}
+
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
+		// HOOK: add custom parse filters
+		if (isset($GLOBALS['TL_HOOKS']['parseTemplate']) && is_array($GLOBALS['TL_HOOKS']['parseTemplate']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseTemplate'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($this);
+			}
+		}
+
 		ob_start();
-		include($this->getTemplate($this->strTemplate));
+		include($this->getTemplate($this->strTemplate, $this->strFormat));
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -201,7 +261,9 @@ abstract class Template extends Controller
 			$this->strBuffer = $this->parse();
 		}
 
-		$arrEncoding = $this->Environment->httpAcceptEncoding;
+		// Minify the markup if activated
+		$this->strBuffer = $this->minifyHtml($this->strBuffer);
+		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 		/**
 		 * Copyright notice
@@ -212,22 +274,18 @@ abstract class Template extends Controller
 		 */
 		$this->strBuffer = preg_replace
 		(
-			'/([ \t]*<head[^>]*>)/U',
-			"$1\n<!--\n\n"
+			'/([ \t]*<title[^>]*>)\n*/',
+			"<!--\n\n"
 			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
 			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
 			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->",
+			. "//-->$lb$1",
 			$this->strBuffer, 1
 		);
 
-		// Activate gzip compression
-		if ($GLOBALS['TL_CONFIG']['enableGZip'] && (in_array('gzip', $arrEncoding) || in_array('x-gzip', $arrEncoding)) && function_exists('ob_gzhandler') && !ini_get('zlib.output_compression'))
-		{
-			ob_start('ob_gzhandler');
-		}
-
+		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
+
 		echo $this->strBuffer;
 
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
@@ -236,6 +294,84 @@ abstract class Template extends Controller
 			print_r($GLOBALS['TL_DEBUG']);
 			echo "\n</pre>";
 		}
+	}
+
+
+	/**
+	 * Minify HTML markup preserving pre, script, style and textarea tags
+	 * @param string
+	 * @return string
+	 */
+	public function minifyHtml($strHtml)
+	{
+		// The feature has been disabled
+		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'])
+		{
+			return $strHtml;
+		}
+
+		// Split the markup based on the tags that shall be preserved
+		$arrChunks = preg_split('@(</?pre[^>]*>)|(</?script[^>]*>)|(</?style[^>]*>)|(</?textarea[^>]*>)@i', $strHtml, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+
+		$strHtml = '';
+		$blnPreserveNext = false;
+		$blnOptimizeNext = false;
+
+		// Recombine the markup
+		foreach ($arrChunks as $strChunk)
+		{
+			if (strncasecmp($strChunk, '<pre', 4) === 0 || strncasecmp($strChunk, '<textarea', 9) === 0)
+			{
+				$blnPreserveNext = true;
+			}
+			elseif (strncasecmp($strChunk, '<script', 7) === 0 || strncasecmp($strChunk, '<style', 6) === 0)
+			{
+				$blnOptimizeNext = true;
+			}
+			elseif ($blnPreserveNext)
+			{
+				$blnPreserveNext = false;
+			}
+			elseif ($blnOptimizeNext)
+			{
+				$blnOptimizeNext = false;
+
+				// Minify inline scripts
+				$strChunk = str_replace("/* <![CDATA[ */\n", '/* <![CDATA[ */', $strChunk);
+				$strChunk = preg_replace('/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|\|\|)[ \n\t]*/', '$1', $strChunk);
+				$strChunk = trim($strChunk);
+			}
+			else
+			{
+				$arrReplace = array
+				(
+					'/\n ?\n+/'      => "\n",   // Convert multiple line-breaks
+					'/^[\t ]+</m'    => '<',    // Remove tag indentation
+					'/>( )?\n</'     => '>$1<', // Remove line-breaks between tags
+					'/\n/'           => '',     // Remove all remaining line-breaks
+					'/ <\/(div|p)>/' => '</$1>' // Remove spaces before closing DIV and P tags
+				);
+
+				$strChunk = str_replace("\r", '', $strChunk);
+				$strChunk = preg_replace(array_keys($arrReplace), array_values($arrReplace), $strChunk);
+				$strChunk = trim($strChunk);
+			}
+
+			$strHtml .= $strChunk;
+		}
+
+		return $strHtml;
+	}
+
+
+	/**
+	 * Print the IE6 warning
+	 */
+	public function showIE6warning()
+	{
+		echo "\n<!--[if lte IE 6]>\n";
+		printf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<div style="background:#ffc;padding:12px;border-bottom:1px solid #e4790f;font-size:14px;color:#000;text-align:center;">', '<a href="http://ie6countdown.com" style="font-size:14px;color:#e4790f;">', '</a>', '</div>');
+		echo "\n<![endif]-->\n";
 	}
 }
 

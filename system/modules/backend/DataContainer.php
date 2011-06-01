@@ -177,13 +177,20 @@ class DataContainer extends Backend
 		// Add the help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" onclick="Backend.openWindow(this, 600, 500); return false;">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" rel="lightbox[help 610 80%]">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom;"').'</a>';
 		}
 
 		// Add the popup file manager
 		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
 		{
-			$xlabel .= ' <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.getScrollOffset(); Backend.openWindow(this, 750, 500); return false;">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
+			$path = '';
+
+			if (isset($arrData['eval']['path']))
+			{
+				$path = '?node=' . $arrData['eval']['path'];
+			}
+
+			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Add table import wizard
@@ -199,13 +206,6 @@ class DataContainer extends Backend
 			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
-		// Decrypt the value if it is encrypted
-		if ($arrData['eval']['encrypt'])
-		{
-			$this->import('Encryption');
-			$this->varValue = $this->Encryption->decrypt($this->varValue);
-		}
-		
 		// Input field callback
 		if (is_array($arrData['input_field_callback']))
 		{
@@ -278,12 +278,6 @@ class DataContainer extends Backend
 						$varValue = serialize($varValue);
 					}
 
-					// Encrypt the value
-					if ($arrData['eval']['encrypt'])
-					{
-						$varValue = $this->Encryption->encrypt($varValue);
-					}
-
 					// Save the current value
 					try
 					{
@@ -306,10 +300,8 @@ class DataContainer extends Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$datepicker = '
-  <script type="text/javascript">
-  <!--//--><![CDATA[//><!--
+  <script>
   window.addEvent(\'domready\', function() { ' . sprintf($arrData['eval']['datepicker'], 'ctrl_' . $objWidget->id) . ' });
-  //--><!]]>
   </script>';
 		}
 
@@ -351,12 +343,12 @@ class DataContainer extends Backend
 			$updateMode = '
 </div>
 <div>
-  <h3 style="padding-top:7px"><label for="ctrl_'.$this->strInputName.'_update">' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</label></h3>
-  <div id="ctrl_'.$this->strInputName.'_update" class="tl_radio_container">
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br />
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br />
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();" /> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
-  </div>';
+  <fieldset class="tl_radio_container">
+  <legend>' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</legend>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
+  </fieldset>';
 		}
 
 		return '
@@ -395,6 +387,7 @@ class DataContainer extends Backend
 		for ($i=0; $i<count($names); $i++)
 		{
 			$buffer = array();
+			$return = array_reverse($return);
 
 			foreach ($return as $k=>$v)
 			{
@@ -405,7 +398,7 @@ class DataContainer extends Backend
 			$return = $buffer;
 		}
 
-		return $return;
+		return array_filter($return);
 	}
 
 

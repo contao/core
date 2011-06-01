@@ -97,7 +97,7 @@ class Password extends Widget
 	{
 		$this->blnSubmitInput = false;
 
-		if (!strlen($varInput) && strlen($this->varValue))
+		if (($varInput == '' || $varInput == '*****') && $this->varValue != '')
 		{
 			return '';
 		}
@@ -138,10 +138,11 @@ class Password extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="password" name="%s" id="ctrl_%s" class="tl_text tl_password%s" value=""%s onfocus="Backend.getScrollOffset();" />%s%s',
+		return sprintf('<input type="password" autocomplete="off" name="%s" id="ctrl_%s" class="tl_text tl_password%s" value="%s"%s onfocus="Backend.getScrollOffset();">%s%s',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->varValue != '') ? '*****' : ''), 
 						$this->getAttributes(),
 						$this->wizard,
 						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$this->hasErrors())) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$this->description.'</p>' : ''));
@@ -169,10 +170,11 @@ class Password extends Widget
 	 */
 	public function generateConfirmation()
 	{
-		return sprintf('<input type="password" name="%s_confirm" id="ctrl_%s_confirm" class="tl_text tl_password confirm%s" value=""%s onfocus="Backend.getScrollOffset();" />%s',
+		return sprintf('<input type="password" autocomplete="off" name="%s_confirm" id="ctrl_%s_confirm" class="tl_text tl_password confirm%s" value="%s"%s onfocus="Backend.getScrollOffset();">%s',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->varValue != '') ? '*****' : ''), 
 						$this->getAttributes(),
 						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
 	}

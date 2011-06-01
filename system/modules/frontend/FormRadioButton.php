@@ -50,7 +50,7 @@ class FormRadioButton extends Widget
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'form_widget';
+	protected $strTemplate = 'form_radio';
 
 	/**
 	 * Options
@@ -116,21 +116,23 @@ class FormRadioButton extends Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s /> <label id="lbl_%s" for="opt_%s">%s</label></span>',
+			$strOptions .= sprintf('<span><input type="radio" name="%s" id="opt_%s" class="radio" value="%s"%s%s%s <label id="lbl_%s" for="opt_%s">%s</label></span>',
 									$this->strName,
 									$this->strId.'_'.$i,
 									$arrOption['value'],
 									$this->isChecked($arrOption),
 									$this->getAttributes(),
+									$this->strTagEnding,
 									$this->strId.'_'.$i,
 									$this->strId.'_'.$i,
 									$arrOption['label']);
 		}
 
-        return sprintf('<div id="ctrl_%s" class="radio_container%s"><input type="hidden" name="%s" value="" />%s</div>',
-						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+        return sprintf('<fieldset class="radio_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
+						(($this->strLabel != '') ? '<legend>' . $this->strLabel . '</legend>' : ''),
 						$this->strName,
+						$this->strTagEnding,
 						$strOptions) . $this->addSubmit();
 	}
 }

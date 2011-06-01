@@ -40,7 +40,7 @@ body {
 
 /* Main */
 #main {
-	width:578px;
+	width:576px;
 	padding:1px;
 	background:#fff;
 	border:1px solid #bbb;
@@ -54,7 +54,7 @@ h1 {
 	color:#fff;
 }
 h2 {
-	margin:18px 18px 9px 18px;
+	margin:18px 18px 9px;
 	padding:7px 0 7px 36px;
 	background:url("images/help.gif") no-repeat left center;
 	font-size:14px;
@@ -63,7 +63,7 @@ h2 {
 
 /* Table */
 .tl_help_table {
-	margin:0 18px 18px 18px;
+	margin:0 18px 18px;
 }
 .tl_help_table td {
 	padding:12px 0;
@@ -76,10 +76,7 @@ h2 {
 	font-weight:bold;
 }
 
-/* IE fixes */
-* html #container {
-	padding-bottom:18px;
-}
-*:first-child+html #container {
+/* IE 7 fix */
+.ie7 #container {
 	padding-bottom:18px;
 }

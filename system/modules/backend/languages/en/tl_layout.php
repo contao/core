@@ -48,13 +48,12 @@ $GLOBALS['TL_LANG']['tl_layout']['widthRight']    = array('Right column width', 
 $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Custom layout sections', 'Custom layout sections can be defined in the back end settings.');
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Custom sections position', 'Please select the position of the custom layout sections.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Style sheets', 'Please select the style sheets you want to add to the layout.');
-$GLOBALS['TL_LANG']['tl_layout']['aggregate']     = array('Aggregate style sheets', 'Aggregate the style sheets into a single file (improves the page loading time).');
 $GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('Skip tl_files/tinymce.css', 'Do not include the TinyMCE style sheet (tl_files/tinymce.css).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('News feeds', 'Please select the news feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Please select the calendar feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
-$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Document Type Definition', 'Please choose a Document Type Definition.');
+$GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Output format', 'Here you can set the output format.');
 $GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'You can either use the local MooTools script or load it from a content delivery network.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
@@ -86,6 +85,7 @@ $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com'
 /**
  * References
  */
+$GLOBALS['TL_LANG']['tl_layout']['html5']        = 'HTML';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_strict'] = 'XHTML Strict';
 $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';

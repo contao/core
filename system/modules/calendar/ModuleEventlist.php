@@ -112,7 +112,7 @@ class ModuleEventlist extends Events
 			$blnClearInput = true;
 		}
 
-		$blnDynamicFormat = in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year'));
+		$blnDynamicFormat = (!$this->cal_ignoreDynamic && in_array($this->cal_format, array('cal_day', 'cal_month', 'cal_year')));
 
 		// Display year
 		if ($blnDynamicFormat && $this->Input->get('year'))
@@ -250,7 +250,6 @@ class ModuleEventlist extends Events
 			}
 
 			// Add template variables
-			$objTemplate->link = $event['href'];
 			$objTemplate->classList = $event['class'] . ((($headerCount % 2) == 0) ? ' even' : ' odd') . (($headerCount == 0) ? ' first' : '') . ($blnIsLastEvent ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->classUpcoming = $event['class'] . ((($eventCount % 2) == 0) ? ' even' : ' odd') . (($eventCount == 0) ? ' first' : '') . ((($offset + $eventCount + 1) >= $limit) ? ' last' : '') . ' cal_' . $event['parent'];
 			$objTemplate->readMore = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['readMore'], $event['title']));

@@ -1,0 +1,25 @@
+
+<div class="layout_latest block<?php echo $this->class; ?>">
+<?php if ($this->hasMetaFields): ?>
+<p class="info"><?php echo $this->date; ?> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
+<?php endif; ?>
+<?php if ($this->addImage): ?>
+<div class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+<?php if ($this->href): ?>
+<a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
+<?php endif; ?>
+<img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>">
+<?php if ($this->href): ?>
+</a>
+<?php endif; ?>
+<?php if ($this->caption): ?>
+<div class="caption"><?php echo $this->caption; ?></div>
+<?php endif; ?>
+</div>
+<?php endif; ?>
+<h2><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h2>
+<p class="teaser"><?php echo $this->teaser; ?></p>
+<?php if ($this->text): ?>
+<p class="more"><?php echo $this->more; ?></p>
+<?php endif; ?>
+</div>

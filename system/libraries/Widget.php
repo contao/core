@@ -83,6 +83,18 @@ abstract class Widget extends Controller
 	protected $strWizard;
 
 	/**
+	 * Output format
+	 * @var string
+	 */
+	protected $strFormat = 'html5';
+
+	/**
+	 * Tag ending
+	 * @var string
+	 */
+	protected $strTagEnding = '>';
+
+	/**
 	 * Errors
 	 * @var array
 	 */
@@ -110,10 +122,25 @@ abstract class Widget extends Controller
 	/**
 	 * Initialize the object
 	 * @param array
+	 * @throws Exception
 	 */
 	public function __construct($arrAttributes=false)
 	{
 		parent::__construct();
+
+		// Override the output format in the front end
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat != '')
+			{
+				$this->strFormat = $objPage->outputFormat;
+			}
+
+			$this->strTagEnding = ($this->strFormat == 'xhtml') ? ' />' : '>';
+		}
+
 		$this->addAttributes($arrAttributes);
 	}
 
@@ -141,7 +168,13 @@ abstract class Widget extends Controller
 				break;
 
 			case 'value':
-				$this->varValue = $varValue;
+				// Decrypt the value if it is encrypted
+				$this->varValue = deserialize($varValue);
+				if ($this->arrConfiguration['encrypt'])
+				{
+					$this->import('Encryption');
+					$this->varValue = $this->Encryption->decrypt($this->varValue);
+				}
 				break;
 
 			case 'class':
@@ -226,6 +259,12 @@ abstract class Widget extends Controller
 				break;
 
 			case 'value':
+				// Encrypt the value
+				if ($this->arrConfiguration['encrypt'])
+				{
+					$this->import('Encryption');
+					return $this->Encryption->encrypt($this->varValue);
+				}
 				return $this->varValue;
 				break;
 
@@ -295,8 +334,13 @@ abstract class Widget extends Controller
 	 * @param string
 	 * @return string
 	 */
-	public function getErrorsAsString($strSeparator="<br />\n")
+	public function getErrorsAsString($strSeparator=false)
 	{
+		if ($strSeparator === false)
+		{
+			$strSeparator = '<br' . $this->strTagEnding . "\n";
+		}
+
 		return $this->hasErrors() ? implode($strSeparator, $this->arrErrors) : '';
 	}
 
@@ -329,7 +373,7 @@ abstract class Widget extends Controller
 	 */
 	public function parse($arrAttributes=false)
 	{
-		if (!strlen($this->strTemplate))
+		if ($this->strTemplate == '')
 		{
 			return '';
 		}
@@ -337,7 +381,7 @@ abstract class Widget extends Controller
 		$this->addAttributes($arrAttributes);
 
 		ob_start();
-		include($this->getTemplate($this->strTemplate));
+		include($this->getTemplate($this->strTemplate, $this->strFormat));
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -417,9 +461,10 @@ abstract class Widget extends Controller
 			return '';
 		}
 
-		return sprintf(' <input type="submit" id="ctrl_%s_submit" class="submit" value="%s" />',
+		return sprintf(' <input type="submit" id="ctrl_%s_submit" class="submit" value="%s"%s',
 						$this->strId,
-						specialchars($this->slabel));
+						specialchars($this->slabel),
+						$this->strTagEnding);
 	}
 
 
@@ -521,13 +566,20 @@ abstract class Widget extends Controller
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
 
-		if (strlen($this->rgxp))
+		if ($this->rgxp != '')
 		{
+			$strAdd = '';
+
+			if ($this->strTable == 'tl_style')
+			{
+				$strAdd = '\$';
+			}
+
 			switch ($this->rgxp)
 			{
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!preg_match('/^[\d \.-]*$/', $varInput))
+					if (!preg_match('/^[\d \.'.$strAdd.'-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -537,14 +589,14 @@ abstract class Widget extends Controller
 				case 'alpha':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alpha:] \.-]*$', $varInput))
+						if (!mb_eregi('^[[:alpha:] \.'.$strAdd.'-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pL \.-]*$/u', $varInput))
+						if (!preg_match('/^[\pL \.'.$strAdd.'-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
@@ -555,14 +607,14 @@ abstract class Widget extends Controller
 				case 'alnum':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alnum:] \._-]*$', $varInput))
+						if (!mb_eregi('^[[:alnum:] \.'.$strAdd.'_-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pN\pL \._-]*$/u', $varInput))
+						if (!preg_match('/^[\pN\pL \.'.$strAdd.'_-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}
@@ -667,7 +719,7 @@ abstract class Widget extends Controller
 			}
 		}
 
-		if ($this->isHexColor && $varInput != '')
+		if ($this->isHexColor && $varInput != '' && strncmp($varInput, '$', 1) !== 0)
 		{
 			$varInput = preg_replace('/[^a-f0-9]+/i', '', $varInput);
 		}

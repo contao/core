@@ -150,6 +150,7 @@ $GLOBALS['BE_FFL'] = array
 	'listWizard'     => 'ListWizard',
 	'optionWizard'   => 'OptionWizard',
 	'moduleWizard'   => 'ModuleWizard',
+	'keyValueWizard' => 'KeyValueWizard',
 	'imageSize'      => 'ImageSize',
 	'timePeriod'     => 'TimePeriod'
 );

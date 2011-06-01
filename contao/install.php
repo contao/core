@@ -71,7 +71,7 @@ class InstallTool extends Controller
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
 	 */
 	public function run()
 	{
@@ -158,6 +158,10 @@ class InstallTool extends Controller
 				{
 					$this->Files->chmod('system/html', 0777);
 				}
+				if (!is_writable(TL_ROOT . '/system/scripts'))
+				{
+					$this->Files->chmod('system/scripts', 0777);
+				}
 				if (!is_writable(TL_ROOT . '/system/logs'))
 				{
 					$this->Files->chmod('system/logs', 0777);
@@ -186,7 +190,17 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Show license
+		 * Check the websitePath
+		 */
+		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
+		{
+			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
+			$this->reload();
+		}
+
+
+		/**
+		 * Make the user accept the LGPL license
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_license')
 		{
@@ -202,17 +216,7 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Check the websitePath
-		 */
-		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
-		{
-			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
-			$this->reload();
-		}
-
-
-		/**
-		 * Authenticate user
+		 * Authenticate the user
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_login')
 		{
@@ -222,47 +226,48 @@ class InstallTool extends Controller
 			list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
 			// Password is correct but not yet salted
-			if (!strlen($strSalt) && $strPassword == sha1($this->Input->post('password')))
+			if ($strSalt == '' && $strPassword == sha1($this->Input->post('password')))
 			{
 				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 				$strPassword = sha1($strSalt . $this->Input->post('password'));
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installPassword']", $strPassword . ':' . $strSalt);
 			}
 
-			// Set cookie
-			if (strlen($strSalt) && $strPassword == sha1($strSalt . $this->Input->post('password')))
+			// Set the cookie
+			if ($strSalt != '' && $strPassword == sha1($strSalt . $this->Input->post('password')))
 			{
-				$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-				$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
-				$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+				$this->setAuthCookie();
 				$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", 0);
-
 				$this->reload();
 			}
 
-			// Increase count
+			// Increase the login count
 			$this->Config->update("\$GLOBALS['TL_CONFIG']['installCount']", $GLOBALS['TL_CONFIG']['installCount'] + 1);
 			$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['invalidPass'];
 		}
 
-		// Check cookie
-		if (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
+		// Auto-login on fresh installations
+		if ($GLOBALS['TL_CONFIG']['installPassword'] == '4d19f112e30930cbe278de966e9b2d907568d1c8')
+		{
+			$this->setAuthCookie();
+		}
+
+		// Check the cookie
+		elseif (!$this->Input->cookie('TL_INSTALL_AUTH') || $_SESSION['TL_INSTALL_AUTH'] == '' || $this->Input->cookie('TL_INSTALL_AUTH') != $_SESSION['TL_INSTALL_AUTH'] || $_SESSION['TL_INSTALL_EXPIRE'] < time())
 		{
 			$this->Template->login = true;
 			$this->outputAndExit();
 		}
 
-		// Renew cookie
+		// Renew the cookie
 		else
 		{
-			$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
-			$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
-			$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
+			$this->setAuthCookie();
 		}
 
 
 		/**
-		 * Set install script password
+		 * Set the install script password
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_install')
 		{
@@ -274,19 +279,19 @@ class InstallTool extends Controller
 				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 			}
 
-			// Passwords do not match
+			// The passwords do not match
 			elseif ($strPassword != $this->Input->post('confirm_password', true))
 			{
 				$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 			}
 
-			// Password too short
+			// The password is too short
 			elseif (utf8_strlen($strPassword) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 			{
 				$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 			}
 
-			// Save password
+			// Save the password
 			else
 			{
 				$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
@@ -299,7 +304,7 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Password must not be "contao" or "typolight"
+		 * The password must not be "contao" or "typolight"
 		 */
 		list($strPassword, $strSalt) = explode(':', $GLOBALS['TL_CONFIG']['installPassword']);
 
@@ -311,22 +316,25 @@ class InstallTool extends Controller
 
 
 		/**
-		 * Save encryption key
+		 * Save the encryption key
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_encryption')
 		{
-			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", (($this->Input->post('key')) ? $this->Input->post('key') : md5(uniqid(mt_rand(), true))));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $this->Input->post('key'));
 			$this->reload();
+		}
+
+		// Autogenerate a key
+		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
+		{
+			$strKey = md5(uniqid(mt_rand(), true));
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['encryptionKey']", $strKey);
+			$GLOBALS['TL_CONFIG']['encryptionKey'] = $strKey;
 		}
 
 		$this->Template->encryptionKey = $GLOBALS['TL_CONFIG']['encryptionKey'];
 
-		if (!strlen($GLOBALS['TL_CONFIG']['encryptionKey']))
-		{
-			$this->Template->encryption = true;
-			$this->outputAndExit();
-		}
-
+		// Check the minimum length
 		if (utf8_strlen($GLOBALS['TL_CONFIG']['encryptionKey']) < 12)
 		{
 			$this->Template->encryptionLength = true;
@@ -630,6 +638,25 @@ class InstallTool extends Controller
 
 
 		/**
+		 * Version 2.10 update
+		 */
+		if ($this->Database->tableExists('tl_style') && !$this->Database->fieldExists('positioning', 'tl_style'))
+		{
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
+			{
+				$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
+				$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
+				$this->Database->query("UPDATE `tl_module` SET `guests`=1 WHERE `type`='lostPassword' OR `type`='registration'");
+
+				$this->reload();
+			}
+
+			$this->Template->is210Update = true;
+			$this->outputAndExit();
+		}
+
+
+		/**
 		 * Collations
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')
@@ -714,7 +741,9 @@ class InstallTool extends Controller
 			$this->reload();
 		}
 
-		$this->Template->dbUpdate = $this->generateSqlForm();
+		$this->import('DbInstaller');
+
+		$this->Template->dbUpdate = $this->DbInstaller->generateSqlForm();
 		$this->Template->dbUpToDate = strlen($this->Template->dbUpdate) ? false : true;
 
 
@@ -841,346 +870,13 @@ class InstallTool extends Controller
 
 
 	/**
-	 * Generate a HTML form with update commands and return it as string
-	 * @return string
+	 * Set the authentication cookie
 	 */
-	protected function generateSqlForm()
+	protected function setAuthCookie()
 	{
-		$count = 0;
-		$return = '';
-		$sql_command = $this->compileCommands();
-
-		if (!count($sql_command))
-		{
-			return '';
-		}
-
-		$_SESSION['sql_commands'] = array();
-
-		$arrOperations = array
-		(
-			'CREATE'        => $GLOBALS['TL_LANG']['tl_install']['CREATE'],
-			'ALTER_ADD'     => $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD'],
-			'ALTER_CHANGE'  => $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'],
-			'ALTER_DROP'    => $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP'],
-			'DROP'          => $GLOBALS['TL_LANG']['tl_install']['DROP']
-		);
-
-		foreach ($arrOperations as $command=>$label)
-		{
-			if (is_array($sql_command[$command]))
-			{
-				// Headline
-				$return .= '
-    <tr>
-      <td colspan="2" class="tl_col_0">'.$label.'</td>
-    </tr>';
-
-				// Check all
-				$return .= '
-    <tr>
-      <td class="tl_col_1"><input type="checkbox" id="check_all_' . $count . '" class="tl_checkbox" onclick="Backend.toggleCheckboxElements(this, \'' . strtolower($command) . '\')" /></td>
-      <td class="tl_col_2"><label for="check_all_' . $count . '" style="color:#a6a6a6;"><em>Select all</em></label></td>
-    </tr>';
-
-				// Fields
-				foreach ($sql_command[$command] as $vv)
-				{
-					$key = md5($vv);
-					$_SESSION['sql_commands'][$key] = $vv;
-
-					$return .= '
-    <tr>
-      <td class="tl_col_1"><input type="checkbox" name="sql[]" id="sql_'.$count.'" class="tl_checkbox ' . strtolower($command) . '" value="'.$key.'"'.((stristr($command, 'DROP') === false) ? ' checked="checked"' : '').' /></td>
-      <td class="tl_col_2"><pre><label for="sql_'.$count++.'">'.$vv.'</label></pre></td>
-    </tr>';
-				}
-			}
-		}
-
-		return '
-  <table cellspacing="0" cellpadding="0" id="sql_table" style="margin-top:9px;" summary="Database modifications">'.$return.'
-  </table>' . "\n";
-	}
-
-
-	/**
-	 * Compile a command array for each necessary database modification
-	 * @return array
-	 */
-	protected function compileCommands()
-	{
-		$drop = array();
-		$create = array();
-		$return = array();
-
-		$sql_current = $this->getFromDb();
-		$sql_target = $this->getFromFile();
-
-		// Create tables
-		foreach (array_diff(array_keys($sql_target), array_keys($sql_current)) as $table)
-		{
-			$return['CREATE'][] = "CREATE TABLE `" . $table . "` (\n  " . implode(",\n  ", $sql_target[$table]['TABLE_FIELDS']) . (count($sql_target[$table]['TABLE_CREATE_DEFINITIONS']) ? ',' : '') . "\n  " . implode(",\n  ", $sql_target[$table]['TABLE_CREATE_DEFINITIONS']) . "\n)".$sql_target[$table]['TABLE_OPTIONS'].';';
-			$create[] = $table;
-		}
-
-		// Add or change fields
-		foreach ($sql_target as $k=>$v)
-		{
-			if (in_array($k, $create))
-			{
-				continue;
-			}
-
-			// Fields
-			if (is_array($v['TABLE_FIELDS']))
-			{
-				foreach ($v['TABLE_FIELDS'] as $kk=>$vv)
-				{
-					if (!isset($sql_current[$k]['TABLE_FIELDS'][$kk]))
-					{
-						$return['ALTER_ADD'][] = 'ALTER TABLE `'.$k.'` ADD '.$vv.';';
-					}
-					elseif ($sql_current[$k]['TABLE_FIELDS'][$kk] != $vv)
-					{
-						$return['ALTER_CHANGE'][] = 'ALTER TABLE `'.$k.'` CHANGE `'.$kk.'` '.$vv.';';
-					}
-				}
-			}
-
-			// Create definitions
-			if (is_array($v['TABLE_CREATE_DEFINITIONS']))
-			{
-				foreach ($v['TABLE_CREATE_DEFINITIONS'] as $kk=>$vv)
-				{
-					if (!isset($sql_current[$k]['TABLE_CREATE_DEFINITIONS'][$kk]))
-					{
-						$return['ALTER_ADD'][] = 'ALTER TABLE `'.$k.'` ADD '.$vv.';';
-					}
-					elseif ($sql_current[$k]['TABLE_CREATE_DEFINITIONS'][$kk] != str_replace('FULLTEXT ', '', $vv))
-					{
-						$return['ALTER_CHANGE'][] = 'ALTER TABLE `'.$k.'` DROP INDEX `'.$kk.'`, ADD '.$vv.';';
-					}
-				}
-			}
-
-			// Move auto_increment fields to the end of the array
-			if (is_array($return['ALTER_ADD']))
-			{
-				foreach (preg_grep('/auto_increment/i', $return['ALTER_ADD']) as $kk=>$vv)
-				{
-					unset($return['ALTER_ADD'][$kk]);
-					$return['ALTER_ADD'][$kk] = $vv;
-				}
-			}
-
-			if (is_array($return['ALTER_CHANGE']))
-			{
-				foreach (preg_grep('/auto_increment/i', $return['ALTER_CHANGE']) as $kk=>$vv)
-				{
-					unset($return['ALTER_CHANGE'][$kk]);
-					$return['ALTER_CHANGE'][$kk] = $vv;
-				}
-			}
-		}
-
-		// Drop tables
-		foreach (array_diff(array_keys($sql_current), array_keys($sql_target)) as $table)
-		{
-			$return['DROP'][] = 'DROP TABLE `'.$table.'`;';
-			$drop[] = $table;
-		}
-
-		// Drop fields
-		foreach ($sql_current as $k=>$v)
-		{
-			if (!in_array($k, $drop))
-			{
-				// Fields
-				if (is_array($v['TABLE_FIELDS']))
-				{
-					foreach ($v['TABLE_FIELDS'] as $kk=>$vv)
-					{
-						if (!isset($sql_target[$k]['TABLE_FIELDS'][$kk]))
-						{
-							$return['ALTER_DROP'][] = 'ALTER TABLE `'.$k.'` DROP `'.$kk.'`;';
-						}
-					}
-				}
-
-				// Create definitions
-				if (is_array($v['TABLE_CREATE_DEFINITIONS']))
-				{
-					foreach ($v['TABLE_CREATE_DEFINITIONS'] as $kk=>$vv)
-					{
-						if (!isset($sql_target[$k]['TABLE_CREATE_DEFINITIONS'][$kk]))
-						{
-							$return['ALTER_DROP'][] = 'ALTER TABLE `'.$k.'` DROP INDEX `'.$kk.'`;';
-						}
-					}
-				}
-			}
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Compile a table array from all SQL files and return it
-	 * @return array
-	 */
-	protected function getFromFile()
-	{
-		$return = array();
-
-		// Get all SQL files
-		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
-		{
-			if (strncmp($strModule, '.', 1) === 0 || strncmp($strModule, '__', 2) === 0)
-			{
-				continue;
-			}
-
-			$strFile = sprintf('%s/system/modules/%s/config/database.sql', TL_ROOT, $strModule);
-
-			if (!file_exists($strFile))
-			{
-				continue;
-			}
-
-			$data = file($strFile);
-
-			foreach ($data as $k=>$v)
-			{
-				$key_name = array();
-				$subpatterns = array();
-
-				// Unset comments and empty lines
-				if (preg_match('/^[#-]+/i', $v) || !strlen(trim($v)))
-				{
-					unset($data[$k]);
-					continue;
-				}
-
-				// Store table names
-				if (preg_match('/^CREATE TABLE `([^`]+)`/i', $v, $subpatterns))
-				{
-					$table = $subpatterns[1];
-				}
-
-				// Get table options
-				elseif (strlen($table) && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
-				{
-					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
-					$table = '';
-				}
-
-				// Add fields
-				elseif (strlen($table))
-				{
-					preg_match('/^[^`]*`([^`]+)`/i', trim($v), $key_name);
-
-					$first = preg_replace('/\s[^\n\r]+/i', '', $key_name[0]);
-					$key = $key_name[1];
-
-					// Create definitions
-					if (in_array($first, array('KEY', 'PRIMARY', 'PRIMARY KEY', 'FOREIGN', 'FOREIGN KEY', 'INDEX', 'UNIQUE', 'FULLTEXT', 'CHECK')))
-					{
-						$return[$table]['TABLE_CREATE_DEFINITIONS'][$key] = preg_replace('/,$/i', '', trim($v));
-					}
-
-					else
-					{
-						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/i', '', trim($v));
-					}
-				}
-			}
-		}
-
-		return $return;
-	}
-
-
-	/**
-	 * Compile a table array from the database and return it
-	 * @return array
-	 */
-	protected function getFromDB()
-	{
-		$tables = preg_grep('/^tl_/i', $this->Database->listTables());
-
-		if (!count($tables))
-		{
-			return array();
-		}
-
-		$return = array();
-
-		foreach ($tables as $table)
-		{
-			$fields = $this->Database->listFields($table);
-
-			foreach ($fields as $field)
-			{
-				$name = $field['name'];
-				$field['name'] = '`'.$field['name'].'`';
-
-				// Field type
-				if (strlen($field['length']))
-				{
-					$field['type'] .= '(' . $field['length'] . (strlen($field['precision']) ? ',' . $field['precision'] : '') . ')';
-
-					unset($field['length']);
-					unset($field['precision']);
-				}
-
-				// Default values
-				if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment'))
-				{
-					unset($field['default']);
-				}
-
-				elseif (is_null($field['default']) || strtolower($field['default']) == 'null')
-				{
-					$field['default'] = "default NULL";
-				}
-
-				else
-				{
-					$field['default'] = "default '" . $field['default'] . "'";
-				}
-
-				// Indices
-				if (strlen($field['index']))
-				{
-					switch ($field['index'])
-					{
-						case 'PRIMARY':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'PRIMARY KEY  (`'.$name.'`)';
-							break;
-
-						case 'UNIQUE':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'UNIQUE KEY `'.$name.'` (`'.$name.'`)';
-							break;
-
-						case 'FULLTEXT':
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'FULLTEXT KEY `'.$name.'` (`'.$name.'`)';
-							break;
-
-						default:
-							$return[$table]['TABLE_CREATE_DEFINITIONS'][$name] = 'KEY `'.$name.'` (`'.$name.'`)';
-							break;
-					}
-
-					unset($field['index']);
-				}
-
-				$return[$table]['TABLE_FIELDS'][$name] = trim(implode(' ', $field));
-			}
-		}
-
-		return $return;
+		$_SESSION['TL_INSTALL_EXPIRE'] = (time() + 300);
+		$_SESSION['TL_INSTALL_AUTH'] = md5(uniqid(mt_rand(), true) . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . session_id());
+		$this->setCookie('TL_INSTALL_AUTH', $_SESSION['TL_INSTALL_AUTH'], $_SESSION['TL_INSTALL_EXPIRE'], $GLOBALS['TL_CONFIG']['websitePath']);
 	}
 
 
@@ -1193,11 +889,12 @@ class InstallTool extends Controller
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->isMac = preg_match('/mac/i', $this->Environment->httpUserAgent);
 		$this->Template->pageOffset = $this->Input->cookie('BE_PAGE_OFFSET');
 		$this->Template->action = ampersand($this->Environment->request);
 		$this->Template->noCookies = $GLOBALS['TL_LANG']['MSC']['noCookies'];
-		$this->Template->pageTitle = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
+		$this->Template->title = $GLOBALS['TL_LANG']['tl_install']['installTool'][0];
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 
 		$this->Template->output();
 		exit;

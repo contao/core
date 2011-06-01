@@ -118,13 +118,13 @@ abstract class Backend extends Controller
 		// Add module style sheet
 		if (isset($arrModule['stylesheet']))
 		{
-			$GLOBALS['TL_CSS'][] = $arrModule['stylesheet'];
+			$GLOBALS['TL_CSS'][] = TL_SCRIPT_URL . $arrModule['stylesheet'];
 		}
 
 		// Add module javascript
 		if (isset($arrModule['javascript']))
 		{
-			$GLOBALS['TL_JAVASCRIPT'][] = $arrModule['javascript'];
+			$GLOBALS['TL_JAVASCRIPT'][] = TL_SCRIPT_URL . $arrModule['javascript'];
 		}
 
 		// Redirect if the current table does not belong to the current module
@@ -174,7 +174,7 @@ abstract class Backend extends Controller
 		}
 
 		// AJAX request
-		if ($this->Input->post('isAjax'))
+		if ($_POST && $this->Environment->isAjaxRequest)
 		{
 			$this->objAjax->executePostActions($dc);
 		}
@@ -286,7 +286,7 @@ abstract class Backend extends Controller
 			elseif ($objPages->type == 'regular')
 			{
 				// Searchable and not protected
-				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && (!$blnIsSitemap || strncmp($objPages->robots, 'noindex', 7) !== 0))
+				if (!$objPages->noSearch && (!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && (!$blnIsSitemap || $objPages->sitemap != 'map_never'))
 				{
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))

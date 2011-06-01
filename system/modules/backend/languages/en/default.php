@@ -66,11 +66,14 @@ $GLOBALS['TL_LANG']['ERR']['invalidColor']      = 'Invalid color format!';
 $GLOBALS['TL_LANG']['ERR']['all_fields']        = 'Please select at least one field!';
 $GLOBALS['TL_LANG']['ERR']['aliasExists']       = 'The alias "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['importFolder']      = 'The folder "%s" cannot be imported!';
-$GLOBALS['TL_LANG']['ERR']['notWriteable']      = 'The file "%s" is not writeable, so your changes will not take effect!';
+$GLOBALS['TL_LANG']['ERR']['notWriteable']      = 'The file "%s" is not writeable and can therefore not be updated!';
 $GLOBALS['TL_LANG']['ERR']['invalidName']       = 'This file or folder name is invalid!';
 $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'The file or folder "%s" is invalid!';
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'The file "%s" already exists!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Invalid redirect target (circular reference)!';
+$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Attention!</strong> Your web browser is %sout of date%s and <strong>you cannot use all features of this website</strong>.%s';
+$GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'None of the website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
+$GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'None of the website root pages for <strong>%s</strong> has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
 
 
 /**
@@ -139,6 +142,13 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'December';
 
 
 /**
+ * Short names length
+ */
+$GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 3;
+$GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
+
+
+/**
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 0;
@@ -157,6 +167,20 @@ $GLOBALS['TL_LANG']['MSC']['target'] = array('Open in new window', 'Open the lin
  */
 $GLOBALS['TL_LANG']['MSC']['decimalSeparator']   = '.';
 $GLOBALS['TL_LANG']['MSC']['thousandsSeparator'] = ',';
+
+
+/**
+ * Units
+ */
+$GLOBALS['TL_LANG']['UNITS'][0] = 'Byte';
+$GLOBALS['TL_LANG']['UNITS'][1] = 'kB';
+$GLOBALS['TL_LANG']['UNITS'][2] = 'MB';
+$GLOBALS['TL_LANG']['UNITS'][3] = 'GB';
+$GLOBALS['TL_LANG']['UNITS'][4] = 'TB';
+$GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
+$GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
+$GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
+$GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
 
 
 /**
@@ -205,6 +229,7 @@ $GLOBALS['TL_LANG']['MSC']['ow_down']    = 'Move the row one position down';
 $GLOBALS['TL_LANG']['MSC']['ow_delete']  = 'Delete the row';
 $GLOBALS['TL_LANG']['MSC']['ow_value']   = 'Value';
 $GLOBALS['TL_LANG']['MSC']['ow_label']   = 'Label';
+$GLOBALS['TL_LANG']['MSC']['ow_key']     = 'Key';
 $GLOBALS['TL_LANG']['MSC']['ow_default'] = 'Default';
 $GLOBALS['TL_LANG']['MSC']['ow_group']   = 'Group';
 

@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,aggregate,skipTinymce;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -227,19 +227,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
 			'eval'                    => array('multiple'=>true)
 		),
-		'aggregate' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['aggregate'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'skipTinymce' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipTinymce'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'inputType'               => 'checkbox'
 		),
 		'newsfeeds' => array
 		(
@@ -283,7 +275,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'select',
-			'options'                 => array('xhtml_strict', 'xhtml_trans'),
+			'options'                 => array('html5', 'xhtml_strict', 'xhtml_trans'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),

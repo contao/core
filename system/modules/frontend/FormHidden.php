@@ -59,9 +59,10 @@ class FormHidden extends Widget
 	 */
 	public function generate()
 	{
-		return sprintf('<input type="hidden" name="%s" value="%s" />',
+		return sprintf('<input type="hidden" name="%s" value="%s"%s',
 						$this->strName,
-						specialchars($this->varValue));
+						specialchars($this->varValue),
+						$this->strTagEnding);
 	}
 }
 
