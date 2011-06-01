@@ -1,1 +1,0 @@
-tinyMCE.addI18n('sr.simple',{cleanup_desc:"O\u010disti kod",redo_desc:"Vrati (Ctrl+Y)",undo_desc:"Opozovi (Ctrl+Z)",numlist_desc:"Broj\u010dana lista",bullist_desc:"Znakovna lista",striketrough_desc:"Precrtaj",underline_desc:"Podvuci (Ctrl+U)",italic_desc:"Iskosi (Ctrl+I)",bold_desc:"Podebljaj (Ctrl+B)"});
