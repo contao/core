@@ -48,7 +48,7 @@ $GLOBALS['TL_LANG']['tl_user_group']['pagemounts_legend'] = 'Pagemounts';
 $GLOBALS['TL_LANG']['tl_user_group']['filemounts_legend'] = 'Filemounts';
 $GLOBALS['TL_LANG']['tl_user_group']['forms_legend']      = 'Form permissions';
 $GLOBALS['TL_LANG']['tl_user_group']['account_legend']    = 'Account settings';
-$GLOBALS['TL_LANG']['tl_user_group']['alexf_legend']      = 'Excluded fields';
+$GLOBALS['TL_LANG']['tl_user_group']['alexf_legend']      = 'Allowed fields';
 
 
 /**

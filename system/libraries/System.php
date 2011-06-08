@@ -235,10 +235,17 @@ abstract class System
 	 */
 	protected function redirect($strLocation, $intStatus=303)
 	{
+		$strLocation = str_replace('&amp;', '&', $strLocation);
+
 		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
-			echo json_encode(array('token'=>REQUEST_TOKEN));
+			echo json_encode(array
+			(
+				'token'  => REQUEST_TOKEN,
+				'target' => $strLocation
+			));
+
 			exit;
 		}
 
@@ -266,11 +273,11 @@ abstract class System
 		// Check the target address
 		if (preg_match('@^https?://@i', $strLocation))
 		{
-			header('Location: ' . str_replace('&amp;', '&', $strLocation));
+			header('Location: ' . $strLocation);
 		}
 		else
 		{
-			header('Location: ' . $this->Environment->base . str_replace('&amp;', '&', $strLocation));
+			header('Location: ' . $this->Environment->base . $strLocation);
 		}
 
 		exit;

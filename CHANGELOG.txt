@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.10.RC1 (XXXX-XX-XX)
+-----------------------------
+- Fixed: the new request tokens did not support working with multiple tabs
+
 Version 2.10.beta1 (2011-06-01)
 -------------------------------
 - Updated: updated TinyMCE to version 3.4.2

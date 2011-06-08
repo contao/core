@@ -57,7 +57,7 @@ define('SWITCH_ORDER', true);
  * the web browser reload those resources after a Contao update.
  */
 define('VERSION', '2.10');
-define('BUILD', 'beta1');
+define('BUILD', 'RC1');
 define('CALENDAR', '1.2.RC4');
 define('EDITAREA', '0.8.2');
 define('FANCYUPLOAD', '3.0');
