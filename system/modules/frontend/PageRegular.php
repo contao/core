@@ -341,6 +341,7 @@ class PageRegular extends Frontend
 	protected function createHeaderScripts(Database_Result $objPage, Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
+		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
 
@@ -366,7 +367,6 @@ class PageRegular extends Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$strCcStyleSheets = '';
 			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
 
 			while ($objStylesheets->next())
@@ -401,16 +401,16 @@ class PageRegular extends Frontend
 					$strCcStyleSheets .= $strStyleSheet . "\n";
 				}
 			}
-
-			// Create the aggregated style sheet
-			if ($objCombiner->hasEntries())
-			{
-				$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
-			}
-
-			// Always add conditional style sheets at the end
-			$strStyleSheets .= $strCcStyleSheets;
 		}
+
+		// Create the aggregated style sheet
+		if ($objCombiner->hasEntries())
+		{
+			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
+		}
+
+		// Always add conditional style sheets at the end
+		$strStyleSheets .= $strCcStyleSheets;
 
 		$newsfeeds = deserialize($objLayout->newsfeeds);
 		$calendarfeeds = deserialize($objLayout->calendarfeeds);
