@@ -435,7 +435,7 @@ class tl_comments extends Backend
 
 				if ($objParent->numRows)
 				{
-					$title .= ' (<a href="contao/main.php?do=faq&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->question . '</a>)';
+					$title .= ' (<a href="contao/main.php?do=faq&amp;table=tl_faq&amp;act=edit&amp;id=' . $objParent->id . '">' . $objParent->question . '</a>)';
 				}
 				break;
 
