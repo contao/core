@@ -1715,7 +1715,7 @@ class StyleSheets extends Backend
 
 				case 'border-spacing':
 					$arrSet['border'] = 1;
-					$arrSet['border-spacing'] = array
+					$arrSet['borderspacing'] = array
 					(
 						'value' => preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]),
 						'unit' => preg_replace('/[^ceimnptx%]/', '', $arrChunks[1])
