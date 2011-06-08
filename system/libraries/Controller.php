@@ -2139,8 +2139,8 @@ abstract class Controller extends System
 					// Sanitize path
 					$strFile = str_replace('../', '', $strFile);
 
-					// Include .php and .tpl files
-					if (preg_match('/\.(php|tpl)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
+					// Include .php, .tpl, .xhtml and .html5 files
+					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
 					{
 						ob_start();
 						include(TL_ROOT . '/templates/' . $strFile);

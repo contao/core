@@ -6,6 +6,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 -----------------------------
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
+- Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)
 -------------------------------
