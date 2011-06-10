@@ -507,18 +507,18 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function getForm($intId, $strFormat='html5')
+	protected function getForm($varId, $strFormat='html5')
 	{
-		if (!strlen($intId) || $intId < 1)
+		if ($varId == '')
 		{
 			return '';
 		}
 
 		$this->import('Database');
 
-		$objElement = $this->Database->prepare("SELECT * FROM tl_form WHERE id=?")
+		$objElement = $this->Database->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
 									 ->limit(1)
-									 ->execute($intId);
+									 ->execute((is_numeric($varId) ? $varId : 0), $varId);
 
 		if ($objElement->numRows < 1)
 		{
@@ -526,7 +526,7 @@ abstract class Controller extends System
 		}
 
 		$objElement->typePrefix = 'ce_';
-		$objElement->form = $intId;
+		$objElement->form = $objElement->id;
 		$objElement = new Form($objElement);
 		$strBuffer = $objElement->generate();
 

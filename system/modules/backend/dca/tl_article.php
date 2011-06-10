@@ -506,8 +506,8 @@ class tl_article extends Backend
 	{
 		$autoAlias = false;
 
-		// Generate alias if there is none
-		if (!strlen($varValue))
+		// Generate an alias if there is none
+		if ($varValue == '')
 		{
 			$autoAlias = true;
 			$varValue = standardize($dc->activeRecord->title);

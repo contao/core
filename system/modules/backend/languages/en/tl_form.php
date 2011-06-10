@@ -33,6 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_form']['title']        = array('Title', 'Please enter the form title.');
+$GLOBALS['TL_LANG']['tl_form']['alias']        = array('Form alias', 'The form alias is a unique reference to the form which can be called instead of its numeric ID.');
 $GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Redirect page', 'Please choose the page to which visitors will be redirected after submitting the form.');
 $GLOBALS['TL_LANG']['tl_form']['sendViaEmail'] = array('Send form data via e-mail', 'Send the submitted data to an e-mail address.');
 $GLOBALS['TL_LANG']['tl_form']['recipient']    = array('Recipient address', 'Separate multiple e-mail addresses with comma.');

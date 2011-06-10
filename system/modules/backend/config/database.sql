@@ -113,6 +113,7 @@ CREATE TABLE `tl_form` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `tstamp` int(10) unsigned NOT NULL default '0',
   `title` varchar(255) NOT NULL default '',
+  `alias` varbinary(128) NOT NULL default '',
   `jumpTo` int(10) unsigned NOT NULL default '0',
   `sendViaEmail` char(1) NOT NULL default '',
   `recipient` text NULL,
@@ -126,7 +127,8 @@ CREATE TABLE `tl_form` (
   `formID` varchar(64) NOT NULL default '',
   `tableless` char(1) NOT NULL default '',
   `allowTags` char(1) NOT NULL default '',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `alias` (`alias`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

@@ -81,22 +81,14 @@ class Index extends Backend
 			$this->reload();
 		}
 
-		$this->User->logout();
-
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('tl_user');
-	}
-
-
-	/**
-	 * Reload the page once after a logout to create a new session_id()
-	 */
-	public function __destruct()
-	{
-		if (!strlen(session_id()))
+		// Reload the page once after a logout to create a new session_id()
+		if ($this->User->logout())
 		{
 			$this->reload();
 		}
+
+		$this->loadLanguageFile('default');
+		$this->loadLanguageFile('tl_user');
 	}
 
 

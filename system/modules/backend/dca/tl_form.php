@@ -118,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('sendViaEmail', 'storeValues'),
-		'default'                     => '{title_legend},title,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail;{store_legend:hide},storeValues;{expert_legend:hide},method,attributes,formID'
+		'default'                     => '{title_legend},title,alias,jumpTo;{config_legend},tableless,allowTags;{email_legend},sendViaEmail;{store_legend:hide},storeValues;{expert_legend:hide},method,attributes,formID'
 	),
 
 	// Subpalettes
@@ -137,7 +137,18 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
+		'alias' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['alias'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_form', 'generateAlias')
+			)
 		),
 		'jumpTo' => array
 		(
@@ -391,6 +402,41 @@ class tl_form extends Backend
 				}
 				break;
 		}
+	}
+
+
+	/**
+	 * Auto-generate a form alias if it has not been set yet
+	 * @param mixed
+	 * @param object
+	 * @return string
+	 */
+	public function generateAlias($varValue, DataContainer $dc)
+	{
+		$autoAlias = false;
+
+		// Generate an alias if there is none
+		if ($varValue == '')
+		{
+			$autoAlias = true;
+			$varValue = standardize($dc->activeRecord->title);
+		}
+
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_form WHERE id=? OR alias=?")
+								   ->execute($dc->id, $varValue);
+
+		// Check whether the page alias exists
+		if ($objAlias->numRows > 1)
+		{
+			if (!$autoAlias)
+			{
+				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			}
+
+			$varValue .= '-' . $dc->id;
+		}
+
+		return $varValue;
 	}
 
 

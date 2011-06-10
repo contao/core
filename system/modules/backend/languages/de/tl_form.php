@@ -33,6 +33,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_form']['title']        = array('Titel', 'Bitte geben Sie den Formular-Titel ein.');
+$GLOBALS['TL_LANG']['tl_form']['alias']        = array('Formalias', 'Der Formalias ist eine eindeutige Referenz, die anstelle der numerischen Form-ID aufgerufen werden kann.');
 $GLOBALS['TL_LANG']['tl_form']['jumpTo']       = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher nach dem Abschicken des Formulars weitergeleitet werden.');
 $GLOBALS['TL_LANG']['tl_form']['sendViaEmail'] = array('Per E-Mail versenden', 'Die Formulardaten an eine E-Mail-Adresse versenden.');
 $GLOBALS['TL_LANG']['tl_form']['recipient']    = array('Empfänger-Adresse', 'Mehrere E-Mail-Adressen können mit Komma getrennt werden.');
