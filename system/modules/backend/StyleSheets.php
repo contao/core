@@ -457,14 +457,14 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$return .= $lb . 'background:' . (($row['bgcolor'] != '') ? '#' . $row['bgcolor'] . ' ' : '') . 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				$return .= $lb . 'background:' . (($row['bgcolor'] != '') ? $this->compileColor($row['bgcolor'], $blnWriteToFile) . ' ' : '') . 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
 			{
 				// Background color
 				if ($row['bgcolor'] != '')
 				{
-					$return .= $lb . 'background-color:#' . $row['bgcolor'] . ';';
+					$return .= $lb . 'background-color:' . $this->compileColor($row['bgcolor'], $blnWriteToFile) . ';';
 				}
 
 				// Background image
@@ -675,7 +675,7 @@ class StyleSheets extends Backend
 					}
 					if ($row['shadowcolor'] != '')
 					{
-						$shadow .= ' #' . $row['shadowcolor'];
+						$shadow .= ' ' . $this->compileColor($row['shadowcolor'], $blnWriteToFile);
 					}
 					$shadow .= ';';
 					
@@ -702,7 +702,7 @@ class StyleSheets extends Backend
 				// Try to shorten the definition
 				if ($top != '' && $right != '' && $bottom != '' && $left != '' && $top == $right && $top == $bottom && $top == $left)
 				{
-					$return .= $lb . 'border:' . $top . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' .$row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' #' .$row['bordercolor'] : '') . ';';
+					$return .= $lb . 'border:' . $top . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' .$row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' ' . $this->compileColor($row['bordercolor'], $blnWriteToFile) : '') . ';';
 				}
 				elseif ($top != '' && $right != '' && $bottom != '' && $left != '' && $top == $bottom && $left == $right)
 				{
@@ -715,7 +715,7 @@ class StyleSheets extends Backend
 
 					if ($row['bordercolor'] != '')
 					{
-						$return .= $lb . 'border-color:#' . $row['bordercolor'] . ';';
+						$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
 					}
 				}
 				elseif ($top == '' && $right == '' && $bottom == '' && $left == '')
@@ -727,7 +727,7 @@ class StyleSheets extends Backend
 
 					if ($row['bordercolor'] != '')
 					{
-						$return .= $lb . 'border-color:#' . $row['bordercolor'] . ';';
+						$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
 					}
 				}
 				else
@@ -738,7 +738,7 @@ class StyleSheets extends Backend
 					{
 						if ($v != '')
 						{
-							$return .= $lb . 'border-' . $k . ':' . $v . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' . $row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' #' . $row['bordercolor'] : '') . ';';
+							$return .= $lb . 'border-' . $k . ':' . $v . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' . $row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' ' . $this->compileColor($row['bordercolor'], $blnWriteToFile) : '') . ';';
 						}
 					}
 				}
@@ -752,7 +752,7 @@ class StyleSheets extends Backend
 
 				if ($row['bordercolor'] != '')
 				{
-					$return .= $lb . 'border-color:#' . $row['bordercolor'] . ';';
+					$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
 				}
 			}
 
@@ -908,7 +908,7 @@ class StyleSheets extends Backend
 			// Font color
 			if ($row['fontcolor'] != '')
 			{
-				$return .= $lb . 'color:#' . $row['fontcolor'] . ';';
+				$return .= $lb . 'color:' . $this->compileColor($row['fontcolor'], $blnWriteToFile) . ';';
 			}
 
 			// White space
@@ -1001,6 +1001,65 @@ class StyleSheets extends Backend
 		}
 
 		return $return;
+	}
+
+
+	/**
+	 * Compile a color value and return a hex or rgba color
+	 * @param  mixed
+	 * @param  boolean
+	 * @return string
+	 */
+	protected function compileColor($color, $blnWriteToFile=false)
+	{
+		$color = deserialize($color, true);
+
+		if (!isset($color[1]) || $color[1] == '')
+		{
+			return '#' . $color[0];
+		}
+		else
+		{
+			return 'rgba(' . implode(',', $this->convertHexColor($color[0], $blnWriteToFile)) . ','. ($color[1] / 100) .')';
+		}
+	}
+
+
+	/**
+	 * Convert hex colors to rgb
+	 * @param  string
+	 * @param  boolean
+	 * @return array
+	 * @see http://de3.php.net/manual/de/function.hexdec.php#99478
+	 */
+	protected function convertHexColor($color, $blnWriteToFile=false)
+	{
+		// Support global variables
+		if (!$blnWriteToFile && strncmp($color, '$', 1) === 0)
+		{
+			return array($color);
+		}
+
+		$rgb = array();
+
+		// Try to convert using bitwise operation
+		if (strlen($color) == 6)
+		{
+			$dec = hexdec($color);
+			$rgb['red'] = 0xFF & ($dec >> 0x10);
+			$rgb['green'] = 0xFF & ($dec >> 0x8);
+			$rgb['blue'] = 0xFF & $dec;
+		}
+
+		// Shorthand notation
+		elseif (strlen($color) == 3)
+		{
+			$rgb['red'] = hexdec(str_repeat(substr($color, 0, 1), 2));
+			$rgb['green'] = hexdec(str_repeat(substr($color, 1, 1), 2));
+			$rgb['blue'] = hexdec(str_repeat(substr($color, 2, 1), 2));
+		}
+
+		return $rgb;
 	}
 
 

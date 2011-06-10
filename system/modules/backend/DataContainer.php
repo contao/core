@@ -328,6 +328,10 @@ class DataContainer extends Backend
 		{
 			$arrData['eval']['tl_class'] .= ' cbx';
 		}
+		elseif ($arrData['inputType'] == 'text' && $arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'wizard') !== false)
+		{
+			$arrData['eval']['tl_class'] .= ' inline';
+		}
 
 		// No 2-column layout in "edit all" mode
 		if ($this->Input->get('act') == 'editAll' || $this->Input->get('act') == 'overrideAll')

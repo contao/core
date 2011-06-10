@@ -42,6 +42,9 @@
 .wizard .tl_text {
 	width:290px;
 }
+.wizard .tl_text_2 {
+	width:140px;
+}
 .long .tl_text {
 	width:657px;
 }
@@ -50,6 +53,9 @@
 }
 .cbx {
 	height:48px;
+}
+.inline div {
+	display:inline;
 }
 
 /* Error messages */
