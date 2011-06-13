@@ -62,7 +62,18 @@ class FormExplanation extends Widget
 	 */
 	public function generate()
 	{
-		return $this->text;
+		global $objPage;
+		$this->import('String');
+
+		// Clean RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			return $this->String->toXhtml($this->text);
+		}
+		else
+		{
+			return $this->String->toHtml5($this->text);
+		}
 	}
 }
 
