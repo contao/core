@@ -158,8 +158,17 @@ class ModuleArticle extends Module
 		// Back link
 		if (!$this->multiMode && $strArticle != '' && ($strArticle == $this->id || $strArticle == $this->alias))
 		{
-			$this->Template->backlink = 'javascript:history.go(-1)';
 			$this->Template->back = specialchars($GLOBALS['TL_LANG']['MSC']['goBack']);
+
+			// Remove the "/articles/…" part from the URL
+			if ($GLOBALS['TL_CONFIG']['disableAlias'])
+			{
+				$this->Template->backlink = preg_replace('@&(amp;)?articles=[^&]+@', '', $this->Environment->request);
+			}
+			else
+			{
+				$this->Template->backlink = preg_replace('@/articles/[^/]+@', '', $this->Environment->request) . $GLOBALS['TL_CONFIG']['urlSuffix'];
+			}
 		}
 
 		$contentElements = '';
