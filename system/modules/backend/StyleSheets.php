@@ -987,7 +987,7 @@ class StyleSheets extends Backend
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
             {                
 				$this->import($callback[0]);
-				$return .= $this->$callback[0]->$callback[1]($row);
+				$return .= $lb . $this->$callback[0]->$callback[1]($row);
 			}    
 		}
 
