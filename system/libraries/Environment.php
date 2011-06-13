@@ -276,7 +276,7 @@ class Environment
 			}
 		}
 
-		return preg_replace('/[^A-Za-z0-9\.:-]/', '', $host);
+		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $host);
 	}
 
 
@@ -286,7 +286,7 @@ class Environment
 	 */
 	protected function httpXForwardedHost()
 	{
-		return preg_replace('/[^A-Za-z0-9\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
+		return preg_replace('/[^A-Za-z0-9\[\]\.:-]/', '', $_SERVER['HTTP_X_FORWARDED_HOST']);
 	}
 
 
