@@ -159,7 +159,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,useSSL,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
 		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
 		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
@@ -169,7 +169,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	(
 		'autoforward'                 => 'redirect,jumpTo',
 		'protected'                   => 'groups',
-		'createSitemap'               => 'sitemapName',
+		'createSitemap'               => 'sitemapName,useSSL',
 		'includeLayout'               => 'layout',
 		'includeCache'                => 'cache',
 		'includeChmod'                => 'cuser,cgroup,chmod'
@@ -285,12 +285,35 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				array('tl_page', 'checkDns')
 			)
 		),
-		'useSSL' => array
+		'staticFiles' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['useSSL'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticFiles'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkStaticUrl')
+			)
+		),
+		'staticSystem' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticSystem'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkStaticUrl')
+			)
+		),
+		'staticPlugins' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['MSC']['staticPlugins'],
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'url', 'trailingSlash'=>false, 'tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkStaticUrl')
+			)
 		),
 		'fallback' => array
 		(
@@ -341,11 +364,18 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['sitemapName'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32),
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'decodeEntities'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkFeedAlias')
 			)
+		),
+		'useSSL' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['useSSL'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'autoforward' => array
 		(
@@ -1058,6 +1088,22 @@ class tl_page extends Backend
 	public function checkDns($varValue, DataContainer $dc)
 	{
 		return str_ireplace(array('http://', 'https://', 'ftp://'), '', $varValue);
+	}
+
+
+	/**
+	 * Check a static URL
+	 * @param mixed
+	 * @return array
+	 */
+	public function checkStaticUrl($varValue)
+	{
+		if ($varValue != '' && !preg_match('@^https?://@', $varValue))
+		{
+			$varValue = ($this->Environment->ssl ? 'https://' : 'http://') . $varValue;
+		}
+
+		return $varValue;
 	}
 
 

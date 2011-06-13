@@ -248,17 +248,20 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Column';
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['id']         = array('ID', 'Note that changing the ID can break data integrity!');
-$GLOBALS['TL_LANG']['MSC']['pid']        = array('Parent ID', 'Note that changing the parent ID can break data integrity!');
-$GLOBALS['TL_LANG']['MSC']['sorting']    = array('Sorting value', 'The sorting value is usually assigned automatically.');
-$GLOBALS['TL_LANG']['MSC']['all']        = array('Edit multiple', 'Edit multiple records at once');
-$GLOBALS['TL_LANG']['MSC']['all_fields'] = array('Available fields', 'Please select the fields you want to edit.');
-$GLOBALS['TL_LANG']['MSC']['password']   = array('Password', 'Please enter a password.');
-$GLOBALS['TL_LANG']['MSC']['confirm']    = array('Confirmation', 'Please confirm the password.');
-$GLOBALS['TL_LANG']['MSC']['dateAdded']  = array('Date added', 'Date added: %s');
-$GLOBALS['TL_LANG']['MSC']['lastLogin']  = array('Last login', 'Last login: %s');
-$GLOBALS['TL_LANG']['MSC']['move_up']    = array('Move up', 'Move the item one position up');
-$GLOBALS['TL_LANG']['MSC']['move_down']  = array('Move down', 'Move the item one position down');
+$GLOBALS['TL_LANG']['MSC']['id']            = array('ID', 'Note that changing the ID can break data integrity!');
+$GLOBALS['TL_LANG']['MSC']['pid']           = array('Parent ID', 'Note that changing the parent ID can break data integrity!');
+$GLOBALS['TL_LANG']['MSC']['sorting']       = array('Sorting value', 'The sorting value is usually assigned automatically.');
+$GLOBALS['TL_LANG']['MSC']['all']           = array('Edit multiple', 'Edit multiple records at once');
+$GLOBALS['TL_LANG']['MSC']['all_fields']    = array('Available fields', 'Please select the fields you want to edit.');
+$GLOBALS['TL_LANG']['MSC']['password']      = array('Password', 'Please enter a password.');
+$GLOBALS['TL_LANG']['MSC']['confirm']       = array('Confirmation', 'Please confirm the password.');
+$GLOBALS['TL_LANG']['MSC']['dateAdded']     = array('Date added', 'Date added: %s');
+$GLOBALS['TL_LANG']['MSC']['lastLogin']     = array('Last login', 'Last login: %s');
+$GLOBALS['TL_LANG']['MSC']['move_up']       = array('Move up', 'Move the item one position up');
+$GLOBALS['TL_LANG']['MSC']['move_down']     = array('Move down', 'Move the item one position down');
+$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL applies to the <em>tl_files</em> directory and all image thumbnails (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
+$GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
+$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
 
 
 /**

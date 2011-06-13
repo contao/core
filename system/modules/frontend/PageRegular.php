@@ -51,6 +51,11 @@ class PageRegular extends Frontend
 
 		$this->loadLanguageFile('default');
 
+		// Define the static URL constants
+		define('TL_FILES_URL', ($objPage->staticFiles != '') ? $objPage->staticFiles . TL_PATH . '/' : '');
+		define('TL_SCRIPT_URL', ($objPage->staticSystem != '') ? $objPage->staticSystem . TL_PATH . '/' : '');
+		define('TL_PLUGINS_URL', ($objPage->staticPlugins != '') ? $objPage->staticPlugins . TL_PATH . '/' : '');
+
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
 		$objPage->template = strlen($objLayout->template) ? $objLayout->template : 'fe_page';

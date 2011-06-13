@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.RC1 (XXXX-XX-XX)
 -----------------------------
+- Changed: make static domains configurable per website root page in the front end
 - Added: added transparency to colors in the style sheet editor (RGBA)
 - Added: added form aliases to reference forms by alias (#3013)
 - Fixed: the new request tokens did not support working with multiple tabs

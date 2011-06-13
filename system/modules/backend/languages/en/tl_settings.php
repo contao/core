@@ -88,9 +88,6 @@ $GLOBALS['TL_LANG']['tl_settings']['defaultUser']         = array('Default page 
 $GLOBALS['TL_LANG']['tl_settings']['defaultGroup']        = array('Default page group', 'Here you can select a group as the default owner of a page.');
 $GLOBALS['TL_LANG']['tl_settings']['defaultChmod']        = array('Default access rights', 'Please assign the default access rights for pages and articles.');
 $GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase']      = array('Live Update URL', 'Here you can enter the live update URL.');
-$GLOBALS['TL_LANG']['tl_settings']['staticFiles']         = array('Files URL', 'The files URL applies to the <em>tl_files</em> directory and all image thumbnails (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
-$GLOBALS['TL_LANG']['tl_settings']['staticSystem']        = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
-$GLOBALS['TL_LANG']['tl_settings']['staticPlugins']       = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
 
 
 /**

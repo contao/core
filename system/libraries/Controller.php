@@ -638,6 +638,9 @@ abstract class Controller extends System
 			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
+			$objPage->staticFiles = $objParentPage->staticFiles;
+			$objPage->staticSystem = $objParentPage->staticSystem;
+			$objPage->staticPlugins = $objParentPage->staticPlugins;
 
 			// Set the admin e-mail address
 			if ($objParentPage->adminEmail != '')
@@ -659,6 +662,9 @@ abstract class Controller extends System
 			$objPage->rootTitle = $GLOBALS['TL_CONFIG']['websiteTitle'];
 			$objPage->domain = '';
 			$objPage->rootLanguage = $objPage->language;
+			$objPage->staticFiles = '';
+			$objPage->staticSystem = '';
+			$objPage->staticPlugins = '';
 
 			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}

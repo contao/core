@@ -248,17 +248,20 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Spalte';
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['id']         = array('ID', 'Das Ändern der ID kann die Konsistenz der Daten gefährden!');
-$GLOBALS['TL_LANG']['MSC']['pid']        = array('Parent-ID', 'Das Ändern der Parent-ID kann die Konsistenz der Daten gefährden!');
-$GLOBALS['TL_LANG']['MSC']['sorting']    = array('Sortierindex', 'Der Sortierindex wird normalerweise automatisch gesetzt.');
-$GLOBALS['TL_LANG']['MSC']['all']        = array('Mehrere bearbeiten', 'Mehrere Datensätze auf einmal bearbeiten');
-$GLOBALS['TL_LANG']['MSC']['all_fields'] = array('Vorhandene Felder', 'Bitte wählen Sie die Felder aus, die Sie bearbeiten möchten.');
-$GLOBALS['TL_LANG']['MSC']['password']   = array('Passwort', 'Bitte geben Sie ein Passwort ein.');
-$GLOBALS['TL_LANG']['MSC']['confirm']    = array('Bestätigung', 'Bitte bestätigen Sie das Passwort.');
-$GLOBALS['TL_LANG']['MSC']['dateAdded']  = array('Hinzugefügt am', 'Hinzugefügt am: %s');
-$GLOBALS['TL_LANG']['MSC']['lastLogin']  = array('Letzte Anmeldung', 'Letzte Anmeldung: %s');
-$GLOBALS['TL_LANG']['MSC']['move_up']    = array('Nach oben', 'Den Eintrag eine Position nach oben verschieben');
-$GLOBALS['TL_LANG']['MSC']['move_down']  = array('Nach unten', 'Den Eintrag eine Position nach unten verschieben');
+$GLOBALS['TL_LANG']['MSC']['id']            = array('ID', 'Das Ändern der ID kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['pid']           = array('Parent-ID', 'Das Ändern der Parent-ID kann die Konsistenz der Daten gefährden!');
+$GLOBALS['TL_LANG']['MSC']['sorting']       = array('Sortierindex', 'Der Sortierindex wird normalerweise automatisch gesetzt.');
+$GLOBALS['TL_LANG']['MSC']['all']           = array('Mehrere bearbeiten', 'Mehrere Datensätze auf einmal bearbeiten');
+$GLOBALS['TL_LANG']['MSC']['all_fields']    = array('Vorhandene Felder', 'Bitte wählen Sie die Felder aus, die Sie bearbeiten möchten.');
+$GLOBALS['TL_LANG']['MSC']['password']      = array('Passwort', 'Bitte geben Sie ein Passwort ein.');
+$GLOBALS['TL_LANG']['MSC']['confirm']       = array('Bestätigung', 'Bitte bestätigen Sie das Passwort.');
+$GLOBALS['TL_LANG']['MSC']['dateAdded']     = array('Hinzugefügt am', 'Hinzugefügt am: %s');
+$GLOBALS['TL_LANG']['MSC']['lastLogin']     = array('Letzte Anmeldung', 'Letzte Anmeldung: %s');
+$GLOBALS['TL_LANG']['MSC']['move_up']       = array('Nach oben', 'Den Eintrag eine Position nach oben verschieben');
+$GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag eine Position nach unten verschieben');
+$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
+$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (siehe <a href="http://www.contao.org/blog-leser/items/contao-fuer-google-page-speed-optimieren.html">Contao für Google Page Speed optimieren</a>).');
 
 
 /**
