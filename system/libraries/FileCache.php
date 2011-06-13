@@ -65,20 +65,19 @@ class FileCache extends System
 	 */
 	protected function __construct($strFile)
 	{
-		$this->strFile = $strFile . '.csv';
+		$this->strFile = md5($strFile);
 		$strPath = TL_ROOT . '/system/tmp/' . $this->strFile;
 
 		// Read the file content if it exists
 		if (file_exists($strPath))
 		{
-			$fh = fopen($strPath, 'rb');
+			$strBuffer = file_get_contents($strPath);
+			$arrCache = deserialize($strBuffer);
 
-			while(($row = @fgetcsv($fh)) !== false)
+			if (is_array($arrCache))
 			{
-				$this->arrCache[$row[0]] = $row[1];
+				$this->arrCache = $arrCache;
 			}
-
-			fclose($fh);
 		}
 	}
 
@@ -111,15 +110,7 @@ class FileCache extends System
 
 		// Write to a temp file first
 		$fh = fopen($strPath . '/' . $strTemp, 'wb');
-
-		foreach ($this->arrCache as $k=>$v)
-		{
-			if ($k != '')
-			{
-				fputs($fh, '"' . $k . '","' . $v . '"' . "\n");
-			}
-		}
-
+		fputs($fh, serialize($this->arrCache));
 		fclose($fh);
 
 		// Then move the file to its final destination
