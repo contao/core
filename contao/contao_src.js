@@ -930,8 +930,8 @@ var Backend =
 	 */
 	getMousePosition: function(event)
 	{
-		Backend.xMousePosition = event.clientX;
-		Backend.yMousePosition = event.clientY;
+		Backend.xMousePosition = event.client.x;
+		Backend.yMousePosition = event.client.y;
 	},
 
 
@@ -1858,9 +1858,12 @@ var Backend =
 
 
 /**
- * Initialize class Backend
+ * Initialize the Backend class
  */
-document.onmousedown = Backend.getMousePosition.bindWithEvent(document);
+document.addEvent('mousedown', function(event)
+{
+	Backend.getMousePosition(event);
+});
 
 
 /**
