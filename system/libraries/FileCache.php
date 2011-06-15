@@ -65,7 +65,7 @@ class FileCache extends System
 	 */
 	protected function __construct($strFile)
 	{
-		$this->strFile = md5($strFile);
+		$this->strFile = md5($strFile) . '.txt';
 		$strPath = TL_ROOT . '/system/tmp/' . $this->strFile;
 
 		// Read the file content if it exists
