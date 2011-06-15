@@ -506,6 +506,12 @@ h2.sub_headline_index {
 }
 .tl_listing .tl_left {
 	float:left;
+	margin-left:43px;
+	text-indent:-43px;
+	width:65%;
+}
+.tl_tree_xtnd .tl_folder .tl_left {
+	width:70% !important;
 }
 .tl_listing .tl_right {
 	float:right;
