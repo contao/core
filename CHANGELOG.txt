@@ -9,6 +9,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Added: added transparency to colors in the style sheet editor (RGBA)
 - Added: added form aliases to reference forms by alias (#3013)
 - Added: replaced editArea with CodeMirror (#3016)
+- Added: added a "notDeletable" flag to the DCA configuration (#3078)
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)

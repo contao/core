@@ -1205,6 +1205,12 @@ class DC_Table extends DataContainer implements listable, editable
 	 */
 	public function delete($blnDoNotRedirect=false)
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
+		{
+			$this->log('Table ' . $this->strTable . ' is not deletable', 'DC_Table delete()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		if (!$this->intId)
 		{
 			$this->redirect($this->getReferer());
@@ -1320,6 +1326,12 @@ class DC_Table extends DataContainer implements listable, editable
 	 */
 	public function deleteAll()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
+		{
+			$this->log('Table ' . $this->strTable . ' is not deletable', 'DC_Table deleteAll()', TL_ERROR);
+			$this->redirect('contao/main.php?act=error');
+		}
+
 		$session = $this->Session->getData();
 		$ids = $session['CURRENT']['IDS'];
 
@@ -2874,8 +2886,8 @@ window.addEvent(\'domready\', function() {
 
 <div class="tl_formbody_submit" style="text-align:right;">
 
-<div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> 
+<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
   <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'"> 
   <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
@@ -3559,8 +3571,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 <div class="tl_formbody_submit" style="text-align:right;">
 
-<div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> 
+<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . '
   <input type="submit" name="cut" id="cut" class="tl_submit" accesskey="x" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['moveSelected']).'"> 
   <input type="submit" name="copy" id="copy" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['copySelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
@@ -3881,8 +3893,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 <div class="tl_formbody_submit" style="text-align:right;">
 
-<div class="tl_submit_container">
-  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
+<div class="tl_submit_container">' . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'] ? '
+  <input type="submit" name="delete" id="delete" class="tl_submit" accesskey="d" onclick="return confirm(\''.$GLOBALS['TL_LANG']['MSC']['delAllConfirm'].'\');" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['deleteSelected']).'"> ' : '') . (!$GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'] ? '
   <input type="submit" name="override" id="override" class="tl_submit" accesskey="v" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['overrideSelected']).'"> 
   <input type="submit" name="edit" id="edit" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['editSelected']).'"> ' : '') . '
 </div>

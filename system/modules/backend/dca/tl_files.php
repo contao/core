@@ -182,19 +182,25 @@ class tl_files extends Backend
 		$f3 = $this->User->hasAccess('f3', 'fop');
 		$f4 = $this->User->hasAccess('f4', 'fop');
 
-		// Set filemounts
+		// Set the filemounts
 		$GLOBALS['TL_DCA']['tl_files']['list']['sorting']['root'] = $this->User->filemounts;
 
-		// Disable upload button if uploads are not allowed
+		// Disable the upload button if uploads are not allowed
 		if (!$f1)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['closed'] = true;
 		}
 
-		// Disable edit_all button
+		// Disable the edit_all button
 		if (!$f2)
 		{
 			$GLOBALS['TL_DCA']['tl_files']['config']['notEditable'] = true;
+		}
+
+		// Disable the delete_all button
+		if (!$f3 && !$f4)
+		{
+			$GLOBALS['TL_DCA']['tl_files']['config']['notDeletable'] = true;
 		}
 
 		$session = $this->Session->getData();
