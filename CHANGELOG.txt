@@ -6,6 +6,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 -----------------------------
 - Changed: make static domains configurable per website root page in the front end
 - Changed: send the form field label instead of its name in raw format (#3065)
+- Changed: send the newsletter preview to the logged in user instead of the sender (#3123)
 - Added: added transparency to colors in the style sheet editor (RGBA)
 - Added: added form aliases to reference forms by alias (#3013)
 - Added: replaced editArea with CodeMirror (#3016)
