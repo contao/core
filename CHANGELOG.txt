@@ -15,6 +15,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)
 - Fixed: the form headline and explanation elements did not convert the markup (#3160)
 - Fixed: support IPv6 addresses in the Environment class (#3157)
+- Fixed: do not cache pages when a back end user is logged in (#3072)
 - Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)
