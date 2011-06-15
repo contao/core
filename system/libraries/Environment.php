@@ -493,7 +493,7 @@ class Environment
 			case $this->has($ua, 'MSIE'):
 				$browser = 'ie';
 				$shorty  = 'ie';
-				$version = preg_replace('/^.*MSIE (\d+).*$/', '$1', $ua);
+				$version = preg_replace('/^.*?MSIE (\d+).*$/', '$1', $ua);
 				break;
 
 			case $this->has($ua, 'Firefox'):
