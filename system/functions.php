@@ -443,7 +443,14 @@ function ampersand($strString, $blnEncode=true)
  */
 function nl2br_pre($str)
 {
-	$str = nl2br($str, false);
+	if (version_compare(PHP_VERSION, '5.3.0') >= 0)
+	{
+		$str = nl2br($str, false);
+	}
+	else
+	{
+		$str = str_replace('<br />', '<br>', nl2br($str));
+	}
 
 	if (stripos($str, '<pre') === false)
 	{
