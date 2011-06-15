@@ -110,6 +110,7 @@ class Form extends Hybrid
 
 		$row = 0;
 		$max_row = $objFields->numRows;
+		$arrLabels = array();
 
 		while ($objFields->next())
 		{
@@ -198,6 +199,11 @@ class Form extends Hybrid
 				continue;
 			}
 
+			if ($objWidget->name != '')
+			{
+				$arrLabels[$objWidget->name] = $objWidget->label;
+			}
+
 			$this->Template->fields .= $objWidget->parse();
 			++$row;
 		}
@@ -205,7 +211,7 @@ class Form extends Hybrid
 		// Process form data
 		if ($this->Input->post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
-			$this->processFormData($arrSubmitted);
+			$this->processFormData($arrSubmitted, $arrLabels);
 		}
 
 		// Add a warning to the page title
@@ -250,8 +256,9 @@ class Form extends Hybrid
 	/**
 	 * Process form data, store it in the session and redirect to the jumpTo page
 	 * @param array
+	 * @param array
 	 */
-	protected function processFormData($arrSubmitted)
+	protected function processFormData($arrSubmitted, $arrLabels)
 	{
 		// Send form data via e-mail
 		if ($this->sendViaEmail)
@@ -279,7 +286,7 @@ class Form extends Hybrid
 				}
 
 				// Add field to message
-				$message .= ucfirst($k) . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
+				$message .= (isset($arrLabels[$k]) ? $arrLabels[$k] : ucfirst($k)) . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
 
 				// Prepare XML file
 				if ($this->format == 'xml')
