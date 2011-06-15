@@ -129,7 +129,7 @@ $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQLi';
 $GLOBALS['TL_CONFIG']['dbUser']      = '';
 $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
@@ -196,7 +196,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * Please enter how many upload fields you want to show in the back end.
  */
 $GLOBALS['TL_CONFIG']['uploadPath']   = 'tl_files';
-$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,ico,csv,doc,xls,ppt,odt,ods,odp,pdf,mp3,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
+$GLOBALS['TL_CONFIG']['uploadTypes']  = 'jpg,jpeg,gif,png,ico,csv,doc,docx,xls,xlsx,ppt,pptx,odt,ods,odp,pdf,mp3,mp4,m4a,m4v,webm,ogg,wma,wmv,ram,rm,mov,fla,flv,swf,css,html,htm,txt,zip,cto';
 $GLOBALS['TL_CONFIG']['maxFileSize']  = 2048000;
 $GLOBALS['TL_CONFIG']['imageWidth']   = 800;
 $GLOBALS['TL_CONFIG']['imageHeight']  = 600;
