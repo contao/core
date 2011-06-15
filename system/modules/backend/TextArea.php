@@ -99,11 +99,17 @@ class TextArea extends Widget
 	 */
 	public function generate()
 	{
-		// Register field name for rich text editor usage
+		// Register the field name for rich text editor usage
 		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
 		{
-			$GLOBALS['TL_RTE']['type'] = $this->rte;
-			$GLOBALS['TL_RTE']['fields'][] = 'ctrl_' . $this->strId;
+			list ($file, $type) = explode('|', $this->rte);
+
+			$GLOBALS['TL_RTE'][$file][] = array
+			(
+				'id'   => 'ctrl_' . $this->strId,
+				'file' => $file,
+				'type' => $type
+			);
 		}
 
 		return sprintf('<textarea name="%s" id="ctrl_%s" class="tl_textarea%s" rows="%s" cols="%s"%s onfocus="Backend.getScrollOffset();">%s</textarea>%s',

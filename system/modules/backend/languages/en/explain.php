@@ -53,7 +53,7 @@ $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
 	array('Rich Text Editor', 'For more information about TinyMCE please visit <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
 	array('Insert tags', 'For more information on insert tags please visit <a href="http://www.contao.org/insert-tags.html" title="Contao online documentation" onclick="window.open(this.href); return false;">http://www.contao.org/insert-tags.html</a>.'),
-	array('Code Editor', 'For more information about EditArea please visit <a href="http://www.cdolivet.com/index.php?page=editArea" title="EditArea by Christophe Dolivet" onclick="window.open(this.href); return false;">http://www.cdolivet.com/index.php?page=editArea</a>.')
+	array('Code Editor', 'For more information about CodeMirror please visit <a href="http://codemirror.net" title="EditArea by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a>.')
 );
 
 

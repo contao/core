@@ -71,33 +71,43 @@ class BackendTemplate extends Template
 		if (count($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
-			$this->brNewLine = false; // Backwards compatibility
-			$this->rteFields = implode(',', $GLOBALS['TL_RTE']['fields']);
-			$this->ceFields = $GLOBALS['TL_RTE']['fields'];
-			$this->ceField = $GLOBALS['TL_RTE']['fields'][0]; // Backwards compatibility
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
-			list($type, $this->syntax) = explode('|', $GLOBALS['TL_RTE']['type']);
-			$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $type);
 
-			if (!file_exists($strFile))
+			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
 			{
-				throw new Exception(sprintf('Cannot find rich text editor configuration file "%s.php"', $GLOBALS['TL_RTE']['type']));
-			}
+				if (strncmp($file, 'tiny', 4) === 0)
+				{
+					// Concat the field IDs for TinyMCE
+					$arrRteFields = array();
 
-			// Fallback to English if the user language is not supported
-			if (file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js'))
-			{
-				$this->language = $GLOBALS['TL_LANGUAGE'];
-			}
-			else
-			{
-				$this->language = 'en';
-			}
+					foreach ($fields as $field)
+					{
+						$arrRteFields[] = $field['id'];
+					}
 
-			ob_start();
-			include($strFile);
-			$this->rteConfig = ob_get_contents();
-			ob_end_clean();
+					$this->rteFields = implode(',', $arrRteFields);
+
+					// Fallback to English if the user language is not supported
+					$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
+				}
+				else
+				{
+					// Otherwise simply pass the fields array
+					$this->ceFields = $fields;
+				}
+
+				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
+
+				if (!file_exists($strFile))
+				{
+					throw new Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+				}
+
+				ob_start();
+				include($strFile);
+				$this->rteConfig .= ob_get_contents();
+				ob_end_clean();
+			}
 		}
 
 		// Style sheets

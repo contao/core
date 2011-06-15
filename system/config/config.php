@@ -254,7 +254,7 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   thumbnails = show image thumbnails in the file manager
  *   debugMode  = debug the system and print results to the screen
  *   useRTE     = use the rich text editor (TinyMCE)
- *   useCE      = use the code editor (EditArea)
+ *   useCE      = use the code editor (CodeMirror)
  *   oldBeTheme = use the old one-column back end form layout
  */
 $GLOBALS['TL_CONFIG']['showHelp']   = true;

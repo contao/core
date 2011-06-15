@@ -1418,20 +1418,69 @@ window.addEvent(\'domready\', function() {
 			$this->reload();
 		}
 
-		$editArea = '';
+		$codeEditor = '';
 
 		// Prepare the code editor
 		if ($GLOBALS['TL_CONFIG']['useCE'])
 		{
-			$this->ceFields = array('ctrl_source');
-			$this->ceField = 'ctrl_source'; // Backwards compatibility
+			$type = '';
+
+			// The following types are supported by CodeMirror
+			switch ($objFile->extension)
+			{
+				case 'c': case 'cc': case 'cpp': case 'c++':
+				case 'h': case 'hh': case 'hpp': case 'h++':
+					$type = 'clike';
+					break;
+
+				case 'css':
+					$type = 'css';
+					break;
+
+				case 'patch':
+					$type = 'diff';
+					break;
+
+				case 'htm': case 'html':
+				case 'tpl': case 'html5': case 'xhtml':
+					$type = 'htmlmixed';
+					break;
+
+				case 'js':
+					$type = 'javascript';
+					break;
+
+				case 'php': case 'inc':
+					$type = 'php';
+					break;
+
+				case 'sql':
+					$type = 'sql';
+					break;
+
+				case 'xml':
+					$type = 'xml';
+					break;
+			}
+
+			// Fall back to HTML
+			if ($type == '')
+			{
+				$type = 'htmlmixed';
+			}
+
+			$this->ceFields = array(array
+			(
+				'id' => 'ctrl_source',
+				'type' => $type
+			));
+
 			$this->language = $GLOBALS['TL_LANGUAGE'];
-			$this->extension = $objFile->extension;
 
 			// Load the code editor configuration
 			ob_start();
-			include(TL_ROOT . '/system/config/editArea.php');
-			$editArea = ob_get_contents();
+			include(TL_ROOT . '/system/config/codeMirror.php');
+			$codeEditor = ob_get_contents();
 			ob_end_clean();
 		}
 
@@ -1461,7 +1510,7 @@ window.addEvent(\'domready\', function() {
 </div>
 
 </div>
-</form>' . "\n\n" . $editArea;
+</form>' . "\n\n" . $codeEditor;
 	}
 
 

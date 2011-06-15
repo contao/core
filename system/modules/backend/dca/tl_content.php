@@ -264,7 +264,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'editArea|html', 'helpwizard'=>true),
+			'eval'                    => array('mandatory'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'codeMirror|html', 'helpwizard'=>true),
 			'explanation'             => 'insertTags'
 		),
 		'listtype' => array
@@ -400,7 +400,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'editArea', 'helpwizard'=>true, 'tl_class'=>'clr'),
+			'eval'                    => array('mandatory'=>true, 'preserveTags'=>true, 'decodeEntities'=>true, 'class'=>'monospace', 'rte'=>'codeMirror', 'helpwizard'=>true, 'tl_class'=>'clr'),
 			'explanation'             => 'insertTags'
 		),
 		'url' => array
@@ -1090,7 +1090,7 @@ class tl_content extends Backend
 
 
 	/**
-	 * Dynamically set the editArea syntax
+	 * Dynamically set the codeMirror syntax
 	 * @param mixed
 	 * @param object
 	 * @return string
@@ -1100,40 +1100,24 @@ class tl_content extends Backend
 		switch ($dc->activeRecord->highlight)
 		{
 			case 'C':
-				$syntax = 'c';
+			case 'CSharp':
+				$syntax = 'clike';
 				break;
 
-			case 'CSharp':
-				$syntax = 'cpp';
+			case 'CSS':
+				$syntax = 'css';
+				break;
+
+			case 'Diff':
+				$syntax = 'diff';
 				break;
 
 			case 'XHTML':
 				$syntax = 'html';
 				break;
 
-			case 'Perl':
-				$syntax = 'perl';
-				break;
-
-			case 'Python':
-				$syntax = 'python';
-				break;
-
-			case 'Ruby':
-				$syntax = 'ruby';
-				break;
-
 			case 'JavaScript':
 				$syntax = 'js';
-				break;
-
-			case 'Java':
-			case 'JavaFX':
-				$syntax = 'java';
-				break;
-
-			case 'CSS':
-				$syntax = 'css';
 				break;
 
 			case 'PHP':
@@ -1142,10 +1126,6 @@ class tl_content extends Backend
 
 			case 'SQL':
 				$syntax = 'sql';
-				break;
-
-			case 'VB':
-				$syntax = 'vb';
 				break;
 
 			case 'XML':
@@ -1157,7 +1137,7 @@ class tl_content extends Backend
 				break;
 		}
 		
-		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'editArea|' . $syntax;
+		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'codeMirror|' . $syntax;
 		return $varValue;
 	}
 

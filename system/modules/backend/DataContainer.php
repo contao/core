@@ -169,7 +169,7 @@ class DataContainer extends Backend
 		$xlabel = '';
 
 		// Toggle line wrap (textarea)
-		if ($arrData['inputType'] == 'textarea' && !strlen($arrData['eval']['rte']))
+		if ($arrData['inputType'] == 'textarea' && $arrData['eval']['rte'] == '')
 		{
 			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\');"');
 		}
