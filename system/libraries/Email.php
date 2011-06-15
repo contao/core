@@ -132,6 +132,8 @@ class Email extends System
 	 */
 	public function __construct()
 	{
+		parent::__construct();
+
 		$this->import('String');
 		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
