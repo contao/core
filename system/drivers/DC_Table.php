@@ -634,6 +634,16 @@ class DC_Table extends DataContainer implements listable, editable
 				$new_records[$this->strTable][] = $insertID;
 				$this->Session->set('new_records', $new_records);
 
+				// Call the oncreate_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['oncreate_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['oncreate_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->strTable, $insertID, $this->set, $this);
+					}
+				}
+
 				// Add a log entry
 				$this->log('A new entry in table "'.$this->strTable.'" has been created (ID: '.$insertID.')', 'DC_Table create()', TL_GENERAL);
 				$this->redirect($this->switchToEdit($insertID).$s2e);
@@ -1784,6 +1794,17 @@ class DC_Table extends DataContainer implements listable, editable
 			if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
 			{
 				$this->createNewVersion($this->strTable, $this->intId);
+
+				// Call the onversion_callback
+				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+				{
+					foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+					}
+				}
+
 				$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 			}
 
