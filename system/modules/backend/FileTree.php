@@ -401,7 +401,7 @@ class FileTree extends Widget
 					$popupHeight = ($objFile->height + 305);
 					$thumbnail .= ' <span class="tl_gray">('.$objFile->width.'x'.$objFile->height.')</span>';
 
-					if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= 3000 && $objFile->width <= 3000)
+					if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 					{
 						$_height = ($objFile->height < 70) ? $objFile->height : 70;
 						$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';

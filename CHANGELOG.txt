@@ -14,6 +14,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Added: added a "generateBreadcrumb" hook to modify breadcrumb menu items (#1771)
 - Added: added an "ifnlng" insert tag as equivalent to the "iflng" tag (#2719)
 - Added: added an "oncreate_callback" and an "onversion_callback" (#2641)
+- Added: make the maximum GD library image dimensions configurable (#2156)
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)

@@ -793,7 +793,7 @@ class DC_Folder extends DataContainer implements listable, editable
 					if (($arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile)) !== false)
 					{
 						// Image is too big
-						if ($arrImageSize[0] > 3000 || $arrImageSize[1] > 3000)
+						if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $arrImageSize[1] > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
 						{
 							$blnExceeds = true;
 						}
@@ -1817,7 +1817,7 @@ window.addEvent(\'domready\', function() {
 				$popupHeight = ($objFile->height + 305);
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).', '.$objFile->width.'x'.$objFile->height.' px)</span>';
 
-				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= 3000 && $objFile->width <= 3000)
+				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
 					$_height = ($objFile->height < 70) ? $objFile->height : 70;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
