@@ -122,6 +122,8 @@ abstract class Controller extends System
 			if (file_exists($strFile))
 			{
 				$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
+				trigger_error('Using .tpl files (templates/'.$strTemplateGroup.'/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
+
 				return $strFile;
 			}
 		}
@@ -141,6 +143,8 @@ abstract class Controller extends System
 		if (file_exists($strFile))
 		{
 			$objCache->$strKey = 'templates/' . $strTemplate . '.tpl';
+			trigger_error('Using .tpl files (templates/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
+
 			return $strFile;
 		}
 
@@ -161,6 +165,8 @@ abstract class Controller extends System
 			if (file_exists($strFile))
 			{
 				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
+				trigger_error('Using .tpl files (system/modules/'.$strModule.'/templates/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
+
 				return $strFile;
 			}
 		}
