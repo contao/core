@@ -1884,13 +1884,32 @@ abstract class Controller extends System
 
 				// Conditional tags
 				case 'iflng':
-					if (strlen($elements[1]) && $elements[1] != $objPage->language)
+					if ($elements[1] != '' && $elements[1] != $objPage->language)
 					{
-						for($_rit; $_rit<count($tags); $_rit+=2)
+						for ($_rit; $_rit<count($tags); $_rit+=2)
 						{
 							if ($tags[$_rit+1] == 'iflng')
 							{
 								break;
+							}
+						}
+					}
+					unset($arrCache[$strTag]);
+					break;
+
+				case 'ifnlng':
+					if ($elements[1] != '')
+					{
+						$langs = trimsplit(',', $elements[1]);
+
+						if (in_array($objPage->language, $langs))
+						{
+							for ($_rit; $_rit<count($tags); $_rit+=2)
+							{
+								if ($tags[$_rit+1] == 'ifnlng')
+								{
+									break;
+								}
 							}
 						}
 					}
