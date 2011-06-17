@@ -320,7 +320,11 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['fallback'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'save_callback' => array
+			(
+				array('tl_page', 'checkFallback')
+			)
 		),
 		'adminEmail' => array
 		(
@@ -879,7 +883,8 @@ class tl_page extends Backend
 		}
 
 		$arrRoots = array();
-		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' ORDER BY dns");
+		$time = time();
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
 
 		while ($objRoots->next())
 		{
@@ -1088,6 +1093,31 @@ class tl_page extends Backend
 	public function checkDns($varValue, DataContainer $dc)
 	{
 		return str_ireplace(array('http://', 'https://', 'ftp://'), '', $varValue);
+	}
+
+
+	/**
+	 * Make sure there is only one fallback per domain (thanks to Andreas Schempp)
+	 * @param mixed
+	 * @param object
+	 * @throws Exception
+	 */
+	public function checkFallback($varValue, DataContainer $dc)
+	{
+		if ($varValue == '')
+		{
+			return '';
+		}
+
+		$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE type='root' AND fallback=1 AND dns=? AND id!=?")
+								  ->execute($dc->activeRecord->dns, $dc->activeRecord->id);
+
+		if ($objPage->numRows)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
+		}
+
+		return $varValue;
 	}
 
 
