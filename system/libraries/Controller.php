@@ -2024,6 +2024,22 @@ abstract class Controller extends System
 					}
 					break;
 
+				// Acronyms
+				case 'acronym':
+					if ($objPage->outputFormat == 'xhtml')
+					{
+						if ($elements[1] != '')
+						{
+							$arrCache[$strTag] = '<acronym title="'. $elements[1] .'">';
+						}
+						else
+						{
+							$arrCache[$strTag] = '</acronym>';
+						}
+						break;
+					}
+					// NO break;
+
 				// Abbreviations
 				case 'abbr':
 					if ($elements[1] != '')
@@ -2033,18 +2049,6 @@ abstract class Controller extends System
 					else
 					{
 						$arrCache[$strTag] = '</abbr>';
-					}
-					break;
-
-				// Acronyms
-				case 'acronym':
-					if ($elements[1] != '')
-					{
-						$arrCache[$strTag] = '<acronym title="'. $elements[1] .'">';
-					}
-					else
-					{
-						$arrCache[$strTag] = '</acronym>';
 					}
 					break;
 

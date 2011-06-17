@@ -81,7 +81,7 @@ tinyMCE.init({
   theme_advanced_statusbar_location : "bottom",
   theme_advanced_source_editor_width : "700",
   theme_advanced_blockformats : "div,p,address,pre,h1,h2,h3,h4,h5,h6",
-  theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,anchor,separator,typolinks,unlink,separator,image,separator,sub,sup,separator,abbr,acronym,separator,styleprops,attribs,separator,search,replace,separator,undo,redo,separator,removeformat,cleanup,separator,code",
+  theme_advanced_buttons1 : "newdocument,save,separator,spellchecker,separator,anchor,separator,typolinks,unlink,separator,image,separator,sub,sup,separator,abbr,separator,styleprops,attribs,separator,search,replace,separator,undo,redo,separator,removeformat,cleanup,separator,code",
   theme_advanced_buttons2 : "formatselect,fontsizeselect,styleselect,separator,bold,italic,underline,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,indent,outdent,separator,blockquote,separator,forecolor,backcolor",
   theme_advanced_buttons3 : "tablecontrols,separator,template,separator,charmap,emotions,separator,help",
   theme_advanced_font_sizes : "9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px"
