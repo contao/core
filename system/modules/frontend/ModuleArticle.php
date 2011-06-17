@@ -179,7 +179,7 @@ class ModuleArticle extends Module
 
 		while ($objCte->next())
 		{
-			$contentElements .= $this->getContentElement($objCte->id, $this->strFormat);
+			$contentElements .= $this->getContentElement($objCte->id);
 		}
 
 		$this->Template->teaser = $this->teaser;

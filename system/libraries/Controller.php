@@ -427,7 +427,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function getContentElement($intId, $strFormat='html5')
+	protected function getContentElement($intId)
 	{
 		if (!strlen($intId) || $intId < 1)
 		{
@@ -513,7 +513,7 @@ abstract class Controller extends System
 	 * @param string
 	 * @return string
 	 */
-	protected function getForm($varId, $strFormat='html5')
+	protected function getForm($varId)
 	{
 		if ($varId == '')
 		{
