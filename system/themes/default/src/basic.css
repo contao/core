@@ -27,7 +27,7 @@
  */
 
 /* Body */
-html,body,form,pre {
+html,body,form,pre,figure {
 	margin:0;
 	padding:0;
 }

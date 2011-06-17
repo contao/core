@@ -101,6 +101,7 @@ class Comments extends Frontend
 				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objPartial->id = 'c' . $objComments->id;
 				$objPartial->timestamp = $objComments->date;
+				$objPartial->datetime = date('Y-m-d\TH:i:sP', $objComments->date);
 
 				$arrComments[] = $objPartial->parse();
 				++$count;

@@ -177,6 +177,7 @@ class ModuleEventlist extends Events
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
 					$event['firstDate'] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $day);
+					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;
 				}

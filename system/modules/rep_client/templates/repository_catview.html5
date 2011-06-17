@@ -36,9 +36,9 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <tr class="description">
   <td colspan="4">
 <?php if (property_exists($ext, 'thumbnail')): ?>
-  <div class="image_container">
+  <figure class="image_container">
     <a href="<?php echo $ext->picture->url; ?>" title="<?php echo $text['showpicture']; ?>" rel="lightbox"><img src="<?php echo $ext->thumbnail->url; ?>" alt="<?php echo $text['thumbnail']; ?>" width="<?php echo $ext->thumbnail->width; ?>" height="<?php echo $ext->thumbnail->height; ?>" class="thumbnail"></a>
-  </div>
+  </figure>
 <?php endif; ?>
 <?php if ($ext->teaser!=''): ?>
   <h2><?php echo $ext->teaser; ?></h2>

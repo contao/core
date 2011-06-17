@@ -129,18 +129,31 @@ class ModuleEventReader extends Events
 
 		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
-		// Get date
-		if ($span > 0)
+		if ($objPage->outputFormat == 'xhtml')
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime);
-		}
-		elseif ($objEvent->startTime == $objEvent->endTime)
-		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '');
+			$strTimeStart = '';
+			$strTimeEnd = '';
+			$strTimeClose = '';
 		}
 		else
 		{
-			$date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '');
+			$strTimeStart = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->startTime) . '">';
+			$strTimeEnd = '<time datetime="' . date('Y-m-d\TH:i:sP', $objEvent->endTime) . '">';
+			$strTimeClose = '</time>';
+		}
+
+		// Get date
+		if ($span > 0)
+		{
+			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime) . $strTimeClose;
+		}
+		elseif ($objEvent->startTime == $objEvent->endTime)
+		{
+			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '') . $strTimeClose;
+		}
+		else
+		{
+			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '') . $strTimeClose;
 		}
 
 		$until = '';

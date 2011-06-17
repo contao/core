@@ -167,6 +167,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->commentCount = $arrMeta['comments'];
 			$objTemplate->timestamp = $objArticles->date;
 			$objTemplate->author = $arrMeta['author'];
+			$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objArticles->date);
 
 			$objTemplate->addImage = false;
 

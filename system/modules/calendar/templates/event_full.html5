@@ -16,7 +16,7 @@
 <?php endif; ?>
 <?php if ($this->addImage): ?>
 
-<div class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+<figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
 <?php if ($this->href): ?>
 <a href="<?php echo $this->href; ?>"<?php echo $this->attributes; ?> title="<?php echo $this->alt; ?>">
 <?php endif; ?>
@@ -25,9 +25,9 @@
 </a>
 <?php endif; ?>
 <?php if ($this->caption): ?>
-<div class="caption"><?php echo $this->caption; ?></div>
+<figcaption class="caption"><?php echo $this->caption; ?></figcaption>
 <?php endif; ?>
-</div>
+</figure>
 <?php endif; ?>
 <?php if ($this->addBefore): ?>
 
