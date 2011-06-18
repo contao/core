@@ -318,7 +318,7 @@ class DataContainer extends Backend
 			}
 
 			$datepicker = '
-  <img src="plugins/datepicker/icon.gif" width="20" height="20" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;">
+  <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;">
   <script>
   window.addEvent(\'domready\', function() {
     new DatePicker(\'#ctrl_' . $objWidget->id . '\', {

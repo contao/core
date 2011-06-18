@@ -106,7 +106,7 @@ var DatePicker = new Class({
 			document.addEvents({
 				'keydown': function(e) {
 					if (e.key == "tab") {
-						this.close(null, true);
+						// PATCH this.close(null, true);
 					}
 				}.bind(this)
 			});
