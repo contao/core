@@ -8,7 +8,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
-  $objCombiner->add('plugins/calendar/css/calendar.css', CALENDAR);
+  $objCombiner->add('plugins/datepicker/dashboard.css', DATEPICKER);
   if ($this->be27) {
     $objCombiner->add('system/themes/'. $this->theme .'/be27.css');
   }
@@ -37,7 +37,7 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
-  $objCombiner->add('plugins/calendar/js/calendar.js', CALENDAR);
+  $objCombiner->add('plugins/datepicker/datepicker.js', DATEPICKER);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();

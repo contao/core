@@ -7,6 +7,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Changed: make static domains configurable per website root page in the front end
 - Changed: send the form field label instead of its name in raw format (#3065)
 - Changed: send the newsletter preview to the logged in user instead of the sender (#3123)
+- Changed: replaced the back end calendar with the MonkeyPhysics datepicker (#2923)
 - Removed: the acronym tag is no longer supported in HTML5 (#3177)
 - Added: added transparency to colors in the style sheet editor (RGBA)
 - Added: added form aliases to reference forms by alias (#3013)

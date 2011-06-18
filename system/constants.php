@@ -58,7 +58,7 @@ define('SWITCH_ORDER', true);
  */
 define('VERSION', '2.10');
 define('BUILD', 'RC1');
-define('CALENDAR', '1.2.RC4');
+define('DATEPICKER', '1.17');
 define('CODEMIRROR', '2.1');
 define('FANCYUPLOAD', '3.0');
 define('HIGHLIGHTER', '3.0.83');

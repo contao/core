@@ -1120,21 +1120,6 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return the current date format to be used with the date picker
-	 * @return string
-	 */
-	protected function getDatePickerString()
-	{
-		if (preg_match('/[AaBbCcEefGgHhIiJKkLNOoPpQqRrsTtUuVvWwXxZz]+/', $GLOBALS['TL_CONFIG']['dateFormat']))
-		{
-			return '';
-		}
-
-		return "new Calendar({ %s: '" . $GLOBALS['TL_CONFIG']['dateFormat'] . "' }, { navigation: 2, days: ['" . implode("','", $GLOBALS['TL_LANG']['DAYS']) . "'], months: ['" . implode("','", $GLOBALS['TL_LANG']['MONTHS']) . "'], offset: ". intval($GLOBALS['TL_LANG']['MSC']['weekOffset']) . ", titleFormat: '" . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . "' });";
-	}
-
-
-	/**
 	 * Return the current languages to be used with the TinyMCE spellchecker
 	 * @return string
 	 */

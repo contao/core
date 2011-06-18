@@ -299,9 +299,42 @@ class DataContainer extends Backend
 		// Datepicker
 		if ($arrData['eval']['datepicker'])
 		{
+			$rgxp = $arrData['eval']['rgxp'];
+			$format = $GLOBALS['TL_CONFIG'][$rgxp.'Format'];
+
+			switch ($rgxp)
+			{
+				case 'datim':
+					$time = ",\n      timePicker: true";
+					break;
+
+				case 'time':
+					$time = ",\n      timePickerOnly: true";
+					break;
+
+				default:
+					$time = '';
+					break;
+			}
+
 			$datepicker = '
+  <img src="plugins/datepicker/icon.gif" width="20" height="20" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;">
   <script>
-  window.addEvent(\'domready\', function() { ' . sprintf($arrData['eval']['datepicker'], 'ctrl_' . $objWidget->id) . ' });
+  window.addEvent(\'domready\', function() {
+    new DatePicker(\'#ctrl_' . $objWidget->id . '\', {
+      allowEmpty: true,
+      toggleElements: \'#toggle_' . $objWidget->id . '\',
+      pickerClass: \'datepicker_dashboard\',
+      format: \'' . $format . '\',
+      inputOutputFormat: \'' . $format . '\',
+      positionOffset: { x:130, y:-185 }' . $time . ',
+      startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
+      days: [\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
+      dayShort: ' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
+      months: [\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
+      monthShort: ' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
+    });
+  });
   </script>';
 		}
 
