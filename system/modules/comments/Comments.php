@@ -394,7 +394,8 @@ class Comments extends Frontend
 	 */
 	public function convertLineFeeds($strComment)
 	{
-		$strComment = nl2br_pre($strComment);
+		global $objPage;
+		$strComment = nl2br_pre($strComment, ($objPage->outputFormat == 'xhtml'));
 
 		// Use paragraphs to generate new lines
 		if (strncmp('<p>', $strComment, 3) !== 0)

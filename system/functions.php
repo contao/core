@@ -437,20 +437,43 @@ function ampersand($strString, $blnEncode=true)
 
 
 /**
- * Replace line breaks with <br> tags preserving preformatted text
+ * Replace line breaks with HTML5-style <br> tags
  * @param string
  * @return string
  */
-function nl2br_pre($str)
+function nl2br_html5($str)
 {
 	if (version_compare(PHP_VERSION, '5.3.0') >= 0)
 	{
-		$str = nl2br($str, false);
+		return nl2br($str, false);
 	}
 	else
 	{
-		$str = str_replace('<br />', '<br>', nl2br($str));
+		return str_replace('<br />', '<br>', nl2br($str));
 	}
+}
+
+
+/**
+ * Replace line breaks with XHTML-style <br /> tags
+ * @param string
+ * @return string
+ */
+function nl2br_xhtml($str)
+{
+	return nl2br($str);
+}
+
+
+/**
+ * Replace line breaks with <br> tags preserving preformatted text
+ * @param string
+ * @param boolean
+ * @return string
+ */
+function nl2br_pre($str, $xhtml=false)
+{
+	$str = $xhtml ? nl2br_xhtml($str) : nl2br_html5($str);
 
 	if (stripos($str, '<pre') === false)
 	{

@@ -330,8 +330,8 @@ class ModuleTasks extends BackendModule
 			(
 				'creator' => $objTask->creator,
 				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStatus->tstamp),
-				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] : $objStatus->status),
-				'comment' => (strlen($objStatus->comment) ? nl2br($objStatus->comment) : '&nbsp;'),
+				'status' => (($GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] != '') ? $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] : $objStatus->status),
+				'comment' => (($objStatus->comment != '') ? nl2br_html5($objStatus->comment) : '&nbsp;'),
 				'assignedTo' => $objStatus->assignedTo,
 				'progress' => $objStatus->progress,
 				'class' => $objStatus->status,
