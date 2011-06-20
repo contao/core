@@ -288,11 +288,13 @@ abstract class Template extends Controller
 
 		echo $this->strBuffer;
 
+		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			echo "\n\n<pre>\n";
+			echo "\n\n" . '<pre style="width:80%; overflow:auto; margin:24px auto; padding:9px; background:#fff;">' . "\n";
+			echo "<strong>Debug information</strong>\n\n";
 			print_r($GLOBALS['TL_DEBUG']);
-			echo "\n</pre>";
+			echo "</pre>";
 		}
 	}
 

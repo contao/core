@@ -198,6 +198,11 @@ class StyleSheets extends Backend
 	 */
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array())
 	{
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$blnWriteToFile = false;
+		}
+
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
@@ -206,9 +211,9 @@ class StyleSheets extends Backend
 		}
 		else
 		{
-			$strGlue = '';
+			$strGlue = $GLOBALS['TL_CONFIG']['debugMode'] ? '../../' : '';
 			$lb = "\n    ";
-			$return = "\n<pre>";
+			$return = $GLOBALS['TL_CONFIG']['debugMode'] ? "\n" : "\n<pre>";
 		}
 
 		$blnNeedsPie = false;
@@ -992,7 +997,7 @@ class StyleSheets extends Backend
 		}
 
 		// Close the format definition
-		$return .= ($blnWriteToFile ? '' : "\n") . '}' . ($blnWriteToFile ? '' : "</pre>\n");
+		$return .= ($blnWriteToFile ? '' : "\n") . '}' . ($blnWriteToFile ? '' : ($GLOBALS['TL_CONFIG']['debugMode'] ? "\n" : "</pre>\n"));
 
 		// Replace global variables
 		if (strpos($return, '$') !== false && count($vars) > 0)
