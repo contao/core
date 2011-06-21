@@ -374,8 +374,14 @@ class DataContainer extends Backend
 
 		$updateMode = '';
 
+		// Replace the textarea with an RTE instance
+		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
+		{
+			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_" . $this->strInputName . "');</script>";
+		}
+
 		// Handle multi-select fields in "override all" mode
-		if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+		elseif ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
 		{
 			$updateMode = '
 </div>

@@ -109,7 +109,14 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{author_legend},name,email,website;{comment_legend},comment;{publish_legend},published'
+		'__selector__'                => array('addReply'),
+		'default'                     => '{author_legend},name,email,website;{comment_legend},comment;{reply_legend},addReply;{publish_legend},published'
+	),
+
+	// Subpalettes
+	'subpalettes' => array
+	(
+		'addReply'                    => 'author,reply'
 	),
 
 	// Fields
@@ -162,6 +169,31 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		'comment' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['comment'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('rte'=>'tinyMCE')
+		),
+		'addReply' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['addReply'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true)
+		),
+		'author' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['author'],
+			'default'                 => $this->User->id,
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'foreignKey'              => 'tl_user.name',
+			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'includeBlankOption'=>true)
+		),
+		'reply' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['reply'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',

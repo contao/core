@@ -39,6 +39,9 @@ $GLOBALS['TL_LANG']['tl_comments']['name']      = array('Autor', 'Bitte geben Si
 $GLOBALS['TL_LANG']['tl_comments']['email']     = array('E-Mail-Adresse', 'Die E-Mail-Adresse wird nicht veröffentlicht.');
 $GLOBALS['TL_LANG']['tl_comments']['website']   = array('Webseite', 'Hier können Sie eine Webadresse eingeben.');
 $GLOBALS['TL_LANG']['tl_comments']['comment']   = array('Kommentar', 'Bitte geben Sie den Kommentar ein.');
+$GLOBALS['TL_LANG']['tl_comments']['addReply']  = array('Antwort hinzufügen', 'Hier können Sie auf den Kommentar antworten.');
+$GLOBALS['TL_LANG']['tl_comments']['author']    = array('Autor', 'Hier können Sie den Autor der Antwort ändern.');
+$GLOBALS['TL_LANG']['tl_comments']['reply']     = array('Antwort', 'Hier können Sie Ihre Antwort eingeben.');
 $GLOBALS['TL_LANG']['tl_comments']['published'] = array('Kommentar veröffentlichen', 'Den Kommentar auf der Webseite anzeigen.');
 
 
@@ -47,6 +50,7 @@ $GLOBALS['TL_LANG']['tl_comments']['published'] = array('Kommentar veröffentlic
  */
 $GLOBALS['TL_LANG']['tl_comments']['author_legend']  = 'Autor';
 $GLOBALS['TL_LANG']['tl_comments']['comment_legend'] = 'Kommentar';
+$GLOBALS['TL_LANG']['tl_comments']['reply_legend']   = 'Antwort';
 $GLOBALS['TL_LANG']['tl_comments']['publish_legend'] = 'Veröffentlichung';
 
 

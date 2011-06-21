@@ -19,6 +19,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Added: added an "oncreate_callback" and an "onversion_callback" (#2641)
 - Added: make the maximum GD library image dimensions configurable (#2156)
 - Added: do not allow multiple fallback pages per domain (#2826)
+- Added: added an option to reply to comments in the back end (#2881, #2505)
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)
@@ -26,6 +27,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Fixed: support IPv6 addresses in the Environment class (#3157)
 - Fixed: do not cache pages when a back end user is logged in (#3072)
 - Fixed: descending sorting of the event list did not reverse the event order (#3098)
+- Fixed: TinyMCE did not load when a field was in a subpalette (#2461)
 - Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)

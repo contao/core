@@ -120,6 +120,7 @@ $GLOBALS['TL_LANG']['MSC']['com_website']   = 'Webseite';
 $GLOBALS['TL_LANG']['MSC']['com_comment']   = 'Kommentar';
 $GLOBALS['TL_LANG']['MSC']['com_submit']    = 'Kommentar absenden';
 $GLOBALS['TL_LANG']['MSC']['comment_by']    = 'Kommentar von';
+$GLOBALS['TL_LANG']['MSC']['reply_by']      = 'Antwort von';
 $GLOBALS['TL_LANG']['MSC']['com_quote']     = '%s schrieb:';
 $GLOBALS['TL_LANG']['MSC']['com_code']      = 'Code:';
 $GLOBALS['TL_LANG']['MSC']['com_subject']   = 'Contao :: Neuer Kommentar auf %s';

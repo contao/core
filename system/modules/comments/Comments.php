@@ -49,6 +49,9 @@ class Comments extends Frontend
 	 */
 	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies)
 	{
+		global $objPage;
+		$this->import('String');
+
 		$limit = null;
 		$arrComments = array();
 
@@ -69,7 +72,7 @@ class Comments extends Frontend
 		}
 
 		// Get all published comments
-		$objCommentsStmt = $this->Database->prepare("SELECT * FROM tl_comments WHERE source=? AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY date" . (($objConfig->order == 'descending') ? " DESC" : ""));
+		$objCommentsStmt = $this->Database->prepare("SELECT c.*, u.name as authorName FROM tl_comments c LEFT JOIN tl_user u ON c.author=u.id WHERE c.source=? AND c.parent=?" . (!BE_USER_LOGGED_IN ? " AND c.published=1" : "") . " ORDER BY c.date" . (($objConfig->order == 'descending') ? " DESC" : ""));
 
 		if ($limit)
 		{
@@ -94,7 +97,18 @@ class Comments extends Frontend
 			{
 				$objPartial->setData($objComments->row());
 
+				// Clean the RTE output
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$objComments->comment = $this->String->toXhtml($objComments->comment);
+				}
+				else
+				{
+					$objComments->comment = $this->String->toHtml5($objComments->comment);
+				}
+
 				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
+
 				$objPartial->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
 				$objPartial->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
@@ -102,6 +116,26 @@ class Comments extends Frontend
 				$objPartial->id = 'c' . $objComments->id;
 				$objPartial->timestamp = $objComments->date;
 				$objPartial->datetime = date('Y-m-d\TH:i:sP', $objComments->date);
+				$objPartial->addReply = false;
+
+				// Reply
+				if ($objComments->addReply)
+				{
+					$objPartial->addReply = true;
+					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
+
+					// Clean the RTE output
+					if ($objPage->outputFormat == 'xhtml')
+					{
+						$objComments->reply = $this->String->toXhtml($objComments->reply);
+					}
+					else
+					{
+						$objComments->reply = $this->String->toHtml5($objComments->reply);
+					}
+
+					$objPartial->reply = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->reply));
+				}
 
 				$arrComments[] = $objPartial->parse();
 				++$count;

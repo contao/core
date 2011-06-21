@@ -82,7 +82,7 @@ Request.Mixed = new Class(
 				});
 			}
 
-			text = text.stripScripts(function(script)
+			json.content = json.content.stripScripts(function(script)
 			{
 				js = script;
 			});
@@ -605,7 +605,7 @@ var AjaxRequest =
 				// HOOK
 				window.fireEvent('subpalette'); // Backwards compatibility
 				window.fireEvent('ajax_change');
-   			}
+			}
 		}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'load':1, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 	},
 

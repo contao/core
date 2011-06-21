@@ -103,10 +103,11 @@ class TextArea extends Widget
 		if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['rte']))
 		{
 			list ($file, $type) = explode('|', $this->rte);
+			$key = 'ctrl_' . $this->strId;
 
-			$GLOBALS['TL_RTE'][$file][] = array
+			$GLOBALS['TL_RTE'][$file][$key] = array
 			(
-				'id'   => 'ctrl_' . $this->strId,
+				'id'   => $key,
 				'file' => $file,
 				'type' => $type
 			);
