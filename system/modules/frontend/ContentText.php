@@ -53,21 +53,19 @@ class ContentText extends ContentElement
 	protected function compile()
 	{
 		global $objPage;
-
 		$this->import('String');
-		$this->Template->text = $this->text;
 
-		// Clean RTE output
+		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->Template->text = $this->String->toXhtml($this->Template->text);
+			$this->text = $this->String->toXhtml($this->text);
 		}
 		else
 		{
-			$this->Template->text = $this->String->toHtml5($this->Template->text);
+			$this->text = $this->String->toHtml5($this->text);
 		}
 
-		$this->Template->text = $this->String->encodeEmail($this->Template->text);
+		$this->Template->text = $this->String->encodeEmail($this->text);
 		$this->Template->addImage = false;
 
 		// Add image

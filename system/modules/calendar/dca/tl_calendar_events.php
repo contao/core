@@ -241,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'allowHtml'=>true)
+			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr')
 		),
 		'details' => array
 		(

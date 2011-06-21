@@ -1786,7 +1786,16 @@ abstract class Controller extends System
 
 					if ($objTeaser->numRows)
 					{
-						$arrCache[$strTag] = $objTeaser->teaser;
+						$this->import('String');
+
+						if ($objPage->outputFormat == 'xhtml')
+						{
+							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+						}
+						else
+						{
+							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+						}
 					}
 					break;
 
@@ -1800,7 +1809,16 @@ abstract class Controller extends System
 
 					if ($objTeaser->numRows)
 					{
-						$arrCache[$strTag] = $objTeaser->teaser;
+						$this->import('String');
+
+						if ($objPage->outputFormat == 'xhtml')
+						{
+							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+						}
+						else
+						{
+							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+						}
 					}
 					break;
 
@@ -1814,7 +1832,16 @@ abstract class Controller extends System
 
 					if ($objTeaser->numRows)
 					{
-						$arrCache[$strTag] = $objTeaser->teaser;
+						$this->import('String');
+
+						if ($objPage->outputFormat == 'xhtml')
+						{
+							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+						}
+						else
+						{
+							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+						}
 					}
 					break;
 

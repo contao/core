@@ -312,6 +312,9 @@ class Calendar extends Frontend
 			return;
 		}
 
+		global $objPage;
+		$this->import('String');
+
 		$intKey = date('Ymd', $intStart);
 		$span = self::calculateSpan($intStart, $intEnd);
 		$format = $objArticle->addTime ? 'datimFormat' : 'dateFormat';
@@ -363,6 +366,16 @@ class Calendar extends Frontend
 		if ($link == '')
 		{
 			$link = sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		}
+
+		// Clean the RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+		}
+		else
+		{
+			$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
 		}
 
 		$arrEvent = array

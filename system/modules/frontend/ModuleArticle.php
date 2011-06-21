@@ -78,6 +78,7 @@ class ModuleArticle extends Module
 	protected function compile()
 	{
 		global $objPage;
+		$this->import('String');
 
 		if ($this->blnNoMarkup)
 		{
@@ -106,6 +107,16 @@ class ModuleArticle extends Module
 		$this->Template->timestamp = $this->tstamp;
 		$this->Template->date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->tstamp);
 		$this->Template->author = $this->author;
+
+		// Clean the RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$this->teaser = $this->String->toXhtml($this->teaser);
+		}
+		else
+		{
+			$this->teaser = $this->String->toHtml5($this->teaser);
+		}
 
 		// Show teaser only
 		if ($this->multiMode && $this->showTeaser)

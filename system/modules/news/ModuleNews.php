@@ -143,19 +143,17 @@ abstract class ModuleNews extends Module
 			// Encode e-mail addresses
 			else
 			{
-				$objTemplate->text = $objArticles->text;
-
-				// Clean RTE output
+				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objTemplate->text = $this->String->toXhtml($objTemplate->text);
+					$objArticles->text = $this->String->toXhtml($objArticles->text);
 				}
 				else
 				{
-					$objTemplate->text = $this->String->toHtml5($objTemplate->text);
+					$objArticles->text = $this->String->toHtml5($objArticles->text);
 				}
 
-				$objTemplate->text = $this->String->encodeEmail($objTemplate->text);
+				$objTemplate->text = $this->String->encodeEmail($objArticles->text);
 			}
 
 			$arrMeta = $this->getMetaFields($objArticles);

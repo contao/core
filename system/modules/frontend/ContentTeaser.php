@@ -79,6 +79,9 @@ class ContentTeaser extends ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
+		$this->import('String');
+
 		$link = '/articles/';
 		$objArticle = $this->objArticle;
 
@@ -89,6 +92,16 @@ class ContentTeaser extends ContentElement
 
 		$link .= (strlen($objArticle->aalias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->aalias : $objArticle->aid;
 		$this->Template->href = $this->generateFrontendUrl($objArticle->row(), $link);
+
+		// Clean the RTE output
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+		}
+		else
+		{
+			$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
+		}
 
 		$this->Template->headline = $objArticle->title;
 		$this->Template->text = $objArticle->teaser;

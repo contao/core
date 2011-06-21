@@ -124,7 +124,7 @@ class ModuleEventReader extends Events
 		// Overwrite the page description
 		if ($objEvent->teaser != '')
 		{
-			$objPage->description = $this->prepareMetaDescription($objEvent->teaser); 
+			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
 		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
@@ -194,19 +194,18 @@ class ModuleEventReader extends Events
 		$objTemplate->until = $until;
 
 		$this->import('String');
-		$objTemplate->details = $objEvent->details;
 
-		// Clean RTE output
+		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objTemplate->details = $this->String->toXhtml($objTemplate->details);
+			$objEvent->details = $this->String->toXhtml($objEvent->details);
 		}
 		else
 		{
-			$objTemplate->details = $this->String->toHtml5($objTemplate->details);
+			$objEvent->details = $this->String->toHtml5($objEvent->details);
 		}
 
-		$objTemplate->details = $this->String->encodeEmail($objTemplate->details);
+		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
 		$objTemplate->addImage = false;
 
 		// Add image
