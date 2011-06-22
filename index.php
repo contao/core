@@ -179,7 +179,7 @@ class Index extends Frontend
 		if (!$this->User->authenticate() && $objPage->protected && !BE_USER_LOGGED_IN)
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId);
+			$objHandler->generate($pageId, $objPage->rootId);
 		}
 
 		// Check user groups if the page is protected
@@ -188,7 +188,7 @@ class Index extends Frontend
 			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
 
 			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId);
+			$objHandler->generate($pageId, $objPage->rootId);
 		}
 
 		// Load the page object depending on its type
@@ -197,9 +197,12 @@ class Index extends Frontend
 		switch ($objPage->type)
 		{
 			case 'root':
-			case 'error_403':
 			case 'error_404':
 				$objHandler->generate($pageId);
+				break;
+
+			case 'error_403':
+				$objHandler->generate($pageId, $objPage->rootId);
 				break;
 
 			default:

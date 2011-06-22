@@ -43,18 +43,25 @@ class PageError403 extends Frontend
 	/**
 	 * Generate an error 403 page
 	 * @param integer
+	 * @param integer
 	 */
-	public function generate($pageId)
+	public function generate($pageId, $rootId=false)
 	{
 		$time = time();
 
 		// Add a log entry
 		$this->log('Access to page ID "' . $pageId . '" denied', 'PageError403 generate()', TL_ERROR);
 
+		// Use the given $rootId if available (thanks to Andreas Schempp)
+		if (!$rootId)
+		{
+			$rootId = $this->getRootIdFromUrl();
+		}
+
 		// Look for an error_403 page within the website root
 		$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								 ->limit(1)
-								 ->execute('error_403', $this->getRootIdFromUrl(), $time, $time);
+								 ->execute('error_403', $rootId, $time, $time);
 
 		// Look for a global error_403 page
 		if ($obj403->numRows < 1)
