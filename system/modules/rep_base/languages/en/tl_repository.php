@@ -119,11 +119,12 @@ $GLOBALS['TL_LANG']['tl_repository_type_options']['commercial'] = 'Commercial';
  * Categories
  */
 $GLOBALS['TL_LANG']['tl_repository_category_options']['application'] = 'Application';
-$GLOBALS['TL_LANG']['tl_repository_category_options']['utility']     = 'Utility';
-$GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Theme';
-$GLOBALS['TL_LANG']['tl_repository_category_options']['widget']      = 'Widget';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['plugin']      = 'Plugin';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['template']    = 'Theme';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['utility']     = 'Utility';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['widget']      = 'Widget';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['translation'] = 'Translation';
+$GLOBALS['TL_LANG']['tl_repository_category_options']['bundle']      = 'Bundle';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['other']       = 'Other';
 $GLOBALS['TL_LANG']['tl_repository_category_options']['core']        = 'Core';
 

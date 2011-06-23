@@ -221,7 +221,7 @@ class Repository
 	{
 		return 
 			'<span title="'.$aText.'">'.
-			(mb_strlen($aText)<=$aLength ? $aText : mb_substr($aText,0,$aLength-2).'...').
+			(mb_strlen($aText)<=$aLength ? $aText : mb_substr($aText,0,$aLength-2).' …').
 			'</span>';
 	} // ellipsisText
 	
