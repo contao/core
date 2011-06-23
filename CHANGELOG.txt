@@ -23,6 +23,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Added: do not allow multiple fallback pages per domain (#2826)
 - Added: added an option to reply to comments in the back end (#2881, #2505)
 - Added: added a "renameTo" method to the Folder and File class (#3181)
+- Added: added an option to add custom runonce.php files (#2664)
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)

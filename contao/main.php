@@ -80,6 +80,8 @@ class Main extends Backend
 	 */
 	public function run()
 	{
+		$this->handleRunOnce();
+
 		$this->Template = new BackendTemplate('be_main');
 		$this->Template->main = '';
 
@@ -92,7 +94,7 @@ class Main extends Backend
 		// Welcome screen
 		if (!$this->Input->get('do') && !$this->Input->get('act'))
 		{
-			$this->welcomeScreen();
+			$this->Template->main .= $this->welcomeScreen();
 		}
 
 		// Open module
@@ -107,6 +109,7 @@ class Main extends Backend
 
 	/**
 	 * Add the welcome screen
+	 * @return string
 	 */
 	protected function welcomeScreen()
 	{
@@ -201,7 +204,7 @@ class Main extends Backend
 			$objTemplate->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin));
 		}
 
-		$this->Template->main .= $objTemplate->parse();
+		return $objTemplate->parse();
 	}
 
 

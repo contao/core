@@ -211,24 +211,4 @@ if (TL_MODE == 'BE')
 	define('TL_PLUGINS_URL', ($GLOBALS['TL_CONFIG']['staticPlugins'] != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $GLOBALS['TL_CONFIG']['staticPlugins'] . TL_PATH . '/' : '');
 }
 
-
-/**
- * Include file runonce.php if it exists
- */
-if (file_exists(TL_ROOT . '/system/runonce.php'))
-{
-	try
-	{
-		include(TL_ROOT . '/system/runonce.php');
-	}
-	catch (Exception $e) {}
-
-	$objFiles = Files::getInstance();
-
-	if (!$objFiles->delete('system/runonce.php'))
-	{
-		throw new Exception('The system/runonce.php file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.');
-	}
-}
-
 ?>

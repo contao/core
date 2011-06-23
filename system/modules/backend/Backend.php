@@ -51,6 +51,45 @@ abstract class Backend extends Controller
 
 
 	/**
+	 * Handle "runonce" files
+	 */
+	protected function handleRunOnce()
+	{
+		$this->import('Files');
+		$objRunonce = $this->Database->query("SELECT * FROM tl_runonce");
+
+		while ($objRunonce->next())
+		{
+			$file = $objRunonce->name;
+
+			// File name must be "runonce.php"
+			if (basename($file) != 'runonce.php')
+			{
+				throw new Exception("File $file is not a valid runonce file");
+			}
+
+			// Check whether the file exists
+			if (file_exists(TL_ROOT . '/' . $file))
+			{
+				try
+				{
+					include(TL_ROOT . '/' . $file);
+				}
+				catch (Exception $e) {}
+
+				if (!$this->Files->delete($file))
+				{
+					throw new Exception("The $file file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
+				}
+			}
+
+			$this->Database->prepare("DELETE FROM tl_runonce WHERE id=?")
+						   ->execute($objRunonce->id);
+		}
+	}
+
+
+	/**
 	 * Open a back end module and return it as HTML
 	 * @param string
 	 * @return string
