@@ -29,6 +29,8 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Fixed: do not cache pages when a back end user is logged in (#3072)
 - Fixed: descending sorting of the event list did not reverse the event order (#3098)
 - Fixed: TinyMCE did not load when a field was in a subpalette (#2461)
+- Fixed: the Input class did not filter "expression()" (#2865)
+- Fixed: the "listTables()" and "listFields()" methods were always cached (#3188)
 - Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)

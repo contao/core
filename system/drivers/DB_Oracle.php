@@ -126,7 +126,7 @@ class DB_Oracle extends Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$arrFields = $this->execute(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
+		$arrFields = $this->executeUncached(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
 
 		foreach ($arrFields as $k=>$v)
 		{
