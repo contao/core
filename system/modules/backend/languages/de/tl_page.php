@@ -95,19 +95,22 @@ $GLOBALS['TL_LANG']['tl_page']['publish_legend']   = 'Veröffentlichung';
 /**
  * Cache timeout labels
  */
-$GLOBALS['TL_LANG']['CACHE'][0]      = '0 (nicht cachen)';
-$GLOBALS['TL_LANG']['CACHE'][5]      = '5 Sekunden';
-$GLOBALS['TL_LANG']['CACHE'][15]     = '15 Sekunden';
-$GLOBALS['TL_LANG']['CACHE'][30]     = '30 Sekunden';
-$GLOBALS['TL_LANG']['CACHE'][60]     = '60 Sekunden';
-$GLOBALS['TL_LANG']['CACHE'][300]    = '5 Minuten';
-$GLOBALS['TL_LANG']['CACHE'][900]    = '15 Minuten';
-$GLOBALS['TL_LANG']['CACHE'][1800]   = '30 Minuten';
-$GLOBALS['TL_LANG']['CACHE'][3600]   = '60 Minuten';
-$GLOBALS['TL_LANG']['CACHE'][10800]  = '3 Stunden';
-$GLOBALS['TL_LANG']['CACHE'][21600]  = '6 Stunden';
-$GLOBALS['TL_LANG']['CACHE'][43200]  = '12 Stunden';
-$GLOBALS['TL_LANG']['CACHE'][86400]  = '24 Stunden';
+$GLOBALS['TL_LANG']['CACHE'][0]       = '0 (nicht cachen)';
+$GLOBALS['TL_LANG']['CACHE'][5]       = '5 Sekunden';
+$GLOBALS['TL_LANG']['CACHE'][15]      = '15 Sekunden';
+$GLOBALS['TL_LANG']['CACHE'][30]      = '30 Sekunden';
+$GLOBALS['TL_LANG']['CACHE'][60]      = '60 Sekunden';
+$GLOBALS['TL_LANG']['CACHE'][300]     = '5 Minuten';
+$GLOBALS['TL_LANG']['CACHE'][900]     = '15 Minuten';
+$GLOBALS['TL_LANG']['CACHE'][1800]    = '30 Minuten';
+$GLOBALS['TL_LANG']['CACHE'][3600]    = '60 Minuten';
+$GLOBALS['TL_LANG']['CACHE'][10800]   = '3 Stunden';
+$GLOBALS['TL_LANG']['CACHE'][21600]   = '6 Stunden';
+$GLOBALS['TL_LANG']['CACHE'][43200]   = '12 Stunden';
+$GLOBALS['TL_LANG']['CACHE'][86400]   = '24 Stunden';
+$GLOBALS['TL_LANG']['CACHE'][259200]  = '3 Tage';
+$GLOBALS['TL_LANG']['CACHE'][604800]  = '7 Tage';
+$GLOBALS['TL_LANG']['CACHE'][2592000] = '30 Tage';
 
 
 /**

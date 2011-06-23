@@ -430,7 +430,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'default'                 => 0,
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400),
+			'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400, 259200, 604800, 2592000),
 			'reference'               => &$GLOBALS['TL_LANG']['CACHE']
 		),
 		'includeChmod' => array
