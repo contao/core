@@ -21,6 +21,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Added: make the maximum GD library image dimensions configurable (#2156)
 - Added: do not allow multiple fallback pages per domain (#2826)
 - Added: added an option to reply to comments in the back end (#2881, #2505)
+- Added: added a "renameTo" method to the Folder and File class (#3181)
 - Fixed: the new request tokens did not support working with multiple tabs
 - Fixed: the FAQ links in the comments view were not linking to the correct FAQ (#3144)
 - Fixed: the default style sheets were not loaded when no style sheets were selected (#3138)
@@ -31,6 +32,7 @@ Version 2.10.RC1 (XXXX-XX-XX)
 - Fixed: TinyMCE did not load when a field was in a subpalette (#2461)
 - Fixed: the Input class did not filter "expression()" (#2865)
 - Fixed: the "listTables()" and "listFields()" methods were always cached (#3188)
+- Fixed: the page cache timeout was limited to 24 hours (#3167)
 - Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)

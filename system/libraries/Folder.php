@@ -127,6 +127,17 @@ class Folder extends System
 	{
 		$this->Files->rrdir($this->strFolder);
 	}
+
+
+	/**
+	 * Rename the folder
+	 * @param string
+	 */
+	public function renameTo($strNewName)
+	{
+		$this->Files->rename($this->strFolder, $strNewName);
+		$this->strFolder = $strNewName;
+	}
 }
 
 ?>

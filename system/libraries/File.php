@@ -87,6 +87,28 @@ class File extends System
 		}
 
 		$this->strFile = $strFile;
+
+		// Create file if it does not exist
+		if (!file_exists(TL_ROOT . '/' . $this->strFile))
+		{
+			// Handle open_basedir restrictions
+			if (($strFolder = dirname($this->strFile)) == '.')
+			{
+				$strFolder = '';
+			}
+
+			// Create folder
+			if (!is_dir(TL_ROOT . '/' . $strFolder))
+			{
+				new Folder($strFolder);
+			}
+
+			// Open file
+			if (($this->resFile = $this->Files->fopen($this->strFile, 'wb')) == false)
+			{
+				throw new Exception(sprintf('Cannot create file "%s"', $this->strFile));
+			}
+		}
 	}
 
 
@@ -277,40 +299,28 @@ class File extends System
 
 
 	/**
+	 * Rename the file
+	 * @param string
+	 */
+	public function renameTo($strNewName)
+	{
+		$this->Files->rename($this->strFile, $strNewName);
+		$this->strFile = $strNewName;
+	}
+
+
+	/**
 	 * Write data to a file
 	 * @param mixed
 	 * @param string
 	 * @return boolean
-	 * @throws Exception
 	 */
 	protected function fputs($varData, $strMode)
 	{
 		if (!is_resource($this->resFile))
 		{
-			// Create the file if it does not exist
-			if (!file_exists(TL_ROOT . '/' . $this->strFile))
-			{
-				// Handle open_basedir restrictions
-				if (($strFolder = dirname($this->strFile)) == '.')
-				{
-					$strFolder = '';
-				}
-
-				// Create the folder
-				if (!is_dir(TL_ROOT . '/' . $strFolder))
-				{
-					new Folder($strFolder);
-				}
-			}
-
-			// Open the file
 			if (($this->resFile = $this->Files->fopen($this->strFile, $strMode)) == false)
 			{
-				if (strncmp($strMode, 'w', 1) === 0)
-				{
-					throw new Exception(sprintf('Cannot create file "%s"', $this->strFile));
-				}
-
 				return false;
 			}
 		}
