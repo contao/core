@@ -63,6 +63,20 @@ interface editable
 
 
 /**
+ * Interface executable
+ * 
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
+ */
+interface executable
+{
+	public function run();
+	public function isActive();
+}
+
+
+/**
  * Interface uploadable
  * 
  * @copyright  Leo Feyer 2005-2011

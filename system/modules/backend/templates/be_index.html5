@@ -1,8 +1,4 @@
 
-<div id="tl_buttons">
-<a href="<?php echo $this->href; ?>" class="header_back" title="<?php echo $this->title; ?>"><?php echo $this->button; ?></a>
-</div>
-
 <h2 class="sub_headline_index"><?php echo $this->indexHeadline; ?></h2>
 
 <div id="tl_rebuild_index">

@@ -1,0 +1,34 @@
+
+<div id="tl_maintenance_index">
+
+<h2 class="sub_headline_index"><?php echo $this->indexHeadline; ?></h2>
+<?php if ($this->indexMessage): ?>
+
+<div class="tl_message">
+<p class="tl_error"><?php echo $this->indexMessage; ?></p>
+</div>
+<?php endif; ?>
+
+<form action="<?php echo $this->action; ?>" class="tl_form" method="get">
+<div class="tl_formbody_edit">
+<input type="hidden" name="act" value="index">
+<input type="hidden" name="do" value="maintenance">
+<div class="tl_tbox block">
+  <h3><label for="ctrl_user"><?php echo $this->indexLabel; ?></label></h3>
+  <select name="user" id="ctrl_user" class="tl_select">
+<?php foreach ($this->user as $id=>$name): ?>
+    <option value="<?php echo $id; ?>"><?php echo $name; ?></option>
+<?php endforeach; ?>
+  </select>
+<?php if ($this->indexHelp): ?>
+  <p class="tl_help tl_tip"><?php echo $this->indexHelp; ?></p>
+<?php endif; ?>
+  </div>
+<div class="tl_submit_container">
+<input type="submit" id="index" class="tl_submit" value="<?php echo $this->indexSubmit; ?>"> 
+</div>
+
+</div>
+</form>
+
+</div>

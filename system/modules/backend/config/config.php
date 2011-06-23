@@ -171,6 +171,17 @@ $GLOBALS['TL_PTY'] = array
 
 
 /**
+ * Maintenance
+ */
+$GLOBALS['TL_MAINTENANCE'] = array
+(
+	'PurgeData',
+	'LiveUpdate',
+	'RebuildIndex'
+);
+
+
+/**
  * Cache tables
  */
 $GLOBALS['TL_CACHE'] = array
