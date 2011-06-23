@@ -88,7 +88,7 @@ Request.Mixed = new Class(
 			});
 
 			js = js.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
-			this.onSuccess(json, js);
+			this.onSuccess(json.content, js, json);
 		}
 	}
 
@@ -147,7 +147,7 @@ Request.Contao = new Class(
 				});
 			}
 
-			this.onSuccess(json, text);
+			this.onSuccess(json.content, json);
 		}
 	}
 
@@ -200,13 +200,13 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
 				item = new Element('li');
 
 				item.addClass('tl_parent');
 				item.setProperty('id', id);
-				item.set('html', json.content);
+				item.set('html', txt);
 				item.setStyle('display', 'inline');
 				item.injectAfter($(el).getParent('li'));
 
@@ -260,12 +260,12 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', json.content);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -351,12 +351,12 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', json.content);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -419,12 +419,12 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', json.content);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -487,12 +487,12 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
 				var ul = new Element('ul');
 
 				ul.addClass('level_' + level);
-				ul.set('html', json.content);
+				ul.set('html', txt);
 
 				item = new Element('li');
 
@@ -529,12 +529,12 @@ var AjaxRequest =
 			new Request.Contao(
 			{
 				onRequest: AjaxRequest.displayBox('Loading data …'),
-				onSuccess: function(json)
+				onSuccess: function(txt, json)
 				{
 					// Preserve the "reset selection" entry
 					var ul = $(el.id + '_parent').getFirst('ul');
 					var li = ul.getLast('li');
-					ul.set('html', json.content);
+					ul.set('html', txt);
 					li.inject(ul);
 					AjaxRequest.hideBox();
 
@@ -580,11 +580,11 @@ var AjaxRequest =
 		new Request.Mixed(
 		{
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(json, js)
+			onSuccess: function(txt, js, json)
 			{
 				item = new Element('div');
 				item.setProperty('id', id);
-				item.set('html', json.content);
+				item.set('html', txt);
 				item.injectAfter($(el).getParent('div').getParent('div'));
 
 				if (js)
@@ -804,9 +804,9 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			onRequest: $('lu_message').set('html', '<p class="tl_info">Connecting to live update server</p>'),
-			onSuccess: function(json)
+			onSuccess: function(txt, json)
 			{
-				if (json.content)
+				if (txt)
 				{
 					$('lu_message').set('html', json.content);
 				}
