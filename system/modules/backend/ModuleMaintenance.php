@@ -366,7 +366,7 @@ class ModuleMaintenance extends BackendModule
 		echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Updating files</h1>';
 		echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
 
-		// Unzip files
+		// Unzip the files
 		while ($objArchive->next())
 		{
 			if ($objArchive->file_name == 'TOC.txt')
@@ -382,7 +382,6 @@ class ModuleMaintenance extends BackendModule
 
 				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
-
 			catch (Exception $e)
 			{
 				echo '<li style="color:#ff0000;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</li>';
