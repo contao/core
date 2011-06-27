@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -46,21 +46,21 @@ class RepositoryBackendModule extends BackendModule
 {
 	protected $strTemplate;
 	protected $actions = array();
-	
+
 	protected $rep;
-	
+
 	protected $tl_root;
 	protected $tl_files;
 	protected $languages;
-	
+
 	protected $mode = '';
 	protected $client;
-	
+
 	private $compiler;
 	private $action = '';
 	private $parameter = '';
-	
-	
+
+
 	/**
 	 * Generate module:
 	 * - Display a wildcard in the back end
@@ -96,7 +96,7 @@ class RepositoryBackendModule extends BackendModule
 		// hide module?
 		$compiler = $this->compiler;
 		if ($compiler=='hide') return;
-		
+
 		// load other helpers
 		$this->tl_root = str_replace("\\",'/',TL_ROOT).'/';
 		$this->tl_files = str_replace("\\",'/',$GLOBALS['TL_CONFIG']['uploadPath']).'/';
@@ -105,7 +105,7 @@ class RepositoryBackendModule extends BackendModule
 		$this->Template->rep = $this->rep;
 		$this->languages = rtrim($GLOBALS['TL_LANGUAGE'].','.trim($GLOBALS['TL_CONFIG']['repository_languages']),',');
 		$this->languages = implode(',',array_unique(explode(',',$this->languages)));
-		
+
 		// complete rep initialization
 		$rep = $this->rep;
 		$rep->f_link	= $this->createUrl(array($this->action=>$this->parameter));
@@ -114,11 +114,11 @@ class RepositoryBackendModule extends BackendModule
 		$rep->theme		= new RepositoryBackendTheme();
 		$rep->backLink	= $this->getReferer(ENCODE_AMPERSANDS);
 		$rep->homeLink	= $this->createUrl();
-		
+
 		// load soap client in case wsdl file is defined
 		$wsdl = trim($GLOBALS['TL_CONFIG']['repository_wsdl']);
 		if ($wsdl != '') {
-			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0); 
+			if (!REPOSITORY_SOAPCACHE) ini_set('soap.wsdl_cache_enabled', 0);
 			// HOOK: proxy module
 			if ($GLOBALS['TL_CONFIG']['useProxy']) {
 				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
@@ -165,7 +165,7 @@ class RepositoryBackendModule extends BackendModule
 	{
 		return $this->createPageUrl($this->Input->get('do'), $aParams);
 	} // createUrl
-	
+
 	/**
 	 * Create url for hyperlink to an arbitrary page.
 	 * @param string $aPage The page ID.
@@ -176,7 +176,7 @@ class RepositoryBackendModule extends BackendModule
 	{
 		$url = $this->Environment->script . '?do='.$aPage;
 		if (is_array($aParams)) {
-			foreach ($aParams as $key => $val) 
+			foreach ($aParams as $key => $val)
 				if ($val!='')
 					$url .= '&amp;'.$key .'='.$val;
 		}
@@ -185,8 +185,8 @@ class RepositoryBackendModule extends BackendModule
 
 	/**
 	 * Get post parameter and filter value.
-	 * @param string $aKey The post key. When filtering html, remove all attribs and 
-	 * keep the plain tags. 
+	 * @param string $aKey The post key. When filtering html, remove all attribs and
+	 * keep the plain tags.
 	 * @param string $aMode '': no filtering
 	 *						'nohtml': strip all html
 	 *						'text': Keep tags p br ul li em
@@ -197,17 +197,17 @@ class RepositoryBackendModule extends BackendModule
 		$v = trim($this->Input->postRaw($aKey));
 		if ($v == '' || $aMode=='') return $v;
 		switch ($aMode) {
-			case 'nohtml': 
+			case 'nohtml':
 				$v = strip_tags($v);
 				break;
-			case 'text': 
+			case 'text':
 				$v = strip_tags($v, REPOSITORY_TEXTTAGS);
 				break;
 		} // switch
 		$v = preg_replace('/<(\w+) .*>/U', '<$1>', $v);
 		return $v;
 	} // filterPost
-	
+
 	protected function getExtensionList($aOptions)
 	{
 		switch ($this->mode) {
@@ -219,8 +219,7 @@ class RepositoryBackendModule extends BackendModule
 				return array();
 		} // if
 	} // getExtensionList
-	
-	
+
 } // class RepositoryBackendModule
 
 ?>

@@ -52,39 +52,37 @@ abstract class Backend extends Controller
 
 	/**
 	 * Handle "runonce" files
+	 * @throws Exception
 	 */
 	protected function handleRunOnce()
 	{
 		$this->import('Files');
-		$objRunonce = $this->Database->query("SELECT * FROM tl_runonce");
+		$arrFiles = array('system/runonce.php');
 
-		while ($objRunonce->next())
+		// Third-party extensions
+		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$file = $objRunonce->name;
+			$arrFiles[] = 'system/modules/' . $strModule . '/config/runonce.php';
+		}
 
-			// File name must be "runonce.php"
-			if (basename($file) != 'runonce.php')
-			{
-				throw new Exception("File $file is not a valid runonce file");
-			}
-
-			// Check whether the file exists
-			if (file_exists(TL_ROOT . '/' . $file))
+		// Check whether a runonce file exists
+		foreach ($arrFiles as $strFile)
+		{
+			if (file_exists(TL_ROOT . '/' . $strFile))
 			{
 				try
 				{
-					include(TL_ROOT . '/' . $file);
+					include(TL_ROOT . '/' . $strFile);
 				}
 				catch (Exception $e) {}
 
-				if (!$this->Files->delete($file))
+				if (!$this->Files->delete($strFile))
 				{
-					throw new Exception("The $file file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
+					throw new Exception("The $strFile file cannot be deleted. Please remove the file manually and correct the file permission settings on your server.");
 				}
-			}
 
-			$this->Database->prepare("DELETE FROM tl_runonce WHERE id=?")
-						   ->execute($objRunonce->id);
+				$this->log("File $strFile ran once and has then been removed successfully", 'Backend handleRunOnce()', TL_GENERAL);
+			}
 		}
 	}
 

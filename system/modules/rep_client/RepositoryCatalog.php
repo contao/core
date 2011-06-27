@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -60,7 +60,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 		);
 		return parent::generate();
 	} // generate
-	
+
 	/**
 	 * List the extensions
 	 */
@@ -68,7 +68,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 	{
 		$rep = &$this->Template->rep;
 		$rep->f_page = 0;
-		
+
 		// returning from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			// get url parameters
@@ -105,13 +105,13 @@ class RepositoryCatalog extends RepositoryBackendModule
 				$rep->f_page	= trim($stg['repository_page']);
 				$rep->f_find	= trim($stg['repository_find']);
 			} // if
-		} // if	
-		
+		} // if
+
 		if ($rep->f_order=='') $rep->f_order = 'popular';
-		
+
 		$perpage = (int)trim($GLOBALS['TL_CONFIG']['repository_listsize']);
 		if ($perpage < 0) $perpage = 0;
-		
+
 		// process parameters and build query options
 		$options = array(
 			'languages'		=> $this->languages,
@@ -124,12 +124,12 @@ class RepositoryCatalog extends RepositoryBackendModule
 		if ($rep->f_tag		!= '') $options['tags']			= $rep->f_tag;
 		if ($rep->f_type 	!= '') $options['types']		= $rep->f_type;
 		if ($rep->f_category!= '') $options['categories'] 	= $rep->f_category;
-		if ($rep->f_state	!= '') $options['states']		= $rep->f_state; 
+		if ($rep->f_state	!= '') $options['states']		= $rep->f_state;
 		if ($rep->f_author	!= '') $options['authors']		= $rep->f_author;
 		if ($rep->f_find	!= '') $options['find']			= $rep->f_find;
 		if (!$GLOBALS['TL_CONFIG']['repository_unsafe_catalog'])
 			$options['compatibility'] = Repository::encodeVersion(VERSION.'.'.BUILD);
-		
+
 		switch ($rep->f_order) {
 			case 'name'		: break;
 			case 'title'	: $options['order'] = 'title'; break;
@@ -138,7 +138,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 			case 'reldate'	: $options['order'] = 'releasedate-'; break;
 			default			: $options['order'] = 'popularity-';
 		} // switch
-		
+
 		// query extensions
 		$rep->extensions = $this->getExtensionList($options);
 		if ($rep->f_page>=0 && $perpage>0 && count($rep->extensions)==0) {
@@ -164,27 +164,27 @@ class RepositoryCatalog extends RepositoryBackendModule
 				$first += $cnt;
 				$totrecs -= $cnt;
 			} // while
-		} // if		
-		
+		} // if
+
 		$rep->tags = $this->getTagList(array('languages'=>$this->languages, 'mode'=>'initcap'));
 		$rep->authors = $this->getAuthorList(array('languages'=>$this->languages));
 	} // listExtensions
-	
+
 	/**
 	 * Detailed view of one extension.
 	 */
 	protected function viewExtension($aParams)
 	{
 		$rep = &$this->Template->rep;
-		
+
 		// parse name[.version][.language]
 		$matches = array();
-		if (!preg_match('#^([a-zA-Z0-9_-]+)(\.([0-9]+))?(\.([a-z]{2,2}))?$#', $aParams, $matches)) 
+		if (!preg_match('#^([a-zA-Z0-9_-]+)(\.([0-9]+))?(\.([a-z]{2,2}))?$#', $aParams, $matches))
 			$this->redirect($rep->homeLink);
 		$name = $matches[1];
 		$version = (count($matches)>=4) ? $matches[3] : '';
 		$language = count($matches)>=6 ? $matches[5] : $this->languages;
-		
+
 		// compose base options
 		$options = array(
 			'match' 	=> 'exact',
@@ -193,16 +193,16 @@ class RepositoryCatalog extends RepositoryBackendModule
 			'sets'  	=> 'details,pictures,languages,history,dependencies,dependents,sums'
 		);
 		if ($version!='') $options['versions'] = $version;
-		
+
 		$rep->extensions = $this->getExtensionList($options);
 		if (count($rep->extensions)<1) $this->redirect($rep->homeLink);
 		$ext = &$rep->extensions[0];
-		
+
 		// other versions links
 		if (property_exists($ext, 'allversions'))
 			foreach ($ext->allversions as &$ver)
 				$ver->viewLink = $this->createUrl(array('view'=>$ext->name.'.'.$ver->version.'.'.$ext->language));
-			
+
 		// other languages links
 		if (property_exists($ext, 'languages')) {
 			$langs = explode(',', $ext->languages);
@@ -214,20 +214,20 @@ class RepositoryCatalog extends RepositoryBackendModule
 				$ext->languages[] = $l;
 			} // for
 		} // if
-		
+
 		// dependencies links
 		if (property_exists($ext, 'dependencies'))
 			foreach ($ext->dependencies as &$dep)
 				$dep->viewLink = $this->createUrl(array('view'=>$dep->extension));
-			
+
 		// dependents links
 		if (property_exists($ext, 'dependents'))
 			foreach ($ext->dependents as &$dep)
 				$dep->viewLink = $this->createUrl(array('view'=>$dep->extension));
-		
+
 		// install link
 		$ext->installLink = $this->createPageUrl('repository_manager',array('install'=>$ext->name.'.'.$ext->version));
-		
+
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_installbutton'])) $this->redirect($ext->installLink);
 			if (isset($_POST['repository_manualbutton']) && property_exists($ext, 'manual')) $this->redirect($ext->manual);
@@ -235,7 +235,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 			if (isset($_POST['repository_shopbutton']) && property_exists($ext, 'shop')) $this->redirect($ext->shop);
 		} // if
 	} // viewExtension
-	
+
 	private function getAuthorList($aOptions)
 	{
 		switch ($this->mode) {
@@ -247,7 +247,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 				return array();
 		} // if
 	} // getAuthorList
-	
+
 	private function getTagList($aOptions)
 	{
 		switch ($this->mode) {
@@ -259,7 +259,7 @@ class RepositoryCatalog extends RepositoryBackendModule
 				return array();
 		} // if
 	} // getTagList
-	
+
 } // class RepositoryCatalog
 
 ?>

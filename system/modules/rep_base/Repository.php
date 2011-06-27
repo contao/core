@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -48,33 +48,33 @@ class Repository
     /**
 	 * Array with status detail names.
 	 */
-	private static $mStatusName = 
+	private static $mStatusName =
 		array(
 			'alpha1', 'alpha2', 'alpha3',
 			'beta1', 'beta2', 'beta3',
 			'rc1', 'rc2', 'rc3',
 			'stable'
 		);
-		
-	private static $mShortStatusName = 
+
+	private static $mShortStatusName =
 		array(
 			'&#945;1', '&#945;2', '&#945;3',
 			'&#946;1', '&#946;2', '&#946;3',
 			'r1', 'r2', 'r3',
 			'st'
 		);
-		
+
 	/**
 	 * Format a version number to human readable with long status text
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::formatVersion(10030042); 
+	 * echo Repository::formatVersion(10030042);
 	 * // will output: 1.3.4 alpha3
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
-	 */ 
+	 */
 	public static function formatVersion($aVersion)
 	{
 		$aVersion	= (int)$aVersion;
@@ -93,12 +93,12 @@ class Repository
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::formatShortVersion(10030042); 
+	 * echo Repository::formatShortVersion(10030042);
 	 * // will output: 1.3.4 a3
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
-	 */ 
+	 */
 	public static function formatShortVersion($aVersion)
 	{
 		$aVersion	= (int)$aVersion;
@@ -117,12 +117,12 @@ class Repository
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::formatCompatVersion(20090039); 
+	 * echo Repository::formatCompatVersion(20090039);
 	 * // version 2.9.3 stable will output: 2.9
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
-	 */ 
+	 */
 	public static function formatCompatVersion($aVersion)
 	{
 		$aVersion	= (int)$aVersion;
@@ -136,12 +136,12 @@ class Repository
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::formatCoreVersion(20050119); 
+	 * echo Repository::formatCoreVersion(20050119);
 	 * // will output: 2.6.0 beta2
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
-	 */ 
+	 */
 	public static function formatCoreVersion($aVersion)
 	{
 		$aVersion = (int)$aVersion;
@@ -161,12 +161,12 @@ class Repository
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::formatShortCoreVersion(20050119); 
+	 * echo Repository::formatShortCoreVersion(20050119);
 	 * // will output: 2.6.0 b2
 	 * </code>
 	 * @param int $aVersion The encoded version
 	 * @return string The version in human readable format
-	 */ 
+	 */
 	public static function formatShortCoreVersion($aVersion)
 	{
 		$aVersion = (int)$aVersion;
@@ -186,12 +186,12 @@ class Repository
 	 *
 	 * Example:
 	 * <code>
-	 * echo Repository::encodeVersion('2.9.21 beta2'); 
+	 * echo Repository::encodeVersion('2.9.21 beta2');
 	 * // will output: 20090214
 	 * </code>
 	 * @param string $aVersion Human readable representation of a version.
 	 * @return int The encoded version number
-	 */ 
+	 */
 	public static function encodeVersion($aVersion)
 	{
 		$matches = array();
@@ -208,7 +208,7 @@ class Repository
 		} // if
 		return 0;
 	} // encodeVersion
-	
+
 	/**
 	 * Shorten text adding ellipsis when it is too long.
 	 * The text is enclosed in a span element with the full length text as title, so when
@@ -219,12 +219,12 @@ class Repository
 	 */
 	public static function ellipsisText($aText, $aLength = 32)
 	{
-		return 
+		return
 			'<span title="'.$aText.'">'.
 			(mb_strlen($aText)<=$aLength ? $aText : mb_substr($aText,0,$aLength-2).' …').
 			'</span>';
 	} // ellipsisText
-	
+
 } // class Repository
 
 ?>

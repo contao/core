@@ -77,14 +77,14 @@ class LiveUpdate extends Backend implements executable
 		}
 
 		// Newer version available
-		elseif (strlen($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
+		elseif ($GLOBALS['TL_CONFIG']['latestVersion'] != '' && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->updateClass = 'tl_info';
 			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
 		}
 
 		// Live update error
-		if (strlen($_SESSION['LIVE_UPDATE_ERROR']))
+		if ($_SESSION['LIVE_UPDATE_ERROR'] != '')
 		{
 			$objTemplate->updateClass = 'tl_error';
 			$objTemplate->updateMessage = $_SESSION['LIVE_UPDATE_ERROR'];
@@ -93,7 +93,7 @@ class LiveUpdate extends Backend implements executable
 		}
 
 		// Live update successful
-		if (strlen($_SESSION['LIVE_UPDATE_CONFIRM']))
+		if ($_SESSION['LIVE_UPDATE_CONFIRM'] != '')
 		{
 			$objTemplate->updateClass = 'tl_confirm';
 			$objTemplate->updateMessage = $_SESSION['LIVE_UPDATE_CONFIRM'];
@@ -104,10 +104,15 @@ class LiveUpdate extends Backend implements executable
 		$objTemplate->uid = $GLOBALS['TL_CONFIG']['liveUpdateId'];
 		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 
-		// Run update
+		// Run the update
 		if ($this->Input->get('token') != '')
 		{
 			$this->runLiveUpdate();
+		}
+		elseif ($this->Input->get('act') == 'runonce')
+		{
+			$this->handleRunOnce();
+			$this->redirect('contao/main.php?do=maintenance');
 		}
 
 		$objTemplate->version = VERSION . '.' .  BUILD;
@@ -193,7 +198,6 @@ class LiveUpdate extends Backend implements executable
 					$objBackup->addFile($strFile);
 					echo '<li>Backed up ' . $strFile . '</li>';
 				}
-
 				catch (Exception $e)
 				{
 					echo '<li>Skipped ' . $strFile . ' (' . $e->getMessage() . ')</li>';
@@ -248,7 +252,7 @@ class LiveUpdate extends Backend implements executable
 
 		echo '</ol>';
 		echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
-		echo '<a href="main.php?do=maintenance" style="float:right;">Click here to proceed &gt;</a>';
+		echo '<a href="main.php?do=maintenance&amp;act=runonce" style="float:right;">Click here to proceed &gt;</a>';
 		echo '</div>';
 		echo '</div>';
 

@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.0 (XXXX-XX-XX)
 ---------------------------
+- Changed: replaced the runonce.php routine with a more practical one (#2664)
 - Fixed: the values of TinyMCE fields were not saved (#3196)
 - Fixed a few minor issues
 

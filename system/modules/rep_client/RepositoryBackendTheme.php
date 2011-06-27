@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -44,7 +44,7 @@
 class RepositoryBackendTheme
 {
 	const themepath = 'system/modules/rep_client/themes/';
-	
+
 	/**
 	 * Get a theme file.
 	 * @param string $file The basename if the file (without extension).
@@ -59,7 +59,7 @@ class RepositoryBackendTheme
 		} // if
 		return self::themepath.'default/'. $file;
 	} // file
-	
+
 	/**
 	 * Get image url from the theme.
 	 * @param string $file The basename if the image (without extension).
@@ -78,7 +78,7 @@ class RepositoryBackendTheme
 		if (is_file(TL_ROOT.'/'.$url.$file.'.gif')) return $url.$file.'.gif';
 		return $url.'default.png';
 	} // image
-	
+
 	/**
 	 * Create a 'img' tag from theme icons.
 	 * @param string $file The basename if the image (without extension).
@@ -93,7 +93,7 @@ class RepositoryBackendTheme
 		$size = getimagesize(TL_ROOT.'/'.$img);
 		return '<img'.((substr($img, -4) == '.png') ? ' class="pngfix"' : '').' src="'.$img.'" '.$size[3].' alt="'.specialchars($alt).'"'.(strlen($attributes) ? ' '.$attributes : '').'>';
 	} // createImage
-	
+
 	/**
 	 * Create a list button (link button)
 	 * @param string $file The basename if the image (without extension).

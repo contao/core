@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -33,7 +33,7 @@
  * Contao Repository :: Repository settings
  *
  * @copyright  Peter Koch 2008-2010
- * @author     Peter Koch, IBK Software AG 
+ * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */
 
@@ -91,18 +91,18 @@ define('REPOSITORY_COREVERSIONS',
 		'20040069,20040069;'.	// 2.4.6 stable
 		'20040009,20040009;'.	// 2.4.0 stable
 		'20030029,20030029'		// 2.3.2 stable
-);               
+);
 
 // Where files are stored, relative to TL_ROOT
-define('REPOSITORY_FILEROOT', 'tl_files/repository');		
+define('REPOSITORY_FILEROOT', 'tl_files/repository');
 
 // Path of download script
 define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');
 
-// HTML tags allowed in long texts 
+// HTML tags allowed in long texts
 define('REPOSITORY_TEXTTAGS', '<h3><h4><h5><h6><p><br><ol><ul><li><em><strong>');
 
-// # of searchtags allowed 
+// # of searchtags allowed
 define('REPOSITORY_SEARCHTAGS', 5);
 
 // Assumed maximum length of one line in translation editor
@@ -128,7 +128,7 @@ define('REPOSITORY_THUMBWIDTHMAX', 240);
 define('REPOSITORY_THUMBHEIGHTMAX', 180);
 
 // Time in seconds after which a dirty cache must be flushed
-// NOW   : Used for 'Resynchronize' by repository admins and after delete/unpublish 
+// NOW   : Used for 'Resynchronize' by repository admins and after delete/unpublish
 // NORMAL: Used on updates by authors and translators
 // LATER : Used for download-, install- and update-counters, and for ratings.
 define('REPOSITORY_CLEARCACHE_NOW', 1);			// immediate

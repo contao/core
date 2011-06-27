@@ -80,8 +80,6 @@ class Main extends Backend
 	 */
 	public function run()
 	{
-		$this->handleRunOnce();
-
 		$this->Template = new BackendTemplate('be_main');
 		$this->Template->main = '';
 

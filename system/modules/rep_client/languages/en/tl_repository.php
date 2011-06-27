@@ -10,12 +10,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -57,17 +57,17 @@ $GLOBALS['TL_LANG']['tl_repository']['apply']              = 'Apply';
 $GLOBALS['TL_LANG']['tl_repository']['byorder']            = 'By %s';
 $GLOBALS['TL_LANG']['tl_repository']['checkextension']     = 'Check extension';
 $GLOBALS['TL_LANG']['tl_repository']['dbuptodate']         = 'Database is up to date';
-$GLOBALS['TL_LANG']['tl_repository']['deletingdirs']       = 'Deleting directories'; 
-$GLOBALS['TL_LANG']['tl_repository']['deletingfiles']      = 'Deleting files'; 
+$GLOBALS['TL_LANG']['tl_repository']['deletingdirs']       = 'Deleting directories';
+$GLOBALS['TL_LANG']['tl_repository']['deletingfiles']      = 'Deleting files';
 $GLOBALS['TL_LANG']['tl_repository']['editextension']      = 'Edit settings';
 $GLOBALS['TL_LANG']['tl_repository']['extinstrecntf']      = 'Extension install record not found';
 $GLOBALS['TL_LANG']['tl_repository']['errdldpkg']          = 'Download of package from repository failed';
 $GLOBALS['TL_LANG']['tl_repository']['failed']             = 'failed';
 $GLOBALS['TL_LANG']['tl_repository']['fileerrwrite']       = 'Error writing file %s';
-$GLOBALS['TL_LANG']['tl_repository']['filesdeleted']       = '%s file(s) deleted'; 
+$GLOBALS['TL_LANG']['tl_repository']['filesdeleted']       = '%s file(s) deleted';
 $GLOBALS['TL_LANG']['tl_repository']['filesinstalled']     = '%s file(s) installed';
-$GLOBALS['TL_LANG']['tl_repository']['filesunchanged']     = '%s file(s) unchanged'; 
-$GLOBALS['TL_LANG']['tl_repository']['filesupdated']       = '%s file(s) updated'; 
+$GLOBALS['TL_LANG']['tl_repository']['filesunchanged']     = '%s file(s) unchanged';
+$GLOBALS['TL_LANG']['tl_repository']['filesupdated']       = '%s file(s) updated';
 $GLOBALS['TL_LANG']['tl_repository']['ftsearch']           = 'Fulltext search';
 $GLOBALS['TL_LANG']['tl_repository']['goback']             = 'Go back';
 $GLOBALS['TL_LANG']['tl_repository']['install']            = 'Install';
