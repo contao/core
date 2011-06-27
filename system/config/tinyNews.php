@@ -46,7 +46,7 @@ tinyMCE_GZ.init({
 </script>
 <script>
 tinyMCE.init({
-  mode : "exact",
+  mode : "none",
   height : "300",
   language : "<?php echo $this->language; ?>",
   elements : "<?php echo $this->rteFields; ?>",

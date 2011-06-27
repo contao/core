@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.0 (XXXX-XX-XX)
 ---------------------------
+- Fixed: the values of TinyMCE fields were not saved (#3196)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
