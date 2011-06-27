@@ -646,10 +646,10 @@ class StyleSheets extends Backend
 					$gradient = $row['gradientAngle'] . ',' . implode(',', $row['gradientColors']);
 					$webkitGradient = $webkitAngle . ',' . implode(',', $webkitColors);
 
-					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-moz-linear-gradient(' . $gradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-webkit-gradient(linear,' . $webkitGradient . ');';
 					$return .= $lb . 'background:' . $bgImage . '-o-linear-gradient(' . $gradient . ');';
+					$return .= $lb . 'background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 					$return .= $lb . '-pie-background:' . $bgImage . 'linear-gradient(' . $gradient . ');';
 				}
 			}
@@ -684,9 +684,9 @@ class StyleSheets extends Backend
 					}
 					$shadow .= ';';
 					
-					$return .= $lb . 'box-shadow:' . $shadow;
 					$return .= $lb . '-moz-box-shadow:' . $shadow;
 					$return .= $lb . '-webkit-box-shadow:' . $shadow;
+					$return .= $lb . 'box-shadow:' . $shadow;
 				}
 			}
 		}
@@ -796,9 +796,9 @@ class StyleSheets extends Backend
 							$borderradius .= $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['borderradius']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['borderradius']['unit']) . ';';
 						}
 
-						$return .= $lb . 'border-radius:' . $borderradius;
 						$return .= $lb . '-moz-border-radius:' . $borderradius;
 						$return .= $lb . '-webkit-border-radius:' . $borderradius;
+						$return .= $lb . 'border-radius:' . $borderradius;
 					}
 					else
 					{
@@ -808,9 +808,9 @@ class StyleSheets extends Backend
 						{
 							if ($v != '')
 							{
-								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
 								$return .= $lb . '-moz-border-radius-' . str_replace('-', '', $k) . ':' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
 								$return .= $lb . '-webkit-border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
 							}
 						}
 					}

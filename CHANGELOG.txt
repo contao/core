@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.10.0 (XXXX-XX-XX)
+---------------------------
+- Fixed a few minor issues
+
 Version 2.10.RC1 (2011-06-23)
 -----------------------------
 - Changed: make static domains configurable per website root page in the front end
