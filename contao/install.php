@@ -51,7 +51,7 @@ require_once('../system/initialize.php');
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class InstallTool extends Controller
+class InstallTool extends Backend
 {
 
 	/**
@@ -724,6 +724,7 @@ class InstallTool extends Controller
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tables')
 		{
+			$this->handleRunOnce();
 			$sql = deserialize($this->Input->post('sql'));
 
 			if (is_array($sql))
@@ -744,7 +745,7 @@ class InstallTool extends Controller
 		$this->import('DbInstaller');
 
 		$this->Template->dbUpdate = $this->DbInstaller->generateSqlForm();
-		$this->Template->dbUpToDate = strlen($this->Template->dbUpdate) ? false : true;
+		$this->Template->dbUpToDate = ($this->Template->dbUpdate != '') ? false : true;
 
 
 		/**

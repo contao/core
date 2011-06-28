@@ -1110,7 +1110,6 @@ window.addEvent('domready', function() {
   <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateConfirm']; ?></p>
 <?php endif; ?>
   <p><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][1]; ?></p>
-<?php if (!$this->dbUpToDate): ?>
   <form action="<?php echo $this->action; ?>" id="sql_form" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_tables">
@@ -1122,7 +1121,6 @@ window.addEvent('domready', function() {
     </div>
   </div>
   </form>
-<?php endif; ?>
 </div>
 </fieldset>
 

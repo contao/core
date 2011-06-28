@@ -294,7 +294,6 @@ class RepositoryManager extends RepositoryBackendModule
 						$lickey = '';
 						if ($error) break;
 					} // foreach
-					$this->handleRunOnce(); // PATCH
 				} // if
 			} // if
 
@@ -407,7 +406,6 @@ class RepositoryManager extends RepositoryBackendModule
 					));
 			} // if
 		} // foreach
-		$this->handleRunOnce(); // PATCH
 	} // upgrade
 
 	/**
@@ -419,6 +417,7 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
+			$this->handleRunOnce(); // PATCH
 			$sql = deserialize($this->Input->post('sql'));
 			if (is_array($sql)) {
 				foreach ($sql as $key) {
