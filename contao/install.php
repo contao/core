@@ -724,7 +724,6 @@ class InstallTool extends Backend
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tables')
 		{
-			$this->handleRunOnce();
 			$sql = deserialize($this->Input->post('sql'));
 
 			if (is_array($sql))
@@ -742,6 +741,7 @@ class InstallTool extends Backend
 			$this->reload();
 		}
 
+		$this->handleRunOnce();
 		$this->import('DbInstaller');
 
 		$this->Template->dbUpdate = $this->DbInstaller->generateSqlForm();

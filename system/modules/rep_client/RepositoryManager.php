@@ -417,7 +417,6 @@ class RepositoryManager extends RepositoryBackendModule
 		// return from submit?
 		if ($this->filterPost('repository_action') == $rep->f_action) {
 			if (isset($_POST['repository_cancelbutton'])) $this->redirect($rep->homeLink);
-			$this->handleRunOnce(); // PATCH
 			$sql = deserialize($this->Input->post('sql'));
 			if (is_array($sql)) {
 				foreach ($sql as $key) {
@@ -428,6 +427,7 @@ class RepositoryManager extends RepositoryBackendModule
 			} // if
 			$_SESSION['sql_commands'] = array();
 		} // if
+		$this->handleRunOnce(); // PATCH
 		$this->import('DbInstaller');
 		$rep->dbUpdate = $this->DbInstaller->generateSqlForm();
 		if ($rep->dbUpdate != '') {
