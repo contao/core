@@ -260,9 +260,9 @@ $GLOBALS['TL_LANG']['MSC']['dateAdded']     = array('Date added', 'Date added: %
 $GLOBALS['TL_LANG']['MSC']['lastLogin']     = array('Last login', 'Last login: %s');
 $GLOBALS['TL_LANG']['MSC']['move_up']       = array('Move up', 'Move the item one position up');
 $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Move down', 'Move the item one position down');
-$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL applies to the <em>tl_files</em> directory and all image thumbnails (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
-$GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
-$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (see <a href="http://www.contao.org/blog-reader/items/optimizing-contao-for-google-page-speed.html">Optimizing Contao for Google Page Speed</a>).');
+$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL applies to the <em>tl_files</em> directory and all image thumbnails (page speed optimization).');
+$GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (page speed optimization).');
+$GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (page speed optimization).');
 
 
 /**
