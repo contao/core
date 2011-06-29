@@ -459,17 +459,19 @@ class StyleSheets extends Backend
 		// Background
 		if ($row['background'])
 		{
+			$bgColor = deserialize($row['bgcolor'], true);
+
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$return .= $lb . 'background:' . (($row['bgcolor'] != '') ? $this->compileColor($row['bgcolor'], $blnWriteToFile) . ' ' : '') . 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile) . ' ' : '') . 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
 			{
 				// Background color
-				if ($row['bgcolor'] != '')
+				if ($bgColor[0] != '')
 				{
-					$return .= $lb . 'background-color:' . $this->compileColor($row['bgcolor'], $blnWriteToFile) . ';';
+					$return .= $lb . 'background-color:' . $this->compileColor($bgColor, $blnWriteToFile) . ';';
 				}
 
 				// Background image
@@ -657,6 +659,7 @@ class StyleSheets extends Backend
 			// Box shadow
 			if ($row['shadowsize'] != '')
 			{
+				$shColor = deserialize($row['shadowcolor'], true);
 				$row['shadowsize'] = deserialize($row['shadowsize']);
 
 				if (is_array($row['shadowsize']) && $row['shadowsize']['top'] != '' && $row['shadowsize']['bottom'] != '')
@@ -678,9 +681,9 @@ class StyleSheets extends Backend
 					{
 						$shadow .= ' ' . $radius . (($radius == 0) ? '' : $row['shadowsize']['unit']);
 					}
-					if ($row['shadowcolor'] != '')
+					if ($shColor[0] != '')
 					{
-						$shadow .= ' ' . $this->compileColor($row['shadowcolor'], $blnWriteToFile);
+						$shadow .= ' ' . $this->compileColor($shColor, $blnWriteToFile);
 					}
 					$shadow .= ';';
 					
@@ -694,9 +697,10 @@ class StyleSheets extends Backend
 		// Border
 		if ($row['border'])
 		{
-			// Border width
+			$bdColor = deserialize($row['bordercolor'], true);
 			$row['borderwidth'] = deserialize($row['borderwidth']);
 
+			// Border width
 			if (is_array($row['borderwidth']))
 			{
 				$top = $row['borderwidth']['top'];
@@ -707,7 +711,7 @@ class StyleSheets extends Backend
 				// Try to shorten the definition
 				if ($top != '' && $right != '' && $bottom != '' && $left != '' && $top == $right && $top == $bottom && $top == $left)
 				{
-					$return .= $lb . 'border:' . $top . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' .$row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' ' . $this->compileColor($row['bordercolor'], $blnWriteToFile) : '') . ';';
+					$return .= $lb . 'border:' . $top . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' .$row['borderstyle'] : '') . (($bdColor[0] != '') ? ' ' . $this->compileColor($bdColor, $blnWriteToFile) : '') . ';';
 				}
 				elseif ($top != '' && $right != '' && $bottom != '' && $left != '' && $top == $bottom && $left == $right)
 				{
@@ -718,9 +722,9 @@ class StyleSheets extends Backend
 						$return .= $lb . 'border-style:' . $row['borderstyle'] . ';';
 					}
 
-					if ($row['bordercolor'] != '')
+					if ($bdColor[0] != '')
 					{
-						$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
+						$return .= $lb . 'border-color:' . $this->compileColor($bdColor, $blnWriteToFile) . ';';
 					}
 				}
 				elseif ($top == '' && $right == '' && $bottom == '' && $left == '')
@@ -730,9 +734,9 @@ class StyleSheets extends Backend
 						$return .= $lb . 'border-style:' . $row['borderstyle'] . ';';
 					}
 
-					if ($row['bordercolor'] != '')
+					if ($bdColor[0] != '')
 					{
-						$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
+						$return .= $lb . 'border-color:' . $this->compileColor($bdColor, $blnWriteToFile) . ';';
 					}
 				}
 				else
@@ -743,7 +747,7 @@ class StyleSheets extends Backend
 					{
 						if ($v != '')
 						{
-							$return .= $lb . 'border-' . $k . ':' . $v . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' . $row['borderstyle'] : '') . (($row['bordercolor'] != '') ? ' ' . $this->compileColor($row['bordercolor'], $blnWriteToFile) : '') . ';';
+							$return .= $lb . 'border-' . $k . ':' . $v . $row['borderwidth']['unit'] . (($row['borderstyle'] != '') ? ' ' . $row['borderstyle'] : '') . (($bdColor[0] != '') ? ' ' . $this->compileColor($bdColor, $blnWriteToFile) : '') . ';';
 						}
 					}
 				}
@@ -755,9 +759,9 @@ class StyleSheets extends Backend
 					$return .= $lb . 'border-style:' . $row['borderstyle'] . ';';
 				}
 
-				if ($row['bordercolor'] != '')
+				if ($bdColor[0] != '')
 				{
-					$return .= $lb . 'border-color:' . $this->compileColor($row['bordercolor'], $blnWriteToFile) . ';';
+					$return .= $lb . 'border-color:' . $this->compileColor($bdColor, $blnWriteToFile) . ';';
 				}
 			}
 
@@ -910,10 +914,12 @@ class StyleSheets extends Backend
 				}
 			}
 
+			$fnColor = deserialize($row['fontcolor'], true);
+
 			// Font color
-			if ($row['fontcolor'] != '')
+			if ($fnColor[0] != '')
 			{
-				$return .= $lb . 'color:' . $this->compileColor($row['fontcolor'], $blnWriteToFile) . ';';
+				$return .= $lb . 'color:' . $this->compileColor($fnColor, $blnWriteToFile) . ';';
 			}
 
 			// White space
@@ -1017,9 +1023,11 @@ class StyleSheets extends Backend
 	 */
 	protected function compileColor($color, $blnWriteToFile=false)
 	{
-		$color = deserialize($color, true);
-
-		if (!isset($color[1]) || $color[1] == '')
+		if (!is_array($color))
+		{
+			return '#' . $color;
+		}
+		elseif (!isset($color[1]) || $color[1] == '')
 		{
 			return '#' . $color[0];
 		}
