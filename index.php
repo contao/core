@@ -166,12 +166,13 @@ class Index extends Frontend
 		if (strlen($objPage->domain))
 		{
 			$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
+			$strHost = preg_replace('/^www\./i', '', $this->Environment->host);
 
 			// Load an error 404 page object
-			if ($strDomain != $this->Environment->host)
+			if ($strDomain != $strHost)
 			{
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-				$objHandler->generate($objPage->id, $strDomain, $this->Environment->host);
+				$objHandler->generate($objPage->id, $strDomain, $strHost);
 			}
 		}
 
