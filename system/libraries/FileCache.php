@@ -106,6 +106,7 @@ class FileCache extends System
 			return;
 		}
 
+		ksort($this->arrCache);
 		$strTemp = md5(uniqid(mt_rand(), true));
 
 		// Write to a temp file first
@@ -158,6 +159,7 @@ class FileCache extends System
 	 */
 	public function __unset($strKey)
 	{
+		$this->blnIsModified = true;
 		unset($this->arrCache[$strKey]);
 	}
 

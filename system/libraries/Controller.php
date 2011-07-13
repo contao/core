@@ -93,9 +93,9 @@ abstract class Controller extends System
 		// Try to load the template path from the cache
 		if (isset($objCache->$strKey))
 		{
-			if (file_exists($objCache->$strKey))
+			if (file_exists(TL_ROOT . '/' . $objCache->$strKey))
 			{
-				return $objCache->$strKey;
+				return TL_ROOT . '/' . $objCache->$strKey;
 			}
 			else
 			{
@@ -2837,14 +2837,14 @@ abstract class Controller extends System
 		// Browse all modules
 		foreach ($this->Config->getActiveModules() as $strModule)
 		{
-			$strFile = sprintf('%s/system/modules/%s/%s.php', TL_ROOT, $strModule, $strClass);
+			$strFile = 'system/modules/' . $strModule . '/' . $strClass . '.php';
 
-			if (file_exists($strFile))
+			if (file_exists(TL_ROOT . '/' . $strFile))
 			{
 				// Also store the result in the autoloader cache, so the
 				// function does not have to browse the module folders again
 				$objAutoload = FileCache::getInstance('autoload');
-				$objAutoload->$strClass = 'system/modules/' . $strModule . '/' . $strClass . '.php';
+				$objAutoload->$strClass = $strFile;
 
 				$this->arrCache[$strClass] = true;
 				break;
