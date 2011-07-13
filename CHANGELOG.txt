@@ -8,6 +8,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: the values of TinyMCE fields were not saved (#3196)
 - Fixed: the new color transparency settings led to incorrect format definitions (#3199, #3210)
 - Fixed: do not allow to link internally to pages running under a different domain (#2387)
+- Fixed: the request token check broke FancyUpload (#3117)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)

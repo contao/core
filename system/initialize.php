@@ -157,7 +157,7 @@ include(TL_ROOT . '/system/config/initconfig.php');
 /**
  * Check the request token upon POST requests
  */
-if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'])
+if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_TOKEN_CHECK'))
 {
 	// Exit if the token cannot be validated
 	if (!$objInput->post('REQUEST_TOKEN') || !is_array($_SESSION['REQUEST_TOKEN'][TL_MODE]) || !in_array($objInput->post('REQUEST_TOKEN'), $_SESSION['REQUEST_TOKEN'][TL_MODE]))

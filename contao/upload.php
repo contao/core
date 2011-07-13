@@ -59,7 +59,7 @@ if (!array_key_exists('pid', $_GET) || !array_key_exists('id', $_GET))
 	die('Required parameters missing');
 }
 
-if (($_GET['do'] != 'files' && !POPUP) || $_GET['act'] != 'move' || $_GET['mode'] != 2)
+if ((!POPUP && $_GET['do'] != 'files') || $_GET['act'] != 'move' || $_GET['mode'] != 2)
 {
 	header('HTTP/1.1 400 Bad Request');
 	die('Unexpected arguments');
@@ -82,6 +82,7 @@ $_COOKIE['BE_USER_AUTH'] = filter_input(INPUT_POST, 'BE_USER_AUTH', FILTER_SANIT
 /**
  * Load Contao
  */
+define('BYPASS_TOKEN_CHECK', true);
 require(POPUP ? 'files.php' : 'main.php');
 
 ?>

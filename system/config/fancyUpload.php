@@ -82,21 +82,6 @@ window.addEvent('domready', function() {
       $('fancy-list').removeClass('fancy-hide');
       $('fancy-fallback').destroy();
       $('fancy-submit').destroy();
-      this.target.addEvents({
-        'click': function() {
-          return false;
-        },
-        'mouseenter': function() {
-          this.addClass('hover');
-        },
-        'mouseleave': function() {
-          this.removeClass('hover');
-          this.blur();
-        },
-        'mousedown': function() {
-          this.focus();
-        }
-      });
       $('fancy-clear').addEvent('click', function() {
         up.remove();
         return false;
