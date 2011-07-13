@@ -646,8 +646,8 @@ class Newsletter extends Backend
 			$blnIsFrontend = false;
 		}
 
-		// Nothing has changed
-		if ($varValue == $objUser->newsletter)
+		// Nothing has changed or e-mail address is empty
+		if ($varValue == $objUser->newsletter || $objUser->email == '')
 		{
 			return $varValue;
 		}
@@ -662,7 +662,7 @@ class Newsletter extends Backend
 		}
 		else
 		{
-			$arrChannel = $this->Database->execute("SELECT id FROM tl_newsletter_channel")->fetchEach('id');
+			$arrChannel = $this->Database->query("SELECT id FROM tl_newsletter_channel")->fetchEach('id');
 		}
 
 		$arrDelete = array_values(array_diff($arrChannel, $varValue));
