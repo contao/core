@@ -393,6 +393,12 @@ abstract class Backend extends Controller
 				continue;
 			}
 
+			// Skip websites that run under a different domain (see #2387)
+			if ($objPage->domain && $objPage->domain != $this->Environment->host && $objPage->domain != 'www.' . $this->Environment->host)
+			{
+				continue;
+			}
+
 			$processed[] = $start;
 			$return .= '<optgroup label="' . $title . '">' . $this->doCreatePageList($start) . '</optgroup>';
 		}

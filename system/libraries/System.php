@@ -306,13 +306,13 @@ abstract class System
 		$return = preg_replace('/^'.preg_quote(TL_PATH, '/').'\//i', '', $return);
 
 		// Fallback to the generic referer in the front end
-		if (!strlen($return) && TL_MODE == 'FE')
+		if ($return == '' && TL_MODE == 'FE')
 		{
 			$return = $this->Environment->httpReferer;
 		}
 
 		// Fallback to the current URL if there is no referer
-		if (!strlen($return))
+		if ($return == '')
 		{
 			$return = (TL_MODE == 'BE') ? 'contao/main.php' : $this->Environment->url;
 		}
