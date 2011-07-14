@@ -207,6 +207,7 @@ class Input
 			}
 
 			$varValue = $this->stripSlashes($varValue);
+			$varValue = $this->preserveBasicEntities($varValue);
 			$varValue = $this->xssClean($varValue);
 
 			$this->arrCache[$strCacheKey][$strKey] = $varValue;
@@ -518,6 +519,36 @@ class Input
 		}
 
 		// Preserve basic entities
+		$varValue = $this->preserveBasicEntities($varValue);
+		$varValue = html_entity_decode($varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Preserve basic entities
+	 * @param  mixed
+	 * @return mixed
+	 */
+	protected function preserveBasicEntities($varValue)
+	{
+		if (is_null($varValue) || $varValue == '')
+		{
+			return $varValue;
+		}
+
+		// Recursively clean arrays
+		if (is_array($varValue))
+		{
+			foreach ($varValue as $k=>$v)
+			{
+				$varValue[$k] = $this->preserveBasicEntities($v);
+			}
+
+			return $varValue;
+		}
+
 		$varValue = str_replace
 		(
 			array('[&amp;]', '&amp;', '[&lt;]', '&lt;', '[&gt;]', '&gt;', '[&nbsp;]', '&nbsp;', '[&shy;]', '&shy;'),
@@ -525,7 +556,7 @@ class Input
 			$varValue
 		);
 
-		return html_entity_decode($varValue, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet']);
+		return $varValue;
 	}
 
 
