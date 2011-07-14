@@ -357,7 +357,7 @@ var Mediabox;
 			} else if (URL.match(/\.flv|\.mp4/i) || mediaType == 'video') {
 				// PATCH: use relative URLs to bypass the .htaccess protection
 				var uri = new URI(URL); 
-				URL = "../../" + uri.toRelative();
+				URL = "../../../" + uri.toRelative();
 				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
@@ -382,7 +382,7 @@ var Mediabox;
 			} else if (URL.match(/\.mp3|\.aac|tweetmic\.com|tmic\.fm/i) || mediaType == 'audio') {
 				// PATCH: use relative URLs to bypass the .htaccess protection
 				var uri = new URI(URL); 
-				URL = "../../" + uri.toRelative();
+				URL = "../../../" + uri.toRelative();
 				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
@@ -958,4 +958,4 @@ var Mediabox;
 		return false;
 	}
 })();
-//PATCH: remove autoload block
+//PATCH: remove the autoload block
