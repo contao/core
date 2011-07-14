@@ -10,6 +10,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: do not allow to link internally to pages running under a different domain (#2387)
 - Fixed: the request token check broke FancyUpload (#3117)
 - Fixed: support global style sheet variables in RGBA colors (#3259)
+- Fixed: make the syntax highlighter initialization script XHTML compatible (#3242)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
