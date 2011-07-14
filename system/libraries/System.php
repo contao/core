@@ -218,12 +218,26 @@ abstract class System
 	 */
 	protected function reload()
 	{
+		$strLocation = $this->Environment->url . $this->Environment->requestUri;
+
+		// Ajax request
+		if ($this->Environment->isAjaxRequest)
+		{
+			echo json_encode(array
+			(
+				'token'  => REQUEST_TOKEN,
+				'target' => $strLocation
+			));
+
+			exit;
+		}
+
 		if (headers_sent())
 		{
 			exit;
 		}
 
-		header('Location: ' . $this->Environment->url . $this->Environment->requestUri);
+		header('Location: ' . $strLocation);
 		exit;
 	}
 
