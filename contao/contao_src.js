@@ -719,12 +719,12 @@ var AjaxRequest =
 		if (publish)
 		{
 			image.src = image.src.replace('invisible.gif', 'visible.gif');
-			new Request.Contao().post({'action':'toggleVisibility', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+			new Request({url: window.location.href}).get({'tid':id, 'state':1});
 		}
 		else
 		{
 			image.src = image.src.replace('visible.gif', 'invisible.gif');
-			new Request.Contao().post({'action':'toggleVisibility', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+			new Request({url: window.location.href}).get({'tid':id, 'state':0});
 		}
 
 		return false;
