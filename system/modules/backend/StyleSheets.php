@@ -988,7 +988,9 @@ class StyleSheets extends Backend
 		// Custom code
 		if ($row['own'] != '')
 		{
-			$own = preg_split('/[\n\r]+/i', trim($this->String->decodeEntities($row['own'])));
+			$own = trim($this->String->decodeEntities($row['own']));
+			$own = str_replace('url("', 'url("' . $strGlue, $own);
+			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
 
