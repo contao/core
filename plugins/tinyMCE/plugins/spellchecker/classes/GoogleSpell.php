@@ -4,7 +4,7 @@
  *
  * @package MCManager.includes
  * @author Moxiecode
- * @copyright Copyright ï¿½ 2004-2007, Moxiecode Systems AB, All rights reserved.
+ * @copyright Copyright © 2004-2007, Moxiecode Systems AB, All rights reserved.
  */
 
 class GoogleSpell extends SpellChecker {
@@ -39,9 +39,7 @@ class GoogleSpell extends SpellChecker {
 		$matches = $this->_getMatches($lang, $word);
 
 		if (count($matches) > 0)
-			// PATCH: do not utf8_encode() here
-			//$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
-			$sug = explode("\t", $this->_unhtmlentities($matches[0][4]));
+			$sug = explode("\t", utf8_encode($this->_unhtmlentities($matches[0][4])));
 
 		// Remove empty
 		foreach ($sug as $item) {

@@ -1,1 +1,1 @@
-tinyMCE.addI18n('zh.paste_dlg',{"word_title":"\u7528 Ctrl+V \u5c06\u5185\u5bb9\u8d34\u4e0a\u3002","text_linebreaks":"\u4fdd\u7559\u5206\u884c\u7b26\u53f7","text_title":"\u7528 Ctrl+V \u5c06\u5185\u5bb9\u8d34\u4e0a\u3002"});
+tinyMCE.addI18n('zh.paste_dlg',{"word_title":"\u8acb\u4f7f\u7528 CTRL V \u5c07\u5167\u5bb9\u8cbc\u4e0a.","text_linebreaks":"\u4fdd\u7559\u5206\u884c\u7b26\u865f","text_title":"\u8acb\u4f7f\u7528 CTRL V \u5c07\u5167\u5bb9\u8cbc\u4e0a."});
