@@ -19,3 +19,5 @@ if (!$GLOBALS['TL_CONFIG']['useFTP'])
 		->setTempDir(TL_ROOT . '/system/tmp')
 		->setCacheType('disk');
 }
+
+Swift_Preferences::getInstance()->setQPDotEscape(false);
