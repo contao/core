@@ -1288,7 +1288,7 @@ abstract class Controller extends System
 			$strTag = $tags[$_rit+1];
 
 			// Skip empty tags
-			if (!strlen($strTag))
+			if ($strTag == '')
 			{
 				continue;
 			}
