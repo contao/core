@@ -18,7 +18,9 @@
 </div>
 <?php endif; ?>
 <h2><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h2>
-<p class="teaser"><?php echo $this->teaser; ?></p>
+<div class="teaser">
+<?php echo $this->teaser; ?> 
+</div>
 <?php if ($this->text): ?>
 <p class="more"><?php echo $this->more; ?></p>
 <?php endif; ?>

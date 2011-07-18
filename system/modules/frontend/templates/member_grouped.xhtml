@@ -9,7 +9,7 @@
 <form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" method="post" enctype="<?php echo $this->enctype; ?>">
 <div class="formbody">
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
-<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>" />
 <?php if ($this->personal): ?>
 <fieldset>
 <legend><?php echo $this->personalData; ?></legend>
