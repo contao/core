@@ -3126,7 +3126,7 @@ abstract class Controller extends System
 		// Image link
 		if (($arrItem['imageUrl'] != '') && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . $arrItem['imageUrl'];
+			$objTemplate->href = $arrItem['imageUrl'];
 			$objTemplate->attributes = '';
 
 			if ($arrItem['fullsize'])

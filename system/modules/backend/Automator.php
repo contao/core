@@ -157,7 +157,7 @@ class Automator extends Backend
 		{
 			foreach ($arrHtml as $strFile)
 			{
-				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/html/' . $strFile))
+				if ($strFile != 'index.html' && $strFile != 'cron.txt' && !is_dir(TL_ROOT . '/system/html/' . $strFile))
 				{
 					@unlink(TL_ROOT . '/system/html/' . $strFile);
 				}

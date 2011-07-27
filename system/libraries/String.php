@@ -125,6 +125,12 @@ class String
 			break;
 		}
 
+		// Backwards compatibility
+		if ($strEllipsis === true)
+		{
+			$strEllipsis = ' …';
+		}
+
 		return implode(' ', $arrWords) . ($blnAddEllipsis ? $strEllipsis : '');
 	}
 

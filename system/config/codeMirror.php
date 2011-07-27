@@ -70,7 +70,8 @@ window.addEvent('domready', function() {
   var myCodeMirror = CodeMirror.fromTextArea(myField, {
     mode: '<?php echo $arrField['type']; ?>',
     lineNumbers: true,
-    form: null
+    form: null,
+    enterMode: 'keep'
   });
 
   // Adjust the height and width

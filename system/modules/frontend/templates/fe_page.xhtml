@@ -76,10 +76,10 @@ new Request({
   onComplete: function(txt) {
     if (!txt) txt = 0;
     if (parseInt(txt) < (Date.now()/1000 - 300)) {
-      new Request({url:'cron.php'}).send();
+      new Request({url:'cron.php'}).get();
     }
   }
-}).send();
+}).get();
 /* ]]> */
 </script>
 <?php endif; ?>

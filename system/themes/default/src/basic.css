@@ -200,7 +200,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 	padding:3px 2px;
 }
 .tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
-	background:#ebfdd7;
+	background-color:#ebfdd7;
 }
 pre,.tl_textarea.monospace {
 	font-family:"Andale Mono",monospace;
