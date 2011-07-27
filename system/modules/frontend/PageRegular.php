@@ -165,9 +165,9 @@ class PageRegular extends Frontend
 		// Fallback layout
 		if ($objLayout->numRows < 1)
 		{
-			$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.fallback=?")
+			$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.fallback=1")
 										->limit(1)
-										->execute(1);
+										->execute();
 		}
 		
 		// Die if there is no layout at all

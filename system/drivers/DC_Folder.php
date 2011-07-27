@@ -592,11 +592,24 @@ class DC_Folder extends DataContainer implements listable, editable
 
 		$this->isValid($source);
 
-		// Delete file or folder
+		// Delete the file or folder
 		if (!file_exists(TL_ROOT . '/' . $source) || !$this->isMounted($source))
 		{
 			$this->log('File or folder "'.$source.'" was not mounted or could not be found', 'DC_Folder delete()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
+		}
+
+		// Call the ondelete_callback
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['ondelete_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['ondelete_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$this->$callback[0]->$callback[1]($source, $this);
+				}
+			}
 		}
 
 		$this->import('Files');

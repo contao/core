@@ -15,6 +15,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: make the syntax highlighter initialization script XHTML compatible (#3242)
 - Fixed: use GET requests to toggle the visibility of an element
 - Fixed: do not remove the cron.txt file when purging system/html (#3292)
+- Fixed: update the templates cache if a file is edited in the templates editor (#3278)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)

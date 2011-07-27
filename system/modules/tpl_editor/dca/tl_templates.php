@@ -53,7 +53,11 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 	(
 		'dataContainer'               => 'Folder',
 		'validFileTypes'              => $GLOBALS['TL_CONFIG']['templateFiles'],
-		'closed'                      => true
+		'closed'                      => true,
+		'ondelete_callback' => array
+		(
+			array('tl_templates', 'deleteFromTemplateCache')
+		)
 	),
 
 	// List
@@ -133,7 +137,11 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'spaceToUnderscore'=>true)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'spaceToUnderscore'=>true),
+			'save_callback' => array
+			(
+				array('tl_templates', 'updateTemplateCache')
+			)
 		)
 	)
 );
@@ -181,7 +189,12 @@ class tl_templates extends Backend
 				{
 					$this->import('Files');
 					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
-					$this->Files->delete('system/tmp/templates.csv');
+
+					// Update the templates cache
+					$objCache = FileCache::getInstance('templates');
+					$strKey = preg_replace('/^.*\/([^\/]+)\.[a-z0-9]{3,5}$/i', '$1', $strOriginal);
+					$objCache->$strKey = $strTarget;
+
 					$this->redirect($this->getReferer());
 				}
 			}
@@ -263,6 +276,43 @@ class tl_templates extends Backend
 </div>
 </div>
 </form>';
+	}
+
+
+	/**
+	 * Update the file cache if a template is renamed
+	 * @return string
+	 */
+	public function updateTemplateCache($strFile, DataContainer $dc)
+	{
+		// Nothing has changed
+		if ($strFile == $dc->value)
+		{
+			return $strFile;
+		}
+
+		$objCache = FileCache::getInstance('templates');
+
+		// The old template no longer exists
+		unset($objCache->{$dc->value});
+
+		// Store the new template path
+		$strPath = str_replace($dc->value, $strFile, $dc->id);
+		$objCache->$strFile = $strPath;
+
+		return $strFile;
+	}
+
+
+	/**
+	 * Update the file cache if a template is deleted
+	 * @return string
+	 */
+	public function deleteFromTemplateCache($strFile)
+	{
+		$objCache = FileCache::getInstance('templates');
+		$strKey = preg_replace('/^.*\/([^\/]+)\.[a-z0-9]{3,5}$/i', '$1', $strFile);
+		unset($objCache->$strKey);
 	}
 
 
