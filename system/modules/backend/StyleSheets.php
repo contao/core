@@ -662,7 +662,7 @@ class StyleSheets extends Backend
 				$shColor = deserialize($row['shadowcolor'], true);
 				$row['shadowsize'] = deserialize($row['shadowsize']);
 
-				if (is_array($row['shadowsize']) && $row['shadowsize']['top'] != '' && $row['shadowsize']['bottom'] != '')
+				if (is_array($row['shadowsize']) && $row['shadowsize']['top'] != '' && $row['shadowsize']['right'] != '')
 				{
 					$blnNeedsPie = true;
 
