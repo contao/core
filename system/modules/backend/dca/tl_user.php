@@ -126,7 +126,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('admin', 'inherit'),
+		'__selector__'                => array('inherit', 'admin'),
 		'login'                       => '{name_legend},name,email;{backend_legend},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload,oldBeTheme;{session_legend},session;{password_legend},password',
 		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{account_legend},disable,start,stop',
 		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload,oldBeTheme;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
