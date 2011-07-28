@@ -177,7 +177,8 @@ class CheckBoxWizard extends Widget
 			$blnCheckAll = false;
 		}
 
-        return sprintf('<fieldset class="tl_checkbox_container tl_checkbox_wizard%s"><legend>%s%s</legend>%s%s</fieldset>%s',
+        return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container tl_checkbox_wizard%s"><legend>%s%s</legend>%s%s</fieldset>%s',
+        				$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->strLabel,
 						$this->xlabel,

@@ -175,7 +175,8 @@ class FormCheckBox extends Widget
 									$arrOption['label']);
 		}
 
-        return sprintf('<fieldset class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
+        				$this->strId,
 						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						(($this->strLabel != '') ? '<legend>' . $this->strLabel . '</legend>' : ''),
 						$this->strName,

@@ -166,7 +166,8 @@ class CheckBox extends Widget
 
 		if ($this->multiple)
 		{
-			return sprintf('<fieldset class="tl_checkbox_container%s"><legend>%s%s</legend>%s%s</fieldset>%s',
+			return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container%s"><legend>%s%s</legend>%s%s</fieldset>%s',
+							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							$this->strLabel,
 							$this->xlabel,
@@ -176,8 +177,9 @@ class CheckBox extends Widget
 		}
 		else
 		{
-	        return sprintf('<div class="tl_checkbox_single_container%s">%s</div>%s',
-							(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+	        return sprintf('<div id="ctrl_%s" class="tl_checkbox_single_container%s">%s</div>%s',
+	        				$this->strId,
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							str_replace('<br></div><br>', '</div>', implode('<br>', $arrOptions)),
 							$this->wizard);
 		}
