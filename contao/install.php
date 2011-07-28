@@ -647,6 +647,7 @@ class InstallTool extends Backend
 				$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
 				$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
 				$this->Database->query("UPDATE `tl_module` SET `guests`=1 WHERE `type`='lostPassword' OR `type`='registration'");
+				$this->Database->query("UPDATE `tl_news` SET `teaser`=CONCAT('<p>', teaser, '</p>') WHERE `teaser`!='' AND `teaser` NOT LIKE '<p>%'");
 
 				$this->reload();
 			}

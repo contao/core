@@ -36,6 +36,7 @@ $GLOBALS['TL_LANG']['MSC']['open']          = 'Weiterlesen auf %s';
 $GLOBALS['TL_LANG']['MSC']['author']        = 'Autor';
 $GLOBALS['TL_LANG']['MSC']['by']            = 'von';
 $GLOBALS['TL_LANG']['MSC']['empty']         = 'Keine Nachrichten in diesem Zeitraum vorhanden.';
+$GLOBALS['TL_LANG']['MSC']['emptyList']     = 'Zur Zeit sind keine Nachrichten vorhanden.';
 $GLOBALS['TL_LANG']['MSC']['comments']      = 'Kommentare';
 $GLOBALS['TL_LANG']['MSC']['commentCount']  = '(Kommentare: %s)';
 $GLOBALS['TL_LANG']['MSC']['news_items']    = '%d Artikel';

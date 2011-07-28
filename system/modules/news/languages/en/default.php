@@ -36,6 +36,7 @@ $GLOBALS['TL_LANG']['MSC']['open']          = 'Read more on %s';
 $GLOBALS['TL_LANG']['MSC']['author']        = 'Author';
 $GLOBALS['TL_LANG']['MSC']['by']            = 'by';
 $GLOBALS['TL_LANG']['MSC']['empty']         = 'There are no news items for this period.';
+$GLOBALS['TL_LANG']['MSC']['emptyList']     = 'Currently there are no news items.';
 $GLOBALS['TL_LANG']['MSC']['comments']      = 'Comments';
 $GLOBALS['TL_LANG']['MSC']['commentCount']  = '(comments: %s)';
 $GLOBALS['TL_LANG']['MSC']['news_items']    = '%d item(s)';

@@ -99,6 +99,7 @@ FileETag None
   ExpiresByType application/x-javascript A2592000
   ExpiresByType application/javascript A2592000
   ExpiresByType text/css A2592000
+  ExpiresByType image/x-icon A2592000
 
 </IfModule>
 
