@@ -285,6 +285,7 @@ class tl_article extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+		$this->import('String');
 	}
 
 
@@ -485,14 +486,20 @@ class tl_article extends Backend
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
+	 * @param object
+	 * @param string
+	 * @param integer
 	 * @return string
 	 */
-	public function addIcon($row, $label)
+	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $level=0)
 	{
 		$time = time();
 		$published = ($row['published'] && ($row['start'] == '' || $row['start'] < $time) && ($row['stop'] == '' || $row['stop'] > $time));
 
-		return $this->generateImage('articles'.($published ? '' : '_').'.gif').' '.$label;
+		list($text, $tags) = explode(' <', $label, 2);
+		$text = $this->String->substr($text, (64 - ($level * 2)));
+
+		return $this->generateImage('articles'.($published ? '' : '_').'.gif') .' '. $text . ' <' . $tags;
 	}
 
 

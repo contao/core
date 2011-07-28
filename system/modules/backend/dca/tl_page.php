@@ -559,6 +559,7 @@ class tl_page extends Backend
 	{
 		parent::__construct();
 		$this->import('BackendUser', 'User');
+		$this->import('String');
 	}
 
 
@@ -807,11 +808,11 @@ class tl_page extends Backend
 				// No link for the active page
 				if ($objPage->id == $intNode)
 				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' ' . $objPage->title;
+					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', 0, true) . ' ' . $objPage->title;
 				}
 				else
 				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
+					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', 0, true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
 				}
 
 				// Do not show the mounted pages
@@ -1188,10 +1189,11 @@ class tl_page extends Backend
 	 * @param string
 	 * @param object
 	 * @param string
+	 * @param integer
 	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
+	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $level=0, $blnReturnImage=false)
 	{
 		$sub = 0;
 		$image = ''.$row['type'].'.gif';
@@ -1225,6 +1227,8 @@ class tl_page extends Backend
 		{
 			return $this->generateImage($image, '', $imageAttribute);
 		}
+
+		$label = $this->String->substr($label, (64 - ($level * 2)));
 
 		// Mark root pages
 		if ($row['type'] == 'root' || $this->Input->get('do') == 'article')
