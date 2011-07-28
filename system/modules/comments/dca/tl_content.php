@@ -133,7 +133,7 @@ class tl_content_comments extends Backend
 		$objPage = $this->getPageDetails($objArticle->pid);
 
 		// Get the theme ID
-		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=?")
+		$objLayout = $this->Database->prepare("SELECT pid FROM tl_layout WHERE id=? OR fallback=1 ORDER BY fallback")
 									->limit(1)
 									->execute($objPage->layout);
 
