@@ -506,6 +506,70 @@ h2.sub_headline_index {
 }
 .tl_listing .tl_left {
 	float:left;
+	width:420px;
+	margin-left:43px;
+	text-indent:-43px;
+}
+.tl_tree_xtnd .tl_file .tl_left {
+	margin-left:22px;
+	text-indent:-22px;
+}
+ul.level_1 .tl_left {
+	width:400px;
+}
+ul.level_2 .tl_left {
+	width:380px;
+}
+ul.level_3 .tl_left {
+	width:360px;
+}
+ul.level_4 .tl_left {
+	width:340px;
+}
+ul.level_5 .tl_left {
+	width:320px;
+}
+ul.level_6 .tl_left {
+	width:300px;
+}
+ul.level_7 .tl_left {
+	width:280px;
+}
+ul.level_8 .tl_left {
+	width:260px;
+}
+ul.level_9 .tl_left {
+	width:240px;
+}
+.tl_tree_xtnd .tl_folder .tl_left {
+	width:460px;
+}
+.tl_tree_xtnd ul.level_1 .tl_folder .tl_left {
+	width:440px;
+}
+.tl_tree_xtnd ul.level_2 .tl_folder .tl_left {
+	width:420px;
+}
+.tl_tree_xtnd ul.level_3 .tl_folder .tl_left {
+	width:400px;
+}
+.tl_tree_xtnd ul.level_4 .tl_folder .tl_left {
+	width:380px;
+}
+.tl_tree_xtnd ul.level_5 .tl_folder .tl_left {
+	width:360px;
+}
+.tl_tree_xtnd ul.level_6 .tl_folder .tl_left {
+	width:340px;
+}
+.tl_tree_xtnd ul.level_7 .tl_folder .tl_left {
+	width:320px;
+}
+.tl_tree_xtnd ul.level_8 .tl_folder .tl_left {
+	width:300px;
+}
+.tl_tree_xtnd ul.level_9 .tl_folder .tl_left {
+	width:280px;
 }
 .tl_listing .tl_right {
 	float:right;
