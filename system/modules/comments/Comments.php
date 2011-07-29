@@ -119,7 +119,7 @@ class Comments extends Frontend
 				$objPartial->addReply = false;
 
 				// Reply
-				if ($objComments->addReply)
+				if ($objComments->addReply && $objComments->reply != '')
 				{
 					$objPartial->addReply = true;
 					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];

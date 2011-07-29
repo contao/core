@@ -19,6 +19,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: empty news lists did not show the "currently no items" note (#3221)
 - Fixed: reapplied the id attributes for checkbox and radio button containers (#3269)
 - Fixed: do not generate inactive layout sections (#3273)
+- Fixed: do not show empty comment replies in the front end (#3223)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
