@@ -1120,6 +1120,16 @@ abstract class Controller extends System
 
 
 	/**
+	 * Return an empty string for backwards compatibility (see #3218)
+	 * @return string
+	 */
+	protected function getDatePickerString()
+	{
+		return '';
+	}
+
+
+	/**
 	 * Return the current languages to be used with the TinyMCE spellchecker
 	 * @return string
 	 */
