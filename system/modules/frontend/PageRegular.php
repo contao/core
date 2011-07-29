@@ -279,7 +279,7 @@ class PageRegular extends Frontend
 			}
 		}
 
-		$this->Template->framework = '';
+		$this->Template->framework = '<link rel="stylesheet"' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' href="system/contao.css" media="screen"' . (($objPage->outputFormat == 'xhtml') ? " />\n" : ">\n");
 
 		// Add layout specific CSS
 		if (!empty($strFramework))
@@ -361,7 +361,6 @@ class PageRegular extends Frontend
 		}
 
 		$objCombiner = new Combiner();
-		$objCombiner->add('system/contao.css');
 
 		// Default TinyMCE style sheet
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
