@@ -119,22 +119,21 @@ class Comments extends Frontend
 				$objPartial->addReply = false;
 
 				// Reply
-				if ($objComments->addReply && $objComments->reply != '')
+				if ($objComments->addReply && $objComments->reply != '' && $objComments->authorName != '')
 				{
 					$objPartial->addReply = true;
 					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
+					$objPartial->reply = $this->replaceInsertTags($objComments->reply);
 
 					// Clean the RTE output
 					if ($objPage->outputFormat == 'xhtml')
 					{
-						$objComments->reply = $this->String->toXhtml($objComments->reply);
+						$objPartial->reply = $this->String->toXhtml($objPartial->reply);
 					}
 					else
 					{
-						$objComments->reply = $this->String->toHtml5($objComments->reply);
+						$objPartial->reply = $this->String->toHtml5($objPartial->reply);
 					}
-
-					$objPartial->reply = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->reply));
 				}
 
 				$arrComments[] = $objPartial->parse();
