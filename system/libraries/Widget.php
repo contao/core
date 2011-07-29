@@ -352,7 +352,7 @@ abstract class Widget extends Controller
 	 */
 	public function getErrorAsHTML($intIndex=0)
 	{
-		return $this->hasErrors() ? sprintf('<p class="%s">%s</p>', ((TL_MODE == 'BE') ? 'tl_error' : 'error'), $this->arrErrors[$intIndex]) : '';
+		return $this->hasErrors() ? sprintf('<p class="%s">%s</p>', ((TL_MODE == 'BE') ? 'tl_error tl_tip' : 'error'), $this->arrErrors[$intIndex]) : '';
 	}
 
 
