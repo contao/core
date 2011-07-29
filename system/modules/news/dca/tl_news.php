@@ -206,6 +206,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 		'time' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news']['time'],
+			'default'                 => time(),
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'time', 'tl_class'=>'w50')
