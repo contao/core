@@ -353,8 +353,8 @@ var Mediabox;
 // FLV, MP4
 			} else if (URL.match(/\.flv|\.mp4/i) || mediaType == 'video') {
 				// PATCH: use relative URLs to bypass the .htaccess protection
-				var uri = new URI(URL); 
-				URL = "../../" + uri.toRelative();
+				var uri = new URI(URL).toRelative();
+				if (uri != URL) URL = "../../../" + uri;
 				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
@@ -378,8 +378,8 @@ var Mediabox;
 // MP3, AAC
 			} else if (URL.match(/\.mp3|\.aac|tweetmic\.com|tmic\.fm/i) || mediaType == 'audio') {
 				// PATCH: use relative URLs to bypass the .htaccess protection
-				var uri = new URI(URL); 
-				URL = "../../" + uri.toRelative();
+				var uri = new URI(URL).toRelative();
+				if (uri != URL) URL = "../../../" + uri;
 				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
