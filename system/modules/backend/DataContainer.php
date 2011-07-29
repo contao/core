@@ -223,7 +223,8 @@ class DataContainer extends Backend
 			return '';
 		}
 
-		$arrData['eval']['required'] = ($this->varValue == '' && $arrData['eval']['mandatory']) ? true : false;
+		// Use strlen() here (see #3277)
+		$arrData['eval']['required'] = (!strlen($this->varValue) && $arrData['eval']['mandatory']) ? true : false;
 		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
 
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
