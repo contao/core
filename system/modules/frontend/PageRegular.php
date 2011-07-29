@@ -79,6 +79,24 @@ class PageRegular extends Frontend
 		{
 			if (in_array($arrModule['col'], $arrSections))
 			{
+				// Filter active sections (see #3273)
+				if ($arrModule['col'] == 'header' && !$objLayout->header)
+				{
+					continue;
+				}
+				if ($arrModule['col'] == 'left' && $objLayout->cols != '2cll' && $objLayout->cols != '3cl')
+				{
+					continue;
+				}
+				if ($arrModule['col'] == 'right' && $objLayout->cols != '2clr' && $objLayout->cols != '3cl')
+				{
+					continue;
+				}
+				if ($arrModule['col'] == 'footer' && !$objLayout->footer)
+				{
+					continue;
+				}
+
 				$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
 			}
 			else

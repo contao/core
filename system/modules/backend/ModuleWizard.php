@@ -123,38 +123,8 @@ class ModuleWizard extends Widget
 								 ->limit(1)
 								 ->execute($this->currentRecord);
 
-		// Columns
-		if ($objRow->numRows)
-		{
-			$cols = array('header');
-
-			switch ($objRow->cols)
-			{
-				case '1c':
-				case '1cl':
-					$cols[] = 'main';
-					break;
-
-				case '2cll':
-					$cols[] = 'left';
-					$cols[] = 'main';
-					break;
-
-				case '2clr':
-					$cols[] = 'right';
-					$cols[] = 'main';
-					break;
-
-				case '3cl':
-					$cols[] = 'left';
-					$cols[] = 'right';
-					$cols[] = 'main';
-					break;
-			}
-
-			$cols[] = 'footer';
-		}
-
+		// Show all columns and filter in PageRegular (see #3273)
+		$cols = array('header', 'left', 'right', 'main', 'footer');
 		$arrSections = deserialize($objRow->sections);
 
 		// Add custom page sections
@@ -163,7 +133,7 @@ class ModuleWizard extends Widget
 			$cols = array_merge($cols, $arrSections);
 		}
 
-		// Get new value
+		// Get the new value
 		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 		{
 			$this->varValue = $this->Input->post($this->strId);
@@ -174,10 +144,9 @@ class ModuleWizard extends Widget
 		{
 			$this->varValue = array('');
 		}
-
 		else
 		{
-			// Initialize sorting order
+			// Initialize the sorting order
 			foreach ($cols as $col)
 			{
 				$arrCols[$col] = array();
@@ -185,11 +154,7 @@ class ModuleWizard extends Widget
 
 			foreach ($this->varValue as $v)
 			{
-				// Add only modules of an active section
-				if (in_array($v['col'], $cols))
-				{
-					$arrCols[$v['col']][] = $v;
-				}
+				$arrCols[$v['col']][] = $v;
 			}
 
 			$this->varValue = array();
