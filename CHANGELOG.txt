@@ -21,6 +21,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: do not generate inactive layout sections (#3273)
 - Fixed: do not show empty comment replies in the front end (#3223)
 - Fixed: parse insert tags in comment replies (#3309)
+- Fixed: do not cache a page if there is a login error (#3171)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
