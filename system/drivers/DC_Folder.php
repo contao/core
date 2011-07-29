@@ -726,15 +726,15 @@ class DC_Folder extends DataContainer implements listable, editable
 			// Convert the value to bytes
 			if (strpos($upload_max_filesize, 'K') !== false)
 			{
-				$upload_max_filesize = round($upload_max_filesize / 1024);
+				$upload_max_filesize = round($upload_max_filesize * 1024);
 			}
 			elseif (strpos($upload_max_filesize, 'M') !== false)
 			{
-				$upload_max_filesize = round($upload_max_filesize / 1024 / 1024);
+				$upload_max_filesize = round($upload_max_filesize * 1024 * 1024);
 			}
 			elseif (strpos($upload_max_filesize, 'G') !== false)
 			{
-				$upload_max_filesize = round($upload_max_filesize / 1024 / 1024 / 1024);
+				$upload_max_filesize = round($upload_max_filesize * 1024 * 1024 * 1024);
 			}
 
 			// Convert the maximum file size into a human-readable format
