@@ -828,12 +828,12 @@ class tl_content extends Backend
 				return $arrAlias;
 			}
 
-			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
+			$objAlias = $this->Database->prepare("SELECT a.id, a.pid, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
 									   ->execute($dc->id);
 		}
 		else
 		{
-			$objAlias = $this->Database->prepare("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
+			$objAlias = $this->Database->prepare("SELECT a.id, a.pid, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.id!=(SELECT pid FROM tl_content WHERE id=?) ORDER BY parent, a.sorting")
 									   ->execute($dc->id);
 		}
 
@@ -843,7 +843,8 @@ class tl_content extends Backend
 
 			while ($objAlias->next())
 			{
-				$arrAlias[$objAlias->parent][$objAlias->id] = $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
+				$key = $objAlias->parent . ' (ID ' . $objAlias->pid . ')';
+				$arrAlias[$key][$objAlias->id] = $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
@@ -886,12 +887,12 @@ class tl_content extends Backend
 				return $arrAlias;
 			}
 
-			$objAlias = $this->Database->prepare("SELECT c.id, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
+			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") AND c.id!=? ORDER BY a.title, c.sorting")
 									   ->execute($this->Input->get('id'));
 		}
 		else
 		{
-			$objAlias = $this->Database->prepare("SELECT c.id, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE c.id!=? ORDER BY a.title, c.sorting")
+			$objAlias = $this->Database->prepare("SELECT c.id, c.pid, c.type, (CASE c.type WHEN 'module' THEN m.name WHEN 'form' THEN f.title WHEN 'table' THEN c.summary ELSE c.headline END) AS headline, c.text, a.title FROM tl_content c LEFT JOIN tl_article a ON a.id=c.pid LEFT JOIN tl_module m ON m.id=c.module LEFT JOIN tl_form f on f.id=c.form WHERE c.id!=? ORDER BY a.title, c.sorting")
 									   ->execute($this->Input->get('id'));
 		}
 
@@ -920,7 +921,8 @@ class tl_content extends Backend
 				$strText .= $text . ', ';
 			}
 
-			$arrAlias[$objAlias->title][$objAlias->id] = $strText . 'ID ' . $objAlias->id . ')';
+			$key = $objAlias->title . ' (ID ' . $objAlias->pid . ')';
+			$arrAlias[$key][$objAlias->id] = $strText . 'ID ' . $objAlias->id . ')';
 		}
 
 		return $arrAlias;
@@ -1069,7 +1071,7 @@ class tl_content extends Backend
 		// Limit pages to the user's pagemounts
 		if ($this->User->isAdmin)
 		{
-			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid" . ((count($arrRoot) > 0) ? " WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .")" : "") . " ORDER BY parent, a.sorting");
+			$objArticle = $this->Database->execute("SELECT a.id, a.pid, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid" . ((count($arrRoot) > 0) ? " WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrRoot))) .")" : "") . " ORDER BY parent, a.sorting");
 		}
 		else
 		{
@@ -1089,7 +1091,7 @@ class tl_content extends Backend
 				return $arrArticle;
 			}
 
-			$objArticle = $this->Database->execute("SELECT a.id, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting");
+			$objArticle = $this->Database->execute("SELECT a.id, a.pid, a.title, a.inColumn, p.title AS parent FROM tl_article a LEFT JOIN tl_page p ON p.id=a.pid WHERE a.pid IN(". implode(',', array_map('intval', array_unique($arrPids))) .") ORDER BY parent, a.sorting");
 		}
 
 		// Edit the result
@@ -1099,7 +1101,8 @@ class tl_content extends Backend
 
 			while ($objArticle->next())
 			{
-				$arrArticle[$objArticle->parent][$objArticle->id] = $objArticle->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn] : $objArticle->inColumn) . ', ID ' . $objArticle->id . ')';
+				$key = $objArticle->parent . ' (ID ' . $objArticle->pid . ')';
+				$arrArticle[$key][$objArticle->id] = $objArticle->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn] : $objArticle->inColumn) . ', ID ' . $objArticle->id . ')';
 			}
 		}
 
