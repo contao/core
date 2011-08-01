@@ -220,6 +220,7 @@ class Form extends Hybrid
 			global $objPage;
 			$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
 			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $title;
+			$_SESSION['FILES'] = array(); // see #3007
 		}
 
 		$strAttributes = '';
