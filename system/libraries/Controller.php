@@ -1120,12 +1120,12 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return an empty string for backwards compatibility (see #3218)
-	 * @return string
+	 * Return true for backwards compatibility (see #3218)
+	 * @return boolean
 	 */
 	protected function getDatePickerString()
 	{
-		return '';
+		return true;
 	}
 
 
