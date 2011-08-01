@@ -542,6 +542,30 @@ function natcaseksort($arrArray)
 
 
 /**
+ * Compare two values based on their length (ascending)
+ * @param integer
+ * @param integer
+ * @return integer
+ */
+function length_sort_asc($a, $b)
+{
+   	return strlen($a) - strlen($b);
+}
+
+
+/**
+ * Compare two values based on their length (descending)
+ * @param integer
+ * @param integer
+ * @return integer
+ */
+function length_sort_desc($a, $b)
+{
+   	return strlen($b) - strlen($a);
+}
+
+
+/**
  * Insert a parameter or array into an existing array at a particular index
  * @param array
  * @param int

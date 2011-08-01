@@ -23,6 +23,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: parse insert tags in comment replies (#3309)
 - Fixed: do not cache a page if there is a login error (#3171)
 - Fixed: the lost password module did not use the dynamic widget class (#3237)
+- Fixed: sort global CSS variables by key length (#3316)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)

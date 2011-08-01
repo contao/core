@@ -163,6 +163,9 @@ class StyleSheets extends Backend
 			}
 		}
 
+		// Sort by key length (see #3316)
+		uksort($vars, 'length_sort_desc');
+
 		$objFile = new File('system/scripts/' . $row['name'] . '.css');
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
