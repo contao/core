@@ -1830,7 +1830,6 @@ window.addEvent(\'domready\', function() {
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}
-
 			elseif (isset($_POST['saveNedit']))
 			{
 				$_SESSION['TL_INFO'] = '';
@@ -1845,7 +1844,6 @@ window.addEvent(\'domready\', function() {
 
 				$this->redirect($strUrl);
 			}
-
 			elseif (isset($_POST['saveNback']))
 			{
 				$_SESSION['TL_INFO'] = '';
@@ -1858,7 +1856,7 @@ window.addEvent(\'domready\', function() {
 				{
 					$this->redirect($this->Environment->script . '?do=' . $this->Input->get('do'));
 				}
-				elseif ($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') # TODO: try to abstract this
+				elseif (($this->ptable == 'tl_theme' && $this->strTable == 'tl_style_sheet') || ($this->ptable == 'tl_page' && $this->strTable == 'tl_article')) # TODO: try to abstract this
 				{
 					$this->redirect($this->getReferer(false, $this->strTable));
 				}
@@ -1867,7 +1865,6 @@ window.addEvent(\'domready\', function() {
 					$this->redirect($this->getReferer(false, $this->ptable));
 				}
 			}
-
 			elseif (isset($_POST['saveNcreate']))
 			{
 				$_SESSION['TL_INFO'] = '';
