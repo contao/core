@@ -204,11 +204,19 @@ class ModulePassword extends Module
 			return;
 		}
 
-		// Define form field
+		// Define the form field
 		$arrField = $GLOBALS['TL_DCA']['tl_member']['fields']['password'];
 		$arrField['eval']['tableless'] = $this->tableless;
 
-		$objWidget = new FormPassword($this->prepareForWidget($arrField, 'password'));
+		$strClass = $GLOBALS['TL_FFL']['password'];
+
+		// Fallback to default if the class is not defined
+		if (!$this->classFileExists($strClass))
+		{
+			$strClass = 'FormPassword';
+		}
+
+		$objWidget = new $strClass($this->prepareForWidget($arrField, 'password'));
 
 		// Set row classes
 		$objWidget->rowClass = 'row_0 row_first even';
