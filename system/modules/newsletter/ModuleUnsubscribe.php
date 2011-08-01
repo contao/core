@@ -144,8 +144,9 @@ class ModuleUnsubscribe extends Module
 	protected function removeRecipient()
 	{
 		$arrChannels = $this->Input->post('channels');
+		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
-		// Check selection
+		// Check the selection
 		if (!is_array($arrChannels) || count($arrChannels) < 1)
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];

@@ -198,8 +198,9 @@ class ModuleSubscribe extends Module
 	protected function addRecipient()
 	{
 		$arrChannels = $this->Input->post('channels');
+		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
-		// Check selection
+		// Check the selection
 		if (!is_array($arrChannels) || count($arrChannels) < 1)
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
