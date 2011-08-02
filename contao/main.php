@@ -144,6 +144,7 @@ class Main extends Backend
 				{
 					continue;
 				}
+
 				if ($objTask->deadline <= $time)
 				{
 					++$tasksDue;
@@ -174,26 +175,7 @@ class Main extends Backend
 			}
 		}
 
-		// Modules
-		$arrGroups = array();
-
-		foreach ($GLOBALS['BE_MOD'] as $strGroup=>$arrModules)
-		{
-			foreach (array_keys($arrModules) as $strModule)
-			{
-				if ($strGroup == 'profile' || $this->User->hasAccess($strModule, 'modules'))
-				{
-					$arrGroups[$GLOBALS['TL_LANG']['MOD'][$strGroup]][$strModule] = array
-					(
-						'name' => $GLOBALS['TL_LANG']['MOD'][$strModule][0],
-						'description' => $GLOBALS['TL_LANG']['MOD'][$strModule][1],
-						'icon' => $arrModules[$strModule]['icon']
-					);
-				}
-			}
-		}
-
-		$objTemplate->arrGroups = $arrGroups;
+		$objTemplate->arrGroups = $this->User->navigation();
 		$objTemplate->tasks = $GLOBALS['TL_LANG']['MOD']['tasks'][0];
 		$objTemplate->script = $this->Environment->script;
 

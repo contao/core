@@ -421,6 +421,12 @@ class BackendUser extends User
 	 */
 	public function navigation()
 	{
+		// Try to load from cache
+		if (isset($this->arrCache['be_navigation']))
+		{
+			return $this->arrCache['be_navigation'];
+		}
+
 		$arrModules = array();
 		$session = $this->Session->getData();
 
@@ -475,6 +481,18 @@ class BackendUser extends User
 			}
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getUserNavigation']) && is_array($GLOBALS['TL_HOOKS']['getUserNavigation']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getUserNavigation'] as $callback)
+			{
+				$this->import($callback[0]);
+				$arrModules = $this->$callback[0]->$callback[1]($arrModules);
+			}
+		}
+
+		// Cache the result
+		$this->arrCache['navigation'] = $arrModules;
 		return $arrModules;
 	}
 }

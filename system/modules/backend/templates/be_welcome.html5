@@ -38,14 +38,14 @@
 </table>
 
 <div id="tl_moverview">
-<?php foreach ($this->arrGroups as $strGroup=>$arrModules): ?>
+<?php foreach ($this->arrGroups as $arrGroup): ?>
 
-<h2><?php echo $strGroup; ?></h2>
-<?php foreach ($arrModules as $strModule=>$arrModule): ?>
+<h2><?php echo $arrGroup['label']; ?></h2>
+<?php foreach ($arrGroup['modules'] as $strModule=>$arrConfig): ?>
 
 <div class="tl_module_desc">
-<h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php if ($arrModule['icon']): ?> style="background-image:url('<?php echo TL_SCRIPT_URL . $arrModule['icon']; ?>')"<?php endif; ?>><?php echo $arrModule['name']; ?></a></h3>
-<p><?php echo $arrModule['description']; ?></p>
+<h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></h3>
+<p><?php echo $arrConfig['title']; ?></p>
 </div>
 <?php endforeach; ?>
 <?php endforeach; ?>
