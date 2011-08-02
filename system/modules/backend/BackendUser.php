@@ -492,7 +492,7 @@ class BackendUser extends User
 		}
 
 		// Cache the result
-		$this->arrCache['navigation'] = $arrModules;
+		$this->arrCache['be_navigation'] = $arrModules;
 		return $arrModules;
 	}
 }
