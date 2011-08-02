@@ -101,7 +101,14 @@ if (is_null($GLOBALS['TL_CONFIG']['websitePath']))
 	try
 	{
 		$GLOBALS['TL_CONFIG']['websitePath'] = $path;
-		$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
+
+		// Only store this value if the temp directory is writable,
+		// otherwise it will initialize a Files object and prevent the
+		// install tool from loading the Safe Mode Hack (see #3215).
+		if (is_writable(TL_ROOT . '/system/tmp'))
+		{
+			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
+		}
 	}
 	catch (Exception $e)
 	{

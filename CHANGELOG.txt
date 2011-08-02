@@ -26,6 +26,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: the lost password module did not use the dynamic widget class (#3237)
 - Fixed: sort global CSS variables by key length (#3316)
 - Fixed: verify the channel when subscribing to or unsubscribing from a newsletter (#3240)
+- Fixed: the Safe Mode Hack could not be set up with the install tool (#3215)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
