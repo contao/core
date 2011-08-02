@@ -1073,20 +1073,25 @@ abstract class Controller extends System
 
 			case 'png':
 				// Optimize non-truecolor images (see #2426)
-				if (version_compare($strGdVersion, '2.0', '>=') && !imageistruecolor($strSourceImage))
+				if (version_compare($strGdVersion, '2.0', '>=') && function_exists('imagecolormatch') && !imageistruecolor($strSourceImage))
 				{
-					$intColors = imagecolorstotal($strSourceImage);
-
-					// Convert to palette image
-					if ($intColors > 0 && $intColors <= 255)
+					// TODO: make it work with transparent images, too
+					if (imagecolortransparent($strSourceImage) == -1)
 					{
-						$wi = imagesx($strNewImage);
-						$he = imagesy($strNewImage);
-						$ch = imagecreatetruecolor($wi, $he);
-						imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
-						imagetruecolortopalette($strNewImage, null, $intColors);
-						imagecolormatch($ch, $strNewImage);
-						imagedestroy($ch);
+						$intColors = imagecolorstotal($strSourceImage);
+
+						// Convert to a palette image
+						// @see http://www.php.net/manual/de/function.imagetruecolortopalette.php#44803
+						if ($intColors > 0 && $intColors < 256)
+						{
+							$wi = imagesx($strNewImage);
+							$he = imagesy($strNewImage);
+							$ch = imagecreatetruecolor($wi, $he);
+							imagecopymerge($ch, $strNewImage, 0, 0, 0, 0, $wi, $he, 100);
+							imagetruecolortopalette($strNewImage, false, $intColors);
+							imagecolormatch($ch, $strNewImage);
+							imagedestroy($ch);
+						}
 					}
 				}
 
