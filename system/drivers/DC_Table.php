@@ -4558,6 +4558,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					// Get the name of the parent record
 					if ($field == 'pid')
 					{
+						$this->loadDataContainer($this->ptable);
 						$showFields = $GLOBALS['TL_DCA'][$this->ptable]['list']['label']['fields'];
 
 						if (!$showFields[0])
