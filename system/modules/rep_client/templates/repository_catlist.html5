@@ -29,14 +29,14 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <div class="tl_panel">
 
 <div class="tl_filter tl_subpanel">
-<strong><?php echo $GLOBALS['TL_LANG']['MSC']['filter']; ?>:</strong>
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['filter']; ?>:</strong> 
 <select name="repository_tag" id="repository_tag" class="tl_select<?php if ($rep->f_tag!='') echo ' active'; ?>">
   <option value=""><?php echo $text['tag']; ?></option>
   <option value="">---</option>
 <?php foreach ($rep->tags as $tag): ?>
   <option value="<?php echo $tag->item; ?>"<?php if ($rep->f_tag==$tag->item) echo ' selected="selected"'; ?>><?php echo $tag->item; ?></option>
 <?php endforeach; ?>
-</select>
+</select> 
 <select name="repository_type" id="repository_type" class="tl_select<?php if ($rep->f_type!='') echo ' active'; ?>">
   <option value=""><?php echo $text['type'][0]; ?></option>
   <option value="">---</option>
@@ -45,7 +45,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <option value="<?php echo $tpe; ?>"<?php if ($rep->f_type==$tpe) echo ' selected="selected"'; ?>><?php echo $type_options[$tpe]; ?></option>
 <?php endif; ?>
 <?php endforeach; ?>
-</select>
+</select> 
 <select name="repository_category" id="repository_category" class="tl_select<?php if ($rep->f_category!='') echo ' active'; ?>">
   <option value=""><?php echo $text['category'][0]; ?></option>
   <option value="">---</option>
@@ -54,21 +54,21 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
   <option value="<?php echo $cat; ?>"<?php if ($rep->f_category==$cat): ?> selected="selected"<?php endif; ?>><?php echo $category_options[$cat]; ?></option>
 <?php endif; ?>
 <?php endforeach; ?>
-</select>
+</select> 
 <select name="repository_state" id="repository_state" class="tl_select<?php if ($rep->f_state!='') echo ' active'; ?>">
   <option value=""><?php echo $text['state']; ?></option>
   <option value="">---</option>
 <?php foreach (array_keys($state_options) as $sta): ?>
   <option value="<?php echo $sta; ?>"<?php if ($rep->f_state==$sta) echo ' selected="selected"'; ?>><?php echo $state_options[$sta]; ?></option>
 <?php endforeach; ?>
-</select>
+</select> 
 <select name="repository_author" id="repository_author" class="tl_select<?php if ($rep->f_author!='') echo ' active'; ?>">
   <option value=""><?php echo $text['author']; ?></option>
   <option value="">---</option>
 <?php foreach ($rep->authors as $aut): ?>
   <option value="<?php echo $aut->item; ?>"<?php if ($rep->f_author==$aut->item) echo ' selected="selected"'; ?>><?php echo $aut->item; ?></option>
 <?php endforeach; ?>
-</select>
+</select> 
 </div>
 
 <div class="clear"></div>
@@ -81,7 +81,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 
 <div class="tl_limit tl_subpanel">
-<strong><?php echo $GLOBALS['TL_LANG']['MSC']['showOnly']; ?>:</strong>
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['showOnly']; ?>:</strong> 
 <select name="repository_page" id="repository_page" class="tl_select<?php if ($rep->f_page!=-1) echo ' active'; ?>" onchange="this.form.submit()">
   <option value="0"><?php echo $GLOBALS['TL_LANG']['MSC']['filterRecords']; ?></option>
 <?php for ($page=0; $page<count($rep->pages); $page++): ?>
@@ -92,12 +92,12 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 </div>
 
 <div class="tl_search tl_subpanel">
-<strong><?php echo $GLOBALS['TL_LANG']['MSC']['search']; ?>:</strong>
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['search']; ?>:</strong> 
 <input type="text" name="repository_find" id="repository_find" value="<?php echo specialchars($rep->f_find); ?>" class="tl_text fulltextsearch<?php if ($rep->f_find!='') echo ' active'; ?>"/>
 </div>
 
 <div class="tl_sorting tl_subpanel">
-<strong><?php echo $GLOBALS['TL_LANG']['MSC']['sortBy']; ?>:</strong>
+<strong><?php echo $GLOBALS['TL_LANG']['MSC']['sortBy']; ?>:</strong> 
 <select name="repository_order" id="repository_order" class="tl_select">
 <?php foreach (array_keys($order_options) as $oby): ?>
   <option value="<?php echo $oby; ?>"<?php if ($rep->f_order==$oby) echo ' selected="selected"'; ?>><?php echo sprintf($text['byorder'], $order_options[$oby]); ?></option>
