@@ -47,6 +47,20 @@ Request.Mixed = new Class(
 		evalResponse: false
 	},
 
+	initialize: function(options)
+	{
+		if (options)
+		{
+			try
+			{
+				this.options.url = options.field.getParent('form').getAttribute('action');
+			}
+			catch(err) {}
+		}
+
+		this.parent(options);
+	},
+
 	success: function(text, xml)
 	{
 		var json;
@@ -102,6 +116,20 @@ Request.Contao = new Class(
 	options:
 	{
 		url: window.location.href
+	},
+
+	initialize: function(options)
+	{
+		if (options)
+		{
+			try
+			{
+				this.options.url = options.field.getParent('form').getAttribute('action');
+			}
+			catch(err) {}
+		}
+
+		this.parent(options);
 	},
 
 	success: function(text, xml)
@@ -252,14 +280,14 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request.Contao().post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request.Contao().post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
@@ -267,6 +295,7 @@ var AjaxRequest =
 
 		new Request.Contao(
 		{
+			'field': el,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -342,7 +371,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC', 'folderO');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request.Contao().post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
@@ -350,7 +379,7 @@ var AjaxRequest =
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				icon.src = icon.src.replace('folderO', 'folderC');
 				$(el).title = CONTAO_EXPAND;
-				new Request.Contao().post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
@@ -358,6 +387,7 @@ var AjaxRequest =
 
 		new Request.Contao(
 		{
+			'field': el,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -411,14 +441,14 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request.Contao().post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request.Contao().post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
@@ -426,6 +456,7 @@ var AjaxRequest =
 
 		new Request.Contao(
 		{
+			'field': el,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -479,14 +510,14 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				$(el).title = CONTAO_COLLAPSE;
-				new Request.Contao().post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				$(el).title = CONTAO_EXPAND;
-				new Request.Contao().post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return false;
@@ -494,6 +525,7 @@ var AjaxRequest =
 
 		new Request.Contao(
 		{
+			'field': el,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -572,14 +604,14 @@ var AjaxRequest =
 				el.value = 1;
 				el.checked = 'checked';
 				item.setStyle('display', 'block');
-				new Request.Contao().post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':1, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 			else
 			{
 				el.value = '';
 				el.checked = '';
 				item.setStyle('display', 'none');
-				new Request.Contao().post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
+				new Request.Contao({'field':el}).post({'action':'toggleSubpalette', 'id':id, 'field':field, 'state':0, 'REQUEST_TOKEN':REQUEST_TOKEN});
 			}
 
 			return;
@@ -587,6 +619,7 @@ var AjaxRequest =
 
 		new Request.Mixed(
 		{
+			'field': el,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, js, json)
 			{
