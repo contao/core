@@ -12,7 +12,7 @@
 <p class="<?php echo $this->mclass; ?>"><?php echo $this->message; ?></p>
 <?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>" />
-<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>" />
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
 <?php if (!$this->showChannels): ?>
 <?php foreach ($this->channels as $id=>$title): ?>
 <input type="hidden" name="channels[]" value="<?php echo $id; ?>" />

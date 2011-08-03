@@ -299,9 +299,10 @@ class Index extends Frontend
 		$this->import('Config');
 		$this->loadLanguageFile('default');
 
-		// Replace insert tags
+		// Replace insert tags and then re-replace the request_token
+		// tag in case a form element has been loaded via insert tag
 		$strBuffer = $this->replaceInsertTags($strBuffer);
-		$strBuffer = str_replace(array('[{]', '[}]'), array('{{', '}}'), $strBuffer);
+		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
 
 		// Content type
 		if (!$content)

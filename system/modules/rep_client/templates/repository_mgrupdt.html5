@@ -38,7 +38,7 @@ $tabindex = 1;
 
 <div class="tl_submit_container">
 <?php if (property_exists($rep, 'f_submit')): ?>
-  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>">
+  <input type="submit" name="repository_submitbutton" class="tl_submit" value="<?php echo $text[$rep->f_submit]; ?>"> 
 <?php endif; ?>
   <input type="submit" name="repository_cancelbutton" class="tl_submit" value="<?php echo $text[$rep->f_cancel]; ?>">
 </div>

@@ -324,9 +324,9 @@ pre,.tl_textarea.monospace {
 	background:#8ab858;
 }
 .tl_submit:disabled {
-    cursor:default;
+	cursor:default;
 	background:#bbb;
-    text-shadow:none;
-    color:#999;
+	text-shadow:none;
+	color:#999;
 	box-shadow:none;
 }

@@ -12,7 +12,7 @@
 <p class="error"><?php echo $this->message; ?></p>
 <?php endif; ?>
 <input type="hidden" name="FORM_SUBMIT" value="tl_login" />
-<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>" />
+<input type="hidden" name="REQUEST_TOKEN" value="{{request_token}}" />
 <label for="username"><?php echo $this->username; ?></label>
 <input type="text" name="username" id="username" class="text" maxlength="64" value="<?php echo $this->value; ?>" /><br />
 <label for="password"><?php echo $this->password; ?></label>

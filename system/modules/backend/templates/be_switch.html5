@@ -26,20 +26,20 @@
 <input type="hidden" name="FORM_SUBMIT" value="tl_switch">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 <?php if ($this->isAdmin): ?>
-<label for="ctrl_user"><?php echo $this->feUser; ?>:</label>
+<label for="ctrl_user"><?php echo $this->feUser; ?>:</label> 
 <select name="user" id="ctrl_user" class="tl_select">
 <?php foreach ($this->users as $id=>$name): ?>
   <option value="<?php echo $id; ?>"<?php if ($id == $this->user): ?> selected="selected"<?php endif; ?>><?php echo $name; ?></option>
 <?php endforeach; ?>
-</select>
+</select> 
 <?php endif; ?>
-<label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label>
+<label for="ctrl_unpublished"><?php echo $this->hiddenElements; ?>:</label> 
 <select name="unpublished" id="ctrl_unpublished" class="tl_select">
   <option value="hide"><?php echo $this->lblHide; ?></option>
   <option value="show"<?php if ($this->show) echo ' selected="selected"'; ?>><?php echo $this->lblShow; ?></option>
-</select>
-<input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>">
-<input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload();">
+</select> 
+<input type="submit" class="tl_submit" value="<?php echo $this->apply; ?>"> 
+<input type="button" class="tl_submit" value="<?php echo $this->reload; ?>" onclick="parent.frames[1].location.reload();"> 
 <img src="<?php echo $this->closeSrc; ?>" width="12" height="12" alt="Close preview bar" class="close" onclick="parent.location = parent.frames[1].location;">
 </div>
 </form>
