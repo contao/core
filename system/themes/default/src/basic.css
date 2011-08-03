@@ -320,3 +320,8 @@ pre,.tl_textarea.monospace {
 .tl_submit:active {
 	background:#8ab858;
 }
+.tl_submit:disabled {
+    cursor:default;
+    background:#b6b6b6;
+    box-shadow:none;
+}
