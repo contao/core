@@ -2647,8 +2647,8 @@ abstract class Controller extends System
 		// Foreign key
 		elseif (isset($arrData['foreignKey']))
 		{
-			$arrKey = explode('.', $arrData['foreignKey']);
-			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY " . $arrKey[1]);
+			$arrKey = explode('.', $arrData['foreignKey'], 2);
+			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " AS value FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY value");
 
 			if ($objOptions->numRows)
 			{
@@ -2656,7 +2656,7 @@ abstract class Controller extends System
 
 				while($objOptions->next())
 				{
-					$arrData['options'][$objOptions->id] = $objOptions->$arrKey[1];
+					$arrData['options'][$objOptions->id] = $objOptions->value;
 				}
 			}
 		}

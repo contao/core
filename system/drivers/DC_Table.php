@@ -432,11 +432,11 @@ class DC_Table extends DataContainer implements listable, editable
 			$value = deserialize($row[$i]);
 			$class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
 		
-			// Get field value
-			if (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']))
+			// Get the field value
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']))
 			{
 				$temp = array();
-				$chunks = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']);
+				$chunks = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey'], 2);
 
 				foreach ((array) $value as $v)
 				{
@@ -3352,9 +3352,9 @@ window.addEvent(\'domready\', function() {
 
 					$_v = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], max($objParent->tstamp, $objMaxTstamp->tstamp));
 				}
-				elseif (strlen($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
+				elseif (isset($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']))
 				{
-					$arrForeignKey = trimsplit('.', $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey']);
+					$arrForeignKey = explode('.', $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey'], 2);
 
 					$objLabel = $this->Database->prepare("SELECT " . $arrForeignKey[1] . " FROM " . $arrForeignKey[0] . " WHERE id=?")
 											   ->limit(1)
@@ -3419,7 +3419,7 @@ window.addEvent(\'domready\', function() {
 				// Order by the foreign key
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
 				{
-					$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']);
+					$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey'], 2);
 					$query = "SELECT *, (SELECT ". $key[1] ." FROM ". $key[0] ." WHERE ". $this->strTable .".". $firstOrderBy ."=". $key[0] .".id) AS ". $key[1] ." FROM " . $this->strTable;
 					$orderBy[0] = $key[1];
 				}
@@ -4556,9 +4556,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					$value = $blnDate ? $kk : $vv;
 
 					// Replace the ID with the foreign key
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'] != '')
+					if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
 					{
-						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']);
+						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'], 2);
 
 						$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
 													->limit(1)
@@ -4668,7 +4668,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 		elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']))
 		{
-			$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']);
+			$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'], 2);
 
 			$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
 										->limit(1)
