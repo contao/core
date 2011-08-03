@@ -139,7 +139,7 @@ class DB_Mysql extends Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$arrFields = $this->executeUncached(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
+		$arrFields = $this->query(sprintf($this->strListFields, $strTable))->fetchAllAssoc();
 
 		foreach ($arrFields as $k=>$v)
 		{
@@ -193,7 +193,7 @@ class DB_Mysql extends Database
 			$arrReturn[$k]['extra'] = $v['Extra'];
 		}
 
-		$arrIndexes = $this->executeUncached("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
+		$arrIndexes = $this->query("SHOW INDEXES FROM `$strTable`")->fetchAllAssoc();
 
 		foreach ($arrIndexes as $arrIndex)
 		{

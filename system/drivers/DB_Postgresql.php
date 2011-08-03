@@ -138,7 +138,7 @@ class DB_Postgresql extends Database
 	protected function list_fields($strTable)
 	{
 		$arrReturn = array();
-		$arrFields = $this->executeUncached(sprintf($this->strListFields, $strTable, $strTable))->fetchAllAssoc();
+		$arrFields = $this->query(sprintf($this->strListFields, $strTable, $strTable))->fetchAllAssoc();
 
 		foreach ($arrFields as $k=>$v)
 		{

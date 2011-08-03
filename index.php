@@ -62,12 +62,6 @@ class Index extends Frontend
 		// Check whether a user is logged in
 		define('BE_USER_LOGGED_IN', $this->getLoginStatus('BE_USER_AUTH'));
 		define('FE_USER_LOGGED_IN', $this->getLoginStatus('FE_USER_AUTH'));
-
-		// HOOK: trigger recall extension
-		if (!FE_USER_LOGGED_IN && $this->Input->cookie('tl_recall_fe') && in_array('recall', $this->Config->getActiveModules()))
-		{
-			Recall::frontend($this);
-		}
 	}
 
 

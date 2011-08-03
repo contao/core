@@ -226,7 +226,7 @@ abstract class Database
 		}
 
 		$arrReturn = array();
-		$arrTables = $this->executeUncached(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
+		$arrTables = $this->query(sprintf($this->strListTables, $strDatabase))->fetchAllAssoc();
 
 		foreach ($arrTables as $arrTable)
 		{
