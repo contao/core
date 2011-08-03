@@ -4555,29 +4555,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				{
 					$value = $blnDate ? $kk : $vv;
 
-					// Get the name of the parent record
-					if ($field == 'pid')
-					{
-						$this->loadDataContainer($this->ptable);
-						$showFields = $GLOBALS['TL_DCA'][$this->ptable]['list']['label']['fields'];
-
-						if (!$showFields[0])
-						{
-							$showFields[0] = 'id';
-						}
-
-						$objShowFields = $this->Database->prepare("SELECT " . $showFields[0] . " FROM ". $this->ptable . " WHERE id=?")
-														->limit(1)
-														->execute($vv);
-
-						if ($objShowFields->numRows)
-						{
-							$vv = $objShowFields->$showFields[0];
-						}
-					}
-
 					// Replace the ID with the foreign key
-					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'] != '')
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'] != '')
 					{
 						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey']);
 
@@ -4601,6 +4580,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					elseif (is_array($options_callback) && count($options_callback) > 0)
 					{
 						$vv = $options_callback[$vv];
+					}
+
+					// Get the name of the parent record (see #2703)
+					elseif ($field == 'pid')
+					{
+						$this->loadDataContainer($this->ptable);
+						$showFields = $GLOBALS['TL_DCA'][$this->ptable]['list']['label']['fields'];
+
+						if (!$showFields[0])
+						{
+							$showFields[0] = 'id';
+						}
+
+						$objShowFields = $this->Database->prepare("SELECT " . $showFields[0] . " FROM ". $this->ptable . " WHERE id=?")
+														->limit(1)
+														->execute($vv);
+
+						if ($objShowFields->numRows)
+						{
+							$vv = $objShowFields->$showFields[0];
+						}
 					}
 
 					$option_label = '';
