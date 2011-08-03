@@ -2645,7 +2645,7 @@ abstract class Controller extends System
 		}
 
 		// Foreign key
-		if (strlen($arrData['foreignKey']))
+		elseif (isset($arrData['foreignKey']))
 		{
 			$arrKey = explode('.', $arrData['foreignKey']);
 			$objOptions = $this->Database->execute("SELECT id, " . $arrKey[1] . " FROM " . $arrKey[0] . " WHERE tstamp>0 ORDER BY " . $arrKey[1]);
