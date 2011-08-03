@@ -70,18 +70,10 @@ Request.Mixed = new Class(
 			// Automatically set the new request token
 			if (json.token)
 			{
-				REQUEST_TOKEN = json.token;
-
-				// Update all forms
-				$$('input[type="hidden"]').each(function(el)
-				{
-					if (el.name == 'REQUEST_TOKEN')
-					{
-						el.value = REQUEST_TOKEN;
-					}
-				});
+				AjaxRequest.updateTokens(json.token);
 			}
 
+			// Strip scripts if any
 			json.content = json.content.stripScripts(function(script)
 			{
 				js = script;
@@ -135,16 +127,7 @@ Request.Contao = new Class(
 			// Automatically set the new request token
 			if (json.token)
 			{
-				REQUEST_TOKEN = json.token;
-
-				// Update all forms
-				$$('input[type="hidden"]').each(function(el)
-				{
-					if (el.name == 'REQUEST_TOKEN')
-					{
-						el.value = REQUEST_TOKEN;
-					}
-				});
+				AjaxRequest.updateTokens(json.token);
 			}
 
 			this.onSuccess(json.content, json);
@@ -164,6 +147,31 @@ Request.Contao = new Class(
  */
 var AjaxRequest =
 {
+
+	/**
+	 * Set a new request token
+	 * @param string
+	 */
+	updateTokens: function(tk)
+	{
+		REQUEST_TOKEN = tk;
+
+		// Update all forms
+		$$('input[type="hidden"]').each(function(el)
+		{
+			if (el.name == 'REQUEST_TOKEN')
+			{
+				el.value = tk;
+			}
+		});
+
+		// Also update the parent window
+		if (self != top && parent.REQUEST_TOKEN)
+		{
+			parent.AjaxRequest.updateTokens(tk);
+		}
+	},
+
 
 	/**
 	 * Toggle the navigation menu
