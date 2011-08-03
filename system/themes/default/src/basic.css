@@ -282,6 +282,9 @@ pre,.tl_textarea.monospace {
 	margin:0 3px 1px 0;
 	vertical-align:middle;
 }
+.safari .tl_radio,.safari .tl_tree_radio {
+	margin-left:1px;
+}
 
 /* Radio table */
 .tl_radio_table {
@@ -322,6 +325,8 @@ pre,.tl_textarea.monospace {
 }
 .tl_submit:disabled {
     cursor:default;
-    background:#b6b6b6;
-    box-shadow:none;
+	background:#bbb;
+    text-shadow:none;
+    color:#999;
+	box-shadow:none;
 }
