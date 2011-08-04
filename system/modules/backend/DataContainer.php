@@ -193,14 +193,14 @@ class DataContainer extends Backend
 			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
-		// Add table import wizard
+		// Add the table import wizard
 		elseif ($arrData['inputType'] == 'tableWizard')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 			$xlabel .= ' ' . $this->generateImage('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
 		}
 
-		// Add list import wizard
+		// Add the list import wizard
 		elseif ($arrData['inputType'] == 'listWizard')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
@@ -235,13 +235,12 @@ class DataContainer extends Backend
 		}
 
 		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
-
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
 
 		$objWidget->xlabel = $xlabel;
 		$objWidget->currentRecord = $this->intId;
 
-		// Validate field
+		// Validate the field
 		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 		{
 			$paletteFields = array();
@@ -276,7 +275,6 @@ class DataContainer extends Backend
 				{
 					$this->noReload = true;
 				}
-
 				elseif ($objWidget->submitInput())
 				{
 					$varValue = $objWidget->value;

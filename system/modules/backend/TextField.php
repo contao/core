@@ -114,6 +114,12 @@ class TextField extends Widget
 
 		if (!$this->multiple)
 		{
+			// Hide the Punycode format (see #2750)
+			if ($this->rgxp == 'email' || $this->rgxp == 'url')
+			{
+				$this->varValue = $this->idnaDecode($this->varValue);
+			}
+
 			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();">%s',
 							$type,
 							$this->strName,

@@ -2707,7 +2707,7 @@ abstract class Controller extends System
 		$arrNew['value'] = deserialize($varValue);
 
 		// Convert timestamps
-		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
+		if ($varValue != '' && ($arrData['eval']['rgxp'] == 'date' || $arrData['eval']['rgxp'] == 'time' || $arrData['eval']['rgxp'] == 'datim'))
 		{
 			$objDate = new Date($varValue);
 			$arrNew['value'] = $objDate->{$arrData['eval']['rgxp']};

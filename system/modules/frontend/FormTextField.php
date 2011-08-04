@@ -104,6 +104,12 @@ class FormTextField extends Widget
 	 */
 	public function generate()
 	{
+		// Hide the Punycode format (see #2750)
+		if ($this->rgxp == 'email' || $this->rgxp == 'url')
+		{
+			$this->varValue = $this->idnaDecode($this->varValue);
+		}
+
 		return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="text%s%s" value="%s"%s%s',
 						($this->hideInput ? 'password' : 'text'),
 						$this->strName,

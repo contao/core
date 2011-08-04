@@ -27,6 +27,7 @@ Version 2.10.0 (XXXX-XX-XX)
 - Fixed: sort global CSS variables by key length (#3316)
 - Fixed: verify the channel when subscribing to or unsubscribing from a newsletter (#3240)
 - Fixed: the Safe Mode Hack could not be set up with the install tool (#3215)
+- Fixed: hide the internally used Punycode format from the user (#2750)
 - Fixed a few minor issues
 
 Version 2.10.RC1 (2011-06-23)
