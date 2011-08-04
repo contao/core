@@ -431,7 +431,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 			$value = deserialize($row[$i]);
 			$class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
-		
+
 			// Get the field value
 			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['foreignKey']))
 			{
@@ -440,13 +440,13 @@ class DC_Table extends DataContainer implements listable, editable
 
 				foreach ((array) $value as $v)
 				{
-					$objKey = $this->Database->prepare("SELECT " . $chunks[1] . " FROM " . $chunks[0] . " WHERE id=?")
+					$objKey = $this->Database->prepare("SELECT " . $chunks[1] . " AS value FROM " . $chunks[0] . " WHERE id=?")
 											 ->limit(1)
 											 ->execute($v);
 
 					if ($objKey->numRows)
 					{
-						$temp[] = $objKey->$chunks[1];
+						$temp[] = $objKey->value;
 					}
 				}
 
@@ -3356,13 +3356,13 @@ window.addEvent(\'domready\', function() {
 				{
 					$arrForeignKey = explode('.', $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['foreignKey'], 2);
 
-					$objLabel = $this->Database->prepare("SELECT " . $arrForeignKey[1] . " FROM " . $arrForeignKey[0] . " WHERE id=?")
+					$objLabel = $this->Database->prepare("SELECT " . $arrForeignKey[1] . " AS value FROM " . $arrForeignKey[0] . " WHERE id=?")
 											   ->limit(1)
 											   ->execute($_v);
 
 					if ($objLabel->numRows)
 					{
-						$_v = $objLabel->$arrForeignKey[1];
+						$_v = $objLabel->value;
 					}
 				}
 				elseif (is_array($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v]))
@@ -3420,8 +3420,8 @@ window.addEvent(\'domready\', function() {
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey']))
 				{
 					$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$firstOrderBy]['foreignKey'], 2);
-					$query = "SELECT *, (SELECT ". $key[1] ." FROM ". $key[0] ." WHERE ". $this->strTable .".". $firstOrderBy ."=". $key[0] .".id) AS ". $key[1] ." FROM " . $this->strTable;
-					$orderBy[0] = $key[1];
+					$query = "SELECT *, (SELECT ". $key[1] ." FROM ". $key[0] ." WHERE ". $this->strTable .".". $firstOrderBy ."=". $key[0] .".id) AS foreignKey FROM " . $this->strTable;
+					$orderBy[0] = 'foreignKey';
 				}
 			}
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields']))
@@ -4560,13 +4560,13 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					{
 						$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'], 2);
 
-						$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
+						$objParent = $this->Database->prepare("SELECT " . $key[1] . " AS value FROM " . $key[0] . " WHERE id=?")
 													->limit(1)
 													->execute($vv);
 
 						if ($objParent->numRows)
 						{
-							$vv = $objParent->$key[1];
+							$vv = $objParent->value;
 						}
 					}
 
@@ -4670,13 +4670,13 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		{
 			$key = explode('.', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['foreignKey'], 2);
 
-			$objParent = $this->Database->prepare("SELECT " . $key[1] . " FROM " . $key[0] . " WHERE id=?")
+			$objParent = $this->Database->prepare("SELECT " . $key[1] . " AS value FROM " . $key[0] . " WHERE id=?")
 										->limit(1)
 										->execute($value);
 
 			if ($objParent->numRows)
 			{
-				$remoteNew = $objParent->$key[1];
+				$remoteNew = $objParent->value;
 			}
 		}
 		elseif (in_array($mode, array(1, 2)))
