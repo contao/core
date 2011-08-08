@@ -175,7 +175,7 @@ class Main extends Backend
 			}
 		}
 
-		$objTemplate->arrGroups = $this->User->navigation();
+		$objTemplate->arrGroups = $this->User->navigation(true);
 		$objTemplate->tasks = $GLOBALS['TL_LANG']['MOD']['tasks'][0];
 		$objTemplate->script = $this->Environment->script;
 

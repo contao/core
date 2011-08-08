@@ -417,16 +417,11 @@ class BackendUser extends User
 
 	/**
 	 * Generate the navigation menu and return it as array
+	 * @param boolean
 	 * @return array
 	 */
-	public function navigation()
+	public function navigation($blnShowAll=false)
 	{
-		// Try to load from cache
-		if (isset($this->arrCache['be_navigation']))
-		{
-			return $this->arrCache['be_navigation'];
-		}
-
 		$arrModules = array();
 		$session = $this->Session->getData();
 
@@ -450,8 +445,8 @@ class BackendUser extends User
 				$arrModules[$strGroupName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strGroupName]) ? $GLOBALS['TL_LANG']['MOD'][$strGroupName][0] : $GLOBALS['TL_LANG']['MOD'][$strGroupName]) != false) ? $label : $strGroupName;
 				$arrModules[$strGroupName]['href'] = $this->addToUrl('mtg=' . $strGroupName);
 
-				// Do not show modules if the group is closed
-				if (isset($session['backend_modules'][$strGroupName]) && $session['backend_modules'][$strGroupName] < 1)
+				// Do not show the modules if the group is closed
+				if (!$blnShowAll && isset($session['backend_modules'][$strGroupName]) && $session['backend_modules'][$strGroupName] < 1)
 				{
 					$arrModules[$strGroupName]['modules'] = false;
 					$arrModules[$strGroupName]['icon'] = 'modPlus.gif';
@@ -491,8 +486,6 @@ class BackendUser extends User
 			}
 		}
 
-		// Cache the result
-		$this->arrCache['be_navigation'] = $arrModules;
 		return $arrModules;
 	}
 }
