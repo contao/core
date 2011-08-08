@@ -58,6 +58,7 @@ class PurgeData extends Backend implements executable
 	{
 		$arrCacheTables = array();
 		$objTemplate = new BackendTemplate('be_purge_data');
+		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message
 		if ($_SESSION['CLEAR_CACHE_CONFIRM'] != '')

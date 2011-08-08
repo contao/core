@@ -60,6 +60,7 @@ class LiveUpdate extends Backend implements executable
 
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
+		$objTemplate->isActive = $this->isActive();
 
 		// Current version up to date
 		$objTemplate->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;"></a>',
@@ -107,7 +108,7 @@ class LiveUpdate extends Backend implements executable
 		// Run the update
 		if ($this->Input->get('token') != '')
 		{
-			$this->runLiveUpdate();
+			$this->runLiveUpdate($objTemplate);
 		}
 		elseif ($this->Input->get('act') == 'runonce')
 		{
@@ -128,8 +129,9 @@ class LiveUpdate extends Backend implements executable
 
 	/**
 	 * Run the live update
+	 * @param object
 	 */
-	protected function runLiveUpdate()
+	protected function runLiveUpdate(BackendTemplate $objTemplate)
 	{
 		$archive = 'system/tmp/' . $this->Input->get('token');
 
@@ -153,36 +155,35 @@ class LiveUpdate extends Backend implements executable
 		}
 
 		$objArchive = new ZipReader($archive);
+		$arrHidden = array();
 
-		// Show files
+		foreach (array_keys($_GET) as $key)
+		{
+			$arrHidden[$key] = $this->Input->get($key);
+		}
+
+		$objTemplate->isRunning = true;
+		$objTemplate->action = ampersand($this->Environment->request);
+		$objTemplate->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
+		$arrElements = array();
+
+		// Show the files
 		if ($this->Input->get('toc'))
 		{
 			$arrFiles = $objArchive->getFileList();
 			array_shift($arrFiles);
+			$objTemplate->elements = $arrFiles;
 
-			echo '<div style="width:720px; margin:0 auto;">';
-			echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Table of contents</h1>';
-			echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
-			echo '<li>';
-			echo implode('</li><li>', $arrFiles);
-			echo '</li>';
-			echo '</ol>';
-			echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
-			echo '<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" style="float:left;">&lt; Click here to go back</a>';
-			echo '<a href="' . str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request) . '" style="float:right;">Click here to proceed &gt;</a>';
-			echo '</div>';
-			echo '</div>';
+			unset($arrHidden['toc']);
+			$objTemplate->hidden = $arrHidden;
+			$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['toc'];
 
-			exit;
+			return;
 		}
 
-		// Create backup
+		// Create the backup
 		if ($this->Input->get('bup'))
 		{
-			echo '<div style="width:720px; margin:0 auto;">';
-			echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Creating backup</h1>';
-			echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
-
 			$arrFiles = $objArchive->getFileList();
 			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
 
@@ -196,30 +197,23 @@ class LiveUpdate extends Backend implements executable
 				try
 				{
 					$objBackup->addFile($strFile);
-					echo '<li>Backed up ' . $strFile . '</li>';
+					$arrElements[] = 'Backed up ' . $strFile;
 				}
 				catch (Exception $e)
 				{
-					echo '<li>Skipped ' . $strFile . ' (' . $e->getMessage() . ')</li>';
+					$arrElements[] = 'Skipped ' . $strFile . ' (' . $e->getMessage() . ')';
 				}
 			}
 
 			$objBackup->close();
-			$url = str_replace('bup=1', 'bup=', $this->Environment->base . $this->Environment->request);
+			$objTemplate->elements = $arrElements;
 
-			echo '</ol>';
-			echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
-			echo '<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" style="float:left;">&lt; Click here to go back</a>';
-			echo '<a href="' . $url . '" style="float:right;">Click here to proceed &gt;</a>';
-			echo '</div>';
-			echo '</div>';
+			unset($arrHidden['bup']);
+			$objTemplate->hidden = $arrHidden;
+			$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['backup'];
 
-			exit;
+			return;
  		}
-
-		echo '<div style="width:720px; margin:0 auto;">';
-		echo '<h1 style="font-family:Verdana,sans-serif; font-size:16px; margin:18px 3px;">Updating files</h1>';
-		echo '<ol style="font-family:Verdana,sans-serif; font-size:11px; height:496px; overflow:auto; background:#eee; border:1px solid #999;">';
 
 		// Unzip the files
 		while ($objArchive->next())
@@ -235,28 +229,28 @@ class LiveUpdate extends Backend implements executable
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 
-				echo '<li>Updated ' . $objArchive->file_name . '</li>';
+				$arrElements[] = 'Updated ' . $objArchive->file_name . '';
 			}
 			catch (Exception $e)
 			{
-				echo '<li style="color:#ff0000;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</li>';
+				$arrElements[] = '<span style="color:#c55;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span>';
 			}
 		}
 
-		// Delete archive
+		$objTemplate->elements = $arrElements;
+
+		unset($arrHidden['token']);
+		$arrHidden['act'] = 'runonce';
+
+		$objTemplate->hidden = $arrHidden;
+		$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['update'];
+
+		// Delete the archive
 		$this->import('Files');
 		$this->Files->delete($archive);
 
-		// Add log entry
-		$this->log('Live update from version ' . VERSION . '.' . BUILD . ' to version ' . $GLOBALS['TL_CONFIG']['latestVersion'] . ' completed', 'ModuleMaintenance runLiveUpdate()', TL_GENERAL);
-
-		echo '</ol>';
-		echo '<div style="font-family:Verdana,sans-serif; font-size:11px; margin:18px 3px 12px 3px; overflow:hidden;">';
-		echo '<a href="main.php?do=maintenance&amp;act=runonce" style="float:right;">Click here to proceed &gt;</a>';
-		echo '</div>';
-		echo '</div>';
-
-		exit;
+		// Add a log entry
+		$this->log('Live update from version ' . VERSION . '.' . BUILD . ' to version ' . $GLOBALS['TL_CONFIG']['latestVersion'] . ' completed', 'LiveUpdate run()', TL_GENERAL);
 	}
 }
 

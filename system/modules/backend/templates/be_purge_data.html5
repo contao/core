@@ -1,5 +1,5 @@
 
-<div id="tl_maintenance_cache">
+<div id="tl_maintenance_cache" class="maintenance_<?php echo $this->isActive ? 'active' : 'inactive'; ?>">
 
 <h2 class="sub_headline"><?php echo $this->cacheHeadline; ?></h2>
 <?php if ($this->cacheMessage): ?>
@@ -30,9 +30,9 @@
   <p class="tl_help tl_tip"><?php echo $this->cacheHelp; ?></p>
 <?php endif; ?>
 </div>
-<div class="tl_submit_container">
-<input type="submit" name="clear" id="clear" class="tl_submit" value="<?php echo $this->cacheSubmit; ?>"> 
 </div>
+<div class="tl_submit_container">
+  <input type="submit" name="clear" id="clear" class="tl_submit" value="<?php echo $this->cacheSubmit; ?>"> 
 </div>
 </form>
 

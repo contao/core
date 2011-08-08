@@ -58,15 +58,18 @@ class RebuildIndex extends Backend implements executable
 	{
 		$time = time();
 		$objTemplate = new BackendTemplate('be_rebuild_index');
+		$objTemplate->action = ampersand($this->Environment->request);
+		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
+		$objTemplate->isActive = $this->isActive();
 
-		// Add error message
+		// Add the error message
 		if ($_SESSION['REBUILD_INDEX_ERROR'] != '')
 		{
 			$objTemplate->indexMessage = $_SESSION['REBUILD_INDEX_ERROR'];
 			$_SESSION['REBUILD_INDEX_ERROR'] = '';
 		}
 
-		// Rebuild index
+		// Rebuild the index
 		if ($this->Input->get('act') == 'index')
 		{
 			$arrPages = $this->findSearchablePages();
@@ -90,7 +93,7 @@ class RebuildIndex extends Backend implements executable
 
 			$this->import('Search');
 
-			// Truncate search tables
+			// Truncate the search tables
 			$this->Database->execute("TRUNCATE TABLE tl_search");
 			$this->Database->execute("TRUNCATE TABLE tl_search_index");
 
@@ -131,13 +134,11 @@ class RebuildIndex extends Backend implements executable
 			$rand = rand();
 			$this->import('String');
 
-			// Display pages
+			// Display the pages
 			for ($i=0; $i<count($arrPages); $i++)
 			{
 				$strBuffer .= '<img src="' . $arrPages[$i] . '#' . $rand . $i . '" alt="" class="invisible">' . $this->String->substr($arrPages[$i], 100) . "<br>\n";
 			}
-
-			$objTemplate = new BackendTemplate('be_index');
 
 			$objTemplate->content = $strBuffer;
 			$objTemplate->note = $GLOBALS['TL_LANG']['tl_maintenance']['indexNote'];
@@ -145,6 +146,7 @@ class RebuildIndex extends Backend implements executable
 			$objTemplate->complete = $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'];
 			$objTemplate->indexContinue = $GLOBALS['TL_LANG']['MSC']['continue'];
 			$objTemplate->theme = $this->getTheme();
+			$objTemplate->isRunning = true;
 
 			return $objTemplate->parse();
 		}
@@ -161,10 +163,8 @@ class RebuildIndex extends Backend implements executable
 
 		// Default variables
 		$objTemplate->user = $arrUser;
-		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->indexLabel = $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][0];
 		$objTemplate->indexHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'][1] : '';
-		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->indexSubmit = $GLOBALS['TL_LANG']['tl_maintenance']['indexSubmit'];
 
 		return $objTemplate->parse();

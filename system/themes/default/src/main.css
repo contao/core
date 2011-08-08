@@ -301,14 +301,36 @@ h2.sub_headline_index {
 	background:#b3b6b3;
 	border-top:1px solid #fff;
 }
-#tl_maintenance_cache .tl_submit_container,#tl_maintenance_update .tl_submit_container,#tl_maintenance_index .tl_submit_container {
-	margin:-12px 0 28px;
-	padding:0;
+.maintenance_inactive .tl_submit_container {
 	background:none;
+	margin:-12px 0 28px;
+	padding-top:0;
+	padding-bottom:0;
 	border:0;
 }
-#tl_maintenance_update,#tl_maintenance_index {
+.maintenance_inactive {
 	margin-top:48px;
+}
+#tl_maintenance_cache {
+	margin-top:0;
+}
+
+/* Live update */
+#tl_live_update {
+	padding:0 18px 18px;
+	line-height:1.5;
+}
+#tl_live_update ol {
+    border:1px solid #ccc;
+    max-height:329px;
+    margin:0 0 6px;
+    overflow:auto;
+    padding:3px 18px 3px 36px;
+    background:#fcfcfc;
+    line-height:1.2;
+}
+#tl_live_update li {
+	padding-bottom:3px;
 }
 
 /* Rebuild the search index */
