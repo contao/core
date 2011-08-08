@@ -1,0 +1,59 @@
+
+<script>
+window.addEvent('domready', function() {
+  new Accordion($$('div.toggler'), $$('div.accordion'), {
+    opacity: false,
+    alwaysHide: true,
+    display: -1, // -1, alle Akkordions sind am Anfang eingeklappt
+    onActive: function(toggler,elem) {
+      elem.setProperty('aria-hidden', 'false');
+      toggler.addClass('active');
+      toggler.getNext().setStyle('visibility', 'visible').fade('in');
+      toggler.setProperty('aria-expanded', 'true');
+      return false;
+    },
+    onBackground: function(toggler,elem) {
+      elem.setProperty('aria-hidden', 'true');
+      toggler.removeClass('active');
+      toggler.getNext().fade('out').setStyle('visibility', 'hidden');
+      toggler.setProperty('aria-expanded', 'false');
+      return false;
+    }
+  });
+  $$('div.toggler>*').each(function(elem) {
+    elem.setProperty('tabindex', '0');
+    elem.addEvents({
+      'keypress': function(event) {
+        if (event.code == 13) {
+          this.getParent().fireEvent('click');
+        }
+      },
+      'focus': function() {
+        this.getParent().addClass('hover');
+      },
+      'blur': function() {
+        this.getParent().removeClass('hover');
+      }
+    });
+  });
+  $$('div.toggler').each(function(elem) {
+    elem.addEvents({
+      'mouseenter': function() {
+        elem.addClass('hover');
+      },
+      'mouseleave': function() {
+        elem.removeClass('hover');
+      }
+    });
+  });
+  $$('div.ce_accordion').each(function(elem) {
+    elem.setProperty('role', 'tablist');
+  });
+  $$('div.toggler').each(function(elem) {
+    elem.setProperty('role', 'tab');
+  });
+  $$('div.accordion').each(function(elem) {
+    elem.setProperty('role', 'tabpanel');
+  });
+});
+</script>
