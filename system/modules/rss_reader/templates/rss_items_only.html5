@@ -9,7 +9,7 @@
 
 <div class="rss_items_only<?php echo $item['class']; ?>">
 <h2><a href="<?php echo $item['link']; ?>" target="_blank"><?php echo $item['title']; ?></a></h2>
-<p class="description"><?php echo $item['description']; ?></p>
+<div class="description"><?php echo $item['description']; ?></div>
 </div>
 <?php endforeach; ?>
 <?php echo $this->pagination; ?>
