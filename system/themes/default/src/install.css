@@ -195,6 +195,9 @@ li {
 fieldset > div {
 	margin-bottom:24px;
 }
+fieldset.last > div {
+	margin-bottom:0;
+}
 fieldset.tl_tbox {
 	margin-top:18px;
 }

@@ -1154,7 +1154,6 @@ window.addEvent('domready', function() {
   </form>
 </div>
 </fieldset>
-<?php if (!$this->adminCreated): ?>
 
 <fieldset class="tl_box<?php if ($this->adminCreated): ?> collapsed<?php endif; ?>">
 <legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['admin'][0]; ?></legend>
@@ -1166,6 +1165,7 @@ window.addEvent('domready', function() {
   <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['adminConfirm']; ?></p>
 <?php endif; ?>
   <p><?php echo $GLOBALS['TL_LANG']['tl_install']['admin'][1]; ?></p>
+<?php if (!$this->adminCreated): ?>
   <form action="<?php echo $this->action; ?>" class="tl_install_form" method="post">
   <div class="tl_formbody">
     <input type="hidden" name="FORM_SUBMIT" value="tl_admin">
@@ -1190,14 +1190,18 @@ window.addEvent('domready', function() {
     </div>
   </div>
   </form>
+<?php endif; ?>
 </div>
 </fieldset>
-<?php else: ?>
+<?php if ($this->adminCreated): ?>
 
-<fieldset class="tl_box nolegend">
+<fieldset class="tl_box last">
+<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></legend>
+<div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></h3>
   <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['installConfirm']; ?></p>
   <p><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][1]; ?></p>
+</div>
 </fieldset>
 <?php endif; ?>
 <?php endif; ?>
