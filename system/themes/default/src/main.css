@@ -315,24 +315,6 @@ h2.sub_headline_index {
 	margin-top:0;
 }
 
-/* Live update */
-#tl_live_update {
-	padding:0 18px 18px;
-	line-height:1.5;
-}
-#tl_live_update ol {
-    border:1px solid #ccc;
-    max-height:329px;
-    margin:0 0 6px;
-    overflow:auto;
-    padding:3px 18px 3px 36px;
-    background:#fcfcfc;
-    line-height:1.2;
-}
-#tl_live_update li {
-	padding-bottom:3px;
-}
-
 /* Rebuild the search index */
 #tl_rebuild_index {
 	padding:0 18px 18px;

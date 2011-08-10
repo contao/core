@@ -78,27 +78,25 @@ class LiveUpdate extends Backend implements executable
 		}
 
 		// Newer version available
-		elseif ($GLOBALS['TL_CONFIG']['latestVersion'] != '' && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
+		elseif (isset($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->updateClass = 'tl_info';
 			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
 		}
 
 		// Live update error
-		if ($_SESSION['LIVE_UPDATE_ERROR'] != '')
+		if (isset($_SESSION['LIVE_UPDATE_ERROR']))
 		{
 			$objTemplate->updateClass = 'tl_error';
 			$objTemplate->updateMessage = $_SESSION['LIVE_UPDATE_ERROR'];
-
 			$_SESSION['LIVE_UPDATE_ERROR'] = '';
 		}
 
 		// Live update successful
-		if ($_SESSION['LIVE_UPDATE_CONFIRM'] != '')
+		if (isset($_SESSION['LIVE_UPDATE_CONFIRM']))
 		{
 			$objTemplate->updateClass = 'tl_confirm';
 			$objTemplate->updateMessage = $_SESSION['LIVE_UPDATE_CONFIRM'];
-
 			$_SESSION['LIVE_UPDATE_CONFIRM'] = '';
 		}
 
@@ -145,7 +143,6 @@ class LiveUpdate extends Backend implements executable
 			{
 				$objTemplate->updateClass = 'tl_error';
 				$objTemplate->updateMessage = $objRequest->response;
-
 				return;
 			}
 
@@ -154,36 +151,59 @@ class LiveUpdate extends Backend implements executable
 			$objFile->close();
 		}
 
+		// Create a minimalistic HTML5 document
+		echo '<!DOCTYPE html>'
+			.'<head>'
+			  .'<meta charset="utf-8">'
+			  .'<title>Contao Live Update</title>'
+			  .'<style>'
+			    .'body { background:#f5f5f5 url("../system/themes/default/images/hbg.jpg") left top repeat-x; font-family:Verdana,sans-serif; font-size:11px; color:#444; padding:1em; }'
+			    .'div { max-width:640px; margin:0 auto; border:1px solid #bbb; background:#fff; }'
+			    .'h1 { font-size:12px; color:#fff; margin:1px; padding:2px 6px 4px; background:#b3b6b3 url("../system/themes/default/images/headline.gif") left top repeat-x; }'
+			    .'h2 { font-size:14px; color:#8ab858; margin:18px 15px; padding:6px 42px 8px; background:url("../system/themes/default/images/current.gif") left center no-repeat; }'
+			    .'ol { border:1px solid #ccc; max-height:430px; margin:0 15px; overflow:auto; padding:3px 18px 3px 48px; background:#fcfcfc; }'
+			    .'li { margin-bottom:3px; }'
+			    .'p { margin:0 12px; padding:0; overflow:hidden; }'
+			    .'.button { font-family:"Trebuchet MS",Verdana,sans-serif; font-size:12px; display:block; float:right; margin:18px 3px; border-radius:3px; background:#808080; text-decoration:none; color:#fff; padding:4px 18px; box-shadow:0 1px 3px #bbb; text-shadow:1px 1px 0 #666; }'
+			    .'.button:hover,.button:focus { box-shadow:0 0 6px #8ab858; }'
+			    .'.button:active { background:#8ab858; }'
+			  .'</style>'
+			.'<body>'
+			.'<div>';
+
 		$objArchive = new ZipReader($archive);
-		$arrHidden = array();
 
-		foreach (array_keys($_GET) as $key)
-		{
-			$arrHidden[$key] = $this->Input->get($key);
-		}
-
-		$objTemplate->isRunning = true;
-		$objTemplate->action = ampersand($this->Environment->request);
-		$objTemplate->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
-		$arrElements = array();
-
-		// Show the files
+		// Table of contents
 		if ($this->Input->get('toc'))
 		{
 			$arrFiles = $objArchive->getFileList();
 			array_shift($arrFiles);
-			$objTemplate->elements = $arrFiles;
 
-			unset($arrHidden['toc']);
-			$objTemplate->hidden = $arrHidden;
-			$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['toc'];
+			echo '<hgroup>'
+				  .'<h1>Contao Live Update</h1>'
+				  .'<h2>' . $GLOBALS['TL_LANG']['tl_maintenance']['toc'] . '</h2>'
+				.'</hgroup>'
+				.'<ol>'
+				  .'<li>' . implode('</li><li>', $arrFiles) . '</li>'
+				.'</ol>'
+				.'<p>'
+				  .'<a href="' . ampersand(str_replace('toc=1', 'toc=', $this->Environment->base . $this->Environment->request)) . '" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'</p>'
+				.'</div>';
 
-			return;
+			exit;
 		}
 
-		// Create the backup
+		// Backup
 		if ($this->Input->get('bup'))
 		{
+			echo '<hgroup>'
+				  .'<h1>Contao Live Update</h1>'
+				  .'<h2>' . $GLOBALS['TL_LANG']['tl_maintenance']['backup'] . '</h2>'
+				.'</hgroup>'
+				.'<ol>';
+
 			$arrFiles = $objArchive->getFileList();
 			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
 
@@ -197,25 +217,33 @@ class LiveUpdate extends Backend implements executable
 				try
 				{
 					$objBackup->addFile($strFile);
-					$arrElements[] = 'Backed up ' . $strFile;
+					echo '<li>Backed up ' . $strFile . '</li>';
 				}
 				catch (Exception $e)
 				{
-					$arrElements[] = 'Skipped ' . $strFile . ' (' . $e->getMessage() . ')';
+					echo '<li>' . $e->getMessage() . ' (skipped)</li>';
 				}
 			}
 
 			$objBackup->close();
-			$objTemplate->elements = $arrElements;
 
-			unset($arrHidden['bup']);
-			$objTemplate->hidden = $arrHidden;
-			$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['backup'];
+			echo '</ol>'
+				.'<p>'
+				  .'<a href="' . ampersand(str_replace('bup=1', 'bup=', $this->Environment->base . $this->Environment->request)) . '" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+				  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance" id="back" class="button">' . $GLOBALS['TL_LANG']['MSC']['cancelBT'] . '</a>'
+				  .'</p>'
+				.'</div>';
 
-			return;
+			exit;
  		}
 
-		// Unzip the files
+ 		echo '<hgroup>'
+			  .'<h1>Contao Live Update</h1>'
+			  .'<h2>' . $GLOBALS['TL_LANG']['tl_maintenance']['update'] . '</h2>'
+			.'</hgroup>'
+			.'<ol>';
+
+		// Update
 		while ($objArchive->next())
 		{
 			if ($objArchive->file_name == 'TOC.txt')
@@ -229,21 +257,13 @@ class LiveUpdate extends Backend implements executable
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 
-				$arrElements[] = 'Updated ' . $objArchive->file_name . '';
+				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
 			catch (Exception $e)
 			{
-				$arrElements[] = '<span style="color:#c55;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span>';
+				echo '<li><span style="color:#c55;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
 			}
 		}
-
-		$objTemplate->elements = $arrElements;
-
-		unset($arrHidden['token']);
-		$arrHidden['act'] = 'runonce';
-
-		$objTemplate->hidden = $arrHidden;
-		$objTemplate->headline = $GLOBALS['TL_LANG']['tl_maintenance']['update'];
 
 		// Delete the archive
 		$this->import('Files');
@@ -251,6 +271,14 @@ class LiveUpdate extends Backend implements executable
 
 		// Add a log entry
 		$this->log('Live update from version ' . VERSION . '.' . BUILD . ' to version ' . $GLOBALS['TL_CONFIG']['latestVersion'] . ' completed', 'LiveUpdate run()', TL_GENERAL);
+
+		echo '</ol>'
+			.'<p>'
+			  .'<a href="' . $this->Environment->base . 'contao/main.php?do=maintenance&amp;act=runonce" id="continue" class="button">' . $GLOBALS['TL_LANG']['MSC']['continue'] . '</a>'
+			.'</p>'
+			.'</div>';
+
+		exit;
 	}
 }
 
