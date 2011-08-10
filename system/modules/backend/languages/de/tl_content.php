@@ -106,6 +106,7 @@ $GLOBALS['TL_LANG']['tl_content']['dwnconfig_legend'] = 'Download-Einstellungen'
 $GLOBALS['TL_LANG']['tl_content']['include_legend']   = 'Include-Einstellungen';
 $GLOBALS['TL_LANG']['tl_content']['protected_legend'] = 'Zugriffsschutz';
 $GLOBALS['TL_LANG']['tl_content']['expert_legend']    = 'Experten-Einstellungen';
+$GLOBALS['TL_LANG']['tl_content']['template_legend']  = 'Template-Einstellungen';
 
 
 /**
