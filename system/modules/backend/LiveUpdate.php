@@ -158,7 +158,7 @@ class LiveUpdate extends Backend implements executable
 			  .'<title>Contao Live Update</title>'
 			  .'<style>'
 			    .'body { background:#f5f5f5 url("../system/themes/default/images/hbg.jpg") left top repeat-x; font-family:Verdana,sans-serif; font-size:11px; color:#444; padding:1em; }'
-			    .'div { max-width:640px; margin:0 auto; border:1px solid #bbb; background:#fff; }'
+			    .'div { max-width:680px; margin:0 auto; border:1px solid #bbb; background:#fff; }'
 			    .'h1 { font-size:12px; color:#fff; margin:1px; padding:2px 6px 4px; background:#b3b6b3 url("../system/themes/default/images/headline.gif") left top repeat-x; }'
 			    .'h2 { font-size:14px; color:#8ab858; margin:18px 15px; padding:6px 42px 8px; background:url("../system/themes/default/images/current.gif") left center no-repeat; }'
 			    .'ol { border:1px solid #ccc; max-height:430px; margin:0 15px; overflow:auto; padding:3px 18px 3px 48px; background:#fcfcfc; }'
