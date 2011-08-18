@@ -888,9 +888,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			// Redirect or reload
 			elseif (!$error)
 			{
-				/**
-				 * Do not purge the html folder (see #2898)
-				 */
+				// Do not purge the html folder (see #2898)
 
 				if ($this->Input->post('uploadNback') && !$blnResized)
 				{

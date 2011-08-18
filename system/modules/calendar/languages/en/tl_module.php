@@ -41,7 +41,7 @@ $GLOBALS['TL_LANG']['tl_module']['cal_template']      = array('Event template', 
 $GLOBALS['TL_LANG']['tl_module']['cal_ctemplate']     = array('Calendar template', 'Here you can select the calendar template.');
 $GLOBALS['TL_LANG']['tl_module']['cal_startDay']      = array('Week start day', 'Here you can choose the week start day.');
 $GLOBALS['TL_LANG']['tl_module']['cal_showQuantity']  = array('Show number of events', 'Show the number of events of each month in the menu.');
-$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'] = array('Ignore URI parameters', 'Do not switch the time period based on the date/month/year URI parameters.');
+$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'] = array('Ignore URL parameters', 'Do not switch the time period based on the date/month/year URL parameters.');
 
 
 /**

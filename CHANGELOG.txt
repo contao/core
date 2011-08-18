@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.10.1 (XXXX-XX-XX)
+---------------------------
+- Fixed: remove single-line comments when minifying inline HTML (#3359)
+
 Version 2.10.0 (2011-08-11)
 ---------------------------
 - Updated: updated TinyMCE to version 3.4.3.2 (#3230)
