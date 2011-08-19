@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.1 (XXXX-XX-XX)
 ---------------------------
+- Added: try to create missing CSS files before throwing the Combiner exception (#3350)
 - Fixed: remove single-line comments when minifying inline HTML (#3359)
 - Fixed: events with images had a wrong href in the eventlist (#3370)
 - Fixed: do not store URLs with the "state" parameter as referer (#3365)

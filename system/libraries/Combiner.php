@@ -106,7 +106,14 @@ class Combiner extends System
 		// Check the source file
 		if (!file_exists(TL_ROOT . '/' . $strFile))
 		{
-			throw new Exception("File $strFile does not exist");
+			$this->import('StyleSheets');
+			$this->StyleSheets->updateStyleSheets();
+
+			// Retry
+			if (!file_exists(TL_ROOT . '/' . $strFile))
+			{
+				throw new Exception("File $strFile does not exist");
+			}
 		}
 
 		// Default version
