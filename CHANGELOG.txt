@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.1 (XXXX-XX-XX)
 ---------------------------
+- Updated: updated TinyMCE to version 3.4.4 (#3329)
 - Added: try to create missing CSS files before throwing the Combiner exception (#3350)
 - Added: make the file extension available in the download(s) templates (#3252)
 - Improved: store the copyright notice in the cached file (#3342)
