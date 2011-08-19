@@ -340,7 +340,7 @@ abstract class Template extends Controller
 
 				// Minify inline scripts
 				$strChunk = str_replace("/* <![CDATA[ */\n", '/* <![CDATA[ */', $strChunk);
-				$strChunk = preg_replace(array('@//.*@', '/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
+				$strChunk = preg_replace(array('@(?<!:)//.*@', '/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
 				$strChunk = trim($strChunk);
 			}
 			else
