@@ -290,6 +290,7 @@ class ModuleEventlist extends Events
 				}
 
 				$this->addImageToTemplate($objTemplate, $event);
+				$objTemplate->href = $event['href']; // Reset the href (see #3370)
 			}
 
 			$objTemplate->enclosure = array();

@@ -174,13 +174,13 @@ abstract class Events extends Module
 			}
 		}
 
-		// Sort data
+		// Sort the array
 		foreach (array_keys($this->arrEvents) as $key)
 		{
 			ksort($this->arrEvents[$key]);
 		}
 
-		// HOOK: modify result set
+		// HOOK: modify the result set
 		if (isset($GLOBALS['TL_HOOKS']['getAllEvents']) && is_array($GLOBALS['TL_HOOKS']['getAllEvents']))
 		{
 			foreach ($GLOBALS['TL_HOOKS']['getAllEvents'] as $callback)
