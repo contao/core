@@ -85,14 +85,14 @@ class BackendUser extends User
 		$session = $this->Session->getData();
 
 		// Main script
-		if ($this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri)
 		{
 			$session['referer']['last'] = $session['referer']['current'];
 			$session['referer']['current'] = $this->Environment->requestUri;
 		}
 
 		// File manager
-		if ($this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri && !$this->Input->get('act') && !$this->Input->get('key') && !$this->Input->get('token'))
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri)
 		{
 			$session['fileReferer']['last'] = $session['referer']['current'];
 			$session['fileReferer']['current'] = $this->Environment->requestUri;
