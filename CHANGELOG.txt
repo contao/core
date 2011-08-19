@@ -6,6 +6,7 @@ Version 2.10.1 (XXXX-XX-XX)
 ---------------------------
 - Fixed: remove single-line comments when minifying inline HTML (#3359)
 - Fixed: events with images had a wrong href in the eventlist (#3370)
+- Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)
 ---------------------------

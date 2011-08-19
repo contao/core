@@ -1356,7 +1356,7 @@ class StyleSheets extends Backend
 						$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrChunks[1]);
 						$varValue = preg_replace('/[^0-9\.-]+/', '', $arrChunks[1]);
 					}
-					$arrSet['size'] = 1;
+					$arrSet['positioning'] = 1;
 					$arrSet['trbl'][$strKey] = $varValue;
 					if ($strUnit != '')
 					{
