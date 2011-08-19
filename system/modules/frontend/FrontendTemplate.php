@@ -130,10 +130,30 @@ class FrontendTemplate extends Template
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
+			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 			// Create the cache file
 			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n" . $this->minifyHtml($strBuffer));
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
+
+			/**
+			 * Copyright notice
+			 * 
+			 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
+			 * PERMITTED TO RUN CONTAO WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
+			 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
+			 */
+			$objFile->append(preg_replace
+			(
+				'/([ \t]*<title[^>]*>)\n*/',
+				"<!--\n\n"
+				. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
+				. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
+				. "\tVisit the project website at http://www.contao.org for more information\n\n"
+				. "//-->$lb$1",
+				$this->minifyHtml($strBuffer), 1
+			), '');
+
 			$objFile->close();
 		}
 
@@ -183,12 +203,6 @@ class FrontendTemplate extends Template
 
 				$this->Search->indexPage($arrData);
 			}
-		}
-
-		// Convert the output to XHTML
-		if ($this->isXhtml)
-		{
-			$this->strBuffer = $this->convertToXhtml($this->strBuffer);
 		}
 
 		parent::output();

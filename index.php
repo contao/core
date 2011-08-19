@@ -257,26 +257,6 @@ class Index extends Frontend
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
-		$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
-
-		/**
-		 * Copyright notice
-		 * 
-		 * ACCORDING TO THE LESSER GENERAL PUBLIC LICENSE (LGPL),YOU ARE NOT
-		 * PERMITTED TO RUN CONTAO WITHOUT THIS COPYRIGHT NOTICE. CHANGING,
-		 * REMOVING OR OBSTRUCTING IT IS PROHIBITED BY LAW!
-		 */
-		$strBuffer = preg_replace
-		(
-			'/([ \t]*<title[^>]*>)\n*/',
-			"<!--\n\n"
-			. "\tThis website is powered by Contao Open Source CMS :: Licensed under GNU/LGPL\n"
-			. "\tCopyright ©2005-" . date('Y') . " by Leo Feyer :: Extensions are copyright of their respective owners\n"
-			. "\tVisit the project website at http://www.contao.org for more information\n\n"
-			. "//-->$lb$1",
-			$strBuffer, 1
-		);
-
 		// Session required to determine the referer
 		$this->import('Session');
 		$session = $this->Session->getData();
