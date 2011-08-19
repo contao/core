@@ -171,7 +171,11 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 	{
 		header('HTTP/1.1 400 Bad Request');
 
-		if (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
+		if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
+		{
+			include(TL_ROOT . '/templates/be_referer.html5');
+		}
+		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
 		{
 			include(TL_ROOT . '/system/modules/backend/templates/be_referer.html5');
 		}

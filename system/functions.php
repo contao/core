@@ -201,7 +201,6 @@ function __exception($e)
 							$e->getLine());
 
 		$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
-
 		echo '<br>' . $strMessage;
 	}
 
