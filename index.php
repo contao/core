@@ -72,7 +72,7 @@ class Index extends Frontend
 	{
 		global $objPage;
 
-		// Get page ID
+		// Get the page ID
 		$pageId = $this->getPageIdFromUrl();
 
 		// Load a website root page object if there is no page ID
@@ -100,14 +100,13 @@ class Index extends Frontend
 		if ($objPage->numRows > 1)
 		{
 			$objNewPage = null;
-			$strHost = $this->Environment->host;
 
 			while ($objPage->next())
 			{
 				$objCurrentPage = $this->getPageDetails($objPage->id);
 
 				// Look for a root page whose domain name matches the host name
-				if ($objCurrentPage->domain == $strHost || $objCurrentPage->domain == 'www.' . $strHost)
+				if ($objCurrentPage->domain == $this->Environment->host)
 				{
 					$objNewPage = $objCurrentPage;
 					break;
@@ -157,16 +156,13 @@ class Index extends Frontend
 		}
 
 		// Check whether there are domain name restrictions
-		if (strlen($objPage->domain))
+		if ($objPage->domain != '')
 		{
-			$strDomain = preg_replace('/^www\./i', '', $objPage->domain);
-			$strHost = preg_replace('/^www\./i', '', $this->Environment->host);
-
 			// Load an error 404 page object
-			if ($strDomain != $strHost)
+			if ($objPage->domain != $this->Environment->host)
 			{
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
-				$objHandler->generate($objPage->id, $strDomain, $strHost);
+				$objHandler->generate($objPage->id, $objPage->domain, $this->Environment->host);
 			}
 		}
 

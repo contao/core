@@ -394,7 +394,7 @@ abstract class Backend extends Controller
 			}
 
 			// Skip websites that run under a different domain (see #2387)
-			if ($objPage->domain && $objPage->domain != $this->Environment->host && $objPage->domain != 'www.' . $this->Environment->host)
+			if ($objPage->domain && $objPage->domain != $this->Environment->host)
 			{
 				continue;
 			}
@@ -431,7 +431,7 @@ abstract class Backend extends Controller
 			if ($objPages->type == 'root')
 			{
 				// Skip websites that run under a different domain
-				if ($objPages->dns && $objPages->dns != $this->Environment->host && $objPages->dns != 'www.' . $this->Environment->host)
+				if ($objPages->dns && $objPages->dns != $this->Environment->host)
 				{
 					continue;
 				}
