@@ -228,9 +228,19 @@ class DataContainer extends Backend
 		// Use strlen() here (see #3277)
 		if ($arrData['eval']['mandatory'])
 		{
-			if ((is_array($this->varValue) && empty($this->varValue)) || !strlen($this->varValue))
+			if (is_array($this->varValue))
 			{
-				$arrData['eval']['required'] = true;
+				 if (empty($this->varValue))
+				 {
+				 	$arrData['eval']['required'] = true;
+				 }
+			}
+			else
+			{
+				if (!strlen($this->varValue))
+				{
+					$arrData['eval']['required'] = true;
+				}
 			}
 		}
 
