@@ -166,10 +166,12 @@ class CheckBox extends Widget
 
 		if ($this->multiple)
 		{
-			return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container%s"><legend>%s%s</legend>%s%s</fieldset>%s',
+			return sprintf('<fieldset id="ctrl_%s" class="tl_checkbox_container%s"><legend>%s%s%s%s</legend>%s%s</fieldset>%s',
 							$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
+							($this->required ? '<span class="mandatory">*</span>' : ''),
 							$this->xlabel,
 							($blnCheckAll ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_' . $this->strId . '\')"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>' : ''),
 							str_replace('<br></fieldset><br>', '</fieldset>', implode('<br>', $arrOptions)),

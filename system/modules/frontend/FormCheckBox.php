@@ -175,13 +175,27 @@ class FormCheckBox extends Widget
 									$arrOption['label']);
 		}
 
-        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
-        				$this->strId,
-						(($this->strClass != '') ? ' ' . $this->strClass : ''),
-						(($this->strLabel != '') ? '<legend>' . $this->strLabel . '</legend>' : ''),
-						$this->strName,
-						$this->strTagEnding,
-						$strOptions) . $this->addSubmit();
+		if ($this->strLabel != '')
+		{
+        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend><input type="hidden" name="%s" value=""%s%s</fieldset>',
+	        				$this->strId,
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
+							$this->strLabel,
+							($this->required ? '<span class="mandatory">*</span>' : ''),
+							$this->strName,
+							$this->strTagEnding,
+							$strOptions) . $this->addSubmit();
+		}
+		else
+		{
+	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><input type="hidden" name="%s" value=""%s%s</fieldset>',
+    	    				$this->strId,
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							$this->strName,
+							$this->strTagEnding,
+							$strOptions) . $this->addSubmit();
+		}
 	}
 }
 
