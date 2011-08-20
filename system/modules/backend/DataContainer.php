@@ -162,7 +162,7 @@ class DataContainer extends Backend
 		// Redirect if the field is excluded
 		if ($arrData['exclude'])
 		{
-			$this->log('Field "'.$this->strField.'" ('.$this->strTable.') was excluded from being edited', 'DataContainer row()', TL_ERROR);
+			$this->log('Field "'.$this->strField.'" of table "'.$this->strTable.'" was excluded from being edited', 'DataContainer row()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 

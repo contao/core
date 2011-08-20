@@ -450,7 +450,14 @@ window.addEvent(\'domready\', function() {
 			// Add a log entry
 			if (!is_array(deserialize($prior)) && !is_array($deserialize))
 			{
-				$this->log('Global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', 'DC_File save()', TL_CONFIGURATION);
+				if ($arrData['inputType'] == 'password' || $arrData['inputType'] == 'textStore')
+				{
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed', 'DC_File save()', TL_CONFIGURATION);
+				}
+				else
+				{
+					$this->log('The global configuration variable "'.$this->strField.'" has been changed from "'.$prior.'" to "'.$varValue.'"', 'DC_File save()', TL_CONFIGURATION);
+				}
 			}
 
 			// Set the new value so the input field can show it

@@ -13,6 +13,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: do not store URLs with the "state" parameter as referer (#3365)
 - Fixed: never add "www." to root page domains (#3373)
 - Fixed: the new checkbox and radio button fields were not marked as mandatory (#3389)
+- Fixed: do not store password and textStore field changes in the system log (#3394)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)
