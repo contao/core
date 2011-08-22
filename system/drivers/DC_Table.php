@@ -1997,13 +1997,13 @@ window.addEvent(\'domready\', function() {
 				$class = 'tl_box block';
 				$formFields = array();
 
-				// Get field values
-				$objValue = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
-										   ->limit(1)
-										   ->execute($this->intId);
+				// Get the field values
+				$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+										 ->limit(1)
+										 ->executeUncached($this->intId);
 
 				// Store the active record
-				$this->objActiveRecord = $objValue;
+				$this->objActiveRecord = $objRow;
 
 				foreach ($this->strPalette as $v)
 				{
@@ -2044,12 +2044,12 @@ window.addEvent(\'domready\', function() {
 					$this->strInputName = $v.'_'.$this->intId;
 					$formFields[] = $v.'_'.$this->intId;
 
-					// Set default value and try to load the current value from DB
+					// Set the default value and try to load the current value from DB
 					$this->varValue = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['default'] : '';
 
-					if ($objValue->$v !== false)
+					if ($objRow->$v !== false)
 					{
-						$this->varValue = $objValue->$v;
+						$this->varValue = $objRow->$v;
 					}
 
 					// Call load_callback
@@ -2094,7 +2094,7 @@ window.addEvent(\'domready\', function() {
 						$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 					}
 
-					// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
 					$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
 								   ->execute(time(), $this->intId);
 				}
@@ -2271,6 +2271,13 @@ window.addEvent(\'domready\', function() {
 					$this->values = array($this->intId);
 					$this->blnCreateNewVersion = false;
 
+					// Get the field values
+					$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+											 ->limit(1)
+											 ->executeUncached($this->intId);
+
+					// Store the active record
+					$this->objActiveRecord = $objRow;
 					$this->createInitialVersion($this->strTable, $this->intId);
 
 					// Store all fields
@@ -2313,7 +2320,7 @@ window.addEvent(\'domready\', function() {
 							$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
 						}
 
-						// Set current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
+						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
 						$this->Database->prepare("UPDATE " . $this->strTable . " SET tstamp=? WHERE id=?")
 									   ->execute(time(), $this->intId);
 					}
