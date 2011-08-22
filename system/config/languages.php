@@ -178,4 +178,72 @@ $languages = array
 	'zu' => 'Zulu'
 );
 
+
+/**
+ * Native language names
+ */
+$langsNative = array
+(
+	'ar' => 'العربية',
+	'az' => 'Azərbaycan dili',
+	'be' => 'Беларуская',
+	'bg' => 'Български',
+	'bn' => 'বাংলা',
+	'bs' => 'Bosanski',
+	'ca' => 'Català',
+	'cs' => 'Čeština',
+	'cy' => 'Cymraeg',
+	'da' => 'Dansk',
+	'de' => 'Deutsch',
+	'el' => 'Ελληνικά',
+	'en' => 'English',
+	'eo' => 'Esperanto',
+	'es' => 'Español',
+	'et' => 'Eesti',
+	'eu' => 'Euskara',
+	'fa' => 'فارسی',
+	'fi' => 'Suomi',
+	'fo' => 'Føroyskt',
+	'fr' => 'Français',
+	'he' => 'עברית',
+	'hi' => 'हिन्दी',
+	'hr' => 'Hrvatski',
+	'hu' => 'Magyar',
+	'hy' => 'Հայերեն',
+	'id' => 'Bahasa Indonesia',
+	'is' => 'Íslenska',
+	'it' => 'Italiano',
+	'ja' => '日本語',
+	'ka' => 'ქართული',
+	'ko' => '한국어',
+	'ku' => 'Kurdî',
+	'lt' => 'Lietuvių',
+	'lv' => 'Latviešu',
+	'mk' => 'Македонски',
+	'ml' => 'മലയാളം',
+	'ms' => 'Bahasa Melayu',
+	'ne' => 'नेपाली',
+	'nl' => 'Nederlands',
+	'no' => 'Norsk',
+	'pa' => 'ਪੰਜਾਬੀ',
+	'pl' => 'Polski',
+	'ps' => 'پښتو',
+	'pt' => 'Português',
+	'ro' => 'Română',
+	'ru' => 'Pусский',
+	'sk' => 'Slovenčina',
+	'sl' => 'Slovenščina',
+	'sr' => 'Српски',
+	'sv' => 'Svenska',
+	'sw' => 'Kiswahili',
+	'ta' => 'தமிழ்',
+	'te' => 'తెలుగు',
+	'th' => 'ภาษาไทย',
+	'tl' => 'Filipino',
+	'tr' => 'Türkçe',
+	'uk' => 'Українська',
+	'vi' => 'Tiếng Việt',
+	'zh' => '中文(简体)'
+);
+
 ?>

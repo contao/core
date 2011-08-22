@@ -734,6 +734,7 @@ abstract class Controller extends System
 		$return = array();
 		$languages = array();
 		$arrAux = array();
+		$langsNative = array();
 
 		$this->loadLanguageFile('languages');
 		include(TL_ROOT . '/system/config/languages.php');
@@ -754,6 +755,11 @@ abstract class Controller extends System
 			}
 
 			$return[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
+
+			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
+			{
+				$return[$strKey] .= ' - ' . $langsNative[$strKey];
+			}
 		}
 
 		return $return;
