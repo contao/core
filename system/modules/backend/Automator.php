@@ -165,7 +165,7 @@ class Automator extends Backend
 		}
 
 		// Add log entry
-		$this->log('Purged thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
+		$this->log('Purged the thumbnail directory', 'Automator purgeHtmlFolder()', TL_CRON);
 	}
 
 
@@ -193,7 +193,7 @@ class Automator extends Backend
 		$this->StyleSheets->updateStyleSheets();
 
 		// Add log entry
-		$this->log('Purged scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
+		$this->log('Purged the scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
 	}
 
 
@@ -225,7 +225,7 @@ class Automator extends Backend
 		}
 
 		// Add log entry
-		$this->log('Purged temporary directory', 'Automator purgeTempFolder()', TL_CRON);
+		$this->log('Purged the temporary directory', 'Automator purgeTempFolder()', TL_CRON);
 	}
 
 

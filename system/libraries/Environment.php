@@ -254,7 +254,7 @@ class Environment
 		$ua = strip_tags($_SERVER['HTTP_USER_AGENT']);
 		$ua = preg_replace('/javascript|vbscri?pt|script|applet|alert|document|write|cookie/i', '', $ua);
 
-		return $ua;
+		return substr($ua, 0, 255);
 	}
 
 
@@ -324,7 +324,7 @@ class Environment
 			return $_SERVER['HTTP_X_FORWARDED_FOR'];
 		}
 
-		return $_SERVER['REMOTE_ADDR'];
+		return substr($_SERVER['REMOTE_ADDR'], 0, 64);
 	}
 
 
@@ -422,8 +422,10 @@ class Environment
 	 */
 	protected function agent()
 	{
-		$return = new stdClass();
 		$ua = $this->httpUserAgent;
+
+		$return = new stdClass();
+		$return->string = $ua;
 
 		// Operating system (check Windows CE before Windows and Android before Linux!)
 		switch (true)

@@ -158,15 +158,21 @@ abstract class System
 	protected function log($strText, $strFunction, $strAction)
 	{
 		$this->import('Database');
+
+		$strUa = 'N/A';
 		$strIp = '127.0.0.1';
 
+		if ($this->Environment->httpUserAgent)
+		{
+			$strUa = $this->Environment->httpUserAgent;
+		}
 		if ($this->Environment->remoteAddr)
 		{
 			$strIp = $this->Environment->remoteAddr;
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
-					   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $this->Environment->httpUserAgent);
+					   ->execute(time(), (TL_MODE == 'FE' ? 'FE' : 'BE'), $strAction, ($GLOBALS['TL_USERNAME'] ? $GLOBALS['TL_USERNAME'] : ''), specialchars($strText), $strFunction, $strIp, $strUa);
 
 		// HOOK: allow to add custom loggers
 		if (isset($GLOBALS['TL_HOOKS']['addLogEntry']) && is_array($GLOBALS['TL_HOOKS']['addLogEntry']))
