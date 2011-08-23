@@ -300,7 +300,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['padding'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'align' => array
 		(
@@ -405,7 +405,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderwidth'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'borderstyle' => array
 		(
@@ -429,7 +429,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderradius'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'bordercollapse' => array
 		(
@@ -443,7 +443,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'font' => array
 		(
@@ -462,7 +462,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontsize'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'fontcolor' => array
 		(
@@ -479,7 +479,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['lineheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'fontstyle' => array
 		(
@@ -507,21 +507,21 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['textindent'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'letterspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['letterspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'wordspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['wordspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'list' => array
 		(
