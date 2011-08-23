@@ -39,7 +39,9 @@
 
 <script type="text/javascript">
 /* <![CDATA[ */
-window.scrollTo(null, ($('tl_login').getElement('p.error').getPosition().y - 20));
+try {
+  window.scrollTo(null, ($('tl_login').getElement('p.error').getPosition().y - 20));
+} catch(e) {}
 /* ]]> */
 </script>
 <?php endif; ?>

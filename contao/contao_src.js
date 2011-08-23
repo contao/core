@@ -55,7 +55,7 @@ Request.Mixed = new Class(
 			{
 				this.options.url = options.field.getParent('form').getAttribute('action');
 			}
-			catch(err) {}
+			catch(e) {}
 		}
 
 		this.parent(options);
@@ -69,7 +69,7 @@ Request.Mixed = new Class(
 		{
 			json = this.response.json = JSON.decode(text, this.options.secure);
 		}
-		catch (error)
+		catch(error)
 		{
 			alert(error);
 			return;
@@ -126,7 +126,7 @@ Request.Contao = new Class(
 			{
 				this.options.url = options.field.getParent('form').getAttribute('action');
 			}
-			catch(err) {}
+			catch(e) {}
 		}
 
 		this.parent(options);
@@ -140,7 +140,7 @@ Request.Contao = new Class(
 		{
 			json = this.response.json = JSON.decode(text, this.options.secure);
 		}
-		catch (error)
+		catch(error)
 		{
 			alert(error);
 			return;
