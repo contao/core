@@ -323,11 +323,11 @@ class DataContainer extends Backend
 			switch ($rgxp)
 			{
 				case 'datim':
-					$time = ",\n      timePicker: true";
+					$time = ",\n      timePicker:true";
 					break;
 
 				case 'time':
-					$time = ",\n      timePickerOnly: true";
+					$time = ",\n      timePickerOnly:true";
 					break;
 
 				default:
@@ -339,17 +339,17 @@ class DataContainer extends Backend
   <script>
   window.addEvent(\'domready\', function() {
     new DatePicker(\'#ctrl_' . $objWidget->id . '\', {
-      allowEmpty: true,
-      toggleElements: \'#toggle_' . $objWidget->id . '\',
-      pickerClass: \'datepicker_dashboard\',
-      format: \'' . $format . '\',
-      inputOutputFormat: \'' . $format . '\',
-      positionOffset: { x:130, y:-185 }' . $time . ',
-      startDay: ' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      days: [\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
-      dayShort: ' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
-      months: [\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
-      monthShort: ' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
+      allowEmpty:true,
+      toggleElements:\'#toggle_' . $objWidget->id . '\',
+      pickerClass:\'datepicker_dashboard\',
+      format:\'' . $format . '\',
+      inputOutputFormat:\'' . $format . '\',
+      positionOffset:{x:130,y:-185}' . $time . ',
+      startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
+      days:[\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
+      dayShort:' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
+      months:[\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
+      monthShort:' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
     });
   });
   </script>';

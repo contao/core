@@ -705,7 +705,6 @@ class ModuleTasks extends BackendModule
 		$widget->name = 'deadline';
 		$widget->mandatory = true;
 		$widget->rgxp = 'date';
-		$widget->datepicker = true;
 		$widget->value = $value;
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['deadline'][0];

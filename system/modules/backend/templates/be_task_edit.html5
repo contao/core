@@ -18,13 +18,27 @@
   <p class="tl_help"><?php echo $this->title->help; ?></p>
 <?php endif; ?>
   <h3><?php echo $this->deadline->generateLabel(); ?></h3>
-  <?php echo $this->deadline->generateWithError(); ?> 
+  <?php echo $this->deadline->generateWithError(); ?> <img src="<?php echo TL_PLUGINS_URL; ?>plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_<?php echo $this->deadline->id; ?>" style="vertical-align:-6px;">
+  <script>
+  window.addEvent('domready', function() {
+    new DatePicker('#ctrl_<?php echo $this->deadline->name; ?>', {
+      allowEmpty:true,
+      toggleElements:'#toggle_<?php echo $this->deadline->id; ?>',
+      pickerClass:'datepicker_dashboard',
+      format:'<?php echo $GLOBALS['TL_CONFIG']['dateFormat']; ?>',
+      inputOutputFormat:'<?php echo $GLOBALS['TL_CONFIG']['dateFormat']; ?>',
+      positionOffset:{x:130,y:-185},
+      startDay:<?php echo $GLOBALS['TL_LANG']['MSC']['weekOffset']; ?>,
+      days:['<?php echo implode("','", $GLOBALS['TL_LANG']['DAYS']); ?>'],
+      dayShort:<?php echo $GLOBALS['TL_LANG']['MSC']['dayShortLength']; ?>,
+      months:['<?php echo implode("','", $GLOBALS['TL_LANG']['MONTHS']); ?>'],
+      monthShort:<?php echo $GLOBALS['TL_LANG']['MSC']['monthShortLength']; ?> 
+    });
+  });
+  </script>
 <?php if ($this->deadline->help): ?>
   <p class="tl_help"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
-  <script>
-  window.addEvent('domready', function() { <?php echo $this->deadline->datepicker; ?> });
-  </script>
 <?php else: ?>
   <h3><?php echo $this->title; ?></h3>
   <p class="tl_deadline"><?php echo $this->deadlineLabel; ?>: <?php echo $this->deadline; ?></p>

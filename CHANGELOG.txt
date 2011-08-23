@@ -17,6 +17,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: do not store password and textStore field changes in the system log (#3394)
 - Fixed: make sure that "html5" is always in the list of allowed template files (#3398)
 - Fixed: some style sheet fields did not yet accept global variables (#3360)
+- Fixed: the task deadline field did not show the date picker (#3351)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)
