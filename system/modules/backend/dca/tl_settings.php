@@ -278,7 +278,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['templateFiles'],
 			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'save_callback' => array
+			(
+				array('tl_settings', 'checkTemplateFiles')
+			)
 		),
 		'maxImageWidth' => array
 		(
@@ -558,6 +562,23 @@ class tl_settings extends Backend
 
 		$this->import('Automator');
 		$this->Automator->purgeScriptsFolder();
+
+		return $varValue;
+	}
+
+
+	/**
+	 * Make sure that "html5" is in the list of valid template
+	 * files, so the back end works correctly (see #3398)
+	 * @param mixed
+	 * @return array
+	 */
+	public function checkTemplateFiles($varValue)
+	{
+		if (strpos($varValue, 'html5') === false)
+		{
+			$varValue .= (($varValue != '') ? ',' : '') . 'html5';
+		}
 
 		return $varValue;
 	}

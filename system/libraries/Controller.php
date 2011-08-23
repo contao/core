@@ -67,6 +67,7 @@ abstract class Controller extends System
 	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
+		array_push($arrAllowed, 'html5'); // see #3398
 
 		if (!in_array($strFormat, $arrAllowed))
 		{
