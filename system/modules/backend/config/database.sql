@@ -289,6 +289,7 @@ CREATE TABLE `tl_member` (
   `createdOn` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `username` (`username`),
+  KEY `email` (`email`),
   UNIQUE KEY `autologin` (`autologin`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -695,7 +696,8 @@ CREATE TABLE `tl_user` (
   `currentLogin` int(10) unsigned NOT NULL default '0',
   `lastLogin` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `username` (`username`)
+  UNIQUE KEY `username` (`username`),
+  KEY `email` (`email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
