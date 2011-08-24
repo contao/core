@@ -294,7 +294,6 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->Database->prepare("DELETE FROM tl_undo WHERE tstamp<?")
 						   ->execute(intval(time() - $GLOBALS['TL_CONFIG']['undoPeriod']));
 		}
-
 		elseif ($this->strTable == 'tl_log' && strlen($GLOBALS['TL_CONFIG']['logPeriod']))
 		{
 			$this->Database->prepare("DELETE FROM tl_log WHERE tstamp<?")
@@ -452,7 +451,6 @@ class DC_Table extends DataContainer implements listable, editable
 
 				$row[$i] = implode(', ', $temp);
 			}
-
 			elseif (is_array($value))
 			{
 				foreach ($value as $kk=>$vv)
@@ -466,35 +464,33 @@ class DC_Table extends DataContainer implements listable, editable
 
 				$row[$i] = implode(', ', $value);
 			}
-
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'date')
 			{
 				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
 			}
-
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'time')
 			{
 				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
 			}
-
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['rgxp'] == 'datim' || in_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['flag'], array(5, 6, 7, 8, 9, 10)) || $i == 'tstamp')
 			{
 				$row[$i] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
 			}
-
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['multiple'])
 			{
 				$row[$i] = strlen($value) ? $GLOBALS['TL_LANG']['MSC']['yes'] : $GLOBALS['TL_LANG']['MSC']['no'];
 			}
-
 			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['inputType'] == 'textarea' && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['allowHtml'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['preserveTags']))
 			{
 				$row[$i] = specialchars($value);
 			}
-
 			elseif (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference']))
 			{
 				$row[$i] = isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) ? ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]])) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) : $row[$i];
+			}
+			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
+			{
+				$row[$i] = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options'][$row[$i]];
 			}
 
 			// Label
@@ -502,7 +498,6 @@ class DC_Table extends DataContainer implements listable, editable
 			{
 				$label = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label']) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label'][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label'];
 			}
-
 			else
 			{
 				$label = is_array($GLOBALS['TL_LANG']['MSC'][$i]) ? $GLOBALS['TL_LANG']['MSC'][$i][0] : $GLOBALS['TL_LANG']['MSC'][$i];
@@ -552,7 +547,6 @@ class DC_Table extends DataContainer implements listable, editable
 						{
 							$label = is_array($GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label']) ? $GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label'][0] : $GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label'];
 						}
-
 						else
 						{
 							$label = is_array($GLOBALS['TL_LANG']['MSC'][$i]) ? $GLOBALS['TL_LANG']['MSC'][$i][0] : $GLOBALS['TL_LANG']['MSC'][$i];
@@ -820,7 +814,11 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->set['tstamp'] = ($blnDoNotRedirect ? time() : 0);
 
 			// Mark the new record with "copy of"
-			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['title']))
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['name']))
+			{
+				$this->set['name'] = sprintf($GLOBALS['TL_LANG']['MSC']['copyOf'], $this->set['name']);
+			}
+			elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['title']))
 			{
 				$this->set['title'] = sprintf($GLOBALS['TL_LANG']['MSC']['copyOf'], $this->set['title']);
 			}
@@ -1617,7 +1615,6 @@ class DC_Table extends DataContainer implements listable, editable
 						$legends[$k] = substr($vv, 1, -1);
 						unset($boxes[$k][$kk]);
 					}
-
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
 					{
 						unset($boxes[$k][$kk]);
@@ -3200,7 +3197,6 @@ window.addEvent(\'domready\', function() {
 				$this->import($strClass);
 				$_buttons .= $this->$strClass->$strMethod($this, $objRow->row(), $table, $blnCircularReference, $arrClipboard, $childs, $previous, $next);
 			}
-
 			else
 			{
 				$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id), 'class="blink"');
@@ -3396,9 +3392,13 @@ window.addEvent(\'domready\', function() {
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v][0];
 				}
-				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v] != '')
+				elseif (isset($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v]))
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v];
+				}
+				elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options']))
+				{
+					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options'][$_v];
 				}
 
 				// Add sorting field

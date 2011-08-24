@@ -19,6 +19,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: some style sheet fields did not yet accept global variables (#3360)
 - Fixed: the task deadline field did not show the date picker (#3351)
 - Fixed: mark duplicated records with "copy of" (#2938)
+- Fixed: option_callbacks did not handle associative arrays correctly (#3026)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)
