@@ -18,6 +18,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: make sure that "html5" is always in the list of allowed template files (#3398)
 - Fixed: some style sheet fields did not yet accept global variables (#3360)
 - Fixed: the task deadline field did not show the date picker (#3351)
+- Fixed: mark duplicated records with "copy of" (#2938)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)

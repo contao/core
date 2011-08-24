@@ -819,6 +819,26 @@ class DC_Table extends DataContainer implements listable, editable
 		{
 			$this->set['tstamp'] = ($blnDoNotRedirect ? time() : 0);
 
+			// Mark the new record with "copy of"
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['title']))
+			{
+				$this->set['title'] = sprintf($GLOBALS['TL_LANG']['MSC']['copyOf'], $this->set['title']);
+			}
+			elseif (isset($GLOBALS['TL_DCA'][$this->strTable]['fields']['headline']))
+			{
+				$headline = deserialize($this->set['headline']);
+
+				if (!is_array($headline))
+				{
+					$this->set['headline'] = sprintf($GLOBALS['TL_LANG']['MSC']['copyOf'], $this->set['headline']);
+				}
+				elseif (isset($headline['value']))
+				{
+					$headline['value'] = sprintf($GLOBALS['TL_LANG']['MSC']['copyOf'], $headline['value']);
+					$this->set['headline'] = serialize($headline);
+				}
+			}
+
 			$objInsertStmt = $this->Database->prepare("INSERT INTO " . $this->strTable . " %s")
 											->set($this->set)
 											->execute();

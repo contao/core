@@ -376,5 +376,6 @@ $GLOBALS['TL_LANG']['MSC']['descending']       = 'descending';
 $GLOBALS['TL_LANG']['MSC']['default']          = 'Default';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Help wizard';
 $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'You have to allow cookies to use Contao.';
+$GLOBALS['TL_LANG']['MSC']['copyOf']           = 'Copy of %s';
 
 ?>
