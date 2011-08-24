@@ -330,18 +330,17 @@ class FileTree extends Widget
 			$folderImg = ($blnIsOpen && $countFiles > 0) ? 'folderO.gif' : 'folderC.gif';
 			$folderLabel = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] ? '<strong>'.specialchars(basename($currentFolder)).'</strong>' : specialchars(basename($currentFolder));
 
-			// Add the current folder
-			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <label for="'.$this->strName.'_'.md5($currentFolder).'">'.$folderLabel.'</label></div> <div class="tl_right">';
-
 			// Prevent folder selection
 			if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 			{
-				$return .= '&nbsp;';
+				$return .= $this->generateImage($folderImg, '', $folderAttribute).' <label>'.$folderLabel.'</label></div> <div class="tl_right">&nbsp;';
 			}
 
-			// Add checkbox or radio button
+			// Add a checkbox or radio button
 			else
 			{
+				$return .= $this->generateImage($folderImg, '', $folderAttribute).' <label for="'.$this->strName.'_'.md5($currentFolder).'">'.$folderLabel.'</label></div> <div class="tl_right">';
+
 				switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
 				{
 					case 'checkbox':
@@ -356,7 +355,7 @@ class FileTree extends Widget
 
 			$return .= '</div><div style="clear:both;"></div></li>';
 
-			// Call next node
+			// Call the next node
 			if ($countFiles > 0 && $blnIsOpen)
 			{
 				$return .= '<li class="parent" id="'.$xtnode.'_'.$tid.'"><ul class="level_'.$level.'">';
