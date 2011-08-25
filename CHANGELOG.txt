@@ -21,6 +21,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: mark duplicated records with "copy of" (#2938)
 - Fixed: option_callbacks did not handle associative arrays correctly (#3026)
 - Fixed: news and event teasers were not converted to HTML5/XHTML (#3402)
+- Fixed: the onversion_callback was not triggered in editAll and overrideAll mode (#3312)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)

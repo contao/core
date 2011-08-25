@@ -2108,6 +2108,17 @@ window.addEvent(\'domready\', function() {
 					if ($this->blnCreateNewVersion && $this->Input->post('SUBMIT_TYPE') != 'auto')
 					{
 						$this->createNewVersion($this->strTable, $this->intId);
+
+						// Call the onversion_callback
+						if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+						{
+							foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+							}
+						}
+
 						$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 					}
 
@@ -2334,6 +2345,17 @@ window.addEvent(\'domready\', function() {
 						if ($this->blnCreateNewVersion)
 						{
 							$this->createNewVersion($this->strTable, $this->intId);
+
+							// Call the onversion_callback
+							if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback']))
+							{
+								foreach ($GLOBALS['TL_DCA'][$this->strTable]['config']['onversion_callback'] as $callback)
+								{
+									$this->import($callback[0]);
+									$this->$callback[0]->$callback[1]($this->strTable, $this->intId, $this);
+								}
+							}
+
 							$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
 						}
 
