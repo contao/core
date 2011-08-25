@@ -263,13 +263,26 @@ abstract class Events extends Module
 			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
 		}
 
+		// Clean the RTE output
+		if ($arrEvent['teaser'] != '')
+		{
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$arrEvent['teaser'] = $this->String->toXhtml($arrEvent['teaser']);
+			}
+			else
+			{
+				$arrEvent['teaser'] = $this->String->toHtml5($arrEvent['teaser']);
+			}
+		}
+
 		// Display the "read more" button for external/article links
 		if (($objEvents->source == 'external' || $objEvents->source == 'article') && $objEvents->details == '')
 		{
 			$arrEvent['details'] = true;
 		}
 
-		// Clean RTE output
+		// Clean the RTE output
 		else
 		{
 			if ($objPage->outputFormat == 'xhtml')

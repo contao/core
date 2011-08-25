@@ -134,6 +134,21 @@ abstract class ModuleNews extends Module
 			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
 			$objTemplate->archive = $objArticles->archive;
 
+			// Clean the RTE output
+			if ($objArticles->teaser != '')
+			{
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$objArticles->teaser = $this->String->toXhtml($objArticles->teaser);
+				}
+				else
+				{
+					$objArticles->teaser = $this->String->toHtml5($objArticles->teaser);
+				}
+
+				$objTemplate->teaser = $this->String->encodeEmail($objArticles->teaser);
+			}
+
 			// Display the "read more" button for external/article links
 			if (($objArticles->source == 'external' || $objArticles->source == 'article') && !strlen($objArticles->text))
 			{
