@@ -659,8 +659,8 @@ class tl_page extends Backend
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			$id = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
-			$ids = ($id != '') ? array($id) : array();
+			$cid = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
+			$ids = ($cid != '') ? array($cid) : array();
 
 			// Set permission
 			switch ($this->Input->get('act'))
@@ -681,7 +681,22 @@ class tl_page extends Backend
 				case 'cut':
 				case 'cutAll':
 					$permission = 2;
-					$ids[] = $this->Input->get('pid');
+
+					// Check the parent page in "paste into" mode
+					if ($this->Input->get('mode') == 2)
+					{
+						$ids[] = $this->Input->get('pid');
+					}
+
+					// Check the parent's parent page in "paste after" mode
+					else
+					{
+						$objPage = $this->Database->prepare("SELECT pid FROM tl_page WHERE id=?")
+												  ->limit(1)
+												  ->execute($this->Input->get('pid'));
+
+						$ids[] = $objPage->pid;
+					}
 					break;
 
 				case 'delete':
@@ -707,6 +722,13 @@ class tl_page extends Backend
 
 				$error = false;
 				$pagemounts = array_unique($pagemounts);
+
+				// Do not allow to paste after pages on the root level (pagemounts)
+				if (($this->Input->get('act') == 'cut' || $this->Input->get('act') == 'cutAll') && $this->Input->get('mode') == 1 && in_array($this->Input->get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
+				{
+					$this->log('Not enough permissions to paste page ID '. $id .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
 
 				// Check each page
 				foreach ($ids as $i=>$id)
@@ -749,7 +771,7 @@ class tl_page extends Backend
 				// Redirect if there is an error
 				if ($error)
 				{
-					$this->log('Not enough permissions to '. $this->Input->get('act') .' page ID '. $id .' or paste it after/into page ID '. $id, 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '. $this->Input->get('act') .' page ID '. $cid .' or paste after/into page ID '. $this->Input->get('pid'), 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 			}

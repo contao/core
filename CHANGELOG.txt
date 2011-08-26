@@ -22,6 +22,7 @@ Version 2.10.1 (XXXX-XX-XX)
 - Fixed: option_callbacks did not handle associative arrays correctly (#3026)
 - Fixed: news and event teasers were not converted to HTML5/XHTML (#3402)
 - Fixed: the onversion_callback was not triggered in editAll and overrideAll mode (#3312)
+- Fixed: fixed two issues when moving pages as normal user (thanks to Andreas Schempp)
 - Fixed a few minor issues
 
 Version 2.10.0 (2011-08-11)
