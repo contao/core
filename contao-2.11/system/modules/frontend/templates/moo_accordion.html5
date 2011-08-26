@@ -1,0 +1,52 @@
+
+<script>
+window.addEvent('domready', function() {
+  new Accordion($$('div.toggler'), $$('div.accordion'), {
+    opacity: false,
+    alwaysHide: true,
+    onActive: function(toggler, elem) {
+      elem.setProperty('aria-hidden', 'false');
+      toggler.addClass('active');
+      toggler.getNext('div').setStyle('visibility', 'visible').fade('in');
+      toggler.setProperty('aria-expanded', 'true');
+      return false;
+    },
+    onBackground: function(toggler, elem) {
+      elem.setProperty('aria-hidden', 'true');
+      toggler.removeClass('active');
+      toggler.getNext('div').fade('out').setStyle('visibility', 'hidden');
+      toggler.setProperty('aria-expanded', 'false');
+      return false;
+    }
+  });
+  $$('div.toggler').each(function(elem) {
+    elem.setProperty('role', 'tab');
+    elem.setProperty('tabindex', 0);
+    elem.addEvents({
+      'keypress': function(event) {
+        if (event.code == 13) {
+          this.fireEvent('click');
+        }
+      },
+      'focus': function() {
+        this.addClass('hover');
+      },
+      'blur': function() {
+        this.removeClass('hover');
+      },
+      'mouseenter': function() {
+        this.addClass('hover');
+      },
+      'mouseleave': function() {
+        this.removeClass('hover');
+      }
+    });
+  });
+  $$('div.ce_accordion').each(function(elem) {
+    elem.setProperty('role', 'tablist');
+  });
+  $$('div.accordion').each(function(elem) {
+    elem.setProperty('role', 'tabpanel');
+  });
+});
+</script>

@@ -1,0 +1,124 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Floats */
+.clr {
+	clear:both;
+	overflow:hidden;
+}
+.w50 {
+	width:50%;
+	float:left;
+	height:72px;
+}
+.w50 .tl_help {
+	margin-right:24px;
+}
+.wizard .tl_text {
+	width:290px;
+}
+.wizard .tl_text_2 {
+	width:140px;
+}
+.long .tl_text {
+	width:657px;
+}
+.m12 {
+	margin:12px 0 12px;
+}
+.cbx {
+	height:48px;
+}
+.inline div {
+	display:inline;
+}
+
+/* Error messages */
+label.error,legend.error {
+	color:#c55;
+}
+.tl_tbox .tl_error,.tl_box .tl_error {
+	background:none;
+	padding:0;
+	font-size:10px;
+}
+
+/* Fieldsets */
+fieldset.tl_tbox {
+	margin-top:18px;
+}
+fieldset.tl_tbox,fieldset.tl_box {
+	padding-top:6px;
+	border:1px solid #ddd;
+	border-width:1px 0 0;
+	background:url("images/palBg.jpg") left top repeat-x;
+}
+fieldset.nolegend {
+	padding-top:12px;
+}
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
+	color:#8ab858;
+	padding-left:18px;
+	padding-right:3px;
+	background:url("images/palOpen.gif") left center no-repeat;
+	cursor:pointer;
+}
+fieldset.collapsed {
+	padding-top:0;
+	padding-bottom:12px;
+	margin-bottom:0;
+}
+fieldset.collapsed div {
+	display:none !important;
+}
+fieldset.collapsed > legend {
+	background:url("images/palCollapsed.gif") left center no-repeat;
+}
+
+/* Help */
+.tl_tip {
+	height:13px;
+	overflow:hidden;
+	cursor:help;
+}
+#tl_helpBox {
+	opacity:.9;
+	-moz-opacity:.9;
+	width:682px;
+	margin-left:-248px;
+	padding:8px 12px 10px;
+	line-height:1.5;
+	text-align:left;
+	color:#fff;
+	background:#333;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	position:absolute;
+	left:50%;
+}

@@ -1,0 +1,13 @@
+
+<div class="layout_short block<?php echo $this->class; ?>">
+<?php if ($this->hasMetaFields): ?>
+<p class="info"><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php echo $this->author; ?> <?php echo $this->commentCount; ?></p>
+<?php endif; ?>
+<h2><?php echo $this->text ? $this->linkHeadline : $this->newsHeadline; ?></h2>
+<div class="teaser">
+<?php echo $this->teaser; ?> 
+</div>
+<?php if ($this->text): ?>
+<p class="more"><?php echo $this->more; ?></p>
+<?php endif; ?>
+</div>

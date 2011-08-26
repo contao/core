@@ -1,0 +1,5 @@
+
+<div id="tl_buttons">
+<a href="<?php echo $this->href; ?>" class="header_back" title="<?php echo $this->title; ?>"><?php echo $this->button; ?></a>
+</div>
+<?php echo $this->content; ?>

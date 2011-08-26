@@ -1,0 +1,175 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Filter */
+#tl_helpBox {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter:alpha(opacity=80);
+}
+#tl_ajaxOverlay {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter:alpha(opacity=50);
+}
+.opacity {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter:alpha(opacity=80);
+}
+
+/* Navigation */
+.ie7 #tl_navigation .tl_parent {
+	display:inline;
+}
+.ie7 #tl_navigation .tl_level_1_group img {
+	top:0;
+}
+.ie7 .tl_show {
+	margin:18px;
+}
+.ie7 .tl_col_1 .tl_checkbox {
+	margin:-2px 0 -4px -3px;
+}
+
+/* Listing */
+.ie7 .tl_panel,.ie7 .tl_panel_bottom {
+	padding-bottom:0;
+}
+.ie7 .tl_panel .tl_search span,.ie7 .tl_panel strong,.ie7 .tl_panel_bottom strong {
+	vertical-align:3px;
+}
+.tl_folder_list,.tl_folder_tlist {
+	padding:0 0 2px 0;
+}
+.ie7 tl_folder_list,.ie7 .tl_folder_tlist {
+	padding:0;
+}
+.tl_file_list {
+	padding:1px 0 2px 0;
+}
+label.tl_change_selected {
+	position:relative;
+	top:1px;
+}
+.tl_noopt {
+	margin:0;
+}
+
+/* Wizards */
+.ie7 #tl_tablewizard {
+	overflow-x:auto;
+	overflow-y:hidden;
+	padding-bottom:19px;
+}
+.tl_tablewizard td.tcontainer {
+	height:75px;
+}
+.ie7 .tl_tablewizard td.tcontainer .tl_textarea {
+	margin-top:1px;
+}
+.ie7 .tl_listwizard_img {
+	top:0px;
+}
+.tl_optionwizard label {
+	position:relative;
+	top:3px;
+	left:-3px
+}
+.ie7 .tl_optionwizard label {
+	top:4px;
+}
+.tl_checkbox_wizard .fixed {
+	position:relative;
+	top:4px;
+}
+.tl_checkbox_wizard span {
+	height:20px;
+	margin:-4px 0 0 0;
+}
+.ie7 .tl_checkbox_wizard span {
+	margin-top:-3px;
+}
+.tl_checkbox_wizard label {
+	position:relative;
+	top:-1px;
+}
+
+/* Forms */
+.ie7 .tl_text,.ie7 .tl_text_2,.ie7 .tl_text_3,.ie7 .tl_text_4,.ie7 .tl_textarea,.ie7 .tl_upload_field {
+	margin:0;
+}
+fieldset.tl_radio_container legend {
+	padding-bottom:2px;
+}
+.ie7 fieldset.tl_radio_container legend {
+	margin-left:-7px;
+	padding-bottom:0;
+}
+.tl_checkbox,.tl_radio {
+	margin:-3px 0 -1px -2px;
+	vertical-align:middle;
+}
+.ie7 .tl_checkbox,.ie7 .tl_radio {
+	margin:-3px 0 -2px -3px;
+	vertical-align:middle;
+}
+.tl_tree_checkbox {
+	margin:-1px 0 0 0;
+}
+.ie7 .tl_tree_checkbox {
+	margin-top:-2px;
+}
+.tl_tree_radio {
+	margin:-3px 0 0 0;
+}
+.ie7 .tl_tree_radio {
+	margin-top:-2px;
+}
+
+/* BE 27 */
+.ie7 fieldset.collapsed legend {
+	display:inline;
+}
+fieldset.tl_tbox,fieldset.tl_box {
+	padding-top:0;
+	background-position:left 7px;
+}
+.ie7 fieldset.tl_tbox,.ie7 fieldset.tl_box {
+	background-position:left 8px;
+}
+.ie7 fieldset.tl_tbox > legend,.ie7 fieldset.tl_box > legend {
+	margin-bottom:6px;
+}
+fieldset.collapsed {
+	padding-bottom:12px;
+}
+.ie7 fieldset.collapsed {
+	padding-bottom:4px;
+}
+fieldset.nolegend {
+	padding-top:12px;
+	background-position:left top;
+}

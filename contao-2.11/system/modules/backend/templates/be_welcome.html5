@@ -1,0 +1,54 @@
+
+<h1 id="tl_welcome"><?php echo $this->welcome; ?></h1>
+
+<div id="tl_soverview">
+
+<div id="tl_messages">
+  <h2><?php echo $this->systemMessages; ?></h2>
+<?php if ($this->tasksDue): ?>
+  <p class="tl_task_due"><a href="contao/main.php?do=tasks"><?php echo $this->tasksDue; ?></a></p>
+<?php endif; ?>
+<?php if ($this->tasksNew): ?>
+  <p class="tl_task_new"><a href="contao/main.php?do=tasks"><?php echo $this->tasksNew; ?></a></p>
+<?php endif; ?>
+<?php if ($this->tasksCur): ?>
+  <p class="tl_task_reg"><a href="contao/main.php?do=tasks"><?php echo $this->tasksCur; ?></a></p>
+<?php endif; ?>
+<?php if ($this->update): ?>
+  <p class="tl_update"><a href="contao/main.php?do=maintenance"><?php echo $this->update; ?></a></p>
+<?php endif; ?>
+<?php if ($this->lastLogin): ?>
+  <p class="tl_update"><?php echo $this->lastLogin; ?></p>
+<?php endif; ?>
+</div>
+
+<table id="tl_shortcuts">
+<?php foreach ($this->arrShortcuts as $arrShortcut): ?>
+<?php if ($arrShortcut[0] == 'colspan'): ?>
+  <tr>
+    <td colspan="2" class="headline"><div><?php echo $arrShortcut[1]; ?></div></td>
+  </tr>
+<?php else: ?>
+  <tr>
+    <td class="col_1"><?php echo $arrShortcut[0]; ?></td>
+    <td class="col_2"><?php echo $arrShortcut[1]; ?></td>
+  </tr>
+<?php endif; ?>
+<?php endforeach; ?>
+</table>
+
+<div id="tl_moverview">
+<?php foreach ($this->arrGroups as $arrGroup): ?>
+
+<h2><?php echo $arrGroup['label']; ?></h2>
+<?php foreach ($arrGroup['modules'] as $strModule=>$arrConfig): ?>
+
+<div class="tl_module_desc">
+<h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></h3>
+<p><?php echo $arrConfig['title']; ?></p>
+</div>
+<?php endforeach; ?>
+<?php endforeach; ?>
+</div>
+
+</div>

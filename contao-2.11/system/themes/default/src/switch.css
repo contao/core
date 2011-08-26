@@ -1,0 +1,94 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Body */
+html,body {
+	background:#333633;
+}
+a,body,div,form,input,selectlabel,p {
+	color:#333633;
+}
+p {
+	margin-bottom:0;
+	font-weight:bold;
+}
+
+/* Container */
+#container {
+	height:22px;
+	margin:0 0 2px;
+	padding:3px 6px 5px 12px;
+	overflow:hidden;
+	background:#ffc;
+	line-height:1;
+}
+
+/* Left */
+#left {
+	width:22%;
+	float:left;
+	padding:6px 0;
+}
+
+/* Right */
+#right {
+	width:78%;
+	float:right;
+	text-align:right;
+}
+img.close {
+	padding-left:3px;
+	vertical-align:middle;
+	cursor:pointer
+}
+
+/* Select menus */
+.tl_select {
+	margin:1px 9px 1px 0;
+	padding:1px;
+	border:1px solid #b8b8b8;
+}
+#ctrl_user {
+	width:24%;
+}
+
+/* Form elements */
+input,select,label {
+	vertical-align:baseline;
+}
+
+/* IE7 fixes */
+.ie7 #container {
+	padding:2px 6px 6px 12px;
+}
+.ie7 #left {
+	padding:7px 0 5px;
+}
+.ie7 input,.ie7 select,.ie7 label {
+	vertical-align:middle;
+}

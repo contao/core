@@ -1,0 +1,121 @@
+.CodeMirror {
+  /* PATCH */
+  line-height: 1.2;
+  font-family: "Andale Mono",monospace;
+  font-size: 12px;
+  border:1px solid #b8b8b8;
+  padding:2px;
+  border-radius:3px;
+  /* PATCH EOF */
+}
+
+.CodeMirror-scroll {
+  overflow: auto;
+  height: 300px;
+}
+
+.CodeMirror-gutter {
+  position: absolute; left: 0; top: 0;
+  background-color: #f7f7f7;
+  border-right: 1px solid #eee;
+  min-width: 2em;
+  height: 100%;
+}
+.CodeMirror-gutter-text {
+  color: #aaa;
+  text-align: right;
+  padding: .4em .2em .4em .4em;
+}
+.CodeMirror-lines {
+  padding: .4em;
+}
+
+.CodeMirror pre {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  border-width: 0; margin: 0; padding: 0; background: transparent;
+  /* PATCH
+  font-family: inherit;
+  font-size: inherit;
+  */
+  padding: 0; margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.CodeMirror textarea {
+  /* PATCH
+  font-family: inherit !important;
+  font-size: inherit !important;
+  */
+}
+
+.CodeMirror-cursor {
+  z-index: 10;
+  position: absolute;
+  visibility: hidden;
+  border-left: 1px solid black !important;
+}
+.CodeMirror-focused .CodeMirror-cursor {
+  visibility: visible;
+}
+
+span.CodeMirror-selected {
+  background: #ccc !important;
+  color: HighlightText !important;
+}
+.CodeMirror-focused span.CodeMirror-selected {
+  background: Highlight !important;
+}
+
+.CodeMirror-matchingbracket {color: #0f0 !important;}
+.CodeMirror-nonmatchingbracket {color: #f22 !important;}
+
+/* Default */
+.cm-s-default span.cm-keyword {color: #708;}
+.cm-s-default span.cm-atom {color: #219;}
+.cm-s-default span.cm-number {color: #164;}
+.cm-s-default span.cm-def {color: #00f;}
+.cm-s-default span.cm-variable {color: black;}
+.cm-s-default span.cm-variable-2 {color: #05a;}
+.cm-s-default span.cm-variable-3 {color: #0a5;}
+.cm-s-default span.cm-property {color: black;}
+.cm-s-default span.cm-operator {color: black;}
+.cm-s-default span.cm-comment {color: #a50;}
+.cm-s-default span.cm-string {color: #a11;}
+.cm-s-default span.cm-meta {color: #555;}
+.cm-s-default span.cm-error {color: #f00;}
+.cm-s-default span.cm-qualifier {color: #555;}
+.cm-s-default span.cm-builtin {color: #30a;}
+.cm-s-default span.cm-bracket {color: #cc7;}
+.cm-s-default span.cm-tag {color: #170;}
+.cm-s-default span.cm-attribute {color: #00c;}
+
+/* Diff */
+.cm-s-default span.cm-rangeinfo {color: #a0b;}
+.cm-s-default span.cm-minus {color: #a22;}
+.cm-s-default span.cm-plus {color: #2b2;}
+
+/* Clike */
+span.c-like-keyword {color: #90b;}
+span.c-like-number {color: #291;}
+span.c-like-comment {color: #a70;}
+span.c-like-string {color: #a22;}
+span.c-like-preprocessor {color: #049;}
+span.c-like-var {color: #22b;}
+span.c-like-annotation {color: #666;}
+
+/* SQL */
+span.cm-sql-keyword {color: blue;}
+span.cm-sql-var {color: red;}
+span.cm-sql-comment {color: #AA7700;}
+span.cm-sql-literal {color: green;}
+span.cm-sql-operator {color: blue;}
+span.cm-sql-word {color: black;}
+span.cm-sql-quoted-word {color: #680;}
+span.cm-sql-function {color: darkorange;}
+span.cm-sql-type {color: purple;}
+span.cm-sql-separator {color: #666666;}
+span.cm-sql-number {color: darkcyan;}

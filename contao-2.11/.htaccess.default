@@ -1,0 +1,181 @@
+##
+# Contao Open Source CMS
+# Copyright (C) 2005-2011 Leo Feyer
+#
+# Formerly known as TYPOlight Open Source CMS.
+#
+# This program is free software: you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation, either
+# version 3 of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public
+# License along with this program. If not, please visit the Free
+# Software Foundation website at <http://www.gnu.org/licenses/>.
+#
+# PHP version 5
+# @copyright  Leo Feyer 2005-2011
+# @author     Leo Feyer <http://www.contao.org>
+# @license    LGPL
+##
+
+##
+# Disable ETags
+# @see http://developer.yahoo.com/performance/rules.html#etags
+##
+FileETag None
+
+##
+# Prevent access to the Contao template files
+##
+<FilesMatch "\.(tpl|html5|xhtml)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+<IfModule mod_mime.c>
+
+  ##
+  # Serve the correct content type for .htc files (CSS3 PIE)
+  # @see http://css3pie.com/documentation/known-issues/#content-type
+  ##
+  AddType text/x-component .htc
+
+</IfModule>
+
+<IfModule mod_deflate.c>
+
+  ##
+  # Use mod_deflate to compress JavaScript, CSS, XML, HTML and PHP files.
+  # @see http://developer.yahoo.com/performance/rules.html#gzip
+  ##
+  <FilesMatch "\.(css|js|xml|html?|php)$">
+    SetOutputFilter DEFLATE
+  </FilesMatch>
+
+</IfModule>
+
+<IfModule mod_headers.c>
+
+  ##
+  # Disable ETags
+  # @see http://developer.yahoo.com/performance/rules.html#etags
+  ##
+  Header unset ETag
+
+  ##
+  # Add a Vary Accept-Encoding header for the compressed resources. If you
+  # modify the file types above, make sure to change them here accordingly.
+  # @see http://developer.yahoo.com/performance/rules.html#gzip
+  ##
+  <FilesMatch "\.(js|css|xml|gz)$">
+    Header append Vary Accept-Encoding
+  </FilesMatch>
+
+</IfModule>
+
+<IfModule mod_expires.c>
+
+  ##
+  # Activate the module
+  ##
+  ExpiresActive On
+
+  ##
+  # Specify an expiration 30 days in the future for images, JavaScripts and
+  # CSS files. Edit or remove the lines to set up your own expiration logic.
+  # @see http://developer.yahoo.com/performance/rules.html#expires
+  ##
+  ExpiresByType image/png A2592000
+  ExpiresByType image/gif A2592000
+  ExpiresByType image/jpg A2592000
+  ExpiresByType image/jpeg A2592000
+  ExpiresByType text/javascript A2592000
+  ExpiresByType application/x-javascript A2592000
+  ExpiresByType application/javascript A2592000
+  ExpiresByType text/css A2592000
+  ExpiresByType image/x-icon A2592000
+
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+  ##
+  # Activate the module
+  ##
+  RewriteEngine On
+
+  ##
+  # Set the RewriteBase if your Contao installation is in a subdirectoy and
+  # the rewrite rules are not working properly. Usage examples:
+  #
+  #   RewriteBase /contao-2.9.0
+  #   RewriteBase /path/to/contao
+  #
+  # Uncomment the following line to set the RewriteBase.
+  ##
+  #RewriteBase /
+
+  ##
+  # Contao usually does not pass absolute URLs via GET, therefore the
+  # following rules block all requests that try to pass a URL or the /etc/
+  # directory as parameter (malicious requests).
+  ##
+  RewriteCond %{REQUEST_URI} (ftp|https?):|/etc/ [NC,OR]
+  RewriteCond %{QUERY_STRING} (ftp|https?):|/etc/ [NC]
+  RewriteRule .* - [F,L]
+
+  ##
+  # Uncomment the following lines and replace "domain.com" with your domain
+  # name to redirect requests without "www" to the correct domain. 
+  ##
+  #RewriteCond %{HTTP_HOST} ^domain\.com [NC]
+  #RewriteRule (.*) http://www.domain.com/$1 [R=301,L]
+
+  ##
+  # If you cannot use mod_deflate, uncomment the following lines to load a
+  # compressed .gz version of the bigger Contao JavaScript and CSS files.
+  ##
+  #AddEncoding gzip .gz
+  #<FilesMatch "\.js\.gz$">
+  #  AddType "text/javascript" .gz
+  #</FilesMatch>
+  #<FilesMatch "\.css\.gz$">
+  #  AddType "text/css" .gz
+  #</FilesMatch>
+  #RewriteCond %{HTTP:Accept-encoding} gzip
+  #RewriteCond %{REQUEST_FILENAME} \.(js|css)$
+  #RewriteCond %{REQUEST_FILENAME}.gz -f
+  #RewriteRule ^(.*)$ $1.gz [QSA,L]
+
+  ##
+  # Do not rewrite requests for static files or folders such as style sheets,
+  # images, movies or text documents.
+  ##
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  ##
+  # By default, Contao adds ".html" to the generated URLs to simulate static
+  # HTML documents. If you change the URL suffix in the back end settings, make
+  # sure to change it here accordingly!
+  #
+  #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
+  #   RewriteRule .* index.php [L]          # No URL suffix
+  #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+  #
+  # If you are using mod_cache, it is recommended to use the RewriteRule below,
+  # which adds the query string to the internal URL:
+  # 
+  #   RewriteRule (.*\.html)$ index.php/$1 [L]
+  #
+  # Note that not all environments support mod_rewrite and mod_cache.
+  ##
+  RewriteRule .*\.html$ index.php [L]
+
+</IfModule>

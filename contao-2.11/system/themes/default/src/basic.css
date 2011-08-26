@@ -1,0 +1,332 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Body */
+html,body,form,pre,figure {
+	margin:0;
+	padding:0;
+}
+img {
+	border:0;
+}
+
+/* Font family */
+a,b,body,cite,div,em,h1,h2,h3,h4,h5,h6,i,label,legend,li,ol,p,strong,td,th,u,ul {
+	font-family:Verdana,sans-serif;
+}
+fieldset,form,input,optgroup,select,textarea {
+	font-family:"Trebuchet MS",Verdana,sans-serif;
+}
+
+/* Font size and color */
+a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,textarea {
+	font-size:11px;
+	color:#666966;
+}
+.mac fieldset,.mac form,.mac input,.mac optgroup,.mac select,.mac textarea {
+	font-size:12px;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:12px;
+	color:#666966;
+}
+table {
+	border-spacing:0;
+}
+th,td {
+	padding:0;
+}
+.tl_small {
+	font-size:9px;
+}
+.tl_small,.tl_gray {
+	color:#a3a3a3;
+}
+.tl_green {
+	color:#8ab858;
+}
+.tl_red {
+	color:#c55;
+}
+.tl_blue {
+	color:#5c9ac9;
+}
+.tl_orange {
+	color:#f90;
+}
+span.mandatory {
+	color:#f00;
+}
+
+/* Basic elements */
+a {
+	color:#666966;
+	text-decoration:none;
+}
+a:hover,a:focus,a:active {
+	color:#8ab858;
+}
+hr {
+	height:1px;
+	margin:18px 0;
+	border:0;
+	background:#ddd;
+	color:#ddd;
+}
+p {
+	margin:0 0 12px;
+	padding:0;
+}
+
+/* Sortable lists */
+ul.sortable,ul.sortable li {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+}
+ul.sortable li {
+	cursor:move;
+}
+
+/* Invisible elements */
+.clear {
+	clear:both;
+	height:0.1px;
+	line-height:0.1px;
+	font-size:0.1px;
+}
+.block,.tl_content {
+	overflow:hidden;
+}
+.invisible {
+	width:0;
+	height:0;
+	left:-1000px;
+	top:-1000px;
+	position:absolute;
+	overflow:hidden;
+	display:inline;
+}
+.fancy-hide {
+	display:none;
+}
+
+/* Forms */
+optgroup {
+	padding-top:3px;
+	padding-bottom:3px;
+	font-style:normal;
+	background:#fff;
+}
+fieldset.tl_checkbox_container,fieldset.tl_radio_container {
+	border:0;
+	margin:15px 0 0;
+	padding:0;
+}
+fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
+	font-weight:bold;
+	margin:0;
+	padding:0 0 1px;
+}
+fieldset.checkbox_container,fieldset.radio_container {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+/* Text fields */
+.tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea {
+	margin:1px 0;
+}
+.tl_text {
+	width:314px;
+}
+.tl_text_2 {
+	width:152px;
+}
+.tl_text_3 {
+	width:99px;
+}
+.tl_text_4 {
+	width:72px;
+}
+.tl_textarea {
+	width:680px;
+	height:240px;
+}
+.tl_text_unit {
+	margin:1px 0 1px;
+	width:250px;
+}
+.tl_text_trbl {
+	margin:1px 0 1px;
+	width:55px;
+}
+.tl_text_interval {
+	margin:1px 0 1px;
+	width:152px;
+}
+.tl_text,.tl_text_2,.tl_text_3,.tl_text_4,.tl_textarea,.tl_text_unit,.tl_text_trbl,.tl_text_interval {
+	border:1px solid #b8b8b8;
+	padding:2px;
+	border-radius:3px;
+}
+.mac .tl_text,.mac .tl_text_2,.mac .tl_text_3,.mac .tl_text_4,.mac .tl_textarea,.mac .tl_text_unit,.mac .tl_text_trbl,.mac .tl_text_interval {
+	padding:3px 2px;
+}
+.tl_text:focus,.tl_text_2:focus,.tl_text_3:focus,.tl_text_4:focus,.tl_textarea:focus,.tl_text_unit:focus,.tl_text_trbl:focus,.tl_text_interval:focus {
+	background-color:#ebfdd7;
+}
+pre,.tl_textarea.monospace {
+	font-family:"Andale Mono",monospace;
+	font-size:12px;
+}
+.tl_textarea.monospace:focus {
+	background:none;
+}
+
+/* Select menus */
+.tl_select,.tl_mselect,.tl_select_column {
+	margin:1px 0;
+}
+.tl_box .tl_select,.tl_tbox .tl_select,.tl_box .tl_mselect,.tl_tbox .tl_mselect {
+	width:320px;
+}
+.tl_select_column {
+	width:140px;
+}
+.tl_select_unit {
+	margin:1px 0;
+	width:60px;
+}
+.tl_select_interval {
+	margin:1px 0;
+	width:158px;
+}
+.tl_select,.tl_mselect,.tl_select_column,.tl_select_unit,.tl_select_interval {
+	border:1px solid #b8b8b8;
+	padding:1px;
+	border-radius:3px;
+}
+.mac .tl_select,.mac .tl_mselect,.mac .tl_select_column,.mac .tl_select_unit,.mac .tl_select_interval {
+	padding:2px 1px;
+}
+
+/* Checkboxes */
+.tl_checkbox {
+	margin:1px 3px 0 0;
+	vertical-align:bottom;
+}
+.mac .tl_checkbox {
+	margin:0 3px 0 0;
+}
+.tl_tree_checkbox {
+	margin:0 3px 0 0;
+}
+.tl_checkbox_single_container {
+	margin:16px 0 1px;
+}
+.tl_checkbox_single_container label {
+	font-weight:bold;
+}
+
+/* Grouped checkboxes */
+.checkbox_toggler {
+	font-weight:bold;
+}
+.checkbox_toggler_first {
+	font-weight:bold;
+	margin-top:3px;
+}
+.checkbox_toggler img,.checkbox_toggler_first img {
+	vertical-align:top;
+	position:relative;
+	top:-2px;
+	margin-right:3px;
+}
+.checkbox_options {
+	margin:0 0 6px 21px !important;
+}
+
+/* Radio buttons */
+.tl_radio {
+	margin:1px 3px 0 0;
+	vertical-align:bottom;
+}
+.tl_tree_radio {
+	margin:0 3px 1px 0;
+	vertical-align:middle;
+}
+.safari .tl_radio,.safari .tl_tree_radio {
+	margin-left:1px;
+}
+
+/* Radio table */
+.tl_radio_table {
+	margin:2px 0 1px;
+}
+.tl_radio_table td {
+	padding:0 24px 1px 0;
+}
+.tl_radio_table img,.tl_radio_table input {
+	vertical-align:middle;
+}
+
+/* Upload fields */
+.tl_upload_field {
+	margin:1px 0;
+}
+
+/* Submit buttons */
+.tl_submit {
+	border:0;
+	border-radius:3px;
+	background:#808080;
+	padding:5px 12px;
+	color:#fff;
+	cursor:pointer;
+	line-height:1;
+	text-shadow:1px 1px 0 #666;
+	box-shadow:0 1px 3px #bbb;
+}
+.firefox .tl_submit {
+	padding:2px 12px 3px;
+}
+.tl_submit:focus,.tl_submit:hover {
+	box-shadow:0 0 6px #8ab858;
+}
+.tl_submit:active {
+	background:#8ab858;
+}
+.tl_submit:disabled {
+	cursor:default;
+	background:#bbb;
+	text-shadow:none;
+	color:#999;
+	box-shadow:none;
+}

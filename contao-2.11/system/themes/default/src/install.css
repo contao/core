@@ -1,0 +1,238 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2011 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ * @filesource
+ */
+
+/* Body */
+body {
+	background:#f5f5f5 url("images/hbg.jpg") repeat-x;
+}
+
+/* Header */
+#header {
+	width:756px;
+	margin:18px auto 0;
+	padding:1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-bottom:0;
+}
+#header h1 {
+	margin:0;
+	padding:2px 0 4px 6px;
+	background:#b3b6b3 url("images/headline.gif") repeat-x;
+	color:#fff;
+}
+
+/* Container */
+#container {
+	width:760px;
+	margin:0 auto;
+	padding:0 0 18px;
+}
+
+/* Main */
+#main {
+	width:756px;
+	padding:1px;
+	background:#fff;
+	border:1px solid #bbb;
+	border-top:0;
+}
+
+/* Headlines */
+#container h2 {
+	margin:16px 18px 0;
+	padding:8px 0 7px 36px;
+	background:url("images/install.gif") no-repeat left center;
+	font-size:14px;
+	color:#8ab858;
+}
+#container h2.important {
+	margin:16px 18px 0;
+	padding:7px 0 8px 36px;
+	background:url("images/important.gif") no-repeat left center;
+	font-size:14px;
+	font-weight:bold;
+	color:#c55;
+}
+#container h3 {
+	margin:0;
+	padding:18px 0 3px;
+	font-size:12px;
+	font-weight:bold;
+}
+#container h4 {
+	margin:12px 0 1px;
+	padding:0;
+	font-size:11px;
+	font-weight:normal;
+}
+
+/* Paragraphs and lists */
+p {
+	margin:0 0 12px;
+	padding:0;
+	line-height:16px;
+	text-align:justify;
+}
+ul {
+	margin:12px 0;
+	padding:0 0 0 48px;
+}
+li {
+	line-height:16px;
+}
+.code_old {
+	margin:9px 18px;
+	padding:6px 6px 7px;
+	border:1px solid #c00;
+	background:#fdd;
+}
+.code_new {
+	margin:9px 18px;
+	padding:6px 6px 7px;
+	border:1px solid #0a0;
+	background:#dfd;
+}
+
+/* Form tables */
+#sql_table {
+	margin:-3px 0;
+}
+#sql_table pre label {
+	font-family:"Andale Mono",monospace;
+}
+.mac #sql_table pre label {
+	font-size:12px;
+}
+.tl_col_0 {
+	padding:6px 0 2px;
+	font-weight:bold;
+	color:#8ab858;
+}
+.tl_col_1 {
+	vertical-align:top;
+}
+.tl_col_2 {
+	padding:2px 0 3px 4px;
+}
+
+/* Error and confirmation messages */
+.tl_error,.tl_confirm,.tl_info {
+	margin:0;
+	padding:2px 0 3px 20px;
+}
+.tl_error {
+	color:#c55;
+	background:url("images/error.gif") no-repeat left center;
+}
+.tl_confirm {
+	color:#8ab858;
+	background:url("images/ok.gif") no-repeat left center;
+}
+.tl_info {
+	color:#5c9ac9;
+	background:url("images/show.gif") no-repeat 1px center;
+}
+.tl_formbody .tl_error {
+	margin:0;
+}
+
+/* Go to back end */
+#go_to_login {
+	margin:12px 18px 14px 0;
+	padding:0;
+	text-align:right;
+}
+#go_to_login a {
+	padding:2px 0 3px 20px;
+	background:url("images/login.gif") no-repeat left center;
+	color:#bbb;
+}
+
+/* License */
+#license pre {
+	height:400px;
+	overflow:auto;
+	margin:0;
+	background:#f9f9f9;
+	border:1px solid #b8b8b8;
+}
+
+/* Formbody */
+.tl_formbody,.tl_formbody_submit {
+	margin:0;
+}
+.tl_submit_container {
+	margin-top:18px;
+}
+
+/* Fieldsets */
+fieldset > div {
+	margin-bottom:24px;
+}
+fieldset.last > div {
+	margin-bottom:0;
+}
+fieldset.tl_tbox {
+	margin-top:18px;
+}
+fieldset.tl_tbox,fieldset.tl_box {
+	margin-left:18px;
+	margin-right:18px;
+	padding-top:6px;
+	border:1px solid #ddd;
+	border-width:1px 0 0;
+	background:url("images/palBg.jpg") left top repeat-x;
+}
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
+	margin-top:-1px;
+	color:#8ab858;
+	padding-left:18px;
+	padding-right:3px;
+	background:url("images/palOpen.gif") left center no-repeat;
+	cursor:pointer;
+}
+fieldset.collapsed {
+	padding-top:0;
+	padding-bottom:12px;
+	margin-bottom:0;
+}
+fieldset.collapsed div {
+	display:none !important;
+}
+fieldset.collapsed > legend {
+	background:url("images/palCollapsed.gif") left center no-repeat;
+}
+
+/* Form fields */
+.tl_text {
+	width:232px !important;
+}
+.tl_select {
+	width:238px !important;
+}

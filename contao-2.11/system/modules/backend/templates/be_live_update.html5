@@ -1,0 +1,28 @@
+
+<div id="tl_maintenance_update" class="maintenance_<?php echo $this->isActive ? 'active' : 'inactive'; ?>">
+
+<h2 class="sub_headline_update"><?php echo $this->updateHeadline; ?></h2>
+
+<div class="tl_message" id="lu_message">
+  <p class="<?php echo $this->updateClass; ?>"><?php echo $this->updateMessage; ?></p>
+</div>
+
+<form action="<?php echo $this->updateServer; ?>" class="tl_form" method="post" onsubmit="AjaxRequest.liveUpdate(this, 'ctrl_liveUpdate'); return false;">
+<div class="tl_formbody_edit">
+<input type="hidden" name="ver" value="<?php echo $this->version; ?>">
+<input type="hidden" name="ref" value="<?php echo $this->referer; ?>">
+<div class="tl_tbox block">
+  <h3 style="padding-top:9px;"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
+  <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset();">
+  <div class="tl_checkbox_container" style="margin-top:0;">
+    <input type="checkbox" name="bup" id="ctrl_bup" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset();" checked="checked"> <label for="ctrl_bup"><?php echo $this->backupFiles; ?></label><br>
+    <input type="checkbox" name="toc" id="ctrl_toc" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset();"> <label for="ctrl_toc"><?php echo $this->showToc; ?></label>
+  </div>
+</div>
+</div>
+<div class="tl_submit_container">
+  <input type="submit" class="tl_submit" value="<?php echo $this->runLiveUpdate; ?>">
+</div>
+</form>
+
+</div>

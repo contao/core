@@ -1,0 +1,4 @@
+
+<div class="layout_simple block<?php echo $this->class; ?>">
+<?php if ($this->date): ?><time datetime="<?php echo $this->datetime; ?>"><?php echo $this->date; ?></time> <?php endif; ?><?php echo $this->linkHeadline; ?> 
+</div>
