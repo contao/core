@@ -129,7 +129,7 @@ $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQLi';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
 $GLOBALS['TL_CONFIG']['dbUser']      = '';
 $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
