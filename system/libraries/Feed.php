@@ -287,7 +287,7 @@ class FeedItem extends System
 	 */
 	public function addEnclosure($strFile)
 	{
-		if (!file_exists(TL_ROOT . '/' . $strFile))
+		if ($strFile == '' || !file_exists(TL_ROOT . '/' . $strFile))
 		{
 			return;
 		}

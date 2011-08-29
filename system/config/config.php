@@ -129,7 +129,7 @@ $GLOBALS['TL_CONFIG']['disableIpCheck']      = false;
  * set used on your HTML pages. Note that you might have to use a different
  * spelling (e.g. UTF8 instead of UTF-8 for MySQL).
  */
-$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQLi';
+$GLOBALS['TL_CONFIG']['dbDriver']    = 'MySQL';
 $GLOBALS['TL_CONFIG']['dbUser']      = '';
 $GLOBALS['TL_CONFIG']['dbPass']      = '';
 $GLOBALS['TL_CONFIG']['dbHost']      = 'localhost';
@@ -301,8 +301,8 @@ $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
 $GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
 $GLOBALS['TL_CONFIG']['customSections']       = '';
 $GLOBALS['TL_CONFIG']['maxImageWidth']        = '';
-$GLOBALS['TL_CONFIG']['defaultUser']          = '';
-$GLOBALS['TL_CONFIG']['defaultGroup']         = '';
+$GLOBALS['TL_CONFIG']['defaultUser']          = 0;
+$GLOBALS['TL_CONFIG']['defaultGroup']         = 0;
 $GLOBALS['TL_CONFIG']['defaultChmod']         = array('u1', 'u2', 'u3', 'u4', 'u5', 'u6', 'g4', 'g5', 'g6');
 $GLOBALS['TL_CONFIG']['validImageTypes']      = 'jpg,jpeg,gif,png,tif,tiff,bmp';
 $GLOBALS['TL_CONFIG']['editableFiles']        = 'htm,html,css,js,txt,log,xml';
