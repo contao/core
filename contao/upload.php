@@ -30,7 +30,7 @@
 
 
 /**
- * Define requirements
+ * Define the requirements
  */
 if ($_POST['isPopup'] == 'true')
 {
@@ -45,7 +45,7 @@ else
 
 
 /**
- * Check parameters
+ * Check the parameters
  */
 if (count($_GET) != GET_COUNT || empty($_POST))
 {

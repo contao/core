@@ -50,10 +50,10 @@ class Index extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Login user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Login the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -66,7 +66,7 @@ class Index extends Backend
 		{
 			$strUrl = 'contao/main.php';
 
-			// Redirect to last page visited
+			// Redirect to the last page visited
 			if ($this->Input->get('referer', true) != '')
 			{
 				$strUrl = base64_decode($this->Input->get('referer', true));
@@ -82,7 +82,7 @@ class Index extends Backend
 		}
 
 		// Reload the page once after a logout to create a new session_id()
-		if ($this->User->logout())
+		elseif ($this->User->logout())
 		{
 			$this->reload();
 		}
@@ -93,7 +93,7 @@ class Index extends Backend
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
 	 */
 	public function run()
 	{
@@ -132,7 +132,7 @@ class Index extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objIndex = new Index();
 $objIndex->run();

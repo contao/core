@@ -56,8 +56,8 @@ define('SWITCH_ORDER', true);
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
  */
-define('VERSION', '2.10');
-define('BUILD', '1');
+define('VERSION', '2.11');
+define('BUILD', 'beta1');
 define('DATEPICKER', '1.17');
 define('CODEMIRROR', '2.1');
 define('FANCYUPLOAD', '3.0');

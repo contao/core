@@ -57,10 +57,10 @@ class Popup extends Backend
 	/**
 	 * Initialize the controller
 	 *
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -80,7 +80,7 @@ class Popup extends Backend
 
 
 	/**
-	 * Run controller and parse the template
+	 * Run the controller and parse the template
 	 */
 	public function run()
 	{
@@ -138,7 +138,6 @@ class Popup extends Backend
 		if ($objFile->isGdImage)
 		{
 			$this->Template->isImage = true;
-
 			$this->Template->width = $objFile->width;
 			$this->Template->height = $objFile->height;
 			$this->Template->src = $this->strFile;
@@ -175,7 +174,7 @@ class Popup extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objPopup = new Popup();
 $objPopup->run();

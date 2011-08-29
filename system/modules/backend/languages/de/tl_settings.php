@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Erlaubte HTML
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Wartezeit bei gesperrtem Konto', 'Ein Konto wird gesperrt, wenn drei Mal hintereinander ein falsches Passwort eingegeben wird.');
 $GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Hashwert für Verschlüsselung', 'Verschlüsselte Daten können nur mit demselben Hashwert wieder entschlüsselt werden!');
 $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldungen anzeigen', 'Fehlermeldungen auf dem Bildschirm ausgegeben (nicht empfohlen für produktive Seiten).');
+$GLOBALS['TL_LANG']['tl_settings']['logErrors']           = array('Fehlermeldungen protokollieren', 'Fehlermeldungen in die Fehler-Logdatei (<em>system/logs/error.log</em>) schreiben.');
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgegeben.');
 $GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Anfrage-Tokens deaktivieren', 'Das Anfrage-Token beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('IP-Prüfung deaktivieren', 'Benutzersitzungen nicht an IP-Adressen binden. Warnung: potentielles Sicherheitsrisiko!');

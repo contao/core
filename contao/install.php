@@ -908,7 +908,7 @@ class InstallTool extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objInstallTool = new InstallTool();
 $objInstallTool->run();
