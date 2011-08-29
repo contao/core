@@ -50,10 +50,10 @@ class PreviewSwitch extends Backend
 	/**
 	 * Initialize the controller
 	 *
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -67,14 +67,14 @@ class PreviewSwitch extends Backend
 
 
 	/**
-	 * Run controller and parse the template
+	 * Run the controller and parse the template
 	 */
 	public function run()
 	{
 		$intUser = null;
 		$strHash = sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIpCheck'] ? $this->Environment->ip : '') . 'FE_USER_AUTH');
 
-		// Get front end user
+		// Get the front end user
 		if (FE_USER_LOGGED_IN)
 		{
 			$objUser = $this->Database->prepare("SELECT id FROM tl_member WHERE id=(SELECT pid FROM tl_session WHERE hash=?)")
@@ -87,9 +87,8 @@ class PreviewSwitch extends Backend
 			}
 		}
 
-		// Create template object
+		// Create the template object
 		$this->Template = new BackendTemplate('be_switch');
-
 		$this->Template->user = $intUser;
 		$this->Template->show = $this->Input->cookie('FE_PREVIEW');
 		$this->Template->update = false;
@@ -120,7 +119,7 @@ class PreviewSwitch extends Backend
 				$this->Database->prepare("DELETE FROM tl_session WHERE tstamp<? OR hash=?")
 							   ->execute(($time - $GLOBALS['TL_CONFIG']['sessionTimeout']), $strHash);
 
-			   // Log in front end user
+			   // Log in the front end user
 				if (is_numeric($this->Input->post('user')) && $this->Input->post('user') > 0)
 				{
 					// Insert new session
@@ -132,7 +131,7 @@ class PreviewSwitch extends Backend
 					$this->Template->user = $this->Input->post('user');
 				}
 
-				// Log out front end user
+				// Log out the front end user
 				else
 				{
 					// Remove cookie
@@ -144,12 +143,12 @@ class PreviewSwitch extends Backend
 			$this->Template->update = true;
 		}
 
-		// Switch user accounts
+		// Switch the user accounts
 		if ($this->User->isAdmin)
 		{
 			$arrUser = array(''=>'-');
 
-			// Get active front end users
+			// Get the active front end users
 			$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
 
 			while ($objUser->next())
@@ -182,7 +181,7 @@ class PreviewSwitch extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objPreviewSwitch = new PreviewSwitch();
 $objPreviewSwitch->run();

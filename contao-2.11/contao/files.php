@@ -57,10 +57,10 @@ class FileManager extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -76,13 +76,14 @@ class FileManager extends Backend
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
 	 */
 	public function run()
 	{
 		$this->Template = new BackendTemplate('be_files');
 		$this->Template->main = '';
 
+		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
 			$this->objAjax = new Ajax($this->Input->post('action'));
@@ -91,7 +92,8 @@ class FileManager extends Backend
 
 		$this->Template->main .= $this->getBackendModule('files');
 
-		if (!strlen($this->Template->headline))
+		// Default headline
+		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		}
@@ -116,7 +118,7 @@ class FileManager extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objFileManager = new FileManager();
 $objFileManager->run();

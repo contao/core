@@ -30,7 +30,7 @@
 
 
 /**
- * Define root path to Contao installation
+ * Define the root path to the Contao installation
  */
 define('TL_ROOT', dirname(dirname(__FILE__)));
 
@@ -50,7 +50,7 @@ require(TL_ROOT . '/system/interface.php');
 
 
 /**
- * Set error and exception handler
+ * Set the error and exception handler
  */
 @set_error_handler('__error');
 @set_exception_handler('__exception');
@@ -69,7 +69,7 @@ require(TL_ROOT . '/system/interface.php');
 
 
 /**
- * Load basic classes
+ * Load the basic classes
  */
 $objConfig = Config::getInstance();
 $objEnvironment = Environment::getInstance();
@@ -80,18 +80,18 @@ $objInput = Input::getInstance();
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] ? E_ALL|E_STRICT : 0));
+error_reporting(($GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
 
 
 /**
- * Set timezone
+ * Set the timezone
  */
 @ini_set('date.timezone', $GLOBALS['TL_CONFIG']['timeZone']);
 @date_default_timezone_set($GLOBALS['TL_CONFIG']['timeZone']);
 
 
 /**
- * Define relativ path to Contao installation
+ * Define the relativ path to the Contao installation
  */
 if (is_null($GLOBALS['TL_CONFIG']['websitePath']))
 {
@@ -120,7 +120,7 @@ define('TL_PATH', $GLOBALS['TL_CONFIG']['websitePath']);
 
 
 /**
- * Set mbstring encoding
+ * Set the mbstring encoding
  */
 if (USE_MBSTRING && function_exists('mb_regex_encoding'))
 {

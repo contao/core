@@ -66,7 +66,6 @@ function __autoload($strClassName)
 	{
 		include_once($strLibrary);
 		$objCache->$strClassName = 'system/libraries/' . $strClassName . '.php';
-
 		return;
 	}
 
@@ -84,7 +83,6 @@ function __autoload($strClassName)
 		{
 			include_once($strModule);
 			$objCache->$strClassName = 'system/modules/' . $strFolder . '/' . $strClassName . '.php';
-
 			return;
 		}
 	}
@@ -142,14 +140,14 @@ function __error($intType, $strMessage, $strFile, $intLine)
 	{
 		if ($intType != E_NOTICE)
 		{
-			// Log error
+			// Log the error
 			error_log(sprintf('PHP %s: %s in %s on line %s',
 							$arrErrors[$intType],
 							$strMessage,
 							$strFile,
 							$intLine));
 
-			// Display error
+			// Display the error
 			if (ini_get('display_errors'))
 			{
 				$strMessage = sprintf('<strong>%s</strong>: %s in <strong>%s</strong> on line <strong>%s</strong>',
@@ -160,7 +158,6 @@ function __error($intType, $strMessage, $strFile, $intLine)
 
 				$e = new Exception();
 				$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
-
 				echo '<br>' . $strMessage;
 			}
 		}
@@ -191,7 +188,7 @@ function __exception($e)
 					$e->getFile(),
 					$e->getLine()));
 
-	// Display exception
+	// Display the exception
 	if (ini_get('display_errors'))
 	{
 		$strMessage = sprintf('<strong>Fatal error</strong>: Uncaught exception <strong>%s</strong> with message <strong>%s</strong> thrown in <strong>%s</strong> on line <strong>%s</strong>',
@@ -214,23 +211,27 @@ function __exception($e)
  */
 function show_help_message()
 {
-	if (!ini_get('display_errors'))
+	if (ini_get('display_errors'))
 	{
-		header('HTTP/1.1 500 Internal Server Error');
+		return;
+	}
 
-		if (file_exists(TL_ROOT . '/templates/be_error.html5'))
-		{
-			include(TL_ROOT . '/templates/be_error.html5');
-			exit;
-		}
-		elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
-		{
-			include(TL_ROOT . '/system/modules/backend/templates/be_error.html5');
-			exit;
-		}
+	header('HTTP/1.1 500 Internal Server Error');
 
+	if (file_exists(TL_ROOT . '/templates/be_error.html5'))
+	{
+		include(TL_ROOT . '/templates/be_error.html5');
+	}
+	elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
+	{
+		include(TL_ROOT . '/system/modules/backend/templates/be_error.html5');
+	}
+	else
+	{
 		echo 'An error occurred while executing this script!';
 	}
+
+	exit;
 }
 
 
@@ -376,7 +377,6 @@ function deserialize($varValue, $blnForceArray=false)
 	{
 		$varValue = $varUnserialized;
 	}
-
 	elseif ($blnForceArray)
 	{
 		$varValue = array($varValue);
@@ -535,8 +535,9 @@ function natcaseksort($arrArray)
 {
 	$arrBuffer = array_flip($arrArray);
 	natcasesort($arrBuffer);
+	$arrBuffer = array_flip($arrBuffer);
 
-	return array_flip($arrBuffer);
+	return $arrBuffer;
 }
 
 
@@ -582,7 +583,6 @@ function array_insert(&$arrCurrent, $intIndex, $arrNew)
 	{
 		$arrBuffer = array_splice($arrCurrent, 0, $intIndex);
 		$arrCurrent = array_merge_recursive($arrBuffer, $arrNew, $arrCurrent);
-
 		return;
 	}
 
@@ -629,7 +629,6 @@ function array_move_up($arrStack, $intIndex)
 		$arrStack[$intIndex] = $arrStack[($intIndex-1)];
 		$arrStack[($intIndex-1)] = $arrBuffer;
 	}
-
 	else
 	{
 		array_push($arrStack, $arrStack[$intIndex]);
@@ -654,7 +653,6 @@ function array_move_down($arrStack, $intIndex)
 		$arrStack[$intIndex] = $arrStack[($intIndex+1)];
 		$arrStack[($intIndex+1)] = $arrBuffer;
 	}
-
 	else
 	{
 		array_unshift($arrStack, $arrStack[$intIndex]);

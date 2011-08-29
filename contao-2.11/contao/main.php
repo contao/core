@@ -57,10 +57,10 @@ class Main extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -76,13 +76,14 @@ class Main extends Backend
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
 	 */
 	public function run()
 	{
 		$this->Template = new BackendTemplate('be_main');
 		$this->Template->main = '';
 
+		// Ajax request
 		if ($_POST && $this->Environment->isAjaxRequest)
 		{
 			$this->objAjax = new Ajax($this->Input->post('action'));
@@ -120,7 +121,7 @@ class Main extends Backend
 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
 
-		// Check for latest version
+		// Check for the latest version
 		if (!empty($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
@@ -193,7 +194,8 @@ class Main extends Backend
 	 */
 	protected function output()
 	{
-		if (!strlen($this->Template->headline))
+		// Default headline
+		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		}
@@ -280,7 +282,7 @@ class Main extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objMain = new Main();
 $objMain->run();

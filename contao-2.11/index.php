@@ -55,7 +55,7 @@ class Index extends Frontend
 		// Try to read from cache
 		$this->outputFromCache();
 
-		// Load user object before calling the parent constructor
+		// Load the user object before calling the parent constructor
 		$this->import('FrontendUser', 'User');
 		parent::__construct();
 
@@ -141,7 +141,7 @@ class Index extends Frontend
 			$objHandler->generate($objPage->id);
 		}
 
-		// Inherit settings from parent pages if it has not been done yet
+		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
 			$objPage = $this->getPageDetails($objPage->id);
@@ -173,7 +173,7 @@ class Index extends Frontend
 			$objHandler->generate($pageId, $objPage->rootId);
 		}
 
-		// Check user groups if the page is protected
+		// Check the user groups if the page is protected
 		if ($objPage->protected && !BE_USER_LOGGED_IN && (!is_array($objPage->groups) || count($objPage->groups) < 1 || count(array_intersect($objPage->groups, $this->User->groups)) < 1))
 		{
 			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
@@ -204,11 +204,11 @@ class Index extends Frontend
 
 
 	/**
-	 * Load the page from the cache table
+	 * Try to load the page from the cache
 	 */
 	protected function outputFromCache()
 	{
-		// Build page if a user is logged in or there is POST data
+		// Build the page if a user is logged in or there is POST data
 		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']))
 		{
 			return;
@@ -242,11 +242,11 @@ class Index extends Frontend
 		$expire = null;
 		$content = null;
 
-		// Include file
+		// Include the file
 		ob_start();
 		require_once($strCacheFile);
 
-		// File has expired
+		// The file has expired
 		if ($expire < time())
 		{
 			ob_end_clean();
@@ -261,7 +261,7 @@ class Index extends Frontend
 		$this->import('Session');
 		$session = $this->Session->getData();
 
-		// Set new referer
+		// Set the new referer
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != $this->Environment->requestUri)
 		{
 			$session['referer']['last'] = $session['referer']['current'];
@@ -275,7 +275,7 @@ class Index extends Frontend
 		$this->import('Config');
 		$this->loadLanguageFile('default');
 
-		// Replace insert tags and then re-replace the request_token
+		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag
 		$strBuffer = $this->replaceInsertTags($strBuffer);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
@@ -289,7 +289,7 @@ class Index extends Frontend
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
-		// Send cache headers
+		// Send the cache headers
 		if (!is_null($expire) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
@@ -313,7 +313,7 @@ class Index extends Frontend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objIndex = new Index();
 $objIndex->run();

@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Allowed HTML 
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Account locking time', 'An account will be locked if a wrong password is entered three times in a row.');
 $GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Encryption key', 'Note that encrypted data can only be decrypted with the same key!');
 $GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Display error messages', 'Print error messages to the screen (not recommended for productional sites).');
+$GLOBALS['TL_LANG']['tl_settings']['logErrors']           = array('Log error messages', 'Write error messages to the error log file (<em>system/logs/error.log</em>).');
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Enable debug mode', 'Print certain runtime information like database queries to the screen.');
 $GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Disable request tokens', 'Do not check the request token when a form is submitted. Attention: potential security risk!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('Disable IP check', 'Do not bind sessions to IP addresses. Choosing this option is a potential security risk!');
