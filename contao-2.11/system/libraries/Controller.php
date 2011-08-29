@@ -92,7 +92,7 @@ abstract class Controller extends System
 		$objCache = FileCache::getInstance('templates');
 
 		// Try to load the template path from the cache
-		if (isset($objCache->$strKey))
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strKey))
 		{
 			if (file_exists(TL_ROOT . '/' . $objCache->$strKey))
 			{
@@ -910,7 +910,7 @@ abstract class Controller extends System
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
-		if (file_exists(TL_ROOT . '/' . $strCacheName))
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))
 		{
 			return $strCacheName;
 		}
@@ -2831,7 +2831,7 @@ abstract class Controller extends System
 		}
 
 		// Try to load from cache
-		if (!$blnNoCache)
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && !$blnNoCache)
 		{
 			// Handle multiple requests for the same class
 			if (isset($this->arrCache[$strClass]))
