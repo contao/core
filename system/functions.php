@@ -47,7 +47,7 @@ function __autoload($strClassName)
 	$objCache = FileCache::getInstance('autoload');
 
 	// Try to load the class name from the session cache
-	if (isset($objCache->$strClassName))
+	if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClassName))
 	{
 		if (@include_once(TL_ROOT . '/' . $objCache->$strClassName))
 		{

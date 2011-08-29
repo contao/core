@@ -6,3 +6,4 @@ Contao Open Source CMS Changelog
 Version 2.11.beta1 (XXXX-XX-XX)
 -------------------------------
 - Improved: make display_errors and error_reporting configurable independently (#3338)
+- Improved: disable all caches if the debug mode is enabled (#3285)

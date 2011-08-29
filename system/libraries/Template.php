@@ -291,10 +291,13 @@ abstract class Template extends Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			echo "\n\n" . '<pre style="width:80%; overflow:auto; margin:24px auto; padding:9px; background:#fff;">' . "\n";
-			echo "<strong>Debug information</strong>\n\n";
+			echo "\n\n"
+				.'<div style="width:936px;background:#fff;margin:0 auto 24px;padding:1px;border:1px solid #bbb;">'
+				.'<h1 style="background:#b3b6b3;color:#fff;margin:0;padding:2px 0 3px 6px;">Debug information</h1>'
+				.'<pre style="max-height:480px;overflow:auto;padding:9px;">';
 			print_r($GLOBALS['TL_DEBUG']);
-			echo "</pre>";
+			echo '</pre>'
+				.'</div>';
 		}
 	}
 
@@ -307,7 +310,7 @@ abstract class Template extends Controller
 	public function minifyHtml($strHtml)
 	{
 		// The feature has been disabled
-		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'])
+		if (!$GLOBALS['TL_CONFIG']['minifyMarkup'] || $GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			return $strHtml;
 		}
