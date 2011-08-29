@@ -349,7 +349,12 @@ class Input
 			return $varValue;
 		}
 
-		return get_magic_quotes_gpc() ? stripslashes($varValue) : $varValue;
+		if (function_exists('get_magic_quotes_gpc'))
+		{
+			$varValue = stripslashes($varValue);
+		}
+
+		return $varValue;
 	}
 
 
