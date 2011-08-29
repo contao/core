@@ -60,7 +60,10 @@ class InstallTool extends Backend
 	public function __construct()
 	{
 		$this->import('String');
-		parent::__construct();
+		$this->import('Config');
+		$this->import('Input');
+		$this->import('Environment');
+		$this->import('Session');
 
 		$GLOBALS['TL_CONFIG']['showHelp'] = false;
 		$GLOBALS['TL_CONFIG']['displayErrors'] = true;
