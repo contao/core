@@ -2831,7 +2831,7 @@ abstract class Controller extends System
 		}
 
 		// Try to load from cache
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && !$blnNoCache)
+		if (!$blnNoCache)
 		{
 			// Handle multiple requests for the same class
 			if (isset($this->arrCache[$strClass]))
@@ -2842,14 +2842,10 @@ abstract class Controller extends System
 			$objCache = FileCache::getInstance('classes');
 
 			// Check the file cache
-			if (isset($objCache->$strClass))
+			if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClass))
 			{
 				$this->arrCache[$strClass] = $objCache->$strClass;
 				return $objCache->$strClass;
-			}
-			else
-			{
-				unset($objCache->$strClass);
 			}
 		}
 
@@ -2874,7 +2870,7 @@ abstract class Controller extends System
 		}
 
 		// Remember the result
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && !$blnNoCache)
+		if (!$blnNoCache)
 		{
 			$objCache->$strClass = $this->arrCache[$strClass];
 		}
