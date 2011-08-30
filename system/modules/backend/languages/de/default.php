@@ -377,5 +377,6 @@ $GLOBALS['TL_LANG']['MSC']['default']          = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Hilfe-Assistent';
 $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
 $GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (Kopie)';
+$GLOBALS['TL_LANG']['MSC']['coreOnlyMode']     = 'Contao befindet sich momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden. Dieser Modus ist z.B. nach einem Live Update aktiv, um eventuellen Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Sie können den Betriebsmodus nach der Prüfung der installierten Third-Party-Erweiterungen in den Backend-Einstellungen anpassen.';
 
 ?>

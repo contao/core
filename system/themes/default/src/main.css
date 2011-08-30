@@ -51,6 +51,12 @@ body {
 	text-align:right;
 	color:#666966;
 }
+#safe_mode {
+	margin:0;
+	background-image:none;
+	padding:8px 12px 10px;
+	border-top:1px solid #ccc;
+}
 
 /* Container */
 #container {

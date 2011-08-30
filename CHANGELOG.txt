@@ -1,9 +1,27 @@
-================================
-Contao Open Source CMS Changelog
-================================
-
+##
+# Contao Open Source CMS Changelog
+# @see http://www.contao.org
+##
 
 Version 2.11.beta1 (XXXX-XX-XX)
--------------------------------
-- Improved: make display_errors and error_reporting configurable independently (#3338)
-- Improved: disable all caches if the debug mode is enabled (#3285)
+===============================
+
+r1004 (New)
+-----------
+
+Added a safe operation mode in which only core modules are loaded. It can be
+used to debug an installation or to prevent possible incompatibilities after
+an update. It is configurable in the back end.
+
+r1002 (Improvement)
+-------------------
+
+Disable all caches if the debug mode is enabled (see #3285). This includes
+HTML and CSS minification, the front end page cache and the system cache for
+getTemplate(), getImage() and __autoload().
+
+r1001 (Improvement)
+-------------------
+
+Make display_errors and error_reporting configurable independently, so error
+messages are logged even when they are not displayed (see #3338).

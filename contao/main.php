@@ -222,6 +222,8 @@ class Main extends Backend
 		$this->Template->frontendFile = $GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php';
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
+		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
+		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
 
 		// Front end preview links
 		if (CURRENT_ID != '')
