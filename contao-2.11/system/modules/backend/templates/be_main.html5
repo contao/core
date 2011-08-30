@@ -51,6 +51,10 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 <span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->home; ?>" accesskey="h"><?php echo $this->home; ?></a> &nbsp; :: &nbsp; </span>
 <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/index.php" class="header_logout" title="<?php echo $this->logout; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
 </div>
+<?php if ($this->isCoreOnlyMode): ?>
+
+<p id="safe_mode" class="tl_error"><?php echo $this->coreOnlyMode; ?></p>
+<?php endif; ?>
 
 </div>
 

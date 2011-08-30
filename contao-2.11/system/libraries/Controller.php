@@ -2874,7 +2874,7 @@ abstract class Controller extends System
 		}
 
 		// Remember the result
-		if (!$blnNoCache)
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && !$blnNoCache)
 		{
 			$objCache->$strClass = $this->arrCache[$strClass];
 		}

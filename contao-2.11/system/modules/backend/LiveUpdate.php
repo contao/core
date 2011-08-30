@@ -111,6 +111,7 @@ class LiveUpdate extends Backend implements executable
 		elseif ($this->Input->get('act') == 'runonce')
 		{
 			$this->handleRunOnce();
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
 			$this->redirect('contao/main.php?do=maintenance');
 		}
 

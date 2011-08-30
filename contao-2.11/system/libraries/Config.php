@@ -234,7 +234,16 @@ class Config
 		}
 
 		$arrActiveModules = array('backend', 'frontend');
-		$arrAllModules = scan(TL_ROOT . '/system/modules');
+
+		// Load only core modules in safe mode
+		if ($GLOBALS['TL_CONFIG']['coreOnlyMode'])
+		{
+			$arrAllModules = array('backend', 'calendar', 'comments', 'faq', 'frontend', 'listing', 'news', 'newsletter', 'registration', 'rep_base', 'rep_client', 'rss_reader', 'tpl_editor');
+		}
+		else
+		{
+			$arrAllModules = scan(TL_ROOT . '/system/modules');
+		}
 
 		$arrInactiveModules = deserialize($GLOBALS['TL_CONFIG']['inactiveModules']);
 		$blnCheckInactiveModules = is_array($arrInactiveModules);

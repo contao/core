@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,encryptionKey,debugMode,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,debugMode,coreOnlyMode,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -216,21 +216,21 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('preserveTags'=>true, 'tl_class'=>'long')
 		),
-		'encryptionKey' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['encryptionKey'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'minlength'=>12, 'tl_class'=>'w50')
-		),
 		'debugMode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['debugMode'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12'),
+			'eval'                    => array('tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_settings', 'regenerateScripts')
 			)
+		),
+		'coreOnlyMode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'displayErrors' => array
 		(

@@ -377,5 +377,6 @@ $GLOBALS['TL_LANG']['MSC']['default']          = 'Default';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Help wizard';
 $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'You have to allow cookies to use Contao.';
 $GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (copy)';
+$GLOBALS['TL_LANG']['MSC']['coreOnlyMode']     = 'Contao is currently running in <strong>safe mode</strong>, in which only core modules are loaded. This operation mode is e.g. activated after a Live Update to prevent possible incompatibilities with third-party extensions. You can deactivate it in the back end settings after you have checked the installed third-party extensions.';
 
 ?>

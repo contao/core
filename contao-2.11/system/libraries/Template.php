@@ -292,7 +292,7 @@ abstract class Template extends Controller
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			echo "\n\n"
-				.'<div style="width:936px;background:#fff;margin:0 auto 24px;padding:1px;border:1px solid #bbb;">'
+				.'<div style="width:936px;background:#fff;margin:24px auto;padding:1px;border:1px solid #bbb;">'
 				.'<h1 style="background:#b3b6b3;color:#fff;margin:0;padding:2px 0 3px 6px;">Debug information</h1>'
 				.'<pre style="max-height:480px;overflow:auto;padding:9px;">';
 			print_r($GLOBALS['TL_DEBUG']);
@@ -343,7 +343,7 @@ abstract class Template extends Controller
 
 				// Minify inline scripts
 				$strChunk = str_replace("/* <![CDATA[ */\n", '/* <![CDATA[ */', $strChunk);
-				$strChunk = preg_replace(array('@(?<!:)//.*@', '/[ \n\t]*(;|=|\{|\}|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
+				$strChunk = preg_replace(array('@(?<!:)//.*@', '/[ \n\t]*(;|=|\{|\}|\[|\]|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
 				$strChunk = trim($strChunk);
 			}
 			else
