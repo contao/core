@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.10.1 (XXXX-XX-XX)
+Version 2.10.1 (2011-08-31)
 ---------------------------
 - Updated: updated TinyMCE to version 3.4.4 (#3329)
 - Added: try to create missing CSS files before throwing the Combiner exception (#3350)
