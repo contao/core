@@ -594,6 +594,7 @@ class tl_settings extends Backend
 	 * Check the upload path
 	 * @param mixed
 	 * @return array
+	 * @throws Exception
 	 */
 	public function checkUploadPath($varValue)
 	{
@@ -602,6 +603,10 @@ class tl_settings extends Backend
 		if ($varValue == '.' || $varValue == '..' || $varValue == '')
 		{
 			$varValue = 'tl_files';
+		}
+		elseif ($varValue == 'contao' || strncmp($varValue, 'contao/', 7) === 0 || $varValue == 'plugins' || strncmp($varValue, 'plugins/', 8) === 0 || $varValue == 'system' || strncmp($varValue, 'system/', 7) === 0 || $varValue == 'templates' || strncmp($varValue, 'templates/', 10) === 0)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		return $varValue;
