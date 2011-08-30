@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1006 (Improvement)
+-------------------
+
+Prevent setting the upload path to one of the Contao core folders (see #3418)
+so the installation cannot be modified with the file manager.
+
 r1004 (New)
 -----------
 
