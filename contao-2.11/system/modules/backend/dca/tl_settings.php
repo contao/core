@@ -604,7 +604,7 @@ class tl_settings extends Backend
 		{
 			$varValue = 'tl_files';
 		}
-		elseif ($varValue == 'contao' || strncmp($varValue, 'contao/', 7) === 0 || $varValue == 'plugins' || strncmp($varValue, 'plugins/', 8) === 0 || $varValue == 'system' || strncmp($varValue, 'system/', 7) === 0 || $varValue == 'templates' || strncmp($varValue, 'templates/', 10) === 0)
+		elseif (preg_match('@^(contao|plugins|system|templates|typolight)(/|$)@', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
