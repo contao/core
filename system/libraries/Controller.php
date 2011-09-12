@@ -2926,6 +2926,7 @@ abstract class Controller extends System
 
 		// Thanks to Andreas Schempp (see #2475)
 		$arrPages = array_intersect($this->getChildRecords(0, $strTable), $arrPages);
+		$arrPages = array_reverse($arrPages); // see #3423
 		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable)));
 
 		return $arrPages;
