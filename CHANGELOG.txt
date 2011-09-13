@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1014 (Fixed)
+-------------
+
+Make all e-mail fields in the database the same size (see #3458).
+
 r1013 (Improvement)
 -------------------
 

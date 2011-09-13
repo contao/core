@@ -64,7 +64,7 @@ CREATE TABLE `tl_newsletter_recipients` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
-  `email` varchar(128) NOT NULL default '',
+  `email` varchar(255) NOT NULL default '',
   `active` char(1) NOT NULL default '',
   `addedOn` varchar(10) NOT NULL default '',
   `ip` varchar(64) NOT NULL default '',
