@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1013 (Improvement)
+-------------------
+
+Make the Database classes independent from the DB_DRIVER constant (see #3452)
+and use factory methods in the driver classes instead.
+
 r1006 (Improvement)
 -------------------
 

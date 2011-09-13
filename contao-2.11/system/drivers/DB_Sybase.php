@@ -211,6 +211,17 @@ class DB_Sybase extends Database
 	 * @todo implement
 	 */
 	protected function get_size_of($strTable) {}
+
+	/**
+	 * Create a Database_Statement object
+	 * @param resource
+	 * @param boolean
+	 * @return object
+	 */
+	protected function createStatement($resConnection, $blnDisableAutocommit)
+	{
+		return new DB_Sybase_Statement($resConnection, $blnDisableAutocommit);
+	}
 }
 
 
@@ -304,6 +315,17 @@ class DB_Sybase_Statement extends Database_Statement
 	protected function explain_query()
 	{
 		return false;
+	}
+
+	/**
+	 * Create a Database_Result object
+	 * @param resource
+	 * @param string
+	 * @return object
+	 */
+	protected function createResult($resResult, $strQuery)
+	{
+		return new DB_Sybase_Result($resResult, $strQuery);
 	}
 }
 

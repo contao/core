@@ -131,8 +131,6 @@ abstract class Database
 			}
 
 			include_once($strFile);
-			define('DB_DRIVER', $strClass);
-
 			self::$objInstance = new $strClass();
 		}
 
@@ -147,9 +145,7 @@ abstract class Database
 	 */
 	public function prepare($strQuery)
 	{
-		$strClass = DB_DRIVER . '_Statement';
-		$objStatement = new $strClass($this->resConnection, $this->blnDisableAutocommit);
-
+		$objStatement = $this->createStatement($this->resConnection, $this->blnDisableAutocommit);
 		return $objStatement->prepare($strQuery);
 	}
 
@@ -183,9 +179,7 @@ abstract class Database
 	 */
 	public function query($strQuery)
 	{
-		$strClass = DB_DRIVER . '_Statement';
-		$objStatement = new $strClass($this->resConnection, $this->blnDisableAutocommit);
-
+		$objStatement = $this->createStatement($this->resConnection, $this->blnDisableAutocommit);
 		return $objStatement->query($strQuery);
 	}
 
@@ -393,6 +387,7 @@ abstract class Database
 	abstract protected function lock_tables($arrTables);
 	abstract protected function unlock_tables();
 	abstract protected function get_size_of($strTable);
+	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
 }
 
 
@@ -685,8 +680,7 @@ abstract class Database_Statement
 		}
 
 		// Instantiate a result object
-		$strClass = DB_DRIVER . '_Result';
-		$objResult = new $strClass($this->resResult, $this->strQuery);
+		$objResult = $this->createResult($this->resResult, $this->strQuery);
 		$this->debugQuery($objResult);
 
 		return $objResult;
@@ -801,6 +795,7 @@ abstract class Database_Statement
 	abstract protected function affected_rows();
 	abstract protected function insert_id();
 	abstract protected function explain_query();
+	abstract protected function createResult($resResult, $strQuery);
 }
 
 

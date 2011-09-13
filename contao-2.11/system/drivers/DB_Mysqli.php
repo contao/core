@@ -261,6 +261,17 @@ class DB_Mysqli extends Database
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
+
+	/**
+	 * Create a Database_Statement object
+	 * @param resource
+	 * @param boolean
+	 * @return object
+	 */
+	protected function createStatement($resConnection, $blnDisableAutocommit)
+	{
+		return new DB_Mysqli_Statement($resConnection, $blnDisableAutocommit);
+	}
 }
 
 
@@ -361,6 +372,17 @@ class DB_Mysqli_Statement extends Database_Statement
 	protected function explain_query()
 	{
 		return @$this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
+	}
+
+	/**
+	 * Create a Database_Result object
+	 * @param resource
+	 * @param string
+	 * @return object
+	 */
+	protected function createResult($resResult, $strQuery)
+	{
+		return new DB_Mysqli_Result($resResult, $strQuery);
 	}
 }
 
