@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1018 (Improvement)
+-------------------
+
+Only show the menu to rebuild the search index in the maintenance module
+if the search has not been disabled in the back end settings (see #3425).
+
 r1017 (Update)
 --------------
 
