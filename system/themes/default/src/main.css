@@ -1073,7 +1073,7 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 }
 
 /* Visual hint for TRBL fields - thanks to Eugene Rybyakov */
-.tl_text_trbl,#ctrl_size input,#ctrl_gradient input {
+.tl_text_trbl,#ctrl_size_0,#ctrl_size_1,#ctrl_gradient input {
 	background:url("images/hints.gif") no-repeat -20px 20px;
 }
 #ctrl_size_0 {

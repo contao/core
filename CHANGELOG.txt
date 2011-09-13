@@ -6,6 +6,7 @@ Version 2.10.2 (XXXX-XX-XX)
 ---------------------------
 - Fixed: do not remove slashes just because get_magic_quotes_gpc() exists
 - Fixed: eliminateNestedPages() reverses the site structure order (#3423)
+- Fixed a few minor issues
 
 Version 2.10.1 (2011-08-31)
 ---------------------------
