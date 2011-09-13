@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1017 (Update)
+--------------
+
+Updated CSS3PIE to version 1.0beta5 (see #3454).
+
 r1014 (Fixed)
 -------------
 
