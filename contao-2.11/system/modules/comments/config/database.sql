@@ -17,7 +17,7 @@ CREATE TABLE `tl_comments` (
   `source` varchar(32) NOT NULL default '',
   `parent` int(10) unsigned NOT NULL default '0',
   `name` varchar(64) NOT NULL default '',
-  `email` varchar(128) NOT NULL default '',
+  `email` varchar(255) NOT NULL default '',
   `website` varchar(128) NOT NULL default '',
   `comment` text NULL,
   `addReply` char(1) NOT NULL default '',
