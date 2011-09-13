@@ -286,6 +286,17 @@ class DB_Mysql extends Database
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
+
+	/**
+	 * Create a Database_Statement object
+	 * @param resource
+	 * @param boolean
+	 * @return object
+	 */
+	protected function createStatement($resConnection, $blnDisableAutocommit)
+	{
+		return new DB_Mysql_Statement($resConnection, $blnDisableAutocommit);
+	}
 }
 
 
@@ -387,6 +398,17 @@ class DB_Mysql_Statement extends Database_Statement
 	protected function explain_query()
 	{
 		return @mysql_fetch_assoc(@mysql_query('EXPLAIN ' . $this->strQuery, $this->resConnection));
+	}
+
+	/**
+	 * Create a Database_Result object
+	 * @param resource
+	 * @param string
+	 * @return object
+	 */
+	protected function createResult($resResult, $strQuery)
+	{
+		return new DB_Mysql_Result($resResult, $strQuery);
 	}
 }
 
