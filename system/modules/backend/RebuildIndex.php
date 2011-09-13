@@ -46,7 +46,7 @@ class RebuildIndex extends Backend implements executable
 	 */
 	public function isActive()
 	{
-		return ($this->Input->get('act') == 'index');
+		return ($GLOBALS['TL_CONFIG']['enableSearch'] && $this->Input->get('act') == 'index');
 	}
 
 
@@ -56,6 +56,11 @@ class RebuildIndex extends Backend implements executable
 	 */
 	public function run()
 	{
+		if (!$GLOBALS['TL_CONFIG']['enableSearch'])
+		{
+			return '';
+		}
+
 		$time = time();
 		$objTemplate = new BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand($this->Environment->request);
