@@ -324,7 +324,7 @@ class DbInstaller extends Controller
 
 		foreach ($tables as $table)
 		{
-			$fields = $this->Database->listFields($table);
+			$fields = $this->Database->listFields($table, true);
 
 			foreach ($fields as $field)
 			{

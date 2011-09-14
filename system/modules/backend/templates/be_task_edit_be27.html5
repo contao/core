@@ -40,7 +40,7 @@
     });
   });
   </script>
-  <?php if ($this->deadline->help): ?>
+<?php if ($this->deadline->help): ?>
   <p class="tl_help tl_tip"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
 </div>
