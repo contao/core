@@ -117,7 +117,7 @@ class Config
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Config();
+			self::$objInstance = new self();
 			self::$objInstance->initialize();
 		}
 

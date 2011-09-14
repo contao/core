@@ -85,7 +85,7 @@ class Encryption
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Encryption();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

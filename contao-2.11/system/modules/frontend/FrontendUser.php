@@ -170,7 +170,7 @@ class FrontendUser extends User
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new FrontendUser();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

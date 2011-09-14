@@ -61,7 +61,7 @@ class Search extends System
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Search();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

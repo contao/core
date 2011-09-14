@@ -113,7 +113,7 @@ class Environment
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Environment();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

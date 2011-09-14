@@ -73,7 +73,7 @@ class Input
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Input();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1024 (Change)
+--------------
+
+Modify the getInstance() method of the Singleton classes so it uses new self()
+instead of e.g. new Config() (see #2969).
+
 r1018 (Improvement)
 -------------------
 

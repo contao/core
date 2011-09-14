@@ -111,7 +111,7 @@ class Session
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new Session();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;

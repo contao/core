@@ -67,7 +67,7 @@ class String
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new String();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;
