@@ -564,10 +564,15 @@ class tl_settings extends Backend
 	 */
 	public function regenerateScripts($varValue)
 	{
-		$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
+		if ($varValue != $GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
 
-		$this->import('Automator');
-		$this->Automator->purgeScriptsFolder();
+			$this->import('Automator');
+			$this->Automator->purgeTempFolder();
+			$this->Automator->purgeScriptsFolder();
+			$this->Automator->purgeHtmlFolder();
+		}
 
 		return $varValue;
 	}
