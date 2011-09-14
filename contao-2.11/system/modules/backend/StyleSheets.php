@@ -299,7 +299,7 @@ class StyleSheets extends Backend
 				{
 					if ($v != '' && $k != 'unit')
 					{
-						$return .= $lb . $k . ':' . $v . (($v == 'auto' || $v == 0) ? '' : $row['trbl']['unit']) . ';';
+						$return .= $lb . $k . ':' . $v . (($v == 'auto' || $v === '0') ? '' : $row['trbl']['unit']) . ';';
 					}
 				}
 			}
@@ -350,7 +350,7 @@ class StyleSheets extends Backend
 					$bottom = $row['margin']['bottom'];
 					$left = $row['margin']['left'];
 
-					// Overwrite left and right margin if an alignment is set
+					// Overwrite the left and right margin if an alignment is set
 					if ($row['align'] != '')
 					{
 						if ($row['align'] == 'left' || $row['align'] == 'center')
@@ -369,19 +369,19 @@ class StyleSheets extends Backend
 					{
 						if ($top == $right && $top == $bottom && $top == $left)
 						{
-							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ';';
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top === '0') ? '' : $row['margin']['unit']) . ';';
 						}
 						elseif ($top == $bottom && $right == $left)
 						{
-							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ';';
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top === '0') ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right === '0') ? '' : $row['margin']['unit']) . ';';
 						}
 						elseif ($top != $bottom && $right == $left)
 						{
-							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ';';
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top === '0') ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right === '0') ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom === '0') ? '' : $row['margin']['unit']) . ';';
 						}
 						else
 						{
-							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top == 0) ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right == 0) ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom == 0) ? '' : $row['margin']['unit']) . ' ' . $left . (($left == 'auto' || $left == 0) ? '' : $row['margin']['unit']) . ';';
+							$return .= $lb . 'margin:' . $top . (($top == 'auto' || $top === '0') ? '' : $row['margin']['unit']) . ' ' . $right . (($right == 'auto' || $right === '0') ? '' : $row['margin']['unit']) . ' ' . $bottom . (($bottom == 'auto' || $bottom === '0') ? '' : $row['margin']['unit']) . ' ' . $left . (($left == 'auto' || $left === '0') ? '' : $row['margin']['unit']) . ';';
 						}
 					}
 					else
@@ -392,7 +392,7 @@ class StyleSheets extends Backend
 						{
 							if ($v != '')
 							{
-								$return .= $lb . 'margin-' . $k . ':' . $v . (($v == 'auto' || $v == 0) ? '' : $row['margin']['unit']) . ';';
+								$return .= $lb . 'margin-' . $k . ':' . $v . (($v == 'auto' || $v === '0') ? '' : $row['margin']['unit']) . ';';
 							}
 						}
 					}
@@ -416,19 +416,19 @@ class StyleSheets extends Backend
 					{
 						if ($top == $right && $top == $bottom && $top == $left)
 						{
-							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ';';
+							$return .= $lb . 'padding:' . $top . (($top === '0') ? '' : $row['padding']['unit']) . ';';
 						}
 						elseif ($top == $bottom && $right == $left)
 						{
-							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ';';
+							$return .= $lb . 'padding:' . $top . (($top === '0') ? '' : $row['padding']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['padding']['unit']) . ';';
 						}
 						elseif ($top != $bottom && $right == $left)
 						{
-							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ';';
+							$return .= $lb . 'padding:' . $top . (($top === '0') ? '' : $row['padding']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom === '0') ? '' : $row['padding']['unit']) . ';';
 						}
 						else
 						{
-							$return .= $lb . 'padding:' . $top . (($top == 0) ? '' : $row['padding']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['padding']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['padding']['unit']) . ';';
+							$return .= $lb . 'padding:' . $top . (($top === '0') ? '' : $row['padding']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['padding']['unit']) . ' ' . $bottom . (($bottom === '0') ? '' : $row['padding']['unit']) . ' ' . $left . (($left === '0') ? '' : $row['padding']['unit']) . ';';
 						}
 					}
 					else
@@ -439,7 +439,7 @@ class StyleSheets extends Backend
 						{
 							if ($v != '')
 							{
-								$return .= $lb . 'padding-' . $k . ':' . $v . (($v == 0) ? '' : $row['padding']['unit']) . ';';
+								$return .= $lb . 'padding-' . $k . ':' . $v . (($v === '0') ? '' : $row['padding']['unit']) . ';';
 							}
 						}
 					}
@@ -674,15 +674,15 @@ class StyleSheets extends Backend
 					$blursize = $row['shadowsize']['bottom'];
 					$radius = $row['shadowsize']['left'];
 
-					$shadow = $offsetx . (($offsetx == 0) ? '' : $row['shadowsize']['unit']);
-					$shadow .= ' ' . $offsety . (($offsety == 0) ? '' : $row['shadowsize']['unit']);
+					$shadow = $offsetx . (($offsetx === '0') ? '' : $row['shadowsize']['unit']);
+					$shadow .= ' ' . $offsety . (($offsety === '0') ? '' : $row['shadowsize']['unit']);
 					if ($blursize != '')
 					{
-						$shadow .= ' ' . $blursize . (($blursize == 0) ? '' : $row['shadowsize']['unit']);
+						$shadow .= ' ' . $blursize . (($blursize === '0') ? '' : $row['shadowsize']['unit']);
 					}
 					if ($radius != '')
 					{
-						$shadow .= ' ' . $radius . (($radius == 0) ? '' : $row['shadowsize']['unit']);
+						$shadow .= ' ' . $radius . (($radius === '0') ? '' : $row['shadowsize']['unit']);
 					}
 					if ($shColor[0] != '')
 					{
@@ -788,19 +788,19 @@ class StyleSheets extends Backend
 					{
 						if ($top == $right && $top == $bottom && $top == $left)
 						{
-							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ';';
+							$borderradius = $top . (($top === '0') ? '' : $row['borderradius']['unit']) . ';';
 						}
 						elseif ($top == $bottom && $right == $left)
 						{
-							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ';';
+							$borderradius = $top . (($top === '0') ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['borderradius']['unit']) . ';';
 						}
 						elseif ($top != $bottom && $right == $left)
 						{
-							$borderradius = $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['borderradius']['unit']) . ';';
+							$borderradius = $top . (($top === '0') ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom === '0') ? '' : $row['borderradius']['unit']) . ';';
 						}
 						else
 						{
-							$borderradius .= $top . (($top == 0) ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right == 0) ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom == 0) ? '' : $row['borderradius']['unit']) . ' ' . $left . (($left == 0) ? '' : $row['borderradius']['unit']) . ';';
+							$borderradius .= $top . (($top === '0') ? '' : $row['borderradius']['unit']) . ' ' . $right . (($right === '0') ? '' : $row['borderradius']['unit']) . ' ' . $bottom . (($bottom === '0') ? '' : $row['borderradius']['unit']) . ' ' . $left . (($left === '0') ? '' : $row['borderradius']['unit']) . ';';
 						}
 
 						$return .= $lb . '-moz-border-radius:' . $borderradius;
@@ -815,9 +815,9 @@ class StyleSheets extends Backend
 						{
 							if ($v != '')
 							{
-								$return .= $lb . '-moz-border-radius-' . str_replace('-', '', $k) . ':' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
-								$return .= $lb . '-webkit-border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
-								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v == 0) ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . '-moz-border-radius-' . str_replace('-', '', $k) . ':' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . '-webkit-border-' . $k . '-radius:' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
+								$return .= $lb . 'border-' . $k . '-radius:' . $v . (($v === '0') ? '' : $row['borderradius']['unit']) . ';';
 							}
 						}
 					}
@@ -1003,7 +1003,12 @@ class StyleSheets extends Backend
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
             {                
 				$this->import($callback[0]);
-				$return .= $lb . $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
+				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
+
+				if ($strTemp != '')
+				{
+					$return .= $lb . $strTemp;
+				}
 			}    
 		}
 
