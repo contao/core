@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1026 (Change)
+--------------
+
+Do not copy the date and time of duplicated news and events (see #3463).
+
 r1024 (Change)
 --------------
 
