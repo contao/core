@@ -1003,7 +1003,12 @@ class StyleSheets extends Backend
 			foreach ($GLOBALS['TL_HOOKS']['compileDefinition'] as $callback)
             {                
 				$this->import($callback[0]);
-				$return .= $lb . $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
+				$strTemp = $this->$callback[0]->$callback[1]($row, $blnWriteToFile, $vars);
+
+				if ($strTemp != '')
+				{
+					$return .= $lb . $strTemp;
+				}
 			}    
 		}
 
