@@ -7,6 +7,7 @@ Version 2.10.2 (XXXX-XX-XX)
 - Fixed: do not remove slashes just because get_magic_quotes_gpc() exists
 - Fixed: eliminateNestedPages() reverses the site structure order (#3423)
 - Fixed: CSS units were not always applied when used with global variables (#3464)
+- Fixed: the task deadline field did not show the date picker (#3351)
 - Fixed a few minor issues
 
 Version 2.10.1 (2011-08-31)
