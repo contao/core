@@ -155,7 +155,7 @@ class BackendUser extends User
 	{
 		if (!is_object(self::$objInstance))
 		{
-			self::$objInstance = new BackendUser();
+			self::$objInstance = new self();
 		}
 
 		return self::$objInstance;
