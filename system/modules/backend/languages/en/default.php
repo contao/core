@@ -377,5 +377,6 @@ $GLOBALS['TL_LANG']['MSC']['default']          = 'Default';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Help wizard';
 $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'You have to allow cookies to use Contao.';
 $GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (copy)';
+$GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-mail address';
 
 ?>
