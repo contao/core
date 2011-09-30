@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1031 (Change)
+--------------
+
+In the global buttons callback, pass the "class" value instead of the "icon"
+value as fourth argument, since there is no icon setting (see #3504).
+
 r1026 (Change)
 --------------
 
