@@ -209,7 +209,7 @@ class Pagination extends Frontend
 		$blnQuery = false;
 		$this->strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
 
-		// Prepare URL
+		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
 			if (strncasecmp($fragment, 'page', 4) !== 0)
@@ -246,28 +246,28 @@ class Pagination extends Frontend
 		$this->Template->first = array
 		(
 			'link' => $this->lblFirst,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=1',
+			'href' => $this->linkToPage(1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), 1)
 		);
 
 		$this->Template->previous = array
 		(
 			'link' => $this->lblPrevious,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . ($this->intPage - 1),
+			'href' => $this->linkToPage($this->intPage - 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage - 1))
 		);
 
 		$this->Template->next = array
 		(
 			'link' => $this->lblNext,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . ($this->intPage + 1),
+			'href' => $this->linkToPage($this->intPage + 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage + 1))
 		);
 
 		$this->Template->last = array
 		(
 			'link' => $this->lblLast,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $this->intTotalPages,
+			'href' => $this->linkToPage($this->intTotalPages),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
 
@@ -322,12 +322,30 @@ class Pagination extends Frontend
 			}
 
 			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
-								ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $i,
+								$this->linkToPage($i),
 								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
 								$i);
 		}
 
 		return implode($strSeparator, $arrLinks);
+	}
+
+
+	/**
+	 * Generate a link and return the URL
+	 * @param integer
+	 * @return string
+	 */
+	protected function linkToPage($intPage)
+	{
+		if ($intPage <= 1)
+		{
+			return ampersand($this->strUrl);
+		}
+		else
+		{
+			return ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $intPage;
+		}
 	}
 }
 
