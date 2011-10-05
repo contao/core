@@ -101,6 +101,7 @@ Version 2.10.RC1 (2011-06-23)
 - Fixed: the Input class did not filter "expression()" (#2865)
 - Fixed: the "listTables()" and "listFields()" methods were always cached (#3188)
 - Fixed: the page cache timeout was limited to 24 hours (#3167)
+- Fixed: the style sheet generator did not render correctly in debug mode (#3520)
 - Fixed a few minor issues
 
 Version 2.10.beta1 (2011-06-01)

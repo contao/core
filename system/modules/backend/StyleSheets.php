@@ -178,7 +178,7 @@ class StyleSheets extends Backend
 			$intLength = strlen($strText);
 
 			// Add a line break after approximately 400 characters
-			if (($intCount + $intLength) >= 400)
+			if (!$GLOBALS['TL_CONFIG']['debugMode'] && ($intCount + $intLength) >= 400)
 			{
 				$intCount = 0;
 				$objFile->append('');
@@ -201,22 +201,19 @@ class StyleSheets extends Backend
 	 */
 	public function compileDefinition($row, $blnWriteToFile=false, $vars=array())
 	{
-		if ($GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			$blnWriteToFile = false;
-		}
+		$blnDebug = $GLOBALS['TL_CONFIG']['debugMode'];
 
 		if ($blnWriteToFile)
 		{
 			$strGlue = '../../';
-			$lb = '';
+			$lb = ($blnDebug ? "\n    " : '');
 			$return = '';
 		}
 		else
 		{
-			$strGlue = $GLOBALS['TL_CONFIG']['debugMode'] ? '../../' : '';
+			$strGlue = '';
 			$lb = "\n    ";
-			$return = $GLOBALS['TL_CONFIG']['debugMode'] ? "\n" : "\n<pre>";
+			$return = "\n<pre>";
 		}
 
 		$blnNeedsPie = false;
@@ -227,13 +224,12 @@ class StyleSheets extends Backend
 			$search = array('@^\s*/\*+@', '@\*+/\s*$@');
 			$comment = preg_replace($search, '', $row['comment']);
 			$comment = wordwrap(trim($comment), 72);
-
 			$return .= "\n/* " . $comment . " */\n";
 		}
 
 		// Selector
 		$arrSelector = trimsplit(',', $this->String->decodeEntities($row['selector']));
-		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? '' : "\n") . '{';
+		$return .= implode(($blnWriteToFile ? ',' : ",\n"), $arrSelector) . ($blnWriteToFile ? ($blnDebug ? ' ' : '') : "\n") . '{';
 
 		// Size
 		if ($row['size'])
@@ -1017,7 +1013,7 @@ class StyleSheets extends Backend
 		}
 
 		// Close the format definition
-		$return .= ($blnWriteToFile ? '' : "\n") . '}' . ($blnWriteToFile ? '' : ($GLOBALS['TL_CONFIG']['debugMode'] ? "\n" : "</pre>\n"));
+		$return .= (($blnWriteToFile && !$blnDebug) ? '' : "\n") . '}' . ($blnWriteToFile ? ($blnDebug ? "\n" : '') : "</pre>\n");
 
 		// Replace global variables
 		if (strpos($return, '$') !== false && count($vars) > 0)
