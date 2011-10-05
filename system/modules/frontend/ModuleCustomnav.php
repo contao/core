@@ -125,7 +125,7 @@ class ModuleCustomnav extends Module
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new BackendTemplate($this->navigationTpl);
+		$objTemplate = new FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_1';
