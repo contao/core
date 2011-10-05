@@ -11,6 +11,7 @@ Version 2.10.2 (XXXX-XX-XX)
 - Fixed: the task deadline field did not show the date picker (#3351)
 - Fixed: do not return empty lines in the compileDefinition hook (#3440)
 - Fixed: the TinyMCE spellchecker did not work anymore (#3487)
+- Fixed: the regexp for validating phone numbers accepted invalid values (#3493)
 - Fixed a few minor issues
 
 Version 2.10.1 (2011-08-31)
