@@ -467,7 +467,8 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
+				$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
 			{
@@ -484,7 +485,8 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$return .= $lb . 'background-image:url("' . $strGlue . $row['bgimage'] . '");';
+					$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
 				}
 
 				// Background position
@@ -513,7 +515,8 @@ class StyleSheets extends Backend
 					// CSS3 PIE only supports -pie-background, so if there is a background image, include it here, too.
 					if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 					{
-						$bgImage = 'url("' . $strGlue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
+						$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$bgImage = 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
 					// Default starting point
@@ -978,7 +981,8 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$return .= $lb . 'list-style-image:url("' . $strGlue . $row['liststyleimage'] . '");';
+				$glue = (strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
 			}
 		}
 
@@ -992,7 +996,7 @@ class StyleSheets extends Backend
 		if ($row['own'] != '')
 		{
 			$own = trim($this->String->decodeEntities($row['own']));
-			$own = str_replace('url("', 'url("' . $strGlue, $own);
+			$own = preg_replace('/url\("([^\/])/', 'url("' . $strGlue . "$1", $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}

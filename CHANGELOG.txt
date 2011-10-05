@@ -13,6 +13,7 @@ Version 2.10.2 (XXXX-XX-XX)
 - Fixed: the TinyMCE spellchecker did not work anymore (#3487)
 - Fixed: the regexp for validating phone numbers accepted invalid values (#3493)
 - Fixed: added the new HTML5 elements to the valid TinyMCE tags (#3479)
+- Fixed: the style sheet generator did not support absolute URLs (#3512)
 - Fixed a few minor issues
 
 Version 2.10.1 (2011-08-31)
