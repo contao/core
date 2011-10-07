@@ -6,6 +6,16 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1043 (Fixed)
+-------------
+
+Redirect to the login screen upon Ajax requests when the session has expired
+(see #3516). This fix required some changes to the Request.Contao JavaScript
+class insofar as you have to pass "evalScripts:true" wherever you want the
+redirect mechanism to apply. Also, the Request.Mixed class has been replaced
+with the Request.Contao class and is not required anymore (it will remain for
+reasons of backwards compatibility though).
+
 r1038 (Improvement)
 -------------------
 
