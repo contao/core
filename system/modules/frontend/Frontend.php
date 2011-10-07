@@ -80,7 +80,7 @@ abstract class Frontend extends Controller
 			return is_numeric($this->Input->get('id')) ? $this->Input->get('id') : null;
 		}
 
-		if (!strlen($this->Environment->request))
+		if ($this->Environment->request == '')
 		{
 			return null;
 		}
@@ -106,13 +106,15 @@ abstract class Frontend extends Controller
 			}
 		}
 
-		// Add fragments to $_GET array
+		// DO NOT USE urldecode() HERE (XSS vulnerability)!
+
+		// Add the fragments to the $_GET array
 		for ($i=1; $i<count($arrFragments); $i+=2)
 		{
-			$_GET[urldecode($arrFragments[$i])] = urldecode($arrFragments[$i+1]);
+			$_GET[$arrFragments[$i]] = $arrFragments[$i+1];
 		}
 
-		return strlen($arrFragments[0]) ? urldecode($arrFragments[0]) : null;
+		return ($arrFragments[0] != '') ? $arrFragments[0] : null;
 	}
 
 
