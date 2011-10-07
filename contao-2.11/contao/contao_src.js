@@ -28,80 +28,6 @@
 
 
 /**
- * Class Request.Mixed
- * 
- * Extend the basic Request class with additional methods for interacting
- * with HTML responses that include script tags which are not evaluated.
- * @copyright  Leo Feyer 2005-2011
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Backend
- */
-Request.Mixed = new Class(
-{
-	Extends: Request.JSON,
-
-	options:
-	{
-		url: window.location.href,
-		evalScripts: false,
-		evalResponse: false
-	},
-
-	initialize: function(options)
-	{
-		if (options)
-		{
-			try
-			{
-				this.options.url = options.field.getParent('form').getAttribute('action');
-			}
-			catch(e) {}
-		}
-
-		this.parent(options);
-	},
-
-	success: function(text, xml)
-	{
-		var json;
-
-		try
-		{
-			json = this.response.json = JSON.decode(text, this.options.secure);
-		}
-		catch(error)
-		{
-			alert(error);
-			return;
-		}
-
-		if (json == null)
-		{
-			this.onFailure();
-		}
-		else
-		{
-			// Automatically set the new request token
-			if (json.token)
-			{
-				AjaxRequest.updateTokens(json.token);
-			}
-
-			// Strip scripts if any
-			json.content = json.content.stripScripts(function(script)
-			{
-				js = script;
-			});
-
-			js = js.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
-			this.onSuccess(json.content, js, json);
-		}
-	}
-
-});
-
-
-/**
  * Class Request.Contao
  * 
  * Extend the basic Request.JSON class to automatically handle request tokens.
@@ -132,7 +58,7 @@ Request.Contao = new Class(
 		this.parent(options);
 	},
 
-	success: function(text, xml)
+	success: function(text)
 	{
 		var json;
 
@@ -140,9 +66,9 @@ Request.Contao = new Class(
 		{
 			json = this.response.json = JSON.decode(text, this.options.secure);
 		}
-		catch(error)
+		catch(e)
 		{
-			alert(error);
+			alert(e);
 			return;
 		}
 
@@ -158,11 +84,28 @@ Request.Contao = new Class(
 				AjaxRequest.updateTokens(json.token);
 			}
 
+			// Isolate scripts and execute them
+			if (json.content)
+			{
+				json.content = json.content.stripScripts(function(script)
+				{
+					json.javascript = script.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g, '');
+				});
+
+				if (json.javascript && this.options.evalScripts)
+				{
+					$exec(json.javascript);
+				}
+			}
+
 			this.onSuccess(json.content, json);
 		}
 	}
 
 });
+
+// Backwards compatibility
+Request.Mixed = Request.Contao;
 
 
 /**
@@ -235,6 +178,7 @@ var AjaxRequest =
 
 		new Request.Contao(
 		{
+			evalScripts: true,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -296,6 +240,7 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			'field': el,
+			evalScripts: true,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -388,6 +333,7 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			'field': el,
+			evalScripts: true,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -457,6 +403,7 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			'field': el,
+			evalScripts: true,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -526,6 +473,7 @@ var AjaxRequest =
 		new Request.Contao(
 		{
 			'field': el,
+			evalScripts: true,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
 			onSuccess: function(txt, json)
 			{
@@ -568,6 +516,7 @@ var AjaxRequest =
 
 			new Request.Contao(
 			{
+				evalScripts: true,
 				onRequest: AjaxRequest.displayBox('Loading data …'),
 				onSuccess: function(txt, json)
 				{
@@ -620,18 +569,17 @@ var AjaxRequest =
 		new Request.Mixed(
 		{
 			'field': el,
+			evalScripts: false,
 			onRequest: AjaxRequest.displayBox('Loading data …'),
-			onSuccess: function(txt, js, json)
+			onSuccess: function(txt, json)
 			{
 				item = new Element('div');
 				item.setProperty('id', id);
 				item.set('html', txt);
 				item.injectAfter($(el).getParent('div').getParent('div'));
 
-				if (js)
-				{
-					$exec(js);
-				}
+				// Execute scripts after the DOM has been updated
+				if (json.javascript) $exec(json.javascript);
 
 				el.value = 1;
 				el.checked = 'checked';
