@@ -238,7 +238,7 @@ abstract class Template extends Controller
 			foreach ($GLOBALS['TL_HOOKS']['parseTemplate'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($this);
+				$this->$callback[0]->$callback[1]($this);
 			}
 		}
 
@@ -291,10 +291,8 @@ abstract class Template extends Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			echo "\n\n"
-				.'<div style="width:936px;background:#fff;margin:24px auto;padding:1px;border:1px solid #bbb;">'
-				.'<h1 style="background:#b3b6b3;color:#fff;margin:0;padding:2px 0 3px 6px;">Debug information</h1>'
-				.'<pre style="max-height:480px;overflow:auto;padding:9px;">';
+			echo "\n\n" . '<pre id="debug" style="width:80%; overflow:auto; margin:24px auto; padding:9px; background:#fff;">' . "\n";
+			echo "<strong>Debug information</strong>\n\n";
 			print_r($GLOBALS['TL_DEBUG']);
 			echo '</pre>'
 				.'</div>';
