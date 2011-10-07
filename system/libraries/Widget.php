@@ -685,7 +685,7 @@ abstract class Widget extends Controller
 
 				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
 				case 'phone':
-					if (!preg_match('/^[\d \+\(\)\/-]*$/', html_entity_decode($varInput)))
+					if (!preg_match('/^(\+|\()?(\d+[ \+\(\)\/-]*)+$/', html_entity_decode($varInput)))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['phone'], $this->strLabel));
 					}

@@ -33,7 +33,6 @@
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['register']         = 'Registrieren';
-$GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-Mail-Adresse';
 $GLOBALS['TL_LANG']['MSC']['accountActivated'] = 'Ihr Konto wurde aktiviert.';
 $GLOBALS['TL_LANG']['MSC']['accountError']     = 'Die Anfrage kann nicht verarbeitet werden.';
 $GLOBALS['TL_LANG']['MSC']['emailSubject']     = 'Ihre Registrierung auf %s';
