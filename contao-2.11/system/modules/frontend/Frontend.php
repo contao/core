@@ -87,7 +87,6 @@ abstract class Frontend extends Controller
 
 		$strRequest = preg_replace('/\?.*$/i', '', $this->Environment->request);
 		$strRequest = preg_replace('/' . preg_quote($GLOBALS['TL_CONFIG']['urlSuffix'], '/') . '$/i', '', $strRequest);
-
 		$arrFragments = explode('/', $strRequest);
 
 		// Skip index.php
@@ -106,12 +105,12 @@ abstract class Frontend extends Controller
 			}
 		}
 
-		// DO NOT USE urldecode() HERE (XSS vulnerability)!
+		$arrFragments = array_map('urldecode', $arrFragments);
 
 		// Add the fragments to the $_GET array
 		for ($i=1; $i<count($arrFragments); $i+=2)
 		{
-			$_GET[$arrFragments[$i]] = $arrFragments[$i+1];
+			$this->Input->setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
 		return ($arrFragments[0] != '') ? $arrFragments[0] : null;
@@ -138,7 +137,7 @@ abstract class Frontend extends Controller
 
 
 	/**
-	 * Overwrite parent method as front end URLs are handled differently
+	 * Overwrite the parent method as front end URLs are handled differently
 	 * @param string
 	 * @param boolean
 	 * @return string
@@ -172,9 +171,22 @@ abstract class Frontend extends Controller
 
 		$strParams = '';
 
+		// Determine connector and separator
+		if ($GLOBALS['TL_CONFIG']['disableAlias'])
+		{
+			$strConnector = '&amp;';
+			$strSeparator = '=';
+		}
+		else
+		{
+			$strConnector = '/';
+			$strSeparator = '/';
+		}
+
+		// Compile the parameters string
 		foreach ($arrGet as $k=>$v)
 		{
-			$strParams .= $GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' . $k . '=' . $v  : '/' . $k . '/' . $v;
+			$strParams .= $strConnector . urlencode($k) . $strSeparator . urlencode($v);
 		}
 
 		// Do not use aliases
