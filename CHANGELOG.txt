@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.10.2 (2010-10-10)
+Version 2.10.2 (2011-10-10)
 ---------------------------
 - Updated: updated TinyMCE to version 3.4.6
 - Fixed: do not remove slashes just because get_magic_quotes_gpc() exists
