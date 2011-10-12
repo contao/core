@@ -6,9 +6,15 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1049 (Change)
+--------------
+Changed the request token system from "one token per request" to "one token
+per session" (see #3214). This change will allow to remove most of the
+JavaScript routines to update the request token upon Ajax request (they have
+not yet been removed though).
+
 r1043 (Fixed)
 -------------
-
 Redirect to the login screen upon Ajax requests when the session has expired
 (see #3516). This fix required some changes to the Request.Contao JavaScript
 class insofar as you have to pass "evalScripts:true" wherever you want the
@@ -18,71 +24,59 @@ reasons of backwards compatibility though).
 
 r1038 (Improvement)
 -------------------
-
 Do not link to ?page=1 in the pagination menu but omit the parameter entirely,
 so there is no duplicate content being generated (see #3518).
 
 r1031 (Change)
 --------------
-
 In the global buttons callback, pass the "class" value instead of the "icon"
 value as fourth argument, since there is no icon setting (see #3504).
 
 r1026 (Change)
 --------------
-
 Do not copy the date and time of duplicated news and events (see #3463).
 
 r1024 (Change)
 --------------
-
 Modify the getInstance() method of the Singleton classes so it uses new self()
 instead of e.g. new Config() (see #2969).
 
 r1018 (Improvement)
 -------------------
-
 Only show the menu to rebuild the search index in the maintenance module
 if the search has not been disabled in the back end settings (see #3425).
 
 r1017 (Update)
 --------------
-
 Updated CSS3PIE to version 1.0beta5 (see #3454).
 
 r1014 (Fixed)
 -------------
-
 Make all e-mail fields in the database the same size (see #3458).
 
 r1013 (Improvement)
 -------------------
-
 Make the Database classes independent from the DB_DRIVER constant (see #3452)
 and use factory methods in the driver classes instead.
 
 r1006 (Improvement)
 -------------------
-
 Prevent setting the upload path to one of the Contao core folders (see #3418)
 so the installation cannot be modified with the file manager.
 
 r1004 (New)
 -----------
-
 Added a safe operation mode in which only core modules are loaded. It can be
 used to debug an installation or to prevent possible incompatibilities after
 an update. It is configurable in the back end.
 
 r1002 (Improvement)
 -------------------
-
 Disable all caches if the debug mode is enabled (see #3285). This includes
 HTML and CSS minification, the front end page cache and the system cache for
 getTemplate(), getImage() and __autoload().
 
 r1001 (Improvement)
 -------------------
-
 Make display_errors and error_reporting configurable independently, so error
 messages are logged even when they are not displayed (see #3338).

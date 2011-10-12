@@ -74,6 +74,7 @@ require(TL_ROOT . '/system/interface.php');
 $objConfig = Config::getInstance();
 $objEnvironment = Environment::getInstance();
 $objInput = Input::getInstance();
+$objToken = RequestToken::getInstance();
 
 
 /**
@@ -167,7 +168,7 @@ include(TL_ROOT . '/system/config/initconfig.php');
 if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_TOKEN_CHECK'))
 {
 	// Exit if the token cannot be validated
-	if (!$objInput->post('REQUEST_TOKEN') || !is_array($_SESSION['REQUEST_TOKEN'][TL_MODE]) || !in_array($objInput->post('REQUEST_TOKEN'), $_SESSION['REQUEST_TOKEN'][TL_MODE]))
+	if (!$objToken->validate($objInput->post('REQUEST_TOKEN')))
 	{
 		// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
 		if ($objEnvironment->isAjaxRequest)
@@ -198,29 +199,6 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 
 		exit;
 	}
-
-	// Remove the token once it has been used
-	if (($key = array_search($objInput->post('REQUEST_TOKEN'), $_SESSION['REQUEST_TOKEN'][TL_MODE])) !== false)
-	{
-		unset($_SESSION['REQUEST_TOKEN'][TL_MODE][$key]);
-		$_SESSION['REQUEST_TOKEN'][TL_MODE] = array_values($_SESSION['REQUEST_TOKEN'][TL_MODE]);
-	}
-}
-
-// Make sure there is a request token array
-if (!is_array($_SESSION['REQUEST_TOKEN'][TL_MODE]))
-{
-	$_SESSION['REQUEST_TOKEN'][TL_MODE] = array();
-}
-
-// Generate a new request token
-define('REQUEST_TOKEN', md5(uniqid(mt_rand(), true)));
-$_SESSION['REQUEST_TOKEN'][TL_MODE][] = REQUEST_TOKEN;
-
-// Only store the last 25 tokens
-if (count($_SESSION['REQUEST_TOKEN'][TL_MODE]) > 25)
-{
-	array_shift($_SESSION['REQUEST_TOKEN'][TL_MODE]);
 }
 
 
