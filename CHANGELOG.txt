@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1050 (Change)
+--------------
+Adjusted the back end JavaScript to the changes of r1049. The Request.Contao
+class now handles both plain text and JSON responses for reasons of backwards
+compatibility with version 2.10.
+
 r1049 (Change)
 --------------
 Changed the request token system from "one token per request" to "one token

@@ -30,7 +30,7 @@
 /**
  * Class Request.Contao
  * 
- * Extend the basic Request.JSON class to automatically handle request tokens.
+ * Extend the basic Request.JSON class.
  * @copyright  Leo Feyer 2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
@@ -48,6 +48,7 @@ Request.Contao = new Class(
 	{
 		if (options)
 		{
+			// Try to replace the URL with the form action
 			try
 			{
 				this.options.url = options.field.getParent('form').getAttribute('action');
@@ -62,14 +63,14 @@ Request.Contao = new Class(
 	{
 		var json;
 
+		// Support both plain text and JSON responses
 		try
 		{
 			json = this.response.json = JSON.decode(text, this.options.secure);
 		}
 		catch(e)
 		{
-			alert(e);
-			return;
+			json = {content:text};
 		}
 
 		if (json == null)
@@ -78,12 +79,6 @@ Request.Contao = new Class(
 		}
 		else
 		{
-			// Automatically set the new request token
-			if (json.token)
-			{
-				AjaxRequest.updateTokens(json.token);
-			}
-
 			// Isolate scripts and execute them
 			if (json.content)
 			{
@@ -118,31 +113,6 @@ Request.Mixed = Request.Contao;
  */
 var AjaxRequest =
 {
-
-	/**
-	 * Set a new request token
-	 * @param string
-	 */
-	updateTokens: function(tk)
-	{
-		REQUEST_TOKEN = tk;
-
-		// Update all forms
-		$$('input[type="hidden"]').each(function(el)
-		{
-			if (el.name == 'REQUEST_TOKEN')
-			{
-				el.value = tk;
-			}
-		});
-
-		// Also update the parent window
-		if (self != top && parent.REQUEST_TOKEN)
-		{
-			parent.AjaxRequest.updateTokens(tk);
-		}
-	},
-
 
 	/**
 	 * Toggle the navigation menu
@@ -935,7 +905,6 @@ var Backend =
 		el.blur();
 		width = Browser.Engine.trident ? (width + 40) : (width + 17);
 		height = Browser.Engine.trident ? (height + 30) : (height + 17);
-
 		Backend.popupWindow = window.open(el.href, '', 'width='+width+',height='+height+',modal=yes,left=100,top=50,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
 	},
 
@@ -991,7 +960,6 @@ var Backend =
 	{
 		el.blur();
 		var parent = $(id);
-
 		parent.setStyle('display', ($(el).checked ? 'inline' : 'none'));
 	},
 

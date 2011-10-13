@@ -93,8 +93,6 @@ class Ajax extends Backend
 				$bemod = $this->Session->get('backend_modules');
 				$bemod[$this->Input->post('id')] = intval($this->Input->post('state'));
 				$this->Session->set('backend_modules', $bemod);
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Load a navigation menu group
@@ -109,11 +107,7 @@ class Ajax extends Backend
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[$this->Input->post('id')]['modules'];
 
-				echo json_encode(array
-				(
-					'content' => $objTemplate->parse(),
-					'token'   => REQUEST_TOKEN
-				));
+				echo $objTemplate->parse();
 				exit; break;
 
 			// Toggle nodes of the file or page tree
@@ -133,8 +127,6 @@ class Ajax extends Backend
 				$nodes = $this->Session->get($this->strAjaxKey);
 				$nodes[$this->strAjaxId] = intval($this->Input->post('state'));
 				$this->Session->set($this->strAjaxKey, $nodes);
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Load nodes of the file or page tree
@@ -161,8 +153,6 @@ class Ajax extends Backend
 				$fs = $this->Session->get('fieldset_states');
 				$fs[$this->Input->post('table')][$this->Input->post('id')] = intval($this->Input->post('state'));
 				$this->Session->set('fieldset_states', $fs);
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Check whether the temporary directory is writeable
@@ -182,11 +172,7 @@ class Ajax extends Backend
 					if ($e->getCode() == 0)
 					{
 						$this->loadLanguageFile('tl_maintenance');
-						echo json_encode(array
-						(
-							'content' => '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>',
-							'token'   => REQUEST_TOKEN
-						));
+						echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable'] . '</p>';
 						exit; break;
 					}
 				}
@@ -195,15 +181,9 @@ class Ajax extends Backend
 				if (!strlen($this->Input->post('id')))
 				{
 					$this->loadLanguageFile('tl_maintenance');
-					echo json_encode(array
-					(
-						'content' => '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>',
-						'token'   => REQUEST_TOKEN
-					));
+					echo '<p class="tl_error">' . $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId'] . '</p>';
 					exit; break;
 				}
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Toggle checkbox groups
@@ -240,20 +220,12 @@ class Ajax extends Backend
 		{
 			// Load nodes of the page structure tree
 			case 'loadStructure':
-				echo json_encode(array
-				(
-					'content' => $dc->ajaxTreeView($this->strAjaxId, intval($this->Input->post('level'))),
-					'token'   => REQUEST_TOKEN
-				));
+				echo $dc->ajaxTreeView($this->strAjaxId, intval($this->Input->post('level')));
 				exit; break;
 
 			// Load nodes of the file manager tree
 			case 'loadFileManager':
-				echo json_encode(array
-				(
-					'content' => $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level'))),
-					'token'   => REQUEST_TOKEN
-				));
+				echo $dc->ajaxTreeView($this->Input->post('folder', true), intval($this->Input->post('level')));
 				exit; break;
 
 			// Load nodes of the page tree
@@ -264,11 +236,7 @@ class Ajax extends Backend
 
 				$objWidget = new $GLOBALS['BE_FFL']['pageTree']($arrData, $dc);
 
-				echo json_encode(array
-				(
-					'content' => $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level'))),
-					'token'   => REQUEST_TOKEN
-				));
+				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;
 
 			// Load nodes of the file tree
@@ -282,11 +250,7 @@ class Ajax extends Backend
 				// Load a particular node
 				if ($this->Input->post('folder', true) != '')
 				{
-					echo json_encode(array
-					(
-						'content' => $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level'))),
-						'token'   => REQUEST_TOKEN
-					));
+					echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
 					exit; break;
 				}
 
@@ -315,11 +279,7 @@ class Ajax extends Backend
 					}
 				}
 
-				echo json_encode(array
-				(
-					'content' => $tree,
-					'token'   => REQUEST_TOKEN
-				));
+				echo $tree;
 				exit; break;
 
 			// Upload files via FancyUpload
@@ -338,8 +298,6 @@ class Ajax extends Backend
 						$dca->toggleFeatured($this->Input->post('id'), (($this->Input->post('state') == 1) ? true : false));
 					}
 				}
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// Toggle subpalettes
@@ -353,12 +311,7 @@ class Ajax extends Backend
 
 						if ($this->Input->post('load'))
 						{
-							echo json_encode(array
-							(
-								'content' => $dc->editAll($this->strAjaxId, $this->Input->post('id')),
-								'token'   => REQUEST_TOKEN
-							));
-							exit; break;
+							echo $dc->editAll($this->strAjaxId, $this->Input->post('id'));
 						}
 					}
 					else
@@ -367,12 +320,7 @@ class Ajax extends Backend
 
 						if ($this->Input->post('load'))
 						{
-							echo json_encode(array
-							(
-								'content' => $dc->edit(false, $this->Input->post('id')),
-								'token'   => REQUEST_TOKEN
-							));
-							exit; break;
+							echo $dc->edit(false, $this->Input->post('id'));
 						}
 					}
 				}
@@ -384,17 +332,9 @@ class Ajax extends Backend
 					if ($this->Input->post('load'))
 					{
 						$GLOBALS['TL_CONFIG'][$this->Input->post('field')] = $val;
-
-						echo json_encode(array
-						(
-							'content' => $dc->edit(false, $this->Input->post('id')),
-							'token'   => REQUEST_TOKEN
-						));
-						exit; break;
+						echo $dc->edit(false, $this->Input->post('id'));
 					}
 				}
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 
 			// HOOK: pass unknown actions to callback functions
@@ -407,8 +347,6 @@ class Ajax extends Backend
 						$this->$callback[0]->$callback[1]($this->strAction, $dc);
 					}
 				}
-
-				echo json_encode(array('token'=>REQUEST_TOKEN));
 				exit; break;
 		}
 	}
