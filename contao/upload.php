@@ -82,7 +82,6 @@ $_COOKIE['BE_USER_AUTH'] = filter_input(INPUT_POST, 'BE_USER_AUTH', FILTER_SANIT
 /**
  * Load Contao
  */
-define('BYPASS_TOKEN_CHECK', true);
 require(POPUP ? 'files.php' : 'main.php');
 
 ?>
