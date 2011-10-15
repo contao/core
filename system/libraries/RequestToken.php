@@ -119,12 +119,7 @@ class RequestToken extends System
 	 */
 	public function validate($strToken)
 	{
-		if ($strToken != '' && $this->strToken != '' && $strToken == $this->strToken)
-		{
-			return true;
-		}
-
-		return false;
+		return ($strToken != '' && $this->strToken != '' && $strToken == $this->strToken);
 	}
 }
 
