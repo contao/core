@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1052 (Change)
+--------------
+Changed the input field type in the mod_search_*.html5 templates from "text"
+to "search" (see #3380). If you want Webkit browsers to render the field like
+a normal text field, use input[type="search"] { -webkit-appearance: none; }.
+
 r1050 (Change)
 --------------
 Adjusted the back end JavaScript to the changes of r1049. The Request.Contao
