@@ -394,10 +394,10 @@ class String
 			'</b>'             => '</strong>',
 			'<i>'              => '<em>',       // Replace <i> with <em>
 			'</i>'             => '</em>',
-			'<u>'              => '<span style="text-decoration:underline;">',
+			'<u>'              => '<span style="text-decoration:underline">',
 			'</u>'             => '</span>',
 			' target="_self"'  => '',
-			' target="_blank"' => ' onclick="window.open(this.href); return false;"'
+			' target="_blank"' => ' onclick="window.open(this.href);return false"'
 		);
 
 		$strString = preg_replace(array_keys($arrPregReplace), array_values($arrPregReplace), $strString);
@@ -422,9 +422,11 @@ class String
 
 		$arrStrReplace = array
 		(
-			'<u>'                                              => '<span style="text-decoration:underline;">',
+			'<u>'                                              => '<span style="text-decoration:underline">',
 			'</u>'                                             => '</span>',
 			' target="_self"'                                  => '',
+			' onclick="window.open(this.href); return false"'  => ' target="_blank"',
+			' onclick="window.open(this.href);return false"'   => ' target="_blank"',
 			' onclick="window.open(this.href); return false;"' => ' target="_blank"'
 		);
 

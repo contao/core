@@ -193,7 +193,7 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 			}
 			else
 			{
-				echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href;">go back</a> and try again.';
+				echo 'Invalid request token. Please <a href="javascript:window.location.href=window.location.href">go back</a> and try again.';
 			}
 		}
 

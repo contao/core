@@ -291,7 +291,7 @@ abstract class Template extends Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			echo "\n\n" . '<pre id="debug" style="width:80%; overflow:auto; margin:24px auto; padding:9px; background:#fff;">' . "\n";
+			echo "\n\n" . '<pre id="debug" style="width:80%;overflow:auto;margin:24px auto;padding:9px;background:#fff">' . "\n";
 			echo "<strong>Debug information</strong>\n\n";
 			print_r($GLOBALS['TL_DEBUG']);
 			echo '</pre>'
@@ -373,7 +373,7 @@ abstract class Template extends Controller
 	public function showIE6warning()
 	{
 		echo "\n<!--[if lte IE 6]>\n";
-		printf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<div style="background:#ffc;padding:12px;border-bottom:1px solid #e4790f;font-size:14px;color:#000;text-align:center;">', '<a href="http://ie6countdown.com" style="font-size:14px;color:#e4790f;">', '</a>', '</div>');
+		printf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<div style="background:#ffc;padding:12px;border-bottom:1px solid #e4790f;font-size:14px;color:#000;text-align:center">', '<a href="http://ie6countdown.com" style="font-size:14px;color:#e4790f">', '</a>', '</div>');
 		echo "\n<![endif]-->\n";
 	}
 }

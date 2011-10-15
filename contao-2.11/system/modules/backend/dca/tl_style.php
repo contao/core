@@ -86,7 +86,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -102,27 +102,27 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'cut' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_style', 'toggleIcon')
 			),
 			'show' => array
@@ -637,7 +637,7 @@ class tl_style extends Backend
 	 */
 	public function colorPicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top; cursor:pointer;" id="moo_'.$dc->field.'" class="mooRainbow"');
+		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'" class="mooRainbow"');
 	}
 
 
@@ -649,7 +649,7 @@ class tl_style extends Backend
 	public function filePicker(DataContainer $dc)
 	{
 		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
-		return ' ' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickFile(\'' . $strField . '\')"');
+		return ' ' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickFile(\'' . $strField . '\')"');
 	}
 
 

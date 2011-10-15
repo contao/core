@@ -93,7 +93,7 @@ class RadioButton extends Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset();"> <label for="opt_%s">%s</label>',
+			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset()"> <label for="opt_%s">%s</label>',
 									 $this->strName,
 									 $this->strId.'_'.$i,
 									 specialchars($arrOption['value']),

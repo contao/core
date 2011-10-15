@@ -63,7 +63,7 @@ class LiveUpdate extends Backend implements executable
 		$objTemplate->isActive = $this->isActive();
 
 		// Current version up to date
-		$objTemplate->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;"></a>',
+		$objTemplate->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom;padding-left:3px"></a>',
 												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
 												 $this->Environment->base,
 												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
@@ -262,7 +262,7 @@ class LiveUpdate extends Backend implements executable
 			}
 			catch (Exception $e)
 			{
-				echo '<li><span style="color:#c55;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
+				echo '<li><span style="color:#c55">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
 			}
 		}
 

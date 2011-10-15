@@ -66,7 +66,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -82,21 +82,21 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_module']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'cut' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_module']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_module']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -717,7 +717,7 @@ class tl_module extends Backend
 	 */
 	public function listModule($row)
 	{
-		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. (isset($GLOBALS['TL_LANG']['FMD'][$row['type']][0]) ? $GLOBALS['TL_LANG']['FMD'][$row['type']][0] : $row['type']) .']</span>' . "</div>\n";
+		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. (isset($GLOBALS['TL_LANG']['FMD'][$row['type']][0]) ? $GLOBALS['TL_LANG']['FMD'][$row['type']][0] : $row['type']) .']</span>' . "</div>\n";
 	}
 }
 

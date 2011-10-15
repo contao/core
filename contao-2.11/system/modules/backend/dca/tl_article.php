@@ -68,7 +68,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		'label' => array
 		(
 			'fields'                  => array('title', 'inColumn'),
-			'format'                  => '%s <span style="color:#b3b3b3; padding-left:3px;">[%s]</span>',
+			'format'                  => '%s <span style="color:#b3b3b3;padding-left:3px">[%s]</span>',
 			'label_callback'          => array('tl_article', 'addIcon')
 		),
 		'global_operations' => array
@@ -84,7 +84,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_article', 'copyArticle')
 			),
 			'cut' => array
@@ -118,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_article', 'cutArticle')
 			),
 			'delete' => array
@@ -126,14 +126,14 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_article', 'deleteArticle')
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_article']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_article', 'toggleIcon')
 			),
 			'show' => array
@@ -706,14 +706,14 @@ class tl_article extends Backend
 
 		if ($table == $GLOBALS['TL_DCA'][$dc->table]['config']['ptable'])
 		{
-			return ($row['type'] == 'root' || (!$this->User->isAdmin && !$this->User->isAllowed(5, $row)) || $cr) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ';
+			return ($row['type'] == 'root' || (!$this->User->isAdmin && !$this->User->isAllowed(5, $row)) || $cr) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 		}
 
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 								  ->limit(1)
 								  ->execute($row['pid']);
 
-		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->row())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+		return (($arrClipboard['mode'] == 'cut' && $arrClipboard['id'] == $row['id']) || ($arrClipboard['mode'] == 'cutAll' && in_array($row['id'], $arrClipboard['id'])) || (!$this->User->isAdmin && !$this->User->isAllowed(5, $objPage->row())) || $cr) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
 	}
 
 

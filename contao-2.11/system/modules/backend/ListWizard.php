@@ -150,7 +150,7 @@ class ListWizard extends Widget
 			// Add buttons
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_'.$button]).'" onclick="Backend.listWizard(this, \''.$button.'\', \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['lw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['lw_'.$button]).'" onclick="Backend.listWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['lw_'.$button], 'class="tl_listwizard_img"').'</a> ';
 			}
 
 			$return .= '</li>';
@@ -249,14 +249,14 @@ class ListWizard extends Widget
 
 <div class="tl_tbox block">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
-  <select name="separator" id="separator" class="tl_select" onfocus="Backend.getScrollOffset();">
+  <select name="separator" id="separator" class="tl_select" onfocus="Backend.getScrollOffset()">
     <option value="comma">'.$GLOBALS['TL_LANG']['MSC']['comma'].'</option>
     <option value="semicolon">'.$GLOBALS['TL_LANG']['MSC']['semicolon'].'</option>
     <option value="tabulator">'.$GLOBALS['TL_LANG']['MSC']['tabulator'].'</option>
     <option value="linebreak">'.$GLOBALS['TL_LANG']['MSC']['linebreak'].'</option>
   </select>'.(($GLOBALS['TL_LANG']['MSC']['separator'][1] != '') ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['separator'][1].'</p>' : '').'
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['MSC']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['MSC']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>
 '.$objTree->generate().(($GLOBALS['TL_LANG']['MSC']['source'][1] != '') ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['source'][1].'</p>' : '').'
 </div>

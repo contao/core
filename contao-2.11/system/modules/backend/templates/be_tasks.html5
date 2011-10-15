@@ -30,7 +30,7 @@
 </form>
 
 <div id="tl_buttons">
-<a href="<?php echo $this->createHref; ?>" class="header_new" title="<?php echo $this->createTitle; ?>" accesskey="n" onclick="Backend.getScrollOffset();"><?php echo $this->createLabel; ?></a>
+<a href="<?php echo $this->createHref; ?>" class="header_new" title="<?php echo $this->createTitle; ?>" accesskey="n" onclick="Backend.getScrollOffset()"><?php echo $this->createLabel; ?></a>
 </div>
 
 <div id="tl_taskcenter">
@@ -54,7 +54,7 @@
     <td class="col_2<?php echo $task['tdClass']; ?>"><?php echo $task['status']; ?></td>
     <td class="col_3<?php echo $task['tdClass']; ?>"><?php echo $task['progress']; ?>%</td>
     <td class="col_4<?php echo $task['tdClass']; ?>"><?php echo $task['deadline']; ?></td>
-    <td class="col_5 col_last<?php echo $task['tdClass']; ?>"><a href="<?php echo $task['editHref']; ?>" title="<?php echo $task['editTitle']; ?>"><img src="<?php echo $task['editIcon']; ?>" width="12" height="16" alt="<?php echo $this->editLabel; ?>"></a><?php if ($task['deleteHref']): ?> <a href="<?php echo $task['deleteHref']; ?>" title="<?php echo $task['deleteTitle']; ?>" onclick="if (!confirm('<?php echo $task['deleteConfirm']; ?>')) return false; Backend.getScrollOffset();"><img src="<?php echo $task['deleteIcon']; ?>" width="14" height="16" alt="<?php echo $this->deleteLabel; ?>"></a><?php else: ?> <img src="<?php echo $task['deleteIcon']; ?>" alt=""><?php endif; ?></td>
+    <td class="col_5 col_last<?php echo $task['tdClass']; ?>"><a href="<?php echo $task['editHref']; ?>" title="<?php echo $task['editTitle']; ?>"><img src="<?php echo $task['editIcon']; ?>" width="12" height="16" alt="<?php echo $this->editLabel; ?>"></a><?php if ($task['deleteHref']): ?> <a href="<?php echo $task['deleteHref']; ?>" title="<?php echo $task['deleteTitle']; ?>" onclick="if (!confirm('<?php echo $task['deleteConfirm']; ?>')) return false; Backend.getScrollOffset()"><img src="<?php echo $task['deleteIcon']; ?>" width="14" height="16" alt="<?php echo $this->deleteLabel; ?>"></a><?php else: ?> <img src="<?php echo $task['deleteIcon']; ?>" alt=""><?php endif; ?></td>
   </tr>
 <?php endforeach; ?>
 <?php else: ?>

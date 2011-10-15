@@ -124,7 +124,7 @@ class Theme extends Backend
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 
 <div class="tl_tbox block">
-  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
+  <h3><label for="source">'.$GLOBALS['TL_LANG']['tl_theme']['source'][0].'</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>'.$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_theme']['source'][1]) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_theme']['source'][1].'</p>' : '').'
 </div>
 
@@ -186,7 +186,7 @@ class Theme extends Backend
 			if ($objArchive->getFile('theme.xml') === false)
 			{
 				$blnHasError = true;
-				$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
+				$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
 
 				continue;
 			}
@@ -229,7 +229,7 @@ class Theme extends Backend
 					if (!in_array($name, $arrDbFields[$table]))
 					{
 						$blnHasError = true;
-						$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
+						$return .= "\n  " . '<p style="margin:0; color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_field'], $table .'.'. $name) .'</p>';
 					}
 				}
 			}
@@ -237,7 +237,7 @@ class Theme extends Backend
 			// Confirmation
 			if (!$blnHasError)
 			{
-				$return .= "\n  " . '<p style="margin:0; color:#8ab858;">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
+				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['tables_ok'] .'</p>';
 			}
 
 			$return .= '
@@ -286,7 +286,7 @@ class Theme extends Backend
 						$blnHasLayout = true;
 						$arrProcessed[] = $mod['col'];
 
-						$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
+						$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_section'], $mod['col']) .'</p>';
 					}
 				}
 			}
@@ -294,7 +294,7 @@ class Theme extends Backend
 			// Confirmation
 			if (!$blnHasLayout)
 			{
-				$return .= "\n  " . '<p style="margin:0; color:#8ab858;">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
+				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['sections_ok'] .'</p>';
 			}
 
 			// Check the custom templates
@@ -315,14 +315,14 @@ class Theme extends Backend
 				if (file_exists(TL_ROOT .'/'. $objArchive->file_name))
 				{
 					$blnTplExists = true;
-					$return .= "\n  " . '<p style="margin:0; color:#c55;">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
+					$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['template_exists'], $objArchive->file_name) .'</p>';
 				}
 			}
 
 			// Confirmation
 			if (!$blnTplExists)
 			{
-				$return .= "\n  " . '<p style="margin:0; color:#8ab858;">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
+				$return .= "\n  " . '<p style="margin:0;color:#8ab858">'. $GLOBALS['TL_LANG']['tl_theme']['templates_ok'] .'</p>';
 			}
 
 			$return .= '

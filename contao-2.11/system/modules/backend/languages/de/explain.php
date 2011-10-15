@@ -51,9 +51,9 @@ $GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
-	array('Rich Text Editor', 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
-	array('Inserttags', 'Weitere Informationen zu Inserttags finden Sie unter <a href="http://www.contao.org/inserttags.html" title="Contao Online-Dokumentation" onclick="window.open(this.href); return false;">http://www.contao.org/inserttags.html</a>.'),
-	array('Code Editor', 'Weitere Informationen zu CodeMirror finden Sie unter <a href="http://codemirror.net" title="CodeMirror by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a>.')
+	array('Rich Text Editor', 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" target="_blank">http://tinymce.moxiecode.com</a>.'),
+	array('Inserttags', 'Weitere Informationen zu Inserttags finden Sie unter <a href="http://www.contao.org/inserttags.html" title="Contao Online-Dokumentation" target="_blank">http://www.contao.org/inserttags.html</a>.'),
+	array('Code Editor', 'Weitere Informationen zu CodeMirror finden Sie unter <a href="http://codemirror.net" title="CodeMirror by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.')
 );
 
 
@@ -78,7 +78,7 @@ $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
-	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" onclick="window.open(this.href); return false;">http://alexgorbatchev.com</a>.')
+	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
 );
 
 ?>

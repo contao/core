@@ -47,7 +47,7 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 
 <div>
 <span class="header_user_container"><a href="<?php echo $this->base; ?>contao/main.php?do=login" class="header_user" title="<?php echo $this->account; ?>"><?php echo $this->username; ?></a> &nbsp; :: &nbsp; </span>
-<span class="header_preview_container"><a href="contao/preview.php?site=<?php echo $this->frontendFile; ?>" onclick="window.open(this.href); return false;" class="header_preview" title="<?php echo $this->preview; ?>" accesskey="f"><?php echo $this->preview; ?></a> &nbsp; :: &nbsp; </span>
+<span class="header_preview_container"><a href="contao/preview.php?site=<?php echo $this->frontendFile; ?>" target="_blank" class="header_preview" title="<?php echo $this->preview; ?>" accesskey="f"><?php echo $this->preview; ?></a> &nbsp; :: &nbsp; </span>
 <span class="header_home_container"><a href="<?php echo $this->base; ?>contao/main.php" class="header_home" title="<?php echo $this->home; ?>" accesskey="h"><?php echo $this->home; ?></a> &nbsp; :: &nbsp; </span>
 <span class="header_logout_container"><a href="<?php echo $this->base; ?>contao/index.php" class="header_logout" title="<?php echo $this->logout; ?>" accesskey="q"><?php echo $this->logout; ?></a></span>
 </div>
@@ -69,7 +69,7 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this, '<?php echo $strGroup; ?>');"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
+<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
 <li class="tl_parent" id="<?php echo $strGroup; ?>">
 <ul class="tl_level_2">
@@ -105,9 +105,9 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 <div id="footer">
 
 <div>
-<span class="footer_project_container"><a href="http://www.contao.org" class="footer_project" onclick="window.open(this.href); return false;">Contao Open Source CMS <?php echo VERSION; ?></a> &nbsp; :: &nbsp; </span>
+<span class="footer_project_container"><a href="http://www.contao.org" class="footer_project" target="_blank">Contao Open Source CMS <?php echo VERSION; ?></a> &nbsp; :: &nbsp; </span>
 <span class="footer_top_container"><a href="<?php echo $this->request; ?>#top" class="footer_top" title="<?php echo $this->backToTop; ?>" accesskey="t"><?php echo $this->top; ?></a> &nbsp; :: &nbsp; </span>
-<span class="footer_preview_container"><a href="contao/preview.php?site=<?php echo $this->frontendFile; ?>" onclick="window.open(this.href); return false;" class="footer_preview" title="<?php echo $this->preview; ?>"><?php echo $this->preview; ?></a></span>
+<span class="footer_preview_container"><a href="contao/preview.php?site=<?php echo $this->frontendFile; ?>" target="_blank" class="footer_preview" title="<?php echo $this->preview; ?>"><?php echo $this->preview; ?></a></span>
 </div>
 
 </div>

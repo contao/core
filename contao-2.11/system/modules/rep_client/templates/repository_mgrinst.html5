@@ -19,7 +19,7 @@ $tabindex = 1;
 ?>
 
 <div id="tl_buttons">
-<a href="<?php echo $rep->homeLink; ?>" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $text['goback']; ?></a>
+<a href="<?php echo $rep->homeLink; ?>" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset()"><?php echo $text['goback']; ?></a>
 </div>
 
 <h2 class="sub_headline"><?php echo $text['installextension']; ?></h2>

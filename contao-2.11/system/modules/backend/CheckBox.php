@@ -144,7 +144,7 @@ class CheckBox extends Widget
 				$display = 'block';
 			}
 
-			$arrOptions[] = '<div class="checkbox_toggler' . ($blnFirst ? '_first' : '') . '"><a href="' . $this->addToUrl('cbc=' . $id) . '" onclick="AjaxRequest.toggleCheckboxGroup(this, \'' . $id . '\'); Backend.getScrollOffset(); return false;"><img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $img . '.gif" width="18" height="18" alt="toggle checkbox group"></a>' . $i .	'</div><fieldset id="' . $id . '" class="tl_checkbox_container checkbox_options" style="display:' . $display . ';"><input type="checkbox" id="check_all_' . $id . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'' . $id . '\')"> <label for="check_all_' . $id . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label>';
+			$arrOptions[] = '<div class="checkbox_toggler' . ($blnFirst ? '_first' : '') . '"><a href="' . $this->addToUrl('cbc=' . $id) . '" onclick="AjaxRequest.toggleCheckboxGroup(this,\'' . $id . '\');Backend.getScrollOffset();return false"><img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $img . '.gif" width="18" height="18" alt="toggle checkbox group"></a>' . $i .	'</div><fieldset id="' . $id . '" class="tl_checkbox_container checkbox_options" style="display:' . $display . '"><input type="checkbox" id="check_all_' . $id . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'' . $id . '\')"> <label for="check_all_' . $id . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label>';
 
 			// Multidimensional array
 			foreach ($arrOption as $k=>$v)
@@ -173,7 +173,7 @@ class CheckBox extends Widget
 							$this->strLabel,
 							($this->required ? '<span class="mandatory">*</span>' : ''),
 							$this->xlabel,
-							($blnCheckAll ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this, \'ctrl_' . $this->strId . '\')"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6;"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>' : ''),
+							($blnCheckAll ? '<input type="checkbox" id="check_all_' . $this->strId . '" class="tl_checkbox" onclick="Backend.toggleCheckboxGroup(this,\'ctrl_' . $this->strId . '\')"> <label for="check_all_' . $this->strId . '" style="color:#a6a6a6"><em>' . $GLOBALS['TL_LANG']['MSC']['selectAll'] . '</em></label><br>' : ''),
 							str_replace('<br></fieldset><br>', '</fieldset>', implode('<br>', $arrOptions)),
 							$this->wizard);
 		}
@@ -196,7 +196,7 @@ class CheckBox extends Widget
 	 */
 	protected function generateCheckbox($arrOption, $i)
 	{
-		return sprintf('<input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset();"> <label for="opt_%s">%s</label>',
+		return sprintf('<input type="checkbox" name="%s" id="opt_%s" class="tl_checkbox" value="%s"%s%s onfocus="Backend.getScrollOffset()"> <label for="opt_%s">%s</label>',
 						$this->strName . ($this->multiple ? '[]' : ''),
 						$this->strId.'_'.$i,
 						($this->multiple ? specialchars($arrOption['value']) : 1),

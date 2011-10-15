@@ -65,7 +65,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -81,28 +81,28 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'cut' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_content', 'deleteElement')
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_content']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_content', 'toggleIcon')
 			),
 			'show' => array
@@ -801,7 +801,7 @@ class tl_content extends Backend
 	 */
 	public function editArticleAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -859,7 +859,7 @@ class tl_content extends Backend
 	 */
 	public function editAlias(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -936,7 +936,7 @@ class tl_content extends Backend
 	 */
 	public function editForm(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -973,7 +973,7 @@ class tl_content extends Backend
 	 */
 	public function editModule(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px;">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1035,7 +1035,7 @@ class tl_content extends Backend
 	 */
 	public function editArticle(DataContainer $dc)
 	{
-		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top;"') . '</a>';
+		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top"') . '</a>';
 	}
 
 
@@ -1170,7 +1170,7 @@ class tl_content extends Backend
 	 */
 	public function pagePicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top; cursor:pointer;" onclick="Backend.pickPage(\'ctrl_' . $dc->inputName . '\')"');
+		return ' ' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickPage(\'ctrl_' . $dc->inputName . '\')"');
 	}
 
 
