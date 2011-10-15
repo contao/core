@@ -63,7 +63,7 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPass']; ?></h4>
     <input type="password" name="password" id="password" autocomplete="off" class="tl_text" value="<?php echo $this->ftpPass; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSLh4']; ?></h4>
-    <div class="tl_checkbox_container" style="margin-top:3px;">
+    <div class="tl_checkbox_container" style="margin-top:3px">
       <input type="checkbox" name="ssl" id="ctrl_ssl" class="tl_checkbox" value="1"<?php echo $this->ftpSSL ? ' checked="checked"' : ''; ?>> <label for="ctrl_ssl"><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpSSL']; ?></label>
     </div>
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['ftpPort']; ?></h4>
@@ -881,7 +881,7 @@ Library.
     <input type="hidden" name="FORM_SUBMIT" value="tl_license">
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['accept']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -920,7 +920,7 @@ window.addEvent('domready', function() {
 <?php else: ?>
 
 <fieldset class="tl_tbox<?php if (!$this->setPassword): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['changePass'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['changePass'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['changePass'][0]; ?></h3>
 <?php if ($this->setPassword): ?>
@@ -952,7 +952,7 @@ window.addEvent('domready', function() {
 <?php if (!$this->setPassword): ?>
 
 <fieldset class="tl_box collapsed">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['keyCreate']; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['keyCreate']; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['encryption'][0]; ?></h3>
 <?php if ($this->encryption): ?>
@@ -972,7 +972,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['keySave']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -981,7 +981,7 @@ window.addEvent('domready', function() {
 <?php if (!$this->encryption && !$this->encryptionLength): ?>
 
 <fieldset class="tl_box<?php if ($this->dbConnection): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['database'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['database'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['database'][0]; ?></h3>
 <?php if ($this->dbConnection): ?>
@@ -1013,7 +1013,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['dbSave']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1022,7 +1022,7 @@ window.addEvent('domready', function() {
 <?php if ($this->is28Update): ?>
 
 <fieldset class="tl_box<?php if (!$this->is28Update): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
@@ -1032,7 +1032,7 @@ window.addEvent('domready', function() {
     <input type="hidden" name="FORM_SUBMIT" value="tl_28update">
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.8'); ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.8'); ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1041,7 +1041,7 @@ window.addEvent('domready', function() {
 <?php elseif ($this->is29Update): ?>
 
 <fieldset class="tl_box<?php if (!$this->is29Update): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
@@ -1051,7 +1051,7 @@ window.addEvent('domready', function() {
     <input type="hidden" name="FORM_SUBMIT" value="tl_29update">
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.9'); ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.9'); ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1060,7 +1060,7 @@ window.addEvent('domready', function() {
 <?php elseif ($this->is210Update): ?>
 
 <fieldset class="tl_box<?php if (!$this->is210Update): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
   <p class="tl_error"><?php echo $GLOBALS['TL_LANG']['tl_install']['updateError']; ?></p>
@@ -1070,7 +1070,7 @@ window.addEvent('domready', function() {
     <input type="hidden" name="FORM_SUBMIT" value="tl_210update">
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.10'); ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo sprintf($GLOBALS['TL_LANG']['tl_install']['updateXrun'], '2.10'); ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1079,7 +1079,7 @@ window.addEvent('domready', function() {
 <?php elseif ($this->dbConnection): ?>
 
 <fieldset class="tl_box collapsed">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['collation'][0]; ?></h3>
   <p class="tl_info"><?php echo $GLOBALS['TL_LANG']['tl_install']['collationInfo']; ?></p>
@@ -1093,7 +1093,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1101,7 +1101,7 @@ window.addEvent('domready', function() {
 </fieldset>
 
 <fieldset class="tl_box<?php if ($this->dbUpToDate): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['update'][0]; ?></h3>
 <?php if (!$this->dbUpToDate): ?>
@@ -1117,7 +1117,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['updateSave']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1125,7 +1125,7 @@ window.addEvent('domready', function() {
 </fieldset>
 
 <fieldset class="tl_box">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['template'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['template'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['template'][0]; ?></h3>
 <?php if ($this->emptySelection): ?>
@@ -1142,13 +1142,13 @@ window.addEvent('domready', function() {
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['tl_install']['templates']; ?></h4>
     <select name="template" class="tl_select"><?php echo $this->templates; ?></select>
-    <div class="tl_checkbox_container" style="margin-top:3px;">
+    <div class="tl_checkbox_container" style="margin-top:3px">
       <input type="checkbox" name="preserve" id="ctrl_preserve" class="tl_checkbox" value="1"> <label for="ctrl_preserve"><?php echo $GLOBALS['TL_LANG']['tl_install']['doNotTruncate']; ?></label>
     </div>
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1156,7 +1156,7 @@ window.addEvent('domready', function() {
 </fieldset>
 
 <fieldset class="tl_box<?php if ($this->adminCreated): ?> collapsed<?php endif; ?>">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['admin'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['admin'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['admin'][0]; ?></h3>
 <?php if (!$this->adminCreated): ?>
@@ -1186,7 +1186,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset();">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['adminSave']; ?>" onclick="Backend.getScrollOffset()">
     </div>
   </div>
   </form>
@@ -1196,7 +1196,7 @@ window.addEvent('domready', function() {
 <?php if ($this->adminCreated): ?>
 
 <fieldset class="tl_box last">
-<legend onclick="this.getParent().toggleClass('collapsed');"><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></legend>
+<legend onclick="this.getParent().toggleClass('collapsed')"><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></legend>
 <div>
   <h3><?php echo $GLOBALS['TL_LANG']['tl_install']['completed'][0]; ?></h3>
   <p class="tl_confirm"><?php echo $GLOBALS['TL_LANG']['tl_install']['installConfirm']; ?></p>

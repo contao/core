@@ -395,9 +395,9 @@ class Comments extends Frontend
 		(
 			'<strong>$1</strong>',
 			'<em>$1</em>',
-			'<span style="text-decoration:underline;">$1</span>',
+			'<span style="text-decoration:underline">$1</span>',
 			"\n\n" . '<div class="code"><p>'. $GLOBALS['TL_LANG']['MSC']['com_code'] .'</p><pre>$1</pre></div>' . "\n\n",
-			'<span style="color:$1;">$2</span>',
+			'<span style="color:$1">$2</span>',
 			"\n\n" . '<div class="quote">$1</div>' . "\n\n",
 			"\n\n" . '<div class="quote"><p>'. sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') .'</p>$2</div>' . "\n\n",
 			'<img src="$1" alt="" />',

@@ -77,14 +77,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['import'],
 				'href'                => 'key=import',
 				'class'               => 'header_css_import',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -115,14 +115,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -296,10 +296,10 @@ class tl_style_sheet extends Backend
 
 		if (!is_array($media) || count($media) < 1)
 		{
-			return '<div style="float:left;">'. $row['name'] ."</div>\n";
+			return '<div style="float:left">'. $row['name'] ."</div>\n";
 		}
 
-		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. implode(', ', $media) .']</span>' . "</div>\n";
+		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. implode(', ', $media) .']</span>' . "</div>\n";
 	}
 
 

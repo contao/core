@@ -13,8 +13,8 @@
 <div id="tl_rebuild_index">
 
 <p id="index_note"><?php echo $this->note; ?></p>
-<p id="index_loading" style="display:none;"><?php echo $this->loading; ?></p>
-<p id="index_complete" style="display:none;"><?php echo $this->complete; ?></p>
+<p id="index_loading" style="display:none"><?php echo $this->loading; ?></p>
+<p id="index_complete" style="display:none"><?php echo $this->complete; ?></p>
 
 <?php echo $this->content; ?>
 

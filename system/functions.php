@@ -157,7 +157,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
 									$intLine);
 
 				$e = new Exception();
-				$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+				$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 				echo '<br>' . $strMessage;
 			}
 		}
@@ -197,7 +197,7 @@ function __exception($e)
 							$e->getFile(),
 							$e->getLine());
 
-		$strMessage .= "\n" . '<pre style="margin: 11px 0 0 0;">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
+		$strMessage .= "\n" . '<pre style="margin:11px 0 0">' . "\n" . $e->getTraceAsString() . "\n" . '</pre>';
 		echo '<br>' . $strMessage;
 	}
 

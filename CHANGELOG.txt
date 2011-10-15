@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1053 (Improvement)
+-------------------
+Removed unnecessary whitespace from inline tags.
+
 r1052 (Change)
 --------------
 Changed the input field type in the mod_search_*.html5 templates from "text"

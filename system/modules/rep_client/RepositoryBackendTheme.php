@@ -110,7 +110,7 @@ class RepositoryBackendTheme
 			$onclick .= 'if (!confirm(\''.$confirm.'\')) return false; ';
 		}
 		if ($popup) {
-			$onclick .= 'window.open(this.href); return false; ';
+			$onclick .= 'target="_blank" ';
 		}
 		if ($onclick!=''){
 			$onclick = ' onclick="' . trim($onclick) . '"';
@@ -122,7 +122,7 @@ class RepositoryBackendTheme
 	{
 		$onclick = ($confirm=='')
 						? ''
-						: ' onclick="if (!confirm(\''.$confirm.'\')) return false;"';
+						: ' onclick="if (!confirm(\''.$confirm.'\')) return false"';
 		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').' '.$text.'</a>';
 	} // createMainButton
 

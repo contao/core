@@ -127,7 +127,7 @@ class TrblField extends Widget
 
 		foreach ($arrKeys as $strKey)
 		{
-			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_trbl trbl_%s%s" value="%s"%s onfocus="Backend.getScrollOffset();">',
+			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_trbl trbl_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$this->strName,
 									$strKey,
 									$this->strId.'_'.$strKey,
@@ -137,7 +137,7 @@ class TrblField extends Widget
 									$this->getAttributes());
 		}
 
-		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset();">%s</select>%s',
+		return sprintf('%s <select name="%s[unit]" class="tl_select_unit" onfocus="Backend.getScrollOffset()">%s</select>%s',
 						implode(' ', $arrFields),
 						$this->strName,
 						implode('', $arrUnits),
