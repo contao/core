@@ -15,7 +15,7 @@
     <img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> alt="<?php echo $col->alt; ?>">
 <?php endif; ?>
 <?php if ($col->caption): ?>
-    <figcaption class="caption"><?php echo $col->caption; ?></figcaption>
+    <figcaption class="caption" style="width:<?php echo $col->arrSize[0]; ?>px"><?php echo $col->caption; ?></figcaption>
 <?php endif; ?>
   </figure>
   </td>
