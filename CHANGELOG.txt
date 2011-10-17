@@ -4,6 +4,7 @@ Contao Open Source CMS Changelog
 
 Version 2.10.3 (XXXX-XX-XX)
 ---------------------------
+- Fixed: the postLogin/Logout hooks broke the save() method of the model (#3545)
 - Fixed a few minor issues
 
 Version 2.10.2 (2011-10-10)
