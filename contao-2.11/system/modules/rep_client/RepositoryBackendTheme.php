@@ -105,24 +105,16 @@ class RepositoryBackendTheme
 	 */
 	public function createListButton($file, $link, $text, $confirm='', $popup=false)
 	{
-		$onclick = '';
-		if ($confirm!='') {
-			$onclick .= 'if (!confirm(\''.$confirm.'\')) return false; ';
-		}
-		if ($popup) {
-			$onclick .= 'target="_blank" ';
-		}
-		if ($onclick!=''){
-			$onclick = ' onclick="' . trim($onclick) . '"';
-		}
-		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').'</a>';
+		$target = $popup ? ' target="_blank"' : '';
+		$onclick = ($confirm!='') ? ' onclick="if(!confirm(\''.$confirm.'\'))return false"' : '';
+		return '<a href="'.$link.'" title="'.$text.'"'.$target.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').'</a>';
 	} // createListButton
 
 	public function createMainButton($file, $link, $text, $confirm='')
 	{
 		$onclick = ($confirm=='')
 						? ''
-						: ' onclick="if (!confirm(\''.$confirm.'\')) return false"';
+						: ' onclick="if(!confirm(\''.$confirm.'\'))return false"';
 		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').' '.$text.'</a>';
 	} // createMainButton
 
