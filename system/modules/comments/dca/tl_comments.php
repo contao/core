@@ -172,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE')
+			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE')
 		),
 		'addReply' => array
 		(
@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'includeBlankOption'=>true)
+			'eval'                    => array('mandatory'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true)
 		),
 		'reply' => array
 		(
