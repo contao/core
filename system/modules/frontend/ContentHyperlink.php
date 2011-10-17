@@ -96,6 +96,7 @@ class ContentHyperlink extends ContentElement
 
 				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
 				{
+					$this->Template->arrSize = $imgSize;
 					$this->Template->imgSize = ' ' . $imgSize[3];
 				}
 

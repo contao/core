@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1055 (Improvement)
+-------------------
+Assign the image width to the caption element so long captions do not break
+the layout (see #3517).
+
 r1053 (Improvement)
 -------------------
 Removed unnecessary whitespace from inline tags.
