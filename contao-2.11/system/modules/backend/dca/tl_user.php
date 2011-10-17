@@ -623,7 +623,7 @@ class tl_user extends Backend
 		{
 			if (count($v) && $k != 'profile')
 			{
-				$arrModules = array_merge($arrModules, array_keys($v));
+				$arrModules[$k] = array_keys($v);
 			}
 		}
 
