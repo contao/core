@@ -1148,7 +1148,7 @@ window.addEvent('domready', function() {
   </div>
   <div class="tl_formbody_submit">
     <div class="tl_submit_container">
-      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if (!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>')) return false; Backend.getScrollOffset()">
+      <input type="submit" class="tl_submit" value="<?php echo $GLOBALS['TL_LANG']['tl_install']['importSave']; ?>" onclick="if(!confirm('<?php echo $GLOBALS['TL_LANG']['tl_install']['importContinue']; ?>'))return false;Backend.getScrollOffset()">
     </div>
   </div>
   </form>
