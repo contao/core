@@ -1682,6 +1682,11 @@ class StyleSheets extends Backend
 				case 'border-right':
 				case 'border-bottom':
 				case 'border-left':
+					if ($arrChunks[1] == 'none')
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					$arrSet['border'] = 1;
 					$arrWSC = preg_split('/\s+/', $arrChunks[1]);
 					$strName = str_replace('border-', '', $strKey);
