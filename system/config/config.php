@@ -258,7 +258,6 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   useRTE      = use the rich text editor (TinyMCE)
  *   useCE       = use the code editor (CodeMirror)
  *   fancyUpload = use the advanced uploader (FancyUpload)
- *   oldBeTheme  = use the old one-column back end form layout
  */
 $GLOBALS['TL_CONFIG']['showHelp']    = true;
 $GLOBALS['TL_CONFIG']['thumbnails']  = true;
@@ -266,7 +265,6 @@ $GLOBALS['TL_CONFIG']['debugMode']   = false;
 $GLOBALS['TL_CONFIG']['useRTE']      = true;
 $GLOBALS['TL_CONFIG']['useCE']       = true;
 $GLOBALS['TL_CONFIG']['fancyUpload'] = true;
-$GLOBALS['TL_CONFIG']['oldBeTheme']  = false;
 
 
 /**

@@ -145,7 +145,7 @@ class Password extends Widget
 						(($this->varValue != '') ? '*****' : ''), 
 						$this->getAttributes(),
 						$this->wizard,
-						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && ($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$this->hasErrors())) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$this->description.'</p>' : ''));
+						((strlen($this->description) && $GLOBALS['TL_CONFIG']['showHelp'] && !$this->hasErrors()) ? "\n  " . '<p class="tl_help tl_tip">'.$this->description.'</p>' : ''));
 	}
 
 
@@ -176,7 +176,7 @@ class Password extends Widget
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						(($this->varValue != '') ? '*****' : ''), 
 						$this->getAttributes(),
-						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
+						((strlen($GLOBALS['TL_LANG']['MSC']['confirm'][1]) && $GLOBALS['TL_CONFIG']['showHelp']) ? "\n  " . '<p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['MSC']['confirm'][1].'</p>' : ''));
 	}
 }
 

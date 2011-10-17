@@ -42,7 +42,6 @@ $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen'
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
 $GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Code-Editor verwenden', 'Den Code-Editor zur Bearbeitung von Code-Elementen verwenden.');
 $GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('FancyUpload aktivieren', 'Falls FancyUpload in Ihrem Browser nicht fehlerfrei läuft, können Sie das Skript hier deaktivieren.');
-$GLOBALS['TL_LANG']['tl_user']['oldBeTheme']   = array('Das alte Formularlayout verwenden', 'Die neuen einklappbaren 2-spaltigen Formulare nicht verwenden.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Zum Administrator machen', 'Administratoren haben uneingeschränkten Zugriff auf alle Module und Elemente!');
 $GLOBALS['TL_LANG']['tl_user']['groups']       = array('Benutzergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
 $GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Rechtevererbung', 'Hier können Sie festlegen, welche Gruppenrechte der Benutzer erbt.');

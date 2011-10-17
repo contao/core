@@ -1115,3 +1115,68 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 #ctrl_shadowsize_left {
 	background-position:46px -179px !important;
 }
+
+/* Error messages */
+label.error,legend.error {
+	color:#c55;
+}
+.tl_tbox .tl_error,.tl_box .tl_error {
+	background:none;
+	padding:0;
+	font-size:10px;
+}
+
+/* Fieldsets */
+fieldset.tl_tbox {
+	margin-top:18px;
+}
+fieldset.tl_tbox,fieldset.tl_box {
+	padding-top:6px;
+	border:1px solid #ddd;
+	border-width:1px 0 0;
+	background:url("images/palBg.jpg") left top repeat-x;
+}
+fieldset.nolegend {
+	padding-top:12px;
+}
+fieldset.tl_tbox > legend,fieldset.tl_box > legend {
+	color:#8ab858;
+	padding-left:18px;
+	padding-right:3px;
+	background:url("images/palOpen.gif") left center no-repeat;
+	cursor:pointer;
+}
+fieldset.collapsed {
+	padding-top:0;
+	padding-bottom:12px;
+	margin-bottom:0;
+}
+fieldset.collapsed div {
+	display:none !important;
+}
+fieldset.collapsed > legend {
+	background:url("images/palCollapsed.gif") left center no-repeat;
+}
+
+/* Help */
+.tl_tip {
+	height:13px;
+	overflow:hidden;
+	cursor:help;
+}
+#tl_helpBox {
+	opacity:.9;
+	-moz-opacity:.9;
+	width:682px;
+	margin-left:-248px;
+	padding:8px 12px 10px;
+	line-height:1.5;
+	text-align:left;
+	color:#fff;
+	background:#333;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	position:absolute;
+	left:50%;
+}

@@ -328,7 +328,6 @@ class BackendUser extends User
 		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
 		$GLOBALS['TL_CONFIG']['fancyUpload'] = $this->fancyUpload;
 		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
-		$GLOBALS['TL_CONFIG']['oldBeTheme'] = $this->oldBeTheme;
 
 		// Inherit permissions
 		$always = array('alexf');

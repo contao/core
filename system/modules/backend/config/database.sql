@@ -673,7 +673,6 @@ CREATE TABLE `tl_user` (
   `useRTE` char(1) NOT NULL default '',
   `useCE` char(1) NOT NULL default '',
   `fancyUpload` char(1) NOT NULL default '',
-  `oldBeTheme` char(1) NOT NULL default '',
   `password` varchar(64) NOT NULL default '',
   `admin` char(1) NOT NULL default '',
   `groups` blob NULL,

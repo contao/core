@@ -196,17 +196,12 @@ class ModuleTasks extends BackendModule
 	protected function createTask()
 	{
 		$this->Template = new BackendTemplate('be_task_create');
+		$fs = $this->Session->get('fieldset_states');
 
-		if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
-		{
-			$this->Template = new BackendTemplate('be_task_create_be27');
-			$fs = $this->Session->get('fieldset_states');
-
-			$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
-			$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
-			$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
-			$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
-		}
+		$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
+		$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
+		$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
+		$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
 
 		$this->Template->title = $this->getTitleWidget();
 		$this->Template->deadline = $this->getDeadlineWidget();
@@ -286,17 +281,12 @@ class ModuleTasks extends BackendModule
 	protected function editTask()
 	{
 		$this->Template = new BackendTemplate('be_task_edit');
+		$fs = $this->Session->get('fieldset_states');
 
-		if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
-		{
-			$this->Template = new BackendTemplate('be_task_edit_be27');
-			$fs = $this->Session->get('fieldset_states');
-
-			$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
-			$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
-			$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
-			$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
-		}
+		$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
+		$this->Template->assignClass = (isset($fs['tl_tasks']['assign_legend']) && !$fs['tl_tasks']['assign_legend']) ? ' collapsed' : '';
+		$this->Template->statusClass = (isset($fs['tl_tasks']['status_legend']) && !$fs['tl_tasks']['status_legend']) ? ' collapsed' : '';
+		$this->Template->historyClass = (isset($fs['tl_tasks']['history_legend']) && !$fs['tl_tasks']['history_legend']) ? ' collapsed' : '';
 
 		$this->Template->goBack = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->headline = sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $this->Input->get('id'));
