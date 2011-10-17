@@ -1752,6 +1752,11 @@ class StyleSheets extends Backend
 					break;
 
 				case 'border-color':
+					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'transparent')
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					$arrSet['border'] = 1;
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;
