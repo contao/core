@@ -8,6 +8,7 @@ Version 2.10.3 (XXXX-XX-XX)
 - Fixed: the style sheet editor did not handle font-family/size:inherit correctly (#3531)
 - Fixed: MooTools changed the default wMode settings for Swiff (#3540)
 - Fixed: the style sheet importer did not handle border-color:transparent/inherit (#3480)
+- Fixed: do not index empty news/event/FAQ/newsletter reader pages (#3511)
 - Fixed a few minor issues
 
 Version 2.10.2 (2011-10-10)

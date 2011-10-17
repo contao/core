@@ -69,6 +69,12 @@ class ModuleNewsletterReader extends Module
 		// Return if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -77,6 +83,12 @@ class ModuleNewsletterReader extends Module
 		// Return if there are no channels
 		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 
