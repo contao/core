@@ -69,6 +69,12 @@ class ModuleEventReader extends Events
 		// Return if no event has been specified
 		if (!$this->Input->get('events'))
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -77,6 +83,12 @@ class ModuleEventReader extends Events
 		// Return if there are no calendars
 		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 

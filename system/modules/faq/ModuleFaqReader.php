@@ -68,6 +68,12 @@ class ModuleFaqReader extends Module
 		// Return if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -76,6 +82,12 @@ class ModuleFaqReader extends Module
 		// Return if there are no categories
 		if (!is_array($this->faq_categories) || count($this->faq_categories) < 1)
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 

@@ -1450,15 +1450,8 @@ class DC_Table extends DataContainer implements listable, editable
 		{
 			foreach ($fields as $row)
 			{
-				$restore = array();
-
-				foreach ($row as $k=>$v)
-				{
-					$restore[$k] = $v;
-				}
-
 				$objInsertStmt = $this->Database->prepare("INSERT INTO " . $table . " %s")
-												->set($restore)
+												->set($row)
 												->execute();
 
 				// Do not delete record from tl_undo if there is an error

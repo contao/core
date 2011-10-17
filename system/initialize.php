@@ -173,10 +173,7 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 		// Force JavaScript redirect upon Ajax requests (IE requires absolute link)
 		if ($objEnvironment->isAjaxRequest)
 		{
-			echo json_encode(array
-			(
-				'content' => '<script>location.replace("' . $objEnvironment->base . 'contao/index.php")</script>'
-			));
+			echo '<script>location.replace("' . $objEnvironment->base . 'contao/index.php")</script>';
 		}
 		else
 		{

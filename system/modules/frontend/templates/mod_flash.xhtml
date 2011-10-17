@@ -28,9 +28,7 @@ if (Browser.Plugins.Flash.version > 0) {
     },
 <?php endif; ?>
     params : {
-<?php if (!$this->transparent): ?>
-      wMode: "window",
-<?php endif; ?>
+      wMode: "<?php if ($this->transparent): ?>transparent<?php else: ?>window<?php endif; ?>",
       allowFullScreen: true,
       flashvars: "<?php echo $this->flashvars; ?>"
     },

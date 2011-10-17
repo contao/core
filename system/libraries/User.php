@@ -88,6 +88,18 @@ abstract class User extends Model
 	 */
 	protected $objImport;
 
+	/**
+	 * Login object
+	 * @var object
+	 */
+	protected $objLogin;
+
+	/**
+	 * Logout object
+	 * @var object
+	 */
+	protected $objLogout;
+
 
 	/**
 	 * Prevent cloning of the object (Singleton)
@@ -291,8 +303,8 @@ abstract class User extends Model
 		{
 			foreach ($GLOBALS['TL_HOOKS']['postLogin'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this);
+				$this->import($callback[0], 'objLogin', true);
+				$this->objLogin->$callback[1]($this);
 			}
 		}
 
@@ -434,8 +446,8 @@ abstract class User extends Model
 		{
 			foreach ($GLOBALS['TL_HOOKS']['postLogout'] as $callback)
 			{
-				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($this);
+				$this->import($callback[0], 'objLogout', true);
+				$this->objLogout->$callback[1]($this);
 			}
 		}
 
