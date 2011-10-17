@@ -835,7 +835,7 @@ class StyleSheets extends Backend
 			$row['lineheight'] = deserialize($row['lineheight']);
 
 			// Try to shorten the definition
-			if ($row['fontfamily'] != '' && $row['fontsize']['value'] != '')
+			if ($row['fontfamily'] != '' && $row['fontfamily'] != 'inherit' && $row['fontsize']['value'] != '' && $row['fontsize']['value'] != 'inherit')
 			{
 				$return .= $lb . 'font:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . (($row['lineheight']['value'] != '') ? '/' . $row['lineheight']['value'] . $row['lineheight']['unit'] : '') . ' ' . $row['fontfamily'] . ';';
 			}
@@ -1672,6 +1672,11 @@ class StyleSheets extends Backend
 				case 'border-right':
 				case 'border-bottom':
 				case 'border-left':
+					if ($arrChunks[1] == 'none')
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					$arrSet['border'] = 1;
 					$arrWSC = preg_split('/\s+/', $arrChunks[1]);
 					$strName = str_replace('border-', '', $strKey);
@@ -1737,6 +1742,11 @@ class StyleSheets extends Backend
 					break;
 
 				case 'border-color':
+					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'transparent')
+					{
+						$arrSet['own'][] = $strDefinition;
+						break;
+					}
 					$arrSet['border'] = 1;
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;

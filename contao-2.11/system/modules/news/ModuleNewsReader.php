@@ -69,6 +69,12 @@ class ModuleNewsReader extends ModuleNews
 		// Return if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 
@@ -77,6 +83,12 @@ class ModuleNewsReader extends ModuleNews
 		// Return if there are no archives
 		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
 		{
+			global $objPage;
+
+			// Do not index the page
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
 			return '';
 		}
 

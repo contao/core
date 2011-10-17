@@ -86,7 +86,7 @@ class ModuleArticle extends Module
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = strlen($this->alias) ? $this->alias : $this->title;
+		$alias = ($this->alias != '') ? $this->alias : $this->title;
 
 		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
 		{
