@@ -469,6 +469,9 @@ h2.sub_headline_index {
 .tl_content pre {
 	margin-bottom:3px;
 }
+.tl_content pre.disabled {
+	color:#a6a6a6;
+}
 .tl_content_right {
 	float:right;
 	text-align:right;

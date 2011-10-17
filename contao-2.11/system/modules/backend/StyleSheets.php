@@ -203,7 +203,7 @@ class StyleSheets extends Backend
 		{
 			$strGlue = '';
 			$lb = "\n    ";
-			$return = "\n<pre>";
+			$return = "\n" . '<pre'. ($row['invisible'] ? ' class="disabled"' : '') .'>';
 		}
 
 		$blnNeedsPie = false;

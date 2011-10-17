@@ -573,9 +573,10 @@ var AjaxRequest =
 	 * Toggle the visibility of an element
 	 * @param object
 	 * @param string
+	 * @param string
 	 * @return boolean
 	 */
-	toggleVisibility: function(el, id)
+	toggleVisibility: function(el, id, table)
 	{
 		el.blur();
 
@@ -608,7 +609,7 @@ var AjaxRequest =
 			img = div.getNext('div');
 		}
 
-		// Change icon
+		// Change the icon
 		if ($defined(img))
 		{
 			// Tree view
@@ -672,6 +673,12 @@ var AjaxRequest =
 					img.setStyle('background-image', img.getStyle('background-image').replace(/\.(gif|png|jpe?g)/, '_.$1'));
 				}
 			}
+		}
+
+		// Mark disabled format definitions
+		if (table == 'tl_style')
+		{
+			div.getParent('div').getElement('pre').toggleClass('disabled');
 		}
 
 		// Send request

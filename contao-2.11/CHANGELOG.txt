@@ -6,9 +6,13 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1071 (Improvement)
+-------------------
+Mark disabled format definitions in the style sheet editor (see #3368).
+
 r1068 (Removed)
 ---------------
-Finally removed the old one-column back end form layout (#3534).
+Finally removed the old one-column back end form layout (see #3534).
 
 r1066 (Change)
 --------------
