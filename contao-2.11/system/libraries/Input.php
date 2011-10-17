@@ -99,7 +99,7 @@ class Input
 		{
 			$varValue = $_GET[$strKey];
 
-			if (is_null($varValue))
+			if ($varValue === null)
 			{
 				return $varValue;
 			}
@@ -135,7 +135,7 @@ class Input
 		{
 			$varValue = $this->findPost($strKey);
 
-			if (is_null($varValue))
+			if ($varValue === null)
 			{
 				return $varValue;
 			}
@@ -171,7 +171,7 @@ class Input
 		{
 			$varValue = $this->findPost($strKey);
 
-			if (is_null($varValue))
+			if ($varValue === null)
 			{
 				return $varValue;
 			}
@@ -206,7 +206,7 @@ class Input
 		{
 			$varValue = $this->findPost($strKey);
 
-			if (is_null($varValue))
+			if ($varValue === null)
 			{
 				return $varValue;
 			}
@@ -236,7 +236,7 @@ class Input
 		{
 			$varValue = $_COOKIE[$strKey];
 
-			if (is_null($varValue))
+			if ($varValue === null)
 			{
 				return $varValue;
 			}
@@ -270,7 +270,7 @@ class Input
 		unset($this->arrCache['getEncoded'][$strKey]);
 		unset($this->arrCache['getDecoded'][$strKey]);
 
-		if (is_null($varValue))
+		if ($varValue === null)
 		{
 			unset($_GET[$strKey]);
 		}
@@ -294,7 +294,7 @@ class Input
 		unset($this->arrCache['postDecoded'][$strKey]);
 		unset($this->arrCache['postRaw'][$strKey]);
 
-		if (is_null($varValue))
+		if ($varValue === null)
 		{
 			unset($_POST[$strKey]);
 		}
@@ -317,7 +317,7 @@ class Input
 		unset($this->arrCache['cookieEncoded'][$strKey]);
 		unset($this->arrCache['cookieDecoded'][$strKey]);
 
-		if (is_null($varValue))
+		if ($varValue === null)
 		{
 			unset($_COOKIE[$strKey]);
 		}
@@ -380,7 +380,7 @@ class Input
 	 */
 	protected function stripSlashes($varValue)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}
@@ -413,7 +413,7 @@ class Input
 	 */
 	protected function stripTags($varValue, $strAllowedTags='')
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}
@@ -445,7 +445,7 @@ class Input
 	 */
 	protected function xssClean($varValue, $blnStrictMode=false)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}
@@ -462,7 +462,7 @@ class Input
 		}
 
 		// Return if var is not a string
-		if (is_bool($varValue) || is_null($varValue) || is_numeric($varValue))
+		if (is_bool($varValue) || $varValue === null || is_numeric($varValue))
 		{
 			return $varValue;
 		}
@@ -554,7 +554,7 @@ class Input
 	 */
 	protected function decodeEntities($varValue)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}
@@ -585,7 +585,7 @@ class Input
 	 */
 	protected function preserveBasicEntities($varValue)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}
@@ -619,7 +619,7 @@ class Input
 	 */
 	protected function encodeSpecialChars($varValue)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if ($varValue === null || $varValue == '')
 		{
 			return $varValue;
 		}

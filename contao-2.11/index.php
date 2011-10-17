@@ -76,7 +76,7 @@ class Index extends Frontend
 		$pageId = $this->getPageIdFromUrl();
 
 		// Load a website root page object if there is no page ID
-		if (is_null($pageId))
+		if ($pageId === null)
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$pageId = $objHandler->generate($this->getRootIdFromUrl(), true);
@@ -290,7 +290,7 @@ class Index extends Frontend
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
 		// Send the cache headers
-		if (!is_null($expire) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+		if ($expire !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
 			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');

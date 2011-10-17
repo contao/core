@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1072 (Improvement)
+-------------------
+Replaced is_null() with === null (see #3533).
+
 r1071 (Improvement)
 -------------------
 Mark disabled format definitions in the style sheet editor (see #3368).

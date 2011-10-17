@@ -797,7 +797,7 @@ class Theme extends Backend
 			$field->setAttribute('name', $k);
 			$field = $row->appendChild($field);
 
-			if (is_null($v))
+			if ($v === null)
 			{
 				$v = 'NULL';
 			}

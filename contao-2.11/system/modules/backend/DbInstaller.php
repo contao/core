@@ -349,7 +349,7 @@ class DbInstaller extends Controller
 					{
 						unset($field['default']);
 					}
-					elseif (is_null($field['default']) || strtolower($field['default']) == 'null')
+					elseif ($field['default'] === null || strtolower($field['default']) == 'null')
 					{
 						$field['default'] = "default NULL";
 					}

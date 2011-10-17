@@ -195,7 +195,7 @@ class InstallTool extends Backend
 		/**
 		 * Check the websitePath
 		 */
-		if (!is_null($GLOBALS['TL_CONFIG']['websitePath']) && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
+		if ($GLOBALS['TL_CONFIG']['websitePath'] !== null && !preg_match('/^' . preg_quote(TL_PATH, '/') . '\/contao\/' . preg_quote(basename(__FILE__), '/') . '/', $this->Environment->requestUri))
 		{
 			$this->Config->delete("\$GLOBALS['TL_CONFIG']['websitePath']");
 			$this->reload();

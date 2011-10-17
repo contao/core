@@ -441,7 +441,7 @@ abstract class System
 			$strFormat
 		);
 
-		if (is_null($intTstamp))
+		if ($intTstamp === null)
 		{
 			$strDate = date($strModified);
 		}

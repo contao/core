@@ -1018,7 +1018,7 @@ class DC_Table extends DataContainer implements listable, editable
 		if ($this->Database->fieldExists('pid', $this->strTable) && $this->Database->fieldExists('sorting', $this->strTable))
 		{
 			// PID is not set - only valid for duplicated records, as they get the same parent ID as the original record!
-			if (is_null($pid) && $this->intId && $mode == 'copy')
+			if ($pid === null && $this->intId && $mode == 'copy')
 			{
 				$pid = $this->intId;
 			}
@@ -1083,7 +1083,7 @@ class DC_Table extends DataContainer implements listable, editable
 											  				 ->executeUncached($newPID, $curSorting);
 
 							// Select sorting value of the next record
-							if (!is_null($objNextSorting->sorting))
+							if ($objNextSorting->sorting !== null)
 							{
 								$nxtSorting = $objNextSorting->sorting;
 
@@ -1134,7 +1134,7 @@ class DC_Table extends DataContainer implements listable, editable
 		elseif ($this->Database->fieldExists('pid', $this->strTable))
 		{
 			// PID is not set - only valid for duplicated records, as they get the same parent ID as the original record!
-			if (is_null($pid) && $this->intId && $mode == 'copy')
+			if ($pid === null && $this->intId && $mode == 'copy')
 			{
 				$pid = $this->intId;
 			}
@@ -4264,9 +4264,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$blnIsMaxResultsPerPage = false;
 
 			// Overall limit
-			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && (is_null($this->limit) || preg_replace('/^.*,/i', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
+			if ($total > $GLOBALS['TL_CONFIG']['maxResultsPerPage'] && ($this->limit === null || preg_replace('/^.*,/i', '', $this->limit) == $GLOBALS['TL_CONFIG']['maxResultsPerPage']))
 			{
-				if (is_null($this->limit))
+				if ($this->limit === null)
 				{
 					$this->limit = '0,' . $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
 				}
@@ -4283,7 +4283,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$options_total = ceil($total / $GLOBALS['TL_CONFIG']['resultsPerPage']);
 
 				// Reset limit if other parameters have decreased the number of results
-				if (!is_null($this->limit) && ($this->limit == '' || preg_replace('/,.*$/i', '', $this->limit) > $total))
+				if ($this->limit !== null && ($this->limit == '' || preg_replace('/,.*$/i', '', $this->limit) > $total))
 				{
 					$this->limit = '0,'.$GLOBALS['TL_CONFIG']['resultsPerPage'];
 				}

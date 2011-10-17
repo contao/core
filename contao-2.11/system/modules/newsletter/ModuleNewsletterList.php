@@ -114,7 +114,7 @@ class ModuleNewsletterList extends Module
 
 			$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
 
-			if (is_null($strUrl))
+			if ($strUrl === null)
 			{
 				continue;
 			}
