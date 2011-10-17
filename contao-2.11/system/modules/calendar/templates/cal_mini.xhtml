@@ -8,7 +8,7 @@
   </tr>
   <tr>
 <?php foreach ($this->days as $i=>$day): ?>
-    <th class="label<?php if ($i == 0 || $i == 6) echo ' weekend'; ?>"><?php echo utf8_substr($day, 0, $this->substr); ?><span class="invisible"><?php echo utf8_substr($day, $this->substr); ?></span></th>
+    <th class="label<?php if ($i == 0) echo ' weekend col_first'; if ($i == 6) echo ' weekend col_last'; ?>"><?php echo utf8_substr($day, 0, $this->substr); ?><span class="invisible"><?php echo utf8_substr($day, $this->substr); ?></span></th>
 <?php endforeach; ?>
   </tr>
 </thead>
