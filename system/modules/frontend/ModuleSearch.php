@@ -171,7 +171,7 @@ class ModuleSearch extends Module
 			}
 
 			// Cache result
-			if (is_null($arrResult))
+			if ($arrResult === null)
 			{
 				try
 				{

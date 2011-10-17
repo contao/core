@@ -624,7 +624,7 @@ class Newsletter extends Backend
 	public function synchronize($varValue, $objUser, $objModule=null)
 	{
 		// Return if there is no user (e.g. upon registration)
-		if (is_null($objUser))
+		if ($objUser === null)
 		{
 			return $varValue;
 		}

@@ -746,7 +746,7 @@ class ModuleTasks extends BackendModule
 		// Get all active users
 		foreach ($GLOBALS['TL_LANG']['tl_task_status'] as $k=>$v)
 		{
-			if ($k != 'created' || ($this->blnAdvanced && !$progress) || is_null($value))
+			if ($k != 'created' || ($this->blnAdvanced && !$progress) || $value === null)
 			{
 				$arrOptions[] = array('value'=>$k, 'label'=>$v);
 			}

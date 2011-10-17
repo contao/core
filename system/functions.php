@@ -364,7 +364,7 @@ function deserialize($varValue, $blnForceArray=false)
 
 	if (!is_string($varValue))
 	{
-		return $blnForceArray ? (is_null($varValue) ? array() : array($varValue)) : $varValue;
+		return $blnForceArray ? (($varValue === null) ? array() : array($varValue)) : $varValue;
 	}
 	elseif (trim($varValue) == '')
 	{
@@ -701,7 +701,7 @@ if (!USE_MBSTRING)
 	// mb_convert_encoding
 	function mb_convert_encoding($str, $to, $from=null)
 	{
-		if (is_null($from))
+		if ($from === null)
 			return utf8_convert_encoding($str, $to);
 
 		return utf8_convert_encoding($str, $to, $from);
@@ -716,7 +716,7 @@ if (!USE_MBSTRING)
 	// mb_stripos
 	function mb_stripos($haystack, $needle, $offset=null)
 	{
-		if (is_null($offset))
+		if ($offset === null)
 			return stripos($haystack, $needle);
 
 		return stripos($haystack, $needle, $offset);
@@ -737,7 +737,7 @@ if (!USE_MBSTRING)
 	// mb_strpos
 	function mb_strpos($haystack, $needle, $offset=null)
 	{
-		if (is_null($offset))
+		if ($offset === null)
 			return utf8_strpos($haystack, $needle);
 
 		return utf8_strpos($haystack, $needle, $offset);
@@ -776,7 +776,7 @@ if (!USE_MBSTRING)
 	// mb_substr
 	function mb_substr($str, $start, $length=null)
 	{
-		if (is_null($length))
+		if ($length === null)
 			return utf8_substr($str, $start);
 
 		return utf8_substr($str, $start, $length);
@@ -785,7 +785,7 @@ if (!USE_MBSTRING)
 	// mb_substr_count
 	function mb_substr_count($haystack, $needle, $offset=null)
 	{
-		if (is_null($offset))
+		if ($offset === null)
 			return substr_count($haystack, $needle);
 
 		return substr_count($haystack, $needle, $offset);

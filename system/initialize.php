@@ -94,7 +94,7 @@ error_reporting(($GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
 /**
  * Define the relativ path to the Contao installation
  */
-if (is_null($GLOBALS['TL_CONFIG']['websitePath']))
+if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 {
 	$path = preg_replace('/\/contao\/[^\/]*$/i', '', $objEnvironment->requestUri);
 	$path = preg_replace('/\/$/i', '', $path);

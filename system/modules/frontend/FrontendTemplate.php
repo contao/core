@@ -160,7 +160,7 @@ class FrontendTemplate extends Template
 		// Send cache headers
 		if (!headers_sent())
 		{
-			if (!is_null($intCache) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+			if ($intCache !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');

@@ -305,7 +305,7 @@ function utf8_strpos($haystack, $needle, $offset=0)
 	$comp = 0;
 	$length = null;
 
-	while (is_null($length) || $length < $offset)
+	while ($length === null || $length < $offset)
 	{
 		$pos = strpos($haystack, $needle, $offset + $comp);
 
@@ -451,7 +451,7 @@ function utf8_substr($str, $start, $length=null)
 {
 	if (USE_MBSTRING)
 	{
-		if (is_null($length))
+		if ($length === null)
 			return mb_substr($str, $start);
 
 		return mb_substr($str, $start, $length);
@@ -460,7 +460,7 @@ function utf8_substr($str, $start, $length=null)
 	$str = (string) $str;
 	$start = (int) $start;
 
-	if (!is_null($length))
+	if ($length !== null)
 		$length = (int) $length;
 
 	// Handle trivial cases
@@ -502,7 +502,7 @@ function utf8_substr($str, $start, $length=null)
 	}
 
 	// Establish a pattern for length
-	if (is_null($length))
+	if ($length === null)
 	{
 		$length_pattern = '(.*)$';
 	}

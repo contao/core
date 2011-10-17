@@ -258,7 +258,7 @@ abstract class Controller extends System
 			{
 				list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
 
-				if (is_null($strArticle))
+				if ($strArticle === null)
 				{
 					$strArticle = $strSection;
 					$strSection = 'main';
@@ -2777,7 +2777,7 @@ abstract class Controller extends System
 		$objVersion = $this->Database->prepare("SELECT MAX(version) AS version FROM tl_version WHERE pid=? AND fromTable=?")
 									 ->executeUncached($intId, $strTable);
 
-		if (!is_null($objVersion->version))
+		if ($objVersion->version !== null)
 		{
 			$intVersion = $objVersion->version + 1;
 		}

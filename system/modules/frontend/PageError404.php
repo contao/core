@@ -51,7 +51,7 @@ class PageError404 extends Frontend
 		$time = time();
 
 		// Add a log entry
-		if (!is_null($strDomain) || !is_null($strHost))
+		if ($strDomain !== null || $strHost !== null)
 		{
 			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', 'PageError404 generate()', TL_ERROR);
 		}
