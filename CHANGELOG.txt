@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1066 (Change)
+--------------
+Added the classes "col_first" and "col_last" to the labels of the calendar
+and mini-calendar (see #1718).
+
 r1055 (Improvement)
 -------------------
 Assign the image width to the caption element so long captions do not break
