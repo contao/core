@@ -172,20 +172,10 @@ class StyleSheets extends Backend
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($row['id']);
 
+		// Append the definition
 		while ($objDefinitions->next())
 		{
-			$strText = $this->compileDefinition($objDefinitions->row(), true, $vars);
-			$intLength = strlen($strText);
-
-			// Add a line break after approximately 400 characters
-			if (!$GLOBALS['TL_CONFIG']['debugMode'] && ($intCount + $intLength) >= 400)
-			{
-				$intCount = 0;
-				$objFile->append('');
-			}
-
-			$intCount += $intLength;
-			$objFile->append($strText, '');
+			$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars), '');
 		}
 
 		$objFile->close();
