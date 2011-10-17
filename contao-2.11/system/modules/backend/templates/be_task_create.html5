@@ -10,11 +10,16 @@
 <input type="hidden" name="FORM_SUBMIT" value="tl_tasks">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
-<div class="tl_tbox block">
+<fieldset id="pal_title_legend" class="tl_tbox block<?php echo $this->titleClass; ?>">
+<legend onclick="AjaxRequest.toggleFieldset(this, 'title_legend', 'tl_tasks')"><?php echo $this->titleLabel; ?></legend>
+<div class="w50">
   <h3><?php echo $this->title->generateLabel(); ?></h3>
-  <?php echo $this->title->generateWithError(); if ($this->title->help): ?> 
-  <p class="tl_help"><?php echo $this->title->help; ?></p><?php endif; ?> 
-
+  <?php echo $this->title->generateWithError(); ?> 
+<?php if ($this->title->help): ?>
+  <p class="tl_help tl_tip"><?php echo $this->title->help; ?></p>
+<?php endif; ?>
+</div>
+<div class="w50 wizard">
   <h3><?php echo $this->deadline->generateLabel(); ?></h3>
   <?php echo $this->deadline->generateWithError(); ?> <img src="<?php echo TL_PLUGINS_URL; ?>plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_<?php echo $this->deadline->id; ?>" style="vertical-align:-6px">
   <script>
@@ -34,25 +39,37 @@
     });
   });
   </script>
-<?php if ($this->deadline->help): ?> 
-  <p class="tl_help"><?php echo $this->deadline->help; ?></p>
+<?php if ($this->deadline->help): ?>
+  <p class="tl_help tl_tip"><?php echo $this->deadline->help; ?></p>
 <?php endif; ?>
 </div>
+</fieldset>
 
-<div class="tl_box block">
+<fieldset id="pal_assign_legend" class="tl_box block<?php echo $this->assignClass; ?>">
+<legend onclick="AjaxRequest.toggleFieldset(this, 'assign_legend', 'tl_tasks')"><?php echo $this->assignLabel; ?></legend>
+<div class="w50">
   <h3><?php echo $this->assignedTo->generateLabel(); ?></h3>
-  <?php echo $this->assignedTo->generateWithError(); if ($this->assignedTo->help): ?> 
-  <p class="tl_help"><?php echo $this->assignedTo->help; ?></p><?php endif; ?> 
-
-  <?php echo $this->notify->generateWithError(); if ($this->notify->help): ?> 
-  <p class="tl_help"><?php echo $this->notify->help; ?></p><?php endif; ?> 
+  <?php echo $this->assignedTo->generateWithError(); ?> 
+<?php if ($this->assignedTo->help): ?>
+  <p class="tl_help tl_tip"><?php echo $this->assignedTo->help; ?></p>
+<?php endif; ?>
 </div>
+<div class="w50 m12">
+  <?php echo $this->notify->generateWithError(); ?>
+<?php if ($this->notify->help): ?>
+  <p class="tl_help tl_tip"><?php echo $this->notify->help; ?></p>
+<?php endif; ?>
+</div>
+</fieldset>
 
-<div class="tl_box block">
+<fieldset id="pal_status_legend" class="tl_box block<?php echo $this->statusClass; ?>">
+<legend onclick="AjaxRequest.toggleFieldset(this, 'status_legend', 'tl_tasks')"><?php echo $this->statusLabel; ?></legend>
+<div>
   <h3><?php echo $this->comment->generateLabel(); ?></h3>
   <?php echo $this->comment->generateWithError(); if ($this->comment->help): ?> 
-  <p class="tl_help"><?php echo $this->comment->help; ?></p><?php endif; ?> 
+  <p class="tl_help tl_tip"><?php echo $this->comment->help; ?></p><?php endif; ?> 
 </div>
+</fieldset>
 
 </div>
 

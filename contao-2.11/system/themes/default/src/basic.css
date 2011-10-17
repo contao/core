@@ -330,3 +330,35 @@ pre,.tl_textarea.monospace {
 	color:#999;
 	box-shadow:none;
 }
+
+/* Floats */
+.clr {
+	clear:both;
+	overflow:hidden;
+}
+.w50 {
+	width:50%;
+	float:left;
+	height:72px;
+}
+.w50 .tl_help {
+	margin-right:24px;
+}
+.wizard .tl_text {
+	width:290px;
+}
+.wizard .tl_text_2 {
+	width:140px;
+}
+.long .tl_text {
+	width:657px;
+}
+.m12 {
+	margin:12px 0 12px;
+}
+.cbx {
+	height:48px;
+}
+.inline div {
+	display:inline;
+}

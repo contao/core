@@ -412,7 +412,7 @@ class DataContainer extends Backend
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (!$objWidget->hasErrors() ? $this->help() : '') . '
 </div>';
 	}
 
@@ -431,7 +431,7 @@ class DataContainer extends Backend
 		}
 
 		return '
-  <p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$return.'</p>';
+  <p class="tl_help tl_tip">'.$return.'</p>';
 	}
 
 

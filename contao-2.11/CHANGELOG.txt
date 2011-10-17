@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1068 (Removed)
+---------------
+Finally removed the old one-column back end form layout (#3534).
+
 r1066 (Change)
 --------------
 Added the classes "col_first" and "col_last" to the labels of the calendar

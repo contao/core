@@ -182,23 +182,16 @@ class DC_File extends DataContainer implements editable
 					$legend = "\n" . '<legend onclick="AjaxRequest.toggleFieldset(this, \'' . $key . '\', \'' . $this->strTable . '\')">' . (isset($GLOBALS['TL_LANG'][$this->strTable][$key]) ? $GLOBALS['TL_LANG'][$this->strTable][$key] : $key) . '</legend>';
 				}
 
-				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
+				if (isset($fs[$this->strTable][$key]))
 				{
-					if (isset($fs[$this->strTable][$key]))
-					{
-						$class .= ($fs[$this->strTable][$key] ? '' : ' collapsed');
-					}
-					else
-					{
-						$class .= (($cls && $legend) ? ' ' . $cls : '');
-					}
-
-					$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
+					$class .= ($fs[$this->strTable][$key] ? '' : ' collapsed');
 				}
 				else
 				{
-					$return .= "\n\n" . '<div class="'.$class.'">';
+					$class .= (($cls && $legend) ? ' ' . $cls : '');
 				}
+
+				$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
 
 				// Build rows of the current box
 				foreach ($v as $kk=>$vv)
@@ -268,15 +261,7 @@ class DC_File extends DataContainer implements editable
 				}
 
 				$class = 'tl_box block';
-
-				if (!$GLOBALS['TL_CONFIG']['oldBeTheme'])
-				{
-					$return .= "\n" . '</fieldset>';
-				}
-				else
-				{
-					$return .= "\n" . '</div>';
-				}
+				$return .= "\n" . '</fieldset>';
 			}
 		}
 
