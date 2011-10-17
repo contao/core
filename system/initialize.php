@@ -196,6 +196,10 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 }
 
 // Make sure there is a request token array
+if (!is_array($_SESSION['REQUEST_TOKEN']))
+{
+	$_SESSION['REQUEST_TOKEN'] = array();
+}
 if (!is_array($_SESSION['REQUEST_TOKEN'][TL_MODE]))
 {
 	$_SESSION['REQUEST_TOKEN'][TL_MODE] = array();
