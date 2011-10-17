@@ -122,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s,\'tl_style\')"',
 				'button_callback'     => array('tl_style', 'toggleIcon')
 			),
 			'show' => array
