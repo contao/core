@@ -226,7 +226,6 @@ class ModuleSearch extends Module
 			{
 				$this->Template->header = sprintf($GLOBALS['TL_LANG']['MSC']['sEmpty'], $strKeywords);
 				$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
-
 				return;
 			}
 
@@ -263,7 +262,7 @@ class ModuleSearch extends Module
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
-				$objTemplate->href = $this->Environment->base . $arrResult[$i]['url'];
+				$objTemplate->href = $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
 				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2) . '%');
