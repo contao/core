@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1074 (Update)
+--------------
+Added MooTools 1.4.1 (see #3456).
+
 r1072 (Improvement)
 -------------------
 Replaced is_null() with === null (see #3533).
