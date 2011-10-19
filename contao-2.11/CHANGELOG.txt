@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1076 (Update)
+--------------
+Updated SimplePie to version 1.2.1 (see #3482).
+
 r1075 (Update)
 --------------
 Updated the IDNA plugin to version 0.8.0 (see #3481).

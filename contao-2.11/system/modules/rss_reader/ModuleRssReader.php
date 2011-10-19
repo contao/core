@@ -36,7 +36,7 @@ require_once(TL_ROOT . '/plugins/simplepie/simplepie.inc');
 
 if (!class_exists('idna_convert', false))
 {
-	require_once(TL_ROOT . '/plugins/simplepie/idna_convert.class.php');
+	require_once(TL_ROOT . '/plugins/idna/idna_convert.class.php');
 }
 
 
