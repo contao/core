@@ -2,7 +2,7 @@
 /**
  * UCTC - The Unicode Transcoder
  *
- * Converts between various flavours of Unicode representations like UCS-4 or UTF8
+ * Converts between various flavours of Unicode representations like UCS-4 or UTF-8
  * Supported schemes:
  * - UCS-4 Little Endian / Big Endian / Array (partially)
  * - UTF-16 Little Endian / Big Endian (not yet)
@@ -10,9 +10,10 @@
  * - UTF-7
  * - UTF-7 IMAP (modified UTF-7)
  *
- * @author Matthias Sommerfeld <mso@phlylabs.de>
- * @version 0.0.5
- * @package phlyMail
+ * @package phlyMail Nahariya 4.0+ Default branch
+ * @author Matthias Sommerfeld  <mso@phlyLabs.de>
+ * @copyright 2003-2009 phlyLabs Berlin, http://phlylabs.de
+ * @version 0.0.6 2009-05-10
  */
 class uctc {
     private static $mechs = array('ucs4', /*'ucs4le', 'ucs4be', */'ucs4array', /*'utf16', 'utf16le', 'utf16be', */'utf8', 'utf7', 'utf7imap');
@@ -44,12 +45,12 @@ class uctc {
     }
 
     /**
-    * This converts an UTF-8 encoded string to its UCS-4 representation
-    *
-    * @param string $input  The UTF-8 string to convert
-    * @return array  Array of 32bit values representing each codepoint
-    * @access private
-    */
+     * This converts an UTF-8 encoded string to its UCS-4 representation
+     *
+     * @param string $input  The UTF-8 string to convert
+     * @return array  Array of 32bit values representing each codepoint
+     * @access private
+     */
     private static function utf8_ucs4array($input)
     {
         $output = array();
@@ -136,10 +137,10 @@ class uctc {
     }
 
     /**
-    * Convert UCS-4 string into UTF-8 string
-    * See utf8_ucs4array() for details
-    * @access   private
-    */
+     * Convert UCS-4 string into UTF-8 string
+     * See utf8_ucs4array() for details
+     * @access   private
+     */
     private static function ucs4array_utf8($input)
     {
         $output = '';
@@ -227,30 +228,32 @@ class uctc {
         $output = '';
         $mode = 'd';
         $b64 = '';
-        foreach ($input as $v) {
-            $is_direct = (0x20 <= $v && $v <= 0x7e && $v != ord($sc));
+        while (true) {
+            $v = (!empty($input)) ? array_shift($input) : false;
+            $is_direct = (false !== $v) ? (0x20 <= $v && $v <= 0x7e && $v != ord($sc)) : true;
             if ($mode == 'b') {
                 if ($is_direct) {
                     if ($b64 == chr(0).$sc) {
                         $output .= $sc.'-';
                         $b64 = '';
-                    } else {
-                        while (strlen($b64) % 3) $b64 .= chr(0);
-                        $output .= $sc.base64_encode($b64).'-';
+                    } elseif ($b64) {
+                        $output .= $sc.str_replace('=', '', base64_encode($b64)).'-';
+                        $b64 = '';
                     }
                     $mode = 'd';
-                } else {
-                    $b64 .= (chr(($v >> 8) & 255). chr($v & 255));
+                } elseif (false !== $v) {
+                    $b64 .= chr(($v >> 8) & 255). chr($v & 255);
                 }
             }
-            if ($mode == 'd') {
+            if ($mode == 'd' && false !== $v) {
                 if ($is_direct) {
                     $output .= chr($v);
                 } else {
-                    $b64 = (chr(($v >> 8) & 255). chr($v & 255));
+                    $b64 = chr(($v >> 8) & 255). chr($v & 255);
                     $mode = 'b';
                 }
             }
+            if (false === $v && $b64 == '') break;
         }
         return $output;
     }
@@ -293,6 +296,5 @@ class uctc {
         }
         return $output;
     }
-
 }
 ?>
