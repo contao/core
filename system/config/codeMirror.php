@@ -71,7 +71,16 @@ window.addEvent('domready', function() {
     mode: '<?php echo $arrField['type']; ?>',
     lineNumbers: true,
     form: null,
-    enterMode: 'keep'
+    enterMode: 'keep',
+    onKeyEvent: function(i, e) {
+      // Fullscreen mode (F11)
+      if (e.keyCode == 122 && e.type == 'keydown') {
+        myCodeMirror.getWrapperElement().
+          getElement('.CodeMirror-scroll').
+          toggleClass('fullscreen');
+        e.stop();
+      }
+    }
   });
 
   // Adjust the height and width
