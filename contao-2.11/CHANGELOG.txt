@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1078 (Update)
+--------------
+Updated CodeMirror to version 2.15 (see #3475) and added a fullscreen mode
+which you can toggle with F11 (see #3376).
+
 r1076 (Update)
 --------------
 Updated SimplePie to version 1.2.1 (see #3482).

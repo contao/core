@@ -12,10 +12,14 @@
 .CodeMirror-scroll {
   overflow: auto;
   height: 300px;
+  /* This is needed to prevent an IE[67] bug where the scrolled content
+     is visible outside of the scrolling box. */
+  position: relative;
 }
 
 .CodeMirror-gutter {
   position: absolute; left: 0; top: 0;
+  z-index: 10;
   background-color: #f7f7f7;
   border-right: 1px solid #eee;
   min-width: 2em;
@@ -39,18 +43,18 @@
   /* PATCH
   font-family: inherit;
   font-size: inherit;
-  */
+  PATCH EOF */
   padding: 0; margin: 0;
   white-space: pre;
   word-wrap: normal;
 }
 
+/* PATCH
 .CodeMirror textarea {
-  /* PATCH
   font-family: inherit !important;
   font-size: inherit !important;
-  */
 }
+PATCH EOF */
 
 .CodeMirror-cursor {
   z-index: 10;
@@ -72,6 +76,22 @@ span.CodeMirror-selected {
 
 .CodeMirror-matchingbracket {color: #0f0 !important;}
 .CodeMirror-nonmatchingbracket {color: #f22 !important;}
+
+/* PATCH */
+.fullscreen {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 999999;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 1;
+  background: #fff;
+}
 
 /* Default */
 .cm-s-default span.cm-keyword {color: #708;}
@@ -119,3 +139,4 @@ span.cm-sql-function {color: darkorange;}
 span.cm-sql-type {color: purple;}
 span.cm-sql-separator {color: #666666;}
 span.cm-sql-number {color: darkcyan;}
+/* PATCH EOF */
