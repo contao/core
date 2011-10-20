@@ -118,10 +118,6 @@ $GLOBALS['BE_MOD'] = array
 		(
 			'tables' => array('tl_user'),
 			'callback' => 'ModuleUser'
-		),
-		'tasks' => array
-		(
-			'callback' => 'ModuleTasks'
 		)
 	)
 );

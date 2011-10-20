@@ -127,53 +127,10 @@ class Main extends Backend
 			$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
 		}
 
-		// Check for tasks
-		$tasksReg = 0;
-		$tasksNew = 0;
-		$tasksDue = 0;
-
-		$objTask = $this->Database->prepare("SELECT t.deadline, s.status, s.assignedTo FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)" . (!$this->User->isAdmin ? " WHERE (t.createdBy=? OR s.assignedTo=?)" : ""))
-								  ->execute($this->User->id, $this->User->id);
-
-		if ($objTask->numRows)
+		// HOOK: add the task center notifications
+		if (in_array('tasks', $this->Config->getActiveModules()))
 		{
-			$time = time();
-
-			while ($objTask->next())
-			{
-				if ($objTask->status == 'completed')
-				{
-					continue;
-				}
-
-				if ($objTask->deadline <= $time)
-				{
-					++$tasksDue;
-				}
-				elseif ($objTask->status == 'created' && $objTask->assignedTo == $this->User->id)
-				{
-					++$tasksNew;
-				}
-				else
-				{
-					++$tasksReg;
-				}
-			}
-
-			if ($tasksReg > 0)
-			{
-				$objTemplate->tasksCur = sprintf($GLOBALS['TL_LANG']['MSC']['tasksCur'], $tasksReg);
-			}
-
-			if ($tasksNew > 0)
-			{
-				$objTemplate->tasksNew = sprintf($GLOBALS['TL_LANG']['MSC']['tasksNew'], $tasksNew);
-			}
-
-			if ($tasksDue > 0)
-			{
-				$objTemplate->tasksDue = sprintf($GLOBALS['TL_LANG']['MSC']['tasksDue'], $tasksDue);
-			}
+			$objTemplate->taskList = ModuleTasks::listTasks();
 		}
 
 		$objTemplate->arrGroups = $this->User->navigation(true);

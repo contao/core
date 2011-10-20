@@ -6,9 +6,15 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1082 (Change)
+--------------
+Moved the task center to a separate module (might be moved to the ER later).
+
 r1081 (New)
 -----------
-Added a language switcher that works with the new URLs from r1080.
+Added a language switcher that works with the new URLs from r1080. For the
+module to work, you need to enable the new feature in the back end settings
+and to assign the same alias to all related pages.
 
 r1080 (New)
 -----------
