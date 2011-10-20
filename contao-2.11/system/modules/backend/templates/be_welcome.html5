@@ -7,10 +7,10 @@
   <h2><?php echo $this->systemMessages; ?></h2>
 <?php echo $this->taskList; ?>
 <?php if ($this->update): ?>
-  <p class="tl_update"><a href="contao/main.php?do=maintenance"><?php echo $this->update; ?></a></p>
+  <p class="tl_info"><a href="contao/main.php?do=maintenance"><?php echo $this->update; ?></a></p>
 <?php endif; ?>
 <?php if ($this->lastLogin): ?>
-  <p class="tl_update"><?php echo $this->lastLogin; ?></p>
+  <p class="tl_info"><?php echo $this->lastLogin; ?></p>
 <?php endif; ?>
 </div>
 

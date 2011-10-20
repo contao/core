@@ -35,7 +35,8 @@
 $GLOBALS['BE_MOD']['profile']['tasks'] = array
 (
 	'callback' => 'ModuleTasks',
-	'icon'     => 'system/modules/tasks/html/icon.gif'
+	'icon'     => 'system/modules/tasks/html/icon.gif',
+	'stylesheet' => 'system/modules/tasks/html/style.css'
 );
 
 ?>
