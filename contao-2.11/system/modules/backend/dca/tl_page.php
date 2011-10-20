@@ -960,44 +960,50 @@ class tl_page extends Backend
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
-		if ($objAlias->numRows > 1)
+		if ($objAlias->numRows > (!$autoAlias ? 1 : 0))
 		{
-			$arrDomains = array();
+			$arrPages = array();
+			$strDomain = '';
+			$strLanguage = '';
 
 			while ($objAlias->next())
 			{
-				$_pid = $objAlias->id;
-				$_type = '';
+				$objCurrentPage = $this->getPageDetails($objAlias->id);
+				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
+				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
-				do
+				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 				{
-					$objParentPage = $this->Database->prepare("SELECT id, pid, alias, type, dns FROM tl_page WHERE id=?")
-													->limit(1)
-													->execute($_pid);
-
-					if ($objParentPage->numRows < 1)
-					{
-						break;
-					}
-
-					$_pid = $objParentPage->pid;
-					$_type = $objParentPage->type;
+					// Check domain and language
+					$arrPages[$domain][$language][] = $objAlias->id;
 				}
-				while ($_pid > 0 && $_type != 'root');
+				else
+				{
+					// Check the domain only
+					$arrPages[$domain][] = $objAlias->id;
+				}
 
-				$arrDomains[] = ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0)) ? $objParentPage->dns : '';
+				// Store the current page's data
+				if ($objCurrentPage->id == $dc->id)
+				{
+					$strDomain = $domain;
+					$strLanguage = $language;
+				}
 			}
 
-			$arrUnique = array_unique($arrDomains);
+			$arrCheck = $GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $arrPages[$strDomain][$strLanguage] : $arrPages[$strDomain];
 
-			if (count($arrDomains) != count($arrUnique))
+			// Check if there are multiple results for the current domain
+			if (count($arrCheck) > 1)
 			{
-				if (!$autoAlias)
+				if ($autoAlias)
+				{
+					$varValue .= '-' . $dc->id;
+				}
+				else
 				{
 					throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 				}
-
-				$varValue .= '-' . $dc->id;
 			}
 		}
 

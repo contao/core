@@ -50,8 +50,8 @@ class PageRoot extends Frontend
 	{
 		$time = time();
 
-		// Get first active page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+		// Get the first active page
+		$objNextPage = $this->Database->prepare("SELECT id, alias, language FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 									  ->limit(1)
 									  ->execute($pageId);
 
@@ -65,13 +65,11 @@ class PageRoot extends Frontend
 			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
 		}
 
-		// No root page found
+		// No page found
 		if ($pageId === 0)
 		{
 			$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);
 		}
-
-		// No active page found
 		else
 		{
 			$this->log('No active page found under root page "' . $pageId . '" (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);

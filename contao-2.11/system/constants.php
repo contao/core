@@ -59,7 +59,7 @@ define('SWITCH_ORDER', true);
 define('VERSION', '2.11');
 define('BUILD', 'beta1');
 define('DATEPICKER', '1.17');
-define('CODEMIRROR', '2.1');
+define('CODEMIRROR', '2.15');
 define('FANCYUPLOAD', '3.0');
 define('HIGHLIGHTER', '3.0.83');
 define('MEDIABOX', '1.3.4');

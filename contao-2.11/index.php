@@ -96,27 +96,48 @@ class Index extends Frontend
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
 								  ->execute((is_numeric($pageId) ? $pageId : 0), $pageId);
 
-		// Check the URL of each page if there are multiple results
+		// Check the URL and language of each page if there are multiple results
 		if ($objPage->numRows > 1)
 		{
 			$objNewPage = null;
+			$arrPages = array();
 
 			while ($objPage->next())
 			{
 				$objCurrentPage = $this->getPageDetails($objPage->id);
+				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
+				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
-				// Look for a root page whose domain name matches the host name
-				if ($objCurrentPage->domain == $this->Environment->host)
+				// Also store the fallback language
+				if ($objCurrentPage->rootIsFallback)
 				{
-					$objNewPage = $objCurrentPage;
-					break;
+					$arrPages[$domain]['*'] = $objCurrentPage;
 				}
+			}
 
-				// Fall back to a root page without domain name
-				if ($objCurrentPage->domain == '')
+			// Look for a root page whose domain name matches the host name
+			if (isset($arrPages[$this->Environment->host]))
+			{
+				$arrLangs = $arrPages[$this->Environment->host];
+			}
+			else
+			{
+				$arrLangs = $arrPages['*']; // Empty domain
+			}
+
+			// Try to find a page matching the language parameter
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			{
+				$lang = $this->Input->get('language');
+
+				if ($lang != '' && isset($arrLangs[$lang]))
 				{
-					$objNewPage = $objCurrentPage;
+					$objNewPage = $arrLangs[$lang];
 				}
+			}
+			else
+			{
+				$objNewPage = $arrLangs['*']; // Fallback language
 			}
 
 			// Matching root page found

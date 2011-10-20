@@ -6,6 +6,19 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1080 (New)
+-----------
+According to Google's recommendations for multilingual websites, you can now
+optionally add the language string as first URL parameter in addition to
+working with different domains (see http://bit.ly/oZfzYK). If you activate the
+feature in the back end settings, Contao will generate URLs like
+
+  http://domain.tld/en/about.html
+  http://domain.tld/de/about.html
+
+In this context, the default .htaccess file has been improved and should now
+execute faster and produce less overhead.
+
 r1078 (Update)
 --------------
 Updated CodeMirror to version 2.15 (see #3475) and added a fullscreen mode

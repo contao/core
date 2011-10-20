@@ -662,6 +662,7 @@ abstract class Controller extends System
 			// Store whether the root page has been published
 			$time = time();
 			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
+			$objPage->rootIsFallback = ($objParentPage->fallback != '');
 		}
 		else
 		{
@@ -672,6 +673,8 @@ abstract class Controller extends System
 			$objPage->staticFiles = '';
 			$objPage->staticSystem = '';
 			$objPage->staticPlugins = '';
+			$objPage->rootIsPublic = true;
+			$objPage->rootIsFallback = true;
 
 			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
@@ -2408,13 +2411,24 @@ abstract class Controller extends System
 	 */
 	protected function generateFrontendUrl($arrRow, $strParams='')
 	{
-		$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . (strlen($arrRow['alias']) ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+		global $objPage;
 
-		if ($GLOBALS['TL_CONFIG']['disableAlias'])
+		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
+		{
+			$strLanguage = '';
+
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			{
+				$strLanguage .= $objPage->rootLanguage . '/';
+			}
+
+			$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+		}
+		else
 		{
 			$strRequest = '';
 
-			if ($strParams)
+			if ($strParams != '')
 			{
 				$arrChunks = explode('/', preg_replace('@^/@', '', $strParams));
 
