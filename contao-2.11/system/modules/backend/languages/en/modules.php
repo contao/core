@@ -54,6 +54,5 @@ $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Maintenance', 'Maintain or up
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'User functions';
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Undo', 'Restore deleted records.');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Personal data', 'Change your personal data or set a new password.');
-$GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task center', 'Assign tasks to other back end users.');
 
 ?>

@@ -1013,9 +1013,6 @@ a.navigation.undo {
 a.navigation.login {
 	background-image:url("images/login.gif");
 }
-a.navigation.tasks {
-	background-image:url("images/taskcenter.gif");
-}
 
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,
