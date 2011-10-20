@@ -328,6 +328,8 @@ $GLOBALS['TL_CONFIG']['staticSystem']         = '';
 $GLOBALS['TL_CONFIG']['staticPlugins']        = '';
 $GLOBALS['TL_CONFIG']['disableCron']          = false;
 $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
+$GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;
+$GLOBALS['TL_CONFIG']['doNotRedirectEmpty']   = false;
 
 
 /**

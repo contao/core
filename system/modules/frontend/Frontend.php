@@ -95,6 +95,13 @@ abstract class Frontend extends Controller
 			array_shift($arrFragments);
 		}
 
+		// Get the language
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && preg_match('/^[a-z]{2}$/', $arrFragments[0]))
+		{
+			$this->Input->setGet('language', $arrFragments[0]);
+			array_shift($arrFragments);
+		}
+
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getPageIdFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getPageIdFromUrl']))
 		{
@@ -127,10 +134,26 @@ abstract class Frontend extends Controller
 		$accept_language = $this->Environment->httpAcceptLanguage;
 		$time = time();
 
-		// Find the matching root pages (thanks to Andreas Schempp)
-		$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
-									  ->limit(1)
-									  ->execute($host);
+		// Get the language from the URL
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && isset($_GET['language']) && !empty($_GET['language']))
+		{
+			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND (language=? OR fallback=1)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
+										  ->limit(1)
+										  ->execute($host, $this->Input->get('language'));
+		}
+		else
+		{
+			// Find the matching root pages (thanks to Andreas Schempp)
+			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
+										  ->limit(1)
+										  ->execute($host);
+
+			// Redirect to the language root
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
+			{
+				$this->redirect($objRootPage->language . '/', 302);
+			}
+		}
 
 		return $objRootPage->numRows ? $objRootPage->id : 0;
 	}
@@ -169,7 +192,11 @@ abstract class Frontend extends Controller
 			}
 		}
 
-		$strParams = '';
+		// Unset the language parameter
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		{
+			unset($arrGet['language']);
+		}
 
 		// Determine connector and separator
 		if ($GLOBALS['TL_CONFIG']['disableAlias'])
@@ -182,6 +209,8 @@ abstract class Frontend extends Controller
 			$strConnector = '/';
 			$strSeparator = '/';
 		}
+
+		$strParams = '';
 
 		// Compile the parameters string
 		foreach ($arrGet as $k=>$v)
@@ -198,13 +227,21 @@ abstract class Frontend extends Controller
 		global $objPage;
 		$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
 
-		// Get page ID from URL if not set
+		// Get the page ID from URL if not set
 		if (empty($pageId))
 		{
 			$pageId = $this->getPageIdFromUrl();
 		}
 
-		return ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $pageId . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+		$pageLanguage = '';
+
+		// Add the language
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		{
+			$pageLanguage = $objPage->rootLanguage . '/';
+		}
+
+		return ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $pageLanguage . $pageId . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
 	}
 
 
