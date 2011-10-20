@@ -2419,7 +2419,7 @@ abstract class Controller extends System
 
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 			{
-				$strLanguage .= $objPage->rootLanguage . '/';
+				$strLanguage .= (isset($arrRow['language']) ? $arrRow['language'] : $objPage->rootLanguage) . '/';
 			}
 
 			$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];

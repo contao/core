@@ -43,7 +43,8 @@ $GLOBALS['FE_MOD'] = array
 		'quicklink'      => 'ModuleQuicklink',
 		'booknav'        => 'ModuleBooknav',
 		'articlenav'     => 'ModuleArticlenav',
-		'sitemap'        => 'ModuleSitemap'
+		'sitemap'        => 'ModuleSitemap',
+		'languageSwitch' => 'ModuleLanguageSwitch'
 	),
 	'user' => array
 	(

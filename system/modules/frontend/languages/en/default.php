@@ -134,5 +134,7 @@ $GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Unpublished';
 $GLOBALS['TL_LANG']['MSC']['addComment']    = 'Add a comment';
 $GLOBALS['TL_LANG']['MSC']['autologin']     = 'Remember me';
 $GLOBALS['TL_LANG']['MSC']['relevance']     = '%s relevance';
+$GLOBALS['TL_LANG']['MSC']['viewPageIn']    = 'View this page in %s';
+$GLOBALS['TL_LANG']['MSC']['switchInfo']    = 'The language switch module requires the "add the language to the URL" option to be enabled as well as all related pages to use the same alias!';
 
 ?>
