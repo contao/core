@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1081 (New)
+-----------
+Added a language switcher that works with the new URLs from r1080.
+
 r1080 (New)
 -----------
 According to Google's recommendations for multilingual websites, you can now

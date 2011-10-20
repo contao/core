@@ -1,0 +1,20 @@
+
+<!-- indexer::stop -->
+<nav class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
+
+<ul>
+<?php foreach ($this->items as $item): ?>
+  <li><a href="<?php echo $item['href']; ?>" title="<?php echo $item['title']; ?>"><img src="system/modules/frontend/html/<?php echo $item['isoCode']; ?>.gif" alt="<?php echo $item['language']; ?>"></a></li>
+<?php endforeach; ?>
+</ul>
+
+<a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
+
+</nav>
+<!-- indexer::continue -->
