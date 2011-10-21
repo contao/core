@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'emails', 'tl_class'=>'w50')
 		),
 		'subject' => array
 		(
