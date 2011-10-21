@@ -70,6 +70,50 @@ class SystemMessages extends Backend
 
 		return '';
 	}
+
+
+	/**
+	 * Show a warning if there is no language fallback page
+	 */
+	public function languageFallback()
+	{
+		$arrRoots = array();
+		$time = time();
+		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
+
+		while ($objRoots->next())
+		{
+			$strDns = ($objRoots->dns != '') ? $objRoots->dns : '*';
+
+			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
+			{
+				continue;
+			}
+
+			$arrRoots[$strDns] = $objRoots->fallback;
+		}
+
+		$arrReturn = array();
+
+		foreach ($arrRoots as $k=>$v)
+		{
+			if ($v != '')
+			{
+				continue;
+			}
+
+			if ($k == '*')
+			{
+				$arrReturn[] = '<p class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'] . '</p>';
+			}
+			else
+			{
+				$arrReturn[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['ERR']['noFallbackDns'], $k) . '</p>';
+			}
+		}
+
+		return implode("\n", $arrReturn);
+	}
 }
 
 ?>

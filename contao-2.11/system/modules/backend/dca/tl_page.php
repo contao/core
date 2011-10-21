@@ -904,38 +904,8 @@ class tl_page extends Backend
 			return;
 		}
 
-		$arrRoots = array();
-		$time = time();
-		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
-
-		while ($objRoots->next())
-		{
-			$strDns = ($objRoots->dns != '') ? $objRoots->dns : 'empty';
-
-			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
-			{
-				continue;
-			}
-
-			$arrRoots[$strDns] = $objRoots->fallback;
-		}
-
-		foreach ($arrRoots as $k=>$v)
-		{
-			if ($v != '')
-			{
-				continue;
-			}
-
-			if ($k == 'empty')
-			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'];
-			}
-			else
-			{
-				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['noFallbackDns'], $k);
-			}
-		}
+		$this->import('SystemMessages');
+		$this->addRawMessage($this->SystemMessages->languageFallback());
 	}
 
 

@@ -270,7 +270,7 @@ class DC_File extends DataContainer implements editable
 		// Check whether the target file is writeable
 		if (!$this->Files->is_writeable('system/config/localconfig.php'))
 		{
-			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php');
+			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/config/localconfig.php'));
 		}
 
 		// Add some buttons and end the form
@@ -326,10 +326,7 @@ window.addEvent(\'domready\', function() {
 			// Reload
 			if ($this->Input->post('saveNclose'))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}

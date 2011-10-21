@@ -178,7 +178,7 @@ class ListWizard extends Widget
 		{
 			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -191,7 +191,7 @@ class ListWizard extends Widget
 
 				if ($objFile->extension != 'csv')
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 

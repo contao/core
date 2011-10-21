@@ -117,7 +117,7 @@ class FormPassword extends Widget
 		if (!$this->hasErrors())
 		{
 			$this->blnSubmitInput = true;
-			$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['MSC']['pw_changed'];
+			$this->addConfirmationMessage($GLOBALS['TL_LANG']['MSC']['pw_changed']);
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 
 			return sha1($strSalt . $varInput) . ':' . $strSalt;

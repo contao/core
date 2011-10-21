@@ -1,9 +1,0 @@
-<?php if ($this->tasksDue): ?>
-  <p class="tl_error"><a href="contao/main.php?do=tasks"><?php echo $this->tasksDue; ?></a></p>
-<?php endif; ?>
-<?php if ($this->tasksNew): ?>
-  <p class="tl_new"><a href="contao/main.php?do=tasks"><?php echo $this->tasksNew; ?></a></p>
-<?php endif; ?>
-<?php if ($this->tasksCur): ?>
-  <p class="tl_info"><a href="contao/main.php?do=tasks"><?php echo $this->tasksCur; ?></a></p>
-<?php endif; ?>

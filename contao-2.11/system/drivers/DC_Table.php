@@ -1822,19 +1822,13 @@ window.addEvent(\'domready\', function() {
 			// Redirect
 			if (isset($_POST['saveNclose']))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}
 			elseif (isset($_POST['saveNedit']))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$strUrl = $this->addToUrl($GLOBALS['TL_DCA'][$this->strTable]['list']['operations']['edit']['href']);
 
@@ -1845,10 +1839,7 @@ window.addEvent(\'domready\', function() {
 			}
 			elseif (isset($_POST['saveNback']))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 
 				if ($this->ptable == '')
@@ -1866,10 +1857,7 @@ window.addEvent(\'domready\', function() {
 			}
 			elseif (isset($_POST['saveNcreate']))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$strUrl = $this->Environment->script . '?do=' . $this->Input->get('do');
 

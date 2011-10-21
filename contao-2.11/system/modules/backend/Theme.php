@@ -52,7 +52,7 @@ class Theme extends Backend
 			// Check the file names
 			if (!$source || !is_array($source))
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -64,7 +64,7 @@ class Theme extends Backend
 				// Skip folders
 				if (is_dir(TL_ROOT . '/' . $strZipFile))
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strZipFile));
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strZipFile)));
 					continue;
 				}
 
@@ -73,7 +73,7 @@ class Theme extends Backend
 				// Skip anything but .cto files
 				if ($objFile->extension != 'cto')
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -83,7 +83,7 @@ class Theme extends Backend
 			// Check wether there are any files left
 			if (count($arrFiles) < 1)
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -374,7 +374,7 @@ class Theme extends Backend
 				// Limit file operations to tl_files and the templates directory
 				if (strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name));
 					continue;
 				}
 
@@ -395,14 +395,14 @@ class Theme extends Backend
 				}
 				catch (Exception $e)
 				{
-					$_SESSION['TL_ERROR'][] = $e->getMessage();
+					$this->addErrorMessage($e->getMessage());
 				}
 			}
 
 			// Continue if there is no XML file
 			if (!$xml instanceof DOMDocument)
 			{
-				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile));
+				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile)));
 				continue;
 			}
 
@@ -578,7 +578,7 @@ class Theme extends Backend
 			$this->StyleSheets->updateStyleSheets();
 
 			// Notify the user
-			$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile));
+			$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['theme_imported'], basename($strZipFile)));
 		}
 
 		// Redirect
