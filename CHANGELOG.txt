@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1087 (New)
+-----------
+Added a new regexp type to the Widget validator to validate a comma separated
+list of e-mail addresses (see #2899).
+
 r1085 (Improvement)
 -------------------
 Added a rudimentary abstraction layer for messages stored in the session.

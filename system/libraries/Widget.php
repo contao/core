@@ -539,29 +539,33 @@ abstract class Widget extends Controller
 			return $varInput;
 		}
 
-		if (!strlen($varInput) && !$this->mandatory)
-		{
-			return '';
-		}
+		$varInput = trim($varInput);
 
-		if ($this->mandatory && !strlen(trim($varInput)))
+		if ($varInput == '')
 		{
-			if ($this->strLabel == '')
+			if (!$this->mandatory)
 			{
-				$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
+				return '';
 			}
 			else
 			{
-				$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+				if ($this->strLabel == '')
+				{
+					$this->addError($GLOBALS['TL_LANG']['ERR']['mdtryNoLabel']);
+				}
+				else
+				{
+					$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['mandatory'], $this->strLabel));
+				}
 			}
 		}
 
-		if ($this->minlength && strlen($varInput) && utf8_strlen(trim($varInput)) < $this->minlength)
+		if ($this->minlength && $varInput != '' && utf8_strlen($varInput) < $this->minlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['minlength'], $this->strLabel, $this->minlength));
 		}
 
-		if ($this->maxlength && strlen($varInput) && utf8_strlen(trim($varInput)) > $this->maxlength)
+		if ($this->maxlength && $varInput != '' && utf8_strlen($varInput) > $this->maxlength)
 		{
 			$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['maxlength'], $this->strLabel, $this->maxlength));
 		}
@@ -632,6 +636,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date format
 				case 'date':
 					$objDate = new Date();
+
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
@@ -641,6 +646,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid time format
 				case 'time':
 					$objDate = new Date();
+
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
@@ -650,6 +656,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid date and time format
 				case 'datim':
 					$objDate = new Date();
+
 					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
@@ -664,6 +671,7 @@ abstract class Widget extends Controller
 				// Check whether the current value is a valid e-mail address
 				case 'email':
 					$varInput = $this->idnaEncodeEmail($varInput);
+
 					if (!$this->isValidEmailAddress($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
@@ -674,9 +682,26 @@ abstract class Widget extends Controller
 					}
 					break;
 
+				// Check whether the current value is list of valid e-mail addresses
+				case 'emails':
+					$arrEmails = trimsplit(',', $varInput);
+
+					foreach ($arrEmails as $strEmail)
+					{
+						$strEmail = $this->idnaEncodeEmail($strEmail);
+
+						if (!$this->isValidEmailAddress($strEmail))
+						{
+							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['emails'], $this->strLabel));
+							break;
+						}
+					}
+					break;
+
 				// Check whether the current value is a valid URL
 				case 'url':
 					$varInput = $this->idnaEncodeUrl($varInput);
+
 					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
