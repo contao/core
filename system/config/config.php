@@ -331,20 +331,4 @@ $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
 $GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;
 $GLOBALS['TL_CONFIG']['doNotRedirectEmpty']   = false;
 
-
-/**
- * -------------------------------------------------------------------------
- * CRON JOBS
- * -------------------------------------------------------------------------
- *
- * Register methods to be executed at certain intervals.
- * 
- *   weekly = run once a week
- *   daily  = run once a day
- *   hourly = run every hour
- */
-$GLOBALS['TL_CRON']['weekly'] = array();
-$GLOBALS['TL_CRON']['daily']  = array();
-$GLOBALS['TL_CRON']['hourly'] = array();
-
 ?>

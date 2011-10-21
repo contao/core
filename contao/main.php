@@ -113,34 +113,31 @@ class Main extends Backend
 	protected function welcomeScreen()
 	{
 		$this->loadLanguageFile('explain');
-
-		// Create template object
 		$objTemplate = new BackendTemplate('be_welcome');
+		$arrMessages = array();
 
-		$objTemplate->arrShortcuts = $GLOBALS['TL_LANG']['XPL']['shortcuts'];
+		// HOOK: add custom messages
+		if (isset($GLOBALS['TL_HOOKS']['getSystemMessages']) && is_array($GLOBALS['TL_HOOKS']['getSystemMessages']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getSystemMessages'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]();
+
+				if ($strBuffer != '')
+				{
+					$arrMessages[] = $strBuffer;
+				}
+			}
+		}
+
+		$objTemplate->messages = implode("\n", $arrMessages);
+		$objTemplate->arrGroups = $this->User->navigation(true);
+		$objTemplate->script = $this->Environment->script;
 		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];
-
-		// Check for the latest version
-		if (!empty($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
-		{
-			$objTemplate->update = sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
-		}
-
-		// HOOK: add the task center notifications
-		if (in_array('tasks', $this->Config->getActiveModules()))
-		{
-			$objTemplate->taskList = ModuleTasks::listTasks();
-		}
-
-		$objTemplate->arrGroups = $this->User->navigation(true);
-		$objTemplate->tasks = $GLOBALS['TL_LANG']['MOD']['tasks'][0];
-		$objTemplate->script = $this->Environment->script;
-
-		if ($this->User->lastLogin > 0)
-		{
-			$objTemplate->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin));
-		}
+		$objTemplate->shortcuts = $GLOBALS['TL_LANG']['MSC']['shortcuts'][0];
+		$objTemplate->shortcutsLink = $GLOBALS['TL_LANG']['MSC']['shortcuts'][1];
 
 		return $objTemplate->parse();
 	}

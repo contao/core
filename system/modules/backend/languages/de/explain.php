@@ -30,23 +30,6 @@
 
 
 /**
- * Shortcuts
- */
-$GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
-(
-	array('colspan', 'Backend-Tastaturkürzel'),
-	array('[ALT] + <strong>s</strong>', 'Speichern'),
-	array('[ALT] + <strong>c</strong>', 'Speichern und schließen'),
-	array('[ALT] + <strong>e</strong>', 'Speichern und bearbeiten'),
-	array('[ALT] + <strong>n</strong>', 'Neues Element'),
-	array('[ALT] + <strong>b</strong>', 'Zurück'),
-	array('[ALT] + <strong>t</strong>', 'Nach oben'),
-	array('[ALT] + <strong>f</strong>', 'Frontend-Vorschau'),
-	array('[ALT] + <strong>q</strong>', 'Abmelden')
-);
-
-
-/**
  * Insert tags
  */
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array

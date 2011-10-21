@@ -4,30 +4,14 @@
 <div id="tl_soverview">
 
 <div id="tl_messages">
-  <h2><?php echo $this->systemMessages; ?></h2>
-<?php echo $this->taskList; ?>
-<?php if ($this->update): ?>
-  <p class="tl_info"><a href="contao/main.php?do=maintenance"><?php echo $this->update; ?></a></p>
-<?php endif; ?>
-<?php if ($this->lastLogin): ?>
-  <p class="tl_info"><?php echo $this->lastLogin; ?></p>
-<?php endif; ?>
+<h2><?php echo $this->systemMessages; ?></h2>
+<?php echo $this->messages; ?> 
 </div>
 
-<table id="tl_shortcuts">
-<?php foreach ($this->arrShortcuts as $arrShortcut): ?>
-<?php if ($arrShortcut[0] == 'colspan'): ?>
-  <tr>
-    <td colspan="2" class="headline"><div><?php echo $arrShortcut[1]; ?></div></td>
-  </tr>
-<?php else: ?>
-  <tr>
-    <td class="col_1"><?php echo $arrShortcut[0]; ?></td>
-    <td class="col_2"><?php echo $arrShortcut[1]; ?></td>
-  </tr>
-<?php endif; ?>
-<?php endforeach; ?>
-</table>
+<div id="tl_shortcuts">
+<h2><?php echo $this->shortcuts; ?></h2>
+<p><?php echo $this->shortcutsLink; ?></p>
+</div>
 
 <div id="tl_moverview">
 <?php foreach ($this->arrGroups as $arrGroup): ?>
