@@ -139,7 +139,7 @@ class Newsletter extends Backend
 				$this->sendNewsletter($objEmail, $objNewsletter, $arrRecipient, $text, $html, $css);
 
 				// Redirect
-				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1);
+				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1));
 				$this->redirect($referer);
 			}
 
@@ -151,7 +151,7 @@ class Newsletter extends Backend
 			if ($objTotal->total < 1)
 			{
 				$this->Session->set('tl_newsletter_send', null);
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['tl_newsletter']['error'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['tl_newsletter']['error']);
 
 				$this->redirect($referer);
 			}
@@ -202,7 +202,7 @@ class Newsletter extends Backend
 				if (!empty($_SESSION['REJECTED_RECIPIENTS']))
 				{
 					$intRejected = count($_SESSION['REJECTED_RECIPIENTS']);
-					$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['rejected'], $intRejected);
+					$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['rejected'], $intRejected));
 					$intTotal -= $intRejected;
 
 					foreach ($_SESSION['REJECTED_RECIPIENTS'] as $strRecipient)
@@ -214,7 +214,7 @@ class Newsletter extends Backend
 					}
 				}
 
-				$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal);
+				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], $intTotal));
 
 				echo '<script>setTimeout(\'window.location="' . $this->Environment->base . $referer . '"\', 1000);</script>';
 				echo '<a href="' . $this->Environment->base . $referer . '">Please click here to proceed if you are not using JavaScript</a>';
@@ -419,7 +419,7 @@ class Newsletter extends Backend
 		{
 			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -433,7 +433,7 @@ class Newsletter extends Backend
 
 				if ($objFile->extension != 'csv')
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -492,11 +492,11 @@ class Newsletter extends Backend
 				}
 			}
 
-			$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'], $intTotal);
+			$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['confirm'], $intTotal));
 
 			if ($intInvalid > 0)
 			{
-				$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid);
+				$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['invalid'], $intInvalid));
 			}
 
 			setcookie('BE_PAGE_OFFSET', 0, 0, '/');

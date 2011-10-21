@@ -505,14 +505,116 @@ abstract class System
 
 
 	/**
-	 * Return all error, confirmation and info messages as HTML
+	 * Add an error message
+	 * @param string
+	 */
+	protected function addErrorMessage($strMessage)
+	{
+		if ($strMessage == '')
+		{
+			return;
+		}
+
+		if (!isset($_SESSION['TL_ERROR']) || !is_array($_SESSION['TL_ERROR']))
+		{
+			$_SESSION['TL_ERROR'] = array();
+		}
+
+		$_SESSION['TL_ERROR'][] = $strMessage;
+	}
+
+
+	/**
+	 * Add a confirmation message
+	 * @param string
+	 */
+	protected function addConfirmationMessage($strMessage)
+	{
+		if ($strMessage == '')
+		{
+			return;
+		}
+
+		if (!isset($_SESSION['TL_CONFIRM']) || !is_array($_SESSION['TL_CONFIRM']))
+		{
+			$_SESSION['TL_CONFIRM'] = array();
+		}
+
+		$_SESSION['TL_CONFIRM'][] = $strMessage;
+	}
+
+
+	/**
+	 * Add a new message
+	 * @param string
+	 */
+	protected function addNewMessage($strMessage)
+	{
+		if ($strMessage == '')
+		{
+			return;
+		}
+
+		if (!isset($_SESSION['TL_NEW']) || !is_array($_SESSION['TL_NEW']))
+		{
+			$_SESSION['TL_NEW'] = array();
+		}
+
+		$_SESSION['TL_NEW'][] = $strMessage;
+	}
+
+
+	/**
+	 * Add an info message
+	 * @param string
+	 */
+	protected function addInfoMessage($strMessage)
+	{
+		if ($strMessage == '')
+		{
+			return;
+		}
+
+		if (!isset($_SESSION['TL_INFO']) || !is_array($_SESSION['TL_INFO']))
+		{
+			$_SESSION['TL_INFO'] = array();
+		}
+
+		$_SESSION['TL_INFO'][] = $strMessage;
+	}
+
+
+	/**
+	 * Add a raw message
+	 * @param string
+	 */
+	protected function addRawMessage($strMessage)
+	{
+		if ($strMessage == '')
+		{
+			return;
+		}
+
+		if (!isset($_SESSION['TL_RAW']) || !is_array($_SESSION['TL_RAW']))
+		{
+			$_SESSION['TL_RAW'] = array();
+		}
+
+		$_SESSION['TL_RAW'][] = $strMessage;
+	}
+
+
+	/**
+	 * Return all messages as HTML
+	 * @param boolean
 	 * @return string
 	 */
 	protected function getMessages($blnDcLayout=false)
 	{
 		$strMessages = '';
-		$arrGroups = array('TL_ERROR', 'TL_CONFIRM', 'TL_INFO');
+		$arrGroups = array('TL_ERROR', 'TL_CONFIRM', 'TL_NEW', 'TL_INFO');
 
+		// Regular messages
 		foreach ($arrGroups as $strGroup)
 		{
 			if (!is_array($_SESSION[$strGroup]))
@@ -533,8 +635,20 @@ abstract class System
 			}
 		}
 
+		// Preformatted messages
+		if (is_array($_SESSION['TL_RAW']))
+		{
+			$strMessages .= implode("\n", $_SESSION['TL_RAW']);
+
+			if (!$_POST)
+			{
+				$_SESSION['TL_RAW'] = array();
+			}
+		}
+
 		$strMessages = trim($strMessages);
 
+		// Wrapping container
 		if ($strMessages != '')
 		{
 			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
@@ -542,6 +656,19 @@ abstract class System
 
 		return $strMessages;
 	}
+
+
+	/**
+	 * Reset the message system
+	 */
+	protected function resetMessages()
+	{
+		$_SESSION['TL_ERROR'] = '';
+		$_SESSION['TL_CONFIRM'] = '';
+		$_SESSION['TL_NEW'] = '';
+		$_SESSION['TL_INFO'] = '';
+		$_SESSION['TL_RAW'] = '';
+	} 
 
 
 	/**

@@ -142,7 +142,7 @@ class StyleSheets extends Backend
 		// Check whether the target file is writeable
 		if (file_exists(TL_ROOT . '/system/scripts/' . $row['name'] . '.css') && !$this->Files->is_writeable('system/scripts/' . $row['name'] . '.css'))
 		{
-			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/scripts/' . $row['name'] . '.css');
+			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/scripts/' . $row['name'] . '.css'));
 			return;
 		}
 
@@ -1102,7 +1102,7 @@ class StyleSheets extends Backend
 		{
 			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -1111,7 +1111,7 @@ class StyleSheets extends Backend
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile));
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile)));
 					continue;
 				}
 
@@ -1120,7 +1120,7 @@ class StyleSheets extends Backend
 				// Check the file extension
 				if ($objFile->extension != 'css')
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -1202,11 +1202,11 @@ class StyleSheets extends Backend
 				// Notify the user
 				if ($strName . '.css' != basename($strCssFile))
 				{
-					$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css');
+					$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css'));
 				}
 				else
 				{
-					$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css');
+					$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css'));
 				}
 			}
 

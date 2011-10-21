@@ -752,7 +752,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				{
 					if (in_array($file['error'], array(1, 2)))
 					{
-						$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb);
+						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
 						$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
 
 						$error = true;
@@ -760,7 +760,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 					if ($file['error'] == 3)
 					{
-						$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']);
+						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
 						$this->log('File "'.$file['name'].'" was only partially uploaded' , 'DC_Folder move()', TL_ERROR);
 
 						$error = true;
@@ -772,7 +772,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				// File is too big
 				if ($file['size'] > $GLOBALS['TL_CONFIG']['maxFileSize'])
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
 					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
 
 					$error = true;
@@ -784,7 +784,7 @@ class DC_Folder extends DataContainer implements listable, editable
 				// File type not allowed
 				if (!in_array(strtolower($pathinfo['extension']), $uploadTypes))
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
 					$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'DC_Folder move()', TL_ERROR);
 
 					$error = true;
@@ -836,17 +836,17 @@ class DC_Folder extends DataContainer implements listable, editable
 					// Notify user
 					if ($blnExceeds)
 					{
-						$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $file['name']);
+						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $file['name']));
 						$this->log('File "'.$file['name'].'" uploaded successfully but was too big to be resized automatically', 'DC_Folder move()', TL_FILES);
 					}
 					elseif ($blnResized)
 					{
-						$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $file['name']);
+						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $file['name']));
 						$this->log('File "'.$file['name'].'" uploaded successfully and was scaled down to the maximum dimensions', 'DC_Folder move()', TL_FILES);
 					}
 					else
 					{
-						$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']);
+						$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
 						$this->log('File "'.$file['name'].'" uploaded successfully', 'DC_Folder move()', TL_FILES);
 					}
 				}
@@ -878,10 +878,7 @@ class DC_Folder extends DataContainer implements listable, editable
 					echo json_encode(array('status'=>'1', 'message'=>$_SESSION['TL_CONFIRM'][0]));
 				}
 
-				$_SESSION['TL_ERROR'] = array();
-				$_SESSION['TL_INFO'] = array();
-				$_SESSION['TL_CONFIRM'] = array();
-
+				$this->resetMessages();
 				exit;
 			}
 
@@ -892,10 +889,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 				if ($this->Input->post('uploadNback') && !$blnResized)
 				{
-					$_SESSION['TL_INFO'] = '';
-					$_SESSION['TL_ERROR'] = '';
-					$_SESSION['TL_CONFIRM'] = '';
-
+					$this->resetMessages();
 					$this->redirect($this->getReferer());
 				}
 
@@ -1155,10 +1149,7 @@ window.addEvent(\'domready\', function() {
 			// Reload
 			if ($this->Input->post('saveNclose'))
 			{
-				$_SESSION['TL_INFO'] = '';
-				$_SESSION['TL_ERROR'] = '';
-				$_SESSION['TL_CONFIRM'] = '';
-
+				$this->resetMessages();
 				setcookie('BE_PAGE_OFFSET', 0, 0, '/');
 				$this->redirect($this->getReferer());
 			}

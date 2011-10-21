@@ -574,19 +574,19 @@ class tl_user extends Backend
 				if (in_array('purge_session', $arrPurge))
 				{
 					$this->Session->setData(array());
-					$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['tl_user']['sessionPurged'];
+					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['sessionPurged']);
 				}
 
 				if (in_array('purge_html', $arrPurge))
 				{
 					$this->Automator->purgeHtmlFolder();
-					$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['tl_user']['htmlPurged'];
+					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['htmlPurged']);
 				}
 
 				if (in_array('purge_temp', $arrPurge))
 				{
 					$this->Automator->purgeTempFolder();
-					$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['tl_user']['tempPurged'];
+					$this->addConfirmationMessage($GLOBALS['TL_LANG']['tl_user']['tempPurged']);
 				}
 			}
 		}

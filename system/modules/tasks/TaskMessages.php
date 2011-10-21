@@ -46,12 +46,12 @@ class TaskMessages extends Backend
 	 */
 	public function listTasks()
 	{
+		$this->import('BackendUser', 'User');
+
 		$tasksReg = 0;
 		$tasksNew = 0;
 		$tasksDue = 0;
-
-		$this->import('BackendUser', 'User');
-		$objTemplate = new BackendTemplate('be_task_list');
+		$arrReturn = array();
 
 		$objTask = $this->Database->prepare("SELECT t.deadline, s.status, s.assignedTo FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)" . (!$this->User->isAdmin ? " WHERE (t.createdBy=? OR s.assignedTo=?)" : ""))
 								  ->execute($this->User->id, $this->User->id);
@@ -83,21 +83,21 @@ class TaskMessages extends Backend
 
 			if ($tasksReg > 0)
 			{
-				$objTemplate->tasksCur = sprintf($GLOBALS['TL_LANG']['MSC']['tasksCur'], $tasksReg);
+				$arrReturn[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['MSC']['tasksCur'], $tasksReg) . '</p>';
 			}
 
 			if ($tasksNew > 0)
 			{
-				$objTemplate->tasksNew = sprintf($GLOBALS['TL_LANG']['MSC']['tasksNew'], $tasksNew);
+				$arrReturn[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['MSC']['tasksNew'], $tasksNew) . '</p>';
 			}
 
 			if ($tasksDue > 0)
 			{
-				$objTemplate->tasksDue = sprintf($GLOBALS['TL_LANG']['MSC']['tasksDue'], $tasksDue);
+				$arrReturn[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['MSC']['tasksDue'], $tasksDue) . '</p>';
 			}
 		}
 
-		return $objTemplate->parse();
+		return implode("\n", $arrReturn);
 	}
 }
 

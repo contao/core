@@ -66,15 +66,15 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-<li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
+  <li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
-<li class="tl_parent" id="<?php echo $strGroup; ?>">
-<ul class="tl_level_2">
+  <li class="tl_parent" id="<?php echo $strGroup; ?>">
+  <ul class="tl_level_2">
 <?php foreach ($arrModules['modules'] as $strModule=>$arrConfig): ?>
-  <li><a href="contao/main.php?do=<?php echo $strModule; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
+    <li><a href="contao/main.php?do=<?php echo $strModule; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
 <?php endforeach; ?>
-</ul>
-</li>
+  </ul>
+  </li>
 <?php endif; ?>
 <?php endforeach; ?>
 </ul>
@@ -91,7 +91,8 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 <?php if ($this->error): ?>
 
 <p class="tl_gerror"><?php echo $this->error; ?></p>
-<?php endif; echo $this->main; ?>
+<?php endif; ?>
+<?php echo $this->main; ?>
 
 </div>
 

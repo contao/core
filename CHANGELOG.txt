@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1085 (Improvement)
+-------------------
+Added a rudimentary abstraction layer for messages stored in the session.
+
 r1084 (New)
 -----------
 Added a hook to add system messages to the back end welcome screen (see #3162).

@@ -220,11 +220,11 @@ class ModuleLogin extends Module
 			$_SESSION['TL_ERROR'] = array();
 		}
 
-		if (strlen($_SESSION['LOGIN_ERROR']))
+		if (isset($_SESSION['LOGIN_ERROR']))
 		{
 			$blnHasError = true;
 			$this->Template->message = $_SESSION['LOGIN_ERROR'];
-			$_SESSION['LOGIN_ERROR'] = '';
+			unset($_SESSION['LOGIN_ERROR']);
 		}
 
 		$this->Template->hasError = $blnHasError;
