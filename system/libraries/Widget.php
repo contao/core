@@ -200,6 +200,13 @@ abstract class Widget extends Controller
 				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
+			case 'tabindex':
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['tabindex'] = $varValue;
+				}
+				break;
+
 			case 'disabled':
 				if ($varValue)
 				{
