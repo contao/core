@@ -30,23 +30,6 @@
 
 
 /**
- * Shortcuts
- */
-$GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
-(
-	array('colspan', 'Back end access keys'),
-	array('[ALT] + <strong>s</strong>', '<span>S</span>ave'),
-	array('[ALT] + <strong>c</strong>', 'Save and <span>c</span>lose'),
-	array('[ALT] + <strong>e</strong>', 'Save and <span>e</span>dit'),
-	array('[ALT] + <strong>n</strong>', 'Create <span>n</span>ew'),
-	array('[ALT] + <strong>b</strong>', 'Go <span>b</span>ack'),
-	array('[ALT] + <strong>t</strong>', 'Back to <span>t</span>op'),
-	array('[ALT] + <strong>f</strong>', '<span>F</span>rontend preview'),
-	array('[ALT] + <strong>q</strong>', '<span>Q</span>uit (logout)')
-);
-
-
-/**
  * Insert tags
  */
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array

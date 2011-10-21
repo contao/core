@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1084 (New)
+-----------
+Added a hook to add system messages to the back end welcome screen (see #3162).
+
 r1082 (Change)
 --------------
 Moved the task center to a separate module (might be moved to the ER later).

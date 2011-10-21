@@ -192,16 +192,33 @@ $GLOBALS['TL_CACHE'] = array
 /**
  * Cron jobs
  */
-$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'purgeTempFolder');
-$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'checkForUpdates');
-$GLOBALS['TL_CRON']['weekly'][] = array('Automator', 'generateSitemap');
-$GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
+$GLOBALS['TL_CRON'] = array
+(
+	'daily' => array
+	(
+		array('Automator', 'purgeTempFolder'),
+		array('Automator', 'checkForUpdates')
+	),
+	'weekly' => array
+	(
+		array('Automator', 'generateSitemap'),
+		array('StyleSheets', 'updateStyleSheets')
+	),
+	'hourly' => array()
+);
 
 
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS'] = array();
+$GLOBALS['TL_HOOKS'] = array
+(
+	'getSystemMessages' => array
+	(
+		array('SystemMessages', 'versionCheck'),
+		array('SystemMessages', 'lastLogin')
+	)
+);
 
 
 /**

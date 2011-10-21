@@ -23,26 +23,53 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
- * @package    TaskCenter
+ * @package    Backend
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Back end modules
+ * Class SystemMessages
+ *
+ * Add system messages to the welcome screen.
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
  */
-$GLOBALS['BE_MOD']['profile']['tasks'] = array
-(
-	'callback' => 'ModuleTasks',
-	'icon'     => 'system/modules/tasks/html/icon.gif',
-	'stylesheet' => 'system/modules/tasks/html/style.css'
-);
+class SystemMessages extends Backend
+{
+
+	/**
+	 * Check for the latest Contao version
+	 * @return string
+	 */
+	public function versionCheck()
+	{
+		if (!empty($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
+		{
+			return '<p class="tl_info"><a href="contao/main.php?do=maintenance">' . sprintf($GLOBALS['TL_LANG']['MSC']['updateVersion'], $GLOBALS['TL_CONFIG']['latestVersion']) . '</a></p>';
+		}
+
+		return '';
+	}
 
 
-/**
- * System messages
- */
-$GLOBALS['TL_HOOKS']['getSystemMessages'][] = array('TaskMessages', 'listTasks');
+	/**
+	 * Return the date of the last login
+	 * @return string
+	 */
+	public function lastLogin()
+	{
+		$this->import('BackendUser', 'User');
+
+		if ($this->User->lastLogin > 0)
+		{
+			return '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin)) . '</p>';
+		}
+
+		return '';
+	}
+}
 
 ?>

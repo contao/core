@@ -451,68 +451,6 @@ class ModuleTasks extends BackendModule
 		// Go back
 		$this->redirect($this->getReferer());
 	}
-	
-
-	/**
-	 * Return the task list
-	 * @return string
-	 */
-	public static function listTasks()
-	{
-		$tasksReg = 0;
-		$tasksNew = 0;
-		$tasksDue = 0;
-
-		$objDatabase = Database::getInstance();
-		$objUser = BackendUser::getInstance();
-		$objTemplate = new BackendTemplate('be_task_list');
-
-		$objTask = $objDatabase->prepare("SELECT t.deadline, s.status, s.assignedTo FROM tl_task t LEFT JOIN tl_task_status s ON t.id=s.pid AND s.tstamp=(SELECT MAX(tstamp) FROM tl_task_status ts WHERE ts.pid=t.id)" . (!$objUser->isAdmin ? " WHERE (t.createdBy=? OR s.assignedTo=?)" : ""))
-							   ->execute($objUser->id, $objUser->id);
-
-		if ($objTask->numRows) 
-		{
-			$time = time();
-
-			while ($objTask->next())
-			{
-				if ($objTask->status == 'completed')
-				{
-					continue;
-				}
-
-				if ($objTask->deadline <= $time)
-				{
-					++$tasksDue;
-				}
-				elseif ($objTask->status == 'created' && $objTask->assignedTo == $objUser->id)
-				{
-					++$tasksNew;
-				}
-				else
-				{
-					++$tasksReg;
-				}
-			}
-
-			if ($tasksReg > 0)
-			{
-				$objTemplate->tasksCur = sprintf($GLOBALS['TL_LANG']['MSC']['tasksCur'], $tasksReg);
-			}
-
-			if ($tasksNew > 0)
-			{
-				$objTemplate->tasksNew = sprintf($GLOBALS['TL_LANG']['MSC']['tasksNew'], $tasksNew);
-			}
-
-			if ($tasksDue > 0)
-			{
-				$objTemplate->tasksDue = sprintf($GLOBALS['TL_LANG']['MSC']['tasksDue'], $tasksDue);
-			}
-		}
-
-		return $objTemplate->parse();
-	}
 
 
 	/**

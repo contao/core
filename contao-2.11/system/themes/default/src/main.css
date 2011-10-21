@@ -188,25 +188,21 @@ h2.sub_headline_index {
 	padding:2px 0 3px 20px;
 	background:url("images/error.gif") no-repeat left center;
 }
-.tl_error {
+.tl_error,.tl_confirm,.tl_info,.tl_new {
 	margin:1px 0 0;
-	padding:4px 2px 5px 22px;
-	background:#faeeee url("images/error.gif") no-repeat 2px center;
+	padding:4px 5px 5px 25px;
+}
+.tl_error {
+	background:#faeeee url("images/error.gif") no-repeat 5px center;
 }
 .tl_confirm {
-	margin:1px 0 0;
-	padding:4px 2px 5px 22px;
-	background:#f3f8ee url("images/ok.gif") no-repeat 2px center;
+	background:#f3f8ee url("images/ok.gif") no-repeat 5px center;
 }
 .tl_info {
-	margin:1px 0 0;
-	padding:4px 2px 5px 22px;
-	background:#eff5fa url("images/show.gif") no-repeat 3px center;
+	background:#eff5fa url("images/show.gif") no-repeat 6px center;
 }
 .tl_new {
-	margin:1px 0 0;
-	padding:4px 2px 5px 22px;
-	background:#fff3e0 url("images/featured.gif") no-repeat 2px center;
+	background:#fff3e0 url("images/featured.gif") no-repeat 5px center;
 }
 .tl_gerror,.tl_gerror a,.tl_error,.tl_error a {
 	color:#c55;	
@@ -678,13 +674,22 @@ label.tl_change_selected {
 #tl_soverview .col_1,#tl_soverview .col_2 {
 	padding:1px 6px;
 }
-#tl_soverview p {
-	padding-right:5px;
-	padding-left:25px;
-	background-position:5px center;
+#tl_messages,#tl_shortcuts {
+	margin-bottom:24px;
 }
-#tl_soverview p.tl_info {
-	background-position:6px center;
+#tl_messages h2,#tl_shortcuts h2 {
+	margin:18px 0 6px;
+	padding:2px 6px 3px;
+	border:1px solid #e9e9e9;
+	border-width:1px 0;
+	background:#f6f6f6;
+}
+#tl_shortcuts p {
+	padding-left:6px;
+	padding-right:6px;
+}
+#tl_shortcuts p a {
+	text-decoration:underline;
 }
 #tl_moverview {
 	margin-top:24px;
@@ -701,21 +706,14 @@ label.tl_change_selected {
 	background:#fff;
 }
 #tl_moverview .tl_module_desc h3 {
-	margin:0 0 4px;
+	margin:0 0 1px;
 	padding:0;
+}
+#tl_moverview p {
+	padding-left:20px;
 }
 #tl_moverview .tl_module_desc p {
 	margin-bottom:0;
-}
-#tl_messages {
-	margin-bottom:24px;
-}
-#tl_messages h2 {
-	margin:18px 0 6px;
-	padding:2px 6px 3px;
-	border:1px solid #e9e9e9;
-	border-width:1px 0;
-	background:#f6f6f6;
 }
 
 /* CHMOD table */
