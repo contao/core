@@ -229,12 +229,7 @@ abstract class System
 		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
-			echo json_encode(array
-			(
-				'token'  => REQUEST_TOKEN,
-				'target' => $strLocation
-			));
-
+			echo $strLocation;
 			exit;
 		}
 
@@ -500,7 +495,7 @@ abstract class System
 			}
 		}
 
-		return $strReturn;	
+		return $strReturn;
 	}
 
 
@@ -510,17 +505,7 @@ abstract class System
 	 */
 	protected function addErrorMessage($strMessage)
 	{
-		if ($strMessage == '')
-		{
-			return;
-		}
-
-		if (!isset($_SESSION['TL_ERROR']) || !is_array($_SESSION['TL_ERROR']))
-		{
-			$_SESSION['TL_ERROR'] = array();
-		}
-
-		$_SESSION['TL_ERROR'][] = $strMessage;
+		$this->addMessage($strMessage, 'TL_ERROR');
 	}
 
 
@@ -530,17 +515,7 @@ abstract class System
 	 */
 	protected function addConfirmationMessage($strMessage)
 	{
-		if ($strMessage == '')
-		{
-			return;
-		}
-
-		if (!isset($_SESSION['TL_CONFIRM']) || !is_array($_SESSION['TL_CONFIRM']))
-		{
-			$_SESSION['TL_CONFIRM'] = array();
-		}
-
-		$_SESSION['TL_CONFIRM'][] = $strMessage;
+		$this->addMessage($strMessage, 'TL_CONFIRM');
 	}
 
 
@@ -550,17 +525,7 @@ abstract class System
 	 */
 	protected function addNewMessage($strMessage)
 	{
-		if ($strMessage == '')
-		{
-			return;
-		}
-
-		if (!isset($_SESSION['TL_NEW']) || !is_array($_SESSION['TL_NEW']))
-		{
-			$_SESSION['TL_NEW'] = array();
-		}
-
-		$_SESSION['TL_NEW'][] = $strMessage;
+		$this->addMessage($strMessage, 'TL_NEW');
 	}
 
 
@@ -570,17 +535,7 @@ abstract class System
 	 */
 	protected function addInfoMessage($strMessage)
 	{
-		if ($strMessage == '')
-		{
-			return;
-		}
-
-		if (!isset($_SESSION['TL_INFO']) || !is_array($_SESSION['TL_INFO']))
-		{
-			$_SESSION['TL_INFO'] = array();
-		}
-
-		$_SESSION['TL_INFO'][] = $strMessage;
+		$this->addMessage($strMessage, 'TL_INFO');
 	}
 
 
@@ -590,17 +545,34 @@ abstract class System
 	 */
 	protected function addRawMessage($strMessage)
 	{
+		$this->addMessage($strMessage, 'TL_RAW');
+	}
+
+
+	/**
+	 * Add a message
+	 * @param string
+	 * @param string
+	 * @throws Exception
+	 */
+	protected function addMessage($strMessage, $strType)
+	{
 		if ($strMessage == '')
 		{
 			return;
 		}
 
-		if (!isset($_SESSION['TL_RAW']) || !is_array($_SESSION['TL_RAW']))
+		if (!in_array($strType, $this->getMessageTypes()))
 		{
-			$_SESSION['TL_RAW'] = array();
+			throw new Exception("Invalid message type $strType");
 		}
 
-		$_SESSION['TL_RAW'][] = $strMessage;
+		if (!is_array($_SESSION[$strType]))
+		{
+			$_SESSION[$strType] = array();
+		}
+
+		$_SESSION[$strType][] = $strMessage;
 	}
 
 
@@ -612,37 +584,32 @@ abstract class System
 	protected function getMessages($blnDcLayout=false)
 	{
 		$strMessages = '';
-		$arrGroups = array('TL_ERROR', 'TL_CONFIRM', 'TL_NEW', 'TL_INFO');
 
 		// Regular messages
-		foreach ($arrGroups as $strGroup)
+		foreach ($this->getMessageTypes() as $strType)
 		{
-			if (!is_array($_SESSION[$strGroup]))
+			if (!is_array($_SESSION[$strType]))
 			{
 				continue;
 			}
 
-			$strClass = strtolower($strGroup);
+			$strClass = strtolower($strType);
 
-			foreach ($_SESSION[$strGroup] as $strMessage)
+			foreach ($_SESSION[$strType] as $strMessage)
 			{
-				$strMessages .= sprintf('<p class="%s">%s</p>%s', $strClass, $strMessage, "\n");
+				if ($strType == 'TL_RAW')
+				{
+					$strMessages .= $strMessage;
+				}
+				else
+				{
+					$strMessages .= sprintf('<p class="%s">%s</p>%s', $strClass, $strMessage, "\n");
+				}
 			}
 
 			if (!$_POST)
 			{
-				$_SESSION[$strGroup] = array();
-			}
-		}
-
-		// Preformatted messages
-		if (is_array($_SESSION['TL_RAW']))
-		{
-			$strMessages .= implode("\n", $_SESSION['TL_RAW']);
-
-			if (!$_POST)
-			{
-				$_SESSION['TL_RAW'] = array();
+				$_SESSION[$strType] = array();
 			}
 		}
 
@@ -663,12 +630,21 @@ abstract class System
 	 */
 	protected function resetMessages()
 	{
-		$_SESSION['TL_ERROR'] = '';
-		$_SESSION['TL_CONFIRM'] = '';
-		$_SESSION['TL_NEW'] = '';
-		$_SESSION['TL_INFO'] = '';
-		$_SESSION['TL_RAW'] = '';
+		foreach ($this->getMessageTypes() as $strType)
+		{
+			$_SESSION[$strType] = array();
+		}
 	} 
+
+
+	/**
+	 * Return all available message types
+	 * @return array
+	 */
+	protected function getMessageTypes()
+	{
+		return array('TL_ERROR', 'TL_CONFIRM', 'TL_NEW', 'TL_INFO', 'TL_RAW');
+	}
 
 
 	/**

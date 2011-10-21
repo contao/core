@@ -191,6 +191,7 @@ h2.sub_headline_index {
 .tl_error,.tl_confirm,.tl_info,.tl_new {
 	margin:1px 0 0;
 	padding:4px 5px 5px 25px;
+	border-radius:3px;
 }
 .tl_error {
 	background:#faeeee url("images/error.gif") no-repeat 5px center;
