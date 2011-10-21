@@ -122,16 +122,16 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'explanation'                 => '{type_legend},type;{text_legend},text',
 		'fieldset'                    => '{type_legend},type;{fconfig_legend},fsType;{expert_legend:hide},class',
 		'html'                        => '{type_legend},type;{text_legend},html',
-		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
-		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,maxlength;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
-		'textarea'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,size;{expert_legend:hide},value,class,accesskey;{submit_legend},addSubmit',
-		'select'                      => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory,multiple;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
-		'radio'                       => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory;{expert_legend:hide},class;{submit_legend},addSubmit',
-		'checkbox'                    => '{type_legend},type,name,label;{options_legend},options;{fconfig_legend},mandatory;{expert_legend:hide},class;{submit_legend},addSubmit',
-		'upload'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,extensions,maxlength;{store_legend:hide},storeFile;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
+		'text'                        => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,maxlength,accesskey,tabindex,value;{submit_legend},addSubmit',
+		'password'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,maxlength,accesskey,tabindex;{submit_legend},addSubmit',
+		'textarea'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory,rgxp,placeholder;{expert_legend:hide},class,size,accesskey,tabindex;{submit_legend},addSubmit',
+		'select'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,multiple;{options_legend},options;{expert_legend:hide},class,accesskey,tabindex;{submit_legend},addSubmit',
+		'radio'                       => '{type_legend},type,name,label;{fconfig_legend},mandatory;{options_legend},options;{expert_legend:hide},class;{submit_legend},addSubmit',
+		'checkbox'                    => '{type_legend},type,name,label;{fconfig_legend},mandatory;{options_legend},options;{expert_legend:hide},class;{submit_legend},addSubmit',
+		'upload'                      => '{type_legend},type,name,label;{fconfig_legend},mandatory,extensions,maxlength;{store_legend:hide},storeFile;{expert_legend:hide},class,accesskey,tabindex,fSize;{submit_legend},addSubmit',
 		'hidden'                      => '{type_legend},type,name,value',
-		'captcha'                     => '{type_legend},type,label;{expert_legend:hide},class,accesskey;{submit_legend},addSubmit',
-		'submit'                      => '{type_legend},type,slabel;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey'
+		'captcha'                     => '{type_legend},type,label;{expert_legend:hide},class,accesskey,tabindex;{submit_legend},addSubmit',
+		'submit'                      => '{type_legend},type,slabel;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey,tabindex'
 	),
 
 	// Subpalettes
@@ -213,6 +213,14 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field'],
 			'eval'                    => array('helpwizard'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
+		'placeholder' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['placeholder'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
 		'maxlength' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['maxlength'],
@@ -223,6 +231,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 		'size' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['size'],
+			'default'                 => array(4, 40),
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'tl_class'=>'w50')
@@ -232,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['multiple'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'clr')
 		),
 		'mSize' => array
 		(
@@ -287,14 +296,6 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field'],
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
 		),
-		'value' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['value'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255)
-		),
 		'class' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['class'],
@@ -303,6 +304,14 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
 		),
+		'value' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['value'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+		),
 		'accesskey' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['accesskey'],
@@ -310,6 +319,21 @@ $GLOBALS['TL_DCA']['tl_form_field'] = array
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1, 'tl_class'=>'w50')
+		),
+		'tabindex' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['tabindex'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'fSize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['fSize'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'addSubmit' => array
 		(

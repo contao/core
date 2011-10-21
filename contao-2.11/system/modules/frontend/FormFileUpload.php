@@ -64,6 +64,13 @@ class FormFileUpload extends Widget implements uploadable
 				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
 				break;
 
+			case 'fSize':
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['size'] = $varValue;
+				}
+				break;
+
 			default:
 				parent::__set($strKey, $varValue);
 				break;
