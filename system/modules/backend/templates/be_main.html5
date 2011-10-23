@@ -70,8 +70,8 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 <?php if ($arrModules['modules']): ?>
   <li class="tl_parent" id="<?php echo $strGroup; ?>">
   <ul class="tl_level_2">
-<?php foreach ($arrModules['modules'] as $strModule=>$arrConfig): ?>
-    <li><a href="contao/main.php?do=<?php echo $strModule; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
+<?php foreach ($arrModules['modules'] as $arrConfig): ?>
+    <li><a href="<?php echo $arrConfig['href']; ?>" class="<?php echo $arrConfig['class']; ?>" title="<?php echo $arrConfig['title']; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></li>
 <?php endforeach; ?>
   </ul>
   </li>
