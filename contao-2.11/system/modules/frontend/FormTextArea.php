@@ -72,10 +72,36 @@ class FormTextArea extends Widget
 	 */
 	public function __set($strKey, $varValue)
 	{
-		global $objPage;
-
 		switch ($strKey)
 		{
+			case 'maxlength':
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] =  $varValue;
+				}
+				break;
+
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
+				break;
+
+			case 'readonly':
+				$this->arrAttributes['readonly'] = 'readonly';
+				$this->blnSubmitInput = false;
+				break;
+
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
+				break;
+
 			case 'size':
 				$arrSize = deserialize($varValue);
 				$this->intRows = $arrSize[0];
@@ -88,26 +114,6 @@ class FormTextArea extends Widget
 
 			case 'cols':
 				$this->intCols = $varValue;
-				break;
-
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
-			case 'readonly':
-				$this->arrAttributes['readonly'] = 'readonly';
-				$this->blnSubmitInput = false;
-				break;
-
-			case 'placeholder':
-				if ($objPage->outputFormat == 'html5')
-				{
-					$this->arrAttributes['placeholder'] = $varValue;
-				}
-				break;
-
-			case 'maxlength':
-				// Not supported
 				break;
 
 			default:
@@ -123,13 +129,22 @@ class FormTextArea extends Widget
 	 */
 	public function generate()
 	{
+		global $objPage;
+		$arrStrip = array();
+
+		// XHTML does not support maxlength
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$arrStrip[] = 'maxlength';
+		}
+
 		return sprintf('<textarea name="%s" id="ctrl_%s" class="textarea%s" rows="%s" cols="%s"%s>%s</textarea>',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->intRows,
 						$this->intCols,
-						$this->getAttributes(),
+						$this->getAttributes($arrStrip),
 						specialchars(str_replace('\n', "\n", $this->varValue))) . $this->addSubmit();
 	}
 }

@@ -62,12 +62,23 @@ class ListWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'maxlength':
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
-			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
 				break;
 
 			default:

@@ -68,12 +68,20 @@ class RadioButton extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'options':
-				$this->arrOptions = deserialize($varValue);
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
 				break;
 
 			default:

@@ -68,15 +68,24 @@ class FormRadioButton extends Widget
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
+				break;
+
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
 			case 'rgxp':
+				// Ignore
 				break;
 
 			default:

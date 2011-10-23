@@ -439,15 +439,40 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return all attributes as string
+	 * @param strip
 	 * @return string
 	 */
-	public function getAttributes()
+	public function getAttributes($arrStrip=array())
 	{
+		$arrAttributes = $this->arrAttributes;
+
+		// Remove HTML5 attributes in XHTML code
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				unset($this->arrAttributes['placeholder']);
+				unset($this->arrAttributes['required']);
+			}
+		}
+
+		// Optionally strip certain attributes
+		if (is_array($arrStrip))
+		{
+			foreach ($arrStrip as $strAttribute)
+			{
+				unset($this->arrAttributes[$strAttribute]);
+			}
+		}
+
 		$strAttributes = '';
 
+		// Add the remaining attributes
 		foreach ($this->arrAttributes as $k=>$v)
 		{
-			if (strlen($v))
+			if ($v != '')
 			{
 				$strAttributes .= sprintf(' %s="%s"', $k, $v);
 			}
