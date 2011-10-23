@@ -64,11 +64,22 @@ class TextStore extends Widget
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
 				break;
 
 			default:

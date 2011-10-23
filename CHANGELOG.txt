@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1091 (New)
+-----------
+Added support for the "placeholder" and "required" attributes in HTML5 forms.
+Textareas in HTML5 now support the "maxlength" attribute. Will also add the
+"autofocus" attribute in one of the next commits.
+
 r1088 (Improved)
 ----------------
 Added support for the tabindex, placeholder and size attribute to the form

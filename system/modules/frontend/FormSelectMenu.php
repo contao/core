@@ -68,6 +68,18 @@ class FormSelectMenu extends Widget
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
+				break;
+
 			case 'mSize':
 				if ($this->multiple)
 				{
@@ -75,22 +87,19 @@ class FormSelectMenu extends Widget
 				}
 				break;
 
-			case 'options':
-				$this->arrOptions = deserialize($varValue);
-				break;
-
 			case 'multiple':
-				if (strlen($varValue))
+				if ($varValue != '')
 				{
 					$this->arrAttributes[$strKey] = 'multiple';
 				}
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
 				break;
 
 			case 'rgxp':
+				// Ignore
 				break;
 
 			default:

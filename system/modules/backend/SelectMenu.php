@@ -68,15 +68,23 @@ class SelectMenu extends Widget
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
+				break;
+
 			case 'size':
 				if ($this->multiple)
 				{
 					$this->arrAttributes['size'] = $varValue;
 				}
-				break;
-
-			case 'options':
-				$this->arrOptions = deserialize($varValue);
 				break;
 
 			case 'multiple':
@@ -86,8 +94,8 @@ class SelectMenu extends Widget
 				}
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
 				break;
 
 			default:

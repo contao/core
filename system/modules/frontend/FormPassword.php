@@ -71,23 +71,29 @@ class FormPassword extends Widget
 	 */
 	public function __set($strKey, $varValue)
 	{
-		global $objPage;
-
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
 				break;
 
 			case 'placeholder':
-				if ($objPage->outputFormat == 'html5')
-				{
-					$this->arrAttributes['placeholder'] = $varValue;
-				}
+				$this->arrAttributes['placeholder'] = $varValue;
 				break;
 
 			default:

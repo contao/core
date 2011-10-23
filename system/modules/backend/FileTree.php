@@ -63,7 +63,15 @@ class FileTree extends Widget
 		switch ($strKey)
 		{
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				if ($varValue)
+				{
+					$this->arrConfiguration['mandatory'] = true;
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					$this->arrConfiguration['mandatory'] = false;
+				}
 				break;
 
 			default:
