@@ -20,7 +20,7 @@
 <?php foreach ($arrGroup['modules'] as $strModule=>$arrConfig): ?>
 
 <div class="tl_module_desc">
-<h3><a href="<?php echo $this->script; ?>?do=<?php echo $strModule; ?>" class="navigation <?php echo $strModule; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></h3>
+<h3><a href="<?php echo $arrConfig['href']; ?>" class="navigation <?php echo $strModule; ?>"<?php echo $arrConfig['icon']; ?>><?php echo $arrConfig['label']; ?></a></h3>
 <p><?php echo $arrConfig['title']; ?></p>
 </div>
 <?php endforeach; ?>
