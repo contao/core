@@ -74,18 +74,6 @@ class RadioTable extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'cols':
 				if ($varValue > 0)
 				{

@@ -71,13 +71,13 @@ class SelectMenu extends Widget
 			case 'mandatory':
 				if ($varValue)
 				{
-					$this->arrConfiguration['mandatory'] = true;
 					$this->arrAttributes['required'] = 'required';
 				}
 				else
 				{
-					$this->arrConfiguration['mandatory'] = false;
+					unset($this->arrAttributes['required']);
 				}
+				parent::__set($strKey, $varValue);
 				break;
 
 			case 'size':
@@ -88,9 +88,9 @@ class SelectMenu extends Widget
 				break;
 
 			case 'multiple':
-				if (strlen($varValue))
+				if ($varValue)
 				{
-					$this->arrAttributes[$strKey] = 'multiple';
+					$this->arrAttributes['multiple'] = 'multiple';
 				}
 				break;
 

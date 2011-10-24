@@ -69,18 +69,6 @@ class CheckBoxWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;

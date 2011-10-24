@@ -74,18 +74,6 @@ class TableWizard extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'rows':
 				$this->intRows = $varValue;
 				break;

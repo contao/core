@@ -68,18 +68,6 @@ class FormCheckBox extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;
@@ -168,6 +156,12 @@ class FormCheckBox extends Widget
 	 */
 	public function generate()
 	{
+		// The "required" attribute only makes sense for single checkboxes
+		if (count($this->arrOptions) == 1 && $this->mandatory)
+		{
+				$this->arrAttributes['required'] = 'required';
+		}
+
 		$strOptions = '';
 
 		foreach ($this->arrOptions as $i=>$arrOption)

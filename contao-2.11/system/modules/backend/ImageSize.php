@@ -75,23 +75,6 @@ class ImageSize extends Widget
 				}
 				break;
 
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
-			case 'readonly':
-				$this->arrAttributes['readonly'] = 'readonly';
-				$this->blnSubmitInput = false;
-				break;
-
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;

@@ -83,13 +83,13 @@ class Password extends Widget
 			case 'mandatory':
 				if ($varValue)
 				{
-					$this->arrConfiguration['mandatory'] = true;
 					$this->arrAttributes['required'] = 'required';
 				}
 				else
 				{
-					$this->arrConfiguration['mandatory'] = false;
+					unset($this->arrAttributes['required']);
 				}
+				parent::__set($strKey, $varValue);
 				break;
 
 			case 'placeholder':

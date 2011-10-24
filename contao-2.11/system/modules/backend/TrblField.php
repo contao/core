@@ -75,18 +75,6 @@ class TrblField extends Widget
 				}
 				break;
 
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'options':
 				$this->arrUnits = deserialize($varValue);
 				break;
