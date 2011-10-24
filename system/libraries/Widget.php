@@ -223,13 +223,22 @@ abstract class Widget extends Controller
 			case 'readonly':
 				if ($varValue)
 				{
-					$this->arrAttributes[$strKey] = $strKey;
 					$this->blnSubmitInput = false;
 				}
 				else
 				{
-					unset($this->arrAttributes[$strKey]);
 					$this->blnSubmitInput = true;
+				}
+				// Do not add a break; statement here
+
+			case 'autofocus':
+				if ($varValue)
+				{
+					$this->arrAttributes[$strKey] = $strKey;
+				}
+				else
+				{
+					unset($this->arrAttributes[$strKey]);
 				}
 				break;
 
@@ -463,6 +472,7 @@ abstract class Widget extends Controller
 	 */
 	public function getAttributes($arrStrip=array())
 	{
+		$blnIsXhtml = false;
 		$arrAttributes = $this->arrAttributes;
 
 		// Remove HTML5 attributes in XHTML code
@@ -472,6 +482,9 @@ abstract class Widget extends Controller
 
 			if ($objPage->outputFormat == 'xhtml')
 			{
+				$blnIsXhtml = true;
+
+				unset($this->arrAttributes['autofocus']);
 				unset($this->arrAttributes['placeholder']);
 				unset($this->arrAttributes['required']);
 			}
@@ -491,9 +504,13 @@ abstract class Widget extends Controller
 		// Add the remaining attributes
 		foreach ($this->arrAttributes as $k=>$v)
 		{
-			if ($v != '')
+			if (!$blnIsXhtml && in_array($k, array('disabled', 'readonly', 'required', 'autofocus')))
 			{
-				$strAttributes .= sprintf(' %s="%s"', $k, $v);
+				$strAttributes .= ' ' . $k;
+			}
+			elseif ($v != '')
+			{
+				$strAttributes .= ' ' . $k . '="' . $v . '"';
 			}
 		}
 

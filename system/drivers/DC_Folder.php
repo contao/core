@@ -1036,6 +1036,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 			// Render boxes
 			$class = 'tl_tbox block';
+			$blnIsFirst = true;
 
 			foreach ($boxes as $k=>$v)
 			{
@@ -1075,6 +1076,13 @@ class DC_Folder extends DataContainer implements listable, editable
 						$this->varValue = '';
 					}
 
+					// Autofocus the first field
+					if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
+					{
+						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
+						$blnIsFirst = false;
+					}
+
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
 					{
@@ -1111,13 +1119,7 @@ class DC_Folder extends DataContainer implements listable, editable
 </div>
 
 </div>
-</form>
-
-<script>
-window.addEvent(\'domready\', function() {
-  $(\''.$this->strTable.'\').getElement(\'input[type="text"]\').focus();
-});
-</script>';
+</form>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = '

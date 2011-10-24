@@ -2949,7 +2949,19 @@ abstract class Controller extends System
 	 */
 	protected function optionSelected($strName, $strValue)
 	{
-		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? ' selected="selected"' : '';
+		$attribute = ' selected';
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$attribute = ' selected="selected"';
+			}
+		}
+
+		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? $attribute : '';
 	}
 
 
@@ -2960,7 +2972,19 @@ abstract class Controller extends System
 	 */
 	protected function optionChecked($strName, $strValue)
 	{
-		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? ' checked="checked"' : '';
+		$attribute = ' checked';
+
+		if (TL_MODE == 'FE')
+		{
+			global $objPage;
+
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$attribute = ' checked="checked"';
+			}
+		}
+
+		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? $attribute : '';
 	}
 
 

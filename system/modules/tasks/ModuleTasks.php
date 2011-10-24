@@ -172,7 +172,7 @@ class ModuleTasks extends BackendModule
 				'title' => $objTask->title,
 				'progress' => $objTask->progress,
 				'deadline' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline),
-				'status' => (strlen($GLOBALS['TL_LANG']['tl_task_status'][$objTask->status]) ? $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] : $objTask->status),
+				'status' => (($GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] != '') ? $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] : $objTask->status),
 				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
 				'editTitle' => sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $objTask->id),
@@ -503,7 +503,7 @@ class ModuleTasks extends BackendModule
 		}
 
 		// Add search value to query
-		if (strlen($session['search']['tl_task']['value']))
+		if ($session['search']['tl_task']['value'] != '')
 		{
 			$where[] = "CAST(" . $session['search']['tl_task']['field'] . " AS CHAR) REGEXP ?";
 			$value[] = $session['search']['tl_task']['value'];
@@ -525,7 +525,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->search = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 
 		// Add deadline value to query
-		if (strlen($session['filter']['tl_task']['deadline']))
+		if ($session['filter']['tl_task']['deadline'] != '')
 		{
 			$objDate = new Date($session['filter']['tl_task']['deadline']);
 
@@ -537,7 +537,7 @@ class ModuleTasks extends BackendModule
 		}
 
 		// Add assignedTo value to query
-		if (strlen($session['filter']['tl_task']['assignedTo']))
+		if ($session['filter']['tl_task']['assignedTo'] != '')
 		{
 			$where[] = "s.assignedTo=?";
 			$value[] = $session['filter']['tl_task']['assignedTo'];
@@ -598,10 +598,11 @@ class ModuleTasks extends BackendModule
 		$widget->mandatory = true;
 		$widget->decodeEntities = true;
 		$widget->value = $value;
+		$widget->autofocus = true;
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['title'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['title'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['title'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['title'][1];
 		}
@@ -637,7 +638,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['assignTo'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['assignTo'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['assignTo'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['assignTo'][1];
 		}
@@ -699,7 +700,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['deadline'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['deadline'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['deadline'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['deadline'][1];
 		}
@@ -736,7 +737,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['status'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['status'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['status'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['status'][1];
 		}
@@ -785,7 +786,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['progress'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['progress'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['progress'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['progress'][1];
 		}
@@ -834,7 +835,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->label = $GLOBALS['TL_LANG']['tl_task']['comment'][0];
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['comment'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['comment'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['comment'][1];
 		}
@@ -867,7 +868,7 @@ class ModuleTasks extends BackendModule
 
 		$widget->options = array(array('value'=>1, 'label'=>$GLOBALS['TL_LANG']['tl_task']['notify'][0]));
 
-		if ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_task']['notify'][1]))
+		if ($GLOBALS['TL_CONFIG']['showHelp'] && $GLOBALS['TL_LANG']['tl_task']['notify'][1] != '')
 		{
 			$widget->help = $GLOBALS['TL_LANG']['tl_task']['notify'][1];
 		}

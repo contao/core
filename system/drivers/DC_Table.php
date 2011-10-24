@@ -1627,6 +1627,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 			$class = 'tl_tbox block';
 			$fs = $this->Session->get('fieldset_states');
+			$blnIsFirst = true;
 
 			// Render boxes
 			foreach ($boxes as $k=>$v)
@@ -1680,6 +1681,13 @@ class DC_Table extends DataContainer implements listable, editable
 					$this->strField = $vv;
 					$this->strInputName = $vv;
 					$this->varValue = $objRow->$vv;
+
+					// Autofocus the first field
+					if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
+					{
+						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
+						$blnIsFirst = false;
+					}
 
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
@@ -1756,14 +1764,7 @@ class DC_Table extends DataContainer implements listable, editable
 </div>
 
 </div>
-</form>
-
-<script>
-window.addEvent(\'domready\', function() {
-  var first = $(\''.$this->strTable.'\').getElement(\'input[type="text"]\');
-  if (first) first.focus();
-});
-</script>';
+</form>';
 
 		// Begin the form (-> DO NOT CHANGE THIS ORDER -> this way the onsubmit attribute of the form can be changed by a field)
 		$return = $version . '
@@ -1991,6 +1992,7 @@ window.addEvent(\'domready\', function() {
 
 				// Store the active record
 				$this->objActiveRecord = $objRow;
+				$blnIsFirst = true;
 
 				foreach ($this->strPalette as $v)
 				{
@@ -2037,6 +2039,13 @@ window.addEvent(\'domready\', function() {
 					if ($objRow->$v !== false)
 					{
 						$this->varValue = $objRow->$v;
+					}
+
+					// Autofocus the first field
+					if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
+					{
+						$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
+						$blnIsFirst = false;
 					}
 
 					// Call load_callback
@@ -2336,6 +2345,8 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
+			$blnIsFirst = true;
+
 			// Begin current row
 			$return .= '
 <div class="'.$class.'">';
@@ -2356,6 +2367,13 @@ window.addEvent(\'domready\', function() {
 				$this->strField = $v;
 				$this->strInputName = $v;
 				$this->varValue = '';
+
+				// Autofocus the first field
+				if ($blnIsFirst && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'text')
+				{
+					$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['autofocus'] = 'autofocus';
+					$blnIsFirst = false;
+				}
 
 				// Disable auto-submit
 				$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['submitOnChange'] = false;
