@@ -604,6 +604,7 @@ CREATE TABLE `tl_theme` (
   `folders` blob NULL,
   `templates` varchar(255) NOT NULL default '',
   `screenshot` varchar(255) NOT NULL default '',
+  `vars` text NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

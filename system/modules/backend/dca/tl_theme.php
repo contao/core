@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,author;{config_legend},folders,templates,screenshot'
+		'default'                     => '{title_legend},name,author;{config_legend},folders,templates,screenshot;{vars_legend},vars'
 	),
 
 	// Fields
@@ -177,6 +177,12 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
 			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true)
+		),
+		'vars' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['vars'],
+			'inputType'               => 'keyValueWizard',
+			'exclude'                 => true
 		),
 		'source' => array
 		(
