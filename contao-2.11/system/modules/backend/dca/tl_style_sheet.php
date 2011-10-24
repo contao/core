@@ -136,7 +136,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc,media,mediaQuery,vars'
+		'default'                     => '{title_legend},name,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
 	),
 
 	// Fields

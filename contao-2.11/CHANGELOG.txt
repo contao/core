@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1093 (New)
+-----------
+Global style sheet variables can now also be defined in the theme settings
+(see #3366). Style sheet variables override theme variables.
+
 r1091 (New)
 -----------
 Added support for the "placeholder" and "required" attributes in HTML5 forms.

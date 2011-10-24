@@ -149,12 +149,26 @@ class StyleSheets extends Backend
 		$intCount = 0;
 		$vars = array();
 
-		// Global variables
+		// Get the global theme variables
+		$objTheme = $this->Database->prepare("SELECT vars FROM tl_theme WHERE id=?")
+								   ->limit(1)
+								   ->execute($row['pid']);
+
+		if ($objTheme->vars != '')
+		{
+			if (is_array(($tmp = deserialize($objTheme->vars))))
+			{
+				foreach ($tmp as $v)
+				{
+					$vars[$v['key']] = $v['value'];
+				}
+			}
+		}
+
+		// Merge the global style sheet variables
 		if ($row['vars'] != '')
 		{
-			$tmp = deserialize($row['vars']);
-
-			if (is_array($tmp))
+			if (is_array(($tmp = deserialize($row['vars']))))
 			{
 				foreach ($tmp as $v)
 				{

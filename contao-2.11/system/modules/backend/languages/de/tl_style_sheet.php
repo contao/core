@@ -44,7 +44,9 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']     = array('Änderungsdatum', '
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name und Medientypen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name';
+$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Medieneinstellungen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']  = 'Globale Variablen';
 
 
 /**
