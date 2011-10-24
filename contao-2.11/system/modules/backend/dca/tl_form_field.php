@@ -540,7 +540,7 @@ class tl_form_field extends Backend
 
 		$strWidget = $objWidget->parse();
 		$strWidget = preg_replace('/ name="[^"]+"/i', '', $strWidget);
-		$strWidget = str_replace('type="submit"', 'type="button"', $strWidget);
+		$strWidget = str_replace(array(' type="submit"', ' autofocus', ' required'), array(' type="button"', '', ''), $strWidget);
 
 		if ($objWidget instanceof FormHidden)
 		{

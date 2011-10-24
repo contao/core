@@ -37,7 +37,7 @@ $tabindex = 1;
 
 <div>
   <h3><label for="<?php echo $nm; ?>"><?php echo $text['extension'][0]; ?></label></h3>
-  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="32" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_extension; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_extension): ?> disabled="disabled"<?php endif; ?>>
+  <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="32" name="<?php echo $nm; ?>" id="<?php echo $nm; ?>" value="<?php echo $rep->f_extension; ?>" class="tl_text"<?php if ($rep->f_stage>$rep->inst_extension): ?> disabled<?php else: ?> autofocus<?php endif; ?>>
 <?php if (property_exists($rep, 'f_extension_msg')): ?>
   <p class="tl_error"><?php echo $text[$rep->f_extension_msg]; ?></p>
 <?php else: ?>
