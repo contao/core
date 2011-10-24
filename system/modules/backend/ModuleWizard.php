@@ -54,34 +54,6 @@ class ModuleWizard extends Widget
 
 
 	/**
-	 * Add specific attributes
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		switch ($strKey)
-		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
-			default:
-				parent::__set($strKey, $varValue);
-				break;
-		}
-	}
-
-
-	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
@@ -197,10 +169,11 @@ class ModuleWizard extends Widget
   </thead>
   <tbody>';
 
-		// Load tl_article language file
+		// Load the tl_article language file
 		$this->loadLanguageFile('tl_article');
+		$tabindex = 0;
 
-		// Add input fields
+		// Add the input fields
 		for ($i=0; $i<count($this->varValue); $i++)
 		{
 			$options = '';
@@ -213,7 +186,7 @@ class ModuleWizard extends Widget
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>';
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>';
 
 			$options = '';
 
@@ -224,7 +197,7 @@ class ModuleWizard extends Widget
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
     <td>';
 
 			// Add buttons

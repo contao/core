@@ -63,13 +63,13 @@ class FormFileUpload extends Widget implements uploadable
 			case 'mandatory':
 				if ($varValue)
 				{
-					$this->arrConfiguration['mandatory'] = true;
 					$this->arrAttributes['required'] = 'required';
 				}
 				else
 				{
-					$this->arrConfiguration['mandatory'] = false;
+					unset($this->arrAttributes['required']);
 				}
+				parent::__set($strKey, $varValue);
 				break;
 
 			case 'fSize':

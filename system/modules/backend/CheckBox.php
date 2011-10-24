@@ -68,18 +68,6 @@ class CheckBox extends Widget
 	{
 		switch ($strKey)
 		{
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;
@@ -118,9 +106,15 @@ class CheckBox extends Widget
 			$this->arrOptions = array($this->arrOptions[0]);
 		}
 
+		// The "required" attribute only makes sense for single checkboxes
+		if (!$this->multiple && $this->mandatory)
+		{
+				$this->arrAttributes['required'] = 'required';
+		}
+
 		$state = $this->Session->get('checkbox_groups');
 
-		// Toggle checkbox group
+		// Toggle the checkbox group
 		if ($this->Input->get('cbc'))
 		{
 			$state[$this->Input->get('cbc')] = (isset($state[$this->Input->get('cbc')]) && $state[$this->Input->get('cbc')] == 1) ? 0 : 1;

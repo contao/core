@@ -69,18 +69,6 @@ class ListWizard extends Widget
 				}
 				break;
 
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
 			default:
 				parent::__set($strKey, $varValue);
 				break;

@@ -155,12 +155,12 @@ abstract class Widget extends Controller
 	{
 		switch ($strKey)
 		{
-			case 'name':
-				$this->strName = $varValue;
-				break;
-
 			case 'id':
 				$this->strId = $varValue;
+				break;
+
+			case 'name':
+				$this->strName = $varValue;
 				break;
 
 			case 'label':
@@ -168,17 +168,17 @@ abstract class Widget extends Controller
 				break;
 
 			case 'value':
-				// Decrypt the value if it is encrypted
 				$this->varValue = deserialize($varValue);
 				if ($this->arrConfiguration['encrypt'])
 				{
+					// Decrypt the value if it is encrypted
 					$this->import('Encryption');
 					$this->varValue = $this->Encryption->decrypt($this->varValue);
 				}
 				break;
 
 			case 'class':
-				if (strlen($varValue) && strpos($this->strClass, $varValue) === false)
+				if ($varValue != '' && strpos($this->strClass, $varValue) === false)
 				{
 					$this->strClass = trim($this->strClass . ' ' . $varValue);
 				}
@@ -194,9 +194,21 @@ abstract class Widget extends Controller
 
 			case 'alt':
 			case 'style':
-			case 'onclick':
-			case 'onchange':
 			case 'accesskey':
+			case 'onblur':
+			case 'onchange':
+			case 'onclick':
+			case 'ondblclick':
+			case 'onfocus':
+			case 'onmousedown':
+			case 'onmousemove':
+			case 'onmouseout':
+			case 'onmouseover':
+			case 'onmouseup':
+			case 'onkeydown':
+			case 'onkeypress':
+			case 'onkeyup':
+			case 'onselect':
 				$this->arrAttributes[$strKey] = $varValue;
 				break;
 
@@ -208,17 +220,27 @@ abstract class Widget extends Controller
 				break;
 
 			case 'disabled':
+			case 'readonly':
 				if ($varValue)
 				{
-					$this->arrAttributes[$strKey] = 'disabled';
+					$this->arrAttributes[$strKey] = $strKey;
 					$this->blnSubmitInput = false;
+				}
+				else
+				{
+					unset($this->arrAttributes[$strKey]);
+					$this->blnSubmitInput = true;
 				}
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration[$strKey] = false;
-				break;
+			case 'required':
+				if ($varValue)
+				{
+					$this->strClass = trim($this->strClass . ' mandatory');
+				}
+				// Do not add a break; statement here
 
+			case 'mandatory':
 			case 'nospace':
 			case 'allowHtml':
 			case 'addSubmit':
@@ -229,13 +251,6 @@ abstract class Widget extends Controller
 			case 'spaceToUnderscore':
 				$this->arrConfiguration[$strKey] = $varValue ? true : false;
 				break;
-
-			case 'required':
-				if ($varValue)
-				{
-					$this->strClass = trim($this->strClass . ' mandatory');
-				}
-				// Do not add a break; statement here
 
 			default:
 				$this->arrConfiguration[$strKey] = $varValue;
@@ -266,9 +281,9 @@ abstract class Widget extends Controller
 				break;
 
 			case 'value':
-				// Encrypt the value
 				if ($this->arrConfiguration['encrypt'])
 				{
+					// Encrypt the value
 					$this->import('Encryption');
 					return $this->Encryption->encrypt($this->varValue);
 				}
@@ -285,6 +300,10 @@ abstract class Widget extends Controller
 
 			case 'wizard':
 				return $this->strWizard;
+				break;
+
+			case 'required':
+				return $this->arrConfiguration[$strKey];
 				break;
 
 			default:

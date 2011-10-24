@@ -54,41 +54,6 @@ class OptionWizard extends Widget
 
 
 	/**
-	 * Add specific attributes
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		switch ($strKey)
-		{
-			case 'maxlength':
-				if ($varValue > 0)
-				{
-					$this->arrAttributes['maxlength'] = $varValue;
-				}
-				break;
-
-			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrConfiguration['mandatory'] = true;
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					$this->arrConfiguration['mandatory'] = false;
-				}
-				break;
-
-			default:
-				parent::__set($strKey, $varValue);
-				break;
-		}
-	}
-
-
-	/**
 	 * Validate input and set value
 	 */
 	public function validate()
