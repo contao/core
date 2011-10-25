@@ -37,7 +37,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class SystemMessages extends Backend
+class Messages extends Backend
 {
 
 	/**

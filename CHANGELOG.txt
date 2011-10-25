@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1098 (Improvement)
+-------------------
+Added a cache for getPageDetails() and outsourced the cache functionality into
+a separate library (see #3577).
+
 r1093 (New)
 -----------
 Global style sheet variables can now also be defined in the theme settings

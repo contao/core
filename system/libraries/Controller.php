@@ -553,6 +553,14 @@ abstract class Controller extends System
 			return null;
 		}
 
+		$this->import('Cache');
+		$strKey = __METHOD__ . '-' . $intId;
+
+		if (isset($this->Cache->$strKey))
+		{
+			return $this->Cache->$strKey;
+		}
+
 		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 						->limit(1)
 						->execute($intId);
@@ -576,7 +584,6 @@ abstract class Controller extends System
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
-
 		$trail = array($intId, $pid);
 
 		// Inherit settings
@@ -713,6 +720,7 @@ abstract class Controller extends System
 			$objPage->cache = 0;
 		}
 
+		$this->Cache->$strKey = $objPage;
 		return $objPage;
 	}
 
@@ -2844,13 +2852,16 @@ abstract class Controller extends System
 			return false;
 		}
 
+		$this->import('Cache');
+		$strKey = __METHOD__ . '-' . $strClass;
+
 		// Try to load from cache
 		if (!$blnNoCache)
 		{
 			// Handle multiple requests for the same class
-			if (isset($this->arrCache[$strClass]))
+			if (isset($this->Cache->$strKey))
 			{
-				return $this->arrCache[$strClass];
+				return $this->Cache->$strKey;
 			}
 
 			$objCache = FileCache::getInstance('classes');
@@ -2858,13 +2869,13 @@ abstract class Controller extends System
 			// Check the file cache
 			if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClass))
 			{
-				$this->arrCache[$strClass] = $objCache->$strClass;
+				$this->Cache->$strKey = $objCache->$strClass;
 				return $objCache->$strClass;
 			}
 		}
 
 		$this->import('Config'); // see ticket #152
-		$this->arrCache[$strClass] = false;
+		$this->Cache->$strKey = false;
 
 		// Browse all modules
 		foreach ($this->Config->getActiveModules() as $strModule)
@@ -2878,7 +2889,7 @@ abstract class Controller extends System
 				$objAutoload = FileCache::getInstance('autoload');
 				$objAutoload->$strClass = $strFile;
 
-				$this->arrCache[$strClass] = true;
+				$this->Cache->$strKey = true;
 				break;
 			}
 		}
@@ -2886,10 +2897,10 @@ abstract class Controller extends System
 		// Remember the result
 		if (!$blnNoCache)
 		{
-			$objCache->$strClass = $this->arrCache[$strClass];
+			$objCache->$strClass = $this->Cache->$strKey;
 		}
 
-		return $this->arrCache[$strClass];
+		return $this->Cache->$strKey;
 	}
 
 

@@ -41,28 +41,16 @@ abstract class System
 {
 
 	/**
+	 * Cache object
+	 * @var object
+	 */
+	protected $Cache;
+
+	/**
 	 * Configuraion object
 	 * @var object
 	 */
 	protected $Config;
-
-	/**
-	 * Input object
-	 * @var object
-	 */
-	protected $Input;
-
-	/**
-	 * Environment object
-	 * @var object
-	 */
-	protected $Environment;
-
-	/**
-	 * Session object
-	 * @var object
-	 */
-	protected $Session;
 
 	/**
 	 * Database object
@@ -77,10 +65,10 @@ abstract class System
 	protected $Encryption;
 
 	/**
-	 * String object
+	 * Environment object
 	 * @var object
 	 */
-	protected $String;
+	protected $Environment;
 
 	/**
 	 * Files object
@@ -89,10 +77,28 @@ abstract class System
 	protected $Files;
 
 	/**
-	 * User object
+	 * Input object
 	 * @var object
 	 */
-	protected $User;
+	protected $Input;
+
+	/**
+	 * Search object
+	 * @var object
+	 */
+	protected $Search;
+
+	/**
+	 * Session object
+	 * @var object
+	 */
+	protected $Session;
+
+	/**
+	 * String object
+	 * @var object
+	 */
+	protected $String;
 
 	/**
 	 * Template object
@@ -101,10 +107,10 @@ abstract class System
 	protected $Template;
 
 	/**
-	 * Data container object
+	 * User object
 	 * @var object
 	 */
-	protected $DataContainer;
+	protected $User;
 
 	/**
 	 * Automator object
@@ -113,10 +119,22 @@ abstract class System
 	protected $Automator;
 
 	/**
+	 * Data container object
+	 * @var object
+	 */
+	protected $DataContainer;
+
+	/**
+	 * Messages object
+	 * @var object
+	 */
+	protected $Messages;
+
+	/**
 	 * Cache array
 	 * @var array
 	 */
-	protected $arrCache = array();
+	protected $arrCache = array(); // Backwards compatibility
 
 
 	/**
