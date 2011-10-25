@@ -182,7 +182,7 @@ class ModuleArticle extends Module
 			}
 		}
 
-		$contentElements = '';
+		$arrElements = array();
 
 		// Get all visible content elements
 		$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
@@ -190,11 +190,11 @@ class ModuleArticle extends Module
 
 		while ($objCte->next())
 		{
-			$contentElements .= $this->getContentElement($objCte->id);
+			$arrElements[] = $this->getContentElement($objCte->id);
 		}
 
 		$this->Template->teaser = $this->teaser;
-		$this->Template->contentElements = $contentElements;
+		$this->Template->elements = $arrElements;
 
 		if ($this->keywords != '')
 		{
