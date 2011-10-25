@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1100 (Change)
+--------------
+Pass the content elements as array to the mod_article template, so custom
+output formats can access the elements separately (see #3502).
+
 r1099 (New)
 -----------
 Added the "getArticle" hook (see #2332).
