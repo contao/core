@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1099 (New)
+-----------
+Added the "getArticle" hook (see #2332).
+
 r1098 (Improvement)
 -------------------
 Added a cache for getPageDetails() and outsourced the cache functionality into

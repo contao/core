@@ -417,6 +417,16 @@ abstract class Controller extends System
 		$objArticle->headline = $objArticle->title;
 		$objArticle->multiMode = $blnMultiMode;
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getArticle']) && is_array($GLOBALS['TL_HOOKS']['getArticle']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objArticle);
+			}
+		}
+
 		$objArticle = new ModuleArticle($objArticle, $strColumn);
 		return $objArticle->generate($blnIsInsertTag);
 	}
