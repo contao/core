@@ -904,8 +904,8 @@ class tl_page extends Backend
 			return;
 		}
 
-		$this->import('SystemMessages');
-		$this->addRawMessage($this->SystemMessages->languageFallback());
+		$this->import('Messages');
+		$this->addRawMessage($this->Messages->languageFallback());
 	}
 
 

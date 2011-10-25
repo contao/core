@@ -58,6 +58,12 @@ class FileCache extends System
 	 */
 	protected $blnIsModified = false;
 
+	/**
+	 * Cache array
+	 * @var array
+	 */
+	protected $arrCache = array();
+
 
 	/**
 	 * Try to load the cache file
@@ -117,6 +123,12 @@ class FileCache extends System
 		// Then move the file to its final destination
 		rename($strPath . '/' . $strTemp, $strPath . '/' . $this->strFile);
 	}
+
+
+	/**
+	 * Prevent cloning of the object (Singleton)
+	 */
+	final private function __clone() {}
 
 
 	/**

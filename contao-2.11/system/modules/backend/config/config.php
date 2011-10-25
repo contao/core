@@ -215,9 +215,9 @@ $GLOBALS['TL_HOOKS'] = array
 (
 	'getSystemMessages' => array
 	(
-		array('SystemMessages', 'versionCheck'),
-		array('SystemMessages', 'lastLogin'),
-		array('SystemMessages', 'languageFallback')
+		array('Messages', 'versionCheck'),
+		array('Messages', 'lastLogin'),
+		array('Messages', 'languageFallback')
 	)
 );
 

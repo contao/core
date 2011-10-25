@@ -312,10 +312,13 @@ class tl_comments extends Backend
 			return true;
 		}
 
+		$this->import('Cache');
+		$strKey = __METHOD__ . '-' . $strSource . '-' . $intParent;
+
 		// Load cached result
-		if (isset($this->arrCache[$strSource][$intParent]))
+		if (isset($this->Cache->$strKey))
 		{
-			return $this->arrCache[$strSource][$intParent];
+			return $this->Cache->$strKey;
 		}
 
 		// Get the pagemounts
@@ -330,7 +333,7 @@ class tl_comments extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Order deny,allow
-		$this->arrCache[$strSource][$intParent] = false;
+		$this->Cache->$strKey = false;
 
 		switch ($strSource)
 		{
@@ -342,7 +345,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit its articles
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -354,7 +357,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit it
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -369,7 +372,7 @@ class tl_comments extends Backend
 					// Check the access to the news archive
 					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
 					{
-						$this->arrCache[$strSource][$intParent] = true;
+						$this->Cache->$strKey = true;
 					}
 				}
 				break;
@@ -385,7 +388,7 @@ class tl_comments extends Backend
 					// Check the access to the calendar
 					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
 					{
-						$this->arrCache[$strSource][$intParent] = true;
+						$this->Cache->$strKey = true;
 					}
 				}
 				break;
@@ -394,7 +397,7 @@ class tl_comments extends Backend
 				// Check the access to the FAQ module
 				if ($this->User->hasAccess('faq', 'modules'))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -408,7 +411,7 @@ class tl_comments extends Backend
 
 						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
 						{
-							$this->arrCache[$strSource][$intParent] = true;
+							$this->Cache->$strKey = true;
 							break;
 						}
 					}
@@ -416,7 +419,7 @@ class tl_comments extends Backend
 				break;
 		}
 
-		return $this->arrCache[$strSource][$intParent];
+		return $this->Cache->$strKey;
 	}
 
 

@@ -72,8 +72,6 @@ class File extends System
 	 */
 	public function __construct($strFile)
 	{
-		$this->import('Files');
-
 		// Handle open_basedir restrictions
 		if ($strFile == '.')
 		{
@@ -88,7 +86,10 @@ class File extends System
 
 		$this->strFile = $strFile;
 
-		// Create file if it does not exist
+		$this->import('Files');
+		$this->import('Cache');
+
+		// Create the file if it does not exist
 		if (!file_exists(TL_ROOT . '/' . $this->strFile))
 		{
 			// Handle open_basedir restrictions
@@ -133,13 +134,15 @@ class File extends System
 	 */
 	public function __get($strKey)
 	{
-		if (!isset($this->arrCache[$strKey]))
+		$strCacheKey = __METHOD__ . '-' . $strKey;
+
+		if (!isset($this->Cache->$strCacheKey))
 		{
 			switch ($strKey)
 			{
 				case 'size':
 				case 'filesize':
-					$this->arrCache[$strKey] = filesize(TL_ROOT . '/' . $this->strFile);
+					$this->Cache->$strCacheKey = filesize(TL_ROOT . '/' . $this->strFile);
 					break;
 
 				case 'dirname':
@@ -148,7 +151,7 @@ class File extends System
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->arrCache[$strKey] = $this->arrPathinfo[$strKey];
+					$this->Cache->$strCacheKey = $this->arrPathinfo[$strKey];
 					break;
 
 				case 'extension':
@@ -156,35 +159,35 @@ class File extends System
 					{
 						$this->arrPathinfo = pathinfo(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->arrCache['extension'] = strtolower($this->arrPathinfo['extension']);
+					$this->Cache->$strCacheKey = strtolower($this->arrPathinfo['extension']);
 					break;
 
 				case 'filename':
-					$this->arrCache['filename'] = basename($this->basename, '.'.$this->extension);
+					$this->Cache->$strCacheKey = basename($this->basename, '.'.$this->extension);
 					break;
 
 				case 'mime':
-					$this->arrCache['mime'] = $this->getMimeType();
+					$this->Cache->$strCacheKey = $this->getMimeType();
 					break;
 
 				case 'ctime':
-					$this->arrCache['ctime'] = filectime(TL_ROOT . '/' . $this->strFile);
+					$this->Cache->$strCacheKey = filectime(TL_ROOT . '/' . $this->strFile);
 					break;
 
 				case 'mtime':
-					$this->arrCache['mtime'] = filemtime(TL_ROOT . '/' . $this->strFile);
+					$this->Cache->$strCacheKey = filemtime(TL_ROOT . '/' . $this->strFile);
 					break;
 
 				case 'atime':
-					$this->arrCache['atime'] = fileatime(TL_ROOT . '/' . $this->strFile);
+					$this->Cache->$strCacheKey = fileatime(TL_ROOT . '/' . $this->strFile);
 					break;
 
 				case 'icon':
-					$this->arrCache['icon'] = $this->getIcon();
+					$this->Cache->$strCacheKey = $this->getIcon();
 					break;
 
 				case 'value':
-					$this->arrCache['value'] = $this->strFile;
+					$this->Cache->$strCacheKey = $this->strFile;
 					break;
 
 				case 'width':
@@ -192,7 +195,7 @@ class File extends System
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->arrCache['width'] = $this->arrImageSize[0];
+					$this->Cache->$strCacheKey = $this->arrImageSize[0];
 					break;
 
 				case 'height':
@@ -200,11 +203,11 @@ class File extends System
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
-					$this->arrCache['height'] = $this->arrImageSize[1];
+					$this->Cache->$strCacheKey = $this->arrImageSize[1];
 					break;
 
 				case 'isGdImage':
-					$this->arrCache['isGdImage'] = in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
+					$this->Cache->$strCacheKey = in_array($this->extension, array('gif', 'jpg', 'jpeg', 'png'));
 					break;
 
 				case 'handle':
@@ -221,7 +224,7 @@ class File extends System
 			}
 		}
 
-		return $this->arrCache[$strKey];
+		return $this->Cache->$strCacheKey;
 	}
 
 
