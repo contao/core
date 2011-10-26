@@ -147,6 +147,7 @@ class Combiner extends System
 
 	/**
 	 * Generate the combined file and return the path
+	 * @param string
 	 * @return string
 	 */
 	public function getCombinedFile($strUrl=TL_SCRIPT_URL)

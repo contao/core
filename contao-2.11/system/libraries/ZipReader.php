@@ -165,8 +165,8 @@ class ZipReader
 	 * - file_comment:              file comment
 	 *
 	 * Throws an exception on requests for unknown fields.
-	 * @param  string
-	 * @return string
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -239,7 +239,7 @@ class ZipReader
 
 	/**
 	 * Go to the first file of the archive
-	 * @return object
+	 * @return ZipReader
 	 */
 	public function first()
 	{
@@ -250,7 +250,7 @@ class ZipReader
 
 	/**
 	 * Go to the next file of the archive
-	 * @return mixed
+	 * @return ZipReader|boolean
 	 */
 	public function next()
 	{
@@ -266,7 +266,7 @@ class ZipReader
 
 	/**
 	 * Go to the previous file of the archive
-	 * @return mixed
+	 * @return ZipReader|boolean
 	 */
 	public function prev()
 	{
@@ -282,7 +282,7 @@ class ZipReader
 
 	/**
 	 * Go to the last file of the archive
-	 * @return mixed
+	 * @return ZipReader|boolean
 	 */
 	public function last()
 	{
@@ -308,7 +308,7 @@ class ZipReader
 
 	/**
 	 * Reset the archive
-	 * @return object
+	 * @return ZipReader
 	 */
 	public function reset()
 	{
@@ -438,7 +438,7 @@ class ZipReader
 		// Read archive header
 		if ($strSignature != self::CENTRAL_DIR_END)
 		{
-			throw new Exception("Error reading central directory");
+			throw new Exception('Error reading central directory');
 		}
 
 		$arrHeader = array();

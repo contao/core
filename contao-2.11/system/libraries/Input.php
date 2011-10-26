@@ -42,7 +42,7 @@ class Input
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Input
 	 */
 	protected static $objInstance;
 
@@ -72,7 +72,7 @@ class Input
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Input
 	 */
 	public static function getInstance()
 	{
@@ -375,7 +375,7 @@ class Input
 
 	/**
 	 * Strip slashes
-	 * @param  mixed
+	 * @param mixed
 	 * @return mixed
 	 */
 	protected function stripSlashes($varValue)
@@ -407,8 +407,8 @@ class Input
 
 	/**
 	 * Strip tags preserving HTML comments
-	 * @param  mixed
-	 * @param  string
+	 * @param mixed
+	 * @param string
 	 * @return mixed
 	 */
 	protected function stripTags($varValue, $strAllowedTags='')
@@ -439,8 +439,8 @@ class Input
 
 	/**
 	 * Clean user input and try to prevent XSS attacks
-	 * @param  mixed
-	 * @param  boolean
+	 * @param mixed
+	 * @param boolean
 	 * @return mixed
 	 */
 	protected function xssClean($varValue, $blnStrictMode=false)
@@ -549,7 +549,7 @@ class Input
 
 	/**
 	 * Decode HTML entities
-	 * @param  mixed
+	 * @param mixed
 	 * @return mixed
 	 */
 	protected function decodeEntities($varValue)
@@ -580,7 +580,7 @@ class Input
 
 	/**
 	 * Preserve basic entities
-	 * @param  mixed
+	 * @param mixed
 	 * @return mixed
 	 */
 	protected function preserveBasicEntities($varValue)
@@ -614,7 +614,7 @@ class Input
 
 	/**
 	 * Encode special characters
-	 * @param  mixed
+	 * @param mixed
 	 * @return mixed
 	 */
 	protected function encodeSpecialChars($varValue)

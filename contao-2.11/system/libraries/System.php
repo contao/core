@@ -42,91 +42,91 @@ abstract class System
 
 	/**
 	 * Cache object
-	 * @var object
+	 * @var Cache
 	 */
 	protected $Cache;
 
 	/**
 	 * Configuraion object
-	 * @var object
+	 * @var Config
 	 */
 	protected $Config;
 
 	/**
 	 * Database object
-	 * @var object
+	 * @var Database
 	 */
 	protected $Database;
 
 	/**
 	 * Encryption object
-	 * @var object
+	 * @var Encryption
 	 */
 	protected $Encryption;
 
 	/**
 	 * Environment object
-	 * @var object
+	 * @var Environment
 	 */
 	protected $Environment;
 
 	/**
 	 * Files object
-	 * @var object
+	 * @var Files
 	 */
 	protected $Files;
 
 	/**
 	 * Input object
-	 * @var object
+	 * @var Input
 	 */
 	protected $Input;
 
 	/**
 	 * Search object
-	 * @var object
+	 * @var Search
 	 */
 	protected $Search;
 
 	/**
 	 * Session object
-	 * @var object
+	 * @var Session
 	 */
 	protected $Session;
 
 	/**
 	 * String object
-	 * @var object
+	 * @var String
 	 */
 	protected $String;
 
 	/**
 	 * Template object
-	 * @var object
+	 * @var Template
 	 */
 	protected $Template;
 
 	/**
 	 * User object
-	 * @var object
+	 * @var User
 	 */
 	protected $User;
 
 	/**
 	 * Automator object
-	 * @var object
+	 * @var Automator
 	 */
 	protected $Automator;
 
 	/**
 	 * Data container object
-	 * @var object
+	 * @var DataContainer
 	 */
 	protected $DataContainer;
 
 	/**
 	 * Messages object
-	 * @var object
+	 * @var Messages
 	 */
 	protected $Messages;
 
@@ -138,7 +138,7 @@ abstract class System
 
 
 	/**
-	 * Import some default libraries
+	 * Import the default libraries
 	 */
 	protected function __construct()
 	{
@@ -154,13 +154,12 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param boolean
-	 * @throws Exception
 	 */
-	protected function import($strClass, $strKey=false, $blnForce=false)
+	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
-		$strKey = $strKey ? $strKey : $strClass;
+		$strKey = ($strKey != '') ? $strKey : $strClass;
 
-		if (!is_object($this->$strKey) || $blnForce)
+		if ($blnForce || !is_object($this->$strKey))
 		{
 			$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 		}
@@ -207,7 +206,6 @@ abstract class System
 	/**
 	 * Add a request string to the current URI string
 	 * @param string
-	 * @param integer
 	 * @return string
 	 */
 	protected function addToUrl($strRequest)
@@ -264,7 +262,7 @@ abstract class System
 	/**
 	 * Redirect to another page
 	 * @param string
-	 * @param false
+	 * @param integer
 	 */
 	protected function redirect($strLocation, $intStatus=303)
 	{
@@ -273,12 +271,7 @@ abstract class System
 		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
-			echo json_encode(array
-			(
-				'token'  => REQUEST_TOKEN,
-				'target' => $strLocation
-			));
-
+			echo $strLocation;
 			exit;
 		}
 
@@ -323,7 +316,7 @@ abstract class System
 	 * @param string
 	 * @return string
 	 */
-	protected function getReferer($blnEncodeAmpersands=false, $strTable='')
+	protected function getReferer($blnEncodeAmpersands=false, $strTable=null)
 	{
 		$key = ($this->Environment->script == 'contao/files.php') ? 'fileReferer' : 'referer';
 		$session = $this->Session->get($key);
@@ -441,8 +434,8 @@ abstract class System
 
 	/**
 	 * Parse a date format string and translate textual representations
-	 * @param integer
 	 * @param string
+	 * @param integer
 	 * @return string
 	 */
 	protected function parseDate($strFormat, $intTstamp=null)
@@ -685,7 +678,7 @@ abstract class System
 	 * @param string
 	 * @param boolean
 	 */
-	protected function setCookie($strName, $varValue, $intExpires, $strPath='', $strDomain=null, $blnSecure=null)
+	protected function setCookie($strName, $varValue, $intExpires, $strPath='/', $strDomain=null, $blnSecure=false)
 	{
 		if ($strPath == '')
 		{
@@ -848,12 +841,7 @@ abstract class System
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{
-		if (preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail))
-		{
-			return true;
-		}
-
-		return false;
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail);
 	}
 
 

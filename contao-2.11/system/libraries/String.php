@@ -42,7 +42,7 @@ class String
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var String
 	 */
 	protected static $objInstance;
 
@@ -61,7 +61,7 @@ class String
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return String
 	 */
 	public static function getInstance()
 	{
@@ -246,19 +246,19 @@ class String
 
 	/**
 	 * Decode all entities
-	 * @param  string
-	 * @param  string
-	 * @param  string
+	 * @param string
+	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	public function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=false)
+	public function decodeEntities($strString, $strQuoteStyle=ENT_COMPAT, $strCharset=null)
 	{
-		if (!strlen($strString))
+		if ($strString == '')
 		{
 			return '';
 		}
 
-		if (!$strCharset)
+		if ($strCharset === null)
 		{
 			$strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 		}
@@ -272,9 +272,9 @@ class String
 
 	/**
 	 * Censor a single word or an array of words within a string
-	 * @param  string
-	 * @param  array
-	 * @param  string
+	 * @param string
+	 * @param mixed
+	 * @param string
 	 * @return string
 	 */
 	public function censor($strString, $varWords, $strReplace="")
@@ -290,7 +290,7 @@ class String
 
 	/**
 	 * Find all e-mail addresses within a string and encode them
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	public function encodeEmail($strString)
@@ -325,9 +325,9 @@ class String
 
 	/**
 	 * Wrap words after a particular number of characers
-	 * @param  string
-	 * @param  int
-	 * @param  string
+	 * @param string
+	 * @param integer
+	 * @param string
 	 * @return string
 	 */
 	public function wordWrap($strString, $strLength=75, $strBreak="\n")
@@ -338,15 +338,15 @@ class String
 
 	/**
 	 * Highlight a phrase within a string
-	 * @param  string
-	 * @param  string
-	 * @param  string
-	 * @param  string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
 	 * @return string
 	 */
 	public function highlight($strString, $strPhrase, $strOpeningTag='<strong>', $strClosingTag='</strong>')
 	{
-		if (!strlen($strString) || !strlen($strPhrase))
+		if ($strString == '' || $strPhrase == '')
 		{
 			return $strString;
 		}
@@ -357,8 +357,8 @@ class String
 
 	/**
 	 * Split a string of comma separated values
-	 * @param  string
-	 * @param  string
+	 * @param string
+	 * @param string
 	 * @return array
 	 */
 	public function splitCsv($strString, $strDelimiter=',')
@@ -376,7 +376,7 @@ class String
 
 	/**
 	 * Convert a string to XHTML
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	public function toXhtml($strString)
@@ -409,7 +409,7 @@ class String
 
 	/**
 	 * Convert a string to HTML5
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	public function toHtml5($strString)

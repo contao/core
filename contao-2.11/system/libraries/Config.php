@@ -42,13 +42,13 @@ class Config
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Config
 	 */
 	protected static $objInstance;
 
 	/**
 	 * Files object
-	 * @var object
+	 * @var Files
 	 */
 	protected $Files;
 
@@ -94,12 +94,10 @@ class Config
 	 */
 	public function __destruct()
 	{
-		if (!$this->blnIsModified)
+		if ($this->blnIsModified)
 		{
-			return;
+			$this->save();
 		}
-
-		$this->save();
 	}
 
 
@@ -111,7 +109,7 @@ class Config
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Config
 	 */
 	public static function getInstance()
 	{
@@ -300,7 +298,6 @@ class Config
 	/**
 	 * Delete a configuration variable from the local configuration file
 	 * @param string
-	 * @param mixed
 	 */
 	public function delete($strKey)
 	{

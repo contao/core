@@ -104,7 +104,7 @@ class Feed extends System
 
 	/**
 	 * Add an item
-	 * @param object
+	 * @param FeedItem
 	 */
 	public function addItem(FeedItem $objItem)
 	{

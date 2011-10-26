@@ -149,7 +149,6 @@ abstract class Widget extends Controller
 	 * Set a parameter
 	 * @param string
 	 * @param mixed
-	 * @throws Exception
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -270,8 +269,8 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return a parameter
+	 * @param string
 	 * @return string
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -369,9 +368,9 @@ abstract class Widget extends Controller
 	 * @param string
 	 * @return string
 	 */
-	public function getErrorsAsString($strSeparator=false)
+	public function getErrorsAsString($strSeparator=null)
 	{
-		if ($strSeparator === false)
+		if ($strSeparator === null)
 		{
 			$strSeparator = '<br' . $this->strTagEnding . "\n";
 		}
@@ -406,7 +405,7 @@ abstract class Widget extends Controller
 	 * @param array
 	 * @return string
 	 */
-	public function parse($arrAttributes=false)
+	public function parse($arrAttributes=null)
 	{
 		if ($this->strTemplate == '')
 		{
@@ -430,7 +429,7 @@ abstract class Widget extends Controller
 	 */
 	public function generateLabel()
 	{
-		if (!strlen($this->strLabel))
+		if ($this->strLabel == '')
 		{
 			return '';
 		}
@@ -467,7 +466,7 @@ abstract class Widget extends Controller
 
 	/**
 	 * Return all attributes as string
-	 * @param strip
+	 * @param array
 	 * @return string
 	 */
 	public function getAttributes($arrStrip=array())

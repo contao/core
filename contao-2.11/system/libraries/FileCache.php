@@ -42,7 +42,7 @@ class FileCache extends System
 
 	/**
 	 * Current object instances (Singleton)
-	 * @var object
+	 * @var array
 	 */
 	protected static $arrInstances = array();
 
@@ -179,7 +179,7 @@ class FileCache extends System
 	/**
 	 * Instantiate a new file cache object and return it (Factory)
 	 * @param string
-	 * @return object
+	 * @return FileCache
 	 */
 	public static function getInstance($strFile)
 	{

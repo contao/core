@@ -60,7 +60,7 @@ abstract class Model extends System
 
 	/**
 	 * Database result
-	 * @var object
+	 * @var Database_Result
 	 */
 	protected $resResult;
 
@@ -78,7 +78,7 @@ abstract class Model extends System
 
 
 	/**
-	 * Import database object
+	 * Import the database object
 	 */
 	protected function __construct()
 	{
@@ -122,7 +122,7 @@ abstract class Model extends System
 
 	/**
 	 * Set the current record from an object or array
-	 * @param  array
+	 * @param array
 	 * @throws Exception
 	 */
 	public function setData($varData)
@@ -153,7 +153,7 @@ abstract class Model extends System
 
 	/**
 	 * Return the database result object
-	 * @return object
+	 * @return Database_Result
 	 */
 	public function getDatabaseResult()
 	{
@@ -163,10 +163,9 @@ abstract class Model extends System
 
 	/**
 	 * Set the current record from a database result row
-	 * @param  object
-	 * @param  string
-	 * @param  string
-	 * @throws Exception
+	 * @param Database_Result
+	 * @param string
+	 * @param string
 	 */
 	public function setFromRow(Database_Result $resResult, $strTable, $strRefField)
 	{
@@ -182,7 +181,8 @@ abstract class Model extends System
 
 	/**
 	 * Find a record by its reference field and return true if it has been found
-	 * @param  int
+	 * @param string
+	 * @param integer
 	 * @return boolean
 	 */
 	public function findBy($strRefField, $varRefId)
@@ -209,8 +209,8 @@ abstract class Model extends System
 
 	/**
 	 * Save the current record and return the number of affected rows or the last insert ID
-	 * @param  boolean
-	 * @return int
+	 * @param boolean
+	 * @return integer
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -233,8 +233,7 @@ abstract class Model extends System
 
 	/**
 	 * Delete the current record and return the number of affected rows
-	 * @param  int
-	 * @return int
+	 * @return integer
 	 */
 	public function delete()
 	{

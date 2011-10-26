@@ -115,8 +115,6 @@ class File extends System
 
 	/**
 	 * Close the file handle if it has not been done yet
-	 * @param string
-	 * @throws Exception
 	 */
 	public function __destruct()
 	{

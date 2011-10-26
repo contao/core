@@ -42,7 +42,7 @@ abstract class User extends Model
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var User
 	 */
 	protected static $objInstance;
 
@@ -457,7 +457,7 @@ abstract class User extends Model
 
 	/**
 	 * Return true if the user is member of a particular group
-	 * @param mixed
+	 * @param integer
 	 * @return boolean
 	 */
 	public function isMemberOf($id)
@@ -488,7 +488,6 @@ abstract class User extends Model
 
 	/**
 	 * Set all user properties from a database record
-	 * @param object
 	 */
 	abstract protected function setUserFromDb();
 }
