@@ -54,7 +54,7 @@ class DB_Oracle extends Database
 
 
 	/**
-	 * Connect to database server and select database
+	 * Connect to the database server and select the database
 	 */
 	protected function connect()
 	{
@@ -70,7 +70,7 @@ class DB_Oracle extends Database
 
 
 	/**
-	 * Disconnect from database
+	 * Disconnect from the database
 	 */
 	protected function disconnect()
 	{
@@ -91,9 +91,9 @@ class DB_Oracle extends Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param  string
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	protected function find_in_set($strKey, $strSet)
 	{
@@ -121,7 +121,7 @@ class DB_Oracle extends Database
 	 * - attributes: attributes (e.g. "unsigned")
 	 * - extra:      extra information (e.g. auto_increment)
 	 * @param string
-	 * @return string
+	 * @return array
 	 */
 	protected function list_fields($strTable)
 	{
@@ -144,7 +144,7 @@ class DB_Oracle extends Database
 
 	/**
 	 * Change the current database
-	 * @param  string
+	 * @param string
 	 * @return boolean
 	 */
 	protected function set_database($strDatabase)
@@ -183,7 +183,7 @@ class DB_Oracle extends Database
 
 
 	/**
-	 * Lock tables
+	 * Lock one or more tables
 	 * @param array
 	 * @todo implement
 	 */
@@ -191,7 +191,7 @@ class DB_Oracle extends Database
 
 
 	/**
-	 * Unlock tables
+	 * Unlock all tables
 	 * @todo implement
 	 */
 	protected function unlock_tables() {}
@@ -199,7 +199,7 @@ class DB_Oracle extends Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param  string
+	 * @param string
 	 * @return integer
 	 * @todo implement
 	 */
@@ -209,7 +209,7 @@ class DB_Oracle extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return object
+	 * @return DB_Oracle_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
@@ -248,7 +248,7 @@ class DB_Oracle_Statement extends Database_Statement
 
 	/**
 	 * Escape a string
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	protected function string_escape($strString)
@@ -259,8 +259,8 @@ class DB_Oracle_Statement extends Database_Statement
 
 	/**
 	 * Limit the current query
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -325,7 +325,7 @@ class DB_Oracle_Statement extends Database_Statement
 
 	/**
 	 * Return the number of affected rows
-	 * @return int
+	 * @return integer
 	 */
 	protected function affected_rows()
 	{
@@ -335,7 +335,7 @@ class DB_Oracle_Statement extends Database_Statement
 
 	/**
 	 * Return the last insert ID
-	 * @return int
+	 * @return boolean
 	 */
 	protected function insert_id()
 	{
@@ -345,7 +345,7 @@ class DB_Oracle_Statement extends Database_Statement
 
 	/**
 	 * Explain the current query
-	 * @return array
+	 * @return boolean
 	 */
 	protected function explain_query()
 	{
@@ -356,7 +356,7 @@ class DB_Oracle_Statement extends Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return object
+	 * @return DB_Oracle_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
@@ -398,7 +398,7 @@ class DB_Oracle_Result extends Database_Result
 
 	/**
 	 * Return the number of rows of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_rows()
 	{
@@ -411,7 +411,7 @@ class DB_Oracle_Result extends Database_Result
 
 	/**
 	 * Return the number of fields of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_fields()
 	{
@@ -420,21 +420,21 @@ class DB_Oracle_Result extends Database_Result
 
 
 	/**
-	 * Get column information
-	 * @param  int
+	 * Get the column information
+	 * @param integer
 	 * @return object
 	 */
 	protected function fetch_field($intOffset)
 	{
-		// Oracle starts row counting at 1
-		++$intOffset;
+		++$intOffset; // Oracle starts row counting at 1
+		$objData = new stdClass();
 
-		$arrData['name'] = @ocicolumnname($this->resResult, $intOffset);
-		$arrData['max_length'] = @ocicolumnsize($this->resResult, $intOffset);
-		$arrData['not_null'] = @ocicolumnisnull($this->resResult, $intOffset);
-		$arrData['type'] = @ocicolumntype($this->resResult, $intOffset);
+		$objData->name = @ocicolumnname($this->resResult, $intOffset);
+		$objData->max_length = @ocicolumnsize($this->resResult, $intOffset);
+		$objData->not_null = @ocicolumnisnull($this->resResult, $intOffset);
+		$objData->type = @ocicolumntype($this->resResult, $intOffset);
 
-		return $arrData;
+		return $objData;
 	}
 
 

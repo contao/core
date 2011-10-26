@@ -54,7 +54,7 @@ class DB_Postgresql extends Database
 
 
 	/**
-	 * Connect to database server and select database
+	 * Connect to the database server and select the database
 	 */
 	protected function connect()
 	{
@@ -77,7 +77,7 @@ class DB_Postgresql extends Database
 
 
 	/**
-	 * Disconnect from database
+	 * Disconnect from the database
 	 */
 	protected function disconnect()
 	{
@@ -102,9 +102,9 @@ class DB_Postgresql extends Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param  string
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	protected function find_in_set($strKey, $strSet)
 	{
@@ -132,7 +132,7 @@ class DB_Postgresql extends Database
 	 * - attributes: attributes (e.g. "unsigned")
 	 * - extra:      extra information (e.g. auto_increment)
 	 * @param string
-	 * @return string
+	 * @return array
 	 * @todo This function is not tested yet, nor is the list tables and list fields statement!
 	 */
 	protected function list_fields($strTable)
@@ -152,7 +152,7 @@ class DB_Postgresql extends Database
 
 	/**
 	 * Change the current database
-	 * @param  string
+	 * @param string
 	 * @return boolean
 	 */
 	protected function set_database($strDatabase)
@@ -190,7 +190,7 @@ class DB_Postgresql extends Database
 
 
 	/**
-	 * Lock tables
+	 * Lock one or more tables
 	 * @param array
 	 * @todo implement
 	 */
@@ -198,7 +198,7 @@ class DB_Postgresql extends Database
 
 
 	/**
-	 * Unlock tables
+	 * Unlock all tables
 	 * @todo implement
 	 */
 	protected function unlock_tables() {}
@@ -206,7 +206,7 @@ class DB_Postgresql extends Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param  string
+	 * @param string
 	 * @return integer
 	 * @todo implement
 	 */
@@ -216,7 +216,7 @@ class DB_Postgresql extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return object
+	 * @return DB_Postgresql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
@@ -248,7 +248,7 @@ class DB_Postgresql_Statement extends Database_Statement
 
 	/**
 	 * Escape a string
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	protected function string_escape($strString)
@@ -259,8 +259,8 @@ class DB_Postgresql_Statement extends Database_Statement
 
 	/**
 	 * Limit the current query
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -297,7 +297,7 @@ class DB_Postgresql_Statement extends Database_Statement
 
 	/**
 	 * Return the number of affected rows
-	 * @return int
+	 * @return integer
 	 */
 	protected function affected_rows()
 	{
@@ -307,7 +307,7 @@ class DB_Postgresql_Statement extends Database_Statement
 
 	/**
 	 * Return the last insert ID
-	 * @return int
+	 * @return integer
 	 */
 	protected function insert_id()
 	{
@@ -328,7 +328,7 @@ class DB_Postgresql_Statement extends Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return object
+	 * @return DB_Postgresql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
@@ -370,7 +370,7 @@ class DB_Postgresql_Result extends Database_Result
 
 	/**
 	 * Return the number of rows of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_rows()
 	{
@@ -380,7 +380,7 @@ class DB_Postgresql_Result extends Database_Result
 
 	/**
 	 * Return the number of fields of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_fields()
 	{
@@ -389,18 +389,20 @@ class DB_Postgresql_Result extends Database_Result
 
 
 	/**
-	 * Get column information
-	 * @param  int
-	 * @return array
+	 * Get the column information
+	 * @param integer
+	 * @return object
 	 */
 	protected function fetch_field($intOffset)
 	{
-		$arrData['name'] = @pg_field_name($this->resResult, $intOffset);
-		$arrData['max_length'] = @pg_field_size($this->resResult, $intOffset);
-		$arrData['not_null'] = @pg_field_is_null($this->resResult, $intOffset);
-		$arrData['type'] = @pg_field_type($this->resResult, $intOffset);
+		$objData = new stdClass();
 
-		return $arrData;
+		$objData->name = @pg_field_name($this->resResult, $intOffset);
+		$objData->max_length = @pg_field_size($this->resResult, $intOffset);
+		$objData->not_null = @pg_field_is_null($this->resResult, $intOffset);
+		$objData->type = @pg_field_type($this->resResult, $intOffset);
+
+		return $objData;
 	}
 
 

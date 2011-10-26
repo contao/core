@@ -42,25 +42,25 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Name of the parent table
-	 * @param  string
+	 * @param string
 	 */
 	protected $ptable;
 
 	/**
-	 * Names of one or more child tables
-	 * @param  array
+	 * Names of the child tables
+	 * @param array
 	 */
 	protected $ctable;
 
 	/**
 	 * ID of the current record
-	 * @param  int
+	 * @param integer
 	 */
 	protected $id;
 
 	/**
 	 * IDs of all root records
-	 * @param  mixed
+	 * @param array
 	 */
 	protected $root;
 
@@ -72,37 +72,37 @@ class DC_Table extends DataContainer implements listable, editable
 
 	/**
 	 * Limit (database query)
-	 * @param  string
+	 * @param string
 	 */
 	protected $limit;
 
 	/**
 	 * First sorting field
-	 * @param  string
+	 * @param string
 	 */
 	protected $firstOrderBy;
 
 	/**
 	 * Order by (database query)
-	 * @param  array
+	 * @param array
 	 */
 	protected $orderBy = array();
 
 	/**
 	 * Fields of a new or duplicated record
-	 * @param  array
+	 * @param array
 	 */
 	protected $set = array();
 
 	/**
 	 * IDs of all records that are currently displayed
-	 * @param  array
+	 * @param array
 	 */
 	protected $current = array();
 
 	/**
 	 * Show the current table as tree
-	 * @param  boolean
+	 * @param boolean
 	 */
 	protected $treeView = false;
 
@@ -750,7 +750,7 @@ class DC_Table extends DataContainer implements listable, editable
 	/**
 	 * Duplicate a particular record of the current table
 	 * @param boolean
-	 * @return integer
+	 * @return integer|boolean
 	 */
 	public function copy($blnDoNotRedirect=false)
 	{
@@ -895,9 +895,9 @@ class DC_Table extends DataContainer implements listable, editable
 	/**
 	 * Duplicate all child records of a duplicated record
 	 * @param string
-	 * @param int
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
+	 * @param integer
 	 */
 	protected function copyChilds($table, $insertID, $id, $parentId)
 	{
@@ -1510,7 +1510,7 @@ class DC_Table extends DataContainer implements listable, editable
 	 * @param integer
 	 * @return string
 	 */
-	public function edit($intID=false, $ajaxId=false)
+	public function edit($intID=null, $ajaxId=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
@@ -1518,7 +1518,7 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		if ($intID)
+		if ($intID != '')
 		{
 			$this->intId = $intID;
 		}
@@ -1913,7 +1913,7 @@ window.addEvent(\'domready\', function() {
 	 * @param integer
 	 * @return string
 	 */
-	public function editAll($intId=false, $ajaxId=false)
+	public function editAll($intId=null, $ajaxId=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
 		{
@@ -1928,7 +1928,7 @@ window.addEvent(\'domready\', function() {
 		$session = $this->Session->getData();
 		$ids = $session['CURRENT']['IDS'];
 
-		if ($this->Environment->isAjaxRequest)
+		if ($intId != '' && $this->Environment->isAjaxRequest)
 		{
 			$ids = array($intId);
 		}

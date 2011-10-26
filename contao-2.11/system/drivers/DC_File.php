@@ -116,8 +116,6 @@ class DC_File extends DataContainer implements editable
 
 	/**
 	 * Auto-generate a form to edit the local configuration file
-	 * @param integer
-	 * @param integer
 	 * @return string
 	 */
 	public function edit()
@@ -355,7 +353,6 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
-	 * @throws Exception
 	 */
 	protected function save($varValue)
 	{
