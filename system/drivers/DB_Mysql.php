@@ -54,7 +54,7 @@ class DB_Mysql extends Database
 
 
 	/**
-	 * Connect to database server and select database
+	 * Connect to the database server and select the database
 	 */
 	protected function connect()
 	{
@@ -84,7 +84,7 @@ class DB_Mysql extends Database
 
 
 	/**
-	 * Disconnect from database
+	 * Disconnect from the database
 	 */
 	protected function disconnect()
 	{
@@ -109,9 +109,9 @@ class DB_Mysql extends Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param  string
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	protected function find_in_set($strKey, $strSet)
 	{
@@ -133,7 +133,7 @@ class DB_Mysql extends Database
 	 * - index:      PRIMARY, UNIQUE or INDEX
 	 * - extra:      extra information (e.g. auto_increment)
 	 * @param string
-	 * @return string
+	 * @return array
 	 * @todo Support all kind of keys (e.g. FULLTEXT or FOREIGN).
 	 */
 	protected function list_fields($strTable)
@@ -209,7 +209,7 @@ class DB_Mysql extends Database
 
 	/**
 	 * Change the current database
-	 * @param  string
+	 * @param string
 	 * @return boolean
 	 */
 	protected function set_database($strDatabase)
@@ -249,7 +249,7 @@ class DB_Mysql extends Database
 
 
 	/**
-	 * Lock tables
+	 * Lock one or more tables
 	 * @param array
 	 */
 	protected function lock_tables($arrTables)
@@ -266,7 +266,7 @@ class DB_Mysql extends Database
 
 
 	/**
-	 * Unlock tables
+	 * Unlock all tables
 	 */
 	protected function unlock_tables()
 	{
@@ -276,7 +276,7 @@ class DB_Mysql extends Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param  string
+	 * @param string
 	 * @return integer
 	 */
 	protected function get_size_of($strTable)
@@ -291,7 +291,7 @@ class DB_Mysql extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return object
+	 * @return DB_Mysql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
@@ -324,7 +324,7 @@ class DB_Mysql_Statement extends Database_Statement
 
 	/**
 	 * Escape a string
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	protected function string_escape($strString)
@@ -335,8 +335,8 @@ class DB_Mysql_Statement extends Database_Statement
 
 	/**
 	 * Limit the current query
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -373,7 +373,7 @@ class DB_Mysql_Statement extends Database_Statement
 
 	/**
 	 * Return the number of affected rows
-	 * @return int
+	 * @return integer
 	 */
 	protected function affected_rows()
 	{
@@ -383,7 +383,7 @@ class DB_Mysql_Statement extends Database_Statement
 
 	/**
 	 * Return the last insert ID
-	 * @return int
+	 * @return integer
 	 */
 	protected function insert_id()
 	{
@@ -404,7 +404,7 @@ class DB_Mysql_Statement extends Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return object
+	 * @return DB_Mysql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{
@@ -446,7 +446,7 @@ class DB_Mysql_Result extends Database_Result
 
 	/**
 	 * Return the number of rows of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_rows()
 	{
@@ -456,7 +456,7 @@ class DB_Mysql_Result extends Database_Result
 
 	/**
 	 * Return the number of fields of the current result
-	 * @return int
+	 * @return integer
 	 */
 	protected function num_fields()
 	{
@@ -465,8 +465,8 @@ class DB_Mysql_Result extends Database_Result
 
 
 	/**
-	 * Get column information
-	 * @param  int
+	 * Get the column information
+	 * @param integer
 	 * @return object
 	 */
 	protected function fetch_field($intOffset)

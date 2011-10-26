@@ -339,7 +339,6 @@ class DC_Folder extends DataContainer implements listable, editable
 
 	/**
 	 * Create a new folder
-	 * @param array
 	 */
 	public function create()
 	{
@@ -439,9 +438,9 @@ class DC_Folder extends DataContainer implements listable, editable
 	 * @param string
 	 * @param string
 	 */
-	public function copy($source='', $destination='')
+	public function copy($source=null, $destination=null)
 	{
-		$noReload = strlen($source);
+		$noReload = ($source != '');
 		$strFolder = $this->Input->get('pid', true);
 
 		if ($source == '')
@@ -575,7 +574,7 @@ class DC_Folder extends DataContainer implements listable, editable
 	 * Recursively delete files and folders
 	 * @param string
 	 */
-	public function delete($source='')
+	public function delete($source=null)
 	{
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notDeletable'])
 		{
@@ -583,7 +582,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$noReload = strlen($source);
+		$noReload = ($source != '');
 
 		if ($source == '')
 		{
@@ -688,6 +687,7 @@ class DC_Folder extends DataContainer implements listable, editable
 	/**
 	 * Move one or more local files to the server
 	 * @param boolean
+	 * @return string
 	 */
 	public function move($blnIsAjax=false)
 	{
@@ -1177,8 +1177,6 @@ window.addEvent(\'domready\', function() {
 
 	/**
 	 * Auto-generate a form to edit all records that are currently shown
-	 * @param integer
-	 * @param integer
 	 * @return string
 	 */
 	public function editAll()
@@ -1538,7 +1536,6 @@ window.addEvent(\'domready\', function() {
 
 	/**
 	 * Protect a folder
-	 * @return string
 	 */
 	public function protect()
 	{
@@ -1574,7 +1571,6 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
-	 * @throws Exception
 	 */
 	protected function save($varValue)
 	{
