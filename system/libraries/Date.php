@@ -203,8 +203,9 @@ class Date extends System
 
 	/**
 	 * Return a regular expression to check a date
-	 * @param  string
+	 * @param string
 	 * @return string
+	 * @throws Exception
 	 */
 	public function getRegexp($strFormat=false)
 	{
@@ -224,7 +225,7 @@ class Date extends System
 
 	/**
 	 * Callback function for getRegexp
-	 * @param  array
+	 * @param array
 	 * @return string
 	 */
 	protected function getRegexpCallback($matches)
@@ -254,8 +255,9 @@ class Date extends System
 
 	/**
 	 * Return an input format string for a particular date (e.g. YYYY-MM-DD)
-	 * @param  string
+	 * @param string
 	 * @return string
+	 * @throws Exception
 	 */
 	public function getInputFormat($strFormat=false)
 	{

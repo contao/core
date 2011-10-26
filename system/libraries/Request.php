@@ -91,7 +91,7 @@ class Request
 
 
 	/**
-	 * Set default values
+	 * Set the default values
 	 */
 	public function __construct()
 	{
@@ -173,12 +173,12 @@ class Request
 
 
 	/**
-	 * Return true if there has been an error
+	 * Return true if there was an error
 	 * @return boolean
 	 */
 	public function hasError()
 	{
-		return strlen($this->strError) ? true : false;
+		return ($this->strError != '');
 	}
 
 
@@ -188,14 +188,14 @@ class Request
 	 * @param string
 	 * @param string
 	 */
-	public function send($strUrl, $strData=false, $strMethod=false)
+	public function send($strUrl, $strData=null, $strMethod=null)
 	{
-		if ($strData)
+		if ($strData !== null)
 		{
 			$this->strData = $strData;
 		}
 
-		if ($strMethod)
+		if ($strMethod !== null)
 		{
 			$this->strMethod = $strMethod;
 		}
@@ -260,9 +260,7 @@ class Request
 		}
 
 		$this->strRequest = $request;
-
 		fwrite($fp, $request);
-
 		$response = '';
 
 		while (!feof($fp) && ($chunk = fread($fp, 1024)) != false)
@@ -274,7 +272,6 @@ class Request
 
 		list($split, $this->strResponse) = explode("\r\n\r\n", $response, 2);
 		$split = preg_split("/\r\n|\n|\r/", $split);
-
 		$this->arrResponseHeaders = array();
 		list(, $code, $text) = explode(' ', trim(array_shift($split)), 3);
 

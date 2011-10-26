@@ -152,7 +152,7 @@ class FTP extends Files
 	 * Open a file and return the handle
 	 * @param string
 	 * @param string
-	 * @return resource
+	 * @return resource|boolean
 	 */
 	public function fopen($strFile, $strMode)
 	{
@@ -306,7 +306,7 @@ class FTP extends Files
 	 * Move an uploaded file to another folder
 	 * @param string
 	 * @param string
-	 * @return string
+	 * @return boolean
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{

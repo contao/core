@@ -42,7 +42,7 @@ class Environment
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Environment
 	 */
 	protected static $objInstance;
 
@@ -78,9 +78,8 @@ class Environment
 
 	/**
 	 * Return an environment parameter
-	 * @param  string
+	 * @param string
 	 * @return string
-	 * @throws Exception
 	 */
 	public function __get($strKey)
 	{
@@ -107,7 +106,7 @@ class Environment
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Environment
 	 */
 	public static function getInstance()
 	{
@@ -594,6 +593,7 @@ class Environment
 	 * Test the user agent string for a certain keyword
 	 * @param string
 	 * @param string
+	 * @return boolean
 	 */
 	protected function has($haystack, $needle)
 	{

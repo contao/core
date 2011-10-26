@@ -42,7 +42,7 @@ abstract class Database
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Database
 	 */
 	protected static $objInstance;
 
@@ -100,7 +100,8 @@ abstract class Database
 
 	/**
 	 * Return an object property
-	 * @return string
+	 * @param string
+	 * @return string|null
 	 */
 	public function __get($strKey)
 	{
@@ -115,7 +116,7 @@ abstract class Database
 
 	/**
 	 * Instantiate a database driver object and return it (Factory)
-	 * @return object
+	 * @return Database
 	 * @throws Exception
 	 */
 	public static function getInstance()
@@ -141,7 +142,7 @@ abstract class Database
 	/**
 	 * Prepare a statement (return a Database_Statement object)
 	 * @param  string
-	 * @return object
+	 * @return Database_Statement
 	 */
 	public function prepare($strQuery)
 	{
@@ -152,8 +153,8 @@ abstract class Database
 
 	/**
 	 * Execute a query (return a Database_Result object)
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @return Database_Result
 	 */
 	public function execute($strQuery)
 	{
@@ -163,8 +164,8 @@ abstract class Database
 
 	/**
 	 * Execute a query and do not cache the result
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @return Database_Result
 	 */
 	public function executeUncached($strQuery)
 	{
@@ -174,8 +175,8 @@ abstract class Database
 
 	/**
 	 * Execute a raw query (return a Database_Result object)
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @return Database_Result
 	 */
 	public function query($strQuery)
 	{
@@ -186,9 +187,9 @@ abstract class Database
 
 	/**
 	 * Auto-generate a FIND_IN_SET() statement
-	 * @param  string
-	 * @param  mixed
-	 * @return object
+	 * @param string
+	 * @param mixed
+	 * @return string
 	 */
 	public function findInSet($strKey, $varSet)
 	{
@@ -203,13 +204,13 @@ abstract class Database
 
 	/**
 	 * Return all tables of a database as array
-	 * @param  string
-	 * @param  boolean
+	 * @param string
+	 * @param boolean
 	 * @return array
 	 */
-	public function listTables($strDatabase=false, $blnNoCache=false)
+	public function listTables($strDatabase=null, $blnNoCache=false)
 	{
-		if (!$strDatabase)
+		if ($strDatabase === null)
 		{
 			$strDatabase = $GLOBALS['TL_CONFIG']['dbDatabase'];
 		}
@@ -234,12 +235,12 @@ abstract class Database
 
 	/**
 	 * Determine if a particular database table exists
-	 * @param  string
-	 * @param  string
-	 * @param  boolean
+	 * @param string
+	 * @param string
+	 * @param boolean
 	 * @return boolean
 	 */
-	public function tableExists($strTable, $strDatabase=false, $blnNoCache=false)
+	public function tableExists($strTable, $strDatabase=null, $blnNoCache=false)
 	{
 		return in_array($strTable, $this->listTables($strDatabase, $blnNoCache));
 	}
@@ -247,8 +248,8 @@ abstract class Database
 
 	/**
 	 * Return all columns of a particular table as array
-	 * @param  string
-	 * @param  boolean
+	 * @param string
+	 * @param boolean
 	 * @return array
 	 */
 	public function listFields($strTable, $blnNoCache=false)
@@ -265,9 +266,9 @@ abstract class Database
 
 	/**
 	 * Determine if a particular column exists
-	 * @param  string
-	 * @param  string
-	 * @param  boolean
+	 * @param string
+	 * @param string
+	 * @param boolean
 	 * @return boolean
 	 */
 	public function fieldExists($strField, $strTable, $blnNoCache=false)
@@ -286,8 +287,8 @@ abstract class Database
 
 	/**
 	 * Return the field names of a particular table as array
-	 * @param  string
-	 * @param  boolean
+	 * @param string
+	 * @param boolean
 	 * @return array
 	 */
 	public function getFieldNames($strTable, $blnNoCache=false)
@@ -306,7 +307,7 @@ abstract class Database
 
 	/**
 	 * Change the current database
-	 * @param  string
+	 * @param string
 	 * @return boolean
 	 */
 	public function setDatabase($strDatabase)
@@ -343,7 +344,7 @@ abstract class Database
 
 
 	/**
-	 * Lock tables
+	 * Lock one or more tables
 	 * @param array
 	 */
 	public function lockTables($arrTables)
@@ -353,7 +354,7 @@ abstract class Database
 
 
 	/**
-	 * Unlock tables
+	 * Unlock all tables
 	 */
 	public function unlockTables()
 	{
@@ -363,7 +364,7 @@ abstract class Database
 
 	/**
 	 * Return the table size in bytes
-	 * @param  string
+	 * @param string
 	 * @return integer
 	 */
 	public function getSizeOf($strTable)
@@ -435,8 +436,8 @@ abstract class Database_Statement
 
 	/**
 	 * Validate the connection resource and store the query
-	 * @param  resource
-	 * @param  boolean
+	 * @param resource
+	 * @param boolean
 	 * @throws Exception
 	 */
 	public function __construct($resConnection, $blnDisableAutocommit=false)
@@ -493,8 +494,8 @@ abstract class Database_Statement
 
 	/**
 	 * Prepare a statement
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @return Database_Statement
 	 * @throws Exception
 	 */
 	public function prepare($strQuery)
@@ -537,8 +538,8 @@ abstract class Database_Statement
 	 * Usage example:
 	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
 	 * will be transformed into "UPDATE table SET id='my_id'".
-	 * @param  array
-	 * @return object
+	 * @param array
+	 * @return Database_Statement
 	 */
 	public function set($arrParams)
 	{
@@ -572,9 +573,9 @@ abstract class Database_Statement
 
 	/**
 	 * Limit the current result to a certain number of rows and take an offset value as second argument
-	 * @param  int
-	 * @param  int
-	 * @return object
+	 * @param integer
+	 * @param integer
+	 * @return Database_Statement
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
@@ -594,8 +595,8 @@ abstract class Database_Statement
 
 
 	/**
-	 * Escape parameters and execute the current statement
-	 * @return object
+	 * Escape the parameters and execute the current statement
+	 * @return Database_Result
 	 * @throws Exception
 	 */
 	public function execute()
@@ -630,7 +631,7 @@ abstract class Database_Statement
 
 	/**
 	 * Execute the current statement but do not cache the result
-	 * @return object
+	 * @return Database_Result
 	 * @throws Exception
 	 */
 	public function executeUncached()
@@ -649,8 +650,8 @@ abstract class Database_Statement
 
 	/**
 	 * Execute a query and return the result object
-	 * @param  string
-	 * @return object
+	 * @param string
+	 * @return Database_Result
 	 * @throws Exception
 	 */
 	public function query($strQuery='')
@@ -706,8 +707,8 @@ abstract class Database_Statement
 
 
 	/**
-	 * Escape parameters and serialize objects and arrays
-	 * @param  array
+	 * Escape the parameters and serialize objects and arrays
+	 * @param array
 	 * @return array
 	 */
 	protected function escapeParams($arrParams)
@@ -744,9 +745,9 @@ abstract class Database_Statement
 
 	/**
 	 * Debug a query
-	 * @param object
+	 * @param Database_Result
 	 */
-	protected function debugQuery($objResult=false)
+	protected function debugQuery($objResult=null)
 	{
 		if (!$GLOBALS['TL_CONFIG']['debugMode'])
 		{
@@ -755,7 +756,7 @@ abstract class Database_Statement
 
 		$arrData[] = $this->strQuery;
 
-		if (!$objResult || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
+		if ($objResult !== null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
 		{
 			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
 			$GLOBALS['TL_DEBUG'][] = $arrData;
@@ -776,7 +777,7 @@ abstract class Database_Statement
 
 	/**
 	 * Explain the current query
-	 * @return int
+	 * @return string
 	 */
 	public function explain()
 	{
@@ -855,8 +856,8 @@ abstract class Database_Result
 
 	/**
 	 * Validate the connection resource and store the query
-	 * @param  resource
-	 * @param  string
+	 * @param resource
+	 * @param string
 	 * @throws Exception
 	 */
 	public function __construct($resResult, $strQuery)
@@ -882,10 +883,10 @@ abstract class Database_Result
 
 	/**
 	 * Set a particular field of the current row
-	 * @param string
+	 * @param mixed
 	 * @param string
 	 */
-	public function __set($strKey, $strValue)
+	public function __set($strKey, $varValue)
 	{
 		if ($this->intIndex < 0)
 		{
@@ -893,7 +894,7 @@ abstract class Database_Result
 		}
 
 		$this->blnModified = true;
-		$this->arrCache[$this->intIndex][$strKey] = $strValue;
+		$this->arrCache[$this->intIndex][$strKey] = $varValue;
 	}
 
 
@@ -906,8 +907,8 @@ abstract class Database_Result
 	 * - numFields: fields of the current result
 	 *
 	 * Throw an exception on requests for unknown fields.
-	 * @param  string
-	 * @return string
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -988,7 +989,7 @@ abstract class Database_Result
 
 	/**
 	 * Fetch a particular field of each row of the result
-	 * @param  string
+	 * @param string
 	 * @return array
 	 */
 	public function fetchEach($strKey)
@@ -1026,8 +1027,8 @@ abstract class Database_Result
 
 
 	/**
-	 * Get column information and return it as array
-	 * @param  int
+	 * Get the column information and return it as array
+	 * @param integer
 	 * @return array
 	 */
 	public function fetchField($intOffset=0)
@@ -1045,7 +1046,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the first row of the current result
-	 * @return object
+	 * @return Database_Result
 	 */
 	public function first()
 	{
@@ -1061,7 +1062,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the next row of the current result
-	 * @return mixed
+	 * @return Database_Result|boolean
 	 */
 	public function next()
 	{
@@ -1092,7 +1093,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the previous row of the current result
-	 * @return mixed
+	 * @return Database_Result|boolean
 	 */
 	public function prev()
 	{
@@ -1108,7 +1109,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the last row of the current result
-	 * @return mixed
+	 * @return Database_Result|boolean
 	 */
 	public function last()
 	{
@@ -1142,13 +1143,12 @@ abstract class Database_Result
 
 	/**
 	 * Reset the current result
-	 * @return object
+	 * @return Database_Result
 	 */
 	public function reset()
 	{
 		$this->intIndex = -1;
 		$this->blnDone = false;
-
 		return $this;
 	}
 

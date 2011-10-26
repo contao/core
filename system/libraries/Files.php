@@ -42,7 +42,7 @@ class Files
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Files
 	 */
 	protected static $objInstance;
 
@@ -61,7 +61,7 @@ class Files
 
 	/**
 	 * Instantiate a files driver object and return it (Factory)
-	 * @return object
+	 * @return Files
 	 */
 	public static function getInstance()
 	{
@@ -190,7 +190,7 @@ class Files
 		// Source file == target file
 		if ($strOldName == $strNewName)
 		{
-			return;
+			return true;
 		}
 
 		$this->validate($strOldName, $strNewName);
@@ -266,7 +266,7 @@ class Files
 	 * Move an uploaded file to another folder
 	 * @param string
 	 * @param string
-	 * @return string
+	 * @return boolean
 	 */
 	public function move_uploaded_file($strSource, $strDestination)
 	{

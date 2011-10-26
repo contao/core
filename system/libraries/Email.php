@@ -49,13 +49,13 @@ class Email extends System
 
 	/**
 	 * Mailer object
-	 * @var object
+	 * @var Email
 	 */
 	protected static $objMailer;
 
 	/**
 	 * Message object
-	 * @var object
+	 * @var Swift_Message
 	 */
 	protected $objMessage;
 
@@ -174,8 +174,8 @@ class Email extends System
 
 	/**
 	 * Set an object property
-	 * @param  string
-	 * @param  mixed
+	 * @param string
+	 * @param mixed
 	 * @throws Exception
 	 */
 	public function __set($strKey, $varValue)
@@ -325,7 +325,7 @@ class Email extends System
 	/**
 	 * Get CC e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
 	 */
 	public function sendCc()
@@ -337,7 +337,7 @@ class Email extends System
 	/**
 	 * Get BCC e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
 	 */
 	public function sendBcc()
@@ -349,7 +349,7 @@ class Email extends System
 	/**
 	 * Get ReplyTo e-mail addresses from an array, string or unlimited number of arguments
 	 *
-	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
 	 */
 	public function replyTo()
@@ -384,7 +384,7 @@ class Email extends System
 	/**
 	 * Get e-mail addresses from an array, string or unlimited number of arguments and send the e-mail
 	 *
-	 * Friendly name portions (e.g. Leo <leo@contao.org>) are allowed.
+	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
 	 * @return boolean
 	 */

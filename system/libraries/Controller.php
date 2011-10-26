@@ -435,7 +435,6 @@ abstract class Controller extends System
 	/**
 	 * Generate a content element and return it as HTML string
 	 * @param integer
-	 * @param string
 	 * @return string
 	 */
 	protected function getContentElement($intId)
@@ -521,7 +520,6 @@ abstract class Controller extends System
 	/**
 	 * Generate a form and return it as HTML string
 	 * @param integer
-	 * @param string
 	 * @return string
 	 */
 	protected function getForm($varId)
@@ -554,7 +552,7 @@ abstract class Controller extends System
 	/**
 	 * Get the details of a page including inherited parameters and return it as object
 	 * @param integer
-	 * @return object
+	 * @return Database_Result|null
 	 */
 	protected function getPageDetails($intId)
 	{
@@ -741,8 +739,7 @@ abstract class Controller extends System
 	 */
 	protected function getPageSections()
 	{
-		$arrSections = array('header', 'left', 'right', 'main', 'footer');
-		return array_merge($arrSections, trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
+		return array_merge(array('header', 'left', 'right', 'main', 'footer'), trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']));
 	}
 
 
@@ -894,11 +891,11 @@ abstract class Controller extends System
 	 * @param integer
 	 * @param string
 	 * @param string
-	 * @return string
+	 * @return string|null
 	 */
 	protected function getImage($image, $width, $height, $mode='', $target=null)
 	{
-		if (!strlen($image))
+		if ($image == '')
 		{
 			return null;
 		}
@@ -1188,7 +1185,7 @@ abstract class Controller extends System
 
 	/**
 	 * Print an article as PDF and stream it to the browser
-	 * @param object
+	 * @param Database_Result
 	 */
 	protected function printArticleAsPdf(Database_Result $objArticle)
 	{
@@ -2758,7 +2755,8 @@ abstract class Controller extends System
 
 	/**
 	 * Create an initial version of a record
-	 * @param mixed
+	 * @param string
+	 * @param integer
 	 */
 	protected function createInitialVersion($strTable, $intId)
 	{
@@ -2780,7 +2778,8 @@ abstract class Controller extends System
 
 	/**
 	 * Create a new version of a record
-	 * @param mixed
+	 * @param string
+	 * @param integer
 	 */
 	protected function createNewVersion($strTable, $intId)
 	{
@@ -2854,6 +2853,7 @@ abstract class Controller extends System
 	 * Return true if a class file exists
 	 * @param string
 	 * @param boolean
+	 * @return boolean
 	 */
 	protected function classFileExists($strClass, $blnNoCache=false)
 	{
@@ -2967,8 +2967,9 @@ abstract class Controller extends System
 	 * Return a "selected" attribute if the current option is selected
 	 * @param string
 	 * @param mixed
+	 * @return string
 	 */
-	protected function optionSelected($strName, $strValue)
+	protected function optionSelected($strName, $varValue)
 	{
 		$attribute = ' selected';
 
@@ -2982,7 +2983,7 @@ abstract class Controller extends System
 			}
 		}
 
-		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? $attribute : '';
+		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
 	}
 
 
@@ -2990,8 +2991,9 @@ abstract class Controller extends System
 	 * Return a "checked" attribute if the current option is checked
 	 * @param string
 	 * @param mixed
+	 * @return string
 	 */
-	protected function optionChecked($strName, $strValue)
+	protected function optionChecked($strName, $varValue)
 	{
 		$attribute = ' checked';
 
@@ -3005,14 +3007,14 @@ abstract class Controller extends System
 			}
 		}
 
-		return (is_array($strValue) ? in_array($strName, $strValue) : $strName == $strValue) ? $attribute : '';
+		return (is_array($varValue) ? in_array($strName, $varValue) : $strName == $varValue) ? $attribute : '';
 	}
 
 
 	/**
 	 * Find a content element in the TL_CTE array and return its value
 	 * @param string
-	 * @return mixed
+	 * @return string
 	 */
 	protected function findContentElement($strName)
 	{
@@ -3034,7 +3036,7 @@ abstract class Controller extends System
 	/**
 	 * Find a front end module in the FE_MOD array and return its value
 	 * @param string
-	 * @return mixed
+	 * @return string
 	 */
 	protected function findFrontendModule($strName)
 	{
@@ -3142,22 +3144,22 @@ abstract class Controller extends System
 
 	/**
 	 * Add an image to a template
-	 * @param object
+	 * @param Template
 	 * @param array
 	 * @param integer
 	 * @param string
 	 */
-	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=false, $strLightboxId=false)
+	protected function addImageToTemplate(Template $objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
 		$size = deserialize($arrItem['size']);
 		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
-		if (!$intMaxWidth)
+		if ($intMaxWidth === null)
 		{
 			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
 		}
 
-		if (!$strLightboxId)
+		if ($strLightboxId === null)
 		{
 			$strLightboxId = 'lightbox';
 		}
@@ -3235,7 +3237,7 @@ abstract class Controller extends System
 	 * @param object
 	 * @param array
 	 */
-	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
+	protected function addEnclosuresToTemplate(Template $objTemplate, $arrItem)
 	{
 		$arrEnclosure = deserialize($arrItem['enclosure'], true);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));

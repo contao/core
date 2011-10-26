@@ -210,7 +210,6 @@ abstract class Template extends Controller
 	/**
 	 * Parse the template file and return it as string
 	 * @return string
-	 * @throws Exception
 	 */
 	public function parse()
 	{
@@ -294,14 +293,13 @@ abstract class Template extends Controller
 			echo "\n\n" . '<pre id="debug" style="width:80%;overflow:auto;margin:24px auto;padding:9px;background:#fff">' . "\n";
 			echo "<strong>Debug information</strong>\n\n";
 			print_r($GLOBALS['TL_DEBUG']);
-			echo '</pre>'
-				.'</div>';
+			echo '</pre>';
 		}
 	}
 
 
 	/**
-	 * Minify HTML markup preserving pre, script, style and textarea tags
+	 * Minify the HTML markup preserving pre, script, style and textarea tags
 	 * @param string
 	 * @return string
 	 */

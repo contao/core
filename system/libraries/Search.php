@@ -42,7 +42,7 @@ class Search extends System
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Search
 	 */
 	protected static $objInstance;
 
@@ -55,7 +55,7 @@ class Search extends System
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Search
 	 */
 	public static function getInstance()
 	{
@@ -295,10 +295,10 @@ class Search extends System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return object
+	 * @return Database_Result
 	 * @throws Exception
 	 */
-	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=false, $intRows=0, $intOffset=0, $blnFuzzy=false)
+	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=null, $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
 		$this->import('String');
 		$this->import('Database');

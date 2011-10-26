@@ -42,7 +42,7 @@ class Session
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Session
 	 */
 	protected static $objInstance;
 
@@ -54,7 +54,7 @@ class Session
 
 
 	/**
-	 * Get session
+	 * Get the session
 	 */
 	protected function __construct()
 	{
@@ -76,7 +76,7 @@ class Session
 
 
 	/**
-	 * Save session
+	 * Save the session
 	 */
 	public function __destruct()
 	{
@@ -105,7 +105,7 @@ class Session
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Session
 	 */
 	public static function getInstance()
 	{
@@ -121,7 +121,7 @@ class Session
 	/**
 	 * Return a particular session parameter
 	 * @param string
-	 * @return array
+	 * @return mixed
 	 */
 	public function get($strKey)
 	{
@@ -143,7 +143,6 @@ class Session
 	/**
 	 * Remove a particular session parameter
 	 * @param string
-	 * @param mixed
 	 */
 	public function remove($strKey)
 	{

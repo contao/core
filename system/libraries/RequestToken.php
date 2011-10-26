@@ -42,7 +42,7 @@ class RequestToken extends System
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var RequestToken
 	 */
 	protected static $objInstance;
 
@@ -90,7 +90,7 @@ class RequestToken extends System
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return RequestToken
 	 */
 	public static function getInstance()
 	{
@@ -115,6 +115,7 @@ class RequestToken extends System
 
 	/**
 	 * Validate a token
+	 * @param string
 	 * @return boolean
 	 */
 	public function validate($strToken)

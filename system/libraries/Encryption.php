@@ -42,7 +42,7 @@ class Encryption
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Encryption
 	 */
 	protected static $objInstance;
 
@@ -79,7 +79,7 @@ class Encryption
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return Encryption
 	 */
 	public static function getInstance()
 	{
@@ -94,8 +94,8 @@ class Encryption
 
 	/**
 	 * Encrypt a value
-	 * @param  mixed
-	 * @param  string
+	 * @param mixed
+	 * @param string
 	 * @return string
 	 */
 	public function encrypt($varValue, $strKey=null)
@@ -133,8 +133,8 @@ class Encryption
 
 	/**
 	 * Decrypt a value
-	 * @param  mixed
-	 * @param  string
+	 * @param mixed
+	 * @param string
 	 * @return string
 	 */
 	public function decrypt($varValue, $strKey=null)

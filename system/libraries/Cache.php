@@ -42,7 +42,7 @@ class Cache extends System
 
 	/**
 	 * Current object instance (Singleton)
-	 * @var object
+	 * @var Cache
 	 */
 	protected static $objInstance;
 
@@ -55,7 +55,6 @@ class Cache extends System
 
 	/**
 	 * Prevent direct instantiation (Singleton) 
-	 * @param string
 	 */
 	protected function __construct() {}
 
@@ -111,7 +110,7 @@ class Cache extends System
 
 	/**
 	 * Instantiate a new cache object and return it (Factory)
-	 * @return object
+	 * @return Cache
 	 */
 	public static function getInstance()
 	{
