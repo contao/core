@@ -73,29 +73,20 @@ class BackendTemplate extends Template
 			$this->base = $this->Environment->base;
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 
+			// Fallback to English if the user language is not supported
+			$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
+
 			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
 			{
-				if (strncmp($file, 'tiny', 4) === 0)
+				$arrRteFields = array();
+
+				foreach ($fields as $field)
 				{
-					// Concat the field IDs for TinyMCE
-					$arrRteFields = array();
-
-					foreach ($fields as $field)
-					{
-						$arrRteFields[] = $field['id'];
-					}
-
-					$this->rteFields = implode(',', $arrRteFields);
-
-					// Fallback to English if the user language is not supported
-					$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
-				}
-				else
-				{
-					// Otherwise simply pass the fields array
-					$this->ceFields = $fields;
+					$arrRteFields[] = $field['id'];
 				}
 
+				$this->rteFields = implode(',', $arrRteFields); // TinyMCE
+				$this->ceFields = $fields; // Other RTEs
 				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
 
 				if (!file_exists($strFile))

@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1103 (Change)
+--------------
+Custom TinyMCE configuration files do not have to start with "tiny" anymore
+(see #3582).
+
 r1100 (Change)
 --------------
 Pass the content elements as array to the mod_article template, so custom
