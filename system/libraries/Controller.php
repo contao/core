@@ -1973,51 +1973,63 @@ abstract class Controller extends System
 					switch ($elements[1])
 					{
 						case 'page_id':
+							trigger_error('The insert tag "env::page_id" is deprecated. Please use "page::id" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->id;
 							break;
 
 						case 'page_alias':
+							trigger_error('The insert tag "env::page_alias" is deprecated. Please use "page::alias" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->alias;
 							break;
 
 						case 'page_name':
+							trigger_error('The insert tag "env::page_name" is deprecated. Please use "page::title" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->title;
 							break;
 
 						case 'page_title':
-							$arrCache[$strTag] = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
+							trigger_error('The insert tag "env::page_title" is deprecated. Please use "page::pageTitle" instead.', E_USER_NOTICE);
+							$arrCache[$strTag] = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
 							break;
 
 						case 'page_language':
+							trigger_error('The insert tag "env::page_language" is deprecated. Please use "page::language" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->language;
 							break;
 
 						case 'parent_alias':
+							trigger_error('The insert tag "env::parent_alias" is deprecated. Please use "page::parentAlias" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->parentAlias;
 							break;
 
 						case 'parent_name':
+							trigger_error('The insert tag "env::parent_name" is deprecated. Please use "page::parentTitle" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->parentTitle;
 							break;
 
 						case 'parent_title':
+							trigger_error('The insert tag "env::parent_title" is deprecated. Please use "page::parentPageTitle" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->parentPageTitle;
 							break;
 
 						case 'main_alias':
+							trigger_error('The insert tag "env::main_alias" is deprecated. Please use "page::mainAlias" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->mainAlias;
 							break;
 
 						case 'main_name':
+							trigger_error('The insert tag "env::main_name" is deprecated. Please use "page::mainTitle" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->mainTitle;
 							break;
 
 						case 'main_title':
+							trigger_error('The insert tag "env::main_title" is deprecated. Please use "page::mainPageTitle" instead.', E_USER_NOTICE);
 							$arrCache[$strTag] = $objPage->mainPageTitle;
 							break;
 
 						case 'website_title':
-							$arrCache[$strTag] = strlen($objPage->rootTitle) ? $objPage->rootTitle : $GLOBALS['TL_CONFIG']['websiteTitle'];
+							trigger_error('The insert tag "env::website_title" is deprecated. Please use "page::rootTitle" instead.', E_USER_NOTICE);
+							$arrCache[$strTag] = $objPage->rootTitle;
 							break;
 
 						case 'host':
@@ -2060,6 +2072,24 @@ abstract class Controller extends System
 							$arrCache[$strTag] = TL_PLUGINS_URL;
 							break;
 					}
+					break;
+
+				// Page
+				case 'page':
+					if ($elements[1] == 'pageTitle' && $objPage->pageTitle == '')
+					{
+						$elements[1] = 'title';
+					}
+					elseif ($elements[1] == 'parentPageTitle' && $objPage->parentPageTitle == '')
+					{
+						$elements[1] = 'parentTitle';
+					}
+					elseif ($elements[1] == 'mainPageTitle' && $objPage->mainPageTitle == '')
+					{
+						$elements[1] = 'mainTitle';
+					}
+
+					$arrCache[$strTag] = specialchars($objPage->{$elements[1]});
 					break;
 
 				// User agent

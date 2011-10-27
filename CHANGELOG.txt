@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1105 (Change)
+--------------
+Removed the page properties from the "env" insert tag and added a "page" insert
+tag instead.
+
 r1103 (Change)
 --------------
 Custom TinyMCE configuration files do not have to start with "tiny" anymore
