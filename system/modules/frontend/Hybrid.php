@@ -73,7 +73,7 @@ abstract class Hybrid extends Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param Database_Result
 	 * @return string
 	 */
 	public function __construct(Database_Result $objElement)

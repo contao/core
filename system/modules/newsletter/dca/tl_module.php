@@ -131,8 +131,8 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default subscribe text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getSubscribeDefault($varValue)
 	{
@@ -147,8 +147,8 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default unsubscribe text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getUnsubscribeDefault($varValue)
 	{
@@ -189,7 +189,7 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Return all newsletter templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getNewsletterTemplates(DataContainer $dc)

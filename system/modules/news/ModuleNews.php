@@ -89,7 +89,7 @@ abstract class ModuleNews extends Module
 
 	/**
 	 * Parse one or more items and return them as array
-	 * @param object
+	 * @param Database_Result
 	 * @param boolean
 	 * @return array
 	 */
@@ -222,7 +222,7 @@ abstract class ModuleNews extends Module
 
 	/**
 	 * Return the meta fields of a news article as array
-	 * @param object
+	 * @param Database_Result
 	 * @return array
 	 */
 	protected function getMetaFields(Database_Result $objArticle)
@@ -270,7 +270,7 @@ abstract class ModuleNews extends Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param object
+	 * @param Database_Result
 	 * @param boolean
 	 * @return string
 	 */
@@ -358,7 +358,7 @@ abstract class ModuleNews extends Module
 	/**
 	 * Generate a link and return it as string
 	 * @param string
-	 * @param object
+	 * @param Database_Result
 	 * @param boolean
 	 * @param boolean
 	 * @return string

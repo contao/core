@@ -1101,7 +1101,6 @@ class StyleSheets extends Backend
 
 	/**
 	 * Return a form to choose an existing style sheet and import it
-	 * @param object
 	 * @return string
 	 */
 	public function importStyleSheet()

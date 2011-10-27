@@ -41,7 +41,7 @@ abstract class Backend extends Controller
 {
 
 	/**
-	 * Load database object
+	 * Load the database object
 	 */
 	protected function __construct()
 	{

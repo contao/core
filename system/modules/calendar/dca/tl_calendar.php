@@ -462,7 +462,8 @@ class tl_calendar extends Backend
 
 	/**
 	 * Check the RSS-feed alias
-	 * @param object
+	 * @param mixed
+	 * @param DataContainer
 	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
@@ -513,7 +514,7 @@ class tl_calendar extends Backend
 	 * 
 	 * This method is triggered when a single calendar or multiple calendars
 	 * are modified (edit/editAll).
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{

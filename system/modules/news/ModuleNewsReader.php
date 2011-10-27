@@ -97,7 +97,7 @@ class ModuleNewsReader extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

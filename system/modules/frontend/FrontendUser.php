@@ -42,7 +42,7 @@ class FrontendUser extends User
 
 	/**
 	 * Current object instance (do not remove)
-	 * @var object
+	 * @var FrontendUser
 	 */
 	protected static $objInstance;
 
@@ -164,7 +164,7 @@ class FrontendUser extends User
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return FrontendUser
 	 */
 	public static function getInstance()
 	{
@@ -287,7 +287,8 @@ class FrontendUser extends User
 
 	/**
 	 * Save the original group membership
-	 * @param  int
+	 * @param string
+	 * @param integer
 	 * @return boolean
 	 */
 	public function findBy($strRefField, $varRefId)
@@ -304,8 +305,8 @@ class FrontendUser extends User
 
 	/**
 	 * Restore the original group membership
-	 * @param  boolean
-	 * @return int
+	 * @param boolean
+	 * @return integer
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -320,7 +321,6 @@ class FrontendUser extends User
 
 	/**
 	 * Set all user properties from a database record
-	 * @param object
 	 */
 	protected function setUserFromDb()
 	{

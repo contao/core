@@ -499,7 +499,7 @@ class tl_article extends Backend
 	/**
 	 * Auto-generate an article alias if it has not been set yet
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
@@ -533,7 +533,7 @@ class tl_article extends Backend
 
 	/**
 	 * Return all active page sections as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getActivePageSections(DataContainer $dc)
@@ -692,7 +692,7 @@ class tl_article extends Backend
 
 	/**
 	 * Return the paste article button
-	 * @param object
+	 * @param DataContainer
 	 * @param array
 	 * @param string
 	 * @param boolean

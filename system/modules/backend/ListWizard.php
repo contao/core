@@ -162,7 +162,7 @@ class ListWizard extends Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function importList(DataContainer $dc)

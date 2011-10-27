@@ -488,7 +488,7 @@ class tl_news_archive extends Backend
 	 * 
 	 * This method is triggered when a single news archive or multiple news
 	 * archives are modified (edit/editAll).
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function scheduleUpdate(DataContainer $dc)
 	{
@@ -507,7 +507,9 @@ class tl_news_archive extends Backend
 
 	/**
 	 * Check the RSS-feed alias
-	 * @param object
+	 * @param mixed
+	 * @param DataContainer
+	 * @return mixed
 	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)

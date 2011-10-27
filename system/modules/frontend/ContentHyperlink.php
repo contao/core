@@ -48,7 +48,7 @@ class ContentHyperlink extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
 	 */
 	protected function compile()
 	{

@@ -592,7 +592,7 @@ class tl_calendar_events extends Backend
 	/**
 	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
@@ -628,7 +628,7 @@ class tl_calendar_events extends Backend
 	/**
 	 * Automatically set the end time if not set
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function setEmptyEndTime($varValue, DataContainer $dc)
@@ -645,7 +645,7 @@ class tl_calendar_events extends Backend
 	/**
 	 * Set the end date to null if empty
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function setEmptyEndDate($varValue, DataContainer $dc)
@@ -711,7 +711,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -757,7 +757,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -863,7 +863,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)

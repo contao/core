@@ -225,9 +225,9 @@ class FrontendTemplate extends Template
 	 * @param string
 	 * @return string
 	 */
-	public function getCustomSections($strKey=false)
+	public function getCustomSections($strKey=null)
 	{
-		if ($strKey && $this->sPosition != $strKey)
+		if ($strKey != '' && $this->sPosition != $strKey)
 		{
 			return '';
 		}

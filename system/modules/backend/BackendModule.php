@@ -61,7 +61,7 @@ abstract class BackendModule extends Backend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function __construct(DataContainer $objDc=null)
 	{

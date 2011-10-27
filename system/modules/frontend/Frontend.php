@@ -60,7 +60,7 @@ abstract class Frontend extends Controller
 
 
 	/**
-	 * Load database object
+	 * Load the database object
 	 */
 	protected function __construct()
 	{
@@ -366,7 +366,7 @@ abstract class Frontend extends Controller
 	/**
 	 * Prepare a text to be used in the meta description tag
 	 * @param string
-	 * @return boolean
+	 * @return string
 	 */
 	protected function prepareMetaDescription($strText)
 	{

@@ -79,7 +79,7 @@ class ModulePersonalData extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

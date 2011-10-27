@@ -210,7 +210,7 @@ class Ajax extends Backend
 
 	/**
 	 * Ajax actions that do require a data container object
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function executePostActions(DataContainer $dc)
 	{

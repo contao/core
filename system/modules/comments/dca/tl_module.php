@@ -111,7 +111,7 @@ class tl_module_comments extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getCommentTemplates(DataContainer $dc)

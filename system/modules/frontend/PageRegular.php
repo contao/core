@@ -42,7 +42,7 @@ class PageRegular extends Frontend
 
 	/**
 	 * Generate a regular page
-	 * @param object
+	 * @param Database_Result
 	 */
 	public function generate(Database_Result $objPage)
 	{
@@ -172,7 +172,7 @@ class PageRegular extends Frontend
 	/**
 	 * Get a page layout and return it as database result object
 	 * @param integer
-	 * @return object
+	 * @return Database_Result
 	 */
 	protected function getPageLayout($intId)
 	{
@@ -203,8 +203,8 @@ class PageRegular extends Frontend
 
 	/**
 	 * Create a new template
-	 * @param object
-	 * @param object
+	 * @param Database_Result
+	 * @param Database_Result
 	 */
 	protected function createTemplate(Database_Result $objPage, Database_Result $objLayout)
 	{
@@ -358,8 +358,8 @@ class PageRegular extends Frontend
 
 	/**
 	 * Create all header scripts
-	 * @param object
-	 * @param object
+	 * @param Database_Result
+	 * @param Database_Result
 	 */
 	protected function createHeaderScripts(Database_Result $objPage, Database_Result $objLayout)
 	{
@@ -494,8 +494,8 @@ class PageRegular extends Frontend
 
 	/**
 	 * Create all footer scripts
-	 * @param object
-	 * @param object
+	 * @param Database_Result
+	 * @param Database_Result
 	 */
 	protected function createFooterScripts(Database_Result $objPage, Database_Result $objLayout)
 	{

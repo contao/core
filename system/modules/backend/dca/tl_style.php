@@ -632,7 +632,7 @@ class tl_style extends Backend
 
 	/**
 	 * Return the color picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function colorPicker(DataContainer $dc)
@@ -643,7 +643,7 @@ class tl_style extends Backend
 
 	/**
 	 * Return the file picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function filePicker(DataContainer $dc)

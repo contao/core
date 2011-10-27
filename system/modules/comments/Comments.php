@@ -41,13 +41,13 @@ class Comments extends Frontend
 
 	/**
 	 * Add comments to a template
-	 * @param object
-	 * @param object
+	 * @param FrontendTemplate
+	 * @param stdClass
 	 * @param string
 	 * @param integer
 	 * @param array
 	 */
-	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate(FrontendTemplate $objTemplate, stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		global $objPage;
 		$this->import('String');

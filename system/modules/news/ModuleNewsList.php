@@ -79,7 +79,7 @@ class ModuleNewsList extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

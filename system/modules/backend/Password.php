@@ -166,7 +166,6 @@ class Password extends Widget
 
 	/**
 	 * Generate the label of the confirmation field and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmationLabel()
@@ -180,7 +179,6 @@ class Password extends Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmation()

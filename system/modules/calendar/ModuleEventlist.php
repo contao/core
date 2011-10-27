@@ -85,7 +85,7 @@ class ModuleEventlist extends Events
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

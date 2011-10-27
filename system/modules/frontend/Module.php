@@ -67,7 +67,7 @@ abstract class Module extends Frontend
 
 	/**
 	 * Initialize the object
-	 * @param object
+	 * @param Database_Result
 	 * @param string
 	 */
 	public function __construct(Database_Result $objModule, $strColumn='main')

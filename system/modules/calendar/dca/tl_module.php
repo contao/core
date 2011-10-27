@@ -195,6 +195,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return the calendar formats depending on the module type
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getFormats(DataContainer $dc)
@@ -244,7 +245,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getEventTemplates(DataContainer $dc)
@@ -262,7 +263,7 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getCalendarTemplates(DataContainer $dc)

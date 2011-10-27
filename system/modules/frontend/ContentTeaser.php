@@ -48,13 +48,14 @@ class ContentTeaser extends ContentElement
 
 	/**
 	 * Article object
-	 * @var object
+	 * @var Database_Result
 	 */
 	protected $objArticle;
 
 
 	/**
 	 * Check whether the target page and article are published
+	 * @return string
 	 */
 	public function generate()
 	{
@@ -75,7 +76,7 @@ class ContentTeaser extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
 	 */
 	protected function compile()
 	{

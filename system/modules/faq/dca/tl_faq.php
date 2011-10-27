@@ -333,8 +333,8 @@ class tl_faq extends Backend
 	/**
 	 * Auto-generate the FAQ alias if it has not been set yet
 	 * @param mixed
-	 * @param object
-	 * @return string
+	 * @param DataContainer
+	 * @return mixed
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -386,7 +386,7 @@ class tl_faq extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)

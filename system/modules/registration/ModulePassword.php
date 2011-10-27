@@ -71,7 +71,7 @@ class ModulePassword extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{
@@ -284,7 +284,7 @@ class ModulePassword extends Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param object
+	 * @param Database_Result
 	 */
 	protected function sendPasswordLink(Database_Result $objMember)
 	{

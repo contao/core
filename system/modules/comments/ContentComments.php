@@ -67,7 +67,7 @@ class ContentComments extends ContentElement
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

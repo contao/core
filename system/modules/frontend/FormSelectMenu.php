@@ -152,8 +152,8 @@ class FormSelectMenu extends Widget
 
 	/**
 	 * Return a parameter
-	 * @return string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{

@@ -64,7 +64,7 @@ class ModuleEventMenu extends ModuleCalendar
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

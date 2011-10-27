@@ -127,9 +127,9 @@ class Pagination extends Frontend
 
 	/**
 	 * Set the number of rows, the number of results per pages and the number of links
-	 * @param int
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
+	 * @param integer
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7)
 	{
@@ -277,7 +277,7 @@ class Pagination extends Frontend
 
 	/**
 	 * Generate all page links separated with the given argument and return them as string
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	public function getItemsAsString($strSeparator=' ')
