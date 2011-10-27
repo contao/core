@@ -89,6 +89,9 @@ window.addEvent('domready', function() {
     setStyle('height', myField.getStyle('height')).
     setStyle('width', myField.getStyle('width'));
 
+  // Unset the "required" attribute
+  myField.erase('required');
+
   // Custom onsubmit logic
   myForm.addEvent('submit', function() {
     var hidden = new Element('input', {
