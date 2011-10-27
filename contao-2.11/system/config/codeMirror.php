@@ -78,7 +78,7 @@ window.addEvent('domready', function() {
         myCodeMirror.getWrapperElement().
           getElement('.CodeMirror-scroll').
           toggleClass('fullscreen');
-        e.stop();
+        e.preventDefault();
       }
     }
   });
