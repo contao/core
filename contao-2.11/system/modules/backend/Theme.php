@@ -589,7 +589,7 @@ class Theme extends Backend
 
 	/**
 	 * Export a theme
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function exportTheme(DataContainer $dc)
 	{
@@ -668,9 +668,9 @@ class Theme extends Backend
 
 	/**
 	 * Add the table tl_theme
-	 * @param object
-	 * @param object
-	 * @param object
+	 * @param DOMDocument
+	 * @param DOMElement
+	 * @param Database_Result
 	 */
 	protected function addTableTlTheme(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -686,9 +686,9 @@ class Theme extends Backend
 
 	/**
 	 * Add the table tl_style_sheet
-	 * @param object
-	 * @param object
-	 * @param object
+	 * @param DOMDocument
+	 * @param DOMElement
+	 * @param Database_Result
 	 */
 	protected function addTableTlStyleSheet(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -732,9 +732,9 @@ class Theme extends Backend
 
 	/**
 	 * Add the table tl_module
-	 * @param object
-	 * @param object
-	 * @param object
+	 * @param DOMDocument
+	 * @param DOMElement
+	 * @param Database_Result
 	 */
 	protected function addTableTlModule(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -757,9 +757,9 @@ class Theme extends Backend
 
 	/**
 	 * Add the table tl_layout
-	 * @param object
-	 * @param object
-	 * @param object
+	 * @param DOMDocument
+	 * @param DOMElement
+	 * @param Database_Result
 	 */
 	protected function addTableTlLayout(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
 	{
@@ -782,9 +782,9 @@ class Theme extends Backend
 
 	/**
 	 * Add a data row to the XML document
-	 * @param object
-	 * @param object
-	 * @param object
+	 * @param DOMDocument
+	 * @param DOMElement
+	 * @param Database_Result
 	 */
 	protected function addDataRow(DOMDocument $xml, DOMElement $table, Database_Result $objData)
 	{
@@ -810,7 +810,7 @@ class Theme extends Backend
 
 	/**
 	 * Recursively add a folder to the archive
-	 * @param object
+	 * @param ZipWriter
 	 * @param string
 	 */
 	protected function addFolderToArchive(ZipWriter $objArchive, $strFolder)
@@ -860,7 +860,7 @@ class Theme extends Backend
 
 	/**
 	 * Add templates to the archive
-	 * @param object
+	 * @param ZipWriter
 	 * @param string
 	 */
 	protected function addTemplatesToArchive(ZipWriter $objArchive, $strFolder)

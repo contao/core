@@ -196,7 +196,7 @@ abstract class Events extends Module
 
 	/**
 	 * Add an event to the array of active events
-	 * @param object
+	 * @param Database_Result
 	 * @param integer
 	 * @param integer
 	 * @param string
@@ -316,7 +316,7 @@ abstract class Events extends Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param object
+	 * @param Database_Result
 	 * @param string
 	 * @return string
 	 */
@@ -370,7 +370,7 @@ abstract class Events extends Module
 
 	/**
 	 * Return the begin and end timestamp and an error message as array
-	 * @param object
+	 * @param Date
 	 * @param string
 	 * @return array
 	 */

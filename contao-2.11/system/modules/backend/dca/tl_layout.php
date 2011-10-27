@@ -401,7 +401,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all style sheets of the current theme
-	 * @param array
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getStyleSheets(DataContainer $dc)
@@ -482,7 +482,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all page templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getPageTemplates(DataContainer $dc)
@@ -500,7 +500,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all MooTools templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getMooToolsTemplates(DataContainer $dc)

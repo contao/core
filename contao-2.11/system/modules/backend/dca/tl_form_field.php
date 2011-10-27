@@ -556,7 +556,7 @@ class tl_form_field extends Backend
 
 	/**
 	 * Return a list of form fields
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getFields(DataContainer $dc)

@@ -400,7 +400,7 @@ class tl_member extends Backend
 	/**
 	 * Call the "setNewPassword" callback
 	 * @param string
-	 * @param object
+	 * @param User
 	 * @return string
 	 */
 	public function setNewPassword($strPassword, $user)
@@ -434,7 +434,7 @@ class tl_member extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{

@@ -254,7 +254,7 @@ class News extends Frontend
 
 	/**
 	 * Return the link of a news article
-	 * @param object
+	 * @param Database_Result
 	 * @param string
 	 * @return string
 	 */

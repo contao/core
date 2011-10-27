@@ -74,6 +74,7 @@ class Messages extends Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
+	 * @return string
 	 */
 	public function languageFallback()
 	{

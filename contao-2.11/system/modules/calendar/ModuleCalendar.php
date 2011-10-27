@@ -107,7 +107,7 @@ class ModuleCalendar extends Events
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

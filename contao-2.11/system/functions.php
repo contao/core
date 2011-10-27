@@ -110,10 +110,10 @@ function __autoload($strClassName)
  *
  * Handle errors like PHP does it natively but additionaly log them to the
  * application error log file.
- * @param int
+ * @param integer
  * @param string
  * @param string
- * @param int
+ * @param integer
  */
 function __error($intType, $strMessage, $strFile, $intLine)
 {
@@ -178,7 +178,7 @@ function __error($intType, $strMessage, $strFile, $intLine)
  * Log exceptions in the application log file and print them to the screen
  * if "display_errors" is set. Callback to a custom exception handler defined
  * in the application file "config/error.php".
- * @param object
+ * @param Exception
  */
 function __exception($e)
 {
@@ -427,6 +427,7 @@ function trimsplit($strPattern, $strString)
 /**
  * Convert all ampersands into their HTML entity (default) or unencoded value
  * @param string
+ * @param boolean
  * @return string
  */
 function ampersand($strString, $blnEncode=true)
@@ -568,7 +569,7 @@ function length_sort_desc($a, $b)
 /**
  * Insert a parameter or array into an existing array at a particular index
  * @param array
- * @param int
+ * @param integer
  * @param mixed
  */
 function array_insert(&$arrCurrent, $intIndex, $arrNew)
@@ -642,7 +643,7 @@ function array_move_up($arrStack, $intIndex)
 /**
  * Move an array element one position down
  * @param array
- * @param int
+ * @param integer
  * @return array
  */
 function array_move_down($arrStack, $intIndex)
@@ -666,7 +667,7 @@ function array_move_down($arrStack, $intIndex)
 /**
  * Delete a particular element of an array
  * @param array
- * @param int
+ * @param integer
  * @return array
  */
 function array_delete($arrStack, $intIndex)

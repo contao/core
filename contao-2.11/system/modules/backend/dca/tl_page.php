@@ -912,7 +912,7 @@ class tl_page extends Backend
 	/**
 	 * Auto-generate a page alias if it has not been set yet
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
@@ -983,7 +983,7 @@ class tl_page extends Backend
 
 	/**
 	 * Convert language tags to lowercase letters
-	 * @param mixed
+	 * @param string
 	 * @return string
 	 */
 	public function languageToLower($varValue)
@@ -994,7 +994,7 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically create an article in the main column of a new page
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function generateArticle(DataContainer $dc)
 	{
@@ -1043,8 +1043,8 @@ class tl_page extends Backend
 
 	/**
 	 * Check the sitemap alias
-	 * @param object
 	 * @param mixed
+	 * @param DataContainer
 	 * @throws Exception
 	 */
 	public function checkFeedAlias($varValue, DataContainer $dc)
@@ -1070,7 +1070,8 @@ class tl_page extends Backend
 	/**
 	 * Prevent circular references
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
+	 * @return mixed
 	 */
 	public function checkJumpTo($varValue, DataContainer $dc)
 	{
@@ -1086,7 +1087,8 @@ class tl_page extends Backend
 	/**
 	 * Check the DNS settings
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
+	 * @return mixed
 	 */
 	public function checkDns($varValue, DataContainer $dc)
 	{
@@ -1097,7 +1099,8 @@ class tl_page extends Backend
 	/**
 	 * Make sure there is only one fallback per domain (thanks to Andreas Schempp)
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
+	 * @return mixed
 	 * @throws Exception
 	 */
 	public function checkFallback($varValue, DataContainer $dc)
@@ -1137,7 +1140,7 @@ class tl_page extends Backend
 
 	/**
 	 * Returns all allowed page types as array
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function getPageTypes(DataContainer $dc)
@@ -1184,7 +1187,7 @@ class tl_page extends Backend
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param object
+	 * @param DataContainer
 	 * @param string
 	 * @param boolean
 	 * @return string
@@ -1320,7 +1323,7 @@ class tl_page extends Backend
 
 	/**
 	 * Return the paste page button
-	 * @param object
+	 * @param DataContainer
 	 * @param array
 	 * @param string
 	 * @param boolean
@@ -1420,7 +1423,7 @@ class tl_page extends Backend
 
 	/**
 	 * Recursively add pages to a sitemap
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function updateSitemap(DataContainer $dc)
 	{

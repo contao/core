@@ -106,7 +106,7 @@ class FormPassword extends Widget
 	/**
 	 * Validate input and set value
 	 * @param mixed
-	 * @return string
+	 * @return mixed
 	 */
 	protected function validator($varInput)
 	{
@@ -159,7 +159,6 @@ class FormPassword extends Widget
 
 	/**
 	 * Generate the label of the confirmation field and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmationLabel()
@@ -175,7 +174,6 @@ class FormPassword extends Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmation()

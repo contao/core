@@ -84,7 +84,7 @@ class ModuleNewsMenu extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

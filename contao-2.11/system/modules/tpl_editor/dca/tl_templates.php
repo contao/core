@@ -281,6 +281,8 @@ class tl_templates extends Backend
 
 	/**
 	 * Update the file cache if a template is renamed
+	 * @param string
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function updateTemplateCache($strFile, DataContainer $dc)
@@ -306,7 +308,7 @@ class tl_templates extends Backend
 
 	/**
 	 * Update the file cache if a template is deleted
-	 * @return string
+	 * @param string
 	 */
 	public function deleteFromTemplateCache($strFile)
 	{
@@ -320,6 +322,7 @@ class tl_templates extends Backend
 	 * Recursively scan the templates directory and return all folders as array
 	 * @param string
 	 * @param integer
+	 * @return string
 	 */
 	protected function getTargetFolders($strFolder, $intLevel=1)
 	{

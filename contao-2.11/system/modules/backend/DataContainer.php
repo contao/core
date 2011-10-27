@@ -493,8 +493,8 @@ class DataContainer extends Backend
 	 * @param array
 	 * @param boolean
 	 * @param array
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
 	 * @return string
 	 */
 	protected function generateButtons($arrRow, $strTable, $arrRootIds=array(), $blnCircularReference=false, $arrChildRecordIds=null, $strPrevious=null, $strNext=null)

@@ -163,8 +163,8 @@ class tl_module_registration extends Backend
 
 	/**
 	 * Load the default activation text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getActivationDefault($varValue)
 	{
@@ -179,8 +179,8 @@ class tl_module_registration extends Backend
 
 	/**
 	 * Load the default password text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getPasswordDefault($varValue)
 	{

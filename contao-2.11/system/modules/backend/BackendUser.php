@@ -149,7 +149,7 @@ class BackendUser extends User
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return object
+	 * @return BackendUser
 	 */
 	public static function getInstance()
 	{
@@ -199,7 +199,7 @@ class BackendUser extends User
 	 * Check whether the current user has a certain access right
 	 * @param string
 	 * @param array
-	 * @return object
+	 * @return boolean
 	 */
 	public function hasAccess($field, $array)
 	{
@@ -236,7 +236,7 @@ class BackendUser extends User
 
 	/**
 	 * Return true if the current user is allowed to do the current operation on the current page
-	 * @param int
+	 * @param integer
 	 * @param array
 	 * @return boolean
 	 */
@@ -304,7 +304,6 @@ class BackendUser extends User
 
 	/**
 	 * Set all user properties from a database record
-	 * @param object
 	 */
 	protected function setUserFromDb()
 	{

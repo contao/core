@@ -139,7 +139,7 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all list templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getListTemplates(DataContainer $dc)
@@ -157,7 +157,7 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all info templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getInfoTemplates(DataContainer $dc)

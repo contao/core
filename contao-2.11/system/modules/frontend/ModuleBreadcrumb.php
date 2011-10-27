@@ -71,7 +71,7 @@ class ModuleBreadcrumb extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

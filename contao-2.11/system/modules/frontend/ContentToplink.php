@@ -48,11 +48,11 @@ class ContentToplink extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
 	 */
 	protected function compile()
 	{
-		if (!strlen($this->linkTitle))
+		if ($this->linkTitle == '')
 		{
 			$this->linkTitle = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 		}

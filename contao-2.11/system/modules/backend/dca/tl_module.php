@@ -659,7 +659,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getNavigationTemplates(DataContainer $dc)
@@ -677,7 +677,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all member templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getMemberTemplates(DataContainer $dc)
@@ -695,7 +695,7 @@ class tl_module extends Backend
 
 	/**
 	 * Return all search templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getSearchTemplates(DataContainer $dc)

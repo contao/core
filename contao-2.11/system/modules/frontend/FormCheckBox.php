@@ -85,8 +85,8 @@ class FormCheckBox extends Widget
 
 	/**
 	 * Return a parameter
-	 * @return string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -104,7 +104,7 @@ class FormCheckBox extends Widget
 
 
 	/**
-	 * Check options if the field is mandatory
+	 * Check the options if the field is mandatory
 	 */
 	public function validate()
 	{

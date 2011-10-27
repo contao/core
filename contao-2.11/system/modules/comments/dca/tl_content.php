@@ -112,7 +112,7 @@ class tl_content_comments extends Backend
 
 	/**
 	 * Return all comments templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getCommentsTemplates(DataContainer $dc)

@@ -392,8 +392,8 @@ class tl_files extends Backend
 	/**
 	 * Check a file name and romanize it
 	 * @param mixed
-	 * @param object
-	 * @return string
+	 * @param DataContainer
+	 * @return mixed
 	 */
 	public function checkFilename($varValue, DataContainer $dc)
 	{

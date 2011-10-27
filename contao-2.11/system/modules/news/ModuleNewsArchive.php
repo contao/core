@@ -78,7 +78,7 @@ class ModuleNewsArchive extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
 	 */
 	protected function compile()
 	{

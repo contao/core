@@ -797,7 +797,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article alias wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function editArticleAlias(DataContainer $dc)
@@ -808,7 +808,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article alias)
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -855,7 +855,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit alias wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function editAlias(DataContainer $dc)
@@ -932,7 +932,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit form wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function editForm(DataContainer $dc)
@@ -969,7 +969,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit module wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function editModule(DataContainer $dc)
@@ -998,7 +998,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return all gallery templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getGalleryTemplates(DataContainer $dc)
@@ -1031,7 +1031,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article teaser wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function editArticle(DataContainer $dc)
@@ -1042,7 +1042,7 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article teaser)
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getArticles(DataContainer $dc)
@@ -1114,7 +1114,7 @@ class tl_content extends Backend
 	/**
 	 * Dynamically set the codeMirror syntax
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function setRteSyntax($varValue, DataContainer $dc)
@@ -1166,7 +1166,7 @@ class tl_content extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)

@@ -42,7 +42,7 @@ class ContentDownload extends ContentElement
 
 	/**
 	 * File object
-	 * @var object
+	 * @var File
 	 */
 	protected $objFile;
 
@@ -87,7 +87,7 @@ class ContentDownload extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
 	 */
 	protected function compile()
 	{

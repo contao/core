@@ -455,7 +455,7 @@ class ModuleTasks extends BackendModule
 
 	/**
 	 * Select all tasks from the DB and return the result object
-	 * @return object
+	 * @return Database_Result
 	 */
 	protected function getTaskObject()
 	{
@@ -587,7 +587,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Return the title widget as object
 	 * @param mixed
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getTitleWidget($value=null)
 	{
@@ -625,7 +625,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Return the assignedTo widget as object
 	 * @param mixed
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getAssignedToWidget($value=null)
 	{
@@ -686,7 +686,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Return the deadline widget as object
 	 * @param mixed
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getDeadlineWidget($value=null)
 	{
@@ -724,7 +724,7 @@ class ModuleTasks extends BackendModule
 	 * Return the status widget as object
 	 * @param mixed
 	 * @param integer
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getStatusWidget($value=null, $progress=null)
 	{
@@ -773,7 +773,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Return the progress widget as object
 	 * @param mixed
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getProgressWidget($value=null)
 	{
@@ -820,7 +820,7 @@ class ModuleTasks extends BackendModule
 	/**
 	 * Return the comment widget as object
 	 * @param mixed
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getCommentWidget($value=null)
 	{
@@ -857,7 +857,7 @@ class ModuleTasks extends BackendModule
 
 	/**
 	 * Return the notify widget as object
-	 * @return object
+	 * @return Widget
 	 */
 	protected function getNotifyWidget()
 	{

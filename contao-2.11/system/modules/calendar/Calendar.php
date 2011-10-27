@@ -299,7 +299,7 @@ class Calendar extends Frontend
 
 	/**
 	 * Add an event to the array of active events
-	 * @param object
+	 * @param Database_Result
 	 * @param integer
 	 * @param integer
 	 * @param string

@@ -96,7 +96,7 @@ class tl_module_rss_reader extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getRssTemplates(DataContainer $dc)

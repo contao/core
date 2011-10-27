@@ -558,7 +558,7 @@ class tl_user extends Backend
 
 	/**
 	 * Return a checkbox to delete session data
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function sessionField(DataContainer $dc)
@@ -627,7 +627,7 @@ class tl_user extends Backend
 	/**
 	 * Prevent administrators from downgrading their own account
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return mixed
 	 */
 	public function checkAdmin($varValue, DataContainer $dc)
@@ -646,7 +646,7 @@ class tl_user extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function storeDateAdded(DataContainer $dc)
 	{

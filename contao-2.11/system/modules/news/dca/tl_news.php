@@ -556,7 +556,7 @@ class tl_news extends Backend
 	/**
 	 * Auto-generate the news alias if it has not been set yet
 	 * @param mixed
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
@@ -610,7 +610,7 @@ class tl_news extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param object
+	 * @param DataContainer
 	 * @return array
 	 */
 	public function getArticleAlias(DataContainer $dc)
@@ -656,7 +656,7 @@ class tl_news extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param object
+	 * @param DataContainer
 	 */
 	public function adjustTime(DataContainer $dc)
 	{
@@ -721,7 +721,7 @@ class tl_news extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function pagePicker(DataContainer $dc)

@@ -42,7 +42,7 @@ class Newsletter extends Backend
 
 	/**
 	 * Renturn a form to choose an existing style sheet and import it
-	 * @param object
+	 * @param DataContainer
 	 * @return string
 	 */
 	public function send(DataContainer $objDc)
@@ -319,9 +319,9 @@ class Newsletter extends Backend
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param object
+	 * @param Database_Result
 	 * @param array
-	 * @return object
+	 * @return Email
 	 */
 	protected function generateEmailObject(Database_Result $objNewsletter, $arrAttachments)
 	{
@@ -354,8 +354,8 @@ class Newsletter extends Backend
 
 	/**
 	 * Compile the newsletter and send it
-	 * @param object
-	 * @param object
+	 * @param Email
+	 * @param Database_Result
 	 * @param array
 	 * @param string
 	 * @param string
@@ -404,7 +404,6 @@ class Newsletter extends Backend
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param object
 	 * @return string
 	 */
 	public function importRecipients()
@@ -547,7 +546,7 @@ class Newsletter extends Backend
 
 	/**
 	 * Synchronize newsletter subscription of new users
-	 * @param object
+	 * @param User
 	 * @param array
 	 */
 	public function createNewUser($userId, $arrData)
@@ -586,7 +585,7 @@ class Newsletter extends Backend
 
 	/**
 	 * Activate newsletter subscription of new users
-	 * @param object
+	 * @param User
 	 */
 	public function activateAccount($objUser)
 	{
@@ -617,8 +616,8 @@ class Newsletter extends Backend
 	/**
 	 * Synchronize newsletter subscription of existing users
 	 * @param mixed
-	 * @param object
-	 * @param object
+	 * @param User
+	 * @param Module
 	 * @return mixed
 	 */
 	public function synchronize($varValue, $objUser, $objModule=null)
@@ -700,8 +699,6 @@ class Newsletter extends Backend
 
 	/**
 	 * Update a particular member account
-	 * @param integer
-	 * @param object
 	 */
 	public function updateAccount()
 	{
@@ -790,7 +787,7 @@ class Newsletter extends Backend
 
 	/**
 	 * Get all editable newsletters and return them as array
-	 * @param object
+	 * @param Module
 	 * @return array
 	 */
 	public function getNewsletters($objModule)
