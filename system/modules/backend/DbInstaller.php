@@ -313,7 +313,7 @@ class DbInstaller extends Controller
 	protected function getFromDB()
 	{
 		$this->import('Database');
-		$tables = preg_grep('/^tl_/i', $this->Database->listTables(false, true));
+		$tables = preg_grep('/^tl_/i', $this->Database->listTables(null, true));
 
 		if (!count($tables))
 		{
