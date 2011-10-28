@@ -58,6 +58,12 @@ class Index extends Backend
 	 */
 	public function __construct()
 	{
+		// Redirect to the install tool
+		if (!Config::getInstance()->isComplete())
+		{
+			$this->redirect('install.php');
+		}
+
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
@@ -85,12 +91,6 @@ class Index extends Backend
 		elseif ($this->User->logout())
 		{
 			$this->reload();
-		}
-
-		// Redirect to the install tool
-		if (!$this->Config->isComplete())
-		{
-			$this->redirect('contao/install.php');
 		}
 
 		$this->loadLanguageFile('default');
