@@ -132,7 +132,7 @@ class File extends System
 	 */
 	public function __get($strKey)
 	{
-		$strCacheKey = __METHOD__ . '-' . $strKey;
+		$strCacheKey = __METHOD__ . '-' . $this->strFile . '-' . $strKey;
 
 		if (!isset($this->Cache->$strCacheKey))
 		{
