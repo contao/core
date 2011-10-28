@@ -103,10 +103,10 @@ if ($GLOBALS['TL_CONFIG']['websitePath'] === null)
 	{
 		$GLOBALS['TL_CONFIG']['websitePath'] = $path;
 
-		// Only store this value if the temp directory is writable,
-		// otherwise it will initialize a Files object and prevent the
-		// install tool from loading the Safe Mode Hack (see #3215).
-		if (is_writable(TL_ROOT . '/system/tmp'))
+		// Only store this value if the temp directory is writable and the local configuration
+		// file exists, otherwise it will initialize a Files object and prevent the install tool
+		// from loading the Safe Mode Hack (see #3215).
+		if (is_writable(TL_ROOT . '/system/tmp') && file_exists(TL_ROOT . '/system/config/localconfig.php'))
 		{
 			$objConfig->update("\$GLOBALS['TL_CONFIG']['websitePath']", $path);
 		}
@@ -159,7 +159,7 @@ else
 /**
  * Include the custom initialization file
  */
-include(TL_ROOT . '/system/config/initconfig.php');
+@include(TL_ROOT . '/system/config/initconfig.php');
 
 
 /**

@@ -115,6 +115,14 @@ class InstallTool extends Backend
 				$GLOBALS['TL_CONFIG']['ftpPath'] .= '/';
 			}
 
+			// Re-insert the data into the form
+			$this->Template->ftpHost = $GLOBALS['TL_CONFIG']['ftpHost'];
+			$this->Template->ftpPath = $GLOBALS['TL_CONFIG']['ftpPath'];
+			$this->Template->ftpUser = $GLOBALS['TL_CONFIG']['ftpUser'];
+			$this->Template->ftpPass = ($GLOBALS['TL_CONFIG']['ftpPass'] != '') ? '*****' : '';
+			$this->Template->ftpSSL  = $GLOBALS['TL_CONFIG']['ftpSSL'];
+			$this->Template->ftpPort = $GLOBALS['TL_CONFIG']['ftpPort'];
+
 			$ftp_connect = ($GLOBALS['TL_CONFIG']['ftpSSL'] && function_exists('ftp_ssl_connect')) ? 'ftp_ssl_connect' : 'ftp_connect';
 
 			// Try to connect and locate the Contao directory
@@ -137,19 +145,6 @@ class InstallTool extends Backend
 			// Update the local configuration file
 			else
 			{
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['useFTP']", true);
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpHost']", $GLOBALS['TL_CONFIG']['ftpHost']);
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
-
-				if ($this->Input->post('password', true) != '*****')
-				{
-					$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
-				}
-
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
-				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
-
 				$this->import('Files');
 
 				// Make folders writable
@@ -170,6 +165,22 @@ class InstallTool extends Backend
 					$this->Files->chmod('system/logs', 0777);
 				}
 
+				$this->createLocalConfigurationFiles();
+
+				// Save the FTP credentials
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['useFTP']", true);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpHost']", $GLOBALS['TL_CONFIG']['ftpHost']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPath']", $GLOBALS['TL_CONFIG']['ftpPath']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpUser']", $GLOBALS['TL_CONFIG']['ftpUser']);
+
+				if ($this->Input->post('password', true) != '*****')
+				{
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPass']", $GLOBALS['TL_CONFIG']['ftpPass']);
+				}
+
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpSSL']",  $GLOBALS['TL_CONFIG']['ftpSSL']);
+				$this->Config->update("\$GLOBALS['TL_CONFIG']['ftpPort']", $GLOBALS['TL_CONFIG']['ftpPort']);
+
 				$this->reload();
 			}
 		}
@@ -177,19 +188,17 @@ class InstallTool extends Backend
 		// Import the Files object AFTER storing the FTP settings
 		$this->import('Files');
 
-		if (!$this->Files->is_writeable('system/config/localconfig.php'))
+		if (!$this->Files->is_writeable('system/config/config.php'))
 		{
-			$this->Template->ftpHost = $GLOBALS['TL_CONFIG']['ftpHost'];
-			$this->Template->ftpPath = $GLOBALS['TL_CONFIG']['ftpPath'];
-			$this->Template->ftpUser = $GLOBALS['TL_CONFIG']['ftpUser'];
-			$this->Template->ftpPass = ($GLOBALS['TL_CONFIG']['ftpPass'] != '') ? '*****' : '';
-			$this->Template->ftpSSL  = $GLOBALS['TL_CONFIG']['ftpSSL'];
-			$this->Template->ftpPort = $GLOBALS['TL_CONFIG']['ftpPort'];
-
 			$this->outputAndExit();
 		}
 
 		$this->Template->lcfWriteable = true;
+
+		if (!$GLOBALS['TL_CONFIG']['useFTP'])
+		{
+			$this->createLocalConfigurationFiles();
+		}
 
 
 		/**
@@ -871,6 +880,24 @@ class InstallTool extends Backend
 		 * Output the template file
 		 */
 		$this->outputAndExit();
+	}
+
+
+	/**
+	 * Create the local configuration files if they do not exist
+	 */
+	protected function createLocalConfigurationFiles()
+	{
+		// The localconfig.php file is created by the Config class
+		foreach (array('dcaconfig', 'initconfig', 'langconfig') as $file)
+		{
+			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
+			{
+				$objFile = new File('system/config/'. $file .'.php');
+				$objFile->write('<?php /* Put your custom configuration here */ ?>');
+				$objFile->close();
+			}
+		}
 	}
 
 

@@ -55,6 +55,12 @@ class Index extends Frontend
 		// Try to read from cache
 		$this->outputFromCache();
 
+		// Redirect to the install tool
+		if (!Config::getInstance()->isComplete())
+		{
+			$this->redirect('contao/install.php');
+		}
+
 		// Load the user object before calling the parent constructor
 		$this->import('FrontendUser', 'User');
 		parent::__construct();
