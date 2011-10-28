@@ -71,6 +71,12 @@ class Config
 	protected $blnIsModified = false;
 
 	/**
+	 * Local configuration file
+	 * @var boolean
+	 */
+	protected $blnHasLcf = true;
+
+	/**
 	 * Data array
 	 * @var array
 	 */
@@ -129,13 +135,19 @@ class Config
 	protected function initialize()
 	{
 		include(TL_ROOT . '/system/config/config.php');
-		include(TL_ROOT . '/system/config/localconfig.php');
+		$this->blnHasLcf = @include(TL_ROOT . '/system/config/localconfig.php');
 
 		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
 			$strFile = sprintf('%s/system/modules/%s/config/config.php', TL_ROOT, $strModule);
 			@include($strFile);
+		}
+
+		// Return if there is no local configuration file yet
+		if (!$this->blnHasLcf)
+		{
+			return;
 		}
 
 		include(TL_ROOT . '/system/config/localconfig.php');
@@ -190,6 +202,11 @@ class Config
 	 */
 	public function save()
 	{
+		if ($this->strTop == '')
+		{
+			$this->strTop = '<?php';
+		}
+
 		$strFile  = trim($this->strTop) . "\n\n";
 		$strFile .= "### INSTALL SCRIPT START ###\n";
 
@@ -216,6 +233,16 @@ class Config
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
+	}
+
+
+	/**
+	 * Return true if the installation is completed
+	 * @return boolean
+	 */
+	public function isComplete()
+	{
+		return $this->blnHasLcf;
 	}
 
 

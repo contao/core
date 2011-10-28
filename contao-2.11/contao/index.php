@@ -87,6 +87,12 @@ class Index extends Backend
 			$this->reload();
 		}
 
+		// Redirect to the install tool
+		if (!$this->Config->isComplete())
+		{
+			$this->redirect('contao/install.php');
+		}
+
 		$this->loadLanguageFile('default');
 		$this->loadLanguageFile('tl_user');
 	}

@@ -2650,7 +2650,7 @@ abstract class Controller extends System
 			}
 		}
 
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
 	}
 
 
@@ -3136,7 +3136,7 @@ abstract class Controller extends System
 		}
 
 		// Make sure the dcaconfig.php is loaded
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Add root files
 		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))

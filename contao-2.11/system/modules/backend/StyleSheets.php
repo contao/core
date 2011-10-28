@@ -92,7 +92,7 @@ class StyleSheets extends Backend
 		$arrStyleSheets = $objStyleSheets->fetchEach('name');
 
 		// Make sure the dcaconfig.php file is loaded
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Delete old style sheets
 		foreach (scan(TL_ROOT . '/system/scripts', true) as $file)
