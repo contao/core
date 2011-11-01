@@ -183,13 +183,7 @@ class DataContainer extends Backend
 		// Add the popup file manager
 		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
 		{
-			$path = '';
-
-			if (isset($arrData['eval']['path']))
-			{
-				$path = '?node=' . $arrData['eval']['path'];
-			}
-
+			$path = isset($arrData['eval']['path']) ? '?node=' . $arrData['eval']['path'] : '';
 			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a>';
 		}
 
