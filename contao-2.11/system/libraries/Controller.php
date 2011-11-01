@@ -2650,7 +2650,11 @@ abstract class Controller extends System
 			}
 		}
 
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		// Local configuration file
+		if (file_exists(TL_ROOT . '/system/config/dcaconfig.php'))
+		{
+			include(TL_ROOT . '/system/config/dcaconfig.php');
+		}
 	}
 
 
