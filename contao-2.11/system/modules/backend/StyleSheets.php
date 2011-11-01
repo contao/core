@@ -847,6 +847,7 @@ class StyleSheets extends Backend
 		{
 			$row['fontsize'] = deserialize($row['fontsize']);
 			$row['lineheight'] = deserialize($row['lineheight']);
+			$row['fontfamily'] = str_replace(', ', ',', $row['fontfamily']);
 
 			// Try to shorten the definition
 			if ($row['fontfamily'] != '' && $row['fontfamily'] != 'inherit' && $row['fontsize']['value'] != '' && $row['fontsize']['value'] != 'inherit')
@@ -1017,7 +1018,16 @@ class StyleSheets extends Backend
 		}
 
 		// Close the format definition
-		$return .= (($blnWriteToFile && !$blnDebug) ? '' : "\n") . '}' . ($blnWriteToFile ? ($blnDebug ? "\n" : '') : "</pre>\n");
+		if ($blnWriteToFile)
+		{
+			$nl = $blnDebug ? "\n" : '';
+			$return = substr($return, 0, -1);
+			$return .= $nl . '}' . $nl;
+		}
+		else
+		{
+			$return .= "\n}</pre>\n";
+		}
 
 		// Replace global variables
 		if (strpos($return, '$') !== false && count($vars) > 0)
@@ -1031,20 +1041,20 @@ class StyleSheets extends Backend
 
 	/**
 	 * Compile a color value and return a hex or rgba color
-	 * @param  mixed
-	 * @param  boolean
-	 * @param  array
+	 * @param mixed
+	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
 	protected function compileColor($color, $blnWriteToFile=false, $vars=array())
 	{
 		if (!is_array($color))
 		{
-			return '#' . $color;
+			return '#' . $this->shortenHexColor($color);
 		}
-		elseif (!isset($color[1]) || $color[1] == '')
+		elseif (!isset($color[1]) || empty($color[1]))
 		{
-			return '#' . $color[0];
+			return '#' . $this->shortenHexColor($color[0]);
 		}
 		else
 		{
@@ -1054,10 +1064,26 @@ class StyleSheets extends Backend
 
 
 	/**
+	 * Try to shorten a hex color
+	 * @param string
+	 * @return string
+	 */
+	protected function shortenHexColor($color)
+	{
+		if ($color[0] == $color[1] && $color[2] == $color[3] && $color[4] == $color[5])
+		{
+			return $color[0] . $color[2] . $color[4];
+		}
+
+		return $color;
+	}
+
+
+	/**
 	 * Convert hex colors to rgb
-	 * @param  string
-	 * @param  boolean
-	 * @param  array
+	 * @param string
+	 * @param boolean
+	 * @param array
 	 * @return array
 	 * @see http://de3.php.net/manual/de/function.hexdec.php#99478
 	 */
