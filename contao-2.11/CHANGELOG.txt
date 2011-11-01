@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1120 (Improvement)
+-------------------
+Throw a 404 error if a request is mapped to Contao but the URL suffix does not
+match (see #2864). This is e.g. the case if Contao is set as ErrorDocument in
+the Apache configuration.
+
 r1119 (Improvement)
 -------------------
 Replaced the rel="lightbox" attribute with data-lightbox="" in all HTML5

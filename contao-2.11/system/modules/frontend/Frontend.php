@@ -85,9 +85,16 @@ abstract class Frontend extends Controller
 			return null;
 		}
 
+		$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 		$strRequest = preg_replace('/\?.*$/i', '', $this->Environment->request);
-		$strRequest = preg_replace('/' . preg_quote($GLOBALS['TL_CONFIG']['urlSuffix'], '/') . '$/i', '', $strRequest);
-		$arrFragments = explode('/', $strRequest);
+
+		// Return false if the URL suffix does not match (see #2864)
+		if ($intSuffixLength > 0 && substr($strRequest, -$intSuffixLength) != $GLOBALS['TL_CONFIG']['urlSuffix'])
+		{
+			return false;
+		}
+
+		$arrFragments = explode('/', substr($strRequest, 0, -$intSuffixLength));
 
 		// Skip index.php
 		if (strtolower($arrFragments[0]) == 'index.php')
