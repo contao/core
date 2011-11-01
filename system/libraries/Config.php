@@ -74,7 +74,7 @@ class Config
 	 * Local configuration file
 	 * @var boolean
 	 */
-	protected $blnHasLcf = true;
+	protected $blnHasLcf = false;
 
 	/**
 	 * Data array
@@ -135,13 +135,22 @@ class Config
 	protected function initialize()
 	{
 		include(TL_ROOT . '/system/config/config.php');
-		$this->blnHasLcf = @include(TL_ROOT . '/system/config/localconfig.php');
+
+		if (file_exists(TL_ROOT . '/system/config/localconfig.php'))
+		{
+			$this->blnHasLcf = true;
+			include(TL_ROOT . '/system/config/localconfig.php');
+		}
 
 		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{
-			$strFile = sprintf('%s/system/modules/%s/config/config.php', TL_ROOT, $strModule);
-			@include($strFile);
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/config.php';
+
+			if (file_exists($strFile))
+			{
+				include($strFile);
+			}
 		}
 
 		// Return if there is no local configuration file yet
