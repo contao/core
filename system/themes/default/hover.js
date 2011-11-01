@@ -1,2 +1,2 @@
 /* Contao Open Source CMS :: Copyright (C) 2005-2011 Leo Feyer :: LGPL license */
-var Theme={hoverRow:function(c,d){var a=$(c).getChildren();for(var b=0;b<a.length;b++){if(a[b].nodeName.toLowerCase()=="td"){a[b].setStyle("background-color",(d?"#ebfdd7":""))}}},hoverDiv:function(a,b){$(a).setStyle("background-color",(b?"#ebfdd7":""))}};
+var Theme={hoverRow:function(a,b){var c=$(a).getChildren();for(var d=0;d<c.length;d++)c[d].nodeName.toLowerCase()=="td"&&c[d].setStyle("background-color",b?"#ebfdd7":"")},hoverDiv:function(a,b){$(a).setStyle("background-color",b?"#ebfdd7":"")}};

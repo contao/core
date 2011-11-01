@@ -1412,7 +1412,7 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var fieldnames = new Array('value', 'label', 'default');
+		var fieldnames = ['value', 'label', 'default'];
 		var tabindex = 1;
 
 		for (var i=0; i<rows.length; i++) {
@@ -1477,7 +1477,7 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var fieldnames = new Array('key', 'value');
+		var fieldnames = ['key', 'value'];
 		var tabindex = 1;
 
 		for (var i=0; i<rows.length; i++) {
