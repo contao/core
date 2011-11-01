@@ -6,6 +6,11 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1119 (Improvement)
+-------------------
+Replaced the rel="lightbox" attribute with data-lightbox="" in all HTML5
+templates, because rel="lightbox" is not a valid attribute actually.
+
 r1116 (Improvement)
 -------------------
 Also embed background images in newsletters and e-mails (see #2659).

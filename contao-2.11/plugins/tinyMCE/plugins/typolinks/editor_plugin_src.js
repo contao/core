@@ -60,7 +60,7 @@
 			// Register lightbox image command
 			ed.addCommand('mceTypobox', function() {
 				ed.windowManager.open({
-					file : url + '/typobox.html',
+					file : url + '/typobox.htm',
 					width : 360 + parseInt(ed.getLang('typobox.delta_width', 0)),
 					height : 256 + parseInt(ed.getLang('typobox.delta_height', 0)),
 					inline : 1
@@ -83,7 +83,7 @@
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
 				infourl : 'http://www.contao.org',
-				version : '3.4.2'
+				version : '3.4.6'
 			};
 		}
 	});

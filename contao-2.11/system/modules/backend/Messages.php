@@ -30,7 +30,7 @@
 
 
 /**
- * Class SystemMessages
+ * Class Messages
  *
  * Add system messages to the welcome screen.
  * @copyright  Leo Feyer 2005-2011

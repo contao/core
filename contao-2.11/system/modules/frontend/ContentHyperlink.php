@@ -52,6 +52,7 @@ class ContentHyperlink extends ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
 		$this->import('String');
 
 		if (substr($this->url, 0, 7) == 'mailto:')
@@ -65,7 +66,7 @@ class ContentHyperlink extends ContentElement
 
 		$embed = explode('%s', $this->embed);
 
-		if (!strlen($this->linkTitle))
+		if ($this->linkTitle == '')
 		{
 			$this->linkTitle = $this->url;
 		}
@@ -107,7 +108,16 @@ class ContentHyperlink extends ContentElement
 			}
 		}
 
-		$this->Template->rel = $this->rel;
+		if (strncmp($this->rel, 'lightbox', 8) !== 0 || $objPage->outputFormat == 'xhtml')
+		{
+			$this->Template->attribute = ' rel="'. $this->rel .'"';
+		}
+		else
+		{
+			$this->Template->attribute = ' data-lightbox="'. substr($this->rel, 9, -1) .'"';
+		} 
+
+		$this->Template->rel = $this->rel; // Backwards compatibility
 		$this->Template->href = $this->url;
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];

@@ -2212,9 +2212,18 @@ abstract class Controller extends System
 						}
 
 						// Generate the HTML markup
-						if (strlen($rel))
+						if ($rel != '')
 						{
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . ' rel="' . $rel . '"><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
+							if (strncmp($rel, 'lightbox', 8) !== 0 || $objPage->outputFormat == 'xhtml')
+							{
+								$attribute = ' rel="' . $rel . '"';
+							}
+							else
+							{
+								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
+							}
+
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
@@ -3178,13 +3187,15 @@ abstract class Controller extends System
 
 	/**
 	 * Add an image to a template
-	 * @param Template
+	 * @param object
 	 * @param array
 	 * @param integer
 	 * @param string
 	 */
-	protected function addImageToTemplate(Template $objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
+	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
+		global $objPage;
+
 		$size = deserialize($arrItem['size']);
 		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
 
@@ -3244,7 +3255,6 @@ abstract class Controller extends System
 
 			if ($arrItem['fullsize'])
 			{
-				global $objPage;
 				$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 			}
 		}
@@ -3253,7 +3263,7 @@ abstract class Controller extends System
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
 			$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
-			$objTemplate->attributes = ' rel="' . $strLightboxId . '"';
+			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
 		$objTemplate->src = TL_FILES_URL . $src;
@@ -3271,7 +3281,7 @@ abstract class Controller extends System
 	 * @param object
 	 * @param array
 	 */
-	protected function addEnclosuresToTemplate(Template $objTemplate, $arrItem)
+	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
 	{
 		$arrEnclosure = deserialize($arrItem['enclosure'], true);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
