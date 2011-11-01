@@ -94,19 +94,6 @@ class Newsletter extends Backend
 			}
 		}
 
-		$css = '';
-
-		// Add style sheet newsletter.css
-		if (!$objNewsletter->sendText && file_exists(TL_ROOT . '/newsletter.css'))
-		{
-			$buffer = file_get_contents(TL_ROOT . '/newsletter.css');
-			$buffer = preg_replace('@/\*\*.*\*/@Us', '', $buffer);
-
-			$css  = '<style type="text/css">' . "\n";
-			$css .= trim($buffer) . "\n";
-			$css .= '</style>' . "\n";
-		}
-
 		// Replace insert tags
 		$html = $this->replaceInsertTags($objNewsletter->content);
 		$text = $this->replaceInsertTags($objNewsletter->text);
@@ -136,7 +123,7 @@ class Newsletter extends Backend
 
 				// Send
 				$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
-				$this->sendNewsletter($objEmail, $objNewsletter, $arrRecipient, $text, $html, $css);
+				$this->sendNewsletter($objEmail, $objNewsletter, $arrRecipient, $text, $html);
 
 				// Redirect
 				$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_newsletter']['confirm'], 1));
@@ -185,7 +172,7 @@ class Newsletter extends Backend
 				while ($objRecipients->next())
 				{
 					$objEmail = $this->generateEmailObject($objNewsletter, $arrAttachments);
-					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html, $css);
+					$this->sendNewsletter($objEmail, $objNewsletter, $objRecipients->row(), $text, $html);
 
 					echo 'Sending newsletter to <strong>' . $objRecipients->email . '</strong><br>';
 				}
@@ -362,22 +349,28 @@ class Newsletter extends Backend
 	 * @param string
 	 * @return string
 	 */
-	protected function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css)
+	protected function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
 	{
-		// Prepare text content
+		// Prepare the text content
 		$objEmail->text = $this->parseSimpleTokens($text, $arrRecipient);
 
-		// Add HTML content
+		// Add the HTML content
 		if (!$objNewsletter->sendText)
 		{
-			// Get the mail template
-			$objTemplate = new BackendTemplate((strlen($objNewsletter->template) ? $objNewsletter->template : 'mail_default'));
+			// Default template
+			if ($objNewsletter->template == '')
+			{
+				$objNewsletter->template = 'mail_default';
+			}
+
+			// Load the mail template
+			$objTemplate = new BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;
 			$objTemplate->body = $this->parseSimpleTokens($html, $arrRecipient);
 			$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-			$objTemplate->css = $css;
+			$objTemplate->css = $css; // Backwards compatibility
 
 			// Parse template
 			$objEmail->html = $objTemplate->parse();

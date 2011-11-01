@@ -421,11 +421,11 @@ class Email extends System
 				}
 
 				$arrMatches = array();
-				preg_match_all('/src="([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
+				preg_match_all('/(src=|url\()"([^"]+\.(jpe?g|png|gif|bmp|tiff?|swf))"/Ui', $this->strHtml, $arrMatches);
 				$strBase = Environment::getInstance()->base;
 
 				// Check for internal images
-				foreach (array_unique($arrMatches[1]) as $url)
+				foreach (array_unique($arrMatches[2]) as $url)
 				{
 					// Try to remove the base URL
 					$src = str_replace($strBase, '', $url);
@@ -434,7 +434,7 @@ class Email extends System
 					if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
 					{
 						$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
-						$this->strHtml = str_replace('src="' . $url . '"', 'src="' . $cid . '"', $this->strHtml);
+						$this->strHtml = str_replace(array('src="' . $url . '"', 'url("' . $url . '"'), array('src="' . $cid . '"', 'url("' . $cid . '"'), $this->strHtml);
 					}
 				}
 			}
