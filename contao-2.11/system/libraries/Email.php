@@ -187,7 +187,7 @@ class Email extends System
 				break;
 
 			case 'text':
-				$this->strText = $varValue;
+				$this->strText = $this->String->decodeEntities($varValue);
 				break;
 
 			case 'html':
