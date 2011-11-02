@@ -264,7 +264,7 @@ class Newsletter extends Backend
 <div class="preview_text">
 ' . nl2br_html5($text) . '
 </div>
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <div class="w50">
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
   <input type="text" name="mpc" id="ctrl_mpc" value="10" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
@@ -510,7 +510,7 @@ class Newsletter extends Backend
 <input type="hidden" name="FORM_SUBMIT" value="tl_recipients_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
   <select name="separator" id="separator" class="tl_select" onfocus="Backend.getScrollOffset()">
     <option value="comma">'.$GLOBALS['TL_LANG']['MSC']['comma'].'</option>

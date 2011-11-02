@@ -256,11 +256,12 @@ class tl_templates extends Backend
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_create_template">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <div>
   <h3><label for="ctrl_original">'.$GLOBALS['TL_LANG']['tl_templates']['original'][0].'</label></h3>
   <select name="original" id="ctrl_original" class="tl_select" onfocus="Backend.getScrollOffset()">'.$strAllTemplates.'</select>'.(($GLOBALS['TL_LANG']['tl_templates']['original'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_templates']['original'][1].'</p>' : '').'
+  <script>new Chosen($("ctrl_original"));</script>
 </div>
 <div>
   <h3><label for="ctrl_target">'.$GLOBALS['TL_LANG']['tl_templates']['target'][0].'</label></h3>

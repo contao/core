@@ -378,7 +378,7 @@ class tl_faq extends Backend
 
 		return '
 <div class="cte_type ' . $key . '"><strong>' . $arrRow['question'] . '</strong> - ' . $date . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
+<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
 '.$arrRow['answer'].'
 </div>' . "\n";
 	}

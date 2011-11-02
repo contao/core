@@ -11,7 +11,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="ver" value="<?php echo $this->version; ?>">
 <input type="hidden" name="ref" value="<?php echo $this->referer; ?>">
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3 style="padding-top:9px"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
   <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset()">
   <div class="tl_checkbox_container" style="margin-top:0">

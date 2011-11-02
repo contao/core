@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1124 (New)
+-----------
+Added a "chosen" widget to the templates editor (see #3587).
+
 r1121 (Update)
 --------------
 Updated CodeMirror to version 2.16 (see #3475).

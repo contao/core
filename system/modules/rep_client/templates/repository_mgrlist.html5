@@ -22,7 +22,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 <?php echo $theme->createMainButton('install16', $rep->installLink, $text['installextension']); ?> 
 </div>
 
-<div class="mod_repository block">
+<div class="mod_repository">
 
 <form action="<?php echo $rep->f_link; ?>" id="repository_upgdform" method="post" >
 <div class="extension_container">

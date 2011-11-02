@@ -10,7 +10,7 @@
 <input type="hidden" name="FORM_SUBMIT" value="tl_tasks">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
-<fieldset id="pal_title_legend" class="tl_tbox block<?php echo $this->titleClass; ?>">
+<fieldset id="pal_title_legend" class="tl_tbox<?php echo $this->titleClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'title_legend', 'tl_tasks')"><?php echo $this->titleLabel; ?></legend>
 <div class="w50">
   <h3><?php echo $this->title->generateLabel(); ?></h3>
@@ -45,7 +45,7 @@
 </div>
 </fieldset>
 
-<fieldset id="pal_assign_legend" class="tl_box block<?php echo $this->assignClass; ?>">
+<fieldset id="pal_assign_legend" class="tl_box<?php echo $this->assignClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'assign_legend', 'tl_tasks')"><?php echo $this->assignLabel; ?></legend>
 <div class="w50">
   <h3><?php echo $this->assignedTo->generateLabel(); ?></h3>
@@ -62,7 +62,7 @@
 </div>
 </fieldset>
 
-<fieldset id="pal_status_legend" class="tl_box block<?php echo $this->statusClass; ?>">
+<fieldset id="pal_status_legend" class="tl_box<?php echo $this->statusClass; ?>">
 <legend onclick="AjaxRequest.toggleFieldset(this, 'status_legend', 'tl_tasks')"><?php echo $this->statusLabel; ?></legend>
 <div>
   <h3><?php echo $this->comment->generateLabel(); ?></h3>

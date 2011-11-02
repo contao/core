@@ -955,7 +955,7 @@ class DC_Folder extends DataContainer implements listable, editable
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 <input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
   <div id="fancy-fallback">'.$fields.'
   </div>
@@ -1035,7 +1035,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			}
 
 			// Render boxes
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 			$blnIsFirst = true;
 
 			foreach ($boxes as $k=>$v)
@@ -1100,7 +1100,7 @@ class DC_Folder extends DataContainer implements listable, editable
 					$return .= $this->row();
 				}
 
-				$class = 'tl_box block';
+				$class = 'tl_box';
 				$return .= '
   <input type="hidden" name="FORM_FIELDS[]" value="'.specialchars($this->strPalette).'">
 </div>';
@@ -1205,7 +1205,7 @@ window.addEvent(\'domready\', function() {
 		// Add fields
 		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
 		{
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 
 			// Walk through each record
 			foreach ($ids as $id)
@@ -1216,7 +1216,7 @@ window.addEvent(\'domready\', function() {
 				$return .= '
 <div class="'.$class.'">';
 
-				$class = 'tl_box block';
+				$class = 'tl_box';
 				$formFields = array();
 
 				foreach ($this->strPalette as $v)
@@ -1351,7 +1351,7 @@ window.addEvent(\'domready\', function() {
 
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').'
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <fieldset class="tl_checkbox_container">
   <legend'.($blnIsError ? ' class="error"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['all_fields'][0].'</legend>
   <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this)"> <label for="check_all" style="color:#a6a6a6"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br>'.$options.'
@@ -1515,7 +1515,7 @@ window.addEvent(\'domready\', function() {
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_files">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3><label for="ctrl_source">'.$GLOBALS['TL_LANG']['tl_files']['editor'][0].'</label></h3>
   <textarea name="source" id="ctrl_source" class="tl_textarea monospace" rows="12" cols="80" style="height:400px" onfocus="Backend.getScrollOffset()">' . "\n" . htmlspecialchars($strContent) . '</textarea>' . (($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_files']['editor'][1])) ? '
   <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG']['tl_files']['editor'][1].'</p>' : '') . '

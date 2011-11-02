@@ -22,13 +22,13 @@ $tabindex = 1;
 
 <h2 class="sub_headline"><?php echo $text['updatedatabase']; ?></h2>
 
-<div class="mod_repository block">
+<div class="mod_repository">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
 <div class="tl_formbody_edit">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <?php echo ($rep->dbUpdate != '') ? $rep->dbUpdate : '<div class="color_green">'.$text['dbuptodate'].'</div>'; ?> 
 </div>
 

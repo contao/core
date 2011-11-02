@@ -23,7 +23,7 @@ $langs = property_exists($ext, 'languages') && count($ext->languages)>0;
 <a href="contao/main.php?do=repository_catalog" class="header_back" title="<?php echo $text['goback']; ?>" accesskey="b" onclick="Backend.getScrollOffset()"><?php echo $text['goback']; ?></a>
 </div>
 
-<div class="mod_repository mod_repository_view block">
+<div class="mod_repository mod_repository_view">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="extension_container">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">

@@ -1625,7 +1625,7 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 			}
 
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 			$fs = $this->Session->get('fieldset_states');
 			$blnIsFirst = true;
 
@@ -1708,7 +1708,7 @@ class DC_Table extends DataContainer implements listable, editable
 					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
 				}
 
-				$class = 'tl_box block';
+				$class = 'tl_box';
 				$return .= "\n" . '</fieldset>';
 			}
 		}
@@ -1945,7 +1945,7 @@ window.addEvent(\'domready\', function() {
 
 		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
 		{
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 			$this->checkForTinyMce();
 
 			// Walk through each record
@@ -1982,7 +1982,7 @@ window.addEvent(\'domready\', function() {
 				$return .= '
 <div class="'.$class.'">';
 
-				$class = 'tl_box block';
+				$class = 'tl_box';
 				$formFields = array();
 
 				// Get the field values
@@ -2203,7 +2203,7 @@ window.addEvent(\'domready\', function() {
 
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').'
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <fieldset class="tl_checkbox_container">
   <legend'.($blnIsError ? ' class="error"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['all_fields'][0].'</legend>
   <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this)"> <label for="check_all" style="color:#a6a6a6"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br>'.$options.'
@@ -2264,7 +2264,7 @@ window.addEvent(\'domready\', function() {
 
 		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
 		{
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 			$formFields = array();
 			$this->checkForTinyMce();
 
@@ -2481,7 +2481,7 @@ window.addEvent(\'domready\', function() {
 
 <p class="tl_error">'.$GLOBALS['TL_LANG']['ERR']['general'].'</p>' : '').'
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
 <fieldset class="tl_checkbox_container">
   <legend'.($blnIsError ? ' class="error"' : '').'>'.$GLOBALS['TL_LANG']['MSC']['all_fields'][0].'</legend>
   <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this)"> <label for="check_all" style="color:#a6a6a6"><em>'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</em></label><br>'.$options.'
@@ -3558,7 +3558,7 @@ window.addEvent(\'domready\', function() {
 
 					$return .= '
 
-<div class="tl_content block'.(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
+<div class="tl_content'.(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
 <div class="tl_content_right">';
 
 					// Edit multiple
