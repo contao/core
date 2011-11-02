@@ -351,8 +351,10 @@ pre,.tl_textarea.monospace {
 	width:657px;
 }
 .m12 {
-	height:48px;
 	margin:12px 0;
+}
+.cbx {
+	height:48px;
 }
 .inline div {
 	display:inline;
