@@ -246,7 +246,7 @@ class ListWizard extends Widget
 <input type="hidden" name="FORM_SUBMIT" value="tl_list_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3><label for="separator">'.$GLOBALS['TL_LANG']['MSC']['separator'][0].'</label></h3>
   <select name="separator" id="separator" class="tl_select" onfocus="Backend.getScrollOffset()">
     <option value="comma">'.$GLOBALS['TL_LANG']['MSC']['comma'].'</option>

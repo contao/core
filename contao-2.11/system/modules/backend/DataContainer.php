@@ -367,12 +367,8 @@ class DataContainer extends Backend
 			$this->blnUploadable = true;
 		}
 
-		// Mark floated single checkboxes
-		if ($arrData['inputType'] == 'checkbox' && !$arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'w50') !== false)
-		{
-			$arrData['eval']['tl_class'] .= ' cbx';
-		}
-		elseif ($arrData['inputType'] == 'text' && $arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'wizard') !== false)
+		// If there is a wizard, make the DIV render inline
+		if ($arrData['inputType'] == 'text' && $arrData['eval']['multiple'] && strpos($arrData['eval']['tl_class'], 'wizard') !== false)
 		{
 			$arrData['eval']['tl_class'] .= ' inline';
 		}

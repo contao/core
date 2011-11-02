@@ -23,13 +23,13 @@ $tabindex = 1;
 
 <h2 class="sub_headline"><?php echo $text['editextension']; ?></h2>
 
-<div class="mod_repository block">
+<div class="mod_repository">
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post" >
 <div class="tl_formbody_edit">
 <input type="hidden" name="repository_action" value="<?php echo $rep->f_action; ?>">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
 
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <h3><label for="repository_lickey"><?php echo $text['lickey'][0]; ?></label></h3>
   <input type="text" tabindex="<?php echo $tabindex++; ?>" maxlength="255" name="repository_lickey" id="repository_lickey" value="<?php echo $rep->f_lickey; ?>" class="tl_text">
   <p class="tl_help tl_tip"><?php echo $text['lickey'][1]; ?></p>

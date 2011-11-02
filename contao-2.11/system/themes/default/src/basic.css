@@ -120,9 +120,6 @@ ul.sortable li {
 	line-height:0.1px;
 	font-size:0.1px;
 }
-.block,.tl_content {
-	overflow:hidden;
-}
 .invisible {
 	width:0;
 	height:0;
@@ -354,10 +351,8 @@ pre,.tl_textarea.monospace {
 	width:657px;
 }
 .m12 {
-	margin:12px 0 12px;
-}
-.cbx {
 	height:48px;
+	margin:12px 0;
 }
 .inline div {
 	display:inline;

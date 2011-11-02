@@ -13,7 +13,7 @@
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_purge">
 <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
-<div class="tl_tbox block">
+<div class="tl_tbox">
   <fieldset class="tl_checkbox_container">
     <legend><?php echo $this->cacheLabel; ?></legend>
     <input type="checkbox" id="check_all" class="tl_checkbox" onclick="Backend.toggleCheckboxes(this, 'cache')"> <label for="check_all" style="color:#a6a6a6"><em><?php echo $this->selectAll; ?></em></label><br>

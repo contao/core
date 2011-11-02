@@ -165,7 +165,7 @@ class DC_File extends DataContainer implements editable
 			}
 
 			// Render boxes
-			$class = 'tl_tbox block';
+			$class = 'tl_tbox';
 			$fs = $this->Session->get('fieldset_states');
 			$blnIsFirst = true;
 
@@ -266,7 +266,7 @@ class DC_File extends DataContainer implements editable
 					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
 				}
 
-				$class = 'tl_box block';
+				$class = 'tl_box';
 				$return .= "\n" . '</fieldset>';
 			}
 		}

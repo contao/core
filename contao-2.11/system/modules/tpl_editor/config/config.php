@@ -34,9 +34,11 @@
  */
 $GLOBALS['BE_MOD']['design']['tpl_editor'] = array
 (
-	'tables'   => array('tl_templates'),
-	'new_tpl'  => array('tl_templates', 'addNewTemplate'),
-	'icon'     => 'system/modules/tpl_editor/html/icon.gif'
+	'tables'     => array('tl_templates'),
+	'new_tpl'    => array('tl_templates', 'addNewTemplate'),
+	'icon'       => 'system/modules/tpl_editor/html/icon.gif',
+	'javascript' => 'plugins/chosen/chosen.js',
+	'stylesheet' => 'plugins/chosen/chosen.css'
 );
 
 ?>
