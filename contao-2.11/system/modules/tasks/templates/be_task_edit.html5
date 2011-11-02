@@ -61,7 +61,7 @@
   <p class="tl_help tl_tip"><?php echo $this->assignedTo->help; ?></p>
 <?php endif; ?>
 </div>
-<div class="w50 m12">
+<div class="w50 m12 cbx">
   <?php echo $this->notify->generateWithError(); ?> 
 <?php if ($this->notify->help): ?>
   <p class="tl_help tl_tip"><?php echo $this->notify->help; ?></p>
