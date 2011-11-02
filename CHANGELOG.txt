@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1121 (Update)
+--------------
+Updated CodeMirror to version 2.16 (see #3475).
+
 r1120 (Improvement)
 -------------------
 Throw a 404 error if a request is mapped to Contao but the URL suffix does not
