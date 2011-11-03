@@ -222,7 +222,7 @@ class DC_Table extends DataContainer implements listable, editable
 			// Get root records from global configuration file
 			elseif (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']))
 			{
-				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table);
+				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table, true);
 			}
 		}
 

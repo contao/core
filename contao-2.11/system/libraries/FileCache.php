@@ -120,6 +120,12 @@ class FileCache extends System
 		fputs($fh, serialize($this->arrCache));
 		fclose($fh);
 
+		// Windows fix: delete the target file
+		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists($strPath . '/' . $this->strFile))
+		{
+			unlink($strPath . '/' . $this->strFile);
+		}
+
 		// Then move the file to its final destination
 		rename($strPath . '/' . $strTemp, $strPath . '/' . $this->strFile);
 	}
