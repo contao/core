@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getContentElements'),
 			'reference'               => &$GLOBALS['TL_LANG']['CTE'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
+			'eval'                    => array('helpwizard'=>true, 'chosen'=>true, 'submitOnChange'=>true)
 		),
 		'headline' => array
 		(
@@ -503,7 +503,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getAlias'),
-			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
 				array('tl_content', 'editAlias')
@@ -515,7 +515,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getArticleAlias'),
-			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
 				array('tl_content', 'editArticleAlias')
@@ -527,7 +527,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getArticles'),
-			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
 				array('tl_content', 'editArticle')
@@ -539,7 +539,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getForms'),
-			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
 				array('tl_content', 'editForm')
@@ -551,7 +551,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_content', 'getModules'),
-			'eval'                    => array('mandatory'=>true, 'submitOnChange'=>true),
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'submitOnChange'=>true),
 			'wizard' => array
 			(
 				array('tl_content', 'editModule')

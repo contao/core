@@ -44,7 +44,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['list_table'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_listing', 'getAllTables'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['list_fields'] = array

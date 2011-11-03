@@ -71,7 +71,7 @@ class Combiner extends System
 	 * @param string
 	 * @param string
 	 */
-	public function add($strFile, $strVersion=false, $strMedia='screen')
+	public function add($strFile, $strVersion=null, $strMedia='screen')
 	{
 		// Determine the file type
 		if (preg_match('/\.css$/', $strFile))
@@ -117,7 +117,7 @@ class Combiner extends System
 		}
 
 		// Default version
-		if ($strVersion === false)
+		if ($strVersion === null)
 		{
 			$strVersion = VERSION .'.'. BUILD;
 		}

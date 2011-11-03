@@ -185,7 +185,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'flag'                    => 1,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'addTime' => array
 		(
@@ -393,7 +393,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_calendar_events', 'getArticleAlias'),
-			'eval'                    => array('mandatory'=>true)
+			'eval'                    => array('chosen'=>true, 'mandatory'=>true)
 		),
 		'url' => array
 		(

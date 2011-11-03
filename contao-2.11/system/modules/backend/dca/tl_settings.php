@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeZone'],
 			'inputType'               => 'select',
 			'options'                 => $this->getTimezones(),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
 		),
 		'websitePath' => array
 		(
@@ -460,13 +460,13 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultUser'],
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'defaultGroup' => array(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'],
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'defaultChmod' => array
 		(

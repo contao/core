@@ -213,7 +213,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_form', 'getAllTables')
+			'options_callback'        => array('tl_form', 'getAllTables'),
+			'eval'                    => array('chosen'=>true)
 		),
 		'method' => array
 		(

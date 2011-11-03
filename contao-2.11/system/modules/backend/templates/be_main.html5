@@ -6,6 +6,7 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
+  $objCombiner->add('plugins/chosen/chosen.css');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
   $objCombiner->add('plugins/datepicker/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -25,6 +26,7 @@ var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/chosen/chosen.js');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
   $objCombiner->add('plugins/datepicker/datepicker.js', DATEPICKER);
   $objCombiner->add('contao/contao.js');
