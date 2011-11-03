@@ -6,6 +6,10 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1129 (Improved)
+----------------
+Added a nice cross-browser select menu style (progressive enhancement).
+
 r1124 (New)
 -----------
 Added a "chosen" widget to the templates editor (see #3587).

@@ -264,6 +264,7 @@ class Newsletter extends Backend
 <div class="preview_text">
 ' . nl2br_html5($text) . '
 </div>
+
 <div class="tl_tbox">
 <div class="w50">
   <h3><label for="ctrl_mpc">' . $GLOBALS['TL_LANG']['tl_newsletter']['mailsPerCycle'][0] . '</label></h3>
@@ -286,17 +287,17 @@ class Newsletter extends Backend
   <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
 </div>
+<div class="clear"></div>
 </div>
 </div>
 
 <div class="tl_formbody_submit">
-
 <div class="tl_submit_container">
 <input type="submit" name="preview" class="tl_submit" accesskey="p" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['preview']).'">
 <input type="submit" id="send" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG']['tl_newsletter']['send'][0]).'" onclick="return confirm(\''. str_replace("'", "\\'", $GLOBALS['TL_LANG']['tl_newsletter']['sendConfirm']) .'\')">
 </div>
-
 </div>
+
 </form>';
 
 		$_SESSION['TL_PREVIEW_ERROR'] = false;

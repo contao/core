@@ -191,6 +191,8 @@ h2.sub_headline_index {
 .tl_error,.tl_confirm,.tl_info,.tl_new {
 	margin:1px 0 0;
 	padding:4px 5px 5px 25px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
 	border-radius:3px;
 }
 .tl_error {
@@ -245,6 +247,9 @@ h2.sub_headline_index {
 .tl_subpanel {
 	padding-left:24px;
 	float:right;
+}
+.tl_subpanel strong {
+	line-height:21px;
 }
 .tl_submit_panel {
 	padding-left:6px;

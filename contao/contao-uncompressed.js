@@ -1497,7 +1497,7 @@ var Backend =
 	 * @param string
 	 * @param string
 	 */
-	checkboxWizard: function(el, command, id) 	{
+	checkboxWizard: function(el, command, id) {
 		var container = $(id);
 		var parent = $(el).getParent('span');
 		Backend.getScrollOffset();
@@ -1518,6 +1518,54 @@ var Backend =
 				}
 				break;
 		}
+	},
+	
+	/**
+	 * Style checkboxes, radio buttons and select menus
+	 * @param object
+	 * @param string
+	 * @param string
+	 */
+	styleFormFields: function() {
+		$$('select').each(function(el) {
+			if (el.getStyle('display') == 'none') {
+				return; // handled by chosen
+			}
+
+			// Get the selected option label
+			if ((active = el.getElement('option[selected]')) != null) {
+				var label = active.get('html');
+			} else {
+				var label = el.getElement('option').get('html');
+			}
+
+			// Create the div element
+			var div = new Element('div', {
+				'id': el.get('id') + '_styled',
+				'class': 'styled_select',
+				'html': '<span>' + label + '</span><b><i></i></b>',
+				'styles': {
+					'width': el.getStyle('width').toInt()-4
+				}
+			}).inject(el, 'before');
+
+			// Fix right-aligned elements
+			if (el.hasClass('right-aligned')) {
+				div.setStyle('left', el.getPosition().x);
+			}
+
+			// Update the div onchange
+			el.addEvent('change', function() {
+				var option = el.getElement('option[value="' + el.value + '"]');
+				div.getElement('span').set('html', option.get('html'));
+			}).setStyle('opacity', 0);
+
+			// Webkit adjustments
+			if (Browser.Engine.webkit) {
+				el.setStyle('margin-bottom', '4px');
+				div.setStyle('width', div.getStyle('width').toInt()-4);
+			}
+		});
 	}
 };
 
@@ -1528,6 +1576,7 @@ document.addEvent('mousedown', function(event) {
 
 // Initialize the back end script
 window.addEvent('domready', function() {
+	Backend.styleFormFields();
 	Backend.hideTreeBody();
 	Backend.blink.periodical(600);
 
