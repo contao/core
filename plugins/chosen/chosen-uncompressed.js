@@ -554,6 +554,9 @@ var Chosen = new Class({
 			this.search_field.set('value', "");
 			this.form_field.fireEvent("change");
 
+			// PATCH: fireEvent seems to be missing the onchange attribute
+			if (typeof(this.form_field.onchange) == 'function') this.form_field.onchange(); 
+
 			this.search_field_scale();
 
 		}
@@ -604,7 +607,9 @@ var Chosen = new Class({
 		this.no_results_clear();
 		results = 0;
 		searchText = this.search_field.get('value') === this.default_text ? "" : new Element('div', {text: this.search_field.get('value').trim()}).get('html');
-		regex = new RegExp('^' + searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
+		// PATCH: change the search type from "starts with" to "contains"
+		//regex = new RegExp('^' + searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
+		regex = new RegExp(searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
 		zregex = new RegExp(searchText.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"), 'i');
 
 		this.results_data.each(function(option){

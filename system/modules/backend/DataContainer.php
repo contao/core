@@ -305,8 +305,9 @@ class DataContainer extends Backend
 			}
 		}
 
-		$wizard = '';
 		$datepicker = '';
+		$wizard = '';
+		$strHelpClass = '';
 
 		// Datepicker
 		if ($arrData['eval']['datepicker'])
@@ -349,7 +350,14 @@ class DataContainer extends Backend
   </script>';
 		}
 
-		// Add custom wizard
+		// Chosen
+		if ($arrData['inputType'] == 'select' && $arrData['eval']['chosen'])
+		{
+			$strHelpClass = ' chosen';
+			$wizard .= "\n" . '<script>new Chosen($("ctrl_' . $objWidget->id . '"));</script>';
+		}
+
+		// Add a custom wizard
 		if (is_array($arrData['wizard']))
 		{
 			foreach ($arrData['wizard'] as $callback)
@@ -406,26 +414,27 @@ class DataContainer extends Backend
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (!$objWidget->hasErrors() ? $this->help() : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
 
 
 	/**
 	 * Return the field explanation as HTML string
+	 * @param string
 	 * @return string
 	 */
-	public function help()
+	public function help($strClass='')
 	{
 		$return = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['label'][1];
 
-		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || !strlen($return))
+		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
 		{
 			return '';
 		}
 
 		return '
-  <p class="tl_help tl_tip">'.$return.'</p>';
+  <p class="tl_help tl_tip' . $strClass . '">'.$return.'</p>';
 	}
 
 

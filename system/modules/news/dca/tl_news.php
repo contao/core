@@ -190,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'flag'                    => 11,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'date' => array
 		(
@@ -349,7 +349,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_news', 'getArticleAlias'),
-			'eval'                    => array('mandatory'=>true)
+			'eval'                    => array('chosen'=>true, 'mandatory'=>true)
 		),
 		'url' => array
 		(

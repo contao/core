@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('mandatory'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true)
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true)
 		),
 		'reply' => array
 		(
