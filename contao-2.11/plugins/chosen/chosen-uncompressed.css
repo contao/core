@@ -10,6 +10,7 @@ select.chzn-select {
   display: inline-block;
   zoom: 1;
   *display: inline;
+  margin:1px 0; /* PATCH */
 }
 .chzn-container .chzn-drop {
   background: #fff;
@@ -55,12 +56,20 @@ select.chzn-select {
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  height: 21px; /* PATCH: 21px instead of 26px */
+  height: 20px; /* PATCH: 20px instead of 26px */
   line-height: 20px; /* PATCH: 20px instead of 26px */
   padding: 0 0 0 6px; /* PATCH: 6px instead of 8px */
   color: #666966; /* PATCH: #666966 instead of #444 */
   text-decoration: none;
 }
+/* PATCH */
+.firefox .chzn-container-single {
+  display:block;
+}
+.firefox .chzn-container-single .chzn-single {
+  height:21px;
+}
+/* PATCH EOF */
 .chzn-container-single .chzn-single span {
   margin-right: 26px;
   display: block;
@@ -323,7 +332,7 @@ select.chzn-select {
   border-left: none;
 }
 .chzn-container-active .chzn-single-with-drop div b {
-  background-position: -18px 1px;
+  background-position: -19px -1px; /* PATCH: -19px -1px instead of -18px 1px */
 }
 .chzn-container-active .chzn-choices {
   /* PATCH

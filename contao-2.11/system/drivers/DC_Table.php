@@ -1738,7 +1738,7 @@ class DC_Table extends DataContainer implements listable, editable
 <div class="tl_formbody">
 <input type="hidden" name="FORM_SUBMIT" value="tl_version">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<select name="version" class="tl_select">'.$versions.'
+<select name="version" class="tl_select right-aligned">'.$versions.'
 </select> 
 <input type="submit" name="showVersion" id="showVersion" class="tl_submit" value="'.specialchars($GLOBALS['TL_LANG']['MSC']['restore']).'">
 </div>

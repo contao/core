@@ -15,6 +15,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('contao/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
@@ -53,7 +54,7 @@
 <tr>
   <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
   <td style="text-align:right">
-    <select name="language" id="language" class="tl_select">
+    <select name="language" id="language" class="tl_select right-aligned">
 <?php foreach ($this->languages as $key=>$lang): ?>
       <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
 <?php endforeach; ?>
