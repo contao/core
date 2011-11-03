@@ -11,6 +11,7 @@ Version 2.10.3 (XXXX-XX-XX)
 - Fixed: do not index empty news/event/FAQ/newsletter reader pages (#3511)
 - Fixed: group labels were not always loaded correctly (#3591)
 - Fixed: added a rename() workaround for Windows to the FileCache class (#3390)
+- Fixed: the site structure was not ordered properly for non-admins (#3423)
 - Fixed a few minor issues
 
 Version 2.10.2 (2011-10-10)
