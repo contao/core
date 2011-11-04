@@ -212,7 +212,8 @@ class ModuleWizard extends Widget
 
 		return $return.'
   </tbody>
-  </table>';
+  </table>
+  <script>$("ctrl_'.$this->strId.'").getElements("select.tl_select").chosen();</script>';
 	}
 }
 
