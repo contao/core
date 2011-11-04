@@ -138,6 +138,12 @@ class ModuleQuicknav extends Module
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
+				// Skip the current page (see #3581)
+				if ($objSubpages->id == $objPage->id)
+				{
+					continue;
+				}
+
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{

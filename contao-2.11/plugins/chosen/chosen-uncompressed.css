@@ -120,14 +120,13 @@ select.chzn-select {
   white-space: nowrap;
 }
 .chzn-container-single .chzn-search input {
-  /* PATCH: -21px instead of -20px */
-  background: #fff url("chosen-sprite.png") no-repeat 100% -21px;
-  background: url("chosen-sprite.png") no-repeat 100% -21px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-  background: url("chosen-sprite.png") no-repeat 100% -21px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("chosen-sprite.png") no-repeat 100% -21px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("chosen-sprite.png") no-repeat 100% -21px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
-  background: url("chosen-sprite.png") no-repeat 100% -21px, -ms-linear-gradient(top, #ffffff 85%,#eeeeee 99%);
-  background: url("chosen-sprite.png") no-repeat 100% -21px, linear-gradient(top, #ffffff 85%,#eeeeee 99%);
+  background: #fff url("chosen-sprite.png") no-repeat 100% -20px;
+  background: url("chosen-sprite.png") no-repeat 100% -20px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+  background: url("chosen-sprite.png") no-repeat 100% -20px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("chosen-sprite.png") no-repeat 100% -20px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+  background: url("chosen-sprite.png") no-repeat 100% -20px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+  background: url("chosen-sprite.png") no-repeat 100% -20px, -ms-linear-gradient(top, #ffffff 85%,#eeeeee 99%);
+  background: url("chosen-sprite.png") no-repeat 100% -20px, linear-gradient(top, #ffffff 85%,#eeeeee 99%);
   margin: 1px 0;
   padding: 4px 20px 4px 5px;
   outline: 0;
