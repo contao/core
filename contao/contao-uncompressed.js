@@ -484,6 +484,7 @@ var AjaxRequest =
 				el.checked = 'checked';
 
 				AjaxRequest.hideBox();
+				Backend.styleFormFields();
 				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
@@ -1326,6 +1327,8 @@ var Backend =
 					}
 				}
 				tr.inject(parent, 'after');
+				tr.getElement('.chzn-container').destroy();
+				new Chosen(tr.getElement('select.tl_select'));
 				break;
 			case 'up':
 				if (tr = parent.getPrevious('tr')) {
@@ -1528,9 +1531,8 @@ var Backend =
 	 */
 	styleFormFields: function() {
 		$$('select').each(function(el) {
-			if (el.getStyle('display') == 'none') {
-				return; // handled by chosen
-			}
+			// Handled by chosen
+			if (el.getStyle('display') == 'none') return;
 
 			// Get the selected option label
 			if ((active = el.getElement('option[selected]')) != null) {
@@ -1560,8 +1562,8 @@ var Backend =
 				div.getElement('span').set('html', option.get('html'));
 			}).setStyle('opacity', 0);
 
-			// Webkit adjustments
-			if (Browser.Engine.webkit) {
+			// Browser-specific adjustments
+			if (Browser.Engine.webkit || Browser.Engine.trident) {
 				el.setStyle('margin-bottom', '4px');
 				div.setStyle('width', div.getStyle('width').toInt()-4);
 			}

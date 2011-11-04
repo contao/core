@@ -66,6 +66,10 @@ select.chzn-select {
 .firefox .chzn-container-single .chzn-single {
   height:21px;
 }
+.win.firefox .chzn-container-single .chzn-single {
+  height:22px;
+  line-height:21px;
+}
 /* PATCH EOF */
 .chzn-container-single .chzn-single span {
   margin-right: 26px;

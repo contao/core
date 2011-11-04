@@ -48,7 +48,7 @@ a,body,div,label,legend,li,ol,p,td,th,ul,fieldset,form,input,optgroup,select,tex
 	font-size:11px;
 	color:#666966;
 }
-.mac fieldset,.mac form,.mac input,.mac optgroup,.mac select,.mac textarea {
+fieldset,form,input,optgroup,select,textarea {
 	font-size:12px;
 }
 h1,h2,h3,h4,h5,h6 {
@@ -256,6 +256,9 @@ pre,.tl_textarea.monospace {
 }
 .firefox .styled_select {
 	line-height:21px;
+}
+.win.firefox .styled_select {
+	line-height:22px;
 }
 .tl_subpanel .styled_select {
 	font-size:11px;

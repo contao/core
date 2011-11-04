@@ -148,6 +148,14 @@ fieldset.tl_radio_container legend {
 .ie7 .tl_tree_radio {
 	margin-top:-2px;
 }
+.ie9 .tl_text,.ie9 .tl_text_2,.ie9 .tl_text_3,.ie9 .tl_text_4,.ie9 .tl_textarea,.ie9 .tl_text_unit,.ie9 .tl_text_trbl,.ie9 .tl_text_interval {
+	padding-top:3px;
+	padding-bottom:3px;
+}
+.ie9 .tl_select,.ie9 .tl_mselect,.ie9 .tl_select_column,.ie9 .tl_select_unit,.ie9 .tl_select_interval {
+	padding-top:2px;
+	padding-bottom:2px;
+}
 
 /* BE 27 */
 .ie7 fieldset.collapsed legend {
