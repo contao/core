@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.10.3 (XXXX-XX-XX)
+Version 2.10.3 (2011-11-07)
 ---------------------------
 - Fixed: the postLogin/Logout hooks broke the save() method of the model (#3545)
 - Fixed: the style sheet editor did not handle font-family/size:inherit correctly (#3531)
