@@ -67,8 +67,8 @@ class ModuleLanguageSwitch extends Module
 		global $objPage;
 		$time = time();
 
-		$objRelated = $this->Database->prepare("SELECT id FROM tl_page WHERE alias=? AND language!=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC")
-									 ->execute($objPage->alias, $objPage->language);
+		$objRelated = $this->Database->prepare("SELECT id FROM tl_page WHERE alias=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC")
+									 ->execute($objPage->alias);
 
 		// Return if there are no related pages
 		if ($objRelated->numRows < 1)
@@ -76,7 +76,31 @@ class ModuleLanguageSwitch extends Module
 			return '';
 		}
 
-		$this->arrRelated = $objRelated->fetchEach('id');
+		while ($objRelated->next())
+		{
+			$objCurrentPage = $this->getPageDetails($objRelated->id);
+
+			// Skip pages under a different domain
+			if ($objCurrentPage->domain != '' && $objCurrentPage->domain != $this->Environment->host)
+			{
+				continue;
+			}
+
+			// Skip the current page
+			if ($objCurrentPage->rootLanguage == $objPage->rootLanguage)
+			{
+				continue;
+			}
+
+			$this->arrRelated[] = $objCurrentPage;
+		}
+
+		// Return if there are no related pages
+		if (empty($this->arrRelated))
+		{
+			return '';
+		}
+
 		return parent::generate();
 	}
 
@@ -89,20 +113,12 @@ class ModuleLanguageSwitch extends Module
 		$arrItems = array();
 		$arrLanguages = $this->getLanguages();
 
-		foreach ($this->arrRelated as $id)
+		foreach ($this->arrRelated as $objPage)
 		{
-			$objPage = $this->getPageDetails($id);
-
-			// Skip pages under a different domain
-			if ($objPage->domain != '' && $objPage->domain != $this->Environment->host)
-			{
-				continue;
-			}
-
 			$arrItems[] = array
 			(
 				'language' => $arrLanguages[$objPage->language],
-				'href' => $this->generateFrontendUrl($objPage->row()),
+				'href' => $this->generateFrontendUrl($objPage->row(), null, $objPage->language),
 				'title' => specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['viewPageIn'], $arrLanguages[$objPage->language])),
 				'isoCode' => $objPage->language
 			);

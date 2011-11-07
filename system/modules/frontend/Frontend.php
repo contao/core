@@ -85,28 +85,42 @@ abstract class Frontend extends Controller
 			return null;
 		}
 
-		$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 		$strRequest = preg_replace('/\?.*$/i', '', $this->Environment->request);
 
-		// Return false if the URL suffix does not match (see #2864)
-		if ($intSuffixLength > 0 && substr($strRequest, -$intSuffixLength) != $GLOBALS['TL_CONFIG']['urlSuffix'])
+		// Remove the URL suffix if not just a language root (e.g. en/) is requested
+		if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest))
 		{
-			return false;
+			$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
+
+			// Return false if the URL suffix does not match (see #2864)
+			if ($intSuffixLength > 0 && substr($strRequest, -$intSuffixLength) != $GLOBALS['TL_CONFIG']['urlSuffix'])
+			{
+				return false;
+			}
+
+			$strRequest = substr($strRequest, 0, -$intSuffixLength);
 		}
 
-		$arrFragments = explode('/', substr($strRequest, 0, -$intSuffixLength));
+		$arrFragments = explode('/', $strRequest);
 
-		// Skip index.php
+		// Skip the index.php fragment
 		if (strtolower($arrFragments[0]) == 'index.php')
 		{
 			array_shift($arrFragments);
 		}
 
-		// Get the language
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && preg_match('/^[a-z]{2}$/', $arrFragments[0]))
+		// Extract the language
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			$this->Input->setGet('language', $arrFragments[0]);
-			array_shift($arrFragments);
+			if (!preg_match('/^[a-z]{2}$/', $arrFragments[0]))
+			{
+				return false; // Language not provided
+			}
+			else
+			{
+				$this->Input->setGet('language', $arrFragments[0]);
+				array_shift($arrFragments);
+			}
 		}
 
 		// HOOK: add custom logic
@@ -132,37 +146,65 @@ abstract class Frontend extends Controller
 
 
 	/**
-	 * Try to find a root page based on language and URL and return its ID
+	 * Return the root page ID (backwards compatibility)
 	 * @return integer
 	 */
 	protected function getRootIdFromUrl()
 	{
-		$host = $this->Environment->host;
-		$accept_language = $this->Environment->httpAcceptLanguage;
-		$time = time();
+		$objRootPage = $this->getRootPageFromUrl();
+		return $objRootPage->numRows ? $objRootPage->id : 0;
+	}
 
-		// Get the language from the URL
+
+	/**
+	 * Try to find a root page based on language and URL
+	 * @return Database_Result
+	 */
+	protected function getRootPageFromUrl()
+	{
+		$time = time();
+		$host = $this->Environment->host;
+
+		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && isset($_GET['language']) && !empty($_GET['language']))
 		{
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND (language=? OR fallback=1)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
+			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
 										  ->limit(1)
 										  ->execute($host, $this->Input->get('language'));
+
+			// No matching root page found
+			if ($objRootPage->numRows < 1)
+			{
+				header('HTTP/1.1 404 Not Found');
+				$this->log('No root page found (host "' . $host . '", language "'. $this->Input->get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				die('No root page found');
+			}
 		}
 		else
 		{
+			$accept_language = $this->Environment->httpAcceptLanguage;
+
 			// Find the matching root pages (thanks to Andreas Schempp)
 			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
 										  ->limit(1)
 										  ->execute($host);
 
-			// Redirect to the language root
+			// No matching root page found
+			if ($objRootPage->numRows < 1)
+			{
+				header('HTTP/1.1 404 Not Found');
+				$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
+				die('No root page found');
+			}
+
+			// Redirect to the language root (e.g. en/)
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
 			{
 				$this->redirect($objRootPage->language . '/', 302);
 			}
 		}
 
-		return $objRootPage->numRows ? $objRootPage->id : 0;
+		return $objRootPage;
 	}
 
 

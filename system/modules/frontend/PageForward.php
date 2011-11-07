@@ -55,7 +55,6 @@ class PageForward extends Frontend
 										  ->limit(1)
 										  ->execute($objPage->id);
 		}
-
 		// Forward to jumpTo page
 		else
 		{
@@ -67,9 +66,8 @@ class PageForward extends Frontend
 		// Forward page does not exist
 		if ($objNextPage->numRows < 1)
 		{
-			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
-
 			header('HTTP/1.1 404 Not Found');
+			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
 			die('Forward page not found');
 		}
 

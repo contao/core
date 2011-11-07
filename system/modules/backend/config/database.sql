@@ -335,7 +335,6 @@ CREATE TABLE `tl_module` (
   `rootPage` int(10) unsigned NOT NULL default '0',
   `navigationTpl` varchar(64) NOT NULL default '',
   `pages` blob NULL,
-  `includeRoot` char(1) NOT NULL default '',
   `showHidden` char(1) NOT NULL default '',
   `customLabel` varchar(64) NOT NULL default '',
   `autologin` char(1) NOT NULL default '',

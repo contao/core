@@ -217,6 +217,7 @@ $GLOBALS['TL_HOOKS'] = array
 	(
 		array('Messages', 'versionCheck'),
 		array('Messages', 'lastLogin'),
+		array('Messages', 'topLevelRoot'),
 		array('Messages', 'languageFallback')
 	)
 );

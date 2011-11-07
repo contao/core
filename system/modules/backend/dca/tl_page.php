@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			array('tl_page', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb'),
-			array('tl_page', 'setDefaultLanguage'),
+			array('tl_page', 'setRootType'),
 			array('tl_page', 'showFallbackWarning')
 		),
 		'onsubmit_callback' => array
@@ -156,12 +156,12 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	(
 		'__selector__'                => array('type', 'autoforward', 'protected', 'createSitemap', 'includeLayout', 'includeCache', 'includeChmod'),
 		'default'                     => '{title_legend},title,alias,type;followup,start,stop',
-		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
-		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
-		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
+		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
@@ -204,7 +204,11 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_page', 'getPageTypes'),
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['PTY']
+			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
+			'save_callback' => array
+			(
+				array('tl_page', 'checkRootType')
+			)
 		),
 		'pageTitle' => array
 		(
@@ -216,7 +220,6 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		'language' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['language'],
-			'default'                 => $GLOBALS['TL_LANGUAGE'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50'),
@@ -874,24 +877,32 @@ class tl_page extends Backend
 
 
 	/**
-	 * Apply the root page language to new pages
+	 * Make new top-level pages root pages
 	 */
-	public function setDefaultLanguage()
+	public function setRootType()
 	{
-		if ($this->Input->get('act') != 'create')
+		if ($this->Input->get('act') == 'create' && $this->Input->get('pid') == 0)
 		{
-			return;
+			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
+		}
+	}
+
+
+	/**
+	 * Make sure that top-level pages are root pages
+	 * @param mixed
+	 * @param DataContainer
+	 * @return mixed
+	 * @throws Exception
+	 */
+	public function checkRootType($varValue, DataContainer $dc)
+	{
+		if ($varValue != 'root' && $dc->activeRecord->pid == 0)
+		{
+			throw new Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
 		}
 
-		if ($this->Input->get('pid') == 0)
-		{
-			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $GLOBALS['TL_LANGUAGE'];
-		}
-		else
-		{
-			$objPage = $this->getPageDetails($this->Input->get('pid'));
-			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
-		}
+		return $varValue;
 	}
 
 
@@ -907,6 +918,7 @@ class tl_page extends Backend
 
 		$this->import('Messages');
 		$this->addRawMessage($this->Messages->languageFallback());
+		$this->addRawMessage($this->Messages->topLevelRoot());
 	}
 
 
@@ -1341,6 +1353,24 @@ class tl_page extends Backend
 		{
 			$disablePA = true;
 			$disablePI = true;
+		}
+
+		// Prevent adding non-root pages on top-level
+		if ($row['pid'] == 0)
+		{
+			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
+									  ->limit(1)
+									  ->execute($this->Input->get('id'));
+
+			if ($objPage->type != 'root')
+			{
+				$disablePA = true;
+
+				if ($row['id'] == 0)
+				{
+					$disablePI = true;
+				}
+			}
 		}
 
 		// Check permissions if the user is not an administrator

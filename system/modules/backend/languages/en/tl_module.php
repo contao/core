@@ -43,7 +43,6 @@ $GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Set a reference page
 $GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Reference page', 'Please choose the reference page from the site structure.');
 $GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigation template', 'Here you can select the navigation template.');
 $GLOBALS['TL_LANG']['tl_module']['pages']          = array('Pages', 'Please choose one or more pages from the site structure.');
-$GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Start from website root', 'Use the website root page as starting point of the module.');
 $GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Show hidden items', 'Show items that are usually hidden in the navigation menu.');
 $GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Custom label', 'Here you can enter a custom label for the drop-down menu.');
 $GLOBALS['TL_LANG']['tl_module']['autologin']      = array('Allow auto login', 'Allow members to log into the front end automatically.');

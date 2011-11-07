@@ -98,42 +98,26 @@ class ModuleBreadcrumb extends Module
 		// Get the first active regular page and display it instead of the root page
 		if ($type == 'root')
 		{
-			if ($this->includeRoot)
-			{
-				$time = time();
+			$time = time();
 
-				// Get the first page
-				$objFirstPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-											   ->limit(1)
-											   ->execute($objPages->id);
+			// Get the first page
+			$objFirstPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+										   ->limit(1)
+										   ->execute($objPages->id);
 
-				$items[] = array
-				(
-					'isRoot' => true,
-					'isActive' => false,
-					'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
-					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
-					'link' => $objPages->title
-				);
-			}
-
-			array_pop($pages);
-		}
-
-		// Link to website root
-		elseif ($this->includeRoot)
-		{
 			$items[] = array
 			(
 				'isRoot' => true,
 				'isActive' => false,
-				'href' => $this->Environment->base,
-				'title' => specialchars($GLOBALS['TL_CONFIG']['websiteTitle'], true),
-				'link' => $GLOBALS['TL_CONFIG']['websiteTitle']
+				'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
+				'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
+				'link' => $objPages->title
 			);
+
+			array_pop($pages);
 		}
 
-		// Build breadcrumb menu
+		// Build the breadcrumb menu
 		for ($i=(count($pages)-1); $i>0; $i--)
 		{
 			if (($pages[$i]['hide'] && !$this->showHidden) || (!$pages[$i]['published'] && !BE_USER_LOGGED_IN))

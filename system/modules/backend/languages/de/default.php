@@ -76,6 +76,8 @@ $GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Achtung!</strong> S
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'Bei keinem der aktiven Website-Startpunkte ohne explizite DNS-Angabe wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 $GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'Bei keinem der aktiven Website-Startpunkte für <strong>%s</strong> wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'Sie können nur einen Website-Startpunkt pro Domain als Sprachen-Fallback definieren.';
+$GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Seiten in der obersten Ebene müssen Website-Startpunkte sein!';
+$GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'Auf der obersten Ebene befinden sich Seiten, die keine Website-Startpunkte sind. Webseiten ohne Startpunkt werden nicht mehr unterstützt, daher stellen Sie bitte sicher, dass alle Seiten unter einem Startpunkt gruppiert sind.';
 
 
 /**

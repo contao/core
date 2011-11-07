@@ -75,9 +75,11 @@ class ModuleSitemap extends Module
 	 */
 	protected function compile()
 	{
-		if ($this->includeRoot)
+		// Start from the website root if there is no reference page
+		if ($this->rootPage == 0)
 		{
-			$this->rootPage = 0;
+			global $objPage;
+			$this->rootPage = $objPage->rootId;
 		}
 
 		$this->showLevel = 0;

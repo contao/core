@@ -55,28 +55,21 @@ class PageRoot extends Frontend
 									  ->limit(1)
 									  ->execute($pageId);
 
-		if ($objNextPage->numRows)
+		// No active pages yet
+		if ($objNextPage->numRows < 1)
 		{
-			if ($blnReturn)
-			{
-				return $objNextPage->id;
-			}
-
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
+			header('HTTP/1.1 404 Not Found');
+			$this->log('No active page found under root page "' . $pageId . '")', 'PageRoot generate()', TL_ERROR);
+			die('No active pages found');
 		}
 
-		// No page found
-		if ($pageId === 0)
+		// Only return the page ID
+		if ($blnReturn)
 		{
-			$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);
-		}
-		else
-		{
-			$this->log('No active page found under root page "' . $pageId . '" (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);
+			return $objNextPage->id;
 		}
 
-		header('HTTP/1.1 404 Not Found');
-		die('No pages found');
+		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
 	}
 }
 

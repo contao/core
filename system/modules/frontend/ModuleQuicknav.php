@@ -85,14 +85,16 @@ class ModuleQuicknav extends Module
 	 */
 	protected function compile()
 	{
-		if ($this->includeRoot)
+		// Start from the website root if there is no reference page
+		if ($this->rootPage == 0)
 		{
-			$this->rootPage = 0;
+			global $objPage;
+			$this->rootPage = $objPage->rootId;
 		}
 
 		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
-		$this->Template->title = strlen($this->customLabel) ? $this->customLabel : $GLOBALS['TL_LANG']['MSC']['quicknav'];
+		$this->Template->title = ($this->customLabel != '') ? $this->customLabel : $GLOBALS['TL_LANG']['MSC']['quicknav'];
 		$this->Template->request = ampersand($this->Environment->request, true);
 		$this->Template->items = $this->getQuicknavPages($this->rootPage);
 	}

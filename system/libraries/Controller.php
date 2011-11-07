@@ -660,6 +660,7 @@ abstract class Controller extends System
 			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
+			$objPage->language = $objParentPage->language;
 			$objPage->staticFiles = $objParentPage->staticFiles;
 			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
@@ -679,19 +680,12 @@ abstract class Controller extends System
 			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
 			$objPage->rootIsFallback = ($objParentPage->fallback != '');
 		}
-		else
+		// No root page found
+		elseif (TL_MODE == 'FE')
 		{
-			$objPage->rootId = 0;
-			$objPage->rootTitle = $GLOBALS['TL_CONFIG']['websiteTitle'];
-			$objPage->domain = '';
-			$objPage->rootLanguage = $objPage->language;
-			$objPage->staticFiles = '';
-			$objPage->staticSystem = '';
-			$objPage->staticPlugins = '';
-			$objPage->rootIsPublic = true;
-			$objPage->rootIsFallback = true;
-
-			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			header('HTTP/1.1 404 Not Found');
+			$this->log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
+			die('No root page found');
 		}
 
 		$objPage->trail = array_reverse($trail);
@@ -2461,9 +2455,10 @@ abstract class Controller extends System
 	 * Generate an URL from a tl_page record depending on the current rewriteURL setting and return it
 	 * @param array
 	 * @param string
+	 * @param string
 	 * @return string
 	 */
-	protected function generateFrontendUrl($arrRow, $strParams='')
+	protected function generateFrontendUrl($arrRow, $strParams=null, $strForceLang=null)
 	{
 		global $objPage;
 
@@ -2473,7 +2468,18 @@ abstract class Controller extends System
 
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 			{
-				$strLanguage .= (isset($arrRow['language']) ? $arrRow['language'] : $objPage->rootLanguage) . '/';
+				if ($strForceLang != '')
+				{
+					$strLanguage = $strForceLang . '/';
+				}
+				elseif (isset($arrRow['language']) && $arrRow['type'] == 'root')
+				{
+					$strLanguage = $arrRow['language'] . '/';
+				}
+				else
+				{
+					$strLanguage = $objPage->rootLanguage . '/';
+				}
 			}
 
 			$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
@@ -2505,7 +2511,7 @@ abstract class Controller extends System
 			}
 		}
 
-		return $strUrl;
+		return str_replace('index' . $GLOBALS['TL_CONFIG']['urlSuffix'], '', $strUrl);
 	}
 
 

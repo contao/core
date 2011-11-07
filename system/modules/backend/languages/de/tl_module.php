@@ -43,7 +43,6 @@ $GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Eine Referenzseite f
 $GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Referenzseite', 'Bitte wählen Sie die Referenzseite aus der Seitenstruktur.');
 $GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigationstemplate', 'Hier können Sie das Navigationstemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['pages']          = array('Seiten', 'Bitte wählen Sie eine oder mehrere Seiten aus der Seitenstruktur.');
-$GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Wurzelseite als Startpunkt', 'Die Wurzelseite der Seitenstruktur als Ausgangspunkt des Moduls verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Versteckte Seiten anzeigen', 'Menüpunkte anzeigen, die sonst in der Navigation nicht sichtbar sind.');
 $GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Individuelle Bezeichnung', 'Hier können Sie eine individuelle Bezeichnung für das Drop-Down-Menü eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['autologin']      = array('Autologin erlauben', 'Mitgliedern die automatische Anmeldung im Frontend erlauben.');

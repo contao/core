@@ -76,6 +76,8 @@ $GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Attention!</strong>
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'None of the active website root pages without an explicit DNS setting has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
 $GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'None of the active website root pages for <strong>%s</strong> has the language fallback option set, which means that these websites are only available in the one language you have defined in the page settings! Visitors and search engines who do not speak this language will not be able to browse your website.';
 $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'You can only define one website root page per domain as language fallback.';
+$GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Top-level pages must be website root pages!';
+$GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.';
 
 
 /**

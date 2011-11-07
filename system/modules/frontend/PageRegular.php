@@ -191,9 +191,8 @@ class PageRegular extends Frontend
 		// Die if there is no layout at all
 		if ($objLayout->numRows < 1)
 		{
-			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
-
 			header('HTTP/1.1 501 Not Implemented');
+			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
 			die('No layout specified');
 		}
 
