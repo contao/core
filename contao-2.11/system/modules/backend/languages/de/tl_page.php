@@ -78,6 +78,7 @@ $GLOBALS['TL_LANG']['tl_page']['stop']           = array('Anzeigen bis', 'Die Se
  */
 $GLOBALS['TL_LANG']['tl_page']['title_legend']     = 'Name und Typ';
 $GLOBALS['TL_LANG']['tl_page']['meta_legend']      = 'Meta-Informationen';
+$GLOBALS['TL_LANG']['tl_page']['system_legend']    = 'System-Einstellungen';
 $GLOBALS['TL_LANG']['tl_page']['redirect_legend']  = 'Weiterleitung';
 $GLOBALS['TL_LANG']['tl_page']['dns_legend']       = 'DNS-Einstellungen';
 $GLOBALS['TL_LANG']['tl_page']['sitemap_legend']   = 'XML-Sitemap';

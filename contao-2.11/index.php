@@ -77,27 +77,24 @@ class Index extends Frontend
 	public function run()
 	{
 		global $objPage;
-
-		// Get the page ID
 		$pageId = $this->getPageIdFromUrl();
 
 		// Load a website root page object if there is no page ID
 		if ($pageId === null)
 		{
+			$objRootPage = $this->getRootPageFromUrl();
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
-			$pageId = $objHandler->generate($this->getRootIdFromUrl(), true);
+			$pageId = $objHandler->generate($objRootPage->id, true);
 		}
-
-		// Throw a 404 error if it is not a Contao request (see #2864)
+		// Throw a 404 error if the request is not a Contao request (see #2864)
 		elseif ($pageId === false)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
-
 		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
-		if ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
+		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -116,6 +113,7 @@ class Index extends Frontend
 			$objNewPage = null;
 			$arrPages = array();
 
+			// Order by domain and language
 			while ($objPage->next())
 			{
 				$objCurrentPage = $this->getPageDetails($objPage->id);
@@ -140,36 +138,31 @@ class Index extends Frontend
 			}
 
 			// Try to find a page matching the language parameter
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-			{
-				$lang = $this->Input->get('language');
-
-				if ($lang != '' && isset($arrLangs[$lang]))
-				{
-					$objNewPage = $arrLangs[$lang];
-				}
-			}
-			else
+			if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 			{
 				$objNewPage = $arrLangs['*']; // Fallback language
 			}
+			elseif (($lang = $this->Input->get('language')) != '' && isset($arrLangs[$lang]))
+			{
+				$objNewPage = $arrLangs[$lang];
+			}
 
-			// Matching root page found
+			// Store the page object
 			if (is_object($objNewPage))
 			{
 				$objPage = $objNewPage;
 			}
 		}
 
-		// Load an error 404 page object if the result is empty or still ambiguous
-		if ($objPage->numRows != 1)
+		// Throw a 404 error if the result is still ambiguous or the language does not match
+		if ($objPage->numRows != 1 || ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->language))
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
 
-		// Load a website root page object if the page is a website root page
+		// Load a website root page object (will redirect to the first active regular page)
 		if ($objPage->type == 'root')
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
@@ -201,11 +194,11 @@ class Index extends Frontend
 			}
 		}
 
-		// Authenticate the current user
+		// Authenticate the user
 		if (!$this->User->authenticate() && $objPage->protected && !BE_USER_LOGGED_IN)
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId, $objPage->rootId);
+			$objHandler->generate($pageId, $objRootPage);
 		}
 
 		// Check the user groups if the page is protected
@@ -214,7 +207,7 @@ class Index extends Frontend
 			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
 
 			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId, $objPage->rootId);
+			$objHandler->generate($pageId, $objRootPage);
 		}
 
 		// Load the page object depending on its type
@@ -228,7 +221,7 @@ class Index extends Frontend
 				break;
 
 			case 'error_403':
-				$objHandler->generate($pageId, $objPage->rootId);
+				$objHandler->generate($pageId, $objRootPage);
 				break;
 
 			default:

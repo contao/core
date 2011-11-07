@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1135 (Change)
+--------------
+The page language is now determined by the root page language (see #3580).
+This has a lot of advantages and a small catch: you will not be able to create
+websites without a root page anymore - which was not recommended anyway.
+
 r1129 (Improved)
 ----------------
 Added a nice cross-browser select menu style (progressive enhancement).

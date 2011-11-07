@@ -264,7 +264,6 @@ abstract class Module extends Frontend
 
 					default:
 						$href = $this->generateFrontendUrl($objSubpages->row());
-						$href = str_replace('index.html', '', $href);
 						break;
 				}
 

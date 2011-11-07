@@ -114,12 +114,12 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'default'                     => '{title_legend},name,type',
 		'navigation'                  => '{title_legend},name,headline,type;{nav_legend},levelOffset,showLevel,hardLimit,showProtected;{reference_legend:hide},defineRoot;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'customnav'                   => '{title_legend},name,headline,type;{nav_legend},showProtected,pages;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'breadcrumb'                  => '{title_legend},name,headline,type;{nav_legend},includeRoot,showHidden;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'quicknav'                    => '{title_legend},name,headline,type;{nav_legend},customLabel,showLevel,hardLimit,includeRoot,showProtected,showHidden;{reference_legend:hide},rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'breadcrumb'                  => '{title_legend},name,headline,type;{nav_legend},showHidden;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'quicknav'                    => '{title_legend},name,headline,type;{nav_legend},customLabel,showLevel,hardLimit,showProtected,showHidden;{reference_legend:hide},rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'quicklink'                   => '{title_legend},name,headline,type;{nav_legend},customLabel,pages;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'booknav'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden,rootPage;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'articlenav'                  => '{title_legend},name,headline,type;{config_legend},loadFirst;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},includeRoot,showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
+		'sitemap'                     => '{title_legend},name,headline,type;{nav_legend},showProtected,showHidden;{reference_legend:hide},rootPage;{template_legend:hide},navigationTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'languageSwitch'              => '{title_legend},name,headline,type;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'login'                       => '{title_legend},name,headline,type;{config_legend},autologin;{redirect_legend},jumpTo,redirectBack;{template_legend:hide},cols;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'logout'                      => '{title_legend},name,headline,type;{redirect_legend},jumpTo,redirectBack;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
@@ -232,13 +232,6 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
 			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
-		),
-		'includeRoot' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['includeRoot'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
 		),
 		'showHidden' => array
 		(

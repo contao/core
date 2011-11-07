@@ -43,33 +43,32 @@ class PageError403 extends Frontend
 	/**
 	 * Generate an error 403 page
 	 * @param integer
-	 * @param integer
+	 * @param Database_Result
+	 * @throws Exception
 	 */
-	public function generate($pageId, $rootId=false)
+	public function generate($pageId, $objRootPage=null)
 	{
 		$time = time();
 
 		// Add a log entry
 		$this->log('Access to page ID "' . $pageId . '" denied', 'PageError403 generate()', TL_ERROR);
 
-		// Use the given $rootId if available (thanks to Andreas Schempp)
-		if (!$rootId)
+		// Use the given root page object if available (thanks to Andreas Schempp)
+		if ($objRootPage === null)
 		{
-			$rootId = $this->getRootIdFromUrl();
+			$objRootPage = $this->getRootPageFromUrl();
+		}
+		else
+		{
+			$objRootPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
+										  ->limit(1)
+										  ->execute((is_integer($objRootPage) ? $objRootPage : $objRootPage->id));
 		}
 
-		// Look for an error_403 page within the website root
+		// Look for an error_403 page
 		$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								 ->limit(1)
-								 ->execute('error_403', $rootId, $time, $time);
-
-		// Look for a global error_403 page
-		if ($obj403->numRows < 1)
-		{
-			$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type='error_403' AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									 ->limit(1)
-									 ->execute();
-		}
+								 ->execute('error_403', $objRootPage->id, $time, $time);
 
 		// Die if there is no page at all
 		if ($obj403->numRows < 1)
@@ -97,15 +96,14 @@ class PageError403 extends Frontend
 									  ->limit(1)
 									  ->execute($obj403->jumpTo);
 
-		if ($objNextPage->numRows)
+		if ($objNextPage->numRows < 1)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), (($obj403->redirect == 'temporary') ? 302 : 301));
+			header('HTTP/1.1 403 Forbidden');
+			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);
+			die('Forward page not found');
 		}
 
-		$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);
-
-		header('HTTP/1.1 403 Forbidden');
-		die('Forward page not found');
+		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

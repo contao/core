@@ -115,6 +115,23 @@ class Messages extends Backend
 
 		return implode("\n", $arrReturn);
 	}
+
+
+	/**
+	 * Show a warning if there are non-root pages on the top-level
+	 * @return string
+	 */
+	public function topLevelRoot()
+	{
+		$objCount = $this->Database->execute("SELECT COUNT(*) AS count FROM tl_page WHERE pid=0 AND type!='root'");
+
+		if ($objCount->count > 0)
+		{
+			return '<p class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['topLevelRegular'] . '</p>';
+		}
+
+		return '';
+	}
 }
 
 ?>
