@@ -127,7 +127,9 @@ Mediabox.scanPage = function() {
     'showCaption': false,
     'showCounter': false
   };
-  $$(links).mediabox(options, null, function(el) {
+  $$(links).mediabox(options, function(el) {
+	return [el.href, el.title, el.getAttribute('data-lightbox')];
+  }, function(el) {
     var data = this.getAttribute('data-lightbox').split(' ');
     return (this == el) || el.getAttribute('data-lightbox').match(data[0]);
   });

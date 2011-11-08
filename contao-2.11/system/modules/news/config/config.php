@@ -67,4 +67,11 @@ $GLOBALS['TL_CRON']['daily'][] = array('News', 'generateFeeds');
  */
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('News', 'getSearchablePages');
 
+
+/**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'news';
+$GLOBALS['TL_PERMISSIONS'][] = 'newp';
+
 ?>

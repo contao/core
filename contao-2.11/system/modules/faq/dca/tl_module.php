@@ -34,6 +34,7 @@
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['faqlist']   = '{title_legend},name,headline,type;{config_legend},faq_categories;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['faqreader'] = '{title_legend},name,headline,type;{config_legend},faq_categories;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['faqpage']   = '{title_legend},name,headline,type;{config_legend},faq_categories;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**

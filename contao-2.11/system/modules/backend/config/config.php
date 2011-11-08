@@ -224,8 +224,9 @@ $GLOBALS['TL_HOOKS'] = array
 
 
 /**
- * Mime types
+ * Other global arrays
  */
 $GLOBALS['TL_MIME'] = array();
+$GLOBALS['TL_PERMISSIONS'] = array();
 
 ?>

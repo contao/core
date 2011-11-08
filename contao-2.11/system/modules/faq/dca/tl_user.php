@@ -30,42 +30,32 @@
 
 
 /**
- * Add back end modules
+ * Extend default palette
  */
-array_insert($GLOBALS['BE_MOD']['content'], 2, array
+$GLOBALS['TL_DCA']['tl_user']['palettes']['extend'] = str_replace('formp;', 'formp;{faq_legend},faqs,faqp;', $GLOBALS['TL_DCA']['tl_user']['palettes']['extend']);
+$GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace('formp;', 'formp;{faq_legend},faqs,faqp;', $GLOBALS['TL_DCA']['tl_user']['palettes']['custom']);
+
+
+/**
+ * Add fields to tl_user_group
+ */
+$GLOBALS['TL_DCA']['tl_user']['fields']['faqs'] = array
 (
-	'faq' => array
-	(
-		'tables' => array('tl_faq_category', 'tl_faq'),
-		'icon'   => 'system/modules/faq/html/icon.gif'
-	)
-));
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['faqs'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'foreignKey'              => 'tl_faq_category.title',
+	'eval'                    => array('multiple'=>true)
+);
 
-
-/**
- * Front end modules
- */
-array_insert($GLOBALS['FE_MOD'], 3, array
+$GLOBALS['TL_DCA']['tl_user']['fields']['faqp'] = array
 (
-	'faq' => array
-	(
-		'faqlist'   => 'ModuleFaqList',
-		'faqreader' => 'ModuleFaqReader',
-		'faqpage'   => 'ModuleFaqPage'
-	)
-));
-
-
-/**
- * Register hooks
- */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('ModuleFaq', 'getSearchablePages');
-
-
-/**
- * Add permissions
- */
-$GLOBALS['TL_PERMISSIONS'][] = 'faqs';
-$GLOBALS['TL_PERMISSIONS'][] = 'faqp';
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['faqp'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'options'                 => array('create', 'delete'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('multiple'=>true)
+);
 
 ?>

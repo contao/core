@@ -11,7 +11,11 @@ Mediabox.scanPage = function() {
   var links = $$('a').filter(function(el) {
     return el.getAttribute('data-lightbox') != null;
   });
-  $$(links).mediabox({/* Put custom options here */}, null, function(el) {
+  $$(links).mediabox({
+    // Put custom options here
+  }, function(el) {
+	return [el.href, el.title, el.getAttribute('data-lightbox')];
+  }, function(el) {
     var data = this.getAttribute('data-lightbox').split(' ');
     return (this == el) || el.getAttribute('data-lightbox').match(data[0]);
   });

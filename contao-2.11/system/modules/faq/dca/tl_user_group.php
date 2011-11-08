@@ -23,56 +23,38 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * @package    Faq
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Back end modules
+ * Extend default palette
  */
-array_insert($GLOBALS['BE_MOD']['content'], 1, array
+$GLOBALS['TL_DCA']['tl_user_group']['palettes']['default'] = str_replace('formp;', 'formp;{faq_legend},faqs,faqp;', $GLOBALS['TL_DCA']['tl_user_group']['palettes']['default']);
+
+
+/**
+ * Add fields to tl_user_group
+ */
+$GLOBALS['TL_DCA']['tl_user_group']['fields']['faqs'] = array
 (
-	'calendar' => array
-	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events'),
-		'icon'       => 'system/modules/calendar/html/icon.gif'
-	)
-));
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['faqs'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'foreignKey'              => 'tl_faq_category.title',
+	'eval'                    => array('multiple'=>true)
+);
 
-
-/**
- * Front end modules
- */
-array_insert($GLOBALS['FE_MOD'], 2, array
+$GLOBALS['TL_DCA']['tl_user_group']['fields']['faqp'] = array
 (
-	'events' => array
-	(
-		'calendar'    => 'ModuleCalendar',
-		'eventreader' => 'ModuleEventReader',
-		'eventlist'   => 'ModuleEventlist',
-		'eventmenu'   => 'ModuleEventMenu'
-	)
-));
-
-
-/**
- * Cron jobs
- */
-$GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
-
-
-/**
- * Register hook to add news items to the indexer
- */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
-
-
-/**
- * Add permissions
- */
-$GLOBALS['TL_PERMISSIONS'][] = 'calendars';
-$GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
+	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['faqp'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'options'                 => array('create', 'delete'),
+	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
+	'eval'                    => array('multiple'=>true)
+);
 
 ?>
