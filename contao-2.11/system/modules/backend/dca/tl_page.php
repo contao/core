@@ -1376,20 +1376,23 @@ class tl_page extends Backend
 		// Check permissions if the user is not an administrator
 		if (!$this->User->isAdmin)
 		{
-			// Disable "paste into" button if there is no permission 2 for the current page
-			if (!$disablePI && !$this->User->isAllowed(2, $row))
+			// Disable "paste into" button if there is no permission 2 (move) or 1 (create) for the current page
+			if (!$disablePI)
 			{
-				$disablePI = true;
+				if (!$this->User->isAllowed(2, $row) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
+				{
+					$disablePI = true;
+				}
 			}
 
 			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
 									  ->limit(1)
 									  ->execute($row['pid']);
 
-			// Disable "paste after" button if there is no permission 2 for the parent page
+			// Disable "paste after" button if there is no permission 2 (move) or 1 (create) for the parent page
 			if (!$disablePA && $objPage->numRows)
 			{
-				if (!$this->User->isAllowed(2, $objPage->row()))
+				if (!$this->User->isAllowed(2, $objPage->row()) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
 				{
 					$disablePA = true;
 				}
