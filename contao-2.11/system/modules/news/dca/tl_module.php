@@ -34,7 +34,7 @@
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_numberOfItems,news_featured,perPage,skipFirst;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newsreader']  = '{title_legend},name,headline,type;{config_legend},news_archives;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newsarchive'] = '{title_legend},name,headline,type;{config_legend},news_archives,news_jumpToCurrent,perPage,news_format;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['newsarchive'] = '{title_legend},name,headline,type;{config_legend},news_archives,news_jumpToCurrent,news_readerModule,perPage,news_format;{template_legend:hide},news_metaFields,news_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['newsmenu']    = '{title_legend},name,headline,type;{config_legend},news_archives,news_showQuantity,news_format,news_startDay,news_order;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
@@ -76,7 +76,18 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options'                 => array('hide_module', 'show_current', 'all_items'),
-	'reference'               => &$GLOBALS['TL_LANG']['tl_module']
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['news_readerModule'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_readerModule'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options_callback'        => array('tl_module_news', 'getReaderModules'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
@@ -198,6 +209,24 @@ class tl_module_news extends Backend
 		}
 
 		return $arrArchives;
+	}
+
+
+	/**
+	 * Get all news reader modules and return them as array
+	 * @return array
+	 */
+	public function getReaderModules()
+	{
+		$arrModules = array();
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id WHERE m.type='newsreader' ORDER BY t.name, m.name");
+
+		while ($objModules->next())
+		{
+			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
+		}
+
+		return $arrModules;
 	}
 
 

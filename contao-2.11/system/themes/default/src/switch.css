@@ -42,7 +42,7 @@ p {
 #container {
 	height:22px;
 	margin:0 0 2px;
-	padding:3px 6px 5px 12px;
+	padding:3px 6px 6px 12px;
 	overflow:hidden;
 	background:#ffc;
 	line-height:1;
@@ -52,7 +52,7 @@ p {
 #left {
 	width:22%;
 	float:left;
-	padding:6px 0;
+	padding:7px 0 5px;
 }
 
 /* Right */
@@ -63,7 +63,7 @@ p {
 }
 img.close {
 	padding-left:3px;
-	vertical-align:middle;
+	vertical-align:-1px;
 	cursor:pointer
 }
 
