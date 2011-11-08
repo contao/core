@@ -68,7 +68,20 @@ class ModuleNewsArchive extends ModuleNews
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1 || ($this->news_jumpToCurrent == 'hide_module' && !isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day'])))
+		// No news archives available
+		if (!is_array($this->news_archives) || empty($this->news_archives))
+		{
+			return '';
+		}
+
+		// Show the news reader if an item has been selected
+		if ($this->news_readerModule > 0 && $this->Input->get('items') != '')
+		{
+			return $this->getFrontendModule($this->news_readerModule, $this->strColumn);
+		}
+
+		// Hide the module if no period has been selected
+		if ($this->news_jumpToCurrent == 'hide_module' && !isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
 		{
 			return '';
 		}

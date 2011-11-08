@@ -6,6 +6,12 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
+r1136 (Improved)
+----------------
+In a news archive module you can now optionally add a news reader module to
+automatically switch to the full article if an item has been selected. This
+allows us to use the news archive and news reader on the same page.
+
 r1135 (Change)
 --------------
 The page language is now determined by the root page language (see #3580).
