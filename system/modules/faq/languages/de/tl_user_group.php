@@ -23,56 +23,15 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * @package    Faq
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Back end modules
+ * Legends
  */
-array_insert($GLOBALS['BE_MOD']['content'], 1, array
-(
-	'calendar' => array
-	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events'),
-		'icon'       => 'system/modules/calendar/html/icon.gif'
-	)
-));
-
-
-/**
- * Front end modules
- */
-array_insert($GLOBALS['FE_MOD'], 2, array
-(
-	'events' => array
-	(
-		'calendar'    => 'ModuleCalendar',
-		'eventreader' => 'ModuleEventReader',
-		'eventlist'   => 'ModuleEventlist',
-		'eventmenu'   => 'ModuleEventMenu'
-	)
-));
-
-
-/**
- * Cron jobs
- */
-$GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
-
-
-/**
- * Register hook to add news items to the indexer
- */
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
-
-
-/**
- * Add permissions
- */
-$GLOBALS['TL_PERMISSIONS'][] = 'calendars';
-$GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
+$GLOBALS['TL_LANG']['tl_user_group']['faq_legend'] = 'FAQ-Rechte';
 
 ?>

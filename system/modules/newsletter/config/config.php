@@ -67,4 +67,11 @@ $GLOBALS['TL_HOOKS']['createNewUser'][] = array('Newsletter', 'createNewUser');
 $GLOBALS['TL_HOOKS']['activateAccount'][] = array('Newsletter', 'activateAccount');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Newsletter', 'getSearchablePages');
 
+
+/**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'newsletters';
+$GLOBALS['TL_PERMISSIONS'][] = 'newsletterp';
+
 ?>

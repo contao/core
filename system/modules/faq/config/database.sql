@@ -74,3 +74,27 @@ CREATE TABLE `tl_faq_category` (
 CREATE TABLE `tl_module` (
   `faq_categories` blob NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table `tl_user`
+-- 
+
+CREATE TABLE `tl_user` (
+  `faqs` blob NULL,
+  `faqp` blob NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Table `tl_user_group`
+-- 
+
+CREATE TABLE `tl_user_group` (
+  `faqs` blob NULL,
+  `faqp` blob NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

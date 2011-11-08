@@ -333,30 +333,9 @@ class BackendUser extends User
 		$depends = array('modules', 'themes', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
-		if (is_array($GLOBALS['TL_PERMISSIONS']) && count($GLOBALS['TL_PERMISSIONS'] > 0))
+		if (is_array($GLOBALS['TL_PERMISSIONS']) && !empty($GLOBALS['TL_PERMISSIONS']))
 		{
 		    $depends = array_merge($depends, $GLOBALS['TL_PERMISSIONS']);
-		}
-
-		// HOOK: add news archive permissions
-		if (in_array('news', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'news';
-			$depends[] = 'newp';
-		}
-
-		// HOOK: add calendar permissions
-		if (in_array('calendar', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'calendars';
-			$depends[] = 'calendarp';
-		}
-
-		// HOOK: add newsletters permissions
-		if (in_array('newsletter', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'newsletters';
-			$depends[] = 'newsletterp';
 		}
 
 		// Overwrite user permissions if only group permissions shall be inherited
