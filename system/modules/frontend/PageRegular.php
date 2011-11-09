@@ -296,8 +296,6 @@ class PageRegular extends Frontend
 			}
 		}
 
-		$this->Template->framework = '<link rel="stylesheet"' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' href="system/contao.css" media="screen"' . (($objPage->outputFormat == 'xhtml') ? " />\n" : ">\n");
-
 		// Add layout specific CSS
 		if (!empty($strFramework))
 		{
@@ -378,9 +376,22 @@ class PageRegular extends Frontend
 		}
 
 		$objCombiner = new Combiner();
+		$objLayout->skipTinymce = deserialize($objLayout->skipTinymce);
 
-		// Default TinyMCE style sheet
-		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		// Backwards compatibility
+		if (!is_array($objLayout->skipTinymce))
+		{
+			$objLayout->skipTinymce = $objLayout->skipTinymce ? array($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') : array();
+		}
+
+		// Skip the Contao framework style sheet
+		if (!in_array('system/contao.css', $objLayout->skipTinymce))
+		{
+			$objCombiner->add('system/contao.css');
+		}
+
+		// Skip the TinyMCE style sheet
+		if (!in_array($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', $objLayout->skipTinymce) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
 			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'), 'all');
 		}
