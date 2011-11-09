@@ -824,6 +824,9 @@ label.tl_change_selected {
 	display:block;
 	margin:-2px 0 0;
 }
+.tl_checkbox_wizard span.fixed {
+	margin-top:1px;
+}
 .tl_checkbox_wizard {
 	padding-top:2px;
 }
