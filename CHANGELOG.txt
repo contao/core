@@ -6,7 +6,7 @@
 Version 2.11.beta1 (XXXX-XX-XX)
 ===============================
 
-r1140 (Changed)
+r1141 (Changed)
 ---------------
 The Contao framework style sheet (system/contao.css) is now included in the
 combined CSS file and can be disabled in the page layout settings (see #3609).
