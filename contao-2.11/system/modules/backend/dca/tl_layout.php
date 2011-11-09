@@ -110,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -230,10 +230,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'skipTinymce' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipTinymce'],
+			'default'                 => 1,
 			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'options'                 => array('system/contao.css', 'tl_files/tinymce.css'),
-			'eval'                    => array('multiple'=>true)
+			'inputType'               => 'checkbox'
 		),
 		'newsfeeds' => array
 		(
@@ -268,6 +267,13 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_layout', 'getPageTemplates'),
 			'eval'                    => array('tl_class'=>'w50')
+		),
+		'skipFramework' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipFramework'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'doctype' => array
 		(
@@ -305,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
 		),
 		'head' => array
 		(

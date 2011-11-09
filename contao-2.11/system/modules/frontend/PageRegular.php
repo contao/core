@@ -235,83 +235,87 @@ class PageRegular extends Frontend
 
 		$strFramework = '';
 
-		// Wrapper
-		if ($objLayout->static)
+		// Generate the CSS framework
+		if (!$objLayout->skipFramework)
 		{
-			$arrSize = deserialize($objLayout->width);
-			$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
-		}
-
-		// Header
-		if ($objLayout->header)
-		{
-			$arrSize = deserialize($objLayout->headerHeight);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			// Wrapper
+			if ($objLayout->static)
 			{
-				$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$arrSize = deserialize($objLayout->width);
+				$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 			}
-		}
 
-		$strMain = '';
-
-		// Left column
-		if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
-		{
-			$arrSize = deserialize($objLayout->widthLeft);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			// Header
+			if ($objLayout->header)
 			{
-				$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+				$arrSize = deserialize($objLayout->headerHeight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				}
 			}
-		}
 
-		// Right column
-		if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-		{
-			$arrSize = deserialize($objLayout->widthRight);
+			$strMain = '';
 
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			// Left column
+			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
 			{
-				$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+				$arrSize = deserialize($objLayout->widthLeft);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+				}
 			}
-		}
 
-		// Main column
-		if (strlen($strMain))
-		{
-			$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
-		}
-
-		// Footer
-		if ($objLayout->footer)
-		{
-			$arrSize = deserialize($objLayout->footerHeight);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			// Right column
+			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
 			{
-				$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$arrSize = deserialize($objLayout->widthRight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+				}
 			}
-		}
 
-		// Add layout specific CSS
-		if (!empty($strFramework))
-		{
-			if ($objPage->outputFormat == 'xhtml')
+			// Main column
+			if ($strMain != '')
 			{
-				$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
-				$this->Template->framework .= '/* <![CDATA[ */' . "\n";
-				$this->Template->framework .= $strFramework;
-				$this->Template->framework .= '/* ]]> */' . "\n";
-				$this->Template->framework .= '</style>' . "\n";
+				$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
 			}
-			else
+
+			// Footer
+			if ($objLayout->footer)
 			{
-				$this->Template->framework .= '<style media="screen">' . "\n";
-				$this->Template->framework .= $strFramework;
-				$this->Template->framework .= '</style>' . "\n";
+				$arrSize = deserialize($objLayout->footerHeight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				}
+			}
+
+			// Add layout specific CSS
+			if ($strFramework != '')
+			{
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
+					$this->Template->framework .= '/* <![CDATA[ */' . "\n";
+					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= '/* ]]> */' . "\n";
+					$this->Template->framework .= '</style>' . "\n";
+				}
+				else
+				{
+					$this->Template->framework .= '<style media="screen">' . "\n";
+					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= '</style>' . "\n";
+				}
 			}
 		}
 
@@ -376,22 +380,15 @@ class PageRegular extends Frontend
 		}
 
 		$objCombiner = new Combiner();
-		$objLayout->skipTinymce = deserialize($objLayout->skipTinymce);
-
-		// Backwards compatibility
-		if (!is_array($objLayout->skipTinymce))
-		{
-			$objLayout->skipTinymce = $objLayout->skipTinymce ? array($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css') : array();
-		}
 
 		// Skip the Contao framework style sheet
-		if (!in_array('system/contao.css', $objLayout->skipTinymce))
+		if (!$objLayout->skipFramework)
 		{
 			$objCombiner->add('system/contao.css');
 		}
 
 		// Skip the TinyMCE style sheet
-		if (!in_array($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', $objLayout->skipTinymce) && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
 			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'), 'all');
 		}
