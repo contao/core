@@ -231,7 +231,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipTinymce'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'options'                 => array('system/contao.css', 'tl_files/tinymce.css'),
+			'eval'                    => array('multiple'=>true)
 		),
 		'newsfeeds' => array
 		(
