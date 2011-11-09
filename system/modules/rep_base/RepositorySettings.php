@@ -43,6 +43,8 @@ define('REPOSITORY_SOAPCACHE', true);
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
 		'20110003,20110003;'.	// 2.11.0 beta1
+		'20100039,20100039;'.	// 2.10.3 stable
+		'20100029,20100029;'.	// 2.10.2 stable
 		'20100029,20100029;'.	// 2.10.2 stable
 		'20100019,20100019;'.	// 2.10.1 stable
 		'20100009,20100009;'.	// 2.10.0 stable
@@ -94,7 +96,7 @@ define('REPOSITORY_COREVERSIONS',
 		'20040079,20040079;'.	// 2.4.7 stable
 		'20040069,20040069;'.	// 2.4.6 stable
 		'20040009,20040009;'.	// 2.4.0 stable
-		'20030029,20030029'		// 2.3.2 stable
+		'20030029,20030029'	// 2.3.2 stable
 );
 
 // Where files are stored, relative to TL_ROOT

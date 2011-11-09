@@ -144,13 +144,16 @@ optgroup {
 }
 fieldset.tl_checkbox_container,fieldset.tl_radio_container {
 	border:0;
-	margin:15px 0 0;
+	margin:15px 0 1px;
 	padding:0;
+}
+fieldset.tl_checkbox_container {
+	line-height:14px;
 }
 fieldset.tl_checkbox_container legend,fieldset.tl_radio_container legend {
 	font-weight:bold;
 	margin:0;
-	padding:0 0 1px;
+	padding:0;
 }
 fieldset.checkbox_container,fieldset.radio_container {
 	border:0;
