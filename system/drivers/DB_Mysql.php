@@ -111,11 +111,19 @@ class DB_Mysql extends Database
 	 * Auto-generate a FIND_IN_SET() statement
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	protected function find_in_set($strKey, $strSet)
+	protected function find_in_set($strKey, $strSet, $blnIsField=false)
 	{
-		return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($strSet, $this->resConnection) . "')";
+		if ($blnIsField)
+		{
+			return "FIND_IN_SET(" . $strKey . ", " . $strSet . ")";
+		}
+		else
+		{
+			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($strSet, $this->resConnection) . "')";
+		}
 	}
 
 

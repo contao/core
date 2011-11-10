@@ -4458,7 +4458,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						// CSV lists (see #2890)
 						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
 						{
-							$this->procedure[] = ' FIND_IN_SET(?, ' . $field . ')';
+							$this->procedure[] = $this->Database->findInSet('?', $field, true);
 							$this->values[] = $session['filter'][$filter][$field];
 						}
 						else

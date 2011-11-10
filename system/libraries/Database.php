@@ -189,16 +189,17 @@ abstract class Database
 	 * Auto-generate a FIND_IN_SET() statement
 	 * @param string
 	 * @param mixed
+	 * @param boolean
 	 * @return string
 	 */
-	public function findInSet($strKey, $varSet)
+	public function findInSet($strKey, $varSet, $blnIsField=false)
 	{
 		if (is_array($varSet))
 		{
 			$varSet = implode(',', $varSet);
 		}
 
-		return $this->find_in_set($strKey, $varSet);
+		return $this->find_in_set($strKey, $varSet, $blnIsField);
 	}
 
 
@@ -379,7 +380,7 @@ abstract class Database
 	abstract protected function connect();
 	abstract protected function disconnect();
 	abstract protected function get_error();
-	abstract protected function find_in_set($strKey, $strSet);
+	abstract protected function find_in_set($strKey, $strSet, $blnIsField=false);
 	abstract protected function begin_transaction();
 	abstract protected function commit_transaction();
 	abstract protected function rollback_transaction();

@@ -93,9 +93,10 @@ class DB_Oracle extends Database
 	 * Auto-generate a FIND_IN_SET() statement
 	 * @param string
 	 * @param string
+	 * @param boolean
 	 * @return string
 	 */
-	protected function find_in_set($strKey, $strSet)
+	protected function find_in_set($strKey, $strSet, $blnIsField=false)
 	{
 		$arrSet = trimsplit(',', $strSet);
 
