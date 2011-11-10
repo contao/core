@@ -52,6 +52,12 @@ class Input
 	 */
 	protected $arrCache = array();
 
+	/**
+	 * Magic quotes
+	 * @var boolean
+	 */
+	protected $blnMagicQuotes;
+
 
 	/**
 	 * Clean the keys of the request arrays
@@ -61,6 +67,9 @@ class Input
 		$_GET    = $this->cleanKey($_GET);
 		$_POST   = $this->cleanKey($_POST);
 		$_COOKIE = $this->cleanKey($_COOKIE);
+
+		// Only check magic quotes once (see #3438)
+		$this->blnMagicQuotes = function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc();
 	}
 
 
@@ -396,7 +405,7 @@ class Input
 			return $varValue;
 		}
 
-		if (function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc())
+		if ($this->blnMagicQuotes)
 		{
 			$varValue = stripslashes($varValue);
 		}
