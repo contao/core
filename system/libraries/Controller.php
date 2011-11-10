@@ -48,7 +48,7 @@ abstract class Controller extends System
 	{
 		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
 
-		if (strlen($theme) && is_dir(TL_ROOT . '/system/themes/' . $theme))
+		if ($theme != '' && is_dir(TL_ROOT . '/system/themes/' . $theme))
 		{
 			return $theme;
 		}
@@ -242,13 +242,13 @@ abstract class Controller extends System
 	 */
 	protected function getFrontendModule($intId, $strColumn='main')
 	{
-		global $objPage;
-		$this->import('Database');
-
 		if (!strlen($intId))
 		{
 			return '';
 		}
+
+		global $objPage;
+		$this->import('Database');
 
 		// Articles
 		if ($intId == 0)
@@ -291,65 +291,78 @@ abstract class Controller extends System
 
 			while ($objArticles->next())
 			{
-				$return .= $this->getArticle($objArticles->id, (($count > 1) ? true : false), false, $strColumn);
+				$return .= $this->getArticle($objArticles->id, ($count > 1), false, $strColumn);
 			}
 
 			return $return;
 		}
 
 		// Other modules
-		$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE id=?")
-									->limit(1)
-									->execute($intId);
-
-		if ($objModule->numRows < 1)
+		else
 		{
-			return '';
-		}
+			$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE id=?")
+										->limit(1)
+										->execute($intId);
 
-		// Show to guests only
-		if ($objModule->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objModule->protected)
-		{
-			return '';
-		}
-
-		// Protected element
-		if (!BE_USER_LOGGED_IN && $objModule->protected)
-		{
-			if (!FE_USER_LOGGED_IN)
+			if ($objModule->numRows < 1)
 			{
 				return '';
 			}
 
-			$this->import('FrontendUser', 'User');
-			$groups = deserialize($objModule->groups);
+			// Show to guests only
+			if ($objModule->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objModule->protected)
+			{
+				return '';
+			}
+
+			// Protected element
+			if (!BE_USER_LOGGED_IN && $objModule->protected)
+			{
+				if (!FE_USER_LOGGED_IN)
+				{
+					return '';
+				}
+
+				$this->import('FrontendUser', 'User');
+				$groups = deserialize($objModule->groups);
 	
-			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				{
+					return '';
+				}
+			}
+
+			$strClass = $this->findFrontendModule($objModule->type);
+
+			// Return if the class does not exist
+			if (!$this->classFileExists($strClass))
 			{
+				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objModule->type].'" (module "'.$objModule->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
 				return '';
 			}
+
+			$objModule->typePrefix = 'mod_';
+			$objModule = new $strClass($objModule, $strColumn);
+			$strBuffer = $objModule->generate();
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['getFrontendModule']) && is_array($GLOBALS['TL_HOOKS']['getFrontendModule']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
+				{
+					$this->import($callback[0]);
+					$strBuffer = $this->$callback[0]->$callback[1]($objModule, $strBuffer);
+				}
+			}
+
+			// Disable indexing if protected
+			if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
+			{
+				$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
+			}
+
+			return $strBuffer;
 		}
-
-		$strClass = $this->findFrontendModule($objModule->type);
-
-		// Return if the class does not exist
-		if (!$this->classFileExists($strClass))
-		{
-			$this->log('Module class "'.$GLOBALS['FE_MOD'][$objModule->type].'" (module "'.$objModule->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
-			return '';
-		}
-
-		$objModule->typePrefix = 'mod_';
-		$objModule = new $strClass($objModule, $strColumn);
-		$strBuffer = $objModule->generate();
-
-		// Disable indexing if protected
-		if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
-		{
-			$strBuffer = "\n<!-- indexer::stop -->". $strBuffer ."<!-- indexer::continue -->\n";
-		}
-
-		return $strBuffer;
 	}
 
 
@@ -371,29 +384,23 @@ abstract class Controller extends System
 		global $objPage;
 		$this->import('Database');
 
-		// Get article
+		// Get the article
 		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
 									 ->limit(1)
 									 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
 
+		// Send a 404 header if the article does not exist
 		if ($objArticle->numRows < 1)
 		{
 			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
 			header('HTTP/1.1 404 Not Found');
 			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
 		}
 
-		if (!file_exists(TL_ROOT . '/system/modules/frontend/ModuleArticle.php'))
-		{
-			$this->log('Class ModuleArticle does not exist', 'Controller getArticle()', TL_ERROR);
-			return '';
-		}
-
-		// Print article as PDF
+		// Print the article as PDF
 		if ($this->Input->get('pdf') == $objArticle->id)
 		{
 			// Backwards compatibility
@@ -401,8 +408,6 @@ abstract class Controller extends System
 			{
 				$this->printArticleAsPdf($objArticle);
 			}
-
-			// New structure
 			elseif ($objArticle->printable != '')
 			{
 				$options = deserialize($objArticle->printable);
@@ -446,6 +451,7 @@ abstract class Controller extends System
 
 		$this->import('Database');
 
+		// Get the content element
 		$objElement = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
 									 ->limit(1)
 									 ->execute($intId);
@@ -461,7 +467,7 @@ abstract class Controller extends System
 			return '';
 		}
 
-		// Protected element
+		// Protected the element
 		if ($objElement->protected && !BE_USER_LOGGED_IN)
 		{
 			if (!FE_USER_LOGGED_IN)
@@ -478,7 +484,7 @@ abstract class Controller extends System
 			}
 		}
 
-		// Remove spacing in the back end preview
+		// Remove the spacing in the back end preview
 		if (TL_MODE == 'BE')
 		{
 			$objElement->space = null;
@@ -544,6 +550,16 @@ abstract class Controller extends System
 		$objElement->form = $objElement->id;
 		$objElement = new Form($objElement);
 		$strBuffer = $objElement->generate();
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getForm']) && is_array($GLOBALS['TL_HOOKS']['getForm']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strBuffer = $this->$callback[0]->$callback[1]($objElement, $strBuffer);
+			}
+		}
 
 		return $strBuffer;
 	}
@@ -800,7 +816,7 @@ abstract class Controller extends System
 
 		foreach ($arrThemes as $strTheme)
 		{
-			if (substr($strTheme, 0, 1) == '.' || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
+			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
 			{
 				continue;
 			}
@@ -824,6 +840,16 @@ abstract class Controller extends System
 
 		$this->loadLanguageFile('countries');
 		include(TL_ROOT . '/system/config/countries.php');
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCountries'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
+			}
+		}
 
 		foreach ($countries as $strKey=>$strName)
 		{
@@ -2391,7 +2417,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (strlen($attributes) ? ' ' . $attributes : '') . '>';
+		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -2441,7 +2467,7 @@ abstract class Controller extends System
 
 		foreach ($arrDir as $k=>$v)
 		{
-			if (strlen($v))
+			if ($v != '')
 			{
 				$return[] = $strType . '-' . $k . ':' . $v . $arrValues['unit'] . ';';
 			}

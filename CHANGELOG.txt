@@ -6,6 +6,11 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+r1148 (New)
+-----------
+Added the "getFrontendModule" hook (see #3244), the "getCountries" hook (see
+#2819) and the "getForm" hook.
+
 r1146 (Improved)
 ----------------
 In an event list module you can now optionally add an event reader module to
