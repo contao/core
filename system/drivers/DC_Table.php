@@ -1689,6 +1689,12 @@ class DC_Table extends DataContainer implements listable, editable
 						$blnIsFirst = false;
 					}
 
+					// Convert CSV fields (see #2890)
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'])
+					{
+						$this->varValue = trimsplit(',', $this->varValue);
+					}
+
 					// Call load_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['load_callback']))
 					{
@@ -2574,11 +2580,21 @@ window.addEvent(\'domready\', function() {
 				{
 					$varValue = '';
 				}
+				elseif ($arrData['eval']['csv'])
+				{
+					$varValue = implode(',', $varValue); // see #2890
+				}
 				else
 				{
 					$varValue = serialize($varValue);
 				}
 			}
+		}
+
+		// Convert arrays (see #2890)
+		if ($arrData['eval']['multiple'] && $arrData['eval']['csv'])
+		{
+			$varValue = implode(',', deserialize($varValue, true));
 		}
 
 		// Trigger the save_callback
@@ -4439,8 +4455,17 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					// Manual filter
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 					{
-						$this->procedure[] = $field . ' LIKE ?';
-						$this->values[] = '%"' . $session['filter'][$filter][$field] . '"%';
+						// CSV lists (see #2890)
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
+						{
+							$this->procedure[] = ' FIND_IN_SET(?, ' . $field . ')';
+							$this->values[] = $session['filter'][$filter][$field];
+						}
+						else
+						{
+							$this->procedure[] = $field . ' LIKE ?';
+							$this->values[] = '%"' . $session['filter'][$filter][$field] . '"%';
+						}
 					}
 
 					// Other sort algorithm
@@ -4557,7 +4582,15 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					// TODO: find a more effective solution
 					foreach($options as $option)
 					{
-						$doptions = deserialize($option);
+						// CSV lists (see #2890)
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
+						{
+							$doptions = trimsplit(',', $option);
+						}
+						else
+						{
+							$doptions = deserialize($option);
+						}
 
 						if (is_array($doptions))
 						{
