@@ -155,17 +155,23 @@ abstract class Backend extends Controller
 		// Add module style sheet
 		if (isset($arrModule['stylesheet']))
 		{
-			$GLOBALS['TL_CSS'][] = TL_SCRIPT_URL . $arrModule['stylesheet'];
+			foreach ((array) $arrModule['stylesheet'] as $stylesheet)
+			{
+				$GLOBALS['TL_CSS'][] = TL_SCRIPT_URL . $stylesheet;
+			}
 		}
 
 		// Add module javascript
 		if (isset($arrModule['javascript']))
 		{
-			$GLOBALS['TL_JAVASCRIPT'][] = TL_SCRIPT_URL . $arrModule['javascript'];
+			foreach ((array) $arrModule['javascript'] as $javascript)
+			{
+				$GLOBALS['TL_JAVASCRIPT'][] = TL_SCRIPT_URL . $javascript;
+			}
 		}
 
 		// Redirect if the current table does not belong to the current module
-		if (strlen($strTable))
+		if ($strTable != '')
 		{
 			if (!in_array($strTable, (array) $arrModule['tables']))
 			{
