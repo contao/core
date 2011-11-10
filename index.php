@@ -259,6 +259,16 @@ class Index extends Frontend
 			$strCacheKey = $this->Environment->base . $this->Environment->request;
 		}
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+			}
+		}
+
 		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
 
 		// Return if the file does not exist

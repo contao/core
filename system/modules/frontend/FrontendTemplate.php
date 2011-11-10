@@ -120,11 +120,21 @@ class FrontendTemplate extends Template
 			// If the request string is empty, use a special cache tag which considers the page language
 			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 			{
-				$strUniqueKey = $this->Environment->base . 'empty.' . $objPage->language;
+				$strCacheKey = $this->Environment->base . 'empty.' . $objPage->language;
 			}
 			else
 			{
-				$strUniqueKey = $this->Environment->base . $strUrl;
+				$strCacheKey = $this->Environment->base . $strUrl;
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
+				{
+					$this->import($callback[0]);
+					$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+				}
 			}
 
 			// Replace insert tags for caching
@@ -133,8 +143,8 @@ class FrontendTemplate extends Template
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 			// Create the cache file
-			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
+			$objFile = new File('system/tmp/' . md5($strCacheKey) . '.html');
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
 
 			/**
 			 * Copyright notice
