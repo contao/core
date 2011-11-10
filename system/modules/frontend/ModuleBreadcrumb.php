@@ -101,7 +101,7 @@ class ModuleBreadcrumb extends Module
 			$time = time();
 
 			// Get the first page
-			$objFirstPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+			$objFirstPage = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
 										   ->limit(1)
 										   ->execute($objPages->id);
 
@@ -111,7 +111,8 @@ class ModuleBreadcrumb extends Module
 				'isActive' => false,
 				'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
 				'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
-				'link' => $objPages->title
+				'link' => $objPages->title,
+				'data' => $objFirstPage->row()
 			);
 
 			array_pop($pages);
@@ -161,7 +162,8 @@ class ModuleBreadcrumb extends Module
 				'isActive' => false,
 				'href' => $href,
 				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle'], true) : specialchars($pages[$i]['title'], true)),
-				'link' => $pages[$i]['title']
+				'link' => $pages[$i]['title'],
+				'data' => $pages[$i]
 			);
 		}
 
@@ -174,7 +176,8 @@ class ModuleBreadcrumb extends Module
 				'isActive' => false,
 				'href' => $this->generateFrontendUrl($pages[0]),
 				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle'], true) : specialchars($pages[0]['title'], true)),
-				'link' => $pages[0]['title']
+				'link' => $pages[0]['title'],
+				'data' => $pages[0]
 			);
 
 			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
@@ -185,7 +188,7 @@ class ModuleBreadcrumb extends Module
 			}
 
 			// Get article title
-			$objArticle = $this->Database->prepare("SELECT title FROM tl_article WHERE id=? OR alias=?")
+			$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE id=? OR alias=?")
 										 ->limit(1)
 										 ->execute((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
 
@@ -196,7 +199,8 @@ class ModuleBreadcrumb extends Module
 					'isRoot' => false,
 					'isActive' => true,
 					'title' => specialchars($objArticle->title, true),
-					'link' => $objArticle->title
+					'link' => $objArticle->title,
+					'data' => $objArticle->row()
 				);
 			}
 		}
@@ -209,7 +213,8 @@ class ModuleBreadcrumb extends Module
 				'isRoot' => false,
 				'isActive' => true,
 				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
-				'link' => $pages[0]['title']
+				'link' => $pages[0]['title'],
+				'data' => $pages[0]
 			);
 		}
 

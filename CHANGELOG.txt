@@ -25,6 +25,10 @@ allows us to use the event list and event reader on the same page.
 Version 2.11.beta1 (2011-11-10)
 ===============================
 
+r1152 (Improved)
+----------------
+Pass the page data to the breadcrumb template as (see #3607).
+
 r1141 (Changed)
 ---------------
 The Contao framework style sheet (system/contao.css) is now included in the
