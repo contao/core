@@ -97,14 +97,15 @@ CREATE TABLE `tl_calendar_events` (
 CREATE TABLE `tl_module` (
   `cal_calendar` blob NULL,
   `cal_noSpan` char(1) NOT NULL default '',
+  `cal_startDay` smallint(5) unsigned NOT NULL default '0',
   `cal_format` varchar(32) NOT NULL default '',
+  `cal_ignoreDynamic` char(1) NOT NULL default '',
   `cal_order` varchar(32) NOT NULL default '',
+  `cal_readerModule` int(10) unsigned NOT NULL default '0'
   `cal_limit` smallint(5) unsigned NOT NULL default '0',
   `cal_template` varchar(32) NOT NULL default '',
   `cal_ctemplate` varchar(32) NOT NULL default '',
-  `cal_startDay` smallint(5) unsigned NOT NULL default '0',
-  `cal_showQuantity` char(1) NOT NULL default '',
-  `cal_ignoreDynamic` char(1) NOT NULL default ''
+  `cal_showQuantity` char(1) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

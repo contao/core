@@ -3,6 +3,16 @@
 # @see http://www.contao.org
 ##
 
+Version 2.11.RC1 (XXXX-XX-XX)
+=============================
+
+r1146 (Improved)
+----------------
+In an event list module you can now optionally add an event reader module to
+automatically switch to the full article if an event has been selected. This
+allows us to use the event list and event reader on the same page.
+
+
 Version 2.11.beta1 (2011-11-10)
 ===============================
 

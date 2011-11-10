@@ -75,9 +75,15 @@ class ModuleEventlist extends Events
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar, true));
 
 		// Return if there are no calendars
-		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
+		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			return '';
+		}
+
+		// Show the event reader if an item has been selected
+		if ($this->cal_readerModule > 0 && $this->Input->get('events') != '')
+		{
+			return $this->getFrontendModule($this->cal_readerModule, $this->strColumn);
 		}
 
 		return parent::generate();
