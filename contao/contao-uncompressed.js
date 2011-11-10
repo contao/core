@@ -125,7 +125,7 @@ var AjaxRequest =
 
 		new Request.Contao({
 			evalScripts: true,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				item = new Element('li', {
 					'id': id,
@@ -179,7 +179,7 @@ var AjaxRequest =
 		new Request.Contao({
 			field: el,
 			evalScripts: true,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				var li = new Element('li', {
 					'id': id,
@@ -262,7 +262,7 @@ var AjaxRequest =
 		new Request.Contao({
 			field: el,
 			evalScripts: true,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				var li = new Element('li', {
 					'id': id,
@@ -323,7 +323,7 @@ var AjaxRequest =
 		new Request.Contao({
 			field: el,
 			evalScripts: true,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				var li = new Element('li', {
 					'id': id,
@@ -384,7 +384,7 @@ var AjaxRequest =
 		new Request.Contao({
 			field: el,
 			evalScripts: true,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				var li = new Element('li', {
 					'id': id,
@@ -422,7 +422,7 @@ var AjaxRequest =
 
 			new Request.Contao({
 				evalScripts: true,
-				onRequest: AjaxRequest.displayBox('Loading data …'),
+				onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 				onSuccess: function(txt, json) {
 
 					// Preserve the "reset selection" entry
@@ -467,7 +467,7 @@ var AjaxRequest =
 		new Request.Contao({
 			field: el,
 			evalScripts: false,
-			onRequest: AjaxRequest.displayBox('Loading data …'),
+			onRequest: AjaxRequest.displayBox(CONTAO_LOADING + ' …'),
 			onSuccess: function(txt, json) {
 				var div = new Element('div', {
 					'id': id,

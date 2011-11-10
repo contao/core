@@ -346,6 +346,7 @@ $GLOBALS['TL_LANG']['MSC']['saveAlert']        = 'ACHTUNG! Nicht gespeicherte Ä
 $GLOBALS['TL_LANG']['MSC']['toggleNodes']      = 'Alle öffnen/schließen';
 $GLOBALS['TL_LANG']['MSC']['expandNode']       = 'Bereich öffnen';
 $GLOBALS['TL_LANG']['MSC']['collapseNode']     = 'Bereich schließen';
+$GLOBALS['TL_LANG']['MSC']['loadingData']      = 'Die Daten werden geladen';
 $GLOBALS['TL_LANG']['MSC']['deleteSelected']   = 'Löschen';
 $GLOBALS['TL_LANG']['MSC']['editSelected']     = 'Bearbeiten';
 $GLOBALS['TL_LANG']['MSC']['overrideSelected'] = 'Überschreiben';

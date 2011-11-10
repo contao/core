@@ -14,21 +14,16 @@
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen"><![endif]-->
 <?php echo $this->stylesheets; ?>
 <style media="screen">
-#container {
-  margin:0 auto;
-  padding:12px 0;
-  width:750px;
-}
-#tl_helpBox {
-  margin-left:-353px;
-}
+#container { margin:0 auto; padding:12px 0; width:750px; }
+#tl_helpBox { margin-left:-353px; }
 </style>
 <script>
-var CONTAO_THEME = '<?php echo $this->theme; ?>';
-var CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>';
-var CONTAO_EXPAND = '<?php echo $this->expandNode; ?>';
-var CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>';
-var REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
+var CONTAO_THEME = '<?php echo $this->theme; ?>',
+CONTAO_COLLAPSE = '<?php echo $this->collapseNode; ?>',
+CONTAO_EXPAND = '<?php echo $this->expandNode; ?>',
+CONTAO_LOADING = '<?php echo $this->loadingData; ?>',
+CONTAO_SCRIPT_URL = '<?php echo TL_SCRIPT_URL; ?>',
+REQUEST_TOKEN = '<?php echo REQUEST_TOKEN; ?>';
 </script>
 <script src="<?php
   $objCombiner = new Combiner();

@@ -4583,7 +4583,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					foreach($options as $option)
 					{
 						// CSV lists (see #2890)
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
 						{
 							$doptions = trimsplit(',', $option);
 						}

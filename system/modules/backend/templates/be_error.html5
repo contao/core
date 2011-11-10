@@ -4,41 +4,13 @@
 <meta charset="utf-8">
 <title>Contao Open Source CMS</title>
 <style media="screen">
-a {
-  text-decoration:none;
-}
-div {
-  width:520px;
-  margin:64px auto 18px;
-  padding:24px;
-  background-color:#ffc;
-  border:1px solid #fc0;
-  font-family:Verdana,sans-serif;
-  font-size:12px;
-}
-h1 {
-  font-size:18px;
-  font-weight:normal;
-  margin:0 0 18px;
-}
-pre {
-  margin:9px;
-  padding:0;
-  font-size:14px;
-}
-p {
-  font-size:11px;
-  color:#999;
-  font-family:Verdana,sans-serif;
-  text-align:center;
-}
-ol {
-  margin:0;
-  padding:0 21px;
-}
-li {
-  line-height:24px;
-}
+a { text-decoration:none; }
+div { width:520px; margin:64px auto 18px; padding:24px; background:#ffc; border:1px solid #fc0; font-family:Verdana,sans-serif; font-size:12px; }
+h1 { font-size:18px; font-weight:normal; margin:0 0 18px; }
+pre { margin:9px; padding:0; font-size:14px; }
+p { font-size:11px; color:#999; font-family:Verdana,sans-serif; text-align:center; }
+ol { margin:0; padding:0 21px; }
+li { line-height:24px; }
 </style>
 </head>
 <body>

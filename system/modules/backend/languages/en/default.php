@@ -346,6 +346,7 @@ $GLOBALS['TL_LANG']['MSC']['saveAlert']        = 'ATTENTION! You will lose any u
 $GLOBALS['TL_LANG']['MSC']['toggleNodes']      = 'Toggle all nodes';
 $GLOBALS['TL_LANG']['MSC']['expandNode']       = 'Expand node';
 $GLOBALS['TL_LANG']['MSC']['collapseNode']     = 'Collapse node';
+$GLOBALS['TL_LANG']['MSC']['loadingData']      = 'Loading data';
 $GLOBALS['TL_LANG']['MSC']['deleteSelected']   = 'Delete';
 $GLOBALS['TL_LANG']['MSC']['editSelected']     = 'Edit';
 $GLOBALS['TL_LANG']['MSC']['overrideSelected'] = 'Override';
