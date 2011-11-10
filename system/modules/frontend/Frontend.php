@@ -297,8 +297,10 @@ abstract class Frontend extends Controller
 	/**
 	 * Redirect to a jumpTo page or reload the current page
 	 * @param integer
+	 * @param string
+	 * @param string
 	 */
-	protected function jumpToOrReload($intId)
+	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
 		global $objPage;
 
@@ -310,7 +312,7 @@ abstract class Frontend extends Controller
 
 			if ($objNextPage->numRows)
 			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
+				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strParams, $strForceLang));
 			}
 		}
 
