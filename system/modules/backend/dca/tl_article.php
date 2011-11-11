@@ -631,7 +631,7 @@ class tl_article extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (!$this->User->isAdmin && empty(preg_grep('/^tl_article::/', $this->User->alexf)))
+		if (!$this->User->isAdmin && count(preg_grep('/^tl_article::/', $this->User->alexf)) < 1)
 		{
 			return '';
 		}

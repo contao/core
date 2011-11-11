@@ -507,7 +507,7 @@ class StyleSheets extends Backend
 			{
 				$row['gradientColors'] = deserialize($row['gradientColors']);
 
-				if (is_array($row['gradientColors']) && !empty(array_filter($row['gradientColors'])))
+				if (is_array($row['gradientColors']) && count(array_filter($row['gradientColors'])) > 0)
 				{
 					$blnNeedsPie = true;
 					$bgImage = '';
@@ -1459,7 +1459,7 @@ class StyleSheets extends Backend
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
 							}
 							// Move to custom section if there are different units
-							if (!empty(array_filter(array_unique($arrUnits))))
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1513,7 +1513,7 @@ class StyleSheets extends Backend
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
 							}
 							// Move to custom section if there are different units
-							if (!empty(array_filter(array_unique($arrUnits))))
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1576,7 +1576,7 @@ class StyleSheets extends Backend
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
 							}
 							// Move to custom section if there are different units
-							if (!empty(array_filter(array_unique($arrUnits))))
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;

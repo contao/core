@@ -225,7 +225,7 @@ class tl_files extends Backend
 					{
 						$folders[] = $id;
 
-						if ($f4 || ($f3 && empty(scan(TL_ROOT . '/' . $id))))
+						if ($f4 || ($f3 && count(scan(TL_ROOT . '/' . $id)) < 1))
 						{
 							$delete_all[] = $id;
 						}
@@ -474,7 +474,7 @@ class tl_files extends Backend
 	 */
 	public function deleteFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (is_dir(TL_ROOT . '/' . $row['id']) && !empty(scan(TL_ROOT . '/' . $row['id'])))
+		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])) > 0)
 		{
 			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -538,7 +538,7 @@ class tl_files extends Backend
 		}
 
 		// Remove protection
-		if (!empty(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))))
+		if (count(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))) > 0)
 		{
 			$label = $GLOBALS['TL_LANG']['tl_files']['unlock'][0];
 			$title = sprintf($GLOBALS['TL_LANG']['tl_files']['unlock'][1], $row['id']);
