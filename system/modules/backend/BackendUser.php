@@ -298,7 +298,7 @@ class BackendUser extends User
 			$permission[] = 'u'.$int;
 		}
 
-		return !empty(array_intersect($permission, $chmod));
+		return (count(array_intersect($permission, $chmod)) > 0);
 	}
 
 

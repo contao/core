@@ -202,7 +202,7 @@ class Index extends Frontend
 		}
 
 		// Check the user groups if the page is protected
-		if ($objPage->protected && !BE_USER_LOGGED_IN && (!is_array($objPage->groups) || empty($objPage->groups) || empty(array_intersect($objPage->groups, $this->User->groups))))
+		if ($objPage->protected && !BE_USER_LOGGED_IN && (!is_array($objPage->groups) || empty($objPage->groups) || !count(array_intersect($objPage->groups, $this->User->groups))))
 		{
 			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
 

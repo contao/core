@@ -2881,7 +2881,7 @@ window.addEvent(\'domready\', function() {
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
+		if (!empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -3035,7 +3035,7 @@ window.addEvent(\'domready\', function() {
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
+		if (!empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -3305,7 +3305,7 @@ window.addEvent(\'domready\', function() {
 		$blnMultiboard = false;
 
 		// Check clipboard
-		if (isset($arrClipboard[$table]) && !empty($arrClipboard[$table]))
+		if (!empty($arrClipboard[$table]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$table];

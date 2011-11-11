@@ -326,7 +326,7 @@ abstract class Controller extends System
 				$this->import('FrontendUser', 'User');
 				$groups = deserialize($objModule->groups);
 	
-				if (!is_array($groups) || empty($groups) || empty(array_intersect($groups, $this->User->groups)))
+				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 				{
 					return '';
 				}

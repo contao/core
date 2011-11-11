@@ -6,7 +6,10 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
-r1159
+r1159 (Improved)
+----------------
+Replaced all "if (count() < 1)" with "if (empty())" and all "if (count() > 0)"
+with "if (!empty())".
 
 r1158 (Improved)
 ----------------

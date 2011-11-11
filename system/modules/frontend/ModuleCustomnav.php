@@ -135,7 +135,7 @@ class ModuleCustomnav extends Module
 			$_groups = deserialize($arrPage['groups']);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && !empty(array_intersect($_groups, $groups))) || $this->showProtected)
+			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected)
 			{
 				// Get href
 				switch ($arrPage['type'])
