@@ -392,7 +392,7 @@ class Email extends System
 	{
 		$arrRecipients = $this->compileRecipients(func_get_args());
 
-		if (!count($arrRecipients))
+		if (empty($arrRecipients))
 		{
 			return false;
 		}
@@ -489,12 +489,12 @@ class Email extends System
 		// Add log entry
 		$strMessage = 'An e-mail has been sent to ' . implode(', ', array_keys($this->objMessage->getTo()));
 
-		if (count($this->objMessage->getCc()) > 0)
+		if (!empty($this->objMessage->getCc()))
 		{
 			$strMessage .= ', CC to ' . implode(', ', array_keys($this->objMessage->getCc()));
 		}
 
-		if (count($this->objMessage->getBcc()) > 0)
+		if (!empty($this->objMessage->getBcc()))
 		{
 			$strMessage .= ', BCC to ' . implode(', ', array_keys($this->objMessage->getBcc()));
 		}

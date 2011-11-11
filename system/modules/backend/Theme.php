@@ -81,7 +81,7 @@ class Theme extends Backend
 			}
 
 			// Check wether there are any files left
-			if (count($arrFiles) < 1)
+			if (empty($arrFiles))
 			{
 				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
@@ -263,7 +263,7 @@ class Theme extends Backend
 					$modules = deserialize($fields->item($j)->nodeValue);
 
 					// Continue if there are no modules
-					if (!is_array($modules) || count($modules) < 1)
+					if (!is_array($modules) || empty($modules))
 					{
 						continue;
 					}
@@ -633,7 +633,7 @@ class Theme extends Backend
 		// Add the folders
 		$arrFolders = deserialize($objTheme->folders);
 
-		if (is_array($arrFolders) && count($arrFolders) > 0)
+		if (is_array($arrFolders) && !empty($arrFolders))
 		{
 			foreach ($this->eliminateNestedPaths($arrFolders) as $strFolder)
 			{

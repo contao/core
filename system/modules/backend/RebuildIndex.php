@@ -90,7 +90,7 @@ class RebuildIndex extends Backend implements executable
 			}
 
 			// Return if there are no pages
-			if (count($arrPages) < 1)
+			if (empty($arrPages))
 			{
 				$_SESSION['REBUILD_INDEX_ERROR'] = $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable'];
 				$this->redirect($this->getReferer());

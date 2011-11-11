@@ -354,7 +354,7 @@ class PageRegular extends Frontend
 		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
 
 		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
@@ -455,7 +455,7 @@ class PageRegular extends Frontend
 		$strHeadTags = '';
 
 		// Add internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && count($GLOBALS['TL_JAVASCRIPT']))
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
@@ -464,7 +464,7 @@ class PageRegular extends Frontend
 		}
 
 		// Add internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && count($GLOBALS['TL_HEAD']))
+		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
 			{
@@ -515,7 +515,7 @@ class PageRegular extends Frontend
 		}
 
 		// Add internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
 			{

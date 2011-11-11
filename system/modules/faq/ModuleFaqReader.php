@@ -80,7 +80,7 @@ class ModuleFaqReader extends Module
 		$this->faq_categories = deserialize($this->faq_categories);
 
 		// Return if there are no categories
-		if (!is_array($this->faq_categories) || count($this->faq_categories) < 1)
+		if (!is_array($this->faq_categories) || empty($this->faq_categories))
 		{
 			global $objPage;
 

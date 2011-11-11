@@ -72,7 +72,7 @@ class CronJob extends Frontend
 		$intHourly = date('YmdH');
 
 		// Weekly jobs
-		if (count($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
+		if (!empty($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
 		{
 			$this->log('Running weekly cron jobs', 'CronJobs run()', TL_CRON);
 
@@ -87,7 +87,7 @@ class CronJob extends Frontend
 		}
 
 		// Daily jobs
-		elseif (count($GLOBALS['TL_CRON']['daily']) && $GLOBALS['TL_CONFIG']['cron_daily'] != $intDaily)
+		elseif (!empty($GLOBALS['TL_CRON']['daily']) && $GLOBALS['TL_CONFIG']['cron_daily'] != $intDaily)
 		{
 			$this->log('Running daily cron jobs', 'CronJobs run()', TL_CRON);
 
@@ -102,7 +102,7 @@ class CronJob extends Frontend
 		}
 
 		// Hourly jobs
-		elseif (count($GLOBALS['TL_CRON']['hourly']) && $GLOBALS['TL_CONFIG']['cron_hourly'] != $intHourly)
+		elseif (!empty($GLOBALS['TL_CRON']['hourly']) && $GLOBALS['TL_CONFIG']['cron_hourly'] != $intHourly)
 		{
 			$this->log('Running hourly cron jobs', 'CronJobs run()', TL_CRON);
 

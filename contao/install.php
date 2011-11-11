@@ -580,7 +580,7 @@ class InstallTool extends Backend
 						}
 					}
 
-					if (count($themes))
+					if (!empty($themes))
 					{
 						$modules[] = 'themes';
 					}
@@ -589,8 +589,8 @@ class InstallTool extends Backend
 
 					$set = array
 					(
-						'modules' => (count($modules) ? serialize($modules) : null),
-						'themes'  => (count($themes) ? serialize($themes) : null)
+						'modules' => (!empty($modules) ? serialize($modules) : null),
+						'themes'  => (!empty($themes) ? serialize($themes) : null)
 					);
 
 					$this->Database->prepare("UPDATE " . $objUser->tbl . " %s WHERE id=?")

@@ -338,7 +338,7 @@ abstract class Widget extends Controller
 	 */
 	public function hasErrors()
 	{
-		return count($this->arrErrors) ? true : false;
+		return !empty($this->arrErrors);
 	}
 
 
@@ -568,7 +568,7 @@ abstract class Widget extends Controller
 		// Support arrays (thanks to Andreas Schempp)
 		$arrParts = explode('[', str_replace(']', '', $strKey));
 
-		if (count($arrParts) > 1)
+		if (!empty($arrParts))
     	{
 			$varValue = $this->Input->$strMethod(array_shift($arrParts), $this->decodeEntities);
 

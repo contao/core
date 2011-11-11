@@ -22,7 +22,7 @@
 <h2><?php echo $this->headline; ?></h2>
 
 <?php echo $this->explanation; ?>
-<?php if (count($this->rows)): ?>
+<?php if (!empty($this->rows)): ?>
 <table class="tl_help_table">
 <?php foreach ($this->rows as $row): ?>
   <tr>

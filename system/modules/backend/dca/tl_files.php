@@ -225,7 +225,7 @@ class tl_files extends Backend
 					{
 						$folders[] = $id;
 
-						if ($f4 || ($f3 && count(scan(TL_ROOT . '/' . $id)) < 1))
+						if ($f4 || ($f3 && empty(scan(TL_ROOT . '/' . $id))))
 						{
 							$delete_all[] = $id;
 						}
@@ -283,7 +283,7 @@ class tl_files extends Backend
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
 						$files = scan(TL_ROOT . '/' . $strFile);
-						if (count($files) && !$f4)
+						if (!empty($files) && !$f4)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
@@ -302,7 +302,7 @@ class tl_files extends Backend
 					break;
 
 				default:
-					if (count($this->User->fop) < 1)
+					if (empty($this->User->fop))
 					{
 						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
@@ -474,7 +474,7 @@ class tl_files extends Backend
 	 */
 	public function deleteFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])))
+		if (is_dir(TL_ROOT . '/' . $row['id']) && !empty(scan(TL_ROOT . '/' . $row['id'])))
 		{
 			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -538,7 +538,7 @@ class tl_files extends Backend
 		}
 
 		// Remove protection
-		if (count(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))) > 0)
+		if (!empty(preg_grep('/^\.htaccess/i', scan(TL_ROOT . '/' . $strDecoded))))
 		{
 			$label = $GLOBALS['TL_LANG']['tl_files']['unlock'][0];
 			$title = sprintf($GLOBALS['TL_LANG']['tl_files']['unlock'][1], $row['id']);

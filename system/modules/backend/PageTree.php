@@ -257,7 +257,7 @@ class PageTree extends Widget
 		$level = ($intMargin / $intSpacing + 1);
 		$blnIsOpen = ($session[$node][$id] == 1 || in_array($id, $this->arrNodes));
 
-		if (count($childs))
+		if (!empty($childs))
 		{
 			$folderAttribute = '';
 			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
@@ -311,7 +311,7 @@ class PageTree extends Widget
 		$return .= '</div><div style="clear:both"></div></li>';
 
 		// Begin new submenu
-		if (count($childs) && $blnIsOpen)
+		if (!empty($childs) && $blnIsOpen)
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 

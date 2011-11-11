@@ -491,7 +491,7 @@ class tl_calendar_events extends Backend
 		}
 
 		// Set root IDs
-		if (!is_array($this->User->calendars) || count($this->User->calendars) < 1)
+		if (!is_array($this->User->calendars) || empty($this->User->calendars))
 		{
 			$root = array(0);
 		}
@@ -822,7 +822,7 @@ class tl_calendar_events extends Backend
 	{
 		$session = $this->Session->get('calendar_feed_updater');
 
-		if (!is_array($session) || count($session) < 1)
+		if (!is_array($session) || empty($session))
 		{
 			return;
 		}

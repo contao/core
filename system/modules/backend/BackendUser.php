@@ -298,7 +298,7 @@ class BackendUser extends User
 			$permission[] = 'u'.$int;
 		}
 
-		return count(array_intersect($permission, $chmod));
+		return !empty(array_intersect($permission, $chmod));
 	}
 
 
@@ -417,7 +417,7 @@ class BackendUser extends User
 
 		foreach ($GLOBALS['BE_MOD'] as $strGroupName=>$arrGroupModules)
 		{
-			if (count($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
+			if (!empty($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
 			{
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);

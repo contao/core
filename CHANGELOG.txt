@@ -6,6 +6,8 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+r1159
+
 r1158 (Improved)
 ----------------
 Add rel="prev" and rel="next" links to the page header if there is a pagination

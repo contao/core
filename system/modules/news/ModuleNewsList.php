@@ -69,7 +69,7 @@ class ModuleNewsList extends ModuleNews
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
 		// Return if there are no archives
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
+		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
 			return '';
 		}

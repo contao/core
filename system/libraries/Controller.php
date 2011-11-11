@@ -326,7 +326,7 @@ abstract class Controller extends System
 				$this->import('FrontendUser', 'User');
 				$groups = deserialize($objModule->groups);
 	
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				if (!is_array($groups) || empty($groups) || empty(array_intersect($groups, $this->User->groups)))
 				{
 					return '';
 				}
@@ -3019,7 +3019,7 @@ abstract class Controller extends System
 	 */
 	protected function eliminateNestedPaths($arrPaths)
 	{
-		if (!is_array($arrPaths) || count($arrPaths) < 1)
+		if (!is_array($arrPaths) || empty($arrPaths))
 		{
 			return array();
 		}
@@ -3044,7 +3044,7 @@ abstract class Controller extends System
 	 */
 	protected function eliminateNestedPages($arrPages, $strTable=null, $blnSorting=false)
 	{
-		if (!is_array($arrPages) || count($arrPages) < 1)
+		if (!is_array($arrPages) || empty($arrPages))
 		{
 			return array();
 		}

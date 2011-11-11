@@ -977,7 +977,7 @@ class tl_page extends Backend
 			$arrCheck = $GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $arrPages[$strDomain][$strLanguage] : $arrPages[$strDomain];
 
 			// Check if there are multiple results for the current domain
-			if (count($arrCheck) > 1)
+			if (!empty($arrCheck))
 			{
 				if ($autoAlias)
 				{

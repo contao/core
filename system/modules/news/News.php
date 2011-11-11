@@ -199,7 +199,7 @@ class News extends Frontend
 		// Walk through each archive
 		while ($objArchive->next())
 		{
-			if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($objArchive->jumpTo, $arrRoot))
+			if (is_array($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
 			{
 				continue;
 			}

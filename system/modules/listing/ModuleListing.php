@@ -128,7 +128,7 @@ class ModuleListing extends Module
 		$this->Template->searchable = false;
 		$arrSearchFields = trimsplit(',', $this->list_search);
 
-		if (is_array($arrSearchFields) && count($arrSearchFields))
+		if (is_array($arrSearchFields) && !empty($arrSearchFields))
 		{
 			$this->Template->searchable = true;
 

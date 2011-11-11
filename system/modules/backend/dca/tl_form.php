@@ -292,7 +292,7 @@ class tl_form extends Backend
 		}
 
 		// Set root IDs
-		if (!is_array($this->User->forms) || count($this->User->forms) < 1)
+		if (!is_array($this->User->forms) || empty($this->User->forms))
 		{
 			$root = array(0);
 		}
@@ -463,7 +463,7 @@ class tl_form extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_form::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
+		return ($this->User->isAdmin || !empty(preg_grep('/^tl_form::/', $this->User->alexf))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 
 

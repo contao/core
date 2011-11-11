@@ -68,7 +68,7 @@ class BackendTemplate extends Template
 	public function output()
 	{
 		// Rich text editor configuration
-		if (count($GLOBALS['TL_RTE']))
+		if (is_array($GLOBALS['TL_RTE']) && !empty($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
@@ -102,7 +102,7 @@ class BackendTemplate extends Template
 		}
 
 		// Style sheets
-		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
 			$strStyleSheets = '';
 
@@ -116,7 +116,7 @@ class BackendTemplate extends Template
 		}
 
 		// JavaScripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && count($GLOBALS['TL_JAVASCRIPT']))
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$strJavaScripts = '';
 
@@ -129,7 +129,7 @@ class BackendTemplate extends Template
 		}
 
 		// MooTools scripts (added at the page bottom)
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 		{
 			$strMootools = '';
 

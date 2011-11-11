@@ -424,7 +424,7 @@ class Search extends System
 		$arrAllKeywords = array();
 
 		// Get keywords
-		if (count($arrKeywords))
+		if (!empty($arrKeywords))
 		{
 			$arrAllKeywords[] = implode(' OR ', array_fill(0, count($arrKeywords), 'word=?'));
 			$arrValues = array_merge($arrValues, $arrKeywords);
@@ -482,7 +482,7 @@ class Search extends System
 		}
 
 		// Limit results to a particular set of pages
-		if (is_array($arrPid) && count($arrPid) > 0)
+		if (is_array($arrPid) && !empty($arrPid))
 		{
 			$strQuery .= " AND tl_search_index.pid IN(SELECT id FROM tl_search WHERE pid IN(" . implode(',', array_map('intval', $arrPid)) . "))";
 		}

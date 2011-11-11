@@ -399,7 +399,7 @@ class tl_form_field extends Backend
 		}
 
 		// Set root IDs
-		if (!is_array($this->User->forms) || count($this->User->forms) < 1)
+		if (!is_array($this->User->forms) || empty($this->User->forms))
 		{
 			$root = array(0);
 		}

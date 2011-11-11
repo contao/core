@@ -375,7 +375,7 @@ class Form extends Hybrid
 			$uploaded = '';
 
 			// Attach uploaded files
-			if (count($_SESSION['FILES']))
+			if (!empty($_SESSION['FILES']))
 			{
 				foreach ($_SESSION['FILES'] as $file)
 				{
@@ -418,7 +418,7 @@ class Form extends Hybrid
 			}
 
 			// Files
-			if (count($_SESSION['FILES']))
+			if (!empty($_SESSION['FILES']))
 			{
 				foreach ($_SESSION['FILES'] as $k=>$v)
 				{

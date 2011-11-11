@@ -507,7 +507,7 @@ class StyleSheets extends Backend
 			{
 				$row['gradientColors'] = deserialize($row['gradientColors']);
 
-				if (is_array($row['gradientColors']) && count(array_filter($row['gradientColors'])) > 0)
+				if (is_array($row['gradientColors']) && !empty(array_filter($row['gradientColors'])))
 				{
 					$blnNeedsPie = true;
 					$bgImage = '';
@@ -1030,7 +1030,7 @@ class StyleSheets extends Backend
 		}
 
 		// Replace global variables
-		if (strpos($return, '$') !== false && count($vars) > 0)
+		if (strpos($return, '$') !== false && !empty($vars))
 		{
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
@@ -1304,7 +1304,7 @@ class StyleSheets extends Backend
 		}
 
 		$chunks = explode('-', $strName);
-		$i = (count($chunks) > 1) ? array_pop($chunks) : 0;
+		$i = !empty($chunks) ? array_pop($chunks) : 0;
 		$strName = implode('-', $chunks) . '-' . (intval($i) + 1);
 
 		return self::checkStyleSheetName($strName);
@@ -1459,7 +1459,7 @@ class StyleSheets extends Backend
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (!empty(array_filter(array_unique($arrUnits))))
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1513,7 +1513,7 @@ class StyleSheets extends Backend
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (!empty(array_filter(array_unique($arrUnits))))
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1576,7 +1576,7 @@ class StyleSheets extends Backend
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (!empty(array_filter(array_unique($arrUnits))))
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -2014,7 +2014,7 @@ class StyleSheets extends Backend
 			}
 		}
 
-		if (count($arrSet['own']))
+		if (!empty($arrSet['own']))
 		{
 			$arrSet['own'] = implode(";\n", $arrSet['own']) . ';';
 		}

@@ -563,7 +563,7 @@ class ModuleTasks extends BackendModule
 		$this->Template->filter = specialchars($GLOBALS['TL_LANG']['MSC']['filter']);
 
 		// Where
-		if (count($where))
+		if (!empty($where))
 		{
 			$query .= " WHERE " . implode(' AND ', $where);
 		}
@@ -657,7 +657,7 @@ class ModuleTasks extends BackendModule
 				$groups = deserialize($objUser->groups, true);
 				$intersect = array_intersect($this->User->groups, $groups);
 
-				if (!is_array($intersect) || count($intersect) < 1)
+				if (!is_array($intersect) || empty($intersect))
 				{
 					continue;
 				}

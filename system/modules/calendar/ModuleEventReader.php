@@ -81,7 +81,7 @@ class ModuleEventReader extends Events
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar));
 
 		// Return if there are no calendars
-		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
+		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			global $objPage;
 

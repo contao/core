@@ -60,7 +60,7 @@ abstract class Events extends Module
 	 */
 	protected function sortOutProtected($arrCalendars)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrCalendars) || count($arrCalendars) < 1)
+		if (BE_USER_LOGGED_IN || !is_array($arrCalendars) || empty($arrCalendars))
 		{
 			return $arrCalendars;
 		}
@@ -80,7 +80,7 @@ abstract class Events extends Module
 
 				$groups = deserialize($objCalendar->groups);
 
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				if (!is_array($groups) || empty($groups) || empty(array_intersect($groups, $this->User->groups)))
 				{
 					continue;
 				}

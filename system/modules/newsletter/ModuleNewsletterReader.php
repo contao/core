@@ -81,7 +81,7 @@ class ModuleNewsletterReader extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			global $objPage;
 

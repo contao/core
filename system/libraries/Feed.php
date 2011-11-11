@@ -208,7 +208,7 @@ class Feed extends System
 	 */
 	protected function adjustPublicationDate()
 	{
-		if (count($this->arrItems) && $this->arrItems[0]->published > $this->published)
+		if (!empty($this->arrItems) && $this->arrItems[0]->published > $this->published)
 		{
 			$this->published = $this->arrItems[0]->published;
 		}

@@ -140,7 +140,7 @@ abstract class Module extends Frontend
 		$this->compile();
 
 		$this->Template->inColumn = $this->strColumn;
-		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
+		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
 
@@ -220,7 +220,7 @@ abstract class Module extends Frontend
 			$_groups = deserialize($objSubpages->groups);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_always'))
+			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && !empty(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_always'))
 			{
 				// Check whether there will be subpages
 				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page'))))))
@@ -329,7 +329,7 @@ abstract class Module extends Frontend
 		}
 
 		// Add classes first and last
-		if (count($items))
+		if (!empty($items))
 		{
 			$last = count($items) - 1;
 
@@ -338,7 +338,7 @@ abstract class Module extends Frontend
 		}
 
 		$objTemplate->items = $items;
-		return count($items) ? $objTemplate->parse() : '';
+		return !empty($items) ? $objTemplate->parse() : '';
 	}
 }
 

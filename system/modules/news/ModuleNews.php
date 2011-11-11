@@ -54,7 +54,7 @@ abstract class ModuleNews extends Module
 	 */
 	protected function sortOutProtected($arrArchives)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrArchives) || count($arrArchives) < 1)
+		if (BE_USER_LOGGED_IN || !is_array($arrArchives) || empty($arrArchives))
 		{
 			return $arrArchives;
 		}
@@ -74,7 +74,7 @@ abstract class ModuleNews extends Module
 
 				$groups = deserialize($objArchive->groups);
 
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+				if (!is_array($groups) || empty($groups) || empty(array_intersect($groups, $this->User->groups)))
 				{
 					continue;
 				}
@@ -175,7 +175,7 @@ abstract class ModuleNews extends Module
 
 			// Add meta information
 			$objTemplate->date = $arrMeta['date'];
-			$objTemplate->hasMetaFields = count($arrMeta) ? true : false;
+			$objTemplate->hasMetaFields = !empty($arrMeta);
 			$objTemplate->numberOfComments = $arrMeta['ccount'];
 			$objTemplate->commentCount = $arrMeta['comments'];
 			$objTemplate->timestamp = $objArticles->date;

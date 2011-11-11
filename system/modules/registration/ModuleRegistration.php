@@ -69,7 +69,7 @@ class ModuleRegistration extends Module
 		$this->editable = deserialize($this->editable);
 
 		// Return if there are no editable fields
-		if (!is_array($this->editable) || count($this->editable) < 1)
+		if (!is_array($this->editable) || empty($this->editable))
 		{
 			return '';
 		}
@@ -393,7 +393,7 @@ class ModuleRegistration extends Module
 						}
 
 						// Replace the wildcard
-						if (count($arrData['newsletter']) > 0)
+						if (!empty($arrData['newsletter']))
 						{
 							$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(". implode(',', array_map('intval', $arrData['newsletter'])) .")");
 							$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);

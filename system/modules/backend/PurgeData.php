@@ -68,7 +68,7 @@ class PurgeData extends Backend implements executable
 		}
 
 		// Add potential error messages
-		if (is_array($_SESSION['TL_ERROR']) && count($_SESSION['TL_ERROR']))
+		if (is_array($_SESSION['TL_ERROR']) && !empty($_SESSION['TL_ERROR']))
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{

@@ -159,7 +159,7 @@ class TableWizard extends Widget
 		}
 
 		// Make sure there is at least an empty array
-		if (!is_array($this->varValue) || count($this->varValue) < 1)
+		if (!is_array($this->varValue) || empty($this->varValue))
 		{
 			$this->varValue = array(array(''));
 		}

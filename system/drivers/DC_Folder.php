@@ -84,7 +84,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		}
 
 		// Check whether the table is defined
-		if (!strlen($strTable) || !count($GLOBALS['TL_DCA'][$strTable]))
+		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
 			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_Folder __construct()', TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
@@ -102,7 +102,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		{
 			$ids = deserialize($this->Input->post('IDS'));
 
-			if (!is_array($ids) || count($ids) < 1)
+			if (!is_array($ids) || empty($ids))
 			{
 				$this->reload();
 			}
@@ -221,7 +221,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			$session = $this->Session->getData();
 
 			// Expand tree
-			if (!is_array($session['filetree']) || count($session['filetree']) < 1 || current($session['filetree']) != 1)
+			if (!is_array($session['filetree']) || empty($session['filetree']) || current($session['filetree']) != 1)
 			{
 				$session['filetree'] = $this->getMD5Folders($GLOBALS['TL_CONFIG']['uploadPath']);
 			}
@@ -240,7 +240,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -249,7 +249,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		$this->import('Files');
 
 		// Call recursive function tree()
-		if (!count($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false)
+		if (empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false)
 		{
 			$return .= $this->generateTree(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'], 0, false, false, ($blnClipboard ? $arrClipboard : false));
 		}
@@ -299,7 +299,7 @@ class DC_Folder extends DataContainer implements listable, editable
 </div>' : '').'
 
 <ul class="tl_listing">
-  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($blnClipboard && !count($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both"></div></li>'.$return.'
+  <li class="tl_folder_top" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left">'.$this->generateImage('filemounts.gif').' '.$GLOBALS['TL_LANG']['MSC']['filetree'].'</div> <div class="tl_right">'.(($blnClipboard && empty($this->arrFilemounts) && !is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root'] !== false) ? '<a href="'.$this->addToUrl('&amp;act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$GLOBALS['TL_CONFIG']['uploadPath'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a>' : '&nbsp;').'</div><div style="clear:both"></div></li>'.$return.'
 </ul>
 
 </div>';
@@ -949,7 +949,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="tl_upload">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -1012,7 +1012,7 @@ class DC_Folder extends DataContainer implements listable, editable
 		$this->strPalette = $this->getPalette();
 		$boxes = trimsplit(';', $this->strPalette);
 
-		if (count($boxes))
+		if (!empty($boxes))
 		{
 			// Get fields
 			foreach ($boxes as $k=>$v)
@@ -1021,14 +1021,14 @@ class DC_Folder extends DataContainer implements listable, editable
 
 				foreach ($boxes[$k] as $kk=>$vv)
 				{
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !count($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]['exclude'] || !isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$vv]))
 					{
 						unset($boxes[$k][$kk]);
 					}
 				}
 
 				// Unset a box if it does not contain any fields
-				if (count($boxes[$k]) < 1)
+				if (empty($boxes[$k]))
 				{
 					unset($boxes[$k]);
 				}
@@ -1129,7 +1129,7 @@ class DC_Folder extends DataContainer implements listable, editable
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['editFF'].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">'.($this->noReload ? '
@@ -1203,7 +1203,7 @@ window.addEvent(\'domready\', function() {
 		$fields = $session['CURRENT'][$this->strTable];
 
 		// Add fields
-		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
+		if (is_array($fields) && !empty($fields) && $this->Input->get('fields'))
 		{
 			$class = 'tl_tbox';
 
@@ -1337,7 +1337,7 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			$blnIsError = ($_POST && !count($_POST['all_fields']));
+			$blnIsError = ($_POST && empty($_POST['all_fields']));
 
 			// Return the select menu
 			$return .= '
@@ -1648,7 +1648,7 @@ window.addEvent(\'domready\', function() {
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -1790,7 +1790,7 @@ window.addEvent(\'domready\', function() {
 			$return .= '</div><div style="clear:both"></div></li>';
 
 			// Call next node
-			if (count($content) > 0 && $session['filetree'][$md5] == 1)
+			if (!empty($content) && $session['filetree'][$md5] == 1)
 			{
 				$return .= '<li class="parent" id="filetree_'.$md5.'"><ul class="level_'.$level.'">';
 				$return .= $this->generateTree($folders[$f], ($intMargin + $intSpacing), false, $protected, $arrClipboard);
@@ -1877,7 +1877,7 @@ window.addEvent(\'domready\', function() {
 			return false;
 		}
 
-		if (!count($this->arrFilemounts))
+		if (empty($this->arrFilemounts))
 		{
 			return true;
 		}

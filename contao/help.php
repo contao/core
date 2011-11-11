@@ -79,7 +79,7 @@ class Help extends Backend
 		$this->Template = new BackendTemplate('be_help');
 
 		// Add reference
-		if (count($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']))
+		if (!empty($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']))
 		{
 			$rows = array();
 			$options = is_array($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options']) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options'] : array_keys($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']);
@@ -96,7 +96,7 @@ class Help extends Backend
 		}
 
 		// Add explanation
-		if (strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation']))
+		if (isset($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation']))
 		{
 			$this->loadLanguageFile('explain');
 			$key = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation'];

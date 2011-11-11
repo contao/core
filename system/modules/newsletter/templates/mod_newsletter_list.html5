@@ -5,7 +5,7 @@
 
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
-<?php if (count($this->newsletters)): ?>
+<?php if (!empty($this->newsletters)): ?>
 
 <ul>
 <?php foreach($this->newsletters as $newsletter): ?>

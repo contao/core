@@ -50,7 +50,7 @@ class DbInstaller extends Controller
 		$return = '';
 		$sql_command = $this->compileCommands();
 
-		if (!count($sql_command))
+		if (empty($sql_command))
 		{
 			return '';
 		}
@@ -120,7 +120,7 @@ class DbInstaller extends Controller
 		// Create tables
 		foreach (array_diff(array_keys($sql_target), array_keys($sql_current)) as $table)
 		{
-			$return['CREATE'][] = "CREATE TABLE `" . $table . "` (\n  " . implode(",\n  ", $sql_target[$table]['TABLE_FIELDS']) . (count($sql_target[$table]['TABLE_CREATE_DEFINITIONS']) ? ',' . "\n  " . implode(",\n  ", $sql_target[$table]['TABLE_CREATE_DEFINITIONS']) : '') . "\n)" . $sql_target[$table]['TABLE_OPTIONS'] . ';';
+			$return['CREATE'][] = "CREATE TABLE `" . $table . "` (\n  " . implode(",\n  ", $sql_target[$table]['TABLE_FIELDS']) . (!empty($sql_target[$table]['TABLE_CREATE_DEFINITIONS']) ? ',' . "\n  " . implode(",\n  ", $sql_target[$table]['TABLE_CREATE_DEFINITIONS']) : '') . "\n)" . $sql_target[$table]['TABLE_OPTIONS'] . ';';
 			$create[] = $table;
 		}
 
@@ -315,7 +315,7 @@ class DbInstaller extends Controller
 		$this->import('Database');
 		$tables = preg_grep('/^tl_/i', $this->Database->listTables(null, true));
 
-		if (!count($tables))
+		if (empty($tables))
 		{
 			return array();
 		}

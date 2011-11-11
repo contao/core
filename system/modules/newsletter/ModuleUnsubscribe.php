@@ -69,7 +69,7 @@ class ModuleUnsubscribe extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			return '';
 		}
@@ -147,7 +147,7 @@ class ModuleUnsubscribe extends Module
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
-		if (!is_array($arrChannels) || count($arrChannels) < 1)
+		if (!is_array($arrChannels) || empty($arrChannels))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
 			$this->reload();
@@ -176,7 +176,7 @@ class ModuleUnsubscribe extends Module
 		$arrRemove = array_intersect($arrChannels, $arrSubscriptions);
 
 		// Return if there are no subscriptions to remove
-		if (!is_array($arrRemove) || count($arrRemove) < 1)
+		if (!is_array($arrRemove) || empty($arrRemove))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['unsubscribed'];
 			$this->reload();

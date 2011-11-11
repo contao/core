@@ -107,7 +107,7 @@ class Folder extends System
 	 */
 	public function isEmpty()
 	{
-		return count(scan(TL_ROOT . '/' . $this->strFolder)) ? false : true;
+		return empty(scan(TL_ROOT . '/' . $this->strFolder));
 	}
 
 

@@ -74,7 +74,7 @@ class PageForward extends Frontend
 		$strGet = '';
 
 		// Add $_GET parameters
-		if (is_array($_GET) && count($_GET) > 0)
+		if (is_array($_GET) && !empty($_GET))
 		{
 			foreach (array_keys($_GET) as $key)
 			{

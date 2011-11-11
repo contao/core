@@ -660,7 +660,7 @@ class tl_style extends Backend
 	{
 		$session = $this->Session->get('style_sheet_updater');
 
-		if (!is_array($session) || count($session) < 1)
+		if (!is_array($session) || empty($session))
 		{
 			return;
 		}

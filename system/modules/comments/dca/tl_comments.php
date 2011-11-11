@@ -269,7 +269,7 @@ class tl_comments extends Backend
 			case 'overrideAll':
 				$session = $this->Session->getData();
 
-				if (!is_array($session['CURRENT']['IDS']) || count($session['CURRENT']['IDS']) < 1)
+				if (!is_array($session['CURRENT']['IDS']) || empty($session['CURRENT']['IDS']))
 				{
 					break;
 				}

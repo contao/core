@@ -296,7 +296,7 @@ class FileTree extends Widget
 			$folderAttribute = 'style="margin-left:20px"';
 			$session[$node][$tid] = is_numeric($session[$node][$tid]) ? $session[$node][$tid] : 0;
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
-			$blnIsOpen = ($session[$node][$tid] == 1 || count(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)) > 0);
+			$blnIsOpen = ($session[$node][$tid] == 1 || !empty(preg_grep('/^' . preg_quote($currentFolder, '/') . '\//', $this->varValue)));
 
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)

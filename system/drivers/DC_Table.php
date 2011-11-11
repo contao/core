@@ -136,7 +136,7 @@ class DC_Table extends DataContainer implements listable, editable
 		}
 
 		// Check whether the table is defined
-		if (!strlen($strTable) || !count($GLOBALS['TL_DCA'][$strTable]))
+		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
 			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_Table __construct()', TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
@@ -147,7 +147,7 @@ class DC_Table extends DataContainer implements listable, editable
 		{
 			$ids = deserialize($this->Input->post('IDS'));
 
-			if (!is_array($ids) || count($ids) < 1)
+			if (!is_array($ids) || empty($ids))
 			{
 				$this->reload();
 			}
@@ -318,7 +318,7 @@ class DC_Table extends DataContainer implements listable, editable
 		}
 
 		// Custom filter
-		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && count($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
+		if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']) && !empty($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter']))
 		{
 			foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['filter'] as $filter)
 			{
@@ -494,7 +494,7 @@ class DC_Table extends DataContainer implements listable, editable
 			}
 
 			// Label
-			if (count($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label']))
+			if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label']))
 			{
 				$label = is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label']) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label'][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['label'];
 			}
@@ -503,7 +503,7 @@ class DC_Table extends DataContainer implements listable, editable
 				$label = is_array($GLOBALS['TL_LANG']['MSC'][$i]) ? $GLOBALS['TL_LANG']['MSC'][$i][0] : $GLOBALS['TL_LANG']['MSC'][$i];
 			}
 
-			if (!strlen($label))
+			if ($label == '')
 			{
 				$label = $i;
 			}
@@ -543,7 +543,7 @@ class DC_Table extends DataContainer implements listable, editable
 						$class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
 
 						// Get the field label
-						if (count($GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label']))
+						if (isset($GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label']))
 						{
 							$label = is_array($GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label']) ? $GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label'][0] : $GLOBALS['TL_DCA'][$strTable]['fields'][$i]['label'];
 						}
@@ -596,7 +596,7 @@ class DC_Table extends DataContainer implements listable, editable
 		}
 
 		// Set passed values
-		if (is_array($set) && count($set))
+		if (is_array($set) && !empty($set))
 		{
 			$this->set = array_merge($this->set, $set);
 		}
@@ -960,7 +960,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Duplicate the child records
 		foreach ($copy as $k=>$v)
 		{
-			if (count($v))
+			if (!empty($v))
 			{
 				foreach ($v as $kk=>$vv)
 				{
@@ -968,7 +968,7 @@ class DC_Table extends DataContainer implements listable, editable
 													->set($vv)
 													->execute();
 
-					if ($objInsertStmt->affectedRows && (count($cctable[$k]) || $GLOBALS['TL_DCA'][$k]['list']['sorting']['mode'] == 5) && $kk != $parentId)
+					if ($objInsertStmt->affectedRows && (!empty($cctable[$k]) || $GLOBALS['TL_DCA'][$k]['list']['sorting']['mode'] == 5) && $kk != $parentId)
 					{
 						$this->copyChilds($k, $objInsertStmt->insertId, $kk, $parentId);
 					}
@@ -1273,7 +1273,7 @@ class DC_Table extends DataContainer implements listable, editable
 		}
 
 		// Delete all child records if there is a child table
-		if (count($this->ctable))
+		if (!empty($this->ctable))
 		{
 			foreach ($delete[$this->strTable] as $id)
 			{
@@ -1411,7 +1411,7 @@ class DC_Table extends DataContainer implements listable, editable
 				{
 					$delete[$v][] = $row['id'];
 
-					if (count($cctable[$v]))
+					if (!empty($cctable[$v]))
 					{
 						$this->deleteChilds($v, $row['id'], $delete);
 					}
@@ -1592,7 +1592,7 @@ class DC_Table extends DataContainer implements listable, editable
 		$boxes = trimsplit(';', $this->strPalette);
 		$legends = array();
 
-		if (count($boxes))
+		if (!empty($boxes))
 		{
 			foreach ($boxes as $k=>$v)
 			{
@@ -1780,7 +1780,7 @@ class DC_Table extends DataContainer implements listable, editable
 
 <h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['MSC']['editRecord'], ($this->intId ? 'ID '.$this->intId : '')).'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post" enctype="' . ($this->blnUploadable ? 'multipart/form-data' : 'application/x-www-form-urlencoded') . '"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
@@ -1949,7 +1949,7 @@ window.addEvent(\'domready\', function() {
 		// Add fields
 		$fields = $session['CURRENT'][$this->strTable];
 
-		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
+		if (is_array($fields) && !empty($fields) && $this->Input->get('fields'))
 		{
 			$class = 'tl_tbox';
 			$this->checkForTinyMce();
@@ -2195,7 +2195,7 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			$blnIsError = ($_POST && !count($_POST['all_fields']));
+			$blnIsError = ($_POST && empty($_POST['all_fields']));
 
 			// Return the select menu
 			$return .= '
@@ -2268,7 +2268,7 @@ window.addEvent(\'domready\', function() {
 		// Add fields
 		$fields = $session['CURRENT'][$this->strTable];
 
-		if (is_array($fields) && count($fields) && $this->Input->get('fields'))
+		if (is_array($fields) && !empty($fields) && $this->Input->get('fields'))
 		{
 			$class = 'tl_tbox';
 			$formFields = array();
@@ -2473,7 +2473,7 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
-			$blnIsError = ($_POST && !count($_POST['all_fields']));
+			$blnIsError = ($_POST && empty($_POST['all_fields']));
 
 			// Return the select menu
 			$return .= '
@@ -2653,7 +2653,7 @@ window.addEvent(\'domready\', function() {
 		$strPalette = $GLOBALS['TL_DCA'][$this->strTable]['palettes'][$palette];
 
 		// Check whether there are selector fields
-		if (count($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
+		if (!empty($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
 		{
 			$sValues = array();
 			$subpalettes = array();
@@ -2771,7 +2771,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Delete all new but incomplete records (tstamp=0)
-		if (is_array($new_records[$this->strTable]) && count($new_records[$this->strTable]) > 0)
+		if (is_array($new_records[$this->strTable]) && !empty($new_records[$this->strTable]))
 		{
 			$objStmt = $this->Database->execute("DELETE FROM " . $this->strTable . " WHERE id IN(" . implode(',', array_map('intval', $new_records[$this->strTable])) . ") AND tstamp=0");
 
@@ -2793,7 +2793,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Delete all records of the child table that are not related to the current table
-		if (is_array($ctable) && count($ctable))
+		if (is_array($ctable) && !empty($ctable))
 		{
 			foreach ($ctable as $v)
 			{
@@ -2842,7 +2842,7 @@ window.addEvent(\'domready\', function() {
 			$node = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->strTable.'_'.$table.'_tree' : $this->strTable.'_tree';
 
 			// Expand tree
-			if (!is_array($session[$node]) || count($session[$node]) < 1 || current($session[$node]) != 1)
+			if (!is_array($session[$node]) || empty($session[$node]) || current($session[$node]) != 1)
 			{
 				$session[$node] = array();
 				$objNodes = $this->Database->execute("SELECT DISTINCT pid FROM " . $table . " WHERE pid>0");
@@ -2881,7 +2881,7 @@ window.addEvent(\'domready\', function() {
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -3035,7 +3035,7 @@ window.addEvent(\'domready\', function() {
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
 		// Check clipboard
-		if (isset($arrClipboard[$this->strTable]) && count($arrClipboard[$this->strTable]))
+		if (isset($arrClipboard[$this->strTable]) && !empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$this->strTable];
@@ -3129,7 +3129,7 @@ window.addEvent(\'domready\', function() {
 		$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
 		$level = ($intMargin / $intSpacing + 1);
 
-		if (count($childs))
+		if (!empty($childs))
 		{
 			$folderAttribute = '';
 			$img = ($session[$node][$id] == 1) ? 'folMinus.gif' : 'folPlus.gif';
@@ -3231,7 +3231,7 @@ window.addEvent(\'domready\', function() {
 				// Regular tree (on cut: disable buttons of the page all its childs to avoid circular references)
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5)
 				{
-					$_buttons .= ($arrClipboard['mode'] == 'cut' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id'])) || (count($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && in_array($id, $this->root))) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
+					$_buttons .= ($arrClipboard['mode'] == 'cut' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id'])) || (!empty($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['root']) && in_array($id, $this->root))) ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteafter'][1], $id)).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
 					$_buttons .= ($arrClipboard['mode'] == 'paste' && ($blnCircularReference || $arrClipboard['id'] == $id) || $arrClipboard['mode'] == 'cutAll' && ($blnCircularReference || in_array($id, $arrClipboard['id']))) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$id.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1], $id)).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 				}
 
@@ -3258,13 +3258,13 @@ window.addEvent(\'domready\', function() {
 
 				for ($j=0; $j<count($ids); $j++)
 				{
-					$return .= $this->generateTree($this->strTable, $ids[$j], array('pp'=>$ids[($j-1)], 'nn'=>$ids[($j+1)]), $blnHasSorting, ($intMargin + $intSpacing + 20), $arrClipboard, false, ($j<(count($ids)-1) || count($childs)));
+					$return .= $this->generateTree($this->strTable, $ids[$j], array('pp'=>$ids[($j-1)], 'nn'=>$ids[($j+1)]), $blnHasSorting, ($intMargin + $intSpacing + 20), $arrClipboard, false, ($j<(count($ids)-1) || !empty($childs)));
 				}
 			}
 		}
 
 		// Begin new submenu
-		if (count($childs) && $session[$node][$id] == 1)
+		if (!empty($childs) && $session[$node][$id] == 1)
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 		}
@@ -3282,7 +3282,7 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Close submenu
-		if (count($childs) && $session[$node][$id] == 1)
+		if (!empty($childs) && $session[$node][$id] == 1)
 		{
 			$return .= '</ul></li>';
 		}
@@ -3305,7 +3305,7 @@ window.addEvent(\'domready\', function() {
 		$blnMultiboard = false;
 
 		// Check clipboard
-		if (isset($arrClipboard[$table]) && count($arrClipboard[$table]))
+		if (isset($arrClipboard[$table]) && !empty($arrClipboard[$table]))
 		{
 			$blnClipboard = true;
 			$arrClipboard = $arrClipboard[$table];
@@ -3483,17 +3483,17 @@ window.addEvent(\'domready\', function() {
 				$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
 			}
 
-			if (count($this->procedure))
+			if (!empty($this->procedure))
 			{
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
 
-			if (is_array($this->root) && count($this->root) > 0)
+			if (is_array($this->root) && !empty($this->root))
 			{
-				$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
+				$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
 
-			if (is_array($orderBy) && count($orderBy) > 0)
+			if (is_array($orderBy) && !empty($orderBy))
 			{
 				$query .= " ORDER BY " . implode(', ', $orderBy);
 			}
@@ -3700,14 +3700,14 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 		$query = "SELECT * FROM " . $this->strTable;
 
-		if (count($this->procedure))
+		if (!empty($this->procedure))
 		{
 			$query .= " WHERE " . implode(' AND ', $this->procedure);
 		}
 
-		if (is_array($this->root) && count($this->root) > 0)
+		if (is_array($this->root) && !empty($this->root))
 		{
-			$query .= (count($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
+			$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 		}
 
 		if (is_array($orderBy) && strlen($orderBy[0]))
@@ -3758,7 +3758,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$this->bid = strlen($return) ? $this->bid : 'tl_buttons';
 
 		// Display buttos
-		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] || count($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations']))
+		if (!$GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] || !empty($GLOBALS['TL_DCA'][$this->strTable]['list']['global_operations']))
 		{
 			$return .= '
 
@@ -4088,7 +4088,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Return if there are no search fields
-		if (!count($searchFields))
+		if (empty($searchFields))
 		{
 			return '';
 		}
@@ -4171,7 +4171,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Return if there are no sorting fields
-		if (!count($sortingFields))
+		if (empty($sortingFields))
 		{
 			return '';
 		}
@@ -4276,7 +4276,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$this->procedure[] = 'id IN(' . implode(',', $this->root) . ')';
 			}
 
-			if (count($this->procedure))
+			if (!empty($this->procedure))
 			{
 				$query .= " WHERE " . implode(' AND ', $this->procedure);
 			}
@@ -4374,7 +4374,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Return if there are no sorting fields
-		if (!count($sortingFields))
+		if (empty($sortingFields))
 		{
 			return '';
 		}
@@ -4490,7 +4490,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$arrValues[] = CURRENT_ID;
 			}
 
-			if (is_array($this->root) && count($this->root) > 0)
+			if (is_array($this->root) && !empty($this->root))
 			{
 				$arrProcedure[] = "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 			}
@@ -4647,7 +4647,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					}
 
 					// Options callback
-					elseif (is_array($options_callback) && count($options_callback) > 0)
+					elseif (is_array($options_callback) && !empty($options_callback))
 					{
 						$vv = $options_callback[$vv];
 					}

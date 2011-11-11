@@ -193,7 +193,7 @@ class FormSelectMenu extends Widget
 		}
 
 		// Add empty option (XHTML) if there are none
-		if (!count($this->arrOptions))
+		if (empty($this->arrOptions))
 		{
 			$this->arrOptions = array(array('value'=>'', 'label'=>'-'));
 		}

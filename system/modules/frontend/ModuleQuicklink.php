@@ -112,7 +112,7 @@ class ModuleQuicklink extends Module
 			$arrPages[] = $objPage->fetchAssoc();
 		}
 
-		if (count($arrPages) < 1)
+		if (empty($arrPages))
 		{
 			return;
 		}

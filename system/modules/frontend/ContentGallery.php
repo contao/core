@@ -66,7 +66,7 @@ class ContentGallery extends ContentElement
 			}
 		}
 
-		if (!is_array($this->multiSRC) || count($this->multiSRC) < 1)
+		if (!is_array($this->multiSRC) || empty($this->multiSRC))
 		{
 			return '';
 		}

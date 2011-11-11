@@ -483,7 +483,7 @@ class DataContainer extends Backend
 		}
 
 		$strUrl = $this->Environment->script . '?' . implode('&', $arrKeys);
-		$glue = count($arrKeys) ? '&' : '';
+		$glue = !empty($arrKeys) ? '&' : '';
 
 		return $strUrl . $glue . ($this->Input->get('table') ? 'table='.$this->Input->get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
@@ -502,7 +502,7 @@ class DataContainer extends Backend
 	 */
 	protected function generateButtons($arrRow, $strTable, $arrRootIds=array(), $blnCircularReference=false, $arrChildRecordIds=null, $strPrevious=null, $strNext=null)
 	{
-		if (!count($GLOBALS['TL_DCA'][$strTable]['list']['operations']))
+		if (empty($GLOBALS['TL_DCA'][$strTable]['list']['operations']))
 		{
 			return '';
 		}
@@ -545,11 +545,11 @@ class DataContainer extends Backend
 
 				if ($dir == 'up')
 				{
-					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || !count($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('up_.gif')).' ';
+					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('up_.gif')).' ';
 					continue;
 				}
 
-				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || !count($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('down_.gif')).' ';
+				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('down_.gif')).' ';
 			}
 		}
 

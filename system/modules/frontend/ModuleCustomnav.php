@@ -114,7 +114,7 @@ class ModuleCustomnav extends Module
 		}
 
 		// Return if there are no pages
-		if (count($arrPages) < 1)
+		if (empty($arrPages))
 		{
 			return;
 		}
@@ -135,7 +135,7 @@ class ModuleCustomnav extends Module
 			$_groups = deserialize($arrPage['groups']);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected)
+			if (!$arrPage['protected'] || BE_USER_LOGGED_IN || (is_array($_groups) && !empty(array_intersect($_groups, $groups))) || $this->showProtected)
 			{
 				// Get href
 				switch ($arrPage['type'])
@@ -223,7 +223,7 @@ class ModuleCustomnav extends Module
 		$this->Template->request = $this->getIndexFreeRequest(true);
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->items = count($items) ? $objTemplate->parse() : '';
+		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';
 	}
 }
 

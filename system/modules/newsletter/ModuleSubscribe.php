@@ -69,7 +69,7 @@ class ModuleSubscribe extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			return '';
 		}
@@ -201,7 +201,7 @@ class ModuleSubscribe extends Module
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
-		if (!is_array($arrChannels) || count($arrChannels) < 1)
+		if (!is_array($arrChannels) || empty($arrChannels))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
 			$this->reload();
@@ -230,7 +230,7 @@ class ModuleSubscribe extends Module
 		$arrNew = array_diff($arrChannels, $arrSubscriptions);
 
 		// Return if there are no new subscriptions
-		if (!is_array($arrNew) || count($arrNew) < 1)
+		if (!is_array($arrNew) || empty($arrNew))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['subscribed'];
 			$this->reload();

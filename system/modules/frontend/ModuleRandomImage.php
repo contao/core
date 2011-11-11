@@ -117,7 +117,7 @@ class ModuleRandomImage extends Module
 
 		$images = array_unique($images);
 
-		if (!is_array($images) || count($images) < 1)
+		if (!is_array($images) || empty($images))
 		{
 			return;
 		}

@@ -244,7 +244,7 @@ class Calendar extends Frontend
 		// Walk through each calendar
 		while ($objCalendar->next())
 		{
-			if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($objCalendar->jumpTo, $arrRoot))
+			if (is_array($arrRoot) && !in_array($objCalendar->jumpTo, $arrRoot))
 			{
 				continue;
 			}

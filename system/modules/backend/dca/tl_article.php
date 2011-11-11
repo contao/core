@@ -590,7 +590,7 @@ class tl_article extends Backend
 		$arrCustom = deserialize($objLayout->sections);
 
 		// Add the custom layout sections
-		if (is_array($arrCustom) && count($arrCustom) > 0)
+		if (is_array($arrCustom) && !empty($arrCustom))
 		{
 			$arrSections = array_merge($arrSections, $arrCustom);
 		}
@@ -631,7 +631,7 @@ class tl_article extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (!$this->User->isAdmin && count(preg_grep('/^tl_article::/', $this->User->alexf)) < 1)
+		if (!$this->User->isAdmin && empty(preg_grep('/^tl_article::/', $this->User->alexf)))
 		{
 			return '';
 		}

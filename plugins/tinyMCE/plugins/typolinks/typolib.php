@@ -98,7 +98,7 @@ class typolib extends Backend
 		$arrPages = scan(TL_ROOT . '/' . $strFolder);
 
 		// Empty folder
-		if (count($arrPages) < 1)
+		if (empty($arrPages))
 		{
 			return '';
 		}

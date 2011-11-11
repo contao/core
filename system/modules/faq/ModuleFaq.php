@@ -64,7 +64,7 @@ class ModuleFaq extends Frontend
 		// Walk through each category
 		while ($objFaq->next())
 		{
-			if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($objFaq->jumpTo, $arrRoot))
+			if (is_array($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
 			{
 				continue;
 			}

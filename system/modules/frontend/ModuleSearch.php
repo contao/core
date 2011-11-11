@@ -145,7 +145,7 @@ class ModuleSearch extends Module
 			}
 
 			// Return if there are no pages
-			if (!is_array($arrPages) || count($arrPages) < 1)
+			if (!is_array($arrPages) || empty($arrPages))
 			{
 				$this->log('No searchable pages found', 'ModuleSearch compile()', TL_ERROR);
 				return;
@@ -208,7 +208,7 @@ class ModuleSearch extends Module
 						{
 							$groups = deserialize($v['groups']);
 
-							if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+							if (!is_array($groups) || empty($groups) || empty(array_intersect($groups, $this->User->groups)))
 							{
 								unset($arrResult[$k]);
 							}
@@ -285,7 +285,7 @@ class ModuleSearch extends Module
 				}
 
 				// Shorten context and highlight keywords
-				if (count($arrContext))
+				if (!empty($arrContext))
 				{
 					$this->import('String');
 

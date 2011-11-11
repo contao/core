@@ -509,7 +509,7 @@ abstract class Backend extends Controller
 		$arrPages = scan(TL_ROOT . '/' . $strFolder);
 
 		// Empty folder
-		if (count($arrPages) < 1)
+		if (empty($arrPages))
 		{
 			return '';
 		}

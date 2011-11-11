@@ -189,7 +189,7 @@ class File extends System
 					break;
 
 				case 'width':
-					if (count($this->arrImageSize) < 1)
+					if (empty($this->arrImageSize))
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}
@@ -197,7 +197,7 @@ class File extends System
 					break;
 
 				case 'height':
-					if (count($this->arrImageSize) < 1)
+					if (empty($this->arrImageSize))
 					{
 						$this->arrImageSize = @getimagesize(TL_ROOT . '/' . $this->strFile);
 					}

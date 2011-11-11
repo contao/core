@@ -471,7 +471,7 @@ abstract class User extends Model
 		$groups = deserialize($this->arrData['groups']);
 
 		// No groups assigned
-		if (!is_array($groups) || count($groups) < 1)
+		if (!is_array($groups) || empty($groups))
 		{
 			return false;
 		}

@@ -67,7 +67,7 @@ class ModuleArticleList extends Module
 		}
 
 		$strBuffer = parent::generate();
-		return count($this->Template->articles) ? $strBuffer : '';
+		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
 

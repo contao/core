@@ -241,7 +241,7 @@ class tl_style_sheet extends Backend
 	{
 		$session = $this->Session->get('style_sheet_updater');
 
-		if (!is_array($session) || count($session) < 1)
+		if (!is_array($session) || empty($session))
 		{
 			return;
 		}
@@ -294,7 +294,7 @@ class tl_style_sheet extends Backend
 	{
 		$media = deserialize($row['media']);
 
-		if (!is_array($media) || count($media) < 1)
+		if (!is_array($media) || empty($media))
 		{
 			return '<div style="float:left">'. $row['name'] ."</div>\n";
 		}
@@ -331,7 +331,7 @@ class tl_style_sheet extends Backend
 	 */
 	public function editHeader($row, $href, $label, $title, $icon, $attributes)
 	{
-		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
+		return ($this->User->isAdmin || !empty(preg_grep('/^tl_style_sheet::/', $this->User->alexf))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 }
 

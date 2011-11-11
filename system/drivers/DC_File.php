@@ -50,7 +50,7 @@ class DC_File extends DataContainer implements editable
 		$this->intId = $this->Input->get('id');
 
 		// Check whether the table is defined
-		if (!strlen($strTable) || !count($GLOBALS['TL_DCA'][$strTable]))
+		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable])) 
 		{
 			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_File __construct()', TL_ERROR);
 			trigger_error('Could not load data container configuration', E_USER_ERROR);
@@ -133,7 +133,7 @@ class DC_File extends DataContainer implements editable
 		$boxes = trimsplit(';', $this->strPalette);
 		$legends = array();
 
-		if (count($boxes))
+		if (!empty($boxes))
 		{
 			foreach ($boxes as $k=>$v)
 			{
@@ -158,7 +158,7 @@ class DC_File extends DataContainer implements editable
 				}
 
 				// Unset a box if it does not contain any fields
-				if (count($boxes[$k]) < 1)
+				if (empty($boxes[$k]))
 				{
 					unset($boxes[$k]);
 				}
@@ -301,7 +301,7 @@ class DC_File extends DataContainer implements editable
 
 <h2 class="sub_headline">'.$GLOBALS['TL_LANG'][$this->strTable]['edit'].'</h2>
 '.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(count($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
+<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').'>
 
 <div class="tl_formbody_edit">
 <input type="hidden" name="FORM_SUBMIT" value="'.specialchars($this->strTable).'">
@@ -457,7 +457,7 @@ window.addEvent(\'domready\', function() {
 		$strPalette = $GLOBALS['TL_DCA'][$this->strTable]['palettes'][$palette];
 
 		// Check whether there are selector fields
-		if (count($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
+		if (!empty($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
 		{
 			$sValues = array();
 			$subpalettes = array();

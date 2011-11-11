@@ -114,7 +114,7 @@ class ModuleLogin extends Module
 				{
 					$arrGroups = deserialize($objGroup->groups);
 
-					if (is_array($arrGroups) && count($arrGroups) > 0)
+					if (is_array($arrGroups) && !empty($arrGroups))
 					{
 						$time = time();
 
@@ -213,7 +213,7 @@ class ModuleLogin extends Module
 
 		$blnHasError = false;
 
-		if (count($_SESSION['TL_ERROR']))
+		if (!empty($_SESSION['TL_ERROR']))
 		{
 			$blnHasError = true;
 			$_SESSION['LOGIN_ERROR'] = $_SESSION['TL_ERROR'][0];

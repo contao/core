@@ -226,7 +226,7 @@ abstract class System
 
 		$href = '?';
 
-		if (count($queries) > 0)
+		if (!empty($queries))
 		{
 			$href .= implode('&amp;', $queries) . '&amp;';
 		}
