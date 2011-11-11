@@ -1556,6 +1556,11 @@ var Backend =
 				div.setStyle('left', el.getPosition().x);
 			}
 
+			// Mark active elements
+			if (el.hasClass('active')) {
+				div.addClass('active');
+			}
+
 			// Update the div onchange
 			el.addEvent('change', function() {
 				var option = el.getElement('option[value="' + el.value + '"]');
