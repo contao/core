@@ -271,6 +271,16 @@ class Pagination extends Frontend
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
 
+		// Add rel="prev" and rel="next" links (see #3515)
+		if ($this->hasPrevious())
+		{
+			$GLOBALS['TL_HEAD'][] = '<link rel="prev" href="' . $this->linkToPage($this->intPage - 1) . '">';
+		}
+		if ($this->hasNext())
+		{
+			$GLOBALS['TL_HEAD'][] = '<link rel="next" href="' . $this->linkToPage($this->intPage + 1) . '">';
+		}
+
 		return $this->Template->parse();
 	}
 

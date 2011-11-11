@@ -6,6 +6,15 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+r1158 (Improved)
+----------------
+Add rel="prev" and rel="next" links to the page header if there is a pagination
+module (see #3515).
+
+r1152 (Improved)
+----------------
+Pass the page data to the breadcrumb template as (see #3607).
+
 r1151 (New)
 -----------
 Added the "getCacheKey" hook (see #3288).
@@ -24,10 +33,6 @@ allows us to use the event list and event reader on the same page.
 
 Version 2.11.beta1 (2011-11-10)
 ===============================
-
-r1152 (Improved)
-----------------
-Pass the page data to the breadcrumb template as (see #3607).
 
 r1141 (Changed)
 ---------------

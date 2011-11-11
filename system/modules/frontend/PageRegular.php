@@ -58,7 +58,7 @@ class PageRegular extends Frontend
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
-		$objPage->template = strlen($objLayout->template) ? $objLayout->template : 'fe_page';
+		$objPage->template = ($objLayout->template != '') ? $objLayout->template : 'fe_page';
 		$objPage->templateGroup = $objLayout->templates;
 
 		// Store the output format
@@ -176,17 +176,9 @@ class PageRegular extends Frontend
 	 */
 	protected function getPageLayout($intId)
 	{
-		$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.id=?")
+		$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.id=? OR l.fallback=1 ORDER BY l.id=? DESC")
 									->limit(1)
-									->execute($intId);
-
-		// Fallback layout
-		if ($objLayout->numRows < 1)
-		{
-			$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.fallback=1")
-										->limit(1)
-										->execute();
-		}
+									->execute($intId, $intId);
 		
 		// Die if there is no layout at all
 		if ($objLayout->numRows < 1)
@@ -224,15 +216,6 @@ class PageRegular extends Frontend
 
 		// Meta robots tag
 		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
-
-		// Initialize margin
-		$arrMargin = array
-		(
-			'left'   => '0 auto 0 0',
-			'center' => '0 auto',
-			'right'  => '0 0 0 auto'
-		);
-
 		$strFramework = '';
 
 		// Generate the CSS framework
@@ -242,6 +225,7 @@ class PageRegular extends Frontend
 			if ($objLayout->static)
 			{
 				$arrSize = deserialize($objLayout->width);
+				$arrMargin = array('left'=>'0 auto 0 0', 'center'=>'0 auto', 'right'=>'0 0 0 auto');
 				$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
 			}
 
@@ -445,26 +429,26 @@ class PageRegular extends Frontend
 		$calendarfeeds = deserialize($objLayout->calendarfeeds);
 
 		// Add newsfeeds
-		if (is_array($newsfeeds) && count($newsfeeds) > 0)
+		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
 			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
 
 			while($objFeeds->next())
 			{
 				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 			}
 		}
 
 		// Add calendarfeeds
-		if (is_array($calendarfeeds) && count($calendarfeeds) > 0)
+		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
 			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
 
 			while($objFeeds->next())
 			{
 				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 			}
 		}
 
@@ -488,7 +472,7 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Add <head> tags
+		// Add user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";

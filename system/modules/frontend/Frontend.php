@@ -185,7 +185,7 @@ abstract class Frontend extends Controller
 			$accept_language = $this->Environment->httpAcceptLanguage;
 
 			// Find the matching root pages (thanks to Andreas Schempp)
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . ((count($accept_language) > 0) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . ((count($accept_language) > 0) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
+			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . (!empty($accept_language) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . (!empty($accept_language) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
 										  ->limit(1)
 										  ->execute($host);
 
