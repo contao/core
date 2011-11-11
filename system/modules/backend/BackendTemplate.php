@@ -160,6 +160,21 @@ class BackendTemplate extends Template
 		$this->strBuffer = $strBuffer;
 		parent::output();
 	}
+
+
+	/**
+	 * Return the locale string
+	 * @return string
+	 */
+	protected function getLocaleString()
+	{
+		return 'var CONTAO_THEME="' . $this->getTheme() . '",'
+			. 'CONTAO_COLLAPSE="' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'
+			. 'CONTAO_EXPAND="' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
+			. 'CONTAO_LOADING="' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
+			. 'CONTAO_SCRIPT_URL="' . TL_SCRIPT_URL . '",'
+			. 'REQUEST_TOKEN="' . REQUEST_TOKEN . '";';
+	}
 }
 
 ?>
