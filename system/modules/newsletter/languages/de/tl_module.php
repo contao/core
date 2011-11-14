@@ -38,7 +38,6 @@ $GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'] = array('Verteilermenü ausb
 $GLOBALS['TL_LANG']['tl_module']['nl_subscribe']    = array('Abonnementbestätigung', 'Sie können die Platzhalter <em>##channels##</em> (Name der Verteiler), <em>##domain##</em> (Domainname) und <em>##link##</em> (Aktivierungslink) verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['nl_unsubscribe']  = array('Kündigungsbestätigung', 'Sie können die Platzhalter <em>##channels##</em> (Name der Verteiler) und <em>##domain##</em> (Domainname) verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['nl_template']     = array('Newslettertemplate', 'Hier können Sie das Newslettertemplate auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['nl_includeCss']   = array('Stylesheet parsen', 'Das Stylesheet <em>newsletter.css</em> der Frontendseite hinzufügen.');
 
 
 /**

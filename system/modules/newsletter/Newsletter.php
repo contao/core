@@ -389,7 +389,7 @@ class Newsletter extends Backend
 		}
 
 		// Rejected recipients
-		if (!empty($objEmail->failures))
+		if ($objEmail->hasFailures())
 		{
 			$_SESSION['REJECTED_RECIPIENTS'][] = $arrRecipient['email'];
 		}

@@ -124,12 +124,6 @@ class ModuleNewsletterReader extends Module
 			return;
 		}
 
-		// Add newsletter style sheet
-		if ($this->nl_includeCss && file_exists(TL_ROOT . '/system/scripts/newsletter.css'))
-		{
-			$GLOBALS['TL_CSS'][] = 'system/scripts/newsletter.css';
-		}
-
 		$arrEnclosures = array();
 
 		// Add enclosure

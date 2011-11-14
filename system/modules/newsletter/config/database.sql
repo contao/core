@@ -97,8 +97,7 @@ CREATE TABLE `tl_module` (
   `nl_hideChannels` char(1) NOT NULL default '',
   `nl_subscribe` text NULL,
   `nl_unsubscribe` text NULL,
-  `nl_template` varchar(32) NOT NULL default '',
-  `nl_includeCss` char(1) NOT NULL default ''
+  `nl_template` varchar(32) NOT NULL default ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

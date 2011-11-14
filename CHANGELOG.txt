@@ -6,6 +6,11 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+r1164 (Removed)
+---------------
+Removed the "parse style sheet" option from the newsletter reader, since the
+functionality has been removed from the newsletter module already.
+
 r1163 (Improved)
 ----------------
 Move the chosen initialization from the DataContainer class to the select

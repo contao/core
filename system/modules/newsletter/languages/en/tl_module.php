@@ -38,7 +38,6 @@ $GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'] = array('Hide channel menu',
 $GLOBALS['TL_LANG']['tl_module']['nl_subscribe']    = array('Subscription message', 'You can use the wildcards <em>##channels##</em> (channel names), <em>##domain##</em> (domain name) and <em>##link##</em> (activation link).');
 $GLOBALS['TL_LANG']['tl_module']['nl_unsubscribe']  = array('Unsubscription message', 'You can use the wildcards <em>##channels##</em> (channel names) and <em>##domain##</em> (domain name).');
 $GLOBALS['TL_LANG']['tl_module']['nl_template']     = array('Newsletter template', 'Here you can select the newsletter template.');
-$GLOBALS['TL_LANG']['tl_module']['nl_includeCss']   = array('Parse style sheet', 'Add style sheet <em>newsletter.css</em> to the front end page.');
 
 
 /**

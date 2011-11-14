@@ -312,6 +312,15 @@ class Email extends System
 
 
 	/**
+	 * Return true if there are failures
+	 */
+	public function hasFailures()
+	{
+		return !empty($this->arrFailures);
+	}
+
+
+	/**
 	 * Add a custom text header
 	 * @param string
 	 * @param string
@@ -402,7 +411,7 @@ class Email extends System
 		$this->objMessage->setPriority($this->intPriority);
 
 		// Default subject
-		if (empty($this->strSubject))
+		if ($this->strSubject == '')
 		{
 			$this->strSubject = 'No subject';
 		}
@@ -410,7 +419,7 @@ class Email extends System
 		$this->objMessage->setSubject($this->strSubject);
 
 		// HTML e-mail
-		if (!empty($this->strHtml))
+		if ($this->strHtml != '')
 		{
 			// Embed images
 			if ($this->blnEmbedImages)
@@ -443,9 +452,9 @@ class Email extends System
 		}
 
 		// Text content
-		if (!empty($this->strText))
+		if ($this->strText != '')
 		{
-			if (!empty($this->strHtml))
+			if ($this->strHtml != '')
 			{
 				$this->objMessage->addPart($this->strText, 'text/plain');
 			}
@@ -486,17 +495,20 @@ class Email extends System
 			return false;
 		}
 
-		// Add log entry
+		$arrCc = $this->objMessage->getCc();
+		$arrBcc = $this->objMessage->getBcc();
+
+		// Add a log entry
 		$strMessage = 'An e-mail has been sent to ' . implode(', ', array_keys($this->objMessage->getTo()));
 
-		if (!empty($this->objMessage->getCc()))
+		if (!empty($arrCc))
 		{
-			$strMessage .= ', CC to ' . implode(', ', array_keys($this->objMessage->getCc()));
+			$strMessage .= ', CC to ' . implode(', ', array_keys($arrCc));
 		}
 
-		if (!empty($this->objMessage->getBcc()))
+		if (!empty($arrBcc))
 		{
-			$strMessage .= ', BCC to ' . implode(', ', array_keys($this->objMessage->getBcc()));
+			$strMessage .= ', BCC to ' . implode(', ', array_keys($arrBcc));
 		}
 
 		log_message($strMessage, $this->strLogFile);

@@ -73,22 +73,26 @@ class Help extends Backend
 	 */
 	public function run()
 	{
-		$this->loadLanguageFile($this->Input->get('table'));
-		$this->loadDataContainer($this->Input->get('table'));
+		$table = $this->Input->get('table');
+		$field = $this->Input->get('field');
+
+		$this->loadLanguageFile($table);
+		$this->loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
+		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
 		// Add reference
-		if (!empty($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']))
+		if (!empty($arrData['reference']))
 		{
 			$rows = array();
-			$options = is_array($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options']) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options'] : array_keys($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']);
+			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
 
 			foreach ($options as $option)
 			{
-				if (is_array($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option]) && strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option][1]))
+				if (is_array($arrData['reference'][$option]) && strlen($arrData['reference'][$option][1]))
 				{
-					$rows[] = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option];
+					$rows[] = $arrData['reference'][$option];
 				}
 			}
 
@@ -96,10 +100,10 @@ class Help extends Backend
 		}
 
 		// Add explanation
-		if (isset($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation']))
+		if (isset($arrData['explanation']))
 		{
 			$this->loadLanguageFile('explain');
-			$key = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation'];
+			$key = $arrData['explanation'];
 
 			if (!is_array($GLOBALS['TL_LANG']['XPL'][$key]))
 			{
@@ -111,21 +115,12 @@ class Help extends Backend
 			}
 		}
 
-		$this->output();
-	}
-
-
-	/**
-	 * Output the template file
-	 */
-	protected function output()
-	{
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->headline = strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0]) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0] : $this->Input->get('field');
+		$this->Template->headline = strlen($arrData['label'][0]) ? $arrData['label'][0] : $field;
 		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
 		$this->Template->output();
