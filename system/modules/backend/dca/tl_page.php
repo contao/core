@@ -878,12 +878,32 @@ class tl_page extends Backend
 
 	/**
 	 * Make new top-level pages root pages
+	 * @param DataContainer
 	 */
-	public function setRootType()
+	public function setRootType(DataContainer $dc)
 	{
-		if ($this->Input->get('act') == 'create' && $this->Input->get('pid') == 0)
+		if ($this->Input->get('act') != 'create')
+		{
+			return;
+		}	
+
+		// Insert into
+		if ($this->Input->get('pid') == 0)
 		{
 			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
+		}
+
+		// Insert after
+		else
+		{
+			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+									  ->limit(1)
+									  ->execute($this->Input->get('pid'));
+
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
+			}
 		}
 	}
 
@@ -1356,7 +1376,7 @@ class tl_page extends Backend
 		}
 
 		// Prevent adding non-root pages on top-level
-		if ($row['pid'] == 0)
+		if ($this->Input->get('mode') != 'create' && $row['pid'] == 0)
 		{
 			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
 									  ->limit(1)

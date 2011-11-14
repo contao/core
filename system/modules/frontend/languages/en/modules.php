@@ -41,7 +41,6 @@ $GLOBALS['TL_LANG']['FMD']['quicklink']      = array('Quick link', 'Generates a 
 $GLOBALS['TL_LANG']['FMD']['booknav']        = array('Book navigation', 'Generates a book navigation menu.');
 $GLOBALS['TL_LANG']['FMD']['articlenav']     = array('Article navigation', 'Generates a pagination menu to navigate articles.');
 $GLOBALS['TL_LANG']['FMD']['sitemap']        = array('Sitemap', 'Generates a list of all pages in the site structure.');
-$GLOBALS['TL_LANG']['FMD']['languageSwitch'] = array('Language switch', 'Generates links to related pages in other languages.');
 $GLOBALS['TL_LANG']['FMD']['user']           = 'User';
 $GLOBALS['TL_LANG']['FMD']['login']          = array('Login form', 'Generates a login form.');
 $GLOBALS['TL_LANG']['FMD']['logout']         = array('Automatic logout', 'Automatically logs out a user.');

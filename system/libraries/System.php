@@ -609,6 +609,7 @@ abstract class System
 			}
 
 			$strClass = strtolower($strType);
+			$_SESSION[$strType] = array_unique($_SESSION[$strType]);
 
 			foreach ($_SESSION[$strType] as $strMessage)
 			{

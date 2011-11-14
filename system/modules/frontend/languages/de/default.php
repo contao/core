@@ -134,7 +134,5 @@ $GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Nicht veröffentlicht';
 $GLOBALS['TL_LANG']['MSC']['addComment']    = 'Einen Kommentar schreiben';
 $GLOBALS['TL_LANG']['MSC']['autologin']     = 'Angemeldet bleiben';
 $GLOBALS['TL_LANG']['MSC']['relevance']     = '%s Relevanz';
-$GLOBALS['TL_LANG']['MSC']['viewPageIn']    = 'Diese Seite auf %s anzeigen';
-$GLOBALS['TL_LANG']['MSC']['switchInfo']    = 'Für den Sprachenwechsler muss die Option "Sprache zur URL hinzufügen" aktiviert sein und alle verwandten Seiten müssen denselben Alias haben!';
 
 ?>
