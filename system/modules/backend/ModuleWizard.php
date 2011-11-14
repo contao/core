@@ -162,9 +162,9 @@ class ModuleWizard extends Widget
 		$return .= '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
   <tr>
-    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</td>
-    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</td>
-    <td>&nbsp;</td>
+    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
+    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>';

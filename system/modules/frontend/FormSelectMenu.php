@@ -225,6 +225,15 @@ class FormSelectMenu extends Widget
 			$strOptions .= '</optgroup>';
 		}
 
+		// Chosen
+		if ($this->chosen)
+		{
+			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/chosen/chosen.css';
+			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/chosen/chosen.js';
+
+			$strOptions .= "\n" . '  <script>new Chosen($("ctrl_' . $this->strId. '"));</script>';
+		}
+
 		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s>%s</select>',
 						$this->strName,
 						$this->strId,

@@ -6,6 +6,11 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+r1163 (Improved)
+----------------
+Move the chosen initialization from the DataContainer class to the select
+widget, so it also works in the front end.
+
 r1159 (Improved)
 ----------------
 Replaced all "if (count() < 1)" with "if (empty())" and all "if (count() > 0)"

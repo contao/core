@@ -350,13 +350,6 @@ class DataContainer extends Backend
   </script>';
 		}
 
-		// Chosen
-		if ($arrData['inputType'] == 'select' && $arrData['eval']['chosen'])
-		{
-			$strHelpClass = ' chosen';
-			$wizard .= "\n" . '<script>new Chosen($("ctrl_' . $objWidget->id . '"));</script>';
-		}
-
 		// Add a custom wizard
 		if (is_array($arrData['wizard']))
 		{

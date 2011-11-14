@@ -202,12 +202,17 @@ class Index extends Frontend
 		}
 
 		// Check the user groups if the page is protected
-		if ($objPage->protected && !BE_USER_LOGGED_IN && (!is_array($objPage->groups) || empty($objPage->groups) || !count(array_intersect($objPage->groups, $this->User->groups))))
+		if ($objPage->protected && !BE_USER_LOGGED_IN)
 		{
-			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
+			$arrGroups = $objPage->groups; // required for empty()
 
-			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId, $objRootPage);
+			if (!is_array($arrGroups) || empty($arrGroups) || !count(array_intersect($arrGroups, $this->User->groups)))
+			{
+				$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
+
+				$objHandler = new $GLOBALS['TL_PTY']['error_403']();
+				$objHandler->generate($pageId, $objRootPage);
+			}
 		}
 
 		// Load the page object depending on its type

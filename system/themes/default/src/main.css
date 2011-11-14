@@ -314,9 +314,6 @@ h2.sub_headline_index {
 .tl_help a:hover,.tl_help a:focus,.tl_help a:active {
 	text-decoration:underline;
 }
-.firefox .tl_help.chosen {
-	margin-top:-2px;
-}
 .tl_formbody_submit {
 	border-top:1px solid #bbb;
 }

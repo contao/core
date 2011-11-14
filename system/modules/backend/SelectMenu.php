@@ -151,6 +151,12 @@ class SelectMenu extends Widget
 			$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
 		}
 
+		// Chosen
+		if ($this->chosen)
+		{
+			$this->wizard .= "\n" . '  <script>new Chosen($("ctrl_' . $this->strId. '"));</script>';
+		}
+
 		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
 						$this->strName,
 						$this->strId,

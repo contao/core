@@ -81,14 +81,8 @@ class FormPassword extends Widget
 				break;
 
 			case 'mandatory':
-				if ($varValue)
-				{
-					$this->arrAttributes['required'] = 'required';
-				}
-				else
-				{
-					unset($this->arrAttributes['required']);
-				}
+				// Do not set the "required" attribute here, because password
+				// fields can remain empty if a password has been set already
 				parent::__set($strKey, $varValue);
 				break;
 

@@ -12,6 +12,11 @@ select.chzn-select {
   *display: inline;
   margin:1px 0; /* PATCH */
 }
+/* PATCH */
+.firefox .chzn-container {
+  display:block;
+}
+/* PATCH EOF */
 .chzn-container .chzn-drop {
   background: #fff;
   border: 1px solid #aaa;
