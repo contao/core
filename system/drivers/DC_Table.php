@@ -3680,7 +3680,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$orderBy = $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['fields'];
 		$firstOrderBy = preg_replace('/\s+.*$/i', '', $orderBy[0]);
 
-		if (is_array($this->orderBy) && strlen($this->orderBy[0]))
+		if (is_array($this->orderBy) && $this->orderBy[0] != '')
 		{
 			$orderBy = $this->orderBy;
 			$firstOrderBy = $this->firstOrderBy;
@@ -3710,7 +3710,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$query .= (!empty($this->procedure) ? " AND " : " WHERE ") . "id IN(" . implode(',', array_map('intval', $this->root)) . ")";
 		}
 
-		if (is_array($orderBy) && strlen($orderBy[0]))
+		if (is_array($orderBy) && $orderBy[0] != '')
 		{
 			foreach ($orderBy as $k=>$v)
 			{
@@ -3748,7 +3748,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 		$objRowStmt = $this->Database->prepare($query);
 
-		if (strlen($this->limit))
+		if ($this->limit != '')
 		{
 			$arrLimit = explode(',', $this->limit);
 			$objRowStmt->limit($arrLimit[1], $arrLimit[0]);
@@ -3792,10 +3792,16 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 <label for="tl_select_trigger" class="tl_select_label">'.$GLOBALS['TL_LANG']['MSC']['selectAll'].'</label> <input type="checkbox" id="tl_select_trigger" onclick="Backend.toggleCheckboxes(this)" class="tl_tree_checkbox">
 </div>' : '').'
 
-<table class="tl_listing">';
+<table class="tl_listing' . ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'] ? ' showColumns' : '') . '">';
+
+			// Automatically add the "order by" field as last column if we do not have group headers
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'] && !in_array($firstOrderBy, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields']))
+			{
+				$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'][] = $firstOrderBy;
+			}
 
 			// Rename each pid to its label and resort the result (sort by parent table)
-			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
 			{
 				$firstOrderBy = 'pid';
 				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
@@ -3819,9 +3825,27 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				array_multisort($aux, SORT_ASC, $result);
 			}
 
+			// Generate the table header if the "show columns" option is active
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'])
+			{
+				$return .= '
+  <tr>';
+
+				foreach ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'] as $f)
+				{
+					$return .= '
+    <th class="tl_folder_tlist col_' . $f . (($f == $firstOrderBy) ? ' ordered_by' : '') . '">'.$GLOBALS['TL_DCA'][$this->strTable]['fields'][$f]['label'][0].'</th>';
+			}
+
+				$return .= '
+    <th class="tl_folder_tlist tl_right_nowrap">&nbsp;</th>
+  </tr>';
+			}
+
 			// Process result and add label and buttons
 			$remoteCur = false;
 			$groupclass = 'tl_folder_tlist';
+			$eoCount = -1;
 
 			foreach ($result as $row)
 			{
@@ -3914,7 +3938,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$label = preg_replace('/\( *\) ?|\[ *\] ?|\{ *\} ?|< *> ?/i', '', $label);
 				$label = preg_replace('/<[^>]+>\s*<\/[^>]+>/i', '', $label);
 
-				// Build sorting groups
+				// Build the sorting groups
 				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] > 0)
 				{
 					$current = $row[$firstOrderBy];
@@ -3923,8 +3947,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					$remoteNew = $this->formatCurrentValue($firstOrderBy, $current, $sortingMode);
 
 					// Add the group header
-					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['disableGrouping'] && ($remoteNew != $remoteCur || $remoteCur === false))
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'] && !$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['disableGrouping'] && ($remoteNew != $remoteCur || $remoteCur === false))
 					{
+						$eoCount = -1;
 						$group = $this->formatGroupHeader($firstOrderBy, $remoteNew, $sortingMode, $row);
 						$remoteCur = $remoteNew;
 
@@ -3937,37 +3962,59 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 
 				$return .= '
-  <tr onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">
-    <td class="tl_file_list">';
+  <tr class="'.((++$eoCount % 2 == 0) ? 'even' : 'odd').'" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">
+    ';
 
-				// Call label callback ($row, $label, $this)
+				$colspan = 1;
+
+				// Call the label callback ($row, $label, $this)
 				if (is_array($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback']))
 				{
 					$strClass = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][0];
 					$strMethod = $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['label_callback'][1];
 
 					$this->import($strClass);
-					$return .= $this->$strClass->$strMethod($row, $label, $this);
+					$args = $this->$strClass->$strMethod($row, $label, $this, $args);
+
+					// Handle strings and arrays (backwards compatibility)
+					if (!$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'])
+					{
+						$label = is_array($args) ? implode(' ', $args) : $args;
+					}
+					elseif (!is_array($args))
+					{
+						$args = array($args);
+						$colspan = count($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields']);
+					}
+				}
+
+				// Show columns
+				if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'])
+				{
+					foreach ($args as $j=>$arg)
+					{
+						$return .= '<td colspan="' . $colspan . '" class="tl_file_list col_' . $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'][$j] . (($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'][$j] == $firstOrderBy) ? ' ordered_by' : '') . '">' . (($arg != '') ? $arg : '-') . '</td>';
+					}
 				}
 				else
 				{
-					$return .= $label;
+					$return .= '<td class="tl_file_list">' . $label . '</td>';
 				}
 
 				// Buttons ($row, $table, $root, $blnCircularReference, $childs, $previous, $next)
-				$return .= '</td>'.(($this->Input->get('act') == 'select') ? '
+				$return .= (($this->Input->get('act') == 'select') ? '
     <td class="tl_file_list tl_right_nowrap"><input type="checkbox" name="IDS[]" id="ids_'.$row['id'].'" class="tl_tree_checkbox" value="'.$row['id'].'"></td>' : '
     <td class="tl_file_list tl_right_nowrap">'.$this->generateButtons($row, $this->strTable, $this->root).'</td>') . '
   </tr>';
 			}
 
-			// Close table
+			// Close the table
 			$return .= '
 </table>
 
 </div>';
 
-			// Close form
+			// Close the form
 			if ($this->Input->get('act') == 'select')
 			{
 				$return .= '
