@@ -6,6 +6,11 @@
 Version 2.11.RC1 (XXXX-XX-XX)
 =============================
 
+New
+---
+Added a "showColumns" option to the list view which makes the core engine
+output the records as table rows (see the member list).
+
 r1164 (Removed)
 ---------------
 Removed the "parse style sheet" option from the newsletter reader, since the

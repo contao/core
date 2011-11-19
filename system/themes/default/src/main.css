@@ -942,6 +942,11 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 	background-position:left center;
 	background-repeat:no-repeat;
 }
+.list_icon_new {
+	width:16px;
+	background-position:left center;
+	background-repeat:no-repeat;
+}
 
 /* Header icons */
 .header_home {

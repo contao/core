@@ -56,14 +56,14 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'sorting' => array
 		(
 			'mode'                    => 2,
-			'fields'                  => array('name'),
+			'fields'                  => array('dateAdded DESC'),
 			'flag'                    => 1,
 			'panelLayout'             => 'filter;sort,search,limit'
 		),
 		'label' => array
 		(
-			'fields'                  => array('name', 'username'),
-			'format'                  => '%s <span style="color:#b3b3b3;padding-left:3px">[%s]</span>',
+			'fields'                  => array('icon', 'name', 'username', 'dateAdded'),
+			'showColumns'             => true,
 			'label_callback'          => array('tl_user', 'addIcon')
 		),
 		'global_operations' => array
@@ -459,9 +459,11 @@ class tl_user extends Backend
 	 * Add an image to each record
 	 * @param array
 	 * @param string
+	 * @param DataContainer
+	 * @param array
 	 * @return string
 	 */
-	public function addIcon($row, $label)
+	public function addIcon($row, $label, DataContainer $dc, $args)
 	{
 		$image = $row['admin'] ? 'admin' :  'user';
 
@@ -470,7 +472,8 @@ class tl_user extends Backend
 			$image .= '_';
 		}
 
-		return sprintf('<div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div>', TL_SCRIPT_URL, $this->getTheme(), $image, $label);
+		$args[0] = sprintf('<div class="list_icon_new" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">&nbsp;</div>', TL_SCRIPT_URL, $this->getTheme(), $image);
+		return $args;
 	}
 
 

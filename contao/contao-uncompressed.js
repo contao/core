@@ -518,6 +518,9 @@ var AjaxRequest =
 			if (img == null) { // Comments
 				img = el.getParent('td').getPrevious('td').getElement('div.cte_type');
 			}
+			if (img == null) { // showColumns
+				img = el.getParent('tr').getFirst('td').getElement('div.list_icon_new');
+			}
 		} else if ((next = div.getNext('div')) && next.hasClass('cte_type')) {
 			img = next;
 		}
