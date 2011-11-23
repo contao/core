@@ -68,10 +68,11 @@ window.addEvent('domready', function() {
       'isPopup': <?php echo $fancy->isPopup; ?>,
       'FORM_SUBMIT': 'tl_upload',
       'REQUEST_TOKEN': '<?php echo REQUEST_TOKEN; ?>',
-      'action': 'fancyUpload'
+      'action': 'uploadProvider',
+      'providerKey': 'fancyupload'
     },
     'appendCookieData': true,
-    'url': $('<?php echo $this->strTable; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
+    'url': $('<?php echo $this->objDC->table; ?>').action.replace('<?php echo $fancy->script; ?>', 'upload.php'),
     'path': 'plugins/fancyupload/Swiff.Uploader.swf',
     'typeFilter': {
       'Images (*.<?php echo implode(', *.', $fancy->uploadTypes); ?>)': '*.<?php echo implode('; *.', $fancy->uploadTypes); ?>'
@@ -80,8 +81,6 @@ window.addEvent('domready', function() {
     'onLoad': function() {
       $('fancy-status').removeClass('fancy-hide');
       $('fancy-list').removeClass('fancy-hide');
-      $('fancy-fallback').destroy();
-      $('fancy-submit').destroy();
       $('fancy-clear').addEvent('click', function() {
         up.remove();
         return false;

@@ -1,0 +1,33 @@
+<div id="tl_buttons">
+<a href="<?php echo $this->backLink; ?>" class="header_back" title="<?php echo $this->backTitle; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $this->back; ?></a>
+</div>
+
+<h2 class="sub_headline"><?php echo $this->hl; ?></h2>
+<?php echo $this->messages; ?>
+<form action="<?php echo $this->action; ?>" id="<?php echo $this->formId; ?>" class="tl_form" method="post"<?php echo $this->onsubmit; ?> enctype="multipart/form-data">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="tl_upload">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->maxFileSize; ?>">
+
+<div class="tl_tbox block">
+	<h3><?php echo $this->fileUpload; ?></h3>
+  <div id="fancy-status" class="fancy-hide">
+  <p><a href="#" id="fancy-browse"><?php echo $this->browseFiles; ?></a> | <a href="#" id="fancy-clear"><?php echo $this->clearList; ?></a> | <a href="#" id="fancy-upload"><?php echo $this->startUpload; ?></a></p>
+  <div>
+    <strong class="overall-title">&nbsp;</strong><br>
+    <img src="<?php echo TL_PLUGINS_URL; ?>plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress overall-progress">
+  </div>
+  <div style="margin-top:3px">
+    <strong class="current-title">&nbsp;</strong><br>
+    <img src="<?php echo TL_PLUGINS_URL; ?>plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress current-progress">
+  </div>
+  <div class="current-text"></div>
+  </div>
+  <ul id="fancy-list" class="fancy-hide">
+    <li></li>
+  </ul>
+  <?php echo (($this->fileUploadHint) ? '<p class="tl_help tl_tip">'.$this->fileUploadHint.'</p>' : ''); ?></div>
+</div>
+<?php echo $this->fancyUploadScript; ?>
+</form>

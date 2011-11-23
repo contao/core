@@ -643,7 +643,7 @@ CREATE TABLE `tl_user` (
   `thumbnails` char(1) NOT NULL default '',
   `useRTE` char(1) NOT NULL default '',
   `useCE` char(1) NOT NULL default '',
-  `fancyUpload` char(1) NOT NULL default '',
+  `uploader` varchar(255) NOT NULL default 'default',
   `password` varchar(64) NOT NULL default '',
   `admin` char(1) NOT NULL default '',
   `groups` blob NULL,

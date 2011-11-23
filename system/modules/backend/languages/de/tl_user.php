@@ -41,7 +41,7 @@ $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Erklärungen anzeigen', 
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
 $GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Code-Editor verwenden', 'Den Code-Editor zur Bearbeitung von Code-Elementen verwenden.');
-$GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('FancyUpload aktivieren', 'Falls FancyUpload in Ihrem Browser nicht fehlerfrei läuft, können Sie das Skript hier deaktivieren.');
+$GLOBALS['TL_LANG']['tl_user']['uploader']  	= array('Uploader', 'Wählen Sie aus dieser Liste den gewünschten Uploader für die Dateiverwaltung aus.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Zum Administrator machen', 'Administratoren haben uneingeschränkten Zugriff auf alle Module und Elemente!');
 $GLOBALS['TL_LANG']['tl_user']['groups']       = array('Benutzergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
 $GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Rechtevererbung', 'Hier können Sie festlegen, welche Gruppenrechte der Benutzer erbt.');
@@ -80,12 +80,15 @@ $GLOBALS['TL_LANG']['tl_user']['session_legend']    = 'Cache leeren';
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_user']['sessionLabel']  = 'Session-Daten';
-$GLOBALS['TL_LANG']['tl_user']['htmlLabel']     = 'Bildercache';
-$GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporärer Ordner';
-$GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'Die Session-Daten wurden gelöscht';
-$GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'Der Bildercache wurde geleert';
-$GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'Der temporäre Ordner wurde geleert';
+$GLOBALS['TL_LANG']['tl_user']['sessionLabel']  			= 'Session-Daten';
+$GLOBALS['TL_LANG']['tl_user']['htmlLabel']     			= 'Bildercache';
+$GLOBALS['TL_LANG']['tl_user']['tempLabel']     			= 'Temporärer Ordner';
+$GLOBALS['TL_LANG']['tl_user']['sessionPurged'] 			= 'Die Session-Daten wurden gelöscht';
+$GLOBALS['TL_LANG']['tl_user']['htmlPurged']    			= 'Der Bildercache wurde geleert';
+$GLOBALS['TL_LANG']['tl_user']['tempPurged']    			= 'Der temporäre Ordner wurde geleert';
+$GLOBALS['TL_LANG']['tl_user']['uploader']['default']		= 'Standard-Uploader';
+$GLOBALS['TL_LANG']['tl_user']['uploader']['fancyupload']	= 'FancyUpload';
+
 
 
 /**

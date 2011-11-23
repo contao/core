@@ -229,4 +229,15 @@ $GLOBALS['TL_HOOKS'] = array
 $GLOBALS['TL_MIME'] = array();
 $GLOBALS['TL_PERMISSIONS'] = array();
 
+
+/**
+ * Upload provider
+ */
+$GLOBALS['TL_UPLOADER'] = array
+(
+	'default'		=> 'UploaderDefault',
+	'fancyupload'	=> 'UploaderFancyUpload'
+);
+
+
 ?>
