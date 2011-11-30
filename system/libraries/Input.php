@@ -380,7 +380,7 @@ class Input
 	 */
 	protected function stripSlashes($varValue)
 	{
-		if (is_null($varValue) || $varValue == '')
+		if (is_null($varValue) || $varValue == '' || !function_exists('get_magic_quotes_gpc') || @!get_magic_quotes_gpc())
 		{
 			return $varValue;
 		}
@@ -396,12 +396,7 @@ class Input
 			return $varValue;
 		}
 
-		if (function_exists('get_magic_quotes_gpc') && @get_magic_quotes_gpc())
-		{
-			$varValue = stripslashes($varValue);
-		}
-
-		return $varValue;
+		return stripslashes($varValue);
 	}
 
 
