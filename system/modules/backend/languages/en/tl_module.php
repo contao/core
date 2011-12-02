@@ -64,6 +64,7 @@ $GLOBALS['TL_LANG']['tl_module']['simple']         = array('Simple form', 'Conta
 $GLOBALS['TL_LANG']['tl_module']['advanced']       = array('Advanced form', 'Contains an input field and a radio button menu to choose the query type.');
 $GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Context range', 'The number of characters on the left and right side of each keyword that are used as context.');
 $GLOBALS['TL_LANG']['tl_module']['totalLength']    = array('Maximum context length', 'Here you can limit the overall context length per result.');
+$GLOBALS['TL_LANG']['tl_module']['numberOfItems']  = array('Total number of items', 'Here you can limit the total number of items. Set to 0 to show all.');
 $GLOBALS['TL_LANG']['tl_module']['perPage']        = array('Items per page', 'The number of items per page. Set to 0 to disable pagination.');
 $GLOBALS['TL_LANG']['tl_module']['searchType']     = array('Search form layout', 'Here you can select the search form layout.');
 $GLOBALS['TL_LANG']['tl_module']['searchTpl']      = array('Search results template', 'Here you can select the search results template.');

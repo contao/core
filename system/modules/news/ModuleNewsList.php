@@ -89,9 +89,9 @@ class ModuleNewsList extends ModuleNews
 		$limit = null;
 
 		// Maximum number of items
-		if ($this->news_numberOfItems > 0)
+		if ($this->numberOfItems > 0)
 		{
-			$limit = $this->news_numberOfItems;
+			$limit = $this->numberOfItems;
 		}
 
 		// Get the total number of items
@@ -99,7 +99,7 @@ class ModuleNewsList extends ModuleNews
 		$total = $objTotal->total - $skipFirst;
 
 		// Split the results
-		if ($this->perPage > 0 && (!isset($limit) || $this->news_numberOfItems > $this->perPage))
+		if ($this->perPage > 0 && (!isset($limit) || $this->numberOfItems > $this->perPage))
 		{
 			// Adjust the overall limit
 			if (isset($limit))

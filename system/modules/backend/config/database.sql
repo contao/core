@@ -347,6 +347,7 @@ CREATE TABLE `tl_module` (
   `fuzzy` char(1) NOT NULL default '',
   `contextLength` smallint(5) unsigned NOT NULL default '0',
   `totalLength` smallint(5) unsigned NOT NULL default '0',
+  `numberOfItems` smallint(5) unsigned NOT NULL default '0',
   `perPage` smallint(5) unsigned NOT NULL default '0',
   `queryType` varchar(32) NOT NULL default '',
   `searchTpl` varchar(64) NOT NULL default '',

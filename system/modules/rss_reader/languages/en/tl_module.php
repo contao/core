@@ -32,9 +32,8 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_module']['rss_cache']         = array('Cache timeout', 'Here you can define how long the RSS feed is being cached.');
-$GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('Feed URLs', 'Please enter the URL of one or more RSS feeds.');
-$GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Feed template', 'Here you can select the feed template.');
-$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Number of items', 'Here you can limit the number of items. Set to 0 to show all.');
+$GLOBALS['TL_LANG']['tl_module']['rss_cache']    = array('Cache timeout', 'Here you can define how long the RSS feed is being cached.');
+$GLOBALS['TL_LANG']['tl_module']['rss_feed']     = array('Feed URLs', 'Please enter the URL of one or more RSS feeds.');
+$GLOBALS['TL_LANG']['tl_module']['rss_template'] = array('Feed template', 'Here you can select the feed template.');
 
 ?>

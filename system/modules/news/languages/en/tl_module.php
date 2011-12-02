@@ -34,7 +34,6 @@
  */
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('News archives', 'Please select one or more news archives.');
 $GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Featured items', 'Here you can choose how featured items are handled.');
-$GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Total number of items', 'Here you can limit the total number of news items. Set to 0 to show all.');
 $GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('No period selected', 'Here you can define what to display if no period is selected.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta fields', 'Here you can select the meta fields.');
 $GLOBALS['TL_LANG']['tl_module']['news_template']      = array('News template', 'Here you can select the news template.');
