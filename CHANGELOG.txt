@@ -2,6 +2,10 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.10.4 (XXXX-XX-XX)
+---------------------------
+- Fixed: the Environment class did not always return the correct script name (#3603)
+
 Version 2.10.3 (2011-11-07)
 ---------------------------
 - Fixed: the postLogin/Logout hooks broke the save() method of the model (#3545)
