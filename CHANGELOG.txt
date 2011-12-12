@@ -6,6 +6,7 @@ Version 2.10.4 (XXXX-XX-XX)
 ---------------------------
 - Fixed: the Environment class did not always return the correct script name (#3603)
 - Fixed: close the connection after sending a file to the browser (#3602)
+- Fixed a few minor issues
 
 Version 2.10.3 (2011-11-07)
 ---------------------------

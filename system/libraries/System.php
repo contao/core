@@ -660,6 +660,12 @@ abstract class System
 			return '';
 		}
 
+		// Empty anchor (see #3555)
+		if ($strUrl == '#')
+		{
+			return $strUrl;
+		}
+
 		// E-mail address
 		if (strncasecmp($strUrl, 'mailto:', 7) === 0)
 		{
