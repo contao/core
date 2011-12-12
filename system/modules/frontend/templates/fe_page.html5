@@ -73,7 +73,7 @@ new Request({
   url:'system/html/cron.txt',
   onComplete: function(txt) {
     if (!txt) txt = 0;
-    if (parseInt(txt) < (Date.now()/1000 - 300)) {
+    if (parseInt(txt) < (Math.round(+new Date()/1000) - 300)) {
       new Request({url:'cron.php'}).get();
     }
   }
