@@ -2928,7 +2928,7 @@ window.addEvent(\'domready\', function() {
 </div>' : '').'
 
 <ul class="tl_listing ' . $treeClass . '">
-  <li class="tl_folder_top"><div class="tl_left">'.$label.'</div> <div class="tl_right">';
+  <li class="tl_folder_top' . (($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && ((!count($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']) && $GLOBALS['TL_DCA'][$table]['list']['sorting']['root'] !== false) || $GLOBALS['TL_DCA'][$table]['list']['sorting']['rootPaste'])) ? ' rootPaste' : '') . '"><div class="tl_left">'.$label.'</div> <div class="tl_right">';
 
 		$_buttons = '&nbsp;';
 
@@ -2975,6 +2975,14 @@ window.addEvent(\'domready\', function() {
 </div>
 </div>
 </form>';
+		}
+
+		if ($blnHasSorting && !$blnClipboard)
+		{
+			$return .= '
+<script>
+Backend.makeTreeViewSortable();
+</script>';
 		}
 
 		return $return;
@@ -3121,7 +3129,7 @@ window.addEvent(\'domready\', function() {
 		$session[$node][$id] = (is_int($session[$node][$id])) ? $session[$node][$id] : 0;
 		$mouseover = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 || $table == $this->strTable) ? ' onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"' : '';
 
-		$return .= "\n  " . '<li class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'"'.$mouseover.'><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+		$return .= "\n  " . '<li id="li_'.$id.'" class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'"'.$mouseover.'><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 		// Calculate label and add a toggle button
 		$args = array();

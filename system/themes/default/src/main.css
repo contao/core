@@ -617,11 +617,14 @@ ul.level_9 .tl_left {
 	margin:0;
 	padding:0;
 }
-.tl_listing li {
+.tl_listing li, .tl_file.drag {
 	margin:0;
 	padding-left:6px;
 	padding-right:6px;
 	list-style-type:none;
+}
+.tl_folder.sortable, .tl_file.sortable {
+	background: url("images/reorder.png") left center no-repeat;
 }
 .tl_listing li.parent {
 	display:inline;
@@ -1099,4 +1102,23 @@ fieldset.collapsed > legend {
 	border-radius:4px;
 	position:absolute;
 	left:50%;
+}
+
+div.treeIndicator {
+	position: absolute;
+	width: 100px;
+	height: 1px;
+	background-color: #000;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+	margin-left:6px;
+	z-index: 50;
+
+	/* For IE */
+	overflow: hidden;
+	line-height: 1px;
+}
+li.drag {
+	position: absolute;
+	z-index: 50;
 }
