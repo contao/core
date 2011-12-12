@@ -2634,6 +2634,7 @@ abstract class Controller extends System
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
 		header('Expires: 0');
+		header('Connection: close');
 
 		$resFile = fopen(TL_ROOT . '/' . $strFile, 'rb');
 		fpassthru($resFile);
