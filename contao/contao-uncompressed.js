@@ -1572,6 +1572,10 @@ var Backend =
 				if (event.key == 'up' || event.key == 'down') {
 					setTimeout(function() {	el.fireEvent('change'); }, 100);
 				}
+			}).addEvent('focus', function() {
+				div.setStyle('background-color', '#ebfdd7');
+			}).addEvent('blur', function() {
+				div.setStyle('background-color', 'transparent');
 			}).setStyle('opacity', 0);
 
 			// Browser-specific adjustments
