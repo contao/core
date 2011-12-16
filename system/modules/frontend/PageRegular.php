@@ -353,6 +353,12 @@ class PageRegular extends Frontend
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
 
+		// Google web fonts
+		if ($objLayout->webfonts != '')
+		{
+			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="http://fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+		}
+
 		// Internal style sheets
 		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
@@ -399,12 +405,7 @@ class PageRegular extends Frontend
 				}
 				else
 				{
-					$strStyleSheet = sprintf('<link%s rel="stylesheet" href="%ssystem/scripts/%s.css" media="%s"%s',
-											 (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : ''),
-											 TL_SCRIPT_URL,
-											 $objStylesheets->name,
-											 $media,
-											 $strTagEnding);
+					$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/scripts/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
 
 					if ($objStylesheets->cc)
 					{

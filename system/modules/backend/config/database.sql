@@ -198,6 +198,7 @@ CREATE TABLE `tl_layout` (
   `sPosition` varchar(32) NOT NULL default '',
   `stylesheet` blob NULL,
   `skipTinymce` char(1) NOT NULL default '',
+  `webfonts` varchar(255) NOT NULL default '',
   `newsfeeds` blob NULL,
   `calendarfeeds` blob NULL,
   `modules` blob NULL,
