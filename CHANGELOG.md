@@ -5,6 +5,10 @@ Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
 ### New
+Added the "storeFormData" hook which is triggered before the form data is
+written into the database (see #3182).
+
+### New
 Added the insert tags "email_open" and "email_url" to ouput the opening link
 tag or the encoded e-mail address only (see #3514).
 
