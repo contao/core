@@ -9,5 +9,9 @@ Disallow: /cron.php
 Disallow: /flash.php
 Disallow: /share.php
 Disallow: /GPL.txt
-Disallow: /INSTALL.txt
+Disallow: /README.md
 Disallow: /LGPL.txt
+Allow: /system/html/
+Allow: /system/contao.css 
+Allow: /plugins/*.js
+Allow: /plugins/*.css
