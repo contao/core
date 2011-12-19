@@ -345,6 +345,14 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
 		),
+		'numberOfItems' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['numberOfItems'],
+			'default'                 => 3,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+		),
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['perPage'],

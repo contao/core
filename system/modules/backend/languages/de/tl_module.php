@@ -64,6 +64,7 @@ $GLOBALS['TL_LANG']['tl_module']['simple']         = array('Einfaches Formular',
 $GLOBALS['TL_LANG']['tl_module']['advanced']       = array('Erweitertes Formular', 'Enthält ein Eingabefeld und ein Radio-Button-Menü zur Auswahl des Abfragetyps.');
 $GLOBALS['TL_LANG']['tl_module']['contextLength']  = array('Kontext-Spannweite', 'Die Anzahl an Buchstaben, die links und rechts des Suchbegriffs als Kontext verwendet werden.');
 $GLOBALS['TL_LANG']['tl_module']['totalLength']    = array('Gesamte Kontextlänge', 'Hier können Sie die Gesamtlänge der Kontexts pro Ergebnis beschränken.');
+$GLOBALS['TL_LANG']['tl_module']['numberOfItems']  = array('Gesamtzahl der Elemente', 'Hier können Sie die Gesamtzahl der Elemente festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['perPage']        = array('Elemente pro Seite', 'Die Anzahl an Elementen pro Seite. Geben Sie 0 ein, um den automatischen Seitenumbruch zu deaktivieren.');
 $GLOBALS['TL_LANG']['tl_module']['searchType']     = array('Suchformular-Layout', 'Bitte wählen Sie das Suchformular-Layout aus.');
 $GLOBALS['TL_LANG']['tl_module']['searchTpl']      = array('Ergebnistemplate', 'Hier können Sie das Ergebnistemplate auswählen.');
