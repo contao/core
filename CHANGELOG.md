@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### New
+Added the insert tags "email_open" and "email_url" to ouput the opening link
+tag or the encoded e-mail address only (see #3514).
+
 ### Improved
 Do not show the number of comments if a news article forwards to another page
 or external URL (see #3505).

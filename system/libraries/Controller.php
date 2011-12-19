@@ -1374,7 +1374,7 @@ abstract class Controller extends System
 
 			$arrCache[$strTag] = '';
 
-			// Replace tag
+			// Replace the tag
 			switch (strtolower($elements[0]))
 			{
 				// Date
@@ -1400,12 +1400,31 @@ abstract class Controller extends System
 
 				// E-mail addresses
 				case 'email':
-					if (strlen($elements[1]))
+				case 'email_open':
+				case 'email_url':
+					if ($elements[1] == '')
 					{
-						$this->import('String');
+						$arrCache[$strTag] = '';
+						break;
+					}
 
-						$strEmail = $this->String->encodeEmail($elements[1]);
-						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+					$this->import('String');
+					$strEmail = $this->String->encodeEmail($elements[1]);
+
+					// Replace the tag
+					switch (strtolower($elements[0]))
+					{
+						case 'email':
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+							break;
+
+						case 'email_open':
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							break;
+
+						case 'email_url':
+							$arrCache[$strTag] = $strEmail;
+							break;
 					}
 					break;
 
@@ -1594,7 +1613,7 @@ abstract class Controller extends System
 						}
 					}
 
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
@@ -1664,7 +1683,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'article':
@@ -1706,7 +1725,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'faq':
@@ -1760,7 +1779,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'news':
@@ -1814,7 +1833,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
 					}
 
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'event':
@@ -2351,7 +2370,7 @@ abstract class Controller extends System
 		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
 		$arrTags = preg_split('/(\{[^\}]+\})/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-		// Replace tags
+		// Replace the tags
 		foreach ($arrTags as $strTag)
 		{
 			if (strncmp($strTag, '{if', 3) === 0)
