@@ -7,6 +7,7 @@ Version 2.10.4 (XXXX-XX-XX)
 - Fixed: the Environment class did not always return the correct script name (#3603)
 - Fixed: close the connection after sending a file to the browser (#3602)
 - Fixed: the new Ajax cron trigger did not work in IE8 due to missing Date.now() support (#3681)
+- Fixed: do not block ressources required by the Google website preview in the robots.txt file (#3688)
 - Fixed a few minor issues
 
 Version 2.10.3 (2011-11-07)
