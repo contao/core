@@ -210,6 +210,12 @@ class FTP extends Files
 	 */
 	public function rename($strOldName, $strNewName)
 	{
+		// Source file == target file
+		if ($strOldName == $strNewName)
+		{
+			return true;
+		}
+
 		$this->connect();
 		$this->validate($strOldName, $strNewName);
 
