@@ -1564,6 +1564,8 @@ var Backend =
 				div.addClass('active');
 			}
 
+			var bgcol = div.getStyle('background-color');
+
 			// Update the div onchange
 			el.addEvent('change', function() {
 				var option = el.getElement('option[value="' + el.value + '"]');
@@ -1575,7 +1577,7 @@ var Backend =
 			}).addEvent('focus', function() {
 				div.setStyle('background-color', '#ebfdd7');
 			}).addEvent('blur', function() {
-				div.setStyle('background-color', 'transparent');
+				div.setStyle('background-color', bgcol);
 			}).setStyle('opacity', 0);
 
 			// Browser-specific adjustments
