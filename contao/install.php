@@ -928,6 +928,7 @@ class InstallTool extends Backend
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
+		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 
 		$this->Template->output();
 		exit;

@@ -131,6 +131,7 @@ class Index extends Backend
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
 		$this->Template->frontendFile = $this->Environment->base;
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 
 		$this->Template->output();
 	}

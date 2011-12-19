@@ -95,7 +95,7 @@ class ModuleNewsList extends ModuleNews
 		}
 
 		// Get the total number of items
-		$objTotal = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
+		$objTotal = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""));
 		$total = $objTotal->total - $skipFirst;
 
 		// Split the results

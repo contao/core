@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Changed
+Removed the general IE6 warning and added it only to the install tool and the
+back end login screen (see #3646).
+
 ### Improved
 If an image link target is another image and the fullscreen view is enabled,
 do not open the target image in a new window but in the lightbox (see #1703).
