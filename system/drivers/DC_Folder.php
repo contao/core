@@ -215,7 +215,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			$this->Session->set('CLIPBOARD', $arrClipboard);
 		}
 
-		// Get session data and toggle nodes
+		// Get the session data and toggle the nodes
 		if ($this->Input->get('tg') == 'all')
 		{
 			$session = $this->Session->getData();
@@ -1673,12 +1673,11 @@ window.addEvent(\'domready\', function() {
 		static $session;
 		$session = $this->Session->getData();
 
-		// Get session data and toggle nodes
+		// Get the session data and toggle the nodes
 		if ($this->Input->get('tg'))
 		{
 			$session['filetree'][$this->Input->get('tg')] = (isset($session['filetree'][$this->Input->get('tg')]) && $session['filetree'][$this->Input->get('tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-
 			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
@@ -1789,7 +1788,7 @@ window.addEvent(\'domready\', function() {
 
 			$return .= '</div><div style="clear:both"></div></li>';
 
-			// Call next node
+			// Call the next node
 			if (!empty($content) && $session['filetree'][$md5] == 1)
 			{
 				$return .= '<li class="parent" id="filetree_'.$md5.'"><ul class="level_'.$level.'">';

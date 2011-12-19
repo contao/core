@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Improved
+Added the breadcrumb folder navigation to the template editor (see #3684).
+
 ### New
 Added support for Google web fonts to the page layout. The fonts are added to
 the page by including a style sheet from the Google APIs.
