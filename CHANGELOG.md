@@ -6,7 +6,7 @@ Version 2.11.RC1 (XXXX-XX-XX)
 
 ### New
 Added support for Google web fonts to the page layout. The fonts are added to
-the page by including a stlye sheet from the Google APIs.
+the page by including a style sheet from the Google APIs.
 
 ### New
 Added a "showColumns" option to the list view which makes the core engine
