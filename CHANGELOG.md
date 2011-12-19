@@ -5,6 +5,10 @@ Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
 ### Improved
+Do not show the number of comments if a news article forwards to another page
+or external URL (see #3505).
+
+### Improved
 Added the breadcrumb folder navigation to the template editor (see #3684).
 
 ### New
