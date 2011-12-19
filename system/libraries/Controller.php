@@ -3285,11 +3285,11 @@ abstract class Controller extends System
 			$strLightboxId = 'lightbox';
 		}
 
-		// Store original dimensions
+		// Store the original dimensions
 		$objTemplate->width = $imgSize[0];
 		$objTemplate->height = $imgSize[1];
 
-		// Adjust image size
+		// Adjust the image size
 		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
 		{
 			$arrMargin = deserialize($arrItem['imagemargin']);
@@ -3324,14 +3324,22 @@ abstract class Controller extends System
 		}
 
 		// Image link
-		if (($arrItem['imageUrl'] != '') && TL_MODE == 'FE')
+		if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
 		{
 			$objTemplate->href = $arrItem['imageUrl'];
 			$objTemplate->attributes = '';
 
 			if ($arrItem['fullsize'])
 			{
-				$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
+				{
+					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
+				}
+				else
+				{
+					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+				}
 			}
 		}
 
