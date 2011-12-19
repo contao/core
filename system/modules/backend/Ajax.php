@@ -282,8 +282,8 @@ class Ajax extends Backend
 				echo $tree;
 				exit; break;
 
-			// Upload files via FancyUpload
-			case 'fancyUpload':
+			// Uploadprovider request
+			case 'uploadProvider':
 				$dc->move(true);
 				exit; break;
 

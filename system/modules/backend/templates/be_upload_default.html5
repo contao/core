@@ -1,0 +1,25 @@
+<div id="tl_buttons">
+<a href="<?php echo $this->backLink; ?>" class="header_back" title="<?php echo $this->backTitle; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?php echo $this->back; ?></a>
+</div>
+
+<h2 class="sub_headline"><?php echo $this->hl; ?></h2>
+<?php echo $this->messages; ?>
+<form action="<?php echo $this->action; ?>" id="<?php echo $this->fromId; ?>" class="tl_form" method="post"<?php echo $this->onsubmit; ?> enctype="multipart/form-data">
+<div class="tl_formbody_edit">
+<input type="hidden" name="FORM_SUBMIT" value="tl_upload">
+<input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->maxFileSize; ?>">
+
+<div class="tl_tbox block">
+	<h3><?php echo $this->fileUpload; ?></h3>
+	<?php echo $this->fields; ?>
+	</div>
+</div>
+
+<div class="tl_formbody_submit">
+	<div class="tl_submit_container">
+		<input type="submit" name="upload" class="tl_submit" accesskey="s" value="<?php echo $this->upload; ?>"> 
+		<input type="submit" name="uploadNback" class="tl_submit" accesskey="c" value="<?php echo $this->uploadNback; ?>">
+	</div>
+</div>
+</form>

@@ -691,7 +691,6 @@ class DC_Folder extends DataContainer implements listable, editable
 	 */
 	public function move($blnIsAjax=false)
 	{
-		$error = false;
 		$strFolder = $this->Input->get('pid', true);
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
@@ -713,144 +712,37 @@ class DC_Folder extends DataContainer implements listable, editable
 			$arrClipboard[$this->strTable] = array();
 			$this->Session->set('CLIPBOARD', $arrClipboard);
 		}
+		
+		// uploader choice. We take the user settings but also make sure that the correct class is called
+		// when doing things with ajax. Use POST data to call your own generateAjax() method - like this:
+		// POST action=uploadProvider&providerKey=<key>
+		$strKey = '';
+		
+		if ($blnIsAjax)
+		{
+			$strKey = $this->Input->post('providerKey');
+		}
+		else
+		{
+			$this->import('BackendUser', 'User');
+			// make sure that at least the default provider is always being loaded
+			$strKey = ($this->User->uploader) ? $this->User->uploader : 'default';
+		}
 
-		$arrUploaded = array();
-		$uploadTypes = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['uploadTypes']));
+		$strClass = $GLOBALS['TL_UPLOADER'][$strKey];
+		
+		if (!$this->classFileExists($strClass))
+		{
+			throw new Exception('The uploader class for the key "' . $strKey . '" does not exist!');
+		}
+		
+		$objUploader = new $strClass($this, $strFolder);
 
 		// Upload files
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
+		if ($objUploader->invokeUpload())
 		{
-			// Get the upload_max_filesize from the php.ini
-			$upload_max_filesize = ini_get('upload_max_filesize');
-
-			// Convert the value to bytes
-			if (strpos($upload_max_filesize, 'K') !== false)
-			{
-				$upload_max_filesize = round($upload_max_filesize * 1024);
-			}
-			elseif (strpos($upload_max_filesize, 'M') !== false)
-			{
-				$upload_max_filesize = round($upload_max_filesize * 1024 * 1024);
-			}
-			elseif (strpos($upload_max_filesize, 'G') !== false)
-			{
-				$upload_max_filesize = round($upload_max_filesize * 1024 * 1024 * 1024);
-			}
-
-			// Convert the maximum file size into a human-readable format
-			$maxlength_kb = $this->getReadableSize(min($upload_max_filesize, $GLOBALS['TL_CONFIG']['maxFileSize']));
-
-			foreach ($_FILES as $file)
-			{
-				// Romanize the filename
-				$file['name'] = strip_tags($file['name']);
-				$file['name'] = utf8_romanize($file['name']);
-				$file['name'] = str_replace('"', '', $file['name']);
-
-				// File was not uploaded
-				if (!is_uploaded_file($file['tmp_name']))
-				{
-					if (in_array($file['error'], array(1, 2)))
-					{
-						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-						$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
-
-						$error = true;
-					}
-
-					if ($file['error'] == 3)
-					{
-						$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filepartial'], $file['name']));
-						$this->log('File "'.$file['name'].'" was only partially uploaded' , 'DC_Folder move()', TL_ERROR);
-
-						$error = true;
-					}
-
-					continue;
-				}
-
-				// File is too big
-				if ($file['size'] > $GLOBALS['TL_CONFIG']['maxFileSize'])
-				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filesize'], $maxlength_kb));
-					$this->log('File "'.$file['name'].'" exceeds the maximum file size of '.$maxlength_kb, 'DC_Folder move()', TL_ERROR);
-
-					$error = true;
-					continue;
-				}
-
-				$pathinfo = pathinfo($file['name']);
-
-				// File type not allowed
-				if (!in_array(strtolower($pathinfo['extension']), $uploadTypes))
-				{
-					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $pathinfo['extension']));
-					$this->log('File type "'.$pathinfo['extension'].'" is not allowed to be uploaded ('.$file['name'].')', 'DC_Folder move()', TL_ERROR);
-
-					$error = true;
-					continue;
-				}
-
-				$this->import('Files');
-				$strNewFile = $strFolder . '/' . $file['name'];
-
-				// Move file to destination
-				if ($this->Files->move_uploaded_file($file['tmp_name'], $strNewFile))
-				{
-					$blnExceeds = false;
-					$blnResized = false;
-
-					$this->Files->chmod($strNewFile, 0644);
-
-					// Resize image if necessary
-					if (($arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile)) !== false)
-					{
-						// Image is too big
-						if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $arrImageSize[1] > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'])
-						{
-							$blnExceeds = true;
-						}
-						else
-						{
-							// Image exceeds maximum image width
-							if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
-							{
-								$blnResized = true;
-								$this->resizeImage($strNewFile, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
-
-								// Recalculate image size
-								$arrImageSize = @getimagesize(TL_ROOT . '/' . $strNewFile);
-							}
-
-							// Image exceeds maximum image height
-							if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
-							{
-								$blnResized = true;
-								$this->resizeImage($strNewFile, 0, $GLOBALS['TL_CONFIG']['imageHeight']);
-							}
-						}
-					}
-
-					$arrUploaded[] = $strNewFile;
-
-					// Notify user
-					if ($blnExceeds)
-					{
-						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileExceeds'], $file['name']));
-						$this->log('File "'.$file['name'].'" uploaded successfully but was too big to be resized automatically', 'DC_Folder move()', TL_FILES);
-					}
-					elseif ($blnResized)
-					{
-						$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $file['name']));
-						$this->log('File "'.$file['name'].'" uploaded successfully and was scaled down to the maximum dimensions', 'DC_Folder move()', TL_FILES);
-					}
-					else
-					{
-						$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileUploaded'], $file['name']));
-						$this->log('File "'.$file['name'].'" uploaded successfully', 'DC_Folder move()', TL_FILES);
-					}
-				}
-			}
+			$objUploader->upload();
+			$arrUploaded = $objUploader->getUploadedFiles();
 
 			// HOOK: post upload callback
 			if (isset($GLOBALS['TL_HOOKS']['postUpload']) && is_array($GLOBALS['TL_HOOKS']['postUpload']))
@@ -861,134 +753,11 @@ class DC_Folder extends DataContainer implements listable, editable
 					$this->$callback[0]->$callback[1]($arrUploaded);
 				}
 			}
-
-			// Send FancyUpload response
-			if ($blnIsAjax)
-			{
-				if ($error)
-				{
-					echo json_encode(array('status'=>'0', 'message'=>$_SESSION['TL_ERROR'][0]));
-				}
-				elseif ($blnExceeds || $blnResized)
-				{
-					echo json_encode(array('status'=>'1', 'message'=>$_SESSION['TL_INFO'][0]));
-				}
-				else
-				{
-					echo json_encode(array('status'=>'1', 'message'=>$_SESSION['TL_CONFIRM'][0]));
-				}
-
-				$this->resetMessages();
-				exit;
-			}
-
-			// Redirect or reload
-			elseif (!$error)
-			{
-				// Do not purge the html folder (see #2898)
-
-				if ($this->Input->post('uploadNback') && !$blnResized)
-				{
-					$this->resetMessages();
-					$this->redirect($this->getReferer());
-				}
-
-				$this->reload();
-			}
+			
+			$objUploader->postUpload();
 		}
 
-		$fields = '';
-
-		// Upload fields
-		for ($i=0; $i<$GLOBALS['TL_CONFIG']['uploadFields']; $i++)
-		{
-			$fields .= '
-  <input type="file" name="'.$i.'" class="tl_upload_field" onfocus="Backend.getScrollOffset()"><br>';
-		}
-
-		$strFancyUpload = '';
-
-		// Add FancyUpload scripts
-		if ($GLOBALS['TL_CONFIG']['fancyUpload'])
-		{
-			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/fancyupload/css/fancyupload.css|screen';
-			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/fancyupload/js/fancyupload.js';
-
-			$fancy = new stdClass();
-
-			// Add upload types and key
-			$fancy->uploadTypes = $uploadTypes;
-			$fancy->script = basename($this->Environment->script);
-			$fancy->isPopup = ($fancy->script == 'files.php') ? 'true' : 'false';
-
-			// Add labels
-			foreach ($GLOBALS['TL_LANG']['tl_files'] as $k=>$v)
-			{
-				list($prefix, $key) = explode('_', $k);
-
-				if ($prefix == 'fancy')
-				{
-					$fancy->$key = $v;
-				}
-			}
-
-			// Set upload script
-			$uploadScript = sprintf('%s/system/config/%s.php', TL_ROOT, basename($GLOBALS['TL_DCA'][$this->strTable]['config']['uploadScript']));
-
-			ob_start();
-			require($uploadScript);
-			$strFancyUpload = ob_get_contents();
-			ob_end_clean();
-		}
-
-		// Display upload form
-		return '
-<div id="tl_buttons">
-<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
-</div>
-
-<h2 class="sub_headline">'.sprintf($GLOBALS['TL_LANG']['tl_files']['uploadFF'], basename($strFolder)).'</h2>
-'.$this->getMessages().'
-<form action="'.ampersand($this->Environment->request, true).'" id="'.$this->strTable.'" class="tl_form" method="post"'.(!empty($this->onsubmit) ? ' onsubmit="'.implode(' ', $this->onsubmit).'"' : '').' enctype="multipart/form-data">
-<div class="tl_formbody_edit">
-<input type="hidden" name="FORM_SUBMIT" value="tl_upload">
-<input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
-<input type="hidden" name="MAX_FILE_SIZE" value="'.$GLOBALS['TL_CONFIG']['maxFileSize'].'">
-
-<div class="tl_tbox">
-  <h3>'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][0].'</h3>
-  <div id="fancy-fallback">'.$fields.'
-  </div>
-  <div id="fancy-status" class="fancy-hide">
-  <p><a href="#" id="fancy-browse">'.$GLOBALS['TL_LANG']['tl_files']['browseFiles'].'</a> | <a href="#" id="fancy-clear">'.$GLOBALS['TL_LANG']['tl_files']['clearList'].'</a> | <a href="#" id="fancy-upload">'.$GLOBALS['TL_LANG']['tl_files']['startUpload'].'</a></p>
-  <div>
-    <strong class="overall-title">&nbsp;</strong><br>
-    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress overall-progress">
-  </div>
-  <div style="margin-top:3px">
-    <strong class="current-title">&nbsp;</strong><br>
-    <img src="' . TL_PLUGINS_URL . 'plugins/fancyupload/assets/bar.gif" width="250" height="12" alt="" class="progress current-progress">
-  </div>
-  <div class="current-text"></div>
-  </div>
-  <ul id="fancy-list" class="fancy-hide">
-    <li></li>
-  </ul>'.(strlen($GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1]) ? '
-  <p class="tl_help tl_tip">'.$GLOBALS['TL_LANG'][$this->strTable]['fileupload'][1].'</p>' : '').'
-</div>
-
-</div>
-
-<div id="fancy-submit" class="tl_formbody_submit">
-
-<div class="tl_submit_container">
-<input type="submit" name="upload" class="tl_submit" accesskey="s" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['upload']).'"> 
-<input type="submit" name="uploadNback" class="tl_submit" accesskey="c" value="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['uploadNback']).'">
-</div>
-
-</div>
-' . $strFancyUpload . '
-</form>';
+		return ($blnIsAjax) ? $objUploader->generateAjax() : $objUploader->generate();
 	}
 
 
