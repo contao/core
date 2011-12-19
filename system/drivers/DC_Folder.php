@@ -1545,23 +1545,20 @@ window.addEvent(\'domready\', function() {
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		// Remove protection
+		// Remove the protection
 		if (file_exists(TL_ROOT . '/' . $this->intId . '/.htaccess'))
 		{
-			$objFile = new File($this->intId . '/.htaccess');
-			$objFile->delete();
-
+			$objFolder = new Folder($this->intId);
+			$objFolder->unprotect();
 			$this->log('The protection from folder "'.$this->intId.'" has been removed', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}
 
-		// Protect folder
+		// Protect the folder
 		else
 		{
-			$objFile = new File($this->intId . '/.htaccess');
-			$objFile->write("order deny,allow\ndeny from all");
-			$objFile->close();
-
+			$objFolder = new Folder($this->intId);
+			$objFolder->protect();
 			$this->log('Folder "'.$this->intId.'" has been protected', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}

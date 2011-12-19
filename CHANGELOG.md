@@ -5,6 +5,9 @@ Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
 ### New
+Added the methods protect() and unprotect() to the Folder class (see #2978).
+
+### New
 Added the "storeFormData" hook which is triggered before the form data is
 written into the database (see #3182).
 
