@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### New
+Support entering the image title in addition to the alternate text (see #3494).
+
 ### Improved
 Restore deleted records even if the database schema has changed (see #3550).
 

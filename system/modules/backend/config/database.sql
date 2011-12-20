@@ -53,6 +53,7 @@ CREATE TABLE `tl_content` (
   `addImage` char(1) NOT NULL default '',
   `singleSRC` varchar(255) NOT NULL default '',
   `alt` varchar(255) NOT NULL default '',
+  `title` varchar(255) NOT NULL default '',
   `size` varchar(64) NOT NULL default '',
   `imagemargin` varchar(128) NOT NULL default '',
   `imageUrl` varchar(255) NOT NULL default '',
