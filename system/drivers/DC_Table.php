@@ -1445,11 +1445,23 @@ class DC_Table extends DataContainer implements listable, editable
 			$this->redirect($this->getReferer());
 		}
 
+		$arrFields = array();
+
 		// Restore the data
 		foreach ($data as $table=>$fields)
 		{
+			// Get the currently available fields
+			if (!isset($arrFields[$table]))
+			{
+				$arrFields[$table] = array_flip($this->Database->getFieldnames($table));
+			}
+
 			foreach ($fields as $row)
 			{
+				// Unset fields that no longer exist in the database
+				$row = array_intersect_key($row, $arrFields[$table]);
+
+				// Re-insert the data
 				$objInsertStmt = $this->Database->prepare("INSERT INTO " . $table . " %s")
 												->set($row)
 												->execute();
