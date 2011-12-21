@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
  * Contao Open Source CMS
@@ -30,30 +30,8 @@
 
 
 /**
- * Initialize the system
+ * Register syndication service
  */
-define('TL_MODE', 'FE');
-require('system/initialize.php');
-
-
-
-foreach ($GLOBALS['TL_SYS'] as $strClass)
-{
-	$objService = new $strClass();
-	$blnResult = $objService->share();
-	
-	if ($blnResult)
-	{
-		exit;
-	}
-}
-
-
-/**
- * Redirect if someone gets here
- */
-header('HTTP/1.1 301 Moved Permanently');
-header('Location: index.php');
-exit;
+$GLOBALS['TL_SYS']['print'] = 'SyndicationPrint';
 
 ?>

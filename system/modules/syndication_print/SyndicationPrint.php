@@ -1,4 +1,4 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
  * Contao Open Source CMS
@@ -30,30 +30,46 @@
 
 
 /**
- * Initialize the system
+ * Class SyndicationPrint
+ *
+ * Parent class for syndication services.
+ * @copyright  Leo Feyer 2005-2011
+ * @author     Yanick Witschi <http://www.certo-net.ch>
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Controller
  */
-define('TL_MODE', 'FE');
-require('system/initialize.php');
-
-
-
-foreach ($GLOBALS['TL_SYS'] as $strClass)
+class SyndicationPrint extends SyndicationService
 {
-	$objService = new $strClass();
-	$blnResult = $objService->share();
-	
-	if ($blnResult)
+
+	/**
+	 * Initialize the object
+	 */
+	public function __construct()
 	{
-		exit;
+		parent::__construct();
+	}
+
+
+	/**
+	 * Generate the HTML view for the service
+	 */
+	public function generateHtml()
+	{
+		$objTemplate = new FrontendTemplate('syndication_print');
+		$objTemplate->printTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printPage']);
+		return $objTemplate->parse();
+	}
+	
+	
+	/**
+	 * Share
+	 * @return boolean
+	 */
+	public function share()
+	{
+		// this service will never share anything
+		return false;
 	}
 }
-
-
-/**
- * Redirect if someone gets here
- */
-header('HTTP/1.1 301 Moved Permanently');
-header('Location: index.php');
-exit;
 
 ?>

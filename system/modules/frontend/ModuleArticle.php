@@ -201,42 +201,14 @@ class ModuleArticle extends Module
 			$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
 		}
 
-		// Backwards compatibility
-		if ($this->printable == 1)
+		// Add syndication variables
+		if ($this->printable)
 		{
 			$this->Template->printable = true;
-			$this->Template->pdfButton = true;
-		}
-
-		// New structure
-		elseif ($this->printable != '')
-		{
-			$options = deserialize($this->printable);
-
-			if (is_array($options) && !empty($options))
-			{
-				$this->Template->printable = true;
-				$this->Template->printButton = in_array('print', $options);
-				$this->Template->pdfButton = in_array('pdf', $options);
-				$this->Template->facebookButton = in_array('facebook', $options);
-				$this->Template->twitterButton = in_array('twitter', $options);
-			}
-		}
-
-		// Add syndication variables
-		if ($this->Template->printable)
-		{
-			$request = $this->getIndexFreeRequest(true);
-
-			$this->Template->print = '#';
-			$this->Template->encUrl = rawurlencode($this->Environment->base . $this->Environment->request);
-			$this->Template->encTitle = rawurlencode($objPage->pageTitle);
-			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
-
-			$this->Template->printTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printPage']);
 			$this->Template->pdfTitle = specialchars($GLOBALS['TL_LANG']['MSC']['printAsPdf']);
-			$this->Template->facebookTitle = specialchars($GLOBALS['TL_LANG']['MSC']['facebookShare']);
-			$this->Template->twitterTitle = specialchars($GLOBALS['TL_LANG']['MSC']['twitterShare']);
+			
+			$request = $this->getIndexFreeRequest(true);
+			$this->Template->href = $request . ((strpos($request, '?') !== false) ? '&amp;' : '?') . 'pdf=' . $this->id;
 		}
 	}
 }

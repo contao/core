@@ -61,7 +61,8 @@ $GLOBALS['FE_MOD'] = array
 		'flash'          => 'ModuleFlash',
 		'articleList'    => 'ModuleArticleList',
 		'randomImage'    => 'ModuleRandomImage',
-		'html'           => 'ModuleHtml'
+		'html'           => 'ModuleHtml',
+		'syndication'	 => 'ModuleSyndication'
 	)
 );
 
@@ -127,5 +128,11 @@ $GLOBALS['TL_FFL'] = array
 	'captcha'     => 'FormCaptcha',
 	'submit'      => 'FormSubmit'
 );
+
+
+/**
+ * Syndication services
+ */
+$GLOBALS['TL_SYS'] = array();
 
 ?>

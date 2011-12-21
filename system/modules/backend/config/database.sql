@@ -24,7 +24,7 @@ CREATE TABLE `tl_article` (
   `showTeaser` char(1) NOT NULL default '',
   `teaserCssID` varchar(255) NOT NULL default '',
   `teaser` text NULL,
-  `printable` varchar(255) NOT NULL default '',
+  `printable` char(1) NOT NULL default '',
   `cssID` varchar(255) NOT NULL default '',
   `space` varchar(64) NOT NULL default '',
   `published` char(1) NOT NULL default '',
@@ -378,6 +378,7 @@ CREATE TABLE `tl_module` (
   `guests` char(1) NOT NULL default '',
   `cssID` varchar(255) NOT NULL default '',
   `space` varchar(64) NOT NULL default '',
+  `syn_services` blob NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
