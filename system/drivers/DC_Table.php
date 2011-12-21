@@ -138,8 +138,8 @@ class DC_Table extends DataContainer implements listable, editable
 		// Check whether the table is defined
 		if ($strTable == '' || !isset($GLOBALS['TL_DCA'][$strTable]))
 		{
-			$this->log('Could not load data container configuration for "' . $strTable . '"', 'DC_Table __construct()', TL_ERROR);
-			trigger_error('Could not load data container configuration', E_USER_ERROR);
+			$this->log('Could not load the data container configuration for "' . $strTable . '"', 'DC_Table __construct()', TL_ERROR);
+			trigger_error('Could not load the data container configuration', E_USER_ERROR);
 		}
 
 		// Set IDs and redirect
@@ -639,7 +639,7 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry in table "'.$this->strTable.'" has been created (ID: '.$insertID.')', 'DC_Table create()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created'.$this->getParentRecords($this->strTable, $insertID), 'DC_Table create()', TL_GENERAL);
 				$this->redirect($this->switchToEdit($insertID).$s2e);
 			}
 		}
@@ -871,7 +871,7 @@ class DC_Table extends DataContainer implements listable, editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry in table "'.$this->strTable.'" has been created (ID: '.$insertID.')', 'DC_Table copy()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created by duplicating record "'.$this->strTable.'.id='.$this->intId.'"'.$this->getParentRecords($this->strTable, $insertID), 'DC_Table copy()', TL_GENERAL);
 
 				// Switch to edit mode
 				if (!$blnDoNotRedirect)
@@ -1563,7 +1563,7 @@ class DC_Table extends DataContainer implements listable, editable
 					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
 								   ->execute($this->intId, $this->Input->post('version'));
 
-					$this->log(sprintf('Version %s of record ID %s (table %s) has been restored', $this->Input->post('version'), $this->intId, $this->strTable), 'DC_Table edit()', TL_GENERAL);
+					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 
 					// Trigger the onrestore_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
@@ -1591,7 +1591,7 @@ class DC_Table extends DataContainer implements listable, editable
 		// Redirect if there is no record with the given ID
 		if ($objRow->numRows < 1)
 		{
-			$this->log('Could not load record ID '.$this->intId.' of table "'.$this->strTable.'"', 'DC_Table edit()', TL_ERROR);
+			$this->log('Could not load record "'.$this->strTable.'.id='.$this->intId.'"', 'DC_Table edit()', TL_ERROR);
 			$this->redirect('contao/main.php?act=error');
 		}
 
@@ -1831,7 +1831,7 @@ class DC_Table extends DataContainer implements listable, editable
 					}
 				}
 
-				$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
+				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -2116,7 +2116,7 @@ window.addEvent(\'domready\', function() {
 							}
 						}
 
-						$this->log(sprintf('A new version of %s ID %s has been created', $this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
+						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2353,7 +2353,7 @@ window.addEvent(\'domready\', function() {
 								}
 							}
 
-							$this->log(sprintf('A new version of record ID %s (table %s) has been created', $this->intId, $this->strTable), 'DC_Table editAll()', TL_GENERAL);
+							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -4976,6 +4976,56 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				);
 			}
 		}
+	}
+
+
+	/**
+	 * Get the parent records of an entry and return them as string
+	 * which can be used in a log message
+	 * @param string
+	 * @param integer
+	 * @return string
+	 */
+	protected function getParentRecords($strTable, $intId)
+	{
+		// No parent table
+		if (!isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))
+		{
+			return '';
+		}
+
+		$arrParent = array();
+
+		do
+		{
+			// Get the pid
+			$objParent = $this->Database->prepare("SELECT pid FROM " . $strTable . " WHERE id=?")
+										->limit(1)
+										->execute($intId);
+
+			if ($objParent->numRows < 1)
+			{
+				break;
+			}
+
+			// Store the parent table information
+			$strTable = $GLOBALS['TL_DCA'][$strTable]['config']['ptable'];
+			$intId = $objParent->pid;
+
+			// Add the log entry
+			$arrParent[] = $strTable .'.id=' . $intId;
+
+			// Load the data container of the parent table
+			$this->loadDataContainer($strTable);
+		}
+		while ($intId && isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']));
+
+		if (empty($arrParent))
+		{
+			return '';
+		}
+
+		return ' (parent records: ' . implode(', ', $arrParent) . ')';
 	}
 }
 
