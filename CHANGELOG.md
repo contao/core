@@ -19,7 +19,7 @@ If an image link target is another image and the fullscreen view is enabled,
 do not open the target image in a new window but in the lightbox (see #1703).
 
 ### New
-Added the methods protect() and unprotect() to the Folder class (see #2978).
+Added the methods `protect()` and `unprotect()` to the Folder class (see #2978).
 
 ### New
 Added the "storeFormData" hook which is triggered before the form data is

@@ -261,6 +261,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'modules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['modules'],
+			'default'                 => array(array('mod'=>0, 'col'=>'main')),
 			'exclude'                 => true,
 			'inputType'               => 'moduleWizard'
 		),
