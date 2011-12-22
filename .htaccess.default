@@ -176,6 +176,6 @@ FileETag None
   # to the front end controller, the second one adds a missing trailing slash.
   ##
   RewriteRule ^[a-z]{2}/$ index.php [L]
-  RewriteRule ^[a-z]{2}$ %{REQUEST_URI}/ [R=301,L]
+  RewriteRule ^([a-z]{2})$ $1/ [R=301,L]
 
 </IfModule>

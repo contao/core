@@ -54,6 +54,10 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 		'dataContainer'               => 'Folder',
 		'validFileTypes'              => $GLOBALS['TL_CONFIG']['templateFiles'],
 		'closed'                      => true,
+		'onload_callback' => array
+		(
+			array('tl_templates', 'addBreadcrumb'),
+		),
 		'ondelete_callback' => array
 		(
 			array('tl_templates', 'deleteFromTemplateCache')
@@ -158,6 +162,67 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
  */
 class tl_templates extends Backend
 {
+
+	/**
+	 * Add the breadcrumb menu
+	 */
+	public function addBreadcrumb()
+	{
+		// Set a new node
+		if (isset($_GET['node']))
+		{
+			$this->Session->set('tl_templates_node', $this->Input->get('node', true));
+			$this->redirect(preg_replace('/(&|\?)node=[^&]*/', '', $this->Environment->request));
+		}
+
+		$strNode = $this->Session->get('tl_templates_node');
+
+		if ($strNode == '')
+		{
+			return;
+		}
+
+		// Currently selected folder does not exist
+		if (!is_dir(TL_ROOT . '/' . $strNode))
+		{
+			$this->Session->set('tl_templates_node', '');
+			return;
+		}
+
+		$strPath = 'templates';
+		$arrNodes = explode('/', preg_replace('/^templates\//', '', $strNode));
+		$arrLinks = array();
+
+		// Add root link
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/filemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+
+		// Generate breadcrumb trail
+		foreach ($arrNodes as $strFolder)
+		{
+			$strPath .= '/' . $strFolder;
+
+			// No link for the active folder
+			if ($strFolder == basename($strNode))
+			{
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> ' . $strFolder;
+			}
+			else
+			{
+				$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/folderC.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node='.$strPath) . '">' . $strFolder . '</a>';
+			}
+		}
+
+		// Limit tree
+		$GLOBALS['TL_DCA']['tl_templates']['list']['sorting']['root'] = array($strNode);
+
+		// Insert breadcrumb menu
+		$GLOBALS['TL_DCA']['tl_templates']['list']['sorting']['breadcrumb'] .= '
+
+<ul id="tl_breadcrumb">
+  <li>' . implode(' &gt; </li><li>', $arrLinks) . '</li>
+</ul>';
+	}
+
 
 	/**
 	 * Create a new template

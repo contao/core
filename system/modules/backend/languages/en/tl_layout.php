@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Custom layout section
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Custom sections position', 'Please select the position of the custom layout sections.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Style sheets', 'Please select the style sheets you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('Skip tl_files/tinymce.css', 'Do not include the TinyMCE style sheet.');
+$GLOBALS['TL_LANG']['tl_layout']['webfonts']      = array('Google web fonts', 'Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. <em>Ubuntu|Ubuntu+Mono</em>).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('News feeds', 'Please select the news feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Please select the calendar feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');

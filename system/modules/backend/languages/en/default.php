@@ -250,6 +250,24 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Column';
 
 
 /**
+ * Images
+ */
+$GLOBALS['TL_LANG']['MSC']['relative']      = 'Relative dimensions';
+$GLOBALS['TL_LANG']['MSC']['proportional']  = array('Proportional', 'The longer side of the image is adjusted to the given dimensions and the image is resized proportionally.');
+$GLOBALS['TL_LANG']['MSC']['box']           = array('Fit the box', 'The shorter side of the image is adjusted to the given dimensions and the image is resized proportionally.');
+$GLOBALS['TL_LANG']['MSC']['crop']          = 'Exact dimensions';
+$GLOBALS['TL_LANG']['MSC']['left_top']      = array('Left top', 'Preserves the left part of a landscape image and the top part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['center_top']    = array('Center top', 'Preserves the center part of a landscape image and the top part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['right_top']     = array('Right top', 'Preserves the right part of a landscape image and the top part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['left_center']   = array('Left center', 'Preserves the left part of a landscape image and the center part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['center_center'] = array('Center center', 'Preserves the center part of a landscape image and the center part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['right_center']  = array('Right center', 'Preserves the right part of a landscape image and the center part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['left_bottom']   = array('Left bottom', 'Preserves the left part of a landscape image and the bottom part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['center_bottom'] = array('Center bottom', 'Preserves the center part of a landscape image and the bottom part of a portrait image.');
+$GLOBALS['TL_LANG']['MSC']['right_bottom']  = array('Right bottom', 'Preserves the right part of a landscape image and the bottom part of a portrait image.');
+
+
+/**
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['id']            = array('ID', 'Note that changing the ID can break data integrity!');
@@ -367,9 +385,6 @@ $GLOBALS['TL_LANG']['MSC']['apply']            = 'Apply';
 $GLOBALS['TL_LANG']['MSC']['mandatory']        = 'Mandatory field';
 $GLOBALS['TL_LANG']['MSC']['create']           = 'Create';
 $GLOBALS['TL_LANG']['MSC']['delete']           = 'Delete';
-$GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
-$GLOBALS['TL_LANG']['MSC']['crop']             = 'Exact dimensions';
-$GLOBALS['TL_LANG']['MSC']['box']              = 'Fit the box';
 $GLOBALS['TL_LANG']['MSC']['protected']        = 'protected';
 $GLOBALS['TL_LANG']['MSC']['guests']           = 'guests only';
 $GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update mode';

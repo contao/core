@@ -1631,10 +1631,20 @@ var Backend =
 				div.addClass('active');
 		}
 
+			var bgcol = div.getStyle('background-color');
+
 			// Update the div onchange
 			el.addEvent('change', function() {
 				var option = el.getElement('option[value="' + el.value + '"]');
 				div.getElement('span').set('html', option.get('html'));
+			}).addEvent('keydown', function(event) {
+				if (event.key == 'up' || event.key == 'down') {
+					setTimeout(function() {	el.fireEvent('change'); }, 100);
+				}
+			}).addEvent('focus', function() {
+				div.setStyle('background-color', '#ebfdd7');
+			}).addEvent('blur', function() {
+				div.setStyle('background-color', bgcol);
 			}).setStyle('opacity', 0);
 
 			// Browser-specific adjustments

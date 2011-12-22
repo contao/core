@@ -138,6 +138,32 @@ class Folder extends System
 		$this->Files->rename($this->strFolder, $strNewName);
 		$this->strFolder = $strNewName;
 	}
+
+
+	/**
+	 * Protect the folder by adding an .htaccess file
+	 */
+	public function protect()
+	{
+		if (!file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
+		{
+			$objFile = new File($this->strFolder . '/.htaccess');
+			$objFile->write("order deny,allow\ndeny from all");
+			$objFile->close();
+		}
+	}
+
+
+	/**
+	 * Unprotect the folder by removing the .htaccess file
+	 */
+	public function unprotect()
+	{
+		if (file_exists(TL_ROOT . '/' . $this->strFolder . '/.htaccess'))
+		{
+			$this->Files->delete($this->strFolder . '/.htaccess');
+		}
+	}
 }
 
 ?>

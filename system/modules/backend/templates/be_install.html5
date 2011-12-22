@@ -15,7 +15,10 @@
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
 <body class="__ua__">
-<?php $this->showIE6warning(); ?>
+
+<!--[if lte IE 6]>
+<div id="ie6warning"><?php echo $this->ie6warning; ?></div>
+<![endif]-->
 
 <div id="header">
 <h1>Contao Open Source CMS <?php echo VERSION; ?></h1>

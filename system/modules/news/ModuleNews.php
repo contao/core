@@ -252,6 +252,11 @@ abstract class ModuleNews extends Module
 					break;
 
 				case 'comments':
+					if ($objArticle->noComments || $objArticle->source != 'default')
+					{
+						break;
+					}
+
 					$objComments = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_comments WHERE source='tl_news' AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
 												  ->execute($objArticle->id);
 

@@ -370,18 +370,7 @@ abstract class Template extends Controller
 	 */
 	public function showIE6warning()
 	{
-		$ua = $this->Environment->agent;
-
-		if ($ua->shorty != 'ie' || $ua->version > 6)
-		{
-			return;
-		}
-
-		echo "\n<!--[if lte IE 6]>\n";
-		echo '<div style="background:#ffc;padding:12px;border-bottom:1px solid #e4790f;font-size:14px;color:#000;text-align:center">';
-		printf("\n  " . $GLOBALS['TL_LANG']['ERR']['ie6warning'] . "\n", '<a href="http://ie6countdown.com" style="font-size:14px;color:#e4790f">', '</a>');
-		echo '</div>';
-		echo "\n<![endif]-->\n";
+		return ''; // Backwards compatibility
 	}
 }
 

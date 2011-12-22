@@ -69,7 +69,7 @@ class ContentText extends ContentElement
 		$this->Template->addImage = false;
 
 		// Add image
-		if ($this->addImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->addImage && $this->singleSRC != '' && is_file(TL_ROOT . '/' . $this->singleSRC))
 		{
 			$this->addImageToTemplate($this->Template, $this->arrData);
 		}

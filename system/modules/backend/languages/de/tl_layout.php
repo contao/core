@@ -49,6 +49,7 @@ $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Eigene Layoutbereiche
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Position der Layoutbereiche', 'Bitte wählen Sie die Position der eigenen Layoutbereiche aus.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Stylesheets', 'Bitte wählen Sie die Stylesheets aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('tl_files/tinymce.css ignorieren', 'Das TinyMCE-Stylesheet tl_files/tinymce.css nicht einbinden.');
+$GLOBALS['TL_LANG']['tl_layout']['webfonts']      = array('Google-Webfonts', 'Hier können Sie Google-Webfonts zu Ihrer Webseite hinzfügen. Geben Sie die Schriftarten ohne die Basis-URL an (z.B. <em>Ubuntu|Ubuntu+Mono</em>).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('Newsfeeds', 'Bitte wählen Sie die Newsfeeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Kalender-Feeds', 'Bitte wählen Sie die Kalender-Feeds aus, die Sie dem Layout hinzufügen möchten.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module', 'Wenn JavaScript deaktiviert ist, speichern Sie unbedingt Ihre Änderungen, bevor Sie die Reihenfolge ändern.');

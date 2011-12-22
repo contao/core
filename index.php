@@ -154,8 +154,8 @@ class Index extends Frontend
 			}
 		}
 
-		// Throw a 404 error if the result is still ambiguous or the language does not match
-		if ($objPage->numRows != 1 || ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->language))
+		// Throw a 404 error if the result is still ambiguous
+		if ($objPage->numRows != 1)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
@@ -183,12 +183,21 @@ class Index extends Frontend
 			die('Page not found');
 		}
 
+		// Check wether the language matches the root page language
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->rootLanguage)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
+
 		// Check whether there are domain name restrictions
 		if ($objPage->domain != '')
 		{
 			// Load an error 404 page object
 			if ($objPage->domain != $this->Environment->host)
 			{
+				$this->User->authenticate();
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 				$objHandler->generate($objPage->id, $objPage->domain, $this->Environment->host);
 			}

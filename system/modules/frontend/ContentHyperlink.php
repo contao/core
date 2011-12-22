@@ -103,7 +103,7 @@ class ContentHyperlink extends ContentElement
 
 				$this->Template->src = TL_FILES_URL . $src;
 				$this->Template->alt = specialchars($this->alt);
-				$this->Template->title = specialchars($this->linkTitle);
+				$this->Template->linkTitle = specialchars($this->linkTitle);
 				$this->Template->caption = $this->caption;
 			}
 		}
@@ -122,7 +122,7 @@ class ContentHyperlink extends ContentElement
 		$this->Template->embed_pre = $embed[0];
 		$this->Template->embed_post = $embed[1];
 		$this->Template->link = $this->linkTitle;
-		$this->Template->title = specialchars($this->linkTitle);
+		$this->Template->linkTitle = specialchars($this->linkTitle);
 		$this->Template->target = '';
 
 		// Override the link target

@@ -300,23 +300,23 @@ abstract class Controller extends System
 		// Other modules
 		else
 		{
-			$objModule = $this->Database->prepare("SELECT * FROM tl_module WHERE id=?")
-										->limit(1)
-										->execute($intId);
+			$objRow = $this->Database->prepare("SELECT * FROM tl_module WHERE id=?")
+									 ->limit(1)
+									 ->execute($intId);
 
-			if ($objModule->numRows < 1)
+			if ($objRow->numRows < 1)
 			{
 				return '';
 			}
 
 			// Show to guests only
-			if ($objModule->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objModule->protected)
+			if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 			{
 				return '';
 			}
 
 			// Protected element
-			if (!BE_USER_LOGGED_IN && $objModule->protected)
+			if (!BE_USER_LOGGED_IN && $objRow->protected)
 			{
 				if (!FE_USER_LOGGED_IN)
 				{
@@ -324,7 +324,7 @@ abstract class Controller extends System
 				}
 
 				$this->import('FrontendUser', 'User');
-				$groups = deserialize($objModule->groups);
+				$groups = deserialize($objRow->groups);
 	
 				if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 				{
@@ -332,18 +332,16 @@ abstract class Controller extends System
 				}
 			}
 
-			$strClass = $this->findFrontendModule($objModule->type);
+			$strClass = $this->findFrontendModule($objRow->type);
 
 			// Return if the class does not exist
 			if (!$this->classFileExists($strClass))
 			{
-				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objModule->type].'" (module "'.$objModule->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
+				$this->log('Module class "'.$GLOBALS['FE_MOD'][$objRow->type].'" (module "'.$objRow->type.'") does not exist', 'Controller getFrontendModule()', TL_ERROR);
 				return '';
 			}
 
-			$objModule->typePrefix = 'mod_';
-			$objModule = new $strClass($objModule, $strColumn);
-			$strBuffer = $objModule->generate();
+			$objRow->typePrefix = 'mod_';
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['getFrontendModule']) && is_array($GLOBALS['TL_HOOKS']['getFrontendModule']))
@@ -351,9 +349,12 @@ abstract class Controller extends System
 				foreach ($GLOBALS['TL_HOOKS']['getFrontendModule'] as $callback)
 				{
 					$this->import($callback[0]);
-					$strBuffer = $this->$callback[0]->$callback[1]($objModule, $strBuffer);
+					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
 				}
 			}
+
+			$objModule = new $strClass($objRow, $strColumn);
+			$strBuffer = $objModule->generate();
 
 			// Disable indexing if protected
 			if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
@@ -385,12 +386,12 @@ abstract class Controller extends System
 		$this->import('Database');
 
 		// Get the article
-		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
-									 ->limit(1)
-									 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
+		$objRow = $this->Database->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
+								 ->limit(1)
+								 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
 
 		// Send a 404 header if the article does not exist
-		if ($objArticle->numRows < 1)
+		if ($objRow->numRows < 1)
 		{
 			// Do not index the page
 			$objPage->noSearch = 1;
@@ -401,26 +402,26 @@ abstract class Controller extends System
 		}
 
 		// Print the article as PDF
-		if ($this->Input->get('pdf') == $objArticle->id)
+		if ($this->Input->get('pdf') == $objRow->id)
 		{
 			// Backwards compatibility
-			if ($objArticle->printable == 1)
+			if ($objRow->printable == 1)
 			{
-				$this->printArticleAsPdf($objArticle);
+				$this->printArticleAsPdf($objRow);
 			}
-			elseif ($objArticle->printable != '')
+			elseif ($objRow->printable != '')
 			{
-				$options = deserialize($objArticle->printable);
+				$options = deserialize($objRow->printable);
 
 				if (is_array($options) && in_array('pdf', $options))
 				{
-					$this->printArticleAsPdf($objArticle);
+					$this->printArticleAsPdf($objRow);
 				}
 			}
 		}
 
-		$objArticle->headline = $objArticle->title;
-		$objArticle->multiMode = $blnMultiMode;
+		$objRow->headline = $objRow->title;
+		$objRow->multiMode = $blnMultiMode;
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getArticle']) && is_array($GLOBALS['TL_HOOKS']['getArticle']))
@@ -428,11 +429,11 @@ abstract class Controller extends System
 			foreach ($GLOBALS['TL_HOOKS']['getArticle'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objArticle);
+				$this->$callback[0]->$callback[1]($objRow);
 			}
 		}
 
-		$objArticle = new ModuleArticle($objArticle, $strColumn);
+		$objArticle = new ModuleArticle($objRow, $strColumn);
 		return $objArticle->generate($blnIsInsertTag);
 	}
 
@@ -452,23 +453,23 @@ abstract class Controller extends System
 		$this->import('Database');
 
 		// Get the content element
-		$objElement = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
-									 ->limit(1)
-									 ->execute($intId);
+		$objRow = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
+								 ->limit(1)
+								 ->execute($intId);
 
-		if ($objElement->numRows < 1)
+		if ($objRow->numRows < 1)
 		{
 			return '';
 		}
 
 		// Show to guests only
-		if ($objElement->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objElement->protected)
+		if ($objRow->guests && FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$objRow->protected)
 		{
 			return '';
 		}
 
 		// Protected the element
-		if ($objElement->protected && !BE_USER_LOGGED_IN)
+		if ($objRow->protected && !BE_USER_LOGGED_IN)
 		{
 			if (!FE_USER_LOGGED_IN)
 			{
@@ -476,7 +477,7 @@ abstract class Controller extends System
 			}
 
 			$this->import('FrontendUser', 'User');
-			$groups = deserialize($objElement->groups);
+			$groups = deserialize($objRow->groups);
 
 			if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
 			{
@@ -487,21 +488,19 @@ abstract class Controller extends System
 		// Remove the spacing in the back end preview
 		if (TL_MODE == 'BE')
 		{
-			$objElement->space = null;
+			$objRow->space = null;
 		}
 
-		$strClass = $this->findContentElement($objElement->type);
+		$strClass = $this->findContentElement($objRow->type);
 
 		// Return if the class does not exist
 		if (!$this->classFileExists($strClass))
 		{
-			$this->log('Content element class "'.$strClass.'" (content element "'.$objElement->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
+			$this->log('Content element class "'.$strClass.'" (content element "'.$objRow->type.'") does not exist', 'Controller getContentElement()', TL_ERROR);
 			return '';
 		}
 
-		$objElement->typePrefix = 'ce_';
-		$objElement = new $strClass($objElement);
-		$strBuffer = $objElement->generate();
+		$objRow->typePrefix = 'ce_';
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getContentElement']) && is_array($GLOBALS['TL_HOOKS']['getContentElement']))
@@ -509,9 +508,12 @@ abstract class Controller extends System
 			foreach ($GLOBALS['TL_HOOKS']['getContentElement'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objElement, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
 			}
 		}
+
+		$objElement = new $strClass($objRow);
+		$strBuffer = $objElement->generate();
 
 		// Disable indexing if protected
 		if ($objElement->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
@@ -537,19 +539,17 @@ abstract class Controller extends System
 
 		$this->import('Database');
 
-		$objElement = $this->Database->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
-									 ->limit(1)
-									 ->execute((is_numeric($varId) ? $varId : 0), $varId);
+		$objRow = $this->Database->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
+								 ->limit(1)
+								 ->execute((is_numeric($varId) ? $varId : 0), $varId);
 
-		if ($objElement->numRows < 1)
+		if ($objRow->numRows < 1)
 		{
 			return '';
 		}
 
-		$objElement->typePrefix = 'ce_';
-		$objElement->form = $objElement->id;
-		$objElement = new Form($objElement);
-		$strBuffer = $objElement->generate();
+		$objRow->typePrefix = 'ce_';
+		$objRow->form = $objRow->id;
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getForm']) && is_array($GLOBALS['TL_HOOKS']['getForm']))
@@ -557,11 +557,12 @@ abstract class Controller extends System
 			foreach ($GLOBALS['TL_HOOKS']['getForm'] as $callback)
 			{
 				$this->import($callback[0]);
-				$strBuffer = $this->$callback[0]->$callback[1]($objElement, $strBuffer);
+				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
 			}
 		}
 
-		return $strBuffer;
+		$objElement = new Form($objRow);
+		return $objElement->generate();
 	}
 
 
@@ -945,6 +946,12 @@ abstract class Controller extends System
 			return $image;
 		}
 
+		// Backwards compatibility
+		if ($mode == 'crop')
+		{
+			$mode = 'center_center';
+		}
+
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
@@ -1023,6 +1030,55 @@ abstract class Controller extends System
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
+			}
+
+			// Advanced crop modes
+			switch ($mode)
+			{
+				case 'left_top':
+					$intPositionX = 0;
+					$intPositionY = 0;
+					break;
+
+				case 'center_top':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = 0;
+					break;
+
+				case 'right_top':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = 0;
+					break;
+
+				case 'left_center':
+					$intPositionX = 0;
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'center_center':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'right_center':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'left_bottom':
+					$intPositionX = 0;
+					$intPositionY = -intval($intHeight - $height);
+					break;
+
+				case 'center_bottom':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = -intval($intHeight - $height);
+					break;
+
+				case 'right_bottom':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = -intval($intHeight - $height);
+					break;
 			}
 
 			$strNewImage = imagecreatetruecolor($width, $height);
@@ -1374,7 +1430,7 @@ abstract class Controller extends System
 
 			$arrCache[$strTag] = '';
 
-			// Replace tag
+			// Replace the tag
 			switch (strtolower($elements[0]))
 			{
 				// Date
@@ -1400,12 +1456,31 @@ abstract class Controller extends System
 
 				// E-mail addresses
 				case 'email':
-					if (strlen($elements[1]))
+				case 'email_open':
+				case 'email_url':
+					if ($elements[1] == '')
 					{
-						$this->import('String');
+						$arrCache[$strTag] = '';
+						break;
+					}
 
-						$strEmail = $this->String->encodeEmail($elements[1]);
-						$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+					$this->import('String');
+					$strEmail = $this->String->encodeEmail($elements[1]);
+
+					// Replace the tag
+					switch (strtolower($elements[0]))
+					{
+						case 'email':
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">' . preg_replace('/\?.*$/', '', $strEmail) . '</a>';
+							break;
+
+						case 'email_open':
+							$arrCache[$strTag] = '<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;' . $strEmail . '" class="email">';
+							break;
+
+						case 'email_url':
+							$arrCache[$strTag] = $strEmail;
+							break;
 					}
 					break;
 
@@ -1594,7 +1669,7 @@ abstract class Controller extends System
 						}
 					}
 
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'link':
@@ -1664,7 +1739,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'article':
@@ -1706,7 +1781,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'faq':
@@ -1760,7 +1835,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId));
 					}
 	
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'news':
@@ -1814,7 +1889,7 @@ abstract class Controller extends System
 						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
 					}
 
-					// Replace tag
+					// Replace the tag
 					switch (strtolower($elements[0]))
 					{
 						case 'event':
@@ -2351,7 +2426,7 @@ abstract class Controller extends System
 		$strBuffer = strip_tags($strBuffer, $GLOBALS['TL_CONFIG']['allowedTags']);
 		$arrTags = preg_split('/(\{[^\}]+\})/', $strBuffer, -1, PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
 
-		// Replace tags
+		// Replace the tags
 		foreach ($arrTags as $strTag)
 		{
 			if (strncmp($strTag, '{if', 3) === 0)
@@ -2634,6 +2709,7 @@ abstract class Controller extends System
 		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: public');
 		header('Expires: 0');
+		header('Connection: close');
 
 		$resFile = fopen(TL_ROOT . '/' . $strFile, 'rb');
 		fpassthru($resFile);
@@ -3265,11 +3341,11 @@ abstract class Controller extends System
 			$strLightboxId = 'lightbox';
 		}
 
-		// Store original dimensions
+		// Store the original dimensions
 		$objTemplate->width = $imgSize[0];
 		$objTemplate->height = $imgSize[1];
 
-		// Adjust image size
+		// Adjust the image size
 		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
 		{
 			$arrMargin = deserialize($arrItem['imagemargin']);
@@ -3304,14 +3380,22 @@ abstract class Controller extends System
 		}
 
 		// Image link
-		if (($arrItem['imageUrl'] != '') && TL_MODE == 'FE')
+		if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
 		{
 			$objTemplate->href = $arrItem['imageUrl'];
 			$objTemplate->attributes = '';
 
 			if ($arrItem['fullsize'])
 			{
-				$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
+				{
+					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
+				}
+				else
+				{
+					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+				}
 			}
 		}
 
@@ -3324,6 +3408,7 @@ abstract class Controller extends System
 
 		$objTemplate->src = TL_FILES_URL . $src;
 		$objTemplate->alt = specialchars($arrItem['alt']);
+		$objTemplate->title = specialchars($arrItem['title']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
 		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');

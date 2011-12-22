@@ -302,11 +302,19 @@ class File extends System
 	/**
 	 * Rename the file
 	 * @param string
+	 * @return boolean
 	 */
 	public function renameTo($strNewName)
 	{
-		$this->Files->rename($this->strFile, $strNewName);
-		$this->strFile = $strNewName;
+		$return = $this->Files->rename($this->strFile, $strNewName);
+
+		if ($return)
+		{
+			$this->strFile = $strNewName;
+			$this->arrPathinfo = array();
+		}
+
+		return $return;
 	}
 
 

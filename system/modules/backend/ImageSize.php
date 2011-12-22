@@ -95,7 +95,7 @@ class ImageSize extends Widget
 	{
 		$varInput[0] = parent::validator($varInput[0]);
 		$varInput[1] = parent::validator($varInput[1]);
-		$varInput[2] = preg_replace('/[^a-z0-9]+/', '', $varInput[2]);
+		$varInput[2] = preg_replace('/[^a-z0-9_]+/', '', $varInput[2]);
 
 		return $varInput;
 	}
@@ -125,12 +125,29 @@ class ImageSize extends Widget
 
 		$arrOptions = array();
 
-		foreach ($this->arrOptions as $arrOption)
+		foreach ($this->arrOptions as $strKey=>$arrOption)
 		{
-			$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
-								   specialchars($arrOption['value']),
-								   ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue)) ? ' selected="selected"' : ''),
-								   $arrOption['label']);
+			if (isset($arrOption['value']))
+			{
+				$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
+									   specialchars($arrOption['value']),
+									   ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue)) ? ' selected="selected"' : ''),
+									   $arrOption['label']);
+			}
+			else
+			{
+				$arrOptgroups = array();
+
+				foreach ($arrOption as $arrOptgroup)
+				{
+					$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
+											   specialchars($arrOptgroup['value']),
+											   $this->isSelected($arrOptgroup),
+											   $arrOptgroup['label']);
+				}
+
+				$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+			}
 		}
 
 		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>',

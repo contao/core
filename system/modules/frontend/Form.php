@@ -398,7 +398,7 @@ class Form extends Hybrid
 		}
 
 		// Store values in the database
-		if ($this->storeValues && strlen($this->targetTable))
+		if ($this->storeValues && $this->targetTable != '')
 		{
 			$arrSet = array();
 
@@ -426,6 +426,16 @@ class Form extends Hybrid
 					{
 						$arrSet[$k] = str_replace(TL_ROOT . '/', '', $v['tmp_name']);
 					}
+				}
+			}
+
+			// HOOK: store form data callback
+			if (isset($GLOBALS['TL_HOOKS']['storeFormData']) && is_array($GLOBALS['TL_HOOKS']['storeFormData']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['storeFormData'] as $callback)
+				{
+					$this->import($callback[0]);
+					$arrSet = $this->$callback[0]->$callback[1]($arrSet, $this);
 				}
 			}
 

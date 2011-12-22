@@ -5,6 +5,46 @@ Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
 ### New
+Added advanced image crop modes to define more precisely which part of an image
+shall be preserved when cropping it (see #2422). 
+
+### New
+Support entering the image title in addition to the alternate text (see #3494).
+
+### Improved
+Restore deleted records even if the database schema has changed (see #3550).
+
+### Changed
+Removed the general IE6 warning and added it only to the install tool and the
+back end login screen (see #3646).
+
+### Improved
+If an image link target is another image and the fullscreen view is enabled,
+do not open the target image in a new window but in the lightbox (see #1703).
+
+### New
+Added the methods `protect()` and `unprotect()` to the Folder class (see #2978).
+
+### New
+Added the "storeFormData" hook which is triggered before the form data is
+written into the database (see #3182).
+
+### New
+Added the insert tags "email_open" and "email_url" to ouput the opening link
+tag or the encoded e-mail address only (see #3514).
+
+### Improved
+Do not show the number of comments if a news article forwards to another page
+or external URL (see #3505).
+
+### Improved
+Added the breadcrumb folder navigation to the template editor (see #3684).
+
+### New
+Added support for Google web fonts to the page layout. The fonts are added to
+the page by including a style sheet from the Google APIs.
+
+### New
 Added a "showColumns" option to the list view which makes the core engine
 output the records as table rows (see the member list).
 

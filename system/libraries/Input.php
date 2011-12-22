@@ -389,7 +389,7 @@ class Input
 	 */
 	protected function stripSlashes($varValue)
 	{
-		if ($varValue === null || $varValue == '')
+		if ($varValue == '' || !$this->blnMagicQuotes)
 		{
 			return $varValue;
 		}
@@ -405,12 +405,7 @@ class Input
 			return $varValue;
 		}
 
-		if ($this->blnMagicQuotes)
-		{
-			$varValue = stripslashes($varValue);
-		}
-
-		return $varValue;
+		return stripslashes($varValue);
 	}
 
 

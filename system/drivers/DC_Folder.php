@@ -215,7 +215,7 @@ class DC_Folder extends DataContainer implements listable, editable
 			$this->Session->set('CLIPBOARD', $arrClipboard);
 		}
 
-		// Get session data and toggle nodes
+		// Get the session data and toggle the nodes
 		if ($this->Input->get('tg') == 'all')
 		{
 			$session = $this->Session->getData();
@@ -1545,23 +1545,20 @@ window.addEvent(\'domready\', function() {
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		// Remove protection
+		// Remove the protection
 		if (file_exists(TL_ROOT . '/' . $this->intId . '/.htaccess'))
 		{
-			$objFile = new File($this->intId . '/.htaccess');
-			$objFile->delete();
-
+			$objFolder = new Folder($this->intId);
+			$objFolder->unprotect();
 			$this->log('The protection from folder "'.$this->intId.'" has been removed', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}
 
-		// Protect folder
+		// Protect the folder
 		else
 		{
-			$objFile = new File($this->intId . '/.htaccess');
-			$objFile->write("order deny,allow\ndeny from all");
-			$objFile->close();
-
+			$objFolder = new Folder($this->intId);
+			$objFolder->protect();
 			$this->log('Folder "'.$this->intId.'" has been protected', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
 		}
@@ -1673,12 +1670,11 @@ window.addEvent(\'domready\', function() {
 		static $session;
 		$session = $this->Session->getData();
 
-		// Get session data and toggle nodes
+		// Get the session data and toggle the nodes
 		if ($this->Input->get('tg'))
 		{
 			$session['filetree'][$this->Input->get('tg')] = (isset($session['filetree'][$this->Input->get('tg')]) && $session['filetree'][$this->Input->get('tg')] == 1) ? 0 : 1;
 			$this->Session->setData($session);
-
 			$this->redirect(preg_replace('/(&(amp;)?|\?)tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
@@ -1789,7 +1785,7 @@ window.addEvent(\'domready\', function() {
 
 			$return .= '</div><div style="clear:both"></div></li>';
 
-			// Call next node
+			// Call the next node
 			if (!empty($content) && $session['filetree'][$md5] == 1)
 			{
 				$return .= '<li class="parent" id="filetree_'.$md5.'"><ul class="level_'.$level.'">';

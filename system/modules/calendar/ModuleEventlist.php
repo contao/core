@@ -319,6 +319,8 @@ class ModuleEventlist extends Events
 			$strEvents = "\n" . '<div class="empty">' . $strEmpty . '</div>' . "\n";
 		}
 
+		// See #3672
+		$this->Template->headline = $this->headline;
 		$this->Template->events = $strEvents;
 
 		// Clear the $_GET array (see #2445)

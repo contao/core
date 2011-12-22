@@ -219,9 +219,8 @@ class Automator extends Backend
 		// Check for .htaccess
 		if (!file_exists(TL_ROOT . '/system/tmp/.htaccess'))
 		{
-			$objFile = new File('system/tmp/.htaccess');
-			$objFile->write("order deny,allow\ndeny from all");
-			$objFile->close();
+			$objFolder = new Folder('system/tmp');
+			$objFolder->protect();
 		}
 
 		// Add log entry
