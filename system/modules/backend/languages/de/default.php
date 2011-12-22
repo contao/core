@@ -250,6 +250,24 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Spalte';
 
 
 /**
+ * Images
+ */
+$GLOBALS['TL_LANG']['MSC']['relative']      = 'Relatives Format';
+$GLOBALS['TL_LANG']['MSC']['proportional']  = array('Proportional', 'Die längere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
+$GLOBALS['TL_LANG']['MSC']['box']           = array('An Rahmen anpassen', 'Die kürzere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
+$GLOBALS['TL_LANG']['MSC']['crop']          = 'Exaktes Format';
+$GLOBALS['TL_LANG']['MSC']['left_top']      = array('Links oben', 'Erhält den linken Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_top']    = array('Mitte oben', 'Erhält den mittleren Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_top']     = array('Rechts oben', 'Erhält den rechten Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_center']   = array('Links Mitte', 'Erhält den linken Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_center'] = array('Mitte Mitte', 'Erhält den mittleren Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_center']  = array('Rechts Mitte', 'Erhält den rechten Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_bottom']   = array('Links unten', 'Erhält den linken Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_bottom'] = array('Mitte unten', 'Erhält den mittleren Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_bottom']  = array('Rechts unten', 'Erhält den rechten Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+
+
+/**
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['id']            = array('ID', 'Das Ändern der ID kann die Konsistenz der Daten gefährden!');
@@ -364,9 +382,6 @@ $GLOBALS['TL_LANG']['MSC']['apply']            = 'Anwenden';
 $GLOBALS['TL_LANG']['MSC']['mandatory']        = 'Pflichtfeld';
 $GLOBALS['TL_LANG']['MSC']['create']           = 'Anlegen';
 $GLOBALS['TL_LANG']['MSC']['delete']           = 'Löschen';
-$GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
-$GLOBALS['TL_LANG']['MSC']['crop']             = 'Exaktes Format';
-$GLOBALS['TL_LANG']['MSC']['box']              = 'An Rahmen anpassen';
 $GLOBALS['TL_LANG']['MSC']['protected']        = 'geschützt';
 $GLOBALS['TL_LANG']['MSC']['guests']           = 'nur Gäste';
 $GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update-Modus';

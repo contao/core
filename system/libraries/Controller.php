@@ -946,6 +946,12 @@ abstract class Controller extends System
 			return $image;
 		}
 
+		// Backwards compatibility
+		if ($mode == 'crop')
+		{
+			$mode = 'center_center';
+		}
+
 		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
@@ -1024,6 +1030,55 @@ abstract class Controller extends System
 					$intPositionX = 0;
 					$intPositionY = -intval(($intHeight - $height) / 2);
 				}
+			}
+
+			// Advanced crop modes
+			switch ($mode)
+			{
+				case 'left_top':
+					$intPositionX = 0;
+					$intPositionY = 0;
+					break;
+
+				case 'center_top':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = 0;
+					break;
+
+				case 'right_top':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = 0;
+					break;
+
+				case 'left_center':
+					$intPositionX = 0;
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'center_center':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'right_center':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = -intval(($intHeight - $height) / 2);
+					break;
+
+				case 'left_bottom':
+					$intPositionX = 0;
+					$intPositionY = -intval($intHeight - $height);
+					break;
+
+				case 'center_bottom':
+					$intPositionX = -intval(($intWidth - $width) / 2);
+					$intPositionY = -intval($intHeight - $height);
+					break;
+
+				case 'right_bottom':
+					$intPositionX = -intval($intWidth - $width);
+					$intPositionY = -intval($intHeight - $height);
+					break;
 			}
 
 			$strNewImage = imagecreatetruecolor($width, $height);

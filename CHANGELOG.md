@@ -5,6 +5,10 @@ Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
 ### New
+Added advanced image crop modes to define more precisely which part of an image
+shall be preserved when cropping it (see #2422). 
+
+### New
 Support entering the image title in addition to the alternate text (see #3494).
 
 ### Improved

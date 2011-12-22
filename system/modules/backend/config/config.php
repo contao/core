@@ -190,6 +190,24 @@ $GLOBALS['TL_CACHE'] = array
 
 
 /**
+ * Image crop modes
+ */
+$GLOBALS['TL_CROP'] = array
+(
+	'relative' => array
+	(
+		'proportional', 'box'
+	),
+	'crop' => array
+	(
+		'left_top',    'center_top',    'right_top',
+		'left_center', 'center_center', 'right_center',
+		'left_bottom', 'center_bottom', 'right_bottom'
+	)
+);
+
+
+/**
  * Cron jobs
  */
 $GLOBALS['TL_CRON'] = array

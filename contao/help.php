@@ -88,11 +88,27 @@ class Help extends Backend
 			$rows = array();
 			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
 
-			foreach ($options as $option)
+			foreach ($options as $key=>$option)
 			{
-				if (is_array($arrData['reference'][$option]) && strlen($arrData['reference'][$option][1]))
+				if (is_array($option))
 				{
-					$rows[] = $arrData['reference'][$option];
+					$rows[] = array('colspan', $arrData['reference'][$key]);
+
+					foreach ($option as $opt)
+					{
+						$rows[] = $arrData['reference'][$opt];
+					}
+				}
+				else
+				{
+					if (!is_array($arrData['reference'][$option]))
+					{
+						$rows[] = array('colspan', $arrData['reference'][$option]);
+					}
+					else
+					{
+						$rows[] = $arrData['reference'][$option];
+					}
 				}
 			}
 

@@ -134,21 +134,21 @@ class SelectMenu extends Widget
 										 specialchars($arrOption['value']),
 										 $this->isSelected($arrOption),
 										 $arrOption['label']);
-
-				continue;
 			}
-
-			$arrOptgroups = array();
-
-			foreach ($arrOption as $arrOptgroup)
+			else
 			{
-				$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
-										   specialchars($arrOptgroup['value']),
-										   $this->isSelected($arrOptgroup),
-										   $arrOptgroup['label']);
-			}
+				$arrOptgroups = array();
 
-			$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+				foreach ($arrOption as $arrOptgroup)
+				{
+					$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
+											   specialchars($arrOptgroup['value']),
+											   $this->isSelected($arrOptgroup),
+											   $arrOptgroup['label']);
+				}
+
+				$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+			}
 		}
 
 		// Chosen

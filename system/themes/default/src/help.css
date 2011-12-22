@@ -75,6 +75,13 @@ h2 {
 	width:200px;
 	font-weight:bold;
 }
+td[colspan="2"] {
+	font-size:16px;
+	padding-top:36px;
+}
+tr:first-child td[colspan="2"] {
+	padding-top:12px;
+}
 
 /* IE 7 fix */
 .ie7 #container {
