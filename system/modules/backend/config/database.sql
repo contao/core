@@ -438,7 +438,8 @@ CREATE TABLE `tl_page` (
   `stop` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`),
-  KEY `alias` (`alias`)
+  KEY `alias` (`alias`),
+  KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
