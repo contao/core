@@ -160,50 +160,80 @@ abstract class Frontend extends Controller
 	 * Try to find a root page based on language and URL
 	 * @return Database_Result
 	 */
-	protected function getRootPageFromUrl()
+	protected function getRootPageFromUrl($blnDieWhenNotFound = true)
 	{
-		$time = time();
-		$host = $this->Environment->host;
-
-		// The language is set in the URL
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
+		if(BE_USER_LOGGED_IN)
 		{
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
-										  ->limit(1)
-										  ->execute($host, $this->Input->get('language'));
-
-			// No matching root page found
-			if ($objRootPage->numRows < 1)
-			{
-				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $host . '", language "'. $this->Input->get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
-				die('No root page found');
-			}
+			$strPublishCond = '';
 		}
 		else
 		{
-			$accept_language = $this->Environment->httpAcceptLanguage;
-
-			// Find the matching root pages (thanks to Andreas Schempp)
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . (!empty($accept_language) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . (!empty($accept_language) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
-										  ->limit(1)
-										  ->execute($host);
-
-			// No matching root page found
-			if ($objRootPage->numRows < 1)
+			$intTime = time();
+			$strPublishCond = '
+				AND (start = \'\' OR start < ' . $intTime . ')
+				AND (stop = \'\' OR stop > ' . $intTime . ')
+				AND published = 1
+			';
+		}
+		
+		if($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
+		{
+			$strLanguage = $this->Input->get('language');
+			$strLangMatch = 'STRCMP(language, ?) = 0';
+		}
+		else
+		{
+			$arrAcceptLanguages = $this->Environment->httpAcceptLanguage;
+			if(!empty($arrAcceptLanguages))
 			{
-				header('HTTP/1.1 404 Not Found');
-				$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
-				die('No root page found');
+				$strLanguage = implode(',', array_reverse($arrAcceptLanguages));
+				$strLangMatch = 'FIND_IN_SET(language, ?)';
 			}
-
-			// Redirect to the language root (e.g. en/)
-			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
+			else
 			{
-				$this->redirect($objRootPage->language . '/', 302);
+				$strLanguage = 0;
+				$strLangMatch = '?';
 			}
 		}
-
+		
+		$objRootPage = $this->Database->prepare('
+			SELECT	id, dns, subdomains, language, fallback
+			FROM	(
+						SELECT	id, dns, subdomains, language, fallback, sorting,
+								? AS domain
+								' . $strLangMatch . ' AS langMatch
+						FROM	tl_page
+						WHERE	type = \'root\'
+						' . $strPublishCond . '
+					) AS r
+			WHERE	(langMatch != 0 OR fallback = 1)
+			AND		(
+					dns = \'\'
+				OR	dns = domain
+				OR	(subdomains AND domain LIKE CONCAT(\'%.\', dns))
+			)
+			ORDER BY subdomains, LENGTH(dns) DESC, langMatch DESC, sorting
+		')->limit(1)->execute(
+			$this->Environment->host,
+			$strLanguage
+		);
+		
+		// No matching root page found
+		// Oliver Hoff: getter with side effects == bad
+		if($objRootPage->numRows < 1 && $blnDieWhenNotFound)
+		{
+			header('HTTP/1.1 404 Not Found');
+			$this->log('No root page found (host "' . $this->Environment->host . '", language "'. $strLanguage .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
+			die('No root page found');
+		}
+		
+		// Redirect to the language root (e.g. en/)
+		// Oliver Hoff: getter with side effects == bad
+		elseif($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
+		{
+			$this->redirect($objRootPage->language . '/', 302);
+		}
+		
 		return $objRootPage;
 	}
 

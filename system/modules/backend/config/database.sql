@@ -405,6 +405,7 @@ CREATE TABLE `tl_page` (
   `target` char(1) NOT NULL default '',
   `fallback` char(1) NOT NULL default '',
   `dns` varchar(255) NOT NULL default '',
+  `subdomains` char(1) NOT NULL default '',
   `staticFiles` varchar(255) NOT NULL default '',
   `staticSystem` varchar(255) NOT NULL default '',
   `staticPlugins` varchar(255) NOT NULL default '',

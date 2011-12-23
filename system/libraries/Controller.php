@@ -673,6 +673,7 @@ abstract class Controller extends System
 		// Set the root ID and title
 		if ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0))
 		{
+			$objPage->rootPage = $objParentPage;
 			$objPage->rootId = $objParentPage->id;
 			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;

@@ -689,6 +689,11 @@ abstract class System
 		{
 			$strPath = '/';
 		}
+		
+		if ($strDomain === null && !empty($GLOBALS['objPage']->domain))
+		{
+			$strDomain = ($GLOBALS['objPage']->rootPage->subdomains ? '.' : '') . $GLOBALS['objPage']->domain; 
+		}
 
 		setcookie($strName, $varValue, $intExpires, $strPath, $strDomain, $blnSecure);
 	}

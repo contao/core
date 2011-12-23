@@ -43,6 +43,7 @@ $GLOBALS['TL_LANG']['tl_page']['redirect']       = array('Weiterleitungstyp', 'B
 $GLOBALS['TL_LANG']['tl_page']['jumpTo']         = array('Weiterleitungsseite', 'Bitte wählen Sie die Seite aus, zu der Besucher weitergeleitet werden. Wenn Sie keine Zielseite auswählen, wird automatisch zur ersten regulären Unterseite weitergeleitet.');
 $GLOBALS['TL_LANG']['tl_page']['fallback']       = array('Sprachen-Fallback', 'Diese Seite anzeigen, wenn es keine in der Sprache des Besuchers gibt.');
 $GLOBALS['TL_LANG']['tl_page']['dns']            = array('Domainname', 'Hier können Sie den Zugriff auf die Webseite auf einen bestimmten Domainnamen beschränken.');
+$GLOBALS['TL_LANG']['tl_page']['subdomains']     = array('Subdomains einschließen', 'Der Zugriff ist, neben der angegebenen Domain, auch über alle derren Subdomains möglich. Diese Funktion hat keine Wirkung, wenn keine Domainname angegeben wurde.');
 $GLOBALS['TL_LANG']['tl_page']['adminEmail']     = array('E-Mail-Adresse des Webseiten-Administrators', 'Automatisch generierte Systemnachrichten wie z.B. Bestätigungsmails an diese Adresse versenden.');
 $GLOBALS['TL_LANG']['tl_page']['dateFormat']     = array('Datumsformat', 'Der Datumsformat-String wird mit der PHP-Funktion date() geparst.');
 $GLOBALS['TL_LANG']['tl_page']['timeFormat']     = array('Zeitformat', 'Der Zeitformat-String wird mit der PHP-Funktion date() geparst.');
