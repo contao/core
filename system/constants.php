@@ -58,15 +58,15 @@ define('SWITCH_ORDER', true);
  */
 define('VERSION', '2.11');
 define('BUILD', 'beta1');
+define('CODEMIRROR', '2.2');
 define('DATEPICKER', '1.17');
-define('CODEMIRROR', '2.16');
 define('FANCYUPLOAD', '3.0');
 define('HIGHLIGHTER', '3.0.83');
-define('MEDIABOX', '1.3.4');
-define('MOOTOOLS', '1.4.1');
+define('HTML5SHIM', '3');
+define('MEDIABOX', '1.4.6');
+define('MOOTOOLS', '1.4.2');
 define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
-define('HTML5SHIM', '1.6.2');
 
 
 /**

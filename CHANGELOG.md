@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Updated
+Updated all plugins to their latest versions.
+
 ### Improved
 Optionally limit the total number of images in a gallery (see #2652).
 
