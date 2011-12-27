@@ -622,11 +622,11 @@ var Chosen = new Class({
 					found = false;
 					result_id = option.dom_id
 
-					if (regex.test(option.html)){
+					if (regex.test(option.text)){
 						found = true;
 						results += 1;
-					}else if (option.html.indexOf(" ") >= 0 || option.html.indexOf("[") === 0){
-						parts = option.html.replace(/\[|\]/g, "").split(" ");
+					}else if (option.text.indexOf(" ") >= 0 || option.text.indexOf("[") === 0){
+						parts = option.text.replace(/\[|\]/g, "").split(" ");
 
 						if (parts.length){
 							parts.each(function(part){
@@ -929,7 +929,7 @@ var SelectParser = new Class({
 
 	add_node: function(child){
 
-		if (child.nodeName === "OPTGROUP"){
+		if (child.nodeName.toUpperCase() === "OPTGROUP"){
 			this.add_group(child);
 		} else {
 			this.add_option(child);
@@ -954,7 +954,7 @@ var SelectParser = new Class({
 
 	add_option: function(option, group_position, group_disabled){
 
-		if (option.nodeName === "OPTION") {
+		if (option.nodeName.toUpperCase() === "OPTION") {
 
 			if (option.text !== ""){
 				if (group_position != null) {
@@ -964,9 +964,9 @@ var SelectParser = new Class({
 				this.parsed.push({
 					array_index: this.parsed.length,
 					options_index: this.options_index,
-					value: option.value,
-					text: option.text,
-					html: option.innerHTML,
+					value: option.get("value"),
+					text: option.get("text").trim(),
+					html: option.get("html"),
 					selected: option.selected,
 					disabled: group_disabled === true ? group_disabled : option.disabled,
 					group_array_index: group_position
