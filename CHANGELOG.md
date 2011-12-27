@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Updated
+Updated TinyMCE to version 3.4.7 (see #3601).
+
 ### New
 Added advanced image crop modes to define more precisely which part of an image
 shall be preserved when cropping it (see #2422). 
