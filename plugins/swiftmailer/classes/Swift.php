@@ -22,7 +22,7 @@ abstract class Swift
   static $initPath;
   
   /** Swift Mailer Version number generated during dist release process */
-  const VERSION = '4.1.1';
+  const VERSION = '4.1.4';
   
   /**
    * Internal autoloader for spl_autoload_register().
@@ -50,7 +50,7 @@ abstract class Swift
       require self::$initPath;
     }
 
-    require_once $path;
+    require $path;
   }
   
   /**
