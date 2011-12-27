@@ -34,7 +34,7 @@
  */
 $GLOBALS['TL_LANG']['tl_module']['news_archives']      = array('Nachrichtenarchive', 'Bitte wählen Sie ein oder mehrere Nachrichtenarchive.');
 $GLOBALS['TL_LANG']['tl_module']['news_featured']      = array('Hervorgehobene Beiträge', 'Hier legen Sie fest, wie hervorgehobene Beiträge gehandhabt werden.');
-$GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['news_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge begrenzen. Geben Sie 0 ein, um alle anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['news_jumpToCurrent'] = array('Kein Zeitraum ausgewählt', 'Hier legen Sie fest, was angezeigt wird, wenn kein Zeitraum ausgewählt ist.');
 $GLOBALS['TL_LANG']['tl_module']['news_readerModule']  = array('Nachrichtenleser', 'Automatisch zum Nachrichtenleser wechseln wenn ein Beitrag ausgewählt wurde.');
 $GLOBALS['TL_LANG']['tl_module']['news_metaFields']    = array('Meta-Felder', 'Hier können Sie die Meta-Felder auswählen.');

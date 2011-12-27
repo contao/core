@@ -88,6 +88,7 @@ CREATE TABLE `tl_content` (
   `useHomeDir` char(1) NOT NULL default '',
   `perRow` smallint(5) unsigned NOT NULL default '0',
   `perPage` smallint(5) unsigned NOT NULL default '0',
+  `numberOfItems` smallint(5) unsigned NOT NULL default '0',
   `sortBy` varchar(32) NOT NULL default '',
   `galleryTpl` varchar(64) NOT NULL default '',
   `cteAlias` int(10) unsigned NOT NULL default '0',

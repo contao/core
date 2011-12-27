@@ -194,6 +194,13 @@ class ContentGallery extends ContentElement
 		}
 
 		$images = array_values($images);
+
+		// Limit the total number of items (see #2652)
+		if ($this->numberOfItems > 0)
+		{
+			$images = array_slice($images, 0, $this->numberOfItems);
+		}
+
 		$total = count($images);
 		$limit = $total;
 		$offset = 0;
