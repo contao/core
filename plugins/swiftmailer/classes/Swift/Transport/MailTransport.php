@@ -75,6 +75,7 @@ class Swift_Transport_MailTransport implements Swift_Transport
    * This string is formatted for sprintf() where %s is the sender address.
    * 
    * @param string $params
+   * @return Swift_Transport_MailTransport
    */
   public function setExtraParams($params)
   {
@@ -97,7 +98,7 @@ class Swift_Transport_MailTransport implements Swift_Transport
   /**
    * Send the given Message.
    * 
-   * Recipient/sender data will be retreived from the Message API.
+   * Recipient/sender data will be retrieved from the Message API.
    * The return value is the number of recipients who were accepted for delivery.
    * 
    * @param Swift_Mime_Message $message
@@ -126,8 +127,14 @@ class Swift_Transport_MailTransport implements Swift_Transport
     $toHeader = $message->getHeaders()->get('To');
     $subjectHeader = $message->getHeaders()->get('Subject');
     
+    if (!$toHeader)
+    {
+      throw new Swift_TransportException(
+        'Cannot send message without a recipient'
+        );
+    }
     $to = $toHeader->getFieldBody();
-    $subject = $subjectHeader->getFieldBody();
+    $subject = $subjectHeader ? $subjectHeader->getFieldBody() : '';
     
     $reversePath = $this->_getReversePath($message);
     

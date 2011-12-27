@@ -35,6 +35,6 @@
 $GLOBALS['TL_LANG']['tl_module']['rss_cache']         = array('Cache-Verfallszeit', 'Hier können Sie festlegen, wie lange der RSS-Feed zwischengespeichert wird.');
 $GLOBALS['TL_LANG']['tl_module']['rss_feed']          = array('Feed-URLs', 'Bitte geben Sie die URL eines oder mehrerer RSS-Feeds ein.');
 $GLOBALS['TL_LANG']['tl_module']['rss_template']      = array('Feed-Template', 'Hier können Sie das Feed-Template auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge festlegen. Geben Sie 0 ein, um alle anzuzeigen.');
+$GLOBALS['TL_LANG']['tl_module']['rss_numberOfItems'] = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge begrenzen. Geben Sie 0 ein, um alle anzuzeigen.');
 
 ?>

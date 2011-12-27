@@ -132,9 +132,9 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'hyperlink'                   => '{type_legend},type,headline;{link_legend},url,target,linkTitle,rel,embed;{imglink_legend:hide},useImage;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'toplink'                     => '{type_legend},type,linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'image'                       => '{type_legend},type,headline;{source_legend},singleSRC;{image_legend},alt,title,size,imagemargin,imageUrl,fullsize,caption;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
-		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,useHomeDir;{image_legend},size,imagemargin,perRow,perPage,sortBy,fullsize;{template_legend:hide},galleryTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
+		'gallery'                     => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,imagemargin,perRow,fullsize,perPage,numberOfItems;{template_legend:hide},galleryTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'download'                    => '{type_legend},type,headline;{source_legend},singleSRC;{dwnconfig_legend},linkTitle;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
-		'downloads'                   => '{type_legend},type,headline;{source_legend},multiSRC,useHomeDir;{dwnconfig_legend},sortBy;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
+		'downloads'                   => '{type_legend},type,headline;{source_legend},multiSRC,sortBy,useHomeDir;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'alias'                       => '{type_legend},type;{include_legend},cteAlias;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
 		'article'                     => '{type_legend},type;{include_legend},articleAlias;{protected_legend:hide},protected',
 		'teaser'                      => '{type_legend},type;{include_legend},article;{protected_legend:hide},protected;{expert_legend:hide},guests,invisible,cssID,space',
@@ -472,7 +472,8 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['useHomeDir'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12')
 		),
 		'perRow' => array
 		(
@@ -486,6 +487,13 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['perPage'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+		),
+		'numberOfItems' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['numberOfItems'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')

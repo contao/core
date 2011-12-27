@@ -257,7 +257,7 @@ class tl_templates extends Backend
 
 					// Update the templates cache
 					$objCache = FileCache::getInstance('templates');
-					$strKey = preg_replace('/^.*\/([^\/]+)\.[a-z0-9]{3,5}$/i', '$1', $strOriginal);
+					$strKey = basename($strOriginal);
 					$objCache->$strKey = $strTarget;
 
 					$this->redirect($this->getReferer());

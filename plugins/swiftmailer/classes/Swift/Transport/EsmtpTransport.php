@@ -45,6 +45,7 @@ class Swift_Transport_EsmtpTransport
     'port' => 25,
     'timeout' => 30,
     'blocking' => 1,
+    'tls' => false,
     'type' => Swift_Transport_IoBuffer::TYPE_SOCKET
     );
   
@@ -64,6 +65,7 @@ class Swift_Transport_EsmtpTransport
   /**
    * Set the host to connect to.
    * @param string $host
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setHost($host)
   {
@@ -83,6 +85,7 @@ class Swift_Transport_EsmtpTransport
   /**
    * Set the port to connect to.
    * @param int $port
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setPort($port)
   {
@@ -102,6 +105,7 @@ class Swift_Transport_EsmtpTransport
   /**
    * Set the connection timeout.
    * @param int $timeout seconds
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setTimeout($timeout)
   {
@@ -122,10 +126,18 @@ class Swift_Transport_EsmtpTransport
   /**
    * Set the encryption type (tls or ssl)
    * @param string $encryption
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setEncryption($enc)
   {
-    $this->_params['protocol'] = $enc;
+    if ('tls' == $enc)
+    {
+      $this->_params['protocol'] = 'tcp';
+      $this->_params['tls'] = true;
+    } else {
+      $this->_params['protocol'] = $enc;
+      $this->_params['tls'] = false;
+    }
     return $this;
   }
   
@@ -135,12 +147,13 @@ class Swift_Transport_EsmtpTransport
    */
   public function getEncryption()
   {
-    return $this->_params['protocol'];
+    return $this->_params['tls'] ? 'tls' : $this->_params['protocol'];
   }
   
   /**
    * Sets the sourceIp
    * @param string $source
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setSourceIp($source)
   {
@@ -160,6 +173,7 @@ class Swift_Transport_EsmtpTransport
   /**
    * Set ESMTP extension handlers.
    * @param Swift_Transport_EsmtpHandler[] $handlers
+   * @return Swift_Transport_EsmtpTransport
    */
   public function setExtensionHandlers(array $handlers)
   {
@@ -256,6 +270,34 @@ class Swift_Transport_EsmtpTransport
     catch (Swift_TransportException $e)
     {
       return parent::_doHeloCommand();
+    }
+
+    if ($this->_params['tls'])
+    {
+      try
+      {
+        $this->executeCommand("STARTTLS\r\n", array(220));
+        
+        if (!$this->_buffer->startTLS())
+        {
+          throw new Swift_TransportException('Unable to connect with TLS encryption');
+        }
+        
+        try
+        {
+          $response = $this->executeCommand(
+            sprintf("EHLO %s\r\n", $this->_domain), array(250)
+            );
+        }
+        catch (Swift_TransportException $e)
+        {
+          return parent::_doHeloCommand();
+        }
+      }
+      catch (Swift_TransportException $e)
+      {
+        $this->_throwException($e);
+      }
     }
 
     $this->_capabilities = $this->_getCapabilities($response);

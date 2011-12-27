@@ -4,6 +4,19 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Updated
+Updated all plugins to their latest versions.
+
+### Improved
+Optionally limit the total number of images in a gallery (see #2652).
+
+### Improved
+The file picker now accepts a second argument to filter by file type. Separate
+multiple file names with comma, e.g. _gif,jpg,png_ (see #2618).
+
+### Updated
+Updated TinyMCE to version 3.4.7 (see #3601).
+
 ### New
 Added advanced image crop modes to define more precisely which part of an image
 shall be preserved when cropping it (see #2422). 

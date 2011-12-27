@@ -79,7 +79,10 @@ class PagePicker extends Backend
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['fpHeadline'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->options = $this->createFileList(true);
+
+		// Allow custom filters (see #2618)
+		$strFilter = ($this->Input->get('filter') != 'undefined') ? $this->Input->get('filter') : 'gif,jpg,jpeg,png';
+		$this->Template->options = $this->createFileList($strFilter);
 
 		$this->Template->output();
 	}

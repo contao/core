@@ -65,7 +65,11 @@ class Swift_KeyCache_DiskKeyCache implements Swift_KeyCache
   {
     $this->_stream = $stream;
     $this->_path = $path;
-    $this->_quotes = ini_get('magic_quotes_runtime');
+
+    if (function_exists('get_magic_quotes_runtime') && @get_magic_quotes_runtime() == 1)
+    {
+      $this->_quotes = true;
+    }
   }
 
   /**
@@ -250,7 +254,10 @@ class Swift_KeyCache_DiskKeyCache implements Swift_KeyCache
       {
         $this->clearKey($nsKey, $itemKey);
       }
-      rmdir($this->_path . '/' . $nsKey);
+      if (is_dir($this->_path . '/' . $nsKey))
+      {
+        rmdir($this->_path . '/' . $nsKey);
+      }
       unset($this->_keys[$nsKey]);
     }
   }

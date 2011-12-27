@@ -1637,6 +1637,7 @@ abstract class Controller extends System
 
 								case 'forward':
 									$time = time();
+									$objNextPage->target = false; // see #3194
 
 									if (!$objNextPage->jumpTo)
 									{

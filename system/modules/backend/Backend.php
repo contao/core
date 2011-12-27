@@ -459,17 +459,23 @@ abstract class Backend extends Controller
 
 	/**
 	 * Get all allowed files and return them as string
-	 * @param boolean
+	 * @param string
 	 * @param boolean
 	 * @return string
 	 */
-	public function createFileList($blnFilterImages=false, $filemount=false)
+	public function createFileList($strFilter='', $filemount=false)
 	{
+		// Backwards compatibility
+		if ($strFilter === true)
+		{
+			$strFilter = 'gif,jpg,jpeg,png';
+		}
+
 		$this->import('BackendUser', 'User');
 
 		if ($this->User->isAdmin)
 		{
-			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $blnFilterImages);
+			return $this->doCreateFileList($GLOBALS['TL_CONFIG']['uploadPath'], -1, $strFilter);
 		}
 
 		$return = '';
@@ -490,7 +496,7 @@ abstract class Backend extends Controller
 			}
 
 			$processed[] = $path;
-			$return .= $this->doCreateFileList($path, -1, $blnFilterImages);
+			$return .= $this->doCreateFileList($path, -1, $strFilter);
 		}
 
 		return $return;
@@ -501,11 +507,17 @@ abstract class Backend extends Controller
 	 * Recursively get all allowed files and return them as string
 	 * @param integer
 	 * @param integer
-	 * @param boolean
+	 * @param string
 	 * @return string
 	 */
-	protected function doCreateFileList($strFolder=null, $level=-1, $blnFilterImages=false)
+	protected function doCreateFileList($strFolder=null, $level=-1, $strFilter='')
 	{
+		// Backwards compatibility
+		if ($strFilter === true)
+		{
+			$strFilter = 'gif,jpg,jpeg,png';
+		}
+
 		$arrPages = scan(TL_ROOT . '/' . $strFolder);
 
 		// Empty folder
@@ -535,18 +547,23 @@ abstract class Backend extends Controller
 			// Folders
 			if (is_dir(TL_ROOT . '/' . $strFolder . '/' . $strFile))
 			{
-				$strFolders .=  $this->doCreateFileList($strFolder . '/' . $strFile, $level, $blnFilterImages);
-			}
-
-			// Filter images
-			elseif ($blnFilterImages && !preg_match('/\.gif$|\.jpg$|\.jpeg$|\.png$/i', $strFile))
-			{
-				continue;
+				$strFolders .=  $this->doCreateFileList($strFolder . '/' . $strFile, $level, $strFilter);
 			}
 
 			// Files
-			elseif ($strFile != 'meta.txt')
+			else
 			{
+				if ($strFile == 'meta.txt')
+				{
+					continue;
+				}
+
+				// Filter images
+				if ($strFilter != '' && !preg_match('/\.(' . str_replace(',', '|', $strFilter) . ')$/i', $strFile))
+				{
+					continue;
+				}
+
 				$strFiles .= sprintf('<option value="%s"%s>%s</option>', $strFolder . '/' . $strFile, (($strFolder . '/' . $strFile == $this->Input->get('value')) ? ' selected="selected"' : ''), specialchars($strFile));
 			}
 		}
