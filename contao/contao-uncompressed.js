@@ -1010,8 +1010,9 @@ var Backend =
 	/**
 	 * Open the file picker wizard in a modal window
 	 * @param string
+	 * @param string
 	 */
-	pickFile: function(id) {
+	pickFile: function(id, filter) {
 		var width = 320;
 		var height = 112;
 
@@ -1019,7 +1020,7 @@ var Backend =
 		Backend.ppValue = $(id).value;
 
 		Backend.getScrollOffset();
-		window.open($$('base')[0].href + 'contao/file.php?value=' + Backend.ppValue, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-(width/2)) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+		window.open($$('base')[0].href + 'contao/file.php?value=' + Backend.ppValue + '&filter=' + filter, '', 'width='+width+',height='+height+',modal=yes,left='+(Backend.xMousePosition ? (Backend.xMousePosition-(width/2)) : 200)+',top='+(Backend.yMousePosition ? (Backend.yMousePosition-(height/2)+80) : 100)+',location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
 	},
 
 	/**

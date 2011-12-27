@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Improved
+The file picker now accepts a second argument to filter by file type. Separate
+multiple file names with comma, e.g. _gif,jpg,png_ (see #2618).
+
 ### Updated
 Updated TinyMCE to version 3.4.7 (see #3601).
 
