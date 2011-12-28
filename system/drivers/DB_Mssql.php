@@ -212,6 +212,16 @@ class DB_Mssql extends Database
 	 */
 	protected function get_size_of($strTable) {}
 
+
+	/**
+	 * Return the next autoincrement ID of a table
+	 * @param string
+	 * @return integer
+	 * @todo implement
+	 */
+	protected function get_next_id($strTable) {}
+
+
 	/**
 	 * Create a Database_Statement object
 	 * @param resource
