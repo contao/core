@@ -334,6 +334,7 @@ class DataContainer extends Backend
   <script>
   window.addEvent("domready", function() {
     new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+      draggable:false,
       toggle:$$("#toggle_' . $objWidget->id . '"),
       format:"' . $format . '",
       positionOffset:{x:-197,y:-182}' . $time . ',
