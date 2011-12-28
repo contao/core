@@ -142,6 +142,9 @@ class Config
 			include(TL_ROOT . '/system/config/localconfig.php');
 		}
 
+		// Load the agent file
+		include(TL_ROOT . '/system/config/agents.php');
+
 		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
 		{

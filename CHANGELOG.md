@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Changed
+Make the user agent and OS list in the `Environment` class editable (see #3410).
+
 ### Updated
 Updated all plugins to their latest versions.
 

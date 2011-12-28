@@ -426,144 +426,36 @@ class Environment
 		$return = new stdClass();
 		$return->string = $ua;
 
-		// Operating system (check Windows CE before Windows and Android before Linux!)
-		switch (true)
+		$os = 'unknown';
+		$mobile = false;
+		$browser = 'other';
+		$shorty  = '';
+		$version = '';
+
+		// Operating system
+		foreach ($GLOBALS['TL_CONFIG']['os'] as $k=>$v)
 		{
-			case $this->has($ua, 'Macintosh'):
-				$os = 'mac';
-				$mobile = false;
+			if (stripos($ua, $k) !== false)
+			{
+				$os = $v['os'];
+				$mobile = $v['mobile'];
 				break;
-
-			case $this->has($ua, 'Windows CE'):
-			case $this->has($ua, 'Windows Phone'):
-				$os = 'win-ce';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Windows'):
-				$os = 'win';
-				$mobile = false;
-				break;
-
-			case $this->has($ua, 'iPad'):
-			case $this->has($ua, 'iPhone'):
-			case $this->has($ua, 'iPod'):
-				$os = 'ios';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Android'):
-				$os = 'android';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Blackberry'):
-				$os = 'blackberry';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Symbian'):
-				$os = 'symbian';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'WebOS'):
-				$os = 'webos';
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Linux'):
-			case $this->has($ua, 'FreeBSD'):
-			case $this->has($ua, 'OpenBSD'):
-			case $this->has($ua, 'NetBSD'):
-				$os = 'unix';
-				$mobile = false;
-				break;
-
-			default;
-				$os = 'unknown';
-				$mobile = false;
-				break;
+			}
 		}
 
 		$return->os = $os;
 
-		// Browser and version (check OmniWeb before Safari and Opera Mini/Mobi before Opera!)
-		switch (true)
+
+		// Browser and version
+		foreach ($GLOBALS['TL_CONFIG']['browser'] as $k=>$v)
 		{
-			case $this->has($ua, 'MSIE'):
-				$browser = 'ie';
-				$shorty  = 'ie';
-				$version = preg_replace('/^.*?MSIE (\d+).*$/', '$1', $ua);
+			if (stripos($ua, $k) !== false)
+			{
+				$browser = $v['browser'];
+				$shorty  = $v['shorty'];
+				$version = preg_replace($v['version'], '$1', $ua);
 				break;
-
-			case $this->has($ua, 'Firefox'):
-				$browser = 'firefox';
-				$shorty  = 'fx';
-				$version = preg_replace('/^.*Firefox\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'Chrome'):
-				$browser = 'chrome';
-				$shorty  = 'ch';
-				$version = preg_replace('/^.*Chrome\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'OmniWeb'):
-				$browser = 'omniweb';
-				$shorty  = 'ow';
-				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'Safari'):
-				$browser = 'safari';
-				$shorty  = 'sf';
-				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'Opera Mini'):
-				$browser = 'opera-mini';
-				$shorty  = 'oi';
-				$version = preg_replace('/^.*Opera Mini\/(\d+).*$/', '$1', $ua);
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Opera Mobi'):
-				$browser = 'opera-mobile';
-				$shorty  = 'om';
-				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Opera'):
-				$browser = 'opera';
-				$shorty  = 'op';
-				$version = preg_replace('/^.*Version\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'IEMobile'):
-				$browser = 'ie-mobile';
-				$shorty  = 'im';
-				$version = preg_replace('/^.*IEMobile (\d+).*$/', '$1', $ua);
-				$mobile = true;
-				break;
-
-			case $this->has($ua, 'Camino'):
-				$browser = 'camino';
-				$shorty  = 'ca';
-				$version = preg_replace('/^.*Camino\/(\d+).*$/', '$1', $ua);
-				break;
-
-			case $this->has($ua, 'Konqueror'):
-				$browser = 'konqueror';
-				$shorty  = 'ko';
-				$version = preg_replace('/^.*Konqueror\/(\d+).*$/', '$1', $ua);
-				break;
-
-			default:
-				$browser = 'other';
-				$shorty  = '';
-				$version = '';
+			}
 		}
 
 		$return->class = $os . ' ' . $browser;
@@ -586,18 +478,6 @@ class Environment
 		$return->mobile  = $mobile;
 
 		return $return;
-	}
-
-
-	/**
-	 * Test the user agent string for a certain keyword
-	 * @param string
-	 * @param string
-	 * @return boolean
-	 */
-	protected function has($haystack, $needle)
-	{
-		return (stripos($haystack, $needle) !== false);
 	}
 }
 
