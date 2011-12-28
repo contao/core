@@ -25,18 +25,13 @@
   <?php echo $this->deadline->generateWithError(); ?> <img src="<?php echo TL_PLUGINS_URL; ?>plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_<?php echo $this->deadline->id; ?>" style="vertical-align:-6px">
   <script>
   window.addEvent('domready', function() {
-    new DatePicker('#ctrl_<?php echo $this->deadline->name; ?>', {
-      allowEmpty:true,
-      toggleElements:'#toggle_<?php echo $this->deadline->id; ?>',
-      pickerClass:'datepicker_dashboard',
-      format:'<?php echo $GLOBALS['TL_CONFIG']['dateFormat']; ?>',
-      inputOutputFormat:'<?php echo $GLOBALS['TL_CONFIG']['dateFormat']; ?>',
-      positionOffset:{x:130,y:-185},
-      startDay:<?php echo $GLOBALS['TL_LANG']['MSC']['weekOffset']; ?>,
-      days:['<?php echo implode("','", $GLOBALS['TL_LANG']['DAYS']); ?>'],
-      dayShort:<?php echo $GLOBALS['TL_LANG']['MSC']['dayShortLength']; ?>,
-      months:['<?php echo implode("','", $GLOBALS['TL_LANG']['MONTHS']); ?>'],
-      monthShort:<?php echo $GLOBALS['TL_LANG']['MSC']['monthShortLength']; ?> 
+    new Picker.Date($$('#ctrl_<?php echo $this->deadline->name; ?>'), {
+      toggle:$$('#toggle_<?php echo $this->deadline->id; ?>'),
+      format:"<?php echo Date::formatToJs($GLOBALS['TL_CONFIG']['dateFormat']); ?>",
+      positionOffset:{x:-197,y:-182},
+      pickerClass:"datepicker_dashboard",
+      useFadeInOut:!Browser.ie,
+      startDay:<?php echo $GLOBALS['TL_LANG']['MSC']['weekOffset']; ?>
     });
   });
   </script>

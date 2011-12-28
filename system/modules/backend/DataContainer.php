@@ -313,7 +313,7 @@ class DataContainer extends Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = $GLOBALS['TL_CONFIG'][$rgxp.'Format'];
+			$format = Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 
 			switch ($rgxp)
 			{
@@ -322,7 +322,7 @@ class DataContainer extends Backend
 					break;
 
 				case 'time':
-					$time = ",\n      timePickerOnly:true";
+					$time = ",\n      pickOnly:\"time\"";
 					break;
 
 				default:
@@ -332,19 +332,15 @@ class DataContainer extends Backend
 
 			$datepicker = ' <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
-  window.addEvent(\'domready\', function() {
-    new DatePicker(\'#ctrl_' . $objWidget->id . '\', {
-      allowEmpty:true,
-      toggleElements:\'#toggle_' . $objWidget->id . '\',
-      pickerClass:\'datepicker_dashboard\',
-      format:\'' . $format . '\',
-      inputOutputFormat:\'' . $format . '\',
-      positionOffset:{x:130,y:-185}' . $time . ',
+  window.addEvent("domready", function() {
+    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+      toggle:$$("#toggle_' . $objWidget->id . '"),
+      format:"' . $format . '",
+      positionOffset:{x:-197,y:-182}' . $time . ',
+      pickerClass:"datepicker_dashboard",
+      useFadeInOut:!Browser.ie,
       startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      days:[\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
-      dayShort:' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
-      months:[\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
-      monthShort:' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
+      titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
     });
   });
   </script>';

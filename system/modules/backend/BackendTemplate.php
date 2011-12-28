@@ -175,6 +175,31 @@ class BackendTemplate extends Template
 			. 'CONTAO_SCRIPT_URL="' . TL_SCRIPT_URL . '",'
 			. 'REQUEST_TOKEN="' . REQUEST_TOKEN . '";';
 	}
+
+
+	/**
+	 * Return the datepicker string
+	 * @return string
+	 */
+	protected function getDateString()
+	{
+		return 'window.addEvent("domready",function(){'
+			. 'Locale.define("en-US","Date",{'
+				. 'months:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS']) . '"],'
+				. 'days:["' . implode('","', $GLOBALS['TL_LANG']['DAYS']) . '"],'
+				. 'months_abbr:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS_SHORT']) . '"],'
+				. 'days_abbr:["' . implode('","', $GLOBALS['TL_LANG']['DAYS_SHORT']) . '"]'
+			. '});'
+			. 'Locale.define("en-US","DatePicker",{'
+				. 'select_a_time:"' . $GLOBALS['TL_LANG']['DP']['select_a_time'] . '",'
+				. 'use_mouse_wheel:"' . $GLOBALS['TL_LANG']['DP']['use_mouse_wheel'] . '",'
+				. 'time_confirm_button:"' . $GLOBALS['TL_LANG']['DP']['time_confirm_button'] . '",'
+				. 'apply_range:"' . $GLOBALS['TL_LANG']['DP']['apply_range'] . '",'
+				. 'cancel:"' . $GLOBALS['TL_LANG']['DP']['cancel'] . '",'
+				. 'week:"' . $GLOBALS['TL_LANG']['DP']['week'] . '"'
+			. '});'
+		. '});';
+	}
 }
 
 ?>

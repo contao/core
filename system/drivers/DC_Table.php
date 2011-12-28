@@ -4603,7 +4603,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 							$options[$v] = date('Y-m', $v);
 							$intMonth = (date('m', $v) - 1);
 
-							if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
+							if (isset($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
 							{
 								$options[$v] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $v);
 							}

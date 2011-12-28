@@ -493,7 +493,7 @@ abstract class System
 					break;
 
 				case 2:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, $GLOBALS['TL_LANG']['MSC']['dayShortLength']);
+					$strReturn .= $GLOBALS['TL_LANG']['DAYS_SHORT'][$index];
 					break;
 
 				case 3:
@@ -501,7 +501,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, $GLOBALS['TL_LANG']['MSC']['monthShortLength']);
+					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)]; 
 					break;
 
 				default:

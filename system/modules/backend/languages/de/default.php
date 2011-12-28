@@ -129,6 +129,18 @@ $GLOBALS['TL_LANG']['DAYS'][6] = 'Samstag';
 
 
 /**
+ * Short day names
+ */
+$GLOBALS['TL_LANG']['DAYS_SHORT'][0] = 'So';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][1] = 'Mo';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][2] = 'Di';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][3] = 'Mi';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][4] = 'Do';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][5] = 'Fr';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][6] = 'Sa';
+
+
+/**
  * Month names
  */
 $GLOBALS['TL_LANG']['MONTHS'][0]  = 'Januar';
@@ -146,6 +158,23 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'Dezember';
 
 
 /**
+ * Short month names
+ */
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][0]  = 'Jan';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][1]  = 'Feb';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][2]  = 'Mär';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][3]  = 'Apr';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][4]  = 'Mai';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][5]  = 'Jun';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][6]  = 'Jul';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][7]  = 'Aug';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][8]  = 'Sep';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][9]  = 'Okt';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][10] = 'Nov';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][11] = 'Dez';
+
+
+/**
  * Short names length
  */
 $GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 2;
@@ -156,7 +185,7 @@ $GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 1;
-$GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';
+$GLOBALS['TL_LANG']['MSC']['titleFormat'] = '%d. %B %Y';
 
 
 /**
@@ -185,6 +214,17 @@ $GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
 $GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
 $GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
 $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+
+
+/**
+ * Datepicker
+ */
+$GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Uhrzeit auswählen';
+$GLOBALS['TL_LANG']['DP']['use_mouse_wheel']     = 'Ändern Sie die Werte mit Hilfe des Mausrads';
+$GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
+$GLOBALS['TL_LANG']['DP']['apply_range']         = 'Anwenden';
+$GLOBALS['TL_LANG']['DP']['cancel']              = 'Abbrechen';
+$GLOBALS['TL_LANG']['DP']['week']                = 'W';
 
 
 /**
