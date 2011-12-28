@@ -9,6 +9,7 @@ Version 2.10.4 (XXXX-XX-XX)
 - Fixed: the new Ajax cron trigger did not work in IE8 due to missing Date.now() support (#3681)
 - Fixed: do not block ressources required by the Google website preview in the robots.txt file (#3688)
 - Fixed: correctly update the cache after a new template has been created (#3676)
+- Fixed: correctly handle HTML comments in inline JavaScripts (#3696)
 - Fixed a few minor issues
 
 Version 2.10.3 (2011-11-07)
