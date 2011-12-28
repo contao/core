@@ -10,6 +10,7 @@ Version 2.10.4 (XXXX-XX-XX)
 - Fixed: do not block ressources required by the Google website preview in the robots.txt file (#3688)
 - Fixed: correctly update the cache after a new template has been created (#3676)
 - Fixed: correctly handle HTML comments in inline JavaScripts (#3696)
+- Fixed: get the next autoincrement ID when importing a theme so deleted themes can be restored (#3604)
 - Fixed a few minor issues
 
 Version 2.10.3 (2011-11-07)
