@@ -93,6 +93,8 @@ $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';
 $GLOBALS['TL_LANG']['tl_layout']['main']         = 'Inside the main column';
 $GLOBALS['TL_LANG']['tl_layout']['after']        = 'Before the page footer';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Edit the style sheets';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Edit the module';
 
 
 /**

@@ -14,7 +14,9 @@ select.chzn-select {
 }
 /* PATCH */
 .firefox .chzn-container {
-  display:block;
+  position:relative;
+  top:2px;
+  margin:-1px 0 0;
 }
 /* PATCH EOF */
 .chzn-container .chzn-drop {

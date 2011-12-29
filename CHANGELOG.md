@@ -4,6 +4,13 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### Improved
+Added edit buttons to the module wizard to directly jump to a front end module
+from a page layout (see #2847). Also, a link to the style sheets of a theme has
+been added to the style sheets section of the page layout. This was done using
+the new "xlabel" callback which works like the "wizard" callback but is added to
+the label instead of to the input field.
+
 ### New
 Force a back end user to change his password upon the next login (see #2928).
 

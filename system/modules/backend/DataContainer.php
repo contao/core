@@ -200,6 +200,16 @@ class DataContainer extends Backend
 			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
 		}
 
+		// Add a custom xlabel
+		if (is_array($arrData['xlabel']))
+		{
+			foreach ($arrData['xlabel'] as $callback)
+			{
+				$this->import($callback[0]);
+				$xlabel .= $this->$callback[0]->$callback[1]($this);
+			}
+		}
+
 		// Input field callback
 		if (is_array($arrData['input_field_callback']))
 		{

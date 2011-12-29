@@ -93,6 +93,8 @@ $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'Unterhalb der Kopfzeile';
 $GLOBALS['TL_LANG']['tl_layout']['main']         = 'In der Hauptspalte';
 $GLOBALS['TL_LANG']['tl_layout']['after']        = 'Oberhalb der Fußzeile';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Die Stylesheets bearbeiten';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Das Modul bearbeiten';
 
 
 /**

@@ -225,7 +225,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'xlabel' => array
+			(
+				array('tl_layout', 'styleSheetLink')
+			)
 		),
 		'skipTinymce' => array
 		(
@@ -531,7 +535,7 @@ class tl_layout extends Backend
 
 		return $this->getTemplateGroup('moo_', $intPid);
 	}
-
+ 
 
 	/**
 	 * List a page layout
@@ -546,6 +550,17 @@ class tl_layout extends Backend
 		}
 
 		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Add a link to edit the stylesheets of the theme
+	 * @param object
+	 * @return string
+	 */
+	public function styleSheetLink(DataContainer $dc)
+	{
+		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}
 }
 

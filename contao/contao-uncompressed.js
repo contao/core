@@ -1526,7 +1526,26 @@ var Backend =
 				break;
 		}
 	},
-	
+
+	/**
+	 * Update the "edit module" links in the module wizard
+	 * @param object
+	 */
+	updateModuleLink: function(el) {
+		var td = el.getParent('td').getNext('td');
+		var a = td.getElement('a.module_link');
+
+		a.href = a.href.replace(/id=[0-9]+/, 'id=' + el.value);
+
+		if (el.value > 0) {
+			td.getElement('a.module_link').setStyle('display', 'inline');
+			td.getElement('img.module_image').setStyle('display', 'none');
+		} else {
+			td.getElement('a.module_link').setStyle('display', 'none');
+			td.getElement('img.module_image').setStyle('display', 'inline');
+		}
+	},
+
 	/**
 	 * Style checkboxes, radio buttons and select menus
 	 * @param object
