@@ -594,9 +594,10 @@ abstract class System
 	/**
 	 * Return all messages as HTML
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function getMessages($blnDcLayout=false)
+	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
 	{
 		$strMessages = '';
 
@@ -632,7 +633,7 @@ abstract class System
 		$strMessages = trim($strMessages);
 
 		// Wrapping container
-		if ($strMessages != '')
+		if (!$blnNoWrapper && $strMessages != '')
 		{
 			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
 		}

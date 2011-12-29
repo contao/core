@@ -43,7 +43,7 @@ $GLOBALS['TL_LANG']['ERR']['prcnt']             = 'Please enter a percentage bet
 $GLOBALS['TL_LANG']['ERR']['alpha']             = 'Please enter alphabetic characters only!';
 $GLOBALS['TL_LANG']['ERR']['alnum']             = 'Please enter alphanumeric characters only!';
 $GLOBALS['TL_LANG']['ERR']['phone']             = 'Please enter a valid phone number!';
-$GLOBALS['TL_LANG']['ERR']['extnd']             = 'For security reasons you can not use these characters (=<>&/()#) here!';
+$GLOBALS['TL_LANG']['ERR']['extnd']             = 'For security reasons you can not use the following characters here: =<>&/()#';
 $GLOBALS['TL_LANG']['ERR']['email']             = 'Please enter a valid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['emails']            = 'There is at least one invalid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['url']               = 'Please enter a valid URL format and encode special characters!';
@@ -361,6 +361,7 @@ $GLOBALS['TL_LANG']['MSC']['saveNcreate']      = 'Save and new';
 $GLOBALS['TL_LANG']['MSC']['continue']         = 'Continue';
 $GLOBALS['TL_LANG']['MSC']['skipNavigation']   = 'Skip navigation';
 $GLOBALS['TL_LANG']['MSC']['selectAll']        = 'Select all';
+$GLOBALS['TL_LANG']['MSC']['pw_change']        = 'Please enter a new password';
 $GLOBALS['TL_LANG']['MSC']['pw_changed']       = 'The password has been updated.';
 $GLOBALS['TL_LANG']['MSC']['fallback']         = 'default';
 $GLOBALS['TL_LANG']['MSC']['view']             = 'View in a new window';

@@ -668,6 +668,7 @@ CREATE TABLE `tl_user` (
   `dateAdded` int(10) unsigned NOT NULL default '0',
   `currentLogin` int(10) unsigned NOT NULL default '0',
   `lastLogin` int(10) unsigned NOT NULL default '0',
+  `pwChange` char(1) NOT NULL default '',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `email` (`email`)

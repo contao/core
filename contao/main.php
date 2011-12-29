@@ -68,13 +68,19 @@ class Main extends Backend
 		// Redirect to the install tool
 		if (!Config::getInstance()->isComplete())
 		{
-			$this->redirect('install.php');
+			$this->redirect('contao/install.php');
 		}
 
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
 		$this->User->authenticate();
+
+		// Password change required
+		if ($this->User->pwChange)
+		{
+			$this->redirect('contao/password.php');
+		}
 
 		$this->loadLanguageFile('default');
 		$this->loadLanguageFile('modules');
@@ -137,7 +143,7 @@ class Main extends Backend
 			}
 		}
 
-		$objTemplate->messages = implode("\n", $arrMessages);
+		$objTemplate->messages = $this->getMessages(false, true) . "\n" . implode("\n", $arrMessages);
 		$objTemplate->arrGroups = $this->User->navigation(true);
  		$objTemplate->welcome = sprintf($GLOBALS['TL_LANG']['MSC']['welcomeTo'], $GLOBALS['TL_CONFIG']['websiteTitle']);
 		$objTemplate->systemMessages = $GLOBALS['TL_LANG']['MSC']['systemMessages'];

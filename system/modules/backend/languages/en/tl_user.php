@@ -42,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Show thumbnail images', 
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
 $GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Enable the code editor', 'Use the code editor to modify code elements.');
 $GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('Use FancyUpload', 'If FancyUpload does not work properly in your web browser, you can deactivate the script here.');
+$GLOBALS['TL_LANG']['tl_user']['pwChange']     = array('Password change required', 'Make the user change his password upon the next login.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');
 $GLOBALS['TL_LANG']['tl_user']['groups']       = array('User groups', 'Here you can assign the user to one or more groups.');
 $GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Permission inheritance', 'Here you can define which group permissions the user inherits.');

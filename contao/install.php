@@ -831,20 +831,22 @@ class InstallTool extends Backend
 				{
 					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
-
 				// Passwords do not match
 				elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
 				{
 					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
-
 				// Password too short
 				elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 				{
 					$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 				}
-
-				// Save data
+				// Password and username are the same
+				elseif ($this->Input->post('pass') == $this->Input->post('username'))
+				{
+					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
+				}
+				// Save the data
 				elseif ($this->Input->post('name') != '' && $this->Input->post('email', true) != '' && $this->Input->post('username') != '')
 				{
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);

@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### New
+Force a back end user to change his password upon the next login (see #2928).
+
 ### Changed
 Make the user agent and OS list in the `Environment` class editable (see #3410).
 
