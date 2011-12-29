@@ -41,7 +41,6 @@ $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Erklärungen anzeigen', 
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
 $GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Code-Editor verwenden', 'Den Code-Editor zur Bearbeitung von Code-Elementen verwenden.');
-$GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('FancyUpload aktivieren', 'Falls FancyUpload in Ihrem Browser nicht fehlerfrei läuft, können Sie das Skript hier deaktivieren.');
 $GLOBALS['TL_LANG']['tl_user']['pwChange']     = array('Passwort-Änderung notwendig', 'Zwingt den Benutzer, sein Passwort bei der nächsten Anmeldung zu ändern.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Zum Administrator machen', 'Administratoren haben uneingeschränkten Zugriff auf alle Module und Elemente!');
 $GLOBALS['TL_LANG']['tl_user']['groups']       = array('Benutzergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');

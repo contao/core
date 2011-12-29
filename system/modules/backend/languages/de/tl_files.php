@@ -51,27 +51,6 @@ $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Upload starten';
 
 
 /**
- * FancyUpload
- */
-$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'] = 'Gesamtfortschritt ({total})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle']    = 'Dateifortschritt';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile']     = 'Übertrage {name}';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'] = 'Upload: {bytesLoaded} mit {rate}, {timeRemaining} verbleibend.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_remove']          = 'Entfernen';
-$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle']     = 'Klicken Sie hier, um den Eintrag zu entfernen.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileError']       = 'Upload fehlgeschlagen';
-$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate']       = 'Die Datei <em>{name}</em> wurde bereits übertragen. Duplikate sind nicht erlaubt.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin']    = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist zu klein. Die Mindestgröße beträgt {fileSizeMin}.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax']    = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist zu groß. Die Maximalgröße beträgt <em>{fileSizeMax}</em>.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax']     = 'Die Datei <em>{name}</em> konnte nicht übertragen werden. Die maximale Anzahl von <em>{fileListMax} Dateien</em> wurde überschritten.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'] = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist to groß. Es können insgesamt nur maximal <em>{fileListSizeMax}</em> übertragen werden.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus']      = 'Der Server hat den HTTP-Status <code>#{code}</code> zurückgegeben';
-$GLOBALS['TL_LANG']['tl_files']['fancy_securityError']   = 'Ein Sicherheitsproblem ist aufgetreten ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_ioError']         = 'Ein Lade- bzw. Sendevorgang wurde wegen eines Fehlers abgebrochen ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'] = 'Upload abgeschlossen';
-
-
-/**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_files']['new']       = array('Neuer Ordner', 'Einen neuen Ordner anlegen');

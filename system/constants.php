@@ -60,7 +60,6 @@ define('VERSION', '2.11');
 define('BUILD', 'beta1');
 define('CODEMIRROR', '2.2');
 define('DATEPICKER', '2.1.1');
-define('FANCYUPLOAD', '3.0');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIM', '3');
 define('MEDIABOX', '1.4.6');

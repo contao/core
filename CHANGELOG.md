@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 2.11.RC1 (XXXX-XX-XX)
 -----------------------------
 
+### New
+The back end file uploader can now be replaced with a custom one (see #3236).
+Also, the uploader now tries to use the HTML5 "multiple" attribute in the file
+input field if the browser supports it. 
+
 ### Improved
 Added edit buttons to the module wizard to directly jump to a front end module
 from a page layout (see #2847). Also, a link to the style sheets of a theme has
