@@ -68,7 +68,7 @@ class Main extends Backend
 		// Redirect to the install tool
 		if (!Config::getInstance()->isComplete())
 		{
-			$this->redirect('contao/install.php');
+			$this->redirect('install.php');
 		}
 
 		$this->import('BackendUser', 'User');
