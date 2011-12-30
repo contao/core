@@ -37,6 +37,7 @@ $GLOBALS['TL_LANG']['tl_user']['name']         = array('Name', 'Bitte geben Sie 
 $GLOBALS['TL_LANG']['tl_user']['email']        = array('E-Mail-Adresse', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
 $GLOBALS['TL_LANG']['tl_user']['language']     = array('Backend-Sprache', 'Hier können Sie die Backend-Sprache auswählen.');
 $GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Backendmotiv', 'Hier können Sie das globale Backendmotiv überschreiben.');
+$GLOBALS['TL_LANG']['tl_user']['uploader']     = array('Datei-Uploader', 'Hier können Sie einen Datei-Uploader auswählen (Standard: <em>FileUpload</em>).');
 $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Erklärungen anzeigen', 'Unter jedem Eingabefeld einen kurzen Erklärungstext anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
@@ -66,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_user']['session']      = array('Daten bereinigen', 'Bitt
  */
 $GLOBALS['TL_LANG']['tl_user']['name_legend']       = 'Name und E-Mail';
 $GLOBALS['TL_LANG']['tl_user']['backend_legend']    = 'Backend-Einstellungen';
+$GLOBALS['TL_LANG']['tl_user']['theme_legend']      = 'Backend-Theme';
 $GLOBALS['TL_LANG']['tl_user']['password_legend']   = 'Passwort-Einstellungen';
 $GLOBALS['TL_LANG']['tl_user']['admin_legend']      = 'Administrator';
 $GLOBALS['TL_LANG']['tl_user']['groups_legend']     = 'Benutzergruppen';

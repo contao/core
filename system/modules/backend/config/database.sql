@@ -642,6 +642,7 @@ CREATE TABLE `tl_user` (
   `email` varchar(255) NOT NULL default '',
   `language` varchar(2) NOT NULL default '',
   `backendTheme` varchar(32) NOT NULL default '',
+  `uploader` varchar(32) NOT NULL default '',
   `showHelp` char(1) NOT NULL default '',
   `thumbnails` char(1) NOT NULL default '',
   `useRTE` char(1) NOT NULL default '',

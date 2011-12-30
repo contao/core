@@ -715,7 +715,9 @@ class DC_Folder extends DataContainer implements listable, editable
 		}
 
 		// Instantiate the uploader
-		$objUploader = new $GLOBALS['TL_DCA']['tl_files']['config']['uploader']();
+		$this->import('BackendUser', 'User');
+		$class = ($this->User->uploader != '') ? $this->User->uploader : 'FileUpload';
+		$objUploader = new $class();
 
 		// Process the uploaded files
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_upload')
