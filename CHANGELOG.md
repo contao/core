@@ -1,7 +1,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.RC1 (XXXX-XX-XX)
+Version 2.11.RC1 (2011-12-30)
 -----------------------------
 
 ### New
