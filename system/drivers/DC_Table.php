@@ -1722,8 +1722,8 @@ class DC_Table extends DataContainer implements listable, editable
 						$this->objActiveRecord->{$this->strField} = $this->varValue;
 					}
 
-					// Build row
-					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
+					// Build row and pass the current palette string (thanks to Tristan Lins)
+					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
 				$class = 'tl_box';

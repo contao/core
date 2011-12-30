@@ -153,9 +153,10 @@ class DataContainer extends Backend
 
 	/**
 	 * Render a row of a box and return it as HTML string
+	 * @param string
 	 * @return string
 	 */
-	protected function row()
+	protected function row($strPalette=null)
 	{
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
@@ -263,7 +264,7 @@ class DataContainer extends Backend
 			// Calculate the current palette
 			$postPaletteFields = implode(',', $this->Input->post($key));
 			$postPaletteFields = array_unique(trimsplit('[,;]', $postPaletteFields));
-			$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+			$newPaletteFields = trimsplit('[,;]', ($strPalette ? $strPalette : $this->getPalette()));
 
 			if ($this->Input->get('act') == 'editAll')
 			{
