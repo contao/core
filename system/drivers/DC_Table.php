@@ -1704,7 +1704,7 @@ class DC_Table extends DataContainer implements listable, editable
 					}
 
 					// Build row
-					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
+					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
 				$class = 'tl_box block';
