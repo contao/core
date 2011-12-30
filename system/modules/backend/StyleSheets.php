@@ -463,7 +463,8 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+				$row['bgimage'] = handleSpecialCharsForUrl($row['bgimage']);
+				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
@@ -481,7 +482,8 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$row['bgimage'] = handleSpecialCharsForUrl($row['bgimage']);
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
 				}
 
@@ -511,7 +513,7 @@ class StyleSheets extends Backend
 					// CSS3 PIE only supports -pie-background, so if there is a background image, include it here, too.
 					if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 					{
-						$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 						$bgImage = 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
@@ -977,7 +979,8 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+				$row['liststyleimage'] = handleSpecialCharsForUrl($row['liststyleimage']);	
+				$glue = (strncmp($row['liststyleimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
 			}
 		}
@@ -992,7 +995,7 @@ class StyleSheets extends Backend
 		if ($row['own'] != '')
 		{
 			$own = trim($this->String->decodeEntities($row['own']));
-			$own = preg_replace('/url\("([^\/])/', 'url("' . $strGlue . "$1", $own);
+			$own = preg_replace('/url\("([^\/])(?!(?<=d)ata:)/', 'url("' . $strGlue . "$1", $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
@@ -1092,6 +1095,19 @@ class StyleSheets extends Backend
 		}
 
 		return $rgb;
+	}
+
+
+	/**
+	 * Decode special chars (encoded by Input::encodeSpecialChars()), urlencode some for using in url()
+	 * @param  string
+	 * @return string
+	 */
+	protected function handleSpecialCharsForUrl($strUrl)
+	{
+		$arrSearch  = array('&#35;', '&#60;', '&#62;', '&#40;', '&#41;', '&#92;', '&#61;');
+		$arrReplace = array('%23', '%3C', '%3E', '%28', '%29', '\\', '=');
+		return str_replace($arrSearch, $arrReplace, $strUrl);
 	}
 
 
