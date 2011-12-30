@@ -2,7 +2,7 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.10.4 (XXXX-XX-XX)
+Version 2.10.4 (2011-12-30)
 ---------------------------
 - Fixed: the Environment class did not always return the correct script name (#3603)
 - Fixed: close the connection after sending a file to the browser (#3602)
