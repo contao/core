@@ -37,7 +37,7 @@ $GLOBALS['TL_LANG']['tl_user']['name']         = array('Name', 'Bitte geben Sie 
 $GLOBALS['TL_LANG']['tl_user']['email']        = array('E-Mail-Adresse', 'Bitte geben Sie eine gültige E-Mail-Adresse ein.');
 $GLOBALS['TL_LANG']['tl_user']['language']     = array('Backend-Sprache', 'Hier können Sie die Backend-Sprache auswählen.');
 $GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Backendmotiv', 'Hier können Sie das globale Backendmotiv überschreiben.');
-$GLOBALS['TL_LANG']['tl_user']['uploader']     = array('Datei-Uploader', 'Hier können Sie einen Datei-Uploader auswählen (Standard: <em>FileUpload</em>).');
+$GLOBALS['TL_LANG']['tl_user']['uploader']     = array('Datei-Uploader', 'Hier können Sie einen Datei-Uploader auswählen.');
 $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Erklärungen anzeigen', 'Unter jedem Eingabefeld einen kurzen Erklärungstext anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Vorschaubilder anzeigen', 'Vorschaubilder im Dateimanager anzeigen.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Rich Text Editor verwenden', 'Den Rich Text Editor zur Textformatierung verwenden.');
@@ -88,6 +88,7 @@ $GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporärer Ordner';
 $GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'Die Session-Daten wurden gelöscht';
 $GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'Der Bildercache wurde geleert';
 $GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'Der temporäre Ordner wurde geleert';
+$GLOBALS['TL_LANG']['tl_user']['FileUpload']    = 'Standard-Uploader';
 
 
 /**

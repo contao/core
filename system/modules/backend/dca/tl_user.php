@@ -190,6 +190,7 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('FileUpload'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
 		'showHelp' => array
