@@ -850,7 +850,7 @@ class Newsletter extends Backend
 		// Walk through each channel
 		while ($objNewsletter->next())
 		{
-			if (is_array($arrRoot) && !in_array($objNewsletter->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objNewsletter->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -860,12 +860,12 @@ class Newsletter extends Backend
 			{
 				$arrProcessed[$objNewsletter->jumpTo] = false;
 
-				// Get target page
+				// Get the target page
 				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
 											->limit(1)
 											->execute($objNewsletter->jumpTo);
 
-				// Determin domain
+				// Determin the domain
 				if ($objParent->numRows)
 				{
 					$domain = $this->Environment->base;
@@ -876,7 +876,7 @@ class Newsletter extends Backend
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 			}
 

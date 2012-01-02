@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly handle the "add language to URL" feature in sitemaps and feeds.
+
 ### New
 You can now optionally skip the `items/` and `events/` fragment in the URL and
 make Contao discover the item automatically. If the number of fragments is even,

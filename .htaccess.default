@@ -111,15 +111,15 @@ FileETag None
   RewriteEngine On
 
   ##
-  # Set the RewriteBase if your Contao installation is in a subdirectoy and
+  # Change the RewriteBase if your Contao installation is in a subdirectoy and
   # the rewrite rules are not working properly. Usage examples:
   #
   #   RewriteBase /contao-2.11.0
   #   RewriteBase /path/to/contao
   #
-  # Uncomment the following line to set the RewriteBase.
+  # Depending on your server, you might have to remove the line entirely. 
   ##
-  #RewriteBase /
+  RewriteBase /
 
   ##
   # Uncomment the following lines and replace "domain.com" with your domain

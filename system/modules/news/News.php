@@ -120,12 +120,13 @@ class News extends Frontend
 
 		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
-		// Get default URL
+		// Get the default URL
 		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
-		$strUrl = $this->generateFrontendUrl($objParent->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+		$objParent = $this->getPageDetails($objParent->id);
+		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 
 		// Parse items
 		while ($objArticle->next())
@@ -199,7 +200,7 @@ class News extends Frontend
 		// Walk through each archive
 		while ($objArchive->next())
 		{
-			if (is_array($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -209,7 +210,7 @@ class News extends Frontend
 			{
 				$arrProcessed[$objArchive->jumpTo] = false;
 
-				// Get target page
+				// Get the target page
 				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
 											->limit(1)
 											->execute($objArchive->jumpTo);
@@ -225,7 +226,7 @@ class News extends Frontend
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 			}
 

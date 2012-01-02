@@ -133,7 +133,8 @@ class Calendar extends Frontend
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
-		$strUrl = $strLink . $this->generateFrontendUrl($objParent->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+		$objParent = $this->getPageDetails($objParent->id);
+		$strUrl = $strLink . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 
 		// Parse items
 		while ($objArticle->next())
@@ -244,7 +245,7 @@ class Calendar extends Frontend
 		// Walk through each calendar
 		while ($objCalendar->next())
 		{
-			if (is_array($arrRoot) && !in_array($objCalendar->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objCalendar->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -270,7 +271,7 @@ class Calendar extends Frontend
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 				}
 			}
 

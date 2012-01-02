@@ -286,9 +286,10 @@ abstract class Backend extends Controller
 	 * @param integer
 	 * @param string
 	 * @param boolean
+	 * @param string
 	 * @return array
 	 */
-	protected function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false)
+	protected function findSearchablePages($pid=0, $domain='', $blnIsSitemap=false, $strLanguage='')
 	{
 		$time = time();
 
@@ -302,7 +303,7 @@ abstract class Backend extends Controller
 		}
 
 		// Fallback domain
-		if (!strlen($domain))
+		if ($domain == '')
 		{
 			$domain = $this->Environment->base;
 		}
@@ -315,7 +316,7 @@ abstract class Backend extends Controller
 			// Set domain
 			if ($objPages->type == 'root')
 			{
-				if (strlen($objPages->dns))
+				if ($objPages->dns != '')
 				{
 					$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPages->dns . TL_PATH . '/';
 				}
@@ -323,6 +324,8 @@ abstract class Backend extends Controller
 				{
 					$domain = $this->Environment->base;
 				}
+
+				$strLanguage = $objPages->language;
 			}
 
 			// Add regular pages
@@ -334,7 +337,7 @@ abstract class Backend extends Controller
 					// Published
 					if ($objPages->published && (!$objPages->start || $objPages->start < $time) && (!$objPages->stop || $objPages->stop > $time))
 					{
-						$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row());
+						$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), null, $strLanguage);
 
 						// Get articles with teaser
 						$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND showTeaser=1 ORDER BY sorting")
@@ -342,14 +345,14 @@ abstract class Backend extends Controller
 
 						while ($objArticle->next())
 						{
-							$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), '/articles/' . ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+							$arrPages[] = $domain . $this->generateFrontendUrl($objPages->row(), '/articles/' . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id), $strLanguage);
 						}
 					}
 				}
 			}
 
 			// Get subpages
-			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain, $blnIsSitemap)) != false)
+			if ((!$objPages->protected || $GLOBALS['TL_CONFIG']['indexProtected']) && ($arrSubpages = $this->findSearchablePages($objPages->id, $domain, $blnIsSitemap, $strLanguage)) != false)
 			{
 				$arrPages = array_merge($arrPages, $arrSubpages);
 			}

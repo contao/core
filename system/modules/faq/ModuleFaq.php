@@ -64,7 +64,7 @@ class ModuleFaq extends Frontend
 		// Walk through each category
 		while ($objFaq->next())
 		{
-			if (is_array($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -74,12 +74,12 @@ class ModuleFaq extends Frontend
 			{
 				$arrProcessed[$objFaq->jumpTo] = false;
 
-				// Get target page
+				// Get the target page
 				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
 											->limit(1)
 											->execute($objFaq->jumpTo);
 
-				// Determin domain
+				// Determin the domain
 				if ($objParent->numRows)
 				{
 					$domain = $this->Environment->base;
@@ -90,7 +90,7 @@ class ModuleFaq extends Frontend
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 			}
 
