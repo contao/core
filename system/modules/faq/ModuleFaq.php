@@ -85,12 +85,12 @@ class ModuleFaq extends Frontend
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 				}
 			}
 
@@ -109,7 +109,7 @@ class ModuleFaq extends Frontend
 			// Add items to the indexer
 			while ($objItem->next())
 			{
-				$arrPages[] = sprintf($strUrl, ((strlen($objItem->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
 			}
 		}
 

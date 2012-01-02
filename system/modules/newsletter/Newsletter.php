@@ -70,7 +70,7 @@ class Newsletter extends Backend
 		}
 
 		// Add default sender address
-		if (!strlen($objNewsletter->sender))
+		if ($objNewsletter->sender == '')
 		{
 			list($objNewsletter->senderName, $objNewsletter->sender) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
@@ -105,7 +105,7 @@ class Newsletter extends Backend
 		}
 
 		// Send newsletter
-		if (strlen($this->Input->get('token')) && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
+		if ($this->Input->get('token') != '' && $this->Input->get('token') == $this->Session->get('tl_newsletter_send'))
 		{
 			$referer = preg_replace('/&(amp;)?(start|mpc|token|recipient|preview)=[^&]*/', '', $this->Environment->request);
 
@@ -222,7 +222,7 @@ class Newsletter extends Backend
 
 		$strToken = md5(uniqid(mt_rand(), true));
 		$this->Session->set('tl_newsletter_send', $strToken);
-		$sprintf = strlen($objNewsletter->senderName) ? $objNewsletter->senderName . ' &lt;%s&gt;' : '%s';
+		$sprintf = ($objNewsletter->senderName != '') ? $objNewsletter->senderName . ' &lt;%s&gt;' : '%s';
 		$this->import('BackendUser', 'User');
 
 		// Preview newsletter
@@ -282,7 +282,7 @@ class Newsletter extends Backend
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
-  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (strlen($_SESSION['TL_PREVIEW_ERROR']) ? '
+  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (isset($_SESSION['TL_PREVIEW_ERROR']) ? '
   <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
   <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
@@ -319,7 +319,7 @@ class Newsletter extends Backend
 		$objEmail->subject = $objNewsletter->subject;
 
 		// Add sender name
-		if (strlen($objNewsletter->senderName))
+		if ($objNewsletter->senderName != '')
 		{
 			$objEmail->fromName = $objNewsletter->senderName;
 		}
@@ -871,12 +871,12 @@ class Newsletter extends Backend
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 				}
 			}
 
@@ -895,7 +895,7 @@ class Newsletter extends Backend
 			// Add items to the indexer
 			while ($objItem->next())
 			{
-				$arrPages[] = sprintf($strUrl, ((strlen($objItem->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
 			}
 		}
 

@@ -125,7 +125,7 @@ abstract class ModuleNews extends Module
 			$objTemplate->setData($objArticles->row());
 
 			$objTemplate->count = ++$count;
-			$objTemplate->class = (strlen($objArticles->cssClass) ? ' ' . $objArticles->cssClass : '') . (($count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
+			$objTemplate->class = (($objArticles->cssClass != '') ? ' ' . $objArticles->cssClass : '') . (($count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
 			$objTemplate->newsHeadline = $objArticles->headline;
 			$objTemplate->subHeadline = $objArticles->subheadline;
 			$objTemplate->hasSubHeadline = $objArticles->subheadline ? true : false;
@@ -150,7 +150,7 @@ abstract class ModuleNews extends Module
 			}
 
 			// Display the "read more" button for external/article links
-			if (($objArticles->source == 'external' || $objArticles->source == 'article') && !strlen($objArticles->text))
+			if (($objArticles->source == 'external' || $objArticles->source == 'article') && $objArticles->text == '')
 			{
 				$objTemplate->text = true;
 			}
@@ -245,7 +245,7 @@ abstract class ModuleNews extends Module
 					break;
 
 				case 'author':
-					if (strlen($objArticle->author))
+					if ($objArticle->author != '')
 					{
 						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objArticle->author;
 					}
@@ -328,7 +328,7 @@ abstract class ModuleNews extends Module
 
 				if ($objPage->numRows)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId)));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId)));
 				}
 				break;
 		}
@@ -342,7 +342,7 @@ abstract class ModuleNews extends Module
 
 			if ($objPage->numRows)
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id)));
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 			}
 			else
 			{
@@ -350,7 +350,7 @@ abstract class ModuleNews extends Module
 			}
 
 			// Add the current archive parameter (news archive)
-			if ($blnAddArchive && strlen($this->Input->get('month')))
+			if ($blnAddArchive && $this->Input->get('month') != '')
 			{
 				self::$arrUrlCache[$strCacheKey] .= ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $this->Input->get('month');
 			}

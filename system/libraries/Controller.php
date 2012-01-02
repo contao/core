@@ -1779,7 +1779,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId));
+						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->fAlias != '') ? $objFaq->fAlias : $objFaq->aId));
 					}
 	
 					// Replace the tag
@@ -1825,7 +1825,7 @@ abstract class Controller extends System
 					}
 					elseif ($objNews->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->aAlias)) ? $objNews->aAlias : $objNews->aId));
+						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->aAlias != '') ? $objNews->aAlias : $objNews->aId));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1833,7 +1833,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId));
+						$strUrl = $this->generateFrontendUrl($objNews->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->nAlias != '') ? $objNews->nAlias : $objNews->nId));
 					}
 	
 					// Replace the tag
@@ -1879,7 +1879,7 @@ abstract class Controller extends System
 					}
 					elseif ($objEvent->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->aAlias)) ? $objEvent->aAlias : $objEvent->aId));
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->aAlias != '') ? $objEvent->aAlias : $objEvent->aId));
 					}
 					elseif ($objEvent->source == 'external')
 					{
@@ -1887,7 +1887,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->eAlias != '') ? $objEvent->eAlias : $objEvent->eId));
 					}
 
 					// Replace the tag

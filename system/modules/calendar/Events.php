@@ -123,7 +123,7 @@ abstract class Events extends Module
 
 			if ($objPage->numRows)
 			{
-				$strUrl = $this->generateFrontendUrl($objPage->row(), '/events/%s');
+				$strUrl = $this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 			}
 
 			// Get events of the current period

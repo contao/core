@@ -123,6 +123,12 @@ abstract class Frontend extends Controller
 			}
 		}
 
+		// Add the second fragment as auto_item if the number of fragments is even
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && count($arrFragments) % 2 == 0)
+		{
+			array_insert($arrFragments, 1, array('auto_item'));
+		}
+
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getPageIdFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getPageIdFromUrl']))
 		{
@@ -274,7 +280,7 @@ abstract class Frontend extends Controller
 		}
 
 		global $objPage;
-		$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
+		$pageId = ($objPage->alias != '') ? $objPage->alias : $objPage->id;
 
 		// Get the page ID from URL if not set
 		if (empty($pageId))

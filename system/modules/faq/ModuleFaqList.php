@@ -158,7 +158,7 @@ class ModuleFaqList extends Module
 				}
 				else
 				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
 				}
 			}
 		}

@@ -55,7 +55,7 @@ class News extends Frontend
 			return;
 		}
 
-		$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+		$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
 
 		// Delete XML file
 		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
@@ -83,7 +83,7 @@ class News extends Frontend
 
 		while ($objArchive->next())
 		{
-			$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+			$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
 
 			$this->generateFiles($objArchive->row());
 			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
@@ -99,7 +99,7 @@ class News extends Frontend
 	{
 		$time = time();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = strlen($arrArchive['feedBase']) ? $arrArchive['feedBase'] : $this->Environment->base;
+		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
 
 		$objFeed = new Feed($strFile);
@@ -125,7 +125,7 @@ class News extends Frontend
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
-		$strUrl = $this->generateFrontendUrl($objParent->fetchAssoc(), '/items/%s');
+		$strUrl = $this->generateFrontendUrl($objParent->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 
 		// Parse items
 		while ($objArticle->next())
@@ -220,12 +220,12 @@ class News extends Frontend
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 				}
 			}
 
@@ -287,13 +287,13 @@ class News extends Frontend
 
 				if ($objParent->numRows)
 				{
-					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objParent->aAlias)) ? $objParent->aAlias : $objParent->aId));
+					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objParent->aAlias != '') ? $objParent->aAlias : $objParent->aId));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		return sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 	}
 }
 

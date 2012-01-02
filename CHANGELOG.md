@@ -1,6 +1,16 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.0 (XXXX-XX-XX)
+---------------------------
+
+### New
+You can now optionally skip the `items/` and `events/` fragment in the URL and
+make Contao discover the item automatically. If the number of fragments is even,
+the Controller will add the second fragment as `$_GET['auto_item']`, which you
+can then use in your reader modules to set the item.
+
+
 Version 2.11.RC1 (2011-12-30)
 -----------------------------
 
@@ -96,7 +106,7 @@ Automatically add `rel="prev"` and `rel="next"` links to the page header if
 there is a pagination module (see #3515).
 
 ### Improved
-Pass the page data to the breadcrumb template as (see #3607).
+Pass the page data to the breadcrumb template as `data` (see #3607).
 
 ### New
 Added the "getCacheKey" hook (see #3288).

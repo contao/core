@@ -62,7 +62,7 @@ class Calendar extends Frontend
 			return;
 		}
 
-		$objCalendar->feedName = strlen($objCalendar->alias) ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+		$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
 
 		// Delete XML file
 		if ($this->Input->get('act') == 'delete' || $objCalendar->protected)
@@ -90,7 +90,7 @@ class Calendar extends Frontend
 
 		while ($objCalendar->next())
 		{
-			$objCalendar->feedName = strlen($objCalendar->alias) ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+			$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
 
 			$this->generateFiles($objCalendar->row());
 			$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
@@ -107,7 +107,7 @@ class Calendar extends Frontend
 		$time = time();
 		$this->arrEvents = array();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = strlen($arrArchive['feedBase']) ? $arrArchive['feedBase'] : $this->Environment->base;
+		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
 
 		$objFeed = new Feed($strFile);
@@ -133,7 +133,7 @@ class Calendar extends Frontend
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
-		$strUrl = $strLink . $this->generateFrontendUrl($objParent->fetchAssoc(), '/events/%s');
+		$strUrl = $strLink . $this->generateFrontendUrl($objParent->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 
 		// Parse items
 		while ($objArticle->next())
@@ -265,12 +265,12 @@ class Calendar extends Frontend
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/events/%s');
+					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 				}
 			}
 
@@ -289,7 +289,7 @@ class Calendar extends Frontend
 			// Add items to the indexer
 			while ($objArticle->next())
 			{
-				$arrPages[] = sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+				$arrPages[] = sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 			}
 		}
 
@@ -357,7 +357,7 @@ class Calendar extends Frontend
 
 				if ($objPage->numRows)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objPage->aAlias)) ? $objPage->aAlias : $objPage->aId));
+					$link = $strLink . $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId));
 				}
 				break;
 		}
@@ -365,7 +365,7 @@ class Calendar extends Frontend
 		// Link to default page
 		if ($link == '')
 		{
-			$link = sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+			$link = sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 		}
 
 		// Clean the RTE output

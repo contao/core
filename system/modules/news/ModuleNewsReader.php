@@ -66,6 +66,12 @@ class ModuleNewsReader extends ModuleNews
 			return $objTemplate->parse();
 		}
 
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('items', $this->Input->get('auto_item'));
+		}
+
 		// Return if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
