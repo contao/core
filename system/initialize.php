@@ -69,14 +69,6 @@ require(TL_ROOT . '/system/interface.php');
 
 
 /**
- * Load basic classes
- */
-$objConfig = Config::getInstance();
-$objEnvironment = Environment::getInstance();
-$objInput = Input::getInstance();
-
-
-/**
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
@@ -88,6 +80,14 @@ error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] ? E_ALL|E_STRICT : 0));
  */
 @ini_set('date.timezone', $GLOBALS['TL_CONFIG']['timeZone']);
 @date_default_timezone_set($GLOBALS['TL_CONFIG']['timeZone']);
+
+
+/**
+ * Load basic classes
+ */
+$objConfig = Config::getInstance();
+$objEnvironment = Environment::getInstance();
+$objInput = Input::getInstance();
 
 
 /**
