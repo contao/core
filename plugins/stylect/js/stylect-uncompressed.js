@@ -33,7 +33,7 @@
 window.addEvent('domready', function() {
 	$$('select').each(function(el) {
 		// Handled by chosen
-		if (el.getStyle('display') == 'none') return;
+		if (el.hasClass('tl_chosen')) return;
 
 		// Get the selected option label
 		if ((active = el.getElement('option[selected]')) != null) {
