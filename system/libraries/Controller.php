@@ -2493,7 +2493,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return '<img src="' . TL_FILES_URL . $this->urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -3407,7 +3407,7 @@ abstract class Controller extends System
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
-		$objTemplate->src = TL_FILES_URL . $src;
+		$objTemplate->src = TL_FILES_URL . $this->urlEncode($src);
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->title = specialchars($arrItem['title']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
