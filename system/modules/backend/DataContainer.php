@@ -264,7 +264,27 @@ class DataContainer extends Backend
 			// Calculate the current palette
 			$postPaletteFields = implode(',', $this->Input->post($key));
 			$postPaletteFields = array_unique(trimsplit('[,;]', $postPaletteFields));
-			$newPaletteFields = trimsplit('[,;]', ($strPalette ? $strPalette : $this->getPalette()));
+
+			// Compile the palette if there is none
+			if ($strPalette === null)
+			{
+				$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+			}
+			else
+			{
+				// Use the given palette
+				$newPaletteFields = trimsplit('[,;]', $strPalette);
+
+				// Re-check the palette if the current field is a selector field
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']) && in_array($this->strField, $GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
+				{
+					// If the field value has changed, recompile the palette
+					if ($this->varValue != $this->Input->post($this->strInputName))
+					{
+						$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+					}
+				}
+			}
 
 			if ($this->Input->get('act') == 'editAll')
 			{

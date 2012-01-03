@@ -1722,7 +1722,7 @@ class DC_Table extends DataContainer implements listable, editable
 						$this->objActiveRecord->{$this->strField} = $this->varValue;
 					}
 
-					// Build row and pass the current palette string (thanks to Tristan Lins)
+					// Build the row and pass the current palette string (thanks to Tristan Lins)
 					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
@@ -2681,15 +2681,11 @@ window.addEvent(\'domready\', function() {
 				{
 					$trigger = $objFields->$name;
 
-					// Overwrite the trigger if the page is not reloaded
+					// Overwrite the trigger
 					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 					{
 						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
-
-						if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
-						{
-							$trigger = $this->Input->post($key);
-						}
+						$trigger = $this->Input->post($key);
 					}
 
 					if ($trigger != '')
