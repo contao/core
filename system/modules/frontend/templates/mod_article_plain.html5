@@ -1,2 +1,1 @@
-
-<?php echo ltrim($this->contentElements); ?>
+<?php echo implode($this->elements); ?>
