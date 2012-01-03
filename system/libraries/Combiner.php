@@ -182,21 +182,17 @@ class Combiner extends System
 			if ($this->strMode == self::CSS)
 			{
 				// Adjust the file paths
-				if (TL_MODE == 'BE')
+				$strDirname = dirname($arrFile['name']);
+
+				// Remove relative paths
+				while (strpos($content, 'url("../') !== false)
 				{
-					$strDirname = dirname($arrFile['name']);
-
-					// Remove relative paths
-					while (strpos($content, 'url("../') !== false)
-					{
-						$strDirname = dirname($strDirname);
-						$content = str_replace('url("../', 'url("', $content);
-					}
-
-					$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
-					$content = str_replace('url("', 'url("../../' . $strGlue, $content);
+					$strDirname = dirname($strDirname);
+					$content = str_replace('url("../', 'url("', $content);
 				}
 
+				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
+				$content = str_replace('url("', 'url("../../' . $strGlue, $content);
 				$content = '@media ' . (($arrFile['media'] != '') ? $arrFile['media'] : 'all') . "{\n" . $content . "\n}";
 			}
 

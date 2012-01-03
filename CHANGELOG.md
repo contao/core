@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+Improved the chosen implementation so it is optional in the front end and can
+be added using the "moo_chosen" template. Also, the styled select scripts have
+been moved to a plugin ("stylect") and can be loaded in the front end now.
+
 ### Fixed
 Correctly handle the "add language to URL" feature in sitemaps and feeds.
 

@@ -1,0 +1,21 @@
+<?php
+
+// CSS files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/chosen/chosen.css');
+$objCombiner->add('plugins/stylect/css/stylect.css');
+$GLOBALS['TL_CSS'][] = $objCombiner->getCombinedFile();
+
+// JavaScript files
+$objCombiner = new Combiner();
+$objCombiner->add('plugins/chosen/chosen.js');
+$objCombiner->add('plugins/stylect/js/stylect.js');
+
+?>
+
+<script src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
+<script>
+window.addEvent('domready', function() {
+  $$('select.tl_chosen').chosen();
+});
+</script>

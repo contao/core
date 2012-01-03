@@ -1544,68 +1544,6 @@ var Backend =
 			td.getElement('a.module_link').setStyle('display', 'none');
 			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
-	},
-
-	/**
-	 * Style checkboxes, radio buttons and select menus
-	 * @param object
-	 * @param string
-	 * @param string
-	 */
-	styleFormFields: function() {
-		$$('select').each(function(el) {
-			// Handled by chosen
-			if (el.getStyle('display') == 'none') return;
-
-			// Get the selected option label
-			if ((active = el.getElement('option[selected]')) != null) {
-				var label = active.get('html');
-			} else {
-				var label = el.getElement('option').get('html');
-			}
-
-			// Create the div element
-			var div = new Element('div', {
-				'id': el.get('id') + '_styled',
-				'class': 'styled_select',
-				'html': '<span>' + label + '</span><b><i></i></b>',
-				'styles': {
-					'width': el.getStyle('width').toInt()-4
-				}
-			}).inject(el, 'before');
-
-			// Fix right-aligned elements
-			if (el.hasClass('right-aligned')) {
-				div.setStyle('left', el.getPosition().x);
-			}
-
-			// Mark active elements
-			if (el.hasClass('active')) {
-				div.addClass('active');
-			}
-
-			var bgcol = div.getStyle('background-color');
-
-			// Update the div onchange
-			el.addEvent('change', function() {
-				var option = el.getElement('option[value="' + el.value + '"]');
-				div.getElement('span').set('html', option.get('html'));
-			}).addEvent('keydown', function(event) {
-				if (event.key == 'up' || event.key == 'down') {
-					setTimeout(function() {	el.fireEvent('change'); }, 100);
-				}
-			}).addEvent('focus', function() {
-				div.setStyle('background-color', '#ebfdd7');
-			}).addEvent('blur', function() {
-				div.setStyle('background-color', bgcol);
-			}).setStyle('opacity', 0);
-
-			// Browser-specific adjustments
-			if (Browser.Engine.webkit || Browser.Engine.trident) {
-				el.setStyle('margin-bottom', '4px');
-				div.setStyle('width', div.getStyle('width').toInt()-4);
-			}
-		});
 	}
 };
 
@@ -1616,7 +1554,11 @@ document.addEvent('mousedown', function(event) {
 
 // Initialize the back end script
 window.addEvent('domready', function() {
-	Backend.styleFormFields();
+	// Chosen
+	if (Elements.chosen != undefined) {
+		$$('select.tl_chosen').chosen();
+	}
+
 	Backend.hideTreeBody();
 	Backend.blink.periodical(600);
 

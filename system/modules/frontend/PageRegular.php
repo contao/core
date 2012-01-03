@@ -121,6 +121,9 @@ class PageRegular extends Frontend
 		$this->Template->mainTitle = $objPage->rootTitle;
 		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 
+		// Meta robots tag
+		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
+
 		// Remove shy-entities (see #2709)
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
 		$this->Template->pageTitle = str_replace('[-]', '', $this->Template->pageTitle);
@@ -214,8 +217,6 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Meta robots tag
-		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
 		$strFramework = '';
 
 		// Generate the CSS framework
