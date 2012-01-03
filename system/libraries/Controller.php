@@ -3364,7 +3364,7 @@ abstract class Controller extends System
 			$size[1] = floor($intMaxWidth * $ratio);
 		}
 
-		$src = $this->getImage($this->urlEncode($arrItem['singleSRC']), $size[0], $size[1], $size[2]);
+		$src = $this->getImage($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
 
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
