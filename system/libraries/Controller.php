@@ -3324,10 +3324,13 @@ abstract class Controller extends System
 	 * @param array
 	 * @param integer
 	 * @param string
+	 * @param string
 	 */
-	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
+	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null, $strVarName='')
 	{
 		global $objPage;
+		
+		$objImageData = new stdClass();		
 
 		$size = deserialize($arrItem['size']);
 		$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
@@ -3343,8 +3346,8 @@ abstract class Controller extends System
 		}
 
 		// Store the original dimensions
-		$objTemplate->width = $imgSize[0];
-		$objTemplate->height = $imgSize[1];
+		$objImageData->width = $imgSize[0];
+		$objImageData->height = $imgSize[1];
 
 		// Adjust the image size
 		if ($intMaxWidth > 0 && ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth)))
@@ -3369,33 +3372,33 @@ abstract class Controller extends System
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
 		{
-			$objTemplate->arrSize = $imgSize;
-			$objTemplate->imgSize = ' ' . $imgSize[3];
+			$objImageData->arrSize = $imgSize;
+			$objImageData->imgSize = ' ' . $imgSize[3];
 		}
 
 		// Float image
 		if (in_array($arrItem['floating'], array('left', 'right')))
 		{
-			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
-			$objTemplate->float = ' float:' . $arrItem['floating'] . ';';
+			$objImageData->floatClass = ' float_' . $arrItem['floating'];
+			$objImageData->float = ' float:' . $arrItem['floating'] . ';';
 		}
 
 		// Image link
 		if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
 		{
-			$objTemplate->href = $arrItem['imageUrl'];
-			$objTemplate->attributes = '';
+			$objImageData->href = $arrItem['imageUrl'];
+			$objImageData->attributes = '';
 
 			if ($arrItem['fullsize'])
 			{
 				if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
 				{
-					$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
-					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
+					$objImageData->href = TL_FILES_URL . $this->urlEncode($arrItem['imageUrl']);
+					$objImageData->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 				}
 				else
 				{
-					$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
+					$objImageData->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 				}
 			}
 		}
@@ -3403,18 +3406,28 @@ abstract class Controller extends System
 		// Fullsize view
 		elseif ($arrItem['fullsize'] && TL_MODE == 'FE')
 		{
-			$objTemplate->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
-			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
+			$objImageData->href = TL_FILES_URL . $this->urlEncode($arrItem['singleSRC']);
+			$objImageData->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
-		$objTemplate->src = TL_FILES_URL . $src;
-		$objTemplate->alt = specialchars($arrItem['alt']);
-		$objTemplate->title = specialchars($arrItem['title']);
-		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
-		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');
-		$objTemplate->caption = $arrItem['caption'];
-		$objTemplate->addImage = true;
+		$objImageData->src = TL_FILES_URL . $src;
+		$objImageData->alt = specialchars($arrItem['alt']);
+		$objImageData->title = specialchars($arrItem['title']);
+		$objImageData->fullsize = $arrItem['fullsize'] ? true : false;
+		$objImageData->addBefore = ($arrItem['floating'] != 'below');
+		$objImageData->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');
+		$objImageData->caption = $arrItem['caption'];
+		$objImageData->addImage = true;
+		
+		// Optionally allow to add multiple images to the same template by specifing $strVarName
+		if ($strVarName)
+		{
+			$objTemplate->{$strVarName} = $objImageData;
+		}
+		else
+		{
+			$objTemplate->appendData(get_object_vars($objImageData));
+		}
 	}
 
 
@@ -3422,8 +3435,9 @@ abstract class Controller extends System
 	 * Add enclosures to a template
 	 * @param object
 	 * @param array
+	 * @param string
 	 */
-	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
+	protected function addEnclosuresToTemplate($objTemplate, $arrItem, $strVarName='enclosure')
 	{
 		$arrEnclosure = deserialize($arrItem['enclosure'], true);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
@@ -3458,7 +3472,7 @@ abstract class Controller extends System
 			}
 		}
 
-		$objTemplate->enclosure = $arrEnclosures;
+		$objTemplate->{$strVarName} = $arrEnclosures;
 	}
 }
 
