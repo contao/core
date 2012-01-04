@@ -187,7 +187,7 @@ class ModuleWizard extends Widget
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
     <td><a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'inline' : 'none') . '">'.$this->generateImage('edit.gif').'</a>'.$this->generateImage('edit_.gif', '', 'class="module_image" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'none' : 'inline') . '"').'</td>';
 
 			$options = '';
@@ -214,8 +214,7 @@ class ModuleWizard extends Widget
 
 		return $return.'
   </tbody>
-  </table>
-  <script>$("ctrl_'.$this->strId.'").getElements("select.tl_select").chosen();</script>';
+  </table>';
 	}
 }
 

@@ -638,6 +638,7 @@ var AjaxRequest =
 	 * Toggle a group of a multi-checkbox field
 	 * @param object
 	 * @param string
+	 * @return boolean
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
@@ -663,7 +664,6 @@ var AjaxRequest =
 	/**
 	 * Store the live update ID
 	 * @param string
-	 * @return boolean
 	 */
 	liveUpdate: function(el, id) {
 		var uid = $(id);

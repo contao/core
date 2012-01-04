@@ -84,22 +84,24 @@ class BackendUser extends User
 	{
 		$session = $this->Session->getData();
 
-		// Main script
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri)
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != $this->Environment->requestUri)
 		{
-			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = $this->Environment->requestUri;
+			// Main script
+			if ($this->Environment->script == 'contao/main.php')
+			{
+				$session['referer']['last'] = $session['referer']['current'];
+				$session['referer']['current'] = $this->Environment->requestUri;
+			}
+			// File manager
+			elseif ($this->Environment->script == 'contao/files.php')
+			{
+				$session['fileReferer']['last'] = $session['referer']['current'];
+				$session['fileReferer']['current'] = $this->Environment->requestUri;
+			}
 		}
 
-		// File manager
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri)
-		{
-			$session['fileReferer']['last'] = $session['referer']['current'];
-			$session['fileReferer']['current'] = $this->Environment->requestUri;
-		}
-
-		// Store session data
-		if (strlen($this->intId))
+		// Store the session data
+		if ($this->intId != '')
 		{
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
 						   ->execute(serialize($session), $this->intId);
