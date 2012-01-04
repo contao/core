@@ -35,7 +35,7 @@ parent.REQUEST_TOKEN = REQUEST_TOKEN;
 parent.Mediabox.enableFiletreeReload();
 </script>
 </head>
-<body class="__ua__">
+<body class="__ua__ popup">
 
 <div id="container">
 <div id="main">
