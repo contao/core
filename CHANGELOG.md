@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+In a FAQ list module you can now optionally add an FAQ reader module to
+automatically switch to the full article if an item has been selected. This
+allows us to use the FAQ list and FAQ reader on the same page.
+
 ### Fixed
 Do not remove the combined style sheets when updating the CSS files (see #3605).
 It might break the layout of cached pages.

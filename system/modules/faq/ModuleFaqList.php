@@ -79,6 +79,12 @@ class ModuleFaqList extends Module
 			return '';
 		}
 
+		// Show the FAQ reader if an item has been selected
+		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		{
+			return $this->getFrontendModule($this->faq_readerModule, $this->strColumn);
+		}
+
 		return parent::generate();
 	}
 

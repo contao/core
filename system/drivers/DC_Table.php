@@ -2636,12 +2636,9 @@ window.addEvent(\'domready\', function() {
 
 			if ($objUpdateStmt->affectedRows)
 			{
-				if ($varValue != $this->varValue)
+				if (!$arrData['eval']['submitOnChange'])
 				{
-					if (!$arrData['eval']['submitOnChange'])
-					{
-						$this->blnCreateNewVersion = true;
-					}
+					$this->blnCreateNewVersion = true;
 				}
 
 				$this->varValue = deserialize($varValue);

@@ -716,18 +716,18 @@ abstract class Controller extends System
 		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
 		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
 
-		// Overwrite the global date and time format
-		if ($objParentPage->numRows && $objParentPage->type == 'root')
+		// Overwrite the global date and time format in the front end
+		if (TL_MODE == 'FE' && $objParentPage->numRows && $objParentPage->type == 'root')
 		{
-			if (strlen($objParentPage->dateFormat))
+			if ($objParentPage->dateFormat != '')
 			{
 				$GLOBALS['TL_CONFIG']['dateFormat'] = $objParentPage->dateFormat;
 			}
-			if (strlen($objParentPage->timeFormat))
+			if ($objParentPage->timeFormat != '')
 			{
 				$GLOBALS['TL_CONFIG']['timeFormat'] = $objParentPage->timeFormat;
 			}
-			if (strlen($objParentPage->datimFormat))
+			if ($objParentPage->datimFormat != '')
 			{
 				$GLOBALS['TL_CONFIG']['datimFormat'] = $objParentPage->datimFormat;
 			}

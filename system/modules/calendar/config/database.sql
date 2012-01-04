@@ -101,7 +101,7 @@ CREATE TABLE `tl_module` (
   `cal_format` varchar(32) NOT NULL default '',
   `cal_ignoreDynamic` char(1) NOT NULL default '',
   `cal_order` varchar(32) NOT NULL default '',
-  `cal_readerModule` int(10) unsigned NOT NULL default '0'
+  `cal_readerModule` int(10) unsigned NOT NULL default '0',
   `cal_limit` smallint(5) unsigned NOT NULL default '0',
   `cal_template` varchar(32) NOT NULL default '',
   `cal_ctemplate` varchar(32) NOT NULL default '',
