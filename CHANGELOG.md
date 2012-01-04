@@ -5,6 +5,10 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not remove the combined style sheets when updating the CSS files (see #3605).
+It might break the layout of cached pages.
+
+### Fixed
 Consider the sitemap setting when finding searchable pages (see #3728).
 
 ### Improved

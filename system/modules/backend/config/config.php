@@ -212,15 +212,20 @@ $GLOBALS['TL_CROP'] = array
  */
 $GLOBALS['TL_CRON'] = array
 (
-	'daily' => array
+	'monthly' => array
 	(
+		array('Automator', 'purgeHtmlFolder'),
+		array('Automator', 'purgeScriptsFolder'),
 		array('Automator', 'purgeTempFolder'),
-		array('Automator', 'checkForUpdates')
 	),
 	'weekly' => array
 	(
 		array('Automator', 'generateSitemap'),
 		array('StyleSheets', 'updateStyleSheets')
+	),
+	'daily' => array
+	(
+		array('Automator', 'checkForUpdates')
 	),
 	'hourly' => array()
 );
@@ -239,6 +244,13 @@ $GLOBALS['TL_HOOKS'] = array
 		array('Messages', 'languageFallback')
 	)
 );
+
+
+/**
+ * Store the auto_item keywords so they can be ignored
+ * when rebuilding the URLs for the search index
+ */
+$GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
 
 
 /**

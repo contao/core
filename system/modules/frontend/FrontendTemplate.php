@@ -71,6 +71,16 @@ class FrontendTemplate extends Template
 
 		// Ignore certain URL parameters 
 		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
+
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'])
+		{
+			$arrIgnore[] = 'auto_item';
+		}
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		{
+			$arrIgnore[] = 'language';
+		}
+
 		$strParams = '';
 
 		// Rebuild the URL to eliminate duplicate parameters
@@ -78,7 +88,14 @@ class FrontendTemplate extends Template
 		{
 			if (!in_array($key, $arrIgnore))
 			{
-				$strParams .= '/' . $key . '/' . $this->Input->get($key);
+				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
+				{
+					$strParams .= '/' . $this->Input->get($key);
+				}
+				else
+				{
+					$strParams .= '/' . $key . '/' . $this->Input->get($key);
+				}
 			}
 		}
 

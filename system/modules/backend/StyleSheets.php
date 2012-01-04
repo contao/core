@@ -97,18 +97,27 @@ class StyleSheets extends Backend
 		// Delete old style sheets
 		foreach (scan(TL_ROOT . '/system/scripts', true) as $file)
 		{
+			// Skip directories
 			if (is_dir(TL_ROOT . '/system/scripts/' . $file))
 			{
 				continue;
 			}
 
+			// Preserve root files (is this still required now that scripts are in system/scripts?)
 			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
+			{
+				continue;
+			}
+
+			// Do not delete the combined files (see #3605)
+			if (preg_match('/^[a-f0-9]{12}\.css$/', $file))
 			{
 				continue;
 			}
 
 			$objFile = new File('system/scripts/' . $file);
 
+			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
 			{
 				$objFile->delete();
