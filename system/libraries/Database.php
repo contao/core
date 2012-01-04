@@ -1089,10 +1089,11 @@ abstract class Database_Result
 
 		if (!$this->arrCache[++$this->intIndex])
 		{
+			--$this->intIndex;
+
 			if (($arrRow = $this->fetchAssoc()) == false)
 			{
 				$this->blnDone = true;
-				--$this->intIndex;
 
 				return false;
 			}
