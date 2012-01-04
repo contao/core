@@ -2726,6 +2726,15 @@ window.addEvent(\'domready\', function() {
 			}
 			elseif (count($sValues) > 1)
 			{
+				foreach ($sValues as $k=>$v)
+				{
+					// Unset selectors that just trigger subpalettes (see #3738)
+					if (isset($GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$v]))
+					{
+						unset($sValues[$k]);
+					}
+				}
+
 				$names = $this->combiner($sValues);
 			}
 			else
