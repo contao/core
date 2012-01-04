@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Consider the sitemap setting when finding searchable pages (see #3728).
+
 ### Improved
 Improved the chosen implementation so it is optional in the front end and can
 be added using the "moo_chosen" template. Also, the styled select scripts have
