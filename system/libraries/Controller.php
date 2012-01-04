@@ -627,11 +627,11 @@ abstract class Controller extends System
 			$type = $objParentPage->type;
 
 			// Parent title
-			if (!strlen($ptitle))
+			if ($ptitle == '')
 			{
 				$palias = $objParentPage->alias;
 				$pname = $objParentPage->title;
-				$ptitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
+				$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 			}
 
 			// Page title
@@ -639,8 +639,7 @@ abstract class Controller extends System
 			{
 				$alias = $objParentPage->alias;
 				$name = $objParentPage->title;
-				$title = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
-
+				$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 				$trail[] = $objParentPage->pid;
 			}
 
@@ -671,26 +670,16 @@ abstract class Controller extends System
 		$objPage->parentPageTitle = $ptitle;
 
 		// Set the root ID and title
-		if ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0))
+		if ($objParentPage->numRows && $objParentPage->type == 'root')
 		{
 			$objPage->rootId = $objParentPage->id;
-			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
+			$objPage->rootTitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
 			$objPage->language = $objParentPage->language;
 			$objPage->staticFiles = $objParentPage->staticFiles;
 			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
-
-			// Set the admin e-mail address
-			if ($objParentPage->adminEmail != '')
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
-			}
-			else
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
-			}
 
 			// Store whether the root page has been published
 			$time = time();
@@ -717,7 +706,7 @@ abstract class Controller extends System
 		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
 
 		// Overwrite the global date and time format in the front end
-		if (TL_MODE == 'FE' && $objParentPage->numRows && $objParentPage->type == 'root')
+		if (!$GLOBALS['TL_ROOT_VALUES_SET'] && TL_MODE == 'FE' && $objParentPage->numRows && $objParentPage->type == 'root')
 		{
 			if ($objParentPage->dateFormat != '')
 			{
@@ -731,6 +720,19 @@ abstract class Controller extends System
 			{
 				$GLOBALS['TL_CONFIG']['datimFormat'] = $objParentPage->datimFormat;
 			}
+
+			// Set the admin e-mail address
+			if ($objParentPage->adminEmail != '')
+			{
+				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
+			}
+			else
+			{
+				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+			}
+
+			// Do not set the root values upon subsequent calls
+			$GLOBALS['TL_ROOT_VALUES_SET'] = true;
 		}
 
 		// Do not cache protected pages

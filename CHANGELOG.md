@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Do not override the global settings upon every call of `getPageDetails()`.
+
 ### Improved
 In a FAQ list module you can now optionally add an FAQ reader module to
 automatically switch to the full article if an item has been selected. This
