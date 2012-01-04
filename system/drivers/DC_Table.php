@@ -2079,8 +2079,8 @@ window.addEvent(\'domready\', function() {
 					// Re-set the current value
 					$this->objActiveRecord->{$this->strField} = $this->varValue;
 
-					// Build the current row
-					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
+					// Build the row and pass the current palette string (thanks to Tristan Lins)
+					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
 				// Close box
@@ -2685,7 +2685,11 @@ window.addEvent(\'domready\', function() {
 					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 					{
 						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
-						$trigger = $this->Input->post($key);
+
+						if (isset($_POST[$key]))
+						{
+							$trigger = $this->Input->post($key);
+						}
 					}
 
 					if ($trigger != '')

@@ -272,8 +272,8 @@ class DataContainer extends Backend
 			}
 			else
 			{
-				// Use the given palette
-				$newPaletteFields = trimsplit('[,;]', $strPalette);
+				// Use the given palette ($strPalette is an array in editAll mode)
+				$newPaletteFields = is_array($strPalette) ? $strPalette : trimsplit('[,;]', $strPalette);
 
 				// Re-check the palette if the current field is a selector field
 				if (isset($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']) && in_array($this->strField, $GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
