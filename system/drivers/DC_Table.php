@@ -210,7 +210,7 @@ class DC_Table extends DataContainer implements listable, editable
 			 // Unless there are any root records specified, use all records with parent ID 0
 			if (!isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']) || $GLOBALS['TL_DCA'][$table]['list']['sorting']['root'] === false)
 			{
-				$objIds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $strTable) ? ' ORDER BY sorting' : ''))
+				$objIds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $table) ? ' ORDER BY sorting' : ''))
 										 ->execute(0);
 
 				if ($objIds->numRows > 0)
@@ -222,7 +222,7 @@ class DC_Table extends DataContainer implements listable, editable
 			// Get root records from global configuration file
 			elseif (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']))
 			{
-				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table, $this->Database->fieldExists('sorting', $strTable));
+				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table, $this->Database->fieldExists('sorting', $table));
 			}
 		}
 
