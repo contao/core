@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### New
+Added the "sqlCompileCommands", "sqlGetFromFile" and "sqlGetFromDB" hooks to the
+`DbInstaller` class (see #3281).
+
 ### Improved
 Added the CSS class "trail" to the back end navigation (see #3301).
 

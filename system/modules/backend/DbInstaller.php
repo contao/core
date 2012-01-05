@@ -222,6 +222,16 @@ class DbInstaller extends Controller
 			}
 		}
 
+		// HOOK: allow third-party developers to modify the array (see #3281)
+		if (isset($GLOBALS['TL_HOOKS']['sqlCompileCommands']) && is_array($GLOBALS['TL_HOOKS']['sqlCompileCommands']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlCompileCommands'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
+			}
+		}
+
 		return $return;
 	}
 
@@ -299,6 +309,16 @@ class DbInstaller extends Controller
 						$return[$table]['TABLE_FIELDS'][$key] = preg_replace('/,$/i', '', trim($v));
 					}
 				}
+			}
+		}
+
+		// HOOK: allow third-party developers to modify the array (see #3281)
+		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromFile']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromFile']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlGetFromFile'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
 			}
 		}
 
@@ -391,6 +411,16 @@ class DbInstaller extends Controller
 					unset($field['index_fields']);
 					unset($field['index']);
 				}
+			}
+		}
+
+		// HOOK: allow third-party developers to modify the array (see #3281)
+		if (isset($GLOBALS['TL_HOOKS']['sqlGetFromDB']) && is_array($GLOBALS['TL_HOOKS']['sqlGetFromDB']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['sqlGetFromDB'] as $callback)
+			{
+				$this->import($callback[0]);
+				$return = $this->$callback[0]->$callback[1]($return);
 			}
 		}
 
