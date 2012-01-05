@@ -680,6 +680,9 @@ abstract class Controller extends System
 			$objPage->staticFiles = $objParentPage->staticFiles;
 			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
+			$objPage->dateFormat = $objParentPage->dateFormat;
+			$objPage->timeFormat = $objParentPage->timeFormat;
+			$objPage->datimFormat = $objParentPage->datimFormat;
 
 			// Store whether the root page has been published
 			$time = time();
@@ -704,36 +707,6 @@ abstract class Controller extends System
 		$objPage->mainTitle = strip_insert_tags($objPage->mainTitle);
 		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
 		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
-
-		// Overwrite the global date and time format in the front end
-		if (!$GLOBALS['TL_ROOT_VALUES_SET'] && TL_MODE == 'FE' && $objParentPage->numRows && $objParentPage->type == 'root')
-		{
-			if ($objParentPage->dateFormat != '')
-			{
-				$GLOBALS['TL_CONFIG']['dateFormat'] = $objParentPage->dateFormat;
-			}
-			if ($objParentPage->timeFormat != '')
-			{
-				$GLOBALS['TL_CONFIG']['timeFormat'] = $objParentPage->timeFormat;
-			}
-			if ($objParentPage->datimFormat != '')
-			{
-				$GLOBALS['TL_CONFIG']['datimFormat'] = $objParentPage->datimFormat;
-			}
-
-			// Set the admin e-mail address
-			if ($objParentPage->adminEmail != '')
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
-			}
-			else
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
-			}
-
-			// Do not set the root values upon subsequent calls
-			$GLOBALS['TL_ROOT_VALUES_SET'] = true;
-		}
 
 		// Do not cache protected pages
 		if ($objPage->protected)

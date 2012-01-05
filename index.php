@@ -175,6 +175,30 @@ class Index extends Frontend
 			$objPage = $this->getPageDetails($objPage->id);
 		}
 
+		// Overwrite the global date and time format in the front end
+		if ($objPage->dateFormat != '')
+		{
+			$GLOBALS['TL_CONFIG']['dateFormat'] = $objPage->dateFormat;
+		}
+		if ($objPage->timeFormat != '')
+		{
+			$GLOBALS['TL_CONFIG']['timeFormat'] = $objPage->timeFormat;
+		}
+		if ($objPage->datimFormat != '')
+		{
+			$GLOBALS['TL_CONFIG']['datimFormat'] = $objPage->datimFormat;
+		}
+
+		// Set the admin e-mail address
+		if ($objPage->adminEmail != '')
+		{
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objPage->adminEmail);
+		}
+		else
+		{
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
+		}
+
 		// Exit if the root page has not been published (see #2425) and
 		// do not try to load the 404 page! It can cause an infinite loop.
 		if (!BE_USER_LOGGED_IN && !$objPage->rootIsPublic)
