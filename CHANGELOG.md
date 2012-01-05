@@ -4,6 +4,18 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+Added an option to include dynamically added style sheets in the combined CSS
+file (see #3161). This is done by passing a second "argument" to the URL:
+
+  `$GLOBAL['TL_CSS'][] = 'style.css|screen|static';`
+
+Important: If you add a style sheet to the combined file, do not add a static
+URL like `TL_PLUGINS_URL` to the path!
+
+### Fixed
+Provide an ID for single lightbox images in HTML5 (see #3742).
+
 ### Fixed
 The front controller now works with the `index.php` fragment again (see #3689).
 

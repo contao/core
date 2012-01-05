@@ -113,7 +113,7 @@ class ContentCode extends ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css|screen';
+			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css';
 
 			// Add the core scripts
 			$objCombiner = new Combiner();
