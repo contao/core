@@ -406,6 +406,7 @@ CREATE TABLE `tl_page` (
   `target` char(1) NOT NULL default '',
   `fallback` char(1) NOT NULL default '',
   `dns` varchar(255) NOT NULL default '',
+  `subdomains` char(1) NOT NULL default '',
   `staticFiles` varchar(255) NOT NULL default '',
   `staticSystem` varchar(255) NOT NULL default '',
   `staticPlugins` varchar(255) NOT NULL default '',
@@ -439,7 +440,8 @@ CREATE TABLE `tl_page` (
   `stop` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`),
-  KEY `alias` (`alias`)
+  KEY `alias` (`alias`),
+  KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
