@@ -100,6 +100,16 @@ class LiveUpdate extends Backend implements executable
 			$_SESSION['LIVE_UPDATE_CONFIRM'] = '';
 		}
 
+		// Automatically switch to SSL
+		if ($this->Environment->ssl)
+		{
+			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('http://', 'https://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+		}
+		else
+		{
+			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('https://', 'http://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+		}
+
 		$objTemplate->uid = $GLOBALS['TL_CONFIG']['liveUpdateId'];
 		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 

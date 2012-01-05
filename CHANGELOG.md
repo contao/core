@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+When using Contao via SSL, automatically switch to an SSL connection when
+running the Live Update (see #3538).
+
 ### New
 Added the "sqlCompileCommands", "sqlGetFromFile" and "sqlGetFromDB" hooks to the
 `DbInstaller` class (see #3281).
