@@ -3312,9 +3312,17 @@ abstract class Controller extends System
 			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
 		}
 
-		if ($strLightboxId === null)
+		// Provide an ID for single lightbox images in HTML5 (see #3742)
+		if ($strLightboxId === null && $arrItem['fullsize'])
 		{
-			$strLightboxId = 'lightbox';
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$strLightboxId = 'lightbox';
+			}
+			else
+			{
+				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
+			}
 		}
 
 		// Store the original dimensions
