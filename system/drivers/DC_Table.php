@@ -1702,9 +1702,9 @@ class DC_Table extends DataContainer implements listable, editable
 					}
 
 					// Convert CSV fields (see #2890)
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'])
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv']))
 					{
-						$this->varValue = trimsplit(',', $this->varValue);
+						$this->varValue = trimsplit($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'], $this->varValue);
 					}
 
 					// Call load_callback
@@ -2592,9 +2592,9 @@ window.addEvent(\'domready\', function() {
 				{
 					$varValue = '';
 				}
-				elseif ($arrData['eval']['csv'])
+				elseif (isset($arrData['eval']['csv']))
 				{
-					$varValue = implode(',', $varValue); // see #2890
+					$varValue = implode($arrData['eval']['csv'], $varValue); // see #2890
 				}
 				else
 				{
@@ -2604,9 +2604,9 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Convert arrays (see #2890)
-		if ($arrData['eval']['multiple'] && $arrData['eval']['csv'])
+		if ($arrData['eval']['multiple'] && isset($arrData['eval']['csv']))
 		{
-			$varValue = implode(',', deserialize($varValue, true));
+			$varValue = implode($arrData['eval']['csv'], deserialize($varValue, true));
 		}
 
 		// Trigger the save_callback
@@ -4521,7 +4521,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 					{
 						// CSV lists (see #2890)
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
+						if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv']))
 						{
 							$this->procedure[] = $this->Database->findInSet('?', $field, true);
 							$this->values[] = $session['filter'][$filter][$field];
@@ -4648,9 +4648,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					foreach($options as $option)
 					{
 						// CSV lists (see #2890)
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
+						if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv']))
 						{
-							$doptions = trimsplit(',', $option);
+							$doptions = trimsplit($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'], $option);
 						}
 						else
 						{
