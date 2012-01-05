@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+Added the CSS class "trail" to the back end navigation (see #3301).
+
 ### Changed
 The static URL is now prepended automatically and does not need to be added in
 your custom script (see #3469). The change is backwards compatible, so you do

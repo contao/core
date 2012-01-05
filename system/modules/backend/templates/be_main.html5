@@ -64,7 +64,7 @@
 
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-  <li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
+  <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
   <li class="tl_parent" id="<?php echo $strGroup; ?>">
   <ul class="tl_level_2">
