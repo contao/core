@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Select menus using the "chosen" plugin were not displayed when they were in a
+collapsed palette (see #3627).
+
 ### Improved
 When using Contao via SSL, automatically switch to an SSL connection when
 running the Live Update (see #3538).
