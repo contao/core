@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The front controller now works with the `index.php` fragment again (see #3689).
+
+### Fixed
 Do not override the global settings upon every call of `getPageDetails()`.
 
 ### Improved

@@ -85,10 +85,10 @@ abstract class Frontend extends Controller
 			return null;
 		}
 
-		$strRequest = preg_replace('/\?.*$/i', '', $this->Environment->request);
+		$strRequest = preg_replace(array('/^index.php\/?/', '/\?.*$/'), '', $this->Environment->request);
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
-		if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest))
+		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest)))
 		{
 			$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 
@@ -102,12 +102,6 @@ abstract class Frontend extends Controller
 		}
 
 		$arrFragments = explode('/', $strRequest);
-
-		// Skip the index.php fragment
-		if (strtolower($arrFragments[0]) == 'index.php')
-		{
-			array_shift($arrFragments);
-		}
 
 		// Extract the language
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
@@ -206,7 +200,7 @@ abstract class Frontend extends Controller
 			// Redirect to the language root (e.g. en/)
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
 			{
-				$this->redirect($objRootPage->language . '/', 302);
+				$this->redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
 			}
 		}
 
