@@ -387,7 +387,7 @@ class PageRegular extends Frontend
 				}
 				else
 				{
-					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -469,7 +469,7 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 		}
 

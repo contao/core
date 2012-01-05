@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Changed
+The static URL is now prepended automatically and does not need to be added in
+your custom script (see #3469). The change is backwards compatible, so you do
+not need to change your existing modules.
+
 ### Improved
 Added an option to include dynamically added style sheets in the combined CSS
 file (see #3161). This is done by passing a second "argument" to the URL:

@@ -152,12 +152,12 @@ abstract class Backend extends Controller
 			}
 		}
 
-		// Add module style sheet
+		// Add the module style sheet
 		if (isset($arrModule['stylesheet']))
 		{
 			foreach ((array) $arrModule['stylesheet'] as $stylesheet)
 			{
-				$GLOBALS['TL_CSS'][] = TL_SCRIPT_URL . $stylesheet;
+				$GLOBALS['TL_CSS'][] = $stylesheet;
 			}
 		}
 
@@ -166,7 +166,7 @@ abstract class Backend extends Controller
 		{
 			foreach ((array) $arrModule['javascript'] as $javascript)
 			{
-				$GLOBALS['TL_JAVASCRIPT'][] = TL_SCRIPT_URL . $javascript;
+				$GLOBALS['TL_JAVASCRIPT'][] = $javascript;
 			}
 		}
 

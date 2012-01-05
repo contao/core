@@ -3443,6 +3443,37 @@ abstract class Controller extends System
 
 		$objTemplate->enclosure = $arrEnclosures;
 	}
+
+
+	/**
+	 * Add a static URL to a script
+	 * @param string
+	 * @return string
+	 */
+	protected function addStaticUrlTo($script)
+	{
+		// The feature is not used
+		if (TL_PLUGINS_URL == '' && TL_SCRIPT_URL == '')
+		{
+			return $script;
+		}
+
+		// Absolut URLs
+		if (preg_match('@^https?://@', $script))
+		{
+			return $script;
+		}
+
+		// Prepend the static URL
+		if (strncmp($script, 'plugins/', 8) === 0)
+		{
+			return TL_PLUGINS_URL . $script;
+		}
+		else
+		{
+			return TL_SCRIPT_URL . $script;
+		}
+	}
 }
 
 ?>
