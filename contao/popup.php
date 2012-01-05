@@ -118,6 +118,7 @@ class Popup extends Backend
 			$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
 			fpassthru($resFile);
 			fclose($resFile);
+			ob_flush(); // see #3595
 
 			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
 		}
