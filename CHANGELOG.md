@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Added
+Added a `chmod()` method to the `File` and `Folder` class (see #3641).
+
 ### New
 Added the Russian and Ukrainian translations for the TinyMCE "typolinks" plugin
 (thanks to DyaGa) (see #3648)

@@ -270,6 +270,17 @@ class File extends System
 
 
 	/**
+	 * Set the file permissions
+	 * @param string
+	 * @return boolean
+	 */
+	public function chmod($strChmod)
+	{
+		return $this->Files->chmod($this->strFile, $strChmod);
+	}
+
+
+	/**
 	 * Close the file handle
 	 * @return boolean
 	 */

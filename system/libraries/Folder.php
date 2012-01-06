@@ -130,6 +130,17 @@ class Folder extends System
 
 
 	/**
+	 * Set the folder permissions
+	 * @param string
+	 * @return boolean
+	 */
+	public function chmod($strChmod)
+	{
+		return $this->Files->chmod($this->strFolder, $strChmod);
+	}
+
+
+	/**
 	 * Rename the folder
 	 * @param string
 	 */
