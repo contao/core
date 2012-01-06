@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly URL-encode image URLs (see #3751).
+
 ### Improved
 Added a fallback which loads the local MooTool core script if the Google CDN is
 not available, e.g. if you are not connected to the Internet (see #3619)

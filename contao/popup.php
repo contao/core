@@ -141,7 +141,7 @@ class Popup extends Backend
 			$this->Template->isImage = true;
 			$this->Template->width = $objFile->width;
 			$this->Template->height = $objFile->height;
-			$this->Template->src = $this->strFile;
+			$this->Template->src = $this->urlEncode($this->strFile);
 		}
 
 		$this->output();
