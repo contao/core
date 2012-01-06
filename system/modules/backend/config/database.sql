@@ -496,7 +496,7 @@ CREATE TABLE `tl_session` (
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
-  `sessionID` varchar(40) NOT NULL default '',
+  `sessionID` varchar(128) NOT NULL default '',
   `hash` varchar(40) NOT NULL default '',
   `ip` varchar(64) NOT NULL default '',
   PRIMARY KEY  (`id`),
