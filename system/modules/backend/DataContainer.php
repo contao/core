@@ -286,6 +286,7 @@ class DataContainer extends Backend
 				}
 			}
 
+			// Adjust the names in editAll mode
 			if ($this->Input->get('act') == 'editAll')
 			{
 				foreach ($newPaletteFields as $k=>$v)
@@ -302,6 +303,7 @@ class DataContainer extends Backend
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
+			// Validate and save the field
 			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
 			{
 				$objWidget->validate();

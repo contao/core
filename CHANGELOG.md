@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly idna-encode domain names (see #3649).
+
 ### Added
 Added a `chmod()` method to the `File` and `Folder` class (see #3641).
 

@@ -794,6 +794,12 @@ abstract class System
 
 		$arrUrl = parse_url($strUrl);
 
+		// Add the scheme to ensure that parse_url works correctly
+		if (!isset($arrUrl['scheme']))
+		{
+			$arrUrl = parse_url('http://' . $strUrl);
+		}
+
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
@@ -824,11 +830,7 @@ abstract class System
 			$arrUrl['port'] = ':' . $arrUrl['port'];
 		}
 
-		// Path
-		if (isset($arrUrl['path']))
-		{
-			$arrUrl['path'] = $arrUrl['path'];
-		}
+		// Path does not have to be altered
 
 		// Query
 		if (isset($arrUrl['query']))
