@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not import commented definitions when importing style sheets (see #3478).
+
+### Fixed
 Correctly idna-encode domain names (see #3649).
 
 ### Added

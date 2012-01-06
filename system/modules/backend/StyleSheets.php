@@ -1193,7 +1193,16 @@ class StyleSheets extends Backend
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
-				$strFile = preg_replace('/\/\*\*\n( *\*.*\n){2,} *\*\//', '', $strFile); // see #2974
+				$strFile = preg_replace
+				(
+					array
+					(
+						'/\/\*\*\n( *\*.*\n){2,} *\*\//', // see #2974
+						'/\/\*[^\*]+\{[^\}]+\}[^\*]+\*\//' // see #3478
+					),
+					'', $strFile
+				);
+
 				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				for ($i=0; $i<count($arrChunks); $i++)
@@ -1303,9 +1312,9 @@ class StyleSheets extends Backend
 	 */
 	public function checkStyleSheetName($strName)
 	{
-		$objStyleSheet = Database::getInstance()->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
-												->limit(1)
-												->execute($strName);
+		$objStyleSheet = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
+										->limit(1)
+										->execute($strName);
 
 		if ($objStyleSheet->total < 1)
 		{
@@ -1313,10 +1322,10 @@ class StyleSheets extends Backend
 		}
 
 		$chunks = explode('-', $strName);
-		$i = !empty($chunks) ? array_pop($chunks) : 0;
+		$i = (count($chunks) > 1) ? array_pop($chunks) : 0;
 		$strName = implode('-', $chunks) . '-' . (intval($i) + 1);
 
-		return self::checkStyleSheetName($strName);
+		return $this->checkStyleSheetName($strName);
 	}
 
 
