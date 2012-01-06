@@ -5,6 +5,10 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly set the CSS ID and class of articles when just their teaser is shown
+(see #3656). Note that the teaser element has its own CSS ID/class field.
+
+### Fixed
 Correctly set the classes "first" and "last" in the RSS reader (see #3687).
 
 ### Improved
