@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The Email class now handles files with special characters (see #3713).
+
+### Fixed
 Correctly URL-encode image URLs (see #3751).
 
 ### Improved

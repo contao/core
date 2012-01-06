@@ -115,7 +115,7 @@ class Newsletter extends Backend
 				// Check the e-mail address
 				if (!$this->isValidEmailAddress($this->Input->get('recipient', true)))
 				{
-					$_SESSION['TL_PREVIEW_ERROR'] = true;
+					$_SESSION['TL_PREVIEW_MAIL_ERROR'] = true;
 					$this->redirect($referer);
 				}
 
@@ -282,10 +282,10 @@ class Newsletter extends Backend
   <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['start'][1] . '</p>' : '') . '
 </div>
 <div class="w50">
-  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>' . (isset($_SESSION['TL_PREVIEW_ERROR']) ? '
-  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : '') . '
-  <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
-  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '') . '
+  <h3><label for="ctrl_recipient">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][0] . '</label></h3>
+  <input type="text" name="recipient" id="ctrl_recipient" value="'.$this->User->email.'" class="tl_text" onfocus="Backend.getScrollOffset()">' . (isset($_SESSION['TL_PREVIEW_MAIL_ERROR']) ? '
+  <div class="tl_error">' . $GLOBALS['TL_LANG']['ERR']['email'] . '</div>' : (($GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] && $GLOBALS['TL_CONFIG']['showHelp']) ? '
+  <p class="tl_help tl_tip">' . $GLOBALS['TL_LANG']['tl_newsletter']['sendPreviewTo'][1] . '</p>' : '')) . '
 </div>
 <div class="clear"></div>
 </div>
@@ -300,7 +300,7 @@ class Newsletter extends Backend
 
 </form>';
 
-		$_SESSION['TL_PREVIEW_ERROR'] = false;
+		unset($_SESSION['TL_PREVIEW_MAIL_ERROR']);
 		return $return;
 	}
 

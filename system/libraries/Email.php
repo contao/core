@@ -438,6 +438,7 @@ class Email extends System
 				{
 					// Try to remove the base URL
 					$src = str_replace($strBase, '', $url);
+					$src = rawurldecode($src); // see #3713
 
 					// Embed the image if the URL is now relative
 					if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
