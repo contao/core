@@ -47,6 +47,18 @@ abstract class Events extends Module
 	protected $strUrl;
 
 	/**
+	 * Today 00:00:00
+	 * @var string
+	 */
+	protected $intTodayBegin;
+
+	/**
+	 * Today 23:59:59
+	 * @var string
+	 */
+	protected $intTodayEnd;
+
+	/**
 	 * Current events
 	 * @var array
 	 */
@@ -293,6 +305,30 @@ abstract class Events extends Module
 			{
 				$arrEvent['details'] = $this->String->toHtml5($arrEvent['details']);
 			}
+		}
+
+		// Get todays start and end timestamp
+		if ($this->intTodayBegin === null)
+		{
+			$this->intTodayBegin = strtotime('00:00:00');
+		}
+		if ($this->intTodayEnd === null)
+		{
+			$this->intTodayEnd = strtotime('23:59:59');
+		}
+
+		// Mark past and upcoming events (see #3692)
+		if ($intEnd < $this->intTodayBegin)
+		{
+			$arrEvent['class'] .= ' bygone';
+		}
+		elseif ($intStart > $this->intTodayEnd)
+		{
+			$arrEvent['class'] .= ' upcoming';
+		}
+		else
+		{
+			$arrEvent['class'] .= ' current';
 		}
 
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
