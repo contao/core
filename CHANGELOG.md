@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Restore basic entities before auto-generating an alias (see #3767).
+
 ### Improved
 Remove a page from the search index if it does not exist anymore (see #3761).
 

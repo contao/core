@@ -956,7 +956,7 @@ class tl_page extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = standardize($dc->activeRecord->title);
+			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->title));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")

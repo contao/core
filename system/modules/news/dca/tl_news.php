@@ -567,7 +567,7 @@ class tl_news extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($dc->activeRecord->headline);
+			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->headline));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")
