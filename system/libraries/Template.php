@@ -136,6 +136,16 @@ abstract class Template extends Controller
 
 
 	/**
+	 * Append a data array to the existing one
+	 * @param array
+	 */
+	public function appendData($arrData)
+	{
+		$this->arrData = array_merge($this->arrData, $arrData);
+	}
+
+
+	/**
 	 * Return the template data as array
 	 * @return array
 	 */
