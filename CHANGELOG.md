@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Re-added a color picker to the style sheets module (see #3228).
+
+### Fixed
 Do not import commented definitions when importing style sheets (see #3478).
 
 ### Fixed

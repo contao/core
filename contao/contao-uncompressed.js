@@ -484,7 +484,6 @@ var AjaxRequest =
 				el.checked = 'checked';
 
 				AjaxRequest.hideBox();
-				Backend.styleFormFields();
 				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();

@@ -6,6 +6,7 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
+  $objCombiner->add('plugins/colorpicker/css/mooRainbow.css');
   $objCombiner->add('plugins/chosen/chosen.css');
   $objCombiner->add('plugins/stylect/css/stylect.css');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
@@ -21,6 +22,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/colorpicker/js/mooRainbow.js');
   $objCombiner->add('plugins/chosen/chosen.js');
   $objCombiner->add('plugins/stylect/js/stylect.js');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);

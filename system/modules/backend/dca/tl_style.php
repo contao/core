@@ -637,7 +637,17 @@ class tl_style extends Backend
 	 */
 	public function colorPicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'" class="mooRainbow"');
+		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'"') . '
+  <script>
+  new MooRainbow("moo_'.$dc->field.'", {
+    id:"ctrl_' . $dc->field . '_0",
+    startColor:((cl = $("ctrl_' . $dc->field . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+    imgPath:"plugins/colorpicker/images/",
+    onComplete: function(color) {
+      $("ctrl_' . $dc->field . '_0").value = color.hex.replace("#", "");
+    }
+  });
+  </script>';
 	}
 
 
