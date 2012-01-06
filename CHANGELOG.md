@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+Remove a page from the search index if it does not exist anymore (see #3761).
+
 ### Fixed
 Select menus using the "chosen" plugin were not displayed when they were in a
 collapsed palette (see #3627).

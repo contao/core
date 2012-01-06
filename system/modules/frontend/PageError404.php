@@ -60,6 +60,21 @@ class PageError404 extends Frontend
 			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '" (' . $this->Environment->base . $this->Environment->request . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
+		// Check the search index
+		$objSearch = $this->Database->prepare("SELECT * FROM tl_search WHERE url=?")
+									->limit(1)
+									->execute($this->Environment->request);
+
+		// Remove the page from the search index (see #3761)
+		if ($objSearch->numRows)
+		{
+			$this->Database->prepare("DELETE FROM tl_search WHERE id=?")
+						   ->execute($objSearch->id);
+
+			$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
+						   ->execute($objSearch->id);
+		}
+
 		$objRootPage = $this->getRootPageFromUrl();
 
 		// Look for an 404 page
