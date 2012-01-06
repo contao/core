@@ -1123,6 +1123,7 @@ abstract class Controller extends System
 		// The new image could not be created
 		if (!$strSourceImage)
 		{
+			imagedestroy($strNewImage);
 			$this->log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
@@ -1901,11 +1902,11 @@ abstract class Controller extends System
 
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = $this->String->toXhtml($this->replaceInsertTags($objTeaser->teaser));
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = $this->String->toHtml5($this->replaceInsertTags($objTeaser->teaser));
 						}
 					}
 					break;
