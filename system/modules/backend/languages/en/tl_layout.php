@@ -82,6 +82,7 @@ $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
 $GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Use the local file';
 $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'Load from googleapis.com with local fallback';
 
 
 /**

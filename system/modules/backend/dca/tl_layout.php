@@ -306,7 +306,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'moo_local',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('moo_local', 'moo_googleapis'),
+			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
