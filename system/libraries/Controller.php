@@ -896,7 +896,7 @@ abstract class Controller extends System
 			return null;
 		}
 
-		$image = urldecode($image);
+		$image = rawurldecode($image);
 
 		// Check whether the file exists
 		if (!file_exists(TL_ROOT . '/' . $image))
@@ -932,7 +932,7 @@ abstract class Controller extends System
 		// Return the path of the new image if it exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))
 		{
-			return $strCacheName;
+			return $this->urlEncode($strCacheName);
 		}
 
 		// HOOK: add custom logic
@@ -945,7 +945,7 @@ abstract class Controller extends System
 
 				if (is_string($return))
 				{
-					return $return;
+					return $this->urlEncode($return);
 				}
 			}
 		}
@@ -953,7 +953,7 @@ abstract class Controller extends System
 		// Return the path to the original image if the GDlib cannot handle it
 		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
-			return $image;
+			return $this->urlEncode($image);
 		}
 
 		$intPositionX = 0;
@@ -1186,7 +1186,7 @@ abstract class Controller extends System
 			$this->import('Files');
 			$this->Files->rename($strCacheName, $target);
 
-			return $target;
+			return $this->urlEncode($target);
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
@@ -1197,7 +1197,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to new image
-		return $strCacheName;
+		return $this->urlEncode($strCacheName);
 	}
 
 
