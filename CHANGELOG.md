@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Correctly set the classes "first" and "last" in the RSS reader (see #3687).
+
 ### Improved
 Mark past and upcoming events with a special CSS class (see #3692).
 
