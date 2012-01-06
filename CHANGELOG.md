@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Improved
+Added a fallback which loads the local MooTool core script if the Google CDN is
+not available, e.g. if you are not connected to the Internet (see #3619)
+
 ### Fixed
 Re-added a color picker to the style sheets module (see #3228).
 
