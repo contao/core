@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['headerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
 		),
 		'footer' => array
@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['footerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
 		),
 		'cols' => array
@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthLeft'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'widthRight' => array
@@ -197,7 +197,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthRight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'sections' => array
@@ -364,7 +364,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['width'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'align' => array

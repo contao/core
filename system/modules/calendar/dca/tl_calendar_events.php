@@ -288,7 +288,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'imageUrl' => array
