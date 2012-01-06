@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### New
+Added the Russian and Ukrainian translations for the TinyMCE "typolinks" plugin
+(thanks to DyaGa) (see #3648)
+
 ### Improved
 Support the CSS "ex" unit (see #3652).
 
