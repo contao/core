@@ -437,7 +437,7 @@ class ModuleListing extends Module
 		}
 
 		// Associative array
-		elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options']))
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options']))
 		{
 			if ($blnListSingle)
 			{

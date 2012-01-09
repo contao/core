@@ -2841,7 +2841,7 @@ abstract class Controller extends System
 		// Add options
 		if (is_array($arrData['options']))
 		{
-			$blnIsAssociative = array_is_assoc($arrData['options']);
+			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
 			$blnUseReference = isset($arrData['reference']);
 
 			if ($arrData['eval']['includeBlankOption'])

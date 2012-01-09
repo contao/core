@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### New
+Added an "isAssociative" flag to the "eval" section of the DCA to mark numeric
+arrays as associative (see #3185).
+
 ### Fixed
 The Email class now handles files with special characters (see #3713).
 

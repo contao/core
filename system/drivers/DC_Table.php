@@ -488,7 +488,7 @@ class DC_Table extends DataContainer implements listable, editable
 			{
 				$row[$i] = isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) ? ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]])) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) : $row[$i];
 			}
-			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
 			{
 				$row[$i] = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options'][$row[$i]];
 			}
@@ -3440,7 +3440,7 @@ window.addEvent(\'domready\', function() {
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v];
 				}
-				elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options']))
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options']))
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options'][$_v];
 				}
@@ -3747,7 +3747,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
 					}
 
-					if (array_is_assoc($keys))
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($keys))
 					{
 						$keys = array_keys($keys);
 					}
@@ -3932,7 +3932,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						{
 							$args[$k] = is_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]]) ? $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]][0] : $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]];
 						}
-						elseif (array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options']) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
+						elseif (($GLOBALS['TL_DCA'][$able]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'])) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
 						{
 							$args[$k] = $GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]];
 						}
@@ -4747,7 +4747,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					}
 
 					// Associative array
-					elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 					{
 						$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$vv];
 					}
@@ -4855,7 +4855,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			{
 				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value];
 			}
-			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 			{
 				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
 			}
@@ -4892,7 +4892,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$group = '';
 		static $lookup = array();
 
-		if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 		{
 			$group = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
 		}
