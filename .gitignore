@@ -8,6 +8,7 @@ Thumbs.db
 .settings/
 .build/
 nbproject/
+.idea/
 
 # Contao
 .htaccess
