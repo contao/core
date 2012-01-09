@@ -73,16 +73,10 @@ class Combiner extends System
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')
 	{
-		// Determine the file type
-		if (preg_match('/\.css$/', $strFile))
-		{
-			$strType = self::CSS;
-		}
-		elseif (preg_match('/\.js$/', $strFile))
-		{
-			$strType = self::JS;
-		}
-		else
+		$strType = strrchr($strFile, '.');
+
+		// Check the file type
+		if ($strType != self::CSS && $strType != self::JS)
 		{
 			throw new Exception("Invalid file $strFile");
 		}
