@@ -30,10 +30,10 @@
 
 
 /**
- * Include SwiftMailer classes
+ * Include the SwiftMailer classes
  */
-require_once(TL_ROOT . '/plugins/swiftmailer/classes/Swift.php');
-require_once(TL_ROOT . '/plugins/swiftmailer/swift_init.php');
+require_once(TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php');
+require_once(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
 
 
 /**

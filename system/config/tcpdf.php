@@ -34,8 +34,8 @@
  * plugins/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/plugins/tcpdf/');
-define('K_PATH_URL', $this->Environment->base . 'plugins/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/system/library/TCPDF/');
+define('K_PATH_URL', $this->Environment->base . 'system/library/TCPDF/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', K_PATH_MAIN . 'cache/');
 define('K_PATH_URL_CACHE', K_PATH_URL . 'cache/');

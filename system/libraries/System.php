@@ -726,7 +726,7 @@ abstract class System
 	{
 		if (!class_exists('idna_convert', false))
 		{
-			require_once(TL_ROOT . '/plugins/idna/idna_convert.class.php');
+			require_once(TL_ROOT . '/system/library/IDNA/idna_convert.class.php');
 		}
 
 		$objIdn = new idna_convert();
@@ -743,7 +743,7 @@ abstract class System
 	{
 		if (!class_exists('idna_convert', false))
 		{
-			require_once(TL_ROOT . '/plugins/idna/idna_convert.class.php');
+			require_once(TL_ROOT . '/system/library/IDNA/idna_convert.class.php');
 		}
 
 		$objIdn = new idna_convert();
