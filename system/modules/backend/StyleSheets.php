@@ -1491,7 +1491,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1545,7 +1545,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1608,7 +1608,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_4,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1759,7 +1759,14 @@ class StyleSheets extends Backend
 				case 'border-width':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1806,7 +1813,14 @@ class StyleSheets extends Backend
 				case 'border-radius':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1917,9 +1931,11 @@ class StyleSheets extends Backend
 						case 'underline':
 							$arrSet['fontstyle'][] = 'underline';
 							break;
+
 						case 'none':
 							$arrSet['fontstyle'][] = 'notUnderlined';
 							break;
+
 						case 'overline':
 						case 'line-through':
 							$arrSet['fontstyle'][] = $arrChunks[1];
