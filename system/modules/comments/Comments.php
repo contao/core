@@ -298,7 +298,7 @@ class Comments extends Frontend
 				'email' => $arrWidgets['email']->value,
 				'website' => $strWebsite,
 				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->Environment->ip,
+				'ip' => $this->anonymizeIp($this->Environment->ip),
 				'date' => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);

@@ -571,7 +571,7 @@ class Newsletter extends Backend
 			if ($objRecipient->total < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, addedOn=$time, ip=?")
-							   ->execute($intNewsletter, $arrData['email'], $this->Environment->ip);
+							   ->execute($intNewsletter, $arrData['email'], $this->anonymizeIp($this->Environment->ip));
 			}
 		}
 	}
@@ -683,7 +683,7 @@ class Newsletter extends Backend
 			if ($objRecipient->total < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=?, addedOn=?, ip=?")
-							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->Environment->ip : ''));
+							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->anonymizeIp($this->Environment->ip) : ''));
 			}
 		}
 

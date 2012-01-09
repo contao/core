@@ -4,6 +4,12 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### New
+Added an option to anonymize IP addresses which are stored in the database and
+IP addresses which are sent to Google Analytics (see #3406 and #2052). This does
+not include the `tl_session` table though, because IP addresses are bound to the
+session for security reasons.
+
 ### Fixed
 Force line-breaks in the filter menu so the filters do not exceed the column
 width (see #3777).

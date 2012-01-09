@@ -185,7 +185,7 @@ abstract class System
 		}
 		if ($this->Environment->remoteAddr)
 		{
-			$strIp = $this->Environment->remoteAddr;
+			$strIp = $this->anonymizeIp($this->Environment->remoteAddr);
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
@@ -885,6 +885,38 @@ abstract class System
 	protected function getFormattedNumber($varNumber, $intDecimals=2)
 	{
 		return number_format(round($varNumber, $intDecimals), $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
+	}
+
+
+	/**
+	 * Anonymize an IP address by overriding the last chunk
+	 * @param string
+	 * @return string
+	 */
+	protected function anonymizeIp($strIp)
+	{
+		// The feature has been disabled
+		if (!$GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
+		{
+			return $strIp;
+		}
+
+		// Localhost
+		if ($strIp == '127.0.0.1' || $strIp == '::1')
+		{
+			return $strIp;
+		}
+
+		// IPv6
+		if (strpos($strIp, ':') !== false)
+		{
+			return str_replace(strrchr($strIp, ':'), ':xxxx', $strIp);
+		}
+		// IPv4
+		else
+		{
+			return str_replace(strrchr($strIp, '.'), '.xxx', $strIp);
+		}
 	}
 }
 

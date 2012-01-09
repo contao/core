@@ -249,7 +249,7 @@ class ModuleSubscribe extends Module
 			$arrValues[] = $varInput;
 			$arrValues[] = '';
 			$arrValues[] = $time;
-			$arrValues[] = $this->Environment->ip;
+			$arrValues[] = $this->anonymizeIp($this->Environment->ip);
 			$arrValues[] = $strToken;
 
 			$arrCondition[] = '(?, ?, ?, ?, ?, ?, ?)';
