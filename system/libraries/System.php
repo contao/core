@@ -795,7 +795,7 @@ abstract class System
 		$arrUrl = parse_url($strUrl);
 
 		// Add the scheme to ensure that parse_url works correctly
-		if (!isset($arrUrl['scheme']))
+		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
 		{
 			$arrUrl = parse_url('http://' . $strUrl);
 		}
