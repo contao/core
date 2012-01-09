@@ -9,6 +9,7 @@ Thumbs.db
 .build/
 .idea/
 nbproject/
+.idea/
 
 # Contao
 .htaccess
