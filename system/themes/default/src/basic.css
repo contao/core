@@ -257,6 +257,14 @@ pre,.tl_textarea.monospace {
 .tl_checkbox_single_container label {
 	font-weight:bold;
 }
+.tl_checkbox_container label {
+	display:block;
+	margin:-14px 0;
+	padding-left:20px;
+}
+.tl_checkbox_container label:last-child {
+	margin-bottom:0;
+}
 
 /* Grouped checkboxes */
 .checkbox_toggler {

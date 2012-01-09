@@ -849,6 +849,20 @@ label.tl_change_selected {
 .tl_checkbox_wizard {
 	padding-top:2px;
 }
+.tl_checkbox_wizard label {
+	display:block;
+	margin:-14px 0;
+	padding-left:48px;
+}
+.tl_checkbox_wizard label:last-child {
+	margin-bottom:0;
+}
+.tl_checkbox_wizard .fixed label {
+	padding-left:20px;
+}
+.tl_checkbox_wizard .tl_checkbox {
+	margin-right:0;
+}
 
 /* Ajax box */
 #tl_ajaxBox {
