@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Force line-breaks in the filter menu so the filters do not exceed the column
+width (see #3777).
+
 ### New
 Added an "isAssociative" flag to the "eval" section of the DCA to mark numeric
 arrays as associative (see #3185).

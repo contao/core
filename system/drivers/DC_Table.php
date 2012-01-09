@@ -4544,7 +4544,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Add sorting options
-		foreach ($sortingFields as $field)
+		foreach ($sortingFields as $cnt=>$field)
 		{
 			$arrValues = array();
 			$arrProcedure = array();
@@ -4778,6 +4778,12 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			// End select menu
 			$fields .= '
 </select> ';
+
+			// Force a line-break after six elements (see #3777)
+			if ((($cnt + 1) % 6) == 0)
+			{
+				$fields .= '<br>';
+			}
 		}
 
 		return '
