@@ -3445,15 +3445,25 @@ window.addEvent(\'domready\', function() {
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options'][$_v];
 				}
 
-				// Add sorting field
-				if (strlen($_v))
+				// Add the sorting field
+				if ($_v != '')
 				{
-					$key = strlen($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0]  : $v;
+					$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0]  : $v;
 					$add[$key] = $_v;
 				}
 			}
 
-			// Output header data
+			// Trigger the header_callback (see #3417)
+			if (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']))
+			{
+				$strClass = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback'][0];
+				$strMethod = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback'][1];
+
+				$this->import($strClass);
+				$add = $this->$strClass->$strMethod($add, $this);
+			}
+
+			// Output the header data
 			$return .= '
 
 <table class="tl_header_table">';
