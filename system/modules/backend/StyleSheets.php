@@ -1350,13 +1350,13 @@ class StyleSheets extends Backend
 		foreach ($arrAttributes as $strDefinition)
 		{
 			// Skip empty definitions
-			if (!strlen(trim($strDefinition)))
+			if (trim($strDefinition) == '')
 			{
 				continue;
 			}
 
 			// Handle important definitions
-			if (preg_match('/important/i', $strDefinition))
+			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false)
 			{
 				$arrSet['own'][] = $strDefinition;
 				continue;
@@ -1715,11 +1715,11 @@ class StyleSheets extends Backend
 						'left' => $varValue,
 						'unit' => $strUnit
 					);
-					if (strlen($arrWSC[1]))
+					if ($arrWSC[1] != '')
 					{
 						$arrSet['borderstyle'] = $arrWSC[1];
 					}
-					if (strlen($arrWSC[2]))
+					if ($arrWSC[2] != '')
 					{
 						$arrSet['bordercolor'] = str_replace('#', '', $arrWSC[2]);
 					}
@@ -1799,11 +1799,6 @@ class StyleSheets extends Backend
 					break;
 
 				case 'border-color':
-					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'transparent')
-					{
-						$arrSet['own'][] = $strDefinition;
-						break;
-					}
 					$arrSet['border'] = 1;
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;
