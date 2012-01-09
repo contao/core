@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Support data: URIs in the style sheet generator (see #3661).
+
 ### New
 Added a "header_callback" to the parent view to format the header fields of the
 parent table (see #3417).
