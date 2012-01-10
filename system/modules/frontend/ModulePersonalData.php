@@ -226,7 +226,7 @@ class ModulePersonalData extends Module
 						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 						{
 							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this->User, $varValue);
+							$this->$callback[0]->$callback[1]($this->User, $varValue, $this);
 						}
 					}
 				}
@@ -255,7 +255,7 @@ class ModulePersonalData extends Module
 				foreach ($GLOBALS['TL_HOOKS']['updatePersonalData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA']);
+					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
 			
