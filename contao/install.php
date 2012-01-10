@@ -192,7 +192,7 @@ class InstallTool extends Backend
 		// Import the Files object AFTER storing the FTP settings
 		$this->import('Files');
 
-		if (!$this->Files->is_writeable('system/config/config.php'))
+		if (!$this->Files->is_writeable('system/config/default.php'))
 		{
 			$this->outputAndExit();
 		}

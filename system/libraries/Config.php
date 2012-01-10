@@ -134,7 +134,7 @@ class Config
 	 */
 	protected function initialize()
 	{
-		include(TL_ROOT . '/system/config/config.php');
+		include(TL_ROOT . '/system/config/default.php');
 
 		if (file_exists(TL_ROOT . '/system/config/localconfig.php'))
 		{
