@@ -32,7 +32,7 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables']  = array('Purge data', 'Please select the data you want to purge.');
+$GLOBALS['TL_LANG']['tl_maintenance']['cacheTables']  = array('Purge data', 'Please select the data you want to purge or rebuild.');
 $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 'Automatically log in a front end user to index protected pages.');
 
 
@@ -40,11 +40,11 @@ $GLOBALS['TL_LANG']['tl_maintenance']['frontendUser'] = array('Front end user', 
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCache']    = 'Purge data';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']     = 'system/html';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'system/scripts';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearHtml']     = 'assets/images';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'assets/css, assets/js';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'XML files';
-$GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS files';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'Rebuild XML files';
+$GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'Rebuild CSS files';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'The data has been purged';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live update ID';
