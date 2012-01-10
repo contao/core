@@ -5,6 +5,11 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Modules are now disabled by adding a `.skip` file instead of using the global
+`inactiveModules` array. This way the local configuration file does not have to
+be included twice in the `Config` class.
+
+### Changed
 Moved the Contao framework into the 'library' folder.
 
 ### Changed

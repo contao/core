@@ -314,7 +314,7 @@ class Config
 	public function add($strKey, $varValue)
 	{
 		$this->blnIsModified = true;
-		$this->Files = Files::getInstance(); // Required in the destructor
+		$this->Files = \Files::getInstance(); // Required in the destructor
 		$this->arrData[$strKey] = $this->escape($varValue) . ';';
 	}
 
@@ -337,7 +337,7 @@ class Config
 	public function delete($strKey)
 	{
 		$this->blnIsModified = true;
-		$this->Files = Files::getInstance(); // Required in the destructor
+		$this->Files = \Files::getInstance(); // Required in the destructor
 		unset($this->arrData[$strKey]);
 	}
 

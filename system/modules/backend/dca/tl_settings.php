@@ -434,7 +434,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'],
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_settings', 'getModules'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'save_callback' => array
+			(
+				array('tl_settings', 'updateInactiveModules')
+			)
 		),
 		'undoPeriod' => array
 		(
@@ -550,6 +554,51 @@ class tl_settings extends Backend
 
 		natcasesort($arrReturn);
 		return $arrReturn;
+	}
+
+
+	/**
+	 * Update the inactive modules
+	 * @param mixed
+	 */
+	public function updateInactiveModules($varValue)
+	{
+		$arrModules = deserialize($varValue);
+
+		if (!is_array($arrModules))
+		{
+			$arrModules = array();
+		}
+
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		{
+			if (strncmp($strModule, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			// Add the .skip file to disable the module
+			if (in_array($strModule, $arrModules))
+			{
+				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile->write('As long as this file exists, the module will be ignored.');
+					$objFile->close();
+				}
+			}
+			// Remove the .skip if it exists
+			else
+			{
+				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile->delete();
+				}
+			}
+		}
+
+		return $varValue;
 	}
 
 
