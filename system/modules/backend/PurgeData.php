@@ -93,13 +93,13 @@ class PurgeData extends Backend implements executable
 
 			foreach ($tables as $table)
 			{
-				// Html folder
+				// HTML folder
 				if ($table == 'html_folder')
 				{
 					$this->Automator->purgeHtmlFolder();
 				}
 
-				// Scripts folder
+				// Script folders
 				elseif ($table == 'scripts_folder')
 				{
 					$this->Automator->purgeScriptsFolder();
@@ -174,18 +174,23 @@ class PurgeData extends Backend implements executable
 
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
-		$objTemplate->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
-		$objTemplate->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
-		$objTemplate->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
-		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
-		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$objTemplate->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$objTemplate->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
-		/* FIXME
-		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/html')) - 2));
-		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/scripts')) - 1));
-		*/
+
+		// HTML folder
+		$objTemplate->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
+		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/images')) - 1));
+
+		// Script folders
+		$objTemplate->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
+		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/js')) + count(scan(TL_ROOT . '/assets/css')) - 3));
+
+		// Temporary directory
+		$objTemplate->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$objTemplate->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
+
+		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
+		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$objTemplate->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$objTemplate->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
 		$objTemplate->cacheTables = $arrCacheTables;
