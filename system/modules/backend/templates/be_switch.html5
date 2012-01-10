@@ -16,7 +16,8 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
-  $objCombiner->add('contao/contao.js');
+  $objCombiner->add('plugins/contao/Request.Contao.js');
+  $objCombiner->add('system/modules/backend/html/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 </head>

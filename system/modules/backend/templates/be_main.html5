@@ -8,7 +8,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/colorpicker/css/mooRainbow.css');
   $objCombiner->add('plugins/chosen/chosen.css');
-  $objCombiner->add('plugins/stylect/css/stylect.css');
+  $objCombiner->add('plugins/contao/stylect/css/stylect.css');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
   $objCombiner->add('plugins/datepicker/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -24,10 +24,11 @@
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
   $objCombiner->add('plugins/colorpicker/js/mooRainbow.js');
   $objCombiner->add('plugins/chosen/chosen.js');
-  $objCombiner->add('plugins/stylect/js/stylect.js');
+  $objCombiner->add('plugins/contao/stylect/js/stylect.js');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
   $objCombiner->add('plugins/datepicker/datepicker.js', DATEPICKER);
-  $objCombiner->add('contao/contao.js');
+  $objCombiner->add('plugins/contao/Request.Contao.js');
+  $objCombiner->add('system/modules/backend/html/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>

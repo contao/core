@@ -69,8 +69,8 @@ class ContentTable extends ContentElement
 		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
-			$GLOBALS['TL_CSS'][] = 'plugins/tablesort/css/tablesort.css';
-			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
+			$GLOBALS['TL_CSS'][] = 'plugins/contao/tablesort/css/tablesort.css';
+			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/contao/tablesort/js/tablesort.js"></script>';
 			$this->Template->sortable = true;
 		}
 
