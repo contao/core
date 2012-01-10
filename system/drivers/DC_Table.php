@@ -210,7 +210,7 @@ class DC_Table extends DataContainer implements listable, editable
 			 // Unless there are any root records specified, use all records with parent ID 0
 			if (!isset($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']) || $GLOBALS['TL_DCA'][$table]['list']['sorting']['root'] === false)
 			{
-				$objIds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $strTable) ? ' ORDER BY sorting' : ''))
+				$objIds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($this->Database->fieldExists('sorting', $table) ? ' ORDER BY sorting' : ''))
 										 ->execute(0);
 
 				if ($objIds->numRows > 0)
@@ -222,7 +222,7 @@ class DC_Table extends DataContainer implements listable, editable
 			// Get root records from global configuration file
 			elseif (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']))
 			{
-				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table, $this->Database->fieldExists('sorting', $strTable));
+				$this->root = $this->eliminateNestedPages($GLOBALS['TL_DCA'][$table]['list']['sorting']['root'], $table, $this->Database->fieldExists('sorting', $table));
 			}
 		}
 
@@ -488,7 +488,7 @@ class DC_Table extends DataContainer implements listable, editable
 			{
 				$row[$i] = isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) ? ((is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]])) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]][0] : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['reference'][$row[$i]]) : $row[$i];
 			}
-			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options']))
 			{
 				$row[$i] = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$i]['options'][$row[$i]];
 			}
@@ -1702,9 +1702,9 @@ class DC_Table extends DataContainer implements listable, editable
 					}
 
 					// Convert CSV fields (see #2890)
-					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'])
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] && isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv']))
 					{
-						$this->varValue = trimsplit(',', $this->varValue);
+						$this->varValue = trimsplit($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['csv'], $this->varValue);
 					}
 
 					// Call load_callback
@@ -1722,8 +1722,8 @@ class DC_Table extends DataContainer implements listable, editable
 						$this->objActiveRecord->{$this->strField} = $this->varValue;
 					}
 
-					// Build row
-					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
+					// Build the row and pass the current palette string (thanks to Tristan Lins)
+					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
 				$class = 'tl_box';
@@ -2079,8 +2079,8 @@ window.addEvent(\'domready\', function() {
 					// Re-set the current value
 					$this->objActiveRecord->{$this->strField} = $this->varValue;
 
-					// Build the current row
-					$blnAjax ? $strAjax .= $this->row() : $return .= $this->row();
+					// Build the row and pass the current palette string (thanks to Tristan Lins)
+					$blnAjax ? $strAjax .= $this->row($this->strPalette) : $return .= $this->row($this->strPalette);
 				}
 
 				// Close box
@@ -2592,9 +2592,9 @@ window.addEvent(\'domready\', function() {
 				{
 					$varValue = '';
 				}
-				elseif ($arrData['eval']['csv'])
+				elseif (isset($arrData['eval']['csv']))
 				{
-					$varValue = implode(',', $varValue); // see #2890
+					$varValue = implode($arrData['eval']['csv'], $varValue); // see #2890
 				}
 				else
 				{
@@ -2604,9 +2604,9 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Convert arrays (see #2890)
-		if ($arrData['eval']['multiple'] && $arrData['eval']['csv'])
+		if ($arrData['eval']['multiple'] && isset($arrData['eval']['csv']))
 		{
-			$varValue = implode(',', deserialize($varValue, true));
+			$varValue = implode($arrData['eval']['csv'], deserialize($varValue, true));
 		}
 
 		// Trigger the save_callback
@@ -2636,12 +2636,9 @@ window.addEvent(\'domready\', function() {
 
 			if ($objUpdateStmt->affectedRows)
 			{
-				if ($varValue != $this->varValue)
+				if (!$arrData['eval']['submitOnChange'])
 				{
-					if (!$arrData['eval']['submitOnChange'])
-					{
-						$this->blnCreateNewVersion = true;
-					}
+					$this->blnCreateNewVersion = true;
 				}
 
 				$this->varValue = deserialize($varValue);
@@ -2681,12 +2678,12 @@ window.addEvent(\'domready\', function() {
 				{
 					$trigger = $objFields->$name;
 
-					// Overwrite the trigger if the page is not reloaded
+					// Overwrite the trigger
 					if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 					{
 						$key = ($this->Input->get('act') == 'editAll') ? $name.'_'.$this->intId : $name;
 
-						if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$name]['eval']['submitOnChange'])
+						if (isset($_POST[$key]))
 						{
 							$trigger = $this->Input->post($key);
 						}
@@ -2726,6 +2723,15 @@ window.addEvent(\'domready\', function() {
 			}
 			elseif (count($sValues) > 1)
 			{
+				foreach ($sValues as $k=>$v)
+				{
+					// Unset selectors that just trigger subpalettes (see #3738)
+					if (isset($GLOBALS['TL_DCA'][$this->strTable]['subpalettes'][$v]))
+					{
+						unset($sValues[$k]);
+					}
+				}
+
 				$names = $this->combiner($sValues);
 			}
 			else
@@ -3442,20 +3448,30 @@ Backend.makeTreeViewSortable();
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['reference'][$_v];
 				}
-				elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options']))
+				elseif ($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options']))
 				{
 					$_v = $GLOBALS['TL_DCA'][$this->ptable]['fields'][$v]['options'][$_v];
 				}
 
-				// Add sorting field
-				if (strlen($_v))
+				// Add the sorting field
+				if ($_v != '')
 				{
-					$key = strlen($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0]  : $v;
+					$key = isset($GLOBALS['TL_LANG'][$this->ptable][$v][0]) ? $GLOBALS['TL_LANG'][$this->ptable][$v][0]  : $v;
 					$add[$key] = $_v;
 				}
 			}
 
-			// Output header data
+			// Trigger the header_callback (see #3417)
+			if (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback']))
+			{
+				$strClass = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback'][0];
+				$strMethod = $GLOBALS['TL_DCA'][$table]['list']['sorting']['header_callback'][1];
+
+				$this->import($strClass);
+				$add = $this->$strClass->$strMethod($add, $this);
+			}
+
+			// Output the header data
 			$return .= '
 
 <table class="tl_header_table">';
@@ -3749,7 +3765,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						$keys = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['options'];
 					}
 
-					if (array_is_assoc($keys))
+					if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($keys))
 					{
 						$keys = array_keys($keys);
 					}
@@ -3934,7 +3950,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						{
 							$args[$k] = is_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]]) ? $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]][0] : $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]];
 						}
-						elseif (array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options']) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
+						elseif (($GLOBALS['TL_DCA'][$able]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'])) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
 						{
 							$args[$k] = $GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]];
 						}
@@ -4523,7 +4539,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 					{
 						// CSV lists (see #2890)
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
+						if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv']))
 						{
 							$this->procedure[] = $this->Database->findInSet('?', $field, true);
 							$this->values[] = $session['filter'][$filter][$field];
@@ -4546,7 +4562,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Add sorting options
-		foreach ($sortingFields as $field)
+		foreach ($sortingFields as $cnt=>$field)
 		{
 			$arrValues = array();
 			$arrProcedure = array();
@@ -4611,7 +4627,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 							$options[$v] = date('Y-m', $v);
 							$intMonth = (date('m', $v) - 1);
 
-							if (strlen($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
+							if (isset($GLOBALS['TL_LANG']['MONTHS'][$intMonth]))
 							{
 								$options[$v] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . date('Y', $v);
 							}
@@ -4650,9 +4666,9 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					foreach($options as $option)
 					{
 						// CSV lists (see #2890)
-						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'])
+						if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv']))
 						{
-							$doptions = trimsplit(',', $option);
+							$doptions = trimsplit($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['csv'], $option);
 						}
 						else
 						{
@@ -4749,7 +4765,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 					}
 
 					// Associative array
-					elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 					{
 						$option_label = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$vv];
 					}
@@ -4780,6 +4796,12 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			// End select menu
 			$fields .= '
 </select> ';
+
+			// Force a line-break after six elements (see #3777)
+			if ((($cnt + 1) % 6) == 0)
+			{
+				$fields .= '<br>';
+			}
 		}
 
 		return '
@@ -4857,7 +4879,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			{
 				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['reference'][$value];
 			}
-			elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+			elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 			{
 				$remoteNew = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
 			}
@@ -4894,7 +4916,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$group = '';
 		static $lookup = array();
 
-		if (array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))
 		{
 			$group = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options'][$value];
 		}

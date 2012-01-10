@@ -223,6 +223,12 @@ class FileTree extends Widget
 			return '';
 		}
 
+		// Make sure that $this->varValue is an array (see #3369)
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array($this->varValue);
+		}
+
 		static $session;
 		$session = $this->Session->getData();
 

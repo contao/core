@@ -143,6 +143,7 @@
 	padding-top: 1px;
 	height: 14px;
 	margin: 0 1px 1px 0;
+	font-weight: normal;
 }
 .datepicker_dashboard .days .titles {
 	height: 15px;
@@ -255,4 +256,13 @@
 	color: #533 !important;
 	cursor: default !important;
 	text-decoration: line-through;
+}
+
+.datepicker_dashboard table {
+	border-spacing: 0;
+}
+
+.datepicker_dashboard th,
+.datepicker_dashboard td {
+	padding: 0;
 }

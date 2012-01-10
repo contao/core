@@ -39,12 +39,18 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-bottom:0;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 #header h1 {
 	margin:0;
-	padding:2px 0 4px 6px;
+	padding:4px 8px 6px;
 	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 
 /* Container */
@@ -61,6 +67,10 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-top:0;
+	-moz-border-radius:0 0 3px 3px;
+	-webkit-border-radius:0 0 3px 3px;
+	border-radius:0 0 3px 3px;
+	box-shadow:0 3px 6px #ccc;
 }
 
 /* Headlines */
@@ -207,7 +217,6 @@ fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:6px;
 	border:1px solid #ddd;
 	border-width:1px 0 0;
-	background:url("images/palBg.jpg") left top repeat-x;
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	margin-top:-1px;

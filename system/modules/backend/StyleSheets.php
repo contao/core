@@ -97,18 +97,27 @@ class StyleSheets extends Backend
 		// Delete old style sheets
 		foreach (scan(TL_ROOT . '/system/scripts', true) as $file)
 		{
+			// Skip directories
 			if (is_dir(TL_ROOT . '/system/scripts/' . $file))
 			{
 				continue;
 			}
 
+			// Preserve root files (is this still required now that scripts are in system/scripts?)
 			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
+			{
+				continue;
+			}
+
+			// Do not delete the combined files (see #3605)
+			if (preg_match('/^[a-f0-9]{12}\.css$/', $file))
 			{
 				continue;
 			}
 
 			$objFile = new File('system/scripts/' . $file);
 
+			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
 			{
 				$objFile->delete();
@@ -467,7 +476,7 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
@@ -485,7 +494,7 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
 				}
 
@@ -515,7 +524,7 @@ class StyleSheets extends Backend
 					// CSS3 PIE only supports -pie-background, so if there is a background image, include it here, too.
 					if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 					{
-						$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 						$bgImage = 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
@@ -982,7 +991,7 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
 			}
 		}
@@ -997,7 +1006,7 @@ class StyleSheets extends Backend
 		if ($row['own'] != '')
 		{
 			$own = trim($this->String->decodeEntities($row['own']));
-			$own = preg_replace('/url\("([^\/])/', 'url("' . $strGlue . "$1", $own);
+			$own = preg_replace('/url\("(?!data:)([^\/])/', 'url("' . $strGlue . "$1", $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
@@ -1184,7 +1193,16 @@ class StyleSheets extends Backend
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
-				$strFile = preg_replace('/\/\*\*\n( *\*.*\n){2,} *\*\//', '', $strFile); // see #2974
+				$strFile = preg_replace
+				(
+					array
+					(
+						'/\/\*\*\n( *\*.*\n){2,} *\*\//', // see #2974
+						'/\/\*[^\*]+\{[^\}]+\}[^\*]+\*\//' // see #3478
+					),
+					'', $strFile
+				);
+
 				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				for ($i=0; $i<count($arrChunks); $i++)
@@ -1294,9 +1312,9 @@ class StyleSheets extends Backend
 	 */
 	public function checkStyleSheetName($strName)
 	{
-		$objStyleSheet = Database::getInstance()->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
-												->limit(1)
-												->execute($strName);
+		$objStyleSheet = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
+										->limit(1)
+										->execute($strName);
 
 		if ($objStyleSheet->total < 1)
 		{
@@ -1304,10 +1322,10 @@ class StyleSheets extends Backend
 		}
 
 		$chunks = explode('-', $strName);
-		$i = !empty($chunks) ? array_pop($chunks) : 0;
+		$i = (count($chunks) > 1) ? array_pop($chunks) : 0;
 		$strName = implode('-', $chunks) . '-' . (intval($i) + 1);
 
-		return self::checkStyleSheetName($strName);
+		return $this->checkStyleSheetName($strName);
 	}
 
 
@@ -1332,13 +1350,13 @@ class StyleSheets extends Backend
 		foreach ($arrAttributes as $strDefinition)
 		{
 			// Skip empty definitions
-			if (!strlen(trim($strDefinition)))
+			if (trim($strDefinition) == '')
 			{
 				continue;
 			}
 
 			// Handle important definitions
-			if (preg_match('/important/i', $strDefinition))
+			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false)
 			{
 				$arrSet['own'][] = $strDefinition;
 				continue;
@@ -1473,7 +1491,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1527,7 +1545,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1590,7 +1608,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_4,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1697,11 +1715,11 @@ class StyleSheets extends Backend
 						'left' => $varValue,
 						'unit' => $strUnit
 					);
-					if (strlen($arrWSC[1]))
+					if ($arrWSC[1] != '')
 					{
 						$arrSet['borderstyle'] = $arrWSC[1];
 					}
-					if (strlen($arrWSC[2]))
+					if ($arrWSC[2] != '')
 					{
 						$arrSet['bordercolor'] = str_replace('#', '', $arrWSC[2]);
 					}
@@ -1741,7 +1759,14 @@ class StyleSheets extends Backend
 				case 'border-width':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1781,11 +1806,6 @@ class StyleSheets extends Backend
 					break;
 
 				case 'border-color':
-					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'transparent')
-					{
-						$arrSet['own'][] = $strDefinition;
-						break;
-					}
 					$arrSet['border'] = 1;
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;
@@ -1793,7 +1813,14 @@ class StyleSheets extends Backend
 				case 'border-radius':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1904,9 +1931,11 @@ class StyleSheets extends Backend
 						case 'underline':
 							$arrSet['fontstyle'][] = 'underline';
 							break;
+
 						case 'none':
 							$arrSet['fontstyle'][] = 'notUnderlined';
 							break;
+
 						case 'overline':
 						case 'line-through':
 							$arrSet['fontstyle'][] = $arrChunks[1];

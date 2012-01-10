@@ -1,8 +1,160 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.RC1 (XXXX-XX-XX)
+Version 2.11.0 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+Support data: URIs in the style sheet generator (see #3661).
+
+### New
+Added a "header_callback" to the parent view to format the header fields of the
+parent table (see #3417).
+
+### New
+Added an option to anonymize IP addresses which are stored in the database and
+IP addresses which are sent to Google Analytics (see #3406 and #2052). This does
+not include the `tl_session` table though, because IP addresses are bound to the
+session for security reasons.
+
+### Fixed
+Force line-breaks in the filter menu so the filters do not exceed the column
+width (see #3777).
+
+### New
+Added an "isAssociative" flag to the "eval" section of the DCA to mark numeric
+arrays as associative (see #3185).
+
+### Fixed
+The Email class now handles files with special characters (see #3713).
+
+### Fixed
+Correctly URL-encode image URLs (see #3751).
+
+### Improved
+Added a fallback which loads the local MooTool core script if the Google CDN is
+not available, e.g. if you are not connected to the Internet (see #3619)
+
+### Fixed
+Re-added a color picker to the style sheets module (see #3228).
+
+### Fixed
+Do not import commented definitions when importing style sheets (see #3478).
+
+### Fixed
+Correctly idna-encode domain names (see #3649).
+
+### Added
+Added a `chmod()` method to the `File` and `Folder` class (see #3641).
+
+### New
+Added the Russian and Ukrainian translations for the TinyMCE "typolinks" plugin
+(thanks to DyaGa) (see #3648)
+
+### Improved
+Support the CSS "ex" unit (see #3652).
+
+### Fixed
+Correctly set the CSS ID and class of articles when just their teaser is shown
+(see #3656). Note that the teaser element has its own CSS ID/class field.
+
+### Fixed
+Correctly set the classes "first" and "last" in the RSS reader (see #3687).
+
+### Improved
+Mark past and upcoming events with a special CSS class (see #3692).
+
+### Fixed
+Restore basic entities before auto-generating an alias (see #3767).
+
+### Improved
+Remove a page from the search index if it does not exist anymore (see #3761).
+
+### Fixed
+Select menus using the "chosen" plugin were not displayed when they were in a
+collapsed palette (see #3627).
+
+### Improved
+When using Contao via SSL, automatically switch to an SSL connection when
+running the Live Update (see #3538).
+
+### New
+Added the "sqlCompileCommands", "sqlGetFromFile" and "sqlGetFromDB" hooks to the
+`DbInstaller` class (see #3281).
+
+### Improved
+Added the CSS class "trail" to the back end navigation (see #3301).
+
+### Changed
+The static URL is now prepended automatically and does not need to be added in
+your custom script (see #3469). The change is backwards compatible, so you do
+not need to change your existing modules.
+
+### Improved
+Added an option to include dynamically added style sheets in the combined CSS
+file (see #3161). This is done by passing a second "argument" to the URL:
+
+  `$GLOBAL['TL_CSS'][] = 'style.css|screen|static';`
+
+Important: If you add a style sheet to the combined file, do not add a static
+URL like `TL_PLUGINS_URL` to the path!
+
+### Fixed
+Provide an ID for single lightbox images in HTML5 (see #3742).
+
+### Fixed
+The front controller now works with the `index.php` fragment again (see #3689).
+
+### Fixed
+Do not override the global settings upon every call of `getPageDetails()`.
+
+### Improved
+In a FAQ list module you can now optionally add an FAQ reader module to
+automatically switch to the full article if an item has been selected. This
+allows us to use the FAQ list and FAQ reader on the same page.
+
+### Fixed
+Do not remove the combined style sheets when updating the CSS files (see #3605).
+It might break the layout of cached pages.
+
+### Fixed
+Consider the sitemap setting when finding searchable pages (see #3728).
+
+### Improved
+Improved the chosen implementation so it is optional in the front end and can
+be added using the "moo_chosen" template. Also, the styled select scripts have
+been moved to a plugin ("stylect") and can be loaded in the front end now.
+
+### Fixed
+Correctly handle the "add language to URL" feature in sitemaps and feeds.
+
+### New
+You can now optionally skip the `items/` and `events/` fragment in the URL and
+make Contao discover the item automatically. If the number of fragments is even,
+the Controller will add the second fragment as `$_GET['auto_item']`, which you
+can then use in your reader modules to set the item.
+
+
+Version 2.11.RC1 (2011-12-30)
 -----------------------------
+
+### New
+The back end file uploader can now be replaced with a custom one (see #3236).
+Also, the uploader now tries to use the HTML5 "multiple" attribute in the file
+input field if the browser supports it. 
+
+### Improved
+Added edit buttons to the module wizard to directly jump to a front end module
+from a page layout (see #2847). Also, a link to the style sheets of a theme has
+been added to the style sheets section of the page layout. This was done using
+the new "xlabel" callback which works like the "wizard" callback but is added to
+the label instead of to the input field.
+
+### New
+Force a back end user to change his password upon the next login (see #2928).
+
+### Changed
+Make the user agent and OS list in the `Environment` class editable (see #3410).
 
 ### Updated
 Updated all plugins to their latest versions.
@@ -78,7 +230,7 @@ Automatically add `rel="prev"` and `rel="next"` links to the page header if
 there is a pagination module (see #3515).
 
 ### Improved
-Pass the page data to the breadcrumb template as (see #3607).
+Pass the page data to the breadcrumb template as `data` (see #3607).
 
 ### New
 Added the "getCacheKey" hook (see #3288).

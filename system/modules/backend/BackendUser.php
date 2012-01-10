@@ -84,22 +84,24 @@ class BackendUser extends User
 	{
 		$session = $this->Session->getData();
 
-		// Main script
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri)
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != $this->Environment->requestUri)
 		{
-			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = $this->Environment->requestUri;
+			// Main script
+			if ($this->Environment->script == 'contao/main.php')
+			{
+				$session['referer']['last'] = $session['referer']['current'];
+				$session['referer']['current'] = $this->Environment->requestUri;
+			}
+			// File manager
+			elseif ($this->Environment->script == 'contao/files.php')
+			{
+				$session['fileReferer']['last'] = $session['referer']['current'];
+				$session['fileReferer']['current'] = $this->Environment->requestUri;
+			}
 		}
 
-		// File manager
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri)
-		{
-			$session['fileReferer']['last'] = $session['referer']['current'];
-			$session['fileReferer']['current'] = $this->Environment->requestUri;
-		}
-
-		// Store session data
-		if (strlen($this->intId))
+		// Store the session data
+		if ($this->intId != '')
 		{
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
 						   ->execute(serialize($session), $this->intId);
@@ -325,7 +327,6 @@ class BackendUser extends User
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
 		$GLOBALS['TL_CONFIG']['useCE'] = $this->useCE;
 		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
-		$GLOBALS['TL_CONFIG']['fancyUpload'] = $this->fancyUpload;
 		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
 
 		// Inherit permissions
@@ -449,8 +450,15 @@ class BackendUser extends User
 						$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
 						$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
 						$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
-						$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName . (($this->Input->get('do') == $strModuleName) ? ' active' : '');
+						$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
 						$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = $this->Environment->script . '?do=' . $strModuleName;
+
+						// Mark the active module and its group
+						if ($this->Input->get('do') == $strModuleName)
+						{
+							$arrModules[$strGroupName]['class'] = ' trail';
+							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';
+						}
 					}
 				}
 			}

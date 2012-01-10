@@ -104,7 +104,7 @@ class ModuleNewsletterList extends Module
 	
 				if ($objJumpTo->numRows)
 				{
-					$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->fetchAssoc(), '/items/%s');
+					$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
 				}
 				else
 				{
@@ -119,7 +119,7 @@ class ModuleNewsletterList extends Module
 				continue;
 			}
 
-			$strAlias = (strlen($objNewsletter->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
+			$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
 
 			$arrNewsletter[] = array
 			(

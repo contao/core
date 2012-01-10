@@ -71,7 +71,7 @@ class Automator extends Backend
 			while ($objRoot->type != 'root' && $intId > 0);
 
 			// Make sure the page is published
-			if (!$objRoot->published || (strlen($objRoot->start) && $objRoot->start > $time) || (strlen($objRoot->stop) && $objRoot->stop < $time))
+			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop < $time))
 			{
 				return;
 			}
@@ -88,7 +88,7 @@ class Automator extends Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->execute("SELECT id, dns, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $this->Database->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages
@@ -109,12 +109,12 @@ class Automator extends Backend
 			$strDomain = '';
 
 			// Overwrite the domain
-			if (strlen($objRoot->dns))
+			if ($objRoot->dns != '')
 			{
 				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
-			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true);
+			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
@@ -122,7 +122,7 @@ class Automator extends Backend
 				foreach ($GLOBALS['TL_HOOKS']['getSearchablePages'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id, true);
+					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id, true, $objRoot->language);
 				}
 			}
 

@@ -831,26 +831,28 @@ class InstallTool extends Backend
 				{
 					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
-
 				// Passwords do not match
 				elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
 				{
 					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
-
 				// Password too short
 				elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 				{
 					$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 				}
-
-				// Save data
+				// Password and username are the same
+				elseif ($this->Input->post('pass') == $this->Input->post('username'))
+				{
+					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
+				}
+				// Save the data
 				elseif ($this->Input->post('name') != '' && $this->Input->post('email', true) != '' && $this->Input->post('username') != '')
 				{
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $this->Input->post('pass'));
 
-					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, fancyUpload, thumbnails) VALUES (?, ?, ?, ?, ?, 1, 1, 1, 1, 1, 1)")
+					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails) VALUES (?, ?, ?, ?, ?, 1, 1, 1, 1, 1)")
 								   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));

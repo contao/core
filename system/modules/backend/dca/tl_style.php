@@ -196,42 +196,42 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['width'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'height' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['height'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'minwidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minwidth'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'minheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'maxwidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'maxheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'positioning' => array
@@ -244,7 +244,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['trbl'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'position' => array
@@ -292,14 +292,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['margin'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'padding' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['padding'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'align' => array
@@ -369,7 +369,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'shadowcolor' => array
@@ -404,7 +404,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderwidth'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'borderstyle' => array
@@ -428,7 +428,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderradius'],
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'bordercollapse' => array
@@ -442,7 +442,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'font' => array
@@ -461,7 +461,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontsize'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'fontcolor' => array
@@ -478,7 +478,7 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['lineheight'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'fontstyle' => array
@@ -506,21 +506,21 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['textindent'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'letterspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['letterspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'wordspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['wordspacing'],
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'alnum', 'tl_class'=>'w50')
 		),
 		'list' => array
@@ -578,8 +578,8 @@ class tl_style extends Backend
 		/*
 		FIXME: replace with http://www.nogray.com/color_picker.php as soon
 		       as the new version has been released.
-		$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.css?' . MOO_RAINBOW . '|screen';
-		$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
+		$GLOBALS['TL_CSS'][] = 'plugins/mootools/rainbow.css?' . MOO_RAINBOW . '|screen';
+		$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/mootools/rainbow.js?' . MOO_RAINBOW;
 		*/
 
 		$this->import('BackendUser', 'User');
@@ -637,7 +637,17 @@ class tl_style extends Backend
 	 */
 	public function colorPicker(DataContainer $dc)
 	{
-		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'" class="mooRainbow"');
+		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'"') . '
+  <script>
+  new MooRainbow("moo_'.$dc->field.'", {
+    id:"ctrl_' . $dc->field . '_0",
+    startColor:((cl = $("ctrl_' . $dc->field . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
+    imgPath:"plugins/colorpicker/images/",
+    onComplete: function(color) {
+      $("ctrl_' . $dc->field . '_0").value = color.hex.replace("#", "");
+    }
+  });
+  </script>';
 	}
 
 

@@ -39,7 +39,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'uploadScript'                => 'fancyUpload',
 		'onload_callback' => array
 		(
 			array('tl_files', 'checkPermission'),

@@ -85,10 +85,10 @@ abstract class Frontend extends Controller
 			return null;
 		}
 
-		$strRequest = preg_replace('/\?.*$/i', '', $this->Environment->request);
+		$strRequest = preg_replace(array('/^index.php\/?/', '/\?.*$/'), '', $this->Environment->request);
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
-		if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest))
+		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest)))
 		{
 			$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 
@@ -103,12 +103,6 @@ abstract class Frontend extends Controller
 
 		$arrFragments = explode('/', $strRequest);
 
-		// Skip the index.php fragment
-		if (strtolower($arrFragments[0]) == 'index.php')
-		{
-			array_shift($arrFragments);
-		}
-
 		// Extract the language
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
@@ -121,6 +115,12 @@ abstract class Frontend extends Controller
 				$this->Input->setGet('language', $arrFragments[0]);
 				array_shift($arrFragments);
 			}
+		}
+
+		// Add the second fragment as auto_item if the number of fragments is even
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && count($arrFragments) % 2 == 0)
+		{
+			array_insert($arrFragments, 1, array('auto_item'));
 		}
 
 		// HOOK: add custom logic
@@ -200,7 +200,7 @@ abstract class Frontend extends Controller
 			// Redirect to the language root (e.g. en/)
 			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'] && $this->Environment->request == '')
 			{
-				$this->redirect($objRootPage->language . '/', 302);
+				$this->redirect((!$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php/' : '') . $objRootPage->language . '/', 302);
 			}
 		}
 
@@ -274,7 +274,7 @@ abstract class Frontend extends Controller
 		}
 
 		global $objPage;
-		$pageId = strlen($objPage->alias) ? $objPage->alias : $objPage->id;
+		$pageId = ($objPage->alias != '') ? $objPage->alias : $objPage->id;
 
 		// Get the page ID from URL if not set
 		if (empty($pageId))

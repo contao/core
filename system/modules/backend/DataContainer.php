@@ -153,9 +153,10 @@ class DataContainer extends Backend
 
 	/**
 	 * Render a row of a box and return it as HTML string
+	 * @param string
 	 * @return string
 	 */
-	protected function row()
+	protected function row($strPalette=null)
 	{
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
@@ -198,6 +199,16 @@ class DataContainer extends Backend
 		elseif ($arrData['inputType'] == 'listWizard')
 		{
 			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
+		}
+
+		// Add a custom xlabel
+		if (is_array($arrData['xlabel']))
+		{
+			foreach ($arrData['xlabel'] as $callback)
+			{
+				$this->import($callback[0]);
+				$xlabel .= $this->$callback[0]->$callback[1]($this);
+			}
 		}
 
 		// Input field callback
@@ -253,8 +264,29 @@ class DataContainer extends Backend
 			// Calculate the current palette
 			$postPaletteFields = implode(',', $this->Input->post($key));
 			$postPaletteFields = array_unique(trimsplit('[,;]', $postPaletteFields));
-			$newPaletteFields = trimsplit('[,;]', $this->getPalette());
 
+			// Compile the palette if there is none
+			if ($strPalette === null)
+			{
+				$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+			}
+			else
+			{
+				// Use the given palette ($strPalette is an array in editAll mode)
+				$newPaletteFields = is_array($strPalette) ? $strPalette : trimsplit('[,;]', $strPalette);
+
+				// Re-check the palette if the current field is a selector field
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']) && in_array($this->strField, $GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
+				{
+					// If the field value has changed, recompile the palette
+					if ($this->varValue != $this->Input->post($this->strInputName))
+					{
+						$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+					}
+				}
+			}
+
+			// Adjust the names in editAll mode
 			if ($this->Input->get('act') == 'editAll')
 			{
 				foreach ($newPaletteFields as $k=>$v)
@@ -271,6 +303,7 @@ class DataContainer extends Backend
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
+			// Validate and save the field
 			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
@@ -313,7 +346,7 @@ class DataContainer extends Backend
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = $GLOBALS['TL_CONFIG'][$rgxp.'Format'];
+			$format = Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 
 			switch ($rgxp)
 			{
@@ -322,7 +355,7 @@ class DataContainer extends Backend
 					break;
 
 				case 'time':
-					$time = ",\n      timePickerOnly:true";
+					$time = ",\n      pickOnly:\"time\"";
 					break;
 
 				default:
@@ -332,19 +365,16 @@ class DataContainer extends Backend
 
 			$datepicker = ' <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
-  window.addEvent(\'domready\', function() {
-    new DatePicker(\'#ctrl_' . $objWidget->id . '\', {
-      allowEmpty:true,
-      toggleElements:\'#toggle_' . $objWidget->id . '\',
-      pickerClass:\'datepicker_dashboard\',
-      format:\'' . $format . '\',
-      inputOutputFormat:\'' . $format . '\',
-      positionOffset:{x:130,y:-185}' . $time . ',
+  window.addEvent("domready", function() {
+    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+      draggable:false,
+      toggle:$$("#toggle_' . $objWidget->id . '"),
+      format:"' . $format . '",
+      positionOffset:{x:-197,y:-182}' . $time . ',
+      pickerClass:"datepicker_dashboard",
+      useFadeInOut:!Browser.ie,
       startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      days:[\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
-      dayShort:' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
-      months:[\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
-      monthShort:' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
+      titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
     });
   });
   </script>';

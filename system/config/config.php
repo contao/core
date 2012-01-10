@@ -257,14 +257,12 @@ $GLOBALS['TL_CONFIG']['lockPeriod']     = 300;
  *   debugMode   = debug the system and print results to the screen
  *   useRTE      = use the rich text editor (TinyMCE)
  *   useCE       = use the code editor (CodeMirror)
- *   fancyUpload = use the advanced uploader (FancyUpload)
  */
-$GLOBALS['TL_CONFIG']['showHelp']    = true;
-$GLOBALS['TL_CONFIG']['thumbnails']  = true;
-$GLOBALS['TL_CONFIG']['debugMode']   = false;
-$GLOBALS['TL_CONFIG']['useRTE']      = true;
-$GLOBALS['TL_CONFIG']['useCE']       = true;
-$GLOBALS['TL_CONFIG']['fancyUpload'] = true;
+$GLOBALS['TL_CONFIG']['showHelp']   = true;
+$GLOBALS['TL_CONFIG']['thumbnails'] = true;
+$GLOBALS['TL_CONFIG']['debugMode']  = false;
+$GLOBALS['TL_CONFIG']['useRTE']     = true;
+$GLOBALS['TL_CONFIG']['useCE']      = true;
 
 
 /**
@@ -330,5 +328,8 @@ $GLOBALS['TL_CONFIG']['disableCron']          = false;
 $GLOBALS['TL_CONFIG']['coreOnlyMode']         = false;
 $GLOBALS['TL_CONFIG']['addLanguageToUrl']     = false;
 $GLOBALS['TL_CONFIG']['doNotRedirectEmpty']   = false;
+$GLOBALS['TL_CONFIG']['useAutoItem']          = false;
+$GLOBALS['TL_CONFIG']['privacyAnonymizeIp']   = true;
+$GLOBALS['TL_CONFIG']['privacyAnonymizeGA']   = true;
 
 ?>

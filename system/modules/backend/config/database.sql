@@ -439,7 +439,8 @@ CREATE TABLE `tl_page` (
   `stop` varchar(10) NOT NULL default '',
   PRIMARY KEY  (`id`),
   KEY `pid` (`pid`),
-  KEY `alias` (`alias`)
+  KEY `alias` (`alias`),
+  KEY `type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -495,7 +496,7 @@ CREATE TABLE `tl_session` (
   `pid` int(10) unsigned NOT NULL default '0',
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(255) NOT NULL default '',
-  `sessionID` varchar(40) NOT NULL default '',
+  `sessionID` varchar(128) NOT NULL default '',
   `hash` varchar(40) NOT NULL default '',
   `ip` varchar(64) NOT NULL default '',
   PRIMARY KEY  (`id`),
@@ -642,11 +643,11 @@ CREATE TABLE `tl_user` (
   `email` varchar(255) NOT NULL default '',
   `language` varchar(2) NOT NULL default '',
   `backendTheme` varchar(32) NOT NULL default '',
+  `uploader` varchar(32) NOT NULL default '',
   `showHelp` char(1) NOT NULL default '',
   `thumbnails` char(1) NOT NULL default '',
   `useRTE` char(1) NOT NULL default '',
   `useCE` char(1) NOT NULL default '',
-  `fancyUpload` char(1) NOT NULL default '',
   `password` varchar(64) NOT NULL default '',
   `admin` char(1) NOT NULL default '',
   `groups` blob NULL,
@@ -668,6 +669,7 @@ CREATE TABLE `tl_user` (
   `dateAdded` int(10) unsigned NOT NULL default '0',
   `currentLogin` int(10) unsigned NOT NULL default '0',
   `lastLogin` int(10) unsigned NOT NULL default '0',
+  `pwChange` char(1) NOT NULL default '',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   KEY `email` (`email`)

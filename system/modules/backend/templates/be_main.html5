@@ -6,7 +6,9 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
+  $objCombiner->add('plugins/colorpicker/css/mooRainbow.css');
   $objCombiner->add('plugins/chosen/chosen.css');
+  $objCombiner->add('plugins/stylect/css/stylect.css');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
   $objCombiner->add('plugins/datepicker/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
@@ -20,13 +22,16 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/colorpicker/js/mooRainbow.js');
   $objCombiner->add('plugins/chosen/chosen.js');
+  $objCombiner->add('plugins/stylect/js/stylect.js');
   $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
   $objCombiner->add('plugins/datepicker/datepicker.js', DATEPICKER);
   $objCombiner->add('contao/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
+<script><?php echo $this->getDateString(); ?></script>
 <?php echo $this->javascripts; ?>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 <?php echo $this->rteConfig; ?>
@@ -61,7 +66,7 @@
 
 <ul class="tl_level_1">
 <?php foreach ($this->modules as $strGroup=>$arrModules): ?>
-  <li class="tl_level_1_group"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
+  <li class="tl_level_1_group<?php echo $arrModules['class']; ?>"><a href="<?php echo $arrModules['href']; ?>" title="<?php echo $arrModules['title']; ?>" onclick="return AjaxRequest.toggleNavigation(this,'<?php echo $strGroup; ?>')"><img src="<?php echo TL_FILES_URL; ?>system/themes/<?php echo $this->theme; ?>/images/<?php echo $arrModules['icon']; ?>" width="16" height="16" alt=""><?php echo $arrModules['label']; ?></a></li>
 <?php if ($arrModules['modules']): ?>
   <li class="tl_parent" id="<?php echo $strGroup; ?>">
   <ul class="tl_level_2">

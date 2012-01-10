@@ -109,7 +109,7 @@ class BackendTemplate extends Template
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '">' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . (($media != '') ? $media : 'all') . '">' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
@@ -122,7 +122,7 @@ class BackendTemplate extends Template
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script src="' . $javascript . '"></script>' . "\n";
+				$strJavaScripts .= '<script src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;
@@ -174,6 +174,31 @@ class BackendTemplate extends Template
 			. 'CONTAO_LOADING="' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
 			. 'CONTAO_SCRIPT_URL="' . TL_SCRIPT_URL . '",'
 			. 'REQUEST_TOKEN="' . REQUEST_TOKEN . '";';
+	}
+
+
+	/**
+	 * Return the datepicker string
+	 * @return string
+	 */
+	protected function getDateString()
+	{
+		return 'window.addEvent("domready",function(){'
+			. 'Locale.define("en-US","Date",{'
+				. 'months:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS']) . '"],'
+				. 'days:["' . implode('","', $GLOBALS['TL_LANG']['DAYS']) . '"],'
+				. 'months_abbr:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS_SHORT']) . '"],'
+				. 'days_abbr:["' . implode('","', $GLOBALS['TL_LANG']['DAYS_SHORT']) . '"]'
+			. '});'
+			. 'Locale.define("en-US","DatePicker",{'
+				. 'select_a_time:"' . $GLOBALS['TL_LANG']['DP']['select_a_time'] . '",'
+				. 'use_mouse_wheel:"' . $GLOBALS['TL_LANG']['DP']['use_mouse_wheel'] . '",'
+				. 'time_confirm_button:"' . $GLOBALS['TL_LANG']['DP']['time_confirm_button'] . '",'
+				. 'apply_range:"' . $GLOBALS['TL_LANG']['DP']['apply_range'] . '",'
+				. 'cancel:"' . $GLOBALS['TL_LANG']['DP']['cancel'] . '",'
+				. 'week:"' . $GLOBALS['TL_LANG']['DP']['week'] . '"'
+			. '});'
+		. '});';
 	}
 }
 

@@ -66,6 +66,12 @@ class ModuleNewsletterReader extends Module
 			return $objTemplate->parse();
 		}
 
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('items', $this->Input->get('auto_item'));
+		}
+
 		// Return if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
@@ -135,7 +141,7 @@ class ModuleNewsletterReader extends Module
 			if (is_array($arrEnclosure))
 			{
 				// Send file to the browser
-				if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
+				if ($this->Input->get('file', true) != '' && in_array($this->Input->get('file', true), $arrEnclosure))
 				{
 					$this->sendFileToBrowser($this->Input->get('file', true));
 				}

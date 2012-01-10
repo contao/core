@@ -12,7 +12,7 @@
 ?>" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 </head>
-<body class="__ua__">
+<body class="__ua__ popup">
 
 <div id="container">
 <div id="main">

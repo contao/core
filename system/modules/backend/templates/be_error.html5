@@ -28,7 +28,7 @@ li { line-height:24px; }
 
 </div>
 
-<p>To customize this notice, create a custom template file named <em>templates/be_error.tpl</em>.</p>
+<p>To customize this notice, create a custom template file named <em>templates/be_error.html5</em>.</p>
 
 </body>
 </html>

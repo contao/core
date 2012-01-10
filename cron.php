@@ -67,12 +67,28 @@ class CronJob extends Frontend
 			return;
 		}
 
-		$intWeekly = date('YW');
-		$intDaily  = date('Ymd');
-		$intHourly = date('YmdH');
+		$intMonthly = date('Ym');
+		$intWeekly  = date('YW');
+		$intDaily   = date('Ymd');
+		$intHourly  = date('YmdH');
+
+		// Monthly jobs
+		if (!empty($GLOBALS['TL_CRON']['monthly']) && $GLOBALS['TL_CONFIG']['cron_monthly'] != $intMonthly)
+		{
+			$this->log('Running monthly cron jobs', 'CronJobs run()', TL_CRON);
+
+			foreach ($GLOBALS['TL_CRON']['monthly'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]();
+			}
+
+			$this->log('Monthly cron jobs complete', 'CronJobs run()', TL_CRON);
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['cron_monthly']", $intMonthly);
+		}
 
 		// Weekly jobs
-		if (!empty($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
+		elseif (!empty($GLOBALS['TL_CRON']['weekly']) && $GLOBALS['TL_CONFIG']['cron_weekly'] != $intWeekly)
 		{
 			$this->log('Running weekly cron jobs', 'CronJobs run()', TL_CRON);
 

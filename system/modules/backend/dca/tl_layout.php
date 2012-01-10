@@ -156,7 +156,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['headerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
 		),
 		'footer' => array
@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['footerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
 		),
 		'cols' => array
@@ -189,7 +189,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthLeft'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'widthRight' => array
@@ -197,7 +197,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthRight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'sections' => array
@@ -225,7 +225,11 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'xlabel' => array
+			(
+				array('tl_layout', 'styleSheetLink')
+			)
 		),
 		'skipTinymce' => array
 		(
@@ -302,7 +306,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'moo_local',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('moo_local', 'moo_googleapis'),
+			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -360,7 +364,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['width'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
 		),
 		'align' => array
@@ -531,7 +535,7 @@ class tl_layout extends Backend
 
 		return $this->getTemplateGroup('moo_', $intPid);
 	}
-
+ 
 
 	/**
 	 * List a page layout
@@ -546,6 +550,17 @@ class tl_layout extends Backend
 		}
 
 		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Add a link to edit the stylesheets of the theme
+	 * @param object
+	 * @return string
+	 */
+	public function styleSheetLink(DataContainer $dc)
+	{
+		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}
 }
 

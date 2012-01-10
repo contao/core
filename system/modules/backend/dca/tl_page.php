@@ -956,14 +956,14 @@ class tl_page extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = standardize($dc->activeRecord->title);
+			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->title));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
-		if ($objAlias->numRows > (!$autoAlias ? 1 : 0))
+		if ($objAlias->numRows > ($autoAlias ? 0 : 1))
 		{
 			$arrPages = array();
 			$strDomain = '';
@@ -975,22 +975,24 @@ class tl_page extends Backend
 				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
-				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
-				{
-					// Check domain and language
-					$arrPages[$domain][$language][] = $objAlias->id;
-				}
-				else
-				{
-					// Check the domain only
-					$arrPages[$domain][] = $objAlias->id;
-				}
-
 				// Store the current page's data
 				if ($objCurrentPage->id == $dc->id)
 				{
 					$strDomain = $domain;
 					$strLanguage = $language;
+				}
+				else
+				{
+					if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+					{
+						// Check domain and language
+						$arrPages[$domain][$language][] = $objAlias->id;
+					}
+					else
+					{
+						// Check the domain only
+						$arrPages[$domain][] = $objAlias->id;
+					}
 				}
 			}
 

@@ -79,6 +79,12 @@ class ModuleFaqList extends Module
 			return '';
 		}
 
+		// Show the FAQ reader if an item has been selected
+		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		{
+			return $this->getFrontendModule($this->faq_readerModule, $this->strColumn);
+		}
+
 		return parent::generate();
 	}
 
@@ -158,7 +164,7 @@ class ModuleFaqList extends Module
 				}
 				else
 				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
 				}
 			}
 		}

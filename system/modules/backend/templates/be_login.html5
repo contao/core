@@ -6,6 +6,7 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
+  $objCombiner->add('plugins/stylect/css/stylect.css');
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/login.css');
   echo $objCombiner->getCombinedFile();
@@ -16,6 +17,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
   $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/stylect/js/stylect.js');
   $objCombiner->add('contao/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>

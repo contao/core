@@ -422,11 +422,11 @@ class Theme extends Backend
 			$this->Database->lockTables($arrLocks);
 
 			// Get the current auto_increment values
-			$tl_theme = $this->Database->query("SELECT MAX(id) AS id FROM tl_theme")->id;
-			$tl_style_sheet = $this->Database->query("SELECT MAX(id) AS id FROM tl_style_sheet")->id;
-			$tl_style = $this->Database->query("SELECT MAX(id) AS id FROM tl_style")->id;
-			$tl_module = $this->Database->query("SELECT MAX(id) AS id FROM tl_module")->id;
-			$tl_layout = $this->Database->query("SELECT MAX(id) AS id FROM tl_layout")->id;
+			$tl_theme = $this->Database->getNextId('tl_theme');
+			$tl_style_sheet = $this->Database->getNextId('tl_style_sheet');
+			$tl_style = $this->Database->getNextId('tl_style');
+			$tl_module = $this->Database->getNextId('tl_module');
+			$tl_layout = $this->Database->getNextId('tl_layout');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -455,7 +455,7 @@ class Theme extends Backend
 						// Increment the ID
 						if ($name == 'id')
 						{
-							$id = ++${$table};
+							$id = ${$table}++;
 							$arrMapper[$table][$value] = $id;
 							$value = $id;
 						}

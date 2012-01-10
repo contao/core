@@ -29,7 +29,7 @@ document.onLoad = self.focus();
 </script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
-<body class="__ua__">
+<body class="__ua__ popup">
 
 <div id="container">
 <div id="main">

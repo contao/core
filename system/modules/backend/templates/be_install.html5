@@ -4,12 +4,14 @@
 <meta charset="<?php echo $this->charset; ?>">
 <title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
 <base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>plugins/stylect/css/stylect.css" media="all">
 <link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/basic.css" media="all">
 <link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/install.css" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/<?php echo MOOTOOLS; ?>/mootools-core.js"></script>
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/<?php echo MOOTOOLS; ?>/mootools-more.js"></script>
+<script src="<?php echo TL_SCRIPT_URL; ?>plugins/stylect/js/stylect.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>contao/contao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/hover.js"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->

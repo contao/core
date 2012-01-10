@@ -13,6 +13,9 @@ if (!BE_USER_LOGGED_IN && sha1(session_id() . (!$GLOBALS['TL_CONFIG']['disableIp
 <script>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-XXXXX-X']);
+<?php if ($GLOBALS['TL_CONFIG']['privacyAnonymizeGA']): ?>
+_gaq.push(['_anonymizeIp']);
+<?php endif; ?>
 _gaq.push(['_trackPageview']);
 (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

@@ -272,7 +272,7 @@ $GLOBALS['TL_DCA']['tl_news'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['imagemargin'],
 			'exclude'                 => true,
 			'inputType'               => 'trbl',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
 			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'imageUrl' => array
@@ -567,7 +567,7 @@ class tl_news extends Backend
 		if (!strlen($varValue))
 		{
 			$autoAlias = true;
-			$varValue = standardize($dc->activeRecord->headline);
+			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->headline));
 		}
 
 		$objAlias = $this->Database->prepare("SELECT id FROM tl_news WHERE alias=?")

@@ -127,12 +127,12 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('inherit', 'admin'),
-		'login'                       => '{name_legend},name,email;{backend_legend},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{session_legend},session;{password_legend},password',
-		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{password_legend:hide},password;{admin_legend},admin;{account_legend},disable,start,stop',
-		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
-		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
-		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,backendTheme,showHelp,thumbnails,useRTE,useCE,fancyUpload;{password_legend:hide},password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
+		'login'                       => '{name_legend},name,email;{backend_legend},language,uploader,showHelp,thumbnails,useRTE,useCE;{session_legend},session;{theme_legend:hide},backendTheme;{password_legend},password',
+		'admin'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{account_legend},disable,start,stop',
+		'default'                     => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
+		'group'                       => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{account_legend},disable,start,stop',
+		'extend'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop',
+		'custom'                      => '{name_legend},username,name,email;{backend_legend:hide},language,uploader,showHelp,thumbnails,useRTE,useCE;{theme_legend:hide},backendTheme;{password_legend:hide},pwChange,password;{admin_legend},admin;{groups_legend},groups,inherit;{modules_legend},modules,themes;{pagemounts_legend},pagemounts,alpty;{filemounts_legend},filemounts,fop;{forms_legend},forms,formp;{account_legend},disable,start,stop'
 	),
 
 	// Fields
@@ -184,6 +184,15 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'options'                 => $this->getBackendThemes(),
 			'eval'                    => array('tl_class'=>'w50')
 		),
+		'uploader' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['uploader'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('FileUpload'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
+			'eval'                    => array('tl_class'=>'w50')
+		),
 		'showHelp' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['showHelp'],
@@ -216,20 +225,19 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
-		'fancyUpload' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['fancyUpload'],
-			'default'                 => 1,
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'password' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'])
+		),
+		'pwChange' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pwChange'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'filter'                  => true
 		),
 		'admin' => array
 		(

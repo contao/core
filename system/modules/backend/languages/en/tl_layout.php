@@ -82,6 +82,7 @@ $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
 $GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Use the local file';
 $GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'Load from googleapis.com with local fallback';
 
 
 /**
@@ -93,6 +94,8 @@ $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';
 $GLOBALS['TL_LANG']['tl_layout']['main']         = 'Inside the main column';
 $GLOBALS['TL_LANG']['tl_layout']['after']        = 'Before the page footer';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Edit the style sheets';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Edit the module';
 
 
 /**

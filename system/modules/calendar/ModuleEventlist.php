@@ -81,7 +81,7 @@ class ModuleEventlist extends Events
 		}
 
 		// Show the event reader if an item has been selected
-		if ($this->cal_readerModule > 0 && $this->Input->get('events') != '')
+		if ($this->cal_readerModule > 0  && (isset($_GET['events']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->cal_readerModule, $this->strColumn);
 		}

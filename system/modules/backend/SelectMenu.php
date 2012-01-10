@@ -154,14 +154,14 @@ class SelectMenu extends Widget
 		// Chosen
 		if ($this->chosen)
 		{
-			$this->wizard .= "\n" . '  <script>new Chosen($("ctrl_' . $this->strId. '"));</script>';
+			$strClass .= ' tl_chosen';
 		}
 
 		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
 						$this->strName,
 						$this->strId,
 						$strClass,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
 						implode('', $arrOptions),
 						$this->wizard);

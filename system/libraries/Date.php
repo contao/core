@@ -423,6 +423,38 @@ class Date extends System
 
 		$this->intTstamp =  mktime((int) $intHour, (int) $intMinute, (int) $intSecond, (int) $intMonth, (int) $intDay, (int) $intYear);
 	}
+
+
+	/**
+	 * Convert a PHP format string into a JavaScript format string
+	 * @throws Exception
+	 */
+	public static function formatToJs($strFormat)
+	{
+		$chunks = str_split($strFormat);
+
+		foreach ($chunks as $k=>$v)
+		{
+			switch ($v)
+			{
+				case 'D': $chunks[$k] = 'a'; break;
+				case 'j': $chunks[$k] = 'e'; break;
+				case 'l': $chunks[$k] = 'A'; break;
+				case 'S': $chunks[$k] = 'o'; break;
+				case 'F': $chunks[$k] = 'B'; break;
+				case 'M': $chunks[$k] = 'b'; break;
+				case 'a': $chunks[$k] = 'p'; break;
+				case 'A': $chunks[$k] = 'p'; break;
+				case 'g': $chunks[$k] = 'l'; break;
+				case 'G': $chunks[$k] = 'k'; break;
+				case 'h': $chunks[$k] = 'I'; break;
+				case 'i': $chunks[$k] = 'M'; break;
+				case 's': $chunks[$k] = 'S'; break;
+			} 
+		}
+
+		return preg_replace('/([a-zA-Z])/', '%$1', implode($chunks));
+	}
 }
 
 ?>

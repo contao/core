@@ -282,11 +282,6 @@ class Ajax extends Backend
 				echo $tree;
 				exit; break;
 
-			// Upload files via FancyUpload
-			case 'fancyUpload':
-				$dc->move(true);
-				exit; break;
-
 			// Feature/unfeature an element
 			case 'toggleFeatured':
 				if (class_exists($dc->table, false))

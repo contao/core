@@ -76,11 +76,11 @@ Request.Contao = new Class(
 			});
 			if (json.javascript && this.options.evalScripts) {
 				$exec(json.javascript);
-		}
 			}
-
-			this.onSuccess(json.content, json);
 		}
+
+		this.onSuccess(json.content, json);
+	}
 });
 
 // Backwards compatibility
@@ -212,7 +212,7 @@ var AjaxRequest =
 						li.inject(parent, 'before');
 					} else {
 						li.inject(parent, 'after')
-				}
+					}
 				}
 
 				$(el).title = CONTAO_COLLAPSE;
@@ -411,7 +411,7 @@ var AjaxRequest =
 
 		return false;
 	},
-	
+
 	/**
 	 * Reload all file trees (input field)
 	 */
@@ -474,7 +474,7 @@ var AjaxRequest =
 					'html': txt,
 					'styles': {
 						'display': 'block'
-				}
+					}
 				}).inject($(el).getParent('div').getParent('div'), 'after');
 
 				// Execute scripts after the DOM has been updated
@@ -484,7 +484,6 @@ var AjaxRequest =
 				el.checked = 'checked';
 
 				AjaxRequest.hideBox();
-				Backend.styleFormFields();
 				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
@@ -534,7 +533,7 @@ var AjaxRequest =
 						img.src = img.src.replace(/_\.(gif|png|jpe?g)/, '.$1');
 					} else {
 						img.src = img.src.replace(/\.(gif|png|jpe?g)/, '_.$1');
-				}
+					}
 				} else {
 					if (img.src.match(/folPlus|folMinus/)) {
 						if (img.getParent('a').getNext('a')) {
@@ -638,6 +637,7 @@ var AjaxRequest =
 	 * Toggle a group of a multi-checkbox field
 	 * @param object
 	 * @param string
+	 * @return boolean
 	 */
 	toggleCheckboxGroup: function(el, id) {
 		el.blur();
@@ -663,7 +663,6 @@ var AjaxRequest =
 	/**
 	 * Store the live update ID
 	 * @param string
-	 * @return boolean
 	 */
 	liveUpdate: function(el, id) {
 		var uid = $(id);
@@ -700,7 +699,7 @@ var AjaxRequest =
 			'styles': {
 				'display': 'block',
 				'top': scroll.y + 'px'
-		}
+			}
 		})
 
 		if (box == null) {
@@ -831,9 +830,9 @@ var Backend =
 			if (lists[i].hasClass('mandatory')) {
 				$('ctrl_' + lists[i].id).checked = 'checked';
 			} else if (lists[i].hasClass('tl_listing') && (parent = lists[i].getFirst('li').getNext('li')) && parent.hasClass('parent')) {
-					parent.setStyle('display', 'none');
-				}
+				parent.setStyle('display', 'none');
 			}
+		}
 	},
 
 	/**
@@ -989,7 +988,7 @@ var Backend =
 		/*
 		 * FIXME: replace with http://www.nogray.com/color_picker.php
 		 * as soon as the new version has been released
-		*/
+		 */
 	},
 
 	/**
@@ -1263,7 +1262,7 @@ var Backend =
 					var next = cols[i].clone(true).inject(tr, 'bottom');
 					if (textarea = cols[i].getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
-				}
+					}
 				}
 				tr.inject(parentTr, 'after');
 				break;
@@ -1293,7 +1292,7 @@ var Backend =
 					var next = current.clone(true).inject(current, 'after');
 					if (textarea = current.getFirst('textarea')) {
 						next.getFirst('textarea').value = textarea.value;
-				}
+					}
 				}
 				break;
 			case 'cmovel':
@@ -1395,7 +1394,7 @@ var Backend =
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (select = childs[i].getFirst('select')) {
 						next.getFirst('select').value = select.value;
-				}
+					}
 				}
 				tr.inject(parent, 'after');
 				tr.getElement('.chzn-container').destroy();
@@ -1459,8 +1458,8 @@ var Backend =
 						next.getFirst('input').value = input.value;
 						if (input.type == 'checkbox') {
 							next.getFirst('input').checked = input.checked ? 'checked' : '';
+						}
 					}
-				}
 				}
 				tr.inject(parent, 'after');
 				break;
@@ -1498,7 +1497,7 @@ var Backend =
 					if (input.type == 'checkbox') {
 						input.id = input.name.replace(/\[[0-9]+\]/g, '').replace(/\[/g, '_').replace(/\]/g, '') + '_' + i;
 						input.getNext('label').set('for', input.id);
-				}
+					}
 				}
 			}
 		}
@@ -1525,7 +1524,7 @@ var Backend =
 					var next = childs[i].clone(true).inject(tr, 'bottom');
 					if (input = childs[i].getFirst('input')) {
 						next.getFirst().value = input.value;
-				}
+					}
 				}
 				tr.inject(parent, 'after');
 				break;
@@ -1595,65 +1594,22 @@ var Backend =
 	},
 
 	/**
-	 * Style checkboxes, radio buttons and select menus
+	 * Update the "edit module" links in the module wizard
 	 * @param object
-	 * @param string
-	 * @param string
 	 */
-	styleFormFields: function() {
-		$$('select').each(function(el) {
-			// Handled by chosen
-			if (el.getStyle('display') == 'none') return;
+	updateModuleLink: function(el) {
+		var td = el.getParent('td').getNext('td');
+		var a = td.getElement('a.module_link');
 
-			// Get the selected option label
-			if ((active = el.getElement('option[selected]')) != null) {
-				var label = active.get('html');
-			} else {
-				var label = el.getElement('option').get('html');
-				}
+		a.href = a.href.replace(/id=[0-9]+/, 'id=' + el.value);
 
-			// Create the div element
-			var div = new Element('div', {
-				'id': el.get('id') + '_styled',
-				'class': 'styled_select',
-				'html': '<span>' + label + '</span><b><i></i></b>',
-				'styles': {
-					'width': el.getStyle('width').toInt()-4
-					}
-			}).inject(el, 'before');
-
-			// Fix right-aligned elements
-			if (el.hasClass('right-aligned')) {
-				div.setStyle('left', el.getPosition().x);
-				}
-
-			// Mark active elements
-			if (el.hasClass('active')) {
-				div.addClass('active');
+		if (el.value > 0) {
+			td.getElement('a.module_link').setStyle('display', 'inline');
+			td.getElement('img.module_image').setStyle('display', 'none');
+		} else {
+			td.getElement('a.module_link').setStyle('display', 'none');
+			td.getElement('img.module_image').setStyle('display', 'inline');
 		}
-
-			var bgcol = div.getStyle('background-color');
-
-			// Update the div onchange
-			el.addEvent('change', function() {
-				var option = el.getElement('option[value="' + el.value + '"]');
-				div.getElement('span').set('html', option.get('html'));
-			}).addEvent('keydown', function(event) {
-				if (event.key == 'up' || event.key == 'down') {
-					setTimeout(function() {	el.fireEvent('change'); }, 100);
-				}
-			}).addEvent('focus', function() {
-				div.setStyle('background-color', '#ebfdd7');
-			}).addEvent('blur', function() {
-				div.setStyle('background-color', bgcol);
-			}).setStyle('opacity', 0);
-
-			// Browser-specific adjustments
-			if (Browser.Engine.webkit || Browser.Engine.trident) {
-				el.setStyle('margin-bottom', '4px');
-				div.setStyle('width', div.getStyle('width').toInt()-4);
-	}
-		});
 	}
 };
 
@@ -1664,7 +1620,11 @@ document.addEvent('mousedown', function(event) {
 
 // Initialize the back end script
 window.addEvent('domready', function() {
-	Backend.styleFormFields();
+	// Chosen
+	if (Elements.chosen != undefined) {
+		$$('select.tl_chosen').chosen();
+	}
+
 	Backend.hideTreeBody();
 	Backend.blink.periodical(600);
 

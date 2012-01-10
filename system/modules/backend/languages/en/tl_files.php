@@ -51,27 +51,6 @@ $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Start upload';
 
 
 /**
- * FancyUpload
- */
-$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'] = 'Overall Progress ({total})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle']    = 'File Progress';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile']     = 'Uploading {name}';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'] = 'Upload: {bytesLoaded} with {rate}, {timeRemaining} remaining.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_remove']          = 'Remove';
-$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle']     = 'Click to remove this entry.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileError']       = 'Upload failed';
-$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate']       = 'File <em>{name}</em> is already added, duplicates are not allowed.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin']    = 'File <em>{name}</em> (<em>{size}</em>) is too small, the minimal file size is {fileSizeMin}.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax']    = 'File <em>{name}</em> (<em>{size}</em>) is too big, the maximal file size is <em>{fileSizeMax}</em>.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax']     = 'File <em>{name}</em> could not be added, amount of <em>{fileListMax} files</em> exceeded.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'] = 'File <em>{name}</em> (<em>{size}</em>) is too big, overall filesize of <em>{fileListSizeMax}</em> exceeded.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus']      = 'Server returned HTTP-Status <code>#{code}</code>';
-$GLOBALS['TL_LANG']['tl_files']['fancy_securityError']   = 'Security error occured ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_ioError']         = 'Error caused a send or load operation to fail ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'] = 'Upload completed';
-
-
-/**
  * Buttons
  */
 $GLOBALS['TL_LANG']['tl_files']['new']       = array('New folder', 'Create a new folder');

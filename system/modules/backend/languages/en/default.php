@@ -43,7 +43,7 @@ $GLOBALS['TL_LANG']['ERR']['prcnt']             = 'Please enter a percentage bet
 $GLOBALS['TL_LANG']['ERR']['alpha']             = 'Please enter alphabetic characters only!';
 $GLOBALS['TL_LANG']['ERR']['alnum']             = 'Please enter alphanumeric characters only!';
 $GLOBALS['TL_LANG']['ERR']['phone']             = 'Please enter a valid phone number!';
-$GLOBALS['TL_LANG']['ERR']['extnd']             = 'For security reasons you can not use these characters (=<>&/()#) here!';
+$GLOBALS['TL_LANG']['ERR']['extnd']             = 'For security reasons you can not use the following characters here: =<>&/()#';
 $GLOBALS['TL_LANG']['ERR']['email']             = 'Please enter a valid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['emails']            = 'There is at least one invalid e-mail address!';
 $GLOBALS['TL_LANG']['ERR']['url']               = 'Please enter a valid URL format and encode special characters!';
@@ -129,6 +129,18 @@ $GLOBALS['TL_LANG']['DAYS'][6] = 'Saturday';
 
 
 /**
+ * Short day names
+ */
+$GLOBALS['TL_LANG']['DAYS_SHORT'][0] = 'Sun';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][1] = 'Mon';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][2] = 'Tue';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][3] = 'Wed';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][4] = 'Thu';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][5] = 'Fri';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][6] = 'Sat';
+
+
+/**
  * Month names
  */
 $GLOBALS['TL_LANG']['MONTHS'][0]  = 'January';
@@ -146,6 +158,23 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'December';
 
 
 /**
+ * Short month names
+ */
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][0]  = 'Jan';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][1]  = 'Feb';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][2]  = 'Mar';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][3]  = 'Apr';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][4]  = 'May';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][5]  = 'Jun';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][6]  = 'Jul';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][7]  = 'Aug';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][8]  = 'Sep';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][9]  = 'Oct';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][10] = 'Nov';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][11] = 'Dec';
+
+
+/**
  * Short names length
  */
 $GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 3;
@@ -156,7 +185,7 @@ $GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 0;
-$GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, dS of F Y';
+$GLOBALS['TL_LANG']['MSC']['titleFormat'] = '%B %d%o, %Y';
 
 
 /**
@@ -185,6 +214,17 @@ $GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
 $GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
 $GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
 $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+
+
+/**
+ * Datepicker
+ */
+$GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Select a time';
+$GLOBALS['TL_LANG']['DP']['use_mouse_wheel']     = 'Use the mouse wheel to quickly change value';
+$GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
+$GLOBALS['TL_LANG']['DP']['apply_range']         = 'Apply';
+$GLOBALS['TL_LANG']['DP']['cancel']              = 'Cancel';
+$GLOBALS['TL_LANG']['DP']['week']                = 'Wk';
 
 
 /**
@@ -321,6 +361,7 @@ $GLOBALS['TL_LANG']['MSC']['saveNcreate']      = 'Save and new';
 $GLOBALS['TL_LANG']['MSC']['continue']         = 'Continue';
 $GLOBALS['TL_LANG']['MSC']['skipNavigation']   = 'Skip navigation';
 $GLOBALS['TL_LANG']['MSC']['selectAll']        = 'Select all';
+$GLOBALS['TL_LANG']['MSC']['pw_change']        = 'Please enter a new password';
 $GLOBALS['TL_LANG']['MSC']['pw_changed']       = 'The password has been updated.';
 $GLOBALS['TL_LANG']['MSC']['fallback']         = 'default';
 $GLOBALS['TL_LANG']['MSC']['view']             = 'View in a new window';

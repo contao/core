@@ -55,7 +55,7 @@ class News extends Frontend
 			return;
 		}
 
-		$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+		$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
 
 		// Delete XML file
 		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
@@ -83,7 +83,7 @@ class News extends Frontend
 
 		while ($objArchive->next())
 		{
-			$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+			$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
 
 			$this->generateFiles($objArchive->row());
 			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
@@ -99,7 +99,7 @@ class News extends Frontend
 	{
 		$time = time();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = strlen($arrArchive['feedBase']) ? $arrArchive['feedBase'] : $this->Environment->base;
+		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
 
 		$objFeed = new Feed($strFile);
@@ -120,12 +120,13 @@ class News extends Frontend
 
 		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
-		// Get default URL
+		// Get the default URL
 		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
-		$strUrl = $this->generateFrontendUrl($objParent->fetchAssoc(), '/items/%s');
+		$objParent = $this->getPageDetails($objParent->id);
+		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 
 		// Parse items
 		while ($objArticle->next())
@@ -179,9 +180,10 @@ class News extends Frontend
 	 * Add news items to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -199,7 +201,7 @@ class News extends Frontend
 		// Walk through each archive
 		while ($objArchive->next())
 		{
-			if (is_array($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -209,8 +211,8 @@ class News extends Frontend
 			{
 				$arrProcessed[$objArchive->jumpTo] = false;
 
-				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
+				// Get the target page
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
 											->limit(1)
 											->execute($objArchive->jumpTo);
 
@@ -220,12 +222,12 @@ class News extends Frontend
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 			}
 
@@ -287,13 +289,13 @@ class News extends Frontend
 
 				if ($objParent->numRows)
 				{
-					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objParent->aAlias)) ? $objParent->aAlias : $objParent->aId));
+					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objParent->aAlias != '') ? $objParent->aAlias : $objParent->aId));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		return sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
 	}
 }
 

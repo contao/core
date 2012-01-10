@@ -66,6 +66,12 @@ class ModuleEventReader extends Events
 			return $objTemplate->parse();
 		}
 
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('events', $this->Input->get('auto_item'));
+		}
+
 		// Return if no event has been specified
 		if (!$this->Input->get('events'))
 		{
@@ -201,7 +207,7 @@ class ModuleEventReader extends Events
 		$objTemplate->date = $date;
 		$objTemplate->start = $objEvent->startTime;
 		$objTemplate->end = $objEvent->endTime;
-		$objTemplate->class = strlen($objEvent->cssClass) ? ' ' . $objEvent->cssClass : '';
+		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 

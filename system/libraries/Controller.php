@@ -627,11 +627,11 @@ abstract class Controller extends System
 			$type = $objParentPage->type;
 
 			// Parent title
-			if (!strlen($ptitle))
+			if ($ptitle == '')
 			{
 				$palias = $objParentPage->alias;
 				$pname = $objParentPage->title;
-				$ptitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
+				$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 			}
 
 			// Page title
@@ -639,8 +639,7 @@ abstract class Controller extends System
 			{
 				$alias = $objParentPage->alias;
 				$name = $objParentPage->title;
-				$title = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
-
+				$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 				$trail[] = $objParentPage->pid;
 			}
 
@@ -671,26 +670,19 @@ abstract class Controller extends System
 		$objPage->parentPageTitle = $ptitle;
 
 		// Set the root ID and title
-		if ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0))
+		if ($objParentPage->numRows && $objParentPage->type == 'root')
 		{
 			$objPage->rootId = $objParentPage->id;
-			$objPage->rootTitle = strlen($objParentPage->pageTitle) ? $objParentPage->pageTitle : $objParentPage->title;
+			$objPage->rootTitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
 			$objPage->language = $objParentPage->language;
 			$objPage->staticFiles = $objParentPage->staticFiles;
 			$objPage->staticSystem = $objParentPage->staticSystem;
 			$objPage->staticPlugins = $objParentPage->staticPlugins;
-
-			// Set the admin e-mail address
-			if ($objParentPage->adminEmail != '')
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objParentPage->adminEmail);
-			}
-			else
-			{
-				list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
-			}
+			$objPage->dateFormat = $objParentPage->dateFormat;
+			$objPage->timeFormat = $objParentPage->timeFormat;
+			$objPage->datimFormat = $objParentPage->datimFormat;
 
 			// Store whether the root page has been published
 			$time = time();
@@ -715,23 +707,6 @@ abstract class Controller extends System
 		$objPage->mainTitle = strip_insert_tags($objPage->mainTitle);
 		$objPage->mainPageTitle = strip_insert_tags($objPage->mainPageTitle);
 		$objPage->rootTitle = strip_insert_tags($objPage->rootTitle);
-
-		// Overwrite the global date and time format
-		if ($objParentPage->numRows && $objParentPage->type == 'root')
-		{
-			if (strlen($objParentPage->dateFormat))
-			{
-				$GLOBALS['TL_CONFIG']['dateFormat'] = $objParentPage->dateFormat;
-			}
-			if (strlen($objParentPage->timeFormat))
-			{
-				$GLOBALS['TL_CONFIG']['timeFormat'] = $objParentPage->timeFormat;
-			}
-			if (strlen($objParentPage->datimFormat))
-			{
-				$GLOBALS['TL_CONFIG']['datimFormat'] = $objParentPage->datimFormat;
-			}
-		}
 
 		// Do not cache protected pages
 		if ($objPage->protected)
@@ -921,7 +896,7 @@ abstract class Controller extends System
 			return null;
 		}
 
-		$image = urldecode($image);
+		$image = rawurldecode($image);
 
 		// Check whether the file exists
 		if (!file_exists(TL_ROOT . '/' . $image))
@@ -957,7 +932,7 @@ abstract class Controller extends System
 		// Return the path of the new image if it exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))
 		{
-			return $strCacheName;
+			return $this->urlEncode($strCacheName);
 		}
 
 		// HOOK: add custom logic
@@ -970,7 +945,7 @@ abstract class Controller extends System
 
 				if (is_string($return))
 				{
-					return $return;
+					return $this->urlEncode($return);
 				}
 			}
 		}
@@ -978,7 +953,7 @@ abstract class Controller extends System
 		// Return the path to the original image if the GDlib cannot handle it
 		if (!extension_loaded('gd') || !$objFile->isGdImage || $objFile->width > $GLOBALS['TL_CONFIG']['gdMaxImgWidth'] || $objFile->height > $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] || (!$width && !$height) || $width > 1200 || $height > 1200)
 		{
-			return $image;
+			return $this->urlEncode($image);
 		}
 
 		$intPositionX = 0;
@@ -1148,6 +1123,7 @@ abstract class Controller extends System
 		// The new image could not be created
 		if (!$strSourceImage)
 		{
+			imagedestroy($strNewImage);
 			$this->log('Image "' . $image . '" could not be processed', 'Controller getImage()', TL_ERROR);
 			return null;
 		}
@@ -1210,7 +1186,7 @@ abstract class Controller extends System
 			$this->import('Files');
 			$this->Files->rename($strCacheName, $target);
 
-			return $target;
+			return $this->urlEncode($target);
 		}
 
 		// Set the file permissions when the Safe Mode Hack is used
@@ -1221,7 +1197,7 @@ abstract class Controller extends System
 		}
 
 		// Return the path to new image
-		return $strCacheName;
+		return $this->urlEncode($strCacheName);
 	}
 
 
@@ -1779,7 +1755,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objFaq->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objFaq->fAlias)) ? $objFaq->fAlias : $objFaq->aId));
+						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->fAlias != '') ? $objFaq->fAlias : $objFaq->aId));
 					}
 	
 					// Replace the tag
@@ -1825,7 +1801,7 @@ abstract class Controller extends System
 					}
 					elseif ($objNews->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->aAlias)) ? $objNews->aAlias : $objNews->aId));
+						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->aAlias != '') ? $objNews->aAlias : $objNews->aId));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1833,7 +1809,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), '/items/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objNews->nAlias)) ? $objNews->nAlias : $objNews->nId));
+						$strUrl = $this->generateFrontendUrl($objNews->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->nAlias != '') ? $objNews->nAlias : $objNews->nId));
 					}
 	
 					// Replace the tag
@@ -1879,7 +1855,7 @@ abstract class Controller extends System
 					}
 					elseif ($objEvent->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->aAlias)) ? $objEvent->aAlias : $objEvent->aId));
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->aAlias != '') ? $objEvent->aAlias : $objEvent->aId));
 					}
 					elseif ($objEvent->source == 'external')
 					{
@@ -1887,7 +1863,7 @@ abstract class Controller extends System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/events/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objEvent->eAlias)) ? $objEvent->eAlias : $objEvent->eId));
+						$strUrl = $this->generateFrontendUrl($objEvent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->eAlias != '') ? $objEvent->eAlias : $objEvent->eId));
 					}
 
 					// Replace the tag
@@ -1926,11 +1902,11 @@ abstract class Controller extends System
 
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = $this->String->toXhtml($this->replaceInsertTags($objTeaser->teaser));
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = $this->String->toHtml5($this->replaceInsertTags($objTeaser->teaser));
 						}
 					}
 					break;
@@ -2493,7 +2469,7 @@ abstract class Controller extends System
 		}
 
 		$size = getimagesize(TL_ROOT .'/'. $src);
-		return '<img src="' . TL_FILES_URL . $src . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
+		return '<img src="' . TL_FILES_URL . $this->urlEncode($src) . '" ' . $size[3] . ' alt="' . specialchars($alt) . '"' . (($attributes != '') ? ' ' . $attributes : '') . '>';
 	}
 
 
@@ -2865,7 +2841,7 @@ abstract class Controller extends System
 		// Add options
 		if (is_array($arrData['options']))
 		{
-			$blnIsAssociative = array_is_assoc($arrData['options']);
+			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
 			$blnUseReference = isset($arrData['reference']);
 
 			if ($arrData['eval']['includeBlankOption'])
@@ -3337,9 +3313,17 @@ abstract class Controller extends System
 			$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
 		}
 
-		if ($strLightboxId === null)
+		// Provide an ID for single lightbox images in HTML5 (see #3742)
+		if ($strLightboxId === null && $arrItem['fullsize'])
 		{
-			$strLightboxId = 'lightbox';
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$strLightboxId = 'lightbox';
+			}
+			else
+			{
+				$strLightboxId = 'lightbox[' . substr(md5($objTemplate->getName() . '_' . $arrItem['id']), 0, 6) . ']';
+			}
 		}
 
 		// Store the original dimensions
@@ -3364,7 +3348,7 @@ abstract class Controller extends System
 			$size[1] = floor($intMaxWidth * $ratio);
 		}
 
-		$src = $this->getImage($this->urlEncode($arrItem['singleSRC']), $size[0], $size[1], $size[2]);
+		$src = $this->getImage($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
 
 		// Image dimensions
 		if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
@@ -3407,7 +3391,7 @@ abstract class Controller extends System
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
-		$objTemplate->src = TL_FILES_URL . $src;
+		$objTemplate->src = TL_FILES_URL . $this->urlEncode($src);
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->title = specialchars($arrItem['title']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
@@ -3459,6 +3443,37 @@ abstract class Controller extends System
 		}
 
 		$objTemplate->enclosure = $arrEnclosures;
+	}
+
+
+	/**
+	 * Add a static URL to a script
+	 * @param string
+	 * @return string
+	 */
+	protected function addStaticUrlTo($script)
+	{
+		// The feature is not used
+		if (TL_PLUGINS_URL == '' && TL_SCRIPT_URL == '')
+		{
+			return $script;
+		}
+
+		// Absolut URLs
+		if (preg_match('@^https?://@', $script))
+		{
+			return $script;
+		}
+
+		// Prepend the static URL
+		if (strncmp($script, 'plugins/', 8) === 0)
+		{
+			return TL_PLUGINS_URL . $script;
+		}
+		else
+		{
+			return TL_SCRIPT_URL . $script;
+		}
 	}
 }
 

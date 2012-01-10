@@ -338,8 +338,8 @@ abstract class Template extends Controller
 				$blnOptimizeNext = false;
 
 				// Minify inline scripts
-				$strChunk = str_replace("/* <![CDATA[ */\n", '/* <![CDATA[ */', $strChunk);
-				$strChunk = preg_replace(array('@(?<!:)//.*@', '/[ \n\t]*(;|=|\{|\}|\[|\]|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
+				$strChunk = str_replace(array("/* <![CDATA[ */\n", "<!--\n", "\n//-->"), array('/* <![CDATA[ */', '', ''), $strChunk);
+				$strChunk = preg_replace(array('@(?<!:)//(?!W3C|DTD|EN).*@', '/[ \n\t]*(;|=|\{|\}|\[|\]|&&|,|<|>|\',|",|\':|":|: |\|\|)[ \n\t]*/'), array('', '$1'), $strChunk);
 				$strChunk = trim($strChunk);
 			}
 			else

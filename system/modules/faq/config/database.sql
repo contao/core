@@ -72,7 +72,8 @@ CREATE TABLE `tl_faq_category` (
 -- 
 
 CREATE TABLE `tl_module` (
-  `faq_categories` blob NULL
+  `faq_categories` blob NULL,
+  `faq_readerModule` int(10) unsigned NOT NULL default '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 

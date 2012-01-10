@@ -73,7 +73,7 @@ class Popup extends Backend
 
 		$strFile = $this->Input->get('src', true);
 		$strFile = base64_decode($strFile);
-		$strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $strFile));
+		$strFile = preg_replace('@^/+@', '', rawurldecode($strFile));
 
 		$this->strFile = $strFile; 
 	}
@@ -118,6 +118,7 @@ class Popup extends Backend
 			$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
 			fpassthru($resFile);
 			fclose($resFile);
+			ob_flush(); // see #3595
 
 			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
 		}
@@ -140,7 +141,7 @@ class Popup extends Backend
 			$this->Template->isImage = true;
 			$this->Template->width = $objFile->width;
 			$this->Template->height = $objFile->height;
-			$this->Template->src = $this->strFile;
+			$this->Template->src = $this->urlEncode($this->strFile);
 		}
 
 		$this->output();

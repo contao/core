@@ -75,7 +75,7 @@ class ModuleNewsArchive extends ModuleNews
 		}
 
 		// Show the news reader if an item has been selected
-		if ($this->news_readerModule > 0 && $this->Input->get('items') != '')
+		if ($this->news_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
 		{
 			return $this->getFrontendModule($this->news_readerModule, $this->strColumn);
 		}

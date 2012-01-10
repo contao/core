@@ -39,12 +39,18 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-bottom:0;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 #header h1 {
 	margin:0;
-	padding:2px 0 4px 6px;
+	padding:4px 8px 6px;
 	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 
 /* Container */
@@ -61,6 +67,10 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-top:0;
+	-moz-border-radius:0 0 3px 3px;
+	-webkit-border-radius:0 0 3px 3px;
+	border-radius:0 0 3px 3px;
+	box-shadow:0 3px 6px #ccc;
 }
 
 /* Headlines */
@@ -108,7 +118,7 @@ body {
 .login_error label {
 	color:#c55;
 }
-.tl_error,.tl_info {
+.tl_error,.tl_info,.tl_confirm {
 	margin:0 0 12px;
 	padding:2px 0 3px 20px;
 }
@@ -119,6 +129,10 @@ body {
 .tl_info {
 	color:#5c9ac9;
 	background:url("images/show.gif") no-repeat 1px center;
+}
+.tl_confirm {
+	color:#8ab858;
+	background:url("images/ok.gif") no-repeat left center;
 }
 
 /* Login form */

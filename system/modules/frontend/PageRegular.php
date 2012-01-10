@@ -121,6 +121,9 @@ class PageRegular extends Frontend
 		$this->Template->mainTitle = $objPage->rootTitle;
 		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
 
+		// Meta robots tag
+		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
+
 		// Remove shy-entities (see #2709)
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
 		$this->Template->pageTitle = str_replace('[-]', '', $this->Template->pageTitle);
@@ -214,8 +217,6 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Meta robots tag
-		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
 		$strFramework = '';
 
 		// Generate the CSS framework
@@ -304,11 +305,17 @@ class PageRegular extends Frontend
 		}
 
 		// MooTools scripts
-		if ($objLayout->mooSource == 'moo_googleapis')
+		if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 		{
 			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
-
 			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+
+			// Local fallback (thanks to DyaGa)
+			if ($objLayout->mooSource == 'moo_fallback')
+			{
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+			}
+
 			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
 		}
 		else
@@ -359,16 +366,6 @@ class PageRegular extends Frontend
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="http://fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
-		{
-			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
-			{
-				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
-			}
-		}
-
 		$objCombiner = new Combiner();
 
 		// Skip the Contao framework style sheet
@@ -381,6 +378,24 @@ class PageRegular extends Frontend
 		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
 		{
 			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'), 'all');
+		}
+
+		// Internal style sheets
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
+		{
+			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
+			{
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
+				}
+			}
 		}
 
 		// User style sheets
@@ -460,7 +475,7 @@ class PageRegular extends Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 		}
 

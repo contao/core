@@ -44,9 +44,10 @@ class ModuleFaq extends Frontend
 	 * Add FAQs to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -64,7 +65,7 @@ class ModuleFaq extends Frontend
 		// Walk through each category
 		while ($objFaq->next())
 		{
-			if (is_array($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
+			if (!empty($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
 			{
 				continue;
 			}
@@ -74,23 +75,23 @@ class ModuleFaq extends Frontend
 			{
 				$arrProcessed[$objFaq->jumpTo] = false;
 
-				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
+				// Get the target page
+				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
 											->limit(1)
 											->execute($objFaq->jumpTo);
 
-				// Determin domain
+				// Determin the domain
 				if ($objParent->numRows)
 				{
 					$domain = $this->Environment->base;
 					$objParent = $this->getPageDetails($objParent->id);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
 			}
 
@@ -109,7 +110,7 @@ class ModuleFaq extends Frontend
 			// Add items to the indexer
 			while ($objItem->next())
 			{
-				$arrPages[] = sprintf($strUrl, ((strlen($objItem->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
 			}
 		}
 

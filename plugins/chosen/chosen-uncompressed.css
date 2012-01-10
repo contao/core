@@ -11,10 +11,13 @@ select.chzn-select {
   zoom: 1;
   *display: inline;
   margin:1px 0; /* PATCH */
+  background-color:#fff; /* PATCH */
 }
 /* PATCH */
 .firefox .chzn-container {
-  display:block;
+  position:relative;
+  top:2px;
+  margin:-1px 0 0;
 }
 /* PATCH EOF */
 .chzn-container .chzn-drop {
@@ -267,8 +270,8 @@ select.chzn-select {
   padding: 0;
 }
 .chzn-container .chzn-results li {
-  line-height: 2px; /* PATCH: 2px instead of 80% */
-  padding: 7px 7px 8px;
+  line-height: 1.2; /* PATCH: 1.2 instead of 80% */
+  padding: 1px 7px 2px; /* PATCH: 1px 7px 2px instead of 7px 7px 8px */
   margin: 0;
   list-style: none;
 }

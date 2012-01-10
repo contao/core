@@ -56,7 +56,9 @@ var Chosen = new Class({
 		if (!this.form_field.id) this.form_field.id = String.uniqueID();
 		this.container_id = this.form_field.id.replace(/(:|\.)/g, '_') + "_chzn";
 		this.f_width = this.form_field.measure(function() {
-			return this.getSize().x;
+			// PATCH: measure elements in collapsed palettes (see #3627)
+			//return this.getSize().x;
+			return (this.getSize().x > 0) ? this.getSize().x : this.getStyle('width').toInt();
 		});
 
 		this.default_text = this.form_field.get('data-placeholder') ? this.form_field.get('data-placeholder') : Locale.get('Chosen.placeholder', this.form_field.multiple);

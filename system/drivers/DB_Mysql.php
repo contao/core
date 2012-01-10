@@ -295,6 +295,21 @@ class DB_Mysql extends Database
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
 
+
+	/**
+	 * Return the next autoincrement ID of a table
+	 * @param string
+	 * @return integer
+	 */
+	protected function get_next_id($strTable)
+	{
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
+
+		return $objStatus->Auto_increment;
+	}
+
+
 	/**
 	 * Create a Database_Statement object
 	 * @param resource

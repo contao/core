@@ -37,11 +37,12 @@ $GLOBALS['TL_LANG']['tl_user']['name']         = array('Name', 'Please enter the
 $GLOBALS['TL_LANG']['tl_user']['email']        = array('E-mail address', 'Please enter a valid e-mail address.');
 $GLOBALS['TL_LANG']['tl_user']['language']     = array('Back end language', 'Here you can choose the back end language.');
 $GLOBALS['TL_LANG']['tl_user']['backendTheme'] = array('Back end theme', 'Here you can override the global back end theme.');
+$GLOBALS['TL_LANG']['tl_user']['uploader']     = array('File uploader', 'Here you can chose a file uploader.');
 $GLOBALS['TL_LANG']['tl_user']['showHelp']     = array('Show explanation', 'Show a short explanation text below each input field.');
 $GLOBALS['TL_LANG']['tl_user']['thumbnails']   = array('Show thumbnail images', 'Show thumbnail images in the file manager.');
 $GLOBALS['TL_LANG']['tl_user']['useRTE']       = array('Enable the rich text editor', 'Use the rich text editor to format text elements.');
 $GLOBALS['TL_LANG']['tl_user']['useCE']        = array('Enable the code editor', 'Use the code editor to modify code elements.');
-$GLOBALS['TL_LANG']['tl_user']['fancyUpload']  = array('Use FancyUpload', 'If FancyUpload does not work properly in your web browser, you can deactivate the script here.');
+$GLOBALS['TL_LANG']['tl_user']['pwChange']     = array('Password change required', 'Make the user change his password upon the next login.');
 $GLOBALS['TL_LANG']['tl_user']['admin']        = array('Make the user an administrator', 'Administrators have unlimited access to all modules and elements!');
 $GLOBALS['TL_LANG']['tl_user']['groups']       = array('User groups', 'Here you can assign the user to one or more groups.');
 $GLOBALS['TL_LANG']['tl_user']['inherit']      = array('Permission inheritance', 'Here you can define which group permissions the user inherits.');
@@ -66,6 +67,7 @@ $GLOBALS['TL_LANG']['tl_user']['session']      = array('Purge data', 'Please sel
  */
 $GLOBALS['TL_LANG']['tl_user']['name_legend']       = 'Name and e-mail';
 $GLOBALS['TL_LANG']['tl_user']['backend_legend']    = 'Back end settings';
+$GLOBALS['TL_LANG']['tl_user']['theme_legend']      = 'Back end theme';
 $GLOBALS['TL_LANG']['tl_user']['password_legend']   = 'Password settings';
 $GLOBALS['TL_LANG']['tl_user']['admin_legend']      = 'Administrator';
 $GLOBALS['TL_LANG']['tl_user']['groups_legend']     = 'User groups';
@@ -86,6 +88,7 @@ $GLOBALS['TL_LANG']['tl_user']['tempLabel']     = 'Temporary folder';
 $GLOBALS['TL_LANG']['tl_user']['sessionPurged'] = 'The session data has been purged';
 $GLOBALS['TL_LANG']['tl_user']['htmlPurged']    = 'The image cache has been purged';
 $GLOBALS['TL_LANG']['tl_user']['tempPurged']    = 'The temporary folder has been purged';
+$GLOBALS['TL_LANG']['tl_user']['FileUpload']    = 'Default uploader';
 
 
 /**

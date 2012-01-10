@@ -185,7 +185,7 @@ abstract class System
 		}
 		if ($this->Environment->remoteAddr)
 		{
-			$strIp = $this->Environment->remoteAddr;
+			$strIp = $this->anonymizeIp($this->Environment->remoteAddr);
 		}
 
 		$this->Database->prepare("INSERT INTO tl_log (tstamp, source, action, username, text, func, ip, browser) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")
@@ -493,7 +493,7 @@ abstract class System
 					break;
 
 				case 2:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['DAYS'][$index], 0, $GLOBALS['TL_LANG']['MSC']['dayShortLength']);
+					$strReturn .= $GLOBALS['TL_LANG']['DAYS_SHORT'][$index];
 					break;
 
 				case 3:
@@ -501,7 +501,7 @@ abstract class System
 					break;
 
 				case 4:
-					$strReturn .= utf8_substr($GLOBALS['TL_LANG']['MONTHS'][($index - 1)], 0, $GLOBALS['TL_LANG']['MSC']['monthShortLength']);
+					$strReturn .= $GLOBALS['TL_LANG']['MONTHS_SHORT'][($index - 1)]; 
 					break;
 
 				default:
@@ -594,9 +594,10 @@ abstract class System
 	/**
 	 * Return all messages as HTML
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function getMessages($blnDcLayout=false)
+	protected function getMessages($blnDcLayout=false, $blnNoWrapper=false)
 	{
 		$strMessages = '';
 
@@ -632,7 +633,7 @@ abstract class System
 		$strMessages = trim($strMessages);
 
 		// Wrapping container
-		if ($strMessages != '')
+		if (!$blnNoWrapper && $strMessages != '')
 		{
 			$strMessages = sprintf('%s<div class="tl_message">%s%s%s</div>%s', ($blnDcLayout ? "\n\n" : "\n"), "\n", $strMessages, "\n", ($blnDcLayout ? '' : "\n"));
 		}
@@ -793,6 +794,12 @@ abstract class System
 
 		$arrUrl = parse_url($strUrl);
 
+		// Add the scheme to ensure that parse_url works correctly
+		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
+		{
+			$arrUrl = parse_url('http://' . $strUrl);
+		}
+
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
@@ -823,11 +830,7 @@ abstract class System
 			$arrUrl['port'] = ':' . $arrUrl['port'];
 		}
 
-		// Path
-		if (isset($arrUrl['path']))
-		{
-			$arrUrl['path'] = $arrUrl['path'];
-		}
+		// Path does not have to be altered
 
 		// Query
 		if (isset($arrUrl['query']))
@@ -882,6 +885,38 @@ abstract class System
 	protected function getFormattedNumber($varNumber, $intDecimals=2)
 	{
 		return number_format(round($varNumber, $intDecimals), $intDecimals, $GLOBALS['TL_LANG']['MSC']['decimalSeparator'], $GLOBALS['TL_LANG']['MSC']['thousandsSeparator']);
+	}
+
+
+	/**
+	 * Anonymize an IP address by overriding the last chunk
+	 * @param string
+	 * @return string
+	 */
+	protected function anonymizeIp($strIp)
+	{
+		// The feature has been disabled
+		if (!$GLOBALS['TL_CONFIG']['privacyAnonymizeIp'])
+		{
+			return $strIp;
+		}
+
+		// Localhost
+		if ($strIp == '127.0.0.1' || $strIp == '::1')
+		{
+			return $strIp;
+		}
+
+		// IPv6
+		if (strpos($strIp, ':') !== false)
+		{
+			return str_replace(strrchr($strIp, ':'), ':xxxx', $strIp);
+		}
+		// IPv4
+		else
+		{
+			return str_replace(strrchr($strIp, '.'), '.xxx', $strIp);
+		}
 	}
 }
 

@@ -375,6 +375,17 @@ abstract class Database
 
 
 	/**
+	 * Return the next autoincrement ID of a table
+	 * @param  string
+	 * @return integer
+	 */
+	public function getNextId($strTable)
+	{
+		return $this->get_next_id($strTable);
+	}
+
+
+	/**
 	 * Abstract database driver methods
 	 */
 	abstract protected function connect();
@@ -389,6 +400,7 @@ abstract class Database
 	abstract protected function lock_tables($arrTables);
 	abstract protected function unlock_tables();
 	abstract protected function get_size_of($strTable);
+	abstract protected function get_next_id($strTable);
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
 }
 
@@ -1074,11 +1086,11 @@ abstract class Database_Result
 
 		if (!$this->arrCache[++$this->intIndex])
 		{
+			--$this->intIndex; // see #3762
+
 			if (($arrRow = $this->fetchAssoc()) == false)
 			{
 				$this->blnDone = true;
-				--$this->intIndex;
-
 				return false;
 			}
 
