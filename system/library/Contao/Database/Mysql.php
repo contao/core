@@ -29,14 +29,20 @@
 
 
 /**
- * Class DB_Mysqlii
+ * Namespace
+ */
+namespace Contao;
+
+
+/**
+ * Class Database_Mysql
  *
- * Driver class for MySQLi databases.
+ * Driver class for MySQL databases.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class DB_Mysqli extends Database
+class Database_Mysql extends \Database
 {
 
 	/**
@@ -57,8 +63,28 @@ class DB_Mysqli extends Database
 	 */
 	protected function connect()
 	{
-		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbDatabase'], $GLOBALS['TL_CONFIG']['dbPort']);
-		@$this->resConnection->set_charset($GLOBALS['TL_CONFIG']['dbCharset']);
+		$strHost = $GLOBALS['TL_CONFIG']['dbHost'];
+
+		if ($GLOBALS['TL_CONFIG']['dbPort'])
+		{
+			$strHost .= ':' . $GLOBALS['TL_CONFIG']['dbPort'];
+		}
+
+		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		{
+			$this->resConnection = @mysql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
+		}
+		else
+		{
+			$this->resConnection = @mysql_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass']);
+		}
+
+		if (is_resource($this->resConnection))
+		{
+			@mysql_query("SET sql_mode=''", $this->resConnection);
+			@mysql_query("SET NAMES " . $GLOBALS['TL_CONFIG']['dbCharset'], $this->resConnection);
+			@mysql_select_db($GLOBALS['TL_CONFIG']['dbDatabase'], $this->resConnection);
+		}
 	}
 
 
@@ -67,7 +93,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function disconnect()
 	{
-		@$this->resConnection->close();
+		@mysql_close($this->resConnection);
 	}
 
 
@@ -77,7 +103,12 @@ class DB_Mysqli extends Database
 	 */
 	protected function get_error()
 	{
-		return @$this->resConnection->error;
+		if (is_resource($this->resConnection))
+		{
+			return mysql_error($this->resConnection);
+		}
+
+		return mysql_error();
 	}
 
 
@@ -96,7 +127,7 @@ class DB_Mysqli extends Database
 		}
 		else
 		{
-			return "FIND_IN_SET(" . $strKey . ", '" . $this->resConnection->real_escape_string($strSet) . "')";
+			return "FIND_IN_SET(" . $strKey . ", '" . mysql_real_escape_string($strSet, $this->resConnection) . "')";
 		}
 	}
 
@@ -196,7 +227,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		@$this->resConnection = new mysqli($GLOBALS['TL_CONFIG']['dbHost'], $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $strDatabase, $GLOBALS['TL_CONFIG']['dbPort']);
+		return @mysql_select_db($strDatabase, $this->resConnection);
 	}
 
 
@@ -205,8 +236,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function begin_transaction()
 	{
-		@$this->resConnection->query("SET AUTOCOMMIT=0");
-		@$this->resConnection->query("BEGIN");
+		@mysql_query("SET AUTOCOMMIT=0", $this->resConnection);
+		@mysql_query("BEGIN", $this->resConnection);
 	}
 
 
@@ -215,8 +246,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function commit_transaction()
 	{
-		@$this->resConnection->query("COMMIT");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		@mysql_query("COMMIT", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -225,8 +256,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function rollback_transaction()
 	{
-		@$this->resConnection->query("ROLLBACK");
-		@$this->resConnection->query("SET AUTOCOMMIT=1");
+		@mysql_query("ROLLBACK", $this->resConnection);
+		@mysql_query("SET AUTOCOMMIT=1", $this->resConnection);
 	}
 
 
@@ -243,7 +274,7 @@ class DB_Mysqli extends Database
 			$arrLocks[] = $table .' '. $mode;
 		}
 
-		@$this->resConnection->query("LOCK TABLES " . implode(', ', $arrLocks));
+		@mysql_query("LOCK TABLES " . implode(', ', $arrLocks));
 	}
 
 
@@ -252,7 +283,7 @@ class DB_Mysqli extends Database
 	 */
 	protected function unlock_tables()
 	{
-		@$this->resConnection->query("UNLOCK TABLES");
+		@mysql_query("UNLOCK TABLES");
 	}
 
 
@@ -263,8 +294,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function get_size_of($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
 
 		return ($objStatus->Data_length + $objStatus->Index_length);
 	}
@@ -277,8 +308,8 @@ class DB_Mysqli extends Database
 	 */
 	protected function get_next_id($strTable)
 	{
-		$objStatus = @$this->resConnection->query("SHOW TABLE STATUS LIKE '" . $strTable . "'")
-										  ->fetch_object();
+		$objStatus = @mysql_query("SHOW TABLE STATUS LIKE '" . $strTable . "'");
+		$objStatus = @mysql_fetch_object($objStatus);
 
 		return $objStatus->Auto_increment;
 	}
@@ -288,198 +319,11 @@ class DB_Mysqli extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return DB_Mysqli_Statement
+	 * @return \Database_Mysql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new DB_Mysqli_Statement($resConnection, $blnDisableAutocommit);
-	}
-}
-
-
-/**
- * Class DB_Mysqli_Statement
- *
- * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Mysqli_Statement extends Database_Statement
-{
-
-	/**
-	 * Prepare a query and return it
-	 * @param string
-	 */
-	protected function prepare_query($strQuery)
-	{
-		return $strQuery;
-	}
-
-
-	/**
-	 * Escape a string
-	 * @param string
-	 * @return string
-	 */
-	protected function string_escape($strString)
-	{
-		return "'" . $this->resConnection->real_escape_string($strString) . "'";
-	}
-
-
-	/**
-	 * Limit the current query
-	 * @param integer
-	 * @param integer
-	 */
-	protected function limit_query($intRows, $intOffset)
-	{
-		if (strncasecmp($this->strQuery, 'SELECT', 6) === 0)
-		{
-			$this->strQuery .= ' LIMIT ' . $intOffset . ',' . $intRows;
-		}
-		else
-		{
-			$this->strQuery .= ' LIMIT ' . $intRows;
-		}
-	}
-
-
-	/**
-	 * Execute the current query
-	 * @return resource
-	 */
-	protected function execute_query()
-	{
-		return @$this->resConnection->query($this->strQuery);
-	}
-
-
-	/**
-	 * Return the last error message
-	 * @return string
-	 */
-	protected function get_error()
-	{
-		return @$this->resConnection->error;
-	}
-
-
-	/**
-	 * Return the number of affected rows
-	 * @return integer
-	 */
-	protected function affected_rows()
-	{
-		return @$this->resConnection->affected_rows;
-	}
-
-
-	/**
-	 * Return the last insert ID
-	 * @return integer
-	 */
-	protected function insert_id()
-	{
-		return @$this->resConnection->insert_id;
-	}
-
-
-	/**
-	 * Explain the current query
-	 * @return array
-	 */
-	protected function explain_query()
-	{
-		return @$this->resConnection->query('EXPLAIN ' . $this->strQuery)->fetch_assoc();
-	}
-
-	/**
-	 * Create a Database_Result object
-	 * @param resource
-	 * @param string
-	 * @return DB_Mysqli_Result
-	 */
-	protected function createResult($resResult, $strQuery)
-	{
-		return new DB_Mysqli_Result($resResult, $strQuery);
-	}
-}
-
-
-/**
- * Class DB_Mysqli_Result
- *
- * Driver class for MySQLi databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Mysqli_Result extends Database_Result
-{
-
-	/**
-	 * Fetch the current row as enumerated array
-	 * @return array
-	 */
-	protected function fetch_row()
-	{
-		return @$this->resResult->fetch_row();
-	}
-
-
-	/**
-	 * Fetch the current row as associative array
-	 * @return array
-	 */
-	protected function fetch_assoc()
-	{
-		return @$this->resResult->fetch_assoc();
-	}
-
-
-	/**
-	 * Return the number of rows of the current result
-	 * @return integer
-	 */
-	protected function num_rows()
-	{
-		return @$this->resResult->num_rows;
-	}
-
-
-	/**
-	 * Return the number of fields of the current result
-	 * @return integer
-	 */
-	protected function num_fields()
-	{
-		return @$this->resResult->field_countmysql;
-	}
-
-
-	/**
-	 * Get the column information
-	 * @param integer
-	 * @return object
-	 */
-	protected function fetch_field($intOffset)
-	{
-		return @$this->resResult->fetch_field_direct($intOffset);
-	}
-
-
-	/**
-	 * Free the current result
-	 */
-	public function free()
-	{
-		if (is_object($this->resResult))
-		{
-			@$this->resResult->free();
-		}
+		return new \Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
 

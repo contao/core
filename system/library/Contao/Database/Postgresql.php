@@ -29,14 +29,20 @@
 
 
 /**
- * Class DB_Postgresql
+ * Namespace
+ */
+namespace Contao;
+
+
+/**
+ * Class Database_Postgresql
  *
  * Driver class for PostgreSQL databases.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class DB_Postgresql extends Database
+class Database_Postgresql extends \Database
 {
 
 	/**
@@ -226,205 +232,11 @@ class DB_Postgresql extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return DB_Postgresql_Statement
+	 * @return \Database_Postgresql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new DB_Postgresql_Statement($resConnection, $blnDisableAutocommit);
-	}
-}
-
-
-/**
- * Class DB_Postgresql_Statement
- *
- * Driver class for PostgreSQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Postgresql_Statement extends Database_Statement
-{
-
-	/**
-	 * Prepare a query and return it
-	 * @param string
-	 */
-	protected function prepare_query($strQuery)
-	{
-		return $strQuery;
-	}
-
-
-	/**
-	 * Escape a string
-	 * @param string
-	 * @return string
-	 */
-	protected function string_escape($strString)
-	{
-		return "'" . pg_escape_string($strString) . "'";
-	}
-
-
-	/**
-	 * Limit the current query
-	 * @param integer
-	 * @param integer
-	 */
-	protected function limit_query($intRows, $intOffset)
-	{
-		if (strncasecmp($this->strQuery, 'SELECT', 6) === 0)
-		{
-			$this->strQuery .= ' LIMIT ' . $intOffset . ',' . $intRows;
-		}
-		else
-		{
-			$this->strQuery .= ' LIMIT ' . $intRows;
-		}
-	}
-
-
-	/**
-	 * Execute the current query
-	 * @return resource
-	 */
-	protected function execute_query()
-	{
-		return @pg_query($this->resConnection, $this->strQuery);
-	}
-
-
-	/**
-	 * Return the last error message
-	 * @return string
-	 */
-	protected function get_error()
-	{
-		return pg_last_error($this->resConnection);
-	}
-
-
-	/**
-	 * Return the number of affected rows
-	 * @return integer
-	 */
-	protected function affected_rows()
-	{
-		return @pg_affected_rows($this->resResult);
-	}
-
-
-	/**
-	 * Return the last insert ID
-	 * @return integer
-	 */
-	protected function insert_id()
-	{
-		return @pg_getlastoid($this->resResult);
-	}
-
-
-	/**
-	 * Explain the current query
-	 * @return array
-	 */
-	protected function explain_query()
-	{
-		return @pg_fetch_assoc(@pg_query($this->resConnection, 'EXPLAIN ' . $this->strQuery));
-	}
-
-	/**
-	 * Create a Database_Result object
-	 * @param resource
-	 * @param string
-	 * @return DB_Postgresql_Result
-	 */
-	protected function createResult($resResult, $strQuery)
-	{
-		return new DB_Postgresql_Result($resResult, $strQuery);
-	}
-}
-
-
-/**
- * Class DB_Postgresql_Result
- *
- * Driver class for PostgreSQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Postgresql_Result extends Database_Result
-{
-
-	/**
-	 * Fetch the current row as enumerated array
-	 * @return array
-	 */
-	protected function fetch_row()
-	{
-		return @pg_fetch_row($this->resResult);
-	}
-
-
-	/**
-	 * Fetch the current row as associative array
-	 * @return array
-	 */
-	protected function fetch_assoc()
-	{
-		return @pg_fetch_assoc($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of rows of the current result
-	 * @return integer
-	 */
-	protected function num_rows()
-	{
-		return @pg_num_rows($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of fields of the current result
-	 * @return integer
-	 */
-	protected function num_fields()
-	{
-		return @pg_num_fields($this->resResult);
-	}
-
-
-	/**
-	 * Get the column information
-	 * @param integer
-	 * @return object
-	 */
-	protected function fetch_field($intOffset)
-	{
-		$objData = new stdClass();
-
-		$objData->name = @pg_field_name($this->resResult, $intOffset);
-		$objData->max_length = @pg_field_size($this->resResult, $intOffset);
-		$objData->not_null = @pg_field_is_null($this->resResult, $intOffset);
-		$objData->type = @pg_field_type($this->resResult, $intOffset);
-
-		return $objData;
-	}
-
-
-	/**
-	 * Free the current result
-	 */
-	public function free()
-	{
-		if (is_resource($this->resResult))
-		{
-			@pg_free_result($this->resResult);
-		}
+		return new \Database_Postgresql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
 

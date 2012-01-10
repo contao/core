@@ -210,8 +210,6 @@ abstract class Backend extends Controller
 			}
 
 			$dataContainer = 'DC_' . $GLOBALS['TL_DCA'][$strTable]['config']['dataContainer'];
-			require(sprintf('%s/system/drivers/%s.php', TL_ROOT, $dataContainer));
-
 			$dc = new $dataContainer($strTable);
 		}
 
@@ -240,7 +238,7 @@ abstract class Backend extends Controller
 		{
 			$act = $this->Input->get('act');
 
-			if (!strlen($act) || $act == 'paste' || $act == 'select')
+			if ($act == '' || $act == 'paste' || $act == 'select')
 			{
 				$act = ($dc instanceof listable) ? 'showAll' : 'edit';
 			}

@@ -29,14 +29,20 @@
 
 
 /**
- * Class DB_Mssql
+ * Namespace
+ */
+namespace Contao;
+
+
+/**
+ * Class Database_Mssql
  *
  * Driver class for MSSQL databases.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class DB_Mssql extends Database
+class Database_Mssql extends \Database
 {
 
 	/**
@@ -225,191 +231,11 @@ class DB_Mssql extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return DB_Mssql_Statement
+	 * @return \Database_Mssql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new DB_Mssql_Statement($resConnection, $blnDisableAutocommit);
-	}
-}
-
-
-/**
- * Class DB_Mssql_Statement
- *
- * Driver class for MSSQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Mssql_Statement extends Database_Statement
-{
-
-	/**
-	 * Prepare a query and return it
-	 * @param string
-	 */
-	protected function prepare_query($strQuery)
-	{
-		return $strQuery;
-	}
-
-
-	/**
-	 * Escape a string
-	 * @param string
-	 * @return string
-	 */
-	protected function string_escape($strString)
-	{
-		return "'" . str_replace("'", "''", $strString) . "'";
-	}
-
-
-	/**
-	 * Limit the current query
-	 * @param integer
-	 * @param integer
-	 */
-	protected function limit_query($intRows, $intOffset)
-	{
-		$this->strQuery .= preg_replace('/(^\s*SELECT\s+(DISTINCT|DISTINCTROW)?)/i', '\\1 TOP ' . intval($intRows + $intOffset), $this->strQuery);
-	}
-
-
-	/**
-	 * Execute the current query
-	 * @return resource
-	 */
-	protected function execute_query()
-	{
-		return @mssql_query($this->strQuery, $this->resConnection);
-	}
-
-
-	/**
-	 * Return the last error message
-	 * @return string
-	 */
-	protected function get_error()
-	{
-		return mssql_get_last_message();
-	}
-
-
-	/**
-	 * Return the number of affected rows
-	 * @return integer
-	 */
-	protected function affected_rows()
-	{
-		return @mssql_rows_affected($this->resConnection);
-	}
-
-
-	/**
-	 * Return the last insert ID
-	 * @return integer
-	 */
-	protected function insert_id()
-	{
-		return @mssql_query('SELECT @@IDENTITY', $this->resConnection);
-	}
-
-
-	/**
-	 * Explain the current query
-	 * @return boolean
-	 */
-	protected function explain_query()
-	{
-		return false;
-	}
-
-	/**
-	 * Create a Database_Result object
-	 * @param resource
-	 * @param string
-	 * @return DB_Mssql_Result
-	 */
-	protected function createResult($resResult, $strQuery)
-	{
-		return new DB_Mssql_Result($resResult, $strQuery);
-	}
-}
-
-
-/**
- * Class DB_Mssql_Result
- *
- * Driver class for MSSQL databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Mssql_Result extends Database_Result
-{
-
-	/**
-	 * Fetch the current row as enumerated array
-	 * @return array
-	 */
-	protected function fetch_row()
-	{
-		return @mssql_fetch_row($this->resResult);
-	}
-
-
-	/**
-	 * Fetch the current row as associative array
-	 * @return array
-	 */
-	protected function fetch_assoc()
-	{
-		return @mssql_fetch_assoc($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of rows of the current result
-	 * @return integer
-	 */
-	protected function num_rows()
-	{
-		return @mssql_num_rows($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of fields of the current result
-	 * @return integer
-	 */
-	protected function num_fields()
-	{
-		return @mssql_num_fields($this->resResult);
-	}
-
-
-	/**
-	 * Get the column information
-	 * @param integer
-	 * @return object
-	 */
-	protected function fetch_field($intOffset)
-	{
-		return @mssql_fetch_field($this->resResult, $intOffset);
-	}
-
-
-	/**
-	 * Free the current result
-	 */
-	public function free()
-	{
-		if (is_resource($this->resResult))
-		{
-			@mssql_free_result($this->resResult);
-		}
+		return new \Database_Mssql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
 

@@ -128,16 +128,8 @@ abstract class Database
 	{
 		if (!is_object(self::$objInstance))
 		{
-			$strClass = 'DB_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
-			$strFile = sprintf('%s/system/drivers/%s.php', TL_ROOT, $strClass);
-
-			if (!file_exists($strFile))
-			{
-				throw new \Exception(sprintf('Could not load database driver %s', $strClass));
-			}
-
-			include_once($strFile);
-			self::$objInstance = new $strClass(); # FIXME
+			$strClass = '\\Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
+			self::$objInstance = new $strClass();
 		}
 
 		return self::$objInstance;

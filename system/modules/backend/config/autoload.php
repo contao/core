@@ -70,7 +70,12 @@ Autoloader::addClasses(array
 	'TextStore'         => 'system/modules/backend/TextStore.php',
 	'Theme'             => 'system/modules/backend/Theme.php',
 	'TimePeriod'        => 'system/modules/backend/TimePeriod.php',
-	'TrblField'         => 'system/modules/backend/TrblField.php'
+	'TrblField'         => 'system/modules/backend/TrblField.php',
+
+	// Drivers
+	'DC_File'   => 'system/modules/backend/drivers/DC_File.php',
+	'DC_Folder' => 'system/modules/backend/drivers/DC_Folder.php',
+	'DC_Table'  => 'system/modules/backend/drivers/DC_Table.php'
 ));
 
 ?>

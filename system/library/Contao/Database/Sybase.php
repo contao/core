@@ -29,14 +29,20 @@
 
 
 /**
- * Class DB_Sybase
+ * Namespace
+ */
+namespace Contao;
+
+
+/**
+ * Class Database_Sybase
  *
  * Driver class for Sybase databases.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Driver
  */
-class DB_Sybase extends Database
+class Database_Sybase extends \Database
 {
 
 	/**
@@ -226,191 +232,11 @@ class DB_Sybase extends Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return DB_Sybase_Statement
+	 * @return Database_Sybase_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
-		return new DB_Sybase_Statement($resConnection, $blnDisableAutocommit);
-	}
-}
-
-
-/**
- * Class DB_Sybase_Statement
- *
- * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Sybase_Statement extends Database_Statement
-{
-
-	/**
-	 * Prepare a query and return it
-	 * @param string
-	 */
-	protected function prepare_query($strQuery)
-	{
-		return $strQuery;
-	}
-
-
-	/**
-	 * Escape a string
-	 * @param string
-	 * @return string
-	 */
-	protected function string_escape($strString)
-	{
-		return "'" . str_replace("'", "''", $strString) . "'";
-	}
-
-
-	/**
-	 * Limit the current query
-	 * @param integer
-	 * @param integer
-	 */
-	protected function limit_query($intRows, $intOffset)
-	{
-		$this->strQuery .= 'SET ROWCOUNT ' . ($intOffset + $intRows) . '; ' . $this->strQuery . '; SET ROWCOUNT 0;';
-	}
-
-
-	/**
-	 * Execute the current query
-	 * @return resource
-	 */
-	protected function execute_query()
-	{
-		return @sybase_query($this->strQuery);
-	}
-
-
-	/**
-	 * Return the last error message
-	 * @return string
-	 */
-	protected function get_error()
-	{
-		return sybase_get_last_message();
-	}
-
-
-	/**
-	 * Return the number of affected rows
-	 * @return integer
-	 */
-	protected function affected_rows()
-	{
-		return @sybase_affected_rows();
-	}
-
-
-	/**
-	 * Return the last insert ID
-	 * @return boolean
-	 */
-	protected function insert_id()
-	{
-		return false;
-	}
-
-
-	/**
-	 * Explain the current query
-	 * @return boolean
-	 */
-	protected function explain_query()
-	{
-		return false;
-	}
-
-	/**
-	 * Create a Database_Result object
-	 * @param resource
-	 * @param string
-	 * @return DB_Sybase_Result
-	 */
-	protected function createResult($resResult, $strQuery)
-	{
-		return new DB_Sybase_Result($resResult, $strQuery);
-	}
-}
-
-
-/**
- * Class DB_Sybase_Result
- *
- * Driver class for Sybase databases.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
- */
-class DB_Sybase_Result extends Database_Result
-{
-
-	/**
-	 * Fetch the current row as enumerated array
-	 * @return array
-	 */
-	protected function fetch_row()
-	{
-		return @sybase_fetch_row($this->resResult);
-	}
-
-
-	/**
-	 * Fetch the current row as associative array
-	 * @return array
-	 */
-	protected function fetch_assoc()
-	{
-		return @sybase_fetch_assoc($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of rows of the current result
-	 * @return integer
-	 */
-	protected function num_rows()
-	{
-		return @sybase_num_rows($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of fields of the current result
-	 * @return integer
-	 */
-	protected function num_fields()
-	{
-		return @sybase_num_fields($this->resResult);
-	}
-
-
-	/**
-	 * Get column information
-	 * @param integer
-	 * @return object
-	 */
-	protected function fetch_field($intOffset)
-	{
-		return @sybase_fetch_field($this->resResult, $intOffset);
-	}
-
-
-	/**
-	 * Free the current result
-	 */
-	public function free()
-	{
-		if (is_resource($this->resResult))
-		{
-			@sybase_free_result($this->resResult);
-		}
+		return new \Database_Sybase_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
 
