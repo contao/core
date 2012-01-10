@@ -35,14 +35,14 @@ namespace Contao;
 
 
 /**
- * Class FTP
+ * Class Files_Ftp
  *
  * Provide methods to modify files and folders via FTP.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class FTP extends Files
+class Files_Ftp extends \Files
 {
 
 	/**

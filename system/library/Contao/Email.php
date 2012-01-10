@@ -38,6 +38,7 @@ namespace Contao;
  * Include the SwiftMailer classes
  */
 require_once(TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php');
+\Swift::registerAutoload();
 require_once(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
 
 
@@ -148,12 +149,12 @@ class Email extends System
 			if (!$GLOBALS['TL_CONFIG']['useSMTP'])
 			{
 				// Mail
-				$objTransport = Swift_MailTransport::newInstance();
+				$objTransport = \Swift_MailTransport::newInstance();
 			}
 			else
 			{
 				// SMTP
-				$objTransport = Swift_SmtpTransport::newInstance($GLOBALS['TL_CONFIG']['smtpHost'], $GLOBALS['TL_CONFIG']['smtpPort']);
+				$objTransport = \Swift_SmtpTransport::newInstance($GLOBALS['TL_CONFIG']['smtpHost'], $GLOBALS['TL_CONFIG']['smtpPort']);
 
 				// Encryption
 				if ($GLOBALS['TL_CONFIG']['smtpEnc'] == 'ssl' || $GLOBALS['TL_CONFIG']['smtpEnc'] == 'tls')
@@ -168,11 +169,11 @@ class Email extends System
 				}
 			}
 
-			self::$objMailer = Swift_Mailer::newInstance($objTransport);
+			self::$objMailer = \Swift_Mailer::newInstance($objTransport);
 		}
 
 		// Instantiate Swift_Message
-		$this->objMessage = Swift_Message::newInstance();
+		$this->objMessage = \Swift_Message::newInstance();
 		$this->objMessage->getHeaders()->addTextHeader('X-Mailer', 'Contao Open Source CMS');
 	}
 
@@ -379,7 +380,7 @@ class Email extends System
 	 */
 	public function attachFile($strFile, $strMime='application/octet-stream')
 	{
-		$this->objMessage->attach(Swift_Attachment::fromPath($strFile, $strMime)->setFilename(basename($strFile)));
+		$this->objMessage->attach(\Swift_Attachment::fromPath($strFile, $strMime)->setFilename(basename($strFile)));
 	}
 
 
@@ -391,7 +392,7 @@ class Email extends System
 	 */
 	public function attachFileFromString($strContent, $strFilename, $strMime='application/octet-stream')
 	{
-		$this->objMessage->attach(Swift_Attachment::newInstance($strContent, $strFilename, $strMime));
+		$this->objMessage->attach(\Swift_Attachment::newInstance($strContent, $strFilename, $strMime));
 	}
 
 
@@ -448,7 +449,7 @@ class Email extends System
 					// Embed the image if the URL is now relative
 					if (!preg_match('@^https?://@', $src) && file_exists($this->strImageDir . $src))
 					{
-						$cid = $this->objMessage->embed(Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
+						$cid = $this->objMessage->embed(\Swift_EmbeddedFile::fromPath($this->strImageDir . $src));
 						$this->strHtml = str_replace(array('src="' . $url . '"', 'url("' . $url . '"'), array('src="' . $cid . '"', 'url("' . $cid . '"'), $this->strHtml);
 					}
 				}

@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Moved the Contao framework into the 'library' folder.
+
+### Changed
 Renamed the default configuration file from `config.php` to `default.php`, so
 hopefully less people will try to edit the file directly.
 

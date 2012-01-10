@@ -71,7 +71,6 @@ class Autoloader
 		'Contao\\Feed'         => 'system/library/Contao/Feed.php',
 		'Contao\\File'         => 'system/library/Contao/File.php',
 		'Contao\\FileCache'    => 'system/library/Contao/FileCache.php',
-		'Contao\\Files'        => 'system/library/Contao/Files.php',
 		'Contao\\Folder'       => 'system/library/Contao/Folder.php',
 		'Contao\\FTP'          => 'system/library/Contao/FTP.php',
 		'Contao\\Input'        => 'system/library/Contao/Input.php',
@@ -109,7 +108,12 @@ class Autoloader
 		'Contao\\Database_Postgresql_Result'    => 'system/library/Contao/Database/Postgresql/Result.php',
 		'Contao\\Database_Sybase'               => 'system/library/Contao/Database/Sybase.php',
 		'Contao\\Database_Sybase_Statement'     => 'system/library/Contao/Database/Sybase/Statement.php',
-		'Contao\\Database_Sybase_Result'        => 'system/library/Contao/Database/Sybase/Result.php'
+		'Contao\\Database_Sybase_Result'        => 'system/library/Contao/Database/Sybase/Result.php',
+
+		// Files
+		'Contao\\Files'     => 'system/library/Contao/Files.php',
+		'Contao\\Files_Ftp' => 'system/library/Contao/Files/Ftp.php',
+		'Contao\\Files_Php' => 'system/library/Contao/Files/Php.php'
 	);
 
 
@@ -175,7 +179,6 @@ class Autoloader
 	/**
 	 * Autoload a class and alias it into the global namespace
 	 * @param string
-	 * @throws \InvalidArgumentException
 	 */
 	public static function load($class)
 	{
@@ -193,10 +196,8 @@ class Autoloader
 			include TL_ROOT . '/' . self::$classes[$namespaced];
 			class_alias($namespaced, $class);
 		}
-		else
-		{
-			throw new \InvalidArgumentException("Cannot find $class");
-		}
+
+		// Pass the request to other autoloaders (e.g. Swift)
 	}
 
 

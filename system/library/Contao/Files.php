@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Files
+abstract class Files
 {
 
 	/**
@@ -75,7 +75,7 @@ class Files
 			// Use FTP to modify files
 			if ($GLOBALS['TL_CONFIG']['useFTP'])
 			{
-				self::$objInstance = new \FTP();
+				self::$objInstance = new \Files_Ftp();
 			}
 
 			// HOOK: use the smhextended module
@@ -87,7 +87,7 @@ class Files
 			// Use PHP to modify files
 			else
 			{
-				self::$objInstance = new \Files();
+				self::$objInstance = new \Files_Php();
 			}
 		}
 
@@ -100,11 +100,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function mkdir($strDirectory)
-	{
-		$this->validate($strDirectory);
-		return @mkdir(TL_ROOT . '/' . $strDirectory);
-	}
+	abstract public function mkdir($strDirectory);
 
 
 	/**
@@ -112,11 +108,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function rmdir($strDirectory)
-	{
-		$this->validate($strDirectory);
-		return @rmdir(TL_ROOT. '/' . $strDirectory);
-	}
+	abstract public function rmdir($strDirectory);
 
 
 	/**
@@ -154,11 +146,7 @@ class Files
 	 * @param string
 	 * @return resource
 	 */
-	public function fopen($strFile, $strMode)
-	{
-		$this->validate($strFile);
-		return @fopen(TL_ROOT . '/' . $strFile, $strMode);
-	}
+	abstract public function fopen($strFile, $strMode);
 
 
 	/**
@@ -167,10 +155,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function fputs($resFile, $strContent)
-	{
-		return @fputs($resFile, $strContent);
-	}
+	abstract public function fputs($resFile, $strContent);
 
 
 	/**
@@ -178,10 +163,7 @@ class Files
 	 * @param resource
 	 * @return boolean
 	 */
-	public function fclose($resFile)
-	{
-		return @fclose($resFile);
-	}
+	abstract public function fclose($resFile);
 
 
 	/**
@@ -190,31 +172,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function rename($strOldName, $strNewName)
-	{
-		// Source file == target file
-		if ($strOldName == $strNewName)
-		{
-			return true;
-		}
-
-		$this->validate($strOldName, $strNewName);
-
-		// Windows fix: delete the target file
-		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists(TL_ROOT . '/' . $strNewName))
-		{
-			$this->delete($strNewName);
-		}
-
-		// Unix fix: rename case sensitively
-		if (strcasecmp($strOldName, $strNewName) === 0 && strcmp($strOldName, $strNewName) !== 0)
-		{
-			@rename(TL_ROOT . '/' . $strOldName, TL_ROOT . '/' . $strOldName . '__');
-			$strOldName .= '__';
-		}
-
-		return @rename(TL_ROOT . '/' . $strOldName, TL_ROOT . '/' . $strNewName);
-	}
+	abstract public function rename($strOldName, $strNewName);
 
 
 	/**
@@ -223,11 +181,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function copy($strSource, $strDestination)
-	{
-		$this->validate($strSource, $strDestination);
-		return @copy(TL_ROOT . '/' . $strSource, TL_ROOT . '/' . $strDestination);
-	}
+	abstract public function copy($strSource, $strDestination);
 
 
 	/**
@@ -235,11 +189,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function delete($strFile)
-	{
-		$this->validate($strFile);
-		return @unlink(TL_ROOT . '/' . $strFile);
-	}
+	abstract public function delete($strFile);
 
 
 	/**
@@ -248,11 +198,7 @@ class Files
 	 * @param mixed
 	 * @return boolean
 	 */
-	public function chmod($strFile, $varMode)
-	{
-		$this->validate($strFile);
-		return @chmod(TL_ROOT . '/' . $strFile, $varMode);
-	}
+	abstract public function chmod($strFile, $varMode);
 
 
 	/**
@@ -260,11 +206,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function is_writeable($strFile)
-	{
-		$this->validate($strFile);
-		return @is_writeable(TL_ROOT . '/' . $strFile);
-	}
+	abstract public function is_writeable($strFile);
 
 
 	/**
@@ -273,11 +215,7 @@ class Files
 	 * @param string
 	 * @return boolean
 	 */
-	public function move_uploaded_file($strSource, $strDestination)
-	{
-		$this->validate($strSource, $strDestination);
-		return @move_uploaded_file($strSource, TL_ROOT . '/' . $strDestination);
-	}
+	abstract public function move_uploaded_file($strSource, $strDestination);
 
 
 	/**
