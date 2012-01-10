@@ -371,7 +371,7 @@ class PageRegular extends Frontend
 		// Skip the Contao framework style sheet
 		if (!$objLayout->skipFramework)
 		{
-			$objCombiner->add('system/contao.css');
+			$objCombiner->add('assets/css/contao.css');
 		}
 
 		// Skip the TinyMCE style sheet
@@ -416,11 +416,11 @@ class PageRegular extends Frontend
 				// Aggregate regular style sheets
 				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
 				{
-					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+					$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
 				}
 				else
 				{
-					$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'system/scripts/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
+					$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
 
 					if ($objStylesheets->cc)
 					{

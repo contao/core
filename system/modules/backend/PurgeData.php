@@ -181,8 +181,10 @@ class PurgeData extends Backend implements executable
 		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$objTemplate->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$objTemplate->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
+		/* FIXME
 		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/html')) - 2));
 		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/scripts')) - 1));
+		*/
 		$objTemplate->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
 		$objTemplate->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$objTemplate->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);

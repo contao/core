@@ -146,16 +146,17 @@ class Combiner extends System
 	 */
 	public function getCombinedFile($strUrl=TL_SCRIPT_URL)
 	{
+		$strTarget = substr($this->strMode, 1);
 		$strKey = substr(md5($this->strKey), 0, 12);
 
 		// Load the existing file
-		if (file_exists(TL_ROOT . '/system/scripts/' . $strKey . $this->strMode))
+		if (file_exists(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode))
 		{
-			return $strUrl . 'system/scripts/' . $strKey . $this->strMode;
+			return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 		}
 
 		// Create the file
-		$objFile = new File('system/scripts/' . $strKey . $this->strMode);
+		$objFile = new File('assets/' . $strTarget . '/' . $strKey . $this->strMode);
 		$objFile->truncate();
 
 		foreach ($this->arrFiles as $arrFile)
@@ -199,12 +200,12 @@ class Combiner extends System
 		// Create a gzipped version
 		if ($GLOBALS['TL_CONFIG']['gzipScripts'] && function_exists('gzencode'))
 		{
-			$objFile = new File('system/scripts/' . $strKey . $this->strMode . '.gz');
-			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/system/scripts/' . $strKey . $this->strMode), 9));
+			$objFile = new File('assets/' . $strTarget . '/' . $strKey . $this->strMode . '.gz');
+			$objFile->write(gzencode(file_get_contents(TL_ROOT . '/assets/' . $strTarget . '/' . $strKey . $this->strMode), 9));
 			$objFile->close();
 		}
 
-		return $strUrl . 'system/scripts/' . $strKey . $this->strMode;
+		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 	}
 }
 

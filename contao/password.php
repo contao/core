@@ -138,7 +138,6 @@ class Index extends Backend
 		$this->Template->submitButton = specialchars($GLOBALS['TL_LANG']['MSC']['continue']);
 		$this->Template->password = $GLOBALS['TL_LANG']['MSC']['password'][0];
 		$this->Template->confirm = $GLOBALS['TL_LANG']['MSC']['confirm'][0];
-		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
 
 		$this->Template->output();
 	}

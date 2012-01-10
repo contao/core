@@ -68,7 +68,7 @@ class Calendar extends Frontend
 		if ($this->Input->get('act') == 'delete' || $objCalendar->protected)
 		{
 			$this->import('Files');
-			$this->Files->delete($objCalendar->feedName . '.xml');
+			$this->Files->delete('share/' . $objCalendar->feedName . '.xml');
 		}
 
 		// Update XML file
@@ -214,7 +214,7 @@ class Calendar extends Frontend
 		}
 
 		// Create file
-		$objRss = new File($strFile . '.xml');
+		$objRss = new File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}

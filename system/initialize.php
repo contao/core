@@ -39,7 +39,7 @@ define('TL_ROOT', dirname(dirname(__FILE__)));
  * Include functions, constants and interfaces
  */
 require(TL_ROOT . '/system/functions.php');
-require(TL_ROOT . '/system/constants.php');
+require(TL_ROOT . '/system/config/constants.php');
 require(TL_ROOT . '/system/interface.php');
 
 

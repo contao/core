@@ -71,7 +71,7 @@ class StyleSheets extends Backend
 		if ($this->Input->get('act') == 'delete')
 		{
 			$this->import('Files');
-			$this->Files->delete('system/scripts/' . $objStyleSheet->name . '.css');
+			$this->Files->delete('assets/css/' . $objStyleSheet->name . '.css');
 		}
 
 		// Update the CSS file
@@ -95,15 +95,15 @@ class StyleSheets extends Backend
 		@include(TL_ROOT . '/system/config/dcaconfig.php');
 
 		// Delete old style sheets
-		foreach (scan(TL_ROOT . '/system/scripts', true) as $file)
+		foreach (scan(TL_ROOT . '/assets/css', true) as $file)
 		{
 			// Skip directories
-			if (is_dir(TL_ROOT . '/system/scripts/' . $file))
+			if (is_dir(TL_ROOT . '/assets/css/' . $file) || $file == 'contao.css')
 			{
 				continue;
 			}
 
-			// Preserve root files (is this still required now that scripts are in system/scripts?)
+			// Preserve root files (is this still required now that scripts are in assets/css/scripts?)
 			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
 			{
 				continue;
@@ -115,7 +115,7 @@ class StyleSheets extends Backend
 				continue;
 			}
 
-			$objFile = new File('system/scripts/' . $file);
+			$objFile = new File('assets/css/' . $file);
 
 			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
@@ -149,9 +149,9 @@ class StyleSheets extends Backend
 		$row['name'] = basename($row['name']);
 
 		// Check whether the target file is writeable
-		if (file_exists(TL_ROOT . '/system/scripts/' . $row['name'] . '.css') && !$this->Files->is_writeable('system/scripts/' . $row['name'] . '.css'))
+		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
-			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/scripts/' . $row['name'] . '.css'));
+			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
 			return;
 		}
 
@@ -189,7 +189,7 @@ class StyleSheets extends Backend
 		// Sort by key length (see #3316)
 		uksort($vars, 'length_sort_desc');
 
-		$objFile = new File('system/scripts/' . $row['name'] . '.css');
+		$objFile = new File('assets/css/' . $row['name'] . '.css');
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")

@@ -100,7 +100,7 @@ class Automator extends Backend
 		// Create the XML file
 		while($objRoot->next())
 		{
-			$objFile = new File($objRoot->sitemapName . '.xml');
+			$objFile = new File('share/' . $objRoot->sitemapName . '.xml');
 
 			$objFile->write('');
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
@@ -146,20 +146,20 @@ class Automator extends Backend
 
 
 	/**
-	 * Purge the thumbnail directory
+	 * Purge the thumbnail directory (assets/images)
 	 */
 	public function purgeHtmlFolder()
 	{
-		$arrHtml = scan(TL_ROOT . '/system/html', true);
+		$arrHtml = scan(TL_ROOT . '/assets/images', true);
 
-		// Remove files
+		// Remove the files
 		if (is_array($arrHtml))
 		{
 			foreach ($arrHtml as $strFile)
 			{
-				if ($strFile != 'index.html' && $strFile != 'cron.txt' && !is_dir(TL_ROOT . '/system/html/' . $strFile))
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/assets/images/' . $strFile))
 				{
-					@unlink(TL_ROOT . '/system/html/' . $strFile);
+					@unlink(TL_ROOT . '/assets/images/' . $strFile);
 				}
 			}
 		}
@@ -170,20 +170,34 @@ class Automator extends Backend
 
 
 	/**
-	 * Purge the scripts directory
+	 * Purge the script directories (assets/js and asset/css)
 	 */
 	public function purgeScriptsFolder()
 	{
-		$arrScripts = scan(TL_ROOT . '/system/scripts', true);
+		$arrScripts = scan(TL_ROOT . '/assets/js', true);
 
-		// Remove files
+		// Remove the JavaScript files
 		if (is_array($arrScripts))
 		{
 			foreach ($arrScripts as $strFile)
 			{
 				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
 				{
-					unlink(TL_ROOT . '/system/scripts/' . $strFile);
+					unlink(TL_ROOT . '/assets/js/' . $strFile);
+				}
+			}
+		}
+
+		$arrScripts = scan(TL_ROOT . '/assets/css', true);
+
+		// Remove the CSS files
+		if (is_array($arrScripts))
+		{
+			foreach ($arrScripts as $strFile)
+			{
+				if ($strFile != 'index.html' && $strFile != 'contao.css' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
+				{
+					unlink(TL_ROOT . '/assets/css/' . $strFile);
 				}
 			}
 		}
@@ -193,7 +207,7 @@ class Automator extends Backend
 		$this->StyleSheets->updateStyleSheets();
 
 		// Add log entry
-		$this->log('Purged the scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
+		$this->log('Purged the scripts directories', 'Automator purgeScriptsFolder()', TL_CRON);
 	}
 
 

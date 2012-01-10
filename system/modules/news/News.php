@@ -61,7 +61,7 @@ class News extends Frontend
 		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
 		{
 			$this->import('Files');
-			$this->Files->delete($objArchive->feedName . '.xml');
+			$this->Files->delete('share/' . $objArchive->feedName . '.xml');
 		}
 
 		// Update XML file
@@ -170,7 +170,7 @@ class News extends Frontend
 		}
 
 		// Create file
-		$objRss = new File($strFile . '.xml');
+		$objRss = new File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}

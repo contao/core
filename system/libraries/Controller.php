@@ -927,7 +927,7 @@ abstract class Controller extends System
 			$mode = 'center_center';
 		}
 
-		$strCacheName = 'system/html/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
+		$strCacheName = 'assets/images/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
 		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))

@@ -109,11 +109,11 @@ window.addEvent('domready', function() {
 
 <script>
 new Request({
-  url:'system/html/cron.txt',
+  url:'system/cron/cron.txt',
   onComplete: function(txt) {
     if (!txt) txt = 0;
     if (parseInt(txt) < (Date.now()/1000 - 300)) {
-      new Request({url:'cron.php'}).send();
+      new Request({url:'system/cron/cron.php'}).send();
     }
   }
 }).send();
