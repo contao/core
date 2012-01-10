@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
+ * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
- * @filesource
  */
 
 
@@ -38,9 +37,9 @@ define('TL_ROOT', dirname(dirname(__FILE__)));
 /**
  * Include functions, constants and interfaces
  */
-require(TL_ROOT . '/system/functions.php');
+require(TL_ROOT . '/system/helper/functions.php');
 require(TL_ROOT . '/system/config/constants.php');
-require(TL_ROOT . '/system/interface.php');
+require(TL_ROOT . '/system/helper/interface.php');
 
 
 /**
@@ -66,6 +65,14 @@ require(TL_ROOT . '/system/interface.php');
  * Start the session
  */
 @session_start();
+
+
+/**
+ * Register the autoloader
+ */
+require TL_ROOT . '/system/library/Contao/Autoloader.php';
+class_alias('Contao\\Autoloader', 'Autoloader');
+Autoloader::scanAndRegister(); // scans for config/autoload.php files
 
 
 /**
