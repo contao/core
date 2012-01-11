@@ -237,8 +237,8 @@ class tl_module_calendar extends Backend
 		return array
 		(
 			'cal_list'     => array('cal_day', 'cal_month', 'cal_year', 'cal_all'),
-			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_cur_day', 'next_cur_month', 'next_cur_year', 'next_all'),
-			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_cur_day', 'past_cur_month', 'past_cur_year', 'past_all')
+			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_cur_month', 'next_cur_year', 'next_all'),
+			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_cur_month', 'past_cur_year', 'past_all')
 		);
 	}
 
