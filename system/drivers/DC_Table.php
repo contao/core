@@ -4192,9 +4192,17 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		}
 
 		// Set search value from session
-		elseif (strlen($session['search'][$this->strTable]['value']))
+		elseif ($session['search'][$this->strTable]['value'] != '')
 		{
-			$this->procedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
+			if (substr($GLOBALS['TL_CONFIG']['dbCollation'], -3) == '_ci')
+			{
+				$this->procedure[] = "LOWER(CAST(".$session['search'][$this->strTable]['field']." AS CHAR)) REGEXP LOWER(?)";
+			}
+			else
+			{
+				$this->procedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
+			}
+
 			$this->values[] = $session['search'][$this->strTable]['value'];
 		}
 

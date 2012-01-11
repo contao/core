@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the case-insensitive search in the back end (see #3789).
+
+### Fixed
 Support data: URIs in the style sheet generator (see #3661).
 
 ### New
