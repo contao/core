@@ -358,7 +358,7 @@ abstract class Controller extends System
 				}
 			}
 
-			$objModule = new $strClass($objRow, $strColumn); # FIXME
+			$objModule = new $strClass($objRow, $strColumn);
 			$strBuffer = $objModule->generate();
 
 			// Disable indexing if protected
@@ -517,7 +517,7 @@ abstract class Controller extends System
 			}
 		}
 
-		$objElement = new $strClass($objRow); # FIXME
+		$objElement = new $strClass($objRow);
 		$strBuffer = $objElement->generate();
 
 		// Disable indexing if protected

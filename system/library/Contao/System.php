@@ -166,7 +166,7 @@ abstract class System
 
 		if ($blnForce || !is_object($this->$strKey))
 		{
-			$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass(); # FIXME
+			$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 		}
 	}
 
