@@ -94,6 +94,7 @@ class ModuleEventlist extends Events
 	 */
 	protected function compile()
 	{
+		global $objPage;
 		$blnClearInput = false;
 
 		// Jump to the current period
@@ -140,7 +141,7 @@ class ModuleEventlist extends Events
 		{
 			$this->Date = new Date($this->Input->get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->Date->tstamp);
+			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
 
 		// Display all events or upcoming/past events
@@ -181,7 +182,7 @@ class ModuleEventlist extends Events
 				foreach ($events as $event)
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
-					$event['firstDate'] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $day);
+					$event['firstDate'] = $this->parseDate($objPage->dateFormat, $day);
 					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;

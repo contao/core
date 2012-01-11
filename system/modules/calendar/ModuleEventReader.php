@@ -162,15 +162,15 @@ class ModuleEventReader extends Events
 		// Get date
 		if ($span > 0)
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime) . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->endTime) . $strTimeClose;
 		}
 		elseif ($objEvent->startTime == $objEvent->endTime)
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $objEvent->startTime) . ')' : '') . $strTimeClose;
 		}
 		else
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($objPage->timeFormat, $objEvent->endTime) . ')' : '') . $strTimeClose;
 		}
 
 		$until = '';
@@ -185,7 +185,7 @@ class ModuleEventReader extends Events
 
 			if ($objEvent->recurrences > 0)
 			{
-				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->repeatEnd));
+				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($objPage->dateFormat, $objEvent->repeatEnd));
 			}
 		}
 
