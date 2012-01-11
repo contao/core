@@ -5,6 +5,9 @@ Version 2.11.RC2 (XXXX-XX-XX)
 -----------------------------
 
 ### New
+Added the `getCookie()` hook (see #3233).
+
+### New
 Added the `copyTo()` method to the `File` and `Folder` class (see #3800).
 
 ### Fixed

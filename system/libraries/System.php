@@ -691,7 +691,26 @@ abstract class System
 			$strPath = '/';
 		}
 
-		setcookie($strName, $varValue, $intExpires, $strPath, $strDomain, $blnSecure);
+		$objCookie = new stdClass();
+
+		$objCookie->strName    = $strName;
+		$objCookie->varValue   = $varValue;
+		$objCookie->intExpires = $intExpires;
+		$objCookie->strPath    = $strPath;
+		$objCookie->strDomain  = $strDomain;
+		$objCookie->blnSecure  = $blnSecure;
+
+		// HOOK: allow to add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['setCookie']) && is_array($GLOBALS['TL_HOOKS']['setCookie']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['setCookie'] as $callback)
+			{
+				$this->import($callback[0]);
+				$objCookie = $this->$callback[0]->$callback[1]($objCookie);
+			}
+		}
+
+		setcookie($objCookie->strName, $objCookie->varValue, $objCookie->intExpires, $objCookie->strPath, $objCookie->strDomain, $objCookie->blnSecure);
 	}
 
 
