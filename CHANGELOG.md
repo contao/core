@@ -1,8 +1,11 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.0 (XXXX-XX-XX)
----------------------------
+Version 2.11.RC2 (XXXX-XX-XX)
+-----------------------------
+
+### New
+Added the `copyTo()` method to the `File` and `Folder` class (see #3800).
 
 ### Fixed
 Do not generate news or calendar feeds if there is no target page (see #3786).

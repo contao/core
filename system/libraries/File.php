@@ -330,6 +330,17 @@ class File extends System
 
 
 	/**
+	 * Copy the file
+	 * @param string
+	 * @return boolean
+	 */
+	public function copyTo($strNewName)
+	{
+		return $this->Files->copy($this->strFile, $strNewName);
+	}
+
+
+	/**
 	 * Write data to a file
 	 * @param mixed
 	 * @param string

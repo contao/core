@@ -152,6 +152,17 @@ class Folder extends System
 
 
 	/**
+	 * Copy the folder
+	 * @param string
+	 * @return boolean
+	 */
+	public function copyTo($strNewName)
+	{
+		return $this->Files->copy($this->strFolder, $strNewName);
+	}
+
+
+	/**
 	 * Protect the folder by adding an .htaccess file
 	 */
 	public function protect()
