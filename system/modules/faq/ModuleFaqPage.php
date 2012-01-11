@@ -128,7 +128,7 @@ class ModuleFaqPage extends Module
 				$this->addEnclosuresToTemplate($objTemp, $objFaq->row());
 			}
 
-			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->author);
+			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author);
 
 			// Order by PID
 			$arrFaq[$objFaq->pid]['items'][] = $objTemp;

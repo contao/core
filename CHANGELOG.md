@@ -5,6 +5,11 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+You can now use a textual date format in the front end without breaking the
+"registration" and "personal data" modules, which will fall back to the numeric
+back end date.
+
+### Fixed
 Fixed the case-insensitive search in the back end (see #3789).
 
 ### Fixed

@@ -105,7 +105,7 @@ class ModuleArticle extends Module
 
 		// Add modification date
 		$this->Template->timestamp = $this->tstamp;
-		$this->Template->date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->tstamp);
+		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
 		$this->Template->author = $this->author;
 
 		// Clean the RTE output

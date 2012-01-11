@@ -83,6 +83,8 @@ class ModuleNewsletterList extends Module
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$objNewsletter = $this->Database->execute("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel, (SELECT jumpTo FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS jumpTo FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ")" . (!BE_USER_LOGGED_IN ? " AND sent=1" : "") . " ORDER BY date DESC");
 
 		$arrJumpTo = array();
@@ -126,9 +128,9 @@ class ModuleNewsletterList extends Module
 				'subject' => $objNewsletter->subject,
 				'title' => strip_insert_tags($objNewsletter->subject),
 				'href' => sprintf($strUrl, $strAlias),
-				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
-				'datim' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),
-				'time' => $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objNewsletter->date),
+				'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
+				'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
+				'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
 				'channel' => $objNewsletter->channel
 			);
 		}

@@ -392,6 +392,8 @@ class ModuleListing extends Module
 			return '';
 		}
 
+		global $objPage;
+
 		// Array
 		if (is_array($value))
 		{
@@ -401,19 +403,19 @@ class ModuleListing extends Module
 		// Date
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+			$value = $this->parseDate($objPage->dateFormat, $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+			$value = $this->parseDate($objPage->timeFormat, $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+			$value = $this->parseDate($objPage->datimFormat, $value);
 		}
 
 		// URLs

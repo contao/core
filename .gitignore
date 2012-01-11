@@ -13,6 +13,9 @@ nbproject/
 # Contao
 .htaccess
 *.xml
+assets/css/*
+assets/images/*
+assets/js/*
 system/html/*
 system/logs/*
 system/scripts/*

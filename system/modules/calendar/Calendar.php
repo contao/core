@@ -324,11 +324,11 @@ class Calendar extends Frontend
 		// Add date
 		if ($span > 0)
 		{
-			$title = $this->parseDate($GLOBALS['TL_CONFIG'][$format], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG'][$format], $intEnd);
+			$title = $this->parseDate($objPage->$format, $intStart) . ' - ' . $this->parseDate($objPage->$format, $intEnd);
 		}
 		else
 		{
-			$title = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ($objArticle->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd) : '') . ')' : '');
+			$title = $this->parseDate($objPage->dateFormat, $intStart) . ($objArticle->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($objPage->timeFormat, $intEnd) : '') . ')' : '');
 		}
 
 		// Add title and link

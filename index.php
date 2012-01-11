@@ -175,18 +175,18 @@ class Index extends Frontend
 			$objPage = $this->getPageDetails($objPage->id);
 		}
 
-		// Overwrite the global date and time format in the front end
-		if ($objPage->dateFormat != '')
+		// Use the global date format if none is set
+		if ($objPage->dateFormat == '')
 		{
-			$GLOBALS['TL_CONFIG']['dateFormat'] = $objPage->dateFormat;
+			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
 		}
-		if ($objPage->timeFormat != '')
+		if ($objPage->timeFormat == '')
 		{
-			$GLOBALS['TL_CONFIG']['timeFormat'] = $objPage->timeFormat;
+			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
 		}
-		if ($objPage->datimFormat != '')
+		if ($objPage->datimFormat == '')
 		{
-			$GLOBALS['TL_CONFIG']['datimFormat'] = $objPage->datimFormat;
+			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
 		}
 
 		// Set the admin e-mail address

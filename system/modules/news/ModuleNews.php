@@ -234,6 +234,7 @@ abstract class ModuleNews extends Module
 			return array();
 		}
 
+		global $objPage;
 		$return = array();
 
 		foreach ($meta as $field)
@@ -241,7 +242,7 @@ abstract class ModuleNews extends Module
 			switch ($field)
 			{
 				case 'date':
-					$return['date'] = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objArticle->date);
+					$return['date'] = $this->parseDate($objPage->datimFormat, $objArticle->date);
 					break;
 
 				case 'author':

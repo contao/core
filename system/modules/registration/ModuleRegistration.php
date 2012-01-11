@@ -208,7 +208,8 @@ class ModuleRegistration extends Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp . 'Format']);
+					// Use the numeric back end format here!
+					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 

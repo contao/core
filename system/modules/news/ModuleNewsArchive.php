@@ -95,6 +95,8 @@ class ModuleNewsArchive extends ModuleNews
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$limit = null;
 		$offset = 0;
 
@@ -145,7 +147,7 @@ class ModuleNewsArchive extends ModuleNews
 			$objDate = new Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
-			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objDate->tstamp);
+			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
 		}
 
 		// Show all items 
