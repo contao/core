@@ -764,6 +764,7 @@ var Backend =
 	 */
 	hideTreeBody: function() {
 		var lists = $$('ul');
+		var parent = null;
 
 		for (var i=0; i<lists.length; i++) {
 			if (lists[i].hasClass('mandatory')) {
