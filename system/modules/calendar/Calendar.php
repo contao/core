@@ -127,10 +127,15 @@ class Calendar extends Frontend
 
 		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
-		// Get default URL
+		// Get the default URL
 		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
+
+		if ($objParent->numRows < 1)
+		{
+			return;
+		}
 
 		$objParent = $this->getPageDetails($objParent->id);
 		$strUrl = $strLink . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);

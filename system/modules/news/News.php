@@ -124,6 +124,11 @@ class News extends Frontend
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
+		if ($objParent->numRows < 1)
+		{
+			return;
+		}
+
 		$objParent = $this->getPageDetails($objParent->id);
 		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 
