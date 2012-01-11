@@ -454,7 +454,7 @@ class ModuleRegistration extends Module
 			foreach ($GLOBALS['TL_HOOKS']['createNewUser'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($insertId, $arrData);
+				$this->$callback[0]->$callback[1]($insertId, $arrData, $this);
 			}
 		}
 
@@ -499,7 +499,7 @@ class ModuleRegistration extends Module
 			foreach ($GLOBALS['TL_HOOKS']['activateAccount'] as $callback)
 			{
 				$this->import($callback[0]);
-				$this->$callback[0]->$callback[1]($objMember);
+				$this->$callback[0]->$callback[1]($objMember, $this);
 			}
 		}
 
