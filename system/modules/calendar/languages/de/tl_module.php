@@ -62,7 +62,7 @@ $GLOBALS['TL_LANG']['tl_module']['next_180']       = '+ 6 Monate';
 $GLOBALS['TL_LANG']['tl_module']['next_365']       = '+ 1 Jahr';
 $GLOBALS['TL_LANG']['tl_module']['next_two']       = '+ 2 Jahre';
 $GLOBALS['TL_LANG']['tl_module']['next_cur_month'] = 'des laufenden Monats';
-$GLOBALS['TL_LANG']['tl_module']['next_cur_year']  = 'des laufenden jahres';
+$GLOBALS['TL_LANG']['tl_module']['next_cur_year']  = 'des laufenden Jahres';
 $GLOBALS['TL_LANG']['tl_module']['next_all']       = 'Alle zukünftigen Events';
 $GLOBALS['TL_LANG']['tl_module']['cal_past']       = 'Vergangene Events';
 $GLOBALS['TL_LANG']['tl_module']['past_7']         = '- 1 Woche';
@@ -73,7 +73,7 @@ $GLOBALS['TL_LANG']['tl_module']['past_180']       = '- 6 Monate';
 $GLOBALS['TL_LANG']['tl_module']['past_365']       = '- 1 Jahr';
 $GLOBALS['TL_LANG']['tl_module']['past_two']       = '- 2 Jahre';
 $GLOBALS['TL_LANG']['tl_module']['past_cur_month'] = 'des laufenden Monats';
-$GLOBALS['TL_LANG']['tl_module']['past_cur_year']  = 'des laufenden jahres';
+$GLOBALS['TL_LANG']['tl_module']['past_cur_year']  = 'des laufenden Jahres';
 $GLOBALS['TL_LANG']['tl_module']['past_all']       = 'Alle vergangenen Events';
 
 ?>
