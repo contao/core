@@ -591,6 +591,13 @@ class DC_Table extends DataContainer implements listable, editable
 			if (isset($v['default']))
 			{
 				$this->set[$k] = is_array($v['default']) ? serialize($v['default']) : $v['default'];
+
+				// Encrypt the default value (see #3740)
+				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
+				{
+					$this->import('Encryption');
+					$this->set[$k] = $this->Encryption->encrypt($this->set[$k]);
+				}
 			}
 		}
 
@@ -779,6 +786,13 @@ class DC_Table extends DataContainer implements listable, editable
 					elseif ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['fallback'])
 					{
 						$v = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default'] ? (is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) ? serialize($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : $GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['default']) : '';
+
+						// Encrypt the default value (see #3740)
+						if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$k]['eval']['encrypt'])
+						{
+							$this->import('Encryption');
+							$v = $this->Encryption->encrypt($v);
+						}
 					}
 
 					// Set fields (except password fields)
@@ -945,6 +959,13 @@ class DC_Table extends DataContainer implements listable, editable
 						if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['unique'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['doNotCopy'] || $GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['fallback'])
 						{
 							$vv = $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'] ? ((is_array($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default'])) ? serialize($GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : $GLOBALS['TL_DCA'][$v]['fields'][$kk]['default']) : '';
+
+							// Encrypt the default value (see #3740)
+							if ($GLOBALS['TL_DCA'][$v]['fields'][$kk]['eval']['encrypt'])
+							{
+								$this->import('Encryption');
+								$vv = $this->Encryption->encrypt($vv);
+							}
 						}
 
 						$copy[$v][$row['id']][$kk] = $vv;

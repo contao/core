@@ -17,7 +17,9 @@ assets/css/*
 assets/images/*
 assets/js/*
 share/*
+system/html
 system/logs/*
+system/scripts
 system/tmp/*
 system/config/dcaconfig.php
 system/config/initconfig.php
