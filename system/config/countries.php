@@ -85,6 +85,7 @@ $countries = array
 	'cr' => 'Costa Rica',
 	'cu' => 'Cuba',
 	'cv' => 'Cape Verde',
+	'cw' => 'Curaçao',
 	'cx' => 'Christmas Island',
 	'cy' => 'Cyprus',
 	'cz' => 'Czech Republic',
@@ -154,6 +155,7 @@ $countries = array
 	'kn' => 'Saint Kitts and Nevis',
 	'kp' => 'North Korea',
 	'kr' => 'South Korea',
+	'kv' => 'Kosovo',
 	'kw' => 'Kuwait',
 	'ky' => 'Cayman Islands',
 	'kz' => 'Kazakhstan',
@@ -258,6 +260,7 @@ $countries = array
 	'tt' => 'Trinidad and Tobago',
 	'tv' => 'Tuvalu',
 	'tw' => 'Taiwan',
+	'ty' => 'Tahiti',
 	'tz' => 'Tanzania',
 	'ua' => 'Ukraine',
 	'ug' => 'Uganda',
@@ -278,7 +281,7 @@ $countries = array
 	'yt' => 'Mayotte',
 	'za' => 'South Africa',
 	'zm' => 'Zambia',
-	'zw' => 'Zimbabwe',
+	'zw' => 'Zimbabwe'
 );
 
 ?>
