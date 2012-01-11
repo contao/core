@@ -5,6 +5,9 @@ Version 2.11.0 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not generate news or calendar feeds if there is no target page (see #3786).
+
+### Fixed
 You can now use a textual date format in the front end without breaking the
 "registration" and "personal data" modules, which will fall back to the numeric
 back end date.
