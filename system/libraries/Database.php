@@ -769,22 +769,22 @@ abstract class Database_Statement
 
 		$arrData[] = $this->strQuery;
 
-		if ($objResult !== null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
+		if ($objResult === null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
 		{
 			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
 			$GLOBALS['TL_DEBUG'][] = $arrData;
-
-			return;
 		}
-
-		$arrData[] = sprintf('%s rows returned', $objResult->numRows);
-
-		if (($arrExplain = $this->explain()) != false)
+		else
 		{
-			$arrData[] = $arrExplain;
-		}
+			$arrData[] = sprintf('%s rows returned', $objResult->numRows);
 
-		$GLOBALS['TL_DEBUG'][] = $arrData;
+			if (($arrExplain = $this->explain()) != false)
+			{
+				$arrData[] = $arrExplain;
+			}
+
+			$GLOBALS['TL_DEBUG'][] = $arrData;
+		}
 	}
 
 

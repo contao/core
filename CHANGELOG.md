@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Fixed an issue in the `Database_Statement::debugQuery()` method.
+
+### Fixed
 Correctly redirect when using an include content element (see #3766).
 
 ### Fixed
