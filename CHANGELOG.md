@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.RC2 (XXXX-XX-XX)
 -----------------------------
 
+### New
+Added the "getRootPageFromUrl" hook.
+
 ### Fixed
 Encrypt the default value of an encrypted field when creating new records or
 duplicating existing records (see #3740).

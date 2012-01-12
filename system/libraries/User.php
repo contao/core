@@ -429,7 +429,7 @@ abstract class User extends Model
 		session_write_close();
 
 		// Reset the session cookie
-		setcookie(session_name(), session_id(), ($time - 86400), '/');
+		$this->setCookie(session_name(), session_id(), ($time - 86400), '/');
 
 		// Remove the login status
 		$_SESSION['TL_USER_LOGGED_IN'] = false;

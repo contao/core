@@ -165,8 +165,23 @@ abstract class Frontend extends Controller
 		$time = time();
 		$host = $this->Environment->host;
 
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getRootPageFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getRootPageFromUrl']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getRootPageFromUrl'] as $callback)
+			{
+				$this->import($callback[0]);
+				$objRootPage = $this->$callback[0]->$callback[1]();
+
+				if ($objRootPage instanceof Database_Result)
+				{
+					return $objRootPage;
+				}
+			}
+		}
+
 		// The language is set in the URL
-		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
+		elseif ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
 		{
 			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
 										  ->limit(1)
@@ -180,6 +195,8 @@ abstract class Frontend extends Controller
 				die('No root page found');
 			}
 		}
+
+		// No language given
 		else
 		{
 			$accept_language = $this->Environment->httpAcceptLanguage;
