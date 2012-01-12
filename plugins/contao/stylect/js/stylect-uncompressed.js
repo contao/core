@@ -31,6 +31,8 @@
  */
 window.addEvent('domready', function() {
 	$$('select').each(function(el) {
+		if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+
 		// Handled by chosen
 		if (el.hasClass('tl_chosen')) return;
 
@@ -76,8 +78,10 @@ window.addEvent('domready', function() {
 		}).setStyle('opacity', 0);
 
 		// Browser-specific adjustments
-		if (Browser.Engine.webkit || Browser.Engine.trident) {
+		if (Browser.Engine.webkit) {
 			el.setStyle('margin-bottom', '4px');
+		}
+		if (Browser.Engine.webkit || Browser.Engine.trident) {
 			div.setStyle('width', div.getStyle('width').toInt()-4);
 		}
 	});
