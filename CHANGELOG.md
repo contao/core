@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.0 (2012-02-XX)
+---------------------------
+
+### Fixed
+The stylect plugin did not work in IE < 9 (see #3628).
+
+
 Version 2.11.RC2 (2012-01-12)
 -----------------------------
 
@@ -16,7 +23,7 @@ Encrypt the default value of an encrypted field when creating new records or
 duplicating existing records (see #3740).
 
 ### New
-Added the `getCookie()` hook (see #3233).
+Added the "getCookie" hook (see #3233).
 
 ### New
 Added the `copyTo()` method to the `File` and `Folder` class (see #3800).
