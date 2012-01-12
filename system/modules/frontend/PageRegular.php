@@ -437,6 +437,12 @@ class PageRegular extends Frontend
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
 		}
 
+		// Add the debug style sheet
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/css/debug.css') . '" media="all">' . "\n";
+		}
+
 		// Always add conditional style sheets at the end
 		$strStyleSheets .= $strCcStyleSheets;
 

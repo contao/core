@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Much nicer debug output.
+
 ### Changed
 Modules are now disabled by adding a `.skip` file instead of using the global
 `inactiveModules` array. This way the local configuration file does not have to

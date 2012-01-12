@@ -114,6 +114,12 @@ class BackendTemplate extends Template
 			$this->stylesheets = $strStyleSheets;
 		}
 
+		// Add the debug style sheet
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/css/debug.css') . '" media="all">' . "\n";
+		}
+
 		// JavaScripts
 		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{

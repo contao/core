@@ -29,6 +29,12 @@
 
 
 /**
+ * Store the microtime
+ */
+define('TL_START', microtime(true));
+
+
+/**
  * Define the root path to the Contao installation
  */
 define('TL_ROOT', dirname(dirname(__FILE__)));

@@ -11,7 +11,6 @@ Disallow: /share.php
 Disallow: /GPL.txt
 Disallow: /README.md
 Disallow: /LGPL.txt
-Allow: /system/html/
-Allow: /system/contao.css 
+Allow: /assets/
 Allow: /plugins/*.js
 Allow: /plugins/*.css

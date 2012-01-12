@@ -401,7 +401,7 @@ abstract class Database_Statement
 		if ($objResult !== null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
 		{
 			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
-			$GLOBALS['TL_DEBUG'][] = $arrData;
+			$GLOBALS['TL_DEBUG']['db'][] = $arrData;
 
 			return;
 		}
@@ -413,7 +413,7 @@ abstract class Database_Statement
 			$arrData[] = $arrExplain;
 		}
 
-		$GLOBALS['TL_DEBUG'][] = $arrData;
+		$GLOBALS['TL_DEBUG']['db'][] = $arrData;
 	}
 
 
