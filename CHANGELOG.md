@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Correctly redirect when using an include content element (see #3766).
+
+### Fixed
 The stylect plugin did not work in IE < 9 (see #3628).
 
 
