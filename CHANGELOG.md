@@ -1,8 +1,12 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.RC2 (XXXX-XX-XX)
+Version 2.11.RC2 (2012-01-12)
 -----------------------------
+
+### New
+Added the event list formats "all upcoming of the current month/year" and "all
+past of the current month/year" (thanks to Dominik Zogg) (see #3801).
 
 ### New
 Added the "getRootPageFromUrl" hook.
