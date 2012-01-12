@@ -47,28 +47,32 @@ $GLOBALS['TL_LANG']['tl_module']['cal_showQuantity']  = array('Anzahl der Events
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_module']['cal_list']     = 'Eventliste';
-$GLOBALS['TL_LANG']['tl_module']['cal_day']      = 'Tag';
-$GLOBALS['TL_LANG']['tl_module']['cal_month']    = 'Monat';
-$GLOBALS['TL_LANG']['tl_module']['cal_year']     = 'Jahr';
-$GLOBALS['TL_LANG']['tl_module']['cal_all']      = 'Alle Events';
-$GLOBALS['TL_LANG']['tl_module']['cal_upcoming'] = 'Zukünftige Events';
-$GLOBALS['TL_LANG']['tl_module']['next_7']       = '+ 1 Woche';
-$GLOBALS['TL_LANG']['tl_module']['next_14']      = '+ 2 Wochen';
-$GLOBALS['TL_LANG']['tl_module']['next_30']      = '+ 1 Monat';
-$GLOBALS['TL_LANG']['tl_module']['next_90']      = '+ 3 Monate';
-$GLOBALS['TL_LANG']['tl_module']['next_180']     = '+ 6 Monate';
-$GLOBALS['TL_LANG']['tl_module']['next_365']     = '+ 1 Jahr';
-$GLOBALS['TL_LANG']['tl_module']['next_two']     = '+ 2 Jahre';
-$GLOBALS['TL_LANG']['tl_module']['next_all']     = 'Alle zukünftigen Events';
-$GLOBALS['TL_LANG']['tl_module']['cal_past']     = 'Vergangene Events';
-$GLOBALS['TL_LANG']['tl_module']['past_7']       = '- 1 Woche';
-$GLOBALS['TL_LANG']['tl_module']['past_14']      = '- 2 Wochen';
-$GLOBALS['TL_LANG']['tl_module']['past_30']      = '- 1 Monat';
-$GLOBALS['TL_LANG']['tl_module']['past_90']      = '- 3 Monate';
-$GLOBALS['TL_LANG']['tl_module']['past_180']     = '- 6 Monate';
-$GLOBALS['TL_LANG']['tl_module']['past_365']     = '- 1 Jahr';
-$GLOBALS['TL_LANG']['tl_module']['past_two']     = '- 2 Jahre';
-$GLOBALS['TL_LANG']['tl_module']['past_all']     = 'Alle vergangenen Events';
+$GLOBALS['TL_LANG']['tl_module']['cal_list']       = 'Eventliste';
+$GLOBALS['TL_LANG']['tl_module']['cal_day']        = 'Tag';
+$GLOBALS['TL_LANG']['tl_module']['cal_month']      = 'Monat';
+$GLOBALS['TL_LANG']['tl_module']['cal_year']       = 'Jahr';
+$GLOBALS['TL_LANG']['tl_module']['cal_all']        = 'Alle Events';
+$GLOBALS['TL_LANG']['tl_module']['cal_upcoming']   = 'Zukünftige Events';
+$GLOBALS['TL_LANG']['tl_module']['next_7']         = '+ 1 Woche';
+$GLOBALS['TL_LANG']['tl_module']['next_14']        = '+ 2 Wochen';
+$GLOBALS['TL_LANG']['tl_module']['next_30']        = '+ 1 Monat';
+$GLOBALS['TL_LANG']['tl_module']['next_90']        = '+ 3 Monate';
+$GLOBALS['TL_LANG']['tl_module']['next_180']       = '+ 6 Monate';
+$GLOBALS['TL_LANG']['tl_module']['next_365']       = '+ 1 Jahr';
+$GLOBALS['TL_LANG']['tl_module']['next_two']       = '+ 2 Jahre';
+$GLOBALS['TL_LANG']['tl_module']['next_cur_month'] = 'des laufenden Monats';
+$GLOBALS['TL_LANG']['tl_module']['next_cur_year']  = 'des laufenden Jahres';
+$GLOBALS['TL_LANG']['tl_module']['next_all']       = 'Alle zukünftigen Events';
+$GLOBALS['TL_LANG']['tl_module']['cal_past']       = 'Vergangene Events';
+$GLOBALS['TL_LANG']['tl_module']['past_7']         = '- 1 Woche';
+$GLOBALS['TL_LANG']['tl_module']['past_14']        = '- 2 Wochen';
+$GLOBALS['TL_LANG']['tl_module']['past_30']        = '- 1 Monat';
+$GLOBALS['TL_LANG']['tl_module']['past_90']        = '- 3 Monate';
+$GLOBALS['TL_LANG']['tl_module']['past_180']       = '- 6 Monate';
+$GLOBALS['TL_LANG']['tl_module']['past_365']       = '- 1 Jahr';
+$GLOBALS['TL_LANG']['tl_module']['past_two']       = '- 2 Jahre';
+$GLOBALS['TL_LANG']['tl_module']['past_cur_month'] = 'des laufenden Monats';
+$GLOBALS['TL_LANG']['tl_module']['past_cur_year']  = 'des laufenden Jahres';
+$GLOBALS['TL_LANG']['tl_module']['past_all']       = 'Alle vergangenen Events';
 
 ?>
