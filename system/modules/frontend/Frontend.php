@@ -181,7 +181,7 @@ abstract class Frontend extends Controller
 		}
 
 		// The language is set in the URL
-		elseif ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
 		{
 			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
 										  ->limit(1)
