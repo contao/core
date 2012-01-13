@@ -29,7 +29,7 @@
 
 
 /**
- * Namespace
+ * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
 
@@ -69,6 +69,7 @@ class ClassLoader
 		'Contao\\Encryption'   => 'system/library/Contao/Encryption.php',
 		'Contao\\Environment'  => 'system/library/Contao/Environment.php',
 		'Contao\\Feed'         => 'system/library/Contao/Feed.php',
+		'Contao\\FeedItem'     => 'system/library/Contao/FeedItem.php',
 		'Contao\\File'         => 'system/library/Contao/File.php',
 		'Contao\\FileCache'    => 'system/library/Contao/FileCache.php',
 		'Contao\\Folder'       => 'system/library/Contao/Folder.php',
@@ -128,6 +129,20 @@ class ClassLoader
 			array_unshift(self::$namespaces, $name);
 		} else {
 			array_push(self::$namespaces, $name);
+		}
+	}
+
+
+	/**
+	 * Add new namespaces (prepend it to override a core class)
+	 * @param array
+	 * @param boolean
+	 */
+	public static function addNamespaces($names, $prepend=false)
+	{
+		foreach ($names as $name)
+		{
+			self::addNamespace($name, $prepend);
 		}
 	}
 

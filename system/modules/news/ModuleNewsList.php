@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class ModuleNewsList
  *
  * Front end module "news list".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsList extends ModuleNews
+class ModuleNewsList extends \ModuleNews
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNewsList extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS LIST ###';
 			$objTemplate->title = $this->headline;
@@ -125,7 +131,7 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -146,7 +152,7 @@ class ModuleNewsList extends ModuleNews
 		// No items found
 		if ($objArticles->numRows < 1)
 		{
-			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
 
 		$this->Template->articles = $this->parseArticles($objArticles);

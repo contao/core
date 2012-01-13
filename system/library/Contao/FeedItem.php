@@ -35,76 +35,89 @@ namespace Contao;
 
 
 /**
- * Class Database_Mysql_Result
+ * Class FeedItem
  *
- * Driver class for MySQL databases.
+ * Provide methods to generate RSS/Atom feed items.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Driver
+ * @package    Library
  */
-class Database_Mysql_Result extends \Database_Result
+class FeedItem extends \System
 {
 
 	/**
-	 * Fetch the current row as enumerated array
-	 * @return array
+	 * Data array
+	 * @var array
 	 */
-	protected function fetch_row()
-	{
-		return @mysql_fetch_row($this->resResult);
-	}
+	protected $arrData = array();
 
 
 	/**
-	 * Fetch the current row as associative array
-	 * @return array
+	 * Take an array of arguments and initialize the object
+	 * @param array
 	 */
-	protected function fetch_assoc()
+	public function __construct($arrData=false)
 	{
-		return @mysql_fetch_assoc($this->resResult);
-	}
+		parent::__construct();
 
-
-	/**
-	 * Return the number of rows of the current result
-	 * @return integer
-	 */
-	protected function num_rows()
-	{
-		return @mysql_num_rows($this->resResult);
-	}
-
-
-	/**
-	 * Return the number of fields of the current result
-	 * @return integer
-	 */
-	protected function num_fields()
-	{
-		return @mysql_num_fields($this->resResult);
-	}
-
-
-	/**
-	 * Get the column information
-	 * @param integer
-	 * @return object
-	 */
-	protected function fetch_field($intOffset)
-	{
-		return @mysql_fetch_field($this->resResult, $intOffset);
-	}
-
-
-	/**
-	 * Free the current result
-	 */
-	public function free()
-	{
-		if (is_resource($this->resResult))
+		if (is_array($arrData))
 		{
-			@mysql_free_result($this->resResult);
+			$this->arrData = $arrData;
 		}
+	}
+
+
+	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		$this->arrData[$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Return an object property
+	 * @return mixed
+	 */
+	public function __get($strKey)
+	{
+		return $this->arrData[$strKey];
+	}
+
+
+	/**
+	 * Check whether a property is set
+	 * @param string
+	 * @return boolean
+	 */
+	public function __isset($strKey)
+	{
+		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
+	 * Add an enclosure
+	 * @param string
+	 */
+	public function addEnclosure($strFile)
+	{
+		if ($strFile == '' || !file_exists(TL_ROOT . '/' . $strFile))
+		{
+			return;
+		}
+
+		$objFile = new \File($strFile);
+
+		$this->arrData['enclosure'][] = array
+		(
+			'url' => $this->Environment->base . $strFile,
+			'length' => $objFile->size,
+			'type' => $objFile->mime
+		);
 	}
 }
 

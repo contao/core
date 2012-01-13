@@ -29,7 +29,7 @@
 
 
 /**
- * Namespace
+ * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
 
@@ -50,7 +50,7 @@ require_once(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Email extends System
+class Email extends \System
 {
 
 	/**

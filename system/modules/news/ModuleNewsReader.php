@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class ModuleNewsReader
  *
  * Front end module "news reader".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsReader extends ModuleNews
+class ModuleNewsReader extends \ModuleNews
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNewsReader extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS READER ###';
 			$objTemplate->title = $this->headline;
@@ -193,7 +199,7 @@ class ModuleNewsReader extends ModuleNews
 			}
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $objArchive->perPage;
 		$objConfig->order = $objArchive->sortOrder;

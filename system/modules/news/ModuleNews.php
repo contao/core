@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class ModuleNews
  *
  * Parent class for news modules.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class ModuleNews extends Module
+abstract class ModuleNews extends \Module
 {
 
 	/**
@@ -92,7 +98,7 @@ abstract class ModuleNews extends Module
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseArticles(Database_Result $objArticles, $blnAddArchive=false)
+	protected function parseArticles(\Database_Result $objArticles, $blnAddArchive=false)
 	{
 		if ($objArticles->numRows < 1)
 		{
@@ -120,7 +126,7 @@ abstract class ModuleNews extends Module
 
 		while ($objArticles->next())
 		{
-			$objTemplate = new FrontendTemplate($this->news_template);
+			$objTemplate = new \FrontendTemplate($this->news_template);
 			$objTemplate->setData($objArticles->row());
 
 			$objTemplate->count = ++$count;
@@ -224,7 +230,7 @@ abstract class ModuleNews extends Module
 	 * @param Database_Result
 	 * @return array
 	 */
-	protected function getMetaFields(Database_Result $objArticle)
+	protected function getMetaFields(\Database_Result $objArticle)
 	{
 		$meta = deserialize($this->news_metaFields);
 
@@ -279,7 +285,7 @@ abstract class ModuleNews extends Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateNewsUrl(Database_Result $objArticle, $blnAddArchive=false)
+	protected function generateNewsUrl(\Database_Result $objArticle, $blnAddArchive=false)
 	{
 		$strCacheKey = 'id_' . $objArticle->id;
 
@@ -368,7 +374,7 @@ abstract class ModuleNews extends Module
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, Database_Result $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, \Database_Result $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
 	{
 		// Internal link
 		if ($objArticle->source != 'external')

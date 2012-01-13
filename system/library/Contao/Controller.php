@@ -29,7 +29,7 @@
 
 
 /**
- * Namespace
+ * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
 
@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Controller extends System
+abstract class Controller extends \System
 {
 
 	/**
@@ -2907,7 +2907,7 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return true if a class exists (try to autoload the class)
+	 * Return true if a class exists (tries to autoload the class)
 	 * @param string
 	 * @param boolean
 	 * @return boolean

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class ModuleNewsArchive
  *
  * Front end module "news archive".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsArchive extends ModuleNews
+class ModuleNewsArchive extends \ModuleNews
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNewsArchive extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS ARCHIVE ###';
 			$objTemplate->title = $this->headline;
@@ -123,7 +129,7 @@ class ModuleNewsArchive extends ModuleNews
 		if ($this->Input->get('year'))
 		{
 			$strDate = $this->Input->get('year');
-			$objDate = new Date($strDate, 'Y');
+			$objDate = new \Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
@@ -133,7 +139,7 @@ class ModuleNewsArchive extends ModuleNews
 		elseif ($this->Input->get('month'))
 		{
 			$strDate = $this->Input->get('month');
-			$objDate = new Date($strDate, 'Ym');
+			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
@@ -143,7 +149,7 @@ class ModuleNewsArchive extends ModuleNews
 		elseif ($this->Input->get('day'))
 		{
 			$strDate = $this->Input->get('day');
-			$objDate = new Date($strDate, 'Ymd');
+			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
@@ -180,7 +186,7 @@ class ModuleNewsArchive extends ModuleNews
 			$offset = (max($page, 1) - 1) * $this->perPage;
 
 			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -197,7 +203,7 @@ class ModuleNewsArchive extends ModuleNews
 		// No items found
 		if ($objArticles->numRows < 1)
 		{
-			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
 
 		$this->Template->headline = trim($this->headline);

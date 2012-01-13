@@ -5,6 +5,11 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Ported the news extension into its own namespace. Note that this is completely
+optional and does not have to be done with your custom modules! I am just doing
+it so the classes can be overriden by an extension
+
+### Changed
 Use the TemplateLoader in the `getTemplate()` and `getTemplateGroup()` methods.
 
 ### New

@@ -201,15 +201,14 @@ EOT
 /**
  * Register the namespaces
  */
-ClassLoader::addNamespace(array
+ClassLoader::addNamespaces(array
 (
 EOT
 						);
 
 						foreach ($arrNamespaces as $strNamespace)
 						{
-							$strNamespace = "'" . $strNamespace . "'";
-							$objFile->append("\t" . str_pad($strNamespace, $intNsWidth+2) . ",");
+							$objFile->append("\t'" . $strNamespace . "',");
 						}
 
 						$objFile->append('));');

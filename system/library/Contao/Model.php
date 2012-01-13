@@ -29,7 +29,7 @@
 
 
 /**
- * Namespace
+ * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
 
@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-abstract class Model extends System
+abstract class Model extends \System
 {
 
 	/**

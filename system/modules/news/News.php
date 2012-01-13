@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class News
  *
  * Provide methods regarding news archives.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class News extends Frontend
+class News extends \Frontend
 {
 
 	/**
@@ -101,7 +107,7 @@ class News extends Frontend
 		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
 
-		$objFeed = new Feed($strFile);
+		$objFeed = new \Feed($strFile);
 
 		$objFeed->link = $strLink;
 		$objFeed->title = $arrArchive['title'];
@@ -135,7 +141,7 @@ class News extends Frontend
 		// Parse items
 		while ($objArticle->next())
 		{
-			$objItem = new FeedItem();
+			$objItem = new \FeedItem();
 
 			$objItem->title = $objArticle->headline;
 			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
@@ -174,7 +180,7 @@ class News extends Frontend
 		}
 
 		// Create file
-		$objRss = new File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -264,7 +270,7 @@ class News extends Frontend
 	 * @param string
 	 * @return string
 	 */
-	protected function getLink(Database_Result $objArticle, $strUrl)
+	protected function getLink(\Database_Result $objArticle, $strUrl)
 	{
 		switch ($objArticle->source)
 		{

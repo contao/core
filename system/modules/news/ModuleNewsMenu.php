@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao\News;
+
+
+/**
  * Class ModuleNewsMenu
  *
  * Front end module "news archive".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsMenu extends ModuleNews
+class ModuleNewsMenu extends \ModuleNews
 {
 
 	/**
@@ -60,7 +66,7 @@ class ModuleNewsMenu extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
 			$objTemplate->title = $this->headline;
@@ -113,7 +119,7 @@ class ModuleNewsMenu extends ModuleNews
 		$time = time();
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_newsmenu_year');
+		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
 
 		foreach ($this->news_archives as $id)
 		{
@@ -230,7 +236,7 @@ class ModuleNewsMenu extends ModuleNews
 		$time = time();
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_newsmenu_day');
+		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
 
 		foreach ($this->news_archives as $id)
 		{
@@ -253,7 +259,7 @@ class ModuleNewsMenu extends ModuleNews
 								  ->execute($this->jumpTo);
 
 		$strUrl = $this->generateFrontendUrl($objPage->row());
-		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
+		$this->Date = $this->Input->get('day') ? new \Date($this->Input->get('day'), 'Ymd') : new \Date();
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);

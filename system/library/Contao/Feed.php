@@ -29,7 +29,7 @@
 
 
 /**
- * Namespace
+ * Run in a custom namespace, so the class can be replaced
  */
 namespace Contao;
 
@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Feed extends System
+class Feed extends \System
 {
 
 	/**
@@ -217,94 +217,6 @@ class Feed extends System
 		{
 			$this->published = $this->arrItems[0]->published;
 		}
-	}
-}
-
-
-/**
- * Class FeedItem
- *
- * Provide methods to generate RSS/Atom feed items.
- * @copyright  Leo Feyer 2005-2012
- * @author     Leo Feyer <http://www.contao.org>
- * @package    Library
- */
-class FeedItem extends System
-{
-
-	/**
-	 * Data array
-	 * @var array
-	 */
-	protected $arrData = array();
-
-
-	/**
-	 * Take an array of arguments and initialize the object
-	 * @param array
-	 */
-	public function __construct($arrData=false)
-	{
-		parent::__construct();
-
-		if (is_array($arrData))
-		{
-			$this->arrData = $arrData;
-		}
-	}
-
-
-	/**
-	 * Set an object property
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		$this->arrData[$strKey] = $varValue;
-	}
-
-
-	/**
-	 * Return an object property
-	 * @return mixed
-	 */
-	public function __get($strKey)
-	{
-		return $this->arrData[$strKey];
-	}
-
-
-	/**
-	 * Check whether a property is set
-	 * @param string
-	 * @return boolean
-	 */
-	public function __isset($strKey)
-	{
-		return isset($this->arrData[$strKey]);
-	}
-
-
-	/**
-	 * Add an enclosure
-	 * @param string
-	 */
-	public function addEnclosure($strFile)
-	{
-		if ($strFile == '' || !file_exists(TL_ROOT . '/' . $strFile))
-		{
-			return;
-		}
-
-		$objFile = new \File($strFile);
-
-		$this->arrData['enclosure'][] = array
-		(
-			'url' => $this->Environment->base . $strFile,
-			'length' => $objFile->size,
-			'type' => $objFile->mime
-		);
 	}
 }
 
