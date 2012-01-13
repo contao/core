@@ -132,7 +132,7 @@ class ModulePersonalData extends Module
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
 			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass) || !$arrData['eval']['feEditable'])
+			if (!$arrData['eval']['feEditable'] || !$this->classFileExists($strClass))
 			{
 				continue;
 			}

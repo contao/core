@@ -67,8 +67,9 @@
 </div>
 </form>
 
-</div>
+<p id="go_to_login"><a href="contao/main.php" title="<?php echo $this->beLogin; ?>"><?php echo $this->backendLink; ?></a></p>
 
+</div>
 </div>
 
 <script>

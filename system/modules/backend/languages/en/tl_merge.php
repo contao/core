@@ -37,5 +37,6 @@ $GLOBALS['TL_LANG']['tl_merge']['headline']       = 'Convert Contao 2 extensions
 $GLOBALS['TL_LANG']['tl_merge']['available']      = 'Available modules';
 $GLOBALS['TL_LANG']['tl_merge']['override']       = 'Override existing files';
 $GLOBALS['TL_LANG']['tl_merge']['explain']        = 'With this script you can prepare Contao 2 extensions for Contao 3. The script will create the <em>config/autoload.php</em> file with the paths to the existing classes and templates. If the <em>namespace</em> command is found in a PHP class, it will be included, too.';
+$GLOBALS['TL_LANG']['tl_merge']['backendLink']    = 'Go back to the back end';
 
 ?>

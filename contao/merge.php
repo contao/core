@@ -301,6 +301,7 @@ EOT
 		$this->Template->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
 		$this->Template->override = $GLOBALS['TL_LANG']['tl_merge']['override'];
 		$this->Template->explain = $GLOBALS['TL_LANG']['tl_merge']['explain'];
+		$this->Template->backendLink = $GLOBALS['TL_LANG']['tl_merge']['backendLink'];
 
 		$this->Template->output();
 	}

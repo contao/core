@@ -71,6 +71,7 @@ abstract class Controller extends System
 	 */
 	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
+		# FIXME: use the TemplateLoader
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 		array_push($arrAllowed, 'html5'); // see #3398
 
@@ -190,6 +191,7 @@ abstract class Controller extends System
 	 */
 	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
+		# FIXME: use the TemplateLoader
 		$arrFolders = array();
 		$arrTemplates = array();
 
@@ -3006,67 +3008,14 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return true if a class file exists
+	 * Return true if a class exists (try to autoload the class)
 	 * @param string
 	 * @param boolean
 	 * @return boolean
 	 */
-	protected function classFileExists($strClass, $blnNoCache=false)
+	protected function classFileExists($strClass)
 	{
-		if ($strClass == '')
-		{
-			return false;
-		}
-
-		$this->import('Cache');
-		$strKey = __METHOD__ . '-' . $strClass;
-
-		// Try to load from cache
-		if (!$blnNoCache)
-		{
-			// Handle multiple requests for the same class
-			if (isset($this->Cache->$strKey))
-			{
-				return $this->Cache->$strKey;
-			}
-
-			$objCache = FileCache::getInstance('classes');
-
-			// Check the file cache
-			if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strClass))
-			{
-				$this->Cache->$strKey = $objCache->$strClass;
-				return $objCache->$strClass;
-			}
-		}
-
-		$this->import('Config'); // see ticket #152
-		$this->Cache->$strKey = false;
-
-		// Browse all modules
-		foreach ($this->Config->getActiveModules() as $strModule)
-		{
-			$strFile = 'system/modules/' . $strModule . '/' . $strClass . '.php';
-
-			if (file_exists(TL_ROOT . '/' . $strFile))
-			{
-				// Also store the result in the autoloader cache, so the
-				// function does not have to browse the module folders again
-				$objAutoload = FileCache::getInstance('autoload');
-				$objAutoload->$strClass = $strFile;
-
-				$this->Cache->$strKey = true;
-				break;
-			}
-		}
-
-		// Remember the result
-		if (!$blnNoCache)
-		{
-			$objCache->$strClass = $this->Cache->$strKey;
-		}
-
-		return $this->Cache->$strKey;
+		return class_exists($strClass, true);
 	}
 
 
