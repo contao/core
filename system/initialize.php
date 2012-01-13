@@ -81,7 +81,7 @@ $objToken = RequestToken::getInstance();
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
+error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
 
 
 /**
