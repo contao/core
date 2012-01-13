@@ -106,14 +106,10 @@ abstract class Controller extends System
 	 */
 	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
-		# FIXME: use the TemplateLoader
-		$arrFolders = array();
-		$arrTemplates = array();
+		$strTplFolder = 'templates';
+		$arrTemplates = TemplateLoader::getPrefixedFiles($strPrefix);
 
-		// Add the templates root directory
-		$arrFolders[] = TL_ROOT . '/templates';
-
-		// Add the theme templates folder
+		// Check for a theme templates folder
 		if ($intTheme > 0)
 		{
 			$objTheme = $this->Database->prepare("SELECT templates FROM tl_theme WHERE id=?")
@@ -122,30 +118,18 @@ abstract class Controller extends System
 
 			if ($objTheme->numRows > 0 && $objTheme->templates != '')
 			{
-				$arrFolders[] = TL_ROOT .'/'. $objTheme->templates;
+				$strTplFolder = $objTheme->templates;
 			}
 		}
 
-		// Add the module templates folders if they exist
-		foreach ($this->Config->getActiveModules() as $strModule)
+		// Scan the templates directory
+		$arrFiles = array_values(preg_grep('/^' . $strPrefix . '/', scan(TL_ROOT . '/templates')));
+
+		if (!empty($arrFiles))
 		{
-			$strFolder = TL_ROOT . '/system/modules/' . $strModule . '/templates';
-
-			if (is_dir($strFolder))
+			foreach ($arrFiles as $strFile)
 			{
-				$arrFolders[] = $strFolder;
-			}
-		}
-
-		// Find all matching templates
-		foreach ($arrFolders as $strFolder)
-		{
-			$arrFiles = preg_grep('/^' . preg_quote($strPrefix, '/') . '/i',  scan($strFolder));
-
-			foreach ($arrFiles as $strTemplate)
-			{
-				$strName = basename($strTemplate);
-				$arrTemplates[] = substr($strName, 0, strrpos($strName, '.'));
+				$arrTemplates[] = basename($strFile, strrchr($strFile, '.'));
 			}
 		}
 

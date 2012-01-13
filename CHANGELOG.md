@@ -5,7 +5,7 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
-Use the TemplateLoader in the `getTemplate()` method.
+Use the TemplateLoader in the `getTemplate()` and `getTemplateGroup()` methods.
 
 ### New
 Added a merge script (`contao/merge.php`) which automatically prepares Contao 2

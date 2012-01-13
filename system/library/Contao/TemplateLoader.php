@@ -87,6 +87,17 @@ class TemplateLoader
 
 
 	/**
+	 * Return the files matching the prefix as array
+	 * @param string
+	 * @return array
+	 */
+	public static function getPrefixedFiles($prefix)
+	{
+		return array_values(preg_grep('/^' . $prefix . '/', array_keys(self::$files)));
+	}
+
+
+	/**
 	 * Return a template path
 	 * @param string
 	 * @param string
