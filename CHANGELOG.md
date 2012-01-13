@@ -5,6 +5,10 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Do not load the empty URL from cache if the language is added and the empty
+domain will be redirected.
+
+### Fixed
 Fixed an issue in the `Database_Statement::debugQuery()` method.
 
 ### Fixed
