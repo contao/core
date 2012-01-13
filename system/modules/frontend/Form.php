@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Form
  *
  * Provide methods to handle front end forms.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Form extends Hybrid
+class Form extends \Hybrid
 {
 
 	/**
@@ -186,12 +192,12 @@ class Form extends Hybrid
 				unset($_POST[$objFields->name]);
 			}
 
-			if ($objWidget instanceof uploadable)
+			if ($objWidget instanceof \uploadable)
 			{
 				$hasUpload = true;
 			}
 
-			if ($objWidget instanceof FormHidden)
+			if ($objWidget instanceof \FormHidden)
 			{
 				$this->Template->hidden .= $objWidget->parse();
 				--$max_row;
@@ -314,7 +320,7 @@ class Form extends Hybrid
 				$recipients[$k] = str_replace(array('[', ']', '"'), array('<', '>', ''), $v);
 			}
 
-			$email = new Email();
+			$email = new \Email();
 
 			// Get subject and message
 			if ($this->format == 'email')
@@ -357,7 +363,7 @@ class Form extends Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
-				$objTemplate = new FrontendTemplate('form_xml');
+				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
 				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -518,7 +524,7 @@ class Form extends Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
-					$objTemplate = new FrontendTemplate('form_message');
+					$objTemplate = new \FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);

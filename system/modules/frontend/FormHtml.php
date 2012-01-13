@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FormHtml
  *
  * Form field "HTML".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormHtml extends Widget
+class FormHtml extends \Widget
 {
 
 	/**

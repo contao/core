@@ -262,7 +262,7 @@ abstract class Database_Statement
 		$objResult = $this->query();
 
 		// Cache the result objects
-		if ($objResult instanceof Database_Result)
+		if ($objResult instanceof \Database_Result)
 		{
 			self::$arrCache[$strKey] = $objResult;
 		}

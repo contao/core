@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageRedirect
  *
  * Provide methods to handle a redirect page.
@@ -36,14 +42,14 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRedirect extends Frontend
+class PageRedirect extends \Frontend
 {
 
 	/**
 	 * Redirect to an external page
 	 * @param Database_Result
 	 */
-	public function generate(Database_Result $objPage)
+	public function generate(\Database_Result $objPage)
 	{
 		$this->redirect($objPage->url, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}

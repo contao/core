@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FormFileUpload
  *
  * File upload field.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormFileUpload extends Widget implements uploadable
+class FormFileUpload extends \Widget implements \uploadable
 {
 
 	/**

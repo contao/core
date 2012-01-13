@@ -29,13 +29,19 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleFaqReader
  *
  * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaqReader extends Module
+class ModuleFaqReader extends \Module
 {
 
 	/**
@@ -53,7 +59,7 @@ class ModuleFaqReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ READER ###';
 			$objTemplate->title = $this->headline;
@@ -213,7 +219,7 @@ class ModuleFaqReader extends Module
 			}
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $objCategory->perPage;
 		$objConfig->order = $objCategory->sortOrder;

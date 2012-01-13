@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class BackendTemplate
  *
  * Provide methods to handle back end templates.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class BackendTemplate extends Template
+class BackendTemplate extends \Template
 {
 
 	/**
@@ -90,7 +96,7 @@ class BackendTemplate extends Template
 
 				if (!file_exists($strFile))
 				{
-					throw new Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+					throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
 				}
 
 				ob_start();

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleEventReader
  *
  * Front end module "event reader".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventReader extends Events
+class ModuleEventReader extends \Events
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleEventReader extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT READER ###';
 			$objTemplate->title = $this->headline;
@@ -200,7 +206,7 @@ class ModuleEventReader extends Events
 			}
 		}
 
-		$objTemplate = new FrontendTemplate($this->cal_template);
+		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
@@ -287,7 +293,7 @@ class ModuleEventReader extends Events
 			}
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $objCalendar->perPage;
 		$objConfig->order = $objCalendar->sortOrder;

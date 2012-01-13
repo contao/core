@@ -33,10 +33,10 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleFaq'       => 'system/modules/faq/ModuleFaq.php',
-	'ModuleFaqList'   => 'system/modules/faq/ModuleFaqList.php',
-	'ModuleFaqPage'   => 'system/modules/faq/ModuleFaqPage.php',
-	'ModuleFaqReader' => 'system/modules/faq/ModuleFaqReader.php',
+	'Contao\\ModuleFaq'       => 'system/modules/faq/ModuleFaq.php',
+	'Contao\\ModuleFaqList'   => 'system/modules/faq/ModuleFaqList.php',
+	'Contao\\ModuleFaqPage'   => 'system/modules/faq/ModuleFaqPage.php',
+	'Contao\\ModuleFaqReader' => 'system/modules/faq/ModuleFaqReader.php',
 ));
 
 

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleLogin
  *
  * Front end module "login".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLogin extends Module
+class ModuleLogin extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleLogin extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FRONT END LOGIN ###';
 			$objTemplate->title = $this->headline;
@@ -190,7 +196,7 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
 
-			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
@@ -208,7 +214,7 @@ class ModuleLogin extends Module
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
 
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$blnHasError = false;

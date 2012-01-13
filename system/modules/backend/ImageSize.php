@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ImageSize
  *
  * Provide methods to handle image size fields.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ImageSize extends Widget
+class ImageSize extends \Widget
 {
 
 	/**

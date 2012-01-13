@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ChmodTable
  *
  * Provide methods to handle CHMOD tables.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ChmodTable extends Widget
+class ChmodTable extends \Widget
 {
 
 	/**

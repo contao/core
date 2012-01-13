@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Newsletter
  *
  * Provide methods to handle newsletters.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Newsletter extends Backend
+class Newsletter extends \Backend
 {
 
 	/**
@@ -310,9 +316,9 @@ class Newsletter extends Backend
 	 * @param array
 	 * @return Email
 	 */
-	protected function generateEmailObject(Database_Result $objNewsletter, $arrAttachments)
+	protected function generateEmailObject(\Database_Result $objNewsletter, $arrAttachments)
 	{
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$objEmail->from = $objNewsletter->sender;
 		$objEmail->subject = $objNewsletter->subject;
@@ -364,7 +370,7 @@ class Newsletter extends Backend
 			}
 
 			// Load the mail template
-			$objTemplate = new BackendTemplate($objNewsletter->template);
+			$objTemplate = new \BackendTemplate($objNewsletter->template);
 			$objTemplate->setData($objNewsletter->row());
 
 			$objTemplate->title = $objNewsletter->subject;
@@ -421,7 +427,7 @@ class Newsletter extends Backend
 
 			foreach ($this->Input->post('source') as $strCsvFile)
 			{
-				$objFile = new File($strCsvFile);
+				$objFile = new \File($strCsvFile);
 
 				if ($objFile->extension != 'csv')
 				{
@@ -495,7 +501,7 @@ class Newsletter extends Backend
 			$this->reload();
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['source'], 'source', null, 'source', 'tl_newsletter_recipients'));
+		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_newsletter_recipients']['fields']['source'], 'source', null, 'source', 'tl_newsletter_recipients'));
 
 		// Return form
 		return '
@@ -624,7 +630,7 @@ class Newsletter extends Backend
 		$blnIsFrontend = true;
 
 		// If called from the back end, the second argument is a DataContainer object
-		if ($objUser instanceof DataContainer)
+		if ($objUser instanceof \DataContainer)
 		{
 			$objUser = $this->Database->prepare("SELECT * FROM tl_member WHERE id=?")
 									  ->limit(1)
@@ -648,7 +654,7 @@ class Newsletter extends Backend
 		$varValue = deserialize($varValue, true);
 
 		// Get all channel IDs (thanks to Andreas Schempp)
-		if ($blnIsFrontend && $objModule instanceof Module)
+		if ($blnIsFrontend && $objModule instanceof \Module)
 		{
 			$arrChannel = deserialize($objModule->newsletters, true);
 		}

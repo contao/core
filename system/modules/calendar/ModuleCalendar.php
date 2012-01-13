@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleCalendar
  *
  * Front end module "calendar".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleCalendar extends Events
+class ModuleCalendar extends \Events
 {
 
 	/**
@@ -66,7 +72,7 @@ class ModuleCalendar extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CALENDAR ###';
 			$objTemplate->title = $this->headline;
@@ -113,25 +119,25 @@ class ModuleCalendar extends Events
 		// Respond to month
 		if ($this->Input->get('month'))
 		{
-			$this->Date = new Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date($this->Input->get('month'), 'Ym');
 		}
 
 		// Respond to day
 		elseif ($this->Input->get('day'))
 		{
-			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
 		}
 
 		// Fallback to today
 		else
 		{
-			$this->Date = new Date();
+			$this->Date = new \Date();
 		}
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
 
-		$objTemplate = new FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
+		$objTemplate = new \FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
 		$objTemplate->intYear = $intYear;
 		$objTemplate->intMonth = $intMonth;

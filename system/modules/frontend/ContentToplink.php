@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentToplink
  *
  * Front end content element "toplink".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentToplink extends ContentElement
+class ContentToplink extends \ContentElement
 {
 
 	/**

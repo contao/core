@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FormRadioButton
  *
  * Form field "radio button".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormRadioButton extends Widget
+class FormRadioButton extends \Widget
 {
 
 	/**

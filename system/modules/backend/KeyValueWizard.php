@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class KeyValueWizard
  *
  * Provide methods to handle key value pairs.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class KeyValueWizard extends Widget
+class KeyValueWizard extends \Widget
 {
 
 	/**

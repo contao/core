@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageRoot
  *
  * Provide methods to handle a website root page.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRoot extends Frontend
+class PageRoot extends \Frontend
 {
 
 	/**

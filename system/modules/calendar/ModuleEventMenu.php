@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleEventMenu
  *
  * Front end module "event menu".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventMenu extends ModuleCalendar
+class ModuleEventMenu extends \ModuleCalendar
 {
 
 	/**
@@ -47,7 +53,7 @@ class ModuleEventMenu extends ModuleCalendar
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT MENU ###';
 			$objTemplate->title = $this->headline;
@@ -93,7 +99,7 @@ class ModuleEventMenu extends ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_eventmenu_year');
+		$this->Template = new \FrontendTemplate('mod_eventmenu_year');
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -144,7 +150,7 @@ class ModuleEventMenu extends ModuleCalendar
 	{
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_eventmenu');
+		$this->Template = new \FrontendTemplate('mod_eventmenu');
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)

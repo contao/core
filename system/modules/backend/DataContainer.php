@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class DataContainer
  *
  * Provide methods to handle data container arrays.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class DataContainer extends Backend
+class DataContainer extends \Backend
 {
 
 	/**
@@ -392,7 +398,7 @@ class DataContainer extends Backend
 		$objWidget->wizard = $wizard;
 
 		// Set correct form enctype
-		if ($objWidget instanceof uploadable)
+		if ($objWidget instanceof \uploadable)
 		{
 			$this->blnUploadable = true;
 		}

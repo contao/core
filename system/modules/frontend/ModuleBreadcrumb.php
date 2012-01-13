@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleBreadcrumb
  *
  * Front end module "breadcrumb".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleBreadcrumb extends Module
+class ModuleBreadcrumb extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleBreadcrumb extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### BREADCRUMB NAVIGATION ###';
 			$objTemplate->title = $this->headline;

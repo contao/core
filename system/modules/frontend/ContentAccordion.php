@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentAccordion
  *
  * Front end content element "accordion".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentAccordion extends ContentElement
+class ContentAccordion extends \ContentElement
 {
 
 	/**
@@ -57,13 +63,13 @@ class ContentAccordion extends ContentElement
 			if (TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_accordion_start';
-				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template = new \FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
 			}
 			else
 			{
 				$this->strTemplate = 'be_wildcard';
-				$this->Template = new BackendTemplate($this->strTemplate);
+				$this->Template = new \BackendTemplate($this->strTemplate);
 				$this->Template->wildcard = '### ACCORDION WRAPPER START ###';
 				$this->Template->title = $this->mooHeadline;
 			}
@@ -75,13 +81,13 @@ class ContentAccordion extends ContentElement
 			if (TL_MODE == 'FE')
 			{
 				$this->strTemplate = 'ce_accordion_stop';
-				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template = new \FrontendTemplate($this->strTemplate);
 				$this->Template->setData($this->arrData);
 			}
 			else
 			{
 				$this->strTemplate = 'be_wildcard';
-				$this->Template = new BackendTemplate($this->strTemplate);
+				$this->Template = new \BackendTemplate($this->strTemplate);
 				$this->Template->wildcard = '### ACCORDION WRAPPER END ###';
 			}
 		}

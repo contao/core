@@ -36,7 +36,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class BackendModule extends Backend
+abstract class BackendModule extends \Backend
 {
 
 	/**
@@ -111,7 +111,7 @@ abstract class BackendModule extends Backend
 	 */
 	public function generate()
 	{
-		$this->Template = new BackendTemplate($this->strTemplate);
+		$this->Template = new \BackendTemplate($this->strTemplate);
 		$this->compile();
 
 		return $this->Template->parse();

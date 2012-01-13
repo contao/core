@@ -33,11 +33,11 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleNewsletterList'   => 'system/modules/newsletter/ModuleNewsletterList.php',
-	'ModuleNewsletterReader' => 'system/modules/newsletter/ModuleNewsletterReader.php',
-	'ModuleSubscribe'        => 'system/modules/newsletter/ModuleSubscribe.php',
-	'ModuleUnsubscribe'      => 'system/modules/newsletter/ModuleUnsubscribe.php',
-	'Newsletter'             => 'system/modules/newsletter/Newsletter.php',
+	'Contao\\ModuleNewsletterList'   => 'system/modules/newsletter/ModuleNewsletterList.php',
+	'Contao\\ModuleNewsletterReader' => 'system/modules/newsletter/ModuleNewsletterReader.php',
+	'Contao\\ModuleSubscribe'        => 'system/modules/newsletter/ModuleSubscribe.php',
+	'Contao\\ModuleUnsubscribe'      => 'system/modules/newsletter/ModuleUnsubscribe.php',
+	'Contao\\Newsletter'             => 'system/modules/newsletter/Newsletter.php',
 ));
 
 

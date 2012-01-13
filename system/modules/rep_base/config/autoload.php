@@ -37,12 +37,4 @@ ClassLoader::addClasses(array
 	'RepositorySettings' => 'system/modules/rep_base/RepositorySettings.php',
 ));
 
-
-/**
- * Register the templates
- */
-TemplateLoader::addFiles(array
-(
-));
-
 ?>

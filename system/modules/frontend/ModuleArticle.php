@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleArticle
  *
  * Provides methodes to handle articles.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticle extends Module
+class ModuleArticle extends \Module
 {
 
 	/**
@@ -81,7 +87,7 @@ class ModuleArticle extends Module
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = new FrontendTemplate('mod_article_plain');
+			$this->Template = new \FrontendTemplate('mod_article_plain');
 			$this->Template->setData($this->arrData);
 		}
 
@@ -120,7 +126,7 @@ class ModuleArticle extends Module
 		// Show teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = new FrontendTemplate('mod_article_teaser');
+			$this->Template = new \FrontendTemplate('mod_article_teaser');
 			$this->Template->setData($this->arrData);
 
 			$this->cssID = array($alias, '');

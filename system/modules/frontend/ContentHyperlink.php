@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentHyperlink
  *
  * Front end content element "hyperlink".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentHyperlink extends ContentElement
+class ContentHyperlink extends \ContentElement
 {
 
 	/**
@@ -75,10 +81,10 @@ class ContentHyperlink extends ContentElement
 		{
 			$this->strTemplate = 'ce_hyperlink_image';
 
-			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 
-			$objFile = new File($this->singleSRC);
+			$objFile = new \File($this->singleSRC);
 
 			if ($objFile->isGdImage)
 			{

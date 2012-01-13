@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PurgeData
  *
  * Maintenance module "purge data".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PurgeData extends Backend implements executable
+class PurgeData extends \Backend implements \executable
 {
 
 	/**
@@ -56,7 +62,7 @@ class PurgeData extends Backend implements executable
 	public function run()
 	{
 		$arrCacheTables = array();
-		$objTemplate = new BackendTemplate('be_purge_data');
+		$objTemplate = new \BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message

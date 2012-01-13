@@ -120,7 +120,12 @@ class Index extends Backend
 						{
 							$strNamespace = preg_replace('/^.*namespace ([^;]+).*$/s', '$1', $strBuffer);
 							$strNamespace = str_replace('\\', '\\\\', $strNamespace);
-							$arrNamespaces[] = $strNamespace;
+
+							if ($strNamespace != 'Contao')
+							{
+								$arrNamespaces[] = $strNamespace;
+							}
+
 							$strNamespace .=  '\\\\';
 						}
 
@@ -133,16 +138,19 @@ class Index extends Backend
 					$arrTplLoader = array();
 
 					// Scan for templates
-					foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
+					if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/templates'))
 					{
-						if (strrchr($strFile, '.') != '.html5' && strrchr($strFile, '.') != '.xhtml')
+						foreach (scan(TL_ROOT . '/system/modules/' . $strModule . '/templates') as $strFile)
 						{
-							continue;
-						}
+							if (strrchr($strFile, '.') != '.html5' && strrchr($strFile, '.') != '.xhtml')
+							{
+								continue;
+							}
 
-						$strKey = basename($strFile, strrchr($strFile, '.'));
-						$arrTplLoader[$strKey] = 'system/modules/' . $strModule . '/templates';
-						$intTplWidth = max(strlen($strKey), $intTplWidth);
+							$strKey = basename($strFile, strrchr($strFile, '.'));
+							$arrTplLoader[$strKey] = 'system/modules/' . $strModule . '/templates';
+							$intTplWidth = max(strlen($strKey), $intTplWidth);
+						}
 					}
 
 					// Neither classes nor templates found

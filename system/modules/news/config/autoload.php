@@ -29,25 +29,16 @@
 
 
 /**
- * Register the namespaces
- */
-ClassLoader::addNamespaces(array
-(
-	'Contao\\News',
-));
-
-
-/**
  * Register the classes
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\News\\ModuleNews'        => 'system/modules/news/ModuleNews.php',
-	'Contao\\News\\ModuleNewsArchive' => 'system/modules/news/ModuleNewsArchive.php',
-	'Contao\\News\\ModuleNewsList'    => 'system/modules/news/ModuleNewsList.php',
-	'Contao\\News\\ModuleNewsMenu'    => 'system/modules/news/ModuleNewsMenu.php',
-	'Contao\\News\\ModuleNewsReader'  => 'system/modules/news/ModuleNewsReader.php',
-	'Contao\\News\\News'              => 'system/modules/news/News.php',
+	'Contao\\ModuleNews'        => 'system/modules/news/ModuleNews.php',
+	'Contao\\ModuleNewsArchive' => 'system/modules/news/ModuleNewsArchive.php',
+	'Contao\\ModuleNewsList'    => 'system/modules/news/ModuleNewsList.php',
+	'Contao\\ModuleNewsMenu'    => 'system/modules/news/ModuleNewsMenu.php',
+	'Contao\\ModuleNewsReader'  => 'system/modules/news/ModuleNewsReader.php',
+	'Contao\\News'              => 'system/modules/news/News.php',
 ));
 
 

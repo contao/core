@@ -29,13 +29,19 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentComments
  *
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentComments extends ContentElement
+class ContentComments extends \ContentElement
 {
 
 	/**
@@ -53,7 +59,7 @@ class ContentComments extends ContentElement
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### COMMENTS ###';
 			$objTemplate->title = $this->headline;
@@ -71,7 +77,7 @@ class ContentComments extends ContentElement
 	protected function compile()
 	{
 		$this->import('Comments');
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $this->com_perPage;
 		$objConfig->order = $this->com_order;

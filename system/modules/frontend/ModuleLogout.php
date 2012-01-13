@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleLogout
  *
  * Front end module "logout".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLogout extends Module
+class ModuleLogout extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleLogout extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FRONTEND LOGOUT ###';
 			$objTemplate->title = $this->headline;

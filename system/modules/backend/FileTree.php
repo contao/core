@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FileTree
  *
  * Provide methods to handle input field "file tree".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FileTree extends Widget
+class FileTree extends \Widget
 {
 
 	/**
@@ -368,7 +374,7 @@ class FileTree extends Widget
 				$currentFile = str_replace(TL_ROOT . '/', '', $files[$h]);
 				$currentEncoded = $this->urlEncode($currentFile);
 
-				$objFile = new File($currentFile);
+				$objFile = new \File($currentFile);
 
 				// Check file extension
 				if (is_array($allowedExtensions) && !in_array($objFile->extension, $allowedExtensions))

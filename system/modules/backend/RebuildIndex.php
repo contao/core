@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class RebuildIndex
  *
  * Maintenance module "rebuild index".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class RebuildIndex extends Backend implements executable
+class RebuildIndex extends \Backend implements \executable
 {
 
 	/**
@@ -61,7 +67,7 @@ class RebuildIndex extends Backend implements executable
 		}
 
 		$time = time();
-		$objTemplate = new BackendTemplate('be_rebuild_index');
+		$objTemplate = new \BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->isActive = $this->isActive();

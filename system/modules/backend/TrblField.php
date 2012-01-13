@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class TrblField
  *
  * Provide methods to handle text fields with unit drop down menu.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TrblField extends Widget
+class TrblField extends \Widget
 {
 
 	/**

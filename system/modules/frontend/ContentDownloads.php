@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentDownloads
  *
  * Front end content element "downloads".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentDownloads extends ContentElement
+class ContentDownloads extends \ContentElement
 {
 
 	/**
@@ -104,7 +110,7 @@ class ContentDownloads extends ContentElement
 			// Single files
 			if (is_file(TL_ROOT . '/' . $file))
 			{
-				$objFile = new File($file);
+				$objFile = new \File($file);
 
 				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 				{
@@ -146,7 +152,7 @@ class ContentDownloads extends ContentElement
 					continue;
 				}
 
-				$objFile = new File($file . '/' . $subfile);
+				$objFile = new \File($file . '/' . $subfile);
 
 				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($subfile)))
 				{

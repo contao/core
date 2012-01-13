@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleWizard
  *
  * Provide methods to handle modules of a page layout.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleWizard extends Widget
+class ModuleWizard extends \Widget
 {
 
 	/**

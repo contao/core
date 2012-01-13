@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleSubscribe
  *
  * Front end module "newsletter subscribe".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSubscribe extends Module
+class ModuleSubscribe extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleSubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER SUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -85,7 +91,7 @@ class ModuleSubscribe extends Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -149,7 +155,7 @@ class ModuleSubscribe extends Module
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = new FrontendTemplate('mod_newsletter');
+		$this->Template = new \FrontendTemplate('mod_newsletter');
 
 		// Check the token
 		$objRecipient = $this->Database->prepare("SELECT r.id, r.email, c.id AS cid, c.title FROM tl_newsletter_recipients r LEFT JOIN tl_newsletter_channel c ON r.pid=c.id WHERE token=?")
@@ -266,7 +272,7 @@ class ModuleSubscribe extends Module
 		$objChannel = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrChannels)) . ")");
 
 		// Activation e-mail
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
 		$strText = str_replace('##domain##', $this->Environment->host, $strText);

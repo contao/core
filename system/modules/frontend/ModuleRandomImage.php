@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleRandomImage
  *
  * Front end module "random image".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleRandomImage extends Module
+class ModuleRandomImage extends \Module
 {
 
 	/**
@@ -90,7 +96,7 @@ class ModuleRandomImage extends Module
 						continue;
 					}
 
-					$objFile = new File($file . '/' . $subfile);
+					$objFile = new\File($file . '/' . $subfile);
 
 					if ($objFile->isGdImage)
 					{
@@ -104,7 +110,7 @@ class ModuleRandomImage extends Module
 			// File
 			if (is_file(TL_ROOT . '/' . $file))
 			{
-				$objFile = new File($file);
+				$objFile = new \File($file);
 				$this->parseMetaFile(dirname($file), true);
 
 				if ($objFile->isGdImage)
@@ -123,7 +129,7 @@ class ModuleRandomImage extends Module
 
 		$i = mt_rand(0, (count($images)-1));
 
-		$objImage = new File($images[$i]);
+		$objImage = new \File($images[$i]);
 		$arrMeta = $this->arrMeta[$objImage->basename];
 
 		if ($arrMeta[0] == '')

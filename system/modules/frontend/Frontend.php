@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Frontend
  *
  * Provide methods to manage front end controllers.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Frontend extends Controller
+abstract class Frontend extends \Controller
 {
 
 	/**
@@ -172,7 +178,7 @@ abstract class Frontend extends Controller
 				$this->import($callback[0]);
 				$objRootPage = $this->$callback[0]->$callback[1]();
 
-				if ($objRootPage instanceof Database_Result)
+				if ($objRootPage instanceof \Database_Result)
 				{
 					return $objRootPage;
 				}

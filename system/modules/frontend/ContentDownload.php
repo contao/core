@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentDownload
  *
  * Front end content element "download".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentDownload extends ContentElement
+class ContentDownload extends \ContentElement
 {
 
 	/**
@@ -64,7 +70,7 @@ class ContentDownload extends ContentElement
 			return '';
 		}
 
-		$objFile = new File($this->singleSRC);
+		$objFile = new \File($this->singleSRC);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Return if the file type is not allowed

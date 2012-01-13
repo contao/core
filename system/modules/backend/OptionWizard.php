@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class OptionWizard
  *
  * Provide methods to handle form field options.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class OptionWizard extends Widget
+class OptionWizard extends \Widget
 {
 
 	/**

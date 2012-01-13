@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class TimePeriod
  *
  * Provide methods to handle text fields with interval drop down menu.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TimePeriod extends Widget
+class TimePeriod extends \Widget
 {
 
 	/**

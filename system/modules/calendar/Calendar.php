@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Calendar
  *
  * Provide methods regarding calendars.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Calendar extends Frontend
+class Calendar extends \Frontend
 {
 
 	/**
@@ -109,7 +115,7 @@ class Calendar extends Frontend
 		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
 		$strFile = $arrArchive['feedName'];
 
-		$objFeed = new Feed($strFile);
+		$objFeed = new \Feed($strFile);
 
 		$objFeed->link = $strLink;
 		$objFeed->title = $arrArchive['title'];
@@ -190,7 +196,7 @@ class Calendar extends Frontend
 						break(3);
 					}
 
-					$objItem = new FeedItem();
+					$objItem = new \FeedItem();
 
 					$objItem->title = $event['title'];
 					$objItem->link = $event['link'];
@@ -218,7 +224,7 @@ class Calendar extends Frontend
 		}
 
 		// Create file
-		$objRss = new File('share/' . $strFile . '.xml');
+		$objRss = new \File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -311,7 +317,7 @@ class Calendar extends Frontend
 	 * @param string
 	 * @param string
 	 */
-	protected function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl, $strLink)
+	protected function addEvent(\Database_Result $objArticle, $intStart, $intEnd, $strUrl, $strLink)
 	{
 		if ($intStart < time())
 		{

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentGallery
  *
  * Front end content element "gallery".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentGallery extends ContentElement
+class ContentGallery extends \ContentElement
 {
 
 	/**
@@ -93,7 +99,7 @@ class ContentGallery extends ContentElement
 			// Single files
 			if (is_file(TL_ROOT . '/' . $file))
 			{
-				$objFile = new File($file);
+				$objFile = new \File($file);
 				$this->parseMetaFile(dirname($file), true);
 				$arrMeta = $this->arrMeta[$objFile->basename];
 
@@ -130,7 +136,7 @@ class ContentGallery extends ContentElement
 					continue;
 				}
 
-				$objFile = new File($file . '/' . $subfile);
+				$objFile = new \File($file . '/' . $subfile);
 
 				if ($objFile->isGdImage)
 				{
@@ -211,7 +217,7 @@ class ContentGallery extends ContentElement
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -253,7 +259,7 @@ class ContentGallery extends ContentElement
 					$class_td = ' col_last';
 				}
 
-				$objCell = new stdClass();
+				$objCell = new \stdClass();
 				$key = 'row_' . $rowcount . $class_tr . $class_eo;
 
 				// Empty cell
@@ -290,7 +296,7 @@ class ContentGallery extends ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
-		$objTemplate = new FrontendTemplate($strTemplate);
+		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;

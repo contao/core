@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModulePersonalData
  *
  * Front end module "personal data".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModulePersonalData extends Module
+class ModulePersonalData extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModulePersonalData extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### PERSONAL DATA ###';
 			$objTemplate->title = $this->headline;
@@ -106,7 +112,7 @@ class ModulePersonalData extends Module
 		// Set template
 		if (strlen($this->memberTpl))
 		{
-			$this->Template = new FrontendTemplate($this->memberTpl);
+			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -142,13 +148,14 @@ class ModulePersonalData extends Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
+			# FIXME
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
 
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if its a password field
-			if ($objWidget instanceof FormPassword)
+			if ($objWidget instanceof \FormPassword)
 			{
 				++$row;
 				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
@@ -166,7 +173,7 @@ class ModulePersonalData extends Module
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
 					// Use the numeric back end format here!
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
@@ -221,7 +228,7 @@ class ModulePersonalData extends Module
 								   ->execute($varSave, $this->User->id);
 
 					// HOOK: set new password callback
-					if ($objWidget instanceof FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
+					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 						{
@@ -232,7 +239,7 @@ class ModulePersonalData extends Module
 				}
 			}
 
-			if ($objWidget instanceof uploadable)
+			if ($objWidget instanceof \uploadable)
 			{
 				$hasUpload = true;
 			}

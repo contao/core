@@ -29,13 +29,19 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleComments
  *
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleComments extends Module
+class ModuleComments extends \Module
 {
 
 	/**
@@ -53,7 +59,7 @@ class ModuleComments extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### COMMENTS ###';
 			$objTemplate->title = $this->headline;
@@ -76,7 +82,7 @@ class ModuleComments extends Module
 		global $objPage;
 
 		$this->import('Comments');
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $this->perPage;
 		$objConfig->order = $this->com_order;

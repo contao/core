@@ -29,13 +29,19 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Comments
  *
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Comments extends Frontend
+class Comments extends \Frontend
 {
 
 	/**
@@ -46,7 +52,7 @@ class Comments extends Frontend
 	 * @param integer
 	 * @param array
 	 */
-	public function addCommentsToTemplate(FrontendTemplate $objTemplate, stdClass $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		global $objPage;
 		$this->import('String');
@@ -66,7 +72,7 @@ class Comments extends Frontend
 									   ->execute($strSource, $intParent);
 
 			// Initialize the pagination menu
-			$objPagination = new Pagination($objTotal->count, $objConfig->perPage);
+			$objPagination = new \Pagination($objTotal->count, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -90,7 +96,7 @@ class Comments extends Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			$objPartial = new FrontendTemplate($objConfig->template);
+			$objPartial = new \FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
 			{
@@ -315,7 +321,7 @@ class Comments extends Frontend
 			}
 
 			// Notification
-			$objEmail = new Email();
+			$objEmail = \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];

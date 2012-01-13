@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleUnsubscribe
  *
  * Front end module "newsletter unsubscribe".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleUnsubscribe extends Module
+class ModuleUnsubscribe extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleUnsubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER UNSUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -85,7 +91,7 @@ class ModuleUnsubscribe extends Module
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -203,7 +209,7 @@ class ModuleUnsubscribe extends Module
 		}
 
 		// Confirmation e-mail
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_unsubscribe);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);

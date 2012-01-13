@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleRegistration
  *
  * Front end module "registration".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleRegistration extends Module
+class ModuleRegistration extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleRegistration extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### USER REGISTRATION ###';
 			$objTemplate->title = $this->headline;
@@ -111,7 +117,7 @@ class ModuleRegistration extends Module
 
 		if (strlen($this->memberTpl))
 		{
-			$this->Template = new FrontendTemplate($this->memberTpl);
+			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -185,7 +191,7 @@ class ModuleRegistration extends Module
 			$objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
 			// Increase the row count if its a password field
-			if ($objWidget instanceof FormPassword)
+			if ($objWidget instanceof \FormPassword)
 			{
 				$objWidget->rowClassConfirm = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
 			}
@@ -197,7 +203,7 @@ class ModuleRegistration extends Module
 				$varValue = $objWidget->value;
 
 				// Check whether the password matches the username
-				if ($objWidget instanceof FormPassword && $varValue == $this->Input->post('username'))
+				if ($objWidget instanceof \FormPassword && $varValue == $this->Input->post('username'))
 				{
 					$objWidget->addError($GLOBALS['TL_LANG']['ERR']['passwordName']);
 				}
@@ -208,7 +214,7 @@ class ModuleRegistration extends Module
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
 					// Use the numeric back end format here!
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
+					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
@@ -256,7 +262,7 @@ class ModuleRegistration extends Module
 				}
 			}
 
-			if ($objWidget instanceof uploadable)
+			if ($objWidget instanceof \uploadable)
 			{
 				$hasUpload = true;
 			}
@@ -410,7 +416,7 @@ class ModuleRegistration extends Module
 				}
 			}
 
-			$objEmail = new Email();
+			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
@@ -441,7 +447,7 @@ class ModuleRegistration extends Module
 				$strUserDir .= '_' . $insertId;
 			}
 
-			new Folder($this->reg_homeDir . '/' . $strUserDir);
+			new \Folder($this->reg_homeDir . '/' . $strUserDir);
 
 			$this->Database->prepare("UPDATE tl_member SET homeDir=?, assignDir=1 WHERE id=?")
 						   ->execute($this->reg_homeDir . '/' . $strUserDir, $insertId);
@@ -473,7 +479,7 @@ class ModuleRegistration extends Module
 	protected function activateAcount()
 	{
 		$this->strTemplate = 'mod_message';
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
 		$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE activation=?")
@@ -544,7 +550,7 @@ class ModuleRegistration extends Module
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];

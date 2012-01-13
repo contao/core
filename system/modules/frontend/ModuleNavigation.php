@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleNavigation
  *
  * Front end module "navigation".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNavigation extends Module
+class ModuleNavigation extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNavigation extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NAVIGATION MENU ###';
 			$objTemplate->title = $this->headline;

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
@@ -36,14 +42,14 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRegular extends Frontend
+class PageRegular extends \Frontend
 {
 
 	/**
 	 * Generate a regular page
 	 * @param Database_Result
 	 */
-	public function generate(Database_Result $objPage)
+	public function generate(\Database_Result $objPage)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -199,9 +205,9 @@ class PageRegular extends Frontend
 	 * @param Database_Result
 	 * @param Database_Result
 	 */
-	protected function createTemplate(Database_Result $objPage, Database_Result $objLayout)
+	protected function createTemplate(\Database_Result $objPage, \Database_Result $objLayout)
 	{
-		$this->Template = new FrontendTemplate($objPage->template);
+		$this->Template = new \FrontendTemplate($objPage->template);
 
 		// Generate the DTD
 		if ($objPage->outputFormat == 'xhtml')
@@ -319,7 +325,7 @@ class PageRegular extends Frontend
 		}
 		else
 		{
-			$objCombiner = new Combiner();
+			$objCombiner = new \Combiner();
 
 			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
 			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
@@ -352,7 +358,7 @@ class PageRegular extends Frontend
 	 * @param Database_Result
 	 * @param Database_Result
 	 */
-	protected function createHeaderScripts(Database_Result $objPage, Database_Result $objLayout)
+	protected function createHeaderScripts(\Database_Result $objPage,\Database_Result $objLayout)
 	{
 		$strStyleSheets = '';
 		$strCcStyleSheets = '';
@@ -365,7 +371,7 @@ class PageRegular extends Frontend
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="http://fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
-		$objCombiner = new Combiner();
+		$objCombiner = new \Combiner();
 
 		// Skip the Contao framework style sheet
 		if (!$objLayout->skipFramework)
@@ -509,7 +515,7 @@ class PageRegular extends Frontend
 	 * @param Database_Result
 	 * @param Database_Result
 	 */
-	protected function createFooterScripts(Database_Result $objPage, Database_Result $objLayout)
+	protected function createFooterScripts(\Database_Result $objPage, \Database_Result $objLayout)
 	{
 		$strMootools = '';
 		$arrMootools = deserialize($objLayout->mootools, true);
@@ -522,7 +528,7 @@ class PageRegular extends Frontend
 				continue;
 			}
 
-			$objTemplate = new FrontendTemplate($strTemplate);
+			$objTemplate = new \FrontendTemplate($strTemplate);
 
 			// Backwards compatibility
 			try

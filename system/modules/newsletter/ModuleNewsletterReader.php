@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleNewsletterReader
  *
  * Front end module "newsletter reader".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsletterReader extends Module
+class ModuleNewsletterReader extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNewsletterReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER READER ###';
 			$objTemplate->title = $this->headline;
@@ -150,7 +156,7 @@ class ModuleNewsletterReader extends Module
 				{
 					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
 					{				
-						$objFile = new File($arrEnclosure[$i]);
+						$objFile = new \File($arrEnclosure[$i]);
 
 						if (in_array($objFile->extension, $allowedDownload))
 						{

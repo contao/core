@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Include SimplePie classes
  */
 require_once(TL_ROOT . '/system/library/Simplepie/simplepie.inc');
@@ -47,7 +53,7 @@ if (!class_exists('idna_convert', false))
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleRssReader extends Module
+class ModuleRssReader extends \Module
 {
 
 	/**
@@ -71,7 +77,7 @@ class ModuleRssReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### RSS READER ###';
 			$objTemplate->title = $this->headline;
@@ -82,7 +88,7 @@ class ModuleRssReader extends Module
 			return $objTemplate->parse();
 		}
 
-		$this->objFeed = new SimplePie();
+		$this->objFeed = new \SimplePie();
 		$arrUrls = trimsplit('[\n\t ]', trim($this->rss_feed));
 
 		if (count($arrUrls) > 1)
@@ -126,7 +132,7 @@ class ModuleRssReader extends Module
 		{
 			$this->strTemplate = $this->rss_template;
 
-			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -160,7 +166,7 @@ class ModuleRssReader extends Module
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 
-			$objPagination = new Pagination(count($arrItems), $this->perPage);
+			$objPagination = new \Pagination(count($arrItems), $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 

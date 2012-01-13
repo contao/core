@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Pagination
  *
  * Provide methodes to render a pagination menu.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  */
-class Pagination extends Frontend
+class Pagination extends \Frontend
 {
 
 	/**
@@ -232,7 +238,7 @@ class Pagination extends Frontend
 			$this->intPage = $this->intTotalPages;
 		}
 
-		$this->Template = new FrontendTemplate('pagination');
+		$this->Template = new \FrontendTemplate('pagination');
 
 		$this->Template->hasFirst = $this->hasFirst();
 		$this->Template->hasPrevious = $this->hasPrevious();

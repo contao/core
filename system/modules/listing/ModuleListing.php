@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleListing
  *
  * Provide methods to render content element "listing".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleListing extends Module
+class ModuleListing extends \Module
 {
 
 	/**
@@ -60,7 +66,7 @@ class ModuleListing extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### LISTING ###';
 			$objTemplate->title = $this->headline;
@@ -295,7 +301,7 @@ class ModuleListing extends Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new Pagination($objTotal->count, $per_page);
+		$objPagination = new \Pagination($objTotal->count, $per_page);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 
@@ -329,7 +335,7 @@ class ModuleListing extends Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new FrontendTemplate($this->list_info_layout);
+		$this->Template = new \FrontendTemplate($this->list_info_layout);
 
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class CheckBox
  *
  * Provide methods to handle check boxes.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class CheckBox extends Widget
+class CheckBox extends \Widget
 {
 
 	/**

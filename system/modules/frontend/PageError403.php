@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageError403
  *
  * Provide methods to handle an error 403 page.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageError403 extends Frontend
+class PageError403 extends \Frontend
 {
 
 	/**

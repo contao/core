@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class DbInstaller
  *
  * Provide methods to handle database installs/updates.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class DbInstaller extends Controller
+class DbInstaller extends \Controller
 {
 
 	/**

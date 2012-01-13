@@ -341,7 +341,7 @@ abstract class User extends \Model
 		}
 
 		// Check wether login is allowed (front end only)
-		elseif ($this instanceof FrontendUser && !$this->login)
+		elseif ($this instanceof \FrontendUser && !$this->login)
 		{
 			$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['invalidLogin']);
 			$this->log('User "' . $this->username . '" is not allowed to log in', get_class($this) . ' login()', TL_ACCESS);

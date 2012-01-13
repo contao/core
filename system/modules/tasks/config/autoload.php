@@ -33,8 +33,8 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleTasks'  => 'system/modules/tasks/ModuleTasks.php',
-	'TaskMessages' => 'system/modules/tasks/TaskMessages.php',
+	'Contao\\ModuleTasks'  => 'system/modules/tasks/ModuleTasks.php',
+	'Contao\\TaskMessages' => 'system/modules/tasks/TaskMessages.php',
 ));
 
 

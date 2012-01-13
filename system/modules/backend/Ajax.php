@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Ajax
  *
  * Provide methods to handle Ajax requests.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Ajax extends Backend
+class Ajax extends \Backend
 {
 
 	/**
@@ -72,7 +78,7 @@ class Ajax extends Backend
 	{
 		if (!$strAction)
 		{
-			throw new Exception('Missing Ajax action');
+			throw new \Exception('Missing Ajax action');
 		}
 
 		$this->strAction = $strAction;
@@ -102,7 +108,7 @@ class Ajax extends Backend
 
 				$this->import('BackendUser', 'User');
 
-				$objTemplate = new BackendTemplate('be_navigation');
+				$objTemplate = new \BackendTemplate('be_navigation');
 				$navigation = $this->User->navigation();
 				$objTemplate->modules = $navigation[$this->Input->post('id')]['modules'];
 
@@ -162,7 +168,7 @@ class Ajax extends Backend
 				// Check whether the temp directory is writeable
 				try
 				{
-					$objFile = new File('system/tmp/' . md5(uniqid(mt_rand(), true)));
+					$objFile = new \File('system/tmp/' . md5(uniqid(mt_rand(), true)));
 					$objFile->close();
 					$objFile->delete();
 				}
@@ -296,7 +302,7 @@ class Ajax extends Backend
 
 			// Toggle subpalettes
 			case 'toggleSubpalette':
-				if ($dc instanceof DC_Table)
+				if ($dc instanceof \DC_Table)
 				{
 					if ($this->Input->get('act') == 'editAll')
 					{
@@ -318,7 +324,7 @@ class Ajax extends Backend
 						}
 					}
 				}
-				elseif ($dc instanceof DC_File)
+				elseif ($dc instanceof \DC_File)
 				{
 					$val = (intval($this->Input->post('state') == 1) ? true : false);
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['".$this->Input->post('field')."']", $val);

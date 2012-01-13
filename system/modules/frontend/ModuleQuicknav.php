@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleQuicknav
  *
  * Front end module "quick navigation".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicknav extends Module
+class ModuleQuicknav extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleQuicknav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK NAVIGATION ###';
 			$objTemplate->title = $this->headline;

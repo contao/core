@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleQuicklink
  *
  * Front end module "quick link".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicklink extends Module
+class ModuleQuicklink extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleQuicklink extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK LINK ###';
 			$objTemplate->title = $this->headline;

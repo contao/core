@@ -33,7 +33,7 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleRssReader' => 'system/modules/rss_reader/ModuleRssReader.php',
+	'Contao\\ModuleRssReader' => 'system/modules/rss_reader/ModuleRssReader.php',
 ));
 
 

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class LiveUpdate
  *
  * Maintenance module "Live Update".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class LiveUpdate extends Backend implements executable
+class LiveUpdate extends \Backend implements \executable
 {
 
 	/**
@@ -55,7 +61,7 @@ class LiveUpdate extends Backend implements executable
 	 */
 	public function run()
 	{
-		$objTemplate = new BackendTemplate('be_live_update');
+		$objTemplate = new \BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
@@ -146,7 +152,7 @@ class LiveUpdate extends Backend implements executable
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
-			$objRequest = new Request();
+			$objRequest = new \Request();
 			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . $this->Input->get('token'));
 
 			if ($objRequest->hasError())
@@ -156,7 +162,7 @@ class LiveUpdate extends Backend implements executable
 				return;
 			}
 
-			$objFile = new File($archive);
+			$objFile = new \File($archive);
 			$objFile->write($objRequest->response);
 			$objFile->close();
 		}
@@ -181,7 +187,7 @@ class LiveUpdate extends Backend implements executable
 			.'<body>'
 			.'<div>';
 
-		$objArchive = new ZipReader($archive);
+		$objArchive = new \ZipReader($archive);
 
 		// Table of contents
 		if ($this->Input->get('toc'))
@@ -215,7 +221,7 @@ class LiveUpdate extends Backend implements executable
 				.'<ol>';
 
 			$arrFiles = $objArchive->getFileList();
-			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
+			$objBackup = new \ZipWriter('LU' . date('YmdHi') . '.zip');
 
 			foreach ($arrFiles as $strFile)
 			{
@@ -263,7 +269,7 @@ class LiveUpdate extends Backend implements executable
 
 			try
 			{
-				$objFile = new File($objArchive->file_name);
+				$objFile = new \File($objArchive->file_name);
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 

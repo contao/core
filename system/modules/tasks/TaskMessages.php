@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class TaskMessages
  *
  * Add task center specific system messages to the welcome screen.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TaskMessages extends Backend
+class TaskMessages extends \Backend
 {
 
 	/**

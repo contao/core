@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class TextStore
  *
  * A TextStore field is used to enter data only. It will not show the
@@ -37,7 +43,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TextStore extends Widget
+class TextStore extends \Widget
 {
 
 	/**

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Automator
  *
  * Provide methods to run automated jobs.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Automator extends Backend
+class Automator extends \Backend
 {
 
 	/**
@@ -99,7 +105,7 @@ class Automator extends Backend
 		// Create the XML file
 		while($objRoot->next())
 		{
-			$objFile = new File('share/' . $objRoot->sitemapName . '.xml');
+			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml');
 
 			$objFile->write('');
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
@@ -232,7 +238,7 @@ class Automator extends Backend
 		// Check for .htaccess
 		if (!file_exists(TL_ROOT . '/system/tmp/.htaccess'))
 		{
-			$objFolder = new Folder('system/tmp');
+			$objFolder = new \Folder('system/tmp');
 			$objFolder->protect();
 		}
 
@@ -251,7 +257,7 @@ class Automator extends Backend
 			return;
 		}
 
-		$objRequest = new Request();
+		$objRequest = new \Request();
 		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'version.txt');
 
 		if (!$objRequest->hasError())

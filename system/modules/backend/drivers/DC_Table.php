@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class DC_Table
  *
  * Provide methods to modify the database.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class DC_Table extends DataContainer implements listable, editable
+class DC_Table extends \DataContainer implements \listable, \editable
 {
 
 	/**
@@ -2565,7 +2571,7 @@ window.addEvent(\'domready\', function() {
 		// Convert date formats into timestamps
 		if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 		{
-			$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
+			$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
 			$varValue = $objDate->tstamp;
 		}
 
@@ -2577,7 +2583,7 @@ window.addEvent(\'domready\', function() {
 
 			if ($objUnique->numRows)
 			{
-				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (($arrData['label'][0] != '') ? $arrData['label'][0] : $this->strField)));
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (($arrData['label'][0] != '') ? $arrData['label'][0] : $this->strField)));
 			}
 		}
 
@@ -4508,7 +4514,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						}
 						else
 						{
-							$objDate = new Date($session['filter'][$filter][$field]);
+							$objDate = new \Date($session['filter'][$filter][$field]);
 							$this->procedure[] = $field . ' BETWEEN ? AND ?';
 							$this->values[] = $objDate->dayBegin;
 							$this->values[] = $objDate->dayEnd;
@@ -4524,7 +4530,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						}
 						else
 						{
-							$objDate = new Date($session['filter'][$filter][$field]);
+							$objDate = new \Date($session['filter'][$filter][$field]);
 							$this->procedure[] = $field . ' BETWEEN ? AND ?';
 							$this->values[] = $objDate->monthBegin;
 							$this->values[] = $objDate->monthEnd;
@@ -4540,7 +4546,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						}
 						else
 						{
-							$objDate = new Date($session['filter'][$filter][$field]);
+							$objDate = new \Date($session['filter'][$filter][$field]);
 							$this->procedure[] = $field . ' BETWEEN ? AND ?';
 							$this->values[] = $objDate->yearBegin;
 							$this->values[] = $objDate->yearEnd;

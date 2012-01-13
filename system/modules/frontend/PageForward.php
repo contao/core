@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageForward
  *
  * Provide methods to handle a forward page.
@@ -36,14 +42,14 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageForward extends Frontend
+class PageForward extends \Frontend
 {
 
 	/**
 	 * Redirect to an internal page
 	 * @param Database_Result
 	 */
-	public function generate(Database_Result $objPage)
+	public function generate(\Database_Result $objPage)
 	{
 		// Forward to first active page
 		if (!$objPage->jumpTo)

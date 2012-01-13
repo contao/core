@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FileUpload
  *
  * Provide methods to handle file uploads in the back end.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  */
-class FileUpload extends Backend
+class FileUpload extends \Backend
 {
 
 	/**
@@ -83,12 +89,12 @@ class FileUpload extends Backend
 	{
 		if ($strTarget == '' || strpos($strTarget, '../') !== false)
 		{
-			throw new Exception("Invalid target path $strTarget");
+			throw new \Exception("Invalid target path $strTarget");
 		}
 
 		if ($strKey == '')
 		{
-			throw new Exception('The key must not be empty');
+			throw new \Exception('The key must not be empty');
 		}
 
 		$maxlength_kb = $this->getMaximumUploadSize();

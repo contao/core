@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleEventlist
  *
  * Front end module "event list".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventlist extends Events
+class ModuleEventlist extends \Events
 {
 
 	/**
@@ -60,7 +66,7 @@ class ModuleEventlist extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT LIST ###';
 			$objTemplate->title = $this->headline;
@@ -123,7 +129,7 @@ class ModuleEventlist extends Events
 		// Display year
 		if ($blnDynamicFormat && $this->Input->get('year'))
 		{
-			$this->Date = new Date($this->Input->get('year'), 'Y');
+			$this->Date = new \Date($this->Input->get('year'), 'Y');
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
@@ -131,7 +137,7 @@ class ModuleEventlist extends Events
 		// Display month
 		elseif ($blnDynamicFormat && $this->Input->get('month'))
 		{
-			$this->Date = new Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date($this->Input->get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
 		}
@@ -139,7 +145,7 @@ class ModuleEventlist extends Events
 		// Display day
 		elseif ($blnDynamicFormat && $this->Input->get('day'))
 		{
-			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
@@ -147,7 +153,7 @@ class ModuleEventlist extends Events
 		// Display all events or upcoming/past events
 		else
 		{
-			$this->Date = new Date();
+			$this->Date = new \Date();
 		}
 
 		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
@@ -209,7 +215,7 @@ class ModuleEventlist extends Events
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -244,7 +250,7 @@ class ModuleEventlist extends Events
 				$blnIsLastEvent = true;
 			}
 
-			$objTemplate = new FrontendTemplate($this->cal_template);
+			$objTemplate = new \FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
 
 			// Month header

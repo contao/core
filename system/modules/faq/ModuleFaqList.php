@@ -29,13 +29,19 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleFaqList
  *
  * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaqList extends Module
+class ModuleFaqList extends \Module
 {
 
 	/**
@@ -59,7 +65,7 @@ class ModuleFaqList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ LIST ###';
 			$objTemplate->title = $this->headline;
@@ -143,7 +149,7 @@ class ModuleFaqList extends Module
 	 * @param Database_Result
 	 * @return string
 	 */
-	protected function generateFaqLink(Database_Result $objFaq)
+	protected function generateFaqLink(\Database_Result $objFaq)
 	{
 		if (!isset($this->arrTargets[$objFaq->id]))
 		{

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class TableWizard
  *
  * Provide methods to handle table fields.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TableWizard extends Widget
+class TableWizard extends \Widget
 {
 
 	/**
@@ -254,7 +260,7 @@ class TableWizard extends Widget
 
 			foreach ($this->Input->post('source') as $strCsvFile)
 			{
-				$objFile = new File($strCsvFile);
+				$objFile = new \File($strCsvFile);
 
 				if ($objFile->extension != 'csv')
 				{
@@ -295,7 +301,7 @@ class TableWizard extends Widget
 			$this->redirect(str_replace('&key=table', '', $this->Environment->request));
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA'][$dc->table]['fields']['source'], 'source', null, 'source', $dc->table));
+		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA'][$dc->table]['fields']['source'], 'source', null, 'source', $dc->table));
 
 		// Return form
 		return '

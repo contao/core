@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class DC_Folder
  *
  * Provide methods to modify the file system.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class DC_Folder extends DataContainer implements listable, editable
+class DC_Folder extends \DataContainer implements \listable, \editable
 {
 
 	/**
@@ -1198,7 +1204,7 @@ window.addEvent(\'domready\', function() {
 			$this->redirect('contao/main.php?act=error');
 		}
 
-		$objFile = new File($this->intId);
+		$objFile = new \File($this->intId);
 
 		// Check whether file type is editable
 		if (!in_array($objFile->extension, trimsplit(',', $GLOBALS['TL_CONFIG']['editableFiles'])))
@@ -1338,7 +1344,7 @@ window.addEvent(\'domready\', function() {
 		// Remove the protection
 		if (file_exists(TL_ROOT . '/' . $this->intId . '/.htaccess'))
 		{
-			$objFolder = new Folder($this->intId);
+			$objFolder = new \Folder($this->intId);
 			$objFolder->unprotect();
 			$this->log('The protection from folder "'.$this->intId.'" has been removed', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
@@ -1347,7 +1353,7 @@ window.addEvent(\'domready\', function() {
 		// Protect the folder
 		else
 		{
-			$objFolder = new Folder($this->intId);
+			$objFolder = new \Folder($this->intId);
 			$objFolder->protect();
 			$this->log('Folder "'.$this->intId.'" has been protected', 'DC_Folder protect()', TL_FILES);
 			$this->redirect($this->getReferer());
@@ -1592,7 +1598,7 @@ window.addEvent(\'domready\', function() {
 			$popupHeight = 260;
 			$currentFile = str_replace(TL_ROOT.'/', '', $files[$h]);
 
-			$objFile = new File($currentFile);
+			$objFile = new \File($currentFile);
 
 			if (!empty($this->arrValidFileTypes) && !in_array($objFile->extension, $this->arrValidFileTypes))
 			{

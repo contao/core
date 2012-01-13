@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleFaqPage
  *
  * @copyright  Leo Feyer 2008-2012
@@ -53,7 +59,7 @@ class ModuleFaqPage extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ PAGE ###';
 			$objTemplate->title = $this->headline;

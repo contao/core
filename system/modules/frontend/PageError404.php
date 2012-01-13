@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class PageError404
  *
  * Provide methods to handle an error 404 page.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageError404 extends Frontend
+class PageError404 extends \Frontend
 {
 
 	/**

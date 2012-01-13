@@ -33,9 +33,9 @@
  */
 ClassLoader::addClasses(array
 (
-	'ModuleCloseAccount' => 'system/modules/registration/ModuleCloseAccount.php',
-	'ModulePassword'     => 'system/modules/registration/ModulePassword.php',
-	'ModuleRegistration' => 'system/modules/registration/ModuleRegistration.php',
+	'Contao\\ModuleCloseAccount' => 'system/modules/registration/ModuleCloseAccount.php',
+	'ModulePassword'             => 'system/modules/registration/ModulePassword.php',
+	'Contao\\ModuleRegistration' => 'system/modules/registration/ModuleRegistration.php',
 ));
 
 

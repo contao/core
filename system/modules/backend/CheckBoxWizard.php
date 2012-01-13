@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class CheckBoxWizard
  *
  * Provide methods to handle sortable checkboxes.
@@ -37,7 +43,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class CheckBoxWizard extends Widget
+class CheckBoxWizard extends \Widget
 {
 
 	/**

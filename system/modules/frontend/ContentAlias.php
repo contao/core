@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ContentAlias
  *
  * Front end content element "alias".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentAlias extends ContentElement
+class ContentAlias extends \ContentElement
 {
 
 	/**
@@ -64,6 +70,7 @@ class ContentAlias extends ContentElement
 		$objElement->id = $this->id;
 		$objElement->typePrefix = 'ce_';
 
+		# FIXME
 		$objElement = new $strClass($objElement);
 
 		// Overwrite spacing and CSS ID

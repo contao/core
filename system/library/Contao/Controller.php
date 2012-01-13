@@ -1145,7 +1145,7 @@ abstract class Controller extends \System
 	 * Print an article as PDF and stream it to the browser
 	 * @param Database_Result
 	 */
-	protected function printArticleAsPdf(Database_Result $objArticle)
+	protected function printArticleAsPdf(\Database_Result $objArticle)
 	{
 		$objArticle->headline = $objArticle->title;
 		$objArticle->printable = false;

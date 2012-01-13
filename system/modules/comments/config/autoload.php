@@ -33,9 +33,9 @@
  */
 ClassLoader::addClasses(array
 (
-	'Comments'        => 'system/modules/comments/Comments.php',
-	'ContentComments' => 'system/modules/comments/ContentComments.php',
-	'ModuleComments'  => 'system/modules/comments/ModuleComments.php',
+	'Contao\\Comments'        => 'system/modules/comments/Comments.php',
+	'Contao\\ContentComments' => 'system/modules/comments/ContentComments.php',
+	'Contao\\ModuleComments'  => 'system/modules/comments/ModuleComments.php',
 ));
 
 

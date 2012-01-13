@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FrontendTemplate
  *
  * Provide methods to handle front end templates.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FrontendTemplate extends Template
+class FrontendTemplate extends \Template
 {
 
 	/**
@@ -159,7 +165,7 @@ class FrontendTemplate extends Template
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 			// Create the cache file
-			$objFile = new File('system/tmp/' . md5($strCacheKey) . '.html');
+			$objFile = new \File('system/tmp/' . md5($strCacheKey) . '.html');
 			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
 
 			/**

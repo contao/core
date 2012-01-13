@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleBooknav
  *
  * Front end module "book navigation".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleBooknav extends Module
+class ModuleBooknav extends \Module
 {
 
 	/**
@@ -60,7 +66,7 @@ class ModuleBooknav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### BOOK NAVIGATION ###';
 			$objTemplate->title = $this->headline;

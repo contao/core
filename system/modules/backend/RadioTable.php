@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class RadioTable
  *
  * Provide methods to handle radio button tables.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class RadioTable extends Widget
+class RadioTable extends \Widget
 {
 
 	/**

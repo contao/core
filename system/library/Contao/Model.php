@@ -172,7 +172,7 @@ abstract class Model extends \System
 	 * @param string
 	 * @param string
 	 */
-	public function setFromRow(Database_Result $resResult, $strTable, $strRefField)
+	public function setFromRow(\Database_Result $resResult, $strTable, $strRefField)
 	{
 		$this->strTable = $strTable;
 		$this->strRefField = $strRefField;

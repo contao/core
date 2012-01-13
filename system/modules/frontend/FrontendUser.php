@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FrontendUser
  *
  * Provide methods to manage front end users.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class FrontendUser extends User
+class FrontendUser extends \User
 {
 
 	/**

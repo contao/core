@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleNewsletterList
  *
  * Front end module "newsletter list".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsletterList extends Module
+class ModuleNewsletterList extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleNewsletterList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER LIST ###';
 			$objTemplate->title = $this->headline;

@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleSearch
  *
  * Front end module "search".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSearch extends Module
+class ModuleSearch extends \Module
 {
 
 	/**
@@ -54,7 +60,7 @@ class ModuleSearch extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### WEBSITE SEARCH ###';
 			$objTemplate->title = $this->headline;
@@ -94,7 +100,7 @@ class ModuleSearch extends Module
 			$this->queryType = $this->Input->get('query_type');
 		}
 
-		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
+		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $this->queryType;
@@ -157,7 +163,7 @@ class ModuleSearch extends Module
 			// Load cached result
 			if (file_exists(TL_ROOT . '/system/tmp/' . $strChecksum))
 			{
-				$objFile = new File('system/tmp/' . $strChecksum);
+				$objFile = new \File('system/tmp/' . $strChecksum);
 
 				if ($objFile->mtime > time() - 1800)
 				{
@@ -183,7 +189,7 @@ class ModuleSearch extends Module
 					$arrResult = array();
 				}
 
-				$objFile = new File('system/tmp/' . $strChecksum);
+				$objFile = new \File('system/tmp/' . $strChecksum);
 				$objFile->write(serialize($arrResult));
 				$objFile->close();
 			}
@@ -249,7 +255,7 @@ class ModuleSearch extends Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new Pagination($count, $per_page);
+					$objPagination = new \Pagination($count, $per_page);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}
@@ -257,7 +263,7 @@ class ModuleSearch extends Module
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
+				$objTemplate = new \FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];

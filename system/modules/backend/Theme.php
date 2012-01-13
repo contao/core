@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class Theme
  *
  * Provide methods to handle themes.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Theme extends Backend
+class Theme extends \Backend
 {
 
 	/**
@@ -67,7 +73,7 @@ class Theme extends Backend
 					continue;
 				}
 
-				$objFile = new File($strZipFile);
+				$objFile = new \File($strZipFile);
 
 				// Skip anything but .cto files
 				if ($objFile->extension != 'cto')
@@ -107,7 +113,7 @@ class Theme extends Backend
 			}
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_theme']['fields']['source'], 'source', null, 'source', 'tl_theme'));
+		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_theme']['fields']['source'], 'source', null, 'source', 'tl_theme'));
 
 		// Return the form
 		return '
@@ -179,7 +185,7 @@ class Theme extends Backend
   <h4>'.$GLOBALS['TL_LANG']['tl_theme']['tables_fields'].'</h4>';
 
 			// Find the XML file
-			$objArchive = new ZipReader($strFile);
+			$objArchive = new \ZipReader($strFile);
 
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
@@ -191,7 +197,7 @@ class Theme extends Backend
 			}
 
 			// Open the XML file
-			$xml = new DOMDocument();
+			$xml = new \DOMDocument();
 			$xml->preserveWhiteSpace = false;
 			$xml->loadXML($objArchive->unzip());
 			$tables = $xml->getElementsByTagName('table');
@@ -356,7 +362,7 @@ class Theme extends Backend
 			$xml = null;
 
 			// Open the archive
-			$objArchive = new ZipReader($strZipFile);
+			$objArchive = new \ZipReader($strZipFile);
 
 			// Extract all files
 			while ($objArchive->next())
@@ -364,7 +370,7 @@ class Theme extends Backend
 				// Load the XML file
 				if ($objArchive->file_name == 'theme.xml')
 				{
-					$xml = new DOMDocument();
+					$xml = new \DOMDocument();
 					$xml->preserveWhiteSpace = false;
 					$xml->loadXML($objArchive->unzip());
 					continue;
@@ -388,7 +394,7 @@ class Theme extends Backend
 						$strFileName = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
 					}
 
-					$objFile = new File($strFileName);
+					$objFile = new \File($strFileName);
 					$objFile->write($objArchive->unzip());
 					$objFile->close();
 				}
@@ -399,7 +405,7 @@ class Theme extends Backend
 			}
 
 			// Continue if there is no XML file
-			if (!$xml instanceof DOMDocument)
+			if (!$xml instanceof \DOMDocument)
 			{
 				$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strZipFile)));
 				continue;
@@ -609,7 +615,7 @@ class Theme extends Backend
 		$strName = basename($strName);
 
 		// Create a new XML document
-		$xml = new DOMDocument('1.0', 'UTF-8');
+		$xml = new \DOMDocument('1.0', 'UTF-8');
 		$xml->formatOutput = true;
 
 		// Root element
@@ -624,7 +630,7 @@ class Theme extends Backend
 
 		// Generate the archive
 		$strTmp = md5(uniqid(mt_rand(), true));
-		$objArchive = new ZipWriter('system/tmp/'. $strTmp);
+		$objArchive = new \ZipWriter('system/tmp/'. $strTmp);
 
 		// Add the XML document
 		$objArchive->addString($xml->saveXML(), 'theme.xml');
@@ -647,7 +653,7 @@ class Theme extends Backend
 		$objArchive->close();
 
 		// Open the "save as …" dialogue
-		$objFile = new File('system/tmp/'. $strTmp);
+		$objFile = new \File('system/tmp/'. $strTmp);
 
 		header('Content-Type: application/octet-stream');
 		header('Content-Transfer-Encoding: binary');

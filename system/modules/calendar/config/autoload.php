@@ -33,12 +33,12 @@
  */
 ClassLoader::addClasses(array
 (
-	'Calendar'          => 'system/modules/calendar/Calendar.php',
-	'Events'            => 'system/modules/calendar/Events.php',
-	'ModuleCalendar'    => 'system/modules/calendar/ModuleCalendar.php',
-	'ModuleEventMenu'   => 'system/modules/calendar/ModuleEventMenu.php',
-	'ModuleEventReader' => 'system/modules/calendar/ModuleEventReader.php',
-	'ModuleEventlist'   => 'system/modules/calendar/ModuleEventlist.php',
+	'Contao\\Calendar'          => 'system/modules/calendar/Calendar.php',
+	'Contao\\Events'            => 'system/modules/calendar/Events.php',
+	'Contao\\ModuleCalendar'    => 'system/modules/calendar/ModuleCalendar.php',
+	'Contao\\ModuleEventMenu'   => 'system/modules/calendar/ModuleEventMenu.php',
+	'Contao\\ModuleEventReader' => 'system/modules/calendar/ModuleEventReader.php',
+	'Contao\\ModuleEventlist'   => 'system/modules/calendar/ModuleEventlist.php',
 ));
 
 

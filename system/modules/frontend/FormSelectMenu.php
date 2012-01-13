@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class FormSelectMenu
  *
  * Form field "select menu".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormSelectMenu extends Widget
+class FormSelectMenu extends \Widget
 {
 
 	/**

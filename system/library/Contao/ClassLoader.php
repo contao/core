@@ -125,9 +125,17 @@ class ClassLoader
 	 */
 	public static function addNamespace($name, $prepend=false)
 	{
-		if ($prepend) {
+		if (in_array($name, self::$namespaces))
+		{
+			return;
+		}
+
+		if ($prepend)
+		{
 			array_unshift(self::$namespaces, $name);
-		} else {
+		}
+		else
+		{
 			array_push(self::$namespaces, $name);
 		}
 	}
@@ -192,7 +200,8 @@ class ClassLoader
 
 
 	/**
-	 * Autoload a class and alias it into the global namespace
+	 * Autoload a class and create an alias in the global namespace to
+	 * preserve backwards compatibility with Contao 2 extensions
 	 * @param string
 	 */
 	public static function load($class)
@@ -202,12 +211,25 @@ class ClassLoader
 			return;
 		}
 
+		// The class file is set in the mapper
 		if (isset(self::$classes[$class]))
 		{
+			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				$GLOBALS['TL_DEBUG']['classes_set'][] = $class;
+			}
+
 			include TL_ROOT . '/' . self::$classes[$class];
 		}
+
+		// Find the class in the registered namespaces
 		elseif (($namespaced = self::findClass($class)) != false)
 		{
+			if ($GLOBALS['TL_CONFIG']['debugMode'])
+			{
+				$GLOBALS['TL_DEBUG']['classes_aliased'][] = $class . ' <span style="color:#999">(' . $namespaced . ')</span>';
+			}
+
 			include TL_ROOT . '/' . self::$classes[$namespaced];
 			class_alias($namespaced, $class);
 		}

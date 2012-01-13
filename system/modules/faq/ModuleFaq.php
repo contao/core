@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleFaq
  *
  * Provide methods regarding FAQs.
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaq extends Frontend
+class ModuleFaq extends \Frontend
 {
 
 	/**

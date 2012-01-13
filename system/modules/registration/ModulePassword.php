@@ -36,7 +36,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModulePassword extends Module
+class ModulePassword extends \Module
 {
 
 	/**
@@ -54,7 +54,7 @@ class ModulePassword extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### LOST PASSWORD ###';
 			$objTemplate->title = $this->headline;
@@ -163,7 +163,7 @@ class ModulePassword extends Module
 			{
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template = new \FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'error';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountNotFound'];
 
@@ -196,7 +196,7 @@ class ModulePassword extends Module
 		{
 			$this->strTemplate = 'mod_message';
 
-			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
 
@@ -262,7 +262,7 @@ class ModulePassword extends Module
 				// Confirm
 				$this->strTemplate = 'mod_message';
 
-				$this->Template = new FrontendTemplate($this->strTemplate);
+				$this->Template = new \FrontendTemplate($this->strTemplate);
 				$this->Template->type = 'confirm';
 				$this->Template->message = $GLOBALS['TL_LANG']['MSC']['newPasswordSet'];
 
@@ -285,7 +285,7 @@ class ModulePassword extends Module
 	 * Create a new user and redirect
 	 * @param Database_Result
 	 */
-	protected function sendPasswordLink(Database_Result $objMember)
+	protected function sendPasswordLink(\Database_Result $objMember)
 	{
 		$arrChunks = array();
 		$confirmationId = md5(uniqid(mt_rand(), true));
@@ -326,7 +326,7 @@ class ModulePassword extends Module
 		}
 
 		// Send e-mail
-		$objEmail = new Email();
+		$objEmail = new \Email();
 
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];

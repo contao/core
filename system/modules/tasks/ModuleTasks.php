@@ -29,6 +29,12 @@
 
 
 /**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
+
+
+/**
  * Class ModuleTasks
  *
  * Back end module "tasks".
@@ -36,7 +42,7 @@
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleTasks extends BackendModule
+class ModuleTasks extends \BackendModule
 {
 
 	/**
@@ -194,7 +200,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function createTask()
 	{
-		$this->Template = new BackendTemplate('be_task_create');
+		$this->Template = new \BackendTemplate('be_task_create');
 		$fs = $this->Session->get('fieldset_states');
 
 		$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
@@ -219,7 +225,7 @@ class ModuleTasks extends BackendModule
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_tasks' && $this->blnSave)
 		{
 			$time = time();
-			$deadline = new Date($this->Template->deadline->value, $GLOBALS['TL_CONFIG']['dateFormat']);
+			$deadline = new \Date($this->Template->deadline->value, $GLOBALS['TL_CONFIG']['dateFormat']);
 
 			// Insert task
 			$arrSet = array
@@ -255,7 +261,7 @@ class ModuleTasks extends BackendModule
 
 				if ($objUser->numRows)
 				{
-					$objEmail = new Email();
+					$objEmail = new \Email();
 
 					$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 					$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
@@ -279,7 +285,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function editTask()
 	{
-		$this->Template = new BackendTemplate('be_task_edit');
+		$this->Template = new \BackendTemplate('be_task_edit');
 		$fs = $this->Session->get('fieldset_states');
 
 		$this->Template->titleClass = (isset($fs['tl_tasks']['title_legend']) && !$fs['tl_tasks']['title_legend']) ? ' collapsed' : '';
@@ -340,7 +346,7 @@ class ModuleTasks extends BackendModule
 			// Update task
 			if ($this->blnAdvanced)
 			{
-				$deadline = new Date($this->Template->deadline->value, $GLOBALS['TL_CONFIG']['dateFormat']);
+				$deadline = new \Date($this->Template->deadline->value, $GLOBALS['TL_CONFIG']['dateFormat']);
 
 				$this->Database->prepare("UPDATE tl_task SET title=?, deadline=? WHERE id=?")
 							   ->execute($this->Template->title->value, $deadline->dayBegin, $this->Input->get('id'));
@@ -368,7 +374,7 @@ class ModuleTasks extends BackendModule
 
 				if ($objUser->numRows)
 				{
-					$objEmail = new Email();
+					$objEmail = new \Email();
 
 					$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 					$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
@@ -526,7 +532,7 @@ class ModuleTasks extends BackendModule
 		// Add deadline value to query
 		if ($session['filter']['tl_task']['deadline'] != '')
 		{
-			$objDate = new Date($session['filter']['tl_task']['deadline']);
+			$objDate = new \Date($session['filter']['tl_task']['deadline']);
 
 			$where[] = "t.deadline BETWEEN ? AND ?";
 			$value[] = $objDate->dayBegin;
@@ -590,7 +596,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getTitleWidget($value=null)
 	{
-		$widget = new TextField();
+		$widget = new \TextField();
 
 		$widget->id = 'title';
 		$widget->name = 'title';
@@ -628,7 +634,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getAssignedToWidget($value=null)
 	{
-		$widget = new SelectMenu();
+		$widget = new \SelectMenu();
 
 		$widget->id = 'assignedTo';
 		$widget->name = 'assignedTo';
@@ -689,7 +695,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getDeadlineWidget($value=null)
 	{
-		$widget = new TextField();
+		$widget = new \TextField();
 
 		$widget->id = 'deadline';
 		$widget->name = 'deadline';
@@ -727,7 +733,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getStatusWidget($value=null, $progress=null)
 	{
-		$widget = new SelectMenu();
+		$widget = new \SelectMenu();
 
 		$widget->id = 'status';
 		$widget->name = 'status';
@@ -776,7 +782,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getProgressWidget($value=null)
 	{
-		$widget = new SelectMenu();
+		$widget = new \SelectMenu();
 
 		$widget->id = 'progress';
 		$widget->name = 'progress';
@@ -823,7 +829,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getCommentWidget($value=null)
 	{
-		$widget = new TextArea();
+		$widget = new \TextArea();
 
 		$widget->id = 'comment';
 		$widget->name = 'comment';
@@ -860,7 +866,7 @@ class ModuleTasks extends BackendModule
 	 */
 	protected function getNotifyWidget()
 	{
-		$widget = new CheckBox();
+		$widget = new \CheckBox();
 
 		$widget->id = 'notify';
 		$widget->name = 'notify';
