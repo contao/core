@@ -297,7 +297,7 @@ abstract class Template extends Controller
 		{
 			echo "\n\n"
 				. '<div id="debug">' . "\n"
-				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['db']) . '</span></p>' . "\n"
+				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 			print_r($GLOBALS['TL_DEBUG']);
 			echo '</pre></div>'

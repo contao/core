@@ -38,7 +38,6 @@ ClassLoader::addClasses(array
 	'Contao\\Backend'           => 'system/modules/backend/Backend.php',
 	'BackendModule'             => 'system/modules/backend/BackendModule.php',
 	'Contao\\BackendTemplate'   => 'system/modules/backend/BackendTemplate.php',
-	'Contao\\BackendUser'       => 'system/modules/backend/BackendUser.php',
 	'Contao\\CheckBox'          => 'system/modules/backend/CheckBox.php',
 	'Contao\\CheckBoxWizard'    => 'system/modules/backend/CheckBoxWizard.php',
 	'Contao\\ChmodTable'        => 'system/modules/backend/ChmodTable.php',
@@ -73,9 +72,12 @@ ClassLoader::addClasses(array
 	'Contao\\TrblField'         => 'system/modules/backend/TrblField.php',
 
 	// Drivers
-	'Contao\\DC_File'   => 'system/modules/backend/drivers/DC_File.php',
-	'Contao\\DC_Folder' => 'system/modules/backend/drivers/DC_Folder.php',
-	'Contao\\DC_Table'  => 'system/modules/backend/drivers/DC_Table.php',
+	'Contao\\DC_File'           => 'system/modules/backend/drivers/DC_File.php',
+	'Contao\\DC_Folder'         => 'system/modules/backend/drivers/DC_Folder.php',
+	'Contao\\DC_Table'          => 'system/modules/backend/drivers/DC_Table.php',
+
+	// Models
+	'Contao\\BackendUser'       => 'system/modules/backend/models/BackendUser.php',
 ));
 
 

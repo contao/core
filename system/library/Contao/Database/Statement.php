@@ -419,7 +419,7 @@ abstract class Database_Statement
 			}
 		}
 
-		$GLOBALS['TL_DEBUG']['db'][] = $arrData;
+		$GLOBALS['TL_DEBUG']['database_queries'][] = $arrData;
 	}
 
 

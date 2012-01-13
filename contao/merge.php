@@ -99,8 +99,26 @@ class Index extends Backend
 					$arrClassLoader = array();
 					$arrNamespaces = array();
 
+					$arrFiles = scan(TL_ROOT . '/system/modules/' . $strModule);
+
+					// Drivers
+					if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/drivers'))
+					{
+						$arrDrivers = scan(TL_ROOT . '/system/modules/' . $strModule . '/drivers');
+						$arrDrivers = array_map(function($val) { return 'drivers/' . $val; }, $arrDrivers);
+						$arrFiles = array_merge($arrFiles, $arrDrivers);
+					}
+
+					// Models
+					if (is_dir(TL_ROOT . '/system/modules/' . $strModule . '/models'))
+					{
+						$arrModels = scan(TL_ROOT . '/system/modules/' . $strModule . '/models');
+						$arrModels = array_map(function($val) { return 'models/' . $val; }, $arrModels);
+						$arrFiles = array_merge($arrFiles, $arrModels);
+					}
+
 					// Scan for classes
-					foreach (scan(TL_ROOT . '/system/modules/' . $strModule) as $strFile)
+					foreach ($arrFiles as $strFile)
 					{
 						if (strrchr($strFile, '.') != '.php')
 						{
@@ -237,8 +255,20 @@ ClassLoader::addClasses(array
 EOT
 						);
 
+						$strGroup = null;
+
 						foreach ($arrClassLoader as $strClass=>$strPath)
 						{
+							if ($strGroup === null)
+							{
+								$strGroup = dirname($strPath);
+							}
+							elseif (dirname($strPath) != $strGroup)
+							{
+								$strGroup = dirname($strPath);
+								$objFile->append("\n\t// " . ucfirst(basename($strGroup)));
+							}
+
 							$strClass = "'" . $strClass . "'";
 							$objFile->append("\t" . str_pad($strClass, $intClassWidth+2) . " => '$strPath',");
 						}

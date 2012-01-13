@@ -68,7 +68,6 @@ ClassLoader::addClasses(array
 	'Contao\\FormTextField'      => 'system/modules/frontend/FormTextField.php',
 	'Contao\\Frontend'           => 'system/modules/frontend/Frontend.php',
 	'Contao\\FrontendTemplate'   => 'system/modules/frontend/FrontendTemplate.php',
-	'Contao\\FrontendUser'       => 'system/modules/frontend/FrontendUser.php',
 	'Contao\\Hybrid'             => 'system/modules/frontend/Hybrid.php',
 	'Contao\\Module'             => 'system/modules/frontend/Module.php',
 	'Contao\\ModuleArticle'      => 'system/modules/frontend/ModuleArticle.php',
@@ -95,6 +94,9 @@ ClassLoader::addClasses(array
 	'Contao\\PageRegular'        => 'system/modules/frontend/PageRegular.php',
 	'Contao\\PageRoot'           => 'system/modules/frontend/PageRoot.php',
 	'Contao\\Pagination'         => 'system/modules/frontend/Pagination.php',
+
+	// Models
+	'Contao\\FrontendUser'       => 'system/modules/frontend/models/FrontendUser.php',
 ));
 
 

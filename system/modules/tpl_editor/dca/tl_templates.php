@@ -56,10 +56,6 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 		'onload_callback' => array
 		(
 			array('tl_templates', 'addBreadcrumb'),
-		),
-		'ondelete_callback' => array
-		(
-			array('tl_templates', 'deleteFromTemplateCache')
 		)
 	),
 
@@ -140,12 +136,7 @@ $GLOBALS['TL_DCA']['tl_templates'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'spaceToUnderscore'=>true),
-			'save_callback' => array
-			(
-				array('tl_templates', 'updateTemplateCache')
-			)
-		)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'spaceToUnderscore'=>true)		)
 	)
 );
 
@@ -253,12 +244,6 @@ class tl_templates extends Backend
 				{
 					$this->import('Files');
 					$this->Files->copy('system/modules/' . $strOriginal, $strTarget);
-
-					// Update the templates cache
-					$objCache = FileCache::getInstance('templates');
-					$strKey = basename($strOriginal);
-					$objCache->$strKey = $strTarget;
-
 					$this->redirect($this->getReferer());
 				}
 			}
@@ -340,45 +325,6 @@ class tl_templates extends Backend
 </div>
 </div>
 </form>';
-	}
-
-
-	/**
-	 * Update the file cache if a template is renamed
-	 * @param string
-	 * @param DataContainer
-	 * @return string
-	 */
-	public function updateTemplateCache($strFile, DataContainer $dc)
-	{
-		// Nothing has changed
-		if ($strFile == $dc->value)
-		{
-			return $strFile;
-		}
-
-		$objCache = FileCache::getInstance('templates');
-
-		// The old template no longer exists
-		unset($objCache->{$dc->value});
-
-		// Store the new template path
-		$strPath = str_replace($dc->value, $strFile, $dc->id);
-		$objCache->$strFile = $strPath;
-
-		return $strFile;
-	}
-
-
-	/**
-	 * Update the file cache if a template is deleted
-	 * @param string
-	 */
-	public function deleteFromTemplateCache($strFile)
-	{
-		$objCache = FileCache::getInstance('templates');
-		$strKey = preg_replace('/^.*\/([^\/]+)\.[a-z0-9]{3,5}$/i', '$1', $strFile);
-		unset($objCache->$strKey);
 	}
 
 
