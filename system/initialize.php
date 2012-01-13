@@ -77,9 +77,9 @@ require(TL_ROOT . '/system/helper/interface.php');
  * Register the class and templtae loader
  */
 require TL_ROOT . '/system/library/Contao/ClassLoader.php';
-require TL_ROOT . '/system/library/Contao/TemplateLoader.php';
-
 class_alias('Contao\\ClassLoader', 'ClassLoader');
+
+require TL_ROOT . '/system/library/Contao/TemplateLoader.php';
 class_alias('Contao\\TemplateLoader', 'TemplateLoader');
 
 ClassLoader::scanAndRegister(); // scans for config/autoload.php files
@@ -98,7 +98,7 @@ $objToken = RequestToken::getInstance();
  * Set error_reporting
  */
 @ini_set('display_errors', ($GLOBALS['TL_CONFIG']['displayErrors'] ? 1 : 0));
-error_reporting(($GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
+error_reporting(($GLOBALS['TL_CONFIG']['displayErrors'] || $GLOBALS['TL_CONFIG']['logErrors'] ? E_ALL|E_STRICT : 0));
 
 
 /**

@@ -71,7 +71,6 @@ abstract class Controller extends System
 	 */
 	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
-		# FIXME: use the TemplateLoader
 		$arrAllowed = trimsplit(',', $GLOBALS['TL_CONFIG']['templateFiles']);
 		array_push($arrAllowed, 'html5'); // see #3398
 
@@ -81,104 +80,20 @@ abstract class Controller extends System
 		}
 
 		$strTemplate = basename($strTemplate);
-		$strKey = $strFilename = $strTemplate . '.' . $strFormat;
 
 		// Check for a theme folder
 		if (TL_MODE == 'FE')
 		{
 			global $objPage;
-			$strTemplateGroup = str_replace(array('../', 'templates/'), '', $objPage->templateGroup);
+			$strCustom = str_replace('../', '', $objPage->templateGroup);
 
-			if ($strTemplateGroup != '')
+			if ($strCustom != '')
 			{
-				$strKey = $strTemplateGroup . '/' . $strKey;
+				return \TemplateLoader::getPath($strTemplate, $strFormat, $strCustom);
 			}
 		}
 
-		$objCache = FileCache::getInstance('templates');
-
-		// Try to load the template path from the cache
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && isset($objCache->$strKey))
-		{
-			if (file_exists(TL_ROOT . '/' . $objCache->$strKey))
-			{
-				return TL_ROOT . '/' . $objCache->$strKey;
-			}
-			else
-			{
-				unset($objCache->$strKey);
-			}
-		}
-
-		$strPath = TL_ROOT . '/templates';
-
-		// Check the theme folder first
-		if (TL_MODE == 'FE' && $strTemplateGroup != '')
-		{
-			$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strFilename;
-
-			if (file_exists($strFile))
-			{
-				$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strFilename;
-				return $strFile;
-			}
-
-			// Also check for .tpl files (backwards compatibility)
-			$strFile = $strPath . '/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
-
-			if (file_exists($strFile))
-			{
-				$objCache->$strKey = 'templates/' . $strTemplateGroup . '/' . $strTemplate . '.tpl';
-				trigger_error('Using .tpl files (templates/'.$strTemplateGroup.'/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
-
-				return $strFile;
-			}
-		}
-
-		// Then check the global templates directory
-		$strFile = $strPath . '/' . $strFilename;
-
-		if (file_exists($strFile))
-		{
-			$objCache->$strKey = 'templates/' . $strFilename;
-			return $strFile;
-		}
-
-		// Also check for .tpl files (backwards compatibility)
-		$strFile = $strPath . '/' . $strTemplate . '.tpl';
-
-		if (file_exists($strFile))
-		{
-			$objCache->$strKey = 'templates/' . $strTemplate . '.tpl';
-			trigger_error('Using .tpl files (templates/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
-
-			return $strFile;
-		}
-
-		// At last browse all module folders in reverse order
-		foreach (array_reverse($this->Config->getActiveModules()) as $strModule)
-		{
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strFilename;
-
-			if (file_exists($strFile))
-			{
-				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strFilename;
-				return $strFile;
-			}
-
-			// Also check for .tpl files (backwards compatibility)
-			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
-
-			if (file_exists($strFile))
-			{
-				$objCache->$strKey = 'system/modules/' . $strModule . '/templates/' . $strTemplate . '.tpl';
-				trigger_error('Using .tpl files (system/modules/'.$strModule.'/templates/'.$strTemplate.'.tpl) is deprecated. Please use the new .html5 and .xhtml files instead.', E_USER_NOTICE);
-
-				return $strFile;
-			}
-		}
-
-		throw new \Exception('Could not find template file "' . $strFilename . '"');
+		return \TemplateLoader::getPath($strTemplate, $strFormat);
 	}
 
 

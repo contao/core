@@ -289,6 +289,12 @@ class Index extends Frontend
 		 */
 		if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 		{
+			// Return if the language is added to the URL and the empty domain will be redirected
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'])
+			{
+				return;
+			}
+ 
 			$strCacheKey = $this->Environment->base .'empty.'. $this->Environment->httpAcceptLanguage[0];
 		}
 		else

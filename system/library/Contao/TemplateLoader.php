@@ -87,44 +87,26 @@ class TemplateLoader
 
 
 	/**
-	 * Autoload a template
+	 * Return a template path
 	 * @param string
-	 */
-	public static function load($class)
-	{
-		if (class_exists($class, false) || interface_exists($class, false))
-		{
-			return;
-		}
-
-		if (isset(self::$classes[$class]))
-		{
-			include TL_ROOT . '/' . self::$classes[$class];
-		}
-		elseif (($namespaced = self::findClass($class)) != false)
-		{
-			include TL_ROOT . '/' . self::$classes[$namespaced];
-			class_alias($namespaced, $class);
-		}
-
-		// Pass the request to other autoloaders (e.g. Swift)
-	}
-
-
-	/**
-	 * Search the namespaces for a matching entry
 	 * @param string
 	 * @return string
 	 */
-	protected static function findClass($class)
+	public static function getPath($template, $format, $custom='templates')
 	{
-		foreach (self::$namespaces as $namespace)
+		$file = $template .  '.' . $format;
+
+		if (file_exists(TL_ROOT . '/' . $custom . '/' . $file))
 		{
-			if (isset(self::$classes[$namespace . '\\' . $class]))
-			{
-				return $namespace . '\\' . $class;
-			}
+			return TL_ROOT . '/' . $custom . '/' . $file;
 		}
+
+		if (isset(self::$files[$template]))
+		{
+			return TL_ROOT . '/' . self::$files[$template] . '/' . $file;
+		}
+
+		throw new \Exception('Could not find template "' . $template . '"');
 	}
 }
 
