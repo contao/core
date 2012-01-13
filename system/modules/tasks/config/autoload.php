@@ -23,18 +23,29 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    TaskCenter
+ * @package    Tasks
  * @license    LGPL
  */
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'ModuleTasks'  => 'system/modules/tasks/ModuleTasks.php',
-	'TaskMessages' => 'system/modules/tasks/TaskMessages.php'
+	'TaskMessages' => 'system/modules/tasks/TaskMessages.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'be_task_create' => 'system/modules/tasks/templates',
+	'be_task_edit'   => 'system/modules/tasks/templates',
+	'be_tasks'       => 'system/modules/tasks/templates',
 ));
 
 ?>

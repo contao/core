@@ -29,16 +29,35 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'Calendar'          => 'system/modules/calendar/Calendar.php',
 	'Events'            => 'system/modules/calendar/Events.php',
 	'ModuleCalendar'    => 'system/modules/calendar/ModuleCalendar.php',
-	'ModuleEventlist'   => 'system/modules/calendar/ModuleEventlist.php',
 	'ModuleEventMenu'   => 'system/modules/calendar/ModuleEventMenu.php',
-	'ModuleEventReader' => 'system/modules/calendar/ModuleEventReader.php'
+	'ModuleEventReader' => 'system/modules/calendar/ModuleEventReader.php',
+	'ModuleEventlist'   => 'system/modules/calendar/ModuleEventlist.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'cal_default'        => 'system/modules/calendar/templates',
+	'cal_mini'           => 'system/modules/calendar/templates',
+	'event_full'         => 'system/modules/calendar/templates',
+	'event_list'         => 'system/modules/calendar/templates',
+	'event_teaser'       => 'system/modules/calendar/templates',
+	'event_upcoming'     => 'system/modules/calendar/templates',
+	'mod_calendar'       => 'system/modules/calendar/templates',
+	'mod_event'          => 'system/modules/calendar/templates',
+	'mod_eventlist'      => 'system/modules/calendar/templates',
+	'mod_eventmenu'      => 'system/modules/calendar/templates',
+	'mod_eventmenu_year' => 'system/modules/calendar/templates',
 ));
 
 ?>

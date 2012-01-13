@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a merge script (`contao/merge.php`) which automatically prepares Contao 2
+extensions for Contao 3 by creating the `config/autoload.php` file.
+
 ### Improved
 Much nicer debug output.
 

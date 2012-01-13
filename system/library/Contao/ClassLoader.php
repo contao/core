@@ -35,14 +35,14 @@ namespace Contao;
 
 
 /**
- * Class Autoloader
+ * Class ClassLoader
  *
  * This class provides methods to automatically load class files.
  * @copyright  Leo Feyer 2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
  */
-class Autoloader
+class ClassLoader
 {
 
 	/**
@@ -233,21 +233,21 @@ class Autoloader
 	 */
 	public static function scanAndRegister()
 	{
-		$dir = new \DirectoryIterator(TL_ROOT . '/system/modules');
-
-		foreach ($dir as $file)
+		foreach (scan(TL_ROOT . '/system/modules') as $file)
 		{
-			if ($file->isDot() || !$file->isDir() || strncmp($file->getFilename(), '.', 1) === 0)
+			$path = TL_ROOT . '/system/modules/' . $file;
+
+			if (strncmp($file, '.', 1) === 0 || !is_dir($path))
 			{
 				continue;
 			}
 
-			if (file_exists($file->getPathname() . '/.skip') || !file_exists($file->getPathname() . '/config/autoload.php'))
+			if (file_exists($path . '/.skip') || !file_exists($path . '/config/autoload.php'))
 			{
 				continue;
 			}
 
-			include $file->getPathname() . '/config/autoload.php';
+			include $path . '/config/autoload.php';
 		}
 
 		self::register();

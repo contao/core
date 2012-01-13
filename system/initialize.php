@@ -74,11 +74,15 @@ require(TL_ROOT . '/system/helper/interface.php');
 
 
 /**
- * Register the autoloader
+ * Register the class and templtae loader
  */
-require TL_ROOT . '/system/library/Contao/Autoloader.php';
-class_alias('Contao\\Autoloader', 'Autoloader');
-Autoloader::scanAndRegister(); // scans for config/autoload.php files
+require TL_ROOT . '/system/library/Contao/ClassLoader.php';
+require TL_ROOT . '/system/library/Contao/TemplateLoader.php';
+
+class_alias('Contao\\ClassLoader', 'ClassLoader');
+class_alias('Contao\\TemplateLoader', 'TemplateLoader');
+
+ClassLoader::scanAndRegister(); // scans for config/autoload.php files
 
 
 /**

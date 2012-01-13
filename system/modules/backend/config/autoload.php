@@ -29,9 +29,9 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'Ajax'              => 'system/modules/backend/Ajax.php',
 	'Automator'         => 'system/modules/backend/Automator.php',
@@ -75,7 +75,39 @@ Autoloader::addClasses(array
 	// Drivers
 	'DC_File'   => 'system/modules/backend/drivers/DC_File.php',
 	'DC_Folder' => 'system/modules/backend/drivers/DC_Folder.php',
-	'DC_Table'  => 'system/modules/backend/drivers/DC_Table.php'
+	'DC_Table'  => 'system/modules/backend/drivers/DC_Table.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'be_error'         => 'system/modules/backend/templates',
+	'be_files'         => 'system/modules/backend/templates',
+	'be_help'          => 'system/modules/backend/templates',
+	'be_install'       => 'system/modules/backend/templates',
+	'be_live_update'   => 'system/modules/backend/templates',
+	'be_login'         => 'system/modules/backend/templates',
+	'be_main'          => 'system/modules/backend/templates',
+	'be_maintenance'   => 'system/modules/backend/templates',
+	'be_merge'         => 'system/modules/backend/templates',
+	'be_navigation'    => 'system/modules/backend/templates',
+	'be_pagepicker'    => 'system/modules/backend/templates',
+	'be_password'      => 'system/modules/backend/templates',
+	'be_popup'         => 'system/modules/backend/templates',
+	'be_preview'       => 'system/modules/backend/templates',
+	'be_purge_data'    => 'system/modules/backend/templates',
+	'be_rebuild_index' => 'system/modules/backend/templates',
+	'be_referer'       => 'system/modules/backend/templates',
+	'be_switch'        => 'system/modules/backend/templates',
+	'be_welcome'       => 'system/modules/backend/templates',
+	'be_widget'        => 'system/modules/backend/templates',
+	'be_widget_chk'    => 'system/modules/backend/templates',
+	'be_widget_pw'     => 'system/modules/backend/templates',
+	'be_widget_rdo'    => 'system/modules/backend/templates',
+	'be_wildcard'      => 'system/modules/backend/templates',
 ));
 
 ?>

@@ -29,13 +29,23 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'Comments'        => 'system/modules/comments/Comments.php',
 	'ContentComments' => 'system/modules/comments/ContentComments.php',
-	'ModuleComments'  => 'system/modules/comments/ModuleComments.php'
+	'ModuleComments'  => 'system/modules/comments/ModuleComments.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'ce_comments' => 'system/modules/comments/templates',
+	'com_default' => 'system/modules/comments/templates',
 ));
 
 ?>

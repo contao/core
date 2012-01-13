@@ -111,7 +111,7 @@ class RepositoryBackendModule extends BackendModule
 		$rep->f_action	= $this->compiler;
 		$rep->f_mode	= $this->action;
 		$rep->theme		= new RepositoryBackendTheme();
-		$rep->backLink	= $this->getReferer(ENCODE_AMPERSANDS);
+		$rep->backLink	= $this->getReferer(true);
 		$rep->homeLink	= $this->createUrl();
 
 		// load soap client in case wsdl file is defined

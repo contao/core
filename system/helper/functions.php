@@ -29,13 +29,6 @@
 
 
 /**
- * Load the required classes for the file cache
- */
-include_once TL_ROOT . '/system/library/Contao/System.php';
-include_once TL_ROOT . '/system/library/Contao/FileCache.php';
-
-
-/**
  * Error handler
  *
  * Handle errors like PHP does it natively but additionaly log them to the
@@ -235,12 +228,7 @@ function specialchars($strString, $blnStripInsertTags=false)
 		$strString = strip_insert_tags($strString);
 	}
 
-	if (version_compare(PHP_VERSION, '5.2.3', '>='))
-	{
-		return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
-	}
-
-	return str_replace(array('&amp;amp;', '&amp;quot;', '&amp;lt;', '&amp;gt;'), array('&amp;', '&quot;', '&lt;', '&gt;'), htmlspecialchars($strString));
+	return htmlspecialchars($strString, ENT_COMPAT, $GLOBALS['TL_CONFIG']['characterSet'], false);
 }
 
 
@@ -369,18 +357,12 @@ function ampersand($strString, $blnEncode=true)
 /**
  * Replace line breaks with HTML5-style <br> tags
  * @param string
+ * @param boolean
  * @return string
  */
-function nl2br_html5($str)
+function nl2br_html5($str, $xhtml=false)
 {
-	if (version_compare(PHP_VERSION, '5.3.0') >= 0)
-	{
-		return nl2br($str, false);
-	}
-	else
-	{
-		return str_replace('<br />', '<br>', nl2br($str));
-	}
+	return nl2br($str, $xhtml);
 }
 
 

@@ -398,10 +398,16 @@ abstract class Database_Statement
 
 		$arrData[] = $this->strQuery;
 
-		if ($objResult === null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
+		if ($objResult === null || strncasecmp($this->strQuery, 'SELECT', 6) !== 0)
 		{
-			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
-			$GLOBALS['TL_DEBUG']['db'][] = $arrData;
+			if (strncasecmp($this->strQuery, 'SHOW', 4) === 0)
+			{
+				$arrData[] = sprintf('%s rows returned', $this->affectedRows);
+			}
+			else
+			{
+				$arrData[] = sprintf('%d rows affected', $this->affectedRows);
+			}
 		}
 		else
 		{
@@ -411,9 +417,9 @@ abstract class Database_Statement
 			{
 				$arrData[] = $arrExplain;
 			}
-
-			$GLOBALS['TL_DEBUG']['db'][] = $arrData;
 		}
+
+		$GLOBALS['TL_DEBUG']['db'][] = $arrData;
 	}
 
 

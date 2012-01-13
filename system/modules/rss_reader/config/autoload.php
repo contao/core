@@ -23,17 +23,27 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    RssReader
+ * @package    Rss_reader
  * @license    LGPL
  */
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
-	'ModuleRssReader' => 'system/modules/rss_reader/ModuleRssReader.php'
+	'ModuleRssReader' => 'system/modules/rss_reader/ModuleRssReader.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'rss_default'    => 'system/modules/rss_reader/templates',
+	'rss_items_only' => 'system/modules/rss_reader/templates',
 ));
 
 ?>

@@ -29,28 +29,7 @@
 
 
 /**
- * -------------------------------------------------------------------------
- * GENERAL CONSTANTS
- * -------------------------------------------------------------------------
- *
- * The URL_SUFFIX will be added to the URI string to simulate the use of
- * static documents (search engine optimization).
- * 
- * If you are using the Environment library to get environment parameters,
- * you can choose whether to ENCODE_AMPERSANDS or not.
- * 
- * If you are rendering widgets with error message, you can choose whether
- * to change the order (default order: error message above input field).
- */
-define('URL_SUFFIX', '.html');
-define('ENCODE_AMPERSANDS', true);
-define('SWITCH_ORDER', true);
-
-
-/**
- * -------------------------------------------------------------------------
- * CORE AND PLUGIN VERSIONS
- * -------------------------------------------------------------------------
+ * Core and plugin versions
  * 
  * Version numbers are added to style sheets and JavaScript files to make
  * the web browser reload those resources after a Contao update.
@@ -68,25 +47,7 @@ define('TABLESORT', '1.3.1');
 
 
 /**
- * -------------------------------------------------------------------------
- * INPUT CONSTANTS
- * -------------------------------------------------------------------------
- *
- * These constants can be used with methods of the input library. You can
- * choose whether to ALLOW_HTML and whether to DECODE_ENTITIES.
- * 
- * Usage example:
- *   echo $this->Input->post('input_field', ALLOW_HTML, DECODE_ENTITIES);
- */
-define('ALLOW_HTML', true);
-define('DECODE_ENTITIES', true);
-define('STRICT_MODE', true);
-
-
-/**
- * -------------------------------------------------------------------------
- * LINK CONSTANTS
- * -------------------------------------------------------------------------
+ * Link constants
  *
  * These constants can be used with any HTML link. Their primary purpose is
  * to provide an accessible alternative for common operations.
@@ -100,9 +61,7 @@ define('LINK_NEW_WINDOW_BLUR', ' onclick="this.blur();window.open(this.href);ret
 
 
 /**
- * -------------------------------------------------------------------------
- * LOG CONSTANTS
- * -------------------------------------------------------------------------
+ * Log constants
  *
  * These constants can be used with method $this->log() to add log entries.
  * 

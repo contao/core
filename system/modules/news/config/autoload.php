@@ -29,16 +29,35 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'ModuleNews'        => 'system/modules/news/ModuleNews.php',
 	'ModuleNewsArchive' => 'system/modules/news/ModuleNewsArchive.php',
 	'ModuleNewsList'    => 'system/modules/news/ModuleNewsList.php',
 	'ModuleNewsMenu'    => 'system/modules/news/ModuleNewsMenu.php',
 	'ModuleNewsReader'  => 'system/modules/news/ModuleNewsReader.php',
-	'News'              => 'system/modules/news/News.php'
+	'News'              => 'system/modules/news/News.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'mod_newsarchive'       => 'system/modules/news/templates',
+	'mod_newsarchive_empty' => 'system/modules/news/templates',
+	'mod_newslist'          => 'system/modules/news/templates',
+	'mod_newsmenu'          => 'system/modules/news/templates',
+	'mod_newsmenu_day'      => 'system/modules/news/templates',
+	'mod_newsmenu_year'     => 'system/modules/news/templates',
+	'mod_newsreader'        => 'system/modules/news/templates',
+	'news_full'             => 'system/modules/news/templates',
+	'news_latest'           => 'system/modules/news/templates',
+	'news_short'            => 'system/modules/news/templates',
+	'news_simple'           => 'system/modules/news/templates',
 ));
 
 ?>

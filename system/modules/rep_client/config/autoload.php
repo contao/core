@@ -23,20 +23,36 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
+ * @package    Rep_client
  * @license    LGPL
  */
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'RepositoryBackendModule' => 'system/modules/rep_client/RepositoryBackendModule.php',
 	'RepositoryBackendTheme'  => 'system/modules/rep_client/RepositoryBackendTheme.php',
 	'RepositoryCatalog'       => 'system/modules/rep_client/RepositoryCatalog.php',
-	'RepositoryManager'       => 'system/modules/rep_client/RepositoryManager.php'
+	'RepositoryManager'       => 'system/modules/rep_client/RepositoryManager.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'repository_catlist' => 'system/modules/rep_client/templates',
+	'repository_catview' => 'system/modules/rep_client/templates',
+	'repository_mgredit' => 'system/modules/rep_client/templates',
+	'repository_mgrinst' => 'system/modules/rep_client/templates',
+	'repository_mgrlist' => 'system/modules/rep_client/templates',
+	'repository_mgruist' => 'system/modules/rep_client/templates',
+	'repository_mgrupdt' => 'system/modules/rep_client/templates',
+	'repository_mgrupgd' => 'system/modules/rep_client/templates',
 ));
 
 ?>

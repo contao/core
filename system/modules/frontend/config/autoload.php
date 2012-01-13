@@ -29,9 +29,9 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'ContentAccordion'   => 'system/modules/frontend/ContentAccordion.php',
 	'ContentAlias'       => 'system/modules/frontend/ContentAlias.php',
@@ -94,7 +94,80 @@ Autoloader::addClasses(array
 	'PageRedirect'       => 'system/modules/frontend/PageRedirect.php',
 	'PageRegular'        => 'system/modules/frontend/PageRegular.php',
 	'PageRoot'           => 'system/modules/frontend/PageRoot.php',
-	'Pagination'         => 'system/modules/frontend/Pagination.php'
+	'Pagination'         => 'system/modules/frontend/Pagination.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'ce_accordion'        => 'system/modules/frontend/templates',
+	'ce_accordion_start'  => 'system/modules/frontend/templates',
+	'ce_accordion_stop'   => 'system/modules/frontend/templates',
+	'ce_code'             => 'system/modules/frontend/templates',
+	'ce_download'         => 'system/modules/frontend/templates',
+	'ce_downloads'        => 'system/modules/frontend/templates',
+	'ce_gallery'          => 'system/modules/frontend/templates',
+	'ce_headline'         => 'system/modules/frontend/templates',
+	'ce_html'             => 'system/modules/frontend/templates',
+	'ce_hyperlink'        => 'system/modules/frontend/templates',
+	'ce_hyperlink_image'  => 'system/modules/frontend/templates',
+	'ce_image'            => 'system/modules/frontend/templates',
+	'ce_list'             => 'system/modules/frontend/templates',
+	'ce_table'            => 'system/modules/frontend/templates',
+	'ce_teaser'           => 'system/modules/frontend/templates',
+	'ce_text'             => 'system/modules/frontend/templates',
+	'ce_toplink'          => 'system/modules/frontend/templates',
+	'fe_page'             => 'system/modules/frontend/templates',
+	'form'                => 'system/modules/frontend/templates',
+	'form_captcha'        => 'system/modules/frontend/templates',
+	'form_checkbox'       => 'system/modules/frontend/templates',
+	'form_explanation'    => 'system/modules/frontend/templates',
+	'form_headline'       => 'system/modules/frontend/templates',
+	'form_hidden'         => 'system/modules/frontend/templates',
+	'form_html'           => 'system/modules/frontend/templates',
+	'form_message'        => 'system/modules/frontend/templates',
+	'form_password'       => 'system/modules/frontend/templates',
+	'form_radio'          => 'system/modules/frontend/templates',
+	'form_submit'         => 'system/modules/frontend/templates',
+	'form_widget'         => 'system/modules/frontend/templates',
+	'form_xml'            => 'system/modules/frontend/templates',
+	'gallery_default'     => 'system/modules/frontend/templates',
+	'mail_default'        => 'system/modules/frontend/templates',
+	'member_default'      => 'system/modules/frontend/templates',
+	'member_grouped'      => 'system/modules/frontend/templates',
+	'mod_article'         => 'system/modules/frontend/templates',
+	'mod_article_list'    => 'system/modules/frontend/templates',
+	'mod_article_nav'     => 'system/modules/frontend/templates',
+	'mod_article_plain'   => 'system/modules/frontend/templates',
+	'mod_article_teaser'  => 'system/modules/frontend/templates',
+	'mod_booknav'         => 'system/modules/frontend/templates',
+	'mod_breadcrumb'      => 'system/modules/frontend/templates',
+	'mod_flash'           => 'system/modules/frontend/templates',
+	'mod_html'            => 'system/modules/frontend/templates',
+	'mod_login_1cl'       => 'system/modules/frontend/templates',
+	'mod_login_2cl'       => 'system/modules/frontend/templates',
+	'mod_logout_1cl'      => 'system/modules/frontend/templates',
+	'mod_logout_2cl'      => 'system/modules/frontend/templates',
+	'mod_message'         => 'system/modules/frontend/templates',
+	'mod_navigation'      => 'system/modules/frontend/templates',
+	'mod_quicklink'       => 'system/modules/frontend/templates',
+	'mod_quicknav'        => 'system/modules/frontend/templates',
+	'mod_random_image'    => 'system/modules/frontend/templates',
+	'mod_search'          => 'system/modules/frontend/templates',
+	'mod_search_advanced' => 'system/modules/frontend/templates',
+	'mod_search_simple'   => 'system/modules/frontend/templates',
+	'mod_sitemap'         => 'system/modules/frontend/templates',
+	'moo_accordion'       => 'system/modules/frontend/templates',
+	'moo_analytics'       => 'system/modules/frontend/templates',
+	'moo_chosen'          => 'system/modules/frontend/templates',
+	'moo_mediabox'        => 'system/modules/frontend/templates',
+	'moo_slimbox'         => 'system/modules/frontend/templates',
+	'nav_default'         => 'system/modules/frontend/templates',
+	'pagination'          => 'system/modules/frontend/templates',
+	'search_default'      => 'system/modules/frontend/templates',
 ));
 
 ?>

@@ -29,11 +29,21 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
-	'ModuleListing' => 'system/modules/listing/ModuleListing.php'
+	'ModuleListing' => 'system/modules/listing/ModuleListing.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'info_default' => 'system/modules/listing/templates',
+	'list_default' => 'system/modules/listing/templates',
 ));
 
 ?>

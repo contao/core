@@ -29,15 +29,27 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'ModuleNewsletterList'   => 'system/modules/newsletter/ModuleNewsletterList.php',
 	'ModuleNewsletterReader' => 'system/modules/newsletter/ModuleNewsletterReader.php',
 	'ModuleSubscribe'        => 'system/modules/newsletter/ModuleSubscribe.php',
 	'ModuleUnsubscribe'      => 'system/modules/newsletter/ModuleUnsubscribe.php',
-	'Newsletter'             => 'system/modules/newsletter/Newsletter.php'
+	'Newsletter'             => 'system/modules/newsletter/Newsletter.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'mod_newsletter'        => 'system/modules/newsletter/templates',
+	'mod_newsletter_list'   => 'system/modules/newsletter/templates',
+	'mod_newsletter_reader' => 'system/modules/newsletter/templates',
+	'nl_default'            => 'system/modules/newsletter/templates',
 ));
 
 ?>

@@ -29,14 +29,25 @@
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'ModuleFaq'       => 'system/modules/faq/ModuleFaq.php',
 	'ModuleFaqList'   => 'system/modules/faq/ModuleFaqList.php',
 	'ModuleFaqPage'   => 'system/modules/faq/ModuleFaqPage.php',
-	'ModuleFaqReader' => 'system/modules/faq/ModuleFaqReader.php'
+	'ModuleFaqReader' => 'system/modules/faq/ModuleFaqReader.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
+	'mod_faqlist'   => 'system/modules/faq/templates',
+	'mod_faqpage'   => 'system/modules/faq/templates',
+	'mod_faqreader' => 'system/modules/faq/templates',
 ));
 
 ?>

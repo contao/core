@@ -23,18 +23,26 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Repository
+ * @package    Rep_base
  * @license    LGPL
  */
 
 
 /**
- * Register the module classes
+ * Register the classes
  */
-Autoloader::addClasses(array
+ClassLoader::addClasses(array
 (
 	'Repository'         => 'system/modules/rep_base/Repository.php',
-	'RepositorySettings' => 'system/modules/rep_base/RepositorySettings.php'
+	'RepositorySettings' => 'system/modules/rep_base/RepositorySettings.php',
+));
+
+
+/**
+ * Register the templates
+ */
+TemplateLoader::addFiles(array
+(
 ));
 
 ?>
