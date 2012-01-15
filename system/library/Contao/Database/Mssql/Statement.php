@@ -130,7 +130,7 @@ class Database_Mssql_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return \Database_Mssql_Result
+	 * @return Database_Mssql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

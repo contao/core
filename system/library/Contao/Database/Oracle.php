@@ -225,7 +225,7 @@ class Database_Oracle extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Database_Oracle_Statement
+	 * @return Database_Oracle_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

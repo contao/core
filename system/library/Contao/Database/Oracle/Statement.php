@@ -172,7 +172,7 @@ class Database_Oracle_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return \Database_Oracle_Result
+	 * @return Database_Oracle_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

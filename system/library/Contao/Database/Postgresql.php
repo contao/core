@@ -232,7 +232,7 @@ class Database_Postgresql extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Database_Postgresql_Statement
+	 * @return Database_Postgresql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

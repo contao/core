@@ -137,7 +137,7 @@ class Database_Mysqli_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return \Database_Mysqli_Result
+	 * @return Database_Mysqli_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

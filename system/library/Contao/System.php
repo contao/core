@@ -162,12 +162,14 @@ abstract class System
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
-		$strKey = ($strKey != '') ? $strKey : $strClass;
+		$strKey = $strKey ?: $strClass;
 
-		if ($blnForce || !is_object($this->$strKey))
+		if (!$blnForce && is_object($this->$strKey))
 		{
-			$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
+			return;
 		}
+
+		$this->$strKey = (in_array('getInstance', get_class_methods($strClass))) ? call_user_func(array($strClass, 'getInstance')) : new $strClass();
 	}
 
 

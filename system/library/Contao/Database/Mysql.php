@@ -319,7 +319,7 @@ class Database_Mysql extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Database_Mysql_Statement
+	 * @return Database_Mysql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

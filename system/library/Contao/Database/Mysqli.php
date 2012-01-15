@@ -294,7 +294,7 @@ class Database_Mysqli extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return \Database_Mysqli_Statement
+	 * @return Database_Mysqli_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{
