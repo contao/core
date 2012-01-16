@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-abstract class User extends \ModelOld
+abstract class User extends \System
 {
 
 	/**
@@ -105,11 +105,75 @@ abstract class User extends \ModelOld
 	 */
 	protected $objLogout;
 
+	/**
+	 * Data array
+	 * @var array
+	 */
+	protected $arrData = array();
+
+
+	/**
+	 * Import the database object
+	 */
+	protected function __construct()
+	{
+		parent::__construct();
+		$this->import('Database');
+	}
+
 
 	/**
 	 * Prevent cloning of the object (Singleton)
 	 */
 	final private function __clone() {}
+
+
+	/**
+	 * Set an object property
+	 * @param string
+	 * @param mixed
+	 */
+	public function __set($strKey, $varValue)
+	{
+		$this->arrData[$strKey] = $varValue;
+	}
+
+
+	/**
+	 * Return an object property
+	 * @param string
+	 * @return mixed
+	 */
+	public function __get($strKey)
+	{
+		return $this->arrData[$strKey];
+	}
+
+
+	/**
+	 * Check whether a property is set
+	 * @param string
+	 * @return boolean
+	 */
+	public function __isset($strKey)
+	{
+		return isset($this->arrData[$strKey]);
+	}
+
+
+	/**
+	 * Instantiate a new cache object and return it (Factory)
+	 * @return Cache
+	 */
+	public static function getInstance()
+	{
+		if (!is_object(static::$objInstance))
+		{
+			static::$objInstance = new static();
+		}
+
+		return static::$objInstance;
+	}
 
 
 	/**
@@ -367,6 +431,39 @@ abstract class User extends \ModelOld
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Find a used in the database
+	 * @param string
+	 * @param mixed
+	 * @return boolean
+	 */
+	public function findBy($strColumn, $varValue)
+	{
+		$objResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $strColumn . "=?")
+									->limit(1)
+									->executeUncached($varValue);
+
+		if ($objResult->numRows > 0)
+		{
+			$this->arrData = $objResult->row();
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Update the current record
+	 */
+	public function save()
+	{
+		return $this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
+							  ->set($this->arrData)
+							  ->execute($this->id);
 	}
 
 

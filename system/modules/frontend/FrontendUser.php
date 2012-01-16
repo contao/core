@@ -165,21 +165,6 @@ class FrontendUser extends \User
 				break;
 		}
 	}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return FrontendUser
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(static::$objInstance))
-		{
-			static::$objInstance = new static();
-		}
-
-		return static::$objInstance;
-	}
 	
 
 	/**
@@ -296,9 +281,9 @@ class FrontendUser extends \User
 	 * @param integer
 	 * @return boolean
 	 */
-	public function findBy($strRefField, $varRefId)
+	public function findBy($strColumn, $varValue)
 	{
-		if (parent::findBy($strRefField, $varRefId) === false)
+		if (parent::findBy($strColumn, $varValue) === false)
 		{
 			return false;
 		}

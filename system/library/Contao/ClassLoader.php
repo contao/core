@@ -76,7 +76,6 @@ class ClassLoader
 		'Contao\\FTP'          => 'system/library/Contao/FTP.php',
 		'Contao\\Input'        => 'system/library/Contao/Input.php',
 		'Contao\\Model'        => 'system/library/Contao/Model.php',
-		'Contao\\ModelOld'     => 'system/library/Contao/ModelOld.php', # FIXME
 		'Contao\\Request'      => 'system/library/Contao/Request.php',
 		'Contao\\RequestToken' => 'system/library/Contao/RequestToken.php',
 		'Contao\\Search'       => 'system/library/Contao/Search.php',
