@@ -194,12 +194,12 @@ class FileCache extends \System
 	 */
 	public static function getInstance($strFile)
 	{
-		if (!isset(self::$arrInstances[$strFile]))
+		if (!isset(static::$arrInstances[$strFile]))
 		{
-			self::$arrInstances[$strFile] = new self($strFile);
+			static::$arrInstances[$strFile] = new static($strFile);
 		}
 
-		return self::$arrInstances[$strFile];
+		return static::$arrInstances[$strFile];
 	}
 }
 

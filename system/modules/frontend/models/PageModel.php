@@ -35,99 +35,40 @@ namespace Contao;
 
 
 /**
- * Class BackendModule
+ * Class PageModel
  *
- * Parent class for back end modules that are not using the default engine.
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-abstract class BackendModule extends \Backend
+class PageModel extends \Model
 {
 
 	/**
-	 * Template
+	 * Name of the table
 	 * @var string
 	 */
-	protected $strTemplate;
-
-	/**
-	 * Data container object
-	 * @var object
-	 */
-	protected $objDc;
-
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
+	protected static $strTable = 'tl_page';
 
 
 	/**
-	 * Initialize the object
-	 * @param DataContainer
+	 * Find the parent records of a record
+	 * @param integer
+	 * @return Model|null
 	 */
-	public function __construct(DataContainer $objDc=null)
+	public static function findParentsFrom($intId)
 	{
-		parent::__construct();
-		$this->objDc = $objDc;
-	}
+		$objPages = \Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
+											->execute($intId);
 
-
-	/**
-	 * Set an object property
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		$this->arrData[$strKey] = $varValue;
-	}
-
-
-	/**
-	 * Return an object property
-	 * @param string
-	 * @return mixed
-	 */
-	public function __get($strKey)
-	{
-		if (isset($this->arrData[$strKey]))
-		{
-			return $this->arrData[$strKey];
-		}
-
-		try
-		{
-			return $this->objDc->$strKey;
-		}
-		catch (Exception $e)
+		if ($objPages->numRows < 1)
 		{
 			return null;
 		}
 
-		return $e;
+		return new static($objPages);
 	}
-
-
-	/**
-	 * Parse the template
-	 * @return string
-	 */
-	public function generate()
-	{
-		$this->Template = new \BackendTemplate($this->strTemplate);
-		$this->compile();
-
-		return $this->Template->parse();
-	}
-
-
-	/**
-	 * Compile the current element
-	 */
-	abstract protected function compile();
 }
 
 ?>

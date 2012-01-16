@@ -35,99 +35,41 @@ namespace Contao;
 
 
 /**
- * Class BackendModule
+ * Class FormModel
  *
- * Parent class for back end modules that are not using the default engine.
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-abstract class BackendModule extends \Backend
+class FormModel extends \Model
 {
 
 	/**
-	 * Template
+	 * Name of the table
 	 * @var string
 	 */
-	protected $strTemplate;
-
-	/**
-	 * Data container object
-	 * @var object
-	 */
-	protected $objDc;
-
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
+	protected static $strTable = 'tl_form';
 
 
 	/**
-	 * Initialize the object
-	 * @param DataContainer
-	 */
-	public function __construct(DataContainer $objDc=null)
-	{
-		parent::__construct();
-		$this->objDc = $objDc;
-	}
-
-
-	/**
-	 * Set an object property
-	 * @param string
+	 * Find a form by its ID or alias
 	 * @param mixed
+	 * @return Model
 	 */
-	public function __set($strKey, $varValue)
+	public static function findByIdOrAlias($varId)
 	{
-		$this->arrData[$strKey] = $varValue;
-	}
+		$objElement = \Database::getInstance()->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
+											  ->limit(1)
+											  ->execute((is_numeric($varId) ? $varId : 0), $varId);
 
-
-	/**
-	 * Return an object property
-	 * @param string
-	 * @return mixed
-	 */
-	public function __get($strKey)
-	{
-		if (isset($this->arrData[$strKey]))
-		{
-			return $this->arrData[$strKey];
-		}
-
-		try
-		{
-			return $this->objDc->$strKey;
-		}
-		catch (Exception $e)
+		if ($objElement->numRows < 1)
 		{
 			return null;
 		}
 
-		return $e;
+		return new static($objElement);
 	}
-
-
-	/**
-	 * Parse the template
-	 * @return string
-	 */
-	public function generate()
-	{
-		$this->Template = new \BackendTemplate($this->strTemplate);
-		$this->compile();
-
-		return $this->Template->parse();
-	}
-
-
-	/**
-	 * Compile the current element
-	 */
-	abstract protected function compile();
 }
 
 ?>

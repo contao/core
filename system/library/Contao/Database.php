@@ -126,13 +126,13 @@ abstract class Database
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(self::$objInstance))
+		if (!is_object(static::$objInstance))
 		{
 			$strClass = '\\Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
-			self::$objInstance = new $strClass();
+			static::$objInstance = new $strClass();
 		}
 
-		return self::$objInstance;
+		return static::$objInstance;
 	}
 
 

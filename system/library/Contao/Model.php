@@ -46,28 +46,22 @@ abstract class Model extends \System
 {
 
 	/**
-	 * Name of the current table
+	 * Name of the table
 	 * @var string
 	 */
-	protected $strTable;
+	protected static $strTable;
 
 	/**
-	 * Name of the field that references the active record
+	 * Primary key
 	 * @var string
 	 */
-	protected $strRefField;
-
-	/**
-	 * Value of the field that references the active record
-	 * @var mixed
-	 */
-	protected $varRefId;
+	protected static $strPk = 'id';
 
 	/**
 	 * Database result
 	 * @var Database_Result
 	 */
-	protected $resResult;
+	protected $objResult;
 
 	/**
 	 * Data array
@@ -76,19 +70,26 @@ abstract class Model extends \System
 	protected $arrData = array();
 
 	/**
-	 * Indicate whether the current record exists
+	 * True if the record exists
 	 * @var boolean
 	 */
-	protected $blnRecordExists = false;
+	protected $blnExists = false;
 
 
 	/**
-	 * Import the database object
+	 * Optionally take a result set
+	 * @param Database_Result
 	 */
-	protected function __construct()
+	public function __construct(\Database_Result $objResult=null)
 	{
 		parent::__construct();
-		$this->import('Database');
+
+		if ($objResult !== null)
+		{
+			$this->setData($objResult->row());
+			$this->objResult = $objResult->reset();
+			$this->blnExists = true;
+		} 
 	}
 
 
@@ -139,7 +140,7 @@ abstract class Model extends \System
 
 		if (!is_array($varData))
 		{
-			throw new \Exception('Array required to set data');
+			throw new \Exception('Array or object required to set data');
 		}
 
 		$this->arrData = $varData;
@@ -157,58 +158,210 @@ abstract class Model extends \System
 
 
 	/**
-	 * Return the database result object
-	 * @return Database_Result
+	 * Return the number of rows in the result set
+	 * @return integer
 	 */
-	public function getDatabaseResult()
+	public function count()
 	{
-		return $this->resResult;
+		return $this->objResult->numRows;
 	}
 
 
 	/**
-	 * Set the current record from a database result row
-	 * @param Database_Result
-	 * @param string
-	 * @param string
-	 */
-	public function setFromRow(\Database_Result $resResult, $strTable, $strRefField)
-	{
-		$this->strTable = $strTable;
-		$this->strRefField = $strRefField;
-		$this->varRefId = $resResult->$strRefField;
-
-		$this->resResult = $resResult;
-		$this->arrData = $resResult->row();
-		$this->blnRecordExists = true;
-	}
-
-
-	/**
-	 * Find a record by its reference field and return true if it has been found
-	 * @param string
-	 * @param integer
+	 * Return the first row
 	 * @return boolean
 	 */
-	public function findBy($strRefField, $varRefId)
+	public function first()
 	{
-		$this->blnRecordExists = false;
-		$this->strRefField = $strRefField;
-		$this->varRefId = $varRefId;
+		$return = $this->objResult->first();
 
-		$resResult = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strRefField . "=?")
-									->executeUncached($this->varRefId);
-
-		if ($resResult->numRows == 1)
+		if ($return !== false)
 		{
-			$this->resResult = $resResult;
-			$this->arrData = $resResult->fetchAssoc();
-			$this->blnRecordExists = true;
-
+			$this->setData($this->objResult->row());
 			return true;
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Return the previous row
+	 * @return boolean
+	 */
+	public function prev()
+	{
+		$return = $this->objResult->prev();
+
+		if ($return !== false)
+		{
+			$this->setData($this->objResult->row());
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Return the next row
+	 * @return boolean
+	 */
+	public function next()
+	{
+		$return = $this->objResult->next();
+
+		if ($return !== false)
+		{
+			$this->setData($this->objResult->row());
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Return the last row
+	 * @return boolean
+	 */
+	public function last()
+	{
+		$return = $this->objResult->last();
+
+		if ($return !== false)
+		{
+			$this->setData($this->objResult->row());
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Return the current row
+	 * @return array
+	 */
+	public function row()
+	{
+		return $this->getData();
+	}
+
+
+	/**
+	 * Reset the model
+	 */
+	public function reset()
+	{
+		$this->objResult->reset();
+		$this->arrData = array();
+	}
+
+
+	/**
+	 * Find a record and return the model
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param integer
+	 * @param integer
+	 * @return Model
+	 */
+	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
+	{
+		if (static::$strTable == '')
+		{
+			return null;
+		}
+
+		$strQuery = "SELECT * FROM " . static::$strTable;
+
+		if ($strColumn !== null)
+		{
+			$strQuery .= " WHERE " . $strColumn . "=?";
+		}
+
+		if ($strOrder !== null)
+		{
+			$strQuery .= " ORDER BY " . $strOrder;
+		}
+
+		$objStatement = \Database::getInstance()->prepare($strQuery);
+
+		if ($intLimit > 0 || $intOffset > 0)
+		{
+			$objStatement->limit($intLimit, $intOffset);
+		}
+
+		$objStatement = static::preFind($objStatement);
+		$objResult = $objStatement->executeUncached($varValue);
+
+		if ($objResult->numRows < 1)
+		{
+			return null;
+		}
+
+		$objResult = static::postFind($objResult);
+		return new static($objResult);
+	}
+
+
+	/**
+	 * Find a record by its primary key
+	 * @param string
+	 * @param string
+	 * @return Model 
+	 */
+	public static function findOneBy($strColumn, $varValue)
+	{
+		return static::findBy($strColumn, $varValue, null, 1);
+	}
+
+
+	/**
+	 * Find a record by its primary key
+	 * @param string
+	 * @return Model 
+	 */
+	public static function findByPk($varValue)
+	{
+		return static::findBy(static::$strPk, $varValue, null, 1);
+	}
+
+
+	/**
+	 * Find all records and return the model
+	 * @param string
+	 * @param integer
+	 * @param integer
+	 * @return Model
+	 */
+	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0)
+	{
+		return static::findBy(null, null, $strOrder, $intLimit, $intOffset);
+	}
+
+
+	/**
+	 * Modify the statement before it is executed
+	 * @param Database_Statement
+	 * @return Database_Statement
+	 */
+	protected static function preFind(\Database_Statement $objStatement)
+	{
+		return $objStatement;
+	}
+
+
+	/**
+	 * Modify the result set before the model is created
+	 * @param Database_Statement
+	 * @return Database_Statement
+	 */
+	protected static function postFind(\Database_Result $objResult)
+	{
+		return $objResult;
 	}
 
 
@@ -219,20 +372,36 @@ abstract class Model extends \System
 	 */
 	public function save($blnForceInsert=false)
 	{
-		if ($this->blnRecordExists && !$blnForceInsert)
+		$this->import('Database');
+		$arrSet = $this->preSave($this->arrData);
+
+		if (!$this->blnExists || $blnForceInsert)
 		{
-			return $this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE " . $this->strRefField . "=?")
-								  ->set($this->arrData)
-								  ->execute($this->varRefId)
-								  ->affectedRows;
-		}
-		else
-		{
-			return $this->Database->prepare("INSERT INTO " . $this->strTable . " %s")
-								  ->set($this->arrData)
+			$this->blnExists = true;
+
+			return $this->Database->prepare("INSERT INTO " . static::$strTable . " %s")
+								  ->set($arrSet)
 								  ->execute()
 								  ->insertId;
 		}
+		else
+		{
+			return $this->Database->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+								  ->set($arrSet)
+								  ->execute($this->{static::$strPk})
+								  ->affectedRows;
+		}
+	}
+
+
+	/**
+	 * Modify the current row before it is stored in the database
+	 * @param array
+	 * @return array
+	 */
+	protected function preSave($arrSet)
+	{
+		return $arrSet;
 	}
 
 
@@ -242,8 +411,10 @@ abstract class Model extends \System
 	 */
 	public function delete()
 	{
-		return $this->Database->prepare("DELETE FROM " . $this->strTable . " WHERE " . $this->strRefField . "=?")
-							  ->execute($this->varRefId)
+		$this->import('Database');
+
+		return $this->Database->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
+							  ->execute($this->{static::$strPk})
 							  ->affectedRows;
 	}
 }

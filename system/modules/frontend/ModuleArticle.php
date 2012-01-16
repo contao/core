@@ -123,7 +123,7 @@ class ModuleArticle extends \Module
 			$this->teaser = $this->String->toHtml5($this->teaser);
 		}
 
-		// Show teaser only
+		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
 			$this->Template = new \FrontendTemplate('mod_article_teaser');
@@ -189,14 +189,11 @@ class ModuleArticle extends \Module
 		}
 
 		$arrElements = array();
-
-		// Get all visible content elements
-		$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
-								 ->execute($this->id);
+		$objCte = \ContentElementModel::findPublishedByPid($this->id);
 
 		while ($objCte->next())
 		{
-			$arrElements[] = $this->getContentElement($objCte->id);
+			$arrElements[] = $this->getContentElement($objCte);
 		}
 
 		$this->Template->teaser = $this->teaser;

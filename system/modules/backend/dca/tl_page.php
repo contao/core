@@ -958,7 +958,7 @@ class tl_page extends Backend
 			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->title));
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
+		$objAlias = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
@@ -970,7 +970,7 @@ class tl_page extends Backend
 
 			while ($objAlias->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objAlias->id);
+				$objCurrentPage = $this->getPageDetails($objAlias);
 				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 

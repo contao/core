@@ -72,10 +72,10 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param string
 	 */
-	public function __construct(Database_Result $objModule, $strColumn='main')
+	public function __construct($objModule, $strColumn='main')
 	{
 		parent::__construct();
 

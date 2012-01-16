@@ -134,7 +134,7 @@ class Calendar extends \Frontend
 		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
 		// Get the default URL
-		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+		$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
@@ -143,7 +143,7 @@ class Calendar extends \Frontend
 			return;
 		}
 
-		$objParent = $this->getPageDetails($objParent->id);
+		$objParent = $this->getPageDetails($objParent);
 		$strUrl = $strLink . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 
 		// Parse items
@@ -267,7 +267,7 @@ class Calendar extends \Frontend
 				$arrProcessed[$objCalendar->jumpTo] = false;
 
 				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
+				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
 											->limit(1)
 											->execute($objCalendar->jumpTo);
 
@@ -275,7 +275,7 @@ class Calendar extends \Frontend
 				if ($objParent->numRows)
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent->id);
+					$objParent = $this->getPageDetails($objParent);
 
 					if ($objParent->domain != '')
 					{

@@ -115,7 +115,7 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objPage->id);
+				$objCurrentPage = $this->getPageDetails($objPage);
 				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
@@ -171,7 +171,7 @@ class Index extends Frontend
 		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
-			$objPage = $this->getPageDetails($objPage->id);
+			$objPage = $this->getPageDetails($objPage);
 		}
 
 		// Use the global date format if none is set

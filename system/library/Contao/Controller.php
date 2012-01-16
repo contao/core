@@ -53,7 +53,7 @@ abstract class Controller extends \System
 	{
 		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
 
-		if ($theme != '' && is_dir(TL_ROOT . '/system/themes/' . $theme))
+		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
 		{
 			return $theme;
 		}
@@ -154,7 +154,6 @@ abstract class Controller extends \System
 		}
 
 		global $objPage;
-		$this->import('Database');
 
 		// Articles
 		if ($intId == 0)
@@ -182,35 +181,34 @@ abstract class Controller extends \System
 				return \RasterDesigner::load($objPage->id, $strColumn);
 			}
 
-			$time = time();
-
-			// Show all articles of the current column
-			$objArticles = $this->Database->prepare("SELECT id FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-										  ->execute($objPage->id, $strColumn);
-
-			if (($count = $objArticles->numRows) < 1)
+			// Show all articles
+			else
 			{
-				return '';
+				$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
+
+				if ($objArticles === null)
+				{
+					return '';
+				}
+
+				$return = '';
+				$blnMultiMode = ($objArticles->count() > 1);
+
+				while ($objArticles->next())
+				{
+					$return .= $this->getArticle($objArticles, $blnMultiMode, false, $strColumn);
+				}
+
+				return $return;
 			}
-
-			$return = '';
-
-			while ($objArticles->next())
-			{
-				$return .= $this->getArticle($objArticles->id, ($count > 1), false, $strColumn);
-			}
-
-			return $return;
 		}
 
 		// Other modules
 		else
 		{
-			$objRow = $this->Database->prepare("SELECT * FROM tl_module WHERE id=?")
-									 ->limit(1)
-									 ->execute($intId);
+			$objRow = \ModuleModel::findByPk($intId);
 
-			if ($objRow->numRows < 1)
+			if ($objRow === null)
 			{
 				return '';
 			}
@@ -275,7 +273,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an article and return it as string
-	 * @param integer
+	 * @param integer|Database_Result
 	 * @param boolean
 	 * @param boolean
 	 * @param string
@@ -283,21 +281,24 @@ abstract class Controller extends \System
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
-		if (!$varId)
+		global $objPage;
+
+		if (is_object($varId))
 		{
-			return '';
+			$objRow = $varId;
+		}
+		else
+		{		
+			if (!$varId)
+			{
+				return '';
+			}
+
+			$objRow = \ArticleModel::findOneWithAuthor($varId, (!$blnIsInsertTag ? $objPage->id : null));
 		}
 
-		global $objPage;
-		$this->import('Database');
-
-		// Get the article
-		$objRow = $this->Database->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . (!$blnIsInsertTag ? " AND pid=?" : ""))
-								 ->limit(1)
-								 ->execute((is_numeric($varId) ? $varId : 0), $varId, $objPage->id);
-
 		// Send a 404 header if the article does not exist
-		if ($objRow->numRows < 1)
+		if ($objRow === null)
 		{
 			// Do not index the page
 			$objPage->noSearch = 1;
@@ -346,26 +347,28 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a content element and return it as HTML string
-	 * @param integer
+	 * @param integer|Database_Result
 	 * @return string
 	 */
 	protected function getContentElement($intId)
 	{
-		if (!strlen($intId) || $intId < 1)
+		if (is_object($intId))
 		{
-			return '';
+			$objRow = $intId;
 		}
+		else
+		{		
+			if (!strlen($intId) || $intId < 1)
+			{
+				return '';
+			}
 
-		$this->import('Database');
+			$objRow = \ContentElementModel::findByPk($intId);
 
-		// Get the content element
-		$objRow = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
-								 ->limit(1)
-								 ->execute($intId);
-
-		if ($objRow->numRows < 1)
-		{
-			return '';
+			if ($objRow === null)
+			{
+				return '';
+			}
 		}
 
 		// Show to guests only
@@ -433,25 +436,28 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a form and return it as HTML string
-	 * @param integer
+	 * @param integer|Database_Result
 	 * @return string
 	 */
 	protected function getForm($varId)
 	{
-		if ($varId == '')
+		if (is_object($varId))
 		{
-			return '';
+			$objRow = $varId;
 		}
-
-		$this->import('Database');
-
-		$objRow = $this->Database->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
-								 ->limit(1)
-								 ->execute((is_numeric($varId) ? $varId : 0), $varId);
-
-		if ($objRow->numRows < 1)
+		else
 		{
-			return '';
+			if ($varId == '')
+			{
+				return '';
+			}
+
+			$objRow = \FormModel::findByIdOrAlias($varId);
+
+			if ($objRow === null)
+			{
+				return '';
+			}
 		}
 
 		$objRow->typePrefix = 'ce_';
@@ -474,31 +480,44 @@ abstract class Controller extends \System
 
 	/**
 	 * Get the details of a page including inherited parameters and return it as object
-	 * @param integer
+	 * @param integer|Database_Result
 	 * @return Database_Result|null
 	 */
 	protected function getPageDetails($intId)
 	{
-		if (!strlen($intId) || $intId < 1)
+		if (is_object($intId))
 		{
-			return null;
+			$objPage = $intId;
+
+			$this->import('Cache');
+			$strKey = __METHOD__ . '-' . $objPage->id;
+
+			if (isset($this->Cache->$strKey))
+			{
+				return $this->Cache->$strKey;
+			}
 		}
-
-		$this->import('Cache');
-		$strKey = __METHOD__ . '-' . $intId;
-
-		if (isset($this->Cache->$strKey))
+		else
 		{
-			return $this->Cache->$strKey;
-		}
+			if (!strlen($intId) || $intId < 1)
+			{
+				return null;
+			}
 
-		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-						->limit(1)
-						->execute($intId);
+			$this->import('Cache');
+			$strKey = __METHOD__ . '-' . $intId;
 
-		if ($objPage->numRows < 1)
-		{
-			return null;
+			if (isset($this->Cache->$strKey))
+			{
+				return $this->Cache->$strKey;
+			}
+
+			$objPage = \PageModel::findByPk($intId);
+
+			if ($objPage === null)
+			{
+				return null;
+			}
 		}
 
 		// Set some default values
@@ -517,18 +536,12 @@ abstract class Controller extends \System
 		$ptitle = '';
 		$trail = array($intId, $pid);
 
+		// Load all parent pages
+		$objParentPage = \PageModel::findParentsFrom($pid);
+
 		// Inherit settings
-		do
+		while ($objParentPage->next() && $pid > 0 && $type != 'root')
 		{
-			$objParentPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($pid);
-
-			if ($objParentPage->numRows < 1)
-			{
-				break;
-			}
-
 			$pid = $objParentPage->pid;
 			$type = $objParentPage->type;
 
@@ -565,7 +578,6 @@ abstract class Controller extends \System
 				$objPage->groups = deserialize($objParentPage->groups);
 			}
 		}
-		while ($pid > 0 && $type != 'root');
 
 		// Set titles
 		$objPage->mainAlias = $alias;
@@ -576,7 +588,7 @@ abstract class Controller extends \System
 		$objPage->parentPageTitle = $ptitle;
 
 		// Set the root ID and title
-		if ($objParentPage->numRows && $objParentPage->type == 'root')
+		if ($objParentPage !== null && $objParentPage->type == 'root')
 		{
 			$objPage->rootId = $objParentPage->id;
 			$objPage->rootTitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
@@ -1143,9 +1155,9 @@ abstract class Controller extends \System
 
 	/**
 	 * Print an article as PDF and stream it to the browser
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 */
-	protected function printArticleAsPdf(\Database_Result $objArticle)
+	protected function printArticleAsPdf($objArticle)
 	{
 		$objArticle->headline = $objArticle->title;
 		$objArticle->printable = false;

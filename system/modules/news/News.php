@@ -126,7 +126,7 @@ class News extends \Frontend
 		$objArticle = $objArticleStmt->execute($arrArchive['id']);
 
 		// Get the default URL
-		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+		$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
 									->limit(1)
 									->execute($arrArchive['jumpTo']);
 
@@ -135,7 +135,7 @@ class News extends \Frontend
 			return;
 		}
 
-		$objParent = $this->getPageDetails($objParent->id);
+		$objParent = $this->getPageDetails($objParent);
 		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 
 		// Parse items
@@ -222,7 +222,7 @@ class News extends \Frontend
 				$arrProcessed[$objArchive->jumpTo] = false;
 
 				// Get the target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
+				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
 											->limit(1)
 											->execute($objArchive->jumpTo);
 
@@ -230,7 +230,7 @@ class News extends \Frontend
 				if ($objParent->numRows)
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent->id);
+					$objParent = $this->getPageDetails($objParent);
 
 					if ($objParent->domain != '')
 					{

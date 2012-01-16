@@ -35,99 +35,41 @@ namespace Contao;
 
 
 /**
- * Class BackendModule
+ * Class ContentElementModel
  *
- * Parent class for back end modules that are not using the default engine.
+ * Provide methods to find and save content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-abstract class BackendModule extends \Backend
+class ContentElementModel extends \Model
 {
 
 	/**
-	 * Template
+	 * Name of the table
 	 * @var string
 	 */
-	protected $strTemplate;
-
-	/**
-	 * Data container object
-	 * @var object
-	 */
-	protected $objDc;
-
-	/**
-	 * Current record
-	 * @var array
-	 */
-	protected $arrData = array();
+	protected static $strTable = 'tl_content';
 
 
 	/**
-	 * Initialize the object
-	 * @param DataContainer
+	 * Find all published content elements of an article
+	 * @param integer
+	 * @return Model|null
 	 */
-	public function __construct(DataContainer $objDc=null)
+	public static function findPublishedByPid($intPid)
 	{
-		parent::__construct();
-		$this->objDc = $objDc;
-	}
+		$objElements = \Database::getInstance()->prepare("SELECT * FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
+											   ->execute($intPid);
 
-
-	/**
-	 * Set an object property
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		$this->arrData[$strKey] = $varValue;
-	}
-
-
-	/**
-	 * Return an object property
-	 * @param string
-	 * @return mixed
-	 */
-	public function __get($strKey)
-	{
-		if (isset($this->arrData[$strKey]))
-		{
-			return $this->arrData[$strKey];
-		}
-
-		try
-		{
-			return $this->objDc->$strKey;
-		}
-		catch (Exception $e)
+		if ($objElements->numRows < 1)
 		{
 			return null;
 		}
 
-		return $e;
+		return new static($objElements);
 	}
-
-
-	/**
-	 * Parse the template
-	 * @return string
-	 */
-	public function generate()
-	{
-		$this->Template = new \BackendTemplate($this->strTemplate);
-		$this->compile();
-
-		return $this->Template->parse();
-	}
-
-
-	/**
-	 * Compile the current element
-	 */
-	abstract protected function compile();
+								 
 }
 
 ?>

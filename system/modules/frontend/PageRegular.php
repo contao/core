@@ -47,9 +47,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Generate a regular page
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 */
-	public function generate(\Database_Result $objPage)
+	public function generate($objPage)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
@@ -202,10 +202,10 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create a new template
-	 * @param Database_Result
-	 * @param Database_Result
+	 * @param Database_Result|Model
+	 * @param Database_Result|Model
 	 */
-	protected function createTemplate(\Database_Result $objPage, \Database_Result $objLayout)
+	protected function createTemplate($objPage, $objLayout)
 	{
 		$this->Template = new \FrontendTemplate($objPage->template);
 
@@ -355,10 +355,10 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all header scripts
-	 * @param Database_Result
-	 * @param Database_Result
+	 * @param Database_Result|Model
+	 * @param Database_Result|Model
 	 */
-	protected function createHeaderScripts(\Database_Result $objPage,\Database_Result $objLayout)
+	protected function createHeaderScripts($objPage, $objLayout)
 	{
 		$strStyleSheets = '';
 		$strCcStyleSheets = '';
@@ -512,10 +512,10 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all footer scripts
-	 * @param Database_Result
-	 * @param Database_Result
+	 * @param Database_Result|Model
+	 * @param Database_Result|Model
 	 */
-	protected function createFooterScripts(\Database_Result $objPage, \Database_Result $objLayout)
+	protected function createFooterScripts($objPage, $objLayout)
 	{
 		$strMootools = '';
 		$arrMootools = deserialize($objLayout->mootools, true);

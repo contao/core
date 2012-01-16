@@ -124,13 +124,13 @@ class Config
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(self::$objInstance))
+		if (!is_object(static::$objInstance))
 		{
-			self::$objInstance = new self();
-			self::$objInstance->initialize();
+			static::$objInstance = new static();
+			static::$objInstance->initialize();
 		}
 
-		return self::$objInstance;
+		return static::$objInstance;
 	}
 
 

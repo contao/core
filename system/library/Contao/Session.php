@@ -114,12 +114,12 @@ class Session
 	 */
 	public static function getInstance()
 	{
-		if (!is_object(self::$objInstance))
+		if (!is_object(static::$objInstance))
 		{
-			self::$objInstance = new self();
+			static::$objInstance = new static();
 		}
 
-		return self::$objInstance;
+		return static::$objInstance;
 	}
 
 

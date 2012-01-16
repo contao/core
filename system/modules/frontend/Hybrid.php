@@ -78,10 +78,10 @@ abstract class Hybrid extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @return string
 	 */
-	public function __construct(Database_Result $objElement)
+	public function __construct($objElement)
 	{
 		parent::__construct();
 

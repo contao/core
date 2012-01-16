@@ -42,7 +42,7 @@ namespace Contao;
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-abstract class User extends \Model
+abstract class User extends \ModelOld
 {
 
 	/**
