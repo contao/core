@@ -157,15 +157,16 @@ class ModuleSearch extends \Module
 			$arrResult = null;
 			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$intRootId.$this->fuzzy);
 			$query_starttime = microtime(true);
+			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
 			// Load cached result
-			if (file_exists(TL_ROOT . '/system/tmp/' . $strChecksum))
+			if (file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$objFile = new \File('system/tmp/' . $strChecksum);
+				$objFile = new \File($strCacheFile);
 
 				if ($objFile->mtime > time() - 1800)
 				{
-					$arrResult = deserialize($objFile->getContent());
+					$arrResult = json_decode($objFile->getContent(), true);
 				}
 				else
 				{
@@ -181,14 +182,14 @@ class ModuleSearch extends \Module
 					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					$this->log('Website search failed: ' . $e->getMessage(), 'ModuleSearch compile()', TL_ERROR);
 					$arrResult = array();
 				}
 
-				$objFile = new \File('system/tmp/' . $strChecksum);
-				$objFile->write(serialize($arrResult));
+				$objFile = new \File($strCacheFile);
+				$objFile->write(json_encode($arrResult));
 				$objFile->close();
 			}
 
@@ -261,7 +262,7 @@ class ModuleSearch extends \Module
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$objTemplate = new \FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
+				$objTemplate = new \FrontendTemplate(($this->searchTpl != '') ? $this->searchTpl : 'search_default');
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];

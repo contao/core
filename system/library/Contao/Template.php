@@ -115,14 +115,7 @@ abstract class Template extends Controller
 	 */
 	public function __get($strKey)
 	{
-		if ($this->arrData[$strKey] instanceof \Closure)
-		{
-			return $this->arrData[$strKey]();
-		}
-		else
-		{
-			return $this->arrData[$strKey];
-		}
+		return $this->arrData[$strKey];
 	}
 
 

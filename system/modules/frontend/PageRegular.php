@@ -79,34 +79,48 @@ class PageRegular extends \Frontend
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		$arrModules = deserialize($objLayout->modules);
 
-		// Generate all modules
-		foreach ($arrModules as $arrModule)
+		// Get all modules in a single DB query
+		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
+		$objModules = \ModuleModel::findMultipleById($arrModuleIds);
+
+		if ($objModules !== null)
 		{
-			if (in_array($arrModule['col'], $arrSections))
+			foreach ($arrModules as $arrModule)
 			{
-				// Filter active sections (see #3273)
-				if ($arrModule['col'] == 'header' && !$objLayout->header)
+				// Replace the module ID with the result row
+				if ($arrModule['mod'] > 0)
 				{
-					continue;
-				}
-				if ($arrModule['col'] == 'left' && $objLayout->cols != '2cll' && $objLayout->cols != '3cl')
-				{
-					continue;
-				}
-				if ($arrModule['col'] == 'right' && $objLayout->cols != '2clr' && $objLayout->cols != '3cl')
-				{
-					continue;
-				}
-				if ($arrModule['col'] == 'footer' && !$objLayout->footer)
-				{
-					continue;
+					$objModules->next();
+					$arrModule['mod'] = $objModules;
 				}
 
-				$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
-			}
-			else
-			{
-				$arrCustomSections[$arrModule['col']] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				// Generate the modules
+				if (in_array($arrModule['col'], $arrSections))
+				{
+					// Filter active sections (see #3273)
+					if ($arrModule['col'] == 'header' && !$objLayout->header)
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'left' && $objLayout->cols != '2cll' && $objLayout->cols != '3cl')
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'right' && $objLayout->cols != '2clr' && $objLayout->cols != '3cl')
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'footer' && !$objLayout->footer)
+					{
+						continue;
+					}
+
+					$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				}
+				else
+				{
+					$arrCustomSections[$arrModule['col']] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				}
 			}
 		}
 
@@ -536,7 +550,7 @@ class PageRegular extends \Frontend
 			{
 				$strMootools .= $objTemplate->parse();
 			}
-			catch (Exception $e)
+			catch (\Exception $e)
 			{
 				$this->log($e->getMessage(), 'PageRegular createFooterScripts()', TL_ERROR);
 			}

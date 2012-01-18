@@ -388,35 +388,52 @@ abstract class System
 		}
 
 		// Return if the data has been loaded already
-		if (!$blnNoCache && isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]))
+		if (isset($GLOBALS['loadLanguageFile'][$strName][$strLanguage]) && !$blnNoCache)
 		{
 			return;
 		}
 
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
+		$strCacheFallback = TL_ROOT . '/system/cache/language/en/' . $strName . '.php';
+		$strCacheFile = TL_ROOT . '/system/cache/language/' . $strLanguage . '/' . $strName . '.php';
 
-		// Parse all active modules
-		foreach ($this->Config->getActiveModules() as $strModule)
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists($strCacheFile))
 		{
-			$strFallback = sprintf('%s/system/modules/%s/languages/en/%s.php', TL_ROOT, $strModule, $strName);
+			include $strCacheFallback;
+			include $strCacheFile;
+		}
+		else
+		{
+			// Generate the cache file
+			$strCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
+			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
 
-			if (file_exists($strFallback))
+			// Parse all active modules
+			foreach ($this->Config->getActiveModules() as $strModule)
 			{
-				include($strFallback);
+				$strFallback = TL_ROOT . '/system/modules/' . $strModule . '/languages/en/' . $strName . '.php';
+
+				if (file_exists($strFallback))
+				{
+					$strCacheFallback->append(file_get_contents($strFallback));
+					include($strFallback);
+				}
+
+				if ($strLanguage == 'en')
+				{
+					continue;
+				}
+
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/languages/' . $strLanguage . '/' . $strName . '.php';
+
+				if (file_exists($strFile))
+				{
+					$objCacheFile->append(file_get_contents($strFile));
+					include($strFile);
+				}
 			}
 
-			if ($strLanguage == 'en')
-			{
-				continue;
-			}
-
-			$strFile = sprintf('%s/system/modules/%s/languages/%s/%s.php', TL_ROOT, $strModule, $strLanguage, $strName);
-
-			if (file_exists($strFile))
-			{
-				include($strFile);
-			}
+			$strCacheFallback->close();
+			$objCacheFile->close();
 		}
 
 		// HOOK: allow to load custom labels
@@ -440,6 +457,9 @@ abstract class System
 		{
 			include(TL_ROOT . '/system/config/langconfig.php');
 		}
+		
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadLanguageFile'][$strName][$strLanguage] = true;
 	}
 
 

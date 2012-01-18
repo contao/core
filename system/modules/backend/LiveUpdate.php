@@ -235,7 +235,7 @@ class LiveUpdate extends \Backend implements \executable
 					$objBackup->addFile($strFile);
 					echo '<li>Backed up ' . $strFile . '</li>';
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					echo '<li>' . $e->getMessage() . ' (skipped)</li>';
 				}
@@ -275,7 +275,7 @@ class LiveUpdate extends \Backend implements \executable
 
 				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
-			catch (Exception $e)
+			catch (\Exception $e)
 			{
 				echo '<li><span style="color:#c55">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
 			}

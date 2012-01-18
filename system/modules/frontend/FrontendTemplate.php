@@ -165,7 +165,7 @@ class FrontendTemplate extends \Template
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
 
 			// Create the cache file
-			$objFile = new \File('system/tmp/' . md5($strCacheKey) . '.html');
+			$objFile = new \File('system/cache/html/' . md5($strCacheKey) . '.html');
 			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
 
 			/**

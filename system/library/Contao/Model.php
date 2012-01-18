@@ -158,6 +158,16 @@ abstract class Model extends \System
 
 
 	/**
+	 * Return the database result
+	 * @return Database_Result
+	 */
+	public function getDbResult()
+	{
+		return $this->objResult;
+	}
+
+
+	/**
 	 * Return the number of rows in the result set
 	 * @return integer
 	 */
@@ -302,7 +312,7 @@ abstract class Model extends \System
 		}
 
 		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->executeUncached($varValue); # FIXME
+		$objResult = $objStatement->execute($varValue);
 
 		if ($objResult->numRows < 1)
 		{
@@ -356,11 +366,12 @@ abstract class Model extends \System
 	/**
 	 * Find a single record by its ID or alias
 	 * @param mixed
+	 * @param mixed
 	 * @return Model
 	 */
-	public static function findByIdOrAlias($varId)
+	public static function findByIdOrAlias($varId, $varAlias)
 	{
-		return static::findOneBy(array("(id=? OR alias=?)"), array((is_numeric($varId) ? $varId : 0), $varId));
+		return static::findOneBy(array("(id=? OR alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias));
 	}
 
 

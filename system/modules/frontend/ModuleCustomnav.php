@@ -150,13 +150,11 @@ class ModuleCustomnav extends \Module
 						break;
 
 					case 'forward':
-						$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($arrPage['jumpTo']);
+						$objNext = \PageModel::findPublishedById($arrPage['jumpTo']);
 
-						if ($objNext->numRows)
+						if ($objNext !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+							$href = $this->generateFrontendUrl($objNext->row());
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT

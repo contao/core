@@ -142,13 +142,13 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a front end module and return it as HTML string
-	 * @param integer
+	 * @param mixed
 	 * @param string
 	 * @return string
 	 */
 	protected function getFrontendModule($intId, $strColumn='main')
 	{
-		if (!strlen($intId))
+		if (!is_object($intId) && !strlen($intId))
 		{
 			return '';
 		}
@@ -206,7 +206,14 @@ abstract class Controller extends \System
 		// Other modules
 		else
 		{
-			$objRow = \ModuleModel::findByPk($intId);
+			if (is_object($intId))
+			{
+				$objRow = $intId;
+			}
+			else
+			{
+				$objRow = \ModuleModel::findByPk($intId);
+			}
 
 			if ($objRow === null)
 			{
@@ -1506,7 +1513,7 @@ abstract class Controller extends \System
 							$elements[1] = $this->User->loginPage;
 						}
 
-						$objNextPage = \PageModel::findByIdOrAlias($elements[1]);
+						$objNextPage = \PageModel::findByIdOrAlias($elements[1], $elements[1]);
 
 						if ($objNextPage === null)
 						{
@@ -2216,7 +2223,7 @@ abstract class Controller extends \System
 							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$arrCache[$strTag] = '';
 					}
@@ -2629,23 +2636,35 @@ abstract class Controller extends \System
 	protected function loadDataContainer($strName, $blnNoCache=false)
 	{
 		// Return if the data has been loaded already
-		if (!$blnNoCache && isset($GLOBALS['loadDataContainer'][$strName]))
+		if (isset($GLOBALS['loadDataContainer'][$strName]) && !$blnNoCache)
 		{
 			return;
 		}
 
-		// Use a global cache variable to support nested calls
-		$GLOBALS['loadDataContainer'][$strName] = true;
+		$strCacheFile = TL_ROOT . '/system/cache/dca/' . $strName . '.php';
 
-		// Parse all module folders
-		foreach ($this->Config->getActiveModules() as $strModule)
+		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists($strCacheFile))
 		{
-			$strFile = sprintf('%s/system/modules/%s/dca/%s.php', TL_ROOT, $strModule, $strName);
+			include $strCacheFile;
+		}
+		else
+		{
+			// Generate the cache file
+			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
 
-			if (file_exists($strFile))
+			// Parse all module folders
+			foreach ($this->Config->getActiveModules() as $strModule)
 			{
-				include($strFile);
+				$strFile = TL_ROOT . '/system/modules/' . $strModule . '/dca/' . $strName . '.php';
+
+				if (file_exists($strFile))
+				{
+					$objCacheFile->append(file_get_contents($strFile));
+					include $strFile;
+				}
 			}
+
+			$objCacheFile->close();
 		}
 
 		// HOOK: allow to load custom settings
@@ -2661,8 +2680,11 @@ abstract class Controller extends \System
 		// Local configuration file
 		if (file_exists(TL_ROOT . '/system/config/dcaconfig.php'))
 		{
-			include(TL_ROOT . '/system/config/dcaconfig.php');
+			include TL_ROOT . '/system/config/dcaconfig.php';
 		}
+
+		// Use a global cache variable to support nested calls
+		$GLOBALS['loadDataContainer'][$strName] = true;
 	}
 
 

@@ -82,40 +82,35 @@ class ModuleBreadcrumb extends \Module
 	{
 		global $objPage;
 
-		$pages = array();
-		$items = array();
-		$pageId = $objPage->id;
 		$type = null;
+		$pageId = $objPage->id;
+		$pages = array($objPage->row());
+		$items = array();
 
 		// Get all pages up to the root page
-		do
-		{
-			$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-									   ->limit(1)
-									   ->execute($pageId);
+		$objPages = \PageModel::findParentsById($objPage->pid);
 
-			$type = $objPages->type;
-			$pageId = $objPages->pid;
-			$pages[] = $objPages->row();
+		if ($objPages !== null)
+		{
+			while ($objPages->next() && $pageId > 0 && $type != 'root')
+			{
+				$type = $objPages->type;
+				$pageId = $objPages->pid;
+				$pages[] = $objPages->row();
+			}
 		}
-		while ($pageId > 0 && $type != 'root' && $objPages->numRows);
 
 		// Get the first active regular page and display it instead of the root page
 		if ($type == 'root')
 		{
-			$time = time();
-
-			// Get the first page
-			$objFirstPage = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-										   ->limit(1)
-										   ->execute($objPages->id);
+			$objFirstPage = \PageModel::findFirstPublishedByPid($objPages->id);
 
 			$items[] = array
 			(
 				'isRoot' => true,
 				'isActive' => false,
-				'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
-				'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
+				'href' => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : $this->Environment->base),
+				'title' => (($objPages->pageTitle != '') ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
 				'link' => $objPages->title,
 				'data' => $objFirstPage->row()
 			);
@@ -145,13 +140,11 @@ class ModuleBreadcrumb extends \Module
 					break;
 
 				case 'forward':
-					$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											  ->limit(1)
-											  ->execute($pages[$i]['jumpTo']);
+					$objNext = \PageModel::findPublishedById($pages[$i]['jumpTo']);
 
-					if ($objNext->numRows)
+					if ($objNext !== null)
 					{
-						$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+						$href = $this->generateFrontendUrl($objNext->row());
 						break;
 					}
 					// DO NOT ADD A break; STATEMENT
@@ -173,7 +166,7 @@ class ModuleBreadcrumb extends \Module
 		}
 
 		// Active article
-		if (strlen($this->Input->get('articles')))
+		if (isset($_GET['articles']))
 		{
 			$items[] = array
 			(
@@ -192,12 +185,10 @@ class ModuleBreadcrumb extends \Module
 				$strArticle = $strSection;
 			}
 
-			// Get article title
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_article WHERE id=? OR alias=?")
-										 ->limit(1)
-										 ->execute((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
+			// Get the article title
+			$objArticle = \ArticleModel::findByIdOrAlias((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
 
-			if ($objArticle->numRows)
+			if ($objArticle !== null)
 			{
 				$items[] = array
 				(

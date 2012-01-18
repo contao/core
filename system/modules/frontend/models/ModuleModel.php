@@ -51,6 +51,16 @@ class ModuleModel extends \Model
 	 */
 	protected static $strTable = 'tl_module';
 
+
+	/**
+	 * Find multiple modules by ID
+	 * @param array
+	 * @return Model
+	 */
+	public static function findMultipleById($arrIds)
+	{
+		return static::findBy(array('id IN(' . implode(',', array_map('intval', $arrIds)) . ')'), $arrIds, \Database::getInstance()->findInSet('id', $arrIds));
+	}
 }
 
 ?>

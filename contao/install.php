@@ -151,17 +151,9 @@ class InstallTool extends Backend
 				{
 					$this->Files->chmod('system/tmp', 0777);
 				}
-				if (!is_writable(TL_ROOT . '/assets/css'))
-				{
-					$this->Files->chmod('assets/css', 0777);
-				}
 				if (!is_writable(TL_ROOT . '/assets/images'))
 				{
 					$this->Files->chmod('assets/images', 0777);
-				}
-				if (!is_writable(TL_ROOT . '/assets/js'))
-				{
-					$this->Files->chmod('assets/js', 0777);
 				}
 				if (!is_writable(TL_ROOT . '/system/logs'))
 				{

@@ -17,6 +17,7 @@ assets/css/*
 assets/images/*
 assets/js/*
 share/*
+system/cache
 system/html
 system/logs/*
 system/scripts

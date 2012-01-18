@@ -111,10 +111,7 @@ class ModuleArticle extends \Module
 		// Add the modification date
 		$this->Template->timestamp = $this->tstamp;
 		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
-
-		// Only request the author model if it is referenced in the template
-		$objModel = $this->objModel;
-		$this->Template->author = function() use($objModel) { return $objModel->getAuthor(); };
+		$this->Template->author = $this->objModel->getAuthor();
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')

@@ -102,7 +102,7 @@ abstract class BackendModule extends \Backend
 		{
 			return $this->objDc->$strKey;
 		}
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			return null;
 		}

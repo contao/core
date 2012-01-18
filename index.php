@@ -313,7 +313,7 @@ class Index extends Frontend
 			}
 		}
 
-		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
+		$strCacheFile = TL_ROOT . '/system/cache/html/' . md5($strCacheKey) . '.html';
 
 		// Return if the file does not exist
 		if (!file_exists($strCacheFile))
