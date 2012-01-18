@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Images with spaces in the name are now displayed correctly (see #3817).
+
+### Fixed
 Do not load the empty URL from cache if the language is added and the empty
 domain will be redirected.
 
