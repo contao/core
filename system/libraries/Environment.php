@@ -458,6 +458,9 @@ class Environment
 			}
 		}
 
+		$versions = explode('.', $version);
+		$version  = $versions[0];
+
 		$return->class = $os . ' ' . $browser;
 
 		// Add the version number if available
@@ -472,10 +475,11 @@ class Environment
 			$return->class .= ' mobile';
 		}
 
-		$return->browser = $browser;
-		$return->shorty  = $shorty;
-		$return->version = $version;
-		$return->mobile  = $mobile;
+		$return->browser  = $browser;
+		$return->shorty   = $shorty;
+		$return->version  = $version;
+		$return->versions = $versions;
+		$return->mobile   = $mobile;
 
 		return $return;
 	}
