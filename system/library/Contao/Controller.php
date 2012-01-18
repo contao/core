@@ -3252,7 +3252,8 @@ abstract class Controller extends \System
 			$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 		}
 
-		$objTemplate->src = TL_FILES_URL . $this->urlEncode($src);
+		// Do not urlEncode() here because getImage() already does (see #3817)
+		$objTemplate->src = TL_FILES_URL . $src;
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->title = specialchars($arrItem['title']);
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
