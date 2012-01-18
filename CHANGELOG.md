@@ -5,6 +5,10 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Request static resources and Google web fonts via `https://` when the main page
+is using an SSL connection (see #3802).
+
+### Fixed
 Images with spaces in the name are now displayed correctly (see #3817).
 
 ### Fixed

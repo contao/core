@@ -52,9 +52,12 @@ class PageRegular extends Frontend
 		$this->loadLanguageFile('default');
 
 		// Define the static URL constants
-		define('TL_FILES_URL', ($objPage->staticFiles != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticFiles . TL_PATH . '/' : '');
-		define('TL_SCRIPT_URL', ($objPage->staticSystem != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticSystem . TL_PATH . '/' : '');
-		define('TL_PLUGINS_URL', ($objPage->staticPlugins != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticPlugins . TL_PATH . '/' : '');
+		if (!$GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$this->setStaticUrl('TL_FILES_URL', $objPage->staticFiles);
+			$this->setStaticUrl('TL_SCRIPT_URL', $objPage->staticSystem);
+			$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
+		}
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
@@ -363,7 +366,8 @@ class PageRegular extends Frontend
 		// Google web fonts
 		if ($objLayout->webfonts != '')
 		{
-			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="http://fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
 		}
 
 		$objCombiner = new Combiner();
