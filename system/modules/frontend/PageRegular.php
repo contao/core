@@ -52,12 +52,9 @@ class PageRegular extends Frontend
 		$this->loadLanguageFile('default');
 
 		// Define the static URL constants
-		if (!$GLOBALS['TL_CONFIG']['debugMode'])
-		{
-			$this->setStaticUrl('TL_FILES_URL', $objPage->staticFiles);
-			$this->setStaticUrl('TL_SCRIPT_URL', $objPage->staticSystem);
-			$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
-		}
+		$this->setStaticUrl('TL_FILES_URL', $objPage->staticFiles);
+		$this->setStaticUrl('TL_SCRIPT_URL', $objPage->staticSystem);
+		$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
