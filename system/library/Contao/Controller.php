@@ -3309,6 +3309,29 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Set a static URL constant and replace the protocol when requested via SSL
+	 * @param string
+	 * @param string
+	 */
+	protected function setStaticUrl($name, $url)
+	{
+		if ($url == '')
+		{
+			define($name, '');
+		}
+		else
+		{
+			if ($this->Environment->ssl)
+			{
+				$url = str_replace('http://', 'https://', $url);
+			}
+
+			define($name, $url . TL_PATH . '/');
+		}
+	}
+
+
+	/**
 	 * Add a static URL to a script
 	 * @param string
 	 * @return string

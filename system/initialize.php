@@ -218,15 +218,4 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 	}
 }
 
-
-/**
- * Static back end ressources URLs
- */
-if (TL_MODE == 'BE')
-{
-	define('TL_FILES_URL', ($GLOBALS['TL_CONFIG']['staticFiles'] != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $GLOBALS['TL_CONFIG']['staticFiles'] . TL_PATH . '/' : '');
-	define('TL_SCRIPT_URL', ($GLOBALS['TL_CONFIG']['staticSystem'] != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $GLOBALS['TL_CONFIG']['staticSystem'] . TL_PATH . '/' : '');
-	define('TL_PLUGINS_URL', ($GLOBALS['TL_CONFIG']['staticPlugins'] != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $GLOBALS['TL_CONFIG']['staticPlugins'] . TL_PATH . '/' : '');
-}
-
 ?>
