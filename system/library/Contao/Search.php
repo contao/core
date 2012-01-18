@@ -520,6 +520,27 @@ class Search extends \System
 
 		return $objResultStmt->execute($arrValues);
 	}
+
+
+	/**
+	 * Remove an entry from the search index
+	 * @param string
+	 */
+	public function removeEntry($strUrl)
+	{
+		$objSearch = $this->Database->prepare("SELECT * FROM tl_search WHERE url=?")
+									->limit(1)
+									->execute($strUrl);
+
+		if ($objSearch->numRows)
+		{
+			$this->Database->prepare("DELETE FROM tl_search WHERE id=?")
+						   ->execute($objSearch->id);
+
+			$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
+						   ->execute($objSearch->id);
+		}
+	}
 }
 
 ?>

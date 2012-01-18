@@ -258,22 +258,18 @@ abstract class Module extends \Frontend
 						break;
 
 					case 'forward':
-						if (!$objSubpages->jumpTo)
+						if ($objSubpages->jumpTo > 0)
 						{
-							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-													  ->limit(1)
-													  ->execute($objSubpages->id);
+							$objNext = \PageModel::findPublishedById($objSubpages->jumpTo);
 						}
 						else
 						{
-							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-													  ->limit(1)
-													  ->execute($objSubpages->jumpTo);
+							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpages->id);
 						}
 
-						if ($objNext->numRows)
+						if ($objNext !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+							$href = $this->generateFrontendUrl($objNext->row());
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT

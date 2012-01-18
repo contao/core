@@ -81,21 +81,19 @@ class ModuleLogout extends \Module
 		$strRedirect = $this->Environment->base;
 
 		// Redirect to last page visited
-		if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))
 		{
 			$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 		}
 
 		// Redirect to jumpTo page
-		elseif (strlen($this->jumpTo))
+		elseif ($this->jumpTo > 0)
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
+			$objNextPage = \PageModel::findPublishedById($this->jumpTo);
 
-			if ($objNextPage->numRows)
+			if ($objNextPage !== null)
 			{
-				$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+				$strRedirect = $this->generateFrontendUrl($objNextPage->row());
 			}
 		}
 

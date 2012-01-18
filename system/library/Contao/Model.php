@@ -302,7 +302,7 @@ abstract class Model extends \System
 		}
 
 		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->executeUncached($varValue);
+		$objResult = $objStatement->executeUncached($varValue); # FIXME
 
 		if ($objResult->numRows < 1)
 		{

@@ -116,11 +116,9 @@ class ModuleSearch extends \Module
 		// Redirect page
 		if ($this->jumpTo > 0)
 		{
-			$objTargetPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($this->jumpTo);
+			$objTargetPage = \PageModel::findPublishedById($this->jumpTo);
 
-			if ($objTargetPage->numRows)
+			if ($objTargetPage !== null)
 			{
 				$objFormTemplate->action = $this->generateFrontendUrl($objTargetPage->row());
 			}

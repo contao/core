@@ -98,24 +98,20 @@ class ModuleLogin extends \Module
 			else
 			{
 				// Redirect to the jumpTo page
-				if (strlen($this->jumpTo))
+				if ($this->jumpTo > 0)
 				{
-					$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->jumpTo);
+					$objNextPage = \PageModel::findPublishedById($this->jumpTo);
 
-					if ($objNextPage->numRows)
+					if ($objNextPage !== null)
 					{
-						$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+						$strRedirect = $this->generateFrontendUrl($objNextPage->row());
 					}
 				}
 
 				// Overwrite the jumpTo page with an individual group setting
-				$objGroup = $this->Database->prepare("SELECT groups FROM tl_member WHERE username=?")
-										   ->limit(1)
-										   ->execute($this->Input->post('username'));
+				$objGroup = \MemberModel::findByUsername($this->Input->post('username'));
 
-				if ($objGroup->numRows)
+				if ($objGroup !== null)
 				{
 					$arrGroups = deserialize($objGroup->groups);
 

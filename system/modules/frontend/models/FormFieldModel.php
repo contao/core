@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
+ * @package    Backend
  * @license    LGPL
  */
 
@@ -35,41 +35,31 @@ namespace Contao;
 
 
 /**
- * Class PageRoot
+ * Class FormFieldModel
  *
- * Provide methods to handle a website root page.
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-class PageRoot extends \Frontend
+class FormFieldModel extends \Model
 {
 
 	/**
-	 * Redirect to the first active regular page
-	 * @param integer
-	 * @param boolean
-	 * @return integer
+	 * Name of the table
+	 * @var string
 	 */
-	public function generate($pageId, $blnReturn=false)
+	protected static $strTable = 'tl_form_field';
+
+
+	/**
+	 * Find published form fields by their parent Id
+	 * @param integer
+	 * @return Model
+	 */
+	public static function findPublishedByPid($intPid)
 	{
-		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
-
-		// No published pages yet
-		if ($objNextPage === null)
-		{
-			header('HTTP/1.1 404 Not Found');
-			$this->log('No active page found under root page "' . $pageId . '")', 'PageRoot generate()', TL_ERROR);
-			die('No active pages found');
-		}
-
-		// Only return the page ID
-		if ($blnReturn)
-		{
-			return $objNextPage->id;
-		}
-
-		$this->redirect($this->generateFrontendUrl($objNextPage->row()));
+		return static::findBy(array('pid=? AND invisible!=1'), $intPid, 'sorting');
 	}
 }
 

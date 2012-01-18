@@ -114,6 +114,27 @@ class ArticleModel extends \Model
 
 
 	/**
+	 * Find all published articles with teaser by their parent ID and column
+	 * @param integer
+	 * @param string
+	 * @return Model
+	 */
+	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
+	{
+		$arrColumns = array('pid=? AND inColumn=? AND showTeaser=1');
+		$arrValues = array($intPid, $strColumn);
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findBy($arrColumns, $arrValues, 'sorting');
+	}
+
+
+	/**
 	 * Return the author of an article
 	 * @return Model
 	 */

@@ -47,29 +47,22 @@ class PageForward extends \Frontend
 
 	/**
 	 * Redirect to an internal page
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 */
-	public function generate(\Database_Result $objPage)
+	public function generate($objPage)
 	{
-		// Forward to first active page
-		if (!$objPage->jumpTo)
+		// Forward to the jumpTo or first published page
+		if ($objPage->jumpTo)
 		{
-			$time = time();
-
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-										  ->limit(1)
-										  ->execute($objPage->id);
+			$objNextPage = \PageModel::findPublishedById($objPage->jumpTo);
 		}
-		// Forward to jumpTo page
 		else
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($objPage->jumpTo);
+			$objNextPage = \PageModel::findFirstPublishedRegularByPid($objPage->id);
 		}
 
 		// Forward page does not exist
-		if ($objNextPage->numRows < 1)
+		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
@@ -88,11 +81,16 @@ class PageForward extends \Frontend
 					continue;
 				}
 
+				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $key == 'language')
+				{
+					continue;
+				}
+
 				$strGet .= '/' . $key . '/' . $this->Input->get($key);
 			}
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

@@ -324,11 +324,11 @@ abstract class Frontend extends \Controller
 
 		if (strlen($intId) && $intId != $objPage->id)
 		{
-			$objNextPage = \PageModel::findByPk($intId);
+			$objNextPage = \PageModel::findPublishedById($intId);
 
 			if ($objNextPage !== null)
 			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strParams, $strForceLang));
+				$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
 			}
 		}
 

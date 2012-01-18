@@ -136,8 +136,84 @@ class PageModel extends \Model
 				$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
 			}
 
-			return static::findOneBy($arrColumns, $arrValues, "dns DESC, fallback");
+			return static::findOneBy($arrColumns, $arrValues, 'dns DESC, fallback');
 		}
+	}
+
+
+	/**
+	 * Find the first published page by its parent ID
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function findFirstPublishedByPid($intPid)
+	{
+		$arrColumns = array("pid=? AND type!='root' AND type!='error_403' AND type!='error_404'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findOneBy($arrColumns, $intPid, 'sorting');
+	}
+
+
+	/**
+	 * Find the first published regular page by its parent ID
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function findFirstPublishedRegularByPid($intPid)
+	{
+		$arrColumns = array("pid=? AND type='regular'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findOneBy($arrColumns, $intPid, 'sorting');
+	}
+
+
+	/**
+	 * Find an error 403 page by its parent ID
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function find403ByPid($intPid)
+	{
+		$arrColumns = array("pid=? AND type='error_403'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findOneBy($arrColumns, $intPid, 'sorting');
+	}
+
+
+	/**
+	 * Find an error 404 page by its parent ID
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function find404ByPid($intPid)
+	{
+		$arrColumns = array("pid=? AND type='error_404'");
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findOneBy($arrColumns, $intPid, 'sorting');
 	}
 
 

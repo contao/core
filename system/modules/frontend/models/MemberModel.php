@@ -51,6 +51,16 @@ class MemberModel extends \Model
 	 */
 	protected static $strTable = 'tl_member';
 
+
+	/**
+	 * Find a member by the username
+	 * @param string
+	 * @return Model|null
+	 */
+	public static function findByUsername($strUsername)
+	{
+		return static::findOneBy('username', $strUsername);
+	}
 }
 
 ?>

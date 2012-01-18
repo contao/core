@@ -97,7 +97,7 @@ class ModuleArticleList extends \Module
 		// Show articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$objTarget = \PageModel::findByPk($this->rootPage);
+			$objTarget = \PageModel::findPublishedById($this->rootPage);
 
 			if ($objTarget !== null)
 			{

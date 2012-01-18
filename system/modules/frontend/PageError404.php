@@ -65,30 +65,16 @@ class PageError404 extends \Frontend
 			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '" (' . $this->Environment->base . $this->Environment->request . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
-		// Check the search index
-		$objSearch = $this->Database->prepare("SELECT * FROM tl_search WHERE url=?")
-									->limit(1)
-									->execute($this->Environment->request);
-
-		// Remove the page from the search index (see #3761)
-		if ($objSearch->numRows)
-		{
-			$this->Database->prepare("DELETE FROM tl_search WHERE id=?")
-						   ->execute($objSearch->id);
-
-			$this->Database->prepare("DELETE FROM tl_search_index WHERE pid=?")
-						   ->execute($objSearch->id);
-		}
-
-		$objRootPage = $this->getRootPageFromUrl();
+		// Check the search index (see #3761)
+		$this->import('Search');
+		$this->Search->removeEntry($this->Environment->request);
 
 		// Look for an 404 page
-		$obj404 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								 ->limit(1)
-								 ->execute('error_404', $objRootPage->id, $time, $time);
+		$objRootPage = $this->getRootPageFromUrl();
+		$obj404 = \PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj404->numRows < 1)
+		if ($obj404 === null)
 		{
 			header('HTTP/1.1 404 Not Found');
 			die('Page not found'); 
@@ -109,18 +95,16 @@ class PageError404 extends \Frontend
 		}
 
 		// Forward to another page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									  ->limit(1)
-									  ->execute($obj404->jumpTo);
+		$objNextPage = \PageModel::findPublishedById($obj404->jumpTo);
 
-		if ($objNextPage->numRows < 1)
+		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
 			die('Forward page not found');
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

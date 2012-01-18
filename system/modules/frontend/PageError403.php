@@ -65,18 +65,14 @@ class PageError403 extends \Frontend
 		}
 		else
 		{
-			$objRootPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute((is_integer($objRootPage) ? $objRootPage : $objRootPage->id));
+			$objRootPage = \PageModel::findPublishedById(is_integer($objRootPage) ? $objRootPage : $objRootPage->id);
 		}
 
 		// Look for an error_403 page
-		$obj403 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								 ->limit(1)
-								 ->execute('error_403', $objRootPage->id, $time, $time);
+		$obj403 = \PageModel::find403ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj403->numRows < 1)
+		if ($obj403 === null)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			die('Forbidden');
@@ -97,18 +93,16 @@ class PageError403 extends \Frontend
 		}
 
 		// Forward to another page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									  ->limit(1)
-									  ->execute($obj403->jumpTo);
+		$objNextPage = \PageModel::findPublishedById($obj403->jumpTo);
 
-		if ($objNextPage->numRows < 1)
+		if ($objNextPage === null)
 		{
 			header('HTTP/1.1 403 Forbidden');
 			$this->log('Forward page ID "' . $obj403->jumpTo . '" does not exist', 'PageError403 generate()', TL_ERROR);
 			die('Forward page not found');
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }
 

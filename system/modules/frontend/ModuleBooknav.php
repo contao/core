@@ -93,12 +93,10 @@ class ModuleBooknav extends \Module
 	 */
 	protected function compile()
 	{
-		// Get root page
-		$objRoot = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->rootPage);
+		// Get the root page
+		$objRoot = \PageModel::findPublishedById($this->rootPage);
 
-		if ($objRoot->numRows < 1)
+		if ($objRoot === null)
 		{
 			return;
 		}

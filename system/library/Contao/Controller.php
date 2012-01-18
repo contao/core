@@ -3315,7 +3315,7 @@ abstract class Controller extends \System
 	 */
 	protected function setStaticUrl($name, $url)
 	{
-		if ($url == '')
+		if ($url == '' || $GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			define($name, '');
 		}
