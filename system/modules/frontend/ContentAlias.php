@@ -51,11 +51,9 @@ class ContentAlias extends \ContentElement
 	 */
 	public function generate()
 	{
-		$objElement = $this->Database->prepare("SELECT * FROM tl_content WHERE id=?")
-									 ->limit(1)
-									 ->execute($this->cteAlias);
+		$objElement = \ContentElementModel::findByPk($this->cteAlias);
 
-		if ($objElement->numRows < 1)
+		if ($objElement === null)
 		{
 			return '';
 		}

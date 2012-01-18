@@ -58,6 +58,12 @@ abstract class Module extends \Frontend
 	protected $strColumn;
 
 	/**
+	 * Model
+	 * @var Model
+	 */
+	protected $objModel;
+
+	/**
 	 * Current record
 	 * @var array
 	 */
@@ -77,6 +83,11 @@ abstract class Module extends \Frontend
 	 */
 	public function __construct($objModule, $strColumn='main')
 	{
+		if ($objModule instanceof \Model)
+		{
+			$this->objModel = $objModule;
+		}
+
 		parent::__construct();
 
 		$this->arrData = $objModule->row();

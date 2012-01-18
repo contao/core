@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
+ * @package    Backend
  * @license    LGPL
  */
 
@@ -35,54 +35,22 @@ namespace Contao;
 
 
 /**
- * Class ContentModule
+ * Class MemberModel
  *
- * Front end content element "module".
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-class ContentModule extends \ContentElement
+class MemberModel extends \Model
 {
 
 	/**
-	 * Parse the template
-	 * @return string
+	 * Name of the table
+	 * @var string
 	 */
-	public function generate()
-	{
-		$objModule = \ModuleModel::findByPk($this->module);
+	protected static $strTable = 'tl_member';
 
-		if ($objModule === null)
-		{
-			return '';
-		}
-
-		$strClass = $this->findFrontendModule($objModule->type);
-
-		if (!$this->classFileExists($strClass))
-		{
-			return '';
-		}
-
-		$objModule->typePrefix = 'ce_';
-		$objModule = new $strClass($objModule);
-
-		// Overwrite spacing and CSS ID
-		$objModule->space = $this->space;
-		$objModule->cssID = $this->cssID;
-
-		return $objModule->generate();
-	}
-
-
-	/**
-	 * Generate the content element
-	 */
-	protected function compile()
-	{
-		return;
-	}
 }
 
 ?>

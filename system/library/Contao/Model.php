@@ -261,14 +261,14 @@ abstract class Model extends \System
 
 	/**
 	 * Find a record and return the model
-	 * @param string
-	 * @param string
+	 * @param mixed
+	 * @param mixed
 	 * @param string
 	 * @param integer
 	 * @param integer
 	 * @return Model
 	 */
-	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
+	protected static function find($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
 	{
 		if (static::$strTable == '')
 		{
@@ -279,7 +279,14 @@ abstract class Model extends \System
 
 		if ($strColumn !== null)
 		{
-			$strQuery .= " WHERE " . $strColumn . "=?";
+			if (is_array($strColumn))
+			{
+				$strQuery .= " WHERE " . implode(" AND ", $strColumn);
+			}
+			else
+			{
+				$strQuery .= " WHERE " . $strColumn . "=?";
+			}
 		}
 
 		if ($strOrder !== null)
@@ -308,25 +315,52 @@ abstract class Model extends \System
 
 
 	/**
-	 * Find a record by its primary key
+	 * Find records by one or more conditions
+	 * @param mixed
+	 * @param mixed
 	 * @param string
-	 * @param string
+	 * @param integer
+	 * @param integer
 	 * @return Model 
 	 */
-	public static function findOneBy($strColumn, $varValue)
+	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
 	{
-		return static::findBy($strColumn, $varValue, null, 1);
+		return static::find($strColumn, $varValue, $strOrder, $intLimit, $intOffset);
 	}
 
 
 	/**
-	 * Find a record by its primary key
-	 * @param string
+	 * Find a single record by its primary key
+	 * @param mixed
 	 * @return Model 
 	 */
 	public static function findByPk($varValue)
 	{
 		return static::findBy(static::$strPk, $varValue, null, 1);
+	}
+
+
+	/**
+	 * Find a single record by one or more conditions
+	 * @param mixed
+	 * @param mixed
+	 * @param string
+	 * @return Model 
+	 */
+	public static function findOneBy($strColumn, $varValue, $strOrder=null)
+	{
+		return static::findBy($strColumn, $varValue, $strOrder, 1);
+	}
+
+
+	/**
+	 * Find a single record by its ID or alias
+	 * @param mixed
+	 * @return Model
+	 */
+	public static function findByIdOrAlias($varId)
+	{
+		return static::findOneBy(array("(id=? OR alias=?)"), array((is_numeric($varId) ? $varId : 0), $varId));
 	}
 
 

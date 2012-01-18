@@ -100,6 +100,7 @@ ClassLoader::addClasses(array
 	'Contao\\ArticleModel'        => 'system/modules/frontend/models/ArticleModel.php',
 	'Contao\\ContentElementModel' => 'system/modules/frontend/models/ContentElementModel.php',
 	'Contao\\FormModel'           => 'system/modules/frontend/models/FormModel.php',
+	'Contao\\MemberModel'         => 'system/modules/frontend/models/MemberModel.php',
 	'Contao\\ModuleModel'         => 'system/modules/frontend/models/ModuleModel.php',
 	'Contao\\PageModel'           => 'system/modules/frontend/models/PageModel.php',
 ));

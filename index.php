@@ -102,12 +102,11 @@ class Index extends Frontend
 
 		$time = time();
 
-		// Get the current page object
-		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-								  ->execute((is_numeric($pageId) ? $pageId : 0), $pageId);
+		// Get the current page object(s)
+		$objPage = \PageModel::findPublishedByIdOrAliases($pageId);
 
 		// Check the URL and language of each page if there are multiple results
-		if ($objPage->numRows > 1)
+		if ($objPage !== null && $objPage->count() > 1)
 		{
 			$objNewPage = null;
 			$arrPages = array();
@@ -115,7 +114,9 @@ class Index extends Frontend
 			// Order by domain and language
 			while ($objPage->next())
 			{
-				$objCurrentPage = $this->getPageDetails($objPage);
+				// Pass the ID so a new page object is created!
+				$objCurrentPage = $this->getPageDetails($objPage->id);
+
 				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
@@ -153,8 +154,8 @@ class Index extends Frontend
 			}
 		}
 
-		// Throw a 404 error if the result is still ambiguous
-		if ($objPage->numRows != 1)
+		// Throw a 404 error if the page could not be found or the result is still ambiguous
+		if ($objPage === null || $objPage->count() != 1)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();

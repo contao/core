@@ -188,12 +188,10 @@ abstract class Frontend extends \Controller
 		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))
 		{
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='') AND language=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC, fallback")
-										  ->limit(1)
-										  ->execute($host, $this->Input->get('language'));
+			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $this->Input->get('language'));
 
 			// No matching root page found
-			if ($objRootPage->numRows < 1)
+			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
 				$this->log('No root page found (host "' . $host . '", language "'. $this->Input->get('language') .'"', 'Frontend getRootPageFromUrl()', TL_ERROR);
@@ -207,12 +205,10 @@ abstract class Frontend extends \Controller
 			$accept_language = $this->Environment->httpAcceptLanguage;
 
 			// Find the matching root pages (thanks to Andreas Schempp)
-			$objRootPage = $this->Database->prepare("SELECT id, dns, language, fallback FROM tl_page WHERE type='root' AND (dns=? OR dns='')" . (!empty($accept_language) ? " AND (language IN('". implode("','", $accept_language) ."') OR fallback=1)" : " AND fallback=1") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY dns DESC" . (!empty($accept_language) ? ", " . $this->Database->findInSet('language', array_reverse($accept_language)) . " DESC" : "") . ", sorting")
-										  ->limit(1)
-										  ->execute($host);
+			$objRootPage = \PageModel::findFirstPublishedRootByHostAndLanguage($host, $accept_language);
 
 			// No matching root page found
-			if ($objRootPage->numRows < 1)
+			if ($objRootPage === null)
 			{
 				header('HTTP/1.1 404 Not Found');
 				$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'Frontend getRootPageFromUrl()', TL_ERROR);
@@ -328,11 +324,9 @@ abstract class Frontend extends \Controller
 
 		if (strlen($intId) && $intId != $objPage->id)
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($intId);
+			$objNextPage = \PageModel::findByPk($intId);
 
-			if ($objNextPage->numRows)
+			if ($objNextPage !== null)
 			{
 				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strParams, $strForceLang));
 			}

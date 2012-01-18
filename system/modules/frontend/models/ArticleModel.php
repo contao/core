@@ -58,18 +58,37 @@ class ArticleModel extends \Model
 	 * @param integer
 	 * @return Model
 	 */
-	public static function findOneWithAuthor($varId, $intPid)
+	public static function findByIdOrAliasAndColumn($varId, $intPid)
 	{
-		$objArticle = \Database::getInstance()->prepare("SELECT *, author AS authorId, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_article WHERE (id=? OR alias=?)" . ($intPid ? " AND pid=?" : ""))
-											  ->limit(1)
-											  ->execute((is_numeric($varId) ? $varId : 0), $varId, $intPid);
+		$arrColumns = array('(id=? OR alias=?)');
+		$arrValues = array((is_numeric($varId) ? $varId : 0), $varId);
 
-		if ($objArticle->numRows < 1)
+		if ($intPid)
 		{
-			return null;
+			$arrColumns[] = 'pid=?';
+			$arrValues[] = $intPid;
 		}
 
-		return new static($objArticle);
+		return static::findOneBy($arrColumns, $arrValues);
+	}
+
+
+	/**
+	 * Find a published article by its ID
+	 * @param integer
+	 * @return Model
+	 */
+	public static function findPublishedById($intId)
+	{
+		$arrColumns = array('id=?');
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
+
+		return static::findOneBy($arrColumns, $intId);
 	}
 
 
@@ -81,17 +100,60 @@ class ArticleModel extends \Model
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn)
 	{
-		$time = time();
+		$arrColumns = array('pid=? AND inColumn=?');
+		$arrValues = array($intPid, $strColumn);
 
-		$objArticles = \Database::getInstance()->prepare("SELECT * FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-											   ->execute($intPid, $strColumn);
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+		}
 
-		if ($objArticles->numRows < 1)
+		return static::findBy($arrColumns, $arrValues, 'sorting');
+	}
+
+
+	/**
+	 * Return the author of an article
+	 * @return Model
+	 */
+	public function getAuthor()
+	{
+		if ($this->author === null)
 		{
 			return null;
 		}
 
-		return new static($objArticles);
+		$objAuthor = \MemberModel::findByPk($this->author);
+
+		if ($objAuthor === null)
+		{
+			return null;
+		}
+
+		return $objAuthor;
+	}
+
+
+	/**
+	 * Return the page of an article
+	 * @return Model
+	 */
+	public function getPage()
+	{
+		if ($this->pid === null)
+		{
+			return null;
+		}
+
+		$objPage = \PageModel::findPublishedById($this->pid);
+
+		if ($objPage === null)
+		{
+			return null;
+		}
+
+		return $objPage;
 	}
 }
 

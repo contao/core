@@ -59,15 +59,14 @@ class ContentElementModel extends \Model
 	 */
 	public static function findPublishedByPid($intPid)
 	{
-		$objElements = \Database::getInstance()->prepare("SELECT * FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
-											   ->execute($intPid);
+		$arrColumns = array('pid=?');
 
-		if ($objElements->numRows < 1)
+		if (!BE_USER_LOGGED_IN)
 		{
-			return null;
+			$arrColumns[] = "invisible=''";
 		}
 
-		return new static($objElements);
+		return static::findBy($arrColumns, $intPid, 'sorting');
 	}
 								 
 }

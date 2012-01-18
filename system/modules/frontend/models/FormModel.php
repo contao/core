@@ -51,25 +51,6 @@ class FormModel extends \Model
 	 */
 	protected static $strTable = 'tl_form';
 
-
-	/**
-	 * Find a form by its ID or alias
-	 * @param mixed
-	 * @return Model
-	 */
-	public static function findByIdOrAlias($varId)
-	{
-		$objElement = \Database::getInstance()->prepare("SELECT * FROM tl_form WHERE id=? OR alias=?")
-											  ->limit(1)
-											  ->execute((is_numeric($varId) ? $varId : 0), $varId);
-
-		if ($objElement->numRows < 1)
-		{
-			return null;
-		}
-
-		return new static($objElement);
-	}
 }
 
 ?>

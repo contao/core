@@ -294,7 +294,7 @@ abstract class Controller extends \System
 				return '';
 			}
 
-			$objRow = \ArticleModel::findOneWithAuthor($varId, (!$blnIsInsertTag ? $objPage->id : null));
+			$objRow = \ArticleModel::findByIdOrAliasAndColumn($varId, (!$blnIsInsertTag ? $objPage->id : null));
 		}
 
 		// Send a 404 header if the article does not exist
@@ -537,49 +537,52 @@ abstract class Controller extends \System
 		$trail = array($intId, $pid);
 
 		// Load all parent pages
-		$objParentPage = \PageModel::findParentsFrom($pid);
+		$objParentPage = \PageModel::findParentsById($pid);
 
 		// Inherit settings
-		while ($objParentPage->next() && $pid > 0 && $type != 'root')
+		if ($objParentPage !== null)
 		{
-			$pid = $objParentPage->pid;
-			$type = $objParentPage->type;
-
-			// Parent title
-			if ($ptitle == '')
+			while ($objParentPage->next() && $pid > 0 && $type != 'root')
 			{
-				$palias = $objParentPage->alias;
-				$pname = $objParentPage->title;
-				$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-			}
+				$pid = $objParentPage->pid;
+				$type = $objParentPage->type;
 
-			// Page title
-			if ($type != 'root')
-			{
-				$alias = $objParentPage->alias;
-				$name = $objParentPage->title;
-				$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
-				$trail[] = $objParentPage->pid;
-			}
+				// Parent title
+				if ($ptitle == '')
+				{
+					$palias = $objParentPage->alias;
+					$pname = $objParentPage->title;
+					$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+				}
 
-			if ($objPage->cache === false && $objParentPage->includeCache)
-			{
-				$objPage->cache = $objParentPage->cache;
-			}
+				// Page title
+				if ($type != 'root')
+				{
+					$alias = $objParentPage->alias;
+					$name = $objParentPage->title;
+					$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+					$trail[] = $objParentPage->pid;
+				}
 
-			if (!$objPage->layout && $objParentPage->includeLayout)
-			{
-				$objPage->layout = $objParentPage->layout;
-			}
+				if ($objPage->cache === false && $objParentPage->includeCache)
+				{
+					$objPage->cache = $objParentPage->cache;
+				}
 
-			if (!$objPage->protected && $objParentPage->protected)
-			{
-				$objPage->protected = true;
-				$objPage->groups = deserialize($objParentPage->groups);
+				if (!$objPage->layout && $objParentPage->includeLayout)
+				{
+					$objPage->layout = $objParentPage->layout;
+				}
+
+				if (!$objPage->protected && $objParentPage->protected)
+				{
+					$objPage->protected = true;
+					$objPage->groups = deserialize($objParentPage->groups);
+				}
 			}
 		}
 
-		// Set titles
+		// Set the titles
 		$objPage->mainAlias = $alias;
 		$objPage->mainTitle = $name;
 		$objPage->mainPageTitle = $title;
@@ -1503,65 +1506,58 @@ abstract class Controller extends \System
 							$elements[1] = $this->User->loginPage;
 						}
 
-						$this->import('Database');
+						$objNextPage = \PageModel::findByIdOrAlias($elements[1]);
 
-						// Get the target page
-						$objNextPage = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
-													  ->limit(1)
-													  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-						if ($objNextPage->numRows < 1)
+						if ($objNextPage === null)
 						{
 							break;
 						}
-						else
+
+						// Page type specific settings (thanks to Andreas Schempp)
+						switch ($objNextPage->type)
 						{
-							// Page type specific settings (thanks to Andreas Schempp)
-							switch ($objNextPage->type)
-							{
-								case 'redirect':
-									$strUrl = $objNextPage->url;
+							case 'redirect':
+								$strUrl = $objNextPage->url;
 
-									if (strncasecmp($strUrl, 'mailto:', 7) === 0)
-									{
-										$this->import('String');
-										$strUrl = $this->String->encodeEmail($strUrl);
-									}
+								if (strncasecmp($strUrl, 'mailto:', 7) === 0)
+								{
+									$this->import('String');
+									$strUrl = $this->String->encodeEmail($strUrl);
+								}
+								break;
+
+							case 'forward':
+								$time = time();
+								$objNextPage->target = false; // see #3194
+
+								if (!$objNextPage->jumpTo)
+								{
+									$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
+																->limit(1)
+																->execute($objNextPage->id);
+								}
+								else
+								{
+									$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+																->limit(1)
+																->execute($objNextPage->jumpTo);
+								}
+
+								if ($objTarget->numRows)
+								{
+									$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
 									break;
+								}
+								// DO NOT ADD A break; STATEMENT
 
-								case 'forward':
-									$time = time();
-									$objNextPage->target = false; // see #3194
-
-									if (!$objNextPage->jumpTo)
-									{
-										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-																	->limit(1)
-																	->execute($objNextPage->id);
-									}
-									else
-									{
-										$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-																	->limit(1)
-																	->execute($objNextPage->jumpTo);
-									}
-
-									if ($objTarget->numRows)
-									{
-										$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
-										break;
-									}
-									// DO NOT ADD A break; STATEMENT
-
-								default:
-									$strUrl = $this->generateFrontendUrl($objNextPage->row());
-									break;
-							}
-
-							$strName = $objNextPage->title;
-							$strTarget = $objNextPage->target ? (($objPage->outputFormat == 'xhtml') ? LINK_NEW_WINDOW : ' target="_blank"') : '';
-							$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
+							default:
+								$strUrl = $this->generateFrontendUrl($objNextPage->row());
+								break;
 						}
+
+						$strName = $objNextPage->title;
+						$strTarget = $objNextPage->target ? (($objPage->outputFormat == 'xhtml') ? LINK_NEW_WINDOW : ' target="_blank"') : '';
+						$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
 					}
 
 					// Replace the tag

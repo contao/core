@@ -108,10 +108,13 @@ class ModuleArticle extends \Module
 
 		$this->Template->column = $this->inColumn;
 
-		// Add modification date
+		// Add the modification date
 		$this->Template->timestamp = $this->tstamp;
 		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
-		$this->Template->author = $this->author;
+
+		// Only request the author model if it is referenced in the template
+		$objModel = $this->objModel;
+		$this->Template->author = function() use($objModel) { return $objModel->getAuthor(); };
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
@@ -191,9 +194,12 @@ class ModuleArticle extends \Module
 		$arrElements = array();
 		$objCte = \ContentElementModel::findPublishedByPid($this->id);
 
-		while ($objCte->next())
+		if ($objCte !== null)
 		{
-			$arrElements[] = $this->getContentElement($objCte);
+			while ($objCte->next())
+			{
+				$arrElements[] = $this->getContentElement($objCte);
+			}
 		}
 
 		$this->Template->teaser = $this->teaser;

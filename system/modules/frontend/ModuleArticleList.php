@@ -97,11 +97,9 @@ class ModuleArticleList extends \Module
 		// Show articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										->limit(1)
-										->execute($this->rootPage);
+			$objTarget = \PageModel::findByPk($this->rootPage);
 
-			if ($objTarget->numRows)
+			if ($objTarget !== null)
 			{
 				$id = $this->rootPage;
 				$this->Template->request = $this->generateFrontendUrl($objTarget->row());
@@ -111,10 +109,9 @@ class ModuleArticleList extends \Module
 		$time = time();
 
 		// Get published articles
-		$objArticles = $this->Database->prepare("SELECT id, title, alias, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($id, $this->inColumn);
+		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
 
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
 			return;
 		}
