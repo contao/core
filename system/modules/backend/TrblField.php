@@ -122,7 +122,7 @@ class TrblField extends \Widget
 		{
 			$arrUnits[] = sprintf('<option value="%s"%s>%s</option>',
 								   specialchars($arrUnit['value']),
-								   ((is_array($this->varValue) && in_array($arrUnit['value'] , $this->varValue)) ? ' selected="selected"' : ''),
+								   $this->isSelected($arrUnit),
 								   $arrUnit['label']);
 		}
 

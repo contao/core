@@ -3007,6 +3007,11 @@ abstract class Controller extends \System
 	 */
 	protected function optionSelected($strName, $varValue)
 	{
+		if ($strName == '')
+		{
+			return '';
+		}
+
 		$attribute = ' selected';
 
 		if (TL_MODE == 'FE')
