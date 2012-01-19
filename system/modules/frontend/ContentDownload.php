@@ -103,6 +103,7 @@ class ContentDownload extends ContentElement
 		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
 		$this->Template->mime = $this->objFile->mime;
 		$this->Template->extension = $this->objFile->extension;
+		$this->Template->path = $this->objFile->dirname;
 	}
 }
 

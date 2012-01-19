@@ -127,7 +127,8 @@ class ContentDownloads extends ContentElement
 						'icon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 						'mime' => $objFile->mime,
 						'meta' => $arrMeta,
-						'extension' => $objFile->extension
+						'extension' => $objFile->extension,
+						'path' => $objFile->dirname
 					);
 
 					$auxDate[] = $objFile->mtime;
@@ -167,7 +168,8 @@ class ContentDownloads extends ContentElement
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
 						'meta' => $arrMeta,
-						'extension' => $objFile->extension
+						'extension' => $objFile->extension,
+						'path' => $objFile->dirname
 					);
 
 					$auxDate[] = $objFile->mtime;

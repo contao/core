@@ -16,6 +16,7 @@ nbproject/
 assets/css/*
 assets/images/*
 assets/js/*
+system/cache/
 system/html/*
 system/logs/*
 system/scripts/*
