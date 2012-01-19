@@ -639,18 +639,22 @@ abstract class Widget extends Controller
 
 		if ($this->rgxp != '')
 		{
-			$strAdd = '';
-
-			if ($this->strTable == 'tl_style')
-			{
-				$strAdd = '\$';
-			}
-
 			switch ($this->rgxp)
 			{
+				// Special validation rule for style sheets
+				case (strncmp($this->rgxp, 'digit_', 6) === 0):
+					$textual = explode('_', $this->rgxp);
+					array_shift($textual);
+
+					if (in_array($varInput, $textual) || strncmp($varInput, '$', 1) === 0)
+					{
+						break;
+					}
+					// DO NOT ADD A break; STATEMENT HERE
+
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!preg_match('/^[\d \.'.$strAdd.'-]*$/', $varInput))
+					if (!preg_match('/^[\d \.-]*$/', $varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -660,14 +664,14 @@ abstract class Widget extends Controller
 				case 'alpha':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alpha:] \.'.$strAdd.'-]*$', $varInput))
+						if (!mb_eregi('^[[:alpha:] \.-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pL \.'.$strAdd.'-]*$/u', $varInput))
+						if (!preg_match('/^[\pL \.-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
 						}
@@ -678,14 +682,14 @@ abstract class Widget extends Controller
 				case 'alnum':
 					if (function_exists('mb_eregi'))
 					{
-						if (!mb_eregi('^[[:alnum:] \.'.$strAdd.'_-]*$', $varInput))
+						if (!mb_eregi('^[[:alnum:] \._-]*$', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}
 					}
 					else
 					{
-						if (!preg_match('/^[\pN\pL \.'.$strAdd.'_-]*$/u', $varInput))
+						if (!preg_match('/^[\pN\pL \._-]*$/u', $varInput))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 						}

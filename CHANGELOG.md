@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+More accurate format definition validation (see #3824).
+
+### Fixed
 Correctly close the `rel="prev"` and `rel="next"` link tags (see #3821).
 
 ### Fixed

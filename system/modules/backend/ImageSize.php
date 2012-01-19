@@ -131,7 +131,7 @@ class ImageSize extends Widget
 			{
 				$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
 									   specialchars($arrOption['value']),
-									   ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue)) ? ' selected="selected"' : ''),
+									   $this->isSelected($arrOption),
 									   $arrOption['label']);
 			}
 			else
@@ -157,7 +157,7 @@ class ImageSize extends Widget
 
 		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
 						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}
