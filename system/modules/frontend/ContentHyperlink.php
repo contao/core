@@ -98,9 +98,9 @@ class ContentHyperlink extends \ContentElement
 					$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
 				}
 
-				$src = $this->getImage($this->urlEncode($this->singleSRC), $size[0], $size[1], $size[2]);
+				$src = $this->getImage($this->singleSRC, $size[0], $size[1], $size[2]);
 
-				if (($imgSize = @getimagesize(TL_ROOT . '/' . $src)) !== false)
+				if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
 				{
 					$this->Template->arrSize = $imgSize;
 					$this->Template->imgSize = ' ' . $imgSize[3];
