@@ -2651,6 +2651,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
+			$objCacheFile->truncate();
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)

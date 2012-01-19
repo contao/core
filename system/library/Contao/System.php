@@ -403,9 +403,12 @@ abstract class System
 		}
 		else
 		{
-			// Generate the cache file
-			$strCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
+			// Generate the cache files
+			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
+			$objCacheFallback->tuncate();
+
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
+			$objCacheFile->truncate();
 
 			// Parse all active modules
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -414,7 +417,7 @@ abstract class System
 
 				if (file_exists($strFallback))
 				{
-					$strCacheFallback->append(file_get_contents($strFallback));
+					$objCacheFallback->append(file_get_contents($strFallback));
 					include($strFallback);
 				}
 
@@ -432,7 +435,7 @@ abstract class System
 				}
 			}
 
-			$strCacheFallback->close();
+			$objCacheFallback->close();
 			$objCacheFile->close();
 		}
 

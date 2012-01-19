@@ -163,9 +163,10 @@ class FrontendTemplate extends \Template
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
+			$strCacheKey = md5($strCacheKey);
 
 			// Create the cache file
-			$objFile = new \File('system/cache/html/' . md5($strCacheKey) . '.html');
+			$objFile = new \File('system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html');
 			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
 
 			/**
