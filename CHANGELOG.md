@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Correctly close the `rel="prev"` and `rel="next"` link tags (see #3821).
+
+### Fixed
 The stylect plugin does not break mutiple select menus anymore (see #3819).
 
 ### Fixed
