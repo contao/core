@@ -246,7 +246,7 @@ select.chzn-select {
   width: 8px;
   height: 9px;
   font-size: 1px;
-  background: url(chosen-sprite.png) right top no-repeat;
+  background: url("chosen-sprite.png") right top no-repeat;
 }
 .chzn-container-multi .chzn-choices .search-choice .search-choice-close:hover {
   background-position: right -9px;
