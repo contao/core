@@ -956,12 +956,12 @@ abstract class System
 		// IPv6
 		if (strpos($strIp, ':') !== false)
 		{
-			return str_replace(strrchr($strIp, ':'), ':xxxx', $strIp);
+			return str_replace(strrchr($strIp, ':'), ':0000', $strIp);
 		}
 		// IPv4
 		else
 		{
-			return str_replace(strrchr($strIp, '.'), '.xxx', $strIp);
+			return str_replace(strrchr($strIp, '.'), '.0', $strIp);
 		}
 	}
 }
