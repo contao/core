@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+The stylect plugin does not break mutiple select menus anymore (see #3819).
+
+### Fixed
 Request static resources and Google web fonts via `https://` when the main page
 is using an SSL connection (see #3802).
 

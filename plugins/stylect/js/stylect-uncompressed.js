@@ -32,7 +32,11 @@
  */
 window.addEvent('domready', function() {
 	$$('select').each(function(el) {
+		// Not supported in IE < 9
 		if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+
+		// Multiple select
+		if (el.get('multiple')) return;
 
 		// Handled by chosen
 		if (el.hasClass('tl_chosen')) return;
