@@ -2278,7 +2278,7 @@ abstract class Controller extends System
 						$dimensions = '';
 
 						// Add the image dimensions
-						if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
+						if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
 						{
 							$dimensions = $imgSize[3];
 						}
@@ -2460,7 +2460,7 @@ abstract class Controller extends System
 	{
 		if (strpos($src, '/') === false)
 		{
-			$src = sprintf('system/themes/%s/images/%s', $this->getTheme(), $src);
+			$src = 'system/themes/' . $this->getTheme() . '/images/' . $src;
 		}
 
 		if (!file_exists(TL_ROOT .'/'. $src))
@@ -3356,7 +3356,7 @@ abstract class Controller extends System
 		$src = $this->getImage($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
 
 		// Image dimensions
-		if (($imgSize = @getimagesize(TL_ROOT .'/'. $src)) !== false)
+		if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
 		{
 			$objTemplate->arrSize = $imgSize;
 			$objTemplate->imgSize = ' ' . $imgSize[3];
