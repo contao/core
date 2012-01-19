@@ -57,17 +57,17 @@ $GLOBALS['TL_CONFIG']['os'] = array
  */
 $GLOBALS['TL_CONFIG']['browser'] = array
 (
-	'MSIE'       => array('browser'=>'ie',           'shorty'=>'ie', 'version'=>'/^.*?MSIE (\d+).*$/'),
-	'Firefox'    => array('browser'=>'firefox',      'shorty'=>'fx', 'version'=>'/^.*Firefox\/(\d+).*$/'),
-	'Chrome'     => array('browser'=>'chrome',       'shorty'=>'ch', 'version'=>'/^.*Chrome\/(\d+).*$/'),
-	'OmniWeb'    => array('browser'=>'omniweb',      'shorty'=>'ow', 'version'=>'/^.*Version\/(\d+).*$/'),
-	'Safari'     => array('browser'=>'safari',       'shorty'=>'sf', 'version'=>'/^.*Version\/(\d+).*$/'),
-	'Opera Mini' => array('browser'=>'opera-mini',   'shorty'=>'oi', 'version'=>'/^.*Opera Mini\/(\d+).*$/'),
-	'Opera Mobi' => array('browser'=>'opera-mobile', 'shorty'=>'om', 'version'=>'/^.*Version\/(\d+).*$/'),
-	'Opera'      => array('browser'=>'opera',        'shorty'=>'op', 'version'=>'/^.*Version\/(\d+).*$/'),
-	'IEMobile'   => array('browser'=>'ie-mobile',    'shorty'=>'im', 'version'=>'/^.*IEMobile (\d+).*$/'),
-	'Camino'     => array('browser'=>'camino',       'shorty'=>'ca', 'version'=>'/^.*Camino\/(\d+).*$/'),
-	'Konqueror'  => array('browser'=>'konqueror',    'shorty'=>'ko', 'version'=>'/^.*Konqueror\/(\d+).*$/')
+	'MSIE'       => array('browser'=>'ie',           'shorty'=>'ie', 'version'=>'/^.*?MSIE (\d+(\.\d+)*).*$/'),
+	'Firefox'    => array('browser'=>'firefox',      'shorty'=>'fx', 'version'=>'/^.*Firefox\/(\d+(\.\d+)*).*$/'),
+	'Chrome'     => array('browser'=>'chrome',       'shorty'=>'ch', 'version'=>'/^.*Chrome\/(\d+(\.\d+)*).*$/'),
+	'OmniWeb'    => array('browser'=>'omniweb',      'shorty'=>'ow', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Safari'     => array('browser'=>'safari',       'shorty'=>'sf', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Opera Mini' => array('browser'=>'opera-mini',   'shorty'=>'oi', 'version'=>'/^.*Opera Mini\/(\d+(\.\d+)*).*$/'),
+	'Opera Mobi' => array('browser'=>'opera-mobile', 'shorty'=>'om', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'Opera'      => array('browser'=>'opera',        'shorty'=>'op', 'version'=>'/^.*Version\/(\d+(\.\d+)*).*$/'),
+	'IEMobile'   => array('browser'=>'ie-mobile',    'shorty'=>'im', 'version'=>'/^.*IEMobile (\d+(\.\d+)*).*$/'),
+	'Camino'     => array('browser'=>'camino',       'shorty'=>'ca', 'version'=>'/^.*Camino\/(\d+(\.\d+)*).*$/'),
+	'Konqueror'  => array('browser'=>'konqueror',    'shorty'=>'ko', 'version'=>'/^.*Konqueror\/(\d+(\.\d+)*).*$/')
 );
 
 ?>
