@@ -46,7 +46,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_archives'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options_callback'        => array('tl_module_news', 'getNewsArchives'),
-	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
+	'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_numberOfItems'] = array
@@ -55,7 +56,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_numberOfItems'] = array
 	'default'                 => 3,
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_featured'] = array
@@ -66,7 +68,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_featured'] = array
 	'inputType'               => 'select',
 	'options'                 => array('all_items', 'featured', 'unfeatured'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(16) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
@@ -76,7 +79,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_jumpToCurrent'] = array
 	'inputType'               => 'select',
 	'options'                 => array('hide_module', 'show_current', 'all_items'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(16) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_readerModule'] = array
@@ -86,7 +90,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_readerModule'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_news', 'getReaderModules'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
@@ -97,7 +102,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_metaFields'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => array('date', 'author', 'comments'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
@@ -107,7 +113,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_news', 'getNewsTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_format'] = array
@@ -122,7 +129,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_format'] = array
 	'wizard' => array
 	(
 		array('tl_module_news', 'hideStartDay')
-	)
+	),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_startDay'] = array
@@ -133,7 +141,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_startDay'] = array
 	'inputType'               => 'select',
 	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
 	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_order'] = array
@@ -144,14 +153,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['news_order'] = array
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['news_showQuantity'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['news_showQuantity'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 

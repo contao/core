@@ -51,7 +51,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_cache'] = array
 	'inputType'               => 'select',
 	'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400),
 	'eval'                    => array('tl_class'=>'w50'),
-	'reference'               => &$GLOBALS['TL_LANG']['CACHE']
+	'reference'               => &$GLOBALS['TL_LANG']['CACHE'],
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['rss_feed'] = array
@@ -59,7 +60,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_feed'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_feed'],
 	'exclude'                 => true,
 	'inputType'               => 'textarea',
-	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px;')
+	'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px;'),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['rss_numberOfItems'] = array
@@ -68,7 +70,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_numberOfItems'] = array
 	'default'                 => 3,
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+	'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['rss_template'] = array
@@ -77,7 +80,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['rss_template'] = array
 	'default'                 => 'rss_default',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_rss_reader', 'getRssTemplates')
+	'options_callback'        => array('tl_module_rss_reader', 'getRssTemplates'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 

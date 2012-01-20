@@ -120,7 +120,7 @@ class DbInstaller extends \Controller
 		$return = array();
 
 		$sql_current = $this->getFromDb();
-		$sql_target = $this->getFromFile();
+		$sql_target = array_merge($this->getFromDca(), $this->getFromFile());
 
 		// Create tables
 		foreach (array_diff(array_keys($sql_target), array_keys($sql_current)) as $table)
@@ -242,7 +242,54 @@ class DbInstaller extends \Controller
 
 
 	/**
-	 * Compile a table array from all SQL files and return it
+	 * Compile a table array from the DCA files
+	 * @return array
+	 */
+	protected function getFromDca()
+	{
+		$arrTables = array();
+
+		// Scan the modules
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		{
+			$dir = TL_ROOT . '/system/modules/' . $strModule . '/dca';
+
+			if (!is_dir($dir))
+			{
+				continue;
+			}
+
+			foreach (scan($dir) as $strTable)
+			{
+				if (strncmp($strTable, '.', 1) === 0 || strrchr($strTable, '.') != '.php')
+				{
+					continue;
+				}
+
+				if ($strTable == 'tl_files.php' || $strTable == 'tl_settings.php' || $strTable == 'tl_templates.php')
+				{
+					continue;
+				}
+
+				$arrTables[] = str_replace('.php', '', $strTable);
+			}
+		}
+
+		$return = array();
+		$arrTables = array_values(array_unique($arrTables));
+
+		foreach ($arrTables as $strTable)
+		{
+			$objTable = new \DcaExtractor($strTable);
+			$return[$strTable] = $objTable->getDbInstallerArray();
+		}
+
+		return $return;
+	}
+
+	
+	/**
+	 * Compile a table array from all SQL files
 	 * @return array
 	 */
 	protected function getFromFile()
@@ -257,7 +304,7 @@ class DbInstaller extends \Controller
 				continue;
 			}
 
-			$strFile = sprintf('%s/system/modules/%s/config/database.sql', TL_ROOT, $strModule);
+			$strFile = TL_ROOT . '/system/modules/' . $strModule . '/config/database.sql';
 
 			if (!file_exists($strFile))
 			{
@@ -278,31 +325,30 @@ class DbInstaller extends \Controller
 					continue;
 				}
 
-				// Store table names
+				// Store the table names
 				if (preg_match('/^CREATE TABLE `([^`]+)`/i', $v, $subpatterns))
 				{
 					$table = $subpatterns[1];
 				}
 
-				// Get table options
+				// Get the table options
 				elseif (strlen($table) && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
 				{
 					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
 					$table = '';
 				}
 
-				// Add fields
-				elseif (strlen($table))
+				// Add the fields
+				elseif ($table != '')
 				{
 					preg_match('/^[^`]*`([^`]+)`/i', trim($v), $key_name);
-
 					$first = preg_replace('/\s[^\n\r]+/i', '', $key_name[0]);
 					$key = $key_name[1];
 
 					// Create definitions
 					if (in_array($first, array('KEY', 'PRIMARY', 'PRIMARY KEY', 'FOREIGN', 'FOREIGN KEY', 'INDEX', 'UNIQUE', 'FULLTEXT', 'CHECK')))
 					{
-						if (in_array($first, array('PRIMARY', 'PRIMARY KEY')))
+						if (strncmp($first, 'PRIMARY', 7) === 0)
 						{
 							$key = 'PRIMARY';
 						}

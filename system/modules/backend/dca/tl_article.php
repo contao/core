@@ -52,6 +52,17 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		(
 			array('tl_article', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'alias' => 'index'
+			)
 		)
 	),
 
@@ -153,12 +164,29 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sorting' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -169,7 +197,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'save_callback' => array
 			(
 				array('tl_article', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 
 		),
 		'author' => array
@@ -179,7 +208,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'inColumn' => array
 		(
@@ -188,35 +218,40 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'default'                 => 'main',
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_article', 'getActivePageSections'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'keywords' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['keywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;')
-		),
-		'teaserCssID' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaserCssID'],
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+			'eval'                    => array('style'=>'height:60px;'),
+			'sql'                     => "text NULL"
 		),
 		'showTeaser' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['showTeaser'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'teaserCssID' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaserCssID'],
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'teaser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaser'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr')
+			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		),
 		'printable' => array
 		(
@@ -225,42 +260,48 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('print', 'pdf', 'facebook', 'twitter'),
 			'eval'                    => array('multiple'=>true),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_article'],
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'cssID' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['cssID'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'space' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['space'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'published' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['published'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['start'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'stop' => array
 		(
 			'exclude'                 => true,
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['stop'],
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );

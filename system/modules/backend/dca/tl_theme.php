@@ -39,7 +39,16 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	(
 		'dataContainer'               => 'Table',
 		'ctable'                      => array('tl_module', 'tl_style_sheet', 'tl_layout'),
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -136,6 +145,14 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['name'],
@@ -144,7 +161,8 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -154,34 +172,39 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'folders' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['folders'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox')
+			'eval'                    => array('fieldType'=>'checkbox'),
+			'sql'                     => "blob NULL"
 		),
 		'templates' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['templates'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'path'=>'templates')
+			'eval'                    => array('fieldType'=>'radio', 'path'=>'templates'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'screenshot' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['screenshot'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true)
+			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'vars' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['vars'],
 			'inputType'               => 'keyValueWizard',
-			'exclude'                 => true
+			'exclude'                 => true,
+			'sql'                     => "text NULL"
 		),
 		'source' => array
 		(

@@ -36,7 +36,7 @@ $GLOBALS['TL_DCA']['tl_user']['palettes']['custom'] = str_replace('fop;', 'fop;{
 
 
 /**
- * Add fields to tl_user_group
+ * Add fields to tl_user
  */
 $GLOBALS['TL_DCA']['tl_user']['fields']['calendars'] = array
 (
@@ -44,7 +44,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['calendars'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_calendar.title',
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_user']['fields']['calendarp'] = array
@@ -54,7 +55,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['calendarp'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => array('create', 'delete'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 ?>

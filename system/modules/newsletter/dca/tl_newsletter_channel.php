@@ -44,6 +44,15 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		'onload_callback' => array
 		(
 			array('tl_newsletter_channel', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
 		)
 	),
 
@@ -135,48 +144,62 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['title'],
 			'search'                  => true,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'useSMTP' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['useSMTP'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'smtpHost' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpHost'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'long')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'long'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'smtpUser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpUser'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'doNotShow'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'smtpPass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['smtpPass'],
 			'exclude'                 => true,
 			'inputType'               => 'textStore',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>32, 'doNotShow'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'smtpEnc' => array
 		(
@@ -184,7 +207,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array(''=>'-', 'ssl'=>'SSL', 'tls'=>'TLS'),
-			'eval'                    => array('doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('doNotShow'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(3) NOT NULL default ''"
 		),
 		'smtpPort' => array
 		(
@@ -192,7 +216,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'doNotShow'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		)
 	)
 );

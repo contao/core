@@ -44,6 +44,16 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 		'onload_callback' => array
 		(
 			array('tl_form', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'alias' => 'index'
+			)
 		)
 	),
 
@@ -130,13 +140,22 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -147,14 +166,16 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'save_callback' => array
 			(
 				array('tl_form', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr')
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'sendViaEmail' => array
 		(
@@ -162,7 +183,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'recipient' => array
 		(
@@ -170,7 +192,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'emails', 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'emails', 'tl_class'=>'w50'),
+			'sql'                     => "text NULL"
 		),
 		'subject' => array
 		(
@@ -178,7 +201,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'format' => array
 		(
@@ -188,7 +212,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'inputType'               => 'select',
 			'options'                 => array('raw', 'xml', 'csv', 'email'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_form'],
-			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('helpwizard'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'skipEmpty' => array
 		(
@@ -196,7 +221,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'storeValues' => array
 		(
@@ -204,7 +230,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'targetTable' => array
 		(
@@ -213,7 +240,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'search'                  => true,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_form', 'getAllTables'),
-			'eval'                    => array('chosen'=>true)
+			'eval'                    => array('chosen'=>true),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'method' => array
 		(
@@ -222,14 +250,16 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'select',
-			'options'                 => array('POST', 'GET')
+			'options'                 => array('POST', 'GET'),
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'attributes' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_form']['attributes'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50')
+			'eval'                    => array('multiple'=>true, 'size'=>2, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'formID' => array
 		(
@@ -237,7 +267,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('nospace'=>true, 'maxlength'=>64, 'tl_class'=>'w50')
+			'eval'                    => array('nospace'=>true, 'maxlength'=>64, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'tableless' => array
 		(
@@ -245,7 +276,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'allowTags' => array
 		(
@@ -253,7 +285,8 @@ $GLOBALS['TL_DCA']['tl_form'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		)
 	)
 );

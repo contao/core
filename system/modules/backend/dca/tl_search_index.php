@@ -23,38 +23,57 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
+ * @package    Backend
  * @license    LGPL
  */
 
 
 /**
- * Add palette
+ * Table tl_search_index
  */
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('assignDir;', 'assignDir;{newsletter_legend:hide},newsletter;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
-
-
-/**
- * Add load callback
- */
-$GLOBALS['TL_DCA']['tl_member']['config']['onload_callback'][] = array('Newsletter', 'updateAccount');
-
-
-/**
- * Add field
- */
-$GLOBALS['TL_DCA']['tl_member']['fields']['newsletter'] = array
+$GLOBALS['TL_DCA']['tl_search_index'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['newsletter'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'options_callback'        => array('Newsletter', 'getNewsletters'),
-	'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'newsletter'),
-	'save_callback' => array
+
+	// Config
+	'config' => array
 	(
-		array('Newsletter', 'synchronize')
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'word' => 'index'
+			)
+		)
 	),
-	'sql'                     => "blob NULL"
+
+	// Fields
+	'fields' => array
+	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'word' => array
+		(
+			'sql'                     => "varbinary(64) NOT NULL default ''"
+		),
+		'relevance' => array
+		(
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+		),
+		'language' => array
+		(
+			'sql'                     => "varchar(2) NOT NULL default ''"
+		)
+	)
 );
 
 ?>

@@ -39,7 +39,16 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 	(
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
-		'notEditable'                 => true
+		'notEditable'                 => true,
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -77,34 +86,44 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 	// Fields
 	'fields' => array
 	(
-		'tstamp' => array
+		'id' => array
 		(
-			'sorting'                 => true,
-			'flag'                    => 6
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
 		),
 		'pid' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['pid'],
 			'sorting'                 => true,
-			'foreignKey'              => 'tl_user.name'
+			'foreignKey'              => 'tl_user.name',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sorting'                 => true,
+			'flag'                    => 6,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'fromTable' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['fromTable'],
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'query' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['query']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['query'],
+			'sql'                     => "text NULL"
 		),
 		'affectedRows' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['affectedRows']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['affectedRows'],
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'data' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['data'],
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "mediumblob NULL"
 		)
 	)
 );

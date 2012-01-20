@@ -49,6 +49,15 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_news_archive', 'scheduleUpdate')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
 		)
 	),
 
@@ -136,20 +145,30 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'radio')
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'allowComments' => array
 		(
@@ -157,7 +176,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'notify' => array
 		(
@@ -166,7 +186,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('notify_admin', 'notify_author', 'notify_both'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'sortOrder' => array
 		(
@@ -176,42 +197,48 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'select',
 			'options'                 => array('ascending', 'descending'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'perPage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['perPage'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'moderate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['moderate'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'bbcode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['bbcode'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'requireLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['requireLogin'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'disableCaptcha' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['disableCaptcha'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'protected' => array
 		(
@@ -219,7 +246,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'groups' => array
 		(
@@ -227,7 +255,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true)
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'makeFeed' => array
 		(
@@ -235,7 +264,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'format' => array
 		(
@@ -245,7 +275,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom'),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'language' => array
 		(
@@ -254,7 +285,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'source' => array
 		(
@@ -264,7 +296,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'select',
 			'options'                 => array('source_teaser', 'source_text'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_news_archive'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'maxItems' => array
 		(
@@ -272,7 +305,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'feedBase' => array
 		(
@@ -281,7 +315,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -293,7 +328,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'save_callback' => array
 			(
 				array('tl_news_archive', 'checkFeedAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'description' => array
 		(
@@ -301,7 +337,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		)
 	)
 );

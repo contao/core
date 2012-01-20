@@ -39,7 +39,16 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 	(
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
-		'notEditable'                 => true
+		'notEditable'                 => true,
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -89,57 +98,69 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
 		'tstamp' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['tstamp'],
 			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 6
+			'flag'                    => 6,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['source'],
 			'filter'                  => true,
 			'sorting'                 => true,
-			'reference'               => &$GLOBALS['TL_LANG']['tl_log']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_log'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'action' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['action'],
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'username' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['username'],
 			'search'                  => true,
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'text' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['text'],
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "text NULL"
 		),
 		'func' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['func'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['ip'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'browser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['browser'],
 			'sorting'                 => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		)
 	)
 );

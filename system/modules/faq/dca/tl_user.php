@@ -44,7 +44,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['faqs'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_faq_category.title',
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_user']['fields']['faqp'] = array
@@ -54,7 +55,8 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['faqp'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => array('create', 'delete'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 ?>

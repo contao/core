@@ -54,6 +54,16 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_style_sheet', 'scheduleUpdate')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'name' => 'unique'
+			)
 		)
 	),
 
@@ -141,6 +151,18 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['name'],
@@ -148,7 +170,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'cc' => array
 		(
@@ -160,7 +183,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'save_callback' => array
 			(
 				array('tl_style_sheet', 'sanitizeCc')
-			)
+			),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'media' => array
 		(
@@ -169,7 +193,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'options'                 => array('all', 'aural', 'braille', 'embossed', 'handheld', 'print', 'projection', 'screen', 'tty', 'tv'),
-			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
+			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'mediaQuery' => array
 		(
@@ -177,13 +202,15 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'search'                  => true,
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'vars' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['vars'],
 			'inputType'               => 'keyValueWizard',
-			'exclude'                 => true
+			'exclude'                 => true,
+			'sql'                     => "text NULL"
 		),
 		'source' => array
 		(

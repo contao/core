@@ -44,7 +44,16 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
-		'enableVersioning'            => true
+		'enableVersioning'            => true,
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -119,13 +128,22 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['name'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'modules' => array
 		(
@@ -134,7 +152,8 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_user_group', 'getModules'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
-			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'themes' => array
 		(
@@ -143,14 +162,16 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('css', 'modules', 'layout'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'pagemounts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pagemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'checkbox')
+			'eval'                    => array('fieldType'=>'checkbox'),
+			'sql'                     => "blob NULL"
 		),
 		'alpty' => array
 		(
@@ -160,14 +181,16 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array_keys($GLOBALS['TL_PTY']),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
-			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'filemounts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['filemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox')
+			'eval'                    => array('fieldType'=>'checkbox'),
+			'sql'                     => "blob NULL"
 		),
 		'fop' => array
 		(
@@ -177,7 +200,8 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5'),
 			'reference'               => &$GLOBALS['TL_LANG']['FOP'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'forms' => array
 		(
@@ -185,7 +209,8 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_form.title',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'formp' => array
 		(
@@ -194,7 +219,8 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('create', 'delete'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'alexf' => array
 		(
@@ -202,28 +228,32 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_user_group', 'getExcludedFields'),
-			'eval'                    => array('multiple'=>true, 'size'=>36)
+			'eval'                    => array('multiple'=>true, 'size'=>36),
+			'sql'                     => "blob NULL"
 		),
 		'disable' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['disable'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user_group']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );

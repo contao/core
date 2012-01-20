@@ -405,7 +405,7 @@ abstract class System
 		{
 			// Generate the cache files
 			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->tuncate();
+			$objCacheFallback->truncate();
 
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
 			$objCacheFile->truncate();

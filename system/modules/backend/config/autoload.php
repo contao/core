@@ -43,7 +43,6 @@ ClassLoader::addClasses(array
 	'Contao\\CheckBoxWizard'    => 'system/modules/backend/CheckBoxWizard.php',
 	'Contao\\ChmodTable'        => 'system/modules/backend/ChmodTable.php',
 	'Contao\\DataContainer'     => 'system/modules/backend/DataContainer.php',
-	'Contao\\DbInstaller'       => 'system/modules/backend/DbInstaller.php',
 	'Contao\\FileTree'          => 'system/modules/backend/FileTree.php',
 	'Contao\\FileUpload'        => 'system/modules/backend/FileUpload.php',
 	'Contao\\ImageSize'         => 'system/modules/backend/ImageSize.php',

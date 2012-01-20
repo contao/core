@@ -43,7 +43,8 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['calendars'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_calendar.title',
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_user_group']['fields']['calendarp'] = array
@@ -53,7 +54,8 @@ $GLOBALS['TL_DCA']['tl_user_group']['fields']['calendarp'] = array
 	'inputType'               => 'checkbox',
 	'options'                 => array('create', 'delete'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 ?>

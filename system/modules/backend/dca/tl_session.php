@@ -23,38 +23,65 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Newsletter
+ * @package    Backend
  * @license    LGPL
  */
 
 
 /**
- * Add palette
+ * Table tl_session
  */
-$GLOBALS['TL_DCA']['tl_member']['palettes']['default'] = str_replace('assignDir;', 'assignDir;{newsletter_legend:hide},newsletter;', $GLOBALS['TL_DCA']['tl_member']['palettes']['default']);
-
-
-/**
- * Add load callback
- */
-$GLOBALS['TL_DCA']['tl_member']['config']['onload_callback'][] = array('Newsletter', 'updateAccount');
-
-
-/**
- * Add field
- */
-$GLOBALS['TL_DCA']['tl_member']['fields']['newsletter'] = array
+$GLOBALS['TL_DCA']['tl_session'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_member']['newsletter'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'options_callback'        => array('Newsletter', 'getNewsletters'),
-	'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'newsletter'),
-	'save_callback' => array
+
+	// Config
+	'config' => array
 	(
-		array('Newsletter', 'synchronize')
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'hash' => 'unique'
+			)
+		)
 	),
-	'sql'                     => "blob NULL"
+
+	// Fields
+	'fields' => array
+	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'name' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'sessionID' => array
+		(
+			'sql'                     => "varchar(128) NOT NULL default ''"
+		),
+		'hash' => array
+		(
+			'sql'                     => "varchar(40) NOT NULL default ''"
+		),
+		'ip' => array
+		(
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		)
+	)
 );
 
 ?>

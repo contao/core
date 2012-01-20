@@ -296,14 +296,21 @@ abstract class Template extends Controller
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
 			echo "\n\n"
-				. '<div id="debug">' . "\n"
-				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span></p>' . "\n"
+				. '<div id="debug" class="' . $this->Input->cookie('CONTAO_CONSOLE') . '">' . "\n"
+				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span id="tog">&nbsp;</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 
 			ksort($GLOBALS['TL_DEBUG']);
 			print_r($GLOBALS['TL_DEBUG']);
 
-			echo '</pre></div><script>$$("#debug p", "#debug div").setStyle("width", window.getSize().x)</script>';
+			echo '</pre></div>'
+				. '<script>'
+					. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
+					. "$('tog').addEvent('click',function(e){"
+						. "$('debug').toggleClass('closed');"
+						. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'');"
+					. "});"
+				. '</script>';
 		}
 	}
 

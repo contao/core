@@ -45,7 +45,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['faq_categories'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkboxWizard',
 	'foreignKey'              => 'tl_faq_category.title',
-	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
+	'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['faq_readerModule'] = array
@@ -55,7 +56,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['faq_readerModule'] = array
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_faq', 'getReaderModules'),
 	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
-	'eval'                    => array('includeBlankOption'=>true)
+	'eval'                    => array('includeBlankOption'=>true),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
 

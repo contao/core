@@ -43,6 +43,16 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		'onload_callback' => array
 		(
 			array('tl_newsletter', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index'
+			)
 		)
 	),
 
@@ -125,6 +135,18 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'subject' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['subject'],
@@ -133,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
@@ -145,7 +168,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'content' => array
 		(
@@ -158,7 +182,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'save_callback' => array
 			(
 				array('tl_newsletter', 'convertRelativeLinks')
-			)
+			),
+			'sql'                     => "text NULL"
 		),
 		'text' => array
 		(
@@ -166,7 +191,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true)
+			'eval'                    => array('decodeEntities'=>true),
+			'sql'                     => "text NULL"
 		),
 		'addFile' => array
 		(
@@ -174,14 +200,16 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'files' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['files'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true)
+			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'template' => array
 		(
@@ -189,7 +217,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'default'                 => 'mail_default',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => $this->getTemplateGroup('mail_')
+			'options'                 => $this->getTemplateGroup('mail_'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),		
 		'sendText' => array
 		(
@@ -197,14 +226,16 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'externalImages' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['externalImages'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'sender' => array
 		(
@@ -213,7 +244,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'search'                  => true,
 			'filter'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'email', 'maxlength'=>128, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'senderName' => array
 		(
@@ -223,7 +255,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'sorting'                 => true,
 			'flag'                    => 11,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'sent' => array
 		(
@@ -231,7 +264,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 11,
-			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true)
+			'eval'                    => array('doNotCopy'=>true, 'isBoolean'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'date' => array
 		(
@@ -239,7 +273,8 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );

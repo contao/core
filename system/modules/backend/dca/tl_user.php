@@ -46,6 +46,17 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_user', 'storeDateAdded')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'username' => 'unique',
+				'email' => 'index'
+			)
 		)
 	),
 
@@ -137,6 +148,14 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'username' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['username'],
@@ -145,7 +164,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64)
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'nospace'=>true, 'unique'=>true, 'maxlength'=>64),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'name' => array
 		(
@@ -155,7 +175,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'email' => array
 		(
@@ -163,7 +184,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>255, 'unique'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'email', 'maxlength'=>255, 'unique'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'language' => array
 		(
@@ -173,7 +195,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'filter'                  => true,
 			'inputType'               => 'select',
 			'options'                 => $this->getBackendLanguages(),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(2) NOT NULL default ''"
 		),
 		'backendTheme' => array
 		(
@@ -181,7 +204,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => $this->getBackendThemes(),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'uploader' => array
 		(
@@ -190,7 +214,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'select',
 			'options'                 => array('FileUpload'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'showHelp' => array
 		(
@@ -198,7 +223,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => 1,
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'thumbnails' => array
 		(
@@ -206,7 +232,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => 1,
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'useRTE' => array
 		(
@@ -214,7 +241,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => 1,
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'useCE' => array
 		(
@@ -222,21 +250,24 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'default'                 => 1,
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'password' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['password'],
 			'exclude'                 => true,
 			'inputType'               => 'password',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength'])
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'extnd', 'minlength'=>$GLOBALS['TL_CONFIG']['minPasswordLength']),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'pwChange' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pwChange'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'filter'                  => true
+			'filter'                  => true,
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'admin' => array
 		(
@@ -248,7 +279,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'save_callback' => array
 			(
 				array('tl_user', 'checkAdmin')
-			)
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'groups' => array
 		(
@@ -257,7 +289,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'inherit' => array
 		(
@@ -267,7 +300,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'radio',
 			'options'                 => array('group', 'extend', 'custom'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_user'],
-			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true)
+			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true),
+			'sql'                     => "varchar(12) NOT NULL default ''"
 		),
 		'modules' => array
 		(
@@ -277,7 +311,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_user', 'getModules'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
-			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'themes' => array
 		(
@@ -286,14 +321,16 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('css', 'modules', 'layout'),
 			'reference'               => &$GLOBALS['TL_LANG']['MOD'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'pagemounts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['pagemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'eval'                    => array('fieldType'=>'checkbox')
+			'eval'                    => array('fieldType'=>'checkbox'),
+			'sql'                     => "blob NULL"
 		),
 		'alpty' => array
 		(
@@ -303,14 +340,16 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('regular', 'redirect', 'forward', 'root', 'error_403', 'error_404'),
 			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
-			'eval'                    => array('multiple'=>true, 'helpwizard'=>true)
+			'eval'                    => array('multiple'=>true, 'helpwizard'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'filemounts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['filemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox')
+			'eval'                    => array('fieldType'=>'checkbox'),
+			'sql'                     => "blob NULL"
 		),
 		'fop' => array
 		(
@@ -320,7 +359,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('f1', 'f2', 'f3', 'f4', 'f5'),
 			'reference'               => &$GLOBALS['TL_LANG']['FOP'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'forms' => array
 		(
@@ -328,7 +368,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_form.title',
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'formp' => array
 		(
@@ -337,7 +378,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('create', 'delete'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'disable' => array
 		(
@@ -345,14 +387,16 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'flag'                    => 2,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 
 		),
 		'stop' => array
@@ -360,28 +404,44 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'session' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['session'],
 			'exclude'                 => true,
 			'input_field_callback'    => array('tl_user', 'sessionField'),
-			'eval'                    => array('doNotShow'=>true)
+			'eval'                    => array('doNotShow'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'dateAdded' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['dateAdded'],
 			'sorting'                 => true,
 			'flag'                    => 6,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'lastLogin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['lastLogin'],
 			'sorting'                 => true,
 			'flag'                    => 6,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'currentLogin' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'loginCount' => array
+		(
+			'sql'                     => "smallint(5) unsigned NOT NULL default '3'"
+		),
+		'locked' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		)
 	)
 );

@@ -47,7 +47,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['newsletters'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_newsletter_channel.title',
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
@@ -56,14 +57,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options_callback'        => array('tl_module_newsletter', 'getChannels'),
-	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
+	'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_hideChannels'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
@@ -75,7 +78,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
 	'load_callback' => array
 	(
 		array('tl_module_newsletter', 'getSubscribeDefault')
-	)
+	),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
@@ -87,7 +91,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
 	'load_callback' => array
 	(
 		array('tl_module_newsletter', 'getUnsubscribeDefault')
-	)
+	),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
@@ -96,7 +101,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 	'default'                 => 'nl_simple',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates')
+	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 

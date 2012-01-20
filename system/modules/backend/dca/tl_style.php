@@ -64,6 +64,17 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 		'onrestore_callback' => array
 		(
 			array('tl_style', 'updateAfterRestore')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'selector' => 'index'
+			)
 		)
 	),
 
@@ -155,16 +166,34 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sorting' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'invisible' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['invisible'],
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'selector' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['selector'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'category' => array
 		(
@@ -176,130 +205,149 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'load_callback' => array
 			(
 				array('tl_style', 'checkCategory')
-			)
+			),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'comment' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['comment'],
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'size' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['size'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'width' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['width'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'height' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['height'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'minwidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minwidth'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'minheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['minheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'maxwidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxwidth'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'maxheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['maxheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'positioning' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['positioning'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'trbl' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['trbl'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'position' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['position'],
 			'inputType'               => 'select',
 			'options'                 => array('absolute', 'relative', 'static', 'fixed'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'floating' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['floating'],
 			'inputType'               => 'select',
 			'options'                 => array('left', 'right', 'none'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'clear' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['clear'],
 			'inputType'               => 'select',
 			'options'                 => array('both', 'left', 'right', 'none'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'overflow' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['overflow'],
 			'inputType'               => 'select',
 			'options'                 => array('auto', 'hidden', 'scroll', 'visible'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'display' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['display'],
 			'inputType'               => 'select',
 			'options'                 => array('block', 'inline', 'inline-block', 'list-item', 'run-in', 'compact', 'none', 'table', 'inline-table', 'table-row', 'table-cell', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-column', 'table-column-group', 'table-caption'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'alignment' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['alignment'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'margin' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['margin'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_auto_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'padding' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['padding'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'align' => array
 		(
@@ -307,14 +355,16 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('left', 'center', 'right'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'verticalalign' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['verticalalign'],
 			'inputType'               => 'select',
 			'options'                 => array('top', 'text-top', 'middle', 'text-bottom', 'baseline', 'bottom'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'textalign' => array
 		(
@@ -322,13 +372,15 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('left', 'center', 'right', 'justify'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'background' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['background'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'bgcolor' => array
 		(
@@ -338,7 +390,8 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'bgimage' => array
 		(
@@ -348,28 +401,32 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'bgposition' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgposition'],
 			'inputType'               => 'select',
 			'options'                 => array('left top', 'left center', 'left bottom', 'center top', 'center center', 'center bottom', 'right top', 'right center', 'right bottom'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'bgrepeat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bgrepeat'],
 			'inputType'               => 'select',
 			'options'                 => array('repeat', 'repeat-x', 'repeat-y', 'no-repeat'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'shadowsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['shadowsize'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'shadowcolor' => array
 		(
@@ -379,39 +436,45 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'gradientAngle' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientAngle'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'gradientColors' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['gradientColors'],
 			'inputType'               => 'text',
-			'eval'                    => array('multiple'=>true, 'size'=>4, 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('multiple'=>true, 'size'=>4, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'border' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['border'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'borderwidth' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderwidth'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'borderstyle' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderstyle'],
 			'inputType'               => 'select',
 			'options'                 => array('solid', 'dotted', 'dashed', 'double', 'groove', 'ridge', 'inset', 'outset', 'hidden'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'bordercolor' => array
 		(
@@ -421,47 +484,54 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'borderradius' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderradius'],
 			'inputType'               => 'trbl',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'bordercollapse' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['bordercollapse'],
 			'inputType'               => 'select',
 			'options'                 => array('collapse', 'separate'),
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'borderspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['borderspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'font' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['font'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'fontfamily' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontfamily'],
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fontsize' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['fontsize'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'fontcolor' => array
 		(
@@ -471,14 +541,16 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'colorPicker')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'lineheight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['lineheight'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'fontstyle' => array
 		(
@@ -486,12 +558,14 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'checkbox',
 			'options'                 => array('bold', 'italic', 'normal', 'underline', 'notUnderlined', 'line-through', 'overline', 'small-caps'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
-			'eval'                    => array('multiple'=>true, 'tl_class'=>'clr')
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'whitespace' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['whitespace'],
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'texttransform' => array
 		(
@@ -499,34 +573,39 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('uppercase', 'lowercase', 'capitalize', 'none'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'textindent' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['textindent'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'letterspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['letterspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'wordspacing' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['wordspacing'],
 			'inputType'               => 'inputUnit',
 			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit_normal_inherit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'list' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['list'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'liststyletype' => array
 		(
@@ -534,7 +613,8 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'inputType'               => 'select',
 			'options'                 => array('disc', 'circle', 'square', 'decimal', 'upper-roman', 'lower-roman', 'upper-alpha', 'lower-alpha', 'none'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_style'],
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'liststyleimage' => array
 		(
@@ -544,13 +624,15 @@ $GLOBALS['TL_DCA']['tl_style'] = array
 			'wizard' => array
 			(
 				array('tl_style', 'filePicker')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'own' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style']['own'],
 			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px;')
+			'eval'                    => array('decodeEntities'=>true, 'style'=>'height:120px;'),
+			'sql'                     => "text NULL"
 		)
 	)
 );

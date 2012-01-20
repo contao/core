@@ -57,7 +57,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['disableCaptcha'] = array
 (
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'],
 	'exclude'       => true,
-	'inputType'     => 'checkbox'
+	'inputType'     => 'checkbox',
+	'sql'           => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_groups'] = array
@@ -66,21 +67,24 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_groups'] = array
 	'exclude'       => true,
 	'inputType'     => 'checkbox',
 	'foreignKey'    => 'tl_member_group.name',
-	'eval'          => array('multiple'=>true)
+	'eval'          => array('multiple'=>true),
+	'sql'           => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_allowLogin'] = array
 (
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'],
 	'exclude'       => true,
-	'inputType'     => 'checkbox'
+	'inputType'     => 'checkbox',
+	'sql'           => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_skipName'] = array
 (
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_skipName'],
 	'exclude'       => true,
-	'inputType'     => 'checkbox'
+	'inputType'     => 'checkbox',
+	'sql'           => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_close'] = array
@@ -89,7 +93,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_close'] = array
 	'exclude'       => true,
 	'inputType'     => 'select',
 	'options'       => array('close_deactivate', 'close_delete'),
-	'reference'     => &$GLOBALS['TL_LANG']['tl_module']
+	'reference'     => &$GLOBALS['TL_LANG']['tl_module'],
+	'sql'           => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_assignDir'] = array
@@ -97,7 +102,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_assignDir'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_assignDir'],
 	'exclude'       => true,
 	'inputType'     => 'checkbox',
-	'eval'          => array('submitOnChange'=>true)
+	'eval'          => array('submitOnChange'=>true),
+	'sql'           => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_homeDir'] = array
@@ -105,7 +111,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_homeDir'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_homeDir'],
 	'exclude'       => true,
 	'inputType'     => 'fileTree',
-	'eval'          => array('fieldType'=>'radio', 'tl_class'=>'clr')
+	'eval'          => array('fieldType'=>'radio', 'tl_class'=>'clr'),
+	'sql'           => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_activate'] = array
@@ -113,7 +120,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_activate'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
 	'exclude'       => true,
 	'inputType'     => 'checkbox',
-	'eval'          => array('submitOnChange'=>true)
+	'eval'          => array('submitOnChange'=>true),
+	'sql'           => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_jumpTo'] = array
@@ -121,7 +129,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_jumpTo'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo'],
 	'exclude'       => true,
 	'inputType'     => 'pageTree',
-	'eval'          => array('fieldType'=>'radio')
+	'eval'          => array('fieldType'=>'radio'),
+	'sql'           => "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_text'] = array
@@ -133,7 +142,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_text'] = array
 	'load_callback' => array
 	(
 		array('tl_module_registration', 'getActivationDefault')
-	)
+	),
+	'sql'           => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_password'] = array
@@ -145,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_password'] = array
 	'load_callback' => array
 	(
 		array('tl_module_registration', 'getPasswordDefault')
-	)
+	),
+	'sql'           => "text NULL"
 );
 
 

@@ -43,6 +43,17 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		'onload_callback' => array
 		(
 			array('tl_comments', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'source' => 'index',
+				'parent' => 'index'
+			)
 		)
 	),
 
@@ -121,25 +132,36 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['source'],
 			'filter'                  => true,
 			'sorting'                 => true,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_comments'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'parent' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['parent'],
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['date'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'flag'                    => 8
+			'flag'                    => 8,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'name' => array
 		(
@@ -147,7 +169,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'email' => array
 		(
@@ -155,7 +178,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'website' => array
 		(
@@ -163,7 +187,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'comment' => array
 		(
@@ -171,7 +196,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE')
+			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE'),
+			'sql'                     => "text NULL"
 		),
 		'addReply' => array
 		(
@@ -179,7 +205,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -188,7 +215,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true)
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'reply' => array
 		(
@@ -196,7 +224,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE')
+			'eval'                    => array('rte'=>'tinyMCE'),
+			'sql'                     => "text NULL"
 		),
 		'published' => array
 		(
@@ -204,7 +233,16 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'date' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'ip' => array
+		(
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		)
 	)
 );

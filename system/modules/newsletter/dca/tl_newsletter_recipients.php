@@ -43,6 +43,17 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		'onload_callback' => array
 		(
 			array('tl_newsletter_recipients', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'engine' => 'MyISAM',
+			'charset' => 'utf8',
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'email' => 'index'
+			)
 		)
 	),
 
@@ -121,6 +132,18 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'email' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email'],
@@ -133,7 +156,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'save_callback' => array
 			(
 				array('tl_newsletter_recipients', 'checkUniqueRecipient')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'active' => array
 		(
@@ -141,7 +165,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'source' => array
 		(
@@ -154,14 +179,20 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'],
 			'search'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 11
+			'flag'                    => 11,
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'token' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
 );
