@@ -76,6 +76,12 @@ class DcaExtractor extends \DbInstaller
 	protected $arrKeys = array();
 
 	/**
+	 * Relations
+	 * @var array
+	 */
+	protected $arrRelations = array();
+
+	/**
 	 * SQL buffer
 	 * @var array
 	 */
@@ -93,7 +99,7 @@ class DcaExtractor extends \DbInstaller
 		$this->strTable = $strTable;
 		$this->strFile = TL_ROOT . '/system/cache/sql/' . $strTable . '.php';
 
-		if ($GLOBALS['TL_CONFIG']['debugMode'] || !file_exists($this->strFile))
+		if ($GLOBALS['TL_CONFIG']['bypassCache'] || !file_exists($this->strFile))
 		{
 			$this->createExtract();
 		}
@@ -105,12 +111,42 @@ class DcaExtractor extends \DbInstaller
 
 
 	/**
-	 * Return the field names as array
+	 * Return the meta array
 	 * @return array
 	 */
-	public function getFieldNames()
+	public function getMeta()
 	{
-		return array_keys($this->arrFields);
+		return $this->arrMeta;
+	}
+
+
+	/**
+	 * Return the fields array
+	 * @return array
+	 */
+	public function getFields()
+	{
+		return $this->arrFields;
+	}
+
+
+	/**
+	 * Return the keys array
+	 * @return array
+	 */
+	public function getKey()
+	{
+		return $this->arrKeys;
+	}
+
+
+	/**
+	 * Return the relations array
+	 * @return array
+	 */
+	public function getRelations()
+	{
+		return $this->arrRelations;
 	}
 
 
@@ -163,14 +199,24 @@ class DcaExtractor extends \DbInstaller
 		}
 
 		$blnFromFile = false;
+		$arrRelations = array();
 
-		// Check whether all fields have an SQL definition
-		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $config)
+		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $field=>$config)
 		{
+			// Check whether all fields have an SQL definition
 			if (!isset($config['sql']) && isset($config['inputType']))
 			{
 				$blnFromFile = true;
-				break;
+			}
+
+			// Check whether there is a relation
+			if (isset($config['foreignKey']) && isset($config['relation']))
+			{
+				$arrRelations[$field] = array
+				(
+					'type' => $config['relation'],
+					'foreignKey' => $config['foreignKey']
+				);
 			}
 		}
 
@@ -251,6 +297,17 @@ class DcaExtractor extends \DbInstaller
 			foreach ($sql['keys'] as $field=>$type)
 			{
 				$objFile->append("\t'$field' => '$type',");
+			}
+			$objFile->append(');', "\n\n");
+		}
+
+		// Relations
+		if (!empty($arrRelations))
+		{
+			$objFile->append("\$this->arrRelations = array\n(");
+			foreach ($arrRelations as $field=>$config)
+			{
+				$objFile->append("\t'$field' => array('type'=>'{$config['type']}', 'foreignKey'=>'{$config['foreignKey']}'),");
 			}
 			$objFile->append(');', "\n\n");
 		}

@@ -855,10 +855,11 @@ abstract class Controller extends \System
 			$mode = 'center_center';
 		}
 
-		$strCacheName = 'assets/images/' . $objFile->filename . '-' . substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8) . '.' . $objFile->extension;
+		$strCacheKey = substr(md5('-w' . $width . '-h' . $height . '-' . $image . '-' . $mode . '-' . $objFile->mtime), 0, 8);
+		$strCacheName = 'assets/images/' . substr($strCacheKey, -1) . '/' . $objFile->filename . '-' . $strCacheKey . '.' . $objFile->extension;
 
 		// Return the path of the new image if it exists already
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists(TL_ROOT . '/' . $strCacheName))
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists(TL_ROOT . '/' . $strCacheName))
 		{
 			return $this->urlEncode($strCacheName);
 		}
@@ -2643,7 +2644,7 @@ abstract class Controller extends \System
 
 		$strCacheFile = TL_ROOT . '/system/cache/dca/' . $strName . '.php';
 
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists($strCacheFile))
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
 		{
 			include $strCacheFile;
 		}

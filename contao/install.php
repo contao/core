@@ -151,15 +151,30 @@ class InstallTool extends Backend
 			{
 				$this->import('Files');
 
-				// Make folders writable
+				// The system/tmp folder must be writable for fopen()
 				if (!is_writable(TL_ROOT . '/system/tmp'))
 				{
 					$this->Files->chmod('system/tmp', 0777);
 				}
+
+				// The assets/images folder must be writable for image*()
 				if (!is_writable(TL_ROOT . '/assets/images'))
 				{
 					$this->Files->chmod('assets/images', 0777);
 				}
+
+				$folders = array('0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f');
+
+				// Also make the subfolders writable
+				foreach ($folders as $folder)
+				{
+					if (!is_writable(TL_ROOT . '/assets/images/' . $folder))
+					{
+						$this->Files->chmod('assets/images/' . $folder, 0777);
+					}
+				}
+
+				// The system/logs folder must be writable for error_log()
 				if (!is_writable(TL_ROOT . '/system/logs'))
 				{
 					$this->Files->chmod('system/logs', 0777);

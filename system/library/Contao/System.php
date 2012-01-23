@@ -396,7 +396,7 @@ abstract class System
 		$strCacheFallback = TL_ROOT . '/system/cache/language/en/' . $strName . '.php';
 		$strCacheFile = TL_ROOT . '/system/cache/language/' . $strLanguage . '/' . $strName . '.php';
 
-		if (!$GLOBALS['TL_CONFIG']['debugMode'] && file_exists($strCacheFile))
+		if (!$GLOBALS['TL_CONFIG']['bypassCache'] && file_exists($strCacheFile))
 		{
 			include $strCacheFallback;
 			include $strCacheFile;
