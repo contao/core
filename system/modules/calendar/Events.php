@@ -468,12 +468,14 @@ abstract class Events extends Module
 
 			case 'next_cur_month':
 				$objToday = new Date();
-				return array($objToday->dayBegin, (strtotime('first day of next month', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				$intHelperTimestamp = strtotime('+1 month', $objToday->dayBegin);
+				return array($objToday->dayBegin, (mktime(0, 0, 0, date('n', $intHelperTimestamp), 1, date('Y', $intHelperTimestamp)) -1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_cur_year':
 				$objToday = new Date();
-				return array($objToday->dayBegin, (strtotime('first day of next year', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				$intHelperTimestamp = strtotime('+1 year', $objToday->dayBegin);
+				return array($objToday->dayBegin, (mktime(0, 0, 0, 1, 1, date('Y', $intHelperTimestamp)) -1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_all': // 2038-01-01 00:00:00
@@ -518,12 +520,12 @@ abstract class Events extends Module
 
 			case 'past_cur_month':
 				$objToday = new Date();
-				return array((strtotime('first day of this month', $objToday->dayBegin)), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array((mktime(0, 0, 0, date('n', $objToday->dayBegin), 1, date('Y', $objToday->dayBegin)) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_cur_year':
 				$objToday = new Date();
-				return array((strtotime('first day of this year', $objToday->dayBegin)), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				return array((mktime(0, 0, 0, 1, 1, date('Y', $objToday->dayBegin)) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_all': // 1970-01-01 00:00:00
