@@ -192,7 +192,7 @@ class Combiner extends \System
 				}
 
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
-				$content = preg_replace('/url\("(?!data:)/', 'url("../../' . $strGlue, $content);
+				$content = preg_replace('/url\("(?!(data:|https?:\/\/))/', 'url("../../' . $strGlue, $content);
 				$content = '@media ' . (($arrFile['media'] != '') ? $arrFile['media'] : 'all') . "{\n" . $content . "\n}";
 			}
 
