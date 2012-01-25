@@ -1030,7 +1030,12 @@ class StyleSheets extends Backend
 		if ($blnWriteToFile)
 		{
 			$nl = $blnDebug ? "\n" : '';
-			$return = substr($return, 0, -1);
+
+			if (substr($return, -1) !== '{')
+			{
+				$return = substr($return, 0, -1);
+			}
+
 			$return .= $nl . '}' . $nl;
 		}
 		else
