@@ -88,15 +88,24 @@ class ModuleWizard extends Widget
 		}
 
 		// Get all modules of the current theme
-		$objModules = $this->Database->prepare("SELECT id, name FROM tl_module WHERE pid=(SELECT pid FROM " . $this->strTable . " WHERE id=?) ORDER BY name")
+		$objModules = $this->Database->prepare("SELECT id, name, type FROM tl_module WHERE pid=(SELECT pid FROM " . $this->strTable . " WHERE id=?) ORDER BY name")
 									 ->execute($this->currentRecord);
 
 		// Add the articles module
-		$modules[] = array('id'=>0, 'name'=>$GLOBALS['TL_LANG']['MOD']['article'][0]);
+		$modules[] = array('id'=>0, 'name'=>$GLOBALS['TL_LANG']['MOD']['article'][0], 'type'=>'article');
 
 		if ($objModules->numRows)
 		{
 			$modules = array_merge($modules, $objModules->fetchAllAssoc());
+		}
+
+		$GLOBALS['TL_LANG']['FMD']['article'] = $GLOBALS['TL_LANG']['MOD']['article'];
+
+		// Add the module type (see #3835)
+		foreach ($modules as $k=>$v)
+		{
+			$v['type'] = $GLOBALS['TL_LANG']['FMD'][$v['type']][0];
+			$modules[$k] = $v;
 		}
 
 		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
@@ -182,7 +191,7 @@ class ModuleWizard extends Widget
 			// Add modules
 			foreach ($modules as $v)
 			{
-				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].'</option>';
+				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' // '. $v['type'] .'</option>';
 			}
 
 			$return .= '
