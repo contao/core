@@ -2950,53 +2950,19 @@ abstract class Controller extends System
 
 
 	/**
-	 * Return the IDs of all child records of a particular record (see #2475)
-	 * @param mixed
-	 * @param string
-	 * @param boolean
-	 * @param array
-	 * @return array
-	 * @author Andreas Schempp
+	 * @deprecated Use DBAdjacencyListTree::getDescendants(..) or
+	 * 		DBAdjacencyListTree::getDescendantsPreorder(..) instead
 	 */
-	protected function getChildRecords($arrParentIds, $strTable, $blnSorting=false, $arrReturn=array())
+	protected function getChildRecords($arrParentIds, $strTable = 'tl_page', $blnSorting = false)
 	{
-		if (!is_array($arrParentIds))
+		if($blnSorting)
 		{
-			$arrParentIds = array($arrParentIds);
+			return DBAdjacencyListTree::getDescendants($arrParentIds, false, $strTable);
 		}
-
-		$arrParentIds = array_map('intval', $arrParentIds);
-		$objChilds = $this->Database->execute("SELECT id, pid FROM " . $strTable . " WHERE pid IN(" . implode(',', $arrParentIds) . ")" . ($blnSorting ? " ORDER BY " . $this->Database->findInSet('pid', $arrParentIds) . ", sorting" : ""));
-
-		if ($objChilds->numRows > 0)
+		else
 		{
-			if ($blnSorting)
-			{
-				$arrChilds = array();
-				$arrOrdered = array();
-
-				while ($objChilds->next())
-				{
-					$arrChilds[] = $objChilds->id;
-					$arrOrdered[$objChilds->pid][] = $objChilds->id;
-				}
-
-				foreach (array_reverse(array_keys($arrOrdered)) as $pid)
-				{
-					$pos = (int) array_search($pid, $arrReturn);
-					array_insert($arrReturn, $pos+1, $arrOrdered[$pid]);
-				}
-
-				$arrReturn = $this->getChildRecords($arrChilds, $strTable, $blnSorting, $arrReturn);
-			}
-			else
-			{
-				$arrChilds = $objChilds->fetchEach('id');
-				$arrReturn = array_merge($arrChilds, $this->getChildRecords($arrChilds, $strTable, $blnSorting));
-			}
+			return DBAdjacencyListTree::getDescendantsPreorder($arrParentIds, false, $strTable);
 		}
-
-		return $arrReturn;
 	}
 
 
@@ -3094,24 +3060,17 @@ abstract class Controller extends System
 	 * @param string
 	 * @param boolean
 	 * @return array
+	 * 
+	 * @deprecated Use DBAdjacencyListTree::getPreorder(..) instead
 	 */
 	protected function eliminateNestedPages($arrPages, $strTable=null, $blnSorting=false)
 	{
-		if (!is_array($arrPages) || empty($arrPages))
-		{
-			return array();
-		}
-
-		if (!$strTable)
-		{
-			$strTable = 'tl_page';
-		}
-
-		// Thanks to Andreas Schempp (see #2475 and #3423)
-		$arrPages = array_intersect($this->getChildRecords(0, $strTable, $blnSorting), $arrPages);
-		$arrPages = array_values(array_diff($arrPages, $this->getChildRecords($arrPages, $strTable, $blnSorting)));
-
-		return $arrPages;
+		strlen($strTable) || $strTable = 'tl_page';
+		return $this->getPreorder($arrPages, true, $strTable);
+		
+		// this restores the original behavior of pre 2.10.3
+//		$arrPreorder = $this->getPreorder($arrPages, true, $strTable);
+//		return array_intersect($arrPages, $arrPreorder);
 	}
 
 
