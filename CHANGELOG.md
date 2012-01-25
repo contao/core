@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Correctly redirect to front end pages (see #3843).
+
+### Fixed
 Handle external image URLs when generating style sheets (see #3832).
 
 ### Fixed

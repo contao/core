@@ -1250,7 +1250,7 @@ class tl_page extends Backend
 			$sub += 4;
 		}
 
-		// Get image name
+		// Get the image name
 		if ($sub > 0)
 		{
 			$image = ''.$row['type'].'_'.$sub.'.gif';
@@ -1268,11 +1268,11 @@ class tl_page extends Backend
 			$label = '<strong>' . $label . '</strong>';
 		}
 
-		// Add breadcrumb link
+		// Add the breadcrumb link
 		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '">' . $label . '</a>';
 
-		// Return image
-		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
+		// Return the image
+		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
 	}
 
 
