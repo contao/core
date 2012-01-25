@@ -476,7 +476,7 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
@@ -494,7 +494,7 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
 				}
 
@@ -524,7 +524,7 @@ class StyleSheets extends Backend
 					// CSS3 PIE only supports -pie-background, so if there is a background image, include it here, too.
 					if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 					{
-						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 						$bgImage = 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
@@ -991,7 +991,7 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['liststyleimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], 'http://', 7) !== 0 && strncmp($row['liststyleimage'], 'https://', 8) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
 			}
 		}

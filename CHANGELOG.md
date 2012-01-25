@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Handle external image URLs when generating style sheets (see #3832).
+
+### Fixed
 Handle empty format definitions when generating style sheets (see #3830).
 
 ### Fixed
