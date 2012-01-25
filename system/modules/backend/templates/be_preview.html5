@@ -6,6 +6,6 @@
 </head>
 <frameset rows="32,*" frameborder="0" framespacing="0">
 <frame src="switch.php" name="switch" frameborder="0" scrolling="no" noresize="noresize" />
-<frame src="<?php echo $this->base . $this->site; ?>" name="website" frameborder="0" noresize="noresize" />
+<frame src="<?php echo $this->url; ?>" name="website" frameborder="0" noresize="noresize" />
 </frameset>
 </html>

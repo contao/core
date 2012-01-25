@@ -81,6 +81,12 @@ class Main extends Backend
 			$this->redirect('contao/password.php');
 		}
 
+		// Front end redirect
+		if ($this->Input->get('do') == 'feRedirect')
+		{
+			$this->redirectToFrontendPage($this->Input->get('page'), $this->Input->get('article'));
+		}
+
 		$this->loadLanguageFile('default');
 		$this->loadLanguageFile('modules');
 	}
@@ -187,7 +193,6 @@ class Main extends Backend
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->coreOnlyMode = $GLOBALS['TL_LANG']['MSC']['coreOnlyMode'];
 		$this->Template->isCoreOnlyMode = $GLOBALS['TL_CONFIG']['coreOnlyMode'];
-		$this->Template->frontendFile = !$GLOBALS['TL_CONFIG']['rewriteURL'] ? 'index.php' : '';
 
 		// Front end preview links
 		if (CURRENT_ID != '')
@@ -195,51 +200,21 @@ class Main extends Backend
 			// Pages
 			if ($this->Input->get('do') == 'page')
 			{
-				$objPreview = $this->Database->prepare("SELECT id, alias, language FROM tl_page WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
-
-				if ($objPreview->numRows)
-				{
-					if ($GLOBALS['TL_CONFIG']['disableAlias'])
-					{
-						$this->Template->frontendFile .= '?id=' . $objPreview->id . ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? '&amp;language=' . $objPreview->language :  '');
-					}
-					else
-					{
-						$this->Template->frontendFile .= ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : '/') . ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $objPreview->language . '/' :  '') . (($objPreview->alias != '') ? $objPreview->alias : $objPreview->id) . $GLOBALS['TL_CONFIG']['urlSuffix'];
-					}
-				}
+				$this->Template->frontendFile = '?page=' . CURRENT_ID;
 			}
 
 			// Articles
 			elseif ($this->Input->get('do') == 'article')
 			{
-				$objPreview = $this->Database->prepare("SELECT p.id AS pid, p.alias AS palias, p.language AS planguage, a.id AS aid, a.alias AS aalias, a.inColumn AS acolumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id")
+				$objArticle = $this->Database->prepare("SELECT id, pid, alias, inColumn FROM tl_article WHERE id=?")
 											 ->limit(1)
 											 ->execute(CURRENT_ID);
 
-				if ($objPreview->numRows)
+				if ($objArticle->numRows)
 				{
-					$strColumn = '';
-
-					if ($objPreview->acolumn != 'main')
-					{
-						$strColumn = $objPreview->acolumn . ':';
-					}
-
-					if ($GLOBALS['TL_CONFIG']['disableAlias'])
-					{
-						$this->Template->frontendFile .= '?id=' . $objPreview->pid . ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? '&amp;language=' . $objPreview->planguage :  '') . '&articles=' . $strColumn . $objPreview->aid;
-					}
-					else
-					{
-						$this->Template->frontendFile .= ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : '/') . ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $objPreview->planguage . '/' :  '') . (($objPreview->palias != '') ? $objPreview->palias : $objPreview->pid) . '/articles/' . $strColumn . (($objPreview->aalias != '') ? $objPreview->aalias : $objPreview->aid) . $GLOBALS['TL_CONFIG']['urlSuffix'];
-					}
+					$this->Template->frontendFile = '?page=' . $objArticle->pid . '&amp;article=' . (($objArticle->inColumn != 'main') ? $objArticle->inColumn . ':' : '') . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id);
 				}
 			}
-		
-			$this->Template->frontendFile = str_replace(array('?', '&', '='), array('%3F', '%26', '%3D'), $this->Template->frontendFile);
 		}
 
 		$this->Template->output();

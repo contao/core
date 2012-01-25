@@ -2460,8 +2460,6 @@ abstract class Controller extends \System
 	 */
 	protected function generateFrontendUrl($arrRow, $strParams=null, $strForceLang=null)
 	{
-		global $objPage;
-
 		if (!$GLOBALS['TL_CONFIG']['disableAlias'])
 		{
 			$strLanguage = '';
@@ -2476,8 +2474,9 @@ abstract class Controller extends \System
 				{
 					$strLanguage = $arrRow['language'] . '/';
 				}
-				else
+				elseif (TL_MODE == 'FE')
 				{
+					global $objPage;
 					$strLanguage = $objPage->rootLanguage . '/';
 				}
 			}
@@ -2884,6 +2883,44 @@ abstract class Controller extends \System
 
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, active, data) VALUES (?, ?, ?, ?, ?, 1, ?)")
 					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, serialize($objRecord->row()));
+	}
+
+
+	/**
+	 * Redirect to a front end page
+	 * @param integer
+	 * @param mixed
+	 * @param boolean
+	 * @return string
+	 */
+	protected function redirectToFrontendPage($intPage, $varArticle=null, $blnReturn=false)
+	{
+		if (($intPage = intval($intPage)) <= 0)
+		{
+			return;
+		}
+
+		$strDomain = $this->Environment->base;
+		$objPage = $this->getPageDetails($intPage);
+
+		if ($objPage->domain != '')
+		{
+			$strDomain = ($this->Environment->ssl ? 'https://' : 'http://') . $objPage->domain . TL_PATH . '/';
+		}
+
+		if ($varArticle !== null)
+		{
+			$varArticle = '/articles/' . $varArticle;
+		}
+
+		$strUrl = $strDomain . $this->generateFrontendUrl($objPage->row(), $varArticle, $objPage->language);
+
+		if ($blnReturn)
+		{
+			return $strUrl;
+		}
+
+		$this->redirect($strUrl);
 	}
 
 
