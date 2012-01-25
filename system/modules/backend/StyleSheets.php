@@ -1034,8 +1034,13 @@ class StyleSheets extends \Backend
 		// Close the format definition
 		if ($blnWriteToFile)
 		{
+			// Remove the last semi-colon (;) before the closing bracket
+			if (substr($return, -1) == ';')
+			{
+				$return = substr($return, 0, -1);
+			}
+
 			$nl = $blnDebug ? "\n" : '';
-			$return = substr($return, 0, -1);
 			$return .= $nl . '}' . $nl;
 		}
 		else
