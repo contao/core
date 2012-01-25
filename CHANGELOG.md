@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Handle empty format definitions when generating style sheets (see #3830).
+
+### Fixed
 More accurate format definition validation (see #3824).
 
 ### Fixed
