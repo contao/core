@@ -777,6 +777,9 @@ label.tl_change_selected {
 	position:relative;
 	top:1px;
 }
+.tl_modulewizard .tl_select {
+	width:360px;
+}
 
 /* Options wizard */
 .tl_optionwizard {
