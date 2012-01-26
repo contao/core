@@ -4,6 +4,22 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added lazy and eager loading of related records to the Model class. Usage:
+
+```
+$objArticle = ArticleModel::findByPk(5);
+
+// The author will be eager loaded
+echo $objArticle->author['name']; // Kevin Jones
+
+// The parent page can be lazy loaded
+$objArticle->getRelated('pid');
+echo $objArticle->pid['title']; // Music Academy
+```
+
+Relations are defined in the DCA files.
+
 ### Changed
 All core modules are now using namespaces and can thus be overriden.
 

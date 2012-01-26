@@ -97,13 +97,14 @@ ClassLoader::addClasses(array
 	'Contao\\Pagination'          => 'system/modules/frontend/Pagination.php',
 
 	// Models
-	'Contao\\ArticleModel'        => 'system/modules/frontend/models/ArticleModel.php',
-	'Contao\\ContentElementModel' => 'system/modules/frontend/models/ContentElementModel.php',
-	'Contao\\FormFieldModel'      => 'system/modules/frontend/models/FormFieldModel.php',
-	'Contao\\FormModel'           => 'system/modules/frontend/models/FormModel.php',
-	'Contao\\MemberModel'         => 'system/modules/frontend/models/MemberModel.php',
-	'Contao\\ModuleModel'         => 'system/modules/frontend/models/ModuleModel.php',
-	'Contao\\PageModel'           => 'system/modules/frontend/models/PageModel.php',
+	'Contao\\ArticleModel'   => 'system/modules/frontend/models/ArticleModel.php',
+	'Contao\\ContentModel'   => 'system/modules/frontend/models/ContentModel.php',
+	'Contao\\FormFieldModel' => 'system/modules/frontend/models/FormFieldModel.php',
+	'Contao\\FormModel'      => 'system/modules/frontend/models/FormModel.php',
+	'Contao\\MemberModel'    => 'system/modules/frontend/models/MemberModel.php',
+	'Contao\\ModuleModel'    => 'system/modules/frontend/models/ModuleModel.php',
+	'Contao\\PageModel'      => 'system/modules/frontend/models/PageModel.php',
+	'Contao\\UserModel'      => 'system/modules/frontend/models/UserModel.php',
 ));
 
 

@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
+ * @package    Backend
  * @license    LGPL
  */
 
@@ -35,57 +35,22 @@ namespace Contao;
 
 
 /**
- * Class ContentAlias
+ * Class UserModel
  *
- * Front end content element "alias".
+ * Provide methods to find and save models.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-class ContentAlias extends \ContentElement
+class UserModel extends \Model
 {
 
 	/**
-	 * Parse the template
-	 * @return string
+	 * Name of the table
+	 * @var string
 	 */
-	public function generate()
-	{
-		$objElement = \ContentModel::findByPk($this->cteAlias);
+	protected static $strTable = 'tl_user';
 
-		if ($objElement === null)
-		{
-			return '';
-		}
-
-		$strClass = $this->findContentElement($objElement->type);
-
-		if (!$this->classFileExists($strClass))
-		{
-			return '';
-		}
-
-		$objElement->id = $this->id;
-		$objElement->typePrefix = 'ce_';
-
-		# FIXME
-		$objElement = new $strClass($objElement);
-
-		// Overwrite spacing and CSS ID
-		$objElement->space = $this->space;
-		$objElement->cssID = $this->cssID;
-
-		return $objElement->generate();
-	}
-
-
-	/**
-	 * Generate the content element
-	 */
-	protected function compile()
-	{
-		return;
-	}
 }
 
 ?>

@@ -94,6 +94,11 @@ class DcaExtractor extends \DbInstaller
 	 */
 	public function __construct($strTable)
 	{
+		if ($strTable == '')
+		{
+			throw new \Exception('The table name must not be empty');
+		}
+
 		parent::__construct();
 
 		$this->strTable = $strTable;
@@ -250,9 +255,10 @@ class DcaExtractor extends \DbInstaller
 			}
 
 			// Check whether there is a relation
-			if (isset($config['foreignKey']) && $config['autojoin'])
+			if (isset($config['foreignKey']) && isset($config['relation']))
 			{
-				$arrRelations[$field] = $config['foreignKey'];
+				$table = substr($config['foreignKey'], 0, strrpos($config['foreignKey'], '.'));
+				$arrRelations[$field] = array_merge(array('table'=>$table, 'field'=>'id'), $config['relation']);
 			}
 		}
 
@@ -330,10 +336,12 @@ class DcaExtractor extends \DbInstaller
 		if (is_array($sql['keys']) && !empty($sql['keys']))
 		{
 			$objFile->append("\$this->arrKeys = array\n(");
+
 			foreach ($sql['keys'] as $field=>$type)
 			{
 				$objFile->append("\t'$field' => '$type',");
 			}
+
 			$objFile->append(');', "\n\n");
 		}
 
@@ -341,10 +349,19 @@ class DcaExtractor extends \DbInstaller
 		if (!empty($arrRelations))
 		{
 			$objFile->append("\$this->arrRelations = array\n(");
-			foreach ($arrRelations as $field=>$foreignKey)
+
+			foreach ($arrRelations as $field=>$config)
 			{
-				$objFile->append("\t'$field' => '$foreignKey',");
+				$objFile->append("\t'$field' => array\n\t(");
+
+				foreach ($config as $k=>$v)
+				{
+					$objFile->append("\t\t'$k'=>'$v',");
+				}
+
+				$objFile->append("\t),");
 			}
+
 			$objFile->append(');', "\n\n");
 		}
 

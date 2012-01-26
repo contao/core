@@ -35,14 +35,14 @@ namespace Contao;
 
 
 /**
- * Class ContentElementModel
+ * Class ContentModel
  *
  * Provide methods to find and save content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class ContentElementModel extends \Model
+class ContentModel extends \Model
 {
 
 	/**

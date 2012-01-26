@@ -370,7 +370,7 @@ abstract class Controller extends \System
 				return '';
 			}
 
-			$objRow = \ContentElementModel::findByPk($intId);
+			$objRow = \ContentModel::findByPk($intId);
 
 			if ($objRow === null)
 			{

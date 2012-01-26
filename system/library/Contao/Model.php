@@ -273,6 +273,11 @@ abstract class Model extends \System
 	 */
 	public function row()
 	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
 		return $this->arrData[$this->intIndex];
 	}
 
@@ -315,22 +320,24 @@ abstract class Model extends \System
 			$arrJoins = array();
 			$arrFields = array(static::$strTable . ".*");
 
-			// Automatically join the related record
-			foreach ($objBase->getRelations() as $strKey=>$foreignKey)
+			foreach ($objBase->getRelations() as $strKey=>$arrConfig)
 			{
-				list($strTable) = explode('.', $foreignKey);
-				$objRelated = new \DcaExtractor($strTable);
-
-				foreach (array_keys($objRelated->getFields()) as $strField)
+				// Automatically join the single-relation records
+				if ($arrConfig['load'] == 'eager' && ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo'))
 				{
-					$arrFields[] = $strTable . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
-				}
+					$objRelated = new \DcaExtractor($arrConfig['table']);
 
-				$arrJoins[] = "LEFT JOIN " . $strTable . " ON " . static::$strTable . "." . $strKey . "=" . $strTable . ".id";
+					foreach (array_keys($objRelated->getFields()) as $strField)
+					{
+						$arrFields[] = $arrConfig['table'] . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
+					}
+
+					$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " ON " . static::$strTable . "." . $strKey . "=" . $arrConfig['table'] . ".id";
+				}
 			}
 
 			// Generate the query
-			$strQuery = "SELECT " . implode(', ', $arrFields) . " FROM " . static::$strTable . " " . implode(" ", $arrJoins);
+			$strQuery = "SELECT " . implode(', ', $arrFields) . " FROM " . static::$strTable . implode("", $arrJoins);
 		}
 
 		// Where condition
@@ -450,6 +457,55 @@ abstract class Model extends \System
 	protected static function postFind(\Database_Result $objResult)
 	{
 		return $objResult;
+	}
+
+
+	/**
+	 * Lazy load a related record
+	 * @param string
+	 * @throws Exception
+	 */
+	public function getRelated($key)
+	{
+		// Load the DCA extract
+		$objRelated = new \DcaExtractor(static::$strTable);
+		$arrRelations = $objRelated->getRelations();
+
+		// No relation defined
+		if (empty($arrRelations) || !isset($arrRelations[$key]))
+		{
+			throw new \Exception("Field $key does not seem to be related");
+		}
+
+		// Return if the relation has been loaded eagerly
+		if ($arrRelations[$key]['type'] == 'eager')
+		{
+			return;
+		}
+
+		// Get the Model class name (e.g. tl_form_field becomes FormFieldModel)
+		$arrChunks = explode('_', $arrRelations[$key]['table']);
+
+		if ($arrChunks[0] == 'tl')
+		{
+			array_shift($arrChunks);
+		}
+
+		$strModelClass = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+
+		// Load the related record(s)
+		switch ($arrRelations[$key]['type'])
+		{
+			case 'hasOne':
+			case 'belongsTo':
+				$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->row();
+				break;
+
+			case 'hasMany':
+			case 'belongsToMany':
+				$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->getData();
+				break;
+		}
 	}
 
 
