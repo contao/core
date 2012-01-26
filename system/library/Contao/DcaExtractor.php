@@ -250,13 +250,9 @@ class DcaExtractor extends \DbInstaller
 			}
 
 			// Check whether there is a relation
-			if (isset($config['foreignKey']) && isset($config['relation']))
+			if (isset($config['foreignKey']) && $config['autojoin'])
 			{
-				$arrRelations[$field] = array
-				(
-					'type' => $config['relation'],
-					'foreignKey' => $config['foreignKey']
-				);
+				$arrRelations[$field] = $config['foreignKey'];
 			}
 		}
 
@@ -345,9 +341,9 @@ class DcaExtractor extends \DbInstaller
 		if (!empty($arrRelations))
 		{
 			$objFile->append("\$this->arrRelations = array\n(");
-			foreach ($arrRelations as $field=>$config)
+			foreach ($arrRelations as $field=>$foreignKey)
 			{
-				$objFile->append("\t'$field' => array('type'=>'{$config['type']}', 'foreignKey'=>'{$config['foreignKey']}'),");
+				$objFile->append("\t'$field' => '$foreignKey',");
 			}
 			$objFile->append(');', "\n\n");
 		}

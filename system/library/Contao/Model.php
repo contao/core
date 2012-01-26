@@ -315,22 +315,18 @@ abstract class Model extends \System
 			$arrJoins = array();
 			$arrFields = array(static::$strTable . ".*");
 
-			// Walk through the relations
-			foreach ($objBase->getRelations() as $strKey=>$arrRelation)
+			// Automatically join the related record
+			foreach ($objBase->getRelations() as $strKey=>$foreignKey)
 			{
-				// Generate the JOIN statement for "has one" and "belongs to" relations
-				if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
+				list($strTable) = explode('.', $foreignKey);
+				$objRelated = new \DcaExtractor($strTable);
+
+				foreach (array_keys($objRelated->getFields()) as $strField)
 				{
-					list($strTable) = explode('.', $arrRelation['foreignKey']);
-					$objRelated = new \DcaExtractor($strTable);
-
-					foreach (array_keys($objRelated->getFields()) as $strField)
-					{
-						$arrFields[] = $strTable . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
-					}
-
-					$arrJoins[] = "LEFT JOIN " . $strTable . " ON " . static::$strTable . "." . $strKey . "=" . $strTable . ".id";
+					$arrFields[] = $strTable . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
 				}
+
+				$arrJoins[] = "LEFT JOIN " . $strTable . " ON " . static::$strTable . "." . $strKey . "=" . $strTable . ".id";
 			}
 
 			// Generate the query
@@ -417,7 +413,8 @@ abstract class Model extends \System
 	 */
 	public static function findByIdOrAlias($varId, $varAlias)
 	{
-		return static::findOneBy(array("(id=? OR alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias));
+		$t = static::$strTable;
+		return static::findOneBy(array("($t.id=? OR $t.alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias));
 	}
 
 
