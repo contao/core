@@ -59,14 +59,15 @@ class ContentElementModel extends \Model
 	 */
 	public static function findPublishedByPid($intPid)
 	{
-		$arrColumns = array('pid=?');
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=?");
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$arrColumns[] = "invisible=''";
+			$arrColumns[] = "$t.invisible=''";
 		}
 
-		return static::findBy($arrColumns, $intPid, 'sorting');
+		return static::findBy($arrColumns, $intPid, "$t.sorting");
 	}
 								 
 }

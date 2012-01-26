@@ -59,7 +59,8 @@ class FormFieldModel extends \Model
 	 */
 	public static function findPublishedByPid($intPid)
 	{
-		return static::findBy(array('pid=? AND invisible!=1'), $intPid, 'sorting');
+		$t = static::$strTable;
+		return static::findBy(array("$t.pid=? AND $t.invisible!=1"), $intPid, "$t.sorting");
 	}
 }
 

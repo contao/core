@@ -59,7 +59,8 @@ class ModuleModel extends \Model
 	 */
 	public static function findMultipleById($arrIds)
 	{
-		return static::findBy(array('id IN(' . implode(',', array_map('intval', $arrIds)) . ')'), $arrIds, \Database::getInstance()->findInSet('id', $arrIds));
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), $arrIds, \Database::getInstance()->findInSet("$t.id", $arrIds));
 	}
 }
 

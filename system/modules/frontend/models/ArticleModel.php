@@ -60,12 +60,13 @@ class ArticleModel extends \Model
 	 */
 	public static function findByIdOrAliasAndColumn($varId, $intPid)
 	{
-		$arrColumns = array('(id=? OR alias=?)');
+		$t = static::$strTable;
+		$arrColumns = array("($t.id=? OR $t.alias=?)");
 		$arrValues = array((is_numeric($varId) ? $varId : 0), $varId);
 
 		if ($intPid)
 		{
-			$arrColumns[] = 'pid=?';
+			$arrColumns[] = "$t.pid=?";
 			$arrValues[] = $intPid;
 		}
 
@@ -80,12 +81,13 @@ class ArticleModel extends \Model
 	 */
 	public static function findPublishedById($intId)
 	{
-		$arrColumns = array('id=?');
+		$t = static::$strTable;
+		$arrColumns = array("$t.id=?");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
 		return static::findOneBy($arrColumns, $intId);
@@ -100,16 +102,17 @@ class ArticleModel extends \Model
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn)
 	{
-		$arrColumns = array('pid=? AND inColumn=?');
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.inColumn=?");
 		$arrValues = array($intPid, $strColumn);
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $arrValues, 'sorting');
+		return static::findBy($arrColumns, $arrValues, "$t.sorting");
 	}
 
 
@@ -121,60 +124,17 @@ class ArticleModel extends \Model
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
 	{
-		$arrColumns = array('pid=? AND inColumn=? AND showTeaser=1');
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.inColumn=? AND $t.showTeaser=1");
 		$arrValues = array($intPid, $strColumn);
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $arrValues, 'sorting');
-	}
-
-
-	/**
-	 * Return the author of an article
-	 * @return Model
-	 */
-	public function getAuthor()
-	{
-		if ($this->author === null)
-		{
-			return null;
-		}
-
-		$objAuthor = \MemberModel::findByPk($this->author);
-
-		if ($objAuthor === null)
-		{
-			return null;
-		}
-
-		return $objAuthor;
-	}
-
-
-	/**
-	 * Return the page of an article
-	 * @return Model
-	 */
-	public function getPage()
-	{
-		if ($this->pid === null)
-		{
-			return null;
-		}
-
-		$objPage = \PageModel::findPublishedById($this->pid);
-
-		if ($objPage === null)
-		{
-			return null;
-		}
-
-		return $objPage;
+		return static::findBy($arrColumns, $arrValues, "$t.sorting");
 	}
 }
 

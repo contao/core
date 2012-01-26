@@ -528,6 +528,8 @@ class Search extends \System
 	 */
 	public function removeEntry($strUrl)
 	{
+		$this->import('Database');
+
 		$objSearch = $this->Database->prepare("SELECT * FROM tl_search WHERE url=?")
 									->limit(1)
 									->execute($strUrl);

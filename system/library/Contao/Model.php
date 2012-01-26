@@ -58,22 +58,28 @@ abstract class Model extends \System
 	protected static $strPk = 'id';
 
 	/**
-	 * Database result
-	 * @var Database_Result
+	 * Current index
+	 * @var integer
 	 */
-	protected $objResult;
+	private $intIndex = -1;
 
 	/**
-	 * Data array
-	 * @var array
+	 * End indicator
+	 * @var boolean
 	 */
-	protected $arrData = array();
+	private $blnDone = false;
 
 	/**
 	 * True if the record exists
 	 * @var boolean
 	 */
 	protected $blnExists = false;
+
+	/**
+	 * Data array
+	 * @var array
+	 */
+	protected $arrData = array();
 
 
 	/**
@@ -86,8 +92,7 @@ abstract class Model extends \System
 
 		if ($objResult !== null)
 		{
-			$this->setData($objResult->row());
-			$this->objResult = $objResult->reset();
+			$this->setData($objResult);
 			$this->blnExists = true;
 		} 
 	}
@@ -100,7 +105,12 @@ abstract class Model extends \System
 	 */
 	public function __set($strKey, $varValue)
 	{
-		$this->arrData[$strKey] = $varValue;
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		$this->arrData[$this->intIndex][$strKey] = $varValue;
 	}
 
 
@@ -111,7 +121,17 @@ abstract class Model extends \System
 	 */
 	public function __get($strKey)
 	{
-		return $this->arrData[$strKey];
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		if (!isset($this->arrData[$this->intIndex][$strKey]))
+		{
+			return null;
+		}
+
+		return $this->arrData[$this->intIndex][$strKey];
 	}
 
 
@@ -122,28 +142,47 @@ abstract class Model extends \System
 	 */
 	public function __isset($strKey)
 	{
-		return isset($this->arrData[$strKey]);
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return isset($this->arrData[$this->intIndex][$strKey]);
 	}
 
 
 	/**
-	 * Set the current record from an object or array
-	 * @param array
+	 * Set the current record from a Database_Result
+	 * @param Database_Result
 	 * @throws Exception
 	 */
-	public function setData($varData)
+	public function setData(\Database_Result $objResult)
 	{
-		if (is_object($varData))
-		{
-			$varData = get_object_vars($varData);
-		}
+		$i = -1;
 
-		if (!is_array($varData))
+		// Walk through the result set
+		while ($objResult->next())
 		{
-			throw new \Exception('Array or object required to set data');
-		}
+			$this->arrData[++$i] = $objResult->row();
 
-		$this->arrData = $varData;
+			// Look for joined fields and make them an object
+			foreach ($this->arrData[$i] as $k=>$v)
+			{
+				// E.g. author__id becomes author['id']
+				if (strpos($k, '__') !== false)
+				{
+					list($key, $field) = explode('__', $k);
+
+					if (!is_array($this->arrData[$i][$key]))
+					{
+						$this->arrData[$i][$key] = array();
+					}
+
+					$this->arrData[$i][$key][$field] = $v;
+					unset($this->arrData[$i][$k]);
+				}
+			}
+		}
 	}
 
 
@@ -158,94 +197,73 @@ abstract class Model extends \System
 
 
 	/**
-	 * Return the database result
-	 * @return Database_Result
-	 */
-	public function getDbResult()
-	{
-		return $this->objResult;
-	}
-
-
-	/**
 	 * Return the number of rows in the result set
 	 * @return integer
 	 */
 	public function count()
 	{
-		return $this->objResult->numRows;
+		return count($this->arrData);
 	}
 
 
 	/**
-	 * Return the first row
-	 * @return boolean
+	 * Go to the first row
+	 * @return Model
 	 */
 	public function first()
 	{
-		$return = $this->objResult->first();
-
-		if ($return !== false)
-		{
-			$this->setData($this->objResult->row());
-			return true;
-		}
-
-		return false;
+		$this->intIndex = 0;
+		return $this;
 	}
 
 
 	/**
-	 * Return the previous row
-	 * @return boolean
+	 * Go to the previous row
+	 * @return Model
 	 */
 	public function prev()
 	{
-		$return = $this->objResult->prev();
-
-		if ($return !== false)
+		if ($this->intIndex == 0)
 		{
-			$this->setData($this->objResult->row());
-			return true;
+			return false;
 		}
 
-		return false;
+		--$this->intIndex;
+		return $this;
 	}
 
 
 	/**
-	 * Return the next row
-	 * @return boolean
+	 * Go to the next row
+	 * @return Model
 	 */
 	public function next()
 	{
-		$return = $this->objResult->next();
-
-		if ($return !== false)
+		if ($this->blnDone)
 		{
-			$this->setData($this->objResult->row());
-			return true;
+			return false;
 		}
 
-		return false;
+		if (!isset($this->arrData[++$this->intIndex]))
+		{
+			--$this->intIndex;
+			$this->blnDone = true;
+			return false;
+		}
+
+		return $this;
 	}
 
 
 	/**
-	 * Return the last row
-	 * @return boolean
+	 * Go to the last row
+	 * @return Model
 	 */
 	public function last()
 	{
-		$return = $this->objResult->last();
-
-		if ($return !== false)
-		{
-			$this->setData($this->objResult->row());
-			return true;
-		}
-
-		return false;
+		$this->blnDone = true;
+		$this->intIndex = count($this->arrData) - 1;
+		return $this;
 	}
 
 
@@ -255,7 +273,7 @@ abstract class Model extends \System
 	 */
 	public function row()
 	{
-		return $this->getData();
+		return $this->arrData[$this->intIndex];
 	}
 
 
@@ -264,8 +282,9 @@ abstract class Model extends \System
 	 */
 	public function reset()
 	{
-		$this->objResult->reset();
+		$this->intIndex = 0;
 		$this->arrData = array();
+		$this->blnDone = false;
 	}
 
 
@@ -285,20 +304,46 @@ abstract class Model extends \System
 			return null;
 		}
 
-		$strQuery = "SELECT * FROM " . static::$strTable;
+		$objBase = new \DcaExtractor(static::$strTable);
 
-		if ($strColumn !== null)
+		if (!$objBase->hasRelations())
 		{
-			if (is_array($strColumn))
+			$strQuery = "SELECT * FROM " . static::$strTable;
+		}
+		else
+		{
+			$arrJoins = array();
+			$arrFields = array(static::$strTable . ".*");
+
+			// Walk through the relations
+			foreach ($objBase->getRelations() as $strKey=>$arrRelation)
 			{
-				$strQuery .= " WHERE " . implode(" AND ", $strColumn);
+				// Generate the JOIN statement for "has one" and "belongs to" relations
+				if ($arrRelation['type'] == 'hasOne' || $arrRelation['type'] == 'belongsTo')
+				{
+					list($strTable) = explode('.', $arrRelation['foreignKey']);
+					$objRelated = new \DcaExtractor($strTable);
+
+					foreach (array_keys($objRelated->getFields()) as $strField)
+					{
+						$arrFields[] = $strTable . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
+					}
+
+					$arrJoins[] = "LEFT JOIN " . $strTable . " ON " . static::$strTable . "." . $strKey . "=" . $strTable . ".id";
+				}
 			}
-			else
-			{
-				$strQuery .= " WHERE " . $strColumn . "=?";
-			}
+
+			// Generate the query
+			$strQuery = "SELECT " . implode(', ', $arrFields) . " FROM " . static::$strTable . " " . implode(" ", $arrJoins);
 		}
 
+		// Where condition
+		if ($strColumn !== null)
+		{
+			$strQuery .= " WHERE " . (is_array($strColumn) ? implode(" AND ", $strColumn) : static::$strTable . '.' . $strColumn . "=?");
+		}
+
+		// Order by
 		if ($strOrder !== null)
 		{
 			$strQuery .= " ORDER BY " . $strOrder;
@@ -306,6 +351,7 @@ abstract class Model extends \System
 
 		$objStatement = \Database::getInstance()->prepare($strQuery);
 
+		// Limit
 		if ($intLimit > 0 || $intOffset > 0)
 		{
 			$objStatement->limit($intLimit, $intOffset);

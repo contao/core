@@ -59,12 +59,13 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedById($intId)
 	{
-		$arrColumns = array('id=?');
+		$t = static::$strTable;
+		$arrColumns = array("$t.id=?");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
 		return static::findOneBy($arrColumns, $intId);
@@ -78,13 +79,14 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedByIdOrAliases($varId)
 	{
-		$arrColumns = array('(id=? OR alias=?)');
+		$t = static::$strTable;
+		$arrColumns = array("($t.id=? OR $t.alias=?)");
 		$arrValues = array((is_numeric($varId) ? $varId : 0), $varId);
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
 		return static::findBy($arrColumns, $arrValues);
@@ -101,42 +103,43 @@ class PageModel extends \Model
 	{
 		$time = time();
 		$objDatabase = \Database::getInstance();
+		$t = static::$strTable;
 
 		if (is_array($varLanguage))
 		{
-			$arrColumns = array("type='root' AND (dns=? OR dns='')");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='')");
 
 			if (!empty($varLanguage))
 			{
-				$arrColumns[] = "(language IN('". implode("','", $varLanguage) ."') OR fallback=1)";
+				$arrColumns[] = "($t.language IN('". implode("','", $varLanguage) ."') OR $t.fallback=1)";
 			}
 			else
 			{
-				$arrColumns[] = "fallback=1";
+				$arrColumns[] = "$t.fallback=1";
 			}
 
-			$strOrder = "dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet('language', array_reverse($varLanguage)) . " DESC" : "") . ", sorting";
+			$strOrder = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
 
 			if (!BE_USER_LOGGED_IN)
 			{
 				$time = time();
-				$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 			}
 
 			return static::findOneBy($arrColumns, $strHost, $strOrder);
 		}
 		else
 		{
-			$arrColumns = array("type='root' AND (dns=? OR dns='') AND language=?");
+			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
 			$arrValues = array($strHost, $varLanguage);
 
 			if (!BE_USER_LOGGED_IN)
 			{
 				$time = time();
-				$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 			}
 
-			return static::findOneBy($arrColumns, $arrValues, 'dns DESC, fallback');
+			return static::findOneBy($arrColumns, $arrValues, "$t.dns DESC, $t.fallback");
 		}
 	}
 
@@ -148,15 +151,16 @@ class PageModel extends \Model
 	 */
 	public static function findFirstPublishedByPid($intPid)
 	{
-		$arrColumns = array("pid=? AND type!='root' AND type!='error_403' AND type!='error_404'");
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.type!='root' AND $t.type!='error_403' AND $t.type!='error_404'");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, 'sorting');
+		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
 	}
 
 
@@ -167,15 +171,16 @@ class PageModel extends \Model
 	 */
 	public static function findFirstPublishedRegularByPid($intPid)
 	{
-		$arrColumns = array("pid=? AND type='regular'");
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.type='regular'");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, 'sorting');
+		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
 	}
 
 
@@ -186,15 +191,16 @@ class PageModel extends \Model
 	 */
 	public static function find403ByPid($intPid)
 	{
-		$arrColumns = array("pid=? AND type='error_403'");
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.type='error_403'");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, 'sorting');
+		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
 	}
 
 
@@ -205,15 +211,16 @@ class PageModel extends \Model
 	 */
 	public static function find404ByPid($intPid)
 	{
-		$arrColumns = array("pid=? AND type='error_404'");
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid=? AND $t.type='error_404'");
 
 		if (!BE_USER_LOGGED_IN)
 		{
 			$time = time();
-			$arrColumns[] = "(start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1";
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, 'sorting');
+		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
 	}
 
 

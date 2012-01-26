@@ -121,6 +121,16 @@ class DcaExtractor extends \DbInstaller
 
 
 	/**
+	 * Return true if there is meta information
+	 * @return boolean
+	 */
+	public function hasMeta()
+	{
+		return !empty($this->arrMeta);
+	}
+
+
+	/**
 	 * Return the fields array
 	 * @return array
 	 */
@@ -131,12 +141,32 @@ class DcaExtractor extends \DbInstaller
 
 
 	/**
+	 * Return true if there are fields
+	 * @return boolean
+	 */
+	public function hasFields()
+	{
+		return !empty($this->arrFields);
+	}
+
+
+	/**
 	 * Return the keys array
 	 * @return array
 	 */
-	public function getKey()
+	public function getKeys()
 	{
 		return $this->arrKeys;
+	}
+
+
+	/**
+	 * Return true if there are keys
+	 * @return boolean
+	 */
+	public function hasKeys()
+	{
+		return !empty($this->arrKeys);
 	}
 
 
@@ -147,6 +177,16 @@ class DcaExtractor extends \DbInstaller
 	public function getRelations()
 	{
 		return $this->arrRelations;
+	}
+
+
+	/**
+	 * Return true if there are relations
+	 * @return boolean
+	 */
+	public function hasRelations()
+	{
+		return !empty($this->arrRelations);
 	}
 
 

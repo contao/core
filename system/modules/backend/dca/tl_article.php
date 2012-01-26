@@ -170,7 +170,9 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_page.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => 'belongsTo'
 		),
 		'sorting' => array
 		(
@@ -209,7 +211,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => 'hasOne'
 		),
 		'inColumn' => array
 		(

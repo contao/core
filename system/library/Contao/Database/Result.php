@@ -169,11 +169,11 @@ abstract class Database_Result
 				{
 					$this->first();
 				}
-				if (isset($this->arrCache[$this->intIndex][$strKey]))
+				if (!isset($this->arrCache[$this->intIndex][$strKey]))
 				{
-					return $this->arrCache[$this->intIndex][$strKey];
+					return null;
 				}
-				return null;
+				return $this->arrCache[$this->intIndex][$strKey];
 				break;
 		}
 	}
