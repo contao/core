@@ -3742,12 +3742,34 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			if (!$this->User->isAdmin)
 			{
-				$this->procedure[] = 'pid=?';
+				$this->procedure[] = $this->strTable . '.pid=?';
 				$this->values[] = $this->User->id;
 			}
 		}
 
-		$query = "SELECT * FROM " . $this->strTable;
+		// Join parent table and sort by it
+		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3 && $this->Database->fieldExists('pid', $this->strTable))
+		{
+			$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
+
+			// select table fields
+			$select = $this->strTable . '.*';
+			// select parent label as pid
+			$select .= ',' . $this->ptable . '.' . $showFields[0] . ' AS pid';
+
+			$join        = ' INNER JOIN ' . $this->ptable . ' ON ' . $this->ptable . '.id=' . $this->strTable . '.pid';
+			$joinOrderBy = $this->ptable . '.' . $showFields[0];
+
+			$firstOrderBy = 'pid';
+		}
+		else
+		{
+			$select      = '*';
+			$join        = '';
+			$joinOrderBy = '';
+		}
+
+		$query = "SELECT " . $select . " FROM " . $this->strTable . $join;
 
 		if (!empty($this->procedure))
 		{
@@ -3787,7 +3809,11 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				}
 			}
 
-			$query .= " ORDER BY " . implode(', ', $orderBy);
+			if ($join) {
+				$query .= " ORDER BY " . $joinOrderBy . ', ' . $this->strTable . '.' . implode(', ' . $this->strTable . '.', $orderBy);
+			} else {
+				$query .= " ORDER BY " . implode(', ', $orderBy);
+			}
 		}
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 1 && ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['flag'] % 2) == 0)
@@ -3847,31 +3873,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['label']['showColumns'] && !in_array($firstOrderBy, $GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields']))
 			{
 				$GLOBALS['TL_DCA'][$this->strTable]['list']['label']['fields'][] = $firstOrderBy;
-			}
-
-			// Rename each pid to its label and resort the result (sort by parent table)
-			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 3)
-			{
-				$firstOrderBy = 'pid';
-				$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
-
-				foreach ($result as $k=>$v)
-				{
-					$objField = $this->Database->prepare("SELECT " . $showFields[0] . " FROM " . $this->ptable . " WHERE id=?")
-											   ->limit(1)
-											   ->execute($v['pid']);
-
-					$result[$k]['pid'] = $objField->$showFields[0];
-				}
-
-				$aux = array();
-
-				foreach ($result as $row)
-				{
-					$aux[] = $row['pid'];
-				}
-
-				array_multisort($aux, SORT_ASC, $result);
 			}
 
 			// Generate the table header if the "show columns" option is active
