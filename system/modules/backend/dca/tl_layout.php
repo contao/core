@@ -139,9 +139,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		),
 		'pid' => array
 		(
-			'foreignKey'              => 'tl_page.title',
+			'foreignKey'              => 'tl_theme.name',
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'tstamp' => array
 		(

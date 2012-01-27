@@ -345,14 +345,12 @@ class FrontendUser extends \User
 		$objGroups = $this->Database->execute("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
 		$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 
-		// Get group login page
+		// Get the group login page
 		if ($this->groups[0] > 0)
 		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
-									   ->limit(1)
-									   ->execute($this->groups[0]);
+			$objGroup = \MemberGroupModel::findPublishedById($this->groups[0]);
 
-			if ($objGroup->numRows && $objGroup->redirect && $objGroup->jumpTo)
+			if ($objGroup !== null && $objGroup->redirect && $objGroup->jumpTo)
 			{
 				$this->strLoginPage = $objGroup->jumpTo;
 			}

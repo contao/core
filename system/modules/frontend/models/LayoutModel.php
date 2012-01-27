@@ -35,63 +35,32 @@ namespace Contao;
 
 
 /**
- * Class MemberGroupModel
+ * Class LayoutModel
  *
- * Provide methods to find and save models.
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class MemberGroupModel extends \Model
+class LayoutModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_member_group';
+	protected static $strTable = 'tl_layout';
 
 
 	/**
-	 * Find a published group by its ID
+	 * Find a layout by its ID or fallback status
 	 * @param integer
 	 * @return Model
 	 */
-	public static function findPublishedById($intId)
+	public static function findByIdOrFallback($varId)
 	{
 		$t = static::$strTable;
-		$arrColumns = array("$t.id=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.disable=''";
-		}
-
-		return static::findOneBy($arrColumns, $intId);
-	}
-
-
-	/**
-	 * Find the first active group with a published jumpTo page
-	 * @param string
-	 * @return Model|null
-	 */
-	public static function findFirstActiveWithJumpToByIds($arrIds)
-	{
-		$time = time();
-		$objDatabase = \Database::getInstance();
-
-		$objResult = $objDatabase->prepare("SELECT p.* FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $objDatabase->findInSet('g.id', $arrGroups))
-								 ->limit(1)
-								 ->execute();
-
-		if ($objResult->numRows < 1)
-		{
-			return null;
-		}
-
-		return new static($objResult);
+		return static::findOneBy(array("($t.id=? OR $t.fallback=1)"), $varId, "$t.id DESC");
 	}
 }
 

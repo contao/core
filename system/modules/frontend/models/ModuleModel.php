@@ -57,10 +57,10 @@ class ModuleModel extends \Model
 	 * @param array
 	 * @return Model
 	 */
-	public static function findMultipleById($arrIds)
+	public static function findMultipleByIds($arrIds)
 	{
 		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), $arrIds, \Database::getInstance()->findInSet("$t.id", $arrIds));
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, \Database::getInstance()->findInSet("$t.id", $arrIds));
 	}
 }
 

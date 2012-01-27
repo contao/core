@@ -107,7 +107,7 @@ class Form extends \Hybrid
 		$this->Template->method = ($this->method == 'GET') ? 'get' : 'post';
 
 		$this->initializeSession($formId);
-		$this->Template->maxFileSize = $this->getMaxFileSize();
+		$this->Template->maxFileSize = $this->objModel->getMaxUploadFileSize();
 		$arrLabels = array();
 
 		// Get all form fields
@@ -486,17 +486,7 @@ class Form extends \Hybrid
 	 */
 	protected function getMaxFileSize()
 	{
-		$objMaxSize = $this->Database->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND type='upload' AND maxlength>0")
-									 ->execute($this->id);
-
-		if ($objMaxSize->maxlength > 0)
-		{
-			return $objMaxSize->maxlength;
-		}
-		else
-		{
-			return $GLOBALS['TL_CONFIG']['maxFileSize'];
-		}
+		return $this->objModel->getMaxUploadFileSize(); // Backwards compatibility
 	}
 
 

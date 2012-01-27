@@ -99,23 +99,8 @@ class ModuleQuicklink extends \Module
 	 */
 	protected function compile()
 	{
-		$time = time();
-		$arrPages = array();
-
 		// Get all active pages
-		foreach ($this->pages as $intId)
-		{
-			$objPage = $this->Database->prepare("SELECT id, title, alias, pageTitle FROM tl_page WHERE id=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									  ->limit(1)
-									  ->execute($intId);
-
-			if ($objPage->numRows < 1)
-			{
-				continue;
-			}
-
-			$arrPages[] = $objPage->fetchAssoc();
-		}
+		$arrPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
 
 		if (empty($arrPages))
 		{

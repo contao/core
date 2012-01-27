@@ -64,7 +64,7 @@ class PageRegular extends \Frontend
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
 		$objPage->template = ($objLayout->template != '') ? $objLayout->template : 'fe_page';
-		$objPage->templateGroup = $objLayout->templates;
+		$objPage->templateGroup = $objLayout->pid['templates'];
 
 		// Store the output format
 		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
@@ -81,7 +81,7 @@ class PageRegular extends \Frontend
 
 		// Get all modules in a single DB query
 		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
-		$objModules = \ModuleModel::findMultipleById($arrModuleIds);
+		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null)
 		{
@@ -198,12 +198,10 @@ class PageRegular extends \Frontend
 	 */
 	protected function getPageLayout($intId)
 	{
-		$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.id=? OR l.fallback=1 ORDER BY l.id=? DESC")
-									->limit(1)
-									->execute($intId, $intId);
-		
+		$objLayout = \LayoutModel::findByIdOrFallback($intId);
+
 		// Die if there is no layout at all
-		if ($objLayout->numRows < 1)
+		if ($objLayout === null)
 		{
 			header('HTTP/1.1 501 Not Implemented');
 			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);

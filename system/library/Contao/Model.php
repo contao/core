@@ -504,15 +504,24 @@ abstract class Model extends \System
 		// Load the related record(s)
 		if ($arrRelations[$key]['type'] == 'hasOne' || $arrRelations[$key]['type'] == 'belongsTo')
 		{
-			$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->row();
+			$objModel = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key);
+
+			if ($objModel !== null)
+			{
+				$this->$key = $objModel->row();
+			}
 		}
 		elseif ($arrRelations[$key]['type'] == 'hasMany' || $arrRelations[$key]['type'] == 'belongsToMany')
 		{
 			$arrValues = deserialize($this->$key, true);
 			$arrColumns = array($arrRelations[$key]['field'] . " IN('" . implode("','", $arrValues) . "')");
 			$strOrder = \Database::getInstance()->findInSet($arrRelations[$key]['field'], $arrValues);
+			$objModel = $strModelClass::findBy($arrColumns, null, $strOrder);
 
-			$this->$key = $strModelClass::findBy($arrColumns, null, $strOrder)->getData();
+			if ($objModel !== null)
+			{
+				$this->$key = $objModel->getData();
+			}
 		}
 	}
 

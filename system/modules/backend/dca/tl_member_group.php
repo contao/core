@@ -157,7 +157,7 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_group']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
-			'foreignKey'              => 'tl_page.table',
+			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')

@@ -91,7 +91,7 @@ class ModuleLogin extends \Module
 			$strRedirect = $this->Environment->request;
 
 			// Redirect to the last page visited
-			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+			if ($this->redirectBack && $_SESSION['LAST_PAGE_VISITED'] != '')
 			{
 				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 			}
@@ -109,22 +109,17 @@ class ModuleLogin extends \Module
 				}
 
 				// Overwrite the jumpTo page with an individual group setting
-				$objGroup = \MemberModel::findByUsername($this->Input->post('username'));
+				$objMember = \MemberModel::findByUsername($this->Input->post('username'));
 
-				if ($objGroup !== null)
+				if ($objMember !== null)
 				{
-					$arrGroups = deserialize($objGroup->groups);
+					$arrGroups = deserialize($objMember->groups);
 
 					if (is_array($arrGroups) && !empty($arrGroups))
 					{
-						$time = time();
+						$objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 
-						// Get the first active jumpTo page
-						$objGroupPage = $this->Database->prepare("SELECT p.id, p.alias FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', array_map('intval', $arrGroups)) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $this->Database->findInSet('g.id', $arrGroups))
-													   ->limit(1)
-													   ->execute();
-
-						if ($objGroupPage->numRows)
+						if ($objGroupPage === null)
 						{
 							$strRedirect = $this->generateFrontendUrl($objGroupPage->row());
 						}

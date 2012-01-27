@@ -101,10 +101,12 @@ ClassLoader::addClasses(array
 	'Contao\\ContentModel'       => 'system/modules/frontend/models/ContentModel.php',
 	'Contao\\FormFieldModel'     => 'system/modules/frontend/models/FormFieldModel.php',
 	'Contao\\FormModel'          => 'system/modules/frontend/models/FormModel.php',
+	'Contao\\LayoutModel'        => 'system/modules/frontend/models/LayoutModel.php',
 	'Contao\\MemberGroupModel'   => 'system/modules/frontend/models/MemberGroupModel.php',
 	'Contao\\MemberModel'        => 'system/modules/frontend/models/MemberModel.php',
 	'Contao\\ModuleModel'        => 'system/modules/frontend/models/ModuleModel.php',
 	'Contao\\PageModel'          => 'system/modules/frontend/models/PageModel.php',
+	'Contao\\SessionModel'       => 'system/modules/frontend/models/SessionModel.php',
 	'Contao\\UserModel'          => 'system/modules/frontend/models/UserModel.php',
 ));
 

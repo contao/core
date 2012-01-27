@@ -206,11 +206,9 @@ class Main extends Backend
 			// Articles
 			elseif ($this->Input->get('do') == 'article')
 			{
-				$objArticle = $this->Database->prepare("SELECT id, pid, alias, inColumn FROM tl_article WHERE id=?")
-											 ->limit(1)
-											 ->execute(CURRENT_ID);
+				$objArticle = ArticleModel::findByPk(CURRENT_ID);
 
-				if ($objArticle->numRows)
+				if ($objArticle !== null)
 				{
 					$this->Template->frontendFile = '?page=' . $objArticle->pid . '&amp;article=' . (($objArticle->inColumn != 'main') ? $objArticle->inColumn . ':' : '') . (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id);
 				}

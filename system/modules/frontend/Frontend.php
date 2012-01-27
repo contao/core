@@ -367,12 +367,10 @@ abstract class Frontend extends \Controller
 		if ($this->Input->cookie($strCookie) == $hash)
 		{
 			// Try to find the session
-			$objSession = $this->Database->prepare("SELECT * FROM tl_session WHERE hash=? AND name=?")
-										 ->limit(1)
-										 ->execute($hash, $strCookie);
+			$objSession = \SessionModel::findByHashAndName($hash, $strCookie);
 
 			// Validate the session ID and timeout
-			if ($objSession->numRows && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
+			if ($objSession !== null && $objSession->sessionID == session_id() && ($GLOBALS['TL_CONFIG']['disableIpCheck'] || $objSession->ip == $this->Environment->ip) && ($objSession->tstamp + $GLOBALS['TL_CONFIG']['sessionTimeout']) > time())
 			{
 				// Disable the cache if a back end user is logged in
 				if (TL_MODE == 'FE' && $strCookie == 'BE_USER_AUTH')
