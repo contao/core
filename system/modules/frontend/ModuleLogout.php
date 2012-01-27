@@ -89,11 +89,11 @@ class ModuleLogout extends \Module
 		// Redirect to jumpTo page
 		elseif ($this->jumpTo > 0)
 		{
-			$objNextPage = \PageModel::findPublishedById($this->jumpTo);
+			$this->objModel->getRelated('jumpTo');
 
-			if ($objNextPage !== null)
+			if ($this->objModel->jumpTo['id'] !== null)
 			{
-				$strRedirect = $this->generateFrontendUrl($objNextPage->row());
+				$strRedirect = $this->generateFrontendUrl($this->objModel->jumpTo);
 			}
 		}
 

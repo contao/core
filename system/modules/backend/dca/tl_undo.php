@@ -42,8 +42,6 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		'notEditable'                 => true,
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'
@@ -95,7 +93,8 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['pid'],
 			'sorting'                 => true,
 			'foreignKey'              => 'tl_user.name',
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'tstamp' => array
 		(

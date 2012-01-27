@@ -376,7 +376,7 @@ abstract class Database_Statement
 					break;
 
 				default:
-					$arrParams[$k] = ($v === NULL) ? 'NULL' : $v;
+					$arrParams[$k] = ($v === null) ? 'NULL' : $v;
 					break;
 			}
 		}

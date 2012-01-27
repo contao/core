@@ -41,8 +41,6 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 		'enableVersioning'            => true,
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'
@@ -159,8 +157,10 @@ $GLOBALS['TL_DCA']['tl_member_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_member_group']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.table',
 			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'disable' => array
 		(

@@ -73,7 +73,7 @@ class ModuleCustomnav extends \Module
 
 		$this->pages = deserialize($this->pages);
 
-		if (!is_array($this->pages) || !strlen($this->pages[0]))
+		if (!is_array($this->pages) || $this->pages[0] == '')
 		{
 			return '';
 		}

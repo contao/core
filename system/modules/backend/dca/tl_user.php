@@ -49,8 +49,6 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',
@@ -290,7 +288,8 @@ $GLOBALS['TL_DCA']['tl_user'] = array
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_user_group.name',
 			'eval'                    => array('multiple'=>true),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
 		),
 		'inherit' => array
 		(

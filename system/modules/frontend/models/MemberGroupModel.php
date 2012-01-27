@@ -29,60 +29,28 @@
 
 
 /**
- * Table tl_version
+ * Run in a custom namespace, so the class can be replaced
  */
-$GLOBALS['TL_DCA']['tl_version'] = array
-(
+namespace Contao;
 
-	// Config
-	'config' => array
-	(
-		'sql' => array
-		(
-			'keys' => array
-			(
-				'id' => 'primary',
-				'pid' => 'index'
-			)
-		)
-	),
 
-	// Fields
-	'fields' => array
-	(
-		'id' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
-		),
-		'pid' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
-		'tstamp' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
-		'version' => array
-		(
-			'sql'                     => "smallint(5) unsigned NOT NULL default '1'"
-		),
-		'fromTable' => array
-		(
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'username' => array
-		(
-			'sql'                     => "varchar(64) NOT NULL default ''"
-		),
-		'active' => array
-		(
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'data' => array
-		(
-			'sql'                     => "mediumblob NULL"
-		)
-	)
-);
+/**
+ * Class MemberGroupModel
+ *
+ * Provide methods to find and save models.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Model
+ */
+class MemberGroupModel extends \Model
+{
+
+	/**
+	 * Name of the table
+	 * @var string
+	 */
+	protected static $strTable = 'tl_member_group';
+
+}
 
 ?>

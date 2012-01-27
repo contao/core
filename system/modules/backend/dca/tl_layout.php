@@ -46,8 +46,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'
@@ -141,7 +139,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_page.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'tstamp' => array
 		(
@@ -255,13 +255,15 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
+			'foreignKey'              => 'tl_style_sheet.name',
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
 			'eval'                    => array('multiple'=>true),
 			'xlabel' => array
 			(
 				array('tl_layout', 'styleSheetLink')
 			),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'skipTinymce' => array
 		(

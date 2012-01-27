@@ -39,8 +39,6 @@ $GLOBALS['TL_DCA']['tl_session'] = array
 	(
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',

@@ -81,7 +81,7 @@ class ModuleSitemap extends \Module
 	protected function compile()
 	{
 		// Start from the website root if there is no reference page
-		if ($this->rootPage == 0)
+		if (!$this->rootPage)
 		{
 			global $objPage;
 			$this->rootPage = $objPage->rootId;

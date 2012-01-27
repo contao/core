@@ -229,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'flag'                    => 8,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'time', 'mandatory'=>true, 'doNotCopy'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NULL default NULL"
+			'sql'                     => "int(10) unsigned NULL"
 		),
 		'endTime' => array
 		(
@@ -241,7 +241,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			(
 				array('tl_calendar_events', 'setEmptyEndTime')
 			),
-			'sql'                     => "int(10) unsigned NULL default NULL"
+			'sql'                     => "int(10) unsigned NULL"
 		),
 		'startDate' => array
 		(
@@ -250,7 +250,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('rgxp'=>'date', 'mandatory'=>true, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
-			'sql'                     => "int(10) unsigned NULL default NULL"
+			'sql'                     => "int(10) unsigned NULL"
 		),
 		'endDate' => array
 		(
@@ -262,7 +262,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			(
 				array('tl_calendar_events', 'setEmptyEndDate')
 			),
-			'sql'                     => "int(10) unsigned NULL default NULL"
+			'sql'                     => "int(10) unsigned NULL"
 		),
 		'teaser' => array
 		(

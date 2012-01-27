@@ -55,8 +55,6 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',

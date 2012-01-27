@@ -47,8 +47,6 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 		'enableVersioning'            => true,
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'

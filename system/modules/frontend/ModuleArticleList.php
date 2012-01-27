@@ -94,15 +94,15 @@ class ModuleArticleList extends \Module
 
 		$this->Template->request = $this->Environment->request;
 
-		// Show articles of a different page
+		// Show the articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$objTarget = \PageModel::findPublishedById($this->rootPage);
+			$this->objModel->getRelated('rootPage');
 
-			if ($objTarget !== null)
+			if ($this->objModel->rootPage['id'] !== null)
 			{
-				$id = $this->rootPage;
-				$this->Template->request = $this->generateFrontendUrl($objTarget->row());
+				$id = $this->objModel->rootPage['id'];
+				$this->Template->request = $this->generateFrontendUrl($this->objModel->rootPage);
 			}
 		}
 

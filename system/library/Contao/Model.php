@@ -323,16 +323,19 @@ abstract class Model extends \System
 			foreach ($objBase->getRelations() as $strKey=>$arrConfig)
 			{
 				// Automatically join the single-relation records
-				if ($arrConfig['load'] == 'eager' && ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo'))
+				if ($arrConfig['load'] == 'eager')
 				{
-					$objRelated = new \DcaExtractor($arrConfig['table']);
-
-					foreach (array_keys($objRelated->getFields()) as $strField)
+					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
-						$arrFields[] = $arrConfig['table'] . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
-					}
+						$objRelated = new \DcaExtractor($arrConfig['table']);
 
-					$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " ON " . static::$strTable . "." . $strKey . "=" . $arrConfig['table'] . ".id";
+						foreach (array_keys($objRelated->getFields()) as $strField)
+						{
+							$arrFields[] = $arrConfig['table'] . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
+						}
+
+						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " ON " . static::$strTable . "." . $strKey . "=" . $arrConfig['table'] . ".id";
+					}
 				}
 			}
 
@@ -467,6 +470,11 @@ abstract class Model extends \System
 	 */
 	public function getRelated($key)
 	{
+		if (!isset($this->$key))
+		{
+			return;
+		}
+
 		// Load the DCA extract
 		$objRelated = new \DcaExtractor(static::$strTable);
 		$arrRelations = $objRelated->getRelations();
@@ -494,17 +502,17 @@ abstract class Model extends \System
 		$strModelClass = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
 
 		// Load the related record(s)
-		switch ($arrRelations[$key]['type'])
+		if ($arrRelations[$key]['type'] == 'hasOne' || $arrRelations[$key]['type'] == 'belongsTo')
 		{
-			case 'hasOne':
-			case 'belongsTo':
-				$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->row();
-				break;
+			$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->row();
+		}
+		elseif ($arrRelations[$key]['type'] == 'hasMany' || $arrRelations[$key]['type'] == 'belongsToMany')
+		{
+			$arrValues = deserialize($this->$key, true);
+			$arrColumns = array($arrRelations[$key]['field'] . " IN('" . implode("','", $arrValues) . "')");
+			$strOrder = \Database::getInstance()->findInSet($arrRelations[$key]['field'], $arrValues);
 
-			case 'hasMany':
-			case 'belongsToMany':
-				$this->$key = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key)->getData();
-				break;
+			$this->$key = $strModelClass::findBy($arrColumns, null, $strOrder)->getData();
 		}
 	}
 

@@ -116,11 +116,11 @@ class ModuleSearch extends \Module
 		// Redirect page
 		if ($this->jumpTo > 0)
 		{
-			$objTargetPage = \PageModel::findPublishedById($this->jumpTo);
+			$this->objModel->getRelated('jumpTo');
 
-			if ($objTargetPage !== null)
+			if ($this->objModel->jumpTo['id'] !== null)
 			{
-				$objFormTemplate->action = $this->generateFrontendUrl($objTargetPage->row());
+				$objFormTemplate->action = $this->generateFrontendUrl($this->objModel->jumpTo);
 			}
 		}
 

@@ -265,6 +265,16 @@ class DcaExtractor extends \DbInstaller
 		$sql = $GLOBALS['TL_DCA'][$this->strTable]['config']['sql'];
 		$fields = $GLOBALS['TL_DCA'][$this->strTable]['fields'];
 
+		// Add the default engine and charset if none is given
+		if (!isset($sql['engine']))
+		{
+			$sql['engine'] = 'MyISAM';
+		}
+		if (!isset($sql['charset']))
+		{
+			$sql['charset'] = 'utf8';
+		}
+
 		// Get the SQL information from the database.sql files (backwards compatibility)
 		if ($blnFromFile)
 		{

@@ -314,7 +314,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Redirect to a jumpTo page or reload the current page
-	 * @param integer
+	 * @param integer|array
 	 * @param string
 	 * @param string
 	 */
@@ -322,13 +322,31 @@ abstract class Frontend extends \Controller
 	{
 		global $objPage;
 
-		if (strlen($intId) && $intId != $objPage->id)
+		if (is_array($intId))
 		{
-			$objNextPage = \PageModel::findPublishedById($intId);
-
-			if ($objNextPage !== null)
+			if ($intId['id'] == $objPage->id)
 			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
+				$this->reload();
+			}
+			else
+			{
+				$this->redirect($this->generateFrontendUrl($intId, $strParams, $strForceLang));
+			}
+		}
+		elseif ($intId > 0)
+		{
+			if ($intId == $objPage->id)
+			{
+				$this->reload();
+			}
+			else
+			{
+				$objNextPage = \PageModel::findPublishedById($intId);
+
+				if ($objNextPage !== null)
+				{
+					$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strParams, $strForceLang));
+				}
 			}
 		}
 

@@ -245,14 +245,9 @@ class Form extends \Hybrid
 		$this->Template->action = $this->getIndexFreeRequest();
 
 		// Get the target URL
-		if ($this->method == 'GET')
+		if ($this->method == 'GET' && $this->objModel->jumpTo['id'])
 		{
-			$objNextPage = \PageModel::findPublishedById($this->jumpTo);
-
-			if ($objNextPage !== null)
-			{
-				$this->Template->action = $this->generateFrontendUrl($objNextPage->row());
-			}
+			$this->Template->action = $this->generateFrontendUrl($this->objModel->jumpTo);
 		}
 
 		return $this->Template->parse();
@@ -481,7 +476,7 @@ class Form extends \Hybrid
 			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->Environment->ip . '.', 'Form processFormData()', TL_FORMS);
 		}
 
-		$this->jumpToOrReload($this->jumpTo);
+		$this->jumpToOrReload($this->objModel->jumpTo);
 	}
 
 

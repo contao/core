@@ -45,8 +45,6 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',
@@ -309,7 +307,8 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 			'inputType'               => 'checkboxWizard',
 			'foreignKey'              => 'tl_member_group.name',
 			'eval'                    => array('multiple'=>true, 'feEditable'=>true, 'feGroup'=>'login'),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
 		),
 		'login' => array
 		(
@@ -417,7 +416,7 @@ $GLOBALS['TL_DCA']['tl_member'] = array
 		),
 		'autologin' => array
 		(
-			'sql'                     => "varchar(32) NULL default NULL"
+			'sql'                     => "varchar(32) NULL"
 		),
 		'createdOn' => array
 		(

@@ -332,7 +332,7 @@ class DbInstaller extends \Controller
 				}
 
 				// Get the table options
-				elseif (strlen($table) && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
+				elseif ($table != '' && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
 				{
 					$return[$table]['TABLE_OPTIONS'] = $subpatterns[1];
 					$table = '';
@@ -416,13 +416,9 @@ class DbInstaller extends \Controller
 					}
 
 					// Default values
-					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment'))
+					if (in_array(strtolower($field['type']), array('text', 'tinytext', 'mediumtext', 'longtext', 'blob', 'tinyblob', 'mediumblob', 'longblob')) || stristr($field['extra'], 'auto_increment') || $field['default'] === null || strtolower($field['default']) == 'null')
 					{
 						unset($field['default']);
-					}
-					elseif ($field['default'] === null || strtolower($field['default']) == 'null')
-					{
-						$field['default'] = "default NULL";
 					}
 					else
 					{

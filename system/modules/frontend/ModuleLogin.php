@@ -100,11 +100,11 @@ class ModuleLogin extends \Module
 				// Redirect to the jumpTo page
 				if ($this->jumpTo > 0)
 				{
-					$objNextPage = \PageModel::findPublishedById($this->jumpTo);
+					$this->objModel->getRelated('jumpTo');
 
-					if ($objNextPage !== null)
+					if ($this->objModel->jumpTo['id'] !== null)
 					{
-						$strRedirect = $this->generateFrontendUrl($objNextPage->row());
+						$strRedirect = $this->generateFrontendUrl($this->objModel->jumpTo);
 					}
 				}
 

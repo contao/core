@@ -89,11 +89,6 @@ abstract class Hybrid extends \Frontend
 	 */
 	public function __construct($objElement)
 	{
-		if ($objElement instanceof \Model)
-		{
-			$this->objModel = $objElement;
-		}
-
 		parent::__construct();
 
 		if ($this->strKey == '' || $this->strTable == '')
@@ -101,13 +96,39 @@ abstract class Hybrid extends \Frontend
 			return;
 		}
 
-		$objHybrid = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
-									->limit(1)
-									->execute($objElement->{$this->strKey});
+		// Get the Model class name (e.g. tl_form_field becomes FormFieldModel)
+		$arrChunks = explode('_', $this->strTable);
 
-		if ($objHybrid->numRows < 1)
+		if ($arrChunks[0] == 'tl')
 		{
-			return;
+			array_shift($arrChunks);
+		}
+
+		$strModelClass = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+
+		// Load the model
+		if ($this->classFileExists($strModelClass))
+		{
+			$objHybrid = $strModelClass::findByPk($objElement->{$this->strKey});
+
+			if ($objHybrid === null)
+			{
+				return;
+			}
+
+			$this->objModel = $objHybrid;
+		}
+		else
+		{
+			// Backwards compatibility
+			$objHybrid = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
+										->limit(1)
+										->execute($objElement->{$this->strKey});
+
+			if ($objHybrid->numRows < 1)
+			{
+				return;
+			}
 		}
 
 		$this->arrData = $objHybrid->row();
