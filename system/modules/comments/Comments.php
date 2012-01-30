@@ -321,7 +321,7 @@ class Comments extends \Frontend
 			}
 
 			// Notification
-			$objEmail = \Email();
+			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];

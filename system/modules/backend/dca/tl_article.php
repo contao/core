@@ -210,7 +210,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'inColumn' => array
 		(

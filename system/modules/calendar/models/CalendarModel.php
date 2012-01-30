@@ -35,27 +35,27 @@ namespace Contao;
 
 
 /**
- * Class ModuleModel
+ * Class CalendarModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class ModuleModel extends \Model
+class CalendarModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_module';
+	protected static $strTable = 'tl_calendar';
 
 
 	/**
-	 * Find multiple modules by ID
+	 * Find multiple events by their IDs
 	 * @param array
-	 * @return Model
+	 * @return Model|null
 	 */
 	public static function findMultipleByIds($arrIds)
 	{
@@ -66,6 +66,18 @@ class ModuleModel extends \Model
 
 		$t = static::$strTable;
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, \Database::getInstance()->findInSet("$t.id", $arrIds));
+	}
+
+
+	/**
+	 * Find unprotected calendars with feeds
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findUnprotectedWithFeeds()
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.makeFeed=1 AND $t.protected=''"), null);
 	}
 }
 

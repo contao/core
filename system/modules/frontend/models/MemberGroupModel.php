@@ -79,6 +79,11 @@ class MemberGroupModel extends \Model
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
 		$time = time();
 		$objDatabase = \Database::getInstance();
 

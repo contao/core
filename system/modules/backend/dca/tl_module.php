@@ -591,7 +591,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'foreignKey'              => 'tl_member_group.name',
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
 			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'belongsToMany', 'load'=>'lazy')
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'guests' => array
 		(

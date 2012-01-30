@@ -35,14 +35,6 @@ namespace Contao;
 
 
 /**
- * Include the SwiftMailer classes
- */
-require_once(TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php');
-\Swift::registerAutoload();
-require_once(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
-
-
-/**
  * Class Email
  *
  * Provide methodes to send e-mails.

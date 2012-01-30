@@ -114,12 +114,8 @@ class ModuleEventMenu extends \ModuleCalendar
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		$strUrl = $this->generateFrontendUrl($objPage->row());
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 		$count = 0;
 		$limit = count($arrData);
 
@@ -170,12 +166,10 @@ class ModuleEventMenu extends \ModuleCalendar
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo, '/month/%s');
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)
 		{
 			$count = 0;
@@ -190,7 +184,7 @@ class ModuleEventMenu extends \ModuleCalendar
 
 				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
+				$arrItems[$intYear][$intMonth]['href'] = sprintf($strUrl, $intDate);
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);

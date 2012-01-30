@@ -118,14 +118,10 @@ class ModuleEventReader extends \Events
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$time = time();
+		// Get the current event
+		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $this->cal_calendar);
 
-		// Get current event
-		$objEvent = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', array_map('intval', $this->cal_calendar)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								   ->limit(1)
-								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
-
-		if ($objEvent->numRows < 1)
+		if ($objEvent === null)
 		{
 			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
 
@@ -150,7 +146,7 @@ class ModuleEventReader extends \Events
 			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
-		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
+		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
 		if ($objPage->outputFormat == 'xhtml')
 		{
@@ -231,7 +227,7 @@ class ModuleEventReader extends \Events
 		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
 		$objTemplate->addImage = false;
 
-		// Add image
+		// Add an image
 		if ($objEvent->addImage && is_file(TL_ROOT . '/' . $objEvent->singleSRC))
 		{
 			$this->addImageToTemplate($objTemplate, $objEvent->row());
@@ -254,18 +250,7 @@ class ModuleEventReader extends \Events
 			return;
 		}
 
-		// Check whether comments are allowed
-		$objCalendar = $this->Database->prepare("SELECT * FROM tl_calendar WHERE id=?")
-									  ->limit(1)
-									  ->execute($objEvent->pid);
-
-		if ($objCalendar->numRows < 1 || !$objCalendar->allowComments)
-		{
-			$this->Template->allowComments = false;
-			return;
-		}
-
-		$this->Template->allowComments = true;
+		$this->Template->allowComments = $objEvent->pid['allowComments'];
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -281,16 +266,9 @@ class ModuleEventReader extends \Events
 		}
 
 		// Notify author
-		if ($objCalendar->notify != 'notify_admin')
+		if ($objCalendar->notify != 'notify_admin' && $objEvent->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objEvent->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objEvent->author['email'];
 		}
 
 		$objConfig = new \stdClass();

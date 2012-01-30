@@ -58,11 +58,9 @@ class Calendar extends \Frontend
 	 */
 	public function generateFeed($intId)
 	{
-		$objCalendar = $this->Database->prepare("SELECT * FROM tl_calendar WHERE id=? AND makeFeed=?")
-									  ->limit(1)
-									  ->execute($intId, 1);
+		$objCalendar = \CalendarModel::findByPk($intId);
 
-		if ($objCalendar->numRows < 1)
+		if ($objCalendar === null || !$objCalendar->makeFeed)
 		{
 			return;
 		}
@@ -91,14 +89,16 @@ class Calendar extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND protected!=1");
+		$objCalendar = \CalendarModel::findUnprotectedWithFeeds();
 
-		while ($objCalendar->next())
+		if ($objCalendar !== null)
 		{
-			$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
-
-			$this->generateFiles($objCalendar->row());
-			$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
+			while ($objCalendar->next())
+			{
+				$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+				$this->generateFiles($objCalendar->row());
+				$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
+			}
 		}
 	}
 
@@ -109,6 +109,11 @@ class Calendar extends \Frontend
 	 */
 	protected function generateFiles($arrArchive)
 	{
+		if (!$arrArchive['jumpTo']['id'])
+		{
+			return;
+		}
+
 		$time = time();
 		$this->arrEvents = array();
 		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
@@ -123,27 +128,15 @@ class Calendar extends \Frontend
 		$objFeed->language = $arrArchive['language'];
 		$objFeed->published = $arrArchive['tstamp'];
 
-		// Get upcoming events
-		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=e.author) AS authorName FROM tl_calendar_events e WHERE pid=? AND (startTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
+		// Get the upcoming events
+		$objArticle = \CalendarEventsModel::findUpcomingByPid($arrArchive['id'], $arrArchive['maxItems']);
 
-		if ($arrArchive['maxItems'] > 0)
-		{
-			$objArticleStmt->limit($arrArchive['maxItems']);
-		}
-
-		$objArticle = $objArticleStmt->execute($arrArchive['id']);
-
-		// Get the default URL
-		$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-									->limit(1)
-									->execute($arrArchive['jumpTo']);
-
-		if ($objParent->numRows < 1)
+		if ($objArticle === null)
 		{
 			return;
 		}
 
-		$objParent = $this->getPageDetails($objParent);
+		$objParent = $this->getPageDetails($arrArchive['jumpTo']['id']);
 		$strUrl = $strLink . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 
 		// Parse items
@@ -250,58 +243,51 @@ class Calendar extends \Frontend
 		$arrProcessed = array();
 
 		// Get all calendars
-		$objCalendar = $this->Database->prepare("SELECT id, jumpTo FROM tl_calendar WHERE protected!=?")
-									  ->execute(1);
+		$objCalendar = \CalendarModel::findBy('protected', '');
 
 		// Walk through each calendar
-		while ($objCalendar->next())
+		if ($objCalendar !== null)
 		{
-			if (!empty($arrRoot) && !in_array($objCalendar->jumpTo, $arrRoot))
+			while ($objCalendar->next())
 			{
-				continue;
-			}
+				// Skip events without target page
+				if ($objCalendar->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objCalendar->jumpTo]))
-			{
-				$arrProcessed[$objCalendar->jumpTo] = false;
+				// Skip events outside the root nodes
+				if (!empty($arrRoot) && !in_array($objCalendar->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get target page
-				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
-											->limit(1)
-											->execute($objCalendar->jumpTo);
-
-				// Determin domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objCalendar->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent);
+					$objParent = $this->getPageDetails($objCalendar->jumpTo['id']);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objCalendar->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+					$arrProcessed[$objCalendar->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
 				}
-			}
 
-			// Skip events without target page
-			if ($arrProcessed[$objCalendar->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objCalendar->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objCalendar->jumpTo];
+				// Get the items
+				$objEvents = \CalendarEventsModel::findPublishedDefaultByPid($objCalendar->id);
 
-			// Get items
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE pid=? AND source='default' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime DESC")
-										 ->execute($objCalendar->id);
-
-			// Add items to the indexer
-			while ($objArticle->next())
-			{
-				$arrPages[] = sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+				if ($objEvents !== null)
+				{
+					while ($objEvents->next())
+					{
+						$arrPages[] = sprintf($strUrl, (($objEvents->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvents->alias : $objEvents->id));
+					}
+				}
 			}
 		}
 
@@ -311,13 +297,13 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add an event to the array of active events
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param integer
 	 * @param integer
 	 * @param string
 	 * @param string
 	 */
-	protected function addEvent(\Database_Result $objArticle, $intStart, $intEnd, $strUrl, $strLink)
+	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strLink)
 	{
 		if ($intStart < time())
 		{
@@ -329,7 +315,7 @@ class Calendar extends \Frontend
 
 		$intKey = date('Ymd', $intStart);
 		$span = self::calculateSpan($intStart, $intEnd);
-		$format = $objArticle->addTime ? 'datimFormat' : 'dateFormat';
+		$format = $objEvent->addTime ? 'datimFormat' : 'dateFormat';
 
 		// Add date
 		if ($span > 0)
@@ -338,38 +324,34 @@ class Calendar extends \Frontend
 		}
 		else
 		{
-			$title = $this->parseDate($objPage->dateFormat, $intStart) . ($objArticle->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($objPage->timeFormat, $intEnd) : '') . ')' : '');
+			$title = $this->parseDate($objPage->dateFormat, $intStart) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $intStart) . (($intStart < $intEnd) ? ' - ' . $this->parseDate($objPage->timeFormat, $intEnd) : '') . ')' : '');
 		}
 
 		// Add title and link
-		$title .= ' ' . $objArticle->title;
+		$title .= ' ' . $objEvent->title;
 		$link = '';
 
-		switch ($objArticle->source)
+		switch ($objEvent->source)
 		{
 			case 'external':
-				$link = $objArticle->url;
+				$link = $objEvent->url;
 				break;
 
 			case 'internal':
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objArticle->jumpTo);
+				$objEvent->getRelated('jumpTo');
 
-				if ($objPage->numRows)
+				if ($objEvent->jumpTo['id'] > 0)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objPage->row());
+					$link = $strLink . $this->generateFrontendUrl($objEvent->jumpTo);
 				}
 				break;
 
 			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objArticle->articleId);
+				$objArticle = \ArticleModel::findByPk($objEvent->articleId, true);
 
-				if ($objPage->numRows)
+				if ($objArticle !== null)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId));
+					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -377,33 +359,33 @@ class Calendar extends \Frontend
 		// Link to default page
 		if ($link == '')
 		{
-			$link = sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+			$link = sprintf($strUrl, (($objEvent->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objEvent->alias : $objEvent->id));
 		}
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+			$objEvent->teaser = $this->String->toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
+			$objEvent->teaser = $this->String->toHtml5($objEvent->teaser);
 		}
 
 		$arrEvent = array
 		(
 			'title' => $title,
-			'description' => $objArticle->details,
-			'teaser' => $objArticle->teaser,
+			'description' => $objEvent->details,
+			'teaser' => $objEvent->teaser,
 			'link' => $link,
-			'published' => $objArticle->tstamp,
-			'authorName' => $objArticle->authorName
+			'published' => $objEvent->tstamp,
+			'authorName' => $objEvent->authorName
 		);
 
 		// Enclosure
-		if ($objArticle->addEnclosure)
+		if ($objEvent->addEnclosure)
 		{
-			$arrEnclosure = deserialize($objArticle->enclosure, true);
+			$arrEnclosure = deserialize($objEvent->enclosure, true);
 
 			if (is_array($arrEnclosure))
 			{

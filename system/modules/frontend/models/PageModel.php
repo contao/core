@@ -251,6 +251,11 @@ class PageModel extends \Model
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
 	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
 		$t = static::$strTable;
 		$arrColumns = array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.type!='root' AND $t.type!='error_403' AND $t.type!='error_404'");
 

@@ -86,6 +86,13 @@ ClassLoader::scanAndRegister(); // config/autoload.php
 
 
 /**
+ * Register the SwiftMailer autoloader
+ */
+require_once(TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php');
+\Swift::registerAutoload(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
+
+
+/**
  * Load the basic classes
  */
 $objConfig = Config::getInstance();

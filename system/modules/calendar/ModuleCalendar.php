@@ -93,14 +93,9 @@ class ModuleCalendar extends \Events
 
 		$this->strUrl = preg_replace('/\?.*$/i', '', $this->Environment->request);
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		if ($objPage->numRows)
+		if ($this->jumpTo['id'] > 0)
 		{
-			$this->strLink = $this->generateFrontendUrl($objPage->row());
+			$this->strLink = $this->generateFrontendUrl($this->jumpTo);
 		}
 		else
 		{

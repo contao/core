@@ -83,27 +83,30 @@ abstract class Events extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCalendar = $this->Database->execute("SELECT id, protected, groups FROM tl_calendar WHERE id IN(" . implode(',', array_map('intval', $arrCalendars)) . ")");
+		$objCalendar = \CalendarModel::findMultipleByIds($arrCalendars);
 		$arrCalendars = array();
 
-		while ($objCalendar->next())
+		if ($objCalendar !== null)
 		{
-			if ($objCalendar->protected)
+			while ($objCalendar->next())
 			{
-				if (!FE_USER_LOGGED_IN)
+				if ($objCalendar->protected)
 				{
-					continue;
+					if (!FE_USER_LOGGED_IN)
+					{
+						continue;
+					}
+
+					$groups = deserialize($objCalendar->groups);
+
+					if (!is_array($groups) || empty($groups) || count(array_intersect($groups, $this->User->groups)) < 1)
+					{
+						continue;
+					}
 				}
 
-				$groups = deserialize($objCalendar->groups);
-
-				if (!is_array($groups) || empty($groups) || count(array_intersect($groups, $this->User->groups)) < 1)
-				{
-					continue;
-				}
+				$arrCalendars[] = $objCalendar->id;
 			}
-
-			$arrCalendars[] = $objCalendar->id;
 		}
 
 		return $arrCalendars;
@@ -132,22 +135,18 @@ abstract class Events extends \Module
 		foreach ($arrCalendars as $id)
 		{
 			$strUrl = $this->strUrl;
+			$objCalendar = \CalendarModel::findByPk($id);
 
-			// Get current "jumpTo" page
-			$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=?)")
-									  ->limit(1)
-									  ->execute($id);
-
-			if ($objPage->numRows)
+			// Get the current "jumpTo" page
+			if ($objCalendar !== null && $objCalendar->jumpTo['id'] != '')
 			{
-				$strUrl = $this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
+				$strUrl = $this->generateFrontendUrl($objCalendar->jumpTo, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 			}
 
-			// Get events of the current period
-			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY startTime")
-										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd);
+			// Get the events of the current period
+			$objEvents = \CalendarEventsModel::findCurrentByPid($id, $intStart, $intEnd);
 
-			if ($objEvents->numRows < 1)
+			if ($objEvents === null)
 			{
 				continue;
 			}
@@ -213,7 +212,7 @@ abstract class Events extends \Module
 
 	/**
 	 * Add an event to the array of active events
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param integer
 	 * @param integer
 	 * @param string
@@ -221,13 +220,13 @@ abstract class Events extends \Module
 	 * @param integer
 	 * @param integer
 	 */
-	protected function addEvent(\Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
+	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
 		global $objPage;
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
-		$span = Calendar::calculateSpan($intStart, $intEnd);
+		$span = \Calendar::calculateSpan($intStart, $intEnd);
 		$strDate = $this->parseDate($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
@@ -357,11 +356,11 @@ abstract class Events extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param string
 	 * @return string
 	 */
-	protected function generateEventUrl(\Database_Result $objEvent, $strUrl)
+	protected function generateEventUrl($objEvent, $strUrl)
 	{
 		switch ($objEvent->source)
 		{
@@ -381,25 +380,21 @@ abstract class Events extends \Module
 
 			// Link to an internal page
 			case 'internal':
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objEvent->jumpTo);
+				$objEvent->getRelated('jumpTo');
 
-				if ($objPage->numRows)
+				if ($objEvent->jumpTo['id'] > 0)
 				{
-					return ampersand($this->generateFrontendUrl($objPage->row()));
+					return ampersand($this->generateFrontendUrl($objEvent->jumpTo));
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objEvent->articleId);
+				$objArticle = \ArticleModel::findByPk($objEvent->articleId, true);
 
-				if ($objPage->numRows)
+				if ($objArticle !== null)
 				{
-					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId)));
+					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -415,7 +410,7 @@ abstract class Events extends \Module
 	 * @param string
 	 * @return array
 	 */
-	protected function getDatesFromFormat(Date $objDate, $strFormat)
+	protected function getDatesFromFormat(\Date $objDate, $strFormat)
 	{
 		switch ($strFormat)
 		{

@@ -287,8 +287,7 @@ abstract class Model extends \System
 	 */
 	public function reset()
 	{
-		$this->intIndex = 0;
-		$this->arrData = array();
+		$this->intIndex = -1;
 		$this->blnDone = false;
 	}
 
@@ -300,9 +299,10 @@ abstract class Model extends \System
 	 * @param string
 	 * @param integer
 	 * @param integer
+	 * @param boolean
 	 * @return Model
 	 */
-	protected static function find($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
+	protected static function find($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
 		if (static::$strTable == '')
 		{
@@ -323,7 +323,7 @@ abstract class Model extends \System
 			foreach ($objBase->getRelations() as $strKey=>$arrConfig)
 			{
 				// Automatically join the single-relation records
-				if ($arrConfig['load'] == 'eager')
+				if ($arrConfig['load'] == 'eager' || $blnForceEager)
 				{
 					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
@@ -383,22 +383,24 @@ abstract class Model extends \System
 	 * @param string
 	 * @param integer
 	 * @param integer
+	 * @param boolean
 	 * @return Model 
 	 */
-	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0)
+	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
-		return static::find($strColumn, $varValue, $strOrder, $intLimit, $intOffset);
+		return static::find($strColumn, $varValue, $strOrder, $intLimit, $intOffset, $blnForceEager);
 	}
 
 
 	/**
 	 * Find a single record by its primary key
 	 * @param mixed
+	 * @param boolean
 	 * @return Model 
 	 */
-	public static function findByPk($varValue)
+	public static function findByPk($varValue, $blnForceEager=false)
 	{
-		return static::findBy(static::$strPk, $varValue, null, 1);
+		return static::findBy(static::$strPk, $varValue, null, 1, 0, $blnForceEager);
 	}
 
 
@@ -407,11 +409,12 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param string
+	 * @param boolean
 	 * @return Model 
 	 */
-	public static function findOneBy($strColumn, $varValue, $strOrder=null)
+	public static function findOneBy($strColumn, $varValue, $strOrder=null, $blnForceEager=false)
 	{
-		return static::findBy($strColumn, $varValue, $strOrder, 1);
+		return static::findBy($strColumn, $varValue, $strOrder, 1, 0, $blnForceEager);
 	}
 
 
@@ -419,12 +422,13 @@ abstract class Model extends \System
 	 * Find a single record by its ID or alias
 	 * @param mixed
 	 * @param mixed
+	 * @param boolean
 	 * @return Model
 	 */
-	public static function findByIdOrAlias($varId, $varAlias)
+	public static function findByIdOrAlias($varId, $varAlias, $blnForceEager=false)
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("($t.id=? OR $t.alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias));
+		return static::findOneBy(array("($t.id=? OR $t.alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias), null, $blnForceEager);
 	}
 
 
@@ -433,11 +437,12 @@ abstract class Model extends \System
 	 * @param string
 	 * @param integer
 	 * @param integer
+	 * @param boolean
 	 * @return Model
 	 */
-	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0)
+	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
-		return static::findBy(null, null, $strOrder, $intLimit, $intOffset);
+		return static::findBy(null, null, $strOrder, $intLimit, $intOffset, $blnForceEager=false);
 	}
 
 

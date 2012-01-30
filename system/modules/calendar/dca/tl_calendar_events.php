@@ -66,8 +66,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',
@@ -168,7 +166,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_calendar.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'tstamp' => array
 		(
@@ -209,7 +209,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'addTime' => array
 		(
@@ -435,8 +436,10 @@ $GLOBALS['TL_DCA']['tl_calendar_events'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_events']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
 		),
 		'articleId' => array
 		(
