@@ -494,8 +494,17 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
-					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
+					$strImage = $this->generateBase64Image($row['bgimage'], $row);
+
+					if ($strImage != false)
+					{
+						$return .= $lb . 'background-image:url("' . $strImage . '");';
+					}
+					else
+					{
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
+					}
 				}
 
 				// Background position
@@ -991,8 +1000,17 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
-				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
+				$strImage = $this->generateBase64Image($row['liststyleimage'], $row);
+
+				if ($strImage != false)
+				{
+					$return .= $lb . 'background-image:url("' . $strImage . '");';
+				}
+				else
+				{
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+					$return .= $lb . 'background-image:url("' . $glue . $row['liststyleimage'] . '");';
+				}
 			}
 		}
 
@@ -2049,6 +2067,45 @@ class StyleSheets extends Backend
 		}
 
 		$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
+	}
+
+
+	/**
+	 * Check if the base64 encoding is requested and return the encoded string
+	 * 
+	 * @param string $strImage
+	 * @param array $arrRow
+	 * @return string|bool
+	 */
+	protected function generateBase64Image($strImage, $arrRow)
+	{
+		$objStyleSheet = $this->Database->prepare('SELECT * FROM tl_style_sheet WHERE id=?')
+										->limit(1)
+										->execute($arrRow['pid']);
+
+		// check if base64 encoding is enabled and if the image exists
+		if ($objStyleSheet->embeddedImages == 1 && file_exists(TL_ROOT . '/' . $strImage))
+		{
+			$objImage = new File($strImage);
+
+			$intSize = $objImage->size / 1024;
+			$strExtension = $objImage->extension;
+
+			// fix jpg mime type
+			if ($strExtension == 'jpg')
+			{
+				$strExtension = 'jpeg';
+			}
+
+			// the image is small enought to be base64 encoded
+			if ($intSize <= $objStyleSheet->embeddedImagesSize)
+			{
+				return 'data:image/' . $strExtension . ';base64,' . base64_encode($objImage->getContent());
+			}
+		}
+
+		// nothing to do here, go ahead an build the normal image path
+		return false;
 	}
 }
 

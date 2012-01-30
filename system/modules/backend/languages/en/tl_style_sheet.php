@@ -32,21 +32,24 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['name']       = array('Name', 'Please enter the style sheet name.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['cc']         = array('Conditional comment', 'Conditional comments allow you to create Internet Explorer specific style sheets (e.g. <em>if lt IE 9</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['media']      = array('Media types', 'Here you can choose the media types the style sheet applies to.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'] = array('Media query', 'Here you can define the media type using a media query like <em>screen and (min-width: 800px)</em>. The media types defined above will then be overwritten.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['vars']       = array('Global variables', 'Here you can define global variables for the style sheet (e.g. <em>$red</em> -> <em>c00</em> or <em>$margin</em> -> <em>12px</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['source']     = array('Source files', 'Please choose one or more files from the files directory.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']     = array('Revision date', 'Date and time of the latest revision');
+$GLOBALS['TL_LANG']['tl_style_sheet']['name']               = array('Name', 'Please enter the style sheet name.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['cc']                 = array('Conditional comment', 'Conditional comments allow you to create Internet Explorer specific style sheets (e.g. <em>if lt IE 9</em>).');
+$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImages']     = array('embedded images', 'Select this option to automaticly embedd images base64 encodet. This helps minimizing your http requests and improve your page speed ranking.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImagesSize'] = array('embedded size', 'Please insert a max image size with sould not be base64 encodet.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['media']              = array('Media types', 'Here you can choose the media types the style sheet applies to.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery']         = array('Media query', 'Here you can define the media type using a media query like <em>screen and (min-width: 800px)</em>. The media types defined above will then be overwritten.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars']               = array('Global variables', 'Here you can define global variables for the style sheet (e.g. <em>$red</em> -> <em>c00</em> or <em>$margin</em> -> <em>12px</em>).');
+$GLOBALS['TL_LANG']['tl_style_sheet']['source']             = array('Source files', 'Please choose one or more files from the files directory.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']             = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name';
-$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Media settings';
-$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']  = 'Global variables';
+$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend']    = 'Name';
+$GLOBALS['TL_LANG']['tl_style_sheet']['optimize_legend'] = 'optimize settings';
+$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend']    = 'Media settings';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']     = 'Global variables';
 
 
 /**

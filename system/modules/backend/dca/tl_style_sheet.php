@@ -136,7 +136,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
+		'__selector__'                => array('embeddedImages'),
+		'default'                     => '{title_legend},name,cc;{optimize_legend},embeddedImages;{media_legend},media,mediaQuery;{vars_legend},vars'
+	),
+
+	// Sub Palettes
+	'subpalettes' => array
+	(
+		'embeddedImages'              => 'embeddedImagesSize',
 	),
 
 	// Fields
@@ -162,6 +169,20 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			(
 				array('tl_style_sheet', 'sanitizeCc')
 			)
+		),
+		'embeddedImages' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImages'],
+			'inputType'               => 'checkbox',
+			'exclude'                 => true,
+			'eval'                    => array('tl_class'=>'w50 m12', 'submitOnChange'=>true)
+		),
+		'embeddedImagesSize' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImagesSize'],
+			'inputType'               => 'text',
+			'exclude'                 => true,
+			'eval'                    => array('tl_class'=>'clr w50', 'rgxp'=>'digit', 'maxlength'=>20)
 		),
 		'media' => array
 		(

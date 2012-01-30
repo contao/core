@@ -32,21 +32,24 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['name']       = array('Name', 'Bitte geben Sie den Namen des Stylesheets ein.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['cc']         = array('Conditional Comment', 'Conditional Comments ermöglichen die Erstellung Internet Explorer-spezifischer Stylesheets (z.B. <em>if lt IE 9</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['media']      = array('Medientypen', 'Hier können Sie die Medientypen auswählen, für die das Stylesheet gültig ist.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery'] = array('Media-Query', 'Hier können Sie den Medientyp mit Hilfe eines Media-Querys wie z.B. <em>screen and (min-width: 800px)</em> festlegen. Die oben ausgewählten Medientypen werden dadurch überschrieben.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['vars']       = array('Globale Variablen', 'Hier können Sie globale Variablen für das Stylesheet definieren (z.B. <em>$rot</em> -> <em>c00</em> oder <em>$abstand</em> -> <em>12px</em>).');
-$GLOBALS['TL_LANG']['tl_style_sheet']['source']     = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
-$GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']     = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
+$GLOBALS['TL_LANG']['tl_style_sheet']['name']               = array('Name', 'Bitte geben Sie den Namen des Stylesheets ein.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['cc']                 = array('Conditional Comment', 'Conditional Comments ermöglichen die Erstellung Internet Explorer-spezifischer Stylesheets (z.B. <em>if lt IE 9</em>).');
+$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImages']     = array('Bilder einbetten', 'Aktivieren Sie diese Option um Bilder automatisch base64 kodiert einzubinden. Dies minimiert die Anzahl der Requests beim Seitenaufruf und sorgt für ein besseres PageSpeed Ranking.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['embeddedImagesSize'] = array('Maximale Bildgröße', 'Bitte geben Sie die maximale Bildgröße in kb an, ab welcher ein Bild NICHT mehr base64 kodiert werden soll.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['media']              = array('Medientypen', 'Hier können Sie die Medientypen auswählen, für die das Stylesheet gültig ist.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['mediaQuery']         = array('Media-Query', 'Hier können Sie den Medientyp mit Hilfe eines Media-Querys wie z.B. <em>screen and (min-width: 800px)</em> festlegen. Die oben ausgewählten Medientypen werden dadurch überschrieben.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars']               = array('Globale Variablen', 'Hier können Sie globale Variablen für das Stylesheet definieren (z.B. <em>$rot</em> -> <em>c00</em> oder <em>$abstand</em> -> <em>12px</em>).');
+$GLOBALS['TL_LANG']['tl_style_sheet']['source']             = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
+$GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']             = array('Änderungsdatum', 'Datum und Uhrzeit der letzten Änderung');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name';
-$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Medieneinstellungen';
-$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']  = 'Globale Variablen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend']    = 'Name';
+$GLOBALS['TL_LANG']['tl_style_sheet']['optimize_legend'] = 'Optimierungen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend']    = 'Medieneinstellungen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']     = 'Globale Variablen';
 
 
 /**

@@ -587,6 +587,8 @@ CREATE TABLE `tl_style_sheet` (
   `tstamp` int(10) unsigned NOT NULL default '0',
   `name` varchar(64) NOT NULL default '',
   `cc` varchar(32) NOT NULL default '',
+  `embeddedImages` char(1) NOT NULL default '',
+  `embeddedImagesSize` int(20) NOT NULL default '500',
   `media` varchar(255) NOT NULL default '',
   `mediaQuery` varchar(255) NOT NULL default '',
   `vars` text NULL,
