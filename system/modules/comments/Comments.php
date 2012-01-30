@@ -246,7 +246,7 @@ class Comments extends \Frontend
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$objTemplate->action = ampersand($this->Environment->request);
-		$objTemplate->messages = $this->getMessages();
+		$objTemplate->messages = ''; // Backwards compatibility
 		$objTemplate->formId = $strFormId;
 		$objTemplate->hasError = $doNotSubmit;
 
