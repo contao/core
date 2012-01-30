@@ -97,3 +97,6 @@ var Stylect =
 window.addEvent('domready', function() {
 	Stylect.convertSelects();
 });
+window.addEvent('ajax_change', function() {
+	Stylect.convertSelects();
+});
