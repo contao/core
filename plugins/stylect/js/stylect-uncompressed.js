@@ -30,64 +30,71 @@
 /**
  * Find all select menus and style them
  */
-window.addEvent('domready', function() {
-	$$('select').each(function(el) {
-		// Not supported in IE < 9
-		if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
+var Stylect =
+{
+	convertSelects: function() {
+		$$('select').each(function(el) {
+			// Not supported in IE < 9
+			if (Browser.ie6 || Browser.ie7 || Browser.ie8) return;
 
-		// Multiple select
-		if (el.get('multiple')) return;
+			// Multiple select
+			if (el.get('multiple')) return;
 
-		// Handled by chosen
-		if (el.hasClass('tl_chosen')) return;
+			// Handled by chosen
+			if (el.hasClass('tl_chosen')) return;
 
-		// Get the selected option label
-		if ((active = el.getElement('option[selected]')) != null) {
-			var label = active.get('html');
-		} else {
-			var label = el.getElement('option').get('html');
-		}
+			// Get the selected option label
+			if ((active = el.getElement('option[selected]')) != null) {
+				var label = active.get('html');
+			} else {
+				var label = el.getElement('option').get('html');
+			}
  
-		// Create the div element
-		var div = new Element('div', {
-			'id': el.get('id') + '_styled',
-			'class': 'styled_select',
-			'html': '<span>' + label + '</span><b><i></i></b>',
-			'styles': {
-				'width': el.getComputedSize().totalWidth - 8
+			// Create the div element
+			var div = new Element('div', {
+				'id': el.get('id') + '_styled',
+				'class': 'styled_select',
+				'html': '<span>' + label + '</span><b><i></i></b>',
+				'styles': {
+					'width': el.getComputedSize().totalWidth - 8
+				}
+			}).inject(el, 'before');
+
+			// Fix right-aligned elements
+			if (el.hasClass('right-aligned')) {
+				div.setStyle('left', el.getPosition().x);
 			}
-		}).inject(el, 'before');
 
-		// Fix right-aligned elements
-		if (el.hasClass('right-aligned')) {
-			div.setStyle('left', el.getPosition().x);
-		}
-
-		// Mark active elements
-		if (el.hasClass('active')) {
-			div.addClass('active');
-		}
-
-		// Update the div onchange
-		el.addEvent('change', function() {
-			var option = el.getElement('option[value="' + el.value + '"]');
-			div.getElement('span').set('html', option.get('html'));
-		}).addEvent('keydown', function(event) {
-			if (event.key == 'up' || event.key == 'down') {
-				setTimeout(function() {	el.fireEvent('change'); }, 100);
+			// Mark active elements
+			if (el.hasClass('active')) {
+				div.addClass('active');
 			}
-		}).addEvent('focus', function() {
-			div.addClass('focused');
-		}).addEvent('blur', function() {
-			div.removeClass('focused');
-		}).setStyle('opacity', 0);
 
-		// Browser-specific adjustments
-		if (Browser.Engine.webkit) {
-			el.setStyle('margin-bottom', '4px');
-		}
-		if (Browser.Engine.webkit || Browser.Engine.trident) {
-			div.setStyle('width', div.getStyle('width').toInt()-4);
-		}
-	});
+			// Update the div onchange
+			el.addEvent('change', function() {
+				var option = el.getElement('option[value="' + el.value + '"]');
+				div.getElement('span').set('html', option.get('html'));
+			}).addEvent('keydown', function(event) {
+				if (event.key == 'up' || event.key == 'down') {
+					setTimeout(function() {	el.fireEvent('change'); }, 100);
+				}
+			}).addEvent('focus', function() {
+				div.addClass('focused');
+			}).addEvent('blur', function() {
+				div.removeClass('focused');
+			}).setStyle('opacity', 0);
+
+			// Browser-specific adjustments
+			if (Browser.Engine.webkit) {
+				el.setStyle('margin-bottom', '4px');
+			}
+			if (Browser.Engine.webkit || Browser.Engine.trident) {
+				div.setStyle('width', div.getStyle('width').toInt()-4);
+			}
+		});
+	}
+}
+
+window.addEvent('domready', function() {
+	Stylect.convertSelects();
 });

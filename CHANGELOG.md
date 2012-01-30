@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Trigger the Stylect plugin after loading a subpalette (see #3850).
+
+### Fixed
 Correctly redirect to front end pages (see #3843).
 
 ### Fixed
