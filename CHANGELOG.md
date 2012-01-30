@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (2012-02-XX)
 ---------------------------
 
+### Updated
+Updated MooTools to version 1.4.3 (see #3837).
+
 ### Fixed
 Do not output (back end) system messages in the front end (see #3838).
 
