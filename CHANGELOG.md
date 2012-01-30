@@ -5,6 +5,10 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Return the `renameTo()` status in the `Folder` class similar to how it is done
+in the `File` class (see #3872).
+
+### Fixed
 Trigger the Stylect plugin after loading a subpalette (see #3850).
 
 ### Fixed
