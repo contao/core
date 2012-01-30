@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (2012-02-XX)
 ---------------------------
 
+### Fixed
+Removed the HTML5 `article` and `section` tags as it turned out that semantics
+cannot be generated automatically (see #3833).
+
 ### Updated
 Updated MooTools to version 1.4.3 (see #3837).
 
