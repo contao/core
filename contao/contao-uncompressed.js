@@ -487,7 +487,6 @@ var AjaxRequest =
 				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
-				if (Stylect) Stylect.convertSelects();
 
 				// HOOK
 				window.fireEvent('subpalette'); // Backwards compatibility
