@@ -150,7 +150,7 @@ var AjaxRequest =
 					if (folder) {
 						li.inject(parent, 'before');
 					} else {
-						li.inject(parent, 'after')
+						li.inject(parent, 'after');
 					}
 				}
 
@@ -426,6 +426,7 @@ var AjaxRequest =
 				Backend.hideTreeBody();
 				Backend.addInteractiveHelp();
 				Backend.addColorPicker();
+				if (Stylect) Stylect.convertSelects();
 
 				// HOOK
 				window.fireEvent('subpalette'); // Backwards compatibility
