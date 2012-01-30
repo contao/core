@@ -148,11 +148,18 @@ class Folder extends \System
 	/**
 	 * Rename the folder
 	 * @param string
+	 * @return boolean
 	 */
 	public function renameTo($strNewName)
 	{
-		$this->Files->rename($this->strFolder, $strNewName);
-		$this->strFolder = $strNewName;
+		$return = $this->Files->rename($this->strFolder, $strNewName);
+
+		if ($return)
+		{
+			$this->strFolder = $strNewName;
+		}
+
+		return $return;
 	}
 
 
