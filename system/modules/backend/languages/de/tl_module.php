@@ -90,6 +90,7 @@ $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliederg
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken, sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_module']['syn_services']   = array('Syndikationsanbieter', 'Hier können Sie die gewünschten Anbieter und die Reihenfolge deren Ausgabe bestimmen.');
 
 
 /**

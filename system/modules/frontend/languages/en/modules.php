@@ -53,5 +53,6 @@ $GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Miscellaneous';
 $GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code.');
 $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash movie', 'Embeds a Flash movie into the page.');
 $GLOBALS['TL_LANG']['FMD']['randomImage']    = array('Random image', 'Adds a random image to the page.');
+$GLOBALS['TL_LANG']['FMD']['syndication']	 = array('Syndication', 'Share your website with others.');
 
 ?>

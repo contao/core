@@ -223,10 +223,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['printable'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'options'                 => array('print', 'pdf', 'facebook', 'twitter'),
-			'eval'                    => array('multiple'=>true),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_article']
+			'inputType'               => 'checkbox'
 		),
 		'cssID' => array
 		(

@@ -90,6 +90,7 @@ $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Allowed member group
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Show to guests only', 'Hide the module if a member is logged in.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Space in front and after', 'Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+$GLOBALS['TL_LANG']['tl_module']['syn_services']   = array('Syndication services', 'Here you can choose from the syndication services and define the display order.');
 
 
 /**

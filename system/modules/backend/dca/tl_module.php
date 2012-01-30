@@ -129,7 +129,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests'
+		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests',
+		'syndication'                 => '{title_legend},name,type;{config},syn_services;{protected_legend:hide},protected;{expert_legend:hide},guests'
 	),
 
 	// Subpalettes
@@ -538,6 +539,15 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('multiple'=>true, 'size'=>2, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+		),
+		'syn_services' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['syn_services'],
+			'exclude'                 => true,
+			'inputType'               => 'checkboxWizard',
+			'options'				  => array_keys($GLOBALS['TL_SYS']),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_module']['syndication'],
+			'eval'                    => array('multiple'=>true)
 		)
 	)
 );

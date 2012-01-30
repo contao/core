@@ -1,8 +1,8 @@
-<?php
+<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2012 Leo Feyer
+ * Copyright (C) 2005-2011 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Leo Feyer 2005-2012
+ * @copyright  Leo Feyer 2005-2011
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
@@ -30,30 +30,8 @@
 
 
 /**
- * Initialize the system
+ * Register syndication service
  */
-define('TL_MODE', 'FE');
-require('system/initialize.php');
-
-
-
-foreach ($GLOBALS['TL_SYS'] as $strClass)
-{
-	$objService = new $strClass();
-	$blnResult = $objService->share();
-	
-	if ($blnResult)
-	{
-		exit;
-	}
-}
-
-
-/**
- * Redirect if someone gets here
- */
-header('HTTP/1.1 301 Moved Permanently');
-header('Location: index.php');
-exit;
+$GLOBALS['TL_SYS']['twitter'] = 'SyndicationTwitter';
 
 ?>
