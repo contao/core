@@ -35,21 +35,21 @@ namespace Contao;
 
 
 /**
- * Class CalendarEventsModel
+ * Class NewsModel
  *
  * Provide methods to find and save content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class CalendarEventsModel extends \Model
+class NewsModel extends \Model
 {
 
 	/**
 	 * Name of the table
 	 * @var string
 	 */
-	protected static $strTable = 'tl_calendar_events';
+	protected static $strTable = 'tl_news';
 
 
 	/**
@@ -59,13 +59,24 @@ class CalendarEventsModel extends \Model
 	 * @param integer
 	 * @return Model|null
 	 */
-	public static function findCurrentByPid($intPid, $intStart, $intEnd)
+	public static function findPublishedByPids($arrPids, $blnFeatured=null)
 	{
-		$t = static::$strTable;
-		$intStart = intval($intStart);
-		$intEnd = intval($intEnd);
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
 
-		$arrColumns = array("$t.pid=? AND (($t.startTime>=$intStart AND $t.startTime<=$intEnd) OR ($t.endTime>=$intStart AND $t.endTime<=$intEnd) OR ($t.startTime<=$intStart AND $t.endTime>=$intEnd) OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$intStart) AND $t.startTime<=$intEnd))");
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if ($blnFeatured === true)
+		{
+			$arrColumns[] = "$t.featured=1";
+		}
+		elseif ($blnFeatured === false)
+		{
+			$arrColumns[] = "$t.featured=''";
+		}
 
 		if (!BE_USER_LOGGED_IN)
 		{
@@ -73,12 +84,12 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, "$t.startTime");
+		return static::findBy($arrColumns, null, "$t.date DESC");
 	}
 
 
 	/**
-	 * Find published events with the default redirect target by their parent ID
+	 * Find published news with the default redirect target by their parent ID
 	 * @param integer
 	 * @return Model|null
 	 */
@@ -93,12 +104,12 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, $intPid, "$t.startTime DESC");
+		return static::findBy($arrColumns, $intPid, "$t.date DESC");
 	}
 
 
 	/**
-	 * Find published events from one or more calendars
+	 * Find published news from one or more news archives
 	 * @param integer
 	 * @param string
 	 * @param array
@@ -125,25 +136,79 @@ class CalendarEventsModel extends \Model
 
 
 	/**
-	 * Find upcoming events by their parent ID
+	 * Find published news by their parent ID
 	 * @param integer
 	 * @param integer
 	 */
-	public static function findUpcomingByPid($intId, $intLimit=0)
+	public static function findPublishedByPid($intId, $intLimit=0)
 	{
 		$time = time();
 		$t = static::$strTable;
 
-		$arrColumns = array("$t.pid=? AND ($t.startTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
+		$arrColumns = array("$t.pid=? AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
 
 		if ($intLimit > 0)
 		{
-			return static::findBy($arrColumns, $intId, "$t.startTime", $intLimit);
+			return static::findBy($arrColumns, $intId, "$t.date DESC", $intLimit);
 		}
 		else
 		{
-			return static::findBy($arrColumns, $intId, "$t.startTime");
+			return static::findBy($arrColumns, $intId, "$t.date DESC");
 		}
+	}
+
+
+	/**
+	 * Find all published news in a certain period of time by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+		
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::findBy($arrColumns, array($intFrom, $intTo), "$t.date DESC", $intLimit, $intOffset);
+	}
+
+
+	/**
+	 * Count all published news in a certain period of time by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.date>=? AND $t.date<=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+		
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::countBy($arrColumns, array($intFrom, $intTo));
 	}
 }
 

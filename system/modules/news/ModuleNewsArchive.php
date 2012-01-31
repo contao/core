@@ -164,44 +164,46 @@ class ModuleNewsArchive extends \ModuleNews
 
 		$time = time();
 
-		// Split result
+		// Split the result
 		if ($this->perPage > 0)
 		{
 			// Get the total number of items
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-									   ->execute($intBegin, $intEnd);
+			$objTotal = \NewsModel::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 
-			$total = $objTotal->total;
-
-			// Get the current page
-			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
-
-			if ($page > ($total/$this->perPage))
+			if ($objTotal !== null)
 			{
-				$page = ceil($total/$this->perPage);
+				$total = $objTotal->total;
+
+				// Get the current page
+				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+				if ($page > ($total/$this->perPage))
+				{
+					$page = ceil($total/$this->perPage);
+				}
+
+				// Set limit and offset
+				$limit = $this->perPage;
+				$offset = (max($page, 1) - 1) * $this->perPage;
+
+				// Add the pagination menu
+				$objPagination = new \Pagination($total, $this->perPage);
+				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
-
-			// Set limit and offset
-			$limit = $this->perPage;
-			$offset = (max($page, 1) - 1) * $this->perPage;
-
-			// Add the pagination menu
-			$objPagination = new \Pagination($total, $this->perPage);
-			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
-
-		// Limit result
+		// Get the news items
 		if (isset($limit))
 		{
-			$objArticlesStmt->limit($limit, $offset);
+			$objArticles = \NewsModel::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives, $limit, $offset);
+		}
+		else
+		{
+			$objArticles = \NewsModel::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 		}
 
-		$objArticles = $objArticlesStmt->execute($intBegin, $intEnd);
-
 		// No items found
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
 			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}

@@ -51,25 +51,23 @@ class News extends \Frontend
 	 */
 	public function generateFeed($intId)
 	{
-		$objArchive = $this->Database->prepare("SELECT * FROM tl_news_archive WHERE id=? AND makeFeed=?")
-									 ->limit(1)
-									 ->execute($intId, 1);
+		$objArchive = \NewsArchiveModel::findByPk($intId);
 
-		if ($objArchive->numRows < 1)
+		if ($objArchive === null || !$objArchive->makeFeed)
 		{
 			return;
 		}
 
 		$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
 
-		// Delete XML file
+		// Delete the XML file
 		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
 		{
 			$this->import('Files');
 			$this->Files->delete('share/' . $objArchive->feedName . '.xml');
 		}
 
-		// Update XML file
+		// Update the XML file
 		else
 		{
 			$this->generateFiles($objArchive->row());
@@ -84,14 +82,16 @@ class News extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objArchive = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND protected!=1");
+		$objArchive = \NewsArchiveModel::findUnprotectedWithFeeds();
 
-		while ($objArchive->next())
+		if ($objArchive !== null)
 		{
-			$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
-
-			$this->generateFiles($objArchive->row());
-			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+			while ($objArchive->next())
+			{
+				$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
+				$this->generateFiles($objArchive->row());
+				$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+			}
 		}
 	}
 
@@ -115,27 +115,15 @@ class News extends \Frontend
 		$objFeed->language = $arrArchive['language'];
 		$objFeed->published = $arrArchive['tstamp'];
 
-		// Get items
-		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=n.author) AS authorName FROM tl_news n WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC");
+		// Get the items
+		$objArticle = \NewsModel::findPublishedByPid($arrArchive['id'], $arrArchive['maxItems']);
 
-		if ($arrArchive['maxItems'] > 0)
-		{
-			$objArticleStmt->limit($arrArchive['maxItems']);
-		}
-
-		$objArticle = $objArticleStmt->execute($arrArchive['id']);
-
-		// Get the default URL
-		$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-									->limit(1)
-									->execute($arrArchive['jumpTo']);
-
-		if ($objParent->numRows < 1)
+		if ($objArticle === null)
 		{
 			return;
 		}
 
-		$objParent = $this->getPageDetails($objParent);
+		$objParent = $this->getPageDetails($arrArchive['jumpTo']['id']);
 		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 
 		// Parse items
@@ -206,57 +194,51 @@ class News extends \Frontend
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objArchive = $this->Database->execute("SELECT id, jumpTo FROM tl_news_archive WHERE protected!=1");
+		$objArchive = \NewsArchiveModel::findBy('protected', '');
 
 		// Walk through each archive
-		while ($objArchive->next())
+		if ($objArchive !== null)
 		{
-			if (!empty($arrRoot) && !in_array($objArchive->jumpTo, $arrRoot))
+			while ($objArchive->next())
 			{
-				continue;
-			}
+				// Skip news archives without target page
+				if ($objArchive->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objArchive->jumpTo]))
-			{
-				$arrProcessed[$objArchive->jumpTo] = false;
+				// Skip news archives outside the root nodes
+				if (!empty($arrRoot) && !in_array($objArchive->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get the target page
-				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
-											->limit(1)
-											->execute($objArchive->jumpTo);
-
-				// Determin domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objArchive->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent);
+					$objParent = $this->getPageDetails($objArchive->jumpTo['id']);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objArchive->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
-			}
 
-			// Skip items without target page
-			if ($arrProcessed[$objArchive->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objArchive->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objArchive->jumpTo];
+				// Get the items
+				$objArticle = \NewsModel::findPublishedDefaultByPid($objArchive->id);
 
-			// Get items
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND source='default' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC")
-										 ->execute($objArchive->id);
-
-			// Add items to the indexer
-			while ($objArticle->next())
-			{
-				$arrPages[] = $this->getLink($objArticle, $strUrl);
+				if ($objArticle !== null)
+				{
+					while ($objArticle->next())
+					{
+						$arrPages[] = $this->getLink($objArticle, $strUrl);
+					}
+				}
 			}
 		}
 
@@ -266,46 +248,42 @@ class News extends \Frontend
 
 	/**
 	 * Return the link of a news article
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param string
 	 * @return string
 	 */
-	protected function getLink(\Database_Result $objArticle, $strUrl)
+	protected function getLink($objItem, $strUrl)
 	{
-		switch ($objArticle->source)
+		switch ($objItem->source)
 		{
 			// Link to an external page
 			case 'external':
-				return $objArticle->url;
+				return $objItem->url;
 				break;
 
 			// Link to an internal page
 			case 'internal':
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($objArticle->jumpTo);
+				$objItem->getRelated('jumpTo');
 
-				if ($objParent->numRows)
+				if ($objItem->jumpTo['id'] > 0)
 				{
-					return $this->generateFrontendUrl($objParent->row());
+					return $this->generateFrontendUrl($objItem->jumpTo);
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objParent = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-											->limit(1)
-											->execute($objArticle->articleId);
+				$objArticle = \ArticleModel::findByPk($objItem->articleId, true);
 
-				if ($objParent->numRows)
+				if ($objArticle !== null)
 				{
-					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objParent->aAlias != '') ? $objParent->aAlias : $objParent->aId));
+					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return sprintf($strUrl, (($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		return sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
 	}
 }
 

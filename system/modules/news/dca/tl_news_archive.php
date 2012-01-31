@@ -52,8 +52,6 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'
@@ -167,8 +165,10 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_news_archive']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'allowComments' => array
 		(
@@ -256,7 +256,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
 			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
-			'sql'                     => "blob NULL"
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'makeFeed' => array
 		(

@@ -250,13 +250,13 @@ class Calendar extends \Frontend
 		{
 			while ($objCalendar->next())
 			{
-				// Skip events without target page
+				// Skip calendars without target page
 				if ($objCalendar->jumpTo['id'] < 1)
 				{
 					continue;
 				}
 
-				// Skip events outside the root nodes
+				// Skip calendars outside the root nodes
 				if (!empty($arrRoot) && !in_array($objCalendar->jumpTo['id'], $arrRoot))
 				{
 					continue;

@@ -116,37 +116,28 @@ class ModuleNewsMenu extends \ModuleNews
 	 */
 	protected function compileYearlyMenu()
 	{
-		$time = time();
 		$arrData = array();
-
 		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
+		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
 
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active items
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Y', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		$strUrl = $this->generateFrontendUrl($objPage->row());
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 		$count = 0;
 		$limit = count($arrData);
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$intCount)
 		{
 			$intDate = $intYear;
@@ -162,7 +153,7 @@ class ModuleNewsMenu extends \ModuleNews
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '');
 	}
 
 
@@ -171,22 +162,18 @@ class ModuleNewsMenu extends \ModuleNews
 	 */
 	protected function compileMonthlyMenu()
 	{
-		$time = time();
 		$arrData = array();
+		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
 
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active months
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Y', $objArchives->date)][date('m', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		foreach (array_keys($arrData) as $key)
 		{
 			($this->news_order == 'ascending') ? ksort($arrData[$key]) : krsort($arrData[$key]);
@@ -195,12 +182,10 @@ class ModuleNewsMenu extends \ModuleNews
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)
 		{
 			$count = 0;
@@ -215,7 +200,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
+				$arrItems[$intYear][$intMonth]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);
@@ -233,32 +218,24 @@ class ModuleNewsMenu extends \ModuleNews
 	 */
 	protected function compileDailyMenu()
 	{
-		$time = time();
 		$arrData = array();
-
 		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
+		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
 
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active months
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Ymd', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		krsort($arrData);
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 
-		$strUrl = $this->generateFrontendUrl($objPage->row());
 		$this->Date = $this->Input->get('day') ? new \Date($this->Input->get('day'), 'Ymd') : new \Date();
 
 		$intYear = date('Y', $this->Date->tstamp);

@@ -135,22 +135,24 @@ class ModuleNewsList extends \ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
-
-		// Limit the result
-		if (isset($limit))
+		// Handle featured news
+		if ($this->news_featured == 'featured')
 		{
-			$objArticlesStmt->limit($limit, $offset + $skipFirst);
+			$blnFeatured = true;
 		}
-		elseif ($skipFirst > 0)
+		elseif ($this->news_featured == 'unfeatured')
 		{
-			$objArticlesStmt->limit(max($total, 1), $skipFirst);
+			$blnFeatured = false;
+		}
+		else
+		{
+			$blnFeatured = null;
 		}
 
-		$objArticles = $objArticlesStmt->execute();
+		$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
 
 		// No items found
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
 			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}

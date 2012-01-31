@@ -65,7 +65,7 @@ abstract class ModuleNews extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objArchive = $this->Database->execute("SELECT id, protected, groups FROM tl_news_archive WHERE id IN(" . implode(',', array_map('intval', $arrArchives)) . ")");
+		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
 		$arrArchives = array();
 
 		while ($objArchive->next())
@@ -94,13 +94,15 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse one or more items and return them as array
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param boolean
 	 * @return array
 	 */
-	protected function parseArticles(\Database_Result $objArticles, $blnAddArchive=false)
+	protected function parseArticles($objArticles, $blnAddArchive=false)
 	{
-		if ($objArticles->numRows < 1)
+		$limit = ($objArticles instanceof \Model) ? $objArticles->count() : $objArticles->numRows;
+
+		if ($limit < 1)
 		{
 			return array();
 		}
@@ -109,7 +111,6 @@ abstract class ModuleNews extends \Module
 		$this->import('String');
 
 		$arrArticles = array();
-		$limit = $objArticles->numRows;
 		$count = 0;
 		$imgSize = false;
 
@@ -227,10 +228,10 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Return the meta fields of a news article as array
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @return array
 	 */
-	protected function getMetaFields(\Database_Result $objArticle)
+	protected function getMetaFields($objArticle)
 	{
 		$meta = deserialize($this->news_metaFields);
 
@@ -251,9 +252,9 @@ abstract class ModuleNews extends \Module
 					break;
 
 				case 'author':
-					if ($objArticle->author != '')
+					if ($objArticle->author['name'] != '')
 					{
-						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objArticle->author;
+						$return['author'] = $GLOBALS['TL_LANG']['MSC']['by'] . ' ' . $objArticle->author['name'];
 					}
 					break;
 
@@ -262,15 +263,9 @@ abstract class ModuleNews extends \Module
 					{
 						break;
 					}
-
-					$objComments = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_comments WHERE source='tl_news' AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
-												  ->execute($objArticle->id);
-
-					if ($objComments->numRows)
-					{
-						$return['ccount'] = $objComments->total;
-						$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $objComments->total);
-					}
+					$objComments = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
+					$return['ccount'] = $objComments->count;
+					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $objComments->count);
 					break;
 			}
 		}
@@ -281,78 +276,72 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateNewsUrl(\Database_Result $objArticle, $blnAddArchive=false)
+	protected function generateNewsUrl($objItem, $blnAddArchive=false)
 	{
-		$strCacheKey = 'id_' . $objArticle->id;
+		$strCacheKey = 'id_' . $objItem->id;
 
-		// Load URL from cache
+		// Load the URL from cache
 		if (isset(self::$arrUrlCache[$strCacheKey]))
 		{
 			return self::$arrUrlCache[$strCacheKey];
 		}
 
-		// Initialize cache
-		self::$arrUrlCache[$strCacheKey] = '';
+		// Initialize the cache
+		self::$arrUrlCache[$strCacheKey] = null;
 
-		switch ($objArticle->source)
+		switch ($objItem->source)
 		{
 			// Link to external page
 			case 'external':
 				$this->import('String');
 
-				if (substr($objArticle->url, 0, 7) == 'mailto:')
+				if (substr($objItem->url, 0, 7) == 'mailto:')
 				{
-					self::$arrUrlCache[$strCacheKey] = $this->String->encodeEmail($objArticle->url);
+					self::$arrUrlCache[$strCacheKey] = $this->String->encodeEmail($objItem->url);
 				}
 				else
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($objArticle->url);
+					self::$arrUrlCache[$strCacheKey] = ampersand($objItem->url);
 				}
 				break;
 
 			// Link to an internal page
 			case 'internal':
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objArticle->jumpTo);
+				$objItem->getRelated('jumpTo');
 
-				if ($objPage->numRows)
+				if ($objItem->jumpTo['id'] > 0)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row()));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objItem->jumpTo));
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objArticle->articleId);
+				$objArticle = \ArticleModel::findByPk($objItem->articleId, true);
 
-				if ($objPage->numRows)
+				if ($objArticle !== null)
 				{
-					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId)));
+					self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		if (self::$arrUrlCache[$strCacheKey] == '')
+		if (self::$arrUrlCache[$strCacheKey] === null)
 		{
-			$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								 	  ->limit(1)
-									  ->execute($objArticle->parentJumpTo);
+			$objPage = \PageModel::findByPk($objItem->pid['jumpTo']);
 
-			if ($objPage->numRows)
+			if ($objPage === null)
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->Environment->request, true);
 			}
 			else
 			{
-				self::$arrUrlCache[$strCacheKey] = ampersand($this->Environment->request, true);
+				self::$arrUrlCache[$strCacheKey] = ampersand($this->generateFrontendUrl($objPage->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objItem->alias != '') ? $objItem->alias : $objItem->id)));
 			}
 
 			// Add the current archive parameter (news archive)
@@ -369,12 +358,12 @@ abstract class ModuleNews extends \Module
 	/**
 	 * Generate a link and return it as string
 	 * @param string
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @param boolean
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateLink($strLink, \Database_Result $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
+	protected function generateLink($strLink, $objArticle, $blnAddArchive=false, $blnIsReadMore=false)
 	{
 		// Internal link
 		if ($objArticle->source != 'external')

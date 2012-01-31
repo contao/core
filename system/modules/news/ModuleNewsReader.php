@@ -120,12 +120,10 @@ class ModuleNewsReader extends \ModuleNews
 
 		$time = time();
 
-		// Get news item
-		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-									 ->limit(1)
-									 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $time, $time);
+		// Get the news item
+		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->news_archives);
 
-		if ($objArticle->numRows < 1)
+		if ($objArticle === null)
 		{
 			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 
@@ -160,18 +158,7 @@ class ModuleNewsReader extends \ModuleNews
 			return;
 		}
 
-		// Check whether comments are allowed
-		$objArchive = $this->Database->prepare("SELECT * FROM tl_news_archive WHERE id=?")
-									 ->limit(1)
-									 ->execute($objArticle->pid);
-
-		if ($objArchive->numRows < 1 || !$objArchive->allowComments)
-		{
-			$this->Template->allowComments = false;
-			return;
-		}
-
-		$this->Template->allowComments = true;
+		$this->Template->allowComments = $objArticle->pid['allowComments'];
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -180,23 +167,16 @@ class ModuleNewsReader extends \ModuleNews
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
+		// Notify the system administrator
 		if ($objArchive->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
-		if ($objArchive->notify != 'notify_admin')
+		// Notify the author
+		if ($objArchive->notify != 'notify_admin' && $objArticle->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objArticle->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objArticle->author['email'];
 		}
 
 		$objConfig = new \stdClass();

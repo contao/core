@@ -259,13 +259,13 @@ class ModuleEventReader extends \Events
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
+		// Notify the system administrator
 		if ($objCalendar->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
+		// Notify the author
 		if ($objCalendar->notify != 'notify_admin' && $objEvent->author['email'] != '')
 		{
 			$arrNotifies[] = $objEvent->author['email'];

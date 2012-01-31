@@ -39,6 +39,10 @@ ClassLoader::addClasses(array
 	'Contao\\ModuleNewsMenu'    => 'system/modules/news/ModuleNewsMenu.php',
 	'Contao\\ModuleNewsReader'  => 'system/modules/news/ModuleNewsReader.php',
 	'Contao\\News'              => 'system/modules/news/News.php',
+
+	// Models
+	'Contao\\NewsArchiveModel'  => 'system/modules/news/models/NewsArchiveModel.php',
+	'Contao\\NewsModel'         => 'system/modules/news/models/NewsModel.php',
 ));
 
 
