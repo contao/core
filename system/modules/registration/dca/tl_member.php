@@ -29,6 +29,12 @@
 
 
 /**
+ * Add the index to the tl_member table
+ */
+$GLOBALS['TL_DCA']['tl_member']['config']['sql']['keys']['activation'] = 'index';
+
+
+/**
  * Add fields to tl_member
  */
 $GLOBALS['TL_DCA']['tl_member']['fields']['activation']['sql'] = "varchar(32) NOT NULL default ''";

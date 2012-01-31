@@ -70,12 +70,6 @@ abstract class Model extends \System
 	private $blnDone = false;
 
 	/**
-	 * True if the record exists
-	 * @var boolean
-	 */
-	protected $blnExists = false;
-
-	/**
 	 * Data array
 	 * @var array
 	 */
@@ -93,7 +87,6 @@ abstract class Model extends \System
 		if ($objResult !== null)
 		{
 			$this->setData($objResult);
-			$this->blnExists = true;
 		} 
 	}
 
@@ -574,24 +567,15 @@ abstract class Model extends \System
 	 */
 	public function save($blnForceInsert=false)
 	{
-		$this->import('Database');
-		$arrSet = $this->preSave($this->arrData);
+		$arrSet = $this->preSave($this->row());
 
-		if (!$this->blnExists || $blnForceInsert)
+		if (!isset($this->{static::$strPk}) || $blnForceInsert)
 		{
-			$this->blnExists = true;
-
-			return $this->Database->prepare("INSERT INTO " . static::$strTable . " %s")
-								  ->set($arrSet)
-								  ->execute()
-								  ->insertId;
+			return \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")->set($arrSet)->execute()->insertId;
 		}
 		else
 		{
-			return $this->Database->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
-								  ->set($arrSet)
-								  ->execute($this->{static::$strPk})
-								  ->affectedRows;
+			return \Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")->set($arrSet)->execute($this->{static::$strPk})->affectedRows;
 		}
 	}
 

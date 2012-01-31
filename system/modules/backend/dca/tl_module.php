@@ -266,7 +266,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'hasMany', 'load'=>'lazy') # TODO: remove the "load pages page" queries
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'showHidden' => array
 		(
@@ -299,7 +299,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
-			'relation'                => array('type'=>'hasOne', 'load'=>'eager') # TODO: remove the "load jumpTo page" queries
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'redirectBack' => array
 		(

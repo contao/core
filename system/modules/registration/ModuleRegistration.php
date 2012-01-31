@@ -109,13 +109,13 @@ class ModuleRegistration extends \Module
 		}
 
 		// Activate account
-		if (strlen($this->Input->get('token')))
+		if ($this->Input->get('token') != '')
 		{
 			$this->activateAcount();
 			return;
 		}
 
-		if (strlen($this->memberTpl))
+		if ($this->memberTpl != '')
 		{
 			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
@@ -250,12 +250,11 @@ class ModuleRegistration extends \Module
 					}
 				}
 
+				// Store the current value
 				if ($objWidget->hasErrors())
 				{
 					$doNotSubmit = true;
 				}
-
-				// Store current value
 				elseif ($objWidget->submitInput())
 				{
 					$arrUser[$field] = $varValue;
@@ -482,21 +481,19 @@ class ModuleRegistration extends \Module
 		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
-		$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE activation=?")
-									->limit(1)
-									->execute($this->Input->get('token'));
+		$objMember = \MemberModel::findOneBy('activation', $this->Input->get('token'));
 
-		if ($objMember->numRows < 1)
+		if ($objMember === null)
 		{
 			$this->Template->type = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['MSC']['accountError'];
-
 			return;
 		}
 
-		// Update account
-		$this->Database->prepare("UPDATE tl_member SET disable='', activation='' WHERE id=?")
-					   ->execute($objMember->id);
+		// Update the account
+		$objMember->disable = '';
+		$objMember->activation = '';
+		$objMember->save();
 
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateAccount']) && is_array($GLOBALS['TL_HOOKS']['activateAccount']))
@@ -510,31 +507,26 @@ class ModuleRegistration extends \Module
 
 		$arrData = array();
 
-		// Get editable fields
+		// Get the editable fields
 		foreach ($this->editable as $key)
 		{
 			$arrData[$key] = $objMember->$key;
 		}
 
-		// Add login details
-		$arrData['groups'] = $objMember->groups;
+		// Add the login details
 		$arrData['login'] = $objMember->login;
+		$arrData['groups'] = $objMember->groups;
 		$arrData['disable'] = '';
 
 		// Log activity
 		$this->log('User account ID ' . $objMember->id . ' (' . $objMember->email . ') has been activated', 'ModuleRegistration activateAccount()', TL_ACCESS);
 
-		// Redirect to jumpTo page
-		if (strlen($this->reg_jumpTo))
-		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->reg_jumpTo);
+		// Redirect to the jumpTo page
+		$this->objModel->getRelated('reg_jumpTo');
 
-			if ($objNextPage->numRows)
-			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
-			}
+		if ($this->objModel->reg_jumpTo['id'])
+		{
+			$this->redirect($this->generateFrontendUrl($this->objModel->reg_jumpTo));
 		}
 
 		// Confirm activation

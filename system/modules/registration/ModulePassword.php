@@ -150,16 +150,19 @@ class ModulePassword extends \Module
 		$this->Template->fields = $strFields;
 		$this->Template->hasError = $doNotSubmit;
 
-		// Look for an account and send password link
+		// Look for an account and send the password link
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_lost_password' && !$doNotSubmit)
 		{
-			$time = time();
+			if ($this->reg_skipName)
+			{
+				$objMember = \MemberModel::findActiveByEmailAndUsername($this->Input->post('email', true), null);
+			}
+			else
+			{
+				$objMember = \MemberModel::findActiveByEmailAndUsername($this->Input->post('email', true), $this->Input->post('username'));
+			}
 
-			$objMember = $this->Database->prepare("SELECT * FROM tl_member WHERE email=? AND login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)" . (!$this->reg_skipName ? " AND username=?" : ""))
-										->limit(1)
-										->execute($this->Input->post('email', true), $this->Input->post('username'));
-
-			if ($objMember->numRows < 1)
+			if ($objMember === null)
 			{
 				$this->strTemplate = 'mod_message';
 
@@ -188,11 +191,9 @@ class ModulePassword extends \Module
 	 */
 	protected function setNewPassword()
 	{
-		$objMember = $this->Database->prepare("SELECT id, username FROM tl_member WHERE login=1 AND activation=?")
-									->limit(1)
-									->execute($this->Input->get('token'));
+		$objMember = \MemberModel::findOneBy('activation', $this->Input->get('token'));
 
-		if ($objMember->numRows < 1)
+		if ($objMember === null || $objMember->login == '')
 		{
 			$this->strTemplate = 'mod_message';
 
@@ -233,8 +234,9 @@ class ModulePassword extends \Module
 				$this->Session->set('setPasswordToken', '');
 				array_pop($_SESSION['TL_CONFIRM']);
 
-				$this->Database->prepare("UPDATE tl_member SET password=?, activation='' WHERE id=?")
-							   ->execute($objWidget->value, $objMember->id);
+				$objMember->activation = '';
+				$objMember->password = $objWidget->value;
+				$objMember->save();
 
 				// HOOK: set new password callback
 				if (isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
@@ -246,17 +248,12 @@ class ModulePassword extends \Module
 					}
 				}
 
-				// Redirect
-				if (strlen($this->reg_jumpTo))
-				{
-					$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->reg_jumpTo);
+				// Redirect to the jumpTo page
+				$this->objModel->getRelated('reg_jumpTo');
 
-					if ($objNextPage->numRows)
-					{
-						$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
-					}
+				if ($this->objModel->reg_jumpTo['id'])
+				{
+					$this->redirect($this->generateFrontendUrl($this->objModel->reg_jumpTo));
 				}
 
 				// Confirm
@@ -283,9 +280,9 @@ class ModulePassword extends \Module
 
 	/**
 	 * Create a new user and redirect
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 */
-	protected function sendPasswordLink(\Database_Result $objMember)
+	protected function sendPasswordLink($objMember)
 	{
 		$arrChunks = array();
 		$confirmationId = md5(uniqid(mt_rand(), true));

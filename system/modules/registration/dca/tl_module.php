@@ -68,7 +68,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_groups'] = array
 	'inputType'     => 'checkbox',
 	'foreignKey'    => 'tl_member_group.name',
 	'eval'          => array('multiple'=>true),
-	'sql'           => "blob NULL"
+	'sql'           => "blob NULL",
+	'relation'      => array('type'=>'hasMany', 'load'=>'lazy')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_allowLogin'] = array
@@ -129,8 +130,10 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['reg_jumpTo'] = array
 	'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo'],
 	'exclude'       => true,
 	'inputType'     => 'pageTree',
+	'foreignKey'    => 'tl_page.title',
 	'eval'          => array('fieldType'=>'radio'),
-	'sql'           => "int(10) unsigned NOT NULL default '0'"
+	'sql'           => "int(10) unsigned NOT NULL default '0'",
+	'relation'      => array('type'=>'hasOne', 'load'=>'lazy')
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['reg_text'] = array
