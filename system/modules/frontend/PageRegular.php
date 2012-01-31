@@ -471,24 +471,30 @@ class PageRegular extends \Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
+			$objFeeds = \NewsArchiveModel::findUnprotectedWithFeedsByIds($newsfeeds);
 
-			while($objFeeds->next())
+			if ($objFeeds !== null)
 			{
-				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				while($objFeeds->next())
+				{
+					$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
 			}
 		}
 
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
+			$objFeeds = \CalendarModel::findUnprotectedWithFeedsByIds($calendarfeeds);
 
-			while($objFeeds->next())
+			if ($objFeeds !== null)
 			{
-				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link rel="alternate" href="' . $base . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				while($objFeeds->next())
+				{
+					$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
 			}
 		}
 

@@ -99,9 +99,30 @@ class ModuleNewsList extends \ModuleNews
 			$limit = $this->news_numberOfItems;
 		}
 
+		// Handle featured news
+		if ($this->news_featured == 'featured')
+		{
+			$blnFeatured = true;
+		}
+		elseif ($this->news_featured == 'unfeatured')
+		{
+			$blnFeatured = false;
+		}
+		else
+		{
+			$blnFeatured = null;
+		}
+
 		// Get the total number of items
-		$objTotal = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""));
-		$total = $objTotal->total - $skipFirst;
+		$objTotal = \NewsModel::countPublishedByPids($this->news_archives, $blnFeatured);
+
+		if ($objTotal === null)
+		{
+			$this->Template->articles = array();
+			return;
+		}
+
+		$total = $objTotal->count - $skipFirst;
 
 		// Split the results
 		if ($this->perPage > 0 && (!isset($limit) || $this->news_numberOfItems > $this->perPage))
@@ -133,20 +154,6 @@ class ModuleNewsList extends \ModuleNews
 			// Add the pagination menu
 			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
-		}
-
-		// Handle featured news
-		if ($this->news_featured == 'featured')
-		{
-			$blnFeatured = true;
-		}
-		elseif ($this->news_featured == 'unfeatured')
-		{
-			$blnFeatured = false;
-		}
-		else
-		{
-			$blnFeatured = null;
 		}
 
 		$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);

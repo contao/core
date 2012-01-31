@@ -93,18 +93,6 @@ class CommentsModel extends \Model
 
 		return static::countBy($arrColumns, array($strSource, $intParent));
 	}
-
-
-	/**
-	 * Find unprotected calendars with feeds
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findUnprotectedWithFeeds()
-	{
-		$t = static::$strTable;
-		return static::findBy(array("$t.makeFeed=1 AND $t.protected=''"), null);
-	}
 }
 
 ?>

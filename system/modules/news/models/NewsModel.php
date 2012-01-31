@@ -53,7 +53,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find events of the current period by their parent ID
+	 * Find news items by their parent ID
 	 * @param integer
 	 * @param integer
 	 * @param integer
@@ -85,6 +85,42 @@ class NewsModel extends \Model
 		}
 
 		return static::findBy($arrColumns, null, "$t.date DESC");
+	}
+
+
+	/**
+	 * Count news items by their parent ID
+	 * @param integer
+	 * @param integer
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function countPublishedByPids($arrPids, $blnFeatured=null)
+	{
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
+
+		if ($blnFeatured === true)
+		{
+			$arrColumns[] = "$t.featured=1";
+		}
+		elseif ($blnFeatured === false)
+		{
+			$arrColumns[] = "$t.featured=''";
+		}
+
+		if (!BE_USER_LOGGED_IN)
+		{
+			$time = time();
+			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
+		}
+
+		return static::countBy($arrColumns, null);
 	}
 
 

@@ -79,6 +79,23 @@ class CalendarModel extends \Model
 		$t = static::$strTable;
 		return static::findBy(array("$t.makeFeed=1 AND $t.protected=''"), null);
 	}
+
+
+	/**
+	 * Find unprotected news archives with feeds by their IDs
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findUnprotectedWithFeedsByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.makeFeed=1 AND $t.protected='' AND $t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
+	}
 }
 
 ?>
