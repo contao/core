@@ -52,8 +52,6 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',
@@ -149,7 +147,9 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_faq_category.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'sorting' => array
 		(
@@ -197,7 +197,8 @@ $GLOBALS['TL_DCA']['tl_faq'] = array
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
 			'eval'                    => array('doNotCopy'=>true, 'chosen'=>true, 'mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'answer' => array
 		(

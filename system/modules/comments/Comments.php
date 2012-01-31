@@ -85,9 +85,7 @@ class Comments extends \Frontend
 			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
-		$total = $objComments->count();
-
-		if ($total > 0)
+		if ($objComments !== null && ($total = $objComments->count()) > 0)
 		{
 			$count = 0;
 

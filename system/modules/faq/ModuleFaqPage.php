@@ -87,17 +87,16 @@ class ModuleFaqPage extends Module
 	 */
 	protected function compile()
 	{
-		global $objPage;
-		$this->import('String');
+		$objFaq = \FaqModel::findPublishedByPids($this->faq_categories);
 
-		$objFaq = $this->Database->execute("SELECT *, author AS authorId, (SELECT headline FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS author FROM tl_faq WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""));
-
-		if ($objFaq->numRows < 1)
+		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
 			return;
 		}
 
+		global $objPage;
+		$this->import('String');
 		$count = 0;
 		$arrFaq = array_fill_keys($this->faq_categories, array());
 
@@ -133,11 +132,11 @@ class ModuleFaqPage extends Module
 				$this->addEnclosuresToTemplate($objTemp, $objFaq->row());
 			}
 
-			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author);
+			$objTemp->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author['name']);
 
 			// Order by PID
-			$arrFaq[$objFaq->pid]['items'][] = $objTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->category;
+			$arrFaq[$objFaq->pid['id']]['items'][] = $objTemp;
+			$arrFaq[$objFaq->pid['id']]['headline'] = $objFaq->category;
 		}
 
 		$arrFaq = array_values($arrFaq);

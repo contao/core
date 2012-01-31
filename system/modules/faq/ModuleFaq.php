@@ -65,57 +65,51 @@ class ModuleFaq extends \Frontend
 		$arrProcessed = array();
 
 		// Get all categories
-		$objFaq = $this->Database->execute("SELECT id, jumpTo FROM tl_faq_category");
+		$objFaq = \FaqCategoryModel::findAll();
 
 		// Walk through each category
-		while ($objFaq->next())
+		if ($objFaq !== null)
 		{
-			if (!empty($arrRoot) && !in_array($objFaq->jumpTo, $arrRoot))
+			while ($objFaq->next())
 			{
-				continue;
-			}
+				// Skip FAQs without target page
+				if ($objFaq->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objFaq->jumpTo]))
-			{
-				$arrProcessed[$objFaq->jumpTo] = false;
+				// Skip FAQs outside the root nodes
+				if (!empty($arrRoot) && !in_array($objFaq->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get the target page
-				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
-											->limit(1)
-											->execute($objFaq->jumpTo);
-
-				// Determin the domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objFaq->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent);
+					$objParent = $this->getPageDetails($objFaq->jumpTo['id']);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objFaq->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
-			}
 
-			// Skip FAQs without target page
-			if ($arrProcessed[$objFaq->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objFaq->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objFaq->jumpTo];
+				// Get the items
+				$objItems = \FaqModel::findBy('pid', $objFaq->id, 'sorting');
 
-			// Get items
-			$objItem = $this->Database->prepare("SELECT * FROM tl_faq WHERE pid=? AND published=1 ORDER BY sorting")
-									  ->execute($objFaq->id);
-
-			// Add items to the indexer
-			while ($objItem->next())
-			{
-				$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				if ($objItems !== null)
+				{
+					while ($objItems->next())
+					{
+						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItems->alias : $objItems->id));
+					}
+				}
 			}
 		}
 

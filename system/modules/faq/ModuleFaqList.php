@@ -99,9 +99,9 @@ class ModuleFaqList extends \Module
 	 */
 	protected function compile()
 	{
-		$objFaq = $this->Database->execute("SELECT *, tl_faq.id AS id FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
+		$objFaq = \FaqModel::findPublishedByPids($this->faq_categories);
 
-		if ($objFaq->numRows < 1)
+		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
 			return;
@@ -117,8 +117,8 @@ class ModuleFaqList extends \Module
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
-			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->headline;
+			$arrFaq[$objFaq->id]['items'][] = $arrTemp;
+			$arrFaq[$objFaq->id]['headline'] = $objFaq->headline;
 		}
 
 		$arrFaq = array_values($arrFaq);
@@ -146,35 +146,30 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Create links and remember pages that have been processed
-	 * @param Database_Result
+	 * @param Database_Result|Model
 	 * @return string
 	 */
-	protected function generateFaqLink(\Database_Result $objFaq)
+	protected function generateFaqLink($objFaq)
 	{
-		if (!isset($this->arrTargets[$objFaq->id]))
-		{
-			if ($objFaq->jumpTo < 1)
-			{
-				$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
-			}
-			else
-			{
-				$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 		->limit(1)
-											->execute(intval($objFaq->jumpTo));
+		$jumpTo = intval($objFaq->pid['jumpTo']);
 
-				if ($objTarget->numRows < 1)
+		// Get the URL from the jumpTo page of the category
+		if (!isset($this->arrTargets[$jumpTo]))
+		{
+			$this->arrTargets[$jumpTo] = ampersand($this->Environment->request, true);
+
+			if ($objFaq->pid['jumpTo'])
+			{
+				$objTarget = \PageModel::findByPk($objFaq->pid['jumpTo']);
+
+				if ($objTarget !== null)
 				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
-				}
-				else
-				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s')));
 				}
 			}
 		}
 
-		return $this->arrTargets[$objFaq->id];
+		return sprintf($this->arrTargets[$jumpTo], (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id));
 	}
 }
 

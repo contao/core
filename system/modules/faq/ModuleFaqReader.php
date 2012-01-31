@@ -116,11 +116,9 @@ class ModuleFaqReader extends \Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->referer = 'javascript:history.go(-1)';
 
-		$objFaq = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS author FROM tl_faq WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
-								 ->limit(1)
-								 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'));
+		$objFaq = \FaqModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->faq_categories);
 
-		if ($objFaq->numRows < 1)
+		if ($objFaq === null)
 		{
 			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 
@@ -171,7 +169,7 @@ class ModuleFaqReader extends \Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author['name']);
 
 		// HOOK: comments extension required
 		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))
@@ -181,11 +179,7 @@ class ModuleFaqReader extends \Module
 		}
 
 		// Check whether comments are allowed
-		$objCategory = $this->Database->prepare("SELECT * FROM tl_faq_category WHERE id=?")
-									  ->limit(1)
-									  ->execute($objFaq->pid);
-
-		if ($objCategory->numRows < 1 || !$objCategory->allowComments)
+		if (!$objFaq->pid['allowComments'])
 		{
 			$this->Template->allowComments = false;
 			return;
@@ -200,23 +194,16 @@ class ModuleFaqReader extends \Module
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
+		// Notify the system administrator
 		if ($objCategory->notify != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
-		if ($objCategory->notify != 'notify_admin')
+		// Notify the author
+		if ($objCategory->notify != 'notify_admin' && $objFaq->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objFaq->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objFaq->author['email'];
 		}
 
 		$objConfig = new \stdClass();
