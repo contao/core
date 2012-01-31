@@ -300,7 +300,7 @@ abstract class Model extends \System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return Model
+	 * @return Model|null
 	 */
 	protected static function find($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
@@ -384,7 +384,7 @@ abstract class Model extends \System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return Model 
+	 * @return Model|null
 	 */
 	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
@@ -396,7 +396,7 @@ abstract class Model extends \System
 	 * Find a single record by its primary key
 	 * @param mixed
 	 * @param boolean
-	 * @return Model 
+	 * @return Model|null
 	 */
 	public static function findByPk($varValue, $blnForceEager=false)
 	{
@@ -410,7 +410,7 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param string
 	 * @param boolean
-	 * @return Model 
+	 * @return Model|null
 	 */
 	public static function findOneBy($strColumn, $varValue, $strOrder=null, $blnForceEager=false)
 	{
@@ -423,7 +423,7 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param boolean
-	 * @return Model
+	 * @return Model|null
 	 */
 	public static function findByIdOrAlias($varId, $varAlias, $blnForceEager=false)
 	{
@@ -438,11 +438,47 @@ abstract class Model extends \System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return Model
+	 * @return Model|null
 	 */
 	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
 		return static::findBy(null, null, $strOrder, $intLimit, $intOffset, $blnForceEager=false);
+	}
+
+
+	/**
+	 * Find records by one or more conditions and return the number of rows
+	 * @param mixed
+	 * @param mixed
+	 * @return integer
+	 */
+	public static function countBy($strColumn, $varValue)
+	{
+		if (static::$strTable == '')
+		{
+			return null;
+		}
+
+		$strQuery = "SELECT COUNT(*) AS count FROM " . static::$strTable;
+
+		// Where condition
+		if ($strColumn !== null)
+		{
+			$strQuery .= " WHERE " . (is_array($strColumn) ? implode(" AND ", $strColumn) : static::$strTable . '.' . $strColumn . "=?");
+		}
+
+		$objResult = \Database::getInstance()->prepare($strQuery)->execute($varValue);
+		return new static($objResult);
+	}
+
+
+	/**
+	 * Find all records and return the number of rows
+	 * @return integer
+	 */
+	public static function countAll()
+	{
+		return static::countBy(null, null);
 	}
 
 

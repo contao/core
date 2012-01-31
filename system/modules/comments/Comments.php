@@ -68,8 +68,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
  
 			// Get the total number of comments
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_comments WHERE source=? AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
-									   ->execute($strSource, $intParent);
+			$objTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
 
 			// Initialize the pagination menu
 			$objPagination = new \Pagination($objTotal->count, $objConfig->perPage);
@@ -77,15 +76,16 @@ class Comments extends \Frontend
 		}
 
 		// Get all published comments
-		$objCommentsStmt = $this->Database->prepare("SELECT c.*, u.name as authorName FROM tl_comments c LEFT JOIN tl_user u ON c.author=u.id WHERE c.source=? AND c.parent=?" . (!BE_USER_LOGGED_IN ? " AND c.published=1" : "") . " ORDER BY c.date" . (($objConfig->order == 'descending') ? " DESC" : ""));
-
 		if ($limit)
 		{
-			$objCommentsStmt->limit($limit, $offset);
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+		}
+		else
+		{
+			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
-		$objComments = $objCommentsStmt->execute($strSource, $intParent);
-		$total = $objComments->numRows;
+		$total = $objComments->count();
 
 		if ($total > 0)
 		{
@@ -124,7 +124,7 @@ class Comments extends \Frontend
 				$objPartial->addReply = false;
 
 				// Reply
-				if ($objComments->addReply && $objComments->reply != '' && $objComments->authorName != '')
+				if ($objComments->addReply && $objComments->reply != '' && $objComments->author['name'] != '')
 				{
 					$objPartial->addReply = true;
 					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
