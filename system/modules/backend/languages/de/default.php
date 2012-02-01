@@ -436,5 +436,18 @@ $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'Für die Nutzung von Contao m�
 $GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (Kopie)';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyMode']     = 'Contao befindet sich momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden. Dieser Modus ist z.B. nach einem Live Update aktiv, um eventuellen Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Sie können den Betriebsmodus nach der Prüfung der installierten Third-Party-Erweiterungen in den Backend-Einstellungen anpassen.';
 $GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-Mail-Adresse';
+$GLOBALS['TL_LANG']['MSC']['register']         = 'Registrieren';
+$GLOBALS['TL_LANG']['MSC']['accountActivated'] = 'Ihr Konto wurde aktiviert.';
+$GLOBALS['TL_LANG']['MSC']['accountError']     = 'Die Anfrage kann nicht verarbeitet werden.';
+$GLOBALS['TL_LANG']['MSC']['emailSubject']     = 'Ihre Registrierung auf %s';
+$GLOBALS['TL_LANG']['MSC']['adminSubject']     = 'Contao :: Neue Registrierung auf %s';
+$GLOBALS['TL_LANG']['MSC']['adminText']        = 'Ein neues Mitglied (ID %s) hat sich auf Ihrer Webseite registriert.%sFalls Sie die automatische E-Mail-Aktivierung nicht nutzen, müssen Sie das Konto manuell im Backend aktivieren.';
+$GLOBALS['TL_LANG']['MSC']['requestPassword']  = 'Neues Passwort anfordern';
+$GLOBALS['TL_LANG']['MSC']['setNewPassword']   = 'Passwort übernehmen';
+$GLOBALS['TL_LANG']['MSC']['newPasswordSet']   = 'Ihr Passwort wurde aktualisiert.';
+$GLOBALS['TL_LANG']['MSC']['passwordSubject']  = 'Ihre Passwortanfrage für %s';
+$GLOBALS['TL_LANG']['MSC']['accountNotFound']  = 'Kein passendes Konto gefunden';
+$GLOBALS['TL_LANG']['MSC']['securityQuestion'] = 'Sicherheitsfrage';
+$GLOBALS['TL_LANG']['MSC']['closeAccount']     = 'Konto schließen';
 
 ?>

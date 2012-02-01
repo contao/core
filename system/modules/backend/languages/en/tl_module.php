@@ -93,6 +93,17 @@ $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Allowed member group
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Show to guests only', 'Hide the module if a member is logged in.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS ID/class', 'Here you can set an ID and one or more classes.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Space in front and after', 'Here you can enter the spacing in front of and after the module in pixel. You should try to avoid inline styles and define the spacing in a style sheet, though.');
+$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Disable the security question', 'Here you can disable the security question (not recommended).');
+$GLOBALS['TL_LANG']['tl_module']['reg_groups']     = array('Member groups', 'Here you can assign the user to one or more groups.');
+$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'] = array('Allow login', 'Allow the new user to log into the front end.');
+$GLOBALS['TL_LANG']['tl_module']['reg_skipName']   = array('Skip username', 'Do not require the username to request a new password.');
+$GLOBALS['TL_LANG']['tl_module']['reg_close']      = array('Mode', 'Here you can define how to handle the deletion.');
+$GLOBALS['TL_LANG']['tl_module']['reg_assignDir']  = array('Create a home directory', 'Create a home directory from the registered username.');
+$GLOBALS['TL_LANG']['tl_module']['reg_homeDir']    = array('Home directory path', 'Please select the parent folder from the files directory.');
+$GLOBALS['TL_LANG']['tl_module']['reg_activate']   = array('Send activation e-mail', 'Send an activation e-mail to the registered e-mail address.');
+$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo']     = array('Confirmation page', 'Please choose the page to which users will be redirected after the request has been completed.');
+$GLOBALS['TL_LANG']['tl_module']['reg_text']       = array('Activation message', 'You can use the wildcards <em>##domain##</em> (domain name), <em>##link##</em> (activation link) and any input field (e.g. <em>##lastname##</em>).');
+$GLOBALS['TL_LANG']['tl_module']['reg_password']   = array('Password message', 'You can use the wildcards <em>##domain##</em> (domain name), <em>##link##</em> (activation link) and any user property (e.g. <em>##lastname##</em>).');
 
 
 /**
@@ -111,18 +122,28 @@ $GLOBALS['TL_LANG']['tl_module']['html_legend']      = 'Text/HTML';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Access protection';
 $GLOBALS['TL_LANG']['tl_module']['expert_legend']    = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_module']['email_legend']     = 'E-mail settings';
+$GLOBALS['TL_LANG']['tl_module']['account_legend']   = 'Account settings';
+
+
+/**
+ * Default messages
+ */
+$GLOBALS['TL_LANG']['tl_module']['emailText']    = array('Your registration on %s', "Thank you for your registration on ##domain##.\n\nPlease click ##link## to complete your registration and to activate your account. If you did not request an account, please ignore this e-mail.\n");
+$GLOBALS['TL_LANG']['tl_module']['passwordText'] = array('Your password request on %s', "You have requested a new password for ##domain##.\n\nPlease click ##link## to set the new password. If you did not request this e-mail, please contact the website administrator.\n");
 
 
 /**
  * Reference
  */
-$GLOBALS['TL_LANG']['tl_module']['header']   = 'Header';
-$GLOBALS['TL_LANG']['tl_module']['left']     = 'Left column';
-$GLOBALS['TL_LANG']['tl_module']['main']     = 'Main column';
-$GLOBALS['TL_LANG']['tl_module']['right']    = 'Right column';
-$GLOBALS['TL_LANG']['tl_module']['footer']   = 'Footer';
-$GLOBALS['TL_LANG']['tl_module']['internal'] = 'Internal file';
-$GLOBALS['TL_LANG']['tl_module']['external'] = 'External URL';
+$GLOBALS['TL_LANG']['tl_module']['header']           = 'Header';
+$GLOBALS['TL_LANG']['tl_module']['left']             = 'Left column';
+$GLOBALS['TL_LANG']['tl_module']['main']             = 'Main column';
+$GLOBALS['TL_LANG']['tl_module']['right']            = 'Right column';
+$GLOBALS['TL_LANG']['tl_module']['footer']           = 'Footer';
+$GLOBALS['TL_LANG']['tl_module']['internal']         = 'Internal file';
+$GLOBALS['TL_LANG']['tl_module']['external']         = 'External URL';
+$GLOBALS['TL_LANG']['tl_module']['close_deactivate'] = 'Deactivate account';
+$GLOBALS['TL_LANG']['tl_module']['close_delete']     = 'Irrevocably delete account';
 
 
 /**

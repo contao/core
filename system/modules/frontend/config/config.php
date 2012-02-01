@@ -48,7 +48,10 @@ $GLOBALS['FE_MOD'] = array
 	(
 		'login'          => 'ModuleLogin',
 		'logout'         => 'ModuleLogout',
-		'personalData'   => 'ModulePersonalData'
+		'personalData'   => 'ModulePersonalData',
+		'registration'   => 'ModuleRegistration',
+		'lostPassword'   => 'ModulePassword',
+		'closeAccount'   => 'ModuleCloseAccount'
 	),
 	'application' => array
 	(

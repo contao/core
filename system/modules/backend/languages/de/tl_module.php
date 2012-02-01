@@ -93,6 +93,17 @@ $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliederg
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken, sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Sicherheitsfrage deaktivieren', 'Hier können Sie die Sicherheitsfrage abschalten (nicht empfohlen).');
+$GLOBALS['TL_LANG']['tl_module']['reg_groups']     = array('Mitgliedergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'] = array('Login erlauben', 'Dem neuen Benutzer die Anmeldung im Frontend erlauben.');
+$GLOBALS['TL_LANG']['tl_module']['reg_skipName']   = array('Benutzernamen nicht abfragen', 'Den Benutzernamen bei der Passwort-Anforderung nicht abfragen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_close']      = array('Modus', 'Hier legen Sie fest, wie die Löschung ausgeführt wird.');
+$GLOBALS['TL_LANG']['tl_module']['reg_assignDir']  = array('Ein Benutzerverzeichnis anlegen', 'Ein Benutzerverzeichnis aus dem registrierten Benutzernamen erstellen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_homeDir']    = array('Pfad zum Benutzerverzeichnis', 'Bitte wählen Sie das übergeordnete Verzeichnis aus der Dateiübersicht.');
+$GLOBALS['TL_LANG']['tl_module']['reg_activate']   = array('Aktivierungsmail verschicken', 'Eine Aktivierungsmail an die registrierte E-Mail-Adresse senden.');
+$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo']     = array('Bestätigungsseite', 'Bitte wählen Sie die Seite aus, zu der Benutzer nach Abarbeitung der Anfrage weitergeleitet werden.');
+$GLOBALS['TL_LANG']['tl_module']['reg_text']       = array('Aktivierungsmail', 'Sie können die Platzhalter <em>##domain##</em> (Domainname), <em>##link##</em> (Aktivierungslink) sowie alle Eingabefelder (z.B. <em>##lastname##</em>) benutzen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_password']   = array('Bestätigungsmail', 'Sie können die Platzhalter <em>##domain##</em> (Domainname), <em>##link##</em> (Aktivierungslink) sowie alle Benutzereigenschaften (z.B. <em>##lastname##</em>) verwenden.');
 
 
 /**
@@ -111,18 +122,28 @@ $GLOBALS['TL_LANG']['tl_module']['html_legend']      = 'Text/HTML';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Zugriffsschutz';
 $GLOBALS['TL_LANG']['tl_module']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_module']['email_legend']     = 'E-Mail-Einstellungen';
+$GLOBALS['TL_LANG']['tl_module']['account_legend']   = 'Konto-Einstellungen';
+
+
+/**
+ * Default messages
+ */
+$GLOBALS['TL_LANG']['tl_module']['emailText']    = array('Ihre Registrierung auf %s', "Vielen Dank für Ihre Registrierung auf ##domain##.\n\nBitte klicken Sie ##link## um Ihre Registrierung abzuschließen und Ihr Konto zu aktivieren. Wenn Sie keinen Zugang angefordert haben, ignorieren Sie bitte diese E-Mail.\n");
+$GLOBALS['TL_LANG']['tl_module']['passwordText'] = array('Ihre Passwort-Anforderung auf %s', "Sie haben ein neues Passwort für ##domain## angefordert.\n\nBitte klicken Sie ##link## um das neue Passwort festzulegen. Wenn Sie diese E-Mail nicht angefordert haben, kontaktieren Sie bitte den Administrator der Webseite.\n");
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_module']['header']   = 'Kopfzeile';
-$GLOBALS['TL_LANG']['tl_module']['left']     = 'Linke Spalte';
-$GLOBALS['TL_LANG']['tl_module']['main']     = 'Hauptspalte';
-$GLOBALS['TL_LANG']['tl_module']['right']    = 'Rechte Spalte';
-$GLOBALS['TL_LANG']['tl_module']['footer']   = 'Fußzeile';
-$GLOBALS['TL_LANG']['tl_module']['internal'] = 'Interne Datei';
-$GLOBALS['TL_LANG']['tl_module']['external'] = 'Externe URL';
+$GLOBALS['TL_LANG']['tl_module']['header']           = 'Kopfzeile';
+$GLOBALS['TL_LANG']['tl_module']['left']             = 'Linke Spalte';
+$GLOBALS['TL_LANG']['tl_module']['main']             = 'Hauptspalte';
+$GLOBALS['TL_LANG']['tl_module']['right']            = 'Rechte Spalte';
+$GLOBALS['TL_LANG']['tl_module']['footer']           = 'Fußzeile';
+$GLOBALS['TL_LANG']['tl_module']['internal']         = 'Interne Datei';
+$GLOBALS['TL_LANG']['tl_module']['external']         = 'Externe URL';
+$GLOBALS['TL_LANG']['tl_module']['close_deactivate'] = 'Konto deaktivieren';
+$GLOBALS['TL_LANG']['tl_module']['close_delete']     = 'Konto unwiderruflich löschen';
 
 
 /**

@@ -436,5 +436,18 @@ $GLOBALS['TL_LANG']['MSC']['noCookies']        = 'You have to allow cookies to u
 $GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (copy)';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyMode']     = 'Contao is currently running in <strong>safe mode</strong>, in which only core modules are loaded. This operation mode is e.g. activated after a Live Update to prevent possible incompatibilities with third-party extensions. You can deactivate it in the back end settings after you have checked the installed third-party extensions.';
 $GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-mail address';
+$GLOBALS['TL_LANG']['MSC']['register']         = 'Register';
+$GLOBALS['TL_LANG']['MSC']['accountActivated'] = 'Your account has been activated.';
+$GLOBALS['TL_LANG']['MSC']['accountError']     = 'Unable to process the current request.';
+$GLOBALS['TL_LANG']['MSC']['emailSubject']     = 'Your registration on %s';
+$GLOBALS['TL_LANG']['MSC']['adminSubject']     = 'Contao :: New registration on %s';
+$GLOBALS['TL_LANG']['MSC']['adminText']        = 'A new member (ID %s) has registered at your website.%sIf you did not allow e-mail activation, you have to enable the account manually in the back end.';
+$GLOBALS['TL_LANG']['MSC']['requestPassword']  = 'Request password';
+$GLOBALS['TL_LANG']['MSC']['setNewPassword']   = 'Set new password';
+$GLOBALS['TL_LANG']['MSC']['newPasswordSet']   = 'Your password has been updated.';
+$GLOBALS['TL_LANG']['MSC']['passwordSubject']  = 'Your password request for %s';
+$GLOBALS['TL_LANG']['MSC']['accountNotFound']  = 'No matching account found';
+$GLOBALS['TL_LANG']['MSC']['securityQuestion'] = 'Security question';
+$GLOBALS['TL_LANG']['MSC']['closeAccount']     = 'Close account';
 
 ?>
