@@ -154,7 +154,7 @@ class ModuleRssReader extends \Module
 		}
 
 		// Get items
-		$arrItems = $this->objFeed->get_items(intval($this->skipFirst), intval($this->rss_numberOfItems));
+		$arrItems = $this->objFeed->get_items(intval($this->skipFirst), intval($this->numberOfItems));
 
 		$limit = count($arrItems);
 		$offset = 0;

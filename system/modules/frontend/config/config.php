@@ -60,7 +60,8 @@ $GLOBALS['FE_MOD'] = array
 		'flash'          => 'ModuleFlash',
 		'articleList'    => 'ModuleArticleList',
 		'randomImage'    => 'ModuleRandomImage',
-		'html'           => 'ModuleHtml'
+		'html'           => 'ModuleHtml',
+		'rss_reader'     => 'ModuleRssReader'
 	)
 );
 

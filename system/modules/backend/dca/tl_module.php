@@ -135,7 +135,8 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		'articleList'                 => '{title_legend},name,headline,type;{config_legend},skipFirst,inColumn;{reference_legend:hide},defineRoot;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'flash'                       => '{title_legend},name,headline,type;{config_legend},size,transparent,flashvars,altContent;{source_legend},source;{interact_legend:hide},interactive;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
 		'randomImage'                 => '{title_legend},name,headline,type;{config_legend},imgSize,useCaption,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space',
-		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests'
+		'html'                        => '{title_legend},name,type;{html_legend},html;{protected_legend:hide},protected;{expert_legend:hide},guests',
+		'rss_reader'                  => '{title_legend},name,headline,type;{config_legend},rss_feed,numberOfItems,perPage,skipFirst,rss_cache;{template_legend:hide},rss_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space'
 	),
 
 	// Subpalettes
@@ -574,6 +575,43 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'explanation'             => 'insertTags',
 			'sql'                     => "text NULL"
 		),
+		'rss_cache' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_cache'],
+			'default'                 => 3600,
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400),
+			'eval'                    => array('tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['CACHE'],
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'rss_feed' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_feed'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true, 'style'=>'height:60px;'),
+			'sql'                     => "text NULL"
+		),
+		'rss_template' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['rss_template'],
+			'default'                 => 'rss_default',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options_callback'        => array('tl_module', 'getRssTemplates'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'numberOfItems' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['numberOfItems'],
+			'default'                 => 3,
+			'exclude'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
+		),
 		'protected' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['protected'],
@@ -780,6 +818,24 @@ class tl_module extends Backend
 		}
 
 		return $this->getTemplateGroup('search_', $intPid);
+	}
+
+
+	/**
+	 * Return all navigation templates as array
+	 * @param DataContainer
+	 * @return array
+	 */
+	public function getRssTemplates(DataContainer $dc)
+	{
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('rss_', $intPid);
 	}
 
 

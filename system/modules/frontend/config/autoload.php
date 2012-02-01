@@ -86,6 +86,7 @@ ClassLoader::addClasses(array
 	'Contao\\ModuleQuicklink'    => 'system/modules/frontend/ModuleQuicklink.php',
 	'Contao\\ModuleQuicknav'     => 'system/modules/frontend/ModuleQuicknav.php',
 	'Contao\\ModuleRandomImage'  => 'system/modules/frontend/ModuleRandomImage.php',
+	'Contao\\ModuleRssReader'    => 'system/modules/frontend/ModuleRssReader.php',
 	'Contao\\ModuleSearch'       => 'system/modules/frontend/ModuleSearch.php',
 	'Contao\\ModuleSitemap'      => 'system/modules/frontend/ModuleSitemap.php',
 	'Contao\\PageError403'       => 'system/modules/frontend/PageError403.php',
@@ -181,6 +182,8 @@ TemplateLoader::addFiles(array
 	'moo_slimbox'         => 'system/modules/frontend/templates',
 	'nav_default'         => 'system/modules/frontend/templates',
 	'pagination'          => 'system/modules/frontend/templates',
+	'rss_default'         => 'system/modules/frontend/templates',
+	'rss_items_only'      => 'system/modules/frontend/templates',
 	'search_default'      => 'system/modules/frontend/templates',
 ));
 

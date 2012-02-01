@@ -685,6 +685,25 @@ class InstallTool extends Backend
 
 
 		/**
+		 * Version 3.0 update
+		 */
+		if ($this->Database->tableExists('tl_module') && !$this->Database->fieldExists('numberOfItems', 'tl_module'))
+		{
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			{
+				$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
+				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
+				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`news_numberOfItems` WHERE `news_numberOfItems`>0");
+
+				$this->reload();
+			}
+
+			$this->Template->is30Update = true;
+			$this->outputAndExit();
+		}
+
+
+		/**
 		 * Collations
 		 */
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_collation')

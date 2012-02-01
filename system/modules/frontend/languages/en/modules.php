@@ -49,8 +49,9 @@ $GLOBALS['TL_LANG']['FMD']['form']           = array('Form', 'Adds a form to the
 $GLOBALS['TL_LANG']['FMD']['search']         = array('Search engine', 'Adds a search form to the page.');
 $GLOBALS['TL_LANG']['FMD']['articleList']    = array('Article list', 'Generates a list of articles of a column.');
 $GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Miscellaneous';
-$GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code.');
 $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash movie', 'Embeds a Flash movie into the page.');
 $GLOBALS['TL_LANG']['FMD']['randomImage']    = array('Random image', 'Adds a random image to the page.');
+$GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code.');
+$GLOBALS['TL_LANG']['FMD']['rss_reader']     = array('RSS reader', 'Adds an RSS feed to the page.');
 
 ?>
