@@ -963,6 +963,9 @@ a.navigation.undo {
 a.navigation.login {
 	background-image:url("images/login.gif");
 }
+a.navigation.tpl_editor {
+	background-image:url("images/template_editor.gif");
+}
 
 /* Default icon classes */
 a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,

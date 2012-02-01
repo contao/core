@@ -61,6 +61,11 @@ $GLOBALS['BE_MOD'] = array
 		'page' => array
 		(
 			'tables' => array('tl_page')
+		),
+		'tpl_editor' => array
+		(
+			'tables' => array('tl_templates'),
+			'new_tpl' => array('tl_templates', 'addNewTemplate')
 		)
 	),
 

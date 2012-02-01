@@ -94,9 +94,9 @@ class ModuleNewsList extends \ModuleNews
 		$limit = null;
 
 		// Maximum number of items
-		if ($this->news_numberOfItems > 0)
+		if ($this->numberOfItems > 0)
 		{
-			$limit = $this->news_numberOfItems;
+			$limit = $this->numberOfItems;
 		}
 
 		// Handle featured news
@@ -125,7 +125,7 @@ class ModuleNewsList extends \ModuleNews
 		$total = $objTotal->count - $skipFirst;
 
 		// Split the results
-		if ($this->perPage > 0 && (!isset($limit) || $this->news_numberOfItems > $this->perPage))
+		if ($this->perPage > 0 && (!isset($limit) || $this->numberOfItems > $this->perPage))
 		{
 			// Adjust the overall limit
 			if (isset($limit))
@@ -156,7 +156,15 @@ class ModuleNewsList extends \ModuleNews
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
+		// Get the items
+		if (isset($limit))
+		{
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
+		}
+		else
+		{
+			$objArticles = \NewsModel::findPublishedByPids($this->news_archives, $blnFeatured);
+		}
 
 		// No items found
 		if ($objArticles === null)

@@ -55,10 +55,12 @@ class NewsModel extends \Model
 	/**
 	 * Find news items by their parent ID
 	 * @param array
+	 * @param boolean
+	 * @param integer
 	 * @param integer
 	 * @return Model|null
 	 */
-	public static function findPublishedByPids($arrPids, $blnFeatured=null)
+	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
 	{
 		if (!is_array($arrPids) || empty($arrPids))
 		{
@@ -83,7 +85,7 @@ class NewsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findBy($arrColumns, null, "$t.date DESC");
+		return static::findBy($arrColumns, null, "$t.date DESC", $intLimit, $intOffset);
 	}
 
 

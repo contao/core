@@ -40,6 +40,7 @@ $GLOBALS['TL_LANG']['MOD']['css']         = array('Style sheets', 'Create style 
 $GLOBALS['TL_LANG']['MOD']['modules']     = array('Front end modules', 'Manage the front end modules of the website.');
 $GLOBALS['TL_LANG']['MOD']['layout']      = array('Page layouts', 'Combine modules and style sheets to a page layout.');
 $GLOBALS['TL_LANG']['MOD']['page']        = array('Site structure', 'Set up the site structure of your website(s).');
+$GLOBALS['TL_LANG']['MOD']['tpl_editor']  = array('Templates', 'Edit templates in the back end.');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Account manager';
 $GLOBALS['TL_LANG']['MOD']['member']      = array('Members', 'Manage member accounts (front end users).');
 $GLOBALS['TL_LANG']['MOD']['mgroup']      = array('Member groups', 'Manage member groups (front end user groups).');
