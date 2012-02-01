@@ -115,8 +115,10 @@ class Index extends Backend
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $pw);
 
-					$this->Database->prepare("UPDATE tl_user SET password=?, pwChange='' WHERE id=?")
-								   ->execute($strPassword . ':' . $strSalt, $this->User->id);
+					$objUser = \UserModel::findByPk($this->User->id);
+					$objUser->pwChange = '';
+					$objUser->password = $strPassword . ':' . $strSalt;
+					$objUser->save();
 
 					$this->addConfirmationMessage($GLOBALS['TL_LANG']['MSC']['pw_changed']);
 					$this->redirect('contao/main.php');

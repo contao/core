@@ -109,8 +109,8 @@ class ModulePersonalData extends \Module
 			}
 		}
 
-		// Set template
-		if (strlen($this->memberTpl))
+		// Set the template
+		if ($this->memberTpl != '')
 		{
 			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
@@ -124,12 +124,15 @@ class ModulePersonalData extends \Module
 		$hasUpload = false;
 		$row = 0;
 
-		// Build form
+		$blnModified = false;
+		$objMember = \MemberModel::findByPk($this->User->id);
+
+		// Build the form
 		foreach ($this->editable as $field)
 		{
 			$arrData = &$GLOBALS['TL_DCA']['tl_member']['fields'][$field];
 
-			// Map checkboxWizard to regular checkbox widget
+			// Map checkboxWizards to regular checkbox widgets
 			if ($arrData['inputType'] == 'checkboxWizard')
 			{
 				$arrData['inputType'] = 'checkbox';
@@ -137,7 +140,7 @@ class ModulePersonalData extends \Module
 
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
-			// Continue if the class is not defined
+			// Continue if the class does not exist
 			if (!$arrData['eval']['feEditable'] || !$this->classFileExists($strClass))
 			{
 				continue;
@@ -153,14 +156,14 @@ class ModulePersonalData extends \Module
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
-			// Increase the row count if its a password field
+			// Increase the row count if it is a password field
 			if ($objWidget instanceof \FormPassword)
 			{
 				++$row;
 				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
 			}
 
-			// Validate input
+			// Validate the form data
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_member_' . $this->id)
 			{
 				$objWidget->validate();
@@ -177,19 +180,12 @@ class ModulePersonalData extends \Module
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
-				if ($arrData['eval']['unique'] && $varValue != '')
+				if ($arrData['eval']['unique'] && $varValue != '' && !$this->fieldIsUnique('tl_member', $field, $varValue, $this->User->id))
 				{
-					$objUnique = $this->Database->prepare("SELECT * FROM tl_member WHERE " . $field . "=? AND id!=?")
-												->limit(1)
-												->execute($varValue, $this->User->id);
-
-					if ($objUnique->numRows)
-					{
-						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $field)));
-					}
+					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $field)));
 				}
 
-				// Save callback
+				// Trigger the save_callback
 				if (is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
@@ -208,7 +204,7 @@ class ModulePersonalData extends \Module
 					}
 				}
 
-				// Do not submit if there are errors
+				// Do not submit the field if there are errors
 				if ($objWidget->hasErrors())
 				{
 					$doNotSubmit = true;
@@ -220,8 +216,9 @@ class ModulePersonalData extends \Module
 					$_SESSION['FORM_DATA'][$field] = $varValue;
 					$varSave = is_array($varValue) ? serialize($varValue) : $varValue;
 
-					// Save the field (do not use Models here)
-					$this->Database->prepare("UPDATE tl_member SET " . $field . "=? WHERE id=?")->execute($varSave, $this->User->id);
+					// Set the new field in the member model
+					$blnModified = true;
+					$objMember->$field = $varValue;
 
 					// HOOK: set new password callback
 					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
@@ -245,6 +242,12 @@ class ModulePersonalData extends \Module
 			$this->Template->fields .= $temp;
 			$arrFields[$strGroup][$field] .= $temp;
 			++$row;
+		}
+
+		// Save the model
+		if ($blnModified)
+		{
+			$objMember->save();
 		}
 
 		$this->Template->hasError = $doNotSubmit;

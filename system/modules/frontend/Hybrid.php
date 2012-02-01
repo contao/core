@@ -118,9 +118,9 @@ abstract class Hybrid extends \Frontend
 
 			$this->objModel = $objHybrid;
 		}
+		// Directly query the database (backwards compatibility)
 		else
 		{
-			// Backwards compatibility
 			$objHybrid = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
 										->limit(1)
 										->execute($objElement->{$this->strKey});

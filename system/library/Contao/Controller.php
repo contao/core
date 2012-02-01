@@ -2884,6 +2884,31 @@ abstract class Controller extends \System
 		$this->Database->prepare("INSERT INTO tl_version (pid, tstamp, version, fromTable, username, active, data) VALUES (?, ?, ?, ?, ?, 1, ?)")
 					   ->execute($intId, time(), $intVersion, $strTable, $this->User->username, serialize($objRecord->row()));
 	}
+	
+
+	/**
+	 * Check whether a field is unique
+	 * @param string
+	 * @param string
+	 * @param mixed
+	 * @param integer
+	 * @return boolean
+	 */
+	protected function fieldIsUnique($strTable, $strField, $varValue, $intId=null)
+	{
+		$strQuery = "SELECT * FROM $strTable WHERE $strField=?";
+
+		if ($intId !== null)
+		{
+			$strQuery .= " AND id!=?";
+		}
+
+		$objUnique = $this->Database->prepare($strQuery)
+						  ->limit(1)
+						  ->execute($varValue, $intId);
+
+		return $objUnique->numRows ? false : true;
+	}
 
 
 	/**

@@ -121,12 +121,15 @@ class ModuleUnsubscribe extends \Module
 		}
 
 		$arrChannels = array();
-		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") ORDER BY title");
+		$objChannel = \NewsletterChannelModel::findByIds($this->nl_channels);
 
-		// Get titles
-		while ($objChannel->next())
+		// Get the titles
+		if ($objChannel !== null)
 		{
-			$arrChannels[$objChannel->id] = $objChannel->title;
+			while ($objChannel->next())
+			{
+				$arrChannels[$objChannel->id] = $objChannel->title;
+			}
 		}
 
 		// Default template variables
@@ -169,11 +172,8 @@ class ModuleUnsubscribe extends \Module
 
 		$arrSubscriptions = array();
 
-		// Get active subscriptions
-		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=1")
-										  ->execute($varInput);
-
-		if ($objSubscription->numRows)
+		// Get the existing active subscriptions
+		if (($objSubscription = \NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
 		{
 			$arrSubscriptions = $objSubscription->fetchEach('pid');
 		}
@@ -187,12 +187,14 @@ class ModuleUnsubscribe extends \Module
 			$this->reload();
 		}
 
-		// Remove subscriptions
-		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', array_map('intval', $arrRemove)) . ")")
-					   ->execute($varInput);
+		// Remove the subscriptions
+		if (($objRemove = \NewsletterRecipientsModel::findByEmailAndPids($varInput, $arrRemove)) !== null)
+		{
+			$objRemove->deleteAll();
+		}
 
-		// Get channels
-		$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrRemove)) . ")");
+		// Get the channels
+		$objChannel = \NewsletterChannelModel::findByIds($arrRemove);
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity
@@ -208,31 +210,22 @@ class ModuleUnsubscribe extends \Module
 			}
 		}
 
-		// Confirmation e-mail
-		$objEmail = new \Email();
-
+		// Prepare the e-mail text
 		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_unsubscribe);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
 
+		// Confirmation e-mail
+		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
-
 		$objEmail->sendTo($varInput);
-		global $objPage;
 
-		// Redirect to jumpTo page
-		if (strlen($this->jumpTo) && $this->jumpTo != $objPage->id)
+		// Redirect to the jumpTo page
+		if ($this->jumpTo['id'])
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
-
-			if ($objNextPage->numRows)
-			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
-			}
+			$this->redirect($this->generateFrontendUrl($this->jumpTo));
 		}
 
 		$_SESSION['UNSUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_removed'];

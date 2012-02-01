@@ -397,12 +397,12 @@ class Form extends \Hybrid
 			$email->sendTo($recipients);
 		}
 
-		// Store values in the database
+		// Store the values in the database
 		if ($this->storeValues && $this->targetTable != '')
 		{
 			$arrSet = array();
 
-			// Add timestamp
+			// Add the timestamp
 			if ($this->Database->fieldExists('tstamp', $this->targetTable))
 			{
 				$arrSet['tstamp'] = time();
