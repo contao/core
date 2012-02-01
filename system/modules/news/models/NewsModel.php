@@ -54,8 +54,7 @@ class NewsModel extends \Model
 
 	/**
 	 * Find news items by their parent ID
-	 * @param integer
-	 * @param integer
+	 * @param array
 	 * @param integer
 	 * @return Model|null
 	 */
@@ -90,9 +89,8 @@ class NewsModel extends \Model
 
 	/**
 	 * Count news items by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @param integer
+	 * @param array
+	 * @param boolean
 	 * @return Model|null
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null)
@@ -199,6 +197,8 @@ class NewsModel extends \Model
 	 * @param integer
 	 * @param integer
 	 * @param array
+	 * @param integer
+	 * @param integer
 	 * @return Model|null
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)

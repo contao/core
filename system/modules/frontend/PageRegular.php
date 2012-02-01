@@ -419,33 +419,36 @@ class PageRegular extends \Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = \StyleSheetModel::findByIds($arrStyleSheets);
 
-			while ($objStylesheets->next())
+			if ($objStylesheets !== null)
 			{
-				$media = implode(',', deserialize($objStylesheets->media));
-
-				// Overwrite the media type with a custom media query
-				if ($objStylesheets->mediaQuery != '')
+				while ($objStylesheets->next())
 				{
-					$media = $objStylesheets->mediaQuery;
-				}
+					$media = implode(',', deserialize($objStylesheets->media));
 
-				// Aggregate regular style sheets
-				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
-				{
-					$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
-				}
-				else
-				{
-					$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
-
-					if ($objStylesheets->cc)
+					// Overwrite the media type with a custom media query
+					if ($objStylesheets->mediaQuery != '')
 					{
-						$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+						$media = $objStylesheets->mediaQuery;
 					}
 
-					$strCcStyleSheets .= $strStyleSheet . "\n";
+					// Aggregate regular style sheets
+					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
+					{
+						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+					}
+					else
+					{
+						$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
+
+						if ($objStylesheets->cc)
+						{
+							$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+						}
+
+						$strCcStyleSheets .= $strStyleSheet . "\n";
+					}
 				}
 			}
 		}

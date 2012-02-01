@@ -306,7 +306,9 @@ class Comments extends \Frontend
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
-			$insertId = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute()->insertId;
+			$objComment = new \CommentsModel();
+			$objComment->setRow($arrSet);
+			$insertId = $objComment->save();
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))

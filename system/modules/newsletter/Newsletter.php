@@ -791,9 +791,9 @@ class Newsletter extends \Backend
 	 */
 	public function getNewsletters($objModule)
 	{
-		$objNewsletter = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel");
+		$objNewsletter = \NewsletterChannelModel::findAll();
 
-		if ($objNewsletter->numRows < 1)
+		if ($objNewsletter === null)
 		{
 			return array();
 		}
@@ -851,57 +851,51 @@ class Newsletter extends \Backend
 		$arrProcessed = array();
 
 		// Get all channels
-		$objNewsletter = $this->Database->execute("SELECT id, jumpTo FROM tl_newsletter_channel");
+		$objNewsletter = \NewsletterChannelModel::findAll();
 
 		// Walk through each channel
-		while ($objNewsletter->next())
+		if ($objNewsletter !== null)
 		{
-			if (!empty($arrRoot) && !in_array($objNewsletter->jumpTo, $arrRoot))
+			while ($objNewsletter->next())
 			{
-				continue;
-			}
+				// Skip channels without target page
+				if ($objNewsletter->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objNewsletter->jumpTo]))
-			{
-				$arrProcessed[$objNewsletter->jumpTo] = false;
+				// Skip channels outside the root nodes
+				if (!empty($arrRoot) && !in_array($objNewsletter->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get the target page
-				$objParent = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1" . ($blnIsSitemap ? " AND sitemap!='map_never'" : ""))
-											->limit(1)
-											->execute($objNewsletter->jumpTo);
-
-				// Determin the domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objNewsletter->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent);
+					$objParent = $this->getPageDetails($objNewsletter->jumpTo['id']);
 
 					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objNewsletter->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+					$arrProcessed[$objNewsletter->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
-			}
 
-			// Skip events without target page
-			if ($arrProcessed[$objNewsletter->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objNewsletter->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objNewsletter->jumpTo];
+				// Get the items
+				$objItem = \NewsletterModel::findSentByPid($objNewsletter->id);
 
-			// Get items
-			$objItem = $this->Database->prepare("SELECT * FROM tl_newsletter WHERE pid=? AND sent=1 ORDER BY date DESC")
-									  ->execute($objNewsletter->id);
-
-			// Add items to the indexer
-			while ($objItem->next())
-			{
-				$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				if ($objItem !== null)
+				{
+					while ($objItem->next())
+					{
+						$arrPages[] = sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+					}
+				}
 			}
 		}
 

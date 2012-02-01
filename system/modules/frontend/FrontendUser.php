@@ -115,10 +115,9 @@ class FrontendUser extends \User
 
 		$this->Session->setData($session);
 
-		if (strlen($this->intId))
+		if ($this->intId)
 		{
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
-						   ->execute(serialize($session), $this->intId);
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")->execute(serialize($session), $this->intId);
 		}
 	}
 
@@ -342,8 +341,10 @@ class FrontendUser extends \User
 		$time = time();
 
 		// Skip inactive groups
-		$objGroups = $this->Database->execute("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
-		$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
+		if (($objGroups = \MemberGroupModel::findAllActive()) !== null)
+		{
+			$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
+		}
 
 		// Get the group login page
 		if ($this->groups[0] > 0)

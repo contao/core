@@ -190,6 +190,21 @@ abstract class Model extends \System
 
 
 	/**
+	 * Set a row from an array
+	 * @param array
+	 */
+	public function setRow($arrData)
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		$this->arrData[$this->intIndex] = $arrData;
+	}
+
+
+	/**
 	 * Return the number of rows in the result set
 	 * @return integer
 	 */
@@ -282,6 +297,30 @@ abstract class Model extends \System
 	{
 		$this->intIndex = -1;
 		$this->blnDone = false;
+	}
+
+
+	/**
+	 * Fetch a column of each row
+	 * @param string
+	 * @return array
+	 * @throws Exception
+	 */
+	public function fetchEach($key)
+	{
+		if (!isset($this->arrData[0][$key]))
+		{
+			throw new \Exception("Unknown field $key");
+		}
+
+		$return = array();
+
+		foreach ($this->arrData as $row)
+		{
+			$return[] = $row[$key];
+		}
+
+		return $return;
 	}
 
 
@@ -597,11 +636,24 @@ abstract class Model extends \System
 	 */
 	public function delete()
 	{
-		$this->import('Database');
+		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($this->{static::$strPk})->affectedRows;
+	}
 
-		return $this->Database->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")
-							  ->execute($this->{static::$strPk})
-							  ->affectedRows;
+
+	/**
+	 * Delete all current records and return the number of affected rows
+	 * @return integer
+	 */
+	public function deleteAll()
+	{
+		$intAffected = 0;
+
+		foreach ($this->arrData as $arrRow)
+		{
+			$intAffected += \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($arrRow[static::$strPk])->affectedRows;
+		}
+
+		return $intAffected;
 	}
 }
 

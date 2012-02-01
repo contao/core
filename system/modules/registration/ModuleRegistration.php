@@ -400,8 +400,12 @@ class ModuleRegistration extends \Module
 						// Replace the wildcard
 						if (!empty($arrData['newsletter']))
 						{
-							$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(". implode(',', array_map('intval', $arrData['newsletter'])) .")");
-							$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
+							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
+
+							if ($objChannels !== null)
+							{
+								$strConfirmation = str_replace($strChunk, implode("\n", $objChannels->fetchEach('title')), $strConfirmation);
+							}
 						}
 						else
 						{
@@ -430,9 +434,10 @@ class ModuleRegistration extends \Module
 			$arrData['newsletter'] = array($arrData['newsletter']);
 		}
 
-		// Create user
-		$objNewUser = $this->Database->prepare("INSERT INTO tl_member %s")->set($arrData)->execute();
-		$insertId = $objNewUser->insertId;
+		// Create the user
+		$objNewUser = new \MemberModel();
+		$objNewUser->setRow($arrData);
+		$insertId = $objNewUser->save();
 
 		// Assign home directory
 		if ($this->reg_assignDir && is_dir(TL_ROOT . '/' . $this->reg_homeDir))
@@ -448,8 +453,9 @@ class ModuleRegistration extends \Module
 
 			new \Folder($this->reg_homeDir . '/' . $strUserDir);
 
-			$this->Database->prepare("UPDATE tl_member SET homeDir=?, assignDir=1 WHERE id=?")
-						   ->execute($this->reg_homeDir . '/' . $strUserDir, $insertId);
+			$objNewUser->assignDir = 1;
+			$objNewUser->homeDir = $this->reg_homeDir . '/' . $strUserDir;
+			$objNewUser->save();
 		}
 
 		// HOOK: send insert ID and user data

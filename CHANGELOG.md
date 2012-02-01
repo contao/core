@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+All front end modules of the core modules now use Models.
+
+### New
 Added lazy and eager loading of related records to the Model class. Usage:
 
 ```

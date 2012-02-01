@@ -33,11 +33,16 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\ModuleNewsletterList'   => 'system/modules/newsletter/ModuleNewsletterList.php',
-	'Contao\\ModuleNewsletterReader' => 'system/modules/newsletter/ModuleNewsletterReader.php',
-	'Contao\\ModuleSubscribe'        => 'system/modules/newsletter/ModuleSubscribe.php',
-	'Contao\\ModuleUnsubscribe'      => 'system/modules/newsletter/ModuleUnsubscribe.php',
-	'Contao\\Newsletter'             => 'system/modules/newsletter/Newsletter.php',
+	'Contao\\ModuleNewsletterList'      => 'system/modules/newsletter/ModuleNewsletterList.php',
+	'Contao\\ModuleNewsletterReader'    => 'system/modules/newsletter/ModuleNewsletterReader.php',
+	'Contao\\ModuleSubscribe'           => 'system/modules/newsletter/ModuleSubscribe.php',
+	'Contao\\ModuleUnsubscribe'         => 'system/modules/newsletter/ModuleUnsubscribe.php',
+	'Contao\\Newsletter'                => 'system/modules/newsletter/Newsletter.php',
+
+	// Models
+	'Contao\\NewsletterChannelModel'    => 'system/modules/newsletter/models/NewsletterChannelModel.php',
+	'Contao\\NewsletterModel'           => 'system/modules/newsletter/models/NewsletterModel.php',
+	'Contao\\NewsletterRecipientsModel' => 'system/modules/newsletter/models/NewsletterRecipientsModel.php',
 ));
 
 

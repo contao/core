@@ -148,7 +148,6 @@ class ModulePersonalData extends \Module
 			$arrData['eval']['tableless'] = $this->tableless;
 			$arrData['eval']['required'] = ($this->User->$field == '' && $arrData['eval']['mandatory']) ? true : false;
 
-			# FIXME
 			$objWidget = new $strClass($this->prepareForWidget($arrData, $field, $this->User->$field));
 
 			$objWidget->storeValues = true;
@@ -214,18 +213,15 @@ class ModulePersonalData extends \Module
 				{
 					$doNotSubmit = true;
 				}
-
-				// Store current value
 				elseif ($objWidget->submitInput())
 				{
-					// Set new value
+					// Set the new value
 					$this->User->$field = $varValue;
 					$_SESSION['FORM_DATA'][$field] = $varValue;
 					$varSave = is_array($varValue) ? serialize($varValue) : $varValue;
 
-					// Save field
-					$this->Database->prepare("UPDATE tl_member SET " . $field . "=? WHERE id=?")
-								   ->execute($varSave, $this->User->id);
+					// Save the field (do not use Models here)
+					$this->Database->prepare("UPDATE tl_member SET " . $field . "=? WHERE id=?")->execute($varSave, $this->User->id);
 
 					// HOOK: set new password callback
 					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))

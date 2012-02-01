@@ -89,55 +89,54 @@ class ModuleNewsletterList extends \Module
 	protected function compile()
 	{
 		global $objPage;
-
-		$objNewsletter = $this->Database->execute("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel, (SELECT jumpTo FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS jumpTo FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ")" . (!BE_USER_LOGGED_IN ? " AND sent=1" : "") . " ORDER BY date DESC");
-
 		$arrJumpTo = array();
 		$arrNewsletter = array();
-		$time = time();
 
-		while ($objNewsletter->next())
+		$objNewsletter = \NewsletterModel::findSentByPids($this->nl_channels);
+
+		if ($objNewsletter !== null)
 		{
-			if ($objNewsletter->jumpTo < 1)
+			while ($objNewsletter->next())
 			{
-				continue;
-			}
+				if (!$objNewsletter->pid['jumpTo'])
+				{
+					continue;
+				}
 
-			if (!isset($arrJumpTo[$objNewsletter->jumpTo]))
-			{
-				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-											->limit(1)
-											->execute($objNewsletter->jumpTo);
+				if (!isset($arrJumpTo[$objNewsletter->pid['jumpTo']]))
+				{
+					$objJumpTo = \PageModel::findPublishedById($objNewsletter->jumpTo);
 	
-				if ($objJumpTo->numRows)
-				{
-					$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->fetchAssoc(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					if ($objJumpTo !== null)
+					{
+						$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					}
+					else
+					{
+						$arrJumpTo[$objNewsletter->jumpTo] = null;
+					}
 				}
-				else
+
+				$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
+
+				if ($strUrl === null)
 				{
-					$arrJumpTo[$objNewsletter->jumpTo] = null;
+					continue;
 				}
+
+				$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
+
+				$arrNewsletter[] = array
+				(
+					'subject' => $objNewsletter->subject,
+					'title' => strip_insert_tags($objNewsletter->subject),
+					'href' => sprintf($strUrl, $strAlias),
+					'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
+					'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
+					'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
+					'channel' => $objNewsletter->channel
+				);
 			}
-
-			$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
-
-			if ($strUrl === null)
-			{
-				continue;
-			}
-
-			$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
-
-			$arrNewsletter[] = array
-			(
-				'subject' => $objNewsletter->subject,
-				'title' => strip_insert_tags($objNewsletter->subject),
-				'href' => sprintf($strUrl, $strAlias),
-				'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
-				'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
-				'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
-				'channel' => $objNewsletter->channel
-			);
 		}
 
 		$this->Template->newsletters = $arrNewsletter;

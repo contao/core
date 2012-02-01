@@ -922,13 +922,10 @@ var Backend =
 	},
 
 	/**
-	 * Initialize the mootools color picker
+	 * Initialize the mootools color picker (backwards compatibility)
 	 */
 	addColorPicker: function() {
-		/*
-		 * FIXME: replace with http://www.nogray.com/color_picker.php
-		 * as soon as the new version has been released
-		 */
+		return true;
 	},
 
 	/**

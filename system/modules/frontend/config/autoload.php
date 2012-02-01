@@ -107,6 +107,7 @@ ClassLoader::addClasses(array
 	'Contao\\ModuleModel'        => 'system/modules/frontend/models/ModuleModel.php',
 	'Contao\\PageModel'          => 'system/modules/frontend/models/PageModel.php',
 	'Contao\\SessionModel'       => 'system/modules/frontend/models/SessionModel.php',
+	'Contao\\StyleSheetModel'    => 'system/modules/frontend/models/StyleSheetModel.php',
 	'Contao\\UserModel'          => 'system/modules/frontend/models/UserModel.php',
 ));
 

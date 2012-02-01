@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
+ * @package    Backend
  * @license    LGPL
  */
 
@@ -35,55 +35,37 @@ namespace Contao;
 
 
 /**
- * Class ContentAlias
+ * Class NewsletterChannelModel
  *
- * Front end content element "alias".
+ * Provide methods to find and save content elements.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-class ContentAlias extends \ContentElement
+class NewsletterChannelModel extends \Model
 {
 
 	/**
-	 * Parse the template
-	 * @return string
+	 * Name of the table
+	 * @var string
 	 */
-	public function generate()
-	{
-		$objElement = \ContentModel::findByPk($this->cteAlias);
-
-		if ($objElement === null)
-		{
-			return '';
-		}
-
-		$strClass = $this->findContentElement($objElement->type);
-
-		if (!$this->classFileExists($strClass))
-		{
-			return '';
-		}
-
-		$objElement->id = $this->id;
-		$objElement->typePrefix = 'ce_';
-
-		$objElement = new $strClass($objElement);
-
-		// Overwrite spacing and CSS ID
-		$objElement->space = $this->space;
-		$objElement->cssID = $this->cssID;
-
-		return $objElement->generate();
-	}
+	protected static $strTable = 'tl_newsletter_channel';
 
 
 	/**
-	 * Generate the content element
+	 * Find channels by their IDs
+	 * @param array
+	 * @return Model|null
 	 */
-	protected function compile()
+	public static function findByIds($arrPids)
 	{
-		return;
+		if (!is_array($arrPids) || empty($arrPids))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, "$t.title");
 	}
 }
 

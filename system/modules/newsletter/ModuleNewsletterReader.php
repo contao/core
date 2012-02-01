@@ -118,11 +118,9 @@ class ModuleNewsletterReader extends \Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objNewsletter = $this->Database->prepare("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND sent=?" : ""))
-										->limit(1)
-										->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), 1);
+		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->nl_channels);
 
-		if ($objNewsletter->numRows < 1)
+		if ($objNewsletter === null)
 		{
 			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 

@@ -130,21 +130,19 @@ class ModuleCloseAccount extends \Module
 					}
 				}
 
+				$objMember = \MemberModel::findByPk($this->User->id);
+
 				// Remove the account
 				if ($this->reg_close == 'close_delete')
 				{
-					$this->Database->prepare("DELETE FROM tl_member WHERE id=?")
-								   ->execute($this->User->id);
-
+					$objMember->delete();
 					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deleted', 'ModuleCloseAccount compile()', TL_ACCESS);
 				}
-
 				// Deactivate the account
 				else
 				{
-					$this->Database->prepare("UPDATE tl_member SET disable=1 WHERE id=?")
-								   ->execute($this->User->id);
-
+					$objMember->disable = 1;
+					$objMember->save();
 					$this->log('User account ID ' . $this->User->id . ' (' . $this->User->email . ') has been deactivated', 'ModuleCloseAccount compile()', TL_ACCESS);
 				}
 

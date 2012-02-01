@@ -287,9 +287,10 @@ class ModulePassword extends \Module
 		$arrChunks = array();
 		$confirmationId = md5(uniqid(mt_rand(), true));
 
-		// Store confirmation ID
-		$this->Database->prepare("UPDATE tl_member SET activation=? WHERE id=?")
-					   ->execute($confirmationId, $objMember->id);
+		// Store the confirmation ID
+		$objMember = \MemberModel::findByPk($objMember->id);
+		$objMember->activation = $confirmationId;
+		$objMember->save();
 
 		$strConfirmation = $this->reg_password;
 		preg_match_all('/##[^#]+##/i', $strConfirmation, $arrChunks);

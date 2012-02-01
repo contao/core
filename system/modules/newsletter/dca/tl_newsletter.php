@@ -46,8 +46,6 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary',
@@ -141,7 +139,9 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 		),
 		'pid' => array
 		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'foreignKey'              => 'tl_newsletter.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'tstamp' => array
 		(

@@ -439,6 +439,7 @@ class Form extends \Hybrid
 				}
 			}
 
+			// Do not use Models here (backwards compatibility)
 			$this->Database->prepare("INSERT INTO " . $this->targetTable . " %s")->set($arrSet)->execute();
 		}
 

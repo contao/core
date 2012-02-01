@@ -47,8 +47,6 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 		),
 		'sql' => array
 		(
-			'engine' => 'MyISAM',
-			'charset' => 'utf8',
 			'keys' => array
 			(
 				'id' => 'primary'
@@ -166,8 +164,10 @@ $GLOBALS['TL_DCA']['tl_newsletter_channel'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_channel']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio'),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
 		),
 		'useSMTP' => array
 		(

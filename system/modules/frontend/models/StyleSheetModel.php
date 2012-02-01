@@ -23,7 +23,7 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Frontend
+ * @package    Backend
  * @license    LGPL
  */
 
@@ -35,55 +35,40 @@ namespace Contao;
 
 
 /**
- * Class ContentAlias
+ * Class StyleSheetModel
  *
- * Front end content element "alias".
+ * Provide methods to find and save modules.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Controller
+ * @package    Model
  */
-class ContentAlias extends \ContentElement
+class StyleSheetModel extends \Model
 {
 
 	/**
-	 * Parse the template
-	 * @return string
+	 * Name of the table
+	 * @var string
 	 */
-	public function generate()
-	{
-		$objElement = \ContentModel::findByPk($this->cteAlias);
-
-		if ($objElement === null)
-		{
-			return '';
-		}
-
-		$strClass = $this->findContentElement($objElement->type);
-
-		if (!$this->classFileExists($strClass))
-		{
-			return '';
-		}
-
-		$objElement->id = $this->id;
-		$objElement->typePrefix = 'ce_';
-
-		$objElement = new $strClass($objElement);
-
-		// Overwrite spacing and CSS ID
-		$objElement->space = $this->space;
-		$objElement->cssID = $this->cssID;
-
-		return $objElement->generate();
-	}
+	protected static $strTable = 'tl_style_sheet';
 
 
 	/**
-	 * Generate the content element
+	 * Find style sheets by their IDs
+	 * @param array
+	 * @return Model|null
 	 */
-	protected function compile()
+	public static function findByIds($arrIds)
 	{
-		return;
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$objDatabase = \Database::getInstance();
+		$arrIds = array_map('intval', $arrIds);
+
+		$objResult = $objDatabase->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(',', $arrIds) . ") ORDER BY " . $objDatabase->findInSet('id', $arrIds));
+		return new static($objResult);
 	}
 }
 
