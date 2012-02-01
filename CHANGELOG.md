@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Merged the "registration", "rss_reader" and "tpl_editor" module into the core
+modules ("backend" and "frontend").
+
 ### New
 All front end modules of the core modules now use Models.
 

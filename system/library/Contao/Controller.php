@@ -112,11 +112,9 @@ abstract class Controller extends \System
 		// Check for a theme templates folder
 		if ($intTheme > 0)
 		{
-			$objTheme = $this->Database->prepare("SELECT templates FROM tl_theme WHERE id=?")
-									   ->limit(1)
-									   ->execute($intTheme);
+			$objTheme = \ThemeModel::findByPk($intTheme);
 
-			if ($objTheme->numRows > 0 && $objTheme->templates != '')
+			if ($objTheme !== null && $objTheme->templates != '')
 			{
 				$strTplFolder = $objTheme->templates;
 			}
@@ -1535,25 +1533,16 @@ abstract class Controller extends \System
 								break;
 
 							case 'forward':
-								$time = time();
-								$objNextPage->target = false; // see #3194
+								$objNextPage->getRelated('jumpTo');
 
-								if (!$objNextPage->jumpTo)
+								if ($objNextPage->jumpTo['id'])
 								{
-									$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-																->limit(1)
-																->execute($objNextPage->id);
+									$strUrl = $this->generateFrontendUrl($objNextPage->jumpTo);
+									break;
 								}
-								else
+								elseif (($objTarget = \PageModel::findFirstPublishedRegularByPid($objNextPage->id)) !== null)
 								{
-									$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-																->limit(1)
-																->execute($objNextPage->jumpTo);
-								}
-
-								if ($objTarget->numRows)
-								{
-									$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
+									$strUrl = $this->generateFrontendUrl($objTarget->row());
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
@@ -1623,19 +1612,15 @@ abstract class Controller extends \System
 				case 'article_open':
 				case 'article_url':
 				case 'article_title':
-					$this->import('Database');
+					$objArticle = \ArticleModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objArticle = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title AS title, p.id AS id, p.alias AS alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND (a.id=? OR a.alias=?)")
-												 ->limit(1)
-												 ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objArticle->numRows < 1)
+					if ($objArticle === null)
 					{
 						break;
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->aAlias)) ? $objArticle->aAlias : $objArticle->aId));
+						$strUrl = $this->generateFrontendUrl($objArticle->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objArticle->alias)) ? $objArticle->alias : $objArticle->id));
 					}
 	
 					// Replace the tag
@@ -1665,19 +1650,15 @@ abstract class Controller extends \System
 				case 'faq_open':
 				case 'faq_url':
 				case 'faq_title':
-					$this->import('Database');
+					$objFaq = \FaqModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objFaq = $this->Database->prepare("SELECT f.id AS fId, f.alias AS fAlias, f.question AS question, p.id AS id, p.alias AS alias FROM tl_faq f, tl_faq_category c, tl_page p WHERE f.pid=c.id AND c.jumpTo=p.id AND (f.id=? OR f.alias=?)")
-											 ->limit(1)
-											 ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objFaq->numRows < 1)
+					if ($objFaq === null)
 					{
 						break;
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->fAlias != '') ? $objFaq->fAlias : $objFaq->aId));
+						$strUrl = $this->generateFrontendUrl($objFaq->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objFaq->alias != '') ? $objFaq->alias : $objFaq->id));
 					}
 	
 					// Replace the tag
@@ -1707,23 +1688,21 @@ abstract class Controller extends \System
 				case 'news_open':
 				case 'news_url':
 				case 'news_title':
-					$this->import('Database');
+					$objNews = \NewsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objNews = $this->Database->prepare("SELECT n.id AS nId, n.alias AS nAlias, n.headline, n.source, n.url, n.articleId as aId, a.alias AS aAlias, p.id, p.alias FROM tl_news n LEFT JOIN tl_news_archive c ON n.pid=c.id LEFT JOIN tl_article a ON n.articleId=a.id LEFT JOIN tl_page p ON p.id=(CASE WHEN n.source='internal' THEN n.jumpTo WHEN n.source='article' THEN a.pid ELSE c.jumpTo END) WHERE (n.id=? OR n.alias=?)")
-											  ->limit(1)
-											  ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objNews->numRows < 1)
+					if ($objNews === null)
 					{
 						break;
 					}
 					elseif ($objNews->source == 'internal')
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row());
+						$objNews->getRelated('jumpTo');
+						$strUrl = $this->generateFrontendUrl($objNews->jumpTo);
 					}
 					elseif ($objNews->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->aAlias != '') ? $objNews->aAlias : $objNews->aId));
+						$objArticle = \ArticleModel::findByPk($objNews->articleId, true);
+						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objNews->source == 'external')
 					{
@@ -1731,7 +1710,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objNews->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->nAlias != '') ? $objNews->nAlias : $objNews->nId));
+						$strUrl = $this->generateFrontendUrl($objNews->pid, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/items/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objNews->alias != '') ? $objNews->alias : $objNews->id));
 					}
 	
 					// Replace the tag
@@ -1761,23 +1740,21 @@ abstract class Controller extends \System
 				case 'event_open':
 				case 'event_url':
 				case 'event_title':
-					$this->import('Database');
+					$objEvent = \CalendarEventsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objEvent = $this->Database->prepare("SELECT e.id AS eId, e.alias AS eAlias, e.title, e.source, e.url, e.articleId as aId, a.alias AS aAlias, p.id, p.alias FROM tl_calendar_events e LEFT JOIN tl_calendar c ON e.pid=c.id LEFT JOIN tl_article a ON e.articleId=a.id LEFT JOIN tl_page p ON p.id=(CASE WHEN e.source='internal' THEN e.jumpTo WHEN e.source='article' THEN a.pid ELSE c.jumpTo END) WHERE (e.id=? OR e.alias=?)")
-											   ->limit(1)
-											   ->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objEvent->numRows < 1)
+					if ($objEvent === null)
 					{
 						break;
 					}
 					elseif ($objEvent->source == 'internal')
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row());
+						$objEvent->getRelated('jumpTo');
+						$strUrl = $this->generateFrontendUrl($objEvent->jumpTo);
 					}
 					elseif ($objEvent->source == 'article')
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->aAlias != '') ? $objEvent->aAlias : $objEvent->aId));
+						$objArticle = \ArticleModel::findByPk($objEvent->articleId, true);
+						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objEvent->source == 'external')
 					{
@@ -1785,7 +1762,7 @@ abstract class Controller extends \System
 					}
 					else
 					{
-						$strUrl = $this->generateFrontendUrl($objEvent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->eAlias != '') ? $objEvent->eAlias : $objEvent->eId));
+						$strUrl = $this->generateFrontendUrl($objEvent->pid, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/' : '/events/') . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objEvent->alias != '') ? $objEvent->alias : $objEvent->id));
 					}
 
 					// Replace the tag
@@ -1812,13 +1789,9 @@ abstract class Controller extends \System
 
 				// Article teaser
 				case 'article_teaser':
-					$this->import('Database');
+					$objTeaser = \ArticleModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_article WHERE id=? OR alias=?")
-												->limit(1)
-												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objTeaser->numRows)
+					if ($objTeaser !== null)
 					{
 						$this->import('String');
 
@@ -1835,13 +1808,9 @@ abstract class Controller extends \System
 
 				// News teaser
 				case 'news_teaser':
-					$this->import('Database');
+					$objTeaser = \NewsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_news WHERE id=? OR alias=?")
-												->limit(1)
-												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objTeaser->numRows)
+					if ($objTeaser !== null)
 					{
 						$this->import('String');
 
@@ -1858,13 +1827,9 @@ abstract class Controller extends \System
 
 				// Event teaser
 				case 'event_teaser':
-					$this->import('Database');
+					$objTeaser = \CalendarEventsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
 
-					$objTeaser = $this->Database->prepare("SELECT teaser FROM tl_calendar_events WHERE id=? OR alias=?")
-												->limit(1)
-												->execute((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
-
-					if ($objTeaser->numRows)
+					if ($objTeaser !== null)
 					{
 						$this->import('String');
 
@@ -1881,13 +1846,9 @@ abstract class Controller extends \System
 
 				// News feed URL
 				case 'news_feed':
-					$this->import('Database');
+					$objFeed = \NewsArchiveModel::findByPk($elements[1]);
 
-					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_news_archive WHERE id=?")
-											  ->limit(1)
-											  ->execute($elements[1]);
-
-					if ($objFeed->numRows)
+					if ($objFeed !== null)
 					{
 						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
 					}
@@ -1895,13 +1856,9 @@ abstract class Controller extends \System
 
 				// Calendar feed URL
 				case 'calendar_feed':
-					$this->import('Database');
+					$objFeed = \CalendarModel::findByPk($elements[1]);
 
-					$objFeed = $this->Database->prepare("SELECT feedBase, alias FROM tl_calendar WHERE id=?")
-											  ->limit(1)
-											  ->execute($elements[1]);
-
-					if ($objFeed->numRows)
+					if ($objFeed !== null)
 					{
 						$arrCache[$strTag] = $objFeed->feedBase . $objFeed->alias . '.xml';
 					}
@@ -1909,8 +1866,7 @@ abstract class Controller extends \System
 
 				// Last update
 				case 'last_update':
-					$this->import('Database');
-					$objUpdate = $this->Database->execute("SELECT MAX(tstamp) AS tc, (SELECT MAX(tstamp) FROM tl_news) AS tn, (SELECT MAX(tstamp) FROM tl_calendar_events) AS te FROM tl_content");
+					$objUpdate = \Database::getInstance()->execute("SELECT MAX(tstamp) AS tc, (SELECT MAX(tstamp) FROM tl_news) AS tn, (SELECT MAX(tstamp) FROM tl_calendar_events) AS te FROM tl_content");
 
 					if ($objUpdate->numRows)
 					{
@@ -2857,7 +2813,7 @@ abstract class Controller extends \System
 		$this->Database->prepare("DELETE FROM tl_version WHERE tstamp<?")
 					   ->execute((time() - $GLOBALS['TL_CONFIG']['versionPeriod']));
 
-		// Get new record
+		// Get the new record
 		$objRecord = $this->Database->prepare("SELECT * FROM " . $strTable . " WHERE id=?")
 									->limit(1)
 									->executeUncached($intId);
@@ -3184,7 +3140,7 @@ abstract class Controller extends \System
 
 			while ($objFeeds->next())
 			{
-				$arrFeeds[] = strlen($objFeeds->alias) ? $objFeeds->alias : 'calendar' . $objFeeds->id;
+				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'calendar' . $objFeeds->id;
 			}
 		}
 
@@ -3195,7 +3151,7 @@ abstract class Controller extends \System
 
 			while ($objFeeds->next())
 			{
-				$arrFeeds[] = strlen($objFeeds->alias) ? $objFeeds->alias : 'news' . $objFeeds->id;
+				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'news' . $objFeeds->id;
 			}
 		}
 
@@ -3212,7 +3168,7 @@ abstract class Controller extends \System
 		// Make sure the dcaconfig.php is loaded
 		@include(TL_ROOT . '/system/config/dcaconfig.php');
 
-		// Add root files
+		// Add the root files
 		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
 		{
 			foreach ($GLOBALS['TL_CONFIG']['rootFiles'] as $strFile)
@@ -3221,7 +3177,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		// Delete old files
+		// Delete the old files
 		if (!$blnReturn)
 		{
 			foreach (scan(TL_ROOT) as $file)
