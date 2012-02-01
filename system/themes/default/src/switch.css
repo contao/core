@@ -43,8 +43,13 @@ p {
 	margin:0 0 2px;
 	padding:3px 6px 6px 12px;
 	overflow:hidden;
-	background:#ffc;
+	background:#ff9;
 	line-height:1;
+	background-image:-moz-linear-gradient(top, #ff9 25%, #fc0 100%);
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0.25, #ff9), color-stop(1, #fc0));
+	background-image:-o-linear-gradient(top, #ff9 25%, #fc0 100%);
+	background-image:-ms-linear-gradient(top, #ff9 25%, #fc0 100%);
+	background-image:linear-gradient(top, #ff9 25%, #fc0 100%);
 }
 
 /* Left */
