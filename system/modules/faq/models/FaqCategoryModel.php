@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class FaqCategoryModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save FAQ categories.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model

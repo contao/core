@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class DcaExtractor
  *
- * This class provides methods to extract information from DCA files.
+ * Provide methods to extract information from DCA files.
  * @copyright  Leo Feyer 2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library
@@ -233,7 +233,7 @@ class DcaExtractor extends \DbInstaller
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
-	 * @throws \Exception
+	 * @throws Exception
 	 */
 	protected function createExtract()
 	{

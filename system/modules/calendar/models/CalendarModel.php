@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class CalendarModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save calendars.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class CalendarModel extends \Model
 
 
 	/**
-	 * Find multiple events by their IDs
+	 * Find multiple calendars by their IDs
 	 * @param array
 	 * @return Model|null
 	 */
@@ -70,7 +70,7 @@ class CalendarModel extends \Model
 
 
 	/**
-	 * Find unprotected calendars with feeds
+	 * Find all unprotected calendars with feeds
 	 * @param array
 	 * @return Model|null
 	 */
@@ -82,7 +82,7 @@ class CalendarModel extends \Model
 
 
 	/**
-	 * Find unprotected news archives with feeds by their IDs
+	 * Find unprotected calendars with feeds by their IDs
 	 * @param array
 	 * @return Model|null
 	 */

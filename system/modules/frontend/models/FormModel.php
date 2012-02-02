@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class FormModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save forms.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model

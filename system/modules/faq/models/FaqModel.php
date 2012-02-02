@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class FaqModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save FAQs.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class FaqModel extends \Model
 
 
 	/**
-	 * Find published FAQs from one or more categories
+	 * Find published FAQs from one or more categories by their ID or alias
 	 * @param integer
 	 * @param string
 	 * @param array
@@ -79,7 +79,7 @@ class FaqModel extends \Model
 
 
 	/**
-	 * Find all published events by their parent IDs
+	 * Find all published FAQs by their parent IDs
 	 * @param array
 	 * @return Model|null
 	 */

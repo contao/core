@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class TemplateLoader
  *
- * This class provides methods to automatically load template files.
+ * Provide methods to automatically load template files.
  * @copyright  Leo Feyer 2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Library

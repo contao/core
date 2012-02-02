@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class FormFieldModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save form fields.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class FormFieldModel extends \Model
 
 
 	/**
-	 * Find published form fields by their parent Id
+	 * Find published form fields by their parent ID
 	 * @param integer
 	 * @return Model
 	 */

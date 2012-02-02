@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class PageModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save pages.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -245,7 +245,7 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their IDs and exclude pages
-	 * which are only visible to guests
+	 * which are only visible for guests
 	 * @param integer
 	 * @return Model|null
 	 */
@@ -276,7 +276,7 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published regular pages by their parent IDs and exclude
-	 * pages which are only visible to guests
+	 * pages which are only visible for guests
 	 * @param integer
 	 * @return Model|null
 	 */
@@ -302,7 +302,7 @@ class PageModel extends \Model
 
 	/**
 	 * Find all published subpages by their parent ID and exclude pages
-	 * which are only visible to guests
+	 * which are only visible for guests
 	 * @param integer
 	 * @param boolean
 	 * @param boolean

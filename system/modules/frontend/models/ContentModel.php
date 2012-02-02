@@ -53,7 +53,7 @@ class ContentModel extends \Model
 
 
 	/**
-	 * Find all published content elements of an article
+	 * Find all published content elements by their parent ID
 	 * @param integer
 	 * @return Model|null
 	 */

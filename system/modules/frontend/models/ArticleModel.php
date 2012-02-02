@@ -53,7 +53,7 @@ class ArticleModel extends \Model
 
 
 	/**
-	 * Find an article by its ID or alias and include the author name
+	 * Find an article by its ID or alias and its column
 	 * @param mixed
 	 * @param integer
 	 * @return Model

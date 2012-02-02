@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class StyleSheetModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save style sheets.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class StyleSheetModel extends \Model
 
 
 	/**
-	 * Find style sheets by their IDs
+	 * Find multiple style sheets by their IDs
 	 * @param array
 	 * @return Model|null
 	 */

@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class Model
  *
- * Provide active record functionality.
+ * Provide active record and a bit of ORM functionality.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -527,8 +527,8 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the result set before the model is created
-	 * @param Database_Statement
-	 * @return Database_Statement
+	 * @param Database_Result
+	 * @return Database_Result
 	 */
 	protected static function postFind(\Database_Result $objResult)
 	{

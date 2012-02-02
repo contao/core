@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class NewsModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save news items.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find news items by their parent ID
+	 * Find published news items by their parent ID
 	 * @param array
 	 * @param boolean
 	 * @param integer
@@ -90,7 +90,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Count news items by their parent ID
+	 * Count published news items by their parent ID
 	 * @param array
 	 * @param boolean
 	 * @return Model|null
@@ -125,7 +125,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find published news with the default redirect target by their parent ID
+	 * Find published news items with the default redirect target by their parent ID
 	 * @param integer
 	 * @return Model|null
 	 */
@@ -145,7 +145,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find published news from one or more news archives
+	 * Find published news items by their parent ID and ID or alias
 	 * @param integer
 	 * @param string
 	 * @param array
@@ -172,7 +172,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find published news by their parent ID
+	 * Find published news items by their parent ID
 	 * @param integer
 	 * @param integer
 	 */
@@ -195,7 +195,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Find all published news in a certain period of time by their parent ID
+	 * Find all published news items of a certain period of time by their parent ID
 	 * @param integer
 	 * @param integer
 	 * @param array
@@ -224,7 +224,7 @@ class NewsModel extends \Model
 
 
 	/**
-	 * Count all published news in a certain period of time by their parent ID
+	 * Count all published news items of a certain period of time by their parent ID
 	 * @param integer
 	 * @param integer
 	 * @param array

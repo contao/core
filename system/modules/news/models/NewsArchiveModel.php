@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class NewsArchiveModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save news archives.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -70,7 +70,7 @@ class NewsArchiveModel extends \Model
 
 
 	/**
-	 * Find unprotected news archives with feeds
+	 * Find all unprotected news archives with feeds
 	 * @return Model|null
 	 */
 	public static function findUnprotectedWithFeeds()

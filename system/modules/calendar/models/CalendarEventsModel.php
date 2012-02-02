@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class CalendarEventsModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save events.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model

@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class MemberModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save members.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class MemberModel extends \Model
 
 
 	/**
-	 * Find a member by the username
+	 * Find a member by his/her username
 	 * @param string
 	 * @return Model|null
 	 */
@@ -64,7 +64,7 @@ class MemberModel extends \Model
 
 
 	/**
-	 * Find an active member by his e-mail-address and username
+	 * Find an active member by his/her e-mail-address and username
 	 * @param string
 	 * @param string
 	 * @return Model|null

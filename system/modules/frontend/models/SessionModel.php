@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class SessionModel
  *
- * Provide methods to find and save modules.
+ * Provide methods to find and save sessions.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model

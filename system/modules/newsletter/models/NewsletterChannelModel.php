@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class NewsletterChannelModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save newsletter channels.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class NewsletterChannelModel extends \Model
 
 
 	/**
-	 * Find channels by their IDs
+	 * Find multiple newsletter channels by their IDs
 	 * @param array
 	 * @return Model|null
 	 */

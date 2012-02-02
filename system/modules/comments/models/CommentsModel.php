@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class CommentsModel
  *
- * Provide methods to find and save content elements.
+ * Provide methods to find and save comments.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
@@ -53,7 +53,7 @@ class CommentsModel extends \Model
 
 
 	/**
-	 * Find the published comments of the current source table and parent ID
+	 * Find published comments by their source table and parent ID
 	 * @param string
 	 * @param integer
 	 * @param boolean
@@ -76,7 +76,7 @@ class CommentsModel extends \Model
 
 
 	/**
-	 * Count the published comments of the current source table and parent ID
+	 * Count published comments by their source table and parent ID
 	 * @param string
 	 * @param integer
 	 * @return Model

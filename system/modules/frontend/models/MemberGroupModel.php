@@ -37,7 +37,7 @@ namespace Contao;
 /**
  * Class MemberGroupModel
  *
- * Provide methods to find and save models.
+ * Provide methods to find and save member groups.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
