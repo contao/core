@@ -103,7 +103,7 @@ class StyleSheets extends \Backend
 		foreach (scan(TL_ROOT . '/assets/css', true) as $file)
 		{
 			// Skip directories
-			if (is_dir(TL_ROOT . '/assets/css/' . $file) || $file == 'contao.css' || $file == 'debug.css')
+			if (is_dir(TL_ROOT . '/assets/css/' . $file))
 			{
 				continue;
 			}

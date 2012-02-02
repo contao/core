@@ -200,7 +200,7 @@ class Automator extends \Backend
 		{
 			foreach ($arrScripts as $strFile)
 			{
-				if ($strFile != 'index.html' && $strFile != 'contao.css' && $strFile != 'debug.css' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
 				{
 					unlink(TL_ROOT . '/assets/css/' . $strFile);
 				}

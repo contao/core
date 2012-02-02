@@ -389,7 +389,7 @@ class PageRegular extends \Frontend
 		// Skip the Contao framework style sheet
 		if (!$objLayout->skipFramework)
 		{
-			$objCombiner->add('assets/css/contao.css');
+			$objCombiner->add('assets/contao/framework.css');
 		}
 
 		// Skip the TinyMCE style sheet
@@ -462,7 +462,7 @@ class PageRegular extends \Frontend
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/css/debug.css') . '" media="all">' . "\n";
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '" media="all">' . "\n";
 		}
 
 		// Always add conditional style sheets at the end

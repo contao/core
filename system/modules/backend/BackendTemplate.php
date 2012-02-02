@@ -123,7 +123,7 @@ class BackendTemplate extends \Template
 		// Add the debug style sheet
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/css/debug.css') . '" media="all">' . "\n";
+			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '" media="all">' . "\n";
 		}
 
 		// JavaScripts

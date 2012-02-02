@@ -474,7 +474,7 @@ abstract class Model extends \System
 	 */
 	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
 	{
-		return static::findBy(null, null, $strOrder, $intLimit, $intOffset, $blnForceEager=false);
+		return static::findBy(null, null, $strOrder, $intLimit, $intOffset, $blnForceEager);
 	}
 
 
