@@ -63,25 +63,25 @@ class Database_Mssql extends \Database
 	 */
 	protected function connect()
 	{
-		$strHost = $GLOBALS['TL_CONFIG']['dbHost'];
+		$strHost = $this->arrConfig['dbHost'];
 
-		if ($GLOBALS['TL_CONFIG']['dbPort'])
+		if ($this->arrConfig['dbPort'])
 		{
-			$strHost .= ',' . $GLOBALS['TL_CONFIG']['dbPort'];
+			$strHost .= ',' . $this->arrConfig['dbPort'];
 		}
 
-		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		if ($this->arrConfig['dbPconnect'])
 		{
-			$this->resConnection = @mssql_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @mssql_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbCharset']);
 		}
 		else
 		{
-			$this->resConnection = @mssql_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @mssql_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbCharset']);
 		}
 
 		if (is_resource($this->resConnection))
 		{
-			@mssql_select_db($GLOBALS['TL_CONFIG']['dbDatabase'], $this->resConnection);
+			@mssql_select_db($this->arrConfig['dbDatabase'], $this->resConnection);
 		}
 	}
 

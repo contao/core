@@ -63,25 +63,25 @@ class Database_Sybase extends \Database
 	 */
 	protected function connect()
 	{
-		$strHost = $GLOBALS['TL_CONFIG']['dbHost'];
+		$strHost = $this->arrConfig['dbHost'];
 
-		if ($GLOBALS['TL_CONFIG']['dbPort'])
+		if ($this->arrConfig['dbPort'])
 		{
-			$strHost .= ':' . $GLOBALS['TL_CONFIG']['dbPort'];
+			$strHost .= ':' . $this->arrConfig['dbPort'];
 		}
 
-		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		if ($this->arrConfig['dbPconnect'])
 		{
-			$this->resConnection = @sybase_pconnect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @sybase_pconnect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbCharset']);
 		}
 		else
 		{
-			$this->resConnection = @sybase_connect($strHost, $GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @sybase_connect($strHost, $this->arrConfig['dbUser'], $this->arrConfig['dbPass'], $this->arrConfig['dbCharset']);
 		}
 
 		if (is_resource($this->resConnection))
 		{
-			@sybase_select_db($GLOBALS['TL_CONFIG']['dbDatabase']);
+			@sybase_select_db($this->arrConfig['dbDatabase']);
 		}
 	}
 

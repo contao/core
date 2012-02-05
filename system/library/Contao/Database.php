@@ -46,10 +46,16 @@ abstract class Database
 {
 
 	/**
-	 * Current object instance (Singleton)
-	 * @var Database
+	 * Current object instances (Singletons)
+	 * @var array
 	 */
-	protected static $objInstance;
+	protected static $arrInstances;
+	
+	/**
+	 * Connection config
+	 * @var array
+	 */
+	protected $arrConfig;
 
 	/**
 	 * Connection ID
@@ -74,8 +80,10 @@ abstract class Database
 	 * Load the database configuration file and connect to the database
 	 * @throws Exception
 	 */
-	protected function __construct()
+	protected function __construct(array $arrConfig)
 	{
+		$this->arrConfig = $arrConfig;
+		
 		$this->connect();
 
 		if (!is_resource($this->resConnection) && !is_object($this->resConnection))
@@ -90,7 +98,7 @@ abstract class Database
 	 */
 	public function __destruct()
 	{
-		if (!$GLOBALS['TL_CONFIG']['dbPconnect'])
+		if (!$this->arrConfig['dbPconnect'])
 		{
 			$this->disconnect();
 		}
@@ -124,15 +132,24 @@ abstract class Database
 	 * @return Database
 	 * @throws Exception
 	 */
-	public static function getInstance()
+	public static function getInstance($strKey='core', array $arrConfig=null)
 	{
-		if (!is_object(static::$objInstance))
+		if (!is_object(static::$arrInstances[$strKey]))
 		{
-			$strClass = '\\Database_' . ucfirst(strtolower($GLOBALS['TL_CONFIG']['dbDriver']));
-			static::$objInstance = new $strClass();
+			if ($arrConfig === null)
+			{
+				$arrConfig = $GLOBALS['TL_CONFIG'];
+			}
+			else
+			{
+				$arrConfig = array_merge($GLOBALS['TL_CONFIG'], $arrConfig);
+			}
+
+			$strClass = '\\Database_' . ucfirst(strtolower($arrConfig['dbDriver']));
+			static::$arrInstances[$strKey] = new $strClass($arrConfig);
 		}
 
-		return static::$objInstance;
+		return static::$arrInstances[$strKey];
 	}
 
 
@@ -210,7 +227,7 @@ abstract class Database
 	{
 		if ($strDatabase === null)
 		{
-			$strDatabase = $GLOBALS['TL_CONFIG']['dbDatabase'];
+			$strDatabase = $this->arrConfig['dbDatabase'];
 		}
 
 		if (!$blnNoCache && isset($this->arrCache[$strDatabase]))

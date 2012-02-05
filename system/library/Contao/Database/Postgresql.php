@@ -61,16 +61,16 @@ class Database_Postgresql extends \Database
 	/**
 	 * Connect to the database server and select the database
 	 */
-	protected function connect()
+	protected function connect(array $arrConfig)
 	{
 		$strConnection = sprintf('host=%s port=%s user=%s password=%s dbname=%s',
-								$GLOBALS['TL_CONFIG']['dbHost'],
-								$GLOBALS['TL_CONFIG']['dbPort'],
-								$GLOBALS['TL_CONFIG']['dbUser'],
-								$GLOBALS['TL_CONFIG']['dbPass'],
-								$GLOBALS['TL_CONFIG']['dbDatabase']);
+								$arrConfig['dbHost'],
+								$arrConfig['dbPort'],
+								$arrConfig['dbUser'],
+								$arrConfig['dbPass'],
+								$arrConfig['dbDatabase']);
 
-		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		if ($arrConfig['dbPconnect'])
 		{
 			$this->resConnection = @pg_pconnect($strConnection);
 		}
@@ -163,7 +163,7 @@ class Database_Postgresql extends \Database
 	 */
 	protected function set_database($strDatabase)
 	{
-		$GLOBALS['TL_CONFIG']['dbDatabase'] = $strDatabase;
+		$this->arrConfig['dbDatabase'] = $strDatabase;
 		return $this->connect();
 	}
 
