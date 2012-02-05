@@ -440,6 +440,17 @@ class String
 
 		return $strString;
 	}
+
+
+	/**
+	 * Validate an e-mail address
+	 * @param string
+	 * @return boolean
+	 */
+	public static function isValidEmailAddress($strEmail)
+	{
+		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail);
+	}
 }
 
 ?>

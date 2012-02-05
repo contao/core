@@ -898,13 +898,14 @@ abstract class System
 
 
 	/**
-	 * Validate an e-mail address
-	 * @param string
-	 * @return boolean
+	 * Compatibility with Contao 2
+	 * @deprecated
+	 * @see String::isValidEmailAddress()
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail);
+		trigger_error(__METHOD__ . '() is deprecated in Contao 3. Please use String::isValidEmailAddress() instead.', E_USER_NOTICE);
+		return String::isValidEmailAddress($strEmail);
 	}
 
 
