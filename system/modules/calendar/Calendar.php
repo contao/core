@@ -311,7 +311,6 @@ class Calendar extends \Frontend
 		}
 
 		global $objPage;
-		$this->import('String');
 
 		$intKey = date('Ymd', $intStart);
 		$span = self::calculateSpan($intStart, $intEnd);
@@ -365,11 +364,11 @@ class Calendar extends \Frontend
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objEvent->teaser = $this->String->toXhtml($objEvent->teaser);
+			$objEvent->teaser = String::toXhtml($objEvent->teaser);
 		}
 		else
 		{
-			$objEvent->teaser = $this->String->toHtml5($objEvent->teaser);
+			$objEvent->teaser = String::toHtml5($objEvent->teaser);
 		}
 
 		$arrEvent = array

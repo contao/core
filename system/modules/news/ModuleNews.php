@@ -108,7 +108,6 @@ abstract class ModuleNews extends \Module
 		}
 
 		global $objPage;
-		$this->import('String');
 
 		$arrArticles = array();
 		$count = 0;
@@ -145,14 +144,14 @@ abstract class ModuleNews extends \Module
 			{
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objArticles->teaser = $this->String->toXhtml($objArticles->teaser);
+					$objArticles->teaser = String::toXhtml($objArticles->teaser);
 				}
 				else
 				{
-					$objArticles->teaser = $this->String->toHtml5($objArticles->teaser);
+					$objArticles->teaser = String::toHtml5($objArticles->teaser);
 				}
 
-				$objTemplate->teaser = $this->String->encodeEmail($objArticles->teaser);
+				$objTemplate->teaser = String::encodeEmail($objArticles->teaser);
 			}
 
 			// Display the "read more" button for external/article links
@@ -167,14 +166,14 @@ abstract class ModuleNews extends \Module
 				// Clean the RTE output
 				if ($objPage->outputFormat == 'xhtml')
 				{
-					$objArticles->text = $this->String->toXhtml($objArticles->text);
+					$objArticles->text = String::toXhtml($objArticles->text);
 				}
 				else
 				{
-					$objArticles->text = $this->String->toHtml5($objArticles->text);
+					$objArticles->text = String::toHtml5($objArticles->text);
 				}
 
-				$objTemplate->text = $this->String->encodeEmail($objArticles->text);
+				$objTemplate->text = String::encodeEmail($objArticles->text);
 			}
 
 			$arrMeta = $this->getMetaFields($objArticles);
@@ -297,11 +296,9 @@ abstract class ModuleNews extends \Module
 		{
 			// Link to external page
 			case 'external':
-				$this->import('String');
-
 				if (substr($objItem->url, 0, 7) == 'mailto:')
 				{
-					self::$arrUrlCache[$strCacheKey] = $this->String->encodeEmail($objItem->url);
+					self::$arrUrlCache[$strCacheKey] = String::encodeEmail($objItem->url);
 				}
 				else
 				{
@@ -378,8 +375,7 @@ abstract class ModuleNews extends \Module
 		// Encode e-mail addresses
 		if (substr($objArticle->url, 0, 7) == 'mailto:')
 		{
-			$this->import('String');
-			$objArticle->url = $this->String->encodeEmail($objArticle->url);
+			$objArticle->url = String::encodeEmail($objArticle->url);
 		}
 
 		// Ampersand URIs

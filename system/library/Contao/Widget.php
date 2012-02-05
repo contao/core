@@ -748,7 +748,7 @@ abstract class Widget extends Controller
 				case 'email':
 					$varInput = $this->idnaEncodeEmail($varInput);
 
-					if (!$this->isValidEmailAddress($varInput))
+					if (!String::isValidEmailAddress($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
 					}
@@ -766,7 +766,7 @@ abstract class Widget extends Controller
 					{
 						$strEmail = $this->idnaEncodeEmail($strEmail);
 
-						if (!$this->isValidEmailAddress($strEmail))
+						if (!String::isValidEmailAddress($strEmail))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['emails'], $this->strLabel));
 							break;

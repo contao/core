@@ -97,20 +97,19 @@ class ContentAccordion extends \ContentElement
 		{
 			global $objPage;
 
-			$this->import('String');
 			$this->Template->text = $this->text;
 
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$this->Template->text = $this->String->toXhtml($this->Template->text);
+				$this->Template->text = String::toXhtml($this->Template->text);
 			}
 			else
 			{
-				$this->Template->text = $this->String->toHtml5($this->Template->text);
+				$this->Template->text = String::toHtml5($this->Template->text);
 			}
 
-			$this->Template->text = $this->String->encodeEmail($this->Template->text);
+			$this->Template->text = String::encodeEmail($this->Template->text);
 			$this->Template->addImage = false;
 
 			// Add image

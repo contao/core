@@ -58,11 +58,10 @@ class ContentHyperlink extends \ContentElement
 	protected function compile()
 	{
 		global $objPage;
-		$this->import('String');
 
 		if (substr($this->url, 0, 7) == 'mailto:')
 		{
-			$this->url = $this->String->encodeEmail($this->url);
+			$this->url = String::encodeEmail($this->url);
 		}
 		else
 		{

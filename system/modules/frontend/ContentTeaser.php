@@ -91,7 +91,6 @@ class ContentTeaser extends \ContentElement
 	protected function compile()
 	{
 		global $objPage;
-		$this->import('String');
 
 		$link = '/articles/';
 		$objArticle = $this->objArticle;
@@ -107,11 +106,11 @@ class ContentTeaser extends \ContentElement
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+			$objArticle->teaser = String::toXhtml($objArticle->teaser);
 		}
 		else
 		{
-			$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
+			$objArticle->teaser = String::toHtml5($objArticle->teaser);
 		}
 
 		$this->Template->headline = $objArticle->title;

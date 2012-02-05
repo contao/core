@@ -46,19 +46,14 @@ abstract class Controller extends \System
 {
 
 	/**
-	 * Return the current theme as string
-	 * @return string
+	 * Backward compatiblity with Contao 2
+	 * @deprecated
+	 * @see Backend::getTheme()
 	 */
 	protected function getTheme()
 	{
-		$theme = $GLOBALS['TL_CONFIG']['backendTheme'];
-
-		if ($theme != '' && $theme != 'default' && is_dir(TL_ROOT . '/system/themes/' . $theme))
-		{
-			return $theme;
-		}
-
-		return 'default';
+		trigger_error(__METHOD__ . '() is deprecated in Contao 3. Please use Backend::getTheme() instead.', E_USER_NOTICE);
+		return Backend::getTheme();
 	}
 
 
@@ -708,25 +703,14 @@ abstract class Controller extends \System
 
 
 	/**
-	 * Return all back end themes as array
-	 * @return array
+	 * Backward compatiblity with Contao 2
+	 * @deprecated
+	 * @see Backend::getThemes()
 	 */
 	public function getBackendThemes()
 	{
-		$arrReturn = array();
-		$arrThemes = scan(TL_ROOT . '/system/themes');
-
-		foreach ($arrThemes as $strTheme)
-		{
-			if (strncmp($strTheme, '.', 1) === 0 || !is_dir(TL_ROOT . '/system/themes/' . $strTheme))
-			{
-				continue;
-			}
-
-			$arrReturn[$strTheme] = $strTheme;
-		}
-
-		return $arrReturn;
+		trigger_error(__METHOD__ . '() is deprecated in Contao 3. Please use Backend::getThemes() instead.', E_USER_NOTICE);
+		return Backend::getThemes();
 	}
 
 
@@ -1367,8 +1351,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$this->import('String');
-					$strEmail = $this->String->encodeEmail($elements[1]);
+					$strEmail = String::encodeEmail($elements[1]);
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1793,15 +1776,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = String::toXhtml($this->replaceInsertTags($objTeaser->teaser));
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = String::toHtml5($this->replaceInsertTags($objTeaser->teaser));
 						}
 					}
 					break;
@@ -1812,15 +1793,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = String::toXhtml($objTeaser->teaser);
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = String::toHtml5($objTeaser->teaser);
 						}
 					}
 					break;
@@ -1831,15 +1810,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = String::toXhtml($objTeaser->teaser);
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = String::toHtml5($objTeaser->teaser);
 						}
 					}
 					break;
@@ -2097,10 +2074,8 @@ abstract class Controller extends \System
 					// Take arguments
 					if (strpos($elements[1], '?') !== false)
 					{
-						$this->import('String');
-
 						$arrChunks = explode('?', urldecode($elements[1]), 2);
-						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = String::decodeEntities($arrChunks[1]);
 						$strSource = str_replace('[&]', '&', $strSource);
 						$arrParams = explode('&', $strSource);
 
@@ -2196,10 +2171,8 @@ abstract class Controller extends \System
 					// Take arguments and add them to the $_GET array
 					if (strpos($elements[1], '?') !== false)
 					{
-						$this->import('String');
-
 						$arrChunks = explode('?', urldecode($elements[1]));
-						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = String::decodeEntities($arrChunks[1]);
 						$strSource = str_replace('[&]', '&', $strSource);
 						$arrParams = explode('&', $strSource);
 
