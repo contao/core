@@ -231,8 +231,8 @@ class ModuleSubscribe extends \Module
 
 		$varInput = $this->idnaEncodeEmail($this->Input->post('email', true));
 
-		// Validate the e-mail address
-		if (!$this->isValidEmailAddress($varInput))
+		// Validate e-mail address
+		if (!String::isValidEmailAddress($varInput))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
 			$this->reload();

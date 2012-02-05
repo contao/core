@@ -1351,8 +1351,7 @@ abstract class Controller extends \System
 						break;
 					}
 
-					$this->import('String');
-					$strEmail = $this->String->encodeEmail($elements[1]);
+					$strEmail = String::encodeEmail($elements[1]);
 
 					// Replace the tag
 					switch (strtolower($elements[0]))
@@ -1777,15 +1776,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = String::toXhtml($this->replaceInsertTags($objTeaser->teaser));
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($this->replaceInsertTags($objTeaser->teaser));
+							$arrCache[$strTag] = String::toHtml5($this->replaceInsertTags($objTeaser->teaser));
 						}
 					}
 					break;
@@ -1796,15 +1793,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = String::toXhtml($objTeaser->teaser);
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = String::toHtml5($objTeaser->teaser);
 						}
 					}
 					break;
@@ -1815,15 +1810,13 @@ abstract class Controller extends \System
 
 					if ($objTeaser !== null)
 					{
-						$this->import('String');
-
 						if ($objPage->outputFormat == 'xhtml')
 						{
-							$arrCache[$strTag] = $this->String->toXhtml($objTeaser->teaser);
+							$arrCache[$strTag] = String::toXhtml($objTeaser->teaser);
 						}
 						else
 						{
-							$arrCache[$strTag] = $this->String->toHtml5($objTeaser->teaser);
+							$arrCache[$strTag] = String::toHtml5($objTeaser->teaser);
 						}
 					}
 					break;
@@ -2081,10 +2074,8 @@ abstract class Controller extends \System
 					// Take arguments
 					if (strpos($elements[1], '?') !== false)
 					{
-						$this->import('String');
-
 						$arrChunks = explode('?', urldecode($elements[1]), 2);
-						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = String::decodeEntities($arrChunks[1]);
 						$strSource = str_replace('[&]', '&', $strSource);
 						$arrParams = explode('&', $strSource);
 
@@ -2180,10 +2171,8 @@ abstract class Controller extends \System
 					// Take arguments and add them to the $_GET array
 					if (strpos($elements[1], '?') !== false)
 					{
-						$this->import('String');
-
 						$arrChunks = explode('?', urldecode($elements[1]));
-						$strSource = $this->String->decodeEntities($arrChunks[1]);
+						$strSource = String::decodeEntities($arrChunks[1]);
 						$strSource = str_replace('[&]', '&', $strSource);
 						$arrParams = explode('&', $strSource);
 

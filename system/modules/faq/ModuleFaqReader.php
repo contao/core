@@ -138,21 +138,20 @@ class ModuleFaqReader extends \Module
 			$objPage->description = $this->prepareMetaDescription($objFaq->question); 
 		}
 
-		$this->import('String');
 		$this->Template->question = $objFaq->question;
 		$this->Template->answer = $objFaq->answer;
 
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->Template->answer = $this->String->toXhtml($this->Template->answer);
+			$this->Template->answer = String::toXhtml($this->Template->answer);
 		}
 		else
 		{
-			$this->Template->answer = $this->String->toHtml5($this->Template->answer);
+			$this->Template->answer = String::toHtml5($this->Template->answer);
 		}
 
-		$this->Template->answer = $this->String->encodeEmail($this->Template->answer);
+		$this->Template->answer = String::encodeEmail($this->Template->answer);
 		$this->Template->addImage = false;
 
 		// Add image

@@ -108,14 +108,14 @@ class ModuleFaqPage extends Module
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objTemp->answer = $this->String->toXhtml($objTemp->answer);
+				$objTemp->answer = String::toXhtml($objTemp->answer);
 			}
 			else
 			{
-				$objTemp->answer = $this->String->toHtml5($objTemp->answer);
+				$objTemp->answer = String::toHtml5($objTemp->answer);
 			}
 
-			$objTemp->answer = $this->String->encodeEmail($objTemp->answer);
+			$objTemp->answer = String::encodeEmail($objTemp->answer);
 			$objTemp->addImage = false;
 
 			// Add image

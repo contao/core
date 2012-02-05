@@ -58,7 +58,6 @@ class InstallTool extends Backend
 	 */
 	public function __construct()
 	{
-		$this->import('String');
 		$this->import('Config');
 		$this->import('Input');
 		$this->import('Environment');

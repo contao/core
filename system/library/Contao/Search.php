@@ -80,7 +80,6 @@ class Search extends \System
 	 */
 	public function indexPage($arrData)
 	{
-		$this->import('String');
 		$this->import('Database');
 
 		$arrSet['url'] = $arrData['url'];
@@ -153,13 +152,13 @@ class Search extends \System
 		// Get description
 		if (preg_match('/<meta[^>]+name="description"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['description'] = trim(preg_replace('/ +/', ' ', $this->String->decodeEntities($tags[1])));
+			$arrData['description'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($tags[1])));
 		}
 
 		// Get keywords
 		if (preg_match('/<meta[^>]+name="keywords"[^>]+content="([^"]*)"[^>]*>/i', $strHead, $tags))
 		{
-			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', $this->String->decodeEntities($tags[1])));
+			$arrData['keywords'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($tags[1])));
 		}
 
 		// Read title and alt attributes
@@ -174,7 +173,7 @@ class Search extends \System
 
 		// Put everything together
 		$arrSet['text'] = $arrData['title'] . ' ' . $arrData['description'] . ' ' . $strBody . ' ' . $arrData['keywords'];
-		$arrSet['text'] = trim(preg_replace('/ +/', ' ', $this->String->decodeEntities($arrSet['text'])));
+		$arrSet['text'] = trim(preg_replace('/ +/', ' ', String::decodeEntities($arrSet['text'])));
 
 		$arrSet['tstamp'] = time();
 
@@ -305,12 +304,11 @@ class Search extends \System
 	 */
 	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=null, $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
-		$this->import('String');
 		$this->import('Database');
 
 		// Clean keywords
 		$strKeywords = utf8_strtolower($strKeywords);
-		$strKeywords = $this->String->decodeEntities($strKeywords);
+		$strKeywords = String::decodeEntities($strKeywords);
 
 		if (function_exists('mb_eregi_replace'))
 		{

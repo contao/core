@@ -118,7 +118,7 @@ class Newsletter extends \Backend
 			if (isset($_GET['preview']))
 			{
 				// Check the e-mail address
-				if (!$this->isValidEmailAddress($this->Input->get('recipient', true)))
+				if (!String::isValidEmailAddress($this->Input->get('recipient', true)))
 				{
 					$_SESSION['TL_PREVIEW_MAIL_ERROR'] = true;
 					$this->redirect($referer);
@@ -468,7 +468,7 @@ class Newsletter extends \Backend
 				foreach ($arrRecipients as $strRecipient)
 				{
 					// Skip invalid entries
-					if (!$this->isValidEmailAddress($strRecipient))
+					if (!String::isValidEmailAddress($strRecipient))
 					{
 						$this->log('Recipient address "' . $strRecipient . '" seems to be invalid and has been skipped', 'Newsletter importRecipients()', TL_ERROR);
 

@@ -132,7 +132,6 @@ class Email extends \System
 	{
 		parent::__construct();
 
-		$this->import('String');
 		$this->strCharset = $GLOBALS['TL_CONFIG']['characterSet'];
 
 		// Instantiate mailer
@@ -185,7 +184,7 @@ class Email extends \System
 				break;
 
 			case 'text':
-				$this->strText = $this->String->decodeEntities($varValue);
+				$this->strText = String::decodeEntities($varValue);
 				break;
 
 			case 'html':
@@ -528,7 +527,7 @@ class Email extends \System
 		{
 			if (!is_array($varRecipients))
 			{
-				$varRecipients = $this->String->splitCsv($varRecipients);
+				$varRecipients = String::splitCsv($varRecipients);
 			}
 
 			// Support friendly name addresses and internationalized domain names
