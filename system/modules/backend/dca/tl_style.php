@@ -715,7 +715,7 @@ class tl_style extends Backend
   new MooRainbow("moo_'.$dc->field.'", {
     id:"ctrl_' . $dc->field . '_0",
     startColor:((cl = $("ctrl_' . $dc->field . '_0").value.hexToRgb(true)) ? cl : [255, 0, 0]),
-    imgPath:"plugins/colorpicker/images/",
+    imgPath:"plugins/mootools/colorpicker/images/",
     onComplete: function(color) {
       $("ctrl_' . $dc->field . '_0").value = color.hex.replace("#", "");
     }

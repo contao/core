@@ -6,11 +6,11 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/colorpicker/css/mooRainbow.css');
-  $objCombiner->add('plugins/chosen/chosen.css');
-  $objCombiner->add('plugins/contao/stylect/css/stylect.css');
-  $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
-  $objCombiner->add('plugins/datepicker/dashboard.css', DATEPICKER);
+  $objCombiner->add('plugins/mootools/colorpicker/css/mooRainbow.css');
+  $objCombiner->add('plugins/mootools/chosen/chosen.css');
+  $objCombiner->add('plugins/mootools/stylect/css/stylect.css');
+  $objCombiner->add('plugins/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
+  $objCombiner->add('plugins/mootools/datepicker/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
   echo $objCombiner->getCombinedFile();
@@ -20,14 +20,14 @@
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
-  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
-  $objCombiner->add('plugins/colorpicker/js/mooRainbow.js');
-  $objCombiner->add('plugins/chosen/chosen.js');
-  $objCombiner->add('plugins/contao/stylect/js/stylect.js');
-  $objCombiner->add('plugins/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
-  $objCombiner->add('plugins/datepicker/datepicker.js', DATEPICKER);
-  $objCombiner->add('plugins/contao/Request.Contao.js');
+  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+  $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/mootools/colorpicker/js/mooRainbow.js');
+  $objCombiner->add('plugins/mootools/chosen/chosen.js');
+  $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
+  $objCombiner->add('plugins/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
+  $objCombiner->add('plugins/mootools/datepicker/datepicker.js', DATEPICKER);
+  $objCombiner->add('plugins/mootools/request/Request.Contao.js');
   $objCombiner->add('system/modules/backend/html/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();

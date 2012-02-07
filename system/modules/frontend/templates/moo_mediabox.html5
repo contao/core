@@ -1,11 +1,11 @@
 <?php
 
 // Add mediabox style sheet
-$GLOBALS['TL_CSS'][] = 'plugins/mediabox/'. MEDIABOX .'/css/mediaboxAdvBlack21.css||static';
+$GLOBALS['TL_CSS'][] = 'plugins/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdvBlack21.css||static';
 
 ?>
 
-<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
+<script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
 <script>
 Mediabox.scanPage = function() {
   var links = $$('a').filter(function(el) {

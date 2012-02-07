@@ -1,23 +1,21 @@
 /*
-	mediaboxAdvanced v1.2.5 - The ultimate extension of Slimbox and Mediabox; an all-media script
-	updated 2010.08.11
-	(c) 2007-2010 John Einselen <http://iaian7.com>
-		based on
+	mediaboxAdvanced v1.4.6 - The ultimate extension of Slimbox and Mediabox; an all-media script
+	updated 2011.2.19
+		(c) 2007-2011 John Einselen <http://iaian7.com>
 	based on Slimbox v1.64 - The ultimate lightweight Lightbox clone
-	(c) 2007-2008 Christophe Beyls <http://www.digitalia.be>
+		(c) 2007-2008 Christophe Beyls <http://www.digitalia.be>
 	MIT-style license.
-	Customized for Contao Open Source CMS.
 */
 
 var Mediabox;
 
 (function() {
 	// Global variables, accessible to Mediabox only
-	var options, images, activeImage, prevImage, nextImage, top, mTop, left, mLeft, winWidth, winHeight, fx, preload, preloadPrev = new Image(), preloadNext = new Image(), foxfix = false, iefix = false,
+	var options, images, activeImage, prevImage, nextImage, top, mTop, left, mLeft, winWidth, winHeight, fx, preload, preloadPrev = new Image(), preloadNext = new Image(),
 	// DOM elements
-	overlay, center, image, bottom, captionSplit, title, caption, prevLink, number, nextLink,
+	overlay, center, image, bottom, captionSplit, title, caption, number, prevLink, nextLink,
 	// Mediabox specific vars
-	URL, WH, WHL, elrel, mediaWidth, mediaHeight, mediaType = "none", mediaSplit, mediaId = "mediaBox", mediaFmt;
+	URL, WH, WHL, elrel, mediaWidth, mediaHeight, mediaType = "none", mediaSplit, mediaId = "mediaBox", mediaFmt, margin;
 
 	/*	Initialization	*/
 
@@ -30,9 +28,9 @@ var Mediabox;
 			]).setStyle("display", "none")
 		);
 
-		image = new Element("div", {id: "mbImage"}).injectInside(center);
-		bottom = new Element("div", {id: "mbBottom"}).injectInside(center).adopt(
-			new Element("a", {id: "mbCloseLink", href: "#"}).addEvent("click", close),
+		image = new Element("div", {id: "mbImage"}).inject(center, "inside");
+		bottom = new Element("div", {id: "mbBottom"}).inject(center, "inside").adopt(
+			closeLink = new Element("a", {id: "mbCloseLink", href: "#"}).addEvent("click", close),
 			nextLink = new Element("a", {id: "mbNextLink", href: "#"}).addEvent("click", next),
 			prevLink = new Element("a", {id: "mbPrevLink", href: "#"}).addEvent("click", previous),
 			title = new Element("div", {id: "mbTitle"}),
@@ -55,32 +53,47 @@ var Mediabox;
 		},
 
 		open: function(_images, startImage, _options) {
-			options = $extend({
-				loop: false,					// Allows to navigate between first and last images
+			options = {
+//			Text options (translate as needed)
+				buttonText: ['<big>&laquo;</big>','<big>&raquo;</big>','<big>&times;</big>'],		// Set "previous", "next", and "close" button content (HTML code should be written as entity codes or properly escaped)
+//				buttonText: ['<big>«</big>','<big>»</big>','<big>×</big>'],
+//				buttonText: ['<b>P</b>rev','<b>N</b>ext','<b>C</b>lose'],
+				counterText: '({x} of {y})',	// Translate or change as you wish, {x} = current item number, {y} = total gallery length
+				linkText: '<a href="{x}" target="_new">{x}</a><br/>open in a new tab</div>',	// Text shown on iOS devices for non-image links
+				flashText: '<b>Error</b><br/>Adobe Flash is either not installed or not up to date, please visit <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" title="Get Flash" target="_new">Adobe.com</a> to download the free player.',	// Text shown if Flash is not installed.
+//			General overlay options
+				center: true,					// Set to false for use with custom CSS layouts
+				loop: false,					// Navigate from last to first elements in a gallery
 				keyboard: true,					// Enables keyboard control; escape key, left arrow, and right arrow
-				alpha: true,					// Adds 'x', 'c', 'p', and 'n' when keyboard control is also set to true
-				stopKey: false,					// Stops all default keyboard actions while overlay is open (such as up/down arrows)
-													// Does not apply to iFrame content, does not affect mouse scrolling
+				keyboardAlpha: false,			// Adds 'x', 'c', 'p', and 'n' when keyboard control is also set to true
+				keyboardStop: false,			// Stops all default keyboard actions while overlay is open (such as up/down arrows)
+												// Does not apply to iFrame content, does not affect mouse scrolling
 				overlayOpacity: 0.7,			// 1 is opaque, 0 is completely transparent (change the color in the CSS file)
 				resizeOpening: true,			// Determines if box opens small and grows (true) or starts at larger size (false)
 				resizeDuration: 240,			// Duration of each of the box resize animations (in milliseconds)
-				resizeTransition: false,		// Mootools transition effect (false leaves it at the default)
 				initialWidth: 320,				// Initial width of the box (in pixels)
 				initialHeight: 180,				// Initial height of the box (in pixels)
 				defaultWidth: 640,				// Default width of the box (in pixels) for undefined media (MP4, FLV, etc.)
 				defaultHeight: 360,				// Default height of the box (in pixels) for undefined media (MP4, FLV, etc.)
 				showCaption: true,				// Display the title and caption, true / false
 				showCounter: true,				// If true, a counter will only be shown if there is more than 1 image to display
-				counterText: '({x} of {y})',	// Translate or change as you wish
+//			iOS device options
+//				iOSenable: false,				// When set to false, disables overlay entirely (links open in new tab)
+												// IMAGES and INLINE content will display normally,
+												// while ALL OTHER content will display a direct link (this is required so as to not break mixed-media galleries)
+				iOShtml: true,					// If set to true, HTML content is displayed normally as well (useful if your HTML content is minimal and UI oriented instead of external sites)
 //			Image options
-				imgBackground: false,			// Embed images as CSS background (true) or <img> tag (false)
-												// ...a CSS background is naturally non-clickable, preventing downloads
-												// ...the IMG tag allows automatic scaling for smaller screens, minimal no-click code is included but does not work in Opera
-				imgPadding: 70,					// Clearance necessary for images larger than the window size (only used when imgBackground is false)
-												// Change this number only if the CSS style is significantly divergent from the original, and requires different sizes
+				imgBackground: false,		// Embed images as CSS background (true) or <img> tag (false)
+											// CSS background is naturally non-clickable, preventing downloads
+											// IMG tag allows automatic scaling for smaller screens
+											// (all images have no-click code applied, albeit not Opera compatible. To remove, comment lines 212 and 822)
+				imgPadding: 100,			// Clearance necessary for images larger than the window size (only used when imgBackground is false)
+											// Change this number only if the CSS style is significantly divergent from the original, and requires different sizes
 //			Inline options
-//				overflow: 'auto',				// Sets CSS overflow of the overflow to allow for
+				overflow: 'auto',			// If set, overides CSS settings for inline content only, set to "false" to leave CSS settings intact.
+				inlineClone: false,			// Clones the inline element instead of moving it from the page to the overlay
 //			Global media options
+				html5: 'true',				// HTML5 settings for YouTube and Vimeo, false = off, true = on
 				scriptaccess: 'true',		// Allow script access to flash files
 				fullscreen: 'true',			// Use fullscreen
 				fullscreenNum: '1',			// 1 = true
@@ -94,14 +107,14 @@ var Mediabox;
 //			NonverBlaster
 				useNB: true,				// use NonverBlaster (true) or JW Media Player (false) for .flv and .mp4 files
 				// PATCH: set path to plugins directory
-				playerpath: 'plugins/mediabox/1.2.5/NonverBlaster.swf',	// Path to NonverBlaster.swf
+				playerpath: 'plugins/mootools/mediabox/1.4.6/NonverBlaster.swf', // Path to NonverBlaster.swf
 				// PATCH EOF
 				controlColor: '0xFFFFFF',	// set the controlbar color
 				controlBackColor: '0x000000',	// set the controlbar color
 				showTimecode: 'false',		// turn timecode display off or on
 //			JW Media Player settings and options
 				// PATCH: set path to plugins directory
-				JWplayerpath: 'plugins/mediabox/1.2.5/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
+				JWplayerpath: 'plugins/mootools/mediabox/1.4.6/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
 				// PATCH EOF
 				backcolor:	'000000',		// Base color for the controller, color name / hex value (0x000000)
 				frontcolor: '999999',		// Text and button color for the controller, color name / hex value (0x000000)
@@ -135,24 +148,29 @@ var Mediabox;
 				vmByline: '1',				// Show byline
 				vmPortrait: '1',			// Show author portrait
 				vmColor: 'ffffff'			// Custom controller colors, hex value minus the # sign, defult is 5ca0b5
-			}, _options || {});
+			};
 
-			if ((Browser.Engine.gecko) && (Browser.Engine.version<19)) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
-				foxfix = true;
+			prevLink.set('html', options.buttonText[0]);
+			nextLink.set('html', options.buttonText[1]);
+			closeLink.set('html', options.buttonText[2]);
+
+			margin = center.getStyle('padding-left').toInt()+image.getStyle('margin-left').toInt()+image.getStyle('padding-left').toInt();
+
+			if (Browser.firefox2) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
 				options.overlayOpacity = 1;
-				overlay.className = 'mbOverlayFF';
+				overlay.className = 'mbOverlayOpaque';
 			}
-/*
-			if ((Browser.Engine.gecko)) {	// Fixes Firefox 2 and Camino 1.6 incompatibility with opacity + flash
-				foxfix = true;
-				overlay.setStyle("position", "absolute");
-				if ((Browser.Engine.version<19)) {
-					options.overlayOpacity = 1;
-					overlay.className = 'mbOverlayFF';
-				}
+
+			if (Browser.Platform.ios || Browser.ie6) {
+				if (Browser.Platform.ios) options.keyboard = false;
+//				if (Browser.Platform.ios) options.overlayOpacity = 0.0;	// This helps ammeliorate the issues with CSS overlays in iOS, leaving a clickable background, but avoiding the visible issues
+				options.resizeOpening = false;
+				overlay.className = 'mbOverlayAbsolute';
+				overlay.setStyle("position", "absolute");	// Temporary stopgap for lack of CSS "position: fixed;" element positioning in iOS browsers
+				position();
 			}
-*/
-			if (typeof _images == "string") {	// The function is called for a single image, with URL and Title as first two arguments
+
+			if (typeof _images == "string") {	// Used for single images only, with URL and Title as first two arguments
 				_images = [[_images,startImage,_options]];
 				startImage = 0;
 			}
@@ -160,18 +178,12 @@ var Mediabox;
 			images = _images;
 			options.loop = options.loop && (images.length > 1);
 
-			if ((Browser.Engine.trident) && (Browser.Engine.version<5)) {	// Fixes IE 6 and earlier incompatibilities with CSS position: fixed;
-				iefix = true;
-				overlay.className = 'mbOverlayIE';
-				overlay.setStyle("position", "absolute");
-				position();
-			}
 			size();
 			setup(true);
 			top = window.getScrollTop() + (window.getHeight()/2);
 			left = window.getScrollLeft() + (window.getWidth()/2);
-			fx.resize = new Fx.Morph(center, $extend({duration: options.resizeDuration, onComplete: imageAnimate}, options.resizeTransition ? {transition: options.resizeTransition} : {}));
-			center.setStyles({top: top, left: left, width: options.initialWidth, height: options.initialHeight, marginTop: -(options.initialHeight/2), marginLeft: -(options.initialWidth/2), display: ""});
+			fx.resize = new Fx.Morph(center, {duration: options.resizeDuration, onComplete: imageAnimate});
+/****/		center.setStyles({top: top, left: left, width: options.initialWidth, height: options.initialHeight, marginTop: -(options.initialHeight/2)-margin, marginLeft: -(options.initialWidth/2)-margin, display: ""});
 			fx.overlay.start(options.overlayOpacity);
 			return changeImage(startImage);
 		}
@@ -198,7 +210,7 @@ var Mediabox;
 			linkMapper = linkMapper || function(el) {
 				elrel = el.rel.split(/[\[\]]/);
 				elrel = elrel[1];
-				return [el.href, el.title, elrel];
+				return [el.get('href'), el.title, elrel];	// thanks to Dušan Medlín for figuring out the URL bug!
 			};
 
 			linksFilter = linksFilter || function() {
@@ -247,9 +259,9 @@ var Mediabox;
 
 	function setup(open) {
 		// Hides on-page objects and embeds while the overlay is open, nessesary to counteract Firefox stupidity
-		if (Browser.Engine.gecko) {
+		if (Browser.firefox) {
 			["object", window.ie ? "select" : "embed"].forEach(function(tag) {
-				Array.forEach(document.getElementsByTagName(tag), function(el) {
+				Array.forEach($$(tag), function(el) {
 					if (open) el._mediabox = el.style.visibility;
 					el.style.visibility = open ? "hidden" : el._mediabox;
 				});
@@ -259,13 +271,13 @@ var Mediabox;
 		overlay.style.display = open ? "" : "none";
 
 		var fn = open ? "addEvent" : "removeEvent";
-		if (iefix) window[fn]("scroll", position);
+		if (Browser.Platform.ios || Browser.ie6) window[fn]("scroll", position);	// scroll position is updated only after movement has stopped
 		window[fn]("resize", size);
 		if (options.keyboard) document[fn]("keydown", keyDown);
 	}
 
 	function keyDown(event) {
-		if (options.alpha) {
+		if (options.keyboardAlpha) {
 			switch(event.code) {
 				case 27:	// Esc
 				case 88:	// 'x'
@@ -292,7 +304,7 @@ var Mediabox;
 					next();
 			}
 		}
-		if (options.stopKey) { return false; };
+		if (options.keyboardStop) { return false; };
 	}
 
 	function previous() {
@@ -305,6 +317,11 @@ var Mediabox;
 
 	function changeImage(imageIndex) {
 		if (imageIndex >= 0) {
+//			if (Browser.Platform.ios && !options.iOSenable) {
+//				window.open(images[imageIndex][0], "_blank");
+//				close();
+//				return false;
+//			}
 			image.set('html', '');
 			activeImage = imageIndex;
 			prevImage = ((activeImage || !options.loop) ? activeImage : images.length) - 1;
@@ -312,8 +329,10 @@ var Mediabox;
 			if (nextImage == images.length) nextImage = options.loop ? 0 : -1;
 			stop();
 			center.className = "mbLoading";
+			if (preload && mediaType == "inline" && !options.inlineClone) preload.adopt(image.getChildren());	// prevents loss of adopted data
 
-// MEDIABOX FORMATING
+	/*	mediaboxAdvanced link formatting and media support	*/
+
 			if (!images[imageIndex][2]) images[imageIndex][2] = '';	// Thanks to Leo Feyer for offering this fix
 			WH = images[imageIndex][2].split(' ');
 			WHL = WH.length;
@@ -326,8 +345,9 @@ var Mediabox;
 			}
 			URL = images[imageIndex][0];
 			// PATCH: do not encode URIs because Contao has done already
-			//URL = encodeURI(URL).replace("(","%28").replace(")","%29");
-			// PATCH EOF
+			// (seems to be in the mediabox core now)
+//			URL = encodeURI(URL).replace("(","%28").replace(")","%29");
+//			URL = encodeURI(URL).replace("(","%28").replace(")","%29").replace("%20"," ");
 			captionSplit = images[activeImage][1].split('::');
 
 // Quietube and yFrog support
@@ -342,8 +362,9 @@ var Mediabox;
 				URL = URL+":iphone";
 			}
 
-// MEDIA TYPES
-// IMAGES
+	/*	Specific Media Types	*/
+
+// GIF, JPG, PNG
 			if (URL.match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i) || mediaType == 'image') {
 				mediaType = 'img';
 				URL = URL.replace(/twitpic\.com/i, "twitpic.com/show/full");
@@ -352,10 +373,6 @@ var Mediabox;
 				preload.src = URL;
 // FLV, MP4
 			} else if (URL.match(/\.flv|\.mp4/i) || mediaType == 'video') {
-				// PATCH: use relative URLs to bypass the .htaccess protection
-				var uri = new URI(URL).toRelative();
-				if (uri != URL) URL = "../../../" + uri;
-				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
@@ -377,10 +394,6 @@ var Mediabox;
 				startEffect();
 // MP3, AAC
 			} else if (URL.match(/\.mp3|\.aac|tweetmic\.com|tmic\.fm/i) || mediaType == 'audio') {
-				// PATCH: use relative URLs to bypass the .htaccess protection
-				var uri = new URI(URL).toRelative();
-				if (uri != URL) URL = "../../../" + uri;
-				// PATCH EOF
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || "20px";
@@ -417,7 +430,7 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// Quicktime
+// MOV, M4V, M4A, MP4, AIFF, etc.
 			} else if (URL.match(/\.mov|\.m4v|\.m4a|\.aiff|\.avi|\.caf|\.dv|\.mid|\.m3u|\.mp3|\.mp2|\.mp4|\.qtz/i) || mediaType == 'qt') {
 				mediaType = 'qt';
 				mediaWidth = mediaWidth || options.defaultWidth;
@@ -426,11 +439,13 @@ var Mediabox;
 					id: 'MediaboxQT',
 					width: mediaWidth,
 					height: mediaHeight,
-					container: 'mbImage',
+//					container: 'mbImage',
 					attributes: {controller: options.controller, autoplay: options.autoplay, volume: options.volume, loop: options.medialoop, bgcolor: options.bgcolor}
 					});
 				startEffect();
-// SOCIAL SITES
+
+	/*	Social Media Sites	*/
+
 // Blip.tv
 			} else if (URL.match(/blip\.tv/i)) {
 				mediaType = 'obj';
@@ -484,7 +499,7 @@ var Mediabox;
 					});
 				startEffect();
 // Flickr
-			} else if (URL.match(/flickr\.com/i)) {
+			} else if (URL.match(/flickr\.com(?!.+\/show\/)/i)) {
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || "500px";
 				mediaHeight = mediaHeight || "375px";
@@ -633,6 +648,19 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
+// Twiturm
+			} else if (URL.match(/twiturm\.com/i)) {
+				mediaType = 'obj';
+				mediaWidth = mediaWidth || "402px";
+				mediaHeight = mediaHeight || "48px";
+				mediaSplit = URL.split('/');
+				mediaId = mediaSplit[3];
+				preload = new Swiff('http://twiturm.com/flash/twiturm_mp3.swf?playerID=0&sf='+mediaId, {
+					width: mediaWidth,
+					height: mediaHeight,
+					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
+					});
+				startEffect();
 // Twitvid
 			} else if (URL.match(/twitvid\.com/i)) {
 				mediaType = 'obj';
@@ -670,32 +698,47 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// YouTube
+// YouTube Video (now includes HTML5 option)
 			} else if (URL.match(/youtube\.com\/watch/i)) {
-				mediaType = 'obj';
 				mediaSplit = URL.split('v=');
-				mediaId = mediaSplit[1];
-				if (mediaId.match(/fmt=18/i)) {
-					mediaFmt = '&ap=%2526fmt%3D18';
-					mediaWidth = mediaWidth || "560px";
-					mediaHeight = mediaHeight || "345px";
-				} else if (mediaId.match(/fmt=22/i)) {
-					mediaFmt = '&ap=%2526fmt%3D22';
+				if (options.html5) {
+					mediaType = 'url';
 					mediaWidth = mediaWidth || "640px";
 					mediaHeight = mediaHeight || "385px";
+					mediaId = "mediaId_"+new Date().getTime();	// Safari may not update iframe content with a static id.
+					preload = new Element('iframe', {
+						'src': 'http://www.youtube.com/embed/'+mediaSplit[1],
+						'id': mediaId,
+						'width': mediaWidth,
+						'height': mediaHeight,
+						'frameborder': 0
+						});
+					startEffect();
 				} else {
-					mediaFmt = options.ytQuality;
-					mediaWidth = mediaWidth || "480px";
-					mediaHeight = mediaHeight || "295px";
+					mediaType = 'obj';
+					mediaId = mediaSplit[1];
+					if (mediaId.match(/fmt=22/i)) {
+						mediaFmt = '&ap=%2526fmt%3D22';
+						mediaWidth = mediaWidth || "640px";
+						mediaHeight = mediaHeight || "385px";
+					} else if (mediaId.match(/fmt=18/i)) {
+						mediaFmt = '&ap=%2526fmt%3D18';
+						mediaWidth = mediaWidth || "560px";
+						mediaHeight = mediaHeight || "345px";
+					} else {
+						mediaFmt = options.ytQuality;
+						mediaWidth = mediaWidth || "480px";
+						mediaHeight = mediaHeight || "295px";
+					}
+					preload = new Swiff('http://www.youtube.com/v/'+mediaId+'&autoplay='+options.autoplayNum+'&fs='+options.fullscreenNum+mediaFmt+'&border='+options.ytBorder+'&color1=0x'+options.ytColor1+'&color2=0x'+options.ytColor2+'&rel='+options.ytRel+'&showinfo='+options.ytInfo+'&showsearch='+options.ytSearch, {
+						id: mediaId,
+						width: mediaWidth,
+						height: mediaHeight,
+						params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
+						});
+					startEffect();
 				}
-				preload = new Swiff('http://www.youtube.com/v/'+mediaId+'&autoplay='+options.autoplayNum+'&fs='+options.fullscreenNum+mediaFmt+'&border='+options.ytBorder+'&color1=0x'+options.ytColor1+'&color2=0x'+options.ytColor2+'&rel='+options.ytRel+'&showinfo='+options.ytInfo+'&showsearch='+options.ytSearch, {
-					id: mediaId,
-					width: mediaWidth,
-					height: mediaHeight,
-					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					});
-				startEffect();
-// YouTube
+// YouTube Playlist
 			} else if (URL.match(/youtube\.com\/view/i)) {
 				mediaType = 'obj';
 				mediaSplit = URL.split('p=');
@@ -755,20 +798,34 @@ var Mediabox;
 					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// Vimeo
+// Vimeo (now includes HTML5 option)
 			} else if (URL.match(/vimeo\.com/i)) {
-				mediaType = 'obj';
 				mediaWidth = mediaWidth || "640px";		// site defualt: 400px
 				mediaHeight = mediaHeight || "360px";	// site defualt: 225px
 				mediaSplit = URL.split('/');
 				mediaId = mediaSplit[3];
-				preload = new Swiff('http://www.vimeo.com/moogaloop.swf?clip_id='+mediaId+'&amp;server=www.vimeo.com&amp;fullscreen='+options.fullscreenNum+'&amp;autoplay='+options.autoplayNum+'&amp;show_title='+options.vmTitle+'&amp;show_byline='+options.vmByline+'&amp;show_portrait='+options.vmPortrait+'&amp;color='+options.vmColor, {
-					id: mediaId,
-					width: mediaWidth,
-					height: mediaHeight,
-					params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
-					});
-				startEffect();
+
+				if (options.html5) {
+					mediaType = 'url';
+					mediaId = "mediaId_"+new Date().getTime();	// Safari may not update iframe content with a static id.
+					preload = new Element('iframe', {
+						'src': 'http://player.vimeo.com/video/'+mediaSplit[3]+'?portrait='+options.vmPortrait,
+						'id': mediaId,
+						'width': mediaWidth,
+						'height': mediaHeight,
+						'frameborder': 0
+						});
+					startEffect();
+				} else {
+					mediaType = 'obj';
+					preload = new Swiff('http://www.vimeo.com/moogaloop.swf?clip_id='+mediaId+'&amp;server=www.vimeo.com&amp;fullscreen='+options.fullscreenNum+'&amp;autoplay='+options.autoplayNum+'&amp;show_title='+options.vmTitle+'&amp;show_byline='+options.vmByline+'&amp;show_portrait='+options.vmPortrait+'&amp;color='+options.vmColor, {
+						id: mediaId,
+						width: mediaWidth,
+						height: mediaHeight,
+						params: {wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
+						});
+					startEffect();
+				}
 // 12seconds
 			} else if (URL.match(/12seconds\.tv/i)) {
 				mediaType = 'obj';
@@ -783,27 +840,26 @@ var Mediabox;
 					params: {flashvars: 'vid='+mediaId+'', wmode: options.wmode, bgcolor: options.bgcolor, allowscriptaccess: options.scriptaccess, allowfullscreen: options.fullscreen}
 					});
 				startEffect();
-// CONTENT TYPES
 // INLINE
 			} else if (URL.match(/\#mb_/i)) {
 				mediaType = 'inline';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
 				URLsplit = URL.split('#');
-				preload = document.id(URLsplit[1]).get('html');
+//				preload = new Element("div", {id: "mbImageInline"}).adopt(document.id(URLsplit[1]).getChildren().clone([true,true]));
+				preload = document.id(URLsplit[1]);
 				startEffect();
-// HTML
+// HTML (applies to ALL links not recognised as a specific media type)
 			} else {
 				mediaType = 'url';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
-				mediaId = "mediaId_"+new Date().getTime();	// Safari will not update iframe content with a static id.
+				mediaId = "mediaId_"+new Date().getTime();	// Safari may not update iframe content with a static id.
 				preload = new Element('iframe', {
 					'src': URL,
 					'id': mediaId,
 					'width': mediaWidth,
 					'height': mediaHeight,
-//					'allowtransparency': 'true',
 					'frameborder': 0
 					});
 				startEffect();
@@ -813,6 +869,9 @@ var Mediabox;
 	}
 
 	function startEffect() {
+//		if (Browser.Platform.ios && (mediaType == "obj" || mediaType == "qt" || mediaType == "html")) alert("this isn't gonna work");
+//		if (Browser.Platform.ios && (mediaType == "obj" || mediaType == "qt" || mediaType == "html")) mediaType = "ios";
+		(mediaType == "img")?image.addEvent("click", next):image.removeEvent("click", next);
 		if (mediaType == "img"){
 			mediaWidth = preload.width;
 			mediaHeight = preload.height;
@@ -828,13 +887,31 @@ var Mediabox;
 					mediaHeight = preload.height = parseInt((mediaWidth/preload.width)*mediaHeight);
 					preload.width = mediaWidth;
 				}
-				if (Browser.Engine.trident) preload = document.id(preload);
+				if (Browser.ie) preload = document.id(preload);
 				preload.addEvent('mousedown', function(e){ e.stop(); }).addEvent('contextmenu', function(e){ e.stop(); });
 				image.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(image);
 			}
+		} else if (mediaType == "inline") {
+//			if (options.overflow) image.setStyles({overflow: options.overflow});
+			image.setStyles({backgroundImage: "none", display: ""});
+//			preload.inject(image);
+//			image.grab(preload.get('html'));
+			(options.inlineClone)?image.grab(preload.get('html')):image.adopt(preload.getChildren());
+		} else if (mediaType == "qt") {
+			image.setStyles({backgroundImage: "none", display: ""});
+			preload.inject(image);
+//			preload;
+		} else if (mediaType == "ios" || Browser.Platform.ios) {
+			image.setStyles({backgroundImage: "none", display: ""});
+			image.set('html', options.linkText.replace(/{x}/gi, URL));
+			mediaWidth = options.DefaultWidth;
+			mediaHeight = options.DefaultHeight;
+		} else if (mediaType == "url") {
+			image.setStyles({backgroundImage: "none", display: ""});
+			preload.inject(image);
 		} else if (mediaType == "obj") {
-			if (Browser.Plugins.Flash.version<8) {
+			if (Browser.Plugins.Flash.version < "8") {
 				image.setStyles({backgroundImage: "none", display: ""});
 				image.set('html', '<div id="mbError"><b>Error</b><br/>Adobe Flash is either not installed or not up to date, please visit <a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" title="Get Flash" target="_new">Adobe.com</a> to download the free player.</div>');
 				mediaWidth = options.DefaultWidth;
@@ -843,37 +920,30 @@ var Mediabox;
 				image.setStyles({backgroundImage: "none", display: ""});
 				preload.inject(image);
 			}
-		} else if (mediaType == "qt") {
-			image.setStyles({backgroundImage: "none", display: ""});
-			preload;
-		} else if (mediaType == "inline") {
-//			center.setStyles({overflow: options.overflow});
-			image.setStyles({backgroundImage: "none", display: ""});
-			image.set('html', preload);
-		} else if (mediaType == "url") {
-			image.setStyles({backgroundImage: "none", display: ""});
-			preload.inject(image);
 		} else {
 			image.setStyles({backgroundImage: "none", display: ""});
-			image.set('html', '<div id="mbError"><b>Error</b><br/>A file type error has occoured, please visit <a href="iaian7.com/webcode/mediaboxAdvanced" title="mediaboxAdvanced" target="_new">iaian7.com</a> or contact the website author for more information.</div>');
+			image.set('html', options.flashText);
 			mediaWidth = options.defaultWidth;
 			mediaHeight = options.defaultHeight;
 		}
 		image.setStyles({width: mediaWidth, height: mediaHeight});
+		caption.setStyles({width: mediaWidth});
 
 		title.set('html', (options.showCaption) ? captionSplit[0] : "");
 		caption.set('html', (options.showCaption && (captionSplit.length > 1)) ? captionSplit[1] : "");
 		number.set('html', (options.showCounter && (images.length > 1)) ? options.counterText.replace(/{x}/, activeImage + 1).replace(/{y}/, images.length) : "");
+//		The following line inverts the displayed number (so instead of the first element being labeled 1/10, it's 10/10)
+//		number.set('html', (options.showCounter && (images.length > 1)) ? options.counterText.replace(/{x}/, images.length - activeImage).replace(/{y}/, images.length) : "");
 
 		if ((prevImage >= 0) && (images[prevImage][0].match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i))) preloadPrev.src = images[prevImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
 		if ((nextImage >= 0) && (images[nextImage][0].match(/\.gif|\.jpg|\.jpeg|\.png|twitpic\.com/i))) preloadNext.src = images[nextImage][0].replace(/twitpic\.com/i, "twitpic.com/show/full");
 
 		mediaWidth = image.offsetWidth;
 		mediaHeight = image.offsetHeight+bottom.offsetHeight;
-		if (mediaHeight >= top+top-10) { mTop = -(top-10) } else { mTop = -(mediaHeight/2) };
-		if (mediaWidth >= left+left-10) { mLeft = -(left-10) } else { mLeft = -(mediaWidth/2) };
-		if (options.resizeOpening) { fx.resize.start({width: mediaWidth, height: mediaHeight, marginTop: mTop, marginLeft: mLeft});
-		} else { center.setStyles({width: mediaWidth, height: mediaHeight, marginTop: mTop, marginLeft: mLeft}); imageAnimate(); }
+		if (mediaHeight >= top+top) { mTop = -top } else { mTop = -(mediaHeight/2) };
+		if (mediaWidth >= left+left) { mLeft = -left } else { mLeft = -(mediaWidth/2) };
+/****/	if (options.resizeOpening) { fx.resize.start({width: mediaWidth, height: mediaHeight, marginTop: mTop-margin, marginLeft: mLeft-margin});
+/****/	} else { center.setStyles({width: mediaWidth, height: mediaHeight, marginTop: mTop-margin, marginLeft: mLeft-margin}); imageAnimate(); }
 	}
 
 	function imageAnimate() {
@@ -888,7 +958,10 @@ var Mediabox;
 	}
 
 	function stop() {
-		if (preload) preload.onload = $empty;
+		if (preload) {
+			if (mediaType == "inline" && !options.inlineClone) preload.adopt(image.getChildren());	// prevents loss of adopted data
+			preload.onload = function(){}; // $empty replacement
+		}
 		fx.resize.cancel();
 		fx.image.cancel().set(0);
 		fx.bottom.cancel().set(0);
@@ -897,8 +970,9 @@ var Mediabox;
 
 	function close() {
 		if (activeImage >= 0) {
-			preload.onload = $empty;
-			image.set('html', '');
+			if (mediaType == "inline" && !options.inlineClone) preload.adopt(image.getChildren());	// prevents loss of adopted data
+			preload.onload = function(){}; // $empty replacement
+			image.empty();
 			for (var f in fx) fx[f].cancel();
 			center.setStyle("display", "none");
 			fx.overlay.chain(setup).start(0);
@@ -909,4 +983,4 @@ var Mediabox;
 		return false;
 	}
 })();
-//PATCH: remove autoload block
+//PATCH: remove the autoload block

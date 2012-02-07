@@ -22,7 +22,7 @@
 </div>
 <div class="w50 wizard">
   <h3><?php echo $this->deadline->generateLabel(); ?></h3>
-  <?php echo $this->deadline->generateWithError(); ?> <img src="<?php echo TL_PLUGINS_URL; ?>plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_<?php echo $this->deadline->id; ?>" style="vertical-align:-6px">
+  <?php echo $this->deadline->generateWithError(); ?> <img src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_<?php echo $this->deadline->id; ?>" style="vertical-align:-6px">
   <script>
   window.addEvent('domready', function() {
     new Picker.Date($$('#ctrl_<?php echo $this->deadline->name; ?>'), {

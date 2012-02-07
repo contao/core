@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Modified the plugins folder structure to prepare for jQuery support.
+
+### Changed
 Split the models into `Model` (single record) and `ModelCollection` (multiple
 models) to have a "cleaner" implementaion (thanks to Andreas Schempp).
 

@@ -97,14 +97,14 @@ var Mediabox;
 //			NonverBlaster
 				useNB: true,				// use NonverBlaster (true) or JW Media Player (false) for .flv and .mp4 files
 				// PATCH: set path to plugins directory
-				playerpath: 'plugins/mediabox/1.3.4/NonverBlaster.swf', // Path to NonverBlaster.swf
+				playerpath: 'plugins/mootools/mediabox/1.3.4/NonverBlaster.swf', // Path to NonverBlaster.swf
 				// PATCH EOF
 				controlColor: '0xFFFFFF',	// set the controlbar color
 				controlBackColor: '0x000000',	// set the controlbar color
 				showTimecode: 'false',		// turn timecode display off or on
 //			JW Media Player settings and options
 				// PATCH: set path to plugins directory
-				JWplayerpath: 'plugins/mediabox/1.3.4/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
+				JWplayerpath: 'plugins/mootools/mediabox/1.3.4/player.swf',	// Path to the mediaplayer.swf or flvplayer.swf file
 				// PATCH EOF
 				backcolor:	'000000',		// Base color for the controller, color name / hex value (0x000000)
 				frontcolor: '999999',		// Text and button color for the controller, color name / hex value (0x000000)
