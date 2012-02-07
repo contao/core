@@ -18,6 +18,7 @@ assets/images/*
 assets/js/*
 share/*
 system/cache
+system/cron/cron.txt
 system/html
 system/logs/*
 system/scripts
