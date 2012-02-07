@@ -42,6 +42,8 @@ define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIM', '3');
 define('MEDIABOX', '1.4.6');
 define('MOOTOOLS', '1.4.3');
+define('JQUERY', '1.7.1');
+define('COLORBOX', '1.3.19');
 define('SLIMBOX', '1.71');
 define('TABLESORT', '1.3.1');
 

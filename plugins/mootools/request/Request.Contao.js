@@ -1,2 +1,2 @@
-/* Contao Open Source CMS :: Copyright (C) 2005-2012 Leo Feyer :: LGPL license */
+/* Contao Open Source CMS, (C) 2005-2012 Leo Feyer, LGPL license */
 Request.Contao=new Class({Extends:Request.JSON,options:{url:window.location.href},initialize:function(a){if(a)try{this.options.url=a.field.getParent("form").getAttribute("action")}catch(b){}this.parent(a)},success:function(a){var b;try{b=this.response.json=JSON.decode(a,this.options.secure)}catch(c){b={content:a}}b==null&&(b={content:""}),b.content!=""&&(b.content=b.content.stripScripts(function(a){b.javascript=a.replace(/<!--|\/\/-->|<!\[CDATA\[\/\/>|<!\]\]>/g,"")}),b.javascript&&this.options.evalScripts&&$exec(b.javascript)),this.onSuccess(b.content,b)}}),Request.Mixed=Request.Contao;

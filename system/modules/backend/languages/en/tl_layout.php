@@ -55,11 +55,12 @@ $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'I
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
 $GLOBALS['TL_LANG']['tl_layout']['skipFramework'] = array('Disable the CSS framework', 'Do not load the Contao CSS framework. Note that the page layout generator will not work in this case.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Output format', 'Here you can set the output format.');
-$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'You can either use the local MooTools script or load it from a content delivery network.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('JavaScript library', 'Here you can choose a JavaScript framework for the front end.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add individual tags to the head section of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools templates', 'Here you can select one or more MooTools templates.');
+$GLOBALS['TL_LANG']['tl_layout']['jquery']        = array('jQuery templates', 'Here you can select one or more jQuery templates.');
 $GLOBALS['TL_LANG']['tl_layout']['script']        = array('Custom JavaScript code', 'The JavaScript code which will be inserted at the bottom of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Static layout', 'Create a static layout with a fixed width and alignment.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Overall width', 'The overall width will be applied to the wrapper element.');
@@ -79,9 +80,12 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Front end modules';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
-$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Use the local file';
-$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com';
-$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'Load from googleapis.com with local fallback';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - local file';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com with local fallback';
+$GLOBALS['TL_LANG']['tl_layout']['j_local']         = 'jQuery - local file';
+$GLOBALS['TL_LANG']['tl_layout']['j_googleapis']    = 'jQuery - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['j_fallback']      = 'jQuery - googleapis.com with local fallback';
 
 
 /**

@@ -322,27 +322,50 @@ class PageRegular extends \Frontend
 		}
 
 		// MooTools scripts
-		if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
+		if (strncmp($objLayout->mooSource, 'moo_', 4) === 0)
 		{
-			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
-			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
-
-			// Local fallback (thanks to DyaGa)
-			if ($objLayout->mooSource == 'moo_fallback')
+			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
 			{
-				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
+
+				// Local fallback (thanks to DyaGa)
+				if ($objLayout->mooSource == 'moo_fallback')
+				{
+					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+				}
+
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
 			}
+			else
+			{
+				$objCombiner = new \Combiner();
 
-			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
+				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+
+				$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+			}
 		}
-		else
+
+		// jQuery scripts
+		elseif (strncmp($objLayout->mooSource, 'j_', 2) === 0)
 		{
-			$objCombiner = new \Combiner();
+			if ($objLayout->mooSource == 'j_googleapis' || $objLayout->mooSource == 'j_fallback')
+			{
+				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
-			$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
-			$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
-
-			$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+				// Local fallback (thanks to DyaGa)
+				if ($objLayout->mooSource == 'j_fallback')
+				{
+					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.js">\x3C/script>\')</script>' . "\n";
+				}
+			}
+			else
+			{
+				$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.js"></script>' . "\n";
+			}
 		}
 
 		// Initialize sections
@@ -539,10 +562,11 @@ class PageRegular extends \Frontend
 	 */
 	protected function createFooterScripts($objPage, $objLayout)
 	{
-		$strMootools = '';
+		$strScripts = '';
+
+		// MooTools
 		$arrMootools = deserialize($objLayout->mootools, true);
 
-		// Add MooTools templates
 		foreach ($arrMootools as $strTemplate)
 		{
 			if ($strTemplate == '')
@@ -555,7 +579,7 @@ class PageRegular extends \Frontend
 			// Backwards compatibility
 			try
 			{
-				$strMootools .= $objTemplate->parse();
+				$strScripts .= $objTemplate->parse();
 			}
 			catch (\Exception $e)
 			{
@@ -568,17 +592,40 @@ class PageRegular extends \Frontend
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
 			{
-				$strMootools .= "\n" . trim($script) . "\n";
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		// jQuery
+		$arrJquery = deserialize($objLayout->jquery, true);
+
+		foreach ($arrJquery as $strTemplate)
+		{
+			if ($strTemplate == '')
+			{
+				continue;
+			}
+
+			$objTemplate = new \FrontendTemplate($strTemplate);
+			$strScripts .= $objTemplate->parse();
+		}
+
+		// Add internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
 			}
 		}
 
 		// Add custom JavaScript
 		if ($objLayout->script != '')
 		{
-			$strMootools .= "\n" . trim($objLayout->script) . "\n";
+			$strScripts .= "\n" . trim($objLayout->script) . "\n";
 		}
 
-		$this->Template->mootools = $strMootools;
+		$this->Template->mootools = $strScripts;
 	}
 }
 

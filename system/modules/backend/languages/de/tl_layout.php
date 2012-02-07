@@ -55,8 +55,9 @@ $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Eingebundene Module',
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Seitentemplate', 'Hier können Sie das Seitentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['skipFramework'] = array('Das CSS-Framework deaktivieren', 'Das Contao-CSS-Framework nicht laden. Beachten Sie, dass der Seitenlayout-Generator in diesem Fall nicht funktioniert.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Ausgabeformat', 'Hier legen Sie das Ausgabeformat fest.');
-$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools-Quelle', 'Sie können entweder das lokale MooTools-Skript verwenden oder es von einem Content Delivery Network laden.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('JavaScript-Bibliothek', 'Hier können Sie eine JavaScript-Bibliothek für das Frontend auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools-Templates', 'Hier können Sie eines oder mehrere MooTools-Templates auswählen.');
+$GLOBALS['TL_LANG']['tl_layout']['jquery']        = array('jQuery-Templates', 'Hier können Sie eines oder mehrere jQuery-Templates auswählen.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body-Klasse', 'Hier können Sie dem Body-Tag individuelle Klassen hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Hier können Sie dem Body-Tag ein Onload-Attribut hinzufügen.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Zusätzliche &lt;head&gt;-Tags', 'Hier können Sie dem Head-Bereich der Seite individuelle Tags hinzufügen.');
@@ -79,9 +80,12 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Frontend-Module';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Skript-Einstellungen';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Statisches Layout';
-$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Die lokale Datei verwenden';
-$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Von googleapis.com laden';
-$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'Von googleapis.com mit lokalem Fallback laden';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - lokale Datei';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com mit lokalem Fallback';
+$GLOBALS['TL_LANG']['tl_layout']['j_local']         = 'jQuery - Lokale Datei';
+$GLOBALS['TL_LANG']['tl_layout']['j_googleapis']    = 'jQuery - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['j_fallback']      = 'jQuery - googleapis.com mit lokalem Fallback';
 
 
 /**

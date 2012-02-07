@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+You can now choose jQuery instead of MooTools in the front end. Also, there is
+a jQuery mediabox alternative called "colorbox" (template `j_colorbox`).
+
 ### Changed
 Modified the plugins folder structure to prepare for jQuery support.
 

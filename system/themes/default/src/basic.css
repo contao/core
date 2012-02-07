@@ -379,3 +379,6 @@ pre,.tl_textarea.monospace {
 .inline div {
 	display:inline;
 }
+.autoheight {
+	height:auto;
+}

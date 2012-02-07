@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,jquery,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -348,9 +348,9 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'default'                 => 'moo_local',
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback'),
+			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback', 'j_local', 'j_googleapis', 'j_fallback'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('tl_class'=>'w50'),
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'cssClass' => array
@@ -388,7 +388,18 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
-			'eval'                    => array('multiple'=>true),
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'w50 autoheight'),
+			'sql'                     => "text NULL"
+		),
+		'jquery' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jquery'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'search'                  => true,
+			'inputType'               => 'checkboxWizard',
+			'options_callback'        => array('tl_layout', 'getJqueryTemplates'),
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'w50 autoheight'),
 			'sql'                     => "text NULL"
 		),
 		'script' => array
@@ -397,7 +408,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:120px;', 'preserveTags'=>true),
+			'eval'                    => array('style'=>'height:120px', 'preserveTags'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
 		'static' => array
@@ -585,6 +596,24 @@ class tl_layout extends Backend
 		}
 
 		return $this->getTemplateGroup('moo_', $intPid);
+	}
+
+
+	/**
+	 * Return all jQuery templates as array
+	 * @param DataContainer
+	 * @return array
+	 */
+	public function getJqueryTemplates(DataContainer $dc)
+	{
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('j_', $intPid);
 	}
  
 
