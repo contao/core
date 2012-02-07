@@ -166,7 +166,7 @@ class ModuleBooknav extends \Module
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{
-		$objPages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($intParentId, $this->showHidden);
+		$objPages = \PageCollection::findPublishedSubpagesWithoutGuestsByPid($intParentId, $this->showHidden);
 
 		if ($objPages !== null)
 		{

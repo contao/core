@@ -65,7 +65,7 @@ abstract class ModuleNews extends \Module
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objArchive = \NewsArchiveModel::findMultipleByIds($arrArchives);
+		$objArchive = \NewsArchiveCollection::findMultipleByIds($arrArchives);
 		$arrArchives = array();
 
 		while ($objArchive->next())
@@ -93,6 +93,118 @@ abstract class ModuleNews extends \Module
 
 
 	/**
+	 * Parse an item and return it as string
+	 * @param Database_Result|Model
+	 * @param boolean
+	 * @param string
+	 * @return string
+	 */
+	protected function parseArticle($objArticle, $blnAddArchive=false, $strClass='')
+	{
+		global $objPage;
+		$this->import('String');
+
+		$objTemplate = new \FrontendTemplate($this->news_template);
+		$objTemplate->setData($objArticle->row());
+
+		$objTemplate->class = (($objArticle->cssClass != '') ? ' ' . $objArticle->cssClass : '') . $strClass;
+		$objTemplate->newsHeadline = $objArticle->headline;
+		$objTemplate->subHeadline = $objArticle->subheadline;
+		$objTemplate->hasSubHeadline = $objArticle->subheadline ? true : false;
+		$objTemplate->linkHeadline = $this->generateLink($objArticle->headline, $objArticle, $blnAddArchive);
+		$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticle, $blnAddArchive, true);
+		$objTemplate->link = $this->generateNewsUrl($objArticle, $blnAddArchive);
+		$objTemplate->archive = $objArticle->archive;
+
+		// Clean the RTE output
+		if ($objArticle->teaser != '')
+		{
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$objArticle->teaser = $this->String->toXhtml($objArticle->teaser);
+			}
+			else
+			{
+				$objArticle->teaser = $this->String->toHtml5($objArticle->teaser);
+			}
+
+			$objTemplate->teaser = $this->String->encodeEmail($objArticle->teaser);
+		}
+
+		// Display the "read more" button for external/article links
+		if (($objArticle->source == 'external' || $objArticle->source == 'article') && $objArticle->text == '')
+		{
+			$objTemplate->text = true;
+		}
+		// Encode e-mail addresses
+		else
+		{
+			// Clean the RTE output
+			if ($objPage->outputFormat == 'xhtml')
+			{
+				$objArticle->text = $this->String->toXhtml($objArticle->text);
+			}
+			else
+			{
+				$objArticle->text = $this->String->toHtml5($objArticle->text);
+			}
+
+			$objTemplate->text = $this->String->encodeEmail($objArticle->text);
+		}
+
+		$arrMeta = $this->getMetaFields($objArticle);
+
+		// Add the meta information
+		$objTemplate->date = $arrMeta['date'];
+		$objTemplate->hasMetaFields = !empty($arrMeta);
+		$objTemplate->numberOfComments = $arrMeta['ccount'];
+		$objTemplate->commentCount = $arrMeta['comments'];
+		$objTemplate->timestamp = $objArticle->date;
+		$objTemplate->author = $arrMeta['author'];
+		$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objArticle->date);
+
+		$objTemplate->addImage = false;
+
+		// Add an image
+		if ($objArticle->addImage && is_file(TL_ROOT . '/' . $objArticle->singleSRC))
+		{
+			// Override the default image size
+			if ($this->imgSize != '')
+			{
+				$size = deserialize($this->imgSize);
+
+				if ($size[0] > 0 || $size[1] > 0)
+				{
+					$objArticle->size = $this->imgSize;
+				}
+			}
+
+			$this->addImageToTemplate($objTemplate, $objArticle->row());
+		}
+
+		$objTemplate->enclosure = array();
+
+		// Add enclosures
+		if ($objArticle->addEnclosure)
+		{
+			$this->addEnclosuresToTemplate($objTemplate, $objArticle->row());
+		}
+
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($objTemplate, $objArticle->row(), $this);
+			}
+		}
+
+		return $objTemplate->parse();
+	}
+
+
+	/**
 	 * Parse one or more items and return them as array
 	 * @param Database_Result|Model
 	 * @param boolean
@@ -100,126 +212,19 @@ abstract class ModuleNews extends \Module
 	 */
 	protected function parseArticles($objArticles, $blnAddArchive=false)
 	{
-		$limit = ($objArticles instanceof \Model) ? $objArticles->count() : $objArticles->numRows;
+		$limit = ($objArticles instanceof \Database_Result) ? $objArticles->numRows : $objArticles->count();
 
 		if ($limit < 1)
 		{
 			return array();
 		}
 
-		global $objPage;
-		$this->import('String');
-
-		$arrArticles = array();
 		$count = 0;
-		$imgSize = false;
-
-		// Override the default image size
-		if ($this->imgSize != '')
-		{
-			$size = deserialize($this->imgSize);
-
-			if ($size[0] > 0 || $size[1] > 0)
-			{
-				$imgSize = $this->imgSize;
-			}
-		}
+		$arrArticles = array();
 
 		while ($objArticles->next())
 		{
-			$objTemplate = new \FrontendTemplate($this->news_template);
-			$objTemplate->setData($objArticles->row());
-
-			$objTemplate->count = ++$count;
-			$objTemplate->class = (($objArticles->cssClass != '') ? ' ' . $objArticles->cssClass : '') . (($count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even');
-			$objTemplate->newsHeadline = $objArticles->headline;
-			$objTemplate->subHeadline = $objArticles->subheadline;
-			$objTemplate->hasSubHeadline = $objArticles->subheadline ? true : false;
-			$objTemplate->linkHeadline = $this->generateLink($objArticles->headline, $objArticles, $blnAddArchive);
-			$objTemplate->more = $this->generateLink($GLOBALS['TL_LANG']['MSC']['more'], $objArticles, $blnAddArchive, true);
-			$objTemplate->link = $this->generateNewsUrl($objArticles, $blnAddArchive);
-			$objTemplate->archive = $objArticles->archive;
-
-			// Clean the RTE output
-			if ($objArticles->teaser != '')
-			{
-				if ($objPage->outputFormat == 'xhtml')
-				{
-					$objArticles->teaser = $this->String->toXhtml($objArticles->teaser);
-				}
-				else
-				{
-					$objArticles->teaser = $this->String->toHtml5($objArticles->teaser);
-				}
-
-				$objTemplate->teaser = $this->String->encodeEmail($objArticles->teaser);
-			}
-
-			// Display the "read more" button for external/article links
-			if (($objArticles->source == 'external' || $objArticles->source == 'article') && $objArticles->text == '')
-			{
-				$objTemplate->text = true;
-			}
-
-			// Encode e-mail addresses
-			else
-			{
-				// Clean the RTE output
-				if ($objPage->outputFormat == 'xhtml')
-				{
-					$objArticles->text = $this->String->toXhtml($objArticles->text);
-				}
-				else
-				{
-					$objArticles->text = $this->String->toHtml5($objArticles->text);
-				}
-
-				$objTemplate->text = $this->String->encodeEmail($objArticles->text);
-			}
-
-			$arrMeta = $this->getMetaFields($objArticles);
-
-			// Add meta information
-			$objTemplate->date = $arrMeta['date'];
-			$objTemplate->hasMetaFields = !empty($arrMeta);
-			$objTemplate->numberOfComments = $arrMeta['ccount'];
-			$objTemplate->commentCount = $arrMeta['comments'];
-			$objTemplate->timestamp = $objArticles->date;
-			$objTemplate->author = $arrMeta['author'];
-			$objTemplate->datetime = date('Y-m-d\TH:i:sP', $objArticles->date);
-
-			$objTemplate->addImage = false;
-
-			// Add an image
-			if ($objArticles->addImage && is_file(TL_ROOT . '/' . $objArticles->singleSRC))
-			{
-				if ($imgSize)
-				{
-					$objArticles->size = $imgSize;
-				}
-
-				$this->addImageToTemplate($objTemplate, $objArticles->row());
-			}
-
-			$objTemplate->enclosure = array();
-
-			// Add enclosures
-			if ($objArticles->addEnclosure)
-			{
-				$this->addEnclosuresToTemplate($objTemplate, $objArticles->row());
-			}
-
-			// HOOK: add custom logic
-			if (isset($GLOBALS['TL_HOOKS']['parseArticles']) && is_array($GLOBALS['TL_HOOKS']['parseArticles']))
-			{
-				foreach ($GLOBALS['TL_HOOKS']['parseArticles'] as $callback)
-				{
-					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($objTemplate, $objArticles->row(), $this);
-				}
-			}
-
-			$arrArticles[] = $objTemplate->parse();
+			$arrArticles[] = $this->parseArticle($objArticles, $blnAddArchive, ((++$count == 1) ? ' first' : '') . (($count == $limit) ? ' last' : '') . ((($count % 2) == 0) ? ' odd' : ' even'));
 		}
 
 		return $arrArticles;
@@ -263,7 +268,7 @@ abstract class ModuleNews extends \Module
 					{
 						break;
 					}
-					$objComments = \CommentsModel::countPublishedBySourceAndParent('tl_news', $objArticle->id);
+					$objComments = \CommentsCollection::countPublishedBySourceAndParent('tl_news', $objArticle->id);
 					$return['ccount'] = $objComments->count;
 					$return['comments'] = sprintf($GLOBALS['TL_LANG']['MSC']['commentCount'], $objComments->count);
 					break;
@@ -321,7 +326,7 @@ abstract class ModuleNews extends \Module
 
 			// Link to an article
 			case 'article':
-				$objArticle = \ArticleModel::findByPk($objItem->articleId, true);
+				$objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true));
 
 				if ($objArticle !== null)
 				{

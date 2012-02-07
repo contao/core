@@ -82,7 +82,7 @@ class News extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objArchive = \NewsArchiveModel::findUnprotectedWithFeeds();
+		$objArchive = \NewsArchiveCollection::findUnprotectedWithFeeds();
 
 		if ($objArchive !== null)
 		{
@@ -116,7 +116,7 @@ class News extends \Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get the items
-		$objArticle = \NewsModel::findPublishedByPid($arrArchive['id'], $arrArchive['maxItems']);
+		$objArticle = \NewsCollection::findPublishedByPid($arrArchive['id'], $arrArchive['maxItems']);
 
 		if ($objArticle === null)
 		{
@@ -194,7 +194,7 @@ class News extends \Frontend
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objArchive = \NewsArchiveModel::findBy('protected', '');
+		$objArchive = \NewsArchiveCollection::findBy('protected', '');
 
 		// Walk through each archive
 		if ($objArchive !== null)
@@ -230,7 +230,7 @@ class News extends \Frontend
 				$strUrl = $arrProcessed[$objArchive->jumpTo['id']];
 
 				// Get the items
-				$objArticle = \NewsModel::findPublishedDefaultByPid($objArchive->id);
+				$objArticle = \NewsCollection::findPublishedDefaultByPid($objArchive->id);
 
 				if ($objArticle !== null)
 				{
@@ -273,7 +273,7 @@ class News extends \Frontend
 
 			// Link to an article
 			case 'article':
-				$objArticle = \ArticleModel::findByPk($objItem->articleId, true);
+				$objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true));
 
 				if ($objArticle !== null)
 				{

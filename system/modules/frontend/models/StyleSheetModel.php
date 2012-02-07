@@ -51,25 +51,6 @@ class StyleSheetModel extends \Model
 	 */
 	protected static $strTable = 'tl_style_sheet';
 
-
-	/**
-	 * Find multiple style sheets by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$objDatabase = \Database::getInstance();
-		$arrIds = array_map('intval', $arrIds);
-
-		$objResult = $objDatabase->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(',', $arrIds) . ") ORDER BY " . $objDatabase->findInSet('id', $arrIds));
-		return new static($objResult);
-	}
 }
 
 ?>

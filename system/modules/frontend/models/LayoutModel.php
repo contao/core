@@ -60,7 +60,7 @@ class LayoutModel extends \Model
 	public static function findByIdOrFallback($varId)
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("($t.id=? OR $t.fallback=1)"), $varId, "$t.id DESC");
+		return static::findBy(array("($t.id=? OR $t.fallback=1)"), $varId, array('order'=>"$t.id DESC"));
 	}
 }
 

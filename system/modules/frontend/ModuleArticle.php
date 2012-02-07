@@ -188,7 +188,7 @@ class ModuleArticle extends \Module
 		}
 
 		$arrElements = array();
-		$objCte = \ContentModel::findPublishedByPid($this->id);
+		$objCte = \ContentCollection::findPublishedByPid($this->id);
 
 		if ($objCte !== null)
 		{

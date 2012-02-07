@@ -58,18 +58,6 @@ abstract class Model extends \System
 	protected static $strPk = 'id';
 
 	/**
-	 * Current index
-	 * @var integer
-	 */
-	private $intIndex = -1;
-
-	/**
-	 * End indicator
-	 * @var boolean
-	 */
-	private $blnDone = false;
-
-	/**
 	 * Data array
 	 * @var array
 	 */
@@ -98,12 +86,7 @@ abstract class Model extends \System
 	 */
 	public function __set($strKey, $varValue)
 	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		$this->arrData[$this->intIndex][$strKey] = $varValue;
+		$this->arrData[$strKey] = $varValue;
 	}
 
 
@@ -114,17 +97,7 @@ abstract class Model extends \System
 	 */
 	public function __get($strKey)
 	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		if (!isset($this->arrData[$this->intIndex][$strKey]))
-		{
-			return null;
-		}
-
-		return $this->arrData[$this->intIndex][$strKey];
+		return isset($this->arrData[$strKey]) ? $this->arrData[$strKey] : null;
 	}
 
 
@@ -135,47 +108,45 @@ abstract class Model extends \System
 	 */
 	public function __isset($strKey)
 	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return isset($this->arrData[$this->intIndex][$strKey]);
+		return isset($this->arrData[$strKey]);
 	}
 
 
 	/**
 	 * Set the current record from a Database_Result
 	 * @param Database_Result
-	 * @throws Exception
 	 */
 	public function setData(\Database_Result $objResult)
 	{
-		$i = -1;
+		$this->arrData = $objResult->row();
 
-		// Walk through the result set
-		while ($objResult->next())
+		// Look for joined fields and make them an array
+		foreach ($this->arrData as $k=>$v)
 		{
-			$this->arrData[++$i] = $objResult->row();
-
-			// Look for joined fields and make them an object
-			foreach ($this->arrData[$i] as $k=>$v)
+			// E.g. author__id becomes author['id']
+			if (strpos($k, '__') !== false)
 			{
-				// E.g. author__id becomes author['id']
-				if (strpos($k, '__') !== false)
+				list($key, $field) = explode('__', $k);
+
+				if (!is_array($this->arrData[$key]))
 				{
-					list($key, $field) = explode('__', $k);
-
-					if (!is_array($this->arrData[$i][$key]))
-					{
-						$this->arrData[$i][$key] = array();
-					}
-
-					$this->arrData[$i][$key][$field] = $v;
-					unset($this->arrData[$i][$k]);
+					$this->arrData[$key] = array();
 				}
+
+				$this->arrData[$key][$field] = $v;
+				unset($this->arrData[$k]);
 			}
 		}
+	}
+
+
+	/**
+	 * Be compatible with the Database_Result interface
+	 * @return integer
+	 */
+	public function count()
+	{
+		return 1;
 	}
 
 
@@ -183,220 +154,41 @@ abstract class Model extends \System
 	 * Return the current record as associative array
 	 * @return array
 	 */
-	public function getData()
+	public function row()
 	{
 		return $this->arrData;
 	}
 
 
 	/**
-	 * Set a row from an array
+	 * Set the current record from an array
 	 * @param array
 	 */
-	public function setRow($arrData)
+	public function setRow(Array $arrData)
 	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		$this->arrData[$this->intIndex] = $arrData;
-	}
-
-
-	/**
-	 * Return the number of rows in the result set
-	 * @return integer
-	 */
-	public function count()
-	{
-		return count($this->arrData);
-	}
-
-
-	/**
-	 * Go to the first row
-	 * @return Model
-	 */
-	public function first()
-	{
-		$this->intIndex = 0;
-		return $this;
-	}
-
-
-	/**
-	 * Go to the previous row
-	 * @return Model
-	 */
-	public function prev()
-	{
-		if ($this->intIndex == 0)
-		{
-			return false;
-		}
-
-		--$this->intIndex;
-		return $this;
-	}
-
-
-	/**
-	 * Go to the next row
-	 * @return Model
-	 */
-	public function next()
-	{
-		if ($this->blnDone)
-		{
-			return false;
-		}
-
-		if (!isset($this->arrData[++$this->intIndex]))
-		{
-			--$this->intIndex;
-			$this->blnDone = true;
-			return false;
-		}
-
-		return $this;
-	}
-
-
-	/**
-	 * Go to the last row
-	 * @return Model
-	 */
-	public function last()
-	{
-		$this->blnDone = true;
-		$this->intIndex = count($this->arrData) - 1;
-		return $this;
-	}
-
-
-	/**
-	 * Return the current row
-	 * @return array
-	 */
-	public function row()
-	{
-		if ($this->intIndex < 0)
-		{
-			$this->first();
-		}
-
-		return $this->arrData[$this->intIndex];
-	}
-
-
-	/**
-	 * Reset the model
-	 */
-	public function reset()
-	{
-		$this->intIndex = -1;
-		$this->blnDone = false;
-	}
-
-
-	/**
-	 * Fetch a column of each row
-	 * @param string
-	 * @return array
-	 * @throws Exception
-	 */
-	public function fetchEach($key)
-	{
-		if (!isset($this->arrData[0][$key]))
-		{
-			throw new \Exception("Unknown field $key");
-		}
-
-		$return = array();
-
-		foreach ($this->arrData as $row)
-		{
-			$return[] = $row[$key];
-		}
-
-		return $return;
+		$this->arrData = $arrData;
 	}
 
 
 	/**
 	 * Find a record and return the model
-	 * @param mixed
-	 * @param mixed
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param boolean
+	 * @param array
 	 * @return Model|null
 	 */
-	protected static function find($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
+	protected static function find(Array $arrOptions)
 	{
 		if (static::$strTable == '')
 		{
 			return null;
 		}
 
-		$objBase = new \DcaExtractor(static::$strTable);
+		$arrOptions['table'] = static::$strTable;
+		$strQuery = \Model_QueryBuilder::find($arrOptions);
 
-		if (!$objBase->hasRelations())
-		{
-			$strQuery = "SELECT * FROM " . static::$strTable;
-		}
-		else
-		{
-			$arrJoins = array();
-			$arrFields = array(static::$strTable . ".*");
-
-			foreach ($objBase->getRelations() as $strKey=>$arrConfig)
-			{
-				// Automatically join the single-relation records
-				if ($arrConfig['load'] == 'eager' || $blnForceEager)
-				{
-					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
-					{
-						$objRelated = new \DcaExtractor($arrConfig['table']);
-
-						foreach (array_keys($objRelated->getFields()) as $strField)
-						{
-							$arrFields[] = $arrConfig['table'] . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
-						}
-
-						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " ON " . static::$strTable . "." . $strKey . "=" . $arrConfig['table'] . ".id";
-					}
-				}
-			}
-
-			// Generate the query
-			$strQuery = "SELECT " . implode(', ', $arrFields) . " FROM " . static::$strTable . implode("", $arrJoins);
-		}
-
-		// Where condition
-		if ($strColumn !== null)
-		{
-			$strQuery .= " WHERE " . (is_array($strColumn) ? implode(" AND ", $strColumn) : static::$strTable . '.' . $strColumn . "=?");
-		}
-
-		// Order by
-		if ($strOrder !== null)
-		{
-			$strQuery .= " ORDER BY " . $strOrder;
-		}
-
-		$objStatement = \Database::getInstance()->prepare($strQuery);
-
-		// Limit
-		if ($intLimit > 0 || $intOffset > 0)
-		{
-			$objStatement->limit($intLimit, $intOffset);
-		}
-
+		$objStatement = \Database::getInstance()->prepare($strQuery)->limit(1);
 		$objStatement = static::preFind($objStatement);
-		$objResult = $objStatement->execute($varValue);
+
+		$objResult = $objStatement->execute($arrOptions['value']);
 
 		if ($objResult->numRows < 1)
 		{
@@ -409,108 +201,59 @@ abstract class Model extends \System
 
 
 	/**
-	 * Find records by one or more conditions
+	 * Find a record by one or more conditions
 	 * @param mixed
 	 * @param mixed
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param boolean
+	 * @param array
 	 * @return Model|null
 	 */
-	public static function findBy($strColumn, $varValue, $strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
+	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
 	{
-		return static::find($strColumn, $varValue, $strOrder, $intLimit, $intOffset, $blnForceEager);
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'column' => $strColumn,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
 	}
 
 
 	/**
-	 * Find a single record by its primary key
+	 * Find a record by its primary key
 	 * @param mixed
-	 * @param boolean
+	 * @param array
 	 * @return Model|null
 	 */
-	public static function findByPk($varValue, $blnForceEager=false)
+	public static function findByPk($varValue, Array $arrOptions=array())
 	{
-		return static::findBy(static::$strPk, $varValue, null, 1, 0, $blnForceEager);
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'column' => static::$strPk,
+			'value'  => $varValue
+		));
+
+		return static::find($arrOptions);
 	}
 
 
 	/**
-	 * Find a single record by one or more conditions
+	 * Find a record by its ID or alias
 	 * @param mixed
-	 * @param mixed
-	 * @param string
-	 * @param boolean
+	 * @param array
 	 * @return Model|null
 	 */
-	public static function findOneBy($strColumn, $varValue, $strOrder=null, $blnForceEager=false)
-	{
-		return static::findBy($strColumn, $varValue, $strOrder, 1, 0, $blnForceEager);
-	}
-
-
-	/**
-	 * Find a single record by its ID or alias
-	 * @param mixed
-	 * @param mixed
-	 * @param boolean
-	 * @return Model|null
-	 */
-	public static function findByIdOrAlias($varId, $varAlias, $blnForceEager=false)
+	public static function findByIdOrAlias($varId, Array $arrOptions=array())
 	{
 		$t = static::$strTable;
-		return static::findOneBy(array("($t.id=? OR $t.alias=?)"), array((is_numeric($varId) ? $varId : 0), $varAlias), null, $blnForceEager);
-	}
 
+		$arrOptions = array_merge($arrOptions, array
+		(
+			'column' => array("($t.id=? OR $t.alias=?)"),
+			'value'  => array((is_numeric($varId) ? $varId : 0), $varId)
+		));
 
-	/**
-	 * Find all records and return the model
-	 * @param string
-	 * @param integer
-	 * @param integer
-	 * @param boolean
-	 * @return Model|null
-	 */
-	public static function findAll($strOrder=null, $intLimit=0, $intOffset=0, $blnForceEager=false)
-	{
-		return static::findBy(null, null, $strOrder, $intLimit, $intOffset, $blnForceEager);
-	}
-
-
-	/**
-	 * Find records by one or more conditions and return the number of rows
-	 * @param mixed
-	 * @param mixed
-	 * @return integer
-	 */
-	public static function countBy($strColumn, $varValue)
-	{
-		if (static::$strTable == '')
-		{
-			return null;
-		}
-
-		$strQuery = "SELECT COUNT(*) AS count FROM " . static::$strTable;
-
-		// Where condition
-		if ($strColumn !== null)
-		{
-			$strQuery .= " WHERE " . (is_array($strColumn) ? implode(" AND ", $strColumn) : static::$strTable . '.' . $strColumn . "=?");
-		}
-
-		$objResult = \Database::getInstance()->prepare($strQuery)->execute($varValue);
-		return new static($objResult);
-	}
-
-
-	/**
-	 * Find all records and return the number of rows
-	 * @return integer
-	 */
-	public static function countAll()
-	{
-		return static::countBy(null, null);
+		return static::find($arrOptions);
 	}
 
 
@@ -537,7 +280,7 @@ abstract class Model extends \System
 
 
 	/**
-	 * Lazy load a related record
+	 * Lazy load related records
 	 * @param string
 	 * @throws Exception
 	 */
@@ -552,7 +295,7 @@ abstract class Model extends \System
 		$objRelated = new \DcaExtractor(static::$strTable);
 		$arrRelations = $objRelated->getRelations();
 
-		// No relation defined
+		// No relations defined
 		if (empty($arrRelations) || !isset($arrRelations[$key]))
 		{
 			throw new \Exception("Field $key does not seem to be related");
@@ -564,20 +307,14 @@ abstract class Model extends \System
 			return;
 		}
 
-		// Get the Model class name (e.g. tl_form_field becomes FormFieldModel)
-		$arrChunks = explode('_', $arrRelations[$key]['table']);
-
-		if ($arrChunks[0] == 'tl')
-		{
-			array_shift($arrChunks);
-		}
-
-		$strModelClass = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+		// Get the class name without suffix (second parameter)
+		$strName = $this->convertTableNameToModelClass($arrRelations[$key]['table'], true);
 
 		// Load the related record(s)
 		if ($arrRelations[$key]['type'] == 'hasOne' || $arrRelations[$key]['type'] == 'belongsTo')
 		{
-			$objModel = $strModelClass::findBy($arrRelations[$key]['field'], $this->$key);
+			$strClass = $strName . 'Model';
+			$objModel = $strClass::findBy($arrRelations[$key]['field'], $this->$key);
 
 			if ($objModel !== null)
 			{
@@ -589,11 +326,20 @@ abstract class Model extends \System
 			$arrValues = deserialize($this->$key, true);
 			$arrColumns = array($arrRelations[$key]['field'] . " IN('" . implode("','", $arrValues) . "')");
 			$strOrder = \Database::getInstance()->findInSet($arrRelations[$key]['field'], $arrValues);
-			$objModel = $strModelClass::findBy($arrColumns, null, $strOrder);
+
+			$strCollectionClass = $strName . 'Collection';
+			$objModel = $strClass::findBy($arrColumns, null, $strOrder);
 
 			if ($objModel !== null)
 			{
-				$this->$key = $objModel->getData();
+				$set = array();
+
+				while ($objModel->next())
+				{
+					$set[] = $objModel->row();
+				}
+
+				$this->$key = $set;
 			}
 		}
 	}
@@ -602,19 +348,27 @@ abstract class Model extends \System
 	/**
 	 * Save the current record and return the number of affected rows or the last insert ID
 	 * @param boolean
-	 * @return integer
 	 */
 	public function save($blnForceInsert=false)
 	{
 		$arrSet = $this->preSave($this->row());
 
-		if (!isset($this->{static::$strPk}) || $blnForceInsert)
+		if (isset($this->{static::$strPk}) && !$blnForceInsert)
 		{
-			return \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")->set($arrSet)->execute()->insertId;
+			\Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")
+									->set($arrSet)
+									->execute($this->{static::$strPk});
 		}
 		else
 		{
-			return \Database::getInstance()->prepare("UPDATE " . static::$strTable . " %s WHERE " . static::$strPk . "=?")->set($arrSet)->execute($this->{static::$strPk})->affectedRows;
+			$stmt = \Database::getInstance()->prepare("INSERT INTO " . static::$strTable . " %s")
+											->set($arrSet)
+											->execute();
+
+			if (static::$strPk == 'id')
+			{
+				$this->id = $stmt->insertId;
+			}
 		}
 	}
 
@@ -624,7 +378,7 @@ abstract class Model extends \System
 	 * @param array
 	 * @return array
 	 */
-	protected function preSave($arrSet)
+	protected function preSave(Array $arrSet)
 	{
 		return $arrSet;
 	}
@@ -637,23 +391,6 @@ abstract class Model extends \System
 	public function delete()
 	{
 		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($this->{static::$strPk})->affectedRows;
-	}
-
-
-	/**
-	 * Delete all current records and return the number of affected rows
-	 * @return integer
-	 */
-	public function deleteAll()
-	{
-		$intAffected = 0;
-
-		foreach ($this->arrData as $arrRow)
-		{
-			$intAffected += \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($arrRow[static::$strPk])->affectedRows;
-		}
-
-		return $intAffected;
 	}
 }
 

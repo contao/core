@@ -99,7 +99,7 @@ class ModuleFaqList extends \Module
 	 */
 	protected function compile()
 	{
-		$objFaq = \FaqModel::findPublishedByPids($this->faq_categories);
+		$objFaq = \FaqCollection::findPublishedByPids($this->faq_categories);
 
 		if ($objFaq === null)
 		{

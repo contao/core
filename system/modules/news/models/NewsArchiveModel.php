@@ -51,50 +51,6 @@ class NewsArchiveModel extends \Model
 	 */
 	protected static $strTable = 'tl_news_archive';
 
-
-	/**
-	 * Find multiple news archives by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findMultipleByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, \Database::getInstance()->findInSet("$t.id", $arrIds));
-	}
-
-
-	/**
-	 * Find all unprotected news archives with feeds
-	 * @return Model|null
-	 */
-	public static function findUnprotectedWithFeeds()
-	{
-		$t = static::$strTable;
-		return static::findBy(array("$t.makeFeed=1 AND $t.protected=''"), null);
-	}
-
-
-	/**
-	 * Find unprotected news archives with feeds by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findUnprotectedWithFeedsByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.makeFeed=1 AND $t.protected='' AND $t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
-	}
 }
 
 ?>

@@ -68,7 +68,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
  
 			// Get the total number of comments
-			$objTotal = \CommentsModel::countPublishedBySourceAndParent($strSource, $intParent);
+			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
 
 			// Initialize the pagination menu
 			$objPagination = new \Pagination($objTotal->count, $objConfig->perPage);
@@ -78,11 +78,11 @@ class Comments extends \Frontend
 		// Get all published comments
 		if ($limit)
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
 		}
 		else
 		{
-			$objComments = \CommentsModel::findPublishedBySourceAndParent($strSource, $intParent);
+			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
 		if ($objComments !== null && ($total = $objComments->count()) > 0)

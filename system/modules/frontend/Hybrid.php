@@ -96,15 +96,7 @@ abstract class Hybrid extends \Frontend
 			return;
 		}
 
-		// Get the Model class name (e.g. tl_form_field becomes FormFieldModel)
-		$arrChunks = explode('_', $this->strTable);
-
-		if ($arrChunks[0] == 'tl')
-		{
-			array_shift($arrChunks);
-		}
-
-		$strModelClass = implode('', array_map('ucfirst', $arrChunks)) . 'Model';
+		$strModelClass = $this->convertTableNameToModelClass($this->strTable);
 
 		// Load the model
 		if ($this->classFileExists($strModelClass))

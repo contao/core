@@ -33,14 +33,16 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\ModuleFaq'        => 'system/modules/faq/ModuleFaq.php',
-	'Contao\\ModuleFaqList'    => 'system/modules/faq/ModuleFaqList.php',
-	'Contao\\ModuleFaqPage'    => 'system/modules/faq/ModuleFaqPage.php',
-	'Contao\\ModuleFaqReader'  => 'system/modules/faq/ModuleFaqReader.php',
+	'Contao\\ModuleFaq'             => 'system/modules/faq/ModuleFaq.php',
+	'Contao\\ModuleFaqList'         => 'system/modules/faq/ModuleFaqList.php',
+	'Contao\\ModuleFaqPage'         => 'system/modules/faq/ModuleFaqPage.php',
+	'Contao\\ModuleFaqReader'       => 'system/modules/faq/ModuleFaqReader.php',
 
 	// Models
-	'Contao\\FaqCategoryModel' => 'system/modules/faq/models/FaqCategoryModel.php',
-	'Contao\\FaqModel'         => 'system/modules/faq/models/FaqModel.php',
+	'Contao\\FaqCategoryCollection' => 'system/modules/faq/models/FaqCategoryCollection.php',
+	'Contao\\FaqCategoryModel'      => 'system/modules/faq/models/FaqCategoryModel.php',
+	'Contao\\FaqCollection'         => 'system/modules/faq/models/FaqCollection.php',
+	'Contao\\FaqModel'              => 'system/modules/faq/models/FaqModel.php',
 ));
 
 

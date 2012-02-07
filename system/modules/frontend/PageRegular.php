@@ -81,7 +81,7 @@ class PageRegular extends \Frontend
 
 		// Get all modules in a single DB query
 		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
-		$objModules = \ModuleModel::findMultipleByIds($arrModuleIds);
+		$objModules = \ModuleCollection::findMultipleByIds($arrModuleIds);
 
 		if ($objModules !== null)
 		{
@@ -419,7 +419,7 @@ class PageRegular extends \Frontend
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = \StyleSheetModel::findByIds($arrStyleSheets);
+			$objStylesheets = \StyleSheetCollection::findByIds($arrStyleSheets);
 
 			if ($objStylesheets !== null)
 			{
@@ -474,7 +474,7 @@ class PageRegular extends \Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
-			$objFeeds = \NewsArchiveModel::findUnprotectedWithFeedsByIds($newsfeeds);
+			$objFeeds = \NewsArchiveCollection::findUnprotectedWithFeedsByIds($newsfeeds);
 
 			if ($objFeeds !== null)
 			{
@@ -489,7 +489,7 @@ class PageRegular extends \Frontend
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
-			$objFeeds = \CalendarModel::findUnprotectedWithFeedsByIds($calendarfeeds);
+			$objFeeds = \CalendarCollection::findUnprotectedWithFeedsByIds($calendarfeeds);
 
 			if ($objFeeds !== null)
 			{

@@ -189,7 +189,7 @@ abstract class Module extends \Frontend
 	protected function renderNavigation($pid, $level=1)
 	{
 		// Get all active subpages
-		$objSubpages = \PageModel::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
+		$objSubpages = \PageCollection::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
 
 		if ($objSubpages === null)
 		{

@@ -887,7 +887,7 @@ class Newsletter extends \Backend
 				$strUrl = $arrProcessed[$objNewsletter->jumpTo['id']];
 
 				// Get the items
-				$objItem = \NewsletterModel::findSentByPid($objNewsletter->id);
+				$objItem = \NewsletterCollection::findSentByPid($objNewsletter->id);
 
 				if ($objItem !== null)
 				{

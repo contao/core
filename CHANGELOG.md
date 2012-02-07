@@ -5,6 +5,10 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### Changed
+Split the models into `Model` (single record) and `ModelCollection` (multiple
+models) to have a "cleaner" implementaion (thanks to Andreas Schempp).
+
+### Changed
 Merged the "registration", "rss_reader" and "tpl_editor" module into the core
 modules ("backend" and "frontend").
 

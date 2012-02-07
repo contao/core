@@ -967,6 +967,25 @@ abstract class System
 			return str_replace(strrchr($strIp, '.'), '.0', $strIp);
 		}
 	}
+
+
+	/**
+	 * Compile a Model class name from a table name (e.g. tl_form_field becomes FormFieldModel)
+	 * @param string
+	 * @param boolean
+	 * @return string
+	 */
+	protected function convertTableNameToModelClass($strTable, $blnNoSuffix=false)
+	{
+		$arrChunks = explode('_', $strTable);
+
+		if ($arrChunks[0] == 'tl')
+		{
+			array_shift($arrChunks);
+		}
+
+		return implode('', array_map('ucfirst', $arrChunks)) . (!$blnNoSuffix ? 'Model' : '');
+	}
 }
 
 ?>

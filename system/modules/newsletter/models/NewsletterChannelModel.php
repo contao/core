@@ -51,22 +51,6 @@ class NewsletterChannelModel extends \Model
 	 */
 	protected static $strTable = 'tl_newsletter_channel';
 
-
-	/**
-	 * Find multiple newsletter channels by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findByIds($arrPids)
-	{
-		if (!is_array($arrPids) || empty($arrPids))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, "$t.title");
-	}
 }
 
 ?>

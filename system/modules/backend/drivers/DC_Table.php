@@ -860,6 +860,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 			}
 
+			// Remove the ID field from the data array
+			unset($this->set['id']);
+
 			$objInsertStmt = $this->Database->prepare("INSERT INTO " . $this->strTable . " %s")
 											->set($this->set)
 											->execute();

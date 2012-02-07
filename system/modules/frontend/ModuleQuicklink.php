@@ -100,7 +100,7 @@ class ModuleQuicklink extends \Module
 	protected function compile()
 	{
 		// Get all active pages
-		$arrPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
+		$arrPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
 
 		if (empty($arrPages))
 		{

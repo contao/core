@@ -191,7 +191,7 @@ class ModulePassword extends \Module
 	 */
 	protected function setNewPassword()
 	{
-		$objMember = \MemberModel::findOneBy('activation', $this->Input->get('token'));
+		$objMember = \MemberModel::findBy('activation', $this->Input->get('token'));
 
 		if ($objMember === null || $objMember->login == '')
 		{

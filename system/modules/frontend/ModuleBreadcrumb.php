@@ -88,7 +88,7 @@ class ModuleBreadcrumb extends \Module
 		$items = array();
 
 		// Get all pages up to the root page
-		$objPages = \PageModel::findParentsById($objPage->pid);
+		$objPages = \PageCollection::findParentsById($objPage->pid);
 
 		if ($objPages !== null)
 		{
@@ -186,7 +186,7 @@ class ModuleBreadcrumb extends \Module
 			}
 
 			// Get the article title
-			$objArticle = \ArticleModel::findByIdOrAlias((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
+			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
 
 			if ($objArticle !== null)
 			{

@@ -115,7 +115,7 @@ class Index extends Backend
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $pw);
 
-					$objUser = \UserModel::findByPk($this->User->id);
+					$objUser = UserModel::findByPk($this->User->id);
 					$objUser->pwChange = '';
 					$objUser->password = $strPassword . ':' . $strSalt;
 					$objUser->save();

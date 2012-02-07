@@ -53,51 +53,6 @@ class NewsletterModel extends \Model
 
 
 	/**
-	 * Find sent newsletters by their parent ID
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findSentByPid($intPid)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "$t.sent=1";
-		}
-
-		return static::findBy($arrColumns, $intPid, "$t.date DESC");
-	}
-
-
-	/**
-	 * Find sent newsletters by multiple parent IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findSentByPids($arrPids)
-	{
-		if (!is_array($arrPids) || empty($arrPids))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "$t.sent=1";
-		}
-
-		return static::findBy($arrColumns, null, "$t.date DESC");
-	}
-
-
-	/**
 	 * Find sent newsletters by their parent IDs and their ID or alias
 	 * @param integer
 	 * @param string
@@ -120,7 +75,7 @@ class NewsletterModel extends \Model
 			$arrColumns[] = "$t.sent=1";
 		}
 
-		return static::findOneBy($arrColumns, array($intId, $varAlias));
+		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
 }
 

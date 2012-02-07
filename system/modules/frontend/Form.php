@@ -111,7 +111,7 @@ class Form extends \Hybrid
 		$arrLabels = array();
 
 		// Get all form fields
-		$objFields = \FormFieldModel::findPublishedByPid($this->id);
+		$objFields = \FormFieldCollection::findPublishedByPid($this->id);
 
 		if ($objFields !== null)
 		{

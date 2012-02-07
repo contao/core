@@ -101,7 +101,7 @@ class ModuleFaq extends \Frontend
 				$strUrl = $arrProcessed[$objFaq->jumpTo['id']];
 
 				// Get the items
-				$objItems = \FaqModel::findBy('pid', $objFaq->id, 'sorting');
+				$objItems = \FaqCollection::findBy('pid', $objFaq->id, array('order'=>'sorting'));
 
 				if ($objItems !== null)
 				{

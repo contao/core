@@ -53,7 +53,7 @@ class FaqModel extends \Model
 
 
 	/**
-	 * Find published FAQs from one or more categories by their ID or alias
+	 * Find a published FAQ from one or more categories by its ID or alias
 	 * @param integer
 	 * @param string
 	 * @param array
@@ -74,24 +74,7 @@ class FaqModel extends \Model
 			$arrColumns[] = "$t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array($intId, $varAlias));
-	}
-
-
-	/**
-	 * Find all published FAQs by their parent IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findPublishedByPids($arrPids)
-	{
-		if (!is_array($arrPids) || empty($arrPids))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, "$t.pid, $t.sorting");
+		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
 }
 

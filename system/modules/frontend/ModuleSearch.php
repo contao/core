@@ -129,7 +129,7 @@ class ModuleSearch extends \Module
 		$this->Template->results = '';
 
 		// Execute the search if there are keywords
-		if ($this->jumpTo < 1 && $strKeywords != '' && $strKeywords != '*')
+		if ($strKeywords != '' && $strKeywords != '*' && !$this->jumpTo['id'])
 		{
 			// Reference page
 			if ($this->rootPage > 0)
@@ -138,7 +138,6 @@ class ModuleSearch extends \Module
 				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page');
 				array_unshift($arrPages, $this->rootPage);
 			}
-
 			// Website root
 			else
 			{
@@ -159,7 +158,7 @@ class ModuleSearch extends \Module
 			$query_starttime = microtime(true);
 			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
-			// Load cached result
+			// Load the cached result
 			if (file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
 				$objFile = new \File($strCacheFile);
@@ -174,7 +173,7 @@ class ModuleSearch extends \Module
 				}
 			}
 
-			// Cache result
+			// Cache the result
 			if ($arrResult === null)
 			{
 				try
@@ -276,7 +275,7 @@ class ModuleSearch extends \Module
 				$arrContext = array();
 				$arrMatches = trimsplit(',', $arrResult[$i]['matches']);
 
-				// Get context
+				// Get the context
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
@@ -288,7 +287,7 @@ class ModuleSearch extends \Module
 					}
 				}
 
-				// Shorten context and highlight keywords
+				// Shorten the context and highlight all keywords
 				if (!empty($arrContext))
 				{
 					$this->import('String');

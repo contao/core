@@ -70,7 +70,7 @@ class ArticleModel extends \Model
 			$arrValues[] = $intPid;
 		}
 
-		return static::findOneBy($arrColumns, $arrValues);
+		return static::findBy($arrColumns, $arrValues);
 	}
 
 
@@ -90,51 +90,7 @@ class ArticleModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intId);
-	}
-
-
-	/**
-	 * Find all published articles by their parent ID and column
-	 * @param integer
-	 * @param string
-	 * @return Model
-	 */
-	public static function findPublishedByPidAndColumn($intPid, $strColumn)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=? AND $t.inColumn=?");
-		$arrValues = array($intPid, $strColumn);
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $arrValues, "$t.sorting");
-	}
-
-
-	/**
-	 * Find all published articles with teaser by their parent ID and column
-	 * @param integer
-	 * @param string
-	 * @return Model
-	 */
-	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=? AND $t.inColumn=? AND $t.showTeaser=1");
-		$arrValues = array($intPid, $strColumn);
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $arrValues, "$t.sorting");
+		return static::findBy($arrColumns, $intId);
 	}
 }
 

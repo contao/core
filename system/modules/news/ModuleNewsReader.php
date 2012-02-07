@@ -136,8 +136,8 @@ class ModuleNewsReader extends \ModuleNews
 			return;
 		}
 
-		$arrArticle = $this->parseArticles($objArticle);
-		$this->Template->articles = $arrArticle[0];
+		$arrArticle = $this->parseArticle($objArticle);
+		$this->Template->articles = $arrArticle;
 
 		// Overwrite the page title
 		if ($objArticle->headline != '')

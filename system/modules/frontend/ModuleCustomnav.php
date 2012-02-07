@@ -101,7 +101,7 @@ class ModuleCustomnav extends \Module
 		}
 
 		// Get all active pages
-		$arrPages = \PageModel::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
+		$arrPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
 
 		// Return if there are no pages
 		if (empty($arrPages))

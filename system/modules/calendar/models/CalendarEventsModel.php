@@ -53,52 +53,7 @@ class CalendarEventsModel extends \Model
 
 
 	/**
-	 * Find events of the current period by their parent ID
-	 * @param integer
-	 * @param integer
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findCurrentByPid($intPid, $intStart, $intEnd)
-	{
-		$t = static::$strTable;
-		$intStart = intval($intStart);
-		$intEnd = intval($intEnd);
-
-		$arrColumns = array("$t.pid=? AND (($t.startTime>=$intStart AND $t.startTime<=$intEnd) OR ($t.endTime>=$intStart AND $t.endTime<=$intEnd) OR ($t.startTime<=$intStart AND $t.endTime>=$intEnd) OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$intStart) AND $t.startTime<=$intEnd))");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $intPid, "$t.startTime");
-	}
-
-
-	/**
-	 * Find published events with the default redirect target by their parent ID
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findPublishedDefaultByPid($intPid)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=? AND $t.source='default'");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $intPid, "$t.startTime DESC");
-	}
-
-
-	/**
-	 * Find published events from one or more calendars
+	 * Find a published event from one or more calendars by its ID or alias
 	 * @param integer
 	 * @param string
 	 * @param array
@@ -120,30 +75,7 @@ class CalendarEventsModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, array($intId, $varAlias));
-	}
-
-
-	/**
-	 * Find upcoming events by their parent ID
-	 * @param integer
-	 * @param integer
-	 */
-	public static function findUpcomingByPid($intId, $intLimit=0)
-	{
-		$time = time();
-		$t = static::$strTable;
-
-		$arrColumns = array("$t.pid=? AND ($t.startTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
-
-		if ($intLimit > 0)
-		{
-			return static::findBy($arrColumns, $intId, "$t.startTime", $intLimit);
-		}
-		else
-		{
-			return static::findBy($arrColumns, $intId, "$t.startTime");
-		}
+		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
 }
 

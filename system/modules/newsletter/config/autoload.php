@@ -33,16 +33,18 @@
  */
 ClassLoader::addClasses(array
 (
-	'Contao\\ModuleNewsletterList'      => 'system/modules/newsletter/ModuleNewsletterList.php',
-	'Contao\\ModuleNewsletterReader'    => 'system/modules/newsletter/ModuleNewsletterReader.php',
-	'Contao\\ModuleSubscribe'           => 'system/modules/newsletter/ModuleSubscribe.php',
-	'Contao\\ModuleUnsubscribe'         => 'system/modules/newsletter/ModuleUnsubscribe.php',
-	'Contao\\Newsletter'                => 'system/modules/newsletter/Newsletter.php',
+	'Contao\\ModuleNewsletterList'        => 'system/modules/newsletter/ModuleNewsletterList.php',
+	'Contao\\ModuleNewsletterReader'      => 'system/modules/newsletter/ModuleNewsletterReader.php',
+	'Contao\\ModuleSubscribe'             => 'system/modules/newsletter/ModuleSubscribe.php',
+	'Contao\\ModuleUnsubscribe'           => 'system/modules/newsletter/ModuleUnsubscribe.php',
+	'Contao\\Newsletter'                  => 'system/modules/newsletter/Newsletter.php',
 
 	// Models
-	'Contao\\NewsletterChannelModel'    => 'system/modules/newsletter/models/NewsletterChannelModel.php',
-	'Contao\\NewsletterModel'           => 'system/modules/newsletter/models/NewsletterModel.php',
-	'Contao\\NewsletterRecipientsModel' => 'system/modules/newsletter/models/NewsletterRecipientsModel.php',
+	'Contao\\NewsletterChannelCollection' => 'system/modules/newsletter/models/NewsletterChannelCollection.php',
+	'Contao\\NewsletterChannelModel'      => 'system/modules/newsletter/models/NewsletterChannelModel.php',
+	'Contao\\NewsletterCollection'        => 'system/modules/newsletter/models/NewsletterCollection.php',
+	'Contao\\NewsletterModel'             => 'system/modules/newsletter/models/NewsletterModel.php',
+	'Contao\\NewsletterRecipientsModel'   => 'system/modules/newsletter/models/NewsletterRecipientsModel.php',
 ));
 
 

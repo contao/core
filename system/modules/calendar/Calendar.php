@@ -89,7 +89,7 @@ class Calendar extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = \CalendarModel::findUnprotectedWithFeeds();
+		$objCalendar = \CalendarCollection::findUnprotectedWithFeeds();
 
 		if ($objCalendar !== null)
 		{
@@ -129,7 +129,7 @@ class Calendar extends \Frontend
 		$objFeed->published = $arrArchive['tstamp'];
 
 		// Get the upcoming events
-		$objArticle = \CalendarEventsModel::findUpcomingByPid($arrArchive['id'], $arrArchive['maxItems']);
+		$objArticle = \CalendarEventsCollection::findUpcomingByPid($arrArchive['id'], $arrArchive['maxItems']);
 
 		if ($objArticle === null)
 		{
@@ -243,7 +243,7 @@ class Calendar extends \Frontend
 		$arrProcessed = array();
 
 		// Get all calendars
-		$objCalendar = \CalendarModel::findBy('protected', '');
+		$objCalendar = \CalendarCollection::findBy('protected', '');
 
 		// Walk through each calendar
 		if ($objCalendar !== null)
@@ -279,7 +279,7 @@ class Calendar extends \Frontend
 				$strUrl = $arrProcessed[$objCalendar->jumpTo['id']];
 
 				// Get the items
-				$objEvents = \CalendarEventsModel::findPublishedDefaultByPid($objCalendar->id);
+				$objEvents = \CalendarEventsCollection::findPublishedDefaultByPid($objCalendar->id);
 
 				if ($objEvents !== null)
 				{
@@ -347,7 +347,7 @@ class Calendar extends \Frontend
 				break;
 
 			case 'article':
-				$objArticle = \ArticleModel::findByPk($objEvent->articleId, true);
+				$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
 
 				if ($objArticle !== null)
 				{

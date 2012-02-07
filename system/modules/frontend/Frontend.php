@@ -167,9 +167,6 @@ abstract class Frontend extends \Controller
 	 */
 	protected function getRootPageFromUrl()
 	{
-		$time = time();
-		$host = $this->Environment->host;
-
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getRootPageFromUrl']) && is_array($GLOBALS['TL_HOOKS']['getRootPageFromUrl']))
 		{
@@ -178,12 +175,14 @@ abstract class Frontend extends \Controller
 				$this->import($callback[0]);
 				$objRootPage = $this->$callback[0]->$callback[1]();
 
-				if ($objRootPage instanceof \Database_Result)
+				if (is_object($objRootPage))
 				{
 					return $objRootPage;
 				}
 			}
 		}
+
+		$host = $this->Environment->host;
 
 		// The language is set in the URL
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !empty($_GET['language']))

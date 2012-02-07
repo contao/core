@@ -59,7 +59,7 @@ class MemberModel extends \Model
 	 */
 	public static function findByUsername($strUsername)
 	{
-		return static::findOneBy('username', $strUsername);
+		return static::findBy('username', $strUsername);
 	}
 
 
@@ -81,7 +81,7 @@ class MemberModel extends \Model
 			$arrColumns[] = "$t.username=?";
 		}
 
-		return static::findOneBy($arrColumns, array($strEmail, $strUsername));
+		return static::findBy($arrColumns, array($strEmail, $strUsername));
 	}
 }
 

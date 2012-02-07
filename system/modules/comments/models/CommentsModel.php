@@ -51,48 +51,6 @@ class CommentsModel extends \Model
 	 */
 	protected static $strTable = 'tl_comments';
 
-
-	/**
-	 * Find published comments by their source table and parent ID
-	 * @param string
-	 * @param integer
-	 * @param boolean
-	 * @param integer
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findPublishedBySourceAndParent($strSource, $intParent, $lbnDesc=false, $intLimit=0, $intOffset=0)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.source=? AND $t.parent=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$arrColumns[] = "$t.published=1";
-		}
-
-		return static::findBy($arrColumns, array($strSource, $intParent), ($lbnDesc ? "$t.date DESC" : "$t.date"), $intLimit, $intOffset);
-	}
-
-
-	/**
-	 * Count published comments by their source table and parent ID
-	 * @param string
-	 * @param integer
-	 * @return Model
-	 */
-	public static function countPublishedBySourceAndParent($strSource, $intParent)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.source=? AND $t.parent=?");
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$arrColumns[] = "$t.published=1";
-		}
-
-		return static::countBy($arrColumns, array($strSource, $intParent));
-	}
 }
 
 ?>

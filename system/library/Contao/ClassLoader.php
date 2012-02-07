@@ -117,6 +117,10 @@ class ClassLoader
 		'Contao\\Files'     => 'system/library/Contao/Files.php',
 		'Contao\\Files_Ftp' => 'system/library/Contao/Files/Ftp.php',
 		'Contao\\Files_Php' => 'system/library/Contao/Files/Php.php',
+
+		// Model
+		'Contao\\Model_Collection'   => 'system/library/Contao/Model/Collection.php',
+		'Contao\\Model_QueryBuilder' => 'system/library/Contao/Model/QueryBuilder.php',
 	);
 
 

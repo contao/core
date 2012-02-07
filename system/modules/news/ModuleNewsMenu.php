@@ -118,7 +118,7 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$arrData = array();
 		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{
@@ -163,7 +163,7 @@ class ModuleNewsMenu extends \ModuleNews
 	protected function compileMonthlyMenu()
 	{
 		$arrData = array();
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{
@@ -220,7 +220,7 @@ class ModuleNewsMenu extends \ModuleNews
 	{
 		$arrData = array();
 		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
-		$objArchives = \NewsModel::findPublishedByPids($this->news_archives);
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
 		if ($objArchives !== null)
 		{

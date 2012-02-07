@@ -51,51 +51,6 @@ class CalendarModel extends \Model
 	 */
 	protected static $strTable = 'tl_calendar';
 
-
-	/**
-	 * Find multiple calendars by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findMultipleByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null, \Database::getInstance()->findInSet("$t.id", $arrIds));
-	}
-
-
-	/**
-	 * Find all unprotected calendars with feeds
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findUnprotectedWithFeeds()
-	{
-		$t = static::$strTable;
-		return static::findBy(array("$t.makeFeed=1 AND $t.protected=''"), null);
-	}
-
-
-	/**
-	 * Find unprotected calendars with feeds by their IDs
-	 * @param array
-	 * @return Model|null
-	 */
-	public static function findUnprotectedWithFeedsByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		return static::findBy(array("$t.makeFeed=1 AND $t.protected='' AND $t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
-	}
 }
 
 ?>

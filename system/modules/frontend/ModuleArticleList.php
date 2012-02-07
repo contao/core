@@ -109,7 +109,7 @@ class ModuleArticleList extends \Module
 		$time = time();
 
 		// Get published articles
-		$objArticles = \ArticleModel::findPublishedByPidAndColumn($id, $this->inColumn);
+		$objArticles = \ArticleCollection::findPublishedByPidAndColumn($id, $this->inColumn);
 
 		if ($objArticles === null)
 		{

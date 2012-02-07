@@ -182,7 +182,7 @@ abstract class Controller extends \System
 			// Show all articles
 			else
 			{
-				$objArticles = \ArticleModel::findPublishedByPidAndColumn($objPage->id, $strColumn);
+				$objArticles = \ArticleCollection::findPublishedByPidAndColumn($objPage->id, $strColumn);
 
 				if ($objArticles === null)
 				{
@@ -542,7 +542,7 @@ abstract class Controller extends \System
 		$trail = array($intId, $pid);
 
 		// Load all parent pages
-		$objParentPage = \PageModel::findParentsById($pid);
+		$objParentPage = \PageCollection::findParentsById($pid);
 
 		// Inherit settings
 		if ($objParentPage !== null)
@@ -1512,7 +1512,7 @@ abstract class Controller extends \System
 							$elements[1] = $this->User->loginPage;
 						}
 
-						$objNextPage = \PageModel::findByIdOrAlias($elements[1], $elements[1]);
+						$objNextPage = \PageModel::findByIdOrAlias($elements[1]);
 
 						if ($objNextPage === null)
 						{
@@ -1612,7 +1612,7 @@ abstract class Controller extends \System
 				case 'article_open':
 				case 'article_url':
 				case 'article_title':
-					$objArticle = \ArticleModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objArticle = \ArticleModel::findByIdOrAlias($elements[1]);
 
 					if ($objArticle === null)
 					{
@@ -1650,7 +1650,7 @@ abstract class Controller extends \System
 				case 'faq_open':
 				case 'faq_url':
 				case 'faq_title':
-					$objFaq = \FaqModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objFaq = \FaqModel::findByIdOrAlias($elements[1]);
 
 					if ($objFaq === null)
 					{
@@ -1688,7 +1688,7 @@ abstract class Controller extends \System
 				case 'news_open':
 				case 'news_url':
 				case 'news_title':
-					$objNews = \NewsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objNews = \NewsModel::findByIdOrAlias($elements[1]);
 
 					if ($objNews === null)
 					{
@@ -1701,7 +1701,7 @@ abstract class Controller extends \System
 					}
 					elseif ($objNews->source == 'article')
 					{
-						$objArticle = \ArticleModel::findByPk($objNews->articleId, true);
+						$objArticle = \ArticleModel::findByPk($objNews->articleId, array('eager'=>true));
 						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objNews->source == 'external')
@@ -1740,7 +1740,7 @@ abstract class Controller extends \System
 				case 'event_open':
 				case 'event_url':
 				case 'event_title':
-					$objEvent = \CalendarEventsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objEvent = \CalendarEventsModel::findByIdOrAlias($elements[1]);
 
 					if ($objEvent === null)
 					{
@@ -1753,7 +1753,7 @@ abstract class Controller extends \System
 					}
 					elseif ($objEvent->source == 'article')
 					{
-						$objArticle = \ArticleModel::findByPk($objEvent->articleId, true);
+						$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
 						$strUrl = $this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id));
 					}
 					elseif ($objEvent->source == 'external')
@@ -1789,7 +1789,7 @@ abstract class Controller extends \System
 
 				// Article teaser
 				case 'article_teaser':
-					$objTeaser = \ArticleModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objTeaser = \ArticleModel::findByIdOrAlias($elements[1]);
 
 					if ($objTeaser !== null)
 					{
@@ -1808,7 +1808,7 @@ abstract class Controller extends \System
 
 				// News teaser
 				case 'news_teaser':
-					$objTeaser = \NewsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objTeaser = \NewsModel::findByIdOrAlias($elements[1]);
 
 					if ($objTeaser !== null)
 					{
@@ -1827,7 +1827,7 @@ abstract class Controller extends \System
 
 				// Event teaser
 				case 'event_teaser':
-					$objTeaser = \CalendarEventsModel::findByIdOrAlias((is_numeric($elements[1]) ? $elements[1] : 0), $elements[1]);
+					$objTeaser = \CalendarEventsModel::findByIdOrAlias($elements[1]);
 
 					if ($objTeaser !== null)
 					{

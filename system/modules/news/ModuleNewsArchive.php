@@ -168,7 +168,7 @@ class ModuleNewsArchive extends \ModuleNews
 		if ($this->perPage > 0)
 		{
 			// Get the total number of items
-			$objTotal = \NewsModel::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
+			$objTotal = \NewsCollection::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 
 			if ($objTotal !== null)
 			{
@@ -195,11 +195,11 @@ class ModuleNewsArchive extends \ModuleNews
 		// Get the news items
 		if (isset($limit))
 		{
-			$objArticles = \NewsModel::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives, $limit, $offset);
+			$objArticles = \NewsCollection::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives, $limit, $offset);
 		}
 		else
 		{
-			$objArticles = \NewsModel::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
+			$objArticles = \NewsCollection::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 		}
 
 		// No items found

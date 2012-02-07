@@ -393,7 +393,7 @@ class ModuleRegistration extends \Module
 						// Replace the wildcard
 						if (!empty($arrData['newsletter']))
 						{
-							$objChannels = \NewsletterChannelModel::findByIds($arrData['newsletter']);
+							$objChannels = \NewsletterChannelCollection::findByIds($arrData['newsletter']);
 
 							if ($objChannels !== null)
 							{
@@ -480,7 +480,7 @@ class ModuleRegistration extends \Module
 		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
-		$objMember = \MemberModel::findOneBy('activation', $this->Input->get('token'));
+		$objMember = \MemberModel::findBy('activation', $this->Input->get('token'));
 
 		if ($objMember === null)
 		{

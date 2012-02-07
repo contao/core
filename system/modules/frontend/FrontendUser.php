@@ -341,7 +341,7 @@ class FrontendUser extends \User
 		$time = time();
 
 		// Skip inactive groups
-		if (($objGroups = \MemberGroupModel::findAllActive()) !== null)
+		if (($objGroups = \MemberGroupCollection::findAllActive()) !== null)
 		{
 			$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
 		}

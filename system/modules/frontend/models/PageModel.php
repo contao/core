@@ -68,28 +68,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intId);
-	}
-
-
-	/**
-	 * Find published pages by their IDs or aliases
-	 * @param mixed
-	 * @return Model
-	 */
-	public static function findPublishedByIdOrAliases($varId)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("($t.id=? OR $t.alias=?)");
-		$arrValues = array((is_numeric($varId) ? $varId : 0), $varId);
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $arrValues);
+		return static::findBy($arrColumns, $intId);
 	}
 
 
@@ -101,9 +80,9 @@ class PageModel extends \Model
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage)
 	{
-		$time = time();
-		$objDatabase = \Database::getInstance();
 		$t = static::$strTable;
+		$objDatabase = \Database::getInstance();
+		$arrOptions = array();
 
 		if (is_array($varLanguage))
 		{
@@ -118,7 +97,7 @@ class PageModel extends \Model
 				$arrColumns[] = "$t.fallback=1";
 			}
 
-			$strOrder = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
+			$arrOptions['order'] = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
 
 			if (!BE_USER_LOGGED_IN)
 			{
@@ -126,7 +105,7 @@ class PageModel extends \Model
 				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 			}
 
-			return static::findOneBy($arrColumns, $strHost, $strOrder);
+			return static::findBy($arrColumns, $strHost, $arrOptions);
 		}
 		else
 		{
@@ -139,7 +118,7 @@ class PageModel extends \Model
 				$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 			}
 
-			return static::findOneBy($arrColumns, $arrValues, "$t.dns DESC, $t.fallback");
+			return static::findBy($arrColumns, $arrValues, array('order'=>"$t.dns DESC, $t.fallback"));
 		}
 	}
 
@@ -160,7 +139,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 
 
@@ -180,7 +159,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 
 
@@ -200,7 +179,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 
 
@@ -220,107 +199,7 @@ class PageModel extends \Model
 			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
 		}
 
-		return static::findOneBy($arrColumns, $intPid, "$t.sorting");
-	}
-
-
-	/**
-	 * Find the parent records of a record
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findParentsById($intId)
-	{
-		$objPages = \Database::getInstance()->prepare("SELECT *, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT *, @pid:=pid FROM tl_page WHERE id=@pid", 9))
-											->execute($intId);
-
-		if ($objPages->numRows < 1)
-		{
-			return null;
-		}
-
-		return new static($objPages);
-	}
-
-
-	/**
-	 * Find all published regular pages by their IDs and exclude pages
-	 * which are only visible for guests
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
-	{
-		if (!is_array($arrIds) || empty($arrIds))
-		{
-			return null;
-		}
-
-		$t = static::$strTable;
-		$arrColumns = array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ") AND $t.type!='root' AND $t.type!='error_403' AND $t.type!='error_404'");
-
-		if (FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN)
-		{
-			$arrColumns[] = "$t.guests=''";
-		}
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, null, \Database::getInstance()->findInSet("$t.id", $arrIds));
-	}
-
-
-	/**
-	 * Find all published regular pages by their parent IDs and exclude
-	 * pages which are only visible for guests
-	 * @param integer
-	 * @return Model|null
-	 */
-	public static function findPublishedRegularWithoutGuestsByPid($intId)
-	{
-		$t = static::$strTable;
-		$arrColumns = array("$t.pid=? AND $t.type!='root' AND $t.type!='error_403' AND $t.type!='error_404'");
-
-		if (FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN)
-		{
-			$arrColumns[] = "$t.guests=''";
-		}
-
-		if (!BE_USER_LOGGED_IN)
-		{
-			$time = time();
-			$arrColumns[] = "($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1";
-		}
-
-		return static::findBy($arrColumns, $intId, "$t.sorting");
-	}
-
-
-	/**
-	 * Find all published subpages by their parent ID and exclude pages
-	 * which are only visible for guests
-	 * @param integer
-	 * @param boolean
-	 * @param boolean
-	 * @return Model|null
-	 */
-	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
-	{
-		$time = time();
-
-		$objSubpages = \Database::getInstance()->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p2.hide='' OR sitemap='map_always')" : " AND p2.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<$time) AND (p2.stop='' OR p2.stop>$time) AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$blnShowHidden ? ($blnIsSitemap ? " AND (p1.hide='' OR sitemap='map_always')" : " AND p1.hide=''") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests=''" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<$time) AND (p1.stop='' OR p1.stop>$time) AND p1.published=1" : "") . " ORDER BY p1.sorting")
-											   ->execute($intPid);
-
-		if ($objSubpages->numRows < 1)
-		{
-			return null;
-		}
-
-		return new static($objSubpages);
+		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 }
 
