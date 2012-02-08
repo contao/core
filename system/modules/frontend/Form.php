@@ -157,7 +157,7 @@ class Form extends Hybrid
 				}
 			}
 
-			// Validate input
+			// Validate the input
 			if ($this->Input->post('FORM_SUBMIT') == $formId)
 			{
 				$objWidget->validate();
@@ -208,7 +208,7 @@ class Form extends Hybrid
 			++$row;
 		}
 
-		// Process form data
+		// Process the form data
 		if ($this->Input->post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
 			$this->processFormData($arrSubmitted, $arrLabels);

@@ -482,7 +482,6 @@ abstract class Widget extends Controller
 			if ($objPage->outputFormat == 'xhtml')
 			{
 				$blnIsXhtml = true;
-
 				unset($this->arrAttributes['autofocus']);
 				unset($this->arrAttributes['placeholder']);
 				unset($this->arrAttributes['required']);
@@ -503,13 +502,19 @@ abstract class Widget extends Controller
 		// Add the remaining attributes
 		foreach ($this->arrAttributes as $k=>$v)
 		{
-			if (!$blnIsXhtml && in_array($k, array('disabled', 'readonly', 'required', 'autofocus')))
+			if ($k == 'disabled' || $k == 'readonly' || $k == 'required' || $k == 'autofocus')
 			{
-				$strAttributes .= ' ' . $k;
+				if (TL_MODE == 'FE') // see #3878
+				{
+					$strAttributes .=  $blnIsXhtml ? ' ' . $k . '="' . $v . '"' : ' ' . $k;
+				}
 			}
-			elseif ($v != '')
+			else
 			{
-				$strAttributes .= ' ' . $k . '="' . $v . '"';
+				if ($v != '')
+				{
+					$strAttributes .= ' ' . $k . '="' . $v . '"';
+				}
 			}
 		}
 
