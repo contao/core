@@ -119,7 +119,7 @@ class Password extends \Widget
 
 		if (($varInput == '' || $varInput == '*****') && $this->varValue != '')
 		{
-			return '';
+			return '*****';
 		}
 
 		if (utf8_strlen($varInput) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
