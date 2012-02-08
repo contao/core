@@ -9,9 +9,11 @@ $GLOBALS['TL_CSS'][] = 'plugins/slimbox/css/slimbox.css||static';
 <script>
 Slimbox.scanPage = function() {
   $$(document.links).filter(function(el) {
-    return el.rel && el.rel.test(/^lightbox/i);
-  }).slimbox({}, null, function(el) {
-    return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
+    return el.getAttribute('data-lightbox') != null;
+  }).slimbox({
+    // Put custom options here
+  }, null, function(el) {
+    return (this == el) || el.getAttribute('data-lightbox').match(this.getAttribute('data-lightbox'));
   });
 };
 window.addEvent('domready', Slimbox.scanPage);

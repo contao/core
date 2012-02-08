@@ -11,7 +11,9 @@ $GLOBALS['TL_CSS'][] = 'plugins/slimbox/css/slimbox.css||static';
 Slimbox.scanPage = function() {
   $$(document.links).filter(function(el) {
     return el.rel && el.rel.test(/^lightbox/i);
-  }).slimbox({}, null, function(el) {
+  }).slimbox({
+    // Put custom options here
+  }, null, function(el) {
     return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
   });
 };
