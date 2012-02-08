@@ -163,7 +163,7 @@ class Form extends \Hybrid
 					}
 				}
 
-				// Validate input
+				// Validate the input
 				if ($this->Input->post('FORM_SUBMIT') == $formId)
 				{
 					$objWidget->validate();
