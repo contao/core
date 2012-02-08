@@ -44,13 +44,13 @@
 </aside>
 <?php endif; ?>
 
-<section id="main">
+<div id="main">
 <div class="inside">
 <?php echo $this->main; ?> 
 </div>
 <?php echo $this->getCustomSections('main'); ?> 
 <div id="clear"></div>
-</section>
+</div>
 
 </div>
 <?php echo $this->getCustomSections('after'); ?>
