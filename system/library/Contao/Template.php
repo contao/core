@@ -290,28 +290,37 @@ abstract class Template extends Controller
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $this->strContentType . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
-		echo $this->strBuffer;
-
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
-			echo "\n\n"
-				. '<div id="debug" class="' . $this->Input->cookie('CONTAO_CONSOLE') . '">' . "\n"
+			$strDebug = '<div id="debug" class="' . $this->Input->cookie('CONTAO_CONSOLE') . '">' . "\n"
 				. '<p><span class="info">Contao debug information</span> <span class="time">Execution time: ' . $this->getFormattedNumber(microtime(true) - TL_START, 4) . ' seconds</span> <span class="memory">Memory usage: ' . $this->getReadableSize(memory_get_peak_usage()) . '</span> <span class="db">Database queries: ' . count($GLOBALS['TL_DEBUG']['database_queries']) . '</span> <span id="tog">&nbsp;</span></p>' . "\n"
 				. '<div><pre>' . "\n";
 
+			ob_start();
 			ksort($GLOBALS['TL_DEBUG']);
 			print_r($GLOBALS['TL_DEBUG']);
+			$strDebug .= ob_get_contents();
+			ob_end_clean();
 
-			echo '</pre></div>'
+			$strDebug .= '</pre></div>'
+				. '<script>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>'
 				. '<script>'
-					. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
-					. "$('tog').addEvent('click',function(e){"
-						. "$('debug').toggleClass('closed');"
-						. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'');"
-					. "});"
-				. '</script>';
+					. "(function($) {"
+						. "$$('#debug p','#debug div').setStyle('width',window.getSize().x);"
+						. "document.body.setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+						. "$('tog').addEvent('click',function(e) {"
+							. "$('debug').toggleClass('closed');"
+							. "Cookie.write('CONTAO_CONSOLE',$('debug').hasClass('closed')?'closed':'');"
+							. "document.body.setStyle('margin-bottom', $('debug').hasClass('closed')?'60px':'320px');"
+						. "});"
+					. "})(document.id);"
+				. '</script>' . "\n\n";
+
+			$this->strBuffer = str_replace('</body>', $strDebug . '</body>', $this->strBuffer);
 		}
+
+		echo $this->strBuffer;
 	}
 
 

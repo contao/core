@@ -589,7 +589,7 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Add internal MooTools scripts
+		// Add the internal MooTools scripts
 		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
@@ -612,7 +612,7 @@ class PageRegular extends \Frontend
 			$strScripts .= $objTemplate->parse();
 		}
 
-		// Add internal jQuery scripts
+		// Add the internal jQuery scripts
 		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
 		{
 			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
@@ -621,7 +621,7 @@ class PageRegular extends \Frontend
 			}
 		}
 
-		// Add custom JavaScript
+		// Add the custom JavaScript
 		if ($objLayout->script != '')
 		{
 			$strScripts .= "\n" . trim($objLayout->script) . "\n";
