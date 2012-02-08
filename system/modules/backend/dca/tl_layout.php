@@ -383,7 +383,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'jSource' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jSource'],
-			'default'                 => 'j_local',
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('j_local', 'j_googleapis', 'j_fallback'),
