@@ -4842,6 +4842,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	 */
 	protected function formatCurrentValue($field, $value, $mode)
 	{
+		$remoteNew = $value; // see #3861
+
 		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType'] == 'checkbox' && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['multiple'])
 		{
 			$remoteNew = ($value != '') ? ucfirst($GLOBALS['TL_LANG']['MSC']['yes']) : ucfirst($GLOBALS['TL_LANG']['MSC']['no']);
