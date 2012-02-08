@@ -7,18 +7,20 @@ $GLOBALS['TL_CSS'][] = 'plugins/mootools/mediabox/'. MEDIABOX .'/css/mediaboxAdv
 
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/mediabox/<?php echo MEDIABOX; ?>/js/mediabox.js"></script>
 <script>
-Mediabox.scanPage = function() {
-  var links = $$('a').filter(function(el) {
-    return el.getAttribute('data-lightbox') != null;
-  });
-  $$(links).mediabox({
-    // Put custom options here
-  }, function(el) {
-	return [el.href, el.title, el.getAttribute('data-lightbox')];
-  }, function(el) {
-    var data = this.getAttribute('data-lightbox').split(' ');
-    return (this == el) || el.getAttribute('data-lightbox').match(data[0]);
-  });
-};
-window.addEvent('domready', Mediabox.scanPage);
+(function($) {
+  Mediabox.scanPage = function() {
+    var links = $$('a').filter(function(el) {
+      return el.getAttribute('data-lightbox') != null;
+    });
+    $$(links).mediabox({
+      // Put custom options here
+    }, function(el) {
+  	return [el.href, el.title, el.getAttribute('data-lightbox')];
+    }, function(el) {
+      var data = this.getAttribute('data-lightbox').split(' ');
+      return (this == el) || el.getAttribute('data-lightbox').match(data[0]);
+    });
+  };
+  window.addEvent('domready', Mediabox.scanPage);
+})(document.id);
 </script>

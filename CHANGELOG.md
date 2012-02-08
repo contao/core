@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Rewrote all front end JavaScripts so they run in "no-conflict" mode, which means
+you don't have to decide "MooTools or jQuery" anymore but can have them both.
+
 ### New
 You can now choose jQuery instead of MooTools in the front end. Also, there is
 a jQuery mediabox alternative called "colorbox" (template `j_colorbox`).

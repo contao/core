@@ -8,13 +8,15 @@ $GLOBALS['TL_CSS'][] = 'plugins/mootools/slimbox/css/slimbox.css||static';
 <script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/slimbox/js/slimbox.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
-Slimbox.scanPage = function() {
-  $$(document.links).filter(function(el) {
-    return el.rel && el.rel.test(/^lightbox/i);
-  }).slimbox({}, null, function(el) {
-    return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
-  });
-};
-window.addEvent('domready', Slimbox.scanPage);
+(function($) {
+  Slimbox.scanPage = function() {
+    $$(document.links).filter(function(el) {
+      return el.rel && el.rel.test(/^lightbox/i);
+    }).slimbox({}, null, function(el) {
+      return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
+    });
+  };
+  window.addEvent('domready', Slimbox.scanPage);
+})(document.id);
 /* ]]> */
 </script>

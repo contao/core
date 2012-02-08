@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,jquery,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -342,17 +342,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
-		'mooSource' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
-			'default'                 => 'moo_local',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback', 'j_local', 'j_googleapis', 'j_fallback'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(16) NOT NULL default ''"
-		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cssClass'],
@@ -368,7 +357,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'head' => array
@@ -379,6 +368,28 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'textarea',
 			'eval'                    => array('style'=>'height:60px;', 'preserveTags'=>true, 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
+		),
+		'mooSource' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
+			'default'                 => 'moo_local',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'jSource' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jSource'],
+			'default'                 => 'j_local',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('j_local', 'j_googleapis', 'j_fallback'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'mootools' => array
 		(

@@ -15,7 +15,9 @@ $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
 
 <script src="<?php echo $objCombiner->getCombinedFile(); ?>"></script>
 <script>
-window.addEvent('domready', function() {
-  $$('select.tl_chosen').chosen();
-});
+(function($) {
+  window.addEvent('domready', function() {
+    $$('select.tl_chosen').chosen();
+  });
+})(document.id);
 </script>
