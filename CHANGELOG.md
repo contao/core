@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (2012-02-XX)
 ---------------------------
 
+### Updated
+Updated MooTools to version 1.4.4 (see #3906).
+
 ### Fixed
 Trigger the Slimbox with the data-lightbox attribute (see #3908).
 
