@@ -128,7 +128,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		$arrChannels = array();
-		$objChannel = \NewsletterChannelModel::findByIds($this->nl_channels);
+		$objChannel = \NewsletterChannelCollection::findByIds($this->nl_channels);
 
 		// Get the titles
 		if ($objChannel !== null)
@@ -281,7 +281,7 @@ class ModuleSubscribe extends \Module
 		}
 
 		// Get the channels
-		$objChannel = \NewsletterChannelModel::findByIds($arrChannels);
+		$objChannel = \NewsletterChannelCollection::findByIds($arrChannels);
 
 		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);

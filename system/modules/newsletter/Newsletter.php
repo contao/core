@@ -791,7 +791,7 @@ class Newsletter extends \Backend
 	 */
 	public function getNewsletters($objModule)
 	{
-		$objNewsletter = \NewsletterChannelModel::findAll();
+		$objNewsletter = \NewsletterChannelCollection::findAll();
 
 		if ($objNewsletter === null)
 		{
@@ -851,7 +851,7 @@ class Newsletter extends \Backend
 		$arrProcessed = array();
 
 		// Get all channels
-		$objNewsletter = \NewsletterChannelModel::findAll();
+		$objNewsletter = \NewsletterChannelCollection::findAll();
 
 		// Walk through each channel
 		if ($objNewsletter !== null)
