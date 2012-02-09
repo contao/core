@@ -98,12 +98,15 @@ abstract class Frontend extends \Controller
 			$intSuffixLength = strlen($GLOBALS['TL_CONFIG']['urlSuffix']);
 
 			// Return false if the URL suffix does not match (see #2864)
-			if ($intSuffixLength > 0 && substr($strRequest, -$intSuffixLength) != $GLOBALS['TL_CONFIG']['urlSuffix'])
+			if ($intSuffixLength > 0)
 			{
-				return false;
-			}
+				if (substr($strRequest, -$intSuffixLength) != $GLOBALS['TL_CONFIG']['urlSuffix'])
+				{
+					return false;
+				}
 
-			$strRequest = substr($strRequest, 0, -$intSuffixLength);
+				$strRequest = substr($strRequest, 0, -$intSuffixLength);
+			}
 		}
 
 		$arrFragments = explode('/', $strRequest);

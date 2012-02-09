@@ -48,14 +48,17 @@ var Stylect =
 			} else {
 				var label = el.getElement('option').get('html');
 			}
- 
+
+			// Try to calculate the width of the select menu (getComputedSize() does not seem to work in Webkit)
+			var tw = el.getComputedSize().totalWidth || (el.getStyle('width').toInt() + el.getStyle('border-left-width').toInt() + el.getStyle('border-right-width').toInt());
+
 			// Create the div element
 			var div = new Element('div', {
 				'id': el.get('id') + '_styled',
 				'class': 'styled_select',
 				'html': '<span>' + label + '</span><b><i></i></b>',
 				'styles': {
-					'width': el.getComputedSize().totalWidth - 8
+					'width': tw - 8
 				}
 			}).inject(el, 'before');
 
