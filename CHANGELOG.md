@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+You can now add external style sheets from the files directory to page layouts.
+They are then treated like the internal style sheets, meaning they can be added
+to the combiner by adding the `|static` flag to the file name.
+
 ### Changed
 Rewrote all front end JavaScripts so they run in "no-conflict" mode, which means
 you don't have to decide "MooTools or jQuery" anymore but can have them both.

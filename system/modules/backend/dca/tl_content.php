@@ -330,6 +330,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'listWizard',
 			'eval'                    => array('allowHtml'=>true),
+			'xlabel' => array
+			(
+				array('tl_content', 'listImportWizard')
+			),
 			'sql'                     => "blob NULL"
 		),
 		'tableitems' => array
@@ -338,6 +342,10 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'exclude'                 => true,
 			'inputType'               => 'tableWizard',
 			'eval'                    => array('allowHtml'=>true, 'doNotSaveEmpty'=>true, 'style'=>'width:142px; height:66px;'),
+			'xlabel' => array
+			(
+				array('tl_content', 'tableImportWizard')
+			),
 			'sql'                     => "mediumblob NULL"
 		),
 		'summary' => array
@@ -1259,6 +1267,28 @@ class tl_content extends Backend
 		
 		$GLOBALS['TL_DCA']['tl_content']['fields']['code']['eval']['rte'] = 'codeMirror|' . $syntax;
 		return $varValue;
+	}
+
+
+	/**
+	 * Add a link to the list items import wizard
+	 * @param object
+	 * @return string
+	 */
+	public function listImportWizard(DataContainer $dc)
+	{
+		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
+	}
+
+
+	/**
+	 * Add a link to the table items import wizard
+	 * @param object
+	 * @return string
+	 */
+	public function tableImportWizard(DataContainer $dc)
+	{
+		return ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a> ' . $this->generateImage('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom;cursor:pointer" onclick="Backend.tableWizardResize(0.9)"') . $this->generateImage('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer" onclick="Backend.tableWizardResize(1.1)"');
 	}
 
 

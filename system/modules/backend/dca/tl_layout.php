@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -272,6 +272,14 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'external' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['external'],
+			'exclude'                 => true,
+			'inputType'               => 'listWizard',
+			'eval'                    => array('style'=>'width:360px'),
+			'sql'                     => "blob NULL"
 		),
 		'webfonts' => array
 		(
