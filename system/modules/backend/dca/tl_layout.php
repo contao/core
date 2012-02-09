@@ -279,6 +279,10 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'inputType'               => 'listWizard',
 			'eval'                    => array('style'=>'width:360px'),
+			'save_callback' => array
+			(
+				array('tl_layout', 'filterExternalPaths')
+			),
 			'sql'                     => "blob NULL"
 		),
 		'webfonts' => array
@@ -648,6 +652,29 @@ class tl_layout extends Backend
 		}
 
 		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Remove empty and duplicate elements from the external style sheets array
+	 * @param 
+	 * @return string
+	 */
+	public function filterExternalPaths($varValue)
+	{
+		if ($varValue == '')
+		{
+			return $varValue;
+		}
+
+		$varValue = deserialize($varValue);
+
+		if (!is_array($varValue))
+		{
+			return '';
+		}
+
+		return array_filter(array_unique($varValue));
 	}
 
 
