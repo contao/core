@@ -4,6 +4,12 @@ Contao Open Source CMS Changelog
 Version 2.11.0 (2012-02-XX)
 ---------------------------
 
+### Fixed
+Fixed extracting the page alias when no URL suffix is used (see #3913).
+
+### Fixed
+Correctly calculate the width of the stylect select element in webkit.
+
 ### Updated
 Updated MooTools to version 1.4.4 (see #3906).
 
