@@ -921,6 +921,12 @@ abstract class Controller extends System
 			return $image;
 		}
 
+		// No mode given
+		if ($mode == '')
+		{
+			$mode = 'proportional';
+		}
+
 		// Backwards compatibility
 		if ($mode == 'crop')
 		{
@@ -1185,7 +1191,6 @@ abstract class Controller extends System
 		{
 			$this->import('Files');
 			$this->Files->rename($strCacheName, $target);
-
 			return $this->urlEncode($target);
 		}
 

@@ -285,21 +285,21 @@ class FileUpload extends Backend
 
 		$blnResized = false;
 
-		// The image exceeds the maximum image width
-		if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
-		{
-			$blnResized = true;
-			$this->resizeImage($strImage, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
-
-			// Recalculate the image size
-			$arrImageSize = @getimagesize(TL_ROOT . '/' . $strImage);
-		}
-
 		// The image exceeds the maximum image height
 		if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
 		{
 			$blnResized = true;
 			$this->resizeImage($strImage, 0, $GLOBALS['TL_CONFIG']['imageHeight']);
+
+			// Recalculate the image size
+			$arrImageSize = @getimagesize(TL_ROOT . '/' . $strImage);
+		}
+
+		// The image exceeds the maximum image width
+		if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
+		{
+			$blnResized = true;
+			$this->resizeImage($strImage, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
 		}
 
 		// Resized successfully
