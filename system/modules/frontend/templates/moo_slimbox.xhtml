@@ -9,7 +9,7 @@ $GLOBALS['TL_CSS'][] = 'plugins/mootools/slimbox/css/slimbox.css||static';
 <script type="text/javascript">
 /* <![CDATA[ */
 (function($) {
-  Slimbox.scanPage = function() {
+  window.addEvent('domready', function() {
     $$(document.links).filter(function(el) {
       return el.rel && el.rel.test(/^lightbox/i);
     }).slimbox({
@@ -17,8 +17,11 @@ $GLOBALS['TL_CSS'][] = 'plugins/mootools/slimbox/css/slimbox.css||static';
     }, null, function(el) {
       return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
     });
-  };
-  window.addEvent('domready', Slimbox.scanPage);
+    // Support swiping on mobile devices
+    $('lbImage').addEvent('swipe', function(e) {
+      (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
+    });
+  });
 })(document.id);
 /* ]]> */
 </script>

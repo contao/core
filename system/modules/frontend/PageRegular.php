@@ -358,13 +358,15 @@ class PageRegular extends \Frontend
 				}
 
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/mobile/mootools-mobile.js"></script>' . "\n";
 			}
 			else
 			{
 				$objCombiner = new \Combiner();
 
-				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
-				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
+				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+				$objCombiner->add('plugins/mootools/mobile/mootools-mobile.js', MOOTOOLS);
 
 				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
 			}

@@ -657,7 +657,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Remove empty and duplicate elements from the external style sheets array
-	 * @param 
+	 * @param mixed
 	 * @return string
 	 */
 	public function filterExternalPaths($varValue)
