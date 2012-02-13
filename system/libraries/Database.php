@@ -767,20 +767,21 @@ abstract class Database_Statement
 			return;
 		}
 
-		$arrData[] = $this->strQuery;
+		$arrData['query'] = $this->strQuery;
+		$arrData['rows_num'] = $this->affectedRows;
 
 		if ($objResult === null || strncmp(strtoupper($this->strQuery), 'SELECT', 6) !== 0)
 		{
-			$arrData[] = sprintf('%d rows affected', $this->affectedRows);
+			$arrData['rows'] = sprintf('%d rows affected', $this->affectedRows);
 			$GLOBALS['TL_DEBUG'][] = $arrData;
 		}
 		else
 		{
-			$arrData[] = sprintf('%s rows returned', $objResult->numRows);
+			$arrData['rows'] = sprintf('%s rows returned', $objResult->numRows);
 
 			if (($arrExplain = $this->explain()) != false)
 			{
-				$arrData[] = $arrExplain;
+				$arrData['explain'] = $arrExplain;
 			}
 
 			$GLOBALS['TL_DEBUG'][] = $arrData;

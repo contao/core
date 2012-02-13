@@ -290,8 +290,22 @@ abstract class Template extends Controller
 		// Debug information
 		if ($GLOBALS['TL_CONFIG']['debugMode'])
 		{
+			$intQuerys = 0;
+			$intRows = 0;
+
+			// calc some debug stats
+			foreach ($GLOBALS['TL_DEBUG'] as &$v)
+			{
+				$intQuerys++;
+				$intRows += $v['rows_num'];
+
+				unset($v['rows_num']);
+			}
+
 			echo "\n\n" . '<pre id="debug" style="width:80%;overflow:auto;margin:24px auto;padding:9px;background:#fff">' . "\n";
 			echo "<strong>Debug information</strong>\n\n";
+			echo '<span>' . $intQuerys . " querys executed.</span>\n";
+			echo '<span>' . $intRows . " rows returned.</span>\n\n";
 			print_r($GLOBALS['TL_DEBUG']);
 			echo '</pre>';
 		}
