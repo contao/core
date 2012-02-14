@@ -305,7 +305,7 @@ class Calendar extends \Frontend
 	 */
 	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strLink)
 	{
-		if ($intStart < time())
+		if ($intEnd < time()) // see #3917
 		{
 			return;
 		}
