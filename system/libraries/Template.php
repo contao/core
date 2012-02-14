@@ -32,7 +32,7 @@
 /**
  * Class Template
  *
- * Provide methods to handle templates.
+ * Provide methods to handle template files.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
