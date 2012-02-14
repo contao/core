@@ -68,32 +68,7 @@
 <?php echo $this->mootools; ?>
 <?php if (!$this->disableCron): ?>
 
-<script type="text/javascript">
-/* <![CDATA[ */
-setTimeout(function() { 
-  if (window.jQuery) {
-    jQuery.ajax('system/cron/cron.txt', {
-      complete: function(xhr) {
-        var txt = xhr.responseText || 0;
-        if (parseInt(txt) < (Math.round(+new Date()/1000) - 300)) {
-          jQuery.ajax('system/cron/cron.php');
-        }
-      }
-    });
-  } else if (window.MooTools) {
-    new Request({
-      url:'system/cron/cron.txt',
-      onComplete: function(txt) {
-        if (!txt) txt = 0;
-        if (parseInt(txt) < (Math.round(+new Date()/1000) - 300)) {
-          new Request({url:'system/cron/cron.php'}).get();
-        }
-      }
-    }).get();
-  }
-}, 5000);
-/* ]]> */
-</script>
+<script type="text/javascript" src="assets/contao/scheduler.js"></script>
 <?php endif; ?>
 
 </body>
