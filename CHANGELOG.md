@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Also show todays events and running events in the RSS feed (see #3917).
+
+### Fixed
 Added "eot|woff|svg|ttf|htm" to the default .htaccess file (see #3930).
 
 ### Fixed

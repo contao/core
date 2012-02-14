@@ -118,8 +118,8 @@ class Calendar extends Frontend
 		$objFeed->language = $arrArchive['language'];
 		$objFeed->published = $arrArchive['tstamp'];
 
-		// Get upcoming events
-		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=e.author) AS authorName FROM tl_calendar_events e WHERE pid=? AND (startTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
+		// Get upcoming events using endTime instead of startTime (see #3917)
+		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=e.author) AS authorName FROM tl_calendar_events e WHERE pid=? AND (endTime>=$time OR (recurring=1 AND (recurrences=0 OR repeatEnd>=$time))) AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY startTime");
 
 		if ($arrArchive['maxItems'] > 0)
 		{
@@ -314,7 +314,7 @@ class Calendar extends Frontend
 	 */
 	protected function addEvent(Database_Result $objArticle, $intStart, $intEnd, $strUrl, $strLink)
 	{
-		if ($intStart < time())
+		if ($intEnd < time()) // see #3917
 		{
 			return;
 		}
