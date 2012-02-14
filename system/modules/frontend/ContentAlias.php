@@ -68,8 +68,22 @@ class ContentAlias extends ContentElement
 		$objElement = new $strClass($objElement);
 
 		// Overwrite spacing and CSS ID
-		$objElement->space = $this->space;
-		$objElement->cssID = $this->cssID;
+		if($this->space != '')
+		{
+			$arrSpace = $objElement->space;
+			foreach($this->space as $k=>$v)
+			{
+				if($v != '') $arrSpace[$k] = $v;
+			}
+			$objElement->space = $arrSpace;
+		}
+		
+		$arrCssID = $objElement->cssID;
+		foreach($this->cssID as $k=>$v)
+		{
+			if($v != '') $arrCssID[$k] = $v;
+		}
+		$objElement->cssID = $arrCssID;
 
 		return $objElement->generate();
 	}
