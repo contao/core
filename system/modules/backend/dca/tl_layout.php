@@ -116,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external,webfonts;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,webfonts,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -285,15 +285,6 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			),
 			'sql'                     => "blob NULL"
 		),
-		'webfonts' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['webfonts'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
 		'newsfeeds' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['newsfeeds'],
@@ -354,6 +345,15 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
+		'webfonts' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['webfonts'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cssClass'],
@@ -369,7 +369,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr'),
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'head' => array
