@@ -281,7 +281,7 @@ var Chosen = new Class({
 				if (data.selected && this.is_multiple){
 					this.choice_build(data);
 				}else if (data.selected && !this.is_multiple){
-					this.selected_item.getElements("span").set('text', data.text);
+					this.selected_item.getElements("span").set('html', data.html); // PATCH: use the HTML field instead of "text"
 				}
 			}
 		}, this);
@@ -968,7 +968,7 @@ var SelectParser = new Class({
 					options_index: this.options_index,
 					value: option.get("value"),
 					text: option.get("text").trim(),
-					html: option.get("html"),
+					html: option.get("html").replace('[', '<span style="color:#b3b3b3;padding-left:3px">[').replace(']', ']</span>'), // PATCH: Contao-specific replacements
 					selected: option.selected,
 					disabled: group_disabled === true ? group_disabled : option.disabled,
 					group_array_index: group_position

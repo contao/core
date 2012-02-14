@@ -79,7 +79,7 @@ select.chzn-select {
   line-height:21px;
 }
 /* PATCH EOF */
-.chzn-container-single .chzn-single span {
+.chzn-container-single .chzn-single > span {
   margin-right: 26px;
   display: block;
   overflow: hidden;

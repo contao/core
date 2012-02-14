@@ -196,7 +196,7 @@ class ModuleWizard extends \Widget
 			// Add modules
 			foreach ($modules as $v)
 			{
-				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' // '. $v['type'] .'</option>';
+				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
 			}
 
 			$return .= '
