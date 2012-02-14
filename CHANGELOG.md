@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a nicer dialog script in the back end.
+
+### New
 Added `mootools-mobile.js` and swipe support to the mediabox and slimbox.
 
 ### New

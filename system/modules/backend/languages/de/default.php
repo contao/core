@@ -358,6 +358,7 @@ $GLOBALS['TL_LANG']['MSC']['saveNedit']        = 'Speichern und bearbeiten';
 $GLOBALS['TL_LANG']['MSC']['saveNback']        = 'Speichern und zurück';
 $GLOBALS['TL_LANG']['MSC']['saveNcreate']      = 'Speichern und neu';
 $GLOBALS['TL_LANG']['MSC']['continue']         = 'Weiter';
+$GLOBALS['TL_LANG']['MSC']['close']            = 'Schließen';
 $GLOBALS['TL_LANG']['MSC']['skipNavigation']   = 'Navigation überspringen';
 $GLOBALS['TL_LANG']['MSC']['selectAll']        = 'Alle auswählen';
 $GLOBALS['TL_LANG']['MSC']['pw_change']        = 'Bitte geben Sie ein neues Passwort ein';

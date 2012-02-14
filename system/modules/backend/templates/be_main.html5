@@ -9,7 +9,7 @@
   $objCombiner->add('plugins/mootools/colorpicker/css/mooRainbow.css');
   $objCombiner->add('plugins/mootools/chosen/chosen.css');
   $objCombiner->add('plugins/mootools/stylect/css/stylect.css');
-  $objCombiner->add('plugins/mootools/mediabox/' . MEDIABOX . '/css/mediaboxAdvWhite21.css', MEDIABOX);
+  $objCombiner->add('plugins/mootools/simplemodal/css/simplemodal.css');
   $objCombiner->add('plugins/mootools/datepicker/dashboard.css', DATEPICKER);
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/main.css');
@@ -25,7 +25,7 @@
   $objCombiner->add('plugins/mootools/colorpicker/js/mooRainbow.js');
   $objCombiner->add('plugins/mootools/chosen/chosen.js');
   $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
-  $objCombiner->add('plugins/mootools/mediabox/' . MEDIABOX . '/js/mediabox.js', MEDIABOX);
+  $objCombiner->add('plugins/mootools/simplemodal/js/simplemodal.js');
   $objCombiner->add('plugins/mootools/datepicker/datepicker.js', DATEPICKER);
   $objCombiner->add('plugins/mootools/request/Request.Contao.js');
   $objCombiner->add('system/modules/backend/html/contao.js');
@@ -118,29 +118,12 @@ Backend.vScrollTo(<?php echo $this->pageOffset; ?>);
 <?php setcookie('BE_PAGE_OFFSET', 0, 0, '/'); endif; ?>
 
 <script>
-Mediabox.scanPage = function() {
-  var links = $$('a').filter(function(el) {
-    return el.getAttribute('data-lightbox') != null;
-  });
-  var options = {
-    'showCaption': false,
-    'showCounter': false
-  };
-  $$(links).mediabox(options, function(el) {
-	return [el.href, el.title, el.getAttribute('data-lightbox')];
-  }, function(el) {
-    var data = this.getAttribute('data-lightbox').split(' ');
-    return (this == el) || el.getAttribute('data-lightbox').match(data[0]);
-  });
-};
-Mediabox.enableFiletreeReload = function() {
-  window.addEvent('mb_close', function() {
+Contao.enableFiletreeReload = function() {
+  window.addEvent('sm_hide', function() {
     AjaxRequest.reloadFiletrees();
-    window.removeEvents('mb_close');
+    window.removeEvents('sm_hide');
   });
 };
-window.addEvent('domready', Mediabox.scanPage);
-window.addEvent('ajax_change', Mediabox.scanPage);
 </script>
 <?php echo $this->mootools; ?>
 

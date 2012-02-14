@@ -27,30 +27,13 @@
 
 /* Body */
 body {
-	background:#f5f5f5 url("images/hbg.jpg") repeat-x;
-}
-
-/* Container */
-#container {
-	width:580px;
-	margin:18px auto;
-	text-align:left;
-}
-
-/* Main */
-#main {
-	width:576px;
-	padding:1px;
 	background:#fff;
-	border:1px solid #bbb;
+	padding:6px 12px;
 }
 
 /* Headline */
 h1 {
-	margin:0;
-	padding:2px 0 4px 6px;
-	background:#b3b6b3 url("images/headline.gif") repeat-x;
-	color:#fff;
+	display:none;
 }
 h2 {
 	margin:18px 18px 9px;
@@ -80,9 +63,4 @@ td[colspan="2"] {
 }
 tr:first-child td[colspan="2"] {
 	padding-top:12px;
-}
-
-/* IE 7 fix */
-.ie7 #container {
-	padding-bottom:18px;
 }

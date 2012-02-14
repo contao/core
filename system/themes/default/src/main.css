@@ -29,6 +29,10 @@
 body {
 	background:#f5f5f5 url("images/hbg.jpg") repeat-x;
 }
+body.popup {
+	background:#fff;
+	padding:6px 12px;
+}
 
 /* Header */
 #header {
@@ -69,6 +73,11 @@ body {
 	width:940px;
 	margin:0 auto;
 }
+.popup #container {
+	width:730px;
+	margin:0;
+	padding:0;
+}
 
 /* Left */
 #left {
@@ -94,6 +103,13 @@ body {
 	-webkit-border-radius:3px;
 	border-radius:3px;
 	box-shadow:0 3px 6px #ccc;
+}
+.popup #main {
+	padding:0;
+	margin:0;
+	border:0;
+	float:none;
+	box-shadow:none;
 }
 
 /* Footer */
@@ -180,6 +196,9 @@ h1.main_headline {
 	-moz-border-radius:3px 3px 0 0;
 	-webkit-border-radius:3px 3px 0 0;
 	border-radius:3px 3px 0 0;
+}
+.popup h1.main_headline {
+	display:none;
 }
 h2.sub_headline,h2.sub_headline_all,h2.sub_headline_update,h2.sub_headline_index {
 	margin:3px 18px 9px;
@@ -1136,4 +1155,7 @@ fieldset.collapsed > legend {
 	border-radius:4px;
 	position:absolute;
 	left:50%;
+}
+.popup #tl_helpBox {
+	margin-left:-353px;
 }

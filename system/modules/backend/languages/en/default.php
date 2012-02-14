@@ -358,6 +358,7 @@ $GLOBALS['TL_LANG']['MSC']['saveNedit']        = 'Save and edit';
 $GLOBALS['TL_LANG']['MSC']['saveNback']        = 'Save and go back';
 $GLOBALS['TL_LANG']['MSC']['saveNcreate']      = 'Save and new';
 $GLOBALS['TL_LANG']['MSC']['continue']         = 'Continue';
+$GLOBALS['TL_LANG']['MSC']['close']            = 'Close';
 $GLOBALS['TL_LANG']['MSC']['skipNavigation']   = 'Skip navigation';
 $GLOBALS['TL_LANG']['MSC']['selectAll']        = 'Select all';
 $GLOBALS['TL_LANG']['MSC']['pw_change']        = 'Please enter a new password';

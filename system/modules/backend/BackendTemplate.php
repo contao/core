@@ -179,12 +179,18 @@ class BackendTemplate extends \Template
 	 */
 	protected function getLocaleString()
 	{
-		return 'var CONTAO_THEME="' . $this->getTheme() . '",'
-			. 'CONTAO_COLLAPSE="' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'
-			. 'CONTAO_EXPAND="' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
-			. 'CONTAO_LOADING="' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
-			. 'CONTAO_SCRIPT_URL="' . TL_SCRIPT_URL . '",'
-			. 'REQUEST_TOKEN="' . REQUEST_TOKEN . '";';
+		return 
+			'var Contao={'
+				. 'theme:"' . $this->getTheme() . '",'
+				. 'lang:{'
+					. 'close:"' . $GLOBALS['TL_LANG']['MSC']['close'] . '",'
+					. 'collapse:"' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'
+					. 'expand:"' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
+					. 'loading:"' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '"'
+				. '},'
+				. 'script_url:"' . TL_SCRIPT_URL . '",'
+				. 'request_token:"' . REQUEST_TOKEN . '"'
+			. '};';
 	}
 
 
