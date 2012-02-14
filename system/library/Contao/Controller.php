@@ -2742,7 +2742,7 @@ abstract class Controller extends \System
 			$blnIsAssociative = ($arrData['eval']['isAssociative'] || array_is_assoc($arrData['options']));
 			$blnUseReference = isset($arrData['reference']);
 
-			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['chosen'])
+			if ($arrData['eval']['includeBlankOption'] && !$arrData['eval']['multiple'])
 			{
 				$strLabel = isset($arrData['eval']['blankOptionLabel']) ? $arrData['eval']['blankOptionLabel'] : '-';
 				$arrNew['options'][] = array('value'=>'', 'label'=>$strLabel);
