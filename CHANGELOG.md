@@ -5,6 +5,9 @@ Version 2.11.0 (2012-02-XX)
 ---------------------------
 
 ### Fixed
+Added "eot|woff|svg|ttf|htm" to the default .htaccess file (see #3930).
+
+### Fixed
 Fixed extracting the page alias when no URL suffix is used (see #3913).
 
 ### Fixed
