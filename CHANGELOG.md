@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.1 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+The slimbox style sheets are now compatible with the combiner.
+
+
 Version 2.11.0 (2012-02-15)
 ---------------------------
 
