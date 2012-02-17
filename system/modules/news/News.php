@@ -51,27 +51,27 @@ class News extends \Frontend
 	 */
 	public function generateFeed($intId)
 	{
-		$objArchive = \NewsArchiveModel::findByPk($intId);
+		$objFeed = \NewsFeedModel::findByArchive($intId);
 
-		if ($objArchive === null || !$objArchive->makeFeed)
+		if ($objFeed === null)
 		{
 			return;
 		}
 
-		$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
+		$objFeed->feedName = ($objFeed->alias != '') ? $objFeed->alias : 'news' . $objFeed->id;
 
-		// Delete the XML file
-		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
+		// Delete XML file
+		if ($this->Input->get('act') == 'delete')
 		{
 			$this->import('Files');
-			$this->Files->delete('share/' . $objArchive->feedName . '.xml');
+			$this->Files->delete($objFeed->feedName . '.xml');
 		}
 
-		// Update the XML file
+		// Update XML file
 		else
 		{
-			$this->generateFiles($objArchive->row());
-			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeed()', TL_CRON);
+			$this->generateFiles($objFeed->row());
+			$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeed()', TL_CRON);
 		}
 	}
 
@@ -82,15 +82,15 @@ class News extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objArchive = \NewsArchiveCollection::findUnprotectedWithFeeds();
+		$objFeed = \NewsFeedCollection::findAll();
 
-		if ($objArchive !== null)
+		if ($objFeed !== null)
 		{
-			while ($objArchive->next())
+			while ($objFeed->next())
 			{
-				$objArchive->feedName = ($objArchive->alias != '') ? $objArchive->alias : 'news' . $objArchive->id;
-				$this->generateFiles($objArchive->row());
-				$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+				$objFeed->feedName = ($objFeed->alias != '') ? $objFeed->alias : 'news' . $objFeed->id;
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
 			}
 		}
 	}
@@ -100,75 +100,94 @@ class News extends \Frontend
 	 * Generate an XML files and save them to the root directory
 	 * @param array
 	 */
-	protected function generateFiles($arrArchive)
+	protected function generateFiles($arrFeed)
 	{
-		$time = time();
-		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
-		$strFile = $arrArchive['feedName'];
+		$arrArchives = deserialize($arrFeed['archives']);
 
-		$objFeed = new \Feed($strFile);
-
-		$objFeed->link = $strLink;
-		$objFeed->title = $arrArchive['title'];
-		$objFeed->description = $arrArchive['description'];
-		$objFeed->language = $arrArchive['language'];
-		$objFeed->published = $arrArchive['tstamp'];
-
-		// Get the items
-		$objArticle = \NewsCollection::findPublishedByPid($arrArchive['id'], $arrArchive['maxItems']);
-
-		if ($objArticle === null)
+		if (!is_array($arrArchives) || empty($arrArchives))
 		{
-			return;
+			continue;
 		}
 
-		$objParent = $this->getPageDetails($arrArchive['jumpTo']['id']);
-		$strUrl = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
+		$strLink = ($arrFeed['feedBase'] != '') ? $arrFeed['feedBase'] : $this->Environment->base;
+		$strFile = $arrFeed['feedName'];
 
-		// Parse items
-		while ($objArticle->next())
+		$objFeed = new Feed($strFile);
+		$objFeed->link = $strLink;
+		$objFeed->title = $arrFeed['title'];
+		$objFeed->description = $arrFeed['description'];
+		$objFeed->language = $arrFeed['language'];
+		$objFeed->published = $arrFeed['tstamp'];
+
+		// Get the items
+		if ($arrFeed['maxItems'] > 0)
 		{
-			$objItem = new \FeedItem();
+			$objArticle = \NewsCollection::findPublishedByPids($arrArchives, null, $arrFeed['maxItems']);
+		}
+		else
+		{
+			$objArticle = \NewsCollection::findPublishedByPids($arrArchives);
+		}
 
-			$objItem->title = $objArticle->headline;
-			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
-			$objItem->published = $objArticle->date;
-			$objItem->author = $objArticle->authorName;
+		// Parse the items
+		if ($objArticle !== null)
+		{
+			$arrUrls = array();
 
-			// Prepare the description
-			$strDescription = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
-			$strDescription = $this->replaceInsertTags($strDescription);
-			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
-
-			// Add the article image as enclosure
-			if ($objArticle->addImage)
+			while ($objArticle->next())
 			{
-				$objItem->addEnclosure($objArticle->singleSRC);
-			}
+				$jumpTo = $objArticle->pid['jumpTo'];
 
-			// Enclosure
-			if ($objArticle->addEnclosure)
-			{
-				$arrEnclosure = deserialize($objArticle->enclosure, true);
-
-				if (is_array($arrEnclosure))
+				// Get the jumpTo URL
+				if (!isset($arrUrls[$jumpTo]))
 				{
-					foreach ($arrEnclosure as $strEnclosure)
+					$objParent = $this->getPageDetails($jumpTo);
+					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+				}
+
+				$strUrl = $arrUrls[$jumpTo];
+				$objItem = new FeedItem();
+
+				$objItem->title = $objArticle->headline;
+				$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
+				$objItem->published = $objArticle->date;
+				$objItem->author = $objArticle->authorName;
+
+				// Prepare the description
+				$strDescription = ($arrFeed['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
+				$strDescription = $this->replaceInsertTags($strDescription);
+				$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
+
+				// Add the article image as enclosure
+				if ($objArticle->addImage)
+				{
+					$objItem->addEnclosure($objArticle->singleSRC);
+				}
+
+				// Enclosure
+				if ($objArticle->addEnclosure)
+				{
+					$arrEnclosure = deserialize($objArticle->enclosure, true);
+
+					if (is_array($arrEnclosure))
 					{
-						if (is_file(TL_ROOT . '/' . $strEnclosure))
-						{				
-							$objItem->addEnclosure($strEnclosure);
+						foreach ($arrEnclosure as $strEnclosure)
+						{
+							if (is_file(TL_ROOT . '/' . $strEnclosure))
+							{				
+								$objItem->addEnclosure($strEnclosure);
+							}
 						}
 					}
 				}
-			}
 
-			$objFeed->addItem($objItem);
+				$objFeed->addItem($objItem);
+			}
 		}
 
-		// Create file
-		$objRss = new \File('share/' . $strFile . '.xml');
+		// Create the file
+		$objRss = new File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -284,6 +303,27 @@ class News extends \Frontend
 
 		// Link to the default page
 		return sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+	}
+
+
+	/**
+	 * Return the names of the existing feeds so they are not removed
+	 * @return array
+	 */
+	public function purgeOldFeeds()
+	{
+		$arrFeeds = array();
+		$objFeeds = \NewsFeedCollection::findAll();
+
+		if ($objFeeds !== null)
+		{
+			while ($objFeeds->next())
+			{
+				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'news' . $objFeeds->id;
+			}
+		}
+
+		return $arrFeeds;
 	}
 }
 

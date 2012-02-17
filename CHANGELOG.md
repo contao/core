@@ -5,6 +5,11 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Improved the RSS feed handling in the news module (will do the same for the
+calendar module). Feeds are no longer bound to a news archive and can include
+multiple archives now.
+
+### New
 Added a nicer dialog script in the back end.
 
 ### New

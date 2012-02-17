@@ -135,7 +135,7 @@ class PurgeData extends \Backend implements \executable
 					{
 						$this->Automator->generateSitemap();
 					}
-
+# FIXME: use a general hook instead
 					// HOOK: recreate news feeds
 					if (in_array('news', $this->Config->getActiveModules()))
 					{

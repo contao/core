@@ -44,6 +44,8 @@ ClassLoader::addClasses(array
 	'Contao\\NewsArchiveCollection' => 'system/modules/news/models/NewsArchiveCollection.php',
 	'Contao\\NewsArchiveModel'      => 'system/modules/news/models/NewsArchiveModel.php',
 	'Contao\\NewsCollection'        => 'system/modules/news/models/NewsCollection.php',
+	'Contao\\NewsFeedCollection'    => 'system/modules/news/models/NewsFeedCollection.php',
+	'Contao\\NewsFeedModel'         => 'system/modules/news/models/NewsFeedModel.php',
 	'Contao\\NewsModel'             => 'system/modules/news/models/NewsModel.php',
 ));
 

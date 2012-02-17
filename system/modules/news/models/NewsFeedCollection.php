@@ -23,55 +23,34 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * @package    Backend
  * @license    LGPL
  */
 
 
 /**
- * Back end modules
+ * Run in a custom namespace, so the class can be replaced
  */
-array_insert($GLOBALS['BE_MOD']['content'], 1, array
-(
-	'news' => array
-	(
-		'tables' => array('tl_news_archive', 'tl_news', 'tl_news_feed')
-	)
-));
+namespace Contao;
 
 
 /**
- * Front end modules
+ * Class NewsFeedCollection
+ *
+ * Provide methods to handle multiple models.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Model
  */
-array_insert($GLOBALS['FE_MOD'], 2, array
-(
-	'news' => array
-	(
-		'newslist'    => 'ModuleNewsList',
-		'newsreader'  => 'ModuleNewsReader',
-		'newsarchive' => 'ModuleNewsArchive',
-		'newsmenu'    => 'ModuleNewsMenu'
-	)
-));
+class NewsFeedCollection extends \Model_Collection
+{
 
+	/**
+	 * Name of the table
+	 * @var string
+	 */
+	protected static $strTable = 'tl_news_feed';
 
-/**
- * Cron jobs
- */
-$GLOBALS['TL_CRON']['daily'][] = array('News', 'generateFeeds');
-
-
-/**
- * Register hook to add news items to the indexer
- */
-$GLOBALS['TL_HOOKS']['removeOldFeeds'][] = array('News', 'purgeOldFeeds');
-$GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('News', 'getSearchablePages');
-
-
-/**
- * Add permissions
- */
-$GLOBALS['TL_PERMISSIONS'][] = 'news';
-$GLOBALS['TL_PERMISSIONS'][] = 'newp';
+}
 
 ?>

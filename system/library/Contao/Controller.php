@@ -3139,24 +3139,13 @@ abstract class Controller extends \System
 		}
 
 		// Calendar module
-		if (in_array('calendar', $arrModules))
+		if (in_array('calendar', $arrModules)) # FIXME: use the hook instead
 		{
 			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_calendar WHERE makeFeed=1 AND alias!=''");
 
 			while ($objFeeds->next())
 			{
 				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'calendar' . $objFeeds->id;
-			}
-		}
-
-		// News module
-		if (in_array('news', $arrModules))
-		{
-			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_news_archive WHERE makeFeed=1 AND alias!=''");
-
-			while ($objFeeds->next())
-			{
-				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'news' . $objFeeds->id;
 			}
 		}
 

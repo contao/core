@@ -200,7 +200,7 @@ h1.main_headline {
 .popup h1.main_headline {
 	display:none;
 }
-h2.sub_headline,h2.sub_headline_all,h2.sub_headline_update,h2.sub_headline_index {
+h2.sub_headline,h2.sub_headline_all,h2.sub_headline_update,h2.sub_headline_index,h2.sub_headline_rss {
 	margin:3px 18px 9px;
 	padding:6px 0 8px 36px;	
 	color:#8ab858;
@@ -987,7 +987,7 @@ a.navigation.tpl_editor {
 }
 
 /* Default icon classes */
-a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,
+a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header_logout,.header_back,.header_new,.header_rss,
 .header_edit_all,.header_delete_all,.header_new_folder,.header_css_import,.header_theme_import,.header_toggle {
 	padding:2px 0 3px 20px;
 	background-position:left center;
@@ -1027,6 +1027,9 @@ a.navigation,.header_home,.header_user,.header_preview,.header_clipboard,.header
 .header_new {
 	padding-left:18px;
 	background:url("images/new.gif") no-repeat left center;
+}
+.header_rss {
+	background:url("images/rss.gif") no-repeat left center;
 }
 .header_edit_all {
 	background:url("images/all.gif") no-repeat left center;
