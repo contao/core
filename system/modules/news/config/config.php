@@ -73,5 +73,7 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('News', 'getSearchablePages
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'news';
 $GLOBALS['TL_PERMISSIONS'][] = 'newp';
+$GLOBALS['TL_PERMISSIONS'][] = 'newsfeeds';
+$GLOBALS['TL_PERMISSIONS'][] = 'newsfeedp';
 
 ?>

@@ -51,6 +51,22 @@ class NewsFeedCollection extends \Model_Collection
 	 */
 	protected static $strTable = 'tl_news_feed';
 
+
+	/**
+	 * Find news feeds by their IDs
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
+	}
 }
 
 ?>

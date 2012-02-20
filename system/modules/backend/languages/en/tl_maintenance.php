@@ -65,5 +65,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable']  = 'No searchable pages fo
 $GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Please wait for the page to load completely before you proceed!';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Please wait while the search index is being rebuilt.';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'The search index has been rebuilt. You can now proceed.';
+$GLOBALS['TL_LANG']['tl_maintenance']['updateHelp']    = 'Please enter your %s here.';
 
 ?>

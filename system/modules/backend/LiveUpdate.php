@@ -136,6 +136,7 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->referer = base64_encode($this->Environment->base . $this->Environment->request . '|' . $this->Environment->server);
 		$objTemplate->backupFiles = $GLOBALS['TL_LANG']['tl_maintenance']['backupFiles'];
 		$objTemplate->showToc = $GLOBALS['TL_LANG']['tl_maintenance']['showToc'];
+		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
 
 		return $objTemplate->parse();
 	}

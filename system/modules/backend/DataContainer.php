@@ -593,7 +593,7 @@ class DataContainer extends \Backend
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
 			$attributes = strlen($v['attributes']) ? ' ' . ltrim($v['attributes']) : '';
 
-			if (!strlen($label))
+			if ($label == '')
 			{
 				$label = $k;
 			}

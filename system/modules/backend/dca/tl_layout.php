@@ -543,9 +543,9 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		$objFeed = $this->Database->execute("SELECT id, title FROM tl_news_archive WHERE makeFeed=1");
+		$objFeed = \NewsFeedCollection::findAll();
 
-		if ($objFeed->numRows < 1)
+		if ($objFeed === null)
 		{
 			return array();
 		}

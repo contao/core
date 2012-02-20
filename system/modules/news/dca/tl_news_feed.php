@@ -42,6 +42,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
+			array('tl_news_feed', 'checkPermission'),
 			array('tl_news_feed', 'generateFeed')
 		),
 		'onsubmit_callback' => array
@@ -169,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_news_archive.title', 
+			'options_callback'        => array('tl_news_feed', 'getAllowedArchives'), 
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
@@ -239,6 +240,141 @@ class tl_news_feed extends Backend
 {
 
 	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+	}
+
+
+	/**
+	 * Check permissions to edit table tl_news_archive
+	 */
+	public function checkPermission()
+	{
+		if ($this->User->isAdmin)
+		{
+			return;
+		}
+
+		// Set the root IDs
+		if (!is_array($this->User->newsfeeds) || empty($this->User->newsfeeds))
+		{
+			$root = array(0);
+		}
+		else
+		{
+			$root = $this->User->newsfeeds;
+		}
+
+		$GLOBALS['TL_DCA']['tl_news_feed']['list']['sorting']['root'] = $root;
+
+		// Check permissions to add feeds
+		if (!$this->User->hasAccess('create', 'newsfeedp'))
+		{
+			$GLOBALS['TL_DCA']['tl_news_feed']['config']['closed'] = true;
+		}
+
+		// Check current action
+		switch ($this->Input->get('act'))
+		{
+			case 'create':
+			case 'select':
+				// Allow
+				break;
+
+			case 'edit':
+				// Dynamically add the record to the user profile
+				if (!in_array($this->Input->get('id'), $root))
+				{
+					$arrNew = $this->Session->get('new_records');
+
+					if (is_array($arrNew['tl_news_feed']) && in_array($this->Input->get('id'), $arrNew['tl_news_feed']))
+					{
+						// Add permissions on user level
+						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
+						{
+							$objUser = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->id);
+
+							$arrNewsfeedp = deserialize($objUser->newsfeedp);
+
+							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							{
+								$arrNewsfeeds = deserialize($objUser->newsfeeds);
+								$arrNewsfeeds[] = $this->Input->get('id');
+
+								$this->Database->prepare("UPDATE tl_user SET newsfeeds=? WHERE id=?")
+											   ->execute(serialize($arrNewsfeeds), $this->User->id);
+							}
+						}
+
+						// Add permissions on group level
+						elseif ($this->User->groups[0] > 0)
+						{
+							$objGroup = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user_group WHERE id=?")
+													   ->limit(1)
+													   ->execute($this->User->groups[0]);
+
+							$arrNewsfeedp = deserialize($objGroup->newsfeedp);
+
+							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
+							{
+								$arrNewsfeeds = deserialize($objGroup->newsfeeds);
+								$arrNewsfeeds[] = $this->Input->get('id');
+
+								$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
+											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
+							}
+						}
+
+						// Add new element to the user object
+						$root[] = $this->Input->get('id');
+						$this->User->newsfeeds = $root;
+					}
+				}
+				// No break;
+
+			case 'copy':
+			case 'delete':
+			case 'show':
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsfeedp')))
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news feed ID "'.$this->Input->get('id').'"', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+
+			case 'editAll':
+			case 'deleteAll':
+			case 'overrideAll':
+				$session = $this->Session->getData();
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newsfeedp'))
+				{
+					$session['CURRENT']['IDS'] = array();
+				}
+				else
+				{
+					$session['CURRENT']['IDS'] = array_intersect($session['CURRENT']['IDS'], $root);
+				}
+				$this->Session->setData($session);
+				break;
+
+			default:
+				if (strlen($this->Input->get('act')))
+				{
+					$this->log('Not enough permissions to '.$this->Input->get('act').' news feeds', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->redirect('contao/main.php?act=error');
+				}
+				break;
+		}
+	}
+
+
+	/**
 	 * Check for modified news feeds and update the XML files if necessary
 	 */
 	public function generateFeed()
@@ -254,7 +390,7 @@ class tl_news_feed extends Backend
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id);
+			$this->News->generateFeed($id, true);
 		}
 
 		$this->Session->set('news_feed_updater', null);
@@ -280,6 +416,35 @@ class tl_news_feed extends Backend
 		$session = $this->Session->get('news_feed_updater');
 		$session[] = $dc->id;
 		$this->Session->set('news_feed_updater', array_unique($session));
+	}
+
+
+	/**
+	 * Return the IDs of the allowed news archives as array
+	 * @return array
+	 */
+	public function getAllowedArchives()
+	{
+		if ($this->User->isAdmin)
+		{
+			$objArchive = \NewsArchiveCollection::findAll();
+		}
+		else
+		{
+			$objArchive = \NewsArchiveCollection::findMultipleByIds($this->User->news);
+		}
+
+		$return = array();
+
+		if ($objArchive !== null)
+		{
+			while ($objArchive->next())
+			{
+				$return[$objArchive->id] = $objArchive->title;
+			}
+		}
+
+		return $return;
 	}
 
 

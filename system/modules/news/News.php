@@ -48,10 +48,11 @@ class News extends \Frontend
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
+	 * @param boolean
 	 */
-	public function generateFeed($intId)
+	public function generateFeed($intId, $blnIsFeedId=false)
 	{
-		$objFeed = \NewsFeedModel::findByArchive($intId);
+		$objFeed = $blnIsFeedId ? \NewsFeedModel::findByPk($intId) : \NewsFeedModel::findByArchive($intId);
 
 		if ($objFeed === null)
 		{

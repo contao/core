@@ -81,7 +81,8 @@ $GLOBALS['TL_DCA']['tl_news_archive'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_news_archive']['feeds'],
 				'href'                => 'table=tl_news_feed',
 				'class'               => 'header_rss',
-				'attributes'          => 'onclick="Backend.getScrollOffset()"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_news_archive', 'manageFeeds')
 			),
 			'all' => array
 			(
@@ -463,6 +464,21 @@ class tl_news_archive extends Backend
 		$session = $this->Session->get('news_feed_updater');
 		$session[] = $dc->id;
 		$this->Session->set('news_feed_updater', array_unique($session));
+	}
+
+
+	/**
+	 * Return the manage feeds button
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function manageFeeds($href, $label, $title, $class, $attributes)
+	{
+		return ($this->User->isAdmin || !empty($this->User->newsfeeds) || $this->User->hasAccess('create', 'newsfeedp')) ? ($this->User->hasAccess('create', 'newp') ? ' &nbsp; :: &nbsp; ' : '') . '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 

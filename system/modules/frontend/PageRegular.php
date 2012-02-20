@@ -545,7 +545,7 @@ class PageRegular extends \Frontend
 		// Add newsfeeds
 		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
-			$objFeeds = \NewsArchiveCollection::findUnprotectedWithFeedsByIds($newsfeeds);
+			$objFeeds = \NewsFeedCollection::findByIds($newsfeeds);
 
 			if ($objFeeds !== null)
 			{
