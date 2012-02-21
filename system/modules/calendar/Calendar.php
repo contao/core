@@ -55,12 +55,13 @@ class Calendar extends \Frontend
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
+	 * @param boolean
 	 */
-	public function generateFeed($intId)
+	public function generateFeed($intId, $blnIsFeedId=false)
 	{
-		$objCalendar = \CalendarModel::findByPk($intId);
+		$objCalendar = $blnIsFeedId ? \CalendarFeedModel::findByPk($intId) : \CalendarFeedModel::findByCalendar($intId);
 
-		if ($objCalendar === null || !$objCalendar->makeFeed)
+		if ($objCalendar === null)
 		{
 			return;
 		}
@@ -68,7 +69,7 @@ class Calendar extends \Frontend
 		$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
 
 		// Delete XML file
-		if ($this->Input->get('act') == 'delete' || $objCalendar->protected)
+		if ($this->Input->get('act') == 'delete')
 		{
 			$this->import('Files');
 			$this->Files->delete('share/' . $objCalendar->feedName . '.xml');
@@ -78,7 +79,7 @@ class Calendar extends \Frontend
 		else
 		{
 			$this->generateFiles($objCalendar->row());
-			$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeed()', TL_CRON);
+			$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeed()', TL_CRON);
 		}
 	}
 
@@ -89,7 +90,7 @@ class Calendar extends \Frontend
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objCalendar = \CalendarCollection::findUnprotectedWithFeeds();
+		$objCalendar = \CalendarFeedCollection::findAll();
 
 		if ($objCalendar !== null)
 		{
@@ -97,7 +98,7 @@ class Calendar extends \Frontend
 			{
 				$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
-				$this->log('Generated event feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
+				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
 			}
 		}
 	}
@@ -107,68 +108,76 @@ class Calendar extends \Frontend
 	 * Generate an XML file and save it to the root directory
 	 * @param array
 	 */
-	protected function generateFiles($arrArchive)
+	protected function generateFiles($arrFeed)
 	{
-		if (!$arrArchive['jumpTo']['id'])
+		$arrCalendars = deserialize($arrFeed['calendars']);
+
+		if (!is_array($arrCalendars) || empty($arrCalendars))
 		{
 			return;
 		}
 
-		$time = time();
-		$this->arrEvents = array();
-		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = ($arrArchive['feedBase'] != '') ? $arrArchive['feedBase'] : $this->Environment->base;
-		$strFile = $arrArchive['feedName'];
+		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
+		$strLink = ($arrFeed['feedBase'] != '') ? $arrFeed['feedBase'] : $this->Environment->base;
+		$strFile = $arrFeed['feedName'];
 
 		$objFeed = new \Feed($strFile);
-
 		$objFeed->link = $strLink;
-		$objFeed->title = $arrArchive['title'];
-		$objFeed->description = $arrArchive['description'];
-		$objFeed->language = $arrArchive['language'];
-		$objFeed->published = $arrArchive['tstamp'];
+		$objFeed->title = $arrFeed['title'];
+		$objFeed->description = $arrFeed['description'];
+		$objFeed->language = $arrFeed['language'];
+		$objFeed->published = $arrFeed['tstamp'];
+
+		$arrUrls = array();
+		$this->arrEvents = array();
+		$time = time();
 
 		// Get the upcoming events
-		$objArticle = \CalendarEventsCollection::findUpcomingByPid($arrArchive['id'], $arrArchive['maxItems']);
+		$objArticle = \CalendarEventsCollection::findUpcomingByPids($arrCalendars, $arrFeed['maxItems']);
 
-		if ($objArticle === null)
+		// Parse the items
+		if ($objArticle !== null)
 		{
-			return;
-		}
-
-		$objParent = $this->getPageDetails($arrArchive['jumpTo']['id']);
-		$strUrl = $strLink . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
-
-		// Parse items
-		while ($objArticle->next())
-		{
-			$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
-
-			// Recurring events
-			if ($objArticle->recurring)
+			while ($objArticle->next())
 			{
-				$count = 0;
-				$arrRepeat = deserialize($objArticle->repeatEach);
+				$jumpTo = $objArticle->pid['jumpTo'];
 
-				// Do not include more than 20 recurrences
-				while ($count++ < 20)
+				// Get the jumpTo URL
+				if (!isset($arrUrls[$jumpTo]))
 				{
-					if ($objArticle->recurrences > 0 && $count >= $objArticle->recurrences)
+					$objParent = $this->getPageDetails($jumpTo);
+					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'), $objParent->language);
+				}
+
+				$strUrl = $arrUrls[$jumpTo];
+				$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+
+				// Recurring events
+				if ($objArticle->recurring)
+				{
+					$count = 0;
+					$arrRepeat = deserialize($objArticle->repeatEach);
+
+					// Do not include more than 20 recurrences
+					while ($count++ < 20)
 					{
-						break;
-					}
+						if ($objArticle->recurrences > 0 && $count >= $objArticle->recurrences)
+						{
+							break;
+						}
 
-					$arg = $arrRepeat['value'];
-					$unit = $arrRepeat['unit'];
+						$arg = $arrRepeat['value'];
+						$unit = $arrRepeat['unit'];
 
-					$strtotime = '+ ' . $arg . ' ' . $unit;
+						$strtotime = '+ ' . $arg . ' ' . $unit;
 
-					$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
-					$objArticle->endTime = strtotime($strtotime, $objArticle->endTime);
+						$objArticle->startTime = strtotime($strtotime, $objArticle->startTime);
+						$objArticle->endTime = strtotime($strtotime, $objArticle->endTime);
 
-					if ($objArticle->startTime >= $time)
-					{
-						$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+						if ($objArticle->startTime >= $time)
+						{
+							$this->addEvent($objArticle, $objArticle->startTime, $objArticle->endTime, $strUrl, $strLink);
+						}
 					}
 				}
 			}
@@ -184,7 +193,7 @@ class Calendar extends \Frontend
 			{
 				foreach ($events as $event)
 				{
-					if ($arrArchive['maxItems'] > 0 && $count++ >= $arrArchive['maxItems'])
+					if ($arrFeed['maxItems'] > 0 && $count++ >= $arrFeed['maxItems'])
 					{
 						break(3);
 					}
@@ -199,7 +208,7 @@ class Calendar extends \Frontend
 					$objItem->author = $event['authorName'];
 
 					// Prepare the description
-					$strDescription = ($arrArchive['source'] == 'source_text') ? $event['description'] : $event['teaser'];
+					$strDescription = ($arrFeed['source'] == 'source_text') ? $event['description'] : $event['teaser'];
 					$strDescription = $this->replaceInsertTags($strDescription);
 					$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
 
@@ -444,6 +453,27 @@ class Calendar extends \Frontend
 		$sdn += $day - 32045;
 
 		return $sdn;
+	}
+
+
+	/**
+	 * Return the names of the existing feeds so they are not removed
+	 * @return array
+	 */
+	public function purgeOldFeeds()
+	{
+		$arrFeeds = array();
+		$objFeeds = \CalendarFeedCollection::findAll();
+
+		if ($objFeeds !== null)
+		{
+			while ($objFeeds->next())
+			{
+				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'calendar' . $objFeeds->id;
+			}
+		}
+
+		return $arrFeeds;
 	}
 }
 

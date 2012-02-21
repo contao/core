@@ -35,7 +35,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events'),
+		'tables'     => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed'),
 		'icon'       => 'system/modules/calendar/html/icon.gif'
 	)
 ));
@@ -65,6 +65,7 @@ $GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
 /**
  * Register hook to add news items to the indexer
  */
+$GLOBALS['TL_HOOKS']['removeOldFeeds'][] = array('Calendar', 'purgeOldFeeds');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
 
 
@@ -73,5 +74,7 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchableP
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'calendars';
 $GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeeds';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeedp';
 
 ?>

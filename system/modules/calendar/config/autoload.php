@@ -44,6 +44,8 @@ ClassLoader::addClasses(array
 	'Contao\\CalendarCollection'       => 'system/modules/calendar/models/CalendarCollection.php',
 	'Contao\\CalendarEventsCollection' => 'system/modules/calendar/models/CalendarEventsCollection.php',
 	'Contao\\CalendarEventsModel'      => 'system/modules/calendar/models/CalendarEventsModel.php',
+	'Contao\\CalendarFeedCollection'   => 'system/modules/calendar/models/CalendarFeedCollection.php',
+	'Contao\\CalendarFeedModel'        => 'system/modules/calendar/models/CalendarFeedModel.php',
 	'Contao\\CalendarModel'            => 'system/modules/calendar/models/CalendarModel.php',
 ));
 

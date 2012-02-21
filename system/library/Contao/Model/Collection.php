@@ -290,6 +290,16 @@ abstract class Model_Collection extends \System
 
 		$objStatement = \Database::getInstance()->prepare($strQuery);
 
+		// Defaults for limit and offset
+		if (!isset($arrOptions['limit']))
+		{
+			$arrOptions['limit'] = 0;
+		}
+		if (!isset($arrOptions['offset']))
+		{
+			$arrOptions['offset'] = 0;
+		}
+
 		// Limit
 		if ($arrOptions['limit'] > 0 || $arrOptions['offset'] > 0)
 		{

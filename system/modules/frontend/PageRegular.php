@@ -560,7 +560,7 @@ class PageRegular extends \Frontend
 		// Add calendarfeeds
 		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
-			$objFeeds = \CalendarCollection::findUnprotectedWithFeedsByIds($calendarfeeds);
+			$objFeeds = \CalendarFeedCollection::findByIds($calendarfeeds);
 
 			if ($objFeeds !== null)
 			{

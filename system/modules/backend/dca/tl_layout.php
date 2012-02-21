@@ -567,9 +567,9 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		$objFeed = $this->Database->execute("SELECT id, title FROM tl_calendar WHERE makeFeed=1");
+		$objFeed = \CalendarFeedCollection::findAll();
 
-		if ($objFeed->numRows < 1)
+		if ($objFeed === null)
 		{
 			return array();
 		}

@@ -107,7 +107,7 @@ class News extends \Frontend
 
 		if (!is_array($arrArchives) || empty($arrArchives))
 		{
-			continue;
+			return;
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
@@ -132,7 +132,7 @@ class News extends \Frontend
 		}
 
 		// Parse the items
-		if ($objArticle !== null)
+		if ($objArticle === null)
 		{
 			$arrUrls = array();
 

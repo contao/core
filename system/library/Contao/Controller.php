@@ -3138,17 +3138,6 @@ abstract class Controller extends \System
 			$arrFeeds[] = $objFeeds->sitemapName;
 		}
 
-		// Calendar module
-		if (in_array('calendar', $arrModules)) # FIXME: use the hook instead
-		{
-			$objFeeds = $this->Database->execute("SELECT id, alias FROM tl_calendar WHERE makeFeed=1 AND alias!=''");
-
-			while ($objFeeds->next())
-			{
-				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'calendar' . $objFeeds->id;
-			}
-		}
-
 		// HOOK: preserve third party feeds
 		if (isset($GLOBALS['TL_HOOKS']['removeOldFeeds']) && is_array($GLOBALS['TL_HOOKS']['removeOldFeeds']))
 		{

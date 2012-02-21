@@ -23,23 +23,45 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * @package    Backend
  * @license    LGPL
  */
 
 
 /**
- * Fields
+ * Run in a custom namespace, so the class can be replaced
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars']     = array('Erlaubte Kalender', 'Hier können Sie den Zugriff auf einen oder mehrere Kalender erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['calendarp']     = array('Kalenderrechte', 'Hier können Sie die Kalenderrechte festlegen.');
-$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'] = array('Erlaubte RSS-Feeds', 'Hier können Sie den Zugriff auf einen oder mehrere RSS-Feeds erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'] = array('RSS-Feed-Rechte', 'Hier können Sie die RSS-Feed-Rechte festlegen.');
+namespace Contao;
 
 
 /**
- * Legends
+ * Class CalendarFeedModel
+ *
+ * Provide methods to find and save calendar feeds.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Model
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars_legend'] = 'Kalender-Rechte';
+class CalendarFeedModel extends \Model
+{
+
+	/**
+	 * Name of the table
+	 * @var string
+	 */
+	protected static $strTable = 'tl_calendar_feed';
+
+
+	/**
+	 * Find all feeds which include a certain calendar
+	 * @param integer
+	 * @return Model|null
+	 */
+	public static function findByCalendar($intId)
+	{
+		$t = static::$strTable;
+		return static::findBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null);
+	}
+}
 
 ?>

@@ -76,6 +76,14 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 		),
 		'global_operations' => array
 		(
+			'feeds' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar']['feeds'],
+				'href'                => 'table=tl_calendar_feed',
+				'class'               => 'header_rss',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
+				'button_callback'     => array('tl_calendar', 'manageFeeds')
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -128,16 +136,15 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('allowComments', 'protected', 'makeFeed'),
-		'default'                     => '{title_legend},title,jumpTo;{comments_legend:hide},allowComments;{protected_legend:hide},protected;{feed_legend:hide},makeFeed'
+		'__selector__'                => array('protected', 'allowComments'),
+		'default'                     => '{title_legend},title,jumpTo;{protected_legend:hide},protected;{comments_legend:hide},allowComments'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha',
 		'protected'                   => 'groups',
-		'makeFeed'                    => 'format,language,source,maxItems,feedBase,alias,description'
+		'allowComments'               => 'notify,sortOrder,perPage,moderate,bbcode,requireLogin,disableCaptcha'
 	),
 
 	// Fields
@@ -169,6 +176,25 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'eval'                    => array('fieldType'=>'radio'),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'",
 			'relation'                => array('type'=>'hasOne', 'load'=>'eager')
+		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['protected'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'groups' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['groups'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'foreignKey'              => 'tl_member_group.name',
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'allowComments' => array
 		(
@@ -239,107 +265,6 @@ $GLOBALS['TL_DCA']['tl_calendar'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'protected' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['protected'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'groups' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['groups'],
-			'exclude'                 => true,
-			'inputType'               => 'checkbox',
-			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
-			'sql'                     => "blob NULL",
-			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
-		),
-		'makeFeed' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['makeFeed'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'format' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['format'],
-			'default'                 => 'rss',
-			'exclude'                 => true,
-			'filter'                  => true,
-			'inputType'               => 'select',
-			'options'                 => array('rss'=>'RSS 2.0', 'atom'=>'Atom'),
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'language' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['language'],
-			'exclude'                 => true,
-			'filter'                  => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'source' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['source'],
-			'default'                 => 'source_teaser',
-			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => array('source_teaser', 'source_text'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar'],
-			'eval'                    => array('tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
-		'maxItems' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['maxItems'],
-			'default'                 => 25,
-			'exclude'                 => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
-			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
-		),
-		'feedBase' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['feedBase'],
-			'default'                 => $this->Environment->base,
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('trailingSlash'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'alias' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['alias'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
-			'save_callback' => array
-			(
-				array('tl_calendar', 'checkFeedAlias')
-			),
-			'sql'                     => "varbinary(128) NOT NULL default ''"
-		),
-		'description' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar']['description'],
-			'exclude'                 => true,
-			'search'                  => true,
-			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
-			'sql'                     => "text NULL"
 		)
 	)
 );
@@ -498,32 +423,6 @@ class tl_calendar extends Backend
 
 
 	/**
-	 * Check the RSS-feed alias
-	 * @param mixed
-	 * @param DataContainer
-	 * @throws Exception
-	 */
-	public function checkFeedAlias($varValue, DataContainer $dc)
-	{
-		// No change or empty value
-		if ($varValue == $dc->value || $varValue == '')
-		{
-			return $varValue;
-		}
-
-		$arrFeeds = $this->removeOldFeeds(true);
-
-		// Alias exists
-		if (array_search($varValue, $arrFeeds) !== false)
-		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-		}
-
-		return $varValue;
-	}
-
-
-	/**
 	 * Check for modified calendar feeds and update the XML files if necessary
 	 */
 	public function generateFeed()
@@ -565,6 +464,21 @@ class tl_calendar extends Backend
 		$session = $this->Session->get('calendar_feed_updater');
 		$session[] = $dc->id;
 		$this->Session->set('calendar_feed_updater', array_unique($session));
+	}
+
+
+	/**
+	 * Return the manage feeds button
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return string
+	 */
+	public function manageFeeds($href, $label, $title, $class, $attributes)
+	{
+		return ($this->User->isAdmin || !empty($this->User->calendarfeeds) || $this->User->hasAccess('create', 'calendarfeedp')) ? ($this->User->hasAccess('create', 'calendarp') ? ' &nbsp; :: &nbsp; ' : '') . '<a href="'.$this->addToUrl($href).'" class="'.$class.'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : '';
 	}
 
 

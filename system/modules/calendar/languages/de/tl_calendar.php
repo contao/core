@@ -82,5 +82,6 @@ $GLOBALS['TL_LANG']['tl_calendar']['edit']       = array('Kalender bearbeiten', 
 $GLOBALS['TL_LANG']['tl_calendar']['editheader'] = array('Kalender-Einstellungen bearbeiten', 'Einstellungen des Kalenders ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_calendar']['copy']       = array('Kalender duplizieren', 'Kalender ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_calendar']['delete']     = array('Kalender löschen', 'Kalender ID %s löschen');
+$GLOBALS['TL_LANG']['tl_calendar']['feeds']      = array('RSS-Feeds', 'RSS-Feeds verwalten');
 
 ?>

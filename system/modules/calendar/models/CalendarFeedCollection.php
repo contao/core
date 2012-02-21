@@ -23,23 +23,50 @@
  * PHP version 5.3
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    Calendar
+ * @package    Backend
  * @license    LGPL
  */
 
 
 /**
- * Fields
+ * Run in a custom namespace, so the class can be replaced
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars']     = array('Erlaubte Kalender', 'Hier können Sie den Zugriff auf einen oder mehrere Kalender erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['calendarp']     = array('Kalenderrechte', 'Hier können Sie die Kalenderrechte festlegen.');
-$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'] = array('Erlaubte RSS-Feeds', 'Hier können Sie den Zugriff auf einen oder mehrere RSS-Feeds erlauben.');
-$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'] = array('RSS-Feed-Rechte', 'Hier können Sie die RSS-Feed-Rechte festlegen.');
+namespace Contao;
 
 
 /**
- * Legends
+ * Class CalendarFeedCollection
+ *
+ * Provide methods to handle multiple models.
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    Model
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars_legend'] = 'Kalender-Rechte';
+class CalendarFeedCollection extends \Model_Collection
+{
+
+	/**
+	 * Name of the table
+	 * @var string
+	 */
+	protected static $strTable = 'tl_calendar_feed';
+
+
+	/**
+	 * Find calendar feeds by their IDs
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findByIds($arrIds)
+	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
+	}
+}
 
 ?>

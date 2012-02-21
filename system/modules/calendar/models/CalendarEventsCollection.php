@@ -98,25 +98,30 @@ class CalendarEventsCollection extends \Model_Collection
 
 
 	/**
-	 * Find upcoming events by their parent ID
-	 * @param integer
+	 * Find upcoming events by their parent IDs
+	 * @param array
 	 * @param integer
 	 */
-	public static function findUpcomingByPid($intId, $intLimit=0)
+	public static function findUpcomingByPids($arrIds, $intLimit=0)
 	{
+		if (!is_array($arrIds) || empty($arrIds))
+		{
+			return null;
+		}
+
 		$time = time();
 		$t = static::$strTable;
 
 		// Get upcoming events using endTime instead of startTime (see #3917)
-		$arrColumns = array("$t.pid=? AND ($t.endTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
+		$arrColumns = array("($t.endTime>=$time OR ($t.recurring=1 AND ($t.recurrences=0 OR $t.repeatEnd>=$time))) AND $t.pid IN(" . implode(',', array_map('intval', $arrIds)) . ") AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time) AND $t.published=1");
 
 		if ($intLimit > 0)
 		{
-			return static::findBy($arrColumns, $intId, "$t.startTime", $intLimit);
+			return static::findBy($arrColumns, null, array('order'=>"$t.startTime", 'limit'=>$intLimit));
 		}
 		else
 		{
-			return static::findBy($arrColumns, $intId, array('order'=>"$t.startTime"));
+			return static::findBy($arrColumns, null, array('order'=>"$t.startTime"));
 		}
 	}
 }

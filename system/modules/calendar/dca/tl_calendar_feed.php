@@ -23,16 +23,16 @@
  * PHP version 5
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
- * @package    News
+ * @package    Calendar
  * @license    LGPL
  * @filesource
  */
 
 
 /**
- * Table tl_news_feed
+ * Table tl_calendar_feed
  */
-$GLOBALS['TL_DCA']['tl_news_feed'] = array
+$GLOBALS['TL_DCA']['tl_calendar_feed'] = array
 (
 
 	// Config
@@ -42,12 +42,12 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		'enableVersioning'            => true,
 		'onload_callback' => array
 		(
-			array('tl_news_feed', 'checkPermission'),
-			array('tl_news_feed', 'generateFeed')
+			array('tl_calendar_feed', 'checkPermission'),
+			array('tl_calendar_feed', 'generateFeed')
 		),
 		'onsubmit_callback' => array
 		(
-			array('tl_news_feed', 'scheduleUpdate')
+			array('tl_calendar_feed', 'scheduleUpdate')
 		),
 		'sql' => array
 		(
@@ -57,7 +57,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 				'alias' => 'index'
 			)
 		),
-		'backlink'                    => 'do=news'
+		'backlink'                    => 'do=calendar'
 	),
 
 	// List
@@ -89,26 +89,26 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		(
 			'edit' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_news_feed']['edit'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_feed']['edit'],
 				'href'                => 'act=edit',
 				'icon'                => 'edit.gif'
 			),
 			'copy' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_news_feed']['copy'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_feed']['copy'],
 				'href'                => 'act=copy',
 				'icon'                => 'copy.gif'
 			),
 			'delete' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_news_feed']['delete'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_feed']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_news_feed']['show'],
+				'label'               => &$GLOBALS['TL_LANG']['tl_calendar_feed']['show'],
 				'href'                => 'act=show',
 				'icon'                => 'show.gif'
 			)
@@ -118,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,alias,language;{archives_legend},archives;{config_legend},format,source,maxItems,feedBase,description'
+		'default'                     => '{title_legend},title,alias,language;{calendars_legend},calendars;{config_legend},format,source,maxItems,feedBase,description'
 	),
 
 	// Fields
@@ -134,7 +134,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		),
 		'title' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['title'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['title'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
@@ -143,20 +143,20 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		),
 		'alias' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['alias'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['alias'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alnum', 'unique'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
-				array('tl_news_feed', 'checkFeedAlias')
+				array('tl_calendar_feed', 'checkFeedAlias')
 			),
 			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'language' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['language'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['language'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'filter'                  => true,
@@ -164,19 +164,19 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>32, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
-		'archives' => array
+		'calendars' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['archives'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['calendars'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'checkbox',
-			'options_callback'        => array('tl_news_feed', 'getAllowedArchives'), 
+			'options_callback'        => array('tl_calendar_feed', 'getAllowedCalendars'), 
 			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'format' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['format'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['format'],
 			'default'                 => 'rss',
 			'exclude'                 => true,
 			'filter'                  => true,
@@ -187,18 +187,18 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		),
 		'source' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['source'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['source'],
 			'default'                 => 'source_teaser',
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('source_teaser', 'source_text'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_news_feed'],
+			'reference'               => &$GLOBALS['TL_LANG']['tl_calendar_feed'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'maxItems' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['maxItems'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['maxItems'],
 			'default'                 => 25,
 			'exclude'                 => true,
 			'inputType'               => 'text',
@@ -207,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		),
 		'feedBase' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['feedBase'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['feedBase'],
 			'default'                 => $this->Environment->base,
 			'exclude'                 => true,
 			'search'                  => true,
@@ -217,7 +217,7 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 		),
 		'description' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_news_feed']['description'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_calendar_feed']['description'],
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
@@ -229,14 +229,14 @@ $GLOBALS['TL_DCA']['tl_news_feed'] = array
 
 
 /**
- * Class tl_news_feed
+ * Class tl_calendar_feed
  *
  * Provide miscellaneous methods that are used by the data configuration array.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class tl_news_feed extends Backend
+class tl_calendar_feed extends Backend
 {
 
 	/**
@@ -260,21 +260,21 @@ class tl_news_feed extends Backend
 		}
 
 		// Set the root IDs
-		if (!is_array($this->User->newsfeeds) || empty($this->User->newsfeeds))
+		if (!is_array($this->User->calendarfeeds) || empty($this->User->calendarfeeds))
 		{
 			$root = array(0);
 		}
 		else
 		{
-			$root = $this->User->newsfeeds;
+			$root = $this->User->calendarfeeds;
 		}
 
-		$GLOBALS['TL_DCA']['tl_news_feed']['list']['sorting']['root'] = $root;
+		$GLOBALS['TL_DCA']['tl_calendar_feed']['list']['sorting']['root'] = $root;
 
 		// Check permissions to add feeds
-		if (!$this->User->hasAccess('create', 'newsfeedp'))
+		if (!$this->User->hasAccess('create', 'calendarfeedp'))
 		{
-			$GLOBALS['TL_DCA']['tl_news_feed']['config']['closed'] = true;
+			$GLOBALS['TL_DCA']['tl_calendar_feed']['config']['closed'] = true;
 		}
 
 		// Check current action
@@ -291,23 +291,23 @@ class tl_news_feed extends Backend
 				{
 					$arrNew = $this->Session->get('new_records');
 
-					if (is_array($arrNew['tl_news_feed']) && in_array($this->Input->get('id'), $arrNew['tl_news_feed']))
+					if (is_array($arrNew['tl_calendar_feed']) && in_array($this->Input->get('id'), $arrNew['tl_calendar_feed']))
 					{
 						// Add permissions on user level
 						if ($this->User->inherit == 'custom' || !$this->User->groups[0])
 						{
-							$objUser = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user WHERE id=?")
+							$objUser = $this->Database->prepare("SELECT calendarfeeds, calendarfeedp FROM tl_user WHERE id=?")
 													   ->limit(1)
 													   ->execute($this->User->id);
 
-							$arrNewsfeedp = deserialize($objUser->newsfeedp);
+							$arrNewsfeedp = deserialize($objUser->calendarfeedp);
 
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
-								$arrNewsfeeds = deserialize($objUser->newsfeeds);
+								$arrNewsfeeds = deserialize($objUser->calendarfeeds);
 								$arrNewsfeeds[] = $this->Input->get('id');
 
-								$this->Database->prepare("UPDATE tl_user SET newsfeeds=? WHERE id=?")
+								$this->Database->prepare("UPDATE tl_user SET calendarfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->id);
 							}
 						}
@@ -315,25 +315,25 @@ class tl_news_feed extends Backend
 						// Add permissions on group level
 						elseif ($this->User->groups[0] > 0)
 						{
-							$objGroup = $this->Database->prepare("SELECT newsfeeds, newsfeedp FROM tl_user_group WHERE id=?")
+							$objGroup = $this->Database->prepare("SELECT calendarfeeds, calendarfeedp FROM tl_user_group WHERE id=?")
 													   ->limit(1)
 													   ->execute($this->User->groups[0]);
 
-							$arrNewsfeedp = deserialize($objGroup->newsfeedp);
+							$arrNewsfeedp = deserialize($objGroup->calendarfeedp);
 
 							if (is_array($arrNewsfeedp) && in_array('create', $arrNewsfeedp))
 							{
-								$arrNewsfeeds = deserialize($objGroup->newsfeeds);
+								$arrNewsfeeds = deserialize($objGroup->calendarfeeds);
 								$arrNewsfeeds[] = $this->Input->get('id');
 
-								$this->Database->prepare("UPDATE tl_user_group SET newsfeeds=? WHERE id=?")
+								$this->Database->prepare("UPDATE tl_user_group SET calendarfeeds=? WHERE id=?")
 											   ->execute(serialize($arrNewsfeeds), $this->User->groups[0]);
 							}
 						}
 
 						// Add new element to the user object
 						$root[] = $this->Input->get('id');
-						$this->User->newsfeeds = $root;
+						$this->User->calendarfeeds = $root;
 					}
 				}
 				// No break;
@@ -341,9 +341,9 @@ class tl_news_feed extends Backend
 			case 'copy':
 			case 'delete':
 			case 'show':
-				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'newsfeedp')))
+				if (!in_array($this->Input->get('id'), $root) || ($this->Input->get('act') == 'delete' && !$this->User->hasAccess('delete', 'calendarfeedp')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news feed ID "'.$this->Input->get('id').'"', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar feed ID "'.$this->Input->get('id').'"', 'tl_calendar_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -352,7 +352,7 @@ class tl_news_feed extends Backend
 			case 'deleteAll':
 			case 'overrideAll':
 				$session = $this->Session->getData();
-				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'newsfeedp'))
+				if ($this->Input->get('act') == 'deleteAll' && !$this->User->hasAccess('delete', 'calendarfeedp'))
 				{
 					$session['CURRENT']['IDS'] = array();
 				}
@@ -366,7 +366,7 @@ class tl_news_feed extends Backend
 			default:
 				if (strlen($this->Input->get('act')))
 				{
-					$this->log('Not enough permissions to '.$this->Input->get('act').' news feeds', 'tl_news_feed checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to '.$this->Input->get('act').' calendar feeds', 'tl_calendar_feed checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 				break;
@@ -375,33 +375,33 @@ class tl_news_feed extends Backend
 
 
 	/**
-	 * Check for modified news feeds and update the XML files if necessary
+	 * Check for modified calendar feeds and update the XML files if necessary
 	 */
 	public function generateFeed()
 	{
-		$session = $this->Session->get('news_feed_updater');
+		$session = $this->Session->get('calendar_feed_updater');
 
 		if (!is_array($session) || empty($session))
 		{
 			return;
 		}
 
-		$this->import('News');
+		$this->import('Calendar');
 
 		foreach ($session as $id)
 		{
-			$this->News->generateFeed($id, true);
+			$this->Calendar->generateFeed($id, true);
 		}
 
-		$this->Session->set('news_feed_updater', null);
+		$this->Session->set('calendar_feed_updater', null);
 	}
 
 
 	/**
-	 * Schedule a news feed update
+	 * Schedule a calendar feed update
 	 * 
-	 * This method is triggered when a single news archive or multiple news
-	 * archives are modified (edit/editAll).
+	 * This method is triggered when a single calendar or multiple calendars
+	 * are modified (edit/editAll).
 	 * @param DataContainer
 	 */
 	public function scheduleUpdate(DataContainer $dc)
@@ -413,34 +413,34 @@ class tl_news_feed extends Backend
 		}
 
 		// Store the ID in the session
-		$session = $this->Session->get('news_feed_updater');
+		$session = $this->Session->get('calendar_feed_updater');
 		$session[] = $dc->id;
-		$this->Session->set('news_feed_updater', array_unique($session));
+		$this->Session->set('calendar_feed_updater', array_unique($session));
 	}
 
 
 	/**
-	 * Return the IDs of the allowed news archives as array
+	 * Return the IDs of the allowed calendars as array
 	 * @return array
 	 */
-	public function getAllowedArchives()
+	public function getAllowedCalendars()
 	{
 		if ($this->User->isAdmin)
 		{
-			$objArchive = \NewsArchiveCollection::findAll();
+			$objCalendar = \CalendarCollection::findAll();
 		}
 		else
 		{
-			$objArchive = \NewsArchiveCollection::findMultipleByIds($this->User->news);
+			$objCalendar = \CalendarCollection::findMultipleByIds($this->User->calendars);
 		}
 
 		$return = array();
 
-		if ($objArchive !== null)
+		if ($objCalendar !== null)
 		{
-			while ($objArchive->next())
+			while ($objCalendar->next())
 			{
-				$return[$objArchive->id] = $objArchive->title;
+				$return[$objCalendar->id] = $objCalendar->title;
 			}
 		}
 

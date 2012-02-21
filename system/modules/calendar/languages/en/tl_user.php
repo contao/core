@@ -31,8 +31,10 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars'] = array('Allowed calendars', 'Here you can grant access to one or more calendars.');
-$GLOBALS['TL_LANG']['tl_user']['calendarp'] = array('Calendar permissions', 'Here you can define the calendar permissions.');
+$GLOBALS['TL_LANG']['tl_user']['calendars']     = array('Allowed calendars', 'Here you can grant access to one or more calendars.');
+$GLOBALS['TL_LANG']['tl_user']['calendarp']     = array('Calendar permissions', 'Here you can define the calendar permissions.');
+$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'] = array('Allowed RSS feeds', 'Here you can grant access to one or more calendar feeds.');
+$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'] = array('RSS feed permissions', 'Here you can define the calendar feed permissions.');
 
 
 /**

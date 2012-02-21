@@ -33,7 +33,7 @@
  */
 $GLOBALS['TL_LANG']['tl_user']['news']      = array('Allowed archives', 'Here you can grant access to one or more news archives.');
 $GLOBALS['TL_LANG']['tl_user']['newp']      = array('News permissions', 'Here you can define the news permissions.');
-$GLOBALS['TL_LANG']['tl_user']['newsfeeds'] = array('Allowed RSS feed', 'Here you can grant access to one or more news feeds.');
+$GLOBALS['TL_LANG']['tl_user']['newsfeeds'] = array('Allowed RSS feeds', 'Here you can grant access to one or more news feeds.');
 $GLOBALS['TL_LANG']['tl_user']['newsfeedp'] = array('RSS feed permissions', 'Here you can define the news feed permissions.');
 
 
