@@ -5,6 +5,10 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Improved the `moo/j_analytics` templates and added `moo/j_piwik` templates in
+case someone wants to use Piwik instead of Google Analytics.
+
+### New
 Improved the RSS feed handling of the calendar module accordingly.
 
 ### New
