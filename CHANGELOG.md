@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Fixed the module wizard so you can use the stylect menu of a duplicated element
+without having to reload the page (see #3970).
+
 ### New
 Added the Slovenian translation of the TinyMCE "typolinks" plugin (thanks a lot
 to Davor) (see #3952)
