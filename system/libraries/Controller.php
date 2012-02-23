@@ -342,6 +342,8 @@ abstract class Controller extends System
 			}
 
 			$objRow->typePrefix = 'mod_';
+			$objModule = new $strClass($objRow, $strColumn);
+			$strBuffer = $objModule->generate();
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['getFrontendModule']) && is_array($GLOBALS['TL_HOOKS']['getFrontendModule']))
@@ -352,9 +354,6 @@ abstract class Controller extends System
 					$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
 				}
 			}
-
-			$objModule = new $strClass($objRow, $strColumn);
-			$strBuffer = $objModule->generate();
 
 			// Disable indexing if protected
 			if ($objModule->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
@@ -501,6 +500,8 @@ abstract class Controller extends System
 		}
 
 		$objRow->typePrefix = 'ce_';
+		$objElement = new $strClass($objRow);
+		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getContentElement']) && is_array($GLOBALS['TL_HOOKS']['getContentElement']))
@@ -511,9 +512,6 @@ abstract class Controller extends System
 				$strBuffer = $this->$callback[0]->$callback[1]($objRow, $strBuffer);
 			}
 		}
-
-		$objElement = new $strClass($objRow);
-		$strBuffer = $objElement->generate();
 
 		// Disable indexing if protected
 		if ($objElement->protected && !preg_match('/^\s*<!-- indexer::stop/i', $strBuffer))
@@ -550,6 +548,8 @@ abstract class Controller extends System
 
 		$objRow->typePrefix = 'ce_';
 		$objRow->form = $objRow->id;
+		$objElement = new Form($objRow);
+		$strBuffer = $objElement->generate();
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getForm']) && is_array($GLOBALS['TL_HOOKS']['getForm']))
@@ -561,8 +561,7 @@ abstract class Controller extends System
 			}
 		}
 
-		$objElement = new Form($objRow);
-		return $objElement->generate();
+		return $strBuffer;
 	}
 
 

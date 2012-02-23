@@ -5,6 +5,10 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the "getContentElement", "getFrontendModule" and "getForm" hooks, so they
+pass the generated content to the callback function (see #3962).
+
+### Fixed
 Correctly handle pages with the alias name "index" (see #3961).
 
 ### Fixed
