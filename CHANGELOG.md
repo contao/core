@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### New
+Added the Slovenian translation of the TinyMCE "typolinks" plugin (thanks a lot
+to Davor) (see #3952)
+
 ### Fixed
 Fixed the "getContentElement", "getFrontendModule" and "getForm" hooks, so they
 pass the generated content to the callback function (see #3962).
