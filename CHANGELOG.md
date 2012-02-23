@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Patched the MooTools core script to fix the accordion effect (see #3956).
+
+### Fixed
 The slimbox style sheets are now compatible with the combiner.
 
 
