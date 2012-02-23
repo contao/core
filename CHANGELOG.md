@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle pages with the alias name "index" (see #3961).
+
+### Fixed
 Patched the MooTools core script to fix the accordion effect (see #3956).
 
 ### Fixed
