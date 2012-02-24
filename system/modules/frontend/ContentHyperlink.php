@@ -77,7 +77,7 @@ class ContentHyperlink extends \ContentElement
 		}
 
 		// Use an image instead of the title
-		if ($this->useImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->useImage && $this->singleSRC != '' && is_file(TL_ROOT . '/' . $this->singleSRC))
 		{
 			$this->strTemplate = 'ce_hyperlink_image';
 
