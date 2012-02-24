@@ -41,12 +41,11 @@ require('system/initialize.php');
  */
 if ($objInput->get('p') == 'facebook')
 {
-	$query  = '?app_id=123050457758183';
-	$query .= '&link=' . rawurlencode($objInput->get('u'));
-	$query .= '&message=' . rawurlencode($objInput->get('t'));
+	$query  = '&u=' . rawurlencode($objInput->get('u'));
+	$query .= '&t=' . rawurlencode($objInput->get('t'));
 	$query .= '&display=popup';
 	$query .= '&redirect_uri=http%3A%2F%2Fwww.facebook.com';
-	header('Location: http://www.facebook.com/dialog/feed' . $query);
+	header('Location: http://www.facebook.com/sharer/sharer.php?' . $query);
 	exit;
 }
 

@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Use the Facebook sharer instead a third-party app (see #3990).
+
+### Fixed
 Preserve IE conditionals like `[if (lt IE 9) & (!IEMobile)]` when replacing
 ampersands in the front end (see #3985).
 
