@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Adjust the submit button height in Opera (see #3940).
+
+### Fixed
 The front end preview drop-down menu did not use the stylect plugin.
 
 ### Fixed
