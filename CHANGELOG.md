@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The front end preview drop-down menu did not use the stylect plugin.
+
+### Fixed
 Use the Facebook sharer instead a third-party app (see #3990).
 
 ### Fixed

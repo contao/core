@@ -81,6 +81,18 @@ img.close {
 input,select,label {
 	vertical-align:baseline;
 }
+input {
+	padding-top:4px !important;
+	padding-bottom:4px !important;
+}
+.firefox input {
+	padding-top:2px !important;
+	padding-bottom:2px !important;
+}
+.chrome .tl_submit,.safari .tl_submit {
+	position:relative;
+	top:-1px;
+}
 
 /* IE7 fixes */
 .ie7 #container {

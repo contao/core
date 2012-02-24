@@ -276,7 +276,7 @@ abstract class Controller extends System
 						$objPage->cache = 0;
 
 						header('HTTP/1.1 404 Not Found');
-						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
+						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $strArticle) . '</p>';
 					}
 
 					return $strBuffer;
