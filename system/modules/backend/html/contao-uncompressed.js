@@ -1332,6 +1332,7 @@ var Backend =
 				tr.inject(parent, 'after');
 				tr.getElement('.chzn-container').destroy();
 				new Chosen(tr.getElement('select.tl_select'));
+				Stylect.convertSelects();
 				break;
 			case 'up':
 				if (tr = parent.getPrevious('tr')) {
