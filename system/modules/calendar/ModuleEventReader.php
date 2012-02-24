@@ -77,29 +77,23 @@ class ModuleEventReader extends \Events
 			$this->Input->setGet('events', $this->Input->get('auto_item'));
 		}
 
-		// Return if no event has been specified
+		// Do not index or cache the page if no event has been specified
 		if (!$this->Input->get('events'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar));
 
-		// Return if there are no calendars
+		// Do not index or cache the page if there are no calendars
 		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -123,14 +117,13 @@ class ModuleEventReader extends \Events
 
 		if ($objEvent === null)
 		{
-			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
 			return;
 		}
 

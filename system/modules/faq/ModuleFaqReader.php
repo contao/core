@@ -76,29 +76,23 @@ class ModuleFaqReader extends \Module
 			$this->Input->setGet('items', $this->Input->get('auto_item'));
 		}
 
-		// Return if no news item has been specified
+		// Do not index or cache the page if no FAQ has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->faq_categories = deserialize($this->faq_categories);
 
-		// Return if there are no categories
+		// Do not index or cache the page if there are no categories
 		if (!is_array($this->faq_categories) || empty($this->faq_categories))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -120,14 +114,13 @@ class ModuleFaqReader extends \Module
 
 		if ($objFaq === null)
 		{
-			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
 		}
 

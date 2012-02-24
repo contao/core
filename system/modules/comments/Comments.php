@@ -63,13 +63,30 @@ class Comments extends \Frontend
 		// Pagination
 		if ($objConfig->perPage > 0)
 		{
+			// Get the total number of comments
+			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
+			$total = $objTotal->count;
+
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$objConfig->perPage))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				$objTemplate->allowComments = false;
+				return;
+			}
+
+			// Set limit and offset
 			$limit = $objConfig->perPage;
 			$offset = ($page - 1) * $objConfig->perPage;
  
-			// Get the total number of comments
-			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
-
 			// Initialize the pagination menu
 			$objPagination = new \Pagination($objTotal->count, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
@@ -248,12 +265,10 @@ class Comments extends \Frontend
 		$objTemplate->formId = $strFormId;
 		$objTemplate->hasError = $doNotSubmit;
 
-		// Confirmation message
+		// Do not index or cache the page with the confirmation message
 		if ($_SESSION['TL_COMMENT_ADDED'])
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 

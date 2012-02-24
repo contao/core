@@ -77,29 +77,23 @@ class ModuleNewsReader extends \ModuleNews
 			$this->Input->setGet('items', $this->Input->get('auto_item'));
 		}
 
-		// Return if no news item has been specified
+		// Do not index or cache the page if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		// Return if there are no archives
+		// Do not index or cache the page if there are no archives
 		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -125,14 +119,13 @@ class ModuleNewsReader extends \ModuleNews
 
 		if ($objArticle === null)
 		{
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
 		}
 

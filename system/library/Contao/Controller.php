@@ -169,7 +169,20 @@ abstract class Controller extends \System
 
 				if ($strSection == $strColumn)
 				{
-					return $this->getArticle($strArticle);
+					$strBuffer = $this->getArticle($strArticle);
+
+					// Send a 404 header if the article does not exist
+					if ($strBuffer === false)
+					{
+						// Do not index the page
+						$objPage->noSearch = 1;
+						$objPage->cache = 0;
+
+						header('HTTP/1.1 404 Not Found');
+						return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
+					}
+
+					return $strBuffer;
 				}
 			}
 
@@ -281,7 +294,7 @@ abstract class Controller extends \System
 	 * @param boolean
 	 * @param boolean
 	 * @param string
-	 * @return string
+	 * @return string|boolean
 	 */
 	protected function getArticle($varId, $blnMultiMode=false, $blnIsInsertTag=false, $strColumn='main')
 	{
@@ -301,15 +314,10 @@ abstract class Controller extends \System
 			$objRow = \ArticleModel::findByIdOrAliasAndColumn($varId, (!$blnIsInsertTag ? $objPage->id : null));
 		}
 
-		// Send a 404 header if the article does not exist
+		// Return if the article does not exist
 		if ($objRow === null)
 		{
-			// Do not index the page
-			$objPage->noSearch = 1;
-			$objPage->cache = 0;
-
-			header('HTTP/1.1 404 Not Found');
-			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $varId) . '</p>';
+			return false;
 		}
 
 		// Print the article as PDF
