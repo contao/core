@@ -2442,7 +2442,15 @@ abstract class Controller extends \System
 				}
 			}
 
-			$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+			// Correctly handle the "index" alias (see #3961)
+			if ($arrRow['alias'] == 'index')
+			{
+				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($strParams != '') ? $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'] : '');
+			}
+			else
+			{
+				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+			}
 		}
 		else
 		{
@@ -2471,7 +2479,7 @@ abstract class Controller extends \System
 			}
 		}
 
-		return str_replace('index' . $GLOBALS['TL_CONFIG']['urlSuffix'], '', $strUrl);
+		return $strUrl;
 	}
 
 
