@@ -3456,6 +3456,7 @@ abstract class Controller extends System
 		$objTemplate->src = TL_FILES_URL . $src;
 		$objTemplate->alt = specialchars($arrItem['alt']);
 		$objTemplate->title = specialchars($arrItem['title']);
+		$objTemplate->linkTitle = $objTemplate->title;
 		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
 		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
 		$objTemplate->margin = $this->generateMargin(deserialize($arrItem['imagemargin']), 'padding');

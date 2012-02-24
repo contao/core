@@ -5,6 +5,10 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+If an image with a title was added to a text element, the lightbox did not show
+the title anymore (see #3986).
+
+### Fixed
 The hyperlink element did not output the link title anymore (see #3973).
 
 ### Fixed
