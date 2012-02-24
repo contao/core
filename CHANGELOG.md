@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The hyperlink element did not output the link title anymore (see #3973).
+
+### Fixed
 Send a 404 header and do not index or cache a page if there is a pagination menu
 and the `page` parameter is outside the range of existing pages. Now that list
 and reader modules can be shown on the same page, it is likely that those pages
