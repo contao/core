@@ -72,29 +72,23 @@ class ModuleNewsletterReader extends Module
 			$this->Input->setGet('items', $this->Input->get('auto_item'));
 		}
 
-		// Return if no news item has been specified
+		// Do not index or cache the page if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->nl_channels = deserialize($this->nl_channels);
 
-		// Return if there are no channels
+		// Do not index or cache the page if there are no channels
 		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -119,14 +113,13 @@ class ModuleNewsletterReader extends Module
 
 		if ($objNewsletter->numRows < 1)
 		{
-			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
 		}
 

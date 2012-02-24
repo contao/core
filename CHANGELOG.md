@@ -5,6 +5,13 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Send a 404 header and do not index or cache a page if there is a pagination menu
+and the `page` parameter is outside the range of existing pages. Now that list
+and reader modules can be shown on the same page, it is likely that those pages
+will be cached. This fix prevents the search index and temporary directory from
+being flooded with non-existing resources (such as `?page=100000`).
+
+### Fixed
 Fixed the module wizard so you can use the stylect menu of a duplicated element
 without having to reload the page (see #3970).
 

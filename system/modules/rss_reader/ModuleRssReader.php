@@ -157,7 +157,23 @@ class ModuleRssReader extends Module
 		// Split pages
 		if ($this->perPage > 0)
 		{
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil(count($arrItems)/$this->perPage))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				$this->Template->items = array();
+				return;
+			}
+
+			// Set limit and offset
 			$offset = (($page - 1) * $this->perPage);
 			$limit = $this->perPage + $offset;
 

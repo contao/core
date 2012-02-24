@@ -72,29 +72,23 @@ class ModuleEventReader extends Events
 			$this->Input->setGet('events', $this->Input->get('auto_item'));
 		}
 
-		// Return if no event has been specified
+		// Do not index or cache the page if no event has been specified
 		if (!$this->Input->get('events'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar));
 
-		// Return if there are no calendars
+		// Do not index or cache the page if there are no calendars
 		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -115,21 +109,20 @@ class ModuleEventReader extends Events
 
 		$time = time();
 
-		// Get current event
+		// Get the current event
 		$objEvent = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', array_map('intval', $this->cal_calendar)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
 								   ->limit(1)
 								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
 
 		if ($objEvent->numRows < 1)
 		{
-			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
 			return;
 		}
 

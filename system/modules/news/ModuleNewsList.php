@@ -87,6 +87,7 @@ class ModuleNewsList extends ModuleNews
 		$skipFirst = intval($this->skipFirst);
 		$offset = 0;
 		$limit = null;
+		$this->Template->articles = array();
 
 		// Maximum number of items
 		if ($this->news_numberOfItems > 0)
@@ -107,15 +108,22 @@ class ModuleNewsList extends ModuleNews
 				$total = min($limit, $total);
 			}
 
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
-			// Check the maximum page number
-			if ($page > ($total/$this->perPage))
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$this->perPage))
 			{
-				$page = ceil($total/$this->perPage);
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
 			}
 
-			// Limit and offset
+			// Set limit and offset
 			$limit = $this->perPage;
 			$offset = (max($page, 1) - 1) * $this->perPage;
 
@@ -150,8 +158,8 @@ class ModuleNewsList extends ModuleNews
 			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
 		}
 
-		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->archives = $this->news_archives;
+		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 }

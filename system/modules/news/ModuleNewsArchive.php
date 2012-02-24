@@ -158,6 +158,7 @@ class ModuleNewsArchive extends ModuleNews
 		}
 
 		$time = time();
+		$this->Template->articles = array();
 
 		// Split result
 		if ($this->perPage > 0)
@@ -171,9 +172,16 @@ class ModuleNewsArchive extends ModuleNews
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
-			if ($page > ($total/$this->perPage))
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$this->perPage))
 			{
-				$page = ceil($total/$this->perPage);
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
 			}
 
 			// Set limit and offset

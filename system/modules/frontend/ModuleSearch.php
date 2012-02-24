@@ -238,10 +238,16 @@ class ModuleSearch extends Module
 				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 				$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
 
-				// Reset page navigator if page exceeds the lower or upper limit
-				if ($page > ceil($count/$per_page) || $page < 1)
+				// Do not index or cache the page if the page number is outside the range
+				if ($page < 1 || $page > ceil($count/$per_page))
 				{
-					$page = 1;
+					global $objPage;
+					$objPage->noSearch = 1;
+					$objPage->cache = 0;
+
+					// Send a 404 header
+					header('HTTP/1.1 404 Not Found');
+					return;
 				}
 
 				$from = (($page - 1) * $per_page) + 1;
