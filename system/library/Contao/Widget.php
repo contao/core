@@ -789,6 +789,22 @@ abstract class Widget extends Controller
 					}
 					break;
 
+				// Check whether the current value is a valid alias
+				case 'alias':
+					if (!preg_match('/^[\pN\pL\._-]*$/', $varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alias'], $this->strLabel));
+					}
+					break;
+
+				// Check whether the current value is a valid folder URL alias
+				case 'folderalias':
+					if (!preg_match('/^[\pN\pL\/\._-]*$/', $varInput))
+					{
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['folderalias'], $this->strLabel));
+					}
+					break;
+
 				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
 				case 'phone':
 					if (!preg_match('/^(\+|\()?(\d+[ \+\(\)\/-]*)+$/', html_entity_decode($varInput)))

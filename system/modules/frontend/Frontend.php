@@ -109,20 +109,58 @@ abstract class Frontend extends \Controller
 			}
 		}
 
-		$arrFragments = explode('/', $strRequest);
-
 		// Extract the language
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			if (!preg_match('/^[a-z]{2}$/', $arrFragments[0]))
+			if (!preg_match('@^[a-z]{2}/@', $strRequest))
 			{
 				return false; // Language not provided
 			}
 			else
 			{
-				$this->Input->setGet('language', $arrFragments[0]);
-				array_shift($arrFragments);
+				$this->Input->setGet('language', substr($strRequest, 0, 2));
+				$strRequest = substr($strRequest, 3);
 			}
+		}
+
+		$arrFragments = null;
+
+		// Use folder-style URLs
+		if ($GLOBALS['TL_CONFIG']['folderUrl'] && strpos($strRequest, '/') !== false)
+		{
+			$strAlias = $strRequest;
+			$arrOptions = array($strAlias);
+
+			// Compile all possible aliases by applying dirname() to the request (e.g. news/archive/item, news/archive, news)
+			while (strpos($strAlias, '/') !== false)
+			{
+				$strAlias = dirname($strAlias);
+				$arrOptions[] = $strAlias;
+			}
+
+			// Check if there is a page with a matching alias
+			$objPage = \PageModel::findByAliases($arrOptions);
+
+			if ($objPage !== null)
+			{
+				// The request consists of the alias only
+				if ($strRequest == $objPage->alias)
+				{
+					$arrFragments = array($strRequest);
+				}
+				// Remove the alias from the request string, explode it and then re-insert the alias at the beginning 
+				else
+				{
+					$arrFragments = explode('/', substr($strRequest, strlen($objPage->alias) + 1));
+					array_unshift($arrFragments, $objPage->alias);
+				}
+			}
+		}
+
+		// If folderUrl is deactivated or did not find a matching page
+		if ($arrFragments === null)
+		{
+			$arrFragments = explode('/', $strRequest);
 		}
 
 		// Add the second fragment as auto_item if the number of fragments is even

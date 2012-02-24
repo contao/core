@@ -201,6 +201,25 @@ class PageModel extends \Model
 
 		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
+
+
+	/**
+	 * Find a page matching a list of possible alias names
+	 * @param array
+	 * @return Model|null
+	 */
+	public static function findByAliases($arrAliases)
+	{
+		if (!is_array($arrAliases) || empty($arrAliases))
+		{
+			return null;
+		}
+
+		$t = static::$strTable;
+		$arrColumns = array("$t.alias IN('" . implode("','", array_filter($arrAliases)) . "')");
+
+		return static::findBy($arrColumns, null, array('order'=>Database::getInstance()->findInSet("$t.alias", $arrAliases)));
+	}
 }
 
 ?>
