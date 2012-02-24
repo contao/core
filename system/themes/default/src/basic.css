@@ -333,6 +333,9 @@ pre,.tl_textarea.monospace {
 .firefox .tl_submit {
 	padding:2px 12px 2px 13px;
 }
+.opera .tl_submit {
+	padding:4px 12px 4px 13px;
+}
 .tl_submit:focus,.tl_submit:hover {
 	box-shadow:0 0 3px #aaa;
 }
