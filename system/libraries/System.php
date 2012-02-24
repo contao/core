@@ -811,18 +811,28 @@ abstract class System
 			return $this->idnaEncodeEmail($strUrl);
 		}
 
+		$blnSchemeAdded = false;
 		$arrUrl = parse_url($strUrl);
 
 		// Add the scheme to ensure that parse_url works correctly
 		if (!isset($arrUrl['scheme']) && strncmp($strUrl, '{{', 2) !== 0)
 		{
+			$blnSchemeAdded = true;
 			$arrUrl = parse_url('http://' . $strUrl);
 		}
 
 		// Scheme
 		if (isset($arrUrl['scheme']))
 		{
-			$arrUrl['scheme'] .= '://';
+			// Remove the scheme if it has been added above (see #3792)
+			if ($blnSchemeAdded)
+			{
+				unset($arrUrl['scheme']);
+			}
+			else
+			{
+				$arrUrl['scheme'] .= '://';
+			}
 		}
 
 		// User

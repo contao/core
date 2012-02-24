@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Relative URLs are now validated correctly (`'rgxp'=>'url'`) (see #3792). 
+
+### Fixed
 Adjust the submit button height in Opera (see #3940).
 
 ### Fixed
