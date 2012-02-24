@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Set the maximum length of `inputUnit` fields to 200 (see #3987).
+
+### Fixed
 If an image with a title was added to a text element, the lightbox did not show
 the title anymore (see #3986).
 

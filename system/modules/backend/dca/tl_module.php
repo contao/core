@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 			'search'                  => true,
 			'inputType'               => 'inputUnit',
 			'options'                 => array('h1', 'h2', 'h3', 'h4', 'h5', 'h6'),
-			'eval'                    => array('maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>200, 'tl_class'=>'w50')
 		),
 		'type' => array
 		(
