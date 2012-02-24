@@ -58,7 +58,7 @@ var Stylect =
 				'class': 'styled_select',
 				'html': '<span>' + label + '</span><b><i></i></b>',
 				'styles': {
-					'width': tw - 8
+					'width': tw - ((Browser.safari || Browser.chrome) ? 6 : 8)
 				}
 			}).inject(el, 'before');
 
