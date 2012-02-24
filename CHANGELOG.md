@@ -5,6 +5,10 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Preserve IE conditionals like `[if (lt IE 9) & (!IEMobile)]` when replacing
+ampersands in the front end (see #3985).
+
+### Fixed
 Set the maximum length of `inputUnit` fields to 200 (see #3987).
 
 ### Fixed

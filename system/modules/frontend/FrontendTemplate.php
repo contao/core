@@ -117,7 +117,7 @@ class FrontendTemplate extends Template
 		}
 
 		// Parse the template
-		$strBuffer = str_replace(' & ', ' &amp; ', $this->parse());
+		$strBuffer = str_replace(array(' & ', ') &amp; ('), array(' &amp; ', ') & ('), $this->parse());
 
 		// HOOK: add custom output filters
 		if (isset($GLOBALS['TL_HOOKS']['outputFrontendTemplate']) && is_array($GLOBALS['TL_HOOKS']['outputFrontendTemplate']))
@@ -204,8 +204,7 @@ class FrontendTemplate extends Template
 			}
 		}
 
-		// Replace insert tags and then re-replace the request_token
-		// tag in case a form element has been loaded via insert tag
+		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 
