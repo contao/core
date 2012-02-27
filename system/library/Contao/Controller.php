@@ -1554,13 +1554,29 @@ abstract class Controller extends \System
 								}
 								elseif (($objTarget = \PageModel::findFirstPublishedRegularByPid($objNextPage->id)) !== null)
 								{
-									$strUrl = $this->generateFrontendUrl($objTarget->row());
+									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+									{
+										$objTarget = $this->getPageDetails($objTarget); // see #3983
+										$strUrl = $this->generateFrontendUrl($objTarget->row(), null, $objTarget->language);
+									}
+									else
+									{
+										$strUrl = $this->generateFrontendUrl($objTarget->row());
+									}
 									break;
 								}
 								// DO NOT ADD A break; STATEMENT
 
 							default:
-								$strUrl = $this->generateFrontendUrl($objNextPage->row());
+								if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+								{
+									$objNextPage = $this->getPageDetails($objNextPage); // see #3983
+									$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $objNextPage->language);
+								}
+								else
+								{
+									$strUrl = $this->generateFrontendUrl($objNextPage->row());
+								}
 								break;
 						}
 
