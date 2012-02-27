@@ -5,6 +5,10 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The date picker in the back end did not work correctly due to MooTools failing
+to parse dates correctly (see #3954).
+
+### Fixed
 The TinyMCE links popup failed under certain conditions (see #3995).
 
 ### Fixed

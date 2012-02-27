@@ -179,11 +179,17 @@ class BackendTemplate extends Template
 
 	/**
 	 * Return the datepicker string
+	 * 
+	 * Fix the MooTools more parsers which incorrectly parse ISO-8601 and do
+	 * not handle German date formats at all.
 	 * @return string
 	 */
 	protected function getDateString()
 	{
 		return 'window.addEvent("domready",function(){'
+			. 'Date.defineParser("%d(.%m(.%Y( %H:%M(:%S)?)?)?)?");'        // 31.12.1999, 31.12.1999 11:59, 31.12.1999 23:59:59
+			. 'Date.defineParser("%Y(-%m(-%d( %H:%M(:%S)?( ?%p)?)?)?)?");' // 1999-12-31, 1999-12-31 11:59pm, 1999-12-31 23:59:59, ISO8601
+			. 'Date.defineParser("%m(/%d(/%Y( %H:%M(:%S)?( ?%p)?)?)?)?");' // 12/31/1999, 12/31/1999 11:59pm, 12/31/1999 23:59:59
 			. 'Locale.define("en-US","Date",{'
 				. 'months:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS']) . '"],'
 				. 'days:["' . implode('","', $GLOBALS['TL_LANG']['DAYS']) . '"],'
