@@ -132,6 +132,9 @@ li {
 #sql_table {
 	margin:-3px 0;
 }
+#sql_table pre {
+	white-space:pre-wrap;
+}
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
 }

@@ -116,4 +116,5 @@
 .mod_repository #sql_table td.tl_col_0 { padding-top:18px; }
 .mod_repository #sql_table td.tl_col_1 { width:18px; vertical-align:top; }
 .mod_repository #sql_table td.tl_col_1, .mod_repository #sql_table td.tl_col_2 { padding-bottom:3px; }
+.mod_repository #sql_table pre { white-space:pre-wrap; }
 .mod_repository #sql_table pre label { font-family:monospace; }
