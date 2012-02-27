@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly add the language to insert tag links (see #3983).
+
+### Fixed
 When creating an admin user in the install tool, the username was not validated
 correctly (see #4006).
 

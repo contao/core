@@ -1641,13 +1641,29 @@ abstract class Controller extends System
 
 									if ($objTarget->numRows)
 									{
-										$strUrl = $this->generateFrontendUrl($objTarget->fetchAssoc());
+										if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+										{
+											$objTarget = $this->getPageDetails($objTarget->id); // see #3983
+											$strUrl = $this->generateFrontendUrl($objTarget->row(), null, $objTarget->rootLanguage);
+										}
+										else
+										{
+											$strUrl = $this->generateFrontendUrl($objTarget->row());
+										}
 										break;
 									}
 									// DO NOT ADD A break; STATEMENT
 
 								default:
-									$strUrl = $this->generateFrontendUrl($objNextPage->row());
+									if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+									{
+										$objNextPage = $this->getPageDetails($objNextPage->id); // see #3983
+										$strUrl = $this->generateFrontendUrl($objNextPage->row(), null, $objNextPage->rootLanguage);
+									}
+									else
+									{
+										$strUrl = $this->generateFrontendUrl($objNextPage->row());
+									}
 									break;
 							}
 
