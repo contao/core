@@ -41,7 +41,7 @@ define('DATEPICKER', '2.1.1');
 define('HIGHLIGHTER', '3.0.83');
 define('HTML5SHIM', '3');
 define('MEDIABOX', '1.4.6');
-define('MOOTOOLS', '1.4.4');
+define('MOOTOOLS', '1.4.5');
 define('JQUERY', '1.7.1');
 define('COLORBOX', '1.3.19');
 define('SLIMBOX', '1.71');
