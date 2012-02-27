@@ -1191,14 +1191,17 @@ window.addEvent('domready', function() {
     <input type="hidden" name="FORM_SUBMIT" value="tl_admin">
     <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['MSC']['username']; ?></h4>
+<?php if ($this->usernameError): ?>
+    <p class="tl_error"><?php echo $this->usernameError; ?></p>
+<?php endif; ?>
     <input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->adminUser; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['MSC']['com_name']; ?></h4>
     <input type="text" name="name" id="name" class="tl_text" value="<?php echo $this->adminName; ?>">
     <h4><?php echo $GLOBALS['TL_LANG']['MSC']['emailAddress']; ?></h4>
     <input type="text" name="email" id="email" class="tl_text" value="<?php echo $this->adminEmail; ?>">
     <h4><label for="password"><?php echo $GLOBALS['TL_LANG']['MSC']['password'][0]; ?></label></h4>
-<?php if ($this->adminError): ?>
-    <p class="tl_error"><?php echo $this->adminError; ?></p>
+<?php if ($this->passwordError): ?>
+    <p class="tl_error"><?php echo $this->passwordError; ?></p>
 <?php endif; ?>
     <input type="password" name="pass" id="pass" class="tl_text" value="">
     <h4><label for="confirm_password"><?php echo $GLOBALS['TL_LANG']['MSC']['confirm'][0]; ?></label></h4>
