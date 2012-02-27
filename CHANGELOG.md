@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+When creating an admin user in the install tool, the username was not validated
+correctly (see #4006).
+
 ### Updated
 Updated MooTools to version 1.4.5 which fixes a critical bug.
 

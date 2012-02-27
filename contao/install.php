@@ -831,25 +831,35 @@ class InstallTool extends Backend
 			// Create an admin account
 			elseif ($this->Input->post('FORM_SUBMIT') == 'tl_admin')
 			{
-				// Do not allow special characters
-				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
+				// Do not allow special characters in usernames
+				if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('username'))))
 				{
-					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['extnd'];
+					$this->Template->usernameError = $GLOBALS['TL_LANG']['ERR']['extnd'];
+				}
+				// The username must not contain whitespace characters (see #4006)
+				elseif (strpos($this->Input->post('username'), ' ') !== false)
+				{
+					$this->Template->usernameError = sprintf($GLOBALS['TL_LANG']['ERR']['noSpace'], $GLOBALS['TL_LANG']['MSC']['username']);
+				}
+				// Do not allow special characters in passwords
+				elseif (preg_match('/[#\(\)\/<=>]/', html_entity_decode($this->Input->post('pass'))))
+				{
+					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['extnd'];
 				}
 				// Passwords do not match
 				elseif ($this->Input->post('pass') != $this->Input->post('confirm_pass'))
 				{
-					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
+					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordMatch'];
 				}
 				// Password too short
 				elseif (utf8_strlen($this->Input->post('pass')) < $GLOBALS['TL_CONFIG']['minPasswordLength'])
 				{
-					$this->Template->adminError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
+					$this->Template->passwordError = sprintf($GLOBALS['TL_LANG']['ERR']['passwordLength'], $GLOBALS['TL_CONFIG']['minPasswordLength']);
 				}
 				// Password and username are the same
 				elseif ($this->Input->post('pass') == $this->Input->post('username'))
 				{
-					$this->Template->adminError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
+					$this->Template->passwordError = $GLOBALS['TL_LANG']['ERR']['passwordName'];
 				}
 				// Save the data
 				elseif ($this->Input->post('name') != '' && $this->Input->post('email', true) != '' && $this->Input->post('username') != '')
