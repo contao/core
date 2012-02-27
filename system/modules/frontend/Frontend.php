@@ -112,14 +112,17 @@ abstract class Frontend extends \Controller
 		// Extract the language
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			if (!preg_match('@^[a-z]{2}/@', $strRequest))
+			$arrMatches = array();
+
+			// Use the matches instead of substr() (thanks to Mario Müller)
+			if (preg_match('@^([a-z]{2})/(.*)$@', $strRequest, $arrMatches))
 			{
-				return false; // Language not provided
+				$this->Input->setGet('language', $arrMatches[1]);
+				$strRequest = $arrMatches[2];
 			}
 			else
 			{
-				$this->Input->setGet('language', substr($strRequest, 0, 2));
-				$strRequest = substr($strRequest, 3);
+				return false; // Language not provided
 			}
 		}
 
