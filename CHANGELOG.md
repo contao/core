@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+The TreeView is now searchable.
+
+### New
 Added support for folder-style URLs (see #3921). This is meant as a proof of
 concept to see whether it works and is useful. We might have to add a feature to
 the site structure to automatically generate folder-style aliases.

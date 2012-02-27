@@ -335,6 +335,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 		// Render view
 		if ($this->treeView)
 		{
+			$return .= $this->panel();
 			$return .= $this->treeView();
 		}
 		else
@@ -651,7 +652,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created'.$this->getParentRecords($this->strTable, $insertID), 'DC_Table create()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created'.$this->getParentEntries($this->strTable, $insertID), 'DC_Table create()', TL_GENERAL);
 				$this->redirect($this->switchToEdit($insertID).$s2e);
 			}
 		}
@@ -893,7 +894,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				}
 
 				// Add a log entry
-				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created by duplicating record "'.$this->strTable.'.id='.$this->intId.'"'.$this->getParentRecords($this->strTable, $insertID), 'DC_Table copy()', TL_GENERAL);
+				$this->log('A new entry "'.$this->strTable.'.id='.$insertID.'" has been created by duplicating record "'.$this->strTable.'.id='.$this->intId.'"'.$this->getParentEntries($this->strTable, $insertID), 'DC_Table copy()', TL_GENERAL);
 
 				// Switch to edit mode
 				if (!$blnDoNotRedirect)
@@ -1592,7 +1593,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					$this->Database->prepare("UPDATE tl_version SET active=1 WHERE pid=? AND version=?")
 								   ->execute($this->intId, $this->Input->post('version'));
 
-					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
+					$this->log('Version '.$this->Input->post('version').' of record "'.$this->strTable.'.id='.$this->intId.'" has been restored'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 
 					// Trigger the onrestore_callback
 					if (is_array($GLOBALS['TL_DCA'][$this->strTable]['config']['onrestore_callback']))
@@ -1860,7 +1861,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 					}
 				}
 
-				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
+				$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table edit()', TL_GENERAL);
 			}
 
 			// Set the current timestamp (-> DO NOT CHANGE THE ORDER version - timestamp)
@@ -2145,7 +2146,7 @@ window.addEvent(\'domready\', function() {
 							}
 						}
 
-						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
+						$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 					}
 
 					// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2382,7 +2383,7 @@ window.addEvent(\'domready\', function() {
 								}
 							}
 
-							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentRecords($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
+							$this->log('A new version of record "'.$this->strTable.'.id='.$this->intId.'" has been created'.$this->getParentEntries($this->strTable, $this->intId), 'DC_Table editAll()', TL_GENERAL);
 						}
 
 						// Set the current timestamp (-> DO NOT CHANGE ORDER version - timestamp)
@@ -2882,10 +2883,11 @@ window.addEvent(\'domready\', function() {
 			$this->loadDataContainer($table);
 		}
 
-		// Get session data and toggle nodes
+		$session = $this->Session->getData();
+
+		// Toggle the nodes
 		if ($this->Input->get('ptg') == 'all')
 		{
-			$session = $this->Session->getData();
 			$node = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? $this->strTable.'_'.$table.'_tree' : $this->strTable.'_tree';
 
 			// Expand tree
@@ -2927,7 +2929,7 @@ window.addEvent(\'domready\', function() {
 		$blnClipboard = false;
 		$arrClipboard = $this->Session->get('CLIPBOARD');
 
-		// Check clipboard
+		// Check the clipboard
 		if (!empty($arrClipboard[$this->strTable]))
 		{
 			$blnClipboard = true;
@@ -2948,15 +2950,53 @@ window.addEvent(\'domready\', function() {
 
 		$tree = '';
 		$blnHasSorting = $this->Database->fieldExists('sorting', $table);
+		$blnNoRecursion = false;
+
+		// Limit the results by modifying $this->root
+		if ($session['search'][$this->strTable]['value'] != '')
+		{
+			$for = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 6) ? 'pid' : 'id';
+
+			$objRoot = $this->Database->prepare("SELECT $for FROM {$this->strTable} WHERE CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?")
+									  ->execute($session['search'][$this->strTable]['value']);
+
+			if ($objRoot->numRows < 1)
+			{
+				$this->root = array();
+			}
+			else
+			{
+				// Respect existing limitations (root IDs)
+				if (is_array($GLOBALS['TL_DCA'][$table]['list']['sorting']['root']))
+				{
+					$arrRoot = array();
+
+					while ($objRoot->next())
+					{
+						if (count(array_intersect($this->root, $this->getParentRecords($objRoot->$for, $table))) > 0)
+						{
+							$arrRoot[] = $objRoot->$for;
+						}
+					}
+
+					$this->root = $arrRoot;
+				}
+				else
+				{
+					$blnNoRecursion = true;
+					$this->root = $objRoot->fetchEach($for);
+				}
+			}
+		}
 
 		// Call a recursive function that builds the tree
 		for ($i=0; $i<count($this->root); $i++)
 		{
-			$tree .= $this->generateTree($table, $this->root[$i], array('p'=>$this->root[($i-1)], 'n'=>$this->root[($i+1)]), $blnHasSorting, -20, ($blnClipboard ? $arrClipboard : false), ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $blnClipboard && $this->root[$i] == $arrClipboard['id']));
+			$tree .= $this->generateTree($table, $this->root[$i], array('p'=>$this->root[($i-1)], 'n'=>$this->root[($i+1)]), $blnHasSorting, -20, ($blnClipboard ? $arrClipboard : false), ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $blnClipboard && $this->root[$i] == $arrClipboard['id']), false, $blnNoRecursion);
 		}
 
 		// Return if there are no records
-		if (!strlen($tree) && $this->Input->get('act') != 'paste')
+		if ($tree == '' && $this->Input->get('act') != 'paste')
 		{
 			return $return . '
 <p class="tl_empty">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
@@ -3108,9 +3148,10 @@ window.addEvent(\'domready\', function() {
 	 * @param array
 	 * @param boolean
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=false, $blnCircularReference=false, $protectedPage=false)
+	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=false, $blnCircularReference=false, $protectedPage=false, $blnNoRecursion=false)
 	{
 		static $session;
 
@@ -3139,6 +3180,7 @@ window.addEvent(\'domready\', function() {
 
 		$return = '';
 		$intSpacing = 20;
+		$childs = array();
 
 		// Add the ID to the list of current IDs
 		if ($this->strTable == $table)
@@ -3147,14 +3189,17 @@ window.addEvent(\'domready\', function() {
 		}
 
 		// Check whether there are child records
-		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 || $this->strTable != $table)
+		if (!$blnNoRecursion)
 		{
-			$objChilds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($blnHasSorting ? " ORDER BY sorting" : ''))
-										->execute($id);
-
-			if ($objChilds->numRows)
+			if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 || $this->strTable != $table)
 			{
-				$childs = $objChilds->fetchEach('id');
+				$objChilds = $this->Database->prepare("SELECT id FROM " . $table . " WHERE pid=?" . ($blnHasSorting ? " ORDER BY sorting" : ''))
+											->execute($id);
+
+				if ($objChilds->numRows)
+				{
+					$childs = $objChilds->fetchEach('id');
+				}
 			}
 		}
 
@@ -3294,7 +3339,7 @@ window.addEvent(\'domready\', function() {
 
 		$return .= (strlen($_buttons) ? $_buttons : '&nbsp;') . '</div><div style="clear:both"></div></li>';
 
-		// Add records of the table itself
+		// Add the records of the table itself
 		if ($table != $this->strTable)
 		{
 			$objChilds = $this->Database->prepare("SELECT id FROM " . $this->strTable . " WHERE pid=?" . ($blnHasSorting ? " ORDER BY sorting" : ''))
@@ -3311,28 +3356,31 @@ window.addEvent(\'domready\', function() {
 			}
 		}
 
-		// Begin new submenu
-		if (!empty($childs) && $session[$node][$id] == 1)
+		// Begin a new submenu
+		if (!$blnNoRecursion)
 		{
-			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
-		}
-
-		// Add records of the parent table
-		if ($session[$node][$id] == 1)
-		{
-			if (is_array($childs))
+			if (!empty($childs) && $session[$node][$id] == 1)
 			{
-				for ($k=0; $k<count($childs); $k++)
+				$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
+			}
+
+			// Add the records of the parent table
+			if ($session[$node][$id] == 1)
+			{
+				if (is_array($childs))
 				{
-					$return .= $this->generateTree($table, $childs[$k], array('p'=>$childs[($k-1)], 'n'=>$childs[($k+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, ((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $childs[$k] == $arrClipboard['id']) || $blnCircularReference) ? true : false), ($blnProtected || $protectedPage));
+					for ($k=0; $k<count($childs); $k++)
+					{
+						$return .= $this->generateTree($table, $childs[$k], array('p'=>$childs[($k-1)], 'n'=>$childs[($k+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, ((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $childs[$k] == $arrClipboard['id']) || $blnCircularReference) ? true : false), ($blnProtected || $protectedPage));
+					}
 				}
 			}
-		}
 
-		// Close submenu
-		if (!empty($childs) && $session[$node][$id] == 1)
-		{
-			$return .= '</ul></li>';
+			// Close the submenu
+			if (!empty($childs) && $session[$node][$id] == 1)
+			{
+				$return .= '</ul></li>';
+			}
 		}
 
 		$this->Session->setData($session);
@@ -4102,17 +4150,17 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	 */
 	protected function panel()
 	{
+		if ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout'] == '')
+		{
+			return '';
+		}
+
 		$filter = $this->filterMenu();
 		$search = $this->searchMenu();
 		$limit = $this->limitMenu();
 		$sort = $this->sortMenu();
 
-		if (!strlen($filter) && !strlen($search) && !strlen($limit) && !strlen($sort))
-		{
-			return '';
-		}
-
-		if (!strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['panelLayout']))
+		if ($filter == '' && $search == '' && $limit == '' && $sort == '')
 		{
 			return '';
 		}
@@ -4135,7 +4183,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 
 			foreach ($arrSubPanels as $strSubPanel)
 			{
-				if (strlen($$strSubPanel))
+				if ($$strSubPanel != '')
 				{
 					$panels = $$strSubPanel . $panels;
 				}
@@ -4150,7 +4198,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 </div>';
 			}
 
-			if (strlen($panels))
+			if ($panels != '')
 			{
 				$return .= '
 <div class="tl_panel">'.$submit.$panels.'
@@ -4222,8 +4270,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			$this->Session->setData($session);
 		}
 
-		// Set search value from session
-		elseif (strlen($session['search'][$this->strTable]['value']))
+		// Set the search value from the session
+		elseif ($session['search'][$this->strTable]['value'] != '')
 		{
 			$this->procedure[] = "CAST(".$session['search'][$this->strTable]['field']." AS CHAR) REGEXP ?";
 			$this->values[] = $session['search'][$this->strTable]['value'];
@@ -4470,7 +4518,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
 
-		// Get sorting fields
+		// Get the sorting fields
 		foreach ($GLOBALS['TL_DCA'][$this->strTable]['fields'] as $k=>$v)
 		{
 			if ($v['filter'])
@@ -5041,7 +5089,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	 * @param integer
 	 * @return string
 	 */
-	protected function getParentRecords($strTable, $intId)
+	protected function getParentEntries($strTable, $intId)
 	{
 		// No parent table
 		if (!isset($GLOBALS['TL_DCA'][$strTable]['config']['ptable']))

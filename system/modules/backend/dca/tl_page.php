@@ -72,7 +72,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			'mode'                    => 5,
 			'icon'                    => 'pagemounts.gif',
-			'paste_button_callback'   => array('tl_page', 'pastePage')
+			'paste_button_callback'   => array('tl_page', 'pastePage'),
+			'panelLayout'             => 'filter,search'
 		),
 		'label' => array
 		(
@@ -208,6 +209,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
@@ -216,6 +218,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('rgxp'=>'folderalias', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
@@ -243,6 +246,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['pageTitle'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
@@ -251,6 +255,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['language'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
@@ -263,6 +268,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['robots'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
+			'search'                  => true,
 			'options'                 => array('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow'),
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"
@@ -272,6 +278,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
+			'search'                  => true,
 			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),
@@ -320,6 +327,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
@@ -548,6 +556,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cssClass'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),

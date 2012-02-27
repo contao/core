@@ -71,7 +71,8 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 		(
 			'mode'                    => 6,
 			'fields'                  => array('published DESC', 'title', 'author'),
-			'paste_button_callback'   => array('tl_article', 'pasteArticle')
+			'paste_button_callback'   => array('tl_article', 'pasteArticle'),
+			'panelLayout'             => 'search'
 		),
 		'label' => array
 		(
@@ -185,6 +186,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
@@ -193,6 +195,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('rgxp'=>'alias', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
@@ -227,6 +230,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['keywords'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
+			'search'                  => true,
 			'eval'                    => array('style'=>'height:60px;'),
 			'sql'                     => "text NULL"
 		),
@@ -251,6 +255,7 @@ $GLOBALS['TL_DCA']['tl_article'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_article']['teaser'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
+			'search'                  => true,
 			'eval'                    => array('rte'=>'tinyMCE', 'tl_class'=>'clr'),
 			'sql'                     => "text NULL"
 		),

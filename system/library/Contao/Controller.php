@@ -2993,6 +2993,29 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Return the IDs of all parent records of a particular record
+	 * @param integer
+	 * @param string
+	 * @return array
+	 */
+	protected function getParentRecords($intId, $strTable)
+	{
+		$arrReturn = array();
+
+		// Currently supports a nesting-level of 10
+		$objPages = $this->Database->prepare("SELECT id, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT id, @pid:=pid FROM $strTable WHERE id=@pid", 9))
+								   ->execute($intId);
+
+		while ($objPages->next())
+		{
+			$arrReturn[] = $objPages->id;
+		}
+
+		return $arrReturn;
+	}
+
+
+	/**
 	 * Return true if a class exists (tries to autoload the class)
 	 * @param string
 	 * @param boolean
