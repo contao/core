@@ -36,8 +36,8 @@ provides: [Core, MooTools, Type, typeOf, instanceOf, Native]
 (function(){
 
 this.MooTools = {
-	version: '1.4.4',
-	build: 'adb02e676407521b516ffa10d2dc6b54237a80f9'
+	version: '1.4.5',
+	build: 'ab8ea8824dc3b24b6666867a2c4ed58ebb762cf0'
 };
 
 // typeOf, instanceOf
@@ -99,8 +99,9 @@ Function.prototype.overloadGetter = function(usePlural){
 	var self = this;
 	return function(a){
 		var args, result;
-		if (usePlural || typeof a != 'string') args = a;
+		if (typeof a != 'string') args = a;
 		else if (arguments.length > 1) args = arguments;
+		else if (usePlural) args = [a];
 		if (args){
 			result = {};
 			for (var i = 0; i < args.length; i++) result[args[i]] = self.call(this, args[i]);
@@ -3665,7 +3666,7 @@ Element.implement({
 				if (pollutesGetAttribute) delete attributeWhiteList[name];
 				/* </ltIE9> */
 			} else {
-				this.setAttribute(name, value);
+				this.setAttribute(name, '' + value);
 				/* <ltIE9> */
 				if (pollutesGetAttribute) attributeWhiteList[name] = true;
 				/* </ltIE9> */
@@ -4139,7 +4140,7 @@ var setOpacity = (hasOpacity ? function(element, opacity){
 } : (hasFilter ? function(element, opacity){
 	var style = element.style;
 	if (!element.currentStyle || !element.currentStyle.hasLayout) style.zoom = 1;
-	if (opacity == null) opacity = '';
+	if (opacity == null || opacity == 1) opacity = '';
 	else opacity = 'alpha(opacity=' + (opacity * 100).limit(0, 100).round() + ')';
 	var filter = style.filter || element.getComputedStyle('filter') || '';
 	style.filter = reAlpha.test(filter) ? filter.replace(reAlpha, opacity) : filter + opacity;
@@ -4214,16 +4215,17 @@ Element.implement({
 			var color = result.match(/rgba?\([\d\s,]+\)/);
 			if (color) result = result.replace(color[0], color[0].rgbToHex());
 		}
-		if (Browser.ie && isNaN(parseFloat(result))){
-			if ((/^(height|width)$/).test(property)){
+		if (Browser.opera || Browser.ie){
+			if ((/^(height|width)$/).test(property) && !(/px$/.test(result))){
 				var values = (property == 'width') ? ['left', 'right'] : ['top', 'bottom'], size = 0;
 				values.each(function(value){
 					size += this.getStyle('border-' + value + '-width').toInt() + this.getStyle('padding-' + value).toInt();
 				}, this);
 				return this['offset' + property.capitalize()] - size + 'px';
 			}
-			if (Browser.opera && String(result).indexOf('px') != -1) return result;
-			if ((/^border(.+)Width|margin|padding/).test(property)) return '0px';
+			if (Browser.ie && (/^border(.+)Width|margin|padding/).test(property) && isNaN(parseFloat(result))){
+				return '0px';
+			}
 		}
 		return result;
 	},

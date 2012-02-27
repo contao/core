@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### Updated
+Updated MooTools to version 1.4.5 which fixes a critical bug.
+
 ### Fixed
 Relative URLs are now validated correctly (`'rgxp'=>'url'`) (see #3792). 
 
