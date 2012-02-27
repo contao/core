@@ -32,7 +32,7 @@
 /**
  * Initialize system
  */
-define('TL_MODE', 'FE');
+define('TL_MODE', 'BE');
 require('../../../../system/initialize.php');
 
 

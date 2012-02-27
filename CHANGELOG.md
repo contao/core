@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The TinyMCE links popup failed under certain conditions (see #3995).
+
+### Fixed
 Correctly add the language to insert tag links (see #3983).
 
 ### Fixed
