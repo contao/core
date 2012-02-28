@@ -144,7 +144,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$value = $this->$callback[0]->$callback[1]($value, $this->User, $this);
+						$value = $this->$callback[0]->$callback[1]($value);
 					}
 				}
 			}
@@ -270,7 +270,7 @@ class ModulePersonalData extends \Module
 					if (is_array($callback))
 					{
 						$this->import($callback[0]);
-						$this->$callback[0]->$callback[1]($this->User, $this);
+						$this->$callback[0]->$callback[1]();
 					}
 				}
 			}
