@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Show a confirmation screen if an invalid URL has been detected instead of the
+default error screen, so deep linking in the back end remains possible.
+
 ### New
 Check the request token in the back end when `$_GET['act']` is set (see #4007).
 

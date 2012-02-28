@@ -93,6 +93,22 @@
 
 <p class="tl_gerror"><?php echo $this->error; ?></p>
 <?php endif; ?>
+<?php if ($this->explain): ?>
+
+<div style="margin:24px 18px">
+  <img class="pngfix" src="system/modules/rep_client/themes/default/images/stop128.png" width="128" height="128" alt="">
+</div>
+
+<form action="contao/main.php?act=confirm" class="tl_form" method="post">
+<div class="tl_formbody_edit">
+  <input type="hidden" name="FORM_SUBMIT" value="invalid_token_url">
+  <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+  <p style="font-size:13px"><?php echo $this->link; ?></p>
+  <p style="margin:2em 0;line-height:1.5"><?php echo $this->explain; ?></p>
+  <p style="margin-bottom:24px"><input type="submit" name="continue" class="tl_submit" accesskey="s" value="<?php echo $this->continue; ?>" style="margin-right:9px"> <a href="contao/main.php"><?php echo $this->cancel; ?></a></p>
+</div> 
+</form>
+<?php endif; ?>
 <?php echo $this->main; ?>
 
 </div>

@@ -107,19 +107,49 @@ class Main extends Backend
 			$this->objAjax->executePreActions();
 		}
 
+		// Error
+		if ($this->Input->get('act') == 'error')
+		{
+			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
+		}
+		// Confirm
+		if ($this->Input->get('act') == 'confirm')
+		{
+			$this->confirmInvalidTokenUrl();
+		}
 		// Welcome screen
-		if (!$this->Input->get('do') && !$this->Input->get('act'))
+		elseif (!$this->Input->get('do') && !$this->Input->get('act'))
 		{
 			$this->Template->main .= $this->welcomeScreen();
 		}
-
-		// Open module
-		if ($this->Input->get('do'))
+		// Open a module
+		elseif ($this->Input->get('do'))
 		{
 			$this->Template->main .= $this->getBackendModule($this->Input->get('do'));
 		}
 
 		$this->output();
+	}
+
+
+	/**
+	 * Add a screen to confirm invalid token URLs
+	 */
+	protected function confirmInvalidTokenUrl()
+	{
+		if ($this->Input->post('FORM_SUBMIT') == 'invalid_token_url')
+		{
+			$url = $this->Session->get('INVALID_TOKEN_URL');
+			$url = preg_replace('/(\?|&)rt=[^&]*/', '', $url);
+			$this->redirect($url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN);
+		}
+
+		$this->Template->confirm = true;
+		$this->Template->link = specialchars($this->Session->get('INVALID_TOKEN_URL'));
+		$this->Template->h2 = $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'];
+		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
+		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
+		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
 	}
 
 
@@ -181,7 +211,6 @@ class Main extends Backend
 		$this->Template->logout = specialchars($GLOBALS['TL_LANG']['MSC']['logoutBT']);
 		$this->Template->backendModules = $GLOBALS['TL_LANG']['MSC']['backendModules'];
 		$this->Template->username = $GLOBALS['TL_LANG']['MSC']['user'] . ' ' . $GLOBALS['TL_USERNAME'];
-		$this->Template->error = ($this->Input->get('act') == 'error') ? $GLOBALS['TL_LANG']['ERR']['general'] : '';
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];

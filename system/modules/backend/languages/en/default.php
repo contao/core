@@ -79,7 +79,7 @@ $GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'None of the active website ro
 $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'You can only define one website root page per domain as language fallback.';
 $GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Top-level pages must be website root pages!';
 $GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.';
-
+$GLOBALS['TL_LANG']['ERR']['invalidTokenUrl']   = 'The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.';
 
 /**
  * Page types

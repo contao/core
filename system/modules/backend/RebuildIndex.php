@@ -85,10 +85,10 @@ class RebuildIndex extends \Backend implements \executable
 			$this->import('RequestToken');
 
 			// Check the request token (see #4007)
-			if (!isset($_GET['act']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
 			{
-				$this->log('Invalid or empty request token', 'DC_Table __construct()', TL_ERROR);
-				$this->redirect('contao/main.php?act=error');
+				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
+				$this->redirect('contao/main.php?act=confirm');
 			}
 
 			$arrPages = $this->findSearchablePages();
