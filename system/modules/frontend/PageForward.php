@@ -83,6 +83,11 @@ class PageForward extends Frontend
 					continue;
 				}
 
+				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $key == 'language')
+				{
+					continue;
+				}
+
 				$strGet .= '/' . $key . '/' . $this->Input->get($key);
 			}
 		}

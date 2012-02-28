@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Do not add the `language` parameter when forwarding to a page (see #4011).
+
+### Fixed
 The date picker in the back end did not work correctly due to MooTools failing
 to parse dates correctly (see #3954).
 
