@@ -83,7 +83,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$this->import('RequestToken');
 
-			if (!isset($_GET['act']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			if (!$this->RequestToken->validate($this->Input->get('rt')))
 			{
 				$this->log('Invalid or empty request token', 'DC_Table __construct()', TL_ERROR);
 				$this->redirect('contao/main.php?act=error');
