@@ -90,7 +90,15 @@ abstract class Frontend extends \Controller
 			return null;
 		}
 
-		$strRequest = preg_replace(array('/^index.php\/?/', '/\?.*$/'), '', $this->Environment->request);
+		// Get the request string without the index.php fragment
+		if ($this->Environment->request == 'index.php')
+		{
+			$strRequest = '';
+		}
+		else
+		{
+			list($strRequest) = explode('?', str_replace('index.php/', '', $this->Environment->request), 2);
+		}
 
 		// Remove the URL suffix if not just a language root (e.g. en/) is requested
 		if ($strRequest != '' && (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'] || !preg_match('@^[a-z]{2}/$@', $strRequest)))
@@ -187,6 +195,12 @@ abstract class Frontend extends \Controller
 		// Add the fragments to the $_GET array
 		for ($i=1; $i<count($arrFragments); $i+=2)
 		{
+			// Return false the request contains an auto_item keyword (duplicate content) (see #4012)
+			if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($arrFragments[$i], $GLOBALS['TL_AUTO_ITEM']))
+			{
+				return false;
+			}
+
 			$this->Input->setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
