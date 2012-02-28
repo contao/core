@@ -4,6 +4,11 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added an "is mobile" switch to the website root pages which marks mobile
+websites in the site structure and prefers them over regular root pages if the
+visitor uses a mobile device (the iPad is not considered a mobile device).
+
 ### Improved
 Show a confirmation screen if an invalid URL has been detected instead of the
 default error screen, so deep linking in the back end remains possible.

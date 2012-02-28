@@ -37,7 +37,7 @@ $GLOBALS['TL_CONFIG']['os'] = array
 	'Windows CE'    => array('os'=>'win-ce',     'mobile'=>true),
 	'Windows Phone' => array('os'=>'win-ce',     'mobile'=>true),
 	'Windows'       => array('os'=>'win',        'mobile'=>false),
-	'iPad'          => array('os'=>'ios',        'mobile'=>true),
+	'iPad'          => array('os'=>'ios',        'mobile'=>false),
 	'iPhone'        => array('os'=>'ios',        'mobile'=>true),
 	'iPod'          => array('os'=>'ios',        'mobile'=>true),
 	'Android'       => array('os'=>'android',    'mobile'=>true),
