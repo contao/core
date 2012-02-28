@@ -272,7 +272,20 @@ class ModulePersonalData extends Module
 					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
-			
+
+			// Call onsubmit_callback
+			if (is_array($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback']))
+			{
+				foreach ($GLOBALS['TL_DCA']['tl_member']['config']['onsubmit_callback'] as $callback)
+				{
+					if (is_array($callback))
+					{
+						$this->import($callback[0]);
+						$this->$callback[0]->$callback[1]();
+					}
+				}
+			}
+
 			$this->jumpToOrReload($this->jumpTo);
 		}
 
