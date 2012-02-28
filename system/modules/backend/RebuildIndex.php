@@ -82,6 +82,15 @@ class RebuildIndex extends \Backend implements \executable
 		// Rebuild the index
 		if ($this->Input->get('act') == 'index')
 		{
+			$this->import('RequestToken');
+
+			// Check the request token (see #4007)
+			if (!isset($_GET['act']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			{
+				$this->log('Invalid or empty request token', 'DC_Table __construct()', TL_ERROR);
+				$this->redirect('contao/main.php?act=error');
+			}
+
 			$arrPages = $this->findSearchablePages();
 
 			// HOOK: take additional pages

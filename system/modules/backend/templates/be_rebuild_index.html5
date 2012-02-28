@@ -44,6 +44,7 @@ window.addEvent('load', function() {
 <div class="tl_formbody_edit">
 <input type="hidden" name="act" value="index">
 <input type="hidden" name="do" value="maintenance">
+<input type="hidden" name="rt" value="<?php echo REQUEST_TOKEN; ?>">
 <div class="tl_tbox">
   <h3><label for="ctrl_user"><?php echo $this->indexLabel; ?></label></h3>
   <select name="user" id="ctrl_user" class="tl_select">

@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Check the request token in the back end when `$_GET['act']` is set (see #4007).
+
+### New
 The TreeView is now searchable.
 
 ### New

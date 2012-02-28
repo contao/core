@@ -61,6 +61,17 @@ abstract class Backend extends \Controller
 
 
 	/**
+	 * Add the request token to the URL
+	 * @param string
+	 * @return string
+	 */
+	protected function addToUrl($strRequest)
+	{
+		return parent::addToUrl($strRequest . (($strRequest != '') ? '&amp;' : '') . 'rt=' . REQUEST_TOKEN);
+	}
+
+
+	/**
 	 * Handle "runonce" files
 	 * @throws Exception
 	 */

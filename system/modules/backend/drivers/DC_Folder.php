@@ -77,8 +77,20 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	public function __construct($strTable)
 	{
 		parent::__construct();
-		$this->import('String');
 
+		// Check the request token (see #4007)
+		if (isset($_GET['act']))
+		{
+			$this->import('RequestToken');
+
+			if (!isset($_GET['act']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			{
+				$this->log('Invalid or empty request token', 'DC_Table __construct()', TL_ERROR);
+				$this->redirect('contao/main.php?act=error');
+			}
+		}
+
+		$this->import('String');
 		$this->intId = $this->Input->get('id', true);
 
 		// Clear the clipboard

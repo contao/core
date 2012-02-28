@@ -65,7 +65,7 @@ class ModuleFaq extends \Frontend
 		$arrProcessed = array();
 
 		// Get all categories
-		$objFaq = \FaqCategoryModel::findAll();
+		$objFaq = \FaqCategoryCollection::findAll();
 
 		// Walk through each category
 		if ($objFaq !== null)
