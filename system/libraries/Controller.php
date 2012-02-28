@@ -1705,7 +1705,14 @@ abstract class Controller extends System
 
 				// Insert article
 				case 'insert_article':
-					$arrCache[$strTag] = $this->replaceInsertTags(ltrim($this->getArticle($elements[1], false, true)));
+					if (($strOutput = $this->getArticle($elements[1], false, true)) !== false)
+					{
+						$arrCache[$strTag] = $this->replaceInsertTags(ltrim($strOutput));
+					}
+					else
+					{
+						$arrCache[$strTag] = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $elements[1]) . '</p>';
+					}
 					break;
 
 				// Insert content element
