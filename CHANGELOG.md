@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Prevent the auto_item feature from generating duplicate content (see #4012).
+
+### Fixed
 Do not add the `language` parameter when forwarding to a page (see #4011).
 
 ### Fixed

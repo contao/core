@@ -141,6 +141,12 @@ abstract class Frontend extends Controller
 		// Add the fragments to the $_GET array
 		for ($i=1; $i<count($arrFragments); $i+=2)
 		{
+			// Return false the request contains an auto_item keyword (duplicate content) (see #4012)
+			if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($arrFragments[$i], $GLOBALS['TL_AUTO_ITEM']))
+			{
+				return false;
+			}
+
 			$this->Input->setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
