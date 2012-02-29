@@ -99,12 +99,6 @@ class PageModel extends \Model
 
 			$arrOptions['order'] = "$t.dns DESC" . (!empty($varLanguage) ? ", " . $objDatabase->findInSet("$t.language", array_reverse($varLanguage)) . " DESC" : "") . ", $t.sorting";
 
-			// Prefer a mobile website if the visitor uses a mobile device
-			if (Environment::getInstance()->agent->mobile && !$this->Input->cookie('NO_MOBILE_REDIRECT'))
-			{
-				$arrOptions['order'] .= ", $t.mobile DESC";
-			}
-
 			if (!BE_USER_LOGGED_IN)
 			{
 				$time = time();
@@ -118,12 +112,6 @@ class PageModel extends \Model
 			$arrColumns = array("$t.type='root' AND ($t.dns=? OR $t.dns='') AND $t.language=?");
 			$arrValues = array($strHost, $varLanguage);
 			$arrOptions['order'] = "$t.dns DESC, $t.fallback";
-
-			// Prefer a mobile website if the visitor uses a mobile device
-			if (Environment::getInstance()->agent->mobile && !$this->Input->cookie('NO_MOBILE_REDIRECT'))
-			{
-				$arrOptions['order'] .= ", $t.mobile DESC";
-			}
 
 			if (!BE_USER_LOGGED_IN)
 			{
