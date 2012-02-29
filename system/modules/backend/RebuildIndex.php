@@ -88,7 +88,7 @@ class RebuildIndex extends \Backend implements \executable
 			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
-				$this->redirect('contao/main.php?act=confirm');
+				$this->redirect('contao/confirm.php');
 			}
 
 			$arrPages = $this->findSearchablePages();

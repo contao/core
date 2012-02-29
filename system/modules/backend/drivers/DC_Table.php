@@ -140,7 +140,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
 			{
 				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
-				$this->redirect('contao/main.php?act=confirm');
+				$this->redirect('contao/confirm.php');
 			}
 		}
 

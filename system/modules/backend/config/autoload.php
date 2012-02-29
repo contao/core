@@ -83,6 +83,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (
+	'be_confirm'       => 'system/modules/backend/templates',
 	'be_error'         => 'system/modules/backend/templates',
 	'be_files'         => 'system/modules/backend/templates',
 	'be_help'          => 'system/modules/backend/templates',

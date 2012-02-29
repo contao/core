@@ -112,11 +112,6 @@ class Main extends Backend
 		{
 			$this->Template->error = $GLOBALS['TL_LANG']['ERR']['general'];
 		}
-		// Confirm
-		if ($this->Input->get('act') == 'confirm')
-		{
-			$this->confirmInvalidTokenUrl();
-		}
 		// Welcome screen
 		elseif (!$this->Input->get('do') && !$this->Input->get('act'))
 		{
@@ -129,27 +124,6 @@ class Main extends Backend
 		}
 
 		$this->output();
-	}
-
-
-	/**
-	 * Add a screen to confirm invalid token URLs
-	 */
-	protected function confirmInvalidTokenUrl()
-	{
-		if ($this->Input->post('FORM_SUBMIT') == 'invalid_token_url')
-		{
-			$url = $this->Session->get('INVALID_TOKEN_URL');
-			$url = preg_replace('/(\?|&)rt=[^&]*/', '', $url);
-			$this->redirect($url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN);
-		}
-
-		$this->Template->confirm = true;
-		$this->Template->link = specialchars($this->Session->get('INVALID_TOKEN_URL'));
-		$this->Template->h2 = $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'];
-		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
-		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
-		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
 	}
 
 
