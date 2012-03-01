@@ -736,13 +736,12 @@ var Backend =
 
 	/**
 	 * Open an image in a modal window
-	 * @param integer
-	 * @param string
-	 * @param string
+	 * @param object
 	 */
-	openModalImage: function(width, title, url) {
+	openModalImage: function(options) {
+		var opt = options || {};
 		var M = new SimpleModal({
-			'width': width,
+			'width': opt.width,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,
@@ -750,23 +749,21 @@ var Backend =
 			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
 		});
 		M.show({
-			'title': title,
-			'contents': '<img src="' + url + '" alt="">'
+			'title': opt.title,
+			'contents': '<img src="' + opt.url + '" alt="">'
 		});
 	},
 
 	/**
 	 * Open an iframe in a modal window
-	 * @param integer
-	 * @param string
-	 * @param string
-	 * @param integer
+	 * @param object
 	 */
-	openModalIframe: function(width, title, url, height) {
+	openModalIframe: function(options) {
+		var opt = options || {};
 		var max = (window.getSize().y*0.8).toInt();
-		if (!height || height > max) height = max;
+		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
-			'width': width,
+			'width': opt.width,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,
@@ -774,24 +771,21 @@ var Backend =
 			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
 		});
 		M.show({
-			'title': title,
-			'contents': '<iframe src="' + url + '" width="100%" height="' + (height || (window.getSize().y*0.8).toInt()) + '" frameborder="0"></iframe>'
+			'title': opt.title,
+			'contents': '<iframe src="' + opt.url + '" width="100%" height="' + opt.height + '" frameborder="0"></iframe>'
 		});
 	},
 
 	/**
 	 * Open a selector page in a modal window
-	 * @param integer
-	 * @param string
-	 * @param string
-	 * @param string
-	 * @param integer
+	 * @param object
 	 */
-	openModalSelector: function(width, title, url, id, height) {
+	openModalSelector: function(options) {
+		var opt = options || {};
 		var max = (window.getSize().y*0.8).toInt();
-		if (!height || height > max) height = max;
+		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
-			'width': width,
+			'width': opt.width,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,
@@ -803,21 +797,26 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [], tls = [];
-			var inp = window.frames['pages_frame'].document.getElementById(id+'_parent').getElementsByTagName('input');
+			var inp = window.frames['pages_frame'].document.getElementById(opt.id+'_parent').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
 				tls.push(inp[i].getParent('li').getFirst('div').getFirst('label').get('text'));
 				val.push(inp[i].get('value'));
 			}
-			$('ctrl_'+id).value = val.join(',');
-			$('target_'+id).getFirst('p').set('html', tls.join(', '));
-			var lnk = $('target_'+id).getElement('a');
-			lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
+			if (opt.tag) {
+				$(opt.tag).value = '{{link::' + val.join(',') + '}}';
+				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
+			} else {
+				$('ctrl_'+opt.id).value = val.join(',');
+				$('target_'+opt.id).getFirst('p').set('html', tls.join(', '));
+				var lnk = $('target_'+opt.id).getElement('a');
+				lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
+			}
 			this.hide();
 		});
 		M.show({
-			'title': title,
-			'contents': '<iframe src="' + url + '" id="pages_frame" width="100%" height="' + (height || (window.getSize().y*0.8).toInt()) + '" frameborder="0"></iframe>',
+			'title': opt.title,
+			'contents': '<iframe src="' + opt.url + '" id="pages_frame" width="100%" height="' + opt.height + '" frameborder="0"></iframe>',
 			'model': 'modal'
 		});
 	},

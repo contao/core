@@ -106,7 +106,7 @@ class PageTree extends \Widget
 		return '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
   <div class="selector_container" id="target_'.$this->strId.'">
     <p>' . implode(', ', $arrValues) . '</p>
-    <p><a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector(765,\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',this.href,\''.$this->strId.'\');return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
+    <p><a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
   </div>';
 	}
 }
