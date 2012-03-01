@@ -239,8 +239,7 @@ class Ajax extends \Backend
 				$arrData['id'] = strlen($this->strAjaxName) ? $this->strAjaxName : $dc->id;
 				$arrData['name'] = $this->Input->post('name');
 
-				$objWidget = new $GLOBALS['BE_FFL']['pageTree']($arrData, $dc);
-
+				$objWidget = new $GLOBALS['BE_FFL']['pageSelector']($arrData, $dc);
 				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;
 

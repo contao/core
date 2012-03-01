@@ -57,7 +57,7 @@ class PageCollection extends \Model_Collection
 	 * @param mixed
 	 * @return Model
 	 */
-	public static function findPublishedByIdOrAliases($varId)
+	public static function findPublishedByIdOrAlias($varId)
 	{
 		$t = static::$strTable;
 		$arrColumns = array("($t.id=? OR $t.alias=?)");

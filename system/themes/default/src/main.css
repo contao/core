@@ -263,6 +263,12 @@ h2.sub_headline_index {
 #lu_message .tl_confirm,#lu_message .tl_info {
 	background-color:transparent;
 }
+.selector_container {
+	margin:9px 0;
+}
+.selector_container a {
+	margin-right:6px;
+}
 
 /* Filter */
 .tl_panel,.tl_version_panel {

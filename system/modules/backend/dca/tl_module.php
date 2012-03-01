@@ -619,101 +619,101 @@ $GLOBALS['TL_DCA']['tl_module'] = array
 		),
 		'disableCaptcha' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'sql'           => "char(1) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'reg_groups' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_groups'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'foreignKey'    => 'tl_member_group.name',
-			'eval'          => array('multiple'=>true),
-			'sql'           => "blob NULL",
-			'relation'      => array('type'=>'hasMany', 'load'=>'lazy')
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_groups'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'foreignKey'              => 'tl_member_group.name',
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'reg_allowLogin' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'sql'           => "char(1) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'reg_skipName' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_skipName'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'sql'           => "char(1) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_skipName'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'reg_close' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_close'],
-			'exclude'       => true,
-			'inputType'     => 'select',
-			'options'       => array('close_deactivate', 'close_delete'),
-			'reference'     => &$GLOBALS['TL_LANG']['tl_module'],
-			'sql'           => "varchar(32) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_close'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('close_deactivate', 'close_delete'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'reg_assignDir' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_assignDir'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'eval'          => array('submitOnChange'=>true),
-			'sql'           => "char(1) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_assignDir'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'reg_homeDir' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_homeDir'],
-			'exclude'       => true,
-			'inputType'     => 'fileTree',
-			'eval'          => array('fieldType'=>'radio', 'tl_class'=>'clr'),
-			'sql'           => "varchar(255) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_homeDir'],
+			'exclude'                 => true,
+			'inputType'               => 'fileTree',
+			'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'reg_activate' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
-			'exclude'       => true,
-			'inputType'     => 'checkbox',
-			'eval'          => array('submitOnChange'=>true),
-			'sql'           => "char(1) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_activate'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'reg_jumpTo' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo'],
-			'exclude'       => true,
-			'inputType'     => 'pageTree',
-			'foreignKey'    => 'tl_page.title',
-			'eval'          => array('fieldType'=>'radio'),
-			'sql'           => "int(10) unsigned NOT NULL default '0'",
-			'relation'      => array('type'=>'hasOne', 'load'=>'lazy')
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo'],
+			'exclude'                 => true,
+			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
+			'eval'                    => array('fieldType'=>'radio'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'reg_text' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_text'],
-			'exclude'       => true,
-			'inputType'     => 'textarea',
-			'eval'          => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_text'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
 			'load_callback' => array
 			(
 				array('tl_module', 'getActivationDefault')
 			),
-			'sql'           => "text NULL"
+			'sql'                     => "text NULL"
 		),
 		'reg_password' => array
 		(
-			'label'         => &$GLOBALS['TL_LANG']['tl_module']['reg_password'],
-			'exclude'       => true,
-			'inputType'     => 'textarea',
-			'eval'          => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
-			'load_callback' => array
+			'label'                   => &$GLOBALS['TL_LANG']['tl_module']['reg_password'],
+			'exclude'                 => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('style'=>'height:120px;', 'decodeEntities'=>true, 'alwaysSave'=>true),
+			'load_callback'           => array
 			(
 				array('tl_module', 'getPasswordDefault')
 			),
-			'sql'           => "text NULL"
+			'sql'                     => "text NULL"
 		),
 		'protected' => array
 		(

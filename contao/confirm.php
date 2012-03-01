@@ -82,10 +82,8 @@ class Confirm extends Backend
 		$this->Template = new BackendTemplate('be_confirm');
 
 		// Prepare the URL
-		$url = $this->Session->get('INVALID_TOKEN_URL');
-		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $url);
-		$url .= ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN;
-		$this->Template->href = $url;
+		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));
+		$this->Template->href = $url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN;
 
 		// Tempalte variables
 		$this->Template->confirm = true;

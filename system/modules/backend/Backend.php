@@ -240,14 +240,12 @@ abstract class Backend extends \Controller
 		{
 			$this->objAjax->executePostActions($dc);
 		}
-
-		// Call module callback
+		// Trigger the module callback
 		elseif ($this->classFileExists($arrModule['callback']))
 		{
 			$objCallback = new $arrModule['callback']($dc);
 			$this->Template->main .= $objCallback->generate();
 		}
-
 		// Custom action (if key is not defined in config.php the default action will be called)
 		elseif ($this->Input->get('key') && isset($arrModule[$this->Input->get('key')]))
 		{

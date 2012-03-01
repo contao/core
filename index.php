@@ -103,7 +103,7 @@ class Index extends Frontend
 		$time = time();
 
 		// Get the current page object(s)
-		$objPage = \PageCollection::findPublishedByIdOrAliases($pageId);
+		$objPage = \PageCollection::findPublishedByIdOrAlias($pageId);
 
 		// Check the URL and language of each page if there are multiple results
 		if ($objPage !== null && $objPage->count() > 1)

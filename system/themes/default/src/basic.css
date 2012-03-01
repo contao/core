@@ -250,6 +250,9 @@ pre,.tl_textarea.monospace {
 .tl_tree_checkbox {
 	margin:0 3px 0 0;
 }
+.mac .tl_tree_checkbox {
+	margin:2px 3px 0 0;
+}
 .tl_checkbox_single_container {
 	margin:16px 0 1px;
 }
@@ -329,6 +332,13 @@ pre,.tl_textarea.monospace {
 	background-image:-o-linear-gradient(bottom, #ccc 0%, #eee 60%);
 	background-image:-ms-linear-gradient(top, #ccc 0%, #eee 60%);
 	background-image:linear-gradient(top, #ccc 0%, #eee 60%);
+}
+a.tl_submit {
+	font-family:"Trebuchet MS",Verdana,sans-serif;
+	font-size:12px;
+}
+a.tl_submit:hover {
+	color:#666966;
 }
 .firefox .tl_submit {
 	padding:2px 12px 2px 13px;

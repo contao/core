@@ -741,14 +741,15 @@ var Backend =
 	 * @param string
 	 */
 	openModalImage: function(width, title, url) {
-		new SimpleModal({
+		var M = new SimpleModal({
 			'width': width,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
 			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
-		}).show({
+		});
+		M.show({
 			'title': title,
 			'contents': '<img src="' + url + '" alt="">'
 		});
@@ -764,16 +765,58 @@ var Backend =
 	openModalIframe: function(width, title, url, height) {
 		var max = (window.getSize().y*0.8).toInt();
 		if (!height || height > max) height = max;
-		new SimpleModal({
+		var M = new SimpleModal({
 			'width': width,
 			'btn_ok': Contao.lang.close,
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
 			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
-		}).show({
+		});
+		M.show({
 			'title': title,
 			'contents': '<iframe src="' + url + '" width="100%" height="' + (height || (window.getSize().y*0.8).toInt()) + '" frameborder="0"></iframe>'
+		});
+	},
+
+	/**
+	 * Open a selector page in a modal window
+	 * @param integer
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param integer
+	 */
+	openModalSelector: function(width, title, url, id, height) {
+		var max = (window.getSize().y*0.8).toInt();
+		if (!height || height > max) height = max;
+		var M = new SimpleModal({
+			'width': width,
+			'btn_ok': Contao.lang.close,
+			'draggable': false,
+			'overlayOpacity': .5,
+			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
+		});
+		M.addButton(Contao.lang.close, 'btn', function() {
+			this.hide();
+		});
+		M.addButton(Contao.lang.apply, 'btn primary', function() {
+			var val = [], tls = [];
+			var inp = window.frames['pages_frame'].document.getElementById(id+'_parent').getElementsByTagName('input');
+			for (var i=0; i<inp.length; i++) {
+				if (!inp[i].checked || inp[i].id.match(/^reset_/)) continue;
+				tls.push(inp[i].getParent('li').getFirst('div').getFirst('label').get('html'));
+				val.push(inp[i].get('value'));
+			}
+			$('ctrl_'+id).value = val.join(',');
+			$('target_'+id).set('html', tls.join(', '));
+			this.hide();
+		});
+		M.show({
+			'title': title,
+			'contents': '<iframe src="' + url + '" id="pages_frame" width="100%" height="' + (height || (window.getSize().y*0.8).toInt()) + '" frameborder="0"></iframe>',
+			'model': 'modal'
 		});
 	},
 
@@ -1559,7 +1602,7 @@ window.addEvent('domready', function() {
 		$$('select.tl_chosen').chosen();
 	}
 
-	Backend.hideTreeBody();
+	//Backend.hideTreeBody();
 	Backend.blink.periodical(600);
 
 	// Remove line wraps from textareas

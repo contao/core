@@ -55,6 +55,7 @@ ClassLoader::addClasses(array
 	'Contao\\ModuleUser'        => 'system/modules/backend/ModuleUser.php',
 	'Contao\\ModuleWizard'      => 'system/modules/backend/ModuleWizard.php',
 	'Contao\\OptionWizard'      => 'system/modules/backend/OptionWizard.php',
+	'Contao\\PageSelector'      => 'system/modules/backend/PageSelector.php',
 	'Contao\\PageTree'          => 'system/modules/backend/PageTree.php',
 	'Contao\\Password'          => 'system/modules/backend/Password.php',
 	'Contao\\PurgeData'         => 'system/modules/backend/PurgeData.php',

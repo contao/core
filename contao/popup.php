@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
 /**
  * Class Popup
  *
- * Preview images in a back end pop up window.
+ * Pop-up file preview (file manager).
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller

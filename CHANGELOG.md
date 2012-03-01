@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Added a much better page picker which opens in a modal window and shows the site
+structure instead of just a drop-down menu.
+
 ### New
 Added a "redirect if mobile device" setting to website root pages to forward
 visitors using a mobile device to another website root page. We recommend to

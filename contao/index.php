@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
 /**
  * Class Index
  *
- * Back end login controller.
+ * Handle back end logins and logouts.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller

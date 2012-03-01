@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
-  $objCombiner->add('system/themes/'. $this->theme .'/page.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/main.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
@@ -21,13 +21,6 @@
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
-<script>
-function setPage(p) {
-  self.opener.$(self.opener.Backend.currentId).value = p;
-  self.close();
-}
-document.onLoad = self.focus();
-</script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
 <body class="__ua__ popup">
@@ -35,8 +28,9 @@ document.onLoad = self.focus();
 <div id="container">
 <div id="main">
 
-<h1><?php echo $this->headline; ?></h1>
-<select onchange="setPage(this.value)"><option value="">-</option><?php echo $this->options; ?></select>
+<div class="tl_listing_container tree_view" id="tl_listing">
+<?php echo $this->main; ?>
+</div>
 
 </div>
 </div>

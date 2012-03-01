@@ -47,6 +47,13 @@ class PagePicker extends Backend
 {
 
 	/**
+	 * Current Ajax object
+	 * @var object
+	 */
+	protected $objAjax;
+
+
+	/**
 	 * Initialize the controller
 	 * 
 	 * 1. Import the user
@@ -71,7 +78,36 @@ class PagePicker extends Backend
 	public function run()
 	{
 		$this->Template = new BackendTemplate('be_pagepicker');
+		$this->Template->main = '';
 
+		// Ajax request
+		if ($_POST && $this->Environment->isAjaxRequest)
+		{
+			$this->objAjax = new Ajax($this->Input->post('action'));
+			$this->objAjax->executePreActions();
+		}
+
+		$strTable = $this->Input->get('table');
+		$strField = $this->Input->get('field');
+
+		$this->loadDataContainer($strTable);
+		$objDca = new DC_Table($strTable);
+
+		// AJAX request
+		if ($_POST && $this->Environment->isAjaxRequest)
+		{
+			$this->objAjax->executePostActions($objDca);
+		}
+
+		$objPageTree = new $GLOBALS['BE_FFL']['pageSelector'](array(
+			'strId'    => $strField,
+			'strTable' => $strTable,
+			'strField' => $strField,
+			'strName'  => $strField,
+			'varValue' => explode(',', $this->Input->get('value'))
+		), $objDca);
+
+		$this->Template->main = $objPageTree->generate();
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];

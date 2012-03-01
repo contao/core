@@ -36,14 +36,14 @@ require_once('../system/initialize.php');
 
 
 /**
- * Class PagePicker
+ * Class FilePicker
  *
- * Back end page picker.
+ * Back end file picker.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PagePicker extends Backend
+class FilePicker extends Backend
 {
 
 	/**
@@ -91,7 +91,7 @@ class PagePicker extends Backend
 /**
  * Instantiate the controller
  */
-$objPagePicker = new PagePicker();
-$objPagePicker->run();
+$objFilePicker = new FilePicker();
+$objFilePicker->run();
 
 ?>

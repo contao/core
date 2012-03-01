@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
 /**
  * Class Preview
  *
- * Front end preview.
+ * Set up the front end preview frames.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller

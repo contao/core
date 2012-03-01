@@ -38,7 +38,7 @@ require_once('../system/initialize.php');
 /**
  * Class FileManager
  *
- * Popup file manager controller.
+ * Pop-up file manager (renders only the files module).
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
