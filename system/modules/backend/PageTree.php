@@ -104,8 +104,9 @@ class PageTree extends \Widget
 		}
 
 		return '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
-  <div class="selector_container">
-    <a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector(765,\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',this.href,\''.$this->strId.'\');return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a> <strong>'.$GLOBALS['TL_LANG']['MSC']['currentlySelected'].':</strong> <span id="target_'.$this->strId.'">' . implode(', ', $arrValues) . '</span>
+  <div class="selector_container" id="target_'.$this->strId.'">
+    <p>' . implode(', ', $arrValues) . '</p>
+    <p><a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector(765,\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',this.href,\''.$this->strId.'\');return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
   </div>';
 	}
 }

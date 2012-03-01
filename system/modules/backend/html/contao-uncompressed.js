@@ -805,12 +805,14 @@ var Backend =
 			var val = [], tls = [];
 			var inp = window.frames['pages_frame'].document.getElementById(id+'_parent').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
-				if (!inp[i].checked || inp[i].id.match(/^reset_/)) continue;
-				tls.push(inp[i].getParent('li').getFirst('div').getFirst('label').get('html'));
+				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
+				tls.push(inp[i].getParent('li').getFirst('div').getFirst('label').get('text'));
 				val.push(inp[i].get('value'));
 			}
 			$('ctrl_'+id).value = val.join(',');
-			$('target_'+id).set('html', tls.join(', '));
+			$('target_'+id).getFirst('p').set('html', tls.join(', '));
+			var lnk = $('target_'+id).getElement('a');
+			lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			this.hide();
 		});
 		M.show({
