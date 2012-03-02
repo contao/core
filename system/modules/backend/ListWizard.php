@@ -202,11 +202,11 @@ class ListWizard extends Widget
 						break;
 
 					case 'tabulator':
-						$strSeparator = '\t';
+						$strSeparator = "\t";
 						break;
 
 					case 'linebreak':
-						$strSeparator = '\n';
+						$strSeparator = "\n";
 						break;
 
 					default:

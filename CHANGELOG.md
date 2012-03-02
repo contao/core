@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Correctly handle tabs and line breaks when importing CSV data (see #4025).
+
+### Fixed
 Event feeds did not show the date anymore (see #4026).
 
 ### Fixed
