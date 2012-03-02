@@ -158,8 +158,14 @@ FileETag None
   # sure to change it here accordingly!
   #
   #   RewriteRule .*\.html$ index.php [L]   # URL suffix .html
-  #   RewriteRule .* index.php [L]          # No URL suffix
   #   RewriteRule .*\.txt$ index.php [L]    # URL suffix .txt
+  #   RewriteRule .*\.json$ index.php [L]   # URL suffix .json
+  #
+  # If you do not want to use an URL suffix at all, you have to add a second
+  # line to prevent URLs that point to folders from being rewritten (see #4031).
+  #
+  #   RewriteCond %{REQUEST_FILENAME} !-d
+  #   RewriteRule .* index.php [L]
   #
   # If you are using mod_cache, it is recommended to use the RewriteRule below,
   # which adds the query string to the internal URL:
