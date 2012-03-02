@@ -54,8 +54,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion']   = 'You cannot update beta
 $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId']     = 'Please enter your live update ID';
 $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable']  = 'The temporary folder (system/tmp) is not writeable';
 $GLOBALS['TL_LANG']['tl_maintenance']['changelog']     = 'View the change log';
-$GLOBALS['TL_LANG']['tl_maintenance']['backupFiles']   = 'Backup the files that will be updated';
-$GLOBALS['TL_LANG']['tl_maintenance']['showToc']       = 'List the files in the update archive';
 $GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate'] = 'Run the update';
 $GLOBALS['TL_LANG']['tl_maintenance']['toc']           = 'Content of the update archive';
 $GLOBALS['TL_LANG']['tl_maintenance']['backup']        = 'Backuped files';
@@ -66,5 +64,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable']  = 'No searchable pages fo
 $GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Please wait for the page to load completely before you proceed!';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Please wait while the search index is being rebuilt.';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'The search index has been rebuilt. You can now proceed.';
+$GLOBALS['TL_LANG']['tl_maintenance']['updateHelp']    = 'Please enter your %s here.';
 
 ?>

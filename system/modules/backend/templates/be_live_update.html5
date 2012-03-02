@@ -14,10 +14,9 @@
 <div class="tl_tbox">
   <h3 style="padding-top:9px"><label for="ctrl_liveUpdate"><?php echo $this->liveUpdateId; ?></label></h3>
   <input type="text" name="uid" id="ctrl_liveUpdate" value="<?php echo $this->uid; ?>" class="tl_text" onfocus="Backend.getScrollOffset()">
-  <div class="tl_checkbox_container" style="margin-top:0">
-    <input type="checkbox" name="bup" id="ctrl_bup" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()" checked="checked"> <label for="ctrl_bup"><?php echo $this->backupFiles; ?></label><br>
-    <input type="checkbox" name="toc" id="ctrl_toc" value="1" class="tl_checkbox" onfocus="Backend.getScrollOffset()"> <label for="ctrl_toc"><?php echo $this->showToc; ?></label>
-  </div>
+<?php if ($GLOBALS['TL_CONFIG']['showHelp']): ?>
+  <p class="tl_help tl_tip"><?php echo $this->updateHelp; ?></p>
+<?php endif; ?>
 </div>
 </div>
 <div class="tl_submit_container">

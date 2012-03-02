@@ -53,8 +53,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion']   = 'Beta-Versionen können
 $GLOBALS['TL_LANG']['tl_maintenance']['emptyLuId']     = 'Bitte geben Sie Ihre Live Update ID ein';
 $GLOBALS['TL_LANG']['tl_maintenance']['notWriteable']  = 'Das temporäre Verzeichnis (system/tmp) ist nicht beschreibbar';
 $GLOBALS['TL_LANG']['tl_maintenance']['changelog']     = 'Changelog aufrufen';
-$GLOBALS['TL_LANG']['tl_maintenance']['backupFiles']   = 'Backup der zu aktualisierenden Dateien erstellen';
-$GLOBALS['TL_LANG']['tl_maintenance']['showToc']       = 'Die Dateien des Update-Archivs anzeigen';
 $GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate'] = 'Aktualisierung starten';
 $GLOBALS['TL_LANG']['tl_maintenance']['toc']           = 'Inhalt des Update-Archivs';
 $GLOBALS['TL_LANG']['tl_maintenance']['backup']        = 'Gesicherte Dateien';
@@ -65,5 +63,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable']  = 'Keine durchsuchbaren S
 $GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Bitte warten Sie, bis die Seite vollständig geladen ist, bevor Sie Ihre Arbeit fortsetzen!';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Bitte warten Sie, während der Suchindex neu aufgebaut wird.';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'Der Suchindex wurde neu aufgebaut. Sie können nun fortfahren.';
+$GLOBALS['TL_LANG']['tl_maintenance']['updateHelp']    = 'Bitte geben Sie Ihre %s ein.';
 
 ?>
