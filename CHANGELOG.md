@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Event feeds did not show the date anymore (see #4026).
+
+### Fixed
 Preserve absolute URLs in style sheets in the Combiner (see #4002).
 
 ### Fixed

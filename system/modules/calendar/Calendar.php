@@ -322,6 +322,15 @@ class Calendar extends Frontend
 		global $objPage;
 		$this->import('String');
 
+		// Called in the back end (see #4026)
+		if ($objPage === null)
+		{
+			$objPage = new stdClass();
+			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+		}
+
 		$intKey = date('Ymd', $intStart);
 		$span = self::calculateSpan($intStart, $intEnd);
 		$format = $objArticle->addTime ? 'datimFormat' : 'dateFormat';
@@ -347,24 +356,24 @@ class Calendar extends Frontend
 				break;
 
 			case 'internal':
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objArticle->jumpTo);
+				$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
+									 		->limit(1)
+											->execute($objArticle->jumpTo);
 
-				if ($objPage->numRows)
+				if ($objTarget->numRows)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objPage->row());
+					$link = $strLink . $this->generateFrontendUrl($objTarget->row());
 				}
 				break;
 
 			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objArticle->articleId);
+				$objTarget = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
+											->limit(1)
+											->execute($objArticle->articleId);
 
-				if ($objPage->numRows)
+				if ($objTarget->numRows)
 				{
-					$link = $strLink . $this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId));
+					$link = $strLink . $this->generateFrontendUrl($objTarget->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objTarget->aAlias != '') ? $objTarget->aAlias : $objTarget->aId));
 				}
 				break;
 		}
