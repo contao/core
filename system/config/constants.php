@@ -36,6 +36,7 @@
  */
 define('VERSION', '3.0');
 define('BUILD', 'beta1');
+define('LONG_TERM_SUPPORT', false);
 define('CODEMIRROR', '2.2');
 define('DATEPICKER', '2.1.1');
 define('HIGHLIGHTER', '3.0.83');
