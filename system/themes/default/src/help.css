@@ -57,10 +57,10 @@ h2 {
 	width:200px;
 	font-weight:bold;
 }
-td[colspan="2"] {
+td.headline {
 	font-size:16px;
 	padding-top:36px;
 }
-tr:first-child td[colspan="2"] {
+tr:first-child td.headline {
 	padding-top:12px;
 }

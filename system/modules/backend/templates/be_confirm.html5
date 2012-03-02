@@ -10,7 +10,7 @@
   $objCombiner->add('system/themes/'. $this->theme .'/login.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<style>#container{width:640px}#header{width:636px}#main{width:602px;padding:24px 18px 6px}p{line-height:1.5;margin-bottom:1.5em}#link{font-size:13px}.tl_submit{margin-right:6px}</style>
+<style>#container{width:640px}#header{width:636px}#main{width:602px;padding:24px 18px 6px}p{line-height:1.5;margin-bottom:1.5em}#link{font-size:13px;word-wrap:break-word}.tl_submit{margin-right:6px}</style>
 <!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
 <script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php

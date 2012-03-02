@@ -28,6 +28,8 @@
   <tr>
 <?php if ($row[0] == 'colspan'): ?>
     <td colspan="2"><?php echo $row[1]; ?></td>
+<?php elseif ($row[0] == 'headspan'): ?>
+    <td colspan="2" class="headline"><?php echo $row[1]; ?></td>
 <?php else: ?>
     <td class="tl_label"><?php echo $row[0]; ?></td>
     <td><?php echo $row[1]; ?></td>

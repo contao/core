@@ -91,7 +91,7 @@ class Help extends Backend
 			{
 				if (is_array($option))
 				{
-					$rows[] = array('colspan', $arrData['reference'][$key]);
+					$rows[] = array('headspan', $arrData['reference'][$key]);
 
 					foreach ($option as $opt)
 					{
@@ -102,7 +102,7 @@ class Help extends Backend
 				{
 					if (!is_array($arrData['reference'][$option]))
 					{
-						$rows[] = array('colspan', $arrData['reference'][$option]);
+						$rows[] = array('headspan', $arrData['reference'][$option]);
 					}
 					else
 					{
