@@ -58,6 +58,7 @@ define('SWITCH_ORDER', true);
  */
 define('VERSION', '2.11');
 define('BUILD', '1');
+define('LONG_TERM_SUPPORT', true);
 define('CODEMIRROR', '2.2');
 define('DATEPICKER', '2.1.1');
 define('HIGHLIGHTER', '3.0.83');

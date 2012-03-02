@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### Added
+Added a separate version check for LTS releases.
+
 ### Fixed
 Prevent the auto_item feature from generating duplicate content (see #4012).
 

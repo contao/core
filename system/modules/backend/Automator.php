@@ -239,7 +239,7 @@ class Automator extends Backend
 		}
 
 		$objRequest = new Request();
-		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'version.txt');
+		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())
 		{
