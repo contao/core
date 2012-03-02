@@ -1011,7 +1011,7 @@ class StyleSheets extends \Backend
 		if ($row['own'] != '')
 		{
 			$own = trim($this->String->decodeEntities($row['own']));
-			$own = preg_replace('/url\("(?!data:)([^\/])/', 'url("' . $strGlue . "$1", $own);
+			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
