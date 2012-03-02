@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Preserve absolute URLs in style sheets in the Combiner (see #4002).
+
+### Fixed
 Support all kinds of keydown events in the stylect plugin, so options can be
 selected by pressing the first key of their label (see #3812).
 
