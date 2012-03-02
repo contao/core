@@ -322,6 +322,15 @@ class Calendar extends \Frontend
 		global $objPage;
 		$this->import('String');
 
+		// Called in the back end (see #4026)
+		if ($objPage === null)
+		{
+			$objPage = new stdClass();
+			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+		}
+
 		$intKey = date('Ymd', $intStart);
 		$span = self::calculateSpan($intStart, $intEnd);
 		$format = $objEvent->addTime ? 'datimFormat' : 'dateFormat';
