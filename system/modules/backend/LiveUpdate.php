@@ -66,26 +66,25 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 		$objTemplate->isActive = $this->isActive();
-
-		// Current version up to date
-		$objTemplate->updateMessage = sprintf('%s <a href="%sCHANGELOG.md" onclick="Backend.openModalIframe({\'width\':680,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom;padding-left:3px"></a>',
-												 (!is_numeric(BUILD) ? $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion'] : sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD)),
-												 $this->Environment->base,
-												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
-												 TL_FILES_URL . 'system/themes/'.$this->getTheme().'/images/changelog.gif',
-												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
+		$strMessage = ' <a href="' . $this->Environment->base . 'CHANGELOG.md" onclick="Backend.openModalIframe({\'width\':680,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="' . specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']) . '"><img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/changelog.gif" width="14" height="14" alt="" style="vertical-align:text-bottom;padding-left:3px"></a>';
 
 		// No live update for beta versions
 		if (!is_numeric(BUILD))
 		{
 			$objTemplate->updateClass = 'tl_info';
+			$objTemplate->updateMessage = $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion'] . $strMessage;
 		}
-
 		// Newer version available
 		elseif (isset($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->updateClass = 'tl_info';
-			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
+			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']) . $strMessage;
+		}
+		// Current version up to date
+		else
+		{
+			$objTemplate->updateClass = 'tl_confirm';
+			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD) . $strMessage;
 		}
 
 		// Live update error
@@ -133,8 +132,6 @@ class LiveUpdate extends \Backend implements \executable
 		$objTemplate->liveUpdateId = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'];
 		$objTemplate->runLiveUpdate = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate']);
 		$objTemplate->referer = base64_encode($this->Environment->base . $this->Environment->request . '|' . $this->Environment->server);
-		$objTemplate->backupFiles = $GLOBALS['TL_LANG']['tl_maintenance']['backupFiles'];
-		$objTemplate->showToc = $GLOBALS['TL_LANG']['tl_maintenance']['showToc'];
 		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
 
 		return $objTemplate->parse();
