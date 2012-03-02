@@ -78,9 +78,7 @@ var Stylect =
 				var option = el.getElement('option[value="' + el.value + '"]');
 				div.getElement('span').set('html', option.get('html'));
 			}).addEvent('keydown', function(event) {
-				if (event.key == 'up' || event.key == 'down') {
-					setTimeout(function() {	el.fireEvent('change'); }, 100);
-				}
+				setTimeout(function() {	el.fireEvent('change'); }, 100);
 			}).addEvent('focus', function() {
 				div.addClass('focused');
 			}).addEvent('blur', function() {

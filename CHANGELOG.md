@@ -4,6 +4,10 @@ Contao Open Source CMS Changelog
 Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
+### Fixed
+Support all kinds of keydown events in the stylect plugin, so options can be
+selected by pressing the first key of their label (see #3812).
+
 ### Added
 Added a separate version check for LTS releases.
 
