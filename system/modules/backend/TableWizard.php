@@ -276,7 +276,7 @@ class TableWizard extends \Widget
 						break;
 
 					case 'tabulator':
-						$strSeparator = '\t';
+						$strSeparator = "\t";
 						break;
 
 					default:
