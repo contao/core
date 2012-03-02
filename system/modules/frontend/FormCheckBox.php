@@ -53,6 +53,12 @@ class FormCheckBox extends Widget
 	protected $strTemplate = 'form_checkbox';
 
 	/**
+	 * Error message
+	 * @var string
+	 */
+	protected $strError = '';
+
+	/**
 	 * Options
 	 * @var array
 	 */
@@ -151,6 +157,18 @@ class FormCheckBox extends Widget
 
 
 	/**
+	 * Override the parent method and inject the error message inside the fieldset (see #3392)
+	 * @param boolean
+	 * @return string
+	 */
+	public function generateWithError($blnSwitchOrder=false)
+	{
+		$this->strError = $this->getErrorAsHTML();
+		return $this->generate();
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
@@ -180,21 +198,23 @@ class FormCheckBox extends Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend><input type="hidden" name="%s" value=""%s%s</fieldset>',
+        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
 	        				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
 							($this->required ? '<span class="mandatory">*</span>' : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();
 		}
 		else
 		{
-	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><input type="hidden" name="%s" value=""%s%s</fieldset>',
+	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
     	    				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();

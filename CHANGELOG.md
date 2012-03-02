@@ -5,6 +5,11 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Inject error messages of checkbox and radio groups inside the fieldset, so they
+can be associated with it (accessibility) and do not break the CSS formatting.
+This change does not require any template adjustments (see #3392).
+
+### Fixed
 Correctly handle tabs and line breaks when importing CSV data (see #4025).
 
 ### Fixed
