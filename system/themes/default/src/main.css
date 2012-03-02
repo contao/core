@@ -261,6 +261,8 @@ h2.sub_headline_index {
 	margin-top:0;
 }
 #lu_message .tl_confirm,#lu_message .tl_info {
+	padding-left:18px;
+	background-position:left center;
 	background-color:transparent;
 }
 
