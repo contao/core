@@ -127,7 +127,7 @@ class PageSelector extends \Widget
 			// Build the tree
 			foreach ($arrIds as $id)
 			{
-				$tree .= $this->renderPagetree($id, -20);
+				$tree .= $this->renderPagetree($id, -20, false, true);
 			}
 		}
 		else
@@ -241,9 +241,10 @@ class PageSelector extends \Widget
 	 * @param int
 	 * @param integer
 	 * @param boolean
+	 * @param boolean
 	 * @return string
 	 */
-	protected function renderPagetree($id, $intMargin, $protectedPage=false)
+	protected function renderPagetree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)
 	{
 		static $session;
 		$session = $this->Session->getData();
@@ -276,12 +277,15 @@ class PageSelector extends \Widget
 		$childs = array();
 
 		// Check whether there are child records
-		$objNodes = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
-								   ->execute($id);
-
-		if ($objNodes->numRows)
+		if (!$blnNoRecursion)
 		{
-			$childs = $objNodes->fetchEach('id');
+			$objNodes = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
+									   ->execute($id);
+
+			if ($objNodes->numRows)
+			{
+				$childs = $objNodes->fetchEach('id');
+			}
 		}
 
 		$return .= "\n    " . '<li class="'.(($objPage->type == 'root') ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
