@@ -378,8 +378,12 @@ h2.sub_headline_index {
 	margin:9px 18px -9px;
 	text-align:right;
 }
-#search input {
-	width:240px;
+#search .tl_text {
+	width:160px;
+	padding:3px 2px;
+}
+.mac #search .tl_text {
+	padding:4px 2px;
 }
 
 /* Rebuild the search index */

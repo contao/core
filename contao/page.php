@@ -119,6 +119,8 @@ class PagePicker extends Backend
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
 		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
+		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->value = $this->Session->get('page_selector_search');
 
 		$this->Template->output();
 	}

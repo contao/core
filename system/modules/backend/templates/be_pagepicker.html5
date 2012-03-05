@@ -28,9 +28,14 @@
 <div id="container">
 <div id="main">
 
+<form action="<?php echo $this->action; ?>" method="post">
 <div id="search">
-  <strong><?php echo $this->search; ?>:</strong> <input type="text" name="search" value="" class="tl_text">
+  <input type="hidden" name="FORM_SUBMIT" value="page_selector">
+  <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+  <input type="text" name="keyword" id="keyword" value="<?php echo $this->value; ?>" class="tl_text">
+  <input type="submit" name="search" value="<?php echo $this->search; ?>" class="tl_submit">
 </div>
+</form>
 
 <div class="tl_listing_container tree_view" id="tl_listing">
 <?php echo $this->main; ?>
@@ -38,18 +43,6 @@
 
 </div>
 </div>
-
-<script>
-window.addEvent('domready', function() {
-  $('search').addEvent('keyup', function() {
-    var key = $('search').getElement('input').value.toLowerCase();
-    $('tl_listing').getElements('li').each(function(el) {
-      if (!el.hasClass('tl_file')) return;
-      el.setStyle('display', (el.getElement('div.tl_left').get('text').toLowerCase().match(key) ? 'block' : 'none'));
-    });
-  });
-});
-</script>
 
 </body>
 </html>

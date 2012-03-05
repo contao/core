@@ -83,27 +83,74 @@ class PageSelector extends \Widget
 	{
 		$this->import('BackendUser', 'User');
 
-		$tree = '';
-		$this->getPathNodes();
-
-		// Show all pages to admins
-		if ($this->User->isAdmin)
+		// Store the keyword
+		if ($this->Input->post('FORM_SUBMIT') == 'page_selector')
 		{
-			$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
-									  ->execute(0);
-
-			while ($objPage->next())
-			{
-				$tree .= $this->renderPagetree($objPage->id, -20);
-			}
+			$this->Session->set('page_selector_search', $this->Input->post('keyword'));
+			$this->reload();
 		}
 
-		// Show mounted pages to users
-		else
+		$tree = '';
+		$this->getPathNodes();
+		$for = $this->Session->get('page_selector_search');
+		$arrIds = array();
+
+		// Search for a specific page
+		if ($for != '')
 		{
-			foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
+			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
+									  ->execute($for);
+
+			if ($objRoot->numRows > 0)
 			{
-				$tree .= $this->renderPagetree($node, -20);
+				// Respect existing limitations (path nodes)
+				if (is_array($this->arrNodes))
+				{
+					$arrRoot = array();
+
+					while ($objRoot->next())
+					{
+						if (count(array_intersect($this->arrNodes, $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						{
+							$arrRoot[] = $objRoot->id;
+						}
+					}
+
+					$arrIds = $arrRoot;
+				}
+				else
+				{
+					$arrIds = $objRoot->fetchEach('id');
+				}
+			}
+
+			// Build the tree
+			foreach ($arrIds as $id)
+			{
+				$tree .= $this->renderPagetree($id, -20);
+			}
+		}
+		else
+		{		
+			// Show all pages to admins
+			if ($this->User->isAdmin)
+			{
+				$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
+										  ->execute(0);
+
+				while ($objPage->next())
+				{
+					$tree .= $this->renderPagetree($objPage->id, -20);
+				}
+			}
+
+			// Show mounted pages to users
+			else
+			{
+				foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
+				{
+					$tree .= $this->renderPagetree($node, -20);
+				}
 			}
 		}
 
@@ -299,7 +346,7 @@ class PageSelector extends \Widget
 		$return .= '</div><div style="clear:both"></div></li>';
 
 		// Begin new submenu
-		if (!empty($childs) && $blnIsOpen)
+		if (!empty($childs) && ($blnIsOpen || $this->Session->get('page_selector_search') != ''))
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 
