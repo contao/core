@@ -6,7 +6,7 @@
  * Although the stlye sheet is shared by all themes, you can override its
  * formattings in any of your theme style sheets.
  * 
- *   tl_files/tinymce.css (this is how it looks like in TinyMCE)
+ *   files/tinymce.css (this is how it looks like in TinyMCE)
  *   .warning { color:#c55; }
  * 
  *   theme_a.css (this is how it looks like in theme A)
@@ -16,7 +16,7 @@
  *   .warning { color:#000; }
  * 
  * If you do not want to use a global TinyMCE style sheet at all, simply delete
- * this file (tl_files/tinymce.css).
+ * this file (files/tinymce.css).
  */
 .warning { color:#c55; font-size:1.1em; }
 .confirmation { color:#090; font-size:1.1em; }

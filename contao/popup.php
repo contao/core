@@ -89,7 +89,7 @@ class Popup extends Backend
 			die('Invalid file name');
 		}
 
-		// Limit preview to the tl_files directory
+		// Limit preview to the files directory
 		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $this->strFile))
 		{
 			die('Invalid path');

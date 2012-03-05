@@ -266,7 +266,7 @@ class DbInstaller extends \Controller
 					continue;
 				}
 
-				if ($strTable == 'tl_files.php' || $strTable == 'tl_settings.php' || $strTable == 'tl_templates.php')
+				if ($strTable == 'tl_settings.php' || $strTable == 'tl_templates.php')
 				{
 					continue;
 				}

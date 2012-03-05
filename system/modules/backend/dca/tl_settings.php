@@ -697,9 +697,9 @@ class tl_settings extends Backend
 
 		if ($varValue == '.' || $varValue == '..' || $varValue == '')
 		{
-			$varValue = 'tl_files';
+			$varValue = 'files';
 		}
-		elseif (preg_match('@^(contao|plugins|system|templates|typolight)(/|$)@', $varValue))
+		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
 		{
 			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}

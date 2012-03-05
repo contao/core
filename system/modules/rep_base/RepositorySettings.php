@@ -101,7 +101,7 @@ define('REPOSITORY_COREVERSIONS',
 );
 
 // Where files are stored, relative to TL_ROOT
-define('REPOSITORY_FILEROOT', 'tl_files/repository');
+define('REPOSITORY_FILEROOT', 'files/repository');
 
 // Path of download script
 define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');

@@ -186,7 +186,7 @@ $GLOBALS['TL_CONFIG']['encryptionCipher'] = 'rijndael-256';
  * FILE UPLOAD SETTINGS
  * -------------------------------------------------------------------------
  *
- * The default files directory is tl_files.
+ * The default files directory is "files".
  *
  *   uploadTypes = allowed file types for uploads
  *   maxFileSize = maximum file size

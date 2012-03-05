@@ -376,8 +376,8 @@ class Theme extends \Backend
 					continue;
 				}
 
-				// Limit file operations to tl_files and the templates directory
-				if (strncmp($objArchive->file_name, 'tl_files/', 9) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
+				// Limit file operations to files and the templates directory
+				if (strncmp($objArchive->file_name, 'files/', 6) !== 0 && strncmp($objArchive->file_name, 'templates/', 10) !== 0)
 				{
 					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['invalidFile'], $objArchive->file_name));
 					continue;
@@ -389,9 +389,9 @@ class Theme extends \Backend
 					$strFileName = $objArchive->file_name;
 
 					// Override the files directory
-					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'tl_files' && strncmp($objArchive->file_name, 'tl_files/', 9) === 0)
+					if ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strncmp($objArchive->file_name, 'files/', 6) === 0)
 					{
-						$strFileName = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
+						$strFileName = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $objArchive->file_name);
 					}
 
 					$objFile = new \File($strFileName);
@@ -539,7 +539,7 @@ class Theme extends \Backend
 						}
 
 						// Adjust the file paths in style sheets and modules
-						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'tl_files' && strpos($value, 'tl_files') !== false)
+						elseif ($GLOBALS['TL_CONFIG']['uploadPath'] != 'files' && strpos($value, 'files') !== false)
 						{
 							$tmp = deserialize($value);
 
@@ -547,14 +547,14 @@ class Theme extends \Backend
 							{
 								foreach ($tmp as $kk=>$vv)
 								{
-									$tmp[$kk] = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
+									$tmp[$kk] = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $vv);
 								}
 
 								$value = serialize($tmp);
 							}
 							else
 							{
-								$value = str_replace('tl_files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
+								$value = str_replace('files/', $GLOBALS['TL_CONFIG']['uploadPath'] . '/', $value);
 							}
 						}
 
@@ -826,12 +826,12 @@ class Theme extends \Backend
 
 		if ($strFolder == '')
 		{
-			$strTarget = 'tl_files';
+			$strTarget = 'files';
 			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'];
 		}
 		else
 		{
-			$strTarget = 'tl_files/' . $strFolder;
+			$strTarget = 'files/' . $strFolder;
 			$strFolder = $GLOBALS['TL_CONFIG']['uploadPath'] .'/'. $strFolder;
 		}
 
@@ -856,7 +856,7 @@ class Theme extends \Backend
 			}
 			else
 			{
-				// Always store files in tl_files and convert the directory upon import
+				// Always store files in files and convert the directory upon import
 				$objArchive->addFile($strFolder .'/'. $strFile, $strTarget .'/'. $strFile);
 			}
 		}

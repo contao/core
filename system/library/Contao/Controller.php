@@ -2568,7 +2568,7 @@ abstract class Controller extends \System
 			die('Invalid file name');
 		}
 
-		// Limit downloads to the tl_files directory
+		// Limit downloads to the files directory
 		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $strFile))
 		{
 			header('HTTP/1.1 404 Not Found');
