@@ -88,72 +88,108 @@ class ContentGallery extends \ContentElement
 		$images = array();
 		$auxDate = array();
 
-		// Get all images
-		foreach ($this->multiSRC as $file)
+		// Get the file entries from the database
+		$objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+
+		if ($objFiles === null)
 		{
-			if (isset($images[$file]) || !file_exists(TL_ROOT . '/' . $file))
+			$this->Template->images = '';
+			return;
+		}
+
+		global $objPage;
+
+		// Get all images
+		while ($objFiles->next())
+		{
+			// Continue if the files has been processed or does not exist
+			if (isset($images[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
 			}
 
 			// Single files
-			if (is_file(TL_ROOT . '/' . $file))
+			if ($objFiles->type == 'file')
 			{
-				$objFile = new \File($file);
-				$this->parseMetaFile(dirname($file), true);
-				$arrMeta = $this->arrMeta[$objFile->basename];
+				$objFile = new \File($objFiles->path);
 
-				if ($arrMeta[0] == '')
-				{
-					$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
-				}
-
-				if ($objFile->isGdImage)
-				{
-					$images[$file] = array
-					(
-						'name' => $objFile->basename,
-						'singleSRC' => $file,
-						'alt' => $arrMeta[0],
-						'imageUrl' => $arrMeta[1],
-						'caption' => $arrMeta[2]
-					);
-
-					$auxDate[] = $objFile->mtime;
-				}
-
-				continue;
-			}
-
-			$subfiles = scan(TL_ROOT . '/' . $file);
-			$this->parseMetaFile($file);
-
-			// Folders
-			foreach ($subfiles as $subfile)
-			{
-				if (is_dir(TL_ROOT . '/' . $file . '/' . $subfile))
+				if (!$objFile->isGdImage)
 				{
 					continue;
 				}
 
-				$objFile = new \File($file . '/' . $subfile);
+				$objMeta = \FilesMetaModel::findByPidAndLanguage($objFiles->id, $objPage->language);
 
-				if ($objFile->isGdImage)
+				if ($objMeta === null)
 				{
-					$arrMeta = $this->arrMeta[$subfile];
+					$objMeta = new \stdClass();
+				}
 
-					if ($arrMeta[0] == '')
+				// FIXME: correct?
+				if ($objMeta->title == '')
+				{
+					$objMeta = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+				}
+
+				// Add the image
+				$images[$objFiles->path] = array
+				(
+					'name'      => $objFile->basename,
+					'singleSRC' => $objFiles->path,
+					'alt'       => $objMeta->title,
+					'imageUrl'  => $objMeta->link,
+					'caption'   => $objMeta->caption
+				);
+
+				$auxDate[] = $objFile->mtime;
+			}
+
+			// Folders
+			else
+			{
+				$objSubfiles = \FilesCollection::findBy('pid', $objFiles->id);
+
+				if ($objSubfiles === null)
+				{
+					continue;
+				}
+
+				while ($objSubfiles->next())
+				{
+					// Skip subfolders
+					if ($objSubfiles->type == 'folder')
 					{
-						$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+						continue;
 					}
 
-					$images[$file . '/' . $subfile] = array
+					$objFile = new \File($objSubfiles->path);
+
+					if (!$objFile->isGdImage)
+					{
+						continue;
+					}
+
+					$objMeta = \FilesMetaModel::findByPidAndLanguage($objSubfiles->id, $objPage->language);
+
+					if ($objMeta === null)
+					{
+						$objMeta = new \stdClass();
+					}
+
+					// FIXME: correct?
+					if ($objMeta->title == '')
+					{
+						$objMeta = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+					}
+
+					// Add the image
+					$images[$objSubfiles->path] = array
 					(
-						'name' => $objFile->basename,
-						'singleSRC' => $file . '/' . $subfile,
-						'alt' => $arrMeta[0],
-						'imageUrl' => $arrMeta[1],
-						'caption' => $arrMeta[2]
+						'name'      => $objFile->basename,
+						'singleSRC' => $objSubfiles->path,
+						'alt'       => $objMeta->title,
+						'imageUrl'  => $objMeta->link,
+						'caption'   => $objMeta->caption
 					);
 
 					$auxDate[] = $objFile->mtime;
@@ -182,6 +218,8 @@ class ContentGallery extends \ContentElement
 				break;
 
 			case 'meta':
+				// FIXME
+				/*
 				$arrImages = array();
 				foreach ($this->arrAux as $k)
 				{
@@ -191,6 +229,7 @@ class ContentGallery extends \ContentElement
 					}
 				}
 				$images = $arrImages;
+				*/
 				break;
 
 			case 'random':
@@ -281,21 +320,20 @@ class ContentGallery extends \ContentElement
 				if (!is_array($images[($i+$j)]) || ($j+$i) >= $limit)
 				{
 					$objCell->class = 'col_'.$j . $class_td;
-					$body[$key][$j] = $objCell;
-
-					continue;
 				}
+				else
+				{
+					// Add size and margin
+					$images[($i+$j)]['size'] = $this->size;
+					$images[($i+$j)]['imagemargin'] = $this->imagemargin;
+					$images[($i+$j)]['fullsize'] = $this->fullsize;
 
-				// Add size and margin
-				$images[($i+$j)]['size'] = $this->size;
-				$images[($i+$j)]['imagemargin'] = $this->imagemargin;
-				$images[($i+$j)]['fullsize'] = $this->fullsize;
+					$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
 
-				$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
-
-				// Add column width and class
-				$objCell->colWidth = $colwidth . '%';
-				$objCell->class = 'col_'.$j . $class_td;
+					// Add column width and class
+					$objCell->colWidth = $colwidth . '%';
+					$objCell->class = 'col_'.$j . $class_td;
+				}
 
 				$body[$key][$j] = $objCell;
 			}

@@ -42,6 +42,15 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			array('tl_files', 'checkPermission'),
 			array('tl_files', 'addBreadcrumb'),
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'path' => 'index'
+			)
 		)
 	),
 
@@ -123,15 +132,44 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sorting' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'type' => array
+		(
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'path' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'hash' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
 );

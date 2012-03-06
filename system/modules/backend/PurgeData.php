@@ -103,25 +103,21 @@ class PurgeData extends \Backend implements \executable
 				{
 					$this->Automator->purgeHtmlFolder();
 				}
-
 				// Script folders
 				elseif ($table == 'scripts_folder')
 				{
 					$this->Automator->purgeScriptsFolder();
 				}
-
 				// Temporary folder
 				elseif ($table == 'temp_folder')
 				{
 					$this->Automator->purgeTempFolder();
 				}
-
 				// CSS files
 				elseif ($table == 'css_files')
 				{
 					$this->StyleSheets->updateStyleSheets();
 				}
-
 				// XML files
 				elseif ($table == 'xml_files')
 				{
@@ -150,7 +146,11 @@ class PurgeData extends \Backend implements \executable
 						$this->Calendar->generateFeeds();
 					}
 				}
-
+				// Files
+				elseif ($table == 'scan_files')
+				{
+					$this->Automator->scanUploadFolder();
+				}
 				// Database table
 				else
 				{

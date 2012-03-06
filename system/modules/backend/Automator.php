@@ -269,6 +269,102 @@ class Automator extends \Backend
 		// Add log entry
 		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
 	}
+
+
+	/**
+	 * Scan the upload folder and create the database entries
+	 * @param string
+	 * @param integer
+	 */
+	public function scanUploadFolder($strPath=null, $pid=0)
+	{
+		if ($strPath === null)
+		{
+			$this->Database->query("TRUNCATE tl_files");
+			$strPath = $GLOBALS['TL_CONFIG']['uploadPath'];
+		}
+
+		$arrMeta = array();
+		$arrMapper = array();
+		$arrFolders = array();
+		$arrFiles = array();
+		$arrScan = scan(TL_ROOT . '/' . $strPath);
+
+		foreach ($arrScan as $strFile)
+		{
+			if (strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
+			{
+				$arrFolders[] = $strPath . '/' . $strFile;
+			}
+			else
+			{
+				$arrFiles[] = $strPath . '/' . $strFile;
+			}
+		}
+
+		// Folders
+		foreach ($arrFolders as $strFolder)
+		{
+			$intSorting += 128;
+
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, sorting, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, '')")
+								 ->execute($pid, time(), $intSorting, basename($strFolder), $strFolder)
+								 ->insertId;
+
+			$this->scanUploadFolder($strFolder, $id);
+		}
+
+		// Files
+		foreach ($arrFiles as $strFile)
+		{
+			$matches = array();
+
+			// Handle meta.txt files
+			if (preg_match('/^meta(_([a-z]{2}))?\.txt$/', basename($strFile), $matches))
+			{
+				$key = $matches[2] ?: 'en';
+				$arrData = file(TL_ROOT . '/' . $strFile, FILE_IGNORE_NEW_LINES);
+
+				foreach ($arrData as $line)
+				{
+					list($name, $info) = explode('=', $line);
+					list($title, $link, $caption) = explode('|', $info);
+					$arrMeta[$key][trim($name)] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
+				}
+			}
+			else
+			{
+				$intSorting += 128;
+
+				$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, sorting, name, type, path, hash) VALUES (?, ?, ?, ?, 'file', ?, ?)")
+									 ->execute($pid, time(), $intSorting, basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
+									 ->insertId;
+
+				$arrMapper[basename($strFile)] = $id;
+			}
+		}
+
+		// Insert the meta data AFTER the file entries have been created
+		if (!empty($arrMeta))
+		{
+			foreach ($arrMeta as $language=>$files)
+			{
+				foreach ($files as $k=>$v)
+				{
+					if (isset($arrMapper[$k]))
+					{
+						$this->Database->prepare("INSERT INTO tl_files_meta (pid, language, title, caption, link) VALUES (?, ?, ?, ?, ?)")
+									   ->execute($arrMapper[$k], $language, $v['title'], $v['caption'], $v['link']);
+					}
+				}
+			}
+		}
+	}
 }
 
 ?>

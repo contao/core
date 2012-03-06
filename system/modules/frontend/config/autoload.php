@@ -106,6 +106,7 @@ ClassLoader::addClasses(array
 	'Contao\\ContentCollection'     => 'system/modules/frontend/models/ContentCollection.php',
 	'Contao\\ContentModel'          => 'system/modules/frontend/models/ContentModel.php',
 	'Contao\\FilesCollection'       => 'system/modules/frontend/models/FilesCollection.php',
+	'Contao\\FilesMetaModel'        => 'system/modules/frontend/models/FilesMetaModel.php',
 	'Contao\\FilesModel'            => 'system/modules/frontend/models/FilesModel.php',
 	'Contao\\FormCollection'        => 'system/modules/frontend/models/FormCollection.php',
 	'Contao\\FormFieldCollection'   => 'system/modules/frontend/models/FormFieldCollection.php',
