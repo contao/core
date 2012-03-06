@@ -5,6 +5,9 @@ Version 2.11.1 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The IDNA convert class did not run under PHP 5.2 (see #4044).
+
+### Fixed
 Inject error messages of checkbox and radio groups inside the fieldset, so they
 can be associated with it (accessibility) and do not break the CSS formatting.
 This change does not require any template adjustments (see #3392).

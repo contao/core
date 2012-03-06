@@ -971,7 +971,9 @@ class idna_convert
         if (self::$_mb_string_overload) {
             return mb_strlen($string, '8bit');
         }
-        return strlen((binary) $string);
+        // PATCH: support PHP 5.2 (see #4044)
+        //return strlen((binary) $string);
+        return version_compare(PHP_VERSION, '5.3.0', '>=') ? strlen((binary) $string) : strlen(unpack('c*', $string));
     }
 
     /**
