@@ -1175,6 +1175,44 @@ abstract class Controller extends \System
 
 
 	/**
+	 * Calculate the status icon name based on the page parameters
+	 * @param object
+	 * @return string
+	 */
+	protected function getPageStatusIcon($objPage)
+	{
+		$sub = 0;
+		$image = $objPage->type.'.gif';
+
+		// Page not published or not active
+		if (!$objPage->published || $objPage->start && $objPage->start > time() || $objPage->stop && $objPage->stop < time())
+		{
+			$sub += 1;
+		}
+
+		// Page hidden from menu
+		if ($objPage->hide && !in_array($objPage->type, array('redirect', 'forward', 'root', 'error_403', 'error_404')))
+		{
+			$sub += 2;
+		}
+
+		// Page protected
+		if ($objPage->protected && !in_array($objPage->type, array('root', 'error_403', 'error_404')))
+		{
+			$sub += 4;
+		}
+
+		// Get the image name
+		if ($sub > 0)
+		{
+			$image = $objPage->type.'_'.$sub.'.gif';
+		}
+
+		return $image;
+	}
+
+
+	/**
 	 * Print an article as PDF and stream it to the browser
 	 * @param Database_Result|Model
 	 */
@@ -3010,7 +3048,7 @@ abstract class Controller extends \System
 		$arrReturn = array();
 
 		// Currently supports a nesting-level of 10
-		$objPages = $this->Database->prepare("SELECT id, @pid:=pid FROM tl_page WHERE id=?" . str_repeat(" UNION SELECT id, @pid:=pid FROM $strTable WHERE id=@pid", 9))
+		$objPages = $this->Database->prepare("SELECT id, @pid:=pid FROM $strTable WHERE id=?" . str_repeat(" UNION SELECT id, @pid:=pid FROM $strTable WHERE id=@pid", 9))
 								   ->execute($intId);
 
 		while ($objPages->next())

@@ -296,11 +296,10 @@ var AjaxRequest =
 	 * @param string
 	 * @param string
 	 * @param string
-	 * @param string
 	 * @param integer
 	 * @return boolean
 	 */
-	toggleFiletree: function (el, id, folder, field, name, level) {
+	toggleFiletree: function (el, id, field, name, level) {
 		el.blur();
 		var item = $(id);
 		var image = $(el).getFirst('img');
@@ -346,7 +345,7 @@ var AjaxRequest =
 				// HOOK
 				window.fireEvent('ajax_change');
    			}
-		}).post({'action':'loadFiletree', 'id':id, 'level':level, 'folder':folder, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
+		}).post({'action':'loadFiletree', 'id':id, 'level':level, 'field':field, 'name':name, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 
 		return false;
 	},
@@ -800,7 +799,8 @@ var Backend =
 			var inp = window.frames['pages_frame'].document.getElementById(opt.id+'_parent').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
-				tls.push(inp[i].getParent('li').getFirst('div').getFirst('label').get('text'));
+				var div = inp[i].getParent('li').getFirst('div');
+				tls.push('<img src="' + div.getFirst('img').src + '" width="18" height="18" alt=""> ' + div.getFirst('label').get('title'));
 				val.push(inp[i].get('value'));
 			}
 			if (opt.tag) {
@@ -808,7 +808,7 @@ var Backend =
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');
-				$('target_'+opt.id).getFirst('p').set('html', tls.join(', '));
+				$('target_'+opt.id).getFirst('ul').set('html', '<li>' + tls.join('</li><li>') + '</li>');
 				var lnk = $('target_'+opt.id).getElement('a');
 				lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			}

@@ -245,45 +245,13 @@ class Ajax extends \Backend
 
 			// Load nodes of the file tree
 			case 'loadFiletree':
+			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
 				$arrData['id'] = strlen($this->strAjaxName) ? $this->strAjaxName : $dc->id;
 				$arrData['name'] = $this->Input->post('name');
 
-				$objWidget = new $GLOBALS['BE_FFL']['fileTree']($arrData, $dc);
-
-				// Load a particular node
-				if ($this->Input->post('folder', true) != '')
-				{
-					echo $objWidget->generateAjax($this->Input->post('folder', true), $this->Input->post('field'), intval($this->Input->post('level')));
-					exit; break;
-				}
-
-				// Reload the whole tree
-				$this->import('BackendUser', 'User');
-				$tree = '';
-
-				// Set a custom path
-				if (strlen($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['eval']['path']))
-				{
-					$tree = $objWidget->generateAjax($GLOBALS['TL_DCA'][$dc->table]['fields'][$this->Input->post('field')]['eval']['path'], $this->Input->post('field'), intval($this->Input->post('level')));
-				}
-
-				// Start from root
-				elseif ($this->User->isAdmin)
-				{
-					$tree = $objWidget->generateAjax($GLOBALS['TL_CONFIG']['uploadPath'], $this->Input->post('field'), intval($this->Input->post('level')));
-				}
-
-				// Set filemounts
-				else
-				{
-					foreach ($this->eliminateNestedPaths($this->User->filemounts) as $node)
-					{
-						$tree .= $objWidget->generateAjax($node, $this->Input->post('field'), intval($this->Input->post('level')), true);
-					}
-				}
-
-				echo $tree;
+				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);
+				echo $objWidget->generateAjax($this->strAjaxId, $this->Input->post('field'), intval($this->Input->post('level')));
 				exit; break;
 
 			// Feature/unfeature an element

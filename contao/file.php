@@ -38,13 +38,20 @@ require_once('../system/initialize.php');
 /**
  * Class FilePicker
  *
- * Back end file picker.
+ * Back end page picker.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
 class FilePicker extends Backend
 {
+
+	/**
+	 * Current Ajax object
+	 * @var object
+	 */
+	protected $objAjax;
+
 
 	/**
 	 * Initialize the controller
@@ -70,18 +77,50 @@ class FilePicker extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_pagepicker');
+		$this->Template = new BackendTemplate('be_picker');
+		$this->Template->main = '';
 
+		// Ajax request
+		if ($_POST && $this->Environment->isAjaxRequest)
+		{
+			$this->objAjax = new Ajax($this->Input->post('action'));
+			$this->objAjax->executePreActions();
+		}
+
+		$strTable = $this->Input->get('table');
+		$strField = $this->Input->get('field');
+
+		$this->loadDataContainer($strTable);
+		$objDca = new DC_Table($strTable);
+
+		// AJAX request
+		if ($_POST && $this->Environment->isAjaxRequest)
+		{
+			$this->objAjax->executePostActions($objDca);
+		}
+
+		$objFileTree = new $GLOBALS['BE_FFL']['fileSelector'](array(
+			'strId'    => $strField,
+			'strTable' => $strTable,
+			'strField' => $strField,
+			'strName'  => $strField,
+			'varValue' => explode(',', $this->Input->get('value'))
+		), $objDca);
+
+		$this->Template->main = $objFileTree->generate();
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
-		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['fpHeadline'];
+		$this->Template->headline = $GLOBALS['TL_LANG']['MSC']['ppHeadline'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-
-		// Allow custom filters (see #2618)
-		$strFilter = ($this->Input->get('filter') != 'undefined') ? $this->Input->get('filter') : 'gif,jpg,jpeg,png';
-		$this->Template->options = $this->createFileList($strFilter);
+		$this->Template->options = $this->createPageList();
+		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
+		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
+		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
+		$this->Template->search = $GLOBALS['TL_LANG']['MSC']['search'];
+		$this->Template->action = ampersand($this->Environment->request);
+		$this->Template->value = $this->Session->get('file_selector_search');
 
 		$this->Template->output();
 	}

@@ -274,6 +274,22 @@ abstract class Model_Collection extends \System
 
 
 	/**
+	 * Lazy load related records
+	 * @param string
+	 * @throws Exception
+	 */
+	public function getRelated($key)
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex]->getRelated($key);
+	}
+
+
+	/**
 	 * Find records and return the model collection
 	 * @param array
 	 * @return Model_Collection|null

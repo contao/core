@@ -1584,7 +1584,6 @@ window.addEvent(\'domready\', function() {
 				$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
 				$return .= (($arrClipboard['mode'] == 'cut' || $arrClipboard['mode'] == 'copy') && preg_match('/^' . preg_quote($arrClipboard['id'], '/') . '/i', $currentFolder)) ? $this->generateImage('pasteinto_.gif', '', 'class="blink"') : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$currentEncoded.(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars($GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][1]).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ';
 			}
-
 			// Default buttons (do not display buttons for mounted folders)
 			elseif (!$mount)
 			{
@@ -1629,10 +1628,10 @@ window.addEvent(\'domready\', function() {
 
 				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $objFile->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $objFile->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
 				{
-					$_height = ($objFile->height < 70) ? $objFile->height : 70;
+					$_height = ($objFile->height < 50) ? $objFile->height : 50;
 					$_width = (($objFile->width * $_height / $objFile->height) > 400) ? 90 : '';
 
-					$thumbnail .= '<br><img src="' . TL_FILES_URL . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px 23px">';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . $this->getImage($currentEncoded, $_width, $_height) . '" alt="" style="margin:0 0 2px -19px">';
 				}
 			}
 			else

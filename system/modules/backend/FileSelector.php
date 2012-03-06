@@ -35,14 +35,14 @@ namespace Contao;
 
 
 /**
- * Class PageSelector
+ * Class FileSelector
  *
- * Provide methods to handle input field "page tree".
+ * Provide methods to handle input field "file tree".
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageSelector extends \Widget
+class FileSelector extends \Widget
 {
 
 	/**
@@ -86,19 +86,19 @@ class PageSelector extends \Widget
 		// Store the keyword
 		if ($this->Input->post('FORM_SUBMIT') == 'item_selector')
 		{
-			$this->Session->set('page_selector_search', $this->Input->post('keyword'));
+			$this->Session->set('file_selector_search', $this->Input->post('keyword'));
 			$this->reload();
 		}
 
 		$tree = '';
 		$this->getPathNodes();
-		$for = $this->Session->get('page_selector_search');
+		$for = $this->Session->get('file_selector_search');
 		$arrIds = array();
 
-		// Search for a specific page
+		// Search for a specific file
 		if ($for != '')
 		{
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_page WHERE CAST(title AS CHAR) REGEXP ?")
+			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?")
 									  ->execute($for);
 
 			if ($objRoot->numRows > 0)
@@ -114,7 +114,7 @@ class PageSelector extends \Widget
 
 					while ($objRoot->next())
 					{
-						if (count(array_intersect($this->User->pagemounts, $this->getParentRecords($objRoot->id, 'tl_page'))) > 0)
+						if (count(array_intersect($this->User->filemounts, $this->getParentRecords($objRoot->id, 'tl_files'))) > 0)
 						{
 							$arrRoot[] = $objRoot->id;
 						}
@@ -127,29 +127,29 @@ class PageSelector extends \Widget
 			// Build the tree
 			foreach ($arrIds as $id)
 			{
-				$tree .= $this->renderPagetree($id, -20, false, true);
+				$tree .= $this->renderFiletree($id, -20, false, true);
 			}
 		}
 		else
 		{		
-			// Show all pages to admins
+			// Show all files to admins
 			if ($this->User->isAdmin)
 			{
-				$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
+				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
 										  ->execute(0);
 
-				while ($objPage->next())
+				while ($objFile->next())
 				{
-					$tree .= $this->renderPagetree($objPage->id, -20);
+					$tree .= $this->renderFiletree($objFile->id, -20);
 				}
 			}
 
-			// Show mounted pages to regular users
+			// Show mounted files to regular users
 			else
 			{
-				foreach ($this->eliminateNestedPages($this->User->pagemounts) as $node)
+				foreach ($this->eliminateNestedPages($this->User->filemounts, 'tl_files') as $node)
 				{
-					$tree .= $this->renderPagetree($node, -20);
+					$tree .= $this->renderFiletree($node, -20);
 				}
 			}
 		}
@@ -169,13 +169,13 @@ class PageSelector extends \Widget
 
 		// Return the tree
 		return '<ul class="tl_listing tree_view'.(($this->strClass != '') ? ' ' . $this->strClass : '').'" id="'.$this->strId.'">
-    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage((strlen($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon']) ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'pagemounts.gif')).' '.(($GLOBALS['TL_CONFIG']['websiteTitle'] != '') ? $GLOBALS['TL_CONFIG']['websiteTitle'] : 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
+    <li class="tl_folder_top"><div class="tl_left">'.$this->generateImage((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] != '') ? $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['icon'] : 'filemounts.gif')).' '.(($GLOBALS['TL_CONFIG']['websiteTitle'] != '') ? $GLOBALS['TL_CONFIG']['websiteTitle'] : 'Contao Open Source CMS').'</div> <div class="tl_right">&nbsp;</div><div style="clear:both"></div></li><li class="parent" id="'.$this->strId.'_parent"><ul>'.$tree.$strReset.'
   </ul></li></ul>';
 	}
 
 
 	/**
-	 * Generate a particular subpart of the page tree and return it as HTML string
+	 * Generate a particular subpart of the file tree and return it as HTML string
 	 * @param integer
 	 * @param string
 	 * @param integer
@@ -191,7 +191,7 @@ class PageSelector extends \Widget
 		$this->strField = $strField;
 		$this->loadDataContainer($this->strTable);
 
-		// Load current values
+		// Load the current values
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['config']['dataContainer'])
 		{
 			case 'File':
@@ -224,12 +224,12 @@ class PageSelector extends \Widget
 		$tree = '';
 		$level = $level * 20;
 
-		$objPage = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
+		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
 								  ->execute($id);
 
-		while ($objPage->next())
+		while ($objFile->next())
 		{
-			$tree .= $this->renderPagetree($objPage->id, $level);
+			$tree .= $this->renderFiletree($objFile->id, $level);
 		}
 
 		return $tree;
@@ -237,14 +237,14 @@ class PageSelector extends \Widget
 
 
 	/**
-	 * Recursively render the pagetree
+	 * Recursively render the filetree
 	 * @param int
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
 	 * @return string
 	 */
-	protected function renderPagetree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)
+	protected function renderFiletree($id, $intMargin, $protectedPage=false, $blnNoRecursion=false)
 	{
 		static $session;
 		$session = $this->Session->getData();
@@ -261,12 +261,12 @@ class PageSelector extends \Widget
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
-		$objPage = $this->Database->prepare("SELECT id, alias, type, protected, published, start, stop, hide, title FROM tl_page WHERE id=?")
+		$objFile = $this->Database->prepare("SELECT id, type, name, path FROM tl_files WHERE id=?")
 								  ->limit(1)
 								  ->execute($id);
 
 		// Return if there is no result
-		if ($objPage->numRows < 1)
+		if ($objFile->numRows < 1)
 		{
 			return '';
 		}
@@ -278,7 +278,7 @@ class PageSelector extends \Widget
 		// Check whether there are child records
 		if (!$blnNoRecursion)
 		{
-			$objNodes = $this->Database->prepare("SELECT id FROM tl_page WHERE pid=? ORDER BY sorting")
+			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
 									   ->execute($id);
 
 			if ($objNodes->numRows)
@@ -287,7 +287,7 @@ class PageSelector extends \Widget
 			}
 		}
 
-		$return .= "\n    " . '<li class="'.(($objPage->type == 'root') ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+		$return .= "\n    " . '<li class="'.(($objFile->type == 'folder') ? 'tl_folder' : 'tl_file').'" onmouseover="Theme.hoverDiv(this, 1)" onmouseout="Theme.hoverDiv(this, 0)"><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
 
 		$folderAttribute = 'style="margin-left:20px"';
 		$session[$node][$id] = is_numeric($session[$node][$id]) ? $session[$node][$id] : 0;
@@ -299,12 +299,44 @@ class PageSelector extends \Widget
 			$folderAttribute = '';
 			$img = $blnIsOpen ? 'folMinus.gif' : 'folPlus.gif';
 			$alt = $blnIsOpen ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
-			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.togglePagetree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
+			$return .= '<a href="'.$this->addToUrl($flag.'tg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleFiletree(this,\''.$xtnode.'_'.$id.'\',\''.$this->strField.'\',\''.$this->strName.'\','.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
 		}
 
-		// Add the page name
-		$objPage->protected = ($objPage->protected || $protectedPage);
-		$return .= $this->generateImage($this->getPageStatusIcon($objPage), '', $folderAttribute).' <label title="'.specialchars($objPage->title . ' (' . $objPage->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')').'" for="'.$this->strName.'_'.$id.'">'.(($objPage->type == 'root') ? '<strong>' : '').$objPage->title.(($objPage->type == 'root') ? '</strong>' : '').'</label></div> <div class="tl_right">';
+		// Get the icon
+		if ($objFile->type == 'folder')
+		{
+			$image = !empty($childs) ? 'folderC.gif' : 'folderO.gif';
+		}
+		else
+		{
+			$file = new \File($objFile->path);
+			$image = $file->icon;
+		}
+
+		$thumbnail = '';
+
+		// Generate the thumbnail
+		if ($objFile->type == 'file' )
+		{
+			if ($file->isGdImage && $file->height > 0)
+			{
+				$thumbnail = ' <span class="tl_gray">('.$this->getReadableSize($file->filesize).', '.$file->width.'x'.$file->height.' px)</span>';
+
+				if ($GLOBALS['TL_CONFIG']['thumbnails'] && $file->height <= $GLOBALS['TL_CONFIG']['gdMaxImgHeight'] && $file->width <= $GLOBALS['TL_CONFIG']['gdMaxImgWidth'])
+				{
+					$_height = ($file->height < 50) ? $file->height : 50;
+					$_width = (($file->width * $_height / $file->height) > 400) ? 90 : '';
+					$thumbnail .= '<br><img src="' . TL_FILES_URL . $this->getImage($objFile->path, $_width, $_height) . '" alt="" style="margin-bottom:2px">';
+				}
+			}
+			else
+			{
+				$thumbnail = ' <span class="tl_gray">('.$this->getReadableSize($file->filesize).')</span>';
+			}
+		}
+
+		// Add the file name
+		$return .= $this->generateImage($image, '', $folderAttribute).' <label title="'.specialchars($objFile->path).'" for="'.$this->strName.'_'.$id.'">'.(($objFile->type == 'folder') ? '<strong>' : '').$objFile->name.(($objFile->type == 'folder') ? '</strong>' : '').'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 		// Add checkbox or radio button
 		switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
@@ -322,13 +354,13 @@ class PageSelector extends \Widget
 		$return .= '</div><div style="clear:both"></div></li>';
 
 		// Begin a new submenu
-		if (!empty($childs) && ($blnIsOpen || $this->Session->get('page_selector_search') != ''))
+		if (!empty($childs) && ($blnIsOpen || $this->Session->get('file_selector_search') != ''))
 		{
 			$return .= '<li class="parent" id="'.$node.'_'.$id.'"><ul class="level_'.$level.'">';
 
 			for ($k=0; $k<count($childs); $k++)
 			{
-				$return .= $this->renderPagetree($childs[$k], ($intMargin + $intSpacing), $objPage->protected);
+				$return .= $this->renderFiletree($childs[$k], ($intMargin + $intSpacing), $objFile->protected);
 			}
 
 			$return .= '</ul></li>';
@@ -339,7 +371,7 @@ class PageSelector extends \Widget
 
 
 	/**
-	 * Get the IDs of all parent pages of the selected pages, so they are expanded automatically
+	 * Get the IDs of all parent folders of the selected files, so they are expanded automatically
 	 */
 	protected function getPathNodes()
 	{
@@ -355,7 +387,7 @@ class PageSelector extends \Widget
 
 		foreach ($this->varValue as $id)
 		{
-			$arrPids = $this->getParentRecords($id, 'tl_page');
+			$arrPids = $this->getParentRecords($id, 'tl_files');
 			array_shift($arrPids); // the first element is the ID of the page itself
 			$this->arrNodes = array_merge($this->arrNodes, $arrPids);
 		}

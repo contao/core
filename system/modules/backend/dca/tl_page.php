@@ -1323,32 +1323,7 @@ class tl_page extends Backend
 	 */
 	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
 	{
-		$sub = 0;
-		$image = ''.$row['type'].'.gif';
-
-		// Page not published or not active
-		if ((!$row['published'] || $row['start'] && $row['start'] > time() || $row['stop'] && $row['stop'] < time()))
-		{
-			$sub += 1;
-		}
-
-		// Page hidden from menu
-		if ($row['hide'] && !in_array($row['type'], array('redirect', 'forward', 'root', 'error_403', 'error_404')))
-		{
-			$sub += 2;
-		}
-
-		// Page protected
-		if ($row['protected'] && !in_array($row['type'], array('root', 'error_403', 'error_404')))
-		{
-			$sub += 4;
-		}
-
-		// Get the image name
-		if ($sub > 0)
-		{
-			$image = ''.$row['type'].'_'.$sub.'.gif';
-		}
+		$image = $this->getPageStatusIcon((object)$row);
 
 		// Return the image only
 		if ($blnReturnImage)

@@ -59,7 +59,7 @@ class PageTree extends \Widget
 
 
 	/**
-	 * Load database object
+	 * Load the database object
 	 * @param array
 	 */
 	public function __construct($arrAttributes=false)
@@ -70,7 +70,7 @@ class PageTree extends \Widget
 
 
 	/**
-	 * Skip the field if "change selection" is not checked
+	 * Return an array if the "multiple" attribute is set
 	 * @param mixed
 	 * @return mixed
 	 */
@@ -78,7 +78,7 @@ class PageTree extends \Widget
 	{
 		if (strpos($varInput, ',') === false)
 		{
-			return intval($varInput);
+			return $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] ? array(intval($varInput)) : intval($varInput);
 		}
 		else
 		{
@@ -99,14 +99,18 @@ class PageTree extends \Widget
 		if ($this->varValue != '')
 		{
 			$strValues = implode(',', array_map('intval', (array)$this->varValue));
-			$objPages = $this->Database->execute("SELECT id, title FROM tl_page WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));
-			$arrValues = $objPages->fetchEach('title');
+			$objPages = $this->Database->execute("SELECT id, title, alias, type, hide, protected, published, start, stop FROM tl_page WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));
+
+			while ($objPages->next())
+			{
+				$arrValues[] = $this->generateImage($this->getPageStatusIcon($objPages)) . ' ' . $objPages->title . ' (' . $objPages->alias . $GLOBALS['TL_CONFIG']['urlSuffix'] . ')';
+			}
 		}
 
 		return '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
   <div class="selector_container" id="target_'.$this->strId.'">
-    <p>' . implode(', ', $arrValues) . '</p>
-    <p><a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
+    <ul><li>' . implode('</li><li>', $arrValues) . '</li></ul>
+    <p><a href="contao/page.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
   </div>';
 	}
 }

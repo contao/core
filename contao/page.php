@@ -77,7 +77,7 @@ class PagePicker extends Backend
 	 */
 	public function run()
 	{
-		$this->Template = new BackendTemplate('be_pagepicker');
+		$this->Template = new BackendTemplate('be_picker');
 		$this->Template->main = '';
 
 		// Ajax request
