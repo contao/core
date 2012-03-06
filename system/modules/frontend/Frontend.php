@@ -109,7 +109,8 @@ abstract class Frontend extends Controller
 		// Extract the language
 		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
 		{
-			if (!preg_match('/^[a-z]{2}$/', $arrFragments[0]))
+			// No language provided if there is only one fragment (see #4043)
+			if (count($arrFragments) == 1 || !preg_match('/^[a-z]{2}$/', $arrFragments[0]))
 			{
 				return false; // Language not provided
 			}
