@@ -172,6 +172,7 @@ class ContentDownloads extends \ContentElement
 						'caption' => $arrMeta[2],
 						'filesize' => $this->getReadableSize($objFile->filesize, 1),
 						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'mime' => $objFile->mime,
 						'meta' => $arrMeta,
 						'extension' => $objFile->extension,
 						'path' => $objFile->dirname
