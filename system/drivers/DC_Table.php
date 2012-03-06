@@ -2753,7 +2753,7 @@ window.addEvent(\'domready\', function() {
 					}
 				}
 
-				$names = $this->combiner($sValues);
+				$names = $this->combiner(array_values($sValues));
 			}
 			else
 			{
