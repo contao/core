@@ -759,7 +759,7 @@ var Backend =
 	 */
 	openModalIframe: function(options) {
 		var opt = options || {};
-		var max = (window.getSize().y*0.8).toInt();
+		var max = (window.getSize().y-180).toInt();
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
@@ -781,7 +781,7 @@ var Backend =
 	 */
 	openModalSelector: function(options) {
 		var opt = options || {};
-		var max = (window.getSize().y*0.8).toInt();
+		var max = (window.getSize().y-180).toInt();
 		if (!opt.height || opt.height > max) opt.height = max;
 		var M = new SimpleModal({
 			'width': opt.width,
