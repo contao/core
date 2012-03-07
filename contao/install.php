@@ -866,9 +866,10 @@ class InstallTool extends Backend
 				{
 					$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 					$strPassword = sha1($strSalt . $this->Input->post('pass'));
+					$time = time();
 
-					$this->Database->prepare("INSERT INTO tl_user (tstamp, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails) VALUES (?, ?, ?, ?, ?, 1, 1, 1, 1, 1)")
-								   ->execute(time(), $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt);
+					$this->Database->prepare("INSERT INTO tl_user (tstamp, dateAdded, name, email, username, password, admin, showHelp, useRTE, useCE, thumbnails) VALUES (?, ?, ?, ?, ?, ?, 1, 1, 1, 1, 1)")
+								   ->execute($time, $time, $this->Input->post('name'), $this->Input->post('email', true), $this->Input->post('username'), $strPassword . ':' . $strSalt);
 
 					$this->Config->update("\$GLOBALS['TL_CONFIG']['adminEmail']", $this->Input->post('email', true));
 					$this->reload();
