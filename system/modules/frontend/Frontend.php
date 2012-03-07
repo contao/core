@@ -487,6 +487,25 @@ abstract class Frontend extends \Controller
 
 
 	/**
+	 * Get the meta data from a serialized string
+	 * @param string
+	 * @param string
+	 * @return array
+	 */
+	protected function getMetaData($strData, $strLanguage)
+	{
+		$arrData = deserialize($strData);
+
+		if (!is_array($arrData) || !isset($arrData[$strLanguage]))
+		{
+			return array();
+		}
+
+		return $arrData[$strLanguage];
+	}
+
+
+	/**
 	 * Parse the meta.txt file of a folder
 	 * @param string
 	 * @param boolean

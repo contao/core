@@ -334,7 +334,7 @@ class Automator extends \Backend
 				{
 					list($name, $info) = explode('=', $line);
 					list($title, $link, $caption) = explode('|', $info);
-					$arrMeta[$key][trim($name)] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
+					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
 				}
 			}
 			else
@@ -352,15 +352,12 @@ class Automator extends \Backend
 		// Insert the meta data AFTER the file entries have been created
 		if (!empty($arrMeta))
 		{
-			foreach ($arrMeta as $language=>$files)
+			foreach ($arrMeta as $file=>$meta)
 			{
-				foreach ($files as $k=>$v)
+				if (isset($arrMapper[$file]))
 				{
-					if (isset($arrMapper[$k]))
-					{
-						$this->Database->prepare("INSERT INTO tl_files_meta (pid, language, title, caption, link) VALUES (?, ?, ?, ?, ?)")
-									   ->execute($arrMapper[$k], $language, $v['title'], $v['caption'], $v['link']);
-					}
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+								   ->execute(serialize($meta), $arrMapper[$file]);
 				}
 			}
 		}

@@ -156,6 +156,10 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
+		'hash' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
@@ -167,9 +171,12 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
-		'hash' => array
+		'meta' => array
 		(
-			'sql'                     => "varchar(32) NOT NULL default ''"
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
+			'inputType'               => 'textare',
+			'eval'                    => array('decodeEntities'=>true),
+			'sql'                     => "blob NULL"
 		)
 	)
 );

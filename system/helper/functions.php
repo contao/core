@@ -420,6 +420,8 @@ function nl2br_callback($matches)
  */
 function dump()
 {
+	echo "<pre>";
+
 	foreach (func_get_args() as $var)
 	{
 		if (is_array($var) || is_object($var))
@@ -431,6 +433,8 @@ function dump()
 			var_dump($var);
 		}
 	}
+
+	echo "</pre>";
 }
 
 

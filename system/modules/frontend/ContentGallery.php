@@ -118,17 +118,12 @@ class ContentGallery extends \ContentElement
 					continue;
 				}
 
-				$objMeta = \FilesMetaModel::findByPidAndLanguage($objFiles->id, $objPage->language);
-
-				if ($objMeta === null)
-				{
-					$objMeta = new \stdClass();
-				}
+				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
 				// FIXME: correct?
-				if ($objMeta->title == '')
+				if ($arrMeta['title'] == '')
 				{
-					$objMeta = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+					$arrMeta['title'] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
 				}
 
 				// Add the image
@@ -136,9 +131,9 @@ class ContentGallery extends \ContentElement
 				(
 					'name'      => $objFile->basename,
 					'singleSRC' => $objFiles->path,
-					'alt'       => $objMeta->title,
-					'imageUrl'  => $objMeta->link,
-					'caption'   => $objMeta->caption
+					'alt'       => $arrMeta['title'],
+					'imageUrl'  => $arrMeta['link'],
+					'caption'   => $arrMeta['caption']
 				);
 
 				$auxDate[] = $objFile->mtime;
@@ -169,17 +164,12 @@ class ContentGallery extends \ContentElement
 						continue;
 					}
 
-					$objMeta = \FilesMetaModel::findByPidAndLanguage($objSubfiles->id, $objPage->language);
-
-					if ($objMeta === null)
-					{
-						$objMeta = new \stdClass();
-					}
+					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
 					// FIXME: correct?
-					if ($objMeta->title == '')
+					if ($arrMeta['title'] == '')
 					{
-						$objMeta = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+						$arrMeta['title'] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
 					}
 
 					// Add the image
@@ -187,9 +177,9 @@ class ContentGallery extends \ContentElement
 					(
 						'name'      => $objFile->basename,
 						'singleSRC' => $objSubfiles->path,
-						'alt'       => $objMeta->title,
-						'imageUrl'  => $objMeta->link,
-						'caption'   => $objMeta->caption
+						'alt'       => $arrMeta['title'],
+						'imageUrl'  => $arrMeta['link'],
+						'caption'   => $arrMeta['caption']
 					);
 
 					$auxDate[] = $objFile->mtime;
