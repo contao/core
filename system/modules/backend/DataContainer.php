@@ -470,14 +470,14 @@ class DataContainer extends Backend
 	{
 		$return = array('');
 
-		for ($i=0; $i<count($names); $i++)
+		foreach ($names as $name)
 		{
 			$buffer = array();
 
 			foreach ($return as $k=>$v)
 			{
-				$buffer[] = ($k%2 == 0) ? $v : $v.$names[$i];
-				$buffer[] = ($k%2 == 0) ? $v.$names[$i] : $v;
+				$buffer[] = ($k%2 == 0) ? $v : $v.$name;
+				$buffer[] = ($k%2 == 0) ? $v.$name : $v;
 			}
 
 			$return = $buffer;
