@@ -469,6 +469,7 @@ class DataContainer extends Backend
 	protected function combiner($names)
 	{
 		$return = array('');
+		$names = array_values($names);
 
 		for ($i=0; $i<count($names); $i++)
 		{
