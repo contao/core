@@ -74,10 +74,10 @@ class Model_QueryBuilder
 
 						foreach (array_keys($objRelated->getFields()) as $strField)
 						{
-							$arrFields[] = $arrConfig['table'] . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
+							$arrFields[] = 'joined.' . $strField . ' AS ' . $strKey . '__' . $strField;
 						}
 
-						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " ON " . $arrOptions['table'] . "." . $strKey . "=" . $arrConfig['table'] . ".id";
+						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " joined ON " . $arrOptions['table'] . "." . $strKey . "=joined.id";
 					}
 				}
 			}

@@ -135,7 +135,7 @@ class FileSelector extends \Widget
 			// Show all files to admins
 			if ($this->User->isAdmin)
 			{
-				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
+				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
 										  ->execute(0);
 
 				while ($objFile->next())
@@ -224,7 +224,7 @@ class FileSelector extends \Widget
 		$tree = '';
 		$level = $level * 20;
 
-		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
+		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
 								  ->execute($id);
 
 		while ($objFile->next())
@@ -278,7 +278,7 @@ class FileSelector extends \Widget
 		// Check whether there are child records
 		if (!$blnNoRecursion)
 		{
-			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY sorting")
+			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
 									   ->execute($id);
 
 			if ($objNodes->numRows)

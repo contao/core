@@ -235,9 +235,9 @@ class ContentGallery extends \ContentElement
 			$images = array_slice($images, 0, $this->numberOfItems);
 		}
 
+		$offset = 0;
 		$total = count($images);
 		$limit = $total;
-		$offset = 0;
 
 		// Pagination
 		if ($this->perPage > 0)

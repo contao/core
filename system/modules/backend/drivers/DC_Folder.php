@@ -281,7 +281,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 		}
 
-		// Check for "create new" button
+		// Check for the "create new" button
 		$clsNew = 'header_new_folder';
 		$lblNew = $GLOBALS['TL_LANG'][$this->strTable]['new'][0];
 		$ttlNew = $GLOBALS['TL_LANG'][$this->strTable]['new'][1];
@@ -297,7 +297,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		$imagePasteInto = $this->generateImage('pasteinto.gif', $GLOBALS['TL_LANG'][$this->strTable]['pasteinto'][0], 'class="blink"');
 
-		// Build tree
+		// Build the tree
 		$return = '
 <div id="tl_buttons">'.(($this->Input->get('act') == 'select') ? '
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>' : '') . (($this->Input->get('act') != 'select') ? '
@@ -321,7 +321,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 </div>';
 
-		// Close form
+		// Close the form
 		if ($this->Input->get('act') == 'select')
 		{
 			$return .= '
@@ -413,8 +413,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		$this->import('Files');
 
+		// Move the file
 		$destination = str_replace(dirname($this->intId), $strFolder, $this->intId);
 		$this->Files->rename($this->intId, $destination);
+
+		// Find the corresponding DB entries
+		$objFile = \FilesModel::findBy('path', $this->intId);
+
+		// Set the parent ID
+		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$objFile->pid = 0;
+		}
+		else
+		{
+			$objFolder = \FilesModel::findBy('path', $strFolder);
+			$objFile->pid = $objFolder->id;
+		}
+
+		// Update the database
+		$objFile->path = $destination;
+		$objFile->save();
+
+		// Add a log entry
 		$this->log('File or folder "'.$this->intId.'" has been moved to "'.$destination.'"', 'DC_Folder cut()', TL_FILES);
 
 		if (!$blnDoNotRedirect)
@@ -512,6 +533,29 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 			$destination = $new;
 			$this->Files->mkdir($destination);
+			$strFolder = dirname($destination);
+
+			// Find the corresponding DB entries
+			$objFolder = \FilesModel::findBy('path', $source);
+			$objNewFolder = clone $objFolder;
+
+			// Set the parent ID
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objNewFolder->pid = 0;
+			}
+			else
+			{
+				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$objNewFolder->pid = $objFolder->id;
+			}
+
+			// Update the database
+			$objNewFolder->tstamp = time();
+			$objNewFolder->path = $destination;
+			$objNewFolder->save();
+
+			// Files
 			$files = scan(TL_ROOT . '/' . $source);
 
 			foreach ($files as $file)
@@ -523,6 +567,16 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
+
+					// Find the corresponding DB entries
+					$objFile = \FilesModel::findBy('path', $source . '/' . $file);
+					$objNewFile = clone $objFile;
+
+					// Update the database
+					$objNewFile->pid = $objNewFolder->id;
+					$objNewFile->tstamp = time();
+					$objNewFile->path = $destination . '/' . $file;
+					$objNewFile->save();
 				}
 			}
 		}
@@ -536,17 +590,32 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			while (file_exists(TL_ROOT . '/' . $new) && $count < 12)
 			{
 				$pif = pathinfo($destination);
-
-				$new = str_replace
-				(
-					'.' . $pif['extension'],
-					'_' . $count++ . '.' . $pif['extension'],
-					$destination
-				);
+				$new = str_replace('.' . $pif['extension'], '_' . $count++ . '.' . $pif['extension'], $destination);
 			}
 
 			$destination = $new;
 			$this->Files->copy($source, $destination);
+			$strFolder = dirname($destination);
+
+			// Find the corresponding DB entries
+			$objFile = \FilesModel::findBy('path', $source);
+			$objNewFile = clone $objFile;
+
+			// Set the parent ID
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$objNewFile->pid = 0;
+			}
+			else
+			{
+				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$objNewFile->pid = $objFolder->id;
+			}
+
+			// Update the database
+			$objNewFile->tstamp = time();
+			$objNewFile->path = $destination;
+			$objNewFile->save();
 		}
 
 		// Do not reload on recursive calls
@@ -644,16 +713,28 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				else
 				{
 					$this->Files->delete($source . '/' . $file);
+
+					// Find the corresponding DB entries
+					$objFile = \FilesModel::findBy('path', $source . '/' . $file);
+					$objFile->delete();
 				}
 			}
 
 			$this->Files->rmdir($source);
+
+			// Find the corresponding DB entries
+			$objFile = \FilesModel::findBy('path', $source);
+			$objFile->delete();
 		}
 
 		// Delete file
 		else
 		{
 			$this->Files->delete($source);
+
+			// Find the corresponding DB entries
+			$objFile = \FilesModel::findBy('path', $source);
+			$objFile->delete();
 		}
 
 		// Do not reload on recursive calls
@@ -741,6 +822,32 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		{
 			$arrUploaded = $objUploader->uploadTo($strFolder, 'files');
 
+			// Get the parent ID
+			if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$pid = 0;
+			}
+			else
+			{
+				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$pid = $objFolder->id;
+			}
+
+			// Generate the DB entries
+			foreach ($arrUploaded as $strFile)
+			{
+				$objFile = new \FilesModel();
+
+				$objFile->pid    = $pid;
+				$objFile->tstamp = time();
+				$objFile->type   = 'file';
+				$objFile->path   = $strFile;
+				$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
+				$objFile->name   = basename($strFile);
+
+				$objFile->save();
+			}
+
 			// HOOK: post upload callback
 			if (isset($GLOBALS['TL_HOOKS']['postUpload']) && is_array($GLOBALS['TL_HOOKS']['postUpload']))
 			{
@@ -806,6 +913,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function edit()
 	{
+# FIXME: DB updates
 		$return = '';
 		$this->noReload = false;
 		$this->isValid($this->intId);
@@ -989,6 +1097,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function editAll()
 	{
+#FIXME: DB entries
 		$return = '';
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
@@ -1227,14 +1336,19 @@ window.addEvent(\'domready\', function() {
 
 		$strContent = $objFile->getContent();
 
-		// Process request
+		// Process the request
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_files')
 		{
-			// Save file
+			// Save the file
 			if (md5($strContent) != md5($this->Input->postRaw('source')))
 			{
 				$objFile->write($this->Input->postRaw('source'));
 				$objFile->close();
+
+				// Update the md5 hash
+				$objMeta = \FilesModel::findBy('path', $objFile->value);
+				$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
+				$objMeta->save();
 			}
 
 			if ($this->Input->post('saveNclose'))
@@ -1379,6 +1493,7 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
+#FIXME: update DB
 		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
 		{
 			return;

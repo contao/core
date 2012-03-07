@@ -80,6 +80,15 @@ abstract class Model extends \System
 
 
 	/**
+	 * Unset the primary key if an object is cloned
+	 */
+	public function __clone()
+	{
+		unset($this->arrData[static::$strPk]);
+	}
+
+
+	/**
 	 * Set an object property
 	 * @param string
 	 * @param mixed

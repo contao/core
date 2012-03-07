@@ -310,10 +310,8 @@ class Automator extends \Backend
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$intSorting += 128;
-
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, sorting, name, type, path, hash) VALUES (?, ?, ?, ?, 'folder', ?, '')")
-								 ->execute($pid, time(), $intSorting, basename($strFolder), $strFolder)
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, '')")
+								 ->execute($pid, time(), basename($strFolder), $strFolder)
 								 ->insertId;
 
 			$this->scanUploadFolder($strFolder, $id);
@@ -337,16 +335,12 @@ class Automator extends \Backend
 					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
 				}
 			}
-			else
-			{
-				$intSorting += 128;
 
-				$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, sorting, name, type, path, hash) VALUES (?, ?, ?, ?, 'file', ?, ?)")
-									 ->execute($pid, time(), $intSorting, basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
-									 ->insertId;
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'file', ?, ?)")
+								 ->execute($pid, time(), basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
+								 ->insertId;
 
-				$arrMapper[basename($strFile)] = $id;
-			}
+			$arrMapper[basename($strFile)] = $id;
 		}
 
 		// Insert the meta data AFTER the file entries have been created
