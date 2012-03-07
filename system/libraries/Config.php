@@ -245,6 +245,12 @@ class Config
 
 		// Then move the file to its final destination
 		$this->Files->rename('system/tmp/' . $strTemp, 'system/config/localconfig.php');
+
+		// Reset the Zend Optimizer+ cache (unfortunately no API to delete just a single file)
+		if (function_exists('accelerator_reset'))
+		{
+			accelerator_reset();
+		}
 	}
 
 

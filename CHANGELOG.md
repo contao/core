@@ -5,6 +5,9 @@ Version 2.11.1 (2012-03-08)
 ---------------------------
 
 ### Fixed
+Purge the Zend Optimizer+ cache after writing the local configuration file.
+
+### Fixed
 The IDNA convert class did not run under PHP 5.2 (see #4044).
 
 ### Fixed
