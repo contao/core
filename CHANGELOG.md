@@ -5,6 +5,9 @@ Version 2.11.1 (2012-03-08)
 ---------------------------
 
 ### Fixed
+Store the date added when creating an admin user upon installation (see #4054).
+
+### Fixed
 Purge the Zend Optimizer+ cache after writing the local configuration file.
 
 ### Fixed
