@@ -126,7 +126,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name'
+		'default'                     => 'name,meta'
 	),
 
 	// Fields
@@ -170,7 +170,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		'meta' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
-			'inputType'               => 'textare',
+			'inputType'               => 'textarea',
 			'eval'                    => array('decodeEntities'=>true),
 			'sql'                     => "blob NULL"
 		)

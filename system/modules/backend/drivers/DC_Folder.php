@@ -951,6 +951,10 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$class = 'tl_tbox';
 			$blnIsFirst = true;
 
+			// Get the DB entry
+			$objFile = \FilesModel::findBy('path', $this->intId);
+			$this->objActiveRecord = $objFile;
+
 			foreach ($boxes as $k=>$v)
 			{
 				$return .= '
@@ -962,31 +966,38 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->strField = $vv;
 					$this->strInputName = $vv;
 
-					// Load current value
-					$pathinfo = pathinfo($this->intId);
-					$this->strPath = $pathinfo['dirname'];
-
-					if (is_dir(TL_ROOT . '/' . $this->intId))
+					// Load the current value
+					if ($vv == 'name')
 					{
-						$this->strExtension = '';
-						$this->varValue = basename($pathinfo['basename']);
+						$pathinfo = pathinfo($this->intId);
+						$this->strPath = $pathinfo['dirname'];
+
+						if (is_dir(TL_ROOT . '/' . $this->intId))
+						{
+							$this->strExtension = '';
+							$this->varValue = basename($pathinfo['basename']);
+						}
+						else
+						{
+							$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
+							$this->varValue = basename($pathinfo['basename'], $this->strExtension);
+						}
+
+						// Fix Unix system files like .htaccess
+						if (strncmp($this->varValue, '.', 1) === 0)
+						{
+							$this->strExtension = '';
+						}
+
+						// Clear the current value if it is a new folder
+						if ($this->Input->post('FORM_SUBMIT') != 'tl_files' && $this->Input->post('FORM_SUBMIT') != 'tl_templates' && $this->varValue == '__new__')
+						{
+							$this->varValue = '';
+						}
 					}
 					else
 					{
-						$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
-						$this->varValue = basename($pathinfo['basename'], $this->strExtension);
-					}
-
-					// Fix Unix system files like .htaccess
-					if (strncmp($this->varValue, '.', 1) === 0)
-					{
-						$this->strExtension = '';
-					}
-
-					// Clear the current value if it is a new folder
-					if ($this->Input->post('FORM_SUBMIT') != 'tl_files' && $this->Input->post('FORM_SUBMIT') != 'tl_templates' && $this->varValue == '__new__')
-					{
-						$this->varValue = '';
+						$this->varValue = $objFile->$vv;
 					}
 
 					// Autofocus the first field
@@ -1069,7 +1080,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 				$this->redirect($this->getReferer());
 			}
 
-			$this->redirect($this->addToUrl('id='.$this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension));
+			$this->redirect($this->addToUrl('id='.$this->urlEncode($this->objActiveRecord->path)));
 		}
 
 		// Set the focus if there is an error
@@ -1489,81 +1500,183 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
+		if ($this->Input->post('FORM_SUBMIT') != $this->strTable)
 		{
 			return;
 		}
 
-		$this->import('Files');
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
-		$varValue = utf8_romanize($varValue);
 
-		// Call save_callback
-		if (is_array($arrData['save_callback']))
+		// Files
+		if ($this->strField == 'name')
 		{
-			foreach ($arrData['save_callback'] as $callback)
+			if (!file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
 			{
-				$this->import($callback[0]);
-				$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				return;
 			}
-		}
 
-		$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
-		
-		// Get the parent ID
-		if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
-		{
-			$pid = 0;
+			$this->import('Files');
+			$varValue = utf8_romanize($varValue);
+
+			// Trigger the save_callback
+			if (is_array($arrData['save_callback']))
+			{
+				foreach ($arrData['save_callback'] as $callback)
+				{
+					$this->import($callback[0]);
+					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				}
+			}
+
+			$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+
+			// Get the parent ID
+			if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
+			{
+				$pid = 0;
+			}
+			else
+			{
+				$objFolder = \FilesModel::findBy('path', $this->strPath);
+				$pid = $objFolder->id;
+			}
+
+			// New folders
+			if (stristr($this->intId, '__new__') == true)
+			{
+				// Create the DB entry
+				$objFile = new \FilesModel();
+				$objFile->pid    = $pid;
+				$objFile->tstamp = time();
+				$objFile->type   = 'folder';
+				$objFile->path   = $this->strPath . '/' . $varValue;
+				$objFile->name   = $varValue;
+				$objFile->save();
+				$this->objActiveRecord = $objFile;
+
+				// Add a log entry
+				$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
+			}
+			else
+			{
+				// Find the corresponding DB entry
+				$objFile = \FilesModel::findBy('path', $this->strPath . '/' . $this->varValue . $this->strExtension);
+
+				// Update the data
+				$objFile->pid  = $pid;
+				$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
+				$objFile->name = $varValue . $this->strExtension;
+				$objFile->save();
+				$this->objActiveRecord = $objFile;
+
+				// Add a log entry
+				$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
+			}
+
+			// Set the new value so the input field can show it
+			if ($this->Input->get('act') == 'editAll')
+			{
+				$session = $this->Session->getData();
+
+				if (($index = array_search($this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension, $session['CURRENT']['IDS'])) !== false)
+				{
+					$session['CURRENT']['IDS'][$index] = $this->urlEncode($this->strPath.'/'.$varValue).$this->strExtension;
+					$this->Session->setData($session);
+				}
+			}
+
+			$this->varValue = $varValue;
 		}
 		else
 		{
-			$objFolder = \FilesModel::findBy('path', $this->strPath);
-			$pid = $objFolder->id;
-		}
-
-		// New folders
-		if (stristr($this->intId, '__new__') == true)
-		{
-			// Create the DB entry
-			$objFile = new \FilesModel();
-			$objFile->pid    = $pid;
-			$objFile->tstamp = time();
-			$objFile->type   = 'folder';
-			$objFile->path   = $this->strPath . '/' . $varValue;
-			$objFile->name   = $varValue;
-			$objFile->save();
-
-			// Add a log entry
-			$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
-		}
-		else
-		{
-			// Find the corresponding DB entry
-			$objFile = \FilesModel::findBy('path', $this->strPath . '/' . $this->varValue . $this->strExtension);
-
-			// Update the data
-			$objFile->pid  = $pid;
-			$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
-			$objFile->name = $varValue . $this->strExtension;
-			$objFile->save();
-
-			// Add a log entry
-			$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
-		}
-
-		// Set the new value so the input field can show it
-		if ($this->Input->get('act') == 'editAll')
-		{
-			$session = $this->Session->getData();
-
-			if (($index = array_search($this->urlEncode($this->strPath.'/'.$this->varValue).$this->strExtension, $session['CURRENT']['IDS'])) !== false)
+			// Convert date formats into timestamps
+			if ($varValue != '' && in_array($arrData['eval']['rgxp'], array('date', 'time', 'datim')))
 			{
-				$session['CURRENT']['IDS'][$index] = $this->urlEncode($this->strPath.'/'.$varValue).$this->strExtension;
-				$this->Session->setData($session);
+				$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$arrData['eval']['rgxp'] . 'Format']);
+				$varValue = $objDate->tstamp;
+			}
+
+			// Make sure unique fields are unique
+			if ($varValue != '' && $arrData['eval']['unique'])
+			{
+				$objUnique = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE " . $this->strField . "=? AND id!=?")
+											->execute($varValue, $this->objActiveRecord->id);
+
+				if ($objUnique->numRows)
+				{
+					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (($arrData['label'][0] != '') ? $arrData['label'][0] : $this->strField)));
+				}
+			}
+
+			// Handle multi-select fields in "override all" mode
+			if ($this->Input->get('act') == 'overrideAll' && ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard') && $arrData['eval']['multiple'])
+			{
+				if ($this->objActiveRecord !== null)
+				{
+					$new = deserialize($varValue, true);
+					$old = deserialize($this->objActiveRecord->{$this->strField}, true);
+
+					switch ($this->Input->post($this->strInputName . '_update'))
+					{
+						case 'add':
+							$varValue = array_values(array_unique(array_merge($old, $new)));
+							break;
+
+						case 'remove':
+							$varValue = array_values(array_diff($old, $new));
+							break;
+
+						case 'replace':
+							$varValue = $new;
+							break;
+					}
+
+					if (!is_array($varValue) || empty($varValue))
+					{
+						$varValue = '';
+					}
+					elseif (isset($arrData['eval']['csv']))
+					{
+						$varValue = implode($arrData['eval']['csv'], $varValue); // see #2890
+					}
+					else
+					{
+						$varValue = serialize($varValue);
+					}
+				}
+			}
+
+			// Convert arrays (see #2890)
+			if ($arrData['eval']['multiple'] && isset($arrData['eval']['csv']))
+			{
+				$varValue = implode($arrData['eval']['csv'], deserialize($varValue, true));
+			}
+
+			// Trigger the save_callback
+			if (is_array($arrData['save_callback']))
+			{
+				foreach ($arrData['save_callback'] as $callback)
+				{
+					$this->import($callback[0]);
+					$varValue = $this->$callback[0]->$callback[1]($varValue, $this);
+				}
+			}
+
+			// Save the value if there was no error
+			if (($varValue != '' || !$arrData['eval']['doNotSaveEmpty']) && ($this->varValue != $varValue || $arrData['eval']['alwaysSave']))
+			{
+				// If the field is a fallback field, empty all other columns
+				if ($arrData['eval']['fallback'] && $varValue != '')
+				{
+					$this->Database->execute("UPDATE " . $this->strTable . " SET " . $this->strField . "=''");
+				}
+
+				$this->objActiveRecord->{$this->strField} = $varValue;
+				$this->objActiveRecord->save();
+
+				$this->varValue = deserialize($varValue);
 			}
 		}
-
-		$this->varValue = $varValue;
 	}
 
 
