@@ -837,14 +837,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			foreach ($arrUploaded as $strFile)
 			{
 				$objFile = new \FilesModel();
-
 				$objFile->pid    = $pid;
 				$objFile->tstamp = time();
 				$objFile->type   = 'file';
 				$objFile->path   = $strFile;
 				$objFile->hash   = md5_file(TL_ROOT . '/' . $strFile);
 				$objFile->name   = basename($strFile);
-
 				$objFile->save();
 			}
 
@@ -913,7 +911,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function edit()
 	{
-# FIXME: DB updates
 		$return = '';
 		$this->noReload = false;
 		$this->isValid($this->intId);
@@ -1097,7 +1094,6 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function editAll()
 	{
-#FIXME: DB entries
 		$return = '';
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['config']['notEditable'])
@@ -1493,7 +1489,6 @@ window.addEvent(\'domready\', function() {
 	 */
 	protected function save($varValue)
 	{
-#FIXME: update DB
 		if ($this->Input->post('FORM_SUBMIT') != $this->strTable || !file_exists(TL_ROOT . '/' . $this->strPath . '/' . $this->varValue . $this->strExtension) || !$this->isMounted($this->strPath . '/' . $this->varValue . $this->strExtension) || $this->varValue == $varValue)
 		{
 			return;
@@ -1514,14 +1509,45 @@ window.addEvent(\'domready\', function() {
 		}
 
 		$this->Files->rename($this->strPath . '/' . $this->varValue . $this->strExtension, $this->strPath . '/' . $varValue . $this->strExtension);
+		
+		// Get the parent ID
+		if ($this->strPath == $GLOBALS['TL_CONFIG']['uploadPath'])
+		{
+			$pid = 0;
+		}
+		else
+		{
+			$objFolder = \FilesModel::findBy('path', $this->strPath);
+			$pid = $objFolder->id;
+		}
 
-		// Add a log entry
+		// New folders
 		if (stristr($this->intId, '__new__') == true)
 		{
+			// Create the DB entry
+			$objFile = new \FilesModel();
+			$objFile->pid    = $pid;
+			$objFile->tstamp = time();
+			$objFile->type   = 'folder';
+			$objFile->path   = $this->strPath . '/' . $varValue;
+			$objFile->name   = $varValue;
+			$objFile->save();
+
+			// Add a log entry
 			$this->log('Folder "'.$this->strPath.'/'.$varValue.$this->strExtension.'" has been created', 'DC_Folder save()', TL_FILES);
 		}
 		else
 		{
+			// Find the corresponding DB entry
+			$objFile = \FilesModel::findBy('path', $this->strPath . '/' . $this->varValue . $this->strExtension);
+
+			// Update the data
+			$objFile->pid  = $pid;
+			$objFile->path = $this->strPath . '/' . $varValue . $this->strExtension;
+			$objFile->name = $varValue . $this->strExtension;
+			$objFile->save();
+
+			// Add a log entry
 			$this->log('File or folder "'.$this->strPath.'/'.$this->varValue.$this->strExtension.'" has been renamed to "'.$this->strPath.'/'.$varValue.$this->strExtension.'"', 'DC_Folder save()', TL_FILES);
 		}
 
