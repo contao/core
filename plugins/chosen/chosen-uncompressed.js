@@ -885,7 +885,7 @@ var Chosen = new Class({
 				'styles': style_block
 			});
 			div.set('text', this.search_field.get('value'));
-			document.body.grab(div);
+			$(document.body).grab(div);
 			w = div.getCoordinates().width + 25;
 			div.destroy();
 			if (w > this.f_width - 10) {
