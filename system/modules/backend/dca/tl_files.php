@@ -140,10 +140,6 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		'sorting' => array
-		(
-			'sql'                     => "int(10) unsigned NOT NULL default '0'"
-		),
 		'tstamp' => array
 		(
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"

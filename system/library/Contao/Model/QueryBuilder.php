@@ -62,6 +62,7 @@ class Model_QueryBuilder
 		{
 			$arrJoins = array();
 			$arrFields = array($arrOptions['table'] . ".*");
+			$intCount = 0;
 
 			foreach ($objBase->getRelations() as $strKey=>$arrConfig)
 			{
@@ -70,14 +71,15 @@ class Model_QueryBuilder
 				{
 					if ($arrConfig['type'] == 'hasOne' || $arrConfig['type'] == 'belongsTo')
 					{
+						++$intCount;
 						$objRelated = new \DcaExtractor($arrConfig['table']);
 
 						foreach (array_keys($objRelated->getFields()) as $strField)
 						{
-							$arrFields[] = 'joined.' . $strField . ' AS ' . $strKey . '__' . $strField;
+							$arrFields[] = 'j' . $intCount . '.' . $strField . ' AS ' . $strKey . '__' . $strField;
 						}
 
-						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " joined ON " . $arrOptions['table'] . "." . $strKey . "=joined.id";
+						$arrJoins[] = " LEFT JOIN " . $arrConfig['table'] . " j$intCount ON " . $arrOptions['table'] . "." . $strKey . "=j$intCount.id";
 					}
 				}
 			}
