@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.2 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+The IDNA convert class did not run under PHP 5.2 (see #4044).
+
+
 Version 2.11.1 (2012-03-08)
 ---------------------------
 

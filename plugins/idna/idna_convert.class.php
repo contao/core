@@ -973,7 +973,7 @@ class idna_convert
         }
         // PATCH: support PHP 5.2 (see #4044)
         //return strlen((binary) $string);
-        return version_compare(PHP_VERSION, '5.3.0', '>=') ? strlen((binary) $string) : strlen(unpack('c*', $string));
+        return version_compare(PHP_VERSION, '5.3.0', '>=') ? strlen((binary) $string) : count(unpack('c*', $string));
     }
 
     /**
