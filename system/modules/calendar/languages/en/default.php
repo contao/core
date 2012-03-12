@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['MSC']['cal_weeks']      = 'This event is repeated every %s.
 $GLOBALS['TL_LANG']['MSC']['cal_months']     = 'This event is repeated every %s. month';
 $GLOBALS['TL_LANG']['MSC']['cal_years']      = 'This event is repeated every %s. year';
 $GLOBALS['TL_LANG']['MSC']['cal_until']      = 'until %s';
-
-?>

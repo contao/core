@@ -675,7 +675,7 @@ abstract class Controller extends \System
 		$langsNative = array();
 
 		$this->loadLanguageFile('languages');
-		include(TL_ROOT . '/system/config/languages.php');
+		include TL_ROOT . '/system/config/languages.php';
 
 		foreach ($languages as $strKey=>$strName)
 		{
@@ -748,7 +748,7 @@ abstract class Controller extends \System
 		$arrAux = array();
 
 		$this->loadLanguageFile('countries');
-		include(TL_ROOT . '/system/config/countries.php');
+		include TL_ROOT . '/system/config/countries.php';
 
 		// HOOK: add custom logic
 		if (isset($GLOBALS['TL_HOOKS']['getCountries']) && is_array($GLOBALS['TL_HOOKS']['getCountries']))
@@ -785,7 +785,7 @@ abstract class Controller extends \System
 		$arrReturn = array();
 		$timezones = array();
 
-		require(TL_ROOT . '/system/config/timezones.php');
+		require TL_ROOT . '/system/config/timezones.php';
 
 		foreach ($timezones as $strGroup=>$arrTimezones)
 		{
@@ -1279,8 +1279,8 @@ abstract class Controller extends \System
 		$l['w_page'] = 'page';
 
 		// Include library
-		require_once(TL_ROOT . '/system/config/tcpdf.php');
-		require_once(TL_ROOT . '/system/library/TCPDF/tcpdf.php');
+		require_once TL_ROOT . '/system/config/tcpdf.php';
+		require_once TL_ROOT . '/system/library/TCPDF/tcpdf.php';
 
 		// Create new PDF document
 		$pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
@@ -2292,7 +2292,7 @@ abstract class Controller extends \System
 					if (preg_match('/\.(php|tpl|xhtml|html5)$/', $strFile) && file_exists(TL_ROOT . '/templates/' . $strFile))
 					{
 						ob_start();
-						include(TL_ROOT . '/templates/' . $strFile);
+						include TL_ROOT . '/templates/' . $strFile;
 						$arrCache[$strTag] = ob_get_contents();
 						ob_end_clean();
 					}
@@ -2688,7 +2688,7 @@ abstract class Controller extends \System
 		{
 			// Generate the cache file
 			$objCacheFile = new \File('system/cache/dca/' . $strName . '.php');
-			$objCacheFile->truncate();
+			$objCacheFile->write('<?php' . "\n");
 
 			// Parse all module folders
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -2697,7 +2697,7 @@ abstract class Controller extends \System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile));
+					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
 					include $strFile;
 				}
 			}
@@ -3247,7 +3247,7 @@ abstract class Controller extends \System
 		}
 
 		// Make sure the dcaconfig.php is loaded
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include TL_ROOT . '/system/config/dcaconfig.php';
 
 		// Add the root files
 		if (is_array($GLOBALS['TL_CONFIG']['rootFiles']))
@@ -3490,5 +3490,3 @@ abstract class Controller extends \System
 		}
 	}
 }
-
-?>

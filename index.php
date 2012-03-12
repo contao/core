@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require('system/initialize.php');
+require 'system/initialize.php';
 
 
 /**
@@ -325,7 +325,7 @@ class Index extends Frontend
 
 		// Include the file
 		ob_start();
-		require_once($strCacheFile);
+		require_once $strCacheFile;
 
 		// The file has expired
 		if ($expire < time())
@@ -398,5 +398,3 @@ class Index extends Frontend
  */
 $objIndex = new Index();
 $objIndex->run();
-
-?>

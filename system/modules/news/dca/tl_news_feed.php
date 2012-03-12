@@ -474,5 +474,3 @@ class tl_news_feed extends Backend
 		return $varValue;
 	}
 }
-
-?>

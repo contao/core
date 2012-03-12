@@ -98,5 +98,3 @@ class tl_module_faq extends Backend
 		return $arrModules;
 	}
 }
-
-?>

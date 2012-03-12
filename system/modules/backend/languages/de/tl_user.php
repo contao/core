@@ -100,5 +100,3 @@ $GLOBALS['TL_LANG']['tl_user']['copy']   = array('Benutzer duplizieren', 'Benutz
 $GLOBALS['TL_LANG']['tl_user']['delete'] = array('Benutzer löschen', 'Benutzer ID %s löschen');
 $GLOBALS['TL_LANG']['tl_user']['toggle'] = array('Benutzer aktivieren/deaktivieren', 'Benutzer ID %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_user']['su']     = array('Benutzer wechseln', 'Zu Benutzer ID %s wechseln');
-
-?>

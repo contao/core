@@ -39,5 +39,3 @@ $GLOBALS['TL_LANG']['tl_user']['newsletterp'] = array('Verteilerrechte', 'Hier k
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['newsletter_legend'] = 'Newsletterrechte';
-
-?>

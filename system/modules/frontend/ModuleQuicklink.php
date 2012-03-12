@@ -128,5 +128,3 @@ class ModuleQuicklink extends \Module
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}
 }
-
-?>

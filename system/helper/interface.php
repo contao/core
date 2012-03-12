@@ -83,5 +83,3 @@ interface executable
  * @package    Controller
  */
 interface uploadable {}
-
-?>

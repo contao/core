@@ -101,5 +101,3 @@ class CommentsCollection extends \Model_Collection
 		return static::countBy($arrColumns, array($strSource, $intParent));
 	}
 }
-
-?>

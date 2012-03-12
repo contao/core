@@ -71,5 +71,3 @@ class StyleSheetCollection extends \Model_Collection
 		return new static($objResult);
 	}
 }
-
-?>

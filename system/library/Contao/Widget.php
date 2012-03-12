@@ -419,7 +419,7 @@ abstract class Widget extends Controller
 		$this->addAttributes($arrAttributes);
 
 		ob_start();
-		include($this->getTemplate($this->strTemplate, $this->strFormat));
+		include $this->getTemplate($this->strTemplate, $this->strFormat);
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -912,5 +912,3 @@ abstract class Widget extends Controller
 		return $this->optionSelected($arrOption['value'], $this->varValue);
 	}
 }
-
-?>

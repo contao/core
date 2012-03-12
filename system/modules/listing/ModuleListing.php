@@ -459,5 +459,3 @@ class ModuleListing extends \Module
 		return $value;
 	}
 }
-
-?>

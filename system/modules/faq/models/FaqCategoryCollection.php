@@ -52,5 +52,3 @@ class FaqCategoryCollection extends \Model_Collection
 	protected static $strTable = 'tl_faq_category';
 
 }
-
-?>

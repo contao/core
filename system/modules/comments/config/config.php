@@ -52,5 +52,3 @@ array_insert($GLOBALS['BE_MOD']['content'], 5, array
 		'stylesheet' => 'system/modules/comments/html/style.css'
 	)
 ));
-
-?>

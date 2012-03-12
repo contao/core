@@ -173,5 +173,3 @@ $GLOBALS['TL_LANG']['LNG']['yo'] = 'Yoruba';
 $GLOBALS['TL_LANG']['LNG']['za'] = 'Zhuang';
 $GLOBALS['TL_LANG']['LNG']['zh'] = 'Chinesisch';
 $GLOBALS['TL_LANG']['LNG']['zu'] = 'Zulu';
-
-?>

@@ -42,5 +42,3 @@ $GLOBALS['TL_LANG']['FMD']['calendar']    = array('Calendar', 'Adds a calendar t
 $GLOBALS['TL_LANG']['FMD']['eventlist']   = array('Event list', 'Adds a list of events to the page.');
 $GLOBALS['TL_LANG']['FMD']['eventreader'] = array('Event reader', 'Shows the details of an event.');
 $GLOBALS['TL_LANG']['FMD']['eventmenu']   = array('Event list menu', 'Generates a navigation menu to browse the event list.');
-
-?>

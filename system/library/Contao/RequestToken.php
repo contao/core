@@ -128,5 +128,3 @@ class RequestToken extends \System
 		return ($strToken != '' && $this->strToken != '' && $strToken == $this->strToken);
 	}
 }
-
-?>

@@ -62,5 +62,3 @@ $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
 	array('Rich Text Editor', 'For more information about how to configure the syntax highlighter please visit <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
 );
-
-?>

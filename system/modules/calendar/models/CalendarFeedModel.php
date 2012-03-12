@@ -63,5 +63,3 @@ class CalendarFeedModel extends \Model
 		return static::findBy(array("$t.calendars LIKE '%\"" . intval($intId) . "\"%'"), null);
 	}
 }
-
-?>

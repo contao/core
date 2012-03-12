@@ -194,5 +194,3 @@ class ModuleNewsletterReader extends \Module
 		$this->Template->enclosure = $arrEnclosures;
 	}
 }
-
-?>

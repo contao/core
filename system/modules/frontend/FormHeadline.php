@@ -81,5 +81,3 @@ class FormHeadline extends \Widget
 		}
 	}
 }
-
-?>

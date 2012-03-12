@@ -47,5 +47,3 @@ $GLOBALS['TL_LANG']['tl_settings']['repository_wsdl'] = array('Extension reposit
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_settings']['repository_legend'] = 'Extension repository';
-
-?>

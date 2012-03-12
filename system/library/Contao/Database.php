@@ -382,9 +382,7 @@ abstract class Database
 	}
 
 
-	/**
-	 * Abstract database driver methods
-	 */
+	// Abstract database driver methods
 	abstract protected function connect();
 	abstract protected function disconnect();
 	abstract protected function get_error();
@@ -400,5 +398,3 @@ abstract class Database
 	abstract protected function get_next_id($strTable);
 	abstract protected function createStatement($resConnection, $blnDisableAutocommit);
 }
-
-?>

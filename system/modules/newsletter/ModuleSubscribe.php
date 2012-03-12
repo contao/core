@@ -307,5 +307,3 @@ class ModuleSubscribe extends \Module
 		$this->reload();
 	}
 }
-
-?>

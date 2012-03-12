@@ -432,5 +432,3 @@ abstract class Model_Collection extends \System
 		}
 	}
 }
-
-?>

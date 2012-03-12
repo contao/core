@@ -86,5 +86,3 @@ class ContentAlias extends \ContentElement
 		return;
 	}
 }
-
-?>

@@ -211,5 +211,3 @@ class KeyValueWizard extends \Widget
   </table>';
 	}
 }
-
-?>

@@ -120,5 +120,3 @@ class ContentTeaser extends \ContentElement
 		$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 	}
 }
-
-?>

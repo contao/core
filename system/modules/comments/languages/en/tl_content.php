@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['tl_content']['com_template']       = array('Comments templa
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_content']['comment_legend']  = 'Comment settings';
-
-?>

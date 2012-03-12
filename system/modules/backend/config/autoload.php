@@ -110,5 +110,3 @@ TemplateLoader::addFiles(array
 	'be_widget_rdo'    => 'system/modules/backend/templates',
 	'be_wildcard'      => 'system/modules/backend/templates',
 ));
-
-?>

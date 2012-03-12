@@ -332,5 +332,3 @@ $GLOBALS['TL_CONFIG']['useAutoItem']          = false;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeIp']   = true;
 $GLOBALS['TL_CONFIG']['privacyAnonymizeGA']   = true;
 $GLOBALS['TL_CONFIG']['bypassCache']          = false;
-
-?>

@@ -84,5 +84,3 @@ class MemberModel extends \Model
 		return static::findBy($arrColumns, array($strEmail, $strUsername));
 	}
 }
-
-?>

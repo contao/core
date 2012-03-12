@@ -71,5 +71,3 @@ class FormModel extends \Model
 		}
 	}
 }
-
-?>

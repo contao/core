@@ -531,5 +531,3 @@ abstract class Events extends \Module
 		}
 	}
 }
-
-?>

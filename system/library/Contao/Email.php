@@ -554,5 +554,3 @@ class Email extends \System
 		return $arrReturn;
 	}
 }
-
-?>

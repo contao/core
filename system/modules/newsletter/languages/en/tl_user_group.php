@@ -32,5 +32,3 @@
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user_group']['newsletter_legend'] = 'Newsletter permissions';
-
-?>

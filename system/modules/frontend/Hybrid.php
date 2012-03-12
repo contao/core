@@ -213,5 +213,3 @@ abstract class Hybrid extends \Frontend
 	 */
 	abstract protected function compile();
 }
-
-?>

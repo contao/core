@@ -526,5 +526,3 @@ class Form extends \Hybrid
 		}
 	}
 }
-
-?>

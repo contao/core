@@ -107,5 +107,3 @@ class Database_Mssql_Result extends \Database_Result
 		}
 	}
 }
-
-?>

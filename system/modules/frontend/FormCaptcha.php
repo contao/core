@@ -204,5 +204,3 @@ class FormCaptcha extends \Widget
 		$this->strQuestion = $strEncoded;
 	}
 }
-
-?>

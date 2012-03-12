@@ -188,5 +188,3 @@ class ModuleBooknav extends \Module
 		}
 	}
 }
-
-?>

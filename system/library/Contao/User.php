@@ -593,5 +593,3 @@ abstract class User extends \System
 	 */
 	abstract protected function setUserFromDb();
 }
-
-?>

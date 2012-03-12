@@ -93,7 +93,7 @@ abstract class Backend extends \Controller
 			{
 				try
 				{
-					include(TL_ROOT . '/' . $strFile);
+					include TL_ROOT . '/' . $strFile;
 				}
 				catch (\Exception $e) {}
 
@@ -596,5 +596,3 @@ abstract class Backend extends \Controller
 		return $strFiles . $strFolders;
 	}
 }
-
-?>

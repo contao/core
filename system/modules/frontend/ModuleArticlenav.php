@@ -198,5 +198,3 @@ class ModuleArticlenav extends \Module
 		}
 	}
 }
-
-?>

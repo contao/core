@@ -5142,5 +5142,3 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		return ' (parent records: ' . implode(', ', $arrParent) . ')';
 	}
 }
-
-?>

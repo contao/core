@@ -114,5 +114,3 @@ class TextStore extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

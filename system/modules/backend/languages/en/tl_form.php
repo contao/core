@@ -72,5 +72,3 @@ $GLOBALS['TL_LANG']['tl_form']['edit']       = array('Edit form', 'Edit form ID 
 $GLOBALS['TL_LANG']['tl_form']['editheader'] = array('Edit form settings', 'Edit the settings of form ID %s');
 $GLOBALS['TL_LANG']['tl_form']['copy']       = array('Duplicate form', 'Duplicate form ID %s');
 $GLOBALS['TL_LANG']['tl_form']['delete']     = array('Delete form', 'Delete form ID %s');
-
-?>

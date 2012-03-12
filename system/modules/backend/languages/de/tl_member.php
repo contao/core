@@ -87,5 +87,3 @@ $GLOBALS['TL_LANG']['tl_member']['edit']   = array('Mitglied bearbeiten', 'Mitgl
 $GLOBALS['TL_LANG']['tl_member']['copy']   = array('Mitglied duplizieren', 'Mitglied ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_member']['delete'] = array('Mitglied löschen', 'Mitglied ID %s löschen');
 $GLOBALS['TL_LANG']['tl_member']['toggle'] = array('Mitglied aktivieren/deaktivieren', 'Mitglied ID %s aktivieren/deaktivieren');
-
-?>

@@ -114,5 +114,3 @@ class PageTree extends \Widget
   </div>';
 	}
 }
-
-?>

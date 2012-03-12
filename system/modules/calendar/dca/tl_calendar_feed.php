@@ -474,5 +474,3 @@ class tl_calendar_feed extends Backend
 		return $varValue;
 	}
 }
-
-?>

@@ -173,5 +173,3 @@ class ImageSize extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

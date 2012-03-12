@@ -35,7 +35,7 @@
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */
-require_once(dirname(dirname(__FILE__)).'/rep_base/RepositorySettings.php');
+require_once dirname(dirname(__FILE__)).'/rep_base/RepositorySettings.php';
 
 
 /**
@@ -220,5 +220,3 @@ class RepositoryBackendModule extends BackendModule
 	} // getExtensionList
 
 } // class RepositoryBackendModule
-
-?>

@@ -292,5 +292,3 @@ class FrontendTemplate extends \Template
 		return "\n" . '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
 }
-
-?>

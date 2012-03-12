@@ -97,7 +97,7 @@ class StyleSheets extends \Backend
 		$arrStyleSheets = $objStyleSheets->fetchEach('name');
 
 		// Make sure the dcaconfig.php file is loaded
-		@include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include TL_ROOT . '/system/config/dcaconfig.php';
 
 		// Delete old style sheets
 		foreach (scan(TL_ROOT . '/assets/css', true) as $file)
@@ -2059,5 +2059,3 @@ class StyleSheets extends \Backend
 		$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
 	}
 }
-
-?>

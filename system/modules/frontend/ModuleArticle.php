@@ -245,5 +245,3 @@ class ModuleArticle extends \Module
 		}
 	}
 }
-
-?>

@@ -214,5 +214,3 @@ class ModuleCustomnav extends \Module
 		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';
 	}
 }
-
-?>

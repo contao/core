@@ -201,5 +201,3 @@ class CheckBox extends \Widget
 						$arrOption['label']);
 	}
 }
-
-?>

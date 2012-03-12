@@ -87,5 +87,3 @@ $GLOBALS['TL_LANG']['tl_newsletter']['delete']     = array('Newsletter löschen'
 $GLOBALS['TL_LANG']['tl_newsletter']['editheader'] = array('Verteiler bearbeiten', 'Die Verteiler-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_newsletter']['pasteafter'] = array('In diesen Verteiler einfügen', 'Nach dem Newsletter ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_newsletter']['send']       = array('Newsletter versenden', 'Newsletter ID %s versenden');
-
-?>

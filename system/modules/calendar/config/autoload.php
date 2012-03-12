@@ -67,5 +67,3 @@ TemplateLoader::addFiles(array
 	'mod_eventmenu'      => 'system/modules/calendar/templates',
 	'mod_eventmenu_year' => 'system/modules/calendar/templates',
 ));
-
-?>

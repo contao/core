@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -132,5 +132,3 @@ class PagePicker extends Backend
  */
 $objPagePicker = new PagePicker();
 $objPagePicker->run();
-
-?>

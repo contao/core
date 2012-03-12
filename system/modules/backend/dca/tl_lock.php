@@ -64,5 +64,3 @@ $GLOBALS['TL_DCA']['tl_lock'] = array
 		)
 	)
 );
-
-?>

@@ -144,5 +144,3 @@ class Database_Postgresql_Statement extends \Database_Statement
 		return new \Database_Postgresql_Result($resResult, $strQuery);
 	}
 }
-
-?>

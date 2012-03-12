@@ -66,5 +66,3 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['cut']        = array('Move style sheet', 
 $GLOBALS['TL_LANG']['tl_style_sheet']['copy']       = array('Duplicate style sheet', 'Duplicate style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['delete']     = array('Delete style sheet', 'Delete style sheet ID %s');
 $GLOBALS['TL_LANG']['tl_style_sheet']['import']     = array('CSS import', 'Import existing CSS files');
-
-?>

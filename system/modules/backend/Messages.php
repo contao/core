@@ -138,5 +138,3 @@ class Messages extends \Backend
 		return '';
 	}
 }
-
-?>

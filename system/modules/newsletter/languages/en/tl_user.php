@@ -39,5 +39,3 @@ $GLOBALS['TL_LANG']['tl_user']['newsletterp'] = array('Channel permissions', 'He
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['newsletter_legend'] = 'Newsletter permissions';
-
-?>

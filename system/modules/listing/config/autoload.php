@@ -45,5 +45,3 @@ TemplateLoader::addFiles(array
 	'info_default' => 'system/modules/listing/templates',
 	'list_default' => 'system/modules/listing/templates',
 ));
-
-?>

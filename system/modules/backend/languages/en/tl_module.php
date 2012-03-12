@@ -157,5 +157,3 @@ $GLOBALS['TL_LANG']['tl_module']['copy']       = array('Duplicate module', 'Dupl
 $GLOBALS['TL_LANG']['tl_module']['delete']     = array('Delete module', 'Delete module ID %s');
 $GLOBALS['TL_LANG']['tl_module']['editheader'] = array('Edit theme', 'Edit the theme settings');
 $GLOBALS['TL_LANG']['tl_module']['pasteafter'] = array('Paste here', 'Paste after module ID %s');
-
-?>

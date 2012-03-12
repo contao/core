@@ -98,5 +98,3 @@ $GLOBALS['TL_DCA']['tl_search'] = array
 		)
 	)
 );
-
-?>

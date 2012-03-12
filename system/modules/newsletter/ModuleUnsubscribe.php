@@ -232,5 +232,3 @@ class ModuleUnsubscribe extends \Module
 		$this->reload();
 	}
 }
-
-?>

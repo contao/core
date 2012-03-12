@@ -544,5 +544,3 @@ class Search extends \System
 		}
 	}
 }
-
-?>

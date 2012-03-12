@@ -99,5 +99,3 @@ class ModuleNavigation extends \Module
 		$this->Template->items = $this->renderNavigation($trail[$level]);
 	}
 }
-
-?>

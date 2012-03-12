@@ -76,5 +76,3 @@ $GLOBALS['TL_LANG']['tl_task']['editSubmit']   = 'Update the task';
 $GLOBALS['TL_LANG']['tl_task']['new']    = array('New task', 'Create a new task');
 $GLOBALS['TL_LANG']['tl_task']['edit']   = array('Edit task', 'Edit task ID %s');
 $GLOBALS['TL_LANG']['tl_task']['delete'] = array('Delete task', 'Delete task ID %s');
-
-?>

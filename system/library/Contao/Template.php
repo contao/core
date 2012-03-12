@@ -247,7 +247,7 @@ abstract class Template extends Controller
 		}
 
 		ob_start();
-		include($this->getTemplate($this->strTemplate, $this->strFormat));
+		include $this->getTemplate($this->strTemplate, $this->strFormat);
 		$strBuffer = ob_get_contents();
 		ob_end_clean();
 
@@ -400,5 +400,3 @@ abstract class Template extends Controller
 		return ''; // Backwards compatibility
 	}
 }
-
-?>

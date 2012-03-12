@@ -137,5 +137,3 @@ class Database_Mssql_Statement extends \Database_Statement
 		return new \Database_Mssql_Result($resResult, $strQuery);
 	}
 }
-
-?>

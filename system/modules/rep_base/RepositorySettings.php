@@ -144,5 +144,3 @@ define('REPOSITORY_THUMBHEIGHTMAX', 180);
 define('REPOSITORY_CLEARCACHE_NOW', 1);			// immediate
 define('REPOSITORY_CLEARCACHE_NORMAL', 300);	// allow 5 minutes max
 define('REPOSITORY_CLEARCACHE_LATER', 3600);	// allow 1 hour max
-
-?>

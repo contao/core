@@ -192,5 +192,3 @@ class OptionWizard extends \Widget
   </table>';
 	}
 }
-
-?>

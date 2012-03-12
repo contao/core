@@ -145,5 +145,3 @@ class Database_Mysql_Statement extends \Database_Statement
 		return new \Database_Mysql_Result($resResult, $strQuery);
 	}
 }
-
-?>

@@ -1427,7 +1427,7 @@ window.addEvent(\'domready\', function() {
 
 			// Load the code editor configuration
 			ob_start();
-			include(TL_ROOT . '/system/config/codeMirror.php');
+			include TL_ROOT . '/system/config/codeMirror.php';
 			$codeEditor = ob_get_contents();
 			ob_end_clean();
 		}
@@ -2039,5 +2039,3 @@ window.addEvent(\'domready\', function() {
 		return $arrFiles;
 	}
 }
-
-?>

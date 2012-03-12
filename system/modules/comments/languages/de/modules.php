@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['FMD']['comments'] = array('Kommentare', 'Kommentare bzw. G�
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['comments'] = array('Kommentare', 'Kommentare bzw. Gästebuch-Einträge verwalten.');
-
-?>

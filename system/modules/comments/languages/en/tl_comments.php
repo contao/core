@@ -72,5 +72,3 @@ $GLOBALS['TL_LANG']['tl_comments']['show']   = array('Comment details', 'Show th
 $GLOBALS['TL_LANG']['tl_comments']['edit']   = array('Edit comment', 'Edit comment ID %s');
 $GLOBALS['TL_LANG']['tl_comments']['delete'] = array('Delete comment', 'Delete comment ID %s');
 $GLOBALS['TL_LANG']['tl_comments']['toggle'] = array('Publish/unpublish comment', 'Publish/unpublish comment ID %s');
-
-?>

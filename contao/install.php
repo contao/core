@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -988,5 +988,3 @@ class InstallTool extends Backend
  */
 $objInstallTool = new InstallTool();
 $objInstallTool->run();
-
-?>

@@ -396,5 +396,3 @@ abstract class Database_Result
 	abstract protected function num_fields();
 	abstract protected function fetch_field($intOffset);
 }
-
-?>

@@ -32,5 +32,3 @@
  * Front end module
  */
 $GLOBALS['FE_MOD']['application']['listing'] = 'ModuleListing';
-
-?>

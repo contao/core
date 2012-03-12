@@ -105,5 +105,3 @@ class TaskMessages extends \Backend
 		return implode("\n", $arrReturn);
 	}
 }
-
-?>

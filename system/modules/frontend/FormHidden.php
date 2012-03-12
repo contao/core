@@ -70,5 +70,3 @@ class FormHidden extends \Widget
 						$this->strTagEnding);
 	}
 }
-
-?>

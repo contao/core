@@ -133,5 +133,3 @@ $GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Nicht veröffentlicht';
 $GLOBALS['TL_LANG']['MSC']['addComment']    = 'Einen Kommentar schreiben';
 $GLOBALS['TL_LANG']['MSC']['autologin']     = 'Angemeldet bleiben';
 $GLOBALS['TL_LANG']['MSC']['relevance']     = '%s Relevanz';
-
-?>

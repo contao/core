@@ -938,5 +938,3 @@ class tl_news extends Backend
 		$this->News->generateFeed(CURRENT_ID);
 	}
 }
-
-?>

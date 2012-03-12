@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -178,5 +178,3 @@ class Popup extends Backend
  */
 $objPopup = new Popup();
 $objPopup->run();
-
-?>

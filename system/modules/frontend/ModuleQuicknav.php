@@ -179,5 +179,3 @@ class ModuleQuicknav extends \Module
 		return $arrPages;
 	}
 }
-
-?>

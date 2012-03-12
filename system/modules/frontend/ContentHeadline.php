@@ -60,5 +60,3 @@ class ContentHeadline extends \ContentElement
 		return;
 	}
 }
-
-?>

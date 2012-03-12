@@ -78,5 +78,3 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Modules', 'Edit the fron
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Layouts', 'Edit the page layouts of theme ID %s');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme import', 'Import new themes');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Export', 'Export theme ID %s');
-
-?>

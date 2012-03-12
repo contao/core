@@ -1394,5 +1394,3 @@ class tl_content extends Backend
 		$this->createNewVersion('tl_content', $intId);
 	}
 }
-
-?>

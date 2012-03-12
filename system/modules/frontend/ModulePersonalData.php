@@ -306,5 +306,3 @@ class ModulePersonalData extends \Module
 		}
 	}
 }
-
-?>

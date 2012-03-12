@@ -122,5 +122,3 @@ class TemplateLoader
 		throw new \Exception('Could not find template "' . $template . '"');
 	}
 }
-
-?>

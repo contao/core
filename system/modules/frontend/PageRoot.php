@@ -72,5 +72,3 @@ class PageRoot extends \Frontend
 		$this->redirect($this->generateFrontendUrl($objNextPage->row()));
 	}
 }
-
-?>

@@ -474,5 +474,3 @@ class DbInstaller extends \Controller
 		return $return;
 	}
 }
-
-?>

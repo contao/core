@@ -51,5 +51,3 @@ TemplateLoader::addFiles(array
 	'ce_comments' => 'system/modules/comments/templates',
 	'com_default' => 'system/modules/comments/templates',
 ));
-
-?>

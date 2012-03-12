@@ -62,5 +62,3 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Protect folder', 'Protect 
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Remove protection', 'Unprotect folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('File upload', 'Upload files to the server');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Paste into', 'Paste into this folder');
-
-?>

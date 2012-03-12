@@ -63,5 +63,3 @@ class ContentArticle extends \ContentElement
 		return;
 	}
 }
-
-?>

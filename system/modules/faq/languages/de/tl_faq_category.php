@@ -70,5 +70,3 @@ $GLOBALS['TL_LANG']['tl_faq_category']['edit']       = array('Kategorie bearbeit
 $GLOBALS['TL_LANG']['tl_faq_category']['editheader'] = array('Kategorie-Einstellungen bearbeiten', 'Einstellungen der Kategorie ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_faq_category']['copy']       = array('Kategorie duplizieren', 'Kategorie ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_faq_category']['delete']     = array('Kategorie löschen', 'Kategorie ID %s löschen');
-
-?>

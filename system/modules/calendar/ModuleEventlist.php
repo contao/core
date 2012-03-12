@@ -351,5 +351,3 @@ class ModuleEventlist extends \Events
 		}
 	}
 }
-
-?>

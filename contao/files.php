@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -121,5 +121,3 @@ class FileManager extends Backend
  */
 $objFileManager = new FileManager();
 $objFileManager->run();
-
-?>

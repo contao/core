@@ -171,5 +171,3 @@ class ContentTable extends \ContentElement
 		$this->Template->footer = $arrFooter;
 	}
 }
-
-?>

@@ -126,5 +126,3 @@ class CalendarEventsCollection extends \Model_Collection
 		}
 	}
 }
-
-?>

@@ -81,5 +81,3 @@ $GLOBALS['TL_DCA']['tl_session'] = array
 		)
 	)
 );
-
-?>

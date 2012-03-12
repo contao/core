@@ -96,5 +96,3 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Event löschen'
 $GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Event veröffentlichen/unveröffentlichen', 'Event ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Kalender bearbeiten', 'Die Kalender-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_calendar_events']['pasteafter'] = array('In diesen Kalender einfügen', 'Nach dem Event ID %s einfügen');
-
-?>

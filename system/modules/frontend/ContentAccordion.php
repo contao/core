@@ -128,5 +128,3 @@ class ContentAccordion extends \ContentElement
 		$this->Template->headline = $this->mooHeadline;
 	}
 }
-
-?>

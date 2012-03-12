@@ -157,5 +157,3 @@ class ContentCode extends \ContentElement
 		}
 	}
 }
-
-?>

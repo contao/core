@@ -231,5 +231,3 @@ class ModuleWizard extends \Widget
   </table>';
 	}
 }
-
-?>

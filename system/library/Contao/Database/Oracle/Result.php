@@ -118,5 +118,3 @@ class Database_Oracle_Result extends \Database_Result
 		}
 	}
 }
-
-?>

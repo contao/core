@@ -93,5 +93,3 @@ class PageForward extends \Frontend
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

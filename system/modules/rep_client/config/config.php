@@ -55,5 +55,3 @@ array_insert($GLOBALS['BE_MOD']['system'], 4, array
 		'stylesheet' => RepositoryBackendTheme::file('backend.css')
 	)
 ));
-
-?>

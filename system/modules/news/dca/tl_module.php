@@ -276,5 +276,3 @@ class tl_module_news extends Backend
 		return $this->getTemplateGroup('news_', $intPid);
 	}
 }
-
-?>

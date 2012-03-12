@@ -339,5 +339,3 @@ class Files_Ftp extends \Files
 		return @ftp_put($this->resConnection, $GLOBALS['TL_CONFIG']['ftpPath'] . $strDestination, $strSource, FTP_BINARY);
 	}
 }
-
-?>

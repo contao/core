@@ -130,5 +130,3 @@ $GLOBALS['TL_FFL'] = array
 	'captcha'     => 'FormCaptcha',
 	'submit'      => 'FormSubmit'
 );
-
-?>

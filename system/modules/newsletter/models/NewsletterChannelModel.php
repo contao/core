@@ -52,5 +52,3 @@ class NewsletterChannelModel extends \Model
 	protected static $strTable = 'tl_newsletter_channel';
 
 }
-
-?>

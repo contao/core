@@ -154,5 +154,3 @@ class TimePeriod extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

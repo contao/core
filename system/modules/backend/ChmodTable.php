@@ -99,5 +99,3 @@ class ChmodTable extends \Widget
   </table>';
 	}
 }
-
-?>

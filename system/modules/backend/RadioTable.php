@@ -143,5 +143,3 @@ class RadioTable extends \Widget
   </table>';
 	}
 }
-
-?>

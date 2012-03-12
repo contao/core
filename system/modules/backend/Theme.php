@@ -895,5 +895,3 @@ class Theme extends \Backend
 		}
 	}
 }
-
-?>

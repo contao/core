@@ -62,5 +62,3 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Verzeichnis schützen', 'V
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Verzeichnisschutz aufheben', 'Schutz des Verzeichnisses "%s" aufheben');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('Datei-Upload', 'Dateien auf den Server übertragen');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
-
-?>

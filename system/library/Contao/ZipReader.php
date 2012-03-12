@@ -543,5 +543,3 @@ class ZipReader
 		);
 	}
 }
-
-?>

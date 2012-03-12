@@ -133,5 +133,3 @@ class RadioButton extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

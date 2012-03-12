@@ -319,5 +319,3 @@ class Ajax extends \Backend
 		}
 	}
 }
-
-?>

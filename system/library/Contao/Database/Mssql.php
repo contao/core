@@ -238,5 +238,3 @@ class Database_Mssql extends \Database
 		return new \Database_Mssql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

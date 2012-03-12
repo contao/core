@@ -264,5 +264,3 @@ $GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
  */
 $GLOBALS['TL_MIME'] = array();
 $GLOBALS['TL_PERMISSIONS'] = array();
-
-?>

@@ -52,5 +52,3 @@ class FormFieldModel extends \Model
 	protected static $strTable = 'tl_form_field';
 
 }
-
-?>

@@ -201,5 +201,3 @@ class Session
 		$this->arrSession = array_merge($this->arrSession, $varData);
 	}
 }
-
-?>

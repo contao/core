@@ -52,5 +52,3 @@ class UserModel extends \Model
 	protected static $strTable = 'tl_user';
 
 }
-
-?>

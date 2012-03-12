@@ -172,5 +172,3 @@ class SelectMenu extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

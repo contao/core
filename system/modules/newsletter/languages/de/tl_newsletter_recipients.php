@@ -63,5 +63,3 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete']     = array('Abonnente
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['editheader'] = array('Verteiler bearbeiten', 'Die Verteiler-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle']     = array('Abonnenten aktivieren/deaktivieren', 'Abonnenten ID %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['import']     = array('CSV-Import', 'Abonnenten aus einer CSV-Datei importieren');
-
-?>

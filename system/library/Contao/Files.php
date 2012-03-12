@@ -233,5 +233,3 @@ abstract class Files
 		}
 	}
 }
-
-?>

@@ -67,5 +67,3 @@ class ContentToplink extends \ContentElement
 		$this->Template->request = ampersand($this->Environment->request, true);
 	}
 }
-
-?>

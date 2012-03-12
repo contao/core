@@ -58,5 +58,3 @@ TemplateLoader::addFiles(array
 	'mod_newsletter_reader' => 'system/modules/newsletter/templates',
 	'nl_default'            => 'system/modules/newsletter/templates',
 ));
-
-?>

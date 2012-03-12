@@ -43,9 +43,9 @@ define('TL_ROOT', dirname(dirname(__FILE__)));
 /**
  * Include functions, constants and interfaces
  */
-require(TL_ROOT . '/system/helper/functions.php');
-require(TL_ROOT . '/system/config/constants.php');
-require(TL_ROOT . '/system/helper/interface.php');
+require TL_ROOT . '/system/helper/functions.php';
+require TL_ROOT . '/system/config/constants.php';
+require TL_ROOT . '/system/helper/interface.php';
 
 
 /**
@@ -88,7 +88,7 @@ ClassLoader::scanAndRegister(); // config/autoload.php
 /**
  * Register the SwiftMailer autoloader
  */
-require_once(TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php');
+require_once TL_ROOT . '/system/library/Swiftmailer/classes/Swift.php';
 \Swift::registerAutoload(TL_ROOT . '/system/library/Swiftmailer/swift_init.php');
 
 
@@ -185,7 +185,7 @@ else
  */
 if (file_exists(TL_ROOT . '/system/config/initconfig.php'))
 {
-	include(TL_ROOT . '/system/config/initconfig.php');
+	include TL_ROOT . '/system/config/initconfig.php';
 }
 
 
@@ -209,11 +209,11 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 
 			if (file_exists(TL_ROOT . '/templates/be_referer.html5'))
 			{
-				include(TL_ROOT . '/templates/be_referer.html5');
+				include TL_ROOT . '/templates/be_referer.html5';
 			}
 			elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_referer.html5'))
 			{
-				include(TL_ROOT . '/system/modules/backend/templates/be_referer.html5');
+				include TL_ROOT . '/system/modules/backend/templates/be_referer.html5';
 			}
 			else
 			{
@@ -224,5 +224,3 @@ if ($_POST && !$GLOBALS['TL_CONFIG']['disableRefererCheck'] && !defined('BYPASS_
 		exit;
 	}
 }
-
-?>

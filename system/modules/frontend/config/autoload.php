@@ -211,5 +211,3 @@ TemplateLoader::addFiles(array
 	'rss_items_only'      => 'system/modules/frontend/templates',
 	'search_default'      => 'system/modules/frontend/templates',
 ));
-
-?>

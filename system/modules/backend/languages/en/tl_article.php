@@ -85,5 +85,3 @@ $GLOBALS['TL_LANG']['tl_article']['delete']     = array('Delete article', 'Delet
 $GLOBALS['TL_LANG']['tl_article']['toggle']     = array('Publish/unpublish article', 'Publish/unpublish article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['pasteafter'] = array('Paste after', 'Paste after article ID %s');
 $GLOBALS['TL_LANG']['tl_article']['pasteinto']  = array('Paste into', 'Paste into page ID %s');
-
-?>

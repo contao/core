@@ -74,5 +74,3 @@ $GLOBALS['TL_LANG']['tl_module']['past_two']       = '- 2 years';
 $GLOBALS['TL_LANG']['tl_module']['past_cur_month'] = 'of the current month';
 $GLOBALS['TL_LANG']['tl_module']['past_cur_year']  = 'of the current year';
 $GLOBALS['TL_LANG']['tl_module']['past_all']       = 'All past events';
-
-?>

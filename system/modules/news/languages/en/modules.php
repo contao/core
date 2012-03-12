@@ -42,5 +42,3 @@ $GLOBALS['TL_LANG']['FMD']['newslist']    = array('Newslist', 'Adds a list of ne
 $GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Newsreader', 'Shows the details of a news item.');
 $GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('News archive', 'Adds a news archive to the page.');
 $GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('News archive menu', 'Generates a navigation menu to browse the news archive.');
-
-?>

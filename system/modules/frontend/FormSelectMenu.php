@@ -245,5 +245,3 @@ class FormSelectMenu extends \Widget
 						$strOptions) . $this->addSubmit();
 	}
 }
-
-?>

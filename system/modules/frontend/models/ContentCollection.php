@@ -71,5 +71,3 @@ class ContentCollection extends \Model_Collection
 	}
 								 
 }
-
-?>

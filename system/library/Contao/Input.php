@@ -671,5 +671,3 @@ class Input
 		return null;
 	}
 }
-
-?>

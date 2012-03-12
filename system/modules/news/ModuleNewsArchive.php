@@ -221,5 +221,3 @@ class ModuleNewsArchive extends \ModuleNews
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['empty'];
 	}
 }
-
-?>

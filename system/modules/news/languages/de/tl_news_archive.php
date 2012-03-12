@@ -84,5 +84,3 @@ $GLOBALS['TL_LANG']['tl_news_archive']['copy']       = array('Archiv duplizieren
 $GLOBALS['TL_LANG']['tl_news_archive']['delete']     = array('Archiv löschen', 'Archiv ID %s löschen');
 $GLOBALS['TL_LANG']['tl_news_archive']['comments']   = array('Kommentare', 'Kommentare des Archivs ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_news_archive']['feeds']      = array('RSS-Feeds', 'RSS-Feeds verwalten');
-
-?>

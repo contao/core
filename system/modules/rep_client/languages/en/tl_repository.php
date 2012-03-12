@@ -107,5 +107,3 @@ $GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Extension not
 $GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installed version not found in repository';
 $GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'License key required, install extension in advance';
 $GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Corrupted, update/repair required';
-
-?>

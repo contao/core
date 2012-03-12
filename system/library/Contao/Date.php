@@ -462,5 +462,3 @@ class Date extends \System
 		return preg_replace('/([a-zA-Z])/', '%$1', implode('', $chunks));
 	}
 }
-
-?>

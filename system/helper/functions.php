@@ -143,11 +143,11 @@ function show_help_message()
 
 	if (file_exists(TL_ROOT . '/templates/be_error.html5'))
 	{
-		include(TL_ROOT . '/templates/be_error.html5');
+		include TL_ROOT . '/templates/be_error.html5';
 	}
 	elseif (file_exists(TL_ROOT . '/system/modules/backend/templates/be_error.html5'))
 	{
-		include(TL_ROOT . '/system/modules/backend/templates/be_error.html5');
+		include TL_ROOT . '/system/modules/backend/templates/be_error.html5';
 	}
 	else
 	{
@@ -626,7 +626,7 @@ function array_is_assoc($arrArray)
 /**
  * Load the mbstring library
  */
-require(TL_ROOT . '/system/helper/mbstring.php');
+require TL_ROOT . '/system/helper/mbstring.php';
 
 
 /**
@@ -727,5 +727,3 @@ if (!USE_MBSTRING)
 		return substr_count($haystack, $needle, $offset);
 	}
 }
-
-?>

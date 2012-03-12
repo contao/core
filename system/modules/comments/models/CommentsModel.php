@@ -52,5 +52,3 @@ class CommentsModel extends \Model
 	protected static $strTable = 'tl_comments';
 
 }
-
-?>

@@ -111,5 +111,3 @@ class ContentDownload extends \ContentElement
 		$this->Template->path = $this->objFile->dirname;
 	}
 }
-
-?>

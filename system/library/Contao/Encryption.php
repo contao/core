@@ -182,5 +182,3 @@ class Encryption
 		return $strDecrypted;
 	}
 }
-
-?>

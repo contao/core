@@ -220,5 +220,3 @@ class Feed extends \System
 		}
 	}
 }
-
-?>

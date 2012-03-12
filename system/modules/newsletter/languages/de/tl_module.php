@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['tl_module']['nl_template']     = array('Newslettertemplate'
  */
 $GLOBALS['TL_LANG']['tl_module']['text_subscribe']   = array('Ihr Abonnement auf %s', "Sie haben folgende Verteiler auf ##domain## abonniert:\n\n##channels##\n\nBitte klicken Sie ##link## um Ihr Abonnement zu aktivieren. Falls Sie die Bestellung nicht selbst getätigt haben, bitte ignorieren Sie diese E-Mail.\n");
 $GLOBALS['TL_LANG']['tl_module']['text_unsubscribe'] = array('Ihr Abonnement auf %s', "Sie haben folgende Abonnements auf ##domain## gekündigt:\n\n##channels##\n");
-
-?>

@@ -366,5 +366,3 @@ class Pagination extends \Frontend
 		}
 	}
 }
-
-?>

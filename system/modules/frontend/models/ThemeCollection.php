@@ -52,5 +52,3 @@ class ThemeCollection extends \Model_Collection
 	protected static $strTable = 'tl_theme';
 
 }
-
-?>

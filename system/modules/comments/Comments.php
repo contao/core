@@ -468,5 +468,3 @@ class Comments extends \Frontend
 		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
 	}
 }
-
-?>

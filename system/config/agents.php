@@ -68,5 +68,3 @@ $GLOBALS['TL_CONFIG']['browser'] = array
 	'Camino'     => array('browser'=>'camino',       'shorty'=>'ca', 'version'=>'/^.*Camino\/(\d+(\.\d+)*).*$/'),
 	'Konqueror'  => array('browser'=>'konqueror',    'shorty'=>'ko', 'version'=>'/^.*Konqueror\/(\d+(\.\d+)*).*$/')
 );
-
-?>

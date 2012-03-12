@@ -52,5 +52,3 @@ class ThemeModel extends \Model
 	protected static $strTable = 'tl_theme';
 
 }
-
-?>

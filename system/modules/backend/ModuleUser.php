@@ -89,5 +89,3 @@ class ModuleUser extends \BackendModule
 		return '';
 	}
 }
-
-?>

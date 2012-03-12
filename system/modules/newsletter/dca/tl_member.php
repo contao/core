@@ -56,5 +56,3 @@ $GLOBALS['TL_DCA']['tl_member']['fields']['newsletter'] = array
 	),
 	'sql'                     => "blob NULL"
 );
-
-?>

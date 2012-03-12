@@ -52,5 +52,3 @@ class FormCollection extends \Model_Collection
 	protected static $strTable = 'tl_form';
 
 }
-
-?>

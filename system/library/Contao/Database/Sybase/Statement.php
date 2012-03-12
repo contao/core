@@ -137,5 +137,3 @@ class Database_Sybase_Statement extends \Database_Statement
 		return new \Database_Sybase_Result($resResult, $strQuery);
 	}
 }
-
-?>

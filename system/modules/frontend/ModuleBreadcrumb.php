@@ -227,5 +227,3 @@ class ModuleBreadcrumb extends \Module
 		$this->Template->items = $items;
 	}
 }
-
-?>

@@ -107,5 +107,3 @@ $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD']    = 'Add new columns';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Change existing columns';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP']   = 'Drop existing columns';
 $GLOBALS['TL_LANG']['tl_install']['DROP']         = 'Drop existing tables';
-
-?>

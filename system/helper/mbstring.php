@@ -257,7 +257,7 @@ function utf8_romanize($str)
 	global $UTF8_LOOKUP_TABLE;
 
 	if (!is_array($UTF8_LOOKUP_TABLE))
-		require_once(TL_ROOT . '/system/helper/utf8_lookup.php');
+		require_once TL_ROOT . '/system/helper/utf8_lookup.php';
 
 	return strtr(utf8_convert_encoding($str, 'UTF-8'), $UTF8_LOOKUP_TABLE['romanize']);
 }
@@ -406,7 +406,7 @@ function utf8_strtolower($str)
 	global $UTF8_LOOKUP_TABLE;
 
 	if (!is_array($UTF8_LOOKUP_TABLE))
-		require_once(TL_ROOT . '/system/helper/utf8_lookup.php');
+		require_once TL_ROOT . '/system/helper/utf8_lookup.php';
 
 	return strtr($str, $UTF8_LOOKUP_TABLE['strtolower']);
 }
@@ -428,7 +428,7 @@ function utf8_strtoupper($str)
 	global $UTF8_LOOKUP_TABLE;
 
 	if (!is_array($UTF8_LOOKUP_TABLE))
-		require_once(TL_ROOT . '/system/helper/utf8_lookup.php');
+		require_once TL_ROOT . '/system/helper/utf8_lookup.php';
 
 	return strtr($str, $UTF8_LOOKUP_TABLE['strtoupper']);
 }
@@ -597,5 +597,3 @@ function utf8_str_split($str)
 
 	return $array;
 }
-
-?>

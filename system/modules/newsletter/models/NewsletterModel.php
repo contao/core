@@ -77,5 +77,3 @@ class NewsletterModel extends \Model
 		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
 }
-
-?>

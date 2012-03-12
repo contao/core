@@ -176,5 +176,3 @@ abstract class ContentElement extends \Frontend
 	 */
 	abstract protected function compile();
 }
-
-?>

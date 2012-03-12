@@ -43,5 +43,3 @@ $GLOBALS['TL_LANG']['tl_undo']['data']         = array('Daten', 'Rohdaten des Un
  */
 $GLOBALS['TL_LANG']['tl_undo']['show'] = array('Anzeigen', 'Den Eintrag ID %s anzeigen');
 $GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Wiederherstellen', 'Die Eintrag ID %s wiederherstellen');
-
-?>

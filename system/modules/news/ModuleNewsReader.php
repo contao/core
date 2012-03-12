@@ -183,5 +183,3 @@ class ModuleNewsReader extends \ModuleNews
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objArticle->id, $arrNotifies);
 	}
 }
-
-?>

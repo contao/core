@@ -1640,5 +1640,3 @@ class tl_page extends Backend
 		$this->createNewVersion('tl_page', $intId);
 	}
 }
-
-?>

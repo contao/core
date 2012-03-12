@@ -75,5 +75,3 @@ class ContentImage extends \ContentElement
 		$this->addImageToTemplate($this->Template, $this->arrData);
 	}
 }
-
-?>

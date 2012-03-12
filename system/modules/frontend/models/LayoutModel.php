@@ -63,5 +63,3 @@ class LayoutModel extends \Model
 		return static::findBy(array("($t.id=? OR $t.fallback=1)"), $varId, array('order'=>"$t.id DESC"));
 	}
 }
-
-?>

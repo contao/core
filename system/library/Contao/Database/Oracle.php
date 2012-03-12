@@ -232,5 +232,3 @@ class Database_Oracle extends \Database
 		return new \Database_Oracle_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

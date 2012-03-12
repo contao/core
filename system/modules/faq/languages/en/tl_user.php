@@ -39,5 +39,3 @@ $GLOBALS['TL_LANG']['tl_user']['faqp'] = array('FAQ category permissions', 'Here
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['faq_legend'] = 'FAQ permissions';
-
-?>

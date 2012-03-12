@@ -233,5 +233,3 @@ class PageModel extends \Model
 		return static::findBy($arrColumns, null, array('order'=>Database::getInstance()->findInSet("$t.alias", $arrAliases)));
 	}
 }
-
-?>

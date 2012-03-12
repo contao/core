@@ -454,5 +454,3 @@ $GLOBALS['TL_LANG']['MSC']['securityQuestion']  = 'Security question';
 $GLOBALS['TL_LANG']['MSC']['closeAccount']      = 'Close account';
 $GLOBALS['TL_LANG']['MSC']['changeSelection']   = 'Change selection';
 $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Selected';
-
-?>

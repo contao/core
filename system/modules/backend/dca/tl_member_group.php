@@ -298,5 +298,3 @@ class tl_member_group extends Backend
 		$this->createNewVersion('tl_member_group', $intId);
 	}
 }
-
-?>

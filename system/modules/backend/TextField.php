@@ -176,5 +176,3 @@ class TextField extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

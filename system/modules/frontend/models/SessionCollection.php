@@ -52,5 +52,3 @@ class SessionCollection extends \Model_Collection
 	protected static $strTable = 'tl_session';
 
 }
-
-?>

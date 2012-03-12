@@ -66,5 +66,3 @@ $GLOBALS['TL_LANG']['tl_faq']['toggle']     = array('Publish/unpublish question'
 $GLOBALS['TL_LANG']['tl_faq']['editheader'] = array('Edit category', 'Edit the category settings');
 $GLOBALS['TL_LANG']['tl_faq']['pasteafter'] = array('Paste at the top', 'Paste after question ID %s');
 $GLOBALS['TL_LANG']['tl_faq']['pastenew']   = array('Add new at the top', 'Add new after question ID %s');
-
-?>

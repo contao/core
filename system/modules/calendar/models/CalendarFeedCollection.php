@@ -68,5 +68,3 @@ class CalendarFeedCollection extends \Model_Collection
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrIds)) . ")"), null);
 	}
 }
-
-?>

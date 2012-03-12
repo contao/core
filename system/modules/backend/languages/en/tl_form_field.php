@@ -118,5 +118,3 @@ $GLOBALS['TL_LANG']['tl_form_field']['editheader'] = array('Edit form', 'Edit th
 $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Paste at the top', 'Paste after field ID %s');
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Add new at the top', 'Add new after field ID %s');
 $GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Toggle visibility', 'Toggle the visibility of field ID %s');
-
-?>

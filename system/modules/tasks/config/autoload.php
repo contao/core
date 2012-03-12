@@ -47,5 +47,3 @@ TemplateLoader::addFiles(array
 	'be_task_edit'   => 'system/modules/tasks/templates',
 	'be_tasks'       => 'system/modules/tasks/templates',
 ));
-
-?>

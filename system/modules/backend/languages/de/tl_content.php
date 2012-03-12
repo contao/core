@@ -138,5 +138,3 @@ $GLOBALS['TL_LANG']['tl_content']['pastenew']    = array('Neues Element oben ers
 $GLOBALS['TL_LANG']['tl_content']['toggle']      = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Inhaltselements ID %s ändern');
 $GLOBALS['TL_LANG']['tl_content']['editalias']   = array('Quellelement bearbeiten', 'Das Quellelement ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_content']['editarticle'] = array('Artikel bearbeiten', 'Artikel ID %s bearbeiten');
-
-?>

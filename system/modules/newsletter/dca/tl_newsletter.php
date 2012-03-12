@@ -489,5 +489,3 @@ class tl_newsletter extends Backend
 		return $varValue;
 	}
 }
-
-?>

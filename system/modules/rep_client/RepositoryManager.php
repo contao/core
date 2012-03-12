@@ -1317,5 +1317,3 @@ class RepositoryManager extends RepositoryBackendModule
 	} // recordAction
 
 } // class RepositoryManager
-
-?>

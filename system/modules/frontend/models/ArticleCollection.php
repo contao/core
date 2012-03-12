@@ -95,5 +95,3 @@ class ArticleCollection extends \Model_Collection
 		return static::findBy($arrColumns, $arrValues, array('order'=>"$t.sorting"));
 	}
 }
-
-?>

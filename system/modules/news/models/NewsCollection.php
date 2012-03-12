@@ -237,5 +237,3 @@ class NewsCollection extends \Model_Collection
 		return static::countBy($arrColumns, array($intFrom, $intTo));
 	}
 }
-
-?>

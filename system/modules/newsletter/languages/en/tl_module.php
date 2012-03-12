@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['tl_module']['nl_template']     = array('Newsletter template
  */
 $GLOBALS['TL_LANG']['tl_module']['text_subscribe']   = array('Your subscription on %s', "You have subscribed to the following channels on ##domain##:\n\n##channels##\n\nPlease click ##link## to activate your subscription. If you did not subscribe yourself, please ignore this e-mail.\n");
 $GLOBALS['TL_LANG']['tl_module']['text_unsubscribe'] = array('Your subscription on %s', "You have unsubscribed from the following channels on ##domain##:\n\n##channels##\n");
-
-?>

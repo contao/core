@@ -32,13 +32,13 @@
  * Initialize system
  */
 define('TL_MODE', 'BE');
-require('../../../../system/initialize.php');
+require '../../../../system/initialize.php';
 
 
 /**
  * Include library class
  */
-require('typolib.php');
+require 'typolib.php';
 
 
 /**

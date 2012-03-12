@@ -613,5 +613,3 @@ class DataContainer extends \Backend
 		return ($GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$blnForceSeparator) ? preg_replace('/^ &#160; :: &#160; /', '', $return) : $return;
 	}
 }
-
-?>

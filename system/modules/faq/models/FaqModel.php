@@ -77,5 +77,3 @@ class FaqModel extends \Model
 		return static::findBy($arrColumns, array($intId, $varAlias));
 	}
 }
-
-?>

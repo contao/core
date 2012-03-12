@@ -147,5 +147,3 @@ class tl_content_comments extends Backend
 		return $this->getTemplateGroup('com_', $objLayout->pid);
 	}
 }
-
-?>

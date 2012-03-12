@@ -312,5 +312,3 @@ class ModuleSearch extends \Module
 		}
 	}
 }
-
-?>

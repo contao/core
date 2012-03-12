@@ -54,5 +54,3 @@ class PageRedirect extends \Frontend
 		$this->redirect($objPage->url, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

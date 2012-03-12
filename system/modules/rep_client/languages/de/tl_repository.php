@@ -107,5 +107,3 @@ $GLOBALS['TL_LANG']['tl_repository_statext']['extnotfound']     = 'Erweiterung i
 $GLOBALS['TL_LANG']['tl_repository_statext']['vernotfound']     = 'Installierte Version im Verzeichnis nicht gefunden';
 $GLOBALS['TL_LANG']['tl_repository_statext']['extneedkey']      = 'Lizenzschlüssel benötigt, Erweiterung vorgängig installieren';
 $GLOBALS['TL_LANG']['tl_repository_statext']['errorinstall']    = 'Beschädigt, Aktualisierung/Reparatur notwendig';
-
-?>

@@ -140,5 +140,3 @@ $GLOBALS['TL_LANG']['tl_page']['toggle']     = array('Seite veröffentlichen/unv
 $GLOBALS['TL_LANG']['tl_page']['pasteafter'] = array('Einfügen nach', 'Nach der Seite ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_page']['pasteinto']  = array('Einfügen in', 'In die Seite ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_page']['articles']   = array('Artikel bearbeiten', 'Die Artikel der Seite ID %s bearbeiten');
-
-?>

@@ -160,5 +160,3 @@ class ModuleCloseAccount extends \Module
 		$this->Template->tableless = $this->tableless;
 	}
 }
-
-?>

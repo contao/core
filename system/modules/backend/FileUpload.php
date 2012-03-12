@@ -319,5 +319,3 @@ class FileUpload extends \Backend
 		return false;
 	}
 }
-
-?>

@@ -403,5 +403,3 @@ abstract class ModuleNews extends \Module
 						$strLink);
 	}
 }
-
-?>

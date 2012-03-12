@@ -554,5 +554,3 @@ $timezones = array
 		'US/Samoa'
 	)
 );
-
-?>

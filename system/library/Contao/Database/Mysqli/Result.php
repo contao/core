@@ -107,5 +107,3 @@ class Database_Mysqli_Result extends \Database_Result
 		}
 	}
 }
-
-?>

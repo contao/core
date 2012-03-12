@@ -136,5 +136,3 @@ class FormTextField extends \Widget
 						$this->strTagEnding) . $this->addSubmit();
 	}
 }
-
-?>

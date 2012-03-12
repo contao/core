@@ -84,5 +84,3 @@ $GLOBALS['TL_LANG']['tl_news']['toggle']     = array('Beitrag veröffentlichen/u
 $GLOBALS['TL_LANG']['tl_news']['feature']    = array('Beitrag hervorheben/zurücksetzen', 'Beitrag ID %s hervorheben/zurücksetzen');
 $GLOBALS['TL_LANG']['tl_news']['editheader'] = array('Nachrichtenarchiv bearbeiten', 'Die Nachrichtenarchiv-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_news']['pasteafter'] = array('In dieses Nachrichtenarchiv einfügen', 'Nach dem Beitrag ID %s einfügen');
-
-?>

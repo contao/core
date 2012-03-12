@@ -66,5 +66,3 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['repository_unsafe_catalog'] = array
 	'inputType'	=> 'checkbox',
 	'eval'      => array('tl_class'=>'w50 m12')
 );
-
-?>

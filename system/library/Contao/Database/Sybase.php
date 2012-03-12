@@ -239,5 +239,3 @@ class Database_Sybase extends \Database
 		return new \Database_Sybase_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

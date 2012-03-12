@@ -294,5 +294,3 @@ class LiveUpdate extends \Backend implements \executable
 		exit;
 	}
 }
-
-?>

@@ -130,5 +130,3 @@ $GLOBALS['TL_LANG']['tl_settings']['both']    = 'Use the server and the browser 
 $GLOBALS['TL_LANG']['tl_settings']['server']  = 'Use only the server cache';
 $GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Use only the browser cache';
 $GLOBALS['TL_LANG']['tl_settings']['none']    = 'Disable caching';
-
-?>

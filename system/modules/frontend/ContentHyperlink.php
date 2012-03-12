@@ -138,5 +138,3 @@ class ContentHyperlink extends \ContentElement
 		}
 	}
 }
-
-?>

@@ -54,5 +54,3 @@ $GLOBALS['TL_LANG']['tl_module']['show_current'] = 'Jump to the current period';
 $GLOBALS['TL_LANG']['tl_module']['all_items']    = 'Show all news items';
 $GLOBALS['TL_LANG']['tl_module']['featured']     = 'Show featured news items only';
 $GLOBALS['TL_LANG']['tl_module']['unfeatured']   = 'Skip featured news items';
-
-?>

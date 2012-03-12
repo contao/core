@@ -62,5 +62,3 @@ $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
 	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
 );
-
-?>

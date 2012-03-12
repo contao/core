@@ -64,5 +64,3 @@ class SessionModel extends \Model
 		return static::findBy(array("$t.hash=?", "$t.name=?"), array($strHash, $strName));
 	}
 }
-
-?>

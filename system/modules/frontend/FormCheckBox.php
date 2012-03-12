@@ -226,5 +226,3 @@ class FormCheckBox extends \Widget
 		}
 	}
 }
-
-?>

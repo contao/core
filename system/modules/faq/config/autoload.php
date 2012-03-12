@@ -55,5 +55,3 @@ TemplateLoader::addFiles(array
 	'mod_faqpage'   => 'system/modules/faq/templates',
 	'mod_faqreader' => 'system/modules/faq/templates',
 ));
-
-?>

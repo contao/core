@@ -402,5 +402,3 @@ abstract class Model extends \System
 		return \Database::getInstance()->prepare("DELETE FROM " . static::$strTable . " WHERE " . static::$strPk . "=?")->execute($this->{static::$strPk})->affectedRows;
 	}
 }
-
-?>

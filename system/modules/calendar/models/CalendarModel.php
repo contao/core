@@ -52,5 +52,3 @@ class CalendarModel extends \Model
 	protected static $strTable = 'tl_calendar';
 
 }
-
-?>

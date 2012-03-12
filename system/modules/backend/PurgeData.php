@@ -203,5 +203,3 @@ class PurgeData extends \Backend implements \executable
 		return $objTemplate->parse();
 	}
 }
-
-?>

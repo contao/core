@@ -32,5 +32,3 @@
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['tasks'] = array('Task center', 'Assign tasks to other back end users.');
-
-?>

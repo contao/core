@@ -121,5 +121,3 @@ class Model_QueryBuilder
 		return $strQuery;
 	}
 }
-
-?>

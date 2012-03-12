@@ -127,5 +127,3 @@ abstract class BackendModule extends \Backend
 	 */
 	abstract protected function compile();
 }
-
-?>

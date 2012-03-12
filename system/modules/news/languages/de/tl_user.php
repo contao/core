@@ -41,5 +41,3 @@ $GLOBALS['TL_LANG']['tl_user']['newsfeedp'] = array('RSS-Feed-Rechte', 'Hier kö
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['news_legend'] = 'Nachrichten-Rechte';
-
-?>

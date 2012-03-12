@@ -52,5 +52,3 @@ class LayoutCollection extends \Model_Collection
 	protected static $strTable = 'tl_layout';
 
 }
-
-?>

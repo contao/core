@@ -67,5 +67,3 @@ TemplateLoader::addFiles(array
 	'news_short'            => 'system/modules/news/templates',
 	'news_simple'           => 'system/modules/news/templates',
 ));
-
-?>

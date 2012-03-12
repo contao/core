@@ -872,5 +872,3 @@ class tl_article extends Backend
 		$this->createNewVersion('tl_article', $intId);
 	}
 }
-
-?>

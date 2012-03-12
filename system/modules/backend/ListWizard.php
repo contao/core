@@ -277,5 +277,3 @@ class ListWizard extends \Widget
 </form>';
 	}
 }
-
-?>

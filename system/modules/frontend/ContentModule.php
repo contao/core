@@ -84,5 +84,3 @@ class ContentModule extends \ContentElement
 		return;
 	}
 }
-
-?>

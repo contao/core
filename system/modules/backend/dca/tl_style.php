@@ -870,5 +870,3 @@ class tl_style extends Backend
 		}
 	}
 }
-
-?>

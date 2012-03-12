@@ -172,5 +172,3 @@ class ModuleFaqList extends \Module
 		return sprintf($this->arrTargets[$jumpTo], (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id));
 	}
 }
-
-?>

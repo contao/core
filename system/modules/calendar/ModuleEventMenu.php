@@ -196,5 +196,3 @@ class ModuleEventMenu extends \ModuleCalendar
 		$this->Template->showQuantity = strlen($this->cal_showQuantity) ? true : false;
 	}
 }
-
-?>

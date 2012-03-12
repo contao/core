@@ -81,5 +81,3 @@ class FormExplanation extends \Widget
 		}
 	}
 }
-
-?>

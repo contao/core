@@ -660,5 +660,3 @@ class tl_comments extends Backend
 		$this->createNewVersion('tl_comments', $intId);
 	}
 }
-
-?>

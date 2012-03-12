@@ -70,5 +70,3 @@ $GLOBALS['TL_LANG']['tl_faq_category']['edit']       = array('Edit category', 'E
 $GLOBALS['TL_LANG']['tl_faq_category']['editheader'] = array('Edit category settings', 'Edit the settings of category ID %s');
 $GLOBALS['TL_LANG']['tl_faq_category']['copy']       = array('Duplicate category', 'Duplicate category ID %s');
 $GLOBALS['TL_LANG']['tl_faq_category']['delete']     = array('Delete category', 'Delete category ID %s');
-
-?>

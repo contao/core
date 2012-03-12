@@ -68,5 +68,3 @@ class NewsletterChannelCollection extends \Model_Collection
 		return static::findBy(array("$t.id IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, array('order'=>"$t.title"));
 	}
 }
-
-?>

@@ -260,5 +260,3 @@ class RepositoryCatalog extends RepositoryBackendModule
 	} // getTagList
 
 } // class RepositoryCatalog
-
-?>

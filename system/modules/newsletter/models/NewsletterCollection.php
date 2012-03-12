@@ -94,5 +94,3 @@ class NewsletterCollection extends \Model_Collection
 		return static::findBy($arrColumns, null, array('order'=>"$t.date DESC"));
 	}
 }
-
-?>

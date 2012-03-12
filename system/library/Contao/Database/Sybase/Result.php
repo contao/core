@@ -107,5 +107,3 @@ class Database_Sybase_Result extends \Database_Result
 		}
 	}
 }
-
-?>

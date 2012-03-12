@@ -101,7 +101,7 @@ class BackendTemplate extends \Template
 				}
 
 				ob_start();
-				include($strFile);
+				include $strFile;
 				$this->rteConfig .= ob_get_contents();
 				ob_end_clean();
 			}
@@ -223,5 +223,3 @@ class BackendTemplate extends \Template
 		. '});';
 	}
 }
-
-?>

@@ -72,5 +72,3 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Newsletter', 'getSearchabl
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'newsletters';
 $GLOBALS['TL_PERMISSIONS'][] = 'newsletterp';
-
-?>

@@ -189,5 +189,3 @@ class RebuildIndex extends \Backend implements \executable
 		return $objTemplate->parse();
 	}
 }
-
-?>

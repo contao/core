@@ -148,5 +148,3 @@ class FormTextArea extends \Widget
 						specialchars(str_replace('\n', "\n", $this->varValue))) . $this->addSubmit();
 	}
 }
-
-?>

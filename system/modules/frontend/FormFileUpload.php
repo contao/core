@@ -271,5 +271,3 @@ class FormFileUpload extends \Widget implements \uploadable
 						$this->strTagEnding) . $this->addSubmit();
 	}
 }
-
-?>

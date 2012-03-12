@@ -565,5 +565,3 @@ abstract class Frontend extends \Controller
 		return trim($strText);
 	}
 }
-
-?>

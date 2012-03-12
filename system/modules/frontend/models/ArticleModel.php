@@ -93,5 +93,3 @@ class ArticleModel extends \Model
 		return static::findBy($arrColumns, $intId);
 	}
 }
-
-?>

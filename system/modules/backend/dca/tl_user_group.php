@@ -438,5 +438,3 @@ class tl_user_group extends Backend
 		$this->createNewVersion('tl_user_group', $intId);
 	}
 }
-
-?>

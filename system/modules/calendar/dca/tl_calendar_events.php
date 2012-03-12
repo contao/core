@@ -1011,5 +1011,3 @@ class tl_calendar_events extends Backend
 		$this->Calendar->generateFeed(CURRENT_ID);
 	}
 }
-
-?>

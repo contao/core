@@ -84,5 +84,3 @@ $GLOBALS['TL_DCA']['tl_version'] = array
 		)
 	)
 );
-
-?>

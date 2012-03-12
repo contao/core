@@ -454,5 +454,3 @@ $GLOBALS['TL_LANG']['MSC']['securityQuestion']  = 'Sicherheitsfrage';
 $GLOBALS['TL_LANG']['MSC']['closeAccount']      = 'Konto schließen';
 $GLOBALS['TL_LANG']['MSC']['changeSelection']   = 'Auswahl ändern';
 $GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Ausgewählt';
-
-?>

@@ -69,5 +69,3 @@ class NewsletterRecipientsModel extends \Model
 		return static::findBy(array("$t.email=? AND $t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), $strEmail);
 	}
 }
-
-?>

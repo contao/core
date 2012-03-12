@@ -42,5 +42,3 @@ $GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Subscribe', 'Generates a form
 $GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Unsubscribe', 'Generates a form to unsubscribe from one or more channels.');
 $GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletter list', 'Adds a list of newsletters to the page.');
 $GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletter reader', 'Shows the details of a newsletter.');
-
-?>

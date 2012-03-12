@@ -276,5 +276,3 @@ class ModuleCalendar extends \Events
 		return $arrDays;
 	}
 }
-
-?>

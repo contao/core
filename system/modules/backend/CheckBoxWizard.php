@@ -198,5 +198,3 @@ class CheckBoxWizard extends \Widget
 						$arrOption['label']);
 	}
 }
-
-?>

@@ -219,5 +219,3 @@ class ContentDownloads extends \ContentElement
 		$this->Template->files = array_values($files);
 	}
 }
-
-?>

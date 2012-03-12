@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require('system/initialize.php');
+require '../initialize.php';
 
 
 /**
@@ -193,5 +193,3 @@ class CronJob extends Frontend
  */
 $objCronJob = new CronJob();
 $objCronJob->run();
-
-?>

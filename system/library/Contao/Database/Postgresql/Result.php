@@ -114,5 +114,3 @@ class Database_Postgresql_Result extends \Database_Result
 		}
 	}
 }
-
-?>

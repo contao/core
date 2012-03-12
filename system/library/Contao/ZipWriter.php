@@ -282,5 +282,3 @@ class ZipWriter extends \System
 		return $strTime;
 	}
 }
-
-?>

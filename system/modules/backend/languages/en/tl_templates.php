@@ -50,5 +50,3 @@ $GLOBALS['TL_LANG']['tl_templates']['invalid']  = 'Invalid target directory "%s"
 $GLOBALS['TL_LANG']['tl_templates']['new_tpl']   = array('New template', 'Create a new template');
 $GLOBALS['TL_LANG']['tl_templates']['new']       = array('New folder', 'Create a new folder');
 $GLOBALS['TL_LANG']['tl_templates']['pasteinto'] = array('Paste into', 'Paste into this folder');
-
-?>

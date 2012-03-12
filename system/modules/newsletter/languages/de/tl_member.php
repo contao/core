@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['tl_member']['newsletter_legend'] = 'Abonnements';
  * Reference
  */
 $GLOBALS['TL_LANG']['tl_member']['newsletterDetails'] = 'Abonnements';
-
-?>

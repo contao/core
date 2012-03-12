@@ -326,5 +326,3 @@ class Database_Mysql extends \Database
 		return new \Database_Mysql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

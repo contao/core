@@ -317,5 +317,3 @@ class tl_module_calendar extends Backend
 		return $this->getTemplateGroup('cal_', $intPid);
 	}
 }
-
-?>

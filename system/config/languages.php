@@ -244,5 +244,3 @@ $langsNative = array
 	'vi' => 'Tiếng Việt',
 	'zh' => '中文(简体)'
 );
-
-?>

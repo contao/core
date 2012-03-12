@@ -42,5 +42,3 @@ $GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Abonnieren', 'Erzeugt ein For
 $GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Kündigen', 'Erzeugt ein Formular zum Kündigen von Abonnements.');
 $GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletterliste', 'Fügt der Seite eine Newsletterliste hinzu.');
 $GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletterleser', 'Stellt einen einzelnen Newsletter dar.');
-
-?>

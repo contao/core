@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -142,5 +142,3 @@ class Index extends Backend
  */
 $objIndex = new Index();
 $objIndex->run();
-
-?>

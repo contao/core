@@ -620,5 +620,3 @@ class tl_member extends Backend
 		}
 	}
 }
-
-?>

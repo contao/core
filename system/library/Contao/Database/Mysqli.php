@@ -301,5 +301,3 @@ class Database_Mysqli extends \Database
 		return new \Database_Mysqli_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

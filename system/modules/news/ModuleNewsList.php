@@ -184,5 +184,3 @@ class ModuleNewsList extends \ModuleNews
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 }
-
-?>

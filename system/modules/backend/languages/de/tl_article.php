@@ -85,5 +85,3 @@ $GLOBALS['TL_LANG']['tl_article']['delete']     = array('Artikel löschen', 'Art
 $GLOBALS['TL_LANG']['tl_article']['toggle']     = array('Artikel veröffentlichen/unveröffentlichen', 'Artikel ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_article']['pasteafter'] = array('Einfügen nach', 'Nach Artikel ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_article']['pasteinto']  = array('Einfügen in', 'In Seite ID %s einfügen');
-
-?>

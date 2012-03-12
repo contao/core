@@ -103,5 +103,3 @@ class PageError403 extends \Frontend
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj403->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

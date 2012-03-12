@@ -365,5 +365,3 @@ class ModuleNewsMenu extends \ModuleNews
 		return $arrDays;
 	}
 }
-
-?>

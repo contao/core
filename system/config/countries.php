@@ -283,5 +283,3 @@ $countries = array
 	'zm' => 'Zambia',
 	'zw' => 'Zimbabwe'
 );
-
-?>

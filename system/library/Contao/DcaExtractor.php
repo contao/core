@@ -373,15 +373,12 @@ class DcaExtractor extends \DbInstaller
 				$objFile->append("\t),");
 			}
 
-			$objFile->append(');', "\n\n");
+			$objFile->append(');', "\n");
 		}
 
-		$objFile->append('?>', '');
 		$objFile->close();
 
 		// Include the file so the class properties are filled
 		include TL_ROOT . '/system/cache/sql/' . $this->strTable . '.php';
 	}
 }
-
-?>

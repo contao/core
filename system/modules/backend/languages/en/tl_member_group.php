@@ -56,5 +56,3 @@ $GLOBALS['TL_LANG']['tl_member_group']['edit']   = array('Edit group', 'Edit gro
 $GLOBALS['TL_LANG']['tl_member_group']['copy']   = array('Duplicate group', 'Duplicate group ID %s');
 $GLOBALS['TL_LANG']['tl_member_group']['delete'] = array('Delete group', 'Delete group ID %s');
 $GLOBALS['TL_LANG']['tl_member_group']['toggle'] = array('Activate/deactivate group', 'Activate/deactivate group ID %s');
-
-?>

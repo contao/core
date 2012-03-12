@@ -43,5 +43,3 @@
 $GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository client';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Extension catalog', 'Browse the repository and install extensions.');
 $GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Extension manager', 'Maintain or remove installed extensions.');
-
-?>

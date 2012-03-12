@@ -115,5 +115,3 @@ class ModuleFaq extends \Frontend
 		return $arrPages;
 	}
 }
-
-?>

@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require('system/initialize.php');
+require 'system/initialize.php';
 
 
 /**
@@ -67,5 +67,3 @@ elseif ($objInput->get('p') == 'twitter')
 header('HTTP/1.1 301 Moved Permanently');
 header('Location: index.php');
 exit;
-
-?>

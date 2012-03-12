@@ -164,5 +164,3 @@ class typolib extends Backend
 		return $strFiles;
 	}
 }
-
-?>

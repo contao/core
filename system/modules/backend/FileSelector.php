@@ -391,5 +391,3 @@ class FileSelector extends \Widget
 		}
 	}
 }
-
-?>

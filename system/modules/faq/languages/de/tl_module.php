@@ -33,5 +33,3 @@
  */
 $GLOBALS['TL_LANG']['tl_module']['faq_categories']   = array('FAQ-Kategorien', 'Bitte wählen Sie eine oder mehrere FAQ-Kategorien.');
 $GLOBALS['TL_LANG']['tl_module']['faq_readerModule'] = array('FAQ-Leser', 'Automatisch zum FAQ-Leser wechseln wenn ein Beitrag ausgewählt wurde.');
-
-?>

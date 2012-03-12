@@ -357,5 +357,3 @@ class Automator extends \Backend
 		}
 	}
 }
-
-?>

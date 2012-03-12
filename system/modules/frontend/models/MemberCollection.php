@@ -52,5 +52,3 @@ class MemberCollection extends \Model_Collection
 	protected static $strTable = 'tl_member';
 
 }
-
-?>

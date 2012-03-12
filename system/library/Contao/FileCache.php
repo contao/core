@@ -202,5 +202,3 @@ class FileCache extends \System
 		return static::$arrInstances[$strFile];
 	}
 }
-
-?>

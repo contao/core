@@ -105,5 +105,3 @@ class PageError404 extends \Frontend
 		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

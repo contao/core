@@ -37,11 +37,11 @@ namespace Contao;
 /**
  * Include SimplePie classes
  */
-require_once(TL_ROOT . '/system/library/Simplepie/simplepie.inc');
+require_once TL_ROOT . '/system/library/Simplepie/simplepie.inc';
 
 if (!class_exists('idna_convert', false))
 {
-	require_once(TL_ROOT . '/system/library/IDNA/idna_convert.class.php');
+	require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
 }
 
 
@@ -218,5 +218,3 @@ class ModuleRssReader extends \Module
 		$this->Template->items = array_values($items);
 	}
 }
-
-?>

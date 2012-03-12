@@ -113,5 +113,3 @@ $GLOBALS['TL_LANG']['tl_layout']['cut']        = array('Move layout', 'Move layo
 $GLOBALS['TL_LANG']['tl_layout']['copy']       = array('Duplicate layout', 'Duplicate layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['delete']     = array('Delete layout', 'Delete layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['editheader'] = array('Edit theme', 'Edit the theme settings');
-
-?>

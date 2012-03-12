@@ -180,5 +180,3 @@ class tl_module_listing extends Backend
 		return $this->getTemplateGroup('info_', $intPid);
 	}
 }
-
-?>

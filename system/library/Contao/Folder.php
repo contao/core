@@ -199,5 +199,3 @@ class Folder extends \System
 		}
 	}
 }
-
-?>

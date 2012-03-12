@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -108,5 +108,3 @@ class Confirm extends Backend
  */
 $objConfirm = new Confirm();
 $objConfirm->run();
-
-?>

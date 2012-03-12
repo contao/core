@@ -59,5 +59,3 @@ $GLOBALS['TL_LANG']['tl_newsletter_channel']['editheader'] = array('Verteiler-Ei
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Verteiler duplizieren', 'Verteiler ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['delete']     = array('Verteiler löschen', 'Verteiler ID %s löschen');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['recipients'] = array('Abonnenten bearbeiten', 'Abonnenten des Verteilers ID %s bearbeiten');
-
-?>

@@ -326,5 +326,3 @@ class News extends \Frontend
 		return $arrFeeds;
 	}
 }
-
-?>

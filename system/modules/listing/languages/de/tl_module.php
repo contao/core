@@ -40,5 +40,3 @@ $GLOBALS['TL_LANG']['tl_module']['list_info']        = array('Felder der Details
 $GLOBALS['TL_LANG']['tl_module']['list_info_where']  = array('Detailseitenbedingung', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>published=1</em> oder <em>type!="admin"</em>).');
 $GLOBALS['TL_LANG']['tl_module']['list_layout']      = array('Listentemplate', 'Hier können Sie das Listentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['list_info_layout'] = array('Detailseitentemplate', 'Hier können Sie das Detailseitentemplate auswählen.');
-
-?>

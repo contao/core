@@ -144,5 +144,3 @@ class Database_Mysqli_Statement extends \Database_Statement
 		return new \Database_Mysqli_Result($resResult, $strQuery);
 	}
 }
-
-?>

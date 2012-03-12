@@ -901,5 +901,3 @@ class Newsletter extends \Backend
 		return $arrPages;
 	}
 }
-
-?>

@@ -118,5 +118,3 @@ $GLOBALS['TL_LANG']['tl_form_field']['editheader'] = array('Formular bearbeiten'
 $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Oben einfügen', 'Nach dem Feld ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Neues Feld oben erstellen', 'Neues Element nach dem Feld ID %s erstellen');
 $GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Feldes ID %s ändern');
-
-?>

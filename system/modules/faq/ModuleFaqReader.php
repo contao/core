@@ -212,5 +212,3 @@ class ModuleFaqReader extends \Module
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_faq', $objFaq->id, $arrNotifies);
 	}
 }
-
-?>

@@ -239,5 +239,3 @@ class Database_Postgresql extends \Database
 		return new \Database_Postgresql_Statement($resConnection, $blnDisableAutocommit);
 	}
 }
-
-?>

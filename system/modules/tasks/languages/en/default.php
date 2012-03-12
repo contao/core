@@ -34,5 +34,3 @@
 $GLOBALS['TL_LANG']['MSC']['tasksCur'] = '%s pending task(s)';
 $GLOBALS['TL_LANG']['MSC']['tasksNew'] = '%s new task(s)';
 $GLOBALS['TL_LANG']['MSC']['tasksDue'] = '%s overdue task(s)';
-
-?>

@@ -66,5 +66,3 @@ $GLOBALS['TL_LANG']['tl_news_feed']['show']   = array('Feeddetails', 'Die Detail
 $GLOBALS['TL_LANG']['tl_news_feed']['edit']   = array('Feed bearbeiten', 'Feed ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_news_feed']['copy']   = array('Feed duplizieren', 'Feed ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_news_feed']['delete'] = array('Feed löschen', 'Feed ID %s löschen');
-
-?>

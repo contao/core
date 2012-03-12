@@ -52,5 +52,3 @@ class NewsArchiveModel extends \Model
 	protected static $strTable = 'tl_news_archive';
 
 }
-
-?>

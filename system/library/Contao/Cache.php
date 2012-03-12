@@ -127,5 +127,3 @@ class Cache extends \System
 		return static::$objInstance;
 	}
 }
-
-?>

@@ -41,5 +41,3 @@
  * Back end modules
  */
 $GLOBALS['TL_LANG']['MOD']['rep_base'] = array('Repository-Base', 'Das Basis-Modul des Extension Repository.');
-
-?>

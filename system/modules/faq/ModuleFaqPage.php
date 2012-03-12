@@ -161,5 +161,3 @@ class ModuleFaqPage extends Module
 		$this->Template->topLink = $GLOBALS['TL_LANG']['MSC']['backToTop'];
 	}
 }
-
-?>

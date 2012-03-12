@@ -80,5 +80,3 @@ class ContentText extends \ContentElement
 		}
 	}
 }
-
-?>

@@ -95,5 +95,3 @@ class ModuleComments extends \Module
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_page', $objPage->id, $GLOBALS['TL_ADMIN_EMAIL']);
 	}
 }
-
-?>

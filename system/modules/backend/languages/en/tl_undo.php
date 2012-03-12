@@ -43,5 +43,3 @@ $GLOBALS['TL_LANG']['tl_undo']['data']         = array('Data', 'Raw data of the 
  */
 $GLOBALS['TL_LANG']['tl_undo']['show'] = array('Show details', 'Show the details of entry ID %s');
 $GLOBALS['TL_LANG']['tl_undo']['undo'] = array('Restore', 'Restore entry ID %s');
-
-?>

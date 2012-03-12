@@ -140,8 +140,8 @@ class Config
 	protected function initialize()
 	{
 		// Load the default files
-		include(TL_ROOT . '/system/config/default.php');
-		include(TL_ROOT . '/system/config/agents.php');
+		include TL_ROOT . '/system/config/default.php';
+		include TL_ROOT . '/system/config/agents.php';
 
 		// Get the module configuration files
 		foreach ($this->getActiveModules() as $strModule)
@@ -150,7 +150,7 @@ class Config
 
 			if (file_exists($strFile))
 			{
-				include($strFile);
+				include $strFile;
 			}
 		}
 
@@ -161,7 +161,7 @@ class Config
 		}
 
 		$this->blnHasLcf = true;
-		include(TL_ROOT . '/system/config/localconfig.php');
+		include TL_ROOT . '/system/config/localconfig.php';
 
 		// Read the local configuration file
 		$strMode = 'top';
@@ -226,15 +226,14 @@ class Config
 			$strFile .= "$k = $v\n";
 		}
 
-		$strFile .= "### INSTALL SCRIPT STOP ###\n\n";
+		$strFile .= "### INSTALL SCRIPT STOP ###\n";
 		$this->strBottom = trim($this->strBottom);
 
 		if ($this->strBottom != '')
 		{
-			$strFile .= $this->strBottom . "\n\n";
+			$strFile .= $this->strBottom . "\n";
 		}
 
-		$strFile .= '?>';
 		$strTemp = md5(uniqid(mt_rand(), true));
 
 		// Write to a temp file first
@@ -381,5 +380,3 @@ class Config
 		return $varValue;
 	}
 }
-
-?>

@@ -72,5 +72,3 @@ $GLOBALS['TL_LANG']['tl_form']['edit']       = array('Formular bearbeiten', 'Das
 $GLOBALS['TL_LANG']['tl_form']['editheader'] = array('Formular-Einstellungen bearbeiten', 'Einstellungen des Formulars ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_form']['copy']       = array('Formular duplizieren', 'Das Formular ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_form']['delete']     = array('Formular löschen', 'Das Formular ID %s löschen');
-
-?>

@@ -363,5 +363,3 @@ class FrontendUser extends \User
 		}
 	}
 }
-
-?>

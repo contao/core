@@ -35,7 +35,7 @@
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */
-require_once(dirname(__FILE__).'/RepositorySettings.php');
+require_once dirname(__FILE__).'/RepositorySettings.php';
 
 
 /**
@@ -225,5 +225,3 @@ class Repository
 	} // ellipsisText
 
 } // class Repository
-
-?>

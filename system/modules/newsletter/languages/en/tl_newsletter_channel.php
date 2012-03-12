@@ -59,5 +59,3 @@ $GLOBALS['TL_LANG']['tl_newsletter_channel']['editheader'] = array('Edit channel
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['copy']       = array('Duplicate channel', 'Duplicate channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['delete']     = array('Delete channel', 'Delete channel ID %s');
 $GLOBALS['TL_LANG']['tl_newsletter_channel']['recipients'] = array('Edit recipients', 'Edit the recipients of channel ID %s');
-
-?>

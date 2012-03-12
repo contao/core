@@ -66,5 +66,3 @@ $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('ModuleFaq', 'getSearchable
  */
 $GLOBALS['TL_PERMISSIONS'][] = 'faqs';
 $GLOBALS['TL_PERMISSIONS'][] = 'faqp';
-
-?>

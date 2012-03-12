@@ -503,5 +503,3 @@ class tl_faq extends Backend
 		$this->createNewVersion('tl_faq', $intId);
 	}
 }
-
-?>

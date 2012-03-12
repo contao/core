@@ -66,5 +66,3 @@ $GLOBALS['TL_LANG']['tl_faq']['toggle']     = array('Frage veröffentlichen/unve
 $GLOBALS['TL_LANG']['tl_faq']['editheader'] = array('Kategorie bearbeiten', 'Die Kategorie-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_faq']['pasteafter'] = array('Oben einfügen', 'Nach der Frage ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_faq']['pastenew']   = array('Neue Frage oben erstellen', 'Neues Element nach der Frage ID %s erstellen');
-
-?>

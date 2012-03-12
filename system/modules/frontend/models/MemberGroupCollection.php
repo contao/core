@@ -65,5 +65,3 @@ class MemberGroupCollection extends \Model_Collection
 		return static::findBy(array("$t.disable='' AND ($t.start='' OR $t.start<$time) AND ($t.stop='' OR $t.stop>$time)"), null);
 	}
 }
-
-?>

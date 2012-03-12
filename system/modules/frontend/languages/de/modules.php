@@ -56,5 +56,3 @@ $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash-Film', 'Bindet einen
 $GLOBALS['TL_LANG']['FMD']['randomImage']    = array('Zufallsbild', 'Fügt der Seite ein zufällig ausgewähltes Bild hinzu.');
 $GLOBALS['TL_LANG']['FMD']['html']           = array('Eigener HTML-Code', 'Erlaubt das Hinzufügen von eigenem HTML-Code.');
 $GLOBALS['TL_LANG']['FMD']['rss_reader']     = array('RSS-Reader', 'Fügt der Seite einen RSS-Feed hinzu.');
-
-?>

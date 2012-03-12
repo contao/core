@@ -76,5 +76,3 @@ $GLOBALS['TL_PERMISSIONS'][] = 'calendars';
 $GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
 $GLOBALS['TL_PERMISSIONS'][] = 'calendarfeeds';
 $GLOBALS['TL_PERMISSIONS'][] = 'calendarfeedp';
-
-?>

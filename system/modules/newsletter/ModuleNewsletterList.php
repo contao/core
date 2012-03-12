@@ -142,5 +142,3 @@ class ModuleNewsletterList extends \Module
 		$this->Template->newsletters = $arrNewsletter;
 	}
 }
-
-?>

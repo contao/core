@@ -185,5 +185,3 @@ class FormPassword extends \Widget
 						$this->strTagEnding);
 	}
 }
-
-?>

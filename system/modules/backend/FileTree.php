@@ -122,5 +122,3 @@ class FileTree extends \Widget
   </div>';
 	}
 }
-
-?>

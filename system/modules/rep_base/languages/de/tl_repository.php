@@ -146,5 +146,3 @@ $GLOBALS['TL_LANG']['tl_repository_state_options']['alpha']   = 'Alpha';
 $GLOBALS['TL_LANG']['tl_repository_state_options']['beta']    = 'Beta';
 $GLOBALS['TL_LANG']['tl_repository_state_options']['rc']      = 'RC';
 $GLOBALS['TL_LANG']['tl_repository_state_options']['stable']  = 'Stabil';
-
-?>

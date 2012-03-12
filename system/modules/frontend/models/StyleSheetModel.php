@@ -52,5 +52,3 @@ class StyleSheetModel extends \Model
 	protected static $strTable = 'tl_style_sheet';
 
 }
-
-?>

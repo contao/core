@@ -70,5 +70,3 @@ class FormFieldCollection extends \Model_Collection
 		return static::findBy($arrColumns, $intPid, array('order'=>"$t.sorting"));
 	}
 }
-
-?>

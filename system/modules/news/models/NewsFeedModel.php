@@ -63,5 +63,3 @@ class NewsFeedModel extends \Model
 		return static::findBy(array("$t.archives LIKE '%\"" . intval($intId) . "\"%'"), null);
 	}
 }
-
-?>

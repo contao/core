@@ -74,5 +74,3 @@ class ContentList extends \ContentElement
 		$this->Template->tag = ($this->listtype == 'ordered') ? 'ol' : 'ul';
 	}
 }
-
-?>

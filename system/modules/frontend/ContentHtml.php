@@ -60,5 +60,3 @@ class ContentHtml extends \ContentElement
 		$this->Template->html = (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
 	}
 }
-
-?>

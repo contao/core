@@ -44,5 +44,3 @@ $GLOBALS['TL_LANG']['MSC']['cal_weeks']      = 'Dieser Termin wiederholt sich je
 $GLOBALS['TL_LANG']['MSC']['cal_months']     = 'Dieser Termin wiederholt sich jeden %s. Monat';
 $GLOBALS['TL_LANG']['MSC']['cal_years']      = 'Dieser Termin wiederholt sich jedes %s. Jahr';
 $GLOBALS['TL_LANG']['MSC']['cal_until']      = 'bis zum  %s';
-
-?>

@@ -32,5 +32,3 @@
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_module']['comment_legend'] = 'Comment settings';
-
-?>

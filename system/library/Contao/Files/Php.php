@@ -200,5 +200,3 @@ class Files_Php extends \Files
 		return @move_uploaded_file($strSource, TL_ROOT . '/' . $strDestination);
 	}
 }
-
-?>

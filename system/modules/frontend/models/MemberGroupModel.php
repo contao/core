@@ -100,5 +100,3 @@ class MemberGroupModel extends \Model
 		return new static($objResult);
 	}
 }
-
-?>

@@ -706,5 +706,3 @@ class tl_form_field extends Backend
 		$this->createNewVersion('tl_form_field', $intId);
 	}
 }
-
-?>

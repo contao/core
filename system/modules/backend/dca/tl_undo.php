@@ -126,5 +126,3 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		)
 	)
 );
-
-?>

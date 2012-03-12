@@ -32,5 +32,3 @@
  * Reference
  */
 $GLOBALS['TL_LANG']['MSC']['faqCreatedBy'] = 'Last update on %s by %s.';
-
-?>

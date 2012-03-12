@@ -350,5 +350,3 @@ abstract class Module extends \Frontend
 		return !empty($items) ? $objTemplate->parse() : '';
 	}
 }
-
-?>

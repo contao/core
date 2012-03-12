@@ -40,5 +40,3 @@ $GLOBALS['TL_LANG']['tl_module']['list_info']        = array('Details page field
 $GLOBALS['TL_LANG']['tl_module']['list_info_where']  = array('Details page condition', 'Here you can enter a condition to filter the results (e.g. <em>published=1</em> or <em>type!="admin"</em>).');
 $GLOBALS['TL_LANG']['tl_module']['list_layout']      = array('List template', 'Here you can select the list template.');
 $GLOBALS['TL_LANG']['tl_module']['list_info_layout'] = array('Details page template', 'Here you can select the details page template.');
-
-?>

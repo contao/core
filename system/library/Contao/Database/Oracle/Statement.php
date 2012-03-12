@@ -179,5 +179,3 @@ class Database_Oracle_Statement extends \Database_Statement
 		return new \Database_Oracle_Result($resResult, $strQuery);
 	}
 }
-
-?>

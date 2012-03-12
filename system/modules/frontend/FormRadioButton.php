@@ -185,5 +185,3 @@ class FormRadioButton extends \Widget
 		}
 	}
 }
-
-?>

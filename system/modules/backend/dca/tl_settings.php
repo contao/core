@@ -558,7 +558,7 @@ class tl_settings extends Backend
 
 				if (file_exists($strFile))
 				{
-					include($strFile);
+					include $strFile;
 				}
 			}
 
@@ -723,5 +723,3 @@ class tl_settings extends Backend
 		return $varValue;
 	}
 }
-
-?>

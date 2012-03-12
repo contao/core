@@ -54,5 +54,3 @@ $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'Contao warte
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'Benutzerfunktionen';
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Rückgängig', 'Gelöschte Datensätze wiederherstellen.');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönliche Daten ändern oder ein neues Passwort setzen.');
-
-?>

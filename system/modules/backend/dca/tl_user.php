@@ -825,5 +825,3 @@ class tl_user extends Backend
 		$this->createNewVersion('tl_user', $intId);
 	}
 }
-
-?>

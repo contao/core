@@ -63,5 +63,3 @@ $GLOBALS['TL_LANG']['tl_maintenance']['indexNote']     = 'Bitte warten Sie, bis 
 $GLOBALS['TL_LANG']['tl_maintenance']['indexLoading']  = 'Bitte warten Sie, während der Suchindex neu aufgebaut wird.';
 $GLOBALS['TL_LANG']['tl_maintenance']['indexComplete'] = 'Der Suchindex wurde neu aufgebaut. Sie können nun fortfahren.';
 $GLOBALS['TL_LANG']['tl_maintenance']['updateHelp']    = 'Bitte geben Sie Ihre %s ein.';
-
-?>

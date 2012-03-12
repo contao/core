@@ -341,5 +341,3 @@ class TableWizard extends \Widget
 </form>';
 	}
 }
-
-?>

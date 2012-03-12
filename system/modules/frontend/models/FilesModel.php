@@ -51,5 +51,3 @@ class FilesModel extends \Model
 	 */
 	protected static $strTable = 'tl_files';
 }
-
-?>

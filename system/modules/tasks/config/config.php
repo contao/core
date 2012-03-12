@@ -43,5 +43,3 @@ $GLOBALS['BE_MOD']['profile']['tasks'] = array
  * System messages
  */
 $GLOBALS['TL_HOOKS']['getSystemMessages'][] = array('TaskMessages', 'listTasks');
-
-?>

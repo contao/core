@@ -172,5 +172,3 @@ class PageCollection extends \Model_Collection
 		return new static($objPages);
 	}
 }
-
-?>

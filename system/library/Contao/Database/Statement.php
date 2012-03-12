@@ -443,5 +443,3 @@ abstract class Database_Statement
 	abstract protected function explain_query();
 	abstract protected function createResult($resResult, $strQuery);
 }
-
-?>

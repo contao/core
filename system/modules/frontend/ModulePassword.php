@@ -336,5 +336,3 @@ class ModulePassword extends \Module
 		$this->jumpToOrReload($this->jumpTo);
 	}
 }
-
-?>

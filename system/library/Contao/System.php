@@ -405,10 +405,10 @@ abstract class System
 		{
 			// Generate the cache files
 			$objCacheFallback = new \File('system/cache/language/en/' . $strName . '.php');
-			$objCacheFallback->truncate();
+			$objCacheFallback->write('<?php' . "\n");
 
 			$objCacheFile = new \File('system/cache/language/' . $strLanguage . '/' . $strName . '.php');
-			$objCacheFile->truncate();
+			$objCacheFile->write('<?php' . "\n");
 
 			// Parse all active modules
 			foreach ($this->Config->getActiveModules() as $strModule)
@@ -417,8 +417,8 @@ abstract class System
 
 				if (file_exists($strFallback))
 				{
-					$objCacheFallback->append(file_get_contents($strFallback));
-					include($strFallback);
+					$objCacheFile->append(file_get_contents($strFallback, null, null, 6));
+					include $strFallback;
 				}
 
 				if ($strLanguage == 'en')
@@ -430,8 +430,8 @@ abstract class System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile));
-					include($strFile);
+					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					include $strFile;
 				}
 			}
 
@@ -458,7 +458,7 @@ abstract class System
 		// Local configuration file
 		if (file_exists(TL_ROOT . '/system/config/langconfig.php'))
 		{
-			include(TL_ROOT . '/system/config/langconfig.php');
+			include TL_ROOT . '/system/config/langconfig.php';
 		}
 		
 		// Use a global cache variable to support nested calls
@@ -775,7 +775,7 @@ abstract class System
 	{
 		if (!class_exists('idna_convert', false))
 		{
-			require_once(TL_ROOT . '/system/library/IDNA/idna_convert.class.php');
+			require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
 		}
 
 		$objIdn = new \idna_convert();
@@ -792,7 +792,7 @@ abstract class System
 	{
 		if (!class_exists('idna_convert', false))
 		{
-			require_once(TL_ROOT . '/system/library/IDNA/idna_convert.class.php');
+			require_once TL_ROOT . '/system/library/IDNA/idna_convert.class.php';
 		}
 
 		$objIdn = new \idna_convert();
@@ -997,5 +997,3 @@ abstract class System
 		return implode('', array_map('ucfirst', $arrChunks)) . (!$blnNoSuffix ? 'Model' : '');
 	}
 }
-
-?>

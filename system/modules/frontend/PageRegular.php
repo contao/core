@@ -676,5 +676,3 @@ class PageRegular extends \Frontend
 		$this->Template->mootools = $strScripts;
 	}
 }
-
-?>

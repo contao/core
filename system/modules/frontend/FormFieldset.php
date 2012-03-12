@@ -101,5 +101,3 @@ class FormFieldset extends \Widget
 		}
 	}
 }
-
-?>

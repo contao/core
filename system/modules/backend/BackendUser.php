@@ -464,5 +464,3 @@ class BackendUser extends \User
 		return $arrModules;
 	}
 }
-
-?>

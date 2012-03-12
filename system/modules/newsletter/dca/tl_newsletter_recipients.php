@@ -429,5 +429,3 @@ class tl_newsletter_recipients extends Backend
 		$this->createNewVersion('tl_newsletter_recipients', $intId);
 	}
 }
-
-?>

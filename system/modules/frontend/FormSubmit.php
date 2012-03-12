@@ -120,5 +120,3 @@ class FormSubmit extends \Widget
 						$this->strTagEnding);
 	}
 }
-
-?>

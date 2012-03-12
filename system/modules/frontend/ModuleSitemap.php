@@ -94,5 +94,3 @@ class ModuleSitemap extends \Module
 		$this->Template->items = $this->renderNavigation($this->rootPage);
 	}
 }
-
-?>

@@ -280,5 +280,3 @@ $GLOBALS['TL_LANG']['CNT']['yt'] = 'Mayotte';
 $GLOBALS['TL_LANG']['CNT']['za'] = 'South Africa';
 $GLOBALS['TL_LANG']['CNT']['zm'] = 'Zambia';
 $GLOBALS['TL_LANG']['CNT']['zw'] = 'Zimbabwe';
-
-?>

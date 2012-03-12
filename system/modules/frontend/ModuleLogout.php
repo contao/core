@@ -115,5 +115,3 @@ class ModuleLogout extends \Module
 		return;
 	}
 }
-
-?>

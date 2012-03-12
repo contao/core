@@ -107,5 +107,3 @@ $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD']    = 'Neue Spalten anlegen';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Bestehende Spalten ändern';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP']   = 'Bestehende Spalten löschen';
 $GLOBALS['TL_LANG']['tl_install']['DROP']         = 'Bestehende Tabellen löschen';
-
-?>

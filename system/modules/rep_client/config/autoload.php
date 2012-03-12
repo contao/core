@@ -54,5 +54,3 @@ TemplateLoader::addFiles(array
 	'repository_mgrupdt' => 'system/modules/rep_client/templates',
 	'repository_mgrupgd' => 'system/modules/rep_client/templates',
 ));
-
-?>

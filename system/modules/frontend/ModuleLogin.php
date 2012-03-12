@@ -234,5 +234,3 @@ class ModuleLogin extends \Module
 		$this->Template->autoLabel = $GLOBALS['TL_LANG']['MSC']['autologin'];
 	}
 }
-
-?>

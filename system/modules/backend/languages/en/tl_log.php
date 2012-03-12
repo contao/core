@@ -53,5 +53,3 @@ $GLOBALS['TL_LANG']['tl_log']['FE'] = 'Front end';
  */
 $GLOBALS['TL_LANG']['tl_log']['show']   = array('Show details', 'Show the details of entry ID %s');
 $GLOBALS['TL_LANG']['tl_log']['delete'] = array('Delete', 'Delete entry ID %s');
-
-?>

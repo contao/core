@@ -42,5 +42,3 @@ $GLOBALS['TL_LANG']['FMD']['newslist']    = array('Nachrichtenliste', 'Fügt der
 $GLOBALS['TL_LANG']['FMD']['newsreader']  = array('Nachrichtenleser', 'Stellt einen einzelnen Nachrichtenbeitrag dar.');
 $GLOBALS['TL_LANG']['FMD']['newsarchive'] = array('Nachrichtenarchiv', 'Fügt der Seite ein Nachrichtenarchiv hinzu.');
 $GLOBALS['TL_LANG']['FMD']['newsmenu']    = array('Nachrichtenarchiv-Menü', 'Erzeugt ein Menü zur Navigation des Nachrichtenarchivs.');
-
-?>

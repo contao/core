@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -97,5 +97,3 @@ class Preview extends Backend
  */
 $objPreview = new Preview();
 $objPreview->run();
-
-?>

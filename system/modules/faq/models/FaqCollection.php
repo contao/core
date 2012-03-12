@@ -68,5 +68,3 @@ class FaqCollection extends \Model_Collection
 		return static::findBy(array("$t.pid IN(" . implode(',', array_map('intval', $arrPids)) . ")"), null, array('order'=>"$t.pid, $t.sorting"));
 	}
 }
-
-?>

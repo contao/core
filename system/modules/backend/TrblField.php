@@ -148,5 +148,3 @@ class TrblField extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

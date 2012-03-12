@@ -542,5 +542,3 @@ window.addEvent(\'domready\', function() {
 		return $strPalette;
 	}
 }
-
-?>

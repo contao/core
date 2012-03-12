@@ -52,5 +52,3 @@ class ContentModel extends \Model
 	protected static $strTable = 'tl_content';
 								 
 }
-
-?>

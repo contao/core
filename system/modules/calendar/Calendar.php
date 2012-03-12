@@ -483,5 +483,3 @@ class Calendar extends \Frontend
 		return $arrFeeds;
 	}
 }
-
-?>

@@ -54,5 +54,3 @@ $GLOBALS['TL_LANG']['tl_module']['show_current'] = 'Zum aktuellen Zeitraum sprin
 $GLOBALS['TL_LANG']['tl_module']['all_items']    = 'Alle Beiträge anzeigen';
 $GLOBALS['TL_LANG']['tl_module']['featured']     = 'Nur hervorgehobene Beiträge anzeigen';
 $GLOBALS['TL_LANG']['tl_module']['unfeatured']   = 'Hervorgehobene Beiträge überspringen';
-
-?>

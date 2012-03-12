@@ -202,5 +202,3 @@ class tl_module_newsletter extends Backend
 		return $this->getTemplateGroup('nl_', $intPid);
 	}
 }
-
-?>

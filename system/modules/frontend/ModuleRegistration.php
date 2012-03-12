@@ -574,5 +574,3 @@ class ModuleRegistration extends \Module
 		$this->log('A new user (ID ' . $intId . ') has registered on the website', 'ModuleRegistration sendAdminNotification()', TL_ACCESS);
 	}
 }
-
-?>

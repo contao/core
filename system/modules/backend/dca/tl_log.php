@@ -202,5 +202,3 @@ class tl_log extends Backend
 		return $label;
 	}
 }
-
-?>

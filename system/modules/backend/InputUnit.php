@@ -158,5 +158,3 @@ class InputUnit extends \Widget
 						$this->wizard);
 	}
 }
-
-?>

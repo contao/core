@@ -140,5 +140,3 @@ $GLOBALS['TL_LANG']['tl_page']['toggle']     = array('Publish/unpublish page', '
 $GLOBALS['TL_LANG']['tl_page']['pasteafter'] = array('Paste after', 'Paste after page ID %s');
 $GLOBALS['TL_LANG']['tl_page']['pasteinto']  = array('Paste into', 'Paste into page ID %s');
 $GLOBALS['TL_LANG']['tl_page']['articles']   = array('Edit articles', 'Edit the articles of page ID %s');
-
-?>

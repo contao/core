@@ -70,5 +70,3 @@ class FormHtml extends \Widget
 		return (TL_MODE == 'FE') ? $this->html : htmlspecialchars($this->html);
 	}
 }
-
-?>

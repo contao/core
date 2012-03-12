@@ -359,5 +359,3 @@ class PageSelector extends \Widget
 		}
 	}
 }
-
-?>

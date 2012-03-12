@@ -43,5 +43,3 @@
 $GLOBALS['TL_LANG']['MOD']['rep_client']         = 'Repository-Client';
 $GLOBALS['TL_LANG']['MOD']['repository_catalog'] = array('Erweiterungskatalog', 'Das Extension Repository durchsuchen und Erweiterungen installieren.');
 $GLOBALS['TL_LANG']['MOD']['repository_manager'] = array('Erweiterungsverwaltung', 'Installierte Erweiterungen verwalten oder entfernen.');
-
-?>

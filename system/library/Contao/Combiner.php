@@ -219,5 +219,3 @@ class Combiner extends \System
 		return $strUrl . 'assets/' . $strTarget . '/' . $strKey . $this->strMode;
 	}
 }
-
-?>

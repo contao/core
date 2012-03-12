@@ -525,5 +525,3 @@ class File extends \System
 		return $arrMime[1];
 	}
 }
-
-?>

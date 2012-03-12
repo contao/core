@@ -41,5 +41,3 @@ $GLOBALS['TL_LANG']['MSC']['commentCount']  = '(comments: %s)';
 $GLOBALS['TL_LANG']['MSC']['news_items']    = '%d item(s)';
 $GLOBALS['TL_LANG']['MSC']['news_previous'] = '&lt;';
 $GLOBALS['TL_LANG']['MSC']['news_next']     = '&gt;';
-
-?>

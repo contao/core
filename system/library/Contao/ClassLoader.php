@@ -227,7 +227,6 @@ class ClassLoader
 
 			include TL_ROOT . '/' . self::$classes[$class];
 		}
-
 		// Find the class in the registered namespaces
 		elseif (($namespaced = self::findClass($class)) != false)
 		{
@@ -298,5 +297,3 @@ class ClassLoader
 		self::register();
 	}
 }
-
-?>

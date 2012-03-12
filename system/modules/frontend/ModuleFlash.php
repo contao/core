@@ -110,5 +110,3 @@ class ModuleFlash extends \Module
 		}
 	}
 }
-
-?>

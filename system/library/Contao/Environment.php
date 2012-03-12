@@ -489,5 +489,3 @@ class Environment
 		return $return;
 	}
 }
-
-?>

@@ -881,5 +881,3 @@ class ModuleTasks extends \BackendModule
 		return $widget;
 	}
 }
-
-?>

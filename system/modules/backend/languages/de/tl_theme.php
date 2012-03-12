@@ -78,5 +78,3 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Module', 'Die Frontend-M
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Seitenlayouts', 'Die Seitenlayouts des Theme ID %s bearbeiten');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme importieren', 'Ein neues Theme importieren');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Exportieren', 'Theme ID %s exportieren');
-
-?>

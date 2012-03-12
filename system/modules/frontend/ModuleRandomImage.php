@@ -159,5 +159,3 @@ class ModuleRandomImage extends \Module
 		$this->addImageToTemplate($this->Template, $arrImage);
 	}
 }
-
-?>

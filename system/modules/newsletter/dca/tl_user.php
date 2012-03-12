@@ -58,5 +58,3 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['newsletterp'] = array
 	'eval'                    => array('multiple'=>true),
 	'sql'                     => "blob NULL"
 );
-
-?>

@@ -118,5 +118,3 @@ class RepositoryBackendTheme
 	} // createMainButton
 
 } // class RepositoryTheme
-
-?>

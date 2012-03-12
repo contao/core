@@ -184,5 +184,3 @@ class PreviewSwitch extends Backend
  */
 $objPreviewSwitch = new PreviewSwitch();
 $objPreviewSwitch->run();
-
-?>
