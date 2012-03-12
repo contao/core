@@ -441,8 +441,9 @@ class tl_form extends Backend
 	/**
 	 * Auto-generate a form alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
-	 * @return string
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{

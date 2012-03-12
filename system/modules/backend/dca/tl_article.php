@@ -545,8 +545,9 @@ class tl_article extends Backend
 	/**
 	 * Auto-generate an article alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -744,7 +745,7 @@ class tl_article extends Backend
 
 	/**
 	 * Return the paste article button
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @param array
 	 * @param string
 	 * @param boolean

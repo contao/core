@@ -61,7 +61,6 @@ class ModuleFaq extends \Frontend
 			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
 
 		// Get all categories

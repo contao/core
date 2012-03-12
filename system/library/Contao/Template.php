@@ -86,7 +86,7 @@ abstract class Template extends Controller
 	 * Create a new template instance
 	 * @param string
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct($strTemplate='', $strContentType='text/html')
 	{
@@ -393,6 +393,7 @@ abstract class Template extends Controller
 
 	/**
 	 * Print the IE6 warning
+	 * @return string
 	 */
 	public function showIE6warning()
 	{

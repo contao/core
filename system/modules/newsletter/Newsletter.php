@@ -312,9 +312,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Generate the e-mail object and return it
-	 * @param Database_Result
+	 * @param \Database_Result
 	 * @param array
-	 * @return Email
+	 * @return \Email
 	 */
 	protected function generateEmailObject(\Database_Result $objNewsletter, $arrAttachments)
 	{
@@ -777,8 +777,8 @@ class Newsletter extends \Backend
 
 			if ($objUser->numRows)
 			{
-				$objSubscriptions = $this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=?")
-												   ->execute($objUser->email);
+				$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=?")
+							   ->execute($objUser->email);
 			}
 		}
 	}
@@ -847,7 +847,6 @@ class Newsletter extends \Backend
 			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
 
 		// Get all channels

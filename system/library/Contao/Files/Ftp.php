@@ -78,7 +78,7 @@ class Files_Ftp extends \Files
 
 	/**
 	 * Establish an FTP connection
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function connect()
 	{
@@ -179,6 +179,18 @@ class Files_Ftp extends \Files
 		$this->arrFiles[$arrData['uri']] = $strFile;
 
 		return $resFile;
+	}
+
+
+	/**
+	 * Write content to a file
+	 * @param string
+	 * @param string
+	 * @return boolean
+	 */
+	public function fputs($resFile, $strContent)
+	{
+		return @fputs($resFile, $strContent);
 	}
 
 

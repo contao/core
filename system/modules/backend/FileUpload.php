@@ -83,7 +83,7 @@ class FileUpload extends \Backend
 	 * @param string
 	 * @param string
 	 * @return array
-	 * @throws Expcetion
+	 * @throws \Expcetion
 	 */
 	public function uploadTo($strTarget, $strKey)
 	{

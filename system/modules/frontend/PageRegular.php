@@ -394,8 +394,8 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all header scripts
-	 * @param Database_Result|Model
-	 * @param Database_Result|Model
+	 * @param \Database_Result|\Model
+	 * @param \Database_Result|\Model
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
 	{

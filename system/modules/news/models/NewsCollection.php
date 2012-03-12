@@ -155,6 +155,7 @@ class NewsCollection extends \Model_Collection
 	 * Find published news items by their parent ID
 	 * @param integer
 	 * @param integer
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPid($intId, $intLimit=0)
 	{

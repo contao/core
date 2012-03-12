@@ -112,8 +112,6 @@ class ModuleNewsReader extends \ModuleNews
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$time = time();
-
 		// Get the news item
 		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->news_archives);
 
@@ -161,7 +159,7 @@ class ModuleNewsReader extends \ModuleNews
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objArchive->notify != 'notify_author')
+		if ($objArticle->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}

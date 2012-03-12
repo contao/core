@@ -295,16 +295,13 @@ class FrontendUser extends \User
 	/**
 	 * Restore the original group membership
 	 * @param boolean
-	 * @return integer
 	 */
 	public function save($blnForceInsert=false)
 	{
 		$groups = $this->groups;
 		$this->arrData['groups'] = $this->arrGroups;
-		$return = parent::save($blnForceInsert);
+		parent::save($blnForceInsert);
 		$this->groups = $groups;
-
-		return $return;
 	}
 
 
@@ -337,8 +334,6 @@ class FrontendUser extends \User
 		{
 			$this->groups = strlen($this->groups) ? array($this->groups) : array();
 		}
-
-		$time = time();
 
 		// Skip inactive groups
 		if (($objGroups = \MemberGroupCollection::findAllActive()) !== null)

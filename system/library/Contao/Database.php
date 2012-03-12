@@ -72,7 +72,7 @@ abstract class Database
 
 	/**
 	 * Load the database configuration file and connect to the database
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function __construct()
 	{
@@ -122,7 +122,7 @@ abstract class Database
 	/**
 	 * Instantiate a database driver object and return it (Factory)
 	 * @return Database
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public static function getInstance()
 	{

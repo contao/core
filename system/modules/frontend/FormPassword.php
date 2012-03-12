@@ -62,7 +62,7 @@ class FormPassword extends \Widget
 	 * Always decode entities
 	 * @param array
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		parent::__construct($arrAttributes);
 		$this->decodeEntities = true;

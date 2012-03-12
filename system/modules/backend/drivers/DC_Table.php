@@ -1374,7 +1374,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// Delete the records
 			foreach ($delete as $table=>$fields)
 			{
-				foreach ($fields as $k=>$v)
+				foreach ($fields as $v)
 				{
 					$this->Database->prepare("DELETE FROM " . $table . " WHERE id=?")
 								   ->limit(1)
@@ -1709,7 +1709,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
 
 				// Build rows of the current box
-				foreach ($v as $kk=>$vv)
+				foreach ($v as $vv)
 				{
 					if ($vv == '[EOF]')
 					{
@@ -2787,9 +2787,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if (strlen($GLOBALS['TL_DCA'][$this->strTable]['palettes'][$paletteName]))
 				{
-					$palette = $paletteName;
 					$strPalette = $GLOBALS['TL_DCA'][$this->strTable]['palettes'][$paletteName];
-
 					break;
 				}
 			}
@@ -4034,7 +4032,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 						{
 							$args[$k] = is_array($GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]]) ? $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]][0] : $GLOBALS['TL_DCA'][$table]['fields'][$v]['reference'][$row[$v]];
 						}
-						elseif (($GLOBALS['TL_DCA'][$able]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'])) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
+						elseif (($GLOBALS['TL_DCA'][$table]['fields'][$v]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'])) && isset($GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]]))
 						{
 							$args[$k] = $GLOBALS['TL_DCA'][$table]['fields'][$v]['options'][$row[$v]];
 						}
@@ -4411,6 +4409,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	{
 		$session = $this->Session->getData();
 		$filter = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 4) ? $this->strTable.'_'.CURRENT_ID : $this->strTable;
+		$fields = '';
 
 		// Set limit from user input
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_filters' || $this->Input->post('FORM_SUBMIT') == 'tl_filters_limit')
@@ -4505,7 +4504,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				return '';
 			}
 
-			$fields .= '
+			$fields = '
 <select name="tl_limit" class="tl_select' . (($session['filter'][$filter]['limit'] != 'all' && $total > $GLOBALS['TL_CONFIG']['resultsPerPage']) ? ' active' : '') . '" onchange="this.form.submit()">
   <option value="tl_limit">'.$GLOBALS['TL_LANG']['MSC']['filterRecords'].'</option>'.$options.'
 </select> ';
@@ -4999,7 +4998,6 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 	 */
 	protected function formatGroupHeader($field, $value, $mode, $row)
 	{
-		$group = '';
 		static $lookup = array();
 
 		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['options']))

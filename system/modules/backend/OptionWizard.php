@@ -149,8 +149,8 @@ class OptionWizard extends \Widget
 			$this->varValue = array(array(''));
 		}
 
-		// Begin table
-		$return .= '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
+		// Begin the table
+		$return = '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
   <thead>
     <tr>
       <th>'.$GLOBALS['TL_LANG']['MSC']['ow_value'].'</th>

@@ -75,6 +75,7 @@ class Combiner extends \System
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @throws \Exception
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')
 	{
@@ -149,8 +150,13 @@ class Combiner extends \System
 	 * @param string
 	 * @return string
 	 */
-	public function getCombinedFile($strUrl=TL_SCRIPT_URL)
+	public function getCombinedFile($strUrl=null)
 	{
+		if ($strUrl === null)
+		{
+			$strUrl = TL_SCRIPT_URL;
+		}
+
 		$strTarget = substr($this->strMode, 1);
 		$strKey = substr(md5($this->strKey), 0, 12);
 

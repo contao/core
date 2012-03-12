@@ -87,10 +87,10 @@ class Date extends \System
 	 * @param integer
 	 * @param string
 	 */
-	public function __construct($intTstamp=false, $strFormat=false)
+	public function __construct($intTstamp=null, $strFormat=null)
 	{
-		$this->intTstamp = $intTstamp ? $intTstamp : time();
-		$this->strFormat = $strFormat ? $strFormat : $GLOBALS['TL_CONFIG']['dateFormat'];
+		$this->intTstamp = $intTstamp ?: time();
+		$this->strFormat = $strFormat ?: $GLOBALS['TL_CONFIG']['dateFormat'];
 
 		if (!preg_match('/^\-?[0-9]+$/', $this->intTstamp) || preg_match('/^[a-zA-Z]+$/', $this->strFormat))
 		{
@@ -210,11 +210,11 @@ class Date extends \System
 	 * Return a regular expression to check a date
 	 * @param string
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function getRegexp($strFormat=false)
+	public function getRegexp($strFormat=null)
 	{
-		if (!$strFormat)
+		if ($strFormat === null)
 		{
 			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
 		}
@@ -262,11 +262,11 @@ class Date extends \System
 	 * Return an input format string for a particular date (e.g. YYYY-MM-DD)
 	 * @param string
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function getInputFormat($strFormat=false)
+	public function getInputFormat($strFormat=null)
 	{
-		if (!$strFormat)
+		if ($strFormat === null)
 		{
 			$strFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
 		}
@@ -314,7 +314,7 @@ class Date extends \System
 
 	/**
 	 * Convert a date string into a UNIX timestamp using a particular date format
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function dateToUnix()
 	{
@@ -432,7 +432,8 @@ class Date extends \System
 
 	/**
 	 * Convert a PHP format string into a JavaScript format string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public static function formatToJs($strFormat)
 	{
@@ -458,7 +459,7 @@ class Date extends \System
 			} 
 		}
 
-		return preg_replace('/([a-zA-Z])/', '%$1', implode($chunks));
+		return preg_replace('/([a-zA-Z])/', '%$1', implode('', $chunks));
 	}
 }
 

@@ -47,6 +47,7 @@ class Theme extends \Backend
 
 	/**
 	 * Import a theme
+	 * @return string
 	 */
 	public function importTheme()
 	{
@@ -105,7 +106,8 @@ class Theme extends \Backend
 			// Proceed
 			if ($this->Input->post('confirm') == 1)
 			{
-				return $this->extractThemeFiles($arrFiles, $arrDbFields);
+				$this->extractThemeFiles($arrFiles, $arrDbFields);
+				return '';
 			}
 			else
 			{
@@ -151,6 +153,7 @@ class Theme extends \Backend
 	 * whether there are custom layout sections 
 	 * @param array
 	 * @param array
+	 * @return string
 	 */
 	protected function compareThemeFiles($arrFiles, $arrDbFields)
 	{
@@ -190,9 +193,7 @@ class Theme extends \Backend
 			// Continue if there is no XML file
 			if ($objArchive->getFile('theme.xml') === false)
 			{
-				$blnHasError = true;
 				$return .= "\n  " . '<p style="margin:0;color:#c55">'. sprintf($GLOBALS['TL_LANG']['tl_theme']['missing_xml'], basename($strFile)) ."</p>\n</div>";
-
 				continue;
 			}
 
@@ -425,13 +426,6 @@ class Theme extends \Backend
 			);
 
 			$this->Database->lockTables($arrLocks);
-
-			// Get the current auto_increment values
-			$tl_theme = $this->Database->getNextId('tl_theme');
-			$tl_style_sheet = $this->Database->getNextId('tl_style_sheet');
-			$tl_style = $this->Database->getNextId('tl_style');
-			$tl_module = $this->Database->getNextId('tl_module');
-			$tl_layout = $this->Database->getNextId('tl_layout');
 
 			// Loop through the tables
 			for ($i=0; $i<$tables->length; $i++)
@@ -808,7 +802,7 @@ class Theme extends \Backend
 			}
 
 			$value = $xml->createTextNode($v);
-			$value = $field->appendChild($value);
+			$field->appendChild($value);
 		}
 	}
 

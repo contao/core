@@ -127,9 +127,8 @@ abstract class Widget extends Controller
 	/**
 	 * Initialize the object
 	 * @param array
-	 * @throws Exception
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		parent::__construct();
 
@@ -477,7 +476,6 @@ abstract class Widget extends Controller
 	public function getAttributes($arrStrip=array())
 	{
 		$blnIsXhtml = false;
-		$arrAttributes = $this->arrAttributes;
 
 		// Remove HTML5 attributes in XHTML code
 		if (TL_MODE == 'FE')

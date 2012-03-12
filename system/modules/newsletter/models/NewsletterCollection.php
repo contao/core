@@ -64,7 +64,6 @@ class NewsletterCollection extends \Model_Collection
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
 			$arrColumns[] = "$t.sent=1";
 		}
 
@@ -89,7 +88,6 @@ class NewsletterCollection extends \Model_Collection
 
 		if (!BE_USER_LOGGED_IN)
 		{
-			$time = time();
 			$arrColumns[] = "$t.sent=1";
 		}
 

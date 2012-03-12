@@ -258,6 +258,8 @@ class ClassLoader
 				return $namespace . '\\' . $class;
 			}
 		}
+
+		return '';
 	}
 
 

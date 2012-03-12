@@ -92,7 +92,7 @@ abstract class Database_Result
 	 * Validate the connection resource and store the query
 	 * @param resource
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct($resResult, $strQuery)
 	{

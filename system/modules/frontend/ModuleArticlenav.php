@@ -78,10 +78,7 @@ class ModuleArticlenav extends \Module
 		}
 
 		global $objPage;
-		$id = $objPage->id;
-		$time = time();
-
-		$this->objArticles = \ArticleCollection::findPublishedWithTeaserByPidAndColumn($id, $this->strColumn);
+		$this->objArticles = \ArticleCollection::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
 
 		// Return if there are no articles
 		if ($this->objArticles === null)

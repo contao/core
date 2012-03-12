@@ -91,6 +91,7 @@ class DcaExtractor extends \DbInstaller
 	/**
 	 * Load or create the extract
 	 * @param string
+	 * @throws \Exception
 	 */
 	public function __construct($strTable)
 	{
@@ -233,7 +234,7 @@ class DcaExtractor extends \DbInstaller
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function createExtract()
 	{

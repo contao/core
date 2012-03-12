@@ -1272,10 +1272,9 @@ class tl_content extends Backend
 
 	/**
 	 * Add a link to the list items import wizard
-	 * @param object
 	 * @return string
 	 */
-	public function listImportWizard(DataContainer $dc)
+	public function listImportWizard()
 	{
 		return ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a>';
 	}
@@ -1283,10 +1282,9 @@ class tl_content extends Backend
 
 	/**
 	 * Add a link to the table items import wizard
-	 * @param object
 	 * @return string
 	 */
-	public function tableImportWizard(DataContainer $dc)
+	public function tableImportWizard()
 	{
 		return ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset()">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom"') . '</a> ' . $this->generateImage('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom;cursor:pointer" onclick="Backend.tableWizardResize(0.9)"') . $this->generateImage('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer" onclick="Backend.tableWizardResize(1.1)"');
 	}

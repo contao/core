@@ -80,7 +80,7 @@ abstract class Database_Statement
 	 * Validate the connection resource and store the query
 	 * @param resource
 	 * @param boolean
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct($resConnection, $blnDisableAutocommit=false)
 	{
@@ -137,14 +137,14 @@ abstract class Database_Statement
 	/**
 	 * Prepare a statement
 	 * @param string
-	 * @return Database_Statement
-	 * @throws Exception
+	 * @return \Database_Statement
+	 * @throws \Exception
 	 */
 	public function prepare($strQuery)
 	{
-		if (!strlen($strQuery))
+		if ($strQuery == '')
 		{
-			throw \Exception('Empty query string');
+			throw new \Exception('Empty query string');
 		}
 
 		$this->resResult = NULL;
@@ -194,7 +194,6 @@ abstract class Database_Statement
 								implode(', ', array_keys($arrParams)),
 								str_replace('%', '%%', implode(', ', array_values($arrParams))));
 		}
-
 		// UPDATE
 		elseif (strncasecmp($this->strQuery, 'UPDATE', 6) === 0)
 		{
@@ -239,7 +238,7 @@ abstract class Database_Statement
 	/**
 	 * Escape the parameters and execute the current statement
 	 * @return Database_Result
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function execute()
 	{
@@ -274,7 +273,7 @@ abstract class Database_Statement
 	/**
 	 * Execute the current statement but do not cache the result
 	 * @return Database_Result
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function executeUncached()
 	{
@@ -294,7 +293,7 @@ abstract class Database_Statement
 	 * Execute a query and return the result object
 	 * @param string
 	 * @return Database_Result
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function query($strQuery='')
 	{
@@ -333,7 +332,7 @@ abstract class Database_Statement
 	/**
 	 * Build the query string
 	 * @param array
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function replaceWildcards($arrParams)
 	{
@@ -433,9 +432,7 @@ abstract class Database_Statement
 	}
 
 
-	/**
-	 * Abstract database driver methods
-	 */
+	// Abstract database driver methods
 	abstract protected function prepare_query($strQuery);
 	abstract protected function string_escape($strString);
 	abstract protected function limit_query($intOffset, $intRows);

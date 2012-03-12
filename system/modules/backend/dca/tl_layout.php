@@ -680,7 +680,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Add a link to edit the stylesheets of the theme
-	 * @param object
+	 * @param \DataContainer
 	 * @return string
 	 */
 	public function styleSheetLink(DataContainer $dc)

@@ -789,7 +789,6 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	public function move($blnIsAjax=false)
 	{
-		$error = false;
 		$strFolder = $this->Input->get('pid', true);
 
 		if (!file_exists(TL_ROOT . '/' . $strFolder) || !$this->isMounted($strFolder))
@@ -955,13 +954,13 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$objFile = \FilesModel::findBy('path', $this->intId);
 			$this->objActiveRecord = $objFile;
 
-			foreach ($boxes as $k=>$v)
+			foreach ($boxes as $v)
 			{
 				$return .= '
 <div class="'.$class.'">';
 
 				// Build rows of the current box
-				foreach ($v as $kk=>$vv)
+				foreach ($v as $vv)
 				{
 					$this->strField = $vv;
 					$this->strInputName = $vv;
@@ -1497,6 +1496,7 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
+	 * @throws \Exception
 	 */
 	protected function save($varValue)
 	{
@@ -1893,7 +1893,6 @@ window.addEvent(\'domready\', function() {
 				$thumbnail .= ' <span class="tl_gray">('.$this->getReadableSize($objFile->filesize).')</span>';
 			}
 
-			$_buttons = '&nbsp;';
 			$strFileNameEncoded = utf8_convert_encoding(specialchars(basename($currentFile)), $GLOBALS['TL_CONFIG']['characterSet']);
 
 			// No popup links for templates and in the popup file manager

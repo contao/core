@@ -188,7 +188,7 @@ class ModuleFaqReader extends \Module
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objCategory->notify != 'notify_author')
+		if ($objFaq->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}

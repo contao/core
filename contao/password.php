@@ -36,14 +36,14 @@ require_once('../system/initialize.php');
 
 
 /**
- * Class Index
+ * Class ChangePassword
  *
  * Handle back end password changes.
  * @copyright  Leo Feyer 2011-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Index extends Backend
+class ChangePassword extends Backend
 {
 
 	/**
@@ -148,7 +148,7 @@ class Index extends Backend
 /**
  * Instantiate the controller
  */
-$objIndex = new Index();
-$objIndex->run();
+$objChangePassword = new ChangePassword();
+$objChangePassword->run();
 
 ?>

@@ -106,8 +106,6 @@ class ModuleArticleList extends \Module
 			}
 		}
 
-		$time = time();
-
 		// Get published articles
 		$objArticles = \ArticleCollection::findPublishedByPidAndColumn($id, $this->inColumn);
 

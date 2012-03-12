@@ -430,7 +430,8 @@ class ModuleRegistration extends \Module
 		// Create the user
 		$objNewUser = new \MemberModel();
 		$objNewUser->setRow($arrData);
-		$insertId = $objNewUser->save();
+		$objNewUser->save();
+		$insertId = $objNewUser->id;
 
 		// Assign home directory
 		if ($this->reg_assignDir && is_dir(TL_ROOT . '/' . $this->reg_homeDir))

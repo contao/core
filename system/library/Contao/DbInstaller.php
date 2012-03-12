@@ -294,6 +294,7 @@ class DbInstaller extends \Controller
 	 */
 	protected function getFromFile()
 	{
+		$table = '';
 		$return = array();
 
 		// Get all SQL files
@@ -330,7 +331,6 @@ class DbInstaller extends \Controller
 				{
 					$table = $subpatterns[1];
 				}
-
 				// Get the table options
 				elseif ($table != '' && preg_match('/^\)([^;]+);/i', $v, $subpatterns))
 				{

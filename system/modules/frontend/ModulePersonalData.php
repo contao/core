@@ -214,7 +214,6 @@ class ModulePersonalData extends \Module
 					// Set the new value
 					$this->User->$field = $varValue;
 					$_SESSION['FORM_DATA'][$field] = $varValue;
-					$varSave = is_array($varValue) ? serialize($varValue) : $varValue;
 
 					// Set the new field in the member model
 					$blnModified = true;

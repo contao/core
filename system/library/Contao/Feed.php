@@ -88,6 +88,7 @@ class Feed extends \System
 
 	/**
 	 * Return an object property
+	 * @param string
 	 * @return mixed
 	 */
 	public function __get($strKey)

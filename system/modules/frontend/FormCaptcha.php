@@ -68,7 +68,7 @@ class FormCaptcha extends \Widget
 	 * Initialize the object
 	 * @param array
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		parent::__construct($arrAttributes);
 

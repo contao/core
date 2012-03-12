@@ -100,8 +100,6 @@ class Index extends Frontend
 			$objHandler->generate($pageId);
 		}
 
-		$time = time();
-
 		// Get the current page object(s)
 		$objPage = \PageCollection::findPublishedByIdOrAlias($pageId);
 

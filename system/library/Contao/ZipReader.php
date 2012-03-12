@@ -93,7 +93,7 @@ class ZipReader
 	/**
 	 * Open the archive and return the file handle
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct($strFile)
 	{
@@ -325,7 +325,7 @@ class ZipReader
 	/**
 	 * Unzip the current file and return its contents as string
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function unzip()
 	{
@@ -418,7 +418,7 @@ class ZipReader
 	/**
 	 * Return a list of all files in the archive
 	 * @return array
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function readCentralDirectory()
 	{

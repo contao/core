@@ -67,7 +67,7 @@ abstract class Controller extends \System
 	 * @param string
 	 * @param string
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function getTemplate($strTemplate, $strFormat='html5')
 	{
@@ -102,7 +102,7 @@ abstract class Controller extends \System
 	 * @param string
 	 * @param integer
 	 * @return array
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function getTemplateGroup($strPrefix, $intTheme=0)
 	{
@@ -121,7 +121,7 @@ abstract class Controller extends \System
 		}
 
 		// Scan the templates directory
-		$arrFiles = array_values(preg_grep('/^' . $strPrefix . '/', scan(TL_ROOT . '/templates')));
+		$arrFiles = array_values(preg_grep('/^' . $strPrefix . '/', scan(TL_ROOT . '/' . $strTplFolder)));
 
 		if (!empty($arrFiles))
 		{
@@ -2344,7 +2344,7 @@ abstract class Controller extends \System
 	 * @param string
 	 * @param array
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function parseSimpleTokens($strBuffer, $arrData)
 	{
@@ -2959,7 +2959,7 @@ abstract class Controller extends \System
 	{
 		if (($intPage = intval($intPage)) <= 0)
 		{
-			return;
+			return '';
 		}
 
 		$strDomain = $this->Environment->base;
@@ -3227,7 +3227,6 @@ abstract class Controller extends \System
 	protected function removeOldFeeds($blnReturn=false)
 	{
 		$arrFeeds = array();
-		$arrModules = $this->Config->getActiveModules();
 
 		// XML sitemaps
 		$objFeeds = $this->Database->execute("SELECT sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!=''");

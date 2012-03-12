@@ -638,7 +638,7 @@ var AjaxRequest =
 				'display': 'block',
 				'top': scroll.y + 'px'
 			}
-		})
+		});
 
 		if (box == null) {
 			box = new Element('div', {
@@ -726,7 +726,7 @@ var Backend =
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
 		}).show({
 			'title': title,
 			'contents': content
@@ -745,7 +745,7 @@ var Backend =
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
 		});
 		M.show({
 			'title': opt.title,
@@ -767,7 +767,7 @@ var Backend =
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
 		});
 		M.show({
 			'title': opt.title,
@@ -789,7 +789,7 @@ var Backend =
 			'draggable': false,
 			'overlayOpacity': .5,
 			'onShow': function() { document.body.setStyle('overflow', 'hidden'); },
-			'onHide': function() { document.body.setStyle('overflow', 'auto'); },
+			'onHide': function() { document.body.setStyle('overflow', 'auto'); }
 		});
 		M.addButton(Contao.lang.close, 'btn', function() {
 			this.hide();
@@ -1463,7 +1463,6 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var fieldnames = ['value', 'label', 'default'];
 		var tabindex = 1;
 
 		for (var i=0; i<rows.length; i++) {
@@ -1471,7 +1470,7 @@ var Backend =
 			for (var j=0; j<childs.length; j++) {
 				if (input = childs[j].getFirst('input')) {
 					input.set('tabindex', tabindex++);
-					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']')
+					input.name = input.name.replace(/\[[0-9]+\]/g, '[' + i + ']');
 					if (input.type == 'checkbox') {
 						input.id = input.name.replace(/\[[0-9]+\]/g, '').replace(/\[/g, '_').replace(/\]/g, '') + '_' + i;
 						input.getNext('label').set('for', input.id);
@@ -1528,7 +1527,6 @@ var Backend =
 		}
 
 		rows = tbody.getChildren();
-		var fieldnames = ['key', 'value'];
 		var tabindex = 1;
 
 		for (var i=0; i<rows.length; i++) {
@@ -1722,7 +1720,7 @@ var TinyCallback =
 	 * @param object
 	 */
 	getScrollOffset: function(ed) {
-		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function(e) {
+		tinymce.dom.Event.add((tinymce.isGecko ? ed.getDoc() : ed.getWin()), 'focus', function() {
 			Backend.getScrollOffset();
 	    });
 	}

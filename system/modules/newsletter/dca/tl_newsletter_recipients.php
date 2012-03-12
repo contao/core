@@ -317,7 +317,7 @@ class tl_newsletter_recipients extends Backend
 	/**
 	 * Check if recipients are unique per channel
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
 	 */
 	public function checkUniqueRecipient($varValue, DataContainer $dc)

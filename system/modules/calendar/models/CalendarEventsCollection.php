@@ -101,6 +101,7 @@ class CalendarEventsCollection extends \Model_Collection
 	 * Find upcoming events by their parent IDs
 	 * @param array
 	 * @param integer
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findUpcomingByPids($arrIds, $intLimit=0)
 	{

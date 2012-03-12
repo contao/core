@@ -598,7 +598,7 @@ abstract class System
 	 * Add a message
 	 * @param string
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function addMessage($strMessage, $strType)
 	{

@@ -563,8 +563,8 @@ class ModuleTasks extends \BackendModule
 			$assigned[$objFilter->assignedTo] = sprintf('<option value="%s"%s>%s</option>', $objFilter->assignedTo, (($objFilter->assignedTo == $session['filter']['tl_task']['assignedTo']) ? ' selected="selected"' : ''), $objFilter->name);
 		}
 
-		$this->Template->deadlineOptions = implode($deadline);
-		$this->Template->assignedOptions = implode($assigned);
+		$this->Template->deadlineOptions = implode('', $deadline);
+		$this->Template->assignedOptions = implode('', $assigned);
 		$this->Template->filter = specialchars($GLOBALS['TL_LANG']['MSC']['filter']);
 
 		// Where

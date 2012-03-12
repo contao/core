@@ -19,7 +19,7 @@
 </div>
 <!-- indexer::continue -->
 <?php endif; ?>
-<?php echo implode($this->elements); ?>
+<?php echo implode('', $this->elements); ?>
 <?php if ($this->backlink): ?>
 
 <!-- indexer::stop -->

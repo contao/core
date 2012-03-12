@@ -654,7 +654,7 @@ class tl_calendar_events extends Backend
 	/**
 	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
@@ -707,10 +707,9 @@ class tl_calendar_events extends Backend
 	/**
 	 * Set the end date to null if empty
 	 * @param mixed
-	 * @param DataContainer
 	 * @return string
 	 */
-	public function setEmptyEndDate($varValue, DataContainer $dc)
+	public function setEmptyEndDate($varValue)
 	{
 		if ($varValue === '')
 		{

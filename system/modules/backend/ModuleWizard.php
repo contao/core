@@ -172,8 +172,8 @@ class ModuleWizard extends \Widget
 			}
 		}
 
-		// Add label and return wizard
-		$return .= '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
+		// Add the label and the return wizard
+		$return = '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
   <tr>
     <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>

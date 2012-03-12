@@ -56,7 +56,7 @@ class FeedItem extends \System
 	 * Take an array of arguments and initialize the object
 	 * @param array
 	 */
-	public function __construct($arrData=false)
+	public function __construct($arrData=null)
 	{
 		parent::__construct();
 
@@ -80,6 +80,7 @@ class FeedItem extends \System
 
 	/**
 	 * Return an object property
+	 * @param string
 	 * @return mixed
 	 */
 	public function __get($strKey)

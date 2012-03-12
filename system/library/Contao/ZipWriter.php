@@ -88,7 +88,7 @@ class ZipWriter extends \System
 	/**
 	 * Create a new file
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct($strFile)
 	{
@@ -112,7 +112,7 @@ class ZipWriter extends \System
 	/**
 	 * Close the file handle if it has not been done yet
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __destruct()
 	{
@@ -132,6 +132,7 @@ class ZipWriter extends \System
 	 * Add a file to the archive
 	 * @param string
 	 * @param string
+	 * @throws \Exception
 	 */
 	public function addFile($strFile, $strName=null)
 	{

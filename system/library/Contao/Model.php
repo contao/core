@@ -66,7 +66,7 @@ abstract class Model extends \System
 
 	/**
 	 * Optionally take a result set
-	 * @param Database_Result
+	 * @param \Database_Result
 	 */
 	public function __construct(\Database_Result $objResult=null)
 	{
@@ -123,7 +123,7 @@ abstract class Model extends \System
 
 	/**
 	 * Set the current record from a Database_Result
-	 * @param Database_Result
+	 * @param \Database_Result
 	 */
 	public function setData(\Database_Result $objResult)
 	{
@@ -268,8 +268,8 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the statement before it is executed
-	 * @param Database_Statement
-	 * @return Database_Statement
+	 * @param \Database_Statement
+	 * @return \Database_Statement
 	 */
 	protected static function preFind(\Database_Statement $objStatement)
 	{
@@ -279,8 +279,8 @@ abstract class Model extends \System
 
 	/**
 	 * Modify the result set before the model is created
-	 * @param Database_Result
-	 * @return Database_Result
+	 * @param \Database_Result
+	 * @return \Database_Result
 	 */
 	protected static function postFind(\Database_Result $objResult)
 	{
@@ -291,7 +291,7 @@ abstract class Model extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function getRelated($key)
 	{
@@ -336,7 +336,7 @@ abstract class Model extends \System
 			$arrColumns = array($arrRelations[$key]['field'] . " IN('" . implode("','", $arrValues) . "')");
 			$strOrder = \Database::getInstance()->findInSet($arrRelations[$key]['field'], $arrValues);
 
-			$strCollectionClass = $strName . 'Collection';
+			$strClass = $strName . 'Collection'; 
 			$objModel = $strClass::findBy($arrColumns, null, $strOrder);
 
 			if ($objModel !== null)

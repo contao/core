@@ -253,7 +253,7 @@ class ModuleEventReader extends \Events
 		$arrNotifies = array();
 
 		// Notify the system administrator
-		if ($objCalendar->notify != 'notify_author')
+		if ($objEvent->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}

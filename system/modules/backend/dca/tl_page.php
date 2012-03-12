@@ -1039,8 +1039,9 @@ class tl_page extends Backend
 	/**
 	 * Auto-generate a page alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{
@@ -1199,8 +1200,9 @@ class tl_page extends Backend
 	/**
 	 * Prevent circular references
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function checkJumpTo($varValue, DataContainer $dc)
 	{
@@ -1216,10 +1218,9 @@ class tl_page extends Backend
 	/**
 	 * Check the DNS settings
 	 * @param mixed
-	 * @param DataContainer
 	 * @return mixed
 	 */
-	public function checkDns($varValue, DataContainer $dc)
+	public function checkDns($varValue)
 	{
 		return str_ireplace(array('http://', 'https://', 'ftp://'), '', $varValue);
 	}
@@ -1427,7 +1428,7 @@ class tl_page extends Backend
 
 	/**
 	 * Return the paste page button
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @param array
 	 * @param string
 	 * @param boolean

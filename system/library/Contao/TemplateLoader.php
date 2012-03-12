@@ -101,7 +101,9 @@ class TemplateLoader
 	 * Return a template path
 	 * @param string
 	 * @param string
+	 * @param string
 	 * @return string
+	 * @throws \Exception
 	 */
 	public static function getPath($template, $format, $custom='templates')
 	{

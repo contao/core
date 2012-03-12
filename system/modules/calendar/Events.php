@@ -128,8 +128,6 @@ abstract class Events extends \Module
 		}
 
 		$this->import('String');
-
-		$time = time();
 		$this->arrEvents = array();
 
 		foreach ($arrCalendars as $id)
@@ -406,7 +404,7 @@ abstract class Events extends \Module
 
 	/**
 	 * Return the begin and end timestamp and an error message as array
-	 * @param Date
+	 * @param \Date
 	 * @param string
 	 * @return array
 	 */

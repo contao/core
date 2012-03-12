@@ -308,7 +308,7 @@ function deserialize($varValue, $blnForceArray=false)
  * Split a string into fragments, remove whitespace and return fragments as array
  * @param string
  * @param string
- * @return string
+ * @return array
  */
 function trimsplit($strPattern, $strString)
 {
@@ -671,9 +671,9 @@ if (!USE_MBSTRING)
 	}
 
 	// mb_strpos
-	function mb_strpos($haystack, $needle, $offset=null)
+	function mb_strpos($haystack, $needle, $offset=0)
 	{
-		if ($offset === null)
+		if ($offset === 0)
 			return utf8_strpos($haystack, $needle);
 
 		return utf8_strpos($haystack, $needle, $offset);

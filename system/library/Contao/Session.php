@@ -168,7 +168,7 @@ class Session
 	/**
 	 * Set the current session data from an array
 	 * @param array
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function setData($arrData)
 	{
@@ -184,7 +184,7 @@ class Session
 	/**
 	 * Append data to the current session
 	 * @param mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function appendData($varData)
 	{

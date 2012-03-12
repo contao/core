@@ -60,7 +60,7 @@ class Encryption
 
 	/**
 	 * Initialize the encryption module
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function __construct()
 	{
@@ -69,7 +69,7 @@ class Encryption
 			throw new \Exception('Error initializing encryption module');
 		}
 
-		if (!strlen($GLOBALS['TL_CONFIG']['encryptionKey']))
+		if ($GLOBALS['TL_CONFIG']['encryptionKey'] == '')
 		{
 			throw new \Exception('Encryption key not set');
 		}

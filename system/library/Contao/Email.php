@@ -126,7 +126,7 @@ class Email extends \System
 
 	/**
 	 * Instantiate object and load Swift plugin
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __construct()
 	{
@@ -174,7 +174,7 @@ class Email extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -311,6 +311,7 @@ class Email extends \System
 
 	/**
 	 * Return true if there are failures
+	 * @return boolean
 	 */
 	public function hasFailures()
 	{

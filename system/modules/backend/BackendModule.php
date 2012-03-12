@@ -106,8 +106,6 @@ abstract class BackendModule extends \Backend
 		{
 			return null;
 		}
-
-		return $e;
 	}
 
 

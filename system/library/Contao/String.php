@@ -252,7 +252,7 @@ class String
 	/**
 	 * Decode all entities
 	 * @param string
-	 * @param string
+	 * @param integer
 	 * @param string
 	 * @return string
 	 */

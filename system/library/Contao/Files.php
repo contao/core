@@ -220,7 +220,7 @@ abstract class Files
 
 	/**
 	 * Validate the path
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function validate()
 	{

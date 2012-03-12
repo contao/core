@@ -53,8 +53,6 @@ class PageError403 extends \Frontend
 	 */
 	public function generate($pageId, $objRootPage=null)
 	{
-		$time = time();
-
 		// Add a log entry
 		$this->log('Access to page ID "' . $pageId . '" denied', 'PageError403 generate()', TL_ERROR);
 

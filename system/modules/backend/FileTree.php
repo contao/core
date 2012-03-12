@@ -62,7 +62,7 @@ class FileTree extends \Widget
 	 * Load the database object
 	 * @param array
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		$this->import('Database');
 		parent::__construct($arrAttributes);

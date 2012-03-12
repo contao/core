@@ -250,7 +250,6 @@ class DataContainer extends \Backend
 		// Validate the field
 		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 		{
-			$paletteFields = array();
 			$key = ($this->Input->get('act') == 'editAll') ? 'FORM_FIELDS_' . $this->intId : 'FORM_FIELDS';
 
 			// Calculate the current palette

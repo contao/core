@@ -194,7 +194,7 @@ class ModuleUnsubscribe extends \Module
 		}
 
 		// Get the channels
-		$objChannel = \NewsletterChannelCollection::findByIds($arrRemove);
+		$objChannels = \NewsletterChannelCollection::findByIds($arrRemove);
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity

@@ -32,7 +32,7 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
@@ -142,11 +142,11 @@ class PreviewSwitch extends Backend
 			$this->Template->update = true;
 		}
 
+		$arrUser = array(''=>'-');
+
 		// Switch the user accounts
 		if ($this->User->isAdmin)
 		{
-			$arrUser = array(''=>'-');
-
 			// Get the active front end users
 			$objUser = $this->Database->execute("SELECT id, username FROM tl_member WHERE login=1 AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time) ORDER BY username");
 

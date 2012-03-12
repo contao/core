@@ -72,11 +72,12 @@ class Ajax extends \Backend
 
 	/**
 	 * Get the current action
-	 * @throws Exception
+	 * @param string
+	 * @throws \Exception
 	 */
 	public function __construct($strAction)
 	{
-		if (!$strAction)
+		if ($strAction == '')
 		{
 			throw new \Exception('Missing Ajax action');
 		}

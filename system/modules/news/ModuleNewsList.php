@@ -88,7 +88,6 @@ class ModuleNewsList extends \ModuleNews
 	 */
 	protected function compile()
 	{
-		$time = time();
 		$skipFirst = intval($this->skipFirst);
 		$offset = 0;
 		$limit = null;

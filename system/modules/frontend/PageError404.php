@@ -53,8 +53,6 @@ class PageError404 extends \Frontend
 	 */
 	public function generate($pageId, $strDomain=null, $strHost=null)
 	{
-		$time = time();
-
 		// Add a log entry
 		if ($strDomain !== null || $strHost !== null)
 		{

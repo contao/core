@@ -198,7 +198,7 @@ class DC_File extends \DataContainer implements \editable
 				$return .= "\n\n" . '<fieldset' . ($key ? ' id="pal_'.$key.'"' : '') . ' class="' . $class . ($legend ? '' : ' nolegend') . '">' . $legend;
 
 				// Build rows of the current box
-				foreach ($v as $kk=>$vv)
+				foreach ($v as $vv)
 				{
 					if ($vv == '[EOF]')
 					{
@@ -527,9 +527,7 @@ window.addEvent(\'domready\', function() {
 			{
 				if (strlen($GLOBALS['TL_DCA'][$this->strTable]['palettes'][$paletteName]))
 				{
-					$palette = $paletteName;
 					$strPalette = $GLOBALS['TL_DCA'][$this->strTable]['palettes'][$paletteName];
-
 					break;
 				}
 			}

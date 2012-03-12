@@ -96,8 +96,8 @@ class ModuleFaqPage extends Module
 		}
 
 		global $objPage;
+
 		$this->import('String');
-		$count = 0;
 		$arrFaq = array_fill_keys($this->faq_categories, array());
 
 		// Add FAQs

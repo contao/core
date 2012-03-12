@@ -236,10 +236,9 @@ class Calendar extends \Frontend
 	 * Add events to the indexer
 	 * @param array
 	 * @param integer
-	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
+	public function getSearchablePages($arrPages, $intRoot=0)
 	{
 		$arrRoot = array();
 
@@ -248,7 +247,6 @@ class Calendar extends \Frontend
 			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
 
 		// Get all calendars

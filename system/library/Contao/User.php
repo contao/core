@@ -461,9 +461,9 @@ abstract class User extends \System
 	 */
 	public function save()
 	{
-		return $this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
-							  ->set($this->arrData)
-							  ->execute($this->id);
+		$this->Database->prepare("UPDATE " . $this->strTable . " %s WHERE id=?")
+					   ->set($this->arrData)
+					   ->execute($this->id);
 	}
 
 

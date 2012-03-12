@@ -109,7 +109,7 @@ class Request
 	 * Set an object property
 	 * @param string
 	 * @param mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	public function __set($strKey, $varValue)
 	{

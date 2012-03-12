@@ -169,8 +169,8 @@ class TableWizard extends \Widget
 			$this->varValue = array(array(''));
 		}
 
-		// Begin table
-		$return .= '<div id="tl_tablewizard">
+		// Begin the table
+		$return = '<div id="tl_tablewizard">
   <table id="ctrl_'.$this->strId.'" class="tl_tablewizard">
   <tbody>
     <tr>';

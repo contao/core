@@ -162,7 +162,6 @@ class ModuleNewsArchive extends \ModuleNews
 			$intEnd = time();
 		}
 
-		$time = time();
 		$this->Template->articles = array();
 
 		// Split the result

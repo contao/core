@@ -26,3 +26,4 @@ system/config/dcaconfig.php
 system/config/initconfig.php
 system/config/langconfig.php
 system/config/localconfig.php
+system/modules/development/

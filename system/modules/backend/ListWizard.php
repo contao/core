@@ -143,7 +143,7 @@ class ListWizard extends \Widget
 		}
 
 		$tabindex = 0;
-		$return .= '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard">';
+		$return = '<ul id="ctrl_'.$this->strId.'" class="tl_listwizard">';
 
 		// Add input fields
 		for ($i=0; $i<count($this->varValue); $i++)

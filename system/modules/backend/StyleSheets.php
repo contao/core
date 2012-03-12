@@ -160,7 +160,6 @@ class StyleSheets extends \Backend
 			return;
 		}
 
-		$intCount = 0;
 		$vars = array();
 
 		// Get the global theme variables
@@ -1195,7 +1194,6 @@ class StyleSheets extends \Backend
 				$intSorting = 0;
 				$strComment = '';
 				$strCategory = '';
-				$arrChunks = array();
 
 				if (!is_numeric($insertId) || $insertId < 0)
 				{

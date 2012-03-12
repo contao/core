@@ -46,8 +46,8 @@ class Comments extends \Frontend
 
 	/**
 	 * Add comments to a template
-	 * @param FrontendTemplate
-	 * @param stdClass
+	 * @param \FrontendTemplate
+	 * @param \stdClass
 	 * @param string
 	 * @param integer
 	 * @param array
@@ -323,7 +323,8 @@ class Comments extends \Frontend
 
 			$objComment = new \CommentsModel();
 			$objComment->setRow($arrSet);
-			$insertId = $objComment->save();
+			$objComment->save();
+			$insertId = $objComment->id;
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))

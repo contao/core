@@ -301,9 +301,9 @@ class Search extends \System
 	 * @param integer
 	 * @param boolean
 	 * @return Database_Result
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=null, $intRows=0, $intOffset=0, $blnFuzzy=false)
+	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
 	{
 		$this->import('String');
 		$this->import('Database');
