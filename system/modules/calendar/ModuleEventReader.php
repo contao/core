@@ -259,20 +259,20 @@ class ModuleEventReader extends \Events
 		}
 
 		// Notify the author
-		if ($objCalendar->notify != 'notify_admin' && $objEvent->author['email'] != '')
+		if ($objEvent->pid['notify'] != 'notify_admin' && $objEvent->author['email'] != '')
 		{
 			$arrNotifies[] = $objEvent->author['email'];
 		}
 
 		$objConfig = new \stdClass();
 
-		$objConfig->perPage = $objCalendar->perPage;
-		$objConfig->order = $objCalendar->sortOrder;
+		$objConfig->perPage = $objEvent->pid['perPage'];
+		$objConfig->order = $objEvent->pid['sortOrder'];
 		$objConfig->template = $this->com_template;
-		$objConfig->requireLogin = $objCalendar->requireLogin;
-		$objConfig->disableCaptcha = $objCalendar->disableCaptcha;
-		$objConfig->bbcode = $objCalendar->bbcode;
-		$objConfig->moderate = $objCalendar->moderate;
+		$objConfig->requireLogin = $objEvent->pid['requireLogin'];
+		$objConfig->disableCaptcha = $objEvent->pid['disableCaptcha'];
+		$objConfig->bbcode = $objEvent->pid['bbcode'];
+		$objConfig->moderate = $objEvent->pid['moderate'];
 
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_calendar_events', $objEvent->id, $arrNotifies);
 	}

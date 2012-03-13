@@ -510,10 +510,10 @@ class Theme extends \Backend
 						// Adjust the names
 						elseif (($table == 'tl_theme' || $table == 'tl_style_sheet') && $name == 'name')
 						{
-							$objCount = $this->Database->prepare("SELECT COUNT(*) AS total FROM ". $table ." WHERE name=?")
+							$objCount = $this->Database->prepare("SELECT COUNT(*) AS count FROM ". $table ." WHERE name=?")
 													   ->execute($value);
 
-							if ($objCount->total > 0)
+							if ($objCount->count > 0)
 							{
 								$value = preg_replace('/( |\-)[0-9]+$/', '', $value);
 								$value .= (($table == 'tl_style_sheet') ? '-' : ' ') . ${$table};

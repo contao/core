@@ -194,7 +194,7 @@ class ModuleFaqReader extends \Module
 		}
 
 		// Notify the author
-		if ($objCategory->notify != 'notify_admin' && $objFaq->author['email'] != '')
+		if ($objFaq->pid['notify'] != 'notify_admin' && $objFaq->author['email'] != '')
 		{
 			$arrNotifies[] = $objFaq->author['email'];
 		}

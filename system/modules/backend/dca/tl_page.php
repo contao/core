@@ -757,6 +757,7 @@ class tl_page extends Backend
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
+			$permission = 0;
 			$cid = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
 			$ids = ($cid != '') ? array($cid) : array();
 
@@ -785,7 +786,6 @@ class tl_page extends Backend
 					{
 						$ids[] = $this->Input->get('pid');
 					}
-
 					// Check the parent's parent page in "paste after" mode
 					else
 					{
@@ -824,7 +824,7 @@ class tl_page extends Backend
 				// Do not allow to paste after pages on the root level (pagemounts)
 				if (($this->Input->get('act') == 'cut' || $this->Input->get('act') == 'cutAll') && $this->Input->get('mode') == 1 && in_array($this->Input->get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. $id .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. $this->Input->get('id') .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -1149,10 +1149,10 @@ class tl_page extends Backend
 		}
 
 		// Check whether there are articles (e.g. on copied pages)
-		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_article WHERE pid=?")
+		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_article WHERE pid=?")
 								   ->execute($dc->id);
 
-		if ($objTotal->total > 0)
+		if ($objTotal->count > 0)
 		{
 			return;
 		}
@@ -1435,7 +1435,7 @@ class tl_page extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=false)
+	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$disablePA = false;
 		$disablePI = false;
@@ -1496,6 +1496,8 @@ class tl_page extends Backend
 				$disablePA = true;
 			}
 		}
+
+		$return = '';
 
 		// Return the buttons
 		$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id']), 'class="blink"');

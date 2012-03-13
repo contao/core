@@ -654,8 +654,9 @@ class tl_calendar_events extends Backend
 	/**
 	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
-	 * @param \DataContainer
-	 * @return string
+	 * @param DataContainer
+	 * @return mixed
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{

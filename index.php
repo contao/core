@@ -77,6 +77,7 @@ class Index extends Frontend
 	{
 		global $objPage;
 		$pageId = $this->getPageIdFromUrl();
+		$objRootPage = null;
 
 		// Load a website root page object if there is no page ID
 		if ($pageId === null)

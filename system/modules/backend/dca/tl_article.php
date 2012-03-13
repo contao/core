@@ -411,14 +411,15 @@ class tl_article extends Backend
 			$session['CLIPBOARD']['tl_article']['id'] = $clipboard;
 		}
 
-		// Overwrite session
+		$error = false;
+		$permission = 0;
+
+		// Overwrite the session
 		$this->Session->setData($session);
 
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			$error = false;
-
 			// Set ID of the article's page
 			$objPage = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
 									  ->limit(1)
@@ -585,6 +586,7 @@ class tl_article extends Backend
 	 */
 	public function getActivePageSections(DataContainer $dc)
 	{
+		$arrCustom = array();
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 
 		// Show only active sections
@@ -632,9 +634,9 @@ class tl_article extends Backend
 			{
 				$arrSections[] = 'footer';
 			}
-		}
 
-		$arrCustom = deserialize($objLayout->sections);
+			$arrCustom = deserialize($objLayout->sections);
+		}
 
 		// Always add the custom layout sections in "override all" mode
 		if ($this->Input->get('act') == 'overrideAll')
@@ -752,7 +754,7 @@ class tl_article extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function pasteArticle(DataContainer $dc, $row, $table, $cr, $arrClipboard=false)
+	public function pasteArticle(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id']), 'class="blink"');
 		$imagePasteInto = $this->generateImage('pasteinto.gif', sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id']), 'class="blink"');

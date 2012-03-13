@@ -303,6 +303,7 @@ class FileSelector extends \Widget
 		// Get the icon
 		if ($objFile->type == 'folder')
 		{
+			$file = null;
 			$image = !empty($childs) ? 'folderC.gif' : 'folderO.gif';
 		}
 		else

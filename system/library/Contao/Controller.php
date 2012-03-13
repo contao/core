@@ -2867,11 +2867,11 @@ abstract class Controller extends \System
 			return;
 		}
 
-		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_version WHERE fromTable=? AND pid=?")
+		$objVersion = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_version WHERE fromTable=? AND pid=?")
 									 ->limit(1)
 									 ->executeUncached($strTable, $intId);
 
-		if ($objVersion->total < 1)
+		if ($objVersion->count < 1)
 		{
 			$this->createNewVersion($strTable, $intId);
 		}

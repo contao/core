@@ -123,6 +123,7 @@ class ModuleRegistration extends \Module
 
 		$this->Template->fields = '';
 		$this->Template->tableless = $this->tableless;
+		$objCaptcha = null;
 		$doNotSubmit = false;
 
 		// Captcha

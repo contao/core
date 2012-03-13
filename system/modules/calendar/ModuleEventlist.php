@@ -133,7 +133,6 @@ class ModuleEventlist extends \Events
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
-
 		// Display month
 		elseif ($blnDynamicFormat && $this->Input->get('month'))
 		{
@@ -141,7 +140,6 @@ class ModuleEventlist extends \Events
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
 		}
-
 		// Display day
 		elseif ($blnDynamicFormat && $this->Input->get('day'))
 		{
@@ -149,7 +147,6 @@ class ModuleEventlist extends \Events
 			$this->cal_format = 'cal_day';
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
-
 		// Display all events or upcoming/past events
 		else
 		{

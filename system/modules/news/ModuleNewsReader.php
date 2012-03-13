@@ -165,7 +165,7 @@ class ModuleNewsReader extends \ModuleNews
 		}
 
 		// Notify the author
-		if ($objArchive->notify != 'notify_admin' && $objArticle->author['email'] != '')
+		if ($objArticle->pid['notify'] != 'notify_admin' && $objArticle->author['email'] != '')
 		{
 			$arrNotifies[] = $objArticle->author['email'];
 		}

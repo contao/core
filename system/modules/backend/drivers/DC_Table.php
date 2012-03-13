@@ -1069,6 +1069,9 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			// PID is set (insert after or into the parent record)
 			if (is_numeric($pid))
 			{
+				$newPID = null;
+				$newSorting = null;
+
 				// Insert the current record at the beginning when inserting into the parent record
 				if ($insertInto)
 				{
@@ -1219,6 +1222,7 @@ class DC_Table extends \DataContainer implements \listable, \editable
 				// Select current record
 				if ($objCurrentRecord->numRows)
 				{
+					$newSorting = null;
 					$curSorting = $objCurrentRecord->sorting;
 
 					$objNextSorting = $this->Database->prepare("SELECT MIN(sorting) AS sorting FROM " . $this->strTable . " WHERE sorting>?")
@@ -1689,6 +1693,8 @@ class DC_Table extends \DataContainer implements \listable, \editable
 			{
 				$strAjax = '';
 				$blnAjax = false;
+				$key = '';
+				$cls = '';
 				$legend = '';
 
 				if (isset($legends[$k]))
@@ -2574,7 +2580,7 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function save($varValue)
 	{
@@ -3162,7 +3168,7 @@ window.addEvent(\'domready\', function() {
 	 * @param boolean
 	 * @return string
 	 */
-	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=false, $blnCircularReference=false, $protectedPage=false, $blnNoRecursion=false)
+	protected function generateTree($table, $id, $arrPrevNext, $blnHasSorting, $intMargin=0, $arrClipboard=null, $blnCircularReference=false, $protectedPage=false, $blnNoRecursion=false)
 	{
 		static $session;
 
@@ -4435,7 +4441,7 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 		else
 		{
 			$this->limit = strlen($session['filter'][$filter]['limit']) ? (($session['filter'][$filter]['limit'] == 'all') ? null : $session['filter'][$filter]['limit']) : '0,' . $GLOBALS['TL_CONFIG']['resultsPerPage'];
-			$query = "SELECT COUNT(*) AS total FROM " . $this->strTable;
+			$query = "SELECT COUNT(*) AS count FROM " . $this->strTable;
 
 			if (is_array($this->root))
 			{
@@ -4448,7 +4454,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 			}
 
 			$objTotal = $this->Database->prepare($query)->execute($this->values);
-			$total = $objTotal->total;
+			$total = $objTotal->count;
+			$options_total = 0;
 			$blnIsMaxResultsPerPage = false;
 
 			// Overall limit
@@ -4463,6 +4470,8 @@ Backend.makeParentViewSortable("ul_' . CURRENT_ID . '");
 				$GLOBALS['TL_CONFIG']['resultsPerPage'] = $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
 				$session['filter'][$filter]['limit'] = $GLOBALS['TL_CONFIG']['maxResultsPerPage'];
 			}
+
+			$options = '';
 
 			// Build options
 			if ($total > 0)

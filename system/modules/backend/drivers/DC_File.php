@@ -178,6 +178,8 @@ class DC_File extends \DataContainer implements \editable
 			{
 				$strAjax = '';
 				$blnAjax = false;
+				$key = '';
+				$cls = '';
 				$legend = '';
 
 				if (isset($legends[$k]))

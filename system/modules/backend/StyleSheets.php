@@ -1146,6 +1146,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Return a form to choose an existing style sheet and import it
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function importStyleSheet()
 	{
@@ -1320,11 +1321,11 @@ class StyleSheets extends \Backend
 	 */
 	public function checkStyleSheetName($strName)
 	{
-		$objStyleSheet = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
+		$objStyleSheet = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_style_sheet WHERE name=?")
 										->limit(1)
 										->execute($strName);
 
-		if ($objStyleSheet->total < 1)
+		if ($objStyleSheet->count < 1)
 		{
 			return $strName;
 		}

@@ -457,8 +457,9 @@ class tl_newsletter extends Backend
 	/**
 	 * Auto-generate the newsletter alias if it has not been set yet
 	 * @param mixed
-	 * @param \DataContainer
+	 * @param DataContainer
 	 * @return mixed
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{

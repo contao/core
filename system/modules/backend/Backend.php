@@ -191,6 +191,8 @@ abstract class Backend extends \Controller
 			}
 		}
 
+		$dc = null;
+
 		// Redirect if the current table does not belong to the current module
 		if ($strTable != '')
 		{
@@ -252,7 +254,6 @@ abstract class Backend extends \Controller
 			$objCallback = new $arrModule[$this->Input->get('key')][0]();
 			$this->Template->main .= $objCallback->$arrModule[$this->Input->get('key')][1]($dc, $strTable, $arrModule);
 		}
-
 		// Default action
 		elseif (is_object($dc))
 		{

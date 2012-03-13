@@ -136,19 +136,18 @@ class Newsletter extends \Backend
 			}
 
 			// Get the total number of recipients
-			$objTotal = $this->Database->prepare("SELECT COUNT(DISTINCT email) AS total FROM tl_newsletter_recipients WHERE pid=? AND active=1")
+			$objTotal = $this->Database->prepare("SELECT COUNT(DISTINCT email) AS count FROM tl_newsletter_recipients WHERE pid=? AND active=1")
 									   ->execute($objNewsletter->pid);
 
 			// Return if there are no recipients
-			if ($objTotal->total < 1)
+			if ($objTotal->count < 1)
 			{
 				$this->Session->set('tl_newsletter_send', null);
 				$this->addErrorMessage($GLOBALS['TL_LANG']['tl_newsletter']['error']);
-
 				$this->redirect($referer);
 			}
 
-			$intTotal = $objTotal->total;
+			$intTotal = $objTotal->count;
 
 			// Get page and timeout
 			$intTimeout = ($this->Input->get('timeout') > 0) ? $this->Input->get('timeout') : 1;
@@ -477,10 +476,10 @@ class Newsletter extends \Backend
 					}
 
 					// Check whether the e-mail address exists
-					$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+					$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE pid=? AND email=?")
 												   ->execute($this->Input->get('id'), $strRecipient);
 
-					if ($objRecipient->total < 1)
+					if ($objRecipient->count < 1)
 					{
 						$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=1")
 									   ->execute($this->Input->get('id'), $strRecipient);
@@ -570,10 +569,10 @@ class Newsletter extends \Backend
 				continue;
 			}
 
-			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE pid=? AND email=?")
 										   ->execute($intNewsletter, $arrData['email']);
 
-			if ($objRecipient->total < 1)
+			if ($objRecipient->count < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, addedOn=$time, ip=?")
 							   ->execute($intNewsletter, $arrData['email'], $this->anonymizeIp($this->Environment->ip));
@@ -682,10 +681,10 @@ class Newsletter extends \Backend
 				continue;
 			}
 
-			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_newsletter_recipients WHERE pid=? AND email=?")
+			$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE pid=? AND email=?")
 										   ->execute($intId, $objUser->email);
 
-			if ($objRecipient->total < 1)
+			if ($objRecipient->count < 1)
 			{
 				$this->Database->prepare("INSERT INTO tl_newsletter_recipients SET pid=?, tstamp=$time, email=?, active=?, addedOn=?, ip=?")
 							   ->execute($intId, $objUser->email, ($objUser->disable ? '' : 1), ($blnIsFrontend ? $time : ''), ($blnIsFrontend ? $this->anonymizeIp($this->Environment->ip) : ''));

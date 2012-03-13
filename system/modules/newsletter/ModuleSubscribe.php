@@ -172,6 +172,7 @@ class ModuleSubscribe extends \Module
 
 		$arrAdd = array();
 		$arrChannels = array();
+		$arrCids = array();
 
 		// Update the subscriptions
 		while ($objRecipient->next())

@@ -221,6 +221,8 @@ class tl_templates extends Backend
 	 */
 	public function addNewTemplate()
 	{
+		$strError = '';
+
 		// Copy an existing template
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_create_template' && file_exists(TL_ROOT . '/system/modules/' . $this->Input->post('original')))
 		{
@@ -296,7 +298,7 @@ class tl_templates extends Backend
 <a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
 </div>
 
-<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_templates']['headline'].'</h2>'.($strError ? '
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_templates']['headline'].'</h2>'.(($strError != '') ? '
 
 <div class="tl_message">
 <p class="tl_error">'.$strError.'</p>

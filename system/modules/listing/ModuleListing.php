@@ -258,6 +258,7 @@ class ModuleListing extends \Module
 			);
 		}
 
+		$j = 0;
 		$arrRows = $objData->fetchAllAssoc();
 
 		// TBODY

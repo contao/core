@@ -850,9 +850,9 @@ class InstallTool extends Backend
 		 */
 		try
 		{
-			$objAdmin = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_user WHERE admin=1");
+			$objAdmin = $this->Database->execute("SELECT COUNT(*) AS count FROM tl_user WHERE admin=1");
 
-			if ($objAdmin->total > 0)
+			if ($objAdmin->count > 0)
 			{
 				$this->Template->adminCreated = true;
 			}
@@ -941,7 +941,7 @@ class InstallTool extends Backend
 			if (!file_exists(TL_ROOT . '/system/config/' . $file . '.php'))
 			{
 				$objFile = new File('system/config/'. $file .'.php');
-				$objFile->write('<?php /* Put your custom configuration here */ ?>');
+				$objFile->write('<?php' . "\n\n// Put your custom configuration here\n");
 				$objFile->close();
 			}
 		}

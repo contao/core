@@ -57,7 +57,10 @@ class Comments extends \Frontend
 		global $objPage;
 		$this->import('String');
 
-		$limit = null;
+		$limit = 0;
+		$offset = 0;
+		$total = 0;
+		$gtotal = 0;
 		$arrComments = array();
 
 		// Pagination
@@ -65,7 +68,7 @@ class Comments extends \Frontend
 		{
 			// Get the total number of comments
 			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
-			$total = $objTotal->count;
+			$total = $gtotal = $objTotal->count;
 
 			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
@@ -88,7 +91,7 @@ class Comments extends \Frontend
 			$offset = ($page - 1) * $objConfig->perPage;
  
 			// Initialize the pagination menu
-			$objPagination = new \Pagination($objTotal->count, $objConfig->perPage);
+			$objPagination = new \Pagination($total, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -166,7 +169,7 @@ class Comments extends \Frontend
 		$objTemplate->name = $GLOBALS['TL_LANG']['MSC']['com_name'];
 		$objTemplate->email = $GLOBALS['TL_LANG']['MSC']['com_email'];
 		$objTemplate->website = $GLOBALS['TL_LANG']['MSC']['com_website'];
-		$objTemplate->commentsTotal = $limit ? $objTotal->count : $total;
+		$objTemplate->commentsTotal = $limit ? $gtotal : $total;
 
 		// Get the front end user object
 		$this->import('FrontendUser', 'User');

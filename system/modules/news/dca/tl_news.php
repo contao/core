@@ -611,8 +611,9 @@ class tl_news extends Backend
 	/**
 	 * Auto-generate the news alias if it has not been set yet
 	 * @param mixed
-	 * @param \DataContainer
+	 * @param DataContainer
 	 * @return string
+	 * @throws Exception
 	 */
 	public function generateAlias($varValue, DataContainer $dc)
 	{

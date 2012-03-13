@@ -140,6 +140,8 @@ class ModuleWizard extends \Widget
 		}
 		else
 		{
+			$arrCols = array();
+
 			// Initialize the sorting order
 			foreach ($cols as $col)
 			{

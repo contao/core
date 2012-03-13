@@ -104,6 +104,8 @@ class ModuleNewsArchive extends \ModuleNews
 
 		$limit = null;
 		$offset = 0;
+		$intBegin = 0;
+		$intEnd = 0;
 
 		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']) && $this->news_jumpToCurrent != 'all_items')
@@ -134,7 +136,6 @@ class ModuleNewsArchive extends \ModuleNews
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
 		}
-
 		// Display month
 		elseif ($this->Input->get('month'))
 		{
@@ -144,7 +145,6 @@ class ModuleNewsArchive extends \ModuleNews
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
 		}
-
 		// Display day
 		elseif ($this->Input->get('day'))
 		{
@@ -154,7 +154,6 @@ class ModuleNewsArchive extends \ModuleNews
 			$intEnd = $objDate->dayEnd;
 			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
 		}
-
 		// Show all items 
 		elseif ($this->news_jumpToCurrent == 'all_items')
 		{
@@ -172,7 +171,7 @@ class ModuleNewsArchive extends \ModuleNews
 
 			if ($objTotal !== null)
 			{
-				$total = $objTotal->total;
+				$total = $objTotal->count;
 
 				// Get the current page
 				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;

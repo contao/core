@@ -1727,7 +1727,7 @@ window.addEvent(\'domready\', function() {
 	 * @param array
 	 * @return string
 	 */
-	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false, $arrClipboard=false)
+	protected function generateTree($path, $intMargin, $mount=false, $blnProtected=false, $arrClipboard=null)
 	{
 		static $session;
 		$session = $this->Session->getData();

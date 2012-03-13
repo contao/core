@@ -160,6 +160,7 @@ class DataContainer extends \Backend
 	 * Render a row of a box and return it as HTML string
 	 * @param string
 	 * @return string
+	 * @throws \Exception
 	 */
 	protected function row($strPalette=null)
 	{
