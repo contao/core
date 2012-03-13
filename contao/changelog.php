@@ -95,7 +95,7 @@ class Changelog extends Backend
 		
 		$strBuffer = str_replace(
 			array(
-				"\n\n```", "```\n\n",
+				"\n\n```\n", "\n```\n\n",
 				' `', '` ',
 				'(`', '`)',
 				"\n`", "`\n",

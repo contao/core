@@ -35,7 +35,7 @@ div,h1,h2,h3,h4,code,pre,a {
     padding:0;
     font-family:Monaco,monospace;
     font-size:12px;
-    color:#666966;
+    color:#444;
 }
 
 /* Headlines */
@@ -66,7 +66,7 @@ pre {
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
     border-radius:3px;
-    color:#777;
+    color:#666;
 }
 a {
     color:#8ab858;
