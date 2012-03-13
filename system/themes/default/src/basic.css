@@ -203,7 +203,7 @@ fieldset.checkbox_container,fieldset.radio_container {
 	background-color:#ebfdd7;
 }
 pre,.tl_textarea.monospace {
-	font-family:"Andale Mono",monospace;
+	font-family:Monaco,monospace;
 	font-size:12px;
 }
 .tl_textarea.monospace:focus {

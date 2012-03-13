@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Changed
+Moved the changelog file into a protected subdirectory (see #4049).
+
 ### Improved
 Added a much better page picker which opens in a modal window and shows the site
 structure instead of just a drop-down menu.

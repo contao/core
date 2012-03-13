@@ -36,14 +36,14 @@ require_once '../system/initialize.php';
 
 
 /**
- * Class Confirm
+ * Class Changelog
  *
- * Confirm an invalid token URL.
+ * Show the changelog to an authenticated user.
  * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Confirm extends Backend
+class Changelog extends Backend
 {
 
 	/**
@@ -61,9 +61,6 @@ class Confirm extends Backend
 		parent::__construct();
 
 		$this->User->authenticate();
-
-		$this->loadLanguageFile('default');
-		$this->loadLanguageFile('modules');
 	}
 
 
@@ -72,26 +69,52 @@ class Confirm extends Backend
 	 */
 	public function run()
 	{
-		// Redirect to the back end home page
-		if ($this->Input->post('FORM_SUBMIT') == 'invalid_token_url')
-		{
-			list($strUrl) = explode('?', $this->Session->get('INVALID_TOKEN_URL'));
-			$this->redirect($strUrl);
-		}
+		$strBuffer = file_get_contents(TL_ROOT . '/system/docs/CHANGELOG.md');
 
-		$this->Template = new BackendTemplate('be_confirm');
+		$strBuffer = preg_replace(
+			array(
+				'/#([0-9]+)/',
+				'/(---+\n)(?!\n)/',
+				'/([^\n]+)\n===+\n/',
+				'/([^\n]+)\n---+\n/',
+				'/\n### ([^\n]+)\n/',
+				'/ _(?!_)/', '/_ /',
+				'/===+\n/'
+			),
+			array(
+				'<a href="https://github.com/contao/core/issues/$1" target="_blank">#$1</a>',
+				"$1\n",
+				'<h2>$1</h2>',
+				"<h3>\$1</h3>\n",
+				"<h4>\$1</h4>\n",
+				' <em>', '</em> ',
+				''
+			),
+			$strBuffer
+		);
+		
+		$strBuffer = str_replace(
+			array(
+				"\n\n```", "```\n\n",
+				' `', '` ',
+				'(`', '`)',
+				"\n`", "`\n",
+				'`.', '`,'
+			),
+			array(
+				"\n\n<pre>", "</pre>\n\n",
+				' <code>', '</code> ',
+				'(<code>', '</code>)',
+				"\n<code>", "</code>\n",
+				'</code>.', '</code>,'
+			),
+			trim($strBuffer)
+		);
 
-		// Prepare the URL
-		$url = preg_replace('/(\?|&)rt=[^&]*/', '', $this->Session->get('INVALID_TOKEN_URL'));
-		$this->Template->href = $url . ((strpos($url, '?') !== false) ? '&rt=' : '?rt=') . REQUEST_TOKEN;
+		$this->Template = new BackendTemplate('be_changelog');
 
 		// Template variables
-		$this->Template->confirm = true;
-		$this->Template->link = specialchars($this->Session->get('INVALID_TOKEN_URL'));
-		$this->Template->h2 = $GLOBALS['TL_LANG']['MSC']['invalidTokenUrl'];
-		$this->Template->explain = $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl'];
-		$this->Template->cancel = $GLOBALS['TL_LANG']['MSC']['cancelBT'];
-		$this->Template->continue = $GLOBALS['TL_LANG']['MSC']['continue'];
+		$this->Template->content = $strBuffer;
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
@@ -106,5 +129,5 @@ class Confirm extends Backend
 /**
  * Instantiate the controller
  */
-$objConfirm = new Confirm();
-$objConfirm->run();
+$objChangelog = new Changelog();
+$objChangelog->run();

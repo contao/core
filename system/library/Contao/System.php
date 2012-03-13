@@ -430,7 +430,7 @@ abstract class System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFallback->append(file_get_contents($strFile, null, null, 6));
 					include $strFile;
 				}
 			}
