@@ -101,6 +101,12 @@ class Popup extends Backend
 			die('File not found');
 		}
 
+		// Check whether the file is mounted (thanks to Marko Cupic)
+		if (!$this->User->hasAccess($this->strFile, 'filemounts'))
+		{
+			die('Permission denied');
+		}
+
 		// Open download dialogue
 		if ($this->Input->get('download') && $this->strFile)
 		{
