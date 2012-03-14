@@ -576,10 +576,11 @@ class DC_Table extends \DataContainer implements \listable, \editable
 							$label = $i;
 						}
 
+						// Always encode special characters (thanks to Oliver Klee)
 						$return .= '
   <tr>
     <td'.$class.'><span class="tl_label">'.$label.': </span></td>
-    <td'.$class.'>'.$v.'</td>
+    <td'.$class.'>'.specialchars($v).'</td>
   </tr>';
 					}
 				}
