@@ -1,8 +1,21 @@
 Contao Open Source CMS Changelog
 ================================
 
-Version 2.11.2 (XXXX-XX-XX)
+Version 2.11.2 (2012-03-14)
 ---------------------------
+
+### Fixed
+Fixed an issue with the CSS3PIE url being incorrectly rewritten (see #4074).
+
+### Fixed
+Fixed a security vulnerability in the file manager which allowed back end users
+to download files from the `tl_files` directory even if they were not mounted in
+their profile (thanks to Marko Cupic).
+
+### Fixed
+Fixed a potential XSS vulnerability in the undo module (thanks to Oliver Klee).
+The issue is not considered critical, because it requires the script tag to be
+in the list of allowed HTML tags, which is not the case by default.
 
 ### Fixed
 The IDNA convert class did not run under PHP 5.2 (see #4044).
