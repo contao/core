@@ -799,9 +799,11 @@ var Backend =
 			var inp = window.frames['pages_frame'].document.getElementById(opt.id+'_parent').getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
-				var div = inp[i].getParent('li').getFirst('div');
-				tls.push('<img src="' + div.getFirst('img').src + '" width="18" height="18" alt=""> ' + div.getFirst('label').get('title'));
-				val.push(inp[i].get('value'));
+                if (!inp[i].id.match(/^reset_/)) {
+				    var div = inp[i].getParent('li').getFirst('div');
+				    tls.push('<img src="' + div.getFirst('img').src + '" width="18" height="18" alt=""> ' + div.getFirst('label').get('title'));
+				    val.push(inp[i].get('value'));
+                }
 			}
 			if (opt.tag) {
 				$(opt.tag).value = '{{link::' + val.join(',') + '}}';
