@@ -221,7 +221,7 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Try to find a root page based on language and URL
-	 * @return Database_Result
+	 * @return \Contao\Model
 	 */
 	protected function getRootPageFromUrl()
 	{
@@ -291,7 +291,8 @@ abstract class Frontend extends \Controller
 
 	/**
 	 * Redirect to another root page if the visitor uses a mobile device
-	 * @param Database_Result|Model
+	 * @param object
+	 * @return void
 	 */
 	protected function redirectToMobile($objRootPage)
 	{
@@ -400,6 +401,7 @@ abstract class Frontend extends \Controller
 	 * @param integer|array
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	protected function jumpToOrReload($intId, $strParams=null, $strForceLang=null)
 	{
@@ -509,6 +511,7 @@ abstract class Frontend extends \Controller
 	 * Parse the meta.txt file of a folder
 	 * @param string
 	 * @param boolean
+	 * @return void
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)
 	{

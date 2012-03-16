@@ -83,7 +83,7 @@ class FileUpload extends \Backend
 	 * @param string
 	 * @param string
 	 * @return array
-	 * @throws \Expcetion
+	 * @throws \Exception
 	 */
 	public function uploadTo($strTarget, $strKey)
 	{
@@ -175,6 +175,10 @@ class FileUpload extends \Backend
 	}
 
 
+	/**
+	 * Generate the markup for the default uploader
+	 * @return string
+	 */
 	public function generateMarkup()
 	{
 		$fields = '';
@@ -204,7 +208,7 @@ class FileUpload extends \Backend
   
 	/**
 	 * Get the files from the global $_FILES array
-	 * @param key
+	 * @param string
 	 * @return array
 	 */
 	protected function getFilesFromGlobal($strKey)

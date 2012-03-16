@@ -59,7 +59,7 @@ class CommentsCollection extends \Model_Collection
 	 * @param boolean
 	 * @param integer
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedBySourceAndParent($strSource, $intParent, $lbnDesc=false, $intLimit=0, $intOffset=0)
 	{
@@ -86,7 +86,7 @@ class CommentsCollection extends \Model_Collection
 	 * Count published comments by their source table and parent ID
 	 * @param string
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function countPublishedBySourceAndParent($strSource, $intParent)
 	{

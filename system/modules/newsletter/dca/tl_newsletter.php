@@ -303,6 +303,7 @@ class tl_newsletter extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -457,11 +458,11 @@ class tl_newsletter extends Backend
 	/**
 	 * Auto-generate the newsletter alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -478,7 +479,7 @@ class tl_newsletter extends Backend
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias

@@ -785,6 +785,7 @@ class tl_module extends Backend
 
 	/**
 	 * Check permissions to edit the table
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -872,10 +873,10 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNavigationTemplates(DataContainer $dc)
+	public function getNavigationTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -890,10 +891,10 @@ class tl_module extends Backend
 
 	/**
 	 * Return all member templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMemberTemplates(DataContainer $dc)
+	public function getMemberTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -908,10 +909,10 @@ class tl_module extends Backend
 
 	/**
 	 * Return all search templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getSearchTemplates(DataContainer $dc)
+	public function getSearchTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -926,10 +927,10 @@ class tl_module extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getRssTemplates(DataContainer $dc)
+	public function getRssTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

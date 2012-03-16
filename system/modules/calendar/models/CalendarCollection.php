@@ -55,7 +55,7 @@ class CalendarCollection extends \Model_Collection
 	/**
 	 * Find multiple calendars by their IDs
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

@@ -360,6 +360,7 @@ window.addEvent(\'domready\', function() {
 	/**
 	 * Save the current value
 	 * @param mixed
+	 * @return void
 	 */
 	protected function save($varValue)
 	{

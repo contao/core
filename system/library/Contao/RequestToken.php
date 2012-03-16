@@ -89,13 +89,14 @@ class RequestToken extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * @return mixed|void
 	 */
 	final private function __clone() {}
 
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return RequestToken
+	 * @return \Contao\RequestToken
 	 */
 	public static function getInstance()
 	{

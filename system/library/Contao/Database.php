@@ -121,7 +121,7 @@ abstract class Database
 
 	/**
 	 * Instantiate a database driver object and return it (Factory)
-	 * @return Database
+	 * @return \Contao\Database
 	 * @throws \Exception
 	 */
 	public static function getInstance()
@@ -138,8 +138,8 @@ abstract class Database
 
 	/**
 	 * Prepare a statement (return a Database_Statement object)
-	 * @param  string
-	 * @return Database_Statement
+	 * @param string
+	 * @return \Contao\Database_Statement
 	 */
 	public function prepare($strQuery)
 	{
@@ -151,7 +151,7 @@ abstract class Database
 	/**
 	 * Execute a query (return a Database_Result object)
 	 * @param string
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	public function execute($strQuery)
 	{
@@ -162,7 +162,7 @@ abstract class Database
 	/**
 	 * Execute a query and do not cache the result
 	 * @param string
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	public function executeUncached($strQuery)
 	{
@@ -171,9 +171,9 @@ abstract class Database
 
 
 	/**
-	 * Execute a raw query (return a Database_Result object)
+	 * Execute a raw query (returns a Database_Result object)
 	 * @param string
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	public function query($strQuery)
 	{
@@ -316,6 +316,7 @@ abstract class Database
 
 	/**
 	 * Begin a transaction
+	 * @return void
 	 */
 	public function beginTransaction()
 	{
@@ -325,6 +326,7 @@ abstract class Database
 
 	/**
 	 * Commit a transaction
+	 * @return void
 	 */
 	public function commitTransaction()
 	{
@@ -334,6 +336,7 @@ abstract class Database
 
 	/**
 	 * Rollback a transaction
+	 * @return void
 	 */
 	public function rollbackTransaction()
 	{
@@ -344,6 +347,7 @@ abstract class Database
 	/**
 	 * Lock one or more tables
 	 * @param array
+	 * @return void
 	 */
 	public function lockTables($arrTables)
 	{
@@ -353,6 +357,7 @@ abstract class Database
 
 	/**
 	 * Unlock all tables
+	 * @return void
 	 */
 	public function unlockTables()
 	{
@@ -373,7 +378,7 @@ abstract class Database
 
 	/**
 	 * Return the next autoincrement ID of a table
-	 * @param  string
+	 * @param string
 	 * @return integer
 	 */
 	public function getNextId($strTable)

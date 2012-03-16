@@ -290,7 +290,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate an article and return it as string
-	 * @param integer|Database_Result
+	 * @param integer|object
 	 * @param boolean
 	 * @param boolean
 	 * @param string
@@ -359,7 +359,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a content element and return it as HTML string
-	 * @param integer|Database_Result
+	 * @param integer|object
 	 * @return string
 	 */
 	protected function getContentElement($intId)
@@ -447,7 +447,7 @@ abstract class Controller extends \System
 
 	/**
 	 * Generate a form and return it as HTML string
-	 * @param integer|Database_Result
+	 * @param integer|object
 	 * @return string
 	 */
 	protected function getForm($varId)
@@ -492,8 +492,8 @@ abstract class Controller extends \System
 
 	/**
 	 * Get the details of a page including inherited parameters and return it as object
-	 * @param integer|Database_Result
-	 * @return Database_Result|null
+	 * @param integer|object
+	 * @return \Contao\Model|null
 	 */
 	protected function getPageDetails($intId)
 	{
@@ -1143,6 +1143,7 @@ abstract class Controller extends \System
 	/**
 	 * Return true for backwards compatibility (see #3218)
 	 * @return boolean
+	 * @deprecated
 	 */
 	protected function getDatePickerString()
 	{
@@ -1214,7 +1215,8 @@ abstract class Controller extends \System
 
 	/**
 	 * Print an article as PDF and stream it to the browser
-	 * @param Database_Result|Model
+	 * @param object
+	 * @return void
 	 */
 	protected function printArticleAsPdf($objArticle)
 	{
@@ -1918,7 +1920,7 @@ abstract class Controller extends \System
 					break;
 
 				// News feed URL
-				case 'news_feed':
+				case 'news_feed': # FIXME: feeds are now in tl_calendar_feed
 					$objFeed = \NewsArchiveModel::findByPk($elements[1]);
 
 					if ($objFeed !== null)
@@ -1928,7 +1930,7 @@ abstract class Controller extends \System
 					break;
 
 				// Calendar feed URL
-				case 'calendar_feed':
+				case 'calendar_feed': # FIXME: feeds are now in tl_calendar_feed
 					$objFeed = \CalendarModel::findByPk($elements[1]);
 
 					if ($objFeed !== null)
@@ -1995,66 +1997,6 @@ abstract class Controller extends \System
 				case 'env':
 					switch ($elements[1])
 					{
-						case 'page_id':
-							trigger_error('The insert tag "env::page_id" is deprecated. Please use "page::id" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->id;
-							break;
-
-						case 'page_alias':
-							trigger_error('The insert tag "env::page_alias" is deprecated. Please use "page::alias" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->alias;
-							break;
-
-						case 'page_name':
-							trigger_error('The insert tag "env::page_name" is deprecated. Please use "page::title" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->title;
-							break;
-
-						case 'page_title':
-							trigger_error('The insert tag "env::page_title" is deprecated. Please use "page::pageTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
-							break;
-
-						case 'page_language':
-							trigger_error('The insert tag "env::page_language" is deprecated. Please use "page::language" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->language;
-							break;
-
-						case 'parent_alias':
-							trigger_error('The insert tag "env::parent_alias" is deprecated. Please use "page::parentAlias" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->parentAlias;
-							break;
-
-						case 'parent_name':
-							trigger_error('The insert tag "env::parent_name" is deprecated. Please use "page::parentTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->parentTitle;
-							break;
-
-						case 'parent_title':
-							trigger_error('The insert tag "env::parent_title" is deprecated. Please use "page::parentPageTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->parentPageTitle;
-							break;
-
-						case 'main_alias':
-							trigger_error('The insert tag "env::main_alias" is deprecated. Please use "page::mainAlias" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->mainAlias;
-							break;
-
-						case 'main_name':
-							trigger_error('The insert tag "env::main_name" is deprecated. Please use "page::mainTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->mainTitle;
-							break;
-
-						case 'main_title':
-							trigger_error('The insert tag "env::main_title" is deprecated. Please use "page::mainPageTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->mainPageTitle;
-							break;
-
-						case 'website_title':
-							trigger_error('The insert tag "env::website_title" is deprecated. Please use "page::rootTitle" instead.', E_USER_NOTICE);
-							$arrCache[$strTag] = $objPage->rootTitle;
-							break;
-
 						case 'host':
 							$arrCache[$strTag] = $this->Environment->host;
 							break;
@@ -2596,6 +2538,7 @@ abstract class Controller extends \System
 	/**
 	 * Send a file to the browser so the "save as" dialogue opens
 	 * @param string
+	 * @return void
 	 */
 	protected function sendFileToBrowser($strFile)
 	{
@@ -2669,6 +2612,7 @@ abstract class Controller extends \System
 	 * Load a set of DCA files
 	 * @param string
 	 * @param boolean
+	 * @return void
 	 */
 	protected function loadDataContainer($strName, $blnNoCache=false)
 	{
@@ -2859,6 +2803,7 @@ abstract class Controller extends \System
 	 * Create an initial version of a record
 	 * @param string
 	 * @param integer
+	 * @return void
 	 */
 	protected function createInitialVersion($strTable, $intId)
 	{
@@ -2882,6 +2827,7 @@ abstract class Controller extends \System
 	 * Create a new version of a record
 	 * @param string
 	 * @param integer
+	 * @return void
 	 */
 	protected function createNewVersion($strTable, $intId)
 	{
@@ -3289,6 +3235,7 @@ abstract class Controller extends \System
 	 * @param array
 	 * @param integer
 	 * @param string
+	 * @return void
 	 */
 	protected function addImageToTemplate($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
 	{
@@ -3397,6 +3344,7 @@ abstract class Controller extends \System
 	 * Add enclosures to a template
 	 * @param object
 	 * @param array
+	 * @return void
 	 */
 	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
 	{
@@ -3441,6 +3389,7 @@ abstract class Controller extends \System
 	 * Set a static URL constant and replace the protocol when requested via SSL
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	protected function setStaticUrl($name, $url)
 	{

@@ -90,6 +90,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -113,6 +114,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Generate the yearly menu
+	 * @return void
 	 */
 	protected function compileYearlyMenu()
 	{
@@ -159,6 +161,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Generate the monthly menu
+	 * @return void
 	 */
 	protected function compileMonthlyMenu()
 	{
@@ -215,6 +218,7 @@ class ModuleNewsMenu extends \ModuleNews
 
 	/**
 	 * Generate the dayil menu
+	 * @return void
 	 */
 	protected function compileDailyMenu()
 	{

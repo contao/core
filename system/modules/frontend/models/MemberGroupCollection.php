@@ -55,7 +55,7 @@ class MemberGroupCollection extends \Model_Collection
 	/**
 	 * Find all active groups
 	 * @param string
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findAllActive()
 	{

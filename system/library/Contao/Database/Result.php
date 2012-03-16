@@ -119,6 +119,7 @@ abstract class Database_Result
 	 * Set a particular field of the current row
 	 * @param mixed
 	 * @param string
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -280,7 +281,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the first row of the current result
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	public function first()
 	{
@@ -296,7 +297,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the next row of the current result
-	 * @return Database_Result|boolean
+	 * @return \Contao\Database_Result|boolean
 	 */
 	public function next()
 	{
@@ -327,7 +328,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the previous row of the current result
-	 * @return Database_Result|boolean
+	 * @return \Contao\Database_Result|boolean
 	 */
 	public function prev()
 	{
@@ -343,7 +344,7 @@ abstract class Database_Result
 
 	/**
 	 * Go to the last row of the current result
-	 * @return Database_Result|boolean
+	 * @return \Contao\Database_Result|boolean
 	 */
 	public function last()
 	{
@@ -377,7 +378,7 @@ abstract class Database_Result
 
 	/**
 	 * Reset the current result
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	public function reset()
 	{
@@ -387,9 +388,7 @@ abstract class Database_Result
 	}
 
 
-	/**
-	 * Abstract database driver methods
-	 */
+	// Abstract database driver methods
 	abstract protected function fetch_row();
 	abstract protected function fetch_assoc();
 	abstract protected function num_rows();

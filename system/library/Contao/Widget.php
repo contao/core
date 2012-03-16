@@ -153,6 +153,7 @@ abstract class Widget extends Controller
 	 * Set a parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -328,6 +329,7 @@ abstract class Widget extends Controller
 	/**
 	 * Add an error message
 	 * @param string
+	 * @return void
 	 */
 	public function addError($strError)
 	{
@@ -544,7 +546,8 @@ abstract class Widget extends Controller
 
 
 	/**
-	 * Validate input and set value
+	 * Validate the input and set the value
+	 * @return void
 	 */
 	public function validate()
 	{
@@ -866,6 +869,7 @@ abstract class Widget extends Controller
 	/**
 	 * Take an associative array and add it to the object's attributes
 	 * @param array
+	 * @return void
 	 */
 	public function addAttributes($arrAttributes)
 	{

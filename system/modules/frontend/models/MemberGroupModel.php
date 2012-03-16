@@ -55,7 +55,7 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find a published group by its ID
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -75,7 +75,7 @@ class MemberGroupModel extends \Model
 	/**
 	 * Find the first active group with a published jumpTo page
 	 * @param string
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findFirstActiveWithJumpToByIds($arrIds)
 	{

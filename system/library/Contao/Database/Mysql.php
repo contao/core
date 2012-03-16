@@ -60,6 +60,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 * @return void
 	 */
 	protected function connect()
 	{
@@ -90,6 +91,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Disconnect from the database
+	 * @return void
 	 */
 	protected function disconnect()
 	{
@@ -233,6 +235,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Begin a transaction
+	 * @return void
 	 */
 	protected function begin_transaction()
 	{
@@ -243,6 +246,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Commit a transaction
+	 * @return void
 	 */
 	protected function commit_transaction()
 	{
@@ -253,6 +257,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Rollback a transaction
+	 * @return void
 	 */
 	protected function rollback_transaction()
 	{
@@ -264,6 +269,7 @@ class Database_Mysql extends \Database
 	/**
 	 * Lock one or more tables
 	 * @param array
+	 * @return void
 	 */
 	protected function lock_tables($arrTables)
 	{
@@ -280,6 +286,7 @@ class Database_Mysql extends \Database
 
 	/**
 	 * Unlock all tables
+	 * @return void
 	 */
 	protected function unlock_tables()
 	{
@@ -319,7 +326,7 @@ class Database_Mysql extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return Database_Mysql_Statement
+	 * @return \Contao\Database_Mysql_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

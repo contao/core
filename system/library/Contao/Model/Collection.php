@@ -89,6 +89,7 @@ abstract class Model_Collection extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -141,6 +142,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Set the current record from a Database_Result
 	 * @param \Database_Result
+	 * @return void
 	 */
 	public function setData(\Database_Result $objResult)
 	{
@@ -165,7 +167,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Go to the first row
-	 * @return Model_Collection
+	 * @return \Contao\Model_Collection
 	 */
 	public function first()
 	{
@@ -176,7 +178,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Go to the previous row
-	 * @return Model_Collection
+	 * @return \Contao\Model_Collection
 	 */
 	public function prev()
 	{
@@ -192,7 +194,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Go to the next row
-	 * @return Model_Collection
+	 * @return \Contao\Model_Collection
 	 */
 	public function next()
 	{
@@ -214,7 +216,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Go to the last row
-	 * @return Model_Collection
+	 * @return \Contao\Model_Collection
 	 */
 	public function last()
 	{
@@ -241,6 +243,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Reset the model
+	 * @return void
 	 */
 	public function reset()
 	{
@@ -276,6 +279,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
+	 * @return void
 	 */
 	public function getRelated($key)
 	{
@@ -291,7 +295,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Find records and return the model collection
 	 * @param array
-	 * @return Model_Collection|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	protected static function find(Array $arrOptions)
 	{
@@ -339,7 +343,7 @@ abstract class Model_Collection extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param array
-	 * @return Model_Collection|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -356,7 +360,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Find all records and return the model
 	 * @param array
-	 * @return Model_Collection|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findAll(Array $arrOptions=array())
 	{
@@ -402,7 +406,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Modify the statement before it is executed
 	 * @param \Database_Statement
-	 * @return \Database_Statement
+	 * @return \Contao\Database_Statement
 	 */
 	protected static function preFind(\Database_Statement $objStatement)
 	{
@@ -413,7 +417,7 @@ abstract class Model_Collection extends \System
 	/**
 	 * Modify the result set before the model is created
 	 * @param \Database_Result
-	 * @return \Database_Result
+	 * @return \Contao\Database_Result
 	 */
 	protected static function postFind(\Database_Result $objResult)
 	{
@@ -423,6 +427,7 @@ abstract class Model_Collection extends \System
 
 	/**
 	 * Delete all records
+	 * @return void
 	 */
 	public function deleteAll()
 	{

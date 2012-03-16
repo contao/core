@@ -71,6 +71,7 @@ class ModuleRandomImage extends \Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{

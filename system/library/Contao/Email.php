@@ -174,6 +174,7 @@ class Email extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function __set($strKey, $varValue)
@@ -323,6 +324,7 @@ class Email extends \System
 	 * Add a custom text header
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public function addHeader($strKey, $strValue)
 	{
@@ -335,6 +337,7 @@ class Email extends \System
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
+	 * @return void
 	 */
 	public function sendCc()
 	{
@@ -347,6 +350,7 @@ class Email extends \System
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
+	 * @return void
 	 */
 	public function sendBcc()
 	{
@@ -359,6 +363,7 @@ class Email extends \System
 	 *
 	 * Friendly name portions (e.g. Admin <admin@example.com>) are allowed.
 	 * @param mixed
+	 * @return void
 	 */
 	public function replyTo()
 	{
@@ -370,6 +375,7 @@ class Email extends \System
 	 * Attach a file
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public function attachFile($strFile, $strMime='application/octet-stream')
 	{
@@ -382,6 +388,7 @@ class Email extends \System
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public function attachFileFromString($strContent, $strFilename, $strMime='application/octet-stream')
 	{

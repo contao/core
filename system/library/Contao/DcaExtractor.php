@@ -234,6 +234,7 @@ class DcaExtractor extends \DbInstaller
 
 	/**
 	 * Create the extract from the DCA or the database.sql files
+	 * @return void
 	 * @throws \Exception
 	 */
 	protected function createExtract()

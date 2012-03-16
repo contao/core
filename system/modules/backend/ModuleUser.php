@@ -82,7 +82,7 @@ class ModuleUser extends \BackendModule
 
 	/**
 	 * Generate the module
-	 * @return string
+	 * @return string|void
 	 */
 	protected function compile()
 	{

@@ -57,7 +57,7 @@ class FaqModel extends \Model
 	 * @param integer
 	 * @param string
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findPublishedByParentAndIdOrAlias($intId, $varAlias, $arrPids)
 	{

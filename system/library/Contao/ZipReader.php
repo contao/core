@@ -244,7 +244,7 @@ class ZipReader
 
 	/**
 	 * Go to the first file of the archive
-	 * @return ZipReader
+	 * @return \Contao\ZipReader
 	 */
 	public function first()
 	{
@@ -255,7 +255,7 @@ class ZipReader
 
 	/**
 	 * Go to the next file of the archive
-	 * @return ZipReader|boolean
+	 * @return \Contao\ZipReader|boolean
 	 */
 	public function next()
 	{
@@ -271,7 +271,7 @@ class ZipReader
 
 	/**
 	 * Go to the previous file of the archive
-	 * @return ZipReader|boolean
+	 * @return \Contao\ZipReader|boolean
 	 */
 	public function prev()
 	{
@@ -287,7 +287,7 @@ class ZipReader
 
 	/**
 	 * Go to the last file of the archive
-	 * @return ZipReader|boolean
+	 * @return \Contao\ZipReader|boolean
 	 */
 	public function last()
 	{
@@ -313,7 +313,7 @@ class ZipReader
 
 	/**
 	 * Reset the archive
-	 * @return ZipReader
+	 * @return \Contao\ZipReader
 	 */
 	public function reset()
 	{

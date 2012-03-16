@@ -86,7 +86,7 @@ class Input
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Input
+	 * @return \Contao\Input
 	 */
 	public static function getInstance()
 	{
@@ -276,6 +276,7 @@ class Input
 	 * Set a $_GET parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function setGet($strKey, $varValue)
 	{
@@ -299,6 +300,7 @@ class Input
 	 * Set a $_POST parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function setPost($strKey, $varValue)
 	{
@@ -323,6 +325,7 @@ class Input
 	 * Set a $_COOKIE parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function setCookie($strKey, $varValue)
 	{
@@ -344,6 +347,7 @@ class Input
 
 	/**
 	 * Reset the internal cache
+	 * @return void
 	 */
 	public function resetCache()
 	{

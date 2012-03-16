@@ -66,6 +66,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -101,6 +102,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Show all tasks
+	 * @return void
 	 */
 	protected function showAllTasks()
 	{
@@ -197,6 +199,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Create a task
+	 * @return void
 	 */
 	protected function createTask()
 	{
@@ -282,6 +285,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Edit a task
+	 * @return void
 	 */
 	protected function editTask()
 	{
@@ -407,6 +411,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Delete a task
+	 * @return void
 	 */
 	protected function deleteTask()
 	{
@@ -460,7 +465,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Select all tasks from the DB and return the result object
-	 * @return Database_Result
+	 * @return \Database_Result
 	 */
 	protected function getTaskObject()
 	{
@@ -592,7 +597,7 @@ class ModuleTasks extends \BackendModule
 	/**
 	 * Return the title widget as object
 	 * @param mixed
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getTitleWidget($value=null)
 	{
@@ -630,7 +635,7 @@ class ModuleTasks extends \BackendModule
 	/**
 	 * Return the assignedTo widget as object
 	 * @param mixed
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getAssignedToWidget($value=null)
 	{
@@ -691,7 +696,7 @@ class ModuleTasks extends \BackendModule
 	/**
 	 * Return the deadline widget as object
 	 * @param mixed
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getDeadlineWidget($value=null)
 	{
@@ -729,7 +734,7 @@ class ModuleTasks extends \BackendModule
 	 * Return the status widget as object
 	 * @param mixed
 	 * @param integer
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getStatusWidget($value=null, $progress=null)
 	{
@@ -778,7 +783,7 @@ class ModuleTasks extends \BackendModule
 	/**
 	 * Return the progress widget as object
 	 * @param mixed
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getProgressWidget($value=null)
 	{
@@ -825,7 +830,7 @@ class ModuleTasks extends \BackendModule
 	/**
 	 * Return the comment widget as object
 	 * @param mixed
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getCommentWidget($value=null)
 	{
@@ -862,7 +867,7 @@ class ModuleTasks extends \BackendModule
 
 	/**
 	 * Return the notify widget as object
-	 * @return Widget
+	 * @return \Widget
 	 */
 	protected function getNotifyWidget()
 	{

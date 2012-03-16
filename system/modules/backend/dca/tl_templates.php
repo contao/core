@@ -156,6 +156,7 @@ class tl_templates extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 * @return void
 	 */
 	public function addBreadcrumb()
 	{

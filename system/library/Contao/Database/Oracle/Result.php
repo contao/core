@@ -109,6 +109,7 @@ class Database_Oracle_Result extends \Database_Result
 
 	/**
 	 * Free the current result
+	 * @return void
 	 */
 	public function free()
 	{

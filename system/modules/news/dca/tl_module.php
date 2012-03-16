@@ -261,10 +261,10 @@ class tl_module_news extends Backend
 
 	/**
 	 * Return all news templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsTemplates(DataContainer $dc)
+	public function getNewsTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

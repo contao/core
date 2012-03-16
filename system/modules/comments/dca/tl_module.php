@@ -116,10 +116,10 @@ class tl_module_comments extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCommentTemplates(DataContainer $dc)
+	public function getCommentTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

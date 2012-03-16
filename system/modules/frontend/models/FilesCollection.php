@@ -55,7 +55,7 @@ class FilesCollection extends \Model_Collection
 	/**
 	 * Find multiple files by ID
 	 * @param array
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

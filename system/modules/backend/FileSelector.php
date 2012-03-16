@@ -236,7 +236,7 @@ class FileSelector extends \Widget
 
 	/**
 	 * Recursively render the filetree
-	 * @param int
+	 * @param integer
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
@@ -371,6 +371,7 @@ class FileSelector extends \Widget
 
 	/**
 	 * Get the IDs of all parent folders of the selected files, so they are expanded automatically
+	 * @return void
 	 */
 	protected function getPathNodes()
 	{

@@ -47,7 +47,8 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Generate a regular page
-	 * @param Database_Result|Model
+	 * @param object
+	 * @return void
 	 */
 	public function generate($objPage)
 	{
@@ -194,7 +195,7 @@ class PageRegular extends \Frontend
 	/**
 	 * Get a page layout and return it as database result object
 	 * @param integer
-	 * @return Database_Result
+	 * @return \Contao\Model
 	 */
 	protected function getPageLayout($intId)
 	{
@@ -214,8 +215,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create a new template
-	 * @param Database_Result|Model
-	 * @param Database_Result|Model
+	 * @param object
+	 * @param object
+	 * @return void
 	 */
 	protected function createTemplate($objPage, $objLayout)
 	{
@@ -396,6 +398,7 @@ class PageRegular extends \Frontend
 	 * Create all header scripts
 	 * @param object
 	 * @param object
+	 * @return void
 	 * @throws \Exception
 	 */
 	protected function createHeaderScripts($objPage, $objLayout)
@@ -606,8 +609,9 @@ class PageRegular extends \Frontend
 
 	/**
 	 * Create all footer scripts
-	 * @param Database_Result|Model
-	 * @param Database_Result|Model
+	 * @param object
+	 * @param object
+	 * @return void
 	 */
 	protected function createFooterScripts($objPage, $objLayout)
 	{

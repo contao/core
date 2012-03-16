@@ -187,10 +187,10 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Return all newsletter templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsletterTemplates(DataContainer $dc)
+	public function getNewsletterTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

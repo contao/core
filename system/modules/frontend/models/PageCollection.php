@@ -55,7 +55,7 @@ class PageCollection extends \Model_Collection
 	/**
 	 * Find published pages by their IDs or aliases
 	 * @param mixed
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByIdOrAlias($varId)
 	{
@@ -79,7 +79,7 @@ class PageCollection extends \Model_Collection
 	 * @param integer
 	 * @param boolean
 	 * @param boolean
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedSubpagesWithoutGuestsByPid($intPid, $blnShowHidden=false, $blnIsSitemap=false)
 	{
@@ -101,7 +101,7 @@ class PageCollection extends \Model_Collection
 	 * Find all published regular pages by their IDs and exclude pages
 	 * which are only visible for guests
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedRegularWithoutGuestsByIds($arrIds)
 	{
@@ -132,7 +132,7 @@ class PageCollection extends \Model_Collection
 	 * Find all published regular pages by their parent IDs and exclude
 	 * pages which are only visible for guests
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedRegularWithoutGuestsByPid($intId)
 	{
@@ -157,7 +157,7 @@ class PageCollection extends \Model_Collection
 	/**
 	 * Find the parent records of a record
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findParentsById($intId)
 	{

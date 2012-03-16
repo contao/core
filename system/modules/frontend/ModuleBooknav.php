@@ -90,6 +90,7 @@ class ModuleBooknav extends \Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -163,6 +164,7 @@ class ModuleBooknav extends \Module
 	 * @param integer
 	 * @param array
 	 * @param integer
+	 * @return void
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{

@@ -269,6 +269,7 @@ class tl_faq_category extends Backend
 
 	/**
 	 * Check permissions to edit table tl_news_archive
+	 * @return void
 	 */
 	public function checkPermission()
 	{

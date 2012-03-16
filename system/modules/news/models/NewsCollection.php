@@ -58,7 +58,7 @@ class NewsCollection extends \Model_Collection
 	 * @param boolean
 	 * @param integer
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPids($arrPids, $blnFeatured=null, $intLimit=0, $intOffset=0)
 	{
@@ -100,7 +100,7 @@ class NewsCollection extends \Model_Collection
 	 * Count published news items by their parent ID
 	 * @param array
 	 * @param boolean
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function countPublishedByPids($arrPids, $blnFeatured=null)
 	{
@@ -134,7 +134,7 @@ class NewsCollection extends \Model_Collection
 	/**
 	 * Find published news items with the default redirect target by their parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{
@@ -182,7 +182,7 @@ class NewsCollection extends \Model_Collection
 	 * @param array
 	 * @param integer
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedFromToByPids($intFrom, $intTo, $arrPids, $intLimit=0, $intOffset=0)
 	{
@@ -216,7 +216,7 @@ class NewsCollection extends \Model_Collection
 	 * @param integer
 	 * @param integer
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function countPublishedFromToByPids($intFrom, $intTo, $arrPids)
 	{

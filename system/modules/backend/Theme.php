@@ -355,6 +355,7 @@ class Theme extends \Backend
 	 * Extract the theme files and write the data to the database
 	 * @param array
 	 * @param array
+	 * @return void
 	 */
 	protected function extractThemeFiles($arrFiles, $arrDbFields)
 	{
@@ -588,9 +589,10 @@ class Theme extends \Backend
 
 	/**
 	 * Export a theme
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function exportTheme(DataContainer $dc)
+	public function exportTheme(\DataContainer $dc)
 	{
 		// Get the theme meta data
 		$objTheme = $this->Database->prepare("SELECT * FROM tl_theme WHERE id=?")
@@ -667,11 +669,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_theme
-	 * @param DOMDocument
-	 * @param DOMElement
-	 * @param Database_Result
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database_Result
+	 * @return void
 	 */
-	protected function addTableTlTheme(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
+	protected function addTableTlTheme(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -685,11 +688,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_style_sheet
-	 * @param DOMDocument
-	 * @param DOMElement
-	 * @param Database_Result
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database_Result
+	 * @return void
 	 */
-	protected function addTableTlStyleSheet(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
+	protected function addTableTlStyleSheet(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -731,11 +735,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_module
-	 * @param DOMDocument
-	 * @param DOMElement
-	 * @param Database_Result
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database_Result
+	 * @return void
 	 */
-	protected function addTableTlModule(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
+	protected function addTableTlModule(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -756,11 +761,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add the table tl_layout
-	 * @param DOMDocument
-	 * @param DOMElement
-	 * @param Database_Result
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database_Result
+	 * @return void
 	 */
-	protected function addTableTlLayout(DOMDocument $xml, DOMElement $tables, Database_Result $objTheme)
+	protected function addTableTlLayout(\DOMDocument $xml, \DOMElement $tables, \Database_Result $objTheme)
 	{
 		// Add the table
 		$table = $xml->createElement('table');
@@ -781,11 +787,12 @@ class Theme extends \Backend
 
 	/**
 	 * Add a data row to the XML document
-	 * @param DOMDocument
-	 * @param DOMElement
-	 * @param Database_Result
+	 * @param \DOMDocument
+	 * @param \DOMElement
+	 * @param \Database_Result
+	 * @return void
 	 */
-	protected function addDataRow(DOMDocument $xml, DOMElement $table, Database_Result $objData)
+	protected function addDataRow(\DOMDocument $xml, \DOMElement $table, \Database_Result $objData)
 	{
 		$row = $xml->createElement('row');
 		$row = $table->appendChild($row);
@@ -809,10 +816,11 @@ class Theme extends \Backend
 
 	/**
 	 * Recursively add a folder to the archive
-	 * @param ZipWriter
+	 * @param \ZipWriter
 	 * @param string
+	 * @return void
 	 */
-	protected function addFolderToArchive(ZipWriter $objArchive, $strFolder)
+	protected function addFolderToArchive(\ZipWriter $objArchive, $strFolder)
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);
@@ -859,10 +867,11 @@ class Theme extends \Backend
 
 	/**
 	 * Add templates to the archive
-	 * @param ZipWriter
+	 * @param \ZipWriter
 	 * @param string
+	 * @return void
 	 */
-	protected function addTemplatesToArchive(ZipWriter $objArchive, $strFolder)
+	protected function addTemplatesToArchive(\ZipWriter $objArchive, $strFolder)
 	{
 		// Sanitize the folder name
 		$strFolder = str_replace('../', '', $strFolder);

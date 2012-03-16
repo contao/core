@@ -56,7 +56,7 @@ class NewsletterRecipientsModel extends \Model
 	 * Find recipients by their e-mail address and parent ID
 	 * @param string
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByEmailAndPids($strEmail, $arrPids)
 	{

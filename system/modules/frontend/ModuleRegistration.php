@@ -85,6 +85,7 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -331,6 +332,7 @@ class ModuleRegistration extends \Module
 	/**
 	 * Create a new user and redirect
 	 * @param array
+	 * @return void
 	 */
 	protected function createNewUser($arrData)
 	{
@@ -475,6 +477,7 @@ class ModuleRegistration extends \Module
 
 	/**
 	 * Activate an account
+	 * @return void
 	 */
 	protected function activateAcount()
 	{
@@ -540,6 +543,7 @@ class ModuleRegistration extends \Module
 	 * Send an admin notification e-mail
 	 * @param integer
 	 * @param array
+	 * @return void
 	 */
 	protected function sendAdminNotification($intId, $arrData)
 	{

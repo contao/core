@@ -53,7 +53,7 @@ class ContentTeaser extends \ContentElement
 
 	/**
 	 * Article object
-	 * @var Database_Result
+	 * @var object
 	 */
 	protected $objArticle;
 
@@ -87,6 +87,7 @@ class ContentTeaser extends \ContentElement
 
 	/**
 	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{

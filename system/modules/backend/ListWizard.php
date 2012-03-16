@@ -62,6 +62,7 @@ class ListWizard extends \Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -167,10 +168,10 @@ class ListWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function importList(DataContainer $dc)
+	public function importList(\DataContainer $dc)
 	{
 		if ($this->Input->get('key') != 'list')
 		{

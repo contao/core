@@ -55,7 +55,7 @@ class CalendarFeedModel extends \Model
 	/**
 	 * Find all feeds which include a certain calendar
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByCalendar($intId)
 	{

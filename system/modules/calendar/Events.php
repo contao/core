@@ -210,13 +210,14 @@ abstract class Events extends \Module
 
 	/**
 	 * Add an event to the array of active events
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param integer
 	 * @param integer
 	 * @param string
 	 * @param integer
 	 * @param integer
 	 * @param integer
+	 * @return void
 	 */
 	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
@@ -354,7 +355,7 @@ abstract class Events extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param string
 	 * @return string
 	 */

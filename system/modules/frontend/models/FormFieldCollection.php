@@ -55,7 +55,7 @@ class FormFieldCollection extends \Model_Collection
 	/**
 	 * Find published form fields by their parent ID
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPid($intPid)
 	{

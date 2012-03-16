@@ -456,11 +456,11 @@ class tl_member extends Backend
 	 * Add an image to each record
 	 * @param array
 	 * @param string
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @param array
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc, $args)
+	public function addIcon($row, $label, \DataContainer $dc, $args)
 	{
 		$image = 'member';
 
@@ -477,7 +477,7 @@ class tl_member extends Backend
 	/**
 	 * Call the "setNewPassword" callback
 	 * @param string
-	 * @param User
+	 * @param object
 	 * @return string
 	 */
 	public function setNewPassword($strPassword, $user)
@@ -511,9 +511,10 @@ class tl_member extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function storeDateAdded(DataContainer $dc)
+	public function storeDateAdded(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
@@ -575,6 +576,7 @@ class tl_member extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

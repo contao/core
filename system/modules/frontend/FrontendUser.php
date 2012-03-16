@@ -126,6 +126,7 @@ class FrontendUser extends \User
 	 * Extend parent setter class and modify some parameters
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -295,6 +296,7 @@ class FrontendUser extends \User
 	/**
 	 * Restore the original group membership
 	 * @param boolean
+	 * @return void
 	 */
 	public function save($blnForceInsert=false)
 	{
@@ -307,6 +309,7 @@ class FrontendUser extends \User
 
 	/**
 	 * Set all user properties from a database record
+	 * @return void
 	 */
 	protected function setUserFromDb()
 	{

@@ -47,10 +47,10 @@ class Newsletter extends \Backend
 
 	/**
 	 * Renturn a form to choose an existing style sheet and import it
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function send(DataContainer $objDc)
+	public function send(\DataContainer $objDc)
 	{
 		$objNewsletter = $this->Database->prepare("SELECT n.*, c.useSMTP, c.smtpHost, c.smtpPort, c.smtpUser, c.smtpPass FROM tl_newsletter n LEFT JOIN tl_newsletter_channel c ON n.pid=c.id WHERE n.id=?")
 										->limit(1)
@@ -346,15 +346,15 @@ class Newsletter extends \Backend
 
 	/**
 	 * Compile the newsletter and send it
-	 * @param Email
-	 * @param Database_Result
+	 * @param \Email
+	 * @param \Database_Result
 	 * @param array
 	 * @param string
 	 * @param string
 	 * @param string
 	 * @return string
 	 */
-	protected function sendNewsletter(Email $objEmail, Database_Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
+	protected function sendNewsletter(\Email $objEmail, \Database_Result $objNewsletter, $arrRecipient, $text, $html, $css=null)
 	{
 		// Prepare the text content
 		$objEmail->text = $this->parseSimpleTokens($text, $arrRecipient);
@@ -544,8 +544,9 @@ class Newsletter extends \Backend
 
 	/**
 	 * Synchronize newsletter subscription of new users
-	 * @param User
+	 * @param object
 	 * @param array
+	 * @return void
 	 */
 	public function createNewUser($userId, $arrData)
 	{
@@ -583,7 +584,8 @@ class Newsletter extends \Backend
 
 	/**
 	 * Activate newsletter subscription of new users
-	 * @param User
+	 * @param object
+	 * @return void
 	 */
 	public function activateAccount($objUser)
 	{
@@ -614,8 +616,8 @@ class Newsletter extends \Backend
 	/**
 	 * Synchronize newsletter subscription of existing users
 	 * @param mixed
-	 * @param User
-	 * @param Module
+	 * @param object
+	 * @param object
 	 * @return mixed
 	 */
 	public function synchronize($varValue, $objUser, $objModule=null)
@@ -697,6 +699,7 @@ class Newsletter extends \Backend
 
 	/**
 	 * Update a particular member account
+	 * @return void
 	 */
 	public function updateAccount()
 	{
@@ -785,7 +788,7 @@ class Newsletter extends \Backend
 
 	/**
 	 * Get all editable newsletters and return them as array
-	 * @param Module
+	 * @param object
 	 * @return array
 	 */
 	public function getNewsletters($objModule)

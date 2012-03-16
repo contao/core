@@ -48,6 +48,7 @@ class Automator extends \Backend
 	/**
 	 * Generate Google XML sitemaps
 	 * @param integer
+	 * @return void
 	 */
 	public function generateSitemap($intId=0)
 	{
@@ -152,6 +153,7 @@ class Automator extends \Backend
 
 	/**
 	 * Purge the thumbnail directory (assets/images)
+	 * @return void
 	 */
 	public function purgeHtmlFolder()
 	{
@@ -176,6 +178,7 @@ class Automator extends \Backend
 
 	/**
 	 * Purge the script directories (assets/js and asset/css)
+	 * @return void
 	 */
 	public function purgeScriptsFolder()
 	{
@@ -218,6 +221,7 @@ class Automator extends \Backend
 
 	/**
 	 * Purge the temporary directory
+	 * @return void
 	 */
 	public function purgeTempFolder()
 	{
@@ -249,6 +253,7 @@ class Automator extends \Backend
 
 	/**
 	 * Check for new Contao versions
+	 * @return void
 	 */
 	public function checkForUpdates()
 	{
@@ -275,6 +280,7 @@ class Automator extends \Backend
 	 * Scan the upload folder and create the database entries
 	 * @param string
 	 * @param integer
+	 * @return void
 	 */
 	public function scanUploadFolder($strPath=null, $pid=0)
 	{

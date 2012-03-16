@@ -99,6 +99,7 @@ class Index extends Backend
 
 	/**
 	 * Run the controller and parse the login template
+	 * @return void
 	 */
 	public function run()
 	{

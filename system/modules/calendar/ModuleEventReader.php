@@ -103,6 +103,7 @@ class ModuleEventReader extends \Events
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{

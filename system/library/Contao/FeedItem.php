@@ -71,6 +71,7 @@ class FeedItem extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -103,6 +104,7 @@ class FeedItem extends \System
 	/**
 	 * Add an enclosure
 	 * @param string
+	 * @return void
 	 */
 	public function addEnclosure($strFile)
 	{

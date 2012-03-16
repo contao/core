@@ -140,9 +140,10 @@ class LiveUpdate extends \Backend implements \executable
 
 	/**
 	 * Run the live update
-	 * @param BackendTemplate
+	 * @param \BackendTemplate
+	 * @return void
 	 */
-	protected function runLiveUpdate(BackendTemplate $objTemplate)
+	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
 		$archive = 'system/tmp/' . $this->Input->get('token');
 

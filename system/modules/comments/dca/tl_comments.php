@@ -270,6 +270,7 @@ class tl_comments extends Backend
 
 	/**
 	 * Check permissions to edit table tl_comments
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -626,6 +627,7 @@ class tl_comments extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

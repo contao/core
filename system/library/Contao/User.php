@@ -124,6 +124,7 @@ abstract class User extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * @return mixed|void
 	 */
 	final private function __clone() {}
 
@@ -132,6 +133,7 @@ abstract class User extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -163,7 +165,7 @@ abstract class User extends \System
 
 	/**
 	 * Instantiate a new cache object and return it (Factory)
-	 * @return Cache
+	 * @return \Contao\Cache
 	 */
 	public static function getInstance()
 	{
@@ -458,6 +460,7 @@ abstract class User extends \System
 
 	/**
 	 * Update the current record
+	 * @return void
 	 */
 	public function save()
 	{
@@ -469,6 +472,7 @@ abstract class User extends \System
 
 	/**
 	 * Generate a session
+	 * @return void
 	 */
 	protected function generateSession()
 	{
@@ -590,6 +594,7 @@ abstract class User extends \System
 
 	/**
 	 * Set all user properties from a database record
+	 * @return void
 	 */
 	abstract protected function setUserFromDb();
 }

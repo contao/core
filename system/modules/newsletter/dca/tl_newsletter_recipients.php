@@ -221,6 +221,7 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter_recipients
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -317,18 +318,18 @@ class tl_newsletter_recipients extends Backend
 	/**
 	 * Check if recipients are unique per channel
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function checkUniqueRecipient($varValue, DataContainer $dc)
+	public function checkUniqueRecipient($varValue, \DataContainer $dc)
 	{
 		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?) AND id!=?")
 									   ->execute($varValue, $dc->id, $dc->id);
 
 		if ($objRecipient->count > 0)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
 		}
 
 		return $varValue;
@@ -396,6 +397,7 @@ class tl_newsletter_recipients extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

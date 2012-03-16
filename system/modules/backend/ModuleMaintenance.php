@@ -54,7 +54,8 @@ class ModuleMaintenance extends \BackendModule
 
 	/**
 	 * Generate the module
-	 * @throws Exception
+	 * @return void
+	 * @throws \Exception
 	 */
 	protected function compile()
 	{

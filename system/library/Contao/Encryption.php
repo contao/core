@@ -84,7 +84,7 @@ class Encryption
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Encryption
+	 * @return \Contao\Encryption
 	 */
 	public static function getInstance()
 	{

@@ -47,7 +47,8 @@ class PageForward extends \Frontend
 
 	/**
 	 * Redirect to an internal page
-	 * @param Database_Result|Model
+	 * @param object
+	 * @return void
 	 */
 	public function generate($objPage)
 	{

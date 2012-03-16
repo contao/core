@@ -48,8 +48,8 @@ class PageError403 extends \Frontend
 	/**
 	 * Generate an error 403 page
 	 * @param integer
-	 * @param Database_Result
-	 * @throws Exception
+	 * @param object
+	 * @return void
 	 */
 	public function generate($pageId, $objRootPage=null)
 	{

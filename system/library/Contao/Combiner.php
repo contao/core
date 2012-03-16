@@ -75,6 +75,7 @@ class Combiner extends \System
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function add($strFile, $strVersion=null, $strMedia='screen')

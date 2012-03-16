@@ -81,6 +81,7 @@ abstract class Model extends \System
 
 	/**
 	 * Unset the primary key if an object is cloned
+	 * @return mixed|void
 	 */
 	public function __clone()
 	{
@@ -92,6 +93,7 @@ abstract class Model extends \System
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -124,6 +126,7 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from a Database_Result
 	 * @param \Database_Result
+	 * @return void
 	 */
 	public function setData(\Database_Result $objResult)
 	{
@@ -172,6 +175,7 @@ abstract class Model extends \System
 	/**
 	 * Set the current record from an array
 	 * @param array
+	 * @return void
 	 */
 	public function setRow(Array $arrData)
 	{
@@ -182,7 +186,7 @@ abstract class Model extends \System
 	/**
 	 * Find a record and return the model
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	protected static function find(Array $arrOptions)
 	{
@@ -214,7 +218,7 @@ abstract class Model extends \System
 	 * @param mixed
 	 * @param mixed
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findBy($strColumn, $varValue, Array $arrOptions=array())
 	{
@@ -232,7 +236,7 @@ abstract class Model extends \System
 	 * Find a record by its primary key
 	 * @param mixed
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByPk($varValue, Array $arrOptions=array())
 	{
@@ -250,7 +254,7 @@ abstract class Model extends \System
 	 * Find a record by its ID or alias
 	 * @param mixed
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByIdOrAlias($varId, Array $arrOptions=array())
 	{
@@ -291,6 +295,7 @@ abstract class Model extends \System
 	/**
 	 * Lazy load related records
 	 * @param string
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function getRelated($key)
@@ -357,6 +362,7 @@ abstract class Model extends \System
 	/**
 	 * Save the current record and return the number of affected rows or the last insert ID
 	 * @param boolean
+	 * @return void
 	 */
 	public function save($blnForceInsert=false)
 	{

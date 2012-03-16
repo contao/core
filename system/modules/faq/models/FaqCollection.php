@@ -55,7 +55,7 @@ class FaqCollection extends \Model_Collection
 	/**
 	 * Find all published FAQs by their parent IDs
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPids($arrPids)
 	{

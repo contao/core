@@ -55,7 +55,7 @@ class PageModel extends \Model
 	/**
 	 * Find a published page by its ID
 	 * @param mixed
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findPublishedById($intId)
 	{
@@ -76,7 +76,7 @@ class PageModel extends \Model
 	 * Find the first published root page by its host name and language
 	 * @param string
 	 * @param mixed
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findFirstPublishedRootByHostAndLanguage($strHost, $varLanguage)
 	{
@@ -127,7 +127,7 @@ class PageModel extends \Model
 	/**
 	 * Find the first published page by its parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findFirstPublishedByPid($intPid)
 	{
@@ -147,7 +147,7 @@ class PageModel extends \Model
 	/**
 	 * Find the first published regular page by its parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findFirstPublishedRegularByPid($intPid)
 	{
@@ -167,7 +167,7 @@ class PageModel extends \Model
 	/**
 	 * Find an error 403 page by its parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function find403ByPid($intPid)
 	{
@@ -187,7 +187,7 @@ class PageModel extends \Model
 	/**
 	 * Find an error 404 page by its parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function find404ByPid($intPid)
 	{
@@ -207,7 +207,7 @@ class PageModel extends \Model
 	/**
 	 * Find a page matching a list of possible alias names
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByAliases($arrAliases)
 	{

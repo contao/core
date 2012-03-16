@@ -78,7 +78,7 @@ abstract class ContentElement extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param \Database_Result|\Model
+	 * @param object
 	 */
 	public function __construct($objElement)
 	{
@@ -103,6 +103,7 @@ abstract class ContentElement extends \Frontend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -172,7 +173,8 @@ abstract class ContentElement extends \Frontend
 
 
 	/**
-	 * Compile the current element
+	 * Compile the content element
+	 * @return void
 	 */
 	abstract protected function compile();
 }

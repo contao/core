@@ -57,7 +57,7 @@ class CalendarEventsCollection extends \Model_Collection
 	 * @param integer
 	 * @param integer
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findCurrentByPid($intPid, $intStart, $intEnd)
 	{
@@ -80,7 +80,7 @@ class CalendarEventsCollection extends \Model_Collection
 	/**
 	 * Find published events with the default redirect target by their parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedDefaultByPid($intPid)
 	{

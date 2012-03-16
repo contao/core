@@ -94,6 +94,7 @@ class Main extends Backend
 
 	/**
 	 * Run the controller and parse the login template
+	 * @return void
 	 */
 	public function run()
 	{
@@ -165,6 +166,7 @@ class Main extends Backend
 
 	/**
 	 * Output the template file
+	 * @return void
 	 */
 	protected function output()
 	{

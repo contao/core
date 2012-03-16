@@ -293,6 +293,7 @@ class tl_calendar extends Backend
 
 	/**
 	 * Check permissions to edit table tl_calendar
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -424,6 +425,7 @@ class tl_calendar extends Backend
 
 	/**
 	 * Check for modified calendar feeds and update the XML files if necessary
+	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -450,9 +452,10 @@ class tl_calendar extends Backend
 	 * 
 	 * This method is triggered when a single calendar or multiple calendars
 	 * are modified (edit/editAll).
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function scheduleUpdate(DataContainer $dc)
+	public function scheduleUpdate(\DataContainer $dc)
 	{
 		// Return if there is no ID 
 		if (!$dc->id)

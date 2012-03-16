@@ -55,7 +55,7 @@ class ContentCollection extends \Model_Collection
 	/**
 	 * Find all published content elements by their parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPid($intPid)
 	{

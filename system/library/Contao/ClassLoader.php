@@ -128,6 +128,7 @@ class ClassLoader
 	 * Add a new namespace (prepend it to override a core class)
 	 * @param string
 	 * @param boolean
+	 * @return void
 	 */
 	public static function addNamespace($name, $prepend=false)
 	{
@@ -151,6 +152,7 @@ class ClassLoader
 	 * Add new namespaces (prepend it to override a core class)
 	 * @param array
 	 * @param boolean
+	 * @return void
 	 */
 	public static function addNamespaces($names, $prepend=false)
 	{
@@ -175,6 +177,7 @@ class ClassLoader
 	 * Add a new class with its file path
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public static function addClass($class, $file)
 	{
@@ -185,6 +188,7 @@ class ClassLoader
 	/**
 	 * Add multiple new classes with their file paths
 	 * @param array
+	 * @return void
 	 */
 	public static function addClasses($classes)
 	{
@@ -209,6 +213,7 @@ class ClassLoader
 	 * Autoload a class and create an alias in the global namespace to
 	 * preserve backwards compatibility with Contao 2 extensions
 	 * @param string
+	 * @return void
 	 */
 	public static function load($class)
 	{
@@ -264,6 +269,7 @@ class ClassLoader
 
 	/**
 	 * Register the autoloader
+	 * @return void
 	 */
 	public static function register()
 	{
@@ -274,6 +280,7 @@ class ClassLoader
 	/**
 	 * Scan the module directories for config/autoload.php files
 	 * and then register the autoloader on the SPL stack
+	 * @return void
 	 */
 	public static function scanAndRegister()
 	{

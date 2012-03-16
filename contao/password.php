@@ -69,6 +69,7 @@ class ChangePassword extends Backend
 
 	/**
 	 * Run the controller and parse the password template
+	 * @return void
 	 */
 	public function run()
 	{

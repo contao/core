@@ -123,7 +123,7 @@ var TableSort = new Class(
 	 * @param object
 	 * @return boolean
 	 */
-	resort: function (index, el)
+	resort: function(index, el)
 	{
 		var col = $(el);
 

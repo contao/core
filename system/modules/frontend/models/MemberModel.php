@@ -55,7 +55,7 @@ class MemberModel extends \Model
 	/**
 	 * Find a member by his/her username
 	 * @param string
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByUsername($strUsername)
 	{
@@ -67,7 +67,7 @@ class MemberModel extends \Model
 	 * Find an active member by his/her e-mail-address and username
 	 * @param string
 	 * @param string
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findActiveByEmailAndUsername($strEmail, $strUsername=null)
 	{

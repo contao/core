@@ -98,6 +98,7 @@ class Database_Sybase_Result extends \Database_Result
 
 	/**
 	 * Free the current result
+	 * @return void
 	 */
 	public function free()
 	{

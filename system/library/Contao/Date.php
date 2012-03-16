@@ -86,6 +86,7 @@ class Date extends \System
 	 * Create object properties and date ranges
 	 * @param integer
 	 * @param string
+	 * @return void
 	 */
 	public function __construct($intTstamp=null, $strFormat=null)
 	{
@@ -314,6 +315,7 @@ class Date extends \System
 
 	/**
 	 * Convert a date string into a UNIX timestamp using a particular date format
+	 * @return void
 	 * @throws \Exception
 	 */
 	protected function dateToUnix()

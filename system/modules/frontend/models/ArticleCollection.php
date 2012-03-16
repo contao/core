@@ -56,7 +56,7 @@ class ArticleCollection extends \Model_Collection
 	 * Find all published articles by their parent ID and column
 	 * @param integer
 	 * @param string
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedByPidAndColumn($intPid, $strColumn)
 	{
@@ -78,7 +78,7 @@ class ArticleCollection extends \Model_Collection
 	 * Find all published articles with teaser by their parent ID and column
 	 * @param integer
 	 * @param string
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findPublishedWithTeaserByPidAndColumn($intPid, $strColumn)
 	{

@@ -74,6 +74,7 @@ class Environment
 	 * Set an environment parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -111,7 +112,7 @@ class Environment
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Environment
+	 * @return \Contao\Environment
 	 */
 	public static function getInstance()
 	{

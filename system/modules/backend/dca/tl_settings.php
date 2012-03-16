@@ -573,6 +573,7 @@ class tl_settings extends Backend
 	/**
 	 * Update the inactive modules
 	 * @param mixed
+	 * @return mixed
 	 */
 	public function updateInactiveModules($varValue)
 	{
@@ -618,7 +619,7 @@ class tl_settings extends Backend
 	/**
 	 * Remove protected search results if the feature is being disabled
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function clearSearchIndex($varValue)
 	{
@@ -634,7 +635,7 @@ class tl_settings extends Backend
 	/**
 	 * Make sure that resultsPerPage > 0
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkResultsPerPage($varValue)
 	{
@@ -650,7 +651,7 @@ class tl_settings extends Backend
 	/**
 	 * Regenerate the CSS scripts when the debug mode changes
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function regenerateScripts($varValue)
 	{
@@ -672,7 +673,7 @@ class tl_settings extends Backend
 	 * Make sure that "html5" is in the list of valid template
 	 * files, so the back end works correctly (see #3398)
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkTemplateFiles($varValue)
 	{
@@ -688,8 +689,8 @@ class tl_settings extends Backend
 	/**
 	 * Check the upload path
 	 * @param mixed
-	 * @return array
-	 * @throws Exception
+	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function checkUploadPath($varValue)
 	{
@@ -701,7 +702,7 @@ class tl_settings extends Backend
 		}
 		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		return $varValue;
@@ -711,7 +712,7 @@ class tl_settings extends Backend
 	/**
 	 * Check a static URL
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
 	{

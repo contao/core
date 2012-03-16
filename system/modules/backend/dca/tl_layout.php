@@ -488,6 +488,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Check permissions to edit the table
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -506,10 +507,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all style sheets of the current theme
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getStyleSheets(DataContainer $dc)
+	public function getStyleSheets(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -587,10 +588,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all page templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getPageTemplates(DataContainer $dc)
+	public function getPageTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -605,10 +606,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all MooTools templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMooToolsTemplates(DataContainer $dc)
+	public function getMooToolsTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -623,10 +624,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all jQuery templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getJqueryTemplates(DataContainer $dc)
+	public function getJqueryTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -683,7 +684,7 @@ class tl_layout extends Backend
 	 * @param \DataContainer
 	 * @return string
 	 */
-	public function styleSheetLink(DataContainer $dc)
+	public function styleSheetLink(\DataContainer $dc)
 	{
 		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}

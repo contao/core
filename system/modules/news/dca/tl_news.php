@@ -493,6 +493,7 @@ class tl_news extends Backend
 
 	/**
 	 * Check permissions to edit table tl_news
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -611,11 +612,11 @@ class tl_news extends Backend
 	/**
 	 * Auto-generate the news alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -632,7 +633,7 @@ class tl_news extends Backend
 		// Check whether the news alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias
@@ -666,10 +667,10 @@ class tl_news extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(DataContainer $dc)
+	public function getArticleAlias(\DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -712,9 +713,10 @@ class tl_news extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function adjustTime(DataContainer $dc)
+	public function adjustTime(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -731,6 +733,7 @@ class tl_news extends Backend
 
 	/**
 	 * Check for modified news feeds and update the XML files if necessary
+	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -759,6 +762,7 @@ class tl_news extends Backend
 	 * items are modified (edit/editAll), moved (cut/cutAll) or deleted
 	 * (delete/deleteAll). Since duplicated items are unpublished by default,
 	 * it is not necessary to schedule updates on copyAll as well.
+	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -777,10 +781,10 @@ class tl_news extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(DataContainer $dc)
+	public function pagePicker(\DataContainer $dc)
 	{
 		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
@@ -900,6 +904,7 @@ class tl_news extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

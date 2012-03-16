@@ -662,6 +662,7 @@ class tl_page extends Backend
 
 	/**
 	 * Check permissions to edit table tl_page
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -879,6 +880,7 @@ class tl_page extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 * @return void
 	 */
 	public function addBreadcrumb()
 	{
@@ -972,9 +974,10 @@ class tl_page extends Backend
 
 	/**
 	 * Make new top-level pages root pages
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function setRootType(DataContainer $dc)
+	public function setRootType(\DataContainer $dc)
 	{
 		if ($this->Input->get('act') != 'create')
 		{
@@ -1005,15 +1008,15 @@ class tl_page extends Backend
 	/**
 	 * Make sure that top-level pages are root pages
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function checkRootType($varValue, DataContainer $dc)
+	public function checkRootType($varValue, \DataContainer $dc)
 	{
 		if ($varValue != 'root' && $dc->activeRecord->pid == 0)
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
 		}
 
 		return $varValue;
@@ -1022,6 +1025,7 @@ class tl_page extends Backend
 
 	/**
 	 * Show a warning if there is no language fallback page
+	 * @return void
 	 */
 	public function showFallbackWarning()
 	{
@@ -1043,7 +1047,7 @@ class tl_page extends Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -1102,7 +1106,7 @@ class tl_page extends Backend
 				}
 				else
 				{
-					throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 				}
 			}
 		}
@@ -1124,9 +1128,10 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically create an article in the main column of a new page
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function generateArticle(DataContainer $dc)
+	public function generateArticle(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -1174,10 +1179,11 @@ class tl_page extends Backend
 	/**
 	 * Check the sitemap alias
 	 * @param mixed
-	 * @param DataContainer
-	 * @throws Exception
+	 * @param \DataContainer
+	 * @return void
+	 * @throws \Exception
 	 */
-	public function checkFeedAlias($varValue, DataContainer $dc)
+	public function checkFeedAlias($varValue, \DataContainer $dc)
 	{
 		// No change or empty value
 		if ($varValue == $dc->value || $varValue == '')
@@ -1190,7 +1196,7 @@ class tl_page extends Backend
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		return $varValue;
@@ -1204,11 +1210,11 @@ class tl_page extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function checkJumpTo($varValue, DataContainer $dc)
+	public function checkJumpTo($varValue, \DataContainer $dc)
 	{
 		if ($varValue == $dc->id)
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
 		}
 
 		return $varValue;
@@ -1229,11 +1235,11 @@ class tl_page extends Backend
 	/**
 	 * Make sure there is only one fallback per domain (thanks to Andreas Schempp)
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function checkFallback($varValue, DataContainer $dc)
+	public function checkFallback($varValue, \DataContainer $dc)
 	{
 		if ($varValue == '')
 		{
@@ -1245,7 +1251,7 @@ class tl_page extends Backend
 
 		if ($objPage->numRows)
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
 		}
 
 		return $varValue;
@@ -1270,10 +1276,10 @@ class tl_page extends Backend
 
 	/**
 	 * Returns all allowed page types as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function getPageTypes(DataContainer $dc)
+	public function getPageTypes(\DataContainer $dc)
 	{
 		$arrOptions = array();
 
@@ -1317,12 +1323,12 @@ class tl_page extends Backend
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @param string
 	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
+	public function addIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
 	{
 		$image = $this->getPageStatusIcon((object)$row);
 
@@ -1435,7 +1441,7 @@ class tl_page extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
+	public function pastePage(\DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$disablePA = false;
 		$disablePI = false;
@@ -1551,9 +1557,10 @@ class tl_page extends Backend
 
 	/**
 	 * Recursively add pages to a sitemap
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function updateSitemap(DataContainer $dc)
+	public function updateSitemap(\DataContainer $dc)
 	{
 		$this->import('Automator');
 		$this->Automator->generateSitemap($dc->id);
@@ -1608,6 +1615,7 @@ class tl_page extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

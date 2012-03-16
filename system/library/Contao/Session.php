@@ -110,7 +110,7 @@ class Session
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Session
+	 * @return \Contao\Session
 	 */
 	public static function getInstance()
 	{
@@ -138,6 +138,7 @@ class Session
 	 * Set a particular session parameter
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function set($strKey, $varValue)
 	{
@@ -148,6 +149,7 @@ class Session
 	/**
 	 * Remove a particular session parameter
 	 * @param string
+	 * @return void
 	 */
 	public function remove($strKey)
 	{
@@ -168,6 +170,7 @@ class Session
 	/**
 	 * Set the current session data from an array
 	 * @param array
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function setData($arrData)
@@ -184,6 +187,7 @@ class Session
 	/**
 	 * Append data to the current session
 	 * @param mixed
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function appendData($varData)

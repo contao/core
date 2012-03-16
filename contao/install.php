@@ -79,6 +79,7 @@ class InstallTool extends Backend
 
 	/**
 	 * Run the controller and parse the login template
+	 * @return void
 	 */
 	public function run()
 	{
@@ -932,6 +933,7 @@ class InstallTool extends Backend
 
 	/**
 	 * Create the local configuration files if they do not exist
+	 * @return void
 	 */
 	protected function createLocalConfigurationFiles()
 	{
@@ -950,6 +952,7 @@ class InstallTool extends Backend
 
 	/**
 	 * Set the authentication cookie
+	 * @return void
 	 */
 	protected function setAuthCookie()
 	{
@@ -961,6 +964,7 @@ class InstallTool extends Backend
 
 	/**
 	 * Output the template file and exit
+	 * @return void
 	 */
 	protected function outputAndExit()
 	{

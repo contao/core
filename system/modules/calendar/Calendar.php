@@ -56,6 +56,7 @@ class Calendar extends \Frontend
 	 * Update a particular RSS feed
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function generateFeed($intId, $blnIsFeedId=false)
 	{
@@ -86,6 +87,7 @@ class Calendar extends \Frontend
 
 	/**
 	 * Delete old files and generate all feeds
+	 * @return void
 	 */
 	public function generateFeeds()
 	{
@@ -107,6 +109,7 @@ class Calendar extends \Frontend
 	/**
 	 * Generate an XML file and save it to the root directory
 	 * @param array
+	 * @return void
 	 */
 	protected function generateFiles($arrFeed)
 	{
@@ -304,11 +307,12 @@ class Calendar extends \Frontend
 
 	/**
 	 * Add an event to the array of active events
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param integer
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	protected function addEvent($objEvent, $intStart, $intEnd, $strUrl, $strLink)
 	{

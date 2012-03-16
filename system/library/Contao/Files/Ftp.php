@@ -78,6 +78,7 @@ class Files_Ftp extends \Files
 
 	/**
 	 * Establish an FTP connection
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function connect()

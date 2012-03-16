@@ -69,6 +69,7 @@ class Confirm extends Backend
 
 	/**
 	 * Run the controller
+	 * @return void
 	 */
 	public function run()
 	{

@@ -315,6 +315,7 @@ class tl_form extends Backend
 
 	/**
 	 * Check permissions to edit table tl_form
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -445,7 +446,7 @@ class tl_form extends Backend
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -464,7 +465,7 @@ class tl_form extends Backend
 		{
 			if (!$autoAlias)
 			{
-				throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+				throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 			}
 
 			$varValue .= '-' . $dc->id;

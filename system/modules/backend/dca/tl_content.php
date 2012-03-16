@@ -741,6 +741,7 @@ class tl_content extends Backend
 
 	/**
 	 * Check permissions to edit table tl_content
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -903,10 +904,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article alias wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editArticleAlias(DataContainer $dc)
+	public function editArticleAlias(\DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_content&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -914,10 +915,10 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article alias)
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(DataContainer $dc)
+	public function getArticleAlias(\DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -961,10 +962,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit alias wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editAlias(DataContainer $dc)
+	public function editAlias(\DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="'.preg_replace('/id=[0-9]+/', 'id=' . $dc->value, ampersand($this->Environment->request)).'" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1038,10 +1039,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit form wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editForm(DataContainer $dc)
+	public function editForm(\DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=form&amp;table=tl_form_field&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1075,10 +1076,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit module wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editModule(DataContainer $dc)
+	public function editModule(\DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editalias'][1]), $dc->value).'" style="padding-left:3px">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editalias'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1104,10 +1105,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return all gallery templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getGalleryTemplates(DataContainer $dc)
+	public function getGalleryTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -1137,10 +1138,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the edit article teaser wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function editArticle(DataContainer $dc)
+	public function editArticle(\DataContainer $dc)
 	{
 		return ($dc->value < 1) ? '' : ' <a href="contao/main.php?do=article&amp;table=tl_article&amp;act=edit&amp;id=' . $dc->value . '" title="'.sprintf(specialchars($GLOBALS['TL_LANG']['tl_content']['editarticle'][1]), $dc->value).'">' . $this->generateImage('alias.gif', $GLOBALS['TL_LANG']['tl_content']['editarticle'][0], 'style="vertical-align:top"') . '</a>';
 	}
@@ -1148,10 +1149,10 @@ class tl_content extends Backend
 
 	/**
 	 * Get all articles and return them as array (article teaser)
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticles(DataContainer $dc)
+	public function getArticles(\DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrArticle = array();
@@ -1220,10 +1221,10 @@ class tl_content extends Backend
 	/**
 	 * Dynamically set the codeMirror syntax
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function setRteSyntax($varValue, DataContainer $dc)
+	public function setRteSyntax($varValue, \DataContainer $dc)
 	{
 		switch ($dc->activeRecord->highlight)
 		{
@@ -1292,10 +1293,10 @@ class tl_content extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(DataContainer $dc)
+	public function pagePicker(\DataContainer $dc)
 	{
 		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
@@ -1360,6 +1361,7 @@ class tl_content extends Backend
 	 * Toggle the visibility of an element
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

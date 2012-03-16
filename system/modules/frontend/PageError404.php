@@ -50,6 +50,7 @@ class PageError404 extends \Frontend
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public function generate($pageId, $strDomain=null, $strHost=null)
 	{

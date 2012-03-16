@@ -661,6 +661,7 @@ class tl_style extends Backend
 
 	/**
 	 * Check permissions to edit the table
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -705,10 +706,10 @@ class tl_style extends Backend
 
 	/**
 	 * Return the color picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function colorPicker(DataContainer $dc)
+	public function colorPicker(\DataContainer $dc)
 	{
 		return ' ' . $this->generateImage('pickcolor.gif', $GLOBALS['TL_LANG']['MSC']['colorpicker'], 'style="vertical-align:top;cursor:pointer" id="moo_'.$dc->field.'"') . '
   <script>
@@ -726,10 +727,10 @@ class tl_style extends Backend
 
 	/**
 	 * Return the file picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function filePicker(DataContainer $dc)
+	public function filePicker(\DataContainer $dc)
 	{
 		$strField = 'ctrl_' . $dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '');
 		return ' ' . $this->generateImage('pickfile.gif', $GLOBALS['TL_LANG']['MSC']['filepicker'], 'style="vertical-align:top;cursor:pointer" onclick="Backend.pickFile(\'' . $strField . '\')"');
@@ -738,6 +739,7 @@ class tl_style extends Backend
 
 	/**
 	 * Check for modified style sheets and update them if necessary
+	 * @return void
 	 */
 	public function updateStyleSheet()
 	{
@@ -765,6 +767,7 @@ class tl_style extends Backend
 	 * This method is triggered when a single style or multiple styles are
 	 * modified (edit/editAll), duplicated (copy/copyAll), moved (cut/cutAll)
 	 * or deleted (delete/deleteAll).
+	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -786,6 +789,7 @@ class tl_style extends Backend
 	 * @param integer
 	 * @param string
 	 * @param array
+	 * @return void
 	 */
 	public function updateAfterRestore($id, $table, $data)
 	{
@@ -837,6 +841,7 @@ class tl_style extends Backend
 	 * Toggle the visibility of a format definition
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

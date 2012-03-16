@@ -66,7 +66,7 @@ abstract class Files
 
 	/**
 	 * Instantiate a files driver object and return it (Factory)
-	 * @return Files
+	 * @return \Contao\Files
 	 */
 	public static function getInstance()
 	{
@@ -220,6 +220,7 @@ abstract class Files
 
 	/**
 	 * Validate the path
+	 * @return void
 	 * @throws \Exception
 	 */
 	protected function validate()

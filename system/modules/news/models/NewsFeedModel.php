@@ -55,7 +55,7 @@ class NewsFeedModel extends \Model
 	/**
 	 * Find all feeds which include a certain archive
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findByArchive($intId)
 	{

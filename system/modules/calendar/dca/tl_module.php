@@ -234,10 +234,10 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return the calendar formats depending on the module type
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getFormats(DataContainer $dc)
+	public function getFormats(\DataContainer $dc)
 	{
 		if ($dc->activeRecord->type == 'eventmenu')
 		{
@@ -284,10 +284,10 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getEventTemplates(DataContainer $dc)
+	public function getEventTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -302,10 +302,10 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCalendarTemplates(DataContainer $dc)
+	public function getCalendarTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

@@ -78,6 +78,7 @@ class ContentModule extends \ContentElement
 
 	/**
 	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{

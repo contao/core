@@ -74,6 +74,7 @@ class FormCheckBox extends \Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -116,6 +117,7 @@ class FormCheckBox extends \Widget
 
 	/**
 	 * Check the options if the field is mandatory
+	 * @return void
 	 */
 	public function validate()
 	{

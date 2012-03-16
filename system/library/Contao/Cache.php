@@ -66,6 +66,7 @@ class Cache extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * @return mixed|void
 	 */
 	final private function __clone() {}
 
@@ -96,6 +97,7 @@ class Cache extends \System
 	 * Set a variable
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -106,6 +108,7 @@ class Cache extends \System
 	/**
 	 * Unset an entry
 	 * @param string
+	 * @return void
 	 */
 	public function __unset($strKey)
 	{
@@ -115,7 +118,7 @@ class Cache extends \System
 
 	/**
 	 * Instantiate a new cache object and return it (Factory)
-	 * @return Cache
+	 * @return \Contao\Cache
 	 */
 	public static function getInstance()
 	{

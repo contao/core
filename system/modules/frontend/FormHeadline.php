@@ -54,6 +54,7 @@ class FormHeadline extends \Widget
 
 	/**
 	 * Do not validate
+	 * @return void
 	 */
 	public function validate()
 	{

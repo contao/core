@@ -54,13 +54,14 @@ class Search extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * @return mixed|void
 	 */
 	final private function __clone() {}
 
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Search
+	 * @return \Contao\Search
 	 */
 	public static function getInstance()
 	{
@@ -300,7 +301,7 @@ class Search extends \System
 	 * @param integer
 	 * @param integer
 	 * @param boolean
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 * @throws \Exception
 	 */
 	public function searchFor($strKeywords, $blnOrSearch=false, $arrPid=array(), $intRows=0, $intOffset=0, $blnFuzzy=false)
@@ -525,6 +526,7 @@ class Search extends \System
 	/**
 	 * Remove an entry from the search index
 	 * @param string
+	 * @return void
 	 */
 	public function removeEntry($strUrl)
 	{

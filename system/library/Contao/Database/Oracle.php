@@ -60,6 +60,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Connect to the database server and select the database
+	 * @return void
 	 */
 	protected function connect()
 	{
@@ -76,6 +77,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Disconnect from the database
+	 * @return void
 	 */
 	protected function disconnect()
 	{
@@ -161,6 +163,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Begin a transaction
+	 * @return void
 	 */
 	protected function begin_transaction()
 	{
@@ -170,6 +173,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Commit a transaction
+	 * @return void
 	 */
 	protected function commit_transaction()
 	{
@@ -180,6 +184,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Rollback a transaction
+	 * @return void
 	 */
 	protected function rollback_transaction()
 	{
@@ -191,6 +196,7 @@ class Database_Oracle extends \Database
 	/**
 	 * Lock one or more tables
 	 * @param array
+	 * @return void
 	 * @todo implement
 	 */
 	protected function lock_tables($arrTables) {}
@@ -198,6 +204,7 @@ class Database_Oracle extends \Database
 
 	/**
 	 * Unlock all tables
+	 * @return void
 	 * @todo implement
 	 */
 	protected function unlock_tables() {}
@@ -225,7 +232,7 @@ class Database_Oracle extends \Database
 	 * Create a Database_Statement object
 	 * @param resource
 	 * @param boolean
-	 * @return Database_Oracle_Statement
+	 * @return \Contao\Database_Oracle_Statement
 	 */
 	protected function createStatement($resConnection, $blnDisableAutocommit)
 	{

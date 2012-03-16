@@ -94,7 +94,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse an item and return it as string
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param boolean
 	 * @param string
 	 * @return string
@@ -206,7 +206,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Parse one or more items and return them as array
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param boolean
 	 * @return array
 	 */
@@ -233,7 +233,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Return the meta fields of a news article as array
-	 * @param Database_Result|Model
+	 * @param object
 	 * @return array
 	 */
 	protected function getMetaFields($objArticle)
@@ -281,7 +281,7 @@ abstract class ModuleNews extends \Module
 
 	/**
 	 * Generate a URL and return it as string
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param boolean
 	 * @return string
 	 */
@@ -363,7 +363,7 @@ abstract class ModuleNews extends \Module
 	/**
 	 * Generate a link and return it as string
 	 * @param string
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param boolean
 	 * @param boolean
 	 * @return string

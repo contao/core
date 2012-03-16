@@ -159,6 +159,7 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param boolean
+	 * @return void
 	 */
 	protected function import($strClass, $strKey=null, $blnForce=false)
 	{
@@ -178,6 +179,7 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	protected function log($strText, $strFunction, $strAction)
 	{
@@ -244,6 +246,7 @@ abstract class System
 
 	/**
 	 * Reload the current page
+	 * @return void
 	 */
 	protected function reload()
 	{
@@ -270,6 +273,7 @@ abstract class System
 	 * Redirect to another page
 	 * @param string
 	 * @param integer
+	 * @return void
 	 */
 	protected function redirect($strLocation, $intStatus=303)
 	{
@@ -379,6 +383,7 @@ abstract class System
 	 * @param string
 	 * @param boolean
 	 * @param boolean
+	 * @return void
 	 */
 	protected function loadLanguageFile($strName, $strLanguage=false, $blnNoCache=false)
 	{
@@ -417,7 +422,7 @@ abstract class System
 
 				if (file_exists($strFallback))
 				{
-					$objCacheFile->append(file_get_contents($strFallback, null, null, 6));
+					$objCacheFallback->append(file_get_contents($strFallback, null, null, 6));
 					include $strFallback;
 				}
 
@@ -430,7 +435,7 @@ abstract class System
 
 				if (file_exists($strFile))
 				{
-					$objCacheFallback->append(file_get_contents($strFile, null, null, 6));
+					$objCacheFile->append(file_get_contents($strFile, null, null, 6));
 					include $strFile;
 				}
 			}
@@ -547,6 +552,7 @@ abstract class System
 	/**
 	 * Add an error message
 	 * @param string
+	 * @return void
 	 */
 	protected function addErrorMessage($strMessage)
 	{
@@ -557,6 +563,7 @@ abstract class System
 	/**
 	 * Add a confirmation message
 	 * @param string
+	 * @return void
 	 */
 	protected function addConfirmationMessage($strMessage)
 	{
@@ -567,6 +574,7 @@ abstract class System
 	/**
 	 * Add a new message
 	 * @param string
+	 * @return void
 	 */
 	protected function addNewMessage($strMessage)
 	{
@@ -577,6 +585,7 @@ abstract class System
 	/**
 	 * Add an info message
 	 * @param string
+	 * @return void
 	 */
 	protected function addInfoMessage($strMessage)
 	{
@@ -587,6 +596,7 @@ abstract class System
 	/**
 	 * Add a raw message
 	 * @param string
+	 * @return void
 	 */
 	protected function addRawMessage($strMessage)
 	{
@@ -598,6 +608,7 @@ abstract class System
 	 * Add a message
 	 * @param string
 	 * @param string
+	 * @return void
 	 * @throws \Exception
 	 */
 	protected function addMessage($strMessage, $strType)
@@ -674,6 +685,7 @@ abstract class System
 
 	/**
 	 * Reset the message system
+	 * @return void
 	 */
 	protected function resetMessages()
 	{
@@ -713,6 +725,7 @@ abstract class System
 	 * @param string
 	 * @param string
 	 * @param boolean
+	 * @return void
 	 */
 	protected function setCookie($strName, $varValue, $intExpires, $strPath='/', $strDomain=null, $blnSecure=false)
 	{

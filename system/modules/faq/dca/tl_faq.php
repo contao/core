@@ -358,6 +358,7 @@ class tl_faq extends Backend
 
 	/**
 	 * Check permissions to edit table tl_faq
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -373,10 +374,10 @@ class tl_faq extends Backend
 	/**
 	 * Auto-generate the FAQ alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -426,10 +427,10 @@ class tl_faq extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(DataContainer $dc)
+	public function pagePicker(\DataContainer $dc)
 	{
 		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
@@ -474,6 +475,7 @@ class tl_faq extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

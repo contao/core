@@ -137,7 +137,7 @@ abstract class Database_Statement
 	/**
 	 * Prepare a statement
 	 * @param string
-	 * @return \Database_Statement
+	 * @return \Contao\Database_Statement
 	 * @throws \Exception
 	 */
 	public function prepare($strQuery)
@@ -181,7 +181,7 @@ abstract class Database_Statement
 	 * $objStatement->prepare("UPDATE table %s")->set(array('id'=>'my_id'));
 	 * will be transformed into "UPDATE table SET id='my_id'".
 	 * @param array
-	 * @return Database_Statement
+	 * @return \Contao\Database_Statement
 	 */
 	public function set($arrParams)
 	{
@@ -216,7 +216,7 @@ abstract class Database_Statement
 	 * Limit the current result to a certain number of rows and take an offset value as second argument
 	 * @param integer
 	 * @param integer
-	 * @return Database_Statement
+	 * @return \Contao\Database_Statement
 	 */
 	public function limit($intRows, $intOffset=0)
 	{
@@ -237,7 +237,7 @@ abstract class Database_Statement
 
 	/**
 	 * Escape the parameters and execute the current statement
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 * @throws \Exception
 	 */
 	public function execute()
@@ -272,7 +272,7 @@ abstract class Database_Statement
 
 	/**
 	 * Execute the current statement but do not cache the result
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 * @throws \Exception
 	 */
 	public function executeUncached()
@@ -292,7 +292,7 @@ abstract class Database_Statement
 	/**
 	 * Execute a query and return the result object
 	 * @param string
-	 * @return Database_Result
+	 * @return \Contao\Database_Result
 	 * @throws \Exception
 	 */
 	public function query($strQuery='')
@@ -386,7 +386,7 @@ abstract class Database_Statement
 
 	/**
 	 * Debug a query
-	 * @param Database_Result
+	 * @param \Contao\Database_Result
 	 */
 	protected function debugQuery($objResult=null)
 	{

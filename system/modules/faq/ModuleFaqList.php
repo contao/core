@@ -96,6 +96,7 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -146,7 +147,7 @@ class ModuleFaqList extends \Module
 
 	/**
 	 * Create links and remember pages that have been processed
-	 * @param Database_Result|Model
+	 * @param object
 	 * @return string
 	 */
 	protected function generateFaqLink($objFaq)

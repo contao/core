@@ -47,9 +47,10 @@ class PageRedirect extends \Frontend
 
 	/**
 	 * Redirect to an external page
-	 * @param \Database_Result
+	 * @param object
+	 * @return void
 	 */
-	public function generate(\Database_Result $objPage)
+	public function generate($objPage)
 	{
 		$this->redirect($objPage->url, (($objPage->redirect == 'temporary') ? 302 : 301));
 	}

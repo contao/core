@@ -55,7 +55,7 @@ class NewsletterChannelCollection extends \Model_Collection
 	/**
 	 * Find multiple newsletter channels by their IDs
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findByIds($arrPids)
 	{

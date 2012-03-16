@@ -74,6 +74,7 @@ class TableWizard extends \Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -236,10 +237,10 @@ class TableWizard extends \Widget
 
 	/**
 	 * Return a form to choose a CSV file and import it
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function importTable(DataContainer $dc)
+	public function importTable(\DataContainer $dc)
 	{
 		if ($this->Input->get('key') != 'table')
 		{

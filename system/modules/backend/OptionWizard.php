@@ -59,7 +59,8 @@ class OptionWizard extends \Widget
 
 
 	/**
-	 * Validate input and set value
+	 * Validate the input and set the value
+	 * @return void
 	 */
 	public function validate()
 	{

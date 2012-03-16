@@ -104,6 +104,7 @@ class ModuleListing extends \Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -327,6 +328,7 @@ class ModuleListing extends \Module
 	/**
 	 * List a single record
 	 * @param integer
+	 * @return void
 	 */
 	protected function listSingleRecord($id)
 	{

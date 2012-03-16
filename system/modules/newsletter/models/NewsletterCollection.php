@@ -55,7 +55,7 @@ class NewsletterCollection extends \Model_Collection
 	/**
 	 * Find sent newsletters by their parent ID
 	 * @param integer
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findSentByPid($intPid)
 	{
@@ -74,7 +74,7 @@ class NewsletterCollection extends \Model_Collection
 	/**
 	 * Find sent newsletters by multiple parent IDs
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findSentByPids($arrPids)
 	{

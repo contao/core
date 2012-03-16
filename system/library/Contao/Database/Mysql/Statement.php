@@ -71,6 +71,7 @@ class Database_Mysql_Statement extends \Database_Statement
 	 * Limit the current query
 	 * @param integer
 	 * @param integer
+	 * @return void
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -138,7 +139,7 @@ class Database_Mysql_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return Database_Mysql_Result
+	 * @return \Contao\Database_Mysql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

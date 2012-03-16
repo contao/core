@@ -138,6 +138,7 @@ class FileCache extends \System
 
 	/**
 	 * Prevent cloning of the object (Singleton)
+	 * @return mixed|void
 	 */
 	final private function __clone() {}
 
@@ -168,6 +169,7 @@ class FileCache extends \System
 	 * Set a variable
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -179,6 +181,7 @@ class FileCache extends \System
 	/**
 	 * Unset an entry
 	 * @param string
+	 * @return void
 	 */
 	public function __unset($strKey)
 	{
@@ -190,7 +193,7 @@ class FileCache extends \System
 	/**
 	 * Instantiate a new file cache object and return it (Factory)
 	 * @param string
-	 * @return FileCache
+	 * @return \Contao\FileCache
 	 */
 	public static function getInstance($strFile)
 	{

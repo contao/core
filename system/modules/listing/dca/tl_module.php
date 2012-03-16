@@ -147,10 +147,10 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all list templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getListTemplates(DataContainer $dc)
+	public function getListTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -165,10 +165,10 @@ class tl_module_listing extends Backend
 
 	/**
 	 * Return all info templates as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getInfoTemplates(DataContainer $dc)
+	public function getInfoTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 

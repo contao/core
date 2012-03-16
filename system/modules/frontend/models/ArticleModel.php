@@ -56,7 +56,7 @@ class ArticleModel extends \Model
 	 * Find an article by its ID or alias and its column
 	 * @param mixed
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findByIdOrAliasAndColumn($varId, $intPid)
 	{
@@ -77,7 +77,7 @@ class ArticleModel extends \Model
 	/**
 	 * Find a published article by its ID
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findPublishedById($intId)
 	{

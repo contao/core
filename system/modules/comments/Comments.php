@@ -51,6 +51,7 @@ class Comments extends \Frontend
 	 * @param string
 	 * @param integer
 	 * @param array
+	 * @return void
 	 */
 	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{

@@ -105,6 +105,7 @@ class Database_Postgresql_Result extends \Database_Result
 
 	/**
 	 * Free the current result
+	 * @return void
 	 */
 	public function free()
 	{

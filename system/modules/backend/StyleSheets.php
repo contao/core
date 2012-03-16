@@ -46,7 +46,7 @@ class StyleSheets extends \Backend
 {
 
 	/**
-	 * Import String library
+	 * Import the String library
 	 */
 	public function __construct()
 	{
@@ -60,6 +60,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Update a particular style sheet
 	 * @param integer
+	 * @return void
 	 */
 	public function updateStyleSheet($intId)
 	{
@@ -90,6 +91,7 @@ class StyleSheets extends \Backend
 
 	/**
 	 * Update all style sheets in the scripts folder
+	 * @return void
 	 */
 	public function updateStyleSheets()
 	{
@@ -143,6 +145,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Write a style sheet to a file
 	 * @param array
+	 * @return void
 	 */
 	protected function writeStyleSheet($row)
 	{
@@ -1341,6 +1344,7 @@ class StyleSheets extends \Backend
 	/**
 	 * Create a format definition and insert it into the database
 	 * @param array
+	 * @return void
 	 */
 	protected function createDefinition($arrDefinition)
 	{

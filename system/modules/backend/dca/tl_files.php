@@ -202,6 +202,7 @@ class tl_files extends Backend
 
 	/**
 	 * Check permissions to edit the file system
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -354,6 +355,7 @@ class tl_files extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 * @return void
 	 */
 	public function addBreadcrumb()
 	{
@@ -431,11 +433,11 @@ class tl_files extends Backend
 	/**
 	 * Check a file name and romanize it
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function checkFilename($varValue, DataContainer $dc)
+	public function checkFilename($varValue, \DataContainer $dc)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
@@ -447,7 +449,7 @@ class tl_files extends Backend
 
 		if (is_file(TL_ROOT .'/'. $dc->path .'/'. $varValue . $dc->extension))
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
 		}
 
 		return $varValue;

@@ -55,7 +55,7 @@ class LayoutModel extends \Model
 	/**
 	 * Find a layout by its ID or fallback status
 	 * @param integer
-	 * @return Model
+	 * @return \Contao\Model|null
 	 */
 	public static function findByIdOrFallback($varId)
 	{

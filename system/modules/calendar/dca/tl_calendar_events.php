@@ -537,6 +537,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Check permissions to edit table tl_calendar_events
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -654,11 +655,11 @@ class tl_calendar_events extends Backend
 	/**
 	 * Auto-generate the event alias if it has not been set yet
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
-	 * @throws Exception
+	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -675,7 +676,7 @@ class tl_calendar_events extends Backend
 		// Check whether the alias exists
 		if ($objAlias->numRows > 1 && !$autoAlias)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		// Add ID to alias
@@ -691,10 +692,10 @@ class tl_calendar_events extends Backend
 	/**
 	 * Automatically set the end time if not set
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function setEmptyEndTime($varValue, DataContainer $dc)
+	public function setEmptyEndTime($varValue, \DataContainer $dc)
 	{
 		if ($varValue === '')
 		{
@@ -773,10 +774,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Get all articles and return them as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getArticleAlias(DataContainer $dc)
+	public function getArticleAlias(\DataContainer $dc)
 	{
 		$arrPids = array();
 		$arrAlias = array();
@@ -819,9 +820,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Adjust start end end time of the event based on date, span, startTime and endTime
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function adjustTime(DataContainer $dc)
+	public function adjustTime(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -879,6 +881,7 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Check for modified calendar feeds and update the XML files if necessary
+	 * @return void
 	 */
 	public function generateFeed()
 	{
@@ -907,6 +910,7 @@ class tl_calendar_events extends Backend
 	 * modified (edit/editAll), moved (cut/cutAll) or deleted (delete/deleteAll).
 	 * Since duplicated events are unpublished by default, it is not necessary
 	 * to schedule updates on copyAll as well.
+	 * @return void
 	 */
 	public function scheduleUpdate()
 	{
@@ -925,10 +929,10 @@ class tl_calendar_events extends Backend
 
 	/**
 	 * Return the link picker wizard
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function pagePicker(DataContainer $dc)
+	public function pagePicker(\DataContainer $dc)
 	{
 		return ' <a href="contao/page.php?table='.$dc->table.'&amp;field='.$dc->field.'&amp;value='.str_replace(array('{{link::', '}}'), '', $dc->value).'" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['page'][0].'\',\'url\':this.href,\'id\':\''.$dc->field.'\',\'tag\':\'ctrl_'.$dc->field . (($this->Input->get('act') == 'editAll') ? '_' . $dc->id : '').'\',\'self\':this});return false">' . $this->generateImage('pickpage.gif', $GLOBALS['TL_LANG']['MSC']['pagepicker'], 'style="vertical-align:top;cursor:pointer"') . '</a>';
 	}
@@ -973,6 +977,7 @@ class tl_calendar_events extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

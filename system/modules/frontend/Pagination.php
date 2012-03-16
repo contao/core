@@ -135,6 +135,7 @@ class Pagination extends \Frontend
 	 * @param integer
 	 * @param integer
 	 * @param integer
+	 * @return void
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7)
 	{

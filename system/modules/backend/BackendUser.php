@@ -156,6 +156,7 @@ class BackendUser extends \User
 
 	/**
 	 * Redirect to contao/index.php if authentication fails
+	 * @return void
 	 */
 	public function authenticate()
 	{
@@ -293,6 +294,7 @@ class BackendUser extends \User
 
 	/**
 	 * Set all user properties from a database record
+	 * @return void
 	 */
 	protected function setUserFromDb()
 	{

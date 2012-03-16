@@ -66,9 +66,9 @@ abstract class BackendModule extends \Backend
 
 	/**
 	 * Initialize the object
-	 * @param DataContainer
+	 * @param \DataContainer
 	 */
-	public function __construct(DataContainer $objDc=null)
+	public function __construct(\DataContainer $objDc=null)
 	{
 		parent::__construct();
 		$this->objDc = $objDc;
@@ -79,6 +79,7 @@ abstract class BackendModule extends \Backend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -124,6 +125,7 @@ abstract class BackendModule extends \Backend
 
 	/**
 	 * Compile the current element
+	 * @return void
 	 */
 	abstract protected function compile();
 }

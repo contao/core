@@ -469,6 +469,7 @@ class tl_user extends Backend
 
 	/**
 	 * Check permissions to edit table tl_user
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -525,11 +526,11 @@ class tl_user extends Backend
 	 * Add an image to each record
 	 * @param array
 	 * @param string
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @param array
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc, $args)
+	public function addIcon($row, $label, \DataContainer $dc, $args)
 	{
 		$image = $row['admin'] ? 'admin' :  'user';
 
@@ -627,10 +628,10 @@ class tl_user extends Backend
 
 	/**
 	 * Return a checkbox to delete session data
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function sessionField(DataContainer $dc)
+	public function sessionField(\DataContainer $dc)
 	{
 		if ($this->Input->post('FORM_SUBMIT') == 'tl_user')
 		{
@@ -696,10 +697,10 @@ class tl_user extends Backend
 	/**
 	 * Prevent administrators from downgrading their own account
 	 * @param mixed
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return mixed
 	 */
-	public function checkAdmin($varValue, DataContainer $dc)
+	public function checkAdmin($varValue, \DataContainer $dc)
 	{
 		if (!$varValue)
 		{
@@ -715,9 +716,10 @@ class tl_user extends Backend
 
 	/**
 	 * Store the date when the account has been added
-	 * @param DataContainer
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function storeDateAdded(DataContainer $dc)
+	public function storeDateAdded(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord || $dc->activeRecord->dateAdded > 0)
@@ -785,6 +787,7 @@ class tl_user extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

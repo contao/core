@@ -336,6 +336,7 @@ class tl_article extends Backend
 
 	/**
 	 * Check permissions to edit table tl_page
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -550,7 +551,7 @@ class tl_article extends Backend
 	 * @return string
 	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -581,10 +582,10 @@ class tl_article extends Backend
 
 	/**
 	 * Return all active page sections as array
-	 * @param DataContainer
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getActivePageSections(DataContainer $dc)
+	public function getActivePageSections(\DataContainer $dc)
 	{
 		$arrCustom = array();
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
@@ -754,7 +755,7 @@ class tl_article extends Backend
 	 * @param array
 	 * @return string
 	 */
-	public function pasteArticle(DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
+	public function pasteArticle(\DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteafter'][1], $row['id']), 'class="blink"');
 		$imagePasteInto = $this->generateImage('pasteinto.gif', sprintf($GLOBALS['TL_LANG'][$dc->table]['pasteinto'][1], $row['id']), 'class="blink"');
@@ -840,6 +841,7 @@ class tl_article extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{

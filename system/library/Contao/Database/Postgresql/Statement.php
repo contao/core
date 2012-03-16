@@ -48,6 +48,7 @@ class Database_Postgresql_Statement extends \Database_Statement
 	/**
 	 * Prepare a query and return it
 	 * @param string
+	 * @return void
 	 */
 	protected function prepare_query($strQuery)
 	{
@@ -70,6 +71,7 @@ class Database_Postgresql_Statement extends \Database_Statement
 	 * Limit the current query
 	 * @param integer
 	 * @param integer
+	 * @return void
 	 */
 	protected function limit_query($intRows, $intOffset)
 	{
@@ -137,7 +139,7 @@ class Database_Postgresql_Statement extends \Database_Statement
 	 * Create a Database_Result object
 	 * @param resource
 	 * @param string
-	 * @return Database_Postgresql_Result
+	 * @return \Contao\Database_Postgresql_Result
 	 */
 	protected function createResult($resResult, $strQuery)
 	{

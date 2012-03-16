@@ -120,7 +120,7 @@ class Config
 
 	/**
 	 * Return the current object instance (Singleton)
-	 * @return Config
+	 * @return \Contao\Config
 	 */
 	public static function getInstance()
 	{
@@ -136,6 +136,7 @@ class Config
 
 	/**
 	 * Load all configuration files
+	 * @return void
 	 */
 	protected function initialize()
 	{
@@ -210,6 +211,7 @@ class Config
 
 	/**
 	 * Save the local configuration file
+	 * @return void
 	 */
 	public function save()
 	{
@@ -328,6 +330,7 @@ class Config
 	 * Alias for Config::add()
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function update($strKey, $varValue)
 	{
@@ -338,6 +341,7 @@ class Config
 	/**
 	 * Delete a configuration variable from the local configuration file
 	 * @param string
+	 * @return void
 	 */
 	public function delete($strKey)
 	{

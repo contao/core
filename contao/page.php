@@ -74,6 +74,7 @@ class PagePicker extends Backend
 
 	/**
 	 * Run the controller and parse the template
+	 * @return void
 	 */
 	public function run()
 	{

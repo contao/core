@@ -55,7 +55,7 @@ class CalendarFeedCollection extends \Model_Collection
 	/**
 	 * Find calendar feeds by their IDs
 	 * @param array
-	 * @return Model|null
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findByIds($arrIds)
 	{

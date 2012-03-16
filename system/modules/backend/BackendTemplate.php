@@ -69,6 +69,7 @@ class BackendTemplate extends \Template
 
 	/**
 	 * Parse the template file, add the TinyMCE configuration and print it to the screen
+	 * @return void
 	 * @throws \Exception
 	 */
 	public function output()

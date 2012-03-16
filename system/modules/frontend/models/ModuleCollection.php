@@ -55,7 +55,7 @@ class ModuleCollection extends \Model_Collection
 	/**
 	 * Find multiple modules by ID
 	 * @param array
-	 * @return Model
+	 * @return \Contao\Model_Collection|null
 	 */
 	public static function findMultipleByIds($arrIds)
 	{

@@ -73,7 +73,7 @@ abstract class Backend extends \Controller
 
 	/**
 	 * Handle "runonce" files
-	 * @throws Exception
+	 * @throws \Exception
 	 */
 	protected function handleRunOnce()
 	{

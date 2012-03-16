@@ -56,7 +56,7 @@ class SessionModel extends \Model
 	 * Find a session by its hash and name
 	 * @param string
 	 * @param string
-	 * @return Model|null
+	 * @return \Contao\Model|null
 	 */
 	public static function findByHashAndName($strHash, $strName)
 	{

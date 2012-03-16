@@ -78,7 +78,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Initialize the object
-	 * @param Database_Result|Model
+	 * @param object
 	 * @param string
 	 */
 	public function __construct($objModule, $strColumn='main')
@@ -105,6 +105,7 @@ abstract class Module extends \Frontend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -176,6 +177,7 @@ abstract class Module extends \Frontend
 
 	/**
 	 * Compile the current element
+	 * @return void
 	 */
 	abstract protected function compile();
 
