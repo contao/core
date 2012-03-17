@@ -124,7 +124,7 @@ class RepositoryBackendModule extends BackendModule
 				$proxy_uri = parse_url($GLOBALS['TL_CONFIG']['proxy_url']);
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE,
+					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE | 1,
 					'proxy_host' => $proxy_uri['host'],
 					'proxy_port' => $proxy_uri['port'],
 					'proxy_login' => $proxy_uri['user'],
@@ -135,7 +135,7 @@ class RepositoryBackendModule extends BackendModule
 			else {
 				$this->client = new SoapClient($wsdl, array(
 					'soap_version' => SOAP_1_2,
-					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE
+					'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_DEFLATE | 1
 				));
 			}
 			$this->mode = 'soap';
