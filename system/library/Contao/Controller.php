@@ -116,7 +116,15 @@ abstract class Controller extends \System
 
 			if ($objTheme !== null && $objTheme->templates != '')
 			{
-				$strTplFolder = $objTheme->templates;
+				$strTplFolder = '';
+				if ((int) $objTheme->templates > 0) {
+					$result = $this->Database->prepare('SELECT `path` FROM `tl_files` WHERE `id` = ?')
+											 ->execute($objTheme->templates)->fetchAssoc();
+					$strTplFolder = $result['path'];
+				}
+				if (!$strTplFolder) {
+					$strTplFolder = $objTheme->templates;
+				}
 			}
 		}
 
