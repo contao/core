@@ -76,6 +76,15 @@ class ContentGallery extends \ContentElement
 			return '';
 		}
 
+		// Check for version 3 format
+		foreach ($this->multiSRC as $val)
+		{
+			if (!is_numeric($val))
+			{
+				return '<p class="error">This element still uses the old Contao 2 multiSRC format. Did you upgrade the database?</p>';
+			}
+		}
+
 		return parent::generate();
 	}
 
@@ -88,6 +97,7 @@ class ContentGallery extends \ContentElement
 	{
 		$images = array();
 		$auxDate = array();
+		$auxId = array();
 
 		// Get the file entries from the database
 		$objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
@@ -130,6 +140,7 @@ class ContentGallery extends \ContentElement
 				// Add the image
 				$images[$objFiles->path] = array
 				(
+					'id'        => $objFiles->id,
 					'name'      => $objFile->basename,
 					'singleSRC' => $objFiles->path,
 					'alt'       => $arrMeta['title'],
@@ -138,6 +149,7 @@ class ContentGallery extends \ContentElement
 				);
 
 				$auxDate[] = $objFile->mtime;
+				$auxId[] = $objFiles->id;
 			}
 
 			// Folders
@@ -176,6 +188,7 @@ class ContentGallery extends \ContentElement
 					// Add the image
 					$images[$objSubfiles->path] = array
 					(
+						'id'        => $objSubfiles->id,
 						'name'      => $objFile->basename,
 						'singleSRC' => $objSubfiles->path,
 						'alt'       => $arrMeta['title'],
@@ -184,6 +197,7 @@ class ContentGallery extends \ContentElement
 					);
 
 					$auxDate[] = $objFile->mtime;
+					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -208,19 +222,41 @@ class ContentGallery extends \ContentElement
 				array_multisort($images, SORT_NUMERIC, $auxDate, SORT_DESC);
 				break;
 
-			case 'meta':
-				// FIXME
-				/*
-				$arrImages = array();
-				foreach ($this->arrAux as $k)
+			case 'meta': // Backwards compatibility
+			case 'custom':
+				if ($this->orderSRC != '')
 				{
-					if (strlen($k))
+					// Turn the order string into an array
+					$arrOrder = array_flip(array_map('intval', explode(',', $this->orderSRC)));
+
+					// Move the matching elements to their position in $arrOrder
+					foreach ($images as $k=>$v)
 					{
-						$arrImages[] = $images[$k];
+						if (isset($arrOrder[$v['id']]))
+						{
+							$arrOrder[$v['id']] = $v;
+							unset($images[$k]);
+						}
 					}
+
+					// Append the left-over images at the end
+					if (!empty($images))
+					{
+						$arrOrder = array_merge($arrOrder, $images);
+					}
+
+					// Remove empty or numeric (not replaced) entries
+					foreach ($arrOrder as $k=>$v)
+					{
+						if ($v == '' || is_numeric($v))
+						{
+							unset($arrOrder[$k]);
+						}
+					}
+
+					$images = $arrOrder;
+					unset($arrOrder);
 				}
-				$images = $arrImages;
-				*/
 				break;
 
 			case 'random':

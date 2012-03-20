@@ -119,7 +119,7 @@ $GLOBALS['TL_LANG']['tl_content']['name_asc']  = 'Dateiname (aufsteigend)';
 $GLOBALS['TL_LANG']['tl_content']['name_desc'] = 'Dateiname (absteigend)';
 $GLOBALS['TL_LANG']['tl_content']['date_asc']  = 'Datum (aufsteigend)';
 $GLOBALS['TL_LANG']['tl_content']['date_desc'] = 'Datum (absteigend)';
-$GLOBALS['TL_LANG']['tl_content']['meta']      = 'Meta Datei (meta.txt)';
+$GLOBALS['TL_LANG']['tl_content']['custom']    = 'Individuelle Reihenfolge';
 $GLOBALS['TL_LANG']['tl_content']['random']    = 'Zufällige Reihenfolge';
 
 

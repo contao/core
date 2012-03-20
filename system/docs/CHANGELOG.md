@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a custom drag&drop sorting order to image gallery elements.
+
 ### Changed
 Moved the changelog file into a protected subdirectory (see #4049).
 

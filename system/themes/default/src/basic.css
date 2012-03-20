@@ -113,6 +113,16 @@ ul.sortable,ul.sortable li {
 ul.sortable li {
 	cursor:move;
 }
+ul.sgallery {
+	overflow:hidden;
+}
+ul.sgallery li {
+	float:left;
+}
+ul.sgallery .gimage {
+	margin:2px;
+	border:1px solid #808080;
+}
 
 /* Invisible elements */
 .clear {

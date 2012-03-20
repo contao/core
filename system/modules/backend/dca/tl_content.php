@@ -536,8 +536,12 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['multiSRC'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'mandatory'=>true),
-			'sql'                     => "blob NULL"
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox', 'files'=>true, 'isGallery'=>true, 'mandatory'=>true),
+			'sql'                     => "text NULL"
+		),
+		'orderSRC' => array
+		(
+			'sql'                     => "text NULL"
 		),
 		'useHomeDir' => array
 		(
@@ -578,7 +582,7 @@ $GLOBALS['TL_DCA']['tl_content'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['sortBy'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options'                 => array('name_asc', 'name_desc', 'date_asc', 'date_desc', 'meta', 'random'),
+			'options'                 => array('custom', 'name_asc', 'name_desc', 'date_asc', 'date_desc', 'random'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_content'],
 			'eval'                    => array('tl_class'=>'w50'),
 			'sql'                     => "varchar(32) NOT NULL default ''"

@@ -810,7 +810,7 @@ var Backend =
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');
-				$('target_'+opt.id).getFirst('ul').set('html', '<li>' + tls.join('</li><li>') + '</li>');
+				$('target_'+opt.id).getFirst('ul').removeClass('sgallery').set('html', '<li>' + tls.join('</li><li>') + '</li>');
 				var lnk = $('target_'+opt.id).getElement('a');
 				lnk.set('href', lnk.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			}
@@ -1160,7 +1160,27 @@ var Backend =
     	});
 	},
 
-	/**
+    /**
+     * Make gallery items sortable
+     * @param string
+     * @param string
+     */
+    makeGallerySortable: function(id, oid) {
+        var list = new Sortables($(id), {
+            contstrain: true,
+            opacity: 0.6
+        }).addEvent('complete', function() {
+            var els = [];
+            var lis = $(id).getChildren('li');
+            for (i=0; i<lis.length; i++) {
+                els.push(lis[i].getFirst('img').get('data-id'));
+            }
+            $(oid).value = els.join(',');
+        });
+        list.fireEvent("complete"); // Initial sorting
+    },
+
+    /**
 	 * List wizard
 	 * @param object
 	 * @param string
