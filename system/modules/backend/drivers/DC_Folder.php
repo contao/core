@@ -1690,6 +1690,192 @@ window.addEvent(\'domready\', function() {
 
 
 	/**
+	 * Synchronize the file system with the database
+	 * @return void
+	 */
+	public function sync()
+	{
+		// Reset the "found" flag
+		$this->Database->query("UPDATE tl_files SET found=''");
+
+		// Traverse the file system
+		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath']);
+
+		// Check for left-over entries in the DB
+		$objFiles = \FilesCollection::findBy('found', '');
+
+		if ($objFiles !== null)
+		{
+			while ($objFiles->next())
+			{
+				if ($objFiles->type == 'folder')
+				{
+					// Delete the entry if the folder has gone
+					$objFiles->current()->delete(); # FIXME: can we track moved folders?
+				}
+				else
+				{
+					// Check whether the file has moved
+					$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
+
+					if ($objFound !== null)
+					{
+						echo "Found the original file {$objFiles->path} at {$objFound->path}\n"; # FIXME: add to log
+						$objFile = $objFiles->current();
+
+						// Update the original entry
+						$objFile->pid = $objFound->pid;
+						$objFile->tstamp = $objFound->tstamp;
+						$objFile->name = $objFound->name;
+						$objFile->type = $objFound->type;
+						$objFile->path = $objFound->path;
+						$objFile->save();
+
+						// Delete the newer (duplicate) entry
+						$objFound->delete();
+					}
+					else
+					{
+						// Delete the entry if the file has gone
+						$objFiles->current()->delete(); 
+					}
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * Recursively synchronize the file system
+	 * @param string
+	 * @param integer
+	 * @return void
+	 */
+	protected function execSync($strPath, $intPid=0)
+	{
+		$arrFiles = array();
+		$arrFolders = array();
+		$arrScan = scan(TL_ROOT . '/' . $strPath);
+
+		// Separate files from folders
+		foreach ($arrScan as $strFile)
+		{
+			if (strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
+			{
+				$arrFolders[] = $strPath . '/' . $strFile;
+			}
+			else
+			{
+				$arrFiles[] = $strPath . '/' . $strFile;
+			}
+		}
+
+		// Folders
+		foreach ($arrFolders as $strFolder)
+		{
+			$objFolder = \FilesModel::findBy('path', $strFolder);
+
+			// Create the entry if it does not yet exist
+			if ($objFolder === null)
+			{
+				$objFolder = new \FilesModel();
+				$objFolder->pid = $intPid;
+				$objFolder->tstamp = time();
+				$objFolder->name = basename($strFolder);
+				$objFolder->type = 'folder';
+				$objFolder->path = $strFolder;
+				$objFolder->found = 1;
+				$objFolder->save();
+				echo "Created folder $strFolder\n"; # FIXME: add to log
+			}
+			else
+			{
+				$objFolder->found = 1;
+				$objFolder->save();
+			}
+
+			$this->execSync($strFolder, $objFolder->id);
+		}
+
+		// Files
+		foreach ($arrFiles as $strFile)
+		{
+			$objFile = \FilesModel::findBy('path', $strFile);
+
+			// Create the entry if it does not yet exist
+			if ($objFile === null)
+			{
+				$objFile = new \FilesModel();
+				$objFile->pid = $intPid;
+				$objFile->tstamp = time();
+				$objFile->name = basename($strFile);
+				$objFile->type = 'file';
+				$objFile->path = $strFile;
+				$objFile->hash = md5_file(TL_ROOT . '/' . $strFile);
+				$objFile->found = 1;
+				$objFile->save();
+				echo "Created file $strFile\n"; # FIXME: add to log
+			}
+			else
+			{
+				// Update the hash if the file has changed
+				if (($strMd5 = md5_file(TL_ROOT . '/' . $strFile)) != $objFile->hash)
+				{
+					$objFile->hash = $strMd5;
+					echo "Updated the hash of file $strFile\n"; # FIXME: add to log
+				}
+
+				$objFile->found = 1;
+				$objFile->save();
+			}
+			/*
+			$matches = array();
+ 
+			// Handle meta.txt files
+			if (preg_match('/^meta(_([a-z]{2}))?\.txt$/', basename($strFile), $matches))
+			{
+				$key = $matches[2] ?: 'en';
+				$arrData = file(TL_ROOT . '/' . $strFile, FILE_IGNORE_NEW_LINES);
+ 
+				foreach ($arrData as $line)
+				{
+					list($name, $info) = explode('=', $line);
+					list($title, $link, $caption) = explode('|', $info);
+					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
+				}
+			}
+ 
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'file', ?, ?)")
+				->execute($pid, time(), basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
+				->insertId;
+ 
+			$arrMapper[basename($strFile)] = $id;
+			*/
+		}
+
+		// Insert the meta data AFTER the file entries have been created
+		/*
+		if (!empty($arrMeta))
+		{
+			foreach ($arrMeta as $file=>$meta)
+			{
+				if (isset($arrMapper[$file]))
+				{
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+						->execute(serialize($meta), $arrMapper[$file]);
+				}
+			}
+		}
+		*/
+	}
+
+
+	/**
 	 * Return the name of the current palette
 	 * @return string
 	 */

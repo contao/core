@@ -227,6 +227,21 @@ abstract class Model_Collection extends \System
 
 
 	/**
+	 * Return the current model
+	 * @return \Contao\Model
+	 */
+	public function current()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		return $this->arrModels[$this->intIndex];
+	}
+
+
+	/**
 	 * Return the current row
 	 * @return array
 	 */

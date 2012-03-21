@@ -59,6 +59,12 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'sync' => array
+			(
+				'label'               => array('Synchronisieren'), # FIXME: translate
+				'href'                => 'act=sync',
+				'class'               => 'header_sync'
+			),
 			'toggleNodes' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
@@ -155,6 +161,10 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		'hash' => array
 		(
 			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'found' => array
+		(
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'name' => array
 		(
