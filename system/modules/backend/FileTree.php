@@ -70,6 +70,12 @@ class FileTree extends \Widget
 	protected $strOrderName;
 
 	/**
+	 * Show files
+	 * @var boolean
+	 */
+	protected $blnIsDownloads = false;
+
+	/**
 	 * Gallery flag
 	 * @var boolean
 	 */
@@ -95,6 +101,7 @@ class FileTree extends \Widget
 					   ->execute($this->Input->get('id'));
 
 		$this->orderSRC = $objRow->orderSRC;
+		$this->blnIsDownloads = ($objRow->type == 'downloads');
 		$this->blnIsGallery = ($objRow->type == 'gallery');
 	}
 
@@ -135,6 +142,7 @@ class FileTree extends \Widget
 		{
 			$strValues = implode(',', array_map('intval', (array)$this->varValue));
 			$objFiles = $this->Database->execute("SELECT id, path, type FROM tl_files WHERE id IN($strValues) ORDER BY " . $this->Database->findInSet('id', $strValues));
+			$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 			while ($objFiles->next())
 			{
@@ -144,8 +152,22 @@ class FileTree extends \Widget
 					continue;
 				}
 
-				// Image galleries
-				if ($this->blnIsGallery)
+				// Show files and folders
+				if (!$this->blnIsDownloads && !$this->blnIsGallery)
+				{
+					if ($objFiles->type == 'folder')
+					{
+						$arrValues[$objFiles->id] = $this->generateImage('folderC.gif') . ' ' . $objFiles->path;
+					}
+					else
+					{
+						$objFile = new \File($objFiles->path);
+						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
+					}
+				}
+
+				// Show a sortable list of files only
+				else
 				{
 					if ($objFiles->type == 'folder')
 					{
@@ -166,35 +188,44 @@ class FileTree extends \Widget
 
 							$objFile = new \File($objSubfiles->path);
 
-							if (!$objFile->isGdImage)
+							if ($this->blnIsGallery)
 							{
-								continue;
+								// Only show images
+								if ($objFile->isGdImage)
+								{
+									$arrValues[$objSubfiles->id] = $this->generateImage($this->getImage($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+								}
 							}
-
-							$arrValues[$objSubfiles->id] = $this->generateImage($this->getImage($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+							else
+							{
+								// Only show allowed download types
+								if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
+								{
+									$arrValues[$objSubfiles->id] = $this->generateImage($objFile->icon) . ' ' . $objSubfiles->path;
+								}
+							}
 						}
 					}
 					else
 					{
 						$objFile = new \File($objFiles->path);
 
-						if ($objFile->isGdImage)
+						if ($this->blnIsGallery)
 						{
-							$arrValues[$objFiles->id] = $this->generateImage($this->getImage($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+							// Only show images
+							if ($objFile->isGdImage)
+							{
+								$arrValues[$objFiles->id] = $this->generateImage($this->getImage($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
+							}
 						}
-					}
-				}
-				// Other element types
-				else
-				{
-					if ($objFiles->type == 'folder')
-					{
-						$arrValues[$objFiles->id] = $this->generateImage('folderC.gif') . ' ' . $objFiles->path;
-					}
-					else
-					{
-						$objFile = new \File($objFiles->path);
-						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
+						else
+						{
+							// Only show allowed download types
+							if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
+							{
+								$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
+							}
+						}
 					}
 				}
 			}
@@ -239,7 +270,7 @@ class FileTree extends \Widget
 
 		$return .= '</ul>
     <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
-    <script>Backend.makeGallerySortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>
+    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>
   </div>';
 
 		return $return;

@@ -1161,11 +1161,11 @@ var Backend =
 	},
 
     /**
-     * Make gallery items sortable
+     * Make multiSRC items sortable
      * @param string
      * @param string
      */
-    makeGallerySortable: function(id, oid) {
+    makeMultiSrcSortable: function(id, oid) {
         var list = new Sortables($(id), {
             contstrain: true,
             opacity: 0.6
