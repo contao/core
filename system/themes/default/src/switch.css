@@ -98,7 +98,7 @@ input,select,label {
 	padding-bottom:3px;
 	margin-top:1px;
 }
-.chrome .tl_submit,.safari .tl_submit {
+.webkit .tl_submit {
 	position:relative;
 	top:-1px;
 }

@@ -287,6 +287,16 @@ h2.sub_headline_index {
 .mac .tl_version_panel .tl_select,.mac .tl_panel_bottom .tl_select {
 	font-size:11px;
 }
+.tl_version_panel .tl_formbody {
+	position:relative;
+}
+.tl_version_panel .styled_select {
+	margin-top:0;
+}
+.webkit .tl_version_panel .styled_select {
+	margin-top:2px;
+	line-height:22px;
+}
 .tl_subpanel {
 	padding-left:24px;
 	float:right;

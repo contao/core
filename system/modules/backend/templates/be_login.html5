@@ -62,7 +62,7 @@
 <tr>
   <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
   <td style="text-align:right">
-    <select name="language" id="language" class="tl_select right-aligned">
+    <select name="language" id="language" class="tl_select">
 <?php foreach ($this->languages as $key=>$lang): ?>
       <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
 <?php endforeach; ?>

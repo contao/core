@@ -62,11 +62,6 @@ var Stylect =
 				}
 			}).inject(el, 'before');
 
-			// Fix right-aligned elements
-			if (el.hasClass('right-aligned')) {
-				div.setStyle('left', el.getPosition().x);
-			}
-
 			// Mark active elements
 			if (el.hasClass('active')) {
 				div.addClass('active');

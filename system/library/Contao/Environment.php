@@ -435,8 +435,9 @@ class Environment
 		$os = 'unknown';
 		$mobile = false;
 		$browser = 'other';
-		$shorty  = '';
+		$shorty = '';
 		$version = '';
+		$engine = '';
 
 		// Operating system
 		foreach ($GLOBALS['TL_CONFIG']['os'] as $k=>$v)
@@ -451,7 +452,6 @@ class Environment
 
 		$return->os = $os;
 
-
 		// Browser and version
 		foreach ($GLOBALS['TL_CONFIG']['browser'] as $k=>$v)
 		{
@@ -460,6 +460,7 @@ class Environment
 				$browser = $v['browser'];
 				$shorty  = $v['shorty'];
 				$version = preg_replace($v['version'], '$1', $ua);
+				$engine  = $v['engine'];
 				break;
 			}
 		}
@@ -467,7 +468,7 @@ class Environment
 		$versions = explode('.', $version);
 		$version  = $versions[0];
 
-		$return->class = $os . ' ' . $browser;
+		$return->class = $os . ' ' . $browser . ' ' . $engine;
 
 		// Add the version number if available
 		if ($version != '')
@@ -484,6 +485,7 @@ class Environment
 		$return->browser  = $browser;
 		$return->shorty   = $shorty;
 		$return->version  = $version;
+		$return->engine   = $engine;
 		$return->versions = $versions;
 		$return->mobile   = $mobile;
 

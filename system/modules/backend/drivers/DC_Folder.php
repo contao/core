@@ -1723,7 +1723,7 @@ window.addEvent(\'domready\', function() {
 
 					if ($objFound !== null)
 					{
-						$this->arrMessages[] = '<p class="tl_info">' . sprinf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFiles->path, $objFound->path) . '</p>';
+						$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFiles->path, $objFound->path) . '</p>';
 						$objFile = $objFiles->current();
 
 						// Update the original entry
@@ -1742,7 +1742,7 @@ window.addEvent(\'domready\', function() {
 
 				// Delete the entry if the file/folder has gone
 				$objFiles->current()->delete();
-				$this->arrMessages[] = '<p class="tl_error">' . sprinf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFiles->path) . '</p>';
+				$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFiles->path) . '</p>';
 			}
 		}
 
