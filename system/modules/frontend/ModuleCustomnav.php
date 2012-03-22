@@ -102,12 +102,19 @@ class ModuleCustomnav extends \Module
 		}
 
 		// Get all active pages
-		$arrPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
+		$objPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages);
 
 		// Return if there are no pages
-		if (empty($arrPages))
+		if ($objPages === null)
 		{
 			return;
+		}
+
+		$arrPages = array();
+
+		while ($objPages->next())
+		{
+			$arrPages[] = $objPages->row();
 		}
 
 		// Set default template
