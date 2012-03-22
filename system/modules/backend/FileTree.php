@@ -138,6 +138,12 @@ class FileTree extends \Widget
 
 			while ($objFiles->next())
 			{
+				// File system and database seem not in sync
+				if (!file_exists(TL_ROOT . '/' . $objFiles->path))
+				{
+					continue;
+				}
+
 				// Image galleries
 				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'])
 				{

@@ -192,7 +192,10 @@ class ModuleUnsubscribe extends \Module
 		// Remove the subscriptions
 		if (($objRemove = \NewsletterRecipientsModel::findByEmailAndPids($varInput, $arrRemove)) !== null)
 		{
-			$objRemove->deleteAll();
+			while ($objRemove->next())
+			{
+				$objRemove->delete();
+			}
 		}
 
 		// Get the channels

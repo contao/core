@@ -5,6 +5,9 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a `hash()` method to calculate the MD5 hash of files and folders.
+
+### New
 Added a custom drag&drop sorting order to image gallery elements.
 
 ### Changed

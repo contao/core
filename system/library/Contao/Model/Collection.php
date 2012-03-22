@@ -441,14 +441,31 @@ abstract class Model_Collection extends \System
 
 
 	/**
-	 * Delete all records
+	 * Save the current model
 	 * @return void
 	 */
-	public function deleteAll()
+	public function save()
 	{
-		foreach ($this->arrModels as $objModel)
+		if ($this->intIndex < 0)
 		{
-			$objModel->delete();
+			$this->first();
 		}
+
+		$this->arrModels[$this->intIndex]->save();
+	}
+
+
+	/**
+	 * Delete the current model
+	 * @return void
+	 */
+	public function delete()
+	{
+		if ($this->intIndex < 0)
+		{
+			$this->first();
+		}
+
+		$this->arrModels[$this->intIndex]->delete();
 	}
 }

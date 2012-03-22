@@ -173,6 +173,10 @@ class File extends \System
 					$this->Cache->$strCacheKey = $this->getMimeType();
 					break;
 
+				case 'hash':
+					$this->Cache->$strCacheKey = $this->getHash();
+					break;
+
 				case 'ctime':
 					$this->Cache->$strCacheKey = filectime(TL_ROOT . '/' . $this->strFile);
 					break;
@@ -523,5 +527,15 @@ class File extends \System
 	{
 		$arrMime = $this->getMimeInfo();
 		return $arrMime[1];
+	}
+
+
+	/**
+	 * Return the MD5 hash
+	 * @return string
+	 */
+	protected function getHash()
+	{
+		return md5_file(TL_ROOT . '/' . $this->strFile);
 	}
 }

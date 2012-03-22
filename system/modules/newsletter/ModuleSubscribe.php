@@ -262,7 +262,10 @@ class ModuleSubscribe extends \Module
 		// Remove old subscriptions that have not been activated yet
 		if (($objOld = \NewsletterRecipientsModel::findBy(array("email=? AND active=''"), $varInput)) !== null)
 		{
-			$objOld->deleteAll();
+			while ($objOld->next())
+			{
+				$objOld->delete();
+			}
 		}
 
 		$time = time();

@@ -59,8 +59,6 @@ class Folder extends \System
 	 */
 	public function __construct($strFolder)
 	{
-		$this->import('Files');
-
 		// Handle open_basedir restrictions
 		if ($strFolder == '.')
 		{
@@ -74,6 +72,9 @@ class Folder extends \System
 		}
 
 		$this->strFolder = $strFolder;
+
+		$this->import('Files');
+		$this->import('Cache');
 
 		// Create folder if it does not exist
 		if (!is_dir(TL_ROOT . '/' . $this->strFolder))
@@ -97,12 +98,27 @@ class Folder extends \System
 	 */
 	public function __get($strKey)
 	{
-		if ($strKey == 'value')
+		$strCacheKey = __METHOD__ . '-' . $this->strFolder . '-' . $strKey;
+
+		if (!isset($this->Cache->$strCacheKey))
 		{
-			return $this->strFolder;
+			switch ($strKey)
+			{
+				case 'hash':
+					$this->Cache->$strCacheKey = $this->getHash();
+					break;
+
+				case 'value':
+					$this->Cache->$strCacheKey = $this->strFolder;
+					break;
+
+				default:
+					return null;
+					break;
+			}
 		}
 
-		return null;
+		return $this->Cache->$strCacheKey;
 	}
 
 
@@ -202,4 +218,27 @@ class Folder extends \System
 			$this->Files->delete($this->strFolder . '/.htaccess');
 		}
 	}
+
+
+	/**
+	 * Return the MD5 hash
+	 * @return string
+	 */
+	protected function getHash()
+	{
+		$arrFiles = array();
+
+		foreach (scan(TL_ROOT . '/' . $this->strFolder) as $strFile)
+		{
+			if (strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			$arrFiles[] = $strFile;
+		}
+		
+		return md5(implode('-', $arrFiles));
+	}
+
 }

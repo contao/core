@@ -315,7 +315,7 @@ class FileSelector extends \Widget
 		$thumbnail = '';
 
 		// Generate the thumbnail
-		if ($objFile->type == 'file' )
+		if ($objFile->type == 'file')
 		{
 			if ($file->isGdImage && $file->height > 0)
 			{

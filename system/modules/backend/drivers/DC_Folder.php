@@ -1714,35 +1714,87 @@ window.addEvent(\'domready\', function() {
 
 		if ($objFiles !== null)
 		{
+			$arrFiles = array();
+			$arrFolders = array();
+
 			while ($objFiles->next())
 			{
-				// Check whether the file has moved
 				if ($objFiles->type == 'file')
 				{
-					$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
-
-					if ($objFound !== null)
-					{
-						$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFiles->path, $objFound->path) . '</p>';
-						$objFile = $objFiles->current();
-
-						// Update the original entry
-						$objFile->pid = $objFound->pid;
-						$objFile->tstamp = $objFound->tstamp;
-						$objFile->name = $objFound->name;
-						$objFile->type = $objFound->type;
-						$objFile->path = $objFound->path;
-						$objFile->save();
-
-						// Delete the newer (duplicate) entry
-						$objFound->delete();
-						continue;
-					}
+					$arrFiles[] = $objFiles->current();
 				}
+				else
+				{
+					$arrFolders[] = $objFiles->current();
+				}
+			}
 
-				// Delete the entry if the file/folder has gone
-				$objFiles->current()->delete();
-				$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFiles->path) . '</p>';
+			// Check whether a folder has moved
+			foreach ($arrFolders as $objFolder)
+			{
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFolder->hash);
+
+				if ($objFound !== null)
+				{
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFolder->path, $objFound->path) . '</p>';
+
+					// Update the original entry
+					$objFolder->pid = $objFound->pid;
+					$objFolder->tstamp = $objFound->tstamp;
+					$objFolder->name = $objFound->name;
+					$objFolder->type = $objFound->type;
+					$objFolder->path = $objFound->path;
+					$objFolder->save();
+
+					// Update the PID of the child records
+					$objChildren = \FilesCollection::findBy('pid', $objFound->id);
+
+					if ($objChildren !== null)
+					{
+						while ($objChildren->next())
+						{
+							$objChildren->pid = $objFolder->id;
+							$objChildren->save();
+						}
+					}
+
+					// Delete the newer (duplicate) entry
+					$objFound->delete();
+				}
+				else
+				{
+					// Delete the entry if the folder has gone
+					$objFolder->delete();
+					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFolder->path) . '</p>';
+				}
+			}
+
+			// Check whether a file has moved
+			foreach ($arrFiles as $objFile)
+			{
+				$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFile->hash);
+
+				if ($objFound !== null)
+				{
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFile->path, $objFound->path) . '</p>';
+
+					// Update the original entry
+					$objFile->pid = $objFound->pid;
+					$objFile->tstamp = $objFound->tstamp;
+					$objFile->name = $objFound->name;
+					$objFile->type = $objFound->type;
+					$objFile->path = $objFound->path;
+					$objFile->save();
+
+					// Delete the newer (duplicate) entry
+					$objFound->delete();
+				}
+				else
+				{
+					// Delete the entry if the file has gone
+					$objFile->delete();
+					$this->arrMessages[] = '<p class="tl_error">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFile->path) . '</p>';
+				}
 			}
 		}
 
@@ -1806,65 +1858,76 @@ window.addEvent(\'domready\', function() {
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$objFolder = \FilesModel::findBy('path', $strFolder);
+			$objFolder = new \Folder($strFolder);
+			$objModel = \FilesModel::findBy('path', $strFolder);
 
 			// Create the entry if it does not yet exist
-			if ($objFolder === null)
+			if ($objModel === null)
 			{
-				$objFolder = new \FilesModel();
-				$objFolder->pid = $intPid;
-				$objFolder->tstamp = time();
-				$objFolder->name = basename($strFolder);
-				$objFolder->type = 'folder';
-				$objFolder->path = $strFolder;
-				$objFolder->found = 1;
-				$objFolder->save();
+				$objModel = new \FilesModel();
+				$objModel->pid = $intPid;
+				$objModel->tstamp = time();
+				$objModel->name = basename($strFolder);
+				$objModel->type = 'folder';
+				$objModel->path = $strFolder;
+				$objModel->hash = $objFolder->hash;
+				$objModel->found = 1;
+				$objModel->save();
+
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderC'], $strFolder) . '</p>';
 			}
 			else
 			{
-				$objFolder->found = 1;
-				$objFolder->save();
+				// Update the hash if the folder has changed
+				if ($objModel->hash != $objFolder->hash)
+				{
+					$objModel->hash = $objFolder->hash;
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFolder) . '</p>';
+				}
+
+				$objModel->found = 1;
+				$objModel->save();
+
 				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
 			}
 
-			$this->execSync($strFolder, $objFolder->id);
+			$this->execSync($strFolder, $objModel->id);
 		}
 
 		// Files
 		foreach ($arrFiles as $strFile)
 		{
-			$objFile = \FilesModel::findBy('path', $strFile);
+			$objFile = new \File($strFile);
+			$objModel = \FilesModel::findBy('path', $strFile);
 
 			// Create the entry if it does not yet exist
-			if ($objFile === null)
+			if ($objModel === null)
 			{
-				$objFile = new \FilesModel();
-				$objFile->pid = $intPid;
-				$objFile->tstamp = time();
-				$objFile->name = basename($strFile);
-				$objFile->type = 'file';
-				$objFile->path = $strFile;
-				$objFile->hash = md5_file(TL_ROOT . '/' . $strFile);
-				$objFile->found = 1;
-				$objFile->save();
+				$objModel = new \FilesModel();
+				$objModel->pid = $intPid;
+				$objModel->tstamp = time();
+				$objModel->name = basename($strFile);
+				$objModel->type = 'file';
+				$objModel->path = $strFile;
+				$objModel->hash = $objFile->hash;
+				$objModel->found = 1;
+				$objModel->save();
+
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileC'], $strFile) . '</p>';
 			}
 			else
 			{
 				// Update the hash if the file has changed
-				if (($strMd5 = md5_file(TL_ROOT . '/' . $strFile)) != $objFile->hash)
+				if ($objModel->hash != $objFile->hash)
 				{
-					$objFile->hash = $strMd5;
+					$objModel->hash = $objFile->hash;
 					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
 				}
-				else
-				{
-					$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
-				}
 
-				$objFile->found = 1;
-				$objFile->save();
+				$objModel->found = 1;
+				$objModel->save();
+
+				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
 			}
 		}
 	}
