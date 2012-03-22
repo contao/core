@@ -69,6 +69,12 @@ class FileTree extends \Widget
 	 */
 	protected $strOrderName;
 
+	/**
+	 * Gallery flag
+	 * @var boolean
+	 */
+	protected $blnIsGallery = false;
+
 
 	/**
 	 * Load the database object
@@ -82,17 +88,14 @@ class FileTree extends \Widget
 		// Prepare the orderSRC field
 		$this->strOrderId = str_replace('multiSRC', 'orderSRC', $this->strId);
 		$this->strOrderName = str_replace('multiSRC', 'orderSRC', $this->strName);
-		$this->orderSRC = null;
 
-		// If the gallery flag is set, retrieve the orderSRC value
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'])
-		{
-			$objRow = $this->Database->prepare("SELECT orderSRC FROM {$this->strTable} WHERE id=?")
-						   ->limit(1)
-						   ->execute($this->Input->get('id'));
+		// Retrieve the orderSRC value
+		$objRow = $this->Database->prepare("SELECT type, orderSRC FROM {$this->strTable} WHERE id=?")
+					   ->limit(1)
+					   ->execute($this->Input->get('id'));
 
-			$this->orderSRC = $objRow->orderSRC;
-		}
+		$this->orderSRC = $objRow->orderSRC;
+		$this->blnIsGallery = ($objRow->type == 'gallery');
 	}
 
 
@@ -103,12 +106,9 @@ class FileTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-		// If the gallery flag is set, store the orderSRC value
-		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'])
-		{
-			$this->Database->prepare("UPDATE {$this->strTable} SET orderSRC=? WHERE id=?")
-						   ->execute($this->Input->post($this->strOrderName), $this->Input->get('id'));
-		}
+		// Store the orderSRC value
+		$this->Database->prepare("UPDATE {$this->strTable} SET orderSRC=? WHERE id=?")
+					   ->execute($this->Input->post($this->strOrderName), $this->Input->get('id'));
 
 		// Return the value as usual
 		if (strpos($varInput, ',') === false)
@@ -145,7 +145,7 @@ class FileTree extends \Widget
 				}
 
 				// Image galleries
-				if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['isGallery'])
+				if ($this->blnIsGallery)
 				{
 					if ($objFiles->type == 'folder')
 					{
@@ -171,7 +171,7 @@ class FileTree extends \Widget
 								continue;
 							}
 
-							$arrValues[$objSubfiles->id] = $this->generateImage($this->getImage($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage" data-id="'.$objSubfiles->id.'"');
+							$arrValues[$objSubfiles->id] = $this->generateImage($this->getImage($objSubfiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 						}
 					}
 					else
@@ -180,7 +180,7 @@ class FileTree extends \Widget
 
 						if ($objFile->isGdImage)
 						{
-							$arrValues[$objFiles->id] = $this->generateImage($this->getImage($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage" data-id="'.$objFiles->id.'"');
+							$arrValues[$objFiles->id] = $this->generateImage($this->getImage($objFiles->path, 50, 50, 'center_center'), '', 'class="gimage"');
 						}
 					}
 				}
@@ -189,18 +189,18 @@ class FileTree extends \Widget
 				{
 					if ($objFiles->type == 'folder')
 					{
-						$arrValues[] = $this->generateImage('folderC.gif') . ' ' . $objFiles->path;
+						$arrValues[$objFiles->id] = $this->generateImage('folderC.gif') . ' ' . $objFiles->path;
 					}
 					else
 					{
 						$objFile = new \File($objFiles->path);
-						$arrValues[] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
+						$arrValues[$objFiles->id] = $this->generateImage($objFile->icon) . ' ' . $objFiles->path;
 					}
 				}
 			}
 
 			// Apply a custom sort order
-			if ($this->orderSRC !== null)
+			if ($this->orderSRC != '')
 			{
 				$arrNew = array();
 				$arrOrder = array_map('intval', explode(',', $this->orderSRC));
@@ -209,14 +209,17 @@ class FileTree extends \Widget
 				{
 					if (isset($arrValues[$i]))
 					{
-						$arrNew[] = $arrValues[$i];
+						$arrNew[$i] = $arrValues[$i];
 						unset($arrValues[$i]);
 					}
 				}
 
 				if (!empty($arrValues))
 				{
-					$arrNew = array_merge($arrNew, $arrValues);
+					foreach ($arrValues as $k=>$v)
+					{
+						$arrNew[$k] = $v;
+					}
 				}
 
 				$arrValues = $arrNew;
@@ -224,12 +227,21 @@ class FileTree extends \Widget
 			}
 		}
 
-		return '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
   <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->orderSRC.'">
   <div class="selector_container" id="target_'.$this->strId.'">
-    <ul id="sort_'.$this->strId.'" class="sortable sgallery"><li>' . implode('</li><li>', $arrValues) . '</li></ul>
+    <ul id="sort_'.$this->strId.'" class="sortable'.($this->blnIsGallery ? ' sgallery' : '').'">';
+
+		foreach ($arrValues as $k=>$v)
+		{
+			$return .= '<li data-id="'.$k.'">'.$v.'</li>';
+		}
+
+		$return .= '</ul>
     <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
     <script>Backend.makeGallerySortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>
   </div>';
+
+		return $return;
 	}
 }

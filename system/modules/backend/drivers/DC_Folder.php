@@ -1736,7 +1736,7 @@ window.addEvent(\'domready\', function() {
 
 				if ($objFound !== null)
 				{
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFolder->path, $objFound->path) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFolder->path, $objFound->path) . '</p>';
 
 					// Update the original entry
 					$objFolder->pid = $objFound->pid;
@@ -1776,7 +1776,7 @@ window.addEvent(\'domready\', function() {
 
 				if ($objFound !== null)
 				{
-					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFile->path, $objFound->path) . '</p>';
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFile->path, $objFound->path) . '</p>';
 
 					// Update the original entry
 					$objFile->pid = $objFound->pid;

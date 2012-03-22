@@ -1173,7 +1173,7 @@ var Backend =
             var els = [];
             var lis = $(id).getChildren('li');
             for (i=0; i<lis.length; i++) {
-                els.push(lis[i].getFirst('img').get('data-id'));
+                els.push(lis[i].get('data-id'));
             }
             $(oid).value = els.join(',');
         });

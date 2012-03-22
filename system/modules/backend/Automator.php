@@ -316,8 +316,10 @@ class Automator extends \Backend
 		// Folders
 		foreach ($arrFolders as $strFolder)
 		{
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, '')")
-								 ->execute($pid, time(), basename($strFolder), $strFolder)
+			$objFolder = new \Folder($strFolder);
+
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
+								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
 								 ->insertId;
 
 			$this->scanUploadFolder($strFolder, $id);
@@ -342,8 +344,10 @@ class Automator extends \Backend
 				}
 			}
 
+			$objFile = new \File($strFile);
+
 			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'file', ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
+								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->hash)
 								 ->insertId;
 
 			$arrMapper[basename($strFile)] = $id;

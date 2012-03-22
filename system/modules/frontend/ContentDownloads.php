@@ -77,6 +77,15 @@ class ContentDownloads extends \ContentElement
 			return '';
 		}
 
+		// Check for version 3 format
+		foreach ($this->multiSRC as $val)
+		{
+			if (!is_numeric($val))
+			{
+				return '<p class="error">This element still uses the old Contao 2 multiSRC format. Did you upgrade the database?</p>';
+			}
+		}
+
 		$file = $this->Input->get('file', true);
 
 		// Send the file to the browser
