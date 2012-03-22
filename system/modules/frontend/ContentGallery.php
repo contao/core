@@ -76,15 +76,6 @@ class ContentGallery extends \ContentElement
 			return '';
 		}
 
-		// Check for version 3 format
-		foreach ($this->multiSRC as $val)
-		{
-			if (!is_numeric($val))
-			{
-				return '<p class="error">This element still uses the old Contao 2 multiSRC format. Did you upgrade the database?</p>';
-			}
-		}
-
 		return parent::generate();
 	}
 
@@ -104,7 +95,17 @@ class ContentGallery extends \ContentElement
 
 		if ($objFiles === null)
 		{
-			$this->Template->images = '';
+			// Check for version 3 format
+			foreach ($this->multiSRC as $val)
+			{
+				if (!is_numeric($val))
+				{
+					$this->Template->images = '';
+					$this->Template->v2warning = '<p class="error">This element still uses the old Contao 2 multiSRC format. Did you upgrade the database?</p>';
+					break;
+				}
+			}
+
 			return;
 		}
 
@@ -131,10 +132,10 @@ class ContentGallery extends \ContentElement
 
 				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
-				// FIXME: correct?
+				// Use the file name as title if none is given
 				if ($arrMeta['title'] == '')
 				{
-					$arrMeta['title'] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
 				}
 
 				// Add the image
@@ -179,10 +180,10 @@ class ContentGallery extends \ContentElement
 
 					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
-					// FIXME: correct?
+					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
 					}
 
 					// Add the image
