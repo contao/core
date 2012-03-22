@@ -47,6 +47,13 @@ $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Edit file "%s"';
 $GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Browse files';
 $GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Clear list';
 $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Start upload';
+$GLOBALS['TL_LANG']['tl_files']['syncFounc']   = 'Found the original file "%s" at "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncRemoved'] = 'Removed the file or folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Created the folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Found the folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileC']   = 'Created the file "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileF']   = 'Found the file "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncHash']    = 'Updated the hash of the file "%s"';
 
 
 /**
@@ -62,3 +69,4 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Protect folder', 'Protect 
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Remove protection', 'Unprotect folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('File upload', 'Upload files to the server');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Paste into', 'Paste into this folder');
+$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronize', 'Synchronize the file system and the database');

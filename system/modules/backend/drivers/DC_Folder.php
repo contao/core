@@ -69,6 +69,12 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 	 */
 	protected $arrValidFileTypes = array();
 
+	/**
+	 * Messages
+	 * @var array
+	 */
+	protected $arrMessages = array();
+
 
 	/**
 	 * Initialize the object
@@ -1695,6 +1701,8 @@ window.addEvent(\'domready\', function() {
 	 */
 	public function sync()
 	{
+		$this->arrMessages = array();
+
 		// Reset the "found" flag
 		$this->Database->query("UPDATE tl_files SET found=''");
 
@@ -1708,19 +1716,14 @@ window.addEvent(\'domready\', function() {
 		{
 			while ($objFiles->next())
 			{
-				if ($objFiles->type == 'folder')
+				// Check whether the file has moved
+				if ($objFiles->type == 'file')
 				{
-					// Delete the entry if the folder has gone
-					$objFiles->current()->delete(); # FIXME: can we track moved folders?
-				}
-				else
-				{
-					// Check whether the file has moved
 					$objFound = \FilesModel::findBy(array('hash=?', 'found=1'), $objFiles->hash);
 
 					if ($objFound !== null)
 					{
-						echo "Found the original file {$objFiles->path} at {$objFound->path}\n"; # FIXME: add to log
+						$this->arrMessages[] = '<p class="tl_info">' . sprinf($GLOBALS['TL_LANG']['tl_files']['syncFounc'], $objFiles->path, $objFound->path) . '</p>';
 						$objFile = $objFiles->current();
 
 						// Update the original entry
@@ -1733,15 +1736,40 @@ window.addEvent(\'domready\', function() {
 
 						// Delete the newer (duplicate) entry
 						$objFound->delete();
-					}
-					else
-					{
-						// Delete the entry if the file has gone
-						$objFiles->current()->delete(); 
+						continue;
 					}
 				}
+
+				// Delete the entry if the file/folder has gone
+				$objFiles->current()->delete();
+				$this->arrMessages[] = '<p class="tl_error">' . sprinf($GLOBALS['TL_LANG']['tl_files']['syncRemoved'], $objFiles->path) . '</p>';
 			}
 		}
+
+		$return = '
+<div id="tl_buttons">
+<a href="'.$this->getReferer(true).'" class="header_back" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['backBT']).'" accesskey="b" onclick="Backend.getScrollOffset()">'.$GLOBALS['TL_LANG']['MSC']['backBT'].'</a>
+</div>
+
+<h2 class="sub_headline">'.$GLOBALS['TL_LANG']['tl_files']['sync'][1].'</h2>
+'.$this->getMessages().'
+<div class="tl_message nobg" style="margin-bottom:2em">';
+
+		// Add the messages
+		foreach ($this->arrMessages as $strMessage)
+		{
+			$return .= "\n  " . $strMessage;
+		}
+
+		$return .= '
+</div>
+
+<div class="tl_submit_container">
+  <a href="'.$this->getReferer(true).'" class="tl_submit" style="display:inline-block">'.$GLOBALS['TL_LANG']['MSC']['continue'].'</a>
+</div>
+';
+
+		return $return;
 	}
 
 
@@ -1791,12 +1819,13 @@ window.addEvent(\'domready\', function() {
 				$objFolder->path = $strFolder;
 				$objFolder->found = 1;
 				$objFolder->save();
-				echo "Created folder $strFolder\n"; # FIXME: add to log
+				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderC'], $strFolder) . '</p>';
 			}
 			else
 			{
 				$objFolder->found = 1;
 				$objFolder->save();
+				$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderF'], $strFolder) . '</p>';
 			}
 
 			$this->execSync($strFolder, $objFolder->id);
@@ -1819,7 +1848,7 @@ window.addEvent(\'domready\', function() {
 				$objFile->hash = md5_file(TL_ROOT . '/' . $strFile);
 				$objFile->found = 1;
 				$objFile->save();
-				echo "Created file $strFile\n"; # FIXME: add to log
+				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileC'], $strFile) . '</p>';
 			}
 			else
 			{
@@ -1827,51 +1856,17 @@ window.addEvent(\'domready\', function() {
 				if (($strMd5 = md5_file(TL_ROOT . '/' . $strFile)) != $objFile->hash)
 				{
 					$objFile->hash = $strMd5;
-					echo "Updated the hash of file $strFile\n"; # FIXME: add to log
+					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncHash'], $strFile) . '</p>';
+				}
+				else
+				{
+					$this->arrMessages[] = '<p class="tl_confirm">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileF'], $strFile) . '</p>';
 				}
 
 				$objFile->found = 1;
 				$objFile->save();
 			}
-			/*
-			$matches = array();
- 
-			// Handle meta.txt files
-			if (preg_match('/^meta(_([a-z]{2}))?\.txt$/', basename($strFile), $matches))
-			{
-				$key = $matches[2] ?: 'en';
-				$arrData = file(TL_ROOT . '/' . $strFile, FILE_IGNORE_NEW_LINES);
- 
-				foreach ($arrData as $line)
-				{
-					list($name, $info) = explode('=', $line);
-					list($title, $link, $caption) = explode('|', $info);
-					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
-				}
-			}
- 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'file', ?, ?)")
-				->execute($pid, time(), basename($strFile), $strFile, md5_file(TL_ROOT . '/' . $strFile))
-				->insertId;
- 
-			$arrMapper[basename($strFile)] = $id;
-			*/
 		}
-
-		// Insert the meta data AFTER the file entries have been created
-		/*
-		if (!empty($arrMeta))
-		{
-			foreach ($arrMeta as $file=>$meta)
-			{
-				if (isset($arrMapper[$file]))
-				{
-					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
-						->execute(serialize($meta), $arrMapper[$file]);
-				}
-			}
-		}
-		*/
 	}
 
 

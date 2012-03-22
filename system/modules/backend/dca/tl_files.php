@@ -61,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		(
 			'sync' => array
 			(
-				'label'               => array('Synchronisieren'), # FIXME: translate
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
 				'href'                => 'act=sync',
 				'class'               => 'header_sync'
 			),

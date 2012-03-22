@@ -47,6 +47,13 @@ $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Datei "%s" bearbeiten';
 $GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Dateien suchen';
 $GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Liste leeren';
 $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Upload starten';
+$GLOBALS['TL_LANG']['tl_files']['syncFounc']   = 'Die Originaldatei "%s" wurde als "%s" gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncRemoved'] = 'Die Datei oder der Ordner "%s" wurde entfernt';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Der Ordner "%s" wurde erstellt';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Der Ordner "%s" wurde gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncFileC']   = 'Die Datei "%s" wurde erstellt';
+$GLOBALS['TL_LANG']['tl_files']['syncFileF']   = 'Die Datei "%s" wurde gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncHash']    = 'Der Hash der Datei "%s" wurde aktualisiert';
 
 
 /**
@@ -62,3 +69,4 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Verzeichnis schützen', 'V
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Verzeichnisschutz aufheben', 'Schutz des Verzeichnisses "%s" aufheben');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('Datei-Upload', 'Dateien auf den Server übertragen');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
+$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronisieren', 'Dateisystem und Datenbank synchronisieren');

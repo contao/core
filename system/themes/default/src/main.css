@@ -265,6 +265,9 @@ h2.sub_headline_index {
 	background-position:left center;
 	background-color:transparent;
 }
+.nobg .tl_error,.nobg .tl_confirm,.nobg .tl_info,.nobg .tl_new {
+	background-color:transparent;
+}
 
 /* Filter */
 .tl_panel,.tl_version_panel {
