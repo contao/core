@@ -253,7 +253,7 @@ class Calendar extends \Frontend
 		$arrProcessed = array();
 
 		// Get all calendars
-		$objCalendar = \CalendarCollection::findBy('protected', '');
+		$objCalendar = \CalendarCollection::findByProtected('');
 
 		// Walk through each calendar
 		if ($objCalendar !== null)

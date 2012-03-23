@@ -373,6 +373,26 @@ abstract class Model_Collection extends \System
 
 
 	/**
+	 * Magic method to call $this->findByPid() instead of $this->findBy('pid')
+	 * @param string
+	 * @param array
+	 * @return mixed|null
+	 */
+	public static function __callStatic($name, $args)
+	{
+		if (strncmp($name, 'findBy', 6) !== 0)
+		{
+			return null;
+		}
+
+		$strColumn = lcfirst(substr($name, 6));
+		$varValue = array_shift($args);
+
+		return call_user_func('static::findBy', $strColumn, $varValue, $args);
+	}
+
+
+	/**
 	 * Find all records and return the model
 	 * @param array
 	 * @return \Contao\Model_Collection|null

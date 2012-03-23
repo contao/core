@@ -163,7 +163,7 @@ class ModuleSubscribe extends \Module
 		$this->Template = new \FrontendTemplate('mod_newsletter');
 
 		// Check the token
-		$objRecipient = \NewsletterRecipientsModel::findBy('token', $this->Input->get('token'));
+		$objRecipient = \NewsletterRecipientsModel::findByToken($this->Input->get('token'));
 
 		if ($objRecipient === null)
 		{

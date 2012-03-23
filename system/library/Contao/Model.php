@@ -271,6 +271,26 @@ abstract class Model extends \System
 
 
 	/**
+	 * Magic method to call $this->findByName() instead of $this->findBy('name')
+	 * @param string
+	 * @param array
+	 * @return mixed|null
+	 */
+	public static function __callStatic($name, $args)
+	{
+		if (strncmp($name, 'findBy', 6) !== 0)
+		{
+			return null;
+		}
+
+		$strColumn = lcfirst(substr($name, 6));
+		$varValue = array_shift($args);
+
+		return call_user_func('static::findBy', $strColumn, $varValue, $args);
+	}
+
+
+	/**
 	 * Modify the statement before it is executed
 	 * @param \Database_Statement
 	 * @return \Database_Statement

@@ -142,7 +142,7 @@ class ModuleRandomImage extends \Module
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesCollection::findBy('pid', $objFiles->id);
+				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{

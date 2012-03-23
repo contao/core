@@ -426,7 +426,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->Files->rename($this->intId, $destination);
 
 		// Find the corresponding DB entries
-		$objFile = \FilesModel::findBy('path', $this->intId);
+		$objFile = \FilesModel::findByPath( $this->intId);
 
 		// Set the parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -435,7 +435,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			$objFolder = \FilesModel::findBy('path', $strFolder);
+			$objFolder = \FilesModel::findByPath( $strFolder);
 			$objFile->pid = $objFolder->id;
 		}
 
@@ -546,7 +546,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFolder = \FilesModel::findBy('path', $source);
+			$objFolder = \FilesModel::findByPath( $source);
 			$objNewFolder = clone $objFolder;
 
 			// Set the parent ID
@@ -556,7 +556,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$objFolder = \FilesModel::findByPath( $strFolder);
 				$objNewFolder->pid = $objFolder->id;
 			}
 
@@ -579,7 +579,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findBy('path', $source . '/' . $file);
+					$objFile = \FilesModel::findByPath( $source . '/' . $file);
 					$objNewFile = clone $objFile;
 
 					// Update the database
@@ -608,7 +608,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findBy('path', $source);
+			$objFile = \FilesModel::findByPath( $source);
 			$objNewFile = clone $objFile;
 
 			// Set the parent ID
@@ -618,7 +618,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$objFolder = \FilesModel::findByPath( $strFolder);
 				$objNewFile->pid = $objFolder->id;
 			}
 
@@ -727,7 +727,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->delete($source . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findBy('path', $source . '/' . $file);
+					$objFile = \FilesModel::findByPath( $source . '/' . $file);
 					$objFile->delete();
 				}
 			}
@@ -735,7 +735,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->rmdir($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findBy('path', $source);
+			$objFile = \FilesModel::findByPath( $source);
 			$objFile->delete();
 		}
 
@@ -745,7 +745,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->delete($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findBy('path', $source);
+			$objFile = \FilesModel::findByPath( $source);
 			$objFile->delete();
 		}
 
@@ -841,7 +841,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findBy('path', $strFolder);
+				$objFolder = \FilesModel::findByPath( $strFolder);
 				$pid = $objFolder->id;
 			}
 
@@ -964,7 +964,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$blnIsFirst = true;
 
 			// Get the DB entry
-			$objFile = \FilesModel::findBy('path', $this->intId);
+			$objFile = \FilesModel::findByPath( $this->intId);
 			$this->objActiveRecord = $objFile;
 
 			foreach ($boxes as $v)
@@ -1365,7 +1365,7 @@ window.addEvent(\'domready\', function() {
 				$objFile->close();
 
 				// Update the md5 hash
-				$objMeta = \FilesModel::findBy('path', $objFile->value);
+				$objMeta = \FilesModel::findByPath( $objFile->value);
 				$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
 				$objMeta->save();
 			}
@@ -1552,7 +1552,7 @@ window.addEvent(\'domready\', function() {
 			}
 			else
 			{
-				$objFolder = \FilesModel::findBy('path', $this->strPath);
+				$objFolder = \FilesModel::findByPath( $this->strPath);
 				$pid = $objFolder->id;
 			}
 
@@ -1575,7 +1575,7 @@ window.addEvent(\'domready\', function() {
 			else
 			{
 				// Find the corresponding DB entry
-				$objFile = \FilesModel::findBy('path', $this->strPath . '/' . $this->varValue . $this->strExtension);
+				$objFile = \FilesModel::findByPath( $this->strPath . '/' . $this->varValue . $this->strExtension);
 
 				// Update the data
 				$objFile->pid  = $pid;
@@ -1710,7 +1710,7 @@ window.addEvent(\'domready\', function() {
 		$this->execSync($GLOBALS['TL_CONFIG']['uploadPath']);
 
 		// Check for left-over entries in the DB
-		$objFiles = \FilesCollection::findBy('found', '');
+		$objFiles = \FilesCollection::findByFound('');
 
 		if ($objFiles !== null)
 		{
@@ -1747,7 +1747,7 @@ window.addEvent(\'domready\', function() {
 					$objFolder->save();
 
 					// Update the PID of the child records
-					$objChildren = \FilesCollection::findBy('pid', $objFound->id);
+					$objChildren = \FilesCollection::findByPid($objFound->id);
 
 					if ($objChildren !== null)
 					{
@@ -1859,7 +1859,7 @@ window.addEvent(\'domready\', function() {
 		foreach ($arrFolders as $strFolder)
 		{
 			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findBy('path', $strFolder);
+			$objModel = \FilesModel::findByPath( $strFolder);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)
@@ -1898,7 +1898,7 @@ window.addEvent(\'domready\', function() {
 		foreach ($arrFiles as $strFile)
 		{
 			$objFile = new \File($strFile);
-			$objModel = \FilesModel::findBy('path', $strFile);
+			$objModel = \FilesModel::findByPath( $strFile);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)

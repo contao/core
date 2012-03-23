@@ -59,7 +59,7 @@ class MemberModel extends \Model
 	 */
 	public static function findByUsername($strUsername)
 	{
-		return static::findBy('username', $strUsername);
+		return static::findByUsername($strUsername);
 	}
 
 

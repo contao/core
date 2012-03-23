@@ -161,7 +161,7 @@ class ContentGallery extends \ContentElement
 			// Folders
 			else
 			{
-				$objSubfiles = \FilesCollection::findBy('pid', $objFiles->id);
+				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
 
 				if ($objSubfiles === null)
 				{

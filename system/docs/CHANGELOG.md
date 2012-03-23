@@ -5,6 +5,11 @@ Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
 ### New
+Added a magic method to the `Model` and `Model_Collection` classes, so you can
+call `Model::findByName($name)` instead of `Model::findBy('name', $name)`. The
+first method call will be rewritten to the second one.
+
+### New
 Added a `hash()` method to calculate the MD5 hash of files and folders.
 
 ### New

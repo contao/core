@@ -485,7 +485,7 @@ class ModuleRegistration extends \Module
 		$this->Template = new \FrontendTemplate($this->strTemplate);
 
 		// Check the token
-		$objMember = \MemberModel::findBy('activation', $this->Input->get('token'));
+		$objMember = \MemberModel::findByActivation($this->Input->get('token'));
 
 		if ($objMember === null)
 		{

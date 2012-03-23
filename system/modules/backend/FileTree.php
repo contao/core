@@ -110,8 +110,8 @@ class FileTree extends \Widget
 		// Prepare the orderSRC field
 		if ($this->strOrderField != '')
 		{
-			$this->strOrderId = 'multiSRC' . str_replace($this->strField, '', $this->strId);
-			$this->strOrderName = 'multiSRC' . str_replace($this->strField, '', $this->strName);
+			$this->strOrderId = 'orderSRC' . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = 'orderSRC' . str_replace($this->strField, '', $this->strName);
 
 			// Retrieve the orderSRC value
 			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
@@ -196,7 +196,7 @@ class FileTree extends \Widget
 				{
 					if ($objFiles->type == 'folder')
 					{
-						$objSubfiles = \FilesCollection::findBy('pid', $objFiles->id);
+						$objSubfiles = \FilesCollection::findByPid($objFiles->id);
 
 						if ($objSubfiles === null)
 						{

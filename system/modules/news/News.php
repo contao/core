@@ -216,7 +216,7 @@ class News extends \Frontend
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objArchive = \NewsArchiveCollection::findBy('protected', '');
+		$objArchive = \NewsArchiveCollection::findByProtected('');
 
 		// Walk through each archive
 		if ($objArchive !== null)
