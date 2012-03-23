@@ -74,10 +74,23 @@ class ContentText extends \ContentElement
 		$this->Template->text = $this->String->encodeEmail($this->text);
 		$this->Template->addImage = false;
 
-		// Add image
-		if ($this->addImage && $this->singleSRC != '' && is_file(TL_ROOT . '/' . $this->singleSRC))
+		// Add an image
+		if ($this->addImage && $this->singleSRC != '')
 		{
-			$this->addImageToTemplate($this->Template, $this->arrData);
+			if (!is_numeric($this->singleSRC))
+			{
+				$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($this->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$this->singleSRC = $objModel->path;
+					$this->addImageToTemplate($this->Template, $this->arrData);
+				}
+			}
 		}
 	}
 }

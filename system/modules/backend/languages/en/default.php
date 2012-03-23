@@ -80,6 +80,7 @@ $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'You can only define one websi
 $GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Top-level pages must be website root pages!';
 $GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'There are pages on the top-level which are not website root pages. Creating websites without a website root page is no longer supported, so please ensure that all pages are grouped under a website root page.';
 $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl']   = 'The link you were trying to open could not be verified. If you have clicked the link yourself or have received it by a trustworthy person, you can confirm the process below.';
+$GLOBALS['TL_LANG']['ERR']['version2format']    = 'This element still uses the old Contao 2 SRC format. Did you upgrade the database?';
 
 /**
  * Page types

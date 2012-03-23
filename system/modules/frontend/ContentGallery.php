@@ -46,6 +46,12 @@ class ContentGallery extends \ContentElement
 {
 
 	/**
+	 * Files object
+	 * @var \Contao\FilesCollection
+	 */
+	protected $objFiles;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -58,8 +64,6 @@ class ContentGallery extends \ContentElement
 	 */
 	public function generate()
 	{
-		$this->multiSRC = deserialize($this->multiSRC);
-
 		// Use the home directory of the current user as file source
 		if ($this->useHomeDir && FE_USER_LOGGED_IN)
 		{
@@ -70,8 +74,27 @@ class ContentGallery extends \ContentElement
 				$this->multiSRC = array($this->User->homeDir);
 			}
 		}
+		else
+		{
+			$this->multiSRC = deserialize($this->multiSRC);
+		}
 
+		// Return if there are no files
 		if (!is_array($this->multiSRC) || empty($this->multiSRC))
+		{
+			return '';
+		}
+
+		// Check for version 3 format
+		if (!is_numeric($this->multiSRC[0]))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		// Get the file entries from the database
+		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+
+		if ($this->objFiles === null)
 		{
 			return '';
 		}
@@ -86,30 +109,12 @@ class ContentGallery extends \ContentElement
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$images = array();
 		$auxDate = array();
 		$auxId = array();
-
-		// Get the file entries from the database
-		$objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
-
-		if ($objFiles === null)
-		{
-			// Check for version 3 format
-			foreach ($this->multiSRC as $val)
-			{
-				if (!is_numeric($val))
-				{
-					$this->Template->images = '';
-					$this->Template->v2warning = '<p class="error">This element still uses the old Contao 2 multiSRC format. Did you upgrade the database?</p>';
-					break;
-				}
-			}
-
-			return;
-		}
-
-		global $objPage;
+		$objFiles = $this->objFiles;
 
 		// Get all images
 		while ($objFiles->next())

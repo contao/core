@@ -242,6 +242,7 @@ class DataContainer extends \Backend
 			}
 		}
 
+		$arrData['activeRecord'] = $this->activeRecord;
 		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
 

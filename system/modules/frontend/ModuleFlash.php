@@ -46,6 +46,12 @@ class ModuleFlash extends \Module
 {
 
 	/**
+	 * Files model
+	 * @var \Contao\FilesModel
+	 */
+	protected $objModel;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -58,9 +64,24 @@ class ModuleFlash extends \Module
 	 */
 	public function generate()
 	{
-		if ($this->source != 'external' && (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC)))
+		if ($this->source != 'external')
 		{
-			return '';
+			if ($this->singleSRC == '')
+			{
+				return '';
+			}
+
+			if (!is_numeric($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
+			$this->objModel = \FilesModel::findByPk($this->singleSRC);
+
+			if ($this->objModel === null  || !is_file(TL_ROOT . '/' . $this->objModel->path))
+			{
+				return '';
+			}
 		}
 
 		if (TL_MODE == 'BE')
@@ -80,8 +101,8 @@ class ModuleFlash extends \Module
 	{
 		$this->import('String');
 
-		$this->Template->src = $this->singleSRC;
-		$this->Template->href = ($this->source == 'external') ? $this->url : $this->singleSRC;
+		$this->Template->src = $this->objModel->path;
+		$this->Template->href = ($this->source == 'external') ? $this->url : $this->objModel->path;
 		$this->Template->alt = $this->altContent;
 		$this->Template->var = 'swf' . $this->id;
 		$this->Template->transparent = $this->transparent ? true : false;
@@ -89,7 +110,7 @@ class ModuleFlash extends \Module
 		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
 		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", $this->String->decodeEntities($this->flashJS));
 		$this->Template->flashvars = 'URL=' . $this->Environment->base;
-		$this->Template->version = strlen($this->version) ? $this->version : '6.0.0';
+		$this->Template->version = ($this->version != '') ? $this->version : '6.0.0';
 
 		$size = deserialize($this->size);
 

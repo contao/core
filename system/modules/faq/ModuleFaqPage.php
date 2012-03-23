@@ -109,20 +109,33 @@ class ModuleFaqPage extends Module
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$objTemp->answer = $this->String->toXhtml($objTemp->answer);
+				$objFaq->answer = $this->String->toXhtml($objFaq->answer);
 			}
 			else
 			{
-				$objTemp->answer = $this->String->toHtml5($objTemp->answer);
+				$objFaq->answer = $this->String->toHtml5($objFaq->answer);
 			}
 
-			$objTemp->answer = $this->String->encodeEmail($objTemp->answer);
+			$objTemp->answer = $this->String->encodeEmail($objFaq->answer);
 			$objTemp->addImage = false;
 
-			// Add image
-			if ($objFaq->addImage && is_file(TL_ROOT . '/' . $objFaq->singleSRC))
+			// Add an image
+			if ($objFaq->addImage && $objFaq->singleSRC != '')
 			{
-				$this->addImageToTemplate($objTemp, $objFaq->row());
+				if (!is_numeric($objFaq->singleSRC))
+				{
+					$objTemp->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+				else
+				{
+					$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+
+					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+					{
+						$objFaq->singleSRC = $objModel->path;
+						$this->addImageToTemplate($objTemp, $objFaq->row());
+					}
+				}
 			}
 
 			$objTemp->enclosure = array();

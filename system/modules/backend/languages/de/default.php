@@ -80,6 +80,8 @@ $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'Sie können nur einen Website
 $GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Seiten in der obersten Ebene müssen Website-Startpunkte sein!';
 $GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'Auf der obersten Ebene befinden sich Seiten, die keine Website-Startpunkte sind. Webseiten ohne Startpunkt werden nicht mehr unterstützt, daher stellen Sie bitte sicher, dass alle Seiten unter einem Startpunkt gruppiert sind.';
 $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl']   = 'Der Link, den Sie aufgerufen haben, konnte nicht verifiziert werden. Wenn Sie den Link selbst aufgerufen oder von einer vertauenswürdigen Person erhalten haben, können Sie den Vorgang fortsetzen.';
+$GLOBALS['TL_LANG']['ERR']['version2format']    = 'Dieses Element verwendet noch das alte Contao 2 SRC-Format. Haben Sie die Datenbank aktualisiert?';
+
 
 /**
  * Page types

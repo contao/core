@@ -2690,6 +2690,7 @@ abstract class Controller extends \System
 		$arrNew['label'] = (($label = is_array($arrData['label']) ? $arrData['label'][0] : $arrData['label']) != false) ? $label : $strField;
 		$arrNew['description'] = $arrData['label'][1];
 		$arrNew['type'] = $arrData['inputType'];
+		$arrNew['activeRecord'] = $arrData['activeRecord'];
 
 		// Internet Explorer does not support onchange for checkboxes and radio buttons
 		if ($arrData['inputType'] == 'checkbox' || $arrData['inputType'] == 'checkboxWizard' || $arrData['inputType'] == 'radio' || $arrData['inputType'] == 'radioTable')
@@ -3348,36 +3349,89 @@ abstract class Controller extends \System
 	 */
 	protected function addEnclosuresToTemplate($objTemplate, $arrItem)
 	{
-		$arrEnclosure = deserialize($arrItem['enclosure'], true);
-		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
+		$arrEnclosures = deserialize($arrItem['enclosure']);
 
-		// Send file to the browser
-		if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
+		if (!is_array($arrEnclosures) || empty($arrEnclosures))
 		{
-			$this->sendFileToBrowser($this->Input->get('file', true));
+			return;
+		}
+
+		// Check for version 3 format
+		if (!is_numeric($arrEnclosures[0]))
+		{
+			foreach (array('details', 'answer', 'text') as $key)
+			{
+				if (isset($objTemplate->$key))
+				{
+					$objTemplate->$key = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+			}
+
+			return;
+		}
+
+		$objFiles = \FilesCollection::findMultipleByIds($arrEnclosures);
+
+		if ($objFiles === null)
+		{
+			return;
+		}
+
+		$file = $this->Input->get('file', true);
+
+		// Send the file to the browser
+		if ($file != '')
+		{
+			while ($objFiles->next())
+			{
+				if ($file == $objFiles->path)
+				{
+					$this->sendFileToBrowser($file);
+				}
+			}
+
+			// Do not index or cache the page
+			global $objPage;
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
+			// Send a 404 header
+			header('HTTP/1.1 404 Not Found');
+
+			foreach (array('details', 'answer', 'text') as $key)
+			{
+				if (isset($objTemplate->$key))
+				{
+					$objTemplate->$key = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
+				}
+			}
 		}
 
 		$arrEnclosures = array();
+		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Add download links
-		for ($i=0; $i<count($arrEnclosure); $i++)
+		while ($objFiles->next())
 		{
-			if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
+			if ($objFiles->type == 'file')
 			{				
-				$objFile = new \File($arrEnclosure[$i]);
+				$objFile = new \File($objFiles->path);
 
 				if (!in_array($objFile->extension, $allowedDownload))
 				{
 					continue;
 				}
 
-				$arrEnclosures[$i]['link'] = basename($arrEnclosure[$i]);
-				$arrEnclosures[$i]['filesize'] = $this->getReadableSize($objFile->filesize);
-				$arrEnclosures[$i]['title'] = ucfirst(str_replace('_', ' ', $objFile->filename));
-				$arrEnclosures[$i]['href'] = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($arrEnclosure[$i]);
-				$arrEnclosures[$i]['enclosure'] = $arrEnclosure[$i];
-				$arrEnclosures[$i]['icon'] = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
-				$arrEnclosures[$i]['mime'] = $objFile->mime;
+				$arrEnclosures[] = array
+				(
+					'link'      => $objFiles->name,
+					'filesize'  => $this->getReadableSize($objFile->filesize),
+					'title'     => ucfirst(str_replace('_', ' ', $objFile->filename)),
+					'href'      => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'enclosure' => $objFiles->path,
+					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+					'mime'      => $objFile->mime
+				);
 			}
 		}
 

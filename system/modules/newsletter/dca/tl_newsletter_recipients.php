@@ -171,7 +171,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
+			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
 		),
 		'addedOn' => array
 		(

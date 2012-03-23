@@ -78,39 +78,42 @@ class ContentHyperlink extends \ContentElement
 		}
 
 		// Use an image instead of the title
-		if ($this->useImage && $this->singleSRC != '' && is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->useImage && $this->singleSRC != '' && is_numeric($this->singleSRC))
 		{
-			$this->strTemplate = 'ce_hyperlink_image';
+			$objModel = \FilesModel::findByPk($this->singleSRC);
 
-			$this->Template = new \FrontendTemplate($this->strTemplate);
-			$this->Template->setData($this->arrData);
-
-			$objFile = new \File($this->singleSRC);
-
-			if ($objFile->isGdImage)
+			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 			{
-				$size = deserialize($this->size);
-				$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+				$this->Template = new \FrontendTemplate('ce_hyperlink_image');
+				$this->Template->setData($this->arrData);
 
-				// Adjust image size
-				if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))
+				$objFile = new \File($objModel->path);
+
+				if ($objFile->isGdImage)
 				{
-					$size[0] = $intMaxWidth;
-					$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
+					$size = deserialize($this->size);
+					$intMaxWidth = (TL_MODE == 'BE') ? 320 : $GLOBALS['TL_CONFIG']['maxImageWidth'];
+
+					// Adjust the image size
+					if ($intMaxWidth > 0  && ($size[0] > $intMaxWidth || (!$size[0] && $objFile->width > $intMaxWidth)))
+					{
+						$size[0] = $intMaxWidth;
+						$size[1] = floor($intMaxWidth * $objFile->height / $objFile->width);
+					}
+
+					$src = $this->getImage($objModel->path, $size[0], $size[1], $size[2]);
+
+					if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
+					{
+						$this->Template->arrSize = $imgSize;
+						$this->Template->imgSize = ' ' . $imgSize[3];
+					}
+
+					$this->Template->src = TL_FILES_URL . $src;
+					$this->Template->alt = specialchars($this->alt);
+					$this->Template->linkTitle = specialchars($this->linkTitle);
+					$this->Template->caption = $this->caption;
 				}
-
-				$src = $this->getImage($this->singleSRC, $size[0], $size[1], $size[2]);
-
-				if (($imgSize = @getimagesize(TL_ROOT . '/' . rawurldecode($src))) !== false)
-				{
-					$this->Template->arrSize = $imgSize;
-					$this->Template->imgSize = ' ' . $imgSize[3];
-				}
-
-				$this->Template->src = TL_FILES_URL . $src;
-				$this->Template->alt = specialchars($this->alt);
-				$this->Template->linkTitle = specialchars($this->linkTitle);
-				$this->Template->caption = $this->caption;
 			}
 		}
 
@@ -134,7 +137,6 @@ class ContentHyperlink extends \ContentElement
 		// Override the link target
 		if ($this->target)
 		{
-			global $objPage;
 			$this->Template->target = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 		}
 	}

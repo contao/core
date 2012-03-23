@@ -70,6 +70,12 @@ class FileTree extends \Widget
 	protected $strOrderName;
 
 	/**
+	 * Order field
+	 * @var string
+	 */
+	protected $strOrderField;
+
+	/**
 	 * Show files
 	 * @var boolean
 	 */
@@ -81,6 +87,12 @@ class FileTree extends \Widget
 	 */
 	protected $blnIsGallery = false;
 
+	/**
+	 * Multiple flag
+	 * @var boolean
+	 */
+	protected $blnIsMultiple = false;
+
 
 	/**
 	 * Load the database object
@@ -91,18 +103,26 @@ class FileTree extends \Widget
 		$this->import('Database');
 		parent::__construct($arrAttributes);
 
+		$this->orderSRC = null;
+		$this->strOrderField = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['orderField'];
+		$this->blnIsMultiple = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'];
+
 		// Prepare the orderSRC field
-		$this->strOrderId = str_replace('multiSRC', 'orderSRC', $this->strId);
-		$this->strOrderName = str_replace('multiSRC', 'orderSRC', $this->strName);
+		if ($this->strOrderField != '')
+		{
+			$this->strOrderId = 'multiSRC' . str_replace($this->strField, '', $this->strId);
+			$this->strOrderName = 'multiSRC' . str_replace($this->strField, '', $this->strName);
 
-		// Retrieve the orderSRC value
-		$objRow = $this->Database->prepare("SELECT type, orderSRC FROM {$this->strTable} WHERE id=?")
-					   ->limit(1)
-					   ->execute($this->Input->get('id'));
+			// Retrieve the orderSRC value
+			$objRow = $this->Database->prepare("SELECT {$this->strOrderField} FROM {$this->strTable} WHERE id=?")
+						   ->limit(1)
+						   ->execute($this->activeRecord->id);
 
-		$this->orderSRC = $objRow->orderSRC;
-		$this->blnIsDownloads = ($objRow->type == 'downloads');
-		$this->blnIsGallery = ($objRow->type == 'gallery');
+			$this->orderSRC = $objRow->orderSRC;
+		}
+
+		$this->blnIsGallery = ($this->activeRecord->type == 'gallery');
+		$this->blnIsDownloads = ($this->activeRecord->type == 'downloads');
 	}
 
 
@@ -113,18 +133,23 @@ class FileTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
+
 		// Store the orderSRC value
-		$this->Database->prepare("UPDATE {$this->strTable} SET orderSRC=? WHERE id=?")
-					   ->execute($this->Input->post($this->strOrderName), $this->Input->get('id'));
+		if ($this->strOrderField != '')
+		{
+			$this->Database->prepare("UPDATE {$this->strTable} SET {$this->strOrderField}=? WHERE id=?")
+						   ->execute($this->Input->post($this->strOrderName), $this->Input->get('id'));
+		}
 
 		// Return the value as usual
 		if (strpos($varInput, ',') === false)
 		{
-			return $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['multiple'] ? array(intval($varInput)) : intval($varInput);
+			return $this->blnIsMultiple ? array(intval($varInput)) : intval($varInput);
 		}
 		else
 		{
-			return array_map('intval', array_filter(explode(',', $varInput)));
+			$arrValue = array_map('intval', array_filter(explode(',', $varInput)));
+			return $this->blnIsMultiple ? $arrValue : $arrValue[0];
 		}
 	}
 
@@ -153,7 +178,7 @@ class FileTree extends \Widget
 				}
 
 				// Show files and folders
-				if (!$this->blnIsDownloads && !$this->blnIsGallery)
+				if (!$this->blnIsGallery && !$this->blnIsDownloads)
 				{
 					if ($objFiles->type == 'folder')
 					{
@@ -231,7 +256,7 @@ class FileTree extends \Widget
 			}
 
 			// Apply a custom sort order
-			if ($this->orderSRC != '')
+			if ($this->strOrderField != '' && $this->orderSRC != '')
 			{
 				$arrNew = array();
 				$arrOrder = array_map('intval', explode(',', $this->orderSRC));
@@ -258,10 +283,10 @@ class FileTree extends \Widget
 			}
 		}
 
-		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">
-  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->orderSRC.'">
+		$return = '<input type="hidden" name="'.$this->strName.'" id="ctrl_'.$this->strId.'" value="'.$strValues.'">' . (($this->strOrderField != '') ? '
+  <input type="hidden" name="'.$this->strOrderName.'" id="ctrl_'.$this->strOrderId.'" value="'.$this->orderSRC.'">' : '') . '
   <div class="selector_container" id="target_'.$this->strId.'">
-    <ul id="sort_'.$this->strId.'" class="sortable'.($this->blnIsGallery ? ' sgallery' : '').'">';
+    <ul id="sort_'.$this->strId.'" class="'.trim((($this->strOrderField != '') ? 'sortable ' : '').($this->blnIsGallery ? 'sgallery' : '')).'">';
 
 		foreach ($arrValues as $k=>$v)
 		{
@@ -269,8 +294,8 @@ class FileTree extends \Widget
 		}
 
 		$return .= '</ul>
-    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>
-    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>
+    <p><a href="contao/file.php?table='.$this->strTable.'&amp;field='.$this->strField.'&amp;id='.$this->Input->get('id').'&amp;value='.$strValues.'" class="tl_submit" onclick="Backend.getScrollOffset();Backend.openModalSelector({\'width\':765,\'title\':\''.$GLOBALS['TL_LANG']['MOD']['files'][0].'\',\'url\':this.href,\'id\':\''.$this->strId.'\'});return false">'.$GLOBALS['TL_LANG']['MSC']['changeSelection'].'</a></p>' . (($this->strOrderField != '') ? '
+    <script>Backend.makeMultiSrcSortable("sort_'.$this->strId.'", "ctrl_'.$this->strOrderId.'");</script>' : '') . '
   </div>';
 
 		return $return;

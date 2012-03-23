@@ -178,7 +178,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['folders'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox'),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox'),
 			'sql'                     => "blob NULL"
 		),
 		'templates' => array
@@ -194,7 +194,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['screenshot'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'radio', 'files'=>true, 'filesOnly'=>true),
+			'eval'                    => array('fieldType'=>'radio', 'filesOnly'=>true),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'vars' => array
@@ -207,7 +207,7 @@ $GLOBALS['TL_DCA']['tl_theme'] = array
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_theme']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'cto', 'class'=>'mandatory')
+			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'cto', 'class'=>'mandatory')
 		)
 	)
 );

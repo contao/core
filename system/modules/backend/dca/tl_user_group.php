@@ -187,7 +187,7 @@ $GLOBALS['TL_DCA']['tl_user_group'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_user']['filemounts'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox'),
+			'eval'                    => array('multiple'=>true, 'fieldType'=>'checkbox'),
 			'sql'                     => "blob NULL"
 		),
 		'fop' => array

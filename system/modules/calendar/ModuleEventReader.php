@@ -222,9 +222,22 @@ class ModuleEventReader extends \Events
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objEvent->addImage && is_file(TL_ROOT . '/' . $objEvent->singleSRC))
+		if ($objEvent->addImage && $objEvent->singleSRC != '')
 		{
-			$this->addImageToTemplate($objTemplate, $objEvent->row());
+			if (!is_numeric($objEvent->singleSRC))
+			{
+				$objTemplate->details = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objEvent->singleSRC = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $objEvent->row());
+				}
+			}
 		}
 
 		$objTemplate->enclosure = array();

@@ -46,6 +46,12 @@ class ContentImage extends \ContentElement
 {
 
 	/**
+	 * Files model
+	 * @var \Contao\FilesModel
+	 */
+	protected $objModel;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -58,7 +64,19 @@ class ContentImage extends \ContentElement
 	 */
 	public function generate()
 	{
-		if (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->singleSRC == '')
+		{
+			return '';
+		}
+
+		if (!is_numeric($this->singleSRC))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+		
+		$this->objModel = \FilesModel::findByPk($this->singleSRC);
+
+		if ($this->objModel === null || !is_file(TL_ROOT . '/' . $this->objModel->path))
 		{
 			return '';
 		}
@@ -73,6 +91,7 @@ class ContentImage extends \ContentElement
 	 */
 	protected function compile()
 	{
+		$this->singleSRC = $this->objModel->path;
 		$this->addImageToTemplate($this->Template, $this->arrData);
 	}
 }

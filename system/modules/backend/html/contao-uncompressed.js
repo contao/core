@@ -796,7 +796,8 @@ var Backend =
 		});
 		M.addButton(Contao.lang.apply, 'btn primary', function() {
 			var val = [], tls = [];
-			var inp = window.frames['pages_frame'].document.getElementById(opt.id+'_parent').getElementsByTagName('input');
+            var par = opt.id.replace(/_[0-9]+$/, '') + '_parent'; // Strip the "edit multiple" suffixes
+			var inp = window.frames['pages_frame'].document.getElementById(par).getElementsByTagName('input');
 			for (var i=0; i<inp.length; i++) {
 				if (!inp[i].checked || inp[i].id.match(/^check_all_/)) continue;
                 if (!inp[i].id.match(/^reset_/)) {
@@ -806,7 +807,7 @@ var Backend =
                 }
 			}
 			if (opt.tag) {
-				$(opt.tag).value = '{{link::' + val.join(',') + '}}';
+				$(opt.tag).value = '{{link_url::' + val.join(',') + '}}';
 				opt.self.set('href', opt.self.get('href').replace(/&value=[^&]*/, '&value='+val.join(',')));
 			} else {
 				$('ctrl_'+opt.id).value = val.join(',');

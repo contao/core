@@ -134,25 +134,37 @@ class ModuleFaqReader extends \Module
 
 		$this->import('String');
 		$this->Template->question = $objFaq->question;
-		$this->Template->answer = $objFaq->answer;
 
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->Template->answer = $this->String->toXhtml($this->Template->answer);
+			$objFaq->answer = $this->String->toXhtml($objFaq->answer);
 		}
 		else
 		{
-			$this->Template->answer = $this->String->toHtml5($this->Template->answer);
+			$objFaq->answer = $this->String->toHtml5($objFaq->answer);
 		}
 
-		$this->Template->answer = $this->String->encodeEmail($this->Template->answer);
+		$this->Template->answer = $this->String->encodeEmail($objFaq->answer);
 		$this->Template->addImage = false;
 
 		// Add image
-		if ($objFaq->addImage && is_file(TL_ROOT . '/' . $objFaq->singleSRC))
+		if ($objFaq->addImage && $objFaq->singleSRC != '')
 		{
-			$this->addImageToTemplate($this->Template, $objFaq->row());
+			if (!is_numeric($objFaq->singleSRC))
+			{
+				$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objFaq->singleSRC = $objModel->path;
+					$this->addImageToTemplate($this->Template, $objFaq->row());
+				}
+			}
 		}
 
 		$this->Template->enclosure = array();

@@ -97,27 +97,38 @@ class ContentAccordion extends \ContentElement
 		else
 		{
 			global $objPage;
-
 			$this->import('String');
-			$this->Template->text = $this->text;
 
 			// Clean RTE output
 			if ($objPage->outputFormat == 'xhtml')
 			{
-				$this->Template->text = $this->String->toXhtml($this->Template->text);
+				$this->text = $this->String->toXhtml($this->text);
 			}
 			else
 			{
-				$this->Template->text = $this->String->toHtml5($this->Template->text);
+				$this->text = $this->String->toHtml5($this->text);
 			}
 
-			$this->Template->text = $this->String->encodeEmail($this->Template->text);
+			$this->Template->text = $this->String->encodeEmail($this->text);
 			$this->Template->addImage = false;
 
-			// Add image
-			if ($this->addImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
+			// Add an image
+			if ($this->addImage && $this->singleSRC != '')
 			{
-				$this->addImageToTemplate($this->Template, $this->arrData);
+				if (!is_numeric($this->singleSRC))
+				{
+					$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+				}
+				else
+				{
+					$objModel = \FilesModel::findByPk($this->singleSRC);
+
+					if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+					{
+						$this->singleSRC = $objModel->path;
+						$this->addImageToTemplate($this->Template, $this->arrData);
+					}
+				}
 			}
 		}
 

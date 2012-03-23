@@ -47,7 +47,7 @@ class ContentDownload extends \ContentElement
 
 	/**
 	 * File object
-	 * @var File
+	 * @var \Contao\File
 	 */
 	protected $objFile;
 
@@ -65,26 +65,51 @@ class ContentDownload extends \ContentElement
 	public function generate()
 	{
 		// Return if there is no file
-		if (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->singleSRC == '')
 		{
 			return '';
 		}
 
-		$objFile = new \File($this->singleSRC);
+		// Check for version 3 format
+		if (!is_numeric($this->singleSRC))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		$objModel = \FilesModel::findByPk($this->singleSRC);
+
+		if ($objModel === null)
+		{
+			return '';
+		}
+
+		$this->objFile = new \File($objModel->path);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Return if the file type is not allowed
-		if (!in_array($objFile->extension, $allowedDownload))
+		if (!in_array($this->objFile->extension, $allowedDownload))
 		{
 			return '';
 		}
 
-		$this->objFile = $objFile;
+		$file = $this->Input->get('file', true);
 
 		// Send the file to the browser
-		if (strlen($this->Input->get('file', true)) && $this->Input->get('file', true) == $this->singleSRC)
+		if ($file != '')
 		{
-			$this->sendFileToBrowser($this->Input->get('file', true));
+			if ($file == $this->objFile->value)
+			{
+				$this->sendFileToBrowser($file);
+			}
+
+			// Do not index or cache the page
+			global $objPage;
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
+			// Send a 404 header
+			header('HTTP/1.1 404 Not Found');
+			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
 		}
 
 		return parent::generate();
@@ -97,14 +122,14 @@ class ContentDownload extends \ContentElement
 	 */
 	protected function compile()
 	{
-		if (!strlen($this->linkTitle))
+		if ($this->linkTitle == '')
 		{
 			$this->linkTitle = $this->objFile->basename;
 		}
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
+		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->objFile->path);
 		$this->Template->filesize = $this->getReadableSize($this->objFile->filesize, 1);
 		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
 		$this->Template->mime = $this->objFile->mime;

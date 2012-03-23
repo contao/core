@@ -259,7 +259,10 @@ class FileSelector extends \Widget
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
-		$objFile = $this->Database->prepare("SELECT id, type, name, path FROM tl_files WHERE id=?")
+		$strWhere = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? "" : " AND type='folder'";
+
+		// Get the current element
+		$objFile = $this->Database->prepare("SELECT id, type, name, path FROM tl_files WHERE id=?$strWhere")
 								  ->limit(1)
 								  ->execute($id);
 
@@ -276,7 +279,7 @@ class FileSelector extends \Widget
 		// Check whether there are child records
 		if (!$blnNoRecursion)
 		{
-			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
+			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?$strWhere ORDER BY type='file', name")
 									   ->execute($id);
 
 			if ($objNodes->numRows)
@@ -338,16 +341,19 @@ class FileSelector extends \Widget
 		$return .= $this->generateImage($image, '', $folderAttribute).' <label title="'.specialchars($objFile->path).'" for="'.$this->strName.'_'.$id.'">'.(($objFile->type == 'folder') ? '<strong>' : '').$objFile->name.(($objFile->type == 'folder') ? '</strong>' : '').'</label>'.$thumbnail.'</div> <div class="tl_right">';
 
 		// Add checkbox or radio button
-		switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+		if ($objFile->type == 'file' || !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly'])
 		{
-			case 'checkbox':
-				$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.$id.'" class="tl_tree_checkbox" value="'.specialchars($id).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($id, $this->varValue).'>';
-				break;
+			switch ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['fieldType'])
+			{
+				case 'checkbox':
+					$return .= '<input type="checkbox" name="'.$this->strName.'[]" id="'.$this->strName.'_'.$id.'" class="tl_tree_checkbox" value="'.specialchars($id).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($id, $this->varValue).'>';
+					break;
 
-			default:
-			case 'radio':
-				$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.$id.'" class="tl_tree_radio" value="'.specialchars($id).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($id, $this->varValue).'>';
-				break;
+				default:
+				case 'radio':
+					$return .= '<input type="radio" name="'.$this->strName.'" id="'.$this->strName.'_'.$id.'" class="tl_tree_radio" value="'.specialchars($id).'" onfocus="Backend.getScrollOffset()"'.$this->optionChecked($id, $this->varValue).'>';
+					break;
+			}
 		}
 
 		$return .= '</div><div style="clear:both"></div></li>';

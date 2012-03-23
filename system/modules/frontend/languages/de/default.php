@@ -31,8 +31,9 @@
 /**
  * Error messages
  */
-$GLOBALS['TL_LANG']['ERR']['form']    = 'Das Formular konnte nicht gesendet werden';
-$GLOBALS['TL_LANG']['ERR']['captcha'] = 'Bitte beantworten Sie die Sicherheitsfrage!';
+$GLOBALS['TL_LANG']['ERR']['form']     = 'Das Formular konnte nicht gesendet werden';
+$GLOBALS['TL_LANG']['ERR']['captcha']  = 'Bitte beantworten Sie die Sicherheitsfrage!';
+$GLOBALS['TL_LANG']['ERR']['download'] = 'Die Datei "%s" ist nicht für den Download verfügbar!';
 
 
 /**

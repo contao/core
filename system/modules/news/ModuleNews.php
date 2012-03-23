@@ -166,20 +166,33 @@ abstract class ModuleNews extends \Module
 		$objTemplate->addImage = false;
 
 		// Add an image
-		if ($objArticle->addImage && is_file(TL_ROOT . '/' . $objArticle->singleSRC))
+		if ($objArticle->addImage && $objArticle->singleSRC != '')
 		{
-			// Override the default image size
-			if ($this->imgSize != '')
+			if (!is_numeric($objArticle->singleSRC))
 			{
-				$size = deserialize($this->imgSize);
+				$objTemplate->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objArticle->singleSRC);
 
-				if ($size[0] > 0 || $size[1] > 0)
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
 				{
-					$objArticle->size = $this->imgSize;
+					// Override the default image size
+					if ($this->imgSize != '')
+					{
+						$size = deserialize($this->imgSize);
+
+						if ($size[0] > 0 || $size[1] > 0)
+						{
+							$objArticle->size = $this->imgSize;
+						}
+					}
+
+					$objArticle->singleSRC = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $objArticle->row());
 				}
 			}
-
-			$this->addImageToTemplate($objTemplate, $objArticle->row());
 		}
 
 		$objTemplate->enclosure = array();

@@ -208,7 +208,7 @@ $GLOBALS['TL_DCA']['tl_newsletter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter']['files'],
 			'exclude'                 => true,
 			'inputType'               => 'fileTree',
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'mandatory'=>true),
+			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'mandatory'=>true),
 			'sql'                     => "blob NULL"
 		),
 		'template' => array

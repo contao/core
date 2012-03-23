@@ -512,6 +512,7 @@ abstract class Frontend extends \Controller
 	 * @param string
 	 * @param boolean
 	 * @return void
+	 * @deprecated
 	 */
 	protected function parseMetaFile($strPath, $blnIsFile=false)
 	{

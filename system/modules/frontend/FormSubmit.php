@@ -102,21 +102,33 @@ class FormSubmit extends \Widget
 	 */
 	public function generate()
 	{
-		if ($this->imageSubmit && is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->imageSubmit)
 		{
-			return sprintf('<input type="image" src="%s" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s%s',
-							$this->singleSRC,
-							$this->strId,
-							(strlen($this->strClass) ? ' ' . $this->strClass : ''),
-							specialchars($this->slabel),
-							specialchars($this->slabel),
-							$this->getAttributes(),
-							$this->strTagEnding);
+			// Check for version 3 format
+			if ($this->singleSRC != '' && !is_numeric($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
+			$objModel = \FilesModel::findByPk($this->singleSRC);
+
+			if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+			{
+				return sprintf('<input type="image" src="%s" id="ctrl_%s" class="submit%s" title="%s" alt="%s"%s%s',
+								$objModel->path,
+								$this->strId,
+								(($this->strClass != '') ? ' ' . $this->strClass : ''),
+								specialchars($this->slabel),
+								specialchars($this->slabel),
+								$this->getAttributes(),
+								$this->strTagEnding);
+			}
 		}
 
+		// Return the regular button 
 		return sprintf('<input type="submit" id="ctrl_%s" class="submit%s" value="%s"%s%s',
 						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						specialchars($this->slabel),
 						$this->getAttributes(),
 						$this->strTagEnding);

@@ -46,6 +46,12 @@ class ModuleRandomImage extends \Module
 {
 
 	/**
+	 * Files object
+	 * @var \Contao\FilesCollection
+	 */
+	protected $objFiles;
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -60,7 +66,21 @@ class ModuleRandomImage extends \Module
 	{
 		$this->multiSRC = deserialize($this->multiSRC);
 
-		if (!is_array($this->multiSRC))
+		if (!is_array($this->multiSRC) || empty($this->multiSRC))
+		{
+			return '';
+		}
+
+		// Check for version 3 format
+		if (!is_numeric($this->multiSRC[0]))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		// Get the file entries from the database
+		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+
+		if ($this->objFiles === null)
 		{
 			return '';
 		}
@@ -75,86 +95,116 @@ class ModuleRandomImage extends \Module
 	 */
 	protected function compile()
 	{
-		$images = array();
+		global $objPage;
 
-		foreach ($this->multiSRC as $file)
+		$images = array();
+		$objFiles = $this->objFiles;
+
+		// Get all images
+		while ($objFiles->next())
 		{
-			if (strncmp($file, '.', 1) === 0)
+			// Continue if the files has been processed or does not exist
+			if (isset($images[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
 			}
 
-			// Directory
-			if (is_dir(TL_ROOT . '/' . $file))
+			// Single files
+			if ($objFiles->type == 'file')
 			{
-				$subfiles = scan(TL_ROOT . '/' . $file);
-				$this->parseMetaFile($file);
+				$objFile = new \File($objFiles->path);
 
-				foreach ($subfiles as $subfile)
+				if (!$objFile->isGdImage)
 				{
-					if (strncmp($subfile, '.', 1) === 0 || is_dir(TL_ROOT . '/' . $file . '/' . $subfile))
+					continue;
+				}
+
+				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
+
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
+				{
+					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+				}
+
+				// Add the image
+				$images[$objFiles->path] = array
+				(
+					'id'        => $objFiles->id,
+					'name'      => $objFile->basename,
+					'singleSRC' => $objFiles->path,
+					'alt'       => $arrMeta['title'],
+					'imageUrl'  => $arrMeta['link'],
+					'caption'   => $arrMeta['caption']
+				);
+			}
+
+			// Folders
+			else
+			{
+				$objSubfiles = \FilesCollection::findBy('pid', $objFiles->id);
+
+				if ($objSubfiles === null)
+				{
+					continue;
+				}
+
+				while ($objSubfiles->next())
+				{
+					// Skip subfolders
+					if ($objSubfiles->type == 'folder')
 					{
 						continue;
 					}
 
-					$objFile = new\File($file . '/' . $subfile);
+					$objFile = new \File($objSubfiles->path);
 
-					if ($objFile->isGdImage)
+					if (!$objFile->isGdImage)
 					{
-						$images[] = $file . '/' . $subfile;
+						continue;
 					}
-				}
 
-				continue;
-			}
+					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
 
-			// File
-			if (is_file(TL_ROOT . '/' . $file))
-			{
-				$objFile = new \File($file);
-				$this->parseMetaFile(dirname($file), true);
+					// Use the file name as title if none is given
+					if ($arrMeta['title'] == '')
+					{
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					}
 
-				if ($objFile->isGdImage)
-				{
-					$images[] = $file;
+					// Add the image
+					$images[$objSubfiles->path] = array
+					(
+						'id'        => $objSubfiles->id,
+						'name'      => $objFile->basename,
+						'singleSRC' => $objSubfiles->path,
+						'alt'       => $arrMeta['title'],
+						'imageUrl'  => $arrMeta['link'],
+						'caption'   => $arrMeta['caption']
+					);
 				}
 			}
 		}
 
-		$images = array_unique($images);
+		$images = array_values($images);
 
-		if (!is_array($images) || empty($images))
+		if (empty($images))
 		{
 			return;
 		}
 
 		$i = mt_rand(0, (count($images)-1));
 
-		$objImage = new \File($images[$i]);
-		$arrMeta = $this->arrMeta[$objImage->basename];
-
-		if ($arrMeta[0] == '')
-		{
-			$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objImage->filename));
-		}
-
-		$arrImage = array();
-
+		$arrImage = $images[$i];
 		$arrImage['size'] = $this->imgSize;
-		$arrImage['singleSRC'] = $objImage->value;
-		$arrImage['alt'] = specialchars($arrMeta[0]);
-		$arrImage['imageUrl'] = $arrMeta[1];
-		$arrImage['fullsize'] = $this->fullsize;
 
-		// Image caption
-		if ($this->useCaption)
+		if (!$this->useCaption)
 		{
-			if ($arrMeta[2] == '')
-			{
-				$arrMeta[2] = $arrMeta[0];
-			}
-
-			$arrImage['caption'] = $arrMeta[2];
+			$arrImage['caption'] = null;
+		}
+		elseif ($arrImage['caption'] == '')
+		{
+			$arrImage['caption'] = $arrImage['title'];
 		}
 
 		$this->addImageToTemplate($this->Template, $arrImage);

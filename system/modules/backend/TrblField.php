@@ -130,6 +130,11 @@ class TrblField extends \Widget
 		$arrFields = array();
 		$arrKeys = array('top', 'right', 'bottom', 'left');
 
+		if (!is_array($this->varValue))
+		{
+			$this->varValue = array();
+		}
+
 		foreach ($arrKeys as $strKey)
 		{
 			$arrFields[] = sprintf('<input type="text" name="%s[%s]" id="ctrl_%s" class="tl_text_trbl trbl_%s%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
@@ -137,7 +142,7 @@ class TrblField extends \Widget
 									$strKey,
 									$this->strId.'_'.$strKey,
 									$strKey,
-									(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+									(($this->strClass != '') ? ' ' . $this->strClass : ''),
 									specialchars($this->varValue[$strKey]),
 									$this->getAttributes());
 		}
