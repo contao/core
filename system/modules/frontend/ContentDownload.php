@@ -46,12 +46,6 @@ class ContentDownload extends \ContentElement
 {
 
 	/**
-	 * File object
-	 * @var \Contao\File
-	 */
-	protected $objFile;
-
-	/**
 	 * Template
 	 * @var string
 	 */
@@ -76,18 +70,17 @@ class ContentDownload extends \ContentElement
 			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 		}
 
-		$objModel = \FilesModel::findByPk($this->singleSRC);
+		$objFile = \FilesModel::findByPk($this->singleSRC);
 
-		if ($objModel === null)
+		if ($objFile === null)
 		{
 			return '';
 		}
 
-		$this->objFile = new \File($objModel->path);
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Return if the file type is not allowed
-		if (!in_array($this->objFile->extension, $allowedDownload))
+		if (!in_array($objFile->extension, $allowedDownload))
 		{
 			return '';
 		}
@@ -97,7 +90,7 @@ class ContentDownload extends \ContentElement
 		// Send the file to the browser
 		if ($file != '')
 		{
-			if ($file == $this->objFile->value)
+			if ($file == $objFile->path)
 			{
 				$this->sendFileToBrowser($file);
 			}
@@ -112,6 +105,7 @@ class ContentDownload extends \ContentElement
 			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
 		}
 
+		$this->singleSRC = $objFile->path;
 		return parent::generate();
 	}
 
@@ -122,18 +116,20 @@ class ContentDownload extends \ContentElement
 	 */
 	protected function compile()
 	{
+		$objFile = new \File($this->singleSRC);
+
 		if ($this->linkTitle == '')
 		{
-			$this->linkTitle = $this->objFile->basename;
+			$this->linkTitle = $objFile->basename;
 		}
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->objFile->path);
-		$this->Template->filesize = $this->getReadableSize($this->objFile->filesize, 1);
-		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
-		$this->Template->mime = $this->objFile->mime;
-		$this->Template->extension = $this->objFile->extension;
-		$this->Template->path = $this->objFile->dirname;
+		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
+		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
+		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+		$this->Template->mime = $objFile->mime;
+		$this->Template->extension = $objFile->extension;
+		$this->Template->path = $objFile->dirname;
 	}
 }

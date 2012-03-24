@@ -46,12 +46,6 @@ class ModuleFlash extends \Module
 {
 
 	/**
-	 * Files model
-	 * @var \Contao\FilesModel
-	 */
-	protected $objModel;
-
-	/**
 	 * Template
 	 * @var string
 	 */
@@ -64,6 +58,11 @@ class ModuleFlash extends \Module
 	 */
 	public function generate()
 	{
+		if (TL_MODE == 'BE')
+		{
+			return $this->altContent;
+		}
+
 		if ($this->source != 'external')
 		{
 			if ($this->singleSRC == '')
@@ -76,17 +75,14 @@ class ModuleFlash extends \Module
 				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
 			}
 
-			$this->objModel = \FilesModel::findByPk($this->singleSRC);
+			$objFile = \FilesModel::findByPk($this->singleSRC);
 
-			if ($this->objModel === null  || !is_file(TL_ROOT . '/' . $this->objModel->path))
+			if ($objFile === null  || !is_file(TL_ROOT . '/' . $objFile->path))
 			{
 				return '';
 			}
-		}
 
-		if (TL_MODE == 'BE')
-		{
-			return $this->altContent;
+			$this->singleSRC = $objFile->path;
 		}
 
 		return parent::generate();
@@ -101,8 +97,8 @@ class ModuleFlash extends \Module
 	{
 		$this->import('String');
 
-		$this->Template->src = $this->objModel->path;
-		$this->Template->href = ($this->source == 'external') ? $this->url : $this->objModel->path;
+		$this->Template->src = $this->singleSRC;
+		$this->Template->href = ($this->source == 'external') ? $this->url : $this->singleSRC;
 		$this->Template->alt = $this->altContent;
 		$this->Template->var = 'swf' . $this->id;
 		$this->Template->transparent = $this->transparent ? true : false;

@@ -346,8 +346,8 @@ class Automator extends \Backend
 
 			$objFile = new \File($strFile);
 
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'file', ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->hash)
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
+								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
 								 ->insertId;
 
 			$arrMapper[basename($strFile)] = $id;

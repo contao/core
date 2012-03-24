@@ -426,7 +426,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		$this->Files->rename($this->intId, $destination);
 
 		// Find the corresponding DB entries
-		$objFile = \FilesModel::findByPath( $this->intId);
+		$objFile = \FilesModel::findByPath($this->intId);
 
 		// Set the parent ID
 		if ($strFolder == $GLOBALS['TL_CONFIG']['uploadPath'])
@@ -435,7 +435,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 		}
 		else
 		{
-			$objFolder = \FilesModel::findByPath( $strFolder);
+			$objFolder = \FilesModel::findByPath($strFolder);
 			$objFile->pid = $objFolder->id;
 		}
 
@@ -546,7 +546,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFolder = \FilesModel::findByPath( $source);
+			$objFolder = \FilesModel::findByPath($source);
 			$objNewFolder = clone $objFolder;
 
 			// Set the parent ID
@@ -556,7 +556,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findByPath( $strFolder);
+				$objFolder = \FilesModel::findByPath($strFolder);
 				$objNewFolder->pid = $objFolder->id;
 			}
 
@@ -579,7 +579,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->copy($source . '/' . $file, $destination . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findByPath( $source . '/' . $file);
+					$objFile = \FilesModel::findByPath($source . '/' . $file);
 					$objNewFile = clone $objFile;
 
 					// Update the database
@@ -608,7 +608,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$strFolder = dirname($destination);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath( $source);
+			$objFile = \FilesModel::findByPath($source);
 			$objNewFile = clone $objFile;
 
 			// Set the parent ID
@@ -618,7 +618,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findByPath( $strFolder);
+				$objFolder = \FilesModel::findByPath($strFolder);
 				$objNewFile->pid = $objFolder->id;
 			}
 
@@ -727,7 +727,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 					$this->Files->delete($source . '/' . $file);
 
 					// Find the corresponding DB entries
-					$objFile = \FilesModel::findByPath( $source . '/' . $file);
+					$objFile = \FilesModel::findByPath($source . '/' . $file);
 					$objFile->delete();
 				}
 			}
@@ -735,7 +735,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->rmdir($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath( $source);
+			$objFile = \FilesModel::findByPath($source);
 			$objFile->delete();
 		}
 
@@ -745,7 +745,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$this->Files->delete($source);
 
 			// Find the corresponding DB entries
-			$objFile = \FilesModel::findByPath( $source);
+			$objFile = \FilesModel::findByPath($source);
 			$objFile->delete();
 		}
 
@@ -841,7 +841,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			}
 			else
 			{
-				$objFolder = \FilesModel::findByPath( $strFolder);
+				$objFolder = \FilesModel::findByPath($strFolder);
 				$pid = $objFolder->id;
 			}
 
@@ -964,7 +964,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 			$blnIsFirst = true;
 
 			// Get the DB entry
-			$objFile = \FilesModel::findByPath( $this->intId);
+			$objFile = \FilesModel::findByPath($this->intId);
 			$this->objActiveRecord = $objFile;
 
 			foreach ($boxes as $v)
@@ -1365,7 +1365,7 @@ window.addEvent(\'domready\', function() {
 				$objFile->close();
 
 				// Update the md5 hash
-				$objMeta = \FilesModel::findByPath( $objFile->value);
+				$objMeta = \FilesModel::findByPath($objFile->value);
 				$objMeta->hash = md5_file(TL_ROOT . '/' . $objFile->value);
 				$objMeta->save();
 			}
@@ -1552,7 +1552,7 @@ window.addEvent(\'domready\', function() {
 			}
 			else
 			{
-				$objFolder = \FilesModel::findByPath( $this->strPath);
+				$objFolder = \FilesModel::findByPath($this->strPath);
 				$pid = $objFolder->id;
 			}
 
@@ -1575,7 +1575,7 @@ window.addEvent(\'domready\', function() {
 			else
 			{
 				// Find the corresponding DB entry
-				$objFile = \FilesModel::findByPath( $this->strPath . '/' . $this->varValue . $this->strExtension);
+				$objFile = \FilesModel::findByPath($this->strPath . '/' . $this->varValue . $this->strExtension);
 
 				// Update the data
 				$objFile->pid  = $pid;
@@ -1739,11 +1739,11 @@ window.addEvent(\'domready\', function() {
 					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFolder->path, $objFound->path) . '</p>';
 
 					// Update the original entry
-					$objFolder->pid = $objFound->pid;
+					$objFolder->pid    = $objFound->pid;
 					$objFolder->tstamp = $objFound->tstamp;
-					$objFolder->name = $objFound->name;
-					$objFolder->type = $objFound->type;
-					$objFolder->path = $objFound->path;
+					$objFolder->name   = $objFound->name;
+					$objFolder->type   = $objFound->type;
+					$objFolder->path   = $objFound->path;
 					$objFolder->save();
 
 					// Update the PID of the child records
@@ -1779,11 +1779,11 @@ window.addEvent(\'domready\', function() {
 					$this->arrMessages[] = '<p class="tl_info">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFound'], $objFile->path, $objFound->path) . '</p>';
 
 					// Update the original entry
-					$objFile->pid = $objFound->pid;
+					$objFile->pid    = $objFound->pid;
 					$objFile->tstamp = $objFound->tstamp;
-					$objFile->name = $objFound->name;
-					$objFile->type = $objFound->type;
-					$objFile->path = $objFound->path;
+					$objFile->name   = $objFound->name;
+					$objFile->type   = $objFound->type;
+					$objFile->path   = $objFound->path;
 					$objFile->save();
 
 					// Delete the newer (duplicate) entry
@@ -1859,19 +1859,19 @@ window.addEvent(\'domready\', function() {
 		foreach ($arrFolders as $strFolder)
 		{
 			$objFolder = new \Folder($strFolder);
-			$objModel = \FilesModel::findByPath( $strFolder);
+			$objModel = \FilesModel::findByPath($strFolder);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)
 			{
 				$objModel = new \FilesModel();
-				$objModel->pid = $intPid;
+				$objModel->pid    = $intPid;
 				$objModel->tstamp = time();
-				$objModel->name = basename($strFolder);
-				$objModel->type = 'folder';
-				$objModel->path = $strFolder;
-				$objModel->hash = $objFolder->hash;
-				$objModel->found = 1;
+				$objModel->name   = basename($strFolder);
+				$objModel->type   = 'folder';
+				$objModel->path   = $strFolder;
+				$objModel->hash   = $objFolder->hash;
+				$objModel->found  = 1;
 				$objModel->save();
 
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFolderC'], $strFolder) . '</p>';
@@ -1898,19 +1898,20 @@ window.addEvent(\'domready\', function() {
 		foreach ($arrFiles as $strFile)
 		{
 			$objFile = new \File($strFile);
-			$objModel = \FilesModel::findByPath( $strFile);
+			$objModel = \FilesModel::findByPath($strFile);
 
 			// Create the entry if it does not yet exist
 			if ($objModel === null)
 			{
 				$objModel = new \FilesModel();
-				$objModel->pid = $intPid;
-				$objModel->tstamp = time();
-				$objModel->name = basename($strFile);
-				$objModel->type = 'file';
-				$objModel->path = $strFile;
-				$objModel->hash = $objFile->hash;
-				$objModel->found = 1;
+				$objModel->pid       = $intPid;
+				$objModel->tstamp    = time();
+				$objModel->name      = basename($strFile);
+				$objModel->type      = 'file';
+				$objModel->path      = $strFile;
+				$objModel->extension = $objFile->extension;
+				$objModel->hash      = $objFile->hash;
+				$objModel->found     = 1;
 				$objModel->save();
 
 				$this->arrMessages[] = '<p class="tl_new">' . sprintf($GLOBALS['TL_LANG']['tl_files']['syncFileC'], $strFile) . '</p>';

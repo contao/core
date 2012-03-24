@@ -3415,12 +3415,12 @@ abstract class Controller extends \System
 		{
 			if ($objFiles->type == 'file')
 			{				
-				$objFile = new \File($objFiles->path);
-
-				if (!in_array($objFile->extension, $allowedDownload))
+				if (!in_array($objFiles->extension, $allowedDownload))
 				{
 					continue;
 				}
+
+				$objFile = new \File($objFiles->path);
 
 				$arrEnclosures[] = array
 				(

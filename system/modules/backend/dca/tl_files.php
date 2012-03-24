@@ -49,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			(
 				'id' => 'primary',
 				'pid' => 'index',
-				'path' => 'index'
+				'path' => 'index',
+				'extension' => 'index'
 			)
 		)
 	),
@@ -157,6 +158,10 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		'path' => array
 		(
 			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'extension' => array
+		(
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'hash' => array
 		(
