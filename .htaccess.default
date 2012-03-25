@@ -114,7 +114,7 @@ FileETag None
   # Change the RewriteBase if your Contao installation is in a subdirectoy and
   # the rewrite rules are not working properly. Usage examples:
   #
-  #   RewriteBase /contao-2.11.0
+  #   RewriteBase /contao-3.0.0
   #   RewriteBase /path/to/contao
   #
   # Depending on your server, you might have to remove the line entirely. 

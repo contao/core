@@ -290,9 +290,6 @@ $GLOBALS['TL_CONFIG']['useCE']      = true;
  * 
  * Please enter a comma separated list of allowed image types, editable files
  * and all all file types that are allowed to be downloaded.
- * 
- * The default install tool password is "contao". Please make sure to change
- * this password during the installation process.
  */
 $GLOBALS['TL_CONFIG']['resultsPerPage']       = 30;
 $GLOBALS['TL_CONFIG']['maxResultsPerPage']    = 500;
