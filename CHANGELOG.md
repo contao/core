@@ -1,6 +1,13 @@
 Contao Open Source CMS Changelog
 ================================
 
+Version 2.11.3 (XXXX-XX-XX)
+---------------------------
+
+### Fixed
+Correctly align the versions drop-down menu (see #4083).
+
+
 Version 2.11.2 (2012-03-14)
 ---------------------------
 
