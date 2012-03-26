@@ -44,7 +44,7 @@ var Stylect =
 			if (el.hasClass('tl_chosen')) return;
 
 			// Get the selected option label
-			if ((active = el.getElement('option[selected]')) != null) {
+			if ((active = el.getElement('option[value="' + el.value + '"]')) != null) {
 				var label = active.get('html');
 			} else {
 				var label = el.getElement('option').get('html');
@@ -72,7 +72,7 @@ var Stylect =
 			el.addEvent('change', function() {
 				var option = el.getElement('option[value="' + el.value + '"]');
 				div.getElement('span').set('html', option.get('html'));
-			}).addEvent('keydown', function(event) {
+            }).addEvent('keydown', function(event) {
 				setTimeout(function() {	el.fireEvent('change'); }, 100);
 			}).addEvent('focus', function() {
 				div.addClass('focused');

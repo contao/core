@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+The stylect menus in the module wizard are now duplicated correctly (see #4079).
+
+### Fixed
 Define `BE|FE_USER_LOGGED_IN` in the cron script (see #4099).
 
 ### Fixed
