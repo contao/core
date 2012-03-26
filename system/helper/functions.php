@@ -293,7 +293,7 @@ function deserialize($varValue, $blnForceArray=false)
 		return $blnForceArray ? array() : '';
 	}
 
-	$varUnserialized = unserialize($varValue);
+	$varUnserialized = @unserialize($varValue);
 
 	if (is_array($varUnserialized))
 	{
