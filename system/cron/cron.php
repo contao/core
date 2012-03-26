@@ -52,6 +52,10 @@ class CronJob extends Frontend
 	public function __construct()
 	{
 		parent::__construct();
+
+		// See #4099
+		define('BE_USER_LOGGED_IN', false);
+		define('FE_USER_LOGGED_IN', false);
 	}
 
 
