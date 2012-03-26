@@ -77,6 +77,7 @@ class Comments extends Frontend
 				// Send a 404 header
 				header('HTTP/1.1 404 Not Found');
 				$objTemplate->allowComments = false;
+				$objTemplate->comments = array(); // see #4064
 				return;
 			}
 
@@ -173,6 +174,7 @@ class Comments extends Frontend
 		if ($objConfig->requireLogin && !BE_USER_LOGGED_IN && !FE_USER_LOGGED_IN)
 		{
 			$objTemplate->requireLogin = true;
+			$objTemplate->comments = array(); // see #4064
 			return;
 		}
 
