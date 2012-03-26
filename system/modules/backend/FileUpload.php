@@ -283,28 +283,30 @@ class FileUpload extends Backend
 			return false;
 		}
 
-		$blnResized = false;
-
-		// The image exceeds the maximum image height
-		if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
-		{
-			$blnResized = true;
-			$this->resizeImage($strImage, 0, $GLOBALS['TL_CONFIG']['imageHeight']);
-
-			// Recalculate the image size
-			$arrImageSize = @getimagesize(TL_ROOT . '/' . $strImage);
-		}
+		$blnResize = false;
 
 		// The image exceeds the maximum image width
 		if ($arrImageSize[0] > $GLOBALS['TL_CONFIG']['imageWidth'])
 		{
-			$blnResized = true;
-			$this->resizeImage($strImage, $GLOBALS['TL_CONFIG']['imageWidth'], 0);
+			$blnResize = true;
+			$intWidth = $GLOBALS['TL_CONFIG']['imageWidth'];
+			$intHeight = ceil($GLOBALS['TL_CONFIG']['imageWidth'] * $arrImageSize[1] / $arrImageSize[0]);
+			$arrImageSize = array($intWidth, $intHeight);
+		}
+
+		// The image exceeds the maximum image height
+		if ($arrImageSize[1] > $GLOBALS['TL_CONFIG']['imageHeight'])
+		{
+			$blnResize = true;
+			$intWidth = ceil($GLOBALS['TL_CONFIG']['imageHeight'] * $arrImageSize[0] / $arrImageSize[1]);
+			$intHeight = $GLOBALS['TL_CONFIG']['imageHeight'];
+			$arrImageSize = array($intWidth, $intHeight);
 		}
 
 		// Resized successfully
-		if ($blnResized)
+		if ($blnResize)
 		{
+			$this->resizeImage($strImage, $arrImageSize[0], $arrImageSize[1]);
 			$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['MSC']['fileResized'], $strName));
 			$this->log('File "'.$strName.'" uploaded successfully and was scaled down to the maximum dimensions', 'Uploader resizeUploadedImage()', TL_FILES);
 			$this->blnHasResized = true;

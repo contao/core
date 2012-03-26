@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Uploaded files should now be resized correctly (see #3806).
+
+### Fixed
 Fixed the "setCookie" hook (see #4116).
 
 ### Fixed
