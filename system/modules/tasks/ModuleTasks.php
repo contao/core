@@ -179,7 +179,7 @@ class ModuleTasks extends \BackendModule
 				'title' => $objTask->title,
 				'progress' => $objTask->progress,
 				'deadline' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objTask->deadline),
-				'status' => (($GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] != '') ? $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] : $objTask->status),
+				'status' => $GLOBALS['TL_LANG']['tl_task_status'][$objTask->status] ?: $objTask->status,
 				'creator' => sprintf($GLOBALS['TL_LANG']['tl_task']['createdBy'], $objTask->creator),
 				'editHref' => $this->addToUrl('act=edit&amp;id=' . $objTask->id),
 				'editTitle' => sprintf($GLOBALS['TL_LANG']['tl_task']['edit'][1], $objTask->id),
@@ -329,7 +329,7 @@ class ModuleTasks extends \BackendModule
 			(
 				'creator' => $objTask->creator,
 				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objStatus->tstamp),
-				'status' => (($GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] != '') ? $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] : $objStatus->status),
+				'status' => $GLOBALS['TL_LANG']['tl_task_status'][$objStatus->status] ?: $objStatus->status,
 				'comment' => (($objStatus->comment != '') ? nl2br_html5($objStatus->comment) : '&nbsp;'),
 				'assignedTo' => $objStatus->assignedTo,
 				'progress' => $objStatus->progress,

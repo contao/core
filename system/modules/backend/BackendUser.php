@@ -132,15 +132,15 @@ class BackendUser extends \User
 				break;
 
 			case 'pagemounts':
-				return is_array($this->arrData['pagemounts']) ? $this->arrData['pagemounts'] : (strlen($this->arrData['pagemounts']) ? array($this->arrData['pagemounts']) : false);
+				return is_array($this->arrData['pagemounts']) ? $this->arrData['pagemounts'] : (($this->arrData['pagemounts'] != '') ? array($this->arrData['pagemounts']) : false);
 				break;
 
 			case 'filemounts':
-				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (strlen($this->arrData['filemounts']) ? array($this->arrData['filemounts']) : false);
+				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (($this->arrData['filemounts'] != '') ? array($this->arrData['filemounts']) : false);
 				break;
 
 			case 'fop':
-				return is_array($this->arrData['fop']) ? $this->arrData['fop'] : (strlen($this->arrData['fop']) ? array($this->arrData['fop']) : false);
+				return is_array($this->arrData['fop']) ? $this->arrData['fop'] : (($this->arrData['fop'] != '') ? array($this->arrData['fop']) : false);
 				break;
 
 			case 'alexf':
@@ -355,7 +355,7 @@ class BackendUser extends \User
 
 					if (is_array($value))
 					{
-						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (strlen($this->$field) ? array($this->$field) : array())), $value);
+						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (($this->$field != '') ? array($this->$field) : array())), $value);
 						$this->$field = array_unique($this->$field);
 					}
 				}

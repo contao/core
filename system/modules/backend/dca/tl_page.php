@@ -674,8 +674,8 @@ class tl_page extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $this->User->groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = $GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id;
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = $GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0];
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
@@ -759,7 +759,7 @@ class tl_page extends Backend
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
 			$permission = 0;
-			$cid = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
+			$cid = CURRENT_ID ?: $this->Input->get('id');
 			$ids = ($cid != '') ? array($cid) : array();
 
 			// Set permission
@@ -1071,7 +1071,7 @@ class tl_page extends Backend
 			while ($objAlias->next())
 			{
 				$objCurrentPage = $this->getPageDetails($objAlias);
-				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
+				$domain = $objCurrentPage->domain ?: '*';
 				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
 				// Store the current page's data

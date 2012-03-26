@@ -124,13 +124,13 @@ class ModuleArticleList extends \Module
 			}
 
 			$cssID = deserialize($objArticles->cssID, true);
-			$alias = strlen($objArticles->alias) ? $objArticles->alias : $objArticles->title;
+			$alias = $objArticles->alias ?: $objArticles->title;
 
 			$articles[] = array
 			(
 				'link' => $objArticles->title,
 				'title' => specialchars($objArticles->title),
-				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($alias),
+				'id' => $cssID[0] ?: standardize($alias),
 				'articleId' => $objArticles->id
 			);
 		}

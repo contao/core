@@ -118,14 +118,14 @@ class ModuleQuicklink extends \Module
 			$items[] = array
 			(
 				'href' => $this->generateFrontendUrl($arrPage),
-				'title' => (strlen($arrPage['pageTitle']) ? specialchars($arrPage['pageTitle']) : specialchars($arrPage['title'])),
+				'title' => specialchars($arrPage['pageTitle'] ?: $arrPage['title']),
 				'link' => $arrPage['title']
 			);
 		}
 
 		$this->Template->items = $items;
 		$this->Template->request = ampersand($this->Environment->request, true);
-		$this->Template->title = strlen($this->customLabel) ? $this->customLabel :$GLOBALS['TL_LANG']['MSC']['quicklink'];
+		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicklink'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}
 }

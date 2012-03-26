@@ -212,7 +212,7 @@ class ModuleNewsMenu extends \ModuleNews
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
 	}
 
 
@@ -280,7 +280,7 @@ class ModuleNewsMenu extends \ModuleNews
 		$this->Template->days = $this->compileDays();
 		$this->Template->weeks = $this->compileWeeks($arrData, $strUrl);
 
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
 	}
 
 

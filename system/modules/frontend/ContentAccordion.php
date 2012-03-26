@@ -134,8 +134,8 @@ class ContentAccordion extends \ContentElement
 
 		$classes = deserialize($this->mooClasses);
 
-		$this->Template->toggler = strlen($classes[0]) ? $classes[0] : 'toggler';
-		$this->Template->accordion = strlen($classes[1]) ? $classes[1] : 'accordion';
+		$this->Template->toggler = $classes[0] ?: 'toggler';
+		$this->Template->accordion = $classes[1] ?: 'accordion';
 		$this->Template->headlineStyle = $this->mooStyle;
 		$this->Template->headline = $this->mooHeadline;
 	}

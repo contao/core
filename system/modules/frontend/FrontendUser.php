@@ -335,7 +335,7 @@ class FrontendUser extends \User
 		// Make sure that groups is an array
 		if (!is_array($this->groups))
 		{
-			$this->groups = strlen($this->groups) ? array($this->groups) : array();
+			$this->groups = ($this->groups != '') ? array($this->groups) : array();
 		}
 
 		// Skip inactive groups

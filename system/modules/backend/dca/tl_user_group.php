@@ -359,7 +359,7 @@ class tl_user_group extends Backend
 				{
 					if ($vv['exclude'] || $vv['orig_exclude'])
 					{
-						$arrReturn[$k][specialchars($k.'::'.$kk)] = (strlen($vv['label'][0]) ? $vv['label'][0] : $kk);
+						$arrReturn[$k][specialchars($k.'::'.$kk)] = $vv['label'][0] ?: $kk;
 					}
 				}
 			}

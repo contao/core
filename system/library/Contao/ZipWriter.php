@@ -140,7 +140,7 @@ class ZipWriter extends \System
 			throw new \Exception("File $strFile does not exist");
 		}
 
-		$this->addString(file_get_contents(TL_ROOT . '/' . $strFile), (($strName != '') ? $strName : $strFile), filemtime(TL_ROOT . '/' . $strFile));
+		$this->addString(file_get_contents(TL_ROOT . '/' . $strFile), $strName ?: $strFile, filemtime(TL_ROOT . '/' . $strFile));
 	}
 
 

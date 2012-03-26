@@ -225,7 +225,7 @@ class Form extends \Hybrid
 		if ($doNotSubmit)
 		{
 			global $objPage;
-			$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
+			$title = $objPage->pageTitle ?: $objPage->title;
 			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $title;
 			$_SESSION['FILES'] = array(); // see #3007
 		}

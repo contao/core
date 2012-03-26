@@ -64,7 +64,7 @@ class PageRegular extends \Frontend
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
-		$objPage->template = ($objLayout->template != '') ? $objLayout->template : 'fe_page';
+		$objPage->template = $objLayout->template ?: 'fe_page';
 		$objPage->templateGroup = $objLayout->pid['templates'];
 
 		// Store the output format
@@ -139,10 +139,10 @@ class PageRegular extends \Frontend
 
 		// Set the page title and description AFTER the modules have been generated
 		$this->Template->mainTitle = $objPage->rootTitle;
-		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
+		$this->Template->pageTitle = $objPage->pageTitle ?: $objPage->title;
 
 		// Meta robots tag
-		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
+		$this->Template->robots = $objPage->robots ?: 'index,follow';
 
 		// Remove shy-entities (see #2709)
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
@@ -442,7 +442,7 @@ class PageRegular extends \Frontend
 				}
 				else
 				{
-					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -523,7 +523,7 @@ class PageRegular extends \Frontend
 				}
 				else
 				{
-					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -555,7 +555,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
+					$base = $objFeeds->feedBase ?: $this->Environment->base;
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}
@@ -570,7 +570,7 @@ class PageRegular extends \Frontend
 			{
 				while($objFeeds->next())
 				{
-					$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
+					$base = $objFeeds->feedBase ?: $this->Environment->base;
 					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
 				}
 			}

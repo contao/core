@@ -79,7 +79,7 @@ class ModuleCustomnav extends \Module
 		}
 
 		$strBuffer = parent::generate();
-		return strlen($this->Template->items) ? $strBuffer : '';
+		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 
 
@@ -160,7 +160,7 @@ class ModuleCustomnav extends \Module
 				// Active page
 				if ($objPage->id == $arrPage['id'])
 				{
-					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''));
+					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
 
 					$row['isActive'] = true;
@@ -185,7 +185,7 @@ class ModuleCustomnav extends \Module
 				// Regular page
 				else
 				{
-					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : '') . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;

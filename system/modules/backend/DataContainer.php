@@ -529,9 +529,9 @@ class DataContainer extends \Backend
 		foreach ($GLOBALS['TL_DCA'][$strTable]['list']['operations'] as $k=>$v)
 		{
 			$v = is_array($v) ? $v : array($v);
-			$label = strlen($v['label'][0]) ? $v['label'][0] : $k;
-			$title = sprintf((strlen($v['label'][1]) ? $v['label'][1] : $k), $arrRow['id']);
-			$attributes = strlen($v['attributes']) ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
+			$label = $v['label'][0] ?: $k;
+			$title = sprintf($v['label'][1] ?: $k, $arrRow['id']);
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
 
 			// Call a custom function instead of using the default button
 			if (is_array($v['button_callback']))
@@ -554,11 +554,11 @@ class DataContainer extends \Backend
 
 			foreach ($arrDirections as $dir)
 			{
-				$label = strlen($GLOBALS['TL_LANG'][$strTable][$dir][0]) ? $GLOBALS['TL_LANG'][$strTable][$dir][0] : $dir;
-				$title = strlen($GLOBALS['TL_LANG'][$strTable][$dir][1]) ? $GLOBALS['TL_LANG'][$strTable][$dir][1] : $dir;
+				$label = $GLOBALS['TL_LANG'][$strTable][$dir][0] ?: $dir;
+				$title = $GLOBALS['TL_LANG'][$strTable][$dir][1] ?: $dir;
 
 				$label = $this->generateImage($dir.'.gif', $label);
-				$href = strlen($v['href']) ? $v['href'] : '&amp;act=move';
+				$href = $v['href'] ?: '&amp;act=move';
 
 				if ($dir == 'up')
 				{
@@ -593,7 +593,7 @@ class DataContainer extends \Backend
 			$v = is_array($v) ? $v : array($v);
 			$label = is_array($v['label']) ? $v['label'][0] : $v['label'];
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
-			$attributes = strlen($v['attributes']) ? ' ' . ltrim($v['attributes']) : '';
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim($v['attributes']) : '';
 
 			if ($label == '')
 			{

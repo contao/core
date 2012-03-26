@@ -67,7 +67,7 @@ class Calendar extends \Frontend
 			return;
 		}
 
-		$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+		$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 
 		// Delete XML file
 		if ($this->Input->get('act') == 'delete')
@@ -98,7 +98,7 @@ class Calendar extends \Frontend
 		{
 			while ($objCalendar->next())
 			{
-				$objCalendar->feedName = ($objCalendar->alias != '') ? $objCalendar->alias : 'calendar' . $objCalendar->id;
+				$objCalendar->feedName = $objCalendar->alias ?: 'calendar' . $objCalendar->id;
 				$this->generateFiles($objCalendar->row());
 				$this->log('Generated calendar feed "' . $objCalendar->feedName . '.xml"', 'Calendar generateFeeds()', TL_CRON);
 			}
@@ -121,7 +121,7 @@ class Calendar extends \Frontend
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = ($arrFeed['feedBase'] != '') ? $arrFeed['feedBase'] : $this->Environment->base;
+		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
 		$strFile = $arrFeed['feedName'];
 
 		$objFeed = new \Feed($strFile);
@@ -480,7 +480,7 @@ class Calendar extends \Frontend
 		{
 			while ($objFeeds->next())
 			{
-				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'calendar' . $objFeeds->id;
+				$arrFeeds[] = $objFeeds->alias ?: 'calendar' . $objFeeds->id;
 			}
 		}
 

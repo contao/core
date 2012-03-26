@@ -103,10 +103,10 @@ class ModuleFlash extends \Module
 		$this->Template->var = 'swf' . $this->id;
 		$this->Template->transparent = $this->transparent ? true : false;
 		$this->Template->interactive = $this->interactive ? true : false;
-		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
+		$this->Template->flashId = $this->flashID ?: 'swf_' . $this->id;
 		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", $this->String->decodeEntities($this->flashJS));
 		$this->Template->flashvars = 'URL=' . $this->Environment->base;
-		$this->Template->version = ($this->version != '') ? $this->version : '6.0.0';
+		$this->Template->version = $this->version ?: '6.0.0';
 
 		$size = deserialize($this->size);
 

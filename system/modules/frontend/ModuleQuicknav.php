@@ -100,7 +100,7 @@ class ModuleQuicknav extends \Module
 
 		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
-		$this->Template->title = ($this->customLabel != '') ? $this->customLabel : $GLOBALS['TL_LANG']['MSC']['quicknav'];
+		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicknav'];
 		$this->Template->request = ampersand($this->Environment->request, true);
 		$this->Template->items = $this->getQuicknavPages($this->rootPage);
 	}
@@ -158,7 +158,7 @@ class ModuleQuicknav extends \Module
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),
-						'title' => (strlen($objSubpages->pageTitle) ? specialchars($objSubpages->pageTitle) : specialchars($objSubpages->title)),
+						'title' => specialchars($objSubpages->pageTitle ?: $objSubpages->title),
 						'href' => $this->generateFrontendUrl($objSubpages->row()),
 						'link' => $objSubpages->title
 					);

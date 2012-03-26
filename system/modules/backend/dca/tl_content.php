@@ -896,7 +896,7 @@ class tl_content extends Backend
 	public function addCteType($arrRow)
 	{
 		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
-		$type = ($GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] != '') ? $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] : '&nbsp;';
+		$type = $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] ?: '&nbsp;';
 
 		return '
 <div class="cte_type ' . $key . '">' . $type . (($arrRow['type'] == 'alias') ? ' ID ' . $arrRow['cteAlias'] : '') . ($arrRow['protected'] ? ' (' . $GLOBALS['TL_LANG']['MSC']['protected'] . ')' : ($arrRow['guests'] ? ' (' . $GLOBALS['TL_LANG']['MSC']['guests'] . ')' : '')) . '</div>
@@ -956,7 +956,7 @@ class tl_content extends Backend
 			while ($objAlias->next())
 			{
 				$key = $objAlias->parent . ' (ID ' . $objAlias->pid . ')';
-				$arrAlias[$key][$objAlias->id] = $objAlias->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] : $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
+				$arrAlias[$key][$objAlias->id] = $objAlias->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objAlias->inColumn] ?: $objAlias->inColumn) . ', ID ' . $objAlias->id . ')';
 			}
 		}
 
@@ -1214,7 +1214,7 @@ class tl_content extends Backend
 			while ($objArticle->next())
 			{
 				$key = $objArticle->parent . ' (ID ' . $objArticle->pid . ')';
-				$arrArticle[$key][$objArticle->id] = $objArticle->title . ' (' . (strlen($GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn]) ? $GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn] : $objArticle->inColumn) . ', ID ' . $objArticle->id . ')';
+				$arrArticle[$key][$objArticle->id] = $objArticle->title . ' (' . ($GLOBALS['TL_LANG']['tl_article'][$objArticle->inColumn] ?: $objArticle->inColumn) . ', ID ' . $objArticle->id . ')';
 			}
 		}
 

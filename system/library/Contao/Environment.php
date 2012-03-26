@@ -406,8 +406,7 @@ class Environment
 	 */
 	protected function host()
 	{
-		$xhost = $this->httpXForwardedHost;
-		return ($xhost != '') ? $xhost : $this->httpHost;
+		return $this->httpXForwardedHost ?: $this->httpHost;
 	}
 
 

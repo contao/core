@@ -409,7 +409,7 @@ class DbInstaller extends \Controller
 					// Field type
 					if (strlen($field['length']))
 					{
-						$field['type'] .= '(' . $field['length'] . (strlen($field['precision']) ? ',' . $field['precision'] : '') . ')';
+						$field['type'] .= '(' . $field['length'] . (($field['precision'] != '') ? ',' . $field['precision'] : '') . ')';
 
 						unset($field['length']);
 						unset($field['precision']);

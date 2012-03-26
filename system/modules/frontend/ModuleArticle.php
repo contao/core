@@ -92,7 +92,7 @@ class ModuleArticle extends \Module
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = ($this->alias != '') ? $this->alias : $this->title;
+		$alias = $this->alias ?: $this->title;
 
 		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
 		{
@@ -204,7 +204,7 @@ class ModuleArticle extends \Module
 
 		if ($this->keywords != '')
 		{
-			$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
+			$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . $this->keywords;
 		}
 
 		// Backwards compatibility

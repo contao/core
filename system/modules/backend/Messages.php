@@ -89,7 +89,7 @@ class Messages extends \Backend
 
 		while ($objRoots->next())
 		{
-			$strDns = ($objRoots->dns != '') ? $objRoots->dns : '*';
+			$strDns = $objRoots->dns ?: '*';
 
 			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
 			{

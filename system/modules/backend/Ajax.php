@@ -239,7 +239,7 @@ class Ajax extends \Backend
 			// Load nodes of the page tree
 			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = strlen($this->strAjaxName) ? $this->strAjaxName : $dc->id;
+				$arrData['id'] = $this->strAjaxName ?: $dc->id;
 				$arrData['name'] = $this->Input->post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['pageSelector']($arrData, $dc);
@@ -250,7 +250,7 @@ class Ajax extends \Backend
 			case 'loadFiletree':
 			case 'loadPagetree':
 				$arrData['strTable'] = $dc->table;
-				$arrData['id'] = strlen($this->strAjaxName) ? $this->strAjaxName : $dc->id;
+				$arrData['id'] = $this->strAjaxName ?: $dc->id;
 				$arrData['name'] = $this->Input->post('name');
 
 				$objWidget = new $GLOBALS['BE_FFL']['fileSelector']($arrData, $dc);

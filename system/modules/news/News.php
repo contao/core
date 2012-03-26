@@ -60,7 +60,7 @@ class News extends \Frontend
 			return;
 		}
 
-		$objFeed->feedName = ($objFeed->alias != '') ? $objFeed->alias : 'news' . $objFeed->id;
+		$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
 		// Delete XML file
 		if ($this->Input->get('act') == 'delete')
@@ -91,7 +91,7 @@ class News extends \Frontend
 		{
 			while ($objFeed->next())
 			{
-				$objFeed->feedName = ($objFeed->alias != '') ? $objFeed->alias : 'news' . $objFeed->id;
+				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 				$this->generateFiles($objFeed->row());
 				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
 			}
@@ -114,7 +114,7 @@ class News extends \Frontend
 		}
 
 		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = ($arrFeed['feedBase'] != '') ? $arrFeed['feedBase'] : $this->Environment->base;
+		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
 		$strFile = $arrFeed['feedName'];
 
 		$objFeed = new Feed($strFile);
@@ -322,7 +322,7 @@ class News extends \Frontend
 		{
 			while ($objFeeds->next())
 			{
-				$arrFeeds[] = ($objFeeds->alias != '') ? $objFeeds->alias : 'news' . $objFeeds->id;
+				$arrFeeds[] = $objFeeds->alias ?: 'news' . $objFeeds->id;
 			}
 		}
 

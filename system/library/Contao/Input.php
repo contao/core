@@ -107,16 +107,16 @@ class Input
 	 */
 	public function get($strKey, $blnDecodeEntities=false)
 	{
+		if (!isset($_GET[$strKey]))
+		{
+			return null;
+		}
+
 		$strCacheKey = $blnDecodeEntities ? 'getDecoded' : 'getEncoded';
 
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $_GET[$strKey];
-
-			if ($varValue === null)
-			{
-				return $varValue;
-			}
 
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);
@@ -244,16 +244,16 @@ class Input
 	 */
 	public function cookie($strKey, $blnDecodeEntities=false)
 	{
+		if (!isset($_COOKIE[$strKey]))
+		{
+			return null;
+		}
+
 		$strCacheKey = $blnDecodeEntities ? 'cookieDecoded' : 'cookieEncoded';
 
 		if (!isset($this->arrCache[$strCacheKey][$strKey]))
 		{
 			$varValue = $_COOKIE[$strKey];
-
-			if ($varValue === null)
-			{
-				return $varValue;
-			}
 
 			$varValue = $this->stripSlashes($varValue);
 			$varValue = $this->decodeEntities($varValue);

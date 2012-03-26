@@ -72,7 +72,7 @@ class ModuleNavigation extends \Module
 		}
 
 		$strBuffer = parent::generate();
-		return strlen($this->Template->items) ? $strBuffer : '';
+		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 
 

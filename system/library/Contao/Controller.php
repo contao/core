@@ -500,6 +500,7 @@ abstract class Controller extends \System
 		if (is_object($intId))
 		{
 			$objPage = $intId;
+			$intId = $objPage->id;
 
 			$this->import('Cache');
 			$strKey = __METHOD__ . '-' . $objPage->id;
@@ -542,7 +543,7 @@ abstract class Controller extends \System
 		$type = $objPage->type;
 		$alias = $objPage->alias;
 		$name = $objPage->title;
-		$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
+		$title = $objPage->pageTitle ?: $objPage->title;
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
@@ -564,7 +565,7 @@ abstract class Controller extends \System
 				{
 					$palias = $objParentPage->alias;
 					$pname = $objParentPage->title;
-					$ptitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+					$ptitle = $objParentPage->pageTitle ?: $objParentPage->title;
 				}
 
 				// Page title
@@ -572,7 +573,7 @@ abstract class Controller extends \System
 				{
 					$alias = $objParentPage->alias;
 					$name = $objParentPage->title;
-					$title = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+					$title = $objParentPage->pageTitle ?: $objParentPage->title;
 					$trail[] = $objParentPage->pid;
 				}
 
@@ -606,7 +607,7 @@ abstract class Controller extends \System
 		if ($objParentPage !== null && $objParentPage->type == 'root')
 		{
 			$objPage->rootId = $objParentPage->id;
-			$objPage->rootTitle = ($objParentPage->pageTitle != '') ? $objParentPage->pageTitle : $objParentPage->title;
+			$objPage->rootTitle = $objParentPage->pageTitle ?: $objParentPage->title;
 			$objPage->domain = $objParentPage->dns;
 			$objPage->rootLanguage = $objParentPage->language;
 			$objPage->language = $objParentPage->language;
@@ -680,7 +681,7 @@ abstract class Controller extends \System
 
 		foreach ($languages as $strKey=>$strName)
 		{
-			$arrAux[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['LNG'][$strKey]) : $strName;
 		}
 
 		asort($arrAux);
@@ -693,7 +694,7 @@ abstract class Controller extends \System
 				continue;
 			}
 
-			$return[$strKey] = strlen($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['LNG'][$strKey]) ? $GLOBALS['TL_LANG']['LNG'][$strKey] : $languages[$strKey];
 
 			if (isset($langsNative[$strKey]) && $langsNative[$strKey] != $return[$strKey])
 			{
@@ -763,14 +764,14 @@ abstract class Controller extends \System
 
 		foreach ($countries as $strKey=>$strName)
 		{
-			$arrAux[$strKey] = strlen($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
+			$arrAux[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? utf8_romanize($GLOBALS['TL_LANG']['CNT'][$strKey]) : $strName;
 		}
 
 		asort($arrAux);
 
 		foreach (array_keys($arrAux) as $strKey)
 		{
-			$return[$strKey] = strlen($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
+			$return[$strKey] = isset($GLOBALS['TL_LANG']['CNT'][$strKey]) ? $GLOBALS['TL_LANG']['CNT'][$strKey] : $countries[$strKey];
 		}
 
 		return $return;
@@ -1391,7 +1392,7 @@ abstract class Controller extends \System
 			{
 				// Date
 				case 'date':
-					$arrCache[$strTag] = $this->parseDate((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['dateFormat']));
+					$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['dateFormat']);
 					break;
 
 				// Accessibility tags
@@ -1623,7 +1624,7 @@ abstract class Controller extends \System
 
 						$strName = $objNextPage->title;
 						$strTarget = $objNextPage->target ? (($objPage->outputFormat == 'xhtml') ? LINK_NEW_WINDOW : ' target="_blank"') : '';
-						$strTitle = ($objNextPage->pageTitle != '') ? $objNextPage->pageTitle : $objNextPage->title;
+						$strTitle = $objNextPage->pageTitle ?: $objNextPage->title;
 					}
 
 					// Replace the tag
@@ -1946,7 +1947,7 @@ abstract class Controller extends \System
 
 					if ($objUpdate->numRows)
 					{
-						$arrCache[$strTag] = $this->parseDate((strlen($elements[1]) ? $elements[1] : $GLOBALS['TL_CONFIG']['datimFormat']), max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
+						$arrCache[$strTag] = $this->parseDate($elements[1] ?: $GLOBALS['TL_CONFIG']['datimFormat'], max($objUpdate->tc, $objUpdate->tn, $objUpdate->te));
 					}
 					break;
 
@@ -2189,11 +2190,11 @@ abstract class Controller extends \System
 								$attribute = ' data-lightbox="' . substr($rel, 8) . '"';
 							}
 
-							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (strlen($alt) ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
+							$arrCache[$strTag] = '<a href="' . TL_FILES_URL . $strFile . '"' . (($alt != '') ? ' title="' . $alt . '"' : '') . $attribute . '><img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>') . '</a>';
 						}
 						else
 						{
-							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (strlen($class) ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
+							$arrCache[$strTag] = '<img src="' . TL_FILES_URL . $src . '" ' . $dimensions . ' alt="' . $alt . '"' . (($class != '') ? ' class="' . $class . '"' : '') . (($objPage->outputFormat == 'xhtml') ? ' />' : '>');
 						}
 					}
 					catch (\Exception $e)
@@ -2460,7 +2461,7 @@ abstract class Controller extends \System
 			}
 			else
 			{
-				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . (($arrRow['alias'] != '') ? $arrRow['alias'] : $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
+				$strUrl = ($GLOBALS['TL_CONFIG']['rewriteURL'] ? '' : 'index.php/') . $strLanguage . ($arrRow['alias'] ?: $arrRow['id']) . $strParams . $GLOBALS['TL_CONFIG']['urlSuffix'];
 			}
 		}
 		else

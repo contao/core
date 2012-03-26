@@ -140,7 +140,7 @@ class TextField extends \Widget
 							$type,
 							$this->strName,
 							$this->strId,
-							(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							specialchars($this->varValue),
 							$this->getAttributes(),
 							$this->wizard);
@@ -172,7 +172,7 @@ class TextField extends \Widget
 
 		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
 						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}

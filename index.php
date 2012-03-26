@@ -117,7 +117,7 @@ class Index extends Frontend
 				// Pass the ID so a new page object is created!
 				$objCurrentPage = $this->getPageDetails($objPage->id);
 
-				$domain = ($objCurrentPage->domain != '') ? $objCurrentPage->domain : '*';
+				$domain = $objCurrentPage->domain ?: '*';
 				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
 				// Also store the fallback language

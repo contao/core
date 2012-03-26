@@ -108,12 +108,12 @@ class ModuleBreadcrumb extends \Module
 
 			$items[] = array
 			(
-				'isRoot' => true,
+				'isRoot'   => true,
 				'isActive' => false,
-				'href' => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : $this->Environment->base),
-				'title' => (($objPages->pageTitle != '') ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
-				'link' => $objPages->title,
-				'data' => $objFirstPage->row()
+				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : $this->Environment->base),
+				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
+				'link'     => $objPages->title,
+				'data'     => $objFirstPage->row()
 			);
 
 			array_pop($pages);
@@ -157,12 +157,12 @@ class ModuleBreadcrumb extends \Module
 
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => false,
-				'href' => $href,
-				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle'], true) : specialchars($pages[$i]['title'], true)),
-				'link' => $pages[$i]['title'],
-				'data' => $pages[$i]
+				'href'     => $href,
+				'title'    => specialchars($pages[$i]['pageTitle'] ?: $pages[$i]['title'], true),
+				'link'     => $pages[$i]['title'],
+				'data'     => $pages[$i]
 			);
 		}
 
@@ -171,12 +171,12 @@ class ModuleBreadcrumb extends \Module
 		{
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => false,
-				'href' => $this->generateFrontendUrl($pages[0]),
-				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle'], true) : specialchars($pages[0]['title'], true)),
-				'link' => $pages[0]['title'],
-				'data' => $pages[0]
+				'href'     => $this->generateFrontendUrl($pages[0]),
+				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title'], true),
+				'link'     => $pages[0]['title'],
+				'data'     => $pages[0]
 			);
 
 			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
@@ -207,11 +207,11 @@ class ModuleBreadcrumb extends \Module
 		{
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => true,
-				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
-				'link' => $pages[0]['title'],
-				'data' => $pages[0]
+				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
+				'link'     => $pages[0]['title'],
+				'data'     => $pages[0]
 			);
 		}
 

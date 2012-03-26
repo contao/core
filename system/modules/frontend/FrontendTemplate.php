@@ -227,7 +227,7 @@ class FrontendTemplate extends \Template
 				(
 					'url' => $strUrl,
 					'content' => $this->strBuffer,
-					'title' => (strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title),
+					'title' => $objPage->pageTitle ?: $objPage->title,
 					'protected' => ($objPage->protected ? '1' : ''),
 					'groups' => $objPage->groups,
 					'pid' => $objPage->id,
@@ -249,7 +249,7 @@ class FrontendTemplate extends \Template
 	 */
 	public function getCustomSection($strKey)
 	{
-		return sprintf("\n<div id=\"%s\">\n%s\n</div>\n", $strKey, (strlen($this->sections[$strKey]) ? $this->sections[$strKey] : '&nbsp;'));
+		return sprintf("\n<div id=\"%s\">\n%s\n</div>\n", $strKey, $this->sections[$strKey] ?: '&nbsp;');
 	}
 
 

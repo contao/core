@@ -204,7 +204,7 @@ abstract class Frontend extends \Controller
 			$this->Input->setGet($arrFragments[$i], $arrFragments[$i+1]);
 		}
 
-		return ($arrFragments[0] != '') ? $arrFragments[0] : null;
+		return $arrFragments[0] ?: null;
 	}
 
 
@@ -376,7 +376,7 @@ abstract class Frontend extends \Controller
 		}
 
 		global $objPage;
-		$pageId = ($objPage->alias != '') ? $objPage->alias : $objPage->id;
+		$pageId = $objPage->alias ?: $objPage->id;
 
 		// Get the page ID from URL if not set
 		if (empty($pageId))

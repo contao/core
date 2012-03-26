@@ -826,7 +826,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		// Instantiate the uploader
 		$this->import('BackendUser', 'User');
-		$class = ($this->User->uploader != '') ? $this->User->uploader : 'FileUpload';
+		$class = $this->User->uploader ?: 'FileUpload';
 		$objUploader = new $class();
 
 		// Process the uploaded files
@@ -991,7 +991,7 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 						}
 						else
 						{
-							$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
+							$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
 							$this->varValue = basename($pathinfo['basename'], $this->strExtension);
 						}
 
@@ -1176,7 +1176,7 @@ window.addEvent(\'domready\', function() {
 					$pathinfo = pathinfo(urldecode($id));
 
 					$this->strPath = $pathinfo['dirname'];
-					$this->strExtension = strlen($pathinfo['extension']) ? '.'.$pathinfo['extension'] : '';
+					$this->strExtension = ($pathinfo['extension'] != '') ? '.'.$pathinfo['extension'] : '';
 					$this->varValue = basename($pathinfo['basename'], $this->strExtension);
 
 					// Fix Unix system files like .htaccess
@@ -1269,7 +1269,7 @@ window.addEvent(\'domready\', function() {
 				if (!$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['exclude'] && !$GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['eval']['doNotShow'] && (strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['inputType']) || is_array($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['input_field_callback'])))
 				{
 					$options .= '
-  <input type="checkbox" name="all_fields[]" id="all_'.$field.'" class="tl_checkbox" value="'.specialchars($field).'"> <label for="all_'.$field.'" class="tl_checkbox_label">'.(strlen($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0]) ? $GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] : $GLOBALS['TL_LANG']['MSC'][$field][0]).'</label><br>';
+  <input type="checkbox" name="all_fields[]" id="all_'.$field.'" class="tl_checkbox" value="'.specialchars($field).'"> <label for="all_'.$field.'" class="tl_checkbox_label">'.($GLOBALS['TL_DCA'][$this->strTable]['fields'][$field]['label'][0] ?: $GLOBALS['TL_LANG']['MSC'][$field][0]).'</label><br>';
 				}
 			}
 
@@ -1619,7 +1619,7 @@ window.addEvent(\'domready\', function() {
 
 				if ($objUnique->numRows)
 				{
-					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (($arrData['label'][0] != '') ? $arrData['label'][0] : $this->strField)));
+					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $this->strField));
 				}
 			}
 

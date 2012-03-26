@@ -147,7 +147,7 @@ class TimePeriod extends \Widget
 		return sprintf('<input type="text" name="%s[value]" id="ctrl_%s" class="tl_text_interval%s" value="%s"%s onfocus="Backend.getScrollOffset()"> <select name="%s[unit]" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>%s',
 						$this->strName,
 						$this->strId,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						specialchars($this->varValue['value']),
 						$this->getAttributes(),
 						$this->strName,

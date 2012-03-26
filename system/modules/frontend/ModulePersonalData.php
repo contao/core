@@ -183,7 +183,7 @@ class ModulePersonalData extends \Module
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
 				if ($arrData['eval']['unique'] && $varValue != '' && !$this->fieldIsUnique('tl_member', $field, $varValue, $this->User->id))
 				{
-					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $field)));
+					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $field));
 				}
 
 				// Trigger the save_callback

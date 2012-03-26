@@ -349,7 +349,7 @@ class Request
 
 		if (!in_array(intval($code), array(200, 304)))
 		{
-			$this->strError = strlen($text) ? $text : $responses[$code];
+			$this->strError = $text ?: $responses[$code];
 		}
 	}
 }
