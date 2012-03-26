@@ -44,12 +44,12 @@ a few examples:
 
 * `http://www.yourdomain.com/contao`
 * `http://www.yourdomain.com/contao/contao`
-* `http://www.yourdomain.com/contao-2.11.0/contao`
+* `http://www.yourdomain.com/contao-3.0.0/contao`
 
 
 Troubleshooting
 ---------------
 
 If you are having problems installing or using Contao, please visit the
-project website at http://www.contao.org/support.html and read the user's
+project website at http://www.contao.org/en/support.html and read the user's
 guide or post your question in the Contao forum.

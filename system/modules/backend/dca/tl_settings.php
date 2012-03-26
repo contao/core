@@ -270,8 +270,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'coreOnlyMode' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'inputType'               => 'checkbox'
 		),
 		'displayErrors' => array
 		(
@@ -510,8 +509,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'liveUpdateBase' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'w50')
+			'inputType'               => 'text'
 		)
 	)
 );
