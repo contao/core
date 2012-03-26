@@ -188,9 +188,6 @@ class Combiner extends System
 				$strGlue = ($strDirname != '.') ? $strDirname . '/' : '';
 				$content = preg_replace('/url\("(?!(data:|https?:\/\/|\/))/', 'url("../../' . $strGlue, $content);
 				$content = '@media ' . (($arrFile['media'] != '') ? $arrFile['media'] : 'all') . "{\n" . $content . "\n}";
-
-				// Correct the PIE.htc file (see 4074)
-				$content = str_replace('"../../system/scripts/plugins/css3pie/PIE.htc"', '"../../plugins/css3pie/PIE.htc"', $content);
 			}
 
 			$objFile->append($content);
