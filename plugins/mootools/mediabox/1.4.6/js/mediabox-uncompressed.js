@@ -376,6 +376,7 @@ var Mediabox;
 				mediaType = 'obj';
 				mediaWidth = mediaWidth || options.defaultWidth;
 				mediaHeight = mediaHeight || options.defaultHeight;
+				var URL = new URI(URL).toAbsolute(); // PATCH: see 4066
 				if (options.useNB) {
 				preload = new Swiff(''+options.playerpath+'?mediaURL='+URL+'&allowSmoothing=true&autoPlay='+options.autoplay+'&buffer=6&showTimecode='+options.showTimecode+'&loop='+options.medialoop+'&controlColor='+options.controlColor+'&controlBackColor='+options.controlBackColor+'&defaultVolume='+options.volume+'&scaleIfFullScreen=true&showScalingButton=true&crop=false', {
 					id: 'MediaboxSWF',
