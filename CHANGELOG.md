@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Fixed the "setCookie" hook (see #4116).
+
+### Fixed
 Fixed the mediabox .mp4 file not found issue (see #4066).
 
 ### Fixed
