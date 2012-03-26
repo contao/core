@@ -550,6 +550,7 @@ h2.sub_headline_index {
 }
 .tl_content pre {
 	margin-bottom:3px;
+	word-break:break-word;
 }
 .tl_content pre.disabled {
 	color:#a6a6a6;
@@ -557,6 +558,7 @@ h2.sub_headline_index {
 .tl_content_right {
 	float:right;
 	text-align:right;
+	margin-left:12px;
 }
 .tl_content_right img {
 	vertical-align:-4px;
