@@ -416,8 +416,9 @@ class String
 	{
 		$arrPregReplace = array
 		(
-			'/<(br|hr|img)([^>]*) \/>/i'                  => '<$1$2>', // Close stand-alone tags
-			'/ (cellpadding|cellspacing|border)="[^"]*"/' => ''        // Remove deprecated attributes 
+			'/<(br|hr|img)([^>]*) \/>/i'                  => '<$1$2>',             // Close stand-alone tags
+			'/ (cellpadding|cellspacing|border)="[^"]*"/' => '',                   // Remove deprecated attributes
+			'/ rel="lightbox(\[([^\]]+)\])?"/'            => ' data-lightbox="$2"' // see #4073
 		);
 
 		$arrStrReplace = array
