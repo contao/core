@@ -136,6 +136,12 @@ abstract class System
 	protected $Messages;
 
 	/**
+	 * Cookie hook object
+	 * @var Messages
+	 */
+	protected $objCookie;
+
+	/**
 	 * Cache array
 	 * @var array
 	 */
@@ -748,8 +754,8 @@ abstract class System
 		{
 			foreach ($GLOBALS['TL_HOOKS']['setCookie'] as $callback)
 			{
-				$this->import($callback[0]);
-				$objCookie = $this->$callback[0]->$callback[1]($objCookie);
+				$this->import($callback[0], 'objCookie', true);
+				$objCookie = $this->objCookie->$callback[1]($objCookie);
 			}
 		}
 

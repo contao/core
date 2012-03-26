@@ -71,7 +71,7 @@ var Stylect =
 			el.addEvent('change', function() {
 				var option = el.getElement('option[value="' + el.value + '"]');
 				div.getElement('span').set('html', option.get('html'));
-            }).addEvent('keydown', function(event) {
+			}).addEvent('keydown', function(event) {
 				setTimeout(function() {	el.fireEvent('change'); }, 100);
 			}).addEvent('focus', function() {
 				div.addClass('focused');
