@@ -623,7 +623,7 @@ abstract class Controller extends \System
 			$objPage->rootIsFallback = ($objParentPage->fallback != '');
 		}
 		// No root page found
-		elseif (TL_MODE == 'FE')
+		elseif ($objPage->type != 'root' && TL_MODE == 'FE')
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
