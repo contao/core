@@ -869,15 +869,15 @@ class InstallTool extends Backend
 			// Create the themes table
 			$this->Database->query(
 				"CREATE TABLE `tl_theme` (
-					  `id` int(10) unsigned NOT NULL auto_increment,
-					  `tstamp` int(10) unsigned NOT NULL default '0',
-					  `name` varchar(128) NOT NULL default '',
-					  `author` varchar(128) NOT NULL default '',
-					  `screenshot` varchar(255) NOT NULL default '',
-					  `folders` blob NULL,
-					  `templates` varchar(255) NOT NULL default '',
-					  PRIMARY KEY  (`id`)
-					) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
+				  `id` int(10) unsigned NOT NULL auto_increment,
+				  `tstamp` int(10) unsigned NOT NULL default '0',
+				  `name` varchar(128) NOT NULL default '',
+				  `author` varchar(128) NOT NULL default '',
+				  `screenshot` varchar(255) NOT NULL default '',
+				  `folders` blob NULL,
+				  `templates` varchar(255) NOT NULL default '',
+				  PRIMARY KEY  (`id`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
 			);
 
 			// Add a PID column to the child tables
@@ -890,7 +890,7 @@ class InstallTool extends Backend
 
 			// Create a theme from the present resources
 			$this->Database->prepare("INSERT INTO tl_theme SET tstamp=?, name=?")
-				->execute(time(), $GLOBALS['TL_CONFIG']['websiteTitle']);
+						   ->execute(time(), $GLOBALS['TL_CONFIG']['websiteTitle']);
 
 			// Adjust the back end user permissions
 			$this->Database->query("ALTER TABLE `tl_user` ADD `themes` blob NULL");
@@ -1024,22 +1024,208 @@ class InstallTool extends Backend
 	 */
 	protected function update_3_0_0()
 	{
-		if ($this->Database->tableExists('tl_module') && $this->Database->fieldExists('numberOfItems', 'tl_module'))
+		if ($this->Database->tableExists('tl_module') && !$this->Database->fieldExists('numberOfItems', 'tl_module'))
 		{
-			return;
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			{
+				$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
+				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
+				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`news_numberOfItems` WHERE `news_numberOfItems`>0");
+			}
+
+			$this->Template->step = 1;
+			$this->Template->is30Update = true;
+			$this->outputAndExit();
 		}
 
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+		if ($this->Database->tableExists('tl_module') && !$this->Database->tableExists('tl_files'))
 		{
-			$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
-			$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
-			$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`news_numberOfItems` WHERE `news_numberOfItems`>0");
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			{
+				// Create the files table
+				$this->Database->query(
+					"CREATE TABLE `tl_files` (
+					  `id` int(10) unsigned NOT NULL auto_increment,
+					  `pid` int(10) unsigned NOT NULL default '0',
+					  `tstamp` int(10) unsigned NOT NULL default '0',
+					  `type` varchar(16) NOT NULL default '',
+					  `path` varchar(255) NOT NULL default '',
+					  `extension` varchar(16) NOT NULL default '',
+					  `hash` varchar(32) NOT NULL default '',
+					  `found` char(1) NOT NULL default '1',
+					  `name` varchar(64) NOT NULL default '',
+					  `meta` blob NULL,
+					  PRIMARY KEY  (`id`),
+					  KEY `pid` (`pid`),
+					  KEY `path` (`path`),
+					  KEY `extension` (`extension`)
+					) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
+				);
 
-			$this->reload();
+				$this->scanUploadFolder($GLOBALS['TL_CONFIG']['uploadPath']);
+
+				// Update the existing singleSRC entries
+				$arrSingleSRC = array
+				(
+					'tl_content.singleSRC',
+					'tl_form_field.uploadFolder',
+					'tl_form_field.singleSRC',
+					'tl_member.homeDir',
+					'tl_module.singleSRC',
+					'tl_module.reg_homeDir',
+					'tl_theme.templates',
+					'tl_theme.screenshot',
+					'tl_calendar_events.singleSRC',
+					'tl_faq.singleSRC',
+					'tl_news.singleSRC'
+				);
+
+				foreach ($arrSingleSRC as $val)
+				{
+					list($table, $field) = explode('.', $val);
+					$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
+
+					while ($objRow->next())
+					{
+						$objFile = \FilesModel::findByPath($objRow->$field);
+
+						$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+									   ->execute($objFile->id, $objRow->id);
+					}
+				}
+
+				// Update the existing multiSRC entries
+				$arrMultiSRC = array
+				(
+					'tl_content.multiSRC',
+					'tl_module.multiSRC',
+					'tl_theme.folders',
+					'tl_user.filemounts',
+					'tl_user_group.filemounts',
+					'tl_calendar_events.enclosure',
+					'tl_faq.enclosure',
+					'tl_news.enclosure',
+					'tl_newsletter.files'
+				);
+
+				foreach ($arrMultiSRC as $val)
+				{
+					list($table, $field) = explode('.', $val);
+					$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
+
+					while ($objRow->next())
+					{
+						$arrPaths = deserialize($objRow->$field);
+
+						if (!is_array($arrPaths) || empty($arrPaths))
+						{
+							continue;
+						}
+
+						foreach ($arrPaths as $k=>$v)
+						{
+							$objFile = \FilesModel::findByPath($v);
+							$arrPaths[$k] = $objFile->id;
+						}
+
+						$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+									   ->execute(serialize($arrPaths), $objRow->id);
+					}
+				}
+
+				$this->reload();
+			}
+
+			$this->Template->step = 2;
+			$this->Template->is30Update = true;
+			$this->outputAndExit();
+		}
+	}
+
+
+	/**
+	 * Scan the upload folder and create the database entries
+	 * @param string
+	 * @param integer
+	 * @return void
+	 */
+	public function scanUploadFolder($strPath, $pid=0)
+	{
+		$arrMeta = array();
+		$arrMapper = array();
+		$arrFolders = array();
+		$arrFiles = array();
+		$arrScan = scan(TL_ROOT . '/' . $strPath);
+
+		foreach ($arrScan as $strFile)
+		{
+			if (strncmp($strFile, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
+			{
+				$arrFolders[] = $strPath . '/' . $strFile;
+			}
+			else
+			{
+				$arrFiles[] = $strPath . '/' . $strFile;
+			}
 		}
 
-		$this->Template->is30Update = true;
-		$this->outputAndExit();
+		// Folders
+		foreach ($arrFolders as $strFolder)
+		{
+			$objFolder = new \Folder($strFolder);
+
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
+								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
+								 ->insertId;
+
+			$this->scanUploadFolder($strFolder, $id);
+		}
+
+		// Files
+		foreach ($arrFiles as $strFile)
+		{
+			$matches = array();
+
+			// Handle meta.txt files
+			if (preg_match('/^meta(_([a-z]{2}))?\.txt$/', basename($strFile), $matches))
+			{
+				$key = $matches[2] ?: 'en';
+				$arrData = file(TL_ROOT . '/' . $strFile, FILE_IGNORE_NEW_LINES);
+
+				foreach ($arrData as $line)
+				{
+					list($name, $info) = explode('=', $line);
+					list($title, $link, $caption) = explode('|', $info);
+					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
+				}
+			}
+
+			$objFile = new \File($strFile);
+
+			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
+								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
+								 ->insertId;
+
+			$arrMapper[basename($strFile)] = $id;
+		}
+
+		// Insert the meta data AFTER the file entries have been created
+		if (!empty($arrMeta))
+		{
+			foreach ($arrMeta as $file=>$meta)
+			{
+				if (isset($arrMapper[$file]))
+				{
+					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
+								   ->execute(serialize($meta), $arrMapper[$file]);
+				}
+			}
+		}
 	}
 }
 

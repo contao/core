@@ -75,6 +75,7 @@ $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'Die Datenbank ist aktuell
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Datenbank aktualisieren';
 $GLOBALS['TL_LANG']['tl_install']['updateX']        = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als %s durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version %s-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Version %s-Update ausführen';
+$GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Version %s-Update – Schritt %s ausführen';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Bitte wählen Sie eine Template-Datei!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm']  = 'Template importiert am %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn']     = 'Alle bestehenden Daten werden gelöscht!';
