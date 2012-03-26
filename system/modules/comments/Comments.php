@@ -63,6 +63,7 @@ class Comments extends \Frontend
 		$total = 0;
 		$gtotal = 0;
 		$arrComments = array();
+		$objTemplate->comments = array(); // see #4064
 
 		// Pagination
 		if ($objConfig->perPage > 0)
