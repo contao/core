@@ -611,7 +611,7 @@ abstract class Controller extends System
 		$type = $objPage->type;
 		$alias = $objPage->alias;
 		$name = $objPage->title;
-		$title = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
+		$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
 		$palias = '';
 		$pname = '';
 		$ptitle = '';
@@ -695,8 +695,9 @@ abstract class Controller extends System
 			$objPage->rootIsPublic = ($objParentPage->published && ($objParentPage->start == '' || $objParentPage->start < $time) && ($objParentPage->stop == '' || $objParentPage->stop > $time));
 			$objPage->rootIsFallback = ($objParentPage->fallback != '');
 		}
+
 		// No root page found
-		elseif ($objPage->type != 'root' && TL_MODE == 'FE')
+		elseif (TL_MODE == 'FE' && $objPage->type != 'root')
 		{
 			header('HTTP/1.1 404 Not Found');
 			$this->log('Page ID "'. $objPage->id .'" does not belong to a root page', 'Controller getPageDetails()', TL_ERROR);
