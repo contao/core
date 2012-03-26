@@ -44,7 +44,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'assets/css, assets/js'
 $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'Rebuild XML files';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'Rebuild CSS files';
-$GLOBALS['TL_LANG']['tl_maintenance']['scanUploadDir'] = 'Scan the upload directory';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'The data has been purged';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live update ID';

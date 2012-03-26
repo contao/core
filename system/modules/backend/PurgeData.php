@@ -196,7 +196,6 @@ class PurgeData extends \Backend implements \executable
 
 		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
 		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
-		$objTemplate->cacheUploadDir = $GLOBALS['TL_LANG']['tl_maintenance']['scanUploadDir'];
 		$objTemplate->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$objTemplate->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
 		$objTemplate->cacheTables = $arrCacheTables;

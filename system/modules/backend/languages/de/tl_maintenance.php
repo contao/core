@@ -43,7 +43,6 @@ $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts']  = 'assets/css, assets/js'
 $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp']     = 'system/tmp';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearXml']      = 'XML-Dateien neu erstellen';
 $GLOBALS['TL_LANG']['tl_maintenance']['clearCss']      = 'CSS-Dateien neu erstellen';
-$GLOBALS['TL_LANG']['tl_maintenance']['scanUploadDir'] = 'Upload-Verzeichnis neu indizieren';
 $GLOBALS['TL_LANG']['tl_maintenance']['cacheCleared']  = 'Die Daten wurden bereinigt';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate']    = 'Live Update';
 $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId']  = 'Live Update ID';
