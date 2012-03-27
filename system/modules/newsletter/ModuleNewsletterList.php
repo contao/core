@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsletterList
  *
  * Front end module "newsletter list".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsletterList extends Module
+class ModuleNewsletterList extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleNewsletterList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER LIST ###';
 			$objTemplate->title = $this->headline;
@@ -69,7 +74,7 @@ class ModuleNewsletterList extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			return '';
 		}
@@ -79,62 +84,62 @@ class ModuleNewsletterList extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		$objNewsletter = $this->Database->execute("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel, (SELECT jumpTo FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS jumpTo FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ")" . (!BE_USER_LOGGED_IN ? " AND sent=1" : "") . " ORDER BY date DESC");
-
+		global $objPage;
 		$arrJumpTo = array();
 		$arrNewsletter = array();
-		$time = time();
 
-		while ($objNewsletter->next())
+		$objNewsletter = \NewsletterCollection::findSentByPids($this->nl_channels);
+
+		if ($objNewsletter !== null)
 		{
-			if ($objNewsletter->jumpTo < 1)
+			while ($objNewsletter->next())
 			{
-				continue;
-			}
+				if (!$objNewsletter->pid['jumpTo'])
+				{
+					continue;
+				}
 
-			if (!isset($arrJumpTo[$objNewsletter->jumpTo]))
-			{
-				$objJumpTo = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-											->limit(1)
-											->execute($objNewsletter->jumpTo);
+				if (!isset($arrJumpTo[$objNewsletter->pid['jumpTo']]))
+				{
+					$objJumpTo = \PageModel::findPublishedById($objNewsletter->jumpTo);
 	
-				if ($objJumpTo->numRows)
-				{
-					$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->fetchAssoc(), '/items/%s');
+					if ($objJumpTo !== null)
+					{
+						$arrJumpTo[$objNewsletter->jumpTo] = $this->generateFrontendUrl($objJumpTo->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'));
+					}
+					else
+					{
+						$arrJumpTo[$objNewsletter->jumpTo] = null;
+					}
 				}
-				else
+
+				$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
+
+				if ($strUrl === null)
 				{
-					$arrJumpTo[$objNewsletter->jumpTo] = null;
+					continue;
 				}
+
+				$strAlias = ($objNewsletter->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
+
+				$arrNewsletter[] = array
+				(
+					'subject' => $objNewsletter->subject,
+					'title' => strip_insert_tags($objNewsletter->subject),
+					'href' => sprintf($strUrl, $strAlias),
+					'date' => $this->parseDate($objPage->dateFormat, $objNewsletter->date),
+					'datim' => $this->parseDate($objPage->datimFormat, $objNewsletter->date),
+					'time' => $this->parseDate($objPage->timeFormat, $objNewsletter->date),
+					'channel' => $objNewsletter->channel
+				);
 			}
-
-			$strUrl = $arrJumpTo[$objNewsletter->jumpTo];
-
-			if (is_null($strUrl))
-			{
-				continue;
-			}
-
-			$strAlias = (strlen($objNewsletter->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objNewsletter->alias : $objNewsletter->id;
-
-			$arrNewsletter[] = array
-			(
-				'subject' => $objNewsletter->subject,
-				'title' => strip_insert_tags($objNewsletter->subject),
-				'href' => sprintf($strUrl, $strAlias),
-				'date' => $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objNewsletter->date),
-				'datim' => $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objNewsletter->date),
-				'time' => $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objNewsletter->date),
-				'channel' => $objNewsletter->channel
-			);
 		}
 
 		$this->Template->newsletters = $arrNewsletter;
 	}
 }
-
-?>

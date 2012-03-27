@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class PageError404
  *
  * Provide methods to handle an error 404 page.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageError404 extends Frontend
+class PageError404 extends \Frontend
 {
 
 	/**
@@ -45,40 +50,33 @@ class PageError404 extends Frontend
 	 * @param integer
 	 * @param string
 	 * @param string
+	 * @return void
 	 */
 	public function generate($pageId, $strDomain=null, $strHost=null)
 	{
-		$time = time();
-
 		// Add a log entry
-		if (!is_null($strDomain) || !is_null($strHost))
+		if ($strDomain !== null || $strHost !== null)
 		{
 			$this->log('Page ID "' . $pageId . '" can only be accessed via domain "' . $strDomain . '" (current request via "' . $strHost . '")', 'PageError404 generate()', TL_ERROR);
 		}
-
 		elseif ($pageId != 'favicon.ico' && $pageId != 'robots.txt')
 		{
 			$this->log('No active page for page ID "' . $pageId . '", host "' . $this->Environment->host . '" and languages "' . implode(', ', $this->Environment->httpAcceptLanguage) . '" (' . $this->Environment->base . $this->Environment->request . ')', 'PageError404 generate()', TL_ERROR);
 		}
 
-		// Look for an 404 page within the website root
-		$obj404 = $this->Database->prepare("SELECT * FROM tl_page WHERE type=? AND pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								 ->limit(1)
-								 ->execute('error_404', $this->getRootIdFromUrl(), $time, $time);
+		// Check the search index (see #3761)
+		$this->import('Search');
+		$this->Search->removeEntry($this->Environment->request);
 
-		// Look for a global 404 page
-		if ($obj404->numRows < 1)
-		{
-			$obj404 = $this->Database->prepare("SELECT * FROM tl_page WHERE type='error_404' AND pid=0" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									 ->limit(1)
-									 ->execute();
-		}
+		// Look for an 404 page
+		$objRootPage = $this->getRootPageFromUrl();
+		$obj404 = \PageModel::find404ByPid($objRootPage->id);
 
 		// Die if there is no page at all
-		if ($obj404->numRows < 1)
+		if ($obj404 === null)
 		{
 			header('HTTP/1.1 404 Not Found');
-			die('Page not found');
+			die('Page not found'); 
 		}
 
 		// Generate the error page
@@ -86,7 +84,7 @@ class PageError404 extends Frontend
 		{
 			global $objPage;
 
-			$objPage = $this->getPageDetails($obj404->id);
+			$objPage = $this->getPageDetails($obj404);
 			$objHandler = new $GLOBALS['TL_PTY']['regular']();
 
 			header('HTTP/1.1 404 Not Found');
@@ -96,20 +94,15 @@ class PageError404 extends Frontend
 		}
 
 		// Forward to another page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									  ->limit(1)
-									  ->execute($obj404->jumpTo);
+		$objNextPage = \PageModel::findPublishedById($obj404->jumpTo);
 
-		if ($objNextPage->numRows)
+		if ($objNextPage === null)
 		{
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()), (($obj404->redirect == 'temporary') ? 302 : 301));
+			header('HTTP/1.1 404 Not Found');
+			$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
+			die('Forward page not found');
 		}
 
-		$this->log('Forward page ID "' . $obj404->jumpTo . '" does not exist', 'PageError404 generate()', TL_ERROR);
-
-		header('HTTP/1.1 404 Not Found');
-		die('Forward page not found');
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), null, $objRootPage->language), (($obj404->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

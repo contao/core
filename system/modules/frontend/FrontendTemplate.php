@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FrontendTemplate
  *
  * Provide methods to handle front end templates.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FrontendTemplate extends Template
+class FrontendTemplate extends \Template
 {
 
 	/**
@@ -64,6 +69,7 @@ class FrontendTemplate extends Template
 
 	/**
 	 * Parse the template file, replace insert tags and print it to the screen
+	 * @return void
 	 */
 	public function output()
 	{
@@ -71,6 +77,16 @@ class FrontendTemplate extends Template
 
 		// Ignore certain URL parameters 
 		$arrIgnore = array('id', 'file', 'token', 'page', 'day', 'month', 'year');
+
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'])
+		{
+			$arrIgnore[] = 'auto_item';
+		}
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+		{
+			$arrIgnore[] = 'language';
+		}
+
 		$strParams = '';
 
 		// Rebuild the URL to eliminate duplicate parameters
@@ -78,7 +94,14 @@ class FrontendTemplate extends Template
 		{
 			if (!in_array($key, $arrIgnore))
 			{
-				$strParams .= '/' . $key . '/' . $this->Input->get($key);
+				if ($GLOBALS['TL_CONFIG']['useAutoItem'] && in_array($key, $GLOBALS['TL_AUTO_ITEM']))
+				{
+					$strParams .= '/' . $this->Input->get($key);
+				}
+				else
+				{
+					$strParams .= '/' . $key . '/' . $this->Input->get($key);
+				}
 			}
 		}
 
@@ -120,21 +143,32 @@ class FrontendTemplate extends Template
 			// If the request string is empty, use a special cache tag which considers the page language
 			if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 			{
-				$strUniqueKey = $this->Environment->base . 'empty.' . $objPage->language;
+				$strCacheKey = $this->Environment->base . 'empty.' . $objPage->language;
 			}
 			else
 			{
-				$strUniqueKey = $this->Environment->base . $strUrl;
+				$strCacheKey = $this->Environment->base . $strUrl;
+			}
+
+			// HOOK: add custom logic
+			if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
+				{
+					$this->import($callback[0]);
+					$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+				}
 			}
 
 			// Replace insert tags for caching
 			$strBuffer = $this->replaceInsertTags($strBuffer, true);
 			$intCache = intval($objPage->cache) + time();
 			$lb = $GLOBALS['TL_CONFIG']['minifyMarkup'] ? '' : "\n";
+			$strCacheKey = md5($strCacheKey);
 
 			// Create the cache file
-			$objFile = new File('system/tmp/' . md5($strUniqueKey) . '.html');
-			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strUniqueKey . " */ ?>\n");
+			$objFile = new \File('system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html');
+			$objFile->write('<?php $expire = ' . $intCache . '; /* ' . $strCacheKey . " */ ?>\n");
 
 			/**
 			 * Copyright notice
@@ -160,7 +194,7 @@ class FrontendTemplate extends Template
 		// Send cache headers
 		if (!headers_sent())
 		{
-			if (!is_null($intCache) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+			if ($intCache !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 			{
 				header('Cache-Control: public, max-age=' . ($intCache -  time()));
 				header('Expires: ' . gmdate('D, d M Y H:i:s', $intCache) . ' GMT');
@@ -177,8 +211,7 @@ class FrontendTemplate extends Template
 			}
 		}
 
-		// Replace insert tags and then re-replace the request_token
-		// tag in case a form element has been loaded via insert tag
+		// Replace insert tags and then re-replace the request_token tag in case a form element has been loaded via insert tag
 		$this->strBuffer = $this->replaceInsertTags($strBuffer);
 		$this->strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $this->strBuffer);
 
@@ -194,7 +227,7 @@ class FrontendTemplate extends Template
 				(
 					'url' => $strUrl,
 					'content' => $this->strBuffer,
-					'title' => (strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title),
+					'title' => $objPage->pageTitle ?: $objPage->title,
 					'protected' => ($objPage->protected ? '1' : ''),
 					'groups' => $objPage->groups,
 					'pid' => $objPage->id,
@@ -216,7 +249,7 @@ class FrontendTemplate extends Template
 	 */
 	public function getCustomSection($strKey)
 	{
-		return sprintf("\n<div id=\"%s\">\n%s\n</div>\n", $strKey, (strlen($this->sections[$strKey]) ? $this->sections[$strKey] : '&nbsp;'));
+		return sprintf("\n<div id=\"%s\">\n%s\n</div>\n", $strKey, $this->sections[$strKey] ?: '&nbsp;');
 	}
 
 
@@ -225,9 +258,9 @@ class FrontendTemplate extends Template
 	 * @param string
 	 * @return string
 	 */
-	public function getCustomSections($strKey=false)
+	public function getCustomSections($strKey=null)
 	{
-		if ($strKey && $this->sPosition != $strKey)
+		if ($strKey != '' && $this->sPosition != $strKey)
 		{
 			return '';
 		}
@@ -260,5 +293,3 @@ class FrontendTemplate extends Template
 		return "\n" . '<div class="custom">' . "\n" . $sections . "\n" . '</div>' . "\n";
 	}
 }
-
-?>

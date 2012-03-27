@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
 
 
@@ -36,7 +35,7 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['personalData'] = str_replace(',edit
 $GLOBALS['TL_DCA']['tl_module']['palettes']['subscribe']    = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_hideChannels;{redirect_legend},jumpTo;{email_legend:hide},nl_subscribe;{template_legend:hide},nl_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['unsubscribe']  = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_hideChannels;{redirect_legend},jumpTo;{email_legend:hide},nl_unsubscribe;{template_legend:hide},nl_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['nl_list']      = '{title_legend},name,headline,type;{config_legend},nl_channels;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_reader']    = '{title_legend},name,headline,type;{config_legend},nl_channels,nl_includeCss;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['nl_reader']    = '{title_legend},name,headline,type;{config_legend},nl_channels;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 /**
@@ -48,7 +47,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['newsletters'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'foreignKey'              => 'tl_newsletter_channel.title',
-	'eval'                    => array('multiple'=>true)
+	'eval'                    => array('multiple'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
@@ -57,14 +57,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_channels'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options_callback'        => array('tl_module_newsletter', 'getChannels'),
-	'eval'                    => array('multiple'=>true, 'mandatory'=>true)
+	'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+	'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_hideChannels'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
@@ -76,7 +78,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_subscribe'] = array
 	'load_callback' => array
 	(
 		array('tl_module_newsletter', 'getSubscribeDefault')
-	)
+	),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
@@ -88,7 +91,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_unsubscribe'] = array
 	'load_callback' => array
 	(
 		array('tl_module_newsletter', 'getUnsubscribeDefault')
-	)
+	),
+	'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
@@ -97,14 +101,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_template'] = array
 	'default'                 => 'nl_simple',
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['nl_includeCss'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'options_callback'        => array('tl_module_newsletter', 'getNewsletterTemplates'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 
@@ -112,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['nl_includeCss'] = array
  * Class tl_module_newsletter
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -131,8 +129,8 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default subscribe text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getSubscribeDefault($varValue)
 	{
@@ -147,8 +145,8 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Load the default unsubscribe text
-	 * @param string
-	 * @return string
+	 * @param mixed
+	 * @return mixed
 	 */
 	public function getUnsubscribeDefault($varValue)
 	{
@@ -189,10 +187,10 @@ class tl_module_newsletter extends Backend
 
 	/**
 	 * Return all newsletter templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getNewsletterTemplates(DataContainer $dc)
+	public function getNewsletterTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -204,5 +202,3 @@ class tl_module_newsletter extends Backend
 		return $this->getTemplateGroup('nl_', $intPid);
 	}
 }
-
-?>

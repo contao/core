@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
- * @filesource
  */
 
 
@@ -71,7 +70,16 @@ window.addEvent('domready', function() {
     mode: '<?php echo $arrField['type']; ?>',
     lineNumbers: true,
     form: null,
-    enterMode: 'keep'
+    enterMode: 'keep',
+    onKeyEvent: function(i, e) {
+      // Fullscreen mode (F11)
+      if (e.keyCode == 122 && e.type == 'keydown') {
+        myCodeMirror.getWrapperElement().
+          getElement('.CodeMirror-scroll').
+          toggleClass('fullscreen');
+        e.preventDefault();
+      }
+    }
   });
 
   // Adjust the height and width
@@ -79,6 +87,9 @@ window.addEvent('domready', function() {
     getElement('.CodeMirror-scroll').
     setStyle('height', myField.getStyle('height')).
     setStyle('width', myField.getStyle('width'));
+
+  // Unset the "required" attribute
+  myField.erase('required');
 
   // Custom onsubmit logic
   myForm.addEvent('submit', function() {

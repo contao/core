@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class SelectMenu
  *
  * Provide methods to handle select menus.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class SelectMenu extends Widget
+class SelectMenu extends \Widget
 {
 
 	/**
@@ -63,11 +68,24 @@ class SelectMenu extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
+				break;
+
 			case 'size':
 				if ($this->multiple)
 				{
@@ -75,19 +93,15 @@ class SelectMenu extends Widget
 				}
 				break;
 
-			case 'options':
-				$this->arrOptions = deserialize($varValue);
-				break;
-
 			case 'multiple':
-				if (strlen($varValue))
+				if ($varValue)
 				{
-					$this->arrAttributes[$strKey] = 'multiple';
+					$this->arrAttributes['multiple'] = 'multiple';
 				}
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
 				break;
 
 			default:
@@ -113,7 +127,7 @@ class SelectMenu extends Widget
 		}
 
 		// Add empty option (XHTML) if there are none
-		if (!count($this->arrOptions))
+		if (empty($this->arrOptions))
 		{
 			$this->arrOptions = array(array('value'=>'', 'label'=>'-'));
 		}
@@ -126,32 +140,36 @@ class SelectMenu extends Widget
 										 specialchars($arrOption['value']),
 										 $this->isSelected($arrOption),
 										 $arrOption['label']);
-
-				continue;
 			}
-
-			$arrOptgroups = array();
-
-			foreach ($arrOption as $arrOptgroup)
+			else
 			{
-				$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
-										   specialchars($arrOptgroup['value']),
-										   $this->isSelected($arrOptgroup),
-										   $arrOptgroup['label']);
-			}
+				$arrOptgroups = array();
 
-			$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+				foreach ($arrOption as $arrOptgroup)
+				{
+					$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
+											   specialchars($arrOptgroup['value']),
+											   $this->isSelected($arrOptgroup),
+											   $arrOptgroup['label']);
+				}
+
+				$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+			}
 		}
 
-		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset();">%s</select>%s',
+		// Chosen
+		if ($this->chosen)
+		{
+			$strClass .= ' tl_chosen';
+		}
+
+		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s onfocus="Backend.getScrollOffset()">%s</select>%s',
 						$this->strName,
 						$this->strId,
 						$strClass,
-						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+						(($this->strClass != '') ? ' ' . $this->strClass : ''),
 						$this->getAttributes(),
 						implode('', $arrOptions),
 						$this->wizard);
 	}
 }
-
-?>

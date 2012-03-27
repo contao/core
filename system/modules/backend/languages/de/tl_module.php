@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -43,7 +42,6 @@ $GLOBALS['TL_LANG']['tl_module']['defineRoot']     = array('Eine Referenzseite f
 $GLOBALS['TL_LANG']['tl_module']['rootPage']       = array('Referenzseite', 'Bitte wählen Sie die Referenzseite aus der Seitenstruktur.');
 $GLOBALS['TL_LANG']['tl_module']['navigationTpl']  = array('Navigationstemplate', 'Hier können Sie das Navigationstemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['pages']          = array('Seiten', 'Bitte wählen Sie eine oder mehrere Seiten aus der Seitenstruktur.');
-$GLOBALS['TL_LANG']['tl_module']['includeRoot']    = array('Wurzelseite als Startpunkt', 'Die Wurzelseite der Seitenstruktur als Ausgangspunkt des Moduls verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['showHidden']     = array('Versteckte Seiten anzeigen', 'Menüpunkte anzeigen, die sonst in der Navigation nicht sichtbar sind.');
 $GLOBALS['TL_LANG']['tl_module']['customLabel']    = array('Individuelle Bezeichnung', 'Hier können Sie eine individuelle Bezeichnung für das Drop-Down-Menü eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['autologin']      = array('Autologin erlauben', 'Mitgliedern die automatische Anmeldung im Frontend erlauben.');
@@ -86,11 +84,26 @@ $GLOBALS['TL_LANG']['tl_module']['useCaption']     = array('Bildunterschrift anz
 $GLOBALS['TL_LANG']['tl_module']['fullsize']       = array('Großansicht/Neues Fenster', 'Großansicht des Bildes in einer Lightbox bzw. den Link in einem neuem Browserfenster öffnen.');
 $GLOBALS['TL_LANG']['tl_module']['multiSRC']       = array('Quelldateien', 'Bitte wählen Sie eine oder mehrere Dateien aus der Dateiübersicht.');
 $GLOBALS['TL_LANG']['tl_module']['html']           = array('HTML-Code', 'Sie können die Liste der erlaubten HTML-Tags in den Backend-Einstellungen ändern.');
+$GLOBALS['TL_LANG']['tl_module']['rss_cache']      = array('Cache-Verfallszeit', 'Hier können Sie festlegen, wie lange der RSS-Feed zwischengespeichert wird.');
+$GLOBALS['TL_LANG']['tl_module']['rss_feed']       = array('Feed-URLs', 'Bitte geben Sie die URL eines oder mehrerer RSS-Feeds ein.');
+$GLOBALS['TL_LANG']['tl_module']['rss_template']   = array('Feed-Template', 'Hier können Sie das Feed-Template auswählen.');
+$GLOBALS['TL_LANG']['tl_module']['numberOfItems']  = array('Gesamtzahl der Beiträge', 'Hier können Sie die Gesamtzahl der Beiträge begrenzen. Geben Sie 0 ein, um alle anzuzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['protected']      = array('Modul schützen', 'Das Modul nur bestimmten Gruppen anzeigen.');
 $GLOBALS['TL_LANG']['tl_module']['groups']         = array('Erlaubte Mitgliedergruppen', 'Diese Gruppen können das Modul sehen.');
 $GLOBALS['TL_LANG']['tl_module']['guests']         = array('Nur Gästen anzeigen', 'Das Modul verstecken, sobald ein Mitglied angemeldet ist.');
 $GLOBALS['TL_LANG']['tl_module']['cssID']          = array('CSS-ID/Klasse', 'Hier können Sie eine ID und beliebig viele Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_module']['space']          = array('Abstand davor und dahinter', 'Hier können Sie den Abstand vor und nach dem Modul in Pixeln eingeben. Sie sollten Inline-Styles jedoch nach Möglichkeit vermeiden und den Abstand in einem Stylesheet definieren.');
+$GLOBALS['TL_LANG']['tl_module']['disableCaptcha'] = array('Sicherheitsfrage deaktivieren', 'Hier können Sie die Sicherheitsfrage abschalten (nicht empfohlen).');
+$GLOBALS['TL_LANG']['tl_module']['reg_groups']     = array('Mitgliedergruppen', 'Hier können Sie den Benutzer einer oder mehreren Gruppen zuweisen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_allowLogin'] = array('Login erlauben', 'Dem neuen Benutzer die Anmeldung im Frontend erlauben.');
+$GLOBALS['TL_LANG']['tl_module']['reg_skipName']   = array('Benutzernamen nicht abfragen', 'Den Benutzernamen bei der Passwort-Anforderung nicht abfragen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_close']      = array('Modus', 'Hier legen Sie fest, wie die Löschung ausgeführt wird.');
+$GLOBALS['TL_LANG']['tl_module']['reg_assignDir']  = array('Ein Benutzerverzeichnis anlegen', 'Ein Benutzerverzeichnis aus dem registrierten Benutzernamen erstellen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_homeDir']    = array('Pfad zum Benutzerverzeichnis', 'Bitte wählen Sie das übergeordnete Verzeichnis aus der Dateiübersicht.');
+$GLOBALS['TL_LANG']['tl_module']['reg_activate']   = array('Aktivierungsmail verschicken', 'Eine Aktivierungsmail an die registrierte E-Mail-Adresse senden.');
+$GLOBALS['TL_LANG']['tl_module']['reg_jumpTo']     = array('Bestätigungsseite', 'Bitte wählen Sie die Seite aus, zu der Benutzer nach Abarbeitung der Anfrage weitergeleitet werden.');
+$GLOBALS['TL_LANG']['tl_module']['reg_text']       = array('Aktivierungsmail', 'Sie können die Platzhalter <em>##domain##</em> (Domainname), <em>##link##</em> (Aktivierungslink) sowie alle Eingabefelder (z.B. <em>##lastname##</em>) benutzen.');
+$GLOBALS['TL_LANG']['tl_module']['reg_password']   = array('Bestätigungsmail', 'Sie können die Platzhalter <em>##domain##</em> (Domainname), <em>##link##</em> (Aktivierungslink) sowie alle Benutzereigenschaften (z.B. <em>##lastname##</em>) verwenden.');
 
 
 /**
@@ -109,18 +122,28 @@ $GLOBALS['TL_LANG']['tl_module']['html_legend']      = 'Text/HTML';
 $GLOBALS['TL_LANG']['tl_module']['protected_legend'] = 'Zugriffsschutz';
 $GLOBALS['TL_LANG']['tl_module']['expert_legend']    = 'Experten-Einstellungen';
 $GLOBALS['TL_LANG']['tl_module']['email_legend']     = 'E-Mail-Einstellungen';
+$GLOBALS['TL_LANG']['tl_module']['account_legend']   = 'Konto-Einstellungen';
+
+
+/**
+ * Default messages
+ */
+$GLOBALS['TL_LANG']['tl_module']['emailText']    = array('Ihre Registrierung auf %s', "Vielen Dank für Ihre Registrierung auf ##domain##.\n\nBitte klicken Sie ##link## um Ihre Registrierung abzuschließen und Ihr Konto zu aktivieren. Wenn Sie keinen Zugang angefordert haben, ignorieren Sie bitte diese E-Mail.\n");
+$GLOBALS['TL_LANG']['tl_module']['passwordText'] = array('Ihre Passwort-Anforderung auf %s', "Sie haben ein neues Passwort für ##domain## angefordert.\n\nBitte klicken Sie ##link## um das neue Passwort festzulegen. Wenn Sie diese E-Mail nicht angefordert haben, kontaktieren Sie bitte den Administrator der Webseite.\n");
 
 
 /**
  * References
  */
-$GLOBALS['TL_LANG']['tl_module']['header']   = 'Kopfzeile';
-$GLOBALS['TL_LANG']['tl_module']['left']     = 'Linke Spalte';
-$GLOBALS['TL_LANG']['tl_module']['main']     = 'Hauptspalte';
-$GLOBALS['TL_LANG']['tl_module']['right']    = 'Rechte Spalte';
-$GLOBALS['TL_LANG']['tl_module']['footer']   = 'Fußzeile';
-$GLOBALS['TL_LANG']['tl_module']['internal'] = 'Interne Datei';
-$GLOBALS['TL_LANG']['tl_module']['external'] = 'Externe URL';
+$GLOBALS['TL_LANG']['tl_module']['header']           = 'Kopfzeile';
+$GLOBALS['TL_LANG']['tl_module']['left']             = 'Linke Spalte';
+$GLOBALS['TL_LANG']['tl_module']['main']             = 'Hauptspalte';
+$GLOBALS['TL_LANG']['tl_module']['right']            = 'Rechte Spalte';
+$GLOBALS['TL_LANG']['tl_module']['footer']           = 'Fußzeile';
+$GLOBALS['TL_LANG']['tl_module']['internal']         = 'Interne Datei';
+$GLOBALS['TL_LANG']['tl_module']['external']         = 'Externe URL';
+$GLOBALS['TL_LANG']['tl_module']['close_deactivate'] = 'Konto deaktivieren';
+$GLOBALS['TL_LANG']['tl_module']['close_delete']     = 'Konto unwiderruflich löschen';
 
 
 /**
@@ -134,5 +157,3 @@ $GLOBALS['TL_LANG']['tl_module']['copy']       = array('Modul duplizieren', 'Mod
 $GLOBALS['TL_LANG']['tl_module']['delete']     = array('Modul löschen', 'Modul ID %s löschen');
 $GLOBALS['TL_LANG']['tl_module']['editheader'] = array('Theme bearbeiten', 'Die Theme-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_module']['pasteafter'] = array('Hier einfügen', 'Nach dem Modul ID %s einfügen');
-
-?>

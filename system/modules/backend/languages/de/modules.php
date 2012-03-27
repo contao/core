@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -41,6 +40,7 @@ $GLOBALS['TL_LANG']['MOD']['css']         = array('Stylesheets', 'Stylesheets er
 $GLOBALS['TL_LANG']['MOD']['modules']     = array('Frontend-Module', 'Die Frontend-Module der Webseite verwalten.');
 $GLOBALS['TL_LANG']['MOD']['layout']      = array('Seitenlayouts', 'Module und Stylesheets zu einem Seitenlayout kombinieren.');
 $GLOBALS['TL_LANG']['MOD']['page']        = array('Seitenstruktur', 'Die Seitenstruktur der Webseite(n) erstellen.');
+$GLOBALS['TL_LANG']['MOD']['tpl_editor']  = array('Templates', 'Templates im Backend bearbeiten.');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Benutzerverwaltung';
 $GLOBALS['TL_LANG']['MOD']['member']      = array('Mitglieder', 'Mitgliederkonten verwalten (Frontend-Benutzer).');
 $GLOBALS['TL_LANG']['MOD']['mgroup']      = array('Mitgliedergruppen', 'Mitgliedergruppen verwalten (Frontend-Benutzergruppen).');
@@ -54,6 +54,3 @@ $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Systemwartung', 'Contao warte
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'Benutzerfunktionen';
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Rückgängig', 'Gelöschte Datensätze wiederherstellen.');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Persönliche Daten', 'Persönliche Daten ändern oder ein neues Passwort setzen.');
-$GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task Center', 'Anderen Backend-Benutzern Aufgaben zuweisen.');
-
-?>

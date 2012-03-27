@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class OptionWizard
  *
  * Provide methods to handle form field options.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class OptionWizard extends Widget
+class OptionWizard extends \Widget
 {
 
 	/**
@@ -54,31 +59,8 @@ class OptionWizard extends Widget
 
 
 	/**
-	 * Add specific attributes
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		switch ($strKey)
-		{
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
-			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
-				break;
-
-			default:
-				parent::__set($strKey, $varValue);
-				break;
-		}
-	}
-
-
-	/**
-	 * Validate input and set value
+	 * Validate the input and set the value
+	 * @return void
 	 */
 	public function validate()
 	{
@@ -168,8 +150,8 @@ class OptionWizard extends Widget
 			$this->varValue = array(array(''));
 		}
 
-		// Begin table
-		$return .= '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
+		// Begin the table
+		$return = '<table class="tl_optionwizard" id="ctrl_'.$this->strId.'">
   <thead>
     <tr>
       <th>'.$GLOBALS['TL_LANG']['MSC']['ow_value'].'</th>
@@ -195,11 +177,11 @@ class OptionWizard extends Widget
 			
 			// Add row buttons
 			$return .= '
-      <td style="white-space:nowrap; padding-left:3px;">';
+      <td style="white-space:nowrap; padding-left:3px">';
 
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'" onclick="Backend.optionsWizard(this, \''.$button.'\', \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'</a> ';
+				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'" onclick="Backend.optionsWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['ow_'.$button]).'</a> ';
 			}
 
 			$return .= '</td>
@@ -211,5 +193,3 @@ class OptionWizard extends Widget
   </table>';
 	}
 }
-
-?>

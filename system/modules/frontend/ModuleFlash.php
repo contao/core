@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleFlash
  *
  * Front end module "flash".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFlash extends Module
+class ModuleFlash extends \Module
 {
 
 	/**
@@ -53,14 +58,31 @@ class ModuleFlash extends Module
 	 */
 	public function generate()
 	{
-		if ($this->source != 'external' && (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC)))
-		{
-			return '';
-		}
-
 		if (TL_MODE == 'BE')
 		{
 			return $this->altContent;
+		}
+
+		if ($this->source != 'external')
+		{
+			if ($this->singleSRC == '')
+			{
+				return '';
+			}
+
+			if (!is_numeric($this->singleSRC))
+			{
+				return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+
+			$objFile = \FilesModel::findByPk($this->singleSRC);
+
+			if ($objFile === null  || !is_file(TL_ROOT . '/' . $objFile->path))
+			{
+				return '';
+			}
+
+			$this->singleSRC = $objFile->path;
 		}
 
 		return parent::generate();
@@ -68,7 +90,8 @@ class ModuleFlash extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -80,10 +103,10 @@ class ModuleFlash extends Module
 		$this->Template->var = 'swf' . $this->id;
 		$this->Template->transparent = $this->transparent ? true : false;
 		$this->Template->interactive = $this->interactive ? true : false;
-		$this->Template->flashId = strlen($this->flashID) ? $this->flashID : 'swf_' . $this->id;
+		$this->Template->flashId = $this->flashID ?: 'swf_' . $this->id;
 		$this->Template->fsCommand = '  ' . preg_replace('/[\n\r]/', "\n  ", $this->String->decodeEntities($this->flashJS));
 		$this->Template->flashvars = 'URL=' . $this->Environment->base;
-		$this->Template->version = strlen($this->version) ? $this->version : '6.0.0';
+		$this->Template->version = $this->version ?: '6.0.0';
 
 		$size = deserialize($this->size);
 
@@ -105,5 +128,3 @@ class ModuleFlash extends Module
 		}
 	}
 }
-
-?>

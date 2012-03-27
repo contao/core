@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentText
  *
  * Front end content element "text".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentText extends ContentElement
+class ContentText extends \ContentElement
 {
 
 	/**
@@ -48,7 +53,8 @@ class ContentText extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -68,12 +74,23 @@ class ContentText extends ContentElement
 		$this->Template->text = $this->String->encodeEmail($this->text);
 		$this->Template->addImage = false;
 
-		// Add image
-		if ($this->addImage && strlen($this->singleSRC) && is_file(TL_ROOT . '/' . $this->singleSRC))
+		// Add an image
+		if ($this->addImage && $this->singleSRC != '')
 		{
-			$this->addImageToTemplate($this->Template, $this->arrData);
+			if (!is_numeric($this->singleSRC))
+			{
+				$this->Template->text = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($this->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$this->singleSRC = $objModel->path;
+					$this->addImageToTemplate($this->Template, $this->arrData);
+				}
+			}
 		}
 	}
 }
-
-?>

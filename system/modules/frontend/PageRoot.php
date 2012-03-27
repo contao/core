@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class PageRoot
  *
  * Provide methods to handle a website root page.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRoot extends Frontend
+class PageRoot extends \Frontend
 {
 
 	/**
@@ -48,38 +53,22 @@ class PageRoot extends Frontend
 	 */
 	public function generate($pageId, $blnReturn=false)
 	{
-		$time = time();
+		$objNextPage = \PageModel::findFirstPublishedByPid($pageId);
 
-		// Get first active page
-		$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-									  ->limit(1)
-									  ->execute($pageId);
-
-		if ($objNextPage->numRows)
+		// No published pages yet
+		if ($objNextPage === null)
 		{
-			if ($blnReturn)
-			{
-				return $objNextPage->id;
-			}
-
-			$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
+			header('HTTP/1.1 404 Not Found');
+			$this->log('No active page found under root page "' . $pageId . '")', 'PageRoot generate()', TL_ERROR);
+			die('No active pages found');
 		}
 
-		// No root page found
-		if ($pageId === 0)
+		// Only return the page ID
+		if ($blnReturn)
 		{
-			$this->log('No root page found (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);
+			return $objNextPage->id;
 		}
 
-		// No active page found
-		else
-		{
-			$this->log('No active page found under root page "' . $pageId . '" (host "' . $this->Environment->host . '", languages "'.implode(', ', $this->Environment->httpAcceptLanguage).'")', 'PageRoot generate()', TL_ERROR);
-		}
-
-		header('HTTP/1.1 404 Not Found');
-		die('No pages found');
+		$this->redirect($this->generateFrontendUrl($objNextPage->row()));
 	}
 }
-
-?>

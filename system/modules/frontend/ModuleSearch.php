@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleSearch
  *
  * Front end module "search".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSearch extends Module
+class ModuleSearch extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleSearch extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### WEBSITE SEARCH ###';
 			$objTemplate->title = $this->headline;
@@ -71,7 +76,8 @@ class ModuleSearch extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -95,7 +101,7 @@ class ModuleSearch extends Module
 			$this->queryType = $this->Input->get('query_type');
 		}
 
-		$objFormTemplate = new FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
+		$objFormTemplate = new \FrontendTemplate((($this->searchType == 'advanced') ? 'mod_search_advanced' : 'mod_search_simple'));
 
 		$objFormTemplate->uniqueId = $this->id;
 		$objFormTemplate->queryType = $this->queryType;
@@ -111,13 +117,11 @@ class ModuleSearch extends Module
 		// Redirect page
 		if ($this->jumpTo > 0)
 		{
-			$objTargetPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($this->jumpTo);
+			$this->objModel->getRelated('jumpTo');
 
-			if ($objTargetPage->numRows)
+			if ($this->objModel->jumpTo['id'] !== null)
 			{
-				$objFormTemplate->action = $this->generateFrontendUrl($objTargetPage->row());
+				$objFormTemplate->action = $this->generateFrontendUrl($this->objModel->jumpTo);
 			}
 		}
 
@@ -126,7 +130,7 @@ class ModuleSearch extends Module
 		$this->Template->results = '';
 
 		// Execute the search if there are keywords
-		if ($this->jumpTo < 1 && $strKeywords != '' && $strKeywords != '*')
+		if ($strKeywords != '' && $strKeywords != '*' && !$this->jumpTo['id'])
 		{
 			// Reference page
 			if ($this->rootPage > 0)
@@ -135,7 +139,6 @@ class ModuleSearch extends Module
 				$arrPages = $this->getChildRecords($this->rootPage, 'tl_page');
 				array_unshift($arrPages, $this->rootPage);
 			}
-
 			// Website root
 			else
 			{
@@ -145,7 +148,7 @@ class ModuleSearch extends Module
 			}
 
 			// Return if there are no pages
-			if (!is_array($arrPages) || count($arrPages) < 1)
+			if (!is_array($arrPages) || empty($arrPages))
 			{
 				$this->log('No searchable pages found', 'ModuleSearch compile()', TL_ERROR);
 				return;
@@ -154,15 +157,16 @@ class ModuleSearch extends Module
 			$arrResult = null;
 			$strChecksum = md5($strKeywords.$this->Input->get('query_type').$intRootId.$this->fuzzy);
 			$query_starttime = microtime(true);
+			$strCacheFile = 'system/cache/search/' . $strChecksum . '.json';
 
-			// Load cached result
-			if (file_exists(TL_ROOT . '/system/tmp/' . $strChecksum))
+			// Load the cached result
+			if (file_exists(TL_ROOT . '/' . $strCacheFile))
 			{
-				$objFile = new File('system/tmp/' . $strChecksum);
+				$objFile = new \File($strCacheFile);
 
 				if ($objFile->mtime > time() - 1800)
 				{
-					$arrResult = deserialize($objFile->getContent());
+					$arrResult = json_decode($objFile->getContent(), true);
 				}
 				else
 				{
@@ -170,22 +174,22 @@ class ModuleSearch extends Module
 				}
 			}
 
-			// Cache result
-			if (is_null($arrResult))
+			// Cache the result
+			if ($arrResult === null)
 			{
 				try
 				{
 					$objSearch = $this->Search->searchFor($strKeywords, ($this->Input->get('query_type') == 'or'), $arrPages, 0, 0, $this->fuzzy);
 					$arrResult = $objSearch->fetchAllAssoc();
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					$this->log('Website search failed: ' . $e->getMessage(), 'ModuleSearch compile()', TL_ERROR);
 					$arrResult = array();
 				}
 
-				$objFile = new File('system/tmp/' . $strChecksum);
-				$objFile->write(serialize($arrResult));
+				$objFile = new \File($strCacheFile);
+				$objFile->write(json_encode($arrResult));
 				$objFile->close();
 			}
 
@@ -208,7 +212,7 @@ class ModuleSearch extends Module
 						{
 							$groups = deserialize($v['groups']);
 
-							if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
+							if (!is_array($groups) || empty($groups) || !count(array_intersect($groups, $this->User->groups)))
 							{
 								unset($arrResult[$k]);
 							}
@@ -226,7 +230,6 @@ class ModuleSearch extends Module
 			{
 				$this->Template->header = sprintf($GLOBALS['TL_LANG']['MSC']['sEmpty'], $strKeywords);
 				$this->Template->duration = substr($query_endtime-$query_starttime, 0, 6) . ' ' . $GLOBALS['TL_LANG']['MSC']['seconds'];
-
 				return;
 			}
 
@@ -239,10 +242,16 @@ class ModuleSearch extends Module
 				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 				$per_page = $this->Input->get('per_page') ? $this->Input->get('per_page') : $this->perPage;
 
-				// Reset page navigator if page exceeds the lower or upper limit
-				if ($page > ceil($count/$per_page) || $page < 1)
+				// Do not index or cache the page if the page number is outside the range
+				if ($page < 1 || $page > ceil($count/$per_page))
 				{
-					$page = 1;
+					global $objPage;
+					$objPage->noSearch = 1;
+					$objPage->cache = 0;
+
+					// Send a 404 header
+					header('HTTP/1.1 404 Not Found');
+					return;
 				}
 
 				$from = (($page - 1) * $per_page) + 1;
@@ -251,7 +260,7 @@ class ModuleSearch extends Module
 				// Pagination menu
 				if ($to < $count || $from > 1)
 				{
-					$objPagination = new Pagination($count, $per_page);
+					$objPagination = new \Pagination($count, $per_page);
 					$this->Template->pagination = $objPagination->generate("\n  ");
 				}
 			}
@@ -259,11 +268,11 @@ class ModuleSearch extends Module
 			// Get the results
 			for ($i=($from-1); $i<$to && $i<$count; $i++)
 			{
-				$objTemplate = new FrontendTemplate((strlen($this->searchTpl) ? $this->searchTpl : 'search_default'));
+				$objTemplate = new \FrontendTemplate($this->searchTpl ?: 'search_default');
 
 				$objTemplate->url = $arrResult[$i]['url'];
 				$objTemplate->link = $arrResult[$i]['title'];
-				$objTemplate->href = $this->Environment->base . $arrResult[$i]['url'];
+				$objTemplate->href = $arrResult[$i]['url'];
 				$objTemplate->title = specialchars($arrResult[$i]['title']);
 				$objTemplate->class = (($i == ($from - 1)) ? 'first ' : '') . (($i == ($to - 1) || $i == ($count - 1)) ? 'last ' : '') . (($i % 2 == 0) ? 'even' : 'odd');
 				$objTemplate->relevance = sprintf($GLOBALS['TL_LANG']['MSC']['relevance'], number_format($arrResult[$i]['relevance'] / $arrResult[0]['relevance'] * 100, 2) . '%');
@@ -273,7 +282,7 @@ class ModuleSearch extends Module
 				$arrContext = array();
 				$arrMatches = trimsplit(',', $arrResult[$i]['matches']);
 
-				// Get context
+				// Get the context
 				foreach ($arrMatches as $strWord)
 				{
 					$arrChunks = array();
@@ -285,8 +294,8 @@ class ModuleSearch extends Module
 					}
 				}
 
-				// Shorten context and highlight keywords
-				if (count($arrContext))
+				// Shorten the context and highlight all keywords
+				if (!empty($arrContext))
 				{
 					$this->import('String');
 
@@ -304,5 +313,3 @@ class ModuleSearch extends Module
 		}
 	}
 }
-
-?>

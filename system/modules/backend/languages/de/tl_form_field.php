@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -69,6 +68,7 @@ $GLOBALS['TL_LANG']['tl_form_field']['datim']          = array('Datum und Uhrzei
 $GLOBALS['TL_LANG']['tl_form_field']['phone']          = array('Telefonnummer', 'Erlaubt numerische Zeichen, Plus (+), Minus (-), Schrägstrich (/), Klammern () und Leerzeichen ( ).');
 $GLOBALS['TL_LANG']['tl_form_field']['email']          = array('E-Mail-Adresse', 'Prüft, ob die Eingabe eine gültige E-Mail-Adresse ist.');
 $GLOBALS['TL_LANG']['tl_form_field']['url']            = array('URL-Format', 'Prüft, ob die Eingabe eine gültige URL ist.');
+$GLOBALS['TL_LANG']['tl_form_field']['placeholder']    = array('Platzhalter', 'Dieser Text wird angezeigt solange das Feld noch nicht ausgefüllt wurde (benötigt HTML5).');
 $GLOBALS['TL_LANG']['tl_form_field']['maxlength']      = array('Maximale Eingabelänge', 'Hier können Sie die maximale Anzahl an Zeichen (Text) bzw. Bytes (Datei-Uploads) festlegen.');
 $GLOBALS['TL_LANG']['tl_form_field']['size']           = array('Reihen und Spalten', 'Die Anzahl an Reihen und Spalten der Textarea.');
 $GLOBALS['TL_LANG']['tl_form_field']['multiple']       = array('Mehrfachauswahl', 'Erlaubt die Auswahl mehrerer Optionen.');
@@ -84,6 +84,8 @@ $GLOBALS['TL_LANG']['tl_form_field']['fsStop']         = array('Umschlag Ende', 
 $GLOBALS['TL_LANG']['tl_form_field']['value']          = array('Standard-Wert', 'Hier können Sie einen Standard-Wert für das Feld eingeben.');
 $GLOBALS['TL_LANG']['tl_form_field']['class']          = array('CSS-Klasse', 'Hier können Sie eine oder mehrere Klassen eingeben.');
 $GLOBALS['TL_LANG']['tl_form_field']['accesskey']      = array('Tastaturkürzel', 'Ein Formularfeld kann direkt angewählt werden, indem man gleichzeitig die [ALT]- bzw. [STRG]-Taste und das Tastaturkürzel drückt.');
+$GLOBALS['TL_LANG']['tl_form_field']['tabindex']       = array('Tab-Index', 'Die Position des Formularfeldes innerhalb der Tabulator-Reihenfolge.');
+$GLOBALS['TL_LANG']['tl_form_field']['fSize']          = array('Feldgröße', 'Hier können Sie die Größe des Upload-Feldes festlegen (Size-Attribut).');
 $GLOBALS['TL_LANG']['tl_form_field']['addSubmit']      = array('Absende-Schaltfläche hinzufügen', 'Eine Absende-Schaltfläche neben dem Feld einfügen, um ein einzeiliges Formular zu erstellen.');
 $GLOBALS['TL_LANG']['tl_form_field']['slabel']         = array('Bezeichnung der Absende-Schaltfläche', 'Bitte geben Sie die Bezeichnung der Absende-Schaltfläche ein.');
 $GLOBALS['TL_LANG']['tl_form_field']['imageSubmit']    = array('Bildschaltfläche erstellen', 'Eine Bildschaltfläche anstatt der Standard-Schaltfläche verwenden.');
@@ -116,5 +118,3 @@ $GLOBALS['TL_LANG']['tl_form_field']['editheader'] = array('Formular bearbeiten'
 $GLOBALS['TL_LANG']['tl_form_field']['pasteafter'] = array('Oben einfügen', 'Nach dem Feld ID %s einfügen');
 $GLOBALS['TL_LANG']['tl_form_field']['pastenew']   = array('Neues Feld oben erstellen', 'Neues Element nach dem Feld ID %s erstellen');
 $GLOBALS['TL_LANG']['tl_form_field']['toggle']     = array('Sichtbarkeit ändern', 'Die Sichtbarkeit des Feldes ID %s ändern');
-
-?>

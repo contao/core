@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleArticle
  *
  * Provides methodes to handle articles.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticle extends Module
+class ModuleArticle extends \Module
 {
 
 	/**
@@ -74,6 +79,7 @@ class ModuleArticle extends Module
 
 	/**
 	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -82,11 +88,11 @@ class ModuleArticle extends Module
 
 		if ($this->blnNoMarkup)
 		{
-			$this->Template = new FrontendTemplate('mod_article_plain');
+			$this->Template = new \FrontendTemplate('mod_article_plain');
 			$this->Template->setData($this->arrData);
 		}
 
-		$alias = ($this->alias != '') ? $this->alias : $this->title;
+		$alias = $this->alias ?: $this->title;
 
 		if (in_array($alias, array('header', 'container', 'left', 'main', 'right', 'footer')))
 		{
@@ -96,17 +102,16 @@ class ModuleArticle extends Module
 		$alias = standardize($alias);
 
 		// Generate the cssID if it is not set
-		if (!strlen($this->cssID[0]))
+		if ($this->cssID[0] == '')
 		{
 			$this->cssID = array($alias, $this->cssID[1]);
 		}
 
 		$this->Template->column = $this->inColumn;
 
-		// Add modification date
+		// Add the modification date
 		$this->Template->timestamp = $this->tstamp;
-		$this->Template->date = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->tstamp);
-		$this->Template->author = $this->author;
+		$this->Template->date = $this->parseDate($objPage->datimFormat, $this->tstamp);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
@@ -118,15 +123,16 @@ class ModuleArticle extends Module
 			$this->teaser = $this->String->toHtml5($this->teaser);
 		}
 
-		// Show teaser only
+		// Show the teaser only
 		if ($this->multiMode && $this->showTeaser)
 		{
-			$this->Template = new FrontendTemplate('mod_article_teaser');
+			$this->Template = new \FrontendTemplate('mod_article_teaser');
 			$this->Template->setData($this->arrData);
 
-			// Override CSS ID and class
+			$this->cssID = array($alias, '');
 			$arrCss = deserialize($this->teaserCssID);
 
+			// Override the CSS ID and class
 			if (is_array($arrCss) && count($arrCss) == 2)
 			{
 				if ($arrCss[0] == '')
@@ -137,7 +143,7 @@ class ModuleArticle extends Module
 				$this->cssID = $arrCss;
 			}
 
-			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($this->alias)) ? $this->alias : $this->id;
+			$article = (!$GLOBALS['TL_CONFIG']['disableAlias'] && $this->alias != '') ? $this->alias : $this->id;
 			$href = 'articles=' . (($this->inColumn != 'main') ? $this->inColumn . ':' : '') . $article;
 
 			$this->Template->headline = $this->headline;
@@ -152,7 +158,7 @@ class ModuleArticle extends Module
 		// Get section and article alias
 		list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
 
-		if (is_null($strArticle))
+		if ($strArticle === null)
 		{
 			$strArticle = $strSection;
 		}
@@ -182,23 +188,23 @@ class ModuleArticle extends Module
 			}
 		}
 
-		$contentElements = '';
+		$arrElements = array();
+		$objCte = \ContentCollection::findPublishedByPid($this->id);
 
-		// Get all visible content elements
-		$objCte = $this->Database->prepare("SELECT id FROM tl_content WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND invisible=''" : "") . " ORDER BY sorting")
-								 ->execute($this->id);
-
-		while ($objCte->next())
+		if ($objCte !== null)
 		{
-			$contentElements .= $this->getContentElement($objCte->id);
+			while ($objCte->next())
+			{
+				$arrElements[] = $this->getContentElement($objCte);
+			}
 		}
 
 		$this->Template->teaser = $this->teaser;
-		$this->Template->contentElements = $contentElements;
+		$this->Template->elements = $arrElements;
 
 		if ($this->keywords != '')
 		{
-			$GLOBALS['TL_KEYWORDS'] .= (strlen($GLOBALS['TL_KEYWORDS']) ? ', ' : '') . $this->keywords;
+			$GLOBALS['TL_KEYWORDS'] .= (($GLOBALS['TL_KEYWORDS'] != '') ? ', ' : '') . $this->keywords;
 		}
 
 		// Backwards compatibility
@@ -213,7 +219,7 @@ class ModuleArticle extends Module
 		{
 			$options = deserialize($this->printable);
 
-			if (is_array($options) && count($options) > 0)
+			if (is_array($options) && !empty($options))
 			{
 				$this->Template->printable = true;
 				$this->Template->printButton = in_array('print', $options);
@@ -240,5 +246,3 @@ class ModuleArticle extends Module
 		}
 	}
 }
-
-?>

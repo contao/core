@@ -1,20 +1,27 @@
 <?php
 
 // Add slimbox style sheet
-$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/slimbox/css/slimbox.css|screen';
+$GLOBALS['TL_CSS'][] = 'plugins/mootools/slimbox/css/slimbox.css||static';
 
 ?>
 
-<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/slimbox/js/slimbox.js"></script>
+<script type="text/javascript" src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/slimbox/js/slimbox.js"></script>
 <script type="text/javascript">
 /* <![CDATA[ */
-Slimbox.scanPage = function() {
-  $$(document.links).filter(function(el) {
-    return el.rel && el.rel.test(/^lightbox/i);
-  }).slimbox({}, null, function(el) {
-    return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
+(function($) {
+  window.addEvent('domready', function() {
+    $$(document.links).filter(function(el) {
+      return el.rel && el.rel.test(/^lightbox/i);
+    }).slimbox({
+      // Put custom options here
+    }, null, function(el) {
+      return (this == el) || ((this.rel.length > 8) && (this.rel == el.rel));
+    });
+    // Support swiping on mobile devices
+    $('lbImage').addEvent('swipe', function(e) {
+      (e.direction == 'left') ? $('lbNextLink').fireEvent('click') : $('lbPrevLink').fireEvent('click');
+    });
   });
-};
-window.addEvent('domready', Slimbox.scanPage);
+})(document.id);
 /* ]]> */
 </script>

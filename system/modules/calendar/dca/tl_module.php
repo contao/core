@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,7 +32,7 @@
  * Add palettes to tl_module
  */
 $GLOBALS['TL_DCA']['tl_module']['palettes']['calendar']    = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_startDay;{redirect_legend},jumpTo;{template_legend:hide},cal_ctemplate;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
-$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_ignoreDynamic,cal_format,cal_order,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['eventlist']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_format,cal_ignoreDynamic,cal_order,cal_readerModule,cal_limit,perPage;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventreader'] = '{title_legend},name,headline,type;{config_legend},cal_calendar;{template_legend:hide},cal_template,imgSize;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['eventmenu']   = '{title_legend},name,headline,type;{config_legend},cal_calendar,cal_noSpan,cal_showQuantity,cal_format,cal_startDay,cal_order;{redirect_legend},jumpTo;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
@@ -47,7 +46,28 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_calendar'] = array
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
 	'options_callback'        => array('tl_module_calendar', 'getCalendars'),
-	'eval'                    => array('mandatory'=>true, 'multiple'=>true)
+	'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+	'sql'                     => "blob NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
+	'default'                 => 0,
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
+	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
@@ -62,7 +82,17 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_format'] = array
 	'wizard' => array
 	(
 		array('tl_module_calendar', 'hideStartDay')
-	)
+	),
+	'sql'                     => "varchar(32) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_ignoreDynamic'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'w50 m12'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
@@ -73,21 +103,19 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_order'] = array
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_noSpan'] = array
+$GLOBALS['TL_DCA']['tl_module']['fields']['cal_readerModule'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_noSpan'],
+	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_readerModule'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_ignoreDynamic'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_ignoreDynamic'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'select',
+	'options_callback'        => array('tl_module_calendar', 'getReaderModules'),
+	'reference'               => &$GLOBALS['TL_LANG']['tl_module'],
+	'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+	'sql'                     => "int(10) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
@@ -95,18 +123,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_limit'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_limit'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50')
-);
-
-$GLOBALS['TL_DCA']['tl_module']['fields']['cal_startDay'] = array
-(
-	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_startDay'],
-	'default'                 => 0,
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options'                 => array(0, 1, 2, 3, 4, 5, 6),
-	'reference'               => &$GLOBALS['TL_LANG']['DAYS'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('rgxp'=>'digit', 'tl_class'=>'w50'),
+	'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
@@ -116,7 +134,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_calendar', 'getEventTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
@@ -126,14 +145,16 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['cal_ctemplate'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_calendar', 'getCalendarTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['cal_showQuantity'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['cal_showQuantity'],
 	'exclude'                 => true,
-	'inputType'               => 'checkbox'
+	'inputType'               => 'checkbox',
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 
@@ -150,7 +171,7 @@ if (in_array('comments', Config::getInstance()->getActiveModules()))
  * Class tl_module_calendar
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -194,10 +215,29 @@ class tl_module_calendar extends Backend
 
 
 	/**
-	 * Return the calendar formats depending on the module type
+	 * Get all event reader modules and return them as array
 	 * @return array
 	 */
-	public function getFormats(DataContainer $dc)
+	public function getReaderModules()
+	{
+		$arrModules = array();
+		$objModules = $this->Database->execute("SELECT m.id, m.name, t.name AS theme FROM tl_module m LEFT JOIN tl_theme t ON m.pid=t.id WHERE m.type='eventreader' ORDER BY t.name, m.name");
+
+		while ($objModules->next())
+		{
+			$arrModules[$objModules->theme][$objModules->id] = $objModules->name . ' (ID ' . $objModules->id . ')';
+		}
+
+		return $arrModules;
+	}
+
+
+	/**
+	 * Return the calendar formats depending on the module type
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getFormats(\DataContainer $dc)
 	{
 		if ($dc->activeRecord->type == 'eventmenu')
 		{
@@ -207,8 +247,8 @@ class tl_module_calendar extends Backend
 		return array
 		(
 			'cal_list'     => array('cal_day', 'cal_month', 'cal_year', 'cal_all'),
-			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_all'),
-			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_all')
+			'cal_upcoming' => array('next_7', 'next_14', 'next_30', 'next_90', 'next_180', 'next_365', 'next_two', 'next_cur_month', 'next_cur_year', 'next_all'),
+			'cal_past'     => array('past_7', 'past_14', 'past_30', 'past_90', 'past_180', 'past_365', 'past_two', 'past_cur_month', 'past_cur_year', 'past_all')
 		);
 	}
 
@@ -244,10 +284,10 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all event templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getEventTemplates(DataContainer $dc)
+	public function getEventTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -262,10 +302,10 @@ class tl_module_calendar extends Backend
 
 	/**
 	 * Return all calendar templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCalendarTemplates(DataContainer $dc)
+	public function getCalendarTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -277,5 +317,3 @@ class tl_module_calendar extends Backend
 		return $this->getTemplateGroup('cal_', $intPid);
 	}
 }
-
-?>

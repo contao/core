@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class RadioButton
  *
  * Provide methods to handle radio buttons.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class RadioButton extends Widget
+class RadioButton extends \Widget
 {
 
 	/**
@@ -63,17 +68,26 @@ class RadioButton extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
-			case 'options':
-				$this->arrOptions = deserialize($varValue);
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+			case 'options':
+				$this->arrOptions = deserialize($varValue);
 				break;
 
 			default:
@@ -93,7 +107,7 @@ class RadioButton extends Widget
 
 		foreach ($this->arrOptions as $i=>$arrOption)
 		{
-			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset();"> <label for="opt_%s">%s</label>',
+			$arrOptions[] = sprintf('<input type="radio" name="%s" id="opt_%s" class="tl_radio" value="%s"%s%s onfocus="Backend.getScrollOffset()"> <label for="opt_%s">%s</label>',
 									 $this->strName,
 									 $this->strId.'_'.$i,
 									 specialchars($arrOption['value']),
@@ -104,7 +118,7 @@ class RadioButton extends Widget
 		}
 
 		// Add a "no entries found" message if there are no options
-		if (!count($arrOptions))
+		if (empty($arrOptions))
 		{
 			$arrOptions[]= '<p class="tl_noopt">'.$GLOBALS['TL_LANG']['MSC']['noResult'].'</p>';
 		}
@@ -120,5 +134,3 @@ class RadioButton extends Widget
 						$this->wizard);
 	}
 }
-
-?>

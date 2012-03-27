@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,46 +20,52 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class PageRegular
  *
  * Provide methods to handle a regular front end page.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageRegular extends Frontend
+class PageRegular extends \Frontend
 {
 
 	/**
 	 * Generate a regular page
 	 * @param object
+	 * @return void
 	 */
-	public function generate(Database_Result $objPage)
+	public function generate($objPage)
 	{
 		$GLOBALS['TL_KEYWORDS'] = '';
 		$GLOBALS['TL_LANGUAGE'] = $objPage->language;
 
 		$this->loadLanguageFile('default');
 
-		// Define the static URL constants
-		define('TL_FILES_URL', ($objPage->staticFiles != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticFiles . TL_PATH . '/' : '');
-		define('TL_SCRIPT_URL', ($objPage->staticSystem != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticSystem . TL_PATH . '/' : '');
-		define('TL_PLUGINS_URL', ($objPage->staticPlugins != '' && !$GLOBALS['TL_CONFIG']['debugMode']) ? $objPage->staticPlugins . TL_PATH . '/' : '');
+		// Static URLs
+		$this->setStaticUrl('TL_FILES_URL', $objPage->staticFiles);
+		$this->setStaticUrl('TL_SCRIPT_URL', $objPage->staticSystem);
+		$this->setStaticUrl('TL_PLUGINS_URL', $objPage->staticPlugins);
 
 		// Get the page layout
 		$objLayout = $this->getPageLayout($objPage->layout);
-		$objPage->template = strlen($objLayout->template) ? $objLayout->template : 'fe_page';
-		$objPage->templateGroup = $objLayout->templates;
+		$objPage->template = $objLayout->template ?: 'fe_page';
+		$objPage->templateGroup = $objLayout->pid['templates'];
 
 		// Store the output format
 		list($strFormat, $strVariant) = explode('_', $objLayout->doctype);
@@ -74,34 +80,48 @@ class PageRegular extends Frontend
 		$arrSections = array('header', 'left', 'right', 'main', 'footer');
 		$arrModules = deserialize($objLayout->modules);
 
-		// Generate all modules
-		foreach ($arrModules as $arrModule)
+		// Get all modules in a single DB query
+		$arrModuleIds = array_map(function($arr) { return $arr['mod']; }, $arrModules);
+		$objModules = \ModuleCollection::findMultipleByIds($arrModuleIds);
+
+		if ($objModules !== null)
 		{
-			if (in_array($arrModule['col'], $arrSections))
+			foreach ($arrModules as $arrModule)
 			{
-				// Filter active sections (see #3273)
-				if ($arrModule['col'] == 'header' && !$objLayout->header)
+				// Replace the module ID with the result row
+				if ($arrModule['mod'] > 0)
 				{
-					continue;
-				}
-				if ($arrModule['col'] == 'left' && $objLayout->cols != '2cll' && $objLayout->cols != '3cl')
-				{
-					continue;
-				}
-				if ($arrModule['col'] == 'right' && $objLayout->cols != '2clr' && $objLayout->cols != '3cl')
-				{
-					continue;
-				}
-				if ($arrModule['col'] == 'footer' && !$objLayout->footer)
-				{
-					continue;
+					$objModules->next();
+					$arrModule['mod'] = $objModules;
 				}
 
-				$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
-			}
-			else
-			{
-				$arrCustomSections[$arrModule['col']] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				// Generate the modules
+				if (in_array($arrModule['col'], $arrSections))
+				{
+					// Filter active sections (see #3273)
+					if ($arrModule['col'] == 'header' && !$objLayout->header)
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'left' && $objLayout->cols != '2cll' && $objLayout->cols != '3cl')
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'right' && $objLayout->cols != '2clr' && $objLayout->cols != '3cl')
+					{
+						continue;
+					}
+					if ($arrModule['col'] == 'footer' && !$objLayout->footer)
+					{
+						continue;
+					}
+
+					$this->Template->$arrModule['col'] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				}
+				else
+				{
+					$arrCustomSections[$arrModule['col']] .= $this->getFrontendModule($arrModule['mod'], $arrModule['col']);
+				}
 			}
 		}
 
@@ -119,7 +139,10 @@ class PageRegular extends Frontend
 
 		// Set the page title and description AFTER the modules have been generated
 		$this->Template->mainTitle = $objPage->rootTitle;
-		$this->Template->pageTitle = strlen($objPage->pageTitle) ? $objPage->pageTitle : $objPage->title;
+		$this->Template->pageTitle = $objPage->pageTitle ?: $objPage->title;
+
+		// Meta robots tag
+		$this->Template->robots = $objPage->robots ?: 'index,follow';
 
 		// Remove shy-entities (see #2709)
 		$this->Template->mainTitle = str_replace('[-]', '', $this->Template->mainTitle);
@@ -172,28 +195,17 @@ class PageRegular extends Frontend
 	/**
 	 * Get a page layout and return it as database result object
 	 * @param integer
-	 * @return object
+	 * @return \Contao\Model
 	 */
 	protected function getPageLayout($intId)
 	{
-		$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.id=?")
-									->limit(1)
-									->execute($intId);
+		$objLayout = \LayoutModel::findByIdOrFallback($intId);
 
-		// Fallback layout
-		if ($objLayout->numRows < 1)
-		{
-			$objLayout = $this->Database->prepare("SELECT l.*, t.templates FROM tl_layout l LEFT JOIN tl_theme t ON l.pid=t.id WHERE l.fallback=1")
-										->limit(1)
-										->execute();
-		}
-		
 		// Die if there is no layout at all
-		if ($objLayout->numRows < 1)
+		if ($objLayout === null)
 		{
-			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
-
 			header('HTTP/1.1 501 Not Implemented');
+			$this->log('Could not find layout ID "' . $intId . '"', 'PageRegular getPageLayout()', TL_ERROR);
 			die('No layout specified');
 		}
 
@@ -205,10 +217,11 @@ class PageRegular extends Frontend
 	 * Create a new template
 	 * @param object
 	 * @param object
+	 * @return void
 	 */
-	protected function createTemplate(Database_Result $objPage, Database_Result $objLayout)
+	protected function createTemplate($objPage, $objLayout)
 	{
-		$this->Template = new FrontendTemplate($objPage->template);
+		$this->Template = new \FrontendTemplate($objPage->template);
 
 		// Generate the DTD
 		if ($objPage->outputFormat == 'xhtml')
@@ -223,117 +236,142 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Meta robots tag
-		$this->Template->robots = ($objPage->robots != '') ? $objPage->robots : 'index,follow';
-
-		// Initialize margin
-		$arrMargin = array
-		(
-			'left'   => '0 auto 0 0',
-			'center' => '0 auto',
-			'right'  => '0 0 0 auto'
-		);
-
 		$strFramework = '';
 
-		// Wrapper
-		if ($objLayout->static)
+		// Generate the CSS framework
+		if (!$objLayout->skipFramework)
 		{
-			$arrSize = deserialize($objLayout->width);
-			$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
-		}
-
-		// Header
-		if ($objLayout->header)
-		{
-			$arrSize = deserialize($objLayout->headerHeight);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			// Wrapper
+			if ($objLayout->static)
 			{
-				$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				$arrSize = deserialize($objLayout->width);
+				$arrMargin = array('left'=>'0 auto 0 0', 'center'=>'0 auto', 'right'=>'0 0 0 auto');
+				$strFramework .= sprintf('#wrapper{width:%s;margin:%s;}', $arrSize['value'] . $arrSize['unit'], $arrMargin[$objLayout->align]) . "\n";
+			}
+
+			// Header
+			if ($objLayout->header)
+			{
+				$arrSize = deserialize($objLayout->headerHeight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#header{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				}
+			}
+
+			$strMain = '';
+
+			// Left column
+			if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+			{
+				$arrSize = deserialize($objLayout->widthLeft);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
+				}
+			}
+
+			// Right column
+			if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
+			{
+				$arrSize = deserialize($objLayout->widthRight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+					$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
+				}
+			}
+
+			// Main column
+			if ($strMain != '')
+			{
+				$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
+			}
+
+			// Footer
+			if ($objLayout->footer)
+			{
+				$arrSize = deserialize($objLayout->footerHeight);
+
+				if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+				{
+					$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
+				}
+			}
+
+			// Add layout specific CSS
+			if ($strFramework != '')
+			{
+				if ($objPage->outputFormat == 'xhtml')
+				{
+					$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
+					$this->Template->framework .= '/* <![CDATA[ */' . "\n";
+					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= '/* ]]> */' . "\n";
+					$this->Template->framework .= '</style>' . "\n";
+				}
+				else
+				{
+					$this->Template->framework .= '<style media="screen">' . "\n";
+					$this->Template->framework .= $strFramework;
+					$this->Template->framework .= '</style>' . "\n";
+				}
 			}
 		}
 
-		$strMain = '';
+		$this->Template->mooScripts = '';
 
-		// Left column
-		if ($objLayout->cols == '2cll' || $objLayout->cols == '3cl')
+		// jQuery scripts
+		if ($objLayout->jSource != '')
 		{
-			$arrSize = deserialize($objLayout->widthLeft);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
+			if ($objLayout->jSource == 'j_googleapis' || $objLayout->jSource == 'j_fallback')
 			{
-				$strFramework .= sprintf('#left{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf('margin-left:%s;', $arrSize['value'] . $arrSize['unit']);
-			}
-		}
+				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/jquery/' . JQUERY . '/jquery.min.js"></script>' . "\n";
 
-		// Right column
-		if ($objLayout->cols == '2clr' || $objLayout->cols == '3cl')
-		{
-			$arrSize = deserialize($objLayout->widthRight);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
-			{
-				$strFramework .= sprintf('#right{width:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
-				$strMain .= sprintf('margin-right:%s;', $arrSize['value'] . $arrSize['unit']);
-			}
-		}
-
-		// Main column
-		if (strlen($strMain))
-		{
-			$strFramework .= sprintf('#main{%s}', $strMain) . "\n";
-		}
-
-		// Footer
-		if ($objLayout->footer)
-		{
-			$arrSize = deserialize($objLayout->footerHeight);
-
-			if ($arrSize['value'] != '' && $arrSize['value'] >= 0)
-			{
-				$strFramework .= sprintf('#footer{height:%s;}', $arrSize['value'] . $arrSize['unit']) . "\n";
-			}
-		}
-
-		$this->Template->framework = '<link rel="stylesheet"' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' href="system/contao.css" media="screen"' . (($objPage->outputFormat == 'xhtml') ? " />\n" : ">\n");
-
-		// Add layout specific CSS
-		if (!empty($strFramework))
-		{
-			if ($objPage->outputFormat == 'xhtml')
-			{
-				$this->Template->framework .= '<style type="text/css" media="screen">' . "\n";
-				$this->Template->framework .= '/* <![CDATA[ */' . "\n";
-				$this->Template->framework .= $strFramework;
-				$this->Template->framework .= '/* ]]> */' . "\n";
-				$this->Template->framework .= '</style>' . "\n";
+				// Local fallback (thanks to DyaGa)
+				if ($objLayout->jSource == 'j_fallback')
+				{
+					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.jQuery || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/jQuery/core/' . JQUERY . '/jquery.js">\x3C/script>\')</script>' . "\n";
+				}
 			}
 			else
 			{
-				$this->Template->framework .= '<style media="screen">' . "\n";
-				$this->Template->framework .= $strFramework;
-				$this->Template->framework .= '</style>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="plugins/jQuery/core/' . JQUERY . '/jquery.js"></script>' . "\n";
 			}
 		}
 
 		// MooTools scripts
-		if ($objLayout->mooSource == 'moo_googleapis')
+		if ($objLayout->mooSource != '')
 		{
-			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+			if ($objLayout->mooSource == 'moo_googleapis' || $objLayout->mooSource == 'moo_fallback')
+			{
+				$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
 
-			$this->Template->mooScripts  = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $protocol . 'ajax.googleapis.com/ajax/libs/mootools/' . MOOTOOLS . '/mootools-yui-compressed.js"></script>' . "\n";
-			$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
-		}
-		else
-		{
-			$objCombiner = new Combiner();
+				// Local fallback (thanks to DyaGa)
+				if ($objLayout->mooSource == 'moo_fallback')
+				{
+					$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . '>window.MooTools || document.write(\'<script src="' . TL_PLUGINS_URL . 'plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js">\x3C/script>\')</script>' . "\n";
+				}
 
-			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
-			$objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js"></script>' . "\n";
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . TL_PLUGINS_URL . 'plugins/mootools/mobile/mootools-mobile.js"></script>' . "\n";
+			}
+			else
+			{
+				$objCombiner = new \Combiner();
 
-			$this->Template->mooScripts = '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+				$objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
+				$objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+				$objCombiner->add('plugins/mootools/mobile/mootools-mobile.js', MOOTOOLS);
+
+				$this->Template->mooScripts .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $objCombiner->getCombinedFile() . '"></script>' . "\n";
+			}
 		}
 
 		// Initialize sections
@@ -360,67 +398,132 @@ class PageRegular extends Frontend
 	 * Create all header scripts
 	 * @param object
 	 * @param object
+	 * @return void
+	 * @throws \Exception
 	 */
-	protected function createHeaderScripts(Database_Result $objPage, Database_Result $objLayout)
+	protected function createHeaderScripts($objPage, $objLayout)
 	{
 		$strStyleSheets = '';
 		$strCcStyleSheets = '';
 		$arrStyleSheets = deserialize($objLayout->stylesheet);
 		$strTagEnding = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
 
+		// Google web fonts
+		if ($objLayout->webfonts != '')
+		{
+			$protocol = $this->Environment->ssl ? 'https://' : 'http://';
+			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') .' rel="stylesheet" href="' . $protocol . 'fonts.googleapis.com/css?family=' . $objLayout->webfonts . '"' . $strTagEnding . "\n";
+		}
+
+		$objCombiner = new \Combiner();
+
+		// Skip the Contao framework style sheet
+		if (!$objLayout->skipFramework)
+		{
+			$objCombiner->add('assets/contao/framework.css');
+		}
+
+		// Skip the TinyMCE style sheet
+		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
+		{
+			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'), 'all');
+		}
+
 		// Internal style sheets
-		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
-				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '"' . $strTagEnding . "\n";
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
+				}
+				else
+				{
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
+				}
 			}
-		}
-
-		$objCombiner = new Combiner();
-
-		// Default TinyMCE style sheet
-		if (!$objLayout->skipTinymce && file_exists(TL_ROOT . '/' . $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'))
-		{
-			$objCombiner->add($GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css', filemtime(TL_ROOT .'/'. $GLOBALS['TL_CONFIG']['uploadPath'] . '/tinymce.css'));
 		}
 
 		// User style sheets
 		if (is_array($arrStyleSheets) && strlen($arrStyleSheets[0]))
 		{
-			$objStylesheets = $this->Database->execute("SELECT *, (SELECT MAX(tstamp) FROM tl_style WHERE tl_style.pid=tl_style_sheet.id) AS tstamp2, (SELECT COUNT(*) FROM tl_style WHERE tl_style.selector='@font-face' AND tl_style.pid=tl_style_sheet.id) AS hasFontFace FROM tl_style_sheet WHERE id IN (" . implode(', ', $arrStyleSheets) . ") ORDER BY FIELD(id, " . implode(', ', $arrStyleSheets) . ")");
+			$objStylesheets = \StyleSheetCollection::findByIds($arrStyleSheets);
 
-			while ($objStylesheets->next())
+			if ($objStylesheets !== null)
 			{
-				$media = implode(',', deserialize($objStylesheets->media));
-
-				// Overwrite the media type with a custom media query
-				if ($objStylesheets->mediaQuery != '')
+				while ($objStylesheets->next())
 				{
-					$media = $objStylesheets->mediaQuery;
+					$media = implode(',', deserialize($objStylesheets->media));
+
+					// Overwrite the media type with a custom media query
+					if ($objStylesheets->mediaQuery != '')
+					{
+						$media = $objStylesheets->mediaQuery;
+					}
+
+					// Aggregate regular style sheets
+					if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
+					{
+						$objCombiner->add('assets/css/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+					}
+					else
+					{
+						$strStyleSheet = '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . TL_SCRIPT_URL . 'css/' . $objStylesheets->name . '.css" media="' . $media . '"' . $strTagEnding;
+
+						if ($objStylesheets->cc)
+						{
+							$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
+						}
+
+						$strCcStyleSheets .= $strStyleSheet . "\n";
+					}
+				}
+			}
+		}
+
+		$arrExternal = deserialize($objLayout->external);
+
+		// External style sheets
+		if (is_array($arrExternal) && !empty($arrExternal))
+		{
+			foreach (array_unique($arrExternal) as $stylesheet)
+			{
+				if ($stylesheet == '')
+				{
+					continue;
 				}
 
-				// Aggregate regular style sheets
-				if (!$objStylesheets->cc && !$objStylesheets->hasFontFace)
+				// Validate the file name
+				if (strpos($stylesheet, '..') !== false || strncmp($stylesheet, $GLOBALS['TL_CONFIG']['uploadPath'] . '/', strlen($GLOBALS['TL_CONFIG']['uploadPath']) + 1) !== 0)
 				{
-					$objCombiner->add('system/scripts/' . $objStylesheets->name . '.css', max($objStylesheets->tstamp, $objStylesheets->tstamp2), $media);
+					throw new \Exception("Invalid path $stylesheet");
+				}
+
+				list($stylesheet, $media, $mode) = explode('|', $stylesheet);
+ 
+				// Only .css files are allowed
+				if (substr($stylesheet, -4) != '.css')
+				{
+					throw new \Exception("Invalid file extension $stylesheet");
+				}
+
+				// Check whether the file exists
+				if (!file_exists(TL_ROOT . '/' . $stylesheet))
+				{
+					continue;
+				}
+
+				// Include the file
+				if ($mode == 'static')
+				{
+					$objCombiner->add($stylesheet, filemtime(TL_ROOT . '/' . $stylesheet), $media);
 				}
 				else
 				{
-					$strStyleSheet = sprintf('<link%s rel="stylesheet" href="%ssystem/scripts/%s.css" media="%s"%s',
-											 (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : ''),
-											 TL_SCRIPT_URL,
-											 $objStylesheets->name,
-											 $media,
-											 $strTagEnding);
-
-					if ($objStylesheets->cc)
-					{
-						$strStyleSheet = '<!--[' . $objStylesheets->cc . ']>' . $strStyleSheet . '<![endif]-->';
-					}
-
-					$strCcStyleSheets .= $strStyleSheet . "\n";
+					$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '"' . $strTagEnding . "\n";
 				}
 			}
 		}
@@ -431,6 +534,12 @@ class PageRegular extends Frontend
 			$strStyleSheets .= '<link' . (($objPage->outputFormat == 'xhtml') ? ' type="text/css"' : '') . ' rel="stylesheet" href="' . $objCombiner->getCombinedFile() . '" media="all"' . $strTagEnding . "\n";
 		}
 
+		// Add the debug style sheet
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '" media="all">' . "\n";
+		}
+
 		// Always add conditional style sheets at the end
 		$strStyleSheets .= $strCcStyleSheets;
 
@@ -438,42 +547,48 @@ class PageRegular extends Frontend
 		$calendarfeeds = deserialize($objLayout->calendarfeeds);
 
 		// Add newsfeeds
-		if (is_array($newsfeeds) && count($newsfeeds) > 0)
+		if (is_array($newsfeeds) && !empty($newsfeeds))
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $newsfeeds)) . ")");
+			$objFeeds = \NewsFeedCollection::findByIds($newsfeeds);
 
-			while($objFeeds->next())
+			if ($objFeeds !== null)
 			{
-				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				while($objFeeds->next())
+				{
+					$base = $objFeeds->feedBase ?: $this->Environment->base;
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
 			}
 		}
 
 		// Add calendarfeeds
-		if (is_array($calendarfeeds) && count($calendarfeeds) > 0)
+		if (is_array($calendarfeeds) && !empty($calendarfeeds))
 		{
-			$objFeeds = $this->Database->execute("SELECT * FROM tl_calendar WHERE makeFeed=1 AND id IN(" . implode(',', array_map('intval', $calendarfeeds)) . ")");
+			$objFeeds = \CalendarFeedCollection::findByIds($calendarfeeds);
 
-			while($objFeeds->next())
+			if ($objFeeds !== null)
 			{
-				$base = strlen($objFeeds->feedBase) ? $objFeeds->feedBase : $this->Environment->base;
-				$strStyleSheets .= '<link type="application/' . $objFeeds->format . '+xml" rel="alternate" href="' . $base . $objFeeds->alias . '.xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				while($objFeeds->next())
+				{
+					$base = $objFeeds->feedBase ?: $this->Environment->base;
+					$strStyleSheets .= '<link rel="alternate" href="' . $base . 'share/' . $objFeeds->alias . '.xml" type="application/' . $objFeeds->format . '+xml" title="' . $objFeeds->title . '"' . $strTagEnding . "\n";
+				}
 			}
 		}
 
 		$strHeadTags = '';
 
 		// Add internal scripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && count($GLOBALS['TL_JAVASCRIPT']))
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $javascript . '"></script>' . "\n";
+				$strHeadTags .= '<script' . (($objPage->outputFormat == 'xhtml') ? ' type="text/javascript"' : '') . ' src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 		}
 
 		// Add internal <head> tags
-		if (is_array($GLOBALS['TL_HEAD']) && count($GLOBALS['TL_HEAD']))
+		if (is_array($GLOBALS['TL_HEAD']) && !empty($GLOBALS['TL_HEAD']))
 		{
 			foreach (array_unique($GLOBALS['TL_HEAD']) as $head)
 			{
@@ -481,7 +596,7 @@ class PageRegular extends Frontend
 			}
 		}
 
-		// Add <head> tags
+		// Add user <head> tags
 		if (($strHead = trim($objLayout->head)) != false)
 		{
 			$strHeadTags .= $strHead . "\n";
@@ -496,13 +611,38 @@ class PageRegular extends Frontend
 	 * Create all footer scripts
 	 * @param object
 	 * @param object
+	 * @return void
 	 */
-	protected function createFooterScripts(Database_Result $objPage, Database_Result $objLayout)
+	protected function createFooterScripts($objPage, $objLayout)
 	{
-		$strMootools = '';
+		$strScripts = '';
+
+		// jQuery
+		$arrJquery = deserialize($objLayout->jquery, true);
+
+		foreach ($arrJquery as $strTemplate)
+		{
+			if ($strTemplate == '')
+			{
+				continue;
+			}
+
+			$objTemplate = new \FrontendTemplate($strTemplate);
+			$strScripts .= $objTemplate->parse();
+		}
+
+		// Add the internal jQuery scripts
+		if (is_array($GLOBALS['TL_JQUERY']) && !empty($GLOBALS['TL_JQUERY']))
+		{
+			foreach (array_unique($GLOBALS['TL_JQUERY']) as $script)
+			{
+				$strScripts .= "\n" . trim($script) . "\n";
+			}
+		}
+
+		// MooTools
 		$arrMootools = deserialize($objLayout->mootools, true);
 
-		// Add MooTools templates
 		foreach ($arrMootools as $strTemplate)
 		{
 			if ($strTemplate == '')
@@ -510,36 +650,34 @@ class PageRegular extends Frontend
 				continue;
 			}
 
-			$objTemplate = new FrontendTemplate($strTemplate);
+			$objTemplate = new \FrontendTemplate($strTemplate);
 
 			// Backwards compatibility
 			try
 			{
-				$strMootools .= $objTemplate->parse();
+				$strScripts .= $objTemplate->parse();
 			}
-			catch (Exception $e)
+			catch (\Exception $e)
 			{
 				$this->log($e->getMessage(), 'PageRegular createFooterScripts()', TL_ERROR);
 			}
 		}
 
-		// Add internal MooTools scripts
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		// Add the internal MooTools scripts
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 		{
 			foreach (array_unique($GLOBALS['TL_MOOTOOLS']) as $script)
 			{
-				$strMootools .= "\n" . trim($script) . "\n";
+				$strScripts .= "\n" . trim($script) . "\n";
 			}
 		}
 
-		// Add custom JavaScript
+		// Add the custom JavaScript
 		if ($objLayout->script != '')
 		{
-			$strMootools .= "\n" . trim($objLayout->script) . "\n";
+			$strScripts .= "\n" . trim($objLayout->script) . "\n";
 		}
 
-		$this->Template->mootools = $strMootools;
+		$this->Template->mootools = $strScripts;
 	}
 }
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -38,8 +37,8 @@ $GLOBALS['TL_LANG']['tl_install']['password']    = array('Passwort', 'Bitte gebe
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Installtool-Passwort', 'Um das Contao-Installtool zusätzlich abzusichern, können Sie die Datei <strong>contao/install.php</strong> nach der Installation von Contao entweder umbenennen oder komplett von Ihrem Server entfernen.');
 $GLOBALS['TL_LANG']['tl_install']['encryption']  = array('Einen Verschlüsselungsschlüssel erstellen', 'Der Schlüssel wird zur verschlüsselten Datenspeicherung verwendet. Beachten Sie, dass einmal verschlüsselte Daten nur mit diesem Schlüssel wiederhergestellt werden können! Notieren Sie ihn sich daher und ändern Sie ihn nicht, wenn es bereits verschlüsselte Daten gibt. Lassen Sie das Feld leer, um einen zufälligen Schlüssel zu generieren.');
 $GLOBALS['TL_LANG']['tl_install']['database']    = array('Datenbankverbindung', 'Bitte geben Sie nachfolgend Ihre Datenbank-Zugangsdaten ein.');
-$GLOBALS['TL_LANG']['tl_install']['collation']   = array('Kollation', 'Weitere Informationen finden Sie im <a href="http://dev.mysql.com/doc/refman/5.1/de/charset-unicode-sets.html" onclick="window.open(this.href); return false;">MySQL-Handbuch</a>.');
-$GLOBALS['TL_LANG']['tl_install']['update']      = array('Tabellen prüfen', 'Beachten Sie, dass der Update-Assistent bisher nur mit MySQL- und MySQLi-Treibern getestet wurde. Wenn Sie eine andere Datenbank verwenden (z.B. Oracle), müssen Sie die Datenbank ggf. manuell installieren bzw. aktualisieren. Durchsuchen Sie in diesem Fall die Unterordner des Verzeichnisses <strong>system/modules</strong> nach <strong>config/database.sql</strong>-Dateien.');
+$GLOBALS['TL_LANG']['tl_install']['collation']   = array('Kollation', 'Weitere Informationen finden Sie im <a href="http://dev.mysql.com/doc/refman/5.1/de/charset-unicode-sets.html" target="_blank">MySQL-Handbuch</a>.');
+$GLOBALS['TL_LANG']['tl_install']['update']      = array('Tabellen prüfen', 'Beachten Sie, dass der Update-Assistent bisher nur mit MySQL- und MySQLi-Treibern getestet wurde. Wenn Sie eine andere Datenbank verwenden (z.B. Oracle), müssen Sie die Datenbank ggf. manuell installieren bzw. aktualisieren.');
 $GLOBALS['TL_LANG']['tl_install']['template']    = array('Ein Template importieren', 'Hier können Sie eine <em>.sql</em>-Datei aus dem <em>templates</em>-Verzeichnis mit einer vorkonfigurierten Beispielwebseite importieren. Dabei werden alle bestehenden Daten gelöscht! Wenn Sie stattdessen lediglich ein Theme importieren wollen, nutzen Sie bitte den Theme-Manager im Contao-Backend.');
 $GLOBALS['TL_LANG']['tl_install']['admin']       = array('Ein Administratorkonto anlegen', 'Wenn Sie die Beispielwebseite importiert haben, lautet der Benutzername des Administrators <strong>k.jones</strong> und das Passwort <strong>kevinjones</strong>. Rufen Sie die Beispielwebseite (Frontend) auf, um weitere Informationen zu erhalten.');
 $GLOBALS['TL_LANG']['tl_install']['completed']   = array('Gratulation!', 'Melden Sie sich nun im <a href="contao/index.php">Contao-Backend</a> an und prüfen Sie die Systemeinstellungen. Rufen Sie danach Ihre Webseite auf, um sicher zu gehen, dass Contao korrekt funktioniert.');
@@ -76,6 +75,7 @@ $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'Die Datenbank ist aktuell
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Datenbank aktualisieren';
 $GLOBALS['TL_LANG']['tl_install']['updateX']        = 'Es scheint als würden Sie ein Update von einer Contao-Version kleiner als %s durchführen. Falls das zutrifft, ist es <strong>unbedingt notwendig, das Version %s-Update auszuführen</strong>, um die Integrität der Daten zu gewährleisten!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Version %s-Update ausführen';
+$GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Version %s-Update – Schritt %s ausführen';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Bitte wählen Sie eine Template-Datei!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm']  = 'Template importiert am %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn']     = 'Alle bestehenden Daten werden gelöscht!';
@@ -108,5 +108,3 @@ $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD']    = 'Neue Spalten anlegen';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Bestehende Spalten ändern';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP']   = 'Bestehende Spalten löschen';
 $GLOBALS['TL_LANG']['tl_install']['DROP']         = 'Bestehende Tabellen löschen';
-
-?>

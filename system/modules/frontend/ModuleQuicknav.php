@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleQuicknav
  *
  * Front end module "quick navigation".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicknav extends Module
+class ModuleQuicknav extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleQuicknav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -81,18 +86,21 @@ class ModuleQuicknav extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		if ($this->includeRoot)
+		// Start from the website root if there is no reference page
+		if (!$this->rootPage)
 		{
-			$this->rootPage = 0;
+			global $objPage;
+			$this->rootPage = $objPage->rootId;
 		}
 
 		$this->Template->targetPage = $GLOBALS['TL_LANG']['MSC']['targetPage'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
-		$this->Template->title = strlen($this->customLabel) ? $this->customLabel : $GLOBALS['TL_LANG']['MSC']['quicknav'];
+		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicknav'];
 		$this->Template->request = ampersand($this->Environment->request, true);
 		$this->Template->items = $this->getQuicknavPages($this->rootPage);
 	}
@@ -118,13 +126,10 @@ class ModuleQuicknav extends Module
 			$groups = $this->User->groups;
 		}
 
-		$time = time();
-
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT * FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($pid);
+		$objSubpages = \PageCollection::findPublishedRegularWithoutGuestsByPid($pid);
 
-		if ($objSubpages->numRows < 1)
+		if ($objSubpages === null)
 		{
 			return array();
 		}
@@ -138,6 +143,12 @@ class ModuleQuicknav extends Module
 			// Do not show protected pages unless a back end or front end user is logged in
 			if (!$objSubpages->protected || (!is_array($_groups) && FE_USER_LOGGED_IN) || BE_USER_LOGGED_IN || (is_array($_groups) && array_intersect($_groups, $groups)) || $this->showProtected)
 			{
+				// Skip the current page (see #3581)
+				if ($objSubpages->id == $objPage->id)
+				{
+					continue;
+				}
+
 				// Check hidden pages
 				if (!$objSubpages->hide || $this->showHidden)
 				{
@@ -147,7 +158,7 @@ class ModuleQuicknav extends Module
 					$arrPages[] = array
 					(
 						'level' => ($level - 2),
-						'title' => (strlen($objSubpages->pageTitle) ? specialchars($objSubpages->pageTitle) : specialchars($objSubpages->title)),
+						'title' => specialchars($objSubpages->pageTitle ?: $objSubpages->title),
 						'href' => $this->generateFrontendUrl($objSubpages->row()),
 						'link' => $objSubpages->title
 					);
@@ -169,5 +180,3 @@ class ModuleQuicknav extends Module
 		return $arrPages;
 	}
 }
-
-?>

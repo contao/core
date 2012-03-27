@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -55,6 +54,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 		'onsubmit_callback' => array
 		(
 			array('tl_style_sheet', 'scheduleUpdate')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'name' => 'unique'
+			)
 		)
 	),
 
@@ -77,14 +84,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['import'],
 				'href'                => 'key=import',
 				'class'               => 'header_css_import',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -115,14 +122,14 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_style_sheet']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -136,12 +143,26 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},name,cc,media,mediaQuery,vars'
+		'default'                     => '{title_legend},name,cc;{media_legend},media,mediaQuery;{vars_legend},vars'
 	),
 
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_theme.name',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['name'],
@@ -149,7 +170,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'flag'                    => 1,
-			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'unique'=>true, 'rgxp'=>'alnum', 'maxlength'=>64, 'spaceToUnderscore'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'cc' => array
 		(
@@ -161,7 +183,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'save_callback' => array
 			(
 				array('tl_style_sheet', 'sanitizeCc')
-			)
+			),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'media' => array
 		(
@@ -170,7 +193,8 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'options'                 => array('all', 'aural', 'braille', 'embossed', 'handheld', 'print', 'projection', 'screen', 'tty', 'tv'),
-			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr')
+			'eval'                    => array('multiple'=>true, 'mandatory'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'mediaQuery' => array
 		(
@@ -178,18 +202,20 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'search'                  => true,
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'clr long'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'vars' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['vars'],
 			'inputType'               => 'keyValueWizard',
-			'exclude'                 => true
+			'exclude'                 => true,
+			'sql'                     => "text NULL"
 		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_style_sheet']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'css', 'class'=>'mandatory')
+			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'css', 'class'=>'mandatory')
 		)
 	)
 );
@@ -199,7 +225,7 @@ $GLOBALS['TL_DCA']['tl_style_sheet'] = array
  * Class tl_style_sheet
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -218,6 +244,7 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Check permissions to edit the table
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -236,12 +263,13 @@ class tl_style_sheet extends Backend
 
 	/**
 	 * Check for modified style sheets and update them if necessary
+	 * @return void
 	 */
 	public function updateStyleSheet()
 	{
 		$session = $this->Session->get('style_sheet_updater');
 
-		if (!is_array($session) || count($session) < 1)
+		if (!is_array($session) || empty($session))
 		{
 			return;
 		}
@@ -263,6 +291,7 @@ class tl_style_sheet extends Backend
 	 * This method is triggered when a single style sheet or multiple style
 	 * sheets are modified (edit/editAll) or duplicated (copy/copyAll).
 	 * @param mixed
+	 * @return void
 	 */
 	public function scheduleUpdate($id)
 	{
@@ -294,19 +323,19 @@ class tl_style_sheet extends Backend
 	{
 		$media = deserialize($row['media']);
 
-		if (!is_array($media) || count($media) < 1)
+		if (!is_array($media) || empty($media))
 		{
-			return '<div style="float:left;">'. $row['name'] ."</div>\n";
+			return '<div style="float:left">'. $row['name'] ."</div>\n";
 		}
 
-		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. implode(', ', $media) .']</span>' . "</div>\n";
+		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3;padding-left:3px">['. implode(', ', $media) .']</span>' . "</div>\n";
 	}
 
 
 	/**
 	 * Sanitize the conditional comments field
 	 * @param mixed
-	 * @return string
+	 * @return mixed
 	 */
 	public function sanitizeCc($varValue)
 	{
@@ -334,5 +363,3 @@ class tl_style_sheet extends Backend
 		return ($this->User->isAdmin || count(preg_grep('/^tl_style_sheet::/', $this->User->alexf)) > 0) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : '';
 	}
 }
-
-?>

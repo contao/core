@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Listing
  * @license    LGPL
- * @filesource
  */
 
 
@@ -41,5 +40,3 @@ $GLOBALS['TL_LANG']['tl_module']['list_info']        = array('Felder der Details
 $GLOBALS['TL_LANG']['tl_module']['list_info_where']  = array('Detailseitenbedingung', 'Hier können Sie eine Bedingung eingeben, um die Ergebnisse zu filtern (z.B. <em>published=1</em> oder <em>type!="admin"</em>).');
 $GLOBALS['TL_LANG']['tl_module']['list_layout']      = array('Listentemplate', 'Hier können Sie das Listentemplate auswählen.');
 $GLOBALS['TL_LANG']['tl_module']['list_info_layout'] = array('Detailseitentemplate', 'Hier können Sie das Detailseitentemplate auswählen.');
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -37,15 +36,22 @@ $GLOBALS['TL_LANG']['tl_theme']['author']     = array('Author', 'Please enter th
 $GLOBALS['TL_LANG']['tl_theme']['folders']    = array('Folders', 'Please select the folders that belong to the theme from the files directory.');
 $GLOBALS['TL_LANG']['tl_theme']['templates']  = array('Templates folder', 'Here you can select a templates folder that will be exported with the theme.');
 $GLOBALS['TL_LANG']['tl_theme']['screenshot'] = array('Screenshot', 'Here you can choose a screenshot of the theme.');
+$GLOBALS['TL_LANG']['tl_theme']['vars']       = array('Global variables', 'Here you can define global variables for the style sheets of the theme (e.g. <em>$red</em> -> <em>c00</em> or <em>$margin</em> -> <em>12px</em>).');
 $GLOBALS['TL_LANG']['tl_theme']['source']     = array('Source files', 'Please choose one or more .cto files from the files directory.');
 $GLOBALS['TL_LANG']['tl_theme']['tstamp']     = array('Revision date', 'Date and time of the latest revision');
 
 
 /**
+ * Legends
+ */
+$GLOBALS['TL_LANG']['tl_theme']['title_legend']  = 'Title and author';
+$GLOBALS['TL_LANG']['tl_theme']['config_legend'] = 'Configuration';
+$GLOBALS['TL_LANG']['tl_theme']['vars_legend']   = 'Global variables';
+
+
+/**
  * References
  */
-$GLOBALS['TL_LANG']['tl_theme']['title_legend']     = 'Title and author';
-$GLOBALS['TL_LANG']['tl_theme']['config_legend']    = 'Configuration';
 $GLOBALS['TL_LANG']['tl_theme']['theme_imported']   = 'Theme "%s" has been imported.';
 $GLOBALS['TL_LANG']['tl_theme']['checking_theme']   = 'The theme data is being checked';
 $GLOBALS['TL_LANG']['tl_theme']['tables_fields']    = 'Tables and fields';
@@ -72,5 +78,3 @@ $GLOBALS['TL_LANG']['tl_theme']['modules']     = array('Modules', 'Edit the fron
 $GLOBALS['TL_LANG']['tl_theme']['layout']      = array('Layouts', 'Edit the page layouts of theme ID %s');
 $GLOBALS['TL_LANG']['tl_theme']['importTheme'] = array('Theme import', 'Import new themes');
 $GLOBALS['TL_LANG']['tl_theme']['exportTheme'] = array('Export', 'Export theme ID %s');
-
-?>

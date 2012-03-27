@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class BackendUser
  *
  * Provide methods to manage back end users.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class BackendUser extends User
+class BackendUser extends \User
 {
 
 	/**
@@ -84,22 +89,24 @@ class BackendUser extends User
 	{
 		$session = $this->Session->getData();
 
-		// Main script
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/main.php' && $session['referer']['current'] != $this->Environment->requestUri)
+		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $session['referer']['current'] != $this->Environment->requestUri)
 		{
-			$session['referer']['last'] = $session['referer']['current'];
-			$session['referer']['current'] = $this->Environment->requestUri;
+			// Main script
+			if ($this->Environment->script == 'contao/main.php')
+			{
+				$session['referer']['last'] = $session['referer']['current'];
+				$session['referer']['current'] = $this->Environment->requestUri;
+			}
+			// File manager
+			elseif ($this->Environment->script == 'contao/files.php')
+			{
+				$session['fileReferer']['last'] = $session['referer']['current'];
+				$session['fileReferer']['current'] = $this->Environment->requestUri;
+			}
 		}
 
-		// File manager
-		if (!isset($_GET['act']) && !isset($_GET['key']) && !isset($_GET['token']) && !isset($_GET['state']) && $this->Environment->script == 'contao/files.php' && $session['referer']['current'] != $this->Environment->requestUri)
-		{
-			$session['fileReferer']['last'] = $session['referer']['current'];
-			$session['fileReferer']['current'] = $this->Environment->requestUri;
-		}
-
-		// Store session data
-		if (strlen($this->intId))
+		// Store the session data
+		if ($this->intId != '')
 		{
 			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
 						   ->execute(serialize($session), $this->intId);
@@ -125,15 +132,15 @@ class BackendUser extends User
 				break;
 
 			case 'pagemounts':
-				return is_array($this->arrData['pagemounts']) ? $this->arrData['pagemounts'] : (strlen($this->arrData['pagemounts']) ? array($this->arrData['pagemounts']) : false);
+				return is_array($this->arrData['pagemounts']) ? $this->arrData['pagemounts'] : (($this->arrData['pagemounts'] != '') ? array($this->arrData['pagemounts']) : false);
 				break;
 
 			case 'filemounts':
-				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (strlen($this->arrData['filemounts']) ? array($this->arrData['filemounts']) : false);
+				return is_array($this->arrData['filemounts']) ? $this->arrData['filemounts'] : (($this->arrData['filemounts'] != '') ? array($this->arrData['filemounts']) : false);
 				break;
 
 			case 'fop':
-				return is_array($this->arrData['fop']) ? $this->arrData['fop'] : (strlen($this->arrData['fop']) ? array($this->arrData['fop']) : false);
+				return is_array($this->arrData['fop']) ? $this->arrData['fop'] : (($this->arrData['fop'] != '') ? array($this->arrData['fop']) : false);
 				break;
 
 			case 'alexf':
@@ -148,22 +155,8 @@ class BackendUser extends User
 
 
 	/**
-	 * Return the current object instance (Singleton)
-	 * @return object
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(self::$objInstance))
-		{
-			self::$objInstance = new BackendUser();
-		}
-
-		return self::$objInstance;
-	}
-
-
-	/**
 	 * Redirect to contao/index.php if authentication fails
+	 * @return void
 	 */
 	public function authenticate()
 	{
@@ -184,8 +177,7 @@ class BackendUser extends User
 		// Force JavaScript redirect on Ajax requests (IE requires an absolute link)
 		if ($this->Environment->isAjaxRequest)
 		{
-			header('Content-Type: text/javascript');
-			echo 'location.replace("' . $this->Environment->base . $strRedirect . '")';
+			echo json_encode(array('content' => '<script>location.replace("' . $this->Environment->base . $strRedirect . '")</script>'));
 			exit;
 		}
 
@@ -197,7 +189,7 @@ class BackendUser extends User
 	 * Check whether the current user has a certain access right
 	 * @param string
 	 * @param array
-	 * @return object
+	 * @return boolean
 	 */
 	public function hasAccess($field, $array)
 	{
@@ -234,7 +226,7 @@ class BackendUser extends User
 
 	/**
 	 * Return true if the current user is allowed to do the current operation on the current page
-	 * @param int
+	 * @param integer
 	 * @param array
 	 * @return boolean
 	 */
@@ -296,13 +288,13 @@ class BackendUser extends User
 			$permission[] = 'u'.$int;
 		}
 
-		return count(array_intersect($permission, $chmod));
+		return (count(array_intersect($permission, $chmod)) > 0);
 	}
 
 
 	/**
 	 * Set all user properties from a database record
-	 * @param object
+	 * @return void
 	 */
 	protected function setUserFromDb()
 	{
@@ -324,39 +316,16 @@ class BackendUser extends User
 		$GLOBALS['TL_CONFIG']['useRTE'] = $this->useRTE;
 		$GLOBALS['TL_CONFIG']['useCE'] = $this->useCE;
 		$GLOBALS['TL_CONFIG']['thumbnails'] = $this->thumbnails;
-		$GLOBALS['TL_CONFIG']['fancyUpload'] = $this->fancyUpload;
 		$GLOBALS['TL_CONFIG']['backendTheme'] = $this->backendTheme;
-		$GLOBALS['TL_CONFIG']['oldBeTheme'] = $this->oldBeTheme;
 
 		// Inherit permissions
 		$always = array('alexf');
 		$depends = array('modules', 'themes', 'pagemounts', 'alpty', 'filemounts', 'fop', 'forms', 'formp');
 
 		// HOOK: Take custom permissions
-		if (is_array($GLOBALS['TL_PERMISSIONS']) && count($GLOBALS['TL_PERMISSIONS'] > 0))
+		if (is_array($GLOBALS['TL_PERMISSIONS']) && !empty($GLOBALS['TL_PERMISSIONS']))
 		{
 		    $depends = array_merge($depends, $GLOBALS['TL_PERMISSIONS']);
-		}
-
-		// HOOK: add news archive permissions
-		if (in_array('news', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'news';
-			$depends[] = 'newp';
-		}
-
-		// HOOK: add calendar permissions
-		if (in_array('calendar', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'calendars';
-			$depends[] = 'calendarp';
-		}
-
-		// HOOK: add newsletters permissions
-		if (in_array('newsletter', $this->Config->getActiveModules()))
-		{
-			$depends[] = 'newsletters';
-			$depends[] = 'newsletterp';
 		}
 
 		// Overwrite user permissions if only group permissions shall be inherited
@@ -386,7 +355,7 @@ class BackendUser extends User
 
 					if (is_array($value))
 					{
-						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (strlen($this->$field) ? array($this->$field) : array())), $value);
+						$this->$field = array_merge((is_array($this->$field) ? $this->$field : (($this->$field != '') ? array($this->$field) : array())), $value);
 						$this->$field = array_unique($this->$field);
 					}
 				}
@@ -438,7 +407,7 @@ class BackendUser extends User
 
 		foreach ($GLOBALS['BE_MOD'] as $strGroupName=>$arrGroupModules)
 		{
-			if (count($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
+			if (!empty($arrGroupModules) && ($strGroupName == 'profile' || $this->hasAccess(array_keys($arrGroupModules), 'modules')))
 			{
 				$arrModules[$strGroupName]['icon'] = 'modMinus.gif';
 				$arrModules[$strGroupName]['title'] = specialchars($GLOBALS['TL_LANG']['MSC']['collapseNode']);
@@ -469,8 +438,16 @@ class BackendUser extends User
 						$arrModules[$strGroupName]['modules'][$strModuleName] = $arrModuleConfig;
 						$arrModules[$strGroupName]['modules'][$strModuleName]['title'] = specialchars($GLOBALS['TL_LANG']['MOD'][$strModuleName][1]);
 						$arrModules[$strGroupName]['modules'][$strModuleName]['label'] = (($label = is_array($GLOBALS['TL_LANG']['MOD'][$strModuleName]) ? $GLOBALS['TL_LANG']['MOD'][$strModuleName][0] : $GLOBALS['TL_LANG']['MOD'][$strModuleName]) != false) ? $label : $strModuleName;
-						$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = strlen($arrModuleConfig['icon']) ? sprintf(' style="background-image:url(\'%s%s\');"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
-						$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName .(($this->Input->get('do') == $strModuleName) ? ' active' : '');
+						$arrModules[$strGroupName]['modules'][$strModuleName]['icon'] = ($arrModuleConfig['icon'] != '') ? sprintf(' style="background-image:url(\'%s%s\')"', TL_SCRIPT_URL, $arrModuleConfig['icon']) : '';
+						$arrModules[$strGroupName]['modules'][$strModuleName]['class'] = 'navigation ' . $strModuleName;
+						$arrModules[$strGroupName]['modules'][$strModuleName]['href']  = $this->Environment->script . '?do=' . $strModuleName;
+
+						// Mark the active module and its group
+						if ($this->Input->get('do') == $strModuleName)
+						{
+							$arrModules[$strGroupName]['class'] = ' trail';
+							$arrModules[$strGroupName]['modules'][$strModuleName]['class'] .= ' active';
+						}
 					}
 				}
 			}
@@ -489,5 +466,3 @@ class BackendUser extends User
 		return $arrModules;
 	}
 }
-
-?>

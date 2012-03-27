@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,63 +20,60 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class PageForward
  *
  * Provide methods to handle a forward page.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PageForward extends Frontend
+class PageForward extends \Frontend
 {
 
 	/**
 	 * Redirect to an internal page
 	 * @param object
+	 * @return void
 	 */
-	public function generate(Database_Result $objPage)
+	public function generate($objPage)
 	{
-		// Forward to first active page
-		if (!$objPage->jumpTo)
+		// Forward to the jumpTo or first published page
+		if ($objPage->jumpTo)
 		{
-			$time = time();
-
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-										  ->limit(1)
-										  ->execute($objPage->id);
+			$objNextPage = \PageModel::findPublishedById($objPage->jumpTo);
 		}
-
-		// Forward to jumpTo page
 		else
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($objPage->jumpTo);
+			$objNextPage = \PageModel::findFirstPublishedRegularByPid($objPage->id);
 		}
 
 		// Forward page does not exist
-		if ($objNextPage->numRows < 1)
+		if ($objNextPage === null)
 		{
-			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
-
 			header('HTTP/1.1 404 Not Found');
+			$this->log('Forward page ID "' . $objPage->jumpTo . '" does not exist', 'PageForward generate()', TL_ERROR);
 			die('Forward page not found');
 		}
 
 		$strGet = '';
 
 		// Add $_GET parameters
-		if (is_array($_GET) && count($_GET) > 0)
+		if (is_array($_GET) && !empty($_GET))
 		{
 			foreach (array_keys($_GET) as $key)
 			{
@@ -85,12 +82,15 @@ class PageForward extends Frontend
 					continue;
 				}
 
+				if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $key == 'language')
+				{
+					continue;
+				}
+
 				$strGet .= '/' . $key . '/' . $this->Input->get($key);
 			}
 		}
 
-		$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
+		$this->redirect($this->generateFrontendUrl($objNextPage->row(), $strGet), (($objPage->redirect == 'temporary') ? 302 : 301));
 	}
 }
-
-?>

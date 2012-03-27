@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class RadioTable
  *
  * Provide methods to handle radio button tables.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class RadioTable extends Widget
+class RadioTable extends \Widget
 {
 
 	/**
@@ -69,6 +74,7 @@ class RadioTable extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -85,10 +91,6 @@ class RadioTable extends Widget
 				$this->arrOptions = deserialize($varValue);
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
 			default:
 				parent::__set($strKey, $varValue);
 				break;
@@ -102,13 +104,13 @@ class RadioTable extends Widget
 	 */
 	public function generate()
 	{
-		if (!is_array($this->arrOptions) || !count($this->arrOptions))
+		if (!is_array($this->arrOptions) || empty($this->arrOptions))
 		{
 			return '';
 		}
 
 		$rows = ceil(count($this->arrOptions) / $this->intCols);
-		$return = '<table id="ctrl_'.$this->strName.'" class="tl_radio_table'.(strlen($this->strClass) ? ' ' . $this->strClass : '').'">';
+		$return = '<table id="ctrl_'.$this->strName.'" class="tl_radio_table'.(($this->strClass != '') ? ' ' . $this->strClass : '').'">';
 
 		for ($i=0; $i<$rows; $i++)
 		{
@@ -125,7 +127,7 @@ class RadioTable extends Widget
 				{
 					$label = $this->generateImage($value.'.gif', $label, 'title="'.specialchars($label).'"');
 					$return .= '
-      <td><input type="radio" name="'.$this->strName.'" id="'.$this->strField.'_'.$i.'_'.$j.'" class="tl_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset();"'.$this->isChecked($this->arrOptions[$j]).$this->getAttributes().'> <label for="'.$this->strField.'_'.$i.'_'.$j.'">'.$label.'</label></td>';
+      <td><input type="radio" name="'.$this->strName.'" id="'.$this->strField.'_'.$i.'_'.$j.'" class="tl_radio" value="'.specialchars($value).'" onfocus="Backend.getScrollOffset()"'.$this->isChecked($this->arrOptions[$j]).$this->getAttributes().'> <label for="'.$this->strField.'_'.$i.'_'.$j.'">'.$label.'</label></td>';
 				}
 
 				// Else return an empty cell
@@ -142,5 +144,3 @@ class RadioTable extends Widget
   </table>';
 	}
 }
-
-?>

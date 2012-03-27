@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
 
 
@@ -97,5 +96,3 @@ $GLOBALS['TL_LANG']['tl_calendar_events']['delete']     = array('Event löschen'
 $GLOBALS['TL_LANG']['tl_calendar_events']['toggle']     = array('Event veröffentlichen/unveröffentlichen', 'Event ID %s veröffentlichen/unveröffentlichen');
 $GLOBALS['TL_LANG']['tl_calendar_events']['editheader'] = array('Kalender bearbeiten', 'Die Kalender-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_calendar_events']['pasteafter'] = array('In diesen Kalender einfügen', 'Nach dem Event ID %s einfügen');
-
-?>

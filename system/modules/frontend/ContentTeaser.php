@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentTeaser
  *
  * Front end content element "teaser".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentTeaser extends ContentElement
+class ContentTeaser extends \ContentElement
 {
 
 	/**
@@ -55,27 +60,34 @@ class ContentTeaser extends ContentElement
 
 	/**
 	 * Check whether the target page and article are published
+	 * @return string
 	 */
 	public function generate()
 	{
-		$time = time();
+		$objArticle = \ArticleModel::findPublishedById($this->article);
 
-		$objArticle = $this->Database->prepare("SELECT p.id AS id, p.alias AS alias, a.id AS aid, a.title AS title, a.alias AS aalias, a.teaser AS teaser, a.inColumn AS inColumn FROM tl_article a, tl_page p WHERE a.id=? AND a.pid=p.id" . (!BE_USER_LOGGED_IN ? " AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) AND p.published=1 AND (a.start='' OR a.start<$time) AND (a.stop='' OR a.stop>$time) AND a.published=1" : ""))
-									 ->limit(1)
-									 ->execute($this->article);
-
-		if ($objArticle->numRows < 1)
+		if ($objArticle === null)
 		{
 			return '';
 		}
 
+		$objPage = $objArticle->getPage();
+
+		if ($objPage === null)
+		{
+			return '';
+		}
+
+		$objArticle->pid = $objPage;
 		$this->objArticle = $objArticle;
+
 		return parent::generate();
 	}
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -90,8 +102,8 @@ class ContentTeaser extends ContentElement
 			$link .= $objArticle->inColumn . ':';
 		}
 
-		$link .= (strlen($objArticle->aalias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->aalias : $objArticle->aid;
-		$this->Template->href = $this->generateFrontendUrl($objArticle->row(), $link);
+		$link .= ($objArticle->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id;
+		$this->Template->href = $this->generateFrontendUrl($objArticle->pid->row(), $link);
 
 		// Clean the RTE output
 		if ($objPage->outputFormat == 'xhtml')
@@ -109,5 +121,3 @@ class ContentTeaser extends ContentElement
 		$this->Template->more = $GLOBALS['TL_LANG']['MSC']['more'];
 	}
 }
-
-?>

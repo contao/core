@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleEventlist
  *
  * Front end module "event list".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventlist extends Events
+class ModuleEventlist extends \Events
 {
 
 	/**
@@ -61,7 +66,7 @@ class ModuleEventlist extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT LIST ###';
 			$objTemplate->title = $this->headline;
@@ -75,9 +80,15 @@ class ModuleEventlist extends Events
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar, true));
 
 		// Return if there are no calendars
-		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
+		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			return '';
+		}
+
+		// Show the event reader if an item has been selected
+		if ($this->cal_readerModule > 0  && (isset($_GET['events']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		{
+			return $this->getFrontendModule($this->cal_readerModule, $this->strColumn);
 		}
 
 		return parent::generate();
@@ -85,10 +96,12 @@ class ModuleEventlist extends Events
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
+		global $objPage;
 		$blnClearInput = false;
 
 		// Jump to the current period
@@ -117,31 +130,28 @@ class ModuleEventlist extends Events
 		// Display year
 		if ($blnDynamicFormat && $this->Input->get('year'))
 		{
-			$this->Date = new Date($this->Input->get('year'), 'Y');
+			$this->Date = new \Date($this->Input->get('year'), 'Y');
 			$this->cal_format = 'cal_year';
 			$this->headline .= ' ' . date('Y', $this->Date->tstamp);
 		}
-
 		// Display month
 		elseif ($blnDynamicFormat && $this->Input->get('month'))
 		{
-			$this->Date = new Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date($this->Input->get('month'), 'Ym');
 			$this->cal_format = 'cal_month';
 			$this->headline .= ' ' . $this->parseDate('F Y', $this->Date->tstamp);
 		}
-
 		// Display day
 		elseif ($blnDynamicFormat && $this->Input->get('day'))
 		{
-			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
 			$this->cal_format = 'cal_day';
-			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $this->Date->tstamp);
+			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $this->Date->tstamp);
 		}
-
 		// Display all events or upcoming/past events
 		else
 		{
-			$this->Date = new Date();
+			$this->Date = new \Date();
 		}
 
 		list($strBegin, $strEnd, $strEmpty) = $this->getDatesFromFormat($this->Date, $this->cal_format);
@@ -176,7 +186,7 @@ class ModuleEventlist extends Events
 				foreach ($events as $event)
 				{
 					$event['firstDay'] = $GLOBALS['TL_LANG']['DAYS'][date('w', $day)];
-					$event['firstDate'] = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $day);
+					$event['firstDate'] = $this->parseDate($objPage->dateFormat, $day);
 					$event['datetime'] = date('Y-m-d', $day);
 
 					$arrEvents[] = $event;
@@ -200,10 +210,23 @@ class ModuleEventlist extends Events
 		if ($this->perPage > 0)
 		{
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$this->perPage))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
+			}
+
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -238,7 +261,7 @@ class ModuleEventlist extends Events
 				$blnIsLastEvent = true;
 			}
 
-			$objTemplate = new FrontendTemplate($this->cal_template);
+			$objTemplate = new \FrontendTemplate($this->cal_template);
 			$objTemplate->setData($event);
 
 			// Month header
@@ -326,5 +349,3 @@ class ModuleEventlist extends Events
 		}
 	}
 }
-
-?>

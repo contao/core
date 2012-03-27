@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Form
  *
  * Provide methods to handle front end forms.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Form extends Hybrid
+class Form extends \Hybrid
 {
 
 	/**
@@ -93,7 +98,7 @@ class Form extends Hybrid
 		$arrSubmitted = array();
 
 		$this->loadDataContainer('tl_form_field');
-		$formId = strlen($this->formID) ? 'auto_'.$this->formID : 'auto_form_'.$this->id;
+		$formId = ($this->formID != '') ? 'auto_'.$this->formID : 'auto_form_'.$this->id;
 
 		$this->Template->fields = '';
 		$this->Template->hidden = '';
@@ -102,113 +107,115 @@ class Form extends Hybrid
 		$this->Template->method = ($this->method == 'GET') ? 'get' : 'post';
 
 		$this->initializeSession($formId);
-		$this->getMaxFileSize();
-
-		// Get all form fields
-		$objFields = $this->Database->prepare("SELECT * FROM tl_form_field WHERE pid=? AND invisible!=1 ORDER BY sorting")
-									->execute($this->id);
-
-		$row = 0;
-		$max_row = $objFields->numRows;
+		$this->Template->maxFileSize = $this->objModel->getMaxUploadFileSize();
 		$arrLabels = array();
 
-		while ($objFields->next())
+		// Get all form fields
+		$objFields = \FormFieldCollection::findPublishedByPid($this->id);
+
+		if ($objFields !== null)
 		{
-			$strClass = $GLOBALS['TL_FFL'][$objFields->type];
+			$row = 0;
+			$max_row = $objFields->numRows;
 
-			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass))
+			while ($objFields->next())
 			{
-				continue;
-			}
+				$strClass = $GLOBALS['TL_FFL'][$objFields->type];
 
-			$arrData = $objFields->row();
-
-			$arrData['decodeEntities'] = true;
-			$arrData['allowHtml'] = $this->allowTags;
-			$arrData['rowClass'] = 'row_'.$row . (($row == 0) ? ' row_first' : (($row == ($max_row - 1)) ? ' row_last' : '')) . ((($row % 2) == 0) ? ' even' : ' odd');
-			$arrData['tableless'] = $this->tableless;
-
-			// Increase the row count if its a password field
-			if ($objFields->type == 'password')
-			{
-				++$row;
-				++$max_row;
-
-				$arrData['rowClassConfirm'] = 'row_'.$row . (($row == ($max_row - 1)) ? ' row_last' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
-			}
-
-			// Submit buttons do not use the name attribute
-			if ($objFields->type == 'submit')
-			{
-				$arrData['name'] = '';
-			}
-
-			$objWidget = new $strClass($arrData);
-			$objWidget->required = $objFields->mandatory ? true : false;
-
-			// HOOK: load form field callback
-			if (isset($GLOBALS['TL_HOOKS']['loadFormField']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
-			{
-				foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
+				// Continue if the class is not defined
+				if (!$this->classFileExists($strClass))
 				{
-					$this->import($callback[0]);
-					$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
+					continue;
 				}
-			}
 
-			// Validate input
-			if ($this->Input->post('FORM_SUBMIT') == $formId)
-			{
-				$objWidget->validate();
+				$arrData = $objFields->row();
 
-				// HOOK: validate form field callback
-				if (isset($GLOBALS['TL_HOOKS']['validateFormField']) && is_array($GLOBALS['TL_HOOKS']['validateFormField']))
+				$arrData['decodeEntities'] = true;
+				$arrData['allowHtml'] = $this->allowTags;
+				$arrData['rowClass'] = 'row_'.$row . (($row == 0) ? ' row_first' : (($row == ($max_row - 1)) ? ' row_last' : '')) . ((($row % 2) == 0) ? ' even' : ' odd');
+				$arrData['tableless'] = $this->tableless;
+
+				// Increase the row count if its a password field
+				if ($objFields->type == 'password')
 				{
-					foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
+					++$row;
+					++$max_row;
+
+					$arrData['rowClassConfirm'] = 'row_'.$row . (($row == ($max_row - 1)) ? ' row_last' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
+				}
+
+				// Submit buttons do not use the name attribute
+				if ($objFields->type == 'submit')
+				{
+					$arrData['name'] = '';
+				}
+
+				$objWidget = new $strClass($arrData);
+				$objWidget->required = $objFields->mandatory ? true : false;
+
+				// HOOK: load form field callback
+				if (isset($GLOBALS['TL_HOOKS']['loadFormField']) && is_array($GLOBALS['TL_HOOKS']['loadFormField']))
+				{
+					foreach ($GLOBALS['TL_HOOKS']['loadFormField'] as $callback)
 					{
 						$this->import($callback[0]);
 						$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
 					}
 				}
 
-				if ($objWidget->hasErrors())
+				// Validate the input
+				if ($this->Input->post('FORM_SUBMIT') == $formId)
 				{
-					$doNotSubmit = true;
+					$objWidget->validate();
+
+					// HOOK: validate form field callback
+					if (isset($GLOBALS['TL_HOOKS']['validateFormField']) && is_array($GLOBALS['TL_HOOKS']['validateFormField']))
+					{
+						foreach ($GLOBALS['TL_HOOKS']['validateFormField'] as $callback)
+						{
+							$this->import($callback[0]);
+							$objWidget = $this->$callback[0]->$callback[1]($objWidget, $formId, $this->arrData);
+						}
+					}
+
+					if ($objWidget->hasErrors())
+					{
+						$doNotSubmit = true;
+					}
+
+					// Store current value in the session
+					elseif ($objWidget->submitInput())
+					{
+						$arrSubmitted[$objFields->name] = $objWidget->value;
+						$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
+					}
+
+					unset($_POST[$objFields->name]);
 				}
 
-				// Store current value in the session
-				elseif ($objWidget->submitInput())
+				if ($objWidget instanceof \uploadable)
 				{
-					$arrSubmitted[$objFields->name] = $objWidget->value;
-					$_SESSION['FORM_DATA'][$objFields->name] = $objWidget->value;
+					$hasUpload = true;
 				}
 
-				unset($_POST[$objFields->name]);
-			}
+				if ($objWidget instanceof \FormHidden)
+				{
+					$this->Template->hidden .= $objWidget->parse();
+					--$max_row;
+					continue;
+				}
 
-			if ($objWidget instanceof uploadable)
-			{
-				$hasUpload = true;
-			}
+				if ($objWidget->name != '')
+				{
+					$arrLabels[$objWidget->name] = $objWidget->label;
+				}
 
-			if ($objWidget instanceof FormHidden)
-			{
-				$this->Template->hidden .= $objWidget->parse();
-				--$max_row;
-				continue;
+				$this->Template->fields .= $objWidget->parse();
+				++$row;
 			}
-
-			if ($objWidget->name != '')
-			{
-				$arrLabels[$objWidget->name] = $objWidget->label;
-			}
-
-			$this->Template->fields .= $objWidget->parse();
-			++$row;
 		}
 
-		// Process form data
+		// Process the form data
 		if ($this->Input->post('FORM_SUBMIT') == $formId && !$doNotSubmit)
 		{
 			$this->processFormData($arrSubmitted, $arrLabels);
@@ -218,7 +225,7 @@ class Form extends Hybrid
 		if ($doNotSubmit)
 		{
 			global $objPage;
-			$title = ($objPage->pageTitle != '') ? $objPage->pageTitle : $objPage->title;
+			$title = $objPage->pageTitle ?: $objPage->title;
 			$objPage->pageTitle = $GLOBALS['TL_LANG']['ERR']['form'] . ' - ' . $title;
 			$_SESSION['FILES'] = array(); // see #3007
 		}
@@ -226,7 +233,7 @@ class Form extends Hybrid
 		$strAttributes = '';
 		$arrAttributes = deserialize($this->attributes, true);
 
-		if (strlen($arrAttributes[1]))
+		if ($arrAttributes[1] != '')
 		{
 			$strAttributes .= ' class="' . $arrAttributes[1] . '"';
 		}
@@ -234,20 +241,13 @@ class Form extends Hybrid
 		$this->Template->hasError = $doNotSubmit;
 		$this->Template->attributes = $strAttributes;
 		$this->Template->enctype = $hasUpload ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
-		$this->Template->formId = strlen($arrAttributes[0]) ? $arrAttributes[0] : 'f' . $this->id;
+		$this->Template->formId = $arrAttributes[0] ?: 'f'.$this->id;
 		$this->Template->action = $this->getIndexFreeRequest();
 
-		// Get target URL
-		if ($this->method == 'GET')
+		// Get the target URL
+		if ($this->method == 'GET' && $this->objModel->jumpTo['id'])
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
-
-			if ($objNextPage->numRows)
-			{
-				$this->Template->action = $this->generateFrontendUrl($objNextPage->fetchAssoc());
-			}
+			$this->Template->action = $this->generateFrontendUrl($this->objModel->jumpTo);
 		}
 
 		return $this->Template->parse();
@@ -258,6 +258,7 @@ class Form extends Hybrid
 	 * Process form data, store it in the session and redirect to the jumpTo page
 	 * @param array
 	 * @param array
+	 * @return void
 	 */
 	protected function processFormData($arrSubmitted, $arrLabels)
 	{
@@ -315,7 +316,7 @@ class Form extends Hybrid
 				$recipients[$k] = str_replace(array('[', ']', '"'), array('<', '>', ''), $v);
 			}
 
-			$email = new Email();
+			$email = new \Email();
 
 			// Get subject and message
 			if ($this->format == 'email')
@@ -358,7 +359,7 @@ class Form extends Hybrid
 			// Attach XML file
 			if ($this->format == 'xml')
 			{
-				$objTemplate = new FrontendTemplate('form_xml');
+				$objTemplate = new \FrontendTemplate('form_xml');
 
 				$objTemplate->fields = $fields;
 				$objTemplate->charset = $GLOBALS['TL_CONFIG']['characterSet'];
@@ -375,7 +376,7 @@ class Form extends Hybrid
 			$uploaded = '';
 
 			// Attach uploaded files
-			if (count($_SESSION['FILES']))
+			if (!empty($_SESSION['FILES']))
 			{
 				foreach ($_SESSION['FILES'] as $file)
 				{
@@ -397,12 +398,12 @@ class Form extends Hybrid
 			$email->sendTo($recipients);
 		}
 
-		// Store values in the database
-		if ($this->storeValues && strlen($this->targetTable))
+		// Store the values in the database
+		if ($this->storeValues && $this->targetTable != '')
 		{
 			$arrSet = array();
 
-			// Add timestamp
+			// Add the timestamp
 			if ($this->Database->fieldExists('tstamp', $this->targetTable))
 			{
 				$arrSet['tstamp'] = time();
@@ -418,7 +419,7 @@ class Form extends Hybrid
 			}
 
 			// Files
-			if (count($_SESSION['FILES']))
+			if (!empty($_SESSION['FILES']))
 			{
 				foreach ($_SESSION['FILES'] as $k=>$v)
 				{
@@ -429,6 +430,17 @@ class Form extends Hybrid
 				}
 			}
 
+			// HOOK: store form data callback
+			if (isset($GLOBALS['TL_HOOKS']['storeFormData']) && is_array($GLOBALS['TL_HOOKS']['storeFormData']))
+			{
+				foreach ($GLOBALS['TL_HOOKS']['storeFormData'] as $callback)
+				{
+					$this->import($callback[0]);
+					$arrSet = $this->$callback[0]->$callback[1]($arrSet, $this);
+				}
+			}
+
+			// Do not use Models here (backwards compatibility)
 			$this->Database->prepare("INSERT INTO " . $this->targetTable . " %s")->set($arrSet)->execute();
 		}
 
@@ -466,30 +478,24 @@ class Form extends Hybrid
 			$this->log('Form "' . $this->title . '" has been submitted by ' . $this->Environment->ip . '.', 'Form processFormData()', TL_FORMS);
 		}
 
-		$this->jumpToOrReload($this->jumpTo);
+		$this->jumpToOrReload($this->objModel->jumpTo);
 	}
 
 
 	/**
 	 * Get the maximum file size that is allowed for file uploads
+	 * @return integer
 	 */
 	protected function getMaxFileSize()
 	{
-		$this->Template->maxFileSize = $GLOBALS['TL_CONFIG']['maxFileSize'];
-
-		$objMaxSize = $this->Database->prepare("SELECT MAX(maxlength) AS maxlength FROM tl_form_field WHERE pid=? AND type=? AND maxlength>?")
-									 ->execute($this->id, 'upload', 0);
-
-		if ($objMaxSize->maxlength > 0)
-		{
-			$this->Template->maxFileSize = $objMaxSize->maxlength;
-		}
+		return $this->objModel->getMaxUploadFileSize(); // Backwards compatibility
 	}
 
 
 	/**
 	 * Initialize the form in the current session
 	 * @param string
+	 * @return void
 	 */
 	protected function initializeSession($formId)
 	{
@@ -509,7 +515,7 @@ class Form extends Hybrid
 
 				foreach ($_SESSION[$formId][$tl] as $message)
 				{
-					$objTemplate = new FrontendTemplate('form_message');
+					$objTemplate = new \FrontendTemplate('form_message');
 
 					$objTemplate->message = $message;
 					$objTemplate->class = strtolower($tl);
@@ -522,5 +528,3 @@ class Form extends Hybrid
 		}
 	}
 }
-
-?>

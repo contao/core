@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleArticleList
  *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticleList extends Module
+class ModuleArticleList extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleArticleList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ARTICLE LIST ###';
 			$objTemplate->title = $this->headline;
@@ -67,12 +72,13 @@ class ModuleArticleList extends Module
 		}
 
 		$strBuffer = parent::generate();
-		return count($this->Template->articles) ? $strBuffer : '';
+		return !empty($this->Template->articles) ? $strBuffer : '';
 	}
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -89,27 +95,22 @@ class ModuleArticleList extends Module
 
 		$this->Template->request = $this->Environment->request;
 
-		// Show articles of a different page
+		// Show the articles of a different page
 		if ($this->defineRoot && $this->rootPage > 0)
 		{
-			$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										->limit(1)
-										->execute($this->rootPage);
+			$this->objModel->getRelated('rootPage');
 
-			if ($objTarget->numRows)
+			if ($this->objModel->rootPage['id'] !== null)
 			{
-				$id = $this->rootPage;
-				$this->Template->request = $this->generateFrontendUrl($objTarget->row());
+				$id = $this->objModel->rootPage['id'];
+				$this->Template->request = $this->generateFrontendUrl($this->objModel->rootPage);
 			}
 		}
 
-		$time = time();
-
 		// Get published articles
-		$objArticles = $this->Database->prepare("SELECT id, title, alias, inColumn, cssID FROM tl_article WHERE pid=? AND inColumn=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-									  ->execute($id, $this->inColumn);
+		$objArticles = \ArticleCollection::findPublishedByPidAndColumn($id, $this->inColumn);
 
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
 			return;
 		}
@@ -123,13 +124,13 @@ class ModuleArticleList extends Module
 			}
 
 			$cssID = deserialize($objArticles->cssID, true);
-			$alias = strlen($objArticles->alias) ? $objArticles->alias : $objArticles->title;
+			$alias = $objArticles->alias ?: $objArticles->title;
 
 			$articles[] = array
 			(
 				'link' => $objArticles->title,
 				'title' => specialchars($objArticles->title),
-				'id' => strlen($cssID[0]) ? $cssID[0] : standardize($alias),
+				'id' => $cssID[0] ?: standardize($alias),
 				'articleId' => $objArticles->id
 			);
 		}
@@ -137,5 +138,3 @@ class ModuleArticleList extends Module
 		$this->Template->articles = $articles;
 	}
 }
-
-?>

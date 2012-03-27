@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -48,27 +47,13 @@ $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Datei "%s" bearbeiten';
 $GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Dateien suchen';
 $GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Liste leeren';
 $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Upload starten';
-
-
-/**
- * FancyUpload
- */
-$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'] = 'Gesamtfortschritt ({total})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle']    = 'Dateifortschritt';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile']     = 'Übertrage {name}';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'] = 'Upload: {bytesLoaded} mit {rate}, {timeRemaining} verbleibend.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_remove']          = 'Entfernen';
-$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle']     = 'Klicken Sie hier, um den Eintrag zu entfernen.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileError']       = 'Upload fehlgeschlagen';
-$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate']       = 'Die Datei <em>{name}</em> wurde bereits übertragen. Duplikate sind nicht erlaubt.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin']    = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist zu klein. Die Mindestgröße beträgt {fileSizeMin}.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax']    = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist zu groß. Die Maximalgröße beträgt <em>{fileSizeMax}</em>.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax']     = 'Die Datei <em>{name}</em> konnte nicht übertragen werden. Die maximale Anzahl von <em>{fileListMax} Dateien</em> wurde überschritten.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'] = 'Die Datei <em>{name}</em> (<em>{size}</em>) ist to groß. Es können insgesamt nur maximal <em>{fileListSizeMax}</em> übertragen werden.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus']      = 'Der Server hat den HTTP-Status <code>#{code}</code> zurückgegeben';
-$GLOBALS['TL_LANG']['tl_files']['fancy_securityError']   = 'Ein Sicherheitsproblem ist aufgetreten ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_ioError']         = 'Ein Lade- bzw. Sendevorgang wurde wegen eines Fehlers abgebrochen ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'] = 'Upload abgeschlossen';
+$GLOBALS['TL_LANG']['tl_files']['syncFound']   = 'Die Originaldatei "%s" wurde als "%s" gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncRemoved'] = 'Die Datei oder der Ordner "%s" wurde entfernt';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Der Ordner "%s" wurde erstellt';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Der Ordner "%s" wurde gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncFileC']   = 'Die Datei "%s" wurde erstellt';
+$GLOBALS['TL_LANG']['tl_files']['syncFileF']   = 'Die Datei "%s" wurde gefunden';
+$GLOBALS['TL_LANG']['tl_files']['syncHash']    = 'Der Hash der Datei "%s" wurde aktualisiert';
 
 
 /**
@@ -84,5 +69,4 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Verzeichnis schützen', 'V
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Verzeichnisschutz aufheben', 'Schutz des Verzeichnisses "%s" aufheben');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('Datei-Upload', 'Dateien auf den Server übertragen');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Einfügen in', 'In dieses Verzeichnis einfügen');
-
-?>
+$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronisieren', 'Dateisystem und Datenbank synchronisieren');

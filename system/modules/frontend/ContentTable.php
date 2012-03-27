@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentTable
  *
  * Front end content element "table".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentTable extends ContentElement
+class ContentTable extends \ContentElement
 {
 
 	/**
@@ -48,7 +53,8 @@ class ContentTable extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -69,8 +75,8 @@ class ContentTable extends ContentElement
 		// Add the CSS and JavaScript files
 		if ($this->sortable)
 		{
-			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/tablesort/css/tablesort.css|screen';
-			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/tablesort/js/tablesort.js"></script>';
+			$GLOBALS['TL_CSS'][] = 'plugins/mootools/tablesort/css/tablesort.css';
+			$GLOBALS['TL_MOOTOOLS'][] = '<script src="' . TL_PLUGINS_URL . 'plugins/mootools/tablesort/js/tablesort.js"></script>';
 			$this->Template->sortable = true;
 		}
 
@@ -166,5 +172,3 @@ class ContentTable extends ContentElement
 		$this->Template->footer = $arrFooter;
 	}
 }
-
-?>

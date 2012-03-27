@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class TextField
  *
  * Provide methods to handle text fields.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class TextField extends Widget
+class TextField extends \Widget
 {
 
 	/**
@@ -63,22 +68,33 @@ class TextField extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
 				break;
 
-			case 'readonly':
-				$this->arrAttributes['readonly'] = 'readonly';
-				$this->blnSubmitInput = false;
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
 				break;
 
 			default:
@@ -120,11 +136,11 @@ class TextField extends Widget
 				$this->varValue = $this->idnaDecode($this->varValue);
 			}
 
-			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset();">%s',
+			return sprintf('<input type="%s" name="%s" id="ctrl_%s" class="tl_text%s" value="%s"%s onfocus="Backend.getScrollOffset()">%s',
 							$type,
 							$this->strName,
 							$this->strId,
-							(strlen($this->strClass) ? ' ' . $this->strClass : ''),
+							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							specialchars($this->varValue),
 							$this->getAttributes(),
 							$this->wizard);
@@ -145,7 +161,7 @@ class TextField extends Widget
 
 		for ($i=0; $i<$this->size; $i++)
 		{
-			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset();">',
+			$arrFields[] = sprintf('<input type="%s" name="%s[]" id="ctrl_%s" class="tl_text_%s" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$type,
 									$this->strName,
 									$this->strId.'_'.$i,
@@ -156,10 +172,8 @@ class TextField extends Widget
 
 		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
 						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}
 }
-
-?>

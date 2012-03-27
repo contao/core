@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleArticlenav
  *
  * Front end module "article list".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleArticlenav extends Module
+class ModuleArticlenav extends \Module
 {
 
 	/**
@@ -61,7 +66,7 @@ class ModuleArticlenav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### ARTICLE NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -73,14 +78,10 @@ class ModuleArticlenav extends Module
 		}
 
 		global $objPage;
-		$id = $objPage->id;
-		$time = time();
-
-		$this->objArticles = $this->Database->prepare("SELECT id, alias, title FROM tl_article WHERE pid=? AND inColumn=? AND showTeaser=1" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-											->execute($id, $this->strColumn);
+		$this->objArticles = \ArticleCollection::findPublishedWithTeaserByPidAndColumn($objPage->id, $this->strColumn);
 
 		// Return if there are no articles
-		if ($this->objArticles->numRows < 1)
+		if ($this->objArticles === null)
 		{
 			return '';
 		}
@@ -102,7 +103,8 @@ class ModuleArticlenav extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -197,5 +199,3 @@ class ModuleArticlenav extends Module
 		}
 	}
 }
-
-?>

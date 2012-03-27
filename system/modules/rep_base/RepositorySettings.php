@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
- * @filesource
  */
 
 
@@ -42,8 +41,15 @@ define('REPOSITORY_SOAPCACHE', true);
 
 // valid core versions in descending order
 define('REPOSITORY_COREVERSIONS',
+		'20110029,20110029;'.	// 2.11.2 stable
+		'20110019,20110019;'.	// 2.11.1 stable
+		'20110009,20110009;'.	// 2.11.0 stable
+		'20110007,20110007;'.	// 2.11.0 RC2
+		'20110006,20110006;'.	// 2.11.0 RC1
+		'20110003,20110003;'.	// 2.11.0 beta1
 		'20100049,20100049;'.	// 2.10.4 stable
 		'20100039,20100039;'.	// 2.10.3 stable
+		'20100029,20100029;'.	// 2.10.2 stable
 		'20100029,20100029;'.	// 2.10.2 stable
 		'20100019,20100019;'.	// 2.10.1 stable
 		'20100009,20100009;'.	// 2.10.0 stable
@@ -95,11 +101,11 @@ define('REPOSITORY_COREVERSIONS',
 		'20040079,20040079;'.	// 2.4.7 stable
 		'20040069,20040069;'.	// 2.4.6 stable
 		'20040009,20040009;'.	// 2.4.0 stable
-		'20030029,20030029'		// 2.3.2 stable
+		'20030029,20030029'	// 2.3.2 stable
 );
 
 // Where files are stored, relative to TL_ROOT
-define('REPOSITORY_FILEROOT', 'tl_files/repository');
+define('REPOSITORY_FILEROOT', 'files/repository');
 
 // Path of download script
 define('REPOSITORY_DOWNLOADS', 'system/modules/rep_server/RepositoryDownload.php?token=');
@@ -139,5 +145,3 @@ define('REPOSITORY_THUMBHEIGHTMAX', 180);
 define('REPOSITORY_CLEARCACHE_NOW', 1);			// immediate
 define('REPOSITORY_CLEARCACHE_NORMAL', 300);	// allow 5 minutes max
 define('REPOSITORY_CLEARCACHE_LATER', 3600);	// allow 1 hour max
-
-?>

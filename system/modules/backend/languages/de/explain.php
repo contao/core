@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,30 +20,12 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
-
-
-/**
- * Shortcuts
- */
-$GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
-(
-	array('colspan', 'Backend-Tastaturkürzel'),
-	array('[ALT] + <strong>s</strong>', 'Speichern'),
-	array('[ALT] + <strong>c</strong>', 'Speichern und schließen'),
-	array('[ALT] + <strong>e</strong>', 'Speichern und bearbeiten'),
-	array('[ALT] + <strong>n</strong>', 'Neues Element'),
-	array('[ALT] + <strong>b</strong>', 'Zurück'),
-	array('[ALT] + <strong>t</strong>', 'Nach oben'),
-	array('[ALT] + <strong>f</strong>', 'Frontend-Vorschau'),
-	array('[ALT] + <strong>q</strong>', 'Abmelden')
-);
 
 
 /**
@@ -51,9 +33,9 @@ $GLOBALS['TL_LANG']['XPL']['shortcuts'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['insertTags'] = array
 (
-	array('Rich Text Editor', 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://tinymce.moxiecode.com" title="TinyMCE by moxiecode" onclick="window.open(this.href); return false;">http://tinymce.moxiecode.com</a>.'),
-	array('Inserttags', 'Weitere Informationen zu Inserttags finden Sie unter <a href="http://www.contao.org/inserttags.html" title="Contao Online-Dokumentation" onclick="window.open(this.href); return false;">http://www.contao.org/inserttags.html</a>.'),
-	array('Code Editor', 'Weitere Informationen zu CodeMirror finden Sie unter <a href="http://codemirror.net" title="CodeMirror by Marijn Haverbeke" onclick="window.open(this.href); return false;">http://codemirror.net</a>.')
+	array('Rich Text Editor', 'Weitere Informationen zu TinyMCE finden Sie unter <a href="http://www.tinymce.com/" title="TinyMCE by moxiecode" target="_blank">http://www.tinymce.com/</a>.'),
+	array('Inserttags', 'Weitere Informationen zu Inserttags finden Sie unter <a href="http://www.contao.org/de/insert-tags.html" title="Contao Online-Dokumentation" target="_blank">http://www.contao.org/de/insert-tags.html</a>.'),
+	array('Code Editor', 'Weitere Informationen zu CodeMirror finden Sie unter <a href="http://codemirror.net" title="CodeMirror by Marijn Haverbeke" target="_blank">http://codemirror.net</a>.')
 );
 
 
@@ -78,7 +60,5 @@ $GLOBALS['TL_LANG']['XPL']['dateFormat'] = array
  */
 $GLOBALS['TL_LANG']['XPL']['highlighter'] = array
 (
-	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" onclick="window.open(this.href); return false;">http://alexgorbatchev.com</a>.')
+	array('Syntaxhervorhebung', 'Weitere Informationen zur Konfiguration des Syntax-Highlighters finden Sie unter <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration#SyntaxHighlighter.defaults" title="SyntaxHighlighter by Alex Gorbatchev" target="_blank">http://alexgorbatchev.com</a>.')
 );
-
-?>

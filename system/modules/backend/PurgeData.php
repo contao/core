@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class PurgeData
  *
  * Maintenance module "purge data".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class PurgeData extends Backend implements executable
+class PurgeData extends \Backend implements \executable
 {
 
 	/**
@@ -57,7 +62,7 @@ class PurgeData extends Backend implements executable
 	public function run()
 	{
 		$arrCacheTables = array();
-		$objTemplate = new BackendTemplate('be_purge_data');
+		$objTemplate = new \BackendTemplate('be_purge_data');
 		$objTemplate->isActive = $this->isActive();
 
 		// Confirmation message
@@ -68,7 +73,7 @@ class PurgeData extends Backend implements executable
 		}
 
 		// Add potential error messages
-		if (is_array($_SESSION['TL_ERROR']) && count($_SESSION['TL_ERROR']))
+		if (is_array($_SESSION['TL_ERROR']) && !empty($_SESSION['TL_ERROR']))
 		{
 			foreach ($_SESSION['TL_ERROR'] as $message)
 			{
@@ -93,30 +98,26 @@ class PurgeData extends Backend implements executable
 
 			foreach ($tables as $table)
 			{
-				// Html folder
+				// HTML folder
 				if ($table == 'html_folder')
 				{
 					$this->Automator->purgeHtmlFolder();
 				}
-
-				// Scripts folder
+				// Script folders
 				elseif ($table == 'scripts_folder')
 				{
 					$this->Automator->purgeScriptsFolder();
 				}
-
 				// Temporary folder
 				elseif ($table == 'temp_folder')
 				{
 					$this->Automator->purgeTempFolder();
 				}
-
 				// CSS files
 				elseif ($table == 'css_files')
 				{
 					$this->StyleSheets->updateStyleSheets();
 				}
-
 				// XML files
 				elseif ($table == 'xml_files')
 				{
@@ -130,7 +131,7 @@ class PurgeData extends Backend implements executable
 					{
 						$this->Automator->generateSitemap();
 					}
-
+# FIXME: use a general hook instead
 					// HOOK: recreate news feeds
 					if (in_array('news', $this->Config->getActiveModules()))
 					{
@@ -145,7 +146,11 @@ class PurgeData extends Backend implements executable
 						$this->Calendar->generateFeeds();
 					}
 				}
-
+				// Files
+				elseif ($table == 'scan_files')
+				{
+					$this->Automator->scanUploadFolder();
+				}
 				// Database table
 				else
 				{
@@ -174,16 +179,23 @@ class PurgeData extends Backend implements executable
 
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->selectAll = $GLOBALS['TL_LANG']['MSC']['selectAll'];
-		$objTemplate->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
-		$objTemplate->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
-		$objTemplate->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
-		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
-		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$objTemplate->cacheHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['clearCache'];
 		$objTemplate->cacheLabel = $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][0];
-		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/html')) - 2));
-		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/scripts')) - 1));
+
+		// HTML folder
+		$objTemplate->cacheHtml = $GLOBALS['TL_LANG']['tl_maintenance']['clearHtml'];
+		$objTemplate->htmlEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/images')) - 1));
+
+		// Script folders
+		$objTemplate->cacheScripts = $GLOBALS['TL_LANG']['tl_maintenance']['clearScripts'];
+		$objTemplate->scriptEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/assets/js')) + count(scan(TL_ROOT . '/assets/css')) - 3));
+
+		// Temporary directory
+		$objTemplate->cacheTmp = $GLOBALS['TL_LANG']['tl_maintenance']['clearTemp'];
 		$objTemplate->cacheEntries = sprintf($GLOBALS['TL_LANG']['MSC']['entries'], (count(scan(TL_ROOT . '/system/tmp')) - 1));
+
+		$objTemplate->cacheXml = $GLOBALS['TL_LANG']['tl_maintenance']['clearXml'];
+		$objTemplate->cacheCss = $GLOBALS['TL_LANG']['tl_maintenance']['clearCss'];
 		$objTemplate->cacheHelp = ($GLOBALS['TL_CONFIG']['showHelp'] && strlen($GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1])) ? $GLOBALS['TL_LANG']['tl_maintenance']['cacheTables'][1] : '';
 		$objTemplate->cacheSubmit = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['clearCache']);
 		$objTemplate->cacheTables = $arrCacheTables;
@@ -191,5 +203,3 @@ class PurgeData extends Backend implements executable
 		return $objTemplate->parse();
 	}
 }
-
-?>

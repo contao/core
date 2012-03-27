@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class Preview
  *
- * Front end preview.
- * @copyright  Leo Feyer 2005-2011
+ * Set up the front end preview frames.
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -50,10 +49,10 @@ class Preview extends Backend
 	/**
 	 * Initialize the controller
 	 *
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -67,7 +66,8 @@ class Preview extends Backend
 
 
 	/**
-	 * Run controller and parse the template
+	 * Run the controller and parse the template
+	 * @return void
 	 */
 	public function run()
 	{
@@ -79,15 +79,22 @@ class Preview extends Backend
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
 		$this->Template->site = $this->Input->get('site', true);
 
+		if ($this->Input->get('page'))
+		{
+			$this->Template->url = $this->redirectToFrontendPage($this->Input->get('page'), $this->Input->get('article'), true);
+		}
+		else
+		{
+			$this->Template->url = $this->Environment->base;
+		}
+
 		$this->Template->output();
 	}
 }
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objPreview = new Preview();
 $objPreview->run();
-
-?>

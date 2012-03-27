@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormPassword
  *
  * Form field "password".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormPassword extends Widget
+class FormPassword extends \Widget
 {
 
 	/**
@@ -57,7 +62,7 @@ class FormPassword extends Widget
 	 * Always decode entities
 	 * @param array
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		parent::__construct($arrAttributes);
 		$this->decodeEntities = true;
@@ -68,17 +73,27 @@ class FormPassword extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
 			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
+				// Do not set the "required" attribute here, because password
+				// fields can remain empty if a password has been set already
+				parent::__set($strKey, $varValue);
+				break;
+
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
 				break;
 
 			default:
@@ -91,7 +106,7 @@ class FormPassword extends Widget
 	/**
 	 * Validate input and set value
 	 * @param mixed
-	 * @return string
+	 * @return mixed
 	 */
 	protected function validator($varInput)
 	{
@@ -117,7 +132,7 @@ class FormPassword extends Widget
 		if (!$this->hasErrors())
 		{
 			$this->blnSubmitInput = true;
-			$_SESSION['TL_CONFIRM'][] = $GLOBALS['TL_LANG']['MSC']['pw_changed'];
+			$this->addConfirmationMessage($GLOBALS['TL_LANG']['MSC']['pw_changed']);
 			$strSalt = substr(md5(uniqid(mt_rand(), true)), 0, 23);
 
 			return sha1($strSalt . $varInput) . ':' . $strSalt;
@@ -144,7 +159,6 @@ class FormPassword extends Widget
 
 	/**
 	 * Generate the label of the confirmation field and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmationLabel()
@@ -160,7 +174,6 @@ class FormPassword extends Widget
 
 	/**
 	 * Generate the widget and return it as string
-	 * @param array
 	 * @return string
 	 */
 	public function generateConfirmation()
@@ -173,5 +186,3 @@ class FormPassword extends Widget
 						$this->strTagEnding);
 	}
 }
-
-?>

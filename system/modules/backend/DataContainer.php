@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class DataContainer
  *
  * Provide methods to handle data container arrays.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class DataContainer extends Backend
+class DataContainer extends \Backend
 {
 
 	/**
@@ -153,9 +158,11 @@ class DataContainer extends Backend
 
 	/**
 	 * Render a row of a box and return it as HTML string
+	 * @param string
 	 * @return string
+	 * @throws \Exception
 	 */
-	protected function row()
+	protected function row($strPalette=null)
 	{
 		$arrData = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField];
 
@@ -171,39 +178,30 @@ class DataContainer extends Backend
 		// Toggle line wrap (textarea)
 		if ($arrData['inputType'] == 'textarea' && $arrData['eval']['rte'] == '')
 		{
-			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\');"');
+			$xlabel .= ' ' . $this->generateImage('wrap.gif', $GLOBALS['TL_LANG']['MSC']['wordWrap'], 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['wordWrap']) . '" class="toggleWrap" onclick="Backend.toggleWrap(\'ctrl_'.$this->strInputName.'\')"');
 		}
 
 		// Add the help wizard
 		if ($arrData['eval']['helpwizard'])
 		{
-			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" rel="lightbox[help 610 80%]">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom;"').'</a>';
+			$xlabel .= ' <a href="contao/help.php?table='.$this->strTable.'&amp;field='.$this->strField.'" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']) . '" onclick="Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['helpWizard']).'\',\'url\':this.href});return false">'.$this->generateImage('about.gif', $GLOBALS['TL_LANG']['MSC']['helpWizard'], 'style="vertical-align:text-bottom"').'</a>';
 		}
 
 		// Add the popup file manager
 		if ($arrData['inputType'] == 'fileTree' && $this->strTable .'.'. $this->strField != 'tl_theme.templates')
 		{
-			$path = '';
+			$path = isset($arrData['eval']['path']) ? '?node=' . $arrData['eval']['path'] : '';
+			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['filetree']).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a>';
+		}
 
-			if (isset($arrData['eval']['path']))
+		// Add a custom xlabel
+		if (is_array($arrData['xlabel']))
+		{
+			foreach ($arrData['xlabel'] as $callback)
 			{
-				$path = '?node=' . $arrData['eval']['path'];
+				$this->import($callback[0]);
+				$xlabel .= $this->$callback[0]->$callback[1]($this);
 			}
-
-			$xlabel .= ' <a href="contao/files.php' . $path . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a>';
-		}
-
-		// Add the table import wizard
-		elseif ($arrData['inputType'] == 'tableWizard')
-		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=table') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
-			$xlabel .= ' ' . $this->generateImage('demagnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_shrink']) . '" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(0.9);"') . $this->generateImage('magnify.gif', '', 'title="' . specialchars($GLOBALS['TL_LANG']['MSC']['tw_expand']) . '" style="vertical-align:text-bottom; cursor:pointer;" onclick="Backend.tableWizardResize(1.1);"');
-		}
-
-		// Add the list import wizard
-		elseif ($arrData['inputType'] == 'listWizard')
-		{
-			$xlabel .= ' <a href="' . $this->addToUrl('key=list') . '" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['lw_import'][1]) . '" onclick="Backend.getScrollOffset();">' . $this->generateImage('tablewizard.gif', $GLOBALS['TL_LANG']['MSC']['tw_import'][0], 'style="vertical-align:text-bottom;"') . '</a>';
 		}
 
 		// Input field callback
@@ -244,6 +242,7 @@ class DataContainer extends Backend
 			}
 		}
 
+		$arrData['activeRecord'] = $this->activeRecord;
 		$arrWidget = $this->prepareForWidget($arrData, $this->strInputName, $this->varValue, $this->strField, $this->strTable);
 		$objWidget = new $GLOBALS['BE_FFL'][$arrData['inputType']]($arrWidget);
 
@@ -253,14 +252,34 @@ class DataContainer extends Backend
 		// Validate the field
 		if ($this->Input->post('FORM_SUBMIT') == $this->strTable)
 		{
-			$paletteFields = array();
 			$key = ($this->Input->get('act') == 'editAll') ? 'FORM_FIELDS_' . $this->intId : 'FORM_FIELDS';
 
 			// Calculate the current palette
 			$postPaletteFields = implode(',', $this->Input->post($key));
 			$postPaletteFields = array_unique(trimsplit('[,;]', $postPaletteFields));
-			$newPaletteFields = trimsplit('[,;]', $this->getPalette());
 
+			// Compile the palette if there is none
+			if ($strPalette === null)
+			{
+				$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+			}
+			else
+			{
+				// Use the given palette ($strPalette is an array in editAll mode)
+				$newPaletteFields = is_array($strPalette) ? $strPalette : trimsplit('[,;]', $strPalette);
+
+				// Re-check the palette if the current field is a selector field
+				if (isset($GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']) && in_array($this->strField, $GLOBALS['TL_DCA'][$this->strTable]['palettes']['__selector__']))
+				{
+					// If the field value has changed, recompile the palette
+					if ($this->varValue != $this->Input->post($this->strInputName))
+					{
+						$newPaletteFields = trimsplit('[,;]', $this->getPalette());
+					}
+				}
+			}
+
+			// Adjust the names in editAll mode
 			if ($this->Input->get('act') == 'editAll')
 			{
 				foreach ($newPaletteFields as $k=>$v)
@@ -277,6 +296,7 @@ class DataContainer extends Backend
 
 			$paletteFields = array_intersect($postPaletteFields, $newPaletteFields);
 
+			// Validate and save the field
 			if (in_array($this->strInputName, $paletteFields) || $this->Input->get('act') == 'overrideAll')
 			{
 				$objWidget->validate();
@@ -301,7 +321,7 @@ class DataContainer extends Backend
 					{
 						$this->save($varValue);
 					}
-					catch (Exception $e)
+					catch (\Exception $e)
 					{
 						$this->noReload = true;
 						$objWidget->addError($e->getMessage());
@@ -311,14 +331,15 @@ class DataContainer extends Backend
 			}
 		}
 
-		$wizard = '';
 		$datepicker = '';
+		$wizard = '';
+		$strHelpClass = '';
 
 		// Datepicker
 		if ($arrData['eval']['datepicker'])
 		{
 			$rgxp = $arrData['eval']['rgxp'];
-			$format = $GLOBALS['TL_CONFIG'][$rgxp.'Format'];
+			$format = Date::formatToJs($GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 
 			switch ($rgxp)
 			{
@@ -327,7 +348,7 @@ class DataContainer extends Backend
 					break;
 
 				case 'time':
-					$time = ",\n      timePickerOnly:true";
+					$time = ",\n      pickOnly:\"time\"";
 					break;
 
 				default:
@@ -335,27 +356,24 @@ class DataContainer extends Backend
 					break;
 			}
 
-			$datepicker = ' <img src="plugins/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px;">
+			$datepicker = ' <img src="plugins/mootools/datepicker/icon.gif" width="20" height="20" alt="" id="toggle_' . $objWidget->id . '" style="vertical-align:-6px">
   <script>
-  window.addEvent(\'domready\', function() {
-    new DatePicker(\'#ctrl_' . $objWidget->id . '\', {
-      allowEmpty:true,
-      toggleElements:\'#toggle_' . $objWidget->id . '\',
-      pickerClass:\'datepicker_dashboard\',
-      format:\'' . $format . '\',
-      inputOutputFormat:\'' . $format . '\',
-      positionOffset:{x:130,y:-185}' . $time . ',
+  window.addEvent("domready", function() {
+    new Picker.Date($$("#ctrl_' . $objWidget->id . '"), {
+      draggable:false,
+      toggle:$$("#toggle_' . $objWidget->id . '"),
+      format:"' . $format . '",
+      positionOffset:{x:-197,y:-182}' . $time . ',
+      pickerClass:"datepicker_dashboard",
+      useFadeInOut:!Browser.ie,
       startDay:' . $GLOBALS['TL_LANG']['MSC']['weekOffset'] . ',
-      days:[\''. implode("','", $GLOBALS['TL_LANG']['DAYS']) . '\'],
-      dayShort:' . $GLOBALS['TL_LANG']['MSC']['dayShortLength'] . ',
-      months:[\''. implode("','", $GLOBALS['TL_LANG']['MONTHS']) . '\'],
-      monthShort:' . $GLOBALS['TL_LANG']['MSC']['monthShortLength'] . '
+      titleFormat:"' . $GLOBALS['TL_LANG']['MSC']['titleFormat'] . '"
     });
   });
   </script>';
 		}
 
-		// Add custom wizard
+		// Add a custom wizard
 		if (is_array($arrData['wizard']))
 		{
 			foreach ($arrData['wizard'] as $callback)
@@ -368,7 +386,7 @@ class DataContainer extends Backend
 		$objWidget->wizard = $wizard;
 
 		// Set correct form enctype
-		if ($objWidget instanceof uploadable)
+		if ($objWidget instanceof \uploadable)
 		{
 			$this->blnUploadable = true;
 		}
@@ -394,7 +412,7 @@ class DataContainer extends Backend
 		// Replace the textarea with an RTE instance
 		if (isset($arrData['eval']['rte']) && strncmp($arrData['eval']['rte'], 'tiny', 4) === 0)
 		{
-			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_" . $this->strInputName . "');</script>";
+			$updateMode = "\n  <script>tinyMCE.execCommand('mceAddControl', false, 'ctrl_".$this->strInputName."');$('ctrl_".$this->strInputName."').erase('required');</script>";
 		}
 
 		// Handle multi-select fields in "override all" mode
@@ -405,33 +423,34 @@ class DataContainer extends Backend
 <div>
   <fieldset class="tl_radio_container">
   <legend>' . $GLOBALS['TL_LANG']['MSC']['updateMode'] . '</legend>
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br>
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br>
-    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset();"> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_1" class="tl_radio" value="add" onfocus="Backend.getScrollOffset()"> <label for="opt_'.$this->strInputName.'_update_1">' . $GLOBALS['TL_LANG']['MSC']['updateAdd'] . '</label><br>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_2" class="tl_radio" value="remove" onfocus="Backend.getScrollOffset()"> <label for="opt_'.$this->strInputName.'_update_2">' . $GLOBALS['TL_LANG']['MSC']['updateRemove'] . '</label><br>
+    <input type="radio" name="'.$this->strInputName.'_update" id="opt_'.$this->strInputName.'_update_0" class="tl_radio" value="replace" checked="checked" onfocus="Backend.getScrollOffset()"> <label for="opt_'.$this->strInputName.'_update_0">' . $GLOBALS['TL_LANG']['MSC']['updateReplace'] . '</label>
   </fieldset>';
 		}
 
 		return '
-<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (($GLOBALS['TL_CONFIG']['oldBeTheme'] || !$objWidget->hasErrors()) ? $this->help() : '') . '
+<div' . ($arrData['eval']['tl_class'] ? ' class="' . $arrData['eval']['tl_class'] . '"' : '') . '>' . $objWidget->parse() . $datepicker . $updateMode . (!$objWidget->hasErrors() ? $this->help($strHelpClass) : '') . '
 </div>';
 	}
 
 
 	/**
 	 * Return the field explanation as HTML string
+	 * @param string
 	 * @return string
 	 */
-	public function help()
+	public function help($strClass='')
 	{
 		$return = $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['label'][1];
 
-		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || !strlen($return))
+		if (!$GLOBALS['TL_CONFIG']['showHelp'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['inputType'] == 'password' || $return == '')
 		{
 			return '';
 		}
 
 		return '
-  <p class="tl_help' . (!$GLOBALS['TL_CONFIG']['oldBeTheme'] ? ' tl_tip' : '') . '">'.$return.'</p>';
+  <p class="tl_help tl_tip' . $strClass . '">'.$return.'</p>';
 	}
 
 
@@ -443,6 +462,7 @@ class DataContainer extends Backend
 	protected function combiner($names)
 	{
 		$return = array('');
+		$names = array_values($names);
 
 		for ($i=0; $i<count($names); $i++)
 		{
@@ -480,7 +500,7 @@ class DataContainer extends Backend
 		}
 
 		$strUrl = $this->Environment->script . '?' . implode('&', $arrKeys);
-		$glue = count($arrKeys) ? '&' : '';
+		$glue = !empty($arrKeys) ? '&' : '';
 
 		return $strUrl . $glue . ($this->Input->get('table') ? 'table='.$this->Input->get('table').'&amp;' : '').'act=edit&amp;id='.$id;
 	}
@@ -493,13 +513,13 @@ class DataContainer extends Backend
 	 * @param array
 	 * @param boolean
 	 * @param array
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
 	 * @return string
 	 */
 	protected function generateButtons($arrRow, $strTable, $arrRootIds=array(), $blnCircularReference=false, $arrChildRecordIds=null, $strPrevious=null, $strNext=null)
 	{
-		if (!count($GLOBALS['TL_DCA'][$strTable]['list']['operations']))
+		if (empty($GLOBALS['TL_DCA'][$strTable]['list']['operations']))
 		{
 			return '';
 		}
@@ -509,9 +529,9 @@ class DataContainer extends Backend
 		foreach ($GLOBALS['TL_DCA'][$strTable]['list']['operations'] as $k=>$v)
 		{
 			$v = is_array($v) ? $v : array($v);
-			$label = strlen($v['label'][0]) ? $v['label'][0] : $k;
-			$title = sprintf((strlen($v['label'][1]) ? $v['label'][1] : $k), $arrRow['id']);
-			$attributes = strlen($v['attributes']) ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
+			$label = $v['label'][0] ?: $k;
+			$title = sprintf($v['label'][1] ?: $k, $arrRow['id']);
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim(sprintf($v['attributes'], $arrRow['id'], $arrRow['id'])) : '';
 
 			// Call a custom function instead of using the default button
 			if (is_array($v['button_callback']))
@@ -534,19 +554,19 @@ class DataContainer extends Backend
 
 			foreach ($arrDirections as $dir)
 			{
-				$label = strlen($GLOBALS['TL_LANG'][$strTable][$dir][0]) ? $GLOBALS['TL_LANG'][$strTable][$dir][0] : $dir;
-				$title = strlen($GLOBALS['TL_LANG'][$strTable][$dir][1]) ? $GLOBALS['TL_LANG'][$strTable][$dir][1] : $dir;
+				$label = $GLOBALS['TL_LANG'][$strTable][$dir][0] ?: $dir;
+				$title = $GLOBALS['TL_LANG'][$strTable][$dir][1] ?: $dir;
 
 				$label = $this->generateImage($dir.'.gif', $label);
-				$href = strlen($v['href']) ? $v['href'] : '&amp;act=move';
+				$href = $v['href'] ?: '&amp;act=move';
 
 				if ($dir == 'up')
 				{
-					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || !count($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('up_.gif')).' ';
+					$return .= ((is_numeric($strPrevious) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strPrevious).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('up_.gif')).' ';
 					continue;
 				}
 
-				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || !count($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('down_.gif')).' ';
+				$return .= ((is_numeric($strNext) && (!in_array($arrRow['id'], $arrRootIds) || empty($GLOBALS['TL_DCA'][$strTable]['list']['sorting']['root']))) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$arrRow['id']).'&amp;sid='.intval($strNext).'" title="'.specialchars($title).'"'.$attributes.'>'.$label.'</a> ' : $this->generateImage('down_.gif')).' ';
 			}
 		}
 
@@ -573,9 +593,9 @@ class DataContainer extends Backend
 			$v = is_array($v) ? $v : array($v);
 			$label = is_array($v['label']) ? $v['label'][0] : $v['label'];
 			$title = is_array($v['label']) ? $v['label'][1] : $v['label'];
-			$attributes = strlen($v['attributes']) ? ' ' . ltrim($v['attributes']) : '';
+			$attributes = ($v['attributes'] != '') ? ' ' . ltrim($v['attributes']) : '';
 
-			if (!strlen($label))
+			if ($label == '')
 			{
 				$label = $k;
 			}
@@ -584,7 +604,7 @@ class DataContainer extends Backend
 			if (is_array($v['button_callback']))
 			{
 				$this->import($v['button_callback'][0]);
-				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['icon'], $attributes, $this->strTable, $this->root);
+				$return .= $this->$v['button_callback'][0]->$v['button_callback'][1]($v['href'], $label, $title, $v['class'], $attributes, $this->strTable, $this->root);
 
 				continue;
 			}
@@ -595,5 +615,3 @@ class DataContainer extends Backend
 		return ($GLOBALS['TL_DCA'][$this->strTable]['config']['closed'] && !$blnForceSeparator) ? preg_replace('/^ &#160; :: &#160; /', '', $return) : $return;
 	}
 }
-
-?>

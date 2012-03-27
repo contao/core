@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
 
 
@@ -44,6 +43,15 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 		'onload_callback' => array
 		(
 			array('tl_newsletter_recipients', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'email' => 'index'
+			)
 		)
 	),
 
@@ -66,14 +74,14 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['import'],
 				'href'                => 'key=import',
 				'class'               => 'header_css_import',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -95,13 +103,13 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_newsletter_recipients', 'toggleIcon')
 			),
 			'show' => array
@@ -122,6 +130,20 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_newsletter_channel.title',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'email' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['email'],
@@ -134,7 +156,8 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'save_callback' => array
 			(
 				array('tl_newsletter_recipients', 'checkUniqueRecipient')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'active' => array
 		(
@@ -142,12 +165,13 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['source'],
-			'eval'                    => array('fieldType'=>'checkbox', 'files'=>true, 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
+			'eval'                    => array('fieldType'=>'checkbox', 'filesOnly'=>true, 'extensions'=>'csv', 'class'=>'mandatory')
 		),
 		'addedOn' => array
 		(
@@ -155,14 +179,20 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
 			'filter'                  => true,
 			'sorting'                 => true,
 			'flag'                    => 8,
-			'eval'                    => array('rgxp'=>'datim')
+			'eval'                    => array('rgxp'=>'datim'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_newsletter_recipients']['ip'],
 			'search'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 11
+			'flag'                    => 11,
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'token' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
 );
@@ -172,7 +202,7 @@ $GLOBALS['TL_DCA']['tl_newsletter_recipients'] = array
  * Class tl_newsletter_recipients
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -191,6 +221,7 @@ class tl_newsletter_recipients extends Backend
 
 	/**
 	 * Check permissions to edit table tl_newsletter_recipients
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -200,7 +231,7 @@ class tl_newsletter_recipients extends Backend
 		}
 
 		// Set root IDs
-		if (!is_array($this->User->newsletters) || count($this->User->newsletters) < 1)
+		if (!is_array($this->User->newsletters) || empty($this->User->newsletters))
 		{
 			$root = array(0);
 		}
@@ -287,17 +318,18 @@ class tl_newsletter_recipients extends Backend
 	/**
 	 * Check if recipients are unique per channel
 	 * @param mixed
-	 * @param object
+	 * @param \DataContainer
 	 * @return mixed
+	 * @throws \Exception
 	 */
-	public function checkUniqueRecipient($varValue, DataContainer $dc)
+	public function checkUniqueRecipient($varValue, \DataContainer $dc)
 	{
 		$objRecipient = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_newsletter_recipients WHERE email=? AND pid=(SELECT pid FROM tl_newsletter_recipients WHERE id=?) AND id!=?")
 									   ->execute($varValue, $dc->id, $dc->id);
 
 		if ($objRecipient->count > 0)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $GLOBALS['TL_LANG'][$dc->table][$dc->field][0]));
 		}
 
 		return $varValue;
@@ -315,14 +347,14 @@ class tl_newsletter_recipients extends Backend
 
 		if ($row['addedOn'])
 		{
-			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
+			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . sprintf($GLOBALS['TL_LANG']['tl_newsletter_recipients']['subscribed'], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $row['addedOn'])) . ')</span>';
 		}
 		else
 		{
-			$label .= ' <span style="color:#b3b3b3; padding-left:3px;">(' . $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually'] . ')</span>';
+			$label .= ' <span style="color:#b3b3b3;padding-left:3px">(' . $GLOBALS['TL_LANG']['tl_newsletter_recipients']['manually'] . ')</span>';
 		}
 
-		return sprintf('<div style="float:left;"><div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\');">%s</div></div>', TL_SCRIPT_URL, $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label) . "\n";
+		return sprintf('<div style="float:left"><div class="list_icon" style="background-image:url(\'%ssystem/themes/%s/images/%s.gif\')">%s</div></div>', TL_SCRIPT_URL, $this->getTheme(), ($row['active'] ? 'member' : 'member_'), $label) . "\n";
 	}
 
 
@@ -365,6 +397,7 @@ class tl_newsletter_recipients extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
@@ -399,5 +432,3 @@ class tl_newsletter_recipients extends Backend
 		$this->createNewVersion('tl_newsletter_recipients', $intId);
 	}
 }
-
-?>

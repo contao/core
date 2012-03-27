@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -62,6 +61,11 @@ $GLOBALS['BE_MOD'] = array
 		'page' => array
 		(
 			'tables' => array('tl_page')
+		),
+		'tpl_editor' => array
+		(
+			'tables' => array('tl_templates'),
+			'new_tpl' => array('tl_templates', 'addNewTemplate')
 		)
 	),
 
@@ -118,10 +122,6 @@ $GLOBALS['BE_MOD'] = array
 		(
 			'tables' => array('tl_user'),
 			'callback' => 'ModuleUser'
-		),
-		'tasks' => array
-		(
-			'callback' => 'ModuleTasks'
 		)
 	)
 );
@@ -145,7 +145,9 @@ $GLOBALS['BE_FFL'] = array
 	'trbl'           => 'TrblField',
 	'chmod'          => 'ChmodTable',
 	'pageTree'       => 'PageTree',
+	'pageSelector'   => 'PageSelector',
 	'fileTree'       => 'FileTree',
+	'fileSelector'   => 'FileSelector',
 	'tableWizard'    => 'TableWizard',
 	'listWizard'     => 'ListWizard',
 	'optionWizard'   => 'OptionWizard',
@@ -194,23 +196,71 @@ $GLOBALS['TL_CACHE'] = array
 
 
 /**
+ * Image crop modes
+ */
+$GLOBALS['TL_CROP'] = array
+(
+	'relative' => array
+	(
+		'proportional', 'box'
+	),
+	'crop' => array
+	(
+		'left_top',    'center_top',    'right_top',
+		'left_center', 'center_center', 'right_center',
+		'left_bottom', 'center_bottom', 'right_bottom'
+	)
+);
+
+
+/**
  * Cron jobs
  */
-$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'purgeTempFolder');
-$GLOBALS['TL_CRON']['daily'][]  = array('Automator', 'checkForUpdates');
-$GLOBALS['TL_CRON']['weekly'][] = array('Automator', 'generateSitemap');
-$GLOBALS['TL_CRON']['weekly'][] = array('StyleSheets', 'updateStyleSheets');
+$GLOBALS['TL_CRON'] = array
+(
+	'monthly' => array
+	(
+		array('Automator', 'purgeHtmlFolder'),
+		array('Automator', 'purgeScriptsFolder'),
+		array('Automator', 'purgeTempFolder'),
+	),
+	'weekly' => array
+	(
+		array('Automator', 'generateSitemap'),
+		array('StyleSheets', 'updateStyleSheets')
+	),
+	'daily' => array
+	(
+		array('Automator', 'checkForUpdates')
+	),
+	'hourly' => array()
+);
 
 
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS'] = array();
+$GLOBALS['TL_HOOKS'] = array
+(
+	'getSystemMessages' => array
+	(
+		array('Messages', 'versionCheck'),
+		array('Messages', 'lastLogin'),
+		array('Messages', 'topLevelRoot'),
+		array('Messages', 'languageFallback')
+	)
+);
 
 
 /**
- * Mime types
+ * Store the auto_item keywords so they can be ignored
+ * when rebuilding the URLs for the search index
+ */
+$GLOBALS['TL_AUTO_ITEM'] = array('items', 'events');
+
+
+/**
+ * Other global arrays
  */
 $GLOBALS['TL_MIME'] = array();
-
-?>
+$GLOBALS['TL_PERMISSIONS'] = array();

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleUnsubscribe
  *
  * Front end module "newsletter unsubscribe".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleUnsubscribe extends Module
+class ModuleUnsubscribe extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleUnsubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER UNSUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -69,7 +74,7 @@ class ModuleUnsubscribe extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			return '';
 		}
@@ -79,14 +84,15 @@ class ModuleUnsubscribe extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -116,12 +122,15 @@ class ModuleUnsubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") ORDER BY title");
+		$objChannel = \NewsletterChannelCollection::findByIds($this->nl_channels);
 
-		// Get titles
-		while ($objChannel->next())
+		// Get the titles
+		if ($objChannel !== null)
 		{
-			$arrChannels[$objChannel->id] = $objChannel->title;
+			while ($objChannel->next())
+			{
+				$arrChannels[$objChannel->id] = $objChannel->title;
+			}
 		}
 
 		// Default template variables
@@ -139,7 +148,8 @@ class ModuleUnsubscribe extends Module
 
 
 	/**
-	 * Add a new recipient
+	 * Remove the recipient
+	 * @return void
 	 */
 	protected function removeRecipient()
 	{
@@ -147,7 +157,7 @@ class ModuleUnsubscribe extends Module
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
-		if (!is_array($arrChannels) || count($arrChannels) < 1)
+		if (!is_array($arrChannels) || empty($arrChannels))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
 			$this->reload();
@@ -164,11 +174,8 @@ class ModuleUnsubscribe extends Module
 
 		$arrSubscriptions = array();
 
-		// Get active subscriptions
-		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=1")
-										  ->execute($varInput);
-
-		if ($objSubscription->numRows)
+		// Get the existing active subscriptions
+		if (($objSubscription = \NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
 		{
 			$arrSubscriptions = $objSubscription->fetchEach('pid');
 		}
@@ -176,18 +183,23 @@ class ModuleUnsubscribe extends Module
 		$arrRemove = array_intersect($arrChannels, $arrSubscriptions);
 
 		// Return if there are no subscriptions to remove
-		if (!is_array($arrRemove) || count($arrRemove) < 1)
+		if (!is_array($arrRemove) || empty($arrRemove))
 		{
 			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['unsubscribed'];
 			$this->reload();
 		}
 
-		// Remove subscriptions
-		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND pid IN(" . implode(',', array_map('intval', $arrRemove)) . ")")
-					   ->execute($varInput);
+		// Remove the subscriptions
+		if (($objRemove = \NewsletterRecipientsModel::findByEmailAndPids($varInput, $arrRemove)) !== null)
+		{
+			while ($objRemove->next())
+			{
+				$objRemove->delete();
+			}
+		}
 
-		// Get channels
-		$objChannels = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrRemove)) . ")");
+		// Get the channels
+		$objChannels = \NewsletterChannelCollection::findByIds($arrRemove);
 		$arrChannels = $objChannels->fetchEach('title');
 
 		// Log activity
@@ -203,36 +215,25 @@ class ModuleUnsubscribe extends Module
 			}
 		}
 
-		// Confirmation e-mail
-		$objEmail = new Email();
-
+		// Prepare the e-mail text
 		$strText = str_replace('##domain##', $this->Environment->host, $this->nl_unsubscribe);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $arrChannels), $strText);
 
+		// Confirmation e-mail
+		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
-
 		$objEmail->sendTo($varInput);
-		global $objPage;
 
-		// Redirect to jumpTo page
-		if (strlen($this->jumpTo) && $this->jumpTo != $objPage->id)
+		// Redirect to the jumpTo page
+		if ($this->jumpTo['id'])
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
-
-			if ($objNextPage->numRows)
-			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
-			}
+			$this->redirect($this->generateFrontendUrl($this->jumpTo));
 		}
 
 		$_SESSION['UNSUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_removed'];
 		$this->reload();
 	}
 }
-
-?>

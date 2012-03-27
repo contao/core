@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,23 +20,28 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleFaqList
  *
- * @copyright  Leo Feyer 2008-2011
+ * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaqList extends Module
+class ModuleFaqList extends \Module
 {
 
 	/**
@@ -60,7 +65,7 @@ class ModuleFaqList extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ LIST ###';
 			$objTemplate->title = $this->headline;
@@ -74,9 +79,15 @@ class ModuleFaqList extends Module
 		$this->faq_categories = deserialize($this->faq_categories);
 
 		// Return if there are no categories
-		if (!is_array($this->faq_categories) || count($this->faq_categories) < 1)
+		if (!is_array($this->faq_categories) || empty($this->faq_categories))
 		{
 			return '';
+		}
+
+		// Show the FAQ reader if an item has been selected
+		if ($this->faq_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		{
+			return $this->getFrontendModule($this->faq_readerModule, $this->strColumn);
 		}
 
 		return parent::generate();
@@ -84,13 +95,14 @@ class ModuleFaqList extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		$objFaq = $this->Database->execute("SELECT *, tl_faq.id AS id FROM tl_faq LEFT JOIN tl_faq_category ON(tl_faq_category.id=tl_faq.pid) WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ")" . (!BE_USER_LOGGED_IN ? " AND published=1" : "") . " ORDER BY pid, sorting");
+		$objFaq = \FaqCollection::findPublishedByPids($this->faq_categories);
 
-		if ($objFaq->numRows < 1)
+		if ($objFaq === null)
 		{
 			$this->Template->faq = array();
 			return;
@@ -106,8 +118,8 @@ class ModuleFaqList extends Module
 			$arrTemp['title'] = specialchars($objFaq->question, true);
 			$arrTemp['href'] = $this->generateFaqLink($objFaq);
 
-			$arrFaq[$objFaq->pid]['items'][] = $arrTemp;
-			$arrFaq[$objFaq->pid]['headline'] = $objFaq->headline;
+			$arrFaq[$objFaq->id]['items'][] = $arrTemp;
+			$arrFaq[$objFaq->id]['headline'] = $objFaq->headline;
 		}
 
 		$arrFaq = array_values($arrFaq);
@@ -138,33 +150,26 @@ class ModuleFaqList extends Module
 	 * @param object
 	 * @return string
 	 */
-	protected function generateFaqLink(Database_Result $objFaq)
+	protected function generateFaqLink($objFaq)
 	{
-		if (!isset($this->arrTargets[$objFaq->id]))
-		{
-			if ($objFaq->jumpTo < 1)
-			{
-				$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
-			}
-			else
-			{
-				$objTarget = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 		->limit(1)
-											->execute(intval($objFaq->jumpTo));
+		$jumpTo = intval($objFaq->pid['jumpTo']);
 
-				if ($objTarget->numRows < 1)
+		// Get the URL from the jumpTo page of the category
+		if (!isset($this->arrTargets[$jumpTo]))
+		{
+			$this->arrTargets[$jumpTo] = ampersand($this->Environment->request, true);
+
+			if ($objFaq->pid['jumpTo'])
+			{
+				$objTarget = \PageModel::findByPk($objFaq->pid['jumpTo']);
+
+				if ($objTarget !== null)
 				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->Environment->request, true);
-				}
-				else
-				{
-					$this->arrTargets[$objFaq->id] = ampersand($this->generateFrontendUrl($objTarget->fetchAssoc(), '/items/' . ((strlen($objFaq->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id)));
+					$this->arrTargets[$jumpTo] = ampersand($this->generateFrontendUrl($objTarget->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s')));
 				}
 			}
 		}
 
-		return $this->arrTargets[$objFaq->id];
+		return sprintf($this->arrTargets[$jumpTo], (($objFaq->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objFaq->alias : $objFaq->id));
 	}
 }
-
-?>

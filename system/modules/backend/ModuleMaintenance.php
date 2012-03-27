@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleMaintenance
  *
  * Back end module "maintenance".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleMaintenance extends BackendModule
+class ModuleMaintenance extends \BackendModule
 {
 
 	/**
@@ -48,8 +53,9 @@ class ModuleMaintenance extends BackendModule
 
 
 	/**
-	 * Generate module
-	 * @throws Exception
+	 * Generate the module
+	 * @return void
+	 * @throws \Exception
 	 */
 	protected function compile()
 	{
@@ -64,9 +70,9 @@ class ModuleMaintenance extends BackendModule
 		{
 			$this->import($callback);
 
-			if (!$this->$callback instanceof executable)
+			if (!$this->$callback instanceof \executable)
 			{
-				throw new Exception("$callback is not an executable class");
+				throw new \Exception("$callback is not an executable class");
 			}
 
 			$buffer = $this->$callback->run();
@@ -84,5 +90,3 @@ class ModuleMaintenance extends BackendModule
 
 	}
 }
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class LiveUpdate
  *
  * Maintenance module "Live Update".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class LiveUpdate extends Backend implements executable
+class LiveUpdate extends \Backend implements \executable
 {
 
 	/**
@@ -56,32 +61,30 @@ class LiveUpdate extends Backend implements executable
 	 */
 	public function run()
 	{
-		$objTemplate = new BackendTemplate('be_live_update');
+		$objTemplate = new \BackendTemplate('be_live_update');
 
 		$objTemplate->updateClass = 'tl_confirm';
 		$objTemplate->updateHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdate'];
 		$objTemplate->isActive = $this->isActive();
-
-		// Current version up to date
-		$objTemplate->updateMessage = sprintf('%s <a href="%sCHANGELOG.txt" rel="lightbox[external 80%% 80%%]" title="%s"><img src="%s" width="14" height="14" alt="%s" style="vertical-align:text-bottom; padding-left:3px;"></a>',
-												 sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD),
-												 $this->Environment->base,
-												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']),
-												 TL_FILES_URL . 'system/themes/'.$this->getTheme().'/images/changelog.gif',
-												 specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']));
+		$strMessage = ' <a href="contao/changelog.php" onclick="Backend.openModalIframe({\'width\':680,\'title\':\'CHANGELOG\',\'url\':this.href});return false" title="' . specialchars($GLOBALS['TL_LANG']['tl_maintenance']['changelog']) . '"><img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/changelog.gif" width="14" height="14" alt="" style="vertical-align:text-bottom;padding-left:3px"></a>';
 
 		// No live update for beta versions
 		if (!is_numeric(BUILD))
 		{
 			$objTemplate->updateClass = 'tl_info';
-			$objTemplate->updateMessage = $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion'];
+			$objTemplate->updateMessage = $GLOBALS['TL_LANG']['tl_maintenance']['betaVersion'] . $strMessage;
 		}
-
 		// Newer version available
 		elseif (isset($GLOBALS['TL_CONFIG']['latestVersion']) && version_compare(VERSION . '.' . BUILD, $GLOBALS['TL_CONFIG']['latestVersion'], '<'))
 		{
 			$objTemplate->updateClass = 'tl_info';
-			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']);
+			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['newVersion'], $GLOBALS['TL_CONFIG']['latestVersion']) . $strMessage;
+		}
+		// Current version up to date
+		else
+		{
+			$objTemplate->updateClass = 'tl_confirm';
+			$objTemplate->updateMessage = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['upToDate'], VERSION . '.' . BUILD) . $strMessage;
 		}
 
 		// Live update error
@@ -100,6 +103,16 @@ class LiveUpdate extends Backend implements executable
 			$_SESSION['LIVE_UPDATE_CONFIRM'] = '';
 		}
 
+		// Automatically switch to SSL
+		if ($this->Environment->ssl)
+		{
+			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('http://', 'https://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+		}
+		else
+		{
+			$GLOBALS['TL_CONFIG']['liveUpdateBase'] = str_replace('https://', 'http://', $GLOBALS['TL_CONFIG']['liveUpdateBase']);
+		}
+
 		$objTemplate->uid = $GLOBALS['TL_CONFIG']['liveUpdateId'];
 		$objTemplate->updateServer = $GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'index.php';
 
@@ -111,6 +124,7 @@ class LiveUpdate extends Backend implements executable
 		elseif ($this->Input->get('act') == 'runonce')
 		{
 			$this->handleRunOnce();
+			$this->Config->update("\$GLOBALS['TL_CONFIG']['coreOnlyMode']", true);
 			$this->redirect('contao/main.php?do=maintenance');
 		}
 
@@ -118,8 +132,7 @@ class LiveUpdate extends Backend implements executable
 		$objTemplate->liveUpdateId = $GLOBALS['TL_LANG']['tl_maintenance']['liveUpdateId'];
 		$objTemplate->runLiveUpdate = specialchars($GLOBALS['TL_LANG']['tl_maintenance']['runLiveUpdate']);
 		$objTemplate->referer = base64_encode($this->Environment->base . $this->Environment->request . '|' . $this->Environment->server);
-		$objTemplate->backupFiles = $GLOBALS['TL_LANG']['tl_maintenance']['backupFiles'];
-		$objTemplate->showToc = $GLOBALS['TL_LANG']['tl_maintenance']['showToc'];
+		$objTemplate->updateHelp = sprintf($GLOBALS['TL_LANG']['tl_maintenance']['updateHelp'], '<a href="http://luid.inetrobots.com" target="_blank">Live Update ID</a>');
 
 		return $objTemplate->parse();
 	}
@@ -127,16 +140,17 @@ class LiveUpdate extends Backend implements executable
 
 	/**
 	 * Run the live update
-	 * @param object
+	 * @param \BackendTemplate
+	 * @return void
 	 */
-	protected function runLiveUpdate(BackendTemplate $objTemplate)
+	protected function runLiveUpdate(\BackendTemplate $objTemplate)
 	{
 		$archive = 'system/tmp/' . $this->Input->get('token');
 
 		// Download the archive
 		if (!file_exists(TL_ROOT . '/' . $archive))
 		{
-			$objRequest = new Request();
+			$objRequest = new \Request();
 			$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'request.php?token=' . $this->Input->get('token'));
 
 			if ($objRequest->hasError())
@@ -146,7 +160,7 @@ class LiveUpdate extends Backend implements executable
 				return;
 			}
 
-			$objFile = new File($archive);
+			$objFile = new \File($archive);
 			$objFile->write($objRequest->response);
 			$objFile->close();
 		}
@@ -171,7 +185,7 @@ class LiveUpdate extends Backend implements executable
 			.'<body>'
 			.'<div>';
 
-		$objArchive = new ZipReader($archive);
+		$objArchive = new \ZipReader($archive);
 
 		// Table of contents
 		if ($this->Input->get('toc'))
@@ -205,7 +219,7 @@ class LiveUpdate extends Backend implements executable
 				.'<ol>';
 
 			$arrFiles = $objArchive->getFileList();
-			$objBackup = new ZipWriter('LU' . date('YmdHi') . '.zip');
+			$objBackup = new \ZipWriter('LU' . date('YmdHi') . '.zip');
 
 			foreach ($arrFiles as $strFile)
 			{
@@ -219,7 +233,7 @@ class LiveUpdate extends Backend implements executable
 					$objBackup->addFile($strFile);
 					echo '<li>Backed up ' . $strFile . '</li>';
 				}
-				catch (Exception $e)
+				catch (\Exception $e)
 				{
 					echo '<li>' . $e->getMessage() . ' (skipped)</li>';
 				}
@@ -253,15 +267,15 @@ class LiveUpdate extends Backend implements executable
 
 			try
 			{
-				$objFile = new File($objArchive->file_name);
+				$objFile = new \File($objArchive->file_name);
 				$objFile->write($objArchive->unzip());
 				$objFile->close();
 
 				echo '<li>Updated ' . $objArchive->file_name . '</li>';
 			}
-			catch (Exception $e)
+			catch (\Exception $e)
 			{
-				echo '<li><span style="color:#c55;">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
+				echo '<li><span style="color:#c55">Error updating ' . $objArchive->file_name . ': ' . $e->getMessage() . '</span></li>';
 			}
 		}
 
@@ -281,5 +295,3 @@ class LiveUpdate extends Backend implements executable
 		exit;
 	}
 }
-
-?>

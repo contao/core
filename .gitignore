@@ -1,0 +1,30 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs 
+.buildpath
+.project
+.settings/
+.build/
+.idea/
+nbproject/
+
+# Contao
+.htaccess
+*.xml
+files/*
+assets/css/*
+assets/images/*
+assets/js/*
+share/*
+system/cache/*
+system/logs/*
+system/tmp/*
+system/config/dcaconfig.php
+system/config/initconfig.php
+system/config/langconfig.php
+system/config/localconfig.php
+system/modules/development/
+system/cron/cron.txt
+

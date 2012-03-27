@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,31 +20,30 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentDownload
  *
  * Front end content element "download".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentDownload extends ContentElement
+class ContentDownload extends \ContentElement
 {
-
-	/**
-	 * File object
-	 * @var object
-	 */
-	protected $objFile;
 
 	/**
 	 * Template
@@ -60,12 +59,24 @@ class ContentDownload extends ContentElement
 	public function generate()
 	{
 		// Return if there is no file
-		if (!strlen($this->singleSRC) || !is_file(TL_ROOT . '/' . $this->singleSRC))
+		if ($this->singleSRC == '')
 		{
 			return '';
 		}
 
-		$objFile = new File($this->singleSRC);
+		// Check for version 3 format
+		if (!is_numeric($this->singleSRC))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		$objFile = \FilesModel::findByPk($this->singleSRC);
+
+		if ($objFile === null)
+		{
+			return '';
+		}
+
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Return if the file type is not allowed
@@ -74,36 +85,51 @@ class ContentDownload extends ContentElement
 			return '';
 		}
 
-		$this->objFile = $objFile;
+		$file = $this->Input->get('file', true);
 
 		// Send the file to the browser
-		if (strlen($this->Input->get('file', true)) && $this->Input->get('file', true) == $this->singleSRC)
+		if ($file != '')
 		{
-			$this->sendFileToBrowser($this->Input->get('file', true));
+			if ($file == $objFile->path)
+			{
+				$this->sendFileToBrowser($file);
+			}
+
+			// Do not index or cache the page
+			global $objPage;
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
+			// Send a 404 header
+			header('HTTP/1.1 404 Not Found');
+			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
 		}
 
+		$this->singleSRC = $objFile->path;
 		return parent::generate();
 	}
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
-		if (!strlen($this->linkTitle))
+		$objFile = new \File($this->singleSRC);
+
+		if ($this->linkTitle == '')
 		{
-			$this->linkTitle = $this->objFile->basename;
+			$this->linkTitle = $objFile->basename;
 		}
 
 		$this->Template->link = $this->linkTitle;
 		$this->Template->title = specialchars($this->linkTitle);
-		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($this->singleSRC);
-		$this->Template->filesize = $this->getReadableSize($this->objFile->filesize, 1);
-		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $this->objFile->icon;
-		$this->Template->mime = $this->objFile->mime;
-		$this->Template->extension = $this->objFile->extension;
+		$this->Template->href = $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFile->value);
+		$this->Template->filesize = $this->getReadableSize($objFile->filesize, 1);
+		$this->Template->icon = TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon;
+		$this->Template->mime = $objFile->mime;
+		$this->Template->extension = $objFile->extension;
+		$this->Template->path = $objFile->dirname;
 	}
 }
-
-?>

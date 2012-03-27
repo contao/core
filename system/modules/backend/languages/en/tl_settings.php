@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -49,13 +48,21 @@ $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum items
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Do not collapse elements', 'Do not collapse elements in the back end preview.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL suffix', 'The URL suffix will be added to the URI string to simulate static documents.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache mode', 'Here you can select the cache mode.');
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp']  = array('Anonymize IP addresses', 'Anonymize any IP address that is stored in the database, except in the <em>tl_session</em> table (the IP address is bound to the session for security reasons).');
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA']  = array('Anonymize Google Analytics', 'Anonymize the IP addresses that are sent to Google Analytics.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('Rewrite URLs', 'Make Contao generate static URLs without the index.php fragment. This feature requires "mod_rewrite", renaming the ".htaccess.default" file to ".htaccess" and adjusting the RewriteBase as necessary.');
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl']    = array('Add the language to the URL', 'Add the language string as first URL parameter (e.g. <em>http://domain.tld/en/</em>).');
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty']  = array('Do not redirect empty URLs', 'For an empty URL display the website instead of redirecting to the language root page (not recommended).');
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem']         = array('Enable auto_item', 'Skip the <em>items/</em> or <em>events/</em> fragment in the URL and automatically discover the item based on the <em>auto_item</em> parameter.');
 $GLOBALS['TL_LANG']['tl_settings']['disableAlias']        = array('Disable page alias usage', 'Use the numeric ID of a page or article instead of its alias.');
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl']           = array('Enable folder URLs', 'Here you can enable folder-style page aliases like <em>docs/install/download.html</em> instead of <em>docs-install-download.html</em>.');
 $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Allowed HTML tags', 'Here you can enter a list of allowed HTML tags that will not be stripped.');
-$GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Account locking time', 'An account will be locked if a wrong password is entered three times in a row.');
-$GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Encryption key', 'Note that encrypted data can only be decrypted with the same key!');
-$GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Display error messages', 'Print error messages to the screen (not recommended for productional sites).');
 $GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Enable debug mode', 'Print certain runtime information like database queries to the screen.');
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache']         = array('Bypass the internal cache', 'Do not use the internal cache files (e.g. useful when developing extensions).');
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode']        = array('Run in safe mode', 'Run Contao in safe mode and load only core modules.');
+$GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Account locking time', 'An account will be locked if a wrong password is entered three times in a row.');
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Display error messages', 'Print error messages to the screen (not recommended for productional sites).');
+$GLOBALS['TL_LANG']['tl_settings']['logErrors']           = array('Log error messages', 'Write error messages to the error log file (<em>system/logs/error.log</em>).');
 $GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Disable request tokens', 'Do not check the request token when a form is submitted. Attention: potential security risk!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('Disable IP check', 'Do not bind sessions to IP addresses. Choosing this option is a potential security risk!');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Download file types', 'Here you can enter a comma separated list of downloadable file types.');
@@ -100,6 +107,8 @@ $GLOBALS['TL_LANG']['tl_settings']['date_legend']     = 'Date and time';
 $GLOBALS['TL_LANG']['tl_settings']['global_legend']   = 'Global configuration';
 $GLOBALS['TL_LANG']['tl_settings']['backend_legend']  = 'Back end configuration';
 $GLOBALS['TL_LANG']['tl_settings']['frontend_legend'] = 'Front end configuration';
+$GLOBALS['TL_LANG']['tl_settings']['safemode_legend'] = 'Safe mode';
+$GLOBALS['TL_LANG']['tl_settings']['privacy_legend']  = 'Privacy settings';
 $GLOBALS['TL_LANG']['tl_settings']['security_legend'] = 'Security settings';
 $GLOBALS['TL_LANG']['tl_settings']['files_legend']    = 'Files and images';
 $GLOBALS['TL_LANG']['tl_settings']['uploads_legend']  = 'Upload settings';
@@ -121,5 +130,3 @@ $GLOBALS['TL_LANG']['tl_settings']['both']    = 'Use the server and the browser 
 $GLOBALS['TL_LANG']['tl_settings']['server']  = 'Use only the server cache';
 $GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Use only the browser cache';
 $GLOBALS['TL_LANG']['tl_settings']['none']    = 'Disable caching';
-
-?>

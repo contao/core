@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModulePersonalData
  *
  * Front end module "personal data".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModulePersonalData extends Module
+class ModulePersonalData extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModulePersonalData extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### PERSONAL DATA ###';
 			$objTemplate->title = $this->headline;
@@ -69,7 +74,7 @@ class ModulePersonalData extends Module
 		$this->editable = deserialize($this->editable);
 
 		// Return if there are not editable fields or if there is no logged in user
-		if (!is_array($this->editable) || count($this->editable) < 1 || !FE_USER_LOGGED_IN)
+		if (!is_array($this->editable) || empty($this->editable) || !FE_USER_LOGGED_IN)
 		{
 			return '';
 		}
@@ -79,7 +84,8 @@ class ModulePersonalData extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -104,10 +110,10 @@ class ModulePersonalData extends Module
 			}
 		}
 
-		// Set template
-		if (strlen($this->memberTpl))
+		// Set the template
+		if ($this->memberTpl != '')
 		{
-			$this->Template = new FrontendTemplate($this->memberTpl);
+			$this->Template = new \FrontendTemplate($this->memberTpl);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -119,12 +125,15 @@ class ModulePersonalData extends Module
 		$hasUpload = false;
 		$row = 0;
 
-		// Build form
+		$blnModified = false;
+		$objMember = \MemberModel::findByPk($this->User->id);
+
+		// Build the form
 		foreach ($this->editable as $field)
 		{
 			$arrData = &$GLOBALS['TL_DCA']['tl_member']['fields'][$field];
 
-			// Map checkboxWizard to regular checkbox widget
+			// Map checkboxWizards to regular checkbox widgets
 			if ($arrData['inputType'] == 'checkboxWizard')
 			{
 				$arrData['inputType'] = 'checkbox';
@@ -132,8 +141,8 @@ class ModulePersonalData extends Module
 
 			$strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
-			// Continue if the class is not defined
-			if (!$this->classFileExists($strClass) || !$arrData['eval']['feEditable'])
+			// Continue if the class does not exist
+			if (!$arrData['eval']['feEditable'] || !$this->classFileExists($strClass))
 			{
 				continue;
 			}
@@ -148,14 +157,14 @@ class ModulePersonalData extends Module
 			$objWidget->storeValues = true;
 			$objWidget->rowClass = 'row_'.$row . (($row == 0) ? ' row_first' : '') . ((($row % 2) == 0) ? ' even' : ' odd');
 
-			// Increase the row count if its a password field
-			if ($objWidget instanceof FormPassword)
+			// Increase the row count if it is a password field
+			if ($objWidget instanceof \FormPassword)
 			{
 				++$row;
 				$objWidget->rowClassConfirm = 'row_'.$row . ((($row % 2) == 0) ? ' even' : ' odd');
 			}
 
-			// Validate input
+			// Validate the form data
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_member_' . $this->id)
 			{
 				$objWidget->validate();
@@ -166,24 +175,18 @@ class ModulePersonalData extends Module
 				// Convert date formats into timestamps (check the eval setting first -> #3063)
 				if (($rgxp == 'date' || $rgxp == 'time' || $rgxp == 'datim') && $varValue != '')
 				{
-					$objDate = new Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp . 'Format']);
+					// Use the numeric back end format here!
+					$objDate = new \Date($varValue, $GLOBALS['TL_CONFIG'][$rgxp.'Format']);
 					$varValue = $objDate->tstamp;
 				}
 
 				// Make sure that unique fields are unique (check the eval setting first -> #3063)
-				if ($arrData['eval']['unique'] && $varValue != '')
+				if ($arrData['eval']['unique'] && $varValue != '' && !$this->fieldIsUnique('tl_member', $field, $varValue, $this->User->id))
 				{
-					$objUnique = $this->Database->prepare("SELECT * FROM tl_member WHERE " . $field . "=? AND id!=?")
-												->limit(1)
-												->execute($varValue, $this->User->id);
-
-					if ($objUnique->numRows)
-					{
-						$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], (strlen($arrData['label'][0]) ? $arrData['label'][0] : $field)));
-					}
+					$objWidget->addError(sprintf($GLOBALS['TL_LANG']['ERR']['unique'], $arrData['label'][0] ?: $field));
 				}
 
-				// Save callback
+				// Trigger the save_callback
 				if (is_array($arrData['save_callback']))
 				{
 					foreach ($arrData['save_callback'] as $callback)
@@ -194,7 +197,7 @@ class ModulePersonalData extends Module
 						{
 							$varValue = $this->$callback[0]->$callback[1]($varValue, $this->User, $this);
 						}
-						catch (Exception $e)
+						catch (\Exception $e)
 						{
 							$objWidget->class = 'error';
 							$objWidget->addError($e->getMessage());
@@ -202,37 +205,34 @@ class ModulePersonalData extends Module
 					}
 				}
 
-				// Do not submit if there are errors
+				// Do not submit the field if there are errors
 				if ($objWidget->hasErrors())
 				{
 					$doNotSubmit = true;
 				}
-
-				// Store current value
 				elseif ($objWidget->submitInput())
 				{
-					// Set new value
+					// Set the new value
 					$this->User->$field = $varValue;
 					$_SESSION['FORM_DATA'][$field] = $varValue;
-					$varSave = is_array($varValue) ? serialize($varValue) : $varValue;
 
-					// Save field
-					$this->Database->prepare("UPDATE tl_member SET " . $field . "=? WHERE id=?")
-								   ->execute($varSave, $this->User->id);
+					// Set the new field in the member model
+					$blnModified = true;
+					$objMember->$field = $varValue;
 
 					// HOOK: set new password callback
-					if ($objWidget instanceof FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
+					if ($objWidget instanceof \FormPassword && isset($GLOBALS['TL_HOOKS']['setNewPassword']) && is_array($GLOBALS['TL_HOOKS']['setNewPassword']))
 					{
 						foreach ($GLOBALS['TL_HOOKS']['setNewPassword'] as $callback)
 						{
 							$this->import($callback[0]);
-							$this->$callback[0]->$callback[1]($this->User, $varValue);
+							$this->$callback[0]->$callback[1]($this->User, $varValue, $this);
 						}
 					}
 				}
 			}
 
-			if ($objWidget instanceof uploadable)
+			if ($objWidget instanceof \uploadable)
 			{
 				$hasUpload = true;
 			}
@@ -242,6 +242,12 @@ class ModulePersonalData extends Module
 			$this->Template->fields .= $temp;
 			$arrFields[$strGroup][$field] .= $temp;
 			++$row;
+		}
+
+		// Save the model
+		if ($blnModified)
+		{
+			$objMember->save();
 		}
 
 		$this->Template->hasError = $doNotSubmit;
@@ -255,7 +261,7 @@ class ModulePersonalData extends Module
 				foreach ($GLOBALS['TL_HOOKS']['updatePersonalData'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA']);
+					$this->$callback[0]->$callback[1]($this->User, $_SESSION['FORM_DATA'], $this);
 				}
 			}
 			
@@ -301,5 +307,3 @@ class ModulePersonalData extends Module
 		}
 	}
 }
-
-?>

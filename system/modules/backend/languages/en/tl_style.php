@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -57,25 +56,25 @@ $GLOBALS['TL_LANG']['tl_style']['align']          = array('Element alignment', '
 $GLOBALS['TL_LANG']['tl_style']['verticalalign']  = array('Vertical alignment', 'Here you can choose the vertical alignment.');
 $GLOBALS['TL_LANG']['tl_style']['textalign']      = array('Text alignment', 'Here you can choose the horizontal text alignment.');
 $GLOBALS['TL_LANG']['tl_style']['background']     = array('Background', 'Background-color, background-image, background-position, background-repeat, linear-gradient and box-shadow.');
-$GLOBALS['TL_LANG']['tl_style']['bgcolor']        = array('Background color and transparency', 'Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional transparency in percent (e.g. 75).');
+$GLOBALS['TL_LANG']['tl_style']['bgcolor']        = array('Background color and opacity', 'Here you can enter a hexadecimal background color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).');
 $GLOBALS['TL_LANG']['tl_style']['bgimage']        = array('Background image', 'Here you can enter the path to a background image.');
 $GLOBALS['TL_LANG']['tl_style']['bgposition']     = array('Background position', 'Here you can select the position of the background image.');
 $GLOBALS['TL_LANG']['tl_style']['bgrepeat']       = array('Background repeat', 'Here you can select the repeating mode.');
 $GLOBALS['TL_LANG']['tl_style']['shadowsize']     = array('Shadow size', 'Here you can enter the X and Y offset, an optional blur size and an optional spread radius.');
-$GLOBALS['TL_LANG']['tl_style']['shadowcolor']    = array('Shadow color', 'Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional transparency in percent (e.g. 75).');
+$GLOBALS['TL_LANG']['tl_style']['shadowcolor']    = array('Shadow color and opacity', 'Here you can enter a hexadecimal shadow color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).');
 $GLOBALS['TL_LANG']['tl_style']['gradientAngle']  = array('Gradient angle', 'Here you can enter the gradient angle (e.g. <em>-45deg</em>) or the starting point (e.g. <em>top</em> or <em>left bottom</em>).');
 $GLOBALS['TL_LANG']['tl_style']['gradientColors'] = array('Gradient colors', 'Here you can enter up to four colors with an optional percentage (e.g. <em>ffc 10% | f90 | f00</em>).');
 $GLOBALS['TL_LANG']['tl_style']['border']         = array('Border', 'Border-width, border-style, border-color, border-radius, border-collapse and border-spacing.');
 $GLOBALS['TL_LANG']['tl_style']['borderwidth']    = array('Border width', 'Here you can enter the top, right, bottom and left border width.');
 $GLOBALS['TL_LANG']['tl_style']['borderstyle']    = array('Border style', 'Here you can choose the border style.');
-$GLOBALS['TL_LANG']['tl_style']['bordercolor']    = array('Border color', 'Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional transparency in percent (e.g. 75).');
+$GLOBALS['TL_LANG']['tl_style']['bordercolor']    = array('Border color and opacity', 'Here you can enter a hexadecimal border color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).');
 $GLOBALS['TL_LANG']['tl_style']['borderradius']   = array('Border radius', 'Here you can enter the top, right, bottom and left border radius.');
 $GLOBALS['TL_LANG']['tl_style']['bordercollapse'] = array('Border handling', 'Here you can choose the border handling.');
 $GLOBALS['TL_LANG']['tl_style']['borderspacing']  = array('Border spacing', 'Here you can enter the border spacing.');
 $GLOBALS['TL_LANG']['tl_style']['font']           = array('Font', 'Font-family, font-size, font-color, line-height, font-style and white-space.');
 $GLOBALS['TL_LANG']['tl_style']['fontfamily']     = array('Font family', 'Here you can enter a comma separated list of font types.');
 $GLOBALS['TL_LANG']['tl_style']['fontsize']       = array('Font size', 'Here you can enter the font size.');
-$GLOBALS['TL_LANG']['tl_style']['fontcolor']      = array('Font color', 'Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional transparency in percent (e.g. 75).');
+$GLOBALS['TL_LANG']['tl_style']['fontcolor']      = array('Font color and opacity', 'Here you can enter a hexadecimal font color (e.g. ff0000 for red) and an optional opacity in percent (e.g. 75).');
 $GLOBALS['TL_LANG']['tl_style']['lineheight']     = array('Line height', 'Here you can define the line height.');
 $GLOBALS['TL_LANG']['tl_style']['fontstyle']      = array('Font style', 'Here you can choose one or more font styles.');
 $GLOBALS['TL_LANG']['tl_style']['whitespace']     = array('Disable automatic line feed', 'Do not wrap words automatically.');
@@ -141,5 +140,3 @@ $GLOBALS['TL_LANG']['tl_style']['editheader'] = array('Edit style sheet', 'Edit 
 $GLOBALS['TL_LANG']['tl_style']['pasteafter'] = array('Paste at the top', 'Paste after format definition ID %s');
 $GLOBALS['TL_LANG']['tl_style']['pastenew']   = array('Add new at the top', 'Add new after format definition ID %s');
 $GLOBALS['TL_LANG']['tl_style']['toggle']     = array('Toggle visibility', 'Toggle the visibility of format definition ID %s');
-
-?>

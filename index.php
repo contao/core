@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'FE');
-require('system/initialize.php');
+require 'system/initialize.php';
 
 
 /**
  * Class Index
  *
  * Main front end controller.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -55,7 +54,13 @@ class Index extends Frontend
 		// Try to read from cache
 		$this->outputFromCache();
 
-		// Load user object before calling the parent constructor
+		// Redirect to the install tool
+		if (!Config::getInstance()->isComplete())
+		{
+			$this->redirect('contao/install.php');
+		}
+
+		// Load the user object before calling the parent constructor
 		$this->import('FrontendUser', 'User');
 		parent::__construct();
 
@@ -67,84 +72,131 @@ class Index extends Frontend
 
 	/**
 	 * Run the controller
+	 * @return void
 	 */
 	public function run()
 	{
 		global $objPage;
-
-		// Get the page ID
 		$pageId = $this->getPageIdFromUrl();
+		$objRootPage = null;
 
 		// Load a website root page object if there is no page ID
-		if (is_null($pageId))
+		if ($pageId === null)
 		{
+			$objRootPage = $this->getRootPageFromUrl();
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
-			$pageId = $objHandler->generate($this->getRootIdFromUrl(), true);
+			$pageId = $objHandler->generate($objRootPage->id, true);
 		}
-
+		// Throw a 404 error if the request is not a Contao request (see #2864)
+		elseif ($pageId === false)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
 		// Throw a 404 error if URL rewriting is active and the URL contains the index.php fragment
-		if ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
+		elseif ($GLOBALS['TL_CONFIG']['rewriteURL'] && strncmp($this->Environment->request, 'index.php/', 10) === 0)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
 
-		$time = time();
+		// Get the current page object(s)
+		$objPage = \PageCollection::findPublishedByIdOrAlias($pageId);
 
-		// Get the current page object
-		$objPage = $this->Database->prepare("SELECT * FROM tl_page WHERE (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-								  ->execute((is_numeric($pageId) ? $pageId : 0), $pageId);
-
-		// Check the URL of each page if there are multiple results
-		if ($objPage->numRows > 1)
+		// Check the URL and language of each page if there are multiple results
+		if ($objPage !== null && $objPage->count() > 1)
 		{
 			$objNewPage = null;
+			$arrPages = array();
 
+			// Order by domain and language
 			while ($objPage->next())
 			{
+				// Pass the ID so a new page object is created!
 				$objCurrentPage = $this->getPageDetails($objPage->id);
 
-				// Look for a root page whose domain name matches the host name
-				if ($objCurrentPage->domain == $this->Environment->host)
-				{
-					$objNewPage = $objCurrentPage;
-					break;
-				}
+				$domain = $objCurrentPage->domain ?: '*';
+				$arrPages[$domain][$objCurrentPage->rootLanguage] = $objCurrentPage;
 
-				// Fall back to a root page without domain name
-				if ($objCurrentPage->domain == '')
+				// Also store the fallback language
+				if ($objCurrentPage->rootIsFallback)
 				{
-					$objNewPage = $objCurrentPage;
+					$arrPages[$domain]['*'] = $objCurrentPage;
 				}
 			}
 
-			// Matching root page found
+			// Look for a root page whose domain name matches the host name
+			if (isset($arrPages[$this->Environment->host]))
+			{
+				$arrLangs = $arrPages[$this->Environment->host];
+			}
+			else
+			{
+				$arrLangs = $arrPages['*']; // Empty domain
+			}
+
+			// Try to find a page matching the language parameter
+			if (!$GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+			{
+				$objNewPage = $arrLangs['*']; // Fallback language
+			}
+			elseif (($lang = $this->Input->get('language')) != '' && isset($arrLangs[$lang]))
+			{
+				$objNewPage = $arrLangs[$lang];
+			}
+
+			// Store the page object
 			if (is_object($objNewPage))
 			{
 				$objPage = $objNewPage;
 			}
 		}
 
-		// Load an error 404 page object if the result is empty or still ambiguous
-		if ($objPage->numRows != 1)
+		// Throw a 404 error if the page could not be found or the result is still ambiguous
+		if ($objPage === null || $objPage->count() != 1)
 		{
 			$this->User->authenticate();
 			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 			$objHandler->generate($pageId);
 		}
 
-		// Load a website root page object if the page is a website root page
+		// Load a website root page object (will redirect to the first active regular page)
 		if ($objPage->type == 'root')
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['root']();
 			$objHandler->generate($objPage->id);
 		}
 
-		// Inherit settings from parent pages if it has not been done yet
+		// Inherit the settings from the parent pages if it has not been done yet
 		if (!is_bool($objPage->protected))
 		{
-			$objPage = $this->getPageDetails($objPage->id);
+			$objPage = $this->getPageDetails($objPage);
+		}
+
+		// Use the global date format if none is set
+		if ($objPage->dateFormat == '')
+		{
+			$objPage->dateFormat = $GLOBALS['TL_CONFIG']['dateFormat'];
+		}
+		if ($objPage->timeFormat == '')
+		{
+			$objPage->timeFormat = $GLOBALS['TL_CONFIG']['timeFormat'];
+		}
+		if ($objPage->datimFormat == '')
+		{
+			$objPage->datimFormat = $GLOBALS['TL_CONFIG']['datimFormat'];
+		}
+
+		// Set the admin e-mail address
+		if ($objPage->adminEmail != '')
+		{
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($objPage->adminEmail);
+		}
+		else
+		{
+			list($GLOBALS['TL_ADMIN_NAME'], $GLOBALS['TL_ADMIN_EMAIL']) = $this->splitFriendlyName($GLOBALS['TL_CONFIG']['adminEmail']);
 		}
 
 		// Exit if the root page has not been published (see #2425) and
@@ -155,31 +207,45 @@ class Index extends Frontend
 			die('Page not found');
 		}
 
+		// Check wether the language matches the root page language
+		if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && $this->Input->get('language') != $objPage->rootLanguage)
+		{
+			$this->User->authenticate();
+			$objHandler = new $GLOBALS['TL_PTY']['error_404']();
+			$objHandler->generate($pageId);
+		}
+
 		// Check whether there are domain name restrictions
 		if ($objPage->domain != '')
 		{
 			// Load an error 404 page object
 			if ($objPage->domain != $this->Environment->host)
 			{
+				$this->User->authenticate();
 				$objHandler = new $GLOBALS['TL_PTY']['error_404']();
 				$objHandler->generate($objPage->id, $objPage->domain, $this->Environment->host);
 			}
 		}
 
-		// Authenticate the current user
+		// Authenticate the user
 		if (!$this->User->authenticate() && $objPage->protected && !BE_USER_LOGGED_IN)
 		{
 			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId, $objPage->rootId);
+			$objHandler->generate($pageId, $objRootPage);
 		}
 
-		// Check user groups if the page is protected
-		if ($objPage->protected && !BE_USER_LOGGED_IN && (!is_array($objPage->groups) || count($objPage->groups) < 1 || count(array_intersect($objPage->groups, $this->User->groups)) < 1))
+		// Check the user groups if the page is protected
+		if ($objPage->protected && !BE_USER_LOGGED_IN)
 		{
-			$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
+			$arrGroups = $objPage->groups; // required for empty()
 
-			$objHandler = new $GLOBALS['TL_PTY']['error_403']();
-			$objHandler->generate($pageId, $objPage->rootId);
+			if (!is_array($arrGroups) || empty($arrGroups) || !count(array_intersect($arrGroups, $this->User->groups)))
+			{
+				$this->log('Page "' . $pageId . '" can only be accessed by groups "' . implode(', ', (array) $objPage->groups) . '" (current user groups: ' . implode(', ', $this->User->groups) . ')', 'Index run()', TL_ERROR);
+
+				$objHandler = new $GLOBALS['TL_PTY']['error_403']();
+				$objHandler->generate($pageId, $objRootPage);
+			}
 		}
 
 		// Load the page object depending on its type
@@ -193,7 +259,7 @@ class Index extends Frontend
 				break;
 
 			case 'error_403':
-				$objHandler->generate($pageId, $objPage->rootId);
+				$objHandler->generate($pageId, $objRootPage);
 				break;
 
 			default:
@@ -204,12 +270,13 @@ class Index extends Frontend
 
 
 	/**
-	 * Load the page from the cache table
+	 * Try to load the page from the cache
+	 * @return void
 	 */
 	protected function outputFromCache()
 	{
-		// Build page if a user is logged in or there is POST data
-		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']))
+		// Build the page if a user is logged in or there is POST data
+		if (!empty($_POST) || $_SESSION['TL_USER_LOGGED_IN'] || $_SESSION['DISABLE_CACHE'] || isset($_SESSION['LOGIN_ERROR']) || $GLOBALS['TL_CONFIG']['bypassCache'])
 		{
 			return;
 		}
@@ -224,6 +291,12 @@ class Index extends Frontend
 		 */
 		if ($this->Environment->request == '' || $this->Environment->request == 'index.php')
 		{
+			// Return if the language is added to the URL and the empty domain will be redirected
+			if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'] && !$GLOBALS['TL_CONFIG']['doNotRedirectEmpty'])
+			{
+				return;
+			}
+ 
 			$strCacheKey = $this->Environment->base .'empty.'. $this->Environment->httpAcceptLanguage[0];
 		}
 		else
@@ -231,7 +304,18 @@ class Index extends Frontend
 			$strCacheKey = $this->Environment->base . $this->Environment->request;
 		}
 
-		$strCacheFile = TL_ROOT . '/system/tmp/' . md5($strCacheKey) . '.html';
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['getCacheKey']) && is_array($GLOBALS['TL_HOOKS']['getCacheKey']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['getCacheKey'] as $callback)
+			{
+				$this->import($callback[0]);
+				$strCacheKey = $this->$callback[0]->$callback[1]($strCacheKey);
+			}
+		}
+
+		$strCacheKey = md5($strCacheKey);
+		$strCacheFile = TL_ROOT . '/system/cache/html/' . substr($strCacheKey, 0, 1) . '/' . $strCacheKey . '.html';
 
 		// Return if the file does not exist
 		if (!file_exists($strCacheFile))
@@ -242,11 +326,11 @@ class Index extends Frontend
 		$expire = null;
 		$content = null;
 
-		// Include file
+		// Include the file
 		ob_start();
-		require_once($strCacheFile);
+		require_once $strCacheFile;
 
-		// File has expired
+		// The file has expired
 		if ($expire < time())
 		{
 			ob_end_clean();
@@ -261,7 +345,7 @@ class Index extends Frontend
 		$this->import('Session');
 		$session = $this->Session->getData();
 
-		// Set new referer
+		// Set the new referer
 		if (!isset($_GET['pdf']) && !isset($_GET['file']) && !isset($_GET['id']) && $session['referer']['current'] != $this->Environment->requestUri)
 		{
 			$session['referer']['last'] = $session['referer']['current'];
@@ -275,7 +359,7 @@ class Index extends Frontend
 		$this->import('Config');
 		$this->loadLanguageFile('default');
 
-		// Replace insert tags and then re-replace the request_token
+		// Replace the insert tags and then re-replace the request_token
 		// tag in case a form element has been loaded via insert tag
 		$strBuffer = $this->replaceInsertTags($strBuffer);
 		$strBuffer = str_replace(array('{{request_token}}', '[{]', '[}]'), array(REQUEST_TOKEN, '{{', '}}'), $strBuffer);
@@ -289,8 +373,8 @@ class Index extends Frontend
 		header('Vary: User-Agent', false);
 		header('Content-Type: ' . $content . '; charset=' . $GLOBALS['TL_CONFIG']['characterSet']);
 
-		// Send cache headers
-		if (!is_null($expire) && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
+		// Send the cache headers
+		if ($expire !== null && ($GLOBALS['TL_CONFIG']['cacheMode'] == 'both' || $GLOBALS['TL_CONFIG']['cacheMode'] == 'browser'))
 		{
 			header('Cache-Control: public, max-age=' . ($expire - time()));
 			header('Expires: ' . gmdate('D, d M Y H:i:s', $expire) . ' GMT');
@@ -313,9 +397,7 @@ class Index extends Frontend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objIndex = new Index();
 $objIndex->run();
-
-?>

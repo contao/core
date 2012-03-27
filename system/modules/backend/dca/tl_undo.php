@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -40,7 +39,14 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 	(
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
-		'notEditable'                 => true
+		'notEditable'                 => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -55,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 		'label' => array
 		(
 			'fields'                  => array('tstamp', 'query'),
-			'format'                  => '<span style="color:#b3b3b3; padding-right:3px;">[%s]</span>%s',
+			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span>%s',
 			'maxCharacters'           => 120
 		),
 		'operations' => array
@@ -78,36 +84,45 @@ $GLOBALS['TL_DCA']['tl_undo'] = array
 	// Fields
 	'fields' => array
 	(
-		'tstamp' => array
+		'id' => array
 		(
-			'sorting'                 => true,
-			'flag'                    => 6
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
 		),
 		'pid' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['pid'],
 			'sorting'                 => true,
-			'foreignKey'              => 'tl_user.name'
+			'foreignKey'              => 'tl_user.name',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'lazy')
+		),
+		'tstamp' => array
+		(
+			'sorting'                 => true,
+			'flag'                    => 6,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'fromTable' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['fromTable'],
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'query' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['query']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['query'],
+			'sql'                     => "text NULL"
 		),
 		'affectedRows' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['affectedRows']
+			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['affectedRows'],
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'data' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_undo']['data'],
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "mediumblob NULL"
 		)
 	)
 );
-
-?>

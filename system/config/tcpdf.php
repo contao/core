@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Config
  * @license    LGPL
- * @filesource
  */
 
 
@@ -34,8 +33,8 @@
  * plugins/tcpdf for more information.
  */
 define('K_TCPDF_EXTERNAL_CONFIG', true);
-define('K_PATH_MAIN', TL_ROOT . '/plugins/tcpdf/');
-define('K_PATH_URL', $this->Environment->base . 'plugins/tcpdf/');
+define('K_PATH_MAIN', TL_ROOT . '/system/library/TCPDF/');
+define('K_PATH_URL', $this->Environment->base . 'system/library/TCPDF/');
 define('K_PATH_FONTS', K_PATH_MAIN . 'fonts/');
 define('K_PATH_CACHE', K_PATH_MAIN . 'cache/');
 define('K_PATH_URL_CACHE', K_PATH_URL . 'cache/');
@@ -69,5 +68,3 @@ define('K_TITLE_MAGNIFICATION', 1.3);
 define('K_SMALL_RATIO', 2/3);
 define('K_THAI_TOPCHARS', false);
 define('K_TCPDF_CALLS_IN_HTML', false);
-
-?>

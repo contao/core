@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -46,13 +45,23 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			array('tl_page', 'checkPermission'),
 			array('tl_page', 'addBreadcrumb'),
-			array('tl_page', 'setDefaultLanguage'),
+			array('tl_page', 'setRootType'),
 			array('tl_page', 'showFallbackWarning')
 		),
 		'onsubmit_callback' => array
 		(
 			array('tl_page', 'updateSitemap'),
 			array('tl_page', 'generateArticle')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'alias' => 'index',
+				'type' => 'index'
+			)
 		)
 	),
 
@@ -63,7 +72,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			'mode'                    => 5,
 			'icon'                    => 'pagemounts.gif',
-			'paste_button_callback'   => array('tl_page', 'pastePage')
+			'paste_button_callback'   => array('tl_page', 'pastePage'),
+			'panelLayout'             => 'filter,search'
 		),
 		'label' => array
 		(
@@ -84,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -101,7 +111,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_page', 'copyPage')
 			),
 			'copyChilds' => array
@@ -109,7 +119,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['copyChilds'],
 				'href'                => 'act=paste&amp;mode=copy&amp;childs=1',
 				'icon'                => 'copychilds.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_page', 'copyPageWithSubpages')
 			),
 			'cut' => array
@@ -117,7 +127,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_page', 'cutPage')
 			),
 			'delete' => array
@@ -125,14 +135,14 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_page', 'deletePage')
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_page']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_page', 'toggleIcon')
 			),
 			'show' => array
@@ -154,20 +164,21 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'__selector__'                => array('type', 'autoforward', 'protected', 'createSitemap', 'includeLayout', 'includeCache', 'includeChmod'),
+		'__selector__'                => array('type', 'autoforward', 'mobile', 'protected', 'createSitemap', 'includeLayout', 'includeCache', 'includeChmod'),
 		'default'                     => '{title_legend},title,alias,type;followup,start,stop',
-		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
+		'regular'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{search_legend},noSearch;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'forward'                     => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,jumpTo;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
 		'redirect'                    => '{title_legend},title,alias,type;{meta_legend},pageTitle;{redirect_legend},redirect,url,target;{protected_legend:hide},protected;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass,sitemap,hide,guests;{tabnav_legend:hide},tabindex,accesskey;{publish_legend},published,start,stop',
-		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle,adminEmail,dateFormat,timeFormat,datimFormat;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
-		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
-		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,language,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
+		'root'                        => '{title_legend},title,alias,type;{meta_legend},pageTitle;{dns_legend},dns,staticFiles,staticSystem,staticPlugins,language,fallback;{mobile_legend},mobile;{global_legend:hide},dateFormat,timeFormat,datimFormat,adminEmail;{sitemap_legend:hide},createSitemap;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{publish_legend},published,start,stop',
+		'error_403'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop',
+		'error_404'                   => '{title_legend},title,alias,type;{meta_legend},pageTitle,robots,description;{forward_legend:hide},autoforward;{layout_legend:hide},includeLayout;{cache_legend:hide},includeCache;{chmod_legend:hide},includeChmod;{expert_legend:hide},cssClass;{publish_legend},published,start,stop'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
 		'autoforward'                 => 'redirect,jumpTo',
+		'mobile'                      => 'jumpTo',
 		'protected'                   => 'groups',
 		'createSitemap'               => 'sitemapName,useSSL',
 		'includeLayout'               => 'layout',
@@ -178,23 +189,43 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'sorting' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'title' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['title'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true)
+			'search'                  => true,
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'decodeEntities'=>true),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'alias' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['alias'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
+			'search'                  => true,
+			'eval'                    => array('rgxp'=>'folderalias', 'doNotCopy'=>true, 'spaceToUnderscore'=>true, 'maxlength'=>128, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_page', 'generateAlias')
-			)
+			),
+			'sql'                     => "varbinary(128) NOT NULL default ''"
 		),
 		'type' => array
 		(
@@ -204,41 +235,53 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_page', 'getPageTypes'),
 			'eval'                    => array('helpwizard'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['PTY']
+			'reference'               => &$GLOBALS['TL_LANG']['PTY'],
+			'save_callback' => array
+			(
+				array('tl_page', 'checkRootType')
+			),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'pageTitle' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['pageTitle'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'long')
+			'search'                  => true,
+			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'language' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['language'],
-			'default'                 => $GLOBALS['TL_LANGUAGE'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50'),
+			'search'                  => true,
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'alpha', 'maxlength'=>2, 'nospace'=>true, 'tl_class'=>'w50 clr'),
 			'save_callback' => array
 			(
 				array('tl_page', 'languageToLower')
-			)
+			),
+			'sql'                     => "varchar(2) NOT NULL default ''"
 		),
 		'robots' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['robots'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
+			'search'                  => true,
 			'options'                 => array('index,follow', 'index,nofollow', 'noindex,follow', 'noindex,nofollow'),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'description' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['description'],
 			'exclude'                 => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr')
+			'search'                  => true,
+			'eval'                    => array('style'=>'height:60px;', 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		),
 		'redirect' => array
 		(
@@ -247,43 +290,59 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('permanent', 'temporary'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_page']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_page'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'jumpTo' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['jumpTo'],
 			'exclude'                 => true,
 			'inputType'               => 'pageTree',
+			'foreignKey'              => 'tl_page.title',
 			'eval'                    => array('fieldType'=>'radio'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkJumpTo')
-			)
+			),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'url' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['url'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'target' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['target'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'dns' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['dns'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
+			'search'                  => true,
 			'eval'                    => array('rgxp'=>'url', 'decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'save_callback' => array
 			(
 				array('tl_page', 'checkDns')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'mobile' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['mobile'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'staticFiles' => array
 		(
@@ -293,7 +352,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkStaticUrl')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'staticSystem' => array
 		(
@@ -303,7 +363,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkStaticUrl')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'staticPlugins' => array
 		(
@@ -313,7 +374,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkStaticUrl')
-			)
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fallback' => array
 		(
@@ -324,14 +386,16 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkFallback')
-			)
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'adminEmail' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['adminEmail'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>255, 'rgxp'=>'friendly', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>255, 'rgxp'=>'friendly', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'dateFormat' => array
 		(
@@ -339,7 +403,8 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'text',
 			'eval'                    => array('helpwizard'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'explanation'             => 'dateFormat'
+			'explanation'             => 'dateFormat',
+			'sql'                     => "varchar(32) NOT NULL default ''"
 
 		),
 		'timeFormat' => array
@@ -347,21 +412,24 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['timeFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'datimFormat' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['datimFormat'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'createSitemap' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['createSitemap'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'sitemapName' => array
 		(
@@ -372,28 +440,32 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'save_callback' => array
 			(
 				array('tl_page', 'checkFeedAlias')
-			)
+			),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'useSSL' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['useSSL'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50 m12')
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'autoforward' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['autoforward'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'protected' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['protected'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'groups' => array
 		(
@@ -401,28 +473,36 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
-			'eval'                    => array('mandatory'=>true, 'multiple'=>true)
+			'eval'                    => array('mandatory'=>true, 'multiple'=>true),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'includeLayout' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['includeLayout'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'layout' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['layout'],
 			'exclude'                 => true,
 			'inputType'               => 'select',
-			'options_callback'        => array('tl_page', 'getPageLayouts')
+			'foreignKey'              => 'tl_layout.name',
+			'options_callback'        => array('tl_page', 'getPageLayouts'),
+			'eval'                    => array('chosen'=>true),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'includeCache' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['includeCache'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'cache' => array
 		(
@@ -431,14 +511,16 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array(0, 5, 15, 30, 60, 300, 900, 1800, 3600, 10800, 21600, 43200, 86400, 259200, 604800, 2592000),
-			'reference'               => &$GLOBALS['TL_LANG']['CACHE']
+			'reference'               => &$GLOBALS['TL_LANG']['CACHE'],
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'includeChmod' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['includeChmod'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'cuser' => array
 		(
@@ -447,7 +529,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
-			'eval'                    => array('mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'cgroup' => array
 		(
@@ -456,7 +540,9 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('mandatory'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
 		),
 		'chmod' => array
 		(
@@ -464,20 +550,24 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'default'                 => $GLOBALS['TL_CONFIG']['defaultChmod'],
 			'exclude'                 => true,
 			'inputType'               => 'chmod',
-			'eval'                    => array('tl_class'=>'clr')
+			'eval'                    => array('tl_class'=>'clr'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'noSearch' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['noSearch'],
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'cssClass' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['cssClass'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50')
+			'search'                  => true,
+			'eval'                    => array('maxlength'=>64, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'sitemap' => array
 		(
@@ -486,56 +576,64 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 			'inputType'               => 'select',
 			'options'                 => array('map_default', 'map_always', 'map_never'),
 			'eval'                    => array('maxlength'=>32, 'tl_class'=>'w50'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_page']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_page'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'hide' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['hide'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'guests' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['guests'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'tabindex' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['tabindex'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "smallint(5) unsigned NOT NULL default '0'"
 		),
 		'accesskey' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['accesskey'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1, 'tl_class'=>'w50')
+			'eval'                    => array('rgxp'=>'alnum', 'maxlength'=>1, 'tl_class'=>'w50'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'published' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['published'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'start' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['start'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		),
 		'stop' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_page']['stop'],
 			'exclude'                 => true,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard')
+			'eval'                    => array('rgxp'=>'datim', 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'sql'                     => "varchar(10) NOT NULL default ''"
 		)
 	)
 );
@@ -545,7 +643,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
  * Class tl_page
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -564,6 +662,7 @@ class tl_page extends Backend
 
 	/**
 	 * Check permissions to edit table tl_page
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -575,8 +674,8 @@ class tl_page extends Backend
 		$session = $this->Session->getData();
 
 		// Set the default page user and group
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = ($GLOBALS['TL_CONFIG']['defaultUser'] != '') ? $GLOBALS['TL_CONFIG']['defaultUser'] : $this->User->id;
-		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = ($GLOBALS['TL_CONFIG']['defaultGroup'] != '') ? $GLOBALS['TL_CONFIG']['defaultGroup'] : $this->User->groups[0];
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cuser']['default'] = $GLOBALS['TL_CONFIG']['defaultUser'] ?: $this->User->id;
+		$GLOBALS['TL_DCA']['tl_page']['fields']['cgroup']['default'] = $GLOBALS['TL_CONFIG']['defaultGroup'] ?: $this->User->groups[0];
 
 		// Restrict the page tree
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = $this->User->pagemounts;
@@ -659,7 +758,8 @@ class tl_page extends Backend
 		// Check current action
 		if ($this->Input->get('act') && $this->Input->get('act') != 'paste')
 		{
-			$cid = (CURRENT_ID != '') ? CURRENT_ID : $this->Input->get('id');
+			$permission = 0;
+			$cid = CURRENT_ID ?: $this->Input->get('id');
 			$ids = ($cid != '') ? array($cid) : array();
 
 			// Set permission
@@ -687,7 +787,6 @@ class tl_page extends Backend
 					{
 						$ids[] = $this->Input->get('pid');
 					}
-
 					// Check the parent's parent page in "paste after" mode
 					else
 					{
@@ -726,7 +825,7 @@ class tl_page extends Backend
 				// Do not allow to paste after pages on the root level (pagemounts)
 				if (($this->Input->get('act') == 'cut' || $this->Input->get('act') == 'cutAll') && $this->Input->get('mode') == 1 && in_array($this->Input->get('pid'), $this->eliminateNestedPages($this->User->pagemounts)))
 				{
-					$this->log('Not enough permissions to paste page ID '. $id .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
+					$this->log('Not enough permissions to paste page ID '. $this->Input->get('id') .' after mounted page ID '. $this->Input->get('pid') .' (root level)', 'tl_page checkPermission', TL_ERROR);
 					$this->redirect('contao/main.php?act=error');
 				}
 
@@ -781,6 +880,7 @@ class tl_page extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 * @return void
 	 */
 	public function addBreadcrumb()
 	{
@@ -873,29 +973,59 @@ class tl_page extends Backend
 
 
 	/**
-	 * Apply the root page language to new pages
+	 * Make new top-level pages root pages
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function setDefaultLanguage()
+	public function setRootType(\DataContainer $dc)
 	{
 		if ($this->Input->get('act') != 'create')
 		{
 			return;
-		}
+		}	
 
+		// Insert into
 		if ($this->Input->get('pid') == 0)
 		{
-			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $GLOBALS['TL_LANGUAGE'];
+			$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
 		}
+
+		// Insert after
 		else
 		{
-			$objPage = $this->getPageDetails($this->Input->get('pid'));
-			$GLOBALS['TL_DCA']['tl_page']['fields']['language']['default'] = $objPage->rootLanguage;
+			$objPage = $this->Database->prepare("SELECT * FROM " . $dc->table . " WHERE id=?")
+									  ->limit(1)
+									  ->execute($this->Input->get('pid'));
+
+			if ($objPage->pid == 0)
+			{
+				$GLOBALS['TL_DCA']['tl_page']['fields']['type']['default'] = 'root';
+			}
 		}
 	}
 
 
 	/**
+	 * Make sure that top-level pages are root pages
+	 * @param mixed
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public function checkRootType($varValue, \DataContainer $dc)
+	{
+		if ($varValue != 'root' && $dc->activeRecord->pid == 0)
+		{
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['topLevelRoot']);
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Show a warning if there is no language fallback page
+	 * @return void
 	 */
 	public function showFallbackWarning()
 	{
@@ -904,48 +1034,20 @@ class tl_page extends Backend
 			return;
 		}
 
-		$arrRoots = array();
-		$time = time();
-		$objRoots = $this->Database->execute("SELECT fallback, dns FROM tl_page WHERE type='root' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY dns");
-
-		while ($objRoots->next())
-		{
-			$strDns = ($objRoots->dns != '') ? $objRoots->dns : 'empty';
-
-			if (isset($arrRoots[$strDns]) && $arrRoots[$strDns] == 1)
-			{
-				continue;
-			}
-
-			$arrRoots[$strDns] = $objRoots->fallback;
-		}
-
-		foreach ($arrRoots as $k=>$v)
-		{
-			if ($v != '')
-			{
-				continue;
-			}
-
-			if ($k == 'empty')
-			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty'];
-			}
-			else
-			{
-				$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['noFallbackDns'], $k);
-			}
-		}
+		$this->import('Messages');
+		$this->addRawMessage($this->Messages->languageFallback());
+		$this->addRawMessage($this->Messages->topLevelRoot());
 	}
 
 
 	/**
 	 * Auto-generate a page alias if it has not been set yet
 	 * @param mixed
-	 * @param object
+	 * @param \DataContainer
 	 * @return string
+	 * @throws \Exception
 	 */
-	public function generateAlias($varValue, DataContainer $dc)
+	public function generateAlias($varValue, \DataContainer $dc)
 	{
 		$autoAlias = false;
 
@@ -953,51 +1055,59 @@ class tl_page extends Backend
 		if ($varValue == '')
 		{
 			$autoAlias = true;
-			$varValue = standardize($dc->activeRecord->title);
+			$varValue = standardize($this->restoreBasicEntities($dc->activeRecord->title));
 		}
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_page WHERE id=? OR alias=?")
+		$objAlias = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? OR alias=?")
 								   ->execute($dc->id, $varValue);
 
 		// Check whether the page alias exists
-		if ($objAlias->numRows > 1)
+		if ($objAlias->numRows > ($autoAlias ? 0 : 1))
 		{
-			$arrDomains = array();
+			$arrPages = array();
+			$strDomain = '';
+			$strLanguage = '';
 
 			while ($objAlias->next())
 			{
-				$_pid = $objAlias->id;
-				$_type = '';
+				$objCurrentPage = $this->getPageDetails($objAlias);
+				$domain = $objCurrentPage->domain ?: '*';
+				$language = (!$objCurrentPage->rootIsFallback) ? $objCurrentPage->rootLanguage : '*';
 
-				do
+				// Store the current page's data
+				if ($objCurrentPage->id == $dc->id)
 				{
-					$objParentPage = $this->Database->prepare("SELECT id, pid, alias, type, dns FROM tl_page WHERE id=?")
-													->limit(1)
-													->execute($_pid);
-
-					if ($objParentPage->numRows < 1)
-					{
-						break;
-					}
-
-					$_pid = $objParentPage->pid;
-					$_type = $objParentPage->type;
+					$strDomain = $domain;
+					$strLanguage = $language;
 				}
-				while ($_pid > 0 && $_type != 'root');
-
-				$arrDomains[] = ($objParentPage->numRows && ($objParentPage->type == 'root' || $objParentPage->pid > 0)) ? $objParentPage->dns : '';
+				else
+				{
+					if ($GLOBALS['TL_CONFIG']['addLanguageToUrl'])
+					{
+						// Check domain and language
+						$arrPages[$domain][$language][] = $objAlias->id;
+					}
+					else
+					{
+						// Check the domain only
+						$arrPages[$domain][] = $objAlias->id;
+					}
+				}
 			}
 
-			$arrUnique = array_unique($arrDomains);
+			$arrCheck = $GLOBALS['TL_CONFIG']['addLanguageToUrl'] ? $arrPages[$strDomain][$strLanguage] : $arrPages[$strDomain];
 
-			if (count($arrDomains) != count($arrUnique))
+			// Check if there are multiple results for the current domain
+			if (!empty($arrCheck))
 			{
-				if (!$autoAlias)
+				if ($autoAlias)
 				{
-					throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+					$varValue .= '-' . $dc->id;
 				}
-
-				$varValue .= '-' . $dc->id;
+				else
+				{
+					throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+				}
 			}
 		}
 
@@ -1007,7 +1117,7 @@ class tl_page extends Backend
 
 	/**
 	 * Convert language tags to lowercase letters
-	 * @param mixed
+	 * @param string
 	 * @return string
 	 */
 	public function languageToLower($varValue)
@@ -1018,9 +1128,10 @@ class tl_page extends Backend
 
 	/**
 	 * Automatically create an article in the main column of a new page
-	 * @param object
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function generateArticle(DataContainer $dc)
+	public function generateArticle(\DataContainer $dc)
 	{
 		// Return if there is no active record (override all)
 		if (!$dc->activeRecord)
@@ -1043,10 +1154,10 @@ class tl_page extends Backend
 		}
 
 		// Check whether there are articles (e.g. on copied pages)
-		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_article WHERE pid=?")
+		$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_article WHERE pid=?")
 								   ->execute($dc->id);
 
-		if ($objTotal->total > 0)
+		if ($objTotal->count > 0)
 		{
 			return;
 		}
@@ -1067,11 +1178,12 @@ class tl_page extends Backend
 
 	/**
 	 * Check the sitemap alias
-	 * @param object
 	 * @param mixed
-	 * @throws Exception
+	 * @param \DataContainer
+	 * @return void
+	 * @throws \Exception
 	 */
-	public function checkFeedAlias($varValue, DataContainer $dc)
+	public function checkFeedAlias($varValue, \DataContainer $dc)
 	{
 		// No change or empty value
 		if ($varValue == $dc->value || $varValue == '')
@@ -1084,7 +1196,7 @@ class tl_page extends Backend
 		// Alias exists
 		if (array_search($varValue, $arrFeeds) !== false)
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
 		}
 
 		return $varValue;
@@ -1094,13 +1206,15 @@ class tl_page extends Backend
 	/**
 	 * Prevent circular references
 	 * @param mixed
-	 * @param object
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
 	 */
-	public function checkJumpTo($varValue, DataContainer $dc)
+	public function checkJumpTo($varValue, \DataContainer $dc)
 	{
 		if ($varValue == $dc->id)
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['circularReference']);
 		}
 
 		return $varValue;
@@ -1110,9 +1224,9 @@ class tl_page extends Backend
 	/**
 	 * Check the DNS settings
 	 * @param mixed
-	 * @param object
+	 * @return mixed
 	 */
-	public function checkDns($varValue, DataContainer $dc)
+	public function checkDns($varValue)
 	{
 		return str_ireplace(array('http://', 'https://', 'ftp://'), '', $varValue);
 	}
@@ -1121,10 +1235,11 @@ class tl_page extends Backend
 	/**
 	 * Make sure there is only one fallback per domain (thanks to Andreas Schempp)
 	 * @param mixed
-	 * @param object
-	 * @throws Exception
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
 	 */
-	public function checkFallback($varValue, DataContainer $dc)
+	public function checkFallback($varValue, \DataContainer $dc)
 	{
 		if ($varValue == '')
 		{
@@ -1136,7 +1251,7 @@ class tl_page extends Backend
 
 		if ($objPage->numRows)
 		{
-			throw new Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['multipleFallback']);
 		}
 
 		return $varValue;
@@ -1161,10 +1276,10 @@ class tl_page extends Backend
 
 	/**
 	 * Returns all allowed page types as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return string
 	 */
-	public function getPageTypes(DataContainer $dc)
+	public function getPageTypes(\DataContainer $dc)
 	{
 		$arrOptions = array();
 
@@ -1208,39 +1323,14 @@ class tl_page extends Backend
 	 * Add an image to each page in the tree
 	 * @param array
 	 * @param string
-	 * @param object
+	 * @param \DataContainer
 	 * @param string
 	 * @param boolean
 	 * @return string
 	 */
-	public function addIcon($row, $label, DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
+	public function addIcon($row, $label, \DataContainer $dc=null, $imageAttribute='', $blnReturnImage=false)
 	{
-		$sub = 0;
-		$image = ''.$row['type'].'.gif';
-
-		// Page not published or not active
-		if ((!$row['published'] || $row['start'] && $row['start'] > time() || $row['stop'] && $row['stop'] < time()))
-		{
-			$sub += 1;
-		}
-
-		// Page hidden from menu
-		if ($row['hide'] && !in_array($row['type'], array('redirect', 'forward', 'root', 'error_403', 'error_404')))
-		{
-			$sub += 2;
-		}
-
-		// Page protected
-		if ($row['protected'] && !in_array($row['type'], array('root', 'error_403', 'error_404')))
-		{
-			$sub += 4;
-		}
-
-		// Get image name
-		if ($sub > 0)
-		{
-			$image = ''.$row['type'].'_'.$sub.'.gif';
-		}
+		$image = $this->getPageStatusIcon((object)$row);
 
 		// Return the image only
 		if ($blnReturnImage)
@@ -1254,11 +1344,11 @@ class tl_page extends Backend
 			$label = '<strong>' . $label . '</strong>';
 		}
 
-		// Add breadcrumb link
+		// Add the breadcrumb link
 		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '">' . $label . '</a>';
 
-		// Return image
-		return '<a href="'.$this->generateFrontendUrl($row).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
+		// Return the image
+		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;
 	}
 
 
@@ -1344,14 +1434,14 @@ class tl_page extends Backend
 
 	/**
 	 * Return the paste page button
-	 * @param object
+	 * @param \DataContainer
 	 * @param array
 	 * @param string
 	 * @param boolean
 	 * @param array
 	 * @return string
 	 */
-	public function pastePage(DataContainer $dc, $row, $table, $cr, $arrClipboard=false)
+	public function pastePage(\DataContainer $dc, $row, $table, $cr, $arrClipboard=null)
 	{
 		$disablePA = false;
 		$disablePI = false;
@@ -1363,23 +1453,44 @@ class tl_page extends Backend
 			$disablePI = true;
 		}
 
+		// Prevent adding non-root pages on top-level
+		if ($this->Input->get('mode') != 'create' && $row['pid'] == 0)
+		{
+			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
+									  ->limit(1)
+									  ->execute($this->Input->get('id'));
+
+			if ($objPage->type != 'root')
+			{
+				$disablePA = true;
+
+				if ($row['id'] == 0)
+				{
+					$disablePI = true;
+				}
+			}
+		}
+
 		// Check permissions if the user is not an administrator
 		if (!$this->User->isAdmin)
 		{
-			// Disable "paste into" button if there is no permission 2 for the current page
-			if (!$disablePI && !$this->User->isAllowed(2, $row))
+			// Disable "paste into" button if there is no permission 2 (move) or 1 (create) for the current page
+			if (!$disablePI)
 			{
-				$disablePI = true;
+				if (!$this->User->isAllowed(2, $row) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $row)))
+				{
+					$disablePI = true;
+				}
 			}
 
 			$objPage = $this->Database->prepare("SELECT * FROM " . $table . " WHERE id=?")
 									  ->limit(1)
 									  ->execute($row['pid']);
 
-			// Disable "paste after" button if there is no permission 2 for the parent page
+			// Disable "paste after" button if there is no permission 2 (move) or 1 (create) for the parent page
 			if (!$disablePA && $objPage->numRows)
 			{
-				if (!$this->User->isAllowed(2, $objPage->row()))
+				if (!$this->User->isAllowed(2, $objPage->row()) || ($this->Input->get('mode') == 'create' && !$this->User->isAllowed(1, $objPage->row())))
 				{
 					$disablePA = true;
 				}
@@ -1392,16 +1503,18 @@ class tl_page extends Backend
 			}
 		}
 
+		$return = '';
+
 		// Return the buttons
 		$imagePasteAfter = $this->generateImage('pasteafter.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id']), 'class="blink"');
 		$imagePasteInto = $this->generateImage('pasteinto.gif', sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id']), 'class="blink"');
 
 		if ($row['id'] > 0)
 		{
-			$return = $disablePA ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteAfter.'</a> ';
+			$return = $disablePA ? $this->generateImage('pasteafter_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=1&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteafter'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteAfter.'</a> ';
 		}
 
-		return $return.($disablePI ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset();">'.$imagePasteInto.'</a> ');
+		return $return.($disablePI ? $this->generateImage('pasteinto_.gif', '', 'class="blink"').' ' : '<a href="'.$this->addToUrl('act='.$arrClipboard['mode'].'&amp;mode=2&amp;pid='.$row['id'].(!is_array($arrClipboard['id']) ? '&amp;id='.$arrClipboard['id'] : '')).'" title="'.specialchars(sprintf($GLOBALS['TL_LANG'][$table]['pasteinto'][1], $row['id'])).'" onclick="Backend.getScrollOffset()">'.$imagePasteInto.'</a> ');
 	}
 
 
@@ -1444,9 +1557,10 @@ class tl_page extends Backend
 
 	/**
 	 * Recursively add pages to a sitemap
-	 * @param object
+	 * @param \DataContainer
+	 * @return void
 	 */
-	public function updateSitemap(DataContainer $dc)
+	public function updateSitemap(\DataContainer $dc)
 	{
 		$this->import('Automator');
 		$this->Automator->generateSitemap($dc->id);
@@ -1501,6 +1615,7 @@ class tl_page extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
@@ -1535,5 +1650,3 @@ class tl_page extends Backend
 		$this->createNewVersion('tl_page', $intId);
 	}
 }
-
-?>

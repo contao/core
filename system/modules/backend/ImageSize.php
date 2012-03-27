@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ImageSize
  *
  * Provide methods to handle image size fields.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ImageSize extends Widget
+class ImageSize extends \Widget
 {
 
 	/**
@@ -63,22 +68,17 @@ class ImageSize extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
 			case 'maxlength':
-				$this->arrAttributes[$strKey] = ($varValue > 0) ? $varValue : '';
-				break;
-
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
-			case 'readonly':
-				$this->arrAttributes['readonly'] = 'readonly';
-				$this->blnSubmitInput = false;
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] = $varValue;
+				}
 				break;
 
 			case 'options':
@@ -101,7 +101,7 @@ class ImageSize extends Widget
 	{
 		$varInput[0] = parent::validator($varInput[0]);
 		$varInput[1] = parent::validator($varInput[1]);
-		$varInput[2] = preg_replace('/[^a-z0-9]+/', '', $varInput[2]);
+		$varInput[2] = preg_replace('/[^a-z0-9_]+/', '', $varInput[2]);
 
 		return $varInput;
 	}
@@ -118,11 +118,17 @@ class ImageSize extends Widget
 			$this->varValue = array($this->varValue);
 		}
 
+		// Backwards compatibility (see #3911)
+		if ($this->varValue[2] == 'crop')
+		{
+			$this->varValue[2] = 'center_center';
+		}
+
 		$arrFields = array();
 
 		for ($i=0; $i<2; $i++)
 		{
-			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4" value="%s"%s onfocus="Backend.getScrollOffset();">',
+			$arrFields[] = sprintf('<input type="text" name="%s[]" id="ctrl_%s" class="tl_text_4" value="%s"%s onfocus="Backend.getScrollOffset()">',
 									$this->strName,
 									$this->strId.'_'.$i,
 									specialchars($this->varValue[$i]),
@@ -131,25 +137,40 @@ class ImageSize extends Widget
 
 		$arrOptions = array();
 
-		foreach ($this->arrOptions as $arrOption)
+		foreach ($this->arrOptions as $strKey=>$arrOption)
 		{
-			$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
-								   specialchars($arrOption['value']),
-								   ((is_array($this->varValue) && in_array($arrOption['value'] , $this->varValue)) ? ' selected="selected"' : ''),
-								   $arrOption['label']);
+			if (isset($arrOption['value']))
+			{
+				$arrOptions[] = sprintf('<option value="%s"%s>%s</option>',
+									   specialchars($arrOption['value']),
+									   $this->isSelected($arrOption),
+									   $arrOption['label']);
+			}
+			else
+			{
+				$arrOptgroups = array();
+
+				foreach ($arrOption as $arrOptgroup)
+				{
+					$arrOptgroups[] = sprintf('<option value="%s"%s>%s</option>',
+											   specialchars($arrOptgroup['value']),
+											   $this->isSelected($arrOptgroup),
+											   $arrOptgroup['label']);
+				}
+
+				$arrOptions[] = sprintf('<optgroup label="&nbsp;%s">%s</optgroup>', specialchars($strKey), implode('', $arrOptgroups));
+			}
 		}
 
-		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset();">%s</select>',
+		$arrFields[] = sprintf('<select name="%s[]" id="ctrl_%s" class="tl_select_interval" onfocus="Backend.getScrollOffset()">%s</select>',
 								$this->strName,
 								$this->strId.'_3',
 								implode(' ', $arrOptions));
 
 		return sprintf('<div id="ctrl_%s"%s>%s</div>%s',
 						$this->strId,
-						(strlen($this->strClass) ? ' class="' . $this->strClass . '"' : ''),
+						(($this->strClass != '') ? ' class="' . $this->strClass . '"' : ''),
 						implode(' ', $arrFields),
 						$this->wizard);
 	}
 }
-
-?>

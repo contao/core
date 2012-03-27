@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -44,6 +43,13 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 		'onload_callback' => array
 		(
 			array('tl_layout', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
 		)
 	),
 
@@ -66,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -88,14 +94,14 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_layout']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()"'
 			),
 			'delete' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_layout']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -110,7 +116,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('header', 'footer', 'cols', 'static'),
-		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,doctype,mooSource,cssClass,onload,head;{script_legend},mootools,script;{static_legend},static'
+		'default'                     => '{title_legend},name,fallback;{header_legend},header,footer;{column_legend},cols;{sections_legend:hide},sections,sPosition;{style_legend},stylesheet,skipTinymce,external;{feed_legend:hide},newsfeeds,calendarfeeds;{modules_legend},modules;{expert_legend:hide},template,skipFramework,doctype,webfonts,cssClass,onload,head;{script_legend},mooSource,jSource,mootools,jquery,script;{static_legend},static'
 	),
 
 	// Subpalettes
@@ -127,6 +133,20 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'foreignKey'              => 'tl_theme.name',
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['name'],
@@ -135,44 +155,50 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'sorting'                 => true,
 			'flag'                    => 1,
 			'search'                  => true,
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'fallback' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['fallback'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('fallback'=>true)
+			'eval'                    => array('fallback'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'header' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['header'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'headerHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['headerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'footer' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['footer'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'footerHeight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['footerHeight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit')
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'cols' => array
 		(
@@ -182,23 +208,26 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'radioTable',
 			'options'                 => array('1cl', '2cll', '2clr', '3cl'),
 			'eval'                    => array('helpwizard'=>true, 'cols'=>4, 'submitOnChange'=>true),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_layout']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'widthLeft' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthLeft'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'widthRight' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['widthRight'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'sections' => array
 		(
@@ -207,7 +236,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'search'                  => true,
 			'inputType'               => 'checkbox',
 			'options'                 => trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'sPosition' => array
 		(
@@ -216,7 +246,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'options'                 => array('before', 'main', 'after'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_layout']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'stylesheet' => array
 		(
@@ -224,14 +255,35 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkboxWizard',
+			'foreignKey'              => 'tl_style_sheet.name',
 			'options_callback'        => array('tl_layout', 'getStyleSheets'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'xlabel' => array
+			(
+				array('tl_layout', 'styleSheetLink')
+			),
+			'sql'                     => "blob NULL",
+			'relation'                => array('type'=>'hasMany', 'load'=>'lazy')
 		),
 		'skipTinymce' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipTinymce'],
+			'default'                 => 1,
 			'exclude'                 => true,
-			'inputType'               => 'checkbox'
+			'inputType'               => 'checkbox',
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'external' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['external'],
+			'exclude'                 => true,
+			'inputType'               => 'listWizard',
+			'eval'                    => array('style'=>'width:360px'),
+			'save_callback' => array
+			(
+				array('tl_layout', 'filterExternalPaths')
+			),
+			'sql'                     => "blob NULL"
 		),
 		'newsfeeds' => array
 		(
@@ -239,7 +291,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_layout', 'getNewsfeeds'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'calendarfeeds' => array
 		(
@@ -247,13 +300,16 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_layout', 'getCalendarfeeds'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'sql'                     => "blob NULL"
 		),
 		'modules' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['modules'],
+			'default'                 => array(array('mod'=>0, 'col'=>'main')),
 			'exclude'                 => true,
-			'inputType'               => 'moduleWizard'
+			'inputType'               => 'moduleWizard',
+			'sql'                     => "blob NULL"
 		),
 		'template' => array
 		(
@@ -265,7 +321,16 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'flag'                    => 11,
 			'inputType'               => 'select',
 			'options_callback'        => array('tl_layout', 'getPageTemplates'),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'skipFramework' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['skipFramework'],
+			'exclude'                 => true,
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50 m12'),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'doctype' => array
 		(
@@ -277,17 +342,17 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'select',
 			'options'                 => array('html5', 'xhtml_strict', 'xhtml_trans'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
-		'mooSource' => array
+		'webfonts' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
-			'default'                 => 'moo_local',
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['webfonts'],
 			'exclude'                 => true,
-			'inputType'               => 'select',
-			'options'                 => array('moo_local', 'moo_googleapis'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
-			'eval'                    => array('tl_class'=>'w50')
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'cssClass' => array
 		(
@@ -295,7 +360,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'onload' => array
 		(
@@ -303,7 +369,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'long clr')
+			'eval'                    => array('decodeEntities'=>true, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'head' => array
 		(
@@ -311,7 +378,29 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:60px;', 'preserveTags'=>true, 'tl_class'=>'clr')
+			'eval'                    => array('style'=>'height:60px;', 'preserveTags'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
+		),
+		'mooSource' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['mooSource'],
+			'default'                 => 'moo_local',
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('moo_local', 'moo_googleapis', 'moo_fallback'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'jSource' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jSource'],
+			'exclude'                 => true,
+			'inputType'               => 'select',
+			'options'                 => array('j_local', 'j_googleapis', 'j_fallback'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_layout'],
+			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(16) NOT NULL default ''"
 		),
 		'mootools' => array
 		(
@@ -321,7 +410,19 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'search'                  => true,
 			'inputType'               => 'checkboxWizard',
 			'options_callback'        => array('tl_layout', 'getMooToolsTemplates'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'w50 autoheight'),
+			'sql'                     => "text NULL"
+		),
+		'jquery' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jquery'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'search'                  => true,
+			'inputType'               => 'checkboxWizard',
+			'options_callback'        => array('tl_layout', 'getJqueryTemplates'),
+			'eval'                    => array('multiple'=>true, 'tl_class'=>'w50 autoheight'),
+			'sql'                     => "text NULL"
 		),
 		'script' => array
 		(
@@ -329,22 +430,25 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('style'=>'height:120px;', 'preserveTags'=>true)
+			'eval'                    => array('style'=>'height:120px', 'preserveTags'=>true, 'tl_class'=>'clr'),
+			'sql'                     => "text NULL"
 		),
 		'static' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['static'],
 			'exclude'                 => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'width' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['width'],
 			'exclude'                 => true,
 			'inputType'               => 'inputUnit',
-			'options'                 => array('px', '%', 'em', 'pt', 'pc', 'in', 'cm', 'mm'),
-			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50')
+			'options'                 => array('px', '%', 'em', 'ex', 'pt', 'pc', 'in', 'cm', 'mm'),
+			'eval'                    => array('includeBlankOption'=>true, 'rgxp'=>'digit', 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'align' => array
 		(
@@ -354,7 +458,8 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
 			'inputType'               => 'select',
 			'options'                 => array('left', 'center', 'right'),
 			'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('tl_class'=>'w50'),
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		)
 	)
 );
@@ -364,7 +469,7 @@ $GLOBALS['TL_DCA']['tl_layout'] = array
  * Class tl_layout
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -383,6 +488,7 @@ class tl_layout extends Backend
 
 	/**
 	 * Check permissions to edit the table
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -401,10 +507,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all style sheets of the current theme
-	 * @param array
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getStyleSheets(DataContainer $dc)
+	public function getStyleSheets(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -438,9 +544,9 @@ class tl_layout extends Backend
 	 */
 	public function getNewsfeeds()
 	{
-		$objFeed = $this->Database->execute("SELECT id, title FROM tl_news_archive WHERE makeFeed=1");
+		$objFeed = \NewsFeedCollection::findAll();
 
-		if ($objFeed->numRows < 1)
+		if ($objFeed === null)
 		{
 			return array();
 		}
@@ -462,9 +568,9 @@ class tl_layout extends Backend
 	 */
 	public function getCalendarfeeds()
 	{
-		$objFeed = $this->Database->execute("SELECT id, title FROM tl_calendar WHERE makeFeed=1");
+		$objFeed = \CalendarFeedCollection::findAll();
 
-		if ($objFeed->numRows < 1)
+		if ($objFeed === null)
 		{
 			return array();
 		}
@@ -482,10 +588,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all page templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getPageTemplates(DataContainer $dc)
+	public function getPageTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -500,10 +606,10 @@ class tl_layout extends Backend
 
 	/**
 	 * Return all MooTools templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getMooToolsTemplates(DataContainer $dc)
+	public function getMooToolsTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -517,6 +623,24 @@ class tl_layout extends Backend
 
 
 	/**
+	 * Return all jQuery templates as array
+	 * @param \DataContainer
+	 * @return array
+	 */
+	public function getJqueryTemplates(\DataContainer $dc)
+	{
+		$intPid = $dc->activeRecord->pid;
+
+		if ($this->Input->get('act') == 'overrideAll')
+		{
+			$intPid = $this->Input->get('id');
+		}
+
+		return $this->getTemplateGroup('j_', $intPid);
+	}
+ 
+
+	/**
 	 * List a page layout
 	 * @param array
 	 * @return string
@@ -525,11 +649,43 @@ class tl_layout extends Backend
 	{
 		if (!$row['fallback'])
 		{
-			return '<div style="float:left;">'. $row['name'] ."</div>\n";
+			return '<div style="float:left">'. $row['name'] ."</div>\n";
 		}
 
-		return '<div style="float:left;">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px;">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+		return '<div style="float:left">'. $row['name'] .' <span style="color:#b3b3b3; padding-left:3px">['. $GLOBALS['TL_LANG']['MSC']['fallback'] .']</span>' . "</div>\n";
+	}
+
+
+	/**
+	 * Remove empty and duplicate elements from the external style sheets array
+	 * @param mixed
+	 * @return string
+	 */
+	public function filterExternalPaths($varValue)
+	{
+		if ($varValue == '')
+		{
+			return $varValue;
+		}
+
+		$varValue = deserialize($varValue);
+
+		if (!is_array($varValue))
+		{
+			return '';
+		}
+
+		return array_filter(array_unique($varValue));
+	}
+
+
+	/**
+	 * Add a link to edit the stylesheets of the theme
+	 * @param \DataContainer
+	 * @return string
+	 */
+	public function styleSheetLink(\DataContainer $dc)
+	{
+		return ' <a href="contao/main.php?do=themes&table=tl_style_sheet&id=' . $dc->activeRecord->pid . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_styles']) . '"><img width="12" height="16" alt="" src="system/themes/' . $this->getTheme() . '/images/edit.gif" style="vertical-align:text-bottom"></a>';
 	}
 }
-
-?>

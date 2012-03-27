@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
 
 
@@ -36,7 +35,7 @@ array_insert($GLOBALS['BE_MOD']['content'], 1, array
 (
 	'calendar' => array
 	(
-		'tables'     => array('tl_calendar', 'tl_calendar_events'),
+		'tables'     => array('tl_calendar', 'tl_calendar_events', 'tl_calendar_feed'),
 		'icon'       => 'system/modules/calendar/html/icon.gif'
 	)
 ));
@@ -66,6 +65,14 @@ $GLOBALS['TL_CRON']['daily'][] = array('Calendar', 'generateFeeds');
 /**
  * Register hook to add news items to the indexer
  */
+$GLOBALS['TL_HOOKS']['removeOldFeeds'][] = array('Calendar', 'purgeOldFeeds');
 $GLOBALS['TL_HOOKS']['getSearchablePages'][] = array('Calendar', 'getSearchablePages');
 
-?>
+
+/**
+ * Add permissions
+ */
+$GLOBALS['TL_PERMISSIONS'][] = 'calendars';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarp';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeeds';
+$GLOBALS['TL_PERMISSIONS'][] = 'calendarfeedp';

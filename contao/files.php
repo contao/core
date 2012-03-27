@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class FileManager
  *
- * Popup file manager controller.
- * @copyright  Leo Feyer 2005-2011
+ * Pop-up file manager (renders only the files module).
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -57,10 +56,10 @@ class FileManager extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -76,13 +75,15 @@ class FileManager extends Backend
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
+	 * @return void
 	 */
 	public function run()
 	{
 		$this->Template = new BackendTemplate('be_files');
 		$this->Template->main = '';
 
+		// Ajax request
 		if ($this->Environment->isAjaxRequest)
 		{
 			$this->objAjax = new Ajax($this->Input->post('action'));
@@ -91,7 +92,8 @@ class FileManager extends Backend
 
 		$this->Template->main .= $this->getBackendModule('files');
 
-		if (!strlen($this->Template->headline))
+		// Default headline
+		if ($this->Template->headline == '')
 		{
 			$this->Template->headline = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		}
@@ -106,9 +108,9 @@ class FileManager extends Backend
 		$this->Template->skipNavigation = $GLOBALS['TL_LANG']['MSC']['skipNavigation'];
 		$this->Template->request = ampersand($this->Environment->request);
 		$this->Template->top = $GLOBALS['TL_LANG']['MSC']['backToTop'];
-		$this->Template->be27 = !$GLOBALS['TL_CONFIG']['oldBeTheme'];
 		$this->Template->expandNode = $GLOBALS['TL_LANG']['MSC']['expandNode'];
 		$this->Template->collapseNode = $GLOBALS['TL_LANG']['MSC']['collapseNode'];
+		$this->Template->loadingData = $GLOBALS['TL_LANG']['MSC']['loadingData'];
 
 		$this->Template->output();
 	}
@@ -116,9 +118,7 @@ class FileManager extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objFileManager = new FileManager();
 $objFileManager->run();
-
-?>

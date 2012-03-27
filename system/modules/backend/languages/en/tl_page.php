@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -43,6 +42,7 @@ $GLOBALS['TL_LANG']['tl_page']['redirect']       = array('Redirect type', 'Pleas
 $GLOBALS['TL_LANG']['tl_page']['jumpTo']         = array('Redirect page', 'Please choose the page to which visitors will be redirected. Leave blank to redirect to the first regular subpage.');
 $GLOBALS['TL_LANG']['tl_page']['fallback']       = array('Language fallback', 'Show this page if there is none that matches the visitor\'s language.');
 $GLOBALS['TL_LANG']['tl_page']['dns']            = array('Domain name', 'Here you can restrict the access to the website to a certain domain name.');
+$GLOBALS['TL_LANG']['tl_page']['mobile']         = array('Redirect mobile devices', 'Redirect to another root page if the visitor uses a mobile device.');
 $GLOBALS['TL_LANG']['tl_page']['adminEmail']     = array('E-mail address of the website administrator', 'Auto-generated messages like subscription confirmation e-mails will be sent to this address.');
 $GLOBALS['TL_LANG']['tl_page']['dateFormat']     = array('Date format', 'The date format string will be parsed with the PHP date() function.');
 $GLOBALS['TL_LANG']['tl_page']['timeFormat']     = array('Time format', 'The time format string will be parsed with the PHP date() function.');
@@ -78,8 +78,11 @@ $GLOBALS['TL_LANG']['tl_page']['stop']           = array('Show until', 'Do not s
  */
 $GLOBALS['TL_LANG']['tl_page']['title_legend']     = 'Name and type';
 $GLOBALS['TL_LANG']['tl_page']['meta_legend']      = 'Meta information';
+$GLOBALS['TL_LANG']['tl_page']['system_legend']    = 'System settings';
 $GLOBALS['TL_LANG']['tl_page']['redirect_legend']  = 'Redirect settings';
 $GLOBALS['TL_LANG']['tl_page']['dns_legend']       = 'DNS settings';
+$GLOBALS['TL_LANG']['tl_page']['global_legend']    = 'Global settings';
+$GLOBALS['TL_LANG']['tl_page']['mobile_legend']    = 'Mobile settings';
 $GLOBALS['TL_LANG']['tl_page']['sitemap_legend']   = 'XML sitemap';
 $GLOBALS['TL_LANG']['tl_page']['forward_legend']   = 'Auto-forward';
 $GLOBALS['TL_LANG']['tl_page']['protected_legend'] = 'Access protection';
@@ -137,5 +140,3 @@ $GLOBALS['TL_LANG']['tl_page']['toggle']     = array('Publish/unpublish page', '
 $GLOBALS['TL_LANG']['tl_page']['pasteafter'] = array('Paste after', 'Paste after page ID %s');
 $GLOBALS['TL_LANG']['tl_page']['pasteinto']  = array('Paste into', 'Paste into page ID %s');
 $GLOBALS['TL_LANG']['tl_page']['articles']   = array('Edit articles', 'Edit the articles of page ID %s');
-
-?>

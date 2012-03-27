@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Pagination
  *
  * Provide methodes to render a pagination menu.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  */
-class Pagination extends Frontend
+class Pagination extends \Frontend
 {
 
 	/**
@@ -127,9 +132,10 @@ class Pagination extends Frontend
 
 	/**
 	 * Set the number of rows, the number of results per pages and the number of links
-	 * @param int
-	 * @param int
-	 * @param int
+	 * @param integer
+	 * @param integer
+	 * @param integer
+	 * @return void
 	 */
 	public function __construct($intRows, $intPerPage, $intNumberOfLinks=7)
 	{
@@ -209,7 +215,7 @@ class Pagination extends Frontend
 		$blnQuery = false;
 		$this->strUrl = preg_replace('/\?.*$/', '', $this->Environment->request);
 
-		// Prepare URL
+		// Prepare the URL
 		foreach (preg_split('/&(amp;)?/', $_SERVER['QUERY_STRING'], -1, PREG_SPLIT_NO_EMPTY) as $fragment)
 		{
 			if (strncasecmp($fragment, 'page', 4) !== 0)
@@ -233,7 +239,7 @@ class Pagination extends Frontend
 			$this->intPage = $this->intTotalPages;
 		}
 
-		$this->Template = new FrontendTemplate('pagination');
+		$this->Template = new \FrontendTemplate('pagination');
 
 		$this->Template->hasFirst = $this->hasFirst();
 		$this->Template->hasPrevious = $this->hasPrevious();
@@ -246,30 +252,43 @@ class Pagination extends Frontend
 		$this->Template->first = array
 		(
 			'link' => $this->lblFirst,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=1',
+			'href' => $this->linkToPage(1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), 1)
 		);
 
 		$this->Template->previous = array
 		(
 			'link' => $this->lblPrevious,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . ($this->intPage - 1),
+			'href' => $this->linkToPage($this->intPage - 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage - 1))
 		);
 
 		$this->Template->next = array
 		(
 			'link' => $this->lblNext,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . ($this->intPage + 1),
+			'href' => $this->linkToPage($this->intPage + 1),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), ($this->intPage + 1))
 		);
 
 		$this->Template->last = array
 		(
 			'link' => $this->lblLast,
-			'href' => ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $this->intTotalPages,
+			'href' => $this->linkToPage($this->intTotalPages),
 			'title' => sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $this->intTotalPages)
 		);
+
+		global $objPage;
+		$strTagClose = ($objPage->outputFormat == 'xhtml') ? ' />' : '>';
+
+		// Add rel="prev" and rel="next" links (see #3515)
+		if ($this->hasPrevious())
+		{
+			$GLOBALS['TL_HEAD'][] = '<link rel="prev" href="' . $this->linkToPage($this->intPage - 1) . '"' . $strTagClose;
+		}
+		if ($this->hasNext())
+		{
+			$GLOBALS['TL_HEAD'][] = '<link rel="next" href="' . $this->linkToPage($this->intPage + 1) . '"' . $strTagClose;
+		}
 
 		return $this->Template->parse();
 	}
@@ -277,7 +296,7 @@ class Pagination extends Frontend
 
 	/**
 	 * Generate all page links separated with the given argument and return them as string
-	 * @param  string
+	 * @param string
 	 * @return string
 	 */
 	public function getItemsAsString($strSeparator=' ')
@@ -322,13 +341,29 @@ class Pagination extends Frontend
 			}
 
 			$arrLinks[] = sprintf('<li><a href="%s" class="link" title="%s">%s</a></li>',
-								ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $i,
+								$this->linkToPage($i),
 								sprintf(specialchars($GLOBALS['TL_LANG']['MSC']['goToPage']), $i),
 								$i);
 		}
 
 		return implode($strSeparator, $arrLinks);
 	}
-}
 
-?>
+
+	/**
+	 * Generate a link and return the URL
+	 * @param integer
+	 * @return string
+	 */
+	protected function linkToPage($intPage)
+	{
+		if ($intPage <= 1)
+		{
+			return ampersand($this->strUrl);
+		}
+		else
+		{
+			return ampersand($this->strUrl) . $this->strVarConnector . 'page=' . $intPage;
+		}
+	}
+}

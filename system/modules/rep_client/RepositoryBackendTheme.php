@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
- * @filesource
  */
 
 
@@ -105,27 +104,17 @@ class RepositoryBackendTheme
 	 */
 	public function createListButton($file, $link, $text, $confirm='', $popup=false)
 	{
-		$onclick = '';
-		if ($confirm!='') {
-			$onclick .= 'if (!confirm(\''.$confirm.'\')) return false; ';
-		}
-		if ($popup) {
-			$onclick .= 'window.open(this.href); return false; ';
-		}
-		if ($onclick!=''){
-			$onclick = ' onclick="' . trim($onclick) . '"';
-		}
-		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').'</a>';
+		$target = $popup ? ' target="_blank"' : '';
+		$onclick = ($confirm!='') ? ' onclick="if(!confirm(\''.$confirm.'\'))return false"' : '';
+		return '<a href="'.$link.'" title="'.$text.'"'.$target.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').'</a>';
 	} // createListButton
 
 	public function createMainButton($file, $link, $text, $confirm='')
 	{
 		$onclick = ($confirm=='')
 						? ''
-						: ' onclick="if (!confirm(\''.$confirm.'\')) return false;"';
+						: ' onclick="if(!confirm(\''.$confirm.'\'))return false"';
 		return '<a href="'.$link.'" title="'.$text.'"'.$onclick.'>'.$this->createImage($file,$text,'title="'.$text.'"').' '.$text.'</a>';
 	} // createMainButton
 
 } // class RepositoryTheme
-
-?>

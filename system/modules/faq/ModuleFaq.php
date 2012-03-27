@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,33 +20,39 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleFaq
  *
  * Provide methods regarding FAQs.
- * @copyright  Leo Feyer 2008-2011
+ * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaq extends Frontend
+class ModuleFaq extends \Frontend
 {
 
 	/**
 	 * Add FAQs to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -55,66 +61,57 @@ class ModuleFaq extends Frontend
 			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
 
 		// Get all categories
-		$objFaq = $this->Database->execute("SELECT id, jumpTo FROM tl_faq_category");
+		$objFaq = \FaqCategoryCollection::findAll();
 
 		// Walk through each category
-		while ($objFaq->next())
+		if ($objFaq !== null)
 		{
-			if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($objFaq->jumpTo, $arrRoot))
+			while ($objFaq->next())
 			{
-				continue;
-			}
+				// Skip FAQs without target page
+				if ($objFaq->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objFaq->jumpTo]))
-			{
-				$arrProcessed[$objFaq->jumpTo] = false;
+				// Skip FAQs outside the root nodes
+				if (!empty($arrRoot) && !in_array($objFaq->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
-											->limit(1)
-											->execute($objFaq->jumpTo);
-
-				// Determin domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objFaq->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent->id);
+					$objParent = $this->getPageDetails($objFaq->jumpTo['id']);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objFaq->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objFaq->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
-			}
 
-			// Skip FAQs without target page
-			if ($arrProcessed[$objFaq->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objFaq->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objFaq->jumpTo];
+				// Get the items
+				$objItems = \FaqCollection::findByPid($objFaq->id, array('order'=>'sorting'));
 
-			// Get items
-			$objItem = $this->Database->prepare("SELECT * FROM tl_faq WHERE pid=? AND published=1 ORDER BY sorting")
-									  ->execute($objFaq->id);
-
-			// Add items to the indexer
-			while ($objItem->next())
-			{
-				$arrPages[] = sprintf($strUrl, ((strlen($objItem->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+				if ($objItems !== null)
+				{
+					while ($objItems->next())
+					{
+						$arrPages[] = sprintf($strUrl, (($objItems->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItems->alias : $objItems->id));
+					}
+				}
 			}
 		}
 
 		return $arrPages;
 	}
 }
-
-?>

@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class Index
  *
- * Back end login controller.
- * @copyright  Leo Feyer 2005-2011
+ * Handle back end logins and logouts.
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -50,14 +49,20 @@ class Index extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Login user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Login the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
 	{
+		// Redirect to the install tool
+		if (!Config::getInstance()->isComplete())
+		{
+			$this->redirect('install.php');
+		}
+
 		$this->import('BackendUser', 'User');
 		parent::__construct();
 
@@ -66,7 +71,7 @@ class Index extends Backend
 		{
 			$strUrl = 'contao/main.php';
 
-			// Redirect to last page visited
+			// Redirect to the last page visited
 			if ($this->Input->get('referer', true) != '')
 			{
 				$strUrl = base64_decode($this->Input->get('referer', true));
@@ -82,7 +87,7 @@ class Index extends Backend
 		}
 
 		// Reload the page once after a logout to create a new session_id()
-		if ($this->User->logout())
+		elseif ($this->User->logout())
 		{
 			$this->reload();
 		}
@@ -93,7 +98,8 @@ class Index extends Backend
 
 
 	/**
-	 * Run controller and parse the login template
+	 * Run the controller and parse the login template
+	 * @return void
 	 */
 	public function run()
 	{
@@ -125,6 +131,7 @@ class Index extends Backend
 		$this->Template->feLink = $GLOBALS['TL_LANG']['MSC']['feLink'];
 		$this->Template->frontendFile = $this->Environment->base;
 		$this->Template->disableCron = $GLOBALS['TL_CONFIG']['disableCron'];
+		$this->Template->ie6warning = sprintf($GLOBALS['TL_LANG']['ERR']['ie6warning'], '<a href="http://ie6countdown.com">', '</a>');
 
 		$this->Template->output();
 	}
@@ -132,9 +139,7 @@ class Index extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objIndex = new Index();
 $objIndex->run();
-
-?>

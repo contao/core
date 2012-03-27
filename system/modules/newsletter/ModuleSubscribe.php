@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleSubscribe
  *
  * Front end module "newsletter subscribe".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSubscribe extends Module
+class ModuleSubscribe extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleSubscribe extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER SUBSCRIBE ###';
 			$objTemplate->title = $this->headline;
@@ -69,7 +74,7 @@ class ModuleSubscribe extends Module
 		$this->nl_channels = deserialize($this->nl_channels);
 
 		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			return '';
 		}
@@ -79,14 +84,15 @@ class ModuleSubscribe extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
 		// Overwrite default template
 		if ($this->nl_template)
 		{
-			$this->Template = new FrontendTemplate($this->nl_template);
+			$this->Template = new \FrontendTemplate($this->nl_template);
 			$this->Template->setData($this->arrData);
 		}
 
@@ -123,12 +129,15 @@ class ModuleSubscribe extends Module
 		}
 
 		$arrChannels = array();
-		$objChannel = $this->Database->execute("SELECT id, title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") ORDER BY title");
+		$objChannel = \NewsletterChannelCollection::findByIds($this->nl_channels);
 
-		// Get titles
-		while ($objChannel->next())
+		// Get the titles
+		if ($objChannel !== null)
 		{
-			$arrChannels[$objChannel->id] = $objChannel->title;
+			while ($objChannel->next())
+			{
+				$arrChannels[$objChannel->id] = $objChannel->title;
+			}
 		}
 
 		// Default template variables
@@ -147,38 +156,47 @@ class ModuleSubscribe extends Module
 
 	/**
 	 * Activate a recipient
+	 * @return void
 	 */
 	protected function activateRecipient()
 	{
-		$this->Template = new FrontendTemplate('mod_newsletter');
+		$this->Template = new \FrontendTemplate('mod_newsletter');
 
 		// Check the token
-		$objRecipient = $this->Database->prepare("SELECT r.id, r.email, c.id AS cid, c.title FROM tl_newsletter_recipients r LEFT JOIN tl_newsletter_channel c ON r.pid=c.id WHERE token=?")
-									   ->execute($this->Input->get('token'));
+		$objRecipient = \NewsletterRecipientsModel::findByToken($this->Input->get('token'));
 
-		if ($objRecipient->numRows < 1)
+		if ($objRecipient === null)
 		{
 			$this->Template->mclass = 'error';
 			$this->Template->message = $GLOBALS['TL_LANG']['ERR']['invalidToken'];
-
 			return;
 		}
 
-		$arrAdd = $objRecipient->fetchEach('id');
-		$arrChannels = $objRecipient->fetchEach('title');
+		$arrAdd = array();
+		$arrChannels = array();
+		$arrCids = array();
 
-		// Update subscriptions
-		$this->Database->prepare("UPDATE tl_newsletter_recipients SET active=1, token='' WHERE token=?")
-					   ->execute($this->Input->get('token'));
+		// Update the subscriptions
+		while ($objRecipient->next())
+		{
+			$objRecipient->getRelated('pid');
+
+			$arrAdd[] = $objRecipient->id;
+			$arrChannels[] = $objRecipient->pid['title'];
+			$arrCids[] = $objRecipient->pid['id'];
+
+			$objRecipient->active = 1;
+			$objRecipient->token = '';
+			$objRecipient->pid = $objRecipient->pid['id'];
+			$objRecipient->save();
+		}
 
 		// Log activity
-		$this->log($objRecipient->email . ' has subscribed to ' . implode(', ', $arrChannels), 'ModuleSubscribe activateRecipient()', TL_NEWSLETTER);
+		$this->log($objRecipient->email . ' has subscribed to the following channels: ' . implode(', ', $arrChannels), 'ModuleSubscribe activateRecipient()', TL_NEWSLETTER);
 
 		// HOOK: post activation callback
 		if (isset($GLOBALS['TL_HOOKS']['activateRecipient']) && is_array($GLOBALS['TL_HOOKS']['activateRecipient']))
 		{
-			$arrCids = $objRecipient->fetchEach('cid');
-
 			foreach ($GLOBALS['TL_HOOKS']['activateRecipient'] as $callback)
 			{
 				$this->import($callback[0]);
@@ -194,14 +212,22 @@ class ModuleSubscribe extends Module
 
 	/**
 	 * Add a new recipient
+	 * @return void
 	 */
 	protected function addRecipient()
 	{
 		$arrChannels = $this->Input->post('channels');
+
+		if (!is_array($arrChannels))
+		{
+			$_SESSION['UNSUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
+			$this->reload();
+		}
+
 		$arrChannels = array_intersect($arrChannels, $this->nl_channels); // see #3240
 
 		// Check the selection
-		if (!is_array($arrChannels) || count($arrChannels) < 1)
+		if (!is_array($arrChannels) || empty($arrChannels))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['noChannels'];
 			$this->reload();
@@ -209,7 +235,7 @@ class ModuleSubscribe extends Module
 
 		$varInput = $this->idnaEncodeEmail($this->Input->post('email', true));
 
-		// Validate e-mail address
+		// Validate the e-mail address
 		if (!$this->isValidEmailAddress($varInput))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['email'];
@@ -218,11 +244,8 @@ class ModuleSubscribe extends Module
 
 		$arrSubscriptions = array();
 
-		// Get active subscriptions
-		$objSubscription = $this->Database->prepare("SELECT pid FROM tl_newsletter_recipients WHERE email=? AND active=1")
-										  ->execute($varInput);
-
-		if ($objSubscription->numRows)
+		// Get the existing active subscriptions
+		if (($objSubscription = \NewsletterRecipientsModel::findBy(array("email=? AND active=1"), $varInput)) !== null)
 		{
 			$arrSubscriptions = $objSubscription->fetchEach('pid');
 		}
@@ -230,74 +253,64 @@ class ModuleSubscribe extends Module
 		$arrNew = array_diff($arrChannels, $arrSubscriptions);
 
 		// Return if there are no new subscriptions
-		if (!is_array($arrNew) || count($arrNew) < 1)
+		if (!is_array($arrNew) || empty($arrNew))
 		{
 			$_SESSION['SUBSCRIBE_ERROR'] = $GLOBALS['TL_LANG']['ERR']['subscribed'];
 			$this->reload();
 		}
 
-		$time = time();
-		$strToken = md5(uniqid(mt_rand(), true));
-		$arrCondition = array();
-		$arrValues = array();
-
-		// Prepare new subscriptions
-		foreach ($arrNew as $id)
+		// Remove old subscriptions that have not been activated yet
+		if (($objOld = \NewsletterRecipientsModel::findBy(array("email=? AND active=''"), $varInput)) !== null)
 		{
-			$arrValues[] = $id;
-			$arrValues[] = $time;
-			$arrValues[] = $varInput;
-			$arrValues[] = '';
-			$arrValues[] = $time;
-			$arrValues[] = $this->Environment->ip;
-			$arrValues[] = $strToken;
-
-			$arrCondition[] = '(?, ?, ?, ?, ?, ?, ?)';
+			while ($objOld->next())
+			{
+				$objOld->delete();
+			}
 		}
 
-		// Remove old subscriptions that have not been activated yet
-		$this->Database->prepare("DELETE FROM tl_newsletter_recipients WHERE email=? AND active!=1")
-					   ->execute($varInput);
+		$time = time();
+		$strToken = md5(uniqid(mt_rand(), true));
 
-		// Add new subscriptions
-		$this->Database->prepare("INSERT INTO tl_newsletter_recipients (pid, tstamp, email, active, addedOn, ip, token) VALUES " . implode(', ', $arrCondition))
-					   ->execute($arrValues);
+		// Add the new subscriptions
+		foreach ($arrNew as $id)
+		{
+			$objRecipient = new \NewsletterRecipientsModel();
 
-		// Get channels
-		$objChannel = $this->Database->execute("SELECT title FROM tl_newsletter_channel WHERE id IN(" . implode(',', array_map('intval', $arrChannels)) . ")");
+			$objRecipient->pid = $id;
+			$objRecipient->tstamp = $time;
+			$objRecipient->email = $varInput;
+			$objRecipient->active = '';
+			$objRecipient->addedOn = $time;
+			$objRecipient->ip = $this->anonymizeIp($this->Environment->ip);
+			$objRecipient->token = $strToken;
 
-		// Activation e-mail
-		$objEmail = new Email();
+			$objRecipient->save();
+		}
 
+		// Get the channels
+		$objChannel = \NewsletterChannelCollection::findByIds($arrChannels);
+
+		// Prepare the e-mail text
 		$strText = str_replace('##token##', $strToken, $this->nl_subscribe);
 		$strText = str_replace('##domain##', $this->Environment->host, $strText);
 		$strText = str_replace('##link##', $this->Environment->base . $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&' : '?') . 'token=' . $strToken, $strText);
 		$strText = str_replace(array('##channel##', '##channels##'), implode("\n", $objChannel->fetchEach('title')), $strText);
 
+		// Activation e-mail
+		$objEmail = new \Email();
 		$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 		$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
 		$objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['nl_subject'], $this->Environment->host);
 		$objEmail->text = $strText;
-
 		$objEmail->sendTo($varInput);
-		global $objPage;
 
-		// Redirect to jumpTo page
-		if (strlen($this->jumpTo) && $this->jumpTo != $objPage->id)
+		// Redirect to the jumpTo page
+		if ($this->jumpTo['id'])
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
-
-			if ($objNextPage->numRows)
-			{
-				$this->redirect($this->generateFrontendUrl($objNextPage->fetchAssoc()));
-			}
+			$this->redirect($this->generateFrontendUrl($this->jumpTo));
 		}
 
 		$_SESSION['SUBSCRIBE_CONFIRM'] = $GLOBALS['TL_LANG']['MSC']['nl_confirm'];
 		$this->reload();
 	}
 }
-
-?>

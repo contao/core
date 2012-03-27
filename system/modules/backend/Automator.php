@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,29 +20,35 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Automator
  *
  * Provide methods to run automated jobs.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Automator extends Backend
+class Automator extends \Backend
 {
 
 	/**
 	 * Generate Google XML sitemaps
 	 * @param integer
+	 * @return void
 	 */
 	public function generateSitemap($intId=0)
 	{
@@ -71,7 +77,7 @@ class Automator extends Backend
 			while ($objRoot->type != 'root' && $intId > 0);
 
 			// Make sure the page is published
-			if (!$objRoot->published || (strlen($objRoot->start) && $objRoot->start > $time) || (strlen($objRoot->stop) && $objRoot->stop < $time))
+			if (!$objRoot->published || ($objRoot->start != '' && $objRoot->start > $time) || ($objRoot->stop != '' && $objRoot->stop < $time))
 			{
 				return;
 			}
@@ -88,7 +94,7 @@ class Automator extends Backend
 		// Get all published root pages
 		else
 		{
-			$objRoot = $this->Database->execute("SELECT id, dns, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
+			$objRoot = $this->Database->execute("SELECT id, dns, language, useSSL, sitemapName FROM tl_page WHERE type='root' AND createSitemap=1 AND sitemapName!='' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1");
 		}
 
 		// Return if there are no pages
@@ -100,7 +106,7 @@ class Automator extends Backend
 		// Create the XML file
 		while($objRoot->next())
 		{
-			$objFile = new File($objRoot->sitemapName . '.xml');
+			$objFile = new \File('share/' . $objRoot->sitemapName . '.xml');
 
 			$objFile->write('');
 			$objFile->append('<?xml version="1.0" encoding="UTF-8"?>');
@@ -109,12 +115,12 @@ class Automator extends Backend
 			$strDomain = '';
 
 			// Overwrite the domain
-			if (strlen($objRoot->dns))
+			if ($objRoot->dns != '')
 			{
 				$strDomain = ($objRoot->useSSL ? 'https://' : 'http://') . $objRoot->dns . TL_PATH . '/';
 			}
 
-			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true);
+			$arrPages = $this->findSearchablePages($objRoot->id, $strDomain, true, $objRoot->language);
 
 			// HOOK: take additional pages
 			if (isset($GLOBALS['TL_HOOKS']['getSearchablePages']) && is_array($GLOBALS['TL_HOOKS']['getSearchablePages']))
@@ -122,7 +128,7 @@ class Automator extends Backend
 				foreach ($GLOBALS['TL_HOOKS']['getSearchablePages'] as $callback)
 				{
 					$this->import($callback[0]);
-					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id, true);
+					$arrPages = $this->$callback[0]->$callback[1]($arrPages, $objRoot->id, true, $objRoot->language);
 				}
 			}
 
@@ -146,20 +152,21 @@ class Automator extends Backend
 
 
 	/**
-	 * Purge the thumbnail directory
+	 * Purge the thumbnail directory (assets/images)
+	 * @return void
 	 */
 	public function purgeHtmlFolder()
 	{
-		$arrHtml = scan(TL_ROOT . '/system/html', true);
+		$arrHtml = scan(TL_ROOT . '/assets/images', true);
 
-		// Remove files
+		// Remove the files
 		if (is_array($arrHtml))
 		{
 			foreach ($arrHtml as $strFile)
 			{
-				if ($strFile != 'index.html' && $strFile != 'cron.txt' && !is_dir(TL_ROOT . '/system/html/' . $strFile))
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/assets/images/' . $strFile))
 				{
-					@unlink(TL_ROOT . '/system/html/' . $strFile);
+					@unlink(TL_ROOT . '/assets/images/' . $strFile);
 				}
 			}
 		}
@@ -170,20 +177,35 @@ class Automator extends Backend
 
 
 	/**
-	 * Purge the scripts directory
+	 * Purge the script directories (assets/js and asset/css)
+	 * @return void
 	 */
 	public function purgeScriptsFolder()
 	{
-		$arrScripts = scan(TL_ROOT . '/system/scripts', true);
+		$arrScripts = scan(TL_ROOT . '/assets/js', true);
 
-		// Remove files
+		// Remove the JavaScript files
 		if (is_array($arrScripts))
 		{
 			foreach ($arrScripts as $strFile)
 			{
 				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
 				{
-					unlink(TL_ROOT . '/system/scripts/' . $strFile);
+					unlink(TL_ROOT . '/assets/js/' . $strFile);
+				}
+			}
+		}
+
+		$arrScripts = scan(TL_ROOT . '/assets/css', true);
+
+		// Remove the CSS files
+		if (is_array($arrScripts))
+		{
+			foreach ($arrScripts as $strFile)
+			{
+				if ($strFile != 'index.html' && !is_dir(TL_ROOT . '/system/scripts/' . $strFile))
+				{
+					unlink(TL_ROOT . '/assets/css/' . $strFile);
 				}
 			}
 		}
@@ -193,12 +215,13 @@ class Automator extends Backend
 		$this->StyleSheets->updateStyleSheets();
 
 		// Add log entry
-		$this->log('Purged the scripts directory', 'Automator purgeScriptsFolder()', TL_CRON);
+		$this->log('Purged the scripts directories', 'Automator purgeScriptsFolder()', TL_CRON);
 	}
 
 
 	/**
 	 * Purge the temporary directory
+	 * @return void
 	 */
 	public function purgeTempFolder()
 	{
@@ -219,9 +242,8 @@ class Automator extends Backend
 		// Check for .htaccess
 		if (!file_exists(TL_ROOT . '/system/tmp/.htaccess'))
 		{
-			$objFile = new File('system/tmp/.htaccess');
-			$objFile->write("order deny,allow\ndeny from all");
-			$objFile->close();
+			$objFolder = new \Folder('system/tmp');
+			$objFolder->protect();
 		}
 
 		// Add log entry
@@ -231,6 +253,7 @@ class Automator extends Backend
 
 	/**
 	 * Check for new Contao versions
+	 * @return void
 	 */
 	public function checkForUpdates()
 	{
@@ -239,8 +262,8 @@ class Automator extends Backend
 			return;
 		}
 
-		$objRequest = new Request();
-		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . 'version.txt');
+		$objRequest = new \Request();
+		$objRequest->send($GLOBALS['TL_CONFIG']['liveUpdateBase'] . (LONG_TERM_SUPPORT ? 'lts-version.txt' : 'version.txt'));
 
 		if (!$objRequest->hasError())
 		{
@@ -252,5 +275,3 @@ class Automator extends Backend
 		$this->log('Checked for Contao updates', 'Automator checkForUpdates()', TL_CRON);
 	}
 }
-
-?>

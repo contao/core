@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsArchive
  *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsArchive extends ModuleNews
+class ModuleNewsArchive extends \ModuleNews
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleNewsArchive extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS ARCHIVE ###';
 			$objTemplate->title = $this->headline;
@@ -68,7 +73,20 @@ class ModuleNewsArchive extends ModuleNews
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1 || ($this->news_jumpToCurrent == 'hide_module' && !isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day'])))
+		// No news archives available
+		if (!is_array($this->news_archives) || empty($this->news_archives))
+		{
+			return '';
+		}
+
+		// Show the news reader if an item has been selected
+		if ($this->news_readerModule > 0 && (isset($_GET['items']) || ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))))
+		{
+			return $this->getFrontendModule($this->news_readerModule, $this->strColumn);
+		}
+
+		// Hide the module if no period has been selected
+		if ($this->news_jumpToCurrent == 'hide_module' && !isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']))
 		{
 			return '';
 		}
@@ -78,12 +96,17 @@ class ModuleNewsArchive extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$limit = null;
 		$offset = 0;
+		$intBegin = 0;
+		$intEnd = 0;
 
 		// Jump to the current period
 		if (!isset($_GET['year']) && !isset($_GET['month']) && !isset($_GET['day']) && $this->news_jumpToCurrent != 'all_items')
@@ -109,32 +132,29 @@ class ModuleNewsArchive extends ModuleNews
 		if ($this->Input->get('year'))
 		{
 			$strDate = $this->Input->get('year');
-			$objDate = new Date($strDate, 'Y');
+			$objDate = new \Date($strDate, 'Y');
 			$intBegin = $objDate->yearBegin;
 			$intEnd = $objDate->yearEnd;
 			$this->headline .= ' ' . date('Y', $objDate->tstamp);
 		}
-
 		// Display month
 		elseif ($this->Input->get('month'))
 		{
 			$strDate = $this->Input->get('month');
-			$objDate = new Date($strDate, 'Ym');
+			$objDate = new \Date($strDate, 'Ym');
 			$intBegin = $objDate->monthBegin;
 			$intEnd = $objDate->monthEnd;
 			$this->headline .= ' ' . $this->parseDate('F Y', $objDate->tstamp);
 		}
-
 		// Display day
 		elseif ($this->Input->get('day'))
 		{
 			$strDate = $this->Input->get('day');
-			$objDate = new Date($strDate, 'Ymd');
+			$objDate = new \Date($strDate, 'Ymd');
 			$intBegin = $objDate->dayBegin;
 			$intEnd = $objDate->dayEnd;
-			$this->headline .= ' ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objDate->tstamp);
+			$this->headline .= ' ' . $this->parseDate($objPage->dateFormat, $objDate->tstamp);
 		}
-
 		// Show all items 
 		elseif ($this->news_jumpToCurrent == 'all_items')
 		{
@@ -142,48 +162,57 @@ class ModuleNewsArchive extends ModuleNews
 			$intEnd = time();
 		}
 
-		$time = time();
+		$this->Template->articles = array();
 
-		// Split result
+		// Split the result
 		if ($this->perPage > 0)
 		{
 			// Get the total number of items
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-									   ->execute($intBegin, $intEnd);
+			$objTotal = \NewsCollection::countPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 
-			$total = $objTotal->total;
-
-			// Get the current page
-			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
-
-			if ($page > ($total/$this->perPage))
+			if ($objTotal !== null)
 			{
-				$page = ceil($total/$this->perPage);
+				$total = $objTotal->count;
+
+				// Get the current page
+				$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+				// Do not index or cache the page if the page number is outside the range
+				if ($page < 1 || $page > ceil($total/$this->perPage))
+				{
+					global $objPage;
+					$objPage->noSearch = 1;
+					$objPage->cache = 0;
+
+					// Send a 404 header
+					header('HTTP/1.1 404 Not Found');
+					return;
+				}
+
+				// Set limit and offset
+				$limit = $this->perPage;
+				$offset = (max($page, 1) - 1) * $this->perPage;
+
+				// Add the pagination menu
+				$objPagination = new \Pagination($total, $this->perPage);
+				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
-
-			// Set limit and offset
-			$limit = $this->perPage;
-			$offset = (max($page, 1) - 1) * $this->perPage;
-
-			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage);
-			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND date>=? AND date<=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
-
-		// Limit result
+		// Get the news items
 		if (isset($limit))
 		{
-			$objArticlesStmt->limit($limit, $offset);
+			$objArticles = \NewsCollection::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives, $limit, $offset);
+		}
+		else
+		{
+			$objArticles = \NewsCollection::findPublishedFromToByPids($intBegin, $intEnd, $this->news_archives);
 		}
 
-		$objArticles = $objArticlesStmt->execute($intBegin, $intEnd);
-
 		// No items found
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
-			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
 
 		$this->Template->headline = trim($this->headline);
@@ -192,5 +221,3 @@ class ModuleNewsArchive extends ModuleNews
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['empty'];
 	}
 }
-
-?>

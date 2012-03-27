@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -46,7 +45,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 	'palettes' => array
 	(
 		'__selector__'                => array('useSMTP'),
-		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,disableAlias;{security_legend:hide},allowedTags,lockPeriod,encryptionKey,displayErrors,debugMode,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
+		'default'                     => '{title_legend},websiteTitle,adminEmail;{date_legend},dateFormat,timeFormat,datimFormat,timeZone;{global_legend:hide},websitePath,characterSet,customSections,disableCron,minifyMarkup,gzipScripts;{backend_legend},resultsPerPage,maxResultsPerPage,staticFiles,staticSystem,staticPlugins,doNotCollapse;{frontend_legend},urlSuffix,cacheMode,rewriteURL,useAutoItem,addLanguageToUrl,doNotRedirectEmpty,folderUrl,disableAlias;{privacy_legend:hide},privacyAnonymizeIp,privacyAnonymizeGA;{safemode_legend:hide},coreOnlyMode;{security_legend:hide},allowedTags,debugMode,bypassCache,displayErrors,logErrors,disableRefererCheck,disableIpCheck;{files_legend:hide},allowedDownload,validImageTypes,editableFiles,templateFiles,maxImageWidth,jpgQuality,gdMaxImgWidth,gdMaxImgHeight;{uploads_legend:hide},uploadPath,uploadTypes,uploadFields,maxFileSize,imageWidth,imageHeight;{search_legend:hide},enableSearch,indexProtected;{smtp_legend:hide},useSMTP;{modules_legend},inactiveModules;{timeout_legend:hide},undoPeriod,versionPeriod,logPeriod,sessionTimeout,autologin,lockPeriod;{chmod_legend:hide},defaultUser,defaultGroup,defaultChmod;{update_legend:hide},liveUpdateBase'
 	),
 
 	// Subpalettes
@@ -94,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['timeZone'],
 			'inputType'               => 'select',
 			'options'                 => $this->getTimezones(),
-			'eval'                    => array('tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'tl_class'=>'w50')
 		),
 		'websitePath' => array
 		(
@@ -190,17 +189,27 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('nospace'=>'true', 'tl_class'=>'w50')
 		),
-		'cacheMode' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['cacheMode'],
-			'inputType'               => 'select',
-			'options'                 => array('both', 'server', 'browser', 'none'),
-			'reference'               => &$GLOBALS['TL_LANG']['tl_settings'],
-			'eval'                    => array('tl_class'=>'w50')
-		),
 		'rewriteURL' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['rewriteURL'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'addLanguageToUrl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'doNotRedirectEmpty' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'useAutoItem' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['useAutoItem'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
@@ -210,29 +219,37 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'checkbox',
 			'eval'                    => array('tl_class'=>'w50')
 		),
+		'folderUrl' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['folderUrl'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'cacheMode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['cacheMode'],
+			'inputType'               => 'select',
+			'options'                 => array('both', 'server', 'browser', 'none'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_settings'],
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'privacyAnonymizeIp' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'privacyAnonymizeGA' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
 		'allowedTags' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowedTags'],
 			'inputType'               => 'text',
 			'eval'                    => array('preserveTags'=>true, 'tl_class'=>'long')
-		),
-		'lockPeriod' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
-		),
-		'encryptionKey' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['encryptionKey'],
-			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'minlength'=>12, 'tl_class'=>'w50')
-		),
-		'displayErrors' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['displayErrors'],
-			'inputType'               => 'checkbox',
-			'eval'                    => array('tl_class'=>'w50')
 		),
 		'debugMode' => array
 		(
@@ -243,6 +260,29 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			(
 				array('tl_settings', 'regenerateScripts')
 			)
+		),
+		'bypassCache' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['bypassCache'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'coreOnlyMode' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode'],
+			'inputType'               => 'checkbox'
+		),
+		'displayErrors' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['displayErrors'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
+		),
+		'logErrors' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['logErrors'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('tl_class'=>'w50')
 		),
 		'disableRefererCheck' => array
 		(
@@ -406,7 +446,11 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['inactiveModules'],
 			'inputType'               => 'checkbox',
 			'options_callback'        => array('tl_settings', 'getModules'),
-			'eval'                    => array('multiple'=>true)
+			'eval'                    => array('multiple'=>true),
+			'save_callback' => array
+			(
+				array('tl_settings', 'updateInactiveModules')
+			)
 		),
 		'undoPeriod' => array
 		(
@@ -438,17 +482,23 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 			'inputType'               => 'text',
 			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
 		),
+		'lockPeriod' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['lockPeriod'],
+			'inputType'               => 'text',
+			'eval'                    => array('mandatory'=>true, 'rgxp'=>'digit', 'nospace'=>true, 'tl_class'=>'w50')
+		),
 		'defaultUser' => array(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultUser'],
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.username',
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'defaultGroup' => array(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['defaultGroup'],
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user_group.name',
-			'eval'                    => array('includeBlankOption'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('chosen'=>true, 'includeBlankOption'=>true, 'tl_class'=>'w50')
 		),
 		'defaultChmod' => array
 		(
@@ -459,8 +509,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
 		'liveUpdateBase' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['liveUpdateBase'],
-			'inputType'               => 'text',
-			'eval'                    => array('tl_class'=>'long')
+			'inputType'               => 'text'
 		)
 	)
 );
@@ -470,7 +519,7 @@ $GLOBALS['TL_DCA']['tl_settings'] = array
  * Class tl_settings
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -507,11 +556,11 @@ class tl_settings extends Backend
 
 				if (file_exists($strFile))
 				{
-					include($strFile);
+					include $strFile;
 				}
 			}
 
-			$arrReturn[$strModule] = '<span style="color:#b3b3b3;">['. $strModule .']</span> ' . (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
+			$arrReturn[$strModule] = '<span style="color:#b3b3b3">['. $strModule .']</span> ' . (is_array($GLOBALS['TL_LANG']['MOD'][$strModule]) ? $GLOBALS['TL_LANG']['MOD'][$strModule][0] : $GLOBALS['TL_LANG']['MOD'][$strModule]);
 		}
 
 		natcasesort($arrReturn);
@@ -520,9 +569,55 @@ class tl_settings extends Backend
 
 
 	/**
+	 * Update the inactive modules
+	 * @param mixed
+	 * @return mixed
+	 */
+	public function updateInactiveModules($varValue)
+	{
+		$arrModules = deserialize($varValue);
+
+		if (!is_array($arrModules))
+		{
+			$arrModules = array();
+		}
+
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		{
+			if (strncmp($strModule, '.', 1) === 0)
+			{
+				continue;
+			}
+
+			// Add the .skip file to disable the module
+			if (in_array($strModule, $arrModules))
+			{
+				if (!file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile->write('As long as this file exists, the module will be ignored.');
+					$objFile->close();
+				}
+			}
+			// Remove the .skip if it exists
+			else
+			{
+				if (file_exists(TL_ROOT . '/system/modules/' . $strModule . '/.skip'))
+				{
+					$objFile = new \File('system/modules/' . $strModule . '/.skip');
+					$objFile->delete();
+				}
+			}
+		}
+
+		return $varValue;
+	}
+
+
+	/**
 	 * Remove protected search results if the feature is being disabled
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function clearSearchIndex($varValue)
 	{
@@ -538,7 +633,7 @@ class tl_settings extends Backend
 	/**
 	 * Make sure that resultsPerPage > 0
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkResultsPerPage($varValue)
 	{
@@ -554,14 +649,19 @@ class tl_settings extends Backend
 	/**
 	 * Regenerate the CSS scripts when the debug mode changes
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function regenerateScripts($varValue)
 	{
-		$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
+		if ($varValue != $GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$GLOBALS['TL_CONFIG']['debugMode'] = $varValue;
 
-		$this->import('Automator');
-		$this->Automator->purgeScriptsFolder();
+			$this->import('Automator');
+			$this->Automator->purgeTempFolder();
+			$this->Automator->purgeScriptsFolder();
+			$this->Automator->purgeHtmlFolder();
+		}
 
 		return $varValue;
 	}
@@ -571,7 +671,7 @@ class tl_settings extends Backend
 	 * Make sure that "html5" is in the list of valid template
 	 * files, so the back end works correctly (see #3398)
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkTemplateFiles($varValue)
 	{
@@ -587,7 +687,8 @@ class tl_settings extends Backend
 	/**
 	 * Check the upload path
 	 * @param mixed
-	 * @return array
+	 * @return mixed
+	 * @throws \Exception
 	 */
 	public function checkUploadPath($varValue)
 	{
@@ -595,7 +696,11 @@ class tl_settings extends Backend
 
 		if ($varValue == '.' || $varValue == '..' || $varValue == '')
 		{
-			$varValue = 'tl_files';
+			$varValue = 'files';
+		}
+		elseif (preg_match('@^(assets|contao|plugins|share|system|templates)(/|$)@', $varValue))
+		{
+			throw new \Exception($GLOBALS['TL_LANG']['ERR']['invalidName']);
 		}
 
 		return $varValue;
@@ -605,7 +710,7 @@ class tl_settings extends Backend
 	/**
 	 * Check a static URL
 	 * @param mixed
-	 * @return array
+	 * @return mixed
 	 */
 	public function checkStaticUrl($varValue)
 	{
@@ -617,5 +722,3 @@ class tl_settings extends Backend
 		return $varValue;
 	}
 }
-
-?>

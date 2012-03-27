@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleSitemap
  *
  * Front end module "sitemap".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleSitemap extends Module
+class ModuleSitemap extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleSitemap extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### SITEMAP ###';
 			$objTemplate->title = $this->headline;
@@ -71,13 +76,16 @@ class ModuleSitemap extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		if ($this->includeRoot)
+		// Start from the website root if there is no reference page
+		if (!$this->rootPage)
 		{
-			$this->rootPage = 0;
+			global $objPage;
+			$this->rootPage = $objPage->rootId;
 		}
 
 		$this->showLevel = 0;
@@ -87,5 +95,3 @@ class ModuleSitemap extends Module
 		$this->Template->items = $this->renderNavigation($this->rootPage);
 	}
 }
-
-?>

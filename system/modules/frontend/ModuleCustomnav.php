@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleCustomnav
  *
  * Front end module "custom navigation".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleCustomnav extends Module
+class ModuleCustomnav extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleCustomnav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CUSTOM NAVIGATION MENU ###';
 			$objTemplate->title = $this->headline;
@@ -68,18 +73,19 @@ class ModuleCustomnav extends Module
 
 		$this->pages = deserialize($this->pages);
 
-		if (!is_array($this->pages) || !strlen($this->pages[0]))
+		if (!is_array($this->pages) || $this->pages[0] == '')
 		{
 			return '';
 		}
 
 		$strBuffer = parent::generate();
-		return strlen($this->Template->items) ? $strBuffer : '';
+		return ($this->Template->items != '') ? $strBuffer : '';
 	}
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -95,28 +101,20 @@ class ModuleCustomnav extends Module
 			$groups = $this->User->groups;
 		}
 
-		$time = time();
-		$arrPages = array();
-
 		// Get all active pages
-		foreach ($this->pages as $intId)
-		{
-			$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE id=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									   ->limit(1)
-									   ->execute($intId);
-
-			if ($objPages->numRows < 1)
-			{
-				continue;
-			}
-
-			$arrPages[] = $objPages->fetchAssoc();
-		}
+		$objPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages);
 
 		// Return if there are no pages
-		if (count($arrPages) < 1)
+		if ($objPages === null)
 		{
 			return;
+		}
+
+		$arrPages = array();
+
+		while ($objPages->next())
+		{
+			$arrPages[] = $objPages->row();
 		}
 
 		// Set default template
@@ -125,7 +123,7 @@ class ModuleCustomnav extends Module
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new FrontendTemplate($this->navigationTpl);
+		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_1';
@@ -145,13 +143,11 @@ class ModuleCustomnav extends Module
 						break;
 
 					case 'forward':
-						$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($arrPage['jumpTo']);
+						$objNext = \PageModel::findPublishedById($arrPage['jumpTo']);
 
-						if ($objNext->numRows)
+						if ($objNext !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+							$href = $this->generateFrontendUrl($objNext->row());
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
@@ -164,7 +160,7 @@ class ModuleCustomnav extends Module
 				// Active page
 				if ($objPage->id == $arrPage['id'])
 				{
-					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : ''));
+					$strClass = trim($arrPage['cssClass']);
 					$row = $arrPage;
 
 					$row['isActive'] = true;
@@ -180,7 +176,7 @@ class ModuleCustomnav extends Module
 					// Override the link target
 					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -189,7 +185,7 @@ class ModuleCustomnav extends Module
 				// Regular page
 				else
 				{
-					$strClass = trim((strlen($arrPage['cssClass']) ? $arrPage['cssClass'] : '') . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
+					$strClass = trim($arrPage['cssClass'] . (in_array($arrPage['id'], $objPage->trail) ? ' trail' : ''));
 					$row = $arrPage;
 
 					$row['isActive'] = false;
@@ -205,7 +201,7 @@ class ModuleCustomnav extends Module
 					// Override the link target
 					if ($arrPage['type'] == 'redirect' && $arrPage['target'])
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -223,8 +219,6 @@ class ModuleCustomnav extends Module
 		$this->Template->request = $this->getIndexFreeRequest(true);
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->items = count($items) ? $objTemplate->parse() : '';
+		$this->Template->items = !empty($items) ? $objTemplate->parse() : '';
 	}
 }
-
-?>

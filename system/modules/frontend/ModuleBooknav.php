@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleBooknav
  *
  * Front end module "book navigation".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleBooknav extends Module
+class ModuleBooknav extends \Module
 {
 
 	/**
@@ -61,7 +66,7 @@ class ModuleBooknav extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### BOOK NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -84,16 +89,15 @@ class ModuleBooknav extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		// Get root page
-		$objRoot = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->rootPage);
+		// Get the root page
+		$this->objModel->getRelated('rootPage');
 
-		if ($objRoot->numRows < 1)
+		if ($this->objModel->rootPage['id'] === null)
 		{
 			return;
 		}
@@ -108,13 +112,13 @@ class ModuleBooknav extends Module
 		}
 
 		// Get all book pages
-		$this->arrPages[$objRoot->id] = $objRoot->row();
-		$this->getBookPages($this->rootPage, $groups, time());
+		$this->arrPages[$this->objModel->rootPage['id']] = $this->objModel->rootPage;
+		$this->getBookPages($this->objModel->rootPage, $groups, time());
 
 		global $objPage;
 
 		// Upper page
-		if ($objPage->id != $this->rootPage)
+		if ($objPage->id != $this->objModel->rootPage['id'])
 		{
 			$intKey = $objPage->pid;
 
@@ -160,13 +164,13 @@ class ModuleBooknav extends Module
 	 * @param integer
 	 * @param array
 	 * @param integer
+	 * @return void
 	 */
 	protected function getBookPages($intParentId, $groups, $time)
 	{
-		$objPages = $this->Database->prepare("SELECT id, pid, sorting, alias, title, pageTitle, protected, groups, (SELECT COUNT(*) FROM tl_page p2 WHERE p1.id=p2.pid) AS hasChilds FROM tl_page p1 WHERE p1.pid=? AND p1.id!=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!$this->showHidden ? " AND hide!=1" : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN && !$this->showProtected) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-								   ->execute($intParentId, $intParentId);
+		$objPages = \PageCollection::findPublishedSubpagesWithoutGuestsByPid($intParentId, $this->showHidden);
 
-		if ($objPages->numRows > 0)
+		if ($objPages !== null)
 		{
 			while ($objPages->next())
 			{
@@ -177,7 +181,7 @@ class ModuleBooknav extends Module
 				{
 					$this->arrPages[$objPages->id] = $objPages->row();
 
-					if ($objPages->hasChilds > 0)
+					if ($objPages->subpages > 0)
 					{
 						$this->getBookPages($objPages->id, $groups, $time);
 					}
@@ -186,5 +190,3 @@ class ModuleBooknav extends Module
 		}
 	}
 }
-
-?>

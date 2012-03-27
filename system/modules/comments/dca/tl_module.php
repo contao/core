@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  * @license    LGPL
- * @filesource
  */
 
 
@@ -52,7 +51,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_order'] = array
 	'inputType'               => 'select',
 	'options'                 => array('ascending', 'descending'),
 	'reference'               => &$GLOBALS['TL_LANG']['MSC'],
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['com_moderate'] = array
@@ -60,7 +60,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_moderate'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_moderate'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['com_bbcode'] = array
@@ -68,7 +69,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_bbcode'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_bbcode'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['com_requireLogin'] = array
@@ -76,7 +78,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_requireLogin'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_requireLogin'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['com_disableCaptcha'] = array
@@ -84,7 +87,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_disableCaptcha'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['com_disableCaptcha'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "char(1) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['com_template'] = array
@@ -94,7 +98,8 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_template'] = array
 	'exclude'                 => true,
 	'inputType'               => 'select',
 	'options_callback'        => array('tl_module_comments', 'getCommentTemplates'),
-	'eval'                    => array('tl_class'=>'w50')
+	'eval'                    => array('tl_class'=>'w50'),
+	'sql'                     => "varchar(32) NOT NULL default ''"
 );
 
 
@@ -102,7 +107,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['com_template'] = array
  * Class tl_module
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -111,10 +116,10 @@ class tl_module_comments extends Backend
 
 	/**
 	 * Return all navigation templates as array
-	 * @param object
+	 * @param \DataContainer
 	 * @return array
 	 */
-	public function getCommentTemplates(DataContainer $dc)
+	public function getCommentTemplates(\DataContainer $dc)
 	{
 		$intPid = $dc->activeRecord->pid;
 
@@ -126,5 +131,3 @@ class tl_module_comments extends Backend
 		return $this->getTemplateGroup('com_', $intPid);
 	}
 }
-
-?>

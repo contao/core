@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class BackendTemplate
  *
  * Provide methods to handle back end templates.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class BackendTemplate extends Template
+class BackendTemplate extends \Template
 {
 
 	/**
@@ -64,81 +69,80 @@ class BackendTemplate extends Template
 
 	/**
 	 * Parse the template file, add the TinyMCE configuration and print it to the screen
+	 * @return void
+	 * @throws \Exception
 	 */
 	public function output()
 	{
 		// Rich text editor configuration
-		if (count($GLOBALS['TL_RTE']))
+		if (is_array($GLOBALS['TL_RTE']) && !empty($GLOBALS['TL_RTE']))
 		{
 			$this->base = $this->Environment->base;
 			$this->uploadPath = $GLOBALS['TL_CONFIG']['uploadPath'];
 
+			// Fallback to English if the user language is not supported
+			$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
+
 			foreach ($GLOBALS['TL_RTE'] as $file=>$fields)
 			{
-				if (strncmp($file, 'tiny', 4) === 0)
+				$arrRteFields = array();
+
+				foreach ($fields as $field)
 				{
-					// Concat the field IDs for TinyMCE
-					$arrRteFields = array();
-
-					foreach ($fields as $field)
-					{
-						$arrRteFields[] = $field['id'];
-					}
-
-					$this->rteFields = implode(',', $arrRteFields);
-
-					// Fallback to English if the user language is not supported
-					$this->language = file_exists(TL_ROOT . '/plugins/tinyMCE/langs/' . $GLOBALS['TL_LANGUAGE'] . '.js') ? $GLOBALS['TL_LANGUAGE'] : 'en';
-				}
-				else
-				{
-					// Otherwise simply pass the fields array
-					$this->ceFields = $fields;
+					$arrRteFields[] = $field['id'];
 				}
 
+				$this->rteFields = implode(',', $arrRteFields); // TinyMCE
+				$this->ceFields = $fields; // Other RTEs
 				$strFile = sprintf('%s/system/config/%s.php', TL_ROOT, $file);
 
 				if (!file_exists($strFile))
 				{
-					throw new Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
+					throw new \Exception(sprintf('Cannot find editor configuration file "%s.php"', $file));
 				}
 
 				ob_start();
-				include($strFile);
+				include $strFile;
 				$this->rteConfig .= ob_get_contents();
 				ob_end_clean();
 			}
 		}
 
 		// Style sheets
-		if (is_array($GLOBALS['TL_CSS']) && count($GLOBALS['TL_CSS']))
+		if (is_array($GLOBALS['TL_CSS']) && !empty($GLOBALS['TL_CSS']))
 		{
 			$strStyleSheets = '';
 
 			foreach (array_unique($GLOBALS['TL_CSS']) as $stylesheet)
 			{
 				list($stylesheet, $media) = explode('|', $stylesheet);
-				$strStyleSheets .= '<link rel="stylesheet" href="' . $stylesheet . '" media="' . (($media != '') ? $media : 'all') . '">' . "\n";
+				$strStyleSheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo($stylesheet) . '" media="' . ($media ?: 'all') . '">' . "\n";
 			}
 
 			$this->stylesheets = $strStyleSheets;
 		}
 
+		// Add the debug style sheet
+		if ($GLOBALS['TL_CONFIG']['debugMode'])
+		{
+			$this->stylesheets .= '<link rel="stylesheet" href="' . $this->addStaticUrlTo('assets/contao/debug.css') . '" media="all">' . "\n";
+		}
+
 		// JavaScripts
-		if (is_array($GLOBALS['TL_JAVASCRIPT']) && count($GLOBALS['TL_JAVASCRIPT']))
+		if (is_array($GLOBALS['TL_JAVASCRIPT']) && !empty($GLOBALS['TL_JAVASCRIPT']))
 		{
 			$strJavaScripts = '';
 
 			foreach (array_unique($GLOBALS['TL_JAVASCRIPT']) as $javascript)
 			{
-				$strJavaScripts .= '<script src="' . $javascript . '"></script>' . "\n";
+				$strJavaScripts .= '<script src="' . $this->addStaticUrlTo($javascript) . '"></script>' . "\n";
 			}
 
 			$this->javascripts = $strJavaScripts;
 		}
 
 		// MooTools scripts (added at the page bottom)
-		if (is_array($GLOBALS['TL_MOOTOOLS']) && count($GLOBALS['TL_MOOTOOLS']))
+		if (is_array($GLOBALS['TL_MOOTOOLS']) && !empty($GLOBALS['TL_MOOTOOLS']))
 		{
 			$strMootools = '';
 
@@ -169,6 +173,54 @@ class BackendTemplate extends Template
 		$this->strBuffer = $strBuffer;
 		parent::output();
 	}
-}
 
-?>
+
+	/**
+	 * Return the locale string
+	 * @return string
+	 */
+	protected function getLocaleString()
+	{
+		return 
+			'var Contao={'
+				. 'theme:"' . $this->getTheme() . '",'
+				. 'lang:{'
+					. 'close:"' . $GLOBALS['TL_LANG']['MSC']['close'] . '",'
+					. 'collapse:"' . $GLOBALS['TL_LANG']['MSC']['collapseNode'] . '",'
+					. 'expand:"' . $GLOBALS['TL_LANG']['MSC']['expandNode'] . '",'
+					. 'loading:"' . $GLOBALS['TL_LANG']['MSC']['loadingData'] . '",'
+					. 'apply:"' . $GLOBALS['TL_LANG']['MSC']['apply'] . '"'
+				. '},'
+				. 'script_url:"' . TL_SCRIPT_URL . '",'
+				. 'request_token:"' . REQUEST_TOKEN . '"'
+			. '};';
+	}
+
+
+	/**
+	 * Return the datepicker string
+	 * 
+	 * Fix the MooTools more parsers which incorrectly parse ISO-8601 and do
+	 * not handle German date formats at all.
+	 * @return string
+	 */
+	protected function getDateString()
+	{
+		return 'window.addEvent("domready",function(){'
+			. 'Locale.define("en-US","Date",{'
+				. 'months:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS']) . '"],'
+				. 'days:["' . implode('","', $GLOBALS['TL_LANG']['DAYS']) . '"],'
+				. 'months_abbr:["' . implode('","', $GLOBALS['TL_LANG']['MONTHS_SHORT']) . '"],'
+				. 'days_abbr:["' . implode('","', $GLOBALS['TL_LANG']['DAYS_SHORT']) . '"]'
+			. '});'
+			. 'Locale.define("en-US","DatePicker",{'
+				. 'select_a_time:"' . $GLOBALS['TL_LANG']['DP']['select_a_time'] . '",'
+				. 'use_mouse_wheel:"' . $GLOBALS['TL_LANG']['DP']['use_mouse_wheel'] . '",'
+				. 'time_confirm_button:"' . $GLOBALS['TL_LANG']['DP']['time_confirm_button'] . '",'
+				. 'apply_range:"' . $GLOBALS['TL_LANG']['DP']['apply_range'] . '",'
+				. 'cancel:"' . $GLOBALS['TL_LANG']['DP']['cancel'] . '",'
+				. 'week:"' . $GLOBALS['TL_LANG']['DP']['week'] . '"'
+			. '});'
+		. '});';
+	}
+}

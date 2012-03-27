@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleBreadcrumb
  *
  * Front end module "breadcrumb".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleBreadcrumb extends Module
+class ModuleBreadcrumb extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleBreadcrumb extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### BREADCRUMB NAVIGATION ###';
 			$objTemplate->title = $this->headline;
@@ -71,69 +76,50 @@ class ModuleBreadcrumb extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
 		global $objPage;
 
-		$pages = array();
-		$items = array();
-		$pageId = $objPage->id;
 		$type = null;
+		$pageId = $objPage->id;
+		$pages = array($objPage->row());
+		$items = array();
 
 		// Get all pages up to the root page
-		do
-		{
-			$objPages = $this->Database->prepare("SELECT * FROM tl_page WHERE id=?")
-									   ->limit(1)
-									   ->execute($pageId);
+		$objPages = \PageCollection::findParentsById($objPage->pid);
 
-			$type = $objPages->type;
-			$pageId = $objPages->pid;
-			$pages[] = $objPages->row();
+		if ($objPages !== null)
+		{
+			while ($objPages->next() && $pageId > 0 && $type != 'root')
+			{
+				$type = $objPages->type;
+				$pageId = $objPages->pid;
+				$pages[] = $objPages->row();
+			}
 		}
-		while ($pageId > 0 && $type != 'root' && $objPages->numRows);
 
 		// Get the first active regular page and display it instead of the root page
 		if ($type == 'root')
 		{
-			if ($this->includeRoot)
-			{
-				$time = time();
+			$objFirstPage = \PageModel::findFirstPublishedByPid($objPages->id);
 
-				// Get the first page
-				$objFirstPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type!='root' AND type!='error_403' AND type!='error_404'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-											   ->limit(1)
-											   ->execute($objPages->id);
-
-				$items[] = array
-				(
-					'isRoot' => true,
-					'isActive' => false,
-					'href' => (($objFirstPage->numRows) ? $this->generateFrontendUrl($objFirstPage->fetchAssoc()) : $this->Environment->base),
-					'title' => (strlen($objPages->pageTitle) ? specialchars($objPages->pageTitle, true) : specialchars($objPages->title, true)),
-					'link' => $objPages->title
-				);
-			}
+			$items[] = array
+			(
+				'isRoot'   => true,
+				'isActive' => false,
+				'href'     => (($objFirstPage !== null) ? $this->generateFrontendUrl($objFirstPage->row()) : $this->Environment->base),
+				'title'    => specialchars($objPages->pageTitle ?: $objPages->title, true),
+				'link'     => $objPages->title,
+				'data'     => $objFirstPage->row()
+			);
 
 			array_pop($pages);
 		}
 
-		// Link to website root
-		elseif ($this->includeRoot)
-		{
-			$items[] = array
-			(
-				'isRoot' => true,
-				'isActive' => false,
-				'href' => $this->Environment->base,
-				'title' => specialchars($GLOBALS['TL_CONFIG']['websiteTitle'], true),
-				'link' => $GLOBALS['TL_CONFIG']['websiteTitle']
-			);
-		}
-
-		// Build breadcrumb menu
+		// Build the breadcrumb menu
 		for ($i=(count($pages)-1); $i>0; $i--)
 		{
 			if (($pages[$i]['hide'] && !$this->showHidden) || (!$pages[$i]['published'] && !BE_USER_LOGGED_IN))
@@ -155,13 +141,11 @@ class ModuleBreadcrumb extends Module
 					break;
 
 				case 'forward':
-					$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											  ->limit(1)
-											  ->execute($pages[$i]['jumpTo']);
+					$objNext = \PageModel::findPublishedById($pages[$i]['jumpTo']);
 
-					if ($objNext->numRows)
+					if ($objNext !== null)
 					{
-						$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+						$href = $this->generateFrontendUrl($objNext->row());
 						break;
 					}
 					// DO NOT ADD A break; STATEMENT
@@ -173,46 +157,47 @@ class ModuleBreadcrumb extends Module
 
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => false,
-				'href' => $href,
-				'title' => (strlen($pages[$i]['pageTitle']) ? specialchars($pages[$i]['pageTitle'], true) : specialchars($pages[$i]['title'], true)),
-				'link' => $pages[$i]['title']
+				'href'     => $href,
+				'title'    => specialchars($pages[$i]['pageTitle'] ?: $pages[$i]['title'], true),
+				'link'     => $pages[$i]['title'],
+				'data'     => $pages[$i]
 			);
 		}
 
 		// Active article
-		if (strlen($this->Input->get('articles')))
+		if (isset($_GET['articles']))
 		{
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => false,
-				'href' => $this->generateFrontendUrl($pages[0]),
-				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle'], true) : specialchars($pages[0]['title'], true)),
-				'link' => $pages[0]['title']
+				'href'     => $this->generateFrontendUrl($pages[0]),
+				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title'], true),
+				'link'     => $pages[0]['title'],
+				'data'     => $pages[0]
 			);
 
 			list($strSection, $strArticle) = explode(':', $this->Input->get('articles'));
 
-			if (is_null($strArticle))
+			if ($strArticle === null)
 			{
 				$strArticle = $strSection;
 			}
 
-			// Get article title
-			$objArticle = $this->Database->prepare("SELECT title FROM tl_article WHERE id=? OR alias=?")
-										 ->limit(1)
-										 ->execute((is_numeric($strArticle) ? $strArticle : 0), $strArticle);
+			// Get the article title
+			$objArticle = \ArticleModel::findByIdOrAlias($strArticle);
 
-			if ($objArticle->numRows)
+			if ($objArticle !== null)
 			{
 				$items[] = array
 				(
 					'isRoot' => false,
 					'isActive' => true,
 					'title' => specialchars($objArticle->title, true),
-					'link' => $objArticle->title
+					'link' => $objArticle->title,
+					'data' => $objArticle->row()
 				);
 			}
 		}
@@ -222,10 +207,11 @@ class ModuleBreadcrumb extends Module
 		{
 			$items[] = array
 			(
-				'isRoot' => false,
+				'isRoot'   => false,
 				'isActive' => true,
-				'title' => (strlen($pages[0]['pageTitle']) ? specialchars($pages[0]['pageTitle']) : specialchars($pages[0]['title'])),
-				'link' => $pages[0]['title']
+				'title'    => specialchars($pages[0]['pageTitle'] ?: $pages[0]['title']),
+				'link'     => $pages[0]['title'],
+				'data'     => $pages[0]
 			);
 		}
 
@@ -235,12 +221,10 @@ class ModuleBreadcrumb extends Module
 			foreach ($GLOBALS['TL_HOOKS']['generateBreadcrumb'] as $callback)
 			{
 				$this->import($callback[0]);
-				$items = $this->$callback[0]->$callback[1]($items);
+				$items = $this->$callback[0]->$callback[1]($items, $this);
 			}
 		}
 
 		$this->Template->items = $items;
 	}
 }
-
-?>

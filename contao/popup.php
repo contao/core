@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class Popup
  *
- * Preview images in a back end pop up window.
- * @copyright  Leo Feyer 2005-2011
+ * Pop-up file preview (file manager).
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -57,10 +56,10 @@ class Popup extends Backend
 	/**
 	 * Initialize the controller
 	 *
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -73,14 +72,15 @@ class Popup extends Backend
 
 		$strFile = $this->Input->get('src', true);
 		$strFile = base64_decode($strFile);
-		$strFile = preg_replace('@^/+@', '', str_replace('%20', ' ' , $strFile));
+		$strFile = preg_replace('@^/+@', '', rawurldecode($strFile));
 
 		$this->strFile = $strFile; 
 	}
 
 
 	/**
-	 * Run controller and parse the template
+	 * Run the controller and parse the template
+	 * @return void
 	 */
 	public function run()
 	{
@@ -90,7 +90,7 @@ class Popup extends Backend
 			die('Invalid file name');
 		}
 
-		// Limit preview to the tl_files directory
+		// Limit preview to the files directory
 		if (!preg_match('@^' . preg_quote($GLOBALS['TL_CONFIG']['uploadPath'], '@') . '@i', $this->strFile))
 		{
 			die('Invalid path');
@@ -100,6 +100,12 @@ class Popup extends Backend
 		if (!file_exists(TL_ROOT . '/' . $this->strFile))
 		{
 			die('File not found');
+		}
+
+		// Check whether the file is mounted (thanks to Marko Cupic)
+		if (!$this->User->hasAccess($this->strFile, 'filemounts'))
+		{
+			die('Permission denied');
 		}
 
 		// Open download dialogue
@@ -118,6 +124,7 @@ class Popup extends Backend
 			$resFile = fopen(TL_ROOT . '/' . $this->strFile, 'rb');
 			fpassthru($resFile);
 			fclose($resFile);
+			ob_flush(); // see #3595
 
 			$this->redirect(str_replace('&download=1', '', $this->Environment->request));
 		}
@@ -138,10 +145,9 @@ class Popup extends Backend
 		if ($objFile->isGdImage)
 		{
 			$this->Template->isImage = true;
-
 			$this->Template->width = $objFile->width;
 			$this->Template->height = $objFile->height;
-			$this->Template->src = $this->strFile;
+			$this->Template->src = $this->urlEncode($this->strFile);
 		}
 
 		$this->output();
@@ -167,7 +173,7 @@ class Popup extends Backend
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_atime = $GLOBALS['TL_LANG']['MSC']['fileAccessed'];
 		$this->Template->label_path = $GLOBALS['TL_LANG']['MSC']['filePath'];
-		$this->Template->download = $GLOBALS['TL_LANG']['MSC']['fileDownload'];
+		$this->Template->download = specialchars($GLOBALS['TL_LANG']['MSC']['fileDownload']);
 
 		$this->Template->output();
 	}
@@ -175,9 +181,7 @@ class Popup extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objPopup = new Popup();
 $objPopup->run();
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormCheckBox
  *
  * Form field "check box".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormCheckBox extends Widget
+class FormCheckBox extends \Widget
 {
 
 	/**
@@ -53,6 +58,12 @@ class FormCheckBox extends Widget
 	protected $strTemplate = 'form_checkbox';
 
 	/**
+	 * Error message
+	 * @var string
+	 */
+	protected $strError = '';
+
+	/**
 	 * Options
 	 * @var array
 	 */
@@ -63,6 +74,7 @@ class FormCheckBox extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -72,11 +84,8 @@ class FormCheckBox extends Widget
 				$this->arrOptions = deserialize($varValue);
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
 			case 'rgxp':
+				// Ignore
 				break;
 
 			default:
@@ -88,8 +97,8 @@ class FormCheckBox extends Widget
 
 	/**
 	 * Return a parameter
-	 * @return string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -107,7 +116,8 @@ class FormCheckBox extends Widget
 
 
 	/**
-	 * Check options if the field is mandatory
+	 * Check the options if the field is mandatory
+	 * @return void
 	 */
 	public function validate()
 	{
@@ -154,11 +164,29 @@ class FormCheckBox extends Widget
 
 
 	/**
+	 * Override the parent method and inject the error message inside the fieldset (see #3392)
+	 * @param boolean
+	 * @return string
+	 */
+	public function generateWithError($blnSwitchOrder=false)
+	{
+		$this->strError = $this->getErrorAsHTML();
+		return $this->generate();
+	}
+
+
+	/**
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
 	public function generate()
 	{
+		// The "required" attribute only makes sense for single checkboxes
+		if (count($this->arrOptions) == 1 && $this->mandatory)
+		{
+				$this->arrAttributes['required'] = 'required';
+		}
+
 		$strOptions = '';
 
 		foreach ($this->arrOptions as $i=>$arrOption)
@@ -177,26 +205,26 @@ class FormCheckBox extends Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend><input type="hidden" name="%s" value=""%s%s</fieldset>',
+        	return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
 	        				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
 							($this->required ? '<span class="mandatory">*</span>' : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();
 		}
 		else
 		{
-	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s"><input type="hidden" name="%s" value=""%s%s</fieldset>',
+	        return sprintf('<fieldset id="ctrl_%s" class="checkbox_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
     	    				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();
 		}
 	}
 }
-
-?>

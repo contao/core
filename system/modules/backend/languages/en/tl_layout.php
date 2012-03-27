@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -48,17 +47,22 @@ $GLOBALS['TL_LANG']['tl_layout']['widthRight']    = array('Right column width', 
 $GLOBALS['TL_LANG']['tl_layout']['sections']      = array('Custom layout sections', 'Custom layout sections can be defined in the back end settings.');
 $GLOBALS['TL_LANG']['tl_layout']['sPosition']     = array('Custom sections position', 'Please select the position of the custom layout sections.');
 $GLOBALS['TL_LANG']['tl_layout']['stylesheet']    = array('Style sheets', 'Please select the style sheets you want to add to the layout.');
-$GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('Skip tl_files/tinymce.css', 'Do not include the TinyMCE style sheet (tl_files/tinymce.css).');
+$GLOBALS['TL_LANG']['tl_layout']['skipTinymce']   = array('Skip files/tinymce.css', 'Do not include the TinyMCE style sheet <em>files/tinymce.css</em>.');
+$GLOBALS['TL_LANG']['tl_layout']['external']      = array('External style sheets', 'Here you can add external style sheets from the files directory (e.g. <em>files/css/style.css|screen|static</em>).');
+$GLOBALS['TL_LANG']['tl_layout']['webfonts']      = array('Google web fonts', 'Here you can add Google web fonts to your website. Specify the font families without the base URL (e.g. <em>Ubuntu|Ubuntu+Mono</em>).');
 $GLOBALS['TL_LANG']['tl_layout']['newsfeeds']     = array('News feeds', 'Please select the news feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['calendarfeeds'] = array('Calendar feeds', 'Please select the calendar feeds you want to add to the layout.');
 $GLOBALS['TL_LANG']['tl_layout']['modules']       = array('Included modules', 'If JavaScript is disabled, make sure to save your changes before modifying the order.');
 $GLOBALS['TL_LANG']['tl_layout']['template']      = array('Page template', 'Here you can select the page template.');
+$GLOBALS['TL_LANG']['tl_layout']['skipFramework'] = array('Disable the CSS framework', 'Do not load the Contao CSS framework. Note that the page layout generator will not work in this case.');
 $GLOBALS['TL_LANG']['tl_layout']['doctype']       = array('Output format', 'Here you can set the output format.');
-$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'You can either use the local MooTools script or load it from a content delivery network.');
 $GLOBALS['TL_LANG']['tl_layout']['cssClass']      = array('Body class', 'Here you can add custom classes to the body tag.');
 $GLOBALS['TL_LANG']['tl_layout']['onload']        = array('Body onload', 'Here you can add a body onload attribute.');
 $GLOBALS['TL_LANG']['tl_layout']['head']          = array('Additional &lt;head&gt; tags', 'Here you can add individual tags to the head section of the page.');
+$GLOBALS['TL_LANG']['tl_layout']['mooSource']     = array('MooTools source', 'Here you can select from where to load the MooTools scripts.');
+$GLOBALS['TL_LANG']['tl_layout']['jSource']       = array('jQuery source', 'Here you can select from where to load the jQuery script.');
 $GLOBALS['TL_LANG']['tl_layout']['mootools']      = array('MooTools templates', 'Here you can select one or more MooTools templates.');
+$GLOBALS['TL_LANG']['tl_layout']['jquery']        = array('jQuery templates', 'Here you can select one or more jQuery templates.');
 $GLOBALS['TL_LANG']['tl_layout']['script']        = array('Custom JavaScript code', 'The JavaScript code which will be inserted at the bottom of the page.');
 $GLOBALS['TL_LANG']['tl_layout']['static']        = array('Static layout', 'Create a static layout with a fixed width and alignment.');
 $GLOBALS['TL_LANG']['tl_layout']['width']         = array('Overall width', 'The overall width will be applied to the wrapper element.');
@@ -78,8 +82,12 @@ $GLOBALS['TL_LANG']['tl_layout']['modules_legend']  = 'Front end modules';
 $GLOBALS['TL_LANG']['tl_layout']['expert_legend']   = 'Expert settings';
 $GLOBALS['TL_LANG']['tl_layout']['script_legend']   = 'Script settings';
 $GLOBALS['TL_LANG']['tl_layout']['static_legend']   = 'Static layout';
-$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'Use the local file';
-$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'Load from googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_local']       = 'MooTools - local file';
+$GLOBALS['TL_LANG']['tl_layout']['moo_googleapis']  = 'MooTools - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['moo_fallback']    = 'MooTools - googleapis.com with local fallback';
+$GLOBALS['TL_LANG']['tl_layout']['j_local']         = 'jQuery - local file';
+$GLOBALS['TL_LANG']['tl_layout']['j_googleapis']    = 'jQuery - googleapis.com';
+$GLOBALS['TL_LANG']['tl_layout']['j_fallback']      = 'jQuery - googleapis.com with local fallback';
 
 
 /**
@@ -91,6 +99,8 @@ $GLOBALS['TL_LANG']['tl_layout']['xhtml_trans']  = 'XHTML Transitional';
 $GLOBALS['TL_LANG']['tl_layout']['before']       = 'After the page header';
 $GLOBALS['TL_LANG']['tl_layout']['main']         = 'Inside the main column';
 $GLOBALS['TL_LANG']['tl_layout']['after']        = 'Before the page footer';
+$GLOBALS['TL_LANG']['tl_layout']['edit_styles']  = 'Edit the style sheets';
+$GLOBALS['TL_LANG']['tl_layout']['edit_module']  = 'Edit the module';
 
 
 /**
@@ -103,5 +113,3 @@ $GLOBALS['TL_LANG']['tl_layout']['cut']        = array('Move layout', 'Move layo
 $GLOBALS['TL_LANG']['tl_layout']['copy']       = array('Duplicate layout', 'Duplicate layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['delete']     = array('Delete layout', 'Delete layout ID %s');
 $GLOBALS['TL_LANG']['tl_layout']['editheader'] = array('Edit theme', 'Edit the theme settings');
-
-?>

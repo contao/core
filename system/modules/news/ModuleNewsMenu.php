@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsMenu
  *
  * Front end module "news archive".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsMenu extends ModuleNews
+class ModuleNewsMenu extends \ModuleNews
 {
 
 	/**
@@ -61,7 +66,7 @@ class ModuleNewsMenu extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS ARCHIVE MENU ###';
 			$objTemplate->title = $this->headline;
@@ -74,7 +79,7 @@ class ModuleNewsMenu extends ModuleNews
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
+		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
 			return '';
 		}
@@ -84,7 +89,8 @@ class ModuleNewsMenu extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -108,40 +114,32 @@ class ModuleNewsMenu extends ModuleNews
 
 	/**
 	 * Generate the yearly menu
+	 * @return void
 	 */
 	protected function compileYearlyMenu()
 	{
-		$time = time();
 		$arrData = array();
+		$this->Template = new \FrontendTemplate('mod_newsmenu_year');
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
-		$this->Template = new FrontendTemplate('mod_newsmenu_year');
-
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active items
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Y', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		$strUrl = $this->generateFrontendUrl($objPage->row());
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 		$count = 0;
 		$limit = count($arrData);
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$intCount)
 		{
 			$intDate = $intYear;
@@ -157,31 +155,28 @@ class ModuleNewsMenu extends ModuleNews
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '');
 	}
 
 
 	/**
 	 * Generate the monthly menu
+	 * @return void
 	 */
 	protected function compileMonthlyMenu()
 	{
-		$time = time();
 		$arrData = array();
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active months
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Y', $objArchives->date)][date('m', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		foreach (array_keys($arrData) as $key)
 		{
 			($this->news_order == 'ascending') ? ksort($arrData[$key]) : krsort($arrData[$key]);
@@ -190,12 +185,10 @@ class ModuleNewsMenu extends ModuleNews
 		($this->news_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)
 		{
 			$count = 0;
@@ -210,7 +203,7 @@ class ModuleNewsMenu extends ModuleNews
 
 				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
+				$arrItems[$intYear][$intMonth]['href'] = $strUrl . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);
@@ -219,42 +212,35 @@ class ModuleNewsMenu extends ModuleNews
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
 	}
 
 
 	/**
 	 * Generate the dayil menu
+	 * @return void
 	 */
 	protected function compileDailyMenu()
 	{
-		$time = time();
 		$arrData = array();
+		$this->Template = new \FrontendTemplate('mod_newsmenu_day');
+		$objArchives = \NewsCollection::findPublishedByPids($this->news_archives);
 
-		$this->Template = new FrontendTemplate('mod_newsmenu_day');
-
-		foreach ($this->news_archives as $id)
+		if ($objArchives !== null)
 		{
-			// Get all active months
-			$objArchives = $this->Database->prepare("SELECT date FROM tl_news WHERE pid=?" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC")
-										  ->execute($id);
-
 			while ($objArchives->next())
 			{
 				++$arrData[date('Ymd', $objArchives->date)];
 			}
 		}
 
-		// Sort data
+		// Sort the data
 		krsort($arrData);
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 
-		$strUrl = $this->generateFrontendUrl($objPage->row());
-		$this->Date = $this->Input->get('day') ? new Date($this->Input->get('day'), 'Ymd') : new Date();
+		$this->Date = $this->Input->get('day') ? new \Date($this->Input->get('day'), 'Ymd') : new \Date();
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
@@ -294,7 +280,7 @@ class ModuleNewsMenu extends ModuleNews
 		$this->Template->days = $this->compileDays();
 		$this->Template->weeks = $this->compileWeeks($arrData, $strUrl);
 
-		$this->Template->showQuantity = strlen($this->news_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->news_showQuantity != '') ? true : false;
 	}
 
 
@@ -383,5 +369,3 @@ class ModuleNewsMenu extends ModuleNews
 		return $arrDays;
 	}
 }
-
-?>

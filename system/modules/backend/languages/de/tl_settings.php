@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -38,7 +37,7 @@ $GLOBALS['TL_LANG']['tl_settings']['dateFormat']          = array('Datumsformat'
 $GLOBALS['TL_LANG']['tl_settings']['timeFormat']          = array('Zeitformat', 'Der Zeitformat-String wird mit der PHP-Funktion date() geparst.');
 $GLOBALS['TL_LANG']['tl_settings']['datimFormat']         = array('Datums- und Zeitformat', 'Der Datums- und Zeitformat-String wird mit der PHP-Funktion date() geparst.');
 $GLOBALS['TL_LANG']['tl_settings']['timeZone']            = array('Zeitzone', 'Bitte wählen Sie die Zeitzone des Servers aus.');
-$GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfad zum Contao-Verzeichnis', 'Der relative Pfad zum Contao-Verzeichnis wird normalerweise automatisch im Install-Tool gesetzt.');
+$GLOBALS['TL_LANG']['tl_settings']['websitePath']         = array('Relativer Pfad zum Contao-Verzeichnis', 'Der relative Pfad zum Contao-Verzeichnis wird normalerweise automatisch im Installtool gesetzt.');
 $GLOBALS['TL_LANG']['tl_settings']['characterSet']        = array('Zeichensatz', 'Damit Sonderzeichen richtig dargestellt werden, wird die Verwendung von UTF-8 empfohlen.');
 $GLOBALS['TL_LANG']['tl_settings']['customSections']      = array('Eigene Layoutbereiche', 'Hier können Sie eine kommagetrennte Liste eigener Layoutbereiche eingeben.');
 $GLOBALS['TL_LANG']['tl_settings']['disableCron']         = array('Den Command Scheduler deaktivieren', 'Den Periodic Command Scheduler deaktivieren und das cron.php-Skript mittels eines echten Cronjobs (den Sie selbständig einrichten müssen) ausführen.');
@@ -49,14 +48,22 @@ $GLOBALS['TL_LANG']['tl_settings']['maxResultsPerPage']   = array('Maximum Daten
 $GLOBALS['TL_LANG']['tl_settings']['doNotCollapse']       = array('Elemente nicht verkürzen', 'Elemente in der Backend-Vorschau nicht verkürzen.');
 $GLOBALS['TL_LANG']['tl_settings']['rewriteURL']          = array('URLs umschreiben', 'Statische URLs ohne das index.php-Fragment erzeugen. Für diese Funktion muss "mod_rewrite" verfügbar sein sowie die Datei ".htaccess.default" in ".htaccess" umbenannt und gegebenenfalls die RewriteBase angepasst werden.');
 $GLOBALS['TL_LANG']['tl_settings']['cacheMode']           = array('Cache-Modus', 'Hier können Sie den Cache-Modus festlegen.');
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeIp']  = array('IP-Adressen anonymisieren', 'Alle IP-Adressen anonymisieren, die in der Datenbank gespeichert werden, außer die der Tabelle <em>tl_session</em> (die IP-Adresse ist aus Sicherheitsgründen an die Session gebunden).');
+$GLOBALS['TL_LANG']['tl_settings']['privacyAnonymizeGA']  = array('Google Analytics anonymisieren', 'Alle IP-Adressen anonymisieren, die an Google Analytics geschickt werden.');
 $GLOBALS['TL_LANG']['tl_settings']['urlSuffix']           = array('URL-Suffix', 'Das URL-Suffix wird der URL angehängt, um statische Dokumente zu simulieren.');
+$GLOBALS['TL_LANG']['tl_settings']['addLanguageToUrl']    = array('Die Sprache zur URL hinzufügen', 'Die Sprache als ersten Parameter zur URL hinzufügen (z.B. <em>http://domain.tld/de/</em>).');
+$GLOBALS['TL_LANG']['tl_settings']['doNotRedirectEmpty']  = array('Leere URLs nicht umleiten', 'Bei einer leeren URL die Webseite anzeigen anstatt auf den Startpunkt der Sprache weiterzuleiten (nicht empfohlen).');
+$GLOBALS['TL_LANG']['tl_settings']['useAutoItem']         = array('Auto_item aktivieren', 'Das <em>items/</em>- bzw. <em>events/</em>-Fragment in der URL auslassen und den Beitrag automatisch anhand des <em>auto_item</em>-Parameters erkennen.');
 $GLOBALS['TL_LANG']['tl_settings']['disableAlias']        = array('Keine Seitenaliase verwenden', 'Die numerische ID einer Seite oder eines Artikels anstelle des Alias verwenden.');
+$GLOBALS['TL_LANG']['tl_settings']['folderUrl']           = array('Ordner-URLs verwenden', 'Hier können Sie Ordnerstrukturen in Seitenaliasen aktivieren (z.B. <em>docs/install/download.html</em> anstatt <em>docs-install-download.html</em>).');
 $GLOBALS['TL_LANG']['tl_settings']['allowedTags']         = array('Erlaubte HTML-Tags', 'Hier können Sie eine Liste erlaubter HTML-Tags eingeben, die nicht entfernt werden sollen.');
 $GLOBALS['TL_LANG']['tl_settings']['lockPeriod']          = array('Wartezeit bei gesperrtem Konto', 'Ein Konto wird gesperrt, wenn drei Mal hintereinander ein falsches Passwort eingegeben wird.');
-$GLOBALS['TL_LANG']['tl_settings']['encryptionKey']       = array('Hashwert für Verschlüsselung', 'Verschlüsselte Daten können nur mit demselben Hashwert wieder entschlüsselt werden!');
-$GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldungen anzeigen', 'Fehlermeldungen auf dem Bildschirm ausgegeben (nicht empfohlen für produktive Seiten).');
-$GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgegeben.');
-$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Anfrage-Tokens deaktivieren', 'Das Anfrage-Token beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
+$GLOBALS['TL_LANG']['tl_settings']['debugMode']           = array('Debugmodus aktivieren', 'Bestimmte Laufzeitinformationen wie z.B. Datenbankabfragen auf dem Bildschirm ausgeben.');
+$GLOBALS['TL_LANG']['tl_settings']['bypassCache']         = array('Internen Cache umgehen', 'Die internen Cache-Dateien ignorieren (z.B. nützlich bei der Extension-Entwicklung).');
+$GLOBALS['TL_LANG']['tl_settings']['coreOnlyMode']        = array('Abgesicherter Modus', 'Contao im abgesicherten Modus betreiben und nur Core-Module laden.');
+$GLOBALS['TL_LANG']['tl_settings']['displayErrors']       = array('Fehlermeldungen anzeigen', 'Fehlermeldungen auf dem Bildschirm ausgeben (nicht empfohlen für produktive Seiten).');
+$GLOBALS['TL_LANG']['tl_settings']['logErrors']           = array('Fehlermeldungen protokollieren', 'Fehlermeldungen in die Fehler-Logdatei (<em>system/logs/error.log</em>) schreiben.');
+$GLOBALS['TL_LANG']['tl_settings']['disableRefererCheck'] = array('Anfrage-Token deaktivieren', 'Das Anfrage-Token beim Absenden eines Formulars nicht prüfen. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['disableIpCheck']      = array('IP-Prüfung deaktivieren', 'Benutzersitzungen nicht an IP-Adressen binden. Warnung: potentielles Sicherheitsrisiko!');
 $GLOBALS['TL_LANG']['tl_settings']['allowedDownload']     = array('Erlaubte Download-Dateitypen', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die über Contao heruntergeladen werden dürfen.');
 $GLOBALS['TL_LANG']['tl_settings']['validImageTypes']     = array('Unterstützte Bildformate', 'Hier können Sie eine kommagetrennte Liste von Dateitypen eingeben, die von der Bild-Klasse verarbeitet werden können.');
@@ -100,6 +107,8 @@ $GLOBALS['TL_LANG']['tl_settings']['date_legend']     = 'Datum und Zeit';
 $GLOBALS['TL_LANG']['tl_settings']['global_legend']   = 'Globale Einstellungen';
 $GLOBALS['TL_LANG']['tl_settings']['backend_legend']  = 'Backend-Einstellungen';
 $GLOBALS['TL_LANG']['tl_settings']['frontend_legend'] = 'Frontend-Einstellungen';
+$GLOBALS['TL_LANG']['tl_settings']['safemode_legend'] = 'Abgesicherter Modus';
+$GLOBALS['TL_LANG']['tl_settings']['privacy_legend']  = 'Datenschutz-Einstellungen';
 $GLOBALS['TL_LANG']['tl_settings']['security_legend'] = 'Sicherheitseinstellungen';
 $GLOBALS['TL_LANG']['tl_settings']['files_legend']    = 'Dateien und Bilder';
 $GLOBALS['TL_LANG']['tl_settings']['uploads_legend']  = 'Datei-Uploads';
@@ -121,5 +130,3 @@ $GLOBALS['TL_LANG']['tl_settings']['both']    = 'Den Server- und den Browsercach
 $GLOBALS['TL_LANG']['tl_settings']['server']  = 'Nur den Servercache verwenden';
 $GLOBALS['TL_LANG']['tl_settings']['browser'] = 'Nur den Browsercache verwenden';
 $GLOBALS['TL_LANG']['tl_settings']['none']    = 'Cache deaktivieren';
-
-?>

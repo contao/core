@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Highlighter
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentCode
  *
  * Front end content element "code".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentCode extends ContentElement
+class ContentCode extends \ContentElement
 {
 
 	/**
@@ -70,7 +75,8 @@ class ContentCode extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -113,16 +119,16 @@ class ContentCode extends ContentElement
 			}
 
 			// Add the style sheet
-			$GLOBALS['TL_CSS'][] = TL_PLUGINS_URL . 'plugins/highlighter/shCore.css|screen';
+			$GLOBALS['TL_CSS'][] = 'plugins/highlighter/shCore.css';
 
 			// Add the core scripts
-			$objCombiner = new Combiner();
+			$objCombiner = new \Combiner();
 			$objCombiner->add('plugins/highlighter/XRegExp.js', HIGHLIGHTER);
 			$objCombiner->add('plugins/highlighter/shCore.js', HIGHLIGHTER);
 			$GLOBALS['TL_JAVASCRIPT'][] = $objCombiner->getCombinedFile(TL_PLUGINS_URL);
 
 			// Add the brushes separately in case there are multiple code elements
-			$GLOBALS['TL_JAVASCRIPT'][] = TL_PLUGINS_URL . 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js';
+			$GLOBALS['TL_JAVASCRIPT'][] = 'plugins/highlighter/' . $arrMapper[$this->highlight] . '.js';
 
 			global $objPage;
 
@@ -152,5 +158,3 @@ class ContentCode extends ContentElement
 		}
 	}
 }
-
-?>

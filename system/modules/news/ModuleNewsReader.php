@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsReader
  *
  * Front end module "news reader".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsReader extends ModuleNews
+class ModuleNewsReader extends \ModuleNews
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleNewsReader extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS READER ###';
 			$objTemplate->title = $this->headline;
@@ -66,29 +71,29 @@ class ModuleNewsReader extends ModuleNews
 			return $objTemplate->parse();
 		}
 
-		// Return if no news item has been specified
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('items', $this->Input->get('auto_item'));
+		}
+
+		// Do not index or cache the page if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
-		// Return if there are no archives
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
+		// Do not index or cache the page if there are no archives
+		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -97,7 +102,8 @@ class ModuleNewsReader extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -107,28 +113,23 @@ class ModuleNewsReader extends ModuleNews
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$time = time();
+		// Get the news item
+		$objArticle = \NewsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->news_archives);
 
-		// Get news item
-		$objArticle = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-									 ->limit(1)
-									 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $time, $time);
-
-		if ($objArticle->numRows < 1)
+		if ($objArticle === null)
 		{
-			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->articles = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
 		}
 
-		$arrArticle = $this->parseArticles($objArticle);
-		$this->Template->articles = $arrArticle[0];
+		$arrArticle = $this->parseArticle($objArticle);
+		$this->Template->articles = $arrArticle;
 
 		// Overwrite the page title
 		if ($objArticle->headline != '')
@@ -149,18 +150,7 @@ class ModuleNewsReader extends ModuleNews
 			return;
 		}
 
-		// Check whether comments are allowed
-		$objArchive = $this->Database->prepare("SELECT * FROM tl_news_archive WHERE id=?")
-									 ->limit(1)
-									 ->execute($objArticle->pid);
-
-		if ($objArchive->numRows < 1 || !$objArchive->allowComments)
-		{
-			$this->Template->allowComments = false;
-			return;
-		}
-
-		$this->Template->allowComments = true;
+		$this->Template->allowComments = $objArticle->pid['allowComments'];
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -169,26 +159,19 @@ class ModuleNewsReader extends ModuleNews
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
-		if ($objArchive->notify != 'notify_author')
+		// Notify the system administrator
+		if ($objArticle->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
-		if ($objArchive->notify != 'notify_admin')
+		// Notify the author
+		if ($objArticle->pid['notify'] != 'notify_admin' && $objArticle->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objArticle->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objArticle->author['email'];
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $objArchive->perPage;
 		$objConfig->order = $objArchive->sortOrder;
@@ -201,5 +184,3 @@ class ModuleNewsReader extends ModuleNews
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_news', $objArticle->id, $arrNotifies);
 	}
 }
-
-?>

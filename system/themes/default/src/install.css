@@ -1,6 +1,6 @@
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -18,12 +18,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    System
  * @license    LGPL
- * @filesource
  */
 
 /* Body */
@@ -39,12 +38,18 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-bottom:0;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 #header h1 {
 	margin:0;
-	padding:2px 0 4px 6px;
+	padding:4px 8px 6px;
 	background:#b3b6b3 url("images/headline.gif") repeat-x;
 	color:#fff;
+	-moz-border-radius:3px 3px 0 0;
+	-webkit-border-radius:3px 3px 0 0;
+	border-radius:3px 3px 0 0;
 }
 
 /* Container */
@@ -61,6 +66,10 @@ body {
 	background:#fff;
 	border:1px solid #bbb;
 	border-top:0;
+	-moz-border-radius:0 0 3px 3px;
+	-webkit-border-radius:0 0 3px 3px;
+	border-radius:0 0 3px 3px;
+	box-shadow:0 3px 6px #ccc;
 }
 
 /* Headlines */
@@ -122,6 +131,9 @@ li {
 /* Form tables */
 #sql_table {
 	margin:-3px 0;
+}
+#sql_table pre {
+	white-space:pre-wrap;
 }
 #sql_table pre label {
 	font-family:"Andale Mono",monospace;
@@ -207,7 +219,6 @@ fieldset.tl_tbox,fieldset.tl_box {
 	padding-top:6px;
 	border:1px solid #ddd;
 	border-width:1px 0 0;
-	background:url("images/palBg.jpg") left top repeat-x;
 }
 fieldset.tl_tbox > legend,fieldset.tl_box > legend {
 	margin-top:-1px;

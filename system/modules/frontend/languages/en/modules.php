@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -45,13 +44,15 @@ $GLOBALS['TL_LANG']['FMD']['user']           = 'User';
 $GLOBALS['TL_LANG']['FMD']['login']          = array('Login form', 'Generates a login form.');
 $GLOBALS['TL_LANG']['FMD']['logout']         = array('Automatic logout', 'Automatically logs out a user.');
 $GLOBALS['TL_LANG']['FMD']['personalData']   = array('Personal data', 'Generates a form to edit a user\'s personal data.');
+$GLOBALS['TL_LANG']['FMD']['registration']   = array('Registration', 'Generates a user registration form.');
+$GLOBALS['TL_LANG']['FMD']['lostPassword']   = array('Lost password', 'Generates a form to request a new password.');
+$GLOBALS['TL_LANG']['FMD']['closeAccount']   = array('Close account', 'Generates a form to delete a member account.');
 $GLOBALS['TL_LANG']['FMD']['application']    = 'Applications';
 $GLOBALS['TL_LANG']['FMD']['form']           = array('Form', 'Adds a form to the page.');
 $GLOBALS['TL_LANG']['FMD']['search']         = array('Search engine', 'Adds a search form to the page.');
 $GLOBALS['TL_LANG']['FMD']['articleList']    = array('Article list', 'Generates a list of articles of a column.');
 $GLOBALS['TL_LANG']['FMD']['miscellaneous']  = 'Miscellaneous';
-$GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code.');
 $GLOBALS['TL_LANG']['FMD']['flash']          = array('Flash movie', 'Embeds a Flash movie into the page.');
 $GLOBALS['TL_LANG']['FMD']['randomImage']    = array('Random image', 'Adds a random image to the page.');
-
-?>
+$GLOBALS['TL_LANG']['FMD']['html']           = array('Custom HTML', 'Allows you to add custom HTML code.');
+$GLOBALS['TL_LANG']['FMD']['rss_reader']     = array('RSS reader', 'Adds an RSS feed to the page.');

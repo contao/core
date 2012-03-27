@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleLogin
  *
  * Front end module "login".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLogin extends Module
+class ModuleLogin extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleLogin extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FRONT END LOGIN ###';
 			$objTemplate->title = $this->headline;
@@ -86,44 +91,35 @@ class ModuleLogin extends Module
 			$strRedirect = $this->Environment->request;
 
 			// Redirect to the last page visited
-			if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+			if ($this->redirectBack && $_SESSION['LAST_PAGE_VISITED'] != '')
 			{
 				$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 			}
 			else
 			{
 				// Redirect to the jumpTo page
-				if (strlen($this->jumpTo))
+				if ($this->jumpTo > 0)
 				{
-					$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-												  ->limit(1)
-												  ->execute($this->jumpTo);
+					$this->objModel->getRelated('jumpTo');
 
-					if ($objNextPage->numRows)
+					if ($this->objModel->jumpTo['id'] !== null)
 					{
-						$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+						$strRedirect = $this->generateFrontendUrl($this->objModel->jumpTo);
 					}
 				}
 
 				// Overwrite the jumpTo page with an individual group setting
-				$objGroup = $this->Database->prepare("SELECT groups FROM tl_member WHERE username=?")
-										   ->limit(1)
-										   ->execute($this->Input->post('username'));
+				$objMember = \MemberModel::findByUsername($this->Input->post('username'));
 
-				if ($objGroup->numRows)
+				if ($objMember !== null)
 				{
-					$arrGroups = deserialize($objGroup->groups);
+					$arrGroups = deserialize($objMember->groups);
 
-					if (is_array($arrGroups) && count($arrGroups) > 0)
+					if (is_array($arrGroups) && !empty($arrGroups))
 					{
-						$time = time();
+						$objGroupPage = \MemberGroupModel::findFirstActiveWithJumpToByIds($arrGroups);
 
-						// Get the first active jumpTo page
-						$objGroupPage = $this->Database->prepare("SELECT p.id, p.alias FROM tl_member_group g LEFT JOIN tl_page p ON g.jumpTo=p.id WHERE g.id IN(" . implode(',', array_map('intval', $arrGroups)) . ") AND g.jumpTo>0 AND g.redirect=1 AND g.disable!=1 AND (g.start='' OR g.start<$time) AND (g.stop='' OR g.stop>$time) AND p.published=1 AND (p.start='' OR p.start<$time) AND (p.stop='' OR p.stop>$time) ORDER BY " . $this->Database->findInSet('g.id', $arrGroups))
-													   ->limit(1)
-													   ->execute();
-
-						if ($objGroupPage->numRows)
+						if ($objGroupPage === null)
 						{
 							$strRedirect = $this->generateFrontendUrl($objGroupPage->row());
 						}
@@ -181,7 +177,8 @@ class ModuleLogin extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -191,7 +188,7 @@ class ModuleLogin extends Module
 			$this->import('FrontendUser', 'User');
 			$this->strTemplate = ($this->cols > 1) ? 'mod_logout_2cl' : 'mod_logout_1cl';
 
-			$this->Template = new FrontendTemplate($this->strTemplate);
+			$this->Template = new \FrontendTemplate($this->strTemplate);
 			$this->Template->setData($this->arrData);
 
 			$this->Template->slabel = specialchars($GLOBALS['TL_LANG']['MSC']['logout']);
@@ -200,7 +197,8 @@ class ModuleLogin extends Module
 
 			if ($this->User->lastLogin > 0)
 			{
-				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $this->User->lastLogin));
+				global $objPage;
+				$this->Template->lastLogin = sprintf($GLOBALS['TL_LANG']['MSC']['lastLogin'][1], $this->parseDate($objPage->datimFormat, $this->User->lastLogin));
 			}
 
 			return;
@@ -208,23 +206,23 @@ class ModuleLogin extends Module
 
 		$this->strTemplate = ($this->cols > 1) ? 'mod_login_2cl' : 'mod_login_1cl';
 
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$blnHasError = false;
 
-		if (count($_SESSION['TL_ERROR']))
+		if (!empty($_SESSION['TL_ERROR']))
 		{
 			$blnHasError = true;
 			$_SESSION['LOGIN_ERROR'] = $_SESSION['TL_ERROR'][0];
 			$_SESSION['TL_ERROR'] = array();
 		}
 
-		if (strlen($_SESSION['LOGIN_ERROR']))
+		if (isset($_SESSION['LOGIN_ERROR']))
 		{
 			$blnHasError = true;
 			$this->Template->message = $_SESSION['LOGIN_ERROR'];
-			$_SESSION['LOGIN_ERROR'] = '';
+			unset($_SESSION['LOGIN_ERROR']);
 		}
 
 		$this->Template->hasError = $blnHasError;
@@ -237,5 +235,3 @@ class ModuleLogin extends Module
 		$this->Template->autoLabel = $GLOBALS['TL_LANG']['MSC']['autologin'];
 	}
 }
-
-?>

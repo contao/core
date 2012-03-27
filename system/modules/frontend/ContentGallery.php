@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,25 +20,36 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentGallery
  *
  * Front end content element "gallery".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentGallery extends ContentElement
+class ContentGallery extends \ContentElement
 {
+
+	/**
+	 * Files object
+	 * @var \Contao\FilesCollection
+	 */
+	protected $objFiles;
 
 	/**
 	 * Template
@@ -53,8 +64,6 @@ class ContentGallery extends ContentElement
 	 */
 	public function generate()
 	{
-		$this->multiSRC = deserialize($this->multiSRC);
-
 		// Use the home directory of the current user as file source
 		if ($this->useHomeDir && FE_USER_LOGGED_IN)
 		{
@@ -65,8 +74,27 @@ class ContentGallery extends ContentElement
 				$this->multiSRC = array($this->User->homeDir);
 			}
 		}
+		else
+		{
+			$this->multiSRC = deserialize($this->multiSRC);
+		}
 
-		if (!is_array($this->multiSRC) || count($this->multiSRC) < 1)
+		// Return if there are no files
+		if (!is_array($this->multiSRC) || empty($this->multiSRC))
+		{
+			return '';
+		}
+
+		// Check for version 3 format
+		if (!is_numeric($this->multiSRC[0]))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		// Get the file entries from the database
+		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+
+		if ($this->objFiles === null)
 		{
 			return '';
 		}
@@ -76,82 +104,106 @@ class ContentGallery extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$images = array();
 		$auxDate = array();
+		$auxId = array();
+		$objFiles = $this->objFiles;
 
 		// Get all images
-		foreach ($this->multiSRC as $file)
+		while ($objFiles->next())
 		{
-			if (isset($images[$file]) || !file_exists(TL_ROOT . '/' . $file))
+			// Continue if the files has been processed or does not exist
+			if (isset($images[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
 			}
 
 			// Single files
-			if (is_file(TL_ROOT . '/' . $file))
+			if ($objFiles->type == 'file')
 			{
-				$objFile = new File($file);
-				$this->parseMetaFile(dirname($file), true);
-				$arrMeta = $this->arrMeta[$objFile->basename];
+				$objFile = new \File($objFiles->path);
 
-				if ($arrMeta[0] == '')
-				{
-					$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
-				}
-
-				if ($objFile->isGdImage)
-				{
-					$images[$file] = array
-					(
-						'name' => $objFile->basename,
-						'singleSRC' => $file,
-						'alt' => $arrMeta[0],
-						'imageUrl' => $arrMeta[1],
-						'caption' => $arrMeta[2]
-					);
-
-					$auxDate[] = $objFile->mtime;
-				}
-
-				continue;
-			}
-
-			$subfiles = scan(TL_ROOT . '/' . $file);
-			$this->parseMetaFile($file);
-
-			// Folders
-			foreach ($subfiles as $subfile)
-			{
-				if (is_dir(TL_ROOT . '/' . $file . '/' . $subfile))
+				if (!$objFile->isGdImage)
 				{
 					continue;
 				}
 
-				$objFile = new File($file . '/' . $subfile);
+				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
-				if ($objFile->isGdImage)
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
 				{
-					$arrMeta = $this->arrMeta[$subfile];
+					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+				}
 
-					if ($arrMeta[0] == '')
+				// Add the image
+				$images[$objFiles->path] = array
+				(
+					'id'        => $objFiles->id,
+					'name'      => $objFile->basename,
+					'singleSRC' => $objFiles->path,
+					'alt'       => $arrMeta['title'],
+					'imageUrl'  => $arrMeta['link'],
+					'caption'   => $arrMeta['caption']
+				);
+
+				$auxDate[] = $objFile->mtime;
+				$auxId[] = $objFiles->id;
+			}
+
+			// Folders
+			else
+			{
+				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
+
+				if ($objSubfiles === null)
+				{
+					continue;
+				}
+
+				while ($objSubfiles->next())
+				{
+					// Skip subfolders
+					if ($objSubfiles->type == 'folder')
 					{
-						$arrMeta[0] = str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename));
+						continue;
 					}
 
-					$images[$file . '/' . $subfile] = array
+					$objFile = new \File($objSubfiles->path);
+
+					if (!$objFile->isGdImage)
+					{
+						continue;
+					}
+
+					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					// Use the file name as title if none is given
+					if ($arrMeta['title'] == '')
+					{
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					}
+
+					// Add the image
+					$images[$objSubfiles->path] = array
 					(
-						'name' => $objFile->basename,
-						'singleSRC' => $file . '/' . $subfile,
-						'alt' => $arrMeta[0],
-						'imageUrl' => $arrMeta[1],
-						'caption' => $arrMeta[2]
+						'id'        => $objSubfiles->id,
+						'name'      => $objFile->basename,
+						'singleSRC' => $objSubfiles->path,
+						'alt'       => $arrMeta['title'],
+						'imageUrl'  => $arrMeta['link'],
+						'caption'   => $arrMeta['caption']
 					);
 
 					$auxDate[] = $objFile->mtime;
+					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -176,16 +228,41 @@ class ContentGallery extends ContentElement
 				array_multisort($images, SORT_NUMERIC, $auxDate, SORT_DESC);
 				break;
 
-			case 'meta':
-				$arrImages = array();
-				foreach ($this->arrAux as $k)
+			case 'meta': // Backwards compatibility
+			case 'custom':
+				if ($this->orderSRC != '')
 				{
-					if (strlen($k))
+					// Turn the order string into an array
+					$arrOrder = array_flip(array_map('intval', explode(',', $this->orderSRC)));
+
+					// Move the matching elements to their position in $arrOrder
+					foreach ($images as $k=>$v)
 					{
-						$arrImages[] = $images[$k];
+						if (isset($arrOrder[$v['id']]))
+						{
+							$arrOrder[$v['id']] = $v;
+							unset($images[$k]);
+						}
 					}
+
+					// Append the left-over images at the end
+					if (!empty($images))
+					{
+						$arrOrder = array_merge($arrOrder, $images);
+					}
+
+					// Remove empty or numeric (not replaced) entries
+					foreach ($arrOrder as $k=>$v)
+					{
+						if ($v == '' || is_numeric($v))
+						{
+							unset($arrOrder[$k]);
+						}
+					}
+
+					$images = $arrOrder;
+					unset($arrOrder);
 				}
-				$images = $arrImages;
 				break;
 
 			case 'random':
@@ -194,18 +271,40 @@ class ContentGallery extends ContentElement
 		}
 
 		$images = array_values($images);
+
+		// Limit the total number of items (see #2652)
+		if ($this->numberOfItems > 0)
+		{
+			$images = array_slice($images, 0, $this->numberOfItems);
+		}
+
+		$offset = 0;
 		$total = count($images);
 		$limit = $total;
-		$offset = 0;
 
 		// Pagination
 		if ($this->perPage > 0)
 		{
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$this->perPage))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
+			}
+
+			// Set limit and offset
 			$offset = ($page - 1) * $this->perPage;
 			$limit = min($this->perPage + $offset, $total);
 
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
@@ -247,28 +346,27 @@ class ContentGallery extends ContentElement
 					$class_td = ' col_last';
 				}
 
-				$objCell = new stdClass();
+				$objCell = new \stdClass();
 				$key = 'row_' . $rowcount . $class_tr . $class_eo;
 
 				// Empty cell
 				if (!is_array($images[($i+$j)]) || ($j+$i) >= $limit)
 				{
 					$objCell->class = 'col_'.$j . $class_td;
-					$body[$key][$j] = $objCell;
-
-					continue;
 				}
+				else
+				{
+					// Add size and margin
+					$images[($i+$j)]['size'] = $this->size;
+					$images[($i+$j)]['imagemargin'] = $this->imagemargin;
+					$images[($i+$j)]['fullsize'] = $this->fullsize;
 
-				// Add size and margin
-				$images[($i+$j)]['size'] = $this->size;
-				$images[($i+$j)]['imagemargin'] = $this->imagemargin;
-				$images[($i+$j)]['fullsize'] = $this->fullsize;
+					$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
 
-				$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
-
-				// Add column width and class
-				$objCell->colWidth = $colwidth . '%';
-				$objCell->class = 'col_'.$j . $class_td;
+					// Add column width and class
+					$objCell->colWidth = $colwidth . '%';
+					$objCell->class = 'col_'.$j . $class_td;
+				}
 
 				$body[$key][$j] = $objCell;
 			}
@@ -284,7 +382,7 @@ class ContentGallery extends ContentElement
 			$strTemplate = $this->galleryTpl;
 		}
 
-		$objTemplate = new FrontendTemplate($strTemplate);
+		$objTemplate = new \FrontendTemplate($strTemplate);
 		$objTemplate->setData($this->arrData);
 
 		$objTemplate->body = $body;
@@ -293,5 +391,3 @@ class ContentGallery extends ContentElement
 		$this->Template->images = $objTemplate->parse();
 	}
 }
-
-?>

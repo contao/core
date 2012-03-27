@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormTextArea
  *
  * Form field "textarea".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormTextArea extends Widget
+class FormTextArea extends \Widget
 {
 
 	/**
@@ -69,11 +74,35 @@ class FormTextArea extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
+			case 'maxlength':
+				if ($varValue > 0)
+				{
+					$this->arrAttributes['maxlength'] =  $varValue;
+				}
+				break;
+
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
+				break;
+
+			case 'placeholder':
+				$this->arrAttributes['placeholder'] = $varValue;
+				break;
+
 			case 'size':
 				$arrSize = deserialize($varValue);
 				$this->intRows = $arrSize[0];
@@ -86,19 +115,6 @@ class FormTextArea extends Widget
 
 			case 'cols':
 				$this->intCols = $varValue;
-				break;
-
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
-			case 'readonly':
-				$this->arrAttributes['readonly'] = 'readonly';
-				$this->blnSubmitInput = false;
-				break;
-
-			case 'maxlength':
-				// Not supported
 				break;
 
 			default:
@@ -114,15 +130,22 @@ class FormTextArea extends Widget
 	 */
 	public function generate()
 	{
+		global $objPage;
+		$arrStrip = array();
+
+		// XHTML does not support maxlength
+		if ($objPage->outputFormat == 'xhtml')
+		{
+			$arrStrip[] = 'maxlength';
+		}
+
 		return sprintf('<textarea name="%s" id="ctrl_%s" class="textarea%s" rows="%s" cols="%s"%s>%s</textarea>',
 						$this->strName,
 						$this->strId,
 						(strlen($this->strClass) ? ' ' . $this->strClass : ''),
 						$this->intRows,
 						$this->intCols,
-						$this->getAttributes(),
+						$this->getAttributes($arrStrip),
 						specialchars(str_replace('\n', "\n", $this->varValue))) . $this->addSubmit();
 	}
 }
-
-?>

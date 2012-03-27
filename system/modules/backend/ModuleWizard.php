@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleWizard
  *
  * Provide methods to handle modules of a page layout.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleWizard extends Widget
+class ModuleWizard extends \Widget
 {
 
 	/**
@@ -51,26 +56,6 @@ class ModuleWizard extends Widget
 	 * @var string
 	 */
 	protected $strTemplate = 'be_widget';
-
-
-	/**
-	 * Add specific attributes
-	 * @param string
-	 * @param mixed
-	 */
-	public function __set($strKey, $varValue)
-	{
-		switch ($strKey)
-		{
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
-			default:
-				parent::__set($strKey, $varValue);
-				break;
-		}
-	}
 
 
 	/**
@@ -108,15 +93,24 @@ class ModuleWizard extends Widget
 		}
 
 		// Get all modules of the current theme
-		$objModules = $this->Database->prepare("SELECT id, name FROM tl_module WHERE pid=(SELECT pid FROM " . $this->strTable . " WHERE id=?) ORDER BY name")
+		$objModules = $this->Database->prepare("SELECT id, name, type FROM tl_module WHERE pid=(SELECT pid FROM " . $this->strTable . " WHERE id=?) ORDER BY name")
 									 ->execute($this->currentRecord);
 
 		// Add the articles module
-		$modules[] = array('id'=>0, 'name'=>$GLOBALS['TL_LANG']['MOD']['article'][0]);
+		$modules[] = array('id'=>0, 'name'=>$GLOBALS['TL_LANG']['MOD']['article'][0], 'type'=>'article');
 
 		if ($objModules->numRows)
 		{
 			$modules = array_merge($modules, $objModules->fetchAllAssoc());
+		}
+
+		$GLOBALS['TL_LANG']['FMD']['article'] = $GLOBALS['TL_LANG']['MOD']['article'];
+
+		// Add the module type (see #3835)
+		foreach ($modules as $k=>$v)
+		{
+			$v['type'] = $GLOBALS['TL_LANG']['FMD'][$v['type']][0];
+			$modules[$k] = $v;
 		}
 
 		$objRow = $this->Database->prepare("SELECT * FROM " . $this->strTable . " WHERE id=?")
@@ -128,7 +122,7 @@ class ModuleWizard extends Widget
 		$arrSections = deserialize($objRow->sections);
 
 		// Add custom page sections
-		if (is_array($arrSections) && count($arrSections))
+		if (is_array($arrSections) && !empty($arrSections))
 		{
 			$cols = array_merge($cols, $arrSections);
 		}
@@ -146,6 +140,8 @@ class ModuleWizard extends Widget
 		}
 		else
 		{
+			$arrCols = array();
+
 			// Initialize the sorting order
 			foreach ($cols as $col)
 			{
@@ -178,21 +174,23 @@ class ModuleWizard extends Widget
 			}
 		}
 
-		// Add label and return wizard
-		$return .= '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
+		// Add the label and the return wizard
+		$return = '<table id="ctrl_'.$this->strId.'" class="tl_modulewizard">
   <thead>
   <tr>
-    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</td>
-    <td>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</td>
-    <td>&nbsp;</td>
+    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_module'].'</th>
+    <th>&nbsp;</th>
+    <th>'.$GLOBALS['TL_LANG']['MSC']['mw_column'].'</th>
+    <th>&nbsp;</th>
   </tr>
   </thead>
   <tbody>';
 
-		// Load tl_article language file
+		// Load the tl_article language file
 		$this->loadLanguageFile('tl_article');
+		$tabindex = 0;
 
-		// Add input fields
+		// Add the input fields
 		for ($i=0; $i<count($this->varValue); $i++)
 		{
 			$options = '';
@@ -200,29 +198,30 @@ class ModuleWizard extends Widget
 			// Add modules
 			foreach ($modules as $v)
 			{
-				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].'</option>';
+				$options .= '<option value="'.specialchars($v['id']).'"'.$this->optionSelected($v['id'], $this->varValue[$i]['mod']).'>'.$v['name'].' ['. $v['type'] .']</option>';
 			}
 
 			$return .= '
   <tr>
-    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select" onfocus="Backend.getScrollOffset();">'.$options.'</select></td>';
+    <td><select name="'.$this->strId.'['.$i.'][mod]" class="tl_select tl_chosen" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()" onchange="Backend.updateModuleLink(this)">'.$options.'</select></td>
+    <td><a href="contao/main.php?do=themes&amp;table=tl_module&amp;act=edit&amp;id=' . $this->varValue[$i]['mod'] . '" title="' . specialchars($GLOBALS['TL_LANG']['tl_layout']['edit_module']) . '" class="module_link" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'inline' : 'none') . '">'.$this->generateImage('edit.gif').'</a>'.$this->generateImage('edit_.gif', '', 'class="module_image" style="display:' . (($this->varValue[$i]['mod'] > 0) ? 'none' : 'inline') . '"').'</td>';
 
 			$options = '';
 
 			// Add columns
 			foreach ($cols as $v)
 			{
-				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
+				$options .= '<option value="'.specialchars($v).'"'.$this->optionSelected($v, $this->varValue[$i]['col']).'>'. ((isset($GLOBALS['TL_LANG']['tl_article'][$v]) && !is_array($GLOBALS['TL_LANG']['tl_article'][$v])) ? $GLOBALS['TL_LANG']['tl_article'][$v] : $v) .'</option>';
 			}
 
 			$return .= '
-    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" onfocus="Backend.getScrollOffset();">'.$options.'</select></td>
+    <td><select name="'.$this->strId.'['.$i.'][col]" class="tl_select_column" tabindex="'.++$tabindex.'" onfocus="Backend.getScrollOffset()">'.$options.'</select></td>
     <td>';
 
 			// Add buttons
 			foreach ($arrButtons as $button)
 			{
-				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this, \''.$button.'\',  \'ctrl_'.$this->strId.'\'); return false;">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
+				$return .= '<a href="'.$this->addToUrl('&amp;'.$strCommand.'='.$button.'&amp;cid='.$i.'&amp;id='.$this->currentRecord).'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['mw_'.$button]).'" onclick="Backend.moduleWizard(this,\''.$button.'\',\'ctrl_'.$this->strId.'\');return false">'.$this->generateImage($button.'.gif', $GLOBALS['TL_LANG']['MSC']['mw_'.$button], 'class="tl_listwizard_img"').'</a> ';
 			}
 
 			$return .= '</td>
@@ -234,5 +233,3 @@ class ModuleWizard extends Widget
   </table>';
 	}
 }
-
-?>

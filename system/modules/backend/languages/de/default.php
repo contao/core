@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -43,14 +42,17 @@ $GLOBALS['TL_LANG']['ERR']['prcnt']             = 'Bitte geben Sie einen Prozent
 $GLOBALS['TL_LANG']['ERR']['alpha']             = 'Bitte geben Sie nur Buchstaben ein!';
 $GLOBALS['TL_LANG']['ERR']['alnum']             = 'Bitte geben Sie nur Buchstaben und Zahlen ein!';
 $GLOBALS['TL_LANG']['ERR']['phone']             = 'Bitte geben Sie eine gültige Telefonnummer ein!';
-$GLOBALS['TL_LANG']['ERR']['extnd']             = 'Aus Sicherheitsgründen können Sie diese Zeichen (=<>&/()#) hier nicht verwenden!';
+$GLOBALS['TL_LANG']['ERR']['extnd']             = 'Aus Sicherheitsgründen können Sie folgende Zeichen hier nicht verwenden: =<>&/()#';
 $GLOBALS['TL_LANG']['ERR']['email']             = 'Bitte geben Sie eine gültige E-Mail-Adresse ein!';
+$GLOBALS['TL_LANG']['ERR']['emails']            = 'Mindestens eine der E-Mail-Adressen ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['url']               = 'Bitte geben Sie ein gültiges URL-Format ein und kodieren Sie Sonderzeichen!';
+$GLOBALS['TL_LANG']['ERR']['alias']             = 'Bitte geben Sie nur Buchstaben und Zahlen sowie folgende Sonderzeichen ein: .-_';
+$GLOBALS['TL_LANG']['ERR']['folderalias']       = 'Bitte geben Sie nur Buchstaben und Zahlen sowie folgende Sonderzeichen ein: .-/_';
 $GLOBALS['TL_LANG']['ERR']['date']              = 'Bitte geben Sie das Datum im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['time']              = 'Bitte geben Sie die Uhrzeit im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['dateTime']          = 'Bitte geben Sie Datum und Uhrzeit im Format "%s" ein!';
 $GLOBALS['TL_LANG']['ERR']['noSpace']           = 'Das Feld "%s" darf keine Leerzeichen enthalten!';
-$GLOBALS['TL_LANG']['ERR']['filesize']          = 'Die maximale Größe für Datei-Uploads beträgt %s!';
+$GLOBALS['TL_LANG']['ERR']['filesize']          = 'Die maximale Größe für Datei-Uploads beträgt %s (Contao- oder php.ini-Einstellungen)!';
 $GLOBALS['TL_LANG']['ERR']['filetype']          = 'Der Dateityp "%s" darf nicht hochgeladen werden!';
 $GLOBALS['TL_LANG']['ERR']['filepartial']       = 'Die Datei %s wurde nur teilweise hochgeladen!';
 $GLOBALS['TL_LANG']['ERR']['filewidth']         = 'Die Datei %s übersteigt die maximale Bildbreite von %d Pixel!';
@@ -71,10 +73,14 @@ $GLOBALS['TL_LANG']['ERR']['invalidName']       = 'Dieser Datei- bzw. Verzeichni
 $GLOBALS['TL_LANG']['ERR']['invalidFile']       = 'Die Datei bzw. das Verzeichnis "%s" ist ungültig!';
 $GLOBALS['TL_LANG']['ERR']['fileExists']        = 'Die Datei "%s" existiert bereits!';
 $GLOBALS['TL_LANG']['ERR']['circularReference'] = 'Ungültiges Weiterleitungsziel (Zirkelbezug)!';
-$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '%s<strong>Achtung!</strong> Sie verwenden einen %sveralteten Browser%s und <strong>können nicht alle Funktionen dieser Webseite nutzen</strong>.%s';
+$GLOBALS['TL_LANG']['ERR']['ie6warning']        = '<strong>Achtung!</strong> Sie verwenden einen %sveralteten Browser%s und <strong>können nicht alle Funktionen dieser Webseite nutzen</strong>.';
 $GLOBALS['TL_LANG']['ERR']['noFallbackEmpty']   = 'Bei keinem der aktiven Website-Startpunkte ohne explizite DNS-Angabe wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 $GLOBALS['TL_LANG']['ERR']['noFallbackDns']     = 'Bei keinem der aktiven Website-Startpunkte für <strong>%s</strong> wurde die Option "Sprachen-Fallback" ausgewählt, d.h. diese Webseiten sind nur in der einen Sprache verfügbar, die in den Seiteneinstellungen definiert wurde! Besucher und Suchmaschinen, die diese Sprache nicht sprechen, können die Webseite nicht aufrufen.';
 $GLOBALS['TL_LANG']['ERR']['multipleFallback']  = 'Sie können nur einen Website-Startpunkt pro Domain als Sprachen-Fallback definieren.';
+$GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Seiten in der obersten Ebene müssen Website-Startpunkte sein!';
+$GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'Auf der obersten Ebene befinden sich Seiten, die keine Website-Startpunkte sind. Webseiten ohne Startpunkt werden nicht mehr unterstützt, daher stellen Sie bitte sicher, dass alle Seiten unter einem Startpunkt gruppiert sind.';
+$GLOBALS['TL_LANG']['ERR']['invalidTokenUrl']   = 'Der Link, den Sie aufgerufen haben, konnte nicht verifiziert werden. Wenn Sie den Link selbst aufgerufen oder von einer vertauenswürdigen Person erhalten haben, können Sie den Vorgang fortsetzen.';
+$GLOBALS['TL_LANG']['ERR']['version2format']    = 'Dieses Element verwendet noch das alte Contao 2 SRC-Format. Haben Sie die Datenbank aktualisiert?';
 
 
 /**
@@ -126,6 +132,18 @@ $GLOBALS['TL_LANG']['DAYS'][6] = 'Samstag';
 
 
 /**
+ * Short day names
+ */
+$GLOBALS['TL_LANG']['DAYS_SHORT'][0] = 'So';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][1] = 'Mo';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][2] = 'Di';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][3] = 'Mi';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][4] = 'Do';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][5] = 'Fr';
+$GLOBALS['TL_LANG']['DAYS_SHORT'][6] = 'Sa';
+
+
+/**
  * Month names
  */
 $GLOBALS['TL_LANG']['MONTHS'][0]  = 'Januar';
@@ -143,6 +161,23 @@ $GLOBALS['TL_LANG']['MONTHS'][11] = 'Dezember';
 
 
 /**
+ * Short month names
+ */
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][0]  = 'Jan';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][1]  = 'Feb';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][2]  = 'Mär';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][3]  = 'Apr';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][4]  = 'Mai';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][5]  = 'Jun';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][6]  = 'Jul';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][7]  = 'Aug';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][8]  = 'Sep';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][9]  = 'Okt';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][10] = 'Nov';
+$GLOBALS['TL_LANG']['MONTHS_SHORT'][11] = 'Dez';
+
+
+/**
  * Short names length
  */
 $GLOBALS['TL_LANG']['MSC']['dayShortLength']   = 2;
@@ -153,7 +188,7 @@ $GLOBALS['TL_LANG']['MSC']['monthShortLength'] = 3;
  * Week offset (0 = Sunday, 1 = Monday, …)
  */
 $GLOBALS['TL_LANG']['MSC']['weekOffset']  = 1;
-$GLOBALS['TL_LANG']['MSC']['titleFormat'] = 'l, d. F Y';
+$GLOBALS['TL_LANG']['MSC']['titleFormat'] = '%d. %B %Y';
 
 
 /**
@@ -182,6 +217,17 @@ $GLOBALS['TL_LANG']['UNITS'][5] = 'PB';
 $GLOBALS['TL_LANG']['UNITS'][6] = 'EB';
 $GLOBALS['TL_LANG']['UNITS'][7] = 'ZB';
 $GLOBALS['TL_LANG']['UNITS'][8] = 'YB';
+
+
+/**
+ * Datepicker
+ */
+$GLOBALS['TL_LANG']['DP']['select_a_time']       = 'Uhrzeit auswählen';
+$GLOBALS['TL_LANG']['DP']['use_mouse_wheel']     = 'Ändern Sie die Werte mit Hilfe des Mausrads';
+$GLOBALS['TL_LANG']['DP']['time_confirm_button'] = 'OK';
+$GLOBALS['TL_LANG']['DP']['apply_range']         = 'Anwenden';
+$GLOBALS['TL_LANG']['DP']['cancel']              = 'Abbrechen';
+$GLOBALS['TL_LANG']['DP']['week']                = 'W';
 
 
 /**
@@ -247,6 +293,24 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Spalte';
 
 
 /**
+ * Images
+ */
+$GLOBALS['TL_LANG']['MSC']['relative']      = 'Relatives Format';
+$GLOBALS['TL_LANG']['MSC']['proportional']  = array('Proportional', 'Die längere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
+$GLOBALS['TL_LANG']['MSC']['box']           = array('An Rahmen anpassen', 'Die kürzere Seite des Bildes wird an die vorgegebenen Abmessungen angepasst und das Bild proportional verkleinert.');
+$GLOBALS['TL_LANG']['MSC']['crop']          = 'Exaktes Format';
+$GLOBALS['TL_LANG']['MSC']['left_top']      = array('Links oben', 'Erhält den linken Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_top']    = array('Mitte oben', 'Erhält den mittleren Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_top']     = array('Rechts oben', 'Erhält den rechten Teil eines Querformat-Bildes und den oberen Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_center']   = array('Links Mitte', 'Erhält den linken Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_center'] = array('Mitte Mitte', 'Erhält den mittleren Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_center']  = array('Rechts Mitte', 'Erhält den rechten Teil eines Querformat-Bildes und den mittleren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['left_bottom']   = array('Links unten', 'Erhält den linken Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['center_bottom'] = array('Mitte unten', 'Erhält den mittleren Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+$GLOBALS['TL_LANG']['MSC']['right_bottom']  = array('Rechts unten', 'Erhält den rechten Teil eines Querformat-Bildes und den unteren Teil eines Hochformat-Bildes.');
+
+
+/**
  * Miscellaneous
  */
 $GLOBALS['TL_LANG']['MSC']['id']            = array('ID', 'Das Ändern der ID kann die Konsistenz der Daten gefährden!');
@@ -260,123 +324,135 @@ $GLOBALS['TL_LANG']['MSC']['dateAdded']     = array('Hinzugefügt am', 'Hinzugef
 $GLOBALS['TL_LANG']['MSC']['lastLogin']     = array('Letzte Anmeldung', 'Letzte Anmeldung: %s');
 $GLOBALS['TL_LANG']['MSC']['move_up']       = array('Nach oben', 'Den Eintrag eine Position nach oben verschieben');
 $GLOBALS['TL_LANG']['MSC']['move_down']     = array('Nach unten', 'Den Eintrag eine Position nach unten verschieben');
-$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>tl_files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
+$GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL gilt für das <em>files</em>-Verzeichnis sowie alle Vorschaubilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
+$GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/de/keyboard-shortcuts.html" target="_blank">Tastaturkürzeln</a> beschleunigen.');
 
 
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['feLink']           = 'Zum Frontend';
-$GLOBALS['TL_LANG']['MSC']['fePreview']        = 'Frontend-Vorschau';
-$GLOBALS['TL_LANG']['MSC']['feUser']           = 'Frontend-Benutzer';
-$GLOBALS['TL_LANG']['MSC']['backToTop']        = 'Nach oben';
-$GLOBALS['TL_LANG']['MSC']['home']             = 'Startseite';
-$GLOBALS['TL_LANG']['MSC']['user']             = 'Benutzer';
-$GLOBALS['TL_LANG']['MSC']['loginTo']          = 'Anmelden bei %s';
-$GLOBALS['TL_LANG']['MSC']['loginBT']          = 'Anmelden';
-$GLOBALS['TL_LANG']['MSC']['logoutBT']         = 'Abmelden';
-$GLOBALS['TL_LANG']['MSC']['backBT']           = 'Zurück';
-$GLOBALS['TL_LANG']['MSC']['cancelBT']         = 'Abbrechen';
-$GLOBALS['TL_LANG']['MSC']['deleteConfirm']    = 'Soll der Eintrag ID %s wirklich gelöscht werden?';
-$GLOBALS['TL_LANG']['MSC']['delAllConfirm']    = 'Wollen Sie die ausgewählten Einträge wirklich löschen?';
-$GLOBALS['TL_LANG']['MSC']['filterRecords']    = 'Datensätze';
-$GLOBALS['TL_LANG']['MSC']['filterAll']        = 'Alle';
-$GLOBALS['TL_LANG']['MSC']['showRecord']       = 'Details des Datensatzes %s anzeigen';
-$GLOBALS['TL_LANG']['MSC']['editRecord']       = 'Datensatz %s bearbeiten';
-$GLOBALS['TL_LANG']['MSC']['all_info']         = 'Ausgewählte Datensätze der Tabelle %s bearbeiten';
-$GLOBALS['TL_LANG']['MSC']['showOnly']         = 'Anzeigen';
-$GLOBALS['TL_LANG']['MSC']['sortBy']           = 'Sortieren';
-$GLOBALS['TL_LANG']['MSC']['filter']           = 'Filtern';
-$GLOBALS['TL_LANG']['MSC']['search']           = 'Suchen';
-$GLOBALS['TL_LANG']['MSC']['noResult']         = 'Keine Einträge gefunden.';
-$GLOBALS['TL_LANG']['MSC']['save']             = 'Speichern';
-$GLOBALS['TL_LANG']['MSC']['saveNclose']       = 'Speichern und schließen';
-$GLOBALS['TL_LANG']['MSC']['saveNedit']        = 'Speichern und bearbeiten';
-$GLOBALS['TL_LANG']['MSC']['saveNback']        = 'Speichern und zurück';
-$GLOBALS['TL_LANG']['MSC']['saveNcreate']      = 'Speichern und neu';
-$GLOBALS['TL_LANG']['MSC']['continue']         = 'Weiter';
-$GLOBALS['TL_LANG']['MSC']['skipNavigation']   = 'Navigation überspringen';
-$GLOBALS['TL_LANG']['MSC']['selectAll']        = 'Alle auswählen';
-$GLOBALS['TL_LANG']['MSC']['pw_changed']       = 'Das Passwort wurde aktualisiert.';
-$GLOBALS['TL_LANG']['MSC']['fallback']         = 'Standard';
-$GLOBALS['TL_LANG']['MSC']['view']             = 'In einem neuen Fenster ansehen';
-$GLOBALS['TL_LANG']['MSC']['fullsize']         = 'Großansicht des Bildes in einem neuen Fenster öffnen';
-$GLOBALS['TL_LANG']['MSC']['colorpicker']      = 'Farbwähler (benötigt JavaScript)';
-$GLOBALS['TL_LANG']['MSC']['pagepicker']       = 'Seitenwähler (benötigt JavaScript)';
-$GLOBALS['TL_LANG']['MSC']['filepicker']       = 'Dateiwähler (benötigt JavaScript)';
-$GLOBALS['TL_LANG']['MSC']['ppHeadline']       = 'Contao-Seiten';
-$GLOBALS['TL_LANG']['MSC']['fpHeadline']       = 'Contao-Dateien';
-$GLOBALS['TL_LANG']['MSC']['yes']              = 'ja';
-$GLOBALS['TL_LANG']['MSC']['no']               = 'nein';
-$GLOBALS['TL_LANG']['MSC']['goBack']           = 'Zurück';
-$GLOBALS['TL_LANG']['MSC']['reload']           = 'Neu laden';
-$GLOBALS['TL_LANG']['MSC']['above']            = 'oberhalb';
-$GLOBALS['TL_LANG']['MSC']['below']            = 'unterhalb';
-$GLOBALS['TL_LANG']['MSC']['date']             = 'Datum';
-$GLOBALS['TL_LANG']['MSC']['tstamp']           = 'Änderungsdatum';
-$GLOBALS['TL_LANG']['MSC']['entry']            = '%s Eintrag';
-$GLOBALS['TL_LANG']['MSC']['entries']          = '%s Einträge';
-$GLOBALS['TL_LANG']['MSC']['left']             = 'linksbündig';
-$GLOBALS['TL_LANG']['MSC']['center']           = 'zentriert';
-$GLOBALS['TL_LANG']['MSC']['right']            = 'rechtsbündig';
-$GLOBALS['TL_LANG']['MSC']['justify']          = 'Blocksatz';
-$GLOBALS['TL_LANG']['MSC']['filetree']         = 'Dateisystem';
-$GLOBALS['TL_LANG']['MSC']['male']             = 'Männlich';
-$GLOBALS['TL_LANG']['MSC']['female']           = 'Weiblich';
-$GLOBALS['TL_LANG']['MSC']['fileSize']         = 'Dateigröße';
-$GLOBALS['TL_LANG']['MSC']['fileCreated']      = 'Erstellt am';
-$GLOBALS['TL_LANG']['MSC']['fileModified']     = 'Zuletzt geändert am';
-$GLOBALS['TL_LANG']['MSC']['fileAccessed']     = 'Letzter Zugriff am';
-$GLOBALS['TL_LANG']['MSC']['fileDownload']     = 'Herunterladen';
-$GLOBALS['TL_LANG']['MSC']['fileImageSize']    = 'Breite/Höhe in Pixeln';
-$GLOBALS['TL_LANG']['MSC']['filePath']         = 'Relativer Pfad';
-$GLOBALS['TL_LANG']['MSC']['version']          = 'Version';
-$GLOBALS['TL_LANG']['MSC']['restore']          = 'Wiederherstellen';
-$GLOBALS['TL_LANG']['MSC']['backendModules']   = 'Backend-Module';
-$GLOBALS['TL_LANG']['MSC']['welcomeTo']        = '%s Backend';
-$GLOBALS['TL_LANG']['MSC']['updateVersion']    = 'Contao Version %s verfügbar';
-$GLOBALS['TL_LANG']['MSC']['wordWrap']         = 'Zeilenumbruch';
-$GLOBALS['TL_LANG']['MSC']['saveAlert']        = 'ACHTUNG! Nicht gespeicherte Änderungen gehen verloren. Fortfahren?';
-$GLOBALS['TL_LANG']['MSC']['toggleNodes']      = 'Alle öffnen/schließen';
-$GLOBALS['TL_LANG']['MSC']['expandNode']       = 'Bereich öffnen';
-$GLOBALS['TL_LANG']['MSC']['collapseNode']     = 'Bereich schließen';
-$GLOBALS['TL_LANG']['MSC']['deleteSelected']   = 'Löschen';
-$GLOBALS['TL_LANG']['MSC']['editSelected']     = 'Bearbeiten';
-$GLOBALS['TL_LANG']['MSC']['overrideSelected'] = 'Überschreiben';
-$GLOBALS['TL_LANG']['MSC']['moveSelected']     = 'Verschieben';
-$GLOBALS['TL_LANG']['MSC']['copySelected']     = 'Kopieren';
-$GLOBALS['TL_LANG']['MSC']['changeSelected']   = 'Auswahl ändern';
-$GLOBALS['TL_LANG']['MSC']['resetSelected']    = 'Auswahl aufheben';
-$GLOBALS['TL_LANG']['MSC']['fileManager']      = 'Dateimanager in einem Popup-Fenster öffnen';
-$GLOBALS['TL_LANG']['MSC']['systemMessages']   = 'Systemnachrichten';
-$GLOBALS['TL_LANG']['MSC']['tasksCur']         = '%s offene Aufgabe(n)';
-$GLOBALS['TL_LANG']['MSC']['tasksNew']         = '%s neue Aufgabe(n)';
-$GLOBALS['TL_LANG']['MSC']['tasksDue']         = '%s überfällige Aufgabe(n)';
-$GLOBALS['TL_LANG']['MSC']['clearClipboard']   = 'Ablage leeren';
-$GLOBALS['TL_LANG']['MSC']['hiddenElements']   = 'Unveröffentlichte Elemente';
-$GLOBALS['TL_LANG']['MSC']['hiddenHide']       = 'verstecken';
-$GLOBALS['TL_LANG']['MSC']['hiddenShow']       = 'anzeigen';
-$GLOBALS['TL_LANG']['MSC']['apply']            = 'Anwenden';
-$GLOBALS['TL_LANG']['MSC']['mandatory']        = 'Pflichtfeld';
-$GLOBALS['TL_LANG']['MSC']['create']           = 'Anlegen';
-$GLOBALS['TL_LANG']['MSC']['delete']           = 'Löschen';
-$GLOBALS['TL_LANG']['MSC']['proportional']     = 'Proportional';
-$GLOBALS['TL_LANG']['MSC']['crop']             = 'Exaktes Format';
-$GLOBALS['TL_LANG']['MSC']['box']              = 'An Rahmen anpassen';
-$GLOBALS['TL_LANG']['MSC']['protected']        = 'geschützt';
-$GLOBALS['TL_LANG']['MSC']['guests']           = 'nur Gäste';
-$GLOBALS['TL_LANG']['MSC']['updateMode']       = 'Update-Modus';
-$GLOBALS['TL_LANG']['MSC']['updateAdd']        = 'Ausgewählte Werte hinzufügen';
-$GLOBALS['TL_LANG']['MSC']['updateRemove']     = 'Ausgewählte Werte entfernen';
-$GLOBALS['TL_LANG']['MSC']['updateReplace']    = 'Bestehende Einträge überschreiben';
-$GLOBALS['TL_LANG']['MSC']['ascending']        = 'aufsteigend';
-$GLOBALS['TL_LANG']['MSC']['descending']       = 'absteigend';
-$GLOBALS['TL_LANG']['MSC']['default']          = 'Standard';
-$GLOBALS['TL_LANG']['MSC']['helpWizard']       = 'Hilfe-Assistent';
-$GLOBALS['TL_LANG']['MSC']['noCookies']        = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
-$GLOBALS['TL_LANG']['MSC']['copyOf']           = '%s (Kopie)';
-$GLOBALS['TL_LANG']['MSC']['emailAddress']     = 'E-Mail-Adresse';
-
-?>
+$GLOBALS['TL_LANG']['MSC']['feLink']            = 'Zum Frontend';
+$GLOBALS['TL_LANG']['MSC']['fePreview']         = 'Frontend-Vorschau';
+$GLOBALS['TL_LANG']['MSC']['feUser']            = 'Frontend-Benutzer';
+$GLOBALS['TL_LANG']['MSC']['backToTop']         = 'Nach oben';
+$GLOBALS['TL_LANG']['MSC']['home']              = 'Startseite';
+$GLOBALS['TL_LANG']['MSC']['user']              = 'Benutzer';
+$GLOBALS['TL_LANG']['MSC']['loginTo']           = 'Anmelden bei %s';
+$GLOBALS['TL_LANG']['MSC']['loginBT']           = 'Anmelden';
+$GLOBALS['TL_LANG']['MSC']['logoutBT']          = 'Abmelden';
+$GLOBALS['TL_LANG']['MSC']['backBT']            = 'Zurück';
+$GLOBALS['TL_LANG']['MSC']['cancelBT']          = 'Abbrechen';
+$GLOBALS['TL_LANG']['MSC']['deleteConfirm']     = 'Soll der Eintrag ID %s wirklich gelöscht werden?';
+$GLOBALS['TL_LANG']['MSC']['delAllConfirm']     = 'Wollen Sie die ausgewählten Einträge wirklich löschen?';
+$GLOBALS['TL_LANG']['MSC']['filterRecords']     = 'Datensätze';
+$GLOBALS['TL_LANG']['MSC']['filterAll']         = 'Alle';
+$GLOBALS['TL_LANG']['MSC']['showRecord']        = 'Details des Datensatzes %s anzeigen';
+$GLOBALS['TL_LANG']['MSC']['editRecord']        = 'Datensatz %s bearbeiten';
+$GLOBALS['TL_LANG']['MSC']['all_info']          = 'Ausgewählte Datensätze der Tabelle %s bearbeiten';
+$GLOBALS['TL_LANG']['MSC']['showOnly']          = 'Anzeigen';
+$GLOBALS['TL_LANG']['MSC']['sortBy']            = 'Sortieren';
+$GLOBALS['TL_LANG']['MSC']['filter']            = 'Filtern';
+$GLOBALS['TL_LANG']['MSC']['search']            = 'Suchen';
+$GLOBALS['TL_LANG']['MSC']['noResult']          = 'Keine Einträge gefunden.';
+$GLOBALS['TL_LANG']['MSC']['save']              = 'Speichern';
+$GLOBALS['TL_LANG']['MSC']['saveNclose']        = 'Speichern und schließen';
+$GLOBALS['TL_LANG']['MSC']['saveNedit']         = 'Speichern und bearbeiten';
+$GLOBALS['TL_LANG']['MSC']['saveNback']         = 'Speichern und zurück';
+$GLOBALS['TL_LANG']['MSC']['saveNcreate']       = 'Speichern und neu';
+$GLOBALS['TL_LANG']['MSC']['continue']          = 'Weiter';
+$GLOBALS['TL_LANG']['MSC']['close']             = 'Schließen';
+$GLOBALS['TL_LANG']['MSC']['skipNavigation']    = 'Navigation überspringen';
+$GLOBALS['TL_LANG']['MSC']['selectAll']         = 'Alle auswählen';
+$GLOBALS['TL_LANG']['MSC']['pw_change']         = 'Bitte geben Sie ein neues Passwort ein';
+$GLOBALS['TL_LANG']['MSC']['pw_changed']        = 'Das Passwort wurde aktualisiert.';
+$GLOBALS['TL_LANG']['MSC']['fallback']          = 'Standard';
+$GLOBALS['TL_LANG']['MSC']['view']              = 'In einem neuen Fenster ansehen';
+$GLOBALS['TL_LANG']['MSC']['fullsize']          = 'Großansicht des Bildes in einem neuen Fenster öffnen';
+$GLOBALS['TL_LANG']['MSC']['colorpicker']       = 'Farbwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['pagepicker']        = 'Seitenwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['filepicker']        = 'Dateiwähler (benötigt JavaScript)';
+$GLOBALS['TL_LANG']['MSC']['ppHeadline']        = 'Contao-Seiten';
+$GLOBALS['TL_LANG']['MSC']['fpHeadline']        = 'Contao-Dateien';
+$GLOBALS['TL_LANG']['MSC']['yes']               = 'ja';
+$GLOBALS['TL_LANG']['MSC']['no']                = 'nein';
+$GLOBALS['TL_LANG']['MSC']['goBack']            = 'Zurück';
+$GLOBALS['TL_LANG']['MSC']['reload']            = 'Neu laden';
+$GLOBALS['TL_LANG']['MSC']['above']             = 'oberhalb';
+$GLOBALS['TL_LANG']['MSC']['below']             = 'unterhalb';
+$GLOBALS['TL_LANG']['MSC']['date']              = 'Datum';
+$GLOBALS['TL_LANG']['MSC']['tstamp']            = 'Änderungsdatum';
+$GLOBALS['TL_LANG']['MSC']['entry']             = '%s Eintrag';
+$GLOBALS['TL_LANG']['MSC']['entries']           = '%s Einträge';
+$GLOBALS['TL_LANG']['MSC']['left']              = 'linksbündig';
+$GLOBALS['TL_LANG']['MSC']['center']            = 'zentriert';
+$GLOBALS['TL_LANG']['MSC']['right']             = 'rechtsbündig';
+$GLOBALS['TL_LANG']['MSC']['justify']           = 'Blocksatz';
+$GLOBALS['TL_LANG']['MSC']['filetree']          = 'Dateisystem';
+$GLOBALS['TL_LANG']['MSC']['male']              = 'Männlich';
+$GLOBALS['TL_LANG']['MSC']['female']            = 'Weiblich';
+$GLOBALS['TL_LANG']['MSC']['fileSize']          = 'Dateigröße';
+$GLOBALS['TL_LANG']['MSC']['fileCreated']       = 'Erstellt am';
+$GLOBALS['TL_LANG']['MSC']['fileModified']      = 'Zuletzt geändert am';
+$GLOBALS['TL_LANG']['MSC']['fileAccessed']      = 'Letzter Zugriff am';
+$GLOBALS['TL_LANG']['MSC']['fileDownload']      = 'Herunterladen';
+$GLOBALS['TL_LANG']['MSC']['fileImageSize']     = 'Breite/Höhe in Pixeln';
+$GLOBALS['TL_LANG']['MSC']['filePath']          = 'Relativer Pfad';
+$GLOBALS['TL_LANG']['MSC']['version']           = 'Version';
+$GLOBALS['TL_LANG']['MSC']['restore']           = 'Wiederherstellen';
+$GLOBALS['TL_LANG']['MSC']['backendModules']    = 'Backend-Module';
+$GLOBALS['TL_LANG']['MSC']['welcomeTo']         = '%s Backend';
+$GLOBALS['TL_LANG']['MSC']['updateVersion']     = 'Contao Version %s verfügbar';
+$GLOBALS['TL_LANG']['MSC']['wordWrap']          = 'Zeilenumbruch';
+$GLOBALS['TL_LANG']['MSC']['saveAlert']         = 'ACHTUNG! Nicht gespeicherte Änderungen gehen verloren. Fortfahren?';
+$GLOBALS['TL_LANG']['MSC']['toggleNodes']       = 'Alle öffnen/schließen';
+$GLOBALS['TL_LANG']['MSC']['expandNode']        = 'Bereich öffnen';
+$GLOBALS['TL_LANG']['MSC']['collapseNode']      = 'Bereich schließen';
+$GLOBALS['TL_LANG']['MSC']['loadingData']       = 'Die Daten werden geladen';
+$GLOBALS['TL_LANG']['MSC']['deleteSelected']    = 'Löschen';
+$GLOBALS['TL_LANG']['MSC']['editSelected']      = 'Bearbeiten';
+$GLOBALS['TL_LANG']['MSC']['overrideSelected']  = 'Überschreiben';
+$GLOBALS['TL_LANG']['MSC']['moveSelected']      = 'Verschieben';
+$GLOBALS['TL_LANG']['MSC']['copySelected']      = 'Kopieren';
+$GLOBALS['TL_LANG']['MSC']['changeSelected']    = 'Auswahl ändern';
+$GLOBALS['TL_LANG']['MSC']['resetSelected']     = 'Auswahl aufheben';
+$GLOBALS['TL_LANG']['MSC']['fileManager']       = 'Dateimanager in einem Popup-Fenster öffnen';
+$GLOBALS['TL_LANG']['MSC']['systemMessages']    = 'Systemnachrichten';
+$GLOBALS['TL_LANG']['MSC']['clearClipboard']    = 'Ablage leeren';
+$GLOBALS['TL_LANG']['MSC']['hiddenElements']    = 'Unveröffentlichte Elemente';
+$GLOBALS['TL_LANG']['MSC']['hiddenHide']        = 'verstecken';
+$GLOBALS['TL_LANG']['MSC']['hiddenShow']        = 'anzeigen';
+$GLOBALS['TL_LANG']['MSC']['apply']             = 'Anwenden';
+$GLOBALS['TL_LANG']['MSC']['mandatory']         = 'Pflichtfeld';
+$GLOBALS['TL_LANG']['MSC']['create']            = 'Anlegen';
+$GLOBALS['TL_LANG']['MSC']['delete']            = 'Löschen';
+$GLOBALS['TL_LANG']['MSC']['protected']         = 'geschützt';
+$GLOBALS['TL_LANG']['MSC']['guests']            = 'nur Gäste';
+$GLOBALS['TL_LANG']['MSC']['updateMode']        = 'Update-Modus';
+$GLOBALS['TL_LANG']['MSC']['updateAdd']         = 'Ausgewählte Werte hinzufügen';
+$GLOBALS['TL_LANG']['MSC']['updateRemove']      = 'Ausgewählte Werte entfernen';
+$GLOBALS['TL_LANG']['MSC']['updateReplace']     = 'Bestehende Einträge überschreiben';
+$GLOBALS['TL_LANG']['MSC']['ascending']         = 'aufsteigend';
+$GLOBALS['TL_LANG']['MSC']['descending']        = 'absteigend';
+$GLOBALS['TL_LANG']['MSC']['default']           = 'Standard';
+$GLOBALS['TL_LANG']['MSC']['helpWizard']        = 'Hilfe-Assistent';
+$GLOBALS['TL_LANG']['MSC']['noCookies']         = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
+$GLOBALS['TL_LANG']['MSC']['copyOf']            = '%s (Kopie)';
+$GLOBALS['TL_LANG']['MSC']['coreOnlyMode']      = 'Contao befindet sich momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden. Dieser Modus ist z.B. nach einem Live Update aktiv, um eventuellen Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Sie können den Betriebsmodus nach der Prüfung der installierten Third-Party-Erweiterungen in den Backend-Einstellungen anpassen.';
+$GLOBALS['TL_LANG']['MSC']['emailAddress']      = 'E-Mail-Adresse';
+$GLOBALS['TL_LANG']['MSC']['register']          = 'Registrieren';
+$GLOBALS['TL_LANG']['MSC']['accountActivated']  = 'Ihr Konto wurde aktiviert.';
+$GLOBALS['TL_LANG']['MSC']['accountError']      = 'Die Anfrage kann nicht verarbeitet werden.';
+$GLOBALS['TL_LANG']['MSC']['emailSubject']      = 'Ihre Registrierung auf %s';
+$GLOBALS['TL_LANG']['MSC']['adminSubject']      = 'Contao :: Neue Registrierung auf %s';
+$GLOBALS['TL_LANG']['MSC']['adminText']         = 'Ein neues Mitglied (ID %s) hat sich auf Ihrer Webseite registriert.%sFalls Sie die automatische E-Mail-Aktivierung nicht nutzen, müssen Sie das Konto manuell im Backend aktivieren.';
+$GLOBALS['TL_LANG']['MSC']['requestPassword']   = 'Neues Passwort anfordern';
+$GLOBALS['TL_LANG']['MSC']['setNewPassword']    = 'Passwort übernehmen';
+$GLOBALS['TL_LANG']['MSC']['newPasswordSet']    = 'Ihr Passwort wurde aktualisiert.';
+$GLOBALS['TL_LANG']['MSC']['passwordSubject']   = 'Ihre Passwortanfrage für %s';
+$GLOBALS['TL_LANG']['MSC']['accountNotFound']   = 'Kein passendes Konto gefunden';
+$GLOBALS['TL_LANG']['MSC']['securityQuestion']  = 'Sicherheitsfrage';
+$GLOBALS['TL_LANG']['MSC']['closeAccount']      = 'Konto schließen';
+$GLOBALS['TL_LANG']['MSC']['changeSelection']   = 'Auswahl ändern';
+$GLOBALS['TL_LANG']['MSC']['currentlySelected'] = 'Ausgewählt';

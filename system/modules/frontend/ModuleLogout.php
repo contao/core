@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleLogout
  *
  * Front end module "logout".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleLogout extends Module
+class ModuleLogout extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleLogout extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FRONTEND LOGOUT ###';
 			$objTemplate->title = $this->headline;
@@ -76,21 +81,19 @@ class ModuleLogout extends Module
 		$strRedirect = $this->Environment->base;
 
 		// Redirect to last page visited
-		if ($this->redirectBack && strlen($_SESSION['LAST_PAGE_VISITED']))
+		if ($this->redirectBack && !empty($_SESSION['LAST_PAGE_VISITED']))
 		{
 			$strRedirect = $_SESSION['LAST_PAGE_VISITED'];
 		}
 
 		// Redirect to jumpTo page
-		elseif (strlen($this->jumpTo))
+		elseif ($this->jumpTo > 0)
 		{
-			$objNextPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-										  ->limit(1)
-										  ->execute($this->jumpTo);
+			$this->objModel->getRelated('jumpTo');
 
-			if ($objNextPage->numRows)
+			if ($this->objModel->jumpTo['id'] !== null)
 			{
-				$strRedirect = $this->generateFrontendUrl($objNextPage->fetchAssoc());
+				$strRedirect = $this->generateFrontendUrl($this->objModel->jumpTo);
 			}
 		}
 
@@ -105,12 +108,11 @@ class ModuleLogout extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
 		return;
 	}
 }
-
-?>

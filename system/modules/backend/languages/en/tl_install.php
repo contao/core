@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -38,8 +37,8 @@ $GLOBALS['TL_LANG']['tl_install']['password']    = array('Password', 'Please ent
 $GLOBALS['TL_LANG']['tl_install']['changePass']  = array('Install tool password', 'To additionally secure the Contao install tool, you can either rename or completely remove the <strong>contao/install.php</strong> file.');
 $GLOBALS['TL_LANG']['tl_install']['encryption']  = array('Generate an encryption key', 'This key is used to store encrypted data. Please note that encrypted data can only be decrypted with this key! Therefore note it down and do not change it if there is encrypted data already. Leave empty to generate a random key.');
 $GLOBALS['TL_LANG']['tl_install']['database']    = array('Check database connection', 'Please enter your database connection parameters.');
-$GLOBALS['TL_LANG']['tl_install']['collation']   = array('Collation', 'For more information see the <a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" onclick="window.open(this.href); return false;">MySQL manual</a>.');
-$GLOBALS['TL_LANG']['tl_install']['update']      = array('Update database tables', 'Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually. In this case, please go to <strong>system/modules</strong> and search all its subfolders for <strong>config/database.sql</strong> files.');
+$GLOBALS['TL_LANG']['tl_install']['collation']   = array('Collation', 'For more information see the <a href="http://dev.mysql.com/doc/refman/5.1/en/charset-unicode-sets.html" target="_blank">MySQL manual</a>.');
+$GLOBALS['TL_LANG']['tl_install']['update']      = array('Update database tables', 'Please note that the update assistant has only been tested with MySQL and MySQLi drivers. If you are using a different database (e.g. Oracle), you might have to install or update your database manually.');
 $GLOBALS['TL_LANG']['tl_install']['template']    = array('Import a template', 'Here you can import an <em>.sql</em> file from the <em>templates</em> directory with a pre-configured example website. Existing data will be deleted! If you only want to import a theme, please use the theme manager in the Contao back end instead.');
 $GLOBALS['TL_LANG']['tl_install']['admin']       = array('Create an admin user', 'If you have imported the example website, the admin\'s username is <strong>k.jones</strong> and the password is <strong>kevinjones</strong>. See the example website (front end) for more information.');
 $GLOBALS['TL_LANG']['tl_install']['completed']   = array('Congratulations!', 'Now please log into the <a href="contao/index.php">Contao back end</a> and check the system settings. Then visit your website to make sure that Contao is working correctly.');
@@ -76,6 +75,7 @@ $GLOBALS['TL_LANG']['tl_install']['updateConfirm']  = 'The database is up to dat
 $GLOBALS['TL_LANG']['tl_install']['updateSave']     = 'Update database';
 $GLOBALS['TL_LANG']['tl_install']['updateX']        = 'It seems that you are upgrading from a Contao version prior to version %s. If that is the case, <strong>it is required to run the version %s update</strong> to ensure the integrity of your data!';
 $GLOBALS['TL_LANG']['tl_install']['updateXrun']     = 'Run version %s update';
+$GLOBALS['TL_LANG']['tl_install']['updateXrunStep'] = 'Run version %s update - step %s';
 $GLOBALS['TL_LANG']['tl_install']['importError']    = 'Please choose a template file!';
 $GLOBALS['TL_LANG']['tl_install']['importConfirm']  = 'Template imported on %s';
 $GLOBALS['TL_LANG']['tl_install']['importWarn']     = 'Any existing data will be deleted!';
@@ -108,5 +108,3 @@ $GLOBALS['TL_LANG']['tl_install']['ALTER_ADD']    = 'Add new columns';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_CHANGE'] = 'Change existing columns';
 $GLOBALS['TL_LANG']['tl_install']['ALTER_DROP']   = 'Drop existing columns';
 $GLOBALS['TL_LANG']['tl_install']['DROP']         = 'Drop existing tables';
-
-?>

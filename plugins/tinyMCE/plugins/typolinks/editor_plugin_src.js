@@ -1,6 +1,6 @@
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -18,12 +18,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Plugins
  * @license    LGPL
- * @filesource
  */
 (function() {
 	tinymce.create('tinymce.plugins.TypolinksPlugin', {
@@ -60,7 +59,7 @@
 			// Register lightbox image command
 			ed.addCommand('mceTypobox', function() {
 				ed.windowManager.open({
-					file : url + '/typobox.html',
+					file : url + '/typobox.htm',
 					width : 360 + parseInt(ed.getLang('typobox.delta_width', 0)),
 					height : 256 + parseInt(ed.getLang('typobox.delta_height', 0)),
 					inline : 1
@@ -83,7 +82,7 @@
 				author : 'Leo Feyer',
 				authorurl : 'http://www.inetrobots.com',
 				infourl : 'http://www.contao.org',
-				version : '3.4.2'
+				version : '3.4.6'
 			};
 		}
 	});

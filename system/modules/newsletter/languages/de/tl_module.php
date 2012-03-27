@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
 
 
@@ -38,7 +37,6 @@ $GLOBALS['TL_LANG']['tl_module']['nl_hideChannels'] = array('Verteilermenü ausb
 $GLOBALS['TL_LANG']['tl_module']['nl_subscribe']    = array('Abonnementbestätigung', 'Sie können die Platzhalter <em>##channels##</em> (Name der Verteiler), <em>##domain##</em> (Domainname) und <em>##link##</em> (Aktivierungslink) verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['nl_unsubscribe']  = array('Kündigungsbestätigung', 'Sie können die Platzhalter <em>##channels##</em> (Name der Verteiler) und <em>##domain##</em> (Domainname) verwenden.');
 $GLOBALS['TL_LANG']['tl_module']['nl_template']     = array('Newslettertemplate', 'Hier können Sie das Newslettertemplate auswählen.');
-$GLOBALS['TL_LANG']['tl_module']['nl_includeCss']   = array('Stylesheet parsen', 'Das Stylesheet <em>newsletter.css</em> der Frontendseite hinzufügen.');
 
 
 /**
@@ -46,5 +44,3 @@ $GLOBALS['TL_LANG']['tl_module']['nl_includeCss']   = array('Stylesheet parsen',
  */
 $GLOBALS['TL_LANG']['tl_module']['text_subscribe']   = array('Ihr Abonnement auf %s', "Sie haben folgende Verteiler auf ##domain## abonniert:\n\n##channels##\n\nBitte klicken Sie ##link## um Ihr Abonnement zu aktivieren. Falls Sie die Bestellung nicht selbst getätigt haben, bitte ignorieren Sie diese E-Mail.\n");
 $GLOBALS['TL_LANG']['tl_module']['text_unsubscribe'] = array('Ihr Abonnement auf %s', "Sie haben folgende Abonnements auf ##domain## gekündigt:\n\n##channels##\n");
-
-?>

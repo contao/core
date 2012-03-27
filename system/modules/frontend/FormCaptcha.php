@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormCaptcha
  *
  * File upload field.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormCaptcha extends Widget
+class FormCaptcha extends \Widget
 {
 
 	/**
@@ -63,7 +68,7 @@ class FormCaptcha extends Widget
 	 * Initialize the object
 	 * @param array
 	 */
-	public function __construct($arrAttributes=false)
+	public function __construct($arrAttributes=null)
 	{
 		parent::__construct($arrAttributes);
 
@@ -77,6 +82,7 @@ class FormCaptcha extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -95,7 +101,8 @@ class FormCaptcha extends Widget
 
 
 	/**
-	 * Validate input and set value
+	 * Validate the input and set the value
+	 * @return void
 	 */
 	public function validate()
 	{
@@ -117,7 +124,7 @@ class FormCaptcha extends Widget
 	 */
 	public function generateLabel()
 	{
-		if (!strlen($this->strLabel))
+		if ($this->strLabel == '')
 		{
 			return '';
 		}
@@ -199,5 +206,3 @@ class FormCaptcha extends Widget
 		$this->strQuestion = $strEncoded;
 	}
 }
-
-?>

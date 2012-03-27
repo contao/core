@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,25 +20,36 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ContentDownloads
  *
  * Front end content element "downloads".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ContentDownloads extends ContentElement
+class ContentDownloads extends \ContentElement
 {
+
+	/**
+	 * Files object
+	 * @var \Contao\FilesCollection
+	 */
+	protected $objFiles;
 
 	/**
 	 * Template
@@ -53,8 +64,6 @@ class ContentDownloads extends ContentElement
 	 */
 	public function generate()
 	{
-		$this->multiSRC = deserialize($this->multiSRC);
-
 		// Use the home directory of the current user as file source
 		if ($this->useHomeDir && FE_USER_LOGGED_IN)
 		{
@@ -65,9 +74,27 @@ class ContentDownloads extends ContentElement
 				$this->multiSRC = array($this->User->homeDir);
 			}
 		}
+		else
+		{
+			$this->multiSRC = deserialize($this->multiSRC);
+		}
 
 		// Return if there are no files
-		if (!is_array($this->multiSRC) || count($this->multiSRC) < 1)
+		if (!is_array($this->multiSRC) || empty($this->multiSRC))
+		{
+			return '';
+		}
+
+		// Check for version 3 format
+		if (!is_numeric($this->multiSRC[0]))
+		{
+			return '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+		}
+
+		// Get the file entries from the database
+		$this->objFiles = \FilesCollection::findMultipleByIds($this->multiSRC);
+
+		if ($this->objFiles === null)
 		{
 			return '';
 		}
@@ -75,9 +102,24 @@ class ContentDownloads extends ContentElement
 		$file = $this->Input->get('file', true);
 
 		// Send the file to the browser
-		if ($file != '' && (in_array($file, $this->multiSRC) || in_array(dirname($file), $this->multiSRC)) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
+		if ($file != '' && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
 		{
-			$this->sendFileToBrowser($file);
+			while ($this->objFiles->next())
+			{
+				if ($file == $this->objFiles->path || dirname($file) == $this->objFiles->path)
+				{
+					$this->sendFileToBrowser($file);
+				}
+			}
+
+			// Do not index or cache the page
+			global $objPage;
+			$objPage->noSearch = 1;
+			$objPage->cache = 0;
+
+			// Send a 404 header
+			header('HTTP/1.1 404 Not Found');
+			return '<p class="error">' . sprintf($GLOBALS['TL_LANG']['ERR']['download'], $file) . '</p>';
 		}
 
 		return parent::generate();
@@ -85,92 +127,120 @@ class ContentDownloads extends ContentElement
 
 
 	/**
-	 * Generate content element
+	 * Generate the content element
+	 * @return void
 	 */
 	protected function compile()
 	{
+		global $objPage;
+
 		$files = array();
 		$auxDate = array();
+		$auxId = array();
 
+		$objFiles = $this->objFiles;
 		$allowedDownload = trimsplit(',', strtolower($GLOBALS['TL_CONFIG']['allowedDownload']));
 
 		// Get all files
-		foreach ($this->multiSRC as $file)
+		while ($objFiles->next())
 		{
-			if (isset($files[$file]) || !file_exists(TL_ROOT . '/' . $file))
+			// Continue if the files has been processed or does not exist
+			if (isset($files[$objFiles->path]) || !file_exists(TL_ROOT . '/' . $objFiles->path))
 			{
 				continue;
 			}
 
 			// Single files
-			if (is_file(TL_ROOT . '/' . $file))
+			if ($objFiles->type == 'file')
 			{
-				$objFile = new File($file);
+				$objFile = new \File($objFiles->path);
 
-				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($file)))
-				{
-					$this->parseMetaFile(dirname($file), true);
-					$arrMeta = $this->arrMeta[$objFile->basename];
-
-					if ($arrMeta[0] == '')
-					{
-						$arrMeta[0] = specialchars($objFile->basename);
-					}
-
-					$files[$file] = array
-					(
-						'link' => $arrMeta[0],
-						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file),
-						'caption' => $arrMeta[2],
-						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
-						'mime' => $objFile->mime,
-						'meta' => $arrMeta,
-						'extension' => $objFile->extension
-					);
-
-					$auxDate[] = $objFile->mtime;
-				}
-
-				continue;
-			}
-
-			$subfiles = scan(TL_ROOT . '/' . $file);
-			$this->parseMetaFile($file);
-
-			// Folders
-			foreach ($subfiles as $subfile)
-			{
-				if (is_dir(TL_ROOT . '/' . $file . '/' . $subfile))
+				if (!in_array($objFile->extension, $allowedDownload) || preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
 				{
 					continue;
 				}
 
-				$objFile = new File($file . '/' . $subfile);
+				$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
 
-				if (in_array($objFile->extension, $allowedDownload) && !preg_match('/^meta(_[a-z]{2})?\.txt$/', basename($subfile)))
+				// Use the file name as title if none is given
+				if ($arrMeta['title'] == '')
 				{
-					$arrMeta = $this->arrMeta[$objFile->basename];
+					$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+				}
 
-					if ($arrMeta[0] == '')
+				// Add the image
+				$files[$objFiles->path] = array
+				(
+					'id'        => $objFiles->id,
+					'name'      => $objFile->basename,
+					'title'     => $arrMeta['title'],
+					'link'      => $arrMeta['title'],
+					'caption'   => $arrMeta['caption'],
+					'href'      => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objFiles->path),
+					'filesize'  => $this->getReadableSize($objFile->filesize, 1),
+					'icon'      => TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+					'mime'      => $objFile->mime,
+					'meta'      => $arrMeta,
+					'extension' => $objFile->extension,
+					'path'      => $objFile->dirname
+				);
+
+				$auxDate[] = $objFile->mtime;
+				$auxId[] = $objFiles->id;
+			}
+
+			// Folders
+			else
+			{
+				$objSubfiles = \FilesCollection::findByPid($objFiles->id);
+
+				if ($objSubfiles === null)
+				{
+					continue;
+				}
+
+				while ($objSubfiles->next())
+				{
+					// Skip subfolders
+					if ($objSubfiles->type == 'folder')
 					{
-						$arrMeta[0] = specialchars($objFile->basename);
+						continue;
 					}
 
-					$files[$file . '/' . $subfile] = array
+					$objFile = new \File($objSubfiles->path);
+
+					if (!in_array($objFile->extension, $allowedDownload) || preg_match('/^meta(_[a-z]{2})?\.txt$/', $objFile->basename))
+					{
+						continue;
+					}
+
+					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					// Use the file name as title if none is given
+					if ($arrMeta['title'] == '')
+					{
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename)));
+					}
+
+					// Add the image
+					$files[$objSubfiles->path] = array
 					(
-						'link' => $arrMeta[0],
-						'title' => $arrMeta[0],
-						'href' => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($file . '/' . $subfile),
-						'caption' => $arrMeta[2],
-						'filesize' => $this->getReadableSize($objFile->filesize, 1),
-						'icon' => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
-						'meta' => $arrMeta,
-						'extension' => $objFile->extension
+						'id'        => $objSubfiles->id,
+						'name'      => $objFile->basename,
+						'title'     => $arrMeta['title'],
+						'link'      => $arrMeta['title'],
+						'caption'   => $arrMeta['caption'],
+						'href'      => $this->Environment->request . (($GLOBALS['TL_CONFIG']['disableAlias'] || strpos($this->Environment->request, '?') !== false) ? '&amp;' : '?') . 'file=' . $this->urlEncode($objSubfiles->path),
+						'filesize'  => $this->getReadableSize($objFile->filesize, 1),
+						'icon'      => 'system/themes/' . $this->getTheme() . '/images/' . $objFile->icon,
+						'mime'      => $objFile->mime,
+						'meta'      => $arrMeta,
+						'extension' => $objFile->extension,
+						'path'      => $objFile->dirname
 					);
 
 					$auxDate[] = $objFile->mtime;
+					$auxId[] = $objSubfiles->id;
 				}
 			}
 		}
@@ -195,21 +265,48 @@ class ContentDownloads extends ContentElement
 				array_multisort($files, SORT_NUMERIC, $auxDate, SORT_DESC);
 				break;
 
-			case 'meta':
-				$arrFiles = array();
-				foreach ($this->arrAux as $k)
+			case 'meta': // Backwards compatibility
+			case 'custom':
+				if ($this->orderSRC != '')
 				{
-					if (strlen($k))
+					// Turn the order string into an array
+					$arrOrder = array_flip(array_map('intval', explode(',', $this->orderSRC)));
+
+					// Move the matching elements to their position in $arrOrder
+					foreach ($files as $k=>$v)
 					{
-						$arrFiles[] = $files[$k];
+						if (isset($arrOrder[$v['id']]))
+						{
+							$arrOrder[$v['id']] = $v;
+							unset($files[$k]);
+						}
 					}
+
+					// Append the left-over images at the end
+					if (!empty($files))
+					{
+						$arrOrder = array_merge($arrOrder, $files);
+					}
+
+					// Remove empty or numeric (not replaced) entries
+					foreach ($arrOrder as $k=>$v)
+					{
+						if ($v == '' || is_numeric($v))
+						{
+							unset($arrOrder[$k]);
+						}
+					}
+
+					$files = $arrOrder;
+					unset($arrOrder);
 				}
-				$files = $arrFiles;
+				break;
+
+			case 'random':
+				shuffle($files);
 				break;
 		}
 
 		$this->Template->files = array_values($files);
 	}
 }
-
-?>

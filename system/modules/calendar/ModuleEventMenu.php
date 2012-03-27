@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleEventMenu
  *
  * Front end module "event menu".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventMenu extends ModuleCalendar
+class ModuleEventMenu extends \ModuleCalendar
 {
 
 	/**
@@ -48,7 +53,7 @@ class ModuleEventMenu extends ModuleCalendar
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT MENU ###';
 			$objTemplate->title = $this->headline;
@@ -64,7 +69,8 @@ class ModuleEventMenu extends ModuleCalendar
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -89,12 +95,13 @@ class ModuleEventMenu extends ModuleCalendar
 
 	/**
 	 * Generate the yearly menu
+	 * @return void
 	 */
 	protected function compileYearlyMenu()
 	{
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_eventmenu_year');
+		$this->Template = new \FrontendTemplate('mod_eventmenu_year');
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -109,12 +116,8 @@ class ModuleEventMenu extends ModuleCalendar
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		$strUrl = $this->generateFrontendUrl($objPage->row());
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo);
 		$count = 0;
 		$limit = count($arrData);
 
@@ -134,18 +137,19 @@ class ModuleEventMenu extends ModuleCalendar
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->cal_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->cal_showQuantity != '') ? true : false;
 	}
 
 
 	/**
 	 * Generate the monthly menu
+	 * @return void
 	 */
 	protected function compileMonthlyMenu()
 	{
 		$arrData = array();
 
-		$this->Template = new FrontendTemplate('mod_eventmenu');
+		$this->Template = new \FrontendTemplate('mod_eventmenu');
 		$arrAllEvents = $this->getAllEvents($this->cal_calendar, 0, 2145913200);
 
 		foreach ($arrAllEvents as $intDay=>$arrDay)
@@ -165,12 +169,10 @@ class ModuleEventMenu extends ModuleCalendar
 		($this->cal_order == 'ascending') ? ksort($arrData) : krsort($arrData);
 		$arrItems = array();
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
+		// Get the current "jumpTo" page
+		$strUrl = $this->generateFrontendUrl($this->jumpTo, '/month/%s');
 
-		// Prepare navigation
+		// Prepare the navigation
 		foreach ($arrData as $intYear=>$arrMonth)
 		{
 			$count = 0;
@@ -185,7 +187,7 @@ class ModuleEventMenu extends ModuleCalendar
 
 				$arrItems[$intYear][$intMonth]['date'] = $intDate;
 				$arrItems[$intYear][$intMonth]['link'] = $GLOBALS['TL_LANG']['MONTHS'][$intMonth] . ' ' . $intYear;
-				$arrItems[$intYear][$intMonth]['href'] = $this->generateFrontendUrl($objPage->row()) . ($GLOBALS['TL_CONFIG']['disableAlias'] ? '&amp;' : '?') . 'month=' . $intDate;
+				$arrItems[$intYear][$intMonth]['href'] = sprintf($strUrl, $intDate);
 				$arrItems[$intYear][$intMonth]['title'] = specialchars($GLOBALS['TL_LANG']['MONTHS'][$intMonth].' '.$intYear . ' (' . $quantity . ')');
 				$arrItems[$intYear][$intMonth]['class'] = trim(((++$count == 1) ? 'first ' : '') . (($count == $limit) ? 'last' : ''));
 				$arrItems[$intYear][$intMonth]['isActive'] = ($this->Input->get('month') == $intDate);
@@ -194,8 +196,6 @@ class ModuleEventMenu extends ModuleCalendar
 		}
 
 		$this->Template->items = $arrItems;
-		$this->Template->showQuantity = strlen($this->cal_showQuantity) ? true : false;
+		$this->Template->showQuantity = ($this->cal_showQuantity != '') ? true : false;
 	}
 }
-
-?>

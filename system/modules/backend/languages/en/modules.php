@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -41,6 +40,7 @@ $GLOBALS['TL_LANG']['MOD']['css']         = array('Style sheets', 'Create style 
 $GLOBALS['TL_LANG']['MOD']['modules']     = array('Front end modules', 'Manage the front end modules of the website.');
 $GLOBALS['TL_LANG']['MOD']['layout']      = array('Page layouts', 'Combine modules and style sheets to a page layout.');
 $GLOBALS['TL_LANG']['MOD']['page']        = array('Site structure', 'Set up the site structure of your website(s).');
+$GLOBALS['TL_LANG']['MOD']['tpl_editor']  = array('Templates', 'Edit templates in the back end.');
 $GLOBALS['TL_LANG']['MOD']['accounts']    = 'Account manager';
 $GLOBALS['TL_LANG']['MOD']['member']      = array('Members', 'Manage member accounts (front end users).');
 $GLOBALS['TL_LANG']['MOD']['mgroup']      = array('Member groups', 'Manage member groups (front end user groups).');
@@ -54,6 +54,3 @@ $GLOBALS['TL_LANG']['MOD']['maintenance'] = array('Maintenance', 'Maintain or up
 $GLOBALS['TL_LANG']['MOD']['profile']     = 'User functions';
 $GLOBALS['TL_LANG']['MOD']['undo']        = array('Undo', 'Restore deleted records.');
 $GLOBALS['TL_LANG']['MOD']['login']       = array('Personal data', 'Change your personal data or set a new password.');
-$GLOBALS['TL_LANG']['MOD']['tasks']       = array('Task center', 'Assign tasks to other back end users.');
-
-?>

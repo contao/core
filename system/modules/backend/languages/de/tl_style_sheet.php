@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -44,7 +43,9 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['tstamp']     = array('Änderungsdatum', '
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name und Medientypen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['title_legend'] = 'Name';
+$GLOBALS['TL_LANG']['tl_style_sheet']['media_legend'] = 'Medieneinstellungen';
+$GLOBALS['TL_LANG']['tl_style_sheet']['vars_legend']  = 'Globale Variablen';
 
 
 /**
@@ -65,5 +66,3 @@ $GLOBALS['TL_LANG']['tl_style_sheet']['cut']        = array('Stylesheet verschie
 $GLOBALS['TL_LANG']['tl_style_sheet']['copy']       = array('Stylesheet duplizieren', 'Stylesheet ID %s duplizieren');
 $GLOBALS['TL_LANG']['tl_style_sheet']['delete']     = array('Stylesheet löschen', 'Stylesheet ID %s löschen');
 $GLOBALS['TL_LANG']['tl_style_sheet']['import']     = array('CSS-Import', 'Bestehende CSS-Dateien importieren');
-
-?>

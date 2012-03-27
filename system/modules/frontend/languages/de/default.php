@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,20 +20,20 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
 
 
 /**
  * Error messages
  */
-$GLOBALS['TL_LANG']['ERR']['form']    = 'Das Formular konnte nicht gesendet werden';
-$GLOBALS['TL_LANG']['ERR']['captcha'] = 'Bitte beantworten Sie die Sicherheitsfrage!';
+$GLOBALS['TL_LANG']['ERR']['form']     = 'Das Formular konnte nicht gesendet werden';
+$GLOBALS['TL_LANG']['ERR']['captcha']  = 'Bitte beantworten Sie die Sicherheitsfrage!';
+$GLOBALS['TL_LANG']['ERR']['download'] = 'Die Datei "%s" ist nicht für den Download verfügbar!';
 
 
 /**
@@ -134,5 +134,3 @@ $GLOBALS['TL_LANG']['MSC']['unpublished']   = 'Nicht veröffentlicht';
 $GLOBALS['TL_LANG']['MSC']['addComment']    = 'Einen Kommentar schreiben';
 $GLOBALS['TL_LANG']['MSC']['autologin']     = 'Angemeldet bleiben';
 $GLOBALS['TL_LANG']['MSC']['relevance']     = '%s Relevanz';
-
-?>

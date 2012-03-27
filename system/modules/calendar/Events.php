@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Events
  *
  * Provide methods to get all events of a certain period from the database.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Events extends Module
+abstract class Events extends \Module
 {
 
 	/**
@@ -45,6 +50,18 @@ abstract class Events extends Module
 	 * @var string
 	 */
 	protected $strUrl;
+
+	/**
+	 * Today 00:00:00
+	 * @var string
+	 */
+	protected $intTodayBegin;
+
+	/**
+	 * Today 23:59:59
+	 * @var string
+	 */
+	protected $intTodayEnd;
 
 	/**
 	 * Current events
@@ -60,33 +77,36 @@ abstract class Events extends Module
 	 */
 	protected function sortOutProtected($arrCalendars)
 	{
-		if (BE_USER_LOGGED_IN || !is_array($arrCalendars) || count($arrCalendars) < 1)
+		if (BE_USER_LOGGED_IN || !is_array($arrCalendars) || empty($arrCalendars))
 		{
 			return $arrCalendars;
 		}
 
 		$this->import('FrontendUser', 'User');
-		$objCalendar = $this->Database->execute("SELECT id, protected, groups FROM tl_calendar WHERE id IN(" . implode(',', array_map('intval', $arrCalendars)) . ")");
+		$objCalendar = \CalendarCollection::findMultipleByIds($arrCalendars);
 		$arrCalendars = array();
 
-		while ($objCalendar->next())
+		if ($objCalendar !== null)
 		{
-			if ($objCalendar->protected)
+			while ($objCalendar->next())
 			{
-				if (!FE_USER_LOGGED_IN)
+				if ($objCalendar->protected)
 				{
-					continue;
+					if (!FE_USER_LOGGED_IN)
+					{
+						continue;
+					}
+
+					$groups = deserialize($objCalendar->groups);
+
+					if (!is_array($groups) || empty($groups) || count(array_intersect($groups, $this->User->groups)) < 1)
+					{
+						continue;
+					}
 				}
 
-				$groups = deserialize($objCalendar->groups);
-
-				if (!is_array($groups) || count($groups) < 1 || count(array_intersect($groups, $this->User->groups)) < 1)
-				{
-					continue;
-				}
+				$arrCalendars[] = $objCalendar->id;
 			}
-
-			$arrCalendars[] = $objCalendar->id;
 		}
 
 		return $arrCalendars;
@@ -108,29 +128,23 @@ abstract class Events extends Module
 		}
 
 		$this->import('String');
-
-		$time = time();
 		$this->arrEvents = array();
 
 		foreach ($arrCalendars as $id)
 		{
 			$strUrl = $this->strUrl;
+			$objCalendar = \CalendarModel::findByPk($id);
 
-			// Get current "jumpTo" page
-			$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=(SELECT jumpTo FROM tl_calendar WHERE id=?)")
-									  ->limit(1)
-									  ->execute($id);
-
-			if ($objPage->numRows)
+			// Get the current "jumpTo" page
+			if ($objCalendar !== null && $objCalendar->jumpTo['id'] != '')
 			{
-				$strUrl = $this->generateFrontendUrl($objPage->row(), '/events/%s');
+				$strUrl = $this->generateFrontendUrl($objCalendar->jumpTo, ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/events/%s'));
 			}
 
-			// Get events of the current period
-			$objEvents = $this->Database->prepare("SELECT *, (SELECT title FROM tl_calendar WHERE id=?) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid=? AND ((startTime>=? AND startTime<=?) OR (endTime>=? AND endTime<=?) OR (startTime<=? AND endTime>=?) OR (recurring=1 AND (recurrences=0 OR repeatEnd>=?) AND startTime<=?))" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY startTime")
-										->execute($id, $id, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd, $intStart, $intEnd);
+			// Get the events of the current period
+			$objEvents = \CalendarEventsCollection::findCurrentByPid($id, $intStart, $intEnd);
 
-			if ($objEvents->numRows < 1)
+			if ($objEvents === null)
 			{
 				continue;
 			}
@@ -203,21 +217,22 @@ abstract class Events extends Module
 	 * @param integer
 	 * @param integer
 	 * @param integer
+	 * @return void
 	 */
-	protected function addEvent(Database_Result $objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
+	protected function addEvent($objEvents, $intStart, $intEnd, $strUrl, $intBegin, $intLimit, $intCalendar)
 	{
 		global $objPage;
 
 		$intDate = $intStart;
 		$intKey = date('Ymd', $intStart);
-		$span = Calendar::calculateSpan($intStart, $intEnd);
-		$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart);
+		$span = \Calendar::calculateSpan($intStart, $intEnd);
+		$strDate = $this->parseDate($objPage->dateFormat, $intStart);
 		$strDay = $GLOBALS['TL_LANG']['DAYS'][date('w', $intStart)];
 		$strMonth = $GLOBALS['TL_LANG']['MONTHS'][(date('n', $intStart)-1)];
 
 		if ($span > 0)
 		{
-			$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $intEnd);
+			$strDate = $this->parseDate($objPage->dateFormat, $intStart) . ' - ' . $this->parseDate($objPage->dateFormat, $intEnd);
 			$strDay = '';
 		}
 
@@ -227,15 +242,15 @@ abstract class Events extends Module
 		{
 			if ($span > 0)
 			{
-				$strDate = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $intEnd);
+				$strDate = $this->parseDate($objPage->datimFormat, $intStart) . ' - ' . $this->parseDate($objPage->datimFormat, $intEnd);
 			}
 			elseif ($intStart == $intEnd)
 			{
-				$strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart);
+				$strTime = $this->parseDate($objPage->timeFormat, $intStart);
 			}
 			else
 			{
-				$strTime = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intStart) . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $intEnd);
+				$strTime = $this->parseDate($objPage->timeFormat, $intStart) . ' - ' . $this->parseDate($objPage->timeFormat, $intEnd);
 			}
 		}
 
@@ -260,7 +275,7 @@ abstract class Events extends Module
 		// Override the link target
 		if ($objEvents->source == 'external' && $objEvents->target)
 		{
-			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+			$arrEvent['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 		}
 
 		// Clean the RTE output
@@ -295,6 +310,30 @@ abstract class Events extends Module
 			}
 		}
 
+		// Get todays start and end timestamp
+		if ($this->intTodayBegin === null)
+		{
+			$this->intTodayBegin = strtotime('00:00:00');
+		}
+		if ($this->intTodayEnd === null)
+		{
+			$this->intTodayEnd = strtotime('23:59:59');
+		}
+
+		// Mark past and upcoming events (see #3692)
+		if ($intEnd < $this->intTodayBegin)
+		{
+			$arrEvent['class'] .= ' bygone';
+		}
+		elseif ($intStart > $this->intTodayEnd)
+		{
+			$arrEvent['class'] .= ' upcoming';
+		}
+		else
+		{
+			$arrEvent['class'] .= ' current';
+		}
+
 		$this->arrEvents[$intKey][$intStart][] = $arrEvent;
 
 		// Multi-day event
@@ -320,7 +359,7 @@ abstract class Events extends Module
 	 * @param string
 	 * @return string
 	 */
-	protected function generateEventUrl(Database_Result $objEvent, $strUrl)
+	protected function generateEventUrl($objEvent, $strUrl)
 	{
 		switch ($objEvent->source)
 		{
@@ -340,25 +379,21 @@ abstract class Events extends Module
 
 			// Link to an internal page
 			case 'internal':
-				$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									 	  ->limit(1)
-										  ->execute($objEvent->jumpTo);
+				$objEvent->getRelated('jumpTo');
 
-				if ($objPage->numRows)
+				if ($objEvent->jumpTo['id'] > 0)
 				{
-					return ampersand($this->generateFrontendUrl($objPage->row()));
+					return ampersand($this->generateFrontendUrl($objEvent->jumpTo));
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objPage = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-										  ->limit(1)
-										  ->execute($objEvent->articleId);
+				$objArticle = \ArticleModel::findByPk($objEvent->articleId, array('eager'=>true));
 
-				if ($objPage->numRows)
+				if ($objArticle !== null)
 				{
-					return ampersand($this->generateFrontendUrl($objPage->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objPage->aAlias != '') ? $objPage->aAlias : $objPage->aId)));
+					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
@@ -370,11 +405,11 @@ abstract class Events extends Module
 
 	/**
 	 * Return the begin and end timestamp and an error message as array
-	 * @param object
+	 * @param \Date
 	 * @param string
 	 * @return array
 	 */
-	protected function getDatesFromFormat(Date $objDate, $strFormat)
+	protected function getDatesFromFormat(\Date $objDate, $strFormat)
 	{
 		switch ($strFormat)
 		{
@@ -396,86 +431,104 @@ abstract class Events extends Module
 				break;
 
 			case 'next_7':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+7 days', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_14':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+14 days', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_30':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+1 month', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_90':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+3 months', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_180':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+6 months', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_365':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+1 year', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'next_two':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array($objToday->dayBegin, (strtotime('+2 years', $objToday->dayBegin) - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
-			case 'next_all': // 2038-01-01 00:00:00
+			case 'next_cur_month':
 				$objToday = new Date();
+				return array($objToday->dayBegin, $objToday->monthEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'next_cur_year':
+				$objToday = new Date();
+				return array($objToday->dayBegin, $objToday->yearEnd, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'next_all': // 2038-01-01 00:00:00
+				$objToday = new \Date();
 				return array($objToday->dayBegin, 2145913200, $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_7':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-7 days', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_14':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-14 days', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_30':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-1 month', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_90':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-3 months', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_180':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-6 months', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_365':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-1 year', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
 			case 'past_two':
-				$objToday = new Date();
+				$objToday = new \Date();
 				return array((strtotime('-2 years', $objToday->dayBegin) - 1), ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 
-			case 'past_all': // 1970-01-01 00:00:00
+			case 'past_cur_month':
 				$objToday = new Date();
+				return array($objToday->monthBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'past_cur_year':
+				$objToday = new Date();
+				return array($objToday->yearBegin, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
+				break;
+
+			case 'past_all': // 1970-01-01 00:00:00
+				$objToday = new \Date();
 				return array(0, ($objToday->dayBegin - 1), $GLOBALS['TL_LANG']['MSC']['cal_empty']);
 				break;
 		}
 	}
 }
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Listing
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleListing
  *
  * Provide methods to render content element "listing".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleListing extends Module
+class ModuleListing extends \Module
 {
 
 	/**
@@ -61,7 +66,7 @@ class ModuleListing extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### LISTING ###';
 			$objTemplate->title = $this->headline;
@@ -98,7 +103,8 @@ class ModuleListing extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -128,7 +134,7 @@ class ModuleListing extends Module
 		$this->Template->searchable = false;
 		$arrSearchFields = trimsplit(',', $this->list_search);
 
-		if (is_array($arrSearchFields) && count($arrSearchFields))
+		if (is_array($arrSearchFields) && !empty($arrSearchFields))
 		{
 			$this->Template->searchable = true;
 
@@ -253,6 +259,7 @@ class ModuleListing extends Module
 			);
 		}
 
+		$j = 0;
 		$arrRows = $objData->fetchAllAssoc();
 
 		// TBODY
@@ -296,7 +303,7 @@ class ModuleListing extends Module
 		/**
 		 * Pagination
 		 */
-		$objPagination = new Pagination($objTotal->count, $per_page);
+		$objPagination = new \Pagination($objTotal->count, $per_page);
 		$this->Template->pagination = $objPagination->generate("\n  ");
 		$this->Template->per_page = $per_page;
 
@@ -305,7 +312,7 @@ class ModuleListing extends Module
 		 * Template variables
 		 */
 		$this->Template->action = $this->getIndexFreeRequest();
-		$this->Template->details = strlen($this->list_info) ? true : false;
+		$this->Template->details = ($this->list_info != '') ? true : false;
 		$this->Template->search_label = specialchars($GLOBALS['TL_LANG']['MSC']['search']);
 		$this->Template->per_page_label = specialchars($GLOBALS['TL_LANG']['MSC']['list_perPage']);
 		$this->Template->fields_label = $GLOBALS['TL_LANG']['MSC']['all_fields'][0];
@@ -321,6 +328,7 @@ class ModuleListing extends Module
 	/**
 	 * List a single record
 	 * @param integer
+	 * @return void
 	 */
 	protected function listSingleRecord($id)
 	{
@@ -330,14 +338,14 @@ class ModuleListing extends Module
 			$this->list_info_layout = 'info_default';
 		}
 
-		$this->Template = new FrontendTemplate($this->list_info_layout);
+		$this->Template = new \FrontendTemplate($this->list_info_layout);
 
 		$this->Template->record = array();
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->list_info = deserialize($this->list_info);
 
-		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (strlen($this->list_info_where) ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
+		$objRecord = $this->Database->prepare("SELECT " . $this->list_info . " FROM " . $this->list_table . " WHERE " . (($this->list_info_where != '') ? $this->list_info_where . " AND " : "") . $this->strPk . "=?")
 									->limit(1)
 									->execute($id);
 
@@ -392,6 +400,8 @@ class ModuleListing extends Module
 			return '';
 		}
 
+		global $objPage;
+
 		// Array
 		if (is_array($value))
 		{
@@ -401,26 +411,26 @@ class ModuleListing extends Module
 		// Date
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'date')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $value);
+			$value = $this->parseDate($objPage->dateFormat, $value);
 		}
 
 		// Time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'time')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $value);
+			$value = $this->parseDate($objPage->timeFormat, $value);
 		}
 
 		// Date and time
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'datim')
 		{
-			$value = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $value);
+			$value = $this->parseDate($objPage->datimFormat, $value);
 		}
 
 		// URLs
 		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['rgxp'] == 'url' && preg_match('@^(https?://|ftp://)@i', $value))
 		{
 			global $objPage;
-			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"') . '>' . $value . '</a>';
+			$value = '<a href="' . $value . '"' . (($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"') . '>' . $value . '</a>';
 		}
 
 		// E-mail addresses
@@ -437,7 +447,7 @@ class ModuleListing extends Module
 		}
 
 		// Associative array
-		elseif (array_is_assoc($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options']))
+		elseif ($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['eval']['isAssociative'] || array_is_assoc($GLOBALS['TL_DCA'][$this->list_table]['fields'][$k]['options']))
 		{
 			if ($blnListSingle)
 			{
@@ -452,5 +462,3 @@ class ModuleListing extends Module
 		return $value;
 	}
 }
-
-?>

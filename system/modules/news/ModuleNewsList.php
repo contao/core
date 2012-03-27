@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsList
  *
  * Front end module "news list".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsList extends ModuleNews
+class ModuleNewsList extends \ModuleNews
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleNewsList extends ModuleNews
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWS LIST ###';
 			$objTemplate->title = $this->headline;
@@ -69,7 +74,7 @@ class ModuleNewsList extends ModuleNews
 		$this->news_archives = $this->sortOutProtected(deserialize($this->news_archives));
 
 		// Return if there are no archives
-		if (!is_array($this->news_archives) || count($this->news_archives) < 1)
+		if (!is_array($this->news_archives) || empty($this->news_archives))
 		{
 			return '';
 		}
@@ -79,27 +84,49 @@ class ModuleNewsList extends ModuleNews
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		$time = time();
 		$skipFirst = intval($this->skipFirst);
 		$offset = 0;
 		$limit = null;
+		$this->Template->articles = array();
 
 		// Maximum number of items
-		if ($this->news_numberOfItems > 0)
+		if ($this->numberOfItems > 0)
 		{
-			$limit = $this->news_numberOfItems;
+			$limit = $this->numberOfItems;
+		}
+
+		// Handle featured news
+		if ($this->news_featured == 'featured')
+		{
+			$blnFeatured = true;
+		}
+		elseif ($this->news_featured == 'unfeatured')
+		{
+			$blnFeatured = false;
+		}
+		else
+		{
+			$blnFeatured = null;
 		}
 
 		// Get the total number of items
-		$objTotal = $this->Database->execute("SELECT COUNT(*) AS total FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
-		$total = $objTotal->total - $skipFirst;
+		$objTotal = \NewsCollection::countPublishedByPids($this->news_archives, $blnFeatured);
+
+		if ($objTotal === null)
+		{
+			$this->Template->articles = array();
+			return;
+		}
+
+		$total = $objTotal->count - $skipFirst;
 
 		// Split the results
-		if ($this->perPage > 0 && (!isset($limit) || $this->news_numberOfItems > $this->perPage))
+		if ($this->perPage > 0 && (!isset($limit) || $this->numberOfItems > $this->perPage))
 		{
 			// Adjust the overall limit
 			if (isset($limit))
@@ -107,15 +134,22 @@ class ModuleNewsList extends ModuleNews
 				$total = min($limit, $total);
 			}
 
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
 
-			// Check the maximum page number
-			if ($page > ($total/$this->perPage))
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$this->perPage))
 			{
-				$page = ceil($total/$this->perPage);
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				return;
 			}
 
-			// Limit and offset
+			// Set limit and offset
 			$limit = $this->perPage;
 			$offset = (max($page, 1) - 1) * $this->perPage;
 
@@ -126,34 +160,28 @@ class ModuleNewsList extends ModuleNews
 			}
 
 			// Add the pagination menu
-			$objPagination = new Pagination($total, $this->perPage);
+			$objPagination = new \Pagination($total, $this->perPage);
 			$this->Template->pagination = $objPagination->generate("\n  ");
 		}
 
-		$objArticlesStmt = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS archive, (SELECT jumpTo FROM tl_news_archive WHERE tl_news_archive.id=tl_news.pid) AS parentJumpTo, (SELECT name FROM tl_user WHERE id=author) AS author FROM tl_news WHERE pid IN(" . implode(',', array_map('intval', $this->news_archives)) . ")" . (($this->news_featured == 'featured') ? " AND featured=1" : (($this->news_featured == 'unfeatured') ? " AND featured=''" : "")) . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY date DESC");
-
-		// Limit the result
+		// Get the items
 		if (isset($limit))
 		{
-			$objArticlesStmt->limit($limit, $offset + $skipFirst);
+			$objArticles = \NewsCollection::findPublishedByPids($this->news_archives, $blnFeatured, $limit, $offset);
 		}
-		elseif ($skipFirst > 0)
+		else
 		{
-			$objArticlesStmt->limit(max($total, 1), $skipFirst);
+			$objArticles = \NewsCollection::findPublishedByPids($this->news_archives, $blnFeatured);
 		}
-
-		$objArticles = $objArticlesStmt->execute();
 
 		// No items found
-		if ($objArticles->numRows < 1)
+		if ($objArticles === null)
 		{
-			$this->Template = new FrontendTemplate('mod_newsarchive_empty');
+			$this->Template = new \FrontendTemplate('mod_newsarchive_empty');
 		}
 
-		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->archives = $this->news_archives;
+		$this->Template->articles = $this->parseArticles($objArticles);
 		$this->Template->empty = $GLOBALS['TL_LANG']['MSC']['emptyList'];
 	}
 }
-
-?>

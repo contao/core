@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,29 +20,34 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FrontendUser
  *
  * Provide methods to manage front end users.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Model
  */
-class FrontendUser extends User
+class FrontendUser extends \User
 {
 
 	/**
 	 * Current object instance (do not remove)
-	 * @var object
+	 * @var FrontendUser
 	 */
 	protected static $objInstance;
 
@@ -110,10 +115,9 @@ class FrontendUser extends User
 
 		$this->Session->setData($session);
 
-		if (strlen($this->intId))
+		if ($this->intId)
 		{
-			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")
-						   ->execute(serialize($session), $this->intId);
+			$this->Database->prepare("UPDATE " . $this->strTable . " SET session=? WHERE id=?")->execute(serialize($session), $this->intId);
 		}
 	}
 
@@ -122,6 +126,7 @@ class FrontendUser extends User
 	 * Extend parent setter class and modify some parameters
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -159,21 +164,6 @@ class FrontendUser extends User
 				return parent::__get($strKey);
 				break;
 		}
-	}
-
-
-	/**
-	 * Return the current object instance (Singleton)
-	 * @return object
-	 */
-	public static function getInstance()
-	{
-		if (!is_object(self::$objInstance))
-		{
-			self::$objInstance = new FrontendUser();
-		}
-
-		return self::$objInstance;
 	}
 	
 
@@ -287,12 +277,13 @@ class FrontendUser extends User
 
 	/**
 	 * Save the original group membership
-	 * @param  int
+	 * @param string
+	 * @param integer
 	 * @return boolean
 	 */
-	public function findBy($strRefField, $varRefId)
+	public function findBy($strColumn, $varValue)
 	{
-		if (parent::findBy($strRefField, $varRefId) === false)
+		if (parent::findBy($strColumn, $varValue) === false)
 		{
 			return false;
 		}
@@ -304,23 +295,21 @@ class FrontendUser extends User
 
 	/**
 	 * Restore the original group membership
-	 * @param  boolean
-	 * @return int
+	 * @param boolean
+	 * @return void
 	 */
 	public function save($blnForceInsert=false)
 	{
 		$groups = $this->groups;
 		$this->arrData['groups'] = $this->arrGroups;
-		$return = parent::save($blnForceInsert);
+		parent::save($blnForceInsert);
 		$this->groups = $groups;
-
-		return $return;
 	}
 
 
 	/**
 	 * Set all user properties from a database record
-	 * @param object
+	 * @return void
 	 */
 	protected function setUserFromDb()
 	{
@@ -346,23 +335,21 @@ class FrontendUser extends User
 		// Make sure that groups is an array
 		if (!is_array($this->groups))
 		{
-			$this->groups = strlen($this->groups) ? array($this->groups) : array();
+			$this->groups = ($this->groups != '') ? array($this->groups) : array();
 		}
 
-		$time = time();
-
 		// Skip inactive groups
-		$objGroups = $this->Database->execute("SELECT id FROM tl_member_group WHERE disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)");
-		$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
+		if (($objGroups = \MemberGroupCollection::findAllActive()) !== null)
+		{
+			$this->groups = array_intersect($this->groups, $objGroups->fetchEach('id'));
+		}
 
-		// Get group login page
+		// Get the group login page
 		if ($this->groups[0] > 0)
 		{
-			$objGroup = $this->Database->prepare("SELECT * FROM tl_member_group WHERE id=? AND disable!=1 AND (start='' OR start<$time) AND (stop='' OR stop>$time)")
-									   ->limit(1)
-									   ->execute($this->groups[0]);
+			$objGroup = \MemberGroupModel::findPublishedById($this->groups[0]);
 
-			if ($objGroup->numRows && $objGroup->redirect && $objGroup->jumpTo)
+			if ($objGroup !== null && $objGroup->redirect && $objGroup->jumpTo)
 			{
 				$this->strLoginPage = $objGroup->jumpTo;
 			}
@@ -379,5 +366,3 @@ class FrontendUser extends User
 		}
 	}
 }
-
-?>

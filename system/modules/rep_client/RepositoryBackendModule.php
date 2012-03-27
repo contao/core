@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Repository
  * @license    LGPL
- * @filesource
  */
 
 
@@ -36,7 +35,7 @@
  * @author     Peter Koch, IBK Software AG
  * @license    See accompaning file LICENSE.txt
  */
-require_once(dirname(dirname(__FILE__)).'/rep_base/RepositorySettings.php');
+require_once dirname(dirname(__FILE__)).'/rep_base/RepositorySettings.php';
 
 
 /**
@@ -112,7 +111,7 @@ class RepositoryBackendModule extends BackendModule
 		$rep->f_action	= $this->compiler;
 		$rep->f_mode	= $this->action;
 		$rep->theme		= new RepositoryBackendTheme();
-		$rep->backLink	= $this->getReferer(ENCODE_AMPERSANDS);
+		$rep->backLink	= $this->getReferer(true);
 		$rep->homeLink	= $this->createUrl();
 
 		// load soap client in case wsdl file is defined
@@ -221,5 +220,3 @@ class RepositoryBackendModule extends BackendModule
 	} // getExtensionList
 
 } // class RepositoryBackendModule
-
-?>

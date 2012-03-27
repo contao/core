@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Newsletter
  * @license    LGPL
- * @filesource
  */
 
 
@@ -64,5 +63,3 @@ $GLOBALS['TL_LANG']['tl_newsletter_recipients']['delete']     = array('Abonnente
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['editheader'] = array('Verteiler bearbeiten', 'Die Verteiler-Einstellungen bearbeiten');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['toggle']     = array('Abonnenten aktivieren/deaktivieren', 'Abonnenten ID %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_newsletter_recipients']['import']     = array('CSV-Import', 'Abonnenten aus einer CSV-Datei importieren');
-
-?>

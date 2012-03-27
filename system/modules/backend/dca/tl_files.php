@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -39,11 +38,20 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Folder',
-		'uploadScript'                => 'fancyUpload',
 		'onload_callback' => array
 		(
 			array('tl_files', 'checkPermission'),
 			array('tl_files', 'addBreadcrumb'),
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'pid' => 'index',
+				'path' => 'index',
+				'extension' => 'index'
+			)
 		)
 	),
 
@@ -52,6 +60,12 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	(
 		'global_operations' => array
 		(
+			'sync' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_files']['sync'],
+				'href'                => 'act=sync',
+				'class'               => 'header_sync'
+			),
 			'toggleNodes' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
@@ -63,7 +77,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -80,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['copy'],
 				'href'                => 'act=paste&amp;mode=copy',
 				'icon'                => 'copy.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'copyFile')
 			),
 			'cut' => array
@@ -88,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['cut'],
 				'href'                => 'act=paste&amp;mode=cut',
 				'icon'                => 'cut.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'cutFile')
 			),
 			'source' => array
@@ -110,7 +124,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_files']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_files', 'deleteFile')
 			)
 		)
@@ -119,21 +133,61 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'name'
+		'default'                     => 'name,meta'
 	),
 
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'pid' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'type' => array
+		(
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'path' => array
+		(
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'extension' => array
+		(
+			'sql'                     => "varchar(16) NOT NULL default ''"
+		),
+		'hash' => array
+		(
+			'sql'                     => "varchar(32) NOT NULL default ''"
+		),
+		'found' => array
+		(
+			'sql'                     => "char(1) NOT NULL default '1'"
+		),
 		'name' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['name'],
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'decodeEntities'=>true),
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'decodeEntities'=>true),
 			'save_callback' => array
 			(
 				array('tl_files', 'checkFilename')
-			)
+			),
+			'sql'                     => "varchar(64) NOT NULL default ''"
+		),
+		'meta' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
+			'inputType'               => 'textarea',
+			'eval'                    => array('decodeEntities'=>true),
+			'sql'                     => "blob NULL"
 		)
 	)
 );
@@ -144,7 +198,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
  * Class tl_files
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -163,6 +217,7 @@ class tl_files extends Backend
 
 	/**
 	 * Check permissions to edit the file system
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -283,7 +338,7 @@ class tl_files extends Backend
 					if (is_dir(TL_ROOT . '/' . $strFile))
 					{
 						$files = scan(TL_ROOT . '/' . $strFile);
-						if (count($files) && !$f4)
+						if (!empty($files) && !$f4)
 						{
 							$this->log('No permission to delete folder "'.$strFile.'" recursively', 'tl_files checkPermission()', TL_ERROR);
 							$this->redirect('contao/main.php?act=error');
@@ -302,7 +357,7 @@ class tl_files extends Backend
 					break;
 
 				default:
-					if (count($this->User->fop) < 1)
+					if (empty($this->User->fop))
 					{
 						$this->log('No permission to manipulate files', 'tl_files checkPermission()', TL_ERROR);
 						$this->redirect('contao/main.php?act=error');
@@ -315,6 +370,7 @@ class tl_files extends Backend
 
 	/**
 	 * Add the breadcrumb menu
+	 * @return void
 	 */
 	public function addBreadcrumb()
 	{
@@ -392,10 +448,11 @@ class tl_files extends Backend
 	/**
 	 * Check a file name and romanize it
 	 * @param mixed
-	 * @param object
-	 * @return string
+	 * @param \DataContainer
+	 * @return mixed
+	 * @throws \Exception
 	 */
-	public function checkFilename($varValue, DataContainer $dc)
+	public function checkFilename($varValue, \DataContainer $dc)
 	{
 		$varValue = utf8_romanize($varValue);
 		$varValue = str_replace('"', '', $varValue);
@@ -407,7 +464,7 @@ class tl_files extends Backend
 
 		if (is_file(TL_ROOT .'/'. $dc->path .'/'. $varValue . $dc->extension))
 		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
+			throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['fileExists'], $dc->path .'/'. $varValue . $dc->extension));
 		}
 
 		return $varValue;
@@ -474,7 +531,7 @@ class tl_files extends Backend
 	 */
 	public function deleteFile($row, $href, $label, $title, $icon, $attributes)
 	{
-		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])))
+		if (is_dir(TL_ROOT . '/' . $row['id']) && count(scan(TL_ROOT . '/' . $row['id'])) > 0)
 		{
 			return ($this->User->isAdmin || $this->User->hasAccess('f4', 'fop')) ? '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ' : $this->generateImage(preg_replace('/\.gif$/i', '_.gif', $icon)).' ';
 		}
@@ -550,5 +607,3 @@ class tl_files extends Backend
 		return '<a href="'.$this->addToUrl($href.'&amp;id='.$row['id']).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
 	}
 }
-
-?>

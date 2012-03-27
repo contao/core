@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  * @license    LGPL
- * @filesource
  */
 
 
@@ -44,6 +43,15 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 		'onload_callback' => array
 		(
 			array('tl_comments', 'checkPermission')
+		),
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary',
+				'source' => 'index',
+				'parent' => 'index'
+			)
 		)
 	),
 
@@ -70,7 +78,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -87,14 +95,14 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_comments']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"',
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"',
 				'button_callback'     => array('tl_comments', 'deleteComment')
 			),
 			'toggle' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['tl_comments']['toggle'],
 				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset(); return AjaxRequest.toggleVisibility(this, %s);"',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
 				'button_callback'     => array('tl_comments', 'toggleIcon')
 			),
 			'show' => array
@@ -122,25 +130,36 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
+		'tstamp' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['source'],
 			'filter'                  => true,
 			'sorting'                 => true,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_comments'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'parent' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['parent'],
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_comments']['date'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'flag'                    => 8
+			'flag'                    => 8,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'name' => array
 		(
@@ -148,7 +167,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>64)
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>64),
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'email' => array
 		(
@@ -156,7 +176,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('mandatory'=>true, 'maxlength'=>128, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'rgxp'=>'email', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'website' => array
 		(
@@ -164,7 +185,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'text',
-			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50')
+			'eval'                    => array('maxlength'=>128, 'rgxp'=>'url', 'decodeEntities'=>true, 'tl_class'=>'w50'),
+			'sql'                     => "varchar(128) NOT NULL default ''"
 		),
 		'comment' => array
 		(
@@ -172,7 +194,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE')
+			'eval'                    => array('mandatory'=>true, 'rte'=>'tinyMCE'),
+			'sql'                     => "text NULL"
 		),
 		'addReply' => array
 		(
@@ -180,7 +203,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true)
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'author' => array
 		(
@@ -189,7 +213,9 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'inputType'               => 'select',
 			'foreignKey'              => 'tl_user.name',
-			'eval'                    => array('mandatory'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true)
+			'eval'                    => array('mandatory'=>true, 'chosen'=>true, 'doNotCopy'=>true, 'includeBlankOption'=>true),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'",
+			'relation'                => array('type'=>'belongsTo', 'load'=>'eager')
 		),
 		'reply' => array
 		(
@@ -197,7 +223,8 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('rte'=>'tinyMCE')
+			'eval'                    => array('rte'=>'tinyMCE'),
+			'sql'                     => "text NULL"
 		),
 		'published' => array
 		(
@@ -205,7 +232,16 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
 			'exclude'                 => true,
 			'filter'                  => true,
 			'inputType'               => 'checkbox',
-			'eval'                    => array('doNotCopy'=>true)
+			'eval'                    => array('doNotCopy'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'date' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
+		),
+		'ip' => array
+		(
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		)
 	)
 );
@@ -215,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_comments'] = array
  * Class tl_comments
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -234,6 +270,7 @@ class tl_comments extends Backend
 
 	/**
 	 * Check permissions to edit table tl_comments
+	 * @return void
 	 */
 	public function checkPermission()
 	{
@@ -269,7 +306,7 @@ class tl_comments extends Backend
 			case 'overrideAll':
 				$session = $this->Session->getData();
 
-				if (!is_array($session['CURRENT']['IDS']) || count($session['CURRENT']['IDS']) < 1)
+				if (!is_array($session['CURRENT']['IDS']) || empty($session['CURRENT']['IDS']))
 				{
 					break;
 				}
@@ -312,10 +349,13 @@ class tl_comments extends Backend
 			return true;
 		}
 
+		$this->import('Cache');
+		$strKey = __METHOD__ . '-' . $strSource . '-' . $intParent;
+
 		// Load cached result
-		if (isset($this->arrCache[$strSource][$intParent]))
+		if (isset($this->Cache->$strKey))
 		{
-			return $this->arrCache[$strSource][$intParent];
+			return $this->Cache->$strKey;
 		}
 
 		// Get the pagemounts
@@ -330,7 +370,7 @@ class tl_comments extends Backend
 		$pagemounts = array_unique($pagemounts);
 
 		// Order deny,allow
-		$this->arrCache[$strSource][$intParent] = false;
+		$this->Cache->$strKey = false;
 
 		switch ($strSource)
 		{
@@ -342,7 +382,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit its articles
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(4, $objPage->row()))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -354,7 +394,7 @@ class tl_comments extends Backend
 				// Check whether the page is mounted and the user is allowed to edit it
 				if ($objPage->numRows > 0 && in_array($objPage->id, $pagemounts) && $this->User->isAllowed(1, $objPage->row()))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -369,7 +409,7 @@ class tl_comments extends Backend
 					// Check the access to the news archive
 					if ($objArchive->numRows > 0 && $this->User->hasAccess($objArchive->pid, 'news'))
 					{
-						$this->arrCache[$strSource][$intParent] = true;
+						$this->Cache->$strKey = true;
 					}
 				}
 				break;
@@ -385,7 +425,7 @@ class tl_comments extends Backend
 					// Check the access to the calendar
 					if ($objCalendar->numRows > 0 && $this->User->hasAccess($objCalendar->pid, 'calendars'))
 					{
-						$this->arrCache[$strSource][$intParent] = true;
+						$this->Cache->$strKey = true;
 					}
 				}
 				break;
@@ -394,7 +434,7 @@ class tl_comments extends Backend
 				// Check the access to the FAQ module
 				if ($this->User->hasAccess('faq', 'modules'))
 				{
-					$this->arrCache[$strSource][$intParent] = true;
+					$this->Cache->$strKey = true;
 				}
 				break;
 
@@ -408,7 +448,7 @@ class tl_comments extends Backend
 
 						if ($this->$callback[0]->$callback[1]($intParent, $strSource) === true)
 						{
-							$this->arrCache[$strSource][$intParent] = true;
+							$this->Cache->$strKey = true;
 							break;
 						}
 					}
@@ -416,7 +456,7 @@ class tl_comments extends Backend
 				break;
 		}
 
-		return $this->arrCache[$strSource][$intParent];
+		return $this->Cache->$strKey;
 	}
 
 
@@ -503,8 +543,8 @@ class tl_comments extends Backend
 
 		return '
 <div class="comment_wrap">
-<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (strlen($arrRow['website']) ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
-<div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . ' block">
+<div class="cte_type ' . $key . '"><strong><a href="mailto:' . $arrRow['email'] . '" title="' . specialchars($arrRow['email']) . '">' . $arrRow['name'] . '</a></strong>' . (($arrRow['website'] != '') ? ' (<a href="' . $arrRow['website'] . '" title="' . specialchars($arrRow['website']) . '" target="_blank">' . $GLOBALS['TL_LANG']['MSC']['com_website'] . '</a>)' : '') . ' - ' . $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $arrRow['date']) . ' - IP ' . specialchars($arrRow['ip']) . '<br>' . $title . '</div>
+<div class="limit_height mark_links' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h52' : '') . '">
 ' . $arrRow['comment'] . '
 </div>
 </div>' . "\n    ";
@@ -587,6 +627,7 @@ class tl_comments extends Backend
 	 * Disable/enable a user group
 	 * @param integer
 	 * @param boolean
+	 * @return void
 	 */
 	public function toggleVisibility($intId, $blnVisible)
 	{
@@ -621,5 +662,3 @@ class tl_comments extends Backend
 		$this->createNewVersion('tl_comments', $intId);
 	}
 }
-
-?>

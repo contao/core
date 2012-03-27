@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class RebuildIndex
  *
  * Maintenance module "rebuild index".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class RebuildIndex extends Backend implements executable
+class RebuildIndex extends \Backend implements \executable
 {
 
 	/**
@@ -46,7 +51,7 @@ class RebuildIndex extends Backend implements executable
 	 */
 	public function isActive()
 	{
-		return ($this->Input->get('act') == 'index');
+		return ($GLOBALS['TL_CONFIG']['enableSearch'] && $this->Input->get('act') == 'index');
 	}
 
 
@@ -56,8 +61,13 @@ class RebuildIndex extends Backend implements executable
 	 */
 	public function run()
 	{
+		if (!$GLOBALS['TL_CONFIG']['enableSearch'])
+		{
+			return '';
+		}
+
 		$time = time();
-		$objTemplate = new BackendTemplate('be_rebuild_index');
+		$objTemplate = new \BackendTemplate('be_rebuild_index');
 		$objTemplate->action = ampersand($this->Environment->request);
 		$objTemplate->indexHeadline = $GLOBALS['TL_LANG']['tl_maintenance']['searchIndex'];
 		$objTemplate->isActive = $this->isActive();
@@ -72,6 +82,15 @@ class RebuildIndex extends Backend implements executable
 		// Rebuild the index
 		if ($this->Input->get('act') == 'index')
 		{
+			$this->import('RequestToken');
+
+			// Check the request token (see #4007)
+			if (!isset($_GET['rt']) || !$this->RequestToken->validate($this->Input->get('rt')))
+			{
+				$this->Session->set('INVALID_TOKEN_URL', $this->Environment->request);
+				$this->redirect('contao/confirm.php');
+			}
+
 			$arrPages = $this->findSearchablePages();
 
 			// HOOK: take additional pages
@@ -85,7 +104,7 @@ class RebuildIndex extends Backend implements executable
 			}
 
 			// Return if there are no pages
-			if (count($arrPages) < 1)
+			if (empty($arrPages))
 			{
 				$_SESSION['REBUILD_INDEX_ERROR'] = $GLOBALS['TL_LANG']['tl_maintenance']['noSearchable'];
 				$this->redirect($this->getReferer());
@@ -170,5 +189,3 @@ class RebuildIndex extends Backend implements executable
 		return $objTemplate->parse();
 	}
 }
-
-?>

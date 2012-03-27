@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormRadioButton
  *
  * Form field "radio button".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormRadioButton extends Widget
+class FormRadioButton extends \Widget
 {
 
 	/**
@@ -53,6 +58,12 @@ class FormRadioButton extends Widget
 	protected $strTemplate = 'form_radio';
 
 	/**
+	 * Error message
+	 * @var string
+	 */
+	protected $strError = '';
+
+	/**
 	 * Options
 	 * @var array
 	 */
@@ -63,20 +74,30 @@ class FormRadioButton extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
+				break;
+
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;
 
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
 			case 'rgxp':
+				// Ignore
 				break;
 
 			default:
@@ -88,8 +109,8 @@ class FormRadioButton extends Widget
 
 	/**
 	 * Return a parameter
-	 * @return string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -103,6 +124,18 @@ class FormRadioButton extends Widget
 				return parent::__get($strKey);
 				break;
 		}
+	}
+
+
+	/**
+	 * Override the parent method and inject the error message inside the fieldset (see #3392)
+	 * @param boolean
+	 * @return string
+	 */
+	public function generateWithError($blnSwitchOrder=false)
+	{
+		$this->strError = $this->getErrorAsHTML();
+		return $this->generate();
 	}
 
 
@@ -130,26 +163,26 @@ class FormRadioButton extends Widget
 
 		if ($this->strLabel != '')
 		{
-        	return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend><input type="hidden" name="%s" value=""%s%s</fieldset>',
+        	return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><legend>%s%s%s</legend>%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
         					$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
 							($this->required ? '<span class="invisible">'.$GLOBALS['TL_LANG']['MSC']['mandatory'].'</span> ' : ''),
 							$this->strLabel,
 							($this->required ? '<span class="mandatory">*</span>' : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();
 		}
 		else
 		{
-	        return sprintf('<fieldset id="ctrl_%s" class="radio_container%s"><input type="hidden" name="%s" value=""%s%s</fieldset>',
+	        return sprintf('<fieldset id="ctrl_%s" class="radio_container%s">%s<input type="hidden" name="%s" value=""%s%s</fieldset>',
     	    				$this->strId,
 							(($this->strClass != '') ? ' ' . $this->strClass : ''),
+							$this->strError,
 							$this->strName,
 							$this->strTagEnding,
 							$strOptions) . $this->addSubmit();
 		}
 	}
 }
-
-?>

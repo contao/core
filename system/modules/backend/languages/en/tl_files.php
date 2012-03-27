@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -48,27 +47,13 @@ $GLOBALS['TL_LANG']['tl_files']['editFile']    = 'Edit file "%s"';
 $GLOBALS['TL_LANG']['tl_files']['browseFiles'] = 'Browse files';
 $GLOBALS['TL_LANG']['tl_files']['clearList']   = 'Clear list';
 $GLOBALS['TL_LANG']['tl_files']['startUpload'] = 'Start upload';
-
-
-/**
- * FancyUpload
- */
-$GLOBALS['TL_LANG']['tl_files']['fancy_progressOverall'] = 'Overall Progress ({total})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentTitle']    = 'File Progress';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentFile']     = 'Uploading {name}';
-$GLOBALS['TL_LANG']['tl_files']['fancy_currentProgress'] = 'Upload: {bytesLoaded} with {rate}, {timeRemaining} remaining.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_remove']          = 'Remove';
-$GLOBALS['TL_LANG']['tl_files']['fancy_removeTitle']     = 'Click to remove this entry.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileError']       = 'Upload failed';
-$GLOBALS['TL_LANG']['tl_files']['fancy_duplicate']       = 'File <em>{name}</em> is already added, duplicates are not allowed.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMin']    = 'File <em>{name}</em> (<em>{size}</em>) is too small, the minimal file size is {fileSizeMin}.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_sizeLimitMax']    = 'File <em>{name}</em> (<em>{size}</em>) is too big, the maximal file size is <em>{fileSizeMax}</em>.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListMax']     = 'File <em>{name}</em> could not be added, amount of <em>{fileListMax} files</em> exceeded.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_fileListSizeMax'] = 'File <em>{name}</em> (<em>{size}</em>) is too big, overall filesize of <em>{fileListSizeMax}</em> exceeded.';
-$GLOBALS['TL_LANG']['tl_files']['fancy_httpStatus']      = 'Server returned HTTP-Status <code>#{code}</code>';
-$GLOBALS['TL_LANG']['tl_files']['fancy_securityError']   = 'Security error occured ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_ioError']         = 'Error caused a send or load operation to fail ({text})';
-$GLOBALS['TL_LANG']['tl_files']['fancy_uploadCompleted'] = 'Upload completed';
+$GLOBALS['TL_LANG']['tl_files']['syncFound']   = 'Found the original file "%s" at "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncRemoved'] = 'Removed the file or folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderC'] = 'Created the folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFolderF'] = 'Found the folder "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileC']   = 'Created the file "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncFileF']   = 'Found the file "%s"';
+$GLOBALS['TL_LANG']['tl_files']['syncHash']    = 'Updated the hash of the file "%s"';
 
 
 /**
@@ -84,5 +69,4 @@ $GLOBALS['TL_LANG']['tl_files']['protect']   = array('Protect folder', 'Protect 
 $GLOBALS['TL_LANG']['tl_files']['unlock']    = array('Remove protection', 'Unprotect folder "%s"');
 $GLOBALS['TL_LANG']['tl_files']['move']      = array('File upload', 'Upload files to the server');
 $GLOBALS['TL_LANG']['tl_files']['pasteinto'] = array('Paste into', 'Paste into this folder');
-
-?>
+$GLOBALS['TL_LANG']['tl_files']['sync']      = array('Synchronize', 'Synchronize the file system and the database');

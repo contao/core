@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class FormSelectMenu
  *
  * Form field "select menu".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class FormSelectMenu extends Widget
+class FormSelectMenu extends \Widget
 {
 
 	/**
@@ -63,11 +68,24 @@ class FormSelectMenu extends Widget
 	 * Add specific attributes
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
 		switch ($strKey)
 		{
+			case 'mandatory':
+				if ($varValue)
+				{
+					$this->arrAttributes['required'] = 'required';
+				}
+				else
+				{
+					unset($this->arrAttributes['required']);
+				}
+				parent::__set($strKey, $varValue);
+				break;
+
 			case 'mSize':
 				if ($this->multiple)
 				{
@@ -75,22 +93,19 @@ class FormSelectMenu extends Widget
 				}
 				break;
 
+			case 'multiple':
+				if ($varValue != '')
+				{
+					$this->arrAttributes['multiple'] = 'multiple';
+				}
+				break;
+
 			case 'options':
 				$this->arrOptions = deserialize($varValue);
 				break;
 
-			case 'multiple':
-				if (strlen($varValue))
-				{
-					$this->arrAttributes[$strKey] = 'multiple';
-				}
-				break;
-
-			case 'mandatory':
-				$this->arrConfiguration['mandatory'] = $varValue ? true : false;
-				break;
-
 			case 'rgxp':
+				// Ignore
 				break;
 
 			default:
@@ -102,6 +117,7 @@ class FormSelectMenu extends Widget
 
 	/**
 	 * Check options if the field is mandatory
+	 * @return void
 	 */
 	public function validate()
 	{
@@ -143,8 +159,8 @@ class FormSelectMenu extends Widget
 
 	/**
 	 * Return a parameter
-	 * @return string
-	 * @throws Exception
+	 * @param string
+	 * @return mixed
 	 */
 	public function __get($strKey)
 	{
@@ -184,7 +200,7 @@ class FormSelectMenu extends Widget
 		}
 
 		// Add empty option (XHTML) if there are none
-		if (!count($this->arrOptions))
+		if (empty($this->arrOptions))
 		{
 			$this->arrOptions = array(array('value'=>'', 'label'=>'-'));
 		}
@@ -216,6 +232,12 @@ class FormSelectMenu extends Widget
 			$strOptions .= '</optgroup>';
 		}
 
+		// Chosen
+		if ($this->chosen)
+		{
+			$strClass .= ' tl_chosen';
+		}
+
 		return sprintf('<select name="%s" id="ctrl_%s" class="%s%s"%s>%s</select>',
 						$this->strName,
 						$this->strId,
@@ -225,5 +247,3 @@ class FormSelectMenu extends Widget
 						$strOptions) . $this->addSubmit();
 	}
 }
-
-?>

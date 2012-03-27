@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleEventReader
  *
  * Front end module "event reader".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleEventReader extends Events
+class ModuleEventReader extends \Events
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleEventReader extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT READER ###';
 			$objTemplate->title = $this->headline;
@@ -66,29 +71,29 @@ class ModuleEventReader extends Events
 			return $objTemplate->parse();
 		}
 
-		// Return if no event has been specified
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('events', $this->Input->get('auto_item'));
+		}
+
+		// Do not index or cache the page if no event has been specified
 		if (!$this->Input->get('events'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar));
 
-		// Return if there are no calendars
-		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
+		// Do not index or cache the page if there are no calendars
+		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -97,7 +102,8 @@ class ModuleEventReader extends Events
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -107,23 +113,18 @@ class ModuleEventReader extends Events
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$time = time();
+		// Get the current event
+		$objEvent = \CalendarEventsModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $this->cal_calendar);
 
-		// Get current event
-		$objEvent = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_calendar WHERE tl_calendar.id=tl_calendar_events.pid) AS calendar, (SELECT name FROM tl_user WHERE id=author) author FROM tl_calendar_events WHERE pid IN(" . implode(',', array_map('intval', $this->cal_calendar)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<?) AND (stop='' OR stop>?) AND published=1" : ""))
-								   ->limit(1)
-								   ->execute((is_numeric($this->Input->get('events')) ? $this->Input->get('events') : 0), $this->Input->get('events'), $time, $time);
-
-		if ($objEvent->numRows < 1)
+		if ($objEvent === null)
 		{
-			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->event = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('events')) . '</p>';
 			return;
 		}
 
@@ -139,7 +140,7 @@ class ModuleEventReader extends Events
 			$objPage->description = $this->prepareMetaDescription($objEvent->teaser);
 		}
 
-		$span = Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
+		$span = \Calendar::calculateSpan($objEvent->startTime, $objEvent->endTime);
 
 		if ($objPage->outputFormat == 'xhtml')
 		{
@@ -157,15 +158,15 @@ class ModuleEventReader extends Events
 		// Get date
 		if ($span > 0)
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG'][($objEvent->addTime ? 'datimFormat' : 'dateFormat')], $objEvent->endTime) . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate(($objEvent->addTime ? $objPage->datimFormat : $objPage->dateFormat), $objEvent->endTime) . $strTimeClose;
 		}
 		elseif ($objEvent->startTime == $objEvent->endTime)
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $objEvent->startTime) . ')' : '') . $strTimeClose;
 		}
 		else
 		{
-			$date = $strTimeStart . $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $objEvent->endTime) . ')' : '') . $strTimeClose;
+			$date = $strTimeStart . $this->parseDate($objPage->dateFormat, $objEvent->startTime) . ($objEvent->addTime ? ' (' . $this->parseDate($objPage->timeFormat, $objEvent->startTime) . $strTimeClose . ' - ' . $strTimeEnd . $this->parseDate($objPage->timeFormat, $objEvent->endTime) . ')' : '') . $strTimeClose;
 		}
 
 		$until = '';
@@ -180,7 +181,7 @@ class ModuleEventReader extends Events
 
 			if ($objEvent->recurrences > 0)
 			{
-				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objEvent->repeatEnd));
+				$until = sprintf($GLOBALS['TL_LANG']['MSC']['cal_until'], $this->parseDate($objPage->dateFormat, $objEvent->repeatEnd));
 			}
 		}
 
@@ -195,13 +196,13 @@ class ModuleEventReader extends Events
 			}
 		}
 
-		$objTemplate = new FrontendTemplate($this->cal_template);
+		$objTemplate = new \FrontendTemplate($this->cal_template);
 		$objTemplate->setData($objEvent->row());
 
 		$objTemplate->date = $date;
 		$objTemplate->start = $objEvent->startTime;
 		$objTemplate->end = $objEvent->endTime;
-		$objTemplate->class = strlen($objEvent->cssClass) ? ' ' . $objEvent->cssClass : '';
+		$objTemplate->class = ($objEvent->cssClass != '') ? ' ' . $objEvent->cssClass : '';
 		$objTemplate->recurring = $recurring;
 		$objTemplate->until = $until;
 
@@ -220,10 +221,23 @@ class ModuleEventReader extends Events
 		$objTemplate->details = $this->String->encodeEmail($objEvent->details);
 		$objTemplate->addImage = false;
 
-		// Add image
-		if ($objEvent->addImage && is_file(TL_ROOT . '/' . $objEvent->singleSRC))
+		// Add an image
+		if ($objEvent->addImage && $objEvent->singleSRC != '')
 		{
-			$this->addImageToTemplate($objTemplate, $objEvent->row());
+			if (!is_numeric($objEvent->singleSRC))
+			{
+				$objTemplate->details = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objEvent->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objEvent->singleSRC = $objModel->path;
+					$this->addImageToTemplate($objTemplate, $objEvent->row());
+				}
+			}
 		}
 
 		$objTemplate->enclosure = array();
@@ -243,18 +257,7 @@ class ModuleEventReader extends Events
 			return;
 		}
 
-		// Check whether comments are allowed
-		$objCalendar = $this->Database->prepare("SELECT * FROM tl_calendar WHERE id=?")
-									  ->limit(1)
-									  ->execute($objEvent->pid);
-
-		if ($objCalendar->numRows < 1 || !$objCalendar->allowComments)
-		{
-			$this->Template->allowComments = false;
-			return;
-		}
-
-		$this->Template->allowComments = true;
+		$this->Template->allowComments = $objEvent->pid['allowComments'];
 
 		// Adjust the comments headline level
 		$intHl = min(intval(str_replace('h', '', $this->hl)), 5);
@@ -263,37 +266,28 @@ class ModuleEventReader extends Events
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
-		if ($objCalendar->notify != 'notify_author')
+		// Notify the system administrator
+		if ($objEvent->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
-		if ($objCalendar->notify != 'notify_admin')
+		// Notify the author
+		if ($objEvent->pid['notify'] != 'notify_admin' && $objEvent->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objEvent->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objEvent->author['email'];
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
-		$objConfig->perPage = $objCalendar->perPage;
-		$objConfig->order = $objCalendar->sortOrder;
+		$objConfig->perPage = $objEvent->pid['perPage'];
+		$objConfig->order = $objEvent->pid['sortOrder'];
 		$objConfig->template = $this->com_template;
-		$objConfig->requireLogin = $objCalendar->requireLogin;
-		$objConfig->disableCaptcha = $objCalendar->disableCaptcha;
-		$objConfig->bbcode = $objCalendar->bbcode;
-		$objConfig->moderate = $objCalendar->moderate;
+		$objConfig->requireLogin = $objEvent->pid['requireLogin'];
+		$objConfig->disableCaptcha = $objEvent->pid['disableCaptcha'];
+		$objConfig->bbcode = $objEvent->pid['bbcode'];
+		$objConfig->moderate = $objEvent->pid['moderate'];
 
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_calendar_events', $objEvent->id, $arrNotifies);
 	}
 }
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,25 +20,24 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
 
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_user']['calendars'] = array('Allowed calendars', 'Here you can grant access to one or more calendars.');
-$GLOBALS['TL_LANG']['tl_user']['calendarp'] = array('Calendar permissions', 'Here you can define the calendar permissions.');
+$GLOBALS['TL_LANG']['tl_user']['calendars']     = array('Allowed calendars', 'Here you can grant access to one or more calendars.');
+$GLOBALS['TL_LANG']['tl_user']['calendarp']     = array('Calendar permissions', 'Here you can define the calendar permissions.');
+$GLOBALS['TL_LANG']['tl_user']['calendarfeeds'] = array('Allowed RSS feeds', 'Here you can grant access to one or more calendar feeds.');
+$GLOBALS['TL_LANG']['tl_user']['calendarfeedp'] = array('RSS feed permissions', 'Here you can define the calendar feed permissions.');
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['calendars_legend'] = 'Calendar permissions';
-
-?>

@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,69 +20,94 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Comments
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Comments
  *
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class Comments extends Frontend
+class Comments extends \Frontend
 {
 
 	/**
 	 * Add comments to a template
-	 * @param object
-	 * @param object
+	 * @param \FrontendTemplate
+	 * @param \stdClass
 	 * @param string
 	 * @param integer
 	 * @param array
+	 * @return void
 	 */
-	public function addCommentsToTemplate($objTemplate, $objConfig, $strSource, $intParent, $arrNotifies)
+	public function addCommentsToTemplate(\FrontendTemplate $objTemplate, \stdClass $objConfig, $strSource, $intParent, $arrNotifies)
 	{
 		global $objPage;
 		$this->import('String');
 
-		$limit = null;
+		$limit = 0;
+		$offset = 0;
+		$total = 0;
+		$gtotal = 0;
 		$arrComments = array();
+		$objTemplate->comments = array(); // see #4064
 
 		// Pagination
 		if ($objConfig->perPage > 0)
 		{
+			// Get the total number of comments
+			$objTotal = \CommentsCollection::countPublishedBySourceAndParent($strSource, $intParent);
+			$total = $gtotal = $objTotal->count;
+
+			// Get the current page
 			$page = $this->Input->get('page') ? $this->Input->get('page') : 1;
+
+			// Do not index or cache the page if the page number is outside the range
+			if ($page < 1 || $page > ceil($total/$objConfig->perPage))
+			{
+				global $objPage;
+				$objPage->noSearch = 1;
+				$objPage->cache = 0;
+
+				// Send a 404 header
+				header('HTTP/1.1 404 Not Found');
+				$objTemplate->allowComments = false;
+				return;
+			}
+
+			// Set limit and offset
 			$limit = $objConfig->perPage;
 			$offset = ($page - 1) * $objConfig->perPage;
  
-			// Get the total number of comments
-			$objTotal = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_comments WHERE source=? AND parent=?" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
-									   ->execute($strSource, $intParent);
-
 			// Initialize the pagination menu
-			$objPagination = new Pagination($objTotal->count, $objConfig->perPage);
+			$objPagination = new \Pagination($total, $objConfig->perPage);
 			$objTemplate->pagination = $objPagination->generate("\n  ");
 		}
 
 		// Get all published comments
-		$objCommentsStmt = $this->Database->prepare("SELECT c.*, u.name as authorName FROM tl_comments c LEFT JOIN tl_user u ON c.author=u.id WHERE c.source=? AND c.parent=?" . (!BE_USER_LOGGED_IN ? " AND c.published=1" : "") . " ORDER BY c.date" . (($objConfig->order == 'descending') ? " DESC" : ""));
-
 		if ($limit)
 		{
-			$objCommentsStmt->limit($limit, $offset);
+			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent, $limit, $offset);
+		}
+		else
+		{
+			$objComments = \CommentsCollection::findPublishedBySourceAndParent($strSource, $intParent);
 		}
 
-		$objComments = $objCommentsStmt->execute($strSource, $intParent);
-		$total = $objComments->numRows;
-
-		if ($total > 0)
+		if ($objComments !== null && ($total = $objComments->count()) > 0)
 		{
 			$count = 0;
 
@@ -91,7 +116,7 @@ class Comments extends Frontend
 				$objConfig->template = 'com_default';
 			}
 
-			$objPartial = new FrontendTemplate($objConfig->template);
+			$objPartial = new \FrontendTemplate($objConfig->template);
 
 			while ($objComments->next())
 			{
@@ -109,8 +134,8 @@ class Comments extends Frontend
 
 				$objPartial->comment = trim(str_replace(array('{{', '}}'), array('&#123;&#123;', '&#125;&#125;'), $objComments->comment));
 
-				$objPartial->datim = $this->parseDate($GLOBALS['TL_CONFIG']['datimFormat'], $objComments->date);
-				$objPartial->date = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objComments->date);
+				$objPartial->datim = $this->parseDate($objPage->datimFormat, $objComments->date);
+				$objPartial->date = $this->parseDate($objPage->dateFormat, $objComments->date);
 				$objPartial->class = (($count < 1) ? ' first' : '') . (($count >= ($total - 1)) ? ' last' : '') . (($count % 2 == 0) ? ' even' : ' odd');
 				$objPartial->by = $GLOBALS['TL_LANG']['MSC']['comment_by'];
 				$objPartial->id = 'c' . $objComments->id;
@@ -119,7 +144,7 @@ class Comments extends Frontend
 				$objPartial->addReply = false;
 
 				// Reply
-				if ($objComments->addReply && $objComments->reply != '' && $objComments->authorName != '')
+				if ($objComments->addReply && $objComments->reply != '' && $objComments->author['name'] != '')
 				{
 					$objPartial->addReply = true;
 					$objPartial->rby = $GLOBALS['TL_LANG']['MSC']['reply_by'];
@@ -146,7 +171,7 @@ class Comments extends Frontend
 		$objTemplate->name = $GLOBALS['TL_LANG']['MSC']['com_name'];
 		$objTemplate->email = $GLOBALS['TL_LANG']['MSC']['com_email'];
 		$objTemplate->website = $GLOBALS['TL_LANG']['MSC']['com_website'];
-		$objTemplate->commentsTotal = $limit ? $objTotal->count : $total;
+		$objTemplate->commentsTotal = $limit ? $gtotal : $total;
 
 		// Get the front end user object
 		$this->import('FrontendUser', 'User');
@@ -241,16 +266,14 @@ class Comments extends Frontend
 		$objTemplate->fields = $arrWidgets;
 		$objTemplate->submit = $GLOBALS['TL_LANG']['MSC']['com_submit'];
 		$objTemplate->action = ampersand($this->Environment->request);
-		$objTemplate->messages = $this->getMessages();
+		$objTemplate->messages = ''; // Backwards compatibility
 		$objTemplate->formId = $strFormId;
 		$objTemplate->hasError = $doNotSubmit;
 
-		// Confirmation message
+		// Do not index or cache the page with the confirmation message
 		if ($_SESSION['TL_COMMENT_ADDED'])
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
@@ -298,12 +321,15 @@ class Comments extends Frontend
 				'email' => $arrWidgets['email']->value,
 				'website' => $strWebsite,
 				'comment' => $this->convertLineFeeds($strComment),
-				'ip' => $this->Environment->ip,
+				'ip' => $this->anonymizeIp($this->Environment->ip),
 				'date' => $time,
 				'published' => ($objConfig->moderate ? '' : 1)
 			);
 
-			$insertId = $this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute()->insertId;
+			$objComment = new \CommentsModel();
+			$objComment->setRow($arrSet);
+			$objComment->save();
+			$insertId = $objComment->id;
 
 			// HOOK: add custom logic
 			if (isset($GLOBALS['TL_HOOKS']['addComment']) && is_array($GLOBALS['TL_HOOKS']['addComment']))
@@ -311,12 +337,12 @@ class Comments extends Frontend
 				foreach ($GLOBALS['TL_HOOKS']['addComment'] as $callback)
 				{
 					$this->import($callback[0]);
-					$this->$callback[0]->$callback[1]($insertId, $arrSet);
+					$this->$callback[0]->$callback[1]($insertId, $arrSet, $this);
 				}
 			}
 
 			// Notification
-			$objEmail = new Email();
+			$objEmail = new \Email();
 
 			$objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
 			$objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
@@ -395,9 +421,9 @@ class Comments extends Frontend
 		(
 			'<strong>$1</strong>',
 			'<em>$1</em>',
-			'<span style="text-decoration:underline;">$1</span>',
+			'<span style="text-decoration:underline">$1</span>',
 			"\n\n" . '<div class="code"><p>'. $GLOBALS['TL_LANG']['MSC']['com_code'] .'</p><pre>$1</pre></div>' . "\n\n",
-			'<span style="color:$1;">$2</span>',
+			'<span style="color:$1">$2</span>',
 			"\n\n" . '<div class="quote">$1</div>' . "\n\n",
 			"\n\n" . '<div class="quote"><p>'. sprintf($GLOBALS['TL_LANG']['MSC']['com_quote'], '$1') .'</p>$2</div>' . "\n\n",
 			'<img src="$1" alt="" />',
@@ -447,5 +473,3 @@ class Comments extends Frontend
 		return preg_replace(array_keys($arrReplace), array_values($arrReplace), $strComment);
 	}
 }
-
-?>

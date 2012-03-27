@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,28 +20,33 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class StyleSheets
  *
  * Provide methods to handle style sheets.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class StyleSheets extends Backend
+class StyleSheets extends \Backend
 {
 
 	/**
-	 * Import String library
+	 * Import the String library
 	 */
 	public function __construct()
 	{
@@ -55,6 +60,7 @@ class StyleSheets extends Backend
 	/**
 	 * Update a particular style sheet
 	 * @param integer
+	 * @return void
 	 */
 	public function updateStyleSheet($intId)
 	{
@@ -71,7 +77,7 @@ class StyleSheets extends Backend
 		if ($this->Input->get('act') == 'delete')
 		{
 			$this->import('Files');
-			$this->Files->delete('system/scripts/' . $objStyleSheet->name . '.css');
+			$this->Files->delete('assets/css/' . $objStyleSheet->name . '.css');
 		}
 
 		// Update the CSS file
@@ -85,6 +91,7 @@ class StyleSheets extends Backend
 
 	/**
 	 * Update all style sheets in the scripts folder
+	 * @return void
 	 */
 	public function updateStyleSheets()
 	{
@@ -92,23 +99,32 @@ class StyleSheets extends Backend
 		$arrStyleSheets = $objStyleSheets->fetchEach('name');
 
 		// Make sure the dcaconfig.php file is loaded
-		include(TL_ROOT . '/system/config/dcaconfig.php');
+		@include TL_ROOT . '/system/config/dcaconfig.php';
 
 		// Delete old style sheets
-		foreach (scan(TL_ROOT . '/system/scripts', true) as $file)
+		foreach (scan(TL_ROOT . '/assets/css', true) as $file)
 		{
-			if (is_dir(TL_ROOT . '/system/scripts/' . $file))
+			// Skip directories
+			if (is_dir(TL_ROOT . '/assets/css/' . $file))
 			{
 				continue;
 			}
 
+			// Preserve root files (is this still required now that scripts are in assets/css/scripts?)
 			if (is_array($GLOBALS['TL_CONFIG']['rootFiles']) && in_array($file, $GLOBALS['TL_CONFIG']['rootFiles']))
 			{
 				continue;
 			}
 
-			$objFile = new File('system/scripts/' . $file);
+			// Do not delete the combined files (see #3605)
+			if (preg_match('/^[a-f0-9]{12}\.css$/', $file))
+			{
+				continue;
+			}
 
+			$objFile = new \File('assets/css/' . $file);
+
+			// Delete the old style sheet
 			if ($objFile->extension == 'css' && !in_array($objFile->filename, $arrStyleSheets))
 			{
 				$objFile->delete();
@@ -129,6 +145,7 @@ class StyleSheets extends Backend
 	/**
 	 * Write a style sheet to a file
 	 * @param array
+	 * @return void
 	 */
 	protected function writeStyleSheet($row)
 	{
@@ -140,21 +157,34 @@ class StyleSheets extends Backend
 		$row['name'] = basename($row['name']);
 
 		// Check whether the target file is writeable
-		if (file_exists(TL_ROOT . '/system/scripts/' . $row['name'] . '.css') && !$this->Files->is_writeable('system/scripts/' . $row['name'] . '.css'))
+		if (file_exists(TL_ROOT . '/assets/css/' . $row['name'] . '.css') && !$this->Files->is_writeable('assets/css/' . $row['name'] . '.css'))
 		{
-			$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'system/scripts/' . $row['name'] . '.css');
+			$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['notWriteable'], 'assets/css/' . $row['name'] . '.css'));
 			return;
 		}
 
-		$intCount = 0;
 		$vars = array();
 
-		// Global variables
+		// Get the global theme variables
+		$objTheme = $this->Database->prepare("SELECT vars FROM tl_theme WHERE id=?")
+								   ->limit(1)
+								   ->execute($row['pid']);
+
+		if ($objTheme->vars != '')
+		{
+			if (is_array(($tmp = deserialize($objTheme->vars))))
+			{
+				foreach ($tmp as $v)
+				{
+					$vars[$v['key']] = $v['value'];
+				}
+			}
+		}
+
+		// Merge the global style sheet variables
 		if ($row['vars'] != '')
 		{
-			$tmp = deserialize($row['vars']);
-
-			if (is_array($tmp))
+			if (is_array(($tmp = deserialize($row['vars']))))
 			{
 				foreach ($tmp as $v)
 				{
@@ -166,26 +196,16 @@ class StyleSheets extends Backend
 		// Sort by key length (see #3316)
 		uksort($vars, 'length_sort_desc');
 
-		$objFile = new File('system/scripts/' . $row['name'] . '.css');
+		$objFile = new \File('assets/css/' . $row['name'] . '.css');
 		$objFile->write('/* Style sheet ' . $row['name'] . " */\n");
 
 		$objDefinitions = $this->Database->prepare("SELECT * FROM tl_style WHERE pid=? AND invisible!=1 ORDER BY sorting")
 										 ->execute($row['id']);
 
+		// Append the definition
 		while ($objDefinitions->next())
 		{
-			$strText = $this->compileDefinition($objDefinitions->row(), true, $vars);
-			$intLength = strlen($strText);
-
-			// Add a line break after approximately 400 characters
-			if (!$GLOBALS['TL_CONFIG']['debugMode'] && ($intCount + $intLength) >= 400)
-			{
-				$intCount = 0;
-				$objFile->append('');
-			}
-
-			$intCount += $intLength;
-			$objFile->append($strText, '');
+			$objFile->append($this->compileDefinition($objDefinitions->row(), true, $vars), '');
 		}
 
 		$objFile->close();
@@ -213,7 +233,7 @@ class StyleSheets extends Backend
 		{
 			$strGlue = '';
 			$lb = "\n    ";
-			$return = "\n<pre>";
+			$return = "\n" . '<pre'. ($row['invisible'] ? ' class="disabled"' : '') .'>';
 		}
 
 		$blnNeedsPie = false;
@@ -237,7 +257,7 @@ class StyleSheets extends Backend
 			// Width
 			$row['width'] = deserialize($row['width']);
 
-			if ($row['width']['value'] != '')
+			if (isset($row['width']['value']) && $row['width']['value'] != '')
 			{
 				$return .= $lb . 'width:' . $row['width']['value'] . (($row['width']['value'] == 'auto') ? '' : $row['width']['unit']) . ';';
 			}
@@ -245,7 +265,7 @@ class StyleSheets extends Backend
 			// Height
 			$row['height'] = deserialize($row['height']);
 
-			if ($row['height']['value'] != '')
+			if (isset($row['height']['value']) && $row['height']['value'] != '')
 			{
 				$return .= $lb . 'height:' . $row['height']['value'] . (($row['height']['value'] == 'auto') ? '' : $row['height']['unit']) . ';';
 			}
@@ -253,7 +273,7 @@ class StyleSheets extends Backend
 			// Min-width
 			$row['minwidth'] = deserialize($row['minwidth']);
 
-			if ($row['minwidth']['value'] != '')
+			if (isset($row['minwidth']['value']) && $row['minwidth']['value'] != '')
 			{
 				$return .= $lb . 'min-width:' . $row['minwidth']['value'] . $row['minwidth']['unit'] . ';';
 			}
@@ -261,7 +281,7 @@ class StyleSheets extends Backend
 			// Min-height
 			$row['minheight'] = deserialize($row['minheight']);
 
-			if ($row['minheight']['value'] != '')
+			if (isset($row['minheight']['value']) && $row['minheight']['value'] != '')
 			{
 				$return .= $lb . 'min-height:' . $row['minheight']['value'] . $row['minheight']['unit'] . ';';
 			}
@@ -269,7 +289,7 @@ class StyleSheets extends Backend
 			// Max-width
 			$row['maxwidth'] = deserialize($row['maxwidth']);
 
-			if ($row['maxwidth']['value'] != '')
+			if (isset($row['maxwidth']['value']) && $row['maxwidth']['value'] != '')
 			{
 				$return .= $lb . 'max-width:' . $row['maxwidth']['value'] . $row['maxwidth']['unit'] . ';';
 			}
@@ -277,7 +297,7 @@ class StyleSheets extends Backend
 			// Max-height
 			$row['maxheight'] = deserialize($row['maxheight']);
 
-			if ($row['maxheight']['value'] != '')
+			if (isset($row['maxheight']['value']) && $row['maxheight']['value'] != '')
 			{
 				$return .= $lb . 'max-height:' . $row['maxheight']['value'] . $row['maxheight']['unit'] . ';';
 			}
@@ -463,7 +483,7 @@ class StyleSheets extends Backend
 			// Try to shorten the definition
 			if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 			{
-				$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'background:' . (($bgColor[0] != '') ? $this->compileColor($bgColor, $blnWriteToFile, $vars) . ' ' : '') . 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ';';
 			}
 			else
@@ -481,7 +501,7 @@ class StyleSheets extends Backend
 				}
 				elseif ($row['bgimage'] != '')
 				{
-					$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+					$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 					$return .= $lb . 'background-image:url("' . $glue . $row['bgimage'] . '");';
 				}
 
@@ -511,7 +531,7 @@ class StyleSheets extends Backend
 					// CSS3 PIE only supports -pie-background, so if there is a background image, include it here, too.
 					if ($row['bgimage'] != '' && $row['bgposition'] != '' && $row['bgrepeat'] != '')
 					{
-						$glue = (strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
+						$glue = (strncmp($row['bgimage'], 'data:', 5) !== 0 && strncmp($row['bgimage'], 'http://', 7) !== 0 && strncmp($row['bgimage'], 'https://', 8) !== 0 && strncmp($row['bgimage'], '/', 1) !== 0) ? $strGlue : '';
 						$bgImage = 'url("' . $glue . $row['bgimage'] . '") ' . $row['bgposition'] . ' ' . $row['bgrepeat'] . ',';
 					}
 
@@ -832,7 +852,7 @@ class StyleSheets extends Backend
 			// Border spacing
 			$row['borderspacing'] = deserialize($row['borderspacing']);
 
-			if ($row['borderspacing']['value'] != '')
+			if (isset($row['borderspacing']['value']) && $row['borderspacing']['value'] != '')
 			{
 				$return .= $lb . 'border-spacing:' . $row['borderspacing']['value'] . $row['borderspacing']['unit'] . ';';
 			}
@@ -843,11 +863,12 @@ class StyleSheets extends Backend
 		{
 			$row['fontsize'] = deserialize($row['fontsize']);
 			$row['lineheight'] = deserialize($row['lineheight']);
+			$row['fontfamily'] = str_replace(', ', ',', $row['fontfamily']);
 
 			// Try to shorten the definition
-			if ($row['fontfamily'] != '' && $row['fontfamily'] != 'inherit' && $row['fontsize']['value'] != '' && $row['fontsize']['value'] != 'inherit')
+			if ($row['fontfamily'] != '' && $row['fontfamily'] != 'inherit' && isset($row['fontsize']['value']) && $row['fontsize']['value'] != '' && $row['fontsize']['value'] != 'inherit')
 			{
-				$return .= $lb . 'font:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . (($row['lineheight']['value'] != '') ? '/' . $row['lineheight']['value'] . $row['lineheight']['unit'] : '') . ' ' . $row['fontfamily'] . ';';
+				$return .= $lb . 'font:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . ((isset($row['lineheight']['value']) && $row['lineheight']['value'] != '') ? '/' . $row['lineheight']['value'] . $row['lineheight']['unit'] : '') . ' ' . $row['fontfamily'] . ';';
 			}
 			else
 			{
@@ -858,13 +879,13 @@ class StyleSheets extends Backend
 				}
 
 				// Font size
-				if ($row['fontsize']['value'] != '')
+				if (isset($row['fontsize']['value']) && $row['fontsize']['value'] != '')
 				{
 					$return .= $lb . 'font-size:' . $row['fontsize']['value'] . $row['fontsize']['unit'] . ';';
 				}
 
 				// Line height
-				if ($row['lineheight']['value'] != '')
+				if (isset($row['lineheight']['value']) && $row['lineheight']['value'] != '')
 				{
 					$return .= $lb . 'line-height:' . $row['lineheight']['value'] . $row['lineheight']['unit'] . ';';
 				}
@@ -939,7 +960,7 @@ class StyleSheets extends Backend
 			// Text indent
 			$row['textindent'] = deserialize($row['textindent']);
 
-			if ($row['textindent']['value'] != '')
+			if (isset($row['textindent']['value']) && $row['textindent']['value'] != '')
 			{
 				$return .= $lb . 'text-indent:' . $row['textindent']['value'] . $row['textindent']['unit'] . ';';
 			}
@@ -947,7 +968,7 @@ class StyleSheets extends Backend
 			// Letter spacing
 			$row['letterspacing'] = deserialize($row['letterspacing']);
 
-			if ($row['letterspacing']['value'] != '')
+			if (isset($row['letterspacing']['value']) && $row['letterspacing']['value'] != '')
 			{
 				$return .= $lb . 'letter-spacing:' . $row['letterspacing']['value'] . $row['letterspacing']['unit'] . ';';
 			}
@@ -955,7 +976,7 @@ class StyleSheets extends Backend
 			// Word spacing
 			$row['wordspacing'] = deserialize($row['wordspacing']);
 
-			if ($row['wordspacing']['value'] != '')
+			if (isset($row['wordspacing']['value']) && $row['wordspacing']['value'] != '')
 			{
 				$return .= $lb . 'word-spacing:' . $row['wordspacing']['value'] . $row['wordspacing']['unit'] . ';';
 			}
@@ -977,7 +998,7 @@ class StyleSheets extends Backend
 			}
 			elseif ($row['liststyleimage'] != '')
 			{
-				$glue = (strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
+				$glue = (strncmp($row['liststyleimage'], 'data:', 5) !== 0 && strncmp($row['liststyleimage'], 'http://', 7) !== 0 && strncmp($row['liststyleimage'], 'https://', 8) !== 0 && strncmp($row['liststyleimage'], '/', 1) !== 0) ? $strGlue : '';
 				$return .= $lb . 'list-style-image:url("' . $glue . $row['liststyleimage'] . '");';
 			}
 		}
@@ -985,14 +1006,14 @@ class StyleSheets extends Backend
 		// CSS3PIE
 		if ($blnNeedsPie)
 		{
-			$return .= $lb . 'behavior:url("plugins/css3pie/PIE.htc");';
+			$return .= $lb . 'behavior:url(\'plugins/css3pie/PIE.htc\');';
 		}
 
 		// Custom code
 		if ($row['own'] != '')
 		{
 			$own = trim($this->String->decodeEntities($row['own']));
-			$own = preg_replace('/url\("([^\/])/', 'url("' . $strGlue . "$1", $own);
+			$own = preg_replace('/url\("(?!data:|\/)/', 'url("' . $strGlue, $own);
 			$own = preg_split('/[\n\r]+/i', $own);
 			$return .= $lb . implode(($blnWriteToFile ? '' : $lb), $own);
 		}
@@ -1013,10 +1034,24 @@ class StyleSheets extends Backend
 		}
 
 		// Close the format definition
-		$return .= (($blnWriteToFile && !$blnDebug) ? '' : "\n") . '}' . ($blnWriteToFile ? ($blnDebug ? "\n" : '') : "</pre>\n");
+		if ($blnWriteToFile)
+		{
+			// Remove the last semi-colon (;) before the closing bracket
+			if (substr($return, -1) == ';')
+			{
+				$return = substr($return, 0, -1);
+			}
+
+			$nl = $blnDebug ? "\n" : '';
+			$return .= $nl . '}' . $nl;
+		}
+		else
+		{
+			$return .= "\n}</pre>\n";
+		}
 
 		// Replace global variables
-		if (strpos($return, '$') !== false && count($vars) > 0)
+		if (strpos($return, '$') !== false && !empty($vars))
 		{
 			$return = str_replace(array_keys($vars), array_values($vars), $return);
 		}
@@ -1027,20 +1062,20 @@ class StyleSheets extends Backend
 
 	/**
 	 * Compile a color value and return a hex or rgba color
-	 * @param  mixed
-	 * @param  boolean
-	 * @param  array
+	 * @param mixed
+	 * @param boolean
+	 * @param array
 	 * @return string
 	 */
 	protected function compileColor($color, $blnWriteToFile=false, $vars=array())
 	{
 		if (!is_array($color))
 		{
-			return '#' . $color;
+			return '#' . $this->shortenHexColor($color);
 		}
-		elseif (!isset($color[1]) || $color[1] == '')
+		elseif (!isset($color[1]) || empty($color[1]))
 		{
-			return '#' . $color[0];
+			return '#' . $this->shortenHexColor($color[0]);
 		}
 		else
 		{
@@ -1050,10 +1085,26 @@ class StyleSheets extends Backend
 
 
 	/**
+	 * Try to shorten a hex color
+	 * @param string
+	 * @return string
+	 */
+	protected function shortenHexColor($color)
+	{
+		if ($color[0] == $color[1] && $color[2] == $color[3] && $color[4] == $color[5])
+		{
+			return $color[0] . $color[2] . $color[4];
+		}
+
+		return $color;
+	}
+
+
+	/**
 	 * Convert hex colors to rgb
-	 * @param  string
-	 * @param  boolean
-	 * @param  array
+	 * @param string
+	 * @param boolean
+	 * @param array
 	 * @return array
 	 * @see http://de3.php.net/manual/de/function.hexdec.php#99478
 	 */
@@ -1097,8 +1148,8 @@ class StyleSheets extends Backend
 
 	/**
 	 * Return a form to choose an existing style sheet and import it
-	 * @param object
 	 * @return string
+	 * @throws \Exception
 	 */
 	public function importStyleSheet()
 	{
@@ -1112,7 +1163,7 @@ class StyleSheets extends Backend
 		{
 			if (!$this->Input->post('source') || !is_array($this->Input->post('source')))
 			{
-				$_SESSION['TL_ERROR'][] = $GLOBALS['TL_LANG']['ERR']['all_fields'];
+				$this->addErrorMessage($GLOBALS['TL_LANG']['ERR']['all_fields']);
 				$this->reload();
 			}
 
@@ -1121,16 +1172,16 @@ class StyleSheets extends Backend
 				// Folders cannot be imported
 				if (is_dir(TL_ROOT . '/' . $strCssFile))
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile));
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['importFolder'], basename($strCssFile)));
 					continue;
 				}
 
-				$objFile = new File($strCssFile);
+				$objFile = new \File($strCssFile);
 
 				// Check the file extension
 				if ($objFile->extension != 'css')
 				{
-					$_SESSION['TL_ERROR'][] = sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension);
+					$this->addErrorMessage(sprintf($GLOBALS['TL_LANG']['ERR']['filetype'], $objFile->extension));
 					continue;
 				}
 
@@ -1147,15 +1198,23 @@ class StyleSheets extends Backend
 				$intSorting = 0;
 				$strComment = '';
 				$strCategory = '';
-				$arrChunks = array();
 
 				if (!is_numeric($insertId) || $insertId < 0)
 				{
-					throw new Exception('Invalid insert ID');
+					throw new \Exception('Invalid insert ID');
 				}
 
 				$strFile = str_replace('/**/', '[__]', $strFile);
-				$strFile = preg_replace('/\/\*\*\n( *\*.*\n){2,} *\*\//', '', $strFile); // see #2974
+				$strFile = preg_replace
+				(
+					array
+					(
+						'/\/\*\*\n( *\*.*\n){2,} *\*\//', // see #2974
+						'/\/\*[^\*]+\{[^\}]+\}[^\*]+\*\//' // see #3478
+					),
+					'', $strFile
+				);
+
 				$arrChunks = preg_split('/\{([^\}]*)\}|\*\//U', $strFile, -1, PREG_SPLIT_DELIM_CAPTURE);
 
 				for ($i=0; $i<count($arrChunks); $i++)
@@ -1212,11 +1271,11 @@ class StyleSheets extends Backend
 				// Notify the user
 				if ($strName . '.css' != basename($strCssFile))
 				{
-					$_SESSION['TL_INFO'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css');
+					$this->addInfoMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_renamed'], basename($strCssFile), $strName . '.css'));
 				}
 				else
 				{
-					$_SESSION['TL_CONFIRM'][] = sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css');
+					$this->addConfirmationMessage(sprintf($GLOBALS['TL_LANG']['tl_style_sheet']['css_imported'], $strName . '.css'));
 				}
 			}
 
@@ -1225,7 +1284,7 @@ class StyleSheets extends Backend
 			$this->redirect(str_replace('&key=import', '', $this->Environment->request));
 		}
 
-		$objTree = new FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
+		$objTree = new \FileTree($this->prepareForWidget($GLOBALS['TL_DCA']['tl_style_sheet']['fields']['source'], 'source', null, 'source', 'tl_style_sheet'));
 
 		// Return form
 		return '
@@ -1240,8 +1299,8 @@ class StyleSheets extends Backend
 <input type="hidden" name="FORM_SUBMIT" value="tl_style_sheet_import">
 <input type="hidden" name="REQUEST_TOKEN" value="'.REQUEST_TOKEN.'">
 
-<div class="tl_tbox block">
-  <h3><label for="source">' .$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0]. '</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" rel="lightbox[files 765 80%]">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom;"') . '</a></h3>' .$objTree->generate().(strlen($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
+<div class="tl_tbox">
+  <h3><label for="source">' .$GLOBALS['TL_LANG']['tl_style_sheet']['source'][0]. '</label> <a href="contao/files.php" title="' . specialchars($GLOBALS['TL_LANG']['MSC']['fileManager']) . '" onclick="Backend.openModalIframe({\'width\':765,\'title\':\''.specialchars($GLOBALS['TL_LANG']['MSC']['filetree']).'\',\'url\':this.href});return false">' . $this->generateImage('filemanager.gif', $GLOBALS['TL_LANG']['MSC']['fileManager'], 'style="vertical-align:text-bottom"') . '</a></h3>' .$objTree->generate().(isset($GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]) ? '
   <p class="tl_help tl_tip">' .$GLOBALS['TL_LANG']['tl_style_sheet']['source'][1]. '</p>' : ''). '
 </div>
 
@@ -1265,11 +1324,11 @@ class StyleSheets extends Backend
 	 */
 	public function checkStyleSheetName($strName)
 	{
-		$objStyleSheet = Database::getInstance()->prepare("SELECT COUNT(*) AS total FROM tl_style_sheet WHERE name=?")
-												->limit(1)
-												->execute($strName);
+		$objStyleSheet = $this->Database->prepare("SELECT COUNT(*) AS count FROM tl_style_sheet WHERE name=?")
+										->limit(1)
+										->execute($strName);
 
-		if ($objStyleSheet->total < 1)
+		if ($objStyleSheet->count < 1)
 		{
 			return $strName;
 		}
@@ -1278,13 +1337,14 @@ class StyleSheets extends Backend
 		$i = (count($chunks) > 1) ? array_pop($chunks) : 0;
 		$strName = implode('-', $chunks) . '-' . (intval($i) + 1);
 
-		return self::checkStyleSheetName($strName);
+		return $this->checkStyleSheetName($strName);
 	}
 
 
 	/**
 	 * Create a format definition and insert it into the database
 	 * @param array
+	 * @return void
 	 */
 	protected function createDefinition($arrDefinition)
 	{
@@ -1303,13 +1363,13 @@ class StyleSheets extends Backend
 		foreach ($arrAttributes as $strDefinition)
 		{
 			// Skip empty definitions
-			if (!strlen(trim($strDefinition)))
+			if (trim($strDefinition) == '')
 			{
 				continue;
 			}
 
 			// Handle important definitions
-			if (preg_match('/important/i', $strDefinition))
+			if (strpos($strDefinition, 'important') !== false || strpos($strDefinition, 'transparent') !== false || strpos($strDefinition, 'inherit') !== false)
 			{
 				$arrSet['own'][] = $strDefinition;
 				continue;
@@ -1430,7 +1490,7 @@ class StyleSheets extends Backend
 								$varValue_2 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[1]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1444,7 +1504,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1484,7 +1544,7 @@ class StyleSheets extends Backend
 								$varValue_3 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[2]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1498,7 +1558,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_2,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1547,7 +1607,7 @@ class StyleSheets extends Backend
 								$varValue_4 = preg_replace('/[^0-9\.-]+/', '', $arrTRBL[3]);
 							}
 							// Move to custom section if there are different units
-							if (count(array_filter(array_unique($arrUnits))) > 1)
+							if (count(array_filter(array_unique($arrUnits))) > 0)
 							{
 								$arrSet['alignment'] = '';
 								$arrSet['own'][] = $strDefinition;
@@ -1561,7 +1621,7 @@ class StyleSheets extends Backend
 								'left' => $varValue_4,
 								'unit' => ''
 							);
-							// Overwrite unit
+							// Overwrite the unit
 							foreach ($arrUnits as $strUnit)
 							{
 								if ($strUnit != '')
@@ -1668,11 +1728,11 @@ class StyleSheets extends Backend
 						'left' => $varValue,
 						'unit' => $strUnit
 					);
-					if (strlen($arrWSC[1]))
+					if ($arrWSC[1] != '')
 					{
 						$arrSet['borderstyle'] = $arrWSC[1];
 					}
-					if (strlen($arrWSC[2]))
+					if ($arrWSC[2] != '')
 					{
 						$arrSet['bordercolor'] = str_replace('#', '', $arrWSC[2]);
 					}
@@ -1712,7 +1772,14 @@ class StyleSheets extends Backend
 				case 'border-width':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1752,11 +1819,6 @@ class StyleSheets extends Backend
 					break;
 
 				case 'border-color':
-					if ($arrChunks[1] == 'inherit' || $arrChunks[1] == 'transparent')
-					{
-						$arrSet['own'][] = $strDefinition;
-						break;
-					}
 					$arrSet['border'] = 1;
 					$arrSet['bordercolor'] = str_replace('#', '', $arrChunks[1]);
 					break;
@@ -1764,7 +1826,14 @@ class StyleSheets extends Backend
 				case 'border-radius':
 					$arrSet['border'] = 1;
 					$arrTRBL = preg_split('/\s+/', $arrChunks[1]);
-					$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+					$strUnit = '';
+					foreach ($arrTRBL as $v)
+					{
+						if ($v != 0)
+						{
+							$strUnit = preg_replace('/[^ceimnptx%]/', '', $arrTRBL[0]);
+						}
+					}
 					switch (count($arrTRBL))
 					{
 						case 1:
@@ -1875,9 +1944,11 @@ class StyleSheets extends Backend
 						case 'underline':
 							$arrSet['fontstyle'][] = 'underline';
 							break;
+
 						case 'none':
 							$arrSet['fontstyle'][] = 'notUnderlined';
 							break;
+
 						case 'overline':
 						case 'line-through':
 							$arrSet['fontstyle'][] = $arrChunks[1];
@@ -1951,7 +2022,7 @@ class StyleSheets extends Backend
 					break;
 
 				case 'behavior':
-					if ($arrChunks[1] != 'url("plugins/css3pie/PIE.htc")')
+					if ($arrChunks[1] != 'url(\'plugins/css3pie/PIE.htc\')')
 					{
 						$arrSet['own'][] = $strDefinition;
 					}
@@ -1985,7 +2056,7 @@ class StyleSheets extends Backend
 			}
 		}
 
-		if (count($arrSet['own']))
+		if (!empty($arrSet['own']))
 		{
 			$arrSet['own'] = implode(";\n", $arrSet['own']) . ';';
 		}
@@ -1993,5 +2064,3 @@ class StyleSheets extends Backend
 		$this->Database->prepare("INSERT INTO tl_style %s")->set($arrSet)->execute();
 	}
 }
-
-?>

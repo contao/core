@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -40,7 +39,14 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 	(
 		'dataContainer'               => 'Table',
 		'closed'                      => true,
-		'notEditable'                 => true
+		'notEditable'                 => true,
+		'sql' => array
+		(
+			'keys' => array
+			(
+				'id' => 'primary'
+			)
+		)
 	),
 
 	// List
@@ -55,7 +61,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 		'label' => array
 		(
 			'fields'                  => array('tstamp', 'text'),
-			'format'                  => '<span style="color:#b3b3b3; padding-right:3px;">[%s]</span> %s',
+			'format'                  => '<span style="color:#b3b3b3;padding-right:3px">[%s]</span> %s',
 			'maxCharacters'           => 96,
 			'label_callback'          => array('tl_log', 'colorize')
 		),
@@ -66,7 +72,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
-				'attributes'          => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
 			)
 		),
 		'operations' => array
@@ -76,7 +82,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 				'label'               => &$GLOBALS['TL_LANG']['tl_log']['delete'],
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
-				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
 			),
 			'show' => array
 			(
@@ -90,57 +96,69 @@ $GLOBALS['TL_DCA']['tl_log'] = array
 	// Fields
 	'fields' => array
 	(
+		'id' => array
+		(
+			'sql'                     => "int(10) unsigned NOT NULL auto_increment"
+		),
 		'tstamp' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['tstamp'],
 			'filter'                  => true,
 			'sorting'                 => true,
-			'flag'                    => 6
+			'flag'                    => 6,
+			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
 		'source' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['source'],
 			'filter'                  => true,
 			'sorting'                 => true,
-			'reference'               => &$GLOBALS['TL_LANG']['tl_log']
+			'reference'               => &$GLOBALS['TL_LANG']['tl_log'],
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'action' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['action'],
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(32) NOT NULL default ''"
 		),
 		'username' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['username'],
 			'search'                  => true,
 			'filter'                  => true,
-			'sorting'                 => true
+			'sorting'                 => true,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'text' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['text'],
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "text NULL"
 		),
 		'func' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['func'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		'ip' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['ip'],
 			'sorting'                 => true,
 			'filter'                  => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
 		'browser' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_log']['browser'],
 			'sorting'                 => true,
-			'search'                  => true
+			'search'                  => true,
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		)
 	)
 );
@@ -150,7 +168,7 @@ $GLOBALS['TL_DCA']['tl_log'] = array
  * Class tl_log
  *
  * Provide miscellaneous methods that are used by the data configuration array.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -184,5 +202,3 @@ class tl_log extends Backend
 		return $label;
 	}
 }
-
-?>

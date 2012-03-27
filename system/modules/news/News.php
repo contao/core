@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,73 +20,81 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class News
  *
  * Provide methods regarding news archives.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class News extends Frontend
+class News extends \Frontend
 {
 
 	/**
 	 * Update a particular RSS feed
 	 * @param integer
+	 * @param boolean
+	 * @return void
 	 */
-	public function generateFeed($intId)
+	public function generateFeed($intId, $blnIsFeedId=false)
 	{
-		$objArchive = $this->Database->prepare("SELECT * FROM tl_news_archive WHERE id=? AND makeFeed=?")
-									 ->limit(1)
-									 ->execute($intId, 1);
+		$objFeed = $blnIsFeedId ? \NewsFeedModel::findByPk($intId) : \NewsFeedModel::findByArchive($intId);
 
-		if ($objArchive->numRows < 1)
+		if ($objFeed === null)
 		{
 			return;
 		}
 
-		$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
+		$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
 
 		// Delete XML file
-		if ($this->Input->get('act') == 'delete' || $objArchive->protected)
+		if ($this->Input->get('act') == 'delete')
 		{
 			$this->import('Files');
-			$this->Files->delete($objArchive->feedName . '.xml');
+			$this->Files->delete($objFeed->feedName . '.xml');
 		}
 
 		// Update XML file
 		else
 		{
-			$this->generateFiles($objArchive->row());
-			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeed()', TL_CRON);
+			$this->generateFiles($objFeed->row());
+			$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeed()', TL_CRON);
 		}
 	}
 
 
 	/**
 	 * Delete old files and generate all feeds
+	 * @return void
 	 */
 	public function generateFeeds()
 	{
 		$this->removeOldFeeds();
-		$objArchive = $this->Database->execute("SELECT * FROM tl_news_archive WHERE makeFeed=1 AND protected!=1");
+		$objFeed = \NewsFeedCollection::findAll();
 
-		while ($objArchive->next())
+		if ($objFeed !== null)
 		{
-			$objArchive->feedName = strlen($objArchive->alias) ? $objArchive->alias : 'news' . $objArchive->id;
-
-			$this->generateFiles($objArchive->row());
-			$this->log('Generated news feed "' . $objArchive->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+			while ($objFeed->next())
+			{
+				$objFeed->feedName = $objFeed->alias ?: 'news' . $objFeed->id;
+				$this->generateFiles($objFeed->row());
+				$this->log('Generated news feed "' . $objFeed->feedName . '.xml"', 'News generateFeeds()', TL_CRON);
+			}
 		}
 	}
 
@@ -94,82 +102,96 @@ class News extends Frontend
 	/**
 	 * Generate an XML files and save them to the root directory
 	 * @param array
+	 * @return void
 	 */
-	protected function generateFiles($arrArchive)
+	protected function generateFiles($arrFeed)
 	{
-		$time = time();
-		$strType = ($arrArchive['format'] == 'atom') ? 'generateAtom' : 'generateRss';
-		$strLink = strlen($arrArchive['feedBase']) ? $arrArchive['feedBase'] : $this->Environment->base;
-		$strFile = $arrArchive['feedName'];
+		$arrArchives = deserialize($arrFeed['archives']);
 
-		$objFeed = new Feed($strFile);
-
-		$objFeed->link = $strLink;
-		$objFeed->title = $arrArchive['title'];
-		$objFeed->description = $arrArchive['description'];
-		$objFeed->language = $arrArchive['language'];
-		$objFeed->published = $arrArchive['tstamp'];
-
-		// Get items
-		$objArticleStmt = $this->Database->prepare("SELECT *, (SELECT name FROM tl_user u WHERE u.id=n.author) AS authorName FROM tl_news n WHERE pid=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC");
-
-		if ($arrArchive['maxItems'] > 0)
+		if (!is_array($arrArchives) || empty($arrArchives))
 		{
-			$objArticleStmt->limit($arrArchive['maxItems']);
+			return;
 		}
 
-		$objArticle = $objArticleStmt->execute($arrArchive['id']);
+		$strType = ($arrFeed['format'] == 'atom') ? 'generateAtom' : 'generateRss';
+		$strLink = $arrFeed['feedBase'] ?: $this->Environment->base;
+		$strFile = $arrFeed['feedName'];
 
-		// Get default URL
-		$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-									->limit(1)
-									->execute($arrArchive['jumpTo']);
+		$objFeed = new Feed($strFile);
+		$objFeed->link = $strLink;
+		$objFeed->title = $arrFeed['title'];
+		$objFeed->description = $arrFeed['description'];
+		$objFeed->language = $arrFeed['language'];
+		$objFeed->published = $arrFeed['tstamp'];
 
-		$strUrl = $this->generateFrontendUrl($objParent->fetchAssoc(), '/items/%s');
-
-		// Parse items
-		while ($objArticle->next())
+		// Get the items
+		if ($arrFeed['maxItems'] > 0)
 		{
-			$objItem = new FeedItem();
+			$objArticle = \NewsCollection::findPublishedByPids($arrArchives, null, $arrFeed['maxItems']);
+		}
+		else
+		{
+			$objArticle = \NewsCollection::findPublishedByPids($arrArchives);
+		}
 
-			$objItem->title = $objArticle->headline;
-			$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
-			$objItem->published = $objArticle->date;
-			$objItem->author = $objArticle->authorName;
+		// Parse the items
+		if ($objArticle === null)
+		{
+			$arrUrls = array();
 
-			// Prepare the description
-			$strDescription = ($arrArchive['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
-			$strDescription = $this->replaceInsertTags($strDescription);
-			$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
-
-			// Add the article image as enclosure
-			if ($objArticle->addImage)
+			while ($objArticle->next())
 			{
-				$objItem->addEnclosure($objArticle->singleSRC);
-			}
+				$jumpTo = $objArticle->pid['jumpTo'];
 
-			// Enclosure
-			if ($objArticle->addEnclosure)
-			{
-				$arrEnclosure = deserialize($objArticle->enclosure, true);
-
-				if (is_array($arrEnclosure))
+				// Get the jumpTo URL
+				if (!isset($arrUrls[$jumpTo]))
 				{
-					foreach ($arrEnclosure as $strEnclosure)
+					$objParent = $this->getPageDetails($jumpTo);
+					$arrUrls[$jumpTo] = $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
+				}
+
+				$strUrl = $arrUrls[$jumpTo];
+				$objItem = new FeedItem();
+
+				$objItem->title = $objArticle->headline;
+				$objItem->link = (($objArticle->source == 'external') ? '' : $strLink) . $this->getLink($objArticle, $strUrl);
+				$objItem->published = $objArticle->date;
+				$objItem->author = $objArticle->authorName;
+
+				// Prepare the description
+				$strDescription = ($arrFeed['source'] == 'source_text') ? $objArticle->text : $objArticle->teaser;
+				$strDescription = $this->replaceInsertTags($strDescription);
+				$objItem->description = $this->convertRelativeUrls($strDescription, $strLink);
+
+				// Add the article image as enclosure
+				if ($objArticle->addImage)
+				{
+					$objItem->addEnclosure($objArticle->singleSRC);
+				}
+
+				// Enclosure
+				if ($objArticle->addEnclosure)
+				{
+					$arrEnclosure = deserialize($objArticle->enclosure, true);
+
+					if (is_array($arrEnclosure))
 					{
-						if (is_file(TL_ROOT . '/' . $strEnclosure))
-						{				
-							$objItem->addEnclosure($strEnclosure);
+						foreach ($arrEnclosure as $strEnclosure)
+						{
+							if (is_file(TL_ROOT . '/' . $strEnclosure))
+							{				
+								$objItem->addEnclosure($strEnclosure);
+							}
 						}
 					}
 				}
-			}
 
-			$objFeed->addItem($objItem);
+				$objFeed->addItem($objItem);
+			}
 		}
 
-		// Create file
-		$objRss = new File($strFile . '.xml');
+		// Create the file
+		$objRss = new File('share/' . $strFile . '.xml');
 		$objRss->write($this->replaceInsertTags($objFeed->$strType()));
 		$objRss->close();
 	}
@@ -179,9 +201,10 @@ class News extends Frontend
 	 * Add news items to the indexer
 	 * @param array
 	 * @param integer
+	 * @param boolean
 	 * @return array
 	 */
-	public function getSearchablePages($arrPages, $intRoot=0)
+	public function getSearchablePages($arrPages, $intRoot=0, $blnIsSitemap=false)
 	{
 		$arrRoot = array();
 
@@ -190,61 +213,54 @@ class News extends Frontend
 			$arrRoot = $this->getChildRecords($intRoot, 'tl_page');
 		}
 
-		$time = time();
 		$arrProcessed = array();
 
 		// Get all news archives
-		$objArchive = $this->Database->execute("SELECT id, jumpTo FROM tl_news_archive WHERE protected!=1");
+		$objArchive = \NewsArchiveCollection::findByProtected('');
 
 		// Walk through each archive
-		while ($objArchive->next())
+		if ($objArchive !== null)
 		{
-			if (is_array($arrRoot) && count($arrRoot) > 0 && !in_array($objArchive->jumpTo, $arrRoot))
+			while ($objArchive->next())
 			{
-				continue;
-			}
+				// Skip news archives without target page
+				if ($objArchive->jumpTo['id'] < 1)
+				{
+					continue;
+				}
 
-			// Get the URL of the jumpTo page
-			if (!isset($arrProcessed[$objArchive->jumpTo]))
-			{
-				$arrProcessed[$objArchive->jumpTo] = false;
+				// Skip news archives outside the root nodes
+				if (!empty($arrRoot) && !in_array($objArchive->jumpTo['id'], $arrRoot))
+				{
+					continue;
+				}
 
-				// Get target page
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=? AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 AND noSearch!=1")
-											->limit(1)
-											->execute($objArchive->jumpTo);
-
-				// Determin domain
-				if ($objParent->numRows)
+				// Get the URL of the jumpTo page
+				if (!isset($arrProcessed[$objArchive->jumpTo['id']]))
 				{
 					$domain = $this->Environment->base;
-					$objParent = $this->getPageDetails($objParent->id);
+					$objParent = $this->getPageDetails($objArchive->jumpTo['id']);
 
-					if (strlen($objParent->domain))
+					if ($objParent->domain != '')
 					{
 						$domain = ($this->Environment->ssl ? 'https://' : 'http://') . $objParent->domain . TL_PATH . '/';
 					}
 
-					$arrProcessed[$objArchive->jumpTo] = $domain . $this->generateFrontendUrl($objParent->row(), '/items/%s');
+					$arrProcessed[$objArchive->jumpTo['id']] = $domain . $this->generateFrontendUrl($objParent->row(), ($GLOBALS['TL_CONFIG']['useAutoItem'] ?  '/%s' : '/items/%s'), $objParent->language);
 				}
-			}
 
-			// Skip items without target page
-			if ($arrProcessed[$objArchive->jumpTo] === false)
-			{
-				continue;
-			}
+				$strUrl = $arrProcessed[$objArchive->jumpTo['id']];
 
-			$strUrl = $arrProcessed[$objArchive->jumpTo];
+				// Get the items
+				$objArticle = \NewsCollection::findPublishedDefaultByPid($objArchive->id);
 
-			// Get items
-			$objArticle = $this->Database->prepare("SELECT * FROM tl_news WHERE pid=? AND source='default' AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1 ORDER BY date DESC")
-										 ->execute($objArchive->id);
-
-			// Add items to the indexer
-			while ($objArticle->next())
-			{
-				$arrPages[] = $this->getLink($objArticle, $strUrl);
+				if ($objArticle !== null)
+				{
+					while ($objArticle->next())
+					{
+						$arrPages[] = $this->getLink($objArticle, $strUrl);
+					}
+				}
 			}
 		}
 
@@ -258,43 +274,58 @@ class News extends Frontend
 	 * @param string
 	 * @return string
 	 */
-	protected function getLink(Database_Result $objArticle, $strUrl)
+	protected function getLink($objItem, $strUrl)
 	{
-		switch ($objArticle->source)
+		switch ($objItem->source)
 		{
 			// Link to an external page
 			case 'external':
-				return $objArticle->url;
+				return $objItem->url;
 				break;
 
 			// Link to an internal page
 			case 'internal':
-				$objParent = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-											->limit(1)
-											->execute($objArticle->jumpTo);
+				$objItem->getRelated('jumpTo');
 
-				if ($objParent->numRows)
+				if ($objItem->jumpTo['id'] > 0)
 				{
-					return $this->generateFrontendUrl($objParent->row());
+					return $this->generateFrontendUrl($objItem->jumpTo);
 				}
 				break;
 
 			// Link to an article
 			case 'article':
-				$objParent = $this->Database->prepare("SELECT a.id AS aId, a.alias AS aAlias, a.title, p.id, p.alias FROM tl_article a, tl_page p WHERE a.pid=p.id AND a.id=?")
-											->limit(1)
-											->execute($objArticle->articleId);
+				$objArticle = \ArticleModel::findByPk($objItem->articleId, array('eager'=>true));
 
-				if ($objParent->numRows)
+				if ($objArticle !== null)
 				{
-					return $this->generateFrontendUrl($objParent->row(), '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && strlen($objParent->aAlias)) ? $objParent->aAlias : $objParent->aId));
+					return ampersand($this->generateFrontendUrl($objArticle->pid, '/articles/' . ((!$GLOBALS['TL_CONFIG']['disableAlias'] && $objArticle->alias != '') ? $objArticle->alias : $objArticle->id)));
 				}
 				break;
 		}
 
 		// Link to the default page
-		return sprintf($strUrl, ((strlen($objArticle->alias) && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objArticle->alias : $objArticle->id));
+		return sprintf($strUrl, (($objItem->alias != '' && !$GLOBALS['TL_CONFIG']['disableAlias']) ? $objItem->alias : $objItem->id));
+	}
+
+
+	/**
+	 * Return the names of the existing feeds so they are not removed
+	 * @return array
+	 */
+	public function purgeOldFeeds()
+	{
+		$arrFeeds = array();
+		$objFeeds = \NewsFeedCollection::findAll();
+
+		if ($objFeeds !== null)
+		{
+			while ($objFeeds->next())
+			{
+				$arrFeeds[] = $objFeeds->alias ?: 'news' . $objFeeds->id;
+			}
+		}
+
+		return $arrFeeds;
 	}
 }
-
-?>

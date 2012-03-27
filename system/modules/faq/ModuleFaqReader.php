@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,23 +20,28 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Faq
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleFaqReader
  *
- * @copyright  Leo Feyer 2008-2011
+ * @copyright  Leo Feyer 2008-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleFaqReader extends Module
+class ModuleFaqReader extends \Module
 {
 
 	/**
@@ -54,7 +59,7 @@ class ModuleFaqReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### FAQ READER ###';
 			$objTemplate->title = $this->headline;
@@ -65,29 +70,29 @@ class ModuleFaqReader extends Module
 			return $objTemplate->parse();
 		}
 
-		// Return if no news item has been specified
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('items', $this->Input->get('auto_item'));
+		}
+
+		// Do not index or cache the page if no FAQ has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->faq_categories = deserialize($this->faq_categories);
 
-		// Return if there are no categories
-		if (!is_array($this->faq_categories) || count($this->faq_categories) < 1)
+		// Do not index or cache the page if there are no categories
+		if (!is_array($this->faq_categories) || empty($this->faq_categories))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -96,7 +101,8 @@ class ModuleFaqReader extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -105,20 +111,17 @@ class ModuleFaqReader extends Module
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 		$this->Template->referer = 'javascript:history.go(-1)';
 
-		$objFaq = $this->Database->prepare("SELECT *, author AS authorId, (SELECT title FROM tl_faq_category WHERE tl_faq_category.id=tl_faq.pid) AS category, (SELECT name FROM tl_user WHERE tl_user.id=tl_faq.author) AS author FROM tl_faq WHERE pid IN(" . implode(',', array_map('intval', $this->faq_categories)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND published=1" : ""))
-								 ->limit(1)
-								 ->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'));
+		$objFaq = \FaqModel::findPublishedByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->faq_categories);
 
-		if ($objFaq->numRows < 1)
+		if ($objFaq === null)
 		{
-			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->error = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
 		}
 
@@ -131,25 +134,37 @@ class ModuleFaqReader extends Module
 
 		$this->import('String');
 		$this->Template->question = $objFaq->question;
-		$this->Template->answer = $objFaq->answer;
 
 		// Clean RTE output
 		if ($objPage->outputFormat == 'xhtml')
 		{
-			$this->Template->answer = $this->String->toXhtml($this->Template->answer);
+			$objFaq->answer = $this->String->toXhtml($objFaq->answer);
 		}
 		else
 		{
-			$this->Template->answer = $this->String->toHtml5($this->Template->answer);
+			$objFaq->answer = $this->String->toHtml5($objFaq->answer);
 		}
 
-		$this->Template->answer = $this->String->encodeEmail($this->Template->answer);
+		$this->Template->answer = $this->String->encodeEmail($objFaq->answer);
 		$this->Template->addImage = false;
 
 		// Add image
-		if ($objFaq->addImage && is_file(TL_ROOT . '/' . $objFaq->singleSRC))
+		if ($objFaq->addImage && $objFaq->singleSRC != '')
 		{
-			$this->addImageToTemplate($this->Template, $objFaq->row());
+			if (!is_numeric($objFaq->singleSRC))
+			{
+				$this->Template->answer = '<p class="error">'.$GLOBALS['TL_LANG']['ERR']['version2format'].'</p>';
+			}
+			else
+			{
+				$objModel = \FilesModel::findByPk($objFaq->singleSRC);
+
+				if ($objModel !== null && is_file(TL_ROOT . '/' . $objModel->path))
+				{
+					$objFaq->singleSRC = $objModel->path;
+					$this->addImageToTemplate($this->Template, $objFaq->row());
+				}
+			}
 		}
 
 		$this->Template->enclosure = array();
@@ -160,7 +175,7 @@ class ModuleFaqReader extends Module
 			$this->addEnclosuresToTemplate($this->Template, $objFaq->row());
 		}
 
-		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $objFaq->tstamp), $objFaq->author);
+		$this->Template->info = sprintf($GLOBALS['TL_LANG']['MSC']['faqCreatedBy'], $this->parseDate($objPage->dateFormat, $objFaq->tstamp), $objFaq->author['name']);
 
 		// HOOK: comments extension required
 		if ($objFaq->noComments || !in_array('comments', $this->Config->getActiveModules()))
@@ -170,11 +185,7 @@ class ModuleFaqReader extends Module
 		}
 
 		// Check whether comments are allowed
-		$objCategory = $this->Database->prepare("SELECT * FROM tl_faq_category WHERE id=?")
-									  ->limit(1)
-									  ->execute($objFaq->pid);
-
-		if ($objCategory->numRows < 1 || !$objCategory->allowComments)
+		if (!$objFaq->pid['allowComments'])
 		{
 			$this->Template->allowComments = false;
 			return;
@@ -189,26 +200,19 @@ class ModuleFaqReader extends Module
 		$this->import('Comments');
 		$arrNotifies = array();
 
-		// Notify system administrator
-		if ($objCategory->notify != 'notify_author')
+		// Notify the system administrator
+		if ($objFaq->pid['notify'] != 'notify_author')
 		{
 			$arrNotifies[] = $GLOBALS['TL_ADMIN_EMAIL'];
 		}
 
-		// Notify author
-		if ($objCategory->notify != 'notify_admin')
+		// Notify the author
+		if ($objFaq->pid['notify'] != 'notify_admin' && $objFaq->author['email'] != '')
 		{
-			$objAuthor = $this->Database->prepare("SELECT email FROM tl_user WHERE id=?")
-										->limit(1)
-										->execute($objFaq->authorId);
-
-			if ($objAuthor->numRows)
-			{
-				$arrNotifies[] = $objAuthor->email;
-			}
+			$arrNotifies[] = $objFaq->author['email'];
 		}
 
-		$objConfig = new stdClass();
+		$objConfig = new \stdClass();
 
 		$objConfig->perPage = $objCategory->perPage;
 		$objConfig->order = $objCategory->sortOrder;
@@ -221,5 +225,3 @@ class ModuleFaqReader extends Module
 		$this->Comments->addCommentsToTemplate($this->Template, $objConfig, 'tl_faq', $objFaq->id, $arrNotifies);
 	}
 }
-
-?>

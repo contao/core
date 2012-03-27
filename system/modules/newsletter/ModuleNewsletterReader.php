@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    News
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleNewsletterReader
  *
  * Front end module "newsletter reader".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleNewsletterReader extends Module
+class ModuleNewsletterReader extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleNewsletterReader extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### NEWSLETTER READER ###';
 			$objTemplate->title = $this->headline;
@@ -66,29 +71,29 @@ class ModuleNewsletterReader extends Module
 			return $objTemplate->parse();
 		}
 
-		// Return if no news item has been specified
+		// Set the item from the auto_item parameter
+		if ($GLOBALS['TL_CONFIG']['useAutoItem'] && isset($_GET['auto_item']))
+		{
+			$this->Input->setGet('items', $this->Input->get('auto_item'));
+		}
+
+		// Do not index or cache the page if no news item has been specified
 		if (!$this->Input->get('items'))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
 		$this->nl_channels = deserialize($this->nl_channels);
 
-		// Return if there are no channels
-		if (!is_array($this->nl_channels) || count($this->nl_channels) < 1)
+		// Do not index or cache the page if there are no channels
+		if (!is_array($this->nl_channels) || empty($this->nl_channels))
 		{
 			global $objPage;
-
-			// Do not index the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
-
 			return '';
 		}
 
@@ -97,7 +102,8 @@ class ModuleNewsletterReader extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
@@ -107,27 +113,18 @@ class ModuleNewsletterReader extends Module
 		$this->Template->referer = 'javascript:history.go(-1)';
 		$this->Template->back = $GLOBALS['TL_LANG']['MSC']['goBack'];
 
-		$objNewsletter = $this->Database->prepare("SELECT *, (SELECT title FROM tl_newsletter_channel WHERE tl_newsletter_channel.id=tl_newsletter.pid) AS channel FROM tl_newsletter WHERE pid IN(" . implode(',', array_map('intval', $this->nl_channels)) . ") AND (id=? OR alias=?)" . (!BE_USER_LOGGED_IN ? " AND sent=?" : ""))
-										->limit(1)
-										->execute((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), 1);
+		$objNewsletter = \NewsletterModel::findSentByParentAndIdOrAlias((is_numeric($this->Input->get('items')) ? $this->Input->get('items') : 0), $this->Input->get('items'), $this->nl_channels);
 
-		if ($objNewsletter->numRows < 1)
+		if ($objNewsletter === null)
 		{
-			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
-
-			// Do not index the page
+			// Do not index or cache the page
 			$objPage->noSearch = 1;
 			$objPage->cache = 0;
 
-			// Send 404 header
+			// Send a 404 header
 			header('HTTP/1.1 404 Not Found');
+			$this->Template->content = '<p class="error">' . sprintf($GLOBALS['TL_LANG']['MSC']['invalidPage'], $this->Input->get('items')) . '</p>';
 			return;
-		}
-
-		// Add newsletter style sheet
-		if ($this->nl_includeCss && file_exists(TL_ROOT . '/system/scripts/newsletter.css'))
-		{
-			$GLOBALS['TL_CSS'][] = 'system/scripts/newsletter.css';
 		}
 
 		$arrEnclosures = array();
@@ -141,7 +138,7 @@ class ModuleNewsletterReader extends Module
 			if (is_array($arrEnclosure))
 			{
 				// Send file to the browser
-				if (strlen($this->Input->get('file', true)) && in_array($this->Input->get('file', true), $arrEnclosure))
+				if ($this->Input->get('file', true) != '' && in_array($this->Input->get('file', true), $arrEnclosure))
 				{
 					$this->sendFileToBrowser($this->Input->get('file', true));
 				}
@@ -151,7 +148,7 @@ class ModuleNewsletterReader extends Module
 				{
 					if (is_file(TL_ROOT . '/' . $arrEnclosure[$i]))
 					{				
-						$objFile = new File($arrEnclosure[$i]);
+						$objFile = new \File($arrEnclosure[$i]);
 
 						if (in_array($objFile->extension, $allowedDownload))
 						{
@@ -198,5 +195,3 @@ class ModuleNewsletterReader extends Module
 		$this->Template->enclosure = $arrEnclosures;
 	}
 }
-
-?>

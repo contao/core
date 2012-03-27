@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class Module
  *
  * Parent class for front end modules.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-abstract class Module extends Frontend
+abstract class Module extends \Frontend
 {
 
 	/**
@@ -51,6 +56,12 @@ abstract class Module extends Frontend
 	 * @var string
 	 */
 	protected $strColumn;
+
+	/**
+	 * Model
+	 * @var Model
+	 */
+	protected $objModel;
 
 	/**
 	 * Current record
@@ -70,8 +81,13 @@ abstract class Module extends Frontend
 	 * @param object
 	 * @param string
 	 */
-	public function __construct(Database_Result $objModule, $strColumn='main')
+	public function __construct($objModule, $strColumn='main')
 	{
+		if ($objModule instanceof \Model)
+		{
+			$this->objModel = $objModule;
+		}
+
 		parent::__construct();
 
 		$this->arrData = $objModule->row();
@@ -89,6 +105,7 @@ abstract class Module extends Frontend
 	 * Set an object property
 	 * @param string
 	 * @param mixed
+	 * @return void
 	 */
 	public function __set($strKey, $varValue)
 	{
@@ -134,13 +151,13 @@ abstract class Module extends Frontend
 			$this->arrStyle[] = 'margin-bottom:'.$this->arrData['space'][1].'px;';
 		}
 
-		$this->Template = new FrontendTemplate($this->strTemplate);
+		$this->Template = new \FrontendTemplate($this->strTemplate);
 		$this->Template->setData($this->arrData);
 
 		$this->compile();
 
 		$this->Template->inColumn = $this->strColumn;
-		$this->Template->style = count($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
+		$this->Template->style = !empty($this->arrStyle) ? implode(' ', $this->arrStyle) : '';
 		$this->Template->cssID = ($this->cssID[0] != '') ? ' id="' . $this->cssID[0] . '"' : '';
 		$this->Template->class = trim('mod_' . $this->type . ' ' . $this->cssID[1]);
 
@@ -160,6 +177,7 @@ abstract class Module extends Frontend
 
 	/**
 	 * Compile the current element
+	 * @return void
 	 */
 	abstract protected function compile();
 
@@ -172,13 +190,10 @@ abstract class Module extends Frontend
 	 */
 	protected function renderNavigation($pid, $level=1)
 	{
-		$time = time();
-
 		// Get all active subpages
-		$objSubpages = $this->Database->prepare("SELECT p1.*, (SELECT COUNT(*) FROM tl_page p2 WHERE p2.pid=p1.id AND p2.type!='root' AND p2.type!='error_403' AND p2.type!='error_404'" . (!$this->showHidden ? (($this instanceof ModuleSitemap) ? " AND (p2.hide!=1 OR sitemap='map_always')" : " AND p2.hide!=1") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p2.guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (p2.start='' OR p2.start<".$time.") AND (p2.stop='' OR p2.stop>".$time.") AND p2.published=1" : "") . ") AS subpages FROM tl_page p1 WHERE p1.pid=? AND p1.type!='root' AND p1.type!='error_403' AND p1.type!='error_404'" . (!$this->showHidden ? (($this instanceof ModuleSitemap) ? " AND (p1.hide!=1 OR sitemap='map_always')" : " AND p1.hide!=1") : "") . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND p1.guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (p1.start='' OR p1.start<".$time.") AND (p1.stop='' OR p1.stop>".$time.") AND p1.published=1" : "") . " ORDER BY p1.sorting")
-									  ->execute($pid);
+		$objSubpages = \PageCollection::findPublishedSubpagesWithoutGuestsByPid($pid, $this->showHidden, $this instanceof \ModuleSitemap);
 
-		if ($objSubpages->numRows < 1)
+		if ($objSubpages === null)
 		{
 			return '';
 		}
@@ -199,7 +214,7 @@ abstract class Module extends Frontend
 			$this->navigationTpl = 'nav_default';
 		}
 
-		$objTemplate = new FrontendTemplate($this->navigationTpl);
+		$objTemplate = new \FrontendTemplate($this->navigationTpl);
 
 		$objTemplate->type = get_class($this);
 		$objTemplate->level = 'level_' . $level++;
@@ -211,7 +226,7 @@ abstract class Module extends Frontend
 		while($objSubpages->next())
 		{
 			// Skip hidden sitemap pages
-			if ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_never')
+			if ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_never')
 			{
 				continue;
 			}
@@ -220,7 +235,7 @@ abstract class Module extends Frontend
 			$_groups = deserialize($objSubpages->groups);
 
 			// Do not show protected pages unless a back end or front end user is logged in
-			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof ModuleSitemap && $objSubpages->sitemap == 'map_always'))
+			if (!$objSubpages->protected || BE_USER_LOGGED_IN || (is_array($_groups) && count(array_intersect($_groups, $groups))) || $this->showProtected || ($this instanceof \ModuleSitemap && $objSubpages->sitemap == 'map_always'))
 			{
 				// Check whether there will be subpages
 				if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->getChildRecords($objSubpages->id, 'tl_page'))))))
@@ -242,22 +257,18 @@ abstract class Module extends Frontend
 						break;
 
 					case 'forward':
-						if (!$objSubpages->jumpTo)
+						if ($objSubpages->jumpTo > 0)
 						{
-							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE pid=? AND type='regular'" . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : "") . " ORDER BY sorting")
-													  ->limit(1)
-													  ->execute($objSubpages->id);
+							$objNext = \PageModel::findPublishedById($objSubpages->jumpTo);
 						}
 						else
 						{
-							$objNext = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-													  ->limit(1)
-													  ->execute($objSubpages->jumpTo);
+							$objNext = \PageModel::findFirstPublishedRegularByPid($objSubpages->id);
 						}
 
-						if ($objNext->numRows)
+						if ($objNext !== null)
 						{
-							$href = $this->generateFrontendUrl($objNext->fetchAssoc());
+							$href = $this->generateFrontendUrl($objNext->row());
 							break;
 						}
 						// DO NOT ADD A break; STATEMENT
@@ -268,7 +279,7 @@ abstract class Module extends Frontend
 				}
 
 				// Active page
-				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof ModuleSitemap && !$this->Input->get('articles'))
+				if (($objPage->id == $objSubpages->id || $objSubpages->type == 'forward' && $objPage->id == $objSubpages->jumpTo) && !$this instanceof \ModuleSitemap && !$this->Input->get('articles'))
 				{
 					$strClass = (($subitems != '') ? 'submenu' : '') . ($objSubpages->protected ? ' protected' : '') . (($objSubpages->cssClass != '') ? ' ' . $objSubpages->cssClass : '');
 					$row = $objSubpages->row();
@@ -287,7 +298,7 @@ abstract class Module extends Frontend
 					// Override the link target
 					if ($objSubpages->type == 'redirect' && $objSubpages->target)
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -320,7 +331,7 @@ abstract class Module extends Frontend
 					// Override the link target
 					if ($objSubpages->type == 'redirect' && $objSubpages->target)
 					{
-						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href); return false;"' : ' target="_blank"';
+						$row['target'] = ($objPage->outputFormat == 'xhtml') ? ' onclick="window.open(this.href);return false"' : ' target="_blank"';
 					}
 
 					$items[] = $row;
@@ -329,7 +340,7 @@ abstract class Module extends Frontend
 		}
 
 		// Add classes first and last
-		if (count($items))
+		if (!empty($items))
 		{
 			$last = count($items) - 1;
 
@@ -338,8 +349,6 @@ abstract class Module extends Frontend
 		}
 
 		$objTemplate->items = $items;
-		return count($items) ? $objTemplate->parse() : '';
+		return !empty($items) ? $objTemplate->parse() : '';
 	}
 }
-
-?>

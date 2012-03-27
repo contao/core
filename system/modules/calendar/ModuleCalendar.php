@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Calendar
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleCalendar
  *
  * Front end module "calendar".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleCalendar extends Events
+class ModuleCalendar extends \Events
 {
 
 	/**
@@ -67,7 +72,7 @@ class ModuleCalendar extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### CALENDAR ###';
 			$objTemplate->title = $this->headline;
@@ -81,21 +86,16 @@ class ModuleCalendar extends Events
 		$this->cal_calendar = $this->sortOutProtected(deserialize($this->cal_calendar, true));
 
 		// Return if there are no calendars
-		if (!is_array($this->cal_calendar) || count($this->cal_calendar) < 1)
+		if (!is_array($this->cal_calendar) || empty($this->cal_calendar))
 		{
 			return '';
 		}
 
 		$this->strUrl = preg_replace('/\?.*$/i', '', $this->Environment->request);
 
-		// Get current "jumpTo" page
-		$objPage = $this->Database->prepare("SELECT id, alias FROM tl_page WHERE id=?")
-								  ->limit(1)
-								  ->execute($this->jumpTo);
-
-		if ($objPage->numRows)
+		if ($this->jumpTo['id'] > 0)
 		{
-			$this->strLink = $this->generateFrontendUrl($objPage->row());
+			$this->strLink = $this->generateFrontendUrl($this->jumpTo);
 		}
 		else
 		{
@@ -107,32 +107,33 @@ class ModuleCalendar extends Events
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
 		// Respond to month
 		if ($this->Input->get('month'))
 		{
-			$this->Date = new Date($this->Input->get('month'), 'Ym');
+			$this->Date = new \Date($this->Input->get('month'), 'Ym');
 		}
 
 		// Respond to day
 		elseif ($this->Input->get('day'))
 		{
-			$this->Date = new Date($this->Input->get('day'), 'Ymd');
+			$this->Date = new \Date($this->Input->get('day'), 'Ymd');
 		}
 
 		// Fallback to today
 		else
 		{
-			$this->Date = new Date();
+			$this->Date = new \Date();
 		}
 
 		$intYear = date('Y', $this->Date->tstamp);
 		$intMonth = date('m', $this->Date->tstamp);
 
-		$objTemplate = new FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
+		$objTemplate = new \FrontendTemplate(($this->cal_ctemplate ? $this->cal_ctemplate : 'cal_default'));
 
 		$objTemplate->intYear = $intYear;
 		$objTemplate->intMonth = $intMonth;
@@ -276,5 +277,3 @@ class ModuleCalendar extends Events
 		return $arrDays;
 	}
 }
-
-?>

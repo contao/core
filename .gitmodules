@@ -1,0 +1,3 @@
+[submodule "system/modules/development"]
+	path = system/modules/development
+	url = git@github.com:contao/development.git

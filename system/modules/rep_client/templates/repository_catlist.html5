@@ -19,7 +19,7 @@ $state_options = &$GLOBALS['TL_LANG']['tl_repository_state_options'];
 
 ?>
 
-<div class="mod_repository block">
+<div class="mod_repository">
 
 <form action="<?php echo $rep->f_link; ?>" id="repository_editform" method="post">
 <div class="tl_formbody">

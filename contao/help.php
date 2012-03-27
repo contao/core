@@ -2,7 +2,7 @@
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Backend
  * @license    LGPL
- * @filesource
  */
 
 
@@ -33,14 +32,14 @@
  * Initialize the system
  */
 define('TL_MODE', 'BE');
-require_once('../system/initialize.php');
+require_once '../system/initialize.php';
 
 
 /**
  * Class Help
  *
  * Back end help wizard.
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
@@ -50,10 +49,10 @@ class Help extends Backend
 	/**
 	 * Initialize the controller
 	 * 
-	 * 1. Import user
-	 * 2. Call parent constructor
-	 * 3. Authenticate user
-	 * 4. Load language files
+	 * 1. Import the user
+	 * 2. Call the parent constructor
+	 * 3. Authenticate the user
+	 * 4. Load the language files
 	 * DO NOT CHANGE THIS ORDER!
 	 */
 	public function __construct()
@@ -69,26 +68,47 @@ class Help extends Backend
 
 
 	/**
-	 * Run controller and parse the template
+	 * Run the controller and parse the template
+	 * @return void
 	 */
 	public function run()
 	{
-		$this->loadLanguageFile($this->Input->get('table'));
-		$this->loadDataContainer($this->Input->get('table'));
+		$table = $this->Input->get('table');
+		$field = $this->Input->get('field');
+
+		$this->loadLanguageFile($table);
+		$this->loadDataContainer($table);
 
 		$this->Template = new BackendTemplate('be_help');
+		$arrData = $GLOBALS['TL_DCA'][$table]['fields'][$field];
 
 		// Add reference
-		if (count($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']))
+		if (!empty($arrData['reference']))
 		{
 			$rows = array();
-			$options = is_array($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options']) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['options'] : array_keys($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference']);
+			$options = is_array($arrData['options']) ? $arrData['options'] : array_keys($arrData['reference']);
 
-			foreach ($options as $option)
+			foreach ($options as $key=>$option)
 			{
-				if (is_array($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option]) && strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option][1]))
+				if (is_array($option))
 				{
-					$rows[] = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['reference'][$option];
+					$rows[] = array('headspan', $arrData['reference'][$key]);
+
+					foreach ($option as $opt)
+					{
+						$rows[] = $arrData['reference'][$opt];
+					}
+				}
+				else
+				{
+					if (!is_array($arrData['reference'][$option]))
+					{
+						$rows[] = array('headspan', $arrData['reference'][$option]);
+					}
+					else
+					{
+						$rows[] = $arrData['reference'][$option];
+					}
 				}
 			}
 
@@ -96,37 +116,27 @@ class Help extends Backend
 		}
 
 		// Add explanation
-		if (strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation']))
+		if (isset($arrData['explanation']))
 		{
 			$this->loadLanguageFile('explain');
-			$key = $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['explanation'];
+			$key = $arrData['explanation'];
 
 			if (!is_array($GLOBALS['TL_LANG']['XPL'][$key]))
 			{
 				$this->Template->explanation = trim($GLOBALS['TL_LANG']['XPL'][$key]);
 			}
-
 			else
 			{
 				$this->Template->rows = $GLOBALS['TL_LANG']['XPL'][$key];
 			}
 		}
 
-		$this->output();
-	}
-
-
-	/**
-	 * Output the template file
-	 */
-	protected function output()
-	{
 		$this->Template->theme = $this->getTheme();
 		$this->Template->base = $this->Environment->base;
 		$this->Template->language = $GLOBALS['TL_LANGUAGE'];
 		$this->Template->title = $GLOBALS['TL_CONFIG']['websiteTitle'];
 		$this->Template->charset = $GLOBALS['TL_CONFIG']['characterSet'];
-		$this->Template->headline = strlen($GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0]) ? $GLOBALS['TL_DCA'][$this->Input->get('table')]['fields'][$this->Input->get('field')]['label'][0] : $this->Input->get('field');
+		$this->Template->headline = $arrData['label'][0] ?: $field;
 		$this->Template->helpWizard = $GLOBALS['TL_LANG']['MSC']['helpWizard'];
 
 		$this->Template->output();
@@ -135,9 +145,7 @@ class Help extends Backend
 
 
 /**
- * Instantiate controller
+ * Instantiate the controller
  */
 $objHelp = new Help();
 $objHelp->run();
-
-?>

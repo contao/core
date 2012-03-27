@@ -6,21 +6,30 @@
 <base href="<?php echo $this->base; ?>">
 <link rel="stylesheet" href="<?php
   $objCombiner = new Combiner();
+  $objCombiner->add('plugins/mootools/stylect/css/stylect.css');
   $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
   $objCombiner->add('system/themes/'. $this->theme .'/login.css');
   echo $objCombiner->getCombinedFile();
 ?>" media="all">
-<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css" media="screen"><![endif]-->
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+<?php echo $this->stylesheets; ?>
+<script><?php echo $this->getLocaleString(); ?></script>
 <script src="<?php
   $objCombiner = new Combiner();
-  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS_CORE);
-  $objCombiner->add('plugins/mootools/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS_MORE);
+  $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
+  $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
+  $objCombiner->add('plugins/mootools/request/Request.Contao.js');
+  $objCombiner->add('system/modules/backend/html/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->
 </head>
 <body class="__ua__">
-<?php $this->showIE6warning(); ?>
+
+<!--[if lte IE 6]>
+<div id="ie6warning"><?php echo $this->ie6warning; ?></div>
+<![endif]-->
 
 <div id="header">
 <h1>Contao Open Source CMS <?php echo VERSION; ?></h1>
@@ -44,15 +53,15 @@
 <table class="tl_login_table">
 <tr>
   <td<?php echo $this->uClass; ?>><label for="username"><?php echo $this->username; ?></label></td>
-  <td style="text-align:right;"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64"></td>
+  <td style="text-align:right"><input type="text" name="username" id="username" class="tl_text" value="<?php echo $this->curUsername; ?>" maxlength="64" required></td>
 </tr>
 <tr>
   <td<?php echo $this->pClass; ?>><label for="password"><?php echo $this->password; ?></label></td>
-  <td style="text-align:right;"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64"></td>
+  <td style="text-align:right"><input type="password" name="password" id="password" class="tl_text" value="" maxlength="64" required></td>
 </tr>
 <tr>
   <td><label for="language"><?php echo $this->userLanguage; ?></label></td>
-  <td style="text-align:right;">
+  <td style="text-align:right">
     <select name="language" id="language" class="tl_select">
 <?php foreach ($this->languages as $key=>$lang): ?>
       <option value="<?php echo specialchars($key); ?>"<?php if ($this->curLanguage == $key) echo ' selected="selected"'; ?>><?php echo $lang; ?></option>
@@ -102,11 +111,11 @@ window.addEvent('domready', function() {
 
 <script>
 new Request({
-  url:'system/html/cron.txt',
+  url:'system/cron/cron.txt',
   onComplete: function(txt) {
     if (!txt) txt = 0;
     if (parseInt(txt) < (Date.now()/1000 - 300)) {
-      new Request({url:'cron.php'}).send();
+      new Request({url:'system/cron/cron.php'}).send();
     }
   }
 }).send();

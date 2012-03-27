@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,12 +20,11 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Language
  * @license    LGPL
- * @filesource
  */
 
 
@@ -84,6 +83,7 @@ $GLOBALS['TL_LANG']['CNT']['co'] = 'Kolumbien';
 $GLOBALS['TL_LANG']['CNT']['cr'] = 'Costa Rica';
 $GLOBALS['TL_LANG']['CNT']['cu'] = 'Kuba';
 $GLOBALS['TL_LANG']['CNT']['cv'] = 'Kapverden';
+$GLOBALS['TL_LANG']['CNT']['cw'] = 'Curaçao';
 $GLOBALS['TL_LANG']['CNT']['cx'] = 'Weihnachtsinsel';
 $GLOBALS['TL_LANG']['CNT']['cy'] = 'Zypern';
 $GLOBALS['TL_LANG']['CNT']['cz'] = 'Tschechien';
@@ -153,6 +153,7 @@ $GLOBALS['TL_LANG']['CNT']['km'] = 'Komoren';
 $GLOBALS['TL_LANG']['CNT']['kn'] = 'Saint Kitts und Nevis';
 $GLOBALS['TL_LANG']['CNT']['kp'] = 'Nordkorea';
 $GLOBALS['TL_LANG']['CNT']['kr'] = 'Südkorea';
+$GLOBALS['TL_LANG']['CNT']['kv'] = 'Kosovo';
 $GLOBALS['TL_LANG']['CNT']['kw'] = 'Kuwait';
 $GLOBALS['TL_LANG']['CNT']['ky'] = 'Kaiman-Inseln';
 $GLOBALS['TL_LANG']['CNT']['kz'] = 'Kasachstan';
@@ -257,6 +258,7 @@ $GLOBALS['TL_LANG']['CNT']['tr'] = 'Türkei';
 $GLOBALS['TL_LANG']['CNT']['tt'] = 'Trinidad und Tobago';
 $GLOBALS['TL_LANG']['CNT']['tv'] = 'Tuvalu';
 $GLOBALS['TL_LANG']['CNT']['tw'] = 'Taiwan';
+$GLOBALS['TL_LANG']['CNT']['ty'] = 'Tahiti';
 $GLOBALS['TL_LANG']['CNT']['tz'] = 'Tansania';
 $GLOBALS['TL_LANG']['CNT']['ua'] = 'Ukraine';
 $GLOBALS['TL_LANG']['CNT']['ug'] = 'Uganda';
@@ -278,5 +280,3 @@ $GLOBALS['TL_LANG']['CNT']['yt'] = 'Mayotte';
 $GLOBALS['TL_LANG']['CNT']['za'] = 'Südafrika';
 $GLOBALS['TL_LANG']['CNT']['zm'] = 'Sambia';
 $GLOBALS['TL_LANG']['CNT']['zw'] = 'Simbabwe';
-
-?>

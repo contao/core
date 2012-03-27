@@ -1,8 +1,8 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
- * Copyright (C) 2005-2011 Leo Feyer
+ * Copyright (C) 2005-2012 Leo Feyer
  *
  * Formerly known as TYPOlight Open Source CMS.
  *
@@ -20,24 +20,29 @@
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
- * PHP version 5
- * @copyright  Leo Feyer 2005-2011
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Frontend
  * @license    LGPL
- * @filesource
  */
+
+
+/**
+ * Run in a custom namespace, so the class can be replaced
+ */
+namespace Contao;
 
 
 /**
  * Class ModuleQuicklink
  *
  * Front end module "quick link".
- * @copyright  Leo Feyer 2005-2011
+ * @copyright  Leo Feyer 2005-2012
  * @author     Leo Feyer <http://www.contao.org>
  * @package    Controller
  */
-class ModuleQuicklink extends Module
+class ModuleQuicklink extends \Module
 {
 
 	/**
@@ -55,7 +60,7 @@ class ModuleQuicklink extends Module
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### QUICK LINK ###';
 			$objTemplate->title = $this->headline;
@@ -80,7 +85,7 @@ class ModuleQuicklink extends Module
 		// Get all pages
 		$this->pages = deserialize($this->pages);
 
-		if (!is_array($this->pages) || !strlen($this->pages[0]))
+		if (!is_array($this->pages) || $this->pages[0] == '')
 		{
 			return '';
 		}
@@ -90,29 +95,15 @@ class ModuleQuicklink extends Module
 
 
 	/**
-	 * Generate module
+	 * Generate the module
+	 * @return void
 	 */
 	protected function compile()
 	{
-		$time = time();
-		$arrPages = array();
-
 		// Get all active pages
-		foreach ($this->pages as $intId)
-		{
-			$objPage = $this->Database->prepare("SELECT id, title, alias, pageTitle FROM tl_page WHERE id=? AND type!='root' AND type!='error_403' AND type!='error_404'" . ((FE_USER_LOGGED_IN && !BE_USER_LOGGED_IN) ? " AND guests!=1" : "") . (!BE_USER_LOGGED_IN ? " AND (start='' OR start<$time) AND (stop='' OR stop>$time) AND published=1" : ""))
-									  ->limit(1)
-									  ->execute($intId);
+		$arrPages = \PageCollection::findPublishedRegularWithoutGuestsByIds($this->pages)->getData();
 
-			if ($objPage->numRows < 1)
-			{
-				continue;
-			}
-
-			$arrPages[] = $objPage->fetchAssoc();
-		}
-
-		if (count($arrPages) < 1)
+		if (empty($arrPages))
 		{
 			return;
 		}
@@ -127,16 +118,14 @@ class ModuleQuicklink extends Module
 			$items[] = array
 			(
 				'href' => $this->generateFrontendUrl($arrPage),
-				'title' => (strlen($arrPage['pageTitle']) ? specialchars($arrPage['pageTitle']) : specialchars($arrPage['title'])),
+				'title' => specialchars($arrPage['pageTitle'] ?: $arrPage['title']),
 				'link' => $arrPage['title']
 			);
 		}
 
 		$this->Template->items = $items;
 		$this->Template->request = ampersand($this->Environment->request, true);
-		$this->Template->title = strlen($this->customLabel) ? $this->customLabel :$GLOBALS['TL_LANG']['MSC']['quicklink'];
+		$this->Template->title = $this->customLabel ?: $GLOBALS['TL_LANG']['MSC']['quicklink'];
 		$this->Template->button = specialchars($GLOBALS['TL_LANG']['MSC']['go']);
 	}
 }
-
-?>
