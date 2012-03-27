@@ -645,12 +645,6 @@ class tl_article extends Backend
 			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
 		}
 
-		// Always add the custom layout sections in "override all" mode
-		if ($this->Input->get('act') == 'overrideAll')
-		{
-			$arrCustom = trimsplit(',', $GLOBALS['TL_CONFIG']['customSections']);
-		}
-
 		// Add the custom layout sections
 		if (is_array($arrCustom) && !empty($arrCustom))
 		{
