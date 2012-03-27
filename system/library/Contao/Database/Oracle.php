@@ -64,13 +64,13 @@ class Database_Oracle extends \Database
 	 */
 	protected function connect()
 	{
-		if ($GLOBALS['TL_CONFIG']['dbPconnect'])
+		if ($this->arrConfig['dbPconnect'])
 		{
-			$this->resConnection = @oci_pconnect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @oci_pconnect($this->arrConfig['dbUser'], $this->arrConfig['dbPass'], '', $this->arrConfig['dbCharset']);
 		}
 		else
 		{
-			$this->resConnection = @oci_connect($GLOBALS['TL_CONFIG']['dbUser'], $GLOBALS['TL_CONFIG']['dbPass'], '', $GLOBALS['TL_CONFIG']['dbCharset']);
+			$this->resConnection = @oci_connect($this->arrConfig['dbUser'], $this->arrConfig['dbPass'], '', $this->arrConfig['dbCharset']);
 		}
 	}
 
