@@ -133,7 +133,6 @@ class FileTree extends \Widget
 	 */
 	protected function validator($varInput)
 	{
-
 		// Store the orderSRC value
 		if ($this->strOrderField != '')
 		{

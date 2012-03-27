@@ -58,6 +58,12 @@ class FileSelector extends \Widget
 	protected $arrNodes = array();
 
 	/**
+	 * Extension filter
+	 * @var string
+	 */
+	protected $strExtensions = '';
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -90,6 +96,12 @@ class FileSelector extends \Widget
 			$this->reload();
 		}
 
+		// Extension filter
+		if ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'] != '')
+		{
+			$this->strExtensions = " AND (type='folder' OR extension IN('" . implode("','", trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'])) . "'))";
+		}
+
 		$tree = '';
 		$this->getPathNodes();
 		$for = $this->Session->get('file_selector_search');
@@ -98,7 +110,7 @@ class FileSelector extends \Widget
 		// Search for a specific file
 		if ($for != '')
 		{
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?")
+			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?" . $this->strExtensions)
 									  ->execute($for);
 
 			if ($objRoot->numRows > 0)
@@ -135,7 +147,7 @@ class FileSelector extends \Widget
 			// Show all files to admins
 			if ($this->User->isAdmin)
 			{
-				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
+				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name")
 										  ->execute(0);
 
 				while ($objFile->next())
@@ -222,7 +234,7 @@ class FileSelector extends \Widget
 		$tree = '';
 		$level = $level * 20;
 
-		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=? ORDER BY type='file', name")
+		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name")
 								  ->execute($id);
 
 		while ($objFile->next())
@@ -259,7 +271,7 @@ class FileSelector extends \Widget
 			$this->redirect(preg_replace('/(&(amp;)?|\?)'.$flag.'tg=[^& ]*/i', '', $this->Environment->request));
 		}
 
-		$strWhere = ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? "" : " AND type='folder'";
+		$strWhere = (($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['files'] || $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['filesOnly']) ? "" : " AND type='folder'") . $this->strExtensions;
 
 		// Get the current element
 		$objFile = $this->Database->prepare("SELECT id, type, name, path FROM tl_files WHERE id=?$strWhere")
