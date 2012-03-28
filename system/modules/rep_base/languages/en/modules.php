@@ -40,4 +40,4 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['rep_base'] = array('Repository base', 'The basic module of the extension repository.');
+$GLOBALS['TL_LANG']['MOD']['rep_base'] = array('Repository base', 'The basic module of the extension repository');

@@ -599,6 +599,10 @@ class DataContainer extends \Backend
 			{
 				$label = $k;
 			}
+			if ($title == '')
+			{
+				$title = $label;
+			}
 
 			// Call a custom function instead of using the default button
 			if (is_array($v['button_callback']))

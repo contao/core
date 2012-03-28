@@ -85,7 +85,7 @@ $GLOBALS['TL_DCA']['tl_page'] = array
 		(
 			'toggleNodes' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleAll'],
 				'href'                => 'ptg=all',
 				'class'               => 'header_toggle'
 			),

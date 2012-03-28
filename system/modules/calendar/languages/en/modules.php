@@ -31,14 +31,14 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Manage events and display them in a calendar or event list.');
+$GLOBALS['TL_LANG']['MOD']['calendar'] = array('Events', 'Manage events and display them in a calendar or event list');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['events']      = 'Events';
-$GLOBALS['TL_LANG']['FMD']['calendar']    = array('Calendar', 'Adds a calendar to the page.');
-$GLOBALS['TL_LANG']['FMD']['eventlist']   = array('Event list', 'Adds a list of events to the page.');
-$GLOBALS['TL_LANG']['FMD']['eventreader'] = array('Event reader', 'Shows the details of an event.');
-$GLOBALS['TL_LANG']['FMD']['eventmenu']   = array('Event list menu', 'Generates a navigation menu to browse the event list.');
+$GLOBALS['TL_LANG']['FMD']['calendar']    = array('Calendar', 'Adds a calendar to the page');
+$GLOBALS['TL_LANG']['FMD']['eventlist']   = array('Event list', 'Adds a list of events to the page');
+$GLOBALS['TL_LANG']['FMD']['eventreader'] = array('Event reader', 'Shows the details of an event');
+$GLOBALS['TL_LANG']['FMD']['eventmenu']   = array('Event list menu', 'Generates a navigation menu to browse the event list');

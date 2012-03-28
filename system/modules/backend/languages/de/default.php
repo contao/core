@@ -328,6 +328,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Datei-URL', 'Die Datei-URL 
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Skript-URL', 'Die Skript-URL gilt für alle JavaScript- und CSS-Dateien inklusive eingebundener Hintergrundbilder (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins-URL', 'Die Plugins-URL gilt für alle Ressourcen im <em>plugins</em>-Verzeichnis (Page-Speed-Optimierung).');
 $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', 'Wie Sie Ihren Arbeitsablauf durch die Verwendung von <a href="http://www.contao.org/de/keyboard-shortcuts.html" target="_blank">Tastaturkürzeln</a> beschleunigen.');
+$GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Alle umschalten', 'Alle Knoten öffnen bzw. schließen');
 
 
 /**
@@ -335,13 +336,17 @@ $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Backend-Tastaturkürzel', '
  */
 $GLOBALS['TL_LANG']['MSC']['feLink']            = 'Zum Frontend';
 $GLOBALS['TL_LANG']['MSC']['fePreview']         = 'Frontend-Vorschau';
+$GLOBALS['TL_LANG']['MSC']['fePreviewTitle']    = 'Vorschau der Webseite in einem neuen Fenster';
 $GLOBALS['TL_LANG']['MSC']['feUser']            = 'Frontend-Benutzer';
 $GLOBALS['TL_LANG']['MSC']['backToTop']         = 'Nach oben';
+$GLOBALS['TL_LANG']['MSC']['backToTopTitle']    = 'An den Anfang der Seite springen';
 $GLOBALS['TL_LANG']['MSC']['home']              = 'Startseite';
+$GLOBALS['TL_LANG']['MSC']['homeTitle']         = 'Zurück zur Backend-Startseite';
 $GLOBALS['TL_LANG']['MSC']['user']              = 'Benutzer';
 $GLOBALS['TL_LANG']['MSC']['loginTo']           = 'Anmelden bei %s';
 $GLOBALS['TL_LANG']['MSC']['loginBT']           = 'Anmelden';
 $GLOBALS['TL_LANG']['MSC']['logoutBT']          = 'Abmelden';
+$GLOBALS['TL_LANG']['MSC']['logoutBTTitle']     = 'Die aktuelle Sitzung beenden';
 $GLOBALS['TL_LANG']['MSC']['backBT']            = 'Zurück';
 $GLOBALS['TL_LANG']['MSC']['cancelBT']          = 'Abbrechen';
 $GLOBALS['TL_LANG']['MSC']['deleteConfirm']     = 'Soll der Eintrag ID %s wirklich gelöscht werden?';
@@ -424,6 +429,7 @@ $GLOBALS['TL_LANG']['MSC']['hiddenElements']    = 'Unveröffentlichte Elemente';
 $GLOBALS['TL_LANG']['MSC']['hiddenHide']        = 'verstecken';
 $GLOBALS['TL_LANG']['MSC']['hiddenShow']        = 'anzeigen';
 $GLOBALS['TL_LANG']['MSC']['apply']             = 'Anwenden';
+$GLOBALS['TL_LANG']['MSC']['applyTitle']        = 'Die Änderungen anwenden';
 $GLOBALS['TL_LANG']['MSC']['mandatory']         = 'Pflichtfeld';
 $GLOBALS['TL_LANG']['MSC']['create']            = 'Anlegen';
 $GLOBALS['TL_LANG']['MSC']['delete']            = 'Löschen';

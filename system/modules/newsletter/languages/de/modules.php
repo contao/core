@@ -31,14 +31,14 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletter', 'Abonnements verwalten und Newsletter versenden.');
+$GLOBALS['TL_LANG']['MOD']['newsletter'] = array('Newsletter', 'Abonnements verwalten und Newsletter versenden');
 
 
 /**
  * Front end modules
  */
 $GLOBALS['TL_LANG']['FMD']['newsletter']  = 'Newsletter';
-$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Abonnieren', 'Erzeugt ein Formular zum Abonnieren von Verteilern.');
-$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Kündigen', 'Erzeugt ein Formular zum Kündigen von Abonnements.');
-$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletterliste', 'Fügt der Seite eine Newsletterliste hinzu.');
-$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletterleser', 'Stellt einen einzelnen Newsletter dar.');
+$GLOBALS['TL_LANG']['FMD']['subscribe']   = array('Abonnieren', 'Erzeugt ein Formular zum Abonnieren von Verteilern');
+$GLOBALS['TL_LANG']['FMD']['unsubscribe'] = array('Kündigen', 'Erzeugt ein Formular zum Kündigen von Abonnements');
+$GLOBALS['TL_LANG']['FMD']['nl_list']     = array('Newsletterliste', 'Fügt der Seite eine Newsletterliste hinzu');
+$GLOBALS['TL_LANG']['FMD']['nl_reader']   = array('Newsletterleser', 'Stellt einen einzelnen Newsletter dar');

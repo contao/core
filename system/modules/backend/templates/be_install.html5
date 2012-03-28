@@ -13,7 +13,7 @@
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/core/<?php echo MOOTOOLS; ?>/mootools-core.js"></script>
 <script src="<?php echo TL_PLUGINS_URL; ?>plugins/mootools/more/<?php echo MOOTOOLS; ?>/mootools-more.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/stylect/js/stylect.js"></script>
-<script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/request/Request.Contao.js"></script>
+<script src="<?php echo TL_SCRIPT_URL; ?>plugins/mootools/mootao/Mootao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/modules/backend/html/contao.js"></script>
 <script src="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/hover.js"></script>
 <!--[if lt IE 9]><script src="<?php echo TL_PLUGINS_URL; ?>plugins/html5shim/html5-<?php echo HTML5SHIM; ?>.js"></script><![endif]-->

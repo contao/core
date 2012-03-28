@@ -16,7 +16,7 @@
   $objCombiner = new Combiner();
   $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
   $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
-  $objCombiner->add('plugins/mootools/request/Request.Contao.js');
+  $objCombiner->add('plugins/mootools/mootao/Mootao.js');
   $objCombiner->add('system/modules/backend/html/contao.js');
   $objCombiner->add('system/themes/'. $this->theme .'/hover.js');
   echo $objCombiner->getCombinedFile();

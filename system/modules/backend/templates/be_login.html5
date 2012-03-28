@@ -19,7 +19,7 @@
   $objCombiner->add('plugins/mootools/core/' . MOOTOOLS . '/mootools-core.js', MOOTOOLS);
   $objCombiner->add('plugins/mootools/more/' . MOOTOOLS . '/mootools-more.js', MOOTOOLS);
   $objCombiner->add('plugins/mootools/stylect/js/stylect.js');
-  $objCombiner->add('plugins/mootools/request/Request.Contao.js');
+  $objCombiner->add('plugins/mootools/mootao/Mootao.js');
   $objCombiner->add('system/modules/backend/html/contao.js');
   echo $objCombiner->getCombinedFile();
 ?>"></script>

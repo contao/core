@@ -327,6 +327,7 @@ $GLOBALS['TL_LANG']['MSC']['staticFiles']   = array('Files URL', 'The files URL 
 $GLOBALS['TL_LANG']['MSC']['staticSystem']  = array('Script URL', 'The script URL applies to all JavaScript and CSS files including embedded background images (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['staticPlugins'] = array('Plugins URL', 'The plugins URL applies to all resources in the <em>plugins</em> directory (page speed optimization).');
 $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts', 'Learn more about speeding up your workflow by using <a href="http://www.contao.org/keyboard-shortcuts.html" target="_blank">keyboard shortcuts</a>.');
+$GLOBALS['TL_LANG']['MSC']['toggleAll']     = array('Toggle all', 'Expand or collapse all nodes');
 
 
 /**
@@ -334,13 +335,17 @@ $GLOBALS['TL_LANG']['MSC']['shortcuts']     = array('Back end keyboard shortcuts
  */
 $GLOBALS['TL_LANG']['MSC']['feLink']            = 'Go to front end';
 $GLOBALS['TL_LANG']['MSC']['fePreview']         = 'Front end preview';
+$GLOBALS['TL_LANG']['MSC']['fePreviewTitle']    = 'Preview of the website in a new window';
 $GLOBALS['TL_LANG']['MSC']['feUser']            = 'Front end user';
 $GLOBALS['TL_LANG']['MSC']['backToTop']         = 'Back to top';
+$GLOBALS['TL_LANG']['MSC']['backToTopTitle']    = 'Go to the top of the page';
 $GLOBALS['TL_LANG']['MSC']['home']              = 'Home';
+$GLOBALS['TL_LANG']['MSC']['homeTitle']         = 'Back to the back end start page';
 $GLOBALS['TL_LANG']['MSC']['user']              = 'User';
 $GLOBALS['TL_LANG']['MSC']['loginTo']           = 'Log into %s';
 $GLOBALS['TL_LANG']['MSC']['loginBT']           = 'Login';
 $GLOBALS['TL_LANG']['MSC']['logoutBT']          = 'Logout';
+$GLOBALS['TL_LANG']['MSC']['logoutBTTitle']     = 'Close the current session';
 $GLOBALS['TL_LANG']['MSC']['backBT']            = 'Go back';
 $GLOBALS['TL_LANG']['MSC']['cancelBT']          = 'Cancel';
 $GLOBALS['TL_LANG']['MSC']['deleteConfirm']     = 'Do you really want to delete entry ID %s?';
@@ -423,6 +428,7 @@ $GLOBALS['TL_LANG']['MSC']['hiddenElements']    = 'Unpublished elements';
 $GLOBALS['TL_LANG']['MSC']['hiddenHide']        = 'hide';
 $GLOBALS['TL_LANG']['MSC']['hiddenShow']        = 'show';
 $GLOBALS['TL_LANG']['MSC']['apply']             = 'Apply';
+$GLOBALS['TL_LANG']['MSC']['applyTitle']        = 'Apply the changes';
 $GLOBALS['TL_LANG']['MSC']['mandatory']         = 'Mandatory field';
 $GLOBALS['TL_LANG']['MSC']['create']            = 'Create';
 $GLOBALS['TL_LANG']['MSC']['delete']            = 'Delete';

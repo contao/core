@@ -31,4 +31,4 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['tasks'] = array('Task-Center', 'Anderen Backend-Benutzern Aufgaben zuweisen.');
+$GLOBALS['TL_LANG']['MOD']['tasks'] = array('Task-Center', 'Anderen Backend-Benutzern Aufgaben zuweisen');

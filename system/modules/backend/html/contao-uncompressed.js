@@ -51,12 +51,12 @@ var AjaxRequest =
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('modMinus.gif', 'modPlus.gif');
-				$(el).title = Contao.lang.expand;
+				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao().post({'action':'toggleNavigation', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return false;
@@ -75,7 +75,7 @@ var AjaxRequest =
 					}
 				}).inject($(el).getParent('li'), 'after');
 
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('modPlus.gif', 'modMinus.gif');
 				AjaxRequest.hideBox();
 
@@ -104,12 +104,12 @@ var AjaxRequest =
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				$(el).title = Contao.lang.expand;
+				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleStructure', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return false;
@@ -154,7 +154,7 @@ var AjaxRequest =
 					}
 				}
 
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				window.fireEvent('structure');
 				AjaxRequest.hideBox();
@@ -186,13 +186,13 @@ var AjaxRequest =
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC', 'folderO');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
 				icon.src = icon.src.replace('folderO', 'folderC');
-				$(el).title = Contao.lang.expand;
+				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFileManager', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return false;
@@ -217,7 +217,7 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				icon.src = icon.src.replace('folderC.gif', 'folderO.gif');
 				AjaxRequest.hideBox();
@@ -248,12 +248,12 @@ var AjaxRequest =
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				$(el).title = Contao.lang.expand;
+				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'togglePagetree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return false;
@@ -278,7 +278,7 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
 
@@ -308,12 +308,12 @@ var AjaxRequest =
 			if (item.getStyle('display') == 'none') {
 				item.setStyle('display', 'inline');
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':1, 'REQUEST_TOKEN':Contao.request_token});
 			} else {
 				item.setStyle('display', 'none');
 				image.src = image.src.replace('folMinus.gif', 'folPlus.gif');
-				$(el).title = Contao.lang.expand;
+				$(el).store('tip:title', Contao.lang.expand);
 				new Request.Contao({field:el}).post({'action':'toggleFiletree', 'id':id, 'state':0, 'REQUEST_TOKEN':Contao.request_token});
 			}
 			return false;
@@ -338,7 +338,7 @@ var AjaxRequest =
 				}).inject(li, 'bottom');
 
 				li.inject($(el).getParent('li'), 'after');
-				$(el).title = Contao.lang.collapse;
+				$(el).store('tip:title', Contao.lang.collapse);
 				image.src = image.src.replace('folPlus.gif', 'folMinus.gif');
 				AjaxRequest.hideBox();
 
@@ -1088,41 +1088,16 @@ var Backend =
 	 * Add the interactive help
 	 */
 	addInteractiveHelp: function() {
-		$$('p.tl_tip').each(function(el) {
-			if (el.retrieve('complete')) {
-				return;
+		new Tips.Contao('p.tl_tip', {
+			offset: {x:9, y:3},
+			text: function(e) {
+				return e.get('html');
 			}
-
-			el.addEvent('mouseover', function() {
-				el.timo = setTimeout(function() {
-					var scroll = el.getTop();
-					var box = $('tl_helpBox');
-
-					if (!box) {
-						box = new Element('div', {
-							'id': 'tl_helpBox'
-						}).inject($(document.body), 'after');
-					}
-
-					box.set({
-						'html': el.get('html'),
-						'styles': {
-							'display': 'block',
-							'top': (scroll + 18) + 'px'
-						}
-					})
-				}, 1000);
+		});
+		['a[title]', 'input[title]'].each(function(el) {
+			new Tips.Contao($$(el), {
+				offset: {x:0, y:26}
 			});
-
-			el.addEvent('mouseout', function() {
-				var box = $('tl_helpBox');
-				if (box) {
-					box.setStyle('display', 'none');
-				}
-				clearTimeout(el.timo);
-			});
-
-			el.store('complete', true);
 		});
 	},
 
@@ -1642,6 +1617,10 @@ window.addEvent('load', function() {
 	Backend.limitPreviewHeight();
 });
 
+// Re-apply the interactive help upon Ajax changes
+window.addEvent('ajax_change', function() {
+	Backend.addInteractiveHelp();
+});
 
 /**
  * Class ContextMenu

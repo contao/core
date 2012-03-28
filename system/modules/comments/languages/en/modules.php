@@ -31,16 +31,16 @@
 /**
  * Content elements
  */
-$GLOBALS['TL_LANG']['CTE']['comments'] = array('Comments', 'Adds a comment form to the page.');
+$GLOBALS['TL_LANG']['CTE']['comments'] = array('Comments', 'Adds a comment form to the page');
 
 
 /**
  * Front end modules
  */
-$GLOBALS['TL_LANG']['FMD']['comments'] = array('Comments', 'Manage comments or guestbook entries.');
+$GLOBALS['TL_LANG']['FMD']['comments'] = array('Comments', 'Manage comments or guestbook entries');
 
 
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD']['comments'] = array('Comments', 'Manage comments or guestbook entries.');
+$GLOBALS['TL_LANG']['MOD']['comments'] = array('Comments', 'Manage comments or guestbook entries');

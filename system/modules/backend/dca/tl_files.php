@@ -68,7 +68,7 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 			),
 			'toggleNodes' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleNodes'],
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['toggleAll'],
 				'href'                => 'tg=all',
 				'class'               => 'header_toggle'
 			),
