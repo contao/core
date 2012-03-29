@@ -86,6 +86,7 @@ class ClassLoader
 		'Contao\\System'       => 'system/library/Contao/System.php',
 		'Contao\\Template'     => 'system/library/Contao/Template.php',
 		'Contao\\User'         => 'system/library/Contao/User.php',
+		'Contao\\Validator'    => 'system/library/Contao/Validator.php',
 		'Contao\\Widget'       => 'system/library/Contao/Widget.php',
 		'Contao\\ZipReader'    => 'system/library/Contao/ZipReader.php',
 		'Contao\\ZipWriter'    => 'system/library/Contao/ZipWriter.php',

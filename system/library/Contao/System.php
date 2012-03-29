@@ -933,7 +933,8 @@ abstract class System
 	 */
 	protected function isValidEmailAddress($strEmail)
 	{
-		return preg_match('/^(\w+[!#\$%&\'\*\+\-\/=\?^_`\.\{\|\}~]*)+(?<!\.)@\w+([_\.-]*\w+)*\.[a-z]{2,6}$/i', $strEmail);
+		// backwards compatibility
+		return Validator::isEmail($strEmail);
 	}
 
 
