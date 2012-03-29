@@ -64,6 +64,12 @@ class FileSelector extends \Widget
 	protected $strExtensions = '';
 
 	/**
+	 * Sort flag
+	 * @var string
+	 */
+	protected $strSortFlag = '';
+
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -102,6 +108,12 @@ class FileSelector extends \Widget
 			$this->strExtensions = " AND (type='folder' OR extension IN('" . implode("','", trimsplit(',', $GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['eval']['extensions'])) . "'))";
 		}
 
+		// Sort descending
+		if (isset($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag']) && ($GLOBALS['TL_DCA'][$this->strTable]['fields'][$this->strField]['flag'] % 2) == 0)
+		{
+			$this->strSortFlag = ' DESC';
+		}
+
 		$tree = '';
 		$this->getPathNodes();
 		$for = $this->Session->get('file_selector_search');
@@ -110,7 +122,7 @@ class FileSelector extends \Widget
 		// Search for a specific file
 		if ($for != '')
 		{
-			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?" . $this->strExtensions)
+			$objRoot = $this->Database->prepare("SELECT id FROM tl_files WHERE CAST(name AS CHAR) REGEXP ?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 									  ->execute($for);
 
 			if ($objRoot->numRows > 0)
@@ -147,7 +159,7 @@ class FileSelector extends \Widget
 			// Show all files to admins
 			if ($this->User->isAdmin)
 			{
-				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name")
+				$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 										  ->execute(0);
 
 				while ($objFile->next())
@@ -234,7 +246,7 @@ class FileSelector extends \Widget
 		$tree = '';
 		$level = $level * 20;
 
-		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name")
+		$objFile = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?{$this->strExtensions} ORDER BY type='file', name{$this->strSortFlag}")
 								  ->execute($id);
 
 		while ($objFile->next())
@@ -291,7 +303,7 @@ class FileSelector extends \Widget
 		// Check whether there are child records
 		if (!$blnNoRecursion)
 		{
-			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?$strWhere ORDER BY type='file', name")
+			$objNodes = $this->Database->prepare("SELECT id FROM tl_files WHERE pid=?$strWhere ORDER BY type='file', name{$this->strSortFlag}")
 									   ->execute($id);
 
 			if ($objNodes->numRows)
