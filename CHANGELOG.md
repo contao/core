@@ -5,6 +5,9 @@ Version 2.11.3 (XXXX-XX-XX)
 ---------------------------
 
 ### Fixed
+Check the uploader class before instantiation (see #4086).
+
+### Fixed
 Convert the "rel" attribute inserted by TinyMCE to a "data-lightbox" attribute
 if it is an HTML5 page (see #4073).
 
