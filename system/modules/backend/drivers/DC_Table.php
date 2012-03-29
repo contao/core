@@ -3245,17 +3245,15 @@ window.addEvent(\'domready\', function() {
 		$session[$node][$id] = (is_int($session[$node][$id])) ? $session[$node][$id] : 0;
 		$mouseover = ($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 || $table == $this->strTable) ? ' onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"' : '';
 
-		$return .= "\n  " . '<li class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'"'.$mouseover.'><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing).'px">';
+		$return .= "\n  " . '<li class="'.((($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'] == 5 && $objRow->type == 'root') || $table != $this->strTable) ? 'tl_folder' : 'tl_file').'"'.$mouseover.'><div class="tl_left" style="padding-left:'.($intMargin + $intSpacing + (empty($childs) ? 20 : 0)).'px">';
 
 		// Calculate label and add a toggle button
 		$args = array();
-		$folderAttribute = 'style="margin-left:20px"';
 		$showFields = $GLOBALS['TL_DCA'][$table]['list']['label']['fields'];
 		$level = ($intMargin / $intSpacing + 1);
 
 		if (!empty($childs))
 		{
-			$folderAttribute = '';
 			$img = ($session[$node][$id] == 1) ? 'folMinus.gif' : 'folPlus.gif';
 			$alt = ($session[$node][$id] == 1) ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
 			$return .= '<a href="'.$this->addToUrl('ptg='.$id).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset();return AjaxRequest.toggleStructure(this,\''.$node.'_'.$id.'\','.$level.','.$GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['mode'].')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
@@ -3308,18 +3306,18 @@ window.addEvent(\'domready\', function() {
 
 		$label = preg_replace('/\(\) ?|\[\] ?|\{\} ?|<> ?/i', '', $label);
 
-		// Call label_callback ($row, $label, $this)
+		// Call the label_callback ($row, $label, $this)
 		if (is_array($GLOBALS['TL_DCA'][$table]['list']['label']['label_callback']))
 		{
 			$strClass = $GLOBALS['TL_DCA'][$table]['list']['label']['label_callback'][0];
 			$strMethod = $GLOBALS['TL_DCA'][$table]['list']['label']['label_callback'][1];
 
 			$this->import($strClass);
-			$return .= $this->$strClass->$strMethod($objRow->row(), $label, $this, $folderAttribute);
+			$return .= $this->$strClass->$strMethod($objRow->row(), $label, $this);
 		}
 		else
 		{
-			$return .= $this->generateImage('iconPLAIN.gif', '', $folderAttribute) . ' ' . $label;
+			$return .= $this->generateImage('iconPLAIN.gif', '') . ' ' . $label;
 		}
 
 		$return .= '</div> <div class="tl_right">';
@@ -3382,7 +3380,7 @@ window.addEvent(\'domready\', function() {
 
 				for ($j=0; $j<count($ids); $j++)
 				{
-					$return .= $this->generateTree($this->strTable, $ids[$j], array('pp'=>$ids[($j-1)], 'nn'=>$ids[($j+1)]), $blnHasSorting, ($intMargin + $intSpacing + 20), $arrClipboard, false, ($j<(count($ids)-1) || !empty($childs)));
+					$return .= $this->generateTree($this->strTable, $ids[$j], array('pp'=>$ids[($j-1)], 'nn'=>$ids[($j+1)]), $blnHasSorting, ($intMargin + $intSpacing), $arrClipboard, false, ($j<(count($ids)-1) || !empty($childs)));
 				}
 			}
 		}

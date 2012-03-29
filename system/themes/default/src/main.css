@@ -1190,13 +1190,19 @@ fieldset.collapsed > legend {
 }
 .tip {
 	max-width:674px;
-	background:#000;
-	opacity:.8;
-	-moz-opacity:.8;
+	opacity:.9;
+	-moz-opacity:.9;
 	padding:3px 6px 4px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
+	box-shadow:1px 1px 3px #666;
+	background:#333;
+	background-image:-moz-linear-gradient(center bottom, #000 0%, #333 80%);
+	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #000), color-stop(0.8, #333));
+	background-image:-o-linear-gradient(bottom, #000 0%, #333 80%);
+	background-image:-ms-linear-gradient(top, #000 0%, #333 80%);
+	background-image:linear-gradient(top, #000 0%, #333 80%);
 }
 .tip div {
 	color:#fff;
@@ -1208,7 +1214,7 @@ fieldset.collapsed > legend {
 	top:-13px;
 	border-left:7px solid transparent;
 	border-right:7px solid transparent;
-	border-bottom:7px solid #000;
-	opacity:.8;
-	-moz-opacity:.8;
+	border-bottom:7px solid #333;
+	opacity:.9;
+	-moz-opacity:.9;
 }
