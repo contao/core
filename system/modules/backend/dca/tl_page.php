@@ -933,7 +933,7 @@ class tl_page extends Backend
 				}
 				else
 				{
-					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '">' . $objPage->title . '</a>';
+					$arrLinks[] = $this->addIcon($objPage->row(), '', null, '', true) . ' <a href="' . $this->addToUrl('node='.$objPage->id) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $objPage->title . '</a>';
 				}
 
 				// Do not show the mounted pages
@@ -960,7 +960,7 @@ class tl_page extends Backend
 		$GLOBALS['TL_DCA']['tl_page']['list']['sorting']['root'] = array($intNode);
 
 		// Add root link
-		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=0') . '">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
+		$arrLinks[] = '<img src="' . TL_FILES_URL . 'system/themes/' . $this->getTheme() . '/images/pagemounts.gif" width="18" height="18" alt=""> <a href="' . $this->addToUrl('node=0') . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectAllNodes']).'">' . $GLOBALS['TL_LANG']['MSC']['filterAll'] . '</a>';
 		$arrLinks = array_reverse($arrLinks);
 
 		// Insert breadcrumb menu
@@ -1345,7 +1345,7 @@ class tl_page extends Backend
 		}
 
 		// Add the breadcrumb link
-		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '">' . $label . '</a>';
+		$label = '<a href="' . $this->addToUrl('node='.$row['id']) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'">' . $label . '</a>';
 
 		// Return the image
 		return '<a href="contao/main.php?do=feRedirect&amp;page='.$row['id'].'" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['view']).'"' . (($dc->table != 'tl_page') ? ' class="tl_gray"' : '') . ' target="_blank">'.$this->generateImage($image, '', $imageAttribute).'</a> '.$label;

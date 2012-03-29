@@ -1704,7 +1704,7 @@ window.addEvent(\'domready\', function() {
 
 	/**
 	 * Synchronize the file system with the database
-	 * @return void
+	 * @return string
 	 */
 	public function sync()
 	{
@@ -2046,11 +2046,8 @@ window.addEvent(\'domready\', function() {
 		// Folders
 		for ($f=0; $f<count($folders); $f++)
 		{
-			$return .= "\n  " . '<li class="tl_folder" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.$intMargin.'px">';
-
 			$md5 = md5($folders[$f]);
 			$content = scan($folders[$f]);
-			$folderAttribute = 'style="margin-left:20px"';
 			$currentFolder = str_replace(TL_ROOT.'/', '', $folders[$f]);
 			$session['filetree'][$md5] = is_numeric($session['filetree'][$md5]) ? $session['filetree'][$md5] : 0;
 			$currentEncoded = $this->urlEncode($currentFolder);
@@ -2078,10 +2075,11 @@ window.addEvent(\'domready\', function() {
 				}
 			}
 
+			$return .= "\n  " . '<li class="tl_folder" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)"><div class="tl_left" style="padding-left:'.($intMargin + (($countFiles < 1) ? 20 : 0)).'px">';
+
 			// Add a toggle button if there are childs
 			if ($countFiles > 0)
 			{
-				$folderAttribute = '';
 				$img = ($session['filetree'][$md5] == 1) ? 'folMinus.gif' : 'folPlus.gif';
 				$alt = ($session['filetree'][$md5] == 1) ? $GLOBALS['TL_LANG']['MSC']['collapseNode'] : $GLOBALS['TL_LANG']['MSC']['expandNode'];
 				$return .= '<a href="'.$this->addToUrl('tg='.$md5).'" title="'.specialchars($alt).'" onclick="Backend.getScrollOffset(); return AjaxRequest.toggleFileManager(this, \'filetree_'.$md5.'\', \''.$currentFolder.'\', '.$level.')">'.$this->generateImage($img, '', 'style="margin-right:2px"').'</a>';
@@ -2091,7 +2089,7 @@ window.addEvent(\'domready\', function() {
 			$folderImg = ($session['filetree'][$md5] == 1 && $countFiles > 0) ? ($protected ? 'folderOP.gif' : 'folderO.gif') : ($protected ? 'folderCP.gif' : 'folderC.gif');
 
 			// Add the current folder
-			$return .= $this->generateImage($folderImg, '', $folderAttribute).' <a href="' . $this->addToUrl('node='.$currentEncoded) . '"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
+			$return .= $this->generateImage($folderImg, '').' <a href="' . $this->addToUrl('node='.$currentEncoded) . '" title="'.specialchars($GLOBALS['TL_LANG']['MSC']['selectNode']).'"><strong>'.specialchars(basename($currentFolder)).'</strong></a></div> <div class="tl_right">';
 
 			// Paste buttons
 			if ($arrClipboard !== false && $this->Input->get('act') != 'select')
