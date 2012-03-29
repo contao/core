@@ -826,7 +826,14 @@ class DC_Folder extends \DataContainer implements \listable, \editable
 
 		// Instantiate the uploader
 		$this->import('BackendUser', 'User');
-		$class = $this->User->uploader ?: 'FileUpload';
+		$class = $this->User->uploader;
+
+		// See #4086
+		if (!$this->classFileExists($class))
+		{
+			$class = 'FileUpload';
+		}
+
 		$objUploader = new $class();
 
 		// Process the uploaded files
