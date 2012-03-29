@@ -81,7 +81,7 @@ $GLOBALS['TL_LANG']['ERR']['topLevelRoot']      = 'Seiten in der obersten Ebene 
 $GLOBALS['TL_LANG']['ERR']['topLevelRegular']   = 'Auf der obersten Ebene befinden sich Seiten, die keine Website-Startpunkte sind. Webseiten ohne Startpunkt werden nicht mehr unterstützt, daher stellen Sie bitte sicher, dass alle Seiten unter einem Startpunkt gruppiert sind.';
 $GLOBALS['TL_LANG']['ERR']['invalidTokenUrl']   = 'Der Link, den Sie aufgerufen haben, konnte nicht verifiziert werden. Wenn Sie den Link selbst aufgerufen oder von einer vertauenswürdigen Person erhalten haben, können Sie den Vorgang fortsetzen.';
 $GLOBALS['TL_LANG']['ERR']['version2format']    = 'Dieses Element verwendet noch das alte Contao 2 SRC-Format. Haben Sie die Datenbank aktualisiert?';
-
+$GLOBALS['TL_LANG']['ERR']['numberOfErrors']    = 'Es sind %s Fehler aufgetreten. Klicken Sie für die Details.';
 
 /**
  * Page types
@@ -443,6 +443,7 @@ $GLOBALS['TL_LANG']['MSC']['ascending']         = 'aufsteigend';
 $GLOBALS['TL_LANG']['MSC']['descending']        = 'absteigend';
 $GLOBALS['TL_LANG']['MSC']['default']           = 'Standard';
 $GLOBALS['TL_LANG']['MSC']['helpWizard']        = 'Hilfe-Assistent';
+$GLOBALS['TL_LANG']['MSC']['errorOverview']     = 'Fehlerübersicht für das Feld "%s"';
 $GLOBALS['TL_LANG']['MSC']['noCookies']         = 'Für die Nutzung von Contao müssen Cookies erlaubt sein.';
 $GLOBALS['TL_LANG']['MSC']['copyOf']            = '%s (Kopie)';
 $GLOBALS['TL_LANG']['MSC']['coreOnlyMode']      = 'Contao befindet sich momentan im <strong>abgesicherten Modus</strong>, in dem nur Core-Module geladen werden. Dieser Modus ist z.B. nach einem Live Update aktiv, um eventuellen Fehlern durch inkompatible Third-Party-Erweiterungen vorzubeugen. Sie können den Betriebsmodus nach der Prüfung der installierten Third-Party-Erweiterungen in den Backend-Einstellungen anpassen.';

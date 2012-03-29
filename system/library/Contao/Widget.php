@@ -397,6 +397,48 @@ abstract class Widget extends Controller
 
 
 	/**
+	 * Return all errors as HTML string
+	 * @return string
+	 */
+	public function getErrorsAsHTML()
+	{
+		$count = count($this->arrErrors);
+		if (!$count)
+		{
+			return '';
+		}
+		
+		if ($count == 1)
+		{
+			return $this->getErrorAsHTML();
+		}
+		
+		// return a nice div for the front end
+		if (TL_MODE == 'FE')
+		{
+			return '<div class="errors"><p class="error">' . implode('</p><p class="error">', $this->arrErrors) . '</p></div>';
+		}
+		
+		// otherwise we show the back end specific error page (javascript fallback is there too)
+		$strHash = sha1(time() . uniqid());
+		$arrErrors = array();
+		$arrErrors[$strHash] = array
+		(
+			'field'  => $this->strLabel,
+			'errors' => $this->arrErrors	
+		);
+		
+		$this->Session->set('backend_errors', $arrErrors);
+
+		$strLabel = specialchars(sprintf($GLOBALS['TL_LANG']['ERR']['numberOfErrors'], $count));
+		$strTitle = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['errorOverview'], $this->strLabel));
+		$strUrl = 'contao/errors.php?hash=' . $strHash;
+
+		return '<p class="tl_error"><a href="' . $strUrl . '" onclick="Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\''. $strTitle . '\',\'url\':this.href});return false">' . $strLabel . '</a></p>';
+	}
+
+
+	/**
 	 * Return true if the current input shall be submitted
 	 * @return boolean
 	 */
@@ -464,9 +506,9 @@ abstract class Widget extends Controller
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$strWidget = $this->generate();
-		$strError = $this->getErrorAsHTML();
+		$strErrors = $this->getErrorsAsHTML();
 
-		return $blnSwitchOrder ? $strWidget . $strError : $strError . $strWidget;
+		return $blnSwitchOrder ? $strWidget . $strErrors : $strErrors . $strWidget;
 	}
 
 

@@ -1,0 +1,59 @@
+/**
+ * Contao Open Source CMS
+ * Copyright (C) 2005-2012 Leo Feyer
+ *
+ * Formerly known as TYPOlight Open Source CMS.
+ *
+ * This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation, either
+ * version 3 of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this program. If not, please visit the Free
+ * Software Foundation website at <http://www.gnu.org/licenses/>.
+ *
+ * PHP version 5.3
+ * @copyright  Leo Feyer 2005-2012
+ * @author     Leo Feyer <http://www.contao.org>
+ * @package    System
+ * @license    LGPL
+ */
+
+/* Body */
+body {
+	background:#fff;
+	padding:6px 12px;
+}
+
+/* Headline */
+h1 {
+	display:none;
+}
+h2 {
+	margin:18px 18px 9px;
+	padding:7px 0 7px 36px;
+	background:url("images/error.gif") no-repeat left center;
+	font-size:14px;
+	color:#C55;
+}
+
+/* Table */
+.tl_error_table {
+	margin:0 18px 18px;
+}
+.tl_error_table td {
+	padding:12px 0;
+	vertical-align:top;
+	border-bottom:1px solid #e6e6e6;
+	line-height:16px;
+}
+.tl_label {
+	width:50px;
+	font-weight:bold;
+}
