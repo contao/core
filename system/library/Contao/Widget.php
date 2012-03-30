@@ -397,6 +397,48 @@ abstract class Widget extends Controller
 
 
 	/**
+	 * Return all errors as HTML string
+	 * @return string
+	 */
+	public function getErrorsAsHTML()
+	{
+		$count = count($this->arrErrors);
+		if (!$count)
+		{
+			return '';
+		}
+		
+		if ($count == 1)
+		{
+			return $this->getErrorAsHTML();
+		}
+		
+		// return a nice div for the front end
+		if (TL_MODE == 'FE')
+		{
+			return '<div class="errors"><p class="error">' . implode('</p><p class="error">', $this->arrErrors) . '</p></div>';
+		}
+		
+		// otherwise we show the back end specific error page (javascript fallback is there too)
+		$strHash = sha1(time() . uniqid());
+		$arrErrors = array();
+		$arrErrors[$strHash] = array
+		(
+			'field'  => $this->strLabel,
+			'errors' => $this->arrErrors	
+		);
+		
+		$this->Session->set('backend_errors', $arrErrors);
+
+		$strLabel = specialchars(sprintf($GLOBALS['TL_LANG']['ERR']['numberOfErrors'], $count));
+		$strTitle = specialchars(sprintf($GLOBALS['TL_LANG']['MSC']['errorOverview'], $this->strLabel));
+		$strUrl = 'contao/errors.php?hash=' . $strHash;
+
+		return '<p class="tl_error"><a href="' . $strUrl . '" onclick="Backend.openModalIframe({\'width\':735,\'height\':405,\'title\':\''. $strTitle . '\',\'url\':this.href});return false">' . $strLabel . '</a></p>';
+	}
+
+
+	/**
 	 * Return true if the current input shall be submitted
 	 * @return boolean
 	 */
@@ -464,9 +506,9 @@ abstract class Widget extends Controller
 	public function generateWithError($blnSwitchOrder=false)
 	{
 		$strWidget = $this->generate();
-		$strError = $this->getErrorAsHTML();
+		$strErrors = $this->getErrorsAsHTML();
 
-		return $blnSwitchOrder ? $strWidget . $strError : $strError . $strWidget;
+		return $blnSwitchOrder ? $strWidget . $strErrors : $strErrors . $strWidget;
 	}
 
 
@@ -652,6 +694,7 @@ abstract class Widget extends Controller
 		{
 			switch ($this->rgxp)
 			{
+				// @todo: can we put that in the validator class as well?
 				// Special validation rule for style sheets
 				case (strncmp($this->rgxp, 'digit_', 6) === 0):
 					$textual = explode('_', $this->rgxp);
@@ -665,7 +708,7 @@ abstract class Widget extends Controller
 
 				// Numeric characters (including full stop [.] minus [-] and space [ ])
 				case 'digit':
-					if (!preg_match('/^[\d \.-]*$/', $varInput))
+					if (!Validator::isDigit($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['digit'], $this->strLabel));
 					}
@@ -673,43 +716,23 @@ abstract class Widget extends Controller
 
 				// Alphabetic characters (including full stop [.] minus [-] and space [ ])
 				case 'alpha':
-					if (function_exists('mb_eregi'))
+					if (!Validator::isAlpha($varInput))
 					{
-						if (!mb_eregi('^[[:alpha:] \.-]*$', $varInput))
-						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
-						}
-					}
-					else
-					{
-						if (!preg_match('/^[\pL \.-]*$/u', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alpha'], $this->strLabel));
-						}
 					}
 					break;
 
 				// Alphanumeric characters (including full stop [.] minus [-], underscore [_] and space [ ])
 				case 'alnum':
-					if (function_exists('mb_eregi'))
+					if (!Validator::isAlnum($varInput))
 					{
-						if (!mb_eregi('^[[:alnum:] \._-]*$', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
-						}
-					}
-					else
-					{
-						if (!preg_match('/^[\pN\pL \._-]*$/u', $varInput))
-						{
-							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
-						}
+						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alnum'], $this->strLabel));
 					}
 					break;
 
 				// Do not allow any characters that are usually encoded by class Input [=<>()#/])
 				case 'extnd':
-					if (preg_match('/[#\(\)\/<=>]/', html_entity_decode($varInput)))
+					if (!Validator::isExtnd($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['extnd'], $this->strLabel));
 					}
@@ -717,9 +740,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid date format
 				case 'date':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['dateFormat']) .'$~i', $varInput))
+					if (!Validator::isDate($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['date'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['dateFormat'])));
 					}
@@ -727,9 +748,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid time format
 				case 'time':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['timeFormat']) .'$~i', $varInput))
+					if (!Validator::isTime($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['time'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['timeFormat'])));
 					}
@@ -737,9 +756,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid date and time format
 				case 'datim':
-					$objDate = new \Date();
-
-					if (!preg_match('~^'. $objDate->getRegexp($GLOBALS['TL_CONFIG']['datimFormat']) .'$~i', $varInput))
+					if (!Validator::isDatim($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['dateTime'], $objDate->getInputFormat($GLOBALS['TL_CONFIG']['datimFormat'])));
 					}
@@ -752,9 +769,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid e-mail address
 				case 'email':
-					$varInput = $this->idnaEncodeEmail($varInput);
-
-					if (!$this->isValidEmailAddress($varInput))
+					if (!Validator::isEmail($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['email'], $this->strLabel));
 					}
@@ -770,9 +785,7 @@ abstract class Widget extends Controller
 
 					foreach ($arrEmails as $strEmail)
 					{
-						$strEmail = $this->idnaEncodeEmail($strEmail);
-
-						if (!$this->isValidEmailAddress($strEmail))
+						if (!Validator::isEmail($strEmail))
 						{
 							$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['emails'], $this->strLabel));
 							break;
@@ -782,9 +795,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid URL
 				case 'url':
-					$varInput = $this->idnaEncodeUrl($varInput);
-
-					if (!preg_match('/^[a-zA-Z0-9\.\+\/\?#%:,;\{\}\(\)\[\]@&=~_-]*$/', $varInput))
+					if (!Validator::isUrl($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['url'], $this->strLabel));
 					}
@@ -792,7 +803,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid alias
 				case 'alias':
-					if (!preg_match('/^[\pN\pL\._-]*$/', $varInput))
+					if (!Validator::isAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['alias'], $this->strLabel));
 					}
@@ -800,7 +811,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a valid folder URL alias
 				case 'folderalias':
-					if (!preg_match('/^[\pN\pL\/\._-]*$/', $varInput))
+					if (!Validator::isFolderAlias($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['folderalias'], $this->strLabel));
 					}
@@ -808,7 +819,7 @@ abstract class Widget extends Controller
 
 				// Phone numbers (numeric characters, space [ ], plus [+], minus [-], parentheses [()] and slash [/])
 				case 'phone':
-					if (!preg_match('/^(\+|\()?(\d+[ \+\(\)\/-]*)+$/', html_entity_decode($varInput)))
+					if (!Validator::isPhone($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['phone'], $this->strLabel));
 					}
@@ -816,7 +827,7 @@ abstract class Widget extends Controller
 
 				// Check whether the current value is a percent value
 				case 'prcnt':
-					if (!is_numeric($varInput) || $varInput < 0 || $varInput > 100)
+					if (!Validator::isPercent($varInput))
 					{
 						$this->addError(sprintf($GLOBALS['TL_LANG']['ERR']['prcnt'], $this->strLabel));
 					}

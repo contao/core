@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->language; ?>">
+<head>
+<meta charset="<?php echo $this->charset; ?>">
+<title><?php echo $this->title; ?> - Contao Open Source CMS <?php echo VERSION; ?></title>
+<base href="<?php echo $this->base; ?>">
+<link rel="stylesheet" href="<?php
+  $objCombiner = new Combiner();
+  $objCombiner->add('system/themes/'. $this->theme .'/basic.css');
+  $objCombiner->add('system/themes/'. $this->theme .'/errors.css');
+  echo $objCombiner->getCombinedFile();
+?>" media="all">
+<!--[if IE]><link rel="stylesheet" href="<?php echo TL_SCRIPT_URL; ?>system/themes/<?php echo $this->theme; ?>/iefixes.css"><![endif]-->
+</head>
+<body class="__ua__ popup">
+
+<div id="container">
+<div id="main">
+
+<h2><?php echo $this->headline; ?></h2>
+
+<?php if (!empty($this->errors)): ?>
+<table class="tl_error_table">
+<?php foreach ($this->errors as $k => $error): ?>
+  <tr>
+    <td class="tl_label">#<?php echo ($k+1); ?></td>
+    <td><?php echo $error; ?></td>
+  </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>
+
+</div>
+</div>
+
+</body>
+</html>

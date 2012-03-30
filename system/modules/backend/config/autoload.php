@@ -90,6 +90,7 @@ TemplateLoader::addFiles(array
 	'be_error'         => 'system/modules/backend/templates',
 	'be_files'         => 'system/modules/backend/templates',
 	'be_help'          => 'system/modules/backend/templates',
+	'be_errors'        => 'system/modules/backend/templates',
 	'be_install'       => 'system/modules/backend/templates',
 	'be_live_update'   => 'system/modules/backend/templates',
 	'be_login'         => 'system/modules/backend/templates',
