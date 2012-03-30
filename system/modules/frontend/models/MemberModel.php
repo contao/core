@@ -53,17 +53,6 @@ class MemberModel extends \Model
 
 
 	/**
-	 * Find a member by his/her username
-	 * @param string
-	 * @return \Contao\Model|null
-	 */
-	public static function findByUsername($strUsername)
-	{
-		return static::findByUsername($strUsername);
-	}
-
-
-	/**
 	 * Find an active member by his/her e-mail-address and username
 	 * @param string
 	 * @param string
