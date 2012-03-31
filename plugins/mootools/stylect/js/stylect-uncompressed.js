@@ -62,6 +62,11 @@ var Stylect =
 				}
 			}).inject(el, 'before');
 
+			// Fix right-aligned elements (e.g. Safari and Opera)
+			if (div.getPosition().x != el.getPosition().x) {
+				div.position({ relativeTo:el, ignoreMargins:true });
+			}
+
 			// Mark active elements
 			if (el.hasClass('active')) {
 				div.addClass('active');

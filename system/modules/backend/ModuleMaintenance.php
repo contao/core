@@ -63,7 +63,7 @@ class ModuleMaintenance extends \BackendModule
 
 		$this->Template->content = '';
 		$this->Template->href = $this->getReferer(true);
-		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBT']);
+		$this->Template->title = specialchars($GLOBALS['TL_LANG']['MSC']['backBTTitle']);
 		$this->Template->button = $GLOBALS['TL_LANG']['MSC']['backBT'];
 
 		foreach ($GLOBALS['TL_MAINTENANCE'] as $callback)

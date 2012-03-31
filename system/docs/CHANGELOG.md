@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### Improved
+Replaced the default browser tooltips with the MooTools tips interface.
+
 ### New
 Added a magic method to the `Model` and `Model_Collection` classes, so you can
 call `Model::findByName($name)` instead of `Model::findBy('name', $name)`. The

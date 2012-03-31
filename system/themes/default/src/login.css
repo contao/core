@@ -146,6 +146,9 @@ body {
 	width:100%;
 	margin:0 0 6px;
 }
+.tl_login_table td:nth-child(2n) {
+	width:180px;
+}
 .tl_login_submit_container {
 	padding-top:0;
 	text-align:right;

@@ -129,8 +129,7 @@ Tips.Contao = new Class(
 		offset: {x:16, y:16},
 		windowPadding: {x:0, y:0},
 		fixed: true,
-		waiAria: true,
-		maxwidth: '600px'
+		waiAria: true
 	},
 
 	position: function(event) {

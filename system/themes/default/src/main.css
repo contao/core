@@ -1187,9 +1187,13 @@ fieldset.collapsed > legend {
 .tl_tip {
 	height:13px;
 	overflow:hidden;
+	cursor:pointer;
+}
+.tip-wrap {
+	z-index:99;
 }
 .tip {
-	max-width:674px;
+	max-width:690px;
 	opacity:.9;
 	-moz-opacity:.9;
 	padding:3px 6px 4px;

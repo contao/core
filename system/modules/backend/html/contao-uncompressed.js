@@ -1089,7 +1089,7 @@ var Backend =
 	 */
 	addInteractiveHelp: function() {
 		new Tips.Contao('p.tl_tip', {
-			offset: {x:9, y:3},
+			offset: {x:9, y:21},
 			text: function(e) {
 				return e.get('html');
 			}
