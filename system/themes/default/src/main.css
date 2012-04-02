@@ -541,6 +541,23 @@ h2.sub_headline_index {
 	border-bottom:1px solid #e9e9e9;
 	overflow:hidden;
 }
+.tl_content.accstart,.tl_content.accstop {
+	background:#f3f3f3;
+}
+.tl_content.accstart {
+	border-bottom:0;
+}
+.tl_content.accstop {
+	border-top:0;
+}
+.tl_content.accstart h1 {
+	margin:0 0 9px 6px;
+}
+.tl_content.indent {
+	width:673px;
+	border-left:10px solid #f3f3f3;
+	border-right:10px solid #f3f3f3;
+}
 .no_padding {
 	padding:2px 6px;
 }
@@ -590,6 +607,9 @@ h2.sub_headline_index {
 }
 .limit_toggler {
 	margin-top:9px;
+}
+.limit_height input[type="file"] {
+	position:relative;
 }
 
 /* Tree view */
@@ -1194,19 +1214,17 @@ fieldset.collapsed > legend {
 }
 .tip {
 	max-width:690px;
-	opacity:.9;
-	-moz-opacity:.9;
 	padding:3px 6px 4px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
 	box-shadow:1px 1px 3px #666;
-	background:#333;
-	background-image:-moz-linear-gradient(center bottom, #000 0%, #333 80%);
-	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #000), color-stop(0.8, #333));
-	background-image:-o-linear-gradient(bottom, #000 0%, #333 80%);
-	background-image:-ms-linear-gradient(top, #000 0%, #333 80%);
-	background-image:linear-gradient(top, #000 0%, #333 80%);
+	background:#666;
+	background-image:-moz-linear-gradient(center bottom, #333 0%, #666 80%);
+	background-image:-webkit-gradient(linear, left bottom, left top, color-stop(0, #333), color-stop(0.8, #666));
+	background-image:-o-linear-gradient(bottom, #333 0%, #666 80%);
+	background-image:-ms-linear-gradient(top, #333 0%, #666 80%);
+	background-image:linear-gradient(top, #333 0%, #666 80%);
 }
 .tip div {
 	color:#fff;
@@ -1218,7 +1236,5 @@ fieldset.collapsed > legend {
 	top:-13px;
 	border-left:7px solid transparent;
 	border-right:7px solid transparent;
-	border-bottom:7px solid #333;
-	opacity:.9;
-	-moz-opacity:.9;
+	border-bottom:7px solid #666;
 }

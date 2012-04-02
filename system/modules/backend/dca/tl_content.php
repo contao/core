@@ -897,10 +897,40 @@ class tl_content extends Backend
 	{
 		$key = $arrRow['invisible'] ? 'unpublished' : 'published';
 		$type = $GLOBALS['TL_LANG']['CTE'][$arrRow['type']][0] ?: '&nbsp;';
+		$class = 'limit_height';
+
+		// Add the type of accordion element
+		if ($arrRow['type'] == 'accordion' && $arrRow['mooType'] != 'single')
+		{
+			$class = '';
+			$type .= ' [' . $GLOBALS['TL_LANG']['tl_content'][$arrRow['mooType']][0] . ']';
+		}
+
+		// Add the ID of the aliased element
+		if ($arrRow['type'] == 'alias')
+		{
+			$type .= ' ID ' . $arrRow['cteAlias'];
+		}
+
+		// Add the protection status
+		if ($arrRow['protected'])
+		{
+			$type .= ' (' . $GLOBALS['TL_LANG']['MSC']['protected'] . ')';
+		}
+		elseif ($arrRow['guests'])
+		{
+			$type .= ' (' . $GLOBALS['TL_LANG']['MSC']['guests'] . ')';
+		}
+
+		// Limit the element's height
+		if (!$GLOBALS['TL_CONFIG']['doNotCollapse'])
+		{
+			$class .=  ' h64';
+		}
 
 		return '
-<div class="cte_type ' . $key . '">' . $type . (($arrRow['type'] == 'alias') ? ' ID ' . $arrRow['cteAlias'] : '') . ($arrRow['protected'] ? ' (' . $GLOBALS['TL_LANG']['MSC']['protected'] . ')' : ($arrRow['guests'] ? ' (' . $GLOBALS['TL_LANG']['MSC']['guests'] . ')' : '')) . '</div>
-<div class="limit_height' . (!$GLOBALS['TL_CONFIG']['doNotCollapse'] ? ' h64' : '') . '">
+<div class="cte_type ' . $key . '">' . $type . '</div>
+<div class="' . trim($class) . '">
 ' . $this->getContentElement($arrRow['id']) . '
 </div>' . "\n";
 	}

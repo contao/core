@@ -3659,6 +3659,7 @@ window.addEvent(\'domready\', function() {
 				$this->import($strClass);
 				$row = $objOrderBy->fetchAllAssoc();
 				$strGroup = '';
+				$blnIndent = false;
 
 				// Make items sortable
 				if ($blnHasSorting)
@@ -3707,10 +3708,22 @@ window.addEvent(\'domready\', function() {
 						}
 					}
 
+					// Accordion wrapper
+					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'stop')
+					{
+						$blnIndent = false;
+					}
+
 					$return .= '
 
-<div class="tl_content'.(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
+<div class="tl_content'.((($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] != 'single')) ? ' acc'.$row[$i]['mooType'] : '').($blnIndent ? ' indent' : '').(($GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] != '') ? ' ' . $GLOBALS['TL_DCA'][$this->strTable]['list']['sorting']['child_record_class'] : '').(($i%2 == 0) ? ' even' : ' odd').'" onmouseover="Theme.hoverDiv(this,1)" onmouseout="Theme.hoverDiv(this,0)">
 <div class="tl_content_right">';
+
+					// Accordion wrapper
+					if ($row[$i]['type'] == 'accordion' && $row[$i]['mooType'] == 'start')
+					{
+						$blnIndent = true;
+					}
 
 					// Edit multiple
 					if ($this->Input->get('act') == 'select')
