@@ -382,4 +382,36 @@ class DcaExtractor extends \DbInstaller
 		// Include the file so the class properties are filled
 		include TL_ROOT . '/system/cache/sql/' . $this->strTable . '.php';
 	}
+
+
+	/**
+	 * Create all extracts
+	 * @return void
+	 */
+	public static function createAllExtracts()
+	{
+		$included = array();
+
+		foreach (scan(TL_ROOT . '/system/modules') as $strModule)
+		{
+			$strDir = TL_ROOT . '/system/modules/' . $strModule . '/dca';
+
+			if (!is_dir($strDir))
+			{
+				continue;
+			}
+
+			foreach (scan($strDir) as $strFile)
+			{
+				if (in_array($strFile, $included) || $strFile == '.htaccess')
+				{
+					continue;
+				}
+
+				$included[] = $strFile;
+				$strTable = str_replace('.php', '', $strFile);
+				new \DcaExtractor($strTable);
+			}
+		}
+	}
 }

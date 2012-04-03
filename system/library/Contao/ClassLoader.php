@@ -66,6 +66,7 @@ class ClassLoader
 		'Contao\\Controller'   => 'system/library/Contao/Controller.php',
 		'Contao\\Date'         => 'system/library/Contao/Date.php',
 		'Contao\\DbInstaller'  => 'system/library/Contao/DbInstaller.php',
+		'Contao\\DbUpdater'    => 'system/library/Contao/DbUpdater.php',
 		'Contao\\DcaExtractor' => 'system/library/Contao/DcaExtractor.php',
 		'Contao\\Email'        => 'system/library/Contao/Email.php',
 		'Contao\\Encryption'   => 'system/library/Contao/Encryption.php',

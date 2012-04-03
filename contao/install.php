@@ -39,7 +39,7 @@ require_once '../system/initialize.php';
  * Show error messages
  */
 @ini_set('display_errors', 1);
-@error_reporting(1);
+@error_reporting(E_ALL|E_STRICT);
 
 
 /**
@@ -769,87 +769,20 @@ class InstallTool extends Backend
 	 * Version 2.8.0 update
 	 * @return void
 	 */
-	protected function update_2_8_0()
+	protected function update28()
 	{
-		if ($this->Database->tableExists('tl_layout') && $this->Database->fieldExists('script', 'tl_layout'))
+		if ($this->Database->tableExists('tl_layout') && !$this->Database->fieldExists('script', 'tl_layout'))
 		{
-			return;
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_28update')
+			{
+				$this->import('DbUpdater');
+				$this->DbUpdater->run28Update();
+				$this->reload();
+			}
+
+			$this->Template->is28Update = true;
+			$this->outputAndExit();
 		}
-
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_28update')
-		{
-			// Database changes
-			$this->Database->query("ALTER TABLE `tl_layout` ADD `script` text NULL");
-			$this->Database->query("ALTER TABLE `tl_member` ADD `dateAdded` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_member` ADD `currentLogin` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_member` ADD `lastLogin` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_user` ADD `dateAdded` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_user` ADD `currentLogin` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_user` ADD `lastLogin` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_comments` ADD `source` varchar(32) NOT NULL default ''");
-			$this->Database->query("ALTER TABLE `tl_comments` ADD KEY `source` (`source`)");
-			$this->Database->query("ALTER TABLE `tl_layout` CHANGE `mootools` `mootools` text NULL");
-			$this->Database->query("ALTER TABLE `tl_comments` CHANGE `pid` `parent` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("UPDATE tl_member SET dateAdded=tstamp, currentLogin=tstamp");
-			$this->Database->query("UPDATE tl_user SET dateAdded=tstamp, currentLogin=tstamp");
-			$this->Database->query("UPDATE tl_layout SET mootools='moo_accordion' WHERE mootools='moo_default'");
-			$this->Database->query("UPDATE tl_comments SET source='tl_content'");
-			$this->Database->query("UPDATE tl_module SET cal_format='next_365', type='eventlist' WHERE type='upcoming_events'");
-
-			// Get all front end groups
-			$objGroups = $this->Database->execute("SELECT id FROM tl_member_group");
-			$strGroups = serialize($objGroups->fetchEach('id'));
-
-			// Update protected elements
-			$this->Database->prepare("UPDATE tl_page SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
-			$this->Database->prepare("UPDATE tl_content SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
-			$this->Database->prepare("UPDATE tl_module SET groups=? WHERE protected=1 AND groups=''")->execute($strGroups);
-
-			// Update layouts
-			$objLayout = $this->Database->execute("SELECT id, mootools FROM tl_layout");
-
-			while ($objLayout->next())
-			{
-				$mootools = array('moo_mediabox');
-
-				if ($objLayout->mootools != '')
-				{
-					$mootools[] = $objLayout->mootools;
-				}
-
-				$this->Database->prepare("UPDATE tl_layout SET mootools=? WHERE id=?")
-					->execute(serialize($mootools), $objLayout->id);
-			}
-
-			// Update event reader
-			if (!file_exists(TL_ROOT . '/templates/event_default.tpl'))
-			{
-				$this->Database->execute("UPDATE tl_module SET cal_template='event_full' WHERE cal_template='event_default'");
-			}
-
-			// News comments
-			$objComment = $this->Database->execute("SELECT * FROM tl_news_comments");
-
-			while ($objComment->next())
-			{
-				$arrSet = $objComment->row();
-
-				$arrSet['source'] = 'tl_news';
-				$arrSet['parent'] = $arrSet['pid'];
-				unset($arrSet['id']);
-				unset($arrSet['pid']);
-
-				$this->Database->prepare("INSERT INTO tl_comments %s")->set($arrSet)->execute();
-			}
-
-			// Delete system/modules/news/Comments.php
-			$this->import('Files');
-			$this->Files->delete('system/modules/news/Comments.php');
-			$this->reload();
-		}
-
-		$this->Template->is28Update = true;
-		$this->outputAndExit();
 	}
 
 
@@ -857,105 +790,20 @@ class InstallTool extends Backend
 	 * Version 2.9.0 update
 	 * @return void
 	 */
-	protected function update_2_9_0()
+	protected function update29()
 	{
-		if ($this->Database->tableExists('tl_layout') && $this->Database->tableExists('tl_theme'))
+		if ($this->Database->tableExists('tl_layout') && !$this->Database->tableExists('tl_theme'))
 		{
-			return;
-		}
-
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_29update')
-		{
-			// Create the themes table
-			$this->Database->query(
-				"CREATE TABLE `tl_theme` (
-				  `id` int(10) unsigned NOT NULL auto_increment,
-				  `tstamp` int(10) unsigned NOT NULL default '0',
-				  `name` varchar(128) NOT NULL default '',
-				  `author` varchar(128) NOT NULL default '',
-				  `screenshot` varchar(255) NOT NULL default '',
-				  `folders` blob NULL,
-				  `templates` varchar(255) NOT NULL default '',
-				  PRIMARY KEY  (`id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
-			);
-
-			// Add a PID column to the child tables
-			$this->Database->query("ALTER TABLE `tl_module` ADD `pid` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_style_sheet` ADD `pid` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("ALTER TABLE `tl_layout` ADD `pid` int(10) unsigned NOT NULL default '0'");
-			$this->Database->query("UPDATE tl_module SET pid=1");
-			$this->Database->query("UPDATE tl_style_sheet SET pid=1");
-			$this->Database->query("UPDATE tl_layout SET pid=1");
-
-			// Create a theme from the present resources
-			$this->Database->prepare("INSERT INTO tl_theme SET tstamp=?, name=?")
-						   ->execute(time(), $GLOBALS['TL_CONFIG']['websiteTitle']);
-
-			// Adjust the back end user permissions
-			$this->Database->query("ALTER TABLE `tl_user` ADD `themes` blob NULL");
-			$this->Database->query("ALTER TABLE `tl_user_group` ADD `themes` blob NULL");
-
-			// Adjust the user and group rights
-			$objUser = $this->Database->execute("SELECT id, modules, 'tl_user' AS tbl FROM tl_user WHERE modules!='' UNION SELECT id, modules, 'tl_user_group' AS tbl FROM tl_user_group WHERE modules!=''");
-
-			while ($objUser->next())
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_29update')
 			{
-				$modules = deserialize($objUser->modules);
-
-				if (!is_array($modules) || empty($modules))
-				{
-					continue;
-				}
-
-				$themes = array();
-
-				foreach ($modules as $k=>$v)
-				{
-					if ($v == 'css' || $v == 'modules ' || $v == 'layout')
-					{
-						$themes[] = $v;
-						unset($modules[$k]);
-					}
-				}
-
-				if (!empty($themes))
-				{
-					$modules[] = 'themes';
-				}
-
-				$modules = array_values($modules);
-
-				$set = array
-				(
-					'modules' => (!empty($modules) ? serialize($modules) : null),
-					'themes'  => (!empty($themes) ? serialize($themes) : null)
-				);
-
-				$this->Database->prepare("UPDATE " . $objUser->tbl . " %s WHERE id=?")
-					->set($set)
-					->execute($objUser->id);
+				$this->import('DbUpdater');
+				$this->DbUpdater->run29Update();
+				$this->reload();
 			}
 
-			// Featured news
-			if ($this->Database->fieldExists('news_featured', 'tl_module'))
-			{
-				$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_featured` `news_featured` varchar(16) NOT NULL default ''");
-				$this->Database->query("UPDATE tl_module SET news_featured='featured' WHERE news_featured=1");
-			}
-
-			// Other version 2.9 updates
-			$this->Database->query("UPDATE tl_member SET country='gb' WHERE country='uk'");
-			$this->Database->query("ALTER TABLE `tl_module` CHANGE `news_jumpToCurrent` `news_jumpToCurrent` varchar(16) NOT NULL default ''");
-			$this->Database->query("UPDATE tl_module SET news_jumpToCurrent='show_current' WHERE news_jumpToCurrent=1");
-			$this->Database->query("ALTER TABLE `tl_user` ADD `useCE` char(1) NOT NULL default ''");
-			$this->Database->query("UPDATE tl_user SET useCE=1");
-
-			$this->reload();
+			$this->Template->is28Update = true;
+			$this->outputAndExit();
 		}
-
-		$this->Template->is29Update = true;
-		$this->outputAndExit();
 	}
 
 
@@ -963,7 +811,7 @@ class InstallTool extends Backend
 	 * Version 2.9.2 update
 	 * @return void
 	 */
-	protected function update_2_9_2()
+	protected function update292()
 	{
 		if ($this->Database->tableExists('tl_calendar_events'))
 		{
@@ -975,12 +823,8 @@ class InstallTool extends Backend
 				{
 					if ($this->Input->post('FORM_SUBMIT') == 'tl_292update')
 					{
-						$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `startTime` `startTime` int(10) unsigned NULL");
-						$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `endTime` `endTime` int(10) unsigned NULL");
-						$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `startDate` `startDate` int(10) unsigned NULL");
-						$this->Database->query("ALTER TABLE `tl_calendar_events` CHANGE `endDate` `endDate` int(10) unsigned NULL");
-						$this->Database->query("UPDATE tl_calendar_events SET endDate=null WHERE endDate=0");
-
+						$this->import('DbUpdater');
+						$this->DbUpdater->run292Update();
 						$this->reload();
 					}
 
@@ -996,25 +840,20 @@ class InstallTool extends Backend
 	 * Version 2.10.0 update
 	 * @return void
 	 */
-	protected function update_2_10_0()
+	protected function update210()
 	{
-		if ($this->Database->tableExists('tl_style') && $this->Database->fieldExists('positioning', 'tl_style'))
+		if ($this->Database->tableExists('tl_style') && !$this->Database->fieldExists('positioning', 'tl_style'))
 		{
-			return;
+			if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
+			{
+				$this->import('DbUpdater');
+				$this->DbUpdater->run210Update();
+				$this->reload();
+			}
+
+			$this->Template->is210Update = true;
+			$this->outputAndExit();
 		}
-
-		if ($this->Input->post('FORM_SUBMIT') == 'tl_210update')
-		{
-			$this->Database->query("ALTER TABLE `tl_style` ADD `positioning` char(1) NOT NULL default ''");
-			$this->Database->query("UPDATE `tl_style` SET `positioning`=`size`");
-			$this->Database->query("UPDATE `tl_module` SET `guests`=1 WHERE `type`='lostPassword' OR `type`='registration'");
-			$this->Database->query("UPDATE `tl_news` SET `teaser`=CONCAT('<p>', teaser, '</p>') WHERE `teaser`!='' AND `teaser` NOT LIKE '<p>%'");
-
-			$this->reload();
-		}
-
-		$this->Template->is210Update = true;
-		$this->outputAndExit();
 	}
 
 
@@ -1022,208 +861,62 @@ class InstallTool extends Backend
 	 * Version 3.0.0 update
 	 * @return void
 	 */
-	protected function update_3_0_0()
+	protected function update300()
 	{
-		if ($this->Database->tableExists('tl_module') && !$this->Database->fieldExists('numberOfItems', 'tl_module'))
+		// Fresh installation
+		if (!$this->Database->tableExists('tl_module'))
+		{
+			return;
+		}
+
+		// Step 1: database structure
+		if (!$this->Database->tableExists('tl_files'))
 		{
 			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
 			{
-				$this->Database->query("ALTER TABLE `tl_module` ADD `numberOfItems` smallint(5) unsigned NOT NULL default '0'");
-				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`rss_numberOfItems` WHERE `rss_numberOfItems`>0");
-				$this->Database->query("UPDATE `tl_module` SET `numberOfItems`=`news_numberOfItems` WHERE `news_numberOfItems`>0");
+				$this->import('DbUpdater');
+				$this->DbUpdater->run300Update();
+				$this->reload();
 			}
 
 			$this->Template->step = 1;
 			$this->Template->is30Update = true;
 			$this->outputAndExit();
 		}
-
-		if ($this->Database->tableExists('tl_module') && !$this->Database->tableExists('tl_files'))
+		else
 		{
-			if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
+			$objRow = $this->Database->query("SELECT COUNT(*) AS count FROM tl_files");
+
+			// Step 2: scan the upload folder
+			if ($objRow->count < 1)
 			{
-				// Create the files table
-				$this->Database->query(
-					"CREATE TABLE `tl_files` (
-					  `id` int(10) unsigned NOT NULL auto_increment,
-					  `pid` int(10) unsigned NOT NULL default '0',
-					  `tstamp` int(10) unsigned NOT NULL default '0',
-					  `type` varchar(16) NOT NULL default '',
-					  `path` varchar(255) NOT NULL default '',
-					  `extension` varchar(16) NOT NULL default '',
-					  `hash` varchar(32) NOT NULL default '',
-					  `found` char(1) NOT NULL default '1',
-					  `name` varchar(64) NOT NULL default '',
-					  `meta` blob NULL,
-					  PRIMARY KEY  (`id`),
-					  KEY `pid` (`pid`),
-					  KEY `path` (`path`),
-					  KEY `extension` (`extension`)
-					) ENGINE=MyISAM DEFAULT CHARSET=utf8;"
-				);
-
-				$this->scanUploadFolder($GLOBALS['TL_CONFIG']['uploadPath']);
-
-				// Update the existing singleSRC entries
-				$arrSingleSRC = array
-				(
-					'tl_content.singleSRC',
-					'tl_form_field.uploadFolder',
-					'tl_form_field.singleSRC',
-					'tl_member.homeDir',
-					'tl_module.singleSRC',
-					'tl_module.reg_homeDir',
-					'tl_theme.templates',
-					'tl_theme.screenshot',
-					'tl_calendar_events.singleSRC',
-					'tl_faq.singleSRC',
-					'tl_news.singleSRC'
-				);
-
-				foreach ($arrSingleSRC as $val)
+				if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
 				{
-					list($table, $field) = explode('.', $val);
-					$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
-
-					while ($objRow->next())
-					{
-						$objFile = \FilesModel::findByPath($objRow->$field);
-
-						$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-									   ->execute($objFile->id, $objRow->id);
-					}
+					$this->import('DbUpdater');
+					$this->DbUpdater->scanUploadFolder();
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", true);
+					$this->reload();
 				}
 
-				// Update the existing multiSRC entries
-				$arrMultiSRC = array
-				(
-					'tl_content.multiSRC',
-					'tl_module.multiSRC',
-					'tl_theme.folders',
-					'tl_user.filemounts',
-					'tl_user_group.filemounts',
-					'tl_calendar_events.enclosure',
-					'tl_faq.enclosure',
-					'tl_news.enclosure',
-					'tl_newsletter.files'
-				);
+				$this->Template->step = 2;
+				$this->Template->is30Update = true;
+				$this->outputAndExit();
+			}
 
-				foreach ($arrMultiSRC as $val)
+			// Step 3: update the database fields
+			elseif ($GLOBALS['TL_CONFIG']['checkFileTree'])
+			{
+				if ($this->Input->post('FORM_SUBMIT') == 'tl_30update')
 				{
-					list($table, $field) = explode('.', $val);
-					$objRow = $this->Database->query("SELECT id, $field FROM $table WHERE $field!=''");
-
-					while ($objRow->next())
-					{
-						$arrPaths = deserialize($objRow->$field);
-
-						if (!is_array($arrPaths) || empty($arrPaths))
-						{
-							continue;
-						}
-
-						foreach ($arrPaths as $k=>$v)
-						{
-							$objFile = \FilesModel::findByPath($v);
-							$arrPaths[$k] = $objFile->id;
-						}
-
-						$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-									   ->execute(serialize($arrPaths), $objRow->id);
-					}
+					$this->import('DbUpdater');
+					$this->DbUpdater->updateFileTreeFields();
+					$this->Config->update("\$GLOBALS['TL_CONFIG']['checkFileTree']", false);
+					$this->reload();
 				}
 
-				$this->reload();
-			}
-
-			$this->Template->step = 2;
-			$this->Template->is30Update = true;
-			$this->outputAndExit();
-		}
-	}
-
-
-	/**
-	 * Scan the upload folder and create the database entries
-	 * @param string
-	 * @param integer
-	 * @return void
-	 */
-	public function scanUploadFolder($strPath, $pid=0)
-	{
-		$arrMeta = array();
-		$arrMapper = array();
-		$arrFolders = array();
-		$arrFiles = array();
-		$arrScan = scan(TL_ROOT . '/' . $strPath);
-
-		foreach ($arrScan as $strFile)
-		{
-			if (strncmp($strFile, '.', 1) === 0)
-			{
-				continue;
-			}
-
-			if (is_dir(TL_ROOT . '/' . $strPath . '/' . $strFile))
-			{
-				$arrFolders[] = $strPath . '/' . $strFile;
-			}
-			else
-			{
-				$arrFiles[] = $strPath . '/' . $strFile;
-			}
-		}
-
-		// Folders
-		foreach ($arrFolders as $strFolder)
-		{
-			$objFolder = new \Folder($strFolder);
-
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, hash) VALUES (?, ?, ?, 'folder', ?, ?)")
-								 ->execute($pid, time(), basename($strFolder), $strFolder, $objFolder->hash)
-								 ->insertId;
-
-			$this->scanUploadFolder($strFolder, $id);
-		}
-
-		// Files
-		foreach ($arrFiles as $strFile)
-		{
-			$matches = array();
-
-			// Handle meta.txt files
-			if (preg_match('/^meta(_([a-z]{2}))?\.txt$/', basename($strFile), $matches))
-			{
-				$key = $matches[2] ?: 'en';
-				$arrData = file(TL_ROOT . '/' . $strFile, FILE_IGNORE_NEW_LINES);
-
-				foreach ($arrData as $line)
-				{
-					list($name, $info) = explode('=', $line);
-					list($title, $link, $caption) = explode('|', $info);
-					$arrMeta[trim($name)][$key] = array('title'=>trim($title), 'link'=>trim($link), 'caption'=>trim($caption));
-				}
-			}
-
-			$objFile = new \File($strFile);
-
-			$id = $this->Database->prepare("INSERT INTO tl_files (pid, tstamp, name, type, path, extension, hash) VALUES (?, ?, ?, 'file', ?, ?, ?)")
-								 ->execute($pid, time(), basename($strFile), $strFile, $objFile->extension, $objFile->hash)
-								 ->insertId;
-
-			$arrMapper[basename($strFile)] = $id;
-		}
-
-		// Insert the meta data AFTER the file entries have been created
-		if (!empty($arrMeta))
-		{
-			foreach ($arrMeta as $file=>$meta)
-			{
-				if (isset($arrMapper[$file]))
-				{
-					$this->Database->prepare("UPDATE tl_files SET meta=? WHERE id=?")
-								   ->execute(serialize($meta), $arrMapper[$file]);
-				}
+				$this->Template->step = 3;
+				$this->Template->is30Update = true;
+				$this->outputAndExit();
 			}
 		}
 	}
