@@ -413,10 +413,13 @@ class DbUpdater extends \Controller
 
 			while ($objRow->next())
 			{
-				$objFile = \FilesModel::findByPath($objRow->$field);
+				if (!is_numeric($objRow->$field))
+				{
+					$objFile = \FilesModel::findByPath($objRow->$field);
 
-				$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
-							   ->execute($objFile->id, $objRow->id);
+					$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")
+								   ->execute($objFile->id, $objRow->id);
+				}
 			}
 		}
 
@@ -437,8 +440,11 @@ class DbUpdater extends \Controller
 
 				foreach ($arrPaths as $k=>$v)
 				{
-					$objFile = \FilesModel::findByPath($v);
-					$arrPaths[$k] = $objFile->id;
+					if (!is_numeric($v))
+					{
+						$objFile = \FilesModel::findByPath($v);
+						$arrPaths[$k] = $objFile->id;
+					}
 				}
 
 				$this->Database->prepare("UPDATE $table SET $field=? WHERE id=?")

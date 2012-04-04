@@ -293,6 +293,16 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Spalte';
 
 
 /**
+ * Meta wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['aw_title']   = 'Titel';
+$GLOBALS['TL_LANG']['MSC']['aw_link']    = 'Link';
+$GLOBALS['TL_LANG']['MSC']['aw_caption'] = 'Bildunterschrift';
+$GLOBALS['TL_LANG']['MSC']['aw_delete']  = 'Die Sprache löschen';
+$GLOBALS['TL_LANG']['MSC']['aw_new']     = 'Sprache hinzufügen';
+
+
+/**
  * Images
  */
 $GLOBALS['TL_LANG']['MSC']['relative']      = 'Relatives Format';

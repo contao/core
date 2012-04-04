@@ -32,6 +32,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_files']['name']       = array('Name', 'Contao automatically adds the file extension.');
+$GLOBALS['TL_LANG']['tl_files']['meta']       = array('Meta information', 'Here you can enter the file meta information.');
 $GLOBALS['TL_LANG']['tl_files']['fileupload'] = array('File upload', 'Browse your local computer and select the files you want to upload to the server.');
 $GLOBALS['TL_LANG']['tl_files']['editor']     = array('Source editor', 'Here you can edit the file source.');
 

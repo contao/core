@@ -1094,7 +1094,7 @@ var Backend =
 				return e.get('html');
 			}
 		});
-		['a[title]', 'input[title]'].each(function(el) {
+		['a[title]', 'img[title]', 'input[title]'].each(function(el) {
 			new Tips.Contao($$(el), {
 				offset: {x:0, y:26}
 			});

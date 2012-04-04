@@ -185,8 +185,8 @@ $GLOBALS['TL_DCA']['tl_files'] = array
 		'meta' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_files']['meta'],
-			'inputType'               => 'textarea',
-			'eval'                    => array('decodeEntities'=>true),
+			'inputType'               => 'metaWizard',
+			'eval'                    => array('allowHtml'=>true),
 			'sql'                     => "blob NULL"
 		)
 	)

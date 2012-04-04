@@ -154,7 +154,8 @@ $GLOBALS['BE_FFL'] = array
 	'moduleWizard'   => 'ModuleWizard',
 	'keyValueWizard' => 'KeyValueWizard',
 	'imageSize'      => 'ImageSize',
-	'timePeriod'     => 'TimePeriod'
+	'timePeriod'     => 'TimePeriod',
+	'metaWizard'     => 'MetaWizard'
 );
 
 

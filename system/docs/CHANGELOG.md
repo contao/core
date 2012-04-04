@@ -4,6 +4,9 @@ Contao Open Source CMS Changelog
 Version 3.0.beta1 (XXXX-XX-XX)
 ------------------------------
 
+### New
+Added a meta wizard to manage file meta information with a GUI.
+
 ### Improved
 Replaced the default browser tooltips with the MooTools tips interface.
 

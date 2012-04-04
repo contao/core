@@ -292,6 +292,16 @@ $GLOBALS['TL_LANG']['MSC']['mw_column'] = 'Column';
 
 
 /**
+ * Meta wizard
+ */
+$GLOBALS['TL_LANG']['MSC']['aw_title']   = 'Title';
+$GLOBALS['TL_LANG']['MSC']['aw_link']    = 'Link';
+$GLOBALS['TL_LANG']['MSC']['aw_caption'] = 'Caption';
+$GLOBALS['TL_LANG']['MSC']['aw_delete']  = 'Delete the language';
+$GLOBALS['TL_LANG']['MSC']['aw_new']     = 'Add language';
+
+
+/**
  * Images
  */
 $GLOBALS['TL_LANG']['MSC']['relative']      = 'Relative dimensions';

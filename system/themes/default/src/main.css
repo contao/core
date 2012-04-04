@@ -948,6 +948,52 @@ label.tl_change_selected {
 	margin-right:0;
 }
 
+/* Meta wizard */
+.tl_metawizard,.tl_metawizard li {
+	margin:0 0 6px;
+	padding:0;
+	list-style:none;
+}
+.tl_metawizard li {
+	overflow:hidden;
+	margin-bottom:2px;
+	padding:9px;
+	background:#fcfcfc;
+}
+.tl_metawizard li.odd {
+	background:#f3f3f3;
+}
+.tl_metawizard label {
+	float:left;
+	width:100px;
+	margin-top:4px;
+}
+.tl_metawizard .tl_text {
+	float:left;
+	width:580px;
+}
+.tl_metawizard br {
+	clear:left;
+}
+.tl_metawizard .lang {
+	display:block;
+	margin-bottom:9px;
+	font-weight:bold;
+	position:relative;
+}
+.tl_metawizard_img {
+	position:absolute;
+	right:0;
+	top:-1px;
+	cursor:pointer;
+}
+.tl_metawizard_new .tl_select {
+	width:inherit;
+}
+.tl_metawizard_new .tl_submit {
+	margin-top:0;
+}
+
 /* Ajax box */
 #tl_ajaxBox {
 	width:20%;

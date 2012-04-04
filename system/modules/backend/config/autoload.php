@@ -52,6 +52,7 @@ ClassLoader::addClasses(array
 	'Contao\\ListWizard'        => 'system/modules/backend/ListWizard.php',
 	'Contao\\LiveUpdate'        => 'system/modules/backend/LiveUpdate.php',
 	'Contao\\Messages'          => 'system/modules/backend/Messages.php',
+	'Contao\\MetaWizard'        => 'system/modules/backend/MetaWizard.php',
 	'Contao\\ModuleMaintenance' => 'system/modules/backend/ModuleMaintenance.php',
 	'Contao\\ModuleUser'        => 'system/modules/backend/ModuleUser.php',
 	'Contao\\ModuleWizard'      => 'system/modules/backend/ModuleWizard.php',
